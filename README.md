@@ -6,6 +6,11 @@ Fleetpane is an independent project, starting with a small read-only Paseo clien
 The current build is a CLI and protocol library. A native desktop UI is planned;
 there is no usable desktop replacement yet, and no performance gain is claimed.
 
+See the [product requirements](docs/prd.md) for the proposed roadmap and acceptance
+criteria, including the accepted [Session Host architecture](docs/adr/0002-preserve-runtimes-across-control-daemon-upgrades.md)
+for preserving active work across control daemon upgrades. These capabilities
+are not implemented by the current prototype.
+
 ## Try the directory client
 
 With an existing Paseo daemon listening on loopback:

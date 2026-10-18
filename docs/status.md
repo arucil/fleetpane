@@ -2,6 +2,11 @@
 
 Updated 2026-10-18. This is an initial foundation, not a replacement release.
 
+The [product requirements](prd.md) define proposed scope and acceptance criteria;
+they are not evidence that a capability has been implemented. Session Host is
+the accepted architecture; first-release platform/provider scope and numerical
+performance targets remain proposals pending M0 validation.
+
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
 | Hello before requesting the directory | verified in fixture | Real local WebSocket integration test |
@@ -16,6 +21,7 @@ Updated 2026-10-18. This is an initial foundation, not a replacement release.
 | Timeline, sending prompts, permissions, terminals | missing | Requires behavioral contracts and replay fixtures |
 | Authenticated/remote/relay connections | missing | Current transport is local plaintext WebSocket only |
 | Full runtime migration and session recovery | missing | Existing daemon remains required |
+| Control daemon upgrade without interrupting active turns | planned; not implemented | [Accepted Session Host architecture](adr/0002-preserve-runtimes-across-control-daemon-upgrades.md); requires lifecycle, ownership transfer and runtime acceptance tests |
 | Responsiveness and total memory under load | unmeasured | Same-machine release comparison required |
 
 The first performance scenarios should cover cold startup, idle memory, directory
