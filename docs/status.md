@@ -1,14 +1,20 @@
 # Behavior status
 
-Updated 2026-10-18. This is an initial foundation, not a replacement release.
+Updated 2026-10-20. This is an initial foundation, not a replacement release.
 
-The [product requirements](prd.md) define proposed scope and acceptance criteria;
+The user-confirmed target is donut-paseo functional completeness; the
+[parity inventory](parity.md) records reference workflows and remaining gaps.
+The [product requirements](prd.md) define scope and acceptance criteria;
 they are not evidence that a capability has been implemented. Session Host is
 the accepted architecture; first-release platform/provider scope and numerical
 performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
+| Read working-tree and staged file diffs | verified locally for covered workflows | Shared GUI/CLI per-file comparisons, unified Kit rendering, raw patch copy, add/delete/rename/mode/untracked/symlink, binary/conflict messages, literal paths, bounded output/deadline and stale/replaced refusal. Real Git index and all fixture Host snapshots unchanged; [evidence](verification/2026-10-20-workspace-diffs.md). No commit/base-ref comparisons, untracked-directory expansion or Git writes |
+| Provider-reported task progress | verified locally for covered workflows | Shared Codex/ACP task model, bounded same-Host cache/read query and native status/priority/explanation, replan/clear/copy/collapse. Real DSH `todo_write` compatibility reproduced and fixed; synthetic event-expiry, fencing, stop, drain/fault and restart limits verified. OpenCodex produced no plan tool call and remains unaccepted for this workflow; [evidence](verification/2026-10-20-agent-tasks.md). No durable plan history or editable checklist |
+| Planned independent worktree creation | verified locally for covered workflows | Shared GUI/CLI preview pins a commit, preserves selected subdirectory and registers the new checkout. Durable one-attempt result, v1/v2→v3 controller migration, target/source replacement refusal, concurrent apply, partial failures, controller kill and 120-second process-group deadline covered. Native prepared-plan reopen, moved baseline, new ACP session, independent edit, failure display and clipboard; [evidence](verification/2026-10-20-worktree-creation.md). No worktree deletion/archive, setup, automatic interrupted-attempt reconciliation or detached operation supervisor |
+| Existing projects/workspaces and read-only Git inspection | verified locally for covered workflows | Shared GUI/CLI catalog, stable per-Host UUIDs, main/linked project grouping, branch/HEAD/changes, 32-record pages and directory/repository replacement refusal. Original catalog verification used store v2; current store v3 preserves those IDs. Real Git process smoke plus native reopen, missing-Host error, saved-cwd ACP creation, Chinese turn and independent old approval/draft; [evidence](verification/2026-10-20-workspaces.md). Worktree removal, setup scripts, workspace tabs, terminal and file editing remain open |
 | Hello before requesting the directory | verified in fixture | Real local WebSocket integration test |
 | Correlated, paged directory response | verified in fixture | Client test; up to 200 entries and explicit next cursor |
 | Request directory without live/timeline subscriptions | verified in fixture | Request encoding and local daemon tests |
@@ -17,15 +23,89 @@ performance targets remain proposals pending M0 validation.
 | Loopback-only connection policy | verified in fixture | Non-loopback rejection test |
 | Current live daemon compatibility | verified locally | Read-only CLI smoke test completed against one local daemon; exact serving source revision was not attested |
 | Absolute request deadline and frame/memory bounds | partial | I/O timeouts and 4 MiB message/frame limits; no hostile-transport timing test yet |
-| Native desktop, virtualized session list | missing | Planned after the protocol slice |
-| Timeline, sending prompts, permissions, terminals | missing | Requires behavioral contracts and replay fixtures |
-| Authenticated/remote/relay connections | missing | Current transport is local plaintext WebSocket only |
-| Full runtime migration and session recovery | missing | Existing daemon remains required |
-| Control daemon upgrade without interrupting active turns | planned; not implemented | [Accepted Session Host architecture](adr/0002-preserve-runtimes-across-control-daemon-upgrades.md); requires lifecycle, ownership transfer and runtime acceptance tests |
+| GPUI Kit native desktop and virtualized directory | verified locally with synthetic data | Kit 0.7.3; rendered 10,000 entries in isolated X11/software Vulkan; selection keys, native Buttons, Tab/Enter, Chinese labels and clipboard readback; [evidence](verification/2026-10-19-gpui-kit.md) |
+| Native live directory and network errors | verified locally for one page | Existing loopback daemon page rendered; connection-refused banner observed; private metadata omitted |
+| Native pagination and refresh | verified locally with synthetic data | Kit buttons loaded 200 + 200 entries; refresh preserved an available selection; Ctrl+R reset to first page; fixture logged each bounded request |
+| Native directory cap | implemented; acceptance pending | 5,000-entry cap; synthetic multipage GUI checks cover 400 entries, not the cap |
+| Host-backed create/list/open/send/stop | verified with synthetic provider | Shared `fleetpane-session` adapter used by CLI and GPUI Kit; process smoke test and rendered-window checks; [evidence](verification/2026-10-19-conversations.md) |
+| Streamed text, history identity and failed turns | verified with synthetic provider | Ordered events; upsert by thread/turn/item identity; empty completion items preserve streamed history; retained Markdown state and visible errors |
+| Native composer, clipboard and per-session drafts | verified locally for covered synthetic workflows | Revisioned private SQLite drafts survive desktop replacement; exact Chinese multiline/indentation clipboard recovery, concurrent-edit conflict, explicit discard/reload, send settlement, and close waiting for coalesced saves. Pending/unknown send attempts are never automatically replayed. Host incarnation is part of draft identity; earlier-incarnation drafts need CLI recovery. Options/attachments/question drafts and restored selection remain open; [evidence](verification/2026-10-20-session-drafts.md) |
+| Reopen desktop without stopping Host/provider | verified locally with synthetic and live OpenCodex | Explicit Take control, same Host/provider PIDs; a 25-second real command completed after the old desktop exited, with one file append; [live evidence](verification/2026-10-19-opencodex-live.md). New paginated threads also retain completed nested commands on reload; see history evidence below |
+| Command/file approval responses | partial | Accept/decline and ownership fencing exercised with synthetic command approval; file approval shares the schema but lacks its own runtime acceptance; unsupported request types remain visible and unanswered |
+| Provider-resolved approvals | verified in tests and process fixture | `serverRequest/resolved` removes the matching pending request, including interrupted synthetic turns; wrong-thread resolution is rejected |
+| Real Codex conversation protocol | verified locally for covered OpenCodex workflows | Codex 0.163.0 through OpenCodex 2.73.0: create/list/read, three completed external model turns, command execution and file change; two models and two efforts checked against Host operations and recorded turn contexts; [evidence](verification/2026-10-19-opencodex-live.md). Real approval/question/cancellation acceptance remains pending |
+| Durable command history for new threads | verified locally for covered Codex workflows | New threads use native paginated storage. Real Codex/local SSE regression fails with the former legacy default and passes across reload/provider restart. One additional real OpenCodex turn produced 3 commands identical in live events, thread/read and thread/resume after completed Host/provider replacement; native cards/details checked; [evidence](verification/2026-10-19-durable-tool-history.md) |
+| Previously discarded legacy command history | unavailable | Existing legacy threads keep their mode; native warning rendered with a synthetic legacy thread. Codex 0.163.0 legacy storage omits nested command items; this change cannot recover those discarded items and does not convert old threads |
+| Real saved workspace history | verified locally for one rendered conversation | Copied rollout plus indexed databases; 74 items / 2 turns, including 24 commands, 14 MCP calls, 2 file changes and 2 local image records; existing runtimes untouched; [evidence](verification/2026-10-19-real-workspace-rendering.md) |
+| Scroll into older variable-height history | verified locally before/after fix | Zero list overdraw left older rows unmeasured and unreachable; viewport-sized overdraw enabled scrolling to earlier file/image/MCP rows in the same real conversation |
+| Host session directory | verified locally for covered queries | 100 metadata rows per page; native 100 → 200 → 237, global title/exact directory filters, empty/error states, refresh and selected draft retention; 5,000-row cap checked in domain tests; 8 MiB metadata bound implemented; [evidence](verification/2026-10-19-session-directory.md) |
+| Session rename | verified locally | Shared CLI/GUI command; Chinese title, native Save/Enter/Cancel, provider notification, filtered result refresh, failed edit retention; real isolated Codex readback |
+| Model and reasoning selection | verified locally for covered contracts and two live models | Provider-paged catalog, next-message menus and shared CLI options; native keyboard, per-session choices/drafts across switch and reconnect, failed/removed capabilities, disabled unsupported reasoning; 71-model process fixture; [fixture evidence](verification/2026-10-19-model-options.md). Live OpenCodex catalog has 8 models; gpt-6.1-sol medium/high and gpt-6-sol medium completed real turns with recorded option readback; [live evidence](verification/2026-10-19-opencodex-live.md) |
+| Session archive/restore | missing | Codex native archive also shuts down loaded root/descendant threads; tree impact, activity checks and explicit-stop lifecycle must precede this UI; [decision](adr/0009-model-and-reasoning-options.md#archive-boundary-found-during-this-slice) |
+| Incremental conversation history | verified locally for covered paginated threads | Metadata-only open/resume, one turn at a time and up to 16 entries per page; native 1,200-command / 5.2 MB history, older loads, fixed scroll anchors, beginning and retained-limit states; delayed paging/streaming overlap with exact native clipboard readback; copied real OpenCodex history keeps all 3 command objects; [evidence](verification/2026-10-19-history-pagination.md) |
+| Complete large-history traversal | partial | Retain at most 500 items, 500 turns and 2 MiB; no eviction/windowing. Oversize pages/individual items can still exceed the 256 KiB provider-frame cap. Legacy/full CLI reads remain bounded |
+| IME, accessibility and native terminal integration | unverified | Chinese paste/glyph rendering is not IME acceptance; no terminal yet |
+| Markdown and streamed rich text | verified locally for covered constructs | Kit Markdown renders headings, emphasis, lists, quote, link, table and code fence; synthetic stream/copy readback and real saved Markdown; [evidence](verification/2026-10-19-rich-rendering.md) |
+| Command and MCP cards | verified locally for covered content | Status/exit/duration, first-line script summary, expandable output/arguments/text/images/structured result; bounded detail scrolling and full-item Copy; no terminal emulation |
+| Supplied file diffs | verified locally for covered changes | Kit diff; synthetic add/delete/update, space in path, real update; rename/newline semantics checked in tests; live generated add rendered. Missing DiffState observation caused a blank first paint; retained observer fixed first-open/collapse repaint; [evidence](verification/2026-10-19-opencodex-live.md). No working-tree reconstruction |
+| Image previews | partial | Local PNG/SVG, user data URL and base64 MCP image rendered; missing/malformed input visible; HTTP sources, upload/send, full-size viewer and hostile decode bounds unaccepted |
+| Empty reasoning and unknown items | verified locally | Empty reasoning hidden; nonempty summaries and future item payloads expandable and copyable |
+| Nested details/diff scrolling | verified locally before/after fixes | Child viewport owns wheel input; Component 0.7.3 patch adds diff-list overdraw so first-open/resize can reach unmeasured tail rows; native MCP, large output and diff checks |
+| Structured Codex questions | verified locally for covered contracts | Paged single choice, Other with notes, free text, masked input, per-request drafts, reconnect/session routing, stale-owner disable and Stop turn; native fixture plus real Codex 0.163.0 with local SSE model; [evidence](verification/2026-10-19-questions.md) |
+| Terminal workflows | missing | No native terminal yet |
+| DeepSeek Harness ACP v1 | verified locally for covered workflows | Independent Host owns `dsh acp`; create/list/resume, model/reasoning configuration, text/thought/tool updates, Markdown and permission buttons. Real DeepSeek-v4-flash read/tool/Chinese table, native controller replacement during bash and Stop; synthetic exact permissions across replacement. DSH resume restores context without transcript replay; native warning. Resident/inactive directory merge and paged overflow tested. No elicitation or attachment send; [evidence](verification/2026-10-20-deepseek-acp.md) |
+| ACP observed-history paging | verified locally for covered workflows | Metadata-only inspect/resume, one turn and at most 16 items per encoded-byte-bounded page; Host/session/turn-bound anchored cursors. Native 1.45 MB history loaded 5 → 30 entries, older-turn traversal, fixed scroll position, exact 60,348-byte tool copy, retained draft across reload and later send; real DSH tool/Markdown paging. Oversized full reads return errors without faulting Host. No private DSH replay, persistence or history window eviction; [evidence](verification/2026-10-20-acp-history.md) |
+| Named local Hosts in one window | verified locally for covered workflows | Version-1 configuration, 1–8 endpoints, retained independent views, lazy snapshot connection, explicit per-Host control and read-only parallel CLI probe. Native retained Chinese draft, background permission badge, explicit answer after 72 seconds, offline endpoint and continued Codex send. Real OpenCodex + DeepSeek tools/Markdown in the same window; real DeepSeek turn completed after switching away with unchanged processes. Synthetic colliding thread/turn/permission IDs and one-Host failure isolated. No runtime migration, remote routing or provider launch; [evidence](verification/2026-10-20-multi-host.md) |
+| Find a ready Host for a new session | verified locally for covered workflows | Explicit ordered groups, shared CLI/native read-only recommendation, drained/offline/faulted members skipped; no target stays inside the group. Native preparation rechecks incarnation/admission, then uses the target view's normal create command and explicit control. Stale refusal, new ACP session/turn, old approval/draft isolation, all-blocked and config reload after window replacement verified. No automatic creation, migration or durable routing table; [evidence](verification/2026-10-20-host-selection.md) |
+| Durable group creation intent | verified locally for covered workflows | Shared GUI/CLI private SQLite binding, one dispatch attempt per saved UUID, 32-record pages, read-only original-Host reconciliation. Controller kill after admission, Host restart unknown, duplicate-send refusal, stale target and workspace mismatch covered. Native prepared recovery after desktop kill, completed ACP turn, recovered session ID, offline error and independent old approval/draft; [evidence](verification/2026-10-20-creation-intents.md). Complete session ownership routing and provider recovery remain open |
+| Authenticated/remote/relay connections | missing | Host control uses same-user Unix sockets; Paseo preview uses loopback WebSocket. Named local Hosts do not implement remote authentication, SSH or relay |
+| Existing Paseo runtime migration | missing | Host starts new provider runtimes; no adoption of existing sessions |
+| Standalone Host across control-client replacement | verified locally for command execution | Synthetic provider and isolated Codex 0.163.0: same host/provider/child PID, accepted command finishes, one side effect |
+| Repeated directory/model/history reads | verified locally for covered workflows | Separate allowlisted query channel, 32 outstanding requests, ordered response boundaries; reads do not consume mutation journal slots. Synthetic and real Codex each completed 160 shared reads before a mutation; native 55 reloads / 165 history reads followed by send; [evidence](verification/2026-10-20-host-queries.md) |
+| Controller fencing, operation discovery/deduplication | verified in tests and process fixture | CAS generation, stale-write/read rejection, durable UUID deduplication beyond the bounded resident snapshot. 300 settled mutations, paged discovery, crash unknowns and exact duplicate suppression; native pending-operation reconnect, status check and explicit acknowledgement followed by a new operation. Now protocol v3; [receipt evidence](verification/2026-10-20-durable-journal.md), [compatibility update](adr/0016-persistent-host-admission-drain.md) |
+| Pending approval across ownership transfer | verified with synthetic provider | Same request ID, stale answer rejected, one explicit decline delivered; not verified with a real LLM/tool approval |
+| Bounded events and provider failure | partial | Unit tests cover expired cursor, size bounds and unknown operation outcomes; snapshot is transport state, not full conversation state |
+| Control daemon upgrade during real streaming LLM turns/tools | missing | Host transport foundation exists; complete daemon, service lifecycle and active-turn acceptance still required |
+| Persistent Host admission drain | verified locally for covered workflows | Lease plus admission-generation CAS; fresh mutations rejected except Stop, while queries/answers/accepted work continue. Mode survives controller changes and crash/restart; schema-1 migration, corrupt admission rejection and explicit reopen tested. Native drain/permission/Stop/new work on a separately selected Host; real isolated Codex command preserved with identical Host/provider/child PIDs and one side effect. No automatic routing or retirement; [evidence](verification/2026-10-20-host-drain.md) |
+| Host/provider restart recovery and complete version drain | partial | Durable receipts and drain survive local Host restart; unknown results are not replayed. Private provider state, active tools, pending approvals, ACP observed history, durable routing, resource inventory and automatic retirement remain open under [ADR 0002](adr/0002-preserve-runtimes-across-control-daemon-upgrades.md#updating-the-session-host-itself). No automatic resubmission or Paseo runtime adoption; [receipt evidence](verification/2026-10-20-durable-journal.md) |
 | Responsiveness and total memory under load | unmeasured | Same-machine release comparison required |
+| Concurrent Host streams | verified locally for a synthetic workload | Release Host, 20 ACP streams configured at 200 chunks/s; exact text, 19 completed / one interrupted, reads and controller replacement with same processes. Snapshot + metadata p95 2.761 ms over 427 samples; raw resource/latency samples retained. This is not UI latency, real 20-agent capacity, W1 completion or a Paseo comparison; [evidence](verification/2026-10-20-acp-history.md#concurrent-host-workload) |
 
 The first performance scenarios should cover cold startup, idle memory, directory
 loading, selecting a session, streaming output while typing, and recovery after a
 disconnect. Scale workload sizes to actual use; record revisions, build profiles,
 all required processes, raw measurements and p50/p95/p99 where useful. Budgets
 remain unset until there is a trustworthy baseline and a concrete requirement.
+
+The first implementation and its current limits are described in [ADR 0003](adr/0003-gpui-desktop-and-first-host-slice.md).
+The desktop dependency decision is superseded by [ADR 0004: GPUI Kit](adr/0004-gpui-kit-desktop.md).
+The first conversation slice is described in [ADR 0005](adr/0005-host-backed-conversations.md).
+Typed content and native renderers are described in [ADR 0006](adr/0006-rich-conversation-items.md).
+Structured questions are described in [ADR 0007](adr/0007-structured-questions.md).
+Local checks do not establish remote CI or replacement readiness.
+
+Session directory paging, filtering and renaming are described in [ADR 0008](adr/0008-session-directory.md).
+Provider model capabilities and next-message options are described in [ADR 0009](adr/0009-model-and-reasoning-options.md).
+Durable Codex command history and legacy compatibility are described in [ADR 0010](adr/0010-durable-codex-tool-history.md).
+Incremental history and snapshot/event reconciliation are described in [ADR 0011](adr/0011-incremental-conversation-history.md).
+Observational queries and mutation admission are described in [ADR 0012](adr/0012-observational-host-queries.md).
+
+DeepSeek ACP capabilities and observed-history limits are described in [ADR 0013](adr/0013-deepseek-acp-provider.md).
+Independent named local Hosts and native state isolation are described in [ADR 0014](adr/0014-local-multi-host-workbench.md).
+
+Durable RPC receipts, bounded resident identities and conservative crash reconciliation are described in [ADR 0015](adr/0015-durable-operation-receipts.md).
+
+Persistent admission drain and its routing/retirement limits are described in [ADR 0016](adr/0016-persistent-host-admission-drain.md).
+
+Explicit ready-Host recommendations and group boundaries are described in [ADR 0017](adr/0017-explicit-ready-host-selection.md).
+
+Durable local creation bindings and conservative recovery are described in [ADR 0018](adr/0018-durable-local-creation-intents.md).
+
+Existing workspace identity, bounded Git inspection and controller-store migration
+are described in [ADR 0019](adr/0019-existing-workspace-catalog.md).
+
+Independent worktree previews, pinned creation and retained failure results are
+described in [ADR 0020](adr/0020-planned-worktree-creation.md).
+
+Provider task plans, DSH successful todo-tool projection and bounded cache semantics
+are described in [ADR 0023](adr/0023-agent-task-plans.md).

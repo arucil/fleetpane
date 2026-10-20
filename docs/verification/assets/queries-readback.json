@@ -1,0 +1,33 @@
+{
+  "task": "bounded observational queries",
+  "baseline": "973b0ed883c25356a9f0849681333919d4497387 plus uncommitted foundation",
+  "old_behavior": "query-smoke failed with capacity before implementation",
+  "synthetic_reads_before_send": 160,
+  "real_codex_reads_before_rename": 160,
+  "new_external_model_turns": 0,
+  "workspace": "fleetpane-query-20261020",
+  "native_reload_clicks": 55,
+  "native_reload_query_responses": 165,
+  "native_mutation_records_after_reads": 0,
+  "host_pid": 751906,
+  "provider_pid": 751909,
+  "desktop_pid": 757898,
+  "runtime_sha256": {
+    "751906": "a8adab48a4999e2433de2c6752a2eeb4afd0fb5b0fbbfb50f00b49c412b7013d",
+    "757898": "4ca253e97208d3c3620a33681cf64e5fa06219ed87164bbd9f47688a82ed4df3"
+  },
+  "native_reply_clipboard": "Echo: 连续读取后仍能发送",
+  "native_send_after_read_error": true,
+  "native_mutation_records_after_two_sends": 2,
+  "native_second_reply_clipboard": "Echo: 读取失败后继续发送",
+  "native_turns_after_two_sends": 5,
+  "native_final_fault": null,
+  "native_sends_completed": 2,
+  "owned_host_graceful_stop": true,
+  "owned_host_socket_removed": true,
+  "workspace_tests_passed": 44,
+  "desktop_tests_passed": 4,
+  "remote_ci_run": false,
+  "workspace_stopped": true,
+  "owned_processes_removed": true
+}

@@ -1,0 +1,20 @@
+[package]
+name = "fleetpane-session"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+fleetpane-runtime.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+tokio.workspace = true
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+rustix = { version = "1.1.5", features = ["process"] }
+
+[lints]
+workspace = true

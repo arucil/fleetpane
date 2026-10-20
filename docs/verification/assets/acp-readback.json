@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-20",
+  "base": "973b0ed883c25356a9f0849681333919d4497387 plus uncommitted foundation",
+  "toolchain": "Rust 1.98.1 / GPUI Kit 0.7.3",
+  "protocol": "ACP v1",
+  "dsh": "0.2.0-rc.2",
+  "real": {
+    "session": "33bd4100-e9d0-4e2d-a0c3-6b51ce52957f",
+    "model": "deepseek-v4-flash",
+    "efforts": [
+      "low",
+      "high"
+    ],
+    "read_tool": "sample.txt compass=west",
+    "native_markdown_copy": "## 原生 ACP 验证\n\n再次读取 `sample.txt` 后确认：compass 值为 **west**，与上一轮结果一致。\n\n| 项目 | 值 |\n| --- | --- |\n| compass | west |",
+    "host_pid": 3473785,
+    "provider_pid": 3473786,
+    "host_sha256": "a45239f29746a09dcf009912e31bcbbb3e577ab5876b2f468767ca97daf26176",
+    "cancelled_after_controller_replacement": true,
+    "provider_stop_reason": "cancelled",
+    "host_fault": null
+  },
+  "fixture": {
+    "model": "model-b",
+    "exact_permission": {
+      "outcome": {
+        "optionId": "allow-one",
+        "outcome": "selected"
+      }
+    },
+    "pending_after_answer": [],
+    "host_pid": 3473796,
+    "provider_pid": 3473814,
+    "native_handoff": "request 11 survives desktop replacement"
+  },
+  "checks": {
+    "workspace_tests": 52,
+    "desktop_tests": 4,
+    "synthetic_process": "PASS",
+    "real_codex_transport_and_local_model_history": "PASS",
+    "native_permission_reject": "reject-one",
+    "native_permission_after_replacement": "allow-one",
+    "inactive_only_directory_regression": "FAIL before merge / PASS after merge"
+  },
+  "scope_limits": [
+    "DSH context resume has no transcript replay",
+    "Permission interaction uses synthetic ACP provider; no external-model permission escalation acceptance",
+    "No existing user runtime restarted or adopted",
+    "Remote CI not run",
+    "No performance claim"
+  ],
+  "source_sha256": {
+    "crates/runtime/src/acp.rs": "3caf4637c198f8ffc8337f3a4d9a21ba6b47bf039b7b2db50f9b4475f1718d93",
+    "crates/runtime/src/unix.rs": "a9e47c2e0552f274fb75163e9aecc96da6eae1f74fb3cdaa86e748ad5a875090",
+    "crates/session/src/acp.rs": "677c2757fa261ee4c2a09ac78e07c53f487b3cb69fce6e854e4c2f3633f22d56",
+    "crates/session/src/client.rs": "1e74c2d72210cb8e095afdb85785303796744070743bafcb3ccb9cf41d294f4b",
+    "crates/session/src/content.rs": "f849c6b51f30b33ceadcbdce1a82262f1c8f946c389c7e06d9e0f2a41dea0c8a",
+    "apps/desktop/src/host_view.rs": "2e04ee281b140b3032a0f2ed34622d1f87099ec78916c3d1b53fb7678b0b0d2b",
+    "apps/desktop/src/conversation_item.rs": "92bfc23e27b4d8435cb26f27cd547352d9a5587416efa20b50b483f53243437c"
+  },
+  "native_artifacts": {
+    "real_handoff_desktop_pid": 3483012,
+    "real_handoff_desktop_sha256": "ebc4d11bcc48c244369d9b726c24f27e527f394794c36178440e32aa79a72ca8",
+    "final_permission_desktop_pid": 3513081,
+    "final_permission_desktop_sha256": "d54100f07a73f94bc7473fb122763eecd3c101012415e1a2e44a64447f5b7620"
+  },
+  "cleanup": {
+    "owned_host_sockets_removed": true,
+    "temporary_credentials_removed": true,
+    "provider_processes_gone": true,
+    "hidden_workspace_stopped": true
+  }
+}

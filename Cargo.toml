@@ -1,6 +1,7 @@
 [workspace]
 resolver = "3"
-members = ["crates/protocol", "crates/client", "apps/cli"]
+members = ["crates/protocol", "crates/client", "crates/runtime", "crates/session", "apps/cli", "apps/host"]
+exclude = ["apps/desktop"]
 
 [workspace.package]
 version = "0.1.0"
@@ -11,11 +12,14 @@ repository = "https://github.com/arucil/fleetpane"
 [workspace.dependencies]
 fleetpane-protocol = { path = "crates/protocol" }
 fleetpane-client = { path = "crates/client" }
+fleetpane-runtime = { path = "crates/runtime" }
+fleetpane-session = { path = "crates/session" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
 tungstenite = "0.29"
 uuid = { version = "1", features = ["v4"] }
+tokio = { version = "1", features = ["rt", "macros", "net", "io-util", "process", "sync", "time", "signal"] }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

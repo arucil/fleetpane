@@ -1,0 +1,32 @@
+[package]
+name = "fleetpane-desktop"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+
+# Separate lockfile keeps GPUI and its platform dependencies out of engine builds.
+[workspace]
+
+[dependencies]
+fleetpane-client = { path = "../../crates/client" }
+fleetpane-protocol = { path = "../../crates/protocol" }
+gpui-kit = "=0.7.3"
+data-url = "0.3"
+
+[patch.crates-io]
+# Keep Kit 0.7.3; fix its zero-overdraw diff list. See vendor/README.md.
+gpui-component = { path = "vendor/gpui-component" }
+
+[target.'cfg(unix)'.dependencies]
+fleetpane-session = { path = "../../crates/session" }
+fleetpane-runtime = { path = "../../crates/runtime" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt", "net", "time"] }
+uuid = { version = "1", features = ["v4"] }
+
+[profile.dev]
+debug = 0
+
+[lints.rust]
+unsafe_code = "forbid"

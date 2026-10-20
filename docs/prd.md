@@ -1,9 +1,10 @@
 # Fleetpane 产品需求文档
 
-版本：v0.1 草案。更新：2026-10-18。
+版本：v0.1 草案。更新：2026-10-20。
 
 本文定义产品范围、工作流、实施顺序和验收要求，不代表功能已经实现。
 实现状态以 [行为状态表](status.md) 为准，架构细节见 [Session Host ADR](adr/0002-preserve-runtimes-across-control-daemon-upgrades.md)。
+用户已确认最终目标达到 donut-paseo 的功能完成度；[功能对照](parity.md) 跟踪参考工作流、现有证据和缺口。
 这是整个 Fleetpane 的产品 PRD，覆盖日常开发、并行会话、审查和自动化；
 daemon 升级和会话迁移是其中的运行时与兼容性模块。
 
@@ -19,13 +20,13 @@ Fleetpane 是面向大量并行编程 Agent 会话的原生桌面工作台。
 | 核心技术 | Rust；界面、控制 daemon、Session Host、协议和领域逻辑分层 |
 | 会话运行架构 | 已确认采用独立 Session Host；应用和控制 daemon 的生命周期不拥有运行中会话 |
 | 主要产品参考 | Paseo；选择性吸收 cmux、Conductor、Zed 的工作流设计 |
-| 桌面工具包 | 当前候选为 GPUI；完成 Linux 输入法、终端和可访问性验证后冻结选择 |
+| 桌面工具包 | 已选择 GPUI Kit；当前固定 0.7.3，输入法、终端和可访问性仍须分别验收 |
 | 首版平台 | 工作假设：Linux 桌面和 Linux headless host 优先；macOS、Windows 保留架构边界，另行验收 |
-| 首版 Agent | 工作假设：先完整支持 Codex；Claude Code 和 ACP 后续接入 |
-| 当前实现 | CLI、协议库及一个有界的只读 Paseo 目录查询；尚无桌面 UI、Session Host 或自有控制 daemon |
+| 首版 Agent | 优先验证用户常用的 OpenCodex 和 DeepSeek Harness；完整 provider 覆盖仍按参考行为逐项补齐 |
+| 当前实现 | 共享 CLI／GPUI Kit 会话命令、Unix Session Host、同窗口本地多 Host、Codex 和 DeepSeek ACP、模型选项、富内容与有界历史分页已有局部证据。自有控制 daemon、持久恢复、终端、工作区开发工具和完整 provider 覆盖尚未完成，详见行为状态表 |
 
-用户已确认 Rust 和 Session Host 方向。平台、首版 provider、下文优先级及性能数值是
-本 PRD 的产品提案，尚未取得单独确认；编写需求不启动真实会话迁移或运行时升级。
+用户已确认 Rust、GPUI Kit、Session Host 和 donut-paseo 功能完成度目标。
+平台验收范围、下文实施优先级及性能数值仍是产品提案；编写需求不启动真实会话迁移或运行时升级。
 
 ## 2. 用户、问题和成功标准
 
@@ -73,7 +74,8 @@ Fleetpane 是面向大量并行编程 Agent 会话的原生桌面工作台。
 公开文档和本地 fork 可能不同，移植时应逐项核对。
 
 不复制竞品的私有实现、视觉资产或未经许可证审查的代码。
-Paseo 的全部功能不是首版清单，竞品的性能宣传也不是 Fleetpane 的基准证据。
+首版可分阶段交付，最终功能完成度目标不因此缩减。参考中尚未移植的能力必须明确列出，
+不能用一条会话链路通过代替整个产品完成；竞品的性能宣传也不是 Fleetpane 的基准证据。
 
 ## 4. 核心概念与状态
 
@@ -240,7 +242,7 @@ P0 不包括完整 IDE / LSP、自研 Agent 推理引擎、云端托管平台、
 | RUN-02 | 新旧控制 daemon 并存，先同步再交接；Host 验证每次修改的 controller generation | 任意时刻只有一个有效控制者；旧实例的迟到发送、停止和审批全部被拒绝 |
 | RUN-03 | Host 提供一致快照与有序事件，记录已接纳操作及状态 | 新控制端能恢复目录、活动 turn 和待审批请求；断线后的操作结果可查询，不能仅靠 JSON-RPC ID 去重 |
 | RUN-04 | 区分桌面、控制 daemon、Host 和 provider 更新 | 前两者更新不强制更新后两者；不兼容的新控制端在交接前被拒绝，旧端继续服务 |
-| RUN-05 | Host / provider 更新采用版本并存和空闲迁移 | 活动工作留在旧版本直至结束；不声称能热迁移进程内存、工具或模型网络请求 |
+| RUN-05 | Host / provider 更新采用多代版本并存、排空和空闲迁移 | 新运行时进新 Host；活动 turn、审批、工具及 PTY 留在原 Host；迁移要暂停新写入并原子更新持久路由，不能重复执行；无依赖资源后旧 Host 才退出 |
 | RUN-06 | 监测 provider 意外退出、Host 故障和结果不确定的命令 | 不显示假空闲或假完成；不自动重复执行提示词和副作用；提供原始诊断及明确恢复入口 |
 | RUN-07 | Host 协议版本协商、健康诊断及受约束的本地访问 | 可查版本、实例身份和兼容范围；默认本机权限边界，不把本地控制接口裸露给公网 |
 
@@ -248,6 +250,13 @@ P0 不包括完整 IDE / LSP、自研 Agent 推理引擎、云端托管平台、
 短暂暂停新修改请求 → Host 原子移交控制权 → 新实例恢复处理 → 旧实例退出。
 整个过程中 Host 持续消费 provider 输出；已接纳的请求由 Host 继续跟踪。
 在交接前失败，原实例继续运行；交接后的回切也是一次新 generation 的转移。
+
+Host 自身升级与上述控制端交接分开：新版本就绪后接收新运行时，旧版本继续服务现有
+任务并排空。不能仅凭 turn 结束就迁移；待审批、结果未确认的操作、后台 Agent / 工具和
+PTY 仍可能持有资源。符合空闲条件后，通过 provider 支持的 resume 恢复上下文，
+再以持久化迁移记录和路由 generation 提交新归属。常规更新不设置强杀活动任务的截止时间；
+长任务跨越多次更新时可有多代 Host 并存，资源不足则延后更新。
+这是一项待实现设计，细节及失败边界见 [Host 自身升级 ADR](adr/0002-preserve-runtimes-across-control-daemon-upgrades.md#updating-the-session-host-itself)。
 
 Host 数量、分片粒度、存储引擎、具体 IPC、事件保留量和 supervisor 实现由后续 ADR 决定。
 不得默认“每会话一个 Host”或“所有账号共用一个 Host”；须验证进程成本、认证隔离和故障影响范围。

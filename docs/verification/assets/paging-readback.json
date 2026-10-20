@@ -1,0 +1,71 @@
+{
+  "source_base": "973b0ed883c25356a9f0849681333919d4497387",
+  "worktree": "uncommitted",
+  "native": {
+    "metadata_sequence": 16,
+    "item_page_sequence": 23,
+    "overlapping_text_deltas": 2,
+    "native_copy": "Echo: 分页历史与实时消息",
+    "native_copy_equals_provider": true,
+    "viewport_pixel_difference_after_prepend": 0,
+    "viewport_region": "780x324+320+195",
+    "history_fixture_bytes": 5211650,
+    "history_fixture_commands": 1200,
+    "host_sha256": "325498c82e34c7eaabb6ddfc6331103b5d3b51692b27c48d73ca6059c9d525f7",
+    "desktop_sha256": "5810ed7a4b868502045793e578f1d576a389997ee3f29451f9e03624344e5166"
+  },
+  "real_codex": {
+    "codex": "0.163.0",
+    "source": "previous isolated real OpenCodex turn",
+    "metadata_only_resume": true,
+    "paged_command_objects_equal_original": true,
+    "command_ids": [
+      "exec-a7d9cc2b-e962-43dd-b12d-28c2ed462440",
+      "exec-6018c926-b84b-4190-866e-3331880a085f",
+      "exec-47af09cf-be83-401b-b2a3-4176964514f6"
+    ],
+    "new_model_turns": 0,
+    "paged_items": 7,
+    "complete": true,
+    "final_runtime_binaries_match_builds": true
+  },
+  "retained_bound_check": {
+    "accepted_commands": 480,
+    "rejected_next_count": 496,
+    "prior_content_retained": true,
+    "reload_returns_entries": 16,
+    "performed_before_final_replay_refinement": true
+  },
+  "short_history_beginning": {
+    "turns": 3,
+    "entries": 6
+  },
+  "automated": {
+    "workspace_tests": 40,
+    "desktop_tests": 4,
+    "synthetic_process_checks": [
+      "history",
+      "session",
+      "directory",
+      "models"
+    ],
+    "installed_codex_local_sse_history": "PASS",
+    "remote_ci_run": false
+  },
+  "cleanup": {
+    "workspace_stopped": true,
+    "no_live_owned_apps_or_providers": true,
+    "owned_socket_nodes_removed": true,
+    "global_codex_config_unchanged": true,
+    "shared_proxy_main_pid": 968,
+    "shared_proxy_child_pid": 1046,
+    "shared_proxy_ready": true
+  },
+  "limits": [
+    "500 retained items / 500 turns / 2 MiB",
+    "256 KiB provider frame still applies to each page and individual items",
+    "128 lifetime Host operations",
+    "no history eviction or bidirectional window",
+    "no new external model turn in this check"
+  ]
+}

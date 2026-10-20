@@ -1,6 +1,8 @@
 # 0002: Preserve runtimes across control daemon upgrades
 
-Status: architecture accepted by the user, 2026-10-18. Not implemented or verified.
+Status: architecture accepted by the user, 2026-10-18. Partial implementation began
+2026-10-19; [ADR 0003](0003-gpui-desktop-and-first-host-slice.md) and the
+[verification record](../verification/2026-10-19-foundation.md) describe its limits.
 Detailed protocol and implementation choices remain subject to validation against
 the [product requirements](../prd.md).
 
@@ -118,6 +120,85 @@ recovery is a separate contract from replacement of a live control daemon.
   pending RPC and side-channel state. Without that support, move sessions at an
   idle boundary; do not promise uninterrupted takeover of existing active work.
 
+## Updating the Session Host itself
+
+Design direction, 2026-10-19; partially implemented as of 2026-10-20. The local
+Host has a persistent admission drain fence; routing and retirement remain open.
+Use overlapping Host generations and drain old runtimes. This resembles a
+blue/green deployment, but sessions do not swap like memory buffers:
+
+```mermaid
+flowchart LR
+    Control[Control daemon / session routing] --> Old[Host v1: draining]
+    Control --> New[Host v2: ready]
+    Old --> Running[Existing turns, tools and approvals]
+    New --> Fresh[New runtimes and resumed idle sessions]
+```
+
+Each running session has exactly one runtime owner, identified by Host
+incarnation, provider runtime, account/configuration boundary and routing
+generation. A new Host is a new incarnation, even if it runs the same version.
+Controller generations fence controllers within a Host; they do not by
+themselves prevent two different Hosts from executing the same session.
+
+1. The supervisor starts the new version at a distinct endpoint without stopping
+   the old Host. Check protocol/provider compatibility and readiness before
+   directing any new runtime to it. Retain both binaries while they are needed.
+   Validate concurrent access to provider-owned storage before changing provider
+   versions: a new binary must not migrate shared state into a schema the old
+   runtime cannot use. Defer an incompatible provider update independently of
+   the Host update.
+2. Mark the old generation as draining: stop assigning new runtimes, but keep
+   accepted work, follow-up tool traffic, cancel commands and approval answers
+   flowing to their original owner. Merely having no connected client is not
+   evidence that a runtime is idle.
+3. Keep active turns and their resources on the old Host. At a provider-verified
+   idle boundary, pause admission of new turns for that session and reconcile
+   accepted operations. A pending approval, unknown operation outcome,
+   background agent/tool, PTY or other connection-owned process blocks migration
+   unless its lifecycle is independently preserved. A turn ending alone is not
+   enough to declare all resources idle.
+4. For an eligible conversation, save the provider thread identity and required
+   configuration. Release its old runtime only after quiescence is confirmed;
+   resume it on the new generation using the provider's supported API. Do not
+   submit a new prompt as part of resume. Resume is a capability to verify per
+   provider/version, not a guarantee of identical in-memory state.
+   If conversations share a provider process, release only the idle
+   conversation's binding; do not stop a process that other sessions still use.
+5. Commit the new session-to-runtime mapping with a durable compare-and-swap
+   after successful resume. Persist a migration record and admission fence so a
+   controller crash cannot reopen both owners. Before retiring the old runtime,
+   startup failures leave the old owner usable. After release, a resume or
+   commit failure leaves the session visibly paused for reconciliation; it must
+   not reactivate either side or resend uncertain work automatically.
+6. Exit the old Host only after all owned runtimes and dependent resources have
+   been released. Show the sessions/resources blocking drain. A routine update
+   has no deadline that silently kills running work; forced interruption is a
+   separate explicit user operation.
+
+There may be more than two live generations when long work spans multiple
+updates. Admission must account for the resource budget and supported protocol
+versions; when another generation cannot be admitted, defer the update rather
+than terminate old work. Keep version-specific endpoints and immutable runtime
+identity instead of replacing a socket that still serves an active Host.
+
+If the requirement becomes "remove the old Host immediately while its turn is
+still running", the provider connection, RPC correlation, approvals and tool/PTY
+ownership must outlive that Host in a smaller stable broker, or the provider must
+offer a verified cooperative live handoff. A second Host cannot recover those
+private stdio and in-memory states from a PID. Moving ownership to a broker
+also moves the eventual broker-upgrade problem; do not add another layer without
+a concrete continuity requirement. Host crashes still require a separate
+recovery contract and cannot be handled by voluntary drain alone.
+
+Acceptance for this design must cover: unchanged active runtime/turn/tool
+identities during drain; new-runtime routing to the new version; no duplicate
+submission across the routing commit; pending approvals and background work
+blocking release; safe failure before and after quiescence; controller/supervisor
+restart during migration; multiple draining versions; and refusal to exit while
+any dependent resource remains. The current process smoke test proves only
+control-client replacement within one living Host.
+
 ## Required acceptance evidence
 
 | Scenario | Required observation |
@@ -133,5 +214,16 @@ recovery is a separate contract from replacement of a live control daemon.
 
 First prove these cases with a deterministic provider fixture, then with an
 isolated real Codex runtime at a pinned version. Run no experiments against a
-user's live sessions. No handoff tests or runtime migration were performed as
-part of this architecture investigation.
+user's live sessions. The original architecture investigation ran no handoff
+tests. Later controller-replacement evidence is recorded in the
+[prototype verification](../verification/2026-10-19-foundation.md); Host version
+drain and complete active-turn acceptance remain pending.
+
+Local implementation note (2026-10-20): [ADR 0015](0015-durable-operation-receipts.md) implements durable RPC receipts and conservative unknown-outcome recovery. It does not implement active-provider restoration, session routing or version drain described here.
+
+[ADR 0016](0016-persistent-host-admission-drain.md) now implements persistent
+per-Host admission drain and observed activity, with native/CLI controls. Existing
+work and explicit answers/interrupts stay on their original provider. Users can
+select another configured Host for new work. There is no automatic routing,
+generation supervisor, cooperative provider takeover or automatic retirement;
+empty observed activity is not proof that every provider/tool/PTY has exited.

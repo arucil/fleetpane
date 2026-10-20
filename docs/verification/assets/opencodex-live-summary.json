@@ -1,0 +1,65 @@
+{
+  "turn_requests": [
+    {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "state": "finished",
+      "id": "305b44d8-7146-42a6-8688-aa7ffe0cb62b"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "state": "finished",
+      "id": "ff740656-fcc8-41e7-a5a6-825682dae5be"
+    },
+    {
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "state": "finished",
+      "id": "8c75a359-336d-4da5-85fd-68a693679dfa"
+    }
+  ],
+  "turn_statuses": [
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "file_content": "verification_nonce=FP-LIVE-8B6C2E\nsum=42\nreconnect_writes=1\nfinal_reconnect_writes=1\n",
+  "host_pid": 3003682,
+  "provider_pid": 3003686,
+  "fault": null,
+  "pending_requests": [],
+  "final_tool": {
+    "started_at_ms": 1792403093249,
+    "desktop_exit_at_seconds": 1792403105,
+    "completed_at_ms": 1792403118220,
+    "exit_code": 0,
+    "duration_ms": 24971
+  },
+  "recorded_turn_contexts": [
+    {
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "reasoning_effort": null
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "reasoning_effort": null
+    },
+    {
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "reasoning_effort": null
+    }
+  ],
+  "global_config_unchanged": true,
+  "proxy_pid_unchanged": true,
+  "desktop_sha256": "d3277de028ddf63ac1926ace3e0cf920822e5dc47ec30a569640fa0fb9cec404",
+  "cleanup": {
+    "workspace_stopped": true,
+    "test_host_provider_desktops_gone": true,
+    "global_config_unchanged": true,
+    "proxy_pid_unchanged": true
+  }
+}

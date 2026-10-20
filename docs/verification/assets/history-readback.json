@@ -1,0 +1,69 @@
+{
+  "codex": "0.163.0",
+  "opencodex": "2.73.0",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "external_model_turns": 1,
+  "history_mode": "paginated",
+  "thread_id": "01a154b0-805c-7010-9033-ec4866adb6b1",
+  "completed_commands": 3,
+  "commands": [
+    {
+      "id": "exec-47af09cf-be83-401b-b2a3-4176964514f6",
+      "exit_code": 0,
+      "duration_ms": 0,
+      "item_sha256": "927af8ee50a8d3fe09955f3c631eefe3d53bd05d4dbe5e0992448f6bb63f3631",
+      "output_sha256": "7c70516e17803b286d49de838f0c260237d213534612147a4e71a134e5cf57a2"
+    },
+    {
+      "id": "exec-6018c926-b84b-4190-866e-3331880a085f",
+      "exit_code": 0,
+      "duration_ms": 0,
+      "item_sha256": "107b03ac31fafa571693011a492f0eb03861b607701825ca4f0db65c3899b1ff",
+      "output_sha256": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"
+    },
+    {
+      "id": "exec-a7d9cc2b-e962-43dd-b12d-28c2ed462440",
+      "exit_code": 0,
+      "duration_ms": 27,
+      "item_sha256": "84b53a0ed646a3523261700d8076082474926d5c7e8915f1f97eb701d63dc80d",
+      "output_sha256": "b797d1562f12fdb52e63b19b82449b9772ef84adf56cb1d6ae18d8d807cabcae"
+    }
+  ],
+  "exact_item_equality": {
+    "live_vs_full_read": true,
+    "live_vs_native_reload": true,
+    "live_vs_restarted_full_read": true,
+    "live_vs_restarted_native_resume": true
+  },
+  "host_replacement": {
+    "old_host_pid": 4045207,
+    "old_provider_pid": 4045210,
+    "new_host_pid": 4060203,
+    "new_provider_pid": 4060204,
+    "incarnation_changed": true,
+    "new_journal_empty": true
+  },
+  "binaries_sha256": {
+    "host": "d33f2b1f965390a41ed5aee4dc1eecb63ce27de5f9135563076ff3a5a8efaaec",
+    "desktop": "829e62b952d1ecdfe182523a2d0011e70de1eca037e953be30b727ca97920716"
+  },
+  "cleanup": {
+    "owned_processes_gone": true,
+    "owned_sockets_gone": true,
+    "stale_sockets_removed_after_refused_connection": [
+      "host/control.sock",
+      "legacy-host/control.sock"
+    ],
+    "shared_proxy_main_pid": 968,
+    "shared_proxy_child_pid": 1046,
+    "shared_proxy_ready": true,
+    "global_config_unchanged": true
+  },
+  "limits": [
+    "existing legacy items not recovered",
+    "incremental history hydration not implemented",
+    "in-flight Host restart recovery not implemented",
+    "remote CI not run"
+  ]
+}

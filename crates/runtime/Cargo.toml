@@ -1,0 +1,18 @@
+[package]
+name = "fleetpane-runtime"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+uuid = { workspace = true, features = ["serde"] }
+
+[target.'cfg(unix)'.dependencies]
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+tokio.workspace = true
+
+[lints]
+workspace = true

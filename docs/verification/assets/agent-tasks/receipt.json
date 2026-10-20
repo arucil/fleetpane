@@ -1,0 +1,124 @@
+{
+  "base_revision": "973b0ed883c25356a9f0849681333919d4497387",
+  "branch": "feat/session-host-foundation",
+  "dirty_worktree": true,
+  "artifacts": {
+    "target/debug/fleetpane-host": "aaf9987158041cb35ba69386d88286d37bf5346fb9f388476391715c3f936abc",
+    "apps/desktop/target/debug/fleetpane-desktop": "899c38d840c284c13849094ec67f4207bb7a61cc428aa810abacaaa1e33a93a1"
+  },
+  "checks": {
+    "root_tests_passed": 89,
+    "desktop_tests_passed": 4,
+    "strict_clippy": [
+      "root",
+      "desktop"
+    ],
+    "fmt": [
+      "root",
+      "desktop"
+    ],
+    "builds": [
+      "host",
+      "desktop"
+    ],
+    "process_smokes": [
+      "tasks",
+      "acp",
+      "drafts"
+    ],
+    "ruff": "pass",
+    "diff_check": "pass",
+    "dsh_regression_before": "failed: zero plan events instead of one",
+    "dsh_regression_after": "passed"
+  },
+  "native": {
+    "synthetic_host_snapshot_equal_after_forced_desktop_replacement": true,
+    "synthetic_exact_clipboard": true,
+    "refresh_snapshot_unchanged": true,
+    "stop_does_not_finish_tasks": true,
+    "previous_turn_label": true,
+    "same_cwd_session_isolation": true,
+    "unknown_status_visible": true,
+    "empty_list_clear": true,
+    "collapse": true,
+    "real_dsh_two_successful_tools": true,
+    "real_dsh_final_steps": [
+      "检查真实任务通知",
+      "完成界面验证"
+    ],
+    "real_dsh_final_statuses": [
+      "completed",
+      "completed"
+    ],
+    "real_dsh_priorities": [
+      null,
+      null
+    ],
+    "real_dsh_clipboard": "[completed] 检查真实任务通知\n[completed] 完成界面验证",
+    "real_dsh_snapshot_equal_after_native_replacement": true,
+    "final_desktop_exited": true
+  },
+  "opencodex": {
+    "completed_turns": 2,
+    "observed_plan_calls": 0,
+    "plan": null,
+    "acceptance": "not verified; no plan tool call or notification; model-reported tool availability not independently attested"
+  },
+  "limits": [
+    "memory-only task cache: 64 sessions / 1 MiB",
+    "plan 128 steps / 32 KiB",
+    "no real OpenCodex plan acceptance",
+    "no remote CI",
+    "no macOS/Windows native run",
+    "no soak or comparative performance",
+    "no historical replay or editable checklist",
+    "native old-Host refusal not tested"
+  ],
+  "hosts_cleaned": true,
+  "workspace_cleaned": true,
+  "credential_copies_deleted": true,
+  "source_sha256": {
+    "crates/runtime/src/tasks.rs": "72a644687153b5e6097dd9e579c9d1c14a5c4458358384e69dc5b1b373d58dfb",
+    "crates/runtime/src/acp.rs": "721358fdaa087a96fc092c7739bab9302c7c43ab049eba8a7788387b868b381e",
+    "crates/runtime/src/lib.rs": "bb4bc0c76d80a1f93ee51b120b06d252178d18f50eb43ae2d10536c06351299d",
+    "crates/runtime/src/unix.rs": "fc11621579c7e79df26a772f56d7355de72d7c61ae10d0b1f8d4e34382a0aca6",
+    "crates/session/src/lib.rs": "778fd85acff567dabfc11ba34110d52b22ce129ae7a8673ec8514ef201ab6ae5",
+    "crates/session/src/client.rs": "bf74c8865d0836a2c26fc9374a9e41d79f85ef35077b6354fb41472aed2e04ad",
+    "apps/host/src/main.rs": "3b62292431e74a9482603c81c6b84fe1cc9c1ca67a4a962d6c43378fd408c8fc",
+    "apps/desktop/src/host_view.rs": "8e37f5a1f2055494d09768e5caf3a64a899fd189d2bf091cedf726b79c5f26f0",
+    "apps/desktop/src/host_view/tasks.rs": "95ad45028383844d762d33b2f9ea97de3eb9a8eee216517b07ed74560cd66867",
+    "scripts/tasks-smoke.py": "d1df3839e182c83d56b9600c8748d71647d2c7904a1913a8a11e3b8975311f18",
+    "scripts/acp-fixture.py": "4fa3a6f605daf672b9e5b36da97069c99f37a90a270703c8dd2b0ea20c5ffc5b",
+    "scripts/provider-fixture.py": "5b19cc9bd167ada2453a346f67eac5c2af149dfbcbc979064a7e0484451bdc97",
+    ".github/workflows/ci.yml": "729a85d8677d146439ab40fb1720366f9346b288e6891ce5be2abf338eefee30",
+    "Cargo.lock": "1ae7e81e4bda7d683d93ba384d0c078e699497a1c0c10b9afe8f6ef071707c0f",
+    "apps/desktop/Cargo.lock": "5c3a7bdec597c0fd54ef4a534a9891eee5e0e0feea079f38597d162f06caa531"
+  },
+  "hosts": [
+    {
+      "name": "Codex",
+      "host_pid": 4049583,
+      "provider_pid": 4049595
+    },
+    {
+      "name": "DeepSeek ACP",
+      "host_pid": 4049618,
+      "provider_pid": 4049625
+    },
+    {
+      "name": "Live OpenCodex",
+      "host_pid": 4110602,
+      "provider_pid": 4110604
+    },
+    {
+      "name": "Live DeepSeek",
+      "host_pid": 94402,
+      "provider_pid": 94436
+    },
+    {
+      "name": "Live DeepSeek fixed",
+      "host_pid": 146545,
+      "provider_pid": 146547
+    }
+  ]
+}
