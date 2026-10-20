@@ -871,10 +871,14 @@ fn choice_exists(options: &Value, value: &str) -> bool {
 mod tests {
     use super::*;
 
+    fn cwd() -> std::path::PathBuf {
+        std::env::temp_dir().join("fleetpane-synthetic")
+    }
+
     fn setup() -> Adapter {
         let mut adapter = Adapter::default();
         let batch = adapter
-            .dispatch("create".into(), "thread/start", json!({"cwd":"/synthetic"}))
+            .dispatch("create".into(), "thread/start", json!({"cwd":cwd()}))
             .unwrap();
         adapter.receive(json!({"jsonrpc":"2.0","id":batch.wire[0]["id"],"result":{"sessionId":"s","configOptions":[{"id":"model","options":[{"group":"models","options":[{"value":"a"},{"value":"b"}]}]}]}})).unwrap();
         adapter
@@ -1120,7 +1124,7 @@ mod tests {
             .dispatch("list".into(), "thread/list", json!({}))
             .unwrap();
         let rows: Vec<_> = (0..100)
-            .map(|i| json!({"sessionId":format!("saved-{i}"),"cwd":"/synthetic","title":null}))
+            .map(|i| json!({"sessionId":format!("saved-{i}"),"cwd":cwd(),"title":null}))
             .collect();
         let page=adapter.receive(json!({"jsonrpc":"2.0","id":listing.wire[0]["id"],"result":{"sessions":rows,"nextCursor":"provider-more"}})).unwrap();
         let result = &page.events[0]["result"];
