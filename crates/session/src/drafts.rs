@@ -30,7 +30,7 @@ mod tests {
     };
 
     fn root() -> PathBuf {
-        std::env::temp_dir().join(format!("fp-draft-{}", Uuid::new_v4()))
+        std::path::PathBuf::from("/tmp").join(format!("fp-draft-{}", Uuid::new_v4()))
     }
     fn key(root: &std::path::Path) -> Key {
         Key {

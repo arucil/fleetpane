@@ -46,6 +46,10 @@ impl Store {
 
     fn database(directory: PathBuf) -> Result<Database, StorageError> {
         fleetpane_runtime::unix::prepare_directory(&directory)?;
+        // SQLite NOFOLLOW rejects symlinks in every filename component. macOS
+        // system roots such as /var are aliases; resolve ancestors only after
+        // checking that the store directory itself is a private non-symlink.
+        let directory = std::fs::canonicalize(directory)?;
         let path = directory.join("creations.sqlite3");
         match OpenOptions::new()
             .write(true)
@@ -118,6 +122,26 @@ impl Store {
 
 #[cfg(test)]
 mod tests {
+    #[tokio::test]
+    async fn system_directory_alias_is_supported_but_leaf_symlinks_are_refused() {
+        use std::os::unix::fs::symlink;
+        let root = std::env::temp_dir().join(format!("fp-alias-{}", uuid::Uuid::new_v4()));
+        std::fs::create_dir(&root).unwrap();
+        let real = root.join("real");
+        std::fs::create_dir(&real).unwrap();
+        let alias = root.join("alias");
+        symlink(&real, &alias).unwrap();
+        let store = Store::open(alias.join("state")).await.unwrap();
+        assert!(store.drafts(None).await.unwrap().is_empty());
+        symlink(real.join("state"), alias.join("leaf-link")).unwrap();
+        assert!(Store::open(alias.join("leaf-link")).await.is_err());
+        let db = real.join("state/creations.sqlite3");
+        std::fs::rename(&db, real.join("saved.sqlite3")).unwrap();
+        symlink(real.join("saved.sqlite3"), &db).unwrap();
+        assert!(Store::open(alias.join("state")).await.is_err());
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
     use super::*;
     use crate::{hosts::Endpoint, routing::Target};
     use uuid::Uuid;

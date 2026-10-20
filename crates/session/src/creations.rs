@@ -279,7 +279,8 @@ mod tests {
 
     #[tokio::test]
     async fn binding_survives_reopen_and_never_changes_hosts() {
-        let directory = std::env::temp_dir().join(format!("fp-creations-{}", Uuid::new_v4()));
+        let directory =
+            std::path::PathBuf::from("/tmp").join(format!("fp-creations-{}", Uuid::new_v4()));
         let store = Store::open(directory.clone()).await.unwrap();
         let id = Uuid::new_v4();
         let first = store
@@ -323,7 +324,8 @@ mod tests {
 
     #[tokio::test]
     async fn pagination_and_corrupt_schema_are_explicit() {
-        let directory = std::env::temp_dir().join(format!("fp-creations-{}", Uuid::new_v4()));
+        let directory =
+            std::path::PathBuf::from("/tmp").join(format!("fp-creations-{}", Uuid::new_v4()));
         let store = Store::open(directory.clone()).await.unwrap();
         let path = directory.join("creations.sqlite3");
         assert_eq!(
@@ -393,7 +395,8 @@ mod tests {
 
     #[tokio::test]
     async fn wrong_host_is_rejected_before_dispatch_or_attempt_marker() {
-        let directory = std::env::temp_dir().join(format!("fp-creations-{}", Uuid::new_v4()));
+        let directory =
+            std::path::PathBuf::from("/tmp").join(format!("fp-creations-{}", Uuid::new_v4()));
         let store = Store::open(directory.clone()).await.unwrap();
         let id = Uuid::new_v4();
         store

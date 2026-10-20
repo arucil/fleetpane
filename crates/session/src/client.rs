@@ -441,7 +441,7 @@ mod tests {
     async fn lost_read_reply_is_refreshable_but_lost_mutation_reply_keeps_identity() {
         use tokio::{io::AsyncBufReadExt, net::UnixListener};
 
-        let directory = std::env::temp_dir().join(format!("fleetpane-query-{}", Uuid::new_v4()));
+        let directory = std::path::PathBuf::from("/tmp").join(format!("fleetpane-query-{}", Uuid::new_v4()));
         fleetpane_runtime::unix::prepare_directory(&directory).unwrap();
         let socket = directory.join("control.sock");
         let listener = UnixListener::bind(&socket).unwrap();
