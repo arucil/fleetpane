@@ -225,6 +225,7 @@ impl Cache {
                 .1;
         }
     }
+    #[cfg(any(unix, test))]
     pub fn read(&self, thread: &str, sequence: u64) -> View {
         View {
             sequence,
