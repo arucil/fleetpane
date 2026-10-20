@@ -149,7 +149,7 @@ def main():
                 )
                 assert overview["git"]["linked_worktree"] and overview["git"][
                     "root"
-                ] == str(linked)
+                ] == str(linked.resolve()), overview
                 assert len(overview["git"]["changes"]) == 3, overview
                 renamed = next(
                     change
@@ -190,9 +190,11 @@ def main():
 
             # Shared command actually sends the registered canonical cwd to its Host.
             assert call("create", linked_workspace["id"])["thread"]["cwd"] == str(
-                linked
+                linked.resolve()
             )
-            assert call("create", other_host["id"])["thread"]["cwd"] == str(linked)
+            assert call("create", other_host["id"])["thread"]["cwd"] == str(
+                linked.resolve()
+            )
             assert (
                 snapshot(0)["journal_total"] == 1 and snapshot(1)["journal_total"] == 1
             )
