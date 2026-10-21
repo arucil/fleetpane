@@ -1,0 +1,199 @@
+{
+  "base_revision": "96d61a6438f1db353dbcc42862d4013ddeadb6d3",
+  "synthetic_before": {
+    "protocol": 3,
+    "host_id": "a5547815-a458-4036-b70c-bccfd560d6d3",
+    "host_pid": 1794654,
+    "provider_pid": 1794663,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "a5547815-a458-4036-b70c-bccfd560d6d3",
+      "controller_id": "2cd98c2a-fd09-4a4d-8242-83d3d0983552",
+      "generation": 2
+    },
+    "sequence": 6,
+    "operation_ids": [
+      "75949b40-c55c-4194-b6c1-11ac2431c9fd",
+      "8d0b634d-4bd6-4d6d-9735-6d87b04f2c57"
+    ],
+    "journal_total": 11,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-2-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-2-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "synthetic_after": {
+    "protocol": 3,
+    "host_id": "a5547815-a458-4036-b70c-bccfd560d6d3",
+    "host_pid": 1794654,
+    "provider_pid": 1794663,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "a5547815-a458-4036-b70c-bccfd560d6d3",
+      "controller_id": "7c6df857-6154-49a9-8c83-7478305bc111",
+      "generation": 3
+    },
+    "sequence": 29,
+    "operation_ids": [
+      "75949b40-c55c-4194-b6c1-11ac2431c9fd",
+      "8d0b634d-4bd6-4d6d-9735-6d87b04f2c57",
+      "826ca512-d535-4eec-a624-5aefce529c47"
+    ],
+    "journal_total": 12,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-2-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-2-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [
+        {
+          "sequence": 22,
+          "observed_unix_ms": 1792608592062,
+          "thread_id": "settings-root",
+          "turn_id": "settings-root-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "installed_provider": {
+    "version": "0.163.0",
+    "thread_fields": {
+      "id": "01a15fcc-1edf-7a93-8301-664029d3734d",
+      "model": "local-settings-probe",
+      "modelProvider": "openai",
+      "reasoningEffort": "high"
+    },
+    "prompt_sent": false
+  },
+  "current_schema_sha256": "d204b96d8560d56600127423b89df9db471b3e22338e8809bb91d5a952998978",
+  "stopped_fixture_hosts": [
+    1794654
+  ],
+  "hashes": {
+    "target/debug/fleetpane-host": "4121f4951a5d974b84f7c811e634c7cb5406f166469d8008bfc41ca532ff2faa",
+    "apps/desktop/target/debug/fleetpane-desktop": "ec35abad054b4051c769964e73ae49c85bbceba94307e2724732e2034a91f0a2"
+  }
+}

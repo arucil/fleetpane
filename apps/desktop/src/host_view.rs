@@ -9,6 +9,7 @@ mod progress;
 mod recent;
 mod recovery;
 mod row_changes;
+mod session_settings;
 mod stopping;
 mod tasks;
 use crate::conversation_item::{ItemView, OpenFile, Row};
@@ -2347,6 +2348,7 @@ impl Render for HostView {
                                         },
                                     ),
                             )
+                            .child(self.reported_session_settings(cx))
                             .when(self.thread.is_some(), |pane| {
                                 pane.child(
                                     div()

@@ -38,6 +38,7 @@ mod reasoning;
 pub mod recent_directories;
 #[cfg(unix)]
 pub mod routing;
+mod session_settings;
 #[cfg(unix)]
 pub mod session_tree;
 #[cfg(unix)]
@@ -56,6 +57,13 @@ pub struct Thread {
     pub cwd: String,
     pub preview: String,
     pub name: Option<String>,
+    /// Provider-reported current/persisted settings, not turn execution telemetry.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub model: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub model_provider: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reasoning_effort: Option<String>,
     /// Codex app-server's Unix seconds; ACP timestamps remain in acp_session_info.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<i64>,
@@ -158,6 +166,7 @@ impl Thread {
     }
 
     pub fn validate(&self) -> Result<(), Error> {
+        self.validate_session_settings()?;
         if let Some(modes) = &self.acp_modes {
             modes.validate().map_err(Error::Projection)?;
         }
@@ -194,6 +203,7 @@ impl Thread {
                 | "thread/acpSessionInfo/updated"
                 | "thread/config/updated"
                 | "thread/acpModes/updated"
+                | "thread/settings/updated"
                 | "turn/started"
                 | "turn/completed"
                 | "item/started"
@@ -215,6 +225,7 @@ impl Thread {
             return Ok(false);
         }
         match envelope.method.as_str() {
+            "thread/settings/updated" => self.apply_session_settings(&params)?,
             method if reasoning::is_delta(method) => reasoning::apply(self, method, params)?,
             "thread/acpSessionInfo/updated" => {
                 let name = params

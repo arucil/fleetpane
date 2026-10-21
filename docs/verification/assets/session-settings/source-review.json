@@ -1,0 +1,202 @@
+{
+  "captured_sources": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "baseline": null,
+      "target": "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c",
+      "commits_in_scope": 6042,
+      "roots": [
+        "fee0f4fd285d2549ddad8d265fd4df69d1740bd0"
+      ]
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "baseline": null,
+      "target": "2d0977759b168264adb3961a862eda8cd574f562",
+      "commits_in_scope": 6059,
+      "roots": [
+        "fee0f4fd285d2549ddad8d265fd4df69d1740bd0"
+      ]
+    }
+  ],
+  "inspections": [
+    {
+      "ordinal": 318,
+      "revision": "f06170fceed8170aff38f8d51b4c4acca0e402e6",
+      "paths": [
+        "package.json",
+        "patches/@openai+codex-sdk+0.76.0.patch"
+      ],
+      "bytes": 2298,
+      "sha256": "cbb324441b7b85fe170d7dc056d0696059f898dde6ab276401ad0aa81b2aebe1",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 319,
+      "revision": "a70842d9ef1fd3f3f4b4275832695d959d7a51eb",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "bytes": 3000,
+      "sha256": "94c1f4b50a4fdc8ccfe855dfb1c1c4a2dfaff51c83c9321fe16adb42311850f0",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 320,
+      "revision": "abe3a424780e607b44ce3a7af430a204d167c337",
+      "paths": [
+        "packages/app/src/utils/extract-agent-model.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "bytes": 4784,
+      "sha256": "74f213ffd6748e281f04be6ea9c9b361ea71e89f9a3d79e7843993298616005f",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 321,
+      "revision": "67fba8e96f48c75a64ea007f230444e0f6e90e10",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 6828,
+      "sha256": "4c4ab06d4b59cf9d5f20da9ab533bb7f241c0b97664fd2b6bcb6fdd9c9fc3adb",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 322,
+      "revision": "845a2120eeb6a062e6709b780be0009576d09a26",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 3030,
+      "sha256": "022a9d101f455984fd026d9903ca4cf424b6de33f1e8625a3812e05e6e1f275b",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 323,
+      "revision": "e1631fcab6a8f593d497f7542a30b575b37b5e4e",
+      "paths": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "bytes": 1656,
+      "sha256": "de2d80dab48002c9f72504fdd06b9b08d4cf0621ecb1b1ee55287a8312954e09",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 324,
+      "revision": "d46bf8c5ac70318f9f44f33b01356320f44ad629",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 4280,
+      "sha256": "cd299e72846198f127f1d66f25d9f2e5b1d10635eb9f3c77e73e6bdc32feb0bb",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 325,
+      "revision": "071f83db8638e6ea7fd9b6687dd51daa52b9195a",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 3645,
+      "sha256": "54b8bc99c6a77bceffd8ef724e7675cc32cabebe66a9790d25e441d5af6669e7",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 326,
+      "revision": "1bf4a1d478d64a57bf2e15a7e6e4b44a2a127002",
+      "paths": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "bytes": 2662,
+      "sha256": "ae35cd8ffbaa0570537e3c5fab65dfec0ba82d7e57cd5bd4d2e13be257bbb73e",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 327,
+      "revision": "b1afa55778f2c8b2481ad8d166e3599103e32e1b",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 3299,
+      "sha256": "4d6eaacef5c535af0f130dfabc75503095b01fc482bec3f173d020ff1075ac4c",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 328,
+      "revision": "b605b53702cf9580761cacbd5f6eb223d37d9e42",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 3172,
+      "sha256": "7a4fe5b9416fc8c52d71593aa26f61cbec7e22182c8cf1f304fcb7d536ebb831",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 329,
+      "revision": "d5344af45dc73c2817ecfd9fc6ac11536f1c71d3",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 2254,
+      "sha256": "990a535aa4414ed92ff9bc32b9d7d5adb75a381bd8ca35c50fdc3b317a454550",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 330,
+      "revision": "20f94e48f72ca566344c6a08983284d72ea83695",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 6298,
+      "sha256": "e604a1b2b0ea01d9602ba28a5e567d9db21dd6a5124556b9c7b26baa0a82dec1",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 331,
+      "revision": "545fad1b712642a0f46cefd280726ac07f1f5140",
+      "paths": [
+        "package.json"
+      ],
+      "bytes": 908,
+      "sha256": "76ddca816aafade5234b81b643746e2289ee8f1c8c211a5ba7b6c9fa1cadf00b",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 332,
+      "revision": "6bae6f3a8937b627b029beceb399468330d7c2df",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 1798,
+      "sha256": "420591f8dfe249a2b854da9b2456e8a3130e10ae534c8921194940656deccc0a",
+      "inspection": "historical-report-diff"
+    },
+    {
+      "ordinal": 333,
+      "revision": "5d5a196525814a1914bcb3b26b20cfaefc9199be",
+      "paths": [
+        "packages/app/src/app/git-diff.tsx"
+      ],
+      "bytes": 1946,
+      "sha256": "8175accf421f98cc2b8250b82b1f91959378562f0d84466f4bf05e1c00d72c87",
+      "inspection": "source-or-config-diff"
+    },
+    {
+      "ordinal": 334,
+      "revision": "07cf1baa4fa5a34ac63af6c977a7ad0c323b0a86",
+      "paths": [
+        "plan.md"
+      ],
+      "bytes": 1973,
+      "sha256": "43bd9d6e07f6e48fa6fb817bfd5efb738b94e9ae11cfd2a2d42d96062a5585b6",
+      "inspection": "historical-report-diff"
+    }
+  ],
+  "historical_runtime_executed": false
+}

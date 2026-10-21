@@ -18,6 +18,7 @@ pub(super) fn affects_rows(event: &fleetpane_runtime::Event, applied: bool) -> b
                     | "thread/acpSessionInfo/updated"
                     | "thread/config/updated"
                     | "thread/acpModes/updated"
+                    | "thread/settings/updated"
                     | "turn/plan/updated"
             )
         )
@@ -241,6 +242,7 @@ mod tests {
             ("thread/status/changed", json!({"threadId":"s","status":{"type":"active"}})),
             ("thread/acpSessionInfo/updated", json!({"threadId":"s","threadName":"Idle title","sessionInfo":{"updatedAt":"2026-10-21T00:00:00Z"}})),
             ("thread/config/updated", json!({"threadId":"s","configOptions":[]})),
+            ("thread/settings/updated", json!({"threadId":"s","threadSettings":{"model":"confirmed","modelProvider":"synthetic","effort":null}})),
             ("thread/acpModes/updated", json!({"threadId":"s","modes":{"currentModeId":"ask","availableModes":[]}})),
             ("turn/plan/updated", json!({"threadId":"s","turnId":"t","plan":[]})),
         ].into_iter().enumerate() {

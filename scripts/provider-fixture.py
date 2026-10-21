@@ -144,6 +144,12 @@ def finish_turn(thread_id, turn_id, status):
 
 def stream(thread_id, turn_id, text):
     stop = running[turn_id]
+    if text == "[settings-update]":
+        with state_lock:
+            thread = threads[thread_id]
+            thread.update({"model": "confirmed-updated", "modelProvider": "synthetic-settings", "reasoningEffort": None})
+            notify("thread/settings/updated", {"threadId":thread_id, "threadSettings":{"model":thread["model"], "modelProvider":thread["modelProvider"], "effort":None}})
+            notify("thread/settings/updated", {"threadId":"unrelated-settings-thread", "threadSettings":{"model":"foreign-model", "modelProvider":"foreign-provider", "effort":"foreign-effort"}})
     if text == "[reasoning]":
         reasoning = {
             "id": f"reasoning-{turn_id}", "type": "reasoning",

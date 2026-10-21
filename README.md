@@ -504,6 +504,12 @@ exact provider answers, controller fencing and cross-Host isolation.
 [Local acceptance and limits](docs/verification/2026-10-21-attention-queue.md).
 [Turn-result acceptance and limits](docs/verification/2026-10-22-turn-results.md).
 
+Codex conversations show **Provider session settings** with reported model,
+provider and effort plus exact **Copy settings**. Updates follow provider events;
+missing metadata stays unavailable. These are current/persisted settings, while
+**Next message** chooses options for the next send. Individual turns may execute
+with another model. [Verification](docs/verification/2026-10-22-session-settings.md).
+
 Conversation details (tasks, approvals, questions, model options and attachments)
 now scroll within at most half the space remaining above the fixed editor.
 At 900 × 560, long drafts and pending interactions leave messages visible;

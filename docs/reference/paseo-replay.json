@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 317,
-    "last_revision": "b8de55f31bc6e3119dbcb54e9797d7750ffd39b3",
-    "next_revision": "f06170fceed8170aff38f8d51b4c4acca0e402e6",
-    "next_ordinal": 318
+    "last_ordinal": 334,
+    "last_revision": "07cf1baa4fa5a34ac63af6c977a7ad0c323b0a86",
+    "next_revision": "978a544f19610549e99a11be3603da4d88d7e6af",
+    "next_ordinal": 335
   },
   "entries": [
     {
@@ -4532,6 +4532,215 @@
       "paths_inspected": [],
       "finding": "Merge metadata and parent identities inspected only; branch changes recorded at their own revisions.",
       "fleetpane_action": "merge-metadata-only"
+    },
+    {
+      "ordinal": 318,
+      "revision": "f06170fceed8170aff38f8d51b4c4acca0e402e6",
+      "date": "2025-12-20T13:10:57+07:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "patches/@openai+codex-sdk+0.76.0.patch"
+      ],
+      "finding": "Codex/Claude SDK bumps and JavaScript shutdown patch. Fleetpane runs explicit installed app-server/ACP executables; no JS SDK port.",
+      "fleetpane_action": "native-provider-processes"
+    },
+    {
+      "ordinal": 319,
+      "revision": "a70842d9ef1fd3f3f4b4275832695d959d7a51eb",
+      "date": "2025-12-20T13:30:49+07:00",
+      "category": "providers",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "System Codex resolution via synchronous which plus embedded fallback. Fleetpane already launches the explicitly supplied executable through process PATH; no render-time resolution or implicit fallback.",
+      "fleetpane_action": "existing-explicit-provider-command"
+    },
+    {
+      "ordinal": 320,
+      "revision": "abe3a424780e607b44ce3a7af430a204d167c337",
+      "date": "2025-12-21T23:16:49+07:00",
+      "category": "providers",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/utils/extract-agent-model.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Inspected runtime-info type, snapshot/storage projections and runtime-only UI extraction. Current Codex schema distinguishes configured/persisted thread settings from per-turn telemetry; retain this distinction.",
+      "fleetpane_action": "provider-session-settings"
+    },
+    {
+      "ordinal": 321,
+      "revision": "67fba8e96f48c75a64ea007f230444e0f6e90e10",
+      "date": "2025-12-21T16:33:00Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical plan audits requested versus runtime model and proposes provider follow-ups; this report is not independently reproduced runtime evidence.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 322,
+      "revision": "845a2120eeb6a062e6709b780be0009576d09a26",
+      "date": "2025-12-21T16:34:48Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Claude model-init and result-usage investigation; Claude SDK integration is outside current OpenCodex/DSH scope.",
+      "fleetpane_action": "provider-scope"
+    },
+    {
+      "ordinal": 323,
+      "revision": "e1631fcab6a8f593d497f7542a30b575b37b5e4e",
+      "date": "2025-12-21T16:36:43Z",
+      "category": "providers",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude init model invalidates runtime-info cache. Do not infer an executed model from user-selected next-turn options.",
+      "fleetpane_action": "provider-session-settings"
+    },
+    {
+      "ordinal": 324,
+      "revision": "d46bf8c5ac70318f9f44f33b01356320f44ad629",
+      "date": "2025-12-21T16:39:58Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical plan records Codex model-display testing; no test executable was changed and the report is not Fleetpane acceptance.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 325,
+      "revision": "071f83db8638e6ea7fd9b6687dd51daa52b9195a",
+      "date": "2025-12-21T16:43:10Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Claude display failure describes Unknown after implementation. Source/report boundaries matter; no new provider support.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 326,
+      "revision": "1bf4a1d478d64a57bf2e15a7e6e4b44a2a127002",
+      "date": "2025-12-21T16:47:42Z",
+      "category": "providers",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Refresh emits state only when model/session/mode changed; missing publication previously hid correct provider info. Fleetpane now handles typed settings events without rebuilding content rows.",
+      "fleetpane_action": "provider-session-settings"
+    },
+    {
+      "ordinal": 327,
+      "revision": "b1afa55778f2c8b2481ad8d166e3599103e32e1b",
+      "date": "2025-12-21T16:52:01Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical repeated Claude display failure report; no executable test diff.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 328,
+      "revision": "b605b53702cf9580761cacbd5f6eb223d37d9e42",
+      "date": "2025-12-21T16:55:42Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Claude model display success report, not independently rerun.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 329,
+      "revision": "d5344af45dc73c2817ecfd9fc6ac11536f1c71d3",
+      "date": "2025-12-21T16:56:35Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical re-audit marks model tracking complete in plan.md; current Fleetpane settings scope is separately tested.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 330,
+      "revision": "20f94e48f72ca566344c6a08983284d72ea83695",
+      "date": "2025-12-21T17:00:55Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Git diff request-loop investigation and plan instructions. Git Diff extensions remain deferred by user; historical instructions are data only.",
+      "fleetpane_action": "user-deferred-git-diff"
+    },
+    {
+      "ordinal": 331,
+      "revision": "545fad1b712642a0f46cefd280726ac07f1f5140",
+      "date": "2025-12-21T17:03:56Z",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "finding": "Claude SDK dependency bump only in inspected package metadata; no dependency package audit or native/provider change.",
+      "fleetpane_action": "provider-scope"
+    },
+    {
+      "ordinal": 332,
+      "revision": "6bae6f3a8937b627b029beceb399468330d7c2df",
+      "date": "2025-12-21T17:06:22Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Claude self-report/UI verification text; no executable tests changed.",
+      "fleetpane_action": "historical-report-only"
+    },
+    {
+      "ordinal": 333,
+      "revision": "5d5a196525814a1914bcb3b26b20cfaefc9199be",
+      "date": "2025-12-21T17:08:05Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/git-diff.tsx"
+      ],
+      "finding": "Git diff screen gates initial requests with an agent ref to stop unstable callback/store loop. Fleetpane uses explicit commands; no React port or Git Diff extension.",
+      "fleetpane_action": "user-deferred-git-diff"
+    },
+    {
+      "ordinal": 334,
+      "revision": "07cf1baa4fa5a34ac63af6c977a7ad0c323b0a86",
+      "date": "2025-12-21T17:09:46Z",
+      "category": "documentation",
+      "inspection": "historical-report-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Git diff Playwright success report, not a test run in this task.",
+      "fleetpane_action": "user-deferred-git-diff"
     }
   ],
   "workflow_status": {

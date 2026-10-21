@@ -1,0 +1,31 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 8.82s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 2 tests
+test session_settings::tests::provider_settings_survive_metadata_roundtrip_without_using_next_message_choices ... FAILED
+test session_settings::tests::settings_events_route_atomically_and_null_effort_clears_previous_setting ... FAILED
+
+failures:
+
+---- session_settings::tests::provider_settings_survive_metadata_roundtrip_without_using_next_message_choices stdout ----
+
+thread 'session_settings::tests::provider_settings_survive_metadata_roundtrip_without_using_next_message_choices' (1782710) panicked at crates/session/src/session_settings.rs:25:9:
+assertion `left == right` failed
+  left: Null
+ right: "provider-confirmed"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- session_settings::tests::settings_events_route_atomically_and_null_effort_clears_previous_setting stdout ----
+
+thread 'session_settings::tests::settings_events_route_atomically_and_null_effort_clears_previous_setting' (1782711) panicked at crates/session/src/session_settings.rs:37:9:
+assertion failed: thread.apply(&event("settings-thread", settings)).unwrap()
+
+
+failures:
+    session_settings::tests::provider_settings_survive_metadata_roundtrip_without_using_next_message_choices
+    session_settings::tests::settings_events_route_atomically_and_null_effort_clears_previous_setting
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 182 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`
