@@ -9,7 +9,6 @@ import signal
 import socket
 import subprocess
 import sys
-import sys
 import tempfile
 import time
 from pathlib import Path

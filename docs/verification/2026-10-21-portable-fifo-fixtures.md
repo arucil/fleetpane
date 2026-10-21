@@ -38,3 +38,11 @@ The invalid-name fixture verifies application rejection when creation succeeds;
 on macOS a failed creation must specifically be `EILSEQ`. Other filesystem errors
 fail the test. None of these changes alters production file access or weakens
 symlink, traversal, identity or special-file refusal.
+
+The subsequent macOS run passed 151 of 152 session tests; the remaining assertion
+was a second use of the same DeepSeek path after deleting its source. The fixture
+now keeps the canonical path from creation, so both original and source-absent
+readbacks compare the same saved identity. The equivalent Python DeepSeek smoke
+resolves its fixture root as well. The filesystem process smoke recognizes only
+Darwin `EILSEQ` at invalid-name creation; otherwise it still tests the ordinary
+application rejection path. Both affected process commands pass locally on Linux.
