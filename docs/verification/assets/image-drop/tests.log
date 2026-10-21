@@ -1,0 +1,43 @@
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 2.48s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-2b4a416202786742)
+
+running 36 tests
+test conversation_item::tests::invalid_image_data_is_visible_failure ... ok
+test conversation_item::resources::tests::resource_preview_is_bounded_without_trimming_the_copy_payload ... ok
+test conversation_item::tests::long_commands_use_a_summary_without_losing_the_script ... ok
+test conversation_item::tests::codex_patch_variants_parse_as_diff_files ... ok
+test file_locations::tests::history_commits_only_success_and_preserves_forward_on_refresh ... ok
+test conversation_item::tests::command_cards_classify_only_supplied_actions_and_preserve_whole_output ... ok
+test conversation_item::tests::search_rows_keep_source_fields_without_inventing_completion ... ok
+test file_locations::tests::history_keeps_line_identity_and_bounds_only_metadata ... ok
+test file_locations::tests::recently_opened_workspace_survives_bounded_eviction_and_updates_in_place ... ok
+test files_view::tests::preview_preserves_utf8_and_caps_display_only ... ok
+test conversation_item::tests::tool_failures_use_the_same_error_presentation_as_codex ... ok
+test file_locations::tests::restores_selection_and_isolates_workspace_host_and_root_identity ... ok
+test host_view::completion::tests::opening_a_source_turn_suspends_tail_following ... ok
+test host_view::draft::hydration_tests::same_thread_read_can_follow_metadata_while_draft_loads_without_relaxing_navigation ... ok
+test files_view::tests::source_line_preview_preserves_newlines_bounds_and_explicit_missing_line ... ok
+test host_view::recovery::tests::identity_protocol_cursor_and_uncertain_results_require_explicit_reconciliation ... ok
+test host_view::recovery::tests::transport_reads_recover_without_clearing_other_errors_or_retrying_writes ... ok
+test conversation_item::tests::turn_rows_distinguish_stop_reasons_and_copy_original_metadata ... ok
+test host_view::row_changes::tests::item_named_status_does_not_replace_the_turn_card ... ok
+test conversation_item::tests::previews_keep_utf8_and_copy_source_is_complete ... ok
+test host_view::row_changes::tests::content_events_invalidate_rows_but_foreign_and_unapplied_events_do_not ... ok
+test host_view::row_changes::tests::delimiters_in_provider_ids_do_not_alias_other_turn_items ... ok
+test host_view::row_changes::tests::pagination_reorder_edits_removal_and_thread_switch_use_identity ... ok
+test host_view::row_changes::tests::item_targets_keep_opaque_turn_and_item_boundaries_and_stable_order ... ok
+test image_navigation::tests::image_navigation_does_not_guess_other_formats_or_extensionless_files ... ok
+test terminal_view::tests::polling_preserves_one_explicit_action_and_never_repeats_it ... ok
+test image_navigation::tests::image_navigation_preserves_directory_order_and_excludes_links_and_special_files ... ok
+test image_navigation::tests::image_navigation_uses_fresh_membership_and_reports_missing_current_image ... ok
+test host_view::row_changes::tests::streamed_reasoning_appears_and_only_updates_its_retained_card ... ok
+test host_view::row_changes::tests::metadata_foreign_pages_structural_and_future_events_keep_their_boundaries ... ok
+test host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline ... ok
+test host_view::row_changes::tests::visibility_lifecycle_and_failed_tool_updates_match_full_projection ... ok
+test host_view::images::tests::clipboard_text_falls_through_and_image_batches_are_bounded ... ok
+test host_view::images::tests::picked_and_dropped_paths_keep_order_and_refuse_entire_invalid_batch ... ok
+test host_view::row_changes::tests::streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items ... ok
+test host_view::row_changes::tests::streaming_tail_updates_one_card_without_touching_1200_retained_cards ... ok
+
+test result: ok. 36 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s

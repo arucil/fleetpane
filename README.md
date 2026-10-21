@@ -932,6 +932,11 @@ SHA-256. The same operation is available as
 `fleetpane-host workspace STORE export UUID RELATIVE_SOURCE ABSOLUTE_DESTINATION`.
 It requires no running Host. [Evidence and limits](docs/verification/2026-10-22-file-export.md).
 
+Drop local PNG/JPEG/WebP files onto an existing Host conversation to add them to
+its saved draft. Picker, paste and drop keep the same four-image limits. Invalid
+batches preserve the draft; sending remains explicit.
+[Linux native verification](docs/verification/2026-10-22-image-drop.md).
+
 ## Workspace
 
 | Package | Responsibility |

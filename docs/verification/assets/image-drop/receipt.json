@@ -1,0 +1,45 @@
+{
+  "baseline": "6101ca42ecf95ea264ed0d3ae50c2c9d8847ab41",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "14c54516435455265f8b521c4b54e63b5800e53a6f2c3806f1ebdccbc3af130a",
+    "apps/desktop/src/host_view/images.rs": "0d61d00505178e5518ff24d168b25f44873abb697764cedd94c8c2657bcb353b"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "2314afcc5fc216701ae26c1a9e4f85f059ef4e6f6600c20b07a9046bdf146bcd",
+    "apps/desktop/target/debug/fleetpane-desktop": "b3cbac0247b5a96c65ec1257539b9c1974a3c3eb88e8c87e3d809f070a907df9"
+  },
+  "native": {
+    "workspace": "fleetpane-drop-20261022",
+    "real_gtk_xdnd_source": true,
+    "draft_utf8_bytes": 27,
+    "image_names": [
+      "中文 %20#图.png",
+      "second.png",
+      "third.png",
+      "fourth.png"
+    ],
+    "invalid_batch_and_fifth_keep_exact_draft_revision": true,
+    "normal_close_reopen_preserves_four_images": true,
+    "minimum_window": [
+      900,
+      560
+    ],
+    "explicit_send_count": 1,
+    "sent_images": 4,
+    "sent_bytes_hashes_exact": true,
+    "final_binary_drop_and_immutable_asset_verified": true,
+    "normal_close_and_workspace_stopped": true
+  },
+  "checks": {
+    "desktop_tests": 36,
+    "strict_clippy": "pass",
+    "format": "pass",
+    "images_process_smoke": "Codex, ACP and unsupported ACP capability pass"
+  },
+  "limits": [
+    "Synthetic provider, local Linux X11 only",
+    "New-session initial attachment and remote URI drops not implemented",
+    "Wayland/macOS/Windows, IME and slow-import close not accepted",
+    "Import refusal may retain immutable validated assets in the bounded store"
+  ]
+}

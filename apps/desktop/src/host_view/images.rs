@@ -1,6 +1,9 @@
 use super::*;
 use fleetpane_runtime::attachments::{self, Store};
-use std::{path::Path, sync::Arc};
+use std::{
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 
 #[derive(Debug)]
 struct PastedImage {
@@ -52,6 +55,55 @@ fn clipboard_images(
 }
 
 impl HostView {
+    pub(super) fn drop_images(
+        &mut self,
+        paths: &ExternalPaths,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        if !self.supports_images() || !self.draft_sendable() {
+            self.draft.images_error = Some(if !self.supports_images() {
+                "Images unavailable for this Host/provider".into()
+            } else {
+                "Wait for the current draft operation before dropping images".into()
+            });
+            cx.notify();
+            return;
+        }
+        self.import_image_paths(paths.paths().to_vec(), window, cx);
+    }
+
+    fn import_image_paths(
+        &mut self,
+        paths: Vec<PathBuf>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        self.draft.importing = true;
+        self.draft.images_error = None;
+        let socket = self.socket.clone();
+        let current = self.draft_images().to_vec();
+        cx.spawn_in(window, async move |this, cx| {
+            let result = cx
+                .background_executor()
+                .spawn(async move {
+                    background(import_paths(&socket, &current, paths))
+                        .map_err(|error| error.to_string())
+                })
+                .await;
+            let _closed = this.update_in(cx, |this, window, cx| {
+                this.draft.importing = false;
+                match result {
+                    Ok(images) => this.edit_images(images, window, cx),
+                    Err(error) => this.draft.images_error = Some(error),
+                }
+                cx.notify();
+            });
+        })
+        .detach();
+        cx.notify();
+    }
+
     pub(super) fn supports_images(&self) -> bool {
         self.snapshot.as_ref().is_some_and(|s| {
             s.provider_info["fleetpaneAttachmentVersion"] == 1
@@ -136,45 +188,23 @@ impl HostView {
             multiple: true,
             prompt: Some("Attach images".into()),
         });
-        let socket = self.socket.clone();
-        let current = self.draft_images().to_vec();
         cx.spawn_in(window, async move |this, cx| {
             let paths = match selection.await {
                 Ok(Ok(paths)) => Ok(paths),
                 Ok(Err(error)) => Err(format!("Image picker: {error}")),
                 Err(error) => Err(format!("Image picker closed unexpectedly: {error}")),
             };
-            if this.update_in(cx, |this, _, cx| {
-                this.draft.picking = false;
-                this.draft.importing = matches!(&paths, Ok(Some(paths)) if !paths.is_empty());
-                cx.notify();
-            }).is_err() { return; }
-            let result = match paths {
-                Ok(None) => Ok(None),
-                Err(error) => Err(error),
-                Ok(Some(paths)) => cx.background_executor().spawn(async move {
-                    background(async move {
-                        if paths.len() + current.len() > attachments::MAX_IMAGES {
-                            return Err(Error::Input("A message can contain at most four images; selection was preserved without changes".into()));
-                        }
-                        let store = Store::for_socket(&socket).map_err(Error::Input)?;
-                        let mut images = current;
-                        for path in paths { images.push(store.import(path).await.map_err(Error::Input)?); }
-                        attachments::validate(&images).map_err(Error::Input)?;
-                        Ok(Some(images))
-                    }).map_err(|e| e.to_string())
-                }).await,
-            };
             let _closed = this.update_in(cx, |this, window, cx| {
-                this.draft.importing = false;
-                match result {
-                    Ok(Some(images)) => this.edit_images(images, window, cx),
-                    Ok(None) => {},
+                this.draft.picking = false;
+                match paths {
+                    Ok(Some(paths)) => this.import_image_paths(paths, window, cx),
+                    Ok(None) => {}
                     Err(error) => this.draft.images_error = Some(error),
                 }
                 cx.notify();
             });
-        }).detach();
+        })
+        .detach();
         cx.notify();
     }
 
@@ -209,7 +239,7 @@ impl HostView {
                             ),
                     )
                     .child(if self.supports_images() {
-                        "Attach or paste PNG · JPEG · WebP · up to 4 × 8 MiB"
+                        "Attach, paste or drop PNG · JPEG · WebP · up to 4 × 8 MiB"
                     } else {
                         "Images unavailable for this Host/provider"
                     }),
@@ -275,10 +305,69 @@ impl HostView {
     }
 }
 
+/// Picker and native drops have the same validation and all-or-nothing draft edit.
+/// Valid assets imported before a later failure may remain in the bounded store.
+async fn import_paths(
+    socket: &Path,
+    current: &[attachments::Image],
+    paths: Vec<PathBuf>,
+) -> Result<Vec<attachments::Image>, Error> {
+    if paths.is_empty() || paths.len() + current.len() > attachments::MAX_IMAGES {
+        return Err(Error::Input(
+            "Choose one to four images in total; draft was preserved without changes".into(),
+        ));
+    }
+    let store = Store::for_socket(socket).map_err(Error::Input)?;
+    let mut images = current.to_vec();
+    for path in paths {
+        images.push(store.import(path).await.map_err(Error::Input)?);
+    }
+    attachments::validate(&images).map_err(Error::Input)?;
+    Ok(images)
+}
+
 #[cfg(test)]
 mod tests {
-    use super::{attachments, clipboard_images};
+    use super::{attachments, clipboard_images, import_paths};
+    use base64::{Engine, engine::general_purpose::STANDARD};
     use gpui_kit::{ClipboardEntry, ClipboardItem, ClipboardString, ImageFormat};
+
+    #[tokio::test]
+    async fn picked_and_dropped_paths_keep_order_and_refuse_entire_invalid_batch() {
+        let base = std::env::temp_dir().join(format!("fp-dropped-images-{}", uuid::Uuid::new_v4()));
+        std::fs::create_dir(&base).unwrap();
+        let socket = base.join("host.sock");
+        let first = base.join("中文 %20#图.png");
+        let second = base.join("second.png");
+        std::fs::write(&first, STANDARD.decode("iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAIAAAAG+GGPAAAAEUlEQVR4nGPYohGAiRhoJAoA3m4pBZ0fAUsAAAAASUVORK5CYII=").unwrap()).unwrap();
+        std::fs::write(&second, STANDARD.decode("iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAIAAAD38zoCAAAAEUlEQVR4nGPYohGAFTHQQQIAgnIu4STVK0EAAAAASUVORK5CYII=").unwrap()).unwrap();
+        let current = import_paths(&socket, &[], vec![first.clone()])
+            .await
+            .unwrap();
+        let updated = import_paths(&socket, &current, vec![second.clone()])
+            .await
+            .unwrap();
+        assert_eq!(updated[0], current[0]);
+        assert_eq!(updated[1].name, "second.png");
+        assert_eq!((updated[0].width, updated[1].width), (7, 8));
+        let invalid = base.join("bad.png");
+        std::fs::write(&invalid, b"not an image").unwrap();
+        let link = base.join("link.png");
+        std::os::unix::fs::symlink(&first, &link).unwrap();
+        for paths in [
+            vec![],
+            vec![first.clone()],
+            vec![second.clone(), invalid],
+            vec![link],
+            vec![base.clone()],
+            vec![second; 4],
+        ] {
+            assert!(import_paths(&socket, &current, paths).await.is_err());
+            assert_eq!(current.len(), 1);
+            assert_eq!(current[0].name, "中文 %20#图.png");
+        }
+        std::fs::remove_dir_all(base).unwrap();
+    }
 
     #[test]
     fn clipboard_text_falls_through_and_image_batches_are_bounded() {

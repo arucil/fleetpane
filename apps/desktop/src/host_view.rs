@@ -2047,11 +2047,18 @@ impl Render for HostView {
             .map(|entry| entry.view.clone());
         let has_question = question_view.is_some();
         div()
+            .id("host-image-drop")
             .size_full()
             .flex()
             .flex_col()
             .bg(cx.theme().background)
             .text_color(cx.theme().foreground)
+            .drag_over::<ExternalPaths>(|style, _, _, cx| {
+                style.border_2().border_color(cx.theme().primary)
+            })
+            .on_drop(cx.listener(|this, paths: &ExternalPaths, window, cx| {
+                this.drop_images(paths, window, cx);
+            }))
             .child(
                 div()
                     .h_16()
