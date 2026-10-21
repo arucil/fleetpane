@@ -28,7 +28,7 @@ use fleetpane_session::{
 use gpui_kit::component::{
     ActiveTheme, Disableable, Selectable, Sizable,
     button::{Button, ButtonVariants},
-    input::{Input, InputEvent, InputState, Textarea, TextareaState},
+    input::{Enter, Input, InputEvent, InputState, Textarea, TextareaState},
     menu::{DropdownMenu, PopupMenuItem},
 };
 use gpui_kit::{prelude::*, *};
@@ -231,7 +231,7 @@ impl HostView {
         let composer = cx.new(|cx| {
             TextareaState::new(window, cx)
                 .auto_grow(1, max_rows)
-                .placeholder("Message · Enter adds a line")
+                .placeholder("Message · Enter adds a line · Ctrl/Cmd+Enter sends")
         });
         let subscription = cx.subscribe_in(&composer, window, |this, input, event, window, cx| {
             if matches!(event, InputEvent::Change) {
@@ -2720,7 +2720,27 @@ impl Render for HostView {
                                     ))
                                     .when(!has_question, |pane| {
                                         pane.child(
-                                            Textarea::new(&self.composer)
+                                            div()
+                                                .capture_action(cx.listener(move |this, action: &Enter, window, cx| {
+                                                    if !action.secondary || action.shift || !this.composer.focus_handle(cx).is_focused(window) {
+                                                        cx.propagate();
+                                                        return;
+                                                    }
+                                                    let composing = this.composer.update(cx, |input, cx| input.marked_text_range(window, cx).is_some());
+                                                    if composing {
+                                                        cx.propagate();
+                                                        return;
+                                                    }
+                                                    // Consume even when unavailable: a shortcut must not
+                                                    // insert a newline or bypass the visible action's gates.
+                                                    cx.stop_propagation();
+                                                    if active_turn && !steer_disabled {
+                                                        this.steer(window, cx);
+                                                    } else if !active_turn && !send_disabled {
+                                                        this.send(window, cx);
+                                                    }
+                                                }))
+                                                .child(Textarea::new(&self.composer)
                                                 .aria_label("Message")
                                                 .on_paste({
                                                     let view = cx.entity();
@@ -2728,7 +2748,7 @@ impl Render for HostView {
                                                         this.paste_images(clipboard, window, cx)
                                                     })
                                                 })
-                                                .readonly(self.busy || !owns || self.pending.is_some() || self.thread.is_none() || !self.draft_editable()),
+                                                .readonly(self.busy || !owns || self.pending.is_some() || self.thread.is_none() || !self.draft_editable())),
                                         )
                                     })
                                     .child(

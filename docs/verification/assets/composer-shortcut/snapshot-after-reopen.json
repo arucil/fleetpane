@@ -1,0 +1,73 @@
+{
+  "response": "snapshot",
+  "data": {
+    "protocol": 3,
+    "host_id": "f7425a0b-d8b7-459b-93bf-cdb4bcbac536",
+    "host_pid": 2607836,
+    "provider_pid": 2607841,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "f7425a0b-d8b7-459b-93bf-cdb4bcbac536",
+      "controller_id": "a573f830-140c-4245-bd8b-4f577a473e53",
+      "generation": 2
+    },
+    "sequence": 41,
+    "operation_ids": [
+      "9ebba1a3-978d-445f-8ad2-46412798fd2b",
+      "92188538-dc32-4dfc-86a3-768958959534",
+      "c7580c2f-a725-45ab-b308-176d94735ced",
+      "8f0ac30a-ac51-4a93-962d-015734dcea6e",
+      "064fa0d4-dab3-440f-8ab4-7dfa762342c5",
+      "207ee1fb-db7e-4b2a-8abe-fb7a1122425f"
+    ],
+    "journal_total": 6,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "attention": {
+      "records": [
+        {
+          "sequence": 14,
+          "observed_unix_ms": 1792616859116,
+          "thread_id": "shortcut-idle",
+          "turn_id": "shortcut-idle-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 22,
+          "observed_unix_ms": 1792616927541,
+          "thread_id": "shortcut-idle",
+          "turn_id": "shortcut-idle-turn-2",
+          "kind": "interrupted",
+          "stop_reason": null
+        },
+        {
+          "sequence": 40,
+          "observed_unix_ms": 1792617056139,
+          "thread_id": "shortcut-idle",
+          "turn_id": "shortcut-idle-turn-3",
+          "kind": "completed",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

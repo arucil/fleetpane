@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "342eb06fec71cc643cc87eeb3483dd808d59239a",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "2ced256b881c9c7a6870a55439a85c090f141d0c8b6f3afdc30cc3764b246e1d"
+  },
+  "binary_sha256": {
+    "apps/desktop/target/debug/fleetpane-desktop": "79663be1fdb2205062e519da62e3fc9a01095690819ac0738e6bd1163fe02b0f"
+  },
+  "native": {
+    "workspace": "fleetpane-shortcut-20261022",
+    "plain_enter_newline": true,
+    "shift_enter_newline": true,
+    "send_exact": "快捷键中文  \n second line",
+    "active_turn_steer_exact": "继续当前回合\n exact steer  ",
+    "steer_expected_turn": "shortcut-idle-turn-2",
+    "rejected_send_preserves": "[options-fail]",
+    "search_focus_no_extra_send": true,
+    "reopened_draft_exact": "保留草稿\n second  \n第三行",
+    "reopened_draft_bytes": 32,
+    "after_rebuild_send_exact": true,
+    "empty_shortcut_no_new_send": true,
+    "send_effect_count": 4,
+    "steer_effect_count": 1,
+    "journal_total": 6,
+    "normal_close_and_workspace_stopped": true
+  },
+  "verification": {
+    "desktop_tests": 35,
+    "strict_desktop_clippy": "pass",
+    "desktop_build": "pass",
+    "format": "pass"
+  },
+  "limits": [
+    "Synthetic Codex provider, Linux isolated X11/software Vulkan only",
+    "Existing input action maps secondary to platform shortcut; macOS/Windows not runtime verified",
+    "IME marked text is propagated; IME interaction not accepted",
+    "Read-only/ACP and image refusal use existing visible-action gates; no fresh native acceptance for those shortcut cases",
+    "No interrupt/retry or send queue introduced"
+  ]
+}

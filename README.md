@@ -179,6 +179,10 @@ fleetpane-host appearance /absolute/private/directory set 0 dark
 The set command requires the revision returned by get. Another writer's change
 requires an explicit reload; it is never silently overwritten.
 
+The conversation composer keeps Enter/Shift+Enter for newlines; Ctrl+Enter
+(Cmd+Enter on macOS) invokes Send, or Steer for a running Codex turn, with the
+same availability checks as the buttons. [Local keyboard evidence](docs/verification/2026-10-22-composer-shortcut.md).
+
 `--host` connects to an independently running Fleetpane Host (see below). Enter an
 absolute workspace directory, create a session, and send a multiline text prompt.
 It supports bounded conversation history with rendered Markdown, command/MCP
