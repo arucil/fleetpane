@@ -112,7 +112,7 @@ impl Workbench {
             workspace_subscription: None,
             continuation_subscription: None,
             file_navigation: files::State::default(),
-            attention: attention::State::default(),
+            attention: attention::State::new(cx),
             sessions: sessions::State::new(window, cx),
             host_choice: host_choice::State::default(),
             creation_directory,

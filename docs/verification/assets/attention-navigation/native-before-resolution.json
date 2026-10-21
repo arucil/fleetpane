@@ -1,0 +1,713 @@
+[
+  {
+    "protocol": 3,
+    "host_id": "a14624cb-c0c1-45b9-a187-98f5c35e772b",
+    "host_pid": 3015565,
+    "provider_pid": 3015662,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "a14624cb-c0c1-45b9-a187-98f5c35e772b",
+      "controller_id": "1b8f1916-7711-499e-bd3a-348e4e9ea539",
+      "generation": 24
+    },
+    "sequence": 72,
+    "operation_ids": [
+      "65c6bfae-6e8b-4c29-9152-cb551c7f1494",
+      "90d6f6cd-dd2f-4937-bff4-27fd73b28402",
+      "4902effb-59d9-4464-849f-4fab4b0ac2a5",
+      "17309f1b-6e52-4e3f-9987-7ebfcf67629a",
+      "0e187a0a-3dc1-497d-9a11-345f0072a2e0",
+      "d7693435-82bf-4d91-8ee1-144ce15b9b88",
+      "e6d3b577-8c6a-4ee1-8992-ecc1ce256840",
+      "e518c440-fa39-41de-90e1-1c8d168682f7",
+      "48367307-2f86-4f2d-91d5-3ab233938871",
+      "b5c11589-7014-4f89-84be-d7ca49d3bf79",
+      "112bb207-2d1e-41ce-8312-81fe77402c7e",
+      "807a986e-6019-4e8d-b5ac-4bb76a20e5ad",
+      "d9bacc1e-1f94-4277-94b3-5f3565733dbf",
+      "c896c6d7-6a3c-4128-bc5d-3def23d597b1",
+      "387ece46-4abc-4ef0-a94f-a704aa536e4c",
+      "cd56c816-88fc-42d0-8be5-22e08d0f6179",
+      "5104561f-b95a-4d01-80c5-a7c814dd3f15",
+      "0cbb40ad-f8d5-48d1-ac66-aa38b559594b",
+      "aaafd122-2253-4e00-8062-14659df680b4",
+      "ba05c99b-e1b5-4b5f-ae48-65b9cbf34b43",
+      "15576663-7918-4a21-824b-1f5e680b70c8",
+      "1a3e338e-1580-4ed3-808a-c9743f8df821",
+      "2ab224e7-d9ce-4641-a925-5392a3a66843",
+      "aa6b26e8-0e3c-4f70-932c-5c6b21ce0d5a"
+    ],
+    "journal_total": 24,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-10",
+          "turn_id": "fixture-thread-10-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-11",
+          "turn_id": "fixture-thread-11-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-12",
+          "turn_id": "fixture-thread-12-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-4",
+          "turn_id": "fixture-thread-4-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-5",
+          "turn_id": "fixture-thread-5-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-6",
+          "turn_id": "fixture-thread-6-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-7",
+          "turn_id": "fixture-thread-7-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-8",
+          "turn_id": "fixture-thread-8-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-9",
+          "turn_id": "fixture-thread-9-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-1-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-1-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-2-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-2-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-3-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-3-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-3",
+          "turnId": "fixture-thread-3-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-4-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-4-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-4",
+          "turnId": "fixture-thread-4-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-5-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-5-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-5",
+          "turnId": "fixture-thread-5-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-6-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-6-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-6",
+          "turnId": "fixture-thread-6-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-7-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-7-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-7",
+          "turnId": "fixture-thread-7-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-8-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-8-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-8",
+          "turnId": "fixture-thread-8-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-9-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-9-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-9",
+          "turnId": "fixture-thread-9-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-10-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-10-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-10",
+          "turnId": "fixture-thread-10-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-11-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-11-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-11",
+          "turnId": "fixture-thread-11-turn-1"
+        }
+      },
+      {
+        "id": "questions-fixture-thread-12-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-12-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-12",
+          "turnId": "fixture-thread-12-turn-1"
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  },
+  {
+    "protocol": 3,
+    "host_id": "5de6fdd3-0579-42e3-b23a-080cd4acc953",
+    "host_pid": 3017856,
+    "provider_pid": 3017917,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "5de6fdd3-0579-42e3-b23a-080cd4acc953",
+      "controller_id": "90a20ec2-a358-481b-a6dc-228863f92d92",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "347a4b14-670b-475b-9d9e-dea9ea9fa323",
+      "224e205f-c192-422a-a3f0-80951272daf5"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "3f72c31b-2ec7-46d0-875d-eaafbeb15527",
+          "turn_id": "5972c47f-a525-461b-b541-7782399337cd"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "3f72c31b-2ec7-46d0-875d-eaafbeb15527",
+          "threadId": "3f72c31b-2ec7-46d0-875d-eaafbeb15527",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-fa94539f-b5a5-480d-b40c-29456457fa99"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  },
+  {
+    "protocol": 3,
+    "host_id": "d8179450-a825-4eec-8fce-db91bb3a2e29",
+    "host_pid": 3018241,
+    "provider_pid": 3018271,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "d8179450-a825-4eec-8fce-db91bb3a2e29",
+      "controller_id": "fd428c3c-40e5-488d-9f78-a99eb0f9e88d",
+      "generation": 3
+    },
+    "sequence": 12,
+    "operation_ids": [
+      "f1144531-1a4c-4e6a-9c77-ad3cf0c1613e",
+      "2bcb9467-7089-4751-868d-152031384c99"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "67e92d21-81d7-4428-ad6e-28738f0d050b",
+          "turn_id": "d6f1a8ee-7590-4ae5-9d90-bd2098082b12"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "67e92d21-81d7-4428-ad6e-28738f0d050b",
+          "threadId": "67e92d21-81d7-4428-ad6e-28738f0d050b",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-275b2c03-d10e-4733-9359-39a074e02307"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+]

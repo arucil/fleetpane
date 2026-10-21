@@ -8,6 +8,8 @@ use serde::Serialize;
 use serde_json::Value;
 use uuid::Uuid;
 
+pub mod navigation;
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Kind {

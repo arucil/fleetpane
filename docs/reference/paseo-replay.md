@@ -29,8 +29,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 207 个提交 `5807f62f1`（提交日期 2025-11-26；本地审查 2026-10-21）。**
-下一条是第 208 个 `db87f331f`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 210 个提交 `4def0dec6`（提交日期 2025-11-26；本地审查 2026-10-21）。**
+下一条是第 211 个 `670c38ab8`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6187 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1035,3 +1035,26 @@ Fleetpane 已有 endpoint 独立的惰性 view、显式接管及跨 Host 目录�
 Linux 原生筛选/打开/恢复、中文草稿与另一 Host 的原审批。
 不因这组历史新增 provider 适配；Kimi、GLM 按用户范围排除。
 下一条为 **208 · `db87f331fbf2d8e735095f9c1bac2c0e5fc8110e`**。
+
+
+## 第 208–210 条：按来源使用 Host，而非隐式 primary
+
+[限定路径回执](../verification/assets/paseo-replay/attention-navigation/receipt.json)
+记录 13 个选定路径 diff（55,358 bytes）的完整 SHA 和摘要哈希，其他路径
+保持未完整审查，前 207 条记录未改变。没有运行这些历史版本。
+
+- **208 · `db87f331f`**：accessor 去掉 primary/background 角色和全局 active
+  Host；会话、创建、settings、realtime 操作绑定具体来源。未连接的输入区仍有
+  inert send/draft 回调，Fleetpane 保留显式 unavailable，不照搬吞掉动作的 fallback。
+  语音来源选择不意味着当前实现语音，也不删除 Fleetpane 的本地导航偏好。
+- **209 · `737e8904b`**：settings 去掉 auto-connect 开关与写入字段。
+  Fleetpane 保留按需读取和惰性 HostView；观察目录、队列不取得控制权。
+- **210 · `4def0dec6`**：删除 Node 工具版本文件和本地 plan loop launcher。
+  历史 agent 提示词仅是审查资料，不执行它，也不因此删除 Rust 工具链约束。
+
+本轮补全待处理队列的 Host + 类型筛选及键盘选择/精确来源打开，依据 PRD
+ATT-05。选择绑定 socket、Host 实例及完整请求；重排保留选择，失效/内容变化/
+被筛掉后清除，不能跳到另一个 Host 的同 ID 请求。引擎及 Linux 原生证据见
+[本轮验证](../verification/2026-10-21-attention-navigation.md)。静音、tray、完成/失败
+事件和跨界面全局快捷键仍是独立缺口。下一条为
+**211 · `670c38ab8cca39dad4bddb0e46fba2f495043f8b`**。

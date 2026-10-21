@@ -17,6 +17,12 @@ The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
 
+**Attention** filters pending requests by Host and kind. With the queue focused,
+Up/Down and Home/End select, Enter opens the original source, Ctrl+C copies the
+original request and Ctrl+R refreshes. A resolved or changed selection clears
+without choosing another request. Opening retains explicit takeover and original
+review controls. [Local verification](docs/verification/2026-10-21-attention-navigation.md).
+
 **All sessions** can search titles across configured Hosts and filter by exact
 workspace directory or **Sessions / Archived** provider membership. CLI uses
 `fleetpane-host sessions CONFIG.json --archived [--cwd DIRECTORY] [--search TITLE]`.

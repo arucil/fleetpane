@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 207,
-    "last_revision": "5807f62f1a824d0d07b54a4775c009f5afe81a13",
-    "next_revision": "db87f331fbf2d8e735095f9c1bac2c0e5fc8110e",
-    "next_ordinal": 208
+    "last_ordinal": 210,
+    "last_revision": "4def0dec626a22a1addf92f58be4cc320ec53cec",
+    "next_revision": "670c38ab8cca39dad4bddb0e46fba2f495043f8b",
+    "next_ordinal": 211
   },
   "entries": [
     {
@@ -3124,6 +3124,52 @@
       ],
       "finding": "Creation/resume navigation captures the requested server identity rather than the later active selection. Aggregation removes active-server dependence but still guesses a fallback registry source. Fleetpane keeps source-specific actions and never assigns rows to a guessed Host. This batch adds archive/workspace filters and retains observed archive membership on exact source opening.",
       "fleetpane_action": "directory-filters"
+    },
+    {
+      "ordinal": 208,
+      "revision": "db87f331fbf2d8e735095f9c1bac2c0e5fc8110e",
+      "date": "2025-11-26T18:30:04+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/global-footer.tsx",
+        "packages/app/src/hooks/use-daemon-session.ts",
+        "packages/app/src/components/multi-daemon-session-host.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/contexts/realtime-context.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Per-Host accessors replace primary/background plumbing. Selected session, creation, settings and realtime actions bind a supplied server ID. Legacy input fallback still has inert send/draft callbacks; Fleetpane keeps unavailable actions explicit and never maps a request to a guessed Host. Pending navigation now retains the exact source and payload.",
+      "fleetpane_action": "attention-navigation"
+    },
+    {
+      "ordinal": 209,
+      "revision": "737e8904be54a76bca29d02c4b0463d72ba6ce64",
+      "date": "2025-11-26T18:42:36+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "finding": "Host settings remove the auto-connect switch and omit it from saved payloads. This is an upstream connection lifecycle decision, not a requirement to eagerly initialize every Fleetpane conversation view. Existing on-demand observation and explicit takeover remain.",
+      "fleetpane_action": "retain-lazy-local-hosts"
+    },
+    {
+      "ordinal": 210,
+      "revision": "4def0dec626a22a1addf92f58be4cc320ec53cec",
+      "date": "2025-11-26T18:49:06+01:00",
+      "category": "maintenance",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        ".tool-versions",
+        "scripts/run-plan-loop.sh"
+      ],
+      "finding": "Deletes Node tool-version pin and local plan loop launcher. Historical agent prompts are inspected data, not executable instructions or a mandate to remove Rust toolchain pins. No application workflow change.",
+      "fleetpane_action": "no-port"
     }
   ],
   "workflow_status": {
