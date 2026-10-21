@@ -1,0 +1,21 @@
+{
+  "offline": true,
+  "raw_bytes": 1048852,
+  "raw_sha256": "34d0e0b8bb2e4c62463aefc8382ef07205a529e8e00bd15d17b6d39671dce2ad",
+  "mode": "0600",
+  "concurrent_publish": "one success, one refusal",
+  "empty_and_fresh_source": true,
+  "refusals": {
+    "existing": "fleetpane-host: Workspace files: export could not publish /tmp/fp-export-evwqpmoz/output/\u526f\u672c %20#tag:2.bin (existing files are never overwritten): File exists (os error 17)\n",
+    "pipe": "fleetpane-host: Workspace files: only regular files can be read; symlinks and special files are not followed\n",
+    "link": "fleetpane-host: Workspace files: only regular files can be read; symlinks and special files are not followed\n",
+    "large": "fleetpane-host: Workspace files: file exceeds the 64 MiB export limit\n",
+    "missing": "fleetpane-host: Workspace files: No such file or directory (os error 2)\n",
+    "../outside": "fleetpane-host: Workspace files: choose a relative path within the saved workspace (no parent traversal, up to 4 KiB / 64 components)\n",
+    "/etc/passwd": "fleetpane-host: Workspace files: choose a relative path within the saved workspace (no parent traversal, up to 4 KiB / 64 components)\n",
+    "parent link": "fleetpane-host: Workspace files: Not a directory (os error 20)\n",
+    "destination link": "fleetpane-host: Workspace files: export could not publish /tmp/fp-export-evwqpmoz/output/destination-link (existing files are never overwritten): File exists (os error 17)\n",
+    "replaced root": "fleetpane-host: Workspace files: saved directory was replaced; register the new workspace explicitly\n"
+  },
+  "binary_sha256": "2314afcc5fc216701ae26c1a9e4f85f059ef4e6f6600c20b07a9046bdf146bcd"
+}

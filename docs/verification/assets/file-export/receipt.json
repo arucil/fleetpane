@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "08911647bd164a2513c74c6e7e6e376faef15483",
+  "source_sha256": {
+    "crates/session/src/files.rs": "5f9e448d194fd9e86e1ae5d6652bf373324ca527daea3df385cf6f357e8c65aa",
+    "crates/session/src/files/export.rs": "d817ee971f380673d34a09ae952e2bb0f674afcf1ee9a285287dc8aeafe99652",
+    "apps/host/src/main.rs": "6819dda3bab32c6016b07a08b6300fed1308a5ea009f84ce1dc0a50ae5a23840",
+    "apps/desktop/src/files_view.rs": "20785ed1219a7c3880a68e690feb957818612ffb41d6ffbfec3a622f31472f10",
+    "apps/desktop/src/workbench.rs": "b289c1e7aa7ad1f473ce5bb4b2c6abe0b12dc4138d3b6784dd29313b3def20e8",
+    "apps/desktop/src/workbench/attention.rs": "fb6d5f6ae7d8e152df86473b733602a337ed7cc13c446ca250d81d885ffd947f",
+    "apps/desktop/src/workbench/diagnostics.rs": "e082e0bdf9141735477a2dbef3c944a87df1c0b10afb771f3312e7f5f3149de3",
+    "apps/desktop/src/workbench/host_choice.rs": "7e0f73aef3244df212d31bbe8b684b89ebbc86920983b00f519c74f303d9c9b9",
+    "apps/desktop/src/workbench/sessions.rs": "d04c7ac26f33f4e901294e1f55966c57fcecd3830550ca760733dc103cc2f768",
+    "apps/desktop/src/workspace_view.rs": "1859b9bcdcece72b6f03ad440a3cd6ea0dd3aabd45f0826f97b46ff2862429b3",
+    "scripts/file-export-smoke.py": "f4a4162a3e9af1e9d3205fe45d97f3c5efb380f66b26e50cacb115d900d1580c"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "2314afcc5fc216701ae26c1a9e4f85f059ef4e6f6600c20b07a9046bdf146bcd",
+    "apps/desktop/target/debug/fleetpane-desktop": "e3f18edd123b5183bcdfaba8610debccfb494825211a311d070b0cb6b580cb60"
+  },
+  "native": {
+    "workspace": "fleetpane-export-20261022",
+    "sizes": [
+      [
+        1098,
+        693
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "raw_export": {
+      "bytes": 8216,
+      "sha256": "501ad2ed7961dfb617ba22418c3998febcbdce4d69a9278b1138b10a8c9762b8",
+      "mode": "0600",
+      "copied_result_bytes": 145
+    },
+    "existing_destination_visible_error_and_unchanged": true,
+    "fresh_source_not_stale_preview": true,
+    "small_window_export_exact_bytes": 23,
+    "retained_draft": "导出保留草稿\n exact  ",
+    "retained_draft_bytes": 27,
+    "host_journal_total": 0,
+    "normal_close_and_workspace_stopped": true
+  },
+  "checks": {
+    "engine_tests": 273,
+    "desktop_tests": 35,
+    "engine_and_desktop_clippy": "strict pass",
+    "engine_and_desktop_format": "pass",
+    "process": [
+      "file-export",
+      "file-navigation",
+      "files"
+    ]
+  },
+  "limits": [
+    "Local Unix paths, no remote HTTP download or system share sheet",
+    "Raw copy up to 64 MiB; 64 KiB buffer, at most two shared file jobs",
+    "No overwrite, folder creation or symlink following",
+    "Exports current bytes with fingerprint checks, not the displayed historical/preview snapshot",
+    "Filesystem failures at publish/cleanup/sync are explicit; filesystem crash/hostile writer testing remains open",
+    "Admitted export waits instead of returning a timeout while it may still publish; view changes and normal close are fenced in code but long-blocked-native export acceptance remains open",
+    "Force-killing desktop/CLI may leave private spool or completed copy; no recovery/automatic replay"
+  ]
+}

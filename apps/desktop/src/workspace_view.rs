@@ -80,7 +80,15 @@ impl EventEmitter<Workspace> for WorkspaceView {}
 impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
+    pub(crate) fn export_pending(&self, cx: &App) -> bool {
+        self.files
+            .as_ref()
+            .is_some_and(|view| view.read(cx).export_pending())
+    }
     pub(crate) fn close_status(&self, cx: &App) -> Result<bool, String> {
+        if self.export_pending(cx) {
+            return Ok(false);
+        }
         if self
             .migration
             .as_ref()

@@ -43,7 +43,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host creation STORE plan CONFIG GROUP CWD UUID | send UUID [--take-control] | check UUID | list [BEFORE_POSITION]: durable Host binding; send is allowed once, check never resends."
         );
         println!(
-            "fleetpane-host workspace STORE add CONFIG HOST git|folder CWD | list [BEFORE_POSITION] | pins | pin UUID on|off | files UUID [RELATIVE_DIRECTORY] | read UUID RELATIVE_FILE | open UUID LOCAL_PATH | inspect UUID | create UUID [--take-control]: existing local directories, stable IDs and read-only Git observations. Pins are local preferences (up to 32); they do not contact a Host. Creation is an explicit provider mutation. Read a file with: workspace STORE diff UUID staged|unstaged ROOT_RELATIVE_PATH."
+            "fleetpane-host workspace STORE add CONFIG HOST git|folder CWD | list [BEFORE_POSITION] | pins | pin UUID on|off | files UUID [RELATIVE_DIRECTORY] | read UUID RELATIVE_FILE | open UUID LOCAL_PATH | export UUID RELATIVE_FILE ABSOLUTE_DESTINATION | inspect UUID | create UUID [--take-control]: existing local directories, stable IDs and read-only Git observations. Export creates a new local copy up to 64 MiB without overwrite. Pins are local preferences (up to 32); they do not contact a Host. Creation is an explicit provider mutation. Read a file with: workspace STORE diff UUID staged|unstaged ROOT_RELATIVE_PATH."
         );
         println!(
             "fleetpane-host worktree STORE plan SOURCE_WORKSPACE_UUID BRANCH BASE_REF UUID | plan-existing SOURCE_WORKSPACE_UUID LOCAL_BRANCH UUID | apply UUID | check UUID | list [BEFORE_POSITION]: preview a pinned baseline or an unoccupied local branch, then explicitly create once. Git mutation only; no provider/session is started."
@@ -584,6 +584,16 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                     "{}",
                     serde_json::to_string_pretty(
                         &store.workspace(id.parse()?).await?.open_path(path).await?
+                    )?
+                ),
+                [verb, id, path, destination] if verb == "export" => println!(
+                    "{}",
+                    serde_json::to_string_pretty(
+                        &store
+                            .workspace(id.parse()?)
+                            .await?
+                            .export_file(path, PathBuf::from(destination))
+                            .await?
                     )?
                 ),
                 [verb, id, state] if verb == "pin" => {

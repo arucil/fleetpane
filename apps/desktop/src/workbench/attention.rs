@@ -50,6 +50,9 @@ impl Workbench {
     }
 
     pub(super) fn open_attention(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.diagnostics.active = false;
         self.sessions.active = false;
         self.file_navigation = files::State::default();

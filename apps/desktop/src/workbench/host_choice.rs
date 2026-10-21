@@ -15,6 +15,9 @@ pub(super) struct State {
 
 impl Workbench {
     pub(super) fn select(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.host_choice.selected_during_load = true;
         self.show_host(index, window, cx);
         self.remember_host(window, cx);

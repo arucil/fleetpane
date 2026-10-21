@@ -24,6 +24,9 @@ impl State {
 
 impl Workbench {
     pub(super) fn open_diagnostics(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.leave_attention();
         self.sessions.active = false;
         self.choosing = false;

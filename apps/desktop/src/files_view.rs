@@ -57,6 +57,11 @@ pub struct FilesView {
     image: Option<Arc<Image>>,
     busy: bool,
     error: Option<String>,
+    export_open: bool,
+    exporting: bool,
+    export_path: Entity<InputState>,
+    _export_subscription: Subscription,
+    export_result: Option<String>,
     scroll: UniformListScrollHandle,
 }
 impl EventEmitter<Location> for FilesView {}
@@ -161,6 +166,17 @@ impl FilesView {
                 this.go(window, cx);
             }
         });
+        let export_path =
+            cx.new(|cx| InputState::new(window, cx).placeholder("Absolute path for a new copy"));
+        let export_subscription = cx.subscribe_in(
+            &export_path,
+            window,
+            |this, _, event, window, cx| match event {
+                InputEvent::PressEnter { .. } => this.export_file(window, cx),
+                InputEvent::Change => cx.notify(),
+                _ => {}
+            },
+        );
         cx.on_release(|this, cx| this.clear_image(cx)).detach();
         let mut value = Self {
             workspace,
@@ -176,6 +192,11 @@ impl FilesView {
             image: None,
             busy: false,
             error: None,
+            export_open: false,
+            exporting: false,
+            export_path,
+            _export_subscription: export_subscription,
+            export_result: None,
             scroll: UniformListScrollHandle::new(),
         };
         value.focus(window, cx);
@@ -184,6 +205,53 @@ impl FilesView {
     }
     pub fn focus(&self, window: &mut Window, cx: &mut Context<Self>) {
         self.path.update(cx, |path, cx| path.focus(window, cx));
+    }
+    pub(crate) fn export_pending(&self) -> bool {
+        self.exporting
+    }
+
+    fn export_file(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.busy || !self.export_open {
+            return;
+        }
+        let Some(file) = &self.file else {
+            return;
+        };
+        if file.size > fleetpane_session::files::MAX_EXPORT_BYTES {
+            return;
+        }
+        let path = file.path.clone();
+        let destination = std::path::PathBuf::from(self.export_path.read(cx).value().to_string());
+        let workspace = self.workspace.clone();
+        self.busy = true;
+        self.exporting = true;
+        self.error = None;
+        self.export_result = None;
+        let task = cx
+            .background_executor()
+            .spawn(async move { background(workspace.export_file(&path, destination)) });
+        cx.spawn_in(window, async move |this, cx| {
+            let result = task.await;
+            let _closed = this.update_in(cx, |this, _, cx| {
+                this.busy = false;
+                this.exporting = false;
+                match result {
+                    Ok(exported) => {
+                        this.export_result = Some(format!(
+                            "Saved {} bytes to {} · SHA-256 {}",
+                            exported.size,
+                            exported.destination.display(),
+                            exported.sha256
+                        ));
+                        this.export_open = false;
+                    }
+                    Err(error) => this.error = Some(error.to_string()),
+                }
+                cx.notify();
+            });
+        })
+        .detach();
+        cx.notify();
     }
     fn folder(&self) -> String {
         self.location.directory.clone()
@@ -214,6 +282,8 @@ impl FilesView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        self.export_open = false;
+        self.export_result = None;
         self.location.file = Some(file.path.clone());
         self.line = line;
         self.clear_image(cx);
@@ -552,8 +622,8 @@ impl Render for FilesView {
         let folder = self.folder();
         div().size_full().flex().flex_col().gap_3().p_4()
             .child(div().flex().items_center().gap_3()
-                .child(Button::new("back-workspaces").small().label(self.back_label).on_click(cx.listener(|this,_,_,cx|cx.emit(this.location.clone()))))
-                .child(div().text_lg().child("Workspace files · Read only"))
+                .child(Button::new("back-workspaces").small().label(self.back_label).disabled(self.exporting).on_click(cx.listener(|this,_,_,cx|cx.emit(this.location.clone()))))
+                .child(div().text_lg().child("Workspace files"))
                 .child(div().flex_1())
                 .child(Button::new("files-back").small().label("Back").disabled(self.busy || self.history.destination(false).is_none()).on_click(cx.listener(|this,_,window,cx|this.navigate(false,window,cx))))
                 .child(Button::new("files-forward").small().label("Forward").disabled(self.busy || self.history.destination(true).is_none()).on_click(cx.listener(|this,_,window,cx|this.navigate(true,window,cx)))))
@@ -566,8 +636,20 @@ impl Render for FilesView {
                 .child(Button::new("files-refresh").small().label("Refresh folder").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.run(Action::Restore(Visit {location:this.location.clone(),line:this.line,top:this.top_entry()}),window,cx))))
                 .child(div().flex_1().min_w_0().child(Input::new(&self.path).disabled(self.busy)))
                 .child(Button::new("files-go").small().label("Go").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.go(window,cx)))))
-            .when(self.busy,|view|view.child(div().text_sm().child("Reading…")))
+            .when(self.busy,|view|view.child(div().text_sm().child(if self.exporting {"Saving copy… wait for the result before leaving."} else {"Reading…"})))
             .children(self.error.iter().map(|e|div().text_sm().text_color(cx.theme().danger).child(e.clone())))
+            .when_some(self.export_result.as_ref(),|view,result| {
+                let copy=result.clone();
+                view.child(div().flex().items_center().gap_2()
+                    .child(div().flex_1().min_w_0().text_sm().truncate().child(result.clone()))
+                    .child(Button::new("copy-export-result").small().label("Copy result").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy.clone())))))
+            })
+            .when(self.export_open, |view| view.child(div().flex().flex_col().gap_2()
+                .child("Save current file bytes as a new copy · up to 64 MiB · existing files are kept")
+                .child(div().flex().gap_2()
+                    .child(div().flex_1().min_w_0().child(Input::new(&self.export_path).disabled(self.busy)))
+                    .child(Button::new("export-save").small().label("Save copy").disabled(self.busy || self.export_path.read(cx).value().is_empty()).on_click(cx.listener(|this,_,window,cx|this.export_file(window,cx))))
+                    .child(Button::new("export-cancel").small().label("Cancel").disabled(self.busy).on_click(cx.listener(|this,_,_,cx| {this.export_open=false;cx.notify();}))))))
             .child(div().flex_1().min_h_0().flex().gap_4()
                 .child(div().w_72().flex_shrink_0().flex().flex_col().gap_2()
                     .child(div().text_sm().truncate().child(format!("Directory: {}",if folder.is_empty() {"."} else {&folder})))
@@ -591,6 +673,10 @@ impl Render for FilesView {
                         let reload=file.path.clone();
                         let copy_path=file.path.clone();
                         let view=view.child(div().text_sm().truncate().child(format!("{:?} · {} bytes",file.path,file.size)))
+                            .child(Button::new("export-file-copy").small().label("Save a copy…").disabled(self.busy || file.size > fleetpane_session::files::MAX_EXPORT_BYTES).on_click(cx.listener(|this,_,window,cx| {
+                                this.export_open=true;this.export_result=None;
+                                this.export_path.update(cx,|input,cx|input.focus(window,cx));cx.notify();
+                            })))
                             .child(Button::new("reload-workspace-file").small().label("Reload file").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Read(reload.clone(), this.line),window,cx))))
                             .child(Button::new("copy-workspace-path").small().label("Copy path").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy_path.clone()))));
                         match &file.content {

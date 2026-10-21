@@ -1,6 +1,8 @@
 //! Demand-loaded local file observations, independent of Host/provider lifetime.
+mod export;
 use crate::{client::Error, workspaces::Workspace};
 use base64::{Engine, engine::general_purpose::STANDARD};
+pub use export::{Exported, MAX_EXPORT_BYTES};
 use fleetpane_runtime::attachments::{Image, MAX_IMAGE_BYTES};
 use rustix::fs::{AtFlags, Dir, FileType, Mode, OFlags, open, openat, statat};
 use serde::Serialize;
@@ -511,7 +513,7 @@ mod tests {
         os::unix::{ffi::OsStrExt, fs::symlink},
         path::PathBuf,
     };
-    static SERIAL: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+    pub(super) static SERIAL: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
 
     #[tokio::test]
     async fn command_read_path_uses_its_directory_and_keeps_literal_names() {
@@ -669,7 +671,7 @@ mod tests {
         std::fs::remove_dir_all(base).unwrap();
     }
 
-    async fn fixture() -> (PathBuf, Workspace) {
+    pub(super) async fn fixture() -> (PathBuf, Workspace) {
         let base = std::env::temp_dir().join(format!("fp-files-{}", Uuid::new_v4()));
         std::fs::create_dir(&base).unwrap();
         let base = std::fs::canonicalize(base).unwrap();

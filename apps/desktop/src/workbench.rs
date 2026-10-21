@@ -58,7 +58,20 @@ pub struct Workbench {
 }
 
 impl Workbench {
+    fn export_pending(&self, cx: &App) -> bool {
+        self.file_navigation
+            .view
+            .as_ref()
+            .is_some_and(|view| view.read(cx).export_pending())
+            || self
+                .workspace_view
+                .as_ref()
+                .is_some_and(|view| view.read(cx).export_pending(cx))
+    }
     fn open_chooser(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.diagnostics.active = false;
         self.leave_attention();
         self.sessions.active = false;
@@ -158,7 +171,8 @@ impl Workbench {
         if let Some(error) = &self.host_choice.error {
             return Err(error.clone());
         }
-        let mut ready = !self.host_choice.busy && !self.attention.review_busy;
+        let mut ready =
+            !self.host_choice.busy && !self.attention.review_busy && !self.export_pending(cx);
         for slot in &self.slots {
             if let Some(view) = &slot.view {
                 ready &= view
@@ -225,6 +239,9 @@ impl Workbench {
     }
 
     fn show_host(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.diagnostics.active = false;
         self.sessions.active = false;
         self.leave_attention();
@@ -259,6 +276,9 @@ impl Workbench {
     }
 
     fn open_workspaces(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.export_pending(cx) {
+            return;
+        }
         self.diagnostics.active = false;
         self.sessions.active = false;
         self.leave_attention();

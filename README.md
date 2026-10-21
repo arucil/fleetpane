@@ -926,6 +926,12 @@ This prototype supports a directly accessible, unauthenticated loopback WebSocke
 daemon only. TLS, relay connections and authentication are not implemented.
 Output contains session metadata; use synthetic examples when sharing output.
 
+Workspace files can **Save a copy…** to a new absolute local filename (up to
+64 MiB). Export preserves current bytes, refuses existing targets and reports
+SHA-256. The same operation is available as
+`fleetpane-host workspace STORE export UUID RELATIVE_SOURCE ABSOLUTE_DESTINATION`.
+It requires no running Host. [Evidence and limits](docs/verification/2026-10-22-file-export.md).
+
 ## Workspace
 
 | Package | Responsibility |
@@ -982,6 +988,7 @@ python3 scripts/routing-smoke.py                 # Unix; explicit groups, ready 
 python3 scripts/creations-smoke.py               # Unix; durable binding, killed controller, Host restart, no second dispatch
 python3 scripts/workspaces-smoke.py              # Unix; real Git identity/status, linked worktrees, bounded reads, Codex/ACP cwd
 python3 scripts/file-navigation-smoke.py          # Unix; offline file/directory paths, exact bytes and root confinement
+python3 scripts/file-export-smoke.py              # Unix; exact raw copy, concurrent no-overwrite and path/size boundaries
 python3 scripts/diffs-smoke.py                   # Unix; real staged/unstaged/untracked Git diffs, bounds, deadline and read-only proof
 python3 scripts/worktrees-smoke.py               # Unix; pinned worktree creation, concurrent attempt, crash/residual/deadline checks (~2 minutes)
 python3 scripts/existing-worktrees-smoke.py       # Unix; local branches, tip/occupancy checks, shared guard and late-change residual

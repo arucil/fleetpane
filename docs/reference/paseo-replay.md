@@ -1275,4 +1275,4 @@ Fleetpane 保持独立 Session Host、当前 app-server、明确 Stop/steer、
 
 限定片段见[来源回执](../verification/assets/composer-shortcut/source-review.json)。语音追加草稿与随后撤回隐藏文本测量说明来源实现也需验证；语音维持 P2。Assistant chunk 独立缓存/完成提交的目标已由现有稀疏卡片投影覆盖，不重建另一层缓存。旧 forceSend 会改变运行中发送语义，Fleetpane 只采用平台快捷键，保持已有显式 Send/Steer、精确文字和草稿完成边界，[原生验收](../verification/2026-10-22-composer-shortcut.md)独立记录。
 
-第 554–555 条暴露本地文件原样导出缺口：下一步实现共享引擎与原生导出，不搭建旧 HTTP token 服务。未运行历史版本；下一条第 561 条 `8add1a66205d496868ae28bea581ee6b807388d2`。
+第 554–555 条对应的本地文件原样导出已补齐共享引擎和原生入口，保留精确字节、私有权限与不覆盖发布；[验证与限制](../verification/2026-10-22-file-export.md)分别记录。远端 HTTP token 和分享服务仍未实现。未运行历史版本；下一条第 561 条 `8add1a66205d496868ae28bea581ee6b807388d2`。
