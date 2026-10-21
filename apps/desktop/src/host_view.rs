@@ -99,6 +99,8 @@ pub struct HostView {
     interactions_scroll: ScrollHandle,
     compact_details: bool,
     directory_scroll: UniformListScrollHandle,
+    directory_visible: bool,
+    focus: FocusHandle,
     workspace: Entity<InputState>,
     composer: Entity<TextareaState>,
     draft: draft::State,
@@ -325,6 +327,8 @@ impl HostView {
             // measured row. Measure one viewport on either side as we scroll.
             timeline,
             directory_scroll: UniformListScrollHandle::new(),
+            directory_visible: true,
+            focus: cx.focus_handle(),
             interactions_scroll: ScrollHandle::new(),
             compact_details: false,
             workspace,
@@ -1883,6 +1887,21 @@ impl HostView {
 }
 
 impl HostView {
+    fn toggle_directory(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.directory_visible = !self.directory_visible;
+        if !self.directory_visible {
+            // A hidden input cannot retain keyboard focus. The composer and
+            // pending-request views otherwise keep their current focus.
+            let hidden_input_focused = [&self.workspace, &self.search, &self.filter_workspace]
+                .iter()
+                .any(|input| input.read(cx).focus_handle(cx).is_focused(window));
+            if hidden_input_focused {
+                window.focus(&self.focus, cx);
+            }
+        }
+        cx.notify();
+    }
+
     fn render_session_details(&self, blocked: bool, cx: &mut Context<Self>) -> AnyElement {
         div()
             .child(self.reported_session_settings(cx))
@@ -2048,6 +2067,23 @@ impl Render for HostView {
         let has_question = question_view.is_some();
         div()
             .id("host-image-drop")
+            .track_focus(&self.focus)
+            .capture_key_down(cx.listener(|this, event: &KeyDownEvent, window, cx| {
+                let modifiers = event.keystroke.modifiers;
+                let primary = if cfg!(target_os = "macos") {
+                    modifiers.platform && !modifiers.control
+                } else {
+                    modifiers.control && !modifiers.platform
+                };
+                if primary && !modifiers.alt && !modifiers.shift
+                    && event.keystroke.key == "b" && !event.prefer_character_input
+                {
+                    cx.stop_propagation();
+                    if !event.is_held {
+                        this.toggle_directory(window, cx);
+                    }
+                }
+            }))
             .size_full()
             .flex()
             .flex_col()
@@ -2068,7 +2104,10 @@ impl Render for HostView {
                     .justify_between()
                     .border_b_1()
                     .border_color(cx.theme().border)
-                    .child("Fleetpane")
+                    .child(Button::new("toggle-session-directory").small().ghost()
+                        .label(if self.directory_visible {"Hide sessions"} else {"Show sessions"})
+                        .tooltip(if cfg!(target_os = "macos") {"Toggle sessions · Cmd+B"} else {"Toggle sessions · Ctrl+B"})
+                        .on_click(cx.listener(|this, _, window, cx| this.toggle_directory(window, cx))))
                     .child(
                         div()
                             .flex()
@@ -2171,7 +2210,7 @@ impl Render for HostView {
                     .items_stretch()
                     .flex_1()
                     .min_h_0()
-                    .child(
+                    .when(self.directory_visible, |body| body.child(
                         div()
                             .w_80()
                             .flex_shrink_0()
@@ -2429,7 +2468,7 @@ impl Render for HostView {
                                         })),
                                 )
                             }),
-                    )
+                    ))
                     .child(
                         div()
                             .flex_1()

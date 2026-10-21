@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "baseline": "033311c269f3d7d659b70ad653f992e90b07fc80",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "f691e3cb7a554b93c409021272d15499801b14fc6db1d1f59c418f19a7fff836"
+  },
+  "binary_sha256": {
+    "apps/desktop/target/debug/fleetpane-desktop": "bf15d61290080657befbe6507e1157200a3a008bd52ecf400d5dc47dcdf03262",
+    "target/debug/fleetpane-host": "2314afcc5fc216701ae26c1a9e4f85f059ef4e6f6600c20b07a9046bdf146bcd"
+  },
+  "native": {
+    "workspace": "fleetpane-sidebar-20261022",
+    "platform": "Linux X11",
+    "draft_utf8_bytes": 32,
+    "draft_clipboard_exact_before_after_and_reopen": true,
+    "hidden_filter_input_preserved": true,
+    "minimum_window": [
+      900,
+      560
+    ],
+    "full_host_snapshot_identical_while_pending": true,
+    "approval_explicit_decline_and_followup_draft_bytes": 22,
+    "normal_close_reopen_same_host_provider": true,
+    "workspace_stopped": true
+  },
+  "checks": {
+    "desktop_tests": 36,
+    "desktop_strict_clippy": "pass",
+    "format": "pass",
+    "native_build": "pass"
+  },
+  "limits": [
+    "Synthetic Codex provider; no new external model acceptance",
+    "Window-local per-Host visibility; no persistence or configurable binding",
+    "macOS shortcut implemented but not exercised; Wayland and IME not accepted",
+    "Toggle does not itself refresh provider directory or restore selected session"
+  ]
+}

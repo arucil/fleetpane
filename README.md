@@ -60,6 +60,8 @@ including provider IDs containing separators. Synthetic before/after pagination,
 independent details and exact clipboard checks have
 [separate evidence](docs/verification/2026-10-21-row-identity.md).
 
+**Hide sessions / Show sessions** toggles the current Host’s directory with Ctrl+B (Cmd+B on macOS). The conversation, drafts and pending requests stay open. Visibility is local to the window and Host; [Linux acceptance](docs/verification/2026-10-22-sidebar-toggle.md).
+
 ## Try the native desktop
 
 On Unix, **Workspaces → Import from Paseo** previews a local Paseo home, saves a

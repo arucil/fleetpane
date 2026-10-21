@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 560,
-    "last_revision": "914cebc914659b0306f9c7d70f1ba1ce97b083af",
-    "next_revision": "8add1a66205d496868ae28bea581ee6b807388d2",
-    "next_ordinal": 561
+    "last_ordinal": 610,
+    "last_revision": "666a0f2fa62a3310abde4779a90f7c2bd2756209",
+    "next_revision": "1a2498e9e781cc3c57529cd2fb24f4fa6d6268f8",
+    "next_ordinal": 611
   },
   "entries": [
     {
@@ -7570,6 +7570,636 @@
       ],
       "finding": "Extracted MessageInput adds autofocus and Ctrl/Cmd+Enter forceSend, Shift newline and normal Enter queue/send; reviewed submit and sizing hunks.",
       "fleetpane_action": "Added platform shortcut to focused native composer with existing Send/Steer gates; retain multiline Enter and exact text, never force interruption."
+    },
+    {
+      "ordinal": 561,
+      "revision": "8add1a66205d496868ae28bea581ee6b807388d2",
+      "date": "2026-01-03T15:23:49+07:00",
+      "category": "tools",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/tool-call-sheet.tsx",
+        "packages/app/src/utils/tool-call-parsers.ts"
+      ],
+      "finding": "MCP detail groups now receive actual input and use key/value rendering instead of only a raw block.",
+      "fleetpane_action": "Keep typed content plus full original Copy and provider identity; native rendering already includes supplied input."
+    },
+    {
+      "ordinal": 562,
+      "revision": "4185db9c750647eacab586cf8737ce45ba053c2f",
+      "date": "2026-01-03T15:53:06+07:00",
+      "category": "assets",
+      "inspection": "binary-path-metadata-only",
+      "paths_inspected": [],
+      "finding": "Only butterfly application icon binaries change; reviewed path/type metadata, not pixels or payload provenance.",
+      "fleetpane_action": "Keep independent Fleetpane identity; no icon payload reused."
+    },
+    {
+      "ordinal": 563,
+      "revision": "e8890a2fc1cdf3fa8d41f66a871f87dac650ea6e",
+      "date": "2026-01-03T16:06:40+07:00",
+      "category": "identity",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/session.ts",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Persistence handle becomes canonical provider session ID; absent ID errors after a run. Registry adds a shared load promise.",
+      "fleetpane_action": "Keep exact Host/provider identities and serialized durable storage; no invented resume ID. Voice remains P2."
+    },
+    {
+      "ordinal": 564,
+      "revision": "a12af74c7b7dd9b179250b01abce05192df29566",
+      "date": "2026-01-03T19:39:24+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Agent list becomes compact with status dots and shorter cwd; removes old sidebar.",
+      "fleetpane_action": "Native virtualized directory and exact full cwd remain; do not erase Host distinctions."
+    },
+    {
+      "ordinal": 565,
+      "revision": "1f9a35dafdf9f103f0e06694b734a67ed2bcf853",
+      "date": "2026-01-03T19:48:05+07:00",
+      "category": "refactor",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/app/index.tsx"
+      ],
+      "finding": "Unused CreateAgentModal export/call sites removed while import modal remains.",
+      "fleetpane_action": "Keep shared explicit creation flow and user-required migration."
+    },
+    {
+      "ordinal": 566,
+      "revision": "fb92eb199e9def7ddbd467a564bde16c00cb7e84",
+      "date": "2026-01-03T19:57:59+07:00",
+      "category": "voice",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Window key listener toggles dictation on Ctrl/Cmd+D.",
+      "fleetpane_action": "Voice remains P2; no unused global binding."
+    },
+    {
+      "ordinal": 567,
+      "revision": "1f33dcb4c14c67922cc11d59ce8932e32728ecdb",
+      "date": "2026-01-03T20:03:42+07:00",
+      "category": "voice",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Focused TextInput gets separate dictation key handling.",
+      "fleetpane_action": "Native keyboard acceptance must include focus; voice still P2."
+    },
+    {
+      "ordinal": 568,
+      "revision": "020d244b26f4762a9f35c2e3ac1356ac78d68bdf",
+      "date": "2026-01-03T21:16:27+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/stores/sidebar-store.ts",
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Mobile sliding sidebar and persisted open-state store appear; new-agent screen moves to home.",
+      "fleetpane_action": "Keep native retained Host views; adopt useful desktop hide/show separately."
+    },
+    {
+      "ordinal": 569,
+      "revision": "344ef87b1023ec3a0bda620c1bc57a0f99184823",
+      "date": "2026-01-03T21:21:33+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Agent selection closes sidebar before router navigation.",
+      "fleetpane_action": "Keep selected source and drafts; no navigation timing workaround."
+    },
+    {
+      "ordinal": 570,
+      "revision": "75895b17d4e54a7164233a8949d4e3b06174499f",
+      "date": "2026-01-03T21:52:17+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Selection explicitly starts closing animation without waiting for state effect.",
+      "fleetpane_action": "Do not replicate animation synchronization in native state."
+    },
+    {
+      "ordinal": 571,
+      "revision": "7b55740a9eb393025f81400a43223de4ebd24274",
+      "date": "2026-01-03T21:55:40+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Navigation froze slide animation; close path switches to quick fade and immediate position snap.",
+      "fleetpane_action": "Use immediate native visibility change without layout timer."
+    },
+    {
+      "ordinal": 572,
+      "revision": "dbf9b7e75d3019b64024f5c33e819a536a7330d7",
+      "date": "2026-01-04T10:06:23+07:00",
+      "category": "identity",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Selected key now includes server and agent, derived from route rather than stale local params.",
+      "fleetpane_action": "Keep tagged exact source identities across Hosts; no delimiter concatenation for opaque IDs."
+    },
+    {
+      "ordinal": 573,
+      "revision": "2a44b08d4b14bd2367773823b31215815bb18361",
+      "date": "2026-01-04T10:21:26+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "New Agent button uses outline styling.",
+      "fleetpane_action": "Use current native Kit controls."
+    },
+    {
+      "ordinal": 574,
+      "revision": "9c09f32dca8dbd8eeb9b33e1cdb400b38315e7b7",
+      "date": "2026-01-04T10:22:00+07:00",
+      "category": "performance",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Generic AgentList sorts attention first then truncates to fifteen rows.",
+      "fleetpane_action": "Do not hide loaded sessions; keep visible bounds/paging. Later 587 moves the limit to sidebar."
+    },
+    {
+      "ordinal": 575,
+      "revision": "74ed95cc08ea91b51e95bb099b77ad9683d618c1",
+      "date": "2026-01-04T10:29:04+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "New Agent foreground changes to theme foreground.",
+      "fleetpane_action": "Keep accessible native theme tokens."
+    },
+    {
+      "ordinal": 576,
+      "revision": "330a75a445d2d893744232b488ef563f3f043dfa",
+      "date": "2026-01-04T10:31:12+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "New Agent button gets hover border/background.",
+      "fleetpane_action": "Keep Kit button interaction states."
+    },
+    {
+      "ordinal": 577,
+      "revision": "e121a90a5855d3a89b0c4be9b5546f0a70738d29",
+      "date": "2026-01-04T10:42:54+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Hover color transition gets 150 ms.",
+      "fleetpane_action": "No native timer needed."
+    },
+    {
+      "ordinal": 578,
+      "revision": "c5dddeb2e0c9d6cab4216d64e6d9a6705d5e5e8e",
+      "date": "2026-01-04T10:45:58+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Hover border uses a darker zinc token.",
+      "fleetpane_action": "Keep System/Light/Dark native theme."
+    },
+    {
+      "ordinal": 579,
+      "revision": "3033685aab11b7044c49a22a0e0f5f4a973ea3d3",
+      "date": "2026-01-04T10:51:53+07:00",
+      "category": "mobile",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Gesture Race replaces Simultaneous to permit vertical list scrolling.",
+      "fleetpane_action": "Do not import mobile gesture stack; native lists retain their own scroll."
+    },
+    {
+      "ordinal": 580,
+      "revision": "719ef75f3dfb697c53c007dfb28d8c5c34cd5c34",
+      "date": "2026-01-04T10:55:26+07:00",
+      "category": "mobile",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "List switches to gesture-handler FlatList.",
+      "fleetpane_action": "Native virtualized list already independent of React Native gestures."
+    },
+    {
+      "ordinal": 581,
+      "revision": "edb3258ae95355301fd1bae9061e5480318cf85f",
+      "date": "2026-01-04T12:46:53+07:00",
+      "category": "mobile",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/sidebar-animation-context.tsx",
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "Sidebar shared animation context coordinates open/close and drag gestures.",
+      "fleetpane_action": "Native visibility uses retained view state; no animation context needed."
+    },
+    {
+      "ordinal": 582,
+      "revision": "9d7e44851c1e5e0d24b04a3e9b256bbe506c037c",
+      "date": "2026-01-05T08:41:43+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Thumbnail queue starts two requests; explicit preview gets priority and delayed cleanup.",
+      "fleetpane_action": "Keep bounded file workers, explicit failures and retained single preview; no timeout-hidden failure. Gallery thumbnails still partial."
+    },
+    {
+      "ordinal": 583,
+      "revision": "8c33df472f64bd4a168e1a35f96a985b570702ea",
+      "date": "2026-01-05T14:27:59+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx",
+        "packages/app/src/stores/explorer-sidebar-store.ts"
+      ],
+      "finding": "Right explorer pane adds list/grid sorting and retained sidebar width; Git Diff shares the pane.",
+      "fleetpane_action": "Keep explicit file navigation and window-local history; grid/sorting/resizing remain gaps, Git Diff deferred."
+    },
+    {
+      "ordinal": 584,
+      "revision": "348242541c804b7170c16a67615cc10f557db38c",
+      "date": "2026-01-05T21:27:35+07:00",
+      "category": "transport",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-git-diff-query.ts",
+        "packages/app/src/lib/send-rpc-request.ts"
+      ],
+      "finding": "Diff query caches server/agent keys and RPC adds request correlation. Query enabled independently of open pane.",
+      "fleetpane_action": "Keep typed identity/receipt command boundaries and demand-driven reads; Git Diff deferred."
+    },
+    {
+      "ordinal": 585,
+      "revision": "33a3031f74b938aa6d0d19290bcada0f317eafe8",
+      "date": "2026-01-05T23:47:58+07:00",
+      "category": "waiting",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Wait imposes 50 s timeout, returning snapshot lifecycle or idle with message; direct URL waits for connection.",
+      "fleetpane_action": "Keep exact-turn timed_out result and explicit source identity, never synthesize idle success."
+    },
+    {
+      "ordinal": 586,
+      "revision": "0806fd7965a40d9a3c39c960eb1c0712b2f38f87",
+      "date": "2026-01-05T23:48:32+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/server/scripts/dev-runner.ts"
+      ],
+      "finding": "Download adds progress/complete/error toast; dev-runner restarts nonzero exits.",
+      "fleetpane_action": "Exact native export has retained visible result; never restart Session Host implicitly."
+    },
+    {
+      "ordinal": 587,
+      "revision": "ecd9ddb4a287a0a0773b3846ca536157324263cb",
+      "date": "2026-01-06T00:14:27+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agents.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "finding": "All Agents page added; fifteen-row cap moves out of generic list and into sidebar plus View More.",
+      "fleetpane_action": "Existing All sessions and independent paging preserve access to loaded rows."
+    },
+    {
+      "ordinal": 588,
+      "revision": "bf22373502bc86add3c0c2b0b137593690174a34",
+      "date": "2026-01-06T08:25:22+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-git-diff-query.ts"
+      ],
+      "finding": "Diff query adds 10 s refetch while enabled.",
+      "fleetpane_action": "User deferred Git Diff; no hidden periodic Git work."
+    },
+    {
+      "ordinal": 589,
+      "revision": "41b321a621137dc3fdd3e77850079e847aba69f2",
+      "date": "2026-01-06T08:30:53+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Untracked diff loops file names through interpolated shell and accepts stdout on failure.",
+      "fleetpane_action": "Git Diff remains deferred; never port shell interpolation/error swallowing."
+    },
+    {
+      "ordinal": 590,
+      "revision": "607decff84ca05e5bf501ad6459b03cf9f23afe3",
+      "date": "2026-01-06T09:36:38+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "finding": "Diff view tracks file collapse and line counts with a local text parser.",
+      "fleetpane_action": "Defer Git Diff expansion; current supplied patches keep typed Kit renderer."
+    },
+    {
+      "ordinal": 591,
+      "revision": "4c8a79f288b1a1b0724e4c5c5ce5faab32987d76",
+      "date": "2026-01-06T09:37:06+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "finding": "Addition/deletion count font weight becomes normal.",
+      "fleetpane_action": "No Git Diff change."
+    },
+    {
+      "ordinal": 592,
+      "revision": "a187f26e1b9bc0c9f02a4e48e1d49df0eba85bcf",
+      "date": "2026-01-06T10:07:08+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/utils/syntax-highlighter.ts"
+      ],
+      "finding": "Lezer syntax highlighter introduces language/tag mapping for diff output.",
+      "fleetpane_action": "Keep native Kit highlighter; Git Diff deferred; dependency payload not audited."
+    },
+    {
+      "ordinal": 593,
+      "revision": "ed25db4e22a0ec87d2268d5962e3e04bcad0c929",
+      "date": "2026-01-06T15:26:09+07:00",
+      "category": "git-diff",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/utils/diff-highlighter.ts",
+        "packages/server/src/server/utils/diff-highlighter.ts"
+      ],
+      "finding": "Client/server diff highlighter structure and full-file RPC separate parsing/highlight.",
+      "fleetpane_action": "Git Diff deferred; selected parser/interface sections only, no parser correctness claim."
+    },
+    {
+      "ordinal": 594,
+      "revision": "351735a71bd4e573772a8b1662ffe9d7a45bad2a",
+      "date": "2026-01-06T16:28:01+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "finding": "Web Cmd/Ctrl+B toggles sidebar; diff gets horizontal scroll.",
+      "fleetpane_action": "Added native per-Host Show/Hide sessions and platform shortcut; retained draft/filters/focus and compact-window validation."
+    },
+    {
+      "ordinal": 595,
+      "revision": "4f3b2317ab80722d3a696562b7d028f6053af3ee",
+      "date": "2026-01-07T10:30:29+07:00",
+      "category": "tools",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/constants/layout.ts",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Selected stream hunks rename tool metadata; layout constants use shared header height.",
+      "fleetpane_action": "Keep actual typed command/MCP contents and native compact layout; historical tests not acceptance."
+    },
+    {
+      "ordinal": 596,
+      "revision": "66881511b6df401b4b01db65c31d6ea73796b307",
+      "date": "2026-01-07T12:38:04+07:00",
+      "category": "tools",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "packages/app/src/utils/tool-call-parsers.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Tool display uses normalized names and supplied principal parameters; old Codex command mapping uses first recognized command.",
+      "fleetpane_action": "Keep all supplied commandActions, exact error/output and approval identities; no fuzzy shell inference."
+    },
+    {
+      "ordinal": 597,
+      "revision": "0d9a69d00fcd26288b3c61c3ded985673b21b71d",
+      "date": "2026-01-07T14:42:16+07:00",
+      "category": "configuration",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Working-directory change resets branch sync; legacy extra.codex MCP settings merge before explicit mcpServers. Permission tool name fixed.",
+      "fleetpane_action": "Keep pinned worktree preview and explicit provider configuration. MCP config editing remains separate."
+    },
+    {
+      "ordinal": 598,
+      "revision": "a515f1fd03ff0430ae0b384df31406814390bc1f",
+      "date": "2026-01-07T18:05:02+07:00",
+      "category": "images",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-file-drop-zone.ts",
+        "packages/app/src/components/file-drop-zone.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Web drop filters image MIME and converts Files to data URLs, console-only error; previews become clickable removal.",
+      "fleetpane_action": "Native drop now uses validated immutable assets and all-or-nothing draft edit with visible errors; exact Linux native acceptance saved."
+    },
+    {
+      "ordinal": 599,
+      "revision": "80886592acac07215254477081e0b7b5ed4f8e46",
+      "date": "2026-01-08T10:31:58+07:00",
+      "category": "images",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "finding": "New Agent home wires FileDropZone into image ref callback.",
+      "fleetpane_action": "Initial new-session image composer remains separate gap; existing session drop acceptance is not initial creation parity."
+    },
+    {
+      "ordinal": 600,
+      "revision": "d233115ab967e0a392b9f891d54fde8a6c640003",
+      "date": "2026-01-08T14:56:10+07:00",
+      "category": "development-tooling",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/tasks/types.ts",
+        "packages/server/src/tasks/task-store.ts",
+        "packages/server/src/server/agent/activity-curator.ts"
+      ],
+      "finding": "Repo-local .tasks Markdown CLI introduces dependencies/status; curation collapses repeated call IDs.",
+      "fleetpane_action": "Do not reproduce developer task tracker as agent plan feature; keep provider plans and exact timeline identities."
+    },
+    {
+      "ordinal": 601,
+      "revision": "f51db38e8167c3fb070e353b3e47ab9d1307ae2d",
+      "date": "2026-01-08T15:35:18+07:00",
+      "category": "provider",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude resume rejects absent persistence ID and honors CLAUDE_CONFIG_DIR.",
+      "fleetpane_action": "Claude adapter outside selected providers; preserve exact Codex/DSH resume identity."
+    },
+    {
+      "ordinal": 602,
+      "revision": "be33676bb6b9122044b94229a6bd997e61cd4d30",
+      "date": "2026-01-08T17:33:55+07:00",
+      "category": "provider",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Interrupt generator return is awaited; pending interrupt settles before next Claude query, removing 500 ms handoff.",
+      "fleetpane_action": "Current providers keep explicit stop settlement and uncertain mutation handling; no timeout-to-success."
+    },
+    {
+      "ordinal": 603,
+      "revision": "889e291e14a9c32a530820204b89a65dd31c55a0",
+      "date": "2026-01-08T18:23:22+07:00",
+      "category": "build",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        ".github/workflows/server-ci.yml"
+      ],
+      "finding": "Server CI adds scoped npm install/typecheck/tests workflow.",
+      "fleetpane_action": "Rust checks already scoped; no new runner or paid service."
+    },
+    {
+      "ordinal": 604,
+      "revision": "de7dfd0984f91846a24f7c2a898a9483843c6cc5",
+      "date": "2026-01-08T18:25:01+07:00",
+      "category": "build",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        ".github/workflows/server-ci.yml"
+      ],
+      "finding": "Workflow adds GitHub Packages authentication.",
+      "fleetpane_action": "No private JS dependency required by independent Rust app."
+    },
+    {
+      "ordinal": 605,
+      "revision": "e715ba53ccb9feb4cc80b78a389bc5639ee1422d",
+      "date": "2026-01-08T18:26:37+07:00",
+      "category": "build",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        ".github/workflows/server-ci.yml"
+      ],
+      "finding": "CI removes package auth and installs only server workspace dependencies.",
+      "fleetpane_action": "Keep independent workspace/dependency boundaries; historical green not current CI."
+    },
+    {
+      "ordinal": 606,
+      "revision": "f2e03c53c1e4876292264f04113dd6834c703823",
+      "date": "2026-01-08T19:06:03+07:00",
+      "category": "provider",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude list also respects config dir; permission names are normalized.",
+      "fleetpane_action": "Provider-only adaptation omitted; exact pending request IDs retained."
+    },
+    {
+      "ordinal": 607,
+      "revision": "cc74d6d0d26e1d122788d04088f4b383aa6ba2b1",
+      "date": "2026-01-08T21:48:48+07:00",
+      "category": "migration",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Historical import UI/protocol removed; worktree branch selection uses actual HEAD.",
+      "fleetpane_action": "Keep offline Paseo workspace/history migration per explicit user need; current pinned worktree engine checks HEAD."
+    },
+    {
+      "ordinal": 608,
+      "revision": "3ba778eea71f61f1be3b0a32486f496022a8fd62",
+      "date": "2026-01-09T08:40:16+07:00",
+      "category": "worktrees",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.ts",
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "MessageInput clears at accepted-submit boundary; worktree setup reads paseo.json and attempts cleanup on failure.",
+      "fleetpane_action": "Keep durable drafts/one dispatch and explicit pinned worktree results. Setup scripts remain missing; do not erase failed checkout automatically."
+    },
+    {
+      "ordinal": 609,
+      "revision": "6f278cb6a60e9838b2f17c73c45316fcdf57bfd8",
+      "date": "2026-01-09T11:05:20+07:00",
+      "category": "refactor",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Legacy file/diff routes removed and conversation links open explorer pane instead.",
+      "fleetpane_action": "Native retained file overlay preserves source and checked exact path. Git Diff remains deferred."
+    },
+    {
+      "ordinal": 610,
+      "revision": "666a0f2fa62a3310abde4779a90f7c2bd2756209",
+      "date": "2026-01-09T11:07:19+07:00",
+      "category": "worktrees",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "finding": "Generated slug truncated to fifty characters, preferably at a hyphen.",
+      "fleetpane_action": "Keep explicit validated branch names; generated names, if added, must preserve preview identity."
     }
   ],
   "workflow_status": {
@@ -7610,7 +8240,8 @@
     "creation-preferences": "partial; Host choice, recents and per-session drafts persist; provider/model defaults for fresh creation not yet stored.",
     "composer-shortcut": "partial; focused native platform Enter invokes existing Send/Steer gates, exact Chinese multiline/rejection/draft/reopen verified with Linux synthetic Codex; IME/other platforms/ACP shortcut native limits retained",
     "file-export": "partial; shared raw local copy and Linux native exact binary/fresh-source/error/900x560/draft workflows verified. 64 MiB and private atomic no-overwrite publication. Long-blocked write/close, crash cleanup, system picker/share and remote download remain open",
-    "image-drop": "partial; existing conversation native local paths reuse picker importer; Linux X11 exact names/hash/draft/reopen/four-image send verified. Initial creation, remote URIs and other platform drop acceptance open"
+    "image-drop": "partial; existing conversation native local paths reuse picker importer; Linux X11 exact names/hash/draft/reopen/four-image send verified. Initial creation, remote URIs and other platform drop acceptance open",
+    "sidebar-toggle": "partial; native per-Host window-local button/platform key; Linux X11 exact draft/filter/focus/pending snapshots and 900x560 validated; persistence and other platforms unaccepted"
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
