@@ -6,6 +6,7 @@ mod images;
 mod observe;
 mod progress;
 mod recent;
+mod recovery;
 mod row_changes;
 mod stopping;
 mod tasks;
@@ -95,6 +96,7 @@ pub struct HostView {
     polling: bool,
     observer_polled_at: Option<std::time::Instant>,
     observer_error: Option<String>,
+    recovery: recovery::Recovery,
     revision: u64,
     cursor: u64,
     error: Option<String>,
@@ -173,6 +175,9 @@ impl HostView {
     }
 
     pub fn badge(&self) -> String {
+        if self.recovery.blocked() || self.observer_error.is_some() {
+            return "Updates unavailable".into();
+        }
         if let Some(state) = &self.snapshot {
             if state.fault.is_some() {
                 return "Unavailable".into();
@@ -233,6 +238,13 @@ impl HostView {
                 max_rows = rows;
                 this.composer
                     .update(cx, |input, cx| input.set_auto_grow(1, rows, cx));
+            }
+        }));
+        subscriptions.push(cx.observe_window_activation(window, |this, window, cx| {
+            if window.is_window_active() {
+                this.recovery.wake();
+                this.observer_polled_at = None;
+                this.poll(window, cx);
             }
         }));
         for input in [&search, &filter_workspace, &rename] {
@@ -302,6 +314,7 @@ impl HostView {
             polling: false,
             observer_polled_at: None,
             observer_error: None,
+            recovery: recovery::Recovery::default(),
             revision: 0,
             cursor: 0,
             error: None,
@@ -333,6 +346,16 @@ impl HostView {
     }
 
     fn adopt_snapshot(&mut self, state: Snapshot) {
+        if self.connection.as_ref().is_some_and(|connection| {
+            connection.lease.host_id != state.host_id
+                || state.owner.as_ref() != Some(&connection.lease)
+        }) {
+            // Once a newer observation revokes our lease, never restore it implicitly.
+            self.connection = None;
+            self.poll_paused = self.thread.is_some();
+            self.recovery.clear();
+            self.error = Some("Host identity or controller changed. Take control explicitly and reload this session; retained content is a previous observation.".into());
+        }
         if self
             .snapshot
             .as_ref()
@@ -350,6 +373,10 @@ impl HostView {
             .is_some_and(|(connection, state)| {
                 state.owner.as_ref() == Some(&connection.lease) && state.fault.is_none()
             })
+    }
+
+    fn can_act(&self) -> bool {
+        self.owns() && !self.recovery.blocked() && self.observer_error.is_none()
     }
 
     fn connect(&mut self, take_control: bool, window: &mut Window, cx: &mut Context<Self>) {
@@ -383,6 +410,8 @@ impl HostView {
                 this.busy = false;
                 match result {
                     Ok((state, connection)) => {
+                        this.observer_error = None;
+                        this.recovery.clear();
                         if this.thread.is_none() {
                             this.cursor = state.sequence;
                         }
@@ -394,13 +423,13 @@ impl HostView {
                             this.questions.clear();
                             this.permission_preview = None;
                         }
+                        this.connection = connection;
                         this.adopt_snapshot(state);
                         this.sync_questions(window, cx);
                         this.sync_permission_preview(cx);
                         for entry in &this.questions {
                             entry.view.update(cx, |view, cx| view.allow_submit(cx));
                         }
-                        this.connection = connection;
                         this.models_requested = false;
                         // Keep the old cursor until the selected history is read.
                         // A failed reload must not silently skip disconnected output.
@@ -416,6 +445,9 @@ impl HostView {
                             this.command(command, window, cx);
                         }
                     }
+                    Err(error) if matches!(error, Error::Transport(_)) => {
+                        this.observer_error = Some(error.to_string());
+                    }
                     Err(error) => this.error = Some(error.to_string()),
                 }
                 cx.notify();
@@ -426,7 +458,7 @@ impl HostView {
     }
 
     fn command(&mut self, command: Command, window: &mut Window, cx: &mut Context<Self>) {
-        if self.busy || self.pending.is_some() || !self.owns() {
+        if self.busy || self.pending.is_some() || !self.can_act() {
             return;
         }
         if matches!(
@@ -948,6 +980,10 @@ impl HostView {
             return;
         }
         if self.poll_paused {
+            self.observe(window, cx);
+            return;
+        }
+        if !self.recovery.ready(std::time::Instant::now()) {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -970,13 +1006,16 @@ impl HostView {
                 match result {
                     Ok((state, events)) => {
                         let mut rows_changed = false;
-                        let mut changed = this.snapshot.as_ref().is_none_or(|old| {
-                            old.owner != state.owner
-                                || old.pending_requests != state.pending_requests
-                                || old.activity.stopping != state.activity.stopping
-                                || old.activity.turns != state.activity.turns
-                                || old.fault != state.fault
-                        });
+                        let recovered =
+                            this.recovery.clear() | this.observer_error.take().is_some();
+                        let mut changed = recovered
+                            || this.snapshot.as_ref().is_none_or(|old| {
+                                old.owner != state.owner
+                                    || old.pending_requests != state.pending_requests
+                                    || old.activity.stopping != state.activity.stopping
+                                    || old.activity.turns != state.activity.turns
+                                    || old.fault != state.fault
+                            });
                         this.adopt_snapshot(state);
                         this.sync_questions(window, cx);
                         for event in events {
@@ -1046,8 +1085,8 @@ impl HostView {
                         }
                     }
                     Err(error) => {
-                        this.error = Some(error.to_string());
-                        this.poll_paused = true;
+                        this.poll_paused = !matches!(error, Error::Transport(_));
+                        this.recovery.failed(&error, std::time::Instant::now());
                         cx.notify();
                     }
                 }
@@ -1095,7 +1134,7 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
-        if self.busy || !self.owns() || self.poll_paused || self.pending.is_some() {
+        if self.busy || !self.can_act() || self.poll_paused || self.pending.is_some() {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -1356,7 +1395,7 @@ impl HostView {
     }
 
     fn acp_options(&self, cx: &mut Context<Self>) -> AnyElement {
-        let unavailable = self.busy || !self.owns() || self.pending.is_some() || self.draining();
+        let unavailable = self.busy || !self.can_act() || self.pending.is_some() || self.draining();
         let blocked = unavailable || self.thread.as_ref().is_none_or(|t| !t.can_send());
         let mut row = div()
             .flex()
@@ -1518,7 +1557,7 @@ impl HostView {
         if self.is_acp() {
             return self.acp_options(cx);
         }
-        let blocked = self.busy || !self.owns() || self.pending.is_some();
+        let blocked = self.busy || !self.can_act() || self.pending.is_some();
         let id = self.thread.as_ref().map(|thread| thread.id.clone());
         let options = id
             .as_ref()
@@ -1656,7 +1695,7 @@ impl HostView {
     }
 
     fn set_admission(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        if self.busy || !self.owns() {
+        if self.busy || !self.can_act() {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -1700,7 +1739,7 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
-        if self.busy || !self.owns() {
+        if self.busy || !self.can_act() {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -1732,7 +1771,7 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
-        if self.busy || !self.owns() || self.pending.is_some() {
+        if self.busy || !self.can_act() || self.pending.is_some() {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -1761,7 +1800,7 @@ impl HostView {
 impl Render for HostView {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let owns = self.owns();
-        let blocked = self.busy || !owns || self.pending.is_some();
+        let blocked = self.busy || !self.can_act() || self.pending.is_some();
         let stopping = self
             .snapshot
             .as_ref()
@@ -1872,7 +1911,9 @@ impl Render for HostView {
                             .flex()
                             .gap_3()
                             .items_center()
-                            .child(if owns {
+                            .child(if self.recovery.blocked() || self.observer_error.is_some() {
+                                "Host updates unavailable"
+                            } else if owns {
                                 "Connected · controlling"
                             } else {
                                 "Read only · take control to work"
@@ -1882,7 +1923,7 @@ impl Render for HostView {
                                 row.child(Button::new("host-admission")
                                     .small().ghost()
                                     .label(if self.draining() { "Accept new work" } else { "Drain Host" })
-                                    .disabled(self.busy)
+                                    .disabled(self.busy || !self.can_act())
                                     .on_click(cx.listener(|this, _, window, cx| this.set_admission(window, cx))))
                             })
                             .child(
@@ -1917,7 +1958,7 @@ impl Render for HostView {
                     .children(state.activity.turns.iter().take(3).map(|turn| div().text_xs().child(format!("Session {} · turn {}", turn.thread_id, turn.turn_id.as_deref().unwrap_or("awaiting identity")))))
                     .when(state.activity.turns.len() > 3, |row| row.child("First 3 shown. The Host snapshot lists all observed active turns.")))
             })
-            .children(self.error.iter().chain(self.observer_error.iter()).map(|error| {
+            .children(self.error.iter().chain(self.observer_error.iter()).cloned().chain(self.recovery.message()).map(|error| {
                 div()
                     .px_6()
                     .py_2()
@@ -2603,7 +2644,7 @@ impl Render for HostView {
                                                         this.paste_images(clipboard, window, cx)
                                                     })
                                                 })
-                                                .readonly(blocked || self.thread.is_none() || !self.draft_editable()),
+                                                .readonly(self.busy || !owns || self.pending.is_some() || self.thread.is_none() || !self.draft_editable()),
                                         )
                                     })
                                     .child(

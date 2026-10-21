@@ -67,7 +67,11 @@ def metadata_inbox(path):
 
 
 def persist():
-    store.write_text(json.dumps(sessions))
+    # Observers must see a complete generation, including during permission replies.
+    with lock:
+        temporary = store.with_suffix(".tmp")
+        temporary.write_text(json.dumps(sessions))
+        temporary.replace(store)
 
 
 def options():

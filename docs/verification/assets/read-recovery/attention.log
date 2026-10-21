@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/attention-smoke.py", line 138, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/attention-smoke.py", line 105, in main
+    wait(lambda: json.loads(provider_store.read_text()).get(original_thread, {}).get("permission") == expected)
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/attention-smoke.py", line 31, in wait
+    value = probe()
+            ^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/attention-smoke.py", line 105, in <lambda>
+    wait(lambda: json.loads(provider_store.read_text()).get(original_thread, {}).get("permission") == expected)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/json/decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

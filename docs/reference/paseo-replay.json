@@ -8,21 +8,21 @@
     {
       "name": "upstream",
       "ref": "refs/remotes/upstream/main",
-      "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+      "target": "e522e6ea8e25140d2ef0c819986175ad6d6379b8"
     },
     {
       "name": "donut-fork",
       "ref": "refs/remotes/origin/main",
-      "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+      "target": "2d0977759b168264adb3961a862eda8cd574f562"
     }
   ],
-  "indexed_unique_commits": 6187,
+  "indexed_unique_commits": 6214,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 214,
-    "last_revision": "881f0e7a8b8672cbb96558180c867736adc5c660",
-    "next_revision": "393aa44e68b59a1582e91643d5cf6ccb6ceb39a6",
-    "next_ordinal": 215
+    "last_ordinal": 219,
+    "last_revision": "69881d38624d9184d38b4b7d94be491afc2fc500",
+    "next_revision": "0c571f6f43ca6af53362f95d315d858bafffb3e5",
+    "next_ordinal": 220
   },
   "entries": [
     {
@@ -3222,6 +3222,75 @@
       ],
       "finding": "Plan claims per-card Test wiring/typecheck and records outstanding offline/Git Diff cleanup. Documentation is not runtime evidence; historical commands were not executed and user-deferred Git Diff remains deferred.",
       "fleetpane_action": "no-runtime-port"
+    },
+    {
+      "ordinal": 215,
+      "revision": "393aa44e68b59a1582e91643d5cf6ccb6ceb39a6",
+      "date": "2025-11-26T19:26:27+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-websocket.ts"
+      ],
+      "finding": "Native AppState active reopens closed sockets. Fleetpane uses a fresh bounded Unix request per read; adds window-activation read wake and separates failed transport replay from history/protocol reconciliation.",
+      "fleetpane_action": "automatic-read-recovery"
+    },
+    {
+      "ordinal": 216,
+      "revision": "0db0e1ad23ed32159f006ef659a921ca750efb4e",
+      "date": "2025-11-26T19:33:43+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/app/git-diff.tsx",
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "finding": "Offline copy distinguishes no configured Host from temporary disconnection, retains exact Host labels, and advertises reconnection. Fleetpane retains selected content and drafts, gates actions while reads fail and reports recovery without automatic write replay.",
+      "fleetpane_action": "automatic-read-recovery"
+    },
+    {
+      "ordinal": 217,
+      "revision": "e98952bf4c50a8c5f180fffbb322cb25fa5c625a",
+      "date": "2025-11-26T19:47:55+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/hooks/use-daemon-session.ts"
+      ],
+      "finding": "Offline copy no longer asks users to manually connect. Fleetpane automatically recovers valid read cursors, preserving explicit takeover and reload when identity/cursor is no longer valid.",
+      "fleetpane_action": "automatic-read-recovery"
+    },
+    {
+      "ordinal": 218,
+      "revision": "c88bbd3ee89c4666cca28d6b80c0d79946c534dd",
+      "date": "2025-11-26T19:58:31+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "finding": "Settings renames Server wording to Host. Fleetpane already uses Host consistently; no new runtime port.",
+      "fleetpane_action": "existing-host-language"
+    },
+    {
+      "ordinal": 219,
+      "revision": "69881d38624d9184d38b4b7d94be491afc2fc500",
+      "date": "2025-11-26T20:03:22+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "finding": "Removes connection issue banners from the home list. Fleetpane keeps per-Host diagnostics and a selected-view recovery message; does not remove actionable protocol/identity errors.",
+      "fleetpane_action": "retain-useful-diagnostics"
     }
   ],
   "workflow_status": {
@@ -3246,7 +3315,8 @@
     "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open.",
     "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch.",
     "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim.",
-    "host-diagnostics": "partial; shared CLI and Linux native count-only observational endpoint checks, protocol/drain/fault status, single/all refresh, exact JSON copy, offline recovery, preserved drafts/pending requests and late-result navigation covered with owned fixtures. No remote auth, registry editing, live update or external-model claim."
+    "host-diagnostics": "partial; shared CLI and Linux native count-only observational endpoint checks, protocol/drain/fault status, single/all refresh, exact JSON copy, offline recovery, preserved drafts/pending requests and late-result navigation covered with owned fixtures. No remote auth, registry editing, live update or external-model claim.",
+    "automatic-read-recovery": "partial; Linux native same-Host original-cursor replay, draft editing/copy, minimize/reactivate, protocol framing refusal, identity revocation, competing lease and pending ACP preservation covered with owned synthetic providers. Cursor expiry stays explicit; no automatic writes, context resume, remote or OS suspend acceptance."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

@@ -1,0 +1,43 @@
+{
+  "base": "252a7da05df510263bd00d81baef3dcd38c00c17",
+  "date": "2026-10-22",
+  "workspace": "fleetpane-reconnect-20261022",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "5d79c274ad3e5875edd13515539f9d84495a320ecba4b7a59767ee76a8b66090",
+    "apps/desktop/src/host_view/recovery.rs": "d66b3ce9abc69dc5bcc5db20d4445f9b5fac6cbb60ae9a8478fe3725d5649fa4",
+    "apps/desktop/src/host_view/progress.rs": "cb3b1c65d3840c84dba0c08d9a2ff79bbe9d9602d6070b796b73c02f6b0f28bc",
+    "crates/runtime/src/unix.rs": "025f49df6b316b0850ed9f44d8d036f6aa10732a377df159ee7f22dc1d88afcc",
+    "crates/session/src/client.rs": "bb32f0fd57eb23fa84d4d6631dde320d6c2a6f24bcbf6d5c81c6c6f9759e54e2",
+    "scripts/acp-fixture.py": "8f06361a970c15cd03704b9f9fa404caaa9a54482ffa5efdc29bdcda29469704",
+    "scripts/reconnect-fixture.py": "48de55dcad05e0bd580d08cd00255b36724ae5f6912c60da9fa16bcf07abfeae"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "842c325df2497685e6833e45878f0bac954092874a7bb89e863be2643a4cb996",
+    "apps/desktop/target/debug/fleetpane-desktop": "66bbfc6c0f6139393d02275ae1e3eae97b01dd39d11209e1d918923178dc2cac"
+  },
+  "checks": {
+    "core_tests": 245,
+    "desktop_tests": 27,
+    "python_tests": 15,
+    "clippy": "workspace and desktop pass",
+    "format": "both pass",
+    "query_smoke": "160 reads pass",
+    "attention_smoke": "original125sec failed fixture partial JSON; corrected atomic fixture1sec passes",
+    "acp_smoke": "pass",
+    "acp_info_smoke": "pass"
+  },
+  "draft": {
+    "content": "自动恢复时保留草稿\n  Rust ↔ DeepSeek",
+    "bytes": 47
+  },
+  "native": {
+    "normal_close": "exit0",
+    "offline_recovery": "original cursor only, same lease and journal",
+    "pending_ACP": "complete snapshot unchanged",
+    "identity_loss": "no implicit reclaim even after original snapshot returns",
+    "expired_cursor": "explicit Reconnect",
+    "fixture_processes": "workspace-owned",
+    "final_binary_delta": "Additional client classifier guard preserves existing mutation uncertainty; native read path unchanged. Follow-up unit coverage confirms both mutation outcomes."
+  },
+  "cleanup": "two normal GUI exits0; fixture terminated and hidden workspace stopped; owned Host/provider processes absent"
+}

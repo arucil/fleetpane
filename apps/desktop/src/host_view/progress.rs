@@ -7,7 +7,12 @@ impl HostView {
         let Some(thread) = &self.thread else {
             return div().into_any_element();
         };
-        let (working, label) = if self.poll_paused || self.observer_error.is_some() {
+        let (working, label) = if self.recovery.blocked() {
+            (
+                false,
+                "Host updates unavailable · last observed session retained".into(),
+            )
+        } else if self.poll_paused || self.observer_error.is_some() {
             (
                 false,
                 "Session updates paused · reload to refresh activity".into(),

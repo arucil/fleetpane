@@ -210,3 +210,11 @@ Single/all checks, exact JSON copy, 8 endpoints, stalled response isolation,
 [local acceptance](verification/2026-10-22-host-diagnostics.md). Remote auth,
 registry editing and safe Host retirement/update remain open.
 Scoped chronological review reaches 214 (`881f0e7a8`); next is 215 (`393aa44e6`).
+
+Observational read recovery (2026-10-22): native same-Host event replay keeps the
+original cursor, local draft and explicit mutation receipts; window activation
+wakes reads. Transport failures recover automatically, while expired history and
+protocol errors require Reconnect, and revoked leases require explicit takeover.
+Owned Linux Codex/ACP fixtures retain process identities and pending requests;
+no OS suspend, remote or external-model acceptance. See
+[verification](verification/2026-10-22-read-recovery.md).

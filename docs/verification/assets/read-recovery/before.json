@@ -1,0 +1,123 @@
+[
+  {
+    "protocol": 3,
+    "host_id": "a21c3ea1-0438-4c84-b492-1a91a70d13b9",
+    "host_pid": 228186,
+    "provider_pid": 228196,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "a21c3ea1-0438-4c84-b492-1a91a70d13b9",
+      "controller_id": "f324e24f-6914-416d-86f9-bd00ef0e3646",
+      "generation": 3
+    },
+    "sequence": 13,
+    "operation_ids": [
+      "742caab8-b4c2-4991-80f0-f07171c5a12e",
+      "bdfa3728-6a23-4084-8a93-f553f99c04f2"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  },
+  {
+    "protocol": 3,
+    "host_id": "346c90cb-bc27-48bb-bb96-b25cc36151c1",
+    "host_pid": 228231,
+    "provider_pid": 228234,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "346c90cb-bc27-48bb-bb96-b25cc36151c1",
+      "controller_id": "98f7fb4a-1428-435f-a0fb-ca49db3c1772",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "ac466fd9-a7ce-4363-8ca4-ca5ab8af9189",
+      "6b87088c-2587-4c5f-b37b-c81ed7e93083"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "25c3ffb4-4a3c-4eb2-8612-f168732a3080",
+          "turn_id": "db0165a2-da4e-4414-823d-ca757488aa6d"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "25c3ffb4-4a3c-4eb2-8612-f168732a3080",
+          "threadId": "25c3ffb4-4a3c-4eb2-8612-f168732a3080",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-dc91b9b9-8e4e-4bec-82e8-b4a19ea49af2"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+]

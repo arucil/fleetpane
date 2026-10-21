@@ -221,7 +221,11 @@ async fn read_frame<R: AsyncBufRead + Unpin>(
         return Ok(None);
     }
     if count > limit || bytes.last() != Some(&b'\n') {
-        return Err("unterminated or oversized JSONL frame".into());
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "unterminated or oversized JSONL frame",
+        )
+        .into());
     }
     Ok(Some(serde_json::from_slice(&bytes)?))
 }

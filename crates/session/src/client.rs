@@ -352,9 +352,22 @@ pub struct Completed {
 }
 
 async fn call(socket: &std::path::Path, command: Request) -> Result<Response, Error> {
-    let response = request(socket, &command)
-        .await
-        .map_err(|error| Error::Transport(error.to_string()))?;
+    let observational = matches!(
+        command,
+        Request::Snapshot | Request::Events { .. } | Request::Query { .. }
+    );
+    let response = request(socket, &command).await.map_err(|error| {
+        if observational
+            && (error.downcast_ref::<serde_json::Error>().is_some()
+                || error
+                    .downcast_ref::<std::io::Error>()
+                    .is_some_and(|error| error.kind() == std::io::ErrorKind::InvalidData))
+        {
+            Error::Protocol(error.to_string())
+        } else {
+            Error::Transport(error.to_string())
+        }
+    })?;
     match response {
         Response::Error { code, message } => Err(Error::Rejected { code, message }),
         response => Ok(response),
@@ -650,6 +663,103 @@ fn provider_result(message: Value, sequence: u64) -> Result<Completed, Error> {
 
 #[cfg(test)]
 mod tests {
+    #[tokio::test(flavor = "current_thread")]
+    async fn read_recovery_preserves_cursor_and_rejects_invalid_wire_data() {
+        use super::*;
+        use tokio::{
+            io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
+            net::UnixListener,
+        };
+        let directory = std::env::temp_dir().join(format!("fp-read-recovery-{}", Uuid::new_v4()));
+        fleetpane_runtime::unix::prepare_directory(&directory).unwrap();
+        let socket = directory.join("control.sock");
+        let listener = UnixListener::bind(&socket).unwrap();
+        let mut state = fleetpane_runtime::State::new(1, json!({}));
+        let Response::Lease(lease) = state.claim(
+            PROTOCOL_VERSION,
+            state.snapshot().host_id,
+            0,
+            Uuid::new_v4(),
+        ) else {
+            panic!("claim")
+        };
+        let connection = Connection {
+            socket: socket.clone(),
+            lease,
+        };
+        for index in 0..8 {
+            state
+                .record(json!({"method":"fixture/read","params":{"index":index}}))
+                .unwrap();
+        }
+        let expected = state.snapshot();
+        let server = tokio::spawn(async move {
+            for step in 0..8 {
+                let (stream, _) = listener.accept().await.unwrap();
+                let mut stream = BufReader::new(stream);
+                let mut line = String::new();
+                stream.read_line(&mut line).await.unwrap();
+                let request: Request = serde_json::from_str(&line).unwrap();
+                let reply = match step {
+                    0 => b"{}".to_vec(), // Unterminated frame.
+                    1 => b"not-json\n".to_vec(),
+                    2 => b"{\"response\":\"future\"}\n".to_vec(),
+                    3 => Vec::new(), // Transport closes without a response.
+                    4 => format!(
+                        "{}\n",
+                        serde_json::to_string(&Response::Snapshot(state.snapshot())).unwrap()
+                    )
+                    .into_bytes(),
+                    5 => {
+                        let Request::Events { host_id, after } = request else {
+                            panic!("must replay reads only")
+                        };
+                        assert_eq!(after, 7);
+                        assert_eq!(host_id, state.snapshot().host_id);
+                        format!(
+                            "{}\n",
+                            serde_json::to_string(&state.events(host_id, after)).unwrap()
+                        )
+                        .into_bytes()
+                    }
+                    6 => {
+                        assert!(matches!(request, Request::Execute { .. }));
+                        b"invalid-admission\n".to_vec()
+                    }
+                    7 => {
+                        assert!(matches!(request, Request::Respond { .. }));
+                        b"invalid-answer\n".to_vec()
+                    }
+                    _ => unreachable!(),
+                };
+                if step < 5 {
+                    assert!(matches!(request, Request::Snapshot));
+                }
+                stream.get_mut().write_all(&reply).await.unwrap();
+            }
+        });
+        for _ in 0..3 {
+            assert!(matches!(connection.poll(7).await, Err(Error::Protocol(_))));
+        }
+        assert!(matches!(connection.poll(7).await, Err(Error::Transport(_))));
+        let (snapshot, events) = connection.poll(7).await.unwrap();
+        assert_eq!(snapshot.owner, expected.owner);
+        assert_eq!(snapshot.sequence, expected.sequence);
+        assert_eq!(events.len(), 1);
+        assert_eq!(events[0].sequence, 8);
+        assert_eq!(events[0].message.pointer("/params/index"), Some(&json!(7)));
+        let id = Uuid::new_v4();
+        assert!(
+            matches!(connection.admit_rpc("turn/start",json!({}),id).await,Err(Error::Pending(pending)) if pending == id)
+        );
+        assert!(matches!(
+            connection.respond(json!(1), json!({})).await,
+            Err(Error::Transport(_))
+        ));
+        server.await.unwrap();
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+
     #[tokio::test(flavor = "current_thread")]
     async fn stop_admission_returns_pending_receipt_without_waiting_and_refuses_legacy_host() {
         use super::*;
