@@ -8,7 +8,7 @@
     {
       "name": "upstream",
       "ref": "refs/remotes/upstream/main",
-      "target": "e522e6ea8e25140d2ef0c819986175ad6d6379b8"
+      "target": "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c"
     },
     {
       "name": "donut-fork",
@@ -16,13 +16,13 @@
       "target": "2d0977759b168264adb3961a862eda8cd574f562"
     }
   ],
-  "indexed_unique_commits": 6214,
+  "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 219,
-    "last_revision": "69881d38624d9184d38b4b7d94be491afc2fc500",
-    "next_revision": "0c571f6f43ca6af53362f95d315d858bafffb3e5",
-    "next_ordinal": 220
+    "last_ordinal": 225,
+    "last_revision": "b97ae99b2b3a11db5b29d144c9b12232af6a737d",
+    "next_revision": "2c84447ec261b2e57e01c2de081d623c9dd9e507",
+    "next_ordinal": 226
   },
   "entries": [
     {
@@ -3291,6 +3291,96 @@
       ],
       "finding": "Removes connection issue banners from the home list. Fleetpane keeps per-Host diagnostics and a selected-view recovery message; does not remove actionable protocol/identity errors.",
       "fleetpane_action": "retain-useful-diagnostics"
+    },
+    {
+      "ordinal": 220,
+      "revision": "0c571f6f43ca6af53362f95d315d858bafffb3e5",
+      "date": "2025-11-26T20:07:33+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Explicit loading replaces a false empty home view while directory data is fetching; offline Hosts do not count as loading.",
+      "fleetpane_action": "native-loading-state"
+    },
+    {
+      "ordinal": 221,
+      "revision": "135bcf13a8be1bee2fac6c67ed1b3fdc6adff736",
+      "date": "2025-11-26T20:12:11+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Create modal separates transport online from usable session readiness; a missing session accessor previously mislabeled online Hosts offline. Fleetpane keeps snapshot authority and explicit create readiness.",
+      "fleetpane_action": "retain-authority-gated-creation"
+    },
+    {
+      "ordinal": 222,
+      "revision": "a01c3f9b737a3363d1ef299ee73169d7dc8c7c4e",
+      "date": "2025-11-26T20:18:49+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Flat cross-Host rows keep original server identity and sort running first, then last user/activity time. Fleetpane adds loaded-row activity order with provider update timestamps and exact Host source.",
+      "fleetpane_action": "implement-global-loaded-activity-order"
+    },
+    {
+      "ordinal": 223,
+      "revision": "bf58e81ce843a9d895f6acd6cc561e83aef46ca4",
+      "date": "2025-11-27T21:06:48+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts",
+        "packages/app/src/hooks/use-daemon-session.ts",
+        "packages/app/src/hooks/use-session-directory.ts",
+        "packages/app/src/hooks/use-websocket.ts"
+      ],
+      "finding": "Direct session snapshots replace accessor subscriptions; sessionReady gates creation until initial hydration. Fleetpane retains typed Host snapshots and on-demand metadata reads, with explicit initial loading.",
+      "fleetpane_action": "retain-engine-snapshots"
+    },
+    {
+      "ordinal": 224,
+      "revision": "08dc2ed937abfff00f15ba505cd4a881b73dfe40",
+      "date": "2025-11-27T21:36:03+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts",
+        "packages/app/src/hooks/use-session-directory.ts",
+        "packages/app/src/stores/session-store.ts"
+      ],
+      "finding": "Zustand store replaces context directory updates, but still snapshots full SessionContextValue. Retain independent Rust domain and cached metadata projection rather than porting JS state libraries.",
+      "fleetpane_action": "retain-rust-domain-boundary"
+    },
+    {
+      "ordinal": 225,
+      "revision": "b97ae99b2b3a11db5b29d144c9b12232af6a737d",
+      "date": "2025-11-28T08:19:41+01:00",
+      "category": "platform-config",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/app.config.js",
+        "packages/app/plugins/with-android-product-flavors.js",
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Android flavor and cleartext-LAN configuration; environment defaults seed a registry, while Test reports socket reasons. Fleetpane retains explicit validated local configuration and independent diagnostics; no Android or implicit endpoint port.",
+      "fleetpane_action": "platform-specific-no-port"
     }
   ],
   "workflow_status": {
@@ -3312,11 +3402,12 @@
     "session-ancestry": "partial; bounded read-only Codex ancestry and loaded contexts are locally verified in shared engine, CLI and Linux native UI. Archived/ephemeral descendants, forks, pending requests, stale failures, drain and lease/Host changes covered. Observation is non-atomic and excludes background resources; safe archive/stop and live Host handoff remain open. ACP explicitly unsupported.",
     "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance.",
     "streamed-reasoning": "partial; three typed indexed Codex deltas, history per-item boundaries and retained native card updates verified locally with regressions and gated synthetic provider. Exact Copy/reload, Stop and independent permission covered; external model and non-Linux native acceptance remain open.",
-    "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open.",
+    "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, full-index activity ordering and subscriptions remain open.",
     "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch.",
     "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim.",
     "host-diagnostics": "partial; shared CLI and Linux native count-only observational endpoint checks, protocol/drain/fault status, single/all refresh, exact JSON copy, offline recovery, preserved drafts/pending requests and late-result navigation covered with owned fixtures. No remote auth, registry editing, live update or external-model claim.",
-    "automatic-read-recovery": "partial; Linux native same-Host original-cursor replay, draft editing/copy, minimize/reactivate, protocol framing refusal, identity revocation, competing lease and pending ACP preservation covered with owned synthetic providers. Cursor expiry stays explicit; no automatic writes, context resume, remote or OS suspend acceptance."
+    "automatic-read-recovery": "partial; Linux native same-Host original-cursor replay, draft editing/copy, minimize/reactivate, protocol framing refusal, identity revocation, competing lease and pending ACP preservation covered with owned synthetic providers. Cursor expiry stays explicit; no automatic writes, context resume, remote or OS suspend acceptance.",
+    "loaded-activity-order": "partial; shared loaded-row projection, exact provider time semantics, stale-last ordering and Linux native source/paging/draft/replacement verified locally. Full-index/realtime activity, keyboard directory navigation and accessibility remain open."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

@@ -56,6 +56,9 @@ pub struct Thread {
     pub cwd: String,
     pub preview: String,
     pub name: Option<String>,
+    /// Codex app-server's Unix seconds; ACP timestamps remain in acp_session_info.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<i64>,
     pub history_mode: Option<String>,
     #[serde(default)]
     pub history_paging: bool,

@@ -8,6 +8,8 @@ use serde::Serialize;
 use std::time::Duration;
 use uuid::Uuid;
 
+pub mod order;
+
 #[derive(Serialize)]
 pub struct Observation {
     pub host_id: Uuid,

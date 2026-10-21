@@ -1066,3 +1066,8 @@ The CLI requires the last observed revision. This selection is scoped to the
 controller store; moving the configuration may change its default store location.
 It does not restore a selected session. Older schema-10 binaries cannot open an
 upgraded store. See [local evidence](docs/verification/2026-10-21-preferred-host.md).
+
+All sessions defaults to **Activity**: fresh active sessions first, then provider
+update time. **By Host** retains provider page order. Ordering covers loaded rows
+only; each Host has independent Load more controls in its summary, and unavailable
+rows say Last observed. Filtering, sorting and opening never resume or send.

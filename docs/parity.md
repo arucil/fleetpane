@@ -218,3 +218,15 @@ protocol errors require Reconnect, and revoked leases require explicit takeover.
 Owned Linux Codex/ACP fixtures retain process identities and pending requests;
 no OS suspend, remote or external-model acceptance. See
 [verification](verification/2026-10-22-read-recovery.md).
+
+### Cross-Host loaded activity order
+
+Implemented and verified locally for covered engine/Linux native fixture paths.
+Activity order places fresh active rows first, then provider update time; missing
+or malformed time is explicit, and stale observations sort after fresh rows.
+By Host retains provider page order. Exact endpoint/Host UUID/session identity,
+archive membership and pagination remain independent. Native history/draft
+readback, 237-row paging, offline labels and minimum size have
+[separate evidence](verification/2026-10-22-activity-order.md).
+This is ordering over loaded rows; full-index activity and realtime subscriptions
+remain open, together with directory keyboard navigation and accessibility.

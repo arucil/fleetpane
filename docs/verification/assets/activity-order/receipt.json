@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-22",
+  "base": "ec10af5c8a91fd492fe08ab0515fa052dc0b74f4",
+  "source_sha256": {
+    "crates/session/src/lib.rs": "7071887aa5bff33e3ae66e563e71f0c379b2bbb7a95e23608c7c441237f76339",
+    "crates/session/src/fleet_directory/order.rs": "0e200c3ee68d8c24913e86fee549c68c9412d27ddd95603baa1dff0c70334131",
+    "crates/session/src/fleet_directory.rs": "080178aee57842f555d3f8c7b720806e710d241b3dc3deb5e9e5f83ce2a9eb70",
+    "crates/session/Cargo.toml": "e34659a93dc90e9aa994cc2b0ec205a73f630ab9edb0e1f31888882447041b2f",
+    "apps/desktop/src/workbench/sessions.rs": "9164b9af7469e7c595fe1c8539e17da9bd189a9be497e0824a5f03e002c14ae6",
+    "scripts/fleet-directory-smoke.py": "cf464e34410b22606eba1618757430bcce2c422e6a1782fb9d2906203831db56",
+    "scripts/activity-fixture.py": "e373b6fafe98b48f2cdc2a4c08dcfb962ac6a60bb832cb66a30b2c77b2c4b0fb",
+    "Cargo.lock": "c9aa32043b74119428064f0d859c9e61eb304c5a7d3082bf6ec1a4641d44ddfd",
+    "apps/desktop/Cargo.lock": "b1e666eb3fe622bbff0b42f8d942186c9afb36724cb68a3562b7b3f301d22289"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "afdc607f9cca50a6e327b314a227df151380e9d3142e294b72d4a29b231d56f1",
+    "apps/desktop/target/debug/fleetpane-desktop": "8a5df5b3d8f67f58bd9839d8b4dae03dd7e96eea357d1f490359674eb1c5cfd6"
+  },
+  "tests": {
+    "core": 248,
+    "desktop": 27,
+    "python": 15,
+    "clippy": "core and desktop passed -D warnings"
+  },
+  "native": {
+    "first_pages": [
+      100,
+      100,
+      1
+    ],
+    "B_pages": [
+      100,
+      200,
+      237
+    ],
+    "history_clipboard": "History from Codex B 001",
+    "history_bytes": 24,
+    "draft": "全局排序后保留 B 草稿\n  Rust ↔ DeepSeek",
+    "draft_bytes": 50,
+    "minimum_window": [
+      900,
+      560
+    ],
+    "final_binary": "stale labels and draft restoration rechecked",
+    "close": "both normal windows exited 0",
+    "independent_ACP": "same full snapshot excluding query response sequence",
+    "no_extra_mutation_receipts": true,
+    "cleanup": "workspace stopped; fixture stopped; owned sockets absent"
+  },
+  "capture": {
+    "upstream": "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c",
+    "fork": "2d0977759b168264adb3961a862eda8cd574f562",
+    "unique": 6215,
+    "old_prefix225_equal": true
+  }
+}

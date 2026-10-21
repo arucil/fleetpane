@@ -27,8 +27,9 @@ def wait(probe):
 
 
 class Fixture:
-    def __init__(self, root):
+    def __init__(self, root, activity=False):
         self.root = root
+        self.activity = activity
         self.processes = []
         self.hosts = []
         self.config = root / "hosts.json"
@@ -44,6 +45,14 @@ class Fixture:
                 "name": f"{name} 共享 {i:03}", "status": {"type": "idle"},
                 "turns": [{"id": "saved-turn", "status": "completed", "items": [{"id": "saved-text", "type": "agentMessage", "text": f"History from {name} {i:03}"}]}],
             } for i in range(237)]
+            if self.activity and index < 2:
+                # Deliberately interleave Hosts; equal IDs remain separate sources.
+                for i, thread in enumerate(threads):
+                    thread['updatedAt'] = 1_700_000_000 + index * 1000 - i
+                threads[0]['status']['type'] = 'active'
+                threads[0]['updatedAt'] = 1000 + index * 1000
+                threads[1]['updatedAt'] = 1_800_000_000 + index
+                threads[2].pop('updatedAt')
             threads.extend({
                 "id": f"archived-{i:03}", "cwd": str(home if i < 137 else home / "second-workspace"),
                 "preview": f"{name} archived message {i}", "name": f"{name} 归档 {i:03}",
