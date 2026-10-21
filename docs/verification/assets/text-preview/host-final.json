@@ -1,0 +1,83 @@
+{
+  "protocol": 3,
+  "host_id": "2c1c458c-3bfd-47b1-a92c-f2f1ca2e0ed1",
+  "host_pid": 3576013,
+  "provider_pid": 3576016,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "2c1c458c-3bfd-47b1-a92c-f2f1ca2e0ed1",
+    "controller_id": "34c51a7d-f15f-4afc-be7b-0789bbc9d48e",
+    "generation": 2
+  },
+  "sequence": 8,
+  "operation_ids": [
+    "78161c53-e6a5-406f-9e42-3f9d83e4b0b7",
+    "50b0d5f2-eb77-4d85-8ee9-e0b6af407aa1"
+  ],
+  "journal_total": 2,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "418754a2-d7ff-4ecc-ad03-9eb57b2b3493",
+        "turn_id": "331b70a8-0805-4ef8-8962-0f461b4ba384"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "418754a2-d7ff-4ecc-ad03-9eb57b2b3493",
+        "threadId": "418754a2-d7ff-4ecc-ad03-9eb57b2b3493",
+        "toolCall": {
+          "title": "Synthetic tool",
+          "toolCallId": "call-425417a9-728b-4169-8a28-0cdd7f4a61b7"
+        }
+      }
+    }
+  ],
+  "attention": {
+    "records": [],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}

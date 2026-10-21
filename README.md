@@ -834,13 +834,15 @@ Closing the view discards this history. [Verification and limits](docs/verificat
 
 Explicit Markdown file links and structured tool/change paths open the same
 read-only view over the retained conversation. **Back to conversation** restores
-the composer and draft. Markdown `#L2`, `#L2-L3` and `:2` anchors start the preview
-at that one-based line; tool line metadata remains display-only. Unsupported
+the composer and draft. Markdown `#L2`, `#L2-L3` and `:2` anchors select the original
+one-based source line; tool line metadata remains display-only. Unsupported
 schemes and outside-root paths show errors. Inline code is not guessed as a path.
 
-UTF-8 text files up to 256 KiB have a selectable read-only preview. The display
-shows at most 16 KiB from the selected source line with a notice; **Copy full text** preserves all
-loaded text, including line endings and whitespace. Binary, empty and oversized
+UTF-8 text files up to 256 KiB have a complete selectable read-only Kit editor
+with line numbers, syntax highlighting and a **Wrap: on/off** toggle. Unknown
+extensions remain plain text. Source links keep earlier lines reachable;
+**Copy full text** preserves original line endings and whitespace. See
+[native verification](docs/verification/2026-10-22-text-preview.md). Binary, empty and oversized
 files have explicit messages. Listings are limited to 500 entries; symlinks and
 special files are displayed but not opened. Parent traversal and replaced saved
 directories are refused. At most two filesystem workers run per process; calls

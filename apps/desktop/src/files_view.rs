@@ -12,7 +12,7 @@ use fleetpane_session::{
 use gpui_kit::component::{
     ActiveTheme, Disableable, Selectable, Sizable,
     button::{Button, ButtonVariants},
-    input::{Input, InputEvent, InputState, Textarea, TextareaState},
+    input::{Editor, EditorState, Input, InputEvent, InputState, Position},
 };
 use gpui_kit::{prelude::*, *};
 use std::{num::NonZeroUsize, sync::Arc};
@@ -53,7 +53,8 @@ pub struct FilesView {
     _path_subscription: Subscription,
     listing: Option<Listing>,
     file: Option<Readback>,
-    preview: Option<Entity<TextareaState>>,
+    preview: Option<Entity<EditorState>>,
+    wrap: bool,
     image: Option<Arc<Image>>,
     busy: bool,
     error: Option<String>,
@@ -66,30 +67,41 @@ pub struct FilesView {
 }
 impl EventEmitter<Location> for FilesView {}
 
-const PREVIEW_BYTES: usize = 16 * 1024;
-fn preview(text: &str) -> &str {
-    let mut end = text.len().min(PREVIEW_BYTES);
-    while !text.is_char_boundary(end) {
-        end -= 1;
+fn source_position(text: &str, line: Option<NonZeroUsize>) -> Result<Position, String> {
+    let line = line.unwrap_or(NonZeroUsize::MIN).get();
+    if line > 1 && text.match_indices('\n').nth(line - 2).is_none() {
+        return Err(format!(
+            "Requested line {line} does not exist; the file is loaded and can be copied."
+        ));
     }
-    &text[..end]
+    Ok(Position::new(
+        u32::try_from(line - 1).map_err(|_| "Source line exceeds the supported range")?,
+        0,
+    ))
 }
 
-fn source_preview(text: &str, line: Option<NonZeroUsize>) -> Result<&str, String> {
-    let line = line.unwrap_or(NonZeroUsize::MIN).get();
-    let start = if line == 1 {
-        0
-    } else {
-        text.match_indices('\n')
-            .nth(line - 2)
-            .map(|(index, _)| index + 1)
-            .ok_or_else(|| {
-                format!(
-                    "Requested line {line} does not exist; the file is loaded and can be copied."
-                )
-            })?
-    };
-    Ok(preview(&text[start..]))
+fn language(path: &str) -> &'static str {
+    match std::path::Path::new(path)
+        .extension()
+        .and_then(|s| s.to_str())
+    {
+        Some("rs") => "rust",
+        Some("py" | "pyi") => "python",
+        Some("js" | "jsx" | "mjs" | "cjs") => "javascript",
+        Some("tsx") => "tsx",
+        Some("ts" | "mts" | "cts") => "typescript",
+        Some("json" | "jsonc") => "json",
+        Some("go") => "go",
+        Some("toml") => "toml",
+        Some("yaml" | "yml") => "yaml",
+        Some("sh" | "bash" | "zsh") => "bash",
+        Some("md" | "markdown") => "markdown",
+        Some("html" | "htm") => "html",
+        Some("css") => "css",
+        Some("c" | "h") => "c",
+        Some("cpp" | "cc" | "cxx" | "hpp") => "cpp",
+        _ => "text",
+    }
 }
 
 // Called in the existing bounded command worker, never in render or the UI callback.
@@ -189,6 +201,7 @@ impl FilesView {
             listing: None,
             file: None,
             preview: None,
+            wrap: true,
             image: None,
             busy: false,
             error: None,
@@ -292,10 +305,16 @@ impl FilesView {
             self.error = Some("Source line anchors apply to text files; showing the image.".into());
         }
         self.preview = match &file.content {
-            Content::Text { text } => match source_preview(text, line) {
-                Ok(text) => Some(cx.new(|cx| {
-                    let mut state = TextareaState::new(window, cx).auto_grow(8, 20);
+            Content::Text { text } => match source_position(text, line) {
+                Ok(position) => Some(cx.new(|cx| {
+                    let mut state = EditorState::new(window, cx)
+                        .language(language(&file.path))
+                        .soft_wrap(self.wrap)
+                        .folding(false);
                     state.set_value(text, window, cx);
+                    if line.is_some() {
+                        state.set_cursor_position(position, window, cx);
+                    }
                     state
                 })),
                 Err(error) => {
@@ -673,17 +692,25 @@ impl Render for FilesView {
                         let reload=file.path.clone();
                         let copy_path=file.path.clone();
                         let view=view.child(div().text_sm().truncate().child(format!("{:?} · {} bytes",file.path,file.size)))
+                            .child(div().flex().flex_wrap().items_center().gap_2()
                             .child(Button::new("export-file-copy").small().label("Save a copy…").disabled(self.busy || file.size > fleetpane_session::files::MAX_EXPORT_BYTES).on_click(cx.listener(|this,_,window,cx| {
                                 this.export_open=true;this.export_result=None;
                                 this.export_path.update(cx,|input,cx|input.focus(window,cx));cx.notify();
                             })))
                             .child(Button::new("reload-workspace-file").small().label("Reload file").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Read(reload.clone(), this.line),window,cx))))
-                            .child(Button::new("copy-workspace-path").small().label("Copy path").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy_path.clone()))));
+                            .child(Button::new("copy-workspace-path").small().label("Copy path").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy_path.clone())))));
                         match &file.content {
                             Content::Text {text}=> {
                                 let full=text.clone();
-                                view.child(Button::new("copy-workspace-file").small().label("Copy full text").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(full.clone()))))
-                                    .when(text.len()>PREVIEW_BYTES,|view|view.child(div().text_sm().child("Preview shows up to 16 KiB from the selected line. Copy full text includes the complete loaded file.")))
+                                view.child(div().flex().flex_wrap().items_center().gap_2()
+                                    .child(Button::new("copy-workspace-file").small().label("Copy full text").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(full.clone()))))
+                                    .child(Button::new("wrap-workspace-file").small().label(if self.wrap {"Wrap: on"} else {"Wrap: off"}).selected(self.wrap).disabled(self.preview.is_none()).on_click(cx.listener(|this,_,window,cx| {
+                                        this.wrap = !this.wrap;
+                                        if let Some(preview) = &this.preview {
+                                            preview.update(cx,|state,cx|state.set_soft_wrap(this.wrap,window,cx));
+                                        }
+                                        cx.notify();
+                                    }))))
                                     .when(text.is_empty(),|view|view.child("Empty file"))
                             }
                             Content::Image {image, ..}=>view.child(format!("{} · {} × {} pixels", image.mime_type, image.width, image.height)),
@@ -697,37 +724,29 @@ impl Render for FilesView {
                         div().relative().flex_1().min_h_0().overflow_hidden().child(img(ImageSource::from(source.clone())).absolute().top_0().left_0().size_full().object_fit(ObjectFit::Contain)
                             .with_loading(||div().child("Loading image…").into_any_element())
                             .with_fallback(||div().child("Image renderer could not display the validated file.").into_any_element()))))
-                    .when_some(self.line.filter(|_|self.preview.is_some()),|view,line|view.child(div().text_sm().child(format!("From source line {line}"))))
-                    .when_some(self.preview.as_ref(),|view,state|view.child(div().flex_1().min_h_0().overflow_hidden().child(Textarea::new(state).readonly(true).h_full())))))
+                    .when_some(self.line.filter(|_|self.preview.is_some()),|view,line|view.child(div().text_sm().child(format!("Requested source line {line} · complete loaded file"))))
+                    .when_some(self.preview.as_ref(),|view,state|view.child(div().flex_1().min_h_0().overflow_hidden().child(Editor::new(state).readonly(true).aria_label("Read-only workspace source").h_full())))))
     }
 }
 
 #[cfg(test)]
 mod tests {
     #[test]
-    fn source_line_preview_preserves_newlines_bounds_and_explicit_missing_line() {
+    fn source_position_keeps_original_lines_and_rejects_absent_targets() {
         use std::num::NonZeroUsize;
         assert_eq!(
-            super::source_preview("first\r\n中文  \n", NonZeroUsize::new(2)).unwrap(),
-            "中文  \n"
+            super::source_position("first\r\n中文  \n", NonZeroUsize::new(2)).unwrap(),
+            super::Position::new(1, 0)
         );
         assert_eq!(
-            super::source_preview("first\n", NonZeroUsize::new(2)).unwrap(),
-            ""
+            super::source_position("first\n", NonZeroUsize::new(2)).unwrap(),
+            super::Position::new(1, 0)
         );
-        assert!(super::source_preview("first\n", NonZeroUsize::new(3)).is_err());
-        let text = format!("skip\n{}", "中".repeat(20_000));
-        let shown = super::source_preview(&text, NonZeroUsize::new(2)).unwrap();
-        assert!(
-            shown.len() <= super::PREVIEW_BYTES && shown.starts_with('中') && shown.ends_with('中')
+        assert!(super::source_position("first\n", NonZeroUsize::new(3)).is_err());
+        assert!(super::source_position("x", NonZeroUsize::new(usize::MAX)).is_err());
+        assert_eq!(
+            super::source_position("", None).unwrap(),
+            super::Position::new(0, 0)
         );
-    }
-    #[test]
-    fn preview_preserves_utf8_and_caps_display_only() {
-        let value = "中".repeat(20_000);
-        let shown = super::preview(&value);
-        assert!(shown.len() <= super::PREVIEW_BYTES && shown.ends_with('中'));
-        assert_eq!(value.len(), 60_000);
-        assert_eq!(super::preview("\r\n exact \n"), "\r\n exact \n");
     }
 }

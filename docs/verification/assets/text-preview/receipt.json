@@ -1,0 +1,58 @@
+{
+  "base_revision": "ae1043e",
+  "source_sha256": {
+    "apps/desktop/src/files_view.rs": "sha256:aef33fd1264f4eda060a064da144fa5ce425791af1ee6a3907ae977de6ff1bb7",
+    "apps/desktop/Cargo.toml": "sha256:b7d169610724a71f7fa08ba2c2614977f6cd1bb08ca0eb13802e4c2e8103250a",
+    "apps/desktop/Cargo.lock": "sha256:4fb7e7659cd7868aefe2bd68ff5096d4c4fe6d353907d250ad1f9e399e80a14d"
+  },
+  "native_binary_sha256": "sha256:456536b2893aafeefebaf1fec3e1c448d35cbed54269acbe5d18165c56fadd7a",
+  "checks": [
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml -- --check",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --locked --all-targets -- -D warnings",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/file-navigation-smoke.py",
+    "python3 scripts/files-smoke.py"
+  ],
+  "desktop_tests_passed": 36,
+  "native_clipboard": {
+    "complete_source_bytes": 36944,
+    "complete_source_sha256": "sha256:84fc32cfc4517708e7ef3208595b9e6292917c0082098a5fa1e1a66f1800da59",
+    "full_copy_exact": true,
+    "readonly_selection_after_backspace_exact": true,
+    "draft_bytes": 24,
+    "draft_normal_reopen_exact": true
+  },
+  "independent_acp_snapshot_unchanged": true,
+  "cleanup": "isolated desktop stopped; both exact-owned synthetic Host processes signaled after cmdline verification",
+  "artifacts_sha256": {
+    "after.json": "sha256:25106226c2c5b35790b7c2d389082a21ec8c098a28ddf84d276ab38c55dd15cc",
+    "before.json": "sha256:bff1b69769c83572e527b221ef00acdad28b561f1be33fa14a015ab6c079ed71",
+    "build.log": "sha256:661da8b8caaccac419f4800ccb28357681229cf3c42cda4aa5176b9e56497a3f",
+    "clippy.log": "sha256:35fc72bacfe065673ddba4b566b6467dc5b94a887c640891f8cbf1f5e1028448",
+    "compact-empty.png": "sha256:acf48985341bbca37a61515065dccd4784e8e151164b5cddbce9b57cfdea0c74",
+    "compact-small-settled.png": "sha256:bbb3379f03f399d253ac899caf9732b07b400aa0c86c1eae9c3672e701708bec",
+    "compact-tail.png": "sha256:00f66344a62f2e21343f3a0385f483e40edeca17f4a5bbd072497f99c510bc1f",
+    "compact-unknown.png": "sha256:1eb90fa4748e3f522098edf5427596052880d43109656ffc651bd811ae1d9f0e",
+    "files.log": "sha256:436857b8683082337c2a78d64677aef7f0e205256b33e3792b2e4e738259e0fd",
+    "fixture.py": "sha256:bc2440a62df7c8aed6970c9aa403e98b8788d6afae75ce2009d0b3f77716bf95",
+    "host-final.json": "sha256:25106226c2c5b35790b7c2d389082a21ec8c098a28ddf84d276ab38c55dd15cc",
+    "links-final.json": "sha256:3b8c1426098720f2ee6b1a0ec2aefe6ff9a31b9eb49464313126176fdc34fff6",
+    "links-fixture.py": "sha256:2f7af3a5f117242234a0b6746bfa1ca3ee221707c44a2dd1bd53e4d84d936aa4",
+    "missing-line-final.png": "sha256:2e8f1543307a8b521750f71198d8eb6b2dfaa0f89593f4ed994d29cf58d2fc32",
+    "navigation.log": "sha256:75781ad7f34c79505f6f1f67f1fcb4c7ba6c7814aee92b0b9de318a790c69e37",
+    "reopened-anchor.png": "sha256:ac84cd96803bd244b1790b1677a2f0e275fd824ad7980f6bbdaa0aac69d06108",
+    "reopened-full-top.png": "sha256:092a3ed8f1a3f4ad1e26423b09ba33087b7e6fdce7e1222337345ec8ea6268a3",
+    "reopened-session.png": "sha256:78757af9d9adab3beaf34402de9ce25bf3115dc3adcb34656667d7a23b65080d",
+    "tests.log": "sha256:105c3f42775e187c090c247eac69143fc3dbab8afd59cbd0bb6df47ef7ab8231"
+  },
+  "limits": [
+    "Linux X11 synthetic providers only",
+    "No installed-provider, other-platform, IME, accessibility or performance claim",
+    "No editing, search-workflow, save/conflict or streaming acceptance"
+  ],
+  "cleanup_processes_absent": {
+    "pid": true,
+    "link-pid": true
+  }
+}

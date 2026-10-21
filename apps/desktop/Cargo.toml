@@ -10,7 +10,12 @@ license = "Apache-2.0"
 [dependencies]
 fleetpane-client = { path = "../../crates/client" }
 fleetpane-protocol = { path = "../../crates/protocol" }
-gpui-kit = "=0.7.3"
+gpui-kit = { version = "=0.7.3", features = [
+    "tree-sitter-bash", "tree-sitter-c", "tree-sitter-cpp", "tree-sitter-css",
+    "tree-sitter-go", "tree-sitter-html", "tree-sitter-javascript",
+    "tree-sitter-markdown", "tree-sitter-python", "tree-sitter-rust",
+    "tree-sitter-toml", "tree-sitter-tsx", "tree-sitter-typescript", "tree-sitter-yaml",
+] }
 data-url = "0.3"
 base64 = "0.22.1"
 
