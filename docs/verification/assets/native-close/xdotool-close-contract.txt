@@ -1,0 +1,10 @@
+.IP "\fBwindowclose\fR \fI[window]\fR" 4
+.IX Item "windowclose [window]"
+Close a window. This action will destroy the window, but will not try
+to kill the client controlling it. If no window is given, \f(CW%1\fR is the
+default. See "WINDOW STACK" and "COMMAND CHAINING" for more details.
+.IP "\fBwindowquit\fR \fI[window]\fR" 4
+.IX Item "windowquit [window]"
+Close a window gracefully. This action sends a request, allowing the
+application to apply close confirmation mechanics. If no window is given, \f(CW%1\fR
+is the default. See "WINDOW STACK" and "COMMAND CHAINING" for more details.

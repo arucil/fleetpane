@@ -1,0 +1,57 @@
+{
+  "verified_at": "2026-10-21T10:56:55.770530+00:00",
+  "source_head": "5f7d2e5a49002747f25dbde02cd85d445ed13cd8",
+  "desktop_source_sha256": {
+    "apps/desktop/src/main.rs": "f0e148becb12913fbacda0b414fad888509a62f3261ab15245575ccf7fbb1fd1",
+    "apps/desktop/src/appearance.rs": "017ed96f3621a37c65982177f0494ed2d7066f9047e7ff70142408d70374b483",
+    "apps/desktop/src/workbench.rs": "bda03fe305f6e3967b39bd4acf4268a312545668d5a025fca90a3d7bcf791e02"
+  },
+  "desktop_binary_sha256": "be25ffe9f8f7b56e88e70e885951c09252ef030fcec773c312c04cb02bd78a36",
+  "environment": "Linux isolated X11 fp-close-lifecycle; Mesa software graphics; private synthetic ACP provider",
+  "normal_exit0_pids": [
+    1908148,
+    2247377,
+    2276306,
+    2338195
+  ],
+  "forced_destroy_retained_pid": 2104137,
+  "normal_close_preserves": [
+    "host_id",
+    "host_pid",
+    "provider_pid",
+    "pending_requests",
+    "activity",
+    "journal_total"
+  ],
+  "exact_multiline_draft_bytes": 47,
+  "tool_contract": "installed agent-workspace binary references xdotool windowclose; installed xdotool manpage says it destroys the window and contrasts windowquit",
+  "limits": [
+    "not every prior close was attributed individually",
+    "no macOS or Windows native close claim",
+    "forced X window destruction remains non-graceful",
+    "no timing guarantee or model request"
+  ],
+  "artifacts_sha256": {
+    "titlebar-close.json": "22e81291cd8a1854d5a7aed7813efc3a24c0c67be74086cef07f73174e7d3624",
+    "reopen-steady.png": "ceeb514bd4489a39cd0f23bf7a899907bb2c1f7f33e37d601e6deb167d15ae9b",
+    "draft-exit.json": "a7f26ed6b879379c388d39143b15f3983fa844531d8f7f1e33b05e83feb736f6",
+    "destroy-cleanup.json": "87a7fa55b9d4318effdd26a3df18f4ddc66008ecad6dcd3987cc25c22fb8f2be",
+    "host-before.json": "4d2bc5fcb44050611016391d0a90702e77f014abe526c71465beb1ff23a101a0",
+    "multiline-readback.json": "0c6908875460667a44886ae96569d6156f60905cd1862f2e38a9ce9a69390912",
+    "reopen-clipboard.json": "445405a0efd363c1ef8a19f8ed6e4b8ede6d9a38b69a55a4e07e0f0b01de8980",
+    "host-exit.json": "29fa23a12d59cc72c910feb89c6bcb58e1e18fbe442ed41a5b6f056d2c81e93d",
+    "host-after-final-close.json": "344cd4dad58ac6b37dd3d536ed516006d2345d222186e0de607ce89aaed325e1",
+    "xdotool-close-contract.txt": "f9c8a8694604ab02983b15016ec8933809954d147a0afa2697b2eb2cd2b06df9",
+    "host-close.json": "d4c9b61be8b5c2d7c6a315d953f1ae026b1c26abe95add36c3c52a442c1fb42f",
+    "reopen-exit.json": "dbe2e3e9087945e18b897d3e6b4d7c107929097eb3fdf0bdc8ca4d22172d06b9",
+    "titlebar-before.png": "e6311d8d003f3fbbd6eded0df748ed2b4181cdfb5ef58c99dc6757987aec298c",
+    "host-after-titlebar.json": "4d2bc5fcb44050611016391d0a90702e77f014abe526c71465beb1ff23a101a0",
+    "host-titlebar-exit.json": "18918fb9bdf07382f51ff34dfcfb598f7684c35cf8e2c05a1e24dad1489b4641",
+    "cleanup.json": "4b310f5a717c6902174b9a8aadc9e8637cfe75d6f23f44c7c0bb8a31cc8845ec"
+  },
+  "cleanup": {
+    "workspace_stopped": true,
+    "host_stopped": true,
+    "provider_stopped": true
+  }
+}

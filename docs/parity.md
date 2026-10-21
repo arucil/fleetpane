@@ -164,5 +164,7 @@ Host-snapshot projection and a fixed native indicator, separate from client acti
 completion. Quiet work, pending Stop, independent approval, 38-byte draft and
 window replacement have [local fixture evidence](verification/2026-10-21-agent-progress.md).
 The concurrency checker now drains startup events and matches exact turn IDs;
-20 synthetic streams pass. Real model capacity, UI performance, native fault
-recovery and graceful desktop process exit remain unaccepted.
+20 synthetic streams pass. Real model capacity, UI performance and native fault
+recovery remain unaccepted. Normal titlebar close now has [separate Linux
+acceptance](verification/2026-10-21-native-close.md); the automation's direct X
+window destruction remains non-graceful.

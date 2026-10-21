@@ -949,6 +949,7 @@ async fn dsh_v4_selects_latest_generation_and_preserves_native_tool_result() {
             4,
             "## 最新中文 **answer**",
         );
+        let path = std::fs::canonicalize(path).unwrap();
         let original = std::fs::read(&path).unwrap();
         let old_bytes = std::fs::read(&old).unwrap();
         let session = f.session().await;

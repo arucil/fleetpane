@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "message": "workspace app stopped",
+  "status": {
+    "id": "fp-close-lifecycle",
+    "session_id": "session-fp-close-lifecycle-1792578633910-1831617",
+    "purpose": "Fleetpane last-window exit regression and independent Host preservation",
+    "user_acknowledged_hidden_workspace": true,
+    "user_acknowledged_unenforced_policy": false,
+    "ready": true,
+    "started_at_unix": 1792578641,
+    "display": ":94",
+    "width": 1500,
+    "height": 1100,
+    "runtime_dir": "/run/user/1000/agent-workspace-linux/fp-close-lifecycle",
+    "socket_path": "/run/user/1000/agent-workspace-linux/fp-close-lifecycle/control.sock",
+    "xauthority_path": "/run/user/1000/agent-workspace-linux/fp-close-lifecycle/Xauthority",
+    "daemon_pid": 1831658,
+    "x_server_pid": 1831665,
+    "window_manager_pid": 1832116,
+    "last_event_sequence": 68,
+    "apps": []
+  },
+  "apps": [
+    {
+      "id": "app-2338195",
+      "name": "native-close-reopen",
+      "pid": 2338195,
+      "process_group_id": 2338195,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--host",
+        "/tmp/fleetpane-close-evidence/host/runtime/control.sock",
+        "--preferences-dir",
+        "/tmp/fleetpane-close-evidence/host-preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fp-close-lifecycle/apps/app-2338195.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fp-close-lifecycle/apps/app-2338195.stderr.log",
+      "started_at_unix": 1792580092,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792580187,
+      "runtime_seconds": 95
+    }
+  ]
+}
