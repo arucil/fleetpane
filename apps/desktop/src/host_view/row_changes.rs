@@ -23,6 +23,108 @@ pub(super) fn affects_rows(event: &fleetpane_runtime::Event, applied: bool) -> b
         )
 }
 
+/// Content targets are collected only after the session decoder accepts an event.
+/// Structural/unknown events use full reconciliation; metadata has no targets.
+#[derive(Default)]
+pub(super) enum Invalidation {
+    #[default]
+    None,
+    Items(BTreeSet<(String, String)>),
+    All,
+}
+
+impl Invalidation {
+    pub fn record(&mut self, event: &fleetpane_runtime::Event, applied: bool) {
+        if !affects_rows(event, applied) || matches!(self, Self::All) {
+            return;
+        }
+        let method = event
+            .message
+            .get("method")
+            .and_then(serde_json::Value::as_str);
+        let item_path = match method {
+            Some("item/started" | "item/completed") => "/params/item/id",
+            Some(
+                "item/agentMessage/delta"
+                | "item/reasoning/summaryPartAdded"
+                | "item/reasoning/summaryTextDelta"
+                | "item/reasoning/textDelta",
+            ) => "/params/itemId",
+            _ => {
+                *self = Self::All;
+                return;
+            }
+        };
+        let (Some(turn), Some(item)) = (
+            event
+                .message
+                .pointer("/params/turnId")
+                .and_then(serde_json::Value::as_str),
+            event
+                .message
+                .pointer(item_path)
+                .and_then(serde_json::Value::as_str),
+        ) else {
+            *self = Self::All;
+            return;
+        };
+        if matches!(self, Self::None) {
+            *self = Self::Items(BTreeSet::new());
+        }
+        if let Self::Items(items) = self {
+            items.insert((turn.to_owned(), item.to_owned()));
+        }
+    }
+
+    /// None asks the caller to reconcile structural changes. The sparse path
+    /// never constructs unrelated content, raw Copy payloads or Markdown.
+    pub fn project(
+        &self,
+        thread: &fleetpane_session::Thread,
+        rows: &[Row],
+        index: &BTreeMap<String, usize>,
+    ) -> Option<Vec<(usize, Row)>> {
+        self.project_with(thread, rows, index, Row::item)
+    }
+
+    fn project_with(
+        &self,
+        thread: &fleetpane_session::Thread,
+        rows: &[Row],
+        index: &BTreeMap<String, usize>,
+        mut project: impl FnMut(&str, &str, &fleetpane_session::Item) -> Option<Row>,
+    ) -> Option<Vec<(usize, Row)>> {
+        let targets = match self {
+            Self::None => return Some(Vec::new()),
+            Self::All => return None,
+            Self::Items(items) => items,
+        };
+        let mut updates = Vec::with_capacity(targets.len());
+        for (turn_id, item_id) in targets {
+            let item = thread
+                .turns
+                .iter()
+                .find(|turn| &turn.id == turn_id)?
+                .items
+                .iter()
+                .find(|item| &item.id == item_id)?;
+            let key = Row::item_key(&thread.id, turn_id, item_id);
+            let position = index.get(&key).copied();
+            match (position, project(&thread.id, turn_id, item)) {
+                (Some(position), Some(row)) => {
+                    if rows.get(position)? != &row {
+                        updates.push((position, row));
+                    }
+                }
+                (None, None) => {}
+                // A newly visible/hidden row changes layout and the identity index.
+                _ => return None,
+            }
+        }
+        Some(updates)
+    }
+}
+
 pub(super) struct Plan<'a> {
     pub retained: BTreeSet<&'a str>,
     pub updated: Vec<usize>,
@@ -177,6 +279,230 @@ mod tests {
         };
         assert!(affects_rows(&future, true));
         assert!(!affects_rows(&future, false));
+    }
+
+    fn source(items: Vec<serde_json::Value>) -> fleetpane_session::Thread {
+        serde_json::from_value(json!({"id":"s:中文","cwd":"/synthetic","preview":"",
+            "status":{"type":"active"},"turns":[{"id":"t:中文","status":"inProgress","items":items}]})).unwrap()
+    }
+
+    fn index(rows: &[Row]) -> BTreeMap<String, usize> {
+        rows.iter()
+            .enumerate()
+            .map(|(i, row)| (row.id.clone(), i))
+            .collect()
+    }
+
+    fn event(method: &str, fields: serde_json::Value) -> fleetpane_runtime::Event {
+        let mut params = json!({"threadId":"s:中文","turnId":"t:中文"});
+        params
+            .as_object_mut()
+            .unwrap()
+            .extend(fields.as_object().unwrap().clone());
+        fleetpane_runtime::Event {
+            sequence: 1,
+            message: json!({"method":method,"params":params}),
+        }
+    }
+
+    fn assert_projection(
+        thread: &mut fleetpane_session::Thread,
+        rows: &mut Vec<Row>,
+        event: &fleetpane_runtime::Event,
+    ) -> bool {
+        let mut dirty = Invalidation::default();
+        dirty.record(event, thread.apply(event).unwrap());
+        let sparse = dirty.project(thread, rows, &index(rows));
+        let incremental = sparse.is_some();
+        match sparse {
+            Some(updates) => {
+                for (i, row) in updates {
+                    rows[i] = row;
+                }
+            }
+            None => *rows = Row::conversation(thread),
+        }
+        assert!(*rows == Row::conversation(thread));
+        incremental
+    }
+
+    #[test]
+    fn streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items() {
+        let mut thread = source((0..400).map(|i| json!({"id":format!("m:{i}"),"type":"agentMessage","text":format!("Retained **中文** {i}")})).collect());
+        let mut rows = Row::conversation(&thread);
+        let indices = index(&rows);
+        let retained: Vec<_> = rows[..400].iter().map(|row| row.copy.as_ptr()).collect();
+        for tick in 0..40 {
+            let mut dirty = Invalidation::default();
+            for part in [" 中文", " **tail**"] {
+                let update = event(
+                    "item/agentMessage/delta",
+                    json!({"itemId":"m:399","delta":part}),
+                );
+                dirty.record(&update, thread.apply(&update).unwrap());
+            }
+            let mut projected = 0;
+            let updates = dirty
+                .project_with(&thread, &rows, &indices, |s, t, i| {
+                    projected += 1;
+                    Row::item(s, t, i)
+                })
+                .unwrap();
+            assert_eq!(
+                projected, 1,
+                "tick {tick}: unrelated source items reprojected"
+            );
+            assert_eq!(updates.len(), 1);
+            assert_eq!(updates[0].0, 400);
+            for (i, row) in updates {
+                rows[i] = row;
+            }
+            assert!(rows == Row::conversation(&thread));
+            assert_eq!(
+                rows[..400]
+                    .iter()
+                    .map(|row| row.copy.as_ptr())
+                    .collect::<Vec<_>>(),
+                retained
+            );
+        }
+    }
+
+    #[test]
+    fn visibility_lifecycle_and_failed_tool_updates_match_full_projection() {
+        let mut thread = source(vec![
+            json!({"id":"r","type":"reasoning","summary":[],"content":[]}),
+            json!({"id":"tool","type":"acpToolCall","call":{"title":"Read settings","status":"pending","rawOutput":null}}),
+        ]);
+        let mut rows = Row::conversation(&thread);
+        // Empty reasoning has no row; becoming visible and becoming hidden
+        // must reconcile layout, not silently discard the change.
+        assert!(assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/reasoning/summaryPartAdded",
+                json!({"itemId":"r","summaryIndex":0})
+            )
+        ));
+        assert!(!assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/reasoning/summaryTextDelta",
+                json!({"itemId":"r","summaryIndex":0,"delta":"Thinking 中文"})
+            )
+        ));
+        assert!(assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/reasoning/textDelta",
+                json!({"itemId":"r","contentIndex":0,"delta":"detail"})
+            )
+        ));
+        assert!(assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/completed",
+                json!({"item":{"id":"tool","type":"acpToolCall","call":{"title":"Read failed","status":"failed","rawOutput":false}}})
+            )
+        ));
+        let copied: serde_json::Value = serde_json::from_str(&rows.last().unwrap().copy).unwrap();
+        assert_eq!(copied["call"]["rawOutput"], false);
+        assert!(!assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/completed",
+                json!({"item":{"id":"r","type":"reasoning","summary":[],"content":[]}})
+            )
+        ));
+        assert!(!assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/started",
+                json!({"item":{"id":"new","type":"agentMessage","text":"New visible row"}})
+            )
+        ));
+        // Malformed known content remains an inspectable error card.
+        assert!(assert_projection(
+            &mut thread,
+            &mut rows,
+            &event(
+                "item/completed",
+                json!({"item":{"id":"tool","type":"commandExecution","command":4}})
+            )
+        ));
+        assert!(rows[1].error.is_some());
+    }
+
+    #[test]
+    fn metadata_foreign_pages_structural_and_future_events_keep_their_boundaries() {
+        let mut thread = source(vec![
+            json!({"id":"m","type":"agentMessage","text":"Retained"}),
+        ]);
+        let rows = Row::conversation(&thread);
+        let indices = index(&rows);
+        let mut dirty = Invalidation::default();
+        let metadata = event("thread/name/updated", json!({"threadName":"New title"}));
+        dirty.record(&metadata, thread.apply(&metadata).unwrap());
+        let mut foreign = event(
+            "item/agentMessage/delta",
+            json!({"itemId":"m","delta":"Ignored"}),
+        );
+        foreign.message["params"]["threadId"] = json!("other");
+        dirty.record(&foreign, thread.apply(&foreign).unwrap());
+        // History can reject an otherwise valid event behind a page watermark.
+        dirty.record(
+            &event("item/completed", json!({"item":{"id":"not-loaded"}})),
+            false,
+        );
+        assert!(
+            dirty
+                .project_with(&thread, &rows, &indices, |_, _, _| panic!(
+                    "metadata projected content"
+                ))
+                .unwrap()
+                .is_empty()
+        );
+        let completion = event(
+            "turn/completed",
+            json!({"turn":{"id":"t:中文","status":"completed","items":[{"id":"m","type":"agentMessage","text":"Final"}]}}),
+        );
+        dirty.record(&completion, thread.apply(&completion).unwrap());
+        assert!(dirty.project(&thread, &rows, &indices).is_none());
+        let mut future = Invalidation::default();
+        future.record(&event("future/content", json!({})), true);
+        assert!(future.project(&thread, &rows, &indices).is_none());
+    }
+
+    #[test]
+    fn item_targets_keep_opaque_turn_and_item_boundaries_and_stable_order() {
+        let mut thread: fleetpane_session::Thread = serde_json::from_value(json!({
+            "id":"s:中文","cwd":"/synthetic","preview":"","status":{"type":"active"},"turns":[
+                {"id":"a:b","status":"inProgress","items":[{"id":"c","type":"agentMessage","text":"First"}]},
+                {"id":"a","status":"inProgress","items":[{"id":"b:c","type":"agentMessage","text":"Second"}]}
+            ]})).unwrap();
+        let mut rows = Row::conversation(&thread);
+        let mut dirty = Invalidation::default();
+        for (turn, item, delta) in [("a:b", "c", " 中文"), ("a", "b:c", " exact")] {
+            let e = event(
+                "item/agentMessage/delta",
+                json!({"turnId":turn,"itemId":item,"delta":delta}),
+            );
+            dirty.record(&e, thread.apply(&e).unwrap());
+        }
+        let updates = dirty.project(&thread, &rows, &index(&rows)).unwrap();
+        assert_eq!(updates.len(), 2);
+        for (i, row) in updates {
+            rows[i] = row;
+        }
+        assert!(rows == Row::conversation(&thread));
+        assert_eq!(rows[1].copy, "First 中文");
+        assert_eq!(rows[3].copy, "Second exact");
     }
 
     fn row(id: usize) -> Row {

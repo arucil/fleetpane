@@ -79,6 +79,7 @@ pub struct HostView {
     session_tree: Option<Entity<crate::session_tree_view::SessionTreeView>>,
     history: Option<History>,
     rows: Vec<Row>,
+    row_index: BTreeMap<String, usize>,
     questions: Vec<QuestionEntry>,
     permission_preview: Option<(Row, Entity<ItemView>)>,
     item_views: BTreeMap<String, Entity<ItemView>>,
@@ -295,6 +296,7 @@ impl HostView {
             tasks: tasks::State::default(),
             history: None,
             rows: Vec::new(),
+            row_index: BTreeMap::new(),
             questions: Vec::new(),
             permission_preview: None,
             item_views: BTreeMap::new(),
@@ -1005,7 +1007,7 @@ impl HostView {
                 }
                 match result {
                     Ok((state, events)) => {
-                        let mut rows_changed = false;
+                        let mut invalidation = row_changes::Invalidation::default();
                         let recovered =
                             this.recovery.clear() | this.observer_error.take().is_some();
                         let mut changed = recovered
@@ -1062,13 +1064,13 @@ impl HostView {
                                 } {
                                     Ok(applied) => {
                                         changed |= applied;
-                                        rows_changed |= row_changes::affects_rows(&event, applied);
+                                        invalidation.record(&event, applied);
                                     }
                                     Err(error) => {
                                         this.error = Some(error.to_string());
                                         this.poll_paused = true;
                                         changed = true;
-                                        rows_changed = true;
+                                        invalidation = row_changes::Invalidation::All;
                                         break;
                                     }
                                 }
@@ -1076,11 +1078,7 @@ impl HostView {
                             this.cursor = event.sequence;
                         }
                         if changed {
-                            if rows_changed {
-                                this.rebuild_rows(cx);
-                            } else {
-                                this.sync_permission_preview(cx);
-                            }
+                            this.refresh_rows(&invalidation, cx);
                             cx.notify();
                         }
                     }
@@ -1180,6 +1178,23 @@ impl HostView {
         cx.notify();
     }
 
+    fn refresh_rows(&mut self, invalidation: &row_changes::Invalidation, cx: &mut Context<Self>) {
+        let Some(thread) = &self.thread else {
+            self.rebuild_rows(cx);
+            return;
+        };
+        let Some(updates) = invalidation.project(thread, &self.rows, &self.row_index) else {
+            self.rebuild_rows(cx);
+            return;
+        };
+        self.sync_permission_preview(cx);
+        for (index, row) in updates {
+            self.item_views[&row.id].update(cx, |view, cx| view.set_row(row.clone(), cx));
+            self.rows[index] = row;
+            self.timeline.splice(index..index + 1, 1);
+        }
+    }
+
     fn rebuild_rows(&mut self, cx: &mut Context<Self>) {
         self.sync_permission_preview(cx);
         let mut rows = Vec::new();
@@ -1231,6 +1246,11 @@ impl HostView {
             .count();
         self.timeline
             .splice(first..self.rows.len() - suffix, rows.len() - first - suffix);
+        self.row_index = rows
+            .iter()
+            .enumerate()
+            .map(|(index, row)| (row.id.clone(), index))
+            .collect();
         self.rows = rows;
     }
 

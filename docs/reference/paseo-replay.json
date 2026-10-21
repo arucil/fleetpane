@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 268,
-    "last_revision": "ad804cb1fe29424a63bb8ec4b85d36cf951a8445",
-    "next_revision": "27ec2b5c679096f76c7c9baad6dccefb48c81f20",
-    "next_ordinal": 269
+    "last_ordinal": 307,
+    "last_revision": "9aacc26eb6bea6fda5d5d48a59976adf2e200182",
+    "next_revision": "d3ad27e10a1e2b739c12c6e9d95201978765f015",
+    "next_ordinal": 308
   },
   "entries": [
     {
@@ -3934,6 +3934,484 @@
       ],
       "finding": "MCP create_agent gains a required short title, persists it and renames the tool. Fleetpane keeps optional provider-supplied titles; Codex rename exists and ACP provider rename remains explicitly unsupported. No new universal required-title rule or Claude adapter.",
       "fleetpane_action": "selective-title-contract"
+    },
+    {
+      "ordinal": 269,
+      "revision": "27ec2b5c679096f76c7c9baad6dccefb48c81f20",
+      "date": "2025-12-01T12:25:58Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-dictation.ts"
+      ],
+      "finding": "Selected hook sections extract shared recording/cancel/transcription state, request-ID matching and visibility cleanup. Some cleanup failures are ignored in this historical hook; no native audio runtime executed.",
+      "fleetpane_action": "retain-P2-voice; do-not-copy-silent-cleanup"
+    },
+    {
+      "ordinal": 270,
+      "revision": "6244988d79a80868781af4750c78df2efbd2a532",
+      "date": "2025-12-01T13:15:23Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-audio-recorder.native.ts"
+      ],
+      "finding": "Metering and isRecording now use recorderState instead of accessing a released native recorder reference. The observable state and resource lifetime are separate; no mobile audio runtime exercised.",
+      "fleetpane_action": "retain-explicit-native-resource-ownership"
+    },
+    {
+      "ordinal": 271,
+      "revision": "b36f870ee93f54d2649073bd59dab38b8f7d17de",
+      "date": "2025-12-02T03:57:36Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-session-rpc.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Selected initialization envelope and RPC helper sections add request-ID response matching. Initial helper dispatches before installing its Promise callbacks and resets without settling; later corrections must be read with it.",
+      "fleetpane_action": "keep-shared-Rust-typed-command-and-receipt-boundaries"
+    },
+    {
+      "ordinal": 272,
+      "revision": "9079695f46a3063f468e5480a63d4b99cd9c423c",
+      "date": "2025-12-02T04:00:30Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Codex timeline tools fall back from trimmed call_id to trimmed item id. This narrows missing identities but does not prove global uniqueness. Fleetpane preserves exact protocol IDs and tagged thread/turn/item keys.",
+      "fleetpane_action": "retain-exact-opaque-provider-identity; no-trimming-or-fuzzy-dedup"
+    },
+    {
+      "ordinal": 273,
+      "revision": "5b920a2b13730de68f9899ab4d6e5049547bc2e8",
+      "date": "2025-12-02T04:07:14Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-session-rpc.ts"
+      ],
+      "finding": "Promise callbacks are installed before send, disconnects and send failures reject and clear state. Selected helper diff still allows one active request to overwrite another; no historical RPC tests executed.",
+      "fleetpane_action": "keep-per-operation-identity-and-durable-unknown-results"
+    },
+    {
+      "ordinal": 274,
+      "revision": "71b238c0cdaa470d6c0473167b0dde60a69617d4",
+      "date": "2025-12-02T04:30:38Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-session-rpc.ts",
+        "packages/app/src/hooks/use-dictation.ts"
+      ],
+      "finding": "Selected helper/transcription sections separate request/response types, register an explicit requestId before audio dispatch and await matching transcript. Voice remains a separate P2 workflow.",
+      "fleetpane_action": "retain-typed-response-identity; defer-native-audio"
+    },
+    {
+      "ordinal": 275,
+      "revision": "dc26bf713e893e27fa126598dbd7a36afb97ef4a",
+      "date": "2025-12-02T08:12:02Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-session-rpc.ts",
+        "packages/app/src/components/dictation-status-notice.tsx"
+      ],
+      "finding": "Retry helper adds timeout/backoff/failure categories and status actions. In read sections delayed retry callbacks are not owned by the active-request cleanup handle; retries can re-dispatch the same request. Do not generalize this to mutations.",
+      "fleetpane_action": "retain-observational-read-recovery; no-automatic-mutation-replay"
+    },
+    {
+      "ordinal": 276,
+      "revision": "755b314e516b4e15f1e13df9e1b15d11d5f24817",
+      "date": "2025-12-02T08:17:53Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Home changes from ScrollView map to FlatList with exact server/agent keys and retained interaction callbacks. It adds virtualization, not proof of end-to-end latency.",
+      "fleetpane_action": "keep-existing-native-virtualized-directory-and-timeline"
+    },
+    {
+      "ordinal": 277,
+      "revision": "34e0e21657b4d216f01262475abbf02930e80b5e",
+      "date": "2025-12-02T09:20:02Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/utils/perf.ts",
+        "packages/app/src/utils/navigation-timing.ts"
+      ],
+      "finding": "Adds gated timing/payload-estimation helpers and navigation bookkeeping. Selected helpers count approximate shapes, not total resident memory or full rendering time.",
+      "fleetpane_action": "measure-observed-workload; no-upstream-number-adoption"
+    },
+    {
+      "ordinal": 278,
+      "revision": "b278b43fac2406ae0189b91a68e43a30feefc14c",
+      "date": "2025-12-02T09:28:52Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-aggregated-agents.ts",
+        "packages/app/src/types/agent-directory.ts"
+      ],
+      "finding": "Adds lightweight directory entries and aggregates their separate store projection, running first then activity time. History payloads need not be directory rows.",
+      "fleetpane_action": "retain-metadata-only-directory-and-exact-Host-source"
+    },
+    {
+      "ordinal": 279,
+      "revision": "fa1d7dd295163bc4feb9ea859f6ffc2cfd4aa8a2",
+      "date": "2025-12-02T09:55:59Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-daemon-session.ts"
+      ],
+      "finding": "Daemon hook selects the requested server from Zustand rather than a copied session directory. This hook still selects the entire per-server session.",
+      "fleetpane_action": "keep-targeted-native-state; assess-content-projection-cost"
+    },
+    {
+      "ordinal": 280,
+      "revision": "6e259c37db19417fb49db29acde2148ff97902de",
+      "date": "2025-12-02T10:13:25Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/contexts/realtime-context.tsx"
+      ],
+      "finding": "Selected consumers fetch a requested server through store getSession, avoiding directory copies. Realtime retains selected-server lookup; no voice runtime acceptance.",
+      "fleetpane_action": "keep-source-specific-command-dispatch"
+    },
+    {
+      "ordinal": 281,
+      "revision": "dfe43210512ce8674e581655dbbfee99fc33be35",
+      "date": "2025-12-02T10:13:59Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/persistence-hooks.ts"
+      ],
+      "finding": "Read registration/title persistence sections: registry write precedes state emission and creation response, and explicit title override preserves null semantics. Missing-title update now errors; resumes carry saved title.",
+      "fleetpane_action": "preserve-typed-mutation-errors; no-new-required-title-contract"
+    },
+    {
+      "ordinal": 282,
+      "revision": "0ba5e481f4996380f920bc8b047a02d4eb16c8c0",
+      "date": "2025-12-02T10:33:49Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-store.ts"
+      ],
+      "finding": "Directory equality adds title, cwd and provider, preventing stale metadata when time/status remain equal.",
+      "fleetpane_action": "retain-complete-directory-metadata-comparison"
+    },
+    {
+      "ordinal": 283,
+      "revision": "3208624c5e4d19b980462643f45a43fe0c1dc133",
+      "date": "2025-12-02T10:50:11Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-heavy-state.ts"
+      ],
+      "finding": "Introduces a separate heavy-state registry and per-server listeners. Its directory snapshot allocates a new Map each read; read only this selected file, not the whole persistence proposal.",
+      "fleetpane_action": "avoid-unproven-secondary-cache; preserve-bounded-authoritative-history"
+    },
+    {
+      "ordinal": 284,
+      "revision": "7896bdd42cacc58ee2d4222e385212c0a6aaa5e2",
+      "date": "2025-12-02T11:06:57Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-heavy-state.ts"
+      ],
+      "finding": "Deletes the preceding selected heavy-state registry file. The historical Phase 3 experiment is withdrawn immediately; do not port it as the current architecture.",
+      "fleetpane_action": "do-not-recreate-withdrawn-heavy-state-cache"
+    },
+    {
+      "ordinal": 285,
+      "revision": "6615b23c8b6ded49ca46c4745dff4d9dc54aa898",
+      "date": "2025-12-02T11:25:18Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/babel.config.js"
+      ],
+      "finding": "Enables import.meta transform for all Expo platforms to support Zustand dependencies. Rust build/toolchain remains independent.",
+      "fleetpane_action": "not-a-Rust-product-feature"
+    },
+    {
+      "ordinal": 286,
+      "revision": "32e111e1bfdcca7cbb7b3b9f905a915367b33fd5",
+      "date": "2025-12-02T13:14:49Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Removes inferred running-agent focus and per-stream metadata timestamp updates. User focus becomes explicit; later activity changes must be read together.",
+      "fleetpane_action": "retain-explicit-focus-and-identity-fenced-actions"
+    },
+    {
+      "ordinal": 287,
+      "revision": "f5c6bce54f6cdd1b2c163c27397a1ea9c217c8da",
+      "date": "2025-12-02T14:08:56Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-store.ts"
+      ],
+      "finding": "Selected type/initialization/setter sections move state to Zustand, with individual setters retaining unchanged references and stream-state mutations replacing their server object. No full context audit or old application execution.",
+      "fleetpane_action": "native-sparse-item-projection; no-framework-port"
+    },
+    {
+      "ordinal": 288,
+      "revision": "8b87b0a4e2b0c78962bc9973fb131fbd5c7bda16",
+      "date": "2025-12-02T14:15:32Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Aggregation derives lightweight rows from session agent Maps instead of synchronizing a second directory slice. It still depends on all sessions; later shallow-selector work follows.",
+      "fleetpane_action": "preserve-one-authoritative-projection; targeted-invalidation"
+    },
+    {
+      "ordinal": 289,
+      "revision": "f5ec3bffb7f83defdf29ca771b4d33c12c10ff30",
+      "date": "2025-12-02T14:16:50Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Stream events update lastActivityAt in the agent Map again. Activity time is not the same as draft edit time or task completion.",
+      "fleetpane_action": "retain-provider-observed-activity-semantics"
+    },
+    {
+      "ordinal": 290,
+      "revision": "e8aa08159af09f7567730902e080b61d68baf653",
+      "date": "2025-12-02T14:27:57Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-daemon-session.ts"
+      ],
+      "finding": "Selected helper sections combine requested server state with imperative context APIs and bind actions. This hybrid is later removed; whole-server selection still causes redundant notifications.",
+      "fleetpane_action": "keep-local-Host-view-entities-and-shared-typed-engine"
+    },
+    {
+      "ordinal": 291,
+      "revision": "473e11d25fe050c8b79ba90427fe5979cd878ead",
+      "date": "2025-12-02T17:17:54Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Send/Stop/queue callbacks read the current agentId reference to avoid stale closures. References alone do not bind an already-dispatched operation to its original source.",
+      "fleetpane_action": "retain-captured-command-identity-and-receipts"
+    },
+    {
+      "ordinal": 292,
+      "revision": "5ddaea73528d309ce38979239fdaef0bd3fbb33c",
+      "date": "2025-12-02T17:42:49Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-daemon-session.ts"
+      ],
+      "finding": "Selected helper sections remove context mixing, bind stable server-specific actions and memoize the combined value before conditional returns. This is an intermediate compatibility helper.",
+      "fleetpane_action": "preserve-native-exact-source-and-explicit-errors"
+    },
+    {
+      "ordinal": 293,
+      "revision": "348cb9d6377e39bf67e76b9e79adc7f9769e6e3a",
+      "date": "2025-12-03T02:45:16Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "finding": "Home separates initial empty loading from revalidation while retaining rows. WebSocket logging emits type/message/stack summaries instead of entire payloads. Other changed paths excluded.",
+      "fleetpane_action": "keep-retained-stale-state-and-explicit-diagnostics"
+    },
+    {
+      "ordinal": 294,
+      "revision": "e346b4c026d9dd84eef05d9e19e1a168ad833ad7",
+      "date": "2025-12-03T02:57:38Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Adds explicit RefreshControl props to the virtualized agent list. Native refresh controls already expose observational reload; no mobile gestures ported.",
+      "fleetpane_action": "retain-explicit-refresh-without-takeover"
+    },
+    {
+      "ordinal": 295,
+      "revision": "43d2794e2d267aa1310339dac52c9ce6de25a48c",
+      "date": "2025-12-03T12:43:41+07:00",
+      "category": "documentation",
+      "inspection": "metadata-only",
+      "paths_inspected": [],
+      "finding": "Commit metadata/stat deletes plan.md. Removed plan contents and historical instructions were not read.",
+      "fleetpane_action": "metadata-only-document-removal"
+    },
+    {
+      "ordinal": 296,
+      "revision": "f4f7790d07caeb5de0dce656946d1262f6ea55c4",
+      "date": "2025-12-03T13:26:28+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Terminal initialization retains its Promise and error, waits before command enumeration and reports failed initialization. It still falls back to empty commands after some errors.",
+      "fleetpane_action": "retain-fault-domains-and-explicit-terminal-errors"
+    },
+    {
+      "ordinal": 297,
+      "revision": "d5f8091d660bd3cb80ccde2807df9e3961dbeb3e",
+      "date": "2025-12-03T14:09:56+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "finding": "Lazy modal wrapper mounts on demand and unmounts after close. Selected worktree diff sets GIT_OPTIONAL_LOCKS=0 for read-only repository detection.",
+      "fleetpane_action": "keep-on-demand-native-views-and-read-only-Git-observation"
+    },
+    {
+      "ordinal": 298,
+      "revision": "74c82a312eb7a233f2fabe4154a6133db0d062dd",
+      "date": "2025-12-03T15:46:45+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-store.ts"
+      ],
+      "finding": "Drafts move outside sessions to prevent stream subscribers updating on each keystroke. Historical draft keys drop server identity on a global-UUID assumption. Fleetpane retains endpoint/thread identities.",
+      "fleetpane_action": "preserve-independent-durable-drafts-and-cross-Host-isolation"
+    },
+    {
+      "ordinal": 299,
+      "revision": "21d43bc249c658efeddcc33a8c514275d2aa920f",
+      "date": "2025-12-03T16:37:23+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Selected input sections and stream-view diff replace broad daemon-session subscription with per-agent/stream/method selectors and stable empty arrays. Does not establish the commit-message render-count claims.",
+      "fleetpane_action": "implement-sparse-native-content-projection-and-retain-draft-entities"
+    },
+    {
+      "ordinal": 300,
+      "revision": "4c1ba8f1b16c6712341e72aded23d65d0f745e6f",
+      "date": "2025-12-03T17:33:23+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-status-bar.tsx"
+      ],
+      "finding": "Removes investigation comments and status render counters from read files. No functional or performance acceptance inferred from removing diagnostics.",
+      "fleetpane_action": "do-not-claim-unmeasured-speedup"
+    },
+    {
+      "ordinal": 301,
+      "revision": "644c654274d64c0a4d00c1b29840de395a390743",
+      "date": "2025-12-03T17:34:07+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/stores/session-store.ts"
+      ],
+      "finding": "Moves activity timestamps to a top-level slice and skips identical timestamps, avoiding server-object changes for every stream event. Selected store retains agent-only keys.",
+      "fleetpane_action": "keep-observational-activity-and-exact-source; no-ID-globality-assumption"
+    },
+    {
+      "ordinal": 302,
+      "revision": "2699e198d6a731898fcf0e7fc4dc15c84a4b1cd7",
+      "date": "2025-12-03T19:14:37+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Screen-open initialization fetches timeline once for its agent instead of trusting cached stream presence. Initializing state and request dispatch are distinct; no complete snapshot migration inferred.",
+      "fleetpane_action": "retain-bounded-fresh-history-read-and-sequence-reconciliation"
+    },
+    {
+      "ordinal": 303,
+      "revision": "b7eed8409b88e38f314ef7fe5a26e92c250886aa",
+      "date": "2025-12-03T20:02:51+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Fire-and-forget interrupt/event forwarding adds logging catches. This does not prove settlement of a turn after forwarding fails. Claude remains outside the requested provider work.",
+      "fleetpane_action": "retain-owned-task-errors-and-provider-authoritative-settlement"
+    },
+    {
+      "ordinal": 304,
+      "revision": "7b649eb77f3a8dfea92e13c9f96ca40612b76c95",
+      "date": "2025-12-03T20:03:38+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Manager temporarily centralizes supported mode validation for create/resume/setMode from provider constant sets. Next commit moves it back to the provider.",
+      "fleetpane_action": "retain-advertised-provider-capabilities; no-universal-mode-enum"
+    },
+    {
+      "ordinal": 305,
+      "revision": "56e2af2308e84b1020f28ef638491045ad7627ad",
+      "date": "2025-12-03T20:17:25+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Codex validates configured modes in its constructor and setter; provider owns supported modes. Historical fixed constants are not current app-server/ACP capability discovery.",
+      "fleetpane_action": "keep-provider-advertised-ACP-mode-validation"
+    },
+    {
+      "ordinal": 306,
+      "revision": "5f645d6b7a5ef0270bef98cfae7f1eeabe563f45",
+      "date": "2025-12-03T20:47:10+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Shallow selectors extract agent Maps and methods instead of the entire sessions object. Prevent unrelated stream/draft data from invalidating directories.",
+      "fleetpane_action": "keep-metadata-directory-independent-from-selected-content"
+    },
+    {
+      "ordinal": 307,
+      "revision": "9aacc26eb6bea6fda5d5d48a59976adf2e200182",
+      "date": "2025-12-03T20:53:01+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "Adds bounded wait timeout and cleans listeners while the agent continues. Historical timeout returns snapshot lifecycle or guessed idle; Fleetpane existing exact-turn wait reports timed_out/unknown explicitly.",
+      "fleetpane_action": "keep-existing-read-only-exact-turn-wait; no-implicit-cancel"
     }
   ],
   "workflow_status": {
@@ -3962,7 +4440,8 @@
     "automatic-read-recovery": "partial; Linux native same-Host original-cursor replay, draft editing/copy, minimize/reactivate, protocol framing refusal, identity revocation, competing lease and pending ACP preservation covered with owned synthetic providers. Cursor expiry stays explicit; no automatic writes, context resume, remote or OS suspend acceptance.",
     "loaded-activity-order": "partial; shared loaded-row projection, exact provider time semantics, stale-last ordering and Linux native source/paging/draft/replacement verified locally. Full-index/realtime activity, keyboard directory navigation and accessibility remain open.",
     "tool-failure-presentation": "partial; known ACP failed status now uses the same native danger presentation as Codex/MCP; pre-fix regression, 224-byte exact source Copy and retained 51-byte draft/replacement verified locally with owned ACP fixture. Unknown status/output remains preserved. No external-model or non-Linux native acceptance.",
-    "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open."
+    "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open.",
+    "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

@@ -1,0 +1,65 @@
+{
+  "base_head": "0668fb4b1d985602b26b7e97b31f7d70f943fa49",
+  "source_sha256": {
+    "apps/desktop/src/conversation_item.rs": "fbf02aafc0791d07e0019a36a3d2d3d345bd38a27b668eb0ff0b1132d22e1aba",
+    "apps/desktop/src/host_view.rs": "dab286ba04d7fb19ff3f01a156fad30537cfd0d083dcfdbbc3700c86003b8271",
+    "apps/desktop/src/host_view/row_changes.rs": "2ea8bf5b7b1e779f8df4c8f7679e52f97c69280f427b9e0c24317e8347105015"
+  },
+  "binary_sha256": {
+    "desktop": "36e2193a564ad844946897a0cb990c023ceaf6a3fec5fcd0b398b1ac46b0735f",
+    "host": "5c219e147225190f0c3da66186d616003b83061ffe5dc093c093f10ea22ae556"
+  },
+  "artifact_sha256": {
+    "12-reasoning-expanded.png": "3388c94258187fe894ac5ae9c51a1fdf3ee8de6bc9b8579784aa02012d6e3250",
+    "13-reasoning-full.png": "eba3eabb267a102945582aeb0358d8b316cbaa605631dd7107cdbd50c500af5d",
+    "17-acp-updated.png": "95f7b5089714c198b0d37a5fa3f2c81b10f304a0b2482037e65375b85fa5a918",
+    "18-acp-progress.png": "b947bacdc010113986a9a526b2db38fc8fde0a1adb86d568aea19cf3f8c648ba",
+    "20-acp-completed.png": "f4d0a4f3b3e0465c77a673282d4428b7ed3557f7bd29ffa64f6f81a5b1a42815",
+    "22-acp-failed.png": "e22af38c6a425b68954fe0d3d4d346b8fb0b160a9277b3a7f0c4aec89400b1ce",
+    "23-codex-return.png": "b8635f6aa5d3d4c1b4361fcde7b808db3d03b86518a00cce2a9172dd0c9a458d",
+    "24-small.png": "f3125d90812382457ce0e5776680a65b3aa84ea96a455eac82a560c0fc65aa66",
+    "28-reopened-ready.png": "2e5162d18ff497aa6efaaf0de1a15401c66603d7362a8bb25397ed0c57fd0f46",
+    "34-acp-small-reopened.png": "45668a8d497b2dff882b9852c7f198b000a61db24489e72d9b698e4cfeec0805",
+    "acp-final-snapshot.json": "08fcf64fa3e79eaf287fe26cf8add238567bbe6a4fed0f3ed03f62a14d37bd0d",
+    "acp.log": "02085376330ba97b7413ea29939f37b378335c83b07dce7e031963da1da71ea8",
+    "before.log": "7bd626879b0168fe7156078f1818417dc1ba1d8e3ff7933d73dccb1b1f56fd35",
+    "build.log": "de08bc97ed35d326a7100d830a96a893a545f451a4d66ffa972352b74ca80ed1",
+    "cleanup.json": "7ba660a682804fb024114f4b566067646f92cedc78d867c68e81646171679b1f",
+    "clipboard-readback.json": "c39dca4788736330cf780542394ed0fdca9fd6e6721b4f545912e95cde54af29",
+    "clippy.log": "de128677125a050b6e703927d2a5c795e63a0872e7ab0719a882b64cb70f4b14",
+    "codex-final-snapshot.json": "15ddd162e4b036f0b2e40fa79624f62e4528eadec191aae05d3defc1246c1993",
+    "fixture-history.json": "59bab1295544621fa5e701b8f8dd7a86dfd0156a60c28e8e327330d39bdb150a",
+    "history.log": "8adf99c475b774eed3e3e867d92711ad0bb354cc02df63ec8cc0beafa6ee3f96",
+    "python.log": "abe04e3ead9f92d14b66bedd1cc692f53c8173952bd286de3d15ee97dfddee4c",
+    "tests.log": "fdb37b4f3b0e211d7f61ad16597212c71d1ee5330b497dc150c4ff2408c9873f"
+  },
+  "negative_control": "item invalidations use legacy All policy; not an unchanged-parent test",
+  "native_scope": "owned synthetic Codex-shaped and ACP providers; no external model or user runtime",
+  "native_clipboard_bytes": {
+    "reasoning": 141,
+    "intermediate_tool": 598,
+    "final_tool": 283,
+    "failed_tool": 224,
+    "codex_draft": 48,
+    "acp_draft": 35,
+    "retained_command": 179
+  },
+  "parent_ci": {
+    "head": "0668fb4b1d985602b26b7e97b31f7d70f943fa49",
+    "run": 39646024228,
+    "conclusion": "success",
+    "not_candidate_acceptance": true
+  },
+  "cleanup": {
+    "owned_pids": [
+      1505122,
+      1505139,
+      1505150,
+      1505156,
+      1510627,
+      1587728,
+      1502074
+    ],
+    "still_alive": []
+  }
+}

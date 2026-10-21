@@ -111,6 +111,10 @@ impl Row {
         }
     }
 
+    pub fn item_key(thread_id: &str, turn_id: &str, item_id: &str) -> String {
+        row_key(&["item", thread_id, turn_id, item_id])
+    }
+
     pub fn item(thread_id: &str, turn_id: &str, item: &Item) -> Option<Self> {
         let content = item.content();
         if matches!(content, Ok(None)) {
@@ -146,7 +150,7 @@ impl Row {
             label
         };
         Some(Self {
-            id: row_key(&["item", thread_id, turn_id, &item.id]),
+            id: Self::item_key(thread_id, turn_id, &item.id),
             label,
             content,
             copy,

@@ -1,0 +1,22 @@
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 7.86s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-2b4a416202786742)
+
+running 1 test
+test host_view::row_changes::tests::streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items ... FAILED
+
+failures:
+
+---- host_view::row_changes::tests::streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items stdout ----
+
+thread 'host_view::row_changes::tests::streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items' (1526763) panicked at src/host_view/row_changes.rs:352:18:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    host_view::row_changes::tests::streaming_projects_only_the_target_once_per_poll_without_serializing_399_other_items
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--bin fleetpane-desktop`
