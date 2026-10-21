@@ -5,6 +5,7 @@ use std::collections::BTreeSet;
 
 pub const PAGE_SIZE: usize = 100;
 pub const MAX_THREADS: usize = 5_000;
+pub const MAX_WORKSPACE_SUGGESTIONS: usize = 24;
 const MAX_BYTES: usize = 8 * 1024 * 1024;
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
@@ -76,11 +77,40 @@ pub struct Directory {
     seen_cursors: BTreeSet<String>,
 }
 
+/// Exact cwd values from this directory's loaded metadata, in provider order.
+/// The title/workspace/archive filters and paging still apply. These are
+/// suggestions, not filesystem observations or registered workspace identities.
+#[derive(Debug)]
+pub struct WorkspaceSuggestions<'a> {
+    pub paths: Vec<&'a str>,
+    pub total: usize,
+}
+
 #[derive(Debug, thiserror::Error)]
 #[error("session directory: {0}")]
 pub struct Error(pub String);
 
 impl Directory {
+    pub fn workspace_suggestions(&self) -> Result<WorkspaceSuggestions<'_>, Error> {
+        let mut seen = BTreeSet::new();
+        let mut paths = Vec::new();
+        for thread in &self.threads {
+            if !std::path::Path::new(&thread.cwd).is_absolute() {
+                return Err(Error(format!(
+                    "Session {} reports a non-absolute workspace directory.",
+                    thread.id
+                )));
+            }
+            if seen.insert(thread.cwd.as_str()) && paths.len() < MAX_WORKSPACE_SUGGESTIONS {
+                paths.push(thread.cwd.as_str());
+            }
+        }
+        Ok(WorkspaceSuggestions {
+            paths,
+            total: seen.len(),
+        })
+    }
+
     pub fn refresh(&self) -> PageRequest {
         PageRequest {
             query: self.query.clone(),
@@ -183,6 +213,69 @@ mod tests {
             data: ids.iter().map(|id| thread(id)).collect(),
             next_cursor: next.map(str::to_owned),
         }
+    }
+
+    #[test]
+    fn workspace_suggestions_preserve_exact_paths_provider_order_and_page_scope() {
+        let first_path = std::env::temp_dir()
+            .join("中文 folder\ntrailing ")
+            .display()
+            .to_string();
+        let second_path = std::env::temp_dir().join("other").display().to_string();
+        let mut first = page(&["a", "b", "c"], Some("next"));
+        first.data[0].cwd = first_path.clone();
+        first.data[1].cwd = second_path.clone();
+        first.data[2].cwd = first_path.clone();
+        let mut directory = Directory::default();
+        directory.apply(&PageRequest::default(), first).unwrap();
+        let suggestions = directory.workspace_suggestions().unwrap();
+        assert_eq!(
+            suggestions.paths,
+            [first_path.as_str(), second_path.as_str()]
+        );
+        assert_eq!(suggestions.total, 2);
+        let request = PageRequest {
+            query: Query {
+                search: Some("filtered".into()),
+                archived: true,
+                ..Query::default()
+            },
+            cursor: None,
+        };
+        let mut filtered = page(&["only"], None);
+        filtered.data[0].cwd = second_path;
+        let only = filtered.data[0].cwd.clone();
+        directory.apply(&request, filtered).unwrap();
+        assert_eq!(
+            directory.workspace_suggestions().unwrap().paths,
+            [only.as_str()]
+        );
+        assert_eq!(directory.query, request.query);
+    }
+
+    #[test]
+    fn workspace_suggestions_bound_menu_and_refuse_malformed_metadata() {
+        let mut directory = Directory::default();
+        for index in 0..MAX_WORKSPACE_SUGGESTIONS + 7 {
+            let mut row = thread(&index.to_string());
+            row.cwd = std::env::temp_dir()
+                .join(format!("folder-{index}"))
+                .display()
+                .to_string();
+            directory.threads.push(row);
+        }
+        let suggestions = directory.workspace_suggestions().unwrap();
+        assert_eq!(suggestions.paths.len(), MAX_WORKSPACE_SUGGESTIONS);
+        assert_eq!(suggestions.total, MAX_WORKSPACE_SUGGESTIONS + 7);
+        directory.threads.last_mut().unwrap().cwd = "relative".into();
+        assert!(
+            directory
+                .workspace_suggestions()
+                .unwrap_err()
+                .to_string()
+                .contains("non-absolute")
+        );
+        assert_eq!(directory.threads.last().unwrap().cwd, "relative");
     }
 
     #[test]

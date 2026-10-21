@@ -230,3 +230,11 @@ readback, 237-row paging, offline labels and minimum size have
 [separate evidence](verification/2026-10-22-activity-order.md).
 This is ordering over loaded rows; full-index activity and realtime subscriptions
 remain open, together with directory keyboard navigation and accessibility.
+
+Loaded-session cwd suggestions (2026-10-22): selected-Host, current-filter/page
+scope, exact path deduplication and bounded native menu now complement persistent
+recents. Non-Git creation, exact path/draft copy, another Host and window replacement
+have [separate acceptance](verification/2026-10-22-loaded-directories.md).
+Scoped historical inspection reaches ordinal 402 (`9318048f5`); MCP automation
+and injection remain open. Native Markdown selection already exists in Kit and
+was observed without modifying the renderer.

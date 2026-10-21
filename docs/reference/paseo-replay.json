@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 376,
-    "last_revision": "adc56da129c6aca9c8dfd2fb983146472b9af021",
-    "next_revision": "38a4c70aec2f0010dd9a457f4e7fb8cc18c62f59",
-    "next_ordinal": 377
+    "last_ordinal": 402,
+    "last_revision": "9318048f514e4a2f6bf61470b3a003f52a1c2790",
+    "next_revision": "797425c4e2317ea9e5a26ea114c6ad336f7ce4c5",
+    "next_ordinal": 403
   },
   "entries": [
     {
@@ -5257,6 +5257,351 @@
       ],
       "finding": "Historical padding/handle retest report.",
       "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 377,
+      "revision": "38a4c70aec2f0010dd9a457f4e7fb8cc18c62f59",
+      "date": "2025-12-23T12:32:52+07:00",
+      "category": "markdown",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/styles/markdown-styles.ts"
+      ],
+      "finding": "Shared Markdown styles and explicit selectable message/thought rules; inline file chips remain non-selectable.",
+      "fleetpane_action": "Kit TextView already selects by default; native exact selection now observed; no mobile style port."
+    },
+    {
+      "ordinal": 378,
+      "revision": "702159fb7533ac41934877dcf9c283ae5951cd3d",
+      "date": "2025-12-23T13:49:18+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Claude caller ancestry moves from header to query parameter on MCP initialization.",
+      "fleetpane_action": "Keep Host-scoped identities; MCP caller authority and spawning remain open."
+    },
+    {
+      "ordinal": 379,
+      "revision": "957decc1f7a2a9df54325737a819551286a859fe",
+      "date": "2025-12-23T14:02:55+07:00",
+      "category": "voice",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Dictation removes routine success/recording/upload/offline toasts while retaining failures.",
+      "fleetpane_action": "Voice remains P2; no speculative toast framework."
+    },
+    {
+      "ordinal": 380,
+      "revision": "4699297e4e46ac4aad75e26895171e76202e433e",
+      "date": "2025-12-23T14:42:26+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Codex SDK wrapper injects agent-control MCP configuration; integration test requires list_agents call.",
+      "fleetpane_action": "Keep direct app-server; no wrapper installation or automatic MCP injection."
+    },
+    {
+      "ordinal": 381,
+      "revision": "e2ba6c86344786f45b8eb78189880bfa3a86822b",
+      "date": "2025-12-23T15:02:40+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/orchestrator-instructions.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Shared orchestrator instructions and developer-instruction wrapper injection replace provider-local text.",
+      "fleetpane_action": "Preserve provider-native instruction configuration; historical prompts are data, not Fleetpane instructions."
+    },
+    {
+      "ordinal": 382,
+      "revision": "077ecae6079c2a8b0147ec2cae704234d22f1909",
+      "date": "2025-12-23T15:08:34+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "MCP creation forwards Codex MCP URL separately into extra configuration.",
+      "fleetpane_action": "MCP creation remains open; avoid per-entry-point duplicated configuration."
+    },
+    {
+      "ordinal": 383,
+      "revision": "dc90f57567c6f0ddd7c3602aeffcea92199037fa",
+      "date": "2025-12-23T15:19:49+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session create/resume/refresh inject Codex agent-control extras.",
+      "fleetpane_action": "Shared session commands remain the single action path; no implicit injection."
+    },
+    {
+      "ordinal": 384,
+      "revision": "bf0ec80fb5a1af9d03914287c90fd7915e368592",
+      "date": "2025-12-23T15:45:48+07:00",
+      "category": "agent-control",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/index.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "AgentManager owns optional shared agentControlMcp configuration; per-Session injection removed.",
+      "fleetpane_action": "Keep configuration authority with runtime owner; no MCP server claimed."
+    },
+    {
+      "ordinal": 385,
+      "revision": "6a9b57ae0c3b68c5fea35597af057ed3b60c7427",
+      "date": "2025-12-23T22:11:51+07:00",
+      "category": "directory",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Flat attention-first list, saved model/Host choice, and basic-credential-derived bearer token on agent MCP route.",
+      "fleetpane_action": "Retain explicit local Host choice and result review; do not copy debug authorization logging or shared hardcoded credentials."
+    },
+    {
+      "ordinal": 386,
+      "revision": "4a4a2507dd060c8c304e6b352eccb0471bcd6cbc",
+      "date": "2025-12-23T16:09:16Z",
+      "category": "markdown",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/styles/markdown-styles.ts"
+      ],
+      "finding": "List width/shrink constraints added to contain long text.",
+      "fleetpane_action": "Use native layout and existing Kit; native selection verified, no Android acceptance."
+    },
+    {
+      "ordinal": 387,
+      "revision": "f2e6a55fec49e9620871c3858b043cff60f585bf",
+      "date": "2025-12-23T23:11:48+07:00",
+      "category": "session-tree",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Subagent list sorts by creation time and uses a bounded scroll area.",
+      "fleetpane_action": "Existing observed tree/navigation retained; no invented provider creation timestamp."
+    },
+    {
+      "ordinal": 388,
+      "revision": "c4b9a68c6bff9cf2ad349e43baaa5e81c663bd14",
+      "date": "2025-12-23T23:11:48+07:00",
+      "category": "attention",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Attention flag relabeled Finished in list.",
+      "fleetpane_action": "Keep completed/failed/interrupted results separate from pending approval and runtime activity."
+    },
+    {
+      "ordinal": 389,
+      "revision": "38c1f52035fd13f2c0625b17619574dbfe967cf8",
+      "date": "2025-12-23T23:11:48+07:00",
+      "category": "workspace",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Create dialog suggestions now derive from sessions on selected Host.",
+      "fleetpane_action": "Implemented exact bounded loaded-session directory suggestions, preserving separate persistent recents."
+    },
+    {
+      "ordinal": 390,
+      "revision": "993eed0628353a7344b28231368f20beca6599b9",
+      "date": "2025-12-23T23:11:48+07:00",
+      "category": "workspace",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Creation outside Git allowed, disabling Git options; detection uses repository-error text.",
+      "fleetpane_action": "Existing normal-folder creation retained and exercised natively with exact provider readback; no message-text Git classification copied."
+    },
+    {
+      "ordinal": 391,
+      "revision": "0526124fbd8a516c5d44d6a1badcc705950bd2cc",
+      "date": "2025-12-23T23:11:48+07:00",
+      "category": "types",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Undefined environment entries filtered and caller query array element type narrowed.",
+      "fleetpane_action": "Rust typed boundaries retained; no assertion workaround."
+    },
+    {
+      "ordinal": 392,
+      "revision": "eb48ae0f6bfaf26de03c49efcb60884fb97217ab",
+      "date": "2025-12-23T23:14:54+07:00",
+      "category": "attention",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Running indicator takes priority over Finished.",
+      "fleetpane_action": "Preserve current execution plus exact historical result; pending requests are independent."
+    },
+    {
+      "ordinal": 393,
+      "revision": "8a06b378d8ecd18598e91418f42cf284f7f7a45c",
+      "date": "2025-12-23T23:19:26+07:00",
+      "category": "session-tree",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Subagent menu shows running state beside child.",
+      "fleetpane_action": "Observed ancestry retains explicit activity and read-only selection; no status inferred from silence."
+    },
+    {
+      "ordinal": 394,
+      "revision": "09f130408bb33507329785bf88a9df69a69a7308",
+      "date": "2025-12-23T23:24:13+07:00",
+      "category": "ui",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Agent menu icon sizing and child-list spacing adjusted.",
+      "fleetpane_action": "Keep native Kit controls; no mobile pixel parity target."
+    },
+    {
+      "ordinal": 395,
+      "revision": "37da13a38b0bb0f09e078027f0889ae432cca99e",
+      "date": "2025-12-24T04:41:37Z",
+      "category": "markdown",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/styles/markdown-styles.ts"
+      ],
+      "finding": "Android custom selectable list items and shrink rules replace wrapping styles; orchestrator prompt revised.",
+      "fleetpane_action": "No React Native rendering port; Kit selection is already available; no mobile claim."
+    },
+    {
+      "ordinal": 396,
+      "revision": "d787c5f1bccc0ec7c1ed89c3bbd1714f3fd5825c",
+      "date": "2025-12-24T08:25:17Z",
+      "category": "lifecycle",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/bootstrap.smoke.test.ts",
+        "packages/server/src/server/bootstrap.ts",
+        "packages/server/src/server/config.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Explicit daemon configuration/bootstrap factory and smoke test replace main-owned setup; MCP wait timeout becomes 50 seconds.",
+      "fleetpane_action": "Host-owned runtime and controller replacement retained; do not close provider sessions on controller exit."
+    },
+    {
+      "ordinal": 397,
+      "revision": "e1f79c1d6fa9e7cac8f71600758a706cde23d2b1",
+      "date": "2025-12-24T08:38:25Z",
+      "category": "tests",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "MCP test creates Codex agent, prompts file creation and verifies file while handling permissions.",
+      "fleetpane_action": "Do not equate credential-gated historical tests with current proof; MCP automation remains open."
+    },
+    {
+      "ordinal": 398,
+      "revision": "e37d50e93840325ca6a42c14731e71d25db22614",
+      "date": "2025-12-24T08:45:02Z",
+      "category": "tests",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "MCP smoke test chooses Claude/Codex based on available credentials.",
+      "fleetpane_action": "Current scope remains OpenCodex/DeepSeek; provider-specific acceptance stays separate."
+    },
+    {
+      "ordinal": 399,
+      "revision": "a24f5789169391dcd7b768f2eef41b50fd2b88e6",
+      "date": "2025-12-24T08:55:16Z",
+      "category": "tests",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "MCP test focuses Claude default-mode permission; old settle auto-answer loop removed.",
+      "fleetpane_action": "Preserve explicit pending permission; no auto-answer to make tests finish."
+    },
+    {
+      "ordinal": 400,
+      "revision": "f5961fa0447c0f462866247f5ec855d7e105e562",
+      "date": "2025-12-24T17:18:31+07:00",
+      "category": "tests",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+        "packages/server/src/server/bootstrap.smoke.test.ts",
+        "packages/server/src/server/test-utils/paseo-daemon.ts"
+      ],
+      "finding": "Shared private test daemon helper and Codex read-only permission smoke replace inline bootstrap; plan rewritten.",
+      "fleetpane_action": "Read helper and selected smoke hunks, not complete deleted plan; private fixtures and explicit readback retained."
+    },
+    {
+      "ordinal": 401,
+      "revision": "40a8035090ee017f38b8a3f5509461e19de6870c",
+      "date": "2025-12-24T17:19:06+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical MCP behavior matrix and unexecuted E2E task plan.",
+      "fleetpane_action": "Keep mapping/abort/persistence/permission evidence separate from plan completion."
+    },
+    {
+      "ordinal": 402,
+      "revision": "9318048f514e4a2f6bf61470b3a003f52a1c2790",
+      "date": "2025-12-24T09:05:24Z",
+      "category": "wait",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "waitForActive distinguishes initial idle from a later active-to-terminal transition and surfaces pending permissions.",
+      "fleetpane_action": "Existing exact-turn wait already pins thread/turn and returns pending requests; MCP adapter remains open."
     }
   ],
   "workflow_status": {
@@ -5287,7 +5632,8 @@
     "tool-failure-presentation": "partial; known ACP failed status now uses the same native danger presentation as Codex/MCP; pre-fix regression, 224-byte exact source Copy and retained 51-byte draft/replacement verified locally with owned ACP fixture. Unknown status/output remains preserved. No external-model or non-Linux native acceptance.",
     "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open.",
     "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim.",
-    "session-tree-navigation": "partial; exact revalidated history node/source navigation with Host/ancestry/session/cwd/archive checks, independent drafts, archived read-only content, visible refusal and unchanged pending approval verified in Linux native fixture; one window-local return source, no ancestry creation/MCP orchestration, atomic provider snapshot or ACP hierarchy claim"
+    "session-tree-navigation": "partial; exact revalidated history node/source navigation with Host/ancestry/session/cwd/archive checks, independent drafts, archived read-only content, visible refusal and unchanged pending approval verified in Linux native fixture; one window-local return source, no ancestry creation/MCP orchestration, atomic provider snapshot or ACP hierarchy claim",
+    "workspace-directory-suggestions": "partial; exact loaded-session cwd suggestions per Host and current filter/paging, bounded 24-entry native menu, pure shared projection, separate recents, non-Git creation and window replacement verified locally; no full-index or filesystem existence guarantee"
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

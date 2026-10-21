@@ -800,6 +800,7 @@ impl HostView {
             Command::List(request) => {
                 let page: Page = serde_json::from_value(completed.result)?;
                 self.directory.apply(request, page)?;
+                self.update_session_directories();
                 if self.thread.as_ref().is_some_and(|selected| {
                     self.directory
                         .threads
@@ -825,6 +826,7 @@ impl HostView {
                     self.directory
                         .threads
                         .retain(|thread| &thread.id != thread_id);
+                    self.update_session_directories();
                 }
             }
             Command::Rename { thread_id, name } => {
@@ -921,6 +923,7 @@ impl HostView {
                 {
                     *old = metadata;
                 }
+                self.update_session_directories();
                 let directory_open = matches!(command, Command::Inspect { resume: false, .. })
                     && self.directory_target.as_ref().is_some_and(|source| {
                         source.thread_id == thread.id

@@ -296,6 +296,12 @@ prefills the workspace input; **New session** remains an explicit action. Sugges
 persist across windows, support Reload/Forget and report save failures separately
 from a successful session creation. [Verification](docs/verification/2026-10-21-recent-directories.md).
 
+**Loaded session directories** also suggests up to 24 exact directories from the
+selected Host's currently loaded, filtered sessions. Choosing a path fills the
+input; **New session** creates it explicitly. The menu states its loaded-page
+scope and keeps persistent recents separate.
+[Verification](docs/verification/2026-10-22-loaded-directories.md).
+
 Tool permissions preview the operation carried by the request, including standalone
 requests without a prior tool event. Request details take precedence over an older
 tool card; raw input, content and file locations can be reviewed and the complete
