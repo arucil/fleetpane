@@ -1,0 +1,60 @@
+{
+  "response": "snapshot",
+  "data": {
+    "protocol": 3,
+    "host_id": "37dc100c-9a20-4270-9f4a-c44981b37292",
+    "host_pid": 2392886,
+    "provider_pid": 2392903,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "37dc100c-9a20-4270-9f4a-c44981b37292",
+      "controller_id": "044cb940-cbe3-4bc6-80ac-f5c5ae9d4b0c",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "79aa8e51-872f-426d-9b7c-ba5e84284b7b",
+      "0ef59603-18e1-4e68-8b05-41c160474907"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-2"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "approval-fixture-thread-1-turn-2",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-1-turn-2",
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-2"
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

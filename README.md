@@ -17,6 +17,14 @@ The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
 
+**MCP servers** exposes explicit Codex provider inventory discovery, paged server
+selection, auth/runtime values, tool discovery errors and complete loaded schema
+Copy. Discovery may start configured servers and requires control; it is never
+triggered by ordinary session reads. CLI:
+`fleetpane-host session SOCKET --take-control mcp [--cursor CURSOR]`.
+Inventory describes Host provider configuration; active conversation connections,
+config editing and OAuth are separate. [Verification](docs/verification/2026-10-22-mcp-discovery.md).
+
 **Hosts** checks each configured local endpoint without taking control. Cards
 show the last check time, protocol, process/controller identity, drain/fault state
 and activity counts, with **Check**, **Check all** and **Copy diagnostics**.
@@ -929,6 +937,8 @@ python3 scripts/runtime-smoke.py --codex --drain # optional; preserve a real com
 python3 scripts/session-smoke.py                 # Unix; synthetic conversation workflows
 python3 scripts/directory-smoke.py               # Unix; paged queries, renaming and failures
 python3 scripts/models-smoke.py                  # Unix; paged model capabilities and validated turn options
+python3 scripts/mcp-smoke.py                     # Unix; explicit journaled MCP discovery, paging and fencing
+python3 scripts/codex-mcp-smoke.py               # optional; installed Codex, synthetic local MCP, no model calls
 python3 scripts/history-smoke.py                 # Unix; large synthetic history and bounded item/turn pages
 python3 scripts/query-smoke.py                   # Unix; repeated reads, fencing and send deduplication
 python3 scripts/acp-smoke.py                     # Unix; ACP lifecycle, config, permissions, fencing and resume

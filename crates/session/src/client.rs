@@ -54,6 +54,9 @@ pub enum Command {
     Models {
         cursor: Option<String>,
     },
+    Mcp {
+        cursor: Option<String>,
+    },
     Rename {
         thread_id: String,
         name: String,
@@ -174,6 +177,10 @@ impl Command {
                     )
                 }
             }
+            Self::Mcp { cursor } => (
+                "mcpServerStatus/list",
+                crate::mcp::params(cursor).map_err(|error| Error::Input(error.to_string()))?,
+            ),
             Self::Models { cursor } => (
                 "model/list",
                 crate::models::params(cursor).map_err(|error| Error::Input(error.to_string()))?,
@@ -282,6 +289,16 @@ impl Command {
     }
 
     pub fn validate_completed(&self, completed: &Completed) -> Result<(), Error> {
+        if let Self::Mcp { cursor } = self {
+            let page: crate::mcp::Page = serde_json::from_value(completed.result.clone())
+                .map_err(|error| Error::Protocol(format!("invalid MCP catalog: {error}")))?;
+            if cursor.is_some() && page.next_cursor == *cursor {
+                return Err(Error::Protocol("MCP discovery repeated its cursor".into()));
+            }
+            crate::mcp::Catalog::default()
+                .apply(&None, page)
+                .map_err(|error| Error::Protocol(error.to_string()))?;
+        }
         if let Self::Fork { thread_id, cwd, .. } = self {
             let thread: crate::Thread = serde_json::from_value(
                 completed
@@ -1062,6 +1079,25 @@ mod tests {
         .rpc()
         .unwrap();
         assert_eq!(method, "model/list");
+        let (mcp_method, mcp_params) = Command::Mcp {
+            cursor: Some("opaque".into()),
+        }
+        .rpc()
+        .unwrap();
+        assert_eq!(mcp_method, "mcpServerStatus/list");
+        assert!(!fleetpane_runtime::is_query_method(mcp_method));
+        assert_eq!(
+            mcp_params,
+            json!({"limit":32,"cursor":"opaque","detail":"toolsAndAuthOnly"})
+        );
+        assert!(
+            !Command::Mcp { cursor: None }
+                .permitted_by(&fleetpane_runtime::lifecycle::Admission {
+                    mode: fleetpane_runtime::lifecycle::Mode::Draining,
+                    ..Default::default()
+                })
+                .unwrap()
+        );
         assert_eq!(
             params,
             json!({"limit":64,"cursor":"opaque","includeHidden":false})

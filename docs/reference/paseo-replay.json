@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 402,
-    "last_revision": "9318048f514e4a2f6bf61470b3a003f52a1c2790",
-    "next_revision": "797425c4e2317ea9e5a26ea114c6ad336f7ce4c5",
-    "next_ordinal": 403
+    "last_ordinal": 441,
+    "last_revision": "ff9b0e6d108896a40ba5380f2e4fab312e6421c0",
+    "next_revision": "a4ae93cef00cd2af2ccfaf8036306c1b5e3493eb",
+    "next_ordinal": 442
   },
   "entries": [
     {
@@ -5602,6 +5602,484 @@
       ],
       "finding": "waitForActive distinguishes initial idle from a later active-to-terminal transition and surfaces pending permissions.",
       "fleetpane_action": "Existing exact-turn wait already pins thread/turn and returns pending requests; MCP adapter remains open."
+    },
+    {
+      "ordinal": 403,
+      "revision": "797425c4e2317ea9e5a26ea114c6ad336f7ce4c5",
+      "date": "2025-12-24T17:21:26+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "Merge waitForActive through manager and MCP timeout wrapper; initial idle differs from a later busy-to-terminal transition.",
+      "fleetpane_action": "Retain exact-thread/turn waits; provider lifecycle idle alone cannot prove this request completed."
+    },
+    {
+      "ordinal": 404,
+      "revision": "4d75bd45e8ed2c2b3574ca2436c1d6db5fc4c065",
+      "date": "2025-12-24T17:28:11+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Integration assertions cover command IDs, reasoning and failed-turn error timeline; the temporary-session helper restores environment but does not establish an isolated provider home.",
+      "fleetpane_action": "Keep deterministic fixtures and explicit provider isolation; test presence is not a recorded pass."
+    },
+    {
+      "ordinal": 405,
+      "revision": "851c687b4fa43349eac36577575002e5ebfc8df4",
+      "date": "2025-12-24T17:31:47+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Persistence test resumes a conversation ID and in-memory history; the follow-up includes the token in its own prompt.",
+      "fleetpane_action": "Do not count this as cross-process persistence or evidence of retained model context."
+    },
+    {
+      "ordinal": 406,
+      "revision": "d04fbb981c0b9ddf3b0affaa820bcf5480025543",
+      "date": "2025-12-24T17:57:49+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Typed client surface and additional runtime/allow/deny/abort assertions; large historical test plan rewrite.",
+      "fleetpane_action": "Keep permission resolution, provider process exit and turn completion separate."
+    },
+    {
+      "ordinal": 407,
+      "revision": "19aaee9c26d62c08c8088653f5069c2d273dc62c",
+      "date": "2025-12-24T18:13:14+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/agent/provider-manifest.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Adds a second Codex provider via MCP stdio, provider manifest/model routing, in-memory history and long tool-call deadline; inspected selected provider setup/persistence hunks.",
+      "fleetpane_action": "Keep current app-server adapter instead of adding a historical transport. Add explicit bounded MCP configuration inventory through the shared command engine; orchestration remains open."
+    },
+    {
+      "ordinal": 408,
+      "revision": "460a2a583f8a79271be01038aa1b0487616c31b7",
+      "date": "2025-12-24T18:15:08+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical plan claims the MCP E2E suite passed.",
+      "fleetpane_action": "Not runtime acceptance; later failure reports must be retained."
+    },
+    {
+      "ordinal": 409,
+      "revision": "da2155e3be9020e950ae03fc378b3c9251917c57",
+      "date": "2025-12-24T18:18:30+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan review lists untested thread/item, permission, abort and environment setup gaps.",
+      "fleetpane_action": "Use concrete fixtures and evidence rather than checklist completion."
+    },
+    {
+      "ordinal": 410,
+      "revision": "f65a134ac0b20a46e38060f9e768f1c248496ea1",
+      "date": "2025-12-24T18:25:12+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Adds raw thread/item, file-change, MCP, web-search and todo coverage assertions.",
+      "fleetpane_action": "Preserve raw provider events and structured cards; external model tool choice is a separate acceptance dependency."
+    },
+    {
+      "ordinal": 411,
+      "revision": "16ccce42915e431d6230601a5c35b7c36c637456",
+      "date": "2025-12-24T18:31:05+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Adds read-only permission-order and permission-interrupt assertions using a safe pwd command.",
+      "fleetpane_action": "Do not infer provider policy violation from no prompt; verify requested operation and execution effects."
+    },
+    {
+      "ordinal": 412,
+      "revision": "b23f2c240486e168ba5f12a5ccca6ae01c3ac15e",
+      "date": "2025-12-24T18:35:58+07:00",
+      "category": "documentation",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "CODEX_MCP_MISMATCH_REPORT.md",
+        "plan.md"
+      ],
+      "finding": "Mismatch report records rejected model, missing elicitation and typecheck errors, qualifying earlier success claims.",
+      "fleetpane_action": "Preserve current installed-schema/provider evidence; historical diagnosis is not a verified root cause."
+    },
+    {
+      "ordinal": 413,
+      "revision": "bcd117270e09e0815ae90e947cd79d75a0b1fd0e",
+      "date": "2025-12-24T18:40:44+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Detects model rejection by error text then retries without the selected model and clears runtime model metadata.",
+      "fleetpane_action": "Do not silently change selected model or retry a user operation."
+    },
+    {
+      "ordinal": 414,
+      "revision": "5b971dba691d270ea41bc5334cf10425a5328cba",
+      "date": "2025-12-24T18:49:29+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Adds synthetic permission gating/no-op handlers and defers timeline emission.",
+      "fleetpane_action": "Do not simulate permission enforcement in presentation; original provider request must control execution."
+    },
+    {
+      "ordinal": 415,
+      "revision": "75c2a96068773ab3d981ece6025f83094245be07",
+      "date": "2025-12-24T18:53:59+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Real elicitation handling replaces pending synthetic handlers and deduplicates requests.",
+      "fleetpane_action": "Keep exact original provider request IDs and fenced responses."
+    },
+    {
+      "ordinal": 416,
+      "revision": "899dafff35ea03fda18d9d7dfe72de3ad27c3d01",
+      "date": "2025-12-24T18:58:49+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Hardcodes a Codex default model and updates test expectation.",
+      "fleetpane_action": "Keep provider-reported models and omit unset overrides; no historical default."
+    },
+    {
+      "ordinal": 417,
+      "revision": "457ea4325990d744a5dc7aca119523eaeef3674e",
+      "date": "2025-12-24T19:12:26+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Changes automatic approval policy to untrusted and updates tests while the plan still records failures.",
+      "fleetpane_action": "Use current provider policy contracts; do not treat a policy string as runtime approval proof."
+    },
+    {
+      "ordinal": 418,
+      "revision": "9f6c9f64e306f73726a2511b8f3c13d3fbdbfd11",
+      "date": "2025-12-24T19:14:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Removes the hardcoded default and omits unset model config/runtime placeholder.",
+      "fleetpane_action": "Existing session settings preserve unavailable versus provider-reported values."
+    },
+    {
+      "ordinal": 419,
+      "revision": "e7398b46a643d0ced63c4593eb583ff7d92e40a3",
+      "date": "2025-12-24T19:24:27+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan infers no elicitation from safe-command behavior; subsequent commits revise that conclusion.",
+      "fleetpane_action": "Do not adopt a historical unverified protocol diagnosis."
+    },
+    {
+      "ordinal": 420,
+      "revision": "29301ba4306e18419c48af2215e2ad1515396f94",
+      "date": "2025-12-24T19:25:20+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan requests an audit of model fallback and synthetic permission workarounds.",
+      "fleetpane_action": "Keep errors explicit rather than masking provider semantics."
+    },
+    {
+      "ordinal": 421,
+      "revision": "c1761a52f2d3e00c1690310bb931a67776a85ea2",
+      "date": "2025-12-24T19:28:02+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Fixes permission-response union access and unused locals while fallback code remains.",
+      "fleetpane_action": "Use typed protocol/domain boundaries; successful typechecking alone does not validate behavior."
+    },
+    {
+      "ordinal": 422,
+      "revision": "847a1a1485454d88677c0229018ae9dc8efc0769",
+      "date": "2025-12-24T19:33:08+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical plan records nine E2E failures.",
+      "fleetpane_action": "Retain failure provenance instead of promoting earlier plan completion to acceptance."
+    },
+    {
+      "ordinal": 423,
+      "revision": "c51eb759306858db2f79340ea70eafabb42ac25a",
+      "date": "2025-12-24T19:36:23+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Command mapping preserves empty output and exit-code metadata from object responses.",
+      "fleetpane_action": "Typed command output and outcome must remain distinct from overall turn success."
+    },
+    {
+      "ordinal": 424,
+      "revision": "383870687fc38ca6f6c54439893b1f7aed518f3c",
+      "date": "2025-12-24T19:41:14+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Unwraps eventdata and normalizes thread/item names for mapping.",
+      "fleetpane_action": "Keep raw event identity alongside typed current app-server projections."
+    },
+    {
+      "ordinal": 425,
+      "revision": "055a1bcefe53b9d0d3e108634e158b04c2eca5ea",
+      "date": "2025-12-24T19:43:05+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Adds failed-turn timeline error conditional on a shared error flag.",
+      "fleetpane_action": "A failed command must not suppress later turn failure; later 440 fixes that distinction."
+    },
+    {
+      "ordinal": 426,
+      "revision": "34d5b75428b2055f3ebc70803baac044309c7ca9",
+      "date": "2025-12-24T19:45:02+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Falls back from absent conversation ID to session ID in persistence metadata.",
+      "fleetpane_action": "Metadata alias alone is not proof of resumable provider context."
+    },
+    {
+      "ordinal": 427,
+      "revision": "f9af141d809186369effac5da757d0aef9d1f0d7",
+      "date": "2025-12-24T19:50:35+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical plan revises elicitation scope and discusses safe-command approval behavior.",
+      "fleetpane_action": "Current installed contract and real effects take precedence over historical assumptions."
+    },
+    {
+      "ordinal": 428,
+      "revision": "8489f35cddbc59dca215307d575c081d636e1dc6",
+      "date": "2025-12-24T19:56:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "SDK rollout hydration parses object or JSON command payload and retains exit metadata.",
+      "fleetpane_action": "Keep exact structured app-server history; avoid guessing missing command identity."
+    },
+    {
+      "ordinal": 429,
+      "revision": "43030b792cf7e6ce92a2b47d08211351b1ca503f",
+      "date": "2025-12-24T19:58:53+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Replaces pwd with date in permission prompts and revises the plan.",
+      "fleetpane_action": "Prompt changes are not proof that a command must require approval."
+    },
+    {
+      "ordinal": 430,
+      "revision": "fb1ebc4ee6980b029d307ff6c36a156f5b7a4ea8",
+      "date": "2025-12-24T20:02:45+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan records SDK failures and interrupted/hanging MCP test run.",
+      "fleetpane_action": "Interrupted run is not passing acceptance."
+    },
+    {
+      "ordinal": 431,
+      "revision": "b1523321f4880dd636e75aa742e405ed81f008b0",
+      "date": "2025-12-24T20:04:38+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan proposes parking MCP based on an SDK approval assumption later corrected.",
+      "fleetpane_action": "Keep present app-server architecture; do not inherit a superseded transport decision."
+    },
+    {
+      "ordinal": 432,
+      "revision": "6805b7f2a8fca04cb91672f41558c92679810584",
+      "date": "2025-12-24T20:06:30+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan separates SDK noninteractive behavior from requested permission tests and follow-up fixes.",
+      "fleetpane_action": "Scope acceptance to the actual transport and requested policy."
+    },
+    {
+      "ordinal": 433,
+      "revision": "d0736837ff4edf5b450b978bd5e20ac1d005af11",
+      "date": "2025-12-24T20:13:13+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "SDK hydration parses Exit code/stdout text and trims trailing whitespace; plan corrects earlier SDK execution assumption.",
+      "fleetpane_action": "Preserve exact structured output rather than text heuristics or whitespace loss."
+    },
+    {
+      "ordinal": 434,
+      "revision": "42ee87cf1591ffe7e5efb0321f428ef5d97d3ff9",
+      "date": "2025-12-24T20:17:52+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Abort test adds delayed interrupt; provider synthesizes terminal events before confirmed child termination.",
+      "fleetpane_action": "Retain Host-owned Stop gates; admission, interrupt reply and terminal/provider exit remain separate."
+    },
+    {
+      "ordinal": 435,
+      "revision": "cb607ecd1d68bff227cf88f7d4e62616998192cf",
+      "date": "2025-12-24T20:20:56+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Removes synthetic permission gating and queued tool-event helpers.",
+      "fleetpane_action": "Continue original provider request handling without fake permission UI enforcement."
+    },
+    {
+      "ordinal": 436,
+      "revision": "914ee6b39073bc4a32ffee7402397281f6220d87",
+      "date": "2025-12-24T20:25:33+07:00",
+      "category": "documentation",
+      "inspection": "historical-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan still records SDK failures and interrupted MCP suite.",
+      "fleetpane_action": "No historical runtime pass is claimed."
+    },
+    {
+      "ordinal": 437,
+      "revision": "c8f542fbe5a05b6e8285f3cbd2d5a46e2ef41f3a",
+      "date": "2025-12-24T20:31:48+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "SDK shell hydration adds custom-tool context, input/output extraction and status handling.",
+      "fleetpane_action": "Use typed current command results and retain unknown raw fields instead of assuming old rollout shapes."
+    },
+    {
+      "ordinal": 438,
+      "revision": "85af83203d1092bea99b53353634cc9f96ff53bb",
+      "date": "2025-12-24T20:33:53+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "MCP mapper accepts numeric strings through finite Number conversion for exit status.",
+      "fleetpane_action": "Keep typed integer exit status; do not silently coerce arbitrary provider values."
+    },
+    {
+      "ordinal": 439,
+      "revision": "3652f08e3d4ede0b6f529baf6c6dcce5ecf42b75",
+      "date": "2025-12-24T20:38:23+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Normalizes raw provider thread/item names before downstream event tests.",
+      "fleetpane_action": "Preserve source identity; normalized payload is not original wire evidence."
+    },
+    {
+      "ordinal": 440,
+      "revision": "a6300d358cf2cdee1c7f65a2ab4a31c5b621a8fb",
+      "date": "2025-12-24T20:41:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Separates errorTimelineEmitted from sawError so terminal turn failures remain visible after other errors.",
+      "fleetpane_action": "Existing command failure and terminal-turn result projections retain their separate outcomes."
+    },
+    {
+      "ordinal": 441,
+      "revision": "ff9b0e6d108896a40ba5380f2e4fab312e6421c0",
+      "date": "2025-12-24T20:58:28+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Adds conversation ID aliases/locking, then silently replays transcript into a new MCP context if resume fails; model fallback remains.",
+      "fleetpane_action": "Do not silently replace failed resume with a new conversation. Keep explicit context resume/fork and durable receipts."
     }
   ],
   "workflow_status": {
@@ -5633,7 +6111,8 @@
     "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open.",
     "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim.",
     "session-tree-navigation": "partial; exact revalidated history node/source navigation with Host/ancestry/session/cwd/archive checks, independent drafts, archived read-only content, visible refusal and unchanged pending approval verified in Linux native fixture; one window-local return source, no ancestry creation/MCP orchestration, atomic provider snapshot or ACP hierarchy claim",
-    "workspace-directory-suggestions": "partial; exact loaded-session cwd suggestions per Host and current filter/paging, bounded 24-entry native menu, pure shared projection, separate recents, non-Git creation and window replacement verified locally; no full-index or filesystem existence guarantee"
+    "workspace-directory-suggestions": "partial; exact loaded-session cwd suggestions per Host and current filter/paging, bounded 24-entry native menu, pure shared projection, separate recents, non-Git creation and window replacement verified locally; no full-index or filesystem existence guarantee",
+    "provider-mcp-inventory": "partial; explicit fenced journaled discovery, bounded paging, unknown statuses/schema/metadata retention and Linux native Host isolation/error/draft/replacement covered. Installed Codex synthetic stdio discovery verified without model calls; OAuth/config editing, orchestration and per-session connection status remain open."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

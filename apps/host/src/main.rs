@@ -13,7 +13,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let args: Vec<String> = std::env::args().skip(1).collect();
     if args.is_empty() || args[0] == "--help" {
         println!(
-            "fleetpane-host serve SOCKET CWD [PROVIDER [ARGS...]]\nfleetpane-host request SOCKET < request.json\nfleetpane-host session SOCKET [--take-control] list [--archived] [--search TITLE] [--cwd CWD] [--cursor CURSOR]|models [--cursor CURSOR]|rename THREAD NAME|restore THREAD|create CWD|open THREAD|send THREAD TEXT [--model MODEL] [--effort EFFORT]|steer THREAD TURN TEXT|stop THREAD TURN|answer JSON_REQUEST_ID < answers.json\n\nUnix prototype. Defaults to codex app-server --stdio. Keep serve running independently.\nOnly local, same-user trusted controllers. Lifecycle: session SOCKET [--take-control] drain|ready (drain pauses fresh mutations; existing output, reads, Stop and answers continue). Mutation receipts persist beside SOCKET in SOCKET.journal; interrupted admissions are never replayed."
+            "fleetpane-host serve SOCKET CWD [PROVIDER [ARGS...]]\nfleetpane-host request SOCKET < request.json\nfleetpane-host session SOCKET [--take-control] list [--archived] [--search TITLE] [--cwd CWD] [--cursor CURSOR]|models [--cursor CURSOR]|mcp [--cursor CURSOR]|rename THREAD NAME|restore THREAD|create CWD|open THREAD|send THREAD TEXT [--model MODEL] [--effort EFFORT]|steer THREAD TURN TEXT|stop THREAD TURN|answer JSON_REQUEST_ID < answers.json\n\nUnix prototype. Defaults to codex app-server --stdio. Keep serve running independently.\nOnly local, same-user trusted controllers. Lifecycle: session SOCKET [--take-control] drain|ready (drain pauses fresh mutations; existing output, reads, Stop and answers continue). Mutation receipts persist beside SOCKET in SOCKET.journal; interrupted admissions are never replayed."
         );
         println!(
             "History: inspect THREAD [--resume] | history-turns THREAD [--cursor CURSOR] | history-items THREAD TURN [--cursor CURSOR]. Native views use these bounded commands; open requests full history."
@@ -972,6 +972,10 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                     thread_id: id.clone(),
                 },
                 [verb] if verb == "models" => Command::Models { cursor: None },
+                [verb] if verb == "mcp" => Command::Mcp { cursor: None },
+                [verb, flag, cursor] if verb == "mcp" && flag == "--cursor" => Command::Mcp {
+                    cursor: Some(cursor.clone()),
+                },
                 [verb, flag, cursor] if verb == "models" && flag == "--cursor" => Command::Models {
                     cursor: Some(cursor.clone()),
                 },

@@ -238,3 +238,11 @@ have [separate acceptance](verification/2026-10-22-loaded-directories.md).
 Scoped historical inspection reaches ordinal 402 (`9318048f5`); MCP automation
 and injection remain open. Native Markdown selection already exists in Kit and
 was observed without modifying the renderer.
+
+
+Explicit MCP discovery (2026-10-22): shared fenced/journaled command and Linux
+native catalog now have [local evidence](verification/2026-10-22-mcp-discovery.md).
+Installed Codex 0.163.0 discovers a synthetic stdio tool without a model call.
+Unknown auth/runtime values and schemas are retained; discovery is explicit and
+may start configured servers. Config editing/OAuth, injected orchestration and
+per-session connection status remain open.

@@ -32,6 +32,9 @@ parser.add_argument(
     "--models", type=Path, help="Reload synthetic model catalog on each model/list"
 )
 parser.add_argument(
+    "--mcp", type=Path, help="Reload synthetic MCP discovery pages or explicit errors"
+)
+parser.add_argument(
     "--tree-control",
     type=Path,
     help="Reload synthetic session inventory faults on reads",
@@ -433,6 +436,17 @@ def session(message):
     if method in ("thread/turns/list", "thread/items/list") and args.history_page_delay:
         time.sleep(args.history_page_delay)
     with state_lock:
+        if method == "mcpServerStatus/list":
+            if args.mcp is None:
+                raise ValueError("MCP fixture must be explicitly configured")
+            catalog = json.loads(args.mcp.read_text())
+            if isinstance(catalog, dict):
+                send({"id":message["id"],"error":{"code":-32600,"message":catalog["error"]}})
+            else:
+                offset = int(params["cursor"]) if params.get("cursor") else 0
+                end = offset + params["limit"]
+                send({"id":message["id"],"result":{"data":catalog[offset:end],"nextCursor":str(end) if end<len(catalog) else None}})
+            return
         if method == "model/list":
             models = model_catalog()
             if isinstance(models, dict):
@@ -806,6 +820,7 @@ for line in sys.stdin:
     elif method == "command/exec":
         threading.Thread(target=execute, args=(message,), daemon=True).start()
     elif method in (
+        "mcpServerStatus/list",
         "model/list",
         "thread/list",
         "thread/loaded/list",

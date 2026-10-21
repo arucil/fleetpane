@@ -28,6 +28,7 @@ pub mod history;
 #[cfg(unix)]
 pub mod host_selection;
 pub mod hosts;
+pub mod mcp;
 pub mod models;
 #[cfg(unix)]
 pub mod paseo_import;

@@ -4,6 +4,7 @@ mod continuation;
 mod directory_source;
 mod draft;
 mod images;
+mod mcp;
 mod observe;
 mod progress;
 mod recent;
@@ -73,6 +74,7 @@ pub struct HostView {
     directory_changed: bool,
     models: Catalog,
     models_requested: bool,
+    mcp: mcp::State,
     turn_options: BTreeMap<String, TurnOptions>,
     search: Entity<InputState>,
     filter_workspace: Entity<InputState>,
@@ -296,6 +298,7 @@ impl HostView {
             directory_changed: false,
             models: Catalog::default(),
             models_requested: false,
+            mcp: mcp::State::default(),
             turn_options: BTreeMap::new(),
             search,
             filter_workspace,
@@ -382,6 +385,7 @@ impl HostView {
             self.session_tree_subscription = None;
             self.tree_opening = None;
             self.tree_return = None;
+            self.mcp = mcp::State::default();
         }
         self.snapshot = Some(state);
     }
@@ -567,6 +571,9 @@ impl HostView {
         if matches!(command, Command::Models { .. }) {
             self.models_requested = true;
         }
+        if matches!(command, Command::Mcp { .. }) {
+            self.mcp.request_host = Some(connection.lease.host_id);
+        }
         self.revision += 1;
         self.error = None;
         let creation = if let Command::Create { cwd } = &command {
@@ -669,6 +676,16 @@ impl HostView {
         cx: &mut Context<Self>,
     ) {
         self.busy = false;
+        if matches!(command, Command::Mcp { .. })
+            && self
+                .snapshot
+                .as_ref()
+                .is_none_or(|state| Some(state.host_id) != self.mcp.request_host)
+        {
+            self.error = Some("MCP discovery belongs to an earlier Host instance; inspect its receipt before discovering again.".into());
+            cx.notify();
+            return;
+        }
         if command.is_composer_input() {
             self.draft.record = None;
         }
@@ -680,7 +697,10 @@ impl HostView {
                     // Directory decode failures do not invalidate selected history replay.
                     if !matches!(
                         command,
-                        Command::List(_) | Command::Models { .. } | Command::History(_)
+                        Command::List(_)
+                            | Command::Models { .. }
+                            | Command::Mcp { .. }
+                            | Command::History(_)
                     ) {
                         self.poll_paused = true;
                     }
@@ -763,6 +783,21 @@ impl HostView {
     ) -> Result<(), Box<dyn std::error::Error>> {
         command.validate_completed(&completed)?;
         match command {
+            Command::Mcp { cursor } => {
+                self.mcp
+                    .catalog
+                    .apply(cursor, serde_json::from_value(completed.result)?)?;
+                self.mcp.observed = true;
+                self.mcp.copy = Some(self.mcp.catalog.copy_text()?);
+                if self
+                    .mcp
+                    .selected
+                    .as_ref()
+                    .is_none_or(|name| !self.mcp.catalog.servers.iter().any(|s| &s.name == name))
+                {
+                    self.mcp.selected = self.mcp.catalog.servers.first().map(|s| s.name.clone());
+                }
+            }
             Command::Mode { thread_id, .. } => {
                 let modes: fleetpane_runtime::acp::modes::State = serde_json::from_value(
                     completed
@@ -2472,6 +2507,7 @@ impl Render for HostView {
                             ))
                             .children(self.session_tree.clone())
                             .when(self.thread.is_some(), |view| view.child(self.render_tasks(cx)))
+                            .when(!self.is_acp(), |view| view.child(self.render_mcp(cx)))
                             .children(self.thread.as_ref().filter(|thread| {
                                 thread.history_mode.as_deref() == Some("legacy")
                             }).map(|_| {
