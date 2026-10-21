@@ -670,7 +670,9 @@ mod tests {
             io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
             net::UnixListener,
         };
-        let directory = std::env::temp_dir().join(format!("fp-read-recovery-{}", Uuid::new_v4()));
+        // macOS TMPDIR can exceed sockaddr_un's address bound before our suffix.
+        let directory =
+            std::path::PathBuf::from("/tmp").join(format!("fp-read-recovery-{}", Uuid::new_v4()));
         fleetpane_runtime::unix::prepare_directory(&directory).unwrap();
         let socket = directory.join("control.sock");
         let listener = UnixListener::bind(&socket).unwrap();

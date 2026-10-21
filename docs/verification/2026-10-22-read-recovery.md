@@ -72,3 +72,15 @@ Host update is claimed. The incompatible-protocol and malformed-wire boundaries
 are unit-covered; native acceptance specifically covers a changed Host UUID and
 expired event cursor. Replay after event-ring expiry remains explicit. Large
 outer errors can reduce conversation space; general banner layout remains open.
+
+Follow-up: exact-head `ec10af5` CI passed Linux desktop/core and Windows core,
+but macOS core failed the new read-recovery test before socket binding because
+the runner's TMPDIR plus its fixture suffix exceeded sockaddr_un SUN_LEN.
+The same error was reproduced locally with a 120-byte TMPDIR, then the fixture
+was changed to the short private `/tmp/fp-read-recovery-UUID` path used by other
+Unix protocol tests. The targeted test passes under that same long TMPDIR;
+[before](assets/read-recovery-path/before.log) and
+[after](assets/read-recovery-path/after.log). This is a fixture-only correction,
+not a change to production socket policy. A first probe selected zero tests
+because it combined a partial name with --exact; the retained probes ran one
+test each. Native acceptance from the preceding candidate remains unchanged.

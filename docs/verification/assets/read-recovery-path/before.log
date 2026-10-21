@@ -1,0 +1,18 @@
+
+running 1 test
+test client::tests::read_recovery_preserves_cursor_and_rejects_invalid_wire_data ... FAILED
+
+failures:
+
+failures:
+    client::tests::read_recovery_preserves_cursor_and_rejects_invalid_wire_data
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 176 filtered out; finished in 0.01s
+
+    Finished `test` profile [unoptimized] target(s) in 0.06s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+thread 'client::tests::read_recovery_preserves_cursor_and_rejects_invalid_wire_data' (998666) panicked at crates/session/src/client.rs:676:52:
+called `Result::unwrap()` on an `Err` value: Error { kind: InvalidInput, message: "path must be shorter than SUN_LEN" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+error: test failed, to rerun pass `-p fleetpane-session --lib`
