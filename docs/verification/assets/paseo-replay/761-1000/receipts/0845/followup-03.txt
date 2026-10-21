@@ -1,0 +1,40 @@
+    }
+    if (selectedEntryPath) {
+      previewSheetRef.current?.present();
+    } else {
+      previewSheetRef.current?.dismiss();
+    }
+  }, [isMobile, selectedEntryPath]);
+
+  const handleClosePreview = useCallback(() => {
+    if (!agentId) {
+      return;
+    }
+    selectExplorerEntry(agentId, null);
+  }, [agentId, selectExplorerEntry]);
+
+  const handleToggleDirectory = useCallback(
+    (entry: ExplorerEntry) => {
+      if (!agentId || !requestDirectoryListing) {
+        return;
+      }
+
+      const isExpanded = expandedPaths.has(entry.path);
+      const nextExpanded = !isExpanded;
+      setExpandedPaths((prev) => {
+        const next = new Set(prev);
+        if (isExpanded) {
+          next.delete(entry.path);
+        } else {
+          next.add(entry.path);
+        }
+        return next;
+      });
+
+      if (nextExpanded && !directories.has(entry.path)) {
+        requestDirectoryListing(agentId, entry.path, { recordHistory: false, setCurrentPath: false });
+      }
+    },
+    [agentId, directories, expandedPaths, requestDirectoryListing]
+  );
+

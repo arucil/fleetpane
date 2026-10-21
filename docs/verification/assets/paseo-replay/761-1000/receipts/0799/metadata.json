@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 799,
+  "revision": "a473302a9f2d2de2ea81b0f98dacccbab43fd9f8",
+  "date": "2026-02-01T12:33:18+07:00",
+  "committer_date": "2026-02-01T12:33:18+07:00",
+  "parents": [
+    "dac1538d1fe54d2b402ec13755ab443354a293a6"
+  ],
+  "subject": "refactor: use --json flag alias instead of --format json throughout CLI",
+  "diff_tree_paths": [
+    "M\tpackages/cli/docs/output-architecture.md",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/permit/index.ts",
+    "M\tpackages/cli/src/commands/provider/index.ts",
+    "M\tpackages/cli/src/commands/worktree/index.ts",
+    "M\tpackages/cli/src/output/with-output.ts",
+    "M\tpackages/cli/tests/03-daemon.test.ts",
+    "M\tpackages/cli/tests/04-agent-ls.test.ts",
+    "M\tpackages/cli/tests/09-agent-inspect.test.ts",
+    "M\tpackages/cli/tests/11-agent-wait.test.ts",
+    "M\tpackages/cli/tests/12-permit-ls.test.ts",
+    "M\tpackages/cli/tests/14-worktree.test.ts",
+    "M\tpackages/cli/tests/15-provider.test.ts",
+    "M\tpackages/cli/tests/e2e/agent-lifecycle.test.ts",
+    "M\tpackages/cli/tests/e2e/permissions.test.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:40d2f3aed071f9327dcba2382a9889955297a28b6b086ac50c159e97fedec90b",
+  "diff_tree_digest": "sha256:b6ecbbb79f468241c24baa76b9983f5a2f90c1a155998747c3c7bb2d1a8f9103",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        238,
+        242
+      ],
+      "new_lines": [
+        264,
+        281
+      ],
+      "diff_block_lines": [
+        63,
+        83
+      ],
+      "hunk_header": "@@ -238,9 +264,28 @@ function coerceSessionMetadata(metadata: AgentMetadata | undefined): Partial<Age",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 346,
+  "receipt_file": "receipts/0799/selected.patch"
+}

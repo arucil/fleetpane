@@ -1,0 +1,23 @@
+FILE packages/app/src/components/ui/dropdown-menu.tsx
+RANGE {"path":"packages/app/src/components/ui/dropdown-menu.tsx","old_lines":[179,187],"new_lines":[180,198],"diff_block_lines":[11,31],"hunk_header":"@@ -179,9 +180,19 @@ export function DropdownMenu({","substantive_changed_lines":8}
+@@ -179,9 +180,19 @@ export function DropdownMenu({
+ }
+ 
++type TriggerState = { pressed: boolean; hovered: boolean; open: boolean };
++type TriggerStyleProp =
++  | StyleProp<ViewStyle>
++  | ((state: TriggerState) => StyleProp<ViewStyle>);
++
++interface DropdownMenuTriggerProps extends Omit<PressableProps, "style"> {
++  style?: TriggerStyleProp;
++}
++
+ export function DropdownMenuTrigger({
+   children,
+   disabled,
++  style,
+   ...props
+-}: PropsWithChildren<PressableProps>): ReactElement {
++}: PropsWithChildren<DropdownMenuTriggerProps>): ReactElement {
+   const { setOpen, open, triggerRef } = useDropdownMenuContext("DropdownMenuTrigger");
+ 

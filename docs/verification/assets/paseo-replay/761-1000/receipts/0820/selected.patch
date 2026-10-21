@@ -1,0 +1,23 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[872,892],"new_lines":[871,877],"diff_block_lines":[19,39],"hunk_header":"@@ -872,75 +871,11 @@ export const ActivityLog = memo(function ActivityLog({","substantive_changed_lines":11}
+ 
+ interface TodoListCardProps {
+-  provider: AgentProvider;
+-  timestamp: number;
+   items: TodoEntry[];
+   disableOuterSpacing?: boolean;
+ }
+ 
+-function formatTasksTimestamp(timestamp: number): string {
+-  try {
+-    return new Intl.DateTimeFormat("en-US", {
+-      hour: "numeric",
+-      minute: "2-digit",
+-      second: "2-digit",
+-    }).format(new Date(timestamp));
+-  } catch {
+-    return new Date(timestamp).toLocaleTimeString();
+-  }
+-}
+-
+ const todoListCardStylesheet = StyleSheet.create((theme) => ({

@@ -1,0 +1,11 @@
+FILE packages/server/.env.example
+RANGE {"path":"packages/server/.env.example","old_lines":[15,22],"new_lines":[15,18],"diff_block_lines":[5,13],"hunk_header":"@@ -15,8 +15,4 @@ PASEO_HOME=~/.paseo","substantive_changed_lines":2}
+@@ -15,8 +15,4 @@ PASEO_HOME=~/.paseo
+ PASEO_PORT=6767
+ 
+-# Legacy web server port used by the legacy Express app
+-PORT=3000
+-NODE_ENV=development
+-
+ # Debug recordings (dictation + STT input + TTS output)
+ # When enabled, recordings are saved under `${cwd}/.debug/recordings/`

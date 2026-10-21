@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 817,
+  "revision": "e9325d92be29247fbfde4a3c77e968c296bc9a6d",
+  "date": "2026-02-02T21:15:28+07:00",
+  "committer_date": "2026-02-02T21:15:28+07:00",
+  "parents": [
+    "4b2d16f2e1933c0abfc8a31bd3f78eacb66f0b0a"
+  ],
+  "subject": "fix: clear timeout handle to prevent event loop from staying alive",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/utils/client.ts"
+  ],
+  "source_receipt_digest": "sha256:37b79a8c9a0a6e4e4c1b40e1ebdbdbb42cbeb17994246214be6e9b27a3bd30cd",
+  "diff_tree_digest": "sha256:a69cd0b24005d37e98ff4a5259c5ba462ada6a7d0310b9c456d13d2943eeba7d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/utils/client.ts",
+      "old_lines": [
+        57,
+        63
+      ],
+      "new_lines": [
+        58,
+        72
+      ],
+      "diff_block_lines": [
+        14,
+        29
+      ],
+      "hunk_header": "@@ -57,7 +58,15 @@ export async function connectToDaemon(options?: ConnectOptions): Promise<DaemonC",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/0817/selected.patch"
+}

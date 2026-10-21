@@ -1,0 +1,32 @@
+FILE packages/cli/src/cli.ts
+RANGE {"path":"packages/cli/src/cli.ts","old_lines":[0,0],"new_lines":[15,44],"diff_block_lines":[21,50],"hunk_header":"@@ -0,0 +1,146 @@","substantive_changed_lines":20}
++import { withOutput } from './output/index.js'
++
++const VERSION = '0.1.0'
++
++// Helper function to collect multiple option values into an array
++function collectMultiple(value: string, previous: string[]): string[] {
++  return previous.concat([value])
++}
++
++export function createCli(): Command {
++  const program = new Command()
++
++  program
++    .name('paseo')
++    .description('Paseo CLI - control your AI coding agents from the command line')
++    .version(VERSION, '-v, --version', 'output the version number')
++    // Global output options
++    .option('-f, --format <format>', 'output format: table, json, yaml', 'table')
++    .option('-q, --quiet', 'minimal output (IDs only)')
++    .option('--no-headers', 'omit table headers')
++    .option('--no-color', 'disable colored output')
++
++  // Primary agent commands (top-level)
++  program
++    .command('ls')
++    .description('List agents. By default shows background agents (without ui=true) in current directory.')
++    .option('-a, --all', 'Include all statuses (not just running)')
++    .option('-g, --global', 'Show agents from all directories (not just current)')
++    .option('--label <key=value>', 'Filter by label (can be used multiple times)', collectMultiple, [])
++    .option('--ui', 'Show only UI agents (equivalent to --label ui=true)')

@@ -1,0 +1,40 @@
+  private async handleArchiveAgentRequest(
+    agentId: string,
+    requestId: string
+  ): Promise<void> {
+    this.sessionLogger.info(
+      { agentId },
+      `Archiving agent ${agentId}`
+    );
+
+    const archivedAt = new Date().toISOString();
+
+    try {
+      const existing = await this.agentStorage.get(agentId);
+      if (existing) {
+        await this.agentStorage.upsert({
+          ...existing,
+          archivedAt,
+        });
+      }
+    } catch (error: any) {
+      this.sessionLogger.error(
+        { err: error, agentId },
+        `Failed to archive agent ${agentId}`
+      );
+    }
+
+    this.emit({
+      type: "agent_archived",
+      payload: {
+        agentId,
+        archivedAt,
+        requestId,
+      },
+    });
+  }
+
+  /**
+   * Handle voice mode toggle
+   */
+  private async handleSetVoiceConversation(

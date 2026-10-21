@@ -1,0 +1,9 @@
+FILE packages/server/src/server/daemon-client.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-client.e2e.test.ts","old_lines":[519,523],"new_lines":[519,523],"diff_block_lines":[5,11],"hunk_header":"@@ -519,5 +519,5 @@ describe(\"daemon client E2E\", () => {","substantive_changed_lines":2}
+@@ -519,5 +519,5 @@ describe("daemon client E2E", () => {
+   );
+ 
+-  test(
++  test.runIf(Boolean(process.env.OPENROUTER_API_KEY))(
+     "streams session activity logs and chunks",
+     async () => {

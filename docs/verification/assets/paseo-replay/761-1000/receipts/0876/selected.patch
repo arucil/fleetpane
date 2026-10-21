@@ -1,0 +1,23 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[73,76],"new_lines":[79,97],"diff_block_lines":[17,37],"hunk_header":"@@ -73,16 +79,41 @@ export function CommandCenter() {","substantive_changed_lines":13}
+       if (prevOpen && !didNavigateRef.current) {
+         const el = takeFocusRestoreElement();
+-        if (el && el.isConnected) {
+-          // Modal unmount can steal focus; restore on next tick.
++        const deadlineMs = Date.now() + 1500;
++        const tryRestore = () => {
++          if (el && el.isConnected) {
++            try {
++              el.focus();
++            } catch {
++              // ignore
++            }
++          }
++
++          if (
++            el &&
++            typeof document !== "undefined" &&
++            document.activeElement === el
++          ) {
++            return;
++          }

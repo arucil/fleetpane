@@ -1,0 +1,23 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1108,1128],"new_lines":[1108,1110],"diff_block_lines":[13,33],"hunk_header":"@@ -1108,26 +1108,17 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":17}
+               </DropdownMenuTrigger>
+               <DropdownMenuContent align="end" width={220} testID="changes-overflow-content">
+-                <DropdownMenuItem
+-                  testID="changes-menu-toggle-view"
+-                  onSelect={() => setDiffModeOverride(diffMode === "uncommitted" ? "base" : "uncommitted")}
+-                >
+-                  {diffMode === "uncommitted" ? `Show changes vs ${baseRefLabel}` : "Show uncommitted changes"}
+-                </DropdownMenuItem>
+                 {gitStatus?.isPaseoOwnedWorktree ? (
+-                  <>
+-                    <DropdownMenuSeparator />
+-                    <DropdownMenuItem
+-                      testID="changes-menu-archive"
+-                      destructive
+-                      disabled={archiveDisabled}
+-                      status={archiveAction.status}
+-                      pendingLabel="Archiving..."
+-                      successLabel="Archived"
+-                      closeOnSelect={false}
+-                      onSelect={archiveAction.trigger}
+-                    >

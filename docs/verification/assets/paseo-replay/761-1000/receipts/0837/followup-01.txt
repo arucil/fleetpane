@@ -1,0 +1,81 @@
+    this.config = {
+      ...config,
+      minChunkDurationMs: config.minChunkDurationMs ?? 1000,
+      pcmSampleRate: config.pcmSampleRate ?? 16000,
+      pcmChannels: config.pcmChannels ?? 1,
+      pcmBitsPerSample: config.pcmBitsPerSample ?? 16,
+    };
+    this.callbacks = callbacks;
+    this.pcmBytesPerMs = 0;
+    this.minChunkBytes = 0;
+    this.recomputeDerived();
+  }
+
+  updateConfig(next: SpeechSegmenterConfig): void {
+    this.config = {
+      ...next,
+      minChunkDurationMs: next.minChunkDurationMs ?? this.config.minChunkDurationMs,
+      pcmSampleRate: next.pcmSampleRate ?? this.config.pcmSampleRate,
+      pcmChannels: next.pcmChannels ?? this.config.pcmChannels,
+      pcmBitsPerSample: next.pcmBitsPerSample ?? this.config.pcmBitsPerSample,
+    };
+    this.recomputeDerived();
+  }
+
+  setCallbacks(callbacks: SpeechSegmenterCallbacks): void {
+    this.callbacks = callbacks;
+  }
+
+  getSpeechDetectionStartMs(): number | null {
+    return this.speechDetectionStartMs;
+  }
+
+  getIsSpeaking(): boolean {
+    return this.isSpeaking;
+  }
+
+  getIsDetecting(): boolean {
+    return this.isDetecting;
+  }
+
+  reset(): void {
+    this.audioBuffer = [];
+    this.bufferedBytes = 0;
+    this.speechDetectionStartMs = null;
+    this.detectionSilenceStartMs = null;
+    this.silenceStartMs = null;
+    this.isSpeaking = false;
+    this.isDetecting = false;
+    this.speechConfirmed = false;
+  }
+
+  flush(isLast: boolean): void {
+    if (this.audioBuffer.length === 0) {
+      this.bufferedBytes = 0;
+      return;
+    }
+
+    const combinedBinary = concatenateUint8Arrays(this.audioBuffer);
+    const pcmBase64 = uint8ArrayToBase64(combinedBinary);
+    this.callbacks.onAudioSegment?.({ audioData: pcmBase64, isLast });
+
+    this.audioBuffer = [];
+    this.bufferedBytes = 0;
+  }
+
+  /**
+   * Called when the input stream emits a PCM16 chunk (Uint8Array of bytes).
+   * In non-continuous mode, chunk buffering is gated by the VAD state.
+   */
+  pushPcmChunk(chunk: Uint8Array): void {
+    if (chunk.length === 0) {
+      return;
+    }
+
+    if (this.config.enableContinuousStreaming) {
+      this.audioBuffer.push(chunk);
+      this.bufferedBytes += chunk.length;
+      if (this.bufferedBytes >= this.minChunkBytes) {
+        this.flush(false);
+      }
+      return;

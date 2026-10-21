@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 811,
+  "revision": "afce2e1c58ad9704947bdfaab0837c051a7be2a8",
+  "date": "2026-02-02T14:15:26+07:00",
+  "committer_date": "2026-02-02T14:15:26+07:00",
+  "parents": [
+    "a0214645eba4691c7b9a4cf8adbf153004b1579a"
+  ],
+  "subject": "refactor: remove paseo prompt instructions and add real agent tests",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.test.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:c580bf974864a1e73ef4363563bf8c7f7625cb94ad481c39464ed84aa9f22f7a",
+  "diff_tree_digest": "sha256:01bea7a0cdf700386da7b36e44075b00d8aa523825cfe8dc97c3db2f7d86856b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        1347,
+        1367
+      ],
+      "new_lines": [
+        1343,
+        1344
+      ],
+      "diff_block_lines": [
+        23,
+        43
+      ],
+      "hunk_header": "@@ -1347,24 +1343,5 @@ class CodexAppServerAgentSession implements AgentSession {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 345,
+  "receipt_file": "receipts/0811/selected.patch"
+}

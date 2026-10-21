@@ -1,0 +1,21 @@
+
+  // Try title/name match (case-insensitive)
+  const titleMatches = agents.filter((a) => a.title?.toLowerCase() === query)
+  if (titleMatches.length === 1 && titleMatches[0]) {
+    return titleMatches[0].id
+  }
+
+  // Try partial title match
+  const partialTitleMatches = agents.filter((a) => a.title?.toLowerCase().includes(query))
+  if (partialTitleMatches.length === 1 && partialTitleMatches[0]) {
+    return partialTitleMatches[0].id
+  }
+
+  // If we have multiple prefix matches and no unique title match, return first prefix match
+  const firstPrefixMatch = prefixMatches[0]
+  if (firstPrefixMatch) {
+    return firstPrefixMatch.id
+  }
+
+  return null
+}

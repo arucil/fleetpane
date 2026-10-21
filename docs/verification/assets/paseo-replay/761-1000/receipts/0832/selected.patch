@@ -1,0 +1,23 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[35,36],"new_lines":[36,56],"diff_block_lines":[22,42],"hunk_header":"@@ -35,4 +36,61 @@ import { getIsTauriMac } from \"@/constants/layout\";","substantive_changed_lines":13}
+ import { useTrafficLightPadding } from "@/utils/tauri-window";
+ 
++function PushNotificationRouter() {
++  const router = useRouter();
++  const lastHandledIdRef = useRef<string | null>(null);
++
++  useEffect(() => {
++    if (Platform.OS === "web") {
++      return;
++    }
++
++    Notifications.setNotificationHandler({
++      handleNotification: async () => ({
++        // When the app is open, don't show OS banners.
++        shouldShowAlert: false,
++        shouldShowBanner: false,
++        shouldShowList: false,
++        shouldPlaySound: false,
++        shouldSetBadge: false,
++      }),
++    });

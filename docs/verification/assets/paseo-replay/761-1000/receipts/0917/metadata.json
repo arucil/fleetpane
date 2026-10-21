@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 917,
+  "revision": "4fb93d92ed42ba59bf69cc29f35101b92abf7017",
+  "date": "2026-02-03T13:57:08+07:00",
+  "committer_date": "2026-02-03T13:57:08+07:00",
+  "parents": [
+    "6ed70e24c7155c5cf7199c01120e435c6004aed5"
+  ],
+  "subject": "fix: stabilize relay E2EE handshake",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/relay/src/encrypted-channel.ts",
+    "M\tpackages/relay/src/node-adapter.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-keypair.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:f054b1ef747a0a907084a48424ebbe9b069ddcc78902f61ad7f71393517ec552",
+  "diff_tree_digest": "sha256:059acd7fa4cbf7a2f60e92784b3d01990e5906f0b891012cbc92de56ffa55eea",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/relay/src/node-adapter.ts",
+      "old_lines": [
+        77,
+        83
+      ],
+      "new_lines": [
+        77,
+        91
+      ],
+      "diff_block_lines": [
+        11,
+        31
+      ],
+      "hunk_header": "@@ -73,13 +73,34 @@ export function createRelayServer(config: NodeRelayServerConfig): RelayServer {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 119,
+  "receipt_file": "receipts/0917/selected.patch"
+}

@@ -1,0 +1,12 @@
+FILE packages/server/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/server/src/utils/tool-call-parsers.ts","old_lines":[19,25],"new_lines":[20,26],"diff_block_lines":[9,18],"hunk_header":"@@ -19,7 +20,7 @@ const PrincipalParamSchema = z.union([","substantive_changed_lines":4}
+@@ -19,7 +20,7 @@ const PrincipalParamSchema = z.union([
+   z.object({ path: z.string() }).transform((d) => ({ type: "path" as const, value: d.path })),
+   // Command as string
+-  z.object({ command: z.string() }).transform((d) => ({ type: "command" as const, value: d.command })),
++  z.object({ command: z.string() }).transform((d) => ({ type: "command" as const, value: stripAnsi(d.command) })),
+   // Command as array (Codex sends this)
+-  z.object({ command: z.array(z.string()).nonempty() }).transform((d) => ({ type: "command" as const, value: d.command.join(" ") })),
++  z.object({ command: z.array(z.string()).nonempty() }).transform((d) => ({ type: "command" as const, value: stripAnsi(d.command.join(" ")) })),
+   // Other text params
+   z.object({ title: z.string() }).transform((d) => ({ type: "text" as const, value: d.title })),

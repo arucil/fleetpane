@@ -1,0 +1,23 @@
+FILE packages/website/src/routeTree.gen.ts
+RANGE {"path":"packages/website/src/routeTree.gen.ts","old_lines":[75,79],"new_lines":[75,92],"diff_block_lines":[39,59],"hunk_header":"@@ -74,8 +74,26 @@ export interface FileRoutesById {","substantive_changed_lines":19}
+   fileRoutesByFullPath: FileRoutesByFullPath
+-  fullPaths: '/' | '/docs' | '/docs/best-practices' | '/docs/configuration' | '/docs/security' | '/docs/'
++  fullPaths:
++    | '/'
++    | '/docs'
++    | '/docs/best-practices'
++    | '/docs/configuration'
++    | '/docs/security'
++    | '/docs/'
+   fileRoutesByTo: FileRoutesByTo
+-  to: '/' | '/docs/best-practices' | '/docs/configuration' | '/docs/security' | '/docs'
+-  id: '__root__' | '/' | '/docs' | '/docs/best-practices' | '/docs/configuration' | '/docs/security' | '/docs/'
++  to:
++    | '/'
++    | '/docs/best-practices'
++    | '/docs/configuration'
++    | '/docs/security'
++    | '/docs'
++  id:
++    | '__root__'
++    | '/'

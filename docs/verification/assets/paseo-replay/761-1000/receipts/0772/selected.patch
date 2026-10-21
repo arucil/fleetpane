@@ -1,0 +1,9 @@
+FILE package.json
+RANGE {"path":"package.json","old_lines":[19,22],"new_lines":[19,24],"diff_block_lines":[5,11],"hunk_header":"@@ -19,4 +19,6 @@","substantive_changed_lines":2}
+@@ -19,4 +19,6 @@
+     "typecheck": "npm run typecheck --workspaces --if-present",
+     "test": "npm run test --workspaces --if-present",
++    "format": "prettier --write .",
++    "format:check": "prettier --check .",
+     "start": "npm run start --workspace=@paseo/server",
+     "android": "npm run android --workspace=@paseo/app",

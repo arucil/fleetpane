@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[238,242],"new_lines":[264,281],"diff_block_lines":[63,83],"hunk_header":"@@ -238,9 +264,28 @@ function coerceSessionMetadata(metadata: AgentMetadata | undefined): Partial<Age","substantive_changed_lines":18}
+ }
+ 
+-function isClaudeMcpServerConfig(value: unknown): value is ClaudeMcpServerConfig {
+-  if (!isMetadata(value)) {
+-    return false;
++function toClaudeSdkMcpConfig(
++  config: McpServerConfig
++): ClaudeSdkMcpServerConfig {
++  switch (config.type) {
++    case "stdio":
++      return {
++        type: "stdio",
++        command: config.command,
++        args: config.args,
++        env: config.env,
++      };
++    case "http":
++      return {
++        type: "http",
++        url: config.url,
++        headers: config.headers,

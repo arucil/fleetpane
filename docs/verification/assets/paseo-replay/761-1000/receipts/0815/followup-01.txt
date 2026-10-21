@@ -1,0 +1,75 @@
+  private async handleValidateBranchRequest(
+    msg: Extract<SessionInboundMessage, { type: "validate_branch_request" }>
+  ): Promise<void> {
+    const { cwd, branchName, requestId } = msg;
+
+    try {
+      const resolvedCwd = expandTilde(cwd);
+
+      // Try local branch first
+      try {
+        await execAsync(`git rev-parse --verify ${branchName}`, {
+          cwd: resolvedCwd,
+          env: READ_ONLY_GIT_ENV,
+        });
+        this.emit({
+          type: "validate_branch_response",
+          payload: {
+            exists: true,
+            resolvedRef: branchName,
+            isRemote: false,
+            error: null,
+            requestId,
+          },
+        });
+        return;
+      } catch {
+        // Local branch doesn't exist, try remote
+      }
+
+      // Try remote branch (origin/{branchName})
+      try {
+        await execAsync(`git rev-parse --verify origin/${branchName}`, {
+          cwd: resolvedCwd,
+          env: READ_ONLY_GIT_ENV,
+        });
+        this.emit({
+          type: "validate_branch_response",
+          payload: {
+            exists: true,
+            resolvedRef: `origin/${branchName}`,
+            isRemote: true,
+            error: null,
+            requestId,
+          },
+        });
+        return;
+      } catch {
+        // Remote branch doesn't exist either
+      }
+
+      // Branch not found anywhere
+      this.emit({
+        type: "validate_branch_response",
+        payload: {
+          exists: false,
+          resolvedRef: null,
+          isRemote: false,
+          error: null,
+          requestId,
+        },
+      });
+    } catch (error) {
+      this.emit({
+        type: "validate_branch_response",
+        payload: {
+          exists: false,
+          resolvedRef: null,
+          isRemote: false,
+          error: error instanceof Error ? error.message : String(error),
+          requestId,
+        },
+      });
+    }
+  }
+

@@ -1,0 +1,74 @@
+  }
+
+  async waitForFinish(
+    agentId: string,
+    timeout = 60000
+  ): Promise<AgentSnapshotPayload> {
+    // We need to see the agent start (running/initializing) before we can
+    // consider idle/error as "finished". Otherwise we'd return the old idle
+    // state from before the task started.
+    //
+    // Permission requests are different - if there are pending permissions,
+    // the agent needs attention NOW regardless of whether we saw it start.
+    let sawStart = false;
+    let finishedState: AgentSnapshotPayload | null = null;
+
+    // Scan message queue for state changes
+    // We need to scan the ENTIRE queue to find the final state, not return early
+    for (const msg of this.messageQueue) {
+      if (
+        msg.type === "agent_update" &&
+        msg.payload.kind === "upsert" &&
+        msg.payload.agent.id === agentId
+      ) {
+        const agent = msg.payload.agent;
+
+        // Track if agent has started processing a task
+        // Only "running" counts - "initializing" is the agent process starting up
+        if (agent.status === "running") {
+          sawStart = true;
+          finishedState = null; // Reset - any previous finished state was before this run
+        }
+
+        // Check for finished state - save it but don't return yet
+        // We need to scan the whole queue to find the FINAL state
+        const hasPendingPermissions = (agent.pendingPermissions?.length ?? 0) > 0;
+        if (hasPendingPermissions) {
+          // Permission means agent needs attention
+          finishedState = agent;
+        } else if (sawStart && (agent.status === "idle" || agent.status === "error")) {
+          finishedState = agent;
+        }
+      }
+    }
+
+    // Only return from queue if we have a definitive finished state (idle/error)
+    // Don't return from queue if the latest state has pending permissions -
+    // the permission might be getting resolved right now, so wait for new messages
+    const hasPendingPermissionsInQueue = (finishedState?.pendingPermissions?.length ?? 0) > 0;
+    if (finishedState && !hasPendingPermissionsInQueue) {
+      return finishedState;
+    }
+
+    // Wait for agent to finish
+    return this.waitFor(
+      (msg) => {
+        if (
+          msg.type === "agent_update" &&
+          msg.payload.kind === "upsert" &&
+          msg.payload.agent.id === agentId
+        ) {
+          const agent = msg.payload.agent;
+
+          // Track if agent has started processing a task
+          // Only "running" counts - "initializing" is the agent process starting up
+          if (agent.status === "running") {
+            sawStart = true;
+          }
+
+          // Check for finished state
+          const hasPendingPermissions = (agent.pendingPermissions?.length ?? 0) > 0;
+          if (hasPendingPermissions) {
+            return agent;
+          }
+          if (sawStart && (agent.status === "idle" || agent.status === "error")) {

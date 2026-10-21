@@ -1,0 +1,23 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[90,105],"new_lines":[87,95],"diff_block_lines":[94,114],"hunk_header":"@@ -87,52 +85,19 @@ export function FileExplorerPane({","substantive_changed_lines":16}
++    selectExplorerEntry,
+   } = useFileExplorerActions(serverId);
+-  const viewMode = usePanelStore((state) => state.explorerViewMode);
+   const sortOption = usePanelStore((state) => state.explorerSortOption);
+   const setSortOption = usePanelStore((state) => state.setExplorerSortOption);
+-  const [selectedEntryPath, setSelectedEntryPath] = useState<string | null>(null);
+-  const listScrollRef = useRef<FlatList<ExplorerEntry> | null>(null);
+-  const listScrollOffsetRef = useRef(0);
+-  const scrollOffsetsByPathRef = useRef<Map<string, number>>(new Map());
+-  const pendingScrollRestoreRef = useRef<number | null>(null);
+-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
++  const splitRatio = usePanelStore((state) => state.explorerFilesSplitRatio);
++  const setSplitRatio = usePanelStore((state) => state.setExplorerFilesSplitRatio);
+ 
+-  const history = explorerState?.history ?? [];
+-  const lastKnownDirectory = history[history.length - 1];
+-  const rememberedDirectory = explorerState?.lastVisitedPath;
+-  const initialTargetDirectory = rememberedDirectory ?? lastKnownDirectory ?? ".";
+-  const currentPath = explorerState?.currentPath ?? ".";
++  const directories = explorerState?.directories ?? new Map();
++  const files = explorerState?.files ?? new Map();

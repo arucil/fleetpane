@@ -1,0 +1,17 @@
+FILE packages/server/src/server/agent/mcp-server.test.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.test.ts","old_lines":[105,116],"new_lines":[106,116],"diff_block_lines":[11,25],"hunk_header":"@@ -105,12 +106,11 @@ describe(\"create_agent MCP tool\", () => {","substantive_changed_lines":5}
+@@ -105,12 +106,11 @@ describe("create_agent MCP tool", () => {
+ 
+   it("set_title trims and persists titles for caller agent", async () => {
+-    const { agentManager, agentStorage, spies } = createTestDeps();
++    const { agentManager, spies } = createTestDeps();
+     spies.agentManager.getAgent.mockReturnValue({
+       id: "agent-1",
+     } as ManagedAgent);
+ 
+-    const server = await createAgentMcpServer({
++    const server = await createAgentSelfIdMcpServer({
+       agentManager,
+-      agentStorage,
+       logger,
+       callerAgentId: "agent-1",

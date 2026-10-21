@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 940,
+  "revision": "98896bfb3742c6124ca1df443f71d8b658b483bc",
+  "date": "2026-02-05T09:06:07+07:00",
+  "committer_date": "2026-02-05T09:06:07+07:00",
+  "parents": [
+    "32f32051d06e5a289dd75532b83bd8758daf09b9"
+  ],
+  "subject": "Stop relay reconnect flapping on takeover",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:f9115cb8986254d538eb9ed59407d43c29ed8d084cb7a501b7160d44fa67188d",
+  "diff_tree_digest": "sha256:4d5ebb51bbce074e620e3a26e404647db069a6fb506a49b19155738f82f4ba2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        398,
+        401
+      ],
+      "new_lines": [
+        407,
+        425
+      ],
+      "diff_block_lines": [
+        19,
+        38
+      ],
+      "hunk_header": "@@ -398,4 +407,19 @@ export class DaemonClient {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/0940/selected.patch"
+}

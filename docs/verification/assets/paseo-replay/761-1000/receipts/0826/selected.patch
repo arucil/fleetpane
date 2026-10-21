@@ -1,0 +1,23 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[680,700],"new_lines":[639,640],"diff_block_lines":[69,89],"hunk_header":"@@ -680,29 +639,28 @@ function AgentScreenContent({","substantive_changed_lines":18}
+                     </View>
+ 
+-                    <View style={styles.menuMetaRow}>
+-                      <Text style={styles.menuMetaLabel}>Branch</Text>
+-                      <View style={styles.menuMetaValueRow}>
+-                        {branchStatus === "loading" ? (
+-                          <>
+-                            <ActivityIndicator
+-                              size="small"
+-                              color={theme.colors.foregroundMuted}
+-                            />
+-                            <Text style={styles.menuMetaPendingText}>Fetching…</Text>
+-                          </>
+-                        ) : (
+-                          <Text
+-                            style={[
+-                              styles.menuMetaValue,
+-                              branchStatus === "error" ? styles.menuMetaValueError : null,
+-                            ]}
+-                            numberOfLines={1}
+-                            ellipsizeMode="middle"

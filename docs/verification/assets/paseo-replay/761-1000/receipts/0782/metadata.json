@@ -1,0 +1,85 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 782,
+  "revision": "dfda6daeedb26928ea67a1064e4c8a88478adc2f",
+  "date": "2026-01-29T10:41:19+07:00",
+  "committer_date": "2026-01-29T10:41:19+07:00",
+  "parents": [
+    "7d4636ecff422256a064e2949998b34f8209ed89"
+  ],
+  "subject": "refactor(cli): rename ps to ls and add top-level agent commands",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "A\tpackages/cli/docs/type-audit.md",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/agent/archive.ts",
+    "A\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "A\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/mode.ts",
+    "D\tpackages/cli/src/commands/agent/ps.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/agent/send.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "A\tpackages/cli/src/commands/agent/wait.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "A\tpackages/cli/src/commands/permit/allow.ts",
+    "A\tpackages/cli/src/commands/permit/deny.ts",
+    "A\tpackages/cli/src/commands/permit/index.ts",
+    "A\tpackages/cli/src/commands/permit/ls.ts",
+    "A\tpackages/cli/src/commands/provider/index.ts",
+    "A\tpackages/cli/src/commands/provider/ls.ts",
+    "A\tpackages/cli/src/commands/provider/models.ts",
+    "A\tpackages/cli/src/commands/worktree/archive.ts",
+    "A\tpackages/cli/src/commands/worktree/index.ts",
+    "A\tpackages/cli/src/commands/worktree/ls.ts",
+    "A\tpackages/cli/tests/04-agent-ls.test.ts",
+    "D\tpackages/cli/tests/04-agent-ps.test.ts",
+    "M\tpackages/cli/tests/05-agent-run.test.ts",
+    "M\tpackages/cli/tests/06-agent-send.test.ts",
+    "M\tpackages/cli/tests/07-agent-stop.test.ts",
+    "M\tpackages/cli/tests/08-agent-logs.test.ts",
+    "M\tpackages/cli/tests/09-agent-inspect.test.ts",
+    "A\tpackages/cli/tests/11-agent-archive.test.ts",
+    "A\tpackages/cli/tests/11-agent-wait.test.ts",
+    "A\tpackages/cli/tests/12-permit-ls.test.ts",
+    "A\tpackages/cli/tests/13-permit-allow-deny.test.ts",
+    "A\tpackages/cli/tests/14-worktree.test.ts",
+    "A\tpackages/cli/tests/15-provider.test.ts",
+    "A\tpackages/cli/tests/e2e/agent-lifecycle.test.ts",
+    "A\tpackages/cli/tests/e2e/agent-send.test.ts",
+    "A\tpackages/cli/tests/e2e/permissions.test.ts",
+    "A\tpackages/cli/tests/helpers/test-daemon.ts",
+    "M\tpackages/cli/tests/setup.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:8dedf99503c57057748eb6bcec7e269f91b8886324f4e3055bcb435ca0cf6765",
+  "diff_tree_digest": "sha256:8f45adee2efe299181179e76904d643066316c775476dbba7d2ad7ce7a943b8b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/cli.ts",
+      "old_lines": [
+        19,
+        24
+      ],
+      "new_lines": [
+        36,
+        61
+      ],
+      "diff_block_lines": [
+        32,
+        61
+      ],
+      "hunk_header": "@@ -18,31 +35,114 @@ export function createCli(): Command {",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 3271,
+  "receipt_file": "receipts/0782/selected.patch"
+}

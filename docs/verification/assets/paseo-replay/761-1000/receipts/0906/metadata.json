@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 906,
+  "revision": "b7e29c0de37103a3ced3c3a66205e239a4628a2a",
+  "date": "2026-02-04T14:22:44+07:00",
+  "committer_date": "2026-02-04T14:22:44+07:00",
+  "parents": [
+    "0b6d5ad39222e9f78bcd16af80174a45bed6cfc2",
+    "eb6c2c90b33dad52d5fb59eac99aa190e09b2884"
+  ],
+  "subject": "Merge branch 'fix/deploy-website'",
+  "diff_tree_paths": [
+    "M\t.github/workflows/deploy-website.yml",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/website/src/routeTree.gen.ts"
+  ],
+  "source_receipt_digest": "sha256:32c9357fbf32000a72c15942329f47346d9f25daaab1559b629d357e4c62b112",
+  "diff_tree_digest": "sha256:48921b0c61503eaa6a670c5ab5aa1f6850b301c99e01b24a1a09e366ae16b5c2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/src/routeTree.gen.ts",
+      "old_lines": [
+        75,
+        79
+      ],
+      "new_lines": [
+        75,
+        92
+      ],
+      "diff_block_lines": [
+        39,
+        59
+      ],
+      "hunk_header": "@@ -74,8 +74,26 @@ export interface FileRoutesById {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 63,
+  "receipt_file": "receipts/0906/selected.patch"
+}

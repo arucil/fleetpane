@@ -1,0 +1,20 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[843,848],"new_lines":[844,858],"diff_block_lines":[40,57],"hunk_header":"@@ -843,6 +844,15 @@ export const TodoListCard = memo(function TodoListCard({","substantive_changed_lines":12}
+@@ -843,6 +844,15 @@ export const TodoListCard = memo(function TodoListCard({
+             items.map((item, idx) => (
+               <View key={`${item.text}-${idx}`} style={todoListCardStylesheet.itemRow}>
+-                <View style={todoListCardStylesheet.radioOuter}>
+-                  {item.completed ? <View style={todoListCardStylesheet.radioInner} /> : null}
++                <View
++                  style={[
++                    todoListCardStylesheet.radioBadge,
++                    item.completed
++                      ? todoListCardStylesheet.radioBadgeComplete
++                      : todoListCardStylesheet.radioBadgeIncomplete,
++                  ]}
++                >
++                  {item.completed ? (
++                    <Check size={12} color={unistylesTheme.colors.primaryForeground} />
++                  ) : null}
+                 </View>
+                 <Text

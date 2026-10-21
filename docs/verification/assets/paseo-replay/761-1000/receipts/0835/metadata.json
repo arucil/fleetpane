@@ -1,0 +1,87 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 835,
+  "revision": "469a25c724153a05832dba70b180a98087a578c1",
+  "date": "2026-02-04T08:18:15+07:00",
+  "committer_date": "2026-02-04T08:18:15+07:00",
+  "parents": [
+    "03f383b90821745e04cff1d65d318a0e2c83b066"
+  ],
+  "subject": "feat: add live model and thinking option preferences UI (#8)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "A\tpackages/app/src/hooks/use-file-explorer-actions.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/app/src/utils/agent-initialization.ts",
+    "A\tpackages/app/src/utils/agent-snapshots.ts",
+    "A\tpackages/app/src/utils/encode-images.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.test.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-basics.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/file-download.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/filesystem.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/images.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/live-preferences.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/models.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-codex.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/setup.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:1495db1b2696443686eb367bb7debfdb6eda113497c9ae2a79a722e2e8911d12",
+  "diff_tree_digest": "sha256:bcc002e4e0a4f28d992b20fa6d3d1a6eff68b9b1a7e7e12dea8eddf282120558",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        33,
+        35
+      ],
+      "new_lines": [
+        35,
+        55
+      ],
+      "diff_block_lines": [
+        39,
+        59
+      ],
+      "hunk_header": "@@ -33,10 +35,46 @@ export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 1979,
+  "receipt_file": "receipts/0835/selected.patch"
+}

@@ -1,0 +1,22 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[398,401],"new_lines":[407,425],"diff_block_lines":[19,38],"hunk_header":"@@ -398,4 +407,19 @@ export class DaemonClient {","substantive_changed_lines":10}
+@@ -398,4 +407,19 @@ export class DaemonClient {
+             ...(reason ? { reason } : {}),
+           });
++
++          // When connecting over the relay, only one client connection is allowed at a time.
++          // If another device/tab takes over, we should not auto-reconnect and "fight" the new
++          // connection (which causes flapping where both sides repeatedly replace each other).
++          if (
++            isRelayClientWebSocketUrl(this.config.url) &&
++            closeCode === 1008 &&
++            (closeReason ?? reason) === "Replaced by new connection"
++          ) {
++            this.shouldReconnect = false;
++            this.clearWaiters(new Error(reason ?? "Replaced by new connection"));
++            this.rejectPendingSendQueue(new Error(reason ?? "Replaced by new connection"));
++            this.rejectConnect(new Error(reason ?? "Replaced by new connection"));
++            return;
++          }
+           this.scheduleReconnect(reason);
+         }),

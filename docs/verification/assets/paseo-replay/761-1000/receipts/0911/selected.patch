@@ -1,0 +1,14 @@
+FILE packages/app/src/components/voice-compact-indicator.tsx
+RANGE {"path":"packages/app/src/components/voice-compact-indicator.tsx","old_lines":[31,38],"new_lines":[31,39],"diff_block_lines":[12,23],"hunk_header":"@@ -31,8 +31,9 @@ export function VoiceCompactIndicator() {","substantive_changed_lines":5}
+@@ -31,8 +31,9 @@ export function VoiceCompactIndicator() {
+         accessibilityRole="button"
+         accessibilityLabel={isMuted ? "Unmute voice" : "Mute voice"}
+-        style={[styles.muteButton, isMuted && styles.muteButtonMuted]}
++        style={styles.muteButton}
++        hitSlop={8}
+       >
+         {isMuted ? (
+-          <MicOff size={14} color={theme.colors.surface0} />
++          <MicOff size={14} color={theme.colors.palette.white} />
+         ) : (
+           <Mic size={14} color={theme.colors.foreground} />

@@ -1,0 +1,18 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[497,501],"new_lines":[497,510],"diff_block_lines":[5,20],"hunk_header":"@@ -497,5 +497,14 @@ export function AgentStreamView({","substantive_changed_lines":6}
+@@ -497,5 +497,14 @@ export function AgentStreamView({
+     return (
+       <View style={stylesheet.contentWrapper}>
+-        <View style={stylesheet.listHeaderContent}>
++        <View
++          style={[
++            stylesheet.listHeaderContent,
++            // In an inverted FlatList, the header is rendered at the visual bottom, so its
++            // top edge can sit directly against the newest timeline item. Add a small
++            // padding to prevent badges (e.g. Thinking/Setup) from butting up against
++            // the last user message when the streaming head is present.
++            hasHeadItems ? { paddingTop: tightGap } : null,
++          ]}
++        >
+           {hasPermissions ? (
+             <View style={stylesheet.permissionsContainer}>

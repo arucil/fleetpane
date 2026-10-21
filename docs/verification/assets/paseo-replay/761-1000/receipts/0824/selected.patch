@@ -1,0 +1,23 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[844,857],"new_lines":[875,888],"diff_block_lines":[42,62],"hunk_header":"@@ -844,149 +875,175 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2}
+ 
+   const hasPullRequest = Boolean(prStatus?.url);
++  const hasRemote = gitStatus?.hasRemote ?? false;
++  const isPaseoOwnedWorktree = gitStatus?.isPaseoOwnedWorktree ?? false;
+ 
+   // ==========================================================================
+-  // Primary CTA Logic
++  // Git Actions (Data-Oriented)
+   // ==========================================================================
+-  // Rules (in priority order):
+-  // 1. Uncommitted changes → "Commit" is primary
+-  // 2. Ahead of origin (unpushed commits) → "Push" is primary
+-  // 3. Has PR → "View PR" is primary
+-  // 4. Ahead of base → "Merge branch" or "Create PR" based on shipDefault preference
+-  // 5. Nothing to do → no primary CTA
++  // All possible actions are computed as data, then partitioned into:
++  // - primary: The main CTA button
++  // - secondary: Dropdown next to primary button
++  // - menu: Kebab overflow menu
+   // ==========================================================================
+ 

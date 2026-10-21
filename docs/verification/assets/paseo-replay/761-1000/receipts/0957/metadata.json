@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 957,
+  "revision": "b2238c4f44139259cf6ed5b16c327dc651e32120",
+  "date": "2026-02-05T14:24:01+07:00",
+  "committer_date": "2026-02-05T14:24:01+07:00",
+  "parents": [
+    "e6c3f2838b81179d81ade6e05e31f50f779fa662"
+  ],
+  "subject": "chore: rename package scope from @paseo to @getpaseo",
+  "diff_tree_paths": [
+    "M\t.github/workflows/deploy-app.yml",
+    "M\t.github/workflows/deploy-relay.yml",
+    "M\t.github/workflows/deploy-website.yml",
+    "M\t.github/workflows/server-ci.yml",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-keypair.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/website/package.json",
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:b94f6e258ac339f43eff97b4cd4b78ad602b3317de1d4ab4a20819f78588f35d",
+  "diff_tree_digest": "sha256:85326cefc960669439251c056edaa6c798bb5a27a90094ab81d6fc7620c18631",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        58,
+        62
+      ],
+      "new_lines": [
+        58,
+        62
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -58,5 +58,5 @@ import {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 18322,
+  "receipt_file": "receipts/0957/selected.patch"
+}

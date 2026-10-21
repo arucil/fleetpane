@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/docs/best-practices.tsx
+RANGE {"path":"packages/website/src/routes/docs/best-practices.tsx","old_lines":[0,0],"new_lines":[15,35],"diff_block_lines":[21,41],"hunk_header":"@@ -0,0 +1,149 @@","substantive_changed_lines":19}
++
++function BestPractices() {
++  return (
++    <div className="space-y-8">
++      <div>
++        <h1 className="text-3xl font-medium font-serif mb-4">Best Practices</h1>
++        <p className="text-white/60 leading-relaxed">
++          What I've learned from using Paseo daily. Not rules, just patterns
++          that have worked for me.
++        </p>
++      </div>
++
++      <section className="space-y-4">
++        <h2 className="text-xl font-medium">Agents replace typing, not thinking</h2>
++        <p className="text-white/60 leading-relaxed">
++          Your role has changed. You're no longer the one writing code line by
++          line. You're the one making decisions: what to build, how it should
++          work, what the architecture looks like. The agent executes, but you
++          direct.
++        </p>
++        <p className="text-white/60 leading-relaxed">

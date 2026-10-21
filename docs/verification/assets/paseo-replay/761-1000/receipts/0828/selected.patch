@@ -1,0 +1,23 @@
+FILE packages/app/src/components/sliding-sidebar.tsx
+RANGE {"path":"packages/app/src/components/sliding-sidebar.tsx","old_lines":[125,126],"new_lines":[131,151],"diff_block_lines":[35,55],"hunk_header":"@@ -125,4 +131,60 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {","substantive_changed_lines":15}
+   }, [backdropOpacity, closeToAgent, isMobile, translateX, windowWidth]);
+ 
++  const voiceEligibleHosts = useMemo(() => {
++    return Array.from(connectionStates.values()).filter((entry) => entry.status === "online");
++  }, [connectionStates]);
++  const hasAnyConfiguredHosts = connectionStates.size > 0;
++
++  const handleToggleVoice = useCallback(() => {
++    if (isVoiceMode) {
++      void stopVoice().catch((error) => {
++        console.error("[SlidingSidebar] Failed to stop voice", error);
++        Alert.alert("Voice failed", "Unable to stop voice mode.");
++      });
++      return;
++    }
++
++    if (voiceEligibleHosts.length === 0) {
++      if (!hasAnyConfiguredHosts) {
++        Alert.alert(
++          "No hosts available",
++          "Add a host in Settings before starting Voice mode.",

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 787,
+  "revision": "1670c7084b5fcb5e5def8bf1fd258391ec2efea3",
+  "date": "2026-01-30T11:46:50+07:00",
+  "committer_date": "2026-01-30T11:46:50+07:00",
+  "parents": [
+    "eac342aa8bf93673820c26accaf52a978ad8a3ea"
+  ],
+  "subject": "fix: complete MCP split implementation",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:3409f151759a69a76b026938bb38c4b58a79c71ff73e27a3f156bb845be6e8af",
+  "diff_tree_digest": "sha256:1e9a7f55012d2420b476986ce93e9a2974d8f5f8e6e5d366bf886d34051d5cbe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        329,
+        331
+      ],
+      "new_lines": [
+        334,
+        362
+      ],
+      "diff_block_lines": [
+        36,
+        65
+      ],
+      "hunk_header": "@@ -329,5 +334,116 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 240,
+  "receipt_file": "receipts/0787/selected.patch"
+}

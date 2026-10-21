@@ -1,0 +1,23 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[60,64],"new_lines":[64,84],"diff_block_lines":[16,36],"hunk_header":"@@ -60,15 +64,37 @@ export function CommandCenter() {","substantive_changed_lines":10}
+ 
+   useEffect(() => {
++    const prevOpen = prevOpenRef.current;
++    prevOpenRef.current = open;
++
+     if (!open) {
+       setQuery("");
+       setActiveIndex(0);
++
++      if (prevOpen && !didNavigateRef.current) {
++        const el = takeFocusRestoreElement();
++        if (el && el.isConnected) {
++          // Modal unmount can steal focus; restore on next tick.
++          requestAnimationFrame(() => {
++            requestAnimationFrame(() => {
++              try {
++                el.focus();
++              } catch {
++                // ignore
++              }
++            });

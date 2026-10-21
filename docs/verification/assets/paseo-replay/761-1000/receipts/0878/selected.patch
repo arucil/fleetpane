@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[617,618],"new_lines":[640,660],"diff_block_lines":[34,54],"hunk_header":"@@ -617,4 +640,52 @@ export class DaemonClientV2 {","substantive_changed_lines":18}
+   }
+ 
++  private async sendRequest<T>(
++    params: {
++      requestId: string;
++      message: SessionInboundMessage;
++      timeout: number;
++      select: (msg: SessionOutboundMessage) => T | null;
++      options?: { skipQueue?: boolean };
++    }
++  ): Promise<T> {
++    const { promise, cancel } = this.waitForWithCancel<RpcWaitResult<T>>(
++      (msg) => {
++        if (msg.type === "rpc_error" && msg.payload.requestId === params.requestId) {
++          return {
++            kind: "error",
++            error: new DaemonRpcError({
++              requestId: msg.payload.requestId,
++              error: msg.payload.error,
++              requestType: msg.payload.requestType,
++              code: msg.payload.code,

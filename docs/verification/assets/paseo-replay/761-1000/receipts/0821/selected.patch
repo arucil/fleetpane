@@ -1,0 +1,23 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[1025,1033],"new_lines":[1034,1048],"diff_block_lines":[60,80],"hunk_header":"@@ -1025,56 +1034,82 @@ function PermissionRequestCard({","substantive_changed_lines":15}
+       </Text>
+ 
+-      <View style={permissionStyles.optionsContainer}>
++      <View
++        style={[
++          permissionStyles.optionsContainer,
++          !isMobile && permissionStyles.optionsContainerDesktop,
++        ]}
++      >
+         <Pressable
+-          style={[
+-            permissionStyles.optionButton,
+-            { backgroundColor: theme.colors.primary },
+-          ]}
+-          onPress={() => handleResponse({ behavior: "allow" })}
++          style={(state) => {
++            const hovered = Boolean((state as any).hovered);
++            const pressed = Boolean(state.pressed);
++            return [
++              permissionStyles.optionButton,
++              {

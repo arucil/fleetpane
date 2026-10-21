@@ -1,0 +1,23 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[115,116],"new_lines":[115,135],"diff_block_lines":[6,26],"hunk_header":"@@ -115,8 +115,37 @@ async function execSetupCommand(","substantive_changed_lines":14}
+ }
+ 
++async function inferRepoRootPathFromWorktreePath(worktreePath: string): Promise<string> {
++  try {
++    const commonDir = await getGitCommonDir(worktreePath);
++    const normalizedCommonDir = normalizePathForOwnership(commonDir);
++    // Normal repo/worktree: common dir is <repoRoot>/.git
++    if (basename(normalizedCommonDir) === ".git") {
++      return dirname(normalizedCommonDir);
++    }
++    // Bare repo: common dir is the repo dir itself
++    return normalizedCommonDir;
++  } catch {
++    // Fallback: best-effort resolve toplevel (will be the worktree root in typical cases)
++    try {
++      const { stdout } = await execAsync(
++        "git rev-parse --path-format=absolute --show-toplevel",
++        { cwd: worktreePath, env: READ_ONLY_GIT_ENV }
++      );
++      const topLevel = stdout.trim();
++      if (topLevel) {

@@ -1,0 +1,23 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[0,0],"new_lines":[8,28],"diff_block_lines":[14,34],"hunk_header":"@@ -0,0 +1,273 @@","substantive_changed_lines":9}
++  View,
++  Platform,
++} from "react-native";
++import { StyleSheet, useUnistyles } from "react-native-unistyles";
++import { router, usePathname } from "expo-router";
++import { useKeyboardNavStore } from "@/stores/keyboard-nav-store";
++import { useAggregatedAgents, type AggregatedAgent } from "@/hooks/use-aggregated-agents";
++import { formatTimeAgo } from "@/utils/time";
++import { shortenPath } from "@/utils/shorten-path";
++import { useSessionStore } from "@/stores/session-store";
++
++function agentKey(agent: Pick<AggregatedAgent, "serverId" | "id">): string {
++  return `${agent.serverId}:${agent.id}`;
++}
++
++function isMatch(agent: AggregatedAgent, query: string): boolean {
++  if (!query) return true;
++  const q = query.toLowerCase();
++  const title = (agent.title ?? "New agent").toLowerCase();
++  const cwd = agent.cwd.toLowerCase();
++  const host = agent.serverLabel.toLowerCase();

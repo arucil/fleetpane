@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 938,
+  "revision": "dc5336660b0568c50b19b7fc1d8014eed7d732a3",
+  "date": "2026-02-05T01:26:39+07:00",
+  "committer_date": "2026-02-05T01:26:39+07:00",
+  "parents": [
+    "9b8f1e348d7590213add7d5567402ddac1ecd1e5"
+  ],
+  "subject": "Relay pairing: prove direct + iOS deeplink smoke",
+  "diff_tree_paths": [
+    "A\tpackages/app/maestro/assert-online.yaml",
+    "A\tpackages/app/maestro/flows/dev-client.yaml",
+    "M\tpackages/app/maestro/flows/launch.yaml",
+    "A\tpackages/app/maestro/launch-clear.yaml",
+    "M\tpackages/app/maestro/relay-pairing.yaml",
+    "M\tpackages/app/maestro/relay-then-direct.yaml",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/relay/src/crypto.test.ts",
+    "M\tpackages/relay/src/e2e.test.ts",
+    "M\tpackages/relay/src/live-relay.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:c997bd9cdd2db7227f0fd11ccf6ab7f3589d2be4fe6c3c851832e64fe818743b",
+  "diff_tree_digest": "sha256:235c54c5ec502beb779212e19a0e7fb302d8eb6b32fdd1f5fa483c5ff63dbdcc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        303,
+        310
+      ],
+      "new_lines": [
+        305,
+        319
+      ],
+      "diff_block_lines": [
+        12,
+        31
+      ],
+      "hunk_header": "@@ -303,8 +305,15 @@ function OfferLinkListener({",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 120,
+  "receipt_file": "receipts/0938/selected.patch"
+}

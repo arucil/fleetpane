@@ -1,0 +1,23 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2516,2517],"new_lines":[2520,2540],"diff_block_lines":[15,35],"hunk_header":"@@ -2516,4 +2520,79 @@ export class Session {","substantive_changed_lines":15}
+   }
+ 
++  private async handleValidateBranchRequest(
++    msg: Extract<SessionInboundMessage, { type: "validate_branch_request" }>
++  ): Promise<void> {
++    const { cwd, branchName, requestId } = msg;
++
++    try {
++      const resolvedCwd = expandTilde(cwd);
++
++      // Try local branch first
++      try {
++        await execAsync(`git rev-parse --verify ${branchName}`, {
++          cwd: resolvedCwd,
++          env: READ_ONLY_GIT_ENV,
++        });
++        this.emit({
++          type: "validate_branch_response",
++          payload: {
++            exists: true,
++            resolvedRef: branchName,

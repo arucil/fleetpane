@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 773,
+  "revision": "e38f8292d4e2f48c327a4c5c18e02da93f27714f",
+  "date": "2026-01-28T23:22:22+07:00",
+  "committer_date": "2026-01-28T23:22:22+07:00",
+  "parents": [
+    "2bc08e788108d12773e88915e68a6fb5dd7045ce"
+  ],
+  "subject": "chore(cli): enable strict TypeScript config",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/tsconfig.json"
+  ],
+  "source_receipt_digest": "sha256:f6a0326708caac74aaa71760a9fccaabbd115efb59693da03be8b7a34a4a337a",
+  "diff_tree_digest": "sha256:254d534bd9426b3f254e44e8405c6072874736de6dad9f23249f0a0e5795da15",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/index.ts",
+      "old_lines": [
+        15,
+        18
+      ],
+      "new_lines": [
+        18,
+        42
+      ],
+      "diff_block_lines": [
+        13,
+        38
+      ],
+      "hunk_header": "@@ -15,4 +18,25 @@ export function createAgentCommand(): Command {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 22,
+  "receipt_file": "receipts/0773/selected.patch"
+}

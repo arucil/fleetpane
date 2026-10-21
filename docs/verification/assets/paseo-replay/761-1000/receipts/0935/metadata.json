@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 935,
+  "revision": "2620fda5007bd408fe067a0f93c712992aa020c4",
+  "date": "2026-02-05T00:13:55+07:00",
+  "committer_date": "2026-02-05T00:13:55+07:00",
+  "parents": [
+    "2f83c2654cdbf1562958ad16d06846e8ccb0f873"
+  ],
+  "subject": "Skip CLI-dependent tests in CI",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2f5b0b6ffdb72bca31ac80509b74ecb8903868ca73a9bbc3eb117c401d9cd378",
+  "diff_tree_digest": "sha256:e930e7dbd07667beb88134071583e7b12e1a6dac35a26b3e49c24d7ac76029d9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.test.ts",
+      "old_lines": [
+        75,
+        79
+      ],
+      "new_lines": [
+        76,
+        91
+      ],
+      "diff_block_lines": [
+        11,
+        28
+      ],
+      "hunk_header": "@@ -75,5 +76,16 @@ async function collectTurnEvents(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/0935/selected.patch"
+}

@@ -1,0 +1,23 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[691,691],"new_lines":[690,710],"diff_block_lines":[166,186],"hunk_header":"@@ -689,4 +685,49 @@ export default function SettingsScreen() {","substantive_changed_lines":19}
++              visible
++              onClose={() => {
++                if (isRemovingHost) return;
++                setPendingRemoveHost(null);
++              }}
++              testID="remove-host-confirm-modal"
++            >
++              <Text style={{ color: theme.colors.foregroundMuted, fontSize: 14 }}>
++                Remove {pendingRemoveHost.label}? This will delete its saved connections.
++              </Text>
++              <View style={[styles.formActionsRow, { marginTop: theme.spacing[4] }]}>
++                <Pressable
++                  style={[styles.formButton, isRemovingHost && styles.disabled]}
++                  onPress={() => setPendingRemoveHost(null)}
++                  disabled={isRemovingHost}
++                >
++                  <Text style={styles.formButtonText}>Cancel</Text>
++                </Pressable>
++                <Pressable
++                  style={[styles.formButton, isRemovingHost && styles.disabled, { backgroundColor: theme.colors.destructive }]}
++                  onPress={() => {

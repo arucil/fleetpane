@@ -1,0 +1,32 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[850,859],"new_lines":[867,891],"diff_block_lines":[107,136],"hunk_header":"@@ -850,14 +867,55 @@ export function SessionProvider({","substantive_changed_lines":20}
+         status: "online",
+         lastOnlineAt: new Date().toISOString(),
+-        sessionReady: true,
++        agentListReady: true,
+       });
+     });
+ 
+-    const unsubAgentState = client.on("agent_state", (message) => {
+-      if (message.type !== "agent_state") return;
+-      const snapshot = message.payload;
+-      const agent = normalizeAgentSnapshot(snapshot, serverId);
++    const unsubAgentUpdate = client.on("agent_update", (message) => {
++      if (message.type !== "agent_update") return;
++      const update = message.payload;
++
++      if (update.kind === "remove") {
++        const agentId = update.agentId;
++        previousAgentStatusRef.current.delete(agentId);
++
++        setAgents(serverId, (prev) => {
++          if (!prev.has(agentId)) {
++            return prev;
++          }
++          const next = new Map(prev);
++          next.delete(agentId);
++          return next;
++        });
++
++        setPendingPermissions(serverId, (prev) => {
++          if (prev.size === 0) {

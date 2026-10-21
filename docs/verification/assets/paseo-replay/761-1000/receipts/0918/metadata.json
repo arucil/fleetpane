@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 918,
+  "revision": "d68596bcbef5eef80a3aa3967fe6550b56e39996",
+  "date": "2026-02-03T14:13:03+07:00",
+  "committer_date": "2026-02-03T14:13:03+07:00",
+  "parents": [
+    "4fb93d92ed42ba59bf69cc29f35101b92abf7017"
+  ],
+  "subject": "refactor: centralize relay vs direct E2EE",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/relay/package.json",
+    "A\tpackages/relay/src/e2ee.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/connection-offer.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "A\tpackages/server/src/shared/connection-offer.ts"
+  ],
+  "source_receipt_digest": "sha256:8636300707bf1c9ba43e836a0f319bb29350e69883841f4b00e3fba71f4fd596",
+  "diff_tree_digest": "sha256:d9bad23f134c831aab658b63dfb7f03d593bcb2f650e93df43b3bdee16458763",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        321,
+        331
+      ],
+      "new_lines": [
+        321,
+        333
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -320,12 +320,14 @@ export class DaemonClientV2 {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 107,
+  "receipt_file": "receipts/0918/selected.patch"
+}

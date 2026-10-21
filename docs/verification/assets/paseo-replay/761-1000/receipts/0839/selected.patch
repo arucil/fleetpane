@@ -1,0 +1,16 @@
+FILE packages/app/src/components/ui/combobox.tsx
+RANGE {"path":"packages/app/src/components/ui/combobox.tsx","old_lines":[509,519],"new_lines":[509,518],"diff_block_lines":[5,18],"hunk_header":"@@ -509,11 +509,10 @@ export function Combobox({","substantive_changed_lines":5}
+@@ -509,11 +509,10 @@ export function Combobox({
+             {
+               position: "absolute",
+-              minWidth: 200,
+-              width: referenceWidth ?? undefined,
++              minWidth: referenceWidth ?? 200,
++              maxWidth: 400,
+             },
+             floatingStyles,
+             referenceWidth === null ? { opacity: 0 } : null,
+             typeof availableSize?.height === "number" ? { maxHeight: Math.min(availableSize.height, 400) } : null,
+-            typeof availableSize?.width === "number" ? { maxWidth: availableSize.width } : null,
+           ]}
+           ref={refs.setFloating}

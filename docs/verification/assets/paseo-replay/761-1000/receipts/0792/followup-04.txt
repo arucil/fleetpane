@@ -1,0 +1,41 @@
+      .boolean()
+      .optional()
+      .default(false)
+      .describe(
+        "Run agent in background. If false (default), waits for completion or permission request. If true, returns immediately."
+      ),
+  };
+
+  server.registerTool(
+    "create_agent",
+    {
+      title: "Create Agent",
+      description:
+        "Create a new Claude or Codex agent tied to a working directory. Optionally run an initial prompt immediately or create a git worktree for the agent.",
+      inputSchema,
+      outputSchema: {
+        agentId: z.string(),
+        type: AgentProviderEnum,
+        status: AgentStatusEnum,
+        cwd: z.string(),
+        currentModeId: z.string().nullable(),
+        availableModes: z.array(
+          z.object({
+            id: z.string(),
+            label: z.string(),
+            description: z.string().nullable().optional(),
+          })
+        ),
+        lastMessage: z.string().nullable().optional(),
+        permission: AgentPermissionRequestPayloadSchema.nullable().optional(),
+      },
+    },
+    async (args) => {
+      const {
+        cwd,
+        agentType,
+        initialPrompt,
+        initialMode,
+        worktreeName,
+        baseBranch,
+        background = false,

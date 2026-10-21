@@ -1,0 +1,9 @@
+FILE package.json
+RANGE {"path":"package.json","old_lines":[16,20],"new_lines":[16,20],"diff_block_lines":[5,11],"hunk_header":"@@ -16,5 +16,5 @@","substantive_changed_lines":2}
+@@ -16,5 +16,5 @@
+     "dev:app": "npm run start --workspace=@paseo/app",
+     "dev:website": "npm run dev --workspace=@paseo/website",
+-    "postinstall": "patch-package",
++    "postinstall": "node scripts/postinstall-patches.mjs",
+     "build": "npm run build --workspaces --if-present",
+     "typecheck": "npm run typecheck --workspaces --if-present",

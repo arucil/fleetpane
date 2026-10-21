@@ -1,0 +1,55 @@
+ * Vite-style allowed hosts check, adapted to raw Host headers.
+ *
+ * Semantics:
+ * - `allowedHosts === true` => allow any host.
+ * - `allowedHosts === []` or `undefined` => allow localhost, *.localhost, and all IPs.
+ * - `allowedHosts === ['.example.com', 'myhost']` => allow those *in addition* to defaults.
+ */
+export function isHostAllowed(
+  hostHeader: string | undefined,
+  allowedHosts: AllowedHostsConfig
+): boolean {
+  const hostname = hostHeader ? parseHostnameFromHostHeader(hostHeader) : null;
+  if (!hostname) return false;
+
+  if (allowedHosts === true) return true;
+
+  // Defaults are always allowed.
+  if (isDefaultAllowedHostname(hostname)) return true;
+
+  const patterns = allowedHosts ?? [];
+  for (const pattern of patterns) {
+    if (matchesAllowedHostPattern(hostname, pattern)) return true;
+  }
+  return false;
+}
+
+export function mergeAllowedHosts(
+  values: Array<AllowedHostsConfig>
+): AllowedHostsConfig {
+  let merged: string[] = [];
+  for (const value of values) {
+    if (value === true) return true;
+    if (!value) continue;
+    merged = merged.concat(value);
+  }
+
+  const deduped = Array.from(
+    new Set(merged.map((v) => v.trim()).filter((v) => v.length > 0))
+  );
+  return deduped;
+}
+
+export function parseAllowedHostsEnv(
+  raw: string | undefined
+): AllowedHostsConfig {
+  if (!raw) return undefined;
+  const trimmed = raw.trim();
+  if (!trimmed) return undefined;
+  if (trimmed.toLowerCase() === "true") return true;
+  return trimmed
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+}
+

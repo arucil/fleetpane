@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 795,
+  "revision": "ea33d1980f416f8b8c7f5081ea57b97590578a0a",
+  "date": "2026-01-30T22:52:07+07:00",
+  "committer_date": "2026-01-30T22:52:07+07:00",
+  "parents": [
+    "025a68c3a452fae022781fb00930ffe5ab04594e"
+  ],
+  "subject": "feat: add keyboard navigation to combobox and select fields on web",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "A\tpackages/app/src/components/ui/combobox-keyboard.test.ts",
+    "A\tpackages/app/src/components/ui/combobox-keyboard.ts",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/server/src/server/agent/agent-self-id-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/website/public/favicon.ico",
+    "M\tpackages/website/public/favicon.svg"
+  ],
+  "source_receipt_digest": "sha256:03dd1a42d08f9f26ce1d47dc57fdf098fe21f62be636d5170c44073abe46a3c3",
+  "diff_tree_digest": "sha256:bffdd330c406be827027d7d5694a57d6bd4c16b05fe414280bbb9a9493b29847",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/ui/combobox.tsx",
+      "old_lines": [
+        306,
+        307
+      ],
+      "new_lines": [
+        310,
+        339
+      ],
+      "diff_block_lines": [
+        42,
+        71
+      ],
+      "hunk_header": "@@ -306,4 +310,54 @@ export function Combobox({",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 241,
+  "receipt_file": "receipts/0795/selected.patch"
+}

@@ -1,0 +1,23 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[215,227],"new_lines":[215,228],"diff_block_lines":[8,28],"hunk_header":"@@ -213,35 +213,44 @@ export function AgentStreamView({","substantive_changed_lines":8}
+-  // In inverted lists, marginBottom renders as visual gap ABOVE the item.
+-  // Index 0 is visually at the bottom, so use the item ABOVE (index + 1) to compute spacing.
+-  const getGapAbove = useCallback(
++  // The FlatList is inverted, but each row is re-inverted by RN, so `marginBottom` still
++  // manifests as the gap *below* the row in the final visual layout. Compute spacing
++  // against the item visually below (index - 1 in our inverted list).
++  const getGapBelow = useCallback(
+     (item: StreamItem, index: number) => {
+-      const aboveItem = flatListData[index + 1];
+-      if (!aboveItem) {
+-        // This is the topmost item; nothing above it visually.
++      const belowItem = flatListData[index - 1];
++      if (!belowItem) {
++        // This is the bottommost (newest) item; nothing below it visually.
+         return 0;
+       }
+ 
+       // Same type groups get tight gap (4px)
+-      if (isUserMessageItem(item) && isUserMessageItem(aboveItem)) {
++      if (isUserMessageItem(item) && isUserMessageItem(belowItem)) {
+         return tightGap;

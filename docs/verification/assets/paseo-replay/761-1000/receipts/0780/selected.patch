@@ -1,0 +1,14 @@
+FILE packages/cli/src/commands/agent/index.ts
+RANGE {"path":"packages/cli/src/commands/agent/index.ts","old_lines":[58,61],"new_lines":[59,69],"diff_block_lines":[11,22],"hunk_header":"@@ -58,4 +59,11 @@ export function createAgentCommand(): Command {","substantive_changed_lines":6}
+@@ -58,4 +59,11 @@ export function createAgentCommand(): Command {
+     .action(withOutput(runModeCommand))
+ 
++  agent
++    .command('inspect')
++    .description('Show detailed information about an agent')
++    .argument('<id>', 'Agent ID (or prefix)')
++    .option('--host <host>', 'Daemon host:port (default: localhost:6767)')
++    .action(withOutput(runInspectCommand))
++
+   return agent
+ }

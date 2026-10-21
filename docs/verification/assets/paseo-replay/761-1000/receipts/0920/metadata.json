@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 920,
+  "revision": "434955eb937633e9e90ed7d8949a5aec839fd41f",
+  "date": "2026-02-03T14:21:53+07:00",
+  "committer_date": "2026-02-03T14:21:53+07:00",
+  "parents": [
+    "a3a12b54de73457a22d4dc8152316b10e492b98a"
+  ],
+  "subject": "refactor: remove ternary soup and tighten E2EE config",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/server/src/client/daemon-client-v2.ts"
+  ],
+  "source_receipt_digest": "sha256:6cee0c1c3878b2f9837f959eb39f58b00bb0430675f62b358cfc5febe06f23f0",
+  "diff_tree_digest": "sha256:4f32a177ff375570ae7570f46e13a1b0215212159669238acea5feb6abe293d2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        2347,
+        2360
+      ],
+      "new_lines": [
+        2353,
+        2362
+      ],
+      "diff_block_lines": [
+        32,
+        52
+      ],
+      "hunk_header": "@@ -2346,16 +2352,12 @@ function createWebSocketTransportFactory(",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 45,
+  "receipt_file": "receipts/0920/selected.patch"
+}

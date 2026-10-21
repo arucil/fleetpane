@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 828,
+  "revision": "d500b256324b792d71ae528117998ec9986daaf7",
+  "date": "2026-02-03T23:12:17+07:00",
+  "committer_date": "2026-02-03T23:12:17+07:00",
+  "parents": [
+    "4c5651fddc37534745e9efae0aaf005772d4bb30"
+  ],
+  "subject": "refactor: rename realtime to voice throughout codebase",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "D\tpackages/app/src/components/home-footer.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "D\tpackages/app/src/components/realtime-controls.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "A\tpackages/app/src/components/voice-panel.tsx",
+    "D\tpackages/app/src/contexts/realtime-context.tsx",
+    "A\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-audio-player.web.ts",
+    "M\tpackages/server/agent-prompt.md",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/agent/wait-for-agent-tracker.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:dffd653e3bd934a1496dfd0514ea7da1ae1c7aa82e98738fa78211e28eabbe77",
+  "diff_tree_digest": "sha256:7641c6aa8157a2f6e6425a831284cf185d7ef9b6c8373ecdfe89b6ad7254a3d1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sliding-sidebar.tsx",
+      "old_lines": [
+        125,
+        126
+      ],
+      "new_lines": [
+        131,
+        151
+      ],
+      "diff_block_lines": [
+        35,
+        55
+      ],
+      "hunk_header": "@@ -125,4 +131,60 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 1059,
+  "receipt_file": "receipts/0828/selected.patch"
+}

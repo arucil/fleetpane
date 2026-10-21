@@ -1,0 +1,21 @@
+  wss.on("connection", (ws, req) => {
+    const url = new URL(req.url ?? "", `http://${req.headers.host}`);
+    const sessionId = url.searchParams.get("session")!;
+    const role = url.searchParams.get("role") as ConnectionRole;
+
+    const connection = wrapWebSocket(ws, role);
+    relay.addConnection(sessionId, role, connection);
+
+    ws.on("message", (data, isBinary) => {
+      relay.forward(sessionId, role, normalizeWsMessageForRelay(data, isBinary));
+    });
+
+    ws.on("close", () => {
+      relay.removeConnection(sessionId, role);
+    });
+
+    ws.on("error", (error) => {
+      console.error(`[Relay] WebSocket error for ${sessionId}/${role}:`, error);
+    });
+  });
+

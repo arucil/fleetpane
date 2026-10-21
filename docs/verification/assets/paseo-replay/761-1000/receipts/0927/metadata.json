@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 927,
+  "revision": "9ce4ad9758b28f53eda8bf2cbe9ab0ca647b7156",
+  "date": "2026-02-04T15:30:15+07:00",
+  "committer_date": "2026-02-04T15:30:15+07:00",
+  "parents": [
+    "6aff4b3f10e766f9549a8e2168733bf1168a6dd2",
+    "68383661654c102083e07207ee492283b8c8d9fa"
+  ],
+  "subject": "Merge pull request #12 from boudra/daemon-server-id-host-selection",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "A\tpackages/server/src/server/server-id.test.ts",
+    "A\tpackages/server/src/server/server-id.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:98946025ae57f8c78a3e970d996bdb0effd8825cc84dc642d872ed11bcc98b61",
+  "diff_tree_digest": "sha256:a48f9a229d82d6c7150a7d639e8ab03fba1bdb615f78f76a56f2225511a15243",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/daemon-registry-context.tsx",
+      "old_lines": [
+        126,
+        126
+      ],
+      "new_lines": [
+        127,
+        147
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -124,4 +125,70 @@ export function DaemonRegistryProvider({ children }: { children: ReactNode }) {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 333,
+  "receipt_file": "receipts/0927/selected.patch"
+}

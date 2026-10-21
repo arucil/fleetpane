@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 919,
+  "revision": "a3a12b54de73457a22d4dc8152316b10e492b98a",
+  "date": "2026-02-03T14:19:12+07:00",
+  "committer_date": "2026-02-03T14:19:12+07:00",
+  "parents": [
+    "d68596bcbef5eef80a3aa3967fe6550b56e39996"
+  ],
+  "subject": "refactor: share ws endpoint utilities",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/utils/daemon-endpoints.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/shared/connection-offer.ts",
+    "A\tpackages/server/src/shared/daemon-endpoints.ts"
+  ],
+  "source_receipt_digest": "sha256:264d0a7a7808097d43478a806de52025f18c93bc215fcb6e419c053ee87789aa",
+  "diff_tree_digest": "sha256:fcedaeb0c59bc3d12ba037cd4e9b9e01177cdff59145ce729b44f966929fe58b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/daemon-endpoints.ts",
+      "old_lines": [
+        19,
+        39
+      ],
+      "new_lines": [
+        32,
+        32
+      ],
+      "diff_block_lines": [
+        34,
+        54
+      ],
+      "hunk_header": "@@ -18,97 +31,5 @@ export function decodeOfferFragmentPayload(encoded: string): unknown {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 213,
+  "receipt_file": "receipts/0919/selected.patch"
+}

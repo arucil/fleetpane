@@ -1,0 +1,32 @@
+FILE packages/cli/docs/output-architecture.md
+RANGE {"path":"packages/cli/docs/output-architecture.md","old_lines":[0,0],"new_lines":[1,30],"diff_block_lines":[7,36],"hunk_header":"@@ -0,0 +1,543 @@","substantive_changed_lines":16}
++# Output Architecture Design
++
++This document describes the output abstraction layer for the Paseo CLI, enabling structured data output with multiple format options.
++
++## Overview
++
++Commands should return **structured data objects**, not formatted strings. A separate rendering layer transforms this data into the requested output format. This separation enables:
++
++1. **Testability** - Tests verify structured data without parsing strings
++2. **Flexibility** - Easy to add new output formats
++3. **Consistency** - Uniform formatting across all commands
++
++### Inspiration from Existing CLIs
++
++This design draws from patterns in established CLIs:
++
++- **Docker CLI** - Uses Go templates with `--format` flag, provides `table` and `json` directives
++- **kubectl** - Supports `-o json`, `-o yaml`, `-o wide`, and custom columns
++- **GitHub CLI** - Uses `--json` with field selection, plus `--jq` and `--template` post-processors
++
++Sources:
++- [Docker CLI Formatting](https://docs.docker.com/engine/cli/formatting/)
++- [kubectl Output Formatting](https://www.baeldung.com/ops/kubectl-output-format)
++- [GitHub CLI Formatting](https://cli.github.com/manual/gh_help_formatting)
++
++## Architecture
++
++```
++┌─────────────────────────────────────────────────────────────┐
++│                     Command Execution                        │

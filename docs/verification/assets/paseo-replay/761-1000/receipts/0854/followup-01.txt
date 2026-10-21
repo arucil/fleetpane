@@ -1,0 +1,91 @@
+  const q = query.toLowerCase();
+  const title = (agent.title ?? "New agent").toLowerCase();
+  const cwd = agent.cwd.toLowerCase();
+  const host = agent.serverLabel.toLowerCase();
+  return title.includes(q) || cwd.includes(q) || host.includes(q);
+}
+
+function sortAgents(left: AggregatedAgent, right: AggregatedAgent): number {
+  const leftAttention = left.requiresAttention ? 1 : 0;
+  const rightAttention = right.requiresAttention ? 1 : 0;
+  if (leftAttention !== rightAttention) return rightAttention - leftAttention;
+
+  const leftRunning = left.status === "running" ? 1 : 0;
+  const rightRunning = right.status === "running" ? 1 : 0;
+  if (leftRunning !== rightRunning) return rightRunning - leftRunning;
+
+  return right.lastActivityAt.getTime() - left.lastActivityAt.getTime();
+}
+
+export function CommandCenter() {
+  const { theme } = useUnistyles();
+  const pathname = usePathname();
+  const { agents } = useAggregatedAgents();
+  const open = useKeyboardNavStore((s) => s.commandCenterOpen);
+  const setOpen = useKeyboardNavStore((s) => s.setCommandCenterOpen);
+  const inputRef = useRef<TextInput>(null);
+  const [query, setQuery] = useState("");
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const results = useMemo(() => {
+    const filtered = agents.filter((agent) => isMatch(agent, query));
+    filtered.sort(sortAgents);
+    return filtered;
+  }, [agents, query]);
+
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+      setActiveIndex(0);
+      return;
+    }
+
+    const id = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+    return () => clearTimeout(id);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    if (activeIndex >= results.length) {
+      setActiveIndex(results.length > 0 ? results.length - 1 : 0);
+    }
+  }, [activeIndex, open, results.length]);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  const handleSelect = useCallback(
+    (agent: AggregatedAgent) => {
+      const session = useSessionStore.getState().sessions[agent.serverId];
+      session?.client?.clearAgentAttention(agent.id);
+
+      const shouldReplace = pathname.startsWith("/agent/");
+      const navigate = shouldReplace ? router.replace : router.push;
+
+      setOpen(false);
+      navigate(`/agent/${agent.serverId}/${agent.id}` as any);
+    },
+    [pathname, setOpen]
+  );
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handler = (event: KeyboardEvent) => {
+      const key = event.key;
+      if (key !== "ArrowDown" && key !== "ArrowUp" && key !== "Enter" && key !== "Escape") {
+        return;
+      }
+      if (key === "Escape") {
+        event.preventDefault();
+        handleClose();
+        return;
+      }
+      if (key === "Enter") {
+        if (results.length === 0) return;
+        event.preventDefault();
+        const index = Math.max(0, Math.min(activeIndex, results.length - 1));
+        handleSelect(results[index]!);

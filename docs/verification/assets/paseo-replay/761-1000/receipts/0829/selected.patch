@@ -1,0 +1,23 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1161,1177],"new_lines":[1159,1173],"diff_block_lines":[23,43],"hunk_header":"@@ -1161,19 +1159,21 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":10}
+         <View style={styles.diffStatusContainer}>
+           <Pressable
+-            style={({ hovered }) => [
++            style={({ hovered, pressed }) => [
+               styles.diffStatusRow,
+-              hovered && styles.diffStatusRowHovered,
++              (hovered || pressed) && styles.diffStatusRowHovered,
+             ]}
+             testID="changes-diff-status"
+             onPress={() => setDiffModeOverride(diffMode === "uncommitted" ? "base" : "uncommitted")}
+           >
+-            {({ hovered }) => (
++            {({ hovered, pressed }) => (
+               <>
+                 <Text style={styles.diffStatusText}>
+                   {diffMode === "uncommitted" ? "Uncommitted" : "Committed"}
+                 </Text>
+-                {hovered ? (
+-                  <ArrowLeftRight size={12} color={theme.colors.foregroundMuted} />
+-                ) : null}
++                <ArrowLeftRight

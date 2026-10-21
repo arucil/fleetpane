@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 764,
+  "revision": "edc67ba5f77b10b6223e0b1b8968d02fb1ddd1c9",
+  "date": "2026-01-29T11:19:33+07:00",
+  "committer_date": "2026-01-29T11:19:33+07:00",
+  "parents": [
+    "2c138312b2d1d14170ebe9dc63b736296472b935"
+  ],
+  "subject": "Strip ANSI codes from commands and limit branch badge width",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:2f940b4363b38e51f0a654a38ad34b60d961c54d0afe3d4e0f9cb58679953e96",
+  "diff_tree_digest": "sha256:5ad7a5946913f44c043f384aa7980345c035c795041d0f024fa83d830846f441",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        19,
+        25
+      ],
+      "new_lines": [
+        20,
+        26
+      ],
+      "diff_block_lines": [
+        9,
+        18
+      ],
+      "hunk_header": "@@ -19,7 +20,7 @@ const PrincipalParamSchema = z.union([",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 27,
+  "receipt_file": "receipts/0764/selected.patch"
+}

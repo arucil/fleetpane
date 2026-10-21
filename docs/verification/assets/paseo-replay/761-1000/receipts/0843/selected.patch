@@ -1,0 +1,23 @@
+FILE packages/server/src/server/allowed-hosts.ts
+RANGE {"path":"packages/server/src/server/allowed-hosts.ts","old_lines":[0,0],"new_lines":[1,21],"diff_block_lines":[7,27],"hunk_header":"@@ -0,0 +1,104 @@","substantive_changed_lines":11}
++import net from "node:net";
++
++export type AllowedHostsConfig = true | string[] | undefined;
++
++function normalizeHostname(hostname: string): string {
++  return hostname.trim().toLowerCase();
++}
++
++function parseHostnameFromHostHeader(hostHeader: string): string | null {
++  const trimmed = hostHeader.trim();
++  if (!trimmed) return null;
++
++  // IPv6 in brackets: [::1]:6767
++  if (trimmed.startsWith("[")) {
++    const end = trimmed.indexOf("]");
++    if (end === -1) return null;
++    return normalizeHostname(trimmed.slice(1, end));
++  }
++
++  // IPv4/hostname with optional port: localhost:6767
++  const colonIndex = trimmed.indexOf(":");

@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 838,
+  "revision": "7c15b2632986de5d87a018b42f492dac45216802",
+  "date": "2026-02-04T08:22:55+07:00",
+  "committer_date": "2026-02-04T08:22:55+07:00",
+  "parents": [
+    "469a25c724153a05832dba70b180a98087a578c1",
+    "363566587e902fa4989bb0041f6532b76c276496"
+  ],
+  "subject": "Merge pull request #10 from boudra/web-voice-dictation-fix",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "M\tpackages/app/src/hooks/use-audio-player.web.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "A\tpackages/app/src/voice/speech-segmenter.test.ts",
+    "A\tpackages/app/src/voice/speech-segmenter.ts"
+  ],
+  "source_receipt_digest": "sha256:9a957b05bea26dfb5d738003f9d56f2f16aad26b471af668fc5cebfb426d5ef8",
+  "diff_tree_digest": "sha256:acde2f4dcc62969940876d1bc6e45974c63a58f452b40391d6e08c95d1217719",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        1158,
+        1178
+      ],
+      "new_lines": [
+        1175,
+        1176
+      ],
+      "diff_block_lines": [
+        35,
+        55
+      ],
+      "hunk_header": "@@ -1158,25 +1175,40 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 951,
+  "receipt_file": "receipts/0838/selected.patch"
+}

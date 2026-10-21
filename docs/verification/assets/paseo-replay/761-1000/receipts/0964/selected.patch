@@ -1,0 +1,12 @@
+FILE packages/server/.env.example
+RANGE {"path":"packages/server/.env.example","old_lines":[12,17],"new_lines":[12,18],"diff_block_lines":[5,14],"hunk_header":"@@ -12,6 +12,7 @@ TTS_MODEL=tts-1","substantive_changed_lines":2}
+@@ -12,6 +12,7 @@ TTS_MODEL=tts-1
+ PASEO_HOME=~/.paseo
+ 
+-# Voice server port (overrides PORT). Defaults to 6767
+-PASEO_PORT=6767
++# Listen address. Defaults to 127.0.0.1:6767
++# Can be host:port, /path/to/socket, or unix:///path/to/socket
++PASEO_LISTEN=127.0.0.1:6767
+ 
+ # Debug recordings (dictation + STT input + TTS output)

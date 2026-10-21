@@ -1,0 +1,23 @@
+FILE packages/app/src/components/sliding-sidebar.tsx
+RANGE {"path":"packages/app/src/components/sliding-sidebar.tsx","old_lines":[363,375],"new_lines":[362,370],"diff_block_lines":[34,54],"hunk_header":"@@ -352,29 +353,29 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {","substantive_changed_lines":19}
+-              <Text style={styles.hostPickerTitle}>Choose a host</Text>
+-              {voiceEligibleHosts.map((entry) => (
+-                <Pressable
+-                  key={entry.daemon.id}
+-                  style={styles.hostPickerButton}
+-                  onPress={() => handleSelectVoiceHost(entry.daemon.id)}
+-                >
+-                  <Text style={styles.hostPickerButtonText}>{entry.daemon.label}</Text>
+-                </Pressable>
+-              ))}
+-              <Pressable style={styles.hostPickerCancel} onPress={handleDismissVoiceHostPicker}>
+-                <Text style={styles.hostPickerCancelText}>Cancel</Text>
++          <View style={styles.hostPickerList}>
++            {voiceEligibleHosts.map((entry) => (
++              <Pressable
++                key={entry.daemon.id}
++                style={styles.hostPickerOption}
++                onPress={() => handleSelectVoiceHost(entry.daemon.id)}
++              >
++                <Text style={styles.hostPickerOptionText}>{entry.daemon.label}</Text>
+               </Pressable>

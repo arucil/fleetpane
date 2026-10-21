@@ -1,0 +1,81 @@
+        unsubscribe()
+        resolve(extractTimelineFromSnapshot(message))
+      })
+    })
+
+    // Initialize agent to trigger timeline snapshot
+    try {
+      await client.initializeAgent(resolvedId)
+    } catch {
+      // Agent might already be initialized, continue to collect from queue
+    }
+
+    // Get timeline from snapshot
+    const timelineItems = await snapshotPromise
+
+    // Also check message queue for any stream events
+    const queue = client.getMessageQueue()
+    for (const msg of queue) {
+      if (msg.type === 'agent_stream') {
+        const payload = msg.payload as { agentId: string }
+        if (payload.agentId === resolvedId) {
+          const item = extractTimelineFromStream(msg)
+          if (item) {
+            timelineItems.push(item)
+          }
+        }
+      }
+    }
+
+    // Convert to log entries
+    for (const item of timelineItems) {
+      logEntries.push(formatTimelineItem(item))
+    }
+
+    await client.close()
+
+    // Apply tail limit
+    let entries = logEntries
+    if (options.tail) {
+      const tailCount = parseInt(options.tail, 10)
+      if (!isNaN(tailCount) && tailCount > 0) {
+        entries = entries.slice(-tailCount)
+      }
+    }
+
+    return {
+      type: 'list',
+      data: entries,
+      schema: logsSchema,
+    }
+  } catch (err) {
+    await client.close().catch(() => {})
+    // Re-throw if already a CommandError
+    if (err && typeof err === 'object' && 'code' in err) {
+      throw err
+    }
+    const message = err instanceof Error ? err.message : String(err)
+    const error: CommandError = {
+      code: 'LOGS_FAILED',
+      message: `Failed to get logs: ${message}`,
+    }
+    throw error
+  }
+}
+
+/**
+ * Follow mode: stream logs in real-time until interrupted
+ */
+async function runFollowMode(
+  client: DaemonClientV2,
+  agentId: string,
+  options: AgentLogsOptions
+): Promise<AgentLogsResult> {
+  const logEntries: LogEntry[] = []
+
+  // First, get existing timeline
+  const snapshotPromise = new Promise<Array<{ type: string; [key: string]: unknown }>>((resolve) => {
+    const timeout = setTimeout(() => resolve([]), 10000)
+
+    const unsubscribe = client.on('agent_stream_snapshot', (msg: unknown) => {
+      const message = msg as AgentStreamSnapshotMessage

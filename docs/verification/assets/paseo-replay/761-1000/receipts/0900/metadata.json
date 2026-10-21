@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 900,
+  "revision": "835e8e45d18cc0d50e97de814441c7f4b38cb6f5",
+  "date": "2026-02-04T14:01:58+07:00",
+  "committer_date": "2026-02-04T14:01:58+07:00",
+  "parents": [
+    "db3c085372fcf492ae51d3e67dd4f2c98239c4dd"
+  ],
+  "subject": "Fix dropdown-menu type by avoiding destructuring",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx"
+  ],
+  "source_receipt_digest": "sha256:aac807a5ebb6e61e01294426403cbf77ad4e096b2c700beb19ef45884a33886d",
+  "diff_tree_digest": "sha256:e096a52669314dbb4c67a7423c3661e4eb0e66f46bc6b3aa232971547f420e02",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/ui/dropdown-menu.tsx",
+      "old_lines": [
+        195,
+        210
+      ],
+      "new_lines": [
+        195,
+        209
+      ],
+      "diff_block_lines": [
+        5,
+        25
+      ],
+      "hunk_header": "@@ -195,16 +195,15 @@ export function DropdownMenuTrigger({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 11,
+  "receipt_file": "receipts/0900/selected.patch"
+}

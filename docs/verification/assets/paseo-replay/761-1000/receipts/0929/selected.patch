@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[758,759],"new_lines":[773,793],"diff_block_lines":[23,43],"hunk_header":"@@ -756,4 +756,38 @@ export class DaemonClient {","substantive_changed_lines":11}
++      timeout: params?.timeoutMs ?? 5000,
++      select: (msg) => {
++        if (msg.type !== "pong") return null;
++        if (msg.payload.requestId !== requestId) return null;
++        if (typeof msg.payload.serverReceivedAt !== "number") return null;
++        if (typeof msg.payload.serverSentAt !== "number") return null;
++        return msg.payload;
++      },
++    });
++
++    return {
++      requestId,
++      clientSentAt,
++      serverReceivedAt: payload.serverReceivedAt,
++      serverSentAt: payload.serverSentAt,
++      rttMs: Date.now() - clientSentAt,
++    };
++  }
++
+   // ============================================================================
+   // Agent RPCs (requestId-correlated)

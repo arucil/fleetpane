@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 790,
+  "revision": "f8da5ada71e9ef0d70550d8edd9c7d3a4d5e4ac2",
+  "date": "2026-01-30T12:09:56+07:00",
+  "committer_date": "2026-01-30T12:09:56+07:00",
+  "parents": [
+    "f689cb13850c0297e423b3f5705282c6d1d6d95b"
+  ],
+  "subject": "fix: move PID lock to bootstrap.ts for all entrypoints",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/index.ts"
+  ],
+  "source_receipt_digest": "sha256:0bec5c129719abd9faf423f96a87d9fc3d7c74c2a1f2a4558364d883c85722d0",
+  "diff_tree_digest": "sha256:9bcbe6330c6b725937748f53509373af339091dc955044411690b29e955750a0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/index.ts",
+      "old_lines": [
+        22,
+        26
+      ],
+      "new_lines": [
+        23,
+        35
+      ],
+      "diff_block_lines": [
+        11,
+        25
+      ],
+      "hunk_header": "@@ -22,5 +23,13 @@ async function main() {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/0790/selected.patch"
+}

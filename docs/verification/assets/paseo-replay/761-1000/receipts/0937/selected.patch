@@ -1,0 +1,17 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[1061,1065],"new_lines":[1066,1078],"diff_block_lines":[22,36],"hunk_header":"@@ -1061,5 +1066,13 @@ function DaemonCard({","substantive_changed_lines":7}
+@@ -1061,5 +1066,13 @@ function DaemonCard({
+         : statusTone === "error"
+           ? "rgba(248, 113, 113, 0.1)"
+-          : "rgba(161, 161, 170, 0.1)";
++      : "rgba(161, 161, 170, 0.1)";
++
++  const connectionsSummary = (() => {
++    const parts = daemon.connections.map((conn) => {
++      if (conn.type === "relay") return `relay:${conn.relayEndpoint}`;
++      return `direct:${conn.endpoint}`;
++    });
++    return parts.join(" • ");
++  })();
+ 
+   return (

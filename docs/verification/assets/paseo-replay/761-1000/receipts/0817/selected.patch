@@ -1,0 +1,18 @@
+FILE packages/cli/src/utils/client.ts
+RANGE {"path":"packages/cli/src/utils/client.ts","old_lines":[57,63],"new_lines":[58,72],"diff_block_lines":[14,29],"hunk_header":"@@ -57,7 +58,15 @@ export async function connectToDaemon(options?: ConnectOptions): Promise<DaemonC","substantive_changed_lines":4}
+@@ -57,7 +58,15 @@ export async function connectToDaemon(options?: ConnectOptions): Promise<DaemonC
+   try {
+     await Promise.race([connectPromise, timeoutPromise])
++    // Clear the timeout so it doesn't keep the event loop alive
++    if (timeoutHandle) {
++      clearTimeout(timeoutHandle)
++    }
+     client.subscribeAgentUpdates({ subscriptionId: `cli:${process.pid}` })
+     return client
+   } catch (err) {
++    // Clear the timeout on error too
++    if (timeoutHandle) {
++      clearTimeout(timeoutHandle)
++    }
+     await client.close().catch(() => {})
+     throw err

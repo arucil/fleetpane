@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 933,
+  "revision": "0438a43cb041e849c564e6a2f868a1e58c913de3",
+  "date": "2026-02-05T00:03:15+07:00",
+  "committer_date": "2026-02-05T00:03:15+07:00",
+  "parents": [
+    "2f3cbe5e84f26cca0bf5e4106cfb0626b6073d47"
+  ],
+  "subject": "Make CI independent of external CLIs",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/model-catalog.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/live-preferences.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/models.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/terminal-mcp/terminal-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:d43c47521e7a89648b338bad36e1893b6deb6b62b9765eb1fe24cf80d65cabdc",
+  "diff_tree_digest": "sha256:a6c0157248253a1d7a8e5ace3e2938ca34d4d6b9621f44184f0ac0548808c37b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/terminal-mcp/terminal-manager.ts",
+      "old_lines": [
+        394,
+        398
+      ],
+      "new_lines": [
+        394,
+        399
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -394,5 +394,6 @@ export class TerminalManager {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 51,
+  "receipt_file": "receipts/0933/selected.patch"
+}

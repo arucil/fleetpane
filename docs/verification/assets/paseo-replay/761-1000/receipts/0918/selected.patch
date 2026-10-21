@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[321,331],"new_lines":[321,333],"diff_block_lines":[14,34],"hunk_header":"@@ -320,12 +320,14 @@ export class DaemonClientV2 {","substantive_changed_lines":14}
+         );
+-      const transportFactory =
+-        this.config.e2ee?.enabled === true
+-          ? createEncryptedTransportFactory(
+-              baseTransportFactory,
+-              this.config.e2ee?.daemonPublicKeyB64,
+-              this.logger
+-            )
+-          : baseTransportFactory;
++      const shouldUseRelayE2ee =
++        this.config.e2ee?.enabled === true &&
++        isRelayClientWebSocketUrl(this.config.url);
++      const transportFactory = shouldUseRelayE2ee
++        ? createRelayE2eeTransportFactory(
++            baseTransportFactory,
++            this.config.e2ee?.daemonPublicKeyB64,
++            this.logger
++          )
++        : baseTransportFactory;
+       const transport = transportFactory({ url: this.config.url, headers });
+       this.transport = transport;

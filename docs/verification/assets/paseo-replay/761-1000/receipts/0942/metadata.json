@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 942,
+  "revision": "574bdc16f6e248fb40b0bddfd8cf077dffd18b54",
+  "date": "2026-02-05T10:45:51+07:00",
+  "committer_date": "2026-02-05T10:45:51+07:00",
+  "parents": [
+    "36e105ed30e057a3b85a1d125cb9f0a7be40059c"
+  ],
+  "subject": "simplify: remove ws bridge; wrangler-based relay tests",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/relay/src/cloudflare-adapter.ts",
+    "M\tpackages/relay/src/e2e.test.ts",
+    "M\tpackages/relay/src/index.ts",
+    "D\tpackages/relay/src/node-adapter.ts",
+    "D\tpackages/relay/src/relay.ts",
+    "M\tpackages/relay/src/types.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "D\tpackages/server/src/server/websocket-session-bridge.ts",
+    "D\tscripts/relay-local.ts"
+  ],
+  "source_receipt_digest": "sha256:28aed5ccbeb3e3b14c8005fc6e84950c5e0bd50c071a6a8c688b56d4776345cc",
+  "diff_tree_digest": "sha256:a8d820c9b8738e02d0c498201e78f557fb596f960a8c9c612590ae0758d06f0f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        102,
+        113
+      ],
+      "new_lines": [
+        164,
+        177
+      ],
+      "diff_block_lines": [
+        137,
+        157
+      ],
+      "hunk_header": "@@ -99,21 +162,495 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 1279,
+  "receipt_file": "receipts/0942/selected.patch"
+}

@@ -1,0 +1,82 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 792,
+  "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+  "date": "2026-01-30T13:39:40+07:00",
+  "committer_date": "2026-01-30T13:39:40+07:00",
+  "parents": [
+    "5b32d0a56cbc5dd481b9a6e2a043d9f054b7cba9"
+  ],
+  "subject": "refactor: rename session_state to agent_list and add subscriptions",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/contexts/daemon-connections-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/agent-directory.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/archive.ts",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/mode.ts",
+    "M\tpackages/cli/src/commands/agent/send.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/cli/src/commands/permit/allow.ts",
+    "M\tpackages/cli/src/commands/permit/deny.ts",
+    "M\tpackages/cli/src/commands/permit/ls.ts",
+    "M\tpackages/cli/src/commands/worktree/ls.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/self-id-bridge/index.ts",
+    "A\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "A\tpackages/server/src/server/agent/agent-self-id-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-codex.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/persistence.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/self-id-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/streaming.e2e.test.ts",
+    "A\tpackages/server/src/server/pid-lock.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-test-context.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:e9613b43cb92741b41e69612b02bb0273427216ace3f03375cc5066d8e4160ad",
+  "diff_tree_digest": "sha256:43ee19b7de96228479a65004eca39ed93a9e8e7f505d622d21de8c468f3b3445",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        850,
+        859
+      ],
+      "new_lines": [
+        867,
+        891
+      ],
+      "diff_block_lines": [
+        107,
+        136
+      ],
+      "hunk_header": "@@ -850,14 +867,55 @@ export function SessionProvider({",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1663,
+  "receipt_file": "receipts/0792/selected.patch"
+}

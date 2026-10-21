@@ -1,0 +1,16 @@
+FILE packages/server/scripts/dictation-generate-baseline.ts
+RANGE {"path":"packages/server/scripts/dictation-generate-baseline.ts","old_lines":[36,37],"new_lines":[22,35],"diff_block_lines":[32,45],"hunk_header":"@@ -18,20 +18,18 @@ async function main(): Promise<void> {","substantive_changed_lines":8}
++    process.env.DICTATION_AUDIO_PATH ??
++    (process.argv[2] ? path.resolve(process.argv[2]) : null);
++  const outPath = path.resolve(process.env.DICTATION_OUT_PATH ?? process.argv[3] ?? defaultOutPath);
++
++  if (!audioPath) {
++    // eslint-disable-next-line no-console
++    console.error(
++      "Usage: npx tsx packages/server/scripts/dictation-generate-baseline.ts <audioPath> [outPath]\n" +
++        "  Or set DICTATION_AUDIO_PATH / DICTATION_OUT_PATH.\n"
++    );
++    process.exit(2);
++  }
+ 
+   const apiKey = requireEnv("OPENAI_API_KEY");

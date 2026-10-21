@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 819,
+  "revision": "30f1682ca1dad86eb658126117b998435ccf4893",
+  "date": "2026-02-02T22:09:17+07:00",
+  "committer_date": "2026-02-02T22:09:17+07:00",
+  "parents": [
+    "303a82d1c79722f16ce7ca5a27421f8770293218"
+  ],
+  "subject": "refactor: rename plan to tasks and extract task entries from tool calls",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-activity.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:6d6104d4fd4323f3c8d138723d06dfc080fee0a532b2085a21cc45db2c8b7ff6",
+  "diff_tree_digest": "sha256:c4638e60d93b9fd8571496dcff417d0a26fd7efff3d6c55e1f86b46ca967edfe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        1227,
+        1227
+      ],
+      "new_lines": [
+        1227,
+        1247
+      ],
+      "diff_block_lines": [
+        8,
+        28
+      ],
+      "hunk_header": "@@ -1225,4 +1225,83 @@ export function parseToolCallDisplay(toolName: string, input: unknown, result: u",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 173,
+  "receipt_file": "receipts/0819/selected.patch"
+}

@@ -1,0 +1,14 @@
+FILE packages/website/src/routeTree.gen.ts
+RANGE {"path":"packages/website/src/routeTree.gen.ts","old_lines":[138,141],"new_lines":[150,160],"diff_block_lines":[57,68],"hunk_header":"@@ -138,4 +150,11 @@ declare module '@tanstack/react-router' {","substantive_changed_lines":6}
+@@ -138,4 +150,11 @@ declare module '@tanstack/react-router' {
+       parentRoute: typeof DocsRoute
+     }
++    '/docs/worktrees': {
++      id: '/docs/worktrees'
++      path: '/worktrees'
++      fullPath: '/docs/worktrees'
++      preLoaderRoute: typeof DocsWorktreesRouteImport
++      parentRoute: typeof DocsRoute
++    }
+     '/docs/security': {
+       id: '/docs/security'

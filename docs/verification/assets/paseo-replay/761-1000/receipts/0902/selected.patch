@@ -1,0 +1,9 @@
+FILE packages/app/src/components/ui/dropdown-menu.tsx
+RANGE {"path":"packages/app/src/components/ui/dropdown-menu.tsx","old_lines":[209,213],"new_lines":[209,213],"diff_block_lines":[5,11],"hunk_header":"@@ -209,5 +209,5 @@ export function DropdownMenuTrigger({","substantive_changed_lines":2}
+@@ -209,5 +209,5 @@ export function DropdownMenuTrigger({
+       disabled={disabled}
+       onPress={handlePress}
+-      style={({ pressed, hovered }) => {
++      style={({ pressed, hovered = false }) => {
+         if (typeof style === "function") {
+           return style({ pressed, hovered, open: ctx.open });

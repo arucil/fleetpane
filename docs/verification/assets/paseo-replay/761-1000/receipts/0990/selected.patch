@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/docs/worktrees.tsx
+RANGE {"path":"packages/website/src/routes/docs/worktrees.tsx","old_lines":[59,67],"new_lines":[59,75],"diff_block_lines":[7,27],"hunk_header":"@@ -58,12 +58,42 @@ function Worktrees() {","substantive_changed_lines":15}
+ ├── my-project/
+-│   ├── feature-auth/        # worktree for feature-auth branch
+-│   └── fix-login-bug/       # worktree for fix-login-bug branch
++│   ├── tidy-fox/            # random slug
++│   └── bold-owl/            # random slug
+ └── another-repo/
+-    └── refactor-api/        # worktree for refactor-api branch`}</pre>
++    └── swift-hare/          # random slug`}</pre>
+         </Code>
+         <p className="text-white/60 leading-relaxed">
+           The project name is derived from your git remote URL or repository directory name.
+-          Worktree names map to branch names.
++          Directory names are random slugs — the branch name is separate and chosen when
++          you first launch an agent in the worktree.
++        </p>
++      </section>
++
++      {/* Branches */}
++      <section className="space-y-4">
++        <h2 className="text-xl font-medium">Branches</h2>
++        <p className="text-white/60 leading-relaxed">

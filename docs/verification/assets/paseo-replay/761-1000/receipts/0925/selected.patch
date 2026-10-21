@@ -1,0 +1,24 @@
+FILE packages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts","old_lines":[127,139],"new_lines":[127,143],"diff_block_lines":[5,26],"hunk_header":"@@ -127,13 +127,17 @@ describe(\"Relay transport (E2EE) - daemon E2E\", () => {","substantive_changed_lines":9}
+@@ -127,13 +127,17 @@ describe("Relay transport (E2EE) - daemon E2E", () => {
+                 {
+                   onmessage: (data) => {
+-                    clearTimeout(timeout);
+                     try {
+                       const payload =
+                         typeof data === "string" ? JSON.parse(data) : data;
+-                      resolve(payload);
++                      // The daemon may send an initial `server_info` status message
++                      // immediately upon connect; ignore everything until we see `pong`.
++                      if (payload && typeof payload === "object" && (payload as any).type === "pong") {
++                        clearTimeout(timeout);
++                        resolve(payload);
++                        ws.close();
++                      }
+                     } catch (err) {
++                      clearTimeout(timeout);
+                       reject(err);
+-                    } finally {
+-                      ws.close();
+                     }
+                   },

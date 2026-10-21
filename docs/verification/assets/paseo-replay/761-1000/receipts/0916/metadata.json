@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 916,
+  "revision": "6ed70e24c7155c5cf7199c01120e435c6004aed5",
+  "date": "2026-02-01T23:11:41+07:00",
+  "committer_date": "2026-02-03T13:40:44+07:00",
+  "parents": [
+    "a7a39ffd01ad5e21bc41ed1a4108ec4fcf0dbd29"
+  ],
+  "subject": "feat: implement end-to-end encryption for relay connections",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackage-lock.json",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/metro.config.js",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/app/src/polyfills/crypto.ts",
+    "M\tpackages/relay/package.json",
+    "A\tpackages/relay/src/base64.ts",
+    "M\tpackages/relay/src/crypto.ts",
+    "M\tpackages/relay/src/encrypted-channel.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/connection-offer.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-keypair.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/tsconfig.server.json"
+  ],
+  "source_receipt_digest": "sha256:3839c978eab95a462eff3e8c9ce37f95cb0591bd61f5978927c69e6493627f31",
+  "diff_tree_digest": "sha256:4922e8890d609e4d1bd78fc069099d8bdc40fe5bd95fc318bc8f1fdc0540a56b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        2327,
+        2327
+      ],
+      "new_lines": [
+        2344,
+        2364
+      ],
+      "diff_block_lines": [
+        45,
+        65
+      ],
+      "hunk_header": "@@ -2326,4 +2343,204 @@ function createWebSocketTransportFactory(",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 815,
+  "receipt_file": "receipts/0916/selected.patch"
+}

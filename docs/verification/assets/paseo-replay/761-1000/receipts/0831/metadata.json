@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 831,
+  "revision": "a7a39ffd01ad5e21bc41ed1a4108ec4fcf0dbd29",
+  "date": "2026-02-03T13:38:16+07:00",
+  "committer_date": "2026-02-03T13:38:16+07:00",
+  "parents": [
+    "ad632cb3bddb3eacaf15d66eef96d84cdeda6238",
+    "af89de1237d5543b6f0f0686a252ad708d76dc26"
+  ],
+  "subject": "Merge pull request #6 from boudra/feat/push-notifications",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "A\tpackages/app/src/hooks/use-push-token-registration.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/server/src/server/push/token-store.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+  "diff_tree_digest": "sha256:3c193644177c2b510c8756f0629d8b9689f3e20793fbcd2d01183509a75f460a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        35,
+        36
+      ],
+      "new_lines": [
+        36,
+        56
+      ],
+      "diff_block_lines": [
+        22,
+        42
+      ],
+      "hunk_header": "@@ -35,4 +36,61 @@ import { getIsTauriMac } from \"@/constants/layout\";",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 314,
+  "receipt_file": "receipts/0831/selected.patch"
+}

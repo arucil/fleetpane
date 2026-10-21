@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 826,
+  "revision": "14b0db55b06e4dc4e936dccef9a0f3bcab26f9e0",
+  "date": "2026-02-03T14:50:15+07:00",
+  "committer_date": "2026-02-03T14:50:15+07:00",
+  "parents": [
+    "ad632cb3bddb3eacaf15d66eef96d84cdeda6238"
+  ],
+  "subject": "consolidate checkout status handling and improve git detection",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.test.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/utils/agent-display-info.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:5757fb698b964c0850a058f586c16e410827ba4b43fc6cf760d1d2f9c2276f5b",
+  "diff_tree_digest": "sha256:a78313ef47001cc040923036c6d0a6a53ed84c6a6c90c34ed7ed203ce1843b87",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agent/agent-ready-screen.tsx",
+      "old_lines": [
+        680,
+        700
+      ],
+      "new_lines": [
+        639,
+        640
+      ],
+      "diff_block_lines": [
+        69,
+        89
+      ],
+      "hunk_header": "@@ -680,29 +639,28 @@ function AgentScreenContent({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 440,
+  "receipt_file": "receipts/0826/selected.patch"
+}

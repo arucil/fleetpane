@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[0,0],"new_lines":[8,28],"diff_block_lines":[14,34],"hunk_header":"@@ -0,0 +1,2700 @@","substantive_changed_lines":1}
++  SessionInboundMessageSchema,
++  WSOutboundMessageSchema,
++} from "../shared/messages.js";
++import type {
++  AgentStreamEventPayload,
++  AgentSnapshotPayload,
++  AgentPermissionResolvedMessage,
++  VoiceConversationLoadedMessage,
++  CreateAgentRequestMessage,
++  DeleteVoiceConversationResponseMessage,
++  FileDownloadTokenResponse,
++  FileExplorerResponse,
++  GitDiffResponse,
++  GitSetupOptions,
++  HighlightedDiffResponse,
++  CheckoutStatusResponse,
++  CheckoutDiffResponse,
++  CheckoutCommitResponse,
++  CheckoutMergeResponse,
++  CheckoutMergeFromBaseResponse,
++  CheckoutPushResponse,

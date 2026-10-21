@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/run.ts
+RANGE {"path":"packages/cli/src/commands/agent/run.ts","old_lines":[0,0],"new_lines":[4,33],"diff_block_lines":[10,39],"hunk_header":"@@ -0,0 +1,113 @@","substantive_changed_lines":21}
++
++/** Agent snapshot type returned from daemon client */
++interface AgentSnapshot {
++  id: string
++  provider: string
++  cwd: string
++  createdAt: string
++  status: string
++  title: string | null
++}
++
++/** Result type for agent run command */
++export interface AgentRunResult {
++  agentId: string
++  status: 'created' | 'running'
++  provider: string
++  cwd: string
++  title: string | null
++}
++
++/** Schema for agent run output */
++export const agentRunSchema: OutputSchema<AgentRunResult> = {
++  idField: 'agentId',
++  columns: [
++    { header: 'AGENT ID', field: 'agentId', width: 12 },
++    { header: 'STATUS', field: 'status', width: 10 },
++    { header: 'PROVIDER', field: 'provider', width: 10 },
++    { header: 'CWD', field: 'cwd', width: 30 },
++    { header: 'TITLE', field: 'title', width: 20 },
++  ],

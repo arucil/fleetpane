@@ -1,0 +1,23 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[765,766],"new_lines":[765,785],"diff_block_lines":[6,26],"hunk_header":"@@ -765,4 +765,26 @@ export function reduceStreamUpdate(","substantive_changed_lines":12}
+           }
+ 
++          if (
++            event.provider === "claude" &&
++            (normalizedToolName === "todowrite" ||
++              normalizedToolName === "todo_write")
++          ) {
++            // For Claude: TodoWrite often appears as a tool call that never resolves. Always render it
++            // as Tasks when possible and otherwise hide it to avoid a stuck loading tool call.
++            const tasks = extractTaskEntriesFromToolCall(item.name, item.input);
++            if (tasks) {
++              nextState = appendTodoList(
++                state,
++                event.provider,
++                tasks.map((entry) => ({
++                  text: entry.text,
++                  completed: entry.completed,
++                })),
++                timestamp
++              );
++            }

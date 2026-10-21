@@ -1,0 +1,9 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[182,186],"new_lines":[182,186],"diff_block_lines":[5,11],"hunk_header":"@@ -182,5 +182,5 @@ export function ToolCallDetailsContent({","substantive_changed_lines":2}
+@@ -182,5 +182,5 @@ export function ToolCallDetailsContent({
+                   <Text style={styles.shellPrompt}>$ </Text>
+                   {display.command}
+-                  {hasOutput ? `\n\n${display.output}` : ""}
++                  {hasOutput ? `\n${display.output}` : ""}
+                 </Text>
+               </View>

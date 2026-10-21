@@ -1,0 +1,96 @@
+    Boolean
+  ) as string[];
+
+  const instructions: string[] = [
+    "Generate metadata for a coding agent based on the user prompt.",
+  ];
+
+  if (needs.needsTitle) {
+    instructions.push("Title: short descriptive label (<= 60 chars).");
+  }
+  if (needs.needsBranch) {
+    instructions.push(
+      "Branch: lowercase slug using letters, numbers, hyphens, and slashes only; no spaces, no uppercase, no leading/trailing hyphen, no consecutive hyphens."
+    );
+  }
+
+  if (fields.length === 1) {
+    instructions.push(`Return JSON only with a single field '${fields[0]}'.`);
+  } else {
+    instructions.push(`Return JSON only with fields '${fields.join("' and '")}'.`);
+  }
+
+  instructions.push("", "User prompt:", needs.prompt ?? "");
+  return instructions.join("\n");
+}
+
+export async function generateAndApplyAgentMetadata(
+  options: AgentMetadataGenerationOptions
+): Promise<void> {
+  const needs = await determineAgentMetadataNeeds(options);
+  if (!needs.prompt) {
+    return;
+  }
+
+  const schema = buildMetadataSchema(needs);
+  if (!schema) {
+    return;
+  }
+
+  const generator = options.deps?.generateStructuredAgentResponse ?? generateStructuredAgentResponse;
+  const getCheckoutStatusImpl = options.deps?.getCheckoutStatus ?? getCheckoutStatus;
+  const renameCurrentBranchImpl = options.deps?.renameCurrentBranch ?? renameCurrentBranch;
+
+  let result: { title?: string; branch?: string };
+
+  try {
+    result = await generator({
+      manager: options.agentManager,
+      agentConfig: {
+        provider: "claude",
+        model: AUTO_GEN_MODEL,
+        cwd: options.cwd,
+        title: "Agent metadata generator",
+        internal: true,
+      },
+      prompt: buildPrompt(needs),
+      schema,
+      schemaName: "AgentMetadata",
+      maxRetries: 2,
+    });
+  } catch (error) {
+    if (error instanceof StructuredAgentResponseError) {
+      options.logger.warn(
+        { err: error, agentId: options.agentId },
+        "Structured metadata generation failed"
+      );
+      return;
+    }
+    options.logger.error(
+      { err: error, agentId: options.agentId },
+      "Agent metadata generation failed"
+    );
+    return;
+  }
+
+  if (needs.needsTitle && typeof result.title === "string") {
+    const normalizedTitle = result.title.trim();
+    if (normalizedTitle.length > 0) {
+      await options.agentManager.setTitle(options.agentId, normalizedTitle);
+    }
+  }
+
+  if (needs.needsBranch && typeof result.branch === "string") {
+    const normalizedBranch = result.branch.trim();
+    const validation = validateBranchSlug(normalizedBranch);
+    if (!validation.valid) {
+      options.logger.warn(
+        { agentId: options.agentId, branch: normalizedBranch, error: validation.error },
+        "Generated branch name is invalid"
+      );
+      return;
+    }
+
+    let status: CheckoutStatusResult;
+    try {
+      status = await getCheckoutStatusImpl(options.cwd, { paseoHome: options.paseoHome });

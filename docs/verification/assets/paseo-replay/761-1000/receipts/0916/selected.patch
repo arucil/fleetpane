@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[2327,2327],"new_lines":[2344,2364],"diff_block_lines":[45,65],"hunk_header":"@@ -2326,4 +2343,204 @@ function createWebSocketTransportFactory(","substantive_changed_lines":15}
+ 
++function createEncryptedTransportFactory(
++  baseFactory: DaemonTransportFactory,
++  daemonPublicKeyB64: string | undefined,
++  logger: Logger
++): DaemonTransportFactory {
++  if (!daemonPublicKeyB64) {
++    throw new Error("daemonPublicKeyB64 is required for relay E2EE");
++  }
++
++  return ({ url, headers }) => {
++    const base = baseFactory({ url, headers });
++    return createEncryptedTransport(base, daemonPublicKeyB64, logger);
++  };
++}
++
++function createEncryptedTransport(
++  base: DaemonTransport,
++  daemonPublicKeyB64: string,
++  logger: Logger
++): DaemonTransport {

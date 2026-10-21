@@ -1,0 +1,9 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[1056,1060],"new_lines":[1059,1063],"diff_block_lines":[25,31],"hunk_header":"@@ -1056,5 +1059,5 @@ function DaemonCard({","substantive_changed_lines":2}
+@@ -1056,5 +1059,5 @@ function DaemonCard({
+       <View style={styles.hostCardContent}>
+         <View style={styles.hostHeaderRow}>
+-          <Text style={styles.hostLabel}>{daemon.label}</Text>
++          <Text style={styles.hostLabel} numberOfLines={1}>{daemon.label}</Text>
+           <View style={styles.hostHeaderRight}>
+             <View style={[styles.statusPill, { backgroundColor: statusPillBg }]}>

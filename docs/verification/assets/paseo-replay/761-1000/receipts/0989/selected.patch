@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/docs/worktrees.tsx
+RANGE {"path":"packages/website/src/routes/docs/worktrees.tsx","old_lines":[0,0],"new_lines":[15,35],"diff_block_lines":[21,41],"hunk_header":"@@ -0,0 +1,235 @@","substantive_changed_lines":16}
++
++function Code({ children }: { children: React.ReactNode }) {
++  return (
++    <div className="bg-card border border-border rounded-lg p-4 font-mono text-sm overflow-x-auto">
++      {children}
++    </div>
++  )
++}
++
++function Worktrees() {
++  return (
++    <div className="space-y-10">
++      <div>
++        <h1 className="text-3xl font-medium font-title mb-4">Git Worktrees</h1>
++        <p className="text-white/60 leading-relaxed">
++          Git worktrees let you have multiple working directories from the same repository.
++          Paseo uses them to run agents in isolated branches without switching contexts.
++        </p>
++      </div>
++
++      {/* Why worktrees */}

@@ -1,0 +1,32 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[1907,1934],"new_lines":[1907,1913],"diff_block_lines":[6,35],"hunk_header":"@@ -1907,91 +1907,57 @@ export class DaemonClientV2 {","substantive_changed_lines":16}
+   }
+ 
+-  async waitForAgentIdle(
++  async waitForFinish(
+     agentId: string,
+     timeout = 60000
+   ): Promise<AgentSnapshotPayload> {
+-    const current = this.agentIndex.get(agentId);
+-    const pendingPermissionIds = new Set<string>();
+-    if (current?.pendingPermissions) {
+-      for (const request of current.pendingPermissions) {
+-        pendingPermissionIds.add(request.id);
+-      }
+-    }
+-
+-    // Track whether we've seen a running state. Important: we only set this
+-    // when we see running IN THE QUEUE, not based on current state. This prevents
+-    // finding old idle states that occurred before the current run started.
+-    let sawRunningInQueue = false;
+-    let queuedIdle: AgentSnapshotPayload | null = null;
+-
+-    const updatePendingPermissions = (msg: SessionOutboundMessage): void => {
+-      if (
+-        msg.type === "agent_permission_request" &&
+-        msg.payload.agentId === agentId
+-      ) {
+-        pendingPermissionIds.add(msg.payload.request.id);
+-        return;
+-      }
++    // We need to see the agent start (running/initializing) before we can

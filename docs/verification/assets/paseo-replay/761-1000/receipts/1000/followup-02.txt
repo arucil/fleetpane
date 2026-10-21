@@ -1,0 +1,14 @@
+diff --git a/packages/server/src/server/bootstrap.ts b/packages/server/src/server/bootstrap.ts
+index 82c54fd28..92f13cff7 100644
+--- a/packages/server/src/server/bootstrap.ts
++++ b/packages/server/src/server/bootstrap.ts
+@@ -136,6 +136,9 @@ export async function createPaseoDaemon(
+   // CORS - allow same-origin + configured origins
+   const allowedOrigins = new Set([
+     ...config.corsAllowedOrigins,
++    // Tauri desktop app WebView origin (used for fetch/WebSocket in production builds).
++    // This origin can't be produced by normal websites, so it's safe to allow by default.
++    "tauri://localhost",
+     // For TCP, add localhost variants
+     ...(listenTarget.type === "tcp"
+       ? [

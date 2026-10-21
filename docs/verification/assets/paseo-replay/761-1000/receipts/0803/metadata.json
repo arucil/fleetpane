@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 803,
+  "revision": "d9435c67d229f6385f8ffc95c3fae8143dd15853",
+  "date": "2026-02-02T12:58:57+07:00",
+  "committer_date": "2026-02-02T12:58:57+07:00",
+  "parents": [
+    "bf9555829bc40639c47ec8c6c162c87ffc2624cb"
+  ],
+  "subject": "refactor: migrate Codex provider from MCP to app-server",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-app-server-agent.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:9f62ced80f48d60c19c786dfaefa6a33325ffcc9875ecbda39b28ef0ef3a5b3c",
+  "diff_tree_digest": "sha256:3ef33784478590f2b57dd1fe977f1ff8591eac725fd7501c59718c534f1d2665",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        1,
+        21
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -0,0 +1,1723 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1799,
+  "receipt_file": "receipts/0803/selected.patch"
+}

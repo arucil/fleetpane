@@ -1,0 +1,32 @@
+FILE packages/cli/src/utils/client.ts
+RANGE {"path":"packages/cli/src/utils/client.ts","old_lines":[76,76],"new_lines":[76,105],"diff_block_lines":[8,37],"hunk_header":"@@ -74,2 +74,57 @@ export async function tryConnectToDaemon(options?: ConnectOptions): Promise<Daem","substantive_changed_lines":10}
++
++/** Minimal agent type for ID resolution */
++interface AgentLike {
++  id: string
++  title?: string | null
++}
++
++/**
++ * Resolve an agent ID from a partial ID or name.
++ * Supports:
++ * - Full ID match
++ * - Prefix match (first N characters)
++ * - Title/name match (case-insensitive)
++ *
++ * Returns the full agent ID if found, null otherwise.
++ */
++export function resolveAgentId(idOrName: string, agents: AgentLike[]): string | null {
++  if (!idOrName || agents.length === 0) {
++    return null
++  }
++
++  const query = idOrName.toLowerCase()
++
++  // Try exact ID match first
++  const exactMatch = agents.find((a) => a.id === idOrName)
++  if (exactMatch) {
++    return exactMatch.id
++  }
++
++  // Try ID prefix match

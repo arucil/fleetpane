@@ -1,0 +1,76 @@
+            kind: "error",
+            error: new DaemonRpcError({
+              requestId: msg.payload.requestId,
+              error: msg.payload.error,
+              requestType: msg.payload.requestType,
+              code: msg.payload.code,
+            }),
+          };
+        }
+        const value = params.select(msg);
+        if (value === null) {
+          return null;
+        }
+        return { kind: "ok", value };
+      },
+      params.timeout,
+      params.options
+    );
+
+    try {
+      await this.sendSessionMessageOrThrow(params.message);
+    } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      cancel(err);
+      void promise.catch(() => undefined);
+      throw err;
+    }
+
+    const result = await promise;
+    if (result.kind === "error") {
+      throw result.error;
+    }
+    return result.value;
+  }
+
+  private sendSessionMessageStrict(message: SessionInboundMessage): void {
+    if (!this.transport || this.connectionState.status !== "connected") {
+      throw new Error("Transport not connected");
+    }
+    const payload = SessionInboundMessageSchema.parse(message);
+    try {
+      this.transport.send(JSON.stringify({ type: "session", message: payload }));
+    } catch (error) {
+      throw error instanceof Error ? error : new Error(String(error));
+    }
+  }
+
+  sendUserMessage(text: string): void {
+    this.sendSessionMessage({ type: "user_text", text });
+  }
+
+  clearAgentAttention(agentId: string | string[]): void {
+    this.sendSessionMessage({ type: "clear_agent_attention", agentId });
+  }
+
+  sendHeartbeat(params: {
+    deviceType: "web" | "mobile";
+    focusedAgentId: string | null;
+    lastActivityAt: string;
+    appVisible: boolean;
+  }): void {
+    this.sendSessionMessage({
+      type: "client_heartbeat",
+      deviceType: params.deviceType,
+      focusedAgentId: params.focusedAgentId,
+      lastActivityAt: params.lastActivityAt,
+      appVisible: params.appVisible,
+    });
+  }
+
+  registerPushToken(token: string): void {
+    this.sendSessionMessage({
+      type: "register_push_token",
+      token,
+    });
+  }

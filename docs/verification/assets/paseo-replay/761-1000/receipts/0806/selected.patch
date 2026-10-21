@@ -1,0 +1,23 @@
+FILE packages/app/e2e/helpers/app.ts
+RANGE {"path":"packages/app/e2e/helpers/app.ts","old_lines":[426,427],"new_lines":[425,444],"diff_block_lines":[18,38],"hunk_header":"@@ -424,6 +423,29 @@ export const denyPermission = async (page: Page) => {","substantive_changed_lines":6}
++  // Wait for the stop button to disappear
+   const stopButton = page.getByRole('button', { name: /stop|cancel/i });
+-  await expect(stopButton).not.toBeVisible({ timeout });
++
++  // First, let's debug what's happening - wait a bit to see the state
++  await page.waitForTimeout(2000);
++
++  // Check if stop button is visible
++  const isVisible = await stopButton.isVisible().catch(() => false);
++
++  if (isVisible) {
++    // If stop button is still visible after permission denial,
++    // it might be that the agent is waiting for something.
++    // Let's check if there's a tool call result or other UI indication
++
++    // Look for any indication that the agent has processed the permission denial
++    const toolCallResult = page.getByText(/permission.*denied|denied|blocked/i);
++
++    // Wait for the tool call result to appear
++    await expect(toolCallResult).toBeVisible({ timeout: 10000 }).catch(() => {
++      // If no specific message, just wait for the button to disappear

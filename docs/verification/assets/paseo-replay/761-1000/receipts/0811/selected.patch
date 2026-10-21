@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[1347,1367],"new_lines":[1343,1344],"diff_block_lines":[23,43],"hunk_header":"@@ -1347,24 +1343,5 @@ class CodexAppServerAgentSession implements AgentSession {","substantive_changed_lines":14}
+     }
+     this.paseoInstructionsInjected = true;
+-    if (blocks.length === 0) {
+-      return blocks;
+-    }
+-    const first = blocks[0];
+-    if (first && typeof first === "object" && (first as { type?: string }).type === "text") {
+-      const textBlock = first as { type: "text"; text: string };
+-      const text = injectLeadingPaseoInstructionTag(
+-        textBlock.text ?? "",
+-        this.config.paseoPromptInstructions
+-      );
+-      return [{ ...textBlock, text }, ...blocks.slice(1)];
+-    }
+-    const injected = injectLeadingPaseoInstructionTag(
+-      "",
+-      this.config.paseoPromptInstructions
+-    );
+-    if (injected.trim().length === 0) {
+-      return blocks;
+-    }

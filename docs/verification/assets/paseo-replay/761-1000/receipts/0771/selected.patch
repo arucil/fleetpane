@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/ps.ts
+RANGE {"path":"packages/cli/src/commands/agent/ps.ts","old_lines":[0,0],"new_lines":[4,33],"diff_block_lines":[10,39],"hunk_header":"@@ -0,0 +1,159 @@","substantive_changed_lines":21}
++
++/** Minimal agent snapshot type (from daemon client) */
++interface AgentSnapshot {
++  id: string
++  provider: string
++  cwd: string
++  createdAt: string
++  status: string
++  title: string | null
++  archivedAt?: string | null
++}
++
++/** Agent list item for display */
++export interface AgentListItem {
++  id: string
++  shortId: string
++  name: string
++  provider: string
++  status: string
++  cwd: string
++  created: string
++}
++
++/** Helper to get relative time string */
++function relativeTime(date: Date | string): string {
++  const now = Date.now()
++  const then = new Date(date).getTime()
++  const seconds = Math.floor((now - then) / 1000)
++
++  if (seconds < 60) return 'just now'

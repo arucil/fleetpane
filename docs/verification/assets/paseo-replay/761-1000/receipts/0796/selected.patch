@@ -1,0 +1,23 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[157,158],"new_lines":[159,179],"diff_block_lines":[20,40],"hunk_header":"@@ -157,7 +159,35 @@ async function getWorktreeRoot(cwd: string): Promise<string | null> {","substantive_changed_lines":14}
+ }
+ 
++async function getMainRepoRoot(cwd: string): Promise<string> {
++  const { stdout: commonDirOut } = await execAsync(
++    "git rev-parse --path-format=absolute --git-common-dir",
++    { cwd, env: READ_ONLY_GIT_ENV }
++  );
++  const commonDir = commonDirOut.trim();
++  const normalized = realpathSync(commonDir);
++
++  if (basename(normalized) === ".git") {
++    return dirname(normalized);
++  }
++
++  const { stdout: worktreeOut } = await execAsync("git worktree list --porcelain", {
++    cwd,
++    env: READ_ONLY_GIT_ENV,
++  });
++  const worktrees = parseWorktreeList(worktreeOut);
++  const nonBareNonPaseo = worktrees.filter(
++    (wt) => !wt.isBare && !wt.path.includes("/.paseo/worktrees/")

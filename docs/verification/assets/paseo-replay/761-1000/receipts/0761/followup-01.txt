@@ -1,0 +1,160 @@
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index cee3baf7d..107c3c1fe 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -35,11 +35,8 @@ import { TTSManager } from "./agent/tts-manager.js";
+ import { STTManager } from "./agent/stt-manager.js";
+ import type { OpenAISTT } from "./agent/stt-openai.js";
+ import type { OpenAITTS } from "./agent/tts-openai.js";
+-import { OpenAIRealtimeTranscriptionSession } from "./agent/openai-realtime-transcription.js";
+-import { Pcm16MonoResampler } from "./agent/pcm16-resampler.js";
+-import { maybePersistDictationDebugAudio } from "./agent/dictation-debug.js";
+ import { maybePersistTtsDebugAudio } from "./agent/tts-debug.js";
+-import { isPaseoDictationDebugEnabled } from "./agent/recordings-debug.js";
++import { DictationStreamManager } from "./dictation/dictation-stream-manager.js";
+ import type { VoiceConversationStore } from "./voice-conversation-store.js";
+ import {
+   buildConfigOverrides,
+@@ -153,66 +150,8 @@ const MIN_STREAMING_SEGMENT_DURATION_MS = 1000;
+ const MIN_STREAMING_SEGMENT_BYTES = Math.round(
+   PCM_BYTES_PER_MS * MIN_STREAMING_SEGMENT_DURATION_MS
+ );
+-
+-const DICTATION_PCM_INPUT_RATE = 16000;
+-const DICTATION_PCM_OUTPUT_RATE = 24000;
+-const DICTATION_FINAL_TIMEOUT_MS = 30000;
+-const DICTATION_SILENCE_PEAK_THRESHOLD = Number.parseInt(
+-  process.env.OPENAI_REALTIME_DICTATION_SILENCE_PEAK_THRESHOLD ?? "300",
+-  10
+-);
+-const DICTATION_TURN_DETECTION = (process.env.OPENAI_REALTIME_DICTATION_TURN_DETECTION ?? "semantic_vad").trim();
+-const DICTATION_SEMANTIC_VAD_EAGERNESS = (process.env.OPENAI_REALTIME_DICTATION_SEMANTIC_VAD_EAGERNESS ?? "medium").trim();
+-const DICTATION_FLUSH_SILENCE_MS = Number.parseInt(
+-  process.env.OPENAI_REALTIME_DICTATION_FLUSH_SILENCE_MS ?? "800",
+-  10
+-);
+ const SAFE_GIT_REF_PATTERN = /^[A-Za-z0-9._\/-]+$/;
+ 
+-function pcm16lePeakAbs(pcm16le: Buffer): number {
+-  if (pcm16le.length === 0) {
+-    return 0;
+-  }
+-  if (pcm16le.length % 2 !== 0) {
+-    throw new Error(`PCM16 chunk byteLength must be even, got ${pcm16le.length}`);
+-  }
+-  const samples = new Int16Array(
+-    pcm16le.buffer,
+-    pcm16le.byteOffset,
+-    pcm16le.byteLength / 2
+-  );
+-  let peak = 0;
+-  for (let i = 0; i < samples.length; i += 1) {
+-    const v = samples[i]!;
+-    const abs = v < 0 ? -v : v;
+-    if (abs > peak) {
+-      peak = abs;
+-      if (peak >= 32767) {
+-        break;
+-      }
+-    }
+-  }
+-  return peak;
+-}
+-
+-function parseDictationTurnDetection():
+-  | null
+-  | { type: "server_vad"; create_response: false; threshold?: number; prefix_padding_ms?: number; silence_duration_ms?: number }
+-  | { type: "semantic_vad"; create_response: false; eagerness?: "low" | "medium" | "high" } {
+-  if (!DICTATION_TURN_DETECTION || DICTATION_TURN_DETECTION === "none" || DICTATION_TURN_DETECTION === "null") {
+-    return null;
+-  }
+-  if (DICTATION_TURN_DETECTION === "server_vad") {
+-    return { type: "server_vad", create_response: false };
+-  }
+-  const eagerness =
+-    DICTATION_SEMANTIC_VAD_EAGERNESS === "low" ||
+-    DICTATION_SEMANTIC_VAD_EAGERNESS === "high"
+-      ? (DICTATION_SEMANTIC_VAD_EAGERNESS as "low" | "high")
+-      : ("medium" as const);
+-  return { type: "semantic_vad", create_response: false, eagerness };
+-}
+-
+ /**
+  * Type for present_artifact tool arguments
+  */
+@@ -326,29 +265,7 @@ export class Session {
+   private speechInProgress = false;
+   private voiceConversationId: string | null = null;
+ 
+-  private dictationStreams = new Map<
+-    string,
+-    {
+-      dictationId: string;
+-      inputFormat: string;
+-      openai: OpenAIRealtimeTranscriptionSession;
+-      resampler: Pcm16MonoResampler;
+-      debugAudioChunks: Buffer[];
+-      debugRecordingPath: string | null;
+-      receivedChunks: Map<number, Buffer>;
+-      nextSeqToForward: number;
+-      ackSeq: number;
+-      bytesSinceCommit: number;
+-      peakSinceCommit: number;
+-      committedItemIds: string[];
+-      transcriptsByItemId: Map<string, string>;
+-      finalTranscriptItemIds: Set<string>;
+-      awaitingFinalCommit: boolean;
+-      finishRequested: boolean;
+-      finalSeq: number | null;
+-      finalTimeout: ReturnType<typeof setTimeout> | null;
+-    }
+-  >();
++  private readonly dictationStreamManager: DictationStreamManager;
+ 
+   // Audio buffering for interruption handling
+   private pendingAudioSegments: Array<{ audio: Buffer; format: string }> = [];
+@@ -427,6 +344,11 @@ export class Session {
+     // Initialize per-session managers
+     this.ttsManager = new TTSManager(this.sessionId, this.sessionLogger, tts);
+     this.sttManager = new STTManager(this.sessionId, this.sessionLogger, stt);
++    this.dictationStreamManager = new DictationStreamManager({
++      logger: this.sessionLogger,
++      sessionId: this.sessionId,
++      emit: (msg) => this.emit(msg as unknown as SessionOutboundMessage),
++    });
+ 
+     // Initialize agent MCP client asynchronously
+     void this.initializeAgentMcp();
+@@ -665,8 +587,11 @@ export class Session {
+   private async buildAgentPayload(
+     agent: ManagedAgent
+   ): Promise<AgentSnapshotPayload> {
+-    const title = await this.getStoredAgentTitle(agent.id);
+-    return toAgentPayload(agent, { title });
++    const storedRecord = await this.agentStorage.get(agent.id);
++    const title = storedRecord?.title ?? null;
++    const payload = toAgentPayload(agent, { title });
++    payload.archivedAt = storedRecord?.archivedAt ?? null;
++    return payload;
+   }
+ 
+   private buildStoredAgentPayload(record: StoredAgentRecord): AgentSnapshotPayload {
+@@ -703,6 +628,11 @@ export class Session {
+       lastUsage: undefined,
+       lastError: undefined,
+       title: record.title ?? null,
++      requiresAttention: record.requiresAttention ?? false,
++      attentionReason: record.attentionReason ?? null,
++      attentionTimestamp: record.attentionTimestamp ?? null,
++      parentAgentId: record.parentAgentId ?? null,
++      archivedAt: record.archivedAt ?? null,
+     };
+   }
+ 
+@@ -768,20 +698,6 @@ export class Session {
+     }
+   }
+ 
+-  private async getStoredAgentTitle(agentId: string): Promise<string | null> {
+-    try {
+-      const record = await this.agentStorage.get(agentId);

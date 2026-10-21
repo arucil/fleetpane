@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 780,
+  "revision": "74fceed9b5160a449d8a626be7823b5143902ef6",
+  "date": "2026-01-28T23:41:50+07:00",
+  "committer_date": "2026-01-28T23:41:50+07:00",
+  "parents": [
+    "f96a4ee3dfdc53a6e8eb4a610d2fe861585e9ab6"
+  ],
+  "subject": "feat(cli): add agent inspect command",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "A\tpackages/cli/src/commands/agent/inspect.ts",
+    "A\tpackages/cli/tests/09-agent-inspect.test.ts"
+  ],
+  "source_receipt_digest": "sha256:0fc8da6ede22f71ec9178c07e2c09f7bf606dd81074899fed6a246f059d636d2",
+  "diff_tree_digest": "sha256:158764ce62170e8571697546278c655108f1d7687fde64ed9672889ae2bddcc1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/index.ts",
+      "old_lines": [
+        58,
+        61
+      ],
+      "new_lines": [
+        59,
+        69
+      ],
+      "diff_block_lines": [
+        11,
+        22
+      ],
+      "hunk_header": "@@ -58,4 +59,11 @@ export function createAgentCommand(): Command {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 312,
+  "receipt_file": "receipts/0780/selected.patch"
+}

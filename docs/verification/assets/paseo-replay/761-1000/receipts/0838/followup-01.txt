@@ -1,0 +1,51 @@
+      return;
+    }
+
+    // Buffer if we're detecting or speaking. When speech is confirmed, we also
+    // stream partial chunks to reduce latency.
+    if (this.speechDetectionStartMs !== null || this.isSpeaking) {
+      this.audioBuffer.push(chunk);
+      this.bufferedBytes += chunk.length;
+
+      if (this.speechConfirmed && this.bufferedBytes >= this.minChunkBytes) {
+        this.flush(false);
+      }
+    }
+  }
+
+  /**
+   * Called with a normalized volume level (0..1). Drives VAD transitions.
+   */
+  pushVolumeLevel(volume: number, nowMs: number): void {
+    if (this.config.enableContinuousStreaming) {
+      return;
+    }
+
+    const speechDetected = volume > this.config.volumeThreshold;
+
+    if (speechDetected && !this.isSpeaking && !this.speechConfirmed) {
+      // Initial detection phase.
+      if (this.speechDetectionStartMs === null) {
+        this.speechDetectionStartMs = nowMs;
+        this.detectionSilenceStartMs = null;
+        this.audioBuffer = [];
+        this.bufferedBytes = 0;
+        this.setDetecting(true);
+        return;
+      }
+
+      // Volume is back above threshold - reset grace period.
+      this.detectionSilenceStartMs = null;
+
+      const speechDuration = nowMs - this.speechDetectionStartMs;
+      if (speechDuration >= this.config.speechConfirmationMs) {
+        this.speechConfirmed = true;
+        this.silenceStartMs = null;
+        this.setDetecting(false);
+        this.setSpeaking(true);
+        this.callbacks.onSpeechStart?.();
+      }
+      return;
+    }
+
+    if (speechDetected && this.isSpeaking && this.speechConfirmed) {

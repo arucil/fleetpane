@@ -1,0 +1,21 @@
+FILE packages/app/src/hooks/use-global-keyboard-nav.ts
+RANGE {"path":"packages/app/src/hooks/use-global-keyboard-nav.ts","old_lines":[128,132],"new_lines":[128,144],"diff_block_lines":[5,23],"hunk_header":"@@ -128,5 +128,17 @@ export function useGlobalKeyboardNav({","substantive_changed_lines":13}
+@@ -128,5 +128,17 @@ export function useGlobalKeyboardNav({
+         event.preventDefault();
+         const s = useKeyboardNavStore.getState();
+-        s.setCommandCenterOpen(!s.commandCenterOpen);
++        if (!s.commandCenterOpen) {
++          const target = event.target as unknown;
++          const el =
++            typeof HTMLElement !== "undefined" && target instanceof HTMLElement
++              ? target
++              : (typeof document !== "undefined"
++                  ? (document.activeElement as HTMLElement | null)
++                  : null);
++          s.setFocusRestoreElement(el);
++          s.setCommandCenterOpen(true);
++        } else {
++          s.setCommandCenterOpen(false);
++        }
+         return;
+       }

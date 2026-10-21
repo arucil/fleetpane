@@ -1,0 +1,67 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 923,
+  "revision": "6aff4b3f10e766f9549a8e2168733bf1168a6dd2",
+  "date": "2026-02-04T15:00:34+07:00",
+  "committer_date": "2026-02-04T15:00:34+07:00",
+  "parents": [
+    "426e24b3447cce1497a0cddde39c78c5e014145e",
+    "54bc3a49eca54781c6e84b8153f1aaffba644886"
+  ],
+  "subject": "Merge branch 'plan/e2ee' - End-to-end encryption for relay connections",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/metro.config.js",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/app/src/polyfills/crypto.ts",
+    "M\tpackages/app/src/utils/daemon-endpoints.ts",
+    "M\tpackages/relay/package.json",
+    "A\tpackages/relay/src/base64.ts",
+    "M\tpackages/relay/src/crypto.ts",
+    "A\tpackages/relay/src/e2ee.ts",
+    "M\tpackages/relay/src/encrypted-channel.ts",
+    "M\tpackages/relay/src/node-adapter.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/connection-offer.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-keypair.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "A\tpackages/server/src/shared/connection-offer.ts",
+    "A\tpackages/server/src/shared/daemon-endpoints.ts",
+    "M\tpackages/server/tsconfig.server.json"
+  ],
+  "source_receipt_digest": "sha256:264d0a7a7808097d43478a806de52025f18c93bc215fcb6e419c053ee87789aa",
+  "diff_tree_digest": "sha256:87003aab6402b15fc495b569eea0cb34bbfe1184e2545ff1f2768cdf75e67054",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/daemon-endpoints.ts",
+      "old_lines": [
+        19,
+        39
+      ],
+      "new_lines": [
+        32,
+        32
+      ],
+      "diff_block_lines": [
+        34,
+        54
+      ],
+      "hunk_header": "@@ -18,97 +31,5 @@ export function decodeOfferFragmentPayload(encoded: string): unknown {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 1154,
+  "receipt_file": "receipts/0923/selected.patch"
+}

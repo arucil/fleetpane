@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 934,
+  "revision": "2f83c2654cdbf1562958ad16d06846e8ccb0f873",
+  "date": "2026-02-05T00:08:09+07:00",
+  "committer_date": "2026-02-05T00:08:09+07:00",
+  "parents": [
+    "0438a43cb041e849c564e6a2f868a1e58c913de3"
+  ],
+  "subject": "Fix tmux executeCommand exitCode parsing",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/terminal-mcp/tmux.ts"
+  ],
+  "source_receipt_digest": "sha256:fac8da21949d2eec97436423ce3d1543399c3704521a0c519df3db592ff07043",
+  "diff_tree_digest": "sha256:1b4bec003b853e7e03d4352af4b66b6140db6e60922501a0fec39292019a9b4d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/terminal-mcp/tmux.ts",
+      "old_lines": [
+        592,
+        596
+      ],
+      "new_lines": [
+        592,
+        597
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -592,5 +592,6 @@ export async function executeCommand({",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 3,
+  "receipt_file": "receipts/0934/selected.patch"
+}

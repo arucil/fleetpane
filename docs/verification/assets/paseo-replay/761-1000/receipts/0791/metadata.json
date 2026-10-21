@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 791,
+  "revision": "5b32d0a56cbc5dd481b9a6e2a043d9f054b7cba9",
+  "date": "2026-01-30T12:29:01+07:00",
+  "committer_date": "2026-01-30T12:29:01+07:00",
+  "parents": [
+    "f8da5ada71e9ef0d70550d8edd9c7d3a4d5e4ac2"
+  ],
+  "subject": "fix: update MCP tests to use createAgentSelfIdMcpServer",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts"
+  ],
+  "source_receipt_digest": "sha256:af0f6b2da965cbec1a5cb49620d0c0e006b043a2ce3cbdf8f8bafeb79db14cc1",
+  "diff_tree_digest": "sha256:7e07ad698912955c2caae6bd199b1356f5222d4156ba9bf3708e3138f61709bd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/mcp-server.test.ts",
+      "old_lines": [
+        105,
+        116
+      ],
+      "new_lines": [
+        106,
+        116
+      ],
+      "diff_block_lines": [
+        11,
+        25
+      ],
+      "hunk_header": "@@ -105,12 +106,11 @@ describe(\"create_agent MCP tool\", () => {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 17,
+  "receipt_file": "receipts/0791/selected.patch"
+}

@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 761,
+  "revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+  "date": "2026-01-28T15:25:12+07:00",
+  "committer_date": "2026-01-28T15:25:12+07:00",
+  "parents": [
+    "96b211a2cf70742e48308ccf407f27eb1614a000"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/agent-directory.ts",
+    "M\tpackages/app/src/utils/agent-grouping.ts",
+    "M\tpackages/server/.gitignore",
+    "A\tpackages/server/scripts/dictation-generate-baseline.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "A\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/test-utils/dictation-e2e.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:2798e6d10305d30c84fdfcc035712a7912480d646f1324ae4af3687226fe96a1",
+  "diff_tree_digest": "sha256:cf401a389daa138b9de621b604d73f135fd36d80fd2779eaa5637376d9ac6de7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/grouped-agent-list.tsx",
+      "old_lines": [
+        416,
+        439
+      ],
+      "new_lines": [
+        429,
+        446
+      ],
+      "diff_block_lines": [
+        33,
+        62
+      ],
+      "hunk_header": "@@ -416,40 +429,62 @@ export function GroupedAgentList({",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 1573,
+  "receipt_file": "receipts/0761/selected.patch"
+}

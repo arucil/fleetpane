@@ -1,0 +1,10 @@
+FILE packages/server/src/server/terminal-mcp/tmux.ts
+RANGE {"path":"packages/server/src/server/terminal-mcp/tmux.ts","old_lines":[592,596],"new_lines":[592,597],"diff_block_lines":[5,12],"hunk_header":"@@ -592,5 +592,6 @@ export async function executeCommand({","substantive_changed_lines":3}
+@@ -592,5 +592,6 @@ export async function executeCommand({
+         "#{pane_dead_status}",
+       ]);
+-      exitCode = parseInt(exitCodeStr, 10);
++      const parsed = parseInt(exitCodeStr, 10);
++      exitCode = Number.isFinite(parsed) ? parsed : null;
+       break;
+     }

@@ -1,0 +1,23 @@
+FILE packages/app/src/components/diff-viewer.tsx
+RANGE {"path":"packages/app/src/components/diff-viewer.tsx","old_lines":[87,107],"new_lines":[88,89],"diff_block_lines":[12,32],"hunk_header":"@@ -87,63 +88,69 @@ export function DiffViewer({ diffLines, maxHeight = 280, emptyLabel = \"No change","substantive_changed_lines":15}
+ }
+ 
+-const styles = StyleSheet.create((theme) => ({
+-  verticalScroll: {},
+-  verticalContent: {
+-    flexGrow: 1,
+-  },
+-  horizontalContent: {
+-    flexDirection: "column" as const,
+-  },
+-  linesContainer: {
+-    alignSelf: "flex-start",
+-  },
+-  line: {
+-    minWidth: "100%",
+-    paddingHorizontal: theme.spacing[3],
+-    paddingVertical: theme.spacing[1],
+-  },
+-  lineText: {
+-    fontFamily: Fonts.mono,
+-    fontSize: theme.fontSize.xs,

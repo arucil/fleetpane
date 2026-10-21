@@ -1,0 +1,23 @@
+FILE packages/server/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/server/src/utils/tool-call-parsers.ts","old_lines":[59,64],"new_lines":[59,75],"diff_block_lines":[8,28],"hunk_header":"@@ -57,10 +57,32 @@ export function stripCwdPrefix(filePath: string, cwd?: string): string {","substantive_changed_lines":11}
+-// Strips shell wrapper prefixes like "/bin/zsh -lc cd /path && " from commands
+-// This is used for display purposes to show the actual command being run
+-const SHELL_WRAPPER_PATTERN = /^\/bin\/(?:zsh|bash|sh)\s+(?:-[a-zA-Z]+\s+)?cd\s+\S+\s+&&\s+/;
++// Strips shell wrapper prefixes like:
++// - `/bin/zsh -lc cd /path && <cmd>`
++// - `/bin/zsh -lc "cd /path && <cmd>"`
++// This is used for display purposes to show the actual command being run.
++const SHELL_WRAPPER_PREFIX_PATTERN = /^\/bin\/(?:zsh|bash|sh)\s+(?:-[a-zA-Z]+\s+)?/;
++const CD_AND_PATTERN = /^cd\s+(?:"[^"]+"|'[^']+'|\S+)\s+&&\s+/;
+ 
+ export function stripShellWrapperPrefix(command: string): string {
+-  return command.replace(SHELL_WRAPPER_PATTERN, "");
++  const prefixMatch = command.match(SHELL_WRAPPER_PREFIX_PATTERN);
++  if (!prefixMatch) {
++    return command;
++  }
++
++  let rest = command.slice(prefixMatch[0].length).trim();
++  if (rest.length >= 2) {
++    const first = rest[0];
++    const last = rest[rest.length - 1];

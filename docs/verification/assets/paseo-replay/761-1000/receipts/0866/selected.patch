@@ -1,0 +1,23 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[354,354],"new_lines":[359,379],"diff_block_lines":[32,52],"hunk_header":"@@ -353,4 +358,33 @@ export function AgentInputArea({","substantive_changed_lines":14}
+ 
++  // When switching agents from the command center, auto-focus the input on web.
++  useEffect(() => {
++    if (Platform.OS !== "web") return;
++    if (!isScreenFocused) return;
++    if (!focusChatInputRequest) return;
++
++    const target = focusChatInputRequest.agentKey;
++    const currentKey = `${serverId}:${agentId}`;
++    if (target !== null && target !== currentKey) {
++      return;
++    }
++
++    if (lastHandledFocusRequestIdRef.current === focusChatInputRequest.id) {
++      return;
++    }
++    lastHandledFocusRequestIdRef.current = focusChatInputRequest.id;
++
++    setTimeout(() => {
++      messageInputRef.current?.focus();
++    }, 0);

@@ -1,0 +1,76 @@
+      const target = event.target as unknown;
+      const isEditableTarget =
+        typeof HTMLElement !== "undefined" &&
+        target instanceof HTMLElement &&
+        (target.tagName === "TEXTAREA" ||
+          target.tagName === "INPUT" ||
+          target.isContentEditable);
+
+      if (key === "Alt") {
+        useKeyboardNavStore.getState().setAltDown(true);
+      }
+      if (isTauri && (key === "Meta" || key === "Control")) {
+        useKeyboardNavStore.getState().setCmdOrCtrlDown(true);
+      }
+
+      // Cmd+B: toggle sidebar
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        (event.code === "KeyB" || lowerKey === "b")
+      ) {
+        // When focus is in the chat input, MessageInput handles Cmd+B (and prevents default)
+        // via TextInput onKeyPress. If we also toggle here, it flips twice and appears "broken".
+        if (isEditableTarget) {
+          return;
+        }
+        event.preventDefault();
+        toggleAgentList();
+        return;
+      }
+
+      // Cmd+E: toggle explorer sidebar (only when an agent is selected)
+      if (
+        selectedAgentId &&
+        toggleFileExplorer &&
+        (event.metaKey || event.ctrlKey) &&
+        (event.code === "KeyE" || lowerKey === "e")
+      ) {
+        // Same double-toggle issue as Cmd+B when focus is inside a text input.
+        if (isEditableTarget) {
+          return;
+        }
+        event.preventDefault();
+        toggleFileExplorer();
+        return;
+      }
+
+      // Cmd+K: command center
+      if ((event.metaKey || event.ctrlKey) && lowerKey === "k") {
+        event.preventDefault();
+        const s = useKeyboardNavStore.getState();
+        s.setCommandCenterOpen(!s.commandCenterOpen);
+        return;
+      }
+
+      // Number switching: ignore while command center is open.
+      if (useKeyboardNavStore.getState().commandCenterOpen) {
+        return;
+      }
+
+      const digit = parseShortcutDigit(event);
+      if (!digit) {
+        return;
+      }
+
+      // Alt/Option+number: always (web + Tauri)
+      if (event.altKey) {
+        event.preventDefault();
+        navigateToSidebarShortcut(digit);
+        return;
+      }
+
+      // Cmd/Ctrl+number: Tauri only (avoid browser tab switching)
+      if (isTauri && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        navigateToSidebarShortcut(digit);
+      }

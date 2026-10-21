@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 769,
+  "revision": "a7f39f79ba995f7f4d570c540d53b3b8a09cc67b",
+  "date": "2026-01-28T22:57:15+07:00",
+  "committer_date": "2026-01-28T22:57:15+07:00",
+  "parents": [
+    "aa5663a854c3ddcd34bdfa89093bb4ee25350ba1"
+  ],
+  "subject": "feat(cli): implement output abstraction layer",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/output/index.ts",
+    "A\tpackages/cli/src/output/json.ts",
+    "A\tpackages/cli/src/output/quiet.ts",
+    "A\tpackages/cli/src/output/render.ts",
+    "A\tpackages/cli/src/output/table.ts",
+    "A\tpackages/cli/src/output/types.ts",
+    "A\tpackages/cli/src/output/with-output.ts",
+    "A\tpackages/cli/src/output/yaml.ts",
+    "A\tpackages/cli/tests/output.test.mts"
+  ],
+  "source_receipt_digest": "sha256:29c39dc57bb99ce4f1c7a0977dd24d9fc0eabfd0686b667d8feb2c4122b96744",
+  "diff_tree_digest": "sha256:8def1136aa2b796c36e93b131800d8d61076780b5b30b5d05e9516a84330e709",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/output/render.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        14,
+        43
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -0,0 +1,103 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 495,
+  "receipt_file": "receipts/0769/selected.patch"
+}

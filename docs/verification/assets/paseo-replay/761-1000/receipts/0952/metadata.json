@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 952,
+  "revision": "8cf86a5d9817702b4b98420ed760464761b1ba1d",
+  "date": "2026-02-05T13:12:53+07:00",
+  "committer_date": "2026-02-05T13:12:53+07:00",
+  "parents": [
+    "3a31d708f82346a9de1851e3d4696a08cb470d48"
+  ],
+  "subject": "chore: align server package name for workspaces",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/cli/docs/type-audit.md",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/mode.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/cli/src/commands/permit/allow.ts",
+    "M\tpackages/cli/src/commands/permit/deny.ts",
+    "M\tpackages/cli/src/commands/permit/ls.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:41f053208a8a09cdb336016bd2975bb0998a7cc44e465991c765ecf6a24e70dd",
+  "diff_tree_digest": "sha256:4500771afe6079c4a3b93e2d0d4c6b76c6a7b7ad4211cc09444536edb4b402b4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        1341,
+        1343
+      ],
+      "new_lines": [
+        1341,
+        1343
+      ],
+      "diff_block_lines": [
+        12,
+        16
+      ],
+      "hunk_header": "@@ -1341,3 +1341,3 @@ export {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/0952/selected.patch"
+}

@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 951,
+  "revision": "3a31d708f82346a9de1851e3d4696a08cb470d48",
+  "date": "2026-02-05T13:06:10+07:00",
+  "committer_date": "2026-02-05T13:06:10+07:00",
+  "parents": [
+    "058c03684a52c1f79f67acbb9a39edfc282b7010"
+  ],
+  "subject": "chore: remove local artifacts and sanitize repo",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/server/.env.example",
+    "M\tpackages/server/README.md",
+    "M\tpackages/server/scripts/dictation-generate-baseline.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.test.ts"
+  ],
+  "source_receipt_digest": "sha256:d208aec0df0270dd4dd6edd255f25ad0f7c3c97a4eb0f06801ae341122011c06",
+  "diff_tree_digest": "sha256:b2610f2edaf59dd76e781d77729bd6d6678e61bd75b2418f0f35401fa6bf810b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/scripts/dictation-generate-baseline.ts",
+      "old_lines": [
+        36,
+        37
+      ],
+      "new_lines": [
+        22,
+        35
+      ],
+      "diff_block_lines": [
+        32,
+        45
+      ],
+      "hunk_header": "@@ -18,20 +18,18 @@ async function main(): Promise<void> {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 66,
+  "receipt_file": "receipts/0951/selected.patch"
+}

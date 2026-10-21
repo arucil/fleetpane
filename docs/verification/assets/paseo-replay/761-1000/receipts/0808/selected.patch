@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/agent-metadata-generator.ts
+RANGE {"path":"packages/server/src/server/agent/agent-metadata-generator.ts","old_lines":[0,0],"new_lines":[7,27],"diff_block_lines":[13,33],"hunk_header":"@@ -0,0 +1,245 @@","substantive_changed_lines":10}
++  StructuredAgentResponseError,
++  generateStructuredAgentResponse,
++} from "./agent-response-loop.js";
++import { validateBranchSlug } from "../../utils/worktree.js";
++import {
++  getCheckoutStatus,
++  renameCurrentBranch,
++  type CheckoutStatusResult,
++} from "../../utils/checkout-git.js";
++
++const AUTO_GEN_MODEL = "haiku";
++
++export type AgentMetadataGeneratorDeps = {
++  generateStructuredAgentResponse?: typeof generateStructuredAgentResponse;
++  getCheckoutStatus?: typeof getCheckoutStatus;
++  renameCurrentBranch?: typeof renameCurrentBranch;
++};
++
++export type AgentMetadataGenerationOptions = {
++  agentManager: AgentManager;
++  agentId: string;

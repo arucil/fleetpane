@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[456,457],"new_lines":[456,476],"diff_block_lines":[7,27],"hunk_header":"@@ -455,4 +455,23 @@ type RequestHandler = (params: unknown) => Promise<unknown> | unknown;","substantive_changed_lines":12}
+ 
++// Codex app-server API response types
++interface CodexModel {
++  id: string;
++  displayName?: string;
++  description?: string;
++  isDefault?: boolean;
++  model?: string;
++  defaultReasoningEffort?: string;
++  supportedReasoningEfforts?: string[];
++}
++
++interface CodexModelListResponse {
++  data?: CodexModel[];
++}
++
++interface CodexThreadStartResponse {
++  thread?: { id?: string };
++}
++
+ class CodexAppServerClient {

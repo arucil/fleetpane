@@ -1,0 +1,65 @@
+export type HostPortParts = {
+  host: string;
+  port: number;
+  isIpv6: boolean;
+};
+
+export type RelayRole = "server" | "client";
+
+function parsePort(portStr: string, context: string): number {
+  const port = Number(portStr);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`${context}: port must be between 1 and 65535`);
+  }
+  return port;
+}
+
+export function parseHostPort(input: string): HostPortParts {
+  const trimmed = input.trim();
+  if (!trimmed) {
+    throw new Error("Host is required");
+  }
+
+  // IPv6: [::1]:6767
+  if (trimmed.startsWith("[")) {
+    const match = trimmed.match(/^\[([^\]]+)\]:(\d{1,5})$/);
+    if (!match) {
+      throw new Error("Invalid host:port (expected [::1]:6767)");
+    }
+    const host = match[1].trim();
+    if (!host) throw new Error("Host is required");
+    const port = parsePort(match[2], "Invalid host:port");
+    return { host, port, isIpv6: true };
+  }
+
+  const match = trimmed.match(/^(.+):(\d{1,5})$/);
+  if (!match) {
+    throw new Error("Invalid host:port (expected localhost:6767)");
+  }
+  const host = match[1].trim();
+  if (!host) throw new Error("Host is required");
+  const port = parsePort(match[2], "Invalid host:port");
+  return { host, port, isIpv6: false };
+}
+
+export function normalizeHostPort(input: string): string {
+  const { host, port, isIpv6 } = parseHostPort(input);
+  return isIpv6 ? `[${host}]:${port}` : `${host}:${port}`;
+}
+
+export function deriveLabelFromEndpoint(endpoint: string): string {
+  try {
+    const { host } = parseHostPort(endpoint);
+    return host || "Unnamed Host";
+  } catch {
+    return "Unnamed Host";
+  }
+}
+
+function shouldUseSecureWebSocket(port: number): boolean {
+  return port === 443;
+}
+
+export function buildDaemonWebSocketUrl(endpoint: string): string {
+  const { host, port, isIpv6 } = parseHostPort(endpoint);
+  const protocol = shouldUseSecureWebSocket(port) ? "wss" : "ws";

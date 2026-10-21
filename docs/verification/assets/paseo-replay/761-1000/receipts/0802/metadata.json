@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 802,
+  "revision": "b2f9bb1294abf12e94bef0880ae1b47964cd2e93",
+  "date": "2026-02-02T12:51:04+07:00",
+  "committer_date": "2026-02-02T12:51:04+07:00",
+  "parents": [
+    "bf9555829bc40639c47ec8c6c162c87ffc2624cb"
+  ],
+  "subject": "refactor: return agent on create and resume instead of waiting",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-basics.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:9470c3a5a196a9c667557e4170e63bbecb8c106ba63262815d8650c2855e5ac3",
+  "diff_tree_digest": "sha256:8aeb33cdced97b9bc07acafd5c9c6e6e6106da51136d57cf8f5045e7f5e33390",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        890,
+        910
+      ],
+      "new_lines": [
+        887,
+        888
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -890,41 +887,5 @@ export class DaemonClientV2 {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 73,
+  "receipt_file": "receipts/0802/selected.patch"
+}

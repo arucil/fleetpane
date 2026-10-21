@@ -1,0 +1,18 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[160,169],"new_lines":[160,172],"diff_block_lines":[5,20],"hunk_header":"@@ -160,10 +160,13 @@ export function ToolCallDetailsContent({","substantive_changed_lines":7}
+@@ -160,10 +160,13 @@ export function ToolCallDetailsContent({
+   const sections: ReactNode[] = [];
+   const isFullBleed = display.type === "edit" || display.type === "shell";
++  const codeBlockStyle = isFullBleed ? styles.fullBleedBlock : styles.diffContainer;
+ 
+   if (display.type === "shell") {
+-    const hasOutput = Boolean(display.output);
++    const command = display.command.replace(/\n+$/, "");
++    const output = display.output.replace(/^\n+/, "");
++    const hasOutput = output.length > 0;
+     sections.push(
+       <View key="shell" style={styles.section}>
+-        <View style={styles.diffContainer}>
++        <View style={codeBlockStyle}>
+           <ScrollView
+             style={[styles.codeVerticalScroll, { maxHeight }]}

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 825,
+  "revision": "ad632cb3bddb3eacaf15d66eef96d84cdeda6238",
+  "date": "2026-02-03T10:38:08+07:00",
+  "committer_date": "2026-02-03T10:38:08+07:00",
+  "parents": [
+    "9cc953625f8106d2b50fa211b0309f7e132dfd2d"
+  ],
+  "subject": "feat: improve git actions UI and mode tracking after plan approval",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:96ded9e0ee2ff599d9fa6551ee7d17bdf01acf4ab1f7a44cfe4c52914e16a827",
+  "diff_tree_digest": "sha256:5efaa8d77102bfed0d6d5b6815efc62c813605e48af6c0f3198ce43dae5986fb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        962,
+        973
+      ],
+      "new_lines": [
+        964,
+        973
+      ],
+      "diff_block_lines": [
+        21,
+        41
+      ],
+      "hunk_header": "@@ -961,15 +963,17 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 102,
+  "receipt_file": "receipts/0825/selected.patch"
+}

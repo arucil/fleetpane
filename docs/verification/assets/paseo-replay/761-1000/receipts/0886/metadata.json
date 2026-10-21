@@ -1,0 +1,79 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 886,
+  "revision": "820b2771332898437b7c3751c590f666a3b09c75",
+  "date": "2026-02-04T13:15:04+07:00",
+  "committer_date": "2026-02-04T13:15:04+07:00",
+  "parents": [
+    "288d3a835668357afb8e44863aa17598d4d5f509",
+    "7a55b6c33dafabcdf16d2b0a64e0844e1186b381"
+  ],
+  "subject": "Merge branch 'keyword-nav-plan'",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/dictation/dictation-stream-sender.ts",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "A\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/app/src/hooks/use-dictation.shared.ts",
+    "M\tpackages/app/src/hooks/use-global-keyboard-nav.ts",
+    "M\tpackages/app/src/hooks/use-push-token-registration.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agent-sections.ts",
+    "M\tpackages/app/src/stores/keyboard-nav-store.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/app/src/utils/command-center-focus-restore.ts",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "A\tpackages/app/src/utils/web-focus.ts",
+    "M\tpackages/cli/docs/type-audit.md",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "D\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "D\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/client/daemon-client.test.ts",
+    "A\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "D\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-client.ts",
+    "M\tpackages/server/src/server/test-utils/message-collector.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:fd06c86d6edb3bf53a01a755d8d6f2b8d4c33833c94ed64c8135c22fb5086b41",
+  "diff_tree_digest": "sha256:d73acdccda54d589ce540bffe1b6f3d1a3bb0906cbd4da30d88d72e1d5164034",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/command-center.tsx",
+      "old_lines": [
+        22,
+        42
+      ],
+      "new_lines": [
+        19,
+        20
+      ],
+      "diff_block_lines": [
+        23,
+        43
+      ],
+      "hunk_header": "@@ -22,146 +19,16 @@ function agentKey(agent: Pick<AggregatedAgent, \"serverId\" | \"id\">): string {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 5792,
+  "receipt_file": "receipts/0886/selected.patch"
+}

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 824,
+  "revision": "9cc953625f8106d2b50fa211b0309f7e132dfd2d",
+  "date": "2026-02-03T10:13:40+07:00",
+  "committer_date": "2026-02-03T10:13:40+07:00",
+  "parents": [
+    "0804f51b03d0a4a8ebd5826b8f6952c228291329"
+  ],
+  "subject": "refactor: restructure git actions into data-driven design pattern",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx"
+  ],
+  "source_receipt_digest": "sha256:6aa38bd3422c493dd1b940c53b78a3e6d4863eab37e7193c2eb5a154f598c3ea",
+  "diff_tree_digest": "sha256:332cf30f5a60d8f5baf160ab88be5deb8c26f0fdb38335c4a8ac8a816dba367a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        844,
+        857
+      ],
+      "new_lines": [
+        875,
+        888
+      ],
+      "diff_block_lines": [
+        42,
+        62
+      ],
+      "hunk_header": "@@ -844,149 +875,175 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 396,
+  "receipt_file": "receipts/0824/selected.patch"
+}

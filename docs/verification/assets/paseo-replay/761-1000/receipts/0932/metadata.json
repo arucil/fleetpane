@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 932,
+  "revision": "2f3cbe5e84f26cca0bf5e4106cfb0626b6073d47",
+  "date": "2026-02-04T23:56:29+07:00",
+  "committer_date": "2026-02-04T23:56:29+07:00",
+  "parents": [
+    "32c98536b5780ca3704e35d28a0158b8efef1262"
+  ],
+  "subject": "Make git tests independent of init.defaultBranch",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts"
+  ],
+  "source_receipt_digest": "sha256:d27bf034c1fb39b304c85f890c5921a42c30e989dc222fb50f74d23d9f015065",
+  "diff_tree_digest": "sha256:aafbbed369aca42a592dac3c9901a5b09f02faf60c3130ff00f68e04b82f1dca",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-client.e2e.test.ts",
+      "old_lines": [
+        784,
+        788
+      ],
+      "new_lines": [
+        784,
+        788
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -784,5 +784,5 @@ function waitForSignal<T>(",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 28,
+  "receipt_file": "receipts/0932/selected.patch"
+}

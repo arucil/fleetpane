@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 796,
+  "revision": "c57c86286a8f35236bb2da3a34572b42c551030c",
+  "date": "2026-01-31T12:04:32+07:00",
+  "committer_date": "2026-01-31T12:04:32+07:00",
+  "parents": [
+    "ea33d1980f416f8b8c7f5081ea57b97590578a0a"
+  ],
+  "subject": "fix: use mainRepoRoot for agent creation in Paseo-owned worktrees",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:6b4581a3f2724113fdeebe14c908b7b03617794f60766a6d8bb756b2269ea7c4",
+  "diff_tree_digest": "sha256:66885327c7405d17c9460c7236c2c49066dec5b0d57041e0aed23a78e79f6a82",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        157,
+        158
+      ],
+      "new_lines": [
+        159,
+        179
+      ],
+      "diff_block_lines": [
+        20,
+        40
+      ],
+      "hunk_header": "@@ -157,7 +159,35 @@ async function getWorktreeRoot(cwd: string): Promise<string | null> {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 59,
+  "receipt_file": "receipts/0796/selected.patch"
+}

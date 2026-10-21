@@ -1,0 +1,9 @@
+FILE packages/server/src/server/daemon-client.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-client.e2e.test.ts","old_lines":[784,788],"new_lines":[784,788],"diff_block_lines":[5,11],"hunk_header":"@@ -784,5 +784,5 @@ function waitForSignal<T>(","substantive_changed_lines":2}
+@@ -784,5 +784,5 @@ function waitForSignal<T>(
+       const cwd = tmpCwd();
+ 
+-      execSync("git init", { cwd, stdio: "pipe" });
++      execSync("git init -b main", { cwd, stdio: "pipe" });
+       execSync("git config user.email 'test@test.com'", {
+         cwd,

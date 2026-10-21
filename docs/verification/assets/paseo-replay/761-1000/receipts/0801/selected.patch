@@ -1,0 +1,23 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[694,713],"new_lines":[694,699],"diff_block_lines":[6,26],"hunk_header":"@@ -694,181 +694,143 @@ export function SessionProvider({","substantive_changed_lines":15}
+ 
+     const MAX_RETRIES = 3;
+-    const TIMEOUT_MS = 15000;
+     const RETRY_DELAY_MS = 2000;
+ 
+-    let retryCount = 0;
++    let cancelled = false;
+ 
+-    const requestAgentList = () => {
+-      console.log(
+-        `[Session] Requesting agent_list (attempt ${retryCount + 1}/${
+-          MAX_RETRIES + 1
+-        })`,
+-        { serverId }
+-      );
+-      void client
+-        .requestAgentList({ filter: { labels: { ui: "true" } } });
+-      if (!agentUpdatesSubscriptionIdRef.current) {
+-        agentUpdatesSubscriptionIdRef.current = client.subscribeAgentUpdates({
+-          subscriptionId: `app:${serverId}`,
+-          filter: { labels: { ui: "true" } },

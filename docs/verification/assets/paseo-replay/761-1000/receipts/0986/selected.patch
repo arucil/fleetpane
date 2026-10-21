@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/docs/cli.tsx
+RANGE {"path":"packages/website/src/routes/docs/cli.tsx","old_lines":[0,0],"new_lines":[15,35],"diff_block_lines":[21,41],"hunk_header":"@@ -0,0 +1,230 @@","substantive_changed_lines":16}
++
++function Code({ children }: { children: React.ReactNode }) {
++  return (
++    <div className="bg-card border border-border rounded-lg p-4 font-mono text-sm overflow-x-auto">
++      {children}
++    </div>
++  )
++}
++
++function CLI() {
++  return (
++    <div className="space-y-10">
++      <div>
++        <h1 className="text-3xl font-medium font-title mb-4">CLI</h1>
++        <p className="text-white/60 leading-relaxed">
++          The Paseo CLI lets you manage agents from your terminal. It's the same interface exposed by
++          the daemon's API, so anything you can do in the app you can do from the command line.
++        </p>
++      </div>
++
++      {/* Agent orchestration callout */}

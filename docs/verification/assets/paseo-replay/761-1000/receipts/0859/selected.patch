@@ -1,0 +1,11 @@
+FILE packages/app/src/stores/panel-store.ts
+RANGE {"path":"packages/app/src/stores/panel-store.ts","old_lines":[174,177],"new_lines":[174,181],"diff_block_lines":[5,13],"hunk_header":"@@ -174,4 +174,8 @@ export const usePanelStore = create<PanelState>()(","substantive_changed_lines":3}
+@@ -174,4 +174,8 @@ export const usePanelStore = create<PanelState>()(
+           if (typeof state.explorerFilesSplitRatio !== "number") {
+             state.explorerFilesSplitRatio = DEFAULT_EXPLORER_FILES_SPLIT_RATIO;
++          } else {
++            state.explorerFilesSplitRatio = clampExplorerFilesSplitRatio(
++              state.explorerFilesSplitRatio
++            );
+           }
+         }

@@ -1,0 +1,12 @@
+diff --git a/packages/server/src/server/agent/agent-storage.ts b/packages/server/src/server/agent/agent-storage.ts
+index 5fda7b895..986db189a 100644
+--- a/packages/server/src/server/agent/agent-storage.ts
++++ b/packages/server/src/server/agent/agent-storage.ts
+@@ -55,6 +55,7 @@ const STORED_AGENT_SCHEMA = z.object({
+   attentionTimestamp: z.string().nullable().optional(),
+   parentAgentId: z.string().nullable().optional(),
+   internal: z.boolean().optional(),
++  archivedAt: z.string().nullable().optional(),
+ });
+ 
+ export type SerializableAgentConfig = Pick<

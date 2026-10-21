@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 789,
+  "revision": "f689cb13850c0297e423b3f5705282c6d1d6d95b",
+  "date": "2026-01-30T11:57:12+07:00",
+  "committer_date": "2026-01-30T11:57:12+07:00",
+  "parents": [
+    "829de66d2fd518c5fc3846253b6ceaa5b48d1786"
+  ],
+  "subject": "fix: remove duplicate PID lock release from bootstrap.ts",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:336d54264e156872462b9a5aa3b1f117dc5023648d5a045d3b9a95cfd618b812",
+  "diff_tree_digest": "sha256:2b85a4cc2846a3c1e95d3d54d5950c2805b1527b7f2841f1ef1d17033af1cb7f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        606,
+        611
+      ],
+      "new_lines": [
+        605,
+        608
+      ],
+      "diff_block_lines": [
+        11,
+        17
+      ],
+      "hunk_header": "@@ -606,6 +605,4 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 1,
+  "receipt_file": "receipts/0789/selected.patch"
+}

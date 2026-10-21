@@ -1,0 +1,13 @@
+FILE packages/app/e2e/delete-agent-persists.spec.ts
+RANGE {"path":"packages/app/e2e/delete-agent-persists.spec.ts","old_lines":[50,56],"new_lines":[50,56],"diff_block_lines":[5,15],"hunk_header":"@@ -50,7 +50,7 @@ test('deleting an agent via long-press persists after reload', async ({ page })","substantive_changed_lines":6}
+@@ -50,7 +50,7 @@ test('deleting an agent via long-press persists after reload', async ({ page })
+     await longPress(page, agentRow, 1200);
+ 
+-    const deleteButton = page.getByTestId('agent-action-delete').first();
+-    await expect(deleteButton).toBeVisible({ timeout: 10000 });
+-    await deleteButton.click({ force: true });
++    const archiveButton = page.getByTestId('agent-action-archive').first();
++    await expect(archiveButton).toBeVisible({ timeout: 10000 });
++    await archiveButton.click({ force: true });
+     await expect(page.getByTestId('agent-action-cancel')).toHaveCount(0, { timeout: 10000 });
+ 

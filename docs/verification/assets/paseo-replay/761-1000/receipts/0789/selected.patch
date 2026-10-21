@@ -1,0 +1,9 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[606,611],"new_lines":[605,608],"diff_block_lines":[11,17],"hunk_header":"@@ -606,6 +605,4 @@ export async function createPaseoDaemon(","substantive_changed_lines":1}
+@@ -606,6 +605,4 @@ export async function createPaseoDaemon(
+       unlinkSync(selfIdMcpSocketPath);
+     }
+-    // Release PID lock
+-    await releasePidLock(config.paseoHome);
+   };
+ 

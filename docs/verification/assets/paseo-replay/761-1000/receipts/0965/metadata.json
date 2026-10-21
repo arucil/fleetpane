@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 965,
+  "revision": "8d1d7b7603353869378c10468e2df4b6888f39dd",
+  "date": "2026-02-05T14:35:35+07:00",
+  "committer_date": "2026-02-05T14:35:35+07:00",
+  "parents": [
+    "7ae56bcdd1ff2b459ba3dfb7fcd4c4357adab954"
+  ],
+  "subject": "chore: migrate PASEO_PORT to PASEO_LISTEN across codebase",
+  "diff_tree_paths": [
+    "M\tpackages/cli/tests/helpers/test-daemon.ts",
+    "M\tpackages/cli/tests/setup.ts",
+    "M\tpackages/server/README.md",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts"
+  ],
+  "source_receipt_digest": "sha256:498b45174222cc9993448a0b7181625f39e33281750a9aef3c2278783ebc697f",
+  "diff_tree_digest": "sha256:07cb9124e4fcece5497d6a5687eb99caf142b2f1ffa00f35f55a336e9e0993cf",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-e2e/checkout-debug.ts",
+      "old_lines": [
+        31,
+        36
+      ],
+      "new_lines": [
+        31,
+        36
+      ],
+      "diff_block_lines": [
+        12,
+        20
+      ],
+      "hunk_header": "@@ -31,6 +31,6 @@ class LoggingWebSocket extends OriginalWebSocket {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 15,
+  "receipt_file": "receipts/0965/selected.patch"
+}

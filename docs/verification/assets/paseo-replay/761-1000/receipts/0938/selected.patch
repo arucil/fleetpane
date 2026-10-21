@@ -1,0 +1,22 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[303,310],"new_lines":[305,319],"diff_block_lines":[12,31],"hunk_header":"@@ -303,8 +305,15 @@ function OfferLinkListener({","substantive_changed_lines":12}
+@@ -303,8 +305,15 @@ function OfferLinkListener({
+       if (!url) return;
+       if (!url.includes("#offer=")) return;
+-      void upsertDaemonFromOfferUrl(url).catch((error) => {
+-        if (cancelled) return;
+-        console.warn("[Linking] Failed to import pairing offer", error);
+-      });
++      void upsertDaemonFromOfferUrl(url)
++        .then((profile) => {
++          if (cancelled) return;
++          const serverId = (profile as any)?.serverId;
++          if (typeof serverId !== "string" || !serverId) return;
++          router.replace({ pathname: "/", params: { serverId } });
++        })
++        .catch((error) => {
++          if (cancelled) return;
++          console.warn("[Linking] Failed to import pairing offer", error);
++        });
+     };
+ 

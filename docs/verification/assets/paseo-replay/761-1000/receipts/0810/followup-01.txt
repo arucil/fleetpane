@@ -1,0 +1,46 @@
+    } finally {
+      if (this.eventQueue === queue) {
+        this.eventQueue = null;
+      }
+    }
+  }
+
+  async *streamHistory(): AsyncGenerator<AgentStreamEvent> {
+    if (!this.historyPending || this.persistedHistory.length === 0) {
+      return;
+    }
+    const history = this.persistedHistory;
+    this.persistedHistory = [];
+    this.historyPending = false;
+    for (const item of history) {
+      yield { type: "timeline", provider: CODEX_PROVIDER, item };
+    }
+  }
+
+  async getRuntimeInfo(): Promise<AgentRuntimeInfo> {
+    if (this.cachedRuntimeInfo) return { ...this.cachedRuntimeInfo };
+    const info: AgentRuntimeInfo = {
+      provider: CODEX_PROVIDER,
+      sessionId: this.currentThreadId,
+      model: this.config.model ?? null,
+      modeId: this.currentMode ?? null,
+      extra: this.resolvedCollaborationMode
+        ? { collaborationMode: this.resolvedCollaborationMode.name }
+        : undefined,
+    };
+    this.cachedRuntimeInfo = info;
+    return { ...info };
+  }
+
+  async getAvailableModes(): Promise<AgentMode[]> {
+    return CODEX_MODES;
+  }
+
+  async getCurrentMode(): Promise<string | null> {
+    return this.currentMode ?? null;
+  }
+
+  async setMode(modeId: string): Promise<void> {
+    validateCodexMode(modeId);
+    this.currentMode = modeId;
+    this.resolvedCollaborationMode = this.resolveCollaborationMode(modeId);

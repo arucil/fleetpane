@@ -1,0 +1,23 @@
+FILE packages/app/src/components/ui/button.tsx
+RANGE {"path":"packages/app/src/components/ui/button.tsx","old_lines":[0,0],"new_lines":[8,28],"diff_block_lines":[14,34],"hunk_header":"@@ -0,0 +1,129 @@","substantive_changed_lines":17}
++
++const styles = StyleSheet.create((theme) => ({
++  base: {
++    flexDirection: "row",
++    alignItems: "center",
++    justifyContent: "center",
++    gap: theme.spacing[2],
++    borderRadius: theme.borderRadius.lg,
++    borderWidth: 1,
++    borderColor: "transparent",
++  },
++  md: {
++    paddingVertical: theme.spacing[3],
++    paddingHorizontal: theme.spacing[4],
++  },
++  sm: {
++    paddingVertical: theme.spacing[2],
++    paddingHorizontal: theme.spacing[3],
++    borderRadius: theme.borderRadius.md,
++  },
++  lg: {

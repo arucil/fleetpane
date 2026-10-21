@@ -1,0 +1,23 @@
+FILE packages/relay/src/node-adapter.ts
+RANGE {"path":"packages/relay/src/node-adapter.ts","old_lines":[78,98],"new_lines":[78,78],"diff_block_lines":[7,27],"hunk_header":"@@ -77,30 +77,5 @@ export function createRelayServer(config: NodeRelayServerConfig): RelayServer {","substantive_changed_lines":17}
+     ws.on("message", (data, isBinary) => {
+-      if (isBinary) {
+-        const message =
+-          data instanceof ArrayBuffer
+-            ? data
+-            : bufferToArrayBuffer(
+-                data instanceof Buffer
+-                  ? data
+-                  : ArrayBuffer.isView(data)
+-                    ? Buffer.from(data.buffer, data.byteOffset, data.byteLength)
+-                    : Buffer.from(String(data), "utf8")
+-              );
+-        relay.forward(sessionId, role, message);
+-        return;
+-      }
+-
+-      const text =
+-        typeof data === "string"
+-          ? data
+-          : data instanceof Buffer
+-            ? data.toString("utf8")

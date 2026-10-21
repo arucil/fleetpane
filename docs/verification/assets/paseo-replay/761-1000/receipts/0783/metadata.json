@@ -1,0 +1,77 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 783,
+  "revision": "c015fdbef1fb71df3307bccbde59128b66b898c3",
+  "date": "2026-01-29T11:31:15+07:00",
+  "committer_date": "2026-01-29T11:31:15+07:00",
+  "parents": [
+    "dfda6daeedb26928ea67a1064e4c8a88478adc2f"
+  ],
+  "subject": "refactor: replace agent-control MCP with labels system and Paseo MCP",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/agent-directory.ts",
+    "M\tpackages/app/src/utils/agent-grouping.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/cli/docs/type-audit.md",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "D\tpackages/server/scripts/test-codex-mcp-agents.ts",
+    "D\tpackages/server/scripts/test-codex-mcp-basic-auth.ts",
+    "D\tpackages/server/scripts/test-codex-mcp-bearer.ts",
+    "D\tpackages/server/scripts/test-codex-mcp-http-headers.ts",
+    "D\tpackages/server/scripts/test-codex-mcp-http.ts",
+    "D\tpackages/server/scripts/verify-codex-mcp-config.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-e2e/daemon-restart-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/orchestration.e2e.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:8334323f31539d0d49b5f2520e18147143e3a3e4c97acc38bb26366e9f349d98",
+  "diff_tree_digest": "sha256:1e2926b490869529a407a97665be63ef61c9d04be9d1a883806298a348c0d3ec",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/ls.ts",
+      "old_lines": [
+        148,
+        148
+      ],
+      "new_lines": [
+        154,
+        183
+      ],
+      "diff_block_lines": [
+        19,
+        48
+      ],
+      "hunk_header": "@@ -146,4 +150,44 @@ export async function runLsCommand(",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 632,
+  "receipt_file": "receipts/0783/selected.patch"
+}

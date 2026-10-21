@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 813,
+  "revision": "54ee84fe7228befef3be949cba382b9251c325b5",
+  "date": "2026-02-02T14:32:14+07:00",
+  "committer_date": "2026-02-02T14:32:14+07:00",
+  "parents": [
+    "ba64b955ec041d69069c6c6dc4c8e6ba821e6594"
+  ],
+  "subject": "Fix Playwright E2E tests",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/delete-agent-persists.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "M\tpackages/app/e2e/permission-prompt.spec.ts"
+  ],
+  "source_receipt_digest": "sha256:c2f0f6cc11c71a2bce20fe19effd73f160a66f4b2876231b04b9d8e05eb9ad5a",
+  "diff_tree_digest": "sha256:21f7a436f0eb6558b5d0051271f4a17bdae123f253197a8ceec2f066a2ef50f1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/e2e/delete-agent-persists.spec.ts",
+      "old_lines": [
+        50,
+        56
+      ],
+      "new_lines": [
+        50,
+        56
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -50,7 +50,7 @@ test('deleting an agent via long-press persists after reload', async ({ page })",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 25,
+  "receipt_file": "receipts/0813/selected.patch"
+}

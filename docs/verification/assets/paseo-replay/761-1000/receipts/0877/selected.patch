@@ -1,0 +1,23 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[22,42],"new_lines":[19,20],"diff_block_lines":[23,43],"hunk_header":"@@ -22,177 +19,16 @@ function agentKey(agent: Pick<AggregatedAgent, \"serverId\" | \"id\">): string {","substantive_changed_lines":15}
+ }
+ 
+-function isMatch(agent: AggregatedAgent, query: string): boolean {
+-  if (!query) return true;
+-  const q = query.toLowerCase();
+-  const title = (agent.title ?? "New agent").toLowerCase();
+-  const cwd = agent.cwd.toLowerCase();
+-  const host = agent.serverLabel.toLowerCase();
+-  return title.includes(q) || cwd.includes(q) || host.includes(q);
+-}
+-
+-function sortAgents(left: AggregatedAgent, right: AggregatedAgent): number {
+-  const leftAttention = left.requiresAttention ? 1 : 0;
+-  const rightAttention = right.requiresAttention ? 1 : 0;
+-  if (leftAttention !== rightAttention) return rightAttention - leftAttention;
+-
+-  const leftRunning = left.status === "running" ? 1 : 0;
+-  const rightRunning = right.status === "running" ? 1 : 0;
+-  if (leftRunning !== rightRunning) return rightRunning - leftRunning;
+-
+-  return right.lastActivityAt.getTime() - left.lastActivityAt.getTime();

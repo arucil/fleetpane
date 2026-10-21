@@ -1,0 +1,17 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[466,478],"new_lines":[470,474],"diff_block_lines":[16,30],"hunk_header":"@@ -466,13 +470,5 @@ export class DaemonClient {","substantive_changed_lines":7}
+@@ -466,13 +470,5 @@ export class DaemonClient {
+       this.reconnectTimeout = null;
+     }
+-    this.cleanupTransport();
+-    if (this.transport) {
+-      try {
+-        this.transport.close();
+-      } catch {
+-        // no-op
+-      }
+-      this.transport = null;
+-    }
++    this.disposeTransport(1000, "Client closed");
+     this.clearWaiters(new Error("Daemon client closed"));
+     this.updateConnectionState({

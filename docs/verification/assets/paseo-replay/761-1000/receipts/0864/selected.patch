@@ -1,0 +1,15 @@
+FILE packages/app/src/hooks/use-global-keyboard-nav.ts
+RANGE {"path":"packages/app/src/hooks/use-global-keyboard-nav.ts","old_lines":[78,81],"new_lines":[78,89],"diff_block_lines":[5,17],"hunk_header":"@@ -78,4 +78,12 @@ export function useGlobalKeyboardNav({","substantive_changed_lines":7}
+@@ -78,4 +78,12 @@ export function useGlobalKeyboardNav({
+       const lowerKey = key.toLowerCase();
+ 
++      const target = event.target as unknown;
++      const isEditableTarget =
++        typeof HTMLElement !== "undefined" &&
++        target instanceof HTMLElement &&
++        (target.tagName === "TEXTAREA" ||
++          target.tagName === "INPUT" ||
++          target.isContentEditable);
++
+       if (key === "Alt") {
+         useKeyboardNavStore.getState().setAltDown(true);

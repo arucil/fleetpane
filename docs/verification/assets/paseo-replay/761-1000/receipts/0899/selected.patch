@@ -1,0 +1,10 @@
+FILE packages/app/src/components/ui/dropdown-menu.tsx
+RANGE {"path":"packages/app/src/components/ui/dropdown-menu.tsx","old_lines":[195,199],"new_lines":[195,200],"diff_block_lines":[5,12],"hunk_header":"@@ -195,5 +195,6 @@ export function DropdownMenuTrigger({","substantive_changed_lines":3}
+@@ -195,5 +195,6 @@ export function DropdownMenuTrigger({
+   ...props
+ }: PropsWithChildren<DropdownMenuTriggerProps>): ReactElement {
+-  const { setOpen, open, triggerRef } = useDropdownMenuContext("DropdownMenuTrigger");
++  const { setOpen, open: isOpen, triggerRef } = useDropdownMenuContext("DropdownMenuTrigger");
++  const open: boolean = isOpen;
+ 
+   const handlePress = useCallback(() => {

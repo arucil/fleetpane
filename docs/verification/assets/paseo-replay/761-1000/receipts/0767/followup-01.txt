@@ -1,0 +1,23 @@
+  try {
+    console.log(chalk.dim('Restarting daemon...'))
+
+    // Request server restart
+    await client.restartServer('cli_restart')
+
+    console.log(chalk.green('Daemon restart requested'))
+
+    await client.close()
+  } catch (err) {
+    await client.close().catch(() => {})
+    const message = err instanceof Error ? err.message : String(err)
+
+    // If connection was closed, the daemon is restarting
+    if (message.includes('closed') || message.includes('disconnected')) {
+      console.log(chalk.green('Daemon is restarting'))
+      process.exit(0)
+    }
+
+    console.error(chalk.red(`Failed to restart daemon: ${message}`))
+    process.exit(1)
+  }
+}

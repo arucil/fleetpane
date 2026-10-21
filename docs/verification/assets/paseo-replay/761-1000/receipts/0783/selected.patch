@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/ls.ts
+RANGE {"path":"packages/cli/src/commands/agent/ls.ts","old_lines":[148,148],"new_lines":[154,183],"diff_block_lines":[19,48],"hunk_header":"@@ -146,4 +150,44 @@ export async function runLsCommand(","substantive_changed_lines":17}
++    // --ui is equivalent to --label ui=true
++    // By default (no --ui flag), show background agents (those WITHOUT ui=true)
++    const labelFilters: Record<string, string> = {}
++    if (options.label) {
++      for (const labelStr of options.label) {
++        const eqIndex = labelStr.indexOf('=')
++        if (eqIndex !== -1) {
++          const key = labelStr.slice(0, eqIndex)
++          const value = labelStr.slice(eqIndex + 1)
++          labelFilters[key] = value
++        }
++      }
++    }
++    // Add ui=true filter if --ui flag is set
++    if (options.ui) {
++      labelFilters['ui'] = 'true'
++    }
++
++    // Apply label filtering
++    if (Object.keys(labelFilters).length > 0) {
++      // Filter to agents that have ALL specified labels (AND semantics)
++      agents = agents.filter((a) => {
++        const agentLabels = (a as any).labels as Record<string, string> | undefined
++        for (const [key, value] of Object.entries(labelFilters)) {
++          if (!agentLabels || agentLabels[key] !== value) {
++            return false
++          }
++        }
++        return true
++      })

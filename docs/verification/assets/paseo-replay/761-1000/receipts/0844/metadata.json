@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 844,
+  "revision": "8f1637ee554bd311979bc92bf1961a66fe309f1b",
+  "date": "2026-02-04T10:18:58+07:00",
+  "committer_date": "2026-02-04T10:18:58+07:00",
+  "parents": [
+    "3e582daf459f3f3d046cf8a023cb6072331037c5",
+    "0aa2fede0803be498ad2b0942dc9888d26700e64"
+  ],
+  "subject": "Merge branch 'plan-paseo-config-schema'",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/generate-config-schema.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "A\tpackages/server/src/server/allowed-hosts.test.ts",
+    "A\tpackages/server/src/server/allowed-hosts.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/paseo-home.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "A\tpackages/website/public/schemas/paseo.config.v1.json",
+    "M\tpackages/website/src/routeTree.gen.ts",
+    "M\tpackages/website/src/routes/docs.tsx"
+  ],
+  "source_receipt_digest": "sha256:848414dfc072055357909a8898aa22a81dc869b97c8464e7653235b14c4eca39",
+  "diff_tree_digest": "sha256:1b25465862babd38fcd5262f4ff0febe250ffe749b66c5620350b730df9e8115",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/allowed-hosts.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        1,
+        21
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -0,0 +1,104 @@",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 758,
+  "receipt_file": "receipts/0844/selected.patch"
+}

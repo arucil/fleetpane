@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 778,
+  "revision": "d78c7d5e0770dcb245e9a4430c2518b8d2ee3ec3",
+  "date": "2026-01-28T23:34:22+07:00",
+  "committer_date": "2026-01-28T23:34:22+07:00",
+  "parents": [
+    "d51d70a6fd538d9162c9eb17d02987f5a85cd2e1"
+  ],
+  "subject": "chore(cli): rename test files from .mts to .ts",
+  "diff_tree_paths": [
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/daemon/restart.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/cli/src/commands/daemon/stop.ts",
+    "M\tpackages/cli/src/output/json.ts",
+    "M\tpackages/cli/src/output/table.ts",
+    "M\tpackages/cli/src/output/with-output.ts",
+    "M\tpackages/cli/src/output/yaml.ts",
+    "D\tpackages/cli/tests/01-foundation.test.mts",
+    "A\tpackages/cli/tests/01-foundation.test.ts",
+    "A\tpackages/cli/tests/02-output.test.ts",
+    "D\tpackages/cli/tests/03-daemon.test.mts",
+    "A\tpackages/cli/tests/03-daemon.test.ts",
+    "D\tpackages/cli/tests/04-agent-ps.test.mts",
+    "A\tpackages/cli/tests/04-agent-ps.test.ts",
+    "D\tpackages/cli/tests/05-agent-run.test.mts",
+    "A\tpackages/cli/tests/05-agent-run.test.ts",
+    "D\tpackages/cli/tests/06-agent-send.test.mts",
+    "A\tpackages/cli/tests/06-agent-send.test.ts",
+    "D\tpackages/cli/tests/07-agent-stop.test.mts",
+    "A\tpackages/cli/tests/07-agent-stop.test.ts",
+    "D\tpackages/cli/tests/output.test.mts",
+    "D\tpackages/cli/tests/run-all.mts",
+    "A\tpackages/cli/tests/run-all.ts"
+  ],
+  "source_receipt_digest": "sha256:ed3ad8fab23f591322c5d3ca32f2d69ecf240b8b2998d01bba56d5e6369669fb",
+  "diff_tree_digest": "sha256:ecc66b94a7dbf4c6a4a49206fc446db319ce526107c77519dd32162423d7878a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/restart.ts",
+      "old_lines": [
+        4,
+        15
+      ],
+      "new_lines": [
+        3,
+        23
+      ],
+      "diff_block_lines": [
+        10,
+        39
+      ],
+      "hunk_header": "@@ -1,39 +1,64 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1593,
+  "receipt_file": "receipts/0778/selected.patch"
+}

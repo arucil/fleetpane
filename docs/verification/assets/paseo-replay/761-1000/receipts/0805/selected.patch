@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[1597,1614],"new_lines":[1597,1603],"diff_block_lines":[43,63],"hunk_header":"@@ -1597,35 +1597,18 @@ export class DaemonClientV2 {","substantive_changed_lines":16}
+   }
+ 
+-  async getGitRepoInfo(
+-    input: string | { cwd: string } | { agentId: string },
++  async validateBranch(
++    options: { cwd: string; branchName: string },
+     requestId?: string
+-  ): Promise<GitRepoInfoPayload> {
+-    const normalizedInput =
+-      typeof input === "string" ? { agentId: input } : input;
++  ): Promise<ValidateBranchPayload> {
+     const resolvedRequestId = this.createRequestId(requestId);
+-    const cwd =
+-      "cwd" in normalizedInput
+-        ? normalizedInput.cwd
+-        : (await this.fetchAgent(normalizedInput.agentId).catch(() => null))?.cwd;
+-
+-    if (!cwd) {
+-      return {
+-        cwd: "cwd" in normalizedInput ? normalizedInput.cwd : "",
+-        repoRoot: "",

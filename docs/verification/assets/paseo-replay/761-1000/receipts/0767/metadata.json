@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 767,
+  "revision": "6fd421446674c5a9a9cefd22d9179da2306efde0",
+  "date": "2026-01-28T22:47:08+07:00",
+  "committer_date": "2026-01-28T22:47:08+07:00",
+  "parents": [
+    "6781c1b8881204ef57ed9f904091cc092f817005"
+  ],
+  "subject": "test(cli): add zx TDD infrastructure and phase 1 tests",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/daemon/index.ts",
+    "A\tpackages/cli/src/commands/daemon/restart.ts",
+    "A\tpackages/cli/src/commands/daemon/start.ts",
+    "A\tpackages/cli/src/commands/daemon/status.ts",
+    "A\tpackages/cli/src/commands/daemon/stop.ts",
+    "A\tpackages/cli/src/utils/client.ts",
+    "A\tpackages/cli/tests/01-foundation.test.mts",
+    "A\tpackages/cli/tests/run-all.mts",
+    "A\tpackages/cli/tests/setup.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:fdd3b016dd84e69775206b41e712a2bd903ffb323bb6f57db9a3138fe66f4450",
+  "diff_tree_digest": "sha256:95eef2e7fa05d3a5f75e3663ce97afc5eb6c97ed5adcca9a5411e1ed98be1578",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/restart.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        3,
+        32
+      ],
+      "diff_block_lines": [
+        9,
+        38
+      ],
+      "hunk_header": "@@ -0,0 +1,51 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 387,
+  "receipt_file": "receipts/0767/selected.patch"
+}

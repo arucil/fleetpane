@@ -1,0 +1,70 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 812,
+  "revision": "ba64b955ec041d69069c6c6dc4c8e6ba821e6594",
+  "date": "2026-02-02T14:15:55+07:00",
+  "committer_date": "2026-02-02T14:15:55+07:00",
+  "parents": [
+    "d45b9723d9f43603a03ab2b79be99ec66fb3e8bd",
+    "afce2e1c58ad9704947bdfaab0837c051a7be2a8"
+  ],
+  "subject": "Merge branch 'plan/structured-agent-self-id'",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/server/package.json",
+    "D\tpackages/server/src/self-id-bridge/index.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/agent-metadata-generator.test.ts",
+    "A\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "D\tpackages/server/src/server/agent/agent-self-id-mcp.ts",
+    "D\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "D\tpackages/server/src/server/agent/paseo-instructions-tag.test.ts",
+    "D\tpackages/server/src/server/agent/paseo-instructions-tag.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "D\tpackages/server/src/server/agent/providers/codex-mcp-agent.paseo-instructions.test.ts",
+    "D\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "D\tpackages/server/src/server/agent/self-identification-instructions.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "D\tpackages/server/src/server/daemon-e2e/self-id-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/setup.ts",
+    "M\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts"
+  ],
+  "source_receipt_digest": "sha256:7524eb15a5beee41b616efd06013ffc240ba7ff53f8f01177f7083adf5321f46",
+  "diff_tree_digest": "sha256:94ba08366ad8d1c4e8556752a9969119e1e7a0acc3321c536b2f3dff8b56862d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-metadata-generator.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        7,
+        27
+      ],
+      "diff_block_lines": [
+        13,
+        33
+      ],
+      "hunk_header": "@@ -0,0 +1,248 @@",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 2501,
+  "receipt_file": "receipts/0812/selected.patch"
+}

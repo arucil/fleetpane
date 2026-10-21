@@ -1,0 +1,6 @@
+       ...(Object.keys(innerConfig).length > 0 ? { config: innerConfig } : {}),
+-    })) as { thread?: { id?: string } };
++    })) as CodexThreadStartResponse;
+     const threadId = response?.thread?.id;
+     if (!threadId) {
+       throw new Error("Codex app-server did not return thread id");

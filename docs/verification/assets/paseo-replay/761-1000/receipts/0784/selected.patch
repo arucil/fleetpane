@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/logs.ts
+RANGE {"path":"packages/cli/src/commands/agent/logs.ts","old_lines":[33,62],"new_lines":[17,18],"diff_block_lines":[36,65],"hunk_header":"@@ -33,72 +17,7 @@ export interface AgentLogsOptions extends CommandOptions {","substantive_changed_lines":22}
+ }
+ 
+-export type AgentLogsResult = ListResult<LogEntry>
+-
+-/** Format a timeline item into a log entry */
+-function formatTimelineItem(item: AgentTimelineItem): LogEntry {
+-  const now = new Date().toISOString().slice(11, 19) // HH:MM:SS
+-
+-  switch (item.type) {
+-    case 'user_message':
+-      return {
+-        timestamp: now,
+-        type: 'user',
+-        summary: truncate(item.text, 60),
+-      }
+-    case 'assistant_message':
+-      return {
+-        timestamp: now,
+-        type: 'assistant',
+-        summary: truncate(item.text, 60),
+-      }
+-    case 'reasoning':
+-      return {
+-        timestamp: now,
+-        type: 'reasoning',
+-        summary: truncate(item.text, 60),
+-      }
+-    case 'tool_call': {
+-      const toolName = item.name
+-      const status = item.status ?? ''

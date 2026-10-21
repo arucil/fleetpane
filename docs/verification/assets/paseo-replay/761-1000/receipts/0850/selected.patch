@@ -1,0 +1,23 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[302,303],"new_lines":[306,326],"diff_block_lines":[36,56],"hunk_header":"@@ -302,4 +306,64 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":12}
+ 
+   const shouldShowInlinePreview = !isMobile && Boolean(selectedEntryPath);
++  const dividerWidth = 10;
++  const minTreeWidth = 220;
++  const minPreviewWidth = 320;
++
++  const treePaneWidth = useMemo(() => {
++    if (!shouldShowInlinePreview || containerWidth <= 0) {
++      return null;
++    }
++
++    const available = Math.max(0, containerWidth - dividerWidth);
++    const maxTree = Math.max(minTreeWidth, available - minPreviewWidth);
++    const raw = Math.round(available * splitRatio);
++    return Math.max(minTreeWidth, Math.min(maxTree, raw));
++  }, [containerWidth, shouldShowInlinePreview, splitRatio]);
++
++  const resizeStartRef = useRef<{ startWidth: number; startX: number; available: number } | null>(
++    null
++  );
++

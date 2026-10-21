@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/stop.ts
+RANGE {"path":"packages/cli/src/commands/agent/stop.ts","old_lines":[0,0],"new_lines":[4,33],"diff_block_lines":[10,39],"hunk_header":"@@ -0,0 +1,131 @@","substantive_changed_lines":17}
++
++/** Result type for agent stop command */
++export interface StopResult {
++  stoppedCount: number
++  agentIds: string[]
++}
++
++/** Schema for stop command output */
++export const stopSchema: OutputSchema<StopResult> = {
++  // For quiet mode, output the stopped agent IDs (one per line)
++  idField: (item) => item.agentIds.join('\n'),
++  columns: [{ header: 'STOPPED', field: 'stoppedCount' }],
++}
++
++export interface AgentStopOptions extends CommandOptions {
++  all?: boolean
++  cwd?: string
++}
++
++export type AgentStopResult = SingleResult<StopResult>
++
++export async function runStopCommand(
++  id: string | undefined,
++  options: AgentStopOptions,
++  _command: Command
++): Promise<AgentStopResult> {
++  const host = getDaemonHost({ host: options.host as string | undefined })
++
++  // Validate arguments - need either an id, --all, or --cwd
++  if (!id && !options.all && !options.cwd) {

@@ -1,0 +1,11 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[502,506],"new_lines":[498,504],"diff_block_lines":[32,40],"hunk_header":"@@ -502,5 +498,7 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":4}
+@@ -502,5 +498,7 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {
+               styles.treePane,
+               shouldShowInlinePreview && styles.treePaneWithPreview,
+-              shouldShowInlinePreview && treePaneWidth !== null ? { width: treePaneWidth } : null,
++              shouldShowInlinePreview && treePaneWidth !== null
++                ? { width: treePaneWidth, flex: 0, flexGrow: 0, flexShrink: 0 }
++                : null,
+             ]}
+           >

@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 784,
+  "revision": "7a8841481e9c11142a0b0855e07c3d6f59314519",
+  "date": "2026-01-29T12:12:39+07:00",
+  "committer_date": "2026-01-29T12:12:39+07:00",
+  "parents": [
+    "c015fdbef1fb71df3307bccbde59128b66b898c3"
+  ],
+  "subject": "feat: wait returns on permission request and improve CLI logging",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts",
+    "M\tpackages/cli/src/commands/permit/allow.ts",
+    "M\tpackages/cli/src/commands/permit/ls.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/orchestrator-instructions.ts",
+    "A\tpackages/server/src/server/daemon-e2e/wait-for-permission.e2e.test.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:89282a9b76911646ad8b64e3084057167d36d4d9ef89cd1d3034f5ffef7b8bda",
+  "diff_tree_digest": "sha256:0fd3a7368c7045fa0c5ff1836282a8962c0fc7fa6286d49cef9a06b73ef75347",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/logs.ts",
+      "old_lines": [
+        33,
+        62
+      ],
+      "new_lines": [
+        17,
+        18
+      ],
+      "diff_block_lines": [
+        36,
+        65
+      ],
+      "hunk_header": "@@ -33,72 +17,7 @@ export interface AgentLogsOptions extends CommandOptions {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 443,
+  "receipt_file": "receipts/0784/selected.patch"
+}

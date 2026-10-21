@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 816,
+  "revision": "4b2d16f2e1933c0abfc8a31bd3f78eacb66f0b0a",
+  "date": "2026-02-02T19:33:58+07:00",
+  "committer_date": "2026-02-02T19:33:58+07:00",
+  "parents": [
+    "98425ab6bc9c86af04f0822cb4d5249823bb1138"
+  ],
+  "subject": "refactor: add Codex API response types and auto-resolve default model",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:8e433759d8b8e8641dfe42dc16e3544db61141e3ad0a428a11b682e1055f6d9a",
+  "diff_tree_digest": "sha256:828ea186fddb427974c0c27c61834729fc3fbea67233485523094159e6e9422b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        456,
+        457
+      ],
+      "new_lines": [
+        456,
+        476
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -455,4 +455,23 @@ type RequestHandler = (params: unknown) => Promise<unknown> | unknown;",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/0816/selected.patch"
+}

@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 901,
+  "revision": "8152deb206b3cae77938ad9a473b177eafa4e4e1",
+  "date": "2026-02-04T14:58:18+07:00",
+  "committer_date": "2026-02-04T14:58:18+07:00",
+  "parents": [
+    "835e8e45d18cc0d50e97de814441c7f4b38cb6f5"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "A\tpackages/server/src/server/server-id.test.ts",
+    "A\tpackages/server/src/server/server-id.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:ea6658c51695bd11c21ab83ac7187d675dc0956523d57ec591a9892354d7fafb",
+  "diff_tree_digest": "sha256:a48f9a229d82d6c7150a7d639e8ab03fba1bdb615f78f76a56f2225511a15243",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/daemon-registry-context.tsx",
+      "old_lines": [
+        132,
+        132
+      ],
+      "new_lines": [
+        133,
+        153
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -130,4 +131,70 @@ export function DaemonRegistryProvider({ children }: { children: ReactNode }) {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 330,
+  "receipt_file": "receipts/0901/selected.patch"
+}

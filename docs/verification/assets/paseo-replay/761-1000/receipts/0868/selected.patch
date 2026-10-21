@@ -1,0 +1,14 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[139,143],"new_lines":[141,150],"diff_block_lines":[17,28],"hunk_header":"@@ -139,5 +141,10 @@ export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {","substantive_changed_lines":7}
+@@ -139,5 +141,10 @@ export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {
+               <ChevronDown size={14} color={theme.colors.foregroundMuted} />
+             </DropdownMenuTrigger>
+-            <DropdownMenuContent side="top" align="start" testID="agent-model-menu">
++            <DropdownMenuContent
++              side="top"
++              align="start"
++              maxWidth={dropdownMaxWidth}
++              testID="agent-model-menu"
++            >
+               <DropdownMenuLabel>Model</DropdownMenuLabel>
+               {models?.map((model) => {

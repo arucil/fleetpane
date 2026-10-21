@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 788,
+  "revision": "829de66d2fd518c5fc3846253b6ceaa5b48d1786",
+  "date": "2026-01-30T11:54:15+07:00",
+  "committer_date": "2026-01-30T11:54:15+07:00",
+  "parents": [
+    "1670c7084b5fcb5e5def8bf1fd258391ec2efea3"
+  ],
+  "subject": "fix: remove duplicate PID lock and simplify socket path config",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts"
+  ],
+  "source_receipt_digest": "sha256:2c569ec793bc40c50feac0865adc109110854f9c05266a9ecb83a340be2df093",
+  "diff_tree_digest": "sha256:b089d59c984f31d521220dee806ff029955479c39b0bd1b4a08ca0a456601ba3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/config.ts",
+      "old_lines": [
+        16,
+        25
+      ],
+      "new_lines": [
+        16,
+        20
+      ],
+      "diff_block_lines": [
+        5,
+        16
+      ],
+      "hunk_header": "@@ -16,10 +16,5 @@ function getDefaultListen(): string {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/0788/selected.patch"
+}

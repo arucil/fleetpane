@@ -1,0 +1,23 @@
+FILE SECURITY.md
+RANGE {"path":"SECURITY.md","old_lines":[2,22],"new_lines":[2,2],"diff_block_lines":[8,28],"hunk_header":"@@ -1,100 +1,11 @@","substantive_changed_lines":8}
+ 
+-Paseo follows a client-server architecture, similar to Docker. The daemon runs on your machine and manages your coding agents. Clients (the mobile app, CLI, or web interface) connect to the daemon to monitor and control those agents.
+-
+-Your code never leaves your machine. Paseo is a local-first tool that connects directly to your development environment.
+-
+-## Architecture
+-
+-The Paseo daemon can run anywhere you want to execute agents: your laptop, a Mac Mini, a VPS, or a Docker container. The daemon listens for connections and manages agent lifecycles.
+-
+-Clients connect to the daemon over WebSocket. There are two ways to establish this connection:
+-
+-- **Relay connection (recommended)** — The daemon connects outbound to our relay server, and clients meet it there. No open ports required.
+-- **Direct connection** — The daemon listens on a network address and clients connect directly.
+-
+-## Relay connections (recommended)
+-
+-The relay is the simplest way to connect from your phone. It requires no VPN setup, no port forwarding, and no firewall configuration. The daemon can stay bound to localhost or a socket file — it connects *outbound* to the relay, and your phone meets it there.
+-
+-> **The relay is designed to be untrusted.** All traffic between your phone and daemon is end-to-end encrypted. The relay server cannot read your messages, see your code, or modify traffic without detection. Even if the relay is compromised, your data remains protected.
+-
+-### How it works

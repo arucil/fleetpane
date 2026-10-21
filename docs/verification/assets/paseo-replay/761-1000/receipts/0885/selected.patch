@@ -1,0 +1,22 @@
+FILE packages/app/src/hooks/use-global-keyboard-nav.ts
+RANGE {"path":"packages/app/src/hooks/use-global-keyboard-nav.ts","old_lines":[112,115],"new_lines":[112,130],"diff_block_lines":[5,24],"hunk_header":"@@ -112,4 +112,19 @@ export function useGlobalKeyboardNav({","substantive_changed_lines":9}
+@@ -112,4 +112,19 @@ export function useGlobalKeyboardNav({
+       }
+ 
++      // Cmd+.: toggle sidebar (VS Code quick-fix muscle memory)
++      // Note: intentionally works even when focus is inside an input/textarea.
++      if (
++        (event.metaKey || event.ctrlKey) &&
++        (event.code === "Period" || key === ".")
++      ) {
++        // Ignore while command center is open.
++        if (useKeyboardNavStore.getState().commandCenterOpen) {
++          return;
++        }
++        event.preventDefault();
++        toggleAgentList();
++        return;
++      }
++
+       // Cmd+E: toggle explorer sidebar (only when an agent is selected)
+       if (

@@ -1,0 +1,9 @@
+FILE .github/workflows/server-ci.yml
+RANGE {"path":".github/workflows/server-ci.yml","old_lines":[23,26],"new_lines":[23,28],"diff_block_lines":[5,11],"hunk_header":"@@ -23,4 +23,6 @@ jobs:","substantive_changed_lines":2}
+@@ -23,4 +23,6 @@ jobs:
+     steps:
+       - uses: actions/checkout@v4
++        with:
++          fetch-depth: 0
+ 
+       - uses: actions/setup-node@v4

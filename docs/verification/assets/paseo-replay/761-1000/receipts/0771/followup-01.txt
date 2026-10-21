@@ -1,0 +1,70 @@
+}
+
+export async function runPsCommand(
+  options: AgentPsOptions,
+  _command: Command
+): Promise<AgentPsResult> {
+  const host = getDaemonHost({ host: options.host as string | undefined })
+
+  let client
+  try {
+    client = await connectToDaemon({ host: options.host as string | undefined })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    const error: CommandError = {
+      code: 'DAEMON_NOT_RUNNING',
+      message: `Cannot connect to daemon at ${host}: ${message}`,
+      details: 'Start the daemon with: paseo daemon start',
+    }
+    throw error
+  }
+
+  try {
+    // Request session state to get agent information
+    client.requestSessionState()
+
+    // Wait a moment for the session state to be populated
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    let agents = client.listAgents()
+
+    // Filter out archived agents unless -a flag is set
+    if (!options.all) {
+      agents = agents.filter((a) => !a.archivedAt)
+    }
+
+    // Filter by status if specified
+    if (options.status) {
+      agents = agents.filter((a) => a.status === options.status)
+    }
+
+    // Filter by cwd if specified
+    if (options.cwd) {
+      const filterCwd = options.cwd
+      agents = agents.filter((a) => {
+        // Normalize paths for comparison
+        const agentCwd = a.cwd.replace(/\/$/, '')
+        const targetCwd = filterCwd.replace(/\/$/, '')
+        return agentCwd === targetCwd || agentCwd.startsWith(targetCwd + '/')
+      })
+    }
+
+    await client.close()
+
+    const items = agents.map(toListItem)
+
+    return {
+      type: 'list',
+      data: items,
+      schema: agentPsSchema,
+    }
+  } catch (err) {
+    await client.close().catch(() => {})
+    const message = err instanceof Error ? err.message : String(err)
+    const error: CommandError = {
+      code: 'LIST_AGENTS_FAILED',
+      message: `Failed to list agents: ${message}`,
+    }
+    throw error
+  }
+}

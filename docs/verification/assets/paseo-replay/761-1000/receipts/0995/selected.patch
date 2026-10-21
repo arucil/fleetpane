@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[172,192],"new_lines":[183,183],"diff_block_lines":[43,63],"hunk_header":"@@ -171,24 +182,6 @@ function Feature({","substantive_changed_lines":20}
+   return (
+-    <div className="pt-10 space-y-6">
+-      <div className="space-y-4">
+-        <Step number={1}>
+-          <p className="text-sm">Install and run the daemon</p>
+-          <CodeBlock>npm install -g @getpaseo/cli && paseo</CodeBlock>
+-        </Step>
+-        <Step number={2}>
+-          <p className="text-sm pt-0.5">
+-            Open the app and connect to your daemon
+-          </p>
+-        </Step>
+-        <Step number={3}>
+-          <p className="text-sm pt-0.5">
+-            Start managing your agents from anywhere
+-          </p>
+-        </Step>
+-      </div>
+-      <p className="text-sm text-white/70 pt-2">
+-        Free and open source. Works on iOS, Android, web, and desktop.
+-      </p>

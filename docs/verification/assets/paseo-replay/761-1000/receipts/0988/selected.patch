@@ -1,0 +1,9 @@
+FILE packages/app/src/components/dictation-controls.tsx
+RANGE {"path":"packages/app/src/components/dictation-controls.tsx","old_lines":[143,147],"new_lines":[142,146],"diff_block_lines":[11,17],"hunk_header":"@@ -143,5 +142,5 @@ export function DictationOverlay({","substantive_changed_lines":2}
+@@ -143,5 +142,5 @@ export function DictationOverlay({
+   onRetry,
+   onDiscard,
+-}: Omit<DictationControlsProps, "onStart" | "disabled"> & { errorText?: string }) {
++}: Omit<DictationControlsProps, "onStart" | "disabled" | "transcript"> & { errorText?: string }) {
+   const { theme } = useUnistyles();
+   const isFailed = status === "failed";

@@ -1,0 +1,36 @@
+            kind: "error",
+            error: new DaemonRpcError({
+              requestId: msg.payload.requestId,
+              error: msg.payload.error,
+              requestType: msg.payload.requestType,
+              code: msg.payload.code,
+            }),
+          };
+        }
+        const value = params.select(msg);
+        if (value === null) {
+          return null;
+        }
+        return { kind: "ok", value };
+      },
+      params.timeout,
+      params.options
+    );
+
+    try {
+      await this.sendSessionMessageOrThrow(params.message);
+    } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      cancel(err);
+      void promise.catch(() => undefined);
+      throw err;
+    }
+
+    const result = await promise;
+    if (result.kind === "error") {
+      throw result.error;
+    }
+    return result.value;
+  }
+
+  private sendSessionMessageStrict(message: SessionInboundMessage): void {

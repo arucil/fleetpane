@@ -1,0 +1,29 @@
+        throw error
+      }
+      agents = [agent]
+    }
+
+    // Stop each agent
+    for (const agent of agents) {
+      try {
+        // Cancel if running
+        if (agent.status === 'running') {
+          await client.cancelAgent(agent.id)
+        }
+        // Delete the agent
+        await client.deleteAgent(agent.id)
+        stoppedIds.push(agent.id)
+      } catch (err) {
+        // Continue stopping other agents even if one fails
+        const message = err instanceof Error ? err.message : String(err)
+        console.error(`Warning: Failed to stop agent ${agent.id.slice(0, 7)}: ${message}`)
+      }
+    }
+
+    await client.close()
+
+    return {
+      type: 'single',
+      data: {
+        stoppedCount: stoppedIds.length,
+        agentIds: stoppedIds,

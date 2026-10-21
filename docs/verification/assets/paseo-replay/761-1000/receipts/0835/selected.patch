@@ -1,0 +1,23 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[33,35],"new_lines":[35,55],"diff_block_lines":[39,59],"hunk_header":"@@ -33,10 +35,46 @@ export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {","substantive_changed_lines":13}
+   }
+ 
++  const canFetchModels = Boolean(client) && Boolean(agent.provider) && (IS_WEB || prefsOpen);
++  const modelsQuery = useQuery({
++    queryKey: ["providerModels", serverId, agent.provider, agent.cwd],
++    enabled: canFetchModels,
++    staleTime: 5 * 60 * 1000,
++    queryFn: async () => {
++      if (!client) {
++        throw new Error("Daemon client unavailable");
++      }
++      const payload = await client.listProviderModels(agent.provider, { cwd: agent.cwd });
++      if (payload.error) {
++        throw new Error(payload.error);
++      }
++      return payload.models ?? [];
++    },
++  });
++  const models = modelsQuery.data ?? null;
++
+   function handleModeChange(modeId: string) {

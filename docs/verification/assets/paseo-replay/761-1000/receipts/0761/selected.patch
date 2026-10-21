@@ -1,0 +1,32 @@
+FILE packages/app/src/components/grouped-agent-list.tsx
+RANGE {"path":"packages/app/src/components/grouped-agent-list.tsx","old_lines":[416,439],"new_lines":[429,446],"diff_block_lines":[33,62],"hunk_header":"@@ -416,40 +429,62 @@ export function GroupedAgentList({","substantive_changed_lines":16}
+         : null;
+ 
++      const canArchive = !isRunning && !agent.requiresAttention;
++
+       return (
+         <Pressable
+-          style={({ pressed, hovered }) => [
++          style={({ pressed }) => [
+             styles.agentItem,
+             isSelected && styles.agentItemSelected,
+-            hovered && styles.agentItemHovered,
++            isHovered && styles.agentItemHovered,
+             pressed && styles.agentItemPressed,
+           ]}
+           onPress={() => handleAgentPress(agent.serverId, agent.id)}
+           onLongPress={() => handleAgentLongPress(agent)}
++          onHoverIn={() => setIsHovered(true)}
++          onHoverOut={() => setIsHovered(false)}
+           testID={`agent-row-${agent.serverId}-${agent.id}`}
+         >
+-          {({ hovered }) => (
+-            <View style={styles.agentContent}>
+-              <View style={styles.row}>
+-                {statusColor && (
+-                  <View
+-                    style={[styles.statusDot, { backgroundColor: statusColor }]}
+-                  />
+-                )}
+-                <Text
+-                  style={[

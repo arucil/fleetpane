@@ -1,0 +1,46 @@
+      type: "create_agent_request",
+      requestId,
+      config,
+      ...(options.initialPrompt ? { initialPrompt: options.initialPrompt } : {}),
+      ...(options.images && options.images.length > 0
+        ? { images: options.images }
+        : {}),
+      ...(options.git ? { git: options.git } : {}),
+      ...(options.worktreeName ? { worktreeName: options.worktreeName } : {}),
+      ...(options.labels && Object.keys(options.labels).length > 0
+        ? { labels: options.labels }
+        : {}),
+    });
+
+    const statusPromise = this.waitFor(
+      (msg) => {
+        if (msg.type !== "status") {
+          return null;
+        }
+        const created = AgentCreatedStatusPayloadSchema.safeParse(msg.payload);
+        if (created.success && created.data.requestId === requestId) {
+          return created.data;
+        }
+        const failed = AgentCreateFailedStatusPayloadSchema.safeParse(msg.payload);
+        if (failed.success && failed.data.requestId === requestId) {
+          return failed.data;
+        }
+        return null;
+      },
+      15000,
+      { skipQueue: true }
+    );
+
+    await this.sendSessionMessageOrThrow(message);
+    const status = await statusPromise;
+    if (status.status === "agent_create_failed") {
+      throw new Error(status.error);
+    }
+
+    return status.agent;
+  }
+
+  async deleteAgent(agentId: string): Promise<void> {
+    const requestId = this.createRequestId();
+    const message = SessionInboundMessageSchema.parse({
+      type: "delete_agent_request",

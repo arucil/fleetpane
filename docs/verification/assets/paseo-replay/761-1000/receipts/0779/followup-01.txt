@@ -1,0 +1,83 @@
+    const error: CommandError = {
+      code: 'DAEMON_NOT_RUNNING',
+      message: `Cannot connect to daemon at ${host}: ${message}`,
+      details: 'Start the daemon with: paseo daemon start',
+    }
+    throw error
+  }
+
+  try {
+    // Request session state to get agent information
+    client.requestSessionState()
+
+    // Wait a moment for the session state to be populated
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    const agents = client.listAgents()
+
+    // Resolve agent ID
+    const resolvedId = resolveAgentId(id, agents)
+    if (!resolvedId) {
+      const error: CommandError = {
+        code: 'AGENT_NOT_FOUND',
+        message: `No agent found matching: ${id}`,
+        details: 'Use `paseo agent ps` to list available agents',
+      }
+      throw error
+    }
+
+    const agent = agents.find((a) => a.id === resolvedId)
+    if (!agent) {
+      const error: CommandError = {
+        code: 'AGENT_NOT_FOUND',
+        message: `Agent not found after resolution: ${resolvedId}`,
+      }
+      throw error
+    }
+
+    if (options.list) {
+      // List available modes for this agent
+      const availableModes = agent.availableModes ?? []
+
+      await client.close()
+
+      const items: ModeListItem[] = availableModes.map((m) => ({
+        id: m.id,
+        label: m.label ?? m.id,
+        description: m.description ?? '',
+      }))
+
+      return {
+        type: 'list',
+        data: items,
+        schema: modeListSchema,
+      }
+    } else {
+      // Set the agent mode
+      await client.setAgentMode(resolvedId, mode!)
+
+      await client.close()
+
+      return {
+        type: 'single',
+        data: {
+          agentId: resolvedId.slice(0, 7),
+          mode: mode!,
+        },
+        schema: setModeSchema,
+      }
+    }
+  } catch (err) {
+    await client.close().catch(() => {})
+    // Re-throw if it's already a CommandError
+    if (err && typeof err === 'object' && 'code' in err) {
+      throw err
+    }
+    const message = err instanceof Error ? err.message : String(err)
+    const error: CommandError = {
+      code: 'MODE_OPERATION_FAILED',
+      message: `Failed to ${options.list ? 'list modes' : 'set mode'}: ${message}`,
+    }
+    throw error
+  }
+}

@@ -1,0 +1,11 @@
+FILE packages/server/src/server/daemon-e2e/checkout-debug.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/checkout-debug.ts","old_lines":[31,36],"new_lines":[31,36],"diff_block_lines":[12,20],"hunk_header":"@@ -31,6 +31,6 @@ class LoggingWebSocket extends OriginalWebSocket {","substantive_changed_lines":4}
+@@ -31,6 +31,6 @@ class LoggingWebSocket extends OriginalWebSocket {
+ 
+ const PASEO_HOME = process.env.PASEO_HOME ?? `${os.homedir()}/.paseo`;
+-const PASEO_PORT = process.env.PASEO_PORT ?? "6767";
+-const DAEMON_URL = `ws://127.0.0.1:${PASEO_PORT}/ws`;
++const PASEO_LISTEN = process.env.PASEO_LISTEN ?? "127.0.0.1:6767";
++const DAEMON_URL = `ws://${PASEO_LISTEN}/ws`;
+ 
+ async function testMultiAgentSequence() {

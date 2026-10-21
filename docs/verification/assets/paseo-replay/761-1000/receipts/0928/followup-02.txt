@@ -1,0 +1,115 @@
+diff --git a/packages/relay/src/encrypted-channel.ts b/packages/relay/src/encrypted-channel.ts
+index 23ac7a7b5..2068b5fc8 100644
+--- a/packages/relay/src/encrypted-channel.ts
++++ b/packages/relay/src/encrypted-channel.ts
+@@ -13,6 +13,8 @@ import {
+   deriveSharedKey,
+   encrypt,
+   decrypt,
++  type KeyPair,
++  type SharedKey,
+ } from "./crypto.js";
+ import { arrayBufferToBase64, base64ToArrayBuffer } from "./base64.js";
+ 
+@@ -33,11 +35,30 @@ export interface EncryptedChannelEvents {
+ 
+ type ChannelState = "connecting" | "handshaking" | "open" | "closed";
+ 
++type EncryptedChannelOptions = {
++  /**
++   * If set, the channel can validate repeated plaintext `{type:"hello"}`
++   * messages even after it is open.
++   *
++   * This is useful for robustness when the client retries the handshake
++   * (e.g., it didn't observe the daemon's `{type:"ready"}` yet). In that case,
++   * the daemon should re-send `{type:"ready"}` without changing keys.
++   */
++  daemonKeyPair?: KeyPair;
++};
++
+ interface HelloMessage {
+   type: "hello";
+   key: string;
+ }
+ 
++interface ReadyMessage {
++  type: "ready";
++}
++
++const HANDSHAKE_RETRY_MS = 1000;
++const MAX_PENDING_SENDS = 200;
++
+ /**
+  * Creates an encrypted channel as the initiator (client).
+  *
+@@ -52,19 +73,38 @@ export async function createClientChannel(
+   daemonPublicKeyB64: string,
+   events: EncryptedChannelEvents = {}
+ ): Promise<EncryptedChannel> {
+-  const keyPair = await generateKeyPair();
+-  const daemonPublicKey = await importPublicKey(daemonPublicKeyB64);
+-  const sharedKey = await deriveSharedKey(keyPair.privateKey, daemonPublicKey);
++  const keyPair = generateKeyPair();
++  const daemonPublicKey = importPublicKey(daemonPublicKeyB64);
++  const sharedKey = deriveSharedKey(keyPair.secretKey, daemonPublicKey);
+ 
+   const channel = new EncryptedChannel(transport, sharedKey, events);
+ 
+   // Send hello with our public key
+-  const ourPublicKeyB64 = await exportPublicKey(keyPair.publicKey);
++  const ourPublicKeyB64 = exportPublicKey(keyPair.publicKey);
+   const hello: HelloMessage = { type: "hello", key: ourPublicKeyB64 };
+-  transport.send(JSON.stringify(hello));
++  const helloText = JSON.stringify(hello);
++
++  let retry: ReturnType<typeof setInterval> | null = null;
++  const clearRetry = () => {
++    if (retry) {
++      clearInterval(retry);
++      retry = null;
++    }
++  };
+ 
+-  channel.setState("open");
+-  events.onopen?.();
++  channel.onTransitionToOpen(() => clearRetry());
++  channel.onClose(() => clearRetry());
++
++  transport.send(helloText);
++  retry = setInterval(() => {
++    if (channel.isOpen()) {
++      clearRetry();
++      return;
++    }
++    transport.send(helloText);
++  }, HANDSHAKE_RETRY_MS);
++  // Avoid keeping Node processes alive (e.g. tests) if the handshake is stuck.
++  (retry as unknown as { unref?: () => void }).unref?.();
+ 
+   return channel;
+ }
+@@ -79,15 +119,20 @@ export async function createClientChannel(
+  */
+ export async function createDaemonChannel(
+   transport: Transport,
+-  daemonKeyPair: CryptoKeyPair,
++  daemonKeyPair: KeyPair,
+   events: EncryptedChannelEvents = {}
+ ): Promise<EncryptedChannel> {
+   return new Promise((resolve, reject) => {
+-    const timeout = setTimeout(() => {
+-      reject(new Error("Handshake timeout"));
+-    }, 10000);
+-
+     const bufferedMessages: Array<string | ArrayBuffer> = [];
++    const shouldIgnorePostHelloPlaintext = (data: string | ArrayBuffer): boolean => {
++      try {
++        const text = typeof data === "string" ? data : new TextDecoder().decode(data);
++        const parsed = JSON.parse(text) as Partial<HelloMessage | ReadyMessage>;
++        return parsed.type === "hello" || parsed.type === "ready";
++      } catch {
++        return false;
++      }
++    };
+ 
+     transport.onmessage = async (data) => {

@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/send.ts
+RANGE {"path":"packages/cli/src/commands/agent/send.ts","old_lines":[0,0],"new_lines":[4,33],"diff_block_lines":[10,39],"hunk_header":"@@ -0,0 +1,164 @@","substantive_changed_lines":19}
++
++/** Minimal agent snapshot type (from daemon client) */
++interface AgentSnapshot {
++  id: string
++  provider: string
++  cwd: string
++  createdAt: string
++  status: string
++  title: string | null
++}
++
++/** Result type for agent send command */
++export interface AgentSendResult {
++  agentId: string
++  status: 'sent' | 'completed'
++  message: string
++}
++
++/** Schema for agent send output */
++export const agentSendSchema: OutputSchema<AgentSendResult> = {
++  idField: 'agentId',
++  columns: [
++    { header: 'AGENT ID', field: 'agentId', width: 12 },
++    { header: 'STATUS', field: 'status', width: 12 },
++    { header: 'MESSAGE', field: 'message', width: 40 },
++  ],
++}
++
++export interface AgentSendOptions extends CommandOptions {
++  noWait?: boolean

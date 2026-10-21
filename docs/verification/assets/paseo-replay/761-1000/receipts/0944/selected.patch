@@ -1,0 +1,23 @@
+FILE packages/app/src/app/pair-scan.tsx
+RANGE {"path":"packages/app/src/app/pair-scan.tsx","old_lines":[141,141],"new_lines":[150,170],"diff_block_lines":[35,55],"hunk_header":"@@ -134,9 +138,54 @@ export default function PairScanScreen() {","substantive_changed_lines":14}
++    useCallback(
++      (state) => {
++        if (!pendingNameHost) return null;
++        return state.sessions[pendingNameHost.serverId]?.serverInfo?.hostname ?? pendingNameHost.hostname ?? null;
++      },
++      [pendingNameHost]
++    )
++  );
++
++  const returnToSource = useCallback(
++    (serverId: string) => {
++      if (source === "onboarding") {
++        router.replace({ pathname: "/", params: { serverId } });
++        return;
++      }
++      if (source === "editHost" && targetServerId) {
++        router.replace({ pathname: "/settings", params: { editHost: targetServerId } });
++        return;
++      }
++      // settings (default): return to previous screen
++      try {

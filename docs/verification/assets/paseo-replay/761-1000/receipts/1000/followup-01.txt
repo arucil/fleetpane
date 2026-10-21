@@ -1,0 +1,26 @@
+diff --git a/packages/app/src/hooks/use-global-keyboard-nav.ts b/packages/app/src/hooks/use-global-keyboard-nav.ts
+index 53ce81259..c115bdf08 100644
+--- a/packages/app/src/hooks/use-global-keyboard-nav.ts
++++ b/packages/app/src/hooks/use-global-keyboard-nav.ts
+@@ -89,12 +89,19 @@ export function useGlobalKeyboardNav({
+       const key = event.key ?? "";
+       const lowerKey = key.toLowerCase();
+ 
+-      if (key === "Alt") {
++      if (key === "Alt" && !event.shiftKey) {
+         useKeyboardNavStore.getState().setAltDown(true);
+       }
+-      if (isTauri && (key === "Meta" || key === "Control")) {
++      if (isTauri && (key === "Meta" || key === "Control") && !event.shiftKey) {
+         useKeyboardNavStore.getState().setCmdOrCtrlDown(true);
+       }
++      // If shift is pressed while a modifier is held, hide the badges
++      if (key === "Shift") {
++        const state = useKeyboardNavStore.getState();
++        if (state.altDown || state.cmdOrCtrlDown) {
++          state.resetModifiers();
++        }
++      }
+ 
+       // Cmd+B: toggle sidebar
+       if (

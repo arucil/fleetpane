@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/codex-mcp-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-mcp-agent.test.ts","old_lines":[14,34],"new_lines":[0,0],"diff_block_lines":[20,40],"hunk_header":"@@ -1,1597 +0,0 @@","substantive_changed_lines":13}
+-  AgentStreamEvent,
+-  AgentTimelineItem,
+-} from "../agent-sdk-types.js";
+-
+-type ToolCallItem = Extract<AgentTimelineItem, { type: "tool_call" }>;
+-
+-// Use gpt-5.1-codex-mini with low reasoning effort for faster test execution
+-const CODEX_TEST_MODEL = "gpt-5.1-codex-mini";
+-const CODEX_TEST_REASONING_EFFORT = "low";
+-
+-function tmpCwd(): string {
+-  return mkdtempSync(path.join(os.tmpdir(), "codex-mcp-e2e-"));
+-}
+-
+-function useTempCodexSessionDir(): () => void {
+-  const prevSessionDir = process.env.CODEX_SESSION_DIR;
+-  const prevHome = process.env.CODEX_HOME;
+-  return () => {
+-    if (prevSessionDir === undefined) {
+-      delete process.env.CODEX_SESSION_DIR;
+-    } else {

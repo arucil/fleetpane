@@ -1,0 +1,41 @@
+function buildTreeRows({
+  directories,
+  expandedPaths,
+  sortOption,
+  path,
+  depth,
+}: {
+  directories: Map<string, { path: string; entries: ExplorerEntry[] }>;
+  expandedPaths: Set<string>;
+  sortOption: SortOption;
+  path: string;
+  depth: number;
+}): TreeRow[] {
+  const directory = directories.get(path);
+  if (!directory) {
+    return [];
+  }
+
+  const rows: TreeRow[] = [];
+  const entries = sortEntries(directory.entries, sortOption);
+
+  for (const entry of entries) {
+    rows.push({ entry, depth });
+    if (entry.kind === "directory" && expandedPaths.has(entry.path)) {
+      rows.push(
+        ...buildTreeRows({
+          directories,
+          expandedPaths,
+          sortOption,
+          path: entry.path,
+          depth: depth + 1,
+        })
+      );
+    }
+  }
+
+  return rows;
+}
+
+function getParentDirectory(path: string): string {
+  const normalized = path.replace(/\/+$/, "");

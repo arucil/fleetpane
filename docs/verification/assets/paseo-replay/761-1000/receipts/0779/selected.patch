@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/mode.ts
+RANGE {"path":"packages/cli/src/commands/agent/mode.ts","old_lines":[0,0],"new_lines":[2,31],"diff_block_lines":[8,37],"hunk_header":"@@ -0,0 +1,154 @@","substantive_changed_lines":18}
++import { connectToDaemon, getDaemonHost, resolveAgentId } from '../../utils/client.js'
++import type {
++  CommandOptions,
++  OutputSchema,
++  CommandError,
++  AnyCommandResult,
++} from '../../output/index.js'
++
++/** Mode item for list display */
++export interface ModeListItem {
++  id: string
++  label: string
++  description: string
++}
++
++/** Result for setting mode */
++export interface SetModeResult {
++  agentId: string
++  mode: string
++}
++
++/** Schema for mode list output */
++export const modeListSchema: OutputSchema<ModeListItem> = {
++  idField: 'id',
++  columns: [
++    { header: 'MODE', field: 'id', width: 15 },
++    { header: 'LABEL', field: 'label', width: 25 },
++    { header: 'DESCRIPTION', field: 'description', width: 40 },
++  ],
++}

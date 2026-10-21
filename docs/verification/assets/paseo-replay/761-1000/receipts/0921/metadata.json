@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 921,
+  "revision": "6e5cfa1eb4d98d4a99d4e87574f5b281aaa3494e",
+  "date": "2026-02-03T14:24:04+07:00",
+  "committer_date": "2026-02-03T14:24:04+07:00",
+  "parents": [
+    "434955eb937633e9e90ed7d8949a5aec839fd41f"
+  ],
+  "subject": "refactor: simplify relay ws message normalization",
+  "diff_tree_paths": [
+    "M\tpackages/relay/src/node-adapter.ts"
+  ],
+  "source_receipt_digest": "sha256:ac783ce6ae00d512eb4cc6879e40e7fdefddd2ed0d120c86371c6591d31fa80d",
+  "diff_tree_digest": "sha256:d5f363317149707a24d46a266c41c9b2507875975afb761f2c24efd9c94bace1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/relay/src/node-adapter.ts",
+      "old_lines": [
+        78,
+        98
+      ],
+      "new_lines": [
+        78,
+        78
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -77,30 +77,5 @@ export function createRelayServer(config: NodeRelayServerConfig): RelayServer {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/0921/selected.patch"
+}

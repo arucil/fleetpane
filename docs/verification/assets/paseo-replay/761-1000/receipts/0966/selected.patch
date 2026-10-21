@@ -1,0 +1,23 @@
+FILE packages/cli/docs/output-architecture.md
+RANGE {"path":"packages/cli/docs/output-architecture.md","old_lines":[31,51],"new_lines":[0,0],"diff_block_lines":[37,57],"hunk_header":"@@ -1,544 +0,0 @@","substantive_changed_lines":21}
+-│                                                             │
+-│   parseArgs() → executeCommand() → CommandResult<T>         │
+-└─────────────────────────────────┬───────────────────────────┘
+-                                  │
+-                                  ▼
+-┌─────────────────────────────────────────────────────────────┐
+-│                     Output Renderer                          │
+-│                                                             │
+-│   CommandResult<T> + OutputOptions → formatted string       │
+-│                                                             │
+-│   Renderers:                                                │
+-│   - TableRenderer (default, human-readable)                 │
+-│   - JsonRenderer (machine-readable)                         │
+-│   - YamlRenderer (machine-readable)                         │
+-│   - QuietRenderer (minimal, IDs only)                       │
+-└─────────────────────────────────┬───────────────────────────┘
+-                                  │
+-                                  ▼
+-┌─────────────────────────────────────────────────────────────┐
+-│                        stdout/stderr                         │
+-└─────────────────────────────────────────────────────────────┘

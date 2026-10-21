@@ -1,0 +1,14 @@
+FILE packages/server/src/server/config.ts
+RANGE {"path":"packages/server/src/server/config.ts","old_lines":[16,25],"new_lines":[16,20],"diff_block_lines":[5,16],"hunk_header":"@@ -16,10 +16,5 @@ function getDefaultListen(): string {","substantive_changed_lines":4}
+@@ -16,10 +16,5 @@ function getDefaultListen(): string {
+ }
+ 
+-function getSelfIdMcpSocketPath(paseoHome: string, env: NodeJS.ProcessEnv): string {
+-  // Allow override via PASEO_SELF_ID_MCP_SOCK for testing
+-  if (env.PASEO_SELF_ID_MCP_SOCK) {
+-    return env.PASEO_SELF_ID_MCP_SOCK;
+-  }
+-  // Default to ${PASEO_HOME}/self-id-mcp.sock
++function getSelfIdMcpSocketPath(paseoHome: string): string {
+   return path.join(paseoHome, "self-id-mcp.sock");
+ }

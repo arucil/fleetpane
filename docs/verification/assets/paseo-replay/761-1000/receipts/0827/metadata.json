@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 827,
+  "revision": "4c5651fddc37534745e9efae0aaf005772d4bb30",
+  "date": "2026-02-03T16:29:48+07:00",
+  "committer_date": "2026-02-03T16:29:48+07:00",
+  "parents": [
+    "14b0db55b06e4dc4e936dccef9a0f3bcab26f9e0"
+  ],
+  "subject": "fix: improve shell wrapper stripping to handle quoted cd paths",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:9d64d010fa7d1b0ad52b93d85326761bbcdd14c058a98c6f193dcfaaf38f5c35",
+  "diff_tree_digest": "sha256:c498f017d92d197414c395571dd91b3038b4be862a6c001079ebadd5ecc40a5a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        59,
+        64
+      ],
+      "new_lines": [
+        59,
+        75
+      ],
+      "diff_block_lines": [
+        8,
+        28
+      ],
+      "hunk_header": "@@ -57,10 +57,32 @@ export function stripCwdPrefix(filePath: string, cwd?: string): string {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 36,
+  "receipt_file": "receipts/0827/selected.patch"
+}

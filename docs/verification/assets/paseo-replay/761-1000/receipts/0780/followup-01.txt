@@ -1,0 +1,66 @@
+      { header: 'KEY', field: 'key' },
+      {
+        header: 'VALUE',
+        field: 'value',
+        color: (_, item) => {
+          if (item.key === 'Status') {
+            if (item.value === 'running') return 'green'
+            if (item.value === 'idle') return 'yellow'
+            if (item.value === 'error') return 'red'
+          }
+          return undefined
+        },
+      },
+    ],
+    // For JSON/YAML, return the structured agent object
+    serialize: (_item) => agent,
+  }
+}
+
+/** Shorten home directory in path */
+function shortenPath(path: string): string {
+  const home = process.env.HOME
+  if (home && path.startsWith(home)) {
+    return '~' + path.slice(home.length)
+  }
+  return path
+}
+
+/** Format cost in USD */
+function formatCost(costUsd: number): string {
+  if (costUsd === 0) return '$0.00'
+  if (costUsd < 0.01) return `$${costUsd.toFixed(4)}`
+  return `$${costUsd.toFixed(2)}`
+}
+
+/** Convert agent snapshot to inspection data */
+function toInspectData(snapshot: AgentSnapshotLike): AgentInspect {
+  const lastUsage = snapshot.lastUsage
+    ? {
+        inputTokens: snapshot.lastUsage.inputTokens ?? 0,
+        outputTokens: snapshot.lastUsage.outputTokens ?? 0,
+        cachedInputTokens: snapshot.lastUsage.cachedInputTokens ?? 0,
+        totalCostUsd: snapshot.lastUsage.totalCostUsd ?? 0,
+      }
+    : null
+
+  const capabilities = snapshot.capabilities
+    ? {
+        streaming: snapshot.capabilities.supportsStreaming ?? false,
+        persistence: snapshot.capabilities.supportsSessionPersistence ?? false,
+        dynamicModes: snapshot.capabilities.supportsDynamicModes ?? false,
+        mcpServers: snapshot.capabilities.supportsMcpServers ?? false,
+      }
+    : null
+
+  return {
+    id: snapshot.id,
+    name: snapshot.title ?? '-',
+    provider: snapshot.provider,
+    model: snapshot.model ?? '-',
+    status: snapshot.status,
+    mode: snapshot.currentModeId ?? 'default',
+    cwd: snapshot.cwd,
+    createdAt: snapshot.createdAt,
+    archivedAt: snapshot.archivedAt ?? null,
+    lastUsage,

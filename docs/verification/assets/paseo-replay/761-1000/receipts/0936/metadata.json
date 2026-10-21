@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 936,
+  "revision": "6e882aaceb7a5ed2ddb929933abb434dcfd27b19",
+  "date": "2026-02-05T00:18:48+07:00",
+  "committer_date": "2026-02-05T00:18:48+07:00",
+  "parents": [
+    "2620fda5007bd408fe067a0f93c712992aa020c4"
+  ],
+  "subject": "Persist exit codes without tmux pane_dead_status",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/terminal-mcp/terminal-manager.ts",
+    "M\tpackages/server/src/server/terminal-mcp/tmux.ts"
+  ],
+  "source_receipt_digest": "sha256:8670ff38d3f8e1bce89696fb1d8af4a9b20ce8dbb5e2acddeeb50fc0ceeacc18",
+  "diff_tree_digest": "sha256:6751fbf9fa8da35a04f64eae8e6137313aa87bd2f905228203fdce63c67012e0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/terminal-mcp/tmux.ts",
+      "old_lines": [
+        58,
+        58
+      ],
+      "new_lines": [
+        60,
+        80
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -57,4 +59,31 @@ function stripAnsiSequences(value: string): string {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 39,
+  "receipt_file": "receipts/0936/selected.patch"
+}

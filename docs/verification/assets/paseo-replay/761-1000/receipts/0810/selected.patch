@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[0,0],"new_lines":[23,43],"diff_block_lines":[29,49],"hunk_header":"@@ -0,0 +1,1723 @@","substantive_changed_lines":6}
++  PersistedAgentDescriptor,
++  ToolCallTimelineItem,
++} from "../agent-sdk-types.js";
++import type { Logger } from "pino";
++
++import { execSync, spawn } from "node:child_process";
++import type { ChildProcessWithoutNullStreams } from "node:child_process";
++import fs from "node:fs/promises";
++import { Dirent } from "node:fs";
++import os from "node:os";
++import path from "node:path";
++import readline from "node:readline";
++
++import { injectLeadingPaseoInstructionTag } from "../paseo-instructions-tag.js";
++
++const DEFAULT_TIMEOUT_MS = 14 * 24 * 60 * 60 * 1000;
++const CODEX_PROVIDER = "codex" as const;
++
++const CODEX_APP_SERVER_CAPABILITIES: AgentCapabilityFlags = {
++  supportsStreaming: true,
++  supportsSessionPersistence: true,

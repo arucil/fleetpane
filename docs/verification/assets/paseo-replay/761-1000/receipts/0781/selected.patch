@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/logs.ts
+RANGE {"path":"packages/cli/src/commands/agent/logs.ts","old_lines":[0,0],"new_lines":[5,34],"diff_block_lines":[11,40],"hunk_header":"@@ -0,0 +1,398 @@","substantive_changed_lines":17}
++
++/** Message type for agent_stream_snapshot */
++interface AgentStreamSnapshotMessage {
++  type: 'agent_stream_snapshot'
++  payload: {
++    agentId: string
++    events: Array<{ event: { type: string; item?: unknown }; timestamp: string }>
++  }
++}
++
++/** Message type for agent_stream */
++interface AgentStreamMessage {
++  type: 'agent_stream'
++  payload: {
++    agentId: string
++    event: { type: string; item?: unknown }
++    timestamp: string
++  }
++}
++
++/** Timeline item for display */
++export interface LogEntry {
++  timestamp: string
++  type: string
++  summary: string
++}
++
++/** Schema for logs output */
++export const logsSchema: OutputSchema<LogEntry> = {
++  idField: 'timestamp',

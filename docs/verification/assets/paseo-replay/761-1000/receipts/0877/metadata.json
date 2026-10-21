@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 877,
+  "revision": "1b3b8bba93526670d7410e9244e97b6880d625fd",
+  "date": "2026-02-04T12:51:06+07:00",
+  "committer_date": "2026-02-04T12:51:06+07:00",
+  "parents": [
+    "48cecdb6b56fbe7448b761cc9399b2f1d86efdac"
+  ],
+  "subject": "Refactor command center and focus handling",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "A\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-global-keyboard-nav.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agent-sections.ts",
+    "M\tpackages/app/src/stores/keyboard-nav-store.ts",
+    "A\tpackages/app/src/utils/command-center-focus-restore.ts",
+    "A\tpackages/app/src/utils/web-focus.ts"
+  ],
+  "source_receipt_digest": "sha256:8d4665ccd100664ef41801db2a82462e335af6435e183acc7f3721c5e2c78d48",
+  "diff_tree_digest": "sha256:b5d30948994ee8f3406c23d71aed49615b0360ac715dba2196e1f9c87abcd7f6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/command-center.tsx",
+      "old_lines": [
+        22,
+        42
+      ],
+      "new_lines": [
+        19,
+        20
+      ],
+      "diff_block_lines": [
+        23,
+        43
+      ],
+      "hunk_header": "@@ -22,177 +19,16 @@ function agentKey(agent: Pick<AggregatedAgent, \"serverId\" | \"id\">): string {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 363,
+  "receipt_file": "receipts/0877/selected.patch"
+}

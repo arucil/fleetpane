@@ -1,0 +1,23 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[890,910],"new_lines":[887,888],"diff_block_lines":[14,34],"hunk_header":"@@ -890,41 +887,5 @@ export class DaemonClientV2 {","substantive_changed_lines":14}
+     }
+ 
+-    return this.waitForAgentUpsert(
+-      status.agentId,
+-      (snapshot) => snapshot.status === "idle",
+-      60000
+-    );
+-  }
+-
+-  async createAgentExpectFail(
+-    options: CreateAgentRequestOptions
+-  ): Promise<AgentCreateFailedStatusPayload> {
+-    const requestId = this.createRequestId(options.requestId);
+-    const config = resolveAgentConfig(options);
+-
+-    const message = SessionInboundMessageSchema.parse({
+-      type: "create_agent_request",
+-      requestId,
+-      config,
+-      ...(options.initialPrompt ? { initialPrompt: options.initialPrompt } : {}),
+-    });

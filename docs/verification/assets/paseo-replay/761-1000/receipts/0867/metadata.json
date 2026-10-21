@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 867,
+  "revision": "1be891e21c1d227acb3cb1a86c2ec553bb17016a",
+  "date": "2026-02-04T11:32:28+07:00",
+  "committer_date": "2026-02-04T11:32:28+07:00",
+  "parents": [
+    "bceac42ec9730c84a18298d8f59b80284a89918e"
+  ],
+  "subject": "Fix Cmd+K focus restore and focus input after agent switch",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/hooks/use-global-keyboard-nav.ts",
+    "M\tpackages/app/src/stores/keyboard-nav-store.ts"
+  ],
+  "source_receipt_digest": "sha256:2627505536282c1990efba9ebfb51fe4d8c2fa8d550519b48f887d1819753f4f",
+  "diff_tree_digest": "sha256:322b6beadbbdff32131f6d65f5bb800c44b33a4306dd644bfa3d83e303a66d21",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-global-keyboard-nav.ts",
+      "old_lines": [
+        128,
+        132
+      ],
+      "new_lines": [
+        128,
+        144
+      ],
+      "diff_block_lines": [
+        5,
+        23
+      ],
+      "hunk_header": "@@ -128,5 +128,17 @@ export function useGlobalKeyboardNav({",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 49,
+  "receipt_file": "receipts/0867/selected.patch"
+}

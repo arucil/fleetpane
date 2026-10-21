@@ -1,0 +1,32 @@
+FILE packages/app/src/components/ui/combobox.tsx
+RANGE {"path":"packages/app/src/components/ui/combobox.tsx","old_lines":[306,307],"new_lines":[310,339],"diff_block_lines":[42,71],"hunk_header":"@@ -306,4 +310,54 @@ export function Combobox({","substantive_changed_lines":21}
+     );
+ 
++  const visibleOptions = useMemo(() => {
++    const next: Array<{
++      id: string;
++      label: string;
++      description?: string;
++    }> = [];
++
++    if (showCustomOption) {
++      next.push({
++        id: sanitizedSearchValue,
++        label: `${customValuePrefix} "${sanitizedSearchValue}"`,
++        description: customValueDescription,
++      });
++    }
++
++    for (const opt of filteredOptions) {
++      next.push({
++        id: opt.id,
++        label: opt.label,
++        description: opt.description,
++      });
++    }
++
++    return next;
++  }, [
++    customValueDescription,
++    customValuePrefix,
++    filteredOptions,

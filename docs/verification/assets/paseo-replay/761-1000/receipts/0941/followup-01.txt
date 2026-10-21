@@ -1,0 +1,115 @@
+diff --git a/packages/server/src/server/relay-transport.ts b/packages/server/src/server/relay-transport.ts
+index 3abdb5f0e..e7583098f 100644
+--- a/packages/server/src/server/relay-transport.ts
++++ b/packages/server/src/server/relay-transport.ts
+@@ -30,6 +30,33 @@ type RelaySocketLike = {
+   once: (event: "close" | "error", listener: (...args: any[]) => void) => void;
+ };
+ 
++type ControlMessage =
++  | { type: "sync"; clientIds: string[] }
++  | { type: "client_connected"; clientId: string }
++  | { type: "client_disconnected"; clientId: string };
++
++function tryParseControlMessage(raw: unknown): ControlMessage | null {
++  try {
++    const text =
++      typeof raw === "string" ? raw : Buffer.isBuffer(raw) ? raw.toString("utf8") : String(raw);
++    const parsed = JSON.parse(text) as any;
++    if (!parsed || typeof parsed !== "object") return null;
++    if (parsed.type === "sync" && Array.isArray(parsed.clientIds)) {
++      const clientIds = parsed.clientIds.filter((id: unknown) => typeof id === "string" && id.trim().length > 0);
++      return { type: "sync", clientIds };
++    }
++    if (parsed.type === "client_connected" && typeof parsed.clientId === "string" && parsed.clientId.trim()) {
++      return { type: "client_connected", clientId: parsed.clientId.trim() };
++    }
++    if (parsed.type === "client_disconnected" && typeof parsed.clientId === "string" && parsed.clientId.trim()) {
++      return { type: "client_disconnected", clientId: parsed.clientId.trim() };
++    }
++    return null;
++  } catch {
++    return null;
++  }
++}
++
+ export function startRelayTransport({
+   logger,
+   attachSocket,
+@@ -40,9 +67,10 @@ export function startRelayTransport({
+   const relayLogger = logger.child({ module: "relay-transport" });
+ 
+   let stopped = false;
+-  let ws: WebSocket | null = null;
++  let controlWs: WebSocket | null = null;
+   let reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
+   let reconnectAttempt = 0;
++  const dataSockets = new Map<string, WebSocket>(); // clientId -> ws
+ 
+   const stop = async (): Promise<void> => {
+     stopped = true;
+@@ -50,17 +78,25 @@ export function startRelayTransport({
+       clearTimeout(reconnectTimeout);
+       reconnectTimeout = null;
+     }
+-    if (ws) {
++    if (controlWs) {
++      try {
++        controlWs.close();
++      } catch {
++        // ignore
++      }
++      controlWs = null;
++    }
++    for (const ws of dataSockets.values()) {
+       try {
+         ws.close();
+       } catch {
+         // ignore
+       }
+-      ws = null;
+     }
++    dataSockets.clear();
+   };
+ 
+-  const connect = (): void => {
++  const connectControl = (): void => {
+     if (stopped) return;
+ 
+     const url = buildRelayWebSocketUrl({
+@@ -69,27 +105,17 @@ export function startRelayTransport({
+       role: "server",
+     });
+     const socket = new WebSocket(url);
+-    ws = socket;
+-
+-    let attached = false;
++    controlWs = socket;
+ 
+     socket.on("open", () => {
+       reconnectAttempt = 0;
+-      relayLogger.info({ url }, "relay_connected");
+-
+-      if (attached) return;
+-      attached = true;
+-      if (daemonKeyPair) {
+-        void attachEncryptedSocket(socket, daemonKeyPair, relayLogger, attachSocket);
+-      } else {
+-        void attachSocket(socket);
+-      }
++      relayLogger.info({ url }, "relay_control_connected");
+     });
+ 
+     socket.on("close", (code, reason) => {
+       relayLogger.warn(
+         { code, reason: reason?.toString?.(), url },
+-        "relay_disconnected"
++        "relay_control_disconnected"
+       );
+       scheduleReconnect();
+     });
+@@ -98,6 +124,32 @@ export function startRelayTransport({
+       relayLogger.warn({ err, url }, "relay_error");
+       // close event will schedule reconnect
+     });
++

@@ -1,0 +1,10 @@
+FILE packages/server/src/server/terminal-mcp/terminal-manager.ts
+RANGE {"path":"packages/server/src/server/terminal-mcp/terminal-manager.ts","old_lines":[394,398],"new_lines":[394,399],"diff_block_lines":[5,12],"hunk_header":"@@ -394,5 +394,6 @@ export class TerminalManager {","substantive_changed_lines":3}
+@@ -394,5 +394,6 @@ export class TerminalManager {
+           "#{pane_dead_status}",
+         ]);
+-        exitCode = parseInt(exitCodeStr, 10);
++        const parsed = parseInt(exitCodeStr, 10);
++        exitCode = Number.isFinite(parsed) ? parsed : null;
+       }
+ 

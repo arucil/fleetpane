@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 944,
+  "revision": "ae27a14e3b8b556d8629f73778c2d1a2353f9125",
+  "date": "2026-02-05T12:02:25+07:00",
+  "committer_date": "2026-02-05T12:02:25+07:00",
+  "parents": [
+    "574bdc16f6e248fb40b0bddfd8cf077dffd18b54"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/app.config.js",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/audio-test.tsx",
+    "M\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "A\tpackages/app/src/components/name-host-modal.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-settings.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:8bc1ce98890dade2c14acee37e3bfd459022029b9972b68c3ae71f71e167e258",
+  "diff_tree_digest": "sha256:079a05843f906defe3c13ea10fbf6e595e06cc60b22dc15794ab72db439febc6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/pair-scan.tsx",
+      "old_lines": [
+        141,
+        141
+      ],
+      "new_lines": [
+        150,
+        170
+      ],
+      "diff_block_lines": [
+        35,
+        55
+      ],
+      "hunk_header": "@@ -134,9 +138,54 @@ export default function PairScanScreen() {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 1068,
+  "receipt_file": "receipts/0944/selected.patch"
+}

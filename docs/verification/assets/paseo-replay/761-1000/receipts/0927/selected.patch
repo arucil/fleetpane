@@ -1,0 +1,23 @@
+FILE packages/app/src/contexts/daemon-registry-context.tsx
+RANGE {"path":"packages/app/src/contexts/daemon-registry-context.tsx","old_lines":[126,126],"new_lines":[127,147],"diff_block_lines":[14,34],"hunk_header":"@@ -124,4 +125,70 @@ export function DaemonRegistryProvider({ children }: { children: ReactNode }) {","substantive_changed_lines":15}
++  const adoptDaemonServerId = useCallback(
++    async (currentId: string, serverId: string) => {
++      const trimmed = serverId.trim();
++      if (!trimmed) {
++        throw new Error("serverId is required");
++      }
++      if (currentId === trimmed) {
++        return trimmed;
++      }
++
++      const existing = readDaemons();
++      const now = new Date().toISOString();
++      const idx = existing.findIndex((daemon) => daemon.id === currentId);
++      if (idx === -1) {
++        return trimmed;
++      }
++
++      const current = existing[idx];
++      const otherIdx = existing.findIndex((daemon) => daemon.id === trimmed);
++
++      const addLegacyId = (metadata: Record<string, unknown> | null | undefined, legacyId: string) => {

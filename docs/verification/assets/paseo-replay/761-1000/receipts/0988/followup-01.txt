@@ -1,0 +1,39 @@
+diff --git a/packages/app/src/components/dictation-controls.tsx b/packages/app/src/components/dictation-controls.tsx
+index bd2c96967..1c50b8159 100644
+--- a/packages/app/src/components/dictation-controls.tsx
++++ b/packages/app/src/components/dictation-controls.tsx
+@@ -132,7 +132,6 @@ export function DictationControls({
+ export function DictationOverlay({
+   volume,
+   duration,
+-  transcript,
+   isRecording,
+   isProcessing,
+   status,
+@@ -142,7 +141,7 @@ export function DictationOverlay({
+   onAcceptAndSend,
+   onRetry,
+   onDiscard,
+-}: Omit<DictationControlsProps, "onStart" | "disabled"> & { errorText?: string }) {
++}: Omit<DictationControlsProps, "onStart" | "disabled" | "transcript"> & { errorText?: string }) {
+   const { theme } = useUnistyles();
+   const isFailed = status === "failed";
+   const showActiveState = isRecording || isProcessing || isFailed;
+@@ -190,17 +189,6 @@ export function DictationOverlay({
+             {formatDuration(duration)}
+           </Text>
+         </View>
+-        {!!transcript && (
+-          <Text
+-            numberOfLines={2}
+-            style={[
+-              overlayStyles.transcriptText,
+-              { color: theme.colors.palette.white },
+-            ]}
+-          >
+-            {transcript}
+-          </Text>
+-        )}
+         {isFailed ? (
+           <Text
+             numberOfLines={2}

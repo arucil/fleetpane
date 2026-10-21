@@ -1,0 +1,23 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[456,456],"new_lines":[465,485],"diff_block_lines":[72,92],"hunk_header":"@@ -453,8 +461,61 @@ export default function SettingsScreen() {","substantive_changed_lines":14}
++  const handleRemoveConnection = useCallback(
++    async (serverId: string, connectionId: string) => {
++      await removeConnection(serverId, connectionId);
++    },
++    [removeConnection]
++  );
++
++  const handleAddDirectConnectionToHost = useCallback(async () => {
++    if (!editingDaemon) return;
++    if (isAddingConnection) return;
++
++    const raw = newEndpointRaw.trim();
++    if (!raw) {
++      Alert.alert("Host required", "Enter host:port.");
++      return;
++    }
++    if (raw.includes("://") || raw.includes("/")) {
++      Alert.alert("Invalid host", "Enter host:port only (no ws://, no /ws).");
++      return;
++    }
++

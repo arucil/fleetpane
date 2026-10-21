@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[330,353],"new_lines":[332,343],"diff_block_lines":[41,70],"hunk_header":"@@ -330,37 +332,36 @@ export function AgentList({","substantive_changed_lines":23}
+             onPress={handleCloseActionSheet}
+           />
+-          <View style={styles.sheetContainer}>
++          <View style={[styles.sheetContainer, { paddingBottom: Math.max(insets.bottom, theme.spacing[6]) }]}>
+             <View style={styles.sheetHandle} />
+             <Text style={styles.sheetTitle}>
+-              {actionAgent?.title || "Delete agent"}
+-            </Text>
+-            <Text style={styles.sheetSubtitle}>
+               {isActionDaemonUnavailable
+-                ? "This host is offline—actions will be available once it reconnects automatically."
+-                : "Removing this agent only deletes it from Paseo. Claude/Codex keeps the original project."}
++                ? "Host offline"
++                : "Archive this agent?"}
+             </Text>
+-            <Pressable
+-              disabled={!deleteAgent || isActionDaemonUnavailable}
+-              style={[styles.sheetButton, styles.sheetDeleteButton]}
+-              onPress={handleDeleteAgent}
+-              testID="agent-action-delete"
+-            >
+-              <Text
+-                style={[
+-                  styles.sheetDeleteText,
+-                  (!deleteAgent || isActionDaemonUnavailable) &&
+-                    styles.sheetDeleteTextDisabled,
+-                ]}
++            <View style={styles.sheetButtonRow}>
++              <Pressable
++                style={[styles.sheetButton, styles.sheetCancelButton]}

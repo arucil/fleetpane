@@ -1,0 +1,71 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 881,
+  "revision": "47e6abd307783525cf2290044c9c441900fd00aa",
+  "date": "2026-02-04T10:27:13+07:00",
+  "committer_date": "2026-02-04T10:27:13+07:00",
+  "parents": [
+    "8f1637ee554bd311979bc92bf1961a66fe309f1b",
+    "807a29e8f4153f12775e0b6073ab73c421ba38da"
+  ],
+  "subject": "Merge pull request #11 from boudra/error-handling/rpc-unknown-schema",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/dictation/dictation-stream-sender.ts",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/app/src/hooks/use-dictation.shared.ts",
+    "M\tpackages/app/src/hooks/use-push-token-registration.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/cli/docs/type-audit.md",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "D\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "D\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/client/daemon-client.test.ts",
+    "A\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "D\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-debug.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-client.ts",
+    "M\tpackages/server/src/server/test-utils/message-collector.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:ed22e21ed00691dd06ae41c0d510ca5a97004c97b1447e3c11546e925e7315fb",
+  "diff_tree_digest": "sha256:e56d0fc5691433e0ec894b5326f128530457d2ed43b16e3cb3256c0e0517e46f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        8,
+        28
+      ],
+      "diff_block_lines": [
+        14,
+        34
+      ],
+      "hunk_header": "@@ -0,0 +1,2700 @@",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 5365,
+  "receipt_file": "receipts/0881/selected.patch"
+}

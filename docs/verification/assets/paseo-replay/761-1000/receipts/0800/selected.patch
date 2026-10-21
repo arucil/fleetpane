@@ -1,0 +1,23 @@
+FILE CLAUDE.md
+RANGE {"path":"CLAUDE.md","old_lines":[23,36],"new_lines":[23,37],"diff_block_lines":[6,26],"hunk_header":"@@ -23,16 +23,18 @@ This is an npm workspace monorepo:","substantive_changed_lines":10}
+ - **packages/server**: The Paseo daemon that runs on your machine. Manages agent processes, provides WebSocket API for real-time streaming, and exposes an MCP server for agent control.
+ - **packages/app**: Cross-platform client (Expo). Connects to one or more servers, displays agent output, handles voice input, and sends push notifications.
++- **packages/cli**: The `paseo` CLI that is used to manage the deamon, and acts as a client to it with  Docker-style commands like `paseo run/ls/logs/wait`
+ - **packages/website**: Marketing site at paseo.dev (TanStack Router + Cloudflare Workers).
+ 
+-## Environment overrides
++## Development Server
+ 
+-- `PASEO_HOME` – path for runtime state such as `agents.json`. Defaults to `~/.paseo`; set this to a unique directory (e.g., `~/.paseo-blue`) when running a secondary server instance.
+-- `PASEO_PORT` – preferred voice server + MCP port. Overrides `PORT` and defaults to `6767`. Use distinct ports (e.g., `7777`) for blue/green testing.
++The `npm run dev` script automatically picks an available port for the development server.
+ 
+-Example blue/green launch:
++When running in a worktree or alongside the main checkout, set `PASEO_HOME` to isolate state:
+ 
++```bash
++PASEO_HOME=~/.paseo-blue npm run dev
+ ```
+-PASEO_HOME=~/.paseo-blue PASEO_PORT=7777 npm run dev
+-```
++

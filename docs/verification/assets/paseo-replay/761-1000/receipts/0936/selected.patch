@@ -1,0 +1,23 @@
+FILE packages/server/src/server/terminal-mcp/tmux.ts
+RANGE {"path":"packages/server/src/server/terminal-mcp/tmux.ts","old_lines":[58,58],"new_lines":[60,80],"diff_block_lines":[14,34],"hunk_header":"@@ -57,4 +59,31 @@ function stripAnsiSequences(value: string): string {","substantive_changed_lines":16}
+ 
++export function extractExitCodeMarkerFromOutput(output: string): {
++  exitCode: number | null;
++  output: string;
++} {
++  if (!output) {
++    return { exitCode: null, output };
++  }
++
++  let exitCode: number | null = null;
++  const kept: string[] = [];
++
++  for (const line of output.split("\n")) {
++    const trimmed = line.trim();
++    if (trimmed.startsWith(EXIT_CODE_MARKER)) {
++      const codeStr = trimmed.slice(EXIT_CODE_MARKER.length).trim();
++      const parsed = parseInt(codeStr, 10);
++      if (Number.isFinite(parsed)) {
++        exitCode = parsed;
++      }
++      continue;

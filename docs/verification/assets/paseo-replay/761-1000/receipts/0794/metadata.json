@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 794,
+  "revision": "025a68c3a452fae022781fb00930ffe5ab04594e",
+  "date": "2026-01-30T14:57:35+07:00",
+  "committer_date": "2026-01-30T14:57:35+07:00",
+  "parents": [
+    "25c7d5afa96b91815507f2b3af606079ff52caa8"
+  ],
+  "subject": "refactor: move shell output ANSI stripping to app layer",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:d003f68a5300f717351d687e575bc097beb34557116c1da7cb6366e276deaeaa",
+  "diff_tree_digest": "sha256:5b3ba272006286af66bb4c82a987ea80f5896ff5b09cf5a7ef1cd58f2cb9909f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        20,
+        26
+      ],
+      "new_lines": [
+        19,
+        25
+      ],
+      "diff_block_lines": [
+        9,
+        18
+      ],
+      "hunk_header": "@@ -20,7 +19,7 @@ const PrincipalParamSchema = z.union([",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 8,
+  "receipt_file": "receipts/0794/selected.patch"
+}

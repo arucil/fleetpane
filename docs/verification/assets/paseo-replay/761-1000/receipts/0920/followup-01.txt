@@ -1,0 +1,45 @@
+diff --git a/packages/server/src/client/daemon-client-v2.ts b/packages/server/src/client/daemon-client-v2.ts
+index 0e82bb815..402d87224 100644
+--- a/packages/server/src/client/daemon-client-v2.ts
++++ b/packages/server/src/client/daemon-client-v2.ts
+@@ -323,13 +323,19 @@ export class DaemonClientV2 {
+       const shouldUseRelayE2ee =
+         this.config.e2ee?.enabled === true &&
+         isRelayClientWebSocketUrl(this.config.url);
+-      const transportFactory = shouldUseRelayE2ee
+-        ? createRelayE2eeTransportFactory(
+-            baseTransportFactory,
+-            this.config.e2ee?.daemonPublicKeyB64,
+-            this.logger
+-          )
+-        : baseTransportFactory;
++
++      let transportFactory = baseTransportFactory;
++      if (shouldUseRelayE2ee) {
++        const daemonPublicKeyB64 = this.config.e2ee?.daemonPublicKeyB64;
++        if (!daemonPublicKeyB64) {
++          throw new Error("daemonPublicKeyB64 is required for relay E2EE");
++        }
++        transportFactory = createRelayE2eeTransportFactory({
++          baseFactory: baseTransportFactory,
++          daemonPublicKeyB64,
++          logger: this.logger,
++        });
++      }
+       const transport = transportFactory({ url: this.config.url, headers });
+       this.transport = transport;
+ 
+@@ -2345,18 +2351,14 @@ function createWebSocketTransportFactory(
+   };
+ }
+ 
+-function createRelayE2eeTransportFactory(
+-  baseFactory: DaemonTransportFactory,
+-  daemonPublicKeyB64: string | undefined,
+-  logger: Logger
+-): DaemonTransportFactory {
+-  if (!daemonPublicKeyB64) {
+-    throw new Error("daemonPublicKeyB64 is required for relay E2EE");
+-  }
+-
++function createRelayE2eeTransportFactory(args: {

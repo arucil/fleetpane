@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[0,0],"new_lines":[1,21],"diff_block_lines":[7,27],"hunk_header":"@@ -0,0 +1,1723 @@","substantive_changed_lines":20}
++import type {
++  AgentCapabilityFlags,
++  AgentClient,
++  AgentCommandResult,
++  AgentMode,
++  AgentModelDefinition,
++  McpServerConfig,
++  AgentPermissionRequest,
++  AgentPermissionResponse,
++  AgentPromptContentBlock,
++  AgentPromptInput,
++  AgentRunOptions,
++  AgentRunResult,
++  AgentRuntimeInfo,
++  AgentSession,
++  AgentSessionConfig,
++  AgentSlashCommand,
++  AgentStreamEvent,
++  AgentTimelineItem,
++  AgentUsage,
++  ListModelsOptions,

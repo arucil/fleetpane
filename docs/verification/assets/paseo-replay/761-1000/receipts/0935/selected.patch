@@ -1,0 +1,20 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[75,79],"new_lines":[76,91],"diff_block_lines":[11,28],"hunk_header":"@@ -75,5 +76,16 @@ async function collectTurnEvents(","substantive_changed_lines":9}
+@@ -75,5 +76,16 @@ async function collectTurnEvents(
+ }
+ 
+-describe("OpenCodeAgentClient", () => {
++function isBinaryInstalled(binary: string): boolean {
++  try {
++    const out = execFileSync("which", [binary], { encoding: "utf8" }).trim();
++    return out.length > 0;
++  } catch {
++    return false;
++  }
++}
++
++const hasOpenCode = isBinaryInstalled("opencode");
++
++(hasOpenCode ? describe : describe.skip)("OpenCodeAgentClient", () => {
+   const logger = createTestLogger();
+   const buildConfig = (cwd: string): AgentSessionConfig => ({

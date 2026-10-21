@@ -1,0 +1,23 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[413,415],"new_lines":[383,402],"diff_block_lines":[85,105],"hunk_header":"@@ -413,5 +383,49 @@ const DiffFileSection = memo(function DiffFileSection({","substantive_changed_lines":13}
+         </View>
+       </Pressable>
+-      {isExpanded && (file.status === "too_large" || file.status === "binary") ? (
++    </View>
++  );
++});
++
++function DiffFileBody({ file, testID }: { file: ParsedDiffFile; testID?: string }) {
++  const [scrollViewWidth, setScrollViewWidth] = useState(0);
++  const [isAtLeftEdge, setIsAtLeftEdge] = useState(true);
++  const horizontalScroll = useHorizontalScrollOptional();
++  const scrollId = useId();
++  const scrollViewRef = useRef<ScrollViewType>(null);
++
++  // Get the close gesture ref from animation context (may not be available outside sidebar)
++  let closeGestureRef: React.MutableRefObject<any> | undefined;
++  try {
++    const animation = useExplorerSidebarAnimation();
++    closeGestureRef = animation.closeGestureRef;
++  } catch {
++    // Not inside ExplorerSidebarAnimationProvider, which is fine

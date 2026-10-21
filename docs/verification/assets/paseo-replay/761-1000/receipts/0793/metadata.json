@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 793,
+  "revision": "25c7d5afa96b91815507f2b3af606079ff52caa8",
+  "date": "2026-01-30T14:50:01+07:00",
+  "committer_date": "2026-01-30T14:50:01+07:00",
+  "parents": [
+    "0618dc6b0d9d8dd525890f6ac455de3b3db90f47"
+  ],
+  "subject": "refactor: consolidate agent wait methods and use in-memory MCP transport",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/permission-prompt.spec.ts",
+    "M\tpackages/cli/src/commands/agent/send.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-basics.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/daemon-restart-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/images.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-claude.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-codex.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/persistence.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/self-id-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/streaming.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/two-cycle-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "D\tpackages/server/src/server/daemon-e2e/wait-for-permission.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:7ec9fd2f9df7dfd3995c7878b0daf6fa76d40c4e2914fb922326a3748cf19dd5",
+  "diff_tree_digest": "sha256:4a004258cdfc779fa59d3bb47a37a4592671ee0b64e78b20d74c6fded5aae58c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        1907,
+        1934
+      ],
+      "new_lines": [
+        1907,
+        1913
+      ],
+      "diff_block_lines": [
+        6,
+        35
+      ],
+      "hunk_header": "@@ -1907,91 +1907,57 @@ export class DaemonClientV2 {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 442,
+  "receipt_file": "receipts/0793/selected.patch"
+}

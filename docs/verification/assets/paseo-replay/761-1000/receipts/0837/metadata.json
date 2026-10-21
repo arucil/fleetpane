@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 837,
+  "revision": "363566587e902fa4989bb0041f6532b76c276496",
+  "date": "2026-02-04T08:22:13+07:00",
+  "committer_date": "2026-02-04T08:22:27+07:00",
+  "parents": [
+    "f08efd2da6a2f61824d75e3ded49ee7180ef0626"
+  ],
+  "subject": "Fix web voice mode; share VAD/segmenting",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "M\tpackages/app/src/hooks/use-audio-player.web.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "A\tpackages/app/src/voice/speech-segmenter.test.ts",
+    "A\tpackages/app/src/voice/speech-segmenter.ts"
+  ],
+  "source_receipt_digest": "sha256:c3751f3666bb334d12ad9db6f239bd2cc1e5e79eb2a93b9018de408b2c7a42f9",
+  "diff_tree_digest": "sha256:59eb6c7ad61708aa9c0043e8c1f1dfd7189fecb52d67cd1af55cf98a7da6cc10",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-audio-player.web.ts",
+      "old_lines": [
+        11,
+        12
+      ],
+      "new_lines": [
+        13,
+        32
+      ],
+      "diff_block_lines": [
+        19,
+        39
+      ],
+      "hunk_header": "@@ -7,21 +7,269 @@ export interface AudioPlayerOptions {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 869,
+  "receipt_file": "receipts/0837/selected.patch"
+}

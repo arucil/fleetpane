@@ -1,0 +1,110 @@
+diff --git a/packages/server/src/server/agent/providers/codex-app-server-agent.ts b/packages/server/src/server/agent/providers/codex-app-server-agent.ts
+index 0467a4906..ba8483fbd 100644
+--- a/packages/server/src/server/agent/providers/codex-app-server-agent.ts
++++ b/packages/server/src/server/agent/providers/codex-app-server-agent.ts
+@@ -27,6 +27,7 @@ import type { Logger } from "pino";
+ 
+ import { execSync, spawn } from "node:child_process";
+ import type { ChildProcessWithoutNullStreams } from "node:child_process";
++import { randomUUID } from "node:crypto";
+ import fs from "node:fs/promises";
+ import { Dirent } from "node:fs";
+ import os from "node:os";
+@@ -36,6 +37,7 @@ import readline from "node:readline";
+ 
+ const DEFAULT_TIMEOUT_MS = 14 * 24 * 60 * 60 * 1000;
+ const CODEX_PROVIDER = "codex" as const;
++const CODEX_IMAGE_ATTACHMENT_DIR = "paseo-attachments";
+ 
+ const CODEX_APP_SERVER_CAPABILITIES: AgentCapabilityFlags = {
+   supportsStreaming: true,
+@@ -790,6 +792,87 @@ function toSandboxPolicy(type: string, networkAccess?: boolean): Record<string,
+   }
+ }
+ 
++function getImageExtension(mimeType: string): string {
++  switch (mimeType) {
++    case "image/jpeg":
++      return "jpg";
++    case "image/png":
++      return "png";
++    case "image/webp":
++      return "webp";
++    case "image/gif":
++      return "gif";
++    case "image/bmp":
++      return "bmp";
++    case "image/tiff":
++      return "tiff";
++    default:
++      return "bin";
++  }
++}
++
++type ImageDataPayload = { mimeType: string; data: string };
++
++function normalizeImageData(mimeType: string, data: string): ImageDataPayload {
++  if (data.startsWith("data:")) {
++    const match = data.match(/^data:([^;]+);base64,(.*)$/);
++    if (match) {
++      return { mimeType: match[1], data: match[2] };
++    }
++  }
++  return { mimeType, data };
++}
++
++async function writeImageAttachment(mimeType: string, data: string): Promise<string> {
++  const attachmentsDir = path.join(os.tmpdir(), CODEX_IMAGE_ATTACHMENT_DIR);
++  await fs.mkdir(attachmentsDir, { recursive: true });
++  const normalized = normalizeImageData(mimeType, data);
++  const extension = getImageExtension(normalized.mimeType);
++  const filename = `${randomUUID()}.${extension}`;
++  const filePath = path.join(attachmentsDir, filename);
++  await fs.writeFile(filePath, Buffer.from(normalized.data, "base64"));
++  return filePath;
++}
++
++export async function codexAppServerTurnInputFromPrompt(
++  prompt: AgentPromptInput,
++  logger: Logger
++): Promise<unknown[]> {
++  if (typeof prompt === "string") {
++    return [{ type: "text", text: prompt }];
++  }
++
++  const blocks = prompt as Array<unknown>;
++  const output: unknown[] = [];
++  for (const block of blocks) {
++    if (!block || typeof block !== "object") {
++      output.push(block);
++      continue;
++    }
++    const record = block as { type?: unknown; mimeType?: unknown; data?: unknown };
++    if (
++      record.type === "image" &&
++      typeof record.mimeType === "string" &&
++      typeof record.data === "string"
++    ) {
++      try {
++        const filePath = await writeImageAttachment(record.mimeType, record.data);
++        output.push({ type: "localImage", path: filePath });
++      } catch (error) {
++        const message = error instanceof Error ? error.message : String(error);
++        logger.warn({ message }, "Failed to write Codex image attachment");
++        output.push({
++          type: "text",
++          text: `User attached image (failed to write temp file): ${message}`,
++        });
++      }
++      continue;
++    }
++    output.push(block);
++  }
++  return output;
++}
++
+ class CodexAppServerAgentSession implements AgentSession {
+   readonly provider = CODEX_PROVIDER;
+   readonly capabilities = CODEX_APP_SERVER_CAPABILITIES;
+@@ -818,7 +901,6 @@ class CodexAppServerAgentSession implements AgentSession {
+   private pendingReasoning = new Map<string, string[]>();

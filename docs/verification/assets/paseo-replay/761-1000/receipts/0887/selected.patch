@@ -1,0 +1,23 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[318,326],"new_lines":[322,338],"diff_block_lines":[22,42],"hunk_header":"@@ -318,58 +322,76 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":14}
+     : DEFAULT_EXPLORER_FILES_SPLIT_RATIO;
+ 
+-  const treePaneWidth = useMemo(() => {
+-    if (!shouldShowInlinePreview || containerWidth <= 0) {
+-      return null;
++  const splitAvailableWidth = useSharedValue(0);
++  const splitMaxTreeWidth = useSharedValue(minTreeWidth);
++  const splitTreeWidth = useSharedValue(minTreeWidth);
++  const splitStartTreeWidth = useSharedValue(minTreeWidth);
++
++  useEffect(() => {
++    if (!shouldShowInlinePreview) {
++      return;
++    }
++    if (containerWidth <= 0) {
++      return;
+     }
+ 
+-    const available = Math.max(0, containerWidth - dividerWidth);
++    const available = Math.max(0, containerWidth);
+     const maxTree = Math.max(minTreeWidth, available - minPreviewWidth);

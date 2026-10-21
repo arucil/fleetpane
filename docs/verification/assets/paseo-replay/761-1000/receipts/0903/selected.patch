@@ -1,0 +1,14 @@
+FILE packages/server/src/server/agent/agent-storage.ts
+RANGE {"path":"packages/server/src/server/agent/agent-storage.ts","old_lines":[231,234],"new_lines":[231,241],"diff_block_lines":[5,16],"hunk_header":"@@ -231,4 +231,11 @@ export class AgentStorage {","substantive_changed_lines":2}
+@@ -231,4 +231,11 @@ export class AgentStorage {
+         : (agent.internal ?? existing?.internal),
+     });
++
++    // Preserve soft-delete/archive status across snapshot flushes.
++    // `archivedAt` is not part of the ManagedAgent snapshot, so a naive projection
++    // would wipe it during normal persistence (including on daemon restart).
++    if (existing && existing.archivedAt !== undefined) {
++      record.archivedAt = existing.archivedAt;
++    }
+     await this.upsert(record);
+   }

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[329,331],"new_lines":[334,362],"diff_block_lines":[36,65],"hunk_header":"@@ -329,5 +334,116 @@ export async function createPaseoDaemon(","substantive_changed_lines":18}
+   app.get(agentMcpRoute, handleAgentMcpRequest);
+   app.delete(agentMcpRoute, handleAgentMcpRequest);
+-  logger.info({ route: agentMcpRoute }, "Agent MCP server mounted");
++  logger.info({ route: agentMcpRoute }, "Agent MCP server mounted on main app");
++
++  // Create dedicated Self-ID MCP server on Unix socket for agent self-identification
++  // This only provides set_title and set_branch tools for coding agents
++  // Host validation is disabled since Unix sockets don't have HTTP hosts
++  const selfIdMcpSocketPath = config.selfIdMcpSocketPath;
++
++  const createSelfIdMcpTransport = async (callerAgentId: string) => {
++    const selfIdMcpServer = await createAgentSelfIdMcpServer({
++      agentManager,
++      paseoHome: config.paseoHome,
++      callerAgentId,
++      logger,
++    });
++
++    const transport = new StreamableHTTPServerTransport({
++      sessionIdGenerator: () => randomUUID(),
++      onsessioninitialized: (sessionId) => {
++        selfIdMcpTransports.set(sessionId, transport);
++        logger.debug({ sessionId, callerAgentId }, "Self-ID MCP session initialized");
++      },
++      onsessionclosed: (sessionId) => {
++        selfIdMcpTransports.delete(sessionId);
++        logger.debug({ sessionId }, "Self-ID MCP session closed");
++      },
++      // Disable host validation for Unix socket
++      enableDnsRebindingProtection: false,

@@ -1,0 +1,12 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[598,602],"new_lines":[598,605],"diff_block_lines":[5,14],"hunk_header":"@@ -598,5 +598,8 @@ function FilePreviewBody({","substantive_changed_lines":5}
+@@ -598,5 +598,8 @@ function FilePreviewBody({
+     if (variant === "sheet") {
+       return (
+-        <BottomSheetScrollView style={styles.previewContent}>
++        <BottomSheetScrollView
++          style={styles.previewContent}
++          contentContainerStyle={styles.previewTextContent}
++        >
+           <ScrollView horizontal nestedScrollEnabled showsHorizontalScrollIndicator>
+             <Text style={styles.codeText}>{preview.content}</Text>

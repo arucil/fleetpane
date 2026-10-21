@@ -1,0 +1,32 @@
+FILE packages/cli/src/output/render.ts
+RANGE {"path":"packages/cli/src/output/render.ts","old_lines":[0,0],"new_lines":[14,43],"diff_block_lines":[20,49],"hunk_header":"@@ -0,0 +1,103 @@","substantive_changed_lines":20}
++
++/** Default output options */
++export const defaultOutputOptions: OutputOptions = {
++  format: 'table',
++  quiet: false,
++  noHeaders: false,
++  noColor: false,
++}
++
++/** Render command result to string based on output options */
++export function render<T>(
++  result: AnyCommandResult<T>,
++  options: Partial<OutputOptions> = {}
++): string {
++  const opts: OutputOptions = { ...defaultOutputOptions, ...options }
++
++  // Quiet mode takes precedence
++  if (opts.quiet) {
++    return renderQuiet(result, opts)
++  }
++
++  // Dispatch to format-specific renderer
++  switch (opts.format) {
++    case 'json':
++      return renderJson(result, opts)
++    case 'yaml':
++      return renderYaml(result, opts)
++    case 'table':
++    default:
++      return renderTable(result, opts)

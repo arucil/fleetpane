@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 833,
+  "revision": "cf9c1c23d3b9c12d150e0b4653eb7ea832128fbf",
+  "date": "2026-02-03T23:12:19+07:00",
+  "committer_date": "2026-02-03T23:12:19+07:00",
+  "parents": [
+    "d500b256324b792d71ae528117998ec9986daaf7",
+    "201fbcc0c6c7eb6f0b93927f402ccfe294a60d24"
+  ],
+  "subject": "Merge branch 'main' into real-time/voice-agent-ui-refresh",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "A\tpackages/app/src/hooks/use-push-token-registration.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/server/src/server/push/token-store.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+  "diff_tree_digest": "sha256:7b1e519a2a3a9a007e16c9b7caa220f9881adb714acc7278c90d9e1158fd1e9f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        35,
+        36
+      ],
+      "new_lines": [
+        36,
+        56
+      ],
+      "diff_block_lines": [
+        22,
+        42
+      ],
+      "hunk_header": "@@ -35,4 +36,61 @@ import { getIsTauriMac } from \"@/constants/layout\";",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 369,
+  "receipt_file": "receipts/0833/selected.patch"
+}

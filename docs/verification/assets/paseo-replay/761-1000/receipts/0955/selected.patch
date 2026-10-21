@@ -1,0 +1,23 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[262,281],"new_lines":[262,263],"diff_block_lines":[14,34],"hunk_header":"@@ -261,23 +261,27 @@ function CodeBlock({ children }: { children: React.ReactNode }) {","substantive_changed_lines":20}
+   return (
+-    <div className="pt-12 space-y-4 text-sm text-white/60">
+-      <p>
+-        I've been using Claude Code since launch. Once I realized I could check
+-        on agents from my phone, I started spending a lot more time outside
+-        instead of waiting at my desk. I'd SSH into Tmux from Termux on Android.
+-        It worked, but the UX was rough. Dictation was bad, the keyboard was
+-        awkward, and the infamous scroll bug meant starting over constantly.
+-      </p>
+-      <p>
+-        Anthropic and OpenAI added coding agents to their mobile apps, but they
+-        force you into cloud sandboxes where you lose your whole setup. I also
+-        like testing different agents, so locking myself to a single harness or
+-        model wasn't an option. Other apps exist but I wasn't happy with their
+-        UX, security, or business model.
+-      </p>
+-      <p>
+-        So I built my own. It became good enough that it felt obvious it should
+-        exist for others too.
+-      </p>
++    <div className="pt-16 space-y-4">

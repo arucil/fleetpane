@@ -1,0 +1,2309 @@
+{
+  "verification": {
+    "kind": "historical receipt integrity validation; not product tests",
+    "range": [
+      761,
+      1000
+    ],
+    "entries": 240,
+    "first_parent_merges": [
+      785,
+      786,
+      804,
+      810,
+      812,
+      831,
+      832,
+      833,
+      834,
+      838,
+      844,
+      846,
+      848,
+      850,
+      852,
+      854,
+      856,
+      859,
+      861,
+      863,
+      870,
+      872,
+      874,
+      880,
+      881,
+      882,
+      883,
+      886,
+      888,
+      891,
+      895,
+      897,
+      904,
+      906,
+      908,
+      910,
+      912,
+      914,
+      923,
+      924,
+      927,
+      945,
+      947,
+      949,
+      999
+    ],
+    "source_receipts": 317,
+    "ranges_reconstructed": 317,
+    "pin_file": "/tmp/fp-pinned-shas.json",
+    "pin_file_sha256": "sha256:75c58728bcaff1b8d94ed303d574fcc365cab2e01950a8a1f757075935ece82c",
+    "review_sha256": "sha256:dfe2668197bab70197f4f86b81d14b18e54f8ba6eed6f0ffe2d01253ffb6a7b2",
+    "verified_at_utc": "2026-10-21T22:24:57.476744+00:00",
+    "checks": [
+      "contiguous pinned ordinal coverage",
+      "full revision equals pin and git object",
+      "actual parent list and first-parent merge basis",
+      "fresh diff-tree inventories and digests",
+      "selected patch reconstruction and old/new/diff ranges",
+      "supplemental source/diff reconstruction",
+      "individual and framed aggregate receipt hashes"
+    ],
+    "product_tests_executed": false,
+    "next_ordinal": 1001,
+    "next_revision": "699671d4d8c68659ffe6e487b1fac007143cc268",
+    "artifact_sha256": {
+      "report.md": "sha256:71f974d6a1ace0cd2744cd1cde0719278dd8df4aab32de88c63bf00b5656832c",
+      "synthesis.md": "sha256:cb4b164797b7ff1e07e8e5515dd869f73cfc84087303a4082cebc5ba6f63af5e",
+      "notes.tsv": "sha256:e722b38b77acfa57165212819c80bb50fa048bbc640f9c3a7bd6e9b4e411bfcc",
+      "inspect.py": "sha256:138ecbdbe29878c18c2a5b375899785bae74836c2e00daf20e000631008ce169",
+      "followup.py": "sha256:2dfe49094be532d74d1caf3d561309e67d67077d337ce49176af81a5bd7e01f6",
+      "checkpoint.py": "sha256:1ec5fc393945794afcaf0da689da045aed7989d6c318e8434212160d8399d245",
+      "fleetpane-docs.json": "sha256:9145caf5044cf353b04464c84d4cc858c091e7bd065688aa16c7cf8666de94a1",
+      "fleetpane-status.md": "sha256:e8eaa36d5368732b3606031a9f4ae4088ed989a691a484f61511b1675dddda3f",
+      "fleetpane-status-final.md": "sha256:ebf2215e772c08e726426ca1e9a80414bd7af7560cf0eb6341cbb291e254e7ae",
+      "fleetpane-status-refresh.diff": "sha256:f07a76c5e75700932fe213a08b8617de56a452bd530f916a1e2008cd35163812",
+      "fleetpane-parity.md": "sha256:793caaeb58927f580ad8a21647136e41e0ddde1af3e1d9506b841f86925f69a7"
+    }
+  },
+  "receipts": [
+    {
+      "ordinal": 761,
+      "revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+      "path": "receipts/0761/selected.patch",
+      "sha256": "sha256:2798e6d10305d30c84fdfcc035712a7912480d646f1324ae4af3687226fe96a1",
+      "bytes": 1407
+    },
+    {
+      "ordinal": 761,
+      "revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+      "path": "receipts/0761/followup-01.txt",
+      "sha256": "sha256:2097b73992800a85bb5eb9f9cd0089c4373088aaae40216e4e745d8c626aac2c",
+      "bytes": 6247
+    },
+    {
+      "ordinal": 761,
+      "revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+      "path": "receipts/0761/followup-02.txt",
+      "sha256": "sha256:4215a3c3316f84a08346dbfbf76ad89cad7f46105d20e2ef03685b096f45bbb6",
+      "bytes": 565
+    },
+    {
+      "ordinal": 761,
+      "revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+      "path": "receipts/0761/followup-03.txt",
+      "sha256": "sha256:73a1cb2ee753c144cec35f6a4782a1b96cfa9bea419576eb2c026e56707aa162",
+      "bytes": 3591
+    },
+    {
+      "ordinal": 762,
+      "revision": "d158dcf77a6cd9c1fb033d3b230685024a6fca93",
+      "path": "receipts/0762/selected.patch",
+      "sha256": "sha256:afd8dba87dfceb83d95e20f6eccb912602d0b4cedee727f67145d2ef4219bc34",
+      "bytes": 1710
+    },
+    {
+      "ordinal": 763,
+      "revision": "2c138312b2d1d14170ebe9dc63b736296472b935",
+      "path": "receipts/0763/selected.patch",
+      "sha256": "sha256:162fc21c576a44b7807c4eac62966117614aa264be566e479b1a5b0806a8b12a",
+      "bytes": 1226
+    },
+    {
+      "ordinal": 763,
+      "revision": "2c138312b2d1d14170ebe9dc63b736296472b935",
+      "path": "receipts/0763/followup-01.txt",
+      "sha256": "sha256:0a2371ef8e5ecc89dbfdbfe70f28383efdf2439c4a82c07f31b74afddabd1fbc",
+      "bytes": 1883
+    },
+    {
+      "ordinal": 764,
+      "revision": "edc67ba5f77b10b6223e0b1b8968d02fb1ddd1c9",
+      "path": "receipts/0764/selected.patch",
+      "sha256": "sha256:2f940b4363b38e51f0a654a38ad34b60d961c54d0afe3d4e0f9cb58679953e96",
+      "bytes": 1128
+    },
+    {
+      "ordinal": 765,
+      "revision": "a21e070647eef8502904b5865651e9d3919b3b31",
+      "path": "receipts/0765/selected.patch",
+      "sha256": "sha256:f0b679bf243adfce53e3ee11f1f8ffcfe3d803ef9464593533eff6c14ac301fe",
+      "bytes": 514
+    },
+    {
+      "ordinal": 766,
+      "revision": "6781c1b8881204ef57ed9f904091cc092f817005",
+      "path": "receipts/0766/selected.patch",
+      "sha256": "sha256:d01e58539ab4df601cb1c7e0de6b291145d49804b9a6a1c97e547e88b55a560d",
+      "bytes": 978
+    },
+    {
+      "ordinal": 767,
+      "revision": "6fd421446674c5a9a9cefd22d9179da2306efde0",
+      "path": "receipts/0767/selected.patch",
+      "sha256": "sha256:fdd3b016dd84e69775206b41e712a2bd903ffb323bb6f57db9a3138fe66f4450",
+      "bytes": 1160
+    },
+    {
+      "ordinal": 767,
+      "revision": "6fd421446674c5a9a9cefd22d9179da2306efde0",
+      "path": "receipts/0767/followup-01.txt",
+      "sha256": "sha256:927a8f400227266db807ebaff952a63a342148c62aedb85441c703a86aec196f",
+      "bytes": 660
+    },
+    {
+      "ordinal": 768,
+      "revision": "aa5663a854c3ddcd34bdfa89093bb4ee25350ba1",
+      "path": "receipts/0768/selected.patch",
+      "sha256": "sha256:88ff8fec89ec30426bbc190c544a3d76ce6006444637a751dd22b59df2caabb5",
+      "bytes": 1698
+    },
+    {
+      "ordinal": 769,
+      "revision": "a7f39f79ba995f7f4d570c540d53b3b8a09cc67b",
+      "path": "receipts/0769/selected.patch",
+      "sha256": "sha256:29c39dc57bb99ce4f1c7a0977dd24d9fc0eabfd0686b667d8feb2c4122b96744",
+      "bytes": 995
+    },
+    {
+      "ordinal": 770,
+      "revision": "3ed4d4519fac4522acb21a747dd80cea21f91763",
+      "path": "receipts/0770/selected.patch",
+      "sha256": "sha256:37ee0b7e69174b81836125af5d5b13dfaf017b82e3f1cfe1fd23072af79f629c",
+      "bytes": 1575
+    },
+    {
+      "ordinal": 771,
+      "revision": "59e6ab2bf51b8f61a79aee67cf0c0105c8eb1ea8",
+      "path": "receipts/0771/selected.patch",
+      "sha256": "sha256:fd2aafe195ef1485e77d04164408327ae115796da369243cc7f810ce4919a0f7",
+      "bytes": 912
+    },
+    {
+      "ordinal": 771,
+      "revision": "59e6ab2bf51b8f61a79aee67cf0c0105c8eb1ea8",
+      "path": "receipts/0771/followup-01.txt",
+      "sha256": "sha256:ecff7793a600325b023e582bd02163218d3af343ab3c1ba026c72844b1facbc8",
+      "bytes": 1931
+    },
+    {
+      "ordinal": 772,
+      "revision": "2bc08e788108d12773e88915e68a6fb5dd7045ce",
+      "path": "receipts/0772/selected.patch",
+      "sha256": "sha256:e8b7980664b8be45e2f01ab2a9452d1e4b46f09a62301d0ee32fa14b05d854cf",
+      "bytes": 511
+    },
+    {
+      "ordinal": 773,
+      "revision": "e38f8292d4e2f48c327a4c5c18e02da93f27714f",
+      "path": "receipts/0773/selected.patch",
+      "sha256": "sha256:f6a0326708caac74aaa71760a9fccaabbd115efb59693da03be8b7a34a4a337a",
+      "bytes": 1447
+    },
+    {
+      "ordinal": 774,
+      "revision": "dd514a4a67b7229502274e98e3680ffc00c0fade",
+      "path": "receipts/0774/selected.patch",
+      "sha256": "sha256:49b2485158248eca8d64180aa749fc74118848f17fac7670bb52895041cd19fd",
+      "bytes": 1040
+    },
+    {
+      "ordinal": 774,
+      "revision": "dd514a4a67b7229502274e98e3680ffc00c0fade",
+      "path": "receipts/0774/followup-01.txt",
+      "sha256": "sha256:071923b6c905e893990df46683545711df5df97bba4bfb2c14169910fd96b9c1",
+      "bytes": 1682
+    },
+    {
+      "ordinal": 775,
+      "revision": "851d5ef247ca2f7a7d7b22b14f90bdca62196cea",
+      "path": "receipts/0775/selected.patch",
+      "sha256": "sha256:842dbe813269c154bec140c8d2ec29e239588d8dfb20f741d3f7816224725413",
+      "bytes": 988
+    },
+    {
+      "ordinal": 775,
+      "revision": "851d5ef247ca2f7a7d7b22b14f90bdca62196cea",
+      "path": "receipts/0775/followup-01.txt",
+      "sha256": "sha256:a70f9d4b8c4b7e26eddb3ae5d82d1a3a3667afdb88101d6b7ed3d8b24f0230ae",
+      "bytes": 2464
+    },
+    {
+      "ordinal": 776,
+      "revision": "b040e2fc6d253741fd04ece12a14fd3b351c88c9",
+      "path": "receipts/0776/selected.patch",
+      "sha256": "sha256:ccebb92f8ee5ef3b71028dd3b9e748852bd371a8f0b43538f131218fb217c906",
+      "bytes": 1121
+    },
+    {
+      "ordinal": 776,
+      "revision": "b040e2fc6d253741fd04ece12a14fd3b351c88c9",
+      "path": "receipts/0776/followup-01.txt",
+      "sha256": "sha256:b0e8773275315a5fbf6ba2ed3067078940960d7c2199928f15880b12eb4482b5",
+      "bytes": 2747
+    },
+    {
+      "ordinal": 777,
+      "revision": "d51d70a6fd538d9162c9eb17d02987f5a85cd2e1",
+      "path": "receipts/0777/selected.patch",
+      "sha256": "sha256:8bdee708464b2760de4c2d871af7db159358e14a48bbcdc4a8aa9e3481517417",
+      "bytes": 1021
+    },
+    {
+      "ordinal": 777,
+      "revision": "d51d70a6fd538d9162c9eb17d02987f5a85cd2e1",
+      "path": "receipts/0777/followup-01.txt",
+      "sha256": "sha256:46a98ec7145efe02f28597d18999607bf0f42b865af2fb37916a9a95374b2328",
+      "bytes": 858
+    },
+    {
+      "ordinal": 778,
+      "revision": "d78c7d5e0770dcb245e9a4430c2518b8d2ee3ec3",
+      "path": "receipts/0778/selected.patch",
+      "sha256": "sha256:ed3ad8fab23f591322c5d3ca32f2d69ecf240b8b2998d01bba56d5e6369669fb",
+      "bytes": 1238
+    },
+    {
+      "ordinal": 779,
+      "revision": "f96a4ee3dfdc53a6e8eb4a610d2fe861585e9ab6",
+      "path": "receipts/0779/selected.patch",
+      "sha256": "sha256:7424cc2a40052151c0ce41f3accfff0e25aca871db483a9fc3f8df7108c60f72",
+      "bytes": 979
+    },
+    {
+      "ordinal": 779,
+      "revision": "f96a4ee3dfdc53a6e8eb4a610d2fe861585e9ab6",
+      "path": "receipts/0779/followup-01.txt",
+      "sha256": "sha256:51e06c7340822ee0fc187a6b9a99676aba7392409ffd9744474409b1ec396373",
+      "bytes": 2197
+    },
+    {
+      "ordinal": 780,
+      "revision": "74fceed9b5160a449d8a626be7823b5143902ef6",
+      "path": "receipts/0780/selected.patch",
+      "sha256": "sha256:0fc8da6ede22f71ec9178c07e2c09f7bf606dd81074899fed6a246f059d636d2",
+      "bytes": 678
+    },
+    {
+      "ordinal": 780,
+      "revision": "74fceed9b5160a449d8a626be7823b5143902ef6",
+      "path": "receipts/0780/followup-01.txt",
+      "sha256": "sha256:503d4f2fe6da9298717a0826ac722c0e443f6d738d3e43cdf1bafd1838a9b205",
+      "bytes": 2035
+    },
+    {
+      "ordinal": 781,
+      "revision": "7d4636ecff422256a064e2949998b34f8209ed89",
+      "path": "receipts/0781/selected.patch",
+      "sha256": "sha256:c7ce42d08447fd8229b94a33ef9875ad8b8fb586b790c0a4dd4d53905ff83913",
+      "bytes": 921
+    },
+    {
+      "ordinal": 781,
+      "revision": "7d4636ecff422256a064e2949998b34f8209ed89",
+      "path": "receipts/0781/followup-01.txt",
+      "sha256": "sha256:4fe1604f4a28f6546750cf7f6dc229e9c48f768d918c8cf46f6b17c767f43d54",
+      "bytes": 2235
+    },
+    {
+      "ordinal": 782,
+      "revision": "dfda6daeedb26928ea67a1064e4c8a88478adc2f",
+      "path": "receipts/0782/selected.patch",
+      "sha256": "sha256:8dedf99503c57057748eb6bcec7e269f91b8886324f4e3055bcb435ca0cf6765",
+      "bytes": 1639
+    },
+    {
+      "ordinal": 782,
+      "revision": "dfda6daeedb26928ea67a1064e4c8a88478adc2f",
+      "path": "receipts/0782/followup-01.txt",
+      "sha256": "sha256:27d6a06b8a4415bd501e54c65ef40ae3d02a0a6e5cb45c38c5fbf23ae4367580",
+      "bytes": 2353
+    },
+    {
+      "ordinal": 783,
+      "revision": "c015fdbef1fb71df3307bccbde59128b66b898c3",
+      "path": "receipts/0783/selected.patch",
+      "sha256": "sha256:8334323f31539d0d49b5f2520e18147143e3a3e4c97acc38bb26366e9f349d98",
+      "bytes": 1373
+    },
+    {
+      "ordinal": 783,
+      "revision": "c015fdbef1fb71df3307bccbde59128b66b898c3",
+      "path": "receipts/0783/followup-01.txt",
+      "sha256": "sha256:fe71bbccde9e82c38ff6a290b1d1cbb190d14ae22c761fdb8623b4c731bdbbd5",
+      "bytes": 2737
+    },
+    {
+      "ordinal": 784,
+      "revision": "7a8841481e9c11142a0b0855e07c3d6f59314519",
+      "path": "receipts/0784/selected.patch",
+      "sha256": "sha256:89282a9b76911646ad8b64e3084057167d36d4d9ef89cd1d3034f5ffef7b8bda",
+      "bytes": 1096
+    },
+    {
+      "ordinal": 784,
+      "revision": "7a8841481e9c11142a0b0855e07c3d6f59314519",
+      "path": "receipts/0784/followup-01.txt",
+      "sha256": "sha256:4da1ffe1da2c4e82f7bf0750b6d6bf7273735d78ae284d1d82349880a823ef00",
+      "bytes": 1223
+    },
+    {
+      "ordinal": 785,
+      "revision": "0f59908415c430d9bfb871312b6a10900573b85d",
+      "path": "receipts/0785/selected.patch",
+      "sha256": "sha256:504fc72f563f96be520b8e704370242b96bda4586b0d8807cfc2b0d4b0ce4072",
+      "bytes": 1509
+    },
+    {
+      "ordinal": 785,
+      "revision": "0f59908415c430d9bfb871312b6a10900573b85d",
+      "path": "receipts/0785/followup-01.txt",
+      "sha256": "sha256:d8c35474545568d79d9388c1846420cf0ab9565a0b5ff4aca9afda5e25130173",
+      "bytes": 658
+    },
+    {
+      "ordinal": 786,
+      "revision": "eac342aa8bf93673820c26accaf52a978ad8a3ea",
+      "path": "receipts/0786/selected.patch",
+      "sha256": "sha256:504fc72f563f96be520b8e704370242b96bda4586b0d8807cfc2b0d4b0ce4072",
+      "bytes": 1509
+    },
+    {
+      "ordinal": 787,
+      "revision": "1670c7084b5fcb5e5def8bf1fd258391ec2efea3",
+      "path": "receipts/0787/selected.patch",
+      "sha256": "sha256:3409f151759a69a76b026938bb38c4b58a79c71ff73e27a3f156bb845be6e8af",
+      "bytes": 1644
+    },
+    {
+      "ordinal": 788,
+      "revision": "829de66d2fd518c5fc3846253b6ceaa5b48d1786",
+      "path": "receipts/0788/selected.patch",
+      "sha256": "sha256:2c569ec793bc40c50feac0865adc109110854f9c05266a9ecb83a340be2df093",
+      "bytes": 720
+    },
+    {
+      "ordinal": 789,
+      "revision": "f689cb13850c0297e423b3f5705282c6d1d6d95b",
+      "path": "receipts/0789/selected.patch",
+      "sha256": "sha256:336d54264e156872462b9a5aa3b1f117dc5023648d5a045d3b9a95cfd618b812",
+      "bytes": 466
+    },
+    {
+      "ordinal": 790,
+      "revision": "f8da5ada71e9ef0d70550d8edd9c7d3a4d5e4ac2",
+      "path": "receipts/0790/selected.patch",
+      "sha256": "sha256:0bec5c129719abd9faf423f96a87d9fc3d7c74c2a1f2a4558364d883c85722d0",
+      "bytes": 623
+    },
+    {
+      "ordinal": 790,
+      "revision": "f8da5ada71e9ef0d70550d8edd9c7d3a4d5e4ac2",
+      "path": "receipts/0790/followup-01.txt",
+      "sha256": "sha256:23532c455da4611aa5a66283bbd5290391f3cd23de5e2f74933f9582a265c66b",
+      "bytes": 1041
+    },
+    {
+      "ordinal": 791,
+      "revision": "5b32d0a56cbc5dd481b9a6e2a043d9f054b7cba9",
+      "path": "receipts/0791/selected.patch",
+      "sha256": "sha256:af0f6b2da965cbec1a5cb49620d0c0e006b043a2ce3cbdf8f8bafeb79db14cc1",
+      "bytes": 869
+    },
+    {
+      "ordinal": 792,
+      "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+      "path": "receipts/0792/selected.patch",
+      "sha256": "sha256:e9613b43cb92741b41e69612b02bb0273427216ace3f03375cc5066d8e4160ad",
+      "bytes": 1292
+    },
+    {
+      "ordinal": 792,
+      "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+      "path": "receipts/0792/followup-01.txt",
+      "sha256": "sha256:02c6c69dbbe400bbdd9fe54f1155b93e2218d06db6b7fc8b7d9fb59f2568569d",
+      "bytes": 517
+    },
+    {
+      "ordinal": 792,
+      "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+      "path": "receipts/0792/followup-02.txt",
+      "sha256": "sha256:ce0fed99baca41c81f4bd9a17bd7c621cb71bd37f7cdccfddd5230cfbf0be1f1",
+      "bytes": 3250
+    },
+    {
+      "ordinal": 792,
+      "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+      "path": "receipts/0792/followup-03.txt",
+      "sha256": "sha256:03c255f429a09c16fb89280a87be75c1fd61f864372c997a842f946f2761f244",
+      "bytes": 2071
+    },
+    {
+      "ordinal": 792,
+      "revision": "0618dc6b0d9d8dd525890f6ac455de3b3db90f47",
+      "path": "receipts/0792/followup-04.txt",
+      "sha256": "sha256:b5eafd2a45324deb4984a3dd53c3ce2cdecf54838d2d6676adfafd6db8d611a2",
+      "bytes": 1210
+    },
+    {
+      "ordinal": 793,
+      "revision": "25c7d5afa96b91815507f2b3af606079ff52caa8",
+      "path": "receipts/0793/selected.patch",
+      "sha256": "sha256:7ec9fd2f9df7dfd3995c7878b0daf6fa76d40c4e2914fb922326a3748cf19dd5",
+      "bytes": 1389
+    },
+    {
+      "ordinal": 793,
+      "revision": "25c7d5afa96b91815507f2b3af606079ff52caa8",
+      "path": "receipts/0793/followup-01.txt",
+      "sha256": "sha256:abc01131ba2d17089020416c6fc3b063dac2260b1e9bbf3c61fb2c3bc5457966",
+      "bytes": 2908
+    },
+    {
+      "ordinal": 794,
+      "revision": "025a68c3a452fae022781fb00930ffe5ab04594e",
+      "path": "receipts/0794/selected.patch",
+      "sha256": "sha256:d003f68a5300f717351d687e575bc097beb34557116c1da7cb6366e276deaeaa",
+      "bytes": 1128
+    },
+    {
+      "ordinal": 795,
+      "revision": "ea33d1980f416f8b8c7f5081ea57b97590578a0a",
+      "path": "receipts/0795/selected.patch",
+      "sha256": "sha256:03dd1a42d08f9f26ce1d47dc57fdf098fe21f62be636d5170c44073abe46a3c3",
+      "bytes": 923
+    },
+    {
+      "ordinal": 795,
+      "revision": "ea33d1980f416f8b8c7f5081ea57b97590578a0a",
+      "path": "receipts/0795/followup-01.txt",
+      "sha256": "sha256:ad16c3d094d29f9e214b6442ab083f7b1a699c8a641fda55b09fd7a2e97d0429",
+      "bytes": 1533
+    },
+    {
+      "ordinal": 796,
+      "revision": "c57c86286a8f35236bb2da3a34572b42c551030c",
+      "path": "receipts/0796/selected.patch",
+      "sha256": "sha256:6b4581a3f2724113fdeebe14c908b7b03617794f60766a6d8bb756b2269ea7c4",
+      "bytes": 1012
+    },
+    {
+      "ordinal": 797,
+      "revision": "7c50b2a66bdf728c3a1cbe6d0544365ddc91a75a",
+      "path": "receipts/0797/selected.patch",
+      "sha256": "sha256:ca48ac08cfa1ad6a2618182d3e5d73d756b75de151761be4b22502dff537260a",
+      "bytes": 1078
+    },
+    {
+      "ordinal": 798,
+      "revision": "dac1538d1fe54d2b402ec13755ab443354a293a6",
+      "path": "receipts/0798/selected.patch",
+      "sha256": "sha256:6ac0b2b3df40898dbddd3a4bbedeb6ce455c6e32b4341184edbe3f2e2fa7e68f",
+      "bytes": 471
+    },
+    {
+      "ordinal": 799,
+      "revision": "a473302a9f2d2de2ea81b0f98dacccbab43fd9f8",
+      "path": "receipts/0799/selected.patch",
+      "sha256": "sha256:40d2f3aed071f9327dcba2382a9889955297a28b6b086ac50c159e97fedec90b",
+      "bytes": 887
+    },
+    {
+      "ordinal": 800,
+      "revision": "8971295c4d3d40a4afd9a7e45d00ed4aab35337a",
+      "path": "receipts/0800/selected.patch",
+      "sha256": "sha256:14175dd969af1ba510706cc1dca00681f9b90c0c20cdbd0da9c67a7c0ae83c2e",
+      "bytes": 1530
+    },
+    {
+      "ordinal": 801,
+      "revision": "bf9555829bc40639c47ec8c6c162c87ffc2624cb",
+      "path": "receipts/0801/selected.patch",
+      "sha256": "sha256:ca7f60d7bac7402c8a58eb4170c50542cc7a5835a40e69f9bcf3b8d3d94e8af1",
+      "bytes": 957
+    },
+    {
+      "ordinal": 801,
+      "revision": "bf9555829bc40639c47ec8c6c162c87ffc2624cb",
+      "path": "receipts/0801/followup-01.txt",
+      "sha256": "sha256:9314ffceca167e6a396532ba2397b92c9e2e7945531e4a920439081ee5acc983",
+      "bytes": 1506
+    },
+    {
+      "ordinal": 802,
+      "revision": "b2f9bb1294abf12e94bef0880ae1b47964cd2e93",
+      "path": "receipts/0802/selected.patch",
+      "sha256": "sha256:9470c3a5a196a9c667557e4170e63bbecb8c106ba63262815d8650c2855e5ac3",
+      "bytes": 885
+    },
+    {
+      "ordinal": 802,
+      "revision": "b2f9bb1294abf12e94bef0880ae1b47964cd2e93",
+      "path": "receipts/0802/followup-01.txt",
+      "sha256": "sha256:0c211df60b4ee850c3686a6cb39499a5b691163708585bf7b69accde358b9366",
+      "bytes": 1511
+    },
+    {
+      "ordinal": 803,
+      "revision": "d9435c67d229f6385f8ffc95c3fae8143dd15853",
+      "path": "receipts/0803/selected.patch",
+      "sha256": "sha256:9f62ced80f48d60c19c786dfaefa6a33325ffcc9875ecbda39b28ef0ef3a5b3c",
+      "bytes": 733
+    },
+    {
+      "ordinal": 803,
+      "revision": "d9435c67d229f6385f8ffc95c3fae8143dd15853",
+      "path": "receipts/0803/followup-01.txt",
+      "sha256": "sha256:8f66c669d8a1fbfdfe5cbee84680f5886c09021850b540d0525caabbf6b43c63",
+      "bytes": 2385
+    },
+    {
+      "ordinal": 804,
+      "revision": "49b66caa63a72affc79335185319dc6bf129d378",
+      "path": "receipts/0804/selected.patch",
+      "sha256": "sha256:9f62ced80f48d60c19c786dfaefa6a33325ffcc9875ecbda39b28ef0ef3a5b3c",
+      "bytes": 733
+    },
+    {
+      "ordinal": 804,
+      "revision": "49b66caa63a72affc79335185319dc6bf129d378",
+      "path": "receipts/0804/followup-01.txt",
+      "sha256": "sha256:0b1f2bcd1f847aa14f273d2428a05d96251b8c4d3bcb11b5ec445a44af4923ed",
+      "bytes": 1547
+    },
+    {
+      "ordinal": 805,
+      "revision": "3e989009299b4879547530b722fdca6991a76ad3",
+      "path": "receipts/0805/selected.patch",
+      "sha256": "sha256:0f63d6e2fa48ba5f8ce125bbf9aef400665a5becb594c86eef19030c83392bb2",
+      "bytes": 1004
+    },
+    {
+      "ordinal": 805,
+      "revision": "3e989009299b4879547530b722fdca6991a76ad3",
+      "path": "receipts/0805/followup-01.txt",
+      "sha256": "sha256:a3e5fba7d7768109b1d771c013c1268554cc05ab659bc8ee443d73b4056902a3",
+      "bytes": 5266
+    },
+    {
+      "ordinal": 806,
+      "revision": "5a424145256ebd58e79ffdb7c91ce84ef4f79652",
+      "path": "receipts/0806/selected.patch",
+      "sha256": "sha256:3f3cbc97756d9c4502bd0bf87ebe02d94be8c8b96623542fff29b4efc2d9e2aa",
+      "bytes": 1264
+    },
+    {
+      "ordinal": 807,
+      "revision": "d45b9723d9f43603a03ab2b79be99ec66fb3e8bd",
+      "path": "receipts/0807/selected.patch",
+      "sha256": "sha256:fec0ca2fb3b005d0b92e1facd64c0f389f300837803a24a56ee06fd60f49fcb0",
+      "bytes": 993
+    },
+    {
+      "ordinal": 808,
+      "revision": "3aecead83970444f9e68c338b3120b19ee7e269e",
+      "path": "receipts/0808/selected.patch",
+      "sha256": "sha256:0973a9684a1fc1d6e825b85957b3e4c4e41ab74f843036abd2f38fe4ac742d2e",
+      "bytes": 931
+    },
+    {
+      "ordinal": 808,
+      "revision": "3aecead83970444f9e68c338b3120b19ee7e269e",
+      "path": "receipts/0808/followup-01.txt",
+      "sha256": "sha256:218091ffdac2a4bee4e5b38f064250c4a8f9ade60521716fdb5c2d5be525e5d5",
+      "bytes": 2906
+    },
+    {
+      "ordinal": 809,
+      "revision": "0acd906402b9565e48a2cc9b7c1950f51ac5f7ba",
+      "path": "receipts/0809/selected.patch",
+      "sha256": "sha256:cfc50095e113f6d0131b6cbc501fc04567a99698a76633183250c5d025f914b4",
+      "bytes": 979
+    },
+    {
+      "ordinal": 810,
+      "revision": "a0214645eba4691c7b9a4cf8adbf153004b1579a",
+      "path": "receipts/0810/selected.patch",
+      "sha256": "sha256:ea4f8a60e6cc307d66577d685f942428b52fd3929465930a1ad59ab94cfec69d",
+      "bytes": 1026
+    },
+    {
+      "ordinal": 810,
+      "revision": "a0214645eba4691c7b9a4cf8adbf153004b1579a",
+      "path": "receipts/0810/followup-01.txt",
+      "sha256": "sha256:eeba4bce5a827daaca4515aac56e68c550f78d86da3b5ac02693863819e4f8e3",
+      "bytes": 1354
+    },
+    {
+      "ordinal": 811,
+      "revision": "afce2e1c58ad9704947bdfaab0837c051a7be2a8",
+      "path": "receipts/0811/selected.patch",
+      "sha256": "sha256:c580bf974864a1e73ef4363563bf8c7f7625cb94ad481c39464ed84aa9f22f7a",
+      "bytes": 1062
+    },
+    {
+      "ordinal": 812,
+      "revision": "ba64b955ec041d69069c6c6dc4c8e6ba821e6594",
+      "path": "receipts/0812/selected.patch",
+      "sha256": "sha256:7524eb15a5beee41b616efd06013ffc240ba7ff53f8f01177f7083adf5321f46",
+      "bytes": 980
+    },
+    {
+      "ordinal": 813,
+      "revision": "54ee84fe7228befef3be949cba382b9251c325b5",
+      "path": "receipts/0813/selected.patch",
+      "sha256": "sha256:c2f0f6cc11c71a2bce20fe19effd73f160a66f4b2876231b04b9d8e05eb9ad5a",
+      "bytes": 947
+    },
+    {
+      "ordinal": 814,
+      "revision": "085c00dd87b39aa914b96396fe73c751e7585bc0",
+      "path": "receipts/0814/selected.patch",
+      "sha256": "sha256:ba2fc77e62b860a51cd47bb5d92b98c9c8b02702cca5967747d7af4c275eb96c",
+      "bytes": 870
+    },
+    {
+      "ordinal": 815,
+      "revision": "98425ab6bc9c86af04f0822cb4d5249823bb1138",
+      "path": "receipts/0815/selected.patch",
+      "sha256": "sha256:b20585ce5a2dde6fdcf720d2ab8332c43564bf37f09a31571502bc135b352883",
+      "bytes": 871
+    },
+    {
+      "ordinal": 815,
+      "revision": "98425ab6bc9c86af04f0822cb4d5249823bb1138",
+      "path": "receipts/0815/followup-01.txt",
+      "sha256": "sha256:e38c43b041de97d353bfe5f5b9f75228e05ea3480ff53f90134cd1998a7800ad",
+      "bytes": 1896
+    },
+    {
+      "ordinal": 816,
+      "revision": "4b2d16f2e1933c0abfc8a31bd3f78eacb66f0b0a",
+      "path": "receipts/0816/selected.patch",
+      "sha256": "sha256:8e433759d8b8e8641dfe42dc16e3544db61141e3ad0a428a11b682e1055f6d9a",
+      "bytes": 792
+    },
+    {
+      "ordinal": 816,
+      "revision": "4b2d16f2e1933c0abfc8a31bd3f78eacb66f0b0a",
+      "path": "receipts/0816/followup-01.txt",
+      "sha256": "sha256:4ce0106e05e334cc98256cd76f84911aebb4de0c2e31dc31a34d628780aedfb0",
+      "bytes": 295
+    },
+    {
+      "ordinal": 816,
+      "revision": "4b2d16f2e1933c0abfc8a31bd3f78eacb66f0b0a",
+      "path": "receipts/0816/followup-02.txt",
+      "sha256": "sha256:3e575344056fbe2337a28dbc9d2d3a3d4025095239c04327f953f707e5ec18bd",
+      "bytes": 1654
+    },
+    {
+      "ordinal": 817,
+      "revision": "e9325d92be29247fbfde4a3c77e968c296bc9a6d",
+      "path": "receipts/0817/selected.patch",
+      "sha256": "sha256:37b79a8c9a0a6e4e4c1b40e1ebdbdbb42cbeb17994246214be6e9b27a3bd30cd",
+      "bytes": 880
+    },
+    {
+      "ordinal": 818,
+      "revision": "303a82d1c79722f16ce7ca5a27421f8770293218",
+      "path": "receipts/0818/selected.patch",
+      "sha256": "sha256:6afeb6c2b319ca047a8d67fec7c36e5de492593dd11d77487e69e989f33424cb",
+      "bytes": 751
+    },
+    {
+      "ordinal": 818,
+      "revision": "303a82d1c79722f16ce7ca5a27421f8770293218",
+      "path": "receipts/0818/followup-01.txt",
+      "sha256": "sha256:adcef014c97947010a8c9f0c1e323f1e64df7847454a632a5757dc10770f8178",
+      "bytes": 738
+    },
+    {
+      "ordinal": 819,
+      "revision": "30f1682ca1dad86eb658126117b998435ccf4893",
+      "path": "receipts/0819/selected.patch",
+      "sha256": "sha256:6d6104d4fd4323f3c8d138723d06dfc080fee0a532b2085a21cc45db2c8b7ff6",
+      "bytes": 825
+    },
+    {
+      "ordinal": 819,
+      "revision": "30f1682ca1dad86eb658126117b998435ccf4893",
+      "path": "receipts/0819/followup-01.txt",
+      "sha256": "sha256:caac9ffa2ae931a9995c3283232426f92d9e0b3fd8343b229974fd55bc4ecd98",
+      "bytes": 1460
+    },
+    {
+      "ordinal": 820,
+      "revision": "4db2e91cdd3dc15698e59e84c7eeb5f66150997e",
+      "path": "receipts/0820/selected.patch",
+      "sha256": "sha256:9c26dfa0c0752f992aea6d48ff384f33c74ec102ecead7f9379db5f8c0bc0ee8",
+      "bytes": 812
+    },
+    {
+      "ordinal": 821,
+      "revision": "262332887258f9137420da9025f1f90a59324191",
+      "path": "receipts/0821/selected.patch",
+      "sha256": "sha256:cb0cc8ad54a3d6ec3335a8850764171ea85666fcdc4628581a52ad8f8bc3471f",
+      "bytes": 988
+    },
+    {
+      "ordinal": 822,
+      "revision": "1ea071adb68148334453a096e5a5414dad68f94e",
+      "path": "receipts/0822/selected.patch",
+      "sha256": "sha256:52ca196fbc6c23b36da8342d03d8dd7da6050a5342bbbb856a7141398ceb094f",
+      "bytes": 1073
+    },
+    {
+      "ordinal": 823,
+      "revision": "0804f51b03d0a4a8ebd5826b8f6952c228291329",
+      "path": "receipts/0823/selected.patch",
+      "sha256": "sha256:00dd4090252448e5d7eae2741feee59a0ef07fa01447ba513bce3f59c97558f1",
+      "bytes": 1410
+    },
+    {
+      "ordinal": 824,
+      "revision": "9cc953625f8106d2b50fa211b0309f7e132dfd2d",
+      "path": "receipts/0824/selected.patch",
+      "sha256": "sha256:6aa38bd3422c493dd1b940c53b78a3e6d4863eab37e7193c2eb5a154f598c3ea",
+      "bytes": 1332
+    },
+    {
+      "ordinal": 825,
+      "revision": "ad632cb3bddb3eacaf15d66eef96d84cdeda6238",
+      "path": "receipts/0825/selected.patch",
+      "sha256": "sha256:96ded9e0ee2ff599d9fa6551ee7d17bdf01acf4ab1f7a44cfe4c52914e16a827",
+      "bytes": 1145
+    },
+    {
+      "ordinal": 825,
+      "revision": "ad632cb3bddb3eacaf15d66eef96d84cdeda6238",
+      "path": "receipts/0825/followup-01.txt",
+      "sha256": "sha256:96943464930c0afacd0edd84c0b56de52f1df34a4b7e8b5dda6fc185daf6d742",
+      "bytes": 835
+    },
+    {
+      "ordinal": 826,
+      "revision": "14b0db55b06e4dc4e936dccef9a0f3bcab26f9e0",
+      "path": "receipts/0826/selected.patch",
+      "sha256": "sha256:5757fb698b964c0850a058f586c16e410827ba4b43fc6cf760d1d2f9c2276f5b",
+      "bytes": 1297
+    },
+    {
+      "ordinal": 826,
+      "revision": "14b0db55b06e4dc4e936dccef9a0f3bcab26f9e0",
+      "path": "receipts/0826/followup-01.txt",
+      "sha256": "sha256:95ab5fdb28dd323b464b1f8059e101c04916483646eb623da8b8ad5c10c28368",
+      "bytes": 3895
+    },
+    {
+      "ordinal": 827,
+      "revision": "4c5651fddc37534745e9efae0aaf005772d4bb30",
+      "path": "receipts/0827/selected.patch",
+      "sha256": "sha256:9d64d010fa7d1b0ad52b93d85326761bbcdd14c058a98c6f193dcfaaf38f5c35",
+      "bytes": 1318
+    },
+    {
+      "ordinal": 828,
+      "revision": "d500b256324b792d71ae528117998ec9986daaf7",
+      "path": "receipts/0828/selected.patch",
+      "sha256": "sha256:dffd653e3bd934a1496dfd0514ea7da1ae1c7aa82e98738fa78211e28eabbe77",
+      "bytes": 1132
+    },
+    {
+      "ordinal": 829,
+      "revision": "0ad6c17d0ec22803d5af0834170276c394299733",
+      "path": "receipts/0829/selected.patch",
+      "sha256": "sha256:0587d4c485e37b1e561d839ede41478503dbc40ef0571a065789588dff3397f3",
+      "bytes": 1254
+    },
+    {
+      "ordinal": 830,
+      "revision": "af89de1237d5543b6f0f0686a252ad708d76dc26",
+      "path": "receipts/0830/selected.patch",
+      "sha256": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+      "bytes": 874
+    },
+    {
+      "ordinal": 830,
+      "revision": "af89de1237d5543b6f0f0686a252ad708d76dc26",
+      "path": "receipts/0830/followup-01.txt",
+      "sha256": "sha256:f23a6a3a1d335dbf0415f2a2345a3911a56d9b5e2fc95021b5b57bd5b1126844",
+      "bytes": 2675
+    },
+    {
+      "ordinal": 831,
+      "revision": "a7a39ffd01ad5e21bc41ed1a4108ec4fcf0dbd29",
+      "path": "receipts/0831/selected.patch",
+      "sha256": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+      "bytes": 874
+    },
+    {
+      "ordinal": 832,
+      "revision": "201fbcc0c6c7eb6f0b93927f402ccfe294a60d24",
+      "path": "receipts/0832/selected.patch",
+      "sha256": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+      "bytes": 874
+    },
+    {
+      "ordinal": 833,
+      "revision": "cf9c1c23d3b9c12d150e0b4653eb7ea832128fbf",
+      "path": "receipts/0833/selected.patch",
+      "sha256": "sha256:e63e7b85e30eba709facca222e236082134a9d3ef75625fe5e57e7dc0a133f45",
+      "bytes": 874
+    },
+    {
+      "ordinal": 834,
+      "revision": "03f383b90821745e04cff1d65d318a0e2c83b066",
+      "path": "receipts/0834/selected.patch",
+      "sha256": "sha256:dffd653e3bd934a1496dfd0514ea7da1ae1c7aa82e98738fa78211e28eabbe77",
+      "bytes": 1132
+    },
+    {
+      "ordinal": 835,
+      "revision": "469a25c724153a05832dba70b180a98087a578c1",
+      "path": "receipts/0835/selected.patch",
+      "sha256": "sha256:1495db1b2696443686eb367bb7debfdb6eda113497c9ae2a79a722e2e8911d12",
+      "bytes": 1028
+    },
+    {
+      "ordinal": 835,
+      "revision": "469a25c724153a05832dba70b180a98087a578c1",
+      "path": "receipts/0835/followup-01.txt",
+      "sha256": "sha256:19602f20e2152b06b5c70b0bac454d89125fd9b2e08331be44c2a32d73ae3b73",
+      "bytes": 1633
+    },
+    {
+      "ordinal": 836,
+      "revision": "f08efd2da6a2f61824d75e3ded49ee7180ef0626",
+      "path": "receipts/0836/selected.patch",
+      "sha256": "sha256:9a957b05bea26dfb5d738003f9d56f2f16aad26b471af668fc5cebfb426d5ef8",
+      "bytes": 1260
+    },
+    {
+      "ordinal": 837,
+      "revision": "363566587e902fa4989bb0041f6532b76c276496",
+      "path": "receipts/0837/selected.patch",
+      "sha256": "sha256:c3751f3666bb334d12ad9db6f239bd2cc1e5e79eb2a93b9018de408b2c7a42f9",
+      "bytes": 1136
+    },
+    {
+      "ordinal": 837,
+      "revision": "363566587e902fa4989bb0041f6532b76c276496",
+      "path": "receipts/0837/followup-01.txt",
+      "sha256": "sha256:e8045e07c062fdd8e342bb42e4bf6f30e11fa331ea1f8c6ae73257f6ee4fa044",
+      "bytes": 2271
+    },
+    {
+      "ordinal": 838,
+      "revision": "7c15b2632986de5d87a018b42f492dac45216802",
+      "path": "receipts/0838/selected.patch",
+      "sha256": "sha256:9a957b05bea26dfb5d738003f9d56f2f16aad26b471af668fc5cebfb426d5ef8",
+      "bytes": 1260
+    },
+    {
+      "ordinal": 838,
+      "revision": "7c15b2632986de5d87a018b42f492dac45216802",
+      "path": "receipts/0838/followup-01.txt",
+      "sha256": "sha256:8db533a941aba2d84ce09db64e3cd55035ad1f4b2f85975cda645885e672930a",
+      "bytes": 1580
+    },
+    {
+      "ordinal": 839,
+      "revision": "9daec9433317ef22b6a4a2cd155390c89acb3046",
+      "path": "receipts/0839/selected.patch",
+      "sha256": "sha256:74ff12b694b73976f28425f5df05dbf9e214bd9c25502cb9922c8f838e5411b2",
+      "bytes": 904
+    },
+    {
+      "ordinal": 840,
+      "revision": "2fd818c156e3b32da7735b116ad52c9318fbd3a7",
+      "path": "receipts/0840/selected.patch",
+      "sha256": "sha256:a72ad36657a2bc086472f4cb326e88e1c5a4b61df3b06bbe38bb3a38c4f12eec",
+      "bytes": 1091
+    },
+    {
+      "ordinal": 841,
+      "revision": "dcf015bd9212a9d5b4a7f8610651f87d2fc7494f",
+      "path": "receipts/0841/selected.patch",
+      "sha256": "sha256:689252ec37cc456547ad03f283658d232e41a029f5abac8c32f68a6a46a9e072",
+      "bytes": 1161
+    },
+    {
+      "ordinal": 842,
+      "revision": "3e582daf459f3f3d046cf8a023cb6072331037c5",
+      "path": "receipts/0842/selected.patch",
+      "sha256": "sha256:e749daf72cba393b2eb69adde6f1c317852904eba2c93c34516aaf5932fd6672",
+      "bytes": 1106
+    },
+    {
+      "ordinal": 843,
+      "revision": "0aa2fede0803be498ad2b0942dc9888d26700e64",
+      "path": "receipts/0843/selected.patch",
+      "sha256": "sha256:848414dfc072055357909a8898aa22a81dc869b97c8464e7653235b14c4eca39",
+      "bytes": 883
+    },
+    {
+      "ordinal": 843,
+      "revision": "0aa2fede0803be498ad2b0942dc9888d26700e64",
+      "path": "receipts/0843/followup-01.txt",
+      "sha256": "sha256:8f33d8d0e3aa54025008e5c845881cc614fa4f17e30ffa4b226baf0edb2d360b",
+      "bytes": 1552
+    },
+    {
+      "ordinal": 844,
+      "revision": "8f1637ee554bd311979bc92bf1961a66fe309f1b",
+      "path": "receipts/0844/selected.patch",
+      "sha256": "sha256:848414dfc072055357909a8898aa22a81dc869b97c8464e7653235b14c4eca39",
+      "bytes": 883
+    },
+    {
+      "ordinal": 845,
+      "revision": "94b12ba8e32fcd1c049e703d720843458b6e47a2",
+      "path": "receipts/0845/selected.patch",
+      "sha256": "sha256:e8c1fccf011f1d1cf5fa27ce44ace7642b24016cde96e6344af6e5550e13febb",
+      "bytes": 1560
+    },
+    {
+      "ordinal": 845,
+      "revision": "94b12ba8e32fcd1c049e703d720843458b6e47a2",
+      "path": "receipts/0845/followup-01.txt",
+      "sha256": "sha256:7af88589d7ee42211111606abb6754385953257889abcf0549a74e0ecdd6d29c",
+      "bytes": 3511
+    },
+    {
+      "ordinal": 845,
+      "revision": "94b12ba8e32fcd1c049e703d720843458b6e47a2",
+      "path": "receipts/0845/followup-02.txt",
+      "sha256": "sha256:dfceb3c098b63a58a43b8684f7049a38665b7376c0561e154d015eb71697b7ab",
+      "bytes": 1603
+    },
+    {
+      "ordinal": 845,
+      "revision": "94b12ba8e32fcd1c049e703d720843458b6e47a2",
+      "path": "receipts/0845/followup-03.txt",
+      "sha256": "sha256:c703bc3b3d0d065d08a5115abadf13520a31aaafeab57aa20c308021ae5799d1",
+      "bytes": 1064
+    },
+    {
+      "ordinal": 845,
+      "revision": "94b12ba8e32fcd1c049e703d720843458b6e47a2",
+      "path": "receipts/0845/followup-04.txt",
+      "sha256": "sha256:27e539d885ed96855ad773d82063dd2deebd804537b893c47e88e69c486d9ab2",
+      "bytes": 901
+    },
+    {
+      "ordinal": 846,
+      "revision": "b1ef3d34696a801470cd96cee65c18a4173a61b7",
+      "path": "receipts/0846/selected.patch",
+      "sha256": "sha256:e8c1fccf011f1d1cf5fa27ce44ace7642b24016cde96e6344af6e5550e13febb",
+      "bytes": 1560
+    },
+    {
+      "ordinal": 847,
+      "revision": "f72ed9b61d449933f3c30357daaffd548e2f1ab4",
+      "path": "receipts/0847/selected.patch",
+      "sha256": "sha256:8fbd4ea3f570e427da9d51e6cf2e542b6eb64521c609e96e52ed82471a3f1598",
+      "bytes": 744
+    },
+    {
+      "ordinal": 848,
+      "revision": "b2d5c26ec8db66a6d1273f53e642ea308617e95d",
+      "path": "receipts/0848/selected.patch",
+      "sha256": "sha256:8fbd4ea3f570e427da9d51e6cf2e542b6eb64521c609e96e52ed82471a3f1598",
+      "bytes": 744
+    },
+    {
+      "ordinal": 849,
+      "revision": "1138b83a069d8d41633725c4c98ca0c2254e0399",
+      "path": "receipts/0849/selected.patch",
+      "sha256": "sha256:3661141aebddf07b3d30a84e71599b8d91df63828c14f134347cebba61d28e45",
+      "bytes": 1079
+    },
+    {
+      "ordinal": 850,
+      "revision": "4496ac4e46543d2f18596f327a4a345e02c11ee2",
+      "path": "receipts/0850/selected.patch",
+      "sha256": "sha256:3661141aebddf07b3d30a84e71599b8d91df63828c14f134347cebba61d28e45",
+      "bytes": 1079
+    },
+    {
+      "ordinal": 851,
+      "revision": "019d451f8702f76073586ea575e491533ec65000",
+      "path": "receipts/0851/selected.patch",
+      "sha256": "sha256:a6ddb13bbdaf01b31944d78869210034f3728329eff758a8e19b79938f7b9ef3",
+      "bytes": 845
+    },
+    {
+      "ordinal": 852,
+      "revision": "31a6317c1ed16554bdc69737ce281705c6346739",
+      "path": "receipts/0852/selected.patch",
+      "sha256": "sha256:a6ddb13bbdaf01b31944d78869210034f3728329eff758a8e19b79938f7b9ef3",
+      "bytes": 845
+    },
+    {
+      "ordinal": 853,
+      "revision": "4887592ebe32b99934defc1be3ba571e156d429a",
+      "path": "receipts/0853/selected.patch",
+      "sha256": "sha256:f98dd2ca1fd7a7bd6e6ccf6b8410ea3dc7563d4d9c6eb97de88c394d30a833cc",
+      "bytes": 1137
+    },
+    {
+      "ordinal": 853,
+      "revision": "4887592ebe32b99934defc1be3ba571e156d429a",
+      "path": "receipts/0853/followup-01.txt",
+      "sha256": "sha256:a50d6a7bcf36964e5ac9c0ba33dfe402653f130a8cc35cf8dbdb0ec75e286f8d",
+      "bytes": 3448
+    },
+    {
+      "ordinal": 854,
+      "revision": "635e7dd759c9e86f9f7fdbf5b0192dcae564082c",
+      "path": "receipts/0854/selected.patch",
+      "sha256": "sha256:f98dd2ca1fd7a7bd6e6ccf6b8410ea3dc7563d4d9c6eb97de88c394d30a833cc",
+      "bytes": 1137
+    },
+    {
+      "ordinal": 854,
+      "revision": "635e7dd759c9e86f9f7fdbf5b0192dcae564082c",
+      "path": "receipts/0854/followup-01.txt",
+      "sha256": "sha256:01cdf1b4e554ea8f083a7bfe2be181472797dc3c82e025c45d289134c573b354",
+      "bytes": 2918
+    },
+    {
+      "ordinal": 855,
+      "revision": "49a9fdeabcfcc4d8ada827e518650350b6ff7f9f",
+      "path": "receipts/0855/selected.patch",
+      "sha256": "sha256:43cd65bd4521546cd1dc866d1de9b5bdcae537fbb143d2a57ea4d105b792dc7e",
+      "bytes": 743
+    },
+    {
+      "ordinal": 855,
+      "revision": "49a9fdeabcfcc4d8ada827e518650350b6ff7f9f",
+      "path": "receipts/0855/followup-01.txt",
+      "sha256": "sha256:77fc170509a3d3eed10234cee290da97f8e287d4baaf93954f40ab3b5ec2d269",
+      "bytes": 1611
+    },
+    {
+      "ordinal": 856,
+      "revision": "c28b7e0380484ccc1b9f93d7b898ddf8fc40cfbe",
+      "path": "receipts/0856/selected.patch",
+      "sha256": "sha256:43cd65bd4521546cd1dc866d1de9b5bdcae537fbb143d2a57ea4d105b792dc7e",
+      "bytes": 743
+    },
+    {
+      "ordinal": 857,
+      "revision": "9883739012250b454a0e1ebd988923661070632d",
+      "path": "receipts/0857/selected.patch",
+      "sha256": "sha256:c8379695f929fd6d9c1433bc73d40a031c156db9d527a5f1a6a396c64cadf0cc",
+      "bytes": 1061
+    },
+    {
+      "ordinal": 858,
+      "revision": "b80c46da6d9fa20b85b6fc9075cd0f4d1576ae27",
+      "path": "receipts/0858/selected.patch",
+      "sha256": "sha256:e73da0bf3998d8a050628a973f78cd09d52517b55455dda343ed286b34a8b61e",
+      "bytes": 687
+    },
+    {
+      "ordinal": 859,
+      "revision": "c4cbff8fdb22add6762cefab7a2e02b2252f6d15",
+      "path": "receipts/0859/selected.patch",
+      "sha256": "sha256:e73da0bf3998d8a050628a973f78cd09d52517b55455dda343ed286b34a8b61e",
+      "bytes": 687
+    },
+    {
+      "ordinal": 860,
+      "revision": "1e2fbb04ff23a461b076fd5ec22d13a3507e44bd",
+      "path": "receipts/0860/selected.patch",
+      "sha256": "sha256:d2bc12ddca7bc26ce5b6514e078adf1b9e5a7b212c8425a656480e16d7d6e38c",
+      "bytes": 632
+    },
+    {
+      "ordinal": 861,
+      "revision": "f5fda52b13186d50074fd7eced60ae8ec5450953",
+      "path": "receipts/0861/selected.patch",
+      "sha256": "sha256:d2bc12ddca7bc26ce5b6514e078adf1b9e5a7b212c8425a656480e16d7d6e38c",
+      "bytes": 632
+    },
+    {
+      "ordinal": 862,
+      "revision": "d2fd1e954f9ac7f66ed65b28112f18fbea3fe117",
+      "path": "receipts/0862/selected.patch",
+      "sha256": "sha256:444f137484765c0dbceee75ebc1d45be7ccd77e544698040652273872166fdec",
+      "bytes": 769
+    },
+    {
+      "ordinal": 863,
+      "revision": "aafe76aa37fcb85bc0d39cad4aaf8a18057e010e",
+      "path": "receipts/0863/selected.patch",
+      "sha256": "sha256:444f137484765c0dbceee75ebc1d45be7ccd77e544698040652273872166fdec",
+      "bytes": 769
+    },
+    {
+      "ordinal": 864,
+      "revision": "6fbc09de2ca8afaa21d38db80663295b90e33de5",
+      "path": "receipts/0864/selected.patch",
+      "sha256": "sha256:95835d50edd326565cf47f8c4d72293b2da6c4ddd428f2e401b2622908b88f47",
+      "bytes": 773
+    },
+    {
+      "ordinal": 864,
+      "revision": "6fbc09de2ca8afaa21d38db80663295b90e33de5",
+      "path": "receipts/0864/followup-01.txt",
+      "sha256": "sha256:5ef0b63fd62cc2990d166c2974390fb0891cd007e78ca861c2cbaa1fd155454c",
+      "bytes": 2349
+    },
+    {
+      "ordinal": 865,
+      "revision": "cec9e3b42bbce0a2f6a3a98bbb2986bf4e88f2ce",
+      "path": "receipts/0865/selected.patch",
+      "sha256": "sha256:6ff8a30cb80afd014de6da5ae55ec07d86fe9a2598c50fe0aaea8c68ce155c93",
+      "bytes": 1366
+    },
+    {
+      "ordinal": 866,
+      "revision": "bceac42ec9730c84a18298d8f59b80284a89918e",
+      "path": "receipts/0866/selected.patch",
+      "sha256": "sha256:04d6dd125af6c6a79f4318694b3a9525dd125eaeaf0d3191d15c739fa93fb4c6",
+      "bytes": 943
+    },
+    {
+      "ordinal": 867,
+      "revision": "1be891e21c1d227acb3cb1a86c2ec553bb17016a",
+      "path": "receipts/0867/selected.patch",
+      "sha256": "sha256:2627505536282c1990efba9ebfb51fe4d8c2fa8d550519b48f887d1819753f4f",
+      "bytes": 1038
+    },
+    {
+      "ordinal": 868,
+      "revision": "19aaa9b266dfaae9c2caca46ad17855bd9522b36",
+      "path": "receipts/0868/selected.patch",
+      "sha256": "sha256:605f33c50504b31c606b7373e959536157b72208fac46250e1db10b869ad5b26",
+      "bytes": 922
+    },
+    {
+      "ordinal": 869,
+      "revision": "1f895e0e8de4786930f274b169aaf17e25efbe19",
+      "path": "receipts/0869/selected.patch",
+      "sha256": "sha256:f8f73563c63ad56595e6b632f6987b39d12474836450c620bf8d2f55a645ffbd",
+      "bytes": 775
+    },
+    {
+      "ordinal": 870,
+      "revision": "de0cc8d327ba820d8b4114b6832094c339bf9700",
+      "path": "receipts/0870/selected.patch",
+      "sha256": "sha256:f8f73563c63ad56595e6b632f6987b39d12474836450c620bf8d2f55a645ffbd",
+      "bytes": 775
+    },
+    {
+      "ordinal": 871,
+      "revision": "b9464e5bd3106db23b7a551b6944011cee2986ee",
+      "path": "receipts/0871/selected.patch",
+      "sha256": "sha256:ef01ff50aebc139e7c042cabed98dc454f429d24cce88c5b7ba0f007c9155f08",
+      "bytes": 752
+    },
+    {
+      "ordinal": 872,
+      "revision": "7a707b44b70ece8c11c191c931fda7ee4c412be8",
+      "path": "receipts/0872/selected.patch",
+      "sha256": "sha256:ef01ff50aebc139e7c042cabed98dc454f429d24cce88c5b7ba0f007c9155f08",
+      "bytes": 752
+    },
+    {
+      "ordinal": 873,
+      "revision": "c73f210b9e704986166b9fe1c9159ce562154684",
+      "path": "receipts/0873/selected.patch",
+      "sha256": "sha256:c9a069da2627b557707275e3f059753d63bb3f2969debd2df7b741ba093f50a3",
+      "bytes": 704
+    },
+    {
+      "ordinal": 874,
+      "revision": "288d3a835668357afb8e44863aa17598d4d5f509",
+      "path": "receipts/0874/selected.patch",
+      "sha256": "sha256:c9a069da2627b557707275e3f059753d63bb3f2969debd2df7b741ba093f50a3",
+      "bytes": 704
+    },
+    {
+      "ordinal": 875,
+      "revision": "d839716e0cfd50ab1402df185cd72fb25c39e827",
+      "path": "receipts/0875/selected.patch",
+      "sha256": "sha256:f07de05d90e83010cd43bb7cb34fc572ae38677481a0da91a40629c4e8566365",
+      "bytes": 873
+    },
+    {
+      "ordinal": 876,
+      "revision": "48cecdb6b56fbe7448b761cc9399b2f1d86efdac",
+      "path": "receipts/0876/selected.patch",
+      "sha256": "sha256:10c4e8276beb0ac5ce545db7d3220a0e3d98269a21b9c44d217109daf043a0ae",
+      "bytes": 906
+    },
+    {
+      "ordinal": 877,
+      "revision": "1b3b8bba93526670d7410e9244e97b6880d625fd",
+      "path": "receipts/0877/selected.patch",
+      "sha256": "sha256:8d4665ccd100664ef41801db2a82462e335af6435e183acc7f3721c5e2c78d48",
+      "bytes": 1232
+    },
+    {
+      "ordinal": 877,
+      "revision": "1b3b8bba93526670d7410e9244e97b6880d625fd",
+      "path": "receipts/0877/followup-01.txt",
+      "sha256": "sha256:a06d00455f51e781cd25d09445ce642748b69b185a60dfca0d728cb9afa52dd2",
+      "bytes": 422
+    },
+    {
+      "ordinal": 878,
+      "revision": "10a2ef34a30e06a0f424cbb863c00239ec175552",
+      "path": "receipts/0878/selected.patch",
+      "sha256": "sha256:5b5486ea307b529b66fb6427428b85a713ea195a94ddc6cc53a82d9c08c168b2",
+      "bytes": 1006
+    },
+    {
+      "ordinal": 878,
+      "revision": "10a2ef34a30e06a0f424cbb863c00239ec175552",
+      "path": "receipts/0878/followup-01.txt",
+      "sha256": "sha256:6ec8d40106e6b6799423c6994fe0129e9292ee51347a0086703c6eef4a6eb729",
+      "bytes": 1310
+    },
+    {
+      "ordinal": 879,
+      "revision": "79aec0069c27ca8b73f575127a5d52ce8ac86513",
+      "path": "receipts/0879/selected.patch",
+      "sha256": "sha256:ed22e21ed00691dd06ae41c0d510ca5a97004c97b1447e3c11546e925e7315fb",
+      "bytes": 830
+    },
+    {
+      "ordinal": 879,
+      "revision": "79aec0069c27ca8b73f575127a5d52ce8ac86513",
+      "path": "receipts/0879/followup-01.txt",
+      "sha256": "sha256:71672f196d4f94a9d5d5ab5bebfa7a009b3ba99bb6c4098a894cf44261d1995d",
+      "bytes": 2110
+    },
+    {
+      "ordinal": 880,
+      "revision": "807a29e8f4153f12775e0b6073ab73c421ba38da",
+      "path": "receipts/0880/selected.patch",
+      "sha256": "sha256:848414dfc072055357909a8898aa22a81dc869b97c8464e7653235b14c4eca39",
+      "bytes": 883
+    },
+    {
+      "ordinal": 881,
+      "revision": "47e6abd307783525cf2290044c9c441900fd00aa",
+      "path": "receipts/0881/selected.patch",
+      "sha256": "sha256:ed22e21ed00691dd06ae41c0d510ca5a97004c97b1447e3c11546e925e7315fb",
+      "bytes": 830
+    },
+    {
+      "ordinal": 881,
+      "revision": "47e6abd307783525cf2290044c9c441900fd00aa",
+      "path": "receipts/0881/followup-01.txt",
+      "sha256": "sha256:128441a2102b01b43215d2a517086b92b4fff07763b58d90ad04a6aed2a7cdd4",
+      "bytes": 948
+    },
+    {
+      "ordinal": 882,
+      "revision": "9a4afe82d21fd3219357f08519d6ad1e7edd3e42",
+      "path": "receipts/0882/selected.patch",
+      "sha256": "sha256:ed22e21ed00691dd06ae41c0d510ca5a97004c97b1447e3c11546e925e7315fb",
+      "bytes": 830
+    },
+    {
+      "ordinal": 882,
+      "revision": "9a4afe82d21fd3219357f08519d6ad1e7edd3e42",
+      "path": "receipts/0882/followup-01.txt",
+      "sha256": "sha256:9abd47ef06add5b7e8c5e1703fe294affd14f17fdfb94ab6124103132cfa9c6c",
+      "bytes": 777
+    },
+    {
+      "ordinal": 883,
+      "revision": "9e9b8c3108f7af586f915e1c4819e42202e06bb8",
+      "path": "receipts/0883/selected.patch",
+      "sha256": "sha256:a68d53588402713ab6c0977dd7b92dcb19ddb6c48606b274822983c212915ed4",
+      "bytes": 1595
+    },
+    {
+      "ordinal": 884,
+      "revision": "27e4d50b38ae0550215f3c8a2fa90539e26aad97",
+      "path": "receipts/0884/selected.patch",
+      "sha256": "sha256:5aad92f451082785150afd5bc7abced1bf12062de9de58e4fd68d13205d47e03",
+      "bytes": 969
+    },
+    {
+      "ordinal": 885,
+      "revision": "7a55b6c33dafabcdf16d2b0a64e0844e1186b381",
+      "path": "receipts/0885/selected.patch",
+      "sha256": "sha256:d07a2364b5af15ad2df4b7286187d3e26bf94351ea0bd2b5425a3872d2907f25",
+      "bytes": 953
+    },
+    {
+      "ordinal": 886,
+      "revision": "820b2771332898437b7c3751c590f666a3b09c75",
+      "path": "receipts/0886/selected.patch",
+      "sha256": "sha256:fd06c86d6edb3bf53a01a755d8d6f2b8d4c33833c94ed64c8135c22fb5086b41",
+      "bytes": 1232
+    },
+    {
+      "ordinal": 887,
+      "revision": "052e917ed7d69bc07a4af9be44d5237e7575723d",
+      "path": "receipts/0887/selected.patch",
+      "sha256": "sha256:d20517ddea5d1ad31aeb1777999b19fcef5ca4d3052123868ee8e2aca9f9e808",
+      "bytes": 1068
+    },
+    {
+      "ordinal": 888,
+      "revision": "619a55bf924ec65da441279b68eda8cfb64ff907",
+      "path": "receipts/0888/selected.patch",
+      "sha256": "sha256:d20517ddea5d1ad31aeb1777999b19fcef5ca4d3052123868ee8e2aca9f9e808",
+      "bytes": 1068
+    },
+    {
+      "ordinal": 889,
+      "revision": "eb0b58e9db5eb19d8a5c92f7d101d7f3c53da8b3",
+      "path": "receipts/0889/selected.patch",
+      "sha256": "sha256:2d446b759be6071640a5e78fd46e39ebebd6c3695103315367ee31ad1962daca",
+      "bytes": 629
+    },
+    {
+      "ordinal": 890,
+      "revision": "c4e37cb326ae816f179b7b97fbf2479575df756a",
+      "path": "receipts/0890/selected.patch",
+      "sha256": "sha256:ba6a71316a9e8e2a6b6e12d56603ef190d824ce8885d550f7ab2a3af20a4aba6",
+      "bytes": 1193
+    },
+    {
+      "ordinal": 891,
+      "revision": "13bc7a504cfd736c363909a05a24017969474591",
+      "path": "receipts/0891/selected.patch",
+      "sha256": "sha256:ba6a71316a9e8e2a6b6e12d56603ef190d824ce8885d550f7ab2a3af20a4aba6",
+      "bytes": 1193
+    },
+    {
+      "ordinal": 892,
+      "revision": "9bff1fbbfcb223ca863a52091b7a0a9a8ac206ed",
+      "path": "receipts/0892/selected.patch",
+      "sha256": "sha256:235c36f647999506e3eba2574ca11f3b014f6d13824f1a1d9a7fcd04b11e9205",
+      "bytes": 657
+    },
+    {
+      "ordinal": 893,
+      "revision": "c9e31b421a5c9724e297567f80e4549159a3b881",
+      "path": "receipts/0893/selected.patch",
+      "sha256": "sha256:475743f33b717116c6aa05f5dee75323c6ac53c9c04e9348bf06db44d6b5255b",
+      "bytes": 936
+    },
+    {
+      "ordinal": 894,
+      "revision": "f1ef10dfeefba3068a66c8ccf1c0db4d486ccf4b",
+      "path": "receipts/0894/selected.patch",
+      "sha256": "sha256:cc771c15c03beab53673227402db700dd29710b6451b32bac74895e45137a153",
+      "bytes": 1044
+    },
+    {
+      "ordinal": 895,
+      "revision": "b75276ec2749069974f86398ae83178e87371eff",
+      "path": "receipts/0895/selected.patch",
+      "sha256": "sha256:cc771c15c03beab53673227402db700dd29710b6451b32bac74895e45137a153",
+      "bytes": 1044
+    },
+    {
+      "ordinal": 896,
+      "revision": "9a462985d168a41ccc3250a951d18e4a5ef1ad03",
+      "path": "receipts/0896/selected.patch",
+      "sha256": "sha256:d449580b300af5825717895b97b2b7bb543d636b2b0a8f76bcc55de8874fd86b",
+      "bytes": 506
+    },
+    {
+      "ordinal": 897,
+      "revision": "39f8b3c9bb574ea386b262acf36466328b25fc32",
+      "path": "receipts/0897/selected.patch",
+      "sha256": "sha256:d449580b300af5825717895b97b2b7bb543d636b2b0a8f76bcc55de8874fd86b",
+      "bytes": 506
+    },
+    {
+      "ordinal": 898,
+      "revision": "2fcb1090870f3db45fd80546c8499e5289053437",
+      "path": "receipts/0898/selected.patch",
+      "sha256": "sha256:9e5fe7b495edd073a181fd113f26435fef6f17e8e76fc3add8c1b2f9d1a3a1eb",
+      "bytes": 593
+    },
+    {
+      "ordinal": 899,
+      "revision": "db3c085372fcf492ae51d3e67dd4f2c98239c4dd",
+      "path": "receipts/0899/selected.patch",
+      "sha256": "sha256:6d3d1ee9efcc94807c73bb92110309cc94aa77fdbe2acece685e20cd308dc26d",
+      "bytes": 691
+    },
+    {
+      "ordinal": 900,
+      "revision": "835e8e45d18cc0d50e97de814441c7f4b38cb6f5",
+      "path": "receipts/0900/selected.patch",
+      "sha256": "sha256:aac807a5ebb6e61e01294426403cbf77ad4e096b2c700beb19ef45884a33886d",
+      "bytes": 958
+    },
+    {
+      "ordinal": 901,
+      "revision": "8152deb206b3cae77938ad9a473b177eafa4e4e1",
+      "path": "receipts/0901/selected.patch",
+      "sha256": "sha256:ea6658c51695bd11c21ab83ac7187d675dc0956523d57ec591a9892354d7fafb",
+      "bytes": 1086
+    },
+    {
+      "ordinal": 901,
+      "revision": "8152deb206b3cae77938ad9a473b177eafa4e4e1",
+      "path": "receipts/0901/followup-01.txt",
+      "sha256": "sha256:d7f1cb6b8a80bedb2c839d01094cb581b1f728caff4040571bbf918996f4efaa",
+      "bytes": 2307
+    },
+    {
+      "ordinal": 902,
+      "revision": "de16c6b6ddb4a5776cbb003b78af8875fb802f24",
+      "path": "receipts/0902/selected.patch",
+      "sha256": "sha256:4845f07ac0595ca103cde7a7b70b9b76fab7d3379781d08ee827fb10d466424a",
+      "bytes": 607
+    },
+    {
+      "ordinal": 903,
+      "revision": "a616b847bb6de0937d11c08a0f7ef2aeaec845ff",
+      "path": "receipts/0903/selected.patch",
+      "sha256": "sha256:b74b1e86d735e919cd550738f9af7ed6c2d6d5d735985b091e0cacefed375e1d",
+      "bytes": 781
+    },
+    {
+      "ordinal": 904,
+      "revision": "0b6d5ad39222e9f78bcd16af80174a45bed6cfc2",
+      "path": "receipts/0904/selected.patch",
+      "sha256": "sha256:b74b1e86d735e919cd550738f9af7ed6c2d6d5d735985b091e0cacefed375e1d",
+      "bytes": 781
+    },
+    {
+      "ordinal": 905,
+      "revision": "eb6c2c90b33dad52d5fb59eac99aa190e09b2884",
+      "path": "receipts/0905/selected.patch",
+      "sha256": "sha256:32c9357fbf32000a72c15942329f47346d9f25daaab1559b629d357e4c62b112",
+      "bytes": 945
+    },
+    {
+      "ordinal": 905,
+      "revision": "eb6c2c90b33dad52d5fb59eac99aa190e09b2884",
+      "path": "receipts/0905/followup-01.txt",
+      "sha256": "sha256:32e3598ad83d74ff2ff922f62122e57131520d6ebf1b879d529b0ac5f2bad9f0",
+      "bytes": 441
+    },
+    {
+      "ordinal": 906,
+      "revision": "b7e29c0de37103a3ced3c3a66205e239a4628a2a",
+      "path": "receipts/0906/selected.patch",
+      "sha256": "sha256:32c9357fbf32000a72c15942329f47346d9f25daaab1559b629d357e4c62b112",
+      "bytes": 945
+    },
+    {
+      "ordinal": 907,
+      "revision": "d0caf5b78c72929ea2d708ebf0b2a940aa141bc8",
+      "path": "receipts/0907/selected.patch",
+      "sha256": "sha256:44552631e79e8f43bbf6b28f11a81c5ad0ddfa8abbdc7a58cd55ca7fa8e521b8",
+      "bytes": 1396
+    },
+    {
+      "ordinal": 908,
+      "revision": "708ed64040372508c007d49a43bcffa820e540ab",
+      "path": "receipts/0908/selected.patch",
+      "sha256": "sha256:44552631e79e8f43bbf6b28f11a81c5ad0ddfa8abbdc7a58cd55ca7fa8e521b8",
+      "bytes": 1396
+    },
+    {
+      "ordinal": 909,
+      "revision": "eb04c8b3e29c04f514def60311926b5f32dc50ab",
+      "path": "receipts/0909/selected.patch",
+      "sha256": "sha256:f0b3ab93a7493f77d13cf81d6e2946f7f4a25bd732243090464708898eefaad7",
+      "bytes": 985
+    },
+    {
+      "ordinal": 910,
+      "revision": "72e61ed51d1bf779153a6151bf00549d26564602",
+      "path": "receipts/0910/selected.patch",
+      "sha256": "sha256:f0b3ab93a7493f77d13cf81d6e2946f7f4a25bd732243090464708898eefaad7",
+      "bytes": 985
+    },
+    {
+      "ordinal": 911,
+      "revision": "d40f23b3dbb2dc45a581aa0ede954b3b2fe4a811",
+      "path": "receipts/0911/selected.patch",
+      "sha256": "sha256:e34fd12dbf333ffa2c22bb791084a57d4890817f19c289ea48cc8b4370b8bc67",
+      "bytes": 837
+    },
+    {
+      "ordinal": 912,
+      "revision": "e5d5810b9b59973c5f7ec3c94beb0f3a4c28b11a",
+      "path": "receipts/0912/selected.patch",
+      "sha256": "sha256:e34fd12dbf333ffa2c22bb791084a57d4890817f19c289ea48cc8b4370b8bc67",
+      "bytes": 837
+    },
+    {
+      "ordinal": 913,
+      "revision": "3aca1127c861817ff7387a5882084600b0a452d7",
+      "path": "receipts/0913/selected.patch",
+      "sha256": "sha256:ffae0ca5eaae726e44781c560c0635541762fe2eeebfaa981cc7de80dc069d0b",
+      "bytes": 557
+    },
+    {
+      "ordinal": 914,
+      "revision": "cb2f8fd5d231f559982445e707c03d9702255350",
+      "path": "receipts/0914/selected.patch",
+      "sha256": "sha256:ffae0ca5eaae726e44781c560c0635541762fe2eeebfaa981cc7de80dc069d0b",
+      "bytes": 557
+    },
+    {
+      "ordinal": 915,
+      "revision": "426e24b3447cce1497a0cddde39c78c5e014145e",
+      "path": "receipts/0915/selected.patch",
+      "sha256": "sha256:21260cdde7b29f3cb2aaf29baf7962c50415773b35654bd9c6580b363fdba5ed",
+      "bytes": 532
+    },
+    {
+      "ordinal": 916,
+      "revision": "6ed70e24c7155c5cf7199c01120e435c6004aed5",
+      "path": "receipts/0916/selected.patch",
+      "sha256": "sha256:3839c978eab95a462eff3e8c9ce37f95cb0591bd61f5978927c69e6493627f31",
+      "bytes": 886
+    },
+    {
+      "ordinal": 916,
+      "revision": "6ed70e24c7155c5cf7199c01120e435c6004aed5",
+      "path": "receipts/0916/followup-01.txt",
+      "sha256": "sha256:d600af83d568a28cebcd9285c768ee14bb58a59b7cb5d385246a260178703365",
+      "bytes": 1184
+    },
+    {
+      "ordinal": 917,
+      "revision": "4fb93d92ed42ba59bf69cc29f35101b92abf7017",
+      "path": "receipts/0917/selected.patch",
+      "sha256": "sha256:f054b1ef747a0a907084a48424ebbe9b069ddcc78902f61ad7f71393517ec552",
+      "bytes": 1102
+    },
+    {
+      "ordinal": 917,
+      "revision": "4fb93d92ed42ba59bf69cc29f35101b92abf7017",
+      "path": "receipts/0917/followup-01.txt",
+      "sha256": "sha256:2aada300a1e5f09d929e720f2f373c9862f7c3286e6a52696a6fe2dee790f263",
+      "bytes": 624
+    },
+    {
+      "ordinal": 918,
+      "revision": "d68596bcbef5eef80a3aa3967fe6550b56e39996",
+      "path": "receipts/0918/selected.patch",
+      "sha256": "sha256:8636300707bf1c9ba43e836a0f319bb29350e69883841f4b00e3fba71f4fd596",
+      "bytes": 1086
+    },
+    {
+      "ordinal": 918,
+      "revision": "d68596bcbef5eef80a3aa3967fe6550b56e39996",
+      "path": "receipts/0918/followup-01.txt",
+      "sha256": "sha256:017ec6e708257139d8b5bd3da6dbba2f9d064741243f8441ef3c9a2e8b729e52",
+      "bytes": 190
+    },
+    {
+      "ordinal": 919,
+      "revision": "a3a12b54de73457a22d4dc8152316b10e492b98a",
+      "path": "receipts/0919/selected.patch",
+      "sha256": "sha256:264d0a7a7808097d43478a806de52025f18c93bc215fcb6e419c053ee87789aa",
+      "bytes": 992
+    },
+    {
+      "ordinal": 919,
+      "revision": "a3a12b54de73457a22d4dc8152316b10e492b98a",
+      "path": "receipts/0919/followup-01.txt",
+      "sha256": "sha256:3b5307d5961b39dc489b78ddde131d60c28165d873ace9b8ff02d25a80be6ee8",
+      "bytes": 1910
+    },
+    {
+      "ordinal": 920,
+      "revision": "434955eb937633e9e90ed7d8949a5aec839fd41f",
+      "path": "receipts/0920/selected.patch",
+      "sha256": "sha256:6cee0c1c3878b2f9837f959eb39f58b00bb0430675f62b358cfc5febe06f23f0",
+      "bytes": 1054
+    },
+    {
+      "ordinal": 920,
+      "revision": "434955eb937633e9e90ed7d8949a5aec839fd41f",
+      "path": "receipts/0920/followup-01.txt",
+      "sha256": "sha256:e378bc4f73916cd476766559449f158ffd49f36c6bc8c9a6a9110a2c0bcbe6fc",
+      "bytes": 1688
+    },
+    {
+      "ordinal": 921,
+      "revision": "6e5cfa1eb4d98d4a99d4e87574f5b281aaa3494e",
+      "path": "receipts/0921/selected.patch",
+      "sha256": "sha256:ac783ce6ae00d512eb4cc6879e40e7fdefddd2ed0d120c86371c6591d31fa80d",
+      "bytes": 983
+    },
+    {
+      "ordinal": 921,
+      "revision": "6e5cfa1eb4d98d4a99d4e87574f5b281aaa3494e",
+      "path": "receipts/0921/followup-01.txt",
+      "sha256": "sha256:20fc4272e2b153952e6040f4d753949069356f4809775eb83a67e9bf498724bd",
+      "bytes": 678
+    },
+    {
+      "ordinal": 922,
+      "revision": "54bc3a49eca54781c6e84b8153f1aaffba644886",
+      "path": "receipts/0922/selected.patch",
+      "sha256": "sha256:0feddc7cb62c78139ec667faf84b05ca01e0da57e2eafe6ecbbf294359ca191e",
+      "bytes": 547
+    },
+    {
+      "ordinal": 923,
+      "revision": "6aff4b3f10e766f9549a8e2168733bf1168a6dd2",
+      "path": "receipts/0923/selected.patch",
+      "sha256": "sha256:264d0a7a7808097d43478a806de52025f18c93bc215fcb6e419c053ee87789aa",
+      "bytes": 992
+    },
+    {
+      "ordinal": 924,
+      "revision": "103917116756237b777e750195a42aafc86608fb",
+      "path": "receipts/0924/selected.patch",
+      "sha256": "sha256:44552631e79e8f43bbf6b28f11a81c5ad0ddfa8abbdc7a58cd55ca7fa8e521b8",
+      "bytes": 1396
+    },
+    {
+      "ordinal": 925,
+      "revision": "e58b3739b3d938ae9df887baf527cfb935be82c9",
+      "path": "receipts/0925/selected.patch",
+      "sha256": "sha256:25df63b48c434c764fea41292a6d6fd62b8c622921c9307fd9b87e6c2cf07cff",
+      "bytes": 1384
+    },
+    {
+      "ordinal": 926,
+      "revision": "68383661654c102083e07207ee492283b8c8d9fa",
+      "path": "receipts/0926/selected.patch",
+      "sha256": "sha256:3514f217242397a2ee2afbd690bb1896e2ee8162bc63b7c40546b3393eb642ee",
+      "bytes": 503
+    },
+    {
+      "ordinal": 927,
+      "revision": "9ce4ad9758b28f53eda8bf2cbe9ab0ca647b7156",
+      "path": "receipts/0927/selected.patch",
+      "sha256": "sha256:98946025ae57f8c78a3e970d996bdb0effd8825cc84dc642d872ed11bcc98b61",
+      "bytes": 1086
+    },
+    {
+      "ordinal": 928,
+      "revision": "021872931632abb3528527c0ce210efc79d11d16",
+      "path": "receipts/0928/selected.patch",
+      "sha256": "sha256:c97e80ea72154befcc9d4ffea2c80d18a397a14a4b72d96279a1150b39142550",
+      "bytes": 905
+    },
+    {
+      "ordinal": 928,
+      "revision": "021872931632abb3528527c0ce210efc79d11d16",
+      "path": "receipts/0928/followup-01.txt",
+      "sha256": "sha256:b646ab6aaa2c2bae3e4c261f6cd9ee9977820cdf52ebd5f17e403fea201f8904",
+      "bytes": 1198
+    },
+    {
+      "ordinal": 928,
+      "revision": "021872931632abb3528527c0ce210efc79d11d16",
+      "path": "receipts/0928/followup-02.txt",
+      "sha256": "sha256:4d1015aadd68beff7837fcee35e3ae3ebdc06600fd865001101c66512af7e5c7",
+      "bytes": 3779
+    },
+    {
+      "ordinal": 929,
+      "revision": "8384b5facf3d630625072a0389df50f1d42d4d9e",
+      "path": "receipts/0929/selected.patch",
+      "sha256": "sha256:01e4387b6e72df6731733b003179683fd5c7854a95dfdd8040d1012f11b8893c",
+      "bytes": 980
+    },
+    {
+      "ordinal": 930,
+      "revision": "0de8609e6ad6c33442a022c0b0b758fef39f683a",
+      "path": "receipts/0930/selected.patch",
+      "sha256": "sha256:6881d955deef2dc7864148f845e1fccf489ab534a6f1147368a3d66fd97b24a4",
+      "bytes": 533
+    },
+    {
+      "ordinal": 931,
+      "revision": "32c98536b5780ca3704e35d28a0158b8efef1262",
+      "path": "receipts/0931/selected.patch",
+      "sha256": "sha256:9704570099c16763c8834d7f1762c5d9192e7ec7b500f420d95b6f90cc0dd586",
+      "bytes": 373
+    },
+    {
+      "ordinal": 932,
+      "revision": "2f3cbe5e84f26cca0bf5e4106cfb0626b6073d47",
+      "path": "receipts/0932/selected.patch",
+      "sha256": "sha256:d27bf034c1fb39b304c85f890c5921a42c30e989dc222fb50f74d23d9f015065",
+      "bytes": 556
+    },
+    {
+      "ordinal": 933,
+      "revision": "0438a43cb041e849c564e6a2f868a1e58c913de3",
+      "path": "receipts/0933/selected.patch",
+      "sha256": "sha256:d43c47521e7a89648b338bad36e1893b6deb6b62b9765eb1fe24cf80d65cabdc",
+      "bytes": 577
+    },
+    {
+      "ordinal": 934,
+      "revision": "2f83c2654cdbf1562958ad16d06846e8ccb0f873",
+      "path": "receipts/0934/selected.patch",
+      "sha256": "sha256:fac8da21949d2eec97436423ce3d1543399c3704521a0c519df3db592ff07043",
+      "bytes": 569
+    },
+    {
+      "ordinal": 935,
+      "revision": "2620fda5007bd408fe067a0f93c712992aa020c4",
+      "path": "receipts/0935/selected.patch",
+      "sha256": "sha256:2f5b0b6ffdb72bca31ac80509b74ecb8903868ca73a9bbc3eb117c401d9cd378",
+      "bytes": 860
+    },
+    {
+      "ordinal": 936,
+      "revision": "6e882aaceb7a5ed2ddb929933abb434dcfd27b19",
+      "path": "receipts/0936/selected.patch",
+      "sha256": "sha256:8670ff38d3f8e1bce89696fb1d8af4a9b20ce8dbb5e2acddeeb50fc0ceeacc18",
+      "bytes": 896
+    },
+    {
+      "ordinal": 936,
+      "revision": "6e882aaceb7a5ed2ddb929933abb434dcfd27b19",
+      "path": "receipts/0936/followup-01.txt",
+      "sha256": "sha256:3abe1fd3eb8110dcbf29bd1c9176ac343d4019a3ce4cd3877926025ccbf31197",
+      "bytes": 2819
+    },
+    {
+      "ordinal": 937,
+      "revision": "9b8f1e348d7590213add7d5567402ddac1ecd1e5",
+      "path": "receipts/0937/selected.patch",
+      "sha256": "sha256:2f2010609cb7e4838e64b0f105d823bf013090fbbf09a1c4a043ba3eadaf73b6",
+      "bytes": 726
+    },
+    {
+      "ordinal": 938,
+      "revision": "dc5336660b0568c50b19b7fc1d8014eed7d732a3",
+      "path": "receipts/0938/selected.patch",
+      "sha256": "sha256:c997bd9cdd2db7227f0fd11ccf6ab7f3589d2be4fe6c3c851832e64fe818743b",
+      "bytes": 1024
+    },
+    {
+      "ordinal": 939,
+      "revision": "32f32051d06e5a289dd75532b83bd8758daf09b9",
+      "path": "receipts/0939/selected.patch",
+      "sha256": "sha256:9ed9d2aa52e2430857d1a4493d0eaa1eb861a02c591193039e9ddd7b16a9e74b",
+      "bytes": 697
+    },
+    {
+      "ordinal": 939,
+      "revision": "32f32051d06e5a289dd75532b83bd8758daf09b9",
+      "path": "receipts/0939/followup-01.txt",
+      "sha256": "sha256:e757e8585da94a3c4a895e3f0bf727abd978766d7cb18df69ad86db1368109f4",
+      "bytes": 1831
+    },
+    {
+      "ordinal": 940,
+      "revision": "98896bfb3742c6124ca1df443f71d8b658b483bc",
+      "path": "receipts/0940/selected.patch",
+      "sha256": "sha256:f9115cb8986254d538eb9ed59407d43c29ed8d084cb7a501b7160d44fa67188d",
+      "bytes": 1264
+    },
+    {
+      "ordinal": 941,
+      "revision": "36e105ed30e057a3b85a1d125cb9f0a7be40059c",
+      "path": "receipts/0941/selected.patch",
+      "sha256": "sha256:d074ecad67340214e4ea46dbae2e958501c09d40d9a17e7db24d0cd24112e5b5",
+      "bytes": 1130
+    },
+    {
+      "ordinal": 941,
+      "revision": "36e105ed30e057a3b85a1d125cb9f0a7be40059c",
+      "path": "receipts/0941/followup-01.txt",
+      "sha256": "sha256:e3f2284d11a3e8cf38fdb3ef08029f053443d0858f0efe18f9c007838b88c277",
+      "bytes": 3730
+    },
+    {
+      "ordinal": 941,
+      "revision": "36e105ed30e057a3b85a1d125cb9f0a7be40059c",
+      "path": "receipts/0941/followup-02.txt",
+      "sha256": "sha256:4b1d9c720711eb2a59cff949cfa703bacc17b09768ec743c7ba6aef2a74a74b8",
+      "bytes": 1818
+    },
+    {
+      "ordinal": 942,
+      "revision": "574bdc16f6e248fb40b0bddfd8cf077dffd18b54",
+      "path": "receipts/0942/selected.patch",
+      "sha256": "sha256:28aed5ccbeb3e3b14c8005fc6e84950c5e0bd50c071a6a8c688b56d4776345cc",
+      "bytes": 893
+    },
+    {
+      "ordinal": 943,
+      "revision": "f1db2164eaa4d33062b667b4eae526cc3de20373",
+      "path": "receipts/0943/selected.patch",
+      "sha256": "sha256:399c7594243b5631ff873b710dddff7f9502543baf5350d0782d7c06398dd903",
+      "bytes": 1351
+    },
+    {
+      "ordinal": 944,
+      "revision": "ae27a14e3b8b556d8629f73778c2d1a2353f9125",
+      "path": "receipts/0944/selected.patch",
+      "sha256": "sha256:8bc1ce98890dade2c14acee37e3bfd459022029b9972b68c3ae71f71e167e258",
+      "bytes": 959
+    },
+    {
+      "ordinal": 945,
+      "revision": "07bd782755b82a1e5960a508e6dcc44a18118812",
+      "path": "receipts/0945/selected.patch",
+      "sha256": "sha256:8bc1ce98890dade2c14acee37e3bfd459022029b9972b68c3ae71f71e167e258",
+      "bytes": 959
+    },
+    {
+      "ordinal": 946,
+      "revision": "45869e699f96885017337a1940c186cde5d0a3bf",
+      "path": "receipts/0946/selected.patch",
+      "sha256": "sha256:1dda9478b3b3e2f2d60ee4eb5467e7533a6a27e0d6f8f316ac73fd665d2726e3",
+      "bytes": 1315
+    },
+    {
+      "ordinal": 947,
+      "revision": "78989137520e4916c66c4631c4ecace1ad24f590",
+      "path": "receipts/0947/selected.patch",
+      "sha256": "sha256:1dda9478b3b3e2f2d60ee4eb5467e7533a6a27e0d6f8f316ac73fd665d2726e3",
+      "bytes": 1315
+    },
+    {
+      "ordinal": 948,
+      "revision": "1d0b2808c7a9e92182b70eedc2e67baa4f5e8a40",
+      "path": "receipts/0948/selected.patch",
+      "sha256": "sha256:eb25b7eded4f787ab5888ce2ef51fb581c2f4f861b5f039f2788d0e4178f8d69",
+      "bytes": 756
+    },
+    {
+      "ordinal": 949,
+      "revision": "2fbd423358ee63046a0ac2b169a7a7ea566425d7",
+      "path": "receipts/0949/selected.patch",
+      "sha256": "sha256:eb25b7eded4f787ab5888ce2ef51fb581c2f4f861b5f039f2788d0e4178f8d69",
+      "bytes": 756
+    },
+    {
+      "ordinal": 950,
+      "revision": "058c03684a52c1f79f67acbb9a39edfc282b7010",
+      "path": "receipts/0950/selected.patch",
+      "sha256": "sha256:cfe8db70e229c2ce17962dcac012063c3412a685119620c72119e20f5e349060",
+      "bytes": 956
+    },
+    {
+      "ordinal": 951,
+      "revision": "3a31d708f82346a9de1851e3d4696a08cb470d48",
+      "path": "receipts/0951/selected.patch",
+      "sha256": "sha256:d208aec0df0270dd4dd6edd255f25ad0f7c3c97a4eb0f06801ae341122011c06",
+      "bytes": 852
+    },
+    {
+      "ordinal": 952,
+      "revision": "8cf86a5d9817702b4b98420ed760464761b1ba1d",
+      "path": "receipts/0952/selected.patch",
+      "sha256": "sha256:41f053208a8a09cdb336016bd2975bb0998a7cc44e465991c765ecf6a24e70dd",
+      "bytes": 429
+    },
+    {
+      "ordinal": 953,
+      "revision": "bac6277012664eff799780e670cd7dbef4a5dc6d",
+      "path": "receipts/0953/selected.patch",
+      "sha256": "sha256:da12848f17fb8d231a20f8333159d3eb67a5616a1938e3b6fd3eef7cf0e2b000",
+      "bytes": 1133
+    },
+    {
+      "ordinal": 954,
+      "revision": "0df416b8425779e0cf8fe64b95bf7d7b60aae062",
+      "path": "receipts/0954/selected.patch",
+      "sha256": "sha256:fb04f938fa57fe810dd44945e0db67ec222c3cb80eaa533c557cee6ba1bea40d",
+      "bytes": 824
+    },
+    {
+      "ordinal": 955,
+      "revision": "f3cc01f6596f6df80af11d259f00e81f87dc05cf",
+      "path": "receipts/0955/selected.patch",
+      "sha256": "sha256:87ec3149ee1f3a5779cb8e5c99347b511ec7054b24d95b756be6e0b88f43b00c",
+      "bytes": 1357
+    },
+    {
+      "ordinal": 956,
+      "revision": "e6c3f2838b81179d81ade6e05e31f50f779fa662",
+      "path": "receipts/0956/selected.patch",
+      "sha256": "sha256:bacc405cea167df87547f6f6759e6338ef603783ce85bd8ced05b94d32a1dd9d",
+      "bytes": 1131
+    },
+    {
+      "ordinal": 957,
+      "revision": "b2238c4f44139259cf6ed5b16c327dc651e32120",
+      "path": "receipts/0957/selected.patch",
+      "sha256": "sha256:b94f6e258ac339f43eff97b4cd4b78ad602b3317de1d4ab4a20819f78588f35d",
+      "bytes": 478
+    },
+    {
+      "ordinal": 958,
+      "revision": "ea5c94a5145f64883bf250931273929a4218a8a6",
+      "path": "receipts/0958/selected.patch",
+      "sha256": "sha256:5b1bda945bebf5b03d6deaea2971dee2bceae6f074c9b43425f57064df1239d3",
+      "bytes": 1274
+    },
+    {
+      "ordinal": 959,
+      "revision": "665f67143f1092bf0c94c3e535b9a4793fbe91d2",
+      "path": "receipts/0959/selected.patch",
+      "sha256": "sha256:44d24fbbe313cc9151f02e382fba7d487b06d2211c034fe844bfe1458cdd901f",
+      "bytes": 671
+    },
+    {
+      "ordinal": 960,
+      "revision": "80cc213dca51579ef34860b498a266cb0142fdb9",
+      "path": "receipts/0960/selected.patch",
+      "sha256": "sha256:601e772ab463503ae5e746387950e7503e8fd8b510e52c8b5fe2dfcc739a643f",
+      "bytes": 592
+    },
+    {
+      "ordinal": 961,
+      "revision": "3c06947d2bffb550ef97d393741fcf4bd83fcd72",
+      "path": "receipts/0961/selected.patch",
+      "sha256": "sha256:1d85fca930eadfa588ea64fbaa0469113382c5c05af136333105565f981d7761",
+      "bytes": 668
+    },
+    {
+      "ordinal": 962,
+      "revision": "5c375034c602b6e67061c10621917b87b833370e",
+      "path": "receipts/0962/selected.patch",
+      "sha256": "sha256:95c40a63fe42331d17be280ba2f5179760d4ed173dff80798675916b7b103521",
+      "bytes": 4567
+    },
+    {
+      "ordinal": 963,
+      "revision": "204400437a0d06a4f6ca594cc4b4dac4eaca6019",
+      "path": "receipts/0963/selected.patch",
+      "sha256": "sha256:7beac84f77851f7342a7040e12868162d89438c46f5b1fdda50f19e970cccbf1",
+      "bytes": 508
+    },
+    {
+      "ordinal": 964,
+      "revision": "7ae56bcdd1ff2b459ba3dfb7fcd4c4357adab954",
+      "path": "receipts/0964/selected.patch",
+      "sha256": "sha256:5f9257f096563a1325ffef3e07bad223364f2591c468c4f71412fcce2318a576",
+      "bytes": 554
+    },
+    {
+      "ordinal": 965,
+      "revision": "8d1d7b7603353869378c10468e2df4b6888f39dd",
+      "path": "receipts/0965/selected.patch",
+      "sha256": "sha256:498b45174222cc9993448a0b7181625f39e33281750a9aef3c2278783ebc697f",
+      "bytes": 728
+    },
+    {
+      "ordinal": 966,
+      "revision": "8f9100f6a9cef2ec4d66179bfbd1292d73895bbf",
+      "path": "receipts/0966/selected.patch",
+      "sha256": "sha256:03b5acf4d6ebf635c52021f4f1f1342b5b23446c8f6647f32c3add86e6bfe33c",
+      "bytes": 2181
+    },
+    {
+      "ordinal": 967,
+      "revision": "130f2d5c401aa0092f0f72a80af83005eba37ea4",
+      "path": "receipts/0967/selected.patch",
+      "sha256": "sha256:76e93ecbf6c12a70e56ab7530de39b108f837df64026164755afb3f3c3000d54",
+      "bytes": 1414
+    },
+    {
+      "ordinal": 968,
+      "revision": "29d1f60e80678ba550e34adaa9b4384765d69c06",
+      "path": "receipts/0968/selected.patch",
+      "sha256": "sha256:e24101a6adfb7455a42038329b25a7fb2ba4726ce9f3660e7d87f2e1cd8cd3ec",
+      "bytes": 1136
+    },
+    {
+      "ordinal": 969,
+      "revision": "31c9565efaabff1b824aae8fa438c3727c1c37d5",
+      "path": "receipts/0969/selected.patch",
+      "sha256": "sha256:a0dd182973d80db39e975196a5e8419e56ea24c1d68826f3968db06498ca5d63",
+      "bytes": 718
+    },
+    {
+      "ordinal": 970,
+      "revision": "66bcfab9c8e959b655f88e2a30b0933c1115d504",
+      "path": "receipts/0970/selected.patch",
+      "sha256": "sha256:ba4c3df0e896dc4a2220cfd84920d871da494c2bef7fb033d4c2f8b43016a291",
+      "bytes": 461
+    },
+    {
+      "ordinal": 971,
+      "revision": "57c7ed6159b75ad3ba6436a96ec1d106cc35a355",
+      "path": "receipts/0971/selected.patch",
+      "sha256": "sha256:cd8795bf1b932d94987eb78a15665a763cbfd42a54c2f44ea94d4a78cba4c55d",
+      "bytes": 1196
+    },
+    {
+      "ordinal": 972,
+      "revision": "60ba5aef4a476d1757b76e88659648209c4fbd53",
+      "path": "receipts/0972/selected.patch",
+      "sha256": "sha256:14d19a58ffe49f553b3fa0d8459efd740af66c4028078aa07de1112a2ca5cda4",
+      "bytes": 475
+    },
+    {
+      "ordinal": 973,
+      "revision": "cb4674cec6f997c8f78561b4543ddffca4690047",
+      "path": "receipts/0973/selected.patch",
+      "sha256": "sha256:807fdd37786ace4870b09d3925e8437f4e0f86b44f86acec1741cc5242baef04",
+      "bytes": 568
+    },
+    {
+      "ordinal": 974,
+      "revision": "0da51ca2f86be11588d610502fdf2909e928a763",
+      "path": "receipts/0974/selected.patch",
+      "sha256": "sha256:97528c03f324a849d9e94a80a4d0fd03e889318d8ed92339ad17d384394292be",
+      "bytes": 624
+    },
+    {
+      "ordinal": 975,
+      "revision": "d21c2aa4d5b5528d3cda0af759e323942857f883",
+      "path": "receipts/0975/selected.patch",
+      "sha256": "sha256:035d7db0cb8f035206ad7fc8f0518bec779d63567919435007074f91cb88bf50",
+      "bytes": 612
+    },
+    {
+      "ordinal": 976,
+      "revision": "ad22c83f45baaffdd989eac5c2d688d0283467c7",
+      "path": "receipts/0976/selected.patch",
+      "sha256": "sha256:2c58d230ab7690e30d88a16a85e13d85f090bcd1dee8c53b83a5547d4486be75",
+      "bytes": 793
+    },
+    {
+      "ordinal": 977,
+      "revision": "0b2ce53f89f8d6ff0b95a2da8f97a958ea2bb777",
+      "path": "receipts/0977/selected.patch",
+      "sha256": "sha256:db060237f5e21c876e0565ded6972abe23f9d9dfa5678a118963b424f0c80a72",
+      "bytes": 1173
+    },
+    {
+      "ordinal": 978,
+      "revision": "4fa6454ce031c96d0f0f42cf8783be921a8195cf",
+      "path": "receipts/0978/selected.patch",
+      "sha256": "sha256:c72e183b8196cc76f32b46a2d6041c49616837fa08d073e6d8d959b84bbfa842",
+      "bytes": 1626
+    },
+    {
+      "ordinal": 979,
+      "revision": "4302455641bd1c12c18fdd7f56943051273f3810",
+      "path": "receipts/0979/selected.patch",
+      "sha256": "sha256:4628fb65570fd8910a71ba2e74b262d52ae17f3cf428be4935db04b3567d16e3",
+      "bytes": 569
+    },
+    {
+      "ordinal": 980,
+      "revision": "ec5c34d539e8f1f84b7f5bcbad4addc645f451e0",
+      "path": "receipts/0980/selected.patch",
+      "sha256": "sha256:994185ff43c81c126d15b7712a32262697440c82e0de79849be368fe576df249",
+      "bytes": 538
+    },
+    {
+      "ordinal": 981,
+      "revision": "67aa59fb33c9a618325c6fa13150ccf858c3d4cc",
+      "path": "receipts/0981/selected.patch",
+      "sha256": "sha256:4f72a2016f21ea13f33c696c925135da3278d0ec2ddae554185d8ed401b64cc8",
+      "bytes": 639
+    },
+    {
+      "ordinal": 982,
+      "revision": "e41c4c17b6e652b0830030a732b3b6459ce357aa",
+      "path": "receipts/0982/selected.patch",
+      "sha256": "sha256:90baa58a8e000bb66ea9925a9f4c24f7d0e94046c5a20e62d269814c53f8cb87",
+      "bytes": 376
+    },
+    {
+      "ordinal": 983,
+      "revision": "ef899717c85614612b3c1de3651a990546ab66c3",
+      "path": "receipts/0983/selected.patch",
+      "sha256": "sha256:80962ec5e59894c7d4abe707192185daeb8e6fe504479b7ab5e80636a73edbe5",
+      "bytes": 1678
+    },
+    {
+      "ordinal": 984,
+      "revision": "41403df4854a262ad466a7ea2c7c45456e8927ec",
+      "path": "receipts/0984/selected.patch",
+      "sha256": "sha256:05f9d3f5ac89a3f4f55212b1120f8c6474fe7481108bf53eb79e5935902145c1",
+      "bytes": 1679
+    },
+    {
+      "ordinal": 985,
+      "revision": "5ac6c4a82ce9366c2881042758ef5e84ec5c75f8",
+      "path": "receipts/0985/selected.patch",
+      "sha256": "sha256:39e9483f4dcf3eed58c86389495b6a2a7b9fde73fec00d93b167bd6de4a5a88c",
+      "bytes": 1482
+    },
+    {
+      "ordinal": 986,
+      "revision": "59efb21d6eae5b07c3509e923e585a57a5aac4a2",
+      "path": "receipts/0986/selected.patch",
+      "sha256": "sha256:6cadea220f66f457c11fe47262f0f45490e1f57652ec6c18a98e039d9432a01c",
+      "bytes": 927
+    },
+    {
+      "ordinal": 987,
+      "revision": "cf0a317d277d6d552657f16db5351bf67e03308a",
+      "path": "receipts/0987/selected.patch",
+      "sha256": "sha256:5d7fb02483be74a40e6d07b9179ff32fb8cda7b76a6cda2ce405bc4534d578db",
+      "bytes": 934
+    },
+    {
+      "ordinal": 988,
+      "revision": "eda86d00a32f93eaca29d8a915c32dc7f54e3c5f",
+      "path": "receipts/0988/selected.patch",
+      "sha256": "sha256:890776aa1f35584613b0521bdde0c122cf6b1f392c3adc2393eefbb93b14ed98",
+      "bytes": 640
+    },
+    {
+      "ordinal": 988,
+      "revision": "eda86d00a32f93eaca29d8a915c32dc7f54e3c5f",
+      "path": "receipts/0988/followup-01.txt",
+      "sha256": "sha256:8c4863954c6738dabf7d76615b806d582506a515680372e9d196c2eb502785a0",
+      "bytes": 1358
+    },
+    {
+      "ordinal": 989,
+      "revision": "34df4816d905d9d482cad37393cf68b92e96dbe6",
+      "path": "receipts/0989/selected.patch",
+      "sha256": "sha256:a5280354c60b036942933d8d8a576e1c514aacd2f6f68f7352b89c58f5b9a2c3",
+      "bytes": 924
+    },
+    {
+      "ordinal": 990,
+      "revision": "c83a3620b7c95e368b34bd8076e4bd7e846d688d",
+      "path": "receipts/0990/selected.patch",
+      "sha256": "sha256:a3df7aa02e4fbe8608beb2d67ddf53fd03f70dbcaf47a9e9a3e5b0cb84c41270",
+      "bytes": 1278
+    },
+    {
+      "ordinal": 991,
+      "revision": "c6a971de766778d8fa78ad73255c629d8569297e",
+      "path": "receipts/0991/selected.patch",
+      "sha256": "sha256:3b4db7a23b91f4215d7b4f1ae46be5db4df82dc43fd5dddde1bb47ff448700d3",
+      "bytes": 746
+    },
+    {
+      "ordinal": 992,
+      "revision": "5dcffb53f0f6bd7c0e3f9b1efb43d3866d7ec712",
+      "path": "receipts/0992/selected.patch",
+      "sha256": "sha256:de7ac4615fdac3acbf8eaa5c2a0a8edf1625200f009201266e705bde8c801147",
+      "bytes": 653
+    },
+    {
+      "ordinal": 992,
+      "revision": "5dcffb53f0f6bd7c0e3f9b1efb43d3866d7ec712",
+      "path": "receipts/0992/followup-01.txt",
+      "sha256": "sha256:5e607ed50f9e08528c0ef266d2c2622c9462c8a6985b65a6df03e6f316750248",
+      "bytes": 4269
+    },
+    {
+      "ordinal": 993,
+      "revision": "e012afbc0cbe65eca5c1f299d647283e97d5d3cd",
+      "path": "receipts/0993/selected.patch",
+      "sha256": "sha256:dc09882497e8a05615c65707e5f388480b806c5436f13a265a2f5cb5f8e5514b",
+      "bytes": 602
+    },
+    {
+      "ordinal": 994,
+      "revision": "fa322613af4f4cef594817b979b2ec410f0de129",
+      "path": "receipts/0994/selected.patch",
+      "sha256": "sha256:881b4abdaf0c34e15eea505071431250f30b1ada624503cb0545d7850d359c89",
+      "bytes": 525
+    },
+    {
+      "ordinal": 995,
+      "revision": "1c38e37c07a030670885f057ede52c7914191b31",
+      "path": "receipts/0995/selected.patch",
+      "sha256": "sha256:7402b8832146e7156900915a4d1b2133cd8a80e0cb1d7f117a9c9dd66eef11b1",
+      "bytes": 982
+    },
+    {
+      "ordinal": 996,
+      "revision": "1f00fadd23dc932b67f22cf1af8b5fca63147d66",
+      "path": "receipts/0996/selected.patch",
+      "sha256": "sha256:6fd083bde812b307e3f7188deef72d3e9cd8e5fb0416d857871d5e29bdea314d",
+      "bytes": 453
+    },
+    {
+      "ordinal": 997,
+      "revision": "ee078f1a8b5d7bcefc6c5e77a7e79dcac9ba4b27",
+      "path": "receipts/0997/selected.patch",
+      "sha256": "sha256:0abb1a94a0a57551dea5b22569f427c49342ab9ac0d7fa706543ba0556a6ff61",
+      "bytes": 667
+    },
+    {
+      "ordinal": 998,
+      "revision": "9f479dd337dba048b454484690baf77fb66d67db",
+      "path": "receipts/0998/selected.patch",
+      "sha256": "sha256:7be9c1d135332c19be941738c6af782c4967188345eb27ab33882919dfe86aee",
+      "bytes": 582
+    },
+    {
+      "ordinal": 999,
+      "revision": "b3a53c29dbe08392e40ade0269740e049ef00f5d",
+      "path": "receipts/0999/selected.patch",
+      "sha256": "sha256:7be9c1d135332c19be941738c6af782c4967188345eb27ab33882919dfe86aee",
+      "bytes": 582
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/selected.patch",
+      "sha256": "sha256:fe5dd8fd929551183c2c593f3eca165b199e0cbe7905b2603f07a68c461a5975",
+      "bytes": 1148
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/followup-01.txt",
+      "sha256": "sha256:9f9f21fbd484f2c4ac80b28a4b03dea55dc6df5aa780b1932e60940a9c1733cf",
+      "bytes": 1072
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/followup-02.txt",
+      "sha256": "sha256:109c064bb3a345fb9c5ef3cf64ce33f46af66351790b25a8d66eabb2e65f766e",
+      "bytes": 701
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/followup-03.txt",
+      "sha256": "sha256:bc20a4275f2de47e1c06d887d6d05f4d526b34445c5d4c378e7c3093aef50ca8",
+      "bytes": 827
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/followup-04.txt",
+      "sha256": "sha256:7ad1ebdb04da0bc23fbc211a87f133a7c6f77a8b318c609548b1d11627d6153a",
+      "bytes": 1186
+    },
+    {
+      "ordinal": 1000,
+      "revision": "cb3cf1c20960c9b67129df8ed5684c4b1769d61d",
+      "path": "receipts/1000/followup-05.txt",
+      "sha256": "sha256:2ed0fe7dcfa73e676d4c50193236e09bc8e837181f55f5cd536c45a13419e940",
+      "bytes": 765
+    }
+  ]
+}

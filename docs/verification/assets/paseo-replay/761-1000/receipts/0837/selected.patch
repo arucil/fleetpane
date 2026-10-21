@@ -1,0 +1,23 @@
+FILE packages/app/src/hooks/use-audio-player.web.ts
+RANGE {"path":"packages/app/src/hooks/use-audio-player.web.ts","old_lines":[11,12],"new_lines":[13,32],"diff_block_lines":[19,39],"hunk_header":"@@ -7,21 +7,269 @@ export interface AudioPlayerOptions {","substantive_changed_lines":16}
++ * - formats supported by `AudioContext.decodeAudioData` (e.g. mp3)
+  */
+-export function useAudioPlayer(_options?: AudioPlayerOptions) {
++export function useAudioPlayer(options?: AudioPlayerOptions) {
++  const [isPlayingState, setIsPlayingState] = useState(false);
++
++  type QueuedAudio = {
++    audioData: Blob;
++    resolve: (duration: number) => void;
++    reject: (error: Error) => void;
++  };
++
++  const audioContextRef = useRef<AudioContext | null>(null);
++  const queueRef = useRef<QueuedAudio[]>([]);
++  const suppressedQueueRef = useRef<QueuedAudio[]>([]);
++  const isProcessingQueueRef = useRef(false);
++  const checkIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
++  const activePlaybackRef = useRef<{
++    source: AudioBufferSourceNode;
++    resolve: (duration: number) => void;
++    reject: (error: Error) => void;

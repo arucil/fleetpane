@@ -1,0 +1,17 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[548,553],"new_lines":[548,559],"diff_block_lines":[5,19],"hunk_header":"@@ -548,6 +548,12 @@ export async function getCheckoutDiff(","substantive_changed_lines":6}
+@@ -548,6 +548,12 @@ export async function getCheckoutDiff(
+     } else {
+       const normalizedBaseRef = normalizeLocalBranchRefName(baseRef);
+-      // Diff base ref against working tree (includes uncommitted changes)
+-      const { stdout: trackedDiff } = await execAsync(`git diff ${normalizedBaseRef}`, {
++      // Find the merge-base (common ancestor) to diff only changes on this branch
++      const { stdout: mergeBaseOut } = await execAsync(
++        `git merge-base ${normalizedBaseRef} HEAD`,
++        { cwd, env: READ_ONLY_GIT_ENV }
++      );
++      const mergeBase = mergeBaseOut.trim();
++      // Diff from merge-base to working tree (includes uncommitted changes)
++      const { stdout: trackedDiff } = await execAsync(`git diff ${mergeBase}`, {
+         cwd,
+         env: READ_ONLY_GIT_ENV,

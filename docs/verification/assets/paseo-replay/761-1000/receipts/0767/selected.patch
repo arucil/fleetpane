@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/daemon/restart.ts
+RANGE {"path":"packages/cli/src/commands/daemon/restart.ts","old_lines":[0,0],"new_lines":[3,32],"diff_block_lines":[9,38],"hunk_header":"@@ -0,0 +1,51 @@","substantive_changed_lines":20}
++import { connectToDaemon, getDaemonHost } from '../../utils/client.js'
++
++export function restartCommand(): Command {
++  return new Command('restart')
++    .description('Restart the daemon')
++    .option('--host <host>', 'Daemon host:port (default: localhost:6767)')
++    .action(async (options: { host?: string }) => {
++      await runRestart(options)
++    })
++}
++
++async function runRestart(options: { host?: string }): Promise<void> {
++  const host = getDaemonHost(options)
++
++  let client
++  try {
++    client = await connectToDaemon(options)
++  } catch {
++    console.log(chalk.yellow('Daemon is not running'))
++    console.log(chalk.dim(`Tried to connect to ${host}`))
++    console.log()
++    console.log(chalk.dim('Start the daemon with:'))
++    console.log(chalk.dim('  paseo daemon start'))
++    process.exit(1)
++  }
++
++  try {
++    console.log(chalk.dim('Restarting daemon...'))
++
++    // Request server restart

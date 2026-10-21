@@ -1,0 +1,23 @@
+FILE packages/app/unistyles.md
+RANGE {"path":"packages/app/unistyles.md","old_lines":[89,109],"new_lines":[0,0],"diff_block_lines":[95,115],"hunk_header":"@@ -1,8616 +0,0 @@","substantive_changed_lines":7}
+-const settings = {
+-    initialTheme: () => {
+-        // get preferred theme from user's preferences/MMKV/SQL/StanJS etc.
+-
+-
+-        return storage.getString('preferredTheme') ?? 'light'
+-    }
+-}
+-
+-
+-// or with adaptive themes
+-const settings = {
+-    adaptiveThemes: true
+-}
+-```
+-
+-Note
+-
+-In the Unistyles 3.0 setting both `initialTheme` and `adaptiveThemes` will cause an error. These options are mutually exclusive.
+-
+-### TypeScript Types (Optional)

@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 818,
+  "revision": "303a82d1c79722f16ce7ca5a27421f8770293218",
+  "date": "2026-02-02T21:35:50+07:00",
+  "committer_date": "2026-02-02T21:35:50+07:00",
+  "parents": [
+    "e9325d92be29247fbfde4a3c77e968c296bc9a6d"
+  ],
+  "subject": "feat: add provider availability check before creating sessions",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts"
+  ],
+  "source_receipt_digest": "sha256:6afeb6c2b319ca047a8d67fec7c36e5de492593dd11d77487e69e989f33424cb",
+  "diff_tree_digest": "sha256:020b78b6cfd6d617b20a0922f609932da4ce0818b5509489e68cb0bac3171265",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        404,
+        407
+      ],
+      "new_lines": [
+        405,
+        417
+      ],
+      "diff_block_lines": [
+        9,
+        22
+      ],
+      "hunk_header": "@@ -404,4 +405,13 @@ export class ClaudeAgentClient implements AgentClient {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 30,
+  "receipt_file": "receipts/0818/selected.patch"
+}

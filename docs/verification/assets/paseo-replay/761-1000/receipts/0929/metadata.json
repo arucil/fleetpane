@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 929,
+  "revision": "8384b5facf3d630625072a0389df50f1d42d4d9e",
+  "date": "2026-02-04T23:41:53+07:00",
+  "committer_date": "2026-02-04T23:41:53+07:00",
+  "parents": [
+    "021872931632abb3528527c0ce210efc79d11d16"
+  ],
+  "subject": "Fix CI + add relay deploy + latency probes",
+  "diff_tree_paths": [
+    "A\t.github/workflows/deploy-relay.yml",
+    "M\t.github/workflows/server-ci.yml",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:01e4387b6e72df6731733b003179683fd5c7854a95dfdd8040d1012f11b8893c",
+  "diff_tree_digest": "sha256:a5c7c47377f40b7cc38401d8f014925e3b1dad9d7e46e26d29a5df2bdbfc7792",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        758,
+        759
+      ],
+      "new_lines": [
+        773,
+        793
+      ],
+      "diff_block_lines": [
+        23,
+        43
+      ],
+      "hunk_header": "@@ -756,4 +756,38 @@ export class DaemonClient {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 114,
+  "receipt_file": "receipts/0929/selected.patch"
+}

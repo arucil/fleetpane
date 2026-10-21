@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 866,
+  "revision": "bceac42ec9730c84a18298d8f59b80284a89918e",
+  "date": "2026-02-04T11:27:04+07:00",
+  "committer_date": "2026-02-04T11:27:04+07:00",
+  "parents": [
+    "cec9e3b42bbce0a2f6a3a98bbb2986bf4e88f2ce"
+  ],
+  "subject": "Restore input focus after Cmd+K and focus input on agent switch",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/stores/keyboard-nav-store.ts"
+  ],
+  "source_receipt_digest": "sha256:04d6dd125af6c6a79f4318694b3a9525dd125eaeaf0d3191d15c739fa93fb4c6",
+  "diff_tree_digest": "sha256:ddd45e20d67cf8a359c22e5447e6298dbb2858e367336d8d94a7704a1b33fe2e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        354,
+        354
+      ],
+      "new_lines": [
+        359,
+        379
+      ],
+      "diff_block_lines": [
+        32,
+        52
+      ],
+      "hunk_header": "@@ -353,4 +358,33 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 53,
+  "receipt_file": "receipts/0866/selected.patch"
+}

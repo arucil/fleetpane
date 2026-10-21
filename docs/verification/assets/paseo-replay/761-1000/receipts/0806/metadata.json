@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 806,
+  "revision": "5a424145256ebd58e79ffdb7c91ce84ef4f79652",
+  "date": "2026-02-02T14:08:00+07:00",
+  "committer_date": "2026-02-02T14:08:00+07:00",
+  "parents": [
+    "3e989009299b4879547530b722fdca6991a76ad3"
+  ],
+  "subject": "fix: improve E2E test reliability and fix openSettings helper",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/permission-prompt.spec.ts"
+  ],
+  "source_receipt_digest": "sha256:3f3cbc97756d9c4502bd0bf87ebe02d94be8c8b96623542fff29b4efc2d9e2aa",
+  "diff_tree_digest": "sha256:d3746dfdda4ea217e952c79041030b30008eb74794c81b6aaf23bd918c7e539e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/e2e/helpers/app.ts",
+      "old_lines": [
+        426,
+        427
+      ],
+      "new_lines": [
+        425,
+        444
+      ],
+      "diff_block_lines": [
+        18,
+        38
+      ],
+      "hunk_header": "@@ -424,6 +423,29 @@ export const denyPermission = async (page: Page) => {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 20,
+  "receipt_file": "receipts/0806/selected.patch"
+}

@@ -1,0 +1,71 @@
+              currentModeId: snapshot.currentModeId,
+              availableModes: snapshot.availableModes,
+              lastMessage: result.lastMessage,
+              permission: sanitizePermissionRequest(result.permission),
+            };
+            const validJson = ensureValidJson(responseData);
+
+            return {
+              content: [],
+              structuredContent: validJson,
+            };
+          }
+        } catch (error) {
+          childLogger.error(
+            { err: error, agentId: snapshot.id },
+            "Failed to run initial prompt"
+          );
+        }
+      }
+
+      return {
+        content: [],
+        structuredContent: ensureValidJson({
+          agentId: snapshot.id,
+          type: provider,
+          status: snapshot.lifecycle,
+          cwd: snapshot.cwd,
+          currentModeId: snapshot.currentModeId,
+          availableModes: snapshot.availableModes,
+          lastMessage: null,
+          permission: null,
+        }),
+      };
+    }
+  );
+
+  server.registerTool(
+    "wait_for_agent",
+    {
+      title: "Wait For Agent",
+      description:
+        "Block until the agent requests permission or the current run completes. Returns the pending permission (if any) and recent activity summary.",
+      inputSchema: {
+        agentId: z
+          .string()
+          .describe("Agent identifier returned by the create_agent tool"),
+      },
+      outputSchema: {
+        agentId: z.string(),
+        status: AgentStatusEnum,
+        permission: AgentPermissionRequestPayloadSchema.nullable(),
+        lastMessage: z.string().nullable(),
+      },
+    },
+    async ({ agentId }, { signal }) => {
+      const abortController = new AbortController();
+      const cleanupFns: Array<() => void> = [];
+
+      const cleanup = () => {
+        while (cleanupFns.length) {
+          const fn = cleanupFns.pop();
+          try {
+            fn?.();
+          } catch {
+            // ignore cleanup errors
+          }
+        }
+      };
+
+      const forwardExternalAbort = () => {
+        if (!abortController.signal.aborted) {

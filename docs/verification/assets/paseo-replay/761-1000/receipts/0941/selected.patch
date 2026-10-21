@@ -1,0 +1,23 @@
+FILE packages/relay/src/cloudflare-adapter.ts
+RANGE {"path":"packages/relay/src/cloudflare-adapter.ts","old_lines":[74,74],"new_lines":[75,95],"diff_block_lines":[13,33],"hunk_header":"@@ -73,8 +74,61 @@ export class RelayDurableObject {","substantive_changed_lines":15}
+ 
++  private bufferClientFrame(clientId: string, message: string | ArrayBuffer): void {
++    const existing = this.pendingClientFrames.get(clientId) ?? [];
++    existing.push(message);
++    // Prevent unbounded memory growth if a daemon never connects.
++    if (existing.length > 200) {
++      existing.splice(0, existing.length - 200);
++    }
++    this.pendingClientFrames.set(clientId, existing);
++  }
++
++  private flushClientFrames(clientId: string, serverWs: WebSocket): void {
++    const frames = this.pendingClientFrames.get(clientId);
++    if (!frames || frames.length === 0) return;
++    this.pendingClientFrames.delete(clientId);
++    for (const frame of frames) {
++      try {
++        serverWs.send(frame);
++      } catch {
++        // If we can't flush, re-buffer and let the daemon re-establish.
++        this.bufferClientFrame(clientId, frame);

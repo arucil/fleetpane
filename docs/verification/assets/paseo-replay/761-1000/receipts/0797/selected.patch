@@ -1,0 +1,23 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[618,627],"new_lines":[618,630],"diff_block_lines":[6,26],"hunk_header":"@@ -618,12 +618,23 @@ function AgentScreenContent({","substantive_changed_lines":17}
+               <Pressable onPress={toggleFileExplorer} style={styles.menuButton}>
+                 {isMobile ? (
+-                  <Folder
+-                    size={20}
+-                    color={
+-                      isExplorerOpen
+-                        ? theme.colors.foreground
+-                        : theme.colors.foregroundMuted
+-                    }
+-                  />
++                  checkout?.isGit ? (
++                    <GitBranch
++                      size={20}
++                      color={
++                        isExplorerOpen
++                          ? theme.colors.foreground
++                          : theme.colors.foregroundMuted
++                      }
++                    />
++                  ) : (
++                    <Folder

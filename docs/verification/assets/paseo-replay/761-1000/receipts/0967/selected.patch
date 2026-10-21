@@ -1,0 +1,23 @@
+FILE packages/server/AGENT_REFACTOR_PROPOSAL.md
+RANGE {"path":"packages/server/AGENT_REFACTOR_PROPOSAL.md","old_lines":[58,78],"new_lines":[0,0],"diff_block_lines":[64,84],"hunk_header":"@@ -1,154 +0,0 @@","substantive_changed_lines":15}
+-   ```ts
+-   function toStoredAgentRecord(agent: ManagedAgent, options?: { title?: string | null }): StoredAgentRecord
+-   ```
+-   Copies provider, cwd, ISO timestamps, lifecycle status, `lastModeId`, complete config (`modeId`, `model`, `extra`), persistence handle, title metadata.
+-
+-2. **Client Payload Projection**
+-   ```ts
+-   function toAgentPayload(agent: ManagedAgent, options?: { title?: string | null }): AgentSnapshotPayload
+-   ```
+-   Converts dates to ISO strings, normalizes pending permissions map to an array, includes safe config/model fields for UI, hides `AgentSession` reference.
+-
+-3. **Additional helpers**
+-   Reuse the same projections for MCP responses, diagnostics, etc. The functions are deterministic and easy to test.
+-
+-### Unified Persistence Flow
+-
+-- Remove `AgentSnapshot` and `recordConfig`.
+-- `AgentManager.subscribe` emits `ManagedAgent` references (or read-only copies) on `agent_state`.
+-- `attachAgentRegistryPersistence` now calls `toStoredAgentRecord` and writes the result. This single path handles both lifecycle and config data atomically.
+-- Tests rely on the pure projection functions instead of crafting ad-hoc snapshots.
+-

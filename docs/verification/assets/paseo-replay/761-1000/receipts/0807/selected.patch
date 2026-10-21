@@ -1,0 +1,14 @@
+FILE packages/app/e2e/checkout-ship.spec.ts
+RANGE {"path":"packages/app/e2e/checkout-ship.spec.ts","old_lines":[233,241],"new_lines":[233,240],"diff_block_lines":[12,23],"hunk_header":"@@ -233,9 +233,8 @@ test('checkout-first Changes panel ship loop', async ({ page }) => {","substantive_changed_lines":5}
+@@ -233,9 +233,8 @@ test('checkout-first Changes panel ship loop', async ({ page }) => {
+     const normalizedRepo = normalizeTmpPath(resolvedRepo);
+     const normalizedCwd = normalizeTmpPath(resolvedCwd);
+-    const expectedMarker = `${path.sep}.paseo${path.sep}worktrees${path.sep}`;
++    const expectedMarker = `${path.sep}worktrees${path.sep}`;
+     expect(normalizedCwd.includes(expectedMarker)).toBeTruthy();
+     if (repo.name) {
+-      const expectedProjectRoot = path.join('.paseo', 'worktrees', repo.name);
+-      expect(normalizedCwd.includes(expectedProjectRoot)).toBeTruthy();
++      expect(normalizedCwd.includes(path.join('worktrees', repo.name))).toBeTruthy();
+     }
+ 

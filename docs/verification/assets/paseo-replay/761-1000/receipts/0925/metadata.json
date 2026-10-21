@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 925,
+  "revision": "e58b3739b3d938ae9df887baf527cfb935be82c9",
+  "date": "2026-02-04T15:21:36+07:00",
+  "committer_date": "2026-02-04T15:21:36+07:00",
+  "parents": [
+    "103917116756237b777e750195a42aafc86608fb"
+  ],
+  "subject": "Fix relay transport e2e ping/pong",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:25df63b48c434c764fea41292a6d6fd62b8c622921c9307fd9b87e6c2cf07cff",
+  "diff_tree_digest": "sha256:f5fffae41c9ab88a886c3f8449a134899f4c2f5a6d14bfe0c0dae022d84b68ab",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+      "old_lines": [
+        127,
+        139
+      ],
+      "new_lines": [
+        127,
+        143
+      ],
+      "diff_block_lines": [
+        5,
+        26
+      ],
+      "hunk_header": "@@ -127,13 +127,17 @@ describe(\"Relay transport (E2EE) - daemon E2E\", () => {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 9,
+  "receipt_file": "receipts/0925/selected.patch"
+}

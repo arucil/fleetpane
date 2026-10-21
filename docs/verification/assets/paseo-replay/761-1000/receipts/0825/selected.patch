@@ -1,0 +1,23 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[962,973],"new_lines":[964,973],"diff_block_lines":[21,41],"hunk_header":"@@ -961,15 +963,17 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":17}
+ 
+-    // Merge from base - always available
+-    allActions.set("merge-from-base", {
+-      id: "merge-from-base",
+-      label: `Merge from ${baseRefLabel}`,
+-      pendingLabel: "Merging...",
+-      successLabel: "Merged",
+-      disabled: mergeFromBaseDisabled,
+-      status: mergeFromBaseAction.status,
+-      description: hasUncommittedChanges ? "Requires clean working tree" : undefined,
+-      handler: mergeFromBaseAction.trigger,
+-    });
++    // Update from base - only when not on base branch
++    if (!isOnBaseBranch) {
++      allActions.set("merge-from-base", {
++        id: "merge-from-base",
++        label: `Update from ${baseRefLabel}`,
++        pendingLabel: "Updating...",
++        successLabel: "Updated",
++        disabled: mergeFromBaseDisabled,
++        status: mergeFromBaseAction.status,

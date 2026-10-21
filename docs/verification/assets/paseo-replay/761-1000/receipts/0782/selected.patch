@@ -1,0 +1,32 @@
+FILE packages/cli/src/cli.ts
+RANGE {"path":"packages/cli/src/cli.ts","old_lines":[19,24],"new_lines":[36,61],"diff_block_lines":[32,61],"hunk_header":"@@ -18,31 +35,114 @@ export function createCli(): Command {","substantive_changed_lines":23}
+ 
+-  // Agent commands
+-  program.addCommand(createAgentCommand())
++  // Primary agent commands (top-level)
++  program
++    .command('ls')
++    .description('List agents. By default shows running agents in current directory.')
++    .option('-a, --all', 'Include all statuses (not just running)')
++    .option('-g, --global', 'Show agents from all directories (not just current)')
++    .option('--json', 'Output in JSON format')
++    .option('--host <host>', 'Daemon host:port (default: localhost:6767)')
++    .action((options, command) => {
++      if (options.json) {
++        command.parent.opts().format = 'json'
++      }
++      return withOutput(runLsCommand)(options, command)
++    })
+ 
+-  // Daemon commands
+-  program.addCommand(createDaemonCommand())
++  program
++    .command('run')
++    .description('Create and start an agent with a task')
++    .argument('<prompt>', 'The task/prompt for the agent')
++    .option('-d, --detach', 'Run in background (detached)')
++    .option('--name <name>', 'Assign a name/title to the agent')
++    .option('--provider <provider>', 'Agent provider: claude | codex | opencode', 'claude')
++    .option('--model <model>', 'Model to use (e.g., claude-sonnet-4-20250514, claude-3-5-haiku-20241022)')
++    .option('--mode <mode>', 'Provider-specific mode (e.g., plan, default, bypass)')
++    .option('--worktree <name>', 'Create agent in a new git worktree')

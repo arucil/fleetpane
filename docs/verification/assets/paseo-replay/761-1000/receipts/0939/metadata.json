@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 939,
+  "revision": "32f32051d06e5a289dd75532b83bd8758daf09b9",
+  "date": "2026-02-05T09:00:01+07:00",
+  "committer_date": "2026-02-05T09:00:01+07:00",
+  "parents": [
+    "dc5336660b0568c50b19b7fc1d8014eed7d732a3"
+  ],
+  "subject": "Fix relay client reconnect self-replacement",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:9ed9d2aa52e2430857d1a4493d0eaa1eb861a02c591193039e9ddd7b16a9e74b",
+  "diff_tree_digest": "sha256:4d5ebb51bbce074e620e3a26e404647db069a6fb506a49b19155738f82f4ba2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        466,
+        478
+      ],
+      "new_lines": [
+        470,
+        474
+      ],
+      "diff_block_lines": [
+        16,
+        30
+      ],
+      "hunk_header": "@@ -466,13 +470,5 @@ export class DaemonClient {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 16,
+  "receipt_file": "receipts/0939/selected.patch"
+}
