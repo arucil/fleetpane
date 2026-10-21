@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1371,
+  "revision": "0832b126083983df2aa5b39318bdcc363d9945ca",
+  "date": "2026-02-24T18:15:23+07:00",
+  "committer_date": "2026-02-24T18:15:23+07:00",
+  "parents": [
+    "9d2ec0e9e10676bf921388089cc733e0f4c7adca"
+  ],
+  "subject": "Show task notifications as synthetic tool calls in chat (#79)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/tool-call-icon.test.ts",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/task-notification-tool-call.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/task-notification-tool-call.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/shared/messages.tool-call-schema.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:c4bbe39cdfd50871298ebf1a4a8295bcaa478911127f61d5f588fc83b2fdf270",
+  "diff_tree_digest": "sha256:e8c8ac8e892eb3deebbfb2bc60e1ecf2a649f9981df933b2f74917b40b2481e7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/task-notification-tool-call.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        9,
+        19
+      ],
+      "diff_block_lines": [
+        15,
+        25
+      ],
+      "hunk_header": "@@ -0,0 +1,332 @@",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 475,
+  "receipt_file": "receipts/1371/selected.patch"
+}

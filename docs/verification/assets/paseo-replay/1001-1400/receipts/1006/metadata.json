@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1006,
+  "revision": "29bca7e7b91e515883bb99060a78fcf2baf64480",
+  "date": "2026-02-05T21:47:03+07:00",
+  "committer_date": "2026-02-05T21:47:03+07:00",
+  "parents": [
+    "8dcf86a33f82f32811802f1047b003e2429c80b4"
+  ],
+  "subject": "relay: reset stuck control sockets; add prod prove script",
+  "diff_tree_paths": [
+    "M\tpackages/relay/src/cloudflare-adapter.ts",
+    "A\tscripts/prove-relay-prod.mjs"
+  ],
+  "source_receipt_digest": "sha256:01741bf21b082b1500307ff5c41f3c781f1cdda34ad5191f6c8d89c13a45bd25",
+  "diff_tree_digest": "sha256:d80d2d4cdd3099684e8eed7f680631fec983fe49ac342965b80a6272b14cb859",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/relay/src/cloudflare-adapter.ts",
+      "old_lines": [
+        77,
+        77
+      ],
+      "new_lines": [
+        77,
+        97
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -76,4 +76,43 @@ export class RelayDurableObject {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 74,
+  "receipt_file": "receipts/1006/selected.patch"
+}

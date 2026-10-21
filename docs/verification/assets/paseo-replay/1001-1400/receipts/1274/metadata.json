@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1274,
+  "revision": "e36d3180011d09534372f3e71a645a5e49d7c832",
+  "date": "2026-02-18T13:12:36+07:00",
+  "committer_date": "2026-02-18T13:12:36+07:00",
+  "parents": [
+    "b1955cf74d144ad6f99d394d57f82ef04ec236cf"
+  ],
+  "subject": "Improve post-ship worktree UX and merged PR detection",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:b395038c286fb9315be0f9f6e9b57fec691e17def13eef99d862e46e52406cf7",
+  "diff_tree_digest": "sha256:af49713f112e8a3e1b8f9d52f6f71dc694466adca855f0c4840d9362338768c3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1594,
+        1594
+      ],
+      "new_lines": [
+        1595,
+        1605
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -1593,4 +1594,60 @@ async function resolveGitHubRepo(cwd: string): Promise<string | null> {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 252,
+  "receipt_file": "receipts/1274/selected.patch"
+}

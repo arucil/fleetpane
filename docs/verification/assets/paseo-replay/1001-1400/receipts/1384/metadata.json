@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1384,
+  "revision": "2e201cab098ba6fee9084b04ab3018ad693a7640",
+  "date": "2026-03-01T16:32:02+07:00",
+  "committer_date": "2026-03-01T16:32:02+07:00",
+  "parents": [
+    "ec5b416b8ab51b72a6df7a78a097777e543bd70e"
+  ],
+  "subject": "feat(server): workspace-scoped explorer + worktree createdAt",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/file-download.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/filesystem.e2e.test.ts",
+    "M\tpackages/server/src/server/file-download/token-store.ts",
+    "M\tpackages/server/src/server/file-explorer/service.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:7dbb553ad9b7d961900782831d4b1168bb6792470a1509219d4a082eaeebb69e",
+  "diff_tree_digest": "sha256:47439132f6ea1a0681feb10c4db9a892f5ff960072edb389241b504e25e611c0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        4733,
+        4743
+      ],
+      "new_lines": [
+        4748,
+        4748
+      ],
+      "diff_block_lines": [
+        134,
+        144
+      ],
+      "hunk_header": "@@ -4720,42 +4718,38 @@ export class Session {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 212,
+  "receipt_file": "receipts/1384/selected.patch"
+}

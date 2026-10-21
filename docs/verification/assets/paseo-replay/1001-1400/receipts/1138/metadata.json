@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1138,
+  "revision": "3319c2d40cb259e38650df8de48dbe46c279527b",
+  "date": "2026-02-12T14:05:29+07:00",
+  "committer_date": "2026-02-12T14:05:46+07:00",
+  "parents": [
+    "bb93fc2a617d8c0771b312a906f5c00d03a4ee86"
+  ],
+  "subject": "Fix dev runner entry and sherpa TTS initialization",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/server/scripts/dev-runner.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts"
+  ],
+  "source_receipt_digest": "sha256:3b7df3cef7e8e9180f76e441d35376b6d3c91e0ca31415b1611ffe707714828f",
+  "diff_tree_digest": "sha256:eaaa64886ccd7596406fdb8eec6504adb16e3d32ae30bccc0145d1a0248e64c2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts",
+      "old_lines": [
+        52,
+        61
+      ],
+      "new_lines": [
+        55,
+        57
+      ],
+      "diff_block_lines": [
+        24,
+        34
+      ],
+      "hunk_header": "@@ -51,28 +54,33 @@ export class SherpaOnnxTTS implements TextToSpeechProvider {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 56,
+  "receipt_file": "receipts/1138/selected.patch"
+}

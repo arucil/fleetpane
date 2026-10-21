@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-archive-agent.ts
+RANGE {"path":"packages/app/src/hooks/use-archive-agent.ts","old_lines":[75,75],"new_lines":[79,89],"diff_block_lines":[16,26],"hunk_header":"@@ -74,4 +78,64 @@ function isAgentArchiving(input: IsAgentArchivingInput): boolean {","substantive_changed_lines":9}
+ 
++function removeAgentFromListPayload<T extends AgentsListQueryData | undefined>(
++  payload: T,
++  agentId: string
++): T {
++  if (!payload || !Array.isArray(payload.entries) || !agentId) {
++    return payload;
++  }
++  const filtered = payload.entries.filter((entry) => entry?.agent?.id !== agentId);
++  if (filtered.length === payload.entries.length) {
++    return payload;

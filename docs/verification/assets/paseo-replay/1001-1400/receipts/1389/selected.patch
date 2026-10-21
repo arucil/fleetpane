@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[477,477],"new_lines":[525,535],"diff_block_lines":[142,152],"hunk_header":"@@ -476,29 +524,73 @@ function WorkspaceScreenContent({","substantive_changed_lines":7}
+ 
++  const requestedTabAvailability = useMemo<TabAvailability | null>(() => {
++    if (!requestedTab) {
++      return null;
++    }
++    return resolveTabAvailability({
++      tab: requestedTab,
++      agentsHydrated: areWorkspaceAgentsHydrated,
++      terminalsHydrated: areWorkspaceTerminalsHydrated,
++      agentsById,
++      terminalIds,

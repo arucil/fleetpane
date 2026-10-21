@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1004,
+  "revision": "caed2dd8523efd5d0d5068f55af97084ae055c31",
+  "date": "2026-02-05T21:27:11+07:00",
+  "committer_date": "2026-02-05T21:27:11+07:00",
+  "parents": [
+    "daec09b8130f61a4757b80cd7c5d9c39455e0ac9"
+  ],
+  "subject": "relay: add control keepalive and prune dead sockets",
+  "diff_tree_paths": [
+    "M\tpackages/relay/src/cloudflare-adapter.ts",
+    "M\tpackages/server/src/server/relay-transport.ts"
+  ],
+  "source_receipt_digest": "sha256:420b154802b79477801d295db37eac9cba28f1565fe3eb70c326f2b462eaa2fc",
+  "diff_tree_digest": "sha256:aed3d79fc91a3e826e4e58988361bbc3016019a86c6ddb880f43068a597a286d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/relay-transport.ts",
+      "old_lines": [
+        112,
+        112
+      ],
+      "new_lines": [
+        126,
+        146
+      ],
+      "diff_block_lines": [
+        50,
+        70
+      ],
+      "hunk_header": "@@ -105,9 +115,44 @@ export function startRelayTransport({",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 72,
+  "receipt_file": "receipts/1004/selected.patch"
+}

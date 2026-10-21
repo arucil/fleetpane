@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1328,
+  "revision": "c1e4b0fcbf43ac27f27d1f8dc332f9048245221c",
+  "date": "2026-02-22T11:16:57+07:00",
+  "committer_date": "2026-02-22T11:16:57+07:00",
+  "parents": [
+    "0d28dae444a6c4f7a1789d0bc1afabee094ec52d"
+  ],
+  "subject": "server: only emit attention notifications for ui agents",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:2e44ecab2636988eb69c72bac2273e09b064597cc40b760f84e0e20d4c627e90",
+  "diff_tree_digest": "sha256:11c309625de27121d3760eff1d2a7c5bf4042f8b1a004a630c8cdb8fc1df727e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        1069,
+        1069
+      ],
+      "new_lines": [
+        1069,
+        1079
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -1068,4 +1068,14 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 22,
+  "receipt_file": "receipts/1328/selected.patch"
+}

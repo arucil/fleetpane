@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[572,572],"new_lines":[573,583],"diff_block_lines":[9,19],"hunk_header":"@@ -570,4 +570,21 @@ function AgentScreenContent({","substantive_changed_lines":8}
++
++  useEffect(() => {
++    if (!resolvedAgentId) {
++      hasRedirectedArchivedAgentRef.current = false;
++      return;
++    }
++    if (!agent?.archivedAt) {
++      hasRedirectedArchivedAgentRef.current = false;
++      return;
++    }
++    if (hasRedirectedArchivedAgentRef.current) {

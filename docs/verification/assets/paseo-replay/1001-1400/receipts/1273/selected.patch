@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1009,1014],"new_lines":[1031,1036],"diff_block_lines":[44,54],"hunk_header":"@@ -1008,9 +1030,282 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":9}
+     const commands = await q.supportedCommands();
+-    return commands.map((cmd) => ({
+-      name: cmd.name,
+-      description: cmd.description,
+-      argumentHint: cmd.argumentHint,
+-    }));
++    const commandMap = new Map<string, AgentSlashCommand>();
++    for (const cmd of commands) {
++      if (!commandMap.has(cmd.name)) {
++        commandMap.set(cmd.name, {
++          name: cmd.name,

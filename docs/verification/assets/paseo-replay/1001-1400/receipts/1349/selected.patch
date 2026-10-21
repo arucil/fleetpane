@@ -1,0 +1,13 @@
+FILE packages/app/src/attachments/local-file-attachment-store.ts
+RANGE {"path":"packages/app/src/attachments/local-file-attachment-store.ts","old_lines":[0,0],"new_lines":[31,41],"diff_block_lines":[37,47],"hunk_header":"@@ -0,0 +1,208 @@","substantive_changed_lines":7}
++
++function extensionForAttachment(params: { fileName?: string | null; mimeType: string }): string {
++  const fromName = getFileExtensionFromName(params.fileName);
++  if (fromName) {
++    return fromName;
++  }
++  return IMAGE_EXTENSION_BY_MIME_TYPE[params.mimeType] ?? ".img";
++}
++
++async function ensureDirectory(uri: string): Promise<void> {
++  const info = await FileSystem.getInfoAsync(uri);

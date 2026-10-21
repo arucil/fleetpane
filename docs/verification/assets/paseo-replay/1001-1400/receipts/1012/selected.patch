@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[678,678],"new_lines":[678,688],"diff_block_lines":[7,17],"hunk_header":"@@ -677,10 +677,24 @@ function planStepsToTodoItems(steps: Array<{ step: string; status: string }>): {","substantive_changed_lines":8}
+ 
++function normalizeCodexFilePath(filePath: unknown, cwd: string | null | undefined): string | null {
++  if (typeof filePath !== "string") return null;
++  const trimmed = filePath.trim();
++  if (!trimmed) return null;
++  if (typeof cwd === "string" && cwd.trim().length > 0) {
++    const normalizedCwd = cwd.endsWith(path.sep) ? cwd : `${cwd}${path.sep}`;
++    if (trimmed.startsWith(normalizedCwd)) {
++      return trimmed.slice(normalizedCwd.length);
++    }
++  }

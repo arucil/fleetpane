@@ -1,0 +1,13 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[190,190],"new_lines":[118,128],"diff_block_lines":[138,148],"hunk_header":"@@ -182,16 +113,45 @@ export function ExplorerSidebar({ serverId, agentId, cwd }: ExplorerSidebarProps","substantive_changed_lines":9}
++        .manualActivation(true)
++        .onTouchesDown((event) => {
++          const touch = event.changedTouches[0];
++          if (!touch) {
++            return;
++          }
++          closeTouchStartX.value = touch.absoluteX;
++          closeTouchStartY.value = touch.absoluteY;
++        })
++        .onTouchesMove((event, stateManager) => {
++          const touch = event.changedTouches[0];

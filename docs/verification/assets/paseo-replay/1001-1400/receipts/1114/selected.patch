@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[1003,1006],"new_lines":[1079,1085],"diff_block_lines":[180,190],"hunk_header":"@@ -998,39 +1072,165 @@ const ExpandableBadge = memo(function ExpandableBadge({","substantive_changed_lines":10}
+-  const [badgeWidth, setBadgeWidth] = useState(0);
+-  const handleLayout = useCallback((e: LayoutChangeEvent) => {
+-    setBadgeWidth(e.nativeEvent.layout.width);
+-  }, []);
++  const nativeGradientIdRef = useRef(
++    `shimmer-gradient-${Math.random().toString(36).substring(2, 9)}`
++  );
++  const [labelRowWidth, setLabelRowWidth] = useState(0);
++  const [labelRowHeight, setLabelRowHeight] = useState(0);
++  const [labelOffsetX, setLabelOffsetX] = useState(0);
++  const [labelWidth, setLabelWidth] = useState(0);

@@ -1,0 +1,14 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[4656,4663],"new_lines":[4622,4629],"diff_block_lines":[63,74],"hunk_header":"@@ -4656,8 +4622,8 @@ export class Session {","substantive_changed_lines":6}
+@@ -4656,8 +4622,8 @@ export class Session {
+    * Process user message through LLM with streaming and tool execution
+    */
+-  private async processVoiceTurn(enableTTS: boolean, latestUserText?: string): Promise<void> {
++  private async processVoiceTurn(latestUserText?: string): Promise<void> {
+     try {
+-      if (!enableTTS) {
+-        this.sessionLogger.warn("Ignoring non-voice processVoiceTurn call; voice is agent-only");
++      if (!this.isVoiceMode) {
++        this.sessionLogger.warn("Ignoring processVoiceTurn call while voice mode is disabled");
+         return;
+       }

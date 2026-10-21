@@ -1,0 +1,28 @@
+  const fileSuggestionsQuery = useQuery({
+    queryKey: ['directorySuggestions', serverId, autocompleteCwd, fileFilterQuery, true, true],
+    queryFn: async (): Promise<DirectorySuggestionEntry[]> => {
+      if (!client) {
+        throw new Error('Daemon client unavailable')
+      }
+      const response = await client.getDirectorySuggestions({
+        cwd: autocompleteCwd,
+        query: fileFilterQuery,
+        limit: 50,
+        includeFiles: true,
+        includeDirectories: true,
+      })
+      if (response.error) {
+        throw new Error(response.error)
+      }
+      return mapDirectorySuggestionsToEntries(response)
+    },
+    enabled:
+      mode === 'file' &&
+      Boolean(serverId) &&
+      autocompleteCwd.length > 0 &&
+      Boolean(client) &&
+      isConnected,
+    retry: false,
+    staleTime: 15_000,
+  })
+

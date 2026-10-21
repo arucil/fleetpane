@@ -1,0 +1,13 @@
+FILE package.json
+RANGE {"path":"package.json","old_lines":[35,40],"new_lines":[35,41],"diff_block_lines":[14,24],"hunk_header":"@@ -34,8 +34,9 @@","substantive_changed_lines":9}
+     "version:sync-internal": "node scripts/sync-workspace-versions.mjs",
+-    "version:all:patch": "npm version patch --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm install --package-lock-only",
+-    "version:all:minor": "npm version minor --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm install --package-lock-only",
+-    "version:all:major": "npm version major --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm install --package-lock-only",
+-    "release:check": "npm run typecheck --workspace=@getpaseo/relay && npm run typecheck --workspace=@getpaseo/server && npm run typecheck --workspace=@getpaseo/cli && npm run build --workspace=@getpaseo/relay && npm run build --workspace=@getpaseo/server && npm run build --workspace=@getpaseo/cli && npm pack --dry-run --workspace=@getpaseo/relay && npm pack --dry-run --workspace=@getpaseo/server && npm pack --dry-run --workspace=@getpaseo/cli",
++    "release:prepare": "npm install --workspaces --include-workspace-root",
++    "version:all:patch": "npm version patch --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm run release:prepare",
++    "version:all:minor": "npm version minor --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm run release:prepare",
++    "version:all:major": "npm version major --workspaces --include-workspace-root --no-git-tag-version && npm run version:sync-internal && npm run release:prepare",
++    "release:check": "npm run release:prepare && npm run typecheck --workspace=@getpaseo/relay && npm run typecheck --workspace=@getpaseo/server && npm run typecheck --workspace=@getpaseo/cli && npm run build --workspace=@getpaseo/relay && npm run build --workspace=@getpaseo/server && npm run build --workspace=@getpaseo/cli && npm pack --dry-run --workspace=@getpaseo/relay && npm pack --dry-run --workspace=@getpaseo/server && npm pack --dry-run --workspace=@getpaseo/cli",
+     "release:publish:dry-run": "npm publish --dry-run --workspace=@getpaseo/relay --access public && npm publish --dry-run --workspace=@getpaseo/server --access public && npm publish --dry-run --workspace=@getpaseo/cli --access public",

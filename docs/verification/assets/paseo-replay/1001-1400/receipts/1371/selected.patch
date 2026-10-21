@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/task-notification-tool-call.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/task-notification-tool-call.ts","old_lines":[0,0],"new_lines":[9,19],"diff_block_lines":[15,25],"hunk_header":"@@ -0,0 +1,332 @@","substantive_changed_lines":9}
++const OptionalNonEmptyTrimmedStringSchema = z.preprocess(
++  (value) => (typeof value === "string" ? value.trim() : value),
++  z.string().min(1).optional()
++);
++
++const TaskNotificationEnvelopeSchema = z.object({
++  messageId: z.string().nullable(),
++  taskId: z.string().nullable(),
++  status: z.string().nullable(),
++  summary: z.string().nullable(),
++  outputFile: z.string().nullable(),

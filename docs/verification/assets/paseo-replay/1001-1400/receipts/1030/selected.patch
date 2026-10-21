@@ -1,0 +1,13 @@
+FILE packages/app/src/components/grouped-agent-list.tsx
+RANGE {"path":"packages/app/src/components/grouped-agent-list.tsx","old_lines":[295,297],"new_lines":[299,309],"diff_block_lines":[28,38],"hunk_header":"@@ -294,4 +298,12 @@ function GroupedAgentRow({","substantive_changed_lines":6}
+               ]}
++              onHoverIn={() => {
++                clearHoverOutTimeout();
++                setIsHovered(true);
++                setIsArchiveHovered(true);
++              }}
++              onHoverOut={() => {
++                setIsArchiveHovered(false);
++              }}
+               onPress={(e) => {
+                 e.stopPropagation();

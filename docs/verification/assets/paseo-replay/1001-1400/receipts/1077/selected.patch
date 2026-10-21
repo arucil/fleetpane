@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[166,176],"new_lines":[170,170],"diff_block_lines":[19,29],"hunk_header":"@@ -164,27 +168,29 @@ export const UserMessage = memo(function UserMessage({","substantive_changed_lines":11}
+-      <Pressable style={userMessageStylesheet.content}>
+-        {({ hovered }) => {
+-          const showCopyButton = Platform.OS !== "web" || hovered;
+-          return (
+-            <>
+-              <View style={userMessageStylesheet.bubble}>
+-                <Text selectable style={userMessageStylesheet.text}>
+-                  {message}
+-                </Text>
+-              </View>
+-              <TurnCopyButton

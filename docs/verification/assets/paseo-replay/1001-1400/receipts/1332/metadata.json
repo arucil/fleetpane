@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1332,
+  "revision": "e9e267ff14c249bdcf0f4d40804129d5c7defddc",
+  "date": "2026-02-22T11:57:33+07:00",
+  "committer_date": "2026-02-22T11:57:33+07:00",
+  "parents": [
+    "18fbd1dfbf6a8285ffcc6befc4c33840825529e9",
+    "d6b7c2ed2d34cef0a5c2b01443f758e65762837c"
+  ],
+  "subject": "Merge pull request #70 from getpaseo/diagnostics/android-hang-cleanup-policy",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "A\tpackages/app/src/runtime/activity/index.ts",
+    "A\tpackages/app/src/runtime/activity/last-activity-coalescer.ts",
+    "A\tpackages/app/src/runtime/activity/last-activity-scheduler.ts",
+    "A\tpackages/app/src/runtime/activity/types.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/debug-tools.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/engine.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/host-runtime-diagnostics.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/index.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/perf-diagnostics-context.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/perf-diagnostics-provider.tsx",
+    "A\tpackages/app/src/runtime/perf-diagnostics/reporter.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/types.ts",
+    "A\tpackages/app/src/runtime/perf-diagnostics/use-perf-diagnostics.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/agent-directory-sync.ts",
+    "A\tpackages/app/src/utils/perf-diagnostics.ts",
+    "M\tpackages/app/vitest.config.ts",
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:5fcca5496d50e6d05a5e2c442e09fad36c7a542c66bb6addec9a42efb628c2d5",
+  "diff_tree_digest": "sha256:fa9ba0427dca781af5937e8bb9c38e5b84ceab7a5296aa9d3a520b8b06334486",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        444,
+        454
+      ],
+      "new_lines": [
+        445,
+        445
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -443,45 +444,47 @@ export default function RootLayout() {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 822,
+  "receipt_file": "receipts/1332/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/terminal/runtime/terminal-debug.ts
+RANGE {"path":"packages/app/src/terminal/runtime/terminal-debug.ts","old_lines":[0,0],"new_lines":[10,20],"diff_block_lines":[16,26],"hunk_header":"@@ -0,0 +1,77 @@","substantive_changed_lines":7}
++
++function resolveGlobalDebugFlag(): boolean | null {
++  if (typeof globalThis === "undefined") {
++    return null;
++  }
++
++  const value = (globalThis as TerminalDebugGlobal).__PASEO_TERMINAL_DEBUG;
++  if (typeof value === "boolean") {
++    return value;
++  }
++  return null;

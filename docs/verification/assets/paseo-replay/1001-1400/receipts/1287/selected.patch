@@ -1,0 +1,13 @@
+FILE packages/app/src/components/web-desktop-scrollbar.tsx
+RANGE {"path":"packages/app/src/components/web-desktop-scrollbar.tsx","old_lines":[133,143],"new_lines":[157,157],"diff_block_lines":[64,74],"hunk_header":"@@ -127,54 +155,214 @@ export function WebDesktopScrollbarOverlay({","substantive_changed_lines":10}
+-        onMoveShouldSetPanResponder: () => true,
+-        onPanResponderGrant: () => {
+-          dragStartOffsetRef.current = normalizedOffset;
+-          setIsDragging(true);
+-        },
+-        onPanResponderMove: (_event, gestureState) => {
+-          const nextNormalizedOffset = computeScrollOffsetFromDragDelta({
+-            startOffset: dragStartOffsetRef.current,
+-            dragDelta: gestureState.dy,
+-            maxScrollOffset: geometry.maxScrollOffset,
+-            maxHandleOffset: geometry.maxHandleOffset,

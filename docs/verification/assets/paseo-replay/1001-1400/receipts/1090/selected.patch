@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-mapper.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-mapper.ts","old_lines":[475,485],"new_lines":[56,56],"diff_block_lines":[478,488],"hunk_header":"@@ -474,94 +55,11 @@ function coerceCallId(callId: string | null | undefined, name: string, input: un","substantive_changed_lines":8}
+ 
+-function toShellDetail(
+-  input: z.infer<typeof ClaudeShellInputSchema> | null,
+-  output: z.infer<typeof ClaudeShellOutputSchema> | null
+-): ToolCallDetail | undefined {
+-  const command = input?.command ?? output?.command;
+-  if (!command) {
+-    return undefined;
+-  }
+-
+-  return {

@@ -1,0 +1,10 @@
+FILE packages/server/src/utils/directory-suggestions.ts
+RANGE {"path":"packages/server/src/utils/directory-suggestions.ts","old_lines":[387,390],"new_lines":[387,393],"diff_block_lines":[5,12],"hunk_header":"@@ -387,4 +387,7 @@ async function listChildDirectories(input: {","substantive_changed_lines":2}
+@@ -387,4 +387,7 @@ async function listChildDirectories(input: {
+   const entries: ChildDirectoryEntry[] = [];
+   for (const dirent of dirents) {
++    if (isHiddenDirectoryName(dirent.name)) {
++      continue;
++    }
+     if (!dirent.isDirectory() && !dirent.isSymbolicLink()) {
+       continue;

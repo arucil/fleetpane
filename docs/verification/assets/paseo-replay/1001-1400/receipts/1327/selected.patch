@@ -1,0 +1,13 @@
+FILE packages/app/metro.config.js
+RANGE {"path":"packages/app/metro.config.js","old_lines":[27,27],"new_lines":[31,41],"diff_block_lines":[16,26],"hunk_header":"@@ -26,4 +30,38 @@ config.resolver.nodeModulesPaths = Array.from(","substantive_changed_lines":7}
+ 
++function isLocalModuleImport(moduleName) {
++  return (
++    moduleName.startsWith("./") ||
++    moduleName.startsWith("../") ||
++    moduleName.startsWith("@/") ||
++    path.isAbsolute(moduleName)
++  );
++}
++
++function resolveWithCustomWebOverlay(context, moduleName, platform) {

@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1233,
+  "revision": "ce5d9d6dc8a545a0e2168b1fb39c671b1034686e",
+  "date": "2026-02-17T14:52:58+07:00",
+  "committer_date": "2026-02-17T14:52:58+07:00",
+  "parents": [
+    "abc146b1863b09cbda71acb8eb255ab704f41256"
+  ],
+  "subject": "refactor: unify structured generation pipeline",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "A\tpackages/cli/tests/21-run-output-schema-helper.test.ts",
+    "A\tpackages/cli/tests/e2e/run-output-schema.test.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:ed39dcc48568070873fd197c03464eee8cc9565e406acf2fe7349de84a43afab",
+  "diff_tree_digest": "sha256:b761d6f81beb1e6706c018ee9d3932938a274e948ab52d599b340eeb5b0cbde5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/run.ts",
+      "old_lines": [
+        107,
+        115
+      ],
+      "new_lines": [
+        111,
+        114
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -106,62 +110,48 @@ function loadOutputSchema(value: string): Record<string, unknown> {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 559,
+  "receipt_file": "receipts/1233/selected.patch"
+}

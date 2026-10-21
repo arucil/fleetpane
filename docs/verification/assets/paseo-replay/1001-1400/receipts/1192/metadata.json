@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1192,
+  "revision": "86b476e309e3c15c0a0bb672283c352755a6c55f",
+  "date": "2026-02-14T18:09:07+07:00",
+  "committer_date": "2026-02-14T18:09:07+07:00",
+  "parents": [
+    "25a6f204a49e254a8b70d2e83b57be7c3ec87180"
+  ],
+  "subject": "fix(app): remove terminal debug instrumentation",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/utils/terminal-keys.test.ts",
+    "A\tpackages/app/src/utils/terminal-keys.ts"
+  ],
+  "source_receipt_digest": "sha256:0cc2ff63ff8e25a4e3eafe50146c4ff3dd6437148b0c311470fa93df2b2b427f",
+  "diff_tree_digest": "sha256:6cce1ce3df880343d1109bc98e129b12d35613bd19182902f448db07f258ed6d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/explorer-sidebar.tsx",
+      "old_lines": [
+        190,
+        190
+      ],
+      "new_lines": [
+        118,
+        128
+      ],
+      "diff_block_lines": [
+        138,
+        148
+      ],
+      "hunk_header": "@@ -182,16 +113,45 @@ export function ExplorerSidebar({ serverId, agentId, cwd }: ExplorerSidebarProps",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 702,
+  "receipt_file": "receipts/1192/selected.patch"
+}

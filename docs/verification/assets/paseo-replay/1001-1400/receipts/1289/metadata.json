@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1289,
+  "revision": "e8c4ae2024980d58887d61d97b539bfb0db1df9c",
+  "date": "2026-02-18T20:35:49+07:00",
+  "committer_date": "2026-02-18T20:35:49+07:00",
+  "parents": [
+    "e22f183bb2577986dab76ba108f3e08d2755ea99"
+  ],
+  "subject": "fix(app): prefill new agent cwd with main repo for worktrees",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/new-agent-routing.test.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.ts"
+  ],
+  "source_receipt_digest": "sha256:45a75ab12930ba2316790d43721265a992639eea4ca04404134ef5aec27c5ead",
+  "diff_tree_digest": "sha256:d9aeeb419830075a41a0db4202e19c079ff64f150b9bc2fa0f22e2ce2627f61b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/new-agent-routing.ts",
+      "old_lines": [
+        34,
+        34
+      ],
+      "new_lines": [
+        34,
+        44
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -33,9 +33,32 @@ export function resolveSelectedAgentForNewAgent(input: {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 26,
+  "receipt_file": "receipts/1289/selected.patch"
+}

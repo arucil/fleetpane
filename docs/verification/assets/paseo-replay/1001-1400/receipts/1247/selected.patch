@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[3498,3508],"new_lines":[3502,3502],"diff_block_lines":[43,53],"hunk_header":"@@ -3497,32 +3501,84 @@ export class Session {","substantive_changed_lines":7}
+ 
+-      const session = agent.session;
+-      if (!session || !session.listCommands) {
+-        this.emit({
+-          type: "list_commands_response",
+-          payload: {
+-            agentId,
+-            commands: [],
+-            error: `Agent does not support listing commands`,
+-            requestId,
+-          },

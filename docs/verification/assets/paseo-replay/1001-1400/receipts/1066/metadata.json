@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1066,
+  "revision": "3cc7feab216b5b9271ca654f39f76d3a66418e67",
+  "date": "2026-02-07T14:06:11+07:00",
+  "committer_date": "2026-02-07T14:06:11+07:00",
+  "parents": [
+    "cef7d8c1348b2d3ccb87496a3074a1ccdf5fe905"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/server/scripts/voice-roundtrip-debug.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/voice-permission-policy.test.ts",
+    "M\tpackages/server/src/server/voice-permission-policy.ts",
+    "M\tpackages/server/src/server/voice-roundtrip.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:18e5e27c62139ed235552c2fcf023d6449bad828aa814bef7b3bb2903ebfe4c0",
+  "diff_tree_digest": "sha256:2338407a9cef56874e05782868b58b252db2abcb38c532212b2c84adce99d783",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        284,
+        294
+      ],
+      "new_lines": [
+        280,
+        280
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -279,96 +278,6 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 856,
+  "receipt_file": "receipts/1066/selected.patch"
+}

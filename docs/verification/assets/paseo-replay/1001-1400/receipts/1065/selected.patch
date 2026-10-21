@@ -1,0 +1,10 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[1598,1601],"new_lines":[1598,1604],"diff_block_lines":[5,12],"hunk_header":"@@ -1598,4 +1598,7 @@ class CodexAppServerAgentSession implements AgentSession {","substantive_changed_lines":3}
+@@ -1598,4 +1598,7 @@ class CodexAppServerAgentSession implements AgentSession {
+         model: this.config.model ?? null,
+         thinkingOptionId,
++        extra: this.config.extra,
++        systemPrompt: this.config.systemPrompt,
++        mcpServers: this.config.mcpServers,
+       },
+     };

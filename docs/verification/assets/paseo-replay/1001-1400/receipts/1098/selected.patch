@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[839,849],"new_lines":[813,813],"diff_block_lines":[119,129],"hunk_header":"@@ -838,23 +812,34 @@ function AgentScreenContent({","substantive_changed_lines":9}
+           <View style={styles.contentContainer}>
+-            <ReanimatedAnimated.View
+-              style={[styles.content, animatedKeyboardStyle]}
+-            >
+-              <AgentStreamView
+-                agentId={effectiveAgent.id}
+-                serverId={serverId}
+-                agent={effectiveAgent}
+-                streamItems={
+-                  shouldUseOptimisticStream ? mergedStreamItems : streamItems
+-                }

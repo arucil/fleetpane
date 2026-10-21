@@ -1,0 +1,9 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[337,340],"new_lines":[338,343],"diff_block_lines":[11,17],"hunk_header":"@@ -337,4 +338,6 @@ function SidebarAgentRow({","substantive_changed_lines":2}
+@@ -337,4 +338,6 @@ function SidebarAgentRow({
+               </Text>
+             </View>
++          ) : reserveArchiveSlot ? (
++            <View style={[styles.branchBadge, styles.branchBadgePlaceholder]} />
+           ) : null}
+         </View>

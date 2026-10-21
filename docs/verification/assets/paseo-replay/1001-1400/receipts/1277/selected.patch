@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[25,35],"new_lines":[19,19],"diff_block_lines":[44,54],"hunk_header":"@@ -24,42 +18,42 @@ import {","substantive_changed_lines":1}
+   type MessageInputRef,
+-} from "./message-input";
+-import { Theme } from "@/styles/theme";
+-import type { DraftCommandConfig } from "@/hooks/use-agent-commands-query";
+-import { encodeImages } from "@/utils/encode-images";
+-import { useKeyboardShortcutsStore } from "@/stores/keyboard-shortcuts-store";
+-import { focusWithRetries } from "@/utils/web-focus";
+-import { useVoiceOptional } from "@/contexts/voice-context";
+-import { useToast } from "@/contexts/toast-context";
+-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+-import { Shortcut } from "@/components/ui/shortcut";

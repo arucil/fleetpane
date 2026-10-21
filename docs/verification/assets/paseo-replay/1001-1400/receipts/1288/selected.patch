@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[684,688],"new_lines":[647,652],"diff_block_lines":[47,57],"hunk_header":"@@ -643,48 +643,52 @@ export function AgentInputArea({","substantive_changed_lines":10}
+-            onKeyPress={handleCommandKeyPress}
+-            onSelectionChange={(selection) => {
+-              setCursorIndex(selection.start)
+-            }}
+-          />
++          <View style={styles.messageInputContainer}>
++            {/* Command + file mention autocomplete rendered as a true popover */}
++            {autocomplete.isVisible && (
++              <View style={styles.autocompletePopover} pointerEvents="box-none">
++                <Autocomplete
++                  options={autocomplete.options}

@@ -1,0 +1,35 @@
+export function getWorktreeTerminalSpecs(repoRoot: string): WorktreeTerminalConfig[] {
+  const config = readPaseoConfig(repoRoot);
+  const terminals = config?.worktree?.terminals;
+  if (!Array.isArray(terminals) || terminals.length === 0) {
+    return [];
+  }
+
+  const specs: WorktreeTerminalConfig[] = [];
+  for (const terminal of terminals) {
+    if (!terminal || typeof terminal !== "object") {
+      continue;
+    }
+
+    const rawCommand = terminal.command;
+    if (typeof rawCommand !== "string") {
+      continue;
+    }
+    const command = rawCommand.trim();
+    if (!command) {
+      continue;
+    }
+
+    const rawName = terminal.name;
+    const name = typeof rawName === "string" && rawName.trim().length > 0
+      ? rawName.trim()
+      : undefined;
+
+    specs.push({
+      ...(name ? { name } : {}),
+      command,
+    });
+  }
+
+  return specs;
+}

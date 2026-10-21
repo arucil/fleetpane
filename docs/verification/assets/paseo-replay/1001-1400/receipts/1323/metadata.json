@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1323,
+  "revision": "c123c98f5f2831f0386db123e86a3e469a8a6185",
+  "date": "2026-02-21T11:47:26+07:00",
+  "committer_date": "2026-02-21T11:47:26+07:00",
+  "parents": [
+    "e6a7c4de42d1709ecda42d60b330177a04e17146"
+  ],
+  "subject": "relay: rename encrypted handshake message types",
+  "diff_tree_paths": [
+    "M\tpackages/relay/src/encrypted-channel.ts"
+  ],
+  "source_receipt_digest": "sha256:a799027c377cc07636379c06c6f7d749726d2731302f2af28c1cf47e5d1c88b5",
+  "diff_tree_digest": "sha256:c963ab6503f598dc10e43183997dade44266e88aae82541d61c9366f74620270",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/relay/src/encrypted-channel.ts",
+      "old_lines": [
+        49,
+        56
+      ],
+      "new_lines": [
+        49,
+        55
+      ],
+      "diff_block_lines": [
+        20,
+        30
+      ],
+      "hunk_header": "@@ -38,21 +38,21 @@ type ChannelState = \"connecting\" | \"handshaking\" | \"open\" | \"closed\";",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 37,
+  "receipt_file": "receipts/1323/selected.patch"
+}

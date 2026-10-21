@@ -1,0 +1,43 @@
+      const agentId = payload.agentId;
+      const initKey = getInitKey(serverId, agentId);
+
+      // Read current store state
+      const session = useSessionStore.getState().sessions[serverId];
+      const isInitializing = session?.initializingAgents.get(agentId) === true;
+      const activeInitDeferred = getInitDeferred(initKey);
+      const hasActiveInitDeferred = Boolean(activeInitDeferred);
+      const currentCursor = session?.agentTimelineCursor.get(agentId);
+      const currentTail = session?.agentStreamTail.get(agentId) ?? [];
+      const currentHead = session?.agentStreamHead.get(agentId) ?? [];
+
+      // Call pure reducer
+      const result = processTimelineResponse({
+        payload,
+        currentTail,
+        currentHead,
+        currentCursor,
+        isInitializing,
+        hasActiveInitDeferred,
+        initRequestDirection: activeInitDeferred?.requestDirection ?? "tail",
+      });
+
+      // Apply error path
+      if (result.error) {
+        if (result.clearInitializing) {
+          setInitializingAgents(serverId, (prev) => {
+            if (prev.get(agentId) !== true) {
+              return prev;
+            }
+            const next = new Map(prev);
+            next.set(agentId, false);
+            return next;
+          });
+        }
+        if (result.initResolution === "reject") {
+          rejectInitDeferred(initKey, new Error(result.error));
+        }
+        return;
+      }
+
+      // Apply tail patch
+      if (result.tail !== currentTail) {

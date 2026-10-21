@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/hooks/use-keyboard-shortcuts.ts","old_lines":[0,0],"new_lines":[30,40],"diff_block_lines":[36,46],"hunk_header":"@@ -0,0 +1,281 @@","substantive_changed_lines":9}
++
++function resolveSelectedOrRouteAgentKey(input: {
++  selectedAgentId?: string;
++  pathname: string;
++}): string | null {
++  if (input.selectedAgentId) {
++    return input.selectedAgentId;
++  }
++  const route = parseHostAgentRouteFromPathname(input.pathname);
++  if (!route) {
++    return null;

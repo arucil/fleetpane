@@ -1,0 +1,60 @@
+      if (!client) {
+        setInitializingAgents(serverId, (prev) => {
+          const next = new Map(prev);
+          next.set(agentId, false);
+          return next;
+        });
+        rejectInitDeferred(key, new Error("Host is not connected"));
+        return deferred.promise;
+      }
+
+      client
+        .initializeAgent(agentId)
+        .then(() => {
+          // No-op: the actual "timeline hydrated" signal is the `agent_stream_snapshot`
+          // message, handled in SessionContext.
+        })
+        .catch((error) => {
+          setInitializingAgents(serverId, (prev) => {
+            const next = new Map(prev);
+            next.set(agentId, false);
+            return next;
+          });
+          rejectInitDeferred(
+            key,
+            error instanceof Error ? error : new Error(String(error))
+          );
+        });
+
+      return deferred.promise;
+    },
+    [client, serverId, setInitializingAgents]
+  );
+
+  const refreshAgent = useCallback(
+    async (agentId: string) => {
+      if (!client) {
+        throw new Error("Host is not connected");
+      }
+      setInitializingAgents(serverId, (prev) => {
+        const next = new Map(prev);
+        next.set(agentId, true);
+        return next;
+      });
+
+      try {
+        await client.refreshAgent(agentId);
+      } catch (error) {
+        setInitializingAgents(serverId, (prev) => {
+          const next = new Map(prev);
+          next.set(agentId, false);
+          return next;
+        });
+        throw error;
+      }
+    },
+    [client, serverId, setInitializingAgents]
+  );
+
+  return { ensureAgentIsInitialized, refreshAgent };
+}

@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/docs/configuration.tsx
+RANGE {"path":"packages/website/src/routes/docs/configuration.tsx","old_lines":[81,81],"new_lines":[81,91],"diff_block_lines":[7,17],"hunk_header":"@@ -80,4 +80,71 @@ function Configuration() {","substantive_changed_lines":10}
+ 
++      <section className="space-y-4">
++        <h2 className="text-xl font-medium">Voice</h2>
++        <p className="text-white/60 leading-relaxed">
++          Voice is provider-based per feature: dictation STT, realtime voice STT, and voice TTS can each
++          use <code className="font-mono">local</code> or <code className="font-mono">openai</code>.
++          Defaults are local for all three.
++        </p>
++        <pre className="bg-card border border-border rounded-lg p-4 font-mono text-sm overflow-x-auto text-white/80">
++{`{
++  "version": 1,

@@ -1,0 +1,61 @@
+}): Promise<WorktreeSetupCommandResult[]> {
+  // Read paseo.json from the worktree (it will have the same content as the source repo)
+  const setupCommands = getWorktreeSetupCommands(options.worktreePath);
+  if (setupCommands.length === 0) {
+    return [];
+  }
+
+  const repoRootPath =
+    options.repoRootPath ?? (await inferRepoRootPathFromWorktreePath(options.worktreePath));
+  const worktreePort = await getAvailablePort();
+
+  const setupEnv = {
+    ...process.env,
+    // Source checkout path is the original git repo root (shared across worktrees), not the
+    // worktree itself. This allows setup scripts to copy local files (e.g. .env) from the
+    // source checkout.
+    PASEO_SOURCE_CHECKOUT_PATH: repoRootPath,
+    // Backward-compatible alias.
+    PASEO_ROOT_PATH: repoRootPath,
+    PASEO_WORKTREE_PATH: options.worktreePath,
+    PASEO_BRANCH_NAME: options.branchName,
+    PASEO_WORKTREE_PORT: String(worktreePort),
+  };
+
+  const results: WorktreeSetupCommandResult[] = [];
+  for (const [index, cmd] of setupCommands.entries()) {
+    const result = options.onEvent
+      ? await execSetupCommandStreamed({
+          command: cmd,
+          cwd: options.worktreePath,
+          env: setupEnv,
+          index: index + 1,
+          total: setupCommands.length,
+          onEvent: options.onEvent,
+        })
+      : await execSetupCommand(cmd, {
+          cwd: options.worktreePath,
+          env: setupEnv,
+        });
+    results.push(result);
+
+    if (result.exitCode !== 0) {
+      if (options.cleanupOnFailure) {
+        try {
+          await execAsync(`git worktree remove "${options.worktreePath}" --force`, {
+            cwd: options.worktreePath,
+          });
+        } catch {
+          rmSync(options.worktreePath, { recursive: true, force: true });
+        }
+      }
+      throw new WorktreeSetupError(
+        `Worktree setup command failed: ${cmd}\n${result.stderr}`.trim(),
+        results
+      );
+    }
+  }
+
+  return results;
+}
+

@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/changelog.tsx
+RANGE {"path":"packages/website/src/routes/changelog.tsx","old_lines":[39,42],"new_lines":[39,47],"diff_block_lines":[7,17],"hunk_header":"@@ -38,7 +38,16 @@ function Changelog() {","substantive_changed_lines":8}
+               rel="noopener noreferrer"
+-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
++              aria-label="GitHub"
++              className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center"
+             >
+-              GitHub
++              <svg
++                xmlns="http://www.w3.org/2000/svg"
++                width="18"
++                height="18"
++                fill="currentColor"

@@ -1,0 +1,23 @@
+FILE packages/app/e2e/relay-stability.spec.ts
+RANGE {"path":"packages/app/e2e/relay-stability.spec.ts","old_lines":[0,0],"new_lines":[2,22],"diff_block_lines":[8,28],"hunk_header":"@@ -0,0 +1,57 @@","substantive_changed_lines":14}
++
++test('relay connection stays stable across multiple tabs', async ({ page }) => {
++  const relayPort = process.env.E2E_RELAY_PORT;
++  const serverId = process.env.E2E_SERVER_ID;
++  const daemonPublicKeyB64 = process.env.E2E_RELAY_DAEMON_PUBLIC_KEY;
++  if (!relayPort || !serverId || !daemonPublicKeyB64) {
++    throw new Error(
++      'E2E_RELAY_PORT, E2E_SERVER_ID, or E2E_RELAY_DAEMON_PUBLIC_KEY is not set (expected from globalSetup).'
++    );
++  }
++
++  const nowIso = new Date().toISOString();
++  const relayEndpoint = `127.0.0.1:${relayPort}`;
++
++  const host = {
++    serverId,
++    label: 'relay-daemon',
++    connections: [
++      { id: 'direct:127.0.0.1:9', type: 'direct', endpoint: '127.0.0.1:9' },
++      { id: `relay:${relayEndpoint}`, type: 'relay', relayEndpoint, daemonPublicKeyB64 },
++    ],

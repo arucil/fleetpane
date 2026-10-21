@@ -1,0 +1,11 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[1509,1510],"new_lines":[1520,1528],"diff_block_lines":[31,39],"hunk_header":"@@ -1507,4 +1511,18 @@ export class AgentManager {","substantive_changed_lines":3}
++    }
++    if (Object.prototype.hasOwnProperty.call(config, "title")) {
++      return config.title ?? null;
++    }
++    return null;
++  }
++
+   private buildTimelineRowsFromItems(
+     items: readonly AgentTimelineItem[],

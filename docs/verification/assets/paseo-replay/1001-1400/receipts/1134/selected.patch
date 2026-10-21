@@ -1,0 +1,13 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[270,280],"new_lines":[277,277],"diff_block_lines":[19,29],"hunk_header":"@@ -269,18 +276,19 @@ function SidebarContent({","substantive_changed_lines":9}
+         <View style={styles.tabsContainer}>
+-          <Pressable
+-            style={[styles.tab, activeTab === "changes" && styles.tabActive]}
+-            onPress={() => onTabPress("changes")}
+-          >
+-            <Text
+-              style={[
+-                styles.tabText,
+-                activeTab === "changes" && styles.tabTextActive,
+-                !isGit && styles.tabTextMuted,
+-              ]}

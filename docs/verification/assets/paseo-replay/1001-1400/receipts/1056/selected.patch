@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/speech-config-resolver.ts
+RANGE {"path":"packages/server/src/server/speech/speech-config-resolver.ts","old_lines":[28,38],"new_lines":[29,29],"diff_block_lines":[24,34],"hunk_header":"@@ -27,18 +28,42 @@ function resolveRequestedSpeechProviders(params: {","substantive_changed_lines":10}
+ }): RequestedSpeechProviders {
+-  return RequestedSpeechProvidersSchema.parse({
+-    dictationSttProvider:
+-      params.env.PASEO_DICTATION_STT_PROVIDER ??
+-      params.persisted.features?.dictation?.stt?.provider ??
+-      "local",
+-    voiceSttProvider:
+-      params.env.PASEO_VOICE_STT_PROVIDER ??
+-      params.persisted.features?.voiceMode?.stt?.provider ??
+-      "local",
+-    voiceTtsProvider:

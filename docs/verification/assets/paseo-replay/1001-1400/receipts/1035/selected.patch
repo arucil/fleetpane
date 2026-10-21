@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-form/agent-form-dropdowns.tsx
+RANGE {"path":"packages/app/src/components/agent-form/agent-form-dropdowns.tsx","old_lines":[419,423],"new_lines":[437,444],"diff_block_lines":[78,88],"hunk_header":"@@ -418,17 +436,29 @@ function CompactSelectField({","substantive_changed_lines":7}
+       disabled={disabled}
+-      style={[styles.compactSelectControl, disabled && styles.compactSelectControlDisabled]}
++      style={[
++        styles.compactSelectControl,
++        !showLabel && styles.compactSelectControlInline,
++        containerStyle,
++        disabled && styles.compactSelectControlDisabled,
++      ]}
+     >
+-      <Text style={styles.compactSelectLabel}>{label}</Text>
+-      {isLoading ? (

@@ -1,0 +1,45 @@
+    }
+  } else if (timelineUnits.length > 0) {
+    // ----------------------------------------------------------------
+    // Incremental append path
+    // ----------------------------------------------------------------
+    const acceptedUnits: typeof timelineUnits = [];
+    let cursor = currentCursor;
+    let gapCursor: { epoch: string; endSeq: number } | null = null;
+
+    for (const unit of timelineUnits) {
+      const decision: SessionTimelineSeqDecision = classifySessionTimelineSeq({
+        cursor: cursor
+          ? { epoch: cursor.epoch, endSeq: cursor.endSeq }
+          : null,
+        epoch: payload.epoch,
+        seq: unit.seq,
+      });
+
+      if (decision === "gap") {
+        gapCursor = cursor
+          ? { epoch: cursor.epoch, endSeq: cursor.endSeq }
+          : null;
+        break;
+      }
+      if (decision === "drop_stale" || decision === "drop_epoch") {
+        continue;
+      }
+
+      acceptedUnits.push(unit);
+      if (decision === "init") {
+        cursor = {
+          epoch: payload.epoch,
+          startSeq: unit.seq,
+          endSeq: unit.seq,
+        };
+        continue;
+      }
+      if (!cursor) {
+        continue;
+      }
+      cursor = {
+        ...cursor,
+        endSeq: unit.seq,
+      };
+    }

@@ -1,0 +1,12 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[241,246],"new_lines":[241,247],"diff_block_lines":[5,14],"hunk_header":"@@ -241,6 +241,7 @@ export function ExplorerSidebar({ serverId, agentId, cwd, isGit }: ExplorerSideb","substantive_changed_lines":2}
+@@ -241,6 +241,7 @@ export function ExplorerSidebar({ serverId, agentId, cwd, isGit }: ExplorerSideb
+   }));
+ 
+-  // Mobile: full-screen overlay with gesture
+-  const overlayPointerEvents = Platform.OS === "web" ? "auto" : "box-none";
++  // Mobile: full-screen overlay with gesture.
++  // On web, keep it interactive only while open so closed sidebars don't eat taps.
++  const overlayPointerEvents = Platform.OS === "web" ? (isOpen ? "auto" : "none") : "box-none";
+ 
+   if (isMobile) {

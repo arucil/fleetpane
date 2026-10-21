@@ -1,0 +1,43 @@
+export async function checkDesktopAppUpdate(): Promise<DesktopAppUpdateCheckResult> {
+  const result = await invokeDesktopCommand<unknown>('check_app_update')
+  if (!isRecord(result)) {
+    throw new Error('Unexpected response while checking desktop updates.')
+  }
+
+  return {
+    hasUpdate: result.hasUpdate === true,
+    currentVersion: toStringOrNull(result.currentVersion),
+    latestVersion: toStringOrNull(result.latestVersion),
+    body: toStringOrNull(result.body),
+    date: toStringOrNull(result.date),
+  }
+}
+
+export async function installDesktopAppUpdate(): Promise<DesktopAppUpdateInstallResult> {
+  const result = await invokeDesktopCommand<unknown>('install_app_update')
+  if (!isRecord(result)) {
+    throw new Error('Unexpected response while installing desktop update.')
+  }
+
+  return {
+    installed: result.installed === true,
+    version: toStringOrNull(result.version),
+    message: toStringOrNull(result.message) ?? 'Update completed.',
+  }
+}
+
+export async function runLocalDaemonUpdate(): Promise<LocalDaemonUpdateResult> {
+  const result = await invokeDesktopCommand<unknown>('run_local_daemon_update')
+  if (!isRecord(result)) {
+    throw new Error('Unexpected response while updating local daemon.')
+  }
+
+  return {
+    exitCode: toNumberOr(1, result.exitCode),
+    stdout: toStringOrEmpty(result.stdout),
+    stderr: toStringOrEmpty(result.stderr),
+  }
+}
+
+export function normalizeVersionForComparison(version: string | null | undefined): string | null {
+  const value = version?.trim()

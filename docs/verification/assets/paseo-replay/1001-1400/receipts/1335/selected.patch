@@ -1,0 +1,13 @@
+FILE packages/app/src/desktop/components/desktop-permission-row.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-permission-row.tsx","old_lines":[0,0],"new_lines":[14,24],"diff_block_lines":[20,30],"hunk_header":"@@ -0,0 +1,102 @@","substantive_changed_lines":5}
++
++export function DesktopPermissionRow({
++  title,
++  status,
++  isRequesting,
++  showBorder,
++  onRequest,
++}: DesktopPermissionRowProps) {
++  const { theme } = useUnistyles();
++  const state = status?.state ?? "unknown";
++  const isGranted = state === "granted";

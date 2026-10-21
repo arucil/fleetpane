@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1164,
+  "revision": "8169134ac3902c8cb504e7502f710364881f4adb",
+  "date": "2026-02-14T01:03:36+07:00",
+  "committer_date": "2026-02-14T01:03:36+07:00",
+  "parents": [
+    "c41815dcb7e7d5536bd05d2db8457ed4009150a9"
+  ],
+  "subject": "refactor timeline loading to cursor-based fetch API",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "A\tpackages/cli/src/utils/timeline.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "A\tpackages/server/src/server/agent/timeline-projection.test.ts",
+    "A\tpackages/server/src/server/agent/timeline-projection.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/persistence.e2e.test.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "D\tpackages/server/src/shared/__fixtures__/legacy-agent-stream-snapshot-inProgress.json",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:793ee54bd90495ea7f5c6ddef1223cd1d6486ed5c134181db0db38a19d87b53c",
+  "diff_tree_digest": "sha256:d4966ca8c36dd5ef30f029b813fe7ced42a7d58b2d3a67d69a2e10cda9f8daf6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        743,
+        743
+      ],
+      "new_lines": [
+        750,
+        760
+      ],
+      "diff_block_lines": [
+        71,
+        81
+      ],
+      "hunk_header": "@@ -741,7 +743,107 @@ export function SessionProvider({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1452,
+  "receipt_file": "receipts/1164/selected.patch"
+}

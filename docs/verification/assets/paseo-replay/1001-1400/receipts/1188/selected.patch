@@ -1,0 +1,13 @@
+FILE packages/app/src/components/multi-daemon-session-host.tsx
+RANGE {"path":"packages/app/src/components/multi-daemon-session-host.tsx","old_lines":[69,69],"new_lines":[77,87],"diff_block_lines":[74,84],"hunk_header":"@@ -67,8 +75,67 @@ function buildCandidates(host: HostProfile): Candidate[] {","substantive_changed_lines":10}
++  const latencyQueries = useQueries({
++    queries: candidates.map((candidate) => ({
++      queryKey: ["connection-selection-latency", daemon.serverId, candidate.connectionId],
++      queryFn: () =>
++        measureConnectionLatency(candidate.connection, {
++          serverId: daemon.serverId,
++        }),
++      refetchInterval: 10_000,
++      staleTime: 9_000,
++      gcTime: 60_000,
++      retry: 1,

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[198,198],"new_lines":[193,203],"diff_block_lines":[43,53],"hunk_header":"@@ -197,4 +192,40 @@ interface AudioBufferState {","substantive_changed_lines":10}
+ 
++export type SessionOptions = {
++  clientId: string;
++  onMessage: (msg: SessionOutboundMessage) => void;
++  logger: pino.Logger;
++  downloadTokenStore: DownloadTokenStore;
++  pushTokenStore: PushTokenStore;
++  paseoHome: string;
++  agentManager: AgentManager;
++  agentStorage: AgentStorage;
++  createAgentMcpTransport: AgentMcpTransportFactory;

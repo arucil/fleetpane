@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-rollout-timeline.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-rollout-timeline.ts","old_lines":[0,0],"new_lines":[11,21],"diff_block_lines":[17,27],"hunk_header":"@@ -0,0 +1,502 @@","substantive_changed_lines":7}
++
++function resolveCodexSessionRoot(): string | null {
++  if (process.env.CODEX_SESSION_DIR) {
++    return process.env.CODEX_SESSION_DIR;
++  }
++  const codexHome = process.env.CODEX_HOME ?? path.join(os.homedir(), ".codex");
++  return path.join(codexHome, "sessions");
++}
++
++async function findRolloutFile(
++  threadId: string,

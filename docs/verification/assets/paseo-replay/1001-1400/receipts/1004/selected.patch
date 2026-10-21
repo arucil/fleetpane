@@ -1,0 +1,23 @@
+FILE packages/server/src/server/relay-transport.ts
+RANGE {"path":"packages/server/src/server/relay-transport.ts","old_lines":[112,112],"new_lines":[126,146],"diff_block_lines":[50,70],"hunk_header":"@@ -105,9 +115,44 @@ export function startRelayTransport({","substantive_changed_lines":13}
++      }
++      controlKeepaliveInterval = setInterval(() => {
++        if (stopped) return;
++        if (controlWs !== socket) return;
++        if (socket.readyState !== WebSocket.OPEN) return;
++
++        const now = Date.now();
++        const staleForMs = now - controlLastSeenAt;
++        // If the control socket is half-open or silently dropped, ws may never emit "close".
++        // Use app-level ping/pong to detect staleness and force a reconnect.
++        if (staleForMs > 90_000) {
++          relayLogger.warn({ url, staleForMs }, "relay_control_stale_terminating");
++          try {
++            socket.terminate();
++          } catch {
++            // ignore
++          }
++          return;
++        }
++
++        try {

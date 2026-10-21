@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1356,
+  "revision": "84e3140f1919c48cf19c27f85ed8bd49984ce187",
+  "date": "2026-02-22T20:01:05+07:00",
+  "committer_date": "2026-02-22T20:01:05+07:00",
+  "parents": [
+    "1974c3397135a330be20ec49ba8ecea29b2fd58b"
+  ],
+  "subject": "fix: keep optimistic status during agent bootstrap phase",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:2b224a8d5e817954e05f9f9d35dc08e600fe5224ba0abeffe494c7bbdda48d27",
+  "diff_tree_digest": "sha256:5bced47086014a8c92d8a6c9ae8e15dd415526de2056acf456f445899ac79a90",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-screen-state-machine.ts",
+      "old_lines": [
+        134,
+        139
+      ],
+      "new_lines": [
+        144,
+        149
+      ],
+      "diff_block_lines": [
+        24,
+        34
+      ],
+      "hunk_header": "@@ -133,9 +143,11 @@ export function deriveAgentScreenViewState({",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 96,
+  "receipt_file": "receipts/1356/selected.patch"
+}

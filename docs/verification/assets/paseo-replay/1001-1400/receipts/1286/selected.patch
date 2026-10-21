@@ -1,0 +1,9 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1113,1117],"new_lines":[1113,1117],"diff_block_lines":[5,11],"hunk_header":"@@ -1113,5 +1113,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2}
+@@ -1113,5 +1113,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+       allActions.set("merge-from-base", {
+         id: "merge-from-base",
+-        label: isOnBaseBranch ? `Sync ${baseRefLabel} from origin` : `Update from ${baseRefLabel}`,
++        label: isOnBaseBranch ? "Sync" : `Update from ${baseRefLabel}`,
+         pendingLabel: "Updating...",
+         successLabel: "Updated",

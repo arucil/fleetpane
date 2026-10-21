@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1179,
+  "revision": "d6f21b3568618a0a1251a6793c77907fa4f16b6e",
+  "date": "2026-02-14T08:38:06+07:00",
+  "committer_date": "2026-02-14T08:38:06+07:00",
+  "parents": [
+    "86b291814bb22947389219845881a8a2f07c9873"
+  ],
+  "subject": "refactor(cli): centralize worktree ls path resolution",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/worktree/ls.ts",
+    "A\tpackages/cli/tests/20-worktree-ls-paths.test.ts"
+  ],
+  "source_receipt_digest": "sha256:ebde19508b5628f4813a964ff8c185a697218f782b381022206a4c9521810c7c",
+  "diff_tree_digest": "sha256:0fbcbd9f2b73e396c9d51897c0957ba4a3707b2ad0c7d35a652edf6c695cc4a8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/worktree/ls.ts",
+      "old_lines": [
+        27,
+        27
+      ],
+      "new_lines": [
+        28,
+        38
+      ],
+      "diff_block_lines": [
+        19,
+        29
+      ],
+      "hunk_header": "@@ -22,7 +24,18 @@ function shortenPath(path: string): string {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 33,
+  "receipt_file": "receipts/1179/selected.patch"
+}

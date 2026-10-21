@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/stt-manager.ts
+RANGE {"path":"packages/server/src/server/agent/stt-manager.ts","old_lines":[105,115],"new_lines":[116,116],"diff_block_lines":[34,44],"hunk_header":"@@ -98,36 +114,166 @@ export class STTManager {","substantive_changed_lines":10}
+-        isLowConfidence?: boolean;
+-      }>((resolve, reject) => {
+-        session.on("error", reject);
+-        session.on("transcript", (payload) => {
+-          if (!payload.isFinal) {
+-            return;
+-          }
+-          resolve({
+-            transcript: payload.transcript,
+-            language: payload.language,
+-            logprobs: payload.logprobs,

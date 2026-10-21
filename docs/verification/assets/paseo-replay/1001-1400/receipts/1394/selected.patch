@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sortable-inline-list.web.tsx
+RANGE {"path":"packages/app/src/components/sortable-inline-list.web.tsx","old_lines":[0,0],"new_lines":[27,37],"diff_block_lines":[33,43],"hunk_header":"@@ -0,0 +1,206 @@","substantive_changed_lines":3}
++
++function SortableItem<T>({
++  id,
++  item,
++  index,
++  renderItem,
++  activeId,
++  useDragHandle,
++  disabled,
++}: {
++  id: string;

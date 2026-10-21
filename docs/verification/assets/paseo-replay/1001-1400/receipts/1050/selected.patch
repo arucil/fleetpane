@@ -1,0 +1,13 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[758,768],"new_lines":[541,541],"diff_block_lines":[266,276],"hunk_header":"@@ -552,382 +539,15 @@ export async function createPaseoDaemon(","substantive_changed_lines":8}
+-    logger.warn(
+-      { configured: Boolean(sherpaConfig) },
+-      "Local STT selected but local provider config is missing; STT will be unavailable"
+-    );
+-  }
+-
+-  if (wantsLocalVoiceTts && sherpaConfig) {
+-    let preset = (sherpaConfig.tts?.preset ?? "pocket-tts-onnx-int8").trim();
+-    if (
+-      preset !== "kitten-nano-en-v0_1-fp16" &&
+-      preset !== "kokoro-en-v0_19" &&

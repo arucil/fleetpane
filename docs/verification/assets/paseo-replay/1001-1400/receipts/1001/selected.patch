@@ -1,0 +1,24 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[246,253],"new_lines":[249,267],"diff_block_lines":[13,34],"hunk_header":"@@ -246,8 +249,19 @@ export function groupAgents(","substantive_changed_lines":9}
+@@ -246,8 +249,19 @@ export function groupAgents(
+     const isRunningOrAttention =
+       agent.status === "running" || agent.requiresAttention;
+-    const isRecentlyActive =
+-      now - agent.lastActivityAt.getTime() < ACTIVE_GRACE_PERIOD_MS;
++    const ageDiff = now - agent.lastActivityAt.getTime();
++    const isRecentlyActive = ageDiff < ACTIVE_GRACE_PERIOD_MS;
+     const isActive = isRunningOrAttention || isRecentlyActive;
+ 
++    // eslint-disable-next-line no-console
++    console.log('[agent-grouping] agent:', agent.title || agent.id, {
++      status: agent.status,
++      lastActivityAt: agent.lastActivityAt,
++      ageDiffHours: ageDiff / (1000 * 60 * 60),
++      gracePeriodHours: ACTIVE_GRACE_PERIOD_MS / (1000 * 60 * 60),
++      isRunningOrAttention,
++      isRecentlyActive,
++      isActive,
++    });
++
+     if (isActive) {
+       activeAgents.push(agent);

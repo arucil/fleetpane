@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[770,770],"new_lines":[774,784],"diff_block_lines":[44,54],"hunk_header":"@@ -768,4 +768,61 @@ export const ActivityLog = memo(function ActivityLog({","substantive_changed_lines":9}
++
++const compactionStylesheet = StyleSheet.create((theme) => ({
++  container: {
++    flexDirection: "row",
++    alignItems: "center",
++    paddingVertical: theme.spacing[3],
++    paddingHorizontal: theme.spacing[4],
++    gap: theme.spacing[2],
++  },
++  line: {
++    flex: 1,

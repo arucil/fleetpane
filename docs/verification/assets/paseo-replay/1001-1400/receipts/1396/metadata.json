@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1396,
+  "revision": "92b5f1e963210e6afff01e259b639a89baa4791f",
+  "date": "2026-03-02T15:59:23+07:00",
+  "committer_date": "2026-03-02T15:59:23+07:00",
+  "parents": [
+    "223c8d7d0bbd8f2098f57aee4f8128fa3728269e",
+    "01faa3467d841291757bc7f943c0a909d83ab3eb"
+  ],
+  "subject": "Merge branch 'main' of github.com:getpaseo/paseo",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/logger.test.ts",
+    "M\tpackages/server/src/server/logger.ts",
+    "M\tpackages/server/src/server/persisted-config.test.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/website/public/schemas/paseo.config.v1.json",
+    "M\tpackages/website/src/routes/docs/configuration.tsx"
+  ],
+  "source_receipt_digest": "sha256:3349bf79ee6c29be4b487695f20fc9cdba88ab19694d0c0b1ea22fecf1ca70d6",
+  "diff_tree_digest": "sha256:015a59e8458aae7cb0e29298a2bedbceaa42fb6d094b31f24716f2d6c9a1dfbf",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/local-daemon.ts",
+      "old_lines": [
+        364,
+        372
+      ],
+      "new_lines": [
+        361,
+        364
+      ],
+      "diff_block_lines": [
+        38,
+        48
+      ],
+      "hunk_header": "@@ -348,62 +348,56 @@ export async function startLocalDaemonDetached(",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 554,
+  "receipt_file": "receipts/1396/selected.patch"
+}

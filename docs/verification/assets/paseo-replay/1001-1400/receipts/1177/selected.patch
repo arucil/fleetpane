@@ -1,0 +1,9 @@
+FILE scripts/codex-refactor-loop.sh
+RANGE {"path":"scripts/codex-refactor-loop.sh","old_lines":[12,16],"new_lines":[12,16],"diff_block_lines":[5,11],"hunk_header":"@@ -12,5 +12,5 @@ CODEX_REASONING_EFFORT=\"${CODEX_REASONING_EFFORT:-medium}\"","substantive_changed_lines":2}
+@@ -12,5 +12,5 @@ CODEX_REASONING_EFFORT="${CODEX_REASONING_EFFORT:-medium}"
+ 
+ read -r -d '' PROMPT <<'EOF' || true
+-1. load the refactor skill
++1. load the refactor skill and read its SKILL.md fully from top to bottom (do not skim or partially read)
+ 2. check previous commits to see what other agents have worked on
+ 3. identify and work on a single improvement based on the refactor skill (can be a file system reorg, file splitting, refactor, add a new test, harden a test, deflakify a test, fix a test, improve control flow, remove unused code)

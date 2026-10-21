@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[506,506],"new_lines":[517,527],"diff_block_lines":[40,50],"hunk_header":"@@ -500,8 +510,113 @@ export function SessionProvider({","substantive_changed_lines":9}
++  const applyAgentUpdatePayload = useCallback(
++    (update: AgentUpdatePayload) => {
++      if (update.kind === "remove") {
++        const agentId = update.agentId;
++        previousAgentStatusRef.current.delete(agentId);
++        pendingAgentUpdatesRef.current.delete(agentId);
++
++        setAgents(serverId, (prev) => {
++          if (!prev.has(agentId)) {
++            return prev;
++          }

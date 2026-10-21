@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1198,
+  "revision": "adb511d2be5425c8db009b71b2fa197faa810d08",
+  "date": "2026-02-15T15:40:18+07:00",
+  "committer_date": "2026-02-15T15:40:18+07:00",
+  "parents": [
+    "9244f1fbd66c8a52b0709d32f90613860d8a143e"
+  ],
+  "subject": "refactor(app): extract terminal runtime out of react lifecycle",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-pump.test.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-pump.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-stream-controller.test.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "A\tpackages/app/src/utils/terminal-output-buffer.test.ts",
+    "A\tpackages/app/src/utils/terminal-output-buffer.ts"
+  ],
+  "source_receipt_digest": "sha256:f31add0263c17feac9de14b6f7ee9ac2a0093125fc6d784946509e4b56c489d9",
+  "diff_tree_digest": "sha256:2d947b56436f5b809e0720667898a620a4bd2277bde7f7368acb26693fd460bc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-emulator.tsx",
+      "old_lines": [
+        164,
+        174
+      ],
+      "new_lines": [
+        74,
+        74
+      ],
+      "diff_block_lines": [
+        168,
+        178
+      ],
+      "hunk_header": "@@ -97,397 +62,64 @@ export default function TerminalEmulator({",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 1702,
+  "receipt_file": "receipts/1198/selected.patch"
+}

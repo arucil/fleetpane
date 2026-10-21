@@ -1,0 +1,13 @@
+FILE EXECUTION_PLAN_ITERATION_3_WORKSPACE_HEADER_TABS_RESTORE.md
+RANGE {"path":"EXECUTION_PLAN_ITERATION_3_WORKSPACE_HEADER_TABS_RESTORE.md","old_lines":[0,0],"new_lines":[4,14],"diff_block_lines":[10,20],"hunk_header":"@@ -0,0 +1,60 @@","substantive_changed_lines":8}
++
++- Work happens in an isolated git worktree and merges back to `main` once verified.
++- Do not restart or touch the daemon on `localhost:6767`.
++- Use the repo’s existing Playwright global setup (isolated daemon/metro) for E2E.
++- Pass all gates before merging:
++  - Typecheck
++  - Vitest
++  - Playwright E2E
++  - Manual `agent-browser` verification
++
++## Agent Delegation (Paseo)

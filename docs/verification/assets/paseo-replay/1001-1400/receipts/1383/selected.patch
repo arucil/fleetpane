@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[810,819],"new_lines":[822,827],"diff_block_lines":[152,162],"hunk_header":"@@ -809,22 +821,37 @@ export function SidebarAgentList({","substantive_changed_lines":6}
+         simultaneousGestureRef={parentGestureRef}
++        onDragBegin={handleListDragBegin}
+       />
+ 
+       {isSelectionMode ? (
+         <View style={styles.selectionBar}>
+-          <Pressable style={styles.selectionAction} onPress={handleSelectionBack}>
+-            <Text style={styles.selectionActionText}>Back</Text>
+-          </Pressable>
+-          <Pressable
+-            style={[

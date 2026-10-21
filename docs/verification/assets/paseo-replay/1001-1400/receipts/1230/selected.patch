@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[145,145],"new_lines":[147,157],"diff_block_lines":[14,24],"hunk_header":"@@ -144,4 +146,111 @@ function ensureWebToolCallShimmerKeyframes() {","substantive_changed_lines":9}
+ 
++function getWheelEventElementTarget(
++  event: WheelEvent,
++  fallback: HTMLElement
++): HTMLElement {
++  const { target } = event;
++  if (target instanceof HTMLElement) {
++    return target;
++  }
++  if (target instanceof Node && target.parentElement) {
++    return target.parentElement;

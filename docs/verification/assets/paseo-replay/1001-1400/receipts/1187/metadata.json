@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1187,
+  "revision": "21f191583f281c329ae90db84fb3362577a0bc97",
+  "date": "2026-02-14T10:06:51+07:00",
+  "committer_date": "2026-02-14T10:06:51+07:00",
+  "parents": [
+    "d9e14186ce28c88339454cf6f310abbe2b0ca4db"
+  ],
+  "subject": "refactor(server): centralize daemon-client correlated RPC wiring",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:fdf3a4e61c652e1794feee770aeac08d728b9738fbab9d2880c8bd98c402b302",
+  "diff_tree_digest": "sha256:fd9373b60be821d7307a30247a4c3dc5ff05e88b40a956dc7ad58932c6ec6c14",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        1945,
+        1955
+      ],
+      "new_lines": [
+        1964,
+        1964
+      ],
+      "diff_block_lines": [
+        95,
+        105
+      ],
+      "hunk_header": "@@ -1944,34 +1963,26 @@ export class DaemonClient {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 302,
+  "receipt_file": "receipts/1187/selected.patch"
+}

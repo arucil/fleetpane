@@ -1,0 +1,13 @@
+FILE package.json
+RANGE {"path":"package.json","old_lines":[36,42],"new_lines":[36,42],"diff_block_lines":[5,15],"hunk_header":"@@ -36,7 +36,7 @@","substantive_changed_lines":6}
+@@ -36,7 +36,7 @@
+     "version:sync-internal": "node scripts/sync-workspace-versions.mjs",
+     "release:prepare": "npm install --workspaces --include-workspace-root",
+-    "version:all:patch": "npm version patch --workspaces --include-workspace-root --message \"chore(release): cut %s\"",
+-    "version:all:minor": "npm version minor --workspaces --include-workspace-root --message \"chore(release): cut %s\"",
+-    "version:all:major": "npm version major --workspaces --include-workspace-root --message \"chore(release): cut %s\"",
++    "version:all:patch": "npm version patch --include-workspace-root --message \"chore(release): cut %s\"",
++    "version:all:minor": "npm version minor --include-workspace-root --message \"chore(release): cut %s\"",
++    "version:all:major": "npm version major --include-workspace-root --message \"chore(release): cut %s\"",
+     "release:check": "npm run release:prepare && npm run typecheck --workspace=@getpaseo/relay && npm run typecheck --workspace=@getpaseo/server && npm run typecheck --workspace=@getpaseo/cli && npm run build --workspace=@getpaseo/relay && npm run build --workspace=@getpaseo/server && npm run build --workspace=@getpaseo/cli && npm pack --dry-run --workspace=@getpaseo/relay && npm pack --dry-run --workspace=@getpaseo/server && npm pack --dry-run --workspace=@getpaseo/cli",
+     "release:publish:dry-run": "npm publish --dry-run --workspace=@getpaseo/relay --access public && npm publish --dry-run --workspace=@getpaseo/server --access public && npm publish --dry-run --workspace=@getpaseo/cli --access public",

@@ -1,0 +1,23 @@
+FILE packages/desktop/src-tauri/src/lib.rs
+RANGE {"path":"packages/desktop/src-tauri/src/lib.rs","old_lines":[49,49],"new_lines":[56,76],"diff_block_lines":[40,60],"hunk_header":"@@ -41,12 +47,43 @@ pub fn run() {","substantive_changed_lines":13}
++                for item in menu.items()? {
++                    if let MenuItemKind::Submenu(submenu) = item {
++                        if submenu.text()? == "View" {
++                            view_submenu = Some(submenu);
++                            break;
++                        }
++                    }
++                }
++
++                if let Some(view) = view_submenu {
++                    // Zoom controls first, then keep existing items (e.g. Fullscreen).
++                    view.insert_items(&[&zoom_in, &zoom_out, &zoom_reset, &separator], 0)?;
++                } else {
++                    // Fallback: if the default menu ever changes, create a View menu.
++                    let view_menu = Submenu::with_items(
++                        app,
++                        "View",
++                        true,
++                        &[&zoom_in, &zoom_out, &zoom_reset, &separator],
++                    )?;
++                    menu.append(&view_menu)?;

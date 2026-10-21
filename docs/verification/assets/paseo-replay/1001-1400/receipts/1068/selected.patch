@@ -1,0 +1,13 @@
+FILE packages/app/app.config.js
+RANGE {"path":"packages/app/app.config.js","old_lines":[4,4],"new_lines":[1,11],"diff_block_lines":[9,19],"hunk_header":"@@ -1,10 +1,25 @@","substantive_changed_lines":8}
+ const pkg = require("./package.json");
++const appVariant = process.env.APP_VARIANT ?? "prod";
++
++const variants = {
++  prod: {
++    name: "Paseo",
++    packageId: "sh.paseo",
++  },
++  debug: {
++    name: "Paseo Debug",
++    packageId: "sh.paseo.debug",

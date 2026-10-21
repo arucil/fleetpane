@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[161,161],"new_lines":[168,178],"diff_block_lines":[29,39],"hunk_header":"@@ -160,4 +167,42 @@ function pickSupportedModelId(","substantive_changed_lines":8}
+ 
++function inferClaudeModelFamilyFromText(
++  text: string | null | undefined
++): ClaudeModelFamily | null {
++  if (typeof text !== "string") {
++    return null;
++  }
++  const lowerText = text.toLowerCase();
++  if (lowerText.includes("sonnet")) {
++    return "sonnet";
++  }

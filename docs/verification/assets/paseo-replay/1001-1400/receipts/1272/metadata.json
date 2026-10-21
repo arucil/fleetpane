@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1272,
+  "revision": "e88a0c1db6bce3583b14fdef54b563e743a15480",
+  "date": "2026-02-18T13:08:40+07:00",
+  "committer_date": "2026-02-18T13:08:40+07:00",
+  "parents": [
+    "dab08865c7d649cbe71da9ee2de2102584452838"
+  ],
+  "subject": "feat(server): add Claude /rewind command support",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts"
+  ],
+  "source_receipt_digest": "sha256:4a2b2894e80f6e01542f28ee185958e474cc23283c43d6be2734f5b3cd087999",
+  "diff_tree_digest": "sha256:98e0f0595a4eda06d63af04ec80f3b10b8328ac72e0a34c37d8d015e76de0663",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1009,
+        1014
+      ],
+      "new_lines": [
+        1031,
+        1036
+      ],
+      "diff_block_lines": [
+        44,
+        54
+      ],
+      "hunk_header": "@@ -1008,9 +1030,282 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 349,
+  "receipt_file": "receipts/1272/selected.patch"
+}

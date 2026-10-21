@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1279,
+  "revision": "95eec2b6c0839c9dfd7bc8d553d4aef46b81c2a9",
+  "date": "2026-02-18T18:22:37+07:00",
+  "committer_date": "2026-02-18T18:22:37+07:00",
+  "parents": [
+    "b1afb2673d1adb4a4ab8514a0386b59704a9fa34",
+    "f2fa7bb79eed95d377ba3db505739c8011b14caf"
+  ],
+  "subject": "Merge pull request #59 from getpaseo/implement/custom-scrollbars-web-desktop",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/+html.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/draggable-list.native.tsx",
+    "M\tpackages/app/src/components/draggable-list.types.ts",
+    "M\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "A\tpackages/app/src/components/web-desktop-scrollbar.math.ts",
+    "A\tpackages/app/src/components/web-desktop-scrollbar.test.ts",
+    "A\tpackages/app/src/components/web-desktop-scrollbar.tsx"
+  ],
+  "source_receipt_digest": "sha256:e6f93581422ff68bd7a85c437d75d390b6f9a459a4bdcb52a55c2f2d74930c0c",
+  "diff_tree_digest": "sha256:b029dc0684aa86e3239741c64207944fb5cb8ff244cc9d89ed57392d42a7cfe1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/draggable-list.web.tsx",
+      "old_lines": [
+        170,
+        180
+      ],
+      "new_lines": [
+        181,
+        181
+      ],
+      "diff_block_lines": [
+        73,
+        83
+      ],
+      "hunk_header": "@@ -152,38 +160,59 @@ export function DraggableList<T>({",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 473,
+  "receipt_file": "receipts/1279/selected.patch"
+}

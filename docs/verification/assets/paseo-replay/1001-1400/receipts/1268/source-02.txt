@@ -1,0 +1,39 @@
+      }))
+    }
+
+    if (mode === 'file' && activeFileMention) {
+      return (fileSuggestionsQuery.data ?? []).map((entry) => ({
+        type: 'workspace_entry' as const,
+        id: `${entry.kind}:${entry.path}`,
+        label: entry.path,
+        detail: entry.kind === 'directory' ? 'Directory' : 'File',
+        kind: entry.kind,
+        entryPath: entry.path,
+        mention: activeFileMention,
+      }))
+    }
+
+    return []
+  }, [activeFileMention, commandFilterQuery, commands, fileSuggestionsQuery.data, isVisible, mode])
+
+  const onSelectOption = useCallback(
+    (option: AutocompleteOption) => {
+      const selected = option as AgentAutocompleteOption
+      if (selected.type === 'command') {
+        setUserInput(`/${selected.id} `)
+        onAutocompleteApplied?.()
+        return
+      }
+
+      const nextInput = applyFileMentionReplacement({
+        text: userInput,
+        mention: selected.mention,
+        relativePath: selected.entryPath,
+      })
+      setUserInput(nextInput)
+      onAutocompleteApplied?.()
+    },
+    [onAutocompleteApplied, setUserInput, userInput]
+  )
+
+  const { selectedIndex, onKeyPress } = useAutocomplete({

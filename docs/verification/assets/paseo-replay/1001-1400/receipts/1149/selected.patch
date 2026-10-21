@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-mapper.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-mapper.ts","old_lines":[79,89],"new_lines":[79,79],"diff_block_lines":[7,17],"hunk_header":"@@ -78,54 +78,36 @@ const ClaudeToolCallPass2Schema = z.discriminatedUnion(\"toolKind\", [","substantive_changed_lines":8}
+     name: z.literal("mcp__paseo__speak"),
+-  }).transform((normalized): ToolCallTimelineItem => {
+-    const name = "speak" as const;
+-    const detail = deriveClaudeToolDetail(name, normalized.input, normalized.output);
+-    if (normalized.status === "failed") {
+-      return {
+-        type: "tool_call",
+-        callId: normalized.callId,
+-        name,
+-        detail,
+-        status: "failed",

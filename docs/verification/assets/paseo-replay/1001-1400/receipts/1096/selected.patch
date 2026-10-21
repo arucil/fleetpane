@@ -1,0 +1,13 @@
+FILE packages/server/src/server/file-explorer/service.ts
+RANGE {"path":"packages/server/src/server/file-explorer/service.ts","old_lines":[106,107],"new_lines":[114,124],"diff_block_lines":[25,35],"hunk_header":"@@ -103,7 +103,24 @@ export async function listDirectoryEntries({","substantive_changed_lines":5}
++        // Skip entries whose targets disappeared instead of failing the whole listing.
++        if (isMissingEntryError(error)) {
++          return null;
++        }
++        throw error;
++      }
+     })
+   );
++  const entries = entriesWithNulls.filter(
++    (entry): entry is FileExplorerEntry => entry !== null
++  );

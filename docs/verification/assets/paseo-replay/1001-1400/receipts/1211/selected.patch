@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[2,7],"new_lines":[2,11],"diff_block_lines":[5,15],"hunk_header":"@@ -2,6 +2,10 @@ import * as React from 'react'","substantive_changed_lines":2}
+@@ -2,6 +2,10 @@ import * as React from 'react'
+ import { createFileRoute } from '@tanstack/react-router'
+ import { CursorFieldProvider } from '~/components/butterfly'
++import websitePackage from '../../package.json'
+ import '~/styles.css'
+ 
++const desktopVersion = websitePackage.version
++const macDownloadHref = `https://github.com/getpaseo/paseo/releases/download/v${desktopVersion}/Paseo_${desktopVersion}_aarch64.dmg`
++
+ export const Route = createFileRoute('/')({
+   head: () => ({

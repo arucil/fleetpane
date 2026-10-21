@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1295,
+  "revision": "24a8db5763a909b7ed7ef6dcf4917b8ce4419682",
+  "date": "2026-02-19T09:53:44+07:00",
+  "committer_date": "2026-02-19T09:53:44+07:00",
+  "parents": [
+    "08d4cfac11c9e3379dbcbedc79fa6a342e5117be"
+  ],
+  "subject": "refactor: extract explorer open gesture and standardize icon sizes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/headers/back-header.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/realtime-voice-overlay.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/components/ui/segmented-control.tsx",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-archive-agent.test.ts",
+    "M\tpackages/app/src/hooks/use-archive-agent.ts",
+    "A\tpackages/app/src/hooks/use-explorer-open-gesture.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/panel-store.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:033d8805532b0818596f8c1feb0bb1db7b13ed907492dd162abedf3e329cfed2",
+  "diff_tree_digest": "sha256:5736cb3f987532d93c4f2f58ae26245c25a52d46d13297bcfbe60c1094794af1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-archive-agent.ts",
+      "old_lines": [
+        75,
+        75
+      ],
+      "new_lines": [
+        79,
+        89
+      ],
+      "diff_block_lines": [
+        16,
+        26
+      ],
+      "hunk_header": "@@ -74,4 +78,64 @@ function isAgentArchiving(input: IsAgentArchivingInput): boolean {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 638,
+  "receipt_file": "receipts/1295/selected.patch"
+}

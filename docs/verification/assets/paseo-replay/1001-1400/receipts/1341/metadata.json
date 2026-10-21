@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1341,
+  "revision": "74a9a3c33b178c43256c06ad4dc973edbd32fec9",
+  "date": "2026-02-22T12:17:37+07:00",
+  "committer_date": "2026-02-22T12:17:37+07:00",
+  "parents": [
+    "1fdad9e2a7f6e180cc6a8d2208dcada254540f12"
+  ],
+  "subject": "refactor: remove permission timeout logic and rely on abort handler (#62)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d61b1e040ca3fd27dab071050c1cf1ba38551472a14054f395a09ec48fe08a4d",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1671,
+        1674
+      ],
+      "new_lines": [
+        1669,
+        1673
+      ],
+      "diff_block_lines": [
+        14,
+        19
+      ],
+      "hunk_header": "@@ -1671,4 +1669,5 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 13,
+  "receipt_file": "receipts/1341/selected.patch"
+}

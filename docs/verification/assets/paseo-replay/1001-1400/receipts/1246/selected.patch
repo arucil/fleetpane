@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[641,651],"new_lines":[642,642],"diff_block_lines":[13,23],"hunk_header":"@@ -640,82 +641,28 @@ function generateWorktreeSlug(): string {","substantive_changed_lines":8}
+ 
+-function tryParseGitRemote(remoteUrl: string): { host?: string; path: string } | null {
+-  const cleaned = remoteUrl.trim().replace(/\.git$/i, "");
+-  if (!cleaned) {
+-    return null;
+-  }
+-
+-  if (cleaned.includes("://")) {
+-    try {
+-      const url = new URL(cleaned);
+-      return { host: url.hostname, path: url.pathname.replace(/^\/+/, "") };

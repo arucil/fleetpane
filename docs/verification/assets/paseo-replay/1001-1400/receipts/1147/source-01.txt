@@ -1,0 +1,24 @@
+        params.model = this.config.model;
+      }
+      const thinkingOptionId = normalizeCodexThinkingOptionId(this.config.thinkingOptionId);
+      if (thinkingOptionId) {
+        params.effort = thinkingOptionId;
+      }
+      if (this.resolvedCollaborationMode) {
+        params.collaborationMode = {
+          mode: this.resolvedCollaborationMode.mode,
+          settings: this.resolvedCollaborationMode.settings,
+        };
+      }
+      if (this.config.cwd) {
+        params.cwd = this.config.cwd;
+      }
+      if (options?.outputSchema) {
+        params.outputSchema = options.outputSchema;
+      }
+      if (this.config.systemPrompt?.trim()) {
+        params.developerInstructions = this.config.systemPrompt.trim();
+      }
+      const codexConfig = this.buildCodexInnerConfig();
+      if (codexConfig) {
+        params.config = codexConfig;

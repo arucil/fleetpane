@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1085,
+  "revision": "6d4992b2f5a13a2832e017a10af38a41160b2b3b",
+  "date": "2026-02-09T08:53:27+07:00",
+  "committer_date": "2026-02-09T08:53:27+07:00",
+  "parents": [
+    "01766144678456447fdcde7cea960e6d69dbeec3"
+  ],
+  "subject": "refactor: tighten canonical tool-call typing and display mapping",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/tool-call-display.ts",
+    "A\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/tool-call-mapper-utils.ts",
+    "M\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.tool-call-schema.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/shared/tool-call-display.test.ts",
+    "A\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:8b000add71cbcec11c6b5ea1441ca592234fb2de0818544eaa39de135d3b15bb",
+  "diff_tree_digest": "sha256:af61c9549f206230dbe471fd69a9e7b5b4407f590b335494a6e5b32c5164cc64",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tool-call-display.ts",
+      "old_lines": [
+        67,
+        77
+      ],
+      "new_lines": [
+        1,
+        1
+      ],
+      "diff_block_lines": [
+        72,
+        82
+      ],
+      "hunk_header": "@@ -1,211 +1,5 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 3468,
+  "receipt_file": "receipts/1085/selected.patch"
+}

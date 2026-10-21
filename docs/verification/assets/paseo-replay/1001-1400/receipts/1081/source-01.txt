@@ -1,0 +1,68 @@
+    if (!sendAgentMessageRef.current && !onSubmitMessageRef.current) return;
+
+    if (agent?.status === "running" && !forceSend) {
+      queueMessage(trimmedMessage, imageAttachments);
+      return;
+    }
+
+    // Clear input optimistically before awaiting server ack.
+    // Save values so we can restore on error.
+    const savedImages = imageAttachments;
+    if (!onSubmitMessageRef.current) {
+      if (value !== undefined) {
+        onChangeText?.("");
+      } else {
+        setUserInput("");
+      }
+    }
+    setSelectedImages([]);
+    setSendError(null);
+    setIsProcessing(true);
+
+    try {
+      await submitMessage(trimmedMessage, imageAttachments);
+    } catch (error) {
+      console.error("[AgentInput] Failed to send message:", error);
+      // Restore input so the user never loses their message
+      if (!onSubmitMessageRef.current) {
+        if (value !== undefined) {
+          onChangeText?.(trimmedMessage);
+        } else {
+          setUserInput(trimmedMessage);
+        }
+      }
+      if (savedImages) {
+        setSelectedImages(savedImages);
+      }
+      setSendError(
+        error instanceof Error ? error.message : "Failed to send message"
+      );
+    } finally {
+      setIsProcessing(false);
+    }
+  }
+
+  function handleSubmit(payload: MessagePayload) {
+    if (blurOnSubmit) {
+      messageInputRef.current?.blur();
+    }
+    void sendMessageWithContent(
+      payload.text,
+      payload.images,
+      payload.forceSend
+    );
+  }
+
+  async function handlePickImage() {
+    const result = await pickImages();
+    if (!result?.assets?.length) {
+      return;
+    }
+
+    const newImages = result.assets.map((asset) => ({
+      uri: asset.uri,
+      mimeType: asset.mimeType || "image/jpeg",
+    }));
+    setSelectedImages((prev) => [...prev, ...newImages]);
+  }
+

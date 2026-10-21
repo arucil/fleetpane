@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1056,
+  "revision": "bc4e2daf6742cb82ea3b4a94998ed55f1234587d",
+  "date": "2026-02-06T22:48:52+07:00",
+  "committer_date": "2026-02-06T22:48:52+07:00",
+  "parents": [
+    "cdb7ef12aea5779ee5580ea6b8a9e152e3a3d4c7"
+  ],
+  "subject": "Refactor speech provider selection model and harden CI startup",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/config.test.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/config.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-types.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2ab7a359a4668e72bed6552541c2e6d9bdc4f1a6e551caa9002795a7b8e91eda",
+  "diff_tree_digest": "sha256:a830435f859e4328c4350030e69de3c8c117480cc9b8bd3663730d412c2e49dd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/speech-config-resolver.ts",
+      "old_lines": [
+        28,
+        38
+      ],
+      "new_lines": [
+        29,
+        29
+      ],
+      "diff_block_lines": [
+        24,
+        34
+      ],
+      "hunk_header": "@@ -27,18 +28,42 @@ function resolveRequestedSpeechProviders(params: {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 438,
+  "receipt_file": "receipts/1056/selected.patch"
+}

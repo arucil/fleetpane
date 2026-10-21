@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1266,
+  "revision": "69e009990c77a21f97a5832904099a2e6688181d",
+  "date": "2026-02-18T17:55:13+07:00",
+  "committer_date": "2026-02-18T17:55:13+07:00",
+  "parents": [
+    "b1955cf74d144ad6f99d394d57f82ef04ec236cf"
+  ],
+  "subject": "feat(app): support pasting images into prompt attachments",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/paste-image-attachment.spec.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "A\tpackages/app/src/utils/image-attachments-from-files.test.ts",
+    "A\tpackages/app/src/utils/image-attachments-from-files.ts"
+  ],
+  "source_receipt_digest": "sha256:16b90e7ed3be2c16fa9cebe650823ca17cc11202c8552f42a013b1adf3d858fb",
+  "diff_tree_digest": "sha256:2ed165547d0c9873fd6c0822a609f435bb4d59273f743f8e814a6b95260567de",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        485,
+        485
+      ],
+      "new_lines": [
+        491,
+        501
+      ],
+      "diff_block_lines": [
+        83,
+        93
+      ],
+      "hunk_header": "@@ -482,7 +488,60 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 194,
+  "receipt_file": "receipts/1266/selected.patch"
+}

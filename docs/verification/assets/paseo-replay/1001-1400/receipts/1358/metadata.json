@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1358,
+  "revision": "42786956c7bf2008915e5c067f8dafb2d1c3b4b9",
+  "date": "2026-02-22T22:37:16+07:00",
+  "committer_date": "2026-02-22T22:37:16+07:00",
+  "parents": [
+    "9b6f5e028cafa9696300a5dd2e01b4290ab2b779"
+  ],
+  "subject": "fix(server): reconcile claude runtime model ids against live catalog",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.model-normalization.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/model-runtime-reconcile-claude.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:34744194fb40a55c27aa29f0296372e22b98355baf8a98061c7309ca81e3541b",
+  "diff_tree_digest": "sha256:43925316c196fcf8575d552b3a942b74faf74768e86c3567330d4f02146d5100",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        161,
+        161
+      ],
+      "new_lines": [
+        168,
+        178
+      ],
+      "diff_block_lines": [
+        29,
+        39
+      ],
+      "hunk_header": "@@ -160,4 +167,42 @@ function pickSupportedModelId(",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 134,
+  "receipt_file": "receipts/1358/selected.patch"
+}

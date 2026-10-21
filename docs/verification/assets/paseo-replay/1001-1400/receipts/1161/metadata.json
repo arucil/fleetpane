@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1161,
+  "revision": "69f851aa14428fe58ce008bf18a5c6c8e781c118",
+  "date": "2026-02-13T09:09:39Z",
+  "committer_date": "2026-02-13T09:09:39Z",
+  "parents": [
+    "4948ba581a88243ece40b18c21865762f5c6e443"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\t.tool-versions",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/relay/src/e2e.test.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tpackages/server/src/shared/binary-mux.test.ts",
+    "A\tpackages/server/src/shared/binary-mux.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/shared/terminal-key-input.test.ts",
+    "A\tpackages/server/src/shared/terminal-key-input.ts",
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:8c1eaf1ae89d1afb0bc48fa7b5ba685537dce2972c5644cc123f789b1d999831",
+  "diff_tree_digest": "sha256:e8344fd90ae9ebceb81d65e51f9d7afa046c285a9e7b3e19395633c25dfb9ae3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        2572,
+        2572
+      ],
+      "new_lines": [
+        2654,
+        2664
+      ],
+      "diff_block_lines": [
+        135,
+        145
+      ],
+      "hunk_header": "@@ -2570,4 +2630,157 @@ export class DaemonClient {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 1493,
+  "receipt_file": "receipts/1161/selected.patch"
+}

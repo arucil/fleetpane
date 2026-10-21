@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[206,206],"new_lines":[206,216],"diff_block_lines":[7,17],"hunk_header":"@@ -205,4 +205,16 @@ function AgentScreenContent({","substantive_changed_lines":8}
+   const isExplorerOpen = isMobile ? mobileView === "file-explorer" : desktopFileExplorerOpen;
++  const openExplorerWithDefaultTab = useCallback(() => {
++    // Generic explorer toggles should land on Changes by default.
++    setExplorerTab("changes");
++    openFileExplorer();
++  }, [openFileExplorer, setExplorerTab]);
++  const handleToggleExplorer = useCallback(() => {
++    if (isExplorerOpen) {
++      toggleFileExplorer();
++      return;
++    }

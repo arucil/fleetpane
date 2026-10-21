@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/ls.ts
+RANGE {"path":"packages/cli/src/commands/agent/ls.ts","old_lines":[123,131],"new_lines":[117,122],"diff_block_lines":[43,53],"hunk_header":"@@ -118,37 +114,24 @@ export async function runLsCommand(","substantive_changed_lines":3}
+     if (!options.all) {
+-      agents = agents.filter((a) => {
+-        // Show running and idle agents, exclude archived
+-        return (a.status === 'running' || a.status === 'idle') && !a.archivedAt
+-      })
++      agents = agents.filter((a) => !a.archivedAt)
+     }
+ 
+-    // If explicit status filter is provided, use it
++    // If explicit status filter is provided, apply it.
+     if (options.status) {

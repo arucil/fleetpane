@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/mode.ts
+RANGE {"path":"packages/cli/src/commands/agent/mode.ts","old_lines":[92,101],"new_lines":[93,94],"diff_block_lines":[30,40],"hunk_header":"@@ -91,25 +92,20 @@ export async function runModeCommand(","substantive_changed_lines":7}
+       }
+-    } else {
+-      if (!normalizedMode) {
+-        const error: CommandError = {
+-          code: 'MISSING_ARGUMENT',
+-          message: 'Mode argument required unless --list is specified',
+-          details: 'Usage: paseo agent mode <id> <mode> | paseo agent mode --list <id>',
+-        }
+-        throw error
+-      }
++    }

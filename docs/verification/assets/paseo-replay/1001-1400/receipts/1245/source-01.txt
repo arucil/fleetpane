@@ -1,0 +1,61 @@
+
+const WORKTREE_PROJECT_HASH_LENGTH = 8;
+
+function deriveShortAlphanumericHash(value: string): string {
+  const digest = createHash("sha256").update(value).digest();
+  let hashValue = 0n;
+  for (let index = 0; index < 8; index += 1) {
+    hashValue = (hashValue << 8n) | BigInt(digest[index] ?? 0);
+  }
+  return hashValue
+    .toString(36)
+    .padStart(13, "0")
+    .slice(0, WORKTREE_PROJECT_HASH_LENGTH);
+}
+
+export async function deriveWorktreeProjectHash(cwd: string): Promise<string> {
+  try {
+    const commonDir = await getGitCommonDir(cwd);
+    const normalizedCommonDir = normalizePathForOwnership(commonDir);
+    const repoRoot = basename(normalizedCommonDir) === ".git"
+      ? dirname(normalizedCommonDir)
+      : normalizedCommonDir;
+    return deriveShortAlphanumericHash(repoRoot);
+  } catch {
+    return deriveShortAlphanumericHash(normalizePathForOwnership(cwd));
+  }
+}
+
+async function getPaseoWorktreesRoot(cwd: string, paseoHome?: string): Promise<string> {
+  const home = paseoHome ? resolve(paseoHome) : resolvePaseoHome();
+  const projectHash = await deriveWorktreeProjectHash(cwd);
+  return join(home, "worktrees", projectHash);
+}
+
+function normalizePathForOwnership(input: string): string {
+  try {
+    return realpathSync(input);
+  } catch {
+    return resolve(input);
+  }
+}
+
+export async function isPaseoOwnedWorktreeCwd(
+  cwd: string,
+  options?: { paseoHome?: string }
+): Promise<PaseoWorktreeOwnership> {
+  const gitCommonDir = await getGitCommonDir(cwd);
+  const worktreesRoot = await getPaseoWorktreesRoot(cwd, options?.paseoHome);
+  const resolvedRoot = normalizePathForOwnership(worktreesRoot) + sep;
+  const resolvedCwd = normalizePathForOwnership(cwd);
+
+  if (!resolvedCwd.startsWith(resolvedRoot)) {
+    return {
+      allowed: false,
+      repoRoot: gitCommonDir,
+      worktreeRoot: worktreesRoot,
+      worktreePath: resolvedCwd,
+    };
+  }
+
+  const worktrees = await listPaseoWorktrees({ cwd, paseoHome: options?.paseoHome });

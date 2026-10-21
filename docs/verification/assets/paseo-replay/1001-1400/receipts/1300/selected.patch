@@ -1,0 +1,13 @@
+FILE .github/workflows/release-notes-sync.yml
+RANGE {"path":".github/workflows/release-notes-sync.yml","old_lines":[0,0],"new_lines":[43,53],"diff_block_lines":[49,59],"hunk_header":"@@ -0,0 +1,67 @@","substantive_changed_lines":9}
++          REF: ${{ github.ref }}
++          INPUT_TAG: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') && github.ref_name || github.event.inputs.tag }}
++          INPUT_CREATE_IF_MISSING: ${{ github.event.inputs.create_if_missing }}
++        shell: bash
++        run: |
++          set -euo pipefail
++
++          args=(--repo "$REPO")
++
++          if [ -n "${INPUT_TAG:-}" ]; then
++            args+=(--tag "$INPUT_TAG")

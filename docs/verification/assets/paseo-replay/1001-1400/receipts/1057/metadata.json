@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1057,
+  "revision": "4a4cff105fce4ca793148c75e592c4084784f665",
+  "date": "2026-02-06T23:12:44+07:00",
+  "committer_date": "2026-02-06T23:12:44+07:00",
+  "parents": [
+    "bc4e2daf6742cb82ea3b4a94998ed55f1234587d"
+  ],
+  "subject": "Refactor voice mode to agent-only flow",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:7fb595fa7ed185f66f2bb8b24bccd47a3e9cd2a2b3b3a010a2a109378972457e",
+  "diff_tree_digest": "sha256:6592a9cf285f22bdd85ca3c84115b882fd9ec9c4aea83f2154cffaac83d03ff7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1445,
+        1452
+      ],
+      "new_lines": [
+        1300,
+        1307
+      ],
+      "diff_block_lines": [
+        227,
+        237
+      ],
+      "hunk_header": "@@ -1440,16 +1295,43 @@ export class Session {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 322,
+  "receipt_file": "receipts/1057/selected.patch"
+}

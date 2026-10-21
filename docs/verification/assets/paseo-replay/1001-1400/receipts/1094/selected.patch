@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts","old_lines":[0,0],"new_lines":[41,51],"diff_block_lines":[47,57],"hunk_header":"@@ -0,0 +1,67 @@","substantive_changed_lines":7}
++  toolDetailBranchByName("str_replace_editor", ToolEditInputSchema, ToolEditOutputSchema, toEditToolDetail),
++  toolDetailBranchByName("WebSearch", ToolSearchInputSchema, z.unknown(), (input) =>
++    toSearchToolDetail(input)
++  ),
++  toolDetailBranchByName("web_search", ToolSearchInputSchema, z.unknown(), (input) =>
++    toSearchToolDetail(input)
++  ),
++  toolDetailBranchByName("search", ToolSearchInputSchema, z.unknown(), (input) =>
++    toSearchToolDetail(input)
++  ),
++]);

@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1193,
+  "revision": "756f9a797205eab27085850055f1bb7d200865ca",
+  "date": "2026-02-14T19:53:19+07:00",
+  "committer_date": "2026-02-14T19:53:19+07:00",
+  "parents": [
+    "86b476e309e3c15c0a0bb672283c352755a6c55f"
+  ],
+  "subject": "refactor(app): centralize keyboard actions and shortcuts",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/sidebar-toggle-tooltip.spec.ts",
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "D\tpackages/app/src/hooks/use-global-keyboard-nav.ts",
+    "A\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "A\tpackages/app/src/keyboard/actions.ts",
+    "A\tpackages/app/src/keyboard/focus-scope.ts",
+    "A\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "A\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "D\tpackages/app/src/stores/keyboard-nav-store.ts",
+    "A\tpackages/app/src/stores/keyboard-shortcuts-store.ts"
+  ],
+  "source_receipt_digest": "sha256:0d3467d3cba05452a28c36397b5007ce5f0ad15d597d9d1e3ba2a182a7ec2d35",
+  "diff_tree_digest": "sha256:9d7e6462c05d2b02cf9579347109926832e6168c83db12eeb965bf9ac2f1dc40",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-keyboard-shortcuts.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        30,
+        40
+      ],
+      "diff_block_lines": [
+        36,
+        46
+      ],
+      "hunk_header": "@@ -0,0 +1,281 @@",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 992,
+  "receipt_file": "receipts/1193/selected.patch"
+}

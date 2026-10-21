@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1148,
+  "revision": "50acf2dd4483edabe5b36462f863c497793b4568",
+  "date": "2026-02-12T18:04:41+07:00",
+  "committer_date": "2026-02-12T18:04:41+07:00",
+  "parents": [
+    "117bbfe2f4bc6397cb39df396ba01dfd21b127ad",
+    "cb2e4aacfe340df85c46ff6a84ce6db43f473e21"
+  ],
+  "subject": "Merge branch 'feature/cli-output-schema'",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/onboard.ts",
+    "M\tpackages/cli/src/output/with-output.ts",
+    "M\tpackages/cli/tests/05-agent-run.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/website/src/routes/docs/cli.tsx"
+  ],
+  "source_receipt_digest": "sha256:3f656e6127433ab8569484aa01444b6cb667127d456e79db0360d72d6b844bf7",
+  "diff_tree_digest": "sha256:6a5a1252a38f24a4fee2a71890695b562789c109f83ecdd05bf604f4945ebf16",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/run.ts",
+      "old_lines": [
+        53,
+        53
+      ],
+      "new_lines": [
+        57,
+        67
+      ],
+      "diff_block_lines": [
+        31,
+        41
+      ],
+      "hunk_header": "@@ -52,4 +56,153 @@ function toRunResult(agent: AgentSnapshotPayload): AgentRunResult {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 247,
+  "receipt_file": "receipts/1148/selected.patch"
+}

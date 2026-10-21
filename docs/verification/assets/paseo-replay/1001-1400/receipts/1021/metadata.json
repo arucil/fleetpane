@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1021,
+  "revision": "d72498854236070de7423c86fd22496650dd0431",
+  "date": "2026-02-06T13:18:15+07:00",
+  "committer_date": "2026-02-06T13:18:15+07:00",
+  "parents": [
+    "4633a7e8fec28f826b96be138cf59c4032fbda85"
+  ],
+  "subject": "Fix agent history catch-up + avoid mobile background stream deltas (#18)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/agent-initialization.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:d70028690202246231599dbfcbdd2345ab92ec0ba38eea599186ba5325602604",
+  "diff_tree_digest": "sha256:fa39081aed8ddfc83d55ce7a696a49f818c2d4463c43e9f038517e915a571fc1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agent/agent-ready-screen.tsx",
+      "old_lines": [
+        725,
+        735
+      ],
+      "new_lines": [
+        766,
+        766
+      ],
+      "diff_block_lines": [
+        58,
+        68
+      ],
+      "hunk_header": "@@ -724,26 +765,19 @@ function AgentScreenContent({",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 189,
+  "receipt_file": "receipts/1021/selected.patch"
+}

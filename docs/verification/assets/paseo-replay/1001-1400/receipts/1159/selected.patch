@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[1505,1505],"new_lines":[1535,1545],"diff_block_lines":[98,108],"hunk_header":"@@ -1503,16 +1532,99 @@ export class DaemonClient {","substantive_changed_lines":7}
++
++    const finalOutcomePromise = finalPromise.then((payload) => ({
++      kind: "final" as const,
++      payload,
++    }));
++    const errorOutcomePromise = errorPromise.then(
++      () => ({
++        kind: "error" as const,
++        error: new Error("Unexpected dictation stream error state"),
++      }),
++      (error) => ({

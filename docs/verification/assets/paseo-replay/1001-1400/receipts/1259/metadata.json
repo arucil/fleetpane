@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1259,
+  "revision": "64b36d0df756837304dc6a4b4194cb9bfd0aec67",
+  "date": "2026-02-18T10:57:21+07:00",
+  "committer_date": "2026-02-18T10:57:21+07:00",
+  "parents": [
+    "803e31e61c036d376e31836a562fb17ffdacf186"
+  ],
+  "subject": "refactor: remove executeCommand in favor of standard run/stream path",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:3c6b2d556c2496184124ef28b91fe7023c838e3e248ba12ca64e86d2ec1980c5",
+  "diff_tree_digest": "sha256:60430375996a8759edf38194bf80f867ece742b4773ccc23d4f9f4ad93393b8c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        2037,
+        2037
+      ],
+      "new_lines": [
+        2039,
+        2049
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -2035,15 +2034,46 @@ class CodexAppServerAgentSession implements AgentSession {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 291,
+  "receipt_file": "receipts/1259/selected.patch"
+}

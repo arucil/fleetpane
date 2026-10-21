@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1361,
+  "revision": "f3ebe0545f93c77b58e6f024868e326d2ccbdb2b",
+  "date": "2026-02-23T15:47:08+07:00",
+  "committer_date": "2026-02-23T15:47:08+07:00",
+  "parents": [
+    "89a117e1c19511412ab71fcfc069d7e3a1549e40"
+  ],
+  "subject": "refactor: decouple permission state from attention signal",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agents-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/agent-directory.ts",
+    "M\tpackages/app/src/utils/agent-attention.test.ts",
+    "M\tpackages/app/src/utils/agent-attention.ts",
+    "M\tpackages/app/src/utils/agent-grouping.ts",
+    "A\tpackages/app/src/utils/sidebar-agent-state.test.ts",
+    "M\tpackages/app/src/utils/sidebar-agent-state.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:2e5717aaa3f96ee0b28ccd67ff59742d0cf757c2a3fb36d9a12f5b411a58b2f6",
+  "diff_tree_digest": "sha256:56a078ca78e0a5b26c29adc01e7c09f186a1a08ce707fca5495a5708db060abb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/sidebar-agent-state.ts",
+      "old_lines": [
+        18,
+        22
+      ],
+      "new_lines": [
+        18,
+        27
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -17,8 +17,14 @@ export type SidebarStateBucket =",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 204,
+  "receipt_file": "receipts/1361/selected.patch"
+}

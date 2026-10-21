@@ -1,0 +1,44 @@
+  }
+
+  private getLastAssistantMessageFromTimeline(
+    timeline: readonly AgentTimelineItem[]
+  ): string | null {
+    // Collect the last contiguous assistant messages (Claude streams chunks)
+    const chunks: string[] = [];
+    for (let i = timeline.length - 1; i >= 0; i--) {
+      const item = timeline[i];
+      if (item.type !== "assistant_message") {
+        if (chunks.length) {
+          break;
+        }
+        continue;
+      }
+      chunks.push(item.text);
+    }
+
+    if (!chunks.length) {
+      return null;
+    }
+
+    return chunks.reverse().join("");
+  }
+
+  async waitForAgentEvent(
+    agentId: string,
+    options?: WaitForAgentOptions
+  ): Promise<WaitForAgentResult> {
+    const snapshot = this.getAgent(agentId);
+    if (!snapshot) {
+      throw new Error(`Agent ${agentId} not found`);
+    }
+
+    const hasPendingRun =
+      "pendingRun" in snapshot && Boolean(snapshot.pendingRun);
+
+    const immediatePermission = this.peekPendingPermission(snapshot);
+    if (immediatePermission) {
+      return {
+        status: snapshot.lifecycle,
+        permission: immediatePermission,
+        lastMessage: this.getLastAssistantMessage(agentId)
+      };

@@ -1,0 +1,33 @@
+          if (payload.source === "agent") {
+            const data = payload.data;
+            return (
+              <ToolCall
+                toolName={data.name}
+                args={data.input}
+                result={data.result}
+                error={data.error}
+                status={data.status as "executing" | "completed" | "failed"}
+                cwd={agent.cwd}
+                isLastInSequence={isLastInSequence}
+              />
+            );
+          }
+
+          const data = payload.data;
+          return (
+            <ToolCall
+              toolName={data.toolName}
+              args={data.arguments}
+              result={data.result}
+              status={data.status}
+              isLastInSequence={isLastInSequence}
+            />
+          );
+        }
+
+        case "activity_log":
+          return (
+            <ActivityLog
+              type={item.activityType}
+              message={item.message}
+              timestamp={item.timestamp.getTime()}

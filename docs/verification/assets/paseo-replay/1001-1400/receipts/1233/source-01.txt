@@ -1,0 +1,46 @@
+export async function getStructuredAgentResponse<T>(
+  options: StructuredAgentResponseOptions<T>
+): Promise<T> {
+  const { caller, prompt, schema, maxRetries = 2, schemaName = "Response" } = options;
+  const validator = buildValidator(schema, schemaName);
+  const basePrompt = buildBasePrompt(prompt, validator.jsonSchema);
+
+  let attemptPrompt = basePrompt;
+  let lastResponse = "";
+  let lastErrors: string[] = [];
+
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    const response = await caller(attemptPrompt);
+    lastResponse = response;
+    const jsonText = extractJsonFromMarkdown(response);
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(jsonText);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      lastErrors = [`Invalid JSON: ${message}`];
+      if (attempt === maxRetries) {
+        break;
+      }
+      attemptPrompt = buildRetryPrompt(basePrompt, lastErrors);
+      continue;
+    }
+
+    const validation = validator.validate(parsed);
+    if (validation.ok) {
+      return validation.value;
+    }
+
+    lastErrors = validation.errors;
+    if (attempt === maxRetries) {
+      break;
+    }
+    attemptPrompt = buildRetryPrompt(basePrompt, lastErrors);
+  }
+
+  throw new StructuredAgentResponseError(
+    "Agent response did not match the required JSON schema",
+    {
+      lastResponse,
+      validationErrors: lastErrors,

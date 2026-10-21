@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/run.ts
+RANGE {"path":"packages/cli/src/commands/agent/run.ts","old_lines":[53,53],"new_lines":[57,67],"diff_block_lines":[31,41],"hunk_header":"@@ -52,4 +56,153 @@ function toRunResult(agent: AgentSnapshotPayload): AgentRunResult {","substantive_changed_lines":8}
+ 
++function loadOutputSchema(value: string): Record<string, unknown> {
++  const trimmed = value.trim()
++  if (!trimmed) {
++    const error: CommandError = {
++      code: 'INVALID_OUTPUT_SCHEMA',
++      message: '--output-schema cannot be empty',
++      details: 'Provide a JSON schema file path or inline JSON object',
++    }
++    throw error
++  }

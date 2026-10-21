@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1055,
+  "revision": "cdb7ef12aea5779ee5580ea6b8a9e152e3a3d4c7",
+  "date": "2026-02-06T22:22:49+07:00",
+  "committer_date": "2026-02-06T22:22:49+07:00",
+  "parents": [
+    "afb1f1580d13134ce53a49e6995382da3224a652"
+  ],
+  "subject": "speech: replace preprocess parsing with strict zod schemas",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/config.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts"
+  ],
+  "source_receipt_digest": "sha256:2e7eb0d65fcd8235e5f911040d510c3a8343d4c31f813d22a4e04fc57aa77ee4",
+  "diff_tree_digest": "sha256:2156a424254fb29233c861c3734d9819f527e152407d5897643baa3a98e6101b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/config.ts",
+      "old_lines": [
+        34,
+        44
+      ],
+      "new_lines": [
+        34,
+        34
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -33,42 +33,27 @@ export type { LocalSpeechModelId, LocalSttModelId, LocalTtsModelId };",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 122,
+  "receipt_file": "receipts/1055/selected.patch"
+}

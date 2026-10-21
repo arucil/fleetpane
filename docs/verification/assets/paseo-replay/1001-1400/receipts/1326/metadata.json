@@ -1,0 +1,72 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1326,
+  "revision": "d7e2ab44371ea9f44a85eef9ddaa29c3a6c4627a",
+  "date": "2026-02-21T22:09:48+07:00",
+  "committer_date": "2026-02-21T22:09:48+07:00",
+  "parents": [
+    "c3c8103563c120c6c9a487d0cecd3a0a6a3dacd6"
+  ],
+  "subject": "feat: add thinking option support and autonomous run handling",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "A\tCLAUDE_PROVIDER_REDESIGN_PLAN.md",
+    "A\tapp.json",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "A\tpackages/cli/src/commands/daemon/runtime-toolchain.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "A\tpackages/cli/src/commands/daemon/update.ts",
+    "M\tpackages/cli/src/commands/provider/index.ts",
+    "M\tpackages/cli/src/commands/provider/models.ts",
+    "A\tpackages/relay/src/dist-handshake-parity.test.ts",
+    "M\tpackages/relay/src/encrypted-channel.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-detail-primitives.ts",
+    "A\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake.real.e2e.test.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:7ace09d5e5b09c4660c65e05936901a252ba8b4e20d4e078bf91a2a49253cc4b",
+  "diff_tree_digest": "sha256:95fa461bcf70a997fe3655033eb149e8007329947d9e84a536520409b13e364c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/runtime-toolchain.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        24,
+        34
+      ],
+      "diff_block_lines": [
+        30,
+        40
+      ],
+      "hunk_header": "@@ -0,0 +1,131 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 3652,
+  "receipt_file": "receipts/1326/selected.patch"
+}

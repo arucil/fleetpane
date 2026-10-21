@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client-transport.ts
+RANGE {"path":"packages/server/src/client/daemon-client-transport.ts","old_lines":[0,0],"new_lines":[42,52],"diff_block_lines":[48,58],"hunk_header":"@@ -0,0 +1,437 @@","substantive_changed_lines":9}
++export interface TransportLogger {
++  warn(obj: object, msg?: string): void;
++}
++
++export function defaultWebSocketFactory(
++  url: string,
++  _options?: { headers?: Record<string, string> }
++): WebSocketLike {
++  const globalWs = (globalThis as { WebSocket?: any }).WebSocket;
++  if (!globalWs) {
++    throw new Error("WebSocket is not available in this runtime");

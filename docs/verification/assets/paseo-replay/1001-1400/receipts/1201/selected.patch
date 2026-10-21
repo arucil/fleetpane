@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[433,433],"new_lines":[474,484],"diff_block_lines":[89,99],"hunk_header":"@@ -432,4 +473,48 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":8}
+ 
++  const enqueuePendingTerminalInput = useCallback((entry: PendingTerminalInput) => {
++    const queue = pendingTerminalInputRef.current;
++    queue.push(entry);
++    if (queue.length > 512) {
++      queue.splice(0, queue.length - 512);
++    }
++  }, []);
++
++  const flushPendingTerminalInput = useCallback(() => {
++    if (!client) {

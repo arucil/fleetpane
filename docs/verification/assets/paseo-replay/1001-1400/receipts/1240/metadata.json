@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1240,
+  "revision": "16ea92aec5d28793cc8fc55ef15eb24204877ec7",
+  "date": "2026-02-17T20:05:20+07:00",
+  "committer_date": "2026-02-17T20:05:20+07:00",
+  "parents": [
+    "93ec53709519a9ee71286fd01077cbdbc7a0dc0b"
+  ],
+  "subject": "fix(app): stop mobile web sidebars from intercepting taps when closed",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx"
+  ],
+  "source_receipt_digest": "sha256:1a32639766a7402a2edeef46d63496821075defb0313707995aed5c2f1c4c33b",
+  "diff_tree_digest": "sha256:0afb0277d1b9dfb330a945727ddf3569998e2eabba78b494629a5bfd1809abce",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/explorer-sidebar.tsx",
+      "old_lines": [
+        241,
+        246
+      ],
+      "new_lines": [
+        241,
+        247
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -241,6 +241,7 @@ export function ExplorerSidebar({ serverId, agentId, cwd, isGit }: ExplorerSideb",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1240/selected.patch"
+}

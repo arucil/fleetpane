@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1363,
+  "revision": "ff4f2eeb56e5f24a646318a74061599ccc3d1a1f",
+  "date": "2026-02-23T15:48:01+07:00",
+  "committer_date": "2026-02-23T15:48:01+07:00",
+  "parents": [
+    "f3ebe0545f93c77b58e6f024868e326d2ccbdb2b",
+    "560e0f2362475cd66f207385596b1942a2e6068e"
+  ],
+  "subject": "Merge branch 'fix/janky-scroll-performance'",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/stores/session-store.ts"
+  ],
+  "source_receipt_digest": "sha256:39dabee518c328254ef3aa6aaab96c1e28bfc4a7334773c815d9091546778183",
+  "diff_tree_digest": "sha256:a6a6815574e2138dc4f069b05d3ad876110cb82c1bd190f44bc0ad501e73268c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        805,
+        808
+      ],
+      "new_lines": [
+        805,
+        812
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -804,14 +804,20 @@ function SessionProviderInternal({",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 29,
+  "receipt_file": "receipts/1363/selected.patch"
+}

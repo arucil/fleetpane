@@ -1,0 +1,13 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[129,129],"new_lines":[147,157],"diff_block_lines":[126,136],"hunk_header":"@@ -110,66 +136,47 @@ export function ToolCallDetailsContent({","substantive_changed_lines":10}
++      { title: "Output", value: output },
++    ].filter((entry) => entry.value !== null && entry.value !== undefined);
++
++    for (const section of sectionsFromTopLevel) {
++      let value = "";
++      try {
++        value =
++          typeof section.value === "string"
++            ? section.value
++            : JSON.stringify(section.value, null, 2);
++      } catch {

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1362,
+  "revision": "560e0f2362475cd66f207385596b1942a2e6068e",
+  "date": "2026-02-23T15:47:58+07:00",
+  "committer_date": "2026-02-23T15:47:58+07:00",
+  "parents": [
+    "42786956c7bf2008915e5c067f8dafb2d1c3b4b9"
+  ],
+  "subject": "fix: optimize agent stream rendering and timeline cursor updates",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/stores/session-store.ts"
+  ],
+  "source_receipt_digest": "sha256:39dabee518c328254ef3aa6aaab96c1e28bfc4a7334773c815d9091546778183",
+  "diff_tree_digest": "sha256:a6a6815574e2138dc4f069b05d3ad876110cb82c1bd190f44bc0ad501e73268c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        805,
+        808
+      ],
+      "new_lines": [
+        805,
+        812
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -804,14 +804,20 @@ function SessionProviderInternal({",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 29,
+  "receipt_file": "receipts/1362/selected.patch"
+}

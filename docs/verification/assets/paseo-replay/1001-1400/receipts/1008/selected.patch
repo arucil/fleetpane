@@ -1,0 +1,23 @@
+FILE packages/app/src/hooks/use-audio-player.native.ts
+RANGE {"path":"packages/app/src/hooks/use-audio-player.native.ts","old_lines":[19,32],"new_lines":[19,26],"diff_block_lines":[12,32],"hunk_header":"@@ -15,30 +15,58 @@ interface QueuedAudio {","substantive_changed_lines":15}
+  */
+-function resamplePcm24kTo16k(pcm24k: Uint8Array): Uint8Array {
+-  // PCM16 = 2 bytes per sample
+-  const samples24k = pcm24k.length / 2;
+-  const samples16k = Math.floor((samples24k * 16000) / 24000);
+-
+-  const pcm16k = new Uint8Array(samples16k * 2);
+-  const ratio = 24000 / 16000; // 1.5
+-
+-  for (let i = 0; i < samples16k; i++) {
+-    const srcIndex = Math.floor(i * ratio) * 2;
+-    if (srcIndex + 1 < pcm24k.length) {
+-      pcm16k[i * 2] = pcm24k[srcIndex];
+-      pcm16k[i * 2 + 1] = pcm24k[srcIndex + 1];
++function resamplePcm16(pcm: Uint8Array, fromRate: number, toRate: number): Uint8Array {
++  if (fromRate === toRate) {
++    return pcm;
++  }
++
++  const inputSamples = Math.floor(pcm.length / 2);
++  const outputSamples = Math.floor((inputSamples * toRate) / fromRate);

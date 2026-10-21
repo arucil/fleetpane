@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[22,30],"new_lines":[22,24],"diff_block_lines":[7,17],"hunk_header":"@@ -21,12 +21,6 @@ function Home() {","substantive_changed_lines":9}
+     <CursorFieldProvider>
+-      {/* Hero section with background image */}
+-      <div
+-        className="relative bg-cover bg-center bg-no-repeat"
+-        style={{ backgroundImage: 'url(/hero-bg.jpg)' }}
+-      >
+-        <div className="absolute inset-0 bg-background/90" />
+-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black to-transparent" />
+-
++      {/* Hero section */}
++      <div className="relative">

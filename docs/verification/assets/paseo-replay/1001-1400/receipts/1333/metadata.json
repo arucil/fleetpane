@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1333,
+  "revision": "231b83dbc2dcbb0ede5ebd3b3c214d026e2a96f5",
+  "date": "2026-02-22T10:40:12+07:00",
+  "committer_date": "2026-02-22T10:40:12+07:00",
+  "parents": [
+    "d7e2ab44371ea9f44a85eef9ddaa29c3a6c4627a"
+  ],
+  "subject": "feat(desktop): add app and local daemon update controls in Settings",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/hooks/use-desktop-app-updater.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "A\tpackages/app/src/utils/desktop-updates.test.ts",
+    "A\tpackages/app/src/utils/desktop-updates.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/tauri.conf.json"
+  ],
+  "source_receipt_digest": "sha256:fda9c7e9b0cd5b459c91ae69c990c651520dc33d4d58719b321b817f477c2d6d",
+  "diff_tree_digest": "sha256:6dd661b2bb714f52e541403394e2a1a9975caa999008d4f625f359adb31ca4f2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-desktop-app-updater.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        31,
+        41
+      ],
+      "diff_block_lines": [
+        37,
+        47
+      ],
+      "hunk_header": "@@ -0,0 +1,182 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 868,
+  "receipt_file": "receipts/1333/selected.patch"
+}

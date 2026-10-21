@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[45,49],"new_lines":[46,50],"diff_block_lines":[11,17],"hunk_header":"@@ -45,5 +46,5 @@ jobs:","substantive_changed_lines":2}
+@@ -45,5 +46,5 @@ jobs:
+ 
+       - name: Install JS dependencies
+-        run: npm install --workspace=@getpaseo/app --workspace=@getpaseo/desktop --include-workspace-root
++        run: npm ci
+         env:
+           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

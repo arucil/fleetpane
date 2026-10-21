@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1140,
+  "revision": "fba7c73c8b56f41c31731dae9f94f4dea6cdf466",
+  "date": "2026-02-12T14:15:33+07:00",
+  "committer_date": "2026-02-12T14:15:33+07:00",
+  "parents": [
+    "f55d0cd25f2ad000cea4fd3ff7101d16798ba89c"
+  ],
+  "subject": "feat(cli): add agent update command for name and labels",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "A\tpackages/cli/src/commands/agent/update.ts",
+    "A\tpackages/cli/tests/16-agent-update.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:42f90c452ac81be0fc8648693ede68c153be4dac9bd637f2bc4370d1894b1369",
+  "diff_tree_digest": "sha256:ecc58952f68cd475991ddf8cc16f0fc1e9150876366e1c7d2590ad166e13ef51",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/update.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        29,
+        39
+      ],
+      "diff_block_lines": [
+        35,
+        45
+      ],
+      "hunk_header": "@@ -0,0 +1,177 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 314,
+  "receipt_file": "receipts/1140/selected.patch"
+}

@@ -1,0 +1,23 @@
+FILE packages/cli/src/commands/speech/download.ts
+RANGE {"path":"packages/cli/src/commands/speech/download.ts","old_lines":[0,0],"new_lines":[29,49],"diff_block_lines":[35,55],"hunk_header":"@@ -0,0 +1,68 @@","substantive_changed_lines":16}
++
++export async function runSpeechDownloadCommand(
++  options: SpeechDownloadOptions,
++  _command: Command
++): Promise<SpeechDownloadResult> {
++  const client = await connectToDaemon({ host: options.host });
++  try {
++    const response = await client.downloadSpeechModels({
++      modelIds: options.model && options.model.length > 0 ? options.model : undefined,
++    });
++    if (response.error) {
++      const commandError: CommandError = {
++        code: "SPEECH_MODELS_DOWNLOAD_FAILED",
++        message: response.error,
++      };
++      throw commandError;
++    }
++
++    return {
++      type: "list",
++      data: response.downloadedModelIds.map((modelId) => ({

@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-delayed-history-refresh-toast.tsx
+RANGE {"path":"packages/app/src/hooks/use-delayed-history-refresh-toast.tsx","old_lines":[0,0],"new_lines":[12,22],"diff_block_lines":[18,28],"hunk_header":"@@ -0,0 +1,74 @@","substantive_changed_lines":8}
++
++export function useDelayedHistoryRefreshToast({
++  isCatchingUp,
++  indicatorColor,
++}: UseDelayedHistoryRefreshToastParams): void {
++  const toast = useToast();
++  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
++  const wasCatchingUpRef = useRef(false);
++  const isCatchingUpRef = useRef(false);
++  const toastRef = useRef(toast);
++  const indicatorColorRef = useRef(indicatorColor);

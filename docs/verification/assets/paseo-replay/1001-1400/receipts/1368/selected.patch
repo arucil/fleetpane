@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5500,5504],"new_lines":[5500,5506],"diff_block_lines":[8,18],"hunk_header":"@@ -5498,8 +5498,10 @@ export class Session {","substantive_changed_lines":10}
+-    const effectiveTimeoutMs = timeoutMs ?? 600_000 // 10 minutes default
+-    const timeoutHandle = setTimeout(() => {
+-      abortController.abort('timeout')
+-    }, effectiveTimeoutMs)
++    const hasTimeout = typeof timeoutMs === 'number' && timeoutMs > 0
++    const timeoutHandle = hasTimeout
++      ? setTimeout(() => {
++          abortController.abort('timeout')
++        }, timeoutMs)
++      : null
+ 

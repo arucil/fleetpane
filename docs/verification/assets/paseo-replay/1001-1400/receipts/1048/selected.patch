@@ -1,0 +1,13 @@
+FILE packages/server/src/server/voice-mcp-bridge.test.ts
+RANGE {"path":"packages/server/src/server/voice-mcp-bridge.test.ts","old_lines":[0,0],"new_lines":[12,22],"diff_block_lines":[18,28],"hunk_header":"@@ -0,0 +1,93 @@","substantive_changed_lines":8}
++
++describe("voice MCP bridge", () => {
++  test("proxies stdio MCP messages through unix socket bridge", async () => {
++    const tmpRoot = await mkdtemp(path.join(os.tmpdir(), "paseo-voice-mcp-bridge-"));
++    const socketPath = path.join(tmpRoot, "voice-mcp.sock");
++    const callerAgentId = "voice-agent-bridge-test";
++
++    const bridge = createVoiceMcpBridgeSocketServer({
++      socketPath,
++      logger: pino({ level: "silent" }),
++      createAgentMcpServerForCaller: async (callerId) => {

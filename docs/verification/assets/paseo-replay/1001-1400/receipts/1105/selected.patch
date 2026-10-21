@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-activity.tsx
+RANGE {"path":"packages/app/src/components/agent-activity.tsx","old_lines":[108,116],"new_lines":[108,116],"diff_block_lines":[7,17],"hunk_header":"@@ -107,21 +107,21 @@ function MergedToolCallItem({ item }: { item: MergedToolCall }) {","substantive_changed_lines":4}
+         <View style={stylesheet.toolContent}>
+-          {item.rawInput && (
++          {item.input && (
+             <View style={stylesheet.section}>
+               <Text style={stylesheet.sectionTitle}>Input:</Text>
+               <Text style={stylesheet.code}>
+-                {JSON.stringify(item.rawInput, null, 2)}
++                {JSON.stringify(item.input, null, 2)}
+               </Text>
+             </View>
+           )}

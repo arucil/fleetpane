@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[725,725],"new_lines":[741,751],"diff_block_lines":[165,175],"hunk_header":"@@ -698,46 +732,78 @@ function AgentScreenContent({","substantive_changed_lines":7}
++                        ]}
++                        onPress={() => {
++                          if (checkoutStatusQuery.isFetching) {
++                            return;
++                          }
++                          void handleCopyMeta("Branch", checkout.currentBranch);
++                        }}
++                      >
++                        <Text style={styles.menuMetaLabel} numberOfLines={1}>
++                          Branch
++                        </Text>

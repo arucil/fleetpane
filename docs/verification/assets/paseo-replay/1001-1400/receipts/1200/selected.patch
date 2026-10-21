@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[233,233],"new_lines":[259,269],"diff_block_lines":[75,85],"hunk_header":"@@ -228,19 +251,43 @@ export const UserMessage = memo(function UserMessage({","substantive_changed_lines":11}
++            >
++              {images.map((image, index) => (
++                <View
++                  key={`${image.uri}-${index}`}
++                  style={userMessageStylesheet.imagePill}
++                >
++                  <Image
++                    source={{ uri: image.uri }}
++                    style={userMessageStylesheet.imageThumbnail}
++                  />
++                </View>

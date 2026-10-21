@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/tauri-window.ts
+RANGE {"path":"packages/app/src/utils/tauri-window.ts","old_lines":[6,6],"new_lines":[6,16],"diff_block_lines":[7,17],"hunk_header":"@@ -5,4 +5,16 @@ import { getCurrentTauriWindow, getTauri, isTauriEnvironment } from \"@/utils/tau","substantive_changed_lines":10}
+ let tauriWindow: any = null;
++const NON_DRAGGABLE_SELECTOR = [
++  "button",
++  "a",
++  "input",
++  "textarea",
++  "select",
++  "[role='button']",
++  "[role='link']",
++  "[role='textbox']",
++  "[role='combobox']",

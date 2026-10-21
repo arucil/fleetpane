@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1247,
+  "revision": "6aa5e97d75fc87e2488bd4dfb61575f64b610d39",
+  "date": "2026-02-17T23:03:42+07:00",
+  "committer_date": "2026-02-17T23:06:37+07:00",
+  "parents": [
+    "a5842482b01cde005d5d41945c87de83c74a5ddc"
+  ],
+  "subject": "feat: make slash commands available in draft agent screen",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-autocomplete.tsx",
+    "M\tpackages/app/src/hooks/use-agent-commands-query.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/shared/messages.list-commands.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:d7d8276bac3dbe29413dbd7ceb63397927c598478aadb99719cc8ce8e262c681",
+  "diff_tree_digest": "sha256:fc6e713590f0859aa7edc4b0d3b92fecc7228513cb66d3164542b5f4aa180686",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3498,
+        3508
+      ],
+      "new_lines": [
+        3502,
+        3502
+      ],
+      "diff_block_lines": [
+        43,
+        53
+      ],
+      "hunk_header": "@@ -3497,32 +3501,84 @@ export class Session {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 294,
+  "receipt_file": "receipts/1247/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[708,718],"new_lines":[564,564],"diff_block_lines":[281,291],"hunk_header":"@@ -702,383 +562,64 @@ export function FileExplorerPane({","substantive_changed_lines":11}
+-                <Text style={styles.previewHeaderText} numberOfLines={1}>
+-                  {selectedEntryPath?.split("/").pop() ?? "Preview"}
+-                </Text>
+-                <View style={styles.previewHeaderRight}>
+-                  {isPreviewLoading ? (
+-                    <ActivityIndicator size="small" color={theme.colors.foregroundMuted} />
+-                  ) : null}
+-                  <Pressable
+-                    onPress={handleClosePreview}
+-                    hitSlop={8}
+-                    style={({ hovered, pressed }) => [

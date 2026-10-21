@@ -1,0 +1,66 @@
+}): Promise<WorktreeDestroyCommandResult[]> {
+  // Read paseo.json from the worktree (it will have the same content as the source repo)
+  const destroyCommands = getWorktreeDestroyCommands(options.worktreePath);
+  if (destroyCommands.length === 0) {
+    return [];
+  }
+
+  const repoRootPath =
+    options.repoRootPath ?? (await inferRepoRootPathFromWorktreePath(options.worktreePath));
+  const branchName =
+    options.branchName ?? (await resolveBranchNameForWorktreePath(options.worktreePath));
+
+  const destroyEnv = {
+    ...process.env,
+    // Root is the original git repo root (shared across worktrees), not the worktree itself.
+    // This allows destroy scripts to clean resources using paths from the main checkout.
+    PASEO_ROOT_PATH: repoRootPath,
+    PASEO_WORKTREE_PATH: options.worktreePath,
+    PASEO_BRANCH_NAME: branchName,
+  };
+
+  const results: WorktreeDestroyCommandResult[] = [];
+  for (const cmd of destroyCommands) {
+    const result = await execSetupCommand(cmd, {
+      cwd: options.worktreePath,
+      env: destroyEnv,
+    });
+    results.push(result);
+
+    if (result.exitCode !== 0) {
+      throw new WorktreeDestroyError(
+        `Worktree destroy command failed: ${cmd}\n${result.stderr}`.trim(),
+        results
+      );
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Get the git common directory (shared across worktrees) for a given cwd.
+ * This is where refs, objects, etc. are stored.
+ */
+export async function getGitCommonDir(cwd: string): Promise<string> {
+  const { stdout } = await execAsync(
+    "git rev-parse --path-format=absolute --git-common-dir",
+    { cwd, env: READ_ONLY_GIT_ENV }
+  );
+  const commonDir = stdout.trim();
+  if (!commonDir) {
+    throw new Error("Not in a git repository");
+  }
+  return commonDir;
+}
+
+/**
+ * Validate that a string is a valid git branch name slug
+ * Must be lowercase, alphanumeric, hyphens only
+ */
+export function validateBranchSlug(slug: string): {
+  valid: boolean;
+  error?: string;
+} {
+  if (!slug || slug.length === 0) {
+    return { valid: false, error: "Branch name cannot be empty" };

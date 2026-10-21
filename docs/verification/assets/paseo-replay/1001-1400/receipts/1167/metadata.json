@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1167,
+  "revision": "cfd061a86dd777b92cfedd07460ab30f292853a4",
+  "date": "2026-02-13T23:23:28+07:00",
+  "committer_date": "2026-02-13T23:23:28+07:00",
+  "parents": [
+    "c41815dcb7e7d5536bd05d2db8457ed4009150a9"
+  ],
+  "subject": "feat(voice): background local model downloads with runtime gating",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/cli/src/commands/onboard.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/stt-manager.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "A\tpackages/server/src/server/speech/speech-runtime.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:728f66c07f9f50a77f17d9c22269611e5851c59752fefba88149a1b41a2ca79b",
+  "diff_tree_digest": "sha256:7bb44878afba5ff136d08e99a0bef7824006da4caacd1c138ce9f29db414a735",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/speech-runtime.ts",
+      "old_lines": [
+        32,
+        32
+      ],
+      "new_lines": [
+        69,
+        78
+      ],
+      "diff_block_lines": [
+        65,
+        75
+      ],
+      "hunk_header": "@@ -30,8 +67,246 @@ function resolveRequestedSpeechProviders(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 858,
+  "receipt_file": "receipts/1167/selected.patch"
+}

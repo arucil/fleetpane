@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[545,555],"new_lines":[539,539],"diff_block_lines":[27,37],"hunk_header":"@@ -544,27 +538,24 @@ export function AgentInputArea({","substantive_changed_lines":9}
+     <View style={styles.rightControls}>
+-      <Pressable
+-        onPress={handleToggleRealtimeVoice}
+-        disabled={!isConnected || voice?.isVoiceSwitching}
+-        accessibilityLabel={
+-          isVoiceModeForAgent ? "Disable realtime voice mode" : "Enable realtime voice mode"
+-        }
+-        accessibilityRole="button"
+-        style={[
+-          styles.realtimeVoiceButton as any,
+-          isVoiceModeForAgent ? (styles.realtimeVoiceButtonActive as any) : undefined,

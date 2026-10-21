@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1083,
+  "revision": "8317b0d89b2be3a3ec6c205a87591ffd5bcd3716",
+  "date": "2026-02-08T21:12:40+07:00",
+  "committer_date": "2026-02-08T21:12:40+07:00",
+  "parents": [
+    "925752c8a3671c0764da4f933bbba661c291fd65"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/transcribe-local-wav.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts",
+    "A\tpaseo@0.1.0"
+  ],
+  "source_receipt_digest": "sha256:914149fef507af1087322cb2502cf6b91403e20c6e2bfd2287c7ebd860130d2a",
+  "diff_tree_digest": "sha256:6b1659660f0be3096b51b2dc7ac4b2145fa0804f42b59a30ae178d5e1794ba7e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        246,
+        256
+      ],
+      "new_lines": [
+        190,
+        190
+      ],
+      "diff_block_lines": [
+        196,
+        206
+      ],
+      "hunk_header": "@@ -222,325 +184,978 @@ const KeyValuePairsSchema = z.record(z.unknown()).transform((data) =>",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1289,
+  "receipt_file": "receipts/1083/selected.patch"
+}

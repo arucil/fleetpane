@@ -1,0 +1,13 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[65,65],"new_lines":[69,79],"diff_block_lines":[21,31],"hunk_header":"@@ -56,12 +56,36 @@ type WebSocketServerConfig = {","substantive_changed_lines":8}
+ 
++function resolveCapabilityReason(params: {
++  state: SpeechReadinessSnapshot["dictation"];
++  readiness: SpeechReadinessSnapshot;
++}): string {
++  const { state, readiness } = params;
++  if (state.available) {
++    return "";
++  }
++
++  if (readiness.voiceFeature.reasonCode === "model_download_in_progress") {

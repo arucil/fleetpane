@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1052,
+  "revision": "f98d844ff71a9783b02bdb27a8f1d6440f79b3d2",
+  "date": "2026-02-06T22:01:45+07:00",
+  "committer_date": "2026-02-06T22:01:45+07:00",
+  "parents": [
+    "8c70b3d86bea4735004775c084175587f5342081"
+  ],
+  "subject": "speech: address PR review feedback and remove unsafe casts",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/path-utils.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-loader.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "A\tpackages/server/src/server/speech/speech-defaults.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-types.ts"
+  ],
+  "source_receipt_digest": "sha256:367e34e41089d8719debe481320efa5938a65f8709af2f6a350483edc3633c7b",
+  "diff_tree_digest": "sha256:3a0020780c4a4ff895442a2ff88a4afb3c9f1d53afe77fc68e2a2660a56e93b9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+      "old_lines": [
+        42,
+        48
+      ],
+      "new_lines": [
+        48,
+        52
+      ],
+      "diff_block_lines": [
+        76,
+        86
+      ],
+      "hunk_header": "@@ -3,55 +3,73 @@ import { z } from \"zod\";",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 797,
+  "receipt_file": "receipts/1052/selected.patch"
+}

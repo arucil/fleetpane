@@ -1,0 +1,13 @@
+FILE packages/app/app.config.js
+RANGE {"path":"packages/app/app.config.js","old_lines":[7,13],"new_lines":[7,17],"diff_block_lines":[7,17],"hunk_header":"@@ -6,8 +6,12 @@ const variants = {","substantive_changed_lines":4}
+     packageId: "sh.paseo",
++    googleServicesFile: "./.secrets/google-services.prod.json",
++    googleServiceInfoPlist: "./.secrets/GoogleService-Info.prod.plist",
+   },
+   development: {
+     name: "Paseo Debug",
+     packageId: "sh.paseo.debug",
++    googleServicesFile: "./.secrets/google-services.debug.json",
++    googleServiceInfoPlist: "./.secrets/GoogleService-Info.debug.plist",
+   },
+ };

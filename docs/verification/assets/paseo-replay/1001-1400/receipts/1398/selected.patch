@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[203,207],"new_lines":[227,235],"diff_block_lines":[70,80],"hunk_header":"@@ -202,8 +226,69 @@ function ProjectRow({","substantive_changed_lines":8}
+ 
+-function WorkspaceRow({ workspace, selected, onPress, onLongPress }: WorkspaceRowProps) {
+-  const didLongPressRef = useRef(false)
++function WorkspaceRow({ workspace, selected, onPress, drag }: WorkspaceRowProps) {
++  const { theme } = useUnistyles()
+   const createdAtLabel = resolveWorkspaceCreatedAtLabel(workspace)
+ 
++  const { setAnchorRect, setOpen } = useContextMenu()
++  const didLongPressRef = useRef(false)
++  const didLongPressCleanupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
++  const longPressArmedRef = useRef(false)

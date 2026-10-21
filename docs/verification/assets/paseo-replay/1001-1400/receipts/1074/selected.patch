@@ -1,0 +1,13 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[257,257],"new_lines":[258,268],"diff_block_lines":[17,27],"hunk_header":"@@ -254,6 +254,51 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {","substantive_changed_lines":10}
+ 
++  const isInitialConnectionPending = useMemo(() => {
++    if (daemons.length === 0) return false;
++    return daemons.some((daemon) => {
++      const record = connectionStates.get(daemon.serverId);
++      if (!record) return true;
++      if (record.hasEverReceivedAgentList) return false;
++      return (
++        record.status === "idle" ||
++        record.status === "connecting" ||
++        (record.status === "online" && !record.agentListReady)

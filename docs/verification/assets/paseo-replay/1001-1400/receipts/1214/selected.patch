@@ -1,0 +1,11 @@
+FILE packages/cli/src/cli.ts
+RANGE {"path":"packages/cli/src/cli.ts","old_lines":[21,25],"new_lines":[22,28],"diff_block_lines":[10,18],"hunk_header":"@@ -21,5 +22,7 @@ import { withOutput } from './output/index.js'","substantive_changed_lines":4}
+@@ -21,5 +22,7 @@ import { withOutput } from './output/index.js'
+ import { onboardCommand } from './commands/onboard.js'
+ 
+-const VERSION = '0.1.0'
++const require = createRequire(import.meta.url)
++const packageJson = require('../package.json') as { version?: string }
++const VERSION = typeof packageJson.version === 'string' ? packageJson.version : '0.0.0'
+ 
+ // Helper function to collect multiple option values into an array

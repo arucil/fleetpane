@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[757,767],"new_lines":[753,753],"diff_block_lines":[12,22],"hunk_header":"@@ -751,140 +751,23 @@ export function SessionProvider({","substantive_changed_lines":7}
+-
+-    const hydrateAgents = async () => {
+-      for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+-        try {
+-          if (!agentUpdatesSubscriptionIdRef.current) {
+-            agentUpdatesSubscriptionIdRef.current = client.subscribeAgentUpdates({
+-              subscriptionId: `app:${serverId}`,
+-              filter: { labels: { ui: "true" } },
+-            });
+-          }
+-

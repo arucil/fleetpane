@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1379,
+  "revision": "4ca97c4fdf9b63a1fbaad99e90cad65f0dec5fac",
+  "date": "2026-02-26T04:03:08Z",
+  "committer_date": "2026-02-26T04:03:08Z",
+  "parents": [
+    "aa2f35656ef6d05b5057e9ba6555301fe70930e9"
+  ],
+  "subject": "Improve provider error surfacing and add Sonnet 4.6",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/model-catalog.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:43730362c560bf2d15ac81f8d9d96d036a96adc1a7a5feadbb35e2b4b85892c9",
+  "diff_tree_digest": "sha256:ef151c65b48d8dc03c95cd427da3ff53bafbaa8e8fbe2a377ca2b54de9da6da0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        1816,
+        1816
+      ],
+      "new_lines": [
+        1828,
+        1838
+      ],
+      "diff_block_lines": [
+        57,
+        67
+      ],
+      "hunk_header": "@@ -1815,4 +1827,60 @@ export class AgentManager {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 180,
+  "receipt_file": "receipts/1379/selected.patch"
+}

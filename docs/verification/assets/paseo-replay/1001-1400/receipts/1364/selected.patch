@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts","old_lines":[105,105],"new_lines":[106,116],"diff_block_lines":[9,19],"hunk_header":"@@ -103,4 +103,23 @@ const ClaudeToolDetailPass2Schema = z.union([","substantive_changed_lines":10}
++    "Skill",
++    z.object({ skill: z.string() }).passthrough(),
++    z.union([
++      z.object({ output: z.string() }).passthrough().transform((value) => value.output),
++      z.string(),
++    ]).nullable(),
++    (input, output) => {
++      const skillName = input?.skill;
++      if (!skillName) {
++        return undefined;
++      }

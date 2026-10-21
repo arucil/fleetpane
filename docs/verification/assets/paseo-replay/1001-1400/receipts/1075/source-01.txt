@@ -1,0 +1,31 @@
+  z.object({ method: z.literal("item/agentMessage/delta"), params: ItemTextDeltaNotificationSchema }).transform(
+    ({ params }): ParsedCodexNotification => ({
+      kind: "agent_message_delta",
+      itemId: params.itemId,
+      delta: params.delta,
+    })
+  ),
+  z.object({ method: z.literal("item/agentMessage/delta"), params: z.unknown() }).transform(
+    ({ method, params }): ParsedCodexNotification => ({ kind: "invalid_payload", method, params })
+  ),
+  z.object({
+    method: z.literal("item/reasoning/summaryTextDelta"),
+    params: ItemTextDeltaNotificationSchema,
+  }).transform(
+    ({ params }): ParsedCodexNotification => ({
+      kind: "reasoning_delta",
+      itemId: params.itemId,
+      delta: params.delta,
+    })
+  ),
+  z.object({ method: z.literal("item/reasoning/summaryTextDelta"), params: z.unknown() }).transform(
+    ({ method, params }): ParsedCodexNotification => ({ kind: "invalid_payload", method, params })
+  ),
+  z.object({ method: z.literal("item/completed"), params: ItemLifecycleNotificationSchema }).transform(
+    ({ params }): ParsedCodexNotification => ({ kind: "item_completed", item: params.item })
+  ),
+  z.object({ method: z.literal("item/completed"), params: z.unknown() }).transform(
+    ({ method, params }): ParsedCodexNotification => ({ kind: "invalid_payload", method, params })
+  ),
+  z.object({ method: z.literal("item/started"), params: ItemLifecycleNotificationSchema }).transform(
+    ({ params }): ParsedCodexNotification => ({ kind: "item_started", item: params.item })

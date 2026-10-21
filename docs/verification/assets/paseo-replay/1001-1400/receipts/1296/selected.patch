@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[937,943],"new_lines":[1014,1021],"diff_block_lines":[139,149],"hunk_header":"@@ -931,13 +987,35 @@ function FilePreviewBody({","substantive_changed_lines":7}
++          metrics={previewScrollbarMetrics}
++          onScrollToOffset={(nextOffset) => {
++            previewScrollRef.current?.scrollTo({ y: nextOffset, animated: false });
+           }}
+-          style={styles.previewImage}
+-          resizeMode="contain"
+         />
+-      </RNScrollView>
++      </View>
+     );
+   }

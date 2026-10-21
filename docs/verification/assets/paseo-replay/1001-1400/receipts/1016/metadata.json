@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1016,
+  "revision": "88ec20a5117e9a3d5391f75cc5d361634be67e17",
+  "date": "2026-02-06T12:14:52+07:00",
+  "committer_date": "2026-02-06T12:14:52+07:00",
+  "parents": [
+    "8dcb7233c0f23c4b0cf666351ead9e2e7c7cab23"
+  ],
+  "subject": "Use system Claude binary for model listing",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/provider/models.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:a9ce540ec8b50c4be648d92245a64792295d7668eead997c7314d2242d5e52d9",
+  "diff_tree_digest": "sha256:c534dae3d2b095a18a2999a901a82acff65e8bb416c17c21e3437c043fbfdd99",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/provider/models.ts",
+      "old_lines": [
+        56,
+        63
+      ],
+      "new_lines": [
+        37,
+        44
+      ],
+      "diff_block_lines": [
+        62,
+        72
+      ],
+      "hunk_header": "@@ -46,24 +30,41 @@ export interface ProviderModelsOptions extends CommandOptions {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 69,
+  "receipt_file": "receipts/1016/selected.patch"
+}

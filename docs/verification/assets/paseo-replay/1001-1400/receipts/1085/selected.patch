@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/tool-call-display.ts
+RANGE {"path":"packages/app/src/utils/tool-call-display.ts","old_lines":[67,77],"new_lines":[1,1],"diff_block_lines":[72,82],"hunk_header":"@@ -1,211 +1,5 @@","substantive_changed_lines":8}
+-
+-function toTitleCase(words: string): string {
+-  return words
+-    .split(" ")
+-    .filter((segment) => segment.length > 0)
+-    .map((segment) => `${segment[0]?.toUpperCase() ?? ""}${segment.slice(1)}`)
+-    .join(" ");
+-}
+-
+-function humanizeToolName(name: string): string {
+-  const trimmed = name.trim();

@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1374,
+  "revision": "c4523c70b58ae4dae035143f7cf3881683d8a3cb",
+  "date": "2026-02-25T13:53:23+07:00",
+  "committer_date": "2026-02-25T13:53:23+07:00",
+  "parents": [
+    "a060ae1256710e72b3b30318dcf9405412850a79"
+  ],
+  "subject": "chore: commit all local changes",
+  "diff_tree_paths": [
+    "M\tLICENSE",
+    "M\tpackage.json",
+    "A\tpackages/app/e2e/agent-scroll-submit-firefox.spec.ts",
+    "A\tpackages/app/playwright.firefox.config.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-stream-reducers.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/timeline-projection.test.ts",
+    "M\tpackages/server/src/server/agent/timeline-projection.ts",
+    "A\tpackages/server/src/server/daemon-e2e/timeline-window.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:de070aa0ea6fa63d5a5a991b52b0391553c1ce6547970ae81dcbd924c0bc007a",
+  "diff_tree_digest": "sha256:de5a299549ee691d3a7b31ea261601e0f09daf3f156d8cc845b61c241494916d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-render-strategy.ts",
+      "old_lines": [
+        139,
+        139
+      ],
+      "new_lines": [
+        139,
+        149
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -138,4 +138,80 @@ function scrollAnchorIntoView(params: {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1376,
+  "receipt_file": "receipts/1374/selected.patch"
+}

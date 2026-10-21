@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[637,637],"new_lines":[642,652],"diff_block_lines":[49,59],"hunk_header":"@@ -635,4 +639,63 @@ async function getAheadOfOrigin(cwd: string, currentBranch: string): Promise<num","substantive_changed_lines":8}
++
++async function isLikelyBinaryFile(absolutePath: string): Promise<boolean> {
++  const handle = await openFile(absolutePath, "r");
++  try {
++    const buffer = Buffer.allocUnsafe(UNTRACKED_BINARY_SNIFF_BYTES);
++    const { bytesRead } = await handle.read(buffer, 0, buffer.length, 0);
++    if (bytesRead === 0) {
++      return false;
++    }
++
++    let suspicious = 0;

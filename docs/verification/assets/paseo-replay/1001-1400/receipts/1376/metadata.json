@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1376,
+  "revision": "91634ca6f23b19a6772f680367dd662932234acb",
+  "date": "2026-02-25T19:53:04+07:00",
+  "committer_date": "2026-02-25T19:53:04+07:00",
+  "parents": [
+    "3355f7d8d970c57e626f191ceefd2ed47dc48d50"
+  ],
+  "subject": "fix(server): dedupe opencode assistant timeline echoes",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts"
+  ],
+  "source_receipt_digest": "sha256:db583f329cd1a5c871347f2de8cc813d21fa391489c0a6a14e124e73905b4986",
+  "diff_tree_digest": "sha256:137cb2744d6607d5291ce74ebe68d5dcd016c272640836a7f168247114437a50",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        526,
+        526
+      ],
+      "new_lines": [
+        548,
+        558
+      ],
+      "diff_block_lines": [
+        40,
+        50
+      ],
+      "hunk_header": "@@ -524,4 +540,209 @@ export class OpenCodeAgentClient implements AgentClient {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 388,
+  "receipt_file": "receipts/1376/selected.patch"
+}

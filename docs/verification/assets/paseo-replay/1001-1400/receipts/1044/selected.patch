@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1230,1230],"new_lines":[1211,1221],"diff_block_lines":[93,103],"hunk_header":"@@ -1215,25 +1201,29 @@ export class Session {","substantive_changed_lines":9}
++        )
++        .map((agent) => ({
++          id: agent.id,
++          lastUpdated: new Date(
++            agent.lastActivityAt ?? agent.updatedAt
++          ).toISOString(),
++          messageCount: 0,
++        }))
++        .sort(
++          (a, b) =>
++            new Date(b.lastUpdated).getTime() -

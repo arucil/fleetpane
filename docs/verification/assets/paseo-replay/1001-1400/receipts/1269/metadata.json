@@ -1,0 +1,65 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1269,
+  "revision": "4affac9ce9bf0fb6bc04047a21d410c069d66133",
+  "date": "2026-02-18T18:13:20+07:00",
+  "committer_date": "2026-02-18T18:13:20+07:00",
+  "parents": [
+    "b1955cf74d144ad6f99d394d57f82ef04ec236cf"
+  ],
+  "subject": "fix(desktop): improve tauri permissions and settings UX",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-audio-recorder.web.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-file-drop-zone.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/utils/confirm-dialog.ts",
+    "A\tpackages/app/src/utils/desktop-permissions.test.ts",
+    "A\tpackages/app/src/utils/desktop-permissions.ts",
+    "M\tpackages/app/src/utils/open-external-url.ts",
+    "M\tpackages/app/src/utils/os-notifications.test.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/tauri-window.ts",
+    "A\tpackages/app/src/utils/tauri.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "A\tpackages/desktop/src-tauri/Entitlements.plist",
+    "M\tpackages/desktop/src-tauri/Info.plist",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/main.rs",
+    "M\tpackages/desktop/src-tauri/tauri.conf.json",
+    "M\tscripts/sync-workspace-versions.mjs"
+  ],
+  "source_receipt_digest": "sha256:b263fd257d98cd8844d64cdfefb2b9e6411a40d03ecee3711223151872bc7b9d",
+  "diff_tree_digest": "sha256:839cc1ebd4609794ac169e59b544e677a405feadcc0bdf5fafdb7069f796417e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/settings-screen.tsx",
+      "old_lines": [
+        536,
+        536
+      ],
+      "new_lines": [
+        569,
+        579
+      ],
+      "diff_block_lines": [
+        174,
+        184
+      ],
+      "hunk_header": "@@ -535,4 +568,71 @@ export default function SettingsScreen() {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1110,
+  "receipt_file": "receipts/1269/selected.patch"
+}

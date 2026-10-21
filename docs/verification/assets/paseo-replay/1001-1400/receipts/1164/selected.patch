@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[743,743],"new_lines":[750,760],"diff_block_lines":[71,81],"hunk_header":"@@ -741,7 +743,107 @@ export function SessionProvider({","substantive_changed_lines":9}
++      >["payload"]
++    ) => {
++      const agentId = payload.agentId;
++      const initKey = getInitKey(serverId, agentId);
++
++      if (payload.error) {
++        setInitializingAgents(serverId, (prev) => {
++          if (prev.get(agentId) !== true) {
++            return prev;
++          }
++          const next = new Map(prev);

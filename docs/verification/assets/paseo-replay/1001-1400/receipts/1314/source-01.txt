@@ -1,0 +1,65 @@
+    nextMemory.hasRenderedReady = true;
+    nextMemory.lastReadyAgent = candidateAgent;
+  }
+
+  if (input.missingAgentState.kind === "not_found") {
+    return {
+      state: {
+        tag: "not_found",
+        message: input.missingAgentState.message,
+      },
+      memory: nextMemory,
+    };
+  }
+
+  if (input.missingAgentState.kind === "error" && !nextMemory.hasRenderedReady) {
+    return {
+      state: {
+        tag: "error",
+        message: input.missingAgentState.message,
+      },
+      memory: nextMemory,
+    };
+  }
+
+  const displayAgent =
+    candidateAgent ?? (nextMemory.hasRenderedReady ? nextMemory.lastReadyAgent : null);
+  if (!displayAgent) {
+    return {
+      state: {
+        tag: "boot",
+        reason: input.missingAgentState.kind === "resolving" ? "resolving" : "loading",
+        source: "none",
+      },
+      memory: nextMemory,
+    };
+  }
+
+  const source: "authoritative" | "optimistic" | "stale" = input.agent
+    ? "authoritative"
+    : input.shouldUseOptimisticStream
+      ? "optimistic"
+      : "stale";
+
+  let syncStatus: AgentScreenSyncStatus = "idle";
+  if (!input.isConnected) {
+    syncStatus = "reconnecting";
+  } else if (input.missingAgentState.kind === "error") {
+    syncStatus = "sync_error";
+  } else if (input.needsAuthoritativeSync || input.isHistorySyncing) {
+    syncStatus = "catching_up";
+  }
+
+  return {
+    state: {
+      tag: "ready",
+      agent: displayAgent,
+      source,
+      syncStatus,
+      isArchiving: input.isArchivingCurrentAgent,
+    },
+    memory: nextMemory,
+  };
+}
+
+export function useAgentScreenStateMachine({

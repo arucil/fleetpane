@@ -1,0 +1,47 @@
+      return models.map((model) => {
+        const defaultReasoningEffort = normalizeCodexThinkingOptionId(
+          typeof model.defaultReasoningEffort === "string"
+            ? model.defaultReasoningEffort
+            : null
+        );
+
+        const thinkingById = new Map<string, { id: string; label: string; description?: string }>();
+        if (Array.isArray(model.supportedReasoningEfforts)) {
+          for (const entry of model.supportedReasoningEfforts) {
+            const id = normalizeCodexThinkingOptionId(
+              typeof entry?.reasoningEffort === "string" ? entry.reasoningEffort : null
+            );
+            if (!id) continue;
+            const description =
+              typeof entry?.description === "string" && entry.description.trim().length > 0
+                ? entry.description
+                : undefined;
+            thinkingById.set(id, { id, label: id, description });
+          }
+        }
+
+        if (defaultReasoningEffort && !thinkingById.has(defaultReasoningEffort)) {
+          thinkingById.set(defaultReasoningEffort, {
+            id: defaultReasoningEffort,
+            label: defaultReasoningEffort,
+            description: "Model default reasoning effort",
+          });
+        }
+
+        const thinkingOptions = Array.from(thinkingById.values()).map((option) => ({
+          ...option,
+          isDefault: option.id === defaultReasoningEffort,
+        }));
+        const defaultThinkingOptionId =
+          defaultReasoningEffort ?? thinkingOptions.find((option) => option.isDefault)?.id ?? thinkingOptions[0]?.id;
+
+        return {
+          provider: CODEX_PROVIDER,
+          id: model.id,
+          label: model.displayName,
+          description: model.description,
+          isDefault: model.isDefault,
+          thinkingOptions: thinkingOptions.length > 0 ? thinkingOptions : undefined,
+          defaultThinkingOptionId,
+          metadata: {
+            model: model.model,

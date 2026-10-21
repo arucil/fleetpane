@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1146,
+  "revision": "117bbfe2f4bc6397cb39df396ba01dfd21b127ad",
+  "date": "2026-02-12T18:04:21+07:00",
+  "committer_date": "2026-02-12T18:04:21+07:00",
+  "parents": [
+    "8bdd083512f5fdf892f6192dfce7160679704cc2"
+  ],
+  "subject": "feat: add provider availability detection and normalize legacy \"default\" model IDs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/utils/extract-agent-model.test.ts",
+    "M\tpackages/app/src/utils/extract-agent-model.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:fc3d86bb0679e2230269fce741ad4e66fb45b31d6102f3b6179f522e027f4451",
+  "diff_tree_digest": "sha256:fcbaf3d0f892b8bdf06c30cf819565433ee2416a87ac3771e5e67be9e60517e4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        356,
+        356
+      ],
+      "new_lines": [
+        378,
+        388
+      ],
+      "diff_block_lines": [
+        111,
+        121
+      ],
+      "hunk_header": "@@ -354,4 +371,43 @@ export function useAgentFormState(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 373,
+  "receipt_file": "receipts/1146/selected.patch"
+}

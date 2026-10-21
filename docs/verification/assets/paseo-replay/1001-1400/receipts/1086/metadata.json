@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1086,
+  "revision": "6d115074e955811073f5ab0ad9814b234a71779a",
+  "date": "2026-02-09T11:11:11+07:00",
+  "committer_date": "2026-02-09T11:11:11+07:00",
+  "parents": [
+    "6d4992b2f5a13a2832e017a10af38a41160b2b3b"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:b9917e25ec17f15b0aabe6bf5c4fc6c7a40675b08166d68561ee5b9b2e6b9efc",
+  "diff_tree_digest": "sha256:4298a1b65d36edfc36b4d47848424c294c454480e656d131b2fb46baa42e50a0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        281,
+        289
+      ],
+      "new_lines": [
+        281,
+        284
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -281,9 +281,4 @@ export const AgentStreamEventPayloadSchema = z.discriminatedUnion(\"type\", [",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1086/selected.patch"
+}

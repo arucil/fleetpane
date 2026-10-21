@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/voice-context.tsx
+RANGE {"path":"packages/app/src/contexts/voice-context.tsx","old_lines":[139,145],"new_lines":[135,141],"diff_block_lines":[20,30],"hunk_header":"@@ -138,8 +134,8 @@ export function VoiceProvider({ children }: VoiceProviderProps) {","substantive_changed_lines":8}
+     },
+-    volumeThreshold: VOICE_VAD_VOLUME_THRESHOLD,
+-    silenceDuration: VOICE_VAD_SILENCE_DURATION_MS,
+-    speechConfirmationDuration: VOICE_VAD_SPEECH_CONFIRMATION_MS,
+-    detectionGracePeriod: VOICE_VAD_DETECTION_GRACE_PERIOD_MS,
++    volumeThreshold: REALTIME_VOICE_VAD_CONFIG.volumeThreshold,
++    silenceDuration: REALTIME_VOICE_VAD_CONFIG.silenceDurationMs,
++    speechConfirmationDuration: REALTIME_VOICE_VAD_CONFIG.speechConfirmationMs,
++    detectionGracePeriod: REALTIME_VOICE_VAD_CONFIG.detectionGracePeriodMs,
+   });
+ 

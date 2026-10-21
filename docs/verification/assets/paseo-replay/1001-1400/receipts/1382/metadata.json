@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1382,
+  "revision": "2566171b4c6962ad352f5dcc560c6ae90451b82c",
+  "date": "2026-03-01T11:26:56+07:00",
+  "committer_date": "2026-03-01T11:26:56+07:00",
+  "parents": [
+    "3a6a8cfa3862219314fb0ca7595a27e121a397dd"
+  ],
+  "subject": "Simplify project filter to single selection and persist sidebar order",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "A\tpackages/app/src/stores/sidebar-order-store.ts"
+  ],
+  "source_receipt_digest": "sha256:db212a6e262cd1bd4a5aa2fc3bdce5ed86d1f175df07a633f041dabf4319a9a5",
+  "diff_tree_digest": "sha256:98e15f2d41f67e5d616e5756c42dbd35091d0777eb36a19ea0659d205a4d22b2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-agent-list.tsx",
+      "old_lines": [
+        762,
+        762
+      ],
+      "new_lines": [
+        730,
+        740
+      ],
+      "diff_block_lines": [
+        221,
+        231
+      ],
+      "hunk_header": "@@ -760,100 +728,66 @@ export function SidebarAgentList({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 540,
+  "receipt_file": "receipts/1382/selected.patch"
+}

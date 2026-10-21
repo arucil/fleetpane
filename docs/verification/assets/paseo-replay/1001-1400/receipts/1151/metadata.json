@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1151,
+  "revision": "734cf7af20c4ffe4fcc5455c7f1e2240794c6203",
+  "date": "2026-02-12T19:05:51+07:00",
+  "committer_date": "2026-02-12T19:05:51+07:00",
+  "parents": [
+    "6f6677fc7ab9ae457c8818377d4c4f114ff66a9f"
+  ],
+  "subject": "chore: script release tag push and trim daemon log noise",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tREADME.md",
+    "M\tpackage.json",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+    "A\tscripts/push-current-release-tag.mjs"
+  ],
+  "source_receipt_digest": "sha256:88aa50713b0b2868b001247524a70c765d9e52b36188628327143e57887d4bea",
+  "diff_tree_digest": "sha256:92bab02e92891de4ac6ebaedb1e488b2177ac6256a60b75585496db941fa66b8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+      "old_lines": [
+        85,
+        95
+      ],
+      "new_lines": [
+        61,
+        61
+      ],
+      "diff_block_lines": [
+        52,
+        62
+      ],
+      "hunk_header": "@@ -77,60 +59,7 @@ async function downloadToFile(options: DownloadToFileOptions): Promise<void> {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 162,
+  "receipt_file": "receipts/1151/selected.patch"
+}

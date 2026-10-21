@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1344,
+  "revision": "44c3ee670f87347e85db6a1ddeb16e24f18d1040",
+  "date": "2026-02-22T12:37:40+07:00",
+  "committer_date": "2026-02-22T13:10:20+07:00",
+  "parents": [
+    "8bcfde81841b636faea9ba150255f116e5779b44"
+  ],
+  "subject": "refactor: remove debug logging and simplify event identifier extraction",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:a302d71886fc36eacb28fccad04cf8fe1893ff1624276d24b072da12125f00ae",
+  "diff_tree_digest": "sha256:319d1b1929027fcd7d52807f1492754997ac8114d43ceec16f57ecdddd617040",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1281,
+        1285
+      ],
+      "new_lines": [
+        1281,
+        1285
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -1281,5 +1281,5 @@ function isMetadataOnlySdkMessage(message: SDKMessage): boolean {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 42,
+  "receipt_file": "receipts/1344/selected.patch"
+}

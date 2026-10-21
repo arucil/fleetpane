@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1369,
+  "revision": "5c773371d669e44625d58bd31785e10c63584538",
+  "date": "2026-02-24T10:36:19+07:00",
+  "committer_date": "2026-02-24T11:36:19+08:00",
+  "parents": [
+    "3f06063b4bda98983dc5dd519510d5e2a5ebff87"
+  ],
+  "subject": "fix(server): decouple explicit and auto agent title limits (#78)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "A\tpackages/server/src/server/agent/agent-metadata-generator.unit.test.ts",
+    "A\tpackages/server/src/server/agent/agent-title-limits.ts",
+    "M\tpackages/server/src/shared/messages.create-agent-client-message-id.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:303925012f5ca01ad65dca73b97b19619c57fdd0e3999cfe2b6d16841436f608",
+  "diff_tree_digest": "sha256:50282ae21b726b4c2650811e621858980bf4e9583263d625d1f4984d4466bcbe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-metadata-generator.ts",
+      "old_lines": [
+        45,
+        47
+      ],
+      "new_lines": [
+        46,
+        56
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -44,4 +45,12 @@ function hasExplicitTitle(title?: string | null): boolean {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 94,
+  "receipt_file": "receipts/1369/selected.patch"
+}

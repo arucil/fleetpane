@@ -1,0 +1,13 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[80,86],"new_lines":[80,86],"diff_block_lines":[19,29],"hunk_header":"@@ -75,19 +75,19 @@ jobs:","substantive_changed_lines":8}
+           const nextLines = cargoLines.map((line) => {
+-            if (/^\\[package\\]\\s*$/.test(line)) inPackage = true;
+-            else if (inPackage && /^\\[/.test(line)) inPackage = false;
++            if (/^\[package\]\s*$/.test(line)) inPackage = true;
++            else if (inPackage && /^\[/.test(line)) inPackage = false;
+ 
+-            if (inPackage && /^version\\s*=\\s*\".*\"\\s*$/.test(line)) {
++            if (inPackage && /^version\s*=\s*".*"\s*$/.test(line)) {
+               updated = true;
+-              return `version = \"${version}\"`;
++              return `version = "${version}"`;

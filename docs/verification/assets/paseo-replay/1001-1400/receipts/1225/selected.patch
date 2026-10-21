@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/tauri-window.ts
+RANGE {"path":"packages/app/src/utils/tauri-window.ts","old_lines":[122,126],"new_lines":[137,146],"diff_block_lines":[32,42],"hunk_header":"@@ -118,17 +132,26 @@ export function useTrafficLightPadding(): { left: number; top: number } {","substantive_changed_lines":6}
+       // Listen for resize events which include fullscreen changes
+-      unlisten = await win.onResized(async () => {
++      const unlisten = await win.onResized(async () => {
++        if (disposed) return;
+         const fs = await win.isFullscreen();
++        if (disposed) return;
+         setIsFullscreen(fs);
+       });
++
++      cleanup = unlisten;
++      if (disposed) {

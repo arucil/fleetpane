@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1011,
+  "revision": "4dc20f58d026a5acf9f74c48b668fcf3d3da5d55",
+  "date": "2026-02-06T13:33:26+07:00",
+  "committer_date": "2026-02-06T13:33:26+07:00",
+  "parents": [
+    "1c6a1d1dd6d53362fb4f50f0075d2d84ed1edd4a"
+  ],
+  "subject": "Harden speech provider reconciliation and startup logging",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:989dbae182cadf09c062a81de23865259ac9fa4e1a5cb3d3099995d90cc5727f",
+  "diff_tree_digest": "sha256:6fd618c5a299f76c36d9b675c414d0cb948d9251fd618d697ac246b86e7ae4f4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        429,
+        432
+      ],
+      "new_lines": [
+        429,
+        436
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -428,7 +428,66 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 127,
+  "receipt_file": "receipts/1011/selected.patch"
+}

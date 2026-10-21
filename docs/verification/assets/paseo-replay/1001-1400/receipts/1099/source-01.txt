@@ -1,0 +1,110 @@
+import { useCallback, useEffect, useMemo } from "react";
+import { useQueries, useQueryClient } from "@tanstack/react-query";
+import { useShallow } from "zustand/shallow";
+import { useDaemonConnections } from "@/contexts/daemon-connections-context";
+import { useSessionStore, type Agent } from "@/stores/session-store";
+import type { AggregatedAgent } from "@/hooks/use-aggregated-agents";
+import { normalizeAgentSnapshot } from "@/utils/agent-snapshots";
+import {
+  deriveProjectKey,
+  deriveProjectName,
+} from "@/utils/agent-grouping";
+import {
+  useSectionOrderStore,
+  sortProjectsByStoredOrder,
+} from "@/stores/section-order-store";
+import type { FetchAgentsGroupedByProjectResponseMessage } from "@server/shared/messages";
+
+const SIDEBAR_GROUPS_STALE_TIME = 15_000;
+const SIDEBAR_GROUPS_REFETCH_INTERVAL = 10_000;
+const MAX_AGENTS_PER_PROJECT = 5;
+
+type SidebarGroupsPayload = FetchAgentsGroupedByProjectResponseMessage["payload"];
+export type SidebarCheckoutLite =
+  SidebarGroupsPayload["groups"][number]["agents"][number]["checkout"];
+type MutableSidebarGroup = {
+  projectKey: string;
+  projectName: string;
+  agents: AggregatedAgent[];
+};
+
+export interface SidebarSectionData {
+  key: string;
+  projectKey: string;
+  title: string;
+  agents: AggregatedAgent[];
+  firstAgentServerId?: string;
+  firstAgentId?: string;
+  workingDir?: string;
+}
+
+export interface SidebarAgentsGroupedResult {
+  sections: SidebarSectionData[];
+  checkoutByAgentKey: Map<string, SidebarCheckoutLite>;
+  isLoading: boolean;
+  isInitialLoad: boolean;
+  isRevalidating: boolean;
+  refreshAll: () => void;
+}
+
+function toAggregatedAgent(params: {
+  source: Agent | ReturnType<typeof normalizeAgentSnapshot>;
+  serverId: string;
+  serverLabel: string;
+}): AggregatedAgent {
+  const source = params.source;
+  return {
+    id: source.id,
+    serverId: params.serverId,
+    serverLabel: params.serverLabel,
+    title: source.title ?? null,
+    status: source.status,
+    lastActivityAt: source.lastActivityAt,
+    cwd: source.cwd,
+    provider: source.provider,
+    requiresAttention: source.requiresAttention,
+    attentionReason: source.attentionReason,
+    attentionTimestamp: source.attentionTimestamp ?? null,
+    archivedAt: source.archivedAt ?? null,
+    labels: source.labels,
+  };
+}
+
+export function useSidebarAgentsGrouped(options?: {
+  isOpen?: boolean;
+}): SidebarAgentsGroupedResult {
+  const { connectionStates } = useDaemonConnections();
+  const queryClient = useQueryClient();
+  const isOpen = options?.isOpen ?? true;
+
+  const sessionClients = useSessionStore(
+    useShallow((state) => {
+      const result: Record<
+        string,
+        NonNullable<typeof state.sessions[string]["client"]> | null
+      > = {};
+      for (const [serverId, session] of Object.entries(state.sessions)) {
+        result[serverId] = session.client ?? null;
+      }
+      return result;
+    })
+  );
+
+  const sessionAgents = useSessionStore(
+    useShallow((state) => {
+      const result: Record<string, Map<string, Agent> | undefined> = {};
+      for (const [serverId, session] of Object.entries(state.sessions)) {
+        result[serverId] = session.agents;
+      }
+      return result;
+    })
+  );
+
+  const sessionConnections = useSessionStore(
+    useShallow((state) => {
+      const result: Record<string, boolean> = {};
+      for (const [serverId, session] of Object.entries(state.sessions)) {
+        result[serverId] = session.connection.isConnected;
+      }
+      return result;
+    })

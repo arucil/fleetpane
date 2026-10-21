@@ -1,0 +1,23 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[1062,1073],"new_lines":[1054,1068],"diff_block_lines":[82,102],"hunk_header":"@@ -1061,15 +1053,19 @@ function DaemonCard({","substantive_changed_lines":15}
+           <View style={styles.hostHeaderRight}>
+-            <View style={[styles.statusPill, { backgroundColor: statusPillBg }]}>
++            <View style={[Platform.OS === "web" ? styles.statusPill : styles.statusPillMobile, { backgroundColor: statusPillBg }]}>
+               <View style={[styles.statusDot, { backgroundColor: statusColor }]} />
+-              <Text style={[styles.statusText, { color: statusColor }]}>{badgeText}</Text>
++              {Platform.OS === "web" ? (
++                <Text style={[styles.statusText, { color: statusColor }]}>{badgeText}</Text>
++              ) : null}
+             </View>
+ 
+             {connectionBadge ? (
+-              <View style={styles.connectionPill}>
++              <View style={Platform.OS === "web" ? styles.connectionPill : styles.connectionPillMobile}>
+                 {connectionBadge.icon}
+-                <Text style={styles.connectionText} numberOfLines={1}>
+-                  {connectionBadge.text}
+-                </Text>
++                {Platform.OS === "web" ? (
++                  <Text style={styles.connectionText} numberOfLines={1}>
++                    {connectionBadge.text}
++                  </Text>

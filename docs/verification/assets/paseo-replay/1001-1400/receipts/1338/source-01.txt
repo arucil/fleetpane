@@ -1,0 +1,46 @@
+          type: 'single',
+          data: {
+            agentId: resolvedAgentId,
+            status: 'timeout',
+            message: appendRecentActivity(
+              `Agent did not finish within ${timeoutLabel}. Run \`paseo wait ${resolvedAgentId}\` again to keep waiting.`,
+              recentActivity
+            ),
+          },
+          schema: agentWaitSchema,
+        }
+      }
+
+      if (state.status === 'permission') {
+        const permission = state.final?.pendingPermissions?.[0]
+        return {
+          type: 'single',
+          data: {
+            agentId: resolvedAgentId,
+            status: 'permission',
+            message: permission
+              ? `Agent is waiting for permission: ${permission.kind}`
+              : 'Agent is waiting for permission',
+          },
+          schema: agentWaitSchema,
+        }
+      }
+
+      if (state.status === 'error') {
+        return {
+          type: 'single',
+          data: {
+            agentId: resolvedAgentId,
+            status: 'error',
+            message: state.error ?? 'Agent finished with error',
+          },
+          schema: agentWaitSchema,
+        }
+      }
+
+      // Agent is idle
+      return {
+        type: 'single',
+        data: {
+          agentId: resolvedAgentId,
+          status: 'idle',

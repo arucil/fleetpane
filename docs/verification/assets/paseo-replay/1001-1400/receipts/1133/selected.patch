@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/voice-context.tsx
+RANGE {"path":"packages/app/src/contexts/voice-context.tsx","old_lines":[72,79],"new_lines":[76,78],"diff_block_lines":[17,27],"hunk_header":"@@ -70,31 +74,52 @@ export function VoiceProvider({ children }: VoiceProviderProps) {","substantive_changed_lines":10}
+-  const realtimeAudio = useSpeechmaticsAudio({
+-    onSpeechStart: () => {
+-      console.log("[Voice] Segment started (speech confirmed)");
+-      // Stop audio playback if playing
+-      const session = realtimeSessionRef.current;
+-      const sessionAudioPlayer = session?.audioPlayer ?? null;
+-      const sessionClient = session?.client ?? null;
+-      const sessionIsPlayingAudio = session?.isPlayingAudio ?? false;
++  const clearSpeechStartInterruptTimer = useCallback((reason: string) => {
++    const timer = speechInterruptTimerRef.current;
++    if (timer) {

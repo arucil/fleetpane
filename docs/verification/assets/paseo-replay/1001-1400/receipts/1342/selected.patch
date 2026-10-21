@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[84,84],"new_lines":[91,101],"diff_block_lines":[22,32],"hunk_header":"@@ -82,4 +82,69 @@ function deriveDateSectionLabel(lastActivityAt: Date): string {","substantive_changed_lines":5}
++
++function AgentListRow({
++  agent,
++  selectedAgentId,
++  showCheckoutInfo,
++  onPress,
++  onLongPress,
++}: AgentListRowProps) {
++  const timeAgo = formatTimeAgo(agent.lastActivityAt);
++  const agentKey = `${agent.serverId}:${agent.id}`;
++  const isSelected = selectedAgentId === agentKey;

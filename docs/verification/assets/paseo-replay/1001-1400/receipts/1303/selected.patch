@@ -1,0 +1,13 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[0,0],"new_lines":[49,59],"diff_block_lines":[55,65],"hunk_header":"@@ -0,0 +1,750 @@","substantive_changed_lines":10}
++
++export function LeftSidebar({ selectedAgentId }: LeftSidebarProps) {
++  const { theme } = useUnistyles();
++  const insets = useSafeAreaInsets();
++  const isMobile =
++    UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
++  const mobileView = usePanelStore((state) => state.mobileView);
++  const desktopAgentListOpen = usePanelStore((state) => state.desktop.agentListOpen);
++  const closeToAgent = usePanelStore((state) => state.closeToAgent);
++  const pathname = usePathname();
++  const { daemons } = useDaemonRegistry();

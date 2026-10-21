@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1174,
+  "revision": "80f0ca08f97e46ec71e26b861d194d8c7488ef2d",
+  "date": "2026-02-14T01:26:54+07:00",
+  "committer_date": "2026-02-14T01:26:54+07:00",
+  "parents": [
+    "193c723714ff34458b6135b86cbe8f7c18c180d7"
+  ],
+  "subject": "refactor(cli): centralize daemon errno parsing and add utility tests",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "A\tpackages/cli/tests/18-local-daemon-utils.test.ts"
+  ],
+  "source_receipt_digest": "sha256:49edfd17be9dc60ce7e8dd78b5bbeaf04cc0cf610849058f3081d5ec705fbd4f",
+  "diff_tree_digest": "sha256:de19d0db4650ba54a1dac2c238e3199d3b1203c0efbfbded3f8a0b4fbbe1c109",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/local-daemon.ts",
+      "old_lines": [
+        171,
+        173
+      ],
+      "new_lines": [
+        171,
+        181
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -170,4 +170,12 @@ function sleep(ms: number): Promise<void> {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 27,
+  "receipt_file": "receipts/1174/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE EXECUTION_PLAN_ITERATION_2_PROJECTS_WORKSPACES_TABS.md
+RANGE {"path":"EXECUTION_PLAN_ITERATION_2_PROJECTS_WORKSPACES_TABS.md","old_lines":[0,0],"new_lines":[2,12],"diff_block_lines":[8,18],"hunk_header":"@@ -0,0 +1,160 @@","substantive_changed_lines":5}
++
++This document describes **how** we will execute the fixes defined in:
++- `PLAN_ITERATION_2_PROJECTS_WORKSPACES_TABS.md`
++
++It is optimized for parallel work using **Paseo-managed worktrees** and strict quality gates.
++
++---
++
++## Constraints / Guardrails
++
++- **Do not restart or modify** the user’s main daemon on `localhost:6767`.

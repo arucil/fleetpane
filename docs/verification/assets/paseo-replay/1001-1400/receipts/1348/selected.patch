@@ -1,0 +1,13 @@
+FILE packages/app/src/desktop/attachments/desktop-attachment-store.ts
+RANGE {"path":"packages/app/src/desktop/attachments/desktop-attachment-store.ts","old_lines":[0,0],"new_lines":[35,45],"diff_block_lines":[41,51],"hunk_header":"@@ -0,0 +1,207 @@","substantive_changed_lines":8}
++
++function inferFileNameFromPath(path: string): string | null {
++  const normalizedPath = path.replace(/\\/g, "/");
++  const parts = normalizedPath.split("/");
++  const lastPart = parts[parts.length - 1];
++  return lastPart && lastPart.length > 0 ? lastPart : null;
++}
++
++function extensionForAttachment(input: {
++  fileName?: string | null;
++  sourcePath?: string | null;

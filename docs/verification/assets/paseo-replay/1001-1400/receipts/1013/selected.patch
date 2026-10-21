@@ -1,0 +1,13 @@
+FILE packages/app/src/components/grouped-agent-list.tsx
+RANGE {"path":"packages/app/src/components/grouped-agent-list.tsx","old_lines":[188,188],"new_lines":[196,206],"diff_block_lines":[28,38],"hunk_header":"@@ -186,4 +186,162 @@ function SectionHeader({","substantive_changed_lines":4}
++
++function GroupedAgentRow({
++  agent,
++  isSelected,
++  shortcutNumber,
++  onPress,
++  onLongPress,
++  onArchive,
++}: GroupedAgentRowProps) {
++  const { theme } = useUnistyles();
++  const [isHovered, setIsHovered] = useState(false);

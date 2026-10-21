@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/worktree/ls.ts
+RANGE {"path":"packages/cli/src/commands/worktree/ls.ts","old_lines":[27,27],"new_lines":[28,38],"diff_block_lines":[19,29],"hunk_header":"@@ -22,7 +24,18 @@ function shortenPath(path: string): string {","substantive_changed_lines":6}
++
++export function resolvePaseoHomePath(): string {
++  return process.env.PASEO_HOME ?? join(homedir(), '.paseo')
++}
++
++export function resolvePaseoWorktreesDir(): string {
++  return join(resolvePaseoHomePath(), 'worktrees')
++}
++
++function isAgentInManagedWorktree(agentCwd: string): boolean {
++  const worktreesDir = resolvePaseoWorktreesDir()

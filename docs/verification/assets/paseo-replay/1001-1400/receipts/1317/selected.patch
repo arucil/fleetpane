@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/daemon-connections-context.tsx
+RANGE {"path":"packages/app/src/contexts/daemon-connections-context.tsx","old_lines":[175,175],"new_lines":[177,187],"diff_block_lines":[28,38],"hunk_header":"@@ -174,8 +176,35 @@ export function DaemonConnectionsProvider({ children }: { children: ReactNode })","substantive_changed_lines":8}
+ 
++  const markAgentListReady = useCallback((serverId: string, ready: boolean) => {
++    setConnectionStates((prev) => {
++      const existing = prev.get(serverId);
++      if (!existing) {
++        return prev;
++      }
++      if (existing.status !== "online") {
++        return prev;
++      }
++      if (

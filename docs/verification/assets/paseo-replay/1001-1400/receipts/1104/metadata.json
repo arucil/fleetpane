@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1104,
+  "revision": "ef29319bafa02a0224bacfa22e5e0ed5e3df9f8c",
+  "date": "2026-02-09T16:19:33+07:00",
+  "committer_date": "2026-02-09T16:19:33+07:00",
+  "parents": [
+    "4bb536768b661d758df5346b7a83253abd0b2877"
+  ],
+  "subject": "feat(app): move realtime voice controls into input overlay",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "A\tpackages/app/src/components/realtime-voice-overlay.tsx"
+  ],
+  "source_receipt_digest": "sha256:d0b8ff2006f2cb79c02f418eb9b28bd93fbf5fcbb81ab00c01c736ff79f5d8a0",
+  "diff_tree_digest": "sha256:e154eb1f0b501fccf7298056268d1891c0e8e6449740b56f31ab2c2994c9a7f3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        729,
+        730
+      ],
+      "new_lines": [
+        759,
+        766
+      ],
+      "diff_block_lines": [
+        120,
+        127
+      ],
+      "hunk_header": "@@ -706,25 +728,39 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 200,
+  "receipt_file": "receipts/1104/selected.patch"
+}

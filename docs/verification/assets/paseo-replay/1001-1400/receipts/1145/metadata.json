@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1145,
+  "revision": "8bdd083512f5fdf892f6192dfce7160679704cc2",
+  "date": "2026-02-12T18:04:13+07:00",
+  "committer_date": "2026-02-12T18:04:13+07:00",
+  "parents": [
+    "018edef3bbc6927efd0e2ad7c7283253ceeef32a",
+    "f79468b79377bad4b52df91b1d3c903abd7d0293"
+  ],
+  "subject": "Merge branch 'main' of github.com:getpaseo/paseo",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-rollout-timeline.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-detail-primitives.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-mapper-utils.ts"
+  ],
+  "source_receipt_digest": "sha256:f0aa8883ff05f04158a3aa1a3a5550a6803770769e1b5b87cb3d54488883760b",
+  "diff_tree_digest": "sha256:c49970c2405796b25b64a5403fbf0321688360a7d9630ea890246870b9a94b63",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+      "old_lines": [
+        23,
+        23
+      ],
+      "new_lines": [
+        34,
+        44
+      ],
+      "diff_block_lines": [
+        21,
+        31
+      ],
+      "hunk_header": "@@ -20,13 +20,56 @@ import {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1838,
+  "receipt_file": "receipts/1145/selected.patch"
+}

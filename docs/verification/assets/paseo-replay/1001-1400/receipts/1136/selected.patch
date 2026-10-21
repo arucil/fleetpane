@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[182,189],"new_lines":[182,189],"diff_block_lines":[7,17],"hunk_header":"@@ -181,16 +181,24 @@ function Feature({","substantive_changed_lines":6}
+   return (
+-    <div className="pt-10">
+-      <div className="flex flex-col sm:flex-row gap-3 mb-4">
++    <div className="pt-10 space-y-4">
++      <CodeBlock>npm install -g @getpaseo/cli && paseo</CodeBlock>
++      <div className="flex flex-col sm:flex-row gap-3">
+         <a
+           href="https://github.com/getpaseo/paseo/releases/latest"
+           target="_blank"
+           rel="noopener noreferrer"
+-          className="inline-flex items-center justify-center rounded-lg bg-white text-black px-4 py-2 text-sm font-medium hover:bg-white/90 transition-colors"

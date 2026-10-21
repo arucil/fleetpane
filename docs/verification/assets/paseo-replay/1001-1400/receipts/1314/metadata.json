@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1314,
+  "revision": "603e95de099618662b75dcf6ad2f5a795dd4b11d",
+  "date": "2026-02-19T21:17:51+07:00",
+  "committer_date": "2026-02-19T21:17:51+07:00",
+  "parents": [
+    "bff1a5accca18dd0e6503cc4c562c35a19c15c61"
+  ],
+  "subject": "refactor(agent-screen): extract state machine for agent loading flow",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message-input.tsx",
+    "A\tpackages/app/src/hooks/use-agent-screen-state-machine.test.ts",
+    "A\tpackages/app/src/hooks/use-agent-screen-state-machine.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:5329bbdcbeeb8fd2be061eb97ca885bdbccd0bfebea70d8f564e31898b6c1e54",
+  "diff_tree_digest": "sha256:49a3711f8f2240af30b5b23c472796ae3435b4359363f0806c18c643d2b69afa",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-screen-state-machine.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        53,
+        63
+      ],
+      "diff_block_lines": [
+        59,
+        69
+      ],
+      "hunk_header": "@@ -0,0 +1,159 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 512,
+  "receipt_file": "receipts/1314/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/speech-runtime.ts
+RANGE {"path":"packages/server/src/server/speech/speech-runtime.ts","old_lines":[32,32],"new_lines":[69,78],"diff_block_lines":[65,75],"hunk_header":"@@ -30,8 +67,246 @@ function resolveRequestedSpeechProviders(","substantive_changed_lines":9}
+-export type InitializedSpeechRuntime = {
++async function hasRequiredLocalModelFile(filePath: string): Promise<boolean> {
++  try {
++    const fileStat = await stat(filePath);
++    if (fileStat.isDirectory()) {
++      return true;
++    }
++    return fileStat.isFile() && fileStat.size > 0;
++  } catch {
++    return false;
++  }

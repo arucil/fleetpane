@@ -1,0 +1,67 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1087,
+  "revision": "34fff59658b357583113a483bfaabb6108b43bed",
+  "date": "2026-02-09T12:00:49+07:00",
+  "committer_date": "2026-02-09T12:00:49+07:00",
+  "parents": [
+    "6d115074e955811073f5ab0ad9814b234a71779a"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/types/stream-buffer.test.ts",
+    "M\tpackages/app/src/types/stream.harness.test.ts",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.tool-call-schema.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:82731f3e8ddc57a8513e8652f6a8ad2e5dbbbd47858937e56238cdc94ccf4e56",
+  "diff_tree_digest": "sha256:5227632efe7a1ceea931cf88a78ef56e2c8b518960cbd7db22518275e6b685c8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/tool-call-display.ts",
+      "old_lines": [
+        81,
+        91
+      ],
+      "new_lines": [
+        81,
+        81
+      ],
+      "diff_block_lines": [
+        14,
+        24
+      ],
+      "hunk_header": "@@ -80,31 +80,33 @@ export function buildToolCallDisplayModel(input: ToolCallDisplayInput): ToolCall",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 666,
+  "receipt_file": "receipts/1087/selected.patch"
+}

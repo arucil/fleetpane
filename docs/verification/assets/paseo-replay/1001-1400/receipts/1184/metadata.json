@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1184,
+  "revision": "b1956cffb7485b5c86d19a9b3d479966f6f592e4",
+  "date": "2026-02-14T09:25:18+07:00",
+  "committer_date": "2026-02-14T09:25:18+07:00",
+  "parents": [
+    "fca2776e61f9263dec2c8f63dc13d95005fce4e3"
+  ],
+  "subject": "refactor(app): remove legacy stream buffer adapter",
+  "diff_tree_paths": [
+    "D\tpackages/app/src/types/stream-buffer.test.ts",
+    "A\tpackages/app/src/types/stream-event.test.ts",
+    "M\tpackages/app/src/types/stream.ts"
+  ],
+  "source_receipt_digest": "sha256:0380fe516446f0d8184f9ac4d40a9fff2e47fd765020302db580e1b74e670b32",
+  "diff_tree_digest": "sha256:0fbab9dc56d4771198e2e5e6afa941e38205cb793da7e54599c471a82e815d58",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/types/stream.ts",
+      "old_lines": [
+        910,
+        920
+      ],
+      "new_lines": [
+        902,
+        902
+      ],
+      "diff_block_lines": [
+        16,
+        26
+      ],
+      "hunk_header": "@@ -900,55 +900,2 @@ export function applyStreamEvent(params: {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 343,
+  "receipt_file": "receipts/1184/selected.patch"
+}

@@ -1,0 +1,41 @@
+      if (target.kind === "terminal") {
+        const terminal = terminals.find((t) => t.id === target.terminalId) ?? null;
+        next.push({
+          key: tab.tabId,
+          tabId: tab.tabId,
+          kind: "terminal",
+          terminalId: target.terminalId,
+          label: terminal?.name ?? "Terminal",
+          subtitle: "Terminal",
+        });
+        continue;
+      }
+      const filePath = target.path;
+      const fileName = filePath.split("/").filter(Boolean).pop() ?? filePath;
+      next.push({
+        key: tab.tabId,
+        tabId: tab.tabId,
+        kind: "file",
+        filePath,
+        label: fileName,
+        subtitle: filePath,
+      });
+    }
+    return next;
+  }, [openTabs, sessionAgents, terminals]);
+
+  const handleReorderTabs = useCallback(
+    (nextTabs: WorkspaceTabDescriptor[]) => {
+      reorderWorkspaceTabs({
+        serverId: normalizedServerId,
+        workspaceId: normalizedWorkspaceId,
+        tabIds: nextTabs.map((tab) => tab.tabId),
+      });
+    },
+    [normalizedServerId, normalizedWorkspaceId, reorderWorkspaceTabs]
+  );
+
+  const navigateToTabId = useCallback(
+    (tabId: string) => {
+      if (!tabId || !normalizedServerId || !normalizedWorkspaceId) {
+        return;

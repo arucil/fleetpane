@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1343,
+  "revision": "8bcfde81841b636faea9ba150255f116e5779b44",
+  "date": "2026-02-22T14:09:49+08:00",
+  "committer_date": "2026-02-22T13:09:49+07:00",
+  "parents": [
+    "55b450c8b96afc31901dec172933501a58e0469d"
+  ],
+  "subject": "perf(app): reduce streaming rerenders and scroll churn (#67)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/stores/session-store.ts"
+  ],
+  "source_receipt_digest": "sha256:a18771bc2ff6f4b0ee3794d90faa74683147cf7f9bb7df737b5020b7e5751bb2",
+  "diff_tree_digest": "sha256:a6a6815574e2138dc4f069b05d3ad876110cb82c1bd190f44bc0ad501e73268c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/session-store.ts",
+      "old_lines": [
+        625,
+        625
+      ],
+      "new_lines": [
+        630,
+        640
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -624,4 +629,65 @@ export const useSessionStore = create<SessionStore>()(",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 87,
+  "receipt_file": "receipts/1343/selected.patch"
+}

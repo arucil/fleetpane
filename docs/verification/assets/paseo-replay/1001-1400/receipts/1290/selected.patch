@@ -1,0 +1,13 @@
+FILE packages/app/src/components/git-action-visibility.ts
+RANGE {"path":"packages/app/src/components/git-action-visibility.ts","old_lines":[0,0],"new_lines":[1,11],"diff_block_lines":[7,17],"hunk_header":"@@ -0,0 +1,14 @@","substantive_changed_lines":10}
++export function shouldShowMergeFromBaseAction(input: {
++  isOnBaseBranch: boolean;
++  hasRemote: boolean;
++  aheadOfOrigin: number;
++  behindOfOrigin: number;
++}): boolean {
++  if (!input.isOnBaseBranch) {
++    return true;
++  }
++  if (!input.hasRemote) {
++    return false;

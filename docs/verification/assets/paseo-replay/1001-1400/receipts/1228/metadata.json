@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1228,
+  "revision": "efde557d6f1de0273909cdb64013500a22966dfd",
+  "date": "2026-02-17T10:43:20+07:00",
+  "committer_date": "2026-02-17T10:43:20+07:00",
+  "parents": [
+    "50b99584a1ff41a4d414d9e101d5ded7b21afaee"
+  ],
+  "subject": "Fix stuck send-while-running processing recovery",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "A\tpackages/server/src/server/daemon-e2e/send-while-running-stuck-claude.real.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/send-while-running-stuck-test-utils.ts",
+    "A\tpackages/server/src/server/daemon-e2e/send-while-running-stuck.real.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:6551b6a35d71b769dcdc452c7450a3c3f9b2d21b374c950907bf71ed47fe41dd",
+  "diff_tree_digest": "sha256:4fbbce50a81532043993fee45b39e61d857abbadf41d9c242ccd513136684abb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        235,
+        238
+      ],
+      "new_lines": [
+        235,
+        245
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -234,13 +234,36 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 183,
+  "receipt_file": "receipts/1228/selected.patch"
+}

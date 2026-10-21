@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[526,526],"new_lines":[548,558],"diff_block_lines":[40,50],"hunk_header":"@@ -524,4 +540,209 @@ export class OpenCodeAgentClient implements AgentClient {","substantive_changed_lines":7}
++
++export function translateOpenCodeEvent(
++  event: unknown,
++  state: OpenCodeEventTranslationState
++): AgentStreamEvent[] {
++  const events: AgentStreamEvent[] = [];
++
++  if (!event || typeof event !== "object") {
++    return events;
++  }
++

@@ -1,0 +1,14 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[860,864],"new_lines":[860,869],"diff_block_lines":[5,16],"hunk_header":"@@ -860,5 +860,10 @@ export class AgentManager {","substantive_changed_lines":6}
+@@ -860,5 +860,10 @@ export class AgentManager {
+   async setTitle(agentId: string, title: string): Promise<void> {
+     const agent = this.requireAgent(agentId);
+-    await this.registry?.setTitle(agentId, title);
++    const normalizedTitle = title.trim();
++    if (!normalizedTitle) {
++      return;
++    }
++    this.touchUpdatedAt(agent);
++    await this.persistSnapshot(agent, { title: normalizedTitle });
+     this.emitState(agent);
+   }

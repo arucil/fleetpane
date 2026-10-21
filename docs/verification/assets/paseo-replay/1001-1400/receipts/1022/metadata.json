@@ -1,0 +1,64 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1022,
+  "revision": "cf9ff07be6238fbb709a4ff12f9daa1a9bbdb50b",
+  "date": "2026-02-06T13:18:30+07:00",
+  "committer_date": "2026-02-06T13:18:30+07:00",
+  "parents": [
+    "d72498854236070de7423c86fd22496650dd0431"
+  ],
+  "subject": "Git panel: share checkout actions + fix push loading (#20)",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/e2e/agent-details-sheet.spec.ts",
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/create-agent.spec.ts",
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/delete-agent-persists.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/git-diff-sticky-headers.spec.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "M\tpackages/app/e2e/host-onboarding-direct.spec.ts",
+    "M\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/permission-prompt.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "A\tpackages/app/src/query/query-client.ts",
+    "A\tpackages/app/src/stores/checkout-git-actions-store.test.ts",
+    "A\tpackages/app/src/stores/checkout-git-actions-store.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts"
+  ],
+  "source_receipt_digest": "sha256:18dde2dc218041721017560e2662c29fa0f7f55ba11491e30a4e83791733ea38",
+  "diff_tree_digest": "sha256:31496b4db343a1314ae31d9a0834ccf416cb4f94103f37929ba257ab54c9cc42",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        672,
+        682
+      ],
+      "new_lines": [
+        611,
+        611
+      ],
+      "diff_block_lines": [
+        95,
+        105
+      ],
+      "hunk_header": "@@ -670,155 +609,96 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 917,
+  "receipt_file": "receipts/1022/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/daemon/local-daemon.ts
+RANGE {"path":"packages/cli/src/commands/daemon/local-daemon.ts","old_lines":[0,0],"new_lines":[80,90],"diff_block_lines":[86,96],"hunk_header":"@@ -0,0 +1,411 @@","substantive_changed_lines":6}
++
++function envWithHome(home?: string): NodeJS.ProcessEnv {
++  if (!home) {
++    return process.env
++  }
++
++  return { ...process.env, PASEO_HOME: home }
++}
++
++function buildRunnerArgs(options: DaemonStartOptions): string[] {
++  const args: string[] = []

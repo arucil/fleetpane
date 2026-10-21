@@ -1,0 +1,13 @@
+FILE .github/workflows/android-apk-release.yml
+RANGE {"path":".github/workflows/android-apk-release.yml","old_lines":[0,0],"new_lines":[1,11],"diff_block_lines":[7,17],"hunk_header":"@@ -0,0 +1,119 @@","substantive_changed_lines":10}
++name: Android APK Release
++
++on:
++  push:
++    tags:
++      - "v*"
++  workflow_dispatch:
++    inputs:
++      tag:
++        description: "Existing tag to build (e.g. v0.1.0)"
++        required: true

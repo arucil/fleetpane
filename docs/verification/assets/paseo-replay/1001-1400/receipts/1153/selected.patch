@@ -1,0 +1,12 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[591,595],"new_lines":[636,645],"diff_block_lines":[68,77],"hunk_header":"@@ -585,11 +613,33 @@ export const AssistantMessage = memo(function AssistantMessage({","substantive_changed_lines":4}
++              accessibilityRole="link"
++              onPress={() => {
++                handleLinkPress(inlineCodeLinkUrl);
++              }}
+               style={[
+                 inheritedStyles,
+                 assistantMessageStylesheet.markdownCodeInline,
++                assistantMessageStylesheet.markdownCodeInlineLink,
+               ]}
+             >

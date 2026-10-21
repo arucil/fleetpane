@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[235,238],"new_lines":[235,245],"diff_block_lines":[7,17],"hunk_header":"@@ -234,13 +234,36 @@ export function AgentInputArea({","substantive_changed_lines":5}
+   const isAgentRunning = agent?.status === "running";
++  const agentUpdatedAtMs = agent?.updatedAt?.getTime() ?? 0;
+ 
+   const prevIsAgentRunningRef = useRef(isAgentRunning);
++  const latestAgentUpdatedAtRef = useRef(agentUpdatedAtMs);
+   useEffect(() => {
++    const previousUpdatedAt = latestAgentUpdatedAtRef.current;
++    if (agentUpdatedAtMs < previousUpdatedAt) {
++      return;
++    }
++

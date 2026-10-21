@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1099,
+  "revision": "1810ace23355db4b914dc1e5faad7f376279dffc",
+  "date": "2026-02-09T15:44:58+07:00",
+  "committer_date": "2026-02-09T15:44:58+07:00",
+  "parents": [
+    "8403ece4ed42a40b7ea52ab040d26107afd3b98a"
+  ],
+  "subject": "feat: add project-grouped agent fetch with checkout-lite placement",
+  "diff_tree_paths": [
+    "D\tpackages/app/src/components/grouped-agent-list.tsx",
+    "A\tpackages/app/src/components/sidebar-agent-list-skeleton.tsx",
+    "A\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/hooks/use-sidebar-agents-grouped.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:2a360ab4bbe997ebc3c4ffdc58d3aab686f98fd381ddb71e31f6879a3fa36586",
+  "diff_tree_digest": "sha256:d893dbb0ae21d35675d945f146afbdb0b644e5fefa1c445785b9cb6877559dd0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-agent-list-skeleton.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        4,
+        14
+      ],
+      "diff_block_lines": [
+        10,
+        20
+      ],
+      "hunk_header": "@@ -0,0 +1,137 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1929,
+  "receipt_file": "receipts/1099/selected.patch"
+}

@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1124,
+  "revision": "a6f60091f28c90f6cd6f0037625468589bcc2771",
+  "date": "2026-02-11T13:11:00+07:00",
+  "committer_date": "2026-02-11T14:11:00+08:00",
+  "parents": [
+    "8e5ba622ee6d5684745a3e3aab804e05af9fa98e"
+  ],
+  "subject": "Push-driven checkout diff subscriptions for changes sidebar (#24)",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/hooks/checkout-diff-order.test.ts",
+    "A\tpackages/app/src/hooks/checkout-diff-order.ts",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "A\tpackages/server/src/server/daemon-e2e/checkout-diff-subscription.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:5ef3ae37314367936cf57430a2c1774bee8f9fd0b9461e27c8f57c3b1b2477e3",
+  "diff_tree_digest": "sha256:297d18ed987b1423b58c3378c6c930c3e1c1f781edf96d7551919c5e984d369d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-checkout-diff-query.ts",
+      "old_lines": [
+        73,
+        73
+      ],
+      "new_lines": [
+        119,
+        129
+      ],
+      "diff_block_lines": [
+        104,
+        114
+      ],
+      "hunk_header": "@@ -50,27 +69,140 @@ export function useCheckoutDiffQuery({",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 746,
+  "receipt_file": "receipts/1124/selected.patch"
+}

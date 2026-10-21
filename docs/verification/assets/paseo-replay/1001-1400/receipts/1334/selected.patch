@@ -1,0 +1,10 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[783,788],"new_lines":[789,793],"diff_block_lines":[31,38],"hunk_header":"@@ -783,6 +789,5 @@ export default function SettingsScreen() {","substantive_changed_lines":3}
+@@ -783,6 +789,5 @@ export default function SettingsScreen() {
+     void confirmDialog({
+       title: "Update local daemon",
+-      message:
+-        "This updates the Paseo daemon on this computer only. A daemon restart is required after the update.",
++      message: "This updates the Paseo daemon on this computer. A restart is required afterwards.",
+       confirmLabel: "Update daemon",
+       cancelLabel: "Cancel",

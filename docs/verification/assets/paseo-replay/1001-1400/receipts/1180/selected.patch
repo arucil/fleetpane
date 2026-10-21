@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[856,856],"new_lines":[882,892],"diff_block_lines":[39,49],"hunk_header":"@@ -854,4 +863,40 @@ export class DaemonClient {","substantive_changed_lines":9}
++      options: params.options,
++      select: (msg) => {
++        const correlated = msg as CorrelatedResponseMessage;
++        if (correlated.type !== params.responseType) {
++          return null;
++        }
++        const payload =
++          correlated.payload as unknown as CorrelatedResponsePayload<TResponseType>;
++        if (payload.requestId !== params.requestId) {
++          return null;
++        }

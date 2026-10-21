@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/changelog.tsx
+RANGE {"path":"packages/website/src/routes/changelog.tsx","old_lines":[0,0],"new_lines":[19,29],"diff_block_lines":[25,35],"hunk_header":"@@ -0,0 +1,53 @@","substantive_changed_lines":10}
++
++function Changelog() {
++  return (
++    <div className="min-h-screen bg-background">
++      <div className="max-w-4xl mx-auto p-6 md:p-12">
++        <header className="flex items-center justify-between gap-4 mb-8">
++          <Link to="/" className="flex items-center gap-3">
++            <img src="/logo.svg" alt="Paseo" className="w-6 h-6" />
++            <span className="text-lg font-medium">Paseo</span>
++          </Link>
++          <div className="flex items-center gap-4">

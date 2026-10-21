@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1071,
+  "revision": "f9ebf6b523379d81602f4db738107ed6ca94a635",
+  "date": "2026-02-07T15:56:14+07:00",
+  "committer_date": "2026-02-07T15:56:14+07:00",
+  "parents": [
+    "902a415911e1355396a65159b3b0cbd966f565d5"
+  ],
+  "subject": "Add device pairing command and voice mute toggle",
+  "diff_tree_paths": [
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "A\tpackages/cli/src/commands/daemon/pair.ts",
+    "M\tpackages/cli/tests/03-daemon.test.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "A\tpackages/server/src/server/pairing-offer.ts",
+    "M\tpackages/server/src/server/pairing-qr.ts"
+  ],
+  "source_receipt_digest": "sha256:cb8135fa67ed6456a216739d58f8b6217773880a22d74f3c9f47cf6d77a902da",
+  "diff_tree_digest": "sha256:7bdbff1cd2a01ffd1977fe94504a131cefa738a5c79aec07f15e11dfe644e673",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/pairing-offer.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        13,
+        23
+      ],
+      "diff_block_lines": [
+        19,
+        29
+      ],
+      "hunk_header": "@@ -0,0 +1,64 @@",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 115,
+  "receipt_file": "receipts/1071/selected.patch"
+}

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1264,
+  "revision": "4305a37ec3439e683129aa5d4dd21a539e183de6",
+  "date": "2026-02-18T12:27:19+07:00",
+  "committer_date": "2026-02-18T12:27:19+07:00",
+  "parents": [
+    "96a80036f6050e8dd078429f61873e85aaae5c9c"
+  ],
+  "subject": "Enable explorer sidebar on draft screen after cwd selection (#54)",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/draft-explorer-sidebar.spec.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/panel-store.ts"
+  ],
+  "source_receipt_digest": "sha256:846f258ee23ba5daeed722a9309084da3713e1f8eca00ae72a8d169b4bf69cc0",
+  "diff_tree_digest": "sha256:84652942cce2eeeb71544e5963e9e9cf2a2750112a981e43516dbd8561695e17",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agent/draft-agent-screen.tsx",
+      "old_lines": [
+        693,
+        693
+      ],
+      "new_lines": [
+        732,
+        742
+      ],
+      "diff_block_lines": [
+        75,
+        85
+      ],
+      "hunk_header": "@@ -691,4 +724,70 @@ export function DraftAgentScreen({",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 524,
+  "receipt_file": "receipts/1264/selected.patch"
+}

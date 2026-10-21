@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-checkout-diff-query.ts
+RANGE {"path":"packages/app/src/hooks/use-checkout-diff-query.ts","old_lines":[73,73],"new_lines":[119,129],"diff_block_lines":[104,114],"hunk_header":"@@ -50,27 +69,140 @@ export function useCheckoutDiffQuery({","substantive_changed_lines":8}
++
++    const unsubscribeUpdate = client.on("checkout_diff_update", (message) => {
++      if (message.type !== "checkout_diff_update") {
++        return;
++      }
++      if (message.payload.subscriptionId !== subscriptionId) {
++        return;
++      }
++      queryClient.setQueryData<CheckoutDiffQueryPayload>(queryKey, {
++        cwd: message.payload.cwd,
++        files: orderCheckoutDiffFiles(message.payload.files),

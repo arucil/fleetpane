@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent-attention-policy.ts
+RANGE {"path":"packages/server/src/server/agent-attention-policy.ts","old_lines":[0,0],"new_lines":[20,30],"diff_block_lines":[26,36],"hunk_header":"@@ -0,0 +1,91 @@","substantive_changed_lines":7}
++
++function hasActiveClientOnAgent(
++  allClientStates: ClientAttentionState[],
++  agentId: string
++): boolean {
++  return allClientStates.some(
++    (state) => state.focusedAgentId === agentId && state.appVisible && !state.isStale
++  );
++}
++
++function hasActiveWebClient(allClientStates: ClientAttentionState[]): boolean {

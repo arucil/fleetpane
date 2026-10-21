@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/provider/models.ts
+RANGE {"path":"packages/cli/src/commands/provider/models.ts","old_lines":[56,63],"new_lines":[37,44],"diff_block_lines":[62,72],"hunk_header":"@@ -46,24 +30,41 @@ export interface ProviderModelsOptions extends CommandOptions {","substantive_changed_lines":6}
+-    const error: CommandError = {
++  if (!VALID_PROVIDERS.includes(normalizedProvider)) {
++    throw {
+       code: 'UNKNOWN_PROVIDER',
+       message: `Unknown provider: ${provider}`,
+-      details: `Valid providers: ${validProviders}`,
++      details: `Valid providers: ${VALID_PROVIDERS.join(', ')}`,
+     }
+-    throw error
+   }
+ 

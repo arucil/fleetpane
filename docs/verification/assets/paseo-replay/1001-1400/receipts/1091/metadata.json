@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1091,
+  "revision": "81d2e8988d523acbbd6b9abea537be328723a6cf",
+  "date": "2026-02-09T09:16:37+07:00",
+  "committer_date": "2026-02-09T09:16:37+07:00",
+  "parents": [
+    "896f88fa34f3073d1e78cfb025df815095ee302b"
+  ],
+  "subject": "refactor: enforce provider-owned canonical tool-call parsing",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "D\tpackages/server/src/server/agent/providers/standard-tool-call-schemas.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-mapper-utils.ts"
+  ],
+  "source_receipt_digest": "sha256:100bebacb8908a6267a7f6faa58823c6932766b25245643f1cd99385fee5690d",
+  "diff_tree_digest": "sha256:d4944f7eef5689da188ad021c5e933ddc8aa3311146192f50dab9c1c97c4fce5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+      "old_lines": [
+        48,
+        48
+      ],
+      "new_lines": [
+        54,
+        64
+      ],
+      "diff_block_lines": [
+        61,
+        71
+      ],
+      "hunk_header": "@@ -46,4 +34,435 @@ const ClaudeFailedMapperParamsSchema = ClaudeMapperParamsSchema.extend({",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 1774,
+  "receipt_file": "receipts/1091/selected.patch"
+}

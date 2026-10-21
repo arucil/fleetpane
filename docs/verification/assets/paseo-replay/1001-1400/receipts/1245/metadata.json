@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1245,
+  "revision": "0354c409f13da5fe8cb45c980f151ce5f716ca59",
+  "date": "2026-02-17T23:03:36+07:00",
+  "committer_date": "2026-02-17T23:07:20+07:00",
+  "parents": [
+    "a5842482b01cde005d5d41945c87de83c74a5ddc"
+  ],
+  "subject": "fix(worktree): hash cwd for collision-safe worktree roots",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/routes/docs/worktrees.tsx"
+  ],
+  "source_receipt_digest": "sha256:5139dc31e2f243521825b64396699df87b723aa7c629c4f5fc183ece3990eeff",
+  "diff_tree_digest": "sha256:154d4de6e0bb8cac3b73fea1720e25ada396a80a7753af387270fecd4dfca7d9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/worktree.ts",
+      "old_lines": [
+        641,
+        651
+      ],
+      "new_lines": [
+        642,
+        642
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -640,82 +641,28 @@ function generateWorktreeSlug(): string {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 126,
+  "receipt_file": "receipts/1245/selected.patch"
+}

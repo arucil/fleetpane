@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[356,356],"new_lines":[378,388],"diff_block_lines":[111,121],"hunk_header":"@@ -354,4 +371,43 @@ export function useAgentFormState(","substantive_changed_lines":9}
++    staleTime: 60 * 1000,
++    queryFn: async () => {
++      if (!client) {
++        throw new Error("Host is not connected");
++      }
++      const payload = await client.listAvailableProviders();
++      if (payload.error) {
++        throw new Error(payload.error);
++      }
++      return payload.providers
++        .filter((entry) => entry.available)

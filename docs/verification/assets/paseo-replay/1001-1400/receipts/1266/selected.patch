@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[485,485],"new_lines":[491,501],"diff_block_lines":[83,93],"hunk_header":"@@ -482,7 +488,60 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(","substantive_changed_lines":8}
++
++  useEffect(() => {
++    if (!IS_WEB || !onAddImages) {
++      return;
++    }
++
++    const textarea = getWebTextArea();
++    if (
++      !textarea ||
++      typeof (textarea as any).addEventListener !== "function" ||
++      typeof (textarea as any).removeEventListener !== "function"

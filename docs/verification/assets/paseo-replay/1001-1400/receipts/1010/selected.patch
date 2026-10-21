@@ -1,0 +1,13 @@
+FILE packages/server/src/server/persisted-config.ts
+RANGE {"path":"packages/server/src/server/persisted-config.ts","old_lines":[52,60],"new_lines":[52,56],"diff_block_lines":[5,15],"hunk_header":"@@ -52,9 +52,5 @@ const SpeechProviderIdSchema = z.preprocess(","substantive_changed_lines":5}
+@@ -52,9 +52,5 @@ const SpeechProviderIdSchema = z.preprocess(
+       return value;
+     }
+-    const normalized = value.trim().toLowerCase();
+-    if (normalized === "sherpa" || normalized === "sherpa-onnx") {
+-      return "local";
+-    }
+-    return normalized;
++    return value.trim().toLowerCase();
+   },
+   z.enum(["openai", "local"])

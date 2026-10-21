@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1249,
+  "revision": "fdb3c6830d891518d79ba91a8906845f9eab791d",
+  "date": "2026-02-18T09:58:56+07:00",
+  "committer_date": "2026-02-18T09:58:56+07:00",
+  "parents": [
+    "ab8ae975f6c323057eaa4fb15a2f5637b7e04a3e",
+    "ecd276e3d27e68e34c763c0084906d385ae60c47"
+  ],
+  "subject": "Merge pull request #48 from getpaseo/feature/commands-in-draft-screen-clean",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-autocomplete.tsx",
+    "M\tpackages/app/src/hooks/use-agent-commands-query.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/shared/messages.list-commands.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:c502a964af5cbbd56d1120b50e395aac319693c7d2b3d60ad0d21c9078d4cd20",
+  "diff_tree_digest": "sha256:98ba3519edb93843634ef93aab9281c249ad6d53cc9182b7be68675b6a0ed12e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        119,
+        119
+      ],
+      "new_lines": [
+        125,
+        135
+      ],
+      "diff_block_lines": [
+        30,
+        40
+      ],
+      "hunk_header": "@@ -118,11 +124,37 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 283,
+  "receipt_file": "receipts/1249/selected.patch"
+}

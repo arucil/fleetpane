@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/mcp-server.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.ts","old_lines":[435,440],"new_lines":[518,523],"diff_block_lines":[155,165],"hunk_header":"@@ -434,71 +517,76 @@ export async function createAgentMcpServer(","substantive_changed_lines":9}
+       const normalizedTitle = title?.trim() ?? null;
+-      const snapshot = await agentManager.createAgent({
+-        provider,
+-        cwd: resolvedCwd,
+-        modeId: resolvedMode,
+-        title: normalizedTitle ?? undefined,
++      const childAgentDefaultLabels =
++        callerAgentId && callerContext?.childAgentDefaultLabels
++          ? callerContext.childAgentDefaultLabels
++          : undefined;
++      const snapshot = await agentManager.createAgent(

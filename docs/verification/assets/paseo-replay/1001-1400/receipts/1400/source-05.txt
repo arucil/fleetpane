@@ -1,0 +1,31 @@
+    if (target.kind === "draft") {
+      return (
+        <WorkspaceDraftAgentTab
+          serverId={normalizedServerId}
+          workspaceId={normalizedWorkspaceId}
+          tabId={activeTabId ?? target.draftId}
+          draftId={target.draftId}
+          onCreated={(agentSnapshot) => {
+            const tabId = activeTabId ?? target.draftId;
+            replaceWorkspaceTabTarget({
+              serverId: normalizedServerId,
+              workspaceId: normalizedWorkspaceId,
+              tabId,
+              target: { kind: "agent", agentId: agentSnapshot.id },
+            });
+          }}
+        />
+      );
+    }
+
+    if (target.kind === "agent") {
+      return (
+        <AgentReadyScreen
+          serverId={normalizedServerId}
+          agentId={target.agentId}
+          showHeader={false}
+          showExplorerSidebar={false}
+          wrapWithExplorerSidebarProvider={false}
+        />
+      );
+    }

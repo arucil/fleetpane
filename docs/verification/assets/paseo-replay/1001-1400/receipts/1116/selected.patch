@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[196,196],"new_lines":[218,228],"diff_block_lines":[44,54],"hunk_header":"@@ -195,4 +217,65 @@ export async function runWorktreeSetupCommands(options: {","substantive_changed_lines":8}
+ 
++async function resolveBranchNameForWorktreePath(worktreePath: string): Promise<string> {
++  try {
++    const { stdout } = await execAsync("git branch --show-current", {
++      cwd: worktreePath,
++      env: READ_ONLY_GIT_ENV,
++    });
++    const branchName = stdout.trim();
++    if (branchName.length > 0) {
++      return branchName;
++    }

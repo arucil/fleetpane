@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1059,
+  "revision": "00bbac007cb493dfa90ded8222a4d064a02a7fc6",
+  "date": "2026-02-07T00:12:50+07:00",
+  "committer_date": "2026-02-07T00:12:50+07:00",
+  "parents": [
+    "9bd26a46e1d38ef8091d67131dd685eadf1df563"
+  ],
+  "subject": "Remove text-turn session path and keep voice flow audio-only",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:ee1ccbfcf81fd26af985c9bc5d97fa9704ba0b45fcd82c50a95b48c4443e3a8b",
+  "diff_tree_digest": "sha256:86f97fca76a657f4ff369f7eac59fc6656af6fbd3c6ef0bd15038f15b80cc1e7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        4656,
+        4663
+      ],
+      "new_lines": [
+        4622,
+        4629
+      ],
+      "diff_block_lines": [
+        63,
+        74
+      ],
+      "hunk_header": "@@ -4656,8 +4622,8 @@ export class Session {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 59,
+  "receipt_file": "receipts/1059/selected.patch"
+}

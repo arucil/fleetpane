@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1188,
+  "revision": "c4bebb97ab1a3d25a9c6aa5a8fd0279e07435fcd",
+  "date": "2026-02-14T11:31:57+07:00",
+  "committer_date": "2026-02-14T11:31:57+07:00",
+  "parents": [
+    "21f191583f281c329ae90db84fb3362577a0bc97"
+  ],
+  "subject": "Improve connection selection and agent hydration reliability",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/agent-timeline-hydration.spec.ts",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/utils/connection-selection.test.ts",
+    "A\tpackages/app/src/utils/connection-selection.ts",
+    "M\tpackages/cli/src/utils/timeline.ts",
+    "M\tpackages/server/src/client/daemon-client-relay-e2ee-transport.ts",
+    "M\tpackages/server/src/client/daemon-client-transport.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts"
+  ],
+  "source_receipt_digest": "sha256:9eab3f3727e4bbc31e7f85db887b8196ccc6c2625ac50b663e6a8642cd52860c",
+  "diff_tree_digest": "sha256:10dbd3a86ba15f08a546c997b41a872d52ead6fc421c3774397bbc63e6408ec6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/multi-daemon-session-host.tsx",
+      "old_lines": [
+        69,
+        69
+      ],
+      "new_lines": [
+        77,
+        87
+      ],
+      "diff_block_lines": [
+        74,
+        84
+      ],
+      "hunk_header": "@@ -67,8 +75,67 @@ function buildCandidates(host: HostProfile): Candidate[] {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 381,
+  "receipt_file": "receipts/1188/selected.patch"
+}

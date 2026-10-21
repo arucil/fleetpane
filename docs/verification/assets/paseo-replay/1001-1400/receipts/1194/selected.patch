@@ -1,0 +1,13 @@
+FILE packages/app/src/components/keyboard-shortcuts-dialog.tsx
+RANGE {"path":"packages/app/src/components/keyboard-shortcuts-dialog.tsx","old_lines":[0,0],"new_lines":[22,32],"diff_block_lines":[28,38],"hunk_header":"@@ -0,0 +1,180 @@","substantive_changed_lines":10}
++
++function buildShortcutHelpSections(input: {
++  isMac: boolean;
++  isTauri: boolean;
++}): ShortcutHelpSection[] {
++  const leftSidebarKeys: ShortcutKey[] = input.isMac ? ["mod", "B"] : ["mod", "."];
++  const newAgentKeys: ShortcutKey[] = input.isTauri
++    ? ["mod", "N"]
++    : ["mod", "alt", "N"];
++  const quickAgentKeys: ShortcutKey[] = input.isTauri
++    ? ["mod", "1-9"]

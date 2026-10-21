@@ -1,0 +1,33 @@
+    } catch (err) {
+      this.emit("error", err instanceof Error ? err : new Error(String(err)));
+    }
+  }
+
+  commit(): void {
+    if (!this.connected || !this.currentSegmentId) {
+      this.emit("error", new Error("Parakeet realtime session not connected"));
+      return;
+    }
+
+    void (async () => {
+      try {
+        await this.maybeDecode(true);
+        const finalText = this.lastPartialText;
+        const segmentId = this.currentSegmentId!;
+        const previousSegmentId = this.previousSegmentId;
+
+        this.emit("committed", { segmentId, previousSegmentId });
+        this.emit("transcript", { segmentId, transcript: finalText, isFinal: true });
+
+        this.previousSegmentId = segmentId;
+        this.currentSegmentId = uuidv4();
+        this.lastPartialText = "";
+        this.pcm16 = Buffer.alloc(0);
+      } catch (err) {
+        this.emit("error", err instanceof Error ? err : new Error(String(err)));
+      }
+    })();
+  }
+
+  clear(): void {
+    if (!this.connected) {

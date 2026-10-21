@@ -1,0 +1,11 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2767,2770],"new_lines":[2767,2774],"diff_block_lines":[5,13],"hunk_header":"@@ -2767,4 +2767,8 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":3}
+@@ -2767,4 +2767,8 @@ class ClaudeAgentSession implements AgentSession {
+       try {
+         next = await q.next();
++        this.logger.info(
++          { claudeSessionId: this.claudeSessionId, next },
++          "Claude query pump raw next()"
++        );
+       } catch (error) {
+         this.logger.warn({ err: error }, "Claude query pump next() failed");

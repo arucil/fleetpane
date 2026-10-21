@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1017,
+  "revision": "9e225d7db98261eb784661186a74a68133d54554",
+  "date": "2026-02-06T12:42:18+07:00",
+  "committer_date": "2026-02-06T12:42:18+07:00",
+  "parents": [
+    "88ec20a5117e9a3d5391f75cc5d361634be67e17"
+  ],
+  "subject": "Fix Codex persisted timeline parsing and session persistence",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-rollout-parsing.test.ts"
+  ],
+  "source_receipt_digest": "sha256:eebd5411449cdb25c15a7ee9821424da08aaef7ee8d37a85019379bc91b16eb0",
+  "diff_tree_digest": "sha256:7024c72404cbc5ac2e87a4263fd11349196df7e729d587f139095ff5027cd409",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+      "old_lines": [
+        5122,
+        5122
+      ],
+      "new_lines": [
+        5137,
+        5147
+      ],
+      "diff_block_lines": [
+        42,
+        52
+      ],
+      "hunk_header": "@@ -5117,75 +5127,129 @@ function extractContentTextByType(content: unknown, itemType: string): string {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 526,
+  "receipt_file": "receipts/1017/selected.patch"
+}

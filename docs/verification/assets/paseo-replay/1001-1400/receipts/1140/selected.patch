@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/update.ts
+RANGE {"path":"packages/cli/src/commands/agent/update.ts","old_lines":[0,0],"new_lines":[29,39],"diff_block_lines":[35,45],"hunk_header":"@@ -0,0 +1,177 @@","substantive_changed_lines":8}
++
++function parseLabelOptions(labels: string[] | undefined): Record<string, string> {
++  const parsed: Record<string, string> = {}
++  if (!labels) {
++    return parsed
++  }
++
++  for (const rawLabel of labels) {
++    for (const segment of rawLabel.split(',')) {
++      const label = segment.trim()
++      if (!label) {

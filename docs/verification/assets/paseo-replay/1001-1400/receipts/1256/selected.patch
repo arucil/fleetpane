@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[107,111],"new_lines":[107,111],"diff_block_lines":[5,11],"hunk_header":"@@ -107,5 +107,5 @@ jobs:","substantive_changed_lines":2}
+@@ -107,5 +107,5 @@ jobs:
+           projectPath: packages/desktop
+           tagName: ${{ env.RELEASE_TAG }}
+-          releaseName: Paseo Desktop ${{ env.RELEASE_TAG }}
++          releaseName: Paseo ${{ env.RELEASE_TAG }}
+           releaseBody: See the assets to download and install this version.
+           releaseDraft: false

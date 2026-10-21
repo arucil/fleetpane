@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1430,1432],"new_lines":[1430,1439],"diff_block_lines":[7,17],"hunk_header":"@@ -1429,5 +1429,12 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":7}
+         if (message.subtype === "init") {
+-          this.handleSystemMessage(message);
++          const threadSessionId = this.handleSystemMessage(message);
++          if (threadSessionId) {
++            events.push({
++              type: "thread_started",
++              provider: "claude",
++              sessionId: threadSessionId,
++            });
++          }
+         } else if (message.subtype === "status") {

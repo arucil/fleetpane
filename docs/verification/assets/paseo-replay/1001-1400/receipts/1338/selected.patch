@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/logs.ts
+RANGE {"path":"packages/cli/src/commands/agent/logs.ts","old_lines":[22,22],"new_lines":[23,33],"diff_block_lines":[9,19],"hunk_header":"@@ -20,4 +20,25 @@ export interface AgentLogsOptions extends CommandOptions {","substantive_changed_lines":8}
++
++export async function fetchAgentTimelineItems(
++  client: DaemonClient,
++  agentId: string
++): Promise<AgentTimelineItem[]> {
++  return fetchProjectedTimelineItems({ client, agentId })
++}
++
++export function formatAgentActivityTranscript(
++  timelineItems: AgentTimelineItem[],
++  tailCount?: number

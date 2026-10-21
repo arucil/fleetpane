@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/config.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/config.ts","old_lines":[148,148],"new_lines":[152,162],"diff_block_lines":[36,46],"hunk_header":"@@ -147,15 +151,17 @@ export function resolveLocalSpeechConfig(params: {","substantive_changed_lines":10}
+             autoDownload: parsed.autoDownload,
++            models: {
++              dictationStt: parsed.dictationLocalSttModel,
++              voiceStt: parsed.voiceLocalSttModel,
++              voiceTts: parsed.voiceLocalTtsModel,
++              ...(parsed.voiceLocalTtsSpeakerId !== undefined
++                ? { voiceTtsSpeakerId: parsed.voiceLocalTtsSpeakerId }
++                : {}),
++              ...(parsed.voiceLocalTtsSpeed !== undefined
++                ? { voiceTtsSpeed: parsed.voiceLocalTtsSpeed }
++                : {}),

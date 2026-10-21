@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/server-info-capabilities.ts
+RANGE {"path":"packages/app/src/utils/server-info-capabilities.ts","old_lines":[0,0],"new_lines":[5,15],"diff_block_lines":[11,21],"hunk_header":"@@ -0,0 +1,50 @@","substantive_changed_lines":7}
++
++export function getServerCapabilities(params: {
++  serverInfo: DaemonServerInfo | null | undefined;
++}): DaemonServerInfo["capabilities"] | null {
++  const capabilities = params.serverInfo?.capabilities;
++  if (!capabilities) {
++    return null;
++  }
++  return capabilities;
++}
++

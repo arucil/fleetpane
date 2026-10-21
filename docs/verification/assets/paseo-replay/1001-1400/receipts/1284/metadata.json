@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1284,
+  "revision": "e26dcde2c816914609c54ea81e5dd7678edbc7a3",
+  "date": "2026-02-18T19:40:46+07:00",
+  "committer_date": "2026-02-18T19:40:46+07:00",
+  "parents": [
+    "005875de2b9754b069cd545c07ff49b5ece5c1a3"
+  ],
+  "subject": "fix(server): use parent pid for lock ownership when spawned as child process",
+  "diff_tree_paths": [
+    "A\tpackages/cli/tests/22-daemon-stop-supervisor.test.ts",
+    "M\tpackages/server/src/server/pid-lock.ts"
+  ],
+  "source_receipt_digest": "sha256:ca3af3da7e81224a30d787ba7ed0fcaaca481016a7a9f1c63e0fa5b7bba3533f",
+  "diff_tree_digest": "sha256:e1cfe4349170acb927457676809d5dd6db9103898b69beb147219561c9d36dae",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/pid-lock.ts",
+      "old_lines": [
+        36,
+        36
+      ],
+      "new_lines": [
+        36,
+        46
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -35,4 +35,15 @@ function getPidFilePath(paseoHome: string): string {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 146,
+  "receipt_file": "receipts/1284/selected.patch"
+}

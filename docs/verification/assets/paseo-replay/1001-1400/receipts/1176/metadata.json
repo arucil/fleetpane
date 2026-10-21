@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1176,
+  "revision": "004bb0ea337977926520854affbba375d24500b3",
+  "date": "2026-02-14T01:51:36+07:00",
+  "committer_date": "2026-02-14T01:51:36+07:00",
+  "parents": [
+    "6ff1c421327c51f0ff129d253a2af07222729881"
+  ],
+  "subject": "refactor(cli): unify daemon start error message handling",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "A\tpackages/cli/src/utils/errors.ts",
+    "A\tpackages/cli/tests/19-errors-utils.test.ts"
+  ],
+  "source_receipt_digest": "sha256:4803c10dc0c6c20d8ff18dd148ae72f9003535069627b30ff6e91beab72188b5",
+  "diff_tree_digest": "sha256:9671ad9eb6d9dd0d4b425791cca581eb8da7fb2819d00aff3bffd08736f7424e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/start.ts",
+      "old_lines": [
+        148,
+        148
+      ],
+      "new_lines": [
+        143,
+        147
+      ],
+      "diff_block_lines": [
+        49,
+        53
+      ],
+      "hunk_header": "@@ -141,7 +137,11 @@ export async function runStart(options: StartOptions): Promise<void> {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 35,
+  "receipt_file": "receipts/1176/selected.patch"
+}

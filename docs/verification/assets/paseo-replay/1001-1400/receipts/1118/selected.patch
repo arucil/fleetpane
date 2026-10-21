@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[0,0],"new_lines":[56,66],"diff_block_lines":[62,72],"hunk_header":"@@ -0,0 +1,119 @@","substantive_changed_lines":8}
++
++export function resolveProviderCommandPrefix(
++  commandConfig: ProviderCommand | undefined,
++  resolveDefaultCommand: () => string
++): ProviderCommandPrefix {
++  if (!commandConfig || commandConfig.mode === "default") {
++    return {
++      command: resolveDefaultCommand(),
++      args: [],
++    };
++  }

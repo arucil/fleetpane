@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1342,
+  "revision": "55b450c8b96afc31901dec172933501a58e0469d",
+  "date": "2026-02-22T12:37:26+07:00",
+  "committer_date": "2026-02-22T12:37:26+07:00",
+  "parents": [
+    "74a9a3c33b178c43256c06ad4dc973edbd32fec9"
+  ],
+  "subject": "fix(app): stabilize hook order in agent archive flows",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/hooks/use-session-directory.ts"
+  ],
+  "source_receipt_digest": "sha256:fb64baaa3f6450629573c6cf86a2b57e6535c75dab729451d1ca3f9bc2ad5e20",
+  "diff_tree_digest": "sha256:4f5ffbe870693499953f0e605726b91ae44769a6ff506352e61351d32c5c8792",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        84,
+        84
+      ],
+      "new_lines": [
+        91,
+        101
+      ],
+      "diff_block_lines": [
+        22,
+        32
+      ],
+      "hunk_header": "@@ -82,4 +82,69 @@ function deriveDateSectionLabel(lastActivityAt: Date): string {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 156,
+  "receipt_file": "receipts/1342/selected.patch"
+}

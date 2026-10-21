@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1019,
+  "revision": "2e49104c6a3c7b515e5decb431dd13459c5a3d19",
+  "date": "2026-02-06T12:56:46+07:00",
+  "committer_date": "2026-02-06T12:56:46+07:00",
+  "parents": [
+    "c237505ea9ba1547704ba55acaba0687cd0f91aa"
+  ],
+  "subject": "Use schema-union live Codex events with fallback handling",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:3e81840ba03ae86b84a33c23a35650c95f15ac272f983809a66b5b00c8260315",
+  "diff_tree_digest": "sha256:828ea186fddb427974c0c27c61834729fc3fbea67233485523094159e6e9422b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        1015,
+        1015
+      ],
+      "new_lines": [
+        1041,
+        1051
+      ],
+      "diff_block_lines": [
+        39,
+        49
+      ],
+      "hunk_header": "@@ -1013,4 +1030,30 @@ const CodexNotificationSchema = z.union([",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 33,
+  "receipt_file": "receipts/1019/selected.patch"
+}

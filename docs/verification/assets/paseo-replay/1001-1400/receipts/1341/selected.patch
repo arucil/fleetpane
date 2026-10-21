@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1671,1674],"new_lines":[1669,1673],"diff_block_lines":[14,19],"hunk_header":"@@ -1671,4 +1669,5 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":1}
+@@ -1671,4 +1669,5 @@ class ClaudeAgentSession implements AgentSession {
+         this.cancelCurrentTurn = null;
+       }
++      this.rejectAllPendingPermissions(new Error("Permission request aborted"));
+       this.cancelRun(run, {
+         type: "turn_canceled",

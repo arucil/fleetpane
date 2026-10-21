@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[458,458],"new_lines":[437,447],"diff_block_lines":[136,146],"hunk_header":"@@ -446,14 +411,45 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":10}
++                leading={<Copy size={14} color={theme.colors.foregroundMuted} />}
++                onSelect={() => {
++                  void handleCopyPath(entry.path);
++                }}
++              >
++                Copy path
++              </DropdownMenuItem>
++              {entry.kind === "file" ? (
++                <DropdownMenuItem
++                  leading={<Download size={14} color={theme.colors.foregroundMuted} />}
++                  onSelect={() => handleDownloadEntry(entry)}

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts","old_lines":[11,14],"new_lines":[18,25],"diff_block_lines":[19,29],"hunk_header":"@@ -10,19 +17,75 @@ export type SherpaOnnxNodeModule = {","substantive_changed_lines":8}
+ 
+-function platformArch(): string {
+-  const platform = process.platform === "win32" ? "win" : process.platform;
+-  return `${platform}-${process.arch}`;
++type LoadAttempt = {
++  target: string;
++  error: unknown;
++};
++
++function appendAttempt(attempts: LoadAttempt[], target: string, error: unknown): void {
++  attempts.push({ target, error });

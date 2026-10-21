@@ -1,0 +1,13 @@
+FILE packages/app/src/keyboard/keyboard-shortcut-routing.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcut-routing.ts","old_lines":[0,0],"new_lines":[7,17],"diff_block_lines":[13,23],"hunk_header":"@@ -0,0 +1,40 @@","substantive_changed_lines":9}
++
++export function resolveSelectedOrRouteAgentKey(input: {
++  selectedAgentId?: string;
++  pathname: string;
++}): string | null {
++  if (input.selectedAgentId) {
++    return input.selectedAgentId;
++  }
++  const route = parseHostAgentRouteFromPathname(input.pathname);
++  if (!route) {
++    const draftRoute = parseHostAgentDraftRouteFromPathname(input.pathname);

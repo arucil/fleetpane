@@ -1,0 +1,92 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1278,
+  "revision": "f2fa7bb79eed95d377ba3db505739c8011b14caf",
+  "date": "2026-02-18T18:21:48+07:00",
+  "committer_date": "2026-02-18T18:21:48+07:00",
+  "parents": [
+    "5079ca386bf0089d429c1934bcdb40281d579e49",
+    "b1afb2673d1adb4a4ab8514a0386b59704a9fa34"
+  ],
+  "subject": "Merge remote-tracking branch 'origin/main' into pr59-sync",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/ui/autocomplete.tsx",
+    "M\tpackages/app/src/components/ui/combobox-options.ts",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-autocomplete.ts",
+    "M\tpackages/app/src/hooks/use-audio-recorder.web.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-file-drop-zone.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/utils/confirm-dialog.ts",
+    "A\tpackages/app/src/utils/desktop-permissions.test.ts",
+    "A\tpackages/app/src/utils/desktop-permissions.ts",
+    "A\tpackages/app/src/utils/file-mention-autocomplete.test.ts",
+    "A\tpackages/app/src/utils/file-mention-autocomplete.ts",
+    "M\tpackages/app/src/utils/open-external-url.ts",
+    "M\tpackages/app/src/utils/os-notifications.test.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/tauri-window.ts",
+    "A\tpackages/app/src/utils/tauri.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "A\tpackages/desktop/src-tauri/Entitlements.plist",
+    "M\tpackages/desktop/src-tauri/Info.plist",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/main.rs",
+    "M\tpackages/desktop/src-tauri/tauri.conf.json",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/directory-suggestions.test.ts",
+    "M\tpackages/server/src/utils/directory-suggestions.ts",
+    "M\tscripts/sync-workspace-versions.mjs"
+  ],
+  "source_receipt_digest": "sha256:c5dc3d6b386acaee98dbb7eb1560fa23dbb6270de89cd13350a78492b5aa38e8",
+  "diff_tree_digest": "sha256:6a8fa317ba095c7146f39cd5bddf644432f3be6f2ec804fab641c7b5c543b261",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        25,
+        35
+      ],
+      "new_lines": [
+        19,
+        19
+      ],
+      "diff_block_lines": [
+        44,
+        54
+      ],
+      "hunk_header": "@@ -24,42 +18,42 @@ import {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 13816,
+  "receipt_file": "receipts/1278/selected.patch"
+}

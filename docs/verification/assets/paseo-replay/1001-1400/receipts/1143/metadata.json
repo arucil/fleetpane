@@ -1,0 +1,76 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1143,
+  "revision": "018edef3bbc6927efd0e2ad7c7283253ceeef32a",
+  "date": "2026-02-12T17:00:35+07:00",
+  "committer_date": "2026-02-12T17:00:35+07:00",
+  "parents": [
+    "44c32fb8fb33c21f80e121184f5bc5fde9e6e199"
+  ],
+  "subject": "feat: add onboarding command and migrate git diff to checkout API",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "D\tpackages/app/src/hooks/use-git-diff-query.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/onboard.ts",
+    "M\tpackages/cli/src/index.ts",
+    "A\tpackages/cli/tests/17-onboard.test.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/git-diff-bottleneck.local.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "A\tpackages/server/src/server/relay-transport.test.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/config.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-types.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/utils/checkout-git-batching.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:57f6948b3d94cc9a644643df5cd3508355f1ce2c77ebd379c86c17c1daf3b81a",
+  "diff_tree_digest": "sha256:311ee5087e6336c91a7d149a83cc020da533fa2bb45c264208039510d577ad84",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/onboard.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        48,
+        58
+      ],
+      "diff_block_lines": [
+        54,
+        64
+      ],
+      "hunk_header": "@@ -0,0 +1,693 @@",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 1995,
+  "receipt_file": "receipts/1143/selected.patch"
+}

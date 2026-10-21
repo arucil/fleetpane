@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/daemon/local-daemon.ts
+RANGE {"path":"packages/cli/src/commands/daemon/local-daemon.ts","old_lines":[171,173],"new_lines":[171,181],"diff_block_lines":[7,17],"hunk_header":"@@ -170,4 +170,12 @@ function sleep(ms: number): Promise<void> {","substantive_changed_lines":4}
+ 
++function readNodeErrnoCode(error: unknown): string | undefined {
++  if (typeof error !== 'object' || error === null || !('code' in error)) {
++    return undefined
++  }
++
++  return typeof error.code === 'string' ? error.code : undefined
++}
++
+ function isProcessRunning(pid: number): boolean {
+   try {

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1301,
+  "revision": "d4a9ee482a16ebd7d19556556b09bf77e1c9e1d6",
+  "date": "2026-02-19T12:32:48+07:00",
+  "committer_date": "2026-02-19T12:32:48+07:00",
+  "parents": [
+    "2f98f073cee2295ae5bf4de81349c7c147709e03"
+  ],
+  "subject": "Fix duplicate /rewind user message and add real e2e regression",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/rewind-user-message-dedupe-claude.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:d1693a2c94aa441c903740e5b33d70645e9f6f35cf07bec99b881f0939fe26ef",
+  "diff_tree_digest": "sha256:90ba3445314eccbc1409e2b8ac69375f255e4272c93880ba0fa82358b2b2a014",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1088,
+        1096
+      ],
+      "new_lines": [
+        1088,
+        1091
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -1088,9 +1088,4 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/1301/selected.patch"
+}

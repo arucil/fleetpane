@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1062,
+  "revision": "4a9cf9e90f0b9e7f455c50329da7496468bd4905",
+  "date": "2026-02-07T09:43:44+07:00",
+  "committer_date": "2026-02-07T09:43:44+07:00",
+  "parents": [
+    "3f58937c98856e2a90833691ece27680c3f8e308"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/utils/agent-grouping.ts",
+    "M\tpackages/app/src/utils/perf.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.test.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:e79585a317c9eef6ebd1a1d87d84f3b917fe1c615c561619d0762e442592d82c",
+  "diff_tree_digest": "sha256:591213d0a5927ea0e08093bdc016f352acc803597b364bb38a921380ca69c1ef",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/voice-context.tsx",
+      "old_lines": [
+        136,
+        136
+      ],
+      "new_lines": [
+        146,
+        156
+      ],
+      "diff_block_lines": [
+        33,
+        43
+      ],
+      "hunk_header": "@@ -135,4 +145,46 @@ export function VoiceProvider({ children }: VoiceProviderProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 393,
+  "receipt_file": "receipts/1062/selected.patch"
+}

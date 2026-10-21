@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1098,
+  "revision": "4fa8859d149000ec2a4ca9efc736c4a31a2e5a01",
+  "date": "2026-02-09T15:44:29+07:00",
+  "committer_date": "2026-02-09T15:44:29+07:00",
+  "parents": [
+    "8403ece4ed42a40b7ea52ab040d26107afd3b98a"
+  ],
+  "subject": "Stabilize agent history sync after app backgrounding",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:323bd1d912bea1eda67ed77f29cf08fb4684a7b70bdbc7c7f0363e7cbd76fc62",
+  "diff_tree_digest": "sha256:df7b87a91b4751836e4a59b9779e0aee00daa9915c0fa73f412decd41b1f4b42",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agent/agent-ready-screen.tsx",
+      "old_lines": [
+        839,
+        849
+      ],
+      "new_lines": [
+        813,
+        813
+      ],
+      "diff_block_lines": [
+        119,
+        129
+      ],
+      "hunk_header": "@@ -838,23 +812,34 @@ function AgentScreenContent({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 217,
+  "receipt_file": "receipts/1098/selected.patch"
+}

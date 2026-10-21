@@ -1,0 +1,150 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+
+export type WorkspaceTabTarget =
+  | { kind: "draft"; draftId: string }
+  | { kind: "agent"; agentId: string }
+  | { kind: "terminal"; terminalId: string }
+  | { kind: "file"; path: string };
+
+export type WorkspaceTab = {
+  tabId: string;
+  target: WorkspaceTabTarget;
+  createdAt: number;
+};
+
+function trimNonEmpty(value: string | null | undefined): string | null {
+  if (typeof value !== "string") {
+    return null;
+  }
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+function normalizeWorkspaceId(value: string): string {
+  return value.trim().replace(/\\/g, "/").replace(/\/+$/, "");
+}
+
+export function buildWorkspaceTabPersistenceKey(input: {
+  serverId: string;
+  workspaceId: string;
+}): string | null {
+  const serverId = trimNonEmpty(input.serverId);
+  const workspaceId = trimNonEmpty(input.workspaceId);
+  if (!serverId || !workspaceId) {
+    return null;
+  }
+  return `${serverId}:${normalizeWorkspaceId(workspaceId)}`;
+}
+
+function normalizeTabTarget(value: WorkspaceTabTarget | null | undefined): WorkspaceTabTarget | null {
+  if (!value || typeof value !== "object" || typeof value.kind !== "string") {
+    return null;
+  }
+  if (value.kind === "draft") {
+    const draftId = trimNonEmpty(value.draftId);
+    return draftId ? { kind: "draft", draftId } : null;
+  }
+  if (value.kind === "agent") {
+    const agentId = trimNonEmpty(value.agentId);
+    return agentId ? { kind: "agent", agentId } : null;
+  }
+  if (value.kind === "terminal") {
+    const terminalId = trimNonEmpty(value.terminalId);
+    return terminalId ? { kind: "terminal", terminalId } : null;
+  }
+  if (value.kind === "file") {
+    const path = trimNonEmpty(value.path);
+    return path ? { kind: "file", path: path.replace(/\\/g, "/") } : null;
+  }
+  return null;
+}
+
+function buildDeterministicTabId(target: WorkspaceTabTarget): string {
+  if (target.kind === "draft") {
+    return target.draftId;
+  }
+  if (target.kind === "agent") {
+    return `agent_${target.agentId}`;
+  }
+  if (target.kind === "terminal") {
+    return `terminal_${target.terminalId}`;
+  }
+  // File tabs are session-only, so stable IDs are still useful for in-session routing.
+  return `file_${target.path}`;
+}
+
+function targetsEqual(left: WorkspaceTabTarget, right: WorkspaceTabTarget): boolean {
+  if (left.kind !== right.kind) {
+    return false;
+  }
+  if (left.kind === "draft" && right.kind === "draft") {
+    return left.draftId === right.draftId;
+  }
+  if (left.kind === "agent" && right.kind === "agent") {
+    return left.agentId === right.agentId;
+  }
+  if (left.kind === "terminal" && right.kind === "terminal") {
+    return left.terminalId === right.terminalId;
+  }
+  if (left.kind === "file" && right.kind === "file") {
+    return left.path === right.path;
+  }
+  return false;
+}
+
+type WorkspaceTabsState = {
+  openTabsByWorkspace: Record<string, WorkspaceTab[]>;
+  focusedTabIdByWorkspace: Record<string, string>;
+  openDraftTab: (input: { serverId: string; workspaceId: string; draftId: string }) => string | null;
+  seedWorkspaceTabs: (input: {
+    serverId: string;
+    workspaceId: string;
+    targets: WorkspaceTabTarget[];
+    focusedTabId?: string | null;
+  }) => void;
+  openOrFocusTab: (input: {
+    serverId: string;
+    workspaceId: string;
+    target: WorkspaceTabTarget;
+  }) => string | null;
+  focusTab: (input: { serverId: string; workspaceId: string; tabId: string }) => void;
+  closeTab: (input: { serverId: string; workspaceId: string; tabId: string }) => void;
+  reorderTabs: (input: { serverId: string; workspaceId: string; tabIds: string[] }) => void;
+  replaceTabTarget: (input: {
+    serverId: string;
+    workspaceId: string;
+    tabId: string;
+    target: WorkspaceTabTarget;
+  }) => void;
+  getWorkspaceTabs: (input: { serverId: string; workspaceId: string }) => WorkspaceTab[];
+};
+
+export const useWorkspaceTabsStore = create<WorkspaceTabsState>()(
+  persist(
+    (set, get) => ({
+      openTabsByWorkspace: {},
+      focusedTabIdByWorkspace: {},
+      openDraftTab: ({ serverId, workspaceId, draftId }) => {
+        const key = buildWorkspaceTabPersistenceKey({ serverId, workspaceId });
+        const normalizedDraftId = trimNonEmpty(draftId);
+        if (!key || !normalizedDraftId) {
+          return null;
+        }
+
+        const target: WorkspaceTabTarget = { kind: "draft", draftId: normalizedDraftId };
+        const tabId = buildDeterministicTabId(target);
+        const now = Date.now();
+        set((state) => {
+          const current = state.openTabsByWorkspace[key] ?? [];
+          if (current.some((tab) => tab.tabId === tabId)) {
+            return {
+              ...state,
+              focusedTabIdByWorkspace: {
+                ...state.focusedTabIdByWorkspace,
+                [key]: tabId,
+              },
+            };
+          }
+          const nextTabs: WorkspaceTab[] = [...current, { tabId, target, createdAt: now }];

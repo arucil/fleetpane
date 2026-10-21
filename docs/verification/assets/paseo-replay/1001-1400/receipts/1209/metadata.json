@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1209,
+  "revision": "5bd6cc11dec0d1e60beee879cc658cf45152d049",
+  "date": "2026-02-16T02:59:12Z",
+  "committer_date": "2026-02-16T02:59:12Z",
+  "parents": [
+    "4313e3623b94a4b0b744477848f863bbfa892a5e"
+  ],
+  "subject": "fix(server): harden sherpa native loading and centralize runtime env",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "A\tpackages/cli/src/commands/daemon/sherpa-env.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-runtime-env.ts"
+  ],
+  "source_receipt_digest": "sha256:7ac688ab4313ff668f2354f42dab095fca395f8dd75add93ba8085ce1219dfd8",
+  "diff_tree_digest": "sha256:746c61f7242b5c8649009501c1e8e20383938346901d7c4e6148b39b959e6007",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts",
+      "old_lines": [
+        11,
+        14
+      ],
+      "new_lines": [
+        18,
+        25
+      ],
+      "diff_block_lines": [
+        19,
+        29
+      ],
+      "hunk_header": "@@ -10,19 +17,75 @@ export type SherpaOnnxNodeModule = {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 199,
+  "receipt_file": "receipts/1209/selected.patch"
+}

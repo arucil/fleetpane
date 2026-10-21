@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/onboard.ts
+RANGE {"path":"packages/cli/src/commands/onboard.ts","old_lines":[0,0],"new_lines":[48,58],"diff_block_lines":[54,64],"hunk_header":"@@ -0,0 +1,693 @@","substantive_changed_lines":5}
++
++function renderNote(message: string, title: string): void {
++  note(message, title, { format: plainNoteFormat })
++}
++
++function sleep(ms: number): Promise<void> {
++  return new Promise((resolve) => {
++    setTimeout(resolve, ms)
++  })
++}
++

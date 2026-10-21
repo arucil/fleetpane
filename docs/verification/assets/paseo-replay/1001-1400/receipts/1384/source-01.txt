@@ -1,0 +1,58 @@
+   * Handle read-only file explorer requests scoped to a workspace cwd
+   */
+  private async handleFileExplorerRequest(request: FileExplorerRequest): Promise<void> {
+    const { cwd: workspaceCwd, path: requestedPath = '.', mode, requestId } = request
+    const cwd = workspaceCwd.trim()
+    if (!cwd) {
+      this.emit({
+        type: 'file_explorer_response',
+        payload: {
+          cwd: workspaceCwd,
+          path: requestedPath,
+          mode,
+          directory: null,
+          file: null,
+          error: 'cwd is required',
+          requestId,
+        },
+      })
+      return
+    }
+
+    try {
+      if (mode === 'list') {
+        const directory = await listDirectoryEntries({
+          root: cwd,
+          relativePath: requestedPath,
+        })
+
+        this.emit({
+          type: 'file_explorer_response',
+          payload: {
+            cwd,
+            path: directory.path,
+            mode,
+            directory,
+            file: null,
+            error: null,
+            requestId,
+          },
+        })
+      } else {
+        const file = await readExplorerFile({
+          root: cwd,
+          relativePath: requestedPath,
+        })
+
+        this.emit({
+          type: 'file_explorer_response',
+          payload: {
+            cwd,
+            path: file.path,
+            mode,
+            directory: null,
+            file,
+            error: null,
+            requestId,
+          },
+        })

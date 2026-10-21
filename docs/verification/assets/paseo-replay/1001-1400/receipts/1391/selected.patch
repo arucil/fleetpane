@@ -1,0 +1,12 @@
+FILE packages/app/src/components/headers/header-toggle-button.tsx
+RANGE {"path":"packages/app/src/components/headers/header-toggle-button.tsx","old_lines":[30,33],"new_lines":[37,45],"diff_block_lines":[18,27],"hunk_header":"@@ -30,4 +37,9 @@ export function HeaderToggleButton({","substantive_changed_lines":5}
+@@ -30,4 +37,9 @@ export function HeaderToggleButton({
+       ? `${props.testID}-tooltip`
+       : undefined;
++  const expandedState = (props.accessibilityState as { expanded?: boolean } | undefined)?.expanded;
++  const ariaExpandedProps =
++    Platform.OS === "web" && typeof expandedState === "boolean"
++      ? ({ "aria-expanded": expandedState } as any)
++      : null;
+ 
+   return (

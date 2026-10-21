@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[1051,1061],"new_lines":[1080,1080],"diff_block_lines":[122,132],"hunk_header":"@@ -1050,30 +1079,58 @@ const ExpandableBadge = memo(function ExpandableBadge({","substantive_changed_lines":10}
+         {({ hovered }) => (
+-          <View style={expandableBadgeStylesheet.headerRow}>
+-            <View style={expandableBadgeStylesheet.iconBadge}>{iconNode}</View>
+-            <Text style={expandableBadgeStylesheet.label} numberOfLines={1}>
+-              {label}
+-            </Text>
+-            {secondaryLabel ? (
+-              <Text
+-                style={expandableBadgeStylesheet.secondaryLabel}
+-                numberOfLines={1}
+-              >

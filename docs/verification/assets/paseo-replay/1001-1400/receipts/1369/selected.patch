@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/agent-metadata-generator.ts
+RANGE {"path":"packages/server/src/server/agent/agent-metadata-generator.ts","old_lines":[45,47],"new_lines":[46,56],"diff_block_lines":[13,23],"hunk_header":"@@ -44,4 +45,12 @@ function hasExplicitTitle(title?: string | null): boolean {","substantive_changed_lines":5}
+ 
++function normalizeAutoTitle(title: string): string | null {
++  const normalized = title.trim();
++  if (!normalized) {
++    return null;
++  }
++  return normalized.slice(0, MAX_AUTO_AGENT_TITLE_CHARS).trim() || null;
++}
++
+ async function canRenameBranch(
+   cwd: string,

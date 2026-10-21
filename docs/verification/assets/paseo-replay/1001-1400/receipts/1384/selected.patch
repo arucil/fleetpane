@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[4733,4743],"new_lines":[4748,4748],"diff_block_lines":[134,144],"hunk_header":"@@ -4720,42 +4718,38 @@ export class Session {","substantive_changed_lines":9}
+-      const agents = this.agentManager.listAgents()
+-      const agent = agents.find((a) => a.id === agentId)
+-
+-      if (!agent) {
+-        this.emit({
+-          type: 'file_download_token_response',
+-          payload: {
+-            agentId,
+-            path: requestedPath,
+-            token: null,
+-            fileName: null,

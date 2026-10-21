@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1120,
+  "revision": "a09a6ca1b3b239932bc9322bca8d6ee6cc772c4f",
+  "date": "2026-02-11T12:12:58+07:00",
+  "committer_date": "2026-02-11T12:12:58+07:00",
+  "parents": [
+    "d904a72dfb4f596baa32e21a9a325f9407c55afa"
+  ],
+  "subject": "Fix chunked assistant finalText assembly",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:a4128f0354bd1083469404bf6514f77464d7f503ff1095271d24d3bb20a38a7a",
+  "diff_tree_digest": "sha256:a75eed004927ddba325316c023c4038a55e12abee88185329eda9e9d8d306fae",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        871,
+        875
+      ],
+      "new_lines": [
+        870,
+        878
+      ],
+      "diff_block_lines": [
+        22,
+        32
+      ],
+      "hunk_header": "@@ -870,8 +869,14 @@ export class AgentManager {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 81,
+  "receipt_file": "receipts/1120/selected.patch"
+}

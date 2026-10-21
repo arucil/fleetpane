@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[859,859],"new_lines":[861,871],"diff_block_lines":[19,29],"hunk_header":"@@ -857,4 +859,163 @@ function truncateUtf8Bytes(text: string, maxBytes: number): { text: string; trun","substantive_changed_lines":9}
++const ThreadStartedNotificationSchema = z.object({
++  thread: z.object({ id: z.string() }).passthrough(),
++}).passthrough();
++
++const TurnStartedNotificationSchema = z.object({
++  turn: z.object({ id: z.string() }).passthrough(),
++}).passthrough();
++
++const TurnCompletedNotificationSchema = z.object({
++  turn: z
++    .object({

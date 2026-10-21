@@ -1,0 +1,7 @@
+FILE packages/cli/src/commands/daemon/start.ts
+RANGE {"path":"packages/cli/src/commands/daemon/start.ts","old_lines":[148,148],"new_lines":[143,147],"diff_block_lines":[49,53],"hunk_header":"@@ -141,7 +137,11 @@ export async function runStart(options: StartOptions): Promise<void> {","substantive_changed_lines":3}
++
++function exitWithError(message: string): never {
++  console.error(chalk.red(message))
++  process.exit(1)
++}

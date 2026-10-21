@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-mapper.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-mapper.ts","old_lines":[48,48],"new_lines":[54,64],"diff_block_lines":[61,71],"hunk_header":"@@ -46,4 +34,435 @@ const ClaudeFailedMapperParamsSchema = ClaudeMapperParamsSchema.extend({","substantive_changed_lines":7}
++  ])
++  .transform((value) => {
++    const commandValue = "command" in value ? value.command : value.cmd;
++    return {
++      command: commandFromValue(commandValue),
++      cwd: nonEmptyString(value.cwd) ?? nonEmptyString(value.directory),
++    };
++  });
++
++const ClaudeShellOutputObjectSchema = z
++  .object({

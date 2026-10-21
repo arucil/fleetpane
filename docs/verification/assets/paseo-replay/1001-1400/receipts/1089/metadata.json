@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1089,
+  "revision": "e75325ca2967286df5499eeb7ae2feddad7dca1c",
+  "date": "2026-02-09T13:29:41+07:00",
+  "committer_date": "2026-02-09T13:29:41+07:00",
+  "parents": [
+    "52a2fa71def16e4e5f26d05588b4953bcf769e64"
+  ],
+  "subject": "Fix checkout diff stalls on untracked binary artifacts",
+  "diff_tree_paths": [
+    "D\tpackages/server/src/server/daemon-e2e/checkout-diff-debug.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:e9668edd96d269ecb7be55dc348548a7a2ab54c6472523e95787145ee4364089",
+  "diff_tree_digest": "sha256:65ea8b1507930677beea9b742d49b464d90e61fbb36d0c9244935f055932431c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        637,
+        637
+      ],
+      "new_lines": [
+        642,
+        652
+      ],
+      "diff_block_lines": [
+        49,
+        59
+      ],
+      "hunk_header": "@@ -635,4 +639,63 @@ async function getAheadOfOrigin(cwd: string, currentBranch: string): Promise<num",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 210,
+  "receipt_file": "receipts/1089/selected.patch"
+}

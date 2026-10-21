@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[4468,4468],"new_lines":[4492,4502],"diff_block_lines":[64,74],"hunk_header":"@@ -4460,10 +4470,142 @@ export class Session {","substantive_changed_lines":9}
++      const records = await this.agentStorage.list();
++      const recordsById = new Map(records.map((record) => [record.id, record]));
++      const targetPath = resolvedWorktree.worktreePath;
++      const hasRemainingNonArchivedRecord = records.some((record) => {
++        if (record.id === options.archivedAgentId || record.archivedAt) {
++          return false;
++        }
++        return this.isPathWithinRoot(targetPath, record.cwd);
++      });
++      if (hasRemainingNonArchivedRecord) {
++        return;

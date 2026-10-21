@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[119,119],"new_lines":[125,135],"diff_block_lines":[30,40],"hunk_header":"@@ -118,11 +124,37 @@ export function AgentInputArea({","substantive_changed_lines":6}
+   const commandFilter = showCommandAutocomplete ? userInput.slice(1) : "";
++  const normalizedCommandDraftConfig = useMemo(() => {
++    if (!commandDraftConfig) {
++      return undefined;
++    }
++
++    const cwd = commandDraftConfig.cwd.trim();
++    if (!cwd) {
++      return undefined;
++    }
++

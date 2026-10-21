@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/workspace/workspace-draft-agent-tab.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-draft-agent-tab.tsx","old_lines":[0,0],"new_lines":[53,63],"diff_block_lines":[59,69],"hunk_header":"@@ -0,0 +1,427 @@","substantive_changed_lines":3}
++
++function assertNever(value: never): never {
++  throw new Error(`Unhandled state: ${JSON.stringify(value)}`);
++}
++
++export function WorkspaceDraftAgentTab({
++  serverId,
++  workspaceId,
++  tabId,
++  draftId,
++  onCreated,

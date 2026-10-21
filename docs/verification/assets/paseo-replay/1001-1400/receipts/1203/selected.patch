@@ -1,0 +1,13 @@
+FILE packages/app/src/components/headers/menu-header.tsx
+RANGE {"path":"packages/app/src/components/headers/menu-header.tsx","old_lines":[30,35],"new_lines":[83,91],"diff_block_lines":[83,93],"hunk_header":"@@ -23,27 +55,40 @@ export function MenuHeader({ title, rightContent }: MenuHeaderProps) {","substantive_changed_lines":4}
++
++export function MenuHeader({
++  title,
++  rightContent,
++}: MenuHeaderProps) {
+   return (
+     <ScreenHeader
+       left={
+         <>
+-          <HeaderToggleButton
+-            onPress={toggleAgentList}

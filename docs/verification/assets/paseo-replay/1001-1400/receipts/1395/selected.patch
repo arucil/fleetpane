@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/daemon/local-daemon.ts
+RANGE {"path":"packages/cli/src/commands/daemon/local-daemon.ts","old_lines":[364,372],"new_lines":[361,364],"diff_block_lines":[38,48],"hunk_header":"@@ -348,62 +348,56 @@ export async function startLocalDaemonDetached(","substantive_changed_lines":8}
+ 
+-    const startup = await new Promise<DetachedStartupResult>((resolve) => {
+-      let settled = false
++  const startup = await new Promise<DetachedStartupResult>((resolve) => {
++    let settled = false
+ 
+-      const finish = (value: DetachedStartupResult) => {
+-        if (settled) return
+-        settled = true
+-        resolve(value)
+-      }

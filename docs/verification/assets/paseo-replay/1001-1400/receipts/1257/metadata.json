@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1257,
+  "revision": "79b64d3e386faebd8e80f26740020a3a55717d88",
+  "date": "2026-02-18T09:57:53+07:00",
+  "committer_date": "2026-02-18T10:03:54+07:00",
+  "parents": [
+    "03372042817765c4628cb3b2cfbf02419c820d49"
+  ],
+  "subject": "feat: route slash commands through executeCommand in run/stream",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts"
+  ],
+  "source_receipt_digest": "sha256:d03a9f1749cb52122a112d7580e8dd0c216e5232c1db07e6d85770af522e13ee",
+  "diff_tree_digest": "sha256:18ea395f1e2d069d8cd0ec9068bc69fdf29e8fd93d906e8b1d73c702cd74db19",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        1990,
+        1990
+      ],
+      "new_lines": [
+        1993,
+        2003
+      ],
+      "diff_block_lines": [
+        11,
+        21
+      ],
+      "hunk_header": "@@ -1988,6 +1988,71 @@ class CodexAppServerAgentSession implements AgentSession {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 253,
+  "receipt_file": "receipts/1257/selected.patch"
+}

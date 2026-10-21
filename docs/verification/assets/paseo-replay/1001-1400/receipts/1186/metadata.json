@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1186,
+  "revision": "d9e14186ce28c88339454cf6f310abbe2b0ca4db",
+  "date": "2026-02-14T09:51:49+07:00",
+  "committer_date": "2026-02-14T09:51:49+07:00",
+  "parents": [
+    "c87c20690031557ce5db9148108ae309df0bda92"
+  ],
+  "subject": "refactor(server): extract terminal stream state manager from daemon client",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/client/daemon-client-terminal-stream-manager.test.ts",
+    "A\tpackages/server/src/client/daemon-client-terminal-stream-manager.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:b3762216e789054f086727ed4a3172eef92fad2c1e52d7c927ac7a47c32101ed",
+  "diff_tree_digest": "sha256:05bba8cfde8509fef41f5693eceebae9c7c7382b7fe0752b124e4918412d961f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-terminal-stream-manager.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        36,
+        46
+      ],
+      "diff_block_lines": [
+        42,
+        52
+      ],
+      "hunk_header": "@@ -0,0 +1,180 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 347,
+  "receipt_file": "receipts/1186/selected.patch"
+}

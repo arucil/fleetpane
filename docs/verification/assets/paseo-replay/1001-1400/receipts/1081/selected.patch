@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[258,259],"new_lines":[266,275],"diff_block_lines":[25,35],"hunk_header":"@@ -257,26 +265,36 @@ export function AgentInputArea({","substantive_changed_lines":7}
+ 
+-    const isControlledLocal = value !== undefined;
++    // Clear input optimistically before awaiting server ack.
++    // Save values so we can restore on error.
++    const savedImages = imageAttachments;
++    if (!onSubmitMessageRef.current) {
++      if (value !== undefined) {
++        onChangeText?.("");
++      } else {
++        setUserInput("");
++      }

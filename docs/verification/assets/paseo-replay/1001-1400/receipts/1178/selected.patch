@@ -1,0 +1,13 @@
+FILE packages/cli/tests/03-daemon.test.ts
+RANGE {"path":"packages/cli/tests/03-daemon.test.ts","old_lines":[64,69],"new_lines":[60,64],"diff_block_lines":[43,53],"hunk_header":"@@ -54,41 +54,26 @@ try {","substantive_changed_lines":11}
+-    const hasDaemonError =
+-      output.toLowerCase().includes('daemon') ||
+-      output.toLowerCase().includes('connect') ||
+-      output.toLowerCase().includes('running')
+-    assert(hasDaemonError, 'error message should mention daemon/connect/running')
+-    console.log('✓ daemon status fails gracefully when not running\n')
++      await $`PASEO_HOME=${paseoHome} npx paseo daemon status`.nothrow()
++    assert.strictEqual(result.exitCode, 0, 'status should succeed when daemon is stopped')
++    const output = result.stdout.toLowerCase()
++    assert(output.includes('status'), 'status table should include Status row')
++    assert(output.includes('stopped'), 'status should report stopped')

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[123,133],"new_lines":[121,121],"diff_block_lines":[37,47],"hunk_header":"@@ -118,59 +116,18 @@ export function AgentInputArea({","substantive_changed_lines":8}
+-  // Command autocomplete logic
+-  const showCommandAutocomplete = userInput.startsWith("/") && !userInput.includes(" ");
+-  const commandFilter = showCommandAutocomplete ? userInput.slice(1) : "";
+-  const normalizedCommandDraftConfig = useMemo(() => {
+-    if (!commandDraftConfig) {
+-      return undefined;
+-    }
+-
+-    const cwd = commandDraftConfig.cwd.trim();
+-    if (!cwd) {
+-      return undefined;

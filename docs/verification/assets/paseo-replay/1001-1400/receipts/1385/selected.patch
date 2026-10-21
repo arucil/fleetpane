@@ -1,0 +1,13 @@
+FILE packages/app/src/app/h/[serverId]/agent/[agentId].tsx
+RANGE {"path":"packages/app/src/app/h/[serverId]/agent/[agentId].tsx","old_lines":[9,12],"new_lines":[19,26],"diff_block_lines":[26,36],"hunk_header":"@@ -1,17 +1,99 @@","substantive_changed_lines":8}
++  const { client, isConnected } = useHostRuntimeSession(serverId);
++  const agentCwd = useSessionStore((state) => {
++    if (!serverId || !agentId) {
++      return null;
++    }
++    return state.sessions[serverId]?.agents?.get(agentId)?.cwd ?? null;
++  });
+ 
+-  return (
+-    <AgentReadyScreen
+-      serverId={typeof params.serverId === "string" ? params.serverId : ""}

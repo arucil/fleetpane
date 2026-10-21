@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1400,
+  "revision": "73eabd2eeae2652649f3e9df8a9d0af14097f1da",
+  "date": "2026-03-03T20:11:55+07:00",
+  "committer_date": "2026-03-03T20:11:55+07:00",
+  "parents": [
+    "97f0f4b2666b088d418ef9bb782a39e2281d50de"
+  ],
+  "subject": "feat: canonical workspace tab IDs with URL routing and draft agent tabs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/tab/[tabId].tsx",
+    "M\tpackages/app/src/components/sortable-inline-list.web.tsx",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/create-flow-store.test.ts",
+    "M\tpackages/app/src/stores/create-flow-store.ts",
+    "M\tpackages/app/src/stores/draft-store.ts",
+    "D\tpackages/app/src/stores/workspace-file-tabs-store.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/server/src/server/file-explorer/service.test.ts",
+    "M\tpackages/server/src/server/file-explorer/service.ts"
+  ],
+  "source_receipt_digest": "sha256:2bfe86fed8642d519c4b7c4abfac72b978313db3bce30c6f1b1a00913e9d2407",
+  "diff_tree_digest": "sha256:90930a21ee5b84a777b8129c1008f9e0692800af24877caa8dbef6d92e7b35f3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        53,
+        63
+      ],
+      "diff_block_lines": [
+        59,
+        69
+      ],
+      "hunk_header": "@@ -0,0 +1,427 @@",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 1746,
+  "receipt_file": "receipts/1400/selected.patch"
+}

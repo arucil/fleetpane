@@ -1,0 +1,13 @@
+FILE packages/app/src/components/web-desktop-scrollbar.tsx
+RANGE {"path":"packages/app/src/components/web-desktop-scrollbar.tsx","old_lines":[364,374],"new_lines":[403,403],"diff_block_lines":[160,170],"hunk_header":"@@ -363,28 +402,26 @@ export function WebDesktopScrollbarOverlay({","substantive_changed_lines":9}
+           : null)}
+-      />
+-      <View
+-        style={[
+-          styles.handle,
+-          {
+-            top: geometry.handleOffset,
+-            height: geometry.handleSize,
+-            width: handleWidth,
+-            backgroundColor: handleColor,
+-            opacity: handleOpacity,

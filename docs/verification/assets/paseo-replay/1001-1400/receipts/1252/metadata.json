@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1252,
+  "revision": "90a81462cba3a9c9e4fdbbcfb5d5b80e7b14d38e",
+  "date": "2026-02-16T11:55:16+07:00",
+  "committer_date": "2026-02-16T11:55:16+07:00",
+  "parents": [
+    "04a06197deb85174e5ed727ce69a106ceb436cff"
+  ],
+  "subject": "fix worktree archive terminal cleanup and worktree setup",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpaseo.json"
+  ],
+  "source_receipt_digest": "sha256:932a99471046eb215c3e53d89a54d1f78fbf1026cc7971df05076a70bfeb576a",
+  "diff_tree_digest": "sha256:9ba20b9b702944f8e36fc657868e96f3d2a28c1e3d6e8a742482a2aeae12ff9f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        6430,
+        6430
+      ],
+      "new_lines": [
+        6432,
+        6442
+      ],
+      "diff_block_lines": [
+        24,
+        34
+      ],
+      "hunk_header": "@@ -6429,4 +6431,54 @@ export class Session {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 136,
+  "receipt_file": "receipts/1252/selected.patch"
+}

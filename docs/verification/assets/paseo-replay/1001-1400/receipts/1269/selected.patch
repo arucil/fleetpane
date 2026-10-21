@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[536,536],"new_lines":[569,579],"diff_block_lines":[174,184],"hunk_header":"@@ -535,4 +568,71 @@ export default function SettingsScreen() {","substantive_changed_lines":9}
+ 
++  const refreshDesktopPermissions = useCallback(async () => {
++    if (!showDesktopPermissionSection) return;
++
++    setIsRefreshingDesktopPermissions(true);
++    try {
++      const snapshot = await getDesktopPermissionSnapshot();
++      if (!isMountedRef.current) return;
++      setDesktopPermissionSnapshot(snapshot);
++    } catch (error) {
++      console.error("[Settings] Failed to load desktop permission status", error);

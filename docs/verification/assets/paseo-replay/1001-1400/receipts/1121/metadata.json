@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1121,
+  "revision": "a57c907013f2a087b1c357a4b80f265009ad6e9a",
+  "date": "2026-02-11T12:41:17+07:00",
+  "committer_date": "2026-02-11T12:41:17+07:00",
+  "parents": [
+    "a09a6ca1b3b239932bc9322bca8d6ee6cc772c4f"
+  ],
+  "subject": "Default paseo to start daemon and seed first-run config",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/index.ts",
+    "M\tpackages/server/src/server/persisted-config.ts"
+  ],
+  "source_receipt_digest": "sha256:d091e615acbe072156842e87e2598b25f3bc97ee6ee612d9ec8b86dd0e6df383",
+  "diff_tree_digest": "sha256:69f0b0a8bdd1cc8917d04c23686c8dc6ab590c5dd77edbd150bbd8000fa474aa",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/persisted-config.ts",
+      "old_lines": [
+        146,
+        146
+      ],
+      "new_lines": [
+        146,
+        156
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -145,4 +145,19 @@ export type PersistedConfig = z.infer<typeof PersistedConfigSchema>;",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 16,
+  "receipt_file": "receipts/1121/selected.patch"
+}

@@ -1,0 +1,51 @@
+
+    const terminals = (terminalsByCwd.get(input.cwd) ?? []).map((session) =>
+      toTerminalListItem({ session })
+    );
+    const event: TerminalsChangedEvent = {
+      cwd: input.cwd,
+      terminals,
+    };
+
+    for (const listener of terminalsChangedListeners) {
+      try {
+        listener(event);
+      } catch {
+        // no-op
+      }
+    }
+  }
+
+  return {
+    async getTerminals(cwd: string): Promise<TerminalSession[]> {
+      assertAbsolutePath(cwd);
+
+      return terminalsByCwd.get(cwd) ?? [];
+    },
+
+    async createTerminal(options: {
+      cwd: string;
+      name?: string;
+      env?: Record<string, string>;
+    }): Promise<TerminalSession> {
+      assertAbsolutePath(options.cwd);
+
+      const terminals = terminalsByCwd.get(options.cwd) ?? [];
+      const defaultName = `Terminal ${terminals.length + 1}`;
+      const inheritedEnv = resolveDefaultEnvForCwd(options.cwd);
+      const mergedEnv =
+        inheritedEnv || options.env
+          ? { ...(inheritedEnv ?? {}), ...(options.env ?? {}) }
+          : undefined;
+      const session = registerSession(
+        await createTerminal({
+          cwd: options.cwd,
+          name: options.name ?? defaultName,
+          ...(mergedEnv ? { env: mergedEnv } : {}),
+        })
+      );
+
+      terminals.push(session);
+      terminalsByCwd.set(options.cwd, terminals);
+      emitTerminalsChanged({ cwd: options.cwd });
+

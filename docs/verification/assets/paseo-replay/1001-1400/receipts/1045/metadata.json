@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1045,
+  "revision": "a5031e02e78b30873b1fbf978e2d57c02f233390",
+  "date": "2026-02-06T16:36:35+07:00",
+  "committer_date": "2026-02-06T16:36:35+07:00",
+  "parents": [
+    "c172e5c939854b343fc75fe841b962708472e010"
+  ],
+  "subject": "Prefer OpenAI speech in daemon-client e2e when available",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:62fe3eba8b85a2a61915f745a4dfde0bfcae8502e3f529187fba59b86a5e3750",
+  "diff_tree_digest": "sha256:6d686f0b84b7f3c8bb953af4294e37b05e9da91c3410be4f4c51dba7646ea214",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-client.e2e.test.ts",
+      "old_lines": [
+        94,
+        94
+      ],
+      "new_lines": [
+        94,
+        104
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -93,21 +93,29 @@ describe(\"daemon client E2E\", () => {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 26,
+  "receipt_file": "receipts/1045/selected.patch"
+}

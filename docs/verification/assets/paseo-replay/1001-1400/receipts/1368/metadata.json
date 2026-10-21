@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1368,
+  "revision": "3f06063b4bda98983dc5dd519510d5e2a5ebff87",
+  "date": "2026-02-23T20:51:42+07:00",
+  "committer_date": "2026-02-23T20:51:42+07:00",
+  "parents": [
+    "b167abfda59223dab311620f3c59904b9125706c"
+  ],
+  "subject": "fix(cli): make agent wait unlimited by default",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts",
+    "M\tpackages/cli/tests/11-agent-wait.test.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:f040ee4e381eecb16efd9d3d685108cde14cfdfc8c6dfa86821ae7b9692c5bc6",
+  "diff_tree_digest": "sha256:4141366c495eb3b42b718a31d4fe9b568e0a7bb578bb18e8cc56c5e0b7cf3aa1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5500,
+        5504
+      ],
+      "new_lines": [
+        5500,
+        5506
+      ],
+      "diff_block_lines": [
+        8,
+        18
+      ],
+      "hunk_header": "@@ -5498,8 +5498,10 @@ export class Session {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 95,
+  "receipt_file": "receipts/1368/selected.patch"
+}

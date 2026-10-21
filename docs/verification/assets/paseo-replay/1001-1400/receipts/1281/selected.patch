@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/image-attachments-from-files.ts
+RANGE {"path":"packages/app/src/utils/image-attachments-from-files.ts","old_lines":[0,0],"new_lines":[15,25],"diff_block_lines":[21,31],"hunk_header":"@@ -0,0 +1,67 @@","substantive_changed_lines":7}
++
++function toBase64(buffer: ArrayBuffer): string {
++  const bytes = new Uint8Array(buffer);
++  const chunkSize = 0x8000;
++  let binary = "";
++
++  for (let index = 0; index < bytes.length; index += chunkSize) {
++    const chunk = bytes.subarray(index, index + chunkSize);
++    binary += String.fromCharCode(...chunk);
++  }
++

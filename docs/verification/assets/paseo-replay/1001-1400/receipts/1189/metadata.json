@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1189,
+  "revision": "a644adbf9b2091917ec9ab604c81fd4fb42c6feb",
+  "date": "2026-02-14T13:14:57+07:00",
+  "committer_date": "2026-02-14T13:14:57+07:00",
+  "parents": [
+    "c4bebb97ab1a3d25a9c6aa5a8fd0279e07435fcd"
+  ],
+  "subject": "feat: add voice capability status reporting to client",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/dictation/dictation-stream-sender.ts",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/app/src/utils/server-info-capabilities.test.ts",
+    "A\tpackages/app/src/utils/server-info-capabilities.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "D\tscripts/codex-refactor-loop.sh"
+  ],
+  "source_receipt_digest": "sha256:294bf5a9c5124ff0cbac6f73255490b11a78ea953a9190846f0f7a4d12f6dae6",
+  "diff_tree_digest": "sha256:739ec3c5bfa63a4f10592aea754a65dba5d3af6d6086d58e757f030bd894d51a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/server-info-capabilities.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        5,
+        15
+      ],
+      "diff_block_lines": [
+        11,
+        21
+      ],
+      "hunk_header": "@@ -0,0 +1,50 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 470,
+  "receipt_file": "receipts/1189/selected.patch"
+}

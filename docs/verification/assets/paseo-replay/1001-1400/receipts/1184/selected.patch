@@ -1,0 +1,13 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[910,920],"new_lines":[902,902],"diff_block_lines":[16,26],"hunk_header":"@@ -900,55 +900,2 @@ export function applyStreamEvent(params: {","substantive_changed_lines":10}
+-
+-export function applyStreamEventWithBuffer(params: {
+-  state: StreamItem[];
+-  buffer: StreamingBufferEntry | null;
+-  event: AgentStreamEventPayload;
+-  timestamp: Date;
+-}): {
+-  stream: StreamItem[];
+-  buffer: StreamingBufferEntry | null;
+-  changedStream: boolean;
+-  changedBuffer: boolean;

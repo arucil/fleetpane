@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client-terminal-stream-manager.ts
+RANGE {"path":"packages/server/src/client/daemon-client-terminal-stream-manager.ts","old_lines":[0,0],"new_lines":[36,46],"diff_block_lines":[42,52],"hunk_header":"@@ -0,0 +1,180 @@","substantive_changed_lines":8}
++
++  constructor(private readonly config: TerminalStreamManagerConfig) {
++    this.maxBufferedChunks =
++      config.maxBufferedChunks ?? DEFAULT_MAX_BUFFERED_CHUNKS;
++    this.maxBufferedBytes =
++      config.maxBufferedBytes ?? DEFAULT_MAX_BUFFERED_BYTES;
++  }
++
++  clearAll(): void {
++    this.handlers.clear();
++    this.bufferedChunks.clear();

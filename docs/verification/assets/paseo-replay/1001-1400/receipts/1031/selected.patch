@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[609,609],"new_lines":[580,590],"diff_block_lines":[85,95],"hunk_header":"@@ -607,4 +578,60 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":8}
++
++          {shouldShowInlinePreview ? (
++            <Animated.View
++              style={[
++                styles.treePane,
++                styles.treePaneWithPreview,
++                { minWidth: minTreeWidth },
++                treePaneAnimatedStyle,
++              ]}
++            >
++              <GestureDetector gesture={splitResizeGesture}>

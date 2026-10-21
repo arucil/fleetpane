@@ -1,0 +1,51 @@
+        return;
+      }
+
+      list.scrollToOffset({ offset: 0, animated });
+      isNearBottomRef.current = true;
+      setIsNearBottom(true);
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (streamItems.length === 0) {
+      return;
+    }
+
+    if (!hasAutoScrolledOnce.current) {
+      const handle = InteractionManager.runAfterInteractions(() => {
+        scrollToBottomInternal({ animated: false });
+        hasAutoScrolledOnce.current = true;
+        hasScrolledInitially.current = true;
+      });
+      return () => handle.cancel();
+    }
+
+    if (!isNearBottomRef.current) {
+      return;
+    }
+
+    const shouldAnimate = hasScrolledInitially.current;
+    scrollToBottomInternal({ animated: shouldAnimate });
+    hasScrolledInitially.current = true;
+  }, [streamItems, scrollToBottomInternal]);
+
+  function scrollToBottom() {
+    scrollToBottomInternal({ animated: true });
+    isNearBottomRef.current = true;
+    setIsNearBottom(true);
+  }
+
+  const flatListData = useMemo(() => {
+    return [...streamItems].reverse();
+  }, [streamItems]);
+
+  const tightGap = theme.spacing[1]; // 4px
+  const looseGap = theme.spacing[4]; // 16px
+
+  // The FlatList is inverted, but each row is re-inverted by RN, so `marginBottom` still
+  // manifests as the gap *below* the row in the final visual layout. Compute spacing
+  // against the item visually below (index - 1 in our inverted list).
+  const getGapBelow = useCallback(
+    (item: StreamItem, index: number) => {

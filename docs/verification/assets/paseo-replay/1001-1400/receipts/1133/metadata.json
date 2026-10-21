@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1133,
+  "revision": "5f864a4dd7dd9359d3ac29f40105007d50e6f1be",
+  "date": "2026-02-12T11:57:38+07:00",
+  "committer_date": "2026-02-12T14:05:46+07:00",
+  "parents": [
+    "6053ee7c349824bff91c5c80598b1bd6f4536bf8"
+  ],
+  "subject": "Add speech-start grace period before voice interrupt",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/voice/realtime-voice-config.ts"
+  ],
+  "source_receipt_digest": "sha256:7aa07f13c26e0bc828da9818e74f627a743e64ad01530120c747ece9f54c8f1e",
+  "diff_tree_digest": "sha256:bbb4b679c005712e4f97ac1e83dc552dded345b5ad19e470659da4a7ebf15e3a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/voice-context.tsx",
+      "old_lines": [
+        72,
+        79
+      ],
+      "new_lines": [
+        76,
+        78
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -70,31 +74,52 @@ export function VoiceProvider({ children }: VoiceProviderProps) {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 98,
+  "receipt_file": "receipts/1133/selected.patch"
+}

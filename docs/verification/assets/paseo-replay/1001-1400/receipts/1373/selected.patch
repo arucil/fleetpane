@@ -1,0 +1,13 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[0,0],"new_lines":[9,19],"diff_block_lines":[15,25],"hunk_header":"@@ -0,0 +1,61 @@","substantive_changed_lines":8}
++
++export default function LegacySettingsRoute() {
++  const router = useRouter();
++  const { theme } = useUnistyles();
++  const { daemons, isLoading: registryLoading } = useDaemonRegistry();
++  const { preferences, isLoading: preferencesLoading } = useFormPreferences();
++
++  const targetServerId = useMemo(() => {
++    if (daemons.length === 0) {
++      return null;
++    }

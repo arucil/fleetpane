@@ -1,0 +1,13 @@
+FILE packages/server/src/server/voice-mcp-bridge.ts
+RANGE {"path":"packages/server/src/server/voice-mcp-bridge.ts","old_lines":[0,0],"new_lines":[16,26],"diff_block_lines":[22,32],"hunk_header":"@@ -0,0 +1,305 @@","substantive_changed_lines":7}
++
++function isRecord(value: unknown): value is Record<string, unknown> {
++  return typeof value === "object" && value !== null;
++}
++
++function parseEnvelope(raw: string): BridgeEnvelope {
++  const parsed = JSON.parse(raw);
++  if (!isRecord(parsed) || typeof parsed.type !== "string") {
++    throw new Error("Invalid bridge envelope");
++  }
++  if (parsed.type === "init") {

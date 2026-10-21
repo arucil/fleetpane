@@ -1,0 +1,77 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1008,
+  "revision": "d791f79efeb675f6002e316b0a6c582793dcc7d4",
+  "date": "2026-02-06T10:38:38+07:00",
+  "committer_date": "2026-02-06T10:38:38+07:00",
+  "parents": [
+    "b1b0be7b56d597282da40be2eef65c1def61ad9b"
+  ],
+  "subject": "Local streaming STT/TTS with Parakeet + Pocket TTS",
+  "diff_tree_paths": [
+    "M\tREADME.md",
+    "M\tpackage-lock.json",
+    "A\tpackages/app/e2e/fixtures/recording.baseline.txt",
+    "M\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/download-speech-models.ts",
+    "A\tpackages/server/scripts/list-speech-models.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "A\tpackages/server/src/server/agent/stt-manager.test.ts",
+    "M\tpackages/server/src/server/agent/stt-manager.ts",
+    "M\tpackages/server/src/server/agent/stt-openai.ts",
+    "A\tpackages/server/src/server/agent/tts-manager.test.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/agent/tts-openai.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/speech/audio.ts",
+    "A\tpackages/server/src/server/speech/pocket/pocket-tts-onnx.ts",
+    "A\tpackages/server/src/server/speech/sherpa/model-catalog.ts",
+    "A\tpackages/server/src/server/speech/sherpa/model-downloader.test.ts",
+    "A\tpackages/server/src/server/speech/sherpa/model-downloader.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-offline-recognizer.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-online-recognizer.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-onnx-loader.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-onnx-node-loader.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-parakeet-realtime-session.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-parakeet-stt.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-realtime-session.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-stt.ts",
+    "A\tpackages/server/src/server/speech/sherpa/sherpa-tts.ts",
+    "A\tpackages/server/src/server/speech/sherpa/speech-download.e2e.test.ts",
+    "A\tpackages/server/src/server/speech/speech-provider.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tscripts/speech/download-sherpa-models.sh"
+  ],
+  "source_receipt_digest": "sha256:0642690f5cc69279704f24ef3202916593c88ddcca8b101861efc4195704112c",
+  "diff_tree_digest": "sha256:103165275a58a132add73a5ee86fadcd964b24acd66a76416b469be9edb0204c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-audio-player.native.ts",
+      "old_lines": [
+        19,
+        32
+      ],
+      "new_lines": [
+        19,
+        26
+      ],
+      "diff_block_lines": [
+        12,
+        32
+      ],
+      "hunk_header": "@@ -15,30 +15,58 @@ interface QueuedAudio {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 2384,
+  "receipt_file": "receipts/1008/selected.patch"
+}

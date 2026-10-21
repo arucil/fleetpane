@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[598,598],"new_lines":[599,609],"diff_block_lines":[21,31],"hunk_header":"@@ -596,4 +597,17 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":8}
++
++      const confirmed = await confirmDialog({
++        title: "Close terminal?",
++        message: "Any running process in this terminal will be stopped immediately.",
++        confirmLabel: "Close",
++        cancelLabel: "Cancel",
++        destructive: true,
++      });
++
++      if (!confirmed) {
++        return;

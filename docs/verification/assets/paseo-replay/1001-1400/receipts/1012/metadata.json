@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1012,
+  "revision": "b5ca49e0fd35e603bcaa99f080f0ee2fbb8478ab",
+  "date": "2026-02-06T11:51:59+07:00",
+  "committer_date": "2026-02-06T11:51:59+07:00",
+  "parents": [
+    "b1b0be7b56d597282da40be2eef65c1def61ad9b"
+  ],
+  "subject": "server(codex): normalize file paths, truncate large diffs, and drop turn/diff/updated telemetry",
+  "diff_tree_paths": [
+    "M\tpackages/server/.gitignore",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:f07ee1e961a33979a6c377572c8bb8fe198f8e9c5baad7168415071d0b8117e7",
+  "diff_tree_digest": "sha256:15fb4b13cee84265cf6af5f952f56cd20877e483550f4ea82d6bfed9d548b938",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        678,
+        678
+      ],
+      "new_lines": [
+        678,
+        688
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -677,10 +677,24 @@ function planStepsToTodoItems(steps: Array<{ step: string; status: string }>): {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 51,
+  "receipt_file": "receipts/1012/selected.patch"
+}

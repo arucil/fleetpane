@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[1273,1274],"new_lines":[1275,1280],"diff_block_lines":[12,17],"hunk_header":"@@ -1270,5 +1270,11 @@ class CodexAppServerAgentSession implements AgentSession {","substantive_changed_lines":3}
++    ]
++      .filter((entry): entry is string => typeof entry === "string" && entry.length > 0)
++      .join("\n\n");
++    if (developerInstructions) settings.developer_instructions = developerInstructions;
+     if (this.config.model) settings.model = this.config.model;
+     const thinkingOptionId = this.config.thinkingOptionId;

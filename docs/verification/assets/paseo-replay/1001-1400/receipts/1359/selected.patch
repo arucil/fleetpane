@@ -1,0 +1,12 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[693,700],"new_lines":[693,697],"diff_block_lines":[33,42],"hunk_header":"@@ -693,8 +693,5 @@ export function AgentStreamView({","substantive_changed_lines":4}
+@@ -693,8 +693,5 @@ export function AgentStreamView({
+               testID="agent-chat-scroll"
+               ListHeaderComponentStyle={headerGapStyle}
+-              contentContainerStyle={{
+-                paddingVertical: 0,
+-                flexGrow: 1,
+-              }}
++              contentContainerStyle={stylesheet.listContentContainer}
+               style={stylesheet.list}
+               onLayout={

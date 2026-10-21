@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/git-diff-scroll.ts
+RANGE {"path":"packages/app/src/utils/git-diff-scroll.ts","old_lines":[0,0],"new_lines":[8,18],"diff_block_lines":[14,24],"hunk_header":"@@ -0,0 +1,36 @@","substantive_changed_lines":6}
++
++export function shouldAnchorHeaderBeforeCollapse({
++  headerOffset,
++  headerHeight,
++  viewportOffset,
++  viewportHeight,
++  edgeThreshold = 1,
++}: AnchorVisibilityInput): boolean {
++  if (
++    !Number.isFinite(headerOffset) ||
++    !Number.isFinite(headerHeight) ||

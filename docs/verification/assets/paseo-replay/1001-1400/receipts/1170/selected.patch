@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1723,1723],"new_lines":[1771,1781],"diff_block_lines":[99,109],"hunk_header":"@@ -1722,4 +1770,59 @@ export class Session {","substantive_changed_lines":8}
+ 
++  private toVoiceFeatureUnavailableContext(
++    state: SpeechReadinessState
++  ): VoiceFeatureUnavailableContext {
++    return {
++      reasonCode: state.reasonCode,
++      message: state.message,
++      retryable: state.retryable,
++      missingModelIds: [...state.missingModelIds],
++    };
++  }

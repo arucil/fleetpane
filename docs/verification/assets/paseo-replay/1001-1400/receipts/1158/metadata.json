@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1158,
+  "revision": "bf432b3d3aa816134366fd5da6b72509fa438ed1",
+  "date": "2026-02-13T09:46:40+07:00",
+  "committer_date": "2026-02-13T09:46:40+07:00",
+  "parents": [
+    "837d0fb387b05384c593b02d1091be0cfa23f84a"
+  ],
+  "subject": "feat: add relay reconnect with grace period and branch suggestions",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "A\tpackages/app/src/utils/branch-suggestions.test.ts",
+    "A\tpackages/app/src/utils/branch-suggestions.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/relay-transport.test.ts",
+    "M\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/routes/docs/worktrees.tsx",
+    "M\tpaseo.json"
+  ],
+  "source_receipt_digest": "sha256:735d87a66a3c59ec4cac9c6d02811535d475ff522e165559683fed87a2cb4dc7",
+  "diff_tree_digest": "sha256:0dcaa397932cb0b2d21c37428ac38e61c7b56495f85121979600de6c55a5f41b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agent/agent-ready-screen.tsx",
+      "old_lines": [
+        412,
+        412
+      ],
+      "new_lines": [
+        419,
+        429
+      ],
+      "diff_block_lines": [
+        60,
+        70
+      ],
+      "hunk_header": "@@ -411,4 +418,54 @@ function AgentScreenContent({",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 872,
+  "receipt_file": "receipts/1158/selected.patch"
+}

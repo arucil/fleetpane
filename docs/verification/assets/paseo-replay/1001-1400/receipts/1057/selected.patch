@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1445,1452],"new_lines":[1300,1307],"diff_block_lines":[227,237],"hunk_header":"@@ -1440,16 +1295,43 @@ export class Session {","substantive_changed_lines":6}
+ 
+-  private parseVoiceConversationId(rawId: string, source: string): string {
+-    const parsed = VoiceConversationIdSchema.safeParse(rawId.trim());
++  private parseVoiceAgentId(rawId: string, source: string): string {
++    const parsed = VoiceAgentIdSchema.safeParse(rawId.trim());
+     if (!parsed.success) {
+-      throw new Error(`${source}: voiceConversationId must be a UUID`);
++      throw new Error(`${source}: voiceAgentId must be a UUID`);
+     }
+     return parsed.data;
+   }

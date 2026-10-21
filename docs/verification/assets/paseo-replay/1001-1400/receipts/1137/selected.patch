@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-file-explorer-actions.ts
+RANGE {"path":"packages/app/src/hooks/use-file-explorer-actions.ts","old_lines":[81,91],"new_lines":[80,80],"diff_block_lines":[16,26],"hunk_header":"@@ -78,34 +78,32 @@ export function useFileExplorerActions(serverId: string) {","substantive_changed_lines":10}
+-        .exploreFileSystem(agentId, normalizedPath, "list")
+-        .then((payload) => {
+-          updateExplorerState(agentId, (state) => {
+-            const nextState: AgentFileExplorerState = {
+-              ...state,
+-              isLoading: false,
+-              lastError: payload.error ?? null,
+-              pendingRequest: null,
+-              directories: state.directories,
+-              files: state.files,
+-            };

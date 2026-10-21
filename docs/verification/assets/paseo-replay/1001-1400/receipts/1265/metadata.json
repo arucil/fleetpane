@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1265,
+  "revision": "b1955cf74d144ad6f99d394d57f82ef04ec236cf",
+  "date": "2026-02-18T12:28:27+07:00",
+  "committer_date": "2026-02-18T12:28:27+07:00",
+  "parents": [
+    "4305a37ec3439e683129aa5d4dd21a539e183de6"
+  ],
+  "subject": "fix: unify agent attention notification payloads (#55)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tpackages/server/src/shared/agent-attention-notification.test.ts",
+    "A\tpackages/server/src/shared/agent-attention-notification.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpaseo.json"
+  ],
+  "source_receipt_digest": "sha256:cb777941e76465afde08097e611c688e16bd3a8fa43ec7dd66a06740d034cb3f",
+  "diff_tree_digest": "sha256:080e4f820b8152277bb5ceb3db5d46b8f8a7fc61ed75aac54ce4a33448be7faf",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        432,
+        442
+      ],
+      "new_lines": [
+        364,
+        364
+      ],
+      "diff_block_lines": [
+        138,
+        148
+      ],
+      "hunk_header": "@@ -424,41 +362,31 @@ export function SessionProvider({",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 414,
+  "receipt_file": "receipts/1265/selected.patch"
+}

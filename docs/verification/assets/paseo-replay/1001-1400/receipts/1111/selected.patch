@@ -1,0 +1,13 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[74,84],"new_lines":[79,79],"diff_block_lines":[49,59],"hunk_header":"@@ -68,42 +73,123 @@ export function CommandCenter() {","substantive_changed_lines":9}
+             ) : (
+-              results.map((agent, index) => {
+-                const active = index === activeIndex;
+-                return (
+-                  <Pressable
+-                    key={agentKey(agent)}
+-                    style={({ hovered, pressed }) => [
+-                      styles.row,
+-                      (hovered || pressed || active) && {
+-                        backgroundColor: theme.colors.surface1,
+-                      },

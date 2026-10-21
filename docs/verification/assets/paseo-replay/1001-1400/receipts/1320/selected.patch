@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/daemon-connections-context.tsx
+RANGE {"path":"packages/app/src/contexts/daemon-connections-context.tsx","old_lines":[37,47],"new_lines":[33,33],"diff_block_lines":[56,66],"hunk_header":"@@ -7,118 +12,47 @@ export type ActiveConnection =","substantive_changed_lines":8}
+ 
+-function createDefaultConnectionState(): ConnectionState {
+-  return {
+-    status: "idle",
+-    activeConnection: null,
+-    lastError: null,
+-    lastOnlineAt: null,
+-    agentListReady: false,
+-    hasEverReceivedAgentList: false,
+-  };
+-}

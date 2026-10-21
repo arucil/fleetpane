@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1054,
+  "revision": "afb1f1580d13134ce53a49e6995382da3224a652",
+  "date": "2026-02-06T22:19:12+07:00",
+  "committer_date": "2026-02-06T22:19:12+07:00",
+  "parents": [
+    "56e75cf77d2c24f0230ee44818d77a5b9a417723"
+  ],
+  "subject": "speech: move defaults and runtime into provider modules",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/speech/providers/local/config.ts",
+    "A\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/config.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "D\tpackages/server/src/server/speech/speech-defaults.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-types.ts"
+  ],
+  "source_receipt_digest": "sha256:b2007364aeec669895ed5b2648bab9bb9379f78143fd4ba53ef8f27fd206e9e6",
+  "diff_tree_digest": "sha256:3597e87c8d41ee300083091d9c6851ecdd4e55b9cb7af441a5067c141d01b4e3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/config.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        34,
+        44
+      ],
+      "diff_block_lines": [
+        40,
+        50
+      ],
+      "hunk_header": "@@ -0,0 +1,176 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1126,
+  "receipt_file": "receipts/1054/selected.patch"
+}

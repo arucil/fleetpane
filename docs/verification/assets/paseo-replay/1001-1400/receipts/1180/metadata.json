@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1180,
+  "revision": "8e5d2805c1c2840b520b073cb18ca34fa0c1c7de",
+  "date": "2026-02-14T08:46:38+07:00",
+  "committer_date": "2026-02-14T08:46:38+07:00",
+  "parents": [
+    "d6f21b3568618a0a1251a6793c77907fa4f16b6e"
+  ],
+  "subject": "refactor(server): centralize correlated RPC response matching in daemon client",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:c5cdf548cf3976133c8589f97a7073b2ba7e0119680104bbc7824e0e80bf24aa",
+  "diff_tree_digest": "sha256:4d5ebb51bbce074e620e3a26e404647db069a6fb506a49b19155738f82f4ba2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        856,
+        856
+      ],
+      "new_lines": [
+        882,
+        892
+      ],
+      "diff_block_lines": [
+        39,
+        49
+      ],
+      "hunk_header": "@@ -854,4 +863,40 @@ export class DaemonClient {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 282,
+  "receipt_file": "receipts/1180/selected.patch"
+}

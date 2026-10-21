@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1348,
+  "revision": "2652bdda2eb3059b081d968d2c7d50bb5e49b861",
+  "date": "2026-02-22T15:25:31+07:00",
+  "committer_date": "2026-02-22T15:25:31+07:00",
+  "parents": [
+    "6f2944ec7fd7d611bf1567d4a0737ee43e5a0d65"
+  ],
+  "subject": "desktop: make tauri attachments filesystem-only",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/desktop/attachments/desktop-attachment-store.test.ts",
+    "A\tpackages/app/src/desktop/attachments/desktop-attachment-store.ts",
+    "A\tpackages/app/src/desktop/attachments/desktop-file-commands.ts",
+    "A\tpackages/app/src/desktop/attachments/desktop-preview-url.test.ts",
+    "A\tpackages/app/src/desktop/attachments/desktop-preview-url.ts",
+    "M\tpackages/app/src/desktop/tauri/invoke-desktop-command.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/src/lib.rs"
+  ],
+  "source_receipt_digest": "sha256:fdabd1d0efaab9d2dd3d033ffd077b3134be24ea73bef2e762f9ec8eacda83c6",
+  "diff_tree_digest": "sha256:8f18de75445b88112152881e251821c31800763298396773727bc4f3ad59b61e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/attachments/desktop-attachment-store.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        35,
+        45
+      ],
+      "diff_block_lines": [
+        41,
+        51
+      ],
+      "hunk_header": "@@ -0,0 +1,207 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 473,
+  "receipt_file": "receipts/1348/selected.patch"
+}

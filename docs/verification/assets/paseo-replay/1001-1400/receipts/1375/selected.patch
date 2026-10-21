@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1534,1544],"new_lines":[1427,1427],"diff_block_lines":[169,179],"hunk_header":"@@ -1533,56 +1426,6 @@ export class ClaudeAgentClient implements AgentClient {","substantive_changed_lines":8}
+ 
+-  async listModels(options?: ListModelsOptions): Promise<AgentModelDefinition[]> {
+-    const prompt = (async function* empty() {})();
+-    const claudeOptions: Options = {
+-      cwd: options?.cwd ?? process.cwd(),
+-      permissionMode: "plan",
+-      includePartialMessages: false,
+-      settingSources: CLAUDE_SETTING_SOURCES,
+-      ...(this.claudePath ? { pathToClaudeCodeExecutable: this.claudePath } : {}),
+-    };
+-

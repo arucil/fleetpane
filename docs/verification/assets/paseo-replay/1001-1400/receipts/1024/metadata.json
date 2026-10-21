@@ -1,0 +1,90 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1024,
+  "revision": "4d284994823615c93805f662f2f3a4c9af15292e",
+  "date": "2026-02-06T13:45:31+07:00",
+  "committer_date": "2026-02-06T13:45:31+07:00",
+  "parents": [
+    "4dc20f58d026a5acf9f74c48b668fcf3d3da5d55",
+    "c343931fec8946a46a05eba401570adc60d948a0"
+  ],
+  "subject": "Merge origin/main into local-streaming-speech-tts",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/e2e/agent-details-sheet.spec.ts",
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/create-agent.spec.ts",
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/delete-agent-persists.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/git-diff-sticky-headers.spec.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "M\tpackages/app/e2e/host-onboarding-direct.spec.ts",
+    "M\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/permission-prompt.spec.ts",
+    "A\tpackages/app/e2e/sidebar-toggle-tooltip.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "A\tpackages/app/src/components/headers/header-toggle-button.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "A\tpackages/app/src/components/ui/shortcut.tsx",
+    "A\tpackages/app/src/components/ui/tooltip.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/hooks/use-client-activity.ts",
+    "A\tpackages/app/src/query/query-client.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/stores/checkout-git-actions-store.test.ts",
+    "A\tpackages/app/src/stores/checkout-git-actions-store.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/agent-initialization.ts",
+    "A\tpackages/app/src/utils/format-shortcut.test.ts",
+    "A\tpackages/app/src/utils/format-shortcut.ts",
+    "A\tpackages/app/src/utils/shortcut-platform.ts",
+    "M\tpackages/cli/src/commands/provider/models.ts",
+    "M\tpackages/server/.gitignore",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-rollout-parsing.test.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:18dde2dc218041721017560e2662c29fa0f7f55ba11491e30a4e83791733ea38",
+  "diff_tree_digest": "sha256:2323ee44a709f51fb7cc51b2562c7e6a36e0866cd6c33abf7177e4689abe3040",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        672,
+        682
+      ],
+      "new_lines": [
+        611,
+        611
+      ],
+      "diff_block_lines": [
+        95,
+        105
+      ],
+      "hunk_header": "@@ -670,155 +609,96 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 2857,
+  "receipt_file": "receipts/1024/selected.patch"
+}

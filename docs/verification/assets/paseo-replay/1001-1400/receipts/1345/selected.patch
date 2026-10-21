@@ -1,0 +1,13 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[34,44],"new_lines":[31,31],"diff_block_lines":[45,55],"hunk_header":"@@ -32,82 +29,24 @@ export function DesktopUpdatesSection({ appVersion }: DesktopUpdatesSectionProps","substantive_changed_lines":10}
+-  const appVersionText = formatVersionWithPrefix(appVersion);
+-  const localDaemonHost = useMemo(() => findLikelyLocalDaemonHost(daemons), [daemons]);
+-  const hasLikelyLocalDaemon = isLikelyLocalHost(localDaemonHost);
+-  const localDaemonServerId = localDaemonHost?.serverId ?? null;
+-  const localDaemonVersion = useSessionStore(
+-    useCallback(
+-      (state) =>
+-        localDaemonServerId
+-          ? (state.sessions[localDaemonServerId]?.serverInfo?.version ?? null)
+-          : null,
+-      [localDaemonServerId]

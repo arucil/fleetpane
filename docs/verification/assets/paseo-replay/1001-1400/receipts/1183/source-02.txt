@@ -1,0 +1,22 @@
+export type ClientAttentionState = {
+  deviceType: "web" | "mobile" | null;
+  focusedAgentId: string | null;
+  isStale: boolean;
+  appVisible: boolean;
+};
+
+export type AgentAttentionReason = "finished" | "error" | "permission";
+
+type ComputeClientNotificationInput = {
+  clientState: ClientAttentionState;
+  allClientStates: ClientAttentionState[];
+  agentId: string;
+};
+
+type ComputePushNotificationInput = {
+  reason: AgentAttentionReason;
+  allClientStates: ClientAttentionState[];
+};
+
+function hasActiveClientOnAgent(
+  allClientStates: ClientAttentionState[],

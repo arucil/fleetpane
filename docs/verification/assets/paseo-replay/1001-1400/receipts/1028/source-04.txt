@@ -1,0 +1,29 @@
+const isToolSequenceItem = (item?: StreamItem) =>
+  item?.kind === "tool_call" || item?.kind === "thought" || item?.kind === "todo_list";
+const AGENT_STREAM_LOG_TAG = "[AgentStreamView]";
+const STREAM_ITEM_LOG_MIN_COUNT = 200;
+const STREAM_ITEM_LOG_DELTA_THRESHOLD = 50;
+
+function collectAssistantTurnContent(
+  flatListData: StreamItem[],
+  startIndex: number
+): string {
+  const messages: string[] = [];
+  for (let i = startIndex; i < flatListData.length; i++) {
+    const currentItem = flatListData[i];
+    if (currentItem.kind === "user_message") {
+      break;
+    }
+    if (currentItem.kind === "assistant_message") {
+      messages.push(currentItem.text);
+    }
+  }
+  return messages.reverse().join("\n\n");
+}
+export interface AgentStreamViewProps {
+  agentId: string;
+  serverId?: string;
+  agent: Agent;
+  streamItems: StreamItem[];
+  pendingPermissions: Map<string, PendingPermission>;
+  /**

@@ -1,0 +1,13 @@
+FILE packages/server/src/shared/tool-call-display.ts
+RANGE {"path":"packages/server/src/shared/tool-call-display.ts","old_lines":[64,74],"new_lines":[64,64],"diff_block_lines":[14,24],"hunk_header":"@@ -63,31 +63,33 @@ export function buildToolCallDisplayModel(input: ToolCallDisplayInput): ToolCall","substantive_changed_lines":10}
+ 
+-  if (input.detail) {
+-    switch (input.detail.type) {
+-      case "shell":
+-        displayName = "Shell";
+-        summary = input.detail.command;
+-        break;
+-      case "read":
+-        displayName = "Read";
+-        summary = stripCwdPrefix(input.detail.filePath, input.cwd);
+-        break;

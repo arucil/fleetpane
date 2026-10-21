@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[164,174],"new_lines":[74,74],"diff_block_lines":[168,178],"hunk_header":"@@ -97,397 +62,64 @@ export default function TerminalEmulator({","substantive_changed_lines":10}
+-    const previousViewportWebkitOverflowScrolling =
+-      viewportElement?.style.getPropertyValue("-webkit-overflow-scrolling") ?? "";
+-    if (viewportElement) {
+-      viewportElement.style.overscrollBehavior = "none";
+-      viewportElement.style.touchAction = "pan-y";
+-      viewportElement.style.overflowY = "auto";
+-      viewportElement.style.overflowX = "hidden";
+-      viewportElement.style.pointerEvents = "auto";
+-      viewportElement.style.setProperty("-webkit-overflow-scrolling", "touch");
+-    }
+-    const previousScreenPointerEvents = screenElement?.style.pointerEvents ?? "";

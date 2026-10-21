@@ -1,0 +1,66 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1113,
+  "revision": "7e5537bcc598b6bbbf5efd102d568cdb4ed81726",
+  "date": "2026-02-10T13:43:07+07:00",
+  "committer_date": "2026-02-10T13:43:07+07:00",
+  "parents": [
+    "ade4fb2e45e5497730474c0a77c57cf8cba08d6e"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/diff-viewer.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/cli/bin/paseo",
+    "M\tpackages/cli/package.json",
+    "A\tpackages/cli/scripts/prepare-bundled-deps.sh",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "A\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/daemon/restart.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/cli/src/commands/daemon/stop.ts",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/relay/tsconfig.json",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/daemon-runner.ts",
+    "M\tpackages/server/scripts/dev-runner.ts",
+    "A\tpackages/server/scripts/supervisor.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "A\tpackages/server/tsconfig.scripts.json"
+  ],
+  "source_receipt_digest": "sha256:a3015d444498fed00d1f975d360f820f050a00e057267353fd2d76a7283cac13",
+  "diff_tree_digest": "sha256:4b081d0e7bf306941a525b597e82a46b9c727a7e949b2c8fb7111b0efe1aca76",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/local-daemon.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        80,
+        90
+      ],
+      "diff_block_lines": [
+        86,
+        96
+      ],
+      "hunk_header": "@@ -0,0 +1,411 @@",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 1251,
+  "receipt_file": "receipts/1113/selected.patch"
+}

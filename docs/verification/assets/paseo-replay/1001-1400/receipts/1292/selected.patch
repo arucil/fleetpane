@@ -1,0 +1,13 @@
+FILE packages/server/src/server/package-version.ts
+RANGE {"path":"packages/server/src/server/package-version.ts","old_lines":[0,0],"new_lines":[23,33],"diff_block_lines":[29,39],"hunk_header":"@@ -0,0 +1,64 @@","substantive_changed_lines":9}
++
++export function resolvePackageVersion(params: ResolvePackageVersionParams): string {
++  const moduleUrl = params.moduleUrl ?? import.meta.url;
++  let currentDir = path.dirname(fileURLToPath(moduleUrl));
++
++  while (true) {
++    const packageJsonPath = path.join(currentDir, "package.json");
++    if (existsSync(packageJsonPath)) {
++      try {
++        const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as PackageJson;
++        if (packageJson.name === params.packageName) {

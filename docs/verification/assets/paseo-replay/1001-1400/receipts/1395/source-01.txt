@@ -1,0 +1,58 @@
+): ResolvedLogConfig {
+  const persistedConfig = normalizeLoggerConfigInput(configInput);
+  const env = options?.env ?? process.env;
+  const paseoHome = resolveConfiguredPaseoHome(options);
+  const persistedLog = persistedConfig?.log;
+
+  const envGlobalLevel = parseLogLevel(env.PASEO_LOG);
+  const persistedGlobalLevel = persistedLog?.level;
+  const consoleLevel: LogLevel =
+    parseLogLevel(env.PASEO_LOG_CONSOLE_LEVEL) ??
+    envGlobalLevel ??
+    persistedLog?.console?.level ??
+    persistedGlobalLevel ??
+    DEFAULT_CONSOLE_LEVEL;
+
+  const fileLevel: LogLevel =
+    parseLogLevel(env.PASEO_LOG_FILE_LEVEL) ??
+    envGlobalLevel ??
+    persistedLog?.file?.level ??
+    persistedGlobalLevel ??
+    DEFAULT_FILE_LEVEL;
+
+  const consoleFormat: LogFormat =
+    parseLogFormat(env.PASEO_LOG_FORMAT) ??
+    persistedLog?.console?.format ??
+    persistedLog?.format ??
+    DEFAULT_CONSOLE_FORMAT;
+
+  const filePath = resolveFilePath(
+    paseoHome,
+    env.PASEO_LOG_FILE_PATH ?? persistedLog?.file?.path
+  );
+
+  const rotateMaxSize =
+    env.PASEO_LOG_FILE_ROTATE_SIZE?.trim() ||
+    persistedLog?.file?.rotate?.maxSize ||
+    DEFAULT_FILE_ROTATE_SIZE;
+
+  const rotateMaxFiles =
+    parsePositiveInteger(env.PASEO_LOG_FILE_ROTATE_COUNT) ??
+    persistedLog?.file?.rotate?.maxFiles ??
+    DEFAULT_FILE_ROTATE_MAX_FILES;
+
+  return {
+    level: minLogLevel([consoleLevel, fileLevel]),
+    console: {
+      level: consoleLevel,
+      format: consoleFormat,
+    },
+    file: {
+      level: fileLevel,
+      path: filePath,
+      rotate: {
+        maxSize: rotateMaxSize,
+        maxFiles: rotateMaxFiles,
+      },
+    },
+  };

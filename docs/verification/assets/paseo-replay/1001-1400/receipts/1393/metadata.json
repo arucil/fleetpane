@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1393,
+  "revision": "c8cef9bec82584ded2b61d0895bf219e2eaf01ce",
+  "date": "2026-03-02T12:23:04+07:00",
+  "committer_date": "2026-03-02T12:23:04+07:00",
+  "parents": [
+    "18d4df339fab38bf5bdc082763df496fedb23b4c"
+  ],
+  "subject": "Restore workspace header controls and polish tab management",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/workspace-header-tabs-restore.spec.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-status-dot.tsx",
+    "M\tpackages/app/src/components/draggable-list.native.tsx",
+    "M\tpackages/app/src/components/draggable-list.types.ts",
+    "M\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/hooks/use-keyboard-shift-style.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/sidebar-agent-state.test.ts",
+    "M\tpackages/app/src/utils/sidebar-agent-state.ts",
+    "A\tpackages/app/src/utils/status-dot-color.ts",
+    "A\tpackages/cli/cli-client-id",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:56da87ff5949a66ab8214ffd2bfd448262f8dc4ccbcaa68dd9d6cd9fd2126fea",
+  "diff_tree_digest": "sha256:c6ffce267389139d5b5cfa7e965e6456bfda6f5385762629ce7fd21fb01b9061",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/draggable-list.web.tsx",
+      "old_lines": [
+        192,
+        202
+      ],
+      "new_lines": [
+        208,
+        208
+      ],
+      "diff_block_lines": [
+        112,
+        122
+      ],
+      "hunk_header": "@@ -162,50 +181,88 @@ export function DraggableList<T>({",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 1272,
+  "receipt_file": "receipts/1393/selected.patch"
+}

@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1350,
+  "revision": "bfea00df78a151730f163483ff70288824e1575f",
+  "date": "2026-02-22T18:05:12+07:00",
+  "committer_date": "2026-02-22T18:05:12+07:00",
+  "parents": [
+    "0c710b09f52fc0a92a01dee464dcff9bf2c98849"
+  ],
+  "subject": "Fix user-message echo dedupe with canonical message IDs",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "A\tpackages/server/src/server/client-message-id.test.ts",
+    "A\tpackages/server/src/server/client-message-id.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:da3d65ddbfef26703be6fc3faae946b66fd0481f18848a1e70e707f701587b26",
+  "diff_tree_digest": "sha256:a936e684293aab9131e4a7e109bac0cd3c79ddeda61cd55a63386aa8fbd7585d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        1754,
+        1754
+      ],
+      "new_lines": [
+        1819,
+        1829
+      ],
+      "diff_block_lines": [
+        109,
+        119
+      ],
+      "hunk_header": "@@ -1752,4 +1799,33 @@ export class AgentManager {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 458,
+  "receipt_file": "receipts/1350/selected.patch"
+}

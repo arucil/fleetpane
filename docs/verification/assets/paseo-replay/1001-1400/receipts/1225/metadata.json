@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1225,
+  "revision": "12ba65d6e7edcb304cfaacb03d5e860e61d67b4d",
+  "date": "2026-02-17T09:43:22+07:00",
+  "committer_date": "2026-02-17T09:43:22+07:00",
+  "parents": [
+    "bb6d30e4f8d86533ed375c1f2d020434d73b448b"
+  ],
+  "subject": "fix(app): guard tauri listener cleanup to prevent uncaught unlisten errors",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/hooks/use-file-drop-zone.ts",
+    "M\tpackages/app/src/utils/tauri-window.ts"
+  ],
+  "source_receipt_digest": "sha256:c59b7bb79e5130910b990167a7154ed707f8990f6ee23a33e55100eec5f3f058",
+  "diff_tree_digest": "sha256:1e8e1a150b24543291d6a0eb5bcf9bfd23d711da83749cc2b51361f011bb1d20",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tauri-window.ts",
+      "old_lines": [
+        122,
+        126
+      ],
+      "new_lines": [
+        137,
+        146
+      ],
+      "diff_block_lines": [
+        32,
+        42
+      ],
+      "hunk_header": "@@ -118,17 +132,26 @@ export function useTrafficLightPadding(): { left: number; top: number } {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 40,
+  "receipt_file": "receipts/1225/selected.patch"
+}

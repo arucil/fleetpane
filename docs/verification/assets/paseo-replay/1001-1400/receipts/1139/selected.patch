@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[297,297],"new_lines":[302,312],"diff_block_lines":[21,31],"hunk_header":"@@ -295,4 +299,46 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":8}
++
++  useEffect(() => {
++    if (isRefreshFetching) {
++      refreshIconRotation.value = 0;
++      refreshIconRotation.value = withRepeat(
++        withTiming(360, {
++          duration: 700,
++          easing: Easing.linear,
++        }),
++        -1,
++        false

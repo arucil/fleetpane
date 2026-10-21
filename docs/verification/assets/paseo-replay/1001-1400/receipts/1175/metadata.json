@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1175,
+  "revision": "6ff1c421327c51f0ff129d253a2af07222729881",
+  "date": "2026-02-14T01:39:01+07:00",
+  "committer_date": "2026-02-14T01:39:01+07:00",
+  "parents": [
+    "80f0ca08f97e46ec71e26b861d194d8c7488ef2d"
+  ],
+  "subject": "refactor(cli): simplify agent mode validation flow",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/mode.ts",
+    "M\tpackages/cli/tests/10-agent-mode.test.ts"
+  ],
+  "source_receipt_digest": "sha256:de294fccae387aaacbfa91111a0bcc6ba414d34f5366947a4a6dd18872fb8660",
+  "diff_tree_digest": "sha256:b0c6bc50b3dabe51423c3e1c540b4d5789e6347711b007201ee0ba0c22825d8f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/mode.ts",
+      "old_lines": [
+        92,
+        101
+      ],
+      "new_lines": [
+        93,
+        94
+      ],
+      "diff_block_lines": [
+        30,
+        40
+      ],
+      "hunk_header": "@@ -91,25 +92,20 @@ export async function runModeCommand(",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 42,
+  "receipt_file": "receipts/1175/selected.patch"
+}

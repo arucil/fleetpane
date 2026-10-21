@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/agent/run.ts
+RANGE {"path":"packages/cli/src/commands/agent/run.ts","old_lines":[107,115],"new_lines":[111,114],"diff_block_lines":[17,27],"hunk_header":"@@ -106,62 +110,48 @@ function loadOutputSchema(value: string): Record<string, unknown> {","substantive_changed_lines":8}
+ 
+-function extractFirstJsonObject(text: string): string | null {
+-  const source = text.trim()
+-  if (!source) {
+-    return null
+-  }
++class StructuredRunStatusError extends Error {
++  readonly kind: 'timeout' | 'permission' | 'error' | 'empty'
+ 
+-  const startIndexes: number[] = []
+-  for (let i = 0; i < source.length; i += 1) {

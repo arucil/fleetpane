@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1394,
+  "revision": "223c8d7d0bbd8f2098f57aee4f8128fa3728269e",
+  "date": "2026-03-02T15:59:13+07:00",
+  "committer_date": "2026-03-02T15:59:13+07:00",
+  "parents": [
+    "c8cef9bec82584ded2b61d0895bf219e2eaf01ce"
+  ],
+  "subject": "feat: sortable workspace tabs, tab context menus, and terminal auto-create removal",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/e2e/workspace-header-tabs-restore.spec.ts",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "A\tpackages/app/src/components/sortable-inline-list.native.tsx",
+    "A\tpackages/app/src/components/sortable-inline-list.tsx",
+    "A\tpackages/app/src/components/sortable-inline-list.web.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "A\tpackages/app/src/utils/provider-command-templates.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:4254269de57702592366da90ae66ea1f14babfa5561a5c6df333c15c6c4db5f9",
+  "diff_tree_digest": "sha256:f6a479e339b13c815cd92b052c7400ff0de8af729bda84f6ad858b79c0b11151",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sortable-inline-list.web.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        27,
+        37
+      ],
+      "diff_block_lines": [
+        33,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,206 @@",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 1552,
+  "receipt_file": "receipts/1394/selected.patch"
+}

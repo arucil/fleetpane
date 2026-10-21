@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1157,
+  "revision": "837d0fb387b05384c593b02d1091be0cfa23f84a",
+  "date": "2026-02-13T00:00:57+07:00",
+  "committer_date": "2026-02-13T00:00:57+07:00",
+  "parents": [
+    "6d4d74fa3a33106f22e93166c6072f9838e4a7ed"
+  ],
+  "subject": "feat: improve Claude agent model normalization and tool mapping",
+  "diff_tree_paths": [
+    "M\tpackages/app/eas.json",
+    "M\tpackages/app/src/app/settings.tsx",
+    "A\tpackages/server/src/server/agent/providers/claude-agent.model-normalization.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/routes/docs/worktrees.tsx"
+  ],
+  "source_receipt_digest": "sha256:0b1cbbb61a0ff0580749a41a0360be8a55abfb210b0176f1362b16952d31f838",
+  "diff_tree_digest": "sha256:914be3c3dee031493e47c377fc0a5a182a21b7e5418e5c0088fe48f8f2b445ac",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        94,
+        94
+      ],
+      "new_lines": [
+        100,
+        110
+      ],
+      "diff_block_lines": [
+        14,
+        24
+      ],
+      "hunk_header": "@@ -92,4 +92,90 @@ function normalizeClaudeModelLabel(model: ModelInfo): string {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 452,
+  "receipt_file": "receipts/1157/selected.patch"
+}

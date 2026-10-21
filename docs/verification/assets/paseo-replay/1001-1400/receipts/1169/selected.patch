@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1779,1789],"new_lines":[1808,1808],"diff_block_lines":[60,70],"hunk_header":"@@ -1778,25 +1807,13 @@ export class Session {","substantive_changed_lines":7}
+ 
+-    if (mode === "voice_mode") {
+-      if (!readiness.realtimeVoice.enabled) {
+-        return this.toVoiceFeatureUnavailableContext(readiness.realtimeVoice);
+-      }
+-      if (!readiness.voiceFeature.available) {
+-        return this.toVoiceFeatureUnavailableContext(readiness.voiceFeature);
+-      }
+-      if (!readiness.realtimeVoice.available) {
+-        return this.toVoiceFeatureUnavailableContext(readiness.realtimeVoice);
+-      }

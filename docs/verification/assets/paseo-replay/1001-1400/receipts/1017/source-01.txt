@@ -1,0 +1,51 @@
+          role: z.string().optional(),
+          message: z.string().optional(),
+          text: z.string().optional(),
+        })
+        .passthrough(),
+    ])
+    .optional(),
+});
+
+type RolloutResponseReasoningPayload = z.infer<
+  typeof RolloutResponseReasoningPayloadSchema
+>;
+type ParsedRolloutRecord =
+  | { kind: "timeline"; item: AgentTimelineItem }
+  | { kind: "call"; name: string; callId?: string; input?: unknown }
+  | { kind: "output"; callId: string; output: string }
+  | { kind: "ignore" };
+
+const RolloutMessageContentSchema = z
+  .union([
+    z.string().transform((content) => content.trim()),
+    z.array(
+      z
+        .object({
+          text: z.string().optional(),
+          message: z.string().optional(),
+        })
+        .passthrough()
+    ).transform((content) =>
+      content
+        .map((block) => block.text ?? block.message ?? "")
+        .map((text) => text.trim())
+        .filter(Boolean)
+        .join("\n")
+        .trim()
+    ),
+  ]);
+
+function extractMessageText(content: unknown): string {
+  const parsed = RolloutMessageContentSchema.safeParse(content);
+  if (!parsed.success) {
+    return "";
+  }
+  return parsed.data;
+}
+
+const RolloutEventMessageTextSchema = z
+  .union([
+    z.string(),
+    z
+      .object({

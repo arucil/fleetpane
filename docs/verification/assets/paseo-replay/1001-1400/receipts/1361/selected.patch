@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/sidebar-agent-state.ts
+RANGE {"path":"packages/app/src/utils/sidebar-agent-state.ts","old_lines":[18,22],"new_lines":[18,27],"diff_block_lines":[7,17],"hunk_header":"@@ -17,8 +17,14 @@ export type SidebarStateBucket =","substantive_changed_lines":4}
+   status: AgentLifecycleStatus;
++  pendingPermissionCount?: number;
+   requiresAttention?: boolean;
+   attentionReason?: SidebarAttentionReason;
+ }): SidebarStateBucket {
+-  if (input.requiresAttention && input.attentionReason === "permission") {
++  if ((input.pendingPermissionCount ?? 0) > 0) {
++    return "needs_input";
++  }
++  // Legacy fallback for snapshots persisted before permission state was decoupled
++  // from unread attention.

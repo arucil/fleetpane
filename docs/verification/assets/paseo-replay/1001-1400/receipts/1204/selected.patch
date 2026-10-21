@@ -1,0 +1,13 @@
+FILE packages/app/.eas/workflows/release-mobile.yml
+RANGE {"path":"packages/app/.eas/workflows/release-mobile.yml","old_lines":[0,0],"new_lines":[1,11],"diff_block_lines":[7,17],"hunk_header":"@@ -0,0 +1,38 @@","substantive_changed_lines":9}
++name: Release Mobile
++
++on:
++  push:
++    tags:
++      - "v*"
++  workflow_dispatch: {}
++
++jobs:
++  build_ios:
++    name: Build iOS

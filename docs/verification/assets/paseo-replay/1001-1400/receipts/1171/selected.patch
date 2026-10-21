@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[0,0],"new_lines":[26,36],"diff_block_lines":[32,42],"hunk_header":"@@ -0,0 +1,405 @@","substantive_changed_lines":8}
++
++function isTerminalDebugEnabled(): boolean {
++  const explicit = (
++    globalThis as {
++      __PASEO_TERMINAL_DEBUG?: unknown;
++    }
++  ).__PASEO_TERMINAL_DEBUG;
++  if (typeof explicit === "boolean") {
++    return explicit;
++  }
++  const devFlag = (globalThis as { __DEV__?: unknown }).__DEV__;

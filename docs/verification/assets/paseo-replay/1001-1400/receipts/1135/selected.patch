@@ -1,0 +1,13 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[264,271],"new_lines":[264,272],"diff_block_lines":[7,17],"hunk_header":"@@ -263,11 +263,12 @@ function SidebarContent({","substantive_changed_lines":5}
+   const isGit = status?.isGit ?? false;
++  const hasResolvedCheckoutStatus = status !== null;
+ 
+   // Switch to Files tab if Changes tab is hidden and user was on it
+   useEffect(() => {
+-    if (!isGit && activeTab === "changes") {
++    if (hasResolvedCheckoutStatus && !isGit && activeTab === "changes") {
+       onTabPress("files");
+     }
+-  }, [isGit, activeTab, onTabPress]);
++  }, [hasResolvedCheckoutStatus, isGit, activeTab, onTabPress]);

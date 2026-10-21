@@ -1,0 +1,35 @@
+    return 'Unavailable'
+  }
+
+  return value.startsWith('v') ? value : `v${value}`
+}
+
+export function findLikelyLocalDaemonHost(daemons: HostProfile[]): HostProfile | null {
+  if (daemons.length === 0) {
+    return null
+  }
+
+  const localhostDaemon = daemons.find((daemon) =>
+    daemon.connections.some(
+      (connection) =>
+        connection.type === 'direct' && isLikelyLocalDirectEndpoint(connection.endpoint)
+    )
+  )
+
+  return localhostDaemon ?? daemons[0] ?? null
+}
+
+export function buildDaemonUpdateDiagnostics(result: LocalDaemonUpdateResult): string {
+  const stdout = result.stdout.length > 0 ? result.stdout : '(empty)'
+  const stderr = result.stderr.length > 0 ? result.stderr : '(empty)'
+
+  return [
+    `Exit code: ${result.exitCode}`,
+    '',
+    'STDOUT:',
+    stdout,
+    '',
+    'STDERR:',
+    stderr,
+  ].join('\n')
+}

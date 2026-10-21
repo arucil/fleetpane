@@ -1,0 +1,13 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[97,99],"new_lines":[97,107],"diff_block_lines":[7,17],"hunk_header":"@@ -96,4 +96,12 @@ jobs:","substantive_changed_lines":8}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
++          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
++          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
++          APPLE_ID: ${{ secrets.APPLE_ID }}
++          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
++          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
++          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
++          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+         with:
+           projectPath: packages/desktop

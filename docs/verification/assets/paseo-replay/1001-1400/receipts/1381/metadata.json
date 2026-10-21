@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1381,
+  "revision": "3a6a8cfa3862219314fb0ca7595a27e121a397dd",
+  "date": "2026-02-26T22:14:25+07:00",
+  "committer_date": "2026-02-26T22:14:25+07:00",
+  "parents": [
+    "6648cb8917002f93c035e8a361b19a9a47ba3952"
+  ],
+  "subject": "fix(server): add debug logging for Claude query pump raw messages",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:3d160105465379a7bbfdae278efff33814793e877c5f4fcf7b239b41e2b966cb",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2767,
+        2770
+      ],
+      "new_lines": [
+        2767,
+        2774
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -2767,4 +2767,8 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 3,
+  "receipt_file": "receipts/1381/selected.patch"
+}

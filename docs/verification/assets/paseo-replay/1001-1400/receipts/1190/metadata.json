@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1190,
+  "revision": "deeba6d6ebfe2f3ba80d086f01fc8c3abf465736",
+  "date": "2026-02-14T13:47:07+07:00",
+  "committer_date": "2026-02-14T13:47:07+07:00",
+  "parents": [
+    "a644adbf9b2091917ec9ab604c81fd4fb42c6feb"
+  ],
+  "subject": "feat: add voice capability status reporting to client",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:bc1dcd2238dfc9c5f899c76c320d88c4f9270ce402b528f75723b67136e03c1b",
+  "diff_tree_digest": "sha256:a09c71e8faf0e3ce9b8c32c96990e374d8ed9c68c824c62a849bf531cdf648a4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        65,
+        65
+      ],
+      "new_lines": [
+        69,
+        79
+      ],
+      "diff_block_lines": [
+        21,
+        31
+      ],
+      "hunk_header": "@@ -56,12 +56,36 @@ type WebSocketServerConfig = {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 157,
+  "receipt_file": "receipts/1190/selected.patch"
+}

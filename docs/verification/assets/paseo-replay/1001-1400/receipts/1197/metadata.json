@@ -1,0 +1,68 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1197,
+  "revision": "9244f1fbd66c8a52b0709d32f90613860d8a143e",
+  "date": "2026-02-15T14:05:29+07:00",
+  "committer_date": "2026-02-15T14:05:29+07:00",
+  "parents": [
+    "1f72ce63cd0aa2bbbf9827824ed8a8300f5faccb"
+  ],
+  "subject": "feat: terminal reattach, explorer tab memory, worktree terminals",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/keyboard-shortcuts-dialog.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/stores/explorer-tab-memory.ts",
+    "A\tpackages/app/src/stores/panel-store.test.ts",
+    "M\tpackages/app/src/stores/panel-store.ts",
+    "A\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "A\tpackages/app/src/utils/terminal-attach.test.ts",
+    "A\tpackages/app/src/utils/terminal-attach.ts",
+    "M\tpackages/app/src/utils/terminal-keys.test.ts",
+    "M\tpackages/app/src/utils/terminal-keys.ts",
+    "M\tpackages/server/src/client/daemon-client-terminal-stream-manager.test.ts",
+    "M\tpackages/server/src/client/daemon-client-terminal-stream-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/agent/timeline-append.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:0f6005a00e7148491ba9139642f54fd65636d82c0d857efd2eed30210ebc7a24",
+  "diff_tree_digest": "sha256:ac5c191dcbf87ac06febac1874ad80db090b2f8917472fab3b6a650bddd297be",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        352,
+        356
+      ],
+      "new_lines": [
+        388,
+        393
+      ],
+      "diff_block_lines": [
+        128,
+        138
+      ],
+      "hunk_header": "@@ -344,38 +383,100 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1662,
+  "receipt_file": "receipts/1197/selected.patch"
+}

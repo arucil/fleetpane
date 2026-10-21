@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[352,356],"new_lines":[388,393],"diff_block_lines":[128,138],"hunk_header":"@@ -344,38 +383,100 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":9}
+-          if (typeof attachPayload.streamId === "number") {
+-            void client.detachTerminalStream(attachPayload.streamId).catch(() => {});
+-          }
+-          return;
+-        }
++        let lastErrorMessage = "Unable to attach terminal stream";
++        const totalAttempts = TERMINAL_ATTACH_MAX_ATTEMPTS;
++        for (let attempt = 0; attempt < totalAttempts; attempt += 1) {
++          try {
++            const lastSize = lastReportedSizeRef.current;
++            const resumeOffset = getTerminalResumeOffset({

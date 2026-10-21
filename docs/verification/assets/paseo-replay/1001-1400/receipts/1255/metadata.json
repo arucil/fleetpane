@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1255,
+  "revision": "2324065e0a695467fb783875580aac5bb8b577d6",
+  "date": "2026-02-18T10:03:07+07:00",
+  "committer_date": "2026-02-18T10:03:07+07:00",
+  "parents": [
+    "792f5d8d6e50eea2ec049d9789c1a9c9958405d0",
+    "d51fd74f55c3a6656b57afbfed6a1ba79962ee5d"
+  ],
+  "subject": "Merge pull request #33 from getpaseo/show-image-previews-in-optimistic-messages",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/create-flow-store.ts",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "A\tpackages/app/src/utils/pending-create-images.test.ts",
+    "A\tpackages/app/src/utils/pending-create-images.ts"
+  ],
+  "source_receipt_digest": "sha256:5f2a40daf3bca6526d7c7b1db86156b744054ba7cba9dbcbab3822e504ef77af",
+  "diff_tree_digest": "sha256:39afa26f3094e3547cbb086a60c0224b2fe869ffb79586a2c41865349a869448",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message.tsx",
+      "old_lines": [
+        342,
+        342
+      ],
+      "new_lines": [
+        368,
+        378
+      ],
+      "diff_block_lines": [
+        75,
+        85
+      ],
+      "hunk_header": "@@ -337,19 +360,43 @@ export const UserMessage = memo(function UserMessage({",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 218,
+  "receipt_file": "receipts/1255/selected.patch"
+}

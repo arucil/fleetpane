@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[805,808],"new_lines":[805,812],"diff_block_lines":[7,17],"hunk_header":"@@ -804,14 +804,20 @@ function SessionProviderInternal({","substantive_changed_lines":7}
+           const current = prev.get(agentId);
+-          const next = new Map(prev);
+-          if (!current || current.epoch !== epoch) {
+-            next.set(agentId, { epoch, startSeq: seq, endSeq: seq });
++          if (current && current.epoch === epoch) {
++            // Fast-path: seq only extends the range during streaming.
++            // Skip the Map copy when nothing actually changes.
++            if (seq >= current.startSeq && seq <= current.endSeq) {
++              return prev;
++            }
++            const next = new Map(prev);

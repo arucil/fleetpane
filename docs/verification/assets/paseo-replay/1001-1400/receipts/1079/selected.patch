@@ -1,0 +1,13 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[1001,1011],"new_lines":[1003,1003],"diff_block_lines":[52,62],"hunk_header":"@@ -981,36 +988,21 @@ const ExpandableBadge = memo(function ExpandableBadge({","substantive_changed_lines":8}
+ 
+-    return () => {
+-      loop?.stop();
+-    };
+-  }, [isLoading, spinAnim]);
+-
+-  const spin = useMemo(
+-    () =>
+-      spinAnim.interpolate({
+-        inputRange: [0, 1],
+-        outputRange: ["0deg", "360deg"],

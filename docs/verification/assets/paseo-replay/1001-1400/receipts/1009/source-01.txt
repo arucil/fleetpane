@@ -1,0 +1,66 @@
+      const finalEventPromise = new Promise<{
+        transcript: string;
+        language?: string;
+        logprobs?: TranscriptionResult["logprobs"];
+        avgLogprob?: number;
+        isLowConfidence?: boolean;
+      }>((resolve, reject) => {
+        session.on("error", reject);
+        session.on("transcript", (payload) => {
+          if (!payload.isFinal) {
+            return;
+          }
+          resolve({
+            transcript: payload.transcript,
+            language: payload.language,
+            logprobs: payload.logprobs,
+            avgLogprob: payload.avgLogprob,
+            isLowConfidence: payload.isLowConfidence,
+          });
+        });
+      });
+
+      await session.connect();
+      session.appendPcm16(pcmForModel);
+      session.commit();
+      const finalEvent = await finalEventPromise;
+      const result: TranscriptionResult = {
+        text: finalEvent.transcript,
+        language: finalEvent.language,
+        logprobs: finalEvent.logprobs,
+        avgLogprob: finalEvent.avgLogprob,
+        isLowConfidence: finalEvent.isLowConfidence,
+        duration: Date.now() - startedAt,
+      };
+
+      // Filter out low-confidence transcriptions (non-speech sounds)
+      if (result.isLowConfidence) {
+        this.logger.debug(
+          { text: result.text, avgLogprob: result.avgLogprob },
+          "Filtered low-confidence transcription (likely non-speech)"
+        );
+
+        // Return empty text to ignore this transcription
+        return {
+          ...result,
+          text: "",
+          byteLength: audio.length,
+          format,
+          debugRecordingPath: debugRecordingPath ?? undefined,
+        };
+      }
+
+      this.logger.debug(
+        { text: result.text, avgLogprob: result.avgLogprob },
+        "Transcription complete"
+      );
+
+      return {
+        ...result,
+        debugRecordingPath: debugRecordingPath ?? undefined,
+        byteLength: audio.length,
+        format,
+      };
+    } finally {
+      session.close();
+    }

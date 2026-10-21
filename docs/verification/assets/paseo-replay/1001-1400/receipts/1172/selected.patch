@@ -1,0 +1,13 @@
+FILE scripts/codex-refactor-loop.sh
+RANGE {"path":"scripts/codex-refactor-loop.sh","old_lines":[0,0],"new_lines":[1,11],"diff_block_lines":[7,17],"hunk_header":"@@ -0,0 +1,51 @@","substantive_changed_lines":8}
++#!/usr/bin/env bash
++set -euo pipefail
++
++SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
++REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
++cd "${REPO_ROOT}"
++
++SLEEP_SECONDS="${SLEEP_SECONDS:-600}"
++MAX_ITERATIONS="${MAX_ITERATIONS:-0}" # 0 means run forever
++CODEX_MODEL="${CODEX_MODEL:-gpt-5.3-codex}"
++CODEX_REASONING_EFFORT="${CODEX_REASONING_EFFORT:-medium}"

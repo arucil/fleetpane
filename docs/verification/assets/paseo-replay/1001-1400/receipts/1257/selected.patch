@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[1990,1990],"new_lines":[1993,2003],"diff_block_lines":[11,21],"hunk_header":"@@ -1988,6 +1988,71 @@ class CodexAppServerAgentSession implements AgentSession {","substantive_changed_lines":10}
++    const trimmed = text.trim();
++    if (!trimmed.startsWith("/") || trimmed.length <= 1) {
++      return null;
++    }
++    const withoutPrefix = trimmed.slice(1);
++    const firstWhitespaceIdx = withoutPrefix.search(/\s/);
++    const commandName =
++      firstWhitespaceIdx === -1
++        ? withoutPrefix
++        : withoutPrefix.slice(0, firstWhitespaceIdx);
++    if (!commandName || commandName.includes("/")) {

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/activity-curator.ts
+RANGE {"path":"packages/server/src/server/agent/activity-curator.ts","old_lines":[27,27],"new_lines":[28,38],"diff_block_lines":[13,23],"hunk_header":"@@ -26,4 +27,32 @@ function flushBuffers(lines: string[], buffers: { message: string; thought: stri","substantive_changed_lines":7}
+ 
++function isLikelyMcpToolCall(name: string): boolean {
++  const normalized = name.toLowerCase();
++  return (
++    normalized.includes("mcp") ||
++    normalized.includes("paseo") ||
++    normalized.includes("__") ||
++    normalized === "speak"
++  );
++}
++

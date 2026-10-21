@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/mcp-server.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.ts","old_lines":[341,341],"new_lines":[413,423],"diff_block_lines":[149,159],"hunk_header":"@@ -339,4 +388,48 @@ export async function createAgentMcpServer(","substantive_changed_lines":8}
++      },
++      async (args, context?: McpToolContext) => {
++        if (!callerAgentId) {
++          throw new Error("speak is only available to agent-scoped MCP sessions");
++        }
++        const handler = resolveSpeakHandler?.(callerAgentId) ?? null;
++        if (!handler) {
++          throw new Error(`No speak handler registered for caller agent '${callerAgentId}'`);
++        }
++        await handler({
++          text: args.text,

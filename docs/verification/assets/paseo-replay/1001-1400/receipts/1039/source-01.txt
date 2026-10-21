@@ -1,0 +1,69 @@
+        title: string;
+      };
+
+      let resolvedCwd: string;
+      let resolvedMode: string | undefined;
+
+      if (callerAgentId) {
+        const parentAgent = agentManager.getAgent(callerAgentId);
+        if (!parentAgent) {
+          throw new Error(`Parent agent ${callerAgentId} not found`);
+        }
+        const callerArgs = args as unknown as { cwd?: string };
+        const requestedCwd = callerArgs.cwd?.trim();
+        const lockedCwd = callerContext?.lockedCwd?.trim();
+        if (lockedCwd) {
+          resolvedCwd = expandPath(lockedCwd);
+        } else if (requestedCwd && (callerContext?.allowCustomCwd ?? true)) {
+          resolvedCwd =
+            requestedCwd.startsWith("/") || requestedCwd.startsWith("~")
+              ? expandPath(requestedCwd)
+              : resolve(parentAgent.cwd, requestedCwd);
+        } else {
+          resolvedCwd = parentAgent.cwd;
+        }
+
+        const provider: AgentProvider = agentType ?? "claude";
+        const parentMode = parentAgent.currentModeId;
+        if (parentMode) {
+          resolvedMode = mapModeAcrossProviders(
+            parentMode,
+            parentAgent.provider,
+            provider
+          );
+        }
+      } else {
+        const topLevelArgs = args as unknown as {
+          cwd: string;
+          initialMode: string;
+          worktreeName?: string;
+          baseBranch?: string;
+        };
+        const {
+          cwd,
+          initialMode,
+          worktreeName,
+          baseBranch,
+        } = topLevelArgs;
+
+        resolvedCwd = expandPath(cwd);
+
+        if (worktreeName) {
+          if (!baseBranch) {
+            throw new Error("baseBranch is required when creating a worktree");
+          }
+          const worktree = await createWorktree({
+            branchName: worktreeName,
+            cwd: resolvedCwd,
+            baseBranch,
+            worktreeSlug: worktreeName,
+            paseoHome: options.paseoHome,
+          });
+          resolvedCwd = worktree.worktreePath;
+        }
+
+        resolvedMode = initialMode;
+      }
+
+      const provider: AgentProvider = agentType ?? "claude";
+      const normalizedTitle = title?.trim() ?? null;

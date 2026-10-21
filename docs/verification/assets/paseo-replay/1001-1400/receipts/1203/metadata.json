@@ -1,0 +1,66 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1203,
+  "revision": "037a6a15a40ca53f0a40a98078c7fbcf854a2028",
+  "date": "2026-02-16T08:09:27+07:00",
+  "committer_date": "2026-02-16T08:09:27+07:00",
+  "parents": [
+    "b980abb7af2e062d4ce7e2bcc73dc7b164c9d509"
+  ],
+  "subject": "feat: stream worktree setup progress and terminal subscriptions",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/headers/back-header.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/timeline-append.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:e5af995619061f0e6d41f90fd0a11209c8ae8054a459c7a54e746b71217a97f5",
+  "diff_tree_digest": "sha256:8e0f63256e2b6c6930eaef5959c193c8a8b190db87b5d973f64c1f98b87dd157",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/headers/menu-header.tsx",
+      "old_lines": [
+        30,
+        35
+      ],
+      "new_lines": [
+        83,
+        91
+      ],
+      "diff_block_lines": [
+        83,
+        93
+      ],
+      "hunk_header": "@@ -23,27 +55,40 @@ export function MenuHeader({ title, rightContent }: MenuHeaderProps) {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 1064,
+  "receipt_file": "receipts/1203/selected.patch"
+}

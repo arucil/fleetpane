@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1063,
+  "revision": "6cfae77a71b4052bd50007382f6693c6f9d36ccb",
+  "date": "2026-02-07T12:52:22+07:00",
+  "committer_date": "2026-02-07T12:52:22+07:00",
+  "parents": [
+    "4a9cf9e90f0b9e7f455c50329da7496468bd4905"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "D\tpackages/cli/src/commands/voice-mcp-bridge.ts",
+    "A\tpackages/server/scripts/mcp-stdio-socket-bridge-cli.mjs",
+    "A\tpackages/server/scripts/voice-main-daemon-e2e.ts",
+    "A\tpackages/server/scripts/voice-mcp-agent-smoke.ts",
+    "A\tpackages/server/scripts/voice-roundtrip-debug.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.voice-mcp-config.test.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "A\tpackages/server/src/server/voice-mcp-bridge-command.test.ts",
+    "A\tpackages/server/src/server/voice-mcp-bridge-command.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge.ts",
+    "A\tpackages/server/src/server/voice-roundtrip.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:e5e1c930db274be3ece1d87dc5d4926934a421c22be80280567c863b6db18945",
+  "diff_tree_digest": "sha256:b1b63ac34b6f6e815330d194fb62a329e1bc85a2e8debf0d3f6eac4e96559775",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        90,
+        100
+      ],
+      "new_lines": [
+        79,
+        79
+      ],
+      "diff_block_lines": [
+        33,
+        43
+      ],
+      "hunk_header": "@@ -68,37 +68,27 @@ import { AGENT_PROVIDER_DEFINITIONS } from \"./agent/provider-manifest.js\";",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1153,
+  "receipt_file": "receipts/1063/selected.patch"
+}

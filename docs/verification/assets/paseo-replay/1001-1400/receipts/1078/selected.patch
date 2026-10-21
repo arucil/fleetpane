@@ -1,0 +1,13 @@
+FILE packages/app/src/components/question-form-card.tsx
+RANGE {"path":"packages/app/src/components/question-form-card.tsx","old_lines":[187,197],"new_lines":[197,197],"diff_block_lines":[101,111],"hunk_header":"@@ -186,50 +196,46 @@ export function QuestionFormCard({","substantive_changed_lines":9}
+                     key={optIndex}
+-                    style={(state) => {
+-                      const hovered = Boolean((state as any).hovered);
+-                      return [
+-                        styles.chip,
+-                        {
+-                          borderColor: isSelected
+-                            ? theme.colors.accent
+-                            : theme.colors.border,
+-                          backgroundColor: isSelected
+-                            ? `${theme.colors.accent}18`

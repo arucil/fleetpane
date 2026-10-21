@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1040,
+  "revision": "7d388b456f1557edac92437151fca6a2cfe6ba12",
+  "date": "2026-02-06T15:58:02+07:00",
+  "committer_date": "2026-02-06T15:58:02+07:00",
+  "parents": [
+    "34ba33402a7748df7b71681fa393eadb9f9eb2a1"
+  ],
+  "subject": "Tune web voice VAD for short utterances",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/voice/speech-segmenter.test.ts"
+  ],
+  "source_receipt_digest": "sha256:0da79874ba6a4668197e9eccb37f825dcc8a764eb828df87f038ea2ead53fda7",
+  "diff_tree_digest": "sha256:d5212abdf664da13929f7c19f4b066783bd5c5f4f6d82f91d70a49884f53f2d2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/voice-context.tsx",
+      "old_lines": [
+        125,
+        131
+      ],
+      "new_lines": [
+        129,
+        135
+      ],
+      "diff_block_lines": [
+        16,
+        26
+      ],
+      "hunk_header": "@@ -124,8 +128,8 @@ export function VoiceProvider({ children }: VoiceProviderProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 33,
+  "receipt_file": "receipts/1040/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/draft-agent-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/draft-agent-screen.tsx","old_lines":[693,693],"new_lines":[732,742],"diff_block_lines":[75,85],"hunk_header":"@@ -691,4 +724,70 @@ export function DraftAgentScreen({","substantive_changed_lines":8}
++  );
++  const draftExplorerCheckout = useMemo<ExplorerCheckoutContext | null>(() => {
++    if (!selectedServerId || !explorerCwd) {
++      return null;
++    }
++    return {
++      serverId: selectedServerId,
++      cwd: explorerCwd,
++      isGit: isAttachWorktree && selectedWorktreePath ? true : checkout?.isGit === true,
++    };
++  }, [

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[3957,3962],"new_lines":[3957,3964],"diff_block_lines":[28,38],"hunk_header":"@@ -3956,16 +3956,29 @@ export class Session {","substantive_changed_lines":8}
+       let watcher: FSWatcher | null = null;
++      let watcherIsRecursive = false;
+       try {
+-        watcher = createWatcher(true);
+-      } catch (error) {
+-        try {
++        if (shouldTryRecursive) {
++          watcher = createWatcher(true);
++          watcherIsRecursive = true;
++        } else {
+           watcher = createWatcher(false);

@@ -1,0 +1,13 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[508,511],"new_lines":[511,520],"diff_block_lines":[13,23],"hunk_header":"@@ -508,4 +511,10 @@ export default function SettingsScreen() {","substantive_changed_lines":5}
+@@ -508,4 +511,10 @@ export default function SettingsScreen() {
+   ]);
+ 
++  useEffect(() => {
++    if (!editingDaemon) return;
++    if (editingDaemonLive) return;
++    handleCloseEditDaemon();
++  }, [editingDaemon, editingDaemonLive, handleCloseEditDaemon]);
++
+   const handleSaveEditDaemon = useCallback(async () => {
+     if (!editingDaemon) return;

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1372,
+  "revision": "094ce49d4ffea8aabc3faf2509f7ba555178c370",
+  "date": "2026-02-24T18:15:31+07:00",
+  "committer_date": "2026-02-24T18:15:31+07:00",
+  "parents": [
+    "0832b126083983df2aa5b39318bdcc363d9945ca"
+  ],
+  "subject": "fix: make agent metadata title/branch application reliable (#81)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.unit.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts"
+  ],
+  "source_receipt_digest": "sha256:e0c0ab3fd36862e46939196b3f904763549c9e755ba34e30e4b086cdf5d376a2",
+  "diff_tree_digest": "sha256:a1802347c3ccd8266ead9620977587ec0e39978287163e2228ce0b6a3ecd212b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        860,
+        864
+      ],
+      "new_lines": [
+        860,
+        869
+      ],
+      "diff_block_lines": [
+        5,
+        16
+      ],
+      "hunk_header": "@@ -860,5 +860,10 @@ export class AgentManager {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 109,
+  "receipt_file": "receipts/1372/selected.patch"
+}

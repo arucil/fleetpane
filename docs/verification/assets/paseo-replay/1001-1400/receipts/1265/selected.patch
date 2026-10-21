@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[432,442],"new_lines":[364,364],"diff_block_lines":[138,148],"hunk_header":"@@ -424,41 +362,31 @@ export function SessionProvider({","substantive_changed_lines":10}
+-      if (params.reason === "finished") {
+-        const head = session?.agentStreamHead.get(params.agentId) ?? [];
+-        const tail = session?.agentStreamTail.get(params.agentId) ?? [];
+-        const lastMessage =
+-          findLatestAssistantMessageText(head) ??
+-          findLatestAssistantMessageText(tail);
+-        preview = buildNotificationPreview(lastMessage);
+-      } else if (params.reason === "permission") {
+-        const permissionRequest = getLatestPermissionRequest(
+-          session,
+-          params.agentId

@@ -1,0 +1,11 @@
+FILE packages/server/tsconfig.server.json
+RANGE {"path":"packages/server/tsconfig.server.json","old_lines":[28,31],"new_lines":[28,35],"diff_block_lines":[5,13],"hunk_header":"@@ -28,4 +28,8 @@","substantive_changed_lines":4}
+@@ -28,4 +28,8 @@
+     "node_modules",
+     "dist",
++    "src/server/test-utils/**",
++    "src/server/daemon-e2e/**",
++    "src/server/**/*.e2e.ts",
++    "src/server/**/*.e2e.tsx",
+     "src/**/*.test.ts",
+     "src/**/*.test.tsx",

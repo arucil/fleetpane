@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1365,
+  "revision": "a134132418f9bd349ddd8150d517751445b901a5",
+  "date": "2026-02-23T19:30:48+07:00",
+  "committer_date": "2026-02-23T19:30:48+07:00",
+  "parents": [
+    "9b6f5e028cafa9696300a5dd2e01b4290ab2b779"
+  ],
+  "subject": "Fix app stream/timeline ordering desync and init lifecycle race (#73)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/contexts/session-stream-lifecycle.test.ts",
+    "A\tpackages/app/src/contexts/session-stream-lifecycle.ts",
+    "A\tpackages/app/src/contexts/session-stream-reducers.test.ts",
+    "A\tpackages/app/src/contexts/session-stream-reducers.ts",
+    "A\tpackages/app/src/contexts/session-timeline-bootstrap-policy.test.ts",
+    "A\tpackages/app/src/contexts/session-timeline-bootstrap-policy.ts",
+    "A\tpackages/app/src/contexts/session-timeline-seq-gate.test.ts",
+    "A\tpackages/app/src/contexts/session-timeline-seq-gate.ts",
+    "A\tpackages/app/src/hooks/use-agent-initialization.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/utils/agent-initialization.ts"
+  ],
+  "source_receipt_digest": "sha256:70126c07a6f891b0732f186ed53c804c8227adf1c6d5a3f2f092cd96b9f6601e",
+  "diff_tree_digest": "sha256:0fccf2f1b405a514a6154bb5a8cb1b36ea4ef01fa75e64d6188eccca07238ca4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        648,
+        657
+      ],
+      "new_lines": [
+        713,
+        713
+      ],
+      "diff_block_lines": [
+        129,
+        139
+      ],
+      "hunk_header": "@@ -646,82 +711,120 @@ function SessionProviderInternal({",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1192,
+  "receipt_file": "receipts/1365/selected.patch"
+}

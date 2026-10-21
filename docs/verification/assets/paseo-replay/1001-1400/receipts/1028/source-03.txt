@@ -1,0 +1,33 @@
+      ) {
+        return tightGap;
+      }
+
+      // Keep todo lists visually connected to the following tool sequence (symmetry).
+      if (item.kind === "todo_list" && isToolSequenceItem(belowItem)) {
+        return tightGap;
+      }
+
+      // Keep tool sequences visually connected to the assistant response (symmetry).
+      if (isToolSequenceItem(item) && belowItem.kind === "assistant_message") {
+        return tightGap;
+      }
+
+      // Different types get loose gap (16px)
+      return looseGap;
+    },
+    [flatListData, looseGap, tightGap]
+  );
+
+  const renderStreamItemContent = useCallback(
+    (item: StreamItem, index: number) => {
+      switch (item.kind) {
+        case "user_message": {
+          // In inverted list: index+1 is the item above, index-1 is below.
+          const prevItem = flatListData[index + 1];
+          const nextItem = flatListData[index - 1];
+          const isFirstInGroup = prevItem?.kind !== "user_message";
+          const isLastInGroup = nextItem?.kind !== "user_message";
+          return (
+            <UserMessage
+              message={item.text}
+              timestamp={item.timestamp.getTime()}

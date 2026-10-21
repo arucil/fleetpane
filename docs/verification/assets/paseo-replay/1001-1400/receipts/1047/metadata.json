@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1047,
+  "revision": "e782fdd35d8b39756960f4b97d78f9d93b1dde64",
+  "date": "2026-02-06T19:05:45+07:00",
+  "committer_date": "2026-02-06T19:05:45+07:00",
+  "parents": [
+    "9f5b1ec087144da7bde537d152a985354dc5eae5"
+  ],
+  "subject": "voice: switch internal MCP path to stdio unix-socket bridge",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/voice-mcp-bridge.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/session.voice-mcp-config.test.ts",
+    "A\tpackages/server/src/server/voice-mcp-bridge.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:2b5717fbc9774df06ea447ec3b09a735fe4304588c39a9f7c0e6c30dd9381e6f",
+  "diff_tree_digest": "sha256:94e02b27a7d0c57b5683b7b37cbcd0040442f7168ba192b72c4504217e5104bc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/voice-mcp-bridge.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        16,
+        26
+      ],
+      "diff_block_lines": [
+        22,
+        32
+      ],
+      "hunk_header": "@@ -0,0 +1,305 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 330,
+  "receipt_file": "receipts/1047/selected.patch"
+}

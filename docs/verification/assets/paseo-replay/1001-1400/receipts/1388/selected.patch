@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[228,233],"new_lines":[232,239],"diff_block_lines":[44,54],"hunk_header":"@@ -227,7 +231,9 @@ function WorkspaceRow({ workspace, onPress, onLongPress }: WorkspaceRowProps) {","substantive_changed_lines":8}
+       </Text>
+-      <Text style={styles.workspaceCreatedAtText} numberOfLines={1}>
+-        {resolveWorkspaceCreatedAtLabel(workspace)}
+-      </Text>
++      {createdAtLabel ? (
++        <Text style={styles.workspaceCreatedAtText} numberOfLines={1}>
++          {createdAtLabel}
++        </Text>
++      ) : null}
+     </Pressable>
+   )

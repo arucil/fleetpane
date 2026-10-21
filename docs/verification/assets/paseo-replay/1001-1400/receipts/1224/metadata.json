@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1224,
+  "revision": "bb6d30e4f8d86533ed375c1f2d020434d73b448b",
+  "date": "2026-02-17T09:43:19+07:00",
+  "committer_date": "2026-02-17T09:43:19+07:00",
+  "parents": [
+    "82a5723240e5228c9331d92d8efb65f64e4cd017"
+  ],
+  "subject": "fix(server): preserve claude session identity on agent reload",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d4c9582e170ce338316272962b20c6d5f3d129fc5ed3af1c62c806e50c7f5126",
+  "diff_tree_digest": "sha256:ba3160a32af8d9d3259ab4723d96f0375250a1bc37c8ea52c6e8642bb7c00421",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1430,
+        1432
+      ],
+      "new_lines": [
+        1430,
+        1439
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -1429,5 +1429,12 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 123,
+  "receipt_file": "receipts/1224/selected.patch"
+}

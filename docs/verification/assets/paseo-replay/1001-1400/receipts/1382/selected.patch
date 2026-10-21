@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[762,762],"new_lines":[730,740],"diff_block_lines":[221,231],"hunk_header":"@@ -760,100 +728,66 @@ export function SidebarAgentList({","substantive_changed_lines":9}
++  const handleDragEnd = useCallback(
++    (reorderedEntries: SidebarAgentListEntry[]) => {
++      if (!serverId) {
++        return;
++      }
++      const reorderedKeys = reorderedEntries.map(
++        (entry) => `${entry.agent.serverId}:${entry.agent.id}`
++      );
++      const reorderedSet = new Set(reorderedKeys);
++      const remainder = getSidebarOrder(serverId).filter((key) => !reorderedSet.has(key));
++      setSidebarOrder(serverId, [...reorderedKeys, ...remainder]);

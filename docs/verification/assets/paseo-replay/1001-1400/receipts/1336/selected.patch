@@ -1,0 +1,13 @@
+FILE packages/app/src/desktop/updates/desktop-updates.ts
+RANGE {"path":"packages/app/src/desktop/updates/desktop-updates.ts","old_lines":[142,151],"new_lines":[142,146],"diff_block_lines":[7,17],"hunk_header":"@@ -141,14 +141,20 @@ export function findLikelyLocalDaemonHost(daemons: HostProfile[]): HostProfile |","substantive_changed_lines":5}
+ 
+-  const localhostDaemon = daemons.find((daemon) =>
+-    daemon.connections.some(
+-      (connection) =>
+-        connection.type === 'direct' && isLikelyLocalDirectEndpoint(connection.endpoint)
+-    )
+-  )
++  const localhostDaemon = daemons.find((daemon) => isLikelyLocalHost(daemon))
+ 
+   return localhostDaemon ?? daemons[0] ?? null
+ }

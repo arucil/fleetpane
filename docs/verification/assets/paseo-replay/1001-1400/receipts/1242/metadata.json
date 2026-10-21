@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1242,
+  "revision": "515cb0a777d5c058cfc866662f45f76bb733afd2",
+  "date": "2026-02-17T21:16:31+07:00",
+  "committer_date": "2026-02-17T21:16:31+07:00",
+  "parents": [
+    "0dc944df3a7937115df68773b1e23aff56a185dd"
+  ],
+  "subject": "refactor: remove legacy agent update RPCs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/server/scripts/voice-main-daemon-e2e.ts",
+    "M\tpackages/server/scripts/voice-roundtrip-debug.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/live-preferences.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-while-running-stuck-claude.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-while-running-stuck.real.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-test-context.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:34e387691395e2783f91339fe14f77c982f0e2c152b54e04acfc2863ff2799f1",
+  "diff_tree_digest": "sha256:0641d3aa5ca058cd7ae53856be7e7163cc6b8d33c231b6a926998e24d9d80ba1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        873,
+        873
+      ],
+      "new_lines": [
+        865,
+        875
+      ],
+      "diff_block_lines": [
+        34,
+        44
+      ],
+      "hunk_header": "@@ -867,24 +861,82 @@ export function SessionProvider({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 351,
+  "receipt_file": "receipts/1242/selected.patch"
+}

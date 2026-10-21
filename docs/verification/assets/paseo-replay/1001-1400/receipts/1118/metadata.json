@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1118,
+  "revision": "29855e07e9764081a18afaf4fb2f63478923ec1b",
+  "date": "2026-02-11T11:45:55+07:00",
+  "committer_date": "2026-02-11T11:45:55+07:00",
+  "parents": [
+    "0d60588431ad0b939511e4852f13120fdb48576d"
+  ],
+  "subject": "feat: add provider runtime launcher settings for agent CLIs",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "A\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "A\tpackages/server/src/server/persisted-config.test.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/website/public/schemas/paseo.config.v1.json",
+    "M\tpackages/website/src/routes/docs/configuration.tsx"
+  ],
+  "source_receipt_digest": "sha256:e097a82e6d805b25cd84e3f574461fd9d11ad572c2d530991ea4f407d0cff894",
+  "diff_tree_digest": "sha256:3a41962c4c853a04f1fe68e58782ae1e4501583bf094dee35caf407e535e40f4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        56,
+        66
+      ],
+      "diff_block_lines": [
+        62,
+        72
+      ],
+      "hunk_header": "@@ -0,0 +1,119 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 520,
+  "receipt_file": "receipts/1118/selected.patch"
+}

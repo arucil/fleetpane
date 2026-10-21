@@ -1,0 +1,13 @@
+FILE packages/app/src/components/headers/header-toggle-button.tsx
+RANGE {"path":"packages/app/src/components/headers/header-toggle-button.tsx","old_lines":[0,0],"new_lines":[7,17],"diff_block_lines":[13,23],"hunk_header":"@@ -0,0 +1,79 @@","substantive_changed_lines":3}
++
++export function HeaderToggleButton({
++  onPress,
++  tooltipLabel,
++  tooltipKeys,
++  tooltipSide,
++  tooltipDelayDuration = 0,
++  style,
++  disabled,
++  children,
++  ...props

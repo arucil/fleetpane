@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[938,945],"new_lines":[939,946],"diff_block_lines":[13,23],"hunk_header":"@@ -937,12 +938,12 @@ function SessionProviderInternal({","substantive_changed_lines":6}
+             current &&
+-            current.epoch === result.cursor.epoch &&
+-            current.startSeq === result.cursor.startSeq &&
+-            current.endSeq === result.cursor.endSeq
++            current.epoch === nextCursor.epoch &&
++            current.startSeq === nextCursor.startSeq &&
++            current.endSeq === nextCursor.endSeq
+           ) {
+             return prev;
+           }
+           const next = new Map(prev);

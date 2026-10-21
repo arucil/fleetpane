@@ -1,0 +1,13 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[444,454],"new_lines":[445,445],"diff_block_lines":[13,23],"hunk_header":"@@ -443,45 +444,47 @@ export default function RootLayout() {","substantive_changed_lines":10}
+     <GestureHandlerRootView style={{ flex: 1 }}>
+-      <PortalProvider>
+-        <SafeAreaProvider>
+-          <KeyboardProvider>
+-            <BottomSheetModalProvider>
+-              <QueryProvider>
+-                <DaemonRegistryProvider>
+-                  <PushNotificationRouter />
+-                  <MultiDaemonSessionHost />
+-                  <ProvidersWrapper>
+-                    <SidebarAnimationProvider>

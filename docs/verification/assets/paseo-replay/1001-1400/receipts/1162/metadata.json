@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1162,
+  "revision": "67620569ab1c35cdb7f08b860230bce2b2681840",
+  "date": "2026-02-13T09:30:35Z",
+  "committer_date": "2026-02-13T09:30:35Z",
+  "parents": [
+    "69f851aa14428fe58ce008bf18a5c6c8e781c118"
+  ],
+  "subject": "fix(server): avoid recursive checkout diff watches on linux",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:62f906991a364119be06bd0507fdf79fefba101848db4fee04a3278ca87b66b7",
+  "diff_tree_digest": "sha256:cf66e83f8ad132516bc18a4b772a81415228a15fb8e73a56d082d029d7fffab0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3957,
+        3962
+      ],
+      "new_lines": [
+        3957,
+        3964
+      ],
+      "diff_block_lines": [
+        28,
+        38
+      ],
+      "hunk_header": "@@ -3956,16 +3956,29 @@ export class Session {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 41,
+  "receipt_file": "receipts/1162/selected.patch"
+}

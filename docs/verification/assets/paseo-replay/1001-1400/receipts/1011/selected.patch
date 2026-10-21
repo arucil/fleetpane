@@ -1,0 +1,13 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[429,432],"new_lines":[429,436],"diff_block_lines":[7,17],"hunk_header":"@@ -428,7 +428,66 @@ export async function createPaseoDaemon(","substantive_changed_lines":9}
+ 
+-  const wantsLocalDictation = (speechConfig?.dictationSttProvider ?? "openai") === "local";
+-  const wantsLocalVoiceStt = (speechConfig?.voiceSttProvider ?? "openai") === "local";
+-  const wantsLocalVoiceTts = (speechConfig?.voiceTtsProvider ?? "openai") === "local";
++  const voiceSttProvider = speechConfig?.voiceSttProvider ?? "local";
++  const voiceTtsProvider = speechConfig?.voiceTtsProvider ?? "local";
++  const dictationSttProvider = speechConfig?.dictationSttProvider ?? "local";
++
++  const wantsLocalDictation = dictationSttProvider === "local";
++  const wantsLocalVoiceStt = voiceSttProvider === "local";
++  const wantsLocalVoiceTts = voiceTtsProvider === "local";

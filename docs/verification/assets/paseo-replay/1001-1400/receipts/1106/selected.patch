@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-all-agents-list.ts
+RANGE {"path":"packages/app/src/hooks/use-all-agents-list.ts","old_lines":[0,0],"new_lines":[10,20],"diff_block_lines":[16,26],"hunk_header":"@@ -0,0 +1,159 @@","substantive_changed_lines":10}
++
++function toAggregatedAgent(params: {
++  source: Agent | ReturnType<typeof normalizeAgentSnapshot>;
++  serverId: string;
++  serverLabel: string;
++}): AggregatedAgent {
++  const source = params.source;
++  return {
++    id: source.id,
++    serverId: params.serverId,
++    serverLabel: params.serverLabel,

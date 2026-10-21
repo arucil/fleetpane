@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1210,
+  "revision": "04a06197deb85174e5ed727ce69a106ceb436cff",
+  "date": "2026-02-16T03:22:03Z",
+  "committer_date": "2026-02-16T03:22:03Z",
+  "parents": [
+    "5bd6cc11dec0d1e60beee879cc658cf45152d049"
+  ],
+  "subject": "refactor(startup): unify dev and cli daemon startup through runner",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "D\tpackages/cli/src/commands/daemon/sherpa-env.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/server/scripts/daemon-runner.ts"
+  ],
+  "source_receipt_digest": "sha256:eb6259367999e6f2e4a2e99a353ae01b4c32db5ed106336984081f906e0e3817",
+  "diff_tree_digest": "sha256:e71508424ffef1f9448a113c75b35497a3f257d629044e0718605e561b06fe34",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/start.ts",
+      "old_lines": [
+        96,
+        106
+      ],
+      "new_lines": [
+        46,
+        46
+      ],
+      "diff_block_lines": [
+        73,
+        83
+      ],
+      "hunk_header": "@@ -80,63 +44,7 @@ export async function runStart(options: StartOptions): Promise<void> {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 162,
+  "receipt_file": "receipts/1210/selected.patch"
+}

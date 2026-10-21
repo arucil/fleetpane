@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1181,
+  "revision": "ccaeb3de2167ac204b7428dc8e69b30783346545",
+  "date": "2026-02-14T09:01:01+07:00",
+  "committer_date": "2026-02-14T09:01:01+07:00",
+  "parents": [
+    "8e5d2805c1c2840b520b073cb18ca34fa0c1c7de"
+  ],
+  "subject": "refactor(server): split daemon client transport helpers into module",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/client/daemon-client-transport.test.ts",
+    "A\tpackages/server/src/client/daemon-client-transport.ts",
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:851fccbc64a75942930402a3385aa33391199e90b83cffae447d774f87739eda",
+  "diff_tree_digest": "sha256:77de05307d72a69e6aee752e59605702794e08cb44cb77dc6fbe6d7bad632c67",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-transport.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        42,
+        52
+      ],
+      "diff_block_lines": [
+        48,
+        58
+      ],
+      "hunk_header": "@@ -0,0 +1,437 @@",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 663,
+  "receipt_file": "receipts/1181/selected.patch"
+}

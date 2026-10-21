@@ -1,0 +1,64 @@
+
+export function resolveProviderCommandPrefix(
+  commandConfig: ProviderCommand | undefined,
+  resolveDefaultCommand: () => string
+): ProviderCommandPrefix {
+  if (!commandConfig || commandConfig.mode === "default") {
+    return {
+      command: resolveDefaultCommand(),
+      args: [],
+    };
+  }
+
+  if (commandConfig.mode === "append") {
+    return {
+      command: resolveDefaultCommand(),
+      args: [...(commandConfig.args ?? [])],
+    };
+  }
+
+  return {
+    command: commandConfig.argv[0]!,
+    args: commandConfig.argv.slice(1),
+  };
+}
+
+export function applyProviderEnv(
+  baseEnv: Record<string, string | undefined>,
+  runtimeSettings?: ProviderRuntimeSettings
+): Record<string, string | undefined> {
+  return {
+    ...baseEnv,
+    ...(runtimeSettings?.env ?? {}),
+  };
+}
+
+export function isCommandAvailable(command: string): boolean {
+  const normalized = command.trim();
+  if (!normalized) {
+    return false;
+  }
+
+  if (normalized.includes("/") || normalized.includes("\\")) {
+    return existsSync(normalized);
+  }
+
+  try {
+    const output = execFileSync("which", [normalized], { encoding: "utf8" }).trim();
+    return output.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+export function isProviderCommandAvailable(
+  commandConfig: ProviderCommand | undefined,
+  resolveDefaultCommand: () => string
+): boolean {
+  try {
+    const prefix = resolveProviderCommandPrefix(commandConfig, resolveDefaultCommand);
+    return isCommandAvailable(prefix.command);
+  } catch {
+    return false;
+  }
+}

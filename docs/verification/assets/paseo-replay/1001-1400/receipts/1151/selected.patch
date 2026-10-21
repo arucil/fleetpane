@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/model-downloader.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/model-downloader.ts","old_lines":[85,95],"new_lines":[61,61],"diff_block_lines":[52,62],"hunk_header":"@@ -77,60 +59,7 @@ async function downloadToFile(options: DownloadToFileOptions): Promise<void> {","substantive_changed_lines":9}
+-
+-  const logProgress = (force: boolean): void => {
+-    const pct =
+-      totalBytes && totalBytes > 0
+-        ? Math.min(100, Math.floor((downloadedBytes * 100) / totalBytes))
+-        : null;
+-
+-    if (!force) {
+-      if (pct !== null) {
+-        if (pct <= lastLoggedPct) {
+-          return;

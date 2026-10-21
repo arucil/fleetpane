@@ -1,0 +1,8 @@
+FILE CLAUDE.md
+RANGE {"path":"CLAUDE.md","old_lines":[168,171],"new_lines":[168,172],"diff_block_lines":[5,10],"hunk_header":"@@ -168,4 +168,5 @@ Notes:","substantive_changed_lines":1}
+@@ -168,4 +168,5 @@ Notes:
+ - `release:prepare` refreshes workspace `node_modules` links to prevent stale local package types during release checks.
+ - If `release:publish` fails after a successful publish of one workspace, re-run `npm run release:publish`; npm will skip already-published versions and continue where possible.
++- After each release, update the website Mac download CTA URL to the new version tag in `packages/website/src/routes/index.tsx`.
+ 
+ ## Orchestrator Mode

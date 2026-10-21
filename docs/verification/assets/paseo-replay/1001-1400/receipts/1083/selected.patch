@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/server/src/utils/tool-call-parsers.ts","old_lines":[246,256],"new_lines":[190,190],"diff_block_lines":[196,206],"hunk_header":"@@ -222,325 +184,978 @@ const KeyValuePairsSchema = z.record(z.unknown()).transform((data) =>","substantive_changed_lines":9}
+   })
+-  .transform((data) => {
+-    const commandRaw = Array.isArray(data.input.command)
+-      ? data.input.command.join(" ")
+-      : data.input.command;
+-    const command = stripShellWrapperPrefix(commandRaw);
+-
+-    const resultParsed = ShellResultSchema.safeParse(data.output);
+-    if (resultParsed.success) {
+-      return {
+-        type: "shell" as const,

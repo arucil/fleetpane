@@ -1,0 +1,13 @@
+FILE packages/server/src/server/daemon-client.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-client.e2e.test.ts","old_lines":[94,94],"new_lines":[94,104],"diff_block_lines":[7,17],"hunk_header":"@@ -93,21 +93,29 @@ describe(\"daemon client E2E\", () => {","substantive_changed_lines":9}
+   beforeAll(async () => {
++    const speechConfig = openaiApiKey
++      ? {
++          dictationSttProvider: "openai" as const,
++          voiceSttProvider: "openai" as const,
++          voiceTtsProvider: "openai" as const,
++        }
++      : {
++          dictationSttProvider: "local" as const,
++          voiceSttProvider: "local" as const,
++          voiceTtsProvider: "local" as const,

@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/os-notifications.ts
+RANGE {"path":"packages/app/src/utils/os-notifications.ts","old_lines":[43,43],"new_lines":[56,66],"diff_block_lines":[29,39],"hunk_header":"@@ -42,4 +55,69 @@ async function ensureNotificationPermission(): Promise<boolean> {","substantive_changed_lines":7}
+ 
++function dispatchWebNotificationClick(detail: WebNotificationClickDetail): boolean {
++  const dispatch = (globalThis as { dispatchEvent?: (event: Event) => boolean }).dispatchEvent;
++  const CustomEventConstructor = (globalThis as { CustomEvent?: typeof CustomEvent })
++    .CustomEvent;
++
++  if (typeof dispatch !== "function" || !CustomEventConstructor) {
++    return false;
++  }
++
++  const event = new CustomEventConstructor<WebNotificationClickDetail>(

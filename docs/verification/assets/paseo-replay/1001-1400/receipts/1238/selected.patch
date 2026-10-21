@@ -1,0 +1,13 @@
+FILE packages/server/src/terminal/terminal.ts
+RANGE {"path":"packages/server/src/terminal/terminal.ts","old_lines":[86,86],"new_lines":[97,107],"diff_block_lines":[26,36],"hunk_header":"@@ -84,4 +89,71 @@ export interface CreateTerminalOptions {","substantive_changed_lines":7}
++
++function resolveNodePtyPackageRoot(): string | null {
++  try {
++    const packageJsonPath = require.resolve("node-pty/package.json");
++    return dirname(packageJsonPath);
++  } catch {
++    return null;
++  }
++}
++
++function ensureExecutableBit(path: string): void {

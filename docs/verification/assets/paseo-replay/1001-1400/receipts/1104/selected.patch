@@ -1,0 +1,10 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[729,730],"new_lines":[759,766],"diff_block_lines":[120,127],"hunk_header":"@@ -706,25 +728,39 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(","substantive_changed_lines":5}
++            onToggleMute={voice.toggleMute}
++            onStop={() => {
++              void handleStopRealtimeVoice();
++            }}
++          />
++        ) : null}
+       </Animated.View>
+     </View>

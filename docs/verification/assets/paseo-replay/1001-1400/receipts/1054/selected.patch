@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/config.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/config.ts","old_lines":[0,0],"new_lines":[34,44],"diff_block_lines":[40,50],"hunk_header":"@@ -0,0 +1,176 @@","substantive_changed_lines":8}
++
++const OptionalBooleanFlagSchema = z.preprocess((value) => {
++  if (typeof value === "boolean") {
++    return value;
++  }
++  if (typeof value !== "string") {
++    return value;
++  }
++  const normalized = value.trim().toLowerCase();
++  if (normalized === "1" || normalized === "true" || normalized === "yes") {
++    return true;

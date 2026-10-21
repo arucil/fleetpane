@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-agent-screen-state-machine.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-screen-state-machine.ts","old_lines":[134,139],"new_lines":[144,149],"diff_block_lines":[24,34],"hunk_header":"@@ -133,9 +143,11 @@ export function deriveAgentScreenViewState({","substantive_changed_lines":10}
+ 
+-  const source: "authoritative" | "optimistic" | "stale" = input.agent
+-    ? "authoritative"
+-    : input.shouldUseOptimisticStream
+-      ? "optimistic"
+-      : "stale";
++  const source: "authoritative" | "optimistic" | "stale" = useOptimisticCreateFlowAgent
++    ? "optimistic"
++    : input.agent
++      ? "authoritative"
++      : input.shouldUseOptimisticStream

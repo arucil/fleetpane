@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1039,
+  "revision": "34ba33402a7748df7b71681fa393eadb9f9eb2a1",
+  "date": "2026-02-06T15:55:34+07:00",
+  "committer_date": "2026-02-06T15:55:34+07:00",
+  "parents": [
+    "72e2fdae2bbf7e8772f7c1a81670d52a14b7b197"
+  ],
+  "subject": "Voice MCP policy: required prompt, cwd override, and restricted tool path",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-loader.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "A\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/test-utils/vitest-setup.ts"
+  ],
+  "source_receipt_digest": "sha256:58798247e2f055544bc9f48143a4b6f68ac6b551e3da56e0833d5bf566b79729",
+  "diff_tree_digest": "sha256:0f56920e7b75531014a6f7e9a30cf96f409201f6ac8ddf0494cb0ea8bd413833",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/mcp-server.ts",
+      "old_lines": [
+        435,
+        440
+      ],
+      "new_lines": [
+        518,
+        523
+      ],
+      "diff_block_lines": [
+        155,
+        165
+      ],
+      "hunk_header": "@@ -434,71 +517,76 @@ export async function createAgentMcpServer(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 733,
+  "receipt_file": "receipts/1039/selected.patch"
+}

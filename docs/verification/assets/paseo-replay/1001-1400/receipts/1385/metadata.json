@@ -1,0 +1,80 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1385,
+  "revision": "080fb7464245e27e75625103e5d1a83f948b9546",
+  "date": "2026-03-01T18:22:11+07:00",
+  "committer_date": "2026-03-01T18:22:11+07:00",
+  "parents": [
+    "2e201cab098ba6fee9084b04ab3018ad693a7640"
+  ],
+  "subject": "feat: projects → workspaces → tabs",
+  "diff_tree_paths": [
+    "A\tEXECUTION_PLAN_PASEO.md",
+    "A\tPLAN_PROJECTS_WORKSPACES_TABS.md",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/app/h/[serverId]/agent/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "A\tpackages/app/src/app/h/[serverId]/new.tsx",
+    "A\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/agent/[agentId].tsx",
+    "A\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/index.tsx",
+    "A\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/terminal/[terminalId].tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-file-explorer-actions.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "D\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/download-store.ts",
+    "M\tpackages/app/src/stores/explorer-tab-memory.ts",
+    "M\tpackages/app/src/stores/panel-store.test.ts",
+    "M\tpackages/app/src/stores/panel-store.ts",
+    "M\tpackages/app/src/stores/sidebar-order-store.ts",
+    "A\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.test.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.ts",
+    "M\tpackages/app/src/utils/notification-routing.test.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:242a9334eea51c29d3268176c51c5ab2b5e74b5c4faff7533cd6d45f88b416d9",
+  "diff_tree_digest": "sha256:875bf5dd7f0d4a680b48473a1ffbd5abce9e5210ecd33231a61fc03d0202a30a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+      "old_lines": [
+        9,
+        12
+      ],
+      "new_lines": [
+        19,
+        26
+      ],
+      "diff_block_lines": [
+        26,
+        36
+      ],
+      "hunk_header": "@@ -1,17 +1,99 @@",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 4832,
+  "receipt_file": "receipts/1385/selected.patch"
+}

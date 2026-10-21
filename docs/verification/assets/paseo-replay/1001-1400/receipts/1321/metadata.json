@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1321,
+  "revision": "5dae7f854faf11154db99a8749403cde6e448188",
+  "date": "2026-02-21T08:52:35+07:00",
+  "committer_date": "2026-02-21T08:52:35+07:00",
+  "parents": [
+    "0350f00840e817399e5166afba76533622910a2f"
+  ],
+  "subject": "refactor: remove daemon connections context, use host runtime directly",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/voice-panel.tsx",
+    "D\tpackages/app/src/contexts/daemon-connections-context.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx",
+    "M\tpackages/app/src/utils/daemons.ts"
+  ],
+  "source_receipt_digest": "sha256:3ec78be3f3c6fb9663100a19103376fe5b699bc88d595bbaa55d2af7dced4971",
+  "diff_tree_digest": "sha256:fa2d3de12dd880c7421389c66e3b2356a8c36a59e8e9dc3a43eb49c5ddc80ab9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        451,
+        461
+      ],
+      "new_lines": [
+        450,
+        450
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -450,35 +449,33 @@ export default function RootLayout() {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 216,
+  "receipt_file": "receipts/1321/selected.patch"
+}

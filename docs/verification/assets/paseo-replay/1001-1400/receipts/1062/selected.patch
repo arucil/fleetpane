@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/voice-context.tsx
+RANGE {"path":"packages/app/src/contexts/voice-context.tsx","old_lines":[136,136],"new_lines":[146,156],"diff_block_lines":[33,43],"hunk_header":"@@ -135,4 +145,46 @@ export function VoiceProvider({ children }: VoiceProviderProps) {","substantive_changed_lines":8}
+ 
++  useEffect(() => {
++    const connected = activeSession?.connection.isConnected ?? false;
++    const client = activeSession?.client ?? null;
++    if (!connected) {
++      voiceTransportReadyRef.current = false;
++    }
++
++    if (!isVoiceMode || !activeServerId || !client) {
++      wasVoiceSocketConnectedRef.current = connected;
++      if (!isVoiceMode) {

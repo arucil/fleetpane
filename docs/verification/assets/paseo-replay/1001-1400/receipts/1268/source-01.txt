@@ -1,0 +1,76 @@
+  const agentCwd = useSessionStore(
+    (state) => state.sessions[serverId]?.agents?.get(agentId)?.cwd ?? ''
+  )
+  const autocompleteCwd = useMemo(() => {
+    if (isRealAgent) {
+      return agentCwd.trim()
+    }
+    return queryDraftConfig?.cwd ?? ''
+  }, [agentCwd, isRealAgent, queryDraftConfig])
+
+  const client = useSessionStore((state) => state.sessions[serverId]?.client ?? null)
+  const isConnected = useSessionStore(
+    (state) => state.sessions[serverId]?.connection.isConnected ?? false
+  )
+
+  const mode: 'command' | 'file' | null = showFileAutocomplete
+    ? 'file'
+    : showCommandAutocomplete
+      ? 'command'
+      : null
+  const isVisible =
+    mode === 'command'
+      ? canLoadCommands
+      : mode === 'file'
+        ? Boolean(serverId) && autocompleteCwd.length > 0
+        : false
+
+  const {
+    commands,
+    isLoading: isCommandsLoading,
+    isError,
+    error,
+  } = useAgentCommandsQuery({
+    serverId,
+    agentId,
+    enabled: mode === 'command' && canLoadCommands,
+    draftConfig: queryDraftConfig,
+  })
+
+  const fileSuggestionsQuery = useQuery({
+    queryKey: ['directorySuggestions', serverId, autocompleteCwd, fileFilterQuery, true, true],
+    queryFn: async (): Promise<DirectorySuggestionEntry[]> => {
+      if (!client) {
+        throw new Error('Daemon client unavailable')
+      }
+      const response = await client.getDirectorySuggestions({
+        cwd: autocompleteCwd,
+        query: fileFilterQuery,
+        limit: 50,
+        includeFiles: true,
+        includeDirectories: true,
+      })
+      if (response.error) {
+        throw new Error(response.error)
+      }
+      return mapDirectorySuggestionsToEntries(response)
+    },
+    enabled:
+      mode === 'file' &&
+      Boolean(serverId) &&
+      autocompleteCwd.length > 0 &&
+      Boolean(client) &&
+      isConnected,
+    retry: false,
+    staleTime: 15_000,
+  })
+
+  const options = useMemo<AgentAutocompleteOption[]>(() => {
+    if (!isVisible) {
+      return []
+    }
+
+    if (mode === 'command') {
+      const filterLower = commandFilterQuery.toLowerCase()
+      const matches = commands.filter((cmd) => cmd.name.toLowerCase().includes(filterLower))
+      const orderedMatches = orderAutocompleteOptions(matches)

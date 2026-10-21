@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1168,
+  "revision": "c5d7fa52b4b3bef6c02590f3c062b1c277b42040",
+  "date": "2026-02-14T00:44:08+07:00",
+  "committer_date": "2026-02-14T00:44:08+07:00",
+  "parents": [
+    "cfd061a86dd777b92cfedd07460ab30f292853a4"
+  ],
+  "subject": "refactor(server): centralize speech provider resolver typing",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/stt-manager.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/speech/provider-resolver.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:f796c8f5f3ce5223f88b7810d7c38efa09d502123428bc85caa59daa63059cd4",
+  "diff_tree_digest": "sha256:e02dca3c97d985a21f34ee6e59ea8b7a3d87bdced2fff8ac270704c82a9df14d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        96,
+        104
+      ],
+      "new_lines": [
+        97,
+        99
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -95,16 +96,10 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 45,
+  "receipt_file": "receipts/1168/selected.patch"
+}

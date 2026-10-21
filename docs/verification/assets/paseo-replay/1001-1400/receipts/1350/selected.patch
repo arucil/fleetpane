@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[1754,1754],"new_lines":[1819,1829],"diff_block_lines":[109,119],"hunk_header":"@@ -1752,4 +1799,33 @@ export class AgentManager {","substantive_changed_lines":6}
++    }
++    return agent.timelineRows.some((row) => {
++      const rowItem = row.item;
++      if (rowItem.type !== "user_message") {
++        return false;
++      }
++      const rowMessageId = normalizeMessageId(rowItem.messageId);
++      return rowMessageId === eventMessageId && rowItem.text === eventText;
++    });
++  }
++

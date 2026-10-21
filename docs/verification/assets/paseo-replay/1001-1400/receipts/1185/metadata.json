@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1185,
+  "revision": "c87c20690031557ce5db9148108ae309df0bda92",
+  "date": "2026-02-14T09:38:02+07:00",
+  "committer_date": "2026-02-14T09:38:02+07:00",
+  "parents": [
+    "b1956cffb7485b5c86d19a9b3d479966f6f592e4"
+  ],
+  "subject": "refactor(server): split daemon client transport into focused modules",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/client/daemon-client-relay-e2ee-transport.ts",
+    "A\tpackages/server/src/client/daemon-client-transport-types.ts",
+    "A\tpackages/server/src/client/daemon-client-transport-utils.ts",
+    "M\tpackages/server/src/client/daemon-client-transport.ts",
+    "A\tpackages/server/src/client/daemon-client-websocket-transport.ts"
+  ],
+  "source_receipt_digest": "sha256:2617a11e209d2ddcbd5dfc88196d988815ad055192b7535f20413680e5d2861d",
+  "diff_tree_digest": "sha256:25c401b29b2ad75cfbb00b77198f5b2e38186634eea14e9eff11251badef41d0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-transport-types.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        36,
+        38
+      ],
+      "diff_block_lines": [
+        42,
+        44
+      ],
+      "hunk_header": "@@ -0,0 +1,38 @@",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 600,
+  "receipt_file": "receipts/1185/selected.patch"
+}

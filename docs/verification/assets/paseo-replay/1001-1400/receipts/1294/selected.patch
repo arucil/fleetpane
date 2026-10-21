@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[434,444],"new_lines":[434,434],"diff_block_lines":[7,17],"hunk_header":"@@ -433,24 +433,13 @@ function resolveAppVersion(): string | null {","substantive_changed_lines":7}
+ 
+-function formatVersionBadgeText(params: { daemonVersion: string | null; appVersion: string | null }): string {
+-  const appVersion = params.appVersion?.trim();
+-  if (!appVersion) {
+-    if (Platform.OS === "web") {
+-      return "App version unavailable";
+-    }
+-    return "App unavailable";
+-  }
+-
+-  const daemonVersion = params.daemonVersion?.trim();

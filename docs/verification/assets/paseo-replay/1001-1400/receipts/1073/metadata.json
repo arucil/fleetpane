@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1073,
+  "revision": "05c150dab89583f6c0728bd13b292e873643083f",
+  "date": "2026-02-07T18:39:19+07:00",
+  "committer_date": "2026-02-07T18:39:19+07:00",
+  "parents": [
+    "5b77cd48051cd067c364c36a61292b6e32ac09b6"
+  ],
+  "subject": "Normalize thinking option IDs and update display logic",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/live-preferences.e2e.test.ts",
+    "M\tpackages/server/src/server/voice-roundtrip.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:293d537077d8036e31a39f68903f15eed90d95559858e8c0d1542e24627c21ba",
+  "diff_tree_digest": "sha256:730826fc92c996980aaf0b04a4ae6f92a87b7dd3f00e2d35aa103dce26db5615",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        2125,
+        2135
+      ],
+      "new_lines": [
+        2139,
+        2139
+      ],
+      "diff_block_lines": [
+        59,
+        69
+      ],
+      "hunk_header": "@@ -2124,35 +2138,56 @@ export class CodexAppServerAgentClient implements AgentClient {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 257,
+  "receipt_file": "receipts/1073/selected.patch"
+}

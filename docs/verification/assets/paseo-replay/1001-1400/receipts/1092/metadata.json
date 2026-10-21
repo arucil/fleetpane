@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1092,
+  "revision": "0b50ac87773a258cc6fe637588500e95a3d1c2ab",
+  "date": "2026-02-09T09:33:36+07:00",
+  "committer_date": "2026-02-09T09:33:36+07:00",
+  "parents": [
+    "81d2e8988d523acbbd6b9abea537be328723a6cf"
+  ],
+  "subject": "refactor tool-call mappers with shared detail primitives",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/codex/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/tool-call-detail-primitives.ts"
+  ],
+  "source_receipt_digest": "sha256:90f82afe920fb9f431bc5d7213f80e7bd503d563b1dfb3c8b2c4632c094a405b",
+  "diff_tree_digest": "sha256:fc4ae865914e73185861e541542bcde02c7dd07a50a8c3ab9af675a0d6caa82b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        41,
+        51
+      ],
+      "diff_block_lines": [
+        47,
+        57
+      ],
+      "hunk_header": "@@ -0,0 +1,67 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 2046,
+  "receipt_file": "receipts/1092/selected.patch"
+}

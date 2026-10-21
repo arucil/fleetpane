@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[94,94],"new_lines":[100,110],"diff_block_lines":[14,24],"hunk_header":"@@ -92,4 +92,90 @@ function normalizeClaudeModelLabel(model: ModelInfo): string {","substantive_changed_lines":7}
++
++function normalizeModelIdCandidate(modelId: string | null | undefined): string | null {
++  if (typeof modelId !== "string") {
++    return null;
++  }
++  const trimmed = modelId.trim();
++  return trimmed.length > 0 ? trimmed : null;
++}
++
++function pickSupportedModelId(
++  supportedModelIds: ReadonlySet<string>,

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/pairing-offer.ts
+RANGE {"path":"packages/server/src/server/pairing-offer.ts","old_lines":[0,0],"new_lines":[13,23],"diff_block_lines":[19,29],"hunk_header":"@@ -0,0 +1,64 @@","substantive_changed_lines":10}
++
++export async function generateLocalPairingOffer(args: {
++  paseoHome: string;
++  relayEnabled?: boolean;
++  relayEndpoint?: string;
++  relayPublicEndpoint?: string;
++  appBaseUrl?: string;
++  includeQr?: boolean;
++  logger?: Logger;
++}): Promise<LocalPairingOffer> {
++  const relayEnabled = args.relayEnabled ?? true;

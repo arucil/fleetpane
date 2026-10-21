@@ -1,0 +1,13 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[284,294],"new_lines":[280,280],"diff_block_lines":[17,27],"hunk_header":"@@ -279,96 +278,6 @@ export async function createPaseoDaemon(","substantive_changed_lines":4}
+-  const voiceEnabledProviders = AGENT_PROVIDER_DEFINITIONS
+-    .filter((definition) => definition.voice?.enabled)
+-    .map((definition) => definition.id as AgentProvider);
+   logger.info(
+-    {
+-      requestedVoiceLlmProvider,
+-      voiceLlmProviderExplicit,
+-      voiceEnabledProviders,
+-    },
+-    "Voice LLM provider reconciliation started"
+-  );

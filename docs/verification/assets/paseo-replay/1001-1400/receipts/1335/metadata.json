@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1335,
+  "revision": "409a3ac5dfb117a35b48c670807ccc37fab948ff",
+  "date": "2026-02-22T11:45:37+07:00",
+  "committer_date": "2026-02-22T11:45:37+07:00",
+  "parents": [
+    "1c83e10c6d88c4f848b2e7a9d7017ca98074c14d"
+  ],
+  "subject": "refactor(app): isolate desktop settings update and permission flows",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/desktop/components/desktop-permission-row.tsx",
+    "A\tpackages/app/src/desktop/components/desktop-permissions-section.tsx",
+    "A\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/permissions/desktop-permissions.test.ts",
+    "A\tpackages/app/src/desktop/permissions/desktop-permissions.ts",
+    "A\tpackages/app/src/desktop/permissions/use-desktop-permissions.ts",
+    "A\tpackages/app/src/desktop/tauri/invoke-desktop-command.ts",
+    "A\tpackages/app/src/desktop/updates/desktop-updates.test.ts",
+    "A\tpackages/app/src/desktop/updates/desktop-updates.ts",
+    "A\tpackages/app/src/desktop/updates/use-desktop-app-updater.ts",
+    "D\tpackages/app/src/hooks/use-desktop-app-updater.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "D\tpackages/app/src/utils/desktop-permissions.test.ts",
+    "D\tpackages/app/src/utils/desktop-permissions.ts",
+    "D\tpackages/app/src/utils/desktop-updates.test.ts",
+    "D\tpackages/app/src/utils/desktop-updates.ts"
+  ],
+  "source_receipt_digest": "sha256:697b9e239b1dafd48aaa05f13cff91995fc06bf96f20d989077cf059099d61c8",
+  "diff_tree_digest": "sha256:87a839033b63cf615e088ec29be1bf19d7a702320cde440581903259770b91af",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-permission-row.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        14,
+        24
+      ],
+      "diff_block_lines": [
+        20,
+        30
+      ],
+      "hunk_header": "@@ -0,0 +1,102 @@",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 2269,
+  "receipt_file": "receipts/1335/selected.patch"
+}

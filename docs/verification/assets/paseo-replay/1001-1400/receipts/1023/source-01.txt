@@ -1,0 +1,51 @@
+  );
+
+  const handleBackFromError = useCallback(() => {
+    if (!agentId || !requestDirectoryListing) {
+      return;
+    }
+    selectExplorerEntry(agentId, null);
+    requestDirectoryListing(agentId, errorRecoveryPath, {
+      recordHistory: false,
+      setCurrentPath: true,
+    });
+  }, [agentId, errorRecoveryPath, requestDirectoryListing, selectExplorerEntry]);
+
+  if (!agentExists) {
+    return (
+      <View style={styles.centerState}>
+        <Text style={styles.errorText}>Agent not found</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View
+      style={styles.container}
+      onLayout={(event) => setContainerWidth(event.nativeEvent.layout.width)}
+    >
+      {error ? (
+        <View style={styles.centerState}>
+          <Text style={styles.errorText}>{error}</Text>
+          <View style={styles.errorActions}>
+            {showBackFromError ? (
+              <Pressable style={styles.retryButton} onPress={handleBackFromError}>
+                <Text style={styles.retryButtonText}>Back</Text>
+              </Pressable>
+            ) : null}
+            <Pressable
+              style={styles.retryButton}
+              onPress={() => {
+                if (agentId) {
+                  requestDirectoryListing(agentId, ".", {
+                    recordHistory: false,
+                    setCurrentPath: false,
+                  });
+                }
+              }}
+            >
+              <Text style={styles.retryButtonText}>Retry</Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : showInitialLoading ? (

@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/daemon/start.ts
+RANGE {"path":"packages/cli/src/commands/daemon/start.ts","old_lines":[96,106],"new_lines":[46,46],"diff_block_lines":[73,83],"hunk_header":"@@ -80,63 +44,7 @@ export async function runStart(options: StartOptions): Promise<void> {","substantive_changed_lines":9}
+-    logger = createRootLogger(persistedConfig)
+-    config = loadConfig(paseoHome, { cli: toCliOverrides(options) })
+-  } catch (err) {
+-    exitWithError(getErrorMessage(err))
+-  }
+-
+-  let daemon: Awaited<ReturnType<typeof createPaseoDaemon>>
+-  try {
+-    daemon = await createPaseoDaemon(config, logger)
+-  } catch (err) {
+-    const message = getErrorMessage(err)

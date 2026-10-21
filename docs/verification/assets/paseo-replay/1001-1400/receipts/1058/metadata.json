@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1058,
+  "revision": "9bd26a46e1d38ef8091d67131dd685eadf1df563",
+  "date": "2026-02-06T23:49:40+07:00",
+  "committer_date": "2026-02-06T23:49:40+07:00",
+  "parents": [
+    "4a4cff105fce4ca793148c75e592c4084784f665"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/server/scripts/download-speech-models.ts",
+    "M\tpackages/server/scripts/list-speech-models.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "A\tpackages/server/src/server/speech/providers/local/models.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-offline-recognizer.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-online-recognizer.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-stt.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:b5387ac8842dc3b6b8c10036e4c229a0379e57dbee3c335a74b89636e2fd757f",
+  "diff_tree_digest": "sha256:1c867459f70d901f9bb00aa375dbbe97e9b47d5bf2b88a427e4c2b917a82a0fe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/config.ts",
+      "old_lines": [
+        148,
+        148
+      ],
+      "new_lines": [
+        152,
+        162
+      ],
+      "diff_block_lines": [
+        36,
+        46
+      ],
+      "hunk_header": "@@ -147,15 +151,17 @@ export function resolveLocalSpeechConfig(params: {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 261,
+  "receipt_file": "receipts/1058/selected.patch"
+}

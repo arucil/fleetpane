@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1159,
+  "revision": "b64fa4ca93be5ce523e4fe205f11e4379c9d148f",
+  "date": "2026-02-13T10:15:44+07:00",
+  "committer_date": "2026-02-13T10:15:44+07:00",
+  "parents": [
+    "bf432b3d3aa816134366fd5da6b72509fa438ed1"
+  ],
+  "subject": "feat(dictation): add adaptive finish timeout with server-provided budget",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:fc3d2299f1b982c4e669d1feadfae1a15da69fb54ae70cc70fcc16533d914367",
+  "diff_tree_digest": "sha256:7cde07e752472e2fde39bf96412d1e2bdbd4beea5ecaa0677b9b808058b5aceb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        1505,
+        1505
+      ],
+      "new_lines": [
+        1535,
+        1545
+      ],
+      "diff_block_lines": [
+        98,
+        108
+      ],
+      "hunk_header": "@@ -1503,16 +1532,99 @@ export class DaemonClient {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 243,
+  "receipt_file": "receipts/1159/selected.patch"
+}

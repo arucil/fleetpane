@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1094,
+  "revision": "015c0d777268a5af6595aa848f39e6b8358c7fe4",
+  "date": "2026-02-09T13:30:20+07:00",
+  "committer_date": "2026-02-09T13:30:20+07:00",
+  "parents": [
+    "e75325ca2967286df5499eeb7ae2feddad7dca1c",
+    "62c0a69ae9493e70b68f721da5e58ed1e335ea8e"
+  ],
+  "subject": "Merge branch 'main' into investigate/ui-network-responsive",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/codex/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/tool-call-detail-primitives.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "A\tpackages/server/src/shared/path-utils.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:90f82afe920fb9f431bc5d7213f80e7bd503d563b1dfb3c8b2c4632c094a405b",
+  "diff_tree_digest": "sha256:aef831ac720a4b65582651af4ddb89fd764cd2ee96e978183b299c7fc070c5df",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        41,
+        51
+      ],
+      "diff_block_lines": [
+        47,
+        57
+      ],
+      "hunk_header": "@@ -0,0 +1,67 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 2181,
+  "receipt_file": "receipts/1094/selected.patch"
+}

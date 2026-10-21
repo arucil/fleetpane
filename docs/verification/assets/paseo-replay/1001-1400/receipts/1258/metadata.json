@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1258,
+  "revision": "803e31e61c036d376e31836a562fb17ffdacf186",
+  "date": "2026-02-18T10:27:22+07:00",
+  "committer_date": "2026-02-18T10:27:22+07:00",
+  "parents": [
+    "79b64d3e386faebd8e80f26740020a3a55717d88"
+  ],
+  "subject": "fix(server): hide hidden directories from cwd suggestions",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/directory-suggestions.test.ts",
+    "M\tpackages/server/src/utils/directory-suggestions.ts"
+  ],
+  "source_receipt_digest": "sha256:ff6c5bf3f22f6d49eb3ba2214b80762e9d45a56633e6b1958c8e1c0f59513ea9",
+  "diff_tree_digest": "sha256:97243b87c6af088fb288085f2c5c2eb70eb07f7e28e6fb00725ea463ab2db7a7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/directory-suggestions.ts",
+      "old_lines": [
+        387,
+        390
+      ],
+      "new_lines": [
+        387,
+        393
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -387,4 +387,7 @@ async function listChildDirectories(input: {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/1258/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[412,412],"new_lines":[419,429],"diff_block_lines":[60,70],"hunk_header":"@@ -411,4 +418,54 @@ function AgentScreenContent({","substantive_changed_lines":7}
+ 
++  useEffect(() => {
++    if (reconnectNoticeTimeoutRef.current) {
++      clearTimeout(reconnectNoticeTimeoutRef.current);
++      reconnectNoticeTimeoutRef.current = null;
++    }
++
++    if (connectionStatus === "online") {
++      if (showReconnectNotice || dismissedReconnectNotice) {
++        setShowConnectedNotice(true);
++      }

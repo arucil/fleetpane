@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1398,
+  "revision": "888af294858b480b95a301ad1af5eaeb25eeb697",
+  "date": "2026-03-03T17:35:48+07:00",
+  "committer_date": "2026-03-03T17:35:48+07:00",
+  "parents": [
+    "f418f3ab02936ed88feddcb58a11b6ee1923db2a"
+  ],
+  "subject": "feat: add worktree archiving with context menu and improved logging",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/stores/checkout-git-actions-store.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:0e455bc5049cfda512e02bf882c67a917cf98ae07a2a6cb55db9056119e8ccdc",
+  "diff_tree_digest": "sha256:92f72d7aa017f611038303c201407a0a46e5242660e8b9e8960158d11d2415ea",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-agent-list.tsx",
+      "old_lines": [
+        203,
+        207
+      ],
+      "new_lines": [
+        227,
+        235
+      ],
+      "diff_block_lines": [
+        70,
+        80
+      ],
+      "hunk_header": "@@ -202,8 +226,69 @@ function ProjectRow({",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 363,
+  "receipt_file": "receipts/1398/selected.patch"
+}

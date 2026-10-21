@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1262,
+  "revision": "483966a05b1df9996089545be4304998641192ad",
+  "date": "2026-02-18T11:13:48+07:00",
+  "committer_date": "2026-02-18T11:13:48+07:00",
+  "parents": [
+    "08a35c9dbf8ed8734eac070de3227adbd80b411c"
+  ],
+  "subject": "fix(app): confirm terminal close for running shell commands (#52)",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/components/terminal-pane.tsx"
+  ],
+  "source_receipt_digest": "sha256:659a56af78b4f27c7d5d47bffbb8ed378184962ffe1d7ae9b93f7cf1d6114c4e",
+  "diff_tree_digest": "sha256:c1609035d5d62617ee14878c26a397419b60732e20ab8a6e560cca0e453facef",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        598,
+        598
+      ],
+      "new_lines": [
+        599,
+        609
+      ],
+      "diff_block_lines": [
+        21,
+        31
+      ],
+      "hunk_header": "@@ -596,4 +597,17 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 63,
+  "receipt_file": "receipts/1262/selected.patch"
+}

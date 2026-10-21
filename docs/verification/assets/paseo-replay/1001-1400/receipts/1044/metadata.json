@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1044,
+  "revision": "c172e5c939854b343fc75fe841b962708472e010",
+  "date": "2026-02-06T16:31:41+07:00",
+  "committer_date": "2026-02-06T16:31:41+07:00",
+  "parents": [
+    "bbad9b284a64f3423ae3b6402eb3f3b7a7e8e139"
+  ],
+  "subject": "Remove voice conversation store and centralize cwd validation",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "D\tpackages/server/src/server/agent/working-directory-validation.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "D\tpackages/server/src/server/voice-conversation-store.ts",
+    "D\tpackages/server/src/server/voice-conversations.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:7d6bc074785431eea2d35ea683a22b2bb40c626d1e6c1195572af486257e801b",
+  "diff_tree_digest": "sha256:f9e4d3d4c9962c6a02634ccde3ab77e52f9b6701b637fd8f2dad5b9a03d804bc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1230,
+        1230
+      ],
+      "new_lines": [
+        1211,
+        1221
+      ],
+      "diff_block_lines": [
+        93,
+        103
+      ],
+      "hunk_header": "@@ -1215,25 +1201,29 @@ export class Session {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 304,
+  "receipt_file": "receipts/1044/selected.patch"
+}

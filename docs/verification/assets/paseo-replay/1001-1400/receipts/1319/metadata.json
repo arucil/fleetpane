@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1319,
+  "revision": "6dad3212daf9d0b20675e53b6117fa5277e13462",
+  "date": "2026-02-20T13:34:06+07:00",
+  "committer_date": "2026-02-20T13:34:06+07:00",
+  "parents": [
+    "e22647af62a19d8f5445655d980e5baf092ef28d"
+  ],
+  "subject": "fix: interrupt running agents before archive",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/archive.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:1eba075e39e46d477ec4808e69ff84bd78c2669c28881bb95a5261b238e03294",
+  "diff_tree_digest": "sha256:065df1156fb1ddf1d15ba54bc3b3e40d2361c95ac0d1645d411ae834baca025a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5252,
+        5252
+      ],
+      "new_lines": [
+        5271,
+        5281
+      ],
+      "diff_block_lines": [
+        41,
+        51
+      ],
+      "hunk_header": "@@ -5251,4 +5270,18 @@ export class Session {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 63,
+  "receipt_file": "receipts/1319/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[1945,1955],"new_lines":[1964,1964],"diff_block_lines":[95,105],"hunk_header":"@@ -1944,34 +1963,26 @@ export class DaemonClient {","substantive_changed_lines":8}
+   ): Promise<CheckoutMergeFromBasePayload> {
+-    const resolvedRequestId = this.createRequestId(requestId);
+-    const message = SessionInboundMessageSchema.parse({
+-      type: "checkout_merge_from_base_request",
+-      cwd,
+-      baseRef: input.baseRef,
+-      requireCleanTarget: input.requireCleanTarget,
+-      requestId: resolvedRequestId,
+-    });
+-    return this.sendCorrelatedRequest({
+-      requestId: resolvedRequestId,

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/ui/segmented-control.tsx
+RANGE {"path":"packages/app/src/components/ui/segmented-control.tsx","old_lines":[0,0],"new_lines":[29,39],"diff_block_lines":[35,45],"hunk_header":"@@ -0,0 +1,145 @@","substantive_changed_lines":5}
++
++export function SegmentedControl<T extends string>({
++  options,
++  value,
++  onValueChange,
++  size = "md",
++  style,
++  testID,
++}: SegmentedControlProps<T>) {
++  const { theme } = useUnistyles();
++  const segmentSizeStyle = size === "sm" ? styles.segmentSm : styles.segmentMd;

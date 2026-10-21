@@ -1,0 +1,13 @@
+FILE packages/app/src/utils/new-agent-routing.ts
+RANGE {"path":"packages/app/src/utils/new-agent-routing.ts","old_lines":[34,34],"new_lines":[34,44],"diff_block_lines":[7,17],"hunk_header":"@@ -33,9 +33,32 @@ export function resolveSelectedAgentForNewAgent(input: {","substantive_changed_lines":9}
+ 
++function inferMainRepoRootFromPaseoWorktreePath(cwd: string): string | null {
++  const normalizedPath = cwd.replace(/\\/g, "/");
++  const marker = "/.paseo/worktrees";
++  const markerIndex = normalizedPath.indexOf(marker);
++  if (markerIndex <= 0) {
++    return null;
++  }
++  const markerEnd = markerIndex + marker.length;
++  const nextChar = normalizedPath[markerEnd];
++  if (nextChar && nextChar !== "/") {

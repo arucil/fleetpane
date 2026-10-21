@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[92,96],"new_lines":[92,96],"diff_block_lines":[5,11],"hunk_header":"@@ -92,5 +92,5 @@ jobs:","substantive_changed_lines":2}
+@@ -92,5 +92,5 @@ jobs:
+ 
+       - name: Build and publish Tauri release
+-        uses: tauri-apps/tauri-action@v1
++        uses: tauri-apps/tauri-action@v0
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

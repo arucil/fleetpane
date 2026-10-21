@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1149,
+  "revision": "972895d85564eeb098e136bbca4755d7ddfef228",
+  "date": "2026-02-12T18:16:36+07:00",
+  "committer_date": "2026-02-12T18:16:36+07:00",
+  "parents": [
+    "50acf2dd4483edabe5b36462f863c497793b4568"
+  ],
+  "subject": "Reduce daemon startup noise and normalize tool-call mappers",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-detail-primitives.ts",
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:02a83747960053bc3de38e3e41bdb11482e26dfd0621c92107c96b9951ce1d62",
+  "diff_tree_digest": "sha256:91db97b774790b7345c45f648ced2dcf0ac3a81c337cb3ea31d4e7348cbf2ee3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+      "old_lines": [
+        79,
+        89
+      ],
+      "new_lines": [
+        79,
+        79
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -78,54 +78,36 @@ const ClaudeToolCallPass2Schema = z.discriminatedUnion(\"toolKind\", [",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 288,
+  "receipt_file": "receipts/1149/selected.patch"
+}

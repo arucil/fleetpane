@@ -1,0 +1,12 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1088,1096],"new_lines":[1088,1091],"diff_block_lines":[5,14],"hunk_header":"@@ -1088,9 +1088,4 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":4}
+@@ -1088,9 +1088,4 @@ class ClaudeAgentSession implements AgentSession {
+   ): AsyncGenerator<AgentStreamEvent> {
+     yield { type: "turn_started", provider: "claude" };
+-    yield {
+-      type: "timeline",
+-      provider: "claude",
+-      item: { type: "user_message", text: invocation.rawInput },
+-    };
+ 
+     try {

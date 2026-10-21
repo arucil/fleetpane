@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/privacy.tsx
+RANGE {"path":"packages/website/src/routes/privacy.tsx","old_lines":[0,0],"new_lines":[16,26],"diff_block_lines":[22,32],"hunk_header":"@@ -0,0 +1,106 @@","substantive_changed_lines":9}
++
++function Privacy() {
++  return (
++    <div className="min-h-screen bg-background">
++      <div className="max-w-3xl mx-auto p-6 md:p-12">
++        <h1 className="text-3xl font-medium mb-8">Privacy Policy</h1>
++
++        <div className="space-y-6 text-white/70 leading-relaxed">
++          <p>
++            Paseo is a self-hosted tool for managing coding agents. Your code and
++            data stay on your machine.

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/persisted-config.ts
+RANGE {"path":"packages/server/src/server/persisted-config.ts","old_lines":[177,177],"new_lines":[176,186],"diff_block_lines":[13,23],"hunk_header":"@@ -176,4 +175,32 @@ function getLogger(logger: LoggerLike | undefined): LoggerLike | undefined {","substantive_changed_lines":7}
+ 
++function stripDeprecatedLocalSpeechConfigFields(parsed: unknown): unknown {
++  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
++    return parsed;
++  }
++
++  const root = { ...(parsed as Record<string, unknown>) };
++  const providers = root.providers;
++  if (!providers || typeof providers !== "object" || Array.isArray(providers)) {
++    return root;
++  }

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1377,
+  "revision": "c0420ac1f96a7e4831d3950bc7ac50f5b82da00e",
+  "date": "2026-02-25T20:05:23+07:00",
+  "committer_date": "2026-02-25T20:05:23+07:00",
+  "parents": [
+    "91634ca6f23b19a6772f680367dd662932234acb"
+  ],
+  "subject": "Fix mobile terminal tab routing and remount restoration",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx"
+  ],
+  "source_receipt_digest": "sha256:533dd8132c51dd6b9e7ec2b3bd70659fa5821936eae4188a5409c3e8a28c1a22",
+  "diff_tree_digest": "sha256:b2075cd1e35c33c7ac3c99cd208a96c8218a7abd1971ceed4b6fd2d414ca4a80",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        172,
+        172
+      ],
+      "new_lines": [
+        177,
+        187
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -170,4 +170,22 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 144,
+  "receipt_file": "receipts/1377/selected.patch"
+}

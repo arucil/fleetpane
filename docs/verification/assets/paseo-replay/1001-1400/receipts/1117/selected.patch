@@ -1,0 +1,13 @@
+FILE packages/app/src/voice/speech-segmenter.ts
+RANGE {"path":"packages/app/src/voice/speech-segmenter.ts","old_lines":[172,173],"new_lines":[192,201],"diff_block_lines":[61,71],"hunk_header":"@@ -171,77 +191,101 @@ export class SpeechSegmenter {","substantive_changed_lines":8}
+ 
+-    const speechDetected = volume > this.config.volumeThreshold;
++    const speechDetectedForStart = volume > this.config.volumeThreshold;
++    const speechDetectedForContinue = volume > this.config.volumeReleaseThreshold;
++
++    if (!this.speechConfirmed) {
++      if (speechDetectedForStart) {
++        // Initial detection phase.
++        this.confirmedDropStartMs = null;
++        if (this.speechDetectionStartMs === null) {
++          this.speechDetectionStartMs = nowMs;

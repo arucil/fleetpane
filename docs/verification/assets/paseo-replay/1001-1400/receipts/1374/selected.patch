@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-stream-render-strategy.ts
+RANGE {"path":"packages/app/src/components/agent-stream-render-strategy.ts","old_lines":[139,139],"new_lines":[139,149],"diff_block_lines":[7,17],"hunk_header":"@@ -138,4 +138,80 @@ function scrollAnchorIntoView(params: {","substantive_changed_lines":9}
+ 
++function forceScrollContainerToBottom(
++  refs: StreamRenderRefs,
++  fallbackOffset: number
++): void {
++  const resolveNode = (
++    input: unknown
++  ): HTMLElement | null => {
++    if (!(input instanceof HTMLElement)) {
++      return null;
++    }

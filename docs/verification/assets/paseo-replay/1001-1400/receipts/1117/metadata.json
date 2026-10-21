@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1117,
+  "revision": "0d60588431ad0b939511e4852f13120fdb48576d",
+  "date": "2026-02-11T11:03:51+07:00",
+  "committer_date": "2026-02-11T11:04:49+07:00",
+  "parents": [
+    "002c09681dc1a87f3824977b701809e4ed08b379"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/volume-meter.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/voice/realtime-voice-config.ts",
+    "M\tpackages/app/src/voice/speech-segmenter.test.ts",
+    "M\tpackages/app/src/voice/speech-segmenter.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/generate-sherpa-tts-matrix.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/website/src/routes/docs/voice.tsx"
+  ],
+  "source_receipt_digest": "sha256:115ec044a6fec12ca42941a0eeaf2f66c5969d216f21630b586e96f87afd13e2",
+  "diff_tree_digest": "sha256:f01e4a28c3894865e89350c676fb85ce9bbcbade8fe3a2757488354a10f09c54",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/voice/speech-segmenter.ts",
+      "old_lines": [
+        172,
+        173
+      ],
+      "new_lines": [
+        192,
+        201
+      ],
+      "diff_block_lines": [
+        61,
+        71
+      ],
+      "hunk_header": "@@ -171,77 +191,101 @@ export class SpeechSegmenter {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1084,
+  "receipt_file": "receipts/1117/selected.patch"
+}

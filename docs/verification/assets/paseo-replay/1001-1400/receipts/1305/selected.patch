@@ -1,0 +1,11 @@
+FILE packages/app/src/components/agent-form/agent-form-dropdowns.tsx
+RANGE {"path":"packages/app/src/components/agent-form/agent-form-dropdowns.tsx","old_lines":[863,869],"new_lines":[863,867],"diff_block_lines":[5,13],"hunk_header":"@@ -863,7 +863,5 @@ export function WorkingDirectoryDropdown({","substantive_changed_lines":4}
+@@ -863,7 +863,5 @@ export function WorkingDirectoryDropdown({
+   const handleOpenChange = useCallback((open: boolean) => setIsOpen(open), []);
+ 
+-  const emptyText = suggestedPaths.length > 0
+-    ? "No agent directories match your search."
+-    : "We'll suggest directories from agents on this host once they exist.";
++  const emptyText = "No agent directories match your search.";
+ 
+   return (

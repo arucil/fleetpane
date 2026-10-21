@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1090,
+  "revision": "896f88fa34f3073d1e78cfb025df815095ee302b",
+  "date": "2026-02-09T09:07:14+07:00",
+  "committer_date": "2026-02-09T09:07:14+07:00",
+  "parents": [
+    "6d4992b2f5a13a2832e017a10af38a41160b2b3b"
+  ],
+  "subject": "refactor: finish strict tool-call typing and mapper dedup",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "A\tpackages/server/src/server/agent/providers/standard-tool-call-schemas.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-mapper-utils.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "A\tpackages/server/src/shared/path-utils.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:7f45d4e6b126eabc59ef2afe28a7cf520d3b5a94ab6cc80d022ce5f62cfa6c0f",
+  "diff_tree_digest": "sha256:8968d8a4389ad68ea1f2b716f6022a2d88376128372d2f3469cb5b22215fb60d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+      "old_lines": [
+        475,
+        485
+      ],
+      "new_lines": [
+        56,
+        56
+      ],
+      "diff_block_lines": [
+        478,
+        488
+      ],
+      "hunk_header": "@@ -474,94 +55,11 @@ function coerceCallId(callId: string | null | undefined, name: string, input: un",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1759,
+  "receipt_file": "receipts/1090/selected.patch"
+}

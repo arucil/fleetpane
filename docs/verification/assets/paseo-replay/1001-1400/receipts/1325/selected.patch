@@ -1,0 +1,13 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[128,128],"new_lines":[129,139],"diff_block_lines":[15,25],"hunk_header":"@@ -127,4 +128,43 @@ export function ToolCallDetailsContent({","substantive_changed_lines":10}
+     );
++  } else if (detail?.type === "sub_agent") {
++    const activityLog = detail.log.replace(/^\n+/, "");
++    const hasLog = activityLog.length > 0;
++    const fallbackHeader =
++      detail.subAgentType && detail.description
++        ? `${detail.subAgentType}: ${detail.description}`
++        : detail.subAgentType ?? detail.description ?? "Sub-agent activity";
++    sections.push(
++      <View
++        key="sub-agent"

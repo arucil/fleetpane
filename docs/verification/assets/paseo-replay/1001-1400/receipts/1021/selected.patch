@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/agent/agent-ready-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/agent-ready-screen.tsx","old_lines":[725,735],"new_lines":[766,766],"diff_block_lines":[58,68],"hunk_header":"@@ -724,26 +765,19 @@ function AgentScreenContent({","substantive_changed_lines":10}
+             >
+-              {isInitializing && !shouldUseOptimisticStream ? (
+-                <View style={styles.loadingContainer}>
+-                  <ActivityIndicator
+-                    size="large"
+-                    color={theme.colors.primary}
+-                  />
+-                  <Text style={styles.loadingText}>Loading agent...</Text>
+-                </View>
+-              ) : (
+-                <AgentStreamView

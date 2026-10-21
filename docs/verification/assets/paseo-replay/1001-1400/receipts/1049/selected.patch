@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[4878,4888],"new_lines":[4729,4729],"diff_block_lines":[303,313],"hunk_header":"@@ -4873,370 +4727,20 @@ export class Session {","substantive_changed_lines":10}
+-          ? latestUserText
+-          : (() => {
+-              const lastUser = [...this.messages]
+-                .reverse()
+-                .find((message) => message.role === "user");
+-              if (!lastUser) {
+-                return "";
+-              }
+-              return typeof lastUser.content === "string"
+-                ? lastUser.content
+-                : JSON.stringify(lastUser.content);

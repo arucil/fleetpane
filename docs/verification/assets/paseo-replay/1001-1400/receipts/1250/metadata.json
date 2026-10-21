@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1250,
+  "revision": "8c0d289c2acb1386e7bbcf5f7417b32283788e07",
+  "date": "2026-02-17T23:01:56+07:00",
+  "committer_date": "2026-02-17T23:03:11+07:00",
+  "parents": [
+    "a5842482b01cde005d5d41945c87de83c74a5ddc"
+  ],
+  "subject": "fix(app): refit terminal when returning to agent",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:702d84f9566195a31cccfb6f6b84af0390e9cfc776e6af5db6105c10892dd709",
+  "diff_tree_digest": "sha256:3a3d9946bab7a862eb0feaaa0057d32df67f0e0d4c9c456b129b6dab909aca6c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        255,
+        255
+      ],
+      "new_lines": [
+        258,
+        268
+      ],
+      "diff_block_lines": [
+        25,
+        35
+      ],
+      "hunk_header": "@@ -254,4 +257,28 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 39,
+  "receipt_file": "receipts/1250/selected.patch"
+}

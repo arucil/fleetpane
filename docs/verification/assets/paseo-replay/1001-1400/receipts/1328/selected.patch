@@ -1,0 +1,13 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[1069,1069],"new_lines":[1069,1079],"diff_block_lines":[7,17],"hunk_header":"@@ -1068,4 +1068,14 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":6}
+     const agent = this.agentManager.getAgent(params.agentId);
++    if (agent?.labels?.ui !== "true") {
++      this.logger.debug(
++        {
++          agentId: params.agentId,
++          labels: agent?.labels ?? null,
++        },
++        "Skipping attention notification for non-UI agent"
++      );
++      return;
++    }

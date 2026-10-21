@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[202,212],"new_lines":[202,202],"diff_block_lines":[7,17],"hunk_header":"@@ -201,44 +201,48 @@ function Feature({","substantive_changed_lines":10}
+   return (
+-    <div className="pt-10 space-y-4">
+-      <CodeBlock>npm install -g @getpaseo/cli && paseo</CodeBlock>
+-      <div className="flex flex-col sm:flex-row gap-3">
+-        <a
+-          href={macDownloadHref}
+-          target="_blank"
+-          rel="noopener noreferrer"
+-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-white hover:bg-white/10 transition-colors"
+-        >
+-          <AppleIcon className="h-4 w-4" />

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[733,733],"new_lines":[702,712],"diff_block_lines":[107,117],"hunk_header":"@@ -715,24 +700,27 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":10}
++  const renderFlatItem = useCallback(
++    ({ item }: { item: DiffFlatItem }) => {
++      if (item.type === "header") {
++        return (
++          <DiffFileHeader
++            file={item.file}
++            isExpanded={item.isExpanded}
++            onToggle={handleToggleExpanded}
++            testID={`diff-file-${item.fileIndex}`}
++          />
++        );

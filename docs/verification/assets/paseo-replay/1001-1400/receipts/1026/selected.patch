@@ -1,0 +1,13 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[716,724],"new_lines":[700,704],"diff_block_lines":[65,75],"hunk_header":"@@ -715,20 +699,13 @@ export async function createPaseoDaemon(","substantive_changed_lines":7}
+   const needsOpenAiTts = !ttsService && voiceTtsProvider === "openai";
+-  const needsOpenAiDictation =
+-    dictationSttProvider === "openai" || (dictationSttProvider === "local" && !dictationSttService);
+-
+-  const fallbackOpenAiStt = !sttService && voiceSttProvider === "local" && Boolean(openaiSttApiKey);
+-  const fallbackOpenAiTts = !ttsService && voiceTtsProvider === "local" && Boolean(openaiTtsApiKey);
++  const needsOpenAiDictation = dictationSttProvider === "openai";
+ 
+   if (
+-    (needsOpenAiStt || needsOpenAiTts || needsOpenAiDictation || fallbackOpenAiStt || fallbackOpenAiTts) &&
++    (needsOpenAiStt || needsOpenAiTts || needsOpenAiDictation) &&

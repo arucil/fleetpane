@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1226,
+  "revision": "459af22670c80f0da1a1fe09cb6561b219f724cc",
+  "date": "2026-02-17T10:04:58+07:00",
+  "committer_date": "2026-02-17T10:04:58+07:00",
+  "parents": [
+    "12ba65d6e7edcb304cfaacb03d5e860e61d67b4d"
+  ],
+  "subject": "Add cross-platform confirm dialog wrapper for daemon restart",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "A\tpackages/app/src/utils/confirm-dialog.test.ts",
+    "A\tpackages/app/src/utils/confirm-dialog.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs"
+  ],
+  "source_receipt_digest": "sha256:b54f644e87abf9507c5b66a41663c47f9577f9a3ae64e43a41033cca35e8563f",
+  "diff_tree_digest": "sha256:5df72d84c94626d11f05b4948eec5a6ac5b9ae1e1e6a4df861fec2f283b51dea",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/confirm-dialog.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        35,
+        45
+      ],
+      "diff_block_lines": [
+        41,
+        51
+      ],
+      "hunk_header": "@@ -0,0 +1,144 @@",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 253,
+  "receipt_file": "receipts/1226/selected.patch"
+}

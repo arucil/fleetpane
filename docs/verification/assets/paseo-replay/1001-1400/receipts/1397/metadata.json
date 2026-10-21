@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1397,
+  "revision": "f418f3ab02936ed88feddcb58a11b6ee1923db2a",
+  "date": "2026-03-02T20:02:54+07:00",
+  "committer_date": "2026-03-02T20:02:54+07:00",
+  "parents": [
+    "92b5f1e963210e6afff01e259b639a89baa4791f"
+  ],
+  "subject": "feat: add file tabs and improve terminal rendering with WebGL",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "A\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/file/[fileId].tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "A\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/sortable-inline-list.web.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/stores/workspace-file-tabs-store.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-pump.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-pump.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "A\tpackages/app/src/utils/to-xterm-theme.ts",
+    "M\tpackages/desktop/package.json"
+  ],
+  "source_receipt_digest": "sha256:5a860e0869c5a4ec202e7cb4853fc50aa76813353cd572f4e86944c3acb27e75",
+  "diff_tree_digest": "sha256:ad9b1eaadaa78a6644f41f912bdcc7f6a489d8ba309139039562c43b4c9b6b8e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/file-explorer-pane.tsx",
+      "old_lines": [
+        708,
+        718
+      ],
+      "new_lines": [
+        564,
+        564
+      ],
+      "diff_block_lines": [
+        281,
+        291
+      ],
+      "hunk_header": "@@ -702,383 +562,64 @@ export function FileExplorerPane({",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 1402,
+  "receipt_file": "receipts/1397/selected.patch"
+}

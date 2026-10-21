@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts","old_lines":[52,61],"new_lines":[55,57],"diff_block_lines":[24,34],"hunk_header":"@@ -51,28 +54,33 @@ export class SherpaOnnxTTS implements TextToSpeechProvider {","substantive_changed_lines":8}
+ 
+-    const modelConfigKey =
++    const modelConfig =
+       config.preset === "kokoro-en-v0_19"
+-        ? "offlineTtsKokoroModelConfig"
+-        : "offlineTtsKittenModelConfig";
+-
+-    const modelConfig = {
+-      [modelConfigKey]: {
+-        model: modelPath,
+-        voices: voicesPath,

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[90,100],"new_lines":[79,79],"diff_block_lines":[33,43],"hunk_header":"@@ -68,37 +68,27 @@ import { AGENT_PROVIDER_DEFINITIONS } from \"./agent/provider-manifest.js\";","substantive_changed_lines":8}
+-  const base = path.basename(argv1).toLowerCase();
+-  if (base.includes("tsx") && process.argv[2]) {
+-    const resolved = {
+-      command: process.execPath,
+-      baseArgs: [argv1, process.argv[2], "__paseo_voice_mcp_bridge"],
+-    };
+-    logger.info({ source: "tsx", command: resolved.command, baseArgs: resolved.baseArgs }, "Resolved voice MCP bridge command");
+-    return resolved;
+-  }
+-
+-  const resolved = { command: argv1, baseArgs: ["__paseo_voice_mcp_bridge"] };

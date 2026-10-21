@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1229,
+  "revision": "34e35621f087719e545930897c6bc72703d2ee8c",
+  "date": "2026-02-17T12:16:02+07:00",
+  "committer_date": "2026-02-17T12:16:02+07:00",
+  "parents": [
+    "efde557d6f1de0273909cdb64013500a22966dfd"
+  ],
+  "subject": "simplify speech bootstrap and clean daemon startup locking",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/cli/src/commands/onboard.ts",
+    "M\tpackages/cli/tests/17-onboard.test.ts",
+    "M\tpackages/server/scripts/dev-runner.ts",
+    "M\tpackages/server/scripts/download-speech-models.ts",
+    "M\tpackages/server/scripts/generate-sherpa-tts-matrix.ts",
+    "M\tpackages/server/scripts/transcribe-local-wav.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/config.ts",
+    "M\tpackages/server/src/server/speech/providers/local/models.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/website/public/schemas/paseo.config.v1.json",
+    "M\tpackages/website/src/routes/docs/configuration.tsx",
+    "M\tpackages/website/src/routes/docs/voice.tsx"
+  ],
+  "source_receipt_digest": "sha256:1908024a2db6b5753ed842f5d545250908dd3f87a5a5e9e45ac8a4640d380420",
+  "diff_tree_digest": "sha256:c41774c2ddf9eb6b8c560817aa49d6893cb7d8c31706dea265252bddc340bd32",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/persisted-config.ts",
+      "old_lines": [
+        177,
+        177
+      ],
+      "new_lines": [
+        176,
+        186
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -176,4 +175,32 @@ function getLogger(logger: LoggerLike | undefined): LoggerLike | undefined {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 158,
+  "receipt_file": "receipts/1229/selected.patch"
+}

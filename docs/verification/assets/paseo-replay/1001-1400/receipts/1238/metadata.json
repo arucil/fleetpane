@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1238,
+  "revision": "9255212043410d2db0a54e00695b666c3dd5a91c",
+  "date": "2026-02-17T17:16:47+07:00",
+  "committer_date": "2026-02-17T17:16:47+07:00",
+  "parents": [
+    "a03da6774a66ec561ac93ea32824be88ce180869"
+  ],
+  "subject": "fix(server): self-heal node-pty spawn-helper execute bit",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:2a4b22eb172af97a0b063c1d13bb66ef70864cfdf20441da59cd3f801cfa0b91",
+  "diff_tree_digest": "sha256:6876da7b715017ab35de12468889031c98fcf738669a2b70188e60d509b59a63",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/terminal/terminal.ts",
+      "old_lines": [
+        86,
+        86
+      ],
+      "new_lines": [
+        97,
+        107
+      ],
+      "diff_block_lines": [
+        26,
+        36
+      ],
+      "hunk_header": "@@ -84,4 +89,71 @@ export interface CreateTerminalOptions {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 63,
+  "receipt_file": "receipts/1238/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[564,574],"new_lines":[583,584],"diff_block_lines":[44,54],"hunk_header":"@@ -559,29 +574,39 @@ export function AgentInputArea({","substantive_changed_lines":8}
+ 
+-  const hasSendableContent = userInput.trim().length > 0 || selectedImages.length > 0;
+-
+   const cancelButton = isAgentRunning && !hasSendableContent ? (
+-    <Pressable
+-      onPress={handleCancelAgent}
+-      disabled={!isConnected || isCancellingAgent}
+-      accessibilityLabel={isCancellingAgent ? "Canceling agent" : "Stop agent"}
+-      accessibilityRole="button"
+-      style={[
+-        styles.cancelButton as any,

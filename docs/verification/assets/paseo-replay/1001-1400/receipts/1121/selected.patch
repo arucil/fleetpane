@@ -1,0 +1,13 @@
+FILE packages/server/src/server/persisted-config.ts
+RANGE {"path":"packages/server/src/server/persisted-config.ts","old_lines":[146,146],"new_lines":[146,156],"diff_block_lines":[7,17],"hunk_header":"@@ -145,4 +145,19 @@ export type PersistedConfig = z.infer<typeof PersistedConfigSchema>;","substantive_changed_lines":8}
+ const CONFIG_FILENAME = "config.json";
++const DEFAULT_PERSISTED_CONFIG: PersistedConfig = PersistedConfigSchema.parse({
++  version: 1,
++  daemon: {
++    listen: "127.0.0.1:6767",
++    cors: {
++      allowedOrigins: ["https://app.paseo.sh"],
++    },
++    relay: {
++      enabled: true,
++    },

@@ -1,0 +1,86 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1220,
+  "revision": "170ee27813deda0e4d20eea92b36102f8e85d6e7",
+  "date": "2026-02-16T23:19:01+07:00",
+  "committer_date": "2026-02-16T23:19:01+07:00",
+  "parents": [
+    "22da0951d5a4b3df08edee5480b38f8f60a74862"
+  ],
+  "subject": "feat: improve agent workspace flows and directory suggestions",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/app.config.js",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-file-drop-zone.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/stores/download-store.ts",
+    "A\tpackages/app/src/utils/agent-attention.test.ts",
+    "A\tpackages/app/src/utils/agent-attention.ts",
+    "A\tpackages/app/src/utils/agent-working-directory-suggestions.test.ts",
+    "A\tpackages/app/src/utils/agent-working-directory-suggestions.ts",
+    "A\tpackages/app/src/utils/open-external-url.ts",
+    "M\tpackages/app/src/utils/syntax-highlighter.ts",
+    "A\tpackages/app/src/utils/terminal-list.test.ts",
+    "A\tpackages/app/src/utils/terminal-list.ts",
+    "A\tpackages/app/src/utils/working-directory-suggestions.test.ts",
+    "A\tpackages/app/src/utils/working-directory-suggestions.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/utils/syntax-highlighter.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts",
+    "A\tpackages/server/src/utils/directory-suggestions.test.ts",
+    "A\tpackages/server/src/utils/directory-suggestions.ts",
+    "M\tpackages/server/src/utils/worktree-metadata.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:c3b8d1a22123cd04588f6dc5881fe9c537e0276311120770cd424d88a75ec28a",
+  "diff_tree_digest": "sha256:09537c5d05f18b368bc36d57ab1a465f648cf37159ce4e00410c83fa51fd4071",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-file-drop-zone.ts",
+      "old_lines": [
+        67,
+        67
+      ],
+      "new_lines": [
+        131,
+        141
+      ],
+      "diff_block_lines": [
+        91,
+        101
+      ],
+      "hunk_header": "@@ -63,76 +127,150 @@ export function useFileDropZone({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 2330,
+  "receipt_file": "receipts/1220/selected.patch"
+}

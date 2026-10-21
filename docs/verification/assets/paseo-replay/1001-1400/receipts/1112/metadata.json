@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1112,
+  "revision": "ade4fb2e45e5497730474c0a77c57cf8cba08d6e",
+  "date": "2026-02-10T11:43:07+07:00",
+  "committer_date": "2026-02-10T11:43:07+07:00",
+  "parents": [
+    "7001928f4fbdd005c7cc0314f27e5eaa33d5fb6f"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "D\tdummy-edit.txt",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/app/src/utils/notification-routing.test.ts",
+    "A\tpackages/app/src/utils/notification-routing.ts",
+    "A\tpackages/app/src/utils/os-notifications.test.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:fb5c866a67f894db9b72dd168da9972c763088513fbb33ce74574c409a59ab78",
+  "diff_tree_digest": "sha256:9647e8833e95347e0a8b2eb26c6b1a6edcfc7d9e90bd104ccf5dfb3932b77455",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/os-notifications.ts",
+      "old_lines": [
+        43,
+        43
+      ],
+      "new_lines": [
+        56,
+        66
+      ],
+      "diff_block_lines": [
+        29,
+        39
+      ],
+      "hunk_header": "@@ -42,4 +55,69 @@ async function ensureNotificationPermission(): Promise<boolean> {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 752,
+  "receipt_file": "receipts/1112/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[1816,1816],"new_lines":[1828,1838],"diff_block_lines":[57,67],"hunk_header":"@@ -1815,4 +1827,60 @@ export class AgentManager {","substantive_changed_lines":9}
+ 
++  private appendSystemErrorTimelineMessage(
++    agent: ActiveManagedAgent,
++    provider: AgentProvider,
++    message: string,
++    options?: {
++      fromHistory?: boolean;
++      canonicalUserMessagesById?: ReadonlyMap<string, string>;
++    }
++  ): void {
++    if (options?.fromHistory) {

@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[770,770],"new_lines":[822,832],"diff_block_lines":[169,179],"hunk_header":"@@ -768,4 +820,102 @@ function WorkspaceScreenContent({","substantive_changed_lines":8}
++  const getTabAfterClosingTerminal = useCallback(
++    (terminalId: string): WorkspaceTabTarget | null => {
++      const currentIndex = tabs.findIndex(
++        (tab) => tab.kind === "terminal" && tab.terminalId === terminalId
++      );
++      const nextTabs = tabs.filter(
++        (tab) => !(tab.kind === "terminal" && tab.terminalId === terminalId)
++      );
++      if (nextTabs.length === 0) {
++        return null;
++      }

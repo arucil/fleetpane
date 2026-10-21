@@ -1,0 +1,21 @@
+
+type ResolveLogConfigOptions = {
+  paseoHome?: string;
+  env?: NodeJS.ProcessEnv;
+};
+
+const LOG_LEVELS: LogLevel[] = ["trace", "debug", "info", "warn", "error", "fatal"];
+const LOG_FORMATS: LogFormat[] = ["pretty", "json"];
+const LOG_LEVEL_PRIORITIES: Record<LogLevel, number> = {
+  trace: 10,
+  debug: 20,
+  info: 30,
+  warn: 40,
+  error: 50,
+  fatal: 60,
+};
+
+const DEFAULT_CONSOLE_LEVEL: LogLevel = "info";
+const DEFAULT_CONSOLE_FORMAT: LogFormat = "pretty";
+const DEFAULT_FILE_LEVEL: LogLevel = "trace";
+const DEFAULT_FILE_ROTATE_SIZE = "10m";

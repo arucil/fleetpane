@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[551,561],"new_lines":[543,543],"diff_block_lines":[20,30],"hunk_header":"@@ -550,15 +542,4 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":9}
+       if (!client || currentStreamId === null) {
+-        terminalDebugLog({
+-          scope: "terminal-pane",
+-          event: "input:key:queue-no-stream",
+-          details: {
+-            key: input.key,
+-            ctrl: input.ctrl,
+-            shift: input.shift,
+-            alt: input.alt,
+-            activeStreamId: currentStreamId,
+-          },

@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-archive-agent.ts
+RANGE {"path":"packages/app/src/hooks/use-archive-agent.ts","old_lines":[0,0],"new_lines":[22,32],"diff_block_lines":[28,38],"hunk_header":"@@ -0,0 +1,157 @@","substantive_changed_lines":7}
++
++function toArchiveKey(input: ArchiveAgentInput): string {
++  const serverId = input.serverId.trim();
++  const agentId = input.agentId.trim();
++  if (!serverId || !agentId) {
++    return "";
++  }
++  return `${serverId}:${agentId}`;
++}
++
++function readPendingState(queryClient: QueryClient): ArchiveAgentPendingState {

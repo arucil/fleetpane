@@ -1,0 +1,13 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/model-catalog.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/model-catalog.ts","old_lines":[42,48],"new_lines":[48,52],"diff_block_lines":[76,86],"hunk_header":"@@ -3,55 +3,73 @@ import { z } from \"zod\";","substantive_changed_lines":10}
+ 
+-export const LocalSttModelIdSchema = z.preprocess((value) => {
+-  if (typeof value !== "string") return value;
+-  const normalized = value.trim().toLowerCase();
+-  if (!normalized) return value;
+-  return STT_MODEL_ALIASES[normalized] ?? normalized;
+-}, z.enum(LOCAL_STT_MODEL_IDS));
++function createAliasedModelIdSchema<T extends readonly [string, ...string[]]>(
++  values: T,
++  aliases: Record<string, T[number]>
++) {

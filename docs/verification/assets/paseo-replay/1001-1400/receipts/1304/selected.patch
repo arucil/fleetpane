@@ -1,0 +1,14 @@
+FILE .github/workflows/deploy-app.yml
+RANGE {"path":".github/workflows/deploy-app.yml","old_lines":[3,11],"new_lines":[3,8],"diff_block_lines":[5,16],"hunk_header":"@@ -3,9 +3,6 @@ name: Deploy App","substantive_changed_lines":7}
+@@ -3,9 +3,6 @@ name: Deploy App
+ on:
+   push:
+-    branches: [main]
+-    paths:
+-      - 'packages/app/**'
+-      - 'packages/server/src/**'
+-      - '.github/workflows/deploy-app.yml'
++    tags:
++      - 'v*'
+   workflow_dispatch:
+ 

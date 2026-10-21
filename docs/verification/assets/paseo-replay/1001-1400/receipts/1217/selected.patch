@@ -1,0 +1,13 @@
+FILE packages/app/src/components/ui/combobox.tsx
+RANGE {"path":"packages/app/src/components/ui/combobox.tsx","old_lines":[265,269],"new_lines":[286,295],"diff_block_lines":[47,57],"hunk_header":"@@ -264,8 +285,36 @@ export function Combobox({","substantive_changed_lines":6}
+     }
+-    const raf = requestAnimationFrame(() => update());
++    const raf = requestAnimationFrame(() => void update());
+     return () => cancelAnimationFrame(raf);
+   }, [desktopPlacement, isMobile, update, isOpen]);
+ 
++  useEffect(() => {
++    if (!isOpen || isMobile) {
++      setReferenceAtOrigin(false);
++      return;
++    }

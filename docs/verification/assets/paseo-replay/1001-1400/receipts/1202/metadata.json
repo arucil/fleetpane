@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1202,
+  "revision": "b980abb7af2e062d4ce7e2bcc73dc7b164c9d509",
+  "date": "2026-02-15T19:10:40+07:00",
+  "committer_date": "2026-02-15T19:10:40+07:00",
+  "parents": [
+    "0103b4da96fb3d82c42ccc5d66ae25e1c5d4f04b"
+  ],
+  "subject": "Remove temporary terminal debug instrumentation",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts"
+  ],
+  "source_receipt_digest": "sha256:46f57d256aed7eac57ddc9de82fc61046aa0a3ff6eb2df50250ed3d639988345",
+  "diff_tree_digest": "sha256:06c68a473c7620f871abdd65273836ae9082124663fdd90b6ff525842f06d9c5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        551,
+        561
+      ],
+      "new_lines": [
+        543,
+        543
+      ],
+      "diff_block_lines": [
+        20,
+        30
+      ],
+      "hunk_header": "@@ -550,15 +542,4 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 43,
+  "receipt_file": "receipts/1202/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[75,80],"new_lines":[72,78],"diff_block_lines":[84,94],"hunk_header":"@@ -64,120 +63,53 @@ interface SidebarAgentListProps {","substantive_changed_lines":2}
+ 
+-function SectionHeader({
+-  section,
+-  checkout,
+-  isCollapsed,
++function ProjectFilterOptionRow({
++  option,
++  selected,
++  iconDataUri,
++  displayName,
+   onToggle,

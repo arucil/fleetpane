@@ -1,0 +1,9 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[475,479],"new_lines":[475,479],"diff_block_lines":[5,11],"hunk_header":"@@ -475,5 +475,5 @@ export function AgentStreamView({","substantive_changed_lines":2}
+@@ -475,5 +475,5 @@ export function AgentStreamView({
+ 
+       return (
+-        <View style={[stylesheet.streamItemWrapper, { marginBottom: gapBelow }]}>
++        <View style={[stylesheet.paddedContentWrapper, { marginBottom: gapBelow }]}>
+           {content}
+           {isEndOfAssistantTurn ? (

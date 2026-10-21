@@ -1,0 +1,13 @@
+FILE packages/server/src/shared/messages.ts
+RANGE {"path":"packages/server/src/shared/messages.ts","old_lines":[2203,2203],"new_lines":[2216,2226],"diff_block_lines":[25,35],"hunk_header":"@@ -2202,4 +2215,27 @@ export const WSPongMessageSchema = z.object({","substantive_changed_lines":9}
+ 
++export const WSHelloMessageSchema = z.object({
++  type: z.literal('hello'),
++  clientId: z.string().min(1),
++  clientType: z.enum(['mobile', 'browser', 'cli', 'mcp']),
++  protocolVersion: z.number().int(),
++  capabilities: z
++    .object({
++      voice: z.boolean().optional(),
++      pushNotifications: z.boolean().optional(),
++    })

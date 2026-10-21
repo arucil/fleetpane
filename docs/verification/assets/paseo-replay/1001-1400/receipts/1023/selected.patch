@@ -1,0 +1,13 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[495,505],"new_lines":[514,514],"diff_block_lines":[46,56],"hunk_header":"@@ -492,17 +512,24 @@ export function FileExplorerPane({ serverId, agentId }: FileExplorerPaneProps) {","substantive_changed_lines":8}
+-            style={styles.retryButton}
+-            onPress={() => {
+-              if (agentId) {
+-                requestDirectoryListing(agentId, ".", {
+-                  recordHistory: false,
+-                  setCurrentPath: false,
+-                });
+-              }
+-            }}
+-          >
+-            <Text style={styles.retryButtonText}>Retry</Text>

@@ -1,0 +1,46 @@
+  }
+
+  const paseoHome = resolveLocalPaseoHome(options.home)
+  if (richUi) {
+    renderNote(paseoHome, 'Paseo home')
+  }
+
+  let persisted = loadPersistedConfig(paseoHome) as OnboardPersistedConfig
+  const persistedVoiceSelection = resolvePersistedVoiceSelection(persisted)
+  const shouldPrompt = options.voice === 'ask' || options.voice === undefined
+  let voiceEnabled: boolean
+  try {
+    voiceEnabled =
+      shouldPrompt && persistedVoiceSelection !== null
+        ? persistedVoiceSelection
+        : await resolveVoiceSelection(options.voice)
+  } catch (error) {
+    if (error instanceof OnboardCancelledError) {
+      cancel('Onboarding cancelled.')
+      process.exit(0)
+      return
+    }
+    throw error
+  }
+
+  if (shouldPrompt && persistedVoiceSelection !== null) {
+    log.message(`Using saved voice setup from config (${voiceEnabled ? 'enabled' : 'disabled'}).`)
+  }
+
+  persisted = applyVoiceSelection(persisted, voiceEnabled)
+  savePersistedConfig(paseoHome, persisted)
+
+  const config = loadConfig(paseoHome, { cli: toCliOverrides(options) })
+
+  const voiceStatus = voiceEnabled
+    ? 'Voice features enabled. Local speech models will be downloaded if missing.'
+    : 'Voice features disabled. Local speech models will not be downloaded now.'
+  log.message(voiceStatus)
+
+  try {
+    await prepareLocalSpeechModelsBeforeStart({
+      config,
+      richUi,
+    })
+  } catch {
+    process.exit(1)

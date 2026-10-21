@@ -1,0 +1,88 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1025,
+  "revision": "8889f6f05c25650edd0ea189b8fc3b4437072665",
+  "date": "2026-02-06T13:45:40+07:00",
+  "committer_date": "2026-02-06T13:45:40+07:00",
+  "parents": [
+    "c343931fec8946a46a05eba401570adc60d948a0",
+    "4d284994823615c93805f662f2f3a4c9af15292e"
+  ],
+  "subject": "Merge pull request #19 from boudra/local-streaming-speech-tts",
+  "diff_tree_paths": [
+    "M\tREADME.md",
+    "M\tpackage-lock.json",
+    "A\tpackages/app/e2e/fixtures/recording.baseline.txt",
+    "M\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/speech/download.ts",
+    "A\tpackages/cli/src/commands/speech/index.ts",
+    "A\tpackages/cli/src/commands/speech/models.ts",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/scripts/download-speech-models.ts",
+    "A\tpackages/server/scripts/list-speech-models.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "D\tpackages/server/src/server/agent/openai-realtime-transcription.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "A\tpackages/server/src/server/agent/stt-manager.test.ts",
+    "M\tpackages/server/src/server/agent/stt-manager.ts",
+    "D\tpackages/server/src/server/agent/stt-openai.ts",
+    "A\tpackages/server/src/server/agent/tts-manager.test.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "D\tpackages/server/src/server/agent/tts-openai.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/speech/audio.ts",
+    "A\tpackages/server/src/server/speech/providers/local/pocket/pocket-tts-onnx.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/model-catalog.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.test.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/model-downloader.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-offline-recognizer.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-online-recognizer.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-loader.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-realtime-session.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-realtime-session.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-stt.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/realtime-transcription-session.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/stt.ts",
+    "A\tpackages/server/src/server/speech/providers/openai/tts.ts",
+    "A\tpackages/server/src/server/speech/speech-provider.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:b67d6604681abe674a3e8dcc0d24ca600d25673fe1bd04d28ce5bade3ce30e98",
+  "diff_tree_digest": "sha256:3ba9addd5d5fb95479334a397e420921138e1bfd199ed382fa69f440e8d83d22",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-audio-player.native.ts",
+      "old_lines": [
+        19,
+        29
+      ],
+      "new_lines": [
+        19,
+        19
+      ],
+      "diff_block_lines": [
+        12,
+        22
+      ],
+      "hunk_header": "@@ -15,30 +15,58 @@ interface QueuedAudio {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 3960,
+  "receipt_file": "receipts/1025/selected.patch"
+}

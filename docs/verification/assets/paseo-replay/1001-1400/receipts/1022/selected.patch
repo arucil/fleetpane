@@ -1,0 +1,13 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[672,682],"new_lines":[611,611],"diff_block_lines":[95,105],"hunk_header":"@@ -670,155 +609,96 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":8}
+-  const commitMutation = useMutation({
+-    mutationFn: async () => {
+-      if (!client) {
+-        throw new Error("Daemon client unavailable");
+-      }
+-      const payload = await client.checkoutCommit(cwd, { addAll: true });
+-      if (payload.error) {
+-        throw new Error(payload.error.message);
+-      }
+-      return payload;
+-    },

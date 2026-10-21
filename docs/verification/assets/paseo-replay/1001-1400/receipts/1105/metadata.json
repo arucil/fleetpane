@@ -1,0 +1,68 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1105,
+  "revision": "7ec3f2d3cf4ed168cb6f877824d898ad4c4cc65b",
+  "date": "2026-02-09T16:50:04+07:00",
+  "committer_date": "2026-02-09T16:50:04+07:00",
+  "parents": [
+    "ef29319bafa02a0224bacfa22e5e0ed5e3df9f8c"
+  ],
+  "subject": "refactor tool-call detail contract for unknown tools",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-activity.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/types/agent-activity.ts",
+    "M\tpackages/app/src/types/stream-buffer.test.ts",
+    "M\tpackages/app/src/types/stream.harness.test.ts",
+    "M\tpackages/app/src/types/stream.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/shared/messages.tool-call-schema.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts"
+  ],
+  "source_receipt_digest": "sha256:ad715c18d279c0bdc60ccf5e9beec5031c7f644a1b55fbf99e9b4458b4992842",
+  "diff_tree_digest": "sha256:9375b503708a05f1797c182a6f9e4fcca6609f1139aa41f63c58cb027d17476b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-activity.tsx",
+      "old_lines": [
+        108,
+        116
+      ],
+      "new_lines": [
+        108,
+        116
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -107,21 +107,21 @@ function MergedToolCallItem({ item }: { item: MergedToolCall }) {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 353,
+  "receipt_file": "receipts/1105/selected.patch"
+}

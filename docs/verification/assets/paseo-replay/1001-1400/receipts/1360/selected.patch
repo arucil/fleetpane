@@ -1,0 +1,13 @@
+FILE packages/app/src/components/welcome-screen.tsx
+RANGE {"path":"packages/app/src/components/welcome-screen.tsx","old_lines":[105,115],"new_lines":[120,120],"diff_block_lines":[44,54],"hunk_header":"@@ -104,42 +119,45 @@ export function WelcomeScreen({ onHostAdded }: WelcomeScreenProps) {","substantive_changed_lines":9}
+     >
+-      <Image
+-        source={require("../../assets/images/icon.png")}
+-        style={styles.logo}
+-        resizeMode="contain"
+-      />
+-      <Text style={styles.title}>Welcome to Paseo</Text>
+-      <Text style={styles.subtitle}>Add a host to start.</Text>
+-
+-      <View style={styles.actions}>
+-        <Pressable

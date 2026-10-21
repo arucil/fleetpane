@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1283,
+  "revision": "005875de2b9754b069cd545c07ff49b5ece5c1a3",
+  "date": "2026-02-18T18:27:03+07:00",
+  "committer_date": "2026-02-18T18:27:03+07:00",
+  "parents": [
+    "dd4cc82ce84505e92333bcbeb2d54a2527233554",
+    "229e7472441ac6a9f2cb4d5649597eea0e251245"
+  ],
+  "subject": "Merge pull request #61 from getpaseo/fix/agent-archive-loading-state",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "A\tpackages/app/src/hooks/use-archive-agent.test.ts",
+    "A\tpackages/app/src/hooks/use-archive-agent.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:09b245fe9135c1e13dd46798b16cdd5ed08ed2daf28d5356b089221b29186767",
+  "diff_tree_digest": "sha256:38e3cb0c810eb157f207642fd2f93fa02110da18dec5f2f6cba3cf31d89bf78c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-archive-agent.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        22,
+        32
+      ],
+      "diff_block_lines": [
+        28,
+        38
+      ],
+      "hunk_header": "@@ -0,0 +1,157 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 231,
+  "receipt_file": "receipts/1283/selected.patch"
+}

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/pid-lock.ts
+RANGE {"path":"packages/server/src/server/pid-lock.ts","old_lines":[36,36],"new_lines":[36,46],"diff_block_lines":[7,17],"hunk_header":"@@ -35,4 +35,15 @@ function getPidFilePath(paseoHome: string): string {","substantive_changed_lines":6}
+ 
++function resolveLockOwnerPid(): number {
++  if (typeof process.send === "function") {
++    const ppid = process.ppid;
++    if (Number.isInteger(ppid) && ppid > 1) {
++      return ppid;
++    }
++  }
++
++  return process.pid;
++}

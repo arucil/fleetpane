@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[873,873],"new_lines":[865,875],"diff_block_lines":[34,44],"hunk_header":"@@ -867,24 +861,82 @@ export function SessionProvider({","substantive_changed_lines":6}
++
++    const bootstrapAgentDirectory = async () => {
++      try {
++        const payload = await client.fetchAgents({
+           filter: { labels: { ui: "true" } },
++          subscribe: { subscriptionId: requestedSubscriptionId },
++        });
++        if (cancelled) {
++          return;
++        }
++

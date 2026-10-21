@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[2286,2290],"new_lines":[2286,2291],"diff_block_lines":[15,25],"hunk_header":"@@ -2284,13 +2284,99 @@ export class DaemonClient {","substantive_changed_lines":9}
+-    const startedAt = Date.now()
+-    while (Date.now() - startedAt < timeout) {
+-      const snapshot = await this.fetchAgent(agentId).catch(() => null)
+-      if (snapshot && predicate(snapshot)) {
+-        return snapshot
++    const initial = await this.fetchAgent(agentId).catch(() => null)
++    if (initial && predicate(initial)) {
++      return initial
++    }
++
++    const deadline = Date.now() + timeout

@@ -1,0 +1,13 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[648,657],"new_lines":[713,713],"diff_block_lines":[129,139],"hunk_header":"@@ -646,82 +711,120 @@ function SessionProviderInternal({","substantive_changed_lines":8}
+-      if (payload.error) {
+-        setInitializingAgents(serverId, (prev) => {
+-          if (prev.get(agentId) !== true) {
+-            return prev;
+-          }
+-          const next = new Map(prev);
+-          next.set(agentId, false);
+-          return next;
+-        });
+-        rejectInitDeferred(initKey, new Error(payload.error));
++      // Read current store state

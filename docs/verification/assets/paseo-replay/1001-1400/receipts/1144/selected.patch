@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts","old_lines":[23,23],"new_lines":[34,44],"diff_block_lines":[21,31],"hunk_header":"@@ -20,13 +20,56 @@ import {","substantive_changed_lines":9}
++      .union([
++        z.string().transform((text) => ({ text })),
++        z.object({ text: z.string() }).passthrough(),
++      ])
++      .nullable(),
++    output: z.unknown().nullable(),
++  })
++  .transform(({ input }) => {
++    const text = input?.text?.trim() ?? "";
++    if (!text) {
++      return undefined;

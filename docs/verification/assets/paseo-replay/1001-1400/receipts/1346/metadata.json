@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1346,
+  "revision": "40f376b824ca82549f0576d760c4906d31f6def2",
+  "date": "2026-02-22T14:10:42+07:00",
+  "committer_date": "2026-02-22T14:10:42+07:00",
+  "parents": [
+    "8ee9e7274dd185d98e50e1a311b52edbaed8483a"
+  ],
+  "subject": "Preserve authoritative agent title across refresh",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/persistence-hooks.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:459f0d113f1cc9936611352164ab5c1beecb79d54cb3a9debc93cb3b0cd9618c",
+  "diff_tree_digest": "sha256:13c102f8c6a9d3794b51e92655fb51c2a78a5622b1822e519cbe15f15c9e8eb7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        1509,
+        1510
+      ],
+      "new_lines": [
+        1520,
+        1528
+      ],
+      "diff_block_lines": [
+        31,
+        39
+      ],
+      "hunk_header": "@@ -1507,4 +1511,18 @@ export class AgentManager {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 63,
+  "receipt_file": "receipts/1346/selected.patch"
+}

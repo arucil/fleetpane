@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1217,
+  "revision": "427e3daca94adfd47796458ae8cd435c8f49ddc8",
+  "date": "2026-02-16T18:37:04+07:00",
+  "committer_date": "2026-02-16T18:37:04+07:00",
+  "parents": [
+    "f590e60617b52642a1cfa6f44076eb5c420132a5"
+  ],
+  "subject": "fix(app): prevent desktop combobox initial 0,0 flash",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/sidebar-project-filter-flash.spec.ts",
+    "M\tpackages/app/src/components/ui/combobox.tsx"
+  ],
+  "source_receipt_digest": "sha256:a61b53250c5345b9a115c2669eb97b5e6dcaca0a54801a0b935e83ca0f817063",
+  "diff_tree_digest": "sha256:728802f69daa877a88666b3ff41a0436568e7f2ce244eb106f0704dfc1ea3ddf",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/ui/combobox.tsx",
+      "old_lines": [
+        265,
+        269
+      ],
+      "new_lines": [
+        286,
+        295
+      ],
+      "diff_block_lines": [
+        47,
+        57
+      ],
+      "hunk_header": "@@ -264,8 +285,36 @@ export function Combobox({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 124,
+  "receipt_file": "receipts/1217/selected.patch"
+}

@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1292,
+  "revision": "a1fdeeb7aee9d7456914ec09b07f9be2e0639b2b",
+  "date": "2026-02-18T21:21:27+07:00",
+  "committer_date": "2026-02-18T21:21:27+07:00",
+  "parents": [
+    "bcae95c372daa3d001ed1fb6e9f8e9cece7b1bbb"
+  ],
+  "subject": "fix(dictation): avoid timeout from dangling non-final segments",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/server-info-capabilities.test.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/daemon-version.test.ts",
+    "A\tpackages/server/src/server/daemon-version.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.test.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.ts",
+    "A\tpackages/server/src/server/package-version.ts",
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/tasks/cli.ts"
+  ],
+  "source_receipt_digest": "sha256:82635e4c6101f24cf96796867a14e71a3e1cb2b6c95e6029eba96d6a0ae70932",
+  "diff_tree_digest": "sha256:1ef6beae33ccee999779cb5c3253d772861b648b0f3fc799e8e50fe957cbc12e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/package-version.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        23,
+        33
+      ],
+      "diff_block_lines": [
+        29,
+        39
+      ],
+      "hunk_header": "@@ -0,0 +1,64 @@",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 282,
+  "receipt_file": "receipts/1292/selected.patch"
+}

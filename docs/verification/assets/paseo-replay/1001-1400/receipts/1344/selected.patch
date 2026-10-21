@@ -1,0 +1,9 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1281,1285],"new_lines":[1281,1285],"diff_block_lines":[5,11],"hunk_header":"@@ -1281,5 +1281,5 @@ function isMetadataOnlySdkMessage(message: SDKMessage): boolean {","substantive_changed_lines":2}
+@@ -1281,5 +1281,5 @@ function isMetadataOnlySdkMessage(message: SDKMessage): boolean {
+ }
+ 
+-function readEventIdentifiers(message: SDKMessage): EventIdentifiers {
++export function readEventIdentifiers(message: SDKMessage): EventIdentifiers {
+   const root = message as unknown as Record<string, unknown>;
+   const messageType = readTrimmedString(root.type);

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-mcp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-mcp-agent.ts","old_lines":[5122,5122],"new_lines":[5137,5147],"diff_block_lines":[42,52],"hunk_header":"@@ -5117,75 +5127,129 @@ function extractContentTextByType(content: unknown, itemType: string): string {","substantive_changed_lines":7}
+   content: z.unknown().optional(),
++  summary: z.array(z.object({ text: z.string().optional() })).optional(),
++  text: z.string().optional(),
++});
++
++const RolloutResponseFunctionCallPayloadSchema = z.object({
++  type: z.literal("function_call"),
++  name: z.string().optional(),
++  call_id: z.string().optional(),
++  arguments: z.string().optional(),
++});

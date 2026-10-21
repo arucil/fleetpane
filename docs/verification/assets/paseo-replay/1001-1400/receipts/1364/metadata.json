@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1364,
+  "revision": "cbf5621a731c9d40057f12ff882e5a0f1a1bd041",
+  "date": "2026-02-23T18:06:38+07:00",
+  "committer_date": "2026-02-23T18:06:38+07:00",
+  "parents": [
+    "ff4f2eeb56e5f24a646318a74061599ccc3d1a1f"
+  ],
+  "subject": "Handle skill tool details and skip synthetic timeline events",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:7715e8d673189ac82c094db0a00d94f76d3c5c6a63ef693989652f1a0fb627c4",
+  "diff_tree_digest": "sha256:f2cdd06ffb9b4905c527ec880a7dd820ca3dcd892b7c22081e92d3d9ad25afd8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+      "old_lines": [
+        105,
+        105
+      ],
+      "new_lines": [
+        106,
+        116
+      ],
+      "diff_block_lines": [
+        9,
+        19
+      ],
+      "hunk_header": "@@ -103,4 +103,23 @@ const ClaudeToolDetailPass2Schema = z.union([",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 61,
+  "receipt_file": "receipts/1364/selected.patch"
+}

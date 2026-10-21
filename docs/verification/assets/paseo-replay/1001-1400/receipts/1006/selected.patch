@@ -1,0 +1,23 @@
+FILE packages/relay/src/cloudflare-adapter.ts
+RANGE {"path":"packages/relay/src/cloudflare-adapter.ts","old_lines":[77,77],"new_lines":[77,97],"diff_block_lines":[7,27],"hunk_header":"@@ -76,4 +76,43 @@ export class RelayDurableObject {","substantive_changed_lines":10}
+ 
++  private hasServerDataSocket(clientId: string): boolean {
++    try {
++      return this.state.getWebSockets(`server:${clientId}`).length > 0;
++    } catch {
++      return false;
++    }
++  }
++
++  private nudgeOrResetControlForClient(clientId: string): void {
++    // If the daemon's control WS becomes half-open, the DO can't reliably detect it via ws.send errors
++    // (Cloudflare may accept writes even if the other side is no longer reading).
++    //
++    // Instead, observe whether the daemon reacts by opening the per-client server-data socket.
++    // If it doesn't, nudge with a sync message; if still no reaction, force-close the control
++    // socket(s) so the daemon reconnects.
++    const initialDelayMs = 10_000;
++    const secondDelayMs = 5_000;
++
++    setTimeout(() => {
++      if (this.hasServerDataSocket(clientId)) return;

@@ -1,0 +1,13 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[2572,2572],"new_lines":[2654,2664],"diff_block_lines":[135,145],"hunk_header":"@@ -2570,4 +2630,157 @@ export class DaemonClient {","substantive_changed_lines":7}
++      options: { skipQueue: true },
++      select: (msg) => {
++        if (msg.type !== "attach_terminal_stream_response") {
++          return null;
++        }
++        if (msg.payload.requestId !== resolvedRequestId) {
++          return null;
++        }
++        return msg.payload;
++      },
++    });

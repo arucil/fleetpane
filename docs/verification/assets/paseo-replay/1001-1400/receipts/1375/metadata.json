@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1375,
+  "revision": "3355f7d8d970c57e626f191ceefd2ed47dc48d50",
+  "date": "2026-02-25T16:38:06+07:00",
+  "committer_date": "2026-02-25T16:38:06+07:00",
+  "parents": [
+    "c4523c70b58ae4dae035143f7cf3881683d8a3cb"
+  ],
+  "subject": "server: hardcode Claude model catalog with runtime IDs",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.model-normalization.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/model-catalog.ts"
+  ],
+  "source_receipt_digest": "sha256:984f2685d13a4b3d7bdffbfe0c7ddbaafcf08ec9f8ddf33ac5039a9d4ce95acb",
+  "diff_tree_digest": "sha256:6bba7076025849c51e511e326261de79a109f611a559039715272ca50816c1b2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1534,
+        1544
+      ],
+      "new_lines": [
+        1427,
+        1427
+      ],
+      "diff_block_lines": [
+        169,
+        179
+      ],
+      "hunk_header": "@@ -1533,56 +1426,6 @@ export class ClaudeAgentClient implements AgentClient {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 256,
+  "receipt_file": "receipts/1375/selected.patch"
+}

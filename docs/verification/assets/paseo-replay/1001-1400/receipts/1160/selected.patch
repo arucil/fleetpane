@@ -1,0 +1,13 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[5,5],"new_lines":[15,25],"diff_block_lines":[21,31],"hunk_header":"@@ -1,5 +1,59 @@","substantive_changed_lines":7}
++
++  const targetServerId = useMemo(() => {
++    if (daemons.length === 0) {
++      return null;
++    }
++    if (preferences.serverId) {
++      const match = daemons.find((daemon) => daemon.serverId === preferences.serverId);
++      if (match) {
++        return match.serverId;
++      }
++    }

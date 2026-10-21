@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1336,
+  "revision": "88f7763430a2df3824747c96d848ba1f0c5e60e0",
+  "date": "2026-02-22T12:05:00+07:00",
+  "committer_date": "2026-02-22T12:05:00+07:00",
+  "parents": [
+    "409a3ac5dfb117a35b48c670807ccc37fab948ff"
+  ],
+  "subject": "polish(app): align desktop updates copy and labeling",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-permissions-section.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/desktop/updates/desktop-updates.ts",
+    "M\tpackages/app/src/desktop/updates/use-desktop-app-updater.ts"
+  ],
+  "source_receipt_digest": "sha256:e146bc8776118adf2adf6841cf8138faaeeb08bd7f0ff7aa6470a81728e7892e",
+  "diff_tree_digest": "sha256:7b694ea4bdc82331866e1dbf68098da3de608a91c111acef6c46925a77d60c62",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/updates/desktop-updates.ts",
+      "old_lines": [
+        142,
+        151
+      ],
+      "new_lines": [
+        142,
+        146
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -141,14 +141,20 @@ export function findLikelyLocalDaemonHost(daemons: HostProfile[]): HostProfile |",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 32,
+  "receipt_file": "receipts/1336/selected.patch"
+}

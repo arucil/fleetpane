@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1201,
+  "revision": "0103b4da96fb3d82c42ccc5d66ae25e1c5d4f04b",
+  "date": "2026-02-15T19:05:27+07:00",
+  "committer_date": "2026-02-15T19:05:27+07:00",
+  "parents": [
+    "75dc802a3a75ce2a721eb024f68c13891ebe3fd6"
+  ],
+  "subject": "Harden terminal streaming and worktree setup flow",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.test.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/server/src/client/daemon-client-terminal-stream-manager.test.ts",
+    "M\tpackages/server/src/client/daemon-client-terminal-stream-manager.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/binary-mux.test.ts",
+    "M\tpackages/server/src/shared/binary-mux.ts"
+  ],
+  "source_receipt_digest": "sha256:42af4659ea542bff317e7d6adb21f2a6e9ce719695239638d6c53758155c6fa9",
+  "diff_tree_digest": "sha256:69abc268c175248efc16d019c4f6f836a4f08d6ad6f7f02016d103ba168f4f9c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-pane.tsx",
+      "old_lines": [
+        433,
+        433
+      ],
+      "new_lines": [
+        474,
+        484
+      ],
+      "diff_block_lines": [
+        89,
+        99
+      ],
+      "hunk_header": "@@ -432,4 +473,48 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 989,
+  "receipt_file": "receipts/1201/selected.patch"
+}

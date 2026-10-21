@@ -1,0 +1,13 @@
+FILE packages/app/src/components/draggable-list.web.tsx
+RANGE {"path":"packages/app/src/components/draggable-list.web.tsx","old_lines":[192,202],"new_lines":[208,208],"diff_block_lines":[112,122],"hunk_header":"@@ -162,50 +181,88 @@ export function DraggableList<T>({","substantive_changed_lines":11}
+-          <SortableContext items={ids} strategy={verticalListSortingStrategy}>
+-            {items.map((item, index) => {
+-              const id = keyExtractor(item, index);
+-              return (
+-                <SortableItem
+-                  key={id}
+-                  id={id}
+-                  item={item}
+-                  index={index}
+-                  renderItem={renderItem}
+-                  activeId={activeId}

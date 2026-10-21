@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-stream-render-strategy.ts
+RANGE {"path":"packages/app/src/components/agent-stream-render-strategy.ts","old_lines":[0,0],"new_lines":[98,108],"diff_block_lines":[104,114],"hunk_header":"@@ -0,0 +1,221 @@","substantive_changed_lines":8}
++
++export function resolveStreamRenderStrategy(
++  input: ResolveStreamRenderStrategyInput
++): StreamRenderStrategy {
++  if (input.platform === "web") {
++    return input.isMobileBreakpoint
++      ? FORWARD_STREAM_STRATEGY_MOBILE
++      : FORWARD_STREAM_STRATEGY_DESKTOP;
++  }
++  return INVERTED_STREAM_STRATEGY;
++}

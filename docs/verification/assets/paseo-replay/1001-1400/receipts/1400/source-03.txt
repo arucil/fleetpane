@@ -1,0 +1,47 @@
+            return state;
+          }
+          let same = true;
+          for (let i = 0; i < next.length; i += 1) {
+            if (next[i]?.tabId !== current[i]?.tabId) {
+              same = false;
+              break;
+            }
+          }
+          if (same) {
+            return state;
+          }
+          return {
+            ...state,
+            openTabsByWorkspace: { ...state.openTabsByWorkspace, [key]: next },
+          };
+        });
+      },
+      replaceTabTarget: ({ serverId, workspaceId, tabId, target }) => {
+        const key = buildWorkspaceTabPersistenceKey({ serverId, workspaceId });
+        const normalizedTabId = trimNonEmpty(tabId);
+        const normalizedTarget = normalizeTabTarget(target);
+        if (!key || !normalizedTabId || !normalizedTarget) {
+          return;
+        }
+
+        set((state) => {
+          const current = state.openTabsByWorkspace[key] ?? [];
+          const idx = current.findIndex((tab) => tab.tabId === normalizedTabId);
+          if (idx < 0) {
+            return state;
+          }
+          const existing = current[idx];
+          if (existing && targetsEqual(existing.target, normalizedTarget)) {
+            return state;
+          }
+          const nextTabs = [...current];
+          nextTabs[idx] = {
+            tabId: normalizedTabId,
+            target: normalizedTarget,
+            createdAt: existing?.createdAt ?? Date.now(),
+          };
+          return {
+            ...state,
+            openTabsByWorkspace: { ...state.openTabsByWorkspace, [key]: nextTabs },
+          };
+        });

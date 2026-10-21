@@ -1,0 +1,5 @@
+FILE packages/server/src/client/daemon-client-transport-types.ts
+RANGE {"path":"packages/server/src/client/daemon-client-transport-types.ts","old_lines":[0,0],"new_lines":[36,38],"diff_block_lines":[42,44],"hunk_header":"@@ -0,0 +1,38 @@","substantive_changed_lines":2}
++export interface TransportLogger {
++  warn(obj: object, msg?: string): void;
++}

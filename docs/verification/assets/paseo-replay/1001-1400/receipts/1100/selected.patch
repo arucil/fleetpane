@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-agent-list-skeleton.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list-skeleton.tsx","old_lines":[0,0],"new_lines":[4,14],"diff_block_lines":[10,20],"hunk_header":"@@ -0,0 +1,137 @@","substantive_changed_lines":8}
++
++function SkeletonPulse({
++  pulse,
++  style,
++}: {
++  pulse: Animated.Value;
++  style: StyleProp<ViewStyle>;
++}) {
++  const opacity = pulse.interpolate({
++    inputRange: [0, 1],
++    outputRange: [0.45, 0.95],

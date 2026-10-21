@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1051,
+  "revision": "8c70b3d86bea4735004775c084175587f5342081",
+  "date": "2026-02-06T21:27:50+07:00",
+  "committer_date": "2026-02-06T21:27:50+07:00",
+  "parents": [
+    "a1008c36685581c2ef031f9cc89b3463e7200f23"
+  ],
+  "subject": "voice: harden local voice stack and enforce UUID agent ids",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/voice-mcp-bridge.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/speech-download.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "A\tpackages/server/src/server/speech/speech-types.ts",
+    "M\tpackages/server/src/server/voice-local-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge.ts",
+    "A\tpackages/server/src/server/voice-permission-policy.test.ts",
+    "A\tpackages/server/src/server/voice-permission-policy.ts",
+    "A\tpackages/server/src/server/voice-types.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:5b1cdccad4fcfd104c838eb372319149503bd9d9d2c151f184d48f1494e3f192",
+  "diff_tree_digest": "sha256:de060bd031e3e002df2ba32cc4c7bdfbc9960737f92ba38acaaf3fea8e4d42b0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        198,
+        198
+      ],
+      "new_lines": [
+        193,
+        203
+      ],
+      "diff_block_lines": [
+        43,
+        53
+      ],
+      "hunk_header": "@@ -197,4 +192,40 @@ interface AudioBufferState {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 604,
+  "receipt_file": "receipts/1051/selected.patch"
+}

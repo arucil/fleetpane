@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1329,
+  "revision": "ccd42751d25444f9f845a11a55e3e31a05b03a8a",
+  "date": "2026-02-22T11:44:56+07:00",
+  "committer_date": "2026-02-22T11:44:56+07:00",
+  "parents": [
+    "c1e4b0fcbf43ac27f27d1f8dc332f9048245221c"
+  ],
+  "subject": "Harden Claude provider lifecycle and clean temp artifacts",
+  "diff_tree_paths": [
+    "D\tCLAUDE_PROVIDER_REDESIGN_PLAN.md",
+    "D\tdocs/claude-provider-invariants-test-plan.md",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:da53bdab766277cdbd5cc330b3fbc9c0b08919938f392b7c93b2d066c8989698",
+  "diff_tree_digest": "sha256:f0882cca7715fe7b0b21c192a90428f407cb09348d9ff63e53366ff1cef3d324",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        2286,
+        2290
+      ],
+      "new_lines": [
+        2286,
+        2291
+      ],
+      "diff_block_lines": [
+        15,
+        25
+      ],
+      "hunk_header": "@@ -2284,13 +2284,99 @@ export class DaemonClient {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1560,
+  "receipt_file": "receipts/1329/selected.patch"
+}

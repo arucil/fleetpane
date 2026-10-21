@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1075,
+  "revision": "e3fad77d5bcebf130b23f6c4379499c629cd3d8b",
+  "date": "2026-02-07T21:13:24+07:00",
+  "committer_date": "2026-02-07T21:13:24+07:00",
+  "parents": [
+    "598a1823aef845c45d5e83fd14efd57fdcfbed96"
+  ],
+  "subject": "Unified tool call display schema, compaction timeline, and auth fixes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/activity-curator.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/test-utils/claude-auth.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:ac182366439ebe9c946a236c9ecda771640defed0059f6d1a2c55f865bf23743",
+  "diff_tree_digest": "sha256:909526031dbd33e93602619ddc02548782845f8cc889ba2e97933da8febe729b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message.tsx",
+      "old_lines": [
+        770,
+        770
+      ],
+      "new_lines": [
+        774,
+        784
+      ],
+      "diff_block_lines": [
+        44,
+        54
+      ],
+      "hunk_header": "@@ -768,4 +768,61 @@ export const ActivityLog = memo(function ActivityLog({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1632,
+  "receipt_file": "receipts/1075/selected.patch"
+}

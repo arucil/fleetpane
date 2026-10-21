@@ -1,0 +1,19 @@
+    {
+      name: "workspace-tabs-state",
+      version: 3,
+      storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => {
+        const nextOpenTabsByWorkspace: Record<string, WorkspaceTab[]> = {};
+        for (const key in state.openTabsByWorkspace) {
+          const tabs = state.openTabsByWorkspace[key] ?? [];
+          const persistedTabs = tabs.filter((tab) => tab.target.kind !== "file");
+          if (persistedTabs.length > 0) {
+            nextOpenTabsByWorkspace[key] = persistedTabs;
+          }
+        }
+        return {
+          openTabsByWorkspace: nextOpenTabsByWorkspace,
+          focusedTabIdByWorkspace: state.focusedTabIdByWorkspace,
+        } as WorkspaceTabsState;
+      },
+      migrate: (persistedState) => {

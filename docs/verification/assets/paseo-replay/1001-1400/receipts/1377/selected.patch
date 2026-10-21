@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[172,172],"new_lines":[177,187],"diff_block_lines":[13,23],"hunk_header":"@@ -170,4 +170,22 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":9}
++        | ((current: string | null) => string | null)
++    ) => {
++      const current = selectedTerminalIdRef.current;
++      const resolved =
++        typeof next === "function"
++          ? (next as (value: string | null) => string | null)(current)
++          : next;
++      selectedTerminalIdRef.current = resolved;
++      setSelectedTerminalId(resolved);
++    },
++    []

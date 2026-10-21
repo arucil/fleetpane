@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[1594,1594],"new_lines":[1595,1605],"diff_block_lines":[13,23],"hunk_header":"@@ -1593,4 +1594,60 @@ async function resolveGitHubRepo(cwd: string): Promise<string | null> {","substantive_changed_lines":9}
+ 
++async function listPullRequestsForHead(options: {
++  cwd: string;
++  repo: string;
++  owner: string;
++  head: string;
++  state: "open" | "closed";
++}): Promise<any[]> {
++  const { stdout } = await execFileAsync(
++    "gh",
++    [

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1163,
+  "revision": "c41815dcb7e7d5536bd05d2db8457ed4009150a9",
+  "date": "2026-02-13T19:01:51+07:00",
+  "committer_date": "2026-02-13T19:01:51+07:00",
+  "parents": [
+    "67620569ab1c35cdb7f08b860230bce2b2681840"
+  ],
+  "subject": "fix(relay): avoid stale client timer resetting control socket",
+  "diff_tree_paths": [
+    "A\tpackages/relay/src/cloudflare-adapter.test.ts",
+    "M\tpackages/relay/src/cloudflare-adapter.ts"
+  ],
+  "source_receipt_digest": "sha256:444c6fb6a3e5d5cce6badb8291a1ba02d95717ce9a139e40dc4ae813bcb602dd",
+  "diff_tree_digest": "sha256:c02dba965e6dec7157ae9f6037f67bbc5444e218e6660988a79c85b9815d1e03",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/relay/src/cloudflare-adapter.ts",
+      "old_lines": [
+        85,
+        87
+      ],
+      "new_lines": [
+        85,
+        95
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -84,4 +84,12 @@ export class RelayDurableObject {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 70,
+  "receipt_file": "receipts/1163/selected.patch"
+}

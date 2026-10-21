@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[6430,6430],"new_lines":[6432,6442],"diff_block_lines":[24,34],"hunk_header":"@@ -6429,4 +6431,54 @@ export class Session {","substantive_changed_lines":8}
+ 
++  private killTrackedTerminal(terminalId: string, options?: { emitExit: boolean }): void {
++    const unsubscribe = this.terminalSubscriptions.get(terminalId);
++    if (unsubscribe) {
++      unsubscribe();
++      this.terminalSubscriptions.delete(terminalId);
++    }
++
++    const streamId = this.terminalStreamByTerminalId.get(terminalId);
++    if (typeof streamId === "number") {
++      this.detachTerminalStream(streamId, { emitExit: options?.emitExit ?? true });

@@ -1,0 +1,13 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[96,104],"new_lines":[97,99],"diff_block_lines":[13,23],"hunk_header":"@@ -95,16 +96,10 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":10}
+   private readonly createAgentMcpTransport: AgentMcpTransportFactory;
+-  private readonly stt:
+-    | SpeechToTextProvider
+-    | null
+-    | (() => SpeechToTextProvider | null);
+-  private readonly tts:
+-    | TextToSpeechProvider
+-    | null
+-    | (() => TextToSpeechProvider | null);
++  private readonly stt: Resolvable<SpeechToTextProvider | null>;
++  private readonly tts: Resolvable<TextToSpeechProvider | null>;

@@ -1,0 +1,13 @@
+FILE packages/cli/src/commands/daemon/runtime-toolchain.ts
+RANGE {"path":"packages/cli/src/commands/daemon/runtime-toolchain.ts","old_lines":[0,0],"new_lines":[24,34],"diff_block_lines":[30,40],"hunk_header":"@@ -0,0 +1,131 @@","substantive_changed_lines":7}
++
++function normalizeError(error: unknown): string {
++  if (error instanceof Error) {
++    return error.message
++  }
++  return String(error)
++}
++
++export function resolveNodePathFromPid(pid: number): NodePathFromPidResult {
++  const result = spawnSync('ps', ['-o', 'comm=', '-p', String(pid)], {
++    encoding: 'utf8',

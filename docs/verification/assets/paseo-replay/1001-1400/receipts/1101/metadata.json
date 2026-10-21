@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1101,
+  "revision": "b246d9726276cb0eba5b31dd8c09558cacbfce63",
+  "date": "2026-02-09T16:05:17+07:00",
+  "committer_date": "2026-02-09T16:05:17+07:00",
+  "parents": [
+    "1810ace23355db4b914dc1e5faad7f376279dffc"
+  ],
+  "subject": "fix: stop sidebar from relying on fetchAgents hydration",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-agents-grouped.ts"
+  ],
+  "source_receipt_digest": "sha256:8e60a802113d98e1b6ceb5f83dcb8cacd7d85c5080c2ae3c9aa364b20f3ea9e6",
+  "diff_tree_digest": "sha256:4269bf697242972613dd781e0136ff673c0f2902b8ec9688701cd07d77c0ba19",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        757,
+        767
+      ],
+      "new_lines": [
+        753,
+        753
+      ],
+      "diff_block_lines": [
+        12,
+        22
+      ],
+      "hunk_header": "@@ -751,140 +751,23 @@ export function SessionProvider({",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 135,
+  "receipt_file": "receipts/1101/selected.patch"
+}

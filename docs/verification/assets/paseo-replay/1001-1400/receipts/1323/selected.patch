@@ -1,0 +1,13 @@
+FILE packages/relay/src/encrypted-channel.ts
+RANGE {"path":"packages/relay/src/encrypted-channel.ts","old_lines":[49,56],"new_lines":[49,55],"diff_block_lines":[20,30],"hunk_header":"@@ -38,21 +38,21 @@ type ChannelState = \"connecting\" | \"handshaking\" | \"open\" | \"closed\";","substantive_changed_lines":7}
+ 
+-interface HelloMessage {
+-  type: "hello";
++interface E2EEHelloMessage {
++  type: "e2ee_hello";
+   key: string;
+ }
+ 
+-interface ReadyMessage {
+-  type: "ready";
++interface E2EEReadyMessage {

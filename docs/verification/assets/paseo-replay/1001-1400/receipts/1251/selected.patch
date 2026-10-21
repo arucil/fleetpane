@@ -1,0 +1,13 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[255,255],"new_lines":[258,268],"diff_block_lines":[25,35],"hunk_header":"@@ -254,4 +257,28 @@ export function TerminalPane({ serverId, cwd }: TerminalPaneProps) {","substantive_changed_lines":7}
+   }, []);
++  const requestTerminalReflow = useCallback(() => {
++    setResizeRequestToken((current) => current + 1);
++  }, []);
++
++  useFocusEffect(
++    useCallback(() => {
++      if (!selectedTerminalId) {
++        return;
++      }
++      // Navigation transitions can temporarily report stale dimensions.

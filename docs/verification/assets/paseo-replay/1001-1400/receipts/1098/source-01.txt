@@ -1,0 +1,36 @@
+          });
+          setHasHydratedAgents(serverId, true);
+          updateConnectionStatus(serverId, {
+            status: "online",
+            lastOnlineAt: new Date().toISOString(),
+            agentListReady: true,
+          });
+          return;
+        }
+      }
+    };
+
+    void hydrateAgents();
+    return () => {
+      cancelled = true;
+    };
+  }, [connectionSnapshot.isConnected, client, serverId, setHasHydratedAgents, updateConnectionStatus]);
+
+  // Daemon message handlers - directly update Zustand store
+  useEffect(() => {
+    const unsubAgentUpdate = client.on("agent_update", (message) => {
+      if (message.type !== "agent_update") return;
+      const update = message.payload;
+      const agentId = getAgentIdFromUpdate(update);
+      const initKey = getInitKey(serverId, agentId);
+      const session = useSessionStore.getState().sessions[serverId];
+      const isSyncingHistory =
+        session?.initializingAgents.get(agentId) === true &&
+        Boolean(getInitDeferred(initKey));
+
+      if (isSyncingHistory) {
+        pendingAgentUpdatesRef.current.set(agentId, update);
+        return;
+      }
+
+      pendingAgentUpdatesRef.current.delete(agentId);

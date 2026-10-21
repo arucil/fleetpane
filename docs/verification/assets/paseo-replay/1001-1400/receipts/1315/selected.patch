@@ -1,0 +1,13 @@
+FILE packages/app/src/components/multi-daemon-session-host.tsx
+RANGE {"path":"packages/app/src/components/multi-daemon-session-host.tsx","old_lines":[28,38],"new_lines":[7,7],"diff_block_lines":[37,47],"hunk_header":"@@ -1,144 +1,29 @@","substantive_changed_lines":8}
+-
+-function sortConnectionsByPreference<T extends { id: string }>(
+-  connections: T[],
+-  preferredId: string | null
+-): T[] {
+-  if (!preferredId) return connections;
+-  const idx = connections.findIndex((c) => c.id === preferredId);
+-  if (idx === -1) return connections;
+-  return [connections[idx]!, ...connections.slice(0, idx), ...connections.slice(idx + 1)];
+-}
+-

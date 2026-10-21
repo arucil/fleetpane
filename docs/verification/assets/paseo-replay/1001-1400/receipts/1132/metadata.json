@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1132,
+  "revision": "6053ee7c349824bff91c5c80598b1bd6f4536bf8",
+  "date": "2026-02-12T11:53:12+07:00",
+  "committer_date": "2026-02-12T14:05:46+07:00",
+  "parents": [
+    "3a303d209513445dd9136c9dae2d779007c240b6"
+  ],
+  "subject": "fix(cli): list all non-archived agents by default and drop ls --ui",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/tests/04-agent-ls.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2c3d56b7661cbbd25d207a481416fafcd0a4b44ba33d428773e96f9b80a49198",
+  "diff_tree_digest": "sha256:36a5e465cc238b0b105857936041d3fab9d1b60cafcd32ea751f91230c1c93b3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/ls.ts",
+      "old_lines": [
+        123,
+        131
+      ],
+      "new_lines": [
+        117,
+        122
+      ],
+      "diff_block_lines": [
+        43,
+        53
+      ],
+      "hunk_header": "@@ -118,37 +114,24 @@ export async function runLsCommand(",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 36,
+  "receipt_file": "receipts/1132/selected.patch"
+}

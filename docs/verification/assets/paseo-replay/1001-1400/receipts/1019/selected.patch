@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[1015,1015],"new_lines":[1041,1051],"diff_block_lines":[39,49],"hunk_header":"@@ -1013,4 +1030,30 @@ const CodexNotificationSchema = z.union([","substantive_changed_lines":9}
++  ),
++  z.object({ method: z.literal("codex/event/turn_aborted"), params: z.unknown() }).transform(
++    ({ method, params }): ParsedCodexNotification => ({ kind: "invalid_payload", method, params })
++  ),
++  z.object({
++    method: z.literal("codex/event/task_complete"),
++    params: CodexEventTaskCompleteNotificationSchema,
++  }).transform(
++    (): ParsedCodexNotification => ({
++      kind: "turn_completed",
++      status: "completed",

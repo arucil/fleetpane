@@ -1,0 +1,55 @@
+export function processTimelineResponse(
+  input: ProcessTimelineResponseInput
+): ProcessTimelineResponseOutput {
+  const {
+    payload,
+    currentTail,
+    currentHead,
+    currentCursor,
+    isInitializing,
+    hasActiveInitDeferred,
+    initRequestDirection,
+  } = input;
+
+  // ------------------------------------------------------------------
+  // Error path: reject init and leave stream state unchanged
+  // ------------------------------------------------------------------
+  if (payload.error) {
+    return {
+      tail: currentTail,
+      head: currentHead,
+      cursor: currentCursor,
+      cursorChanged: false,
+      initResolution: hasActiveInitDeferred ? "reject" : null,
+      clearInitializing: isInitializing,
+      error: payload.error,
+      sideEffects: [],
+    };
+  }
+
+  // ------------------------------------------------------------------
+  // Convert entries to timeline units
+  // ------------------------------------------------------------------
+  const timelineUnits = payload.entries.map((entry) => ({
+    seq: entry.seqStart,
+    event: {
+      type: "timeline",
+      provider: entry.provider,
+      item: entry.item,
+    } as AgentStreamEventPayload,
+    timestamp: new Date(entry.timestamp),
+  }));
+
+  const toHydratedEvents = (
+    units: typeof timelineUnits
+  ): Array<{ event: AgentStreamEventPayload; timestamp: Date }> =>
+    units.map(({ event, timestamp }) => ({ event, timestamp }));
+
+  // ------------------------------------------------------------------
+  // Derive bootstrap policy (replace vs incremental)
+  // ------------------------------------------------------------------
+  const bootstrapPolicy = deriveBootstrapTailTimelinePolicy({
+    direction: payload.direction,
+    reset: payload.reset,
+    epoch: payload.epoch,
+    endCursor: payload.endCursor,
