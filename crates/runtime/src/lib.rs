@@ -9,6 +9,8 @@ pub mod acp;
 pub mod attachments;
 pub mod attention;
 #[cfg(unix)]
+mod creation_directory;
+#[cfg(unix)]
 pub mod journal;
 pub mod lifecycle;
 pub mod stopping;

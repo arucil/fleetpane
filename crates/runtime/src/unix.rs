@@ -254,7 +254,25 @@ async fn write_frame_limit<W: AsyncWrite + Unpin, T: serde::Serialize>(
 struct Call {
     request: Request,
     reply: oneshot::Sender<Response>,
-    images: Result<Option<crate::attachments::Prepared>, String>,
+    prepared: PreparedInput,
+}
+
+type PreparedInput = Result<Option<crate::attachments::Prepared>, (&'static str, String)>;
+
+async fn prepare_input(
+    request: &Request,
+    store: &crate::attachments::Store,
+    acp: bool,
+) -> PreparedInput {
+    let Request::Execute { method, params, .. } = request else {
+        return Ok(None);
+    };
+    crate::creation_directory::validate(method, params)
+        .await
+        .map_err(|error| ("invalid_workspace_directory", error))?;
+    crate::attachments::prepare(store, method, params, acp)
+        .await
+        .map_err(|error| ("invalid_images", error))
 }
 
 async fn serve_client(
@@ -282,18 +300,14 @@ async fn serve_client(
                 continue;
             }
         };
-        let images = if let Request::Execute { method, params, .. } = &request {
-            crate::attachments::prepare(&store, method, params, acp).await
-        } else {
-            Ok(None)
-        };
+        let prepared = prepare_input(&request, &store, acp).await;
         let (reply, response) = oneshot::channel();
         timeout(
             IO_TIMEOUT,
             calls.send(Call {
                 request,
                 reply,
-                images,
+                prepared,
             }),
         )
         .await??;
@@ -310,7 +324,7 @@ async fn handle(
     replies: &mut QueryReplies,
     terminals: &mut crate::terminal::Manager,
     request: Request,
-    images: Result<Option<crate::attachments::Prepared>, String>,
+    prepared: PreparedInput,
 ) -> Response {
     match request {
         Request::Snapshot => {
@@ -427,9 +441,9 @@ async fn handle(
                     return Response::error("journal_unavailable", error.to_string());
                 }
             }
-            let images = match images {
+            let images = match prepared {
                 Ok(images) => images,
-                Err(error) => return Response::error("invalid_images", error),
+                Err((code, error)) => return Response::error(code, error),
             };
             if images.is_some()
                 && adapter.is_some()
@@ -730,7 +744,7 @@ pub async fn run(config: Config) -> Result<(), Error> {
                         }
                     }
                     request => {
-                        let response = handle(&mut state, &mut stdin, &mut adapter, &mut query_replies, &mut terminals, request, call.images).await;
+                        let response = handle(&mut state, &mut stdin, &mut adapter, &mut query_replies, &mut terminals, request, call.prepared).await;
                         // Mutation results remain in host state if a controller disappeared.
                         let _disconnected = call.reply.send(response);
                     }

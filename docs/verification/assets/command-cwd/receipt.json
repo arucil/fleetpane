@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "c5a48dc17048e419a7b3bc7b22258c90d4d2e7d7",
+  "source_sha256": {
+    "crates/session/src/files.rs": "92ff3c63f66a74479d4403f17dac7fc9c9609a349a0d7f6332a4a3fdd6d49a73",
+    "apps/desktop/src/conversation_item.rs": "b7be9fd51cda1eb5cdc6b166d1fa17a95400a4029acde1e3cb930fdd0e91b455"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "687eb27cc35957a9788b3f98959475d7ad839c955f90e1701930250406f130e3",
+    "apps/desktop/target/debug/fleetpane-desktop": "1e765a9d8a83c3619bdd24a397af400341f91fbb5a616885da360e6a32074061"
+  },
+  "regression": "same literal filename in thread root and command subdirectory; old root-relative resolution reads wrong content",
+  "native": {
+    "workspace": "fleetpane-command-cwd-20261022",
+    "file_clipboard": "正确子目录\r\n exact 中文  \n",
+    "file_clipboard_bytes": 33,
+    "draft_clipboard": "子目录链接保留草稿\n exact 中文  ",
+    "draft_clipboard_bytes": 43,
+    "normal_close": true,
+    "workspace_stopped": true,
+    "fixture_setup_correction": "initial fixture omitted required preview; fixed synthetic record and restarted only owned fixture Host before validation"
+  },
+  "checks": {
+    "engine_tests": 271,
+    "desktop_tests": 35,
+    "strict_clippy": "engine and desktop pass",
+    "process": [
+      "file-navigation",
+      "creation-directory",
+      "images"
+    ]
+  },
+  "limits": [
+    "Synthetic provider/history; no shell action or external model executed",
+    "Literal provider paths do not decode percent escapes or line suffixes",
+    "Workspace root confinement and refusal of traversal, symlinks, special files remain enforced",
+    "Original web-search/command-actions/creation-directory evidence retains its own earlier source and binary hashes"
+  ]
+}

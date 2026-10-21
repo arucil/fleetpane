@@ -141,8 +141,23 @@ impl Row {
             Content::Message(_) => "You".into(),
             Content::AgentParts(_) => "Assistant".into(),
             Content::Tool(call) => call.display_title().into(),
-            Content::Command(_) => "Command".into(),
+            Content::Command(command) => match command.command_actions.as_deref() {
+                Some([fleetpane_session::content::CommandAction::Read { .. }]) => {
+                    "Read file".into()
+                }
+                Some([fleetpane_session::content::CommandAction::ListFiles { .. }]) => {
+                    "List files".into()
+                }
+                Some([fleetpane_session::content::CommandAction::Search { .. }]) => {
+                    "Search files".into()
+                }
+                Some(actions) if actions.len() > 1 => {
+                    format!("Command · {} reported actions", actions.len())
+                }
+                _ => "Command".into(),
+            },
             Content::Mcp(call) => format!("{} · {}", call.server, call.tool),
+            Content::WebSearch(_) => "Web search".into(),
             Content::Files(_) => "Changed files".into(),
             Content::Image(_) => "Image".into(),
             Content::Reasoning(_) => "Reasoning".into(),
@@ -311,8 +326,67 @@ impl ItemView {
                 }
             }
             Content::Command(command) => {
+                use fleetpane_session::content::CommandAction;
                 let summary = command_summary(&command.command);
                 self.blocks.push(code(&summary));
+                match &command.command_actions {
+                    Some(actions) => {
+                        self.details.push(text(&format!(
+                            "{} provider-reported actions",
+                            actions.len()
+                        )));
+                        for action in actions {
+                            match action {
+                                CommandAction::Read {
+                                    command: action_command,
+                                    name,
+                                    path,
+                                } => {
+                                    self.blocks.push(
+                                        match Target::in_directory(&command.cwd, path) {
+                                            Ok(target) => Block::File {
+                                                target,
+                                                label: format!("Read · {name} · {path}").into(),
+                                            },
+                                            Err(error) => Block::Error(error.to_string().into()),
+                                        },
+                                    );
+                                    self.details.push(code(action_command));
+                                }
+                                CommandAction::ListFiles { command, path } => {
+                                    self.details.push(text("List files"));
+                                    self.details.push(code(command));
+                                    if let Some(path) = path {
+                                        self.details.push(text(path));
+                                    }
+                                }
+                                CommandAction::Search {
+                                    command,
+                                    path,
+                                    query,
+                                } => {
+                                    self.details.push(text("Search files"));
+                                    self.details.push(code(command));
+                                    if let Some(path) = path {
+                                        self.details.push(text(path));
+                                    }
+                                    if let Some(query) = query {
+                                        self.details.push(text(query));
+                                    }
+                                }
+                                CommandAction::Unknown { command } => {
+                                    self.details.push(text("Unclassified action"));
+                                    self.details.push(code(command));
+                                }
+                                CommandAction::Unsupported(raw) => {
+                                    self.details.push(text("Unsupported command action"));
+                                    self.details.push(code(&pretty(raw)));
+                                }
+                            }
+                        }
+                    }
+                    None => self.details.push(text("Command actions unavailable")),
+                }
                 if summary != command.command {
                     self.details.push(text("Command"));
                     self.details.push(code(&command.command));
@@ -342,6 +416,50 @@ impl ItemView {
                         self.details.push(text("Structured result"));
                         self.details.push(code(&pretty(structured)));
                     }
+                }
+            }
+            Content::WebSearch(search) => {
+                use fleetpane_session::content::WebSearchAction;
+                self.blocks.push(text(&search.query));
+                match &search.action {
+                    Some(WebSearchAction::Search { query, queries }) => {
+                        self.details.push(text("Search"));
+                        if let Some(query) = query {
+                            self.details.push(text(query));
+                        }
+                        for query in queries.iter().flatten() {
+                            self.details.push(text(query));
+                        }
+                    }
+                    Some(WebSearchAction::OpenPage { url }) => {
+                        self.details.push(text("Open page"));
+                        if let Some(url) = url {
+                            self.details.push(text(url));
+                        }
+                    }
+                    Some(WebSearchAction::FindInPage { url, pattern }) => {
+                        self.details.push(text("Find in page"));
+                        if let Some(url) = url {
+                            self.details.push(text(url));
+                        }
+                        if let Some(pattern) = pattern {
+                            self.details.push(text(pattern));
+                        }
+                    }
+                    Some(WebSearchAction::Other) => self.details.push(text("Other search action")),
+                    Some(WebSearchAction::Unknown(raw)) => {
+                        self.details.push(text("Unsupported search action"));
+                        self.details.push(code(&pretty(raw)));
+                    }
+                    None => self.details.push(text("Search action unavailable")),
+                }
+                if let Some(results) = &search.results {
+                    self.details
+                        .push(text(&format!("{} supplied results", results.len())));
+                    self.details
+                        .push(code(&pretty(&serde_json::json!(results))));
+                } else {
+                    self.details.push(text("Search results unavailable"));
                 }
             }
             Content::Files(changes) => {
@@ -766,6 +884,59 @@ mod tests {
             serde_json::from_value(json!({"id":"a","type":"agentMessage","text":value})).unwrap();
         let row = Row::item("thread", "turn", &item).unwrap();
         assert_eq!(row.copy.len(), PREVIEW_BYTES * 3);
+    }
+
+    #[test]
+    fn command_cards_classify_only_supplied_actions_and_preserve_whole_output() {
+        for (action, label) in [
+            (
+                json!({"type":"read","command":"cat one","name":"one","path":"one"}),
+                "Read file",
+            ),
+            (json!({"type":"listFiles","command":"ls"}), "List files"),
+            (
+                json!({"type":"search","command":"rg exact","query":" exact "}),
+                "Search files",
+            ),
+        ] {
+            let item:Item=serde_json::from_value(json!({"id":"c","type":"commandExecution","command":"opaque original command","cwd":"/work","status":"completed","commandActions":[action.clone()],"aggregatedOutput":" one\n二  ","exitCode":null,"future":42})).unwrap();
+            let row = Row::item("thread", "turn", &item).unwrap();
+            assert_eq!(row.label, label);
+            assert!(!row.failed());
+            let fields: Value = serde_json::from_str(&row.copy).unwrap();
+            assert_eq!(fields["commandActions"], json!([action]));
+            assert_eq!(fields["aggregatedOutput"], " one\n二  ");
+            assert_eq!(fields["future"], 42);
+            assert!(fields["exitCode"].is_null());
+        }
+        let item:Item=serde_json::from_value(json!({"id":"c","type":"commandExecution","command":"cat one","cwd":"/work","status":"completed"})).unwrap();
+        assert_eq!(Row::item("thread", "turn", &item).unwrap().label, "Command");
+        let item:Item=serde_json::from_value(json!({"id":"c","type":"commandExecution","command":"cat one","cwd":"/work","status":"completed","commandActions":[{"type":"read","command":"cat","name":"x"}]})).unwrap();
+        let row = Row::item("thread", "turn", &item).unwrap();
+        assert!(row.failed());
+        assert_eq!(row.label, "Invalid commandExecution");
+    }
+
+    #[test]
+    fn search_rows_keep_source_fields_without_inventing_completion() {
+        let source = json!({"id":"search","type":"webSearch","query":" 中文 ","action":{"type":"future","extra":42},"results":[{"payload":"literal"}],"futureField":true});
+        let item: Item = serde_json::from_value(source.clone()).unwrap();
+        let row = Row::item("thread", "turn", &item).unwrap();
+        assert_eq!(row.label, "Web search");
+        assert!(!row.failed());
+        assert!(matches!(row.content, Content::WebSearch(_)));
+        let fields: Value = serde_json::from_str(&row.copy).unwrap();
+        assert_eq!(fields["futureField"], true);
+        assert_eq!(fields["action"], source["action"]);
+        assert!(fields.get("status").is_none());
+        let invalid:Item=serde_json::from_value(json!({"id":"bad","type":"webSearch","query":"x","action":{"type":"search","queries":[4]}})).unwrap();
+        let row = Row::item("thread", "turn", &invalid).unwrap();
+        assert!(row.failed());
+        assert_eq!(row.label, "Invalid webSearch");
+        assert_eq!(
+            serde_json::from_str::<Value>(&row.copy).unwrap()["action"]["queries"],
+            json!([4])
+        );
     }
 
     #[test]

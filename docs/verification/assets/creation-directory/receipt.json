@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "c5a48dc17048e419a7b3bc7b22258c90d4d2e7d7",
+  "source_sha256": {
+    "crates/runtime/src/creation_directory.rs": "09eb98b369e47721e732c1cb13e5cca1133af27deb0be710a9895bf57984b2c8",
+    "crates/runtime/src/unix.rs": "e77d7c69038754a758801b5ae06be753ba4b10d88c491a65240afc83738cf35e",
+    "scripts/creation-directory-smoke.py": "6a8b42f03c17d9cc236ffd40cf7922ce41cc6f1f517dba10d1ca057233ce8177"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "a5ec3a38b45837fa6649e518480d97d7ac10a929bc182ad9fdce56dd9cede558",
+    "apps/desktop/target/debug/fleetpane-desktop": "ddcc57dd09b04408637d8c372aaa78a378923d04d7565285f31b3378a8026923"
+  },
+  "regression": "old Host admitted nonexistent directory; current refuses before admission",
+  "process": "process.json",
+  "native": {
+    "workspace": "fleetpane-create-20261022",
+    "sizes": [
+      [
+        1100,
+        720
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "codex_missing_visible": true,
+    "acp_file_path_visible": true,
+    "after_each_error_one_valid_creation": true,
+    "journal_total_each_host": 1,
+    "same_host_provider_identities": true,
+    "draft": "目录校验保留草稿\n exact 中文  ",
+    "draft_utf8_bytes": 40,
+    "replacement_clipboard_readback": true,
+    "normal_close_and_workspace_stopped": true
+  },
+  "checks": {
+    "engine_tests": 270,
+    "desktop_tests": 35,
+    "clippy": "engine and desktop strict pass",
+    "format": "engine and desktop pass",
+    "process": [
+      "creation-directory",
+      "session",
+      "acp",
+      "creations",
+      "images"
+    ],
+    "python_tests": 16,
+    "windows_gnu": "engine compile/lint only"
+  },
+  "limits": [
+    "Host-local preflight observes a path; provider is still responsible for changes between check and use",
+    "Existing directory symlinks allowed; exact user cwd retained",
+    "Two filesystem jobs, one total two-second deadline; timed-out jobs retain permits until they exit",
+    "Synthetic providers; no external-model or non-Linux native acceptance",
+    "No live Host update or existing runtime restart performed"
+  ]
+}

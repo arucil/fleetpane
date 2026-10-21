@@ -97,6 +97,7 @@ pub struct HostView {
     permission_file_subscription: Option<Subscription>,
     timeline: ListState,
     interactions_scroll: ScrollHandle,
+    compact_details: bool,
     directory_scroll: UniformListScrollHandle,
     workspace: Entity<InputState>,
     composer: Entity<TextareaState>,
@@ -325,6 +326,7 @@ impl HostView {
             timeline,
             directory_scroll: UniformListScrollHandle::new(),
             interactions_scroll: ScrollHandle::new(),
+            compact_details: false,
             workspace,
             composer,
             draft: draft::State::new(draft_directory),
@@ -1880,9 +1882,80 @@ impl HostView {
     }
 }
 
+impl HostView {
+    fn render_session_details(&self, blocked: bool, cx: &mut Context<Self>) -> AnyElement {
+        div()
+            .child(self.reported_session_settings(cx))
+            .when(self.thread.is_some(), |pane| {
+                pane.child(
+                    div()
+                        .px_4()
+                        .pb_2()
+                        .flex()
+                        .gap_2()
+                        .items_center()
+                        .when(self.rename_target.is_none(), |row| {
+                            row.child(
+                                Button::new("rename-session")
+                                    .small()
+                                    .ghost()
+                                    .label("Rename session")
+                                    .disabled(blocked || self.is_acp())
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        if let Some(thread) = &this.thread {
+                                            this.rename_target = Some(thread.id.clone());
+                                            let title = thread.title().to_owned();
+                                            this.rename.update(cx, |input, cx| {
+                                                input.set_value(title, window, cx);
+                                                input.focus(window, cx);
+                                            });
+                                            cx.notify();
+                                        }
+                                    })),
+                            )
+                        })
+                        .when(self.rename_target.is_some(), |row| {
+                            row.child(
+                                Input::new(&self.rename)
+                                    .aria_label("Session name")
+                                    .disabled(blocked)
+                                    .flex_1(),
+                            )
+                            .child(
+                                Button::new("save-session-name")
+                                    .small()
+                                    .label("Save name")
+                                    .disabled(
+                                        blocked
+                                            || self.draining()
+                                            || self.rename.read(cx).value().trim().is_empty(),
+                                    )
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        this.save_name(window, cx);
+                                    })),
+                            )
+                            .child(
+                                Button::new("cancel-session-name")
+                                    .small()
+                                    .ghost()
+                                    .label("Cancel")
+                                    .disabled(self.busy)
+                                    .on_click(cx.listener(|this, _, _, cx| {
+                                        this.rename_target = None;
+                                        cx.notify();
+                                    })),
+                            )
+                        }),
+                )
+            })
+            .into_any_element()
+    }
+}
+
 impl Render for HostView {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let owns = self.owns();
+        let compact = window.viewport_size().height < px(680.);
         let blocked = self.busy || !self.can_act() || self.pending.is_some();
         let stopping = self
             .snapshot
@@ -2359,7 +2432,7 @@ impl Render for HostView {
                             .flex_col()
                             .child(
                                 div()
-                                    .p_4()
+                                    .px_4().py(if compact {px(8.)} else {px(16.)})
                                     .flex()
                                     .items_center()
                                     .justify_between()
@@ -2367,6 +2440,11 @@ impl Render for HostView {
                                     .child(
                                         div().flex_1().min_w_0().text_lg().truncate().child(title),
                                     )
+                                    .when(compact, |row| row.child(
+                                        Button::new("compact-session-details").small().ghost()
+                                            .label(if self.compact_details {"Hide options"} else {"Session options"})
+                                            .on_click(cx.listener(|this, _, _, cx| {this.compact_details = !this.compact_details;cx.notify();}))
+                                    ))
                                     .when_some(
                                         self.thread.as_ref().map(|thread| thread.id.clone()),
                                         |row, id| {
@@ -2398,85 +2476,8 @@ impl Render for HostView {
                                         },
                                     ),
                             )
-                            .child(self.reported_session_settings(cx))
+                            .when(!compact, |pane| pane.child(self.render_session_details(blocked, cx)))
                             .child(self.tree_navigation_banner(cx))
-                            .when(self.thread.is_some(), |pane| {
-                                pane.child(
-                                    div()
-                                        .px_4()
-                                        .pb_2()
-                                        .flex()
-                                        .gap_2()
-                                        .items_center()
-                                        .when(self.rename_target.is_none(), |row| {
-                                            row.child(
-                                                Button::new("rename-session")
-                                                    .small()
-                                                    .ghost()
-                                                    .label("Rename session")
-                                                    .disabled(blocked || self.is_acp())
-                                                    .on_click(cx.listener(
-                                                        |this, _, window, cx| {
-                                                            if let Some(thread) = &this.thread {
-                                                                this.rename_target =
-                                                                    Some(thread.id.clone());
-                                                                let title =
-                                                                    thread.title().to_owned();
-                                                                this.rename.update(
-                                                                    cx,
-                                                                    |input, cx| {
-                                                                        input.set_value(
-                                                                            title, window, cx,
-                                                                        );
-                                                                        input.focus(window, cx);
-                                                                    },
-                                                                );
-                                                                cx.notify();
-                                                            }
-                                                        },
-                                                    )),
-                                            )
-                                        })
-                                        .when(self.rename_target.is_some(), |row| {
-                                            row.child(
-                                                Input::new(&self.rename)
-                                                    .aria_label("Session name")
-                                                    .disabled(blocked)
-                                                    .flex_1(),
-                                            )
-                                            .child(
-                                                Button::new("save-session-name")
-                                                    .small()
-                                                    .label("Save name")
-                                                    .disabled(
-                                                        blocked || self.draining()
-                                                            || self
-                                                                .rename
-                                                                .read(cx)
-                                                                .value()
-                                                                .trim()
-                                                                .is_empty(),
-                                                    )
-                                                    .on_click(cx.listener(
-                                                        |this, _, window, cx| {
-                                                            this.save_name(window, cx);
-                                                        },
-                                                    )),
-                                            )
-                                            .child(
-                                                Button::new("cancel-session-name")
-                                                    .small()
-                                                    .ghost()
-                                                    .label("Cancel")
-                                                    .disabled(self.busy)
-                                                    .on_click(cx.listener(|this, _, _, cx| {
-                                                        this.rename_target = None;
-                                                        cx.notify();
-                                                    })),
-                                            )
-                                        }),
-                                )
-                            })
                             .child(self.render_history_navigation(blocked, cx))
                             .child(
                                 // Split the space left AFTER the header/editor.
@@ -2497,7 +2498,7 @@ impl Render for HostView {
                             .child(div().id("session-interactions")
                             .min_h_0()
                             .flex_shrink_0()
-                            .max_h(relative(0.5))
+                            .max_h(relative(if compact {0.35} else {0.5}))
                             .overflow_y_scroll()
                             .track_scroll(&self.interactions_scroll)
                             .child(div().flex().flex_col().flex_shrink_0()
@@ -2505,9 +2506,10 @@ impl Render for HostView {
                                 Button::new("close-session-tree").small().ghost().label("Close session tree")
                                     .on_click(cx.listener(|this, _, _, cx| {this.session_tree = None;this.session_tree_subscription=None;this.tree_opening=None;cx.notify();}))
                             ))
+                            .when(compact && self.compact_details, |pane| pane.child(self.render_session_details(blocked,cx)))
                             .children(self.session_tree.clone())
-                            .when(self.thread.is_some(), |view| view.child(self.render_tasks(cx)))
-                            .when(!self.is_acp(), |view| view.child(self.render_mcp(cx)))
+                            .when(self.thread.is_some() && (!compact || self.compact_details), |view| view.child(self.render_tasks(cx)))
+                            .when(!self.is_acp() && (!compact || self.compact_details), |view| view.child(self.render_mcp(cx)))
                             .children(self.thread.as_ref().filter(|thread| {
                                 thread.history_mode.as_deref() == Some("legacy")
                             }).map(|_| {
@@ -2687,10 +2689,10 @@ impl Render for HostView {
                                 },
                             ))
                             .when(!has_question, |region| region.child(
-                                div().p_4().flex().flex_col().gap_2()
+                                div().px_4().py(if compact {px(4.)} else {px(16.)}).flex().flex_col().gap_2()
                                     .child(self.render_draft(cx))
-                                    .child(self.render_options(cx))
-                                    .child(self.render_images(blocked, cx))
+                                    .when(!compact || self.compact_details, |pane| pane.child(self.render_options(cx)))
+                                    .when(!compact || self.compact_details || !self.draft_images().is_empty() || self.draft.images_error.is_some(), |pane| pane.child(self.render_images(blocked, cx)))
                                     .when(active_turn && self.is_acp() && !cancel_requested, |pane| pane.child(
                                         div().text_xs().text_color(cx.theme().muted_foreground)
                                             .child("DeepSeek ACP does not support live follow-ups. Stop the turn before sending a new message.")
@@ -2699,7 +2701,7 @@ impl Render for HostView {
                             )))
                             .child(
                                 div()
-                                    .p_4()
+                                    .px_4().py(if compact {px(8.)} else {px(16.)})
                                     .border_t_1()
                                     .border_color(cx.theme().border)
                                     .flex()

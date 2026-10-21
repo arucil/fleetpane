@@ -1,0 +1,464 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "c5a48dc17048e419a7b3bc7b22258c90d4d2e7d7",
+  "source_sha256": {
+    "crates/session/src/content.rs": "ff1d9629b61057df9c5573872dbdc4e0ae028f139a0f19807258ab80889fc508",
+    "apps/desktop/src/conversation_item.rs": "597ae702bca81753a72a4d3540f1c6efdcf89d5c52885698bea56e554f3706a8",
+    "scripts/render-fixture.py": "e603958cd84933d3c1657904a45d4018197e7ac301939cdba1b80a81c050c215"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "2122cec626f2eb831edca8f2591134a82cea15f1c9516a3fe0de90c193d67c1a",
+    "apps/desktop/target/debug/fleetpane-desktop": "11c071196b0f6d54d404b88b9a3d4c05c70ab7ba34658f6eda3140e1a7b8b869"
+  },
+  "schema_sha256": {
+    "schema.json": "8098a3e996b413de7997548aad89bb629a394ba7a05d70155e28870f9717b816"
+  },
+  "native_workspace": "fleetpane-search-20261022",
+  "clipboard": {
+    "search_bytes": 318,
+    "future_action_bytes": 174,
+    "draft": "搜索卡片不发送\n exact 中文  ",
+    "draft_utf8_bytes": 37,
+    "replacement_readback": true
+  },
+  "runtime": {
+    "same_host_provider": true,
+    "journal_total": 0,
+    "explicit_takeover_generations": [
+      1,
+      2
+    ],
+    "workspace_stopped": true
+  },
+  "checks": {
+    "engine_tests": 266,
+    "desktop_tests": 34,
+    "strict_clippy": "engine and desktop pass",
+    "formatting": "engine and desktop pass",
+    "baseline_regression": "fails before fix; passes current",
+    "windows_gnu_clippy": "passed"
+  },
+  "limits": [
+    "900x560 conversation too short; layout remains open",
+    "Synthetic histories; no external search/model/network validation",
+    "Copy returns original fields, without item id/type",
+    "No non-Linux native or performance claim"
+  ],
+  "history_inspections": [
+    {
+      "ordinal": 442,
+      "revision": "a4ae93cef00cd2af2ccfaf8036306c1b5e3493eb",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 8151,
+      "patch_sha256": "37c5568a1133ab49160226720e1bfac73a3dfe529ed64a5fb4bdaa4221a47854"
+    },
+    {
+      "ordinal": 443,
+      "revision": "b752c8a56224c015f8999ddfd440015997b0a861",
+      "paths": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 11176,
+      "patch_sha256": "7bc4b29d57711afd10c21153b6911df85e51d3d5a94a5ffa9ef76faa1bd2a2af"
+    },
+    {
+      "ordinal": 444,
+      "revision": "f1e1bd47805033db83d88c5f1d41168ea53842a6",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 7121,
+      "patch_sha256": "ecbfb80801411c108e247e17252984b9b00d051fcdf19537ac3c89f92d16f308"
+    },
+    {
+      "ordinal": 445,
+      "revision": "e41ad30d26cd8324a2d4a4c6833fdbff7df7894a",
+      "paths": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 13489,
+      "patch_sha256": "7a0534ec258c34ba2f8d1de37725b72375e6de2b61cbfb8f7173edfdb63c5ba9"
+    },
+    {
+      "ordinal": 446,
+      "revision": "9d3b45475a042b282c029f976f4b031270afb14b",
+      "paths": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 66231,
+      "patch_sha256": "3250c1e96ad8db6f2af8e000abbce35c991e6bc540ccebb013db62a86f0c3c10"
+    },
+    {
+      "ordinal": 447,
+      "revision": "5ce9be16883efddb9ca2e84772bcc6b3e5860199",
+      "paths": [
+        "REPORT-claude-credentials-failure.md",
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 9722,
+      "patch_sha256": "0870d2177633dfd44cebe8e1ea23c33a84dbdaa0d0f6cc0e3f53a03a91c98084"
+    },
+    {
+      "ordinal": 448,
+      "revision": "6c48b5044204bd30f3b77b21674be0a41c7b8a77",
+      "paths": [
+        "REPORT-codex-mcp-claude-parity.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 7288,
+      "patch_sha256": "a4967427c8670aef30c122e4d0caa79a0d656b3e4bea1bee9b21d2d3f6c99274"
+    },
+    {
+      "ordinal": 449,
+      "revision": "c8988b80d6c3b52c9e33d9b972010cf39348890e",
+      "paths": [
+        "REPORT-codex-mcp-tool-call-coverage.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 21978,
+      "patch_sha256": "ade9a8865251ad83ea3c5bdcc638d71bb3ebbfed2fad68c70dac035eae9c792b"
+    },
+    {
+      "ordinal": 450,
+      "revision": "672261872a003b395bada59b5950f34c6fde2652",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 18600,
+      "patch_sha256": "868729d4085b9e68b6efc20b1fda6675b197062a646a1de492d5d1bd03cb8609"
+    },
+    {
+      "ordinal": 451,
+      "revision": "4ef376632836eef0e25fa743a2e67036f1713304",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4394,
+      "patch_sha256": "958ea0bb8691e276c7749fcdc1e2acf1dcc127579088f2a4caf4db57e43312fd"
+    },
+    {
+      "ordinal": 452,
+      "revision": "27b0218b94f3a44fe005a62f5e0ec882f333d80f",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 5435,
+      "patch_sha256": "dc4dfc03e9682af8a34c127de9238aaaebda32e0e84fbcb244c26ee002ea89e8"
+    },
+    {
+      "ordinal": 453,
+      "revision": "8812107f90d3cd5ae1609699cc139b2819a13101",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4037,
+      "patch_sha256": "f2b352c701f815dd3ee1575295a6f343aa6a7710ec61279a30bdc92029003fc9"
+    },
+    {
+      "ordinal": 454,
+      "revision": "74ff71c8484413bb6c97aa52305e90ed7ba544c8",
+      "paths": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 117813,
+      "patch_sha256": "d6c34ba5a7061e6c4ebcb7a83161d6b6c6cbad5b746a395592096b715d45bfa6"
+    },
+    {
+      "ordinal": 455,
+      "revision": "e546009190c34b2f5f46c8e64faea74c4b1916f6",
+      "paths": [
+        "REPORT-codex-mcp-refactor-review.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 5186,
+      "patch_sha256": "410303a08463dab277422d1cc6e8b4bfd3bafcac9bb2462182b8fefb827d302e"
+    },
+    {
+      "ordinal": 456,
+      "revision": "4221df1e2dbdf49c09e91a13316a5b01e5bbcd01",
+      "paths": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 43512,
+      "patch_sha256": "4f80ac25240dd1ff6043d57dd3fa9a8346a7c795e6e5512ee406765d1bed03b1"
+    },
+    {
+      "ordinal": 457,
+      "revision": "199fb9e70b67b094993af0b8746d0bc1cc52c36f",
+      "paths": [
+        "REPORT-refactor-validation-test-audit.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 26492,
+      "patch_sha256": "94a10e67347a2b842ec07488eb1b87b5fb62acc04c780ab216534bbe4b66d714"
+    },
+    {
+      "ordinal": 458,
+      "revision": "f5f1410591e79f6b3533cfba68fb4e953de1492f",
+      "paths": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4394,
+      "patch_sha256": "0c03985928b320b399c15baa804d27b98d589a5a6345da94d19efc7319ef1c9f"
+    },
+    {
+      "ordinal": 459,
+      "revision": "efdec18ad3cbb8fcdc1dfa1dc810478f2355d9b4",
+      "paths": [
+        "packages/server/src/server/agent/activity-curator.ts",
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/agent/stt-openai.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 24973,
+      "patch_sha256": "a42f2967af737698ad9bb6beabe9de6b954498eb22f84af64b6c825c47cfd3a6"
+    },
+    {
+      "ordinal": 460,
+      "revision": "f02d97a8514702deaf57d400238b9482983a4476",
+      "paths": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 30712,
+      "patch_sha256": "98326602db07f4edc1ca2cf1a17156e2101c36d8bd3f66b3bde9dec78ed0abab"
+    },
+    {
+      "ordinal": 461,
+      "revision": "3154fb208469e17ce917abde0d25512dee771cd6",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 7768,
+      "patch_sha256": "4f299062b367878a5f51865a64cfdfda1b1d1b68335a0f955c11fa552f441841"
+    },
+    {
+      "ordinal": 462,
+      "revision": "a1886c08d1bcbad5fdcd78dbfd30b92581e05c46",
+      "paths": [
+        "REPORT-e2e-rerun.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 5326,
+      "patch_sha256": "b9f61c2eebcf790c753e6ca6f14542ee69eeb6a6a4572cc6df8d4e6dfb711911"
+    },
+    {
+      "ordinal": 463,
+      "revision": "7b00544caaf8b134eb79e1a9bd95c7fa987bd5ab",
+      "paths": [
+        "plan.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 1829,
+      "patch_sha256": "d4a55043d5e2b38d9797667da22670ab4014c1a2039079551bec2afefacd302a"
+    },
+    {
+      "ordinal": 464,
+      "revision": "fe5e86d514dd09ca1b93062aadb8e1103716cc2a",
+      "paths": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 8809,
+      "patch_sha256": "71a68956b69c16ebddb1b3c9056cf67444d331eb7a4781ad93466a02ece10c74"
+    },
+    {
+      "ordinal": 465,
+      "revision": "3146533438352a7a46ce2245d604cae3b601c3a5",
+      "paths": [
+        "REPORT-codex-mcp-go-live-audit.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 58783,
+      "patch_sha256": "5fb720e398687491ee553fac15cbb3844a1d8bc67f763b98c35e0d1390f5034b"
+    },
+    {
+      "ordinal": 466,
+      "revision": "8261910c376d2a320fe49a28c576e86f4ccb39aa",
+      "paths": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 1617,
+      "patch_sha256": "651bb7cf876f9374b37976e39a9b2f58251d77c4bd7f0851a12d272ebfecda75"
+    },
+    {
+      "ordinal": 467,
+      "revision": "c771fd986d47156954bca9b16662eee52f1cc54b",
+      "paths": [
+        "packages/server/src/server/agent/agent-projections.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4452,
+      "patch_sha256": "7427ea025354b5642fb4b0a0258499eba639d04ba6138b8eb017aa9cbba68fee"
+    },
+    {
+      "ordinal": 468,
+      "revision": "16bce1c3c50936949982165f23afaafd3f3ec355",
+      "paths": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 3076,
+      "patch_sha256": "250f672e6dfc32a914b02a31911b2dcdda427ed4637f020affb9e890ccb668fe"
+    },
+    {
+      "ordinal": 469,
+      "revision": "65763a70f11b342b509d57a3b8c01320bd10a746",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 27878,
+      "patch_sha256": "69acd582ac8b37ab058eb3019a06de170ab830eb63304ba3dc064d9f66a4a05e"
+    },
+    {
+      "ordinal": 470,
+      "revision": "381b08120b20013a0eb260d9d474fcda098877a8",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 10488,
+      "patch_sha256": "6fe98df186aa033dc103a223246f62a281f560a58b6c046b32a4e555af96f6a7"
+    },
+    {
+      "ordinal": 471,
+      "revision": "54f1a7c1d7174f789564a57d780b72c25739355d",
+      "paths": [
+        "plan.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 2869,
+      "patch_sha256": "96bbe367f54f9a8c85ff0b480a6abb007f6cdfac2c59a77468a3ec5a8fbcfa99"
+    },
+    {
+      "ordinal": 472,
+      "revision": "c816b1f82ecea9cd3c37938d969dfcb368a231dd",
+      "paths": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4665,
+      "patch_sha256": "44f0f1062d18c70094c274fa7a3cbf1987fe370c5ebecae298cef66ee83b3185"
+    },
+    {
+      "ordinal": 473,
+      "revision": "31312f5396d64831c4ce45914929b2c4b0829e92",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 12926,
+      "patch_sha256": "248b1bb45822cf82e6836fbdb26714f7081249366df4b49a4f83902b60d4a7cc"
+    },
+    {
+      "ordinal": 474,
+      "revision": "f1df1cdcce1cbfd1d470f2a669d2cc589408c69a",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 5526,
+      "patch_sha256": "7d6d7837779ef7d4dfc2112cda3feb30e0a405ad30deeab0ca454327552ec8b5"
+    },
+    {
+      "ordinal": 475,
+      "revision": "28514f5b76d9daee75fd3528e1753f46d03bfcb2",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 24377,
+      "patch_sha256": "ed152f3eac32d39d84298ae88770fd2e24d16056a8d402118e87c0a760ad6edf"
+    },
+    {
+      "ordinal": 476,
+      "revision": "30af3ffd1a23d1d2b0625cdc077348fa97ac18ee",
+      "paths": [
+        "REPORT-test-audit.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 328565,
+      "patch_sha256": "822e0a71ff344508225cb2e90b2a4f5979a9fa620bf4cfc588b069e8ffbcf2b7"
+    },
+    {
+      "ordinal": 477,
+      "revision": "f96bde68b341823009233a0e7c72a51c45ba918c",
+      "paths": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 14445,
+      "patch_sha256": "74d52160f2099b9ab94aa0c967a4dff8ef7e3c007bf492bda5feabc2349854ef"
+    },
+    {
+      "ordinal": 478,
+      "revision": "f138b755062044e0a7b03a261f6dae8849358f1e",
+      "paths": [
+        "plan.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 4821,
+      "patch_sha256": "7f13b4912f83cec92ed60ea38183352af94d9c7b77d1f7b2736e00a288235906"
+    },
+    {
+      "ordinal": 479,
+      "revision": "c40de3bd49a782209525474baab124b5e86b4189",
+      "paths": [
+        "plan.md"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 110817,
+      "patch_sha256": "972c033cdf48b238f52fdfd135eaba9e9e43db494ffb06329ac95bebab9af504"
+    },
+    {
+      "ordinal": 480,
+      "revision": "1b56751324babbba3d399e2e9de22a0f7b346570",
+      "paths": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/agent/provider-manifest.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "scope": "Selected source/report hunks only; digest identifies captured patch, not full-file audit or runtime acceptance",
+      "patch_bytes": 22989,
+      "patch_sha256": "60f8ed34c6247cec6803f2234001eafea68ad429eff4c7c274717813c42a4f53"
+    }
+  ],
+  "reference_tips_fetched_2026_10_22": [
+    "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c",
+    "2d0977759b168264adb3961a862eda8cd574f562"
+  ]
+}

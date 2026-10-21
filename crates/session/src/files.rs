@@ -76,6 +76,35 @@ pub struct Target {
     pub line: Option<NonZeroUsize>,
 }
 
+impl Target {
+    /// Resolve a literal provider path against the command's directory, not the
+    /// conversation directory. Workspace identity and confinement are checked on open.
+    pub fn in_directory(directory: &str, path: &str) -> Result<Self, Error> {
+        if path.is_empty() || path.len() > 4096 || path.contains('\0') {
+            return Err(invalid("choose a nonempty file path within 4 KiB"));
+        }
+        let path = Path::new(path);
+        let resolved = if path.is_absolute() {
+            path.to_owned()
+        } else {
+            if !Path::new(directory).is_absolute() || directory.contains('\0') {
+                return Err(invalid("command directory must be an absolute local path"));
+            }
+            Path::new(directory).join(path)
+        };
+        let path = resolved
+            .to_str()
+            .ok_or_else(|| invalid("file path is not UTF-8"))?;
+        if path.len() > 4096 {
+            return Err(invalid("resolved file path exceeds 4 KiB"));
+        }
+        Ok(Self {
+            path: path.into(),
+            line: None,
+        })
+    }
+}
+
 #[derive(Debug, PartialEq, Eq)]
 pub enum Link {
     Web(String),
@@ -483,6 +512,45 @@ mod tests {
         path::PathBuf,
     };
     static SERIAL: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
+    #[tokio::test]
+    async fn command_read_path_uses_its_directory_and_keeps_literal_names() {
+        let _guard = SERIAL.lock().await;
+        let (base, workspace) = fixture().await;
+        let root = base.join("work");
+        let directory = root.join("子目录 ");
+        std::fs::create_dir(&directory).unwrap();
+        let name = "exact%20#tag:2.txt";
+        std::fs::write(root.join(name), "wrong root file").unwrap();
+        std::fs::write(directory.join(name), "exact 子目录\r\n  ").unwrap();
+        let target = Target::in_directory(directory.to_str().unwrap(), name).unwrap();
+        let Opened::File(file) = workspace.open_path(&target.path).await.unwrap() else {
+            panic!("expected file");
+        };
+        assert!(matches!(file.content,Content::Text {text} if text == "exact 子目录\r\n  "));
+        assert_eq!(target.line, None);
+        let absolute = directory.join(name);
+        assert_eq!(
+            Target::in_directory("unused", absolute.to_str().unwrap()).unwrap(),
+            target
+        );
+        for (cwd, path) in [
+            ("relative", "file"),
+            ("", "file"),
+            ("/work", ""),
+            ("/work", "bad\0path"),
+        ] {
+            assert!(Target::in_directory(cwd, path).is_err());
+        }
+        for (cwd, path) in [
+            (directory.to_str().unwrap(), "../exact%20#tag:2.txt"),
+            (base.to_str().unwrap(), "outside.txt"),
+        ] {
+            let target = Target::in_directory(cwd, path).unwrap();
+            assert!(workspace.open_path(&target.path).await.is_err());
+        }
+        std::fs::remove_dir_all(base).unwrap();
+    }
 
     #[test]
     fn explicit_links_decode_paths_and_lines_without_external_scheme_confusion() {

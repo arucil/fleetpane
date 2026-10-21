@@ -246,3 +246,9 @@ Installed Codex 0.163.0 discovers a synthetic stdio tool without a model call.
 Unknown auth/runtime values and schemas are retained; discovery is explicit and
 may start configured servers. Config editing/OAuth, injected orchestration and
 per-session connection status remain open.
+
+Codex supplied web-search cards (2026-10-22) now have [local projection/native evidence](verification/2026-10-22-web-search.md): exact queries, actions, opaque results and future/invalid metadata. This does not implement external search or resolve the minimum-size conversation layout gap.
+
+Supplied command actions and compact conversations (2026-10-22): ordered typed actions, separate read links, complete Copy and retained drafts/window replacement have [local native evidence](verification/2026-10-22-command-actions.md). At 900×560 optional settings use explicit Session options while composer and approval/Stop stay reachable; arbitrary-content and cross-platform acceptance remain open.
+
+Creation directory validation (2026-10-22): the Host rejects invalid paths before fresh admission for both current providers, retains exact cwd and original duplicate receipts. [Local native/process evidence](verification/2026-10-22-creation-directory.md) separates preflight observation from provider use.

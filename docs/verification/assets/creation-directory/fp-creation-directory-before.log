@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/creation-directory-smoke.py", line 129, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/creation-directory-smoke.py", line 121, in main
+    results = [exercise(root / "codex", False), exercise(root / "acp", True)]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/creation-directory-smoke.py", line 69, in exercise
+    assert response["response"] == "error", (cwd, response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('/tmp/fp-create-directory-56vdbd4d/codex/absent', {'response': 'operation', 'data': {'id': 'ee4d112c-5c84-4914-8173-6d07ca22cb17', 'method': 'thread/start', 'params': {'cwd': '/tmp/fp-create-directory-56vdbd4d/codex/absent', 'historyMode': 'paginated'}, 'outcome': {'state': 'accepted'}, 'completed_sequence': None}})

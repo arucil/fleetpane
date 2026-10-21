@@ -175,6 +175,33 @@ samples = [
         ],
     ),
 ]
+samples.append((
+    "09 Web search actions",
+    [
+        item("webSearch", "search", query="Fleetpane 中文 query",
+             action={"type": "search", "queries": ["Rust native", " 中文 query "]},
+             results=[{"title": "<b>literal result</b>", "url": "https://example.invalid/path?q=中文", "future": {"score": 3}}]),
+        item("webSearch", "open", query="", action={"type": "openPage", "url": "https://example.invalid/open"}),
+        item("webSearch", "find", query="exact needle 中文", action={"type": "findInPage", "url": "https://example.invalid/find", "pattern": " exact 中文 "}, results=[]),
+        item("webSearch", "future-search", query="future search", action={"type": "futureAction", "payload": {"中文": [1, 2]}}, futureTop="retained"),
+        item("webSearch", "unavailable-search", query="No action or results supplied"),
+        item("webSearch", "malformed-search", query="bad known action", action={"type": "search", "queries": [4]}),
+    ],
+))
+samples.append((
+    "10 Command actions",
+    [
+        item("commandExecution", "read-actions", command="cat one.txt; cat two.txt; ls; rg exact", cwd=str(root), status="completed", exitCode=None, aggregatedOutput="one\n二  ", commandActions=[
+            {"type": "read", "command": "cat one.txt", "name": "one.txt", "path": "one.txt"},
+            {"type": "read", "command": "cat two.txt", "name": "二.txt", "path": "目录/二.txt"},
+            {"type": "listFiles", "command": "ls", "path": "."},
+            {"type": "search", "command": "rg exact", "query": " exact 中文 ", "path": None},
+            {"type": "unknown", "command": "opaque"},
+            {"type": "futureAction", "payload": {"retained": True}},
+        ]),
+        item("commandExecution", "missing-read-action", command="cat one.txt", cwd=str(root), status="completed", commandActions=[{"type": "read", "command": "cat", "name": "missing path"}]),
+    ],
+))
 threads = []
 for index, (name, items) in enumerate(samples):
     threads.append(

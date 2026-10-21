@@ -12,6 +12,7 @@ pub enum Content {
     Tool(ToolCall),
     Command(Command),
     Mcp(McpCall),
+    WebSearch(WebSearch),
     Files(FileChanges),
     Image(Image),
     Reasoning(String),
@@ -110,6 +111,54 @@ pub struct Command {
     pub aggregated_output: Option<String>,
     pub exit_code: Option<i64>,
     pub duration_ms: Option<i64>,
+    #[serde(default, deserialize_with = "decode_command_actions")]
+    pub command_actions: Option<Vec<CommandAction>>,
+}
+
+/// Provider-supplied best-effort descriptions, not inferred shell effects.
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(tag = "type", rename_all = "camelCase")]
+pub enum CommandAction {
+    Read {
+        command: String,
+        name: String,
+        path: String,
+    },
+    ListFiles {
+        command: String,
+        path: Option<String>,
+    },
+    Search {
+        command: String,
+        path: Option<String>,
+        query: Option<String>,
+    },
+    Unknown {
+        command: String,
+    },
+    #[serde(skip)]
+    Unsupported(Value),
+}
+
+fn decode_command_actions<'de, D>(deserializer: D) -> Result<Option<Vec<CommandAction>>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let actions = Option::<Vec<Value>>::deserialize(deserializer)?;
+    actions
+        .map(|actions| {
+            actions
+                .into_iter()
+                .map(|value| match value.get("type").and_then(Value::as_str) {
+                    Some("read" | "listFiles" | "search" | "unknown") => {
+                        serde_json::from_value(value).map_err(serde::de::Error::custom)
+                    }
+                    Some(_) => Ok(CommandAction::Unsupported(value)),
+                    None => Err(serde::de::Error::custom("Command action lacks its type")),
+                })
+                .collect()
+        })
+        .transpose()
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq)]
@@ -132,6 +181,61 @@ pub struct McpResult {
     pub content: Vec<Value>,
     pub structured_content: Option<Value>,
     pub is_error: Option<bool>,
+}
+
+/// Current app-server search items do not carry a completion status. Keep
+/// supplied results opaque; rendering them must not fetch their URLs.
+#[derive(Clone, Debug, PartialEq)]
+pub struct WebSearch {
+    pub query: String,
+    pub action: Option<WebSearchAction>,
+    pub results: Option<Vec<Value>>,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(tag = "type", rename_all = "camelCase")]
+pub enum WebSearchAction {
+    Search {
+        query: Option<String>,
+        queries: Option<Vec<String>>,
+    },
+    OpenPage {
+        url: Option<String>,
+    },
+    FindInPage {
+        url: Option<String>,
+        pattern: Option<String>,
+    },
+    Other,
+    #[serde(skip)]
+    Unknown(Value),
+}
+
+impl WebSearch {
+    fn decode(value: Value) -> Result<Self, Error> {
+        #[derive(Deserialize)]
+        struct Fields {
+            query: String,
+            action: Option<Value>,
+            results: Option<Vec<Value>>,
+        }
+        let fields: Fields = serde_json::from_value(value)?;
+        let action = fields
+            .action
+            .map(|value| match value.get("type").and_then(Value::as_str) {
+                Some("search" | "openPage" | "findInPage" | "other") => {
+                    serde_json::from_value(value).map_err(Error::from)
+                }
+                Some(_) => Ok(WebSearchAction::Unknown(value)),
+                None => Err(Error::Projection("Web search action lacks its type".into())),
+            })
+            .transpose()?;
+        Ok(Self {
+            query: fields.query,
+            action,
+            results: fields.results,
+        })
+    }
 }
 
 impl McpResult {
@@ -242,6 +346,7 @@ impl Item {
             }
             "commandExecution" => Content::Command(serde_json::from_value(fields)?),
             "mcpToolCall" => Content::Mcp(serde_json::from_value(fields)?),
+            "webSearch" => Content::WebSearch(WebSearch::decode(fields)?),
             "acpToolCall" => Content::Tool(serde_json::from_value(
                 fields
                     .get("call")
@@ -462,6 +567,139 @@ mod tests {
         assert_eq!(command.exit_code, Some(1));
         assert_eq!(command.aggregated_output.as_deref(), Some("first\n失败"));
         assert_eq!(command.duration_ms, Some(123));
+    }
+
+    #[test]
+    fn command_actions_preserve_every_supplied_read_in_order() {
+        let source = json!({"id":"c","type":"commandExecution","command":"cat one; cat two","cwd":"/work","status":"completed","exitCode":null,"aggregatedOutput":"one\n二  ","commandActions":[{"type":"read","command":"cat one","name":" one ","path":"one"},{"type":"read","command":"cat two","name":"二","path":"目录/二.txt"},{"type":"listFiles","command":"ls","path":null},{"type":"search","command":"rg exact","path":".","query":" exact 中文 "},{"type":"unknown","command":"opaque"},{"type":"future","data":[1,2]}]});
+        let Some(Content::Command(command)) = item(source.clone()).content().unwrap() else {
+            panic!("command")
+        };
+        let actions = command
+            .command_actions
+            .expect("supplied actions must be projected");
+        assert_eq!(actions.len(), 6);
+        assert!(
+            matches!(&actions[0],CommandAction::Read{command,name,path} if command=="cat one" && name==" one " && path=="one")
+        );
+        assert!(matches!(&actions[1],CommandAction::Read{path,..} if path=="目录/二.txt"));
+        assert!(matches!(
+            &actions[2],
+            CommandAction::ListFiles { path: None, .. }
+        ));
+        assert!(
+            matches!(&actions[3],CommandAction::Search{query:Some(query),..} if query==" exact 中文 ")
+        );
+        assert!(matches!(&actions[4],CommandAction::Unknown{command} if command=="opaque"));
+        assert_eq!(
+            actions[5],
+            CommandAction::Unsupported(source["commandActions"][5].clone())
+        );
+        assert_eq!(command.aggregated_output.as_deref(), Some("one\n二  "));
+        assert_eq!(command.exit_code, None);
+    }
+
+    #[test]
+    fn command_actions_distinguish_unavailable_empty_and_invalid_metadata() {
+        let base = json!({"id":"c","type":"commandExecution","command":"cat one","cwd":"/work","status":"inProgress"});
+        for actions in [None, Some(Value::Null), Some(json!([]))] {
+            let mut source = base.clone();
+            if let Some(value) = &actions {
+                source["commandActions"] = value.clone();
+            }
+            let Some(Content::Command(command)) = item(source).content().unwrap() else {
+                panic!("command")
+            };
+            assert_eq!(
+                command.command_actions,
+                if actions == Some(json!([])) {
+                    Some(vec![])
+                } else {
+                    None
+                }
+            );
+        }
+        for value in [
+            json!({}),
+            json!([{}]),
+            json!([{"type":"read","command":"cat","name":"x"}]),
+            json!([{"type":"read","command":false,"name":"x","path":"x"}]),
+            json!([{"type":"listFiles","command":"ls","path":4}]),
+            json!([{"type":"search","command":"rg","query":[]}]),
+            json!([{"type":"unknown"}]),
+        ] {
+            let mut source = base.clone();
+            source["commandActions"] = value;
+            assert!(item(source).content().is_err());
+        }
+    }
+
+    #[test]
+    fn web_search_has_a_readable_projection_instead_of_a_raw_unknown_card() {
+        let value=item(json!({"id":"search","type":"webSearch","query":"Chinese 中文","action":{"type":"search","queries":["exact query"]},"results":[{"title":"literal","url":"https://example.invalid"}]})).content().unwrap();
+        assert!(!matches!(value, Some(Content::Unknown(_))));
+    }
+
+    #[test]
+    fn web_search_keeps_exact_queries_opaque_results_and_future_actions() {
+        let source = json!({"id":"search","type":"webSearch","query":"  中文 query\n ","action":{"type":"search","query":null,"queries":["one"," 二 "]},"results":[{"title":"<b>literal</b>","future":{"score":3},"url":"https://example.invalid"},"opaque"],"futureField":42});
+        let parsed = item(source.clone());
+        let Some(Content::WebSearch(search)) = parsed.content().unwrap() else {
+            panic!("expected search")
+        };
+        assert_eq!(search.query, "  中文 query\n ");
+        assert_eq!(
+            search.results,
+            Some(source["results"].as_array().unwrap().clone())
+        );
+        assert!(
+            matches!(search.action, Some(WebSearchAction::Search { query: None, queries: Some(queries) }) if queries==["one"," 二 "])
+        );
+        assert_eq!(parsed.fields["futureField"], 42);
+        for action in [
+            json!({"type":"openPage","url":null}),
+            json!({"type":"findInPage","url":"https://example.invalid","pattern":" 中文 "}),
+            json!({"type":"other"}),
+            json!({"type":"future","payload":[1,2]}),
+        ] {
+            let Some(Content::WebSearch(search)) =
+                item(json!({"id":"s","type":"webSearch","query":"","action":action}))
+                    .content()
+                    .unwrap()
+            else {
+                panic!("expected search")
+            };
+            assert!(search.action.is_some());
+            if action["type"] == "future" {
+                assert_eq!(search.action, Some(WebSearchAction::Unknown(action)));
+            }
+        }
+        let Some(Content::WebSearch(search)) =
+            item(json!({"id":"s","type":"webSearch","query":""}))
+                .content()
+                .unwrap()
+        else {
+            panic!("expected search")
+        };
+        assert_eq!(search.action, None);
+        assert_eq!(search.results, None);
+    }
+
+    #[test]
+    fn malformed_known_search_fields_are_visible_errors_not_unknown_actions() {
+        for fields in [
+            json!({"query":null}),
+            json!({"query":"x","results":{}}),
+            json!({"query":"x","action":{}}),
+            json!({"query":"x","action":{"type":"search","queries":[4]}}),
+            json!({"query":"x","action":{"type":"openPage","url":7}}),
+            json!({"query":"x","action":{"type":"findInPage","pattern":[]}}),
+        ] {
+            let mut source = fields;
+            source["id"] = json!("s");
+            source["type"] = json!("webSearch");
+            assert!(item(source).content().is_err());
+        }
     }
 
     #[test]

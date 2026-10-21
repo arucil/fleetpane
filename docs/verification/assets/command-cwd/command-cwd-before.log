@@ -1,0 +1,22 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 11.27s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 1 test
+test files::tests::command_read_path_uses_its_directory_and_keeps_literal_names ... FAILED
+
+failures:
+
+---- files::tests::command_read_path_uses_its_directory_and_keeps_literal_names stdout ----
+
+thread 'files::tests::command_read_path_uses_its_directory_and_keeps_literal_names' (2576165) panicked at crates/session/src/files.rs:509:9:
+assertion failed: matches!(file.content,Content::Text {text} if text == "exact 子目录\r\n  ")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    files::tests::command_read_path_uses_its_directory_and_keeps_literal_names
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 194 filtered out; finished in 0.06s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

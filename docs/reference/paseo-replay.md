@@ -29,8 +29,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 441 个提交 `ff9b0e6d1`（本地审查 2026-10-22）。**
-下一条是第 442 个 `a4ae93cef`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 550 个提交 `7a024ce7f`（本地审查 2026-10-22）。**
+下一条是第 551 个 `09d4acce4`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6215 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1229,3 +1229,44 @@ Fleetpane 保持当前 Codex app-server 和独立 Session Host，不重建旧 MC
 [MCP 服务发现](../verification/2026-10-22-mcp-discovery.md)：分页目录、
 鉴权/运行状态、工具 schema 与完整 Copy；调用可能启动配置的服务。
 配置编辑、OAuth、agent 编排和实际会话连接状态仍未完成。
+
+
+## 第 442–480 条：按真实协议显示工具内容
+
+限定片段审查覆盖权限测试、wait、类型重构、MCP/搜索/读取映射和旧 SDK 移除。
+历史报告多次记录失败、中断和被条件断言掩盖的缺口；这些均不算本轮验收。
+[来源路径与哈希](../verification/assets/web-search/receipt.json)保留逐条范围，
+没有运行这些历史版本。第 453 条对应的搜索卡片已按当前 Codex schema 补齐，
+[原生证据](../verification/2026-10-22-web-search.md)包括完整复制、草稿和窗口重建。
+477 的旧实现只选第一个读取动作；下一步按当前 commandActions 保留全部动作，
+不把一个 shell 输出猜成某个文件全文。900×560 会话布局仍有缺口，Git Diff 扩展暂缓。
+下一条为第 481 条 `27b0a2da63f5a61038f172c7428a75b991a3ebbd`。
+
+
+## 第 481–500 条：避免重复消息、精确等待和可验证工具动作
+
+选定路径/片段见[来源回执](../verification/assets/command-actions/source-review.json)。
+父子编排、MCP 注入和协议 E2E 逐步出现；历史设计声称 API 正确即可保证 UI，
+Fleetpane 继续独立验证原生交互。队列等待按第一个新状态推测身份、文件响应
+只按 Agent ID 匹配以及缺失 Git 状态默认 clean 均不照搬。Git Diff 扩展暂缓。
+下一条为第 501 条 `7b8d032bbce361600b2d95331043a810d47a62b8`。
+
+该段对应的 [命令动作与紧凑布局](../verification/2026-10-22-command-actions.md)已完成限定 Linux 原生验证；完整输出和全部动作独立保留，900×560 的选项与审批入口可达。
+
+## 第 501–525 条：恢复、停止、创建和输入保留
+
+限定片段见[来源回执](../verification/assets/creation-directory/source-review.json)。
+历史 streaming 报告多次改变归因，随后才出现 turn-local flag 修复；测试和
+报告不替代重现。恢复路径从内存 Map 走向 rollout，再增加 metadata 路径，
+静默 fallback 和清空 session ID 的 experimental_resume 均不照搬。
+Fleetpane 保持独立 Session Host、当前 app-server、明确 Stop/steer、
+精确草稿与工作树计划、显式完成 review，Git Diff 扩展继续暂缓。
+第 524 条对应的目录缺口已复现，并增加 Host 边界统一校验；
+[证据](../verification/2026-10-22-creation-directory.md)独立记录引擎与原生范围。
+下一条为第 526 条 `9d941a150969c18e8ce0f94decb83af62a1fe788`。
+
+## 第 526–550 条：导入身份、可见错误和真实图片载荷
+
+限定路径/片段见[回执](../verification/assets/command-cwd/source-review.json)。旧实验恢复失败后把聊天注入 developer instructions、图片失败后丢弃继续发送，以及图库超时隐藏错误均不照搬。Fleetpane 保持完整历史副本、原生独立 fork、结构化图片输入和显式边界错误。创建配置默认值持久化仍有缺口，Git Diff 扩展继续暂缓。
+
+本段对应的文件路径复核发现命令工作目录可能不同于会话根目录，已复现同名文件误读并修正，[原生与引擎证据](../verification/2026-10-22-command-cwd.md)独立记录。下一条是第 551 条 `09d4acce4c27bd301e7f7a3b283441c1a48dc535`。

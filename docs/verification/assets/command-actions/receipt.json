@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "date": "2026-10-22",
+  "baseline": "c5a48dc17048e419a7b3bc7b22258c90d4d2e7d7",
+  "sources": {
+    "crates/session/src/content.rs": "8704a01c46028f0e039e76ed5234c5a601923b477141b7c9fb1c23bf374077e0",
+    "apps/desktop/src/conversation_item.rs": "cc7983490d6d4265dd27f95cda6b78f8f7f37a8eb95425cf0019acddb0c0bcc7",
+    "apps/desktop/src/host_view.rs": "9dd52adaed008528a126a391eb4140d5292c94c7452369ece9c642fdb1a79e05",
+    "scripts/render-fixture.py": "5a86aa85d1caed57f3d667106b970ce8e020917f480fc9cf96b801ca6c5bc518"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "2122cec626f2eb831edca8f2591134a82cea15f1c9516a3fe0de90c193d67c1a",
+    "apps/desktop/target/debug/fleetpane-desktop": "3bd465bb6ea1ab43e89687be8797020194f17b401c5a4df3b50c1b3e37a559f7"
+  },
+  "native": {
+    "workspace": "fleetpane-command-20261022",
+    "sizes": [
+      [
+        1360,
+        900
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "command_copy_utf8_bytes": 970,
+    "draft": "读取动作不发送\n exact 中文  ",
+    "draft_utf8_bytes": 37,
+    "replacement_generation": 2,
+    "same_host_provider_identity": true,
+    "journal_total": 1,
+    "journal_description": "one explicit synthetic [approval] turn; explicit Decline settles it",
+    "pending_after": [],
+    "fault": null,
+    "file_one_copy_utf8_bytes": 10,
+    "file_two": "目录/二.txt",
+    "screenshots": [
+      "actions.png",
+      "details-top.png",
+      "file-second.png",
+      "now-small-top.png",
+      "all-card-top.png",
+      "small-options-scroll.png",
+      "small-approval-buttons.png",
+      "small-declined.png",
+      "replacement-small.png",
+      "malformed.png"
+    ],
+    "workspace_stopped": true
+  },
+  "checks": {
+    "workspace-tests-final": {
+      "log": "fp-command-workspace-tests-final.log",
+      "sha256": "eba88eeabfe3805fcd306d600cddb8651e6fbdc65714717f4a309a740af15db5"
+    },
+    "desktop-tests-final": {
+      "log": "fp-command-desktop-tests-final.log",
+      "sha256": "7f9f10280a53fe323efb6a9e63f4fb2c5dbf2fde918af5031db30466c68d7cd2"
+    },
+    "clippy": {
+      "log": "fp-command-clippy.log",
+      "sha256": "d798d3a922fab6c327b27628257633f84985ba7073e3d323b906c97c99beae43"
+    },
+    "desktop-clippy": {
+      "log": "fp-command-desktop-clippy.log",
+      "sha256": "afb5e4c62a9a33554d8c9d5e5eb2459ac5468f91c2e743d623f39fa1355368a2"
+    },
+    "windows": {
+      "log": "fp-command-windows.log",
+      "sha256": "12d20ba9953e23546da506c4cb6fdcbcf90740a37fcd474e1bb9252bd96d39cf"
+    },
+    "file-smoke": {
+      "log": "fp-command-file-smoke.log",
+      "sha256": "75781ad7f34c79505f6f1f67f1fcb4c7ba6c7814aee92b0b9de318a790c69e37"
+    },
+    "python-tests": {
+      "log": "fp-command-python-tests.log",
+      "sha256": "988170a0cb96326eaac35f5abee567233a9247f8575d7aa0553003741e212b75"
+    }
+  },
+  "limits": [
+    "Synthetic histories; no external model, shell command execution or remote URL",
+    "Command actions are provider descriptions, not confirmed file reads",
+    "Compact session options remain explicit and scrollable; no non-Linux native or IME acceptance",
+    "No performance or whole-app memory claim"
+  ]
+}

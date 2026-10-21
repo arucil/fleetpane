@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 441,
-    "last_revision": "ff9b0e6d108896a40ba5380f2e4fab312e6421c0",
-    "next_revision": "a4ae93cef00cd2af2ccfaf8036306c1b5e3493eb",
-    "next_ordinal": 442
+    "last_ordinal": 550,
+    "last_revision": "7a024ce7fd0a4ade26b225fd94a3b1e1e61b190d",
+    "next_revision": "09d4acce4c27bd301e7f7a3b283441c1a48dc535",
+    "next_ordinal": 551
   },
   "entries": [
     {
@@ -6080,6 +6080,1367 @@
       ],
       "finding": "Adds conversation ID aliases/locking, then silently replays transcript into a new MCP context if resume fails; model fallback remains.",
       "fleetpane_action": "Do not silently replace failed resume with a new conversation. Keep explicit context resume/fork and durable receipts."
+    },
+    {
+      "ordinal": 442,
+      "revision": "a4ae93cef00cd2af2ccfaf8036306c1b5e3493eb",
+      "date": "2025-12-24T21:13:00+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Permission tests move to read-only/on-request writes and remove ordering/command-absence assertions.",
+      "fleetpane_action": "Do not treat removed assertions as proof of denied side-effect suppression."
+    },
+    {
+      "ordinal": 443,
+      "revision": "b752c8a56224c015f8999ddfd440015997b0a861",
+      "date": "2025-12-24T21:18:25+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "Claude MCP E2E adds bounded waits/close and an explicit credential-enabled test gate.",
+      "fleetpane_action": "Keep skipped integration distinct from passed tests; preserve owned-process cleanup."
+    },
+    {
+      "ordinal": 444,
+      "revision": "f1e1bd47805033db83d88c5f1d41168ea53842a6",
+      "date": "2025-12-24T21:21:34+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts"
+      ],
+      "finding": "Codex abort latency test checks a marker process but process-list failures become empty results.",
+      "fleetpane_action": "Host Stop acceptance must retain actual child settlement and visible inspection failures."
+    },
+    {
+      "ordinal": 445,
+      "revision": "e41ad30d26cd8324a2d4a4c6833fdbff7df7894a",
+      "date": "2025-12-24T21:25:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Claude permission tests add allow, deny and interruption scenarios.",
+      "fleetpane_action": "Claude adaptation remains outside current provider scope; preserve original permission identity."
+    },
+    {
+      "ordinal": 446,
+      "revision": "9d3b45475a042b282c029f976f4b031270afb14b",
+      "date": "2025-12-24T23:23:16+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Manager wait handles pending runs and terminal/permission events; MCP response strips undefined permission fields.",
+      "fleetpane_action": "Keep exact-turn wait and distinct outcomes instead of assuming any non-running state succeeded."
+    },
+    {
+      "ordinal": 447,
+      "revision": "5ce9be16883efddb9ca2e84772bcc6b3e5860199",
+      "date": "2025-12-24T23:31:31+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-claude-credentials-failure.md",
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "Credential setup copies a user credential file into temporary Claude test configuration.",
+      "fleetpane_action": "Do not copy personal credentials into public fixtures or acceptance receipts."
+    },
+    {
+      "ordinal": 448,
+      "revision": "6c48b5044204bd30f3b77b21674be0a41c7b8a77",
+      "date": "2025-12-24T23:36:00+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-codex-mcp-claude-parity.md"
+      ],
+      "finding": "Parity report flags local-only mode changes, in-memory history and missing MCP configuration propagation.",
+      "fleetpane_action": "Capability declarations must reflect actual provider support; the report is historical evidence only."
+    },
+    {
+      "ordinal": 449,
+      "revision": "c8988b80d6c3b52c9e33d9b972010cf39348890e",
+      "date": "2025-12-24T23:44:56+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-codex-mcp-tool-call-coverage.md"
+      ],
+      "finding": "Tool coverage report records missing file paths, reads, MCP and search results.",
+      "fleetpane_action": "Use supplied typed fields and preserve unavailable results; tests cannot require invented provider output."
+    },
+    {
+      "ordinal": 450,
+      "revision": "672261872a003b395bada59b5950f34c6fde2652",
+      "date": "2025-12-24T23:50:59+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Patch normalization caches changes and guesses command outcomes/exit codes from status.",
+      "fleetpane_action": "Retain explicit provider exit codes; do not infer zero from completed. Git Diff expansion stays deferred."
+    },
+    {
+      "ordinal": 451,
+      "revision": "4ef376632836eef0e25fa743a2e67036f1713304",
+      "date": "2025-12-24T23:53:20+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Read-file timeline mapping guesses path/content aliases and defaults status completed.",
+      "fleetpane_action": "Use present documented command actions, not guessed historic field aliases."
+    },
+    {
+      "ordinal": 452,
+      "revision": "27b0218b94f3a44fe005a62f5e0ec882f333d80f",
+      "date": "2025-12-25T00:00:59+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "MCP mapping guesses server/tool payload aliases and fallback names.",
+      "fleetpane_action": "Keep current typed app-server MCP item contract and raw unknown fields."
+    },
+    {
+      "ordinal": 453,
+      "revision": "8812107f90d3cd5ae1609699cc139b2819a13101",
+      "date": "2025-12-25T00:04:07+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Search timeline mapping adds query/results aliases and defaults completed.",
+      "fleetpane_action": "Implement typed supplied search actions/results without fetching URLs or inventing status."
+    },
+    {
+      "ordinal": 454,
+      "revision": "74ff71c8484413bb6c97aa52305e90ed7ba544c8",
+      "date": "2025-12-25T00:34:45+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Provider/test Zod refactor retains multi-key normalizers and adds raw provider_event to shared types.",
+      "fleetpane_action": "Keep validation at the current wire boundary; syntax changes alone do not establish compatibility."
+    },
+    {
+      "ordinal": 455,
+      "revision": "e546009190c34b2f5f46c8e64faea74c4b1916f6",
+      "date": "2025-12-25T00:38:17+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-codex-mcp-refactor-review.md"
+      ],
+      "finding": "Refactor review still finds multi-key identity/payload guessing after cast removal.",
+      "fleetpane_action": "Preserve exact source fields and distinguish schema validation from behavior verification."
+    },
+    {
+      "ordinal": 456,
+      "revision": "4221df1e2dbdf49c09e91a13316a5b01e5bbcd01",
+      "date": "2025-12-25T01:04:25+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Schema normalization rejects multiple identity aliases and replaces Record with an equivalent index signature.",
+      "fleetpane_action": "Do not impose exclusive identity semantics without wire evidence; next audit exposes valid multiple identifiers."
+    },
+    {
+      "ordinal": 457,
+      "revision": "199fb9e70b67b094993af0b8746d0bc1cc52c36f",
+      "date": "2025-12-25T10:45:32+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-refactor-validation-test-audit.md"
+      ],
+      "finding": "Audit records incomplete/failing suites, type errors and permission call-id alias rejection.",
+      "fleetpane_action": "Historical incomplete verification is not a passing baseline."
+    },
+    {
+      "ordinal": 458,
+      "revision": "f5f1410591e79f6b3533cfba68fb4e953de1492f",
+      "date": "2025-12-25T10:47:25+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "finding": "MCP E2E replaces Record with StructuredContent and an object guard.",
+      "fleetpane_action": "An index-signature rename does not validate object semantics."
+    },
+    {
+      "ordinal": 459,
+      "revision": "efdec18ad3cbb8fcdc1dfa1dc810478f2355d9b4",
+      "date": "2025-12-25T10:56:25+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/activity-curator.ts",
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/agent/stt-openai.ts"
+      ],
+      "finding": "Core guards narrow files/query, persisted runtime/config JSON and model/STT values.",
+      "fleetpane_action": "Keep canonical typed projections and explicit invalid-data errors; no new voice scope."
+    },
+    {
+      "ordinal": 460,
+      "revision": "f02d97a8514702deaf57d400238b9482983a4476",
+      "date": "2025-12-25T11:13:29+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude provider/tests replace casts with guards and typed imported API structures.",
+      "fleetpane_action": "Do not add another provider for historical refactor parity."
+    },
+    {
+      "ordinal": 461,
+      "revision": "3154fb208469e17ce917abde0d25512dee771cd6",
+      "date": "2025-12-25T11:25:42+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Permission call-id resolution becomes preferred-order rather than exclusive; provider config typing narrows.",
+      "fleetpane_action": "Keep distinct provider request identities according to installed contracts."
+    },
+    {
+      "ordinal": 462,
+      "revision": "a1886c08d1bcbad5fdcd78dbfd30b92581e05c46",
+      "date": "2025-12-25T11:31:56+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-e2e-rerun.md"
+      ],
+      "finding": "Rerun report records failures, skip and interrupted full/diagnostic suites.",
+      "fleetpane_action": "No historical E2E acceptance is claimed."
+    },
+    {
+      "ordinal": 463,
+      "revision": "7b00544caaf8b134eb79e1a9bd95c7fa987bd5ab",
+      "date": "2025-12-25T11:32:57+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan records remaining projection and Claude TS2322 failures.",
+      "fleetpane_action": "Documented typecheck failure remains failure."
+    },
+    {
+      "ordinal": 464,
+      "revision": "fe5e86d514dd09ca1b93062aadb8e1103716cc2a",
+      "date": "2025-12-25T11:43:14+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "finding": "Large-screen agent sidebar appears at width 768 with selected row styling.",
+      "fleetpane_action": "Existing Host directory supplies navigation; minimum-size native conversation remains a separate layout gap."
+    },
+    {
+      "ordinal": 465,
+      "revision": "3146533438352a7a46ce2245d604cae3b601c3a5",
+      "date": "2025-12-25T11:50:28+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-codex-mcp-go-live-audit.md"
+      ],
+      "finding": "Go-live audit rejects shipping default MCP with tool/error/persistence and typecheck failures.",
+      "fleetpane_action": "Do not equate reported checklist completion with acceptance."
+    },
+    {
+      "ordinal": 466,
+      "revision": "8261910c376d2a320fe49a28c576e86f4ccb39aa",
+      "date": "2025-12-25T12:07:29+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Web document title follows the current agent title.",
+      "fleetpane_action": "Native window titles are a useful separate enhancement; no web document API is ported."
+    },
+    {
+      "ordinal": 467,
+      "revision": "c771fd986d47156954bca9b16662eee52f1cc54b",
+      "date": "2025-12-25T12:30:27+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-projections.ts"
+      ],
+      "finding": "Persisted optional JSON sanitizer adds primitive narrowing.",
+      "fleetpane_action": "Preserve explicit supported JSON semantics rather than silently drop unknown protocol data."
+    },
+    {
+      "ordinal": 468,
+      "revision": "16bce1c3c50936949982165f23afaafd3f3ec355",
+      "date": "2025-12-25T12:32:29+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude config return fixes the provider discriminant.",
+      "fleetpane_action": "No new provider implementation is required."
+    },
+    {
+      "ordinal": 469,
+      "revision": "65763a70f11b342b509d57a3b8c01320bd10a746",
+      "date": "2025-12-25T12:38:56+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Thread item union adds PascalCase variants and discriminant narrowing.",
+      "fleetpane_action": "Current app-server contract remains the seam; retain future data rather than guess every old event variant."
+    },
+    {
+      "ordinal": 470,
+      "revision": "381b08120b20013a0eb260d9d474fcda098877a8",
+      "date": "2025-12-25T13:04:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Missing MCP begin/end events explain tool timeline failure; report distinguishes slow tool cycles from deadlock.",
+      "fleetpane_action": "Existing typed MCP call/result projection remains; elapsed time alone is not deadlock proof."
+    },
+    {
+      "ordinal": 471,
+      "revision": "54f1a7c1d7174f789564a57d780b72c25739355d",
+      "date": "2025-12-25T13:11:34+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan records typecheck success alongside SDK failure/skip and interrupted MCP tests.",
+      "fleetpane_action": "Partial runs cannot establish full-suite success."
+    },
+    {
+      "ordinal": 472,
+      "revision": "c816b1f82ecea9cd3c37938d969dfcb368a231dd",
+      "date": "2025-12-25T13:12:52+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Bootstrap routes codex and codex-mcp aliases to MCP instead of SDK.",
+      "fleetpane_action": "Keep the current app-server Session Host; no obsolete transport migration."
+    },
+    {
+      "ordinal": 473,
+      "revision": "31312f5396d64831c4ce45914929b2c4b0829e92",
+      "date": "2025-12-25T13:41:36+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Patch paths are parsed from diff text and conversation identity locking changes; plan reports API rate limits.",
+      "fleetpane_action": "Preserve current structured file changes and exact context identity. Git Diff expansion stays deferred."
+    },
+    {
+      "ordinal": 474,
+      "revision": "f1df1cdcce1cbfd1d470f2a669d2cc589408c69a",
+      "date": "2025-12-25T13:54:25+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Resume always locks conversation identity, falling back to session ID, and includes file metadata in inputs.",
+      "fleetpane_action": "A metadata fallback is not evidence of resumable context; keep explicit continuation and refusal."
+    },
+    {
+      "ordinal": 475,
+      "revision": "28514f5b76d9daee75fd3528e1753f46d03bfcb2",
+      "date": "2025-12-25T14:32:50+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Raw tool-output completion maps pending patches; tests weaken missing read/search checks and reports expose identity errors.",
+      "fleetpane_action": "Known unavailable output stays explicit; do not infer omitted result schemas or silently weaken acceptance."
+    },
+    {
+      "ordinal": 476,
+      "revision": "30af3ffd1a23d1d2b0625cdc077348fa97ac18ee",
+      "date": "2025-12-25T14:53:51+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-test-audit.md"
+      ],
+      "finding": "Audit finds conditional read assertions conceal supplied parsed_cmd read metadata.",
+      "fleetpane_action": "Project documented commandActions, including all reads, while retaining original command/output."
+    },
+    {
+      "ordinal": 477,
+      "revision": "f96bde68b341823009233a0e7c72a51c45ba918c",
+      "date": "2025-12-25T15:08:13+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Read detection uses parsed_cmd but returns only the first matching read; test requires a completed read.",
+      "fleetpane_action": "Preserve every current command action and avoid replacing aggregate output with one alleged file content."
+    },
+    {
+      "ordinal": 478,
+      "revision": "f138b755062044e0a7b03a261f6dae8849358f1e",
+      "date": "2025-12-25T15:11:52+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan reports a Playwright command/read/write run and filesystem readback.",
+      "fleetpane_action": "Historical report is not this implementation runtime evidence."
+    },
+    {
+      "ordinal": 479,
+      "revision": "c40de3bd49a782209525474baab124b5e86b4189",
+      "date": "2025-12-25T15:42:22+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Deprecated SDK provider/tests are removed; plan still records two Claude history failures.",
+      "fleetpane_action": "Do not recreate removed SDK support or call an incomplete historical suite green."
+    },
+    {
+      "ordinal": 480,
+      "revision": "1b56751324babbba3d399e2e9de22a0f7b346570",
+      "date": "2025-12-25T15:47:13+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/agent/provider-manifest.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Duplicate codex-mcp provider ID is removed across manifest/catalog/bootstrap/types and tests.",
+      "fleetpane_action": "Retain one Codex app-server provider identity; adapter identity and transport remain separate."
+    },
+    {
+      "ordinal": 481,
+      "revision": "27b0a2da63f5a61038f172c7428a75b991a3ebbd",
+      "date": "2025-12-25T15:59:43+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Duplicate message fix selects item.completed and stops direct text/reasoning plus user item emissions.",
+      "fleetpane_action": "Keep one authoritative item lifecycle with real deltas; completion-only rendering would lose live output."
+    },
+    {
+      "ordinal": 482,
+      "revision": "b6f0cc5c9c82f63d512992dec21c8a07d0ba195c",
+      "date": "2025-12-25T16:16:19+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Duplicate user remains because manager and provider both emit; provider local echo is removed.",
+      "fleetpane_action": "The full stack, not a provider-only test, owns exactly-once user display."
+    },
+    {
+      "ordinal": 483,
+      "revision": "007b41e455957724e485155529b6f92ff5281204",
+      "date": "2025-12-25T16:32:34+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "MCP config forwards agent-control identity, injects Playwright and lets user config override.",
+      "fleetpane_action": "Keep explicit configured services and isolated browser ownership; do not auto-install or start Playwright."
+    },
+    {
+      "ordinal": 484,
+      "revision": "cf82296be99375f9a84d6aa324c8d76aede4fb65",
+      "date": "2025-12-25T16:37:36+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-daemon-client-design.md"
+      ],
+      "finding": "DaemonClient design proposes direct protocol E2E and incorrectly assumes UI correctness follows.",
+      "fleetpane_action": "Reuse shared typed commands but retain independent native render/input acceptance."
+    },
+    {
+      "ordinal": 485,
+      "revision": "99a5ac97fb8a058a11191d8e11705237952937ba",
+      "date": "2025-12-25T16:49:38+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts",
+        "packages/server/src/server/test-utils/daemon-client.ts",
+        "packages/server/src/server/test-utils/daemon-test-context.ts",
+        "packages/server/src/server/test-utils/index.ts"
+      ],
+      "finding": "DaemonClient implements create/resume/send/cancel/mode/permission and queued waits.",
+      "fleetpane_action": "Keep exact operation/session/turn correlation and bounded data rather than first matching future state."
+    },
+    {
+      "ordinal": 486,
+      "revision": "3281a0f656cfee44a626265531f92a31a0b8a8a3",
+      "date": "2025-12-25T17:06:58+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "Daemon permission tests expose explicit Codex config and initially skip Claude.",
+      "fleetpane_action": "Skipped provider tests are not parity proof; current provider scope stays selective."
+    },
+    {
+      "ordinal": 487,
+      "revision": "20cc51ed897677541fb2ec67ab23f9f8160a6b4b",
+      "date": "2025-12-25T17:08:49+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan marks type reuse audit passed with a reported typecheck.",
+      "fleetpane_action": "Historical plan is a report, not this run acceptance."
+    },
+    {
+      "ordinal": 488,
+      "revision": "1fb73b104563b2e178838d98cadce3f38ac1f978",
+      "date": "2025-12-25T17:23:06+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "Resume waits from a queue boundary but discovers identity from first new agent_state.",
+      "fleetpane_action": "Keep exact target binding; unrelated concurrent state cannot select a resumed context."
+    },
+    {
+      "ordinal": 489,
+      "revision": "5f642f12ea5151bc92c86733447c96a78c23fc50",
+      "date": "2025-12-25T17:28:52+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "MCP parent/child orchestration E2E is added.",
+      "fleetpane_action": "Agent-control orchestration remains open separately from observed tree navigation."
+    },
+    {
+      "ordinal": 490,
+      "revision": "3459354e45ba6d49de2f18b94303c8e18343ecb8",
+      "date": "2025-12-25T17:33:23+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-daemon-e2e-audit.md"
+      ],
+      "finding": "Audit reports five passes and two skips while listing missing lifecycle/error coverage.",
+      "fleetpane_action": "Do not turn active-test success into complete provider or UI parity."
+    },
+    {
+      "ordinal": 491,
+      "revision": "6ba5c466a181d6cbf57008d7956802e41bcbcf34",
+      "date": "2025-12-25T17:42:33+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "Initialize and clear-attention timestamp E2E assert observation does not update activity.",
+      "fleetpane_action": "Keep activity sourced from provider changes and explicit local review receipts."
+    },
+    {
+      "ordinal": 492,
+      "revision": "5ce0a742e79fce9cb47e55e4c4b4c3cdf6732864",
+      "date": "2025-12-25T17:44:52+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Cancellation test exercises long-running work, interruption and later reuse.",
+      "fleetpane_action": "Retain exact-turn Stop acknowledgement plus terminal settlement and independent process evidence."
+    },
+    {
+      "ordinal": 493,
+      "revision": "18cc63fa3947d056fc6380b5bf9e49f318471522",
+      "date": "2025-12-25T17:48:02+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "setMode updates cached runtime metadata and tests mode labels persist.",
+      "fleetpane_action": "A changed label does not prove execution sandbox policy changed; current ACP modes are negotiated."
+    },
+    {
+      "ordinal": 494,
+      "revision": "d2587d0c6a330f0f5f7291fa6525909a3176689a",
+      "date": "2025-12-25T17:53:29+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "listAgents folds queued state/deletion events; create adds a queue position.",
+      "fleetpane_action": "Keep fresh bounded directory queries; tombstones and unrelated state must not rewrite identity."
+    },
+    {
+      "ordinal": 495,
+      "revision": "78dec91bdfd4df475e69e8bb826c56b0d114c469",
+      "date": "2025-12-25T17:57:40+07:00",
+      "category": "documentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-claude-permission-tests.md"
+      ],
+      "finding": "Report attributes Claude permission skips to inherited user allow settings.",
+      "fleetpane_action": "Use isolated test config; do not weaken production permissions or copy credentials into public evidence."
+    },
+    {
+      "ordinal": 496,
+      "revision": "46ddb5a20cb6359c370ce5de75a5d35ff0ac16d3",
+      "date": "2025-12-25T18:06:44+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/claude-config.ts"
+      ],
+      "finding": "Shared temporary Claude settings isolate ask rules and copy user credentials.",
+      "fleetpane_action": "Reuse the isolation principle without adding Claude adaptation or publishing credentials."
+    },
+    {
+      "ordinal": 497,
+      "revision": "26ec7d20f0e7b3174270f7212b6c2be686ed35b7",
+      "date": "2025-12-25T18:10:00+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "DaemonClient adds Git diff response waiting and tests.",
+      "fleetpane_action": "Git Diff expansion remains user-deferred."
+    },
+    {
+      "ordinal": 498,
+      "revision": "bf83908a42402ec7b59d2084cf58cfc117b10496",
+      "date": "2025-12-25T18:13:49+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "Git metadata client uses cached cwd and defaults absent dirty flag false.",
+      "fleetpane_action": "Keep explicit unavailable/error state rather than claim clean from missing metadata."
+    },
+    {
+      "ordinal": 499,
+      "revision": "b32ad5ef134d4c1879b228f1855a4688a44372bb",
+      "date": "2025-12-25T18:17:46+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "File explorer client waits by agent ID without matching path/mode.",
+      "fleetpane_action": "Current workspace identity and explicit target checks must bind readback to the exact requested file."
+    },
+    {
+      "ordinal": 500,
+      "revision": "8a614aac580088681f8f5f9a4bb6bcad7bc0337e",
+      "date": "2025-12-25T18:20:37+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/daemon-client.ts"
+      ],
+      "finding": "Provider model client adds returned catalog and timestamp, defaulting missing fields.",
+      "fleetpane_action": "Keep typed bounded model pages and visible invalid responses."
+    },
+    {
+      "ordinal": 501,
+      "revision": "7b8d032bbce361600b2d95331043a810d47a62b8",
+      "date": "2025-12-25T18:24:29+07:00",
+      "category": "test",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Image E2E asserts stream completion and assistant presence for single/multiple attachments; historical MIME mismatch is not valid image proof.",
+      "fleetpane_action": "Retain immutable decoded images and exact provider payload tests."
+    },
+    {
+      "ordinal": 502,
+      "revision": "ab9c133d0e1e0af34b1d98b89ba2b730362e6278",
+      "date": "2025-12-25T18:51:18+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/stores/session-store.ts",
+        "packages/app/src/types/agent-directory.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/agent/agent-projections.ts"
+      ],
+      "finding": "Parent agent identity becomes nullable in schemas and projections; extra MCP scripts are outside inspected scope.",
+      "fleetpane_action": "Retain explicit optional ancestry and current bounded session tree."
+    },
+    {
+      "ordinal": 503,
+      "revision": "f22f76c56b3476e1efb7a006d15159626d108903",
+      "date": "2025-12-25T19:14:51+07:00",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Restart history begins scanning rollouts and parsing messages/tools; first matching file and silent read/parse failures can hide missing history. Nonzero shell exit alone stops marking the whole turn failed.",
+      "fleetpane_action": "Use current provider history and explicit import source bindings; do not copy old scanners or conflate tool and turn failure."
+    },
+    {
+      "ordinal": 504,
+      "revision": "aea8a661125e6fb4531cbd4f9868d6ba779a84e5",
+      "date": "2025-12-25T19:26:28+07:00",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Remove module global history map, retain history per session and read disk on resume.",
+      "fleetpane_action": "Retain Host/session scoping and persistent ACP observed archive."
+    },
+    {
+      "ordinal": 505,
+      "revision": "db8c1004482153bc1d8c5d69069cbb82555ca207",
+      "date": "2025-12-25T19:27:04+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Checklist reports disk history refactor complete and notes other model-dependent failures.",
+      "fleetpane_action": "Report is historical, not current acceptance."
+    },
+    {
+      "ordinal": 506,
+      "revision": "d107ba0f0c9a2fb1af3540b925309e39eb298da1",
+      "date": "2025-12-25T19:50:03+07:00",
+      "category": "test",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Streaming test asserts relevant words and sentence punctuation but logs suspected corruption without failing.",
+      "fleetpane_action": "Exact deterministic chunk identities and bytes remain the oracle."
+    },
+    {
+      "ordinal": 507,
+      "revision": "5e041c47a38ed189e1bb6fa14e19612cbed23680",
+      "date": "2025-12-25T20:00:29+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-garbled-text-bug.md"
+      ],
+      "finding": "Report initially attributes missing chunks to server, lists hypotheses and concedes fresh-agent test misses long-running case.",
+      "fleetpane_action": "Do not treat report attribution as reproduced root cause."
+    },
+    {
+      "ordinal": 508,
+      "revision": "b1bcb8e6dfc3c5f502e071b187a2ea3a73677cd7",
+      "date": "2025-12-25T20:10:44+07:00",
+      "category": "lifecycle",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "MCP prompt cancels active run, then polls idle up to five seconds before dispatch.",
+      "fleetpane_action": "Keep explicit Stop/steer and settlement identity; do not silently cancel or rely on timeout as settlement."
+    },
+    {
+      "ordinal": 509,
+      "revision": "219411d3ee5acc29d45207bc51eeb28d854c28ed",
+      "date": "2025-12-25T20:17:45+07:00",
+      "category": "test",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Three-turn streaming test checks remembered words; narrative declares server correct before later race fix.",
+      "fleetpane_action": "No current acceptance from semantic model assertions or narrative."
+    },
+    {
+      "ordinal": 510,
+      "revision": "0406720d4bec460ba6a33ce78fc11fff7e338702",
+      "date": "2025-12-25T20:21:33+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Creation page review identifies missing attachments, Git controls, error/loading states and dead modal entry.",
+      "fleetpane_action": "Keep explicit existing creation/worktree/image flows; voice remains P2."
+    },
+    {
+      "ordinal": 511,
+      "revision": "5a7d16b10f7822a66b6071bd26e9f61d3b7f6308",
+      "date": "2025-12-25T20:24:13+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-new-agent-page-review.md"
+      ],
+      "finding": "Review describes early image return, ignored failures and missing form controls. Proposed image config is a historical hypothesis.",
+      "fleetpane_action": "Check actual commands and UI independently."
+    },
+    {
+      "ordinal": 512,
+      "revision": "7e9e685a141891db51624d333d20c0b0c626f283",
+      "date": "2025-12-25T20:43:42+07:00",
+      "category": "lifecycle",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Turn-local streamed flags replace shared flags; session cancellation also polls pendingRun and lifecycle.",
+      "fleetpane_action": "Adopt per-turn identity principle; Claude adapter outside current provider scope and polling not copied."
+    },
+    {
+      "ordinal": 513,
+      "revision": "a398f67527d041eeb5bfe9aff891e3774416d535",
+      "date": "2025-12-25T20:53:31+07:00",
+      "category": "creation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "New page validates directory/prompt/host, tracks matching pending request and displays errors/loading; explicit unsupported-image return remains.",
+      "fleetpane_action": "Retain exact local drafts and creation receipts; no new React page."
+    },
+    {
+      "ordinal": 514,
+      "revision": "58769e7ece165330a94f11d743ad8496a367e164",
+      "date": "2025-12-25T21:04:06+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-new-agent-page-deep-comparison.md"
+      ],
+      "finding": "Comparison distinguishes a loading variable from visible progress and records remaining Git controls.",
+      "fleetpane_action": "Visible action state requires native proof."
+    },
+    {
+      "ordinal": 515,
+      "revision": "bd7752b4f4302c3d5b52a5679c0f84d7b370d550",
+      "date": "2025-12-25T21:07:46+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "Submit callback and external loading spinner connect form creation; draft text still cleared before awaited submit.",
+      "fleetpane_action": "Existing shared draft dispatch preserves text until known result."
+    },
+    {
+      "ordinal": 516,
+      "revision": "54f05833349502f9b0f0f370184bce19c12555b1",
+      "date": "2025-12-25T21:17:25+07:00",
+      "category": "workspaces",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "Git form observes repository/base, validates names, blocks unsafe dirty checkouts and passes explicit branch/worktree options.",
+      "fleetpane_action": "Reuse existing planned pinned worktree workflows; Git diff expansion deferred."
+    },
+    {
+      "ordinal": 517,
+      "revision": "5d20129a3316d8a166d9b683198e1912701c68e3",
+      "date": "2025-12-25T21:17:49+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Marks spinner and Git controls complete; historical reported validation is not this run.",
+      "fleetpane_action": "Reference only."
+    },
+    {
+      "ordinal": 518,
+      "revision": "11e7bc5fcc92ea782ba91df5e29c2d3334256447",
+      "date": "2025-12-25T21:22:24+07:00",
+      "category": "attention",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Viewing a running-to-idle transition automatically clears attention.",
+      "fleetpane_action": "Keep explicit exact local completion reviews; do not clear failures or pending approvals on idle."
+    },
+    {
+      "ordinal": 519,
+      "revision": "4cf0ea73a16d89d943c87cc194134f3a13e62a5f",
+      "date": "2025-12-25T21:22:56+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Attention fix checklist repeats viewed-completion assumption.",
+      "fleetpane_action": "Reference only; explicit review remains current contract."
+    },
+    {
+      "ordinal": 520,
+      "revision": "26da925de69d8ef409416fd88d14dbfc825e3ac9",
+      "date": "2025-12-25T21:40:35+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx",
+        "packages/app/src/components/agent-form/agent-form-dropdowns.tsx"
+      ],
+      "finding": "Host trigger moves to header, form uses scrolling and explicit none/branch/worktree isolation control.",
+      "fleetpane_action": "Reuse native Host selection and explicit planned workspace creation; no React layout copy."
+    },
+    {
+      "ordinal": 521,
+      "revision": "e65ee140f281ba3a4f5d0fc1ae77ca5037558ad4",
+      "date": "2025-12-25T21:41:15+07:00",
+      "category": "report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Marks creation layout redesign and visual review complete.",
+      "fleetpane_action": "Historical report only."
+    },
+    {
+      "ordinal": 522,
+      "revision": "40835bbe9dd0b795e97228f86f6f68be051a41a4",
+      "date": "2025-12-26T11:39:20+07:00",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "History can load explicit rollout path/session root, falls back on errors and uses session/conversation identity; MCP timeout increases.",
+      "fleetpane_action": "Keep explicit imported source identity and errors; do not scan silently or change current app-server protocol."
+    },
+    {
+      "ordinal": 523,
+      "revision": "95c821a4c6afcc9558f152f235ec405ece85e5bb",
+      "date": "2025-12-27T09:35:40+07:00",
+      "category": "creation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Controlled prompt restores on failed submit, attachments restored and Git cleanliness enforced at branch checkout.",
+      "fleetpane_action": "Keep exact persistent drafts and isolated worktree flow; no automatic checkout."
+    },
+    {
+      "ordinal": 524,
+      "revision": "1e9d8bf07593bedbc0fc293e028884ff7be81d61",
+      "date": "2025-12-27T05:10:59Z",
+      "category": "creation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/daemon.e2e.test.ts",
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "Server now stats cwd for existence/directory before creation; app infers missing directory from error strings.",
+      "fleetpane_action": "Implement typed Host-local preflight before fresh journal admission for Codex and ACP; retain dedup and exact cwd."
+    },
+    {
+      "ordinal": 525,
+      "revision": "2fd6c83746b501451888f7410dab6f7605fb4231",
+      "date": "2025-12-27T07:08:13Z",
+      "category": "lifecycle",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Mode and interrupt clear session IDs then start from experimental transcript resume; one new-turn-after-interrupt test is skipped for race.",
+      "fleetpane_action": "Keep current provider mode/interrupt identity; do not clear native IDs or use historical experimental resume."
+    },
+    {
+      "ordinal": 526,
+      "revision": "9d941a150969c18e8ce0f94decb83af62a1fe788",
+      "date": "2025-12-27T07:19:39Z",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "External-context restore test is skipped; nonexistent import fallback starts fresh.",
+      "fleetpane_action": "Keep exact native fork binding and explicit missing context refusal."
+    },
+    {
+      "ordinal": 527,
+      "revision": "076080db489b22dfdc640305554f0e0b7fe41216",
+      "date": "2025-12-27T07:55:54Z",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Removed experimental_resume is replaced by parsing messages into developer instructions, skipping parse/read failures.",
+      "fleetpane_action": "Do not promote imported messages to developer instructions; retain complete archive and native fork."
+    },
+    {
+      "ordinal": 528,
+      "revision": "69b6f755fa3ad9d08fd55ba9ee48531597a9cb8e",
+      "date": "2025-12-28T16:29:01Z",
+      "category": "lifecycle",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Adds canceled terminal event and turn-local IDs; legacy Claude cancellation waits at most 500 ms and suppresses stale output.",
+      "fleetpane_action": "Keep explicit provider completion/interruption and Host Stop receipts; do not infer process cleanup from timeout."
+    },
+    {
+      "ordinal": 529,
+      "revision": "1269edcb6e9deefd7e8bc9d99e9c5e8303637f85",
+      "date": "2025-12-28T23:36:05+07:00",
+      "category": "preferences",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx",
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "finding": "Only provided initial fields override saved creation preferences; explicit save merges AsyncStorage payload and only logs failures.",
+      "fleetpane_action": "Retained drafts, Host preference and exact recents already covered; persisted new-session model defaults remain open."
+    },
+    {
+      "ordinal": 530,
+      "revision": "7c97dc18fb598e729b2aeec5137e986e8af04530",
+      "date": "2025-12-28T23:38:02+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "Creation trigger adds mode label with fallback to first mode.",
+      "fleetpane_action": "Keep provider-reported session settings separate from next-message options; do not guess unknown mode."
+    },
+    {
+      "ordinal": 531,
+      "revision": "1cbb2192072d923afb21c78c342a6e9d9639da50",
+      "date": "2025-12-28T23:40:35+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Playwright persistence success report only.",
+      "fleetpane_action": "Reference only; no current execution proof."
+    },
+    {
+      "ordinal": 532,
+      "revision": "8ce8eb5652ff2ee651e9d77ef5d33a90de7b01e8",
+      "date": "2025-12-28T23:42:34+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical mode-switch report; later tasks identify image loading and error-state failures.",
+      "fleetpane_action": "Reference only; no current execution proof."
+    },
+    {
+      "ordinal": 533,
+      "revision": "e5ea77e9618d8aa7789edcf0b87b639109ab446c",
+      "date": "2025-12-28T23:48:41+07:00",
+      "category": "provider",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Claude import skips sidechain entries; synthetic test checks warmup suppression.",
+      "fleetpane_action": "Claude adapter outside current OpenCodex/DeepSeek scope; preserve source records."
+    },
+    {
+      "ordinal": 534,
+      "revision": "29d561725cc6865405309e22e5e235ade40c8793",
+      "date": "2025-12-28T23:59:09+07:00",
+      "category": "history",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/daemon.e2e.test.ts"
+      ],
+      "finding": "Lists recent rollout metadata and loads text timeline; cwd fallback and skipped IO/parse failures can obscure source problems.",
+      "fleetpane_action": "Existing bounded workspace/history migration and native Codex archive listing remain; do not invent cwd or omit corrupt source silently."
+    },
+    {
+      "ordinal": 535,
+      "revision": "265caaf14090f48debe156d7d4c397b822bfec7f",
+      "date": "2025-12-29T00:02:00+07:00",
+      "category": "error-handling",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Removes shared preview error updates, leaving thumbnail failures without useful failure state.",
+      "fleetpane_action": "Keep explicit file/image error and prior preview; never hide timeout indefinitely."
+    },
+    {
+      "ordinal": 536,
+      "revision": "5120f73f493d293e29201ca40b77e13cf9eff78c",
+      "date": "2025-12-29T00:06:06+07:00",
+      "category": "migration",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Import flow adds explicit Host badge and selector.",
+      "fleetpane_action": "Existing migration preview binds target Host explicitly; remote runtime adoption remains missing."
+    },
+    {
+      "ordinal": 537,
+      "revision": "025fd971438a3308aac18d6920b9de7bed649d7c",
+      "date": "2025-12-29T00:10:23+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Back navigation uses request helper and clears pending/loading on completion or failure.",
+      "fleetpane_action": "Existing token-scoped native file history and fresh bounded reads retain failure state."
+    },
+    {
+      "ordinal": 538,
+      "revision": "ffc6bd3ba596c23e136fa17302891e1f5caa2bfd",
+      "date": "2025-12-29T00:15:21+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Converts inline absolute paths under agent cwd to relative paths, trimming quotes and normalizing slash/case.",
+      "fleetpane_action": "Explicit Markdown/provider paths only; fixed command read links to resolve against command cwd while retaining exact literal names and workspace confinement."
+    },
+    {
+      "ordinal": 539,
+      "revision": "5325240b263574d91169e6c7029c11bed0ca1a41",
+      "date": "2025-12-29T00:16:38+07:00",
+      "category": "deferred",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/git-diff.tsx"
+      ],
+      "finding": "Removes Host label from Git diff view.",
+      "fleetpane_action": "Git Diff expansion remains deferred by user."
+    },
+    {
+      "ordinal": 540,
+      "revision": "890708a55af88c7855ff7f50e06daf02b2949d44",
+      "date": "2025-12-29T00:19:30+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-typecheck-code-quality.md"
+      ],
+      "finding": "Historical typecheck success and unchecked URL-provider cast finding.",
+      "fleetpane_action": "Current strict Rust checks run independently; no URL provider route is added."
+    },
+    {
+      "ordinal": 541,
+      "revision": "db9887d723a4d60b954b35c88fd3c9d67289c503",
+      "date": "2025-12-29T00:22:40+07:00",
+      "category": "validation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx"
+      ],
+      "finding": "Validates URL provider/mode and applies supplied model only after advertised catalog loads.",
+      "fleetpane_action": "Keep typed advertised model choices and explicit validation; never silently substitute invalid saved settings."
+    },
+    {
+      "ordinal": 542,
+      "revision": "62181e1f4cb110f8f3c2d036cc5b15dd65cfad5c",
+      "date": "2025-12-29T00:23:35+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-daemon-test-coverage.md"
+      ],
+      "finding": "Coverage report distinguishes daemon and client changes without new executable tests.",
+      "fleetpane_action": "Native UI proof remains independent of protocol checks."
+    },
+    {
+      "ordinal": 543,
+      "revision": "5d24e0eee85149fa9b35ccd853efbbec1a8396e4",
+      "date": "2025-12-29T09:03:58+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-image-attachment-investigation.md"
+      ],
+      "finding": "Image report identifies silent creation drop, web encoder failure and text-only server summaries.",
+      "fleetpane_action": "Existing attachment admission/byte/capability fixtures cover actual provider payloads; image rendering alone is not vision acceptance."
+    },
+    {
+      "ordinal": 544,
+      "revision": "d5f5351d37c0feb875f3e843ef93a4989feff95e",
+      "date": "2025-12-29T09:07:54+07:00",
+      "category": "attachments",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/new.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/stores/session-store.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Creation forwards images, shared encoder logs and drops failed images before sending.",
+      "fleetpane_action": "Retain exact draft and refuse partial sends; existing separate create/send workflow keeps images until explicit send."
+    },
+    {
+      "ordinal": 545,
+      "revision": "6160d9671627d0d456d23b17501f8dd76d1e500f",
+      "date": "2025-12-29T09:09:53+07:00",
+      "category": "attachments",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Web encoding uses fetch/FileReader with native fallback.",
+      "fleetpane_action": "Native private attachment import uses bounded validated bytes; no arbitrary remote fetch is added."
+    },
+    {
+      "ordinal": 546,
+      "revision": "a087b085e6430ddf752d2cd310aa18329a6c2de3",
+      "date": "2025-12-29T09:15:09+07:00",
+      "category": "attachments",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Adds image prompt blocks; legacy Codex serializes image bytes inside Markdown prompt text.",
+      "fleetpane_action": "Keep structured Codex localImage/ACP image blocks, exact text and explicit unsupported capability errors."
+    },
+    {
+      "ordinal": 547,
+      "revision": "b559422cb068814893b60306c7e16442ccbafef6",
+      "date": "2025-12-29T10:13:00+07:00",
+      "category": "attachments",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Writes image data to temp file and inserts path text; failures become prompt prose.",
+      "fleetpane_action": "Keep private hashed Host-owned files and actual structured input; IO failures remain errors."
+    },
+    {
+      "ordinal": 548,
+      "revision": "0ffac203af36dafec8bb4e0090c4b4d49cbdbe6e",
+      "date": "2025-12-29T10:28:24+07:00",
+      "category": "historical-report",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "REPORT-codex-image-attachment-test.md"
+      ],
+      "finding": "Report observes base64 still in context and absent expected temp directory despite a correct color answer.",
+      "fleetpane_action": "Image identification is insufficient to prove intended transport or built revision."
+    },
+    {
+      "ordinal": 549,
+      "revision": "1200bce7e35b3dec5cbf2ddd2bfd0cb12f39cbb4",
+      "date": "2025-12-29T10:34:43+07:00",
+      "category": "attachments",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "finding": "Regex replaces inline data URLs with temp paths; write failure retains original inline bytes.",
+      "fleetpane_action": "Do not rewrite user text or fall back silently; keep typed attachment payloads."
+    },
+    {
+      "ordinal": 550,
+      "revision": "7a024ce7fd0a4ade26b225fd94a3b1e1e61b190d",
+      "date": "2025-12-29T10:51:06+07:00",
+      "category": "platform",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Native Expo File API replaces deprecated base64 reader; debug logs expose image URI structures.",
+      "fleetpane_action": "Expo-specific API not ported; retain private native file handling without payload logs."
     }
   ],
   "workflow_status": {
@@ -6112,7 +7473,12 @@
     "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim.",
     "session-tree-navigation": "partial; exact revalidated history node/source navigation with Host/ancestry/session/cwd/archive checks, independent drafts, archived read-only content, visible refusal and unchanged pending approval verified in Linux native fixture; one window-local return source, no ancestry creation/MCP orchestration, atomic provider snapshot or ACP hierarchy claim",
     "workspace-directory-suggestions": "partial; exact loaded-session cwd suggestions per Host and current filter/paging, bounded 24-entry native menu, pure shared projection, separate recents, non-Git creation and window replacement verified locally; no full-index or filesystem existence guarantee",
-    "provider-mcp-inventory": "partial; explicit fenced journaled discovery, bounded paging, unknown statuses/schema/metadata retention and Linux native Host isolation/error/draft/replacement covered. Installed Codex synthetic stdio discovery verified without model calls; OAuth/config editing, orchestration and per-session connection status remain open."
+    "provider-mcp-inventory": "partial; explicit fenced journaled discovery, bounded paging, unknown statuses/schema/metadata retention and Linux native Host isolation/error/draft/replacement covered. Installed Codex synthetic stdio discovery verified without model calls; OAuth/config editing, orchestration and per-session connection status remain open.",
+    "supplied-web-search": "partial; typed shared projection and Linux native fixture query/action/results/unknown/error/copy/draft/replacement verified. No URL fetch, external search/model or minimum-size layout acceptance.",
+    "supplied-command-actions": "Covered shared/Linux native fixture workflows verified: ordered actions, 970-byte raw Copy, separate bounded read navigation, retained 37-byte draft/replacement and compact options/approval controls. No external-model or performance claim.",
+    "creation-directory-validation": "Covered shared/CLI/Linux native synthetic workflows verified: Host-local bounded directory observation before fresh admission, exact cwd, saved operation dedup after removal, visible errors and recovery. Provider still handles changes after preflight.",
+    "command-read-paths": "covered local engine/native fixture; command cwd resolves literal relative paths, absolute paths retained, original conversation identity and workspace confinement remain; 33-byte exact file and 43-byte retained draft, journal zero.",
+    "creation-preferences": "partial; Host choice, recents and per-session drafts persist; provider/model defaults for fresh creation not yet stored."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

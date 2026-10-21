@@ -1,0 +1,23 @@
+   Compiling fleetpane-runtime v0.1.0 (/tmp/fp-web-before-1022/crates/runtime)
+   Compiling fleetpane-session v0.1.0 (/tmp/fp-web-before-1022/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 17.02s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 1 test
+test content::tests::web_search_has_a_readable_projection_instead_of_a_raw_unknown_card ... FAILED
+
+failures:
+
+---- content::tests::web_search_has_a_readable_projection_instead_of_a_raw_unknown_card stdout ----
+
+thread 'content::tests::web_search_has_a_readable_projection_instead_of_a_raw_unknown_card' (2449543) panicked at crates/session/src/content.rs:459:9:
+assertion failed: !matches!(value, Some(Content::Unknown(_)))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    content::tests::web_search_has_a_readable_projection_instead_of_a_raw_unknown_card
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 189 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

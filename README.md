@@ -17,6 +17,15 @@ The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
 
+Provider-reported command actions preserve all reads, listings and searches with
+explicit bounded file navigation and complete original Copy. At compact window
+heights, **Session options** holds optional controls while pending requests and
+the composer remain reachable. [Verification](docs/verification/2026-10-22-command-actions.md).
+
+Supplied Codex web-search items show the exact query and expandable action/results
+without fetching URLs. Future fields remain copyable; missing results stay
+unavailable. [Verification](docs/verification/2026-10-22-web-search.md).
+
 **MCP servers** exposes explicit Codex provider inventory discovery, paged server
 selection, auth/runtime values, tool discovery errors and complete loaded schema
 Copy. Discovery may start configured servers and requires control; it is never
@@ -935,6 +944,7 @@ python3 scripts/runtime-smoke.py                 # Unix; synthetic provider
 python3 scripts/runtime-smoke.py --codex         # optional; installed Codex required
 python3 scripts/runtime-smoke.py --codex --drain # optional; preserve a real command while draining
 python3 scripts/session-smoke.py                 # Unix; synthetic conversation workflows
+python3 scripts/creation-directory-smoke.py      # Unix; Host directory checks before fresh session admission
 python3 scripts/directory-smoke.py               # Unix; paged queries, renaming and failures
 python3 scripts/models-smoke.py                  # Unix; paged model capabilities and validated turn options
 python3 scripts/mcp-smoke.py                     # Unix; explicit journaled MCP discovery, paging and fencing
