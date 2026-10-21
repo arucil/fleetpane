@@ -67,7 +67,8 @@ async fn scripted(
     tokio::task::JoinHandle<Vec<Request>>,
     std::path::PathBuf,
 ) {
-    let root = std::env::temp_dir().join(format!("fleetpane-wait-{}", Uuid::new_v4()));
+    // Keep the socket below Darwin's sockaddr_un path limit.
+    let root = std::path::PathBuf::from("/tmp").join(format!("fleetpane-wait-{}", Uuid::new_v4()));
     std::fs::create_dir(&root).unwrap();
     let socket = root.join("control.sock");
     let listener = tokio::net::UnixListener::bind(&socket).unwrap();
@@ -161,7 +162,8 @@ async fn missing_and_repeating_history_are_errors_not_completion() {
 
 #[tokio::test]
 async fn completion_before_a_stale_read_reply_is_still_observed() {
-    let root = std::env::temp_dir().join(format!("fleetpane-wait-race-{}", Uuid::new_v4()));
+    let root =
+        std::path::PathBuf::from("/tmp").join(format!("fleetpane-wait-race-{}", Uuid::new_v4()));
     std::fs::create_dir(&root).unwrap();
     let socket = root.join("control.sock");
     let listener = tokio::net::UnixListener::bind(&socket).unwrap();

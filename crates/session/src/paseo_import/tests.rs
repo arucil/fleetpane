@@ -957,7 +957,7 @@ async fn dsh_v4_selects_latest_generation_and_preserves_native_tool_result() {
             .snapshot_paseo_history(session.id, f.roots.clone())
             .await
             .unwrap();
-        assert_eq!(status.source, path);
+        assert_eq!(status.source, std::fs::canonicalize(&path).unwrap());
         assert_eq!(status.source_records, 5);
         assert!(status.warning.is_none());
         let page = f.store.paseo_history(session.id, 0).await.unwrap();

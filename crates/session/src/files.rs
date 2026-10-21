@@ -555,6 +555,7 @@ mod tests {
     async fn fixture() -> (PathBuf, Workspace) {
         let base = std::env::temp_dir().join(format!("fp-files-{}", Uuid::new_v4()));
         std::fs::create_dir(&base).unwrap();
+        let base = std::fs::canonicalize(base).unwrap();
         std::fs::create_dir(base.join("work")).unwrap();
         let store = Store::open(base.join("state")).await.unwrap();
         let workspace = store
@@ -686,13 +687,22 @@ mod tests {
         }
         assert!(workspace.list_files("many").await.is_err());
         std::fs::create_dir(path.join("non-utf8")).unwrap();
-        std::fs::write(
+        let created = std::fs::write(
             path.join("non-utf8")
                 .join(std::ffi::OsStr::from_bytes(&[255])),
             "data",
-        )
-        .unwrap();
-        assert!(workspace.list_files("non-utf8").await.is_err());
+        );
+        // APFS rejects this filename before the application can enumerate it.
+        match created {
+            Ok(()) => assert!(workspace.list_files("non-utf8").await.is_err()),
+            #[cfg(target_os = "macos")]
+            Err(error) => assert_eq!(
+                error.raw_os_error(),
+                Some(rustix::io::Errno::ILSEQ.raw_os_error())
+            ),
+            #[cfg(not(target_os = "macos"))]
+            Err(error) => panic!("create non-UTF-8 fixture: {error}"),
+        }
         std::fs::remove_dir_all(base).unwrap();
     }
 

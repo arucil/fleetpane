@@ -148,7 +148,8 @@ async fn scripted(
     first: Snapshot,
     responses: Vec<Response>,
 ) -> (Result<View, Error>, Vec<Request>) {
-    let root = std::env::temp_dir().join(format!("fp-tree-{}", Uuid::new_v4()));
+    // Darwin's per-user temp path plus UUID exceeds sockaddr_un::sun_path.
+    let root = std::path::PathBuf::from("/tmp").join(format!("fp-tree-{}", Uuid::new_v4()));
     std::fs::create_dir(&root).unwrap();
     let socket = root.join("control.sock");
     let listener = tokio::net::UnixListener::bind(&socket).unwrap();

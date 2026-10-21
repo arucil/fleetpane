@@ -24,3 +24,17 @@ cargo clippy --workspace --all-targets --locked -- -D warnings
 All 223 Rust tests pass, including the four rejection paths. The original macOS
 compile log establishes the regression; local Linux success does not establish
 macOS acceptance. The pushed candidate requires a fresh hosted CI run.
+
+The [next macOS run](https://github.com/arucil/fleetpane/actions/runs/39587447852/job/119179771313)
+compiled successfully and reached all session tests. It exposed additional
+fixture assumptions: seven socket tests exceeded Darwin's path limit under its
+long per-user temporary directory; two exact path comparisons used `/var` while
+stored identities use `/private/var`; and APFS rejected an invalid UTF-8 filename
+with `EILSEQ` before enumeration could run.
+
+Socket fixtures now use unique short `/tmp` directories. File fixtures use their
+canonical directory, and the DeepSeek source assertion compares canonical paths.
+The invalid-name fixture verifies application rejection when creation succeeds;
+on macOS a failed creation must specifically be `EILSEQ`. Other filesystem errors
+fail the test. None of these changes alters production file access or weakens
+symlink, traversal, identity or special-file refusal.
