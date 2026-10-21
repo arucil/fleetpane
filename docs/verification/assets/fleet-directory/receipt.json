@@ -1,0 +1,102 @@
+{
+  "base_head": "a2eb05629a65e9b1e99260e1dcbf9f5c17ac001f",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "c3d55dc401ff024ebdcbdb64f0d0091413acf10e48b38a9153a57aa29f12261b",
+    "apps/desktop/src/host_view.rs": "e5288848e3aa6740ac0b778f482f3cc973513a26505956bd49244cdea8519886",
+    "apps/desktop/src/host_view/attention.rs": "7f83ad9eacc97c5ad165ba7e165af5e47ba3222796afb100a11dab100196adfd",
+    "apps/desktop/src/workbench.rs": "4389a4539cfa03292f744ce3dc388e2d678f8220e48d23c9018cd95f8f94325f",
+    "apps/desktop/src/workbench/attention.rs": "e88fcb33053e7b0aa85342151fa6fd572e38005bd20796af8b243edb93d95db6",
+    "apps/host/src/main.rs": "5a7ce0829e3de6387a170ca867fa5ab345a526ae2513cda28e53f5567def5472",
+    "crates/session/src/lib.rs": "bdfaaaa30f4fdae5f272c566cf9f7a055a04848c6422b29806da5ef092004dd0",
+    "apps/desktop/src/host_view/directory_source.rs": "0ae99724bc13f566f22a178833f4f7ddbf20826ea5580c2b26fd4cdfab5ff7a0",
+    "apps/desktop/src/workbench/sessions.rs": "cb7b750d7dbd00c3e36d1af491f5eb78287c99fc43057f0ecfb9eb627ad94fc1",
+    "crates/session/src/fleet_directory.rs": "ec0416767ef602c06d4ce5dd4828fe7117c33beec8c2fa63e759f676cc0d7864",
+    "scripts/fleet-directory-smoke.py": "2e59f3c09e545b929d8bdb100ada81b5724ceafa2dfd3611570460e76973b6d5"
+  },
+  "first_native_binary_sha256": "05fd62021717d54353e3474d257ea3dd1935e29883c231aa714e2aacb3d18a49",
+  "final_native_binary_sha256": "011ad60bd062289ca119c9d1396d3bbcb6feeefc84cdee05f44f3c08fe0493ce",
+  "final_host_binary_sha256": "279695768e79ebc467248c795a31a1be2f4025383aa49bb6e4e3a5dbd302df0e",
+  "checks": {
+    "root-tests": {
+      "log": "root-tests.log",
+      "sha256": "ff0b5af43781810dd206675adb9a9c2baaca5f4a53a7503b2af0c38554ec7719"
+    },
+    "root-clippy": {
+      "log": "root-clippy.log",
+      "sha256": "eba00a68835259baa1986d296d1f82b5ebc793920c37340bc331708ae7ac227c"
+    },
+    "host-build": {
+      "log": "host-build.log",
+      "sha256": "8a75a2edd90fd8f8c369bbebdbe48f21fc1ac943a8d6ebe0660d49532b296dcb"
+    },
+    "desktop-tests": {
+      "log": "desktop-tests.log",
+      "sha256": "126589a8d9dac3d793d484ca9d9c663828ea61caccf09dce356ca7e038c3ce01"
+    },
+    "desktop-clippy": {
+      "log": "desktop-clippy.log",
+      "sha256": "8045a06a341e55ae1108bb7d9f8c0c8d0fb709b7fccae6f7482c4137e12ae018"
+    },
+    "desktop-build": {
+      "log": "desktop-build.log",
+      "sha256": "b7aca5700c2fdee8a3945c073dbba1acbd7ceea9f577f51bb6b17f351ef4463e"
+    },
+    "python-tests": {
+      "log": "python-tests.log",
+      "sha256": "8e1fa031435e25ae9b0dab985f18d3e3d49ca9fb6f6b3c7013e2f86a8837f79c"
+    },
+    "process": {
+      "log": "process.log",
+      "sha256": "e75f1848224a170fc9971452327940f880b8818a5c3dbadb6c11c35fb0d3c324"
+    }
+  },
+  "native_workflows": [
+    "100 to 200 to 237 pages",
+    "two Host same-000 exact source",
+    "Unicode server title search finds same-236",
+    "unowned/offline/ACP title filter errors",
+    "read-only source no ownership change",
+    "explicit control then history only",
+    "32-byte exact draft across Host switch and final window replacement",
+    "900x560 directory",
+    "failed same-query refresh keeps stale disabled rows",
+    "original independent permission and active turn preserved",
+    "final exact same-236 history clipboard"
+  ],
+  "first_history_clipboard": {
+    "content": "History from Codex A 000",
+    "bytes": 24
+  },
+  "final_history_clipboard": {
+    "content": "History from Codex B 236",
+    "bytes": 24
+  },
+  "draft_clipboard": {
+    "content": "B 草稿\nsame-000 must stay on B",
+    "bytes": 32
+  },
+  "desktop_exit_codes": [
+    0,
+    0
+  ],
+  "after_final_close_snapshots_equal": true,
+  "owned_process_ids": [
+    1401679,
+    1401682,
+    1401684,
+    1401686,
+    1401707,
+    1401709,
+    1401732,
+    1401734
+  ],
+  "owned_processes_exited": true,
+  "hidden_workspace_stopped": true,
+  "limits": [
+    "synthetic providers only",
+    "first and final native binaries differ by protocol/input validation",
+    "first process checker incorrectly required query event sequence unchanged; corrected with explicit evidence",
+    "no remote/macOS/Windows native acceptance",
+    "no external model or performance claim"
+  ]
+}

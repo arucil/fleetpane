@@ -1,0 +1,59 @@
+{
+  "base_head": "a2eb05629a65e9b1e99260e1dcbf9f5c17ac001f",
+  "entries": [
+    {
+      "ordinal": 202,
+      "revision": "4ab79b1a50144dc0f4b47aa9a4cf0f6170f80338",
+      "date": "2025-11-26T08:25:02+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/multi-daemon-session-host.tsx",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts",
+        "packages/app/src/hooks/use-daemon-session.ts",
+        "packages/app/src/hooks/use-session-directory.ts",
+        "packages/app/src/utils/daemons.ts"
+      ],
+      "finding": "Seven new source files define explicit per-daemon accessors, grouped metadata, running-first sorting, registry/default migration, connection states and source-specific routing that rejects unavailable targets. Background autoConnect excludes the active daemon to avoid duplicate connections. Other changed routes, request hook, settings and session internals not inspected.",
+      "fleetpane_action": "fleet-session-directory",
+      "selected_diff_bytes": 26139,
+      "selected_diff_sha256": "501deaf436566a1b3d8c33623dc125d00edb2847e8dd158c363d36030370b91d",
+      "paths_not_inspected": [
+        "codex-patch.txt",
+        "package-lock.json",
+        "packages/app/package.json",
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/app/git-diff.tsx",
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/components/active-processes.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/agent-sidebar.tsx",
+        "packages/app/src/components/agent-status-bar.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/empty-state.tsx",
+        "packages/app/src/components/global-footer.tsx",
+        "packages/app/src/components/headers/home-header.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/hooks/use-daemon-request.ts",
+        "packages/app/src/hooks/use-settings.ts",
+        "packages/app/src/hooks/use-websocket.ts",
+        "plan.md",
+        "scripts/run-plan-loop.sh"
+      ]
+    }
+  ],
+  "prior_201_entries_sha256": "4a53858de417ebf698835c372daa55c534362869985ca0ffb7e86b40c797f3a9",
+  "prior_entries_hash_format": "UTF-8 json.dumps ensure_ascii=False sort_keys=True separators=(comma,colon)",
+  "prior_201_entries_unchanged": true,
+  "next_ordinal": 203,
+  "next_revision": "59967aad87dc96e7602611e2ede402103c6bea5f",
+  "scope": "Complete source text / changed text of seven newly added paths. No historical execution, dependency audit, other changed paths, copied source or assets."
+}

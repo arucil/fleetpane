@@ -171,6 +171,25 @@ the loaded count and the beginning/limit state. History reads and live text use
 their response boundaries to avoid duplicate deltas or reordered older items.
 [History pagination verification](docs/verification/2026-10-19-history-pagination.md)
 covers a 1,200-command conversation, scroll anchors and simultaneous streaming.
+**All sessions** observes all configured Hosts without taking control. It groups
+metadata by Host, supports title search (Search / Refresh or Enter), Host filters
+and per-Host Load more. Failed Hosts remain visible; stale rows cannot open.
+DeepSeek ACP does not support server-side title search and reports that limitation.
+Open session selects its exact Host; take control explicitly if needed, then
+Open selected session to load history. Existing drafts stay with their original
+Host/session. No context resumes or messages are sent by this navigation.
+[Cross-Host verification and limits](docs/verification/2026-10-21-fleet-directory.md).
+
+```sh
+fleetpane-host sessions /absolute/hosts.json --search TITLE
+fleetpane-host sessions /absolute/hosts.json --cwd /absolute/workspace
+# Continue a report's page with the same filters and original Host identity:
+fleetpane-host sessions /absolute/hosts.json --host NAME --cursor CURSOR --host-id UUID
+```
+
+The CLI emits per-Host errors in its JSON report and does not claim control.
+Hosts need an existing controller lease for provider queries.
+
 The Host session directory loads 100 metadata rows per page. **Load more sessions**
 continues up to 5,000 sessions / 8 MiB. Title and exact workspace filters run on
 the provider's complete index; Apply or Enter replaces the result set only after

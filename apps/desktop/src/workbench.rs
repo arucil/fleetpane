@@ -1,6 +1,7 @@
 //! Retain separate Host views; switching never transfers a lease or resumes a session.
 mod attention;
 mod files;
+mod sessions;
 use crate::host_view::{HostView, background};
 use crate::workspace_view::WorkspaceView;
 use fleetpane_session::hosts::{Configuration, Endpoint};
@@ -43,6 +44,7 @@ pub struct Workbench {
     continuation_subscription: Option<Subscription>,
     file_navigation: files::State,
     attention: attention::State,
+    sessions: sessions::State,
     creation_directory: Option<std::path::PathBuf>,
     creations: Vec<Intent>,
     records_busy: bool,
@@ -53,6 +55,7 @@ pub struct Workbench {
 impl Workbench {
     fn open_chooser(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         self.leave_attention();
+        self.sessions.active = false;
         self.choosing = true;
         self.file_navigation = files::State::default();
         self.browsing_workspaces = false;
@@ -108,6 +111,7 @@ impl Workbench {
             continuation_subscription: None,
             file_navigation: files::State::default(),
             attention: attention::State::default(),
+            sessions: sessions::State::new(window, cx),
             creation_directory,
             creations: Vec::new(),
             records_busy: false,
@@ -210,6 +214,7 @@ impl Workbench {
     }
 
     fn select(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        self.sessions.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
         let slot = &mut self.slots[index];
@@ -242,6 +247,7 @@ impl Workbench {
     }
 
     fn open_workspaces(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.sessions.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
         let Some(directory) = self.creation_directory.clone() else {
@@ -711,6 +717,15 @@ impl Render for Workbench {
                                     }))
                             }))
                             .child(
+                                Button::new("open-all-sessions")
+                                    .small()
+                                    .label("All sessions")
+                                    .selected(self.sessions.active)
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        this.open_sessions(window, cx)
+                                    })),
+                            )
+                            .child(
                                 Button::new("open-attention")
                                     .small()
                                     .label("Attention")
@@ -748,6 +763,9 @@ impl Render for Workbench {
             .when(self.attention.active, |root| {
                 root.child(self.attention_view(cx))
             })
+            .when(self.sessions.active, |root| {
+                root.child(self.sessions_view(cx))
+            })
             .when(self.browsing_workspaces, |root| {
                 root.child(
                     div().flex_1().min_h_0().child(
@@ -779,6 +797,7 @@ impl Render for Workbench {
                 !self.choosing
                     && !self.browsing_workspaces
                     && !self.attention.active
+                    && !self.sessions.active
                     && self.file_navigation.view.is_none(),
                 |root| {
                     root.child(

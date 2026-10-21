@@ -1,0 +1,219 @@
+//! Cross-Host directory reads are independent of retained conversation views.
+use super::*;
+use fleetpane_session::{
+    directory::{PageRequest, Query},
+    fleet_directory::{self, Group},
+};
+
+pub(super) struct State {
+    pub active: bool,
+    groups: Vec<Group>,
+    search: Entity<InputState>,
+    query: Query,
+    busy: bool,
+    paging: Option<usize>,
+    filter: Option<usize>,
+    error: Option<String>,
+    _subscription: Subscription,
+}
+
+impl State {
+    pub fn new(window: &mut Window, cx: &mut Context<Workbench>) -> Self {
+        let search = cx.new(|cx| {
+            InputState::new(window, cx).placeholder("Search session titles across Hosts")
+        });
+        let subscription = cx.subscribe_in(&search, window, |this, _, event, window, cx| {
+            if matches!(event, InputEvent::PressEnter { .. }) {
+                this.refresh_sessions(window, cx);
+            }
+        });
+        Self {
+            active: false,
+            groups: Vec::new(),
+            search,
+            query: Query::default(),
+            busy: false,
+            paging: None,
+            filter: None,
+            error: None,
+            _subscription: subscription,
+        }
+    }
+}
+
+impl Workbench {
+    pub(super) fn open_sessions(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.leave_attention();
+        self.file_navigation = files::State::default();
+        self.choosing = false;
+        self.browsing_workspaces = false;
+        self.route_notice = None;
+        self.sessions.active = true;
+        self.sessions
+            .search
+            .update(cx, |input, cx| input.focus(window, cx));
+        self.refresh_sessions(window, cx);
+        cx.notify();
+    }
+
+    fn refresh_sessions(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.sessions.busy || self.sessions.paging.is_some() {
+            return;
+        }
+        let search = self.sessions.search.read(cx).value().trim().to_owned();
+        let query = Query {
+            search: (!search.is_empty()).then_some(search),
+            ..Query::default()
+        };
+        if let Err(error) = query.validate() {
+            self.sessions.error = Some(error.to_string());
+            cx.notify();
+            return;
+        }
+        self.sessions.busy = true;
+        self.sessions.error = None;
+        let configuration = self.configuration.clone();
+        let request = PageRequest {
+            query: query.clone(),
+            cursor: None,
+        };
+        let task = cx
+            .background_executor()
+            .spawn(async move { background(fleet_directory::collect(configuration, query)) });
+        cx.spawn_in(window, async move |this, cx| {
+            let result = task.await;
+            let _closed = this.update_in(cx, |this, _, cx| {
+                this.sessions.busy = false;
+                match result {
+                    Ok(reports) => {
+                        if this.sessions.groups.is_empty() {
+                            this.sessions.groups = this
+                                .configuration
+                                .hosts
+                                .iter()
+                                .cloned()
+                                .map(Group::new)
+                                .collect();
+                        }
+                        for (group, report) in this.sessions.groups.iter_mut().zip(reports) {
+                            let result = match report.observation {
+                                Some(observation) => Ok(observation),
+                                None => Err(Error::Input(
+                                    report.error.expect("failed observation has an error"),
+                                )),
+                            };
+                            group.apply(&request, result);
+                        }
+                        this.sessions.query = request.query;
+                    }
+                    Err(error) => this.sessions.error = Some(error.to_string()),
+                }
+                cx.notify();
+            });
+        })
+        .detach();
+        cx.notify();
+    }
+
+    fn more_sessions(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        if self.sessions.busy || self.sessions.paging.is_some() {
+            return;
+        }
+        let group = &self.sessions.groups[index];
+        let Some(request) = group.directory.next() else {
+            return;
+        };
+        let endpoint = group.endpoint.clone();
+        let host_id = group.host_id;
+        self.sessions.paging = Some(index);
+        let pending = request.clone();
+        let task = cx.background_executor().spawn(async move {
+            background(fleet_directory::read_page(&endpoint, host_id, &pending))
+        });
+        cx.spawn_in(window, async move |this, cx| {
+            let result = task.await;
+            let _closed = this.update_in(cx, |this, _, cx| {
+                this.sessions.paging = None;
+                this.sessions.groups[index].apply(&request, result);
+                cx.notify();
+            });
+        })
+        .detach();
+        cx.notify();
+    }
+
+    fn open_fleet_session(
+        &mut self,
+        index: usize,
+        id: String,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        if self.sessions.busy || self.sessions.paging.is_some() {
+            return;
+        }
+        let group = &self.sessions.groups[index];
+        if !group.can_open() {
+            return;
+        }
+        let host_id = group.host_id.expect("observed directory Host");
+        self.select(index, window, cx);
+        self.slots[index]
+            .view
+            .as_ref()
+            .expect("selected Host initialized")
+            .update(cx, |view, cx| {
+                view.prepare_directory_session(host_id, id, window, cx)
+            });
+    }
+
+    pub(super) fn sessions_view(&self, cx: &mut Context<Self>) -> impl IntoElement {
+        let blocked = self.sessions.busy || self.sessions.paging.is_some();
+        // Headers and rows share one virtualized list; rendering performs no I/O.
+        let rows: Vec<_> = self
+            .sessions
+            .groups
+            .iter()
+            .enumerate()
+            .filter(|(index, _)| {
+                self.sessions
+                    .filter
+                    .is_none_or(|selected| selected == *index)
+            })
+            .flat_map(|(index, group)| {
+                std::iter::once((index, None))
+                    .chain((0..group.directory.threads.len()).map(move |row| (index, Some(row))))
+            })
+            .collect();
+        div().flex_1().min_h_0().flex().flex_col()
+            .child(div().p_4().flex().items_center().gap_2()
+                .child(Button::new("sessions-back").small().label("Back to Host").on_click(cx.listener(|this,_,window,cx|this.select(this.selected,window,cx))))
+                .child(div().flex_1().child(Input::new(&self.sessions.search)))
+                .child(Button::new("sessions-refresh").small().label(if self.sessions.busy { "Checking…" } else { "Search / Refresh" }).disabled(blocked).on_click(cx.listener(|this,_,window,cx|this.refresh_sessions(window,cx)))))
+            .child(div().px_4().pb_2().text_sm().child("All configured Hosts · metadata only · 100 per page · refresh explicitly. Opening never resumes or sends a message."))
+            .child(div().px_4().pb_2().flex().flex_wrap().gap_2()
+                .child(Button::new("sessions-all-hosts").small().ghost().label("All Hosts").selected(self.sessions.filter.is_none()).on_click(cx.listener(|this,_,_,cx|{this.sessions.filter=None;cx.notify();})))
+                .children(self.sessions.groups.iter().enumerate().map(|(index,group)|Button::new(("sessions-host-filter",index)).small().ghost().label(format!("{} · {}{}",group.endpoint.name,group.directory.threads.len(),if group.error.is_some(){" !"}else{""})).selected(self.sessions.filter==Some(index)).on_click(cx.listener(move|this,_,_,cx|{this.sessions.filter=Some(index);cx.notify();})))))
+            .child(div().px_4().pb_2().text_xs().child(format!("Applied title filter: {}", self.sessions.query.search.as_deref().unwrap_or("all titles"))))
+            .children(self.sessions.error.iter().map(|error| div().px_4().text_color(cx.theme().danger).child(error.clone())))
+            .child(uniform_list("fleet-sessions", rows.len(), cx.processor(move |this, range: std::ops::Range<usize>, _, cx| {
+                range.map(|row| {
+                    let (index, entry) = rows[row];
+                    let group = &this.sessions.groups[index];
+                    if let Some(entry) = entry {
+                        let thread = &group.directory.threads[entry];
+                        let id = thread.id.clone();
+                        div().h(px(104.)).px_4().py_2().border_b_1().border_color(cx.theme().border)
+                            .child(div().truncate().child(format!("{} · {}", group.endpoint.name, thread.title())))
+                            .child(div().text_xs().truncate().child(format!("{} · {} · {}",thread.id,thread.status.kind,thread.cwd)))
+                            .child(Button::new(("fleet-session-open",row)).small().label("Open session").disabled(blocked || !group.can_open()).on_click(cx.listener(move|this,_,window,cx|this.open_fleet_session(index,id.clone(),window,cx))))
+                    } else {
+                        div().h(px(104.)).px_4().py_2().bg(cx.theme().secondary)
+                            .child(div().truncate().child(format!("{} · {} loaded{}",group.endpoint.name,group.directory.threads.len(),if group.error.is_some(){" · stale / unavailable"}else{""})))
+                            .child(div().text_xs().truncate().text_color(if group.error.is_some(){cx.theme().danger}else{cx.theme().muted_foreground}).child(group.error.clone().unwrap_or_else(||if group.directory.at_limit { "5,000-session limit; narrow the search".into() }else if group.directory.next_cursor.is_some(){"More sessions available".into()}else{"All matching sessions loaded".into()})))
+                            .child(Button::new(("fleet-session-more",index)).small().label(if this.sessions.paging==Some(index){"Loading…"}else{"Load more"}).disabled(blocked || group.directory.next().is_none()).on_click(cx.listener(move|this,_,window,cx|this.more_sessions(index,window,cx))))
+                    }
+                }).collect()
+            })).flex_1().min_h_0())
+    }
+}

@@ -31,6 +31,9 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host attention CONFIG.json: read-only pending approvals/questions across configured Hosts; unavailable Hosts remain explicit. No takeover, answer, resume or timeout decision."
         );
         println!(
+            "fleetpane-host sessions CONFIG.json [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]: observe 100-session metadata pages across configured Hosts without acquiring control. Failed Hosts have explicit errors in the JSON report."
+        );
+        println!(
             "fleetpane-host route CONFIG.json GROUP: read-only ready-Host recommendation in an explicit route group; never creates or claims."
         );
         println!(
@@ -705,6 +708,68 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             if selection.target.is_none() {
                 return Err("No ready Host in this route group; no action was taken".into());
             }
+            Ok(())
+        }
+        "sessions" if args.len() >= 2 => {
+            let configuration =
+                fleetpane_session::hosts::Configuration::read(std::path::Path::new(&args[1]))?;
+            let mut query = fleetpane_session::directory::Query::default();
+            let mut host = None;
+            let mut cursor = None;
+            let mut host_id = None;
+            for option in args[2..].chunks(2) {
+                match option {
+                    [flag, text] if flag == "--search" && query.search.is_none() => {
+                        query.search = Some(text.clone())
+                    }
+                    [flag, path] if flag == "--cwd" && query.cwd.is_none() => {
+                        query.cwd = Some(path.clone())
+                    }
+                    [flag, name] if flag == "--host" && host.is_none() => host = Some(name.clone()),
+                    [flag, value] if flag == "--cursor" && cursor.is_none() => {
+                        cursor = Some(value.clone())
+                    }
+                    [flag, value] if flag == "--host-id" && host_id.is_none() => {
+                        host_id = Some(value.parse::<uuid::Uuid>()?)
+                    }
+                    _ => {
+                        return Err(
+                            "sessions CONFIG [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]".into(),
+                        );
+                    }
+                }
+            }
+            if cursor.is_some() && (host.is_none() || host_id.is_none())
+                || host_id.is_some() && host.is_none()
+            {
+                return Err(
+                    "Paging requires --host NAME, --cursor CURSOR and the original --host-id UUID"
+                        .into(),
+                );
+            }
+            let reports = if let Some(name) = host {
+                let endpoint = configuration
+                    .hosts
+                    .into_iter()
+                    .find(|endpoint| endpoint.name == name)
+                    .ok_or("Unknown configured Host name")?;
+                let request = fleetpane_session::directory::PageRequest { query, cursor };
+                let result =
+                    fleetpane_session::fleet_directory::read_page(&endpoint, host_id, &request)
+                        .await;
+                let (observation, error) = match result {
+                    Ok(observation) => (Some(observation), None),
+                    Err(error) => (None, Some(error.to_string())),
+                };
+                vec![fleetpane_session::fleet_directory::Report {
+                    endpoint,
+                    observation,
+                    error,
+                }]
+            } else {
+                fleetpane_session::fleet_directory::collect(configuration, query).await?
+            };
+            println!("{}", serde_json::to_string_pretty(&reports)?);
             Ok(())
         }
         "attention" if args.len() == 2 => {

@@ -1,5 +1,6 @@
 mod attention;
 mod continuation;
+mod directory_source;
 mod draft;
 mod images;
 mod observe;
@@ -61,6 +62,7 @@ pub struct HostView {
     connection: Option<Connection>,
     snapshot: Option<Snapshot>,
     attention_target: Option<fleetpane_session::attention::Item>,
+    directory_target: Option<(Uuid, String)>,
     directory: Directory,
     directory_changed: bool,
     models: Catalog,
@@ -265,6 +267,7 @@ impl HostView {
             connection: None,
             snapshot: None,
             attention_target: None,
+            directory_target: None,
             directory: Directory::default(),
             directory_changed: false,
             models: Catalog::default(),
@@ -866,15 +869,27 @@ impl HostView {
                 {
                     *old = metadata;
                 }
-                self.selected_archived =
-                    if matches!(command, Command::Fork { .. } | Command::Create { .. }) {
-                        false
-                    } else if self.directory.threads.iter().any(|row| row.id == thread.id) {
-                        self.directory.query.archived
-                    } else {
-                        self.thread.as_ref().is_some_and(|old| old.id == thread.id)
-                            && self.selected_archived
-                    };
+                let directory_open = matches!(command, Command::Inspect { resume: false, .. })
+                    && self.directory_target.as_ref().is_some_and(|(host_id, id)| {
+                        id == &thread.id
+                            && self
+                                .snapshot
+                                .as_ref()
+                                .is_some_and(|state| state.host_id == *host_id)
+                    });
+                self.selected_archived = if directory_open
+                    || matches!(command, Command::Fork { .. } | Command::Create { .. })
+                {
+                    false
+                } else if self.directory.threads.iter().any(|row| row.id == thread.id) {
+                    self.directory.query.archived
+                } else {
+                    self.thread.as_ref().is_some_and(|old| old.id == thread.id)
+                        && self.selected_archived
+                };
+                if directory_open {
+                    self.directory_target = None;
+                }
                 self.rename_target = None;
                 if self.thread.as_ref().is_none_or(|old| old.id != thread.id) {
                     self.session_tree = None;
@@ -1891,6 +1906,7 @@ impl Render for HostView {
                     ),
             )
             .child(self.attention_banner(cx))
+            .child(self.directory_source_banner(cx))
             .when(self.draining(), |view| {
                 let state = self.snapshot.as_ref().expect("draining Host snapshot");
                 view.child(div().px_6().py_2().text_sm().border_b_1().border_color(cx.theme().border)

@@ -85,6 +85,9 @@ jobs:
         run: python3 scripts/session-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/directory-smoke.py
+      - name: Cross-Host observational session directory
+        if: runner.os != 'Windows'
+        run: python3 scripts/fleet-directory-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/models-smoke.py
       - if: runner.os != 'Windows'

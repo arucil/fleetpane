@@ -22,6 +22,8 @@ pub mod creations;
 pub mod directory;
 #[cfg(unix)]
 pub mod files;
+#[cfg(unix)]
+pub mod fleet_directory;
 pub mod history;
 pub mod hosts;
 pub mod models;

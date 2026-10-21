@@ -174,3 +174,12 @@ per-item history boundaries now have [local native and regression evidence](veri
 Empty items stay hidden, Copy preserves fields, and Stop retains its exact-turn
 contract. External model and cross-platform native reasoning acceptance remain open.
 Scoped-path chronological review reaches 195 (`47a99f566`); 196 (`6aa9b1c72`) is next.
+
+
+Review 202 adds explicit per-daemon directory accessors and grouped sessions.
+Fleetpane now has an observational cross-Host session directory with bounded
+metadata pages, native title/Host filtering, pinned source opening and explicit
+partial errors ([evidence](verification/2026-10-21-fleet-directory.md)).
+Provider ordering remains in effect; remote connections, registry editing,
+subscriptions and global activity sorting remain open. Seven new source paths
+were inspected; the other 26 changed paths remain outside this review scope.
