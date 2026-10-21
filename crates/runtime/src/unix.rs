@@ -50,7 +50,9 @@ async fn record(
     state: &mut State,
     replies: &mut QueryReplies,
     message: Value,
+    target: crate::OperationTarget,
 ) -> Result<(), Error> {
+    state.check_response_target(&message, target)?;
     if message.get("method").is_none()
         && let Some(id) = message.get("id").and_then(Value::as_str)
         && !id.starts_with("query:")
@@ -78,14 +80,20 @@ async fn record(
                 .checked_add(1)
                 .ok_or("event sequence exhausted")?,
         );
-        state
+        if let Err(error) = state
             .journal
             .as_ref()
             .expect("Host journal initialized")
             .finish(operation)
-            .await?;
+            .await
+        {
+            state.fail(format!(
+                "journal completion failed; result uncertain: {error}"
+            ));
+            return Err(error);
+        }
     }
-    if let Some(query) = state.record(message)? {
+    if let Some(query) = state.record_from(message, target)? {
         let reply = replies
             .remove(&query.id)
             .ok_or("query response channel missing")?;
@@ -103,13 +111,44 @@ async fn batch(
     replies: &mut QueryReplies,
     batch: crate::acp::Batch,
 ) -> Result<(), Error> {
+    if state.snapshot.fault_scope == Some(crate::FaultScope::Host) {
+        return Err("Host storage is fenced; ACP activity cannot be published".into());
+    }
+    if !batch.archive.is_empty() {
+        let result = state
+            .journal
+            .as_ref()
+            .ok_or("ACP archive needs its Host journal")?
+            .archive_write(batch.archive)
+            .await;
+        if let Err(error) = result {
+            state.fail(format!("ACP archive write failed: {error}"));
+            return Err(error);
+        }
+    }
     for message in batch.wire {
-        write_frame(stdin, &message).await?;
+        // ACP images are expanded only on this outgoing provider pipe. Control,
+        // events, responses and persisted operations keep their existing limits.
+        write_frame_limit(
+            stdin,
+            &message,
+            crate::attachments::MAX_IMAGES
+                * ((crate::attachments::MAX_IMAGE_BYTES as usize).div_ceil(3) * 4)
+                + MAX_FRAME,
+        )
+        .await?;
     }
     for message in batch.events {
-        record(state, replies, message).await?;
+        record(state, replies, message, crate::OperationTarget::Provider).await?;
     }
     Ok(())
+}
+
+struct Submission {
+    id: String,
+    method: String,
+    params: Value,
+    images: Option<crate::attachments::Prepared>,
 }
 
 async fn submit(
@@ -117,19 +156,25 @@ async fn submit(
     stdin: &mut ChildStdin,
     adapter: &mut Option<crate::acp::Adapter>,
     replies: &mut QueryReplies,
-    id: String,
-    method: String,
-    params: Value,
+    submission: Submission,
 ) -> Result<(), Error> {
+    let Submission {
+        id,
+        method,
+        mut params,
+        images,
+    } = submission;
     if let Some(adapter) = adapter {
-        batch(
-            state,
-            stdin,
-            replies,
-            adapter.dispatch(id, &method, params)?,
-        )
-        .await
+        let result = if let Some(images) = &images {
+            adapter.dispatch_images(id, params, &images.prompt)?
+        } else {
+            adapter.dispatch(id, &method, params)?
+        };
+        batch(state, stdin, replies, result).await
     } else {
+        if let Some(images) = &images {
+            params["input"] = json!(images.prompt.wire);
+        }
         write_frame(stdin, &json!({"id":id,"method":method,"params":params})).await
     }
 }
@@ -185,8 +230,16 @@ async fn write_frame<W: AsyncWrite + Unpin, T: serde::Serialize>(
     writer: &mut W,
     value: &T,
 ) -> Result<(), Error> {
+    write_frame_limit(writer, value, MAX_FRAME).await
+}
+
+async fn write_frame_limit<W: AsyncWrite + Unpin, T: serde::Serialize>(
+    writer: &mut W,
+    value: &T,
+    limit: usize,
+) -> Result<(), Error> {
     let mut bytes = serde_json::to_vec(value)?;
-    if bytes.len() + 1 > MAX_FRAME {
+    if bytes.len() + 1 > limit {
         return Err("outbound JSONL frame exceeds limit".into());
     }
     bytes.push(b'\n');
@@ -197,9 +250,15 @@ async fn write_frame<W: AsyncWrite + Unpin, T: serde::Serialize>(
 struct Call {
     request: Request,
     reply: oneshot::Sender<Response>,
+    images: Result<Option<crate::attachments::Prepared>, String>,
 }
 
-async fn serve_client(stream: UnixStream, calls: mpsc::Sender<Call>) -> Result<(), Error> {
+async fn serve_client(
+    stream: UnixStream,
+    calls: mpsc::Sender<Call>,
+    store: crate::attachments::Store,
+    acp: bool,
+) -> Result<(), Error> {
     let (reader, mut writer) = stream.into_split();
     let mut reader = BufReader::new(reader);
     while let Some(message) = timeout(
@@ -208,7 +267,7 @@ async fn serve_client(stream: UnixStream, calls: mpsc::Sender<Call>) -> Result<(
     )
     .await??
     {
-        let request = match serde_json::from_value(message) {
+        let request: Request = match serde_json::from_value(message) {
             Ok(request) => request,
             Err(error) => {
                 write_frame(
@@ -219,8 +278,21 @@ async fn serve_client(stream: UnixStream, calls: mpsc::Sender<Call>) -> Result<(
                 continue;
             }
         };
+        let images = if let Request::Execute { method, params, .. } = &request {
+            crate::attachments::prepare(&store, method, params, acp).await
+        } else {
+            Ok(None)
+        };
         let (reply, response) = oneshot::channel();
-        timeout(IO_TIMEOUT, calls.send(Call { request, reply })).await??;
+        timeout(
+            IO_TIMEOUT,
+            calls.send(Call {
+                request,
+                reply,
+                images,
+            }),
+        )
+        .await??;
         let result = timeout(IO_TIMEOUT, response).await??;
         write_frame(&mut writer, &result).await?;
     }
@@ -232,16 +304,22 @@ async fn handle(
     stdin: &mut ChildStdin,
     adapter: &mut Option<crate::acp::Adapter>,
     replies: &mut QueryReplies,
+    terminals: &mut crate::terminal::Manager,
     request: Request,
+    images: Result<Option<crate::attachments::Prepared>, String>,
 ) -> Response {
     match request {
-        Request::Snapshot => Response::Snapshot(state.snapshot()),
+        Request::Snapshot => {
+            let mut snapshot = state.snapshot();
+            snapshot.activity.terminal_ids = terminals.live();
+            Response::Snapshot(snapshot)
+        }
         Request::SetAdmission {
             lease,
             expected_generation,
             mode,
         } => {
-            if let Err(error) = state.authorize_controller(&lease) {
+            if let Err(error) = state.authorize_host(&lease) {
                 return error.into();
             }
             let next = match state.snapshot.admission.change(expected_generation, mode) {
@@ -317,7 +395,7 @@ async fn handle(
             method,
             params,
         } => {
-            if let Err(error) = state.authorize(&lease) {
+            if let Err(error) = state.authorize_mutation(&lease, &method) {
                 return error.into();
             }
             match state
@@ -344,6 +422,23 @@ async fn handle(
                     ));
                     return Response::error("journal_unavailable", error.to_string());
                 }
+            }
+            let images = match images {
+                Ok(images) => images,
+                Err(error) => return Response::error("invalid_images", error),
+            };
+            if images.is_some()
+                && adapter.is_some()
+                && state
+                    .snapshot
+                    .provider_info
+                    .pointer("/agentCapabilities/promptCapabilities/image")
+                    != Some(&json!(true))
+            {
+                return Response::error(
+                    "unsupported_images",
+                    "ACP provider did not advertise v1 image prompt support",
+                );
             }
             match state.admit(&lease, operation_id, method.clone(), params.clone()) {
                 Err(error) => error.into(),
@@ -372,20 +467,27 @@ async fn handle(
                             }
                         }
                     }
+                    if fresh && crate::terminal::is_mutation(&method) {
+                        terminals.dispatch(operation_id, &method, params);
+                        return state.operation(operation_id);
+                    }
                     if fresh
                         && let Err(error) = submit(
                             state,
                             stdin,
                             adapter,
                             replies,
-                            operation_id.to_string(),
-                            method,
-                            params,
+                            Submission {
+                                id: operation_id.to_string(),
+                                method,
+                                params,
+                                images,
+                            },
                         )
                         .await
                     {
                         // A partial write may have been accepted. Never resend it.
-                        state.fail(format!("provider write outcome unknown: {error}"));
+                        state.fail_provider(format!("provider write outcome unknown: {error}"));
                     }
                     state.operation(operation_id)
                 }
@@ -420,7 +522,7 @@ async fn handle(
                     Response::Answered
                 }
                 Err(error) => {
-                    state.fail(format!("approval write outcome unknown: {error}"));
+                    state.fail_provider(format!("approval write outcome unknown: {error}"));
                     Response::error(
                         "outcome_unknown",
                         "approval may have reached provider; not resubmitted",
@@ -517,13 +619,24 @@ pub async fn run(config: Config) -> Result<(), Error> {
             return Err("DeepSeek adapter requires ACP v1 session/list and session/resume".into());
         }
         info["fleetpaneProvider"] = json!("deepseek-acp");
-        Some(crate::acp::Adapter::default())
+        Some(crate::acp::Adapter::restore(
+            state
+                .journal
+                .as_ref()
+                .ok_or("ACP archive needs its Host journal")?
+                .archive_read()
+                .await?,
+        )?)
     } else {
         write_frame(&mut stdin, &json!({"method":"initialized"})).await?;
+        info["fleetpaneProvider"] = json!("codex");
         None
     };
     state.snapshot.provider_pid = pid;
     state.snapshot.provider_info = info;
+    state.snapshot.provider_info["fleetpaneTerminalVersion"] = json!(1);
+    state.snapshot.provider_info["fleetpaneAttachmentVersion"] = json!(1);
+    let attachment_store = crate::attachments::Store::for_socket(&config.socket)?;
     let (calls_tx, mut calls_rx) = mpsc::channel::<Call>(32);
     let (events_tx, mut events_rx) = mpsc::channel(16);
     let reader = tokio::spawn(async move {
@@ -550,7 +663,8 @@ pub async fn run(config: Config) -> Result<(), Error> {
     let mut clients = tokio::task::JoinSet::new();
     let mut provider_open = true;
     let mut query_replies = HashMap::new();
-    let mut fault_recorded = false;
+    let mut fault_recorded = None;
+    let mut terminals = crate::terminal::Manager::default();
     let shutdown = tokio::signal::ctrl_c();
     tokio::pin!(shutdown);
     eprintln!(
@@ -564,12 +678,26 @@ pub async fn run(config: Config) -> Result<(), Error> {
                 let (stream, _) = accepted?;
                 if let Ok(permit) = semaphore.clone().try_acquire_owned() {
                     let calls = calls_tx.clone();
-                    clients.spawn(async move { let _permit = permit; serve_client(stream, calls).await });
+                    let store = attachment_store.clone();
+                    let acp = config.acp;
+                    clients.spawn(async move { let _permit = permit; serve_client(stream, calls, store, acp).await });
                 }
             }
             Some(call) = calls_rx.recv() => {
                 match call.request {
                     Request::Query { lease, method, params } => {
+                        if method == crate::terminal::READ_METHOD {
+                            let response = match state.authorize_controller(&lease) {
+                                Err(error) => error.into(),
+                                Ok(()) => match serde_json::from_value::<crate::terminal::Read>(params)
+                                    .map_err(|e|e.to_string()).and_then(|read|terminals.read(read)) {
+                                    Ok(result) => Response::Query { message:json!({"result":result}), sequence:state.snapshot.sequence },
+                                    Err(error) => Response::error("terminal_read",error),
+                                }
+                            };
+                            let _disconnected = call.reply.send(response);
+                            continue;
+                        }
                         if method == crate::tasks::READ_METHOD {
                             let response = match state.authorize_controller(&lease) {
                                 Err(error)=>error.into(),
@@ -588,20 +716,27 @@ pub async fn run(config: Config) -> Result<(), Error> {
                             Err(error) => { let _disconnected = call.reply.send(error.into()); }
                             Ok(id) => {
                                 query_replies.insert(id, call.reply);
-                                match submit(&mut state, &mut stdin, &mut adapter, &mut query_replies, format!("query:{id}"), method, params).await {
+                                match submit(&mut state, &mut stdin, &mut adapter, &mut query_replies, Submission { id:format!("query:{id}"), method, params, images:None }).await {
                                     Ok(()) => {}
                                     Err(error) => {
-                                        state.fail(format!("provider write outcome unknown: {error}"));
+                                        state.fail_provider(format!("provider write outcome unknown: {error}"));
                                     }
                                 }
                             }
                         }
                     }
                     request => {
-                        let response = handle(&mut state, &mut stdin, &mut adapter, &mut query_replies, request).await;
+                        let response = handle(&mut state, &mut stdin, &mut adapter, &mut query_replies, &mut terminals, request, call.images).await;
                         // Mutation results remain in host state if a controller disappeared.
                         let _disconnected = call.reply.send(response);
                     }
+                }
+            }
+            Some(completion) = terminals.next(), if terminals.has_pending() => {
+                match completion {
+                    Ok(message) => if state.snapshot.fault_scope != Some(crate::FaultScope::Host)
+                        && let Err(error) = record(&mut state, &mut query_replies, message, crate::OperationTarget::Terminal).await { state.fail(error.to_string()); },
+                    Err(error) => state.fail(format!("terminal completion task failed: {error}")),
                 }
             }
             event = events_rx.recv(), if provider_open => {
@@ -612,11 +747,11 @@ pub async fn run(config: Config) -> Result<(), Error> {
                                 Ok(messages) => batch(&mut state, &mut stdin, &mut query_replies, messages).await,
                                 Err(error) => Err(error.into()),
                             }
-                        } else { record(&mut state, &mut query_replies, message).await };
-                        if let Err(error) = outcome {state.fail(error.to_string());}
+                        } else { record(&mut state, &mut query_replies, message, crate::OperationTarget::Provider).await };
+                        if let Err(error) = outcome {state.fail_provider(error.to_string());}
                     }
-                    Some(Err(reason)) => { state.fail(reason); provider_open = false; }
-                    None => { state.fail("provider reader stopped".into()); provider_open = false; }
+                    Some(Err(reason)) => { state.fail_provider(reason); provider_open = false; }
+                    None => { state.fail_provider("provider reader stopped".into()); provider_open = false; }
                 }
             }
             Some(result) = clients.join_next(), if !clients.is_empty() => {
@@ -628,19 +763,23 @@ pub async fn run(config: Config) -> Result<(), Error> {
             }
         }
         if let Some(reason) = state.fault().map(str::to_owned) {
-            if !fault_recorded {
+            provider_open = false;
+            let scope = state.snapshot.fault_scope.expect("fault has a scope");
+            if fault_recorded != Some(scope) {
                 if let Err(error) = state
                     .journal
                     .as_ref()
                     .expect("Host journal initialized")
-                    .fail(reason.to_owned())
+                    .fail(reason.to_owned(), scope)
                     .await
                 {
-                    eprintln!(
+                    state.fail(format!(
                         "journal fault persistence failed; admissions remain uncertain: {error}"
-                    );
+                    ));
                 }
-                fault_recorded = true;
+                // If persisting a provider fault failed, the Host fault must
+                // still be persisted for every target on the next iteration.
+                fault_recorded = Some(scope);
                 match state
                     .journal
                     .as_ref()
@@ -649,11 +788,20 @@ pub async fn run(config: Config) -> Result<(), Error> {
                     .await
                 {
                     Ok(count) => state.snapshot.activity.unknown_operations = count,
-                    Err(error) => eprintln!("cannot read uncertain receipt count: {error}"),
+                    Err(error) => {
+                        state.fail(format!("cannot read uncertain receipt count: {error}"))
+                    }
                 }
             }
+            let code = match state.snapshot.fault_scope.expect("fault has a scope") {
+                crate::FaultScope::Provider => "provider_unavailable",
+                crate::FaultScope::Host => "host_unavailable",
+            };
             for (_, reply) in query_replies.drain() {
-                let _disconnected = reply.send(Response::error("provider_unavailable", &reason));
+                let _disconnected = reply.send(Response::error(
+                    code,
+                    state.fault().expect("fault has a reason"),
+                ));
             }
         }
     }
@@ -663,7 +811,10 @@ pub async fn run(config: Config) -> Result<(), Error> {
         .journal
         .as_ref()
         .expect("Host journal initialized")
-        .fail("Host shut down before a provider response".into())
+        .fail(
+            "Host shut down before an operation result".into(),
+            crate::FaultScope::Host,
+        )
         .await?;
     drop(stdin);
     if child.try_wait()?.is_none() {

@@ -1,0 +1,598 @@
+diff --git a/packages/app/package.json b/packages/app/package.json
+index a75826a97..289a1d6bb 100644
+--- a/packages/app/package.json
++++ b/packages/app/package.json
+@@ -17,7 +17,7 @@
+     "@react-navigation/bottom-tabs": "^7.4.0",
+     "@react-navigation/elements": "^2.6.3",
+     "@react-navigation/native": "^7.1.8",
+-    "@speechmatics/expo-two-way-audio": "^0.1.2",
++    "@boudra/expo-two-way-audio": "^0.1.3",
+     "buffer": "^6.0.3",
+     "expo": "^54.0.18",
+     "expo-audio": "~1.0.13",
+diff --git a/packages/app/src/components/agent-stream-view.tsx b/packages/app/src/components/agent-stream-view.tsx
+index c0dae2306..dbca06d13 100644
+--- a/packages/app/src/components/agent-stream-view.tsx
++++ b/packages/app/src/components/agent-stream-view.tsx
+@@ -1,9 +1,11 @@
+-import { useEffect, useRef } from 'react';
++import { useEffect, useRef, useState } from 'react';
+ import { View, Text, ScrollView, Pressable } from 'react-native';
+ import { useSafeAreaInsets } from 'react-native-safe-area-context';
+ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
++import { BottomSheetModal } from '@gorhom/bottom-sheet';
+ import type { AgentStatus } from '@server/server/acp/types';
+ import { AssistantMessage, UserMessage, ActivityLog, ToolCall } from './message';
++import { ToolCallBottomSheet } from './tool-call-bottom-sheet';
+ import type { StreamItem } from '@/types/stream';
+ 
+ export interface AgentStreamViewProps {
+@@ -40,13 +42,32 @@ export function AgentStreamView({
+   onPermissionResponse,
+ }: AgentStreamViewProps) {
+   const scrollViewRef = useRef<ScrollView>(null);
++  const bottomSheetRef = useRef<BottomSheetModal>(null);
+   const insets = useSafeAreaInsets();
++  const [selectedToolCall, setSelectedToolCall] = useState<{
++    toolName: string;
++    status: 'executing' | 'completed' | 'failed';
++    args: any;
++    result?: any;
++    error?: any;
++  } | null>(null);
+ 
+   // Auto-scroll to bottom when new items arrive
+   useEffect(() => {
+     scrollViewRef.current?.scrollToEnd({ animated: true });
+   }, [streamItems]);
+ 
++  function handleOpenToolCallDetails(toolCall: {
++    toolName: string;
++    status: 'executing' | 'completed' | 'failed';
++    args: any;
++    result?: any;
++    error?: any;
++  }) {
++    setSelectedToolCall(toolCall);
++    bottomSheetRef.current?.present();
++  }
++
+   return (
+     <View style={stylesheet.container}>
+       {/* Content list */}
+@@ -107,6 +128,12 @@ export function AgentStreamView({
+                     args={item.rawInput}
+                     result={item.rawOutput}
+                     status={toolStatus}
++                    onOpenDetails={() => handleOpenToolCallDetails({
++                      toolName: item.title,
++                      status: toolStatus,
++                      args: item.rawInput,
++                      result: item.rawOutput,
++                    })}
+                   />
+                 );
+               }
+@@ -137,6 +164,15 @@ export function AgentStreamView({
+             />
+           ))}
+       </ScrollView>
++
++      <ToolCallBottomSheet
++        bottomSheetRef={bottomSheetRef}
++        toolName={selectedToolCall?.toolName}
++        status={selectedToolCall?.status}
++        args={selectedToolCall?.args}
++        result={selectedToolCall?.result}
++        error={selectedToolCall?.error}
++      />
+     </View>
+   );
+ }
+diff --git a/packages/app/src/components/create-agent-modal.tsx b/packages/app/src/components/create-agent-modal.tsx
+index ef31660e2..c7aea45f4 100644
+--- a/packages/app/src/components/create-agent-modal.tsx
++++ b/packages/app/src/components/create-agent-modal.tsx
+@@ -1,5 +1,12 @@
+ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+-import { View, Text, Pressable, ScrollView, ActivityIndicator } from "react-native";
++import {
++  View,
++  Text,
++  Pressable,
++  ScrollView,
++  ActivityIndicator,
++  InteractionManager,
++} from "react-native";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
+ import Animated, { useAnimatedStyle } from "react-native-reanimated";
+@@ -57,6 +64,9 @@ export function CreateAgentModal({
+   const [isLoading, setIsLoading] = useState(false);
+   const [pendingRequestId, setPendingRequestId] = useState<string | null>(null);
+ 
++  // Use ref instead of state to survive state resets in onDismiss
++  const pendingNavigationAgentIdRef = useRef<string | null>(null);
++
+   const snapPoints = useMemo(() => ["90%"], []);
+ 
+   // Keyboard animation for footer
+@@ -132,12 +142,11 @@ export function CreateAgentModal({
+         setIsLoading(false);
+         setPendingRequestId(null);
+ 
+-        // Navigate to the agent page BEFORE closing modal
+-        // This prevents race condition on Android where router.push() happens
+-        // while the modal is unmounting, causing NullPointerException
+-        router.push(`/agent/${agentId}`);
++        // Store the agent ID in ref for navigation after modal dismisses
++        // Using ref instead of state because state gets reset in onDismiss
++        pendingNavigationAgentIdRef.current = agentId;
+ 
+-        // Close modal after navigation starts
++        // Close modal - navigation will happen in handleDismiss
+         handleClose();
+       }
+     });
+@@ -145,7 +154,7 @@ export function CreateAgentModal({
+     return () => {
+       unsubscribe();
+     };
+-  }, [pendingRequestId, ws, router]);
++  }, [pendingRequestId, ws]);
+ 
+   async function handleCreate() {
+     if (!workingDir.trim()) {
+@@ -194,6 +203,8 @@ export function CreateAgentModal({
+   }
+ 
+   function handleDismiss() {
++    const agentId = pendingNavigationAgentIdRef.current;
++
+     // Reset all state
+     setWorkingDir("");
+     setSelectedMode("plan");
+@@ -201,6 +212,14 @@ export function CreateAgentModal({
+     setIsLoading(false);
+     setPendingRequestId(null);
+     onClose();
++
++    // Navigate after interactions complete to avoid race with dismiss animation
++    if (agentId) {
++      InteractionManager.runAfterInteractions(() => {
++        router.push(`/agent/${agentId}`);
++        pendingNavigationAgentIdRef.current = null;
++      });
++    }
+   }
+ 
+   return (
+diff --git a/packages/app/src/components/message.tsx b/packages/app/src/components/message.tsx
+index 1aaf3b215..00f69ca0f 100644
+--- a/packages/app/src/components/message.tsx
++++ b/packages/app/src/components/message.tsx
+@@ -322,6 +322,7 @@ interface ToolCallProps {
+   result?: any;
+   error?: any;
+   status: 'executing' | 'completed' | 'failed';
++  onOpenDetails?: () => void;
+ }
+ 
+ const toolCallStylesheet = StyleSheet.create((theme) => ({
+@@ -420,8 +421,7 @@ const toolCallStylesheet = StyleSheet.create((theme) => ({
+   },
+ }));
+ 
+-export function ToolCall({ toolName, args, result, error, status }: ToolCallProps) {
+-  const [isExpanded, setIsExpanded] = useState(false);
++export function ToolCall({ toolName, args, result, error, status, onOpenDetails }: ToolCallProps) {
+   const spinAnim = useRef(new Animated.Value(0)).current;
+ 
+   useEffect(() => {
+@@ -469,18 +469,11 @@ export function ToolCall({ toolName, args, result, error, status }: ToolCallProp
+ 
+   return (
+     <Pressable
+-      onPress={() => setIsExpanded(!isExpanded)}
++      onPress={onOpenDetails}
+       style={[toolCallStylesheet.pressable, toolCallStylesheet.pressableActive, config.border]}
+     >
+       <View style={toolCallStylesheet.content}>
+         <View style={toolCallStylesheet.headerRow}>
+-          <View style={toolCallStylesheet.chevronContainer}>
+-            {isExpanded ? (
+-              <ChevronDown size={16} color="#9ca3af" />
+-            ) : (
+-              <ChevronRight size={16} color="#9ca3af" />
+-            )}
+-          </View>
+           <Text style={toolCallStylesheet.toolName}>
+             {toolName}
+           </Text>
+@@ -499,47 +492,6 @@ export function ToolCall({ toolName, args, result, error, status }: ToolCallProp
+             </Text>
+           </View>
+         </View>
+-
+-        {isExpanded && (
+-          <View style={toolCallStylesheet.expandedContent}>
+-            <View style={toolCallStylesheet.section}>
+-              <Text style={toolCallStylesheet.sectionTitle}>
+-                Arguments
+-              </Text>
+-              <View style={toolCallStylesheet.sectionContent}>
+-                <Text style={toolCallStylesheet.sectionText}>
+-                  {JSON.stringify(args, null, 2)}
+-                </Text>
+-              </View>
+-            </View>
+-
+-            {result !== undefined && (
+-              <View style={toolCallStylesheet.section}>
+-                <Text style={toolCallStylesheet.sectionTitle}>
+-                  Result
+-                </Text>
+-                <View style={toolCallStylesheet.sectionContent}>
+-                  <Text style={toolCallStylesheet.sectionText}>
+-                    {JSON.stringify(result, null, 2)}
+-                  </Text>
+-                </View>
+-              </View>
+-            )}
+-
+-            {error !== undefined && (
+-              <View style={toolCallStylesheet.section}>
+-                <Text style={[toolCallStylesheet.sectionTitle, toolCallStylesheet.errorSectionTitle]}>
+-                  Error
+-                </Text>
+-                <View style={[toolCallStylesheet.sectionContent, toolCallStylesheet.errorSectionContent]}>
+-                  <Text style={toolCallStylesheet.sectionText}>
+-                    {JSON.stringify(error, null, 2)}
+-                  </Text>
+-                </View>
+-              </View>
+-            )}
+-          </View>
+-        )}
+       </View>
+     </Pressable>
+   );
+diff --git a/packages/app/src/components/orchestrator-messages-view.tsx b/packages/app/src/components/orchestrator-messages-view.tsx
+index f8558c312..a6f2442da 100644
+--- a/packages/app/src/components/orchestrator-messages-view.tsx
++++ b/packages/app/src/components/orchestrator-messages-view.tsx
+@@ -1,12 +1,14 @@
+ import { View, ScrollView } from "react-native";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+-import { forwardRef } from "react";
++import { forwardRef, useRef, useState } from "react";
++import { BottomSheetModal } from "@gorhom/bottom-sheet";
+ import {
+   UserMessage,
+   AssistantMessage,
+   ActivityLog,
+   ToolCall,
+ } from "@/components/message";
++import { ToolCallBottomSheet } from "./tool-call-bottom-sheet";
+ import type { MessageEntry } from "@/contexts/session-context";
+ 
+ interface OrchestratorMessagesViewProps {
+@@ -18,15 +20,35 @@ interface OrchestratorMessagesViewProps {
+ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessagesViewProps>(
+   function OrchestratorMessagesView({ messages, currentAssistantMessage, onArtifactClick }, ref) {
+     const { theme } = useUnistyles();
++    const bottomSheetRef = useRef<BottomSheetModal>(null);
++    const [selectedToolCall, setSelectedToolCall] = useState<{
++      toolName: string;
++      status: 'executing' | 'completed' | 'failed';
++      args: any;
++      result?: any;
++      error?: any;
++    } | null>(null);
++
++    function handleOpenToolCallDetails(toolCall: {
++      toolName: string;
++      status: 'executing' | 'completed' | 'failed';
++      args: any;
++      result?: any;
++      error?: any;
++    }) {
++      setSelectedToolCall(toolCall);
++      bottomSheetRef.current?.present();
++    }
+ 
+     return (
+-      <ScrollView
+-        ref={ref}
+-        style={styles.scrollView}
+-        contentContainerStyle={styles.scrollContent}
+-        keyboardShouldPersistTaps="handled"
+-        keyboardDismissMode="on-drag"
+-      >
++      <>
++        <ScrollView
++          ref={ref}
++          style={styles.scrollView}
++          contentContainerStyle={styles.scrollContent}
++          keyboardShouldPersistTaps="handled"
++          keyboardDismissMode="on-drag"
++        >
+         {messages.map((msg) => {
+           if (msg.type === "user") {
+             return (
+@@ -85,6 +107,13 @@ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessa
+                 result={msg.result}
+                 error={msg.error}
+                 status={msg.status}
++                onOpenDetails={() => handleOpenToolCallDetails({
++                  toolName: msg.toolName,
++                  status: msg.status,
++                  args: msg.args,
++                  result: msg.result,
++                  error: msg.error,
++                })}
+               />
+             );
+           }
+@@ -101,6 +130,16 @@ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessa
+           />
+         )}
+       </ScrollView>
++
++      <ToolCallBottomSheet
++        bottomSheetRef={bottomSheetRef}
++        toolName={selectedToolCall?.toolName}
++        status={selectedToolCall?.status}
++        args={selectedToolCall?.args}
++        result={selectedToolCall?.result}
++        error={selectedToolCall?.error}
++      />
++    </>
+     );
+   }
+ );
+diff --git a/packages/app/src/components/tool-call-bottom-sheet.tsx b/packages/app/src/components/tool-call-bottom-sheet.tsx
+new file mode 100644
+index 000000000..cff7f806e
+--- /dev/null
++++ b/packages/app/src/components/tool-call-bottom-sheet.tsx
+@@ -0,0 +1,207 @@
++import React, { useCallback, useMemo } from "react";
++import { View, Text, StyleSheet } from "react-native";
++import {
++  BottomSheetModal,
++  BottomSheetView,
++  BottomSheetScrollView,
++  BottomSheetBackdrop,
++  BottomSheetBackdropProps,
++} from "@gorhom/bottom-sheet";
++
++interface ToolCallBottomSheetProps {
++  bottomSheetRef: React.RefObject<BottomSheetModal>;
++  toolName?: string;
++  status?: "pending" | "in_progress" | "executing" | "completed" | "failed";
++  args?: any;
++  result?: any;
++  error?: any;
++}
++
++export function ToolCallBottomSheet({
++  bottomSheetRef,
++  toolName,
++  status,
++  args,
++  result,
++  error,
++}: ToolCallBottomSheetProps) {
++  const snapPoints = useMemo(() => ["80%"], []);
++
++  const renderBackdrop = useCallback(
++    (props: BottomSheetBackdropProps) => (
++      <BottomSheetBackdrop
++        {...props}
++        disappearsOnIndex={-1}
++        appearsOnIndex={0}
++        opacity={0.5}
++      />
++    ),
++    []
++  );
++
++  const statusColor = useMemo(() => {
++    switch (status) {
++      case "completed":
++        return "#22c55e";
++      case "failed":
++        return "#ef4444";
++      case "executing":
++      case "in_progress":
++        return "#3b82f6";
++      case "pending":
++      default:
++        return "#6b7280";
++    }
++  }, [status]);
++
++  const statusLabel = useMemo(() => {
++    switch (status) {
++      case "in_progress":
++      case "executing":
++        return "Executing";
++      case "completed":
++        return "Completed";
++      case "failed":
++        return "Failed";
++      case "pending":
++      default:
++        return "Pending";
++    }
++  }, [status]);
++
++  return (
++    <BottomSheetModal
++      ref={bottomSheetRef}
++      snapPoints={snapPoints}
++      backdropComponent={renderBackdrop}
++      enablePanDownToClose={true}
++      handleIndicatorStyle={styles.handleIndicator}
++      backgroundStyle={styles.background}
++    >
++      <BottomSheetView style={styles.container}>
++        <View style={styles.header}>
++          <Text style={styles.toolName}>{toolName || "Tool Call"}</Text>
++          <View style={[styles.statusBadge, { backgroundColor: statusColor }]}>
++            <Text style={styles.statusText}>{statusLabel}</Text>
++          </View>
++        </View>
++
++        <BottomSheetScrollView
++          style={styles.scrollView}
++          contentContainerStyle={styles.scrollContent}
++        >
++          {args !== undefined && (
++            <View style={styles.section}>
++              <Text style={styles.sectionTitle}>Arguments</Text>
++              <View style={styles.jsonContainer}>
++                <Text style={styles.jsonText}>
++                  {JSON.stringify(args, null, 2)}
++                </Text>
++              </View>
++            </View>
++          )}
++
++          {result !== undefined && (
++            <View style={styles.section}>
++              <Text style={styles.sectionTitle}>Result</Text>
++              <View style={styles.jsonContainer}>
++                <Text style={styles.jsonText}>
++                  {JSON.stringify(result, null, 2)}
++                </Text>
++              </View>
++            </View>
++          )}
++
++          {error !== undefined && (
++            <View style={styles.section}>
++              <Text style={styles.sectionTitle}>Error</Text>
++              <View style={[styles.jsonContainer, styles.errorContainer]}>
++                <Text style={[styles.jsonText, styles.errorText]}>
++                  {JSON.stringify(error, null, 2)}
++                </Text>
++              </View>
++            </View>
++          )}
++        </BottomSheetScrollView>
++      </BottomSheetView>
++    </BottomSheetModal>
++  );
++}
++
++const styles = StyleSheet.create({
++  container: {
++    flex: 1,
++    backgroundColor: "#1f2937",
++  },
++  handleIndicator: {
++    backgroundColor: "#4b5563",
++  },
++  background: {
++    backgroundColor: "#1f2937",
++  },
++  header: {
++    flexDirection: "row",
++    alignItems: "center",
++    justifyContent: "space-between",
++    paddingHorizontal: 20,
++    paddingVertical: 16,
++    borderBottomWidth: 1,
++    borderBottomColor: "#374151",
++  },
++  toolName: {
++    fontSize: 18,
++    fontWeight: "600",
++    color: "#f9fafb",
++    flex: 1,
++  },
++  statusBadge: {
++    paddingHorizontal: 8,
++    paddingVertical: 4,
++    borderRadius: 4,
++    marginLeft: 12,
++  },
++  statusText: {
++    fontSize: 12,
++    fontWeight: "600",
++    color: "#fff",
++    textTransform: "capitalize",
++  },
++  scrollView: {
++    flex: 1,
++  },
++  scrollContent: {
++    paddingHorizontal: 20,
++    paddingVertical: 16,
++  },
++  section: {
++    marginBottom: 20,
++  },
++  sectionTitle: {
++    fontSize: 14,
++    fontWeight: "600",
++    color: "#9ca3af",
++    marginBottom: 8,
++    textTransform: "uppercase",
++    letterSpacing: 0.5,
++  },
++  jsonContainer: {
++    backgroundColor: "#111827",
++    borderRadius: 8,
++    padding: 12,
++    borderWidth: 1,
++    borderColor: "#374151",
++  },
++  jsonText: {
++    fontFamily: "monospace",
++    fontSize: 12,
++    color: "#e5e7eb",
++    lineHeight: 18,
++  },
++  errorContainer: {
++    borderColor: "#ef4444",
++    backgroundColor: "#1f1416",
++  },
++  errorText: {
++    color: "#fca5a5",
++  },
++});
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 8dcf4830d..b92c53a93 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -259,7 +259,7 @@ export class Session {
+ 
+   /**
+    * Maybe trigger title generation for an agent
+-   * Only generates title once after first meaningful activity
++   * Only generates title once after first user message chunk and some initial agent activity
+    */
+   private maybeTriggerTitleGeneration(agentId: string): void {
+     // Skip if title generator not initialized
+@@ -275,8 +275,15 @@ export class Session {
+     // Get agent updates
+     const updates = this.agentManager.getAgentUpdates(agentId);
+ 
+-    // Need at least 15 updates before generating title
+-    if (updates.length < 15) {
++    // Find first user message chunk
++    const hasUserMessage = updates.some(
++      (update) =>
++        update.notification.type === "session" &&
++        update.notification.notification.update.sessionUpdate === "user_message_chunk"
++    );
++
++    // Need at least one user message and some additional updates (3-5) for context
++    if (!hasUserMessage || updates.length < 5) {
+       return;
+     }
+ 

@@ -1,0 +1,37 @@
+{
+  "socket": "/tmp/fleetpane-appearance-qa/private/control.sock",
+  "host_id": "9e914c3b-571d-44fe-897e-242878bf2cda",
+  "pids": [
+    229799,
+    229801
+  ],
+  "thread": "a9c32174-a3ab-420f-a606-011d4da2205b",
+  "pending_request": {
+    "id": 10,
+    "method": "session/request_permission",
+    "params": {
+      "options": [
+        {
+          "kind": "allow_once",
+          "name": "Run this tool",
+          "optionId": "allow-one"
+        },
+        {
+          "kind": "reject_once",
+          "name": "Skip this tool",
+          "optionId": "reject-one"
+        }
+      ],
+      "sessionId": "a9c32174-a3ab-420f-a606-011d4da2205b",
+      "threadId": "a9c32174-a3ab-420f-a606-011d4da2205b",
+      "toolCall": {
+        "title": "Synthetic tool",
+        "toolCallId": "call-4faaa922-7d5a-4cf9-b89f-cfb0980997b5"
+      }
+    }
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "aae4480ffdea32ecb01ad5af1348390e6f3200e295b56b848f6b581b6173752f",
+    "apps/desktop/target/debug/fleetpane-desktop": "3d5c7f1609b164d727a9efcb0073a2ea5aba6ed7416d52077082e5495b484a29"
+  }
+}

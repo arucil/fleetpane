@@ -1,0 +1,184 @@
+commit 8d93eeb5c510e48fe183fa994b22d16a285337a7
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 18:10:12 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 18:10:12 2025 +0200
+
+    feat: switch to local claude-code-acp package and remove screen transition animations
+
+diff --git a/packages/app/src/app/_layout.tsx b/packages/app/src/app/_layout.tsx
+index 143c2ccf2..683a5e7da 100644
+--- a/packages/app/src/app/_layout.tsx
++++ b/packages/app/src/app/_layout.tsx
+@@ -58,12 +58,10 @@ export default function RootLayout() {
+                   <Stack
+                     screenOptions={{
+                       headerShown: false,
+-                      animation: "slide_from_right",
+-                      animationDuration: 250,
++                      animation: "none",
+                       gestureEnabled: true,
+                       gestureDirection: "horizontal",
+                       fullScreenGestureEnabled: true,
+-                      animationMatchesGesture: true,
+                     }}
+                   >
+                     <Stack.Screen name="index" />
+diff --git a/packages/server/package.json b/packages/server/package.json
+index 7ce8e0858..661f1f9f2 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -18,7 +18,7 @@
+   "dependencies": {
+     "@agentclientprotocol/sdk": "^0.4.9",
+     "@ai-sdk/openai": "^2.0.52",
+-    "@boudra/claude-code-acp": "^0.8.1",
++    "@boudra/claude-code-acp": "file:../../../claude-code-acp",
+     "@deepgram/sdk": "^3.4.0",
+     "@modelcontextprotocol/sdk": "^1.20.1",
+     "@openrouter/ai-sdk-provider": "^1.2.0",
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 88b2be878..2a38ffdb8 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -64,7 +64,8 @@ class ACPClient implements Client {
+   constructor(
+     private agentId: string,
+     private onUpdate: (agentId: string, update: SessionNotification) => void,
+-    private onPermissionRequest: (agentId: string, params: RequestPermissionRequest) => Promise<RequestPermissionResponse>
++    private onPermissionRequest: (agentId: string, params: RequestPermissionRequest) => Promise<RequestPermissionResponse>,
++    private persistence: AgentPersistence
+   ) {}
+ 
+   async requestPermission(params: RequestPermissionRequest): Promise<RequestPermissionResponse> {
+@@ -75,6 +76,19 @@ class ACPClient implements Client {
+   }
+ 
+   async sessionUpdate(params: SessionNotification): Promise<void> {
++    // Check if this update contains a Claude session ID
++    const claudeSessionId = params._meta?.claudeSessionId as string | undefined;
++    if (claudeSessionId && this.persistence) {
++      const persisted = await this.persistence.load();
++      const persistedAgent = persisted.find(a => a.id === this.agentId);
++      if (persistedAgent && persistedAgent.options.type === "claude") {
++        if (persistedAgent.options.sessionId === null || persistedAgent.options.sessionId !== claudeSessionId) {
++          // Update the Claude session ID
++          persistedAgent.options.sessionId = claudeSessionId;
++          await this.persistence.upsert(persistedAgent);
++        }
++      }
++    }
+     this.onUpdate(this.agentId, params);
+   }
+ 
+@@ -138,6 +152,13 @@ export class AgentManager {
+     const agentId = persisted.id;
+     const cwd = expandTilde(persisted.cwd);
+ 
++    // Check if Claude agent has a session ID
++    if (persisted.options.type === "claude" && persisted.options.sessionId === null) {
++      throw new Error(
++        `Cannot resume agent ${agentId}: Claude agent has no session ID. This agent was created but never received any prompts.`
++      );
++    }
++
+     // Validate that the working directory exists
+     try {
+       await access(cwd, constants.R_OK | constants.X_OK);
+@@ -166,7 +187,8 @@ export class AgentManager {
+       },
+       (id, params) => {
+         return this.handlePermissionRequest(id, params);
+-      }
++      },
++      this.persistence
+     );
+     const connection = new ClientSideConnection(() => client, stream);
+ 
+@@ -227,7 +249,7 @@ export class AgentManager {
+       // Use the loadSession API to resume the existing session
+       // If this is a Claude agent, use the Claude's internal session ID for resumption
+       const sessionIdToResume = persisted.options.type === "claude"
+-        ? persisted.options.sessionId
++        ? persisted.options.sessionId! // Not null because we checked above
+         : persisted.sessionId;
+ 
+       console.log(`[Agent ${agentId}] Loading session - ACP: ${persisted.sessionId}, Claude: ${sessionIdToResume}`);
+@@ -305,7 +327,8 @@ export class AgentManager {
+       },
+       (id, params) => {
+         return this.handlePermissionRequest(id, params);
+-      }
++      },
++      this.persistence
+     );
+     const connection = new ClientSideConnection(() => client, stream);
+ 
+@@ -407,7 +430,7 @@ export class AgentManager {
+           sessionId: agent.sessionId,
+           options: {
+             type: "claude",
+-            sessionId: claudeSessionId || agent.sessionId, // Use Claude's internal session ID if available
++            sessionId: claudeSessionId || null, // null until first prompt
+           },
+           createdAt: agent.createdAt.toISOString(),
+           cwd: agent.cwd,
+diff --git a/packages/server/src/server/acp/agent-persistence.ts b/packages/server/src/server/acp/agent-persistence.ts
+index e47149f2a..3089454db 100644
+--- a/packages/server/src/server/acp/agent-persistence.ts
++++ b/packages/server/src/server/acp/agent-persistence.ts
+@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
+ export const AgentOptionsSchema = z.discriminatedUnion("type", [
+   z.object({
+     type: z.literal("claude"),
+-    sessionId: z.string(), // Claude's internal session ID
++    sessionId: z.string().nullable(), // Claude's internal session ID (null until first prompt)
+   }),
+   // Add more agent types here in the future
+ ]);
+@@ -51,9 +51,20 @@ export class AgentPersistence {
+       for (const agent of parsed) {
+         try {
+           const validated = PersistedAgentSchema.parse(agent);
++
++          if (
++            validated.options.type === "claude" &&
++            validated.options.sessionId !== null
++          ) {
++            validated.sessionId = validated.options.sessionId;
++          }
++
+           agents.push(validated);
+         } catch (zodError) {
+-          console.error(`[AgentPersistence] Invalid agent data for ${agent.id}:`, zodError);
++          console.error(
++            `[AgentPersistence] Invalid agent data for ${agent.id}:`,
++            zodError
++          );
+           // Skip invalid agents
+         }
+       }
+@@ -61,7 +72,9 @@ export class AgentPersistence {
+       return agents;
+     } catch (error) {
+       // File doesn't exist or is invalid, return empty array
+-      console.log("[AgentPersistence] No existing agents found or file is invalid");
++      console.log(
++        "[AgentPersistence] No existing agents found or file is invalid"
++      );
+       return [];
+     }
+   }
+@@ -124,7 +137,9 @@ export class AgentPersistence {
+     if (agent) {
+       agent.title = title;
+       await this.save(agents);
+-      console.log(`[AgentPersistence] Updated title for agent ${agentId}: "${title}"`);
++      console.log(
++        `[AgentPersistence] Updated title for agent ${agentId}: "${title}"`
++      );
+     }
+   }
+-}
+\ No newline at end of file
++}

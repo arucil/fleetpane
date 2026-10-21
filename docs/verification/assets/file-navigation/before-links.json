@@ -1,0 +1,148 @@
+{
+  "snapshots": [
+    {
+      "protocol": 3,
+      "host_id": "4f45af2e-9aa7-468c-8fe8-f7db736433d4",
+      "host_pid": 2895231,
+      "provider_pid": 2895236,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "4f45af2e-9aa7-468c-8fe8-f7db736433d4",
+        "controller_id": "7453c7f2-9d9e-48f5-9b67-ba24ff4c83f8",
+        "generation": 6
+      },
+      "sequence": 22,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "0a010c0a-6825-438f-84c6-85249757cfd7",
+      "host_pid": 2895249,
+      "provider_pid": 2895251,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "0a010c0a-6825-438f-84c6-85249757cfd7",
+        "controller_id": "71471292-4892-499e-8f16-3651ccdf6cb7",
+        "generation": 2
+      },
+      "sequence": 7,
+      "operation_ids": [
+        "ca9fcb5c-7445-431f-a58c-17ada8aaff78",
+        "31488a47-25e4-4f67-b03f-150729adf5cf"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "8ec1724d-6e92-4521-a6a1-fa623dafd64c",
+            "turn_id": "0c41e91c-35ca-4c32-a7bb-84f7b2a84137"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "8ec1724d-6e92-4521-a6a1-fa623dafd64c",
+            "threadId": "8ec1724d-6e92-4521-a6a1-fa623dafd64c",
+            "toolCall": {
+              "content": [
+                {
+                  "content": {
+                    "text": "Proposed settings before approval \u4e2d\u6587",
+                    "type": "text"
+                  },
+                  "type": "content"
+                }
+              ],
+              "kind": "edit",
+              "locations": [
+                {
+                  "line": 42,
+                  "path": "/tmp/fleetpane-replay-144-20261021/1/review-settings.md"
+                }
+              ],
+              "name": "write_file",
+              "rawInput": {
+                "attempt": 0,
+                "content": "# New settings \u4e2d\u6587\nKeep exact content.",
+                "enabled": false,
+                "file_path": "/tmp/fleetpane-replay-144-20261021/1/review-settings.md"
+              },
+              "title": "Review settings \u4e2d\u6587",
+              "toolCallId": "reviewed"
+            }
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    }
+  ],
+  "draft": {
+    "key": {
+      "socket": "/tmp/fleetpane-replay-144-20261021/0/host/control.sock",
+      "host_id": "4f45af2e-9aa7-468c-8fe8-f7db736433d4",
+      "thread_id": "links-main",
+      "cwd": "/tmp/fleetpane-replay-144-20261021/work"
+    },
+    "revision": 1,
+    "text": "\u4fdd\u7559\u8349\u7a3f\n exact  trailing  \n",
+    "attempt": null
+  }
+}

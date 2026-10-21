@@ -1,0 +1,157 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "profile": "development",
+  "desktop_binary_sha256": "a7a382018315cba15dc396ead9dd202a80d462f1c4fd148851e4ab6df3426e0c",
+  "host_binary_sha256": "088ac3790e91295053a7cc8b6db930f1ce95ad1aa549bfcca27c68d2f16a693a",
+  "source_sha256": {
+    "crates/session/src/directory.rs": "899ba583dc9a7bdb9c006d8daf3bb648f3fc554fe6d0745a37c7535c956d551d",
+    "crates/session/src/client.rs": "6a3079bbfa0b6b3f8f7497098d9ab84a2c93feb1615f51018e934657511293b5",
+    "crates/runtime/src/acp.rs": "804a5392915911b1dab0f4f94a18f5f5fba73f6ce00c039d4aa516a07ea05fb7",
+    "apps/host/src/main.rs": "dd3f6cfcb8f7c5205b7f979a3d92cc37d01d57791418478a18bb69498114ed54",
+    "apps/desktop/src/host_view.rs": "8762ec2c6b6535b5eda3d16f0ee01e49b74614bd515c0fa3383343ee8413c8e1",
+    "scripts/provider-fixture.py": "b618becf3c4547170cab5ec041e1e46d2e273f13a765f6ef2c2462c2a3b9e876",
+    "scripts/archive-restore-smoke.py": "3ab05b2e21001c80133d24e6a9943042be2aafea1688adfa03a1f250078fd7b4",
+    "scripts/codex-session-smoke.py": "40d29e1d60d6b8a371ccfa2a957acf7901357c6ff1954635a760c38056e892c4"
+  },
+  "checks": {
+    "root-tests.log": 169,
+    "desktop-tests.log": 19,
+    "root-clippy.log": "passed",
+    "desktop-clippy.log": "passed",
+    "host-build.log": "passed",
+    "desktop-build.log": "passed",
+    "root-fmt.log": "passed",
+    "desktop-fmt.log": "passed",
+    "diff-check.log": "passed",
+    "restore-smoke.log": "passed",
+    "directory-smoke.log": "passed",
+    "session-smoke.log": "passed",
+    "codex-session-smoke.log": "passed"
+  },
+  "commands": [
+    "cargo test --workspace --locked",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --workspace --all-targets -- -D warnings",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets -- -D warnings",
+    "cargo fmt --check",
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml --check",
+    "cargo build -p fleetpane-host --locked",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/archive-restore-smoke.py",
+    "python3 scripts/directory-smoke.py",
+    "python3 scripts/session-smoke.py",
+    "python3 scripts/codex-session-smoke.py",
+    "git diff --check"
+  ],
+  "native": {
+    "workspace": "fleetpane-restore-20261021",
+    "stopped": true,
+    "provider": "synthetic Codex-shaped fixture",
+    "same_host_pid": 3164084,
+    "same_provider_pid": 3164086,
+    "host_id": "fe4586e4-066f-4f5c-8ce3-80f2e631820c",
+    "apps": [
+      {
+        "id": "app-3164089",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3175129",
+        "exit_code": 0
+      }
+    ],
+    "archive_read_mutations": 0,
+    "exact_copied_markdown_bytes": 81,
+    "exact_reopened_draft_bytes": 36,
+    "restore_drafts_unchanged": true,
+    "explicit_resume_drafts_unchanged": true,
+    "exact_send_turns": 1,
+    "methods": [
+      "thread/unarchive",
+      "thread/unarchive",
+      "thread/resume",
+      "turn/start"
+    ],
+    "cleanup": {
+      "pids_gone": {
+        "3164084": true,
+        "3164086": true
+      },
+      "socket_gone": true
+    }
+  },
+  "installed_codex": {
+    "version": "0.163.0",
+    "home": "new empty isolated temporary directory",
+    "model": "loopback rejecting HTTP fixture",
+    "model_requests": 2,
+    "external_model": false,
+    "native_desktop_acceptance": false,
+    "generated_schema_sha256": {
+      "ThreadListParams.ts": "840eb0bf3fc91f63719713948b22cbf9b9a9f8d392f316d42f2d9257abe3b7ea",
+      "ThreadUnarchiveParams.ts": "50df685c2ddcc5cb002d57c70662d4d5ebc23b14bef71c448e36a3ad65b18ffd",
+      "ThreadUnarchiveResponse.ts": "fa9f1eda4cb375ce0fb7aac2a7e8c25d5dd5d7a7b0f30f716de1574bff7fe17a"
+    },
+    "local_source_revision_inspected": "70b5cfc73b25458a7af225d24b16ef4794f8f380",
+    "local_source_is_not_asserted_equal_to_installed_build": true
+  },
+  "private_evidence_root": "/tmp/fleetpane-replay-169-20261021",
+  "private_evidence_sha256": {
+    "native/after-restore-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "native/apps.json": "dc41619085e49158b64d5e88d37b1a5f8780dd31115c236385e3d6c4c552f936",
+    "native/artifacts.json": "4474320cba83606f37f855125fb0fbb7bd31a82c0fd66015f97f7b3cbaa7aa6a",
+    "native/before-restore-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "native/before-restore.json": "75d1e31af73e31a363ce7c421b4e958055af173943f0d39589c5004c42569852",
+    "native/cleanup.json": "e056ee25929565ad68c42af7acc81495305697047fa561f26e6f7453386c4d76",
+    "native/clipboard.json": "3cbd1b9e8980be789b70334e8864f08c0fe41f3d3b19921596888104c028a086",
+    "native/failure-draft.json": "88310899763514a8ced9d0cbd6c356dc9beae3eba50f9e13073d759505dde02b",
+    "native/failure-state.json": "b6dbce72ee209109f5ad4c68b4d586739bcd7d7f314d43f9a0ceaf7b8d8549f6",
+    "native/history.json": "6df162d890f3b9751eaf394bbd5c5b64f0aa42f6257947b9a217acbc18ce4c94",
+    "native/hosts.json": "827204754e5b92d948bdb0fdc080e9808b57512c8beaff83d2ce61ed2b8ebb6b",
+    "native/native-operations.json": "d4419280e5b2c4194f4513e76de6f623498ca1989f1ea6708f47de7b16797bbd",
+    "native/reopened-state.json": "89cf4ac5541d8ccc6417d4612f54e571166450e2e644b50e6f64a20486171074",
+    "native/restored-state.json": "90c6d7e3948ad971cad5a159fece27aced8b9cf10d9a99c6903cdfdbf93b0060",
+    "native/resumed-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "native/sent-drafts.json": "34425eeb0017a0a3aa50d5304a7408a0091caede6a60efbb655f75106ab6b160",
+    "native/sent-readback.json": "420479971d3307122fd60c1ccdde9d85889713fb755f6cfab66fd75b6f320e44",
+    "native/sent-state.json": "e8bfee7bedd12d14721d49ca1962c55c449c524701d76801cc0e64eba30d22ac",
+    "native/setup.json": "9ed2d1fb8c5f9df8d2a9e9b1e9cc26c0d55b0228af930b7833ca4a0e3e70a360"
+  },
+  "evidence_sha256": {
+    "after-restore-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "archived-open.png": "b9fd777572667c9b5669d0d689561120c8c9d7506b8e24e48661dd21d64f93cf",
+    "before-restore-draft.png": "69a805d9c6fa2ca11f606722a0b83c4844c9fe545bd1825746cdc7fd28439bb2",
+    "before-restore-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "clipboard.json": "3cbd1b9e8980be789b70334e8864f08c0fe41f3d3b19921596888104c028a086",
+    "codex-session-smoke.log": "0ab60af20a0a7a605dc14eeed79858819ce49476db1672cf01ae4c240bb13616",
+    "desktop-build.log": "a9985f2b513b2badb42e342031d678d5ac076b5d05699c579c731633ae95a40d",
+    "desktop-clippy.log": "5c9df3bb07a588ed94efad2347b43fd7349107e2d5100f0355a1a5e0d43c9747",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "88e6a4486010e8353bab6e20843dec28fabb46058e798f487d59a6a17ab0661e",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "directory-smoke.log": "0ef031512a0e366ed15b68d80d0ff504149b4268adf75da300543979f2e35199",
+    "host-build.log": "98f75e6de30051557331984a1f26b09c30a740cac0a4ef94743adc2baf71e622",
+    "native-operations.json": "d4419280e5b2c4194f4513e76de6f623498ca1989f1ea6708f47de7b16797bbd",
+    "reopened-refusal-draft.png": "07161b6abe1d8b68d9a5529df3f745aed740ebe0878ad5f2eadf2b31a2e0fd14",
+    "reopened-sessions.png": "80b138a7bd1cb82533bc163fa9318e6d0ba823d508afd3cbefc9657bb3c31a43",
+    "restore-refused.png": "3ccee2309bbdb4e5ec64479a466bf4c4eabae37320bf43fe391bc95e7960cb84",
+    "restore-smoke.log": "deeb0f6caf669631b9e746d4464f5b38f9e6ce3139ae31eb07f09032b0e8ee42",
+    "restored-not-resumed.png": "f935a2b69ed520341a28b7ce95545f090a1ad4600e6e48150bb87af0649f8b1d",
+    "resumed-draft.png": "e173193e375615d72fd14f0ce24f544523b75ffbb0a9c464049cb44f4c464576",
+    "resumed-drafts.json": "3292d776990d42e2cd5c51dc4fe1392d8884cc5fc27ae47c1c4d09e31628fe0a",
+    "root-clippy.log": "d39dce3e163c48b1ec4a1a9179656d02d3eff7fb2c3a06e26aec9a4981d2ad06",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-tests.log": "c13916222b232d0ff666922f2e93a8a98318605268eb6030098a4b0d8275561c",
+    "sent-drafts.json": "34425eeb0017a0a3aa50d5304a7408a0091caede6a60efbb655f75106ab6b160",
+    "sent-readback.json": "420479971d3307122fd60c1ccdde9d85889713fb755f6cfab66fd75b6f320e44",
+    "sent.png": "62c675b6ca886455c4dc8521a98516e9f0b5aacaf03ddaa8fba1cc36fab604c9",
+    "session-smoke.log": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0"
+  },
+  "limits": [
+    "Safe archive mutation, tree impact/explicit stop, descendant restoration, deletion and Host runtime recovery remain incomplete.",
+    "Native X11 fixture and installed Codex process evidence are distinct; no external provider/model desktop, remote CI or performance claim.",
+    "Native forced lost-reply restore, ACP provider archive restore and other platforms remain unaccepted.",
+    "Selected archive membership/directory scope is window-local observation, not provider-wide locking.",
+    "The native fixture was launched before its active-resume guard was tightened and Python formatting applied; exercised notLoaded restore/resume behavior is unchanged. Rust candidate source/artifact hashes are exact."
+  ]
+}

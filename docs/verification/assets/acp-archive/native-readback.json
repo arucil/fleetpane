@@ -1,0 +1,213 @@
+{
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "model-a",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "synthetic",
+          "name": "Synthetic",
+          "options": [
+            {
+              "name": "Synthetic A",
+              "value": "model-a"
+            },
+            {
+              "name": "Synthetic B",
+              "value": "model-b"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "currentValue": "low",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "name": "High",
+          "value": "high"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fleetpane-acp-archive-qa/native",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "967477f3-a860-4afa-832c-f44bb86661e8",
+  "name": "Synthetic ACP",
+  "preview": "DeepSeek Harness",
+  "status": {
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "aea46d37-54c7-4b4b-aab1-e3faec08ef4c",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "归档验证 中文 **markdown**",
+              "type": "text"
+            }
+          ],
+          "id": "user:aea46d37-54c7-4b4b-aab1-e3faec08ef4c",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "Synthetic ACP reasoning"
+          ],
+          "id": "aea46d37-54c7-4b4b-aab1-e3faec08ef4c:agent_thought_chunk:thought",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "content": [
+              {
+                "content": {
+                  "text": "Synthetic ACP tool output",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "other",
+            "rawInput": {
+              "text": "归档验证 中文 **markdown**"
+            },
+            "sessionUpdate": "tool_call_update",
+            "status": "completed",
+            "title": "Synthetic tool",
+            "toolCallId": "call-09f70608-bb7f-402e-8583-768937427a81"
+          },
+          "id": "aea46d37-54c7-4b4b-aab1-e3faec08ef4c:tool:call-09f70608-bb7f-402e-8583-768937427a81",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            {
+              "text": "**ACP** Echo: 归档验证 中文 **markdown**",
+              "type": "text"
+            }
+          ],
+          "id": "aea46d37-54c7-4b4b-aab1-e3faec08ef4c:agent_message_chunk:answer",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    },
+    {
+      "error": {
+        "message": "Host stopped before ACP prompt settlement. Inspect provider state before manually retrying; nothing was replayed."
+      },
+      "id": "250edf3d-2cbd-4eb1-97cc-60d291af6fd9",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[permission]",
+              "type": "text"
+            }
+          ],
+          "id": "user:250edf3d-2cbd-4eb1-97cc-60d291af6fd9",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "Synthetic ACP reasoning"
+          ],
+          "id": "250edf3d-2cbd-4eb1-97cc-60d291af6fd9:agent_thought_chunk:thought",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "kind": "other",
+            "rawInput": {
+              "text": "[permission]"
+            },
+            "sessionUpdate": "tool_call",
+            "status": "in_progress",
+            "title": "Synthetic tool",
+            "toolCallId": "call-0181f3b6-5cb1-4727-9156-2fb151712e2e"
+          },
+          "id": "250edf3d-2cbd-4eb1-97cc-60d291af6fd9:tool:call-0181f3b6-5cb1-4727-9156-2fb151712e2e",
+          "type": "acpToolCall"
+        }
+      ],
+      "status": "unknown"
+    },
+    {
+      "error": null,
+      "id": "7f8638f5-bc89-4c94-a948-764d8adfa098",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "原生继续 中文",
+              "type": "text"
+            }
+          ],
+          "id": "user:7f8638f5-bc89-4c94-a948-764d8adfa098",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "Synthetic ACP reasoning"
+          ],
+          "id": "7f8638f5-bc89-4c94-a948-764d8adfa098:agent_thought_chunk:thought",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "content": [
+              {
+                "content": {
+                  "text": "Synthetic ACP tool output",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "other",
+            "rawInput": {
+              "text": "原生继续 中文"
+            },
+            "sessionUpdate": "tool_call_update",
+            "status": "completed",
+            "title": "Synthetic tool",
+            "toolCallId": "call-dad575f3-7893-450e-92f8-e417921ba48e"
+          },
+          "id": "7f8638f5-bc89-4c94-a948-764d8adfa098:tool:call-dad575f3-7893-450e-92f8-e417921ba48e",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            {
+              "text": "**ACP** Echo: 原生继续 中文",
+              "type": "text"
+            }
+          ],
+          "id": "7f8638f5-bc89-4c94-a948-764d8adfa098:agent_message_chunk:answer",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  ]
+}

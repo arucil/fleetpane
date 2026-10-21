@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "conclusion": "Prior saved screenshots contain full UI; blank regions were in consecutive image previews, not demonstrated in application or PNG pixels. No renderer fix applied. Preview pipeline root cause is outside this claim.",
+  "binary_sha256": "1128b0d170a32824dca72242d0d2b5d077a443cdd5cec7b6a5574e5f500a4e1a",
+  "prior_receipt_sha256": "6abb6497a15cb3abf2a5b91884391535b16c8e24143f3ccbcd14a0f72db7d9b0",
+  "unchanged_product_files": [
+    "apps/desktop/src/appearance.rs",
+    "apps/desktop/src/host_view.rs",
+    "apps/desktop/src/workbench.rs",
+    "apps/desktop/Cargo.lock"
+  ],
+  "final_prefill_clipboard": "/tmp/fleetpane-render-qa",
+  "final_exit_code": 0,
+  "all_task_pids_gone": [
+    630562,
+    630563,
+    630583,
+    630611,
+    912458,
+    1004400,
+    1009387,
+    1013471
+  ],
+  "no_private_hosts_started": true,
+  "artifacts": [
+    {
+      "path": "diagnostic-scene-tail.txt",
+      "sha256": "490f2b7a0d2a66837a1853ef2e1b3dbe4234e749284fd4484c25d696954f23aa"
+    },
+    {
+      "path": "final-build.log",
+      "sha256": "01013a39fe1d4c26840d60b53f79de7b8c54f64f6c11480c77d79e7c7c0fdff5"
+    },
+    {
+      "path": "final-crop.png",
+      "sha256": "e873b363fd5aa80bed4cf45f20860140a5c899d48d4e0f764bb45e23c079ce44"
+    },
+    {
+      "path": "final-direct.png",
+      "sha256": "400da42ad1032d83878f43707f89a2268c0bb2ae48929e96c976706f687f8b00"
+    },
+    {
+      "path": "final-menu.png",
+      "sha256": "38cfaa46156653ed8e765014ab00539ffce8ca13d438f1c436e0b97416a03157"
+    },
+    {
+      "path": "final-prefill.png",
+      "sha256": "ed687041c66b603d15771c74ee2348efcbd9f0f27117a54a71867d401f721067"
+    },
+    {
+      "path": "final-prefill.txt",
+      "sha256": "0bc169db107c43935599f29439c9d9e56509baafd26a35158bc94c0dbdceafe2"
+    },
+    {
+      "path": "final-switch.png",
+      "sha256": "5863a6521b1e2c1d986ff486371e529d72aa56715bf6624040dc774b5f119d85"
+    },
+    {
+      "path": "final-switch.txt",
+      "sha256": "611ded3a31777ddad8f50ad4413dae45f079d1c98fb691fef062b2a86dd5d7c1"
+    },
+    {
+      "path": "old-offline-crop.png",
+      "sha256": "1e2969458cce85fde7968cbd3a531645bb47aa88fe10bea30e82839dc58711c2"
+    },
+    {
+      "path": "prior-offline-ocr.txt",
+      "sha256": "adebda933ba542d346f073f03a7c8836e4dfb2162ad6cdc4749932c8e5c07277"
+    }
+  ]
+}

@@ -1,0 +1,1021 @@
+diff --git a/packages/app/src/components/agent-stream-view.tsx b/packages/app/src/components/agent-stream-view.tsx
+index 9f57dad9f..3e0a0a044 100644
+--- a/packages/app/src/components/agent-stream-view.tsx
++++ b/packages/app/src/components/agent-stream-view.tsx
+@@ -1,12 +1,21 @@
+-import { useEffect, useRef, useState } from 'react';
+-import { View, Text, ScrollView, Pressable } from 'react-native';
+-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+-import { BottomSheetModal } from '@gorhom/bottom-sheet';
+-import { AssistantMessage, UserMessage, ActivityLog, ToolCall } from './message';
+-import { ToolCallBottomSheet } from './tool-call-bottom-sheet';
+-import type { StreamItem } from '@/types/stream';
+-import type { SelectedToolCall, PendingPermission, AgentInfo } from '@/types/shared';
++import { useEffect, useRef, useState } from "react";
++import { View, Text, ScrollView, Pressable } from "react-native";
++import { useSafeAreaInsets } from "react-native-safe-area-context";
++import { StyleSheet, useUnistyles } from "react-native-unistyles";
++import { BottomSheetModal } from "@gorhom/bottom-sheet";
++import {
++  AssistantMessage,
++  UserMessage,
++  ActivityLog,
++  ToolCall,
++} from "./message";
++import { ToolCallBottomSheet } from "./tool-call-bottom-sheet";
++import type { StreamItem } from "@/types/stream";
++import type {
++  SelectedToolCall,
++  PendingPermission,
++  AgentInfo,
++} from "@/types/shared";
+ 
+ export interface AgentStreamViewProps {
+   agentId: string;
+@@ -26,7 +35,8 @@ export function AgentStreamView({
+   const scrollViewRef = useRef<ScrollView>(null);
+   const bottomSheetRef = useRef<BottomSheetModal | null>(null);
+   const insets = useSafeAreaInsets();
+-  const [selectedToolCall, setSelectedToolCall] = useState<SelectedToolCall | null>(null);
++  const [selectedToolCall, setSelectedToolCall] =
++    useState<SelectedToolCall | null>(null);
+ 
+   // Auto-scroll to bottom when new items arrive
+   useEffect(() => {
+@@ -44,7 +54,10 @@ export function AgentStreamView({
+       <ScrollView
+         ref={scrollViewRef}
+         style={stylesheet.scrollView}
+-        contentContainerStyle={{ paddingTop: 24, paddingBottom: Math.max(insets.bottom, 32) }}
++        contentContainerStyle={{
++          paddingTop: 24,
++          paddingBottom: Math.max(insets.bottom, 32),
++        }}
+       >
+         {streamItems.length === 0 ? (
+           <View style={stylesheet.emptyState}>
+@@ -55,7 +68,7 @@ export function AgentStreamView({
+         ) : (
+           streamItems.map((item) => {
+             switch (item.kind) {
+-              case 'user_message':
++              case "user_message":
+                 return (
+                   <UserMessage
+                     key={item.id}
+@@ -64,7 +77,7 @@ export function AgentStreamView({
+                   />
+                 );
+ 
+-              case 'assistant_message':
++              case "assistant_message":
+                 return (
+                   <AssistantMessage
+                     key={item.id}
+@@ -73,7 +86,7 @@ export function AgentStreamView({
+                   />
+                 );
+ 
+-              case 'thought':
++              case "thought":
+                 return (
+                   <ActivityLog
+                     key={item.id}
+@@ -83,27 +96,31 @@ export function AgentStreamView({
+                   />
+                 );
+ 
+-              case 'tool_call': {
++              case "tool_call": {
+                 const { payload } = item;
+ 
+                 // Extract data based on source
+-                if (payload.source === 'acp') {
++                if (payload.source === "acp") {
+                   const data = payload.data;
+                   // Map ACP status to display status
+-                  const toolStatus = data.status === 'pending' || data.status === 'in_progress'
+-                    ? 'executing' as const
+-                    : data.status === 'completed'
+-                    ? 'completed' as const
+-                    : 'failed' as const;
++                  const toolStatus =
++                    data.status === "pending" || data.status === "in_progress"
++                      ? ("executing" as const)
++                      : data.status === "completed"
++                      ? ("completed" as const)
++                      : ("failed" as const);
+ 
+                   return (
+                     <ToolCall
+                       key={item.id}
+-                      toolName={data.title ?? 'Unknown Tool'}
++                      toolName={data.title ?? "Unknown Tool"}
++                      kind={data.kind}
+                       args={data.rawInput}
+                       result={data.rawOutput}
+                       status={toolStatus}
+-                      onOpenDetails={() => handleOpenToolCallDetails({ payload })}
++                      onOpenDetails={() =>
++                        handleOpenToolCallDetails({ payload })
++                      }
+                     />
+                   );
+                 } else {
+@@ -116,18 +133,20 @@ export function AgentStreamView({
+                       args={data.arguments}
+                       result={data.result}
+                       status={data.status}
+-                      onOpenDetails={() => handleOpenToolCallDetails({ payload })}
++                      onOpenDetails={() =>
++                        handleOpenToolCallDetails({ payload })
++                      }
+                     />
+                   );
+                 }
+               }
+ 
+-              case 'plan':
++              case "plan":
+                 // TODO: Render plan component
+                 return null;
+ 
+-              case 'activity_log':
+-              case 'artifact':
++              case "activity_log":
++              case "artifact":
+                 // These are orchestrator-only, skip for now
+                 return null;
+ 
+@@ -178,9 +197,9 @@ function PermissionRequestCard({
+   // Determine permission type and content based on toolCall
+   const getPermissionInfo = () => {
+     const rawInput = permission.toolCall?.rawInput || {};
+-    const toolCallId = permission.toolCall?.toolCallId || '';
++    const toolCallId = permission.toolCall?.toolCallId || "";
+ 
+-    console.log('[PermissionCard] Tool call details:', {
++    console.log("[PermissionCard] Tool call details:", {
+       toolCallId,
+       rawInputKeys: Object.keys(rawInput),
+       rawInput,
+@@ -189,41 +208,44 @@ function PermissionRequestCard({
+     // Check if this is a plan (ExitPlanMode)
+     if (rawInput.plan) {
+       return {
+-        title: 'Plan Ready for Review',
++        title: "Plan Ready for Review",
+         content: rawInput.plan,
+-        type: 'plan' as const,
++        type: "plan" as const,
+       };
+     }
+ 
+     // Check if this is a file operation (Write, Edit, etc.)
+     if (rawInput.file_path) {
+-      const operation = toolCallId.includes('Write') ? 'Create' : 'Edit';
+-      const fileContent = rawInput.content || rawInput.new_string || '';
+-      const preview = fileContent.length > 500
+-        ? fileContent.slice(0, 500) + '\n\n... (truncated)'
+-        : fileContent;
++      const operation = toolCallId.includes("Write") ? "Create" : "Edit";
++      const fileContent = rawInput.content || rawInput.new_string || "";
++      const preview =
++        fileContent.length > 500
++          ? fileContent.slice(0, 500) + "\n\n... (truncated)"
++          : fileContent;
+ 
+       return {
+         title: `${operation} File Permission`,
+-        content: `File: ${rawInput.file_path}\n\n${preview || '(empty file)'}`,
+-        type: 'file' as const,
++        content: `File: ${rawInput.file_path}\n\n${preview || "(empty file)"}`,
++        type: "file" as const,
+       };
+     }
+ 
+     // Check if this is a command (Bash)
+     if (rawInput.command) {
+       return {
+-        title: 'Run Command Permission',
+-        content: `Command: ${rawInput.command}\n\nDescription: ${rawInput.description || 'No description'}`,
+-        type: 'command' as const,
++        title: "Run Command Permission",
++        content: `Command: ${rawInput.command}\n\nDescription: ${
++          rawInput.description || "No description"
++        }`,
++        type: "command" as const,
+       };
+     }
+ 
+     // Fallback - show whatever is in rawInput
+     return {
+-      title: 'Permission Required',
++      title: "Permission Required",
+       content: JSON.stringify(rawInput, null, 2),
+-      type: 'unknown' as const,
++      type: "unknown" as const,
+     };
+   };
+ 
+@@ -233,22 +255,42 @@ function PermissionRequestCard({
+     <View
+       style={[
+         permissionStyles.container,
+-        { backgroundColor: theme.colors.secondary, borderColor: theme.colors.border },
++        {
++          backgroundColor: theme.colors.secondary,
++          borderColor: theme.colors.border,
++        },
+       ]}
+     >
+-      <Text style={[permissionStyles.title, { color: theme.colors.foreground }]}>
++      <Text
++        style={[permissionStyles.title, { color: theme.colors.foreground }]}
++      >
+         {permissionInfo.title}
+       </Text>
+ 
+       {permissionInfo.content && (
+-        <View style={[permissionStyles.planContainer, { backgroundColor: theme.colors.background }]}>
+-          <Text style={[permissionStyles.planText, { color: theme.colors.foreground }]}>
++        <View
++          style={[
++            permissionStyles.planContainer,
++            { backgroundColor: theme.colors.background },
++          ]}
++        >
++          <Text
++            style={[
++              permissionStyles.planText,
++              { color: theme.colors.foreground },
++            ]}
++          >
+             {permissionInfo.content}
+           </Text>
+         </View>
+       )}
+ 
+-      <Text style={[permissionStyles.question, { color: theme.colors.mutedForeground }]}>
++      <Text
++        style={[
++          permissionStyles.question,
++          { color: theme.colors.mutedForeground },
++        ]}
++      >
+         How would you like to proceed?
+       </Text>
+ 
+@@ -259,14 +301,19 @@ function PermissionRequestCard({
+             style={[
+               permissionStyles.optionButton,
+               {
+-                backgroundColor: option.kind.includes('reject')
++                backgroundColor: option.kind.includes("reject")
+                   ? theme.colors.destructive
+                   : theme.colors.primary,
+               },
+             ]}
+             onPress={() => onResponse(permission.requestId, option.optionId)}
+           >
+-            <Text style={[permissionStyles.optionText, { color: theme.colors.primaryForeground }]}>
++            <Text
++              style={[
++                permissionStyles.optionText,
++                { color: theme.colors.primaryForeground },
++              ]}
++            >
+               {option.name}
+             </Text>
+           </Pressable>
+@@ -283,7 +330,7 @@ const stylesheet = StyleSheet.create((theme) => ({
+   },
+   scrollView: {
+     flex: 1,
+-    paddingHorizontal: theme.spacing[4],
++    paddingHorizontal: theme.spacing[2],
+   },
+   emptyState: {
+     flex: 1,
+diff --git a/packages/app/src/components/message.tsx b/packages/app/src/components/message.tsx
+index 00f69ca0f..dee45a5a0 100644
+--- a/packages/app/src/components/message.tsx
++++ b/packages/app/src/components/message.tsx
+@@ -1,8 +1,25 @@
+-import { View, Text, Pressable, Animated } from 'react-native';
+-import { useState, useEffect, useRef } from 'react';
+-import Markdown from 'react-native-markdown-display';
+-import { Circle, Info, CheckCircle, XCircle, FileText, ChevronRight, ChevronDown, RefreshCw } from 'lucide-react-native';
+-import { StyleSheet } from 'react-native-unistyles';
++import { View, Text, Pressable, Animated } from "react-native";
++import { useState, useEffect, useRef } from "react";
++import Markdown from "react-native-markdown-display";
++import {
++  Circle,
++  Info,
++  CheckCircle,
++  XCircle,
++  FileText,
++  ChevronRight,
++  ChevronDown,
++  Loader2,
++  Check,
++  X,
++  Wrench,
++  Pencil,
++  Eye,
++  SquareTerminal,
++} from "lucide-react-native";
++import { StyleSheet } from "react-native-unistyles";
++import { baseColors, theme } from "@/styles/theme";
++import { Colors } from "@/constants/theme";
+ 
+ interface UserMessageProps {
+   message: string;
+@@ -11,18 +28,18 @@ interface UserMessageProps {
+ 
+ const userMessageStylesheet = StyleSheet.create((theme) => ({
+   container: {
+-    flexDirection: 'row',
+-    justifyContent: 'flex-end',
++    flexDirection: "row",
++    justifyContent: "flex-end",
+     marginBottom: theme.spacing[3],
+     paddingHorizontal: theme.spacing[4],
+   },
+   bubble: {
+     backgroundColor: theme.colors.primary,
+-    borderRadius: theme.borderRadius['2xl'],
++    borderRadius: theme.borderRadius["2xl"],
+     borderTopRightRadius: theme.borderRadius.sm,
+     paddingHorizontal: theme.spacing[4],
+     paddingVertical: theme.spacing[3],
+-    maxWidth: '80%',
++    maxWidth: "80%",
+   },
+   text: {
+     color: theme.colors.primaryForeground,
+@@ -61,9 +78,66 @@ const assistantMessageStylesheet = StyleSheet.create((theme) => ({
+     fontSize: theme.fontSize.xs,
+     fontWeight: theme.fontWeight.bold,
+   },
++  // Markdown styles
++  markdownBody: {
++    color: theme.colors.foreground,
++    fontSize: theme.fontSize.base,
++    lineHeight: 24,
++  },
++  markdownParagraph: {
++    marginTop: 0,
++    marginBottom: theme.spacing[2],
++  },
++  markdownStrong: {
++    fontWeight: theme.fontWeight.bold,
++  },
++  markdownEm: {
++    fontStyle: "italic" as const,
++  },
++  markdownCodeInline: {
++    backgroundColor: theme.colors.secondary,
++    color: theme.colors.secondaryForeground,
++    paddingHorizontal: theme.spacing[2],
++    paddingVertical: 2,
++    borderRadius: theme.borderRadius.sm,
++    fontFamily: "monospace",
++    fontSize: 13,
++  },
++  markdownCodeBlock: {
++    backgroundColor: theme.colors.secondary,
++    color: theme.colors.secondaryForeground,
++    padding: theme.spacing[3],
++    borderRadius: theme.borderRadius.md,
++    fontFamily: "monospace",
++    fontSize: 13,
++  },
++  markdownFence: {
++    backgroundColor: theme.colors.secondary,
++    borderColor: theme.colors.border,
++    color: theme.colors.secondaryForeground,
++    padding: theme.spacing[3],
++    borderRadius: theme.borderRadius.md,
++    marginVertical: theme.spacing[2],
++    fontFamily: "monospace",
++    fontSize: 13,
++  },
++  markdownLink: {
++    color: theme.colors.primary,
++    textDecorationLine: "underline" as const,
++  },
++  markdownList: {
++    marginBottom: theme.spacing[2],
++  },
++  markdownListItem: {
++    marginBottom: theme.spacing[1],
++  },
+ }));
+ 
+-export function AssistantMessage({ message, timestamp, isStreaming = false }: AssistantMessageProps) {
++export function AssistantMessage({
++  message,
++  timestamp,
++  isStreaming = false,
++}: AssistantMessageProps) {
+   const fadeAnim = useRef(new Animated.Value(0.3)).current;
+ 
+   useEffect(() => {
+@@ -89,65 +163,29 @@ export function AssistantMessage({ message, timestamp, isStreaming = false }: As
+   }, [isStreaming, fadeAnim]);
+ 
+   const markdownStyles = {
+-    body: {
+-      color: '#f0fdfa',
+-      fontSize: 16,
+-      lineHeight: 24,
+-    },
+-    paragraph: {
+-      marginTop: 0,
+-      marginBottom: 8,
+-    },
+-    strong: {
+-      fontWeight: '700' as const,
+-    },
+-    em: {
+-      fontStyle: 'italic' as const,
+-    },
+-    code_inline: {
+-      backgroundColor: '#134e4a',
+-      color: '#ccfbf1',
+-      paddingHorizontal: 4,
+-      paddingVertical: 2,
+-      borderRadius: 3,
+-      fontFamily: 'monospace',
+-    },
+-    code_block: {
+-      backgroundColor: '#134e4a',
+-      color: '#ccfbf1',
+-      padding: 12,
+-      borderRadius: 6,
+-      fontFamily: 'monospace',
+-      fontSize: 14,
+-    },
+-    fence: {
+-      backgroundColor: '#134e4a',
+-      color: '#ccfbf1',
+-      padding: 12,
+-      borderRadius: 6,
+-      fontFamily: 'monospace',
+-      fontSize: 14,
+-    },
+-    link: {
+-      color: '#5eead4',
+-      textDecorationLine: 'underline' as const,
+-    },
+-    bullet_list: {
+-      marginBottom: 8,
+-    },
+-    ordered_list: {
+-      marginBottom: 8,
+-    },
+-    list_item: {
+-      marginBottom: 4,
+-    },
++    body: assistantMessageStylesheet.markdownBody,
++    paragraph: assistantMessageStylesheet.markdownParagraph,
++    strong: assistantMessageStylesheet.markdownStrong,
++    em: assistantMessageStylesheet.markdownEm,
++    code_inline: assistantMessageStylesheet.markdownCodeInline,
++    code_block: assistantMessageStylesheet.markdownCodeBlock,
++    fence: assistantMessageStylesheet.markdownFence,
++    link: assistantMessageStylesheet.markdownLink,
++    bullet_list: assistantMessageStylesheet.markdownList,
++    ordered_list: assistantMessageStylesheet.markdownList,
++    list_item: assistantMessageStylesheet.markdownListItem,
+   };
+ 
+   return (
+     <View style={assistantMessageStylesheet.container}>
+       <Markdown style={markdownStyles}>{message}</Markdown>
+       {isStreaming && (
+-        <Animated.View style={[assistantMessageStylesheet.streamingIndicator, { opacity: fadeAnim }]}>
++        <Animated.View
++          style={[
++            assistantMessageStylesheet.streamingIndicator,
++            { opacity: fadeAnim },
++          ]}
++        >
+           <Text style={assistantMessageStylesheet.streamingText}>...</Text>
+         </Animated.View>
+       )}
+@@ -156,7 +194,7 @@ export function AssistantMessage({ message, timestamp, isStreaming = false }: As
+ }
+ 
+ interface ActivityLogProps {
+-  type: 'system' | 'info' | 'success' | 'error' | 'artifact';
++  type: "system" | "info" | "success" | "error" | "artifact";
+   message: string;
+   timestamp: number;
+   metadata?: Record<string, unknown>;
+@@ -171,33 +209,33 @@ const activityLogStylesheet = StyleSheet.create((theme) => ({
+     marginHorizontal: theme.spacing[2],
+     marginBottom: theme.spacing[1],
+     borderRadius: theme.borderRadius.md,
+-    overflow: 'hidden',
++    overflow: "hidden",
+   },
+   pressableActive: {
+     opacity: 0.7,
+   },
+   systemBg: {
+-    backgroundColor: 'rgba(39, 39, 42, 0.5)',
++    backgroundColor: "rgba(39, 39, 42, 0.5)",
+   },
+   infoBg: {
+-    backgroundColor: 'rgba(30, 58, 138, 0.3)',
++    backgroundColor: "rgba(30, 58, 138, 0.3)",
+   },
+   successBg: {
+-    backgroundColor: 'rgba(20, 83, 45, 0.3)',
++    backgroundColor: "rgba(20, 83, 45, 0.3)",
+   },
+   errorBg: {
+-    backgroundColor: 'rgba(127, 29, 29, 0.3)',
++    backgroundColor: "rgba(127, 29, 29, 0.3)",
+   },
+   artifactBg: {
+-    backgroundColor: 'rgba(30, 58, 138, 0.4)',
++    backgroundColor: "rgba(30, 58, 138, 0.4)",
+   },
+   content: {
+     paddingHorizontal: theme.spacing[3],
+     paddingVertical: 10,
+   },
+   row: {
+-    flexDirection: 'row',
+-    alignItems: 'flex-start',
++    flexDirection: "row",
++    alignItems: "flex-start",
+     gap: theme.spacing[2],
+   },
+   iconContainer: {
+@@ -211,8 +249,8 @@ const activityLogStylesheet = StyleSheet.create((theme) => ({
+     lineHeight: 20,
+   },
+   detailsRow: {
+-    flexDirection: 'row',
+-    alignItems: 'center',
++    flexDirection: "row",
++    alignItems: "center",
+     marginTop: theme.spacing[1],
+   },
+   detailsText: {
+@@ -222,7 +260,7 @@ const activityLogStylesheet = StyleSheet.create((theme) => ({
+   },
+   metadataContainer: {
+     marginTop: theme.spacing[2],
+-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
++    backgroundColor: "rgba(0, 0, 0, 0.5)",
+     borderRadius: theme.borderRadius.base,
+     padding: theme.spacing[2],
+     borderWidth: theme.borderWidth[1],
+@@ -231,7 +269,7 @@ const activityLogStylesheet = StyleSheet.create((theme) => ({
+   metadataText: {
+     color: theme.colors.foreground,
+     fontSize: theme.fontSize.xs,
+-    fontFamily: 'monospace',
++    fontFamily: "monospace",
+     lineHeight: 16,
+   },
+ }));
+@@ -244,34 +282,51 @@ export function ActivityLog({
+   artifactId,
+   artifactType,
+   title,
+-  onArtifactClick
++  onArtifactClick,
+ }: ActivityLogProps) {
+   const [isExpanded, setIsExpanded] = useState(false);
+ 
+   const typeConfig = {
+-    system: { bg: activityLogStylesheet.systemBg, color: '#a1a1aa', Icon: Circle },
+-    info: { bg: activityLogStylesheet.infoBg, color: '#60a5fa', Icon: Info },
+-    success: { bg: activityLogStylesheet.successBg, color: '#4ade80', Icon: CheckCircle },
+-    error: { bg: activityLogStylesheet.errorBg, color: '#f87171', Icon: XCircle },
+-    artifact: { bg: activityLogStylesheet.artifactBg, color: '#93c5fd', Icon: FileText },
++    system: {
++      bg: activityLogStylesheet.systemBg,
++      color: "#a1a1aa",
++      Icon: Circle,
++    },
++    info: { bg: activityLogStylesheet.infoBg, color: "#60a5fa", Icon: Info },
++    success: {
++      bg: activityLogStylesheet.successBg,
++      color: "#4ade80",
++      Icon: CheckCircle,
++    },
++    error: {
++      bg: activityLogStylesheet.errorBg,
++      color: "#f87171",
++      Icon: XCircle,
++    },
++    artifact: {
++      bg: activityLogStylesheet.artifactBg,
++      color: "#93c5fd",
++      Icon: FileText,
++    },
+   };
+ 
+   const config = typeConfig[type];
+   const IconComponent = config.Icon;
+ 
+   const handlePress = () => {
+-    if (type === 'artifact' && artifactId && onArtifactClick) {
++    if (type === "artifact" && artifactId && onArtifactClick) {
+       onArtifactClick(artifactId);
+     } else if (metadata) {
+       setIsExpanded(!isExpanded);
+     }
+   };
+ 
+-  const displayMessage = type === 'artifact' && artifactType && title
+-    ? `${artifactType}: ${title}`
+-    : message;
++  const displayMessage =
++    type === "artifact" && artifactType && title
++      ? `${artifactType}: ${title}`
++      : message;
+ 
+-  const isInteractive = type === 'artifact' || metadata;
++  const isInteractive = type === "artifact" || metadata;
+ 
+   return (
+     <Pressable
+@@ -289,7 +344,12 @@ export function ActivityLog({
+             <IconComponent size={16} color={config.color} />
+           </View>
+           <View style={activityLogStylesheet.textContainer}>
+-            <Text style={[activityLogStylesheet.messageText, { color: config.color }]}>
++            <Text
++              style={[
++                activityLogStylesheet.messageText,
++                { color: config.color },
++              ]}
++            >
+               {displayMessage}
+             </Text>
+             {metadata && (
+@@ -318,10 +378,11 @@ export function ActivityLog({
+ 
+ interface ToolCallProps {
+   toolName: string;
++  kind?: string; // Optional kind for ACP tool calls
+   args: any;
+   result?: any;
+   error?: any;
+-  status: 'executing' | 'completed' | 'failed';
++  status: "executing" | "completed" | "failed";
+   onOpenDetails?: () => void;
+ }
+ 
+@@ -332,16 +393,16 @@ const toolCallStylesheet = StyleSheet.create((theme) => ({
+     backgroundColor: theme.colors.card,
+     borderRadius: theme.borderRadius.lg,
+     borderWidth: theme.borderWidth[1],
+-    overflow: 'hidden',
++    overflow: "hidden",
+   },
+   pressableActive: {
+     opacity: 0.8,
+   },
+   executingBorder: {
+-    borderColor: theme.colors.palette.amber[500],
++    borderColor: theme.colors.primary,
+   },
+   completedBorder: {
+-    borderColor: theme.colors.palette.green[500],
++    borderColor: theme.colors.border,
+   },
+   failedBorder: {
+     borderColor: theme.colors.destructive,
+@@ -350,40 +411,36 @@ const toolCallStylesheet = StyleSheet.create((theme) => ({
+     padding: theme.spacing[3],
+   },
+   headerRow: {
+-    flexDirection: 'row',
+-    alignItems: 'center',
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
+   },
+   chevronContainer: {
+     marginRight: theme.spacing[2],
+   },
+   toolName: {
+     color: theme.colors.foreground,
+-    fontFamily: 'monospace',
++    fontFamily: "monospace",
+     fontWeight: theme.fontWeight.semibold,
+     fontSize: theme.fontSize.sm,
+     flex: 1,
+   },
+   statusBadge: {
+-    flexDirection: 'row',
+-    alignItems: 'center',
+-    gap: 6,
+-    paddingHorizontal: theme.spacing[2],
+-    paddingVertical: theme.spacing[1],
++    alignItems: "center",
++    justifyContent: "center",
++    padding: theme.spacing[1],
+     borderRadius: theme.borderRadius.base,
++    width: 28,
++    height: 28,
+   },
+   executingBadgeBg: {
+-    backgroundColor: 'rgba(245, 158, 11, 0.2)',
++    backgroundColor: theme.colors.accent,
+   },
+   completedBadgeBg: {
+-    backgroundColor: 'rgba(34, 197, 94, 0.2)',
++    backgroundColor: "transparent",
+   },
+   failedBadgeBg: {
+-    backgroundColor: 'rgba(239, 68, 68, 0.2)',
+-  },
+-  statusText: {
+-    fontSize: theme.fontSize.xs,
+-    fontWeight: theme.fontWeight.semibold,
+-    textTransform: 'uppercase',
++    backgroundColor: "rgba(239, 68, 68, 0.2)",
+   },
+   expandedContent: {
+     marginTop: theme.spacing[3],
+@@ -396,7 +453,7 @@ const toolCallStylesheet = StyleSheet.create((theme) => ({
+     color: theme.colors.mutedForeground,
+     fontSize: theme.fontSize.xs,
+     fontWeight: theme.fontWeight.semibold,
+-    textTransform: 'uppercase',
++    textTransform: "uppercase",
+     letterSpacing: 0.5,
+     marginBottom: 6,
+   },
+@@ -416,81 +473,113 @@ const toolCallStylesheet = StyleSheet.create((theme) => ({
+   sectionText: {
+     color: theme.colors.foreground,
+     fontSize: theme.fontSize.xs,
+-    fontFamily: 'monospace',
++    fontFamily: "monospace",
+     lineHeight: 16,
+   },
+ }));
+ 
+-export function ToolCall({ toolName, args, result, error, status, onOpenDetails }: ToolCallProps) {
++// Icon mapping for tool kinds
++const toolKindIcons: Record<string, any> = {
++  edit: Pencil,
++  read: Eye,
++  execute: SquareTerminal,
++  // Add more mappings as needed
++};
++
++export function ToolCall({
++  toolName,
++  kind,
++  args,
++  result,
++  error,
++  status,
++  onOpenDetails,
++}: ToolCallProps) {
+   const spinAnim = useRef(new Animated.Value(0)).current;
+ 
+   useEffect(() => {
+-    if (status === 'executing') {
++    if (status === "executing") {
++      // Reset to 0 before starting
++      spinAnim.setValue(0);
+       Animated.loop(
+         Animated.timing(spinAnim, {
+           toValue: 1,
+-          duration: 1000,
++          duration: 1500,
+           useNativeDriver: true,
++          easing: (t) => t, // Linear easing for smooth continuous rotation
+         })
+       ).start();
+     } else {
+       spinAnim.stopAnimation();
+-      spinAnim.setValue(0);
+     }
+   }, [status, spinAnim]);
+ 
+   const spin = spinAnim.interpolate({
+     inputRange: [0, 1],
+-    outputRange: ['0deg', '360deg'],
++    outputRange: ["0deg", "360deg"],
+   });
+ 
+   const statusConfig = {
+     executing: {
+       border: toolCallStylesheet.executingBorder,
+       badgeBg: toolCallStylesheet.executingBadgeBg,
+-      color: '#fcd34d',
+-      label: 'executing',
++      color: "#fff",
+     },
+     completed: {
+       border: toolCallStylesheet.completedBorder,
+       badgeBg: toolCallStylesheet.completedBadgeBg,
+-      color: '#86efac',
+-      label: 'completed',
++      color: "#71717a",
+     },
+     failed: {
+       border: toolCallStylesheet.failedBorder,
+       badgeBg: toolCallStylesheet.failedBadgeBg,
+-      color: '#fca5a5',
+-      label: 'failed',
++      color: "#fca5a5",
+     },
+   };
+ 
+   const config = statusConfig[status];
+ 
++  // Get the appropriate icon for the tool kind
++  const getToolIcon = () => {
++    if (kind) {
++      const IconComponent = toolKindIcons[kind.toLowerCase()] || Wrench;
++      return IconComponent;
++    }
++    return Wrench; // Default icon
++  };
++
+   return (
+     <Pressable
+       onPress={onOpenDetails}
+-      style={[toolCallStylesheet.pressable, toolCallStylesheet.pressableActive, config.border]}
++      style={[
++        toolCallStylesheet.pressable,
++        toolCallStylesheet.pressableActive,
++        config.border,
++      ]}
+     >
+       <View style={toolCallStylesheet.content}>
+         <View style={toolCallStylesheet.headerRow}>
+-          <Text style={toolCallStylesheet.toolName}>
+-            {toolName}
+-          </Text>
+           <View style={[toolCallStylesheet.statusBadge, config.badgeBg]}>
+-            {status === 'executing' ? (
++            {status === "executing" ? (
+               <Animated.View style={{ transform: [{ rotate: spin }] }}>
+-                <RefreshCw size={14} color={config.color} />
++                <Loader2 size={16} color={config.color} />
+               </Animated.View>
+-            ) : status === 'completed' ? (
+-              <CheckCircle size={14} color={config.color} />
++            ) : status === "completed" ? (
++              (() => {
++                const IconComponent = getToolIcon();
++                return <IconComponent size={16} color={config.color} />;
++              })()
+             ) : (
+-              <XCircle size={14} color={config.color} />
++              <X size={16} color={config.color} />
+             )}
+-            <Text style={[toolCallStylesheet.statusText, { color: config.color }]}>
+-              {config.label}
+-            </Text>
+           </View>
++          <Text
++            style={toolCallStylesheet.toolName}
++            numberOfLines={1}
++            ellipsizeMode="tail"
++          >
++            {toolName}
++          </Text>
+         </View>
+       </View>
+     </Pressable>
+diff --git a/packages/app/src/components/tool-call-bottom-sheet.tsx b/packages/app/src/components/tool-call-bottom-sheet.tsx
+index 9cdd76649..fc2cea89d 100644
+--- a/packages/app/src/components/tool-call-bottom-sheet.tsx
++++ b/packages/app/src/components/tool-call-bottom-sheet.tsx
+@@ -1,7 +1,8 @@
+ import React, { useCallback, useMemo } from "react";
+-import { View, Text, StyleSheet } from "react-native";
++import { View, Text } from "react-native";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { ScrollView } from "react-native-gesture-handler";
++import { StyleSheet } from "react-native-unistyles";
+ import {
+   BottomSheetModal,
+   BottomSheetView,
+@@ -156,64 +157,64 @@ export function ToolCallBottomSheet({
+   );
+ }
+ 
+-const styles = StyleSheet.create({
++const styles = StyleSheet.create((theme) => ({
+   handleIndicator: {
+-    backgroundColor: "#4b5563",
++    backgroundColor: theme.colors.border,
+   },
+   background: {
+-    backgroundColor: "#1f2937",
++    backgroundColor: theme.colors.popover,
+   },
+   header: {
+-    paddingHorizontal: 20,
+-    paddingTop: 4,
+-    paddingBottom: 16,
+-    borderBottomWidth: 1,
+-    borderBottomColor: "#374151",
+-    backgroundColor: "#1f2937",
++    paddingHorizontal: theme.spacing[6],
++    paddingTop: theme.spacing[1],
++    paddingBottom: theme.spacing[4],
++    borderBottomWidth: theme.borderWidth[1],
++    borderBottomColor: theme.colors.border,
++    backgroundColor: theme.colors.popover,
+   },
+   toolName: {
+-    fontSize: 18,
+-    fontWeight: "600",
+-    color: "#f9fafb",
++    fontSize: theme.fontSize.xl,
++    fontWeight: theme.fontWeight.semibold,
++    color: theme.colors.popoverForeground,
+   },
+   sheetContent: {
+-    paddingTop: 20,
+-    paddingBottom: 20,
++    paddingTop: theme.spacing[6],
++    paddingBottom: theme.spacing[6],
+   },
+   section: {
+-    marginBottom: 20,
+-    paddingHorizontal: 20,
++    marginBottom: theme.spacing[6],
++    paddingHorizontal: theme.spacing[6],
+   },
+   sectionTitle: {
+-    fontSize: 14,
+-    fontWeight: "600",
+-    color: "#9ca3af",
+-    marginBottom: 8,
+-    textTransform: "uppercase",
++    fontSize: theme.fontSize.sm,
++    fontWeight: theme.fontWeight.semibold,
++    color: theme.colors.mutedForeground,
++    marginBottom: theme.spacing[2],
++    textTransform: "uppercase" as const,
+     letterSpacing: 0.5,
+   },
+   jsonContainer: {
+-    backgroundColor: "#111827",
+-    borderRadius: 8,
+-    borderWidth: 1,
+-    borderColor: "#374151",
++    backgroundColor: theme.colors.background,
++    borderRadius: theme.borderRadius.lg,
++    borderWidth: theme.borderWidth[1],
++    borderColor: theme.colors.border,
+     // Natural height based on content
+   },
+   jsonContent: {
+-    padding: 12,
++    padding: theme.spacing[3],
+   },
+   jsonText: {
+     fontFamily: "monospace",
+-    fontSize: 12,
+-    color: "#e5e7eb",
+-    lineHeight: 18,
++    fontSize: theme.fontSize.sm,
++    color: theme.colors.foreground,
++    lineHeight: 20,
+     // Text maintains whitespace and formatting
+   },
+   errorContainer: {
+-    borderColor: "#ef4444",
+-    backgroundColor: "#1f1416",
++    borderColor: theme.colors.destructive,
++    backgroundColor: theme.colors.background,
+   },
+   errorText: {
+-    color: "#fca5a5",
++    color: theme.colors.destructive,
+   },
+-});
++}));
+diff --git a/packages/app/src/styles/theme.ts b/packages/app/src/styles/theme.ts
+index 91bc014ff..ee7e71df9 100644
+--- a/packages/app/src/styles/theme.ts
++++ b/packages/app/src/styles/theme.ts
+@@ -1,4 +1,4 @@
+-const baseColors = {
++export const baseColors = {
+   // Base colors
+   white: "#ffffff",
+   black: "#000000",

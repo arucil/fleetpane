@@ -1,0 +1,845 @@
+commit 64d1518a6f2d2bc9ef57d04a6e7480b3b30055c1
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 15:14:44 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 15:14:44 2025 +0200
+
+    Prompt is too long
+
+diff --git a/AGENTS.md b/AGENTS.md
+deleted file mode 120000
+index ac55cbdc9..000000000
+--- a/AGENTS.md
++++ /dev/null
+@@ -1 +0,0 @@
+-.claude/CLAUDE.md
+\ No newline at end of file
+diff --git a/AGENTS.md b/AGENTS.md
+new file mode 100644
+index 000000000..34beff0fa
+--- /dev/null
++++ b/AGENTS.md
+@@ -0,0 +1,48 @@
++# Agent Lifecycle
++
++This project uses client-driven lazy initialization for Claude Code agents. Sessions start without spinning up agent runtimes; the client opts in when needed.
++
++## Connection Bootstrapping
++- The session emits `session_state` after connection with an array of agents. Each entry matches the server `AgentInfo` structure (`id`, `status`, `createdAt`, `type`, `sessionId`, `error`, `currentModeId`, `availableModes`, `title`, `cwd`).
++- No history or runtime is loaded at this point. Every agent starts in `uninitialized` and only streams live status updates once subscribed.
++
++## Opting In To An Agent
++1. When the UI needs an agent, send an inbound session message:
++
++   ```json
++   {
++     "type": "initialize_agent_request",
++     "agentId": "<agent-id>",
++     "requestId": "<optional-correlation-id>"
++   }
++   ```
++
++2. The session subscribes to the agent, calls `AgentManager.initializeAgentAndGetHistory`, and lazily starts the runtime if required.
++3. The server responds with:
++
++   ```json
++   {
++     "type": "agent_initialized",
++     "payload": {
++       "agentId": "<agent-id>",
++       "info": { /* same shape as session_state agents */ },
++       "updates": [
++         {
++           "agentId": "<agent-id>",
++           "timestamp": "2024-01-01T00:00:00.000Z",
++           "notification": { /* AgentNotification */ }
++         }
++       ],
++       "requestId": "<optional-correlation-id>"
++     }
++   }
++   ```
++
++4. After the response, all ongoing traffic uses the existing channels:
++   - `agent_status` continues to broadcast status changes.
++   - `agent_update` streams real-time session notifications, permission prompts, etc.
++
++## Notes
++- `initialize_agent_request` is idempotent. The manager short-circuits if the agent is already ready and returns the cached history.
++- Session state no longer replays history when clients reconnect; clients must explicitly reinitialize agents they care about.
++- `requestId` lets the caller correlate UI state but remains optional throughout the flow.
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index c45e39b84..99bb33538 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -16,7 +16,7 @@ export default function AgentScreen() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+   const { id } = useLocalSearchParams<{ id: string }>();
+-  const { agents, agentStreamState, pendingPermissions, respondToPermission } = useSession();
++  const { agents, agentStreamState, pendingPermissions, respondToPermission, initializeAgent } = useSession();
+   const { registerFooterControls, unregisterFooterControls } = useFooterControls();
+   const [isContentReady, setIsContentReady] = useState(false);
+ 
+@@ -38,6 +38,13 @@ export default function AgentScreen() {
+     Array.from(pendingPermissions.entries()).filter(([_, perm]) => perm.agentId === id)
+   );
+ 
++  useEffect(() => {
++    if (!id) {
++      return;
++    }
++    initializeAgent({ agentId: id });
++  }, [id, initializeAgent]);
++
+   const agentControls = useMemo(() => {
+     if (!id) return null;
+     return <AgentInputArea agentId={id} />;
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index aa14d3f6d..5db590eeb 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -57,15 +57,15 @@ export interface Agent {
+   status: AgentStatus;
+   createdAt: Date;
+   type: "claude";
+-  sessionId?: string;
+-  error?: string;
+-  currentModeId?: string;
+-  availableModes?: Array<{
++  sessionId: string | null;
++  error: string | null;
++  currentModeId: string | null;
++  availableModes: Array<{
+     id: string;
+     name: string;
+     description?: string | null;
+-  }>;
+-  title?: string;
++  }> | null;
++  title: string | null;
+   cwd: string;
+ }
+ 
+@@ -112,6 +112,7 @@ interface SessionContextValue {
+   setPendingPermissions: (perms: Map<string, PendingPermission> | ((prev: Map<string, PendingPermission>) => Map<string, PendingPermission>)) => void;
+ 
+   // Helpers
++  initializeAgent: (params: { agentId: string; requestId?: string }) => void;
+   sendAgentMessage: (agentId: string, message: string) => void;
+   sendAgentAudio: (agentId: string, audioBlob: Blob) => Promise<void>;
+   createAgent: (options: { cwd: string; initialMode?: string; requestId?: string }) => void;
+@@ -165,12 +166,32 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+ 
+       console.log("[Session] Session state:", agentsList.length, "agents,", commandsList.length, "commands");
+ 
+-      setAgents(new Map(agentsList.map((a) => [a.id, {
+-        ...a,
+-        createdAt: new Date(a.createdAt),
+-      } as Agent])));
++      setAgents(
++        new Map(
++          agentsList.map((agentInfo) => {
++            const createdAt = new Date(agentInfo.createdAt);
++            return [
++              agentInfo.id,
++              {
++                id: agentInfo.id,
++                status: agentInfo.status as AgentStatus,
++                type: agentInfo.type,
++                createdAt,
++                title: agentInfo.title ?? null,
++                cwd: agentInfo.cwd,
++                sessionId: agentInfo.sessionId ?? null,
++                error: agentInfo.error ?? null,
++                currentModeId: agentInfo.currentModeId ?? null,
++                availableModes: agentInfo.availableModes ?? null,
++              } satisfies Agent,
++            ];
++          })
++        )
++      );
+ 
+       setCommands(new Map(commandsList.map((c) => [c.id, c as Command])));
++      setAgentStreamState(new Map());
++      setAgentUpdates(new Map());
+     });
+ 
+     // Agent created
+@@ -185,16 +206,77 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+         status: status as AgentStatus,
+         type,
+         createdAt: new Date(),
+-        title,
++        title: title ?? null,
+         cwd,
+-        currentModeId,
+-        availableModes,
++        sessionId: null,
++        error: null,
++        currentModeId: currentModeId ?? null,
++        availableModes: availableModes ?? null,
+       };
+ 
+       setAgents((prev) => new Map(prev).set(agentId, agent));
+       setAgentStreamState((prev) => new Map(prev).set(agentId, []));
+     });
+ 
++    // Agent initialized - receive full history on demand
++    const unsubAgentInitialized = ws.on("agent_initialized", (message) => {
++      if (message.type !== "agent_initialized") return;
++      const { agentId, info, updates } = message.payload;
++
++      console.log(
++        "[Session] Agent initialized:",
++        agentId,
++        "updates:",
++        updates.length
++      );
++
++      setAgents((prev) => {
++        const next = new Map(prev);
++        const createdAt = new Date(info.createdAt);
++        const existing = next.get(agentId);
++
++        const normalizedAgent: Agent = {
++          id: info.id,
++          status: info.status as AgentStatus,
++          type: info.type,
++          createdAt,
++          title: info.title ?? null,
++          cwd: info.cwd,
++          sessionId: info.sessionId ?? null,
++          error: info.error ?? null,
++          currentModeId: info.currentModeId ?? null,
++          availableModes: info.availableModes ?? null,
++        };
++
++        next.set(
++          agentId,
++          existing
++            ? {
++                ...existing,
++                ...normalizedAgent,
++              }
++            : normalizedAgent
++        );
++        return next;
++      });
++
++      const normalizedUpdates: AgentUpdate[] = updates.map((update) => ({
++        agentId: update.agentId,
++        timestamp: new Date(update.timestamp),
++        notification: update.notification,
++      }));
++
++      setAgentUpdates((prev) => new Map(prev).set(agentId, normalizedUpdates));
++
++      setAgentStreamState((prev) => {
++        const reconstructedStream = normalizedUpdates.reduce<StreamItem[]>(
++          (acc, update) => reduceStreamUpdate(acc, update.notification, update.timestamp),
++          []
++        );
++        return new Map(prev).set(agentId, reconstructedStream);
++      });
++    });
++
+     // Agent status update (mode changes, title changes, etc.)
+     const unsubAgentStatus = ws.on("agent_status", (message) => {
+       if (message.type !== "agent_status") return;
+@@ -209,11 +291,11 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+         const updatedAgent: Agent = {
+           ...existingAgent,
+           status: info.status as AgentStatus,
+-          sessionId: info.sessionId,
+-          error: info.error,
+-          currentModeId: info.currentModeId,
+-          availableModes: info.availableModes,
+-          title: info.title,
++          sessionId: info.sessionId ?? null,
++          error: info.error ?? null,
++          currentModeId: info.currentModeId ?? null,
++          availableModes: info.availableModes ?? null,
++          title: info.title ?? null,
+           cwd: info.cwd,
+         };
+ 
+@@ -224,11 +306,12 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     // Agent update
+     const unsubAgentUpdate = ws.on("agent_update", (message) => {
+       if (message.type !== "agent_update") return;
+-      const { agentId, notification } = message.payload;
++      const { agentId, notification, timestamp: rawTimestamp } = message.payload;
++      const timestamp = new Date(rawTimestamp);
+ 
+       const update: AgentUpdate = {
+         agentId,
+-        timestamp: new Date(),
++        timestamp,
+         notification,
+       };
+ 
+@@ -240,7 +323,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       // Update stream state using reducer
+       setAgentStreamState((prev) => {
+         const currentStream = prev.get(agentId) || [];
+-        const newStream = reduceStreamUpdate(currentStream, notification, new Date());
++        const newStream = reduceStreamUpdate(currentStream, notification, timestamp);
+         return new Map(prev).set(agentId, newStream);
+       });
+     });
+@@ -480,6 +563,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     return () => {
+       unsubSessionState();
+       unsubAgentCreated();
++      unsubAgentInitialized();
+       unsubAgentStatus();
+       unsubAgentUpdate();
+       unsubPermissionRequest();
+@@ -491,6 +575,18 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     };
+   }, [ws, audioPlayer, setIsPlayingAudio]);
+ 
++  const initializeAgent = useCallback(({ agentId, requestId }: { agentId: string; requestId?: string }) => {
++    const msg: WSInboundMessage = {
++      type: "session",
++      message: {
++        type: "initialize_agent_request",
++        agentId,
++        requestId,
++      },
++    };
++    ws.send(msg);
++  }, [ws]);
++
+   const sendAgentMessage = useCallback((agentId: string, message: string) => {
+     // Generate unique message ID for deduplication
+     const messageId = generateMessageId();
+@@ -636,6 +732,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     setAgentUpdates,
+     pendingPermissions,
+     setPendingPermissions,
++    initializeAgent,
+     sendAgentMessage,
+     sendAgentAudio,
+     createAgent,
+diff --git a/packages/server/package.json b/packages/server/package.json
+index 661f1f9f2..cb98ec714 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -18,7 +18,7 @@
+   "dependencies": {
+     "@agentclientprotocol/sdk": "^0.4.9",
+     "@ai-sdk/openai": "^2.0.52",
+-    "@boudra/claude-code-acp": "file:../../../claude-code-acp",
++    "@boudra/claude-code-acp": "^0.8.2",
+     "@deepgram/sdk": "^3.4.0",
+     "@modelcontextprotocol/sdk": "^1.20.1",
+     "@openrouter/ai-sdk-provider": "^1.2.0",
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index b38eb4b1b..f5d63cb12 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -505,18 +505,10 @@ export class AgentManager {
+     return Array.from(this.agents.values()).map((agent) => {
+       const status = getAgentStatusFromState(agent.state);
+       const error = getAgentError(agent.state);
+-      const sessionId =
+-        agent.state.type !== "uninitialized" && agent.state.type !== "killed" && agent.state.type !== "failed"
+-          ? agent.state.runtime.sessionId
+-          : null;
+-      const currentModeId =
+-        agent.state.type !== "uninitialized" && agent.state.type !== "killed" && agent.state.type !== "failed"
+-          ? agent.state.runtime.currentModeId
+-          : null;
+-      const availableModes =
+-        agent.state.type !== "uninitialized" && agent.state.type !== "killed" && agent.state.type !== "failed"
+-          ? agent.state.runtime.availableModes
+-          : null;
++      const runtime = this.getRuntime(agent);
++      const sessionId = runtime?.sessionId ?? null;
++      const currentModeId = runtime?.currentModeId ?? null;
++      const availableModes = runtime?.availableModes ?? null;
+ 
+       return {
+         id: agent.id,
+@@ -564,6 +556,43 @@ export class AgentManager {
+     return [...agent.updates];
+   }
+ 
++  /**
++   * Lazily initialize an agent and return its info and existing history
++   * Used by clients to opt-in to agent startup on demand
++   */
++  async initializeAgentAndGetHistory(
++    agentId: string
++  ): Promise<{ info: AgentInfo; updates: AgentUpdate[] }> {
++    await this.ensureInitialized(agentId);
++
++    const agent = this.agents.get(agentId);
++    if (!agent) {
++      throw new Error(`Agent ${agentId} not found`);
++    }
++
++    const status = getAgentStatusFromState(agent.state);
++    const error = getAgentError(agent.state);
++    const runtime = this.getRuntime(agent);
++
++    const info: AgentInfo = {
++      id: agent.id,
++      status,
++      createdAt: agent.createdAt,
++      type: "claude",
++      sessionId: runtime?.sessionId ?? null,
++      error: error ?? null,
++      currentModeId: runtime?.currentModeId ?? null,
++      availableModes: runtime?.availableModes ?? null,
++      title: agent.title,
++      cwd: agent.cwd,
++    };
++
++    return {
++      info,
++      updates: [...agent.updates],
++    };
++  }
++
+   /**
+    * Get the current session mode for an agent
+    */
+@@ -645,6 +674,8 @@ export class AgentManager {
+         case "initializing":
+           agent.state = {
+             type: "initializing",
++            persistedSessionId: agent.state.persistedSessionId,
++            initPromise: agent.state.initPromise,
+             runtime: updatedRuntime,
+             initStartedAt: agent.state.initStartedAt,
+           };
+@@ -755,7 +786,7 @@ export class AgentManager {
+     }
+ 
+     if (agent.state.type === "initializing") {
+-      return agent.state.runtime;
++      return agent.state.runtime ?? null;
+     }
+ 
+     if (agent.state.type === "failed" && agent.state.runtime) {
+@@ -820,10 +851,16 @@ export class AgentManager {
+       availableModes: null,
+     };
+ 
++    if (agent.state.type !== "initializing") {
++      throw new Error(`Agent ${agentId} must be initializing before starting runtime`);
++    }
++
+     agent.state = {
+       type: "initializing",
++      persistedSessionId: agent.state.persistedSessionId,
++      initPromise: agent.state.initPromise,
++      initStartedAt: agent.state.initStartedAt,
+       runtime,
+-      initStartedAt: new Date(),
+     };
+ 
+     agentProcess.on("error", (error) => {
+diff --git a/packages/server/src/server/acp/types.ts b/packages/server/src/server/acp/types.ts
+index 42eb0af31..56a551f3a 100644
+--- a/packages/server/src/server/acp/types.ts
++++ b/packages/server/src/server/acp/types.ts
+@@ -65,7 +65,13 @@ export interface AgentRuntime {
+  */
+ export type ManagedAgentState =
+   | { type: "uninitialized"; persistedSessionId: string | null; lastError?: string }
+-  | { type: "initializing"; persistedSessionId: string | null; initPromise: Promise<void>; initStartedAt: Date }
++  | {
++      type: "initializing";
++      persistedSessionId: string | null;
++      initPromise: Promise<void>;
++      initStartedAt: Date;
++      runtime?: AgentRuntime;
++    }
+   | { type: "ready"; runtime: AgentRuntime }
+   | { type: "processing"; runtime: AgentRuntime }
+   | { type: "completed"; runtime: AgentRuntime; stopReason?: string }
+diff --git a/packages/server/src/server/messages.ts b/packages/server/src/server/messages.ts
+index a7740f8aa..e1242a821 100644
+--- a/packages/server/src/server/messages.ts
++++ b/packages/server/src/server/messages.ts
+@@ -1,5 +1,30 @@
+ import { z } from "zod";
+ 
++const AgentModeSchema = z.object({
++  id: z.string(),
++  name: z.string(),
++  description: z.string().nullable().optional(),
++});
++
++const AgentInfoSchema = z.object({
++  id: z.string(),
++  status: z.string(),
++  createdAt: z.date(),
++  type: z.literal("claude"),
++  sessionId: z.string().nullable(),
++  error: z.string().nullable(),
++  currentModeId: z.string().nullable(),
++  availableModes: z.array(AgentModeSchema).nullable(),
++  title: z.string().nullable(),
++  cwd: z.string(),
++});
++
++const AgentUpdatePayloadSchema = z.object({
++  agentId: z.string(),
++  timestamp: z.date(),
++  notification: z.any(),
++});
++
+ // ============================================================================
+ // Session Inbound Messages (Session receives these)
+ // ============================================================================
+@@ -66,6 +91,12 @@ export const CreateAgentRequestMessageSchema = z.object({
+   requestId: z.string().optional(),
+ });
+ 
++export const InitializeAgentRequestMessageSchema = z.object({
++  type: z.literal("initialize_agent_request"),
++  agentId: z.string(),
++  requestId: z.string().optional(),
++});
++
+ export const SetAgentModeMessageSchema = z.object({
+   type: z.literal("set_agent_mode"),
+   agentId: z.string(),
+@@ -91,6 +122,7 @@ export const SessionInboundMessageSchema = z.discriminatedUnion("type", [
+   SendAgentMessageSchema,
+   SendAgentAudioSchema,
+   CreateAgentRequestMessageSchema,
++  InitializeAgentRequestMessageSchema,
+   SetAgentModeMessageSchema,
+   AgentPermissionResponseMessageSchema,
+ ]);
+@@ -182,11 +214,7 @@ export const AgentCreatedMessageSchema = z.object({
+     status: z.string(),
+     type: z.literal("claude"),
+     currentModeId: z.string().optional(),
+-    availableModes: z.array(z.object({
+-      id: z.string(),
+-      name: z.string(),
+-      description: z.string().nullable().optional(),
+-    })).optional(),
++    availableModes: z.array(AgentModeSchema).optional(),
+     title: z.string().optional(),
+     cwd: z.string(),
+     requestId: z.string().optional(),
+@@ -195,12 +223,7 @@ export const AgentCreatedMessageSchema = z.object({
+ 
+ export const AgentUpdateMessageSchema = z.object({
+   type: z.literal("agent_update"),
+-  payload: z.object({
+-    agentId: z.string(),
+-    timestamp: z.date(),
+-    // Runtime validation with z.any(), TypeScript enforces AgentNotification type
+-    notification: z.any(),
+-  }),
++  payload: AgentUpdatePayloadSchema,
+ });
+ 
+ export const AgentStatusMessageSchema = z.object({
+@@ -208,46 +231,14 @@ export const AgentStatusMessageSchema = z.object({
+   payload: z.object({
+     agentId: z.string(),
+     status: z.string(),
+-    info: z.object({
+-      id: z.string(),
+-      status: z.string(),
+-      createdAt: z.date(),
+-      type: z.literal("claude"),
+-      sessionId: z.string().optional(),
+-      error: z.string().optional(),
+-      currentModeId: z.string().optional(),
+-      availableModes: z.array(z.object({
+-        id: z.string(),
+-        name: z.string(),
+-        description: z.string().nullable().optional(),
+-      })).optional(),
+-      title: z.string().optional(),
+-      cwd: z.string(),
+-    }),
++    info: AgentInfoSchema,
+   }),
+ });
+ 
+ export const SessionStateMessageSchema = z.object({
+   type: z.literal("session_state"),
+   payload: z.object({
+-    agents: z.array(
+-      z.object({
+-        id: z.string(),
+-        status: z.string(),
+-        createdAt: z.date(),
+-        type: z.literal("claude"),
+-        sessionId: z.string().nullable(),
+-        error: z.string().nullable(),
+-        currentModeId: z.string().nullable(),
+-        availableModes: z.array(z.object({
+-          id: z.string(),
+-          name: z.string(),
+-          description: z.string().nullable().optional(),
+-        })).nullable(),
+-        title: z.string().nullable(),
+-        cwd: z.string(),
+-      })
+-    ),
++    agents: z.array(AgentInfoSchema),
+     commands: z.array(
+       z.object({
+         id: z.string(),
+@@ -261,6 +252,16 @@ export const SessionStateMessageSchema = z.object({
+   }),
+ });
+ 
++export const AgentInitializedMessageSchema = z.object({
++  type: z.literal("agent_initialized"),
++  payload: z.object({
++    agentId: z.string(),
++    info: AgentInfoSchema,
++    updates: z.array(AgentUpdatePayloadSchema),
++    requestId: z.string().optional(),
++  }),
++});
++
+ export const ListConversationsResponseMessageSchema = z.object({
+   type: z.literal("list_conversations_response"),
+   payload: z.object({
+@@ -319,6 +320,7 @@ export const SessionOutboundMessageSchema = z.discriminatedUnion("type", [
+   AgentUpdateMessageSchema,
+   AgentStatusMessageSchema,
+   SessionStateMessageSchema,
++  AgentInitializedMessageSchema,
+   ListConversationsResponseMessageSchema,
+   DeleteConversationResponseMessageSchema,
+   AgentPermissionRequestMessageSchema,
+@@ -341,6 +343,7 @@ export type AgentCreatedMessage = z.infer<typeof AgentCreatedMessageSchema>;
+ export type AgentUpdateMessage = z.infer<typeof AgentUpdateMessageSchema>;
+ export type AgentStatusMessage = z.infer<typeof AgentStatusMessageSchema>;
+ export type SessionStateMessage = z.infer<typeof SessionStateMessageSchema>;
++export type AgentInitializedMessage = z.infer<typeof AgentInitializedMessageSchema>;
+ export type ListConversationsResponseMessage = z.infer<typeof ListConversationsResponseMessageSchema>;
+ export type DeleteConversationResponseMessage = z.infer<typeof DeleteConversationResponseMessageSchema>;
+ export type AgentPermissionRequestMessage = z.infer<typeof AgentPermissionRequestMessageSchema>;
+@@ -355,6 +358,7 @@ export type RealtimeAudioChunkMessage = z.infer<typeof RealtimeAudioChunkMessage
+ export type SendAgentMessage = z.infer<typeof SendAgentMessageSchema>;
+ export type SendAgentAudio = z.infer<typeof SendAgentAudioSchema>;
+ export type CreateAgentRequestMessage = z.infer<typeof CreateAgentRequestMessageSchema>;
++export type InitializeAgentRequestMessage = z.infer<typeof InitializeAgentRequestMessageSchema>;
+ export type SetAgentModeMessage = z.infer<typeof SetAgentModeMessageSchema>;
+ export type AgentPermissionResponseMessage = z.infer<typeof AgentPermissionResponseMessageSchema>;
+ 
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 64a03cd8c..1e30b2d16 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -222,18 +222,7 @@ export class Session {
+                 payload: {
+                   agentId,
+                   status,
+-                  info: {
+-                    id: info.id,
+-                    status: info.status,
+-                    createdAt: info.createdAt,
+-                    type: info.type,
+-                    sessionId: info.sessionId ?? undefined,
+-                    error: info.error ?? undefined,
+-                    currentModeId: info.currentModeId ?? undefined,
+-                    availableModes: info.availableModes ?? undefined,
+-                    title: info.title ?? undefined,
+-                    cwd: info.cwd,
+-                  },
++                  info,
+                 },
+               });
+               console.log(
+@@ -331,18 +320,7 @@ export class Session {
+             payload: {
+               agentId,
+               status: updatedInfo.status,
+-              info: {
+-                id: updatedInfo.id,
+-                status: updatedInfo.status,
+-                createdAt: updatedInfo.createdAt,
+-                type: updatedInfo.type,
+-                sessionId: updatedInfo.sessionId ?? undefined,
+-                error: updatedInfo.error ?? undefined,
+-                currentModeId: updatedInfo.currentModeId ?? undefined,
+-                availableModes: updatedInfo.availableModes ?? undefined,
+-                title: updatedInfo.title ?? undefined,
+-                cwd: updatedInfo.cwd,
+-              },
++              info: updatedInfo,
+             },
+           });
+         }
+@@ -492,6 +470,13 @@ export class Session {
+           await this.handleCreateAgentRequest(msg.cwd, msg.initialMode, msg.requestId);
+           break;
+ 
++        case "initialize_agent_request":
++          await this.handleInitializeAgentRequest(
++            msg.agentId,
++            msg.requestId
++          );
++          break;
++
+         case "set_agent_mode":
+           await this.handleSetAgentMode(msg.agentId, msg.modeId);
+           break;
+@@ -715,6 +700,61 @@ export class Session {
+     }
+   }
+ 
++  /**
++   * Handle on-demand agent initialization request from client
++   */
++  private async handleInitializeAgentRequest(
++    agentId: string,
++    requestId?: string
++  ): Promise<void> {
++    console.log(
++      `[Session ${this.clientId}] Initializing agent ${agentId} on demand`
++    );
++
++    try {
++      this.subscribeToAgent(agentId);
++
++      const { info, updates } =
++        await this.agentManager.initializeAgentAndGetHistory(agentId);
++
++      this.emit({
++        type: "agent_initialized",
++        payload: {
++          agentId,
++          info,
++          updates: updates.map((update) => ({
++            agentId: update.agentId,
++            timestamp:
++              update.timestamp instanceof Date
++                ? update.timestamp
++                : new Date(update.timestamp),
++            notification: update.notification,
++          })),
++          requestId,
++        },
++      });
++
++      console.log(
++        `[Session ${this.clientId}] Agent ${agentId} initialized with ${updates.length} historical updates`
++      );
++    } catch (error: any) {
++      console.error(
++        `[Session ${this.clientId}] Failed to initialize agent ${agentId}:`,
++        error
++      );
++      this.emit({
++        type: "activity_log",
++        payload: {
++          id: uuidv4(),
++          timestamp: new Date(),
++          type: "error",
++          content: `Failed to initialize agent: ${error.message}`,
++        },
++      });
++      throw error;
++    }
++  }
++
+   /**
+    * Handle create agent request
+    */
+@@ -749,23 +789,27 @@ export class Session {
+       // Subscribe to agent updates
+       this.subscribeToAgent(agentId);
+ 
+-      // Emit agent_created message
++      // Auto-initialize agent immediately on explicit creation so it's ready to use
++      console.log(`[Session ${this.clientId}] Auto-initializing agent ${agentId}`);
++      const { info } = await this.agentManager.initializeAgentAndGetHistory(agentId);
++
++      // Emit agent_created message with initialized info
+       this.emit({
+         type: "agent_created",
+         payload: {
+           agentId,
+-          status: agentInfo?.status || "initializing",
++          status: info.status,
+           type: "claude",
+-          currentModeId: agentInfo?.currentModeId ?? undefined,
+-          availableModes: agentInfo?.availableModes ?? undefined,
+-          title: agentInfo?.title ?? undefined,
+-          cwd: agentInfo?.cwd || cwd,
++          currentModeId: info.currentModeId ?? undefined,
++          availableModes: info.availableModes ?? undefined,
++          title: info.title ?? undefined,
++          cwd: info.cwd,
+           requestId,
+         },
+       });
+       console.log(
+-        `[Session ${this.clientId}] Emitted agent_created with currentModeId:`,
+-        agentInfo?.currentModeId
++        `[Session ${this.clientId}] Emitted agent_created with status: ${info.status}, currentModeId:`,
++        info.currentModeId
+       );
+     } catch (error: any) {
+       console.error(
+@@ -810,18 +854,7 @@ export class Session {
+           payload: {
+             agentId,
+             status: info.status,
+-            info: {
+-              id: info.id,
+-              status: info.status,
+-              createdAt: info.createdAt,
+-              type: info.type,
+-              title: info.title ?? undefined,
+-              cwd: info.cwd,
+-              sessionId: info.sessionId ?? undefined,
+-              error: info.error ?? undefined,
+-              currentModeId: info.currentModeId ?? undefined,
+-              availableModes: info.availableModes ?? undefined,
+-            },
++            info,
+           },
+         });
+       }
+@@ -886,30 +919,9 @@ export class Session {
+       // Get live agents with session modes
+       const agents = this.agentManager?.listAgents() || [];
+ 
+-      // Subscribe to all existing agents and send their history (in case of reconnection)
++      // Subscribe to all existing agents so future updates stream through
+       for (const agent of agents) {
+         this.subscribeToAgent(agent.id);
+-
+-        // Get historical updates from AgentManager
+-        const history = this.agentManager.getAgentUpdates(agent.id);
+-
+-        // Send each historical update to client
+-        console.log(
+-          `[Session ${this.clientId}] Sending ${history.length} historical updates for agent ${agent.id}`
+-        );
+-        for (const update of history) {
+-          this.emit({
+-            type: "agent_update",
+-            payload: {
+-              agentId: update.agentId,
+-              timestamp:
+-                update.timestamp instanceof Date
+-                  ? update.timestamp
+-                  : new Date(update.timestamp),
+-              notification: update.notification,
+-            },
+-          });
+-        }
+       }
+ 
+       // Get live commands from terminal manager

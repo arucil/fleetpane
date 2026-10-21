@@ -1,0 +1,195 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-review-before",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "1b042ed6-6a89-42b9-bda0-00ba4277d10b",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "active"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "17ae45c3-62a9-4ab6-95db-025613846c8b",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission-review]",
+                "type": "text"
+              }
+            ],
+            "id": "user:17ae45c3-62a9-4ab6-95db-025613846c8b",
+            "type": "userMessage"
+          },
+          {
+            "call": {
+              "content": [],
+              "kind": "other",
+              "locations": [],
+              "rawInput": {
+                "command": "old-command",
+                "old": true
+              },
+              "sessionUpdate": "tool_call",
+              "status": "pending",
+              "title": "Old operation",
+              "toolCallId": "reviewed"
+            },
+            "id": "17ae45c3-62a9-4ab6-95db-025613846c8b:tool:reviewed",
+            "type": "acpToolCall"
+          }
+        ],
+        "status": "inProgress"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "ec163af9-9894-4e5b-a3f2-f149a831c27d",
+    "host_pid": 402991,
+    "provider_pid": 402993,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "ec163af9-9894-4e5b-a3f2-f149a831c27d",
+      "controller_id": "dc3effb2-18dc-475c-9997-8011de028f85",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "93003f4e-7272-4a58-8c4f-6d85e00818ee",
+      "12e6da35-f935-43d9-ad95-9c278327bad4"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "1b042ed6-6a89-42b9-bda0-00ba4277d10b",
+          "turn_id": "17ae45c3-62a9-4ab6-95db-025613846c8b"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "1b042ed6-6a89-42b9-bda0-00ba4277d10b",
+          "threadId": "1b042ed6-6a89-42b9-bda0-00ba4277d10b",
+          "toolCall": {
+            "content": [
+              {
+                "content": {
+                  "text": "Proposed settings before approval 中文",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "edit",
+            "locations": [
+              {
+                "line": 42,
+                "path": "/tmp/fleetpane-acp-review-before/review-settings.md"
+              }
+            ],
+            "name": "write_file",
+            "rawInput": {
+              "attempt": 0,
+              "content": "# New settings 中文\nKeep exact content.",
+              "enabled": false,
+              "file_path": "/tmp/fleetpane-acp-review-before/review-settings.md"
+            },
+            "title": "Review settings 中文",
+            "toolCallId": "reviewed"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+}

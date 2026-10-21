@@ -1,0 +1,76 @@
+--- before/host_view.rs
++++ after/host_view.rs
+@@ -1526,7 +1526,7 @@
+ }
+ 
+ impl Render for HostView {
+-    fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
++    fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+         let owns = self.owns();
+         let blocked = self.busy || !owns || self.pending.is_some();
+         let title = self
+@@ -2075,6 +2075,11 @@
+                             })
+                             .child(self.render_history_navigation(blocked, cx))
+                             .child(
++                                // Split the space left AFTER the header/editor.
++                                // Details may use half; the virtual list keeps
++                                // the rest even when task/approval content grows.
++                                div().id("conversation-body").flex().flex_col().flex_1().min_h_0()
++                            .child(
+                                 list(
+                                     self.timeline.clone(),
+                                     cx.processor(|this, ix: usize, _, _| {
+@@ -2087,9 +2092,9 @@
+                             )
+                             .child(div().id("session-interactions")
+                             .min_h_0()
++                            .flex_shrink_0()
++                            .max_h(relative(0.5))
+                             .overflow_y_scroll()
+-                            .when(self.permission_preview.is_some(), |region| region
+-                                .max_h(window.viewport_size().height * 0.3))
+                             .child(div().flex().flex_col().flex_shrink_0()
+                             .when(self.thread.is_some(), |view| view.child(self.render_tasks(cx)))
+                             .children(self.thread.as_ref().filter(|thread| {
+@@ -2253,7 +2258,22 @@
+                                         .children(permission_error.map(|error| div().text_color(cx.theme().danger).child(error)))
+                                         .child(permission_buttons)
+                                 },
+-                            ))))
++                            ))
++                            .when(!has_question, |region| region.child(
++                                div().p_4().flex().flex_col().gap_2()
++                                    .child(self.render_draft(cx))
++                                    .child(self.render_options(cx))
++                                    .child(self.render_images(blocked, cx))
++                                    .when(cancel_requested, |pane| pane.child(
++                                        div().text_xs().text_color(cx.theme().muted_foreground)
++                                            .child("Stop requested. Waiting for the agent to finish cancellation.")
++                                    ))
++                                    .when(active_turn && self.is_acp() && !cancel_requested, |pane| pane.child(
++                                        div().text_xs().text_color(cx.theme().muted_foreground)
++                                            .child("DeepSeek ACP does not support live follow-ups. Stop the turn before sending a new message.")
++                                    ))
++                            ))
++                            )))
+                             .child(
+                                 div()
+                                     .p_4()
+@@ -2264,15 +2284,7 @@
+                                     .flex_shrink_0()
+                                     .gap_2()
+                                     .when(!has_question, |pane| {
+-                                        pane.child(self.render_draft(cx)).child(self.render_options(cx)).child(self.render_images(blocked, cx))
+-                                        .when(cancel_requested, |pane| pane.child(
+-                                            div().text_xs().text_color(cx.theme().muted_foreground)
+-                                                .child("Stop requested. Waiting for the agent to finish cancellation.")
+-                                        ))
+-                                        .when(active_turn && self.is_acp() && !cancel_requested, |pane| pane.child(
+-                                            div().text_xs().text_color(cx.theme().muted_foreground)
+-                                                .child("DeepSeek ACP does not support live follow-ups. Stop the turn before sending a new message.")
+-                                        )).child(
++                                        pane.child(
+                                             Textarea::new(&self.composer)
+                                                 .aria_label("Message")
+                                                 .readonly(blocked || self.thread.is_none() || !self.draft_editable()),

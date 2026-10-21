@@ -1,0 +1,137 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-cancel-qa",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "8b04a43e-cf95-45bc-b240-ef9a2ebf258a",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission-cancel-gate]",
+                "type": "text"
+              }
+            ],
+            "id": "user:8b04a43e-cf95-45bc-b240-ef9a2ebf258a",
+            "type": "userMessage"
+          },
+          {
+            "content": [
+              {
+                "text": "Cancellation cleanup finished 中文",
+                "type": "text"
+              }
+            ],
+            "id": "8b04a43e-cf95-45bc-b240-ef9a2ebf258a:agent_message_chunk:segment:1",
+            "type": "acpMessage"
+          }
+        ],
+        "status": "interrupted",
+        "stopReason": "cancelled"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "bef6fe9f-105e-4358-b68d-bd25a362aa48",
+    "host_pid": 382734,
+    "provider_pid": 382737,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "bef6fe9f-105e-4358-b68d-bd25a362aa48",
+      "controller_id": "9c698fde-1597-43cd-afa8-600ddf82ff55",
+      "generation": 7
+    },
+    "sequence": 37,
+    "operation_ids": [
+      "b36602f1-2a2d-4203-bfd4-e33ad5c49b7c",
+      "98e7afff-cc28-4db5-9b8d-d2c213f83f26",
+      "74056989-4343-4334-b6a5-c8f8553d1897"
+    ],
+    "journal_total": 3,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  }
+}

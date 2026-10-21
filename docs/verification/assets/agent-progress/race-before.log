@@ -1,0 +1,15 @@
+F
+======================================================================
+FAIL: test_completion_during_startup_remains_after_the_baseline (observer_tests.ConcurrencyObserverTest.test_completion_during_startup_remains_after_the_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/tests/concurrency_test.py", line 38, in test_completion_during_startup_remains_after_the_baseline
+    self.assertEqual(concurrency.completed_targets(delivered, targets), {"a", "b"})
+AssertionError: Items in the second set but not the first:
+'a'
+'b'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+FAILED (failures=1)

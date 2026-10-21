@@ -6,10 +6,13 @@ use std::collections::{HashSet, VecDeque};
 use uuid::Uuid;
 
 pub mod acp;
+pub mod attachments;
 #[cfg(unix)]
 pub mod journal;
 pub mod lifecycle;
+pub mod stopping;
 pub mod tasks;
+pub mod terminal;
 #[cfg(unix)]
 pub mod unix;
 
@@ -48,6 +51,37 @@ pub enum Outcome {
     Unknown(String),
 }
 
+/// A provider failure fences that provider's work; a Host failure fences every
+/// mutation, including local PTYs that share its durable journal.
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum FaultScope {
+    Provider,
+    Host,
+}
+
+impl FaultScope {
+    fn includes(self, method: &str) -> bool {
+        self == Self::Host || OperationTarget::for_method(method) == OperationTarget::Provider
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum OperationTarget {
+    Provider,
+    Terminal,
+}
+
+impl OperationTarget {
+    fn for_method(method: &str) -> Self {
+        if terminal::is_mutation(method) {
+            Self::Terminal
+        } else {
+            Self::Provider
+        }
+    }
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Event {
     pub sequence: u64,
@@ -70,6 +104,8 @@ pub struct Snapshot {
     pub activity: lifecycle::Activity,
     pub pending_requests: Vec<Value>,
     pub fault: Option<String>,
+    #[serde(default)]
+    pub fault_scope: Option<FaultScope>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -185,6 +221,7 @@ pub struct State {
     events: VecDeque<(Event, usize)>,
     event_bytes: usize,
     activity: lifecycle::Tracker,
+    stopping: stopping::Tracker,
     tasks: tasks::Cache,
 }
 
@@ -193,11 +230,13 @@ pub fn is_query_method(method: &str) -> bool {
     matches!(
         method,
         "thread/list"
+            | "thread/loaded/list"
             | "model/list"
             | "thread/read"
             | "thread/turns/list"
             | "thread/items/list"
             | tasks::READ_METHOD
+            | terminal::READ_METHOD
     )
 }
 
@@ -224,18 +263,22 @@ impl State {
                 journal_total: 0,
                 admission: lifecycle::Admission::default(),
                 activity: lifecycle::Activity {
+                    stopping: Some(Vec::new()),
+                    terminal_ids: Vec::new(),
                     turns: Vec::new(),
                     in_flight_operations: 0,
                     unknown_operations: 0,
                 },
                 pending_requests: Vec::new(),
                 fault: None,
+                fault_scope: None,
             },
             operations: Vec::new(),
             queries: HashSet::new(),
             events: VecDeque::new(),
             event_bytes: 0,
             activity: lifecycle::Tracker::default(),
+            stopping: stopping::Tracker::default(),
             tasks: tasks::Cache::default(),
         }
     }
@@ -243,6 +286,7 @@ impl State {
     pub fn snapshot(&self) -> Snapshot {
         let mut snapshot = self.snapshot.clone();
         snapshot.activity.turns = self.activity.snapshot();
+        snapshot.activity.stopping = Some(self.stopping.snapshot());
         snapshot.activity.in_flight_operations = self
             .operations
             .iter()
@@ -292,11 +336,32 @@ impl State {
     }
 
     pub fn authorize(&self, lease: &Lease) -> Result<(), HostError> {
-        self.authorize_controller(lease)?;
+        self.authorize_host(lease)?;
         if let Some(fault) = &self.snapshot.fault {
             return Err(HostError::new("provider_unavailable", fault));
         }
         Ok(())
+    }
+
+    fn authorize_host(&self, lease: &Lease) -> Result<(), HostError> {
+        self.authorize_controller(lease)?;
+        if self.snapshot.fault_scope == Some(FaultScope::Host) {
+            return Err(HostError::new(
+                "host_unavailable",
+                self.snapshot
+                    .fault
+                    .as_deref()
+                    .expect("Host fault has a reason"),
+            ));
+        }
+        Ok(())
+    }
+
+    fn authorize_mutation(&self, lease: &Lease, method: &str) -> Result<(), HostError> {
+        match OperationTarget::for_method(method) {
+            OperationTarget::Terminal => self.authorize_host(lease),
+            OperationTarget::Provider => self.authorize(lease),
+        }
     }
 
     pub fn authorize_controller(&self, lease: &Lease) -> Result<(), HostError> {
@@ -318,7 +383,7 @@ impl State {
         method: String,
         params: Value,
     ) -> Result<bool, HostError> {
-        self.authorize(lease)?;
+        self.authorize_mutation(lease, &method)?;
         if method.is_empty() || matches!(method.as_str(), "initialize" | "initialized") {
             return Err(HostError::new(
                 "reserved_method",
@@ -344,6 +409,12 @@ impl State {
                 "Host is draining; select a ready Host for new work. Existing output, answers, reads and Stop remain available.",
             ));
         }
+        let stop = if OperationTarget::for_method(&method) == OperationTarget::Provider {
+            self.stopping
+                .prepare(id, &method, &params, &self.activity.snapshot())?
+        } else {
+            None
+        };
         let operation = Operation {
             id,
             method,
@@ -382,6 +453,9 @@ impl State {
         // Dropping settled RAM entries never removes their on-disk identity.
         self.operations.push(operation);
         self.snapshot.operation_ids.push(id);
+        if let Some(stop) = stop {
+            self.stopping.commit(stop);
+        }
         Ok(true)
     }
 
@@ -415,6 +489,44 @@ impl State {
     }
 
     pub fn record(&mut self, message: Value) -> Result<Option<QueryReply>, String> {
+        self.record_from(message, OperationTarget::Provider)
+    }
+
+    fn check_response_target(
+        &self,
+        message: &Value,
+        target: OperationTarget,
+    ) -> Result<(), String> {
+        if message.get("method").is_none()
+            && let Some(id) = message.get("id").and_then(Value::as_str)
+        {
+            if id.starts_with("query:") {
+                if target != OperationTarget::Provider {
+                    return Err("terminal completion cannot answer a provider query".into());
+                }
+            } else {
+                let id = Uuid::parse_str(id).map_err(|error| error.to_string())?;
+                let operation = self
+                    .operations
+                    .iter()
+                    .find(|op| op.id == id)
+                    .ok_or("completion references an unrecorded operation")?;
+                if OperationTarget::for_method(&operation.method) != target {
+                    return Err("completion belongs to a different operation target".into());
+                }
+            }
+        } else if target == OperationTarget::Terminal {
+            return Err("terminal completion must be an operation response".into());
+        }
+        Ok(())
+    }
+
+    fn record_from(
+        &mut self,
+        message: Value,
+        target: OperationTarget,
+    ) -> Result<Option<QueryReply>, String> {
+        self.check_response_target(&message, target)?;
         let plan = tasks::Plan::from_event(&message)?;
         let bytes = serde_json::to_vec(&message)
             .map_err(|error| error.to_string())?
@@ -514,6 +626,9 @@ impl State {
         } else {
             return Err("invalid provider envelope".into());
         }
+        if target == OperationTarget::Provider {
+            self.stopping.record(&message)?;
+        }
         if let Some(plan) = plan {
             self.tasks.record(plan);
         }
@@ -579,13 +694,27 @@ impl State {
     }
 
     pub fn fail(&mut self, reason: String) {
+        self.fail_in_scope(reason, FaultScope::Host);
+    }
+
+    pub fn fail_provider(&mut self, reason: String) {
+        self.fail_in_scope(reason, FaultScope::Provider);
+    }
+
+    fn fail_in_scope(&mut self, reason: String, scope: FaultScope) {
+        self.stopping.fail(&reason);
         self.queries.clear();
         for operation in &mut self.operations {
-            if matches!(operation.outcome, Outcome::Accepted) {
+            if matches!(operation.outcome, Outcome::Accepted) && scope.includes(&operation.method) {
                 operation.outcome = Outcome::Unknown(reason.clone());
             }
         }
+        // A later provider error must never downgrade a storage/Host failure.
+        if self.snapshot.fault_scope == Some(FaultScope::Host) {
+            return;
+        }
         self.snapshot.fault = Some(reason);
+        self.snapshot.fault_scope = Some(scope);
     }
 }
 
@@ -690,7 +819,7 @@ mod tests {
                 .admit(&second, Uuid::new_v4(), "turn/start".into(), json!({}))
                 .unwrap()
         );
-        state.fail("provider exited".into());
+        state.fail_provider("provider exited".into());
         assert!(state.queries.is_empty());
         assert_eq!(
             state.admit_query(&second, "thread/read").unwrap_err().code,
@@ -851,6 +980,128 @@ mod tests {
     }
 
     #[test]
+    fn provider_fault_preserves_terminal_admission_receipts_and_owner_fences() {
+        let mut state = State::new(42, json!({}));
+        let old = claim(&mut state, 0);
+        let lease = claim(&mut state, 1);
+        let terminal = Uuid::new_v4();
+        let provider = Uuid::new_v4();
+        state
+            .admit(
+                &lease,
+                terminal,
+                "fleetpane/terminal/input".into(),
+                json!({}),
+            )
+            .unwrap();
+        state
+            .admit(&lease, provider, "turn/start".into(), json!({}))
+            .unwrap();
+        state.fail_provider("provider exited".into());
+        assert_eq!(state.snapshot().fault_scope, Some(FaultScope::Provider));
+        assert!(matches!(
+            state.operation(terminal),
+            Response::Operation(Operation {
+                outcome: Outcome::Accepted,
+                ..
+            })
+        ));
+        assert!(matches!(
+            state.operation(provider),
+            Response::Operation(Operation {
+                outcome: Outcome::Unknown(_),
+                ..
+            })
+        ));
+        assert!(
+            state.record(json!({"id":terminal,"result":{}})).is_err(),
+            "provider cannot finish a terminal receipt"
+        );
+        state
+            .record_from(
+                json!({"id":terminal,"result":{}}),
+                OperationTarget::Terminal,
+            )
+            .unwrap();
+        assert_eq!(
+            state
+                .admit(
+                    &old,
+                    Uuid::new_v4(),
+                    "fleetpane/terminal/close".into(),
+                    json!({})
+                )
+                .unwrap_err()
+                .code,
+            "stale_controller"
+        );
+        for method in ["turn/start", "fleetpane/terminal/future"] {
+            assert_eq!(
+                state
+                    .admit(&lease, Uuid::new_v4(), method.into(), json!({}))
+                    .unwrap_err()
+                    .code,
+                "provider_unavailable"
+            );
+        }
+        let close = Uuid::new_v4();
+        state
+            .admit(&lease, close, "fleetpane/terminal/close".into(), json!({}))
+            .unwrap();
+        state.fail("journal failed".into());
+        state.fail_provider("later provider error".into());
+        assert_eq!(state.snapshot().fault_scope, Some(FaultScope::Host));
+        assert_eq!(state.fault(), Some("journal failed"));
+        assert!(matches!(
+            state.operation(close),
+            Response::Operation(Operation {
+                outcome: Outcome::Unknown(_),
+                ..
+            })
+        ));
+        assert_eq!(
+            state
+                .admit(
+                    &lease,
+                    Uuid::new_v4(),
+                    "fleetpane/terminal/close".into(),
+                    json!({})
+                )
+                .unwrap_err()
+                .code,
+            "host_unavailable"
+        );
+        assert!(
+            state.authorize_controller(&lease).is_ok(),
+            "observational local reads remain available"
+        );
+    }
+
+    #[test]
+    fn completions_cannot_cross_operation_targets() {
+        let mut state = State::new(42, json!({}));
+        let lease = claim(&mut state, 0);
+        let id = Uuid::new_v4();
+        state
+            .admit(&lease, id, "turn/start".into(), json!({}))
+            .unwrap();
+        assert!(
+            state
+                .record_from(json!({"id":id,"result":{}}), OperationTarget::Terminal)
+                .is_err()
+        );
+        assert!(
+            state
+                .record_from(
+                    json!({"method":"delta","params":{}}),
+                    OperationTarget::Terminal
+                )
+                .is_err()
+        );
+        state.record(json!({"id":id,"result":{}})).unwrap();
+    }
+
+    #[test]
     fn expired_cursor_and_conflicting_id_do_not_silently_lose_or_repeat_work() {
         let mut state = State::new(42, json!({"userAgent":"synthetic-provider/1"}));
         let lease = claim(&mut state, 0);
@@ -871,7 +1122,7 @@ mod tests {
                 .admit(&lease, id, "test".into(), json!({"a":2}))
                 .is_err()
         );
-        state.fail("provider exited".into());
+        state.fail_provider("provider exited".into());
         assert!(matches!(
             state.operation(id),
             Response::Operation(Operation {

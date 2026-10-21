@@ -11,8 +11,91 @@ foundations, not a usable replacement release. No performance gain is claimed.
 
 See the [product requirements](docs/prd.md), [behavior status](docs/status.md), and
 [Session Host architecture](docs/adr/0002-preserve-runtimes-across-control-daemon-upgrades.md).
+The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
+lineages from their first commit, records each inspected batch and maps the
+evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
+
+Native conversation identities now keep turn status and item cards distinct,
+including provider IDs containing separators. Synthetic before/after pagination,
+independent details and exact clipboard checks have
+[separate evidence](docs/verification/2026-10-21-row-identity.md).
 
 ## Try the native desktop
+
+On Unix, **Workspaces → Import from Paseo** previews a local Paseo home, saves a
+selected workspace and its session identities, then **Copy workspace history**
+copies supported Codex/DeepSeek Harness transcripts. **Sessions → View history**
+browses independent private snapshots with Markdown, tools and supplied images.
+DeepSeek histories support v3/v4, plain or Zstandard, and select the latest
+canonical generation. Unsupported/corrupt newer generations and mixed encodings
+show an error; older generations are not substituted. Existing imported snapshots
+retain their original version. [v4 verification](docs/verification/2026-10-21-paseo-dsh-v4.md).
+The destination Host can be offline. Missing directories and unsupported histories
+remain explicit; repeated imports keep the first snapshot. Complete saved Codex legacy histories can also create an independent context
+fork; original running agents retain their ownership. See [migration behavior and limits](docs/adr/0059-offline-paseo-workspace-history-import.md).
+
+For multiple workspaces, preview, filter by name/path and select individual rows
+or **Select matching**, then **Migrate selected + history**. Progress and each
+workspace's Details show failures and warnings. **Stop after current copy** keeps
+completed work; repeat the selection to continue. Selection includes hidden rows
+until cleared. [Batch behavior and limits](docs/adr/0060-bulk-paseo-workspace-history-migration.md).
+
+**Saved migration attempts** retains progress and workspace diagnostics across
+app restarts. Open/refresh reports without copying; **Retry saved selection**
+creates a new attempt after checking the saved source revisions. Existing
+identities and complete snapshots are reused. An interrupted attempt stays
+unconfirmed; another active worker prevents retry. Selection check completion
+does not imply every history succeeded. [Recovery contract](docs/adr/0064-durable-paseo-batch-receipts.md).
+
+After an interrupted copy, **Check temporary files** shows the unused file count
+and bytes; **Clear unused temporary files** removes that version's scratch files.
+Both actions refuse an active history copy or context export. Source transcripts,
+published histories and migration reports are retained. Older temporary files
+have no shared ownership lock and are reported without deletion. Cleanup is
+explicit; opening the app never starts it. [Cleanup contract and verification](docs/verification/2026-10-21-paseo-scratch.md).
+
+For supported Codex histories, choose **Continue in Codex…**, take control of the
+target Host, then **Fork saved context**. This uses a private raw snapshot to
+create a new thread with the original context; it never resumes the Paseo thread.
+**Check saved fork status** recovers its result after reopening the app. Dispatch
+is allowed once per saved import, even after an uncertain result. DeepSeek,
+incomplete snapshots and Codex paginated histories with a separate thread store
+remain unsupported for continuation. A prepared binding is pinned to its Host and
+admission generation; stale preparations are refused. Use **Reprepare unsent context**
+to explicitly replace an unsent binding after its Host changes. This does not
+submit a fork. CLI: `paseo-import reprepare-fork STORE SESSION_UUID EXPECTED_OPERATION_UUID`.
+Already attempted bindings, including unknown results, cannot be replaced. [Contract](docs/adr/0061-independent-codex-history-continuation.md).
+
+The same engine is available from `fleetpane-host paseo-import`:
+
+```sh
+fleetpane-host paseo-import preview /absolute/paseo-home
+# Use the selected candidate's revision and source.workspaceId from preview:
+fleetpane-host paseo-import workspace /absolute/controller /absolute/paseo-home WORKSPACE_PREVIEW_REVISION /absolute/hosts.json HOST_NAME SOURCE_WORKSPACE_ID
+fleetpane-host paseo-import list /absolute/controller
+fleetpane-host paseo-import copy-workspace-history /absolute/controller IMPORTED_WORKSPACE_UUID /absolute/codex-home /absolute/dsh-home
+fleetpane-host paseo-import sessions /absolute/controller IMPORTED_WORKSPACE_UUID
+fleetpane-host paseo-import history /absolute/controller IMPORTED_SESSION_UUID 0
+fleetpane-host paseo-import prepare-fork /absolute/controller IMPORTED_SESSION_UUID
+fleetpane-host paseo-import fork /absolute/controller IMPORTED_SESSION_UUID --take-control
+fleetpane-host paseo-import fork-status /absolute/controller IMPORTED_SESSION_UUID
+# Omit IDs to plan all workspaces; otherwise list the selected source IDs.
+umask 077
+fleetpane-host paseo-import plan /absolute/paseo-home /absolute/hosts.json HOST_NAME /absolute/codex-home /absolute/dsh-home > /absolute/plan.json
+fleetpane-host paseo-import batch /absolute/controller /absolute/plan.json > /absolute/result.json
+fleetpane-host paseo-import batches /absolute/controller
+fleetpane-host paseo-import batch-status /absolute/controller BATCH_UUID
+fleetpane-host paseo-import batch-results /absolute/controller BATCH_UUID
+fleetpane-host paseo-import retry-batch /absolute/controller BATCH_UUID
+fleetpane-host paseo-import scratch-status /absolute/controller
+fleetpane-host paseo-import clean-scratch /absolute/controller
+```
+
+`history` returns a `next` cursor for the next page. `source-record STORE SESSION_UUID
+RECORD_NUMBER` reads the preserved JSON record (numbering starts at 1). Default
+desktop roots respect `PASEO_HOME`, `CODEX_HOME` and `DSH_HOME`; edit the path fields
+for another local export. Paths and full transcripts are private data; keep CLI
+output outside public logs. [Verification](docs/verification/2026-10-21-paseo-import.md).
 
 On Linux with Vulkan, fontconfig, FreeType, xkbcommon, and X11 or Wayland development
 libraries installed:
@@ -28,6 +111,26 @@ mode reads the existing Paseo directory one page at a time, with an explicit
 5,000-session cap. Select with the mouse or ↑/↓, Home/End; Ctrl+R refreshes the
 live directory; Ctrl+C copies the selected session ID. Kit buttons provide
 refresh, pagination and copy actions.
+
+On Unix, **Appearance** selects System, Light or Dark for this device. System
+follows OS appearance changes; a choice applies after its local save succeeds.
+Storage failures and stale writes show an error with **Reload appearance**.
+The default preferences directory is `$XDG_CONFIG_HOME/fleetpane/preferences`
+or `$HOME/.config/fleetpane/preferences` on Linux, and
+`$HOME/Library/Application Support/Fleetpane/preferences` on macOS.
+Use `--preferences-dir /absolute/private/directory` for an isolated profile.
+These settings are independent of the selected Host; normal close waits for
+pending theme and draft saves. [Verified behavior and limits](docs/verification/2026-10-21-appearance.md).
+
+The shared CLI can inspect or change a preference without connecting to a Host:
+
+```sh
+fleetpane-host appearance /absolute/private/directory get
+fleetpane-host appearance /absolute/private/directory set 0 dark
+```
+
+The set command requires the revision returned by get. Another writer's change
+requires an explicit reload; it is never silently overwritten.
 
 `--host` connects to an independently running Fleetpane Host (see below). Enter an
 absolute workspace directory, create a session, and send a multiline text prompt.
@@ -88,7 +191,69 @@ during command execution. DeepSeek Harness ACP has its own bounded adapter,
 [decision](docs/adr/0013-deepseek-acp-provider.md) and
 [verification](docs/verification/2026-10-20-deepseek-acp.md).
 
-Terminal emulation, attachment upload/send and broader
+ACP v1 sessions that advertise modes now expose **Mode** beside their existing
+configuration options. Choices come from that session's provider; mode changes
+are allowed during a reply or tool permission wait. Rejected changes keep the
+confirmed mode visible. The CLI equivalent is `session SOCKET --take-control
+mode THREAD MODE_ID`. Archived sessions must resume first. This is separate from
+profiles and permission policy presets; see [the contract and limits](docs/adr/0039-acp-v1-session-modes.md).
+
+Fleetpane saves observed ACP messages and tools in its private Host journal.
+After restarting that Host, select an **archived** session to browse its saved
+history; **Resume context** must succeed before sending. Unfinished turns show
+**unknown**, with no automatic prompt or permission replay. Existing DSH messages
+that Fleetpane never observed are not replayed into the Host journal. The separate
+Paseo importer can copy available Codex/DSH logs into its archive browser. See the
+[decision](docs/adr/0031-durable-observed-acp-history.md) and
+[verification](docs/verification/2026-10-21-acp-archive.md).
+
+ACP agent title updates now reach the directory and open conversation even while
+idle or waiting for a tool permission. Session information is saved before it is
+published, without adding conversation items; null clears the supplied title.
+[Verified behavior and limits](docs/verification/2026-10-21-acp-info.md).
+
+ACP tool calls default to pending when the agent omits status. Expanded cards
+show tool names, kinds and file locations; incremental updates retain the card
+and replace its details. [Verification](docs/verification/2026-10-21-acp-tools.md).
+
+ACP/MCP embedded resources and resource links have cards with supplied URI,
+metadata and bounded text previews. Markdown MIME uses the Kit renderer;
+Copy text, Copy URI and Copy base64 retain complete supplied data. Empty and
+malformed content are explicit. Resource URIs are not fetched or opened.
+[Local acceptance](docs/verification/2026-10-21-resources.md) covers native cards,
+exact clipboard output and ACP archive reload with synthetic providers.
+
+Stop cancels outstanding ACP permission requests immediately, including requests
+that arrive while cancellation is pending. The turn remains active and the UI
+shows **Stopping…** until the agent confirms settlement. Replacing the window
+preserves this waiting state and its draft without sending another cancellation.
+[Verification](docs/verification/2026-10-21-acp-cancel.md).
+
+Stop progress now belongs to the Session Host for both Codex and ACP. An interrupt
+acknowledgement and the exact original turn's terminal notification are separate:
+Send and follow-ups stay blocked until both arrive. The desktop remains usable
+for other sessions while waiting. Rejection shows **Retry Stop**; retries are
+explicit, and a lost provider connection shows unknown. Older Hosts without
+progress support refuse Stop. This does not prove background resources exited or
+implement live Host replacement. [Verification](docs/verification/2026-10-21-stop-progress.md).
+
+The composer now shows observed Agent activity independently of pending UI
+actions: working, awaiting your response, stopping, synchronizing or unavailable.
+It remains visible while details scroll. No running turn observed does not prove
+background resources have exited. [Local verification and limits](docs/verification/2026-10-21-agent-progress.md).
+
+New session remembers up to three recent directories per Host endpoint. The menu
+prefills the workspace input; **New session** remains an explicit action. Suggestions
+persist across windows, support Reload/Forget and report save failures separately
+from a successful session creation. [Verification](docs/verification/2026-10-21-recent-directories.md).
+
+Tool permissions preview the operation carried by the request, including standalone
+requests without a prior tool event. Request details take precedence over an older
+tool card; raw input, content and file locations can be reviewed and the complete
+request copied. A bounded interaction area keeps the draft and Stop/Send accessible
+in small windows. [Verification](docs/verification/2026-10-21-acp-review.md).
+
+Complete terminal interaction/IME, remote attachment upload and broader
 provider integration acceptance remain pending. The Host
 view retains at most 500 items, 500 turns and 2 MiB; reaching that bound stops
 older loads, preserves current content and offers Reload for recent history.
@@ -111,7 +276,7 @@ The [Component patch](apps/desktop/vendor/README.md) fixes diff-list overdraw in
 that version without changing the engine.
 See [the toolkit decision](docs/adr/0004-gpui-kit-desktop.md).
 Linux rendered-window verification is recorded; macOS/Windows desktop behavior,
-IME, accessibility and terminal integration remain unverified.
+IME, accessibility and complete raw-terminal interaction remain unverified.
 
 ## Try the Session Host
 
@@ -149,8 +314,23 @@ cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --tak
 cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --take-control send THREAD_ID "Hello" --model MODEL --effort EFFORT
 ```
 
-Each CLI invocation is a separate controller; `--take-control` explicitly fences
-the previous owner. Do not use it against a Host another window should control.
+To observe an exact turn, use **wait** with its session and turn IDs:
+
+```sh
+cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock wait THREAD_ID TURN_ID --timeout-ms 30000
+python3 scripts/wait-smoke.py --real-codex
+```
+
+Wait returns `finished` (including its actual status/error/stop reason), `unknown`,
+`attention` (exact pending requests) or `timed_out`. It reads an existing controller
+lease and keeps that controller; omit `--take-control`. Timeout/Ctrl+C stops only
+observation. It never answers, sends or stops a turn. Host replacement/fault and
+expired cursors are explicit errors. [Contract and limits](docs/adr/0047-observe-an-exact-turn.md),
+[local protocol evidence](docs/verification/2026-10-21-wait-turn.md).
+
+Session commands that acquire control use a separate controller;
+`--take-control` explicitly fences the previous owner. Do not use it against a
+Host another window should control.
 The [process-level smoke test](scripts/runtime-smoke.py) is a complete runnable
 handoff example with a synthetic provider. Adding `--codex` exercises a real,
 isolated Codex `command/exec` without sending model requests or using saved sessions.
@@ -166,7 +346,8 @@ replayed. The native window can reconnect, check an old UUID, and explicitly
 **Continue without resending** before doing other work. Protocol v3 requires
 updating the disposable Host and clients together. Storage has a 256 MiB page
 budget and fails closed; there is no automatic receipt deletion. This does not
-restore an in-flight provider/tool or ACP observed history. See
+restore an in-flight provider/tool. Retained observed ACP history has its own
+[archive contract](docs/adr/0031-durable-observed-acp-history.md). See
 [durable receipt semantics](docs/adr/0015-durable-operation-receipts.md) and
 [local verification](docs/verification/2026-10-20-durable-journal.md).
 
@@ -206,7 +387,8 @@ The default provider is `dsh acp`. It inherits the launching environment, includ
 credentials there through DSH or its supported environment variables. Existing
 DSH processes and sessions are not adopted or restarted.
 
-Create or select a session, choose the provider's model/reasoning options under
+Connections open read-only. Use **Take control**, then create or select a session
+and choose the provider's model/reasoning options under
 **Session configuration**, and send text. These are persistent session options,
 not next-message overrides. Text/thought/tool updates, Markdown, tool details,
 Stop and exact permission choices share the Host lifecycle. A replacement window
@@ -222,13 +404,63 @@ cargo run -p fleetpane-host -- session /tmp/fleetpane-deepseek/control.sock --ta
 ```
 
 DSH 0.2.0-rc.2 resumes model context without replaying old messages. The desktop
-warns that it shows activity observed by this Host; a Host restart starts a fresh
-observed transcript. Metadata-only open/resume and **Load earlier messages** page
+warns that it shows retained activity observed by Fleetpane, independently of
+provider transcript replay. Host restart restores the observed archive; unfinished
+turns remain unknown and are not resent. Metadata-only open/resume and **Load earlier messages** page
 through retained Host observations with a 256 KiB encoded reply budget. This is
 independent of DSH's missing transcript replay. The adapter does not provide
-elicitation, attachment send or account setup UI. Existing frame/cache/journal
+elicitation or account setup UI. Local image send is enabled only for providers
+advertising ACP v1 image support; installed DSH 0.2.0-rc.2 reports false. Existing frame/cache/journal
 limits apply; an individual oversized item cannot be paged.
 See [ACP semantics and limits](docs/adr/0013-deepseek-acp-provider.md).
+
+When reading earlier content, **Jump to latest** returns to the loaded tail and
+resumes following a growing reply. It is local navigation and preserves drafts and
+pending permissions. Existing history limits still apply.
+[Native verification](docs/verification/2026-10-21-history-navigation.md).
+
+**Attention** lists pending approvals, questions and other provider requests from
+every configured Host, including unopened views. Filter by request type, copy the
+original JSON or open its checked source. Read-only viewing does not take control;
+use **Take control**, then **Open pending session** to review in the original
+conversation. External decisions update read-only views automatically. The queue
+refreshes every two seconds while open and keeps unavailable Hosts visible.
+Completion/unread notifications, mute/tray settings and request age remain open.
+
+```sh
+cargo run -p fleetpane-host -- attention /path/to/hosts.json
+python3 scripts/attention-smoke.py --evidence-dir /tmp/fleetpane-attention-proof
+```
+
+The smoke check holds synthetic requests for 125 seconds by default and verifies
+exact provider answers, controller fencing and cross-Host isolation.
+[Local acceptance and limits](docs/verification/2026-10-21-attention-queue.md).
+
+Conversation details (tasks, approvals, questions, model options and attachments)
+now scroll within at most half the space remaining above the fixed editor.
+At 900 × 560, long drafts and pending interactions leave messages visible;
+Send/Stop stay reachable. [Before/after and native interaction evidence](docs/verification/2026-10-21-conversation-space.md).
+
+Native **Attach images** imports up to four PNG/JPEG/WebP files (8 MiB each),
+previews/removes them and supports image-only Send. Saved image identities share
+the text draft's revision and one-attempt receipt recovery. The Host keeps original
+bytes in `SOCKET.attachments`; missing/corrupt files and unsupported providers
+refuse sending without clearing the draft. Codex receives local image paths;
+supported ACP receives image content while history keeps local references.
+Clipboard image paste, remote upload and full-size media remain open.
+[Architecture](docs/adr/0042-local-image-attachments.md),
+[native and provider evidence](docs/verification/2026-10-21-image-attachments.md).
+
+```sh
+# Local file import does not contact a provider or send a message.
+cargo run -p fleetpane-host -- image /tmp/fleetpane/control.sock import /absolute/screenshot.png
+# Use the exact key/revision returned by the draft commands; attachment edits are CAS writes.
+cargo run -p fleetpane-host -- draft STORE attach KEY_JSON REVISION /absolute/screenshot.png
+cargo run -p fleetpane-host -- draft STORE remove-image KEY_JSON REVISION 0
+python3 scripts/images-smoke.py
+# Requires installed Codex; uses a private CODEX_HOME and a local SSE model stub.
+python3 scripts/codex-images-smoke.py
+```
 
 ## Use several local Hosts in one window
 
@@ -307,6 +539,13 @@ fleetpane-host creation /absolute/hosts.creations check UUID # read-only; never 
 fleetpane-host creation /absolute/hosts.creations list # 32 newest; append oldest position for next page
 ```
 
+Local controller store jobs share a queue per canonical directory before opening
+SQLite. Cloned handles and ancestor aliases use the same queue, and a spawned job
+keeps its slot even if its caller closes. Other stores and Host streams remain
+independent; cross-process SQLite lock errors remain explicit.
+[Decision and limits](docs/adr/0043-serialize-local-controller-store-jobs.md),
+[local verification](docs/verification/2026-10-21-controller-store-queue.md).
+
 The private store is bounded to 64 MiB and has no retention UI. Storage failures
 stop creation. This is an initial binding, not complete session routing or
 provider recovery. See [ADR 0018](docs/adr/0018-durable-local-creation-intents.md).
@@ -343,10 +582,10 @@ fleetpane-host workspace /absolute/hosts.creations create UUID # --take-control 
 The catalog shares the private 64 MiB controller store with creation intents.
 For `--hosts hosts.json`, keep `hosts.creations/creations.sqlite3`; `--host
 /absolute/control.sock` uses `/absolute/control.controller/creations.sqlite3`.
-Local-store schemas 1–3 upgrade transactionally to 4 and preserve creation
-bindings, attempt flags and workspace IDs. Older controller binaries reject
-schema 4. Host protocol and journal remain v3/schema 2. Worktree removal,
-workspace setup scripts, file editor and terminal remain open. Session creation follows direct
+Local-store schemas 1–4 upgrade transactionally to 5 and preserve creation
+bindings, attempt flags, workspace IDs and draft revisions. Older controller binaries reject
+schema 5. Host protocol and journal remain v3/schema 2. Worktree removal,
+workspace setup scripts, file editor and complete terminal interaction remain open. Session creation follows direct
 per-Host command receipts; this catalog does not add durable session ownership
 routing or ADR 0018 group creation bindings. Git observations have a 10-second
 deadline per subprocess, 256 KiB per output stream and 500 changed-path limit;
@@ -376,8 +615,14 @@ project subdirectory. It registers the result without starting a session. Open
 the result and prepare a session separately. Uncommitted source files are not
 copied; moving the baseline ref after preview does not change the pinned commit.
 
+Choose **Existing local branch** to create a checkout for a local branch already
+in the repository. Preview records its expected tip; creation refuses a changed,
+deleted or occupied branch. No remote branch is guessed/fetched, and no branch is
+reset or forced. The base input applies only to **New branch**.
+
 ```sh
 fleetpane-host worktree /absolute/hosts.creations plan SOURCE_WORKSPACE_UUID feature/task main OPERATION_UUID
+fleetpane-host worktree /absolute/hosts.creations plan-existing SOURCE_WORKSPACE_UUID feature/existing OPERATION_UUID
 fleetpane-host worktree /absolute/hosts.creations apply OPERATION_UUID
 fleetpane-host worktree /absolute/hosts.creations check OPERATION_UUID
 fleetpane-host worktree /absolute/hosts.creations list # optional oldest position for next page
@@ -398,7 +643,21 @@ before further repository operations. Worktree disk usage is separate from the
 64 MiB database limit. See [ADR 0020](docs/adr/0020-planned-worktree-creation.md)
 and [verification](docs/verification/2026-10-20-worktree-creation.md).
 
+Fleetpane creation operations share a repository lock across linked worktrees,
+windows and controller stores. A busy repository is refused before an attempt.
+An admitted checkout continues to completion/deadline if its async caller goes
+away while the controller process lives. Exiting the program or hard-killing the
+controller still requires manual inspection. External Git
+commands do not honor this guard. See [ADR 0045](docs/adr/0045-existing-branch-worktrees.md)
+and [existing-branch evidence](docs/verification/2026-10-21-existing-worktrees.md).
+
 ## Saved session drafts
+
+Paste PNG/JPEG/WebP images into the message composer, or use **Attach images**.
+Pasted images join the saved text/image draft and wait for explicit Send.
+Provider capabilities and the four-image / 8 MiB-per-image bounds still apply.
+See [clipboard input evidence](docs/verification/2026-10-21-clipboard-images.md)
+for native Linux coverage and remaining platform/media limits.
 
 Text in an opened Host-backed session saves to the same private controller store.
 **Draft saved locally** confirms the save; closing the window waits for outstanding
@@ -433,6 +692,81 @@ text per opened Host. Forced termination restores the last confirmed save;
 new-session input before creation, model options, attachments, question answers
 and selection/layout persistence are outside this slice. See [ADR 0022](docs/adr/0022-durable-session-drafts.md)
 and [local verification](docs/verification/2026-10-20-session-drafts.md).
+
+## Browse workspace files
+
+Inspect a saved workspace and choose **Browse files**. Navigate one directory at
+a time with **Root**, **Up** or a file/directory path and **Go** or **Enter**.
+Relative, `./` and absolute paths within the saved root are accepted. **Refresh folder**
+reloads its contents; **Reload file** observes external edits. This works without
+Host control and never starts a provider or writes files.
+
+Explicit Markdown file links and structured tool/change paths open the same
+read-only view over the retained conversation. **Back to conversation** restores
+the composer and draft. Markdown `#L2`, `#L2-L3` and `:2` anchors start the preview
+at that one-based line; tool line metadata remains display-only. Unsupported
+schemes and outside-root paths show errors. Inline code is not guessed as a path.
+
+UTF-8 text files up to 256 KiB have a selectable read-only preview. The display
+shows at most 16 KiB from the selected source line with a notice; **Copy full text** preserves all
+loaded text, including line endings and whitespace. Binary, empty and oversized
+files have explicit messages. Listings are limited to 500 entries; symlinks and
+special files are displayed but not opened. Parent traversal and replaced saved
+directories are refused. At most two filesystem workers run per process; calls
+return an error after five seconds, while blocked workers retain their slots.
+
+```sh
+fleetpane-host workspace /absolute/hosts.creations files WORKSPACE_UUID
+fleetpane-host workspace /absolute/hosts.creations files WORKSPACE_UUID src
+fleetpane-host workspace /absolute/hosts.creations read WORKSPACE_UUID src/main.rs
+fleetpane-host workspace /absolute/hosts.creations open WORKSPACE_UUID ./src/main.rs
+```
+
+Editing, recursive trees, watching/search, media preview and large-file streaming
+remain open. See [the decision](docs/adr/0026-read-only-workspace-files.md)
+and [engine verification](docs/verification/2026-10-20-workspace-files.md), plus
+[conversation navigation acceptance](docs/verification/2026-10-21-file-navigation.md).
+
+## Pin frequently used workspaces
+
+Choose **Pin** on a saved workspace to keep it in the separate **Pinned** group,
+even when viewing another catalog page. Up to 32 pins survive window replacement;
+the newest pin appears first. **Unpin** preserves the saved workspace, drafts and
+running sessions. Pins belong to the local controller store and require no Host
+control or provider connection. Same-path entries on different Hosts are distinct.
+
+**Use workspace** selects the saved Host and prepares its directory for a new
+session, after checking directory identity. It does not create a session or take
+control. Use **Newest** to reload preference changes from another window.
+
+```sh
+fleetpane-host workspace /absolute/hosts.creations pins
+fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID on
+fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID off
+```
+
+This adds local quick access; workspace tabs, drag ordering, keyboard pin shortcuts
+and selection restoration remain open. See [the decision](docs/adr/0025-local-workspace-pins.md)
+and [verification](docs/verification/2026-10-20-workspace-pins.md).
+
+## Follow up during a Codex turn
+
+Type in the composer while Codex runs and choose **Send to active turn**.
+The message is bound to that turn; if the turn ends or changes, the provider
+rejects it and the text is retained. This action uses the current turn's model
+and does not approve pending tools or start another turn.
+
+```sh
+fleetpane-host session /absolute/control.sock --take-control steer SESSION TURN TEXT
+fleetpane-host draft /absolute/hosts.creations steer KEY_JSON REVISION TURN --take-control
+```
+
+The saved-draft command persists the exact request before dispatch, like normal
+Send. Pending or uncertain outcomes require a receipt check and are never
+resent automatically. DeepSeek ACP currently has no live follow-up operation;
+the UI explains this and offers Stop before a new ordinary send. Input queues
+remain unimplemented. See [the decision](docs/adr/0024-active-turn-follow-ups.md)
+and [verification](docs/verification/2026-10-20-active-turn-follow-ups.md).
 
 ## Agent task lists
 
@@ -488,6 +822,7 @@ Output contains session metadata; use synthetic examples when sharing output.
 cargo fmt --all --check
 cargo test --workspace --locked
 cargo clippy --workspace --all-targets --locked -- -D warnings
+python3 scripts/stop-progress-smoke.py
 cargo build -p fleetpane-host --locked
 python3 scripts/runtime-smoke.py                 # Unix; synthetic provider
 python3 scripts/runtime-smoke.py --codex         # optional; installed Codex required
@@ -499,6 +834,21 @@ python3 scripts/history-smoke.py                 # Unix; large synthetic history
 python3 scripts/query-smoke.py                   # Unix; repeated reads, fencing and send deduplication
 python3 scripts/acp-smoke.py                     # Unix; ACP lifecycle, config, permissions, fencing and resume
 python3 scripts/acp-history-smoke.py             # Unix; byte-bounded observed history, scoped stable cursors
+python3 scripts/acp-archive-smoke.py             # Unix; crash recovery and archive storage faults
+python3 scripts/acp-stop-smoke.py                # Unix; admission, quiet prompts and explicit stop reasons
+python3 scripts/acp-order-smoke.py               # Unix; text/tool ordering, message identity and exact restart history
+python3 scripts/acp-info-smoke.py                 # Unix; idle/live session info, archive and commit-failure fencing
+python3 scripts/acp-tools-smoke.py                # Unix; minimal tool defaults, exact patches and archived snapshots
+python3 scripts/resources-smoke.py                # Unix; supplied ACP/MCP resources, exact reload and ACP archive restart
+python3 scripts/acp-cancel-smoke.py               # Unix; pending/late permissions, cancellation settlement and isolation
+python3 scripts/acp-review-smoke.py               # Unix; exact request details, choices, controller/session isolation
+python3 scripts/recent-directories-smoke.py       # Unix; device-local exact MRU, Host isolation, corruption/forget
+python3 scripts/appearance-smoke.py              # Unix; device preference persistence, migration, conflicts and failures
+python3 scripts/paseo-receipts-smoke.py          # Unix; process death, durable reports and explicit retry
+python3 scripts/paseo-scratch-smoke.py           # Unix; paused/killed copies and explicit scratch collection
+python3 scripts/paseo-fork-smoke.py              # Unix; saved context fork, stale binding and interrupted-operation recovery
+python3 scripts/paseo-fork-smoke.py --real       # optional; real Codex app-server, local rejecting model, no account
+python3 scripts/paseo-fork-smoke.py --opencodex  # optional; one real model turn through existing loopback proxy
 python3 scripts/concurrency-smoke.py             # Unix; 20 synthetic ACP streams, reads, cancel and handoff
 python3 scripts/multihost-smoke.py               # Unix; colliding IDs, permissions, read-only probes and one-Host loss
 python3 scripts/journal-smoke.py                 # Unix; durable receipts, crash unknowns and exact deduplication
@@ -506,8 +856,10 @@ python3 scripts/drain-smoke.py                   # Unix; old/new Hosts, durable 
 python3 scripts/routing-smoke.py                 # Unix; explicit groups, ready recommendations, no cross-Host replay
 python3 scripts/creations-smoke.py               # Unix; durable binding, killed controller, Host restart, no second dispatch
 python3 scripts/workspaces-smoke.py              # Unix; real Git identity/status, linked worktrees, bounded reads, Codex/ACP cwd
+python3 scripts/file-navigation-smoke.py          # Unix; offline file/directory paths, exact bytes and root confinement
 python3 scripts/diffs-smoke.py                   # Unix; real staged/unstaged/untracked Git diffs, bounds, deadline and read-only proof
 python3 scripts/worktrees-smoke.py               # Unix; pinned worktree creation, concurrent attempt, crash/residual/deadline checks (~2 minutes)
+python3 scripts/existing-worktrees-smoke.py       # Unix; local branches, tip/occupancy checks, shared guard and late-change residual
 python3 scripts/codex-session-smoke.py           # optional; real Codex, local rejecting HTTP fixture
 python3 scripts/codex-questions-smoke.py         # optional; real Codex question, local SSE model fixture
 python3 scripts/codex-history-smoke.py           # optional; real Codex nested tool history, local SSE model fixture
@@ -544,3 +896,77 @@ and [parity assessment](https://github.com/storytold/photocraft/blob/8d2e615ab93
 describe these practices.
 
 Apache-2.0. Fleetpane is not affiliated with Paseo or ArtCraft.
+
+### Host-owned terminals (Linux prototype)
+
+`fleetpane-host terminal STORE WORKSPACE_UUID create LABEL` starts an owned POSIX
+shell in a saved workspace. Add `--take-control` before the verb when a controller
+already owns the Host. `list` and `output ID AFTER_BYTE` only read; `input ID
+EXPECTED_INPUT TEXT` writes exact bytes without Enter. `key ID EXPECTED_INPUT
+enter|interrupt|eof|tab|escape`, `resize ID ROWS COLS`, `rename ID LABEL` and
+`close ID` use the same typed engine and durable operation receipts. See `--help`
+and the [acceptance limits](docs/verification/2026-10-20-host-terminals.md).
+Provider loss leaves terminal operations and their pending receipts available; storage/Host faults fence all mutations. See [fault isolation evidence](docs/verification/2026-10-21-terminal-fault-domains.md).
+In the desktop, open **Workspaces**, select a saved directory, then **Terminals**.
+The panel lists existing shells without claiming control. **Take control** transfers
+control of the entire Host; then create, rename, resize or close a shell. Closing
+the panel/window keeps the Host and shell running. Its ANSI screen handles
+incremental UTF-8, styles, cursor movement, alternate screens and bounded
+scrollback; **Copy screen** copies the displayed text without escape sequences.
+
+The composer sends exact UTF-8 with **Send text**, or appends CR with **Send + Enter**.
+Separate Enter, Ctrl-C, Ctrl-D and Tab buttons send control bytes. Unsent drafts
+stay with each terminal during panel selection. Background reads do not disable
+input, and an explicit operation waits behind an in-flight read once. Uncertain
+receipts expose **Check operation** without resending a command.
+
+**Type in terminal** enables direct keyboard input for the focused screen. Arrows,
+control/function keys and Tab use terminal encodings; **Ctrl+Shift+V** preserves
+text with the observed bracketed-paste mode, and **Ctrl+Shift+C** copies the screen.
+A bounded 16 KiB queue sends ordered 4 KiB packets through the same fenced Host
+commands. Errors pause queued input for explicit inspection; uncertain packets
+are never automatically resent. Normal window close waits for accepted input.
+See [keyboard acceptance and limits](docs/verification/2026-10-21-terminal-keyboard.md).
+
+Native text selection, IME acceptance, terminal replies/mouse reporting, automatic geometry and Host
+update recovery remain open. One selected screen is retained (up to 60×200 cells
+and 1,000 scrollback lines); dropped Host output clears incomplete parser state
+and remains visibly flagged. Resize does not reflow prior lines. Terminal drafts
+and the panel's pending-operation selection are transient; durable operation
+receipts remain discoverable through the CLI. See
+[native acceptance and limits](docs/verification/2026-10-21-native-terminals.md).
+
+### Restore existing Codex archives
+
+Choose **Archived** beside the session filters to read provider-archived history.
+**Restore to sessions** restores the selected original ID; it preserves the loaded
+history/draft and does not start a turn, resume a context or restore descendants.
+For an unloaded context, use **Resume context** before sending. Failures keep the
+archive/draft visible. ACP provider archive listing is unsupported.
+
+The shared CLI exposes `session SOCKET [--take-control] list --archived` (also
+accepting title/cwd/cursor flags) and `session SOCKET [--take-control] restore THREAD`.
+Restoration is a fenced mutation and unavailable during drain. Safe archive
+mutation/tree impact is still separate work. See
+[verification and limits](docs/verification/2026-10-21-archive-restoration.md).
+
+### Inspect a Codex session tree
+
+Choose **Session tree** in an open conversation, or run:
+
+```bash
+cargo run -p fleetpane-host -- session /path/to/control.sock tree THREAD_ID
+python3 scripts/session-tree-smoke.py
+```
+
+Inspection uses the existing controller lease without taking control. It reads
+normal/archived metadata and loaded contexts, includes spawned descendants and
+shows pending requests, observed activity and incomplete ancestry. Forks remain
+independent. Use Refresh tree, Copy tree JSON or Copy ID; switching conversation
+closes the inspector. Failures retain explicitly stale observations.
+
+Reads are bounded to 5,000 nodes, 8 MiB metadata, depth 64 and 30 seconds. The
+result is non-atomic and does not enumerate background resources or authorize
+archive/stop. ACP does not advertise this capability. See
+[verification](docs/verification/2026-10-21-session-tree.md) and
+[ADR 0056](docs/adr/0056-observe-session-ancestry.md).

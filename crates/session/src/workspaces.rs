@@ -267,7 +267,10 @@ fn parse_status(
     })
 }
 
-async fn inspect(path: PathBuf, kind: Kind) -> Result<(Directory, Directory, Option<Git>), Error> {
+pub(crate) async fn inspect(
+    path: PathBuf,
+    kind: Kind,
+) -> Result<(Directory, Directory, Option<Git>), Error> {
     let current = directory(path).await?;
     if kind == Kind::Folder {
         return Ok((current.clone(), current, None));
@@ -333,6 +336,26 @@ impl Workspace {
 }
 
 impl Store {
+    /// Exact saved root lookup for a session file link. Reuse its identity fence.
+    pub async fn workspace_at(
+        &self,
+        socket: &Path,
+        cwd: &Path,
+    ) -> Result<Option<Workspace>, Error> {
+        let socket = socket
+            .to_str()
+            .ok_or_else(|| invalid("non-UTF-8 Host endpoint"))?
+            .to_owned();
+        let cwd = cwd
+            .to_str()
+            .ok_or_else(|| invalid("non-UTF-8 workspace path"))?
+            .to_owned();
+        self.job(move |database| {
+            database.query_row("SELECT position,id,project,data FROM workspaces WHERE endpoint=?1 AND cwd=?2 ORDER BY position DESC LIMIT 1", params![socket,cwd], workspace_row)
+                .optional()?.map(decode).transpose()
+        }).await
+    }
+
     pub async fn register_workspace(
         &self,
         endpoint: Endpoint,
@@ -350,19 +373,11 @@ impl Store {
         };
         self.job(move |database| {
             let transaction = database.transaction_with_behavior(TransactionBehavior::Immediate)?;
-            let endpoint = registration.endpoint.socket.to_str().ok_or("non-UTF-8 Host endpoint")?;
-            let identity = serde_json::to_string(&registration.directory)?;
-            let project_key = serde_json::to_string(&(registration.kind, &registration.project))?;
-            let kind = serde_json::to_string(&kind)?;
-            let cwd = registration.directory.path.to_str().ok_or("non-UTF-8 directory")?;
-            transaction.execute("INSERT INTO projects(id,endpoint,identity) VALUES(?1,?2,?3) ON CONFLICT(endpoint,identity) DO NOTHING", params![Uuid::new_v4().to_string(), endpoint, project_key])?;
-            let project: String = transaction.query_row("SELECT id FROM projects WHERE endpoint=?1 AND identity=?2", params![endpoint,project_key], |row| row.get(0))?;
-            transaction.execute("INSERT INTO workspaces(id,project,endpoint,cwd,kind,identity,data) VALUES(?1,?2,?3,?4,?5,?6,?7) ON CONFLICT(endpoint,cwd,kind,identity,project) DO UPDATE SET data=excluded.data", params![Uuid::new_v4().to_string(),project,endpoint,cwd,kind,identity,serde_json::to_string(&registration)?])?;
-            let row = transaction.query_row("SELECT position,id,project,data FROM workspaces WHERE endpoint=?1 AND cwd=?2 AND kind=?3 AND identity=?4 AND project=?5", params![endpoint,cwd,kind,identity,project], workspace_row)?;
-            let workspace = decode(row)?;
+            let workspace = save_registration(&transaction, &registration)?;
             transaction.commit()?;
             Ok(workspace)
-        }).await
+        })
+        .await
     }
 
     pub async fn workspace(&self, id: Uuid) -> Result<Workspace, Error> {
@@ -390,11 +405,42 @@ impl Store {
     }
 }
 
-fn workspace_row(row: &rusqlite::Row<'_>) -> rusqlite::Result<(i64, String, String, String)> {
+pub(crate) fn save_registration(
+    database: &rusqlite::Connection,
+    registration: &Registration,
+) -> Result<Workspace, StorageError> {
+    let endpoint = registration
+        .endpoint
+        .socket
+        .to_str()
+        .ok_or("non-UTF-8 Host endpoint")?;
+    let identity = serde_json::to_string(&registration.directory)?;
+    let project_key = serde_json::to_string(&(registration.kind, &registration.project))?;
+    let kind = serde_json::to_string(&registration.kind)?;
+    let cwd = registration
+        .directory
+        .path
+        .to_str()
+        .ok_or("non-UTF-8 directory")?;
+    database.execute("INSERT INTO projects(id,endpoint,identity) VALUES(?1,?2,?3) ON CONFLICT(endpoint,identity) DO NOTHING", params![Uuid::new_v4().to_string(), endpoint, project_key])?;
+    let project: String = database.query_row(
+        "SELECT id FROM projects WHERE endpoint=?1 AND identity=?2",
+        params![endpoint, project_key],
+        |row| row.get(0),
+    )?;
+    database.execute("INSERT INTO workspaces(id,project,endpoint,cwd,kind,identity,data) VALUES(?1,?2,?3,?4,?5,?6,?7) ON CONFLICT(endpoint,cwd,kind,identity,project) DO UPDATE SET data=excluded.data", params![Uuid::new_v4().to_string(),project,endpoint,cwd,kind,identity,serde_json::to_string(&registration)?])?;
+    let row = database.query_row("SELECT position,id,project,data FROM workspaces WHERE endpoint=?1 AND cwd=?2 AND kind=?3 AND identity=?4 AND project=?5", params![endpoint,cwd,kind,identity,project], workspace_row)?;
+    let workspace = decode(row)?;
+    Ok(workspace)
+}
+
+pub(crate) fn workspace_row(
+    row: &rusqlite::Row<'_>,
+) -> rusqlite::Result<(i64, String, String, String)> {
     Ok((row.get(0)?, row.get(1)?, row.get(2)?, row.get(3)?))
 }
 
-fn decode(row: (i64, String, String, String)) -> Result<Workspace, StorageError> {
+pub(crate) fn decode(row: (i64, String, String, String)) -> Result<Workspace, StorageError> {
     Ok(Workspace {
         position: row.0.try_into()?,
         id: row.1.parse()?,

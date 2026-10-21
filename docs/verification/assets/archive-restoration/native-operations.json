@@ -1,0 +1,106 @@
+[
+  {
+    "id": "56394cf2-9170-419b-b666-3900addcf665",
+    "method": "thread/unarchive",
+    "params": {
+      "threadId": "archived-fail"
+    },
+    "outcome": {
+      "state": "finished",
+      "response": {
+        "error": {
+          "code": -32600,
+          "message": "Synthetic restore refusal"
+        },
+        "id": "56394cf2-9170-419b-b666-3900addcf665"
+      }
+    },
+    "completed_sequence": 10
+  },
+  {
+    "id": "d4284bc5-2c43-4cb1-840f-0069236f27db",
+    "method": "thread/unarchive",
+    "params": {
+      "threadId": "archived-ok"
+    },
+    "outcome": {
+      "state": "finished",
+      "response": {
+        "id": "d4284bc5-2c43-4cb1-840f-0069236f27db",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-replay-169-20261021/native/workspace",
+            "fixtureArchived": false,
+            "historyMode": "paginated",
+            "id": "archived-ok",
+            "name": "Archived 中文 session",
+            "preview": "Archived 中文 session",
+            "status": {
+              "type": "notLoaded"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    "completed_sequence": 14
+  },
+  {
+    "id": "4af88d17-a748-4dd9-9d88-bf2a90a3357e",
+    "method": "thread/resume",
+    "params": {
+      "excludeTurns": true,
+      "threadId": "archived-ok"
+    },
+    "outcome": {
+      "state": "finished",
+      "response": {
+        "id": "4af88d17-a748-4dd9-9d88-bf2a90a3357e",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-replay-169-20261021/native/workspace",
+            "fixtureArchived": false,
+            "historyMode": "paginated",
+            "id": "archived-ok",
+            "name": "Archived 中文 session",
+            "preview": "Archived 中文 session",
+            "status": {
+              "type": "idle"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    "completed_sequence": 16
+  },
+  {
+    "id": "3a48c29b-8008-435c-8360-bdf1efa07bdb",
+    "method": "turn/start",
+    "params": {
+      "input": [
+        {
+          "text": "恢复后的下一条消息\n  preserve draft",
+          "type": "text"
+        }
+      ],
+      "threadId": "archived-ok"
+    },
+    "outcome": {
+      "state": "finished",
+      "response": {
+        "id": "3a48c29b-8008-435c-8360-bdf1efa07bdb",
+        "result": {
+          "turn": {
+            "error": null,
+            "fixtureOptions": {},
+            "id": "archived-ok-turn-2",
+            "items": [],
+            "status": "inProgress"
+          }
+        }
+      }
+    },
+    "completed_sequence": 22
+  }
+]

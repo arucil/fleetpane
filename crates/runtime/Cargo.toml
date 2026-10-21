@@ -9,10 +9,15 @@ serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
 uuid = { workspace = true, features = ["serde"] }
+image = { version = "=0.25.10", default-features = false, features = ["png", "jpeg", "webp"] }
+sha2 = "0.10.9"
 
 [target.'cfg(unix)'.dependencies]
+base64 = "0.22.1"
 rusqlite = { version = "0.40.2", features = ["bundled"] }
 tokio.workspace = true
+pty-process = { version = "0.5.3", features = ["async"] }
+rustix = { version = "1.1.5", features = ["process", "termios", "fs"] }
 
 [lints]
 workspace = true

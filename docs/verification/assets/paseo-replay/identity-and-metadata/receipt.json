@@ -1,0 +1,181 @@
+{
+  "captured_sources": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+    }
+  ],
+  "ordering": "git rev-list --reverse --topo-order TARGETS; parent before child; ordinals valid only for these captured tips",
+  "review_batch": {
+    "first_ordinal": 115,
+    "last_ordinal": 124,
+    "last_revision": "4323d7d193623d4335011eabd71e3b92ca2851f4",
+    "next_revision": "dcfdccf07f1bea64f8cca00ad405e3d8e93159a4",
+    "next_ordinal": 125
+  },
+  "prior_entries_1_to_114_unchanged_sha256": "6280f6cf195b6eec1ed855a7edca463ecc26fba83213b6d40ecb20e349127822",
+  "selected_entries": [
+    {
+      "revision": "0cc9666df0721aae724d2ce28776434b79c252cd",
+      "date": "2025-10-26T07:41:27+01:00",
+      "ordinal": 115,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Handles current_mode_update by changing runtime.currentModeId; resets saved agent fixture data outside the selected source path.",
+      "fleetpane_action": "Existing ACP v1 mode metadata handles active/idle updates and late-ACK ordering; no copied saved agents or provider-private identity alias."
+    },
+    {
+      "revision": "a81a8a86b81a8ca22a9ac09f334c4b5b13453e21",
+      "date": "2025-10-26T07:44:33+01:00",
+      "ordinal": 116,
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Changes printed final mode to an acceptEdits assertion in the live plan/file test.",
+      "fleetpane_action": "Retain deterministic mode transition, permission and UI evidence; a historical live test assertion is not Fleetpane runtime acceptance."
+    },
+    {
+      "revision": "9f22acfead06078fe2a71660f018057107decdf4",
+      "date": "2025-10-26T07:53:51+01:00",
+      "ordinal": 117,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Persists runtime/session metadata before kill and stops deleting the persistent record, enabling later resume attempts.",
+      "fleetpane_action": "Retain observed archive, original session identity, durable receipts and explicit context resume; stopping is separate from deleting saved history."
+    },
+    {
+      "revision": "604e3594372a66f303bd273630cb494b00727f82",
+      "date": "2025-10-26T07:59:35+01:00",
+      "ordinal": 118,
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Adds a manager-replacement prompt test, but clears both persisted ACP and provider options session IDs during kill, causing a fresh session rather than proving the old context resumed.",
+      "fleetpane_action": "Do not clear session identity to make a continuation test pass; keep archived observations and uncertain work without automatic replay."
+    },
+    {
+      "revision": "1d8e86985b75b7e154a0b04d982767ee2d4e64bf",
+      "date": "2025-10-26T08:29:52+01:00",
+      "ordinal": 119,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Centralizes agent serialization/update persistence, preserves session IDs by state and updates Claude private IDs in managed options before persisting. Added session ID checks are console output, not equality assertions; removes separate persistence title update.",
+      "fleetpane_action": "Use protocol ACP IDs and Host-owned observed archive, not Claude-private _meta aliases; existing restart/resume evidence keeps identity and saved observations distinct from provider context."
+    },
+    {
+      "revision": "b1faab72ceaf815c3c29276f5ea1987ed709a970",
+      "date": "2025-10-26T08:57:57+01:00",
+      "ordinal": 120,
+      "category": "dependency",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Selected package diff upgrades Claude ACP 0.8.3 to 0.8.4 only; test becomes it.only and prints restored history/IDs without asserting context identity. Manager changes are formatting and a force-kill log. The subject does not establish Express optional-dependency behavior.",
+      "fleetpane_action": "No adapter payload compatibility claim from a version string. Keep all tests enabled and compare actual original IDs/context; do not adopt process.killed as proof of exit or a fixed force-kill timer for Host retirement."
+    },
+    {
+      "revision": "7d1ef63c8f9d1dce0efeca368dc510c7010d9a83",
+      "date": "2025-10-26T09:07:41+01:00",
+      "ordinal": 121,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Replaces fetch/blob/byte-loop/btoa conversion with synchronous Expo File.base64Sync and file.type or JPEG fallback; per-image conversion errors are still logged and skipped.",
+      "fleetpane_action": "Existing local asset import remains off the UI thread, checks actual image bytes, preserves originals and fails the selection without silently dropping images. No Expo library/runtime audit."
+    },
+    {
+      "revision": "fdaf403f13cf23fa814cfc5e8ad05067d9cf21b5",
+      "date": "2025-10-26T09:51:18+01:00",
+      "ordinal": 122,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Upgrades declared Claude ACP to 0.8.5, adds deleteAgent separately from kill and tracks managers for afterEach deletion; cleanup errors are logged and it.only remains.",
+      "fleetpane_action": "Keep stopping, metadata retention and deletion separate. Fleetpane archive deletion/retention UI remains open; no copied cleanup fallback, new Claude acceptance or implicit Host/provider destruction."
+    },
+    {
+      "revision": "7fee9d4dc42ed41a1a2f9b0934cfff0772e9678d",
+      "date": "2025-10-26T09:52:43+01:00",
+      "ordinal": 123,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Adds console error logging for the already failed refusal stop-reason branch.",
+      "fleetpane_action": "Existing typed ACP refusal and explicit stop reasons remain observable in history/UI; logs alone are not task-success evidence."
+    },
+    {
+      "revision": "4323d7d193623d4335011eabd71e3b92ca2851f4",
+      "date": "2025-10-26T10:18:51+01:00",
+      "ordinal": 124,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Emits an additional agent_status after current_mode_update so selectors change before turn completion; fetches full agent info and catches/logs errors.",
+      "fleetpane_action": "Existing session-scoped mode metadata projection refreshes during active/idle turns without rebuilding the timeline for metadata-only events. Retain verified permission/mode/draft continuity."
+    }
+  ],
+  "artifacts": {
+    "115-selected.diff": "ab9d94dc360cb0899e90147b72ab7bbb170650b46026223e07b08a03aad2108b",
+    "116-selected.diff": "cf001130aa2ba3fd0b98d876d38c2e6d17c2c9326cce2bbbd54f5a14fcfdb604",
+    "117-selected.diff": "0ec0091152cc360f58bb76945bb7c31fa40fea54e5fe79793aa36e24b44551fe",
+    "118-selected.diff": "948b5984724061c533fd03f8c44555a4ceccfdf8ddd0b3a77c8a1953cc1e5034",
+    "119-selected.diff": "aa8e3cf8efc7da7fbd08bd189dc1d5165da541ff34a3f97795d98757115f4b88",
+    "120-selected.diff": "df86e618d5345328cc8d2b6230efe4fbe3d0f1d1b3aaafbff1e31dfd1d9aa0fe",
+    "121-selected.diff": "40158fb6e73bbe01edd7312102524c2ce3b0e908e65637be676cd585e568d2cf",
+    "122-selected.diff": "f3548ea134e8154859b3095fbb9b815f5d04f420631a9bbcdbf4bec1e2017e79",
+    "123-selected.diff": "05947b4c7aec56eebe004bd8879522201d78654a45af6481a633c2b497195a6b",
+    "124-selected.diff": "c8ef2c3a42358f6ccc24048ed26c89b9a0599edd1853a37d848e90f07a6d3dca"
+  },
+  "limits": [
+    "Source/config review only; historical application and live models not run",
+    "Saved agents excluded, no personal fixture data copied",
+    "Dependency versions are not payload audits",
+    "Existing archive/mode/image evidence remains tied to its own source and binary receipts",
+    "Archive deletion, remote media, complete Host retirement and deferred Git Diff remain open"
+  ]
+}

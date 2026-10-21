@@ -1,0 +1,13 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 8.06s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-0f3d3cbf1f13dad6)
+
+running 5 tests
+test paseo_import::scratch::tests::exclusive_collection_fences_new_writers_and_rejects_invalid_lock_or_directory ... ok
+test paseo_import::scratch::tests::shared_writers_refuse_collection_until_all_owners_exit_and_preserve_complete_hardlinks ... ok
+test paseo_import::scratch::tests::cancelled_awaiter_cannot_release_a_blocking_writer_guard ... ok
+test paseo_import::scratch::tests::legacy_files_and_export_targets_are_reported_or_retained_without_reading_content ... ok
+test paseo_import::scratch::tests::preflight_refuses_unknown_names_symlinks_public_files_and_nested_paths_without_partial_deletion ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 147 filtered out; finished in 0.01s
+

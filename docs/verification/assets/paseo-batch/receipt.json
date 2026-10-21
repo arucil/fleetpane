@@ -1,0 +1,93 @@
+{
+  "base_commit": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "uncommitted working tree; all earlier changes retained",
+  "source_sha256": {
+    "crates/session/src/paseo_import.rs": "8401427c87f67d9aee839b895586983561c4b8835b230aecc1295897a0d9ba24",
+    "crates/session/src/paseo_import/batch.rs": "678d568525a9ec64fabfe6be22468e36ec30ea5e256e1ddc5310838e785682c2",
+    "crates/session/src/paseo_import/tests.rs": "0b27e6341f23e6bc8c16b33ee369089742471b36e5f3149a523394905ddfcf76",
+    "apps/host/src/main.rs": "70ea752dd1c8dbc13125117335ef876af1e02a6f8e1e16ab721c217f81459e4c",
+    "apps/desktop/src/paseo_import_view.rs": "022b6cb21a7923f214b0146d6b68fe362cd92ecb56482e28553743b684740d57",
+    "scripts/paseo-batch-smoke.py": "ae56ca25ee21d80a25f0b5b3ff6fca905b5a81cecb0f69b322e6d113ee494250",
+    ".github/workflows/ci.yml": "ec89270b6e920bf507e0bd21cba348dc6a69d1398095ddb08b00908b30fb9a43",
+    "README.md": "a8d856729aa5e97b450b8cb944832844477428234ebeb08b36afa60ddbe6d4b9",
+    "docs/status.md": "22d996c599894141cde16420b3218d758800b4ef785967753fdcc139a50f82fe",
+    "docs/parity.md": "44694255c98eb15fd0eb72cf847187e0802913d02d1fc5e2467c0156903617c3",
+    "docs/prd.md": "e8185efa4bd3fd888ba0aae74a731795aea3641b29b138cfe6dfca6a6f9e3164",
+    "docs/adr/0059-offline-paseo-workspace-history-import.md": "135ed3bf39ee7108d4a8c5fb01ed532a5ef9fb9734e6d657d3552148ef80eba2",
+    "docs/adr/0060-bulk-paseo-workspace-history-migration.md": "a4e19b31df65bcf71ed0094bcf3415f6786971be1aa1e86432f2022695f09fa0",
+    "docs/verification/2026-10-21-paseo-batch.md": "c63aee34129c3b17f0db8816a0602579049bf001d9ad7afa1721534fc5d63d58"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "5e147092c7fc21f2600c70f25445c3e8fdb0d0ddaed69191fd609d29232987df",
+    "apps/desktop/target/debug/fleetpane-desktop": "39af7623790a02de27c6b229141a1bbcdc54168b28dd868e9c140bd86d297752"
+  },
+  "tests": {
+    "workspace": 201,
+    "session_migration_subset": 14,
+    "desktop": 19,
+    "python": 15
+  },
+  "commands": [
+    "cargo test --workspace --locked",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings",
+    "cargo fmt --all --check",
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml --check",
+    "cargo build -p fleetpane-host --locked",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/paseo-batch-smoke.py",
+    "python3 scripts/paseo-import-smoke.py",
+    "python3 scripts/appearance-smoke.py",
+    "python3 scripts/recent-directories-smoke.py",
+    "python3 -m unittest discover -s scripts/tests -p '*_test.py'",
+    "git diff --check"
+  ],
+  "synthetic_fixture": "python3 scripts/paseo-batch-smoke.py --fixture /tmp/fp-paseo-batch-native --large",
+  "final_native_pids": [
+    704138,
+    747736
+  ],
+  "native_binary_identity_verified": true,
+  "workspace": "fp-paseo-batch",
+  "native_outcome": "selection, filtering, progress, cooperative stop, repeat, stable identities/snapshots, explicit error details, saved DeepSeek history browsing",
+  "initial_screenshots_precede_progress_task_fix": [
+    "stopping.png",
+    "stopped-report.png",
+    "resume-progress.png",
+    "filter.png"
+  ],
+  "real_source_bulk_migration": false,
+  "host_or_provider_started": false,
+  "ci_commit_or_push_claim": false,
+  "artifact_sha256": {
+    "cli-single.json": "566b1d5f7291a66822e28a9fd639c21f3eac418820232c100a3d0e109a119b62",
+    "final-preview.png": "a094a8650fb84a149c2745efe19a285234036548fdf5e6d7f7c0779ef3fd0dd7",
+    "cancel-final-resume.png": "f182820fb57609f04c01ca7afa65f2dde221a17af377f0ab209e925e3165b9eb",
+    "root-tests.log": "4a951f6ffb402e96bb64f580b8796db1d651e16c2b0c3700459216453308b9cd",
+    "cancel-final-running.png": "f182820fb57609f04c01ca7afa65f2dde221a17af377f0ab209e925e3165b9eb",
+    "final-filter.png": "f804477712a0e03a4dace77c00150d43ca583d17dfd89619e66f820ce0521c3f",
+    "cancel-final-stopped.png": "0ad36cf75665e10e883e7e641b520281951036c5fc804ed68e27a80353751ff5",
+    "cancel-final-completed.png": "54e57979bde4ab5f5953982269802afcecd683beb0decec0715996cbfc716675",
+    "stopped-report.png": "e5055216741c407bf9b858b4068790a28f3b59245f631c6825d7bd5cd0ab852f",
+    "host-build.log": "8752b2aa8b648dc69fc76df9420c1e4d7e9c0b926bc3e0bcfe3d52fbb6529570",
+    "desktop-build.log": "26dfa7e7c297ff16c0e03fb735d1bc3c55b193eb0c8dd2d8ea8cfa03ea311c0a",
+    "recent.json": "7bad9c6749f582ec77aaf4e74f122710953d6abd4505a601c7bdd119d3163b66",
+    "final-result.png": "47607cb1a5d23a5135c15b10c64d57a9532ba92f59b15704cac76b7653640caf",
+    "final-history-2.png": "d73f1b64d4c86f526b934088aaa05ab7a260675b104b4444f7b50785bb80bf15",
+    "desktop-clippy.log": "2609c015bd4652fa29fa0aa31b6c85aeeaff67617e21ccd5e3b28c9adee5992e",
+    "final-report-bottom.png": "2886037f1e416c28136d831b784169642425b32f1b81eb702f6c96c6c91df20e",
+    "final-details.png": "816052701122d53182effb797aa0e45075ec51b5b1ec265a545d6f22e974d07c",
+    "cli-batch.json": "f0b4330d39b5cca07eeaa1d8341155b7accc2aea1733fcae6f12f205aa1e0b79",
+    "filter.png": "5fe454973fea73718bbcd29ef0c62a592fb2fddee6dd317557d198ed3161f3e0",
+    "native-readback.json": "ae842089d5dbcd1526103af8d3d8a6d595e80b5b43176cba5aa3416340fb389f",
+    "python-tests.log": "f61fc5230cafc36ec55088c65e44c12e6e3ee6d59338a30b022f2cfe078f5eb4",
+    "desktop-tests.log": "614fa16f8e242a76a28b604935dd750e95e8399d017e900685e1aa2c596000c6",
+    "appearance.json": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830",
+    "stopping.png": "440a4a63358dc7b4c7cfbcc98ed7bc529250cd351baeeb53824b1f450846985d",
+    "resume-progress.png": "113486b0b4f8542e5785a60928d52351afafa2ce63c824c588dd7fcbeb1c3e65",
+    "root-clippy.log": "622aa91b7725fe08b0ae9f40693ca3d3f12fa8cffdcd900adac21443f319ef3f",
+    "final-cancel-readback.json": "053da88a3843c2cd02e0492a3627d2293eeac781f272e3c67b61ecca0b7cb629",
+    "cleanup.json": "885517dea165bd7cd268d9822d137415d20989ff17ffa24d592bbeca9e1fea5f"
+  }
+}

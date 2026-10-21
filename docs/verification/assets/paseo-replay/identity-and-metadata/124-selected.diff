@@ -1,0 +1,59 @@
+commit 4323d7d193623d4335011eabd71e3b92ca2851f4
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 10:18:51 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 10:18:51 2025 +0100
+
+    fix(session): emit agent_status on mode change for immediate UI update
+    
+    When a user accepts an ExitPlanMode permission, the agent sends a
+    current_mode_update notification. Previously this was only forwarded
+    as an agent_update message, but the frontend relies on agent_status
+    messages to update the mode selector UI.
+    
+    Now we detect current_mode_update notifications and emit an additional
+    agent_status message immediately, ensuring the UI updates without
+    waiting for the agent to complete its turn.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 747939f6d..bcba0fdf8 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -250,6 +250,33 @@ export class Session {
+             },
+           });
+ 
++          // Check if this is a current_mode_update - emit agent_status so UI updates immediately
++          if (notification.notification.update.sessionUpdate === "current_mode_update") {
++            try {
++              const info = this.agentManager!.listAgents().find(
++                (a) => a.id === agentId
++              );
++              if (info) {
++                this.emit({
++                  type: "agent_status",
++                  payload: {
++                    agentId,
++                    status: info.status,
++                    info,
++                  },
++                });
++                console.log(
++                  `[Session ${this.clientId}] Agent ${agentId} mode changed to: ${info.currentModeId}`
++                );
++              }
++            } catch (error) {
++              console.error(
++                `[Session ${this.clientId}] Failed to get agent info for mode update:`,
++                error
++              );
++            }
++          }
++
+           // Trigger title generation after first meaningful update
+           this.maybeTriggerTitleGeneration(agentId);
+         }

@@ -1,0 +1,524 @@
+commit ff02b500e0058d08b6a2600f97834f7a0733de0e
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 15:52:47 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 15:52:47 2025 +0200
+
+    feat: add voice detection gating for TTS playback and optimize agent screen rendering
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index 1cd3a6347..c45e39b84 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -1,5 +1,5 @@
+-import { useEffect, useMemo } from "react";
+-import { View, Text } from "react-native";
++import { useEffect, useMemo, useState } from "react";
++import { View, Text, ActivityIndicator } from "react-native";
+ import { useLocalSearchParams } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
+@@ -18,6 +18,7 @@ export default function AgentScreen() {
+   const { id } = useLocalSearchParams<{ id: string }>();
+   const { agents, agentStreamState, pendingPermissions, respondToPermission } = useSession();
+   const { registerFooterControls, unregisterFooterControls } = useFooterControls();
++  const [isContentReady, setIsContentReady] = useState(false);
+ 
+   // Keyboard animation
+   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+@@ -42,8 +43,39 @@ export default function AgentScreen() {
+     return <AgentInputArea agentId={id} />;
+   }, [id]);
+ 
++  // Defer heavy rendering to next frame for faster initial paint
+   useEffect(() => {
+-    if (!agentControls || !agent) {
++    let isMounted = true;
++    let frameId: number | null = null;
++    let timeoutId: ReturnType<typeof setTimeout> | null = null;
++
++    const markReady = () => {
++      if (isMounted) {
++        setIsContentReady(true);
++      }
++    };
++
++    if (typeof requestAnimationFrame === "function") {
++      frameId = requestAnimationFrame(markReady);
++    } else {
++      timeoutId = setTimeout(markReady, 0);
++    }
++
++    return () => {
++      isMounted = false;
++
++      if (frameId !== null && typeof cancelAnimationFrame === "function") {
++        cancelAnimationFrame(frameId);
++      }
++
++      if (timeoutId !== null) {
++        clearTimeout(timeoutId);
++      }
++    };
++  }, []);
++
++  useEffect(() => {
++    if (!agentControls || !agent || !isContentReady) {
+       unregisterFooterControls();
+       return;
+     }
+@@ -53,7 +85,7 @@ export default function AgentScreen() {
+     return () => {
+       unregisterFooterControls();
+     };
+-  }, [agentControls, agent, registerFooterControls, unregisterFooterControls]);
++  }, [agentControls, agent, isContentReady, registerFooterControls, unregisterFooterControls]);
+ 
+   if (!agent) {
+     return (
+@@ -73,20 +105,28 @@ export default function AgentScreen() {
+ 
+       {/* Content Area with Keyboard Animation */}
+       <ReanimatedAnimated.View style={[styles.content, animatedKeyboardStyle]}>
+-        <AgentStreamView
+-          agentId={id!}
+-          agent={agent}
+-          streamItems={streamItems}
+-          pendingPermissions={agentPermissions}
+-          onPermissionResponse={(requestId, optionId) =>
+-            respondToPermission(requestId, id!, agent.sessionId || "", [optionId])
+-          }
+-        />
+-
+-        {/* Footer area - status bar pinned within screen */}
+-        <View style={styles.footerContainer}>
+-          <AgentStatusBar agentId={id!} />
+-        </View>
++        {isContentReady ? (
++          <>
++            <AgentStreamView
++              agentId={id!}
++              agent={agent}
++              streamItems={streamItems}
++              pendingPermissions={agentPermissions}
++              onPermissionResponse={(requestId, optionId) =>
++                respondToPermission(requestId, id!, agent.sessionId || "", [optionId])
++              }
++            />
++
++            {/* Footer area - status bar pinned within screen */}
++            <View style={styles.footerContainer}>
++              <AgentStatusBar agentId={id!} />
++            </View>
++          </>
++        ) : (
++          <View style={styles.loadingContainer}>
++            <ActivityIndicator size="large" color={theme.colors.primary} />
++          </View>
++        )}
+       </ReanimatedAnimated.View>
+     </View>
+   );
+@@ -103,6 +143,11 @@ const styles = StyleSheet.create((theme) => ({
+   footerContainer: {
+     backgroundColor: theme.colors.background,
+   },
++  loadingContainer: {
++    flex: 1,
++    alignItems: "center",
++    justifyContent: "center",
++  },
+   errorContainer: {
+     flex: 1,
+     alignItems: "center",
+diff --git a/packages/app/src/components/agent-list.tsx b/packages/app/src/components/agent-list.tsx
+index 5eaaef888..ff95dd669 100644
+--- a/packages/app/src/components/agent-list.tsx
++++ b/packages/app/src/components/agent-list.tsx
+@@ -63,7 +63,10 @@ export function AgentList({ agents }: AgentListProps) {
+         return (
+           <Pressable
+             key={agent.id}
+-            style={styles.agentItem}
++            style={({ pressed }) => [
++              styles.agentItem,
++              pressed && styles.agentItemPressed,
++            ]}
+             onPress={() => handleAgentPress(agent.id)}
+           >
+             <View style={styles.agentContent}>
+@@ -112,6 +115,10 @@ const styles = StyleSheet.create((theme) => ({
+     marginBottom: theme.spacing[2],
+     backgroundColor: theme.colors.muted,
+   },
++  agentItemPressed: {
++    opacity: 0.7,
++    backgroundColor: theme.colors.accent,
++  },
+   agentContent: {
+     flex: 1,
+   },
+diff --git a/packages/app/src/components/message.tsx b/packages/app/src/components/message.tsx
+index dee45a5a0..24f63f74f 100644
+--- a/packages/app/src/components/message.tsx
++++ b/packages/app/src/components/message.tsx
+@@ -1,5 +1,5 @@
+ import { View, Text, Pressable, Animated } from "react-native";
+-import { useState, useEffect, useRef } from "react";
++import { useState, useEffect, useRef, memo } from "react";
+ import Markdown from "react-native-markdown-display";
+ import {
+   Circle,
+@@ -48,7 +48,7 @@ const userMessageStylesheet = StyleSheet.create((theme) => ({
+   },
+ }));
+ 
+-export function UserMessage({ message, timestamp }: UserMessageProps) {
++export const UserMessage = memo(function UserMessage({ message, timestamp }: UserMessageProps) {
+   return (
+     <View style={userMessageStylesheet.container}>
+       <View style={userMessageStylesheet.bubble}>
+@@ -56,7 +56,7 @@ export function UserMessage({ message, timestamp }: UserMessageProps) {
+       </View>
+     </View>
+   );
+-}
++});
+ 
+ interface AssistantMessageProps {
+   message: string;
+@@ -133,7 +133,7 @@ const assistantMessageStylesheet = StyleSheet.create((theme) => ({
+   },
+ }));
+ 
+-export function AssistantMessage({
++export const AssistantMessage = memo(function AssistantMessage({
+   message,
+   timestamp,
+   isStreaming = false,
+@@ -191,7 +191,7 @@ export function AssistantMessage({
+       )}
+     </View>
+   );
+-}
++});
+ 
+ interface ActivityLogProps {
+   type: "system" | "info" | "success" | "error" | "artifact";
+@@ -274,7 +274,7 @@ const activityLogStylesheet = StyleSheet.create((theme) => ({
+   },
+ }));
+ 
+-export function ActivityLog({
++export const ActivityLog = memo(function ActivityLog({
+   type,
+   message,
+   timestamp,
+@@ -374,7 +374,7 @@ export function ActivityLog({
+       </View>
+     </Pressable>
+   );
+-}
++});
+ 
+ interface ToolCallProps {
+   toolName: string;
+@@ -486,7 +486,7 @@ const toolKindIcons: Record<string, any> = {
+   // Add more mappings as needed
+ };
+ 
+-export function ToolCall({
++export const ToolCall = memo(function ToolCall({
+   toolName,
+   kind,
+   args,
+@@ -584,4 +584,4 @@ export function ToolCall({
+       </View>
+     </Pressable>
+   );
+-}
++});
+diff --git a/packages/app/src/contexts/realtime-context.tsx b/packages/app/src/contexts/realtime-context.tsx
+index c530d6880..c05f8ad84 100644
+--- a/packages/app/src/contexts/realtime-context.tsx
++++ b/packages/app/src/contexts/realtime-context.tsx
+@@ -1,4 +1,4 @@
+-import { createContext, useContext, useState, ReactNode, useCallback } from "react";
++import { createContext, useContext, useState, ReactNode, useCallback, useEffect } from "react";
+ import { useSpeechmaticsAudio } from "@/hooks/use-speechmatics-audio";
+ import { useSession } from "./session-context";
+ import { generateMessageId } from "@/types/stream";
+@@ -31,7 +31,7 @@ interface RealtimeProviderProps {
+ }
+ 
+ export function RealtimeProvider({ children }: RealtimeProviderProps) {
+-  const { ws, audioPlayer, isPlayingAudio, setMessages } = useSession();
++  const { ws, audioPlayer, isPlayingAudio, setMessages, setVoiceDetectionFlags } = useSession();
+   const [isRealtimeMode, setIsRealtimeMode] = useState(false);
+ 
+   const realtimeAudio = useSpeechmaticsAudio({
+@@ -82,6 +82,11 @@ export function RealtimeProvider({ children }: RealtimeProviderProps) {
+     detectionGracePeriod: 200,
+   });
+ 
++  // Update voice detection flags whenever they change
++  useEffect(() => {
++    setVoiceDetectionFlags(realtimeAudio.isDetecting, realtimeAudio.isSpeaking);
++  }, [realtimeAudio.isDetecting, realtimeAudio.isSpeaking, setVoiceDetectionFlags]);
++
+   const startRealtime = useCallback(async () => {
+     try {
+       await realtimeAudio.start();
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index c8e1941a5..aa14d3f6d 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -87,6 +87,9 @@ interface SessionContextValue {
+   audioPlayer: ReturnType<typeof useAudioPlayer>;
+   isPlayingAudio: boolean;
+   setIsPlayingAudio: (playing: boolean) => void;
++  
++  // Voice detection flags (updated by RealtimeContext)
++  setVoiceDetectionFlags: (isDetecting: boolean, isSpeaking: boolean) => void;
+ 
+   // Messages and stream state
+   messages: MessageEntry[];
+@@ -133,7 +136,15 @@ interface SessionProviderProps {
+ 
+ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+   const ws = useWebSocket(serverUrl);
+-  const audioPlayer = useAudioPlayer();
++  
++  // State for voice detection flags (will be set by RealtimeContext)
++  const isDetectingRef = useRef(false);
++  const isSpeakingRef = useRef(false);
++  
++  const audioPlayer = useAudioPlayer({
++    isDetecting: () => isDetectingRef.current,
++    isSpeaking: () => isSpeakingRef.current,
++  });
+ 
+   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+   const [messages, setMessages] = useState<MessageEntry[]>([]);
+@@ -250,6 +261,20 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       }));
+     });
+ 
++    // Permission resolved - remove from pending
++    const unsubPermissionResolved = ws.on("agent_permission_resolved", (message) => {
++      if (message.type !== "agent_permission_resolved") return;
++      const { requestId, agentId, optionId } = message.payload;
++
++      console.log("[Session] Permission resolved:", requestId, "for agent:", agentId, "with option:", optionId);
++
++      setPendingPermissions((prev) => {
++        const next = new Map(prev);
++        next.delete(requestId);
++        return next;
++      });
++    });
++
+     // Audio output
+     const unsubAudioOutput = ws.on("audio_output", async (message) => {
+       if (message.type !== "audio_output") return;
+@@ -458,6 +483,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       unsubAgentStatus();
+       unsubAgentUpdate();
+       unsubPermissionRequest();
++      unsubPermissionResolved();
+       unsubAudioOutput();
+       unsubActivity();
+       unsubChunk();
+@@ -581,19 +607,21 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     };
+     ws.send(msg);
+ 
+-    // Remove from pending
+-    setPendingPermissions((prev) => {
+-      const next = new Map(prev);
+-      next.delete(requestId);
+-      return next;
+-    });
++    // Don't remove from pending here - wait for server confirmation via agent_permission_resolved
++    // This ensures UI stays in sync whether permission is accepted via UI or MCP
+   }, [ws]);
+ 
++  const setVoiceDetectionFlags = useCallback((isDetecting: boolean, isSpeaking: boolean) => {
++    isDetectingRef.current = isDetecting;
++    isSpeakingRef.current = isSpeaking;
++  }, []);
++
+   const value: SessionContextValue = {
+     ws,
+     audioPlayer,
+     isPlayingAudio,
+     setIsPlayingAudio,
++    setVoiceDetectionFlags,
+     messages,
+     setMessages,
+     currentAssistantMessage,
+diff --git a/packages/app/src/hooks/use-audio-player.ts b/packages/app/src/hooks/use-audio-player.ts
+index 5e7be1f98..5775cd604 100644
+--- a/packages/app/src/hooks/use-audio-player.ts
++++ b/packages/app/src/hooks/use-audio-player.ts
+@@ -42,18 +42,40 @@ function resamplePcm24kTo16k(pcm24k: Uint8Array): Uint8Array {
+   return pcm16k;
+ }
+ 
++export interface AudioPlayerOptions {
++  isDetecting?: () => boolean;
++  isSpeaking?: () => boolean;
++}
++
+ /**
+  * Hook for audio playback using Speechmatics two-way audio with echo cancellation
+  */
+-export function useAudioPlayer() {
++export function useAudioPlayer(options?: AudioPlayerOptions) {
+   const [isPlaying, setIsPlaying] = useState(false);
+   const [audioInitialized, setAudioInitialized] = useState(false);
+   const queueRef = useRef<QueuedAudio[]>([]);
++  const suppressedQueueRef = useRef<QueuedAudio[]>([]);
+   const isProcessingQueueRef = useRef(false);
+   const playbackTimeoutRef = useRef<number | null>(null);
++  const checkIntervalRef = useRef<number | null>(null);
+ 
+   async function play(audioData: Blob): Promise<number> {
+     return new Promise((resolve, reject) => {
++      // Check if we should suppress playback due to voice detection/speaking
++      const shouldSuppress = 
++        (options?.isDetecting && options.isDetecting()) ||
++        (options?.isSpeaking && options.isSpeaking());
++
++      if (shouldSuppress) {
++        console.log("[AudioPlayer] Suppressing playback - voice detection/speaking active");
++        // Add to suppressed queue instead
++        suppressedQueueRef.current.push({ audioData, resolve, reject });
++        
++        // Start checking for when flags clear
++        startCheckingForClearFlags();
++        return;
++      }
++
+       // Add to queue with its promise handlers
+       queueRef.current.push({ audioData, resolve, reject });
+ 
+@@ -64,6 +86,49 @@ export function useAudioPlayer() {
+     });
+   }
+ 
++  function startCheckingForClearFlags(): void {
++    // Already checking
++    if (checkIntervalRef.current !== null) {
++      return;
++    }
++
++    console.log("[AudioPlayer] Starting to check for clear flags");
++    
++    checkIntervalRef.current = setInterval(() => {
++      const isStillBlocked = 
++        (options?.isDetecting && options.isDetecting()) ||
++        (options?.isSpeaking && options.isSpeaking());
++
++      if (!isStillBlocked && suppressedQueueRef.current.length > 0) {
++        console.log("[AudioPlayer] Flags cleared - moving suppressed queue to main queue");
++        
++        // Move all suppressed items to main queue
++        const suppressedItems = [...suppressedQueueRef.current];
++        suppressedQueueRef.current = [];
++        
++        // Add to front of main queue (they were waiting)
++        queueRef.current = [...suppressedItems, ...queueRef.current];
++        
++        // Stop checking
++        if (checkIntervalRef.current !== null) {
++          clearInterval(checkIntervalRef.current);
++          checkIntervalRef.current = null;
++        }
++        
++        // Start processing if not already
++        if (!isProcessingQueueRef.current) {
++          processQueue();
++        }
++      } else if (!isStillBlocked && suppressedQueueRef.current.length === 0) {
++        // No more suppressed items and flags are clear - stop checking
++        if (checkIntervalRef.current !== null) {
++          clearInterval(checkIntervalRef.current);
++          checkIntervalRef.current = null;
++        }
++      }
++    }, 100); // Check every 100ms
++  }
++
+   async function processQueue(): Promise<void> {
+     if (isProcessingQueueRef.current || queueRef.current.length === 0) {
+       return;
+@@ -72,6 +137,20 @@ export function useAudioPlayer() {
+     isProcessingQueueRef.current = true;
+ 
+     while (queueRef.current.length > 0) {
++      // Before processing each item, check if flags became active
++      const shouldSuppress = 
++        (options?.isDetecting && options.isDetecting()) ||
++        (options?.isSpeaking && options.isSpeaking());
++
++      if (shouldSuppress) {
++        console.log("[AudioPlayer] Flags became active during processing - moving remaining queue to suppressed");
++        // Move remaining queue to suppressed
++        suppressedQueueRef.current = [...queueRef.current, ...suppressedQueueRef.current];
++        queueRef.current = [];
++        startCheckingForClearFlags();
++        break;
++      }
++
+       const item = queueRef.current.shift()!;
+       try {
+         const duration = await playAudio(item.audioData);
+@@ -188,21 +267,45 @@ export function useAudioPlayer() {
+ 
+     setIsPlaying(false);
+ 
+-    // Reject all pending promises in the queue
++    // Reject all pending promises in the main queue
+     while (queueRef.current.length > 0) {
+       const item = queueRef.current.shift()!;
+       item.reject(new Error("Playback stopped"));
+     }
+ 
++    // Reject all pending promises in the suppressed queue
++    while (suppressedQueueRef.current.length > 0) {
++      const item = suppressedQueueRef.current.shift()!;
++      item.reject(new Error("Playback stopped"));
++    }
++
++    // Clear check interval
++    if (checkIntervalRef.current !== null) {
++      clearInterval(checkIntervalRef.current);
++      checkIntervalRef.current = null;
++    }
++
+     isProcessingQueueRef.current = false;
+   }
+ 
+   function clearQueue(): void {
+-    // Reject all pending promises in the queue
++    // Reject all pending promises in the main queue
+     while (queueRef.current.length > 0) {
+       const item = queueRef.current.shift()!;
+       item.reject(new Error("Queue cleared"));
+     }
++
++    // Reject all pending promises in the suppressed queue
++    while (suppressedQueueRef.current.length > 0) {
++      const item = suppressedQueueRef.current.shift()!;
++      item.reject(new Error("Queue cleared"));
++    }
++
++    // Clear check interval
++    if (checkIntervalRef.current !== null) {
++      clearInterval(checkIntervalRef.current);
++      checkIntervalRef.current = null;
++    }
+   }
+ 
+   return {

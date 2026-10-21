@@ -14,7 +14,11 @@ uuid.workspace = true
 [target.'cfg(unix)'.dependencies]
 tokio.workspace = true
 rusqlite = { version = "0.40.2", features = ["bundled"] }
-rustix = { version = "1.1.5", features = ["process"] }
+rustix = { version = "1.1.5", features = ["process", "fs"] }
+vt100 = { version = "=0.18.1", default-features = false }
+percent-encoding = "=2.3.2"
+zstd = "=0.13.3"
+sha2 = "0.10.9"
 
 [lints]
 workspace = true

@@ -1,0 +1,108 @@
+{
+  "state": {
+    "protocol": 3,
+    "host_id": "8cea29d4-b658-4dab-b1e8-aa7dea22a697",
+    "host_pid": 1718881,
+    "provider_pid": 1718884,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "8cea29d4-b658-4dab-b1e8-aa7dea22a697",
+      "controller_id": "596d2d25-31bb-4257-a69c-8be75f237afc",
+      "generation": 6
+    },
+    "sequence": 352,
+    "operation_ids": [
+      "eaa003b3-b788-4824-8444-6765a29c1d47",
+      "75ed9ce6-9b43-477a-83a0-f2939955d628",
+      "28a0c954-1a40-4be4-b8b9-865e634c1686",
+      "6c095b32-bf03-4a4f-a0cc-1a7641f85011"
+    ],
+    "journal_total": 4,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "af382f41-4417-4368-982c-65229322c7bf",
+          "turn_id": "29963575-4129-4195-96aa-e1ec35ab7dd1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "af382f41-4417-4368-982c-65229322c7bf",
+          "threadId": "af382f41-4417-4368-982c-65229322c7bf",
+          "toolCall": {
+            "content": [
+              {
+                "content": {
+                  "text": "Proposed settings before approval \u4e2d\u6587",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "edit",
+            "locations": [
+              {
+                "line": 42,
+                "path": "/tmp/fleetpane-invalidation-native-20261021/review-settings.md"
+              }
+            ],
+            "name": "write_file",
+            "rawInput": {
+              "attempt": 0,
+              "content": "# New settings \u4e2d\u6587\nKeep exact content.",
+              "enabled": false,
+              "file_path": "/tmp/fleetpane-invalidation-native-20261021/review-settings.md"
+            },
+            "title": "Review settings \u4e2d\u6587",
+            "toolCallId": "reviewed"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  },
+  "conversation": {
+    "records": 30,
+    "sha256": "3d4d747ec08f798d21e894a479c0c4b9d72cf58a95ac484933d8c93b0559d6ce"
+  }
+}

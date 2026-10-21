@@ -1,0 +1,54 @@
+[
+  {
+    "id": "app-2846963",
+    "pid": 2846963,
+    "name": "before",
+    "command": [
+      "dbus-run-session",
+      "--",
+      "/tmp/fleetpane-replay-142-20261021/before-desktop",
+      "--hosts",
+      "/tmp/fleetpane-replay-142-20261021/hosts.json"
+    ],
+    "running": false,
+    "exit_code": 0,
+    "started_at_unix": 1792537626,
+    "stopped_at_unix": 1792537743
+  },
+  {
+    "id": "app-2852280",
+    "pid": 2852280,
+    "name": "after",
+    "command": [
+      "dbus-run-session",
+      "--",
+      "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+      "--hosts",
+      "/tmp/fleetpane-replay-142-20261021/hosts.json",
+      "--preferences-dir",
+      "/tmp/fleetpane-replay-142-20261021/prefs"
+    ],
+    "running": false,
+    "exit_code": 0,
+    "started_at_unix": 1792537743,
+    "stopped_at_unix": 1792537881
+  },
+  {
+    "id": "app-2859618",
+    "pid": 2859618,
+    "name": "final",
+    "command": [
+      "dbus-run-session",
+      "--",
+      "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+      "--hosts",
+      "/tmp/fleetpane-replay-142-20261021/hosts.json",
+      "--preferences-dir",
+      "/tmp/fleetpane-replay-142-20261021/prefs"
+    ],
+    "running": false,
+    "exit_code": 0,
+    "started_at_unix": 1792537890,
+    "stopped_at_unix": 1792537977
+  }
+]

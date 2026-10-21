@@ -1,0 +1,71 @@
+{
+  "thread": {
+    "cwd": "/tmp/fleetpane-acp-review-question-qa",
+    "historyMode": "paginated",
+    "id": "fixture-thread-1",
+    "name": null,
+    "preview": "[questions]",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "error": null,
+        "fixtureOptions": {},
+        "id": "fixture-thread-1-turn-1",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[questions]",
+                "type": "text"
+              }
+            ],
+            "id": "user-fixture-thread-1-turn-1",
+            "type": "userMessage"
+          },
+          {
+            "id": "assistant-fixture-thread-1-turn-1",
+            "text": "Echo: Answers received: {\"answers\": {\"language\": {\"answers\": [\"Rust (Recommended)\"]}, \"notes\": {\"answers\": [\"user_note: 隔离验证 中文\\n保留换行，不发送草稿。\"]}}}",
+            "type": "agentMessage"
+          }
+        ],
+        "status": "completed"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "f809106e-faa1-4367-bade-225c1aef6608",
+    "host_pid": 439428,
+    "provider_pid": 439430,
+    "provider_info": {
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "f809106e-faa1-4367-bade-225c1aef6608",
+      "controller_id": "f71cd697-9021-45e1-9ed2-6914260dc3d6",
+      "generation": 3
+    },
+    "sequence": 22,
+    "operation_ids": [
+      "4d1d4acc-62a0-436f-8dd8-107224d5c57c",
+      "c4ff24f8-4b63-4fa3-a756-0e6273b54204"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  }
+}

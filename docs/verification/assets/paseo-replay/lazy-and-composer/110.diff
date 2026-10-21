@@ -1,0 +1,179 @@
+commit 1d6de732b6a180279f4204db34a089d83c2ca827
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 21:20:27 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 21:20:27 2025 +0200
+
+    feat: implement graceful agent shutdown and update dev script
+    
+    - Add graceful shutdown to AgentManager that waits for processing agents to complete
+    - Update server to handle SIGTERM and SIGINT with proper agent cleanup
+    - Switch dev script to use node --watch --import tsx for faster restarts
+    - Add shutdown timeout handling with configurable wait period
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/server/package.json b/packages/server/package.json
+index 6ece976c8..3e7d5bb17 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -4,7 +4,8 @@
+   "description": "Voice assistant backend server",
+   "type": "module",
+   "scripts": {
+-    "dev": "NODE_ENV=development tsx watch --ignore '**/*.timestamp-*' src/server/index.ts",
++    "dev": "NODE_ENV=development node --watch --import tsx src/server/index.ts",
++    "dev:tsx": "NODE_ENV=development tsx watch --ignore '**/*.timestamp-*' src/server/index.ts",
+     "build": "tsc -p tsconfig.server.json",
+     "start": "NODE_ENV=production node dist/server/index.js",
+     "typecheck": "tsc -p tsconfig.server.json --noEmit",
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 3b841a2d0..b19b9d9e2 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -1406,4 +1406,106 @@ export class AgentManager {
+ 
+     return allPermissions;
+   }
++
++  /**
++   * Gracefully shutdown all agents
++   * Waits for processing agents to finish, then terminates all processes
++   * @param timeout - Maximum time to wait for processing agents (ms), default 2 minutes
++   */
++  async shutdown(timeout: number = 120000): Promise<void> {
++    console.log("[AgentManager] Starting graceful shutdown...");
++
++    // Find agents currently processing work
++    const processingAgents = Array.from(this.agents.values()).filter(
++      (agent) => agent.state.type === "processing"
++    );
++
++    if (processingAgents.length > 0) {
++      console.log(
++        `[AgentManager] Waiting for ${processingAgents.length} agent(s) to finish processing...`
++      );
++
++      // Wait for processing agents to complete or timeout
++      await Promise.race([
++        // Wait for all processing agents to finish
++        Promise.all(
++          processingAgents.map((agent) => this.waitForAgentToFinish(agent.id))
++        ),
++        // Timeout fallback
++        new Promise<void>((resolve) =>
++          setTimeout(() => {
++            console.log(
++              `[AgentManager] Timeout reached (${timeout}ms), proceeding with shutdown`
++            );
++            resolve();
++          }, timeout)
++        ),
++      ]);
++    }
++
++    // Persist state and terminate all agents
++    console.log("[AgentManager] Persisting agent state and terminating...");
++
++    const shutdownPromises = Array.from(this.agents.values()).map(
++      async (agent) => {
++        try {
++          const runtime = this.getRuntime(agent);
++
++          // Persist current state if agent has a session
++          if (runtime) {
++            await this.persistence.upsert({
++              id: agent.id,
++              title: agent.title || `Agent ${agent.id.slice(0, 8)}`,
++              sessionId: runtime.sessionId,
++              options: agent.options,
++              createdAt: agent.createdAt.toISOString(),
++              cwd: agent.cwd,
++            });
++            console.log(`[Agent ${agent.id}] State persisted`);
++
++            // Send graceful termination signal
++            runtime.process.kill("SIGTERM");
++          }
++        } catch (error) {
++          console.error(`[Agent ${agent.id}] Shutdown error:`, error);
++        }
++      }
++    );
++
++    await Promise.all(shutdownPromises);
++
++    // Give processes a moment to exit cleanly
++    await new Promise((resolve) => setTimeout(resolve, 1000));
++
++    console.log("[AgentManager] Graceful shutdown complete");
++  }
++
++  /**
++   * Wait for a specific agent to finish processing
++   */
++  private waitForAgentToFinish(agentId: string): Promise<void> {
++    return new Promise<void>((resolve) => {
++      const agent = this.agents.get(agentId);
++      if (!agent || agent.state.type !== "processing") {
++        resolve();
++        return;
++      }
++
++      console.log(`[Agent ${agentId}] Waiting for work to complete...`);
++
++      // Subscribe to status changes
++      const unsubscribe = this.subscribeToUpdates(agentId, (update) => {
++        if (update.notification.type === "status") {
++          const status = update.notification.status;
++          if (status !== "processing") {
++            console.log(
++              `[Agent ${agentId}] Finished processing (status: ${status})`
++            );
++            unsubscribe();
++            resolve();
++          }
++        }
++      });
++    });
++  }
+ }
+diff --git a/packages/server/src/server/index.ts b/packages/server/src/server/index.ts
+index dc9913ced..73f05cf4d 100644
+--- a/packages/server/src/server/index.ts
++++ b/packages/server/src/server/index.ts
+@@ -120,14 +120,29 @@ async function main() {
+   });
+ 
+   // Graceful shutdown
+-  process.on("SIGTERM", () => {
+-    console.log("\nSIGTERM received, shutting down gracefully...");
++  const handleShutdown = async (signal: string) => {
++    console.log(`\n${signal} received, shutting down gracefully...`);
++
++    // Wait for agents to finish work (with 2 minute timeout)
++    await agentManager.shutdown(120000);
++
++    // Close WebSocket and HTTP servers
+     wsServer.close();
+     httpServer.close(() => {
+       console.log("Server closed");
+       process.exit(0);
+     });
+-  });
++
++    // Force exit after 10 seconds if HTTP server doesn't close
++    // This runs AFTER agent shutdown completes
++    setTimeout(() => {
++      console.log("Forcing shutdown - HTTP server didn't close in time");
++      process.exit(1);
++    }, 10000);
++  };
++
++  process.on("SIGTERM", () => handleShutdown("SIGTERM"));
++  process.on("SIGINT", () => handleShutdown("SIGINT"));
+ }
+ 
+ main();

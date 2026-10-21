@@ -1,0 +1,29 @@
+commit 7f15e7ebe387208d5d6b2d6d74955969ea4a15e9
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:19:58 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:19:58 2025 +0200
+
+    fix: remove gap between status bar and realtime controls in agent mode
+    
+    - Only apply bottom padding to footer container when NOT in realtime mode
+    - When realtime is active, GlobalFooter handles the bottom padding
+    - This eliminates the large gap between status bar and realtime controls
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index cacb88bfd..85fde7cb0 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -64,7 +64,7 @@ export default function AgentScreen() {
+         />
+ 
+         {/* Footer area - status bar + controls */}
+-        <View style={[styles.footerContainer, { paddingBottom: insets.bottom }]}>
++        <View style={[styles.footerContainer, !isRealtimeMode && { paddingBottom: insets.bottom }]}>
+           {/* Status bar - always visible, floating above controls */}
+           <AgentStatusBar agentId={id!} />
+           

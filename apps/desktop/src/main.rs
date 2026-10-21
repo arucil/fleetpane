@@ -13,8 +13,20 @@ use std::net::SocketAddr;
 const MAX_DIRECTORY: usize = 5_000;
 
 #[cfg(unix)]
+mod appearance;
+#[cfg(unix)]
 mod host_view;
 
+#[cfg(unix)]
+mod file_locations;
+#[cfg(unix)]
+mod files_view;
+#[cfg(unix)]
+mod paseo_import_view;
+#[cfg(unix)]
+mod session_tree_view;
+#[cfg(unix)]
+mod terminal_view;
 #[cfg(unix)]
 mod workbench;
 #[cfg(unix)]
@@ -30,6 +42,23 @@ enum Screen {
     Directory(gpui_kit::Entity<Fleetpane>),
     #[cfg(unix)]
     Host(gpui_kit::Entity<workbench::Workbench>),
+}
+
+#[cfg(unix)]
+impl Screen {
+    fn is_closing(&self, cx: &App) -> bool {
+        match self {
+            Self::Directory(_) => false,
+            Self::Host(view) => view.read(cx).is_closing(),
+        }
+    }
+
+    fn request_close(&mut self, window: &mut Window, cx: &mut Context<Self>) -> bool {
+        match self {
+            Self::Directory(_) => true,
+            Self::Host(view) => view.update(cx, |view, cx| view.request_close(window, cx)),
+        }
+    }
 }
 
 impl Render for Screen {
@@ -383,6 +412,7 @@ fn main() {
     let mut demo = false;
     let mut host = None;
     let mut hosts_file = None;
+    let mut preferences_directory = None;
     let mut args = std::env::args().skip(1);
     while let Some(arg) = args.next() {
         if arg == "--demo" {
@@ -407,9 +437,19 @@ fn main() {
                 eprintln!("--hosts requires a configuration file path");
                 std::process::exit(2);
             })));
+        } else if arg == "--preferences-dir" {
+            if preferences_directory.is_some() {
+                eprintln!("--preferences-dir may be supplied once");
+                std::process::exit(2);
+            }
+            preferences_directory =
+                Some(std::path::PathBuf::from(args.next().unwrap_or_else(|| {
+                    eprintln!("--preferences-dir requires an absolute directory");
+                    std::process::exit(2);
+                })));
         } else if arg == "--help" {
             println!(
-                "fleetpane-desktop [127.0.0.1:PORT] [--demo]\nfleetpane-desktop --host /absolute/private/control.sock\nfleetpane-desktop --hosts CONFIG.json\nPaseo directory preview, synthetic demo, or named local Codex/ACP Hosts."
+                "fleetpane-desktop [127.0.0.1:PORT] [--demo]\nfleetpane-desktop --host /absolute/private/control.sock\nfleetpane-desktop --hosts CONFIG.json\nUnix: optional --preferences-dir ABSOLUTE_DIRECTORY overrides device-local appearance storage.\nPaseo directory preview, synthetic demo, or named local Codex/ACP Hosts."
             );
             return;
         } else {
@@ -429,10 +469,21 @@ fn main() {
         std::process::exit(2);
     }
     #[cfg(not(unix))]
-    if host.is_some() || hosts_file.is_some() {
-        eprintln!("Host conversations currently require Unix sockets");
+    if host.is_some() || hosts_file.is_some() || preferences_directory.is_some() {
+        eprintln!("Host conversations and persistent appearance currently require Unix");
         std::process::exit(2);
     }
+    #[cfg(unix)]
+    let preferences_directory = preferences_directory.map_or_else(
+        fleetpane_session::appearance::default_directory,
+        |path| {
+            if path.is_absolute() {
+                Ok(path)
+            } else {
+                Err("--preferences-dir must be absolute".into())
+            }
+        },
+    );
     #[cfg(unix)]
     let creation_directory = hosts_file
         .as_ref()
@@ -461,6 +512,8 @@ fn main() {
         .with_assets(gpui_kit::assets::Assets)
         .run(move |cx: &mut App| {
             gpui_kit::init(cx);
+            #[cfg(unix)]
+            terminal_view::init(cx);
             cx.on_window_closed(|cx, _| {
                 if cx.windows().is_empty() {
                     // GPUI's X11 close callback still borrows platform state.
@@ -482,7 +535,7 @@ fn main() {
                 },
                 cx,
                 |window, cx| {
-                    cx.new(|cx| {
+                    let screen = cx.new(|cx| {
                         #[cfg(unix)]
                         if let Some(configuration) = hosts {
                             return Screen::Host(cx.new(|cx| {
@@ -499,7 +552,12 @@ fn main() {
                             window.focus(&view.focus, cx);
                             view
                         }))
-                    })
+                    });
+                    #[cfg(unix)]
+                    let screen = cx.new(|cx| {
+                        appearance::Frame::new(screen, preferences_directory, window, cx)
+                    });
+                    screen
                 },
             ) {
                 Ok(_) => cx.activate(true),

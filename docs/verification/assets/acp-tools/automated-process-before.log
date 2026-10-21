@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 125, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 84, in main
+    first = wait(lambda: tool("pending"))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 26, in wait
+    value = probe()
+            ^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 84, in <lambda>
+    first = wait(lambda: tool("pending"))
+                         ^^^^^^^^^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 76, in tool
+    t = opened()
+        ^^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-tools-smoke.py", line 72, in opened
+    assert not snapshot()["fault"], snapshot()["fault"]
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ACP status must contain a string

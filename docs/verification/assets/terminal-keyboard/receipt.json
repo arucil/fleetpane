@@ -1,0 +1,138 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "desktop_binary_sha256": "f895318163bcd5a40570d2d27918d765f7c0c4734152215ba00e99079e81bb61",
+  "host_binary_sha256": "4dab79f0826152b55bb4411655841d4d271752ef6cabb431a20706a8c49fcf0a",
+  "profile": "development",
+  "source_sha256": {
+    "crates/session/src/terminals.rs": "586d2423829b52c77427d04bfccf1472608c56d2a74f4b201836249d8dd5ff56",
+    "crates/session/src/terminals/input.rs": "8426ba04871d5b1993f217afae99a2ab067ab77cd4e892d44062c561e9a05722",
+    "apps/desktop/src/main.rs": "6a218bf29f7e0512bacf04d575c665c58a455f352c82587286ba397646a1f1f4",
+    "apps/desktop/src/terminal_view.rs": "47c50dae300f0f39438cf04fe4b2dbad5d1c10b91e9ba6d5ec4b193381a82d8f",
+    "apps/desktop/src/terminal_view/keyboard.rs": "8020f0e81f8b3006c77075fb786377cae230280a39b2a43b8be235e3211aa11b",
+    "apps/desktop/src/workspace_view.rs": "17b9084352a61fdaba2c79ebbf30d9897ad253322ec271f5a0c920db59204fc9",
+    "apps/desktop/src/workbench.rs": "da64c859bf430bc42a3b8d7759df3313e1c512b314b963ce6452795e6834db86"
+  },
+  "checks": {
+    "root-tests.log": 167,
+    "desktop-tests.log": 19,
+    "root-clippy.log": "passed",
+    "desktop-clippy.log": "passed",
+    "desktop-build.log": "passed",
+    "host-build.log": "passed",
+    "root-fmt.log": "passed",
+    "desktop-fmt.log": "passed",
+    "diff-check.log": "passed",
+    "terminal-smoke.log": "Codex/ACP fixture real PTYs passed"
+  },
+  "commands": [
+    "cargo test --workspace --locked",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --workspace --all-targets -- -D warnings",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets -- -D warnings",
+    "cargo fmt --check",
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml --check",
+    "cargo build -p fleetpane-host --locked",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/terminal-smoke.py",
+    "git diff --check"
+  ],
+  "native": {
+    "workspace": "fleetpane-keys-20261021",
+    "stopped": true,
+    "display": "isolated Linux X11, 1400x1000, software rendering",
+    "provider": "synthetic Codex-shaped fixture; real owned /bin/sh PTY",
+    "apps": [
+      {
+        "id": "app-3104365",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3118436",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3127548",
+        "exit_code": 0
+      }
+    ],
+    "before_tab_fix_app": "app-3104365",
+    "final_binary_apps": [
+      "app-3118436",
+      "app-3127548"
+    ],
+    "same_host_pid": 3104219,
+    "same_provider_pid": 3104221,
+    "same_terminal_id": "6ed7d536-bb80-4821-924b-b95ae44be5c6",
+    "same_shell_pid": 3109273,
+    "input_sequence": {
+      "before": 0,
+      "after": 36
+    },
+    "capture_exact_bytes": 52,
+    "queued_close": {
+      "paste_text_bytes": 6035,
+      "paste_markers_and_cr": 13,
+      "total_input_bytes": 6048,
+      "outstanding_packet_bytes": 4096,
+      "waiting_bytes": 1952,
+      "window_alive_while_host_stopped": true,
+      "normal_exit_after_host_continued": true,
+      "side_effect_exact_once": "QUEUED_OK"
+    },
+    "keyboard_off_on_reopen": true,
+    "cleanup": {
+      "pids_gone": {
+        "3104219": true,
+        "3104221": true,
+        "3109273": true
+      },
+      "socket_gone": true
+    }
+  },
+  "private_evidence_root": "/tmp/fleetpane-replay-165-20261021",
+  "private_evidence_sha256": {
+    "native/apps-while-closing.json": "d338c1cdc7310baa90afe234938af3cfd1de8e86a21d22971d68278d2ca190db",
+    "native/apps.json": "48dd587f5e70cb6b89d66bad443f9a1542e4d42704290d4f5c935507a1699cdd",
+    "native/artifacts.json": "332924910d088a3be5e9612fc59c2ce0971180626349d07c79d738fc1d7c3965",
+    "native/cleanup.json": "1ae0b59748cfb60295c5f57466bdec94981a1615ebd024f44521836be2f8a22b",
+    "native/exact-readback.json": "22924fbf9127fdba00dd2d22b23c6fec7e40ae92a6f4c97369ead86ea07a703c",
+    "native/hosts.json": "7003c5c6a3df19a15395a27099353e1c2cdd1e303ec587204140b54a86a41fad",
+    "native/registered.json": "fe99f9b9a254eab8c66f3c1e63cc8a31d18c8aaa80ac1ae53e04f62d464c2b1f",
+    "native/setup.json": "e41d6ffe5fa76f34dbf1f084a379056ed586c833a8fb34f42e0adbe85a061c5e",
+    "native/sleep-pids.json": "22a2ae71027e37596cd7ca83072ad6f898c83c8879e4b598a0aa9fa2d89f2ca5",
+    "native/snapshot-after.json": "c94eb23b87640f93f55c5de6814897b44fed7c952fe7a80cf50742fa3150967b",
+    "native/terminals-after.json": "7ba328bbd1e493775c57d7c1d96001480f78d5cee92ba1b447c3f359d981baf8",
+    "native/terminals-before.json": "8f5524e38413cc75613b93e012e42fd77e32ce283e4e6b947abf57b803b544c3"
+  },
+  "evidence_sha256": {
+    "apps-while-closing.json": "d338c1cdc7310baa90afe234938af3cfd1de8e86a21d22971d68278d2ca190db",
+    "capture.py": "24b7a9f5e38bbdd75da137ecb2e30b3ef1d4b9d8ba9bd0c93128b393398d637c",
+    "captured.bin": "071c50dd9ce001120c1f5d229da41c23ccaf2e7c3a44104209f7a71afd11f8b1",
+    "closing-queued.png": "6a6702d1955a292e37cc4d2e77f850a99d7e043b11e859396b002f02836dd96f",
+    "desktop-build.log": "d00394d2f4b22926bbf6bcb65a9a96b68993ad98dae2a99004fe0fe5790cc8a6",
+    "desktop-clippy.log": "89a3778df4795d7d6126ea85bda4475e5c4aaf330ebeed04b9e29d93f1c00e7f",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "b26a25291d4f20b252d7287d0921a867cacc1e19b6fb71dacea1e11d58a3ff78",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exact-readback.json": "22924fbf9127fdba00dd2d22b23c6fec7e40ae92a6f4c97369ead86ea07a703c",
+    "final-raw-paste.png": "229ee9c43aa98ec857306c2927c1d86967c279f3a81c91cc76b637581b027c2c",
+    "final-reopened-keys.png": "62d5fffc07ddb977ca4e5086457c74e180f13e551f8d1e408015915d3297b256",
+    "history-arrow.png": "ff7cd25e34f3dae9949c937f47a1c900f2756505b9b5245f99e4009950a5bad7",
+    "host-build.log": "bcb7b75150cb02bf911eecc517ea1365139df40ecbe1219bbd014f9353aec064",
+    "reopened-keyboard-off.png": "979ee38fc9bf64f53734f52c75a29c66122c27329d08d22236963419b7bf0f2a",
+    "root-clippy.log": "f85a66b34d35781a1a54579a63fd76d978df94598845119ba53ae0bc700ef748",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-tests.log": "be3b050a78bcbce5690188963da72fddb2ab4fcde97ddac7eb114399816995c0",
+    "tab-before-fix.png": "bb61473988c7c45bed63ec7cb9dda7fc8076c9daf12603dd2bb0e36b142d8a26",
+    "terminal-smoke.log": "44507ebd3372ae032fc4a7ce2e2e96526933251462251383755f31046a96e4aa",
+    "terminals-after.json": "7ba328bbd1e493775c57d7c1d96001480f78d5cee92ba1b447c3f359d981baf8",
+    "terminals-before.json": "8f5524e38413cc75613b93e012e42fd77e32ce283e4e6b947abf57b803b544c3",
+    "typed-not-entered.png": "f9dabc6626f201a1f48049c007b46e8ce09bcde3a25416405b1d517f320b1b6f"
+  },
+  "limits": [
+    "Before-Tab-fix executable hash was not captured. First key/edit/interrupt trial used that candidate; raw capture, queued close and reopened edits used the hashed final binary.",
+    "No native overflow, uncertain-delivery recovery or ownership-loss interaction acceptance; core queue checks and existing engine process evidence are separate.",
+    "No IME, native selection, mouse/query replies, automatic geometry, other-platform, fresh external-provider, remote CI or performance claim.",
+    "Unsent keyboard queue and pending-operation UI pointer are transient; forced termination can lose unsent bytes. Host update/active PTY transfer remains open."
+  ]
+}

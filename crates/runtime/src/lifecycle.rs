@@ -50,7 +50,15 @@ impl Admission {
     /// Reads use the separate query channel. A drained Host permits only the
     /// supported cancellation RPC; new and unclassified mutations fail closed.
     pub fn permits(&self, method: &str) -> bool {
-        self.mode == Mode::Ready || method == "turn/interrupt"
+        self.mode == Mode::Ready
+            || matches!(
+                method,
+                "turn/interrupt"
+                    | "fleetpane/terminal/input"
+                    | "fleetpane/terminal/resize"
+                    | "fleetpane/terminal/rename"
+                    | "fleetpane/terminal/close"
+            )
     }
 }
 
@@ -64,6 +72,11 @@ pub struct ActiveTurn {
 /// These are observed blockers, never a proof that provider resources are idle.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Activity {
+    /// None identifies an older Host without authoritative Stop progress.
+    #[serde(default)]
+    pub stopping: Option<Vec<crate::stopping::Stop>>,
+    #[serde(default)]
+    pub terminal_ids: Vec<uuid::Uuid>,
     pub turns: Vec<ActiveTurn>,
     pub in_flight_operations: usize,
     pub unknown_operations: u64,
@@ -168,6 +181,7 @@ mod tests {
         assert!(drained.change(0, Mode::Ready).is_err());
         for method in [
             "thread/start",
+            "thread/fork",
             "thread/resume",
             "turn/start",
             "thread/name/set",

@@ -1,0 +1,127 @@
+{
+  "verified_at": "2026-10-20T19:16:19.925704+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "branch": "feat/session-host-foundation",
+  "worktree": "uncommitted; no commit or push",
+  "provider": "private deterministic ACP fixture; no new real model run",
+  "tests": {
+    "root": 130,
+    "desktop": 9,
+    "python_history": 13,
+    "clippy": "root, desktop, Windows GNU cross-target; warnings denied"
+  },
+  "desktop": "hidden Linux workspace; software rendering; no performance acceptance",
+  "history": {
+    "first_ordinal": 1,
+    "last_ordinal": 75,
+    "last_revision": "30bf4d1b6396cc9f5dab4d00b69f86e7771edcae",
+    "next_revision": "c6cdc09a0b5ba5d797aaefe3dfda9466e5d0ad8e",
+    "next_ordinal": 76
+  },
+  "sources": {
+    "crates/runtime/src/acp.rs": "0a09dfd0f586afe8cb1c5a51323f7075f12bff3f5f508facb3a61d961224343c",
+    "crates/runtime/src/acp/history.rs": "0825be41fd22b06253c0d4186189bd92eaa1eb149a74dbe58de15a023fb8f80b",
+    "crates/session/src/lib.rs": "9d823f39485417fb1f816f03f671492c4374ae1e3f11871fc7c156993d684352",
+    "apps/desktop/src/host_view.rs": "96a3aad1d87f60293669a1afca64c1b43f59b3100e981b798ddf1d23e83a66ec",
+    "scripts/acp-fixture.py": "982578402f86e760cdd4fab004c66e186b67fa2e4b0be631450a0aed45783365",
+    "scripts/acp-cancel-smoke.py": "69dac364f2c9cde05034297c032f6d18379add13c3e290137453f4063d6d95b9",
+    ".github/workflows/ci.yml": "7409571d6f418b312636c54fbc8ea905285c532eb12bd72474bb9e3ef19cc7d0",
+    "docs/reference/paseo-replay.json": "f74eef2815064f60cdf795bad982f5ad970eb7e121ee3849df454c50c8cc42f7",
+    "docs/reference/paseo-replay.md": "a2b367bba93b12fe69cfda33b9952198fd8735f66dbc61d282e504a82d4ef492",
+    "README.md": "608367fde1bbfcab32484e2889f8414ace295f9ee42da4302ed0d2176c1ac3b1",
+    "docs/status.md": "db378822b8e1a4161d35beef5f302ab687e2653e70cbf138b6c8b1db9091d31c",
+    "docs/parity.md": "a28e7dc53a525b4d40ccfb7f25112d9659c497a1bd8393c5ae6748ba82584afd",
+    "docs/adr/0036-acp-permission-cancellation.md": "1b40c827567fe53338b6d85f19feee33bc2e09a74706bc62cb8f0bc57c2cc36a",
+    "docs/verification/2026-10-21-acp-cancel.md": "0a98603af2969a58b6ca4ba2e4ef10247060174f0a99950b64236c24427a891e"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "1087137ebb8e1a973452638b5b6d0a312571b1adb304e3d8a371ebe476f12942",
+    "apps/desktop/target/debug/fleetpane-desktop": "249f4a4d4e0a08e3fe9442ff1bef4a33552f7312f6ee611fa9d3ec117ecfaeaf"
+  },
+  "cleanup_processes": [
+    {
+      "pid": 382734,
+      "exists": false
+    },
+    {
+      "pid": 382737,
+      "exists": false
+    },
+    {
+      "pid": 383044,
+      "exists": false
+    },
+    {
+      "pid": 389214,
+      "exists": false
+    }
+  ],
+  "workspace": {
+    "id": "fleetpane-acp-cancel-20261021",
+    "stopped": true
+  },
+  "native": {
+    "host_id": "bef6fe9f-105e-4358-b68d-bd25a362aa48",
+    "first_app": 383044,
+    "replacement_app": 389214,
+    "normal_close_codes": [
+      0,
+      0
+    ],
+    "same_host_provider_during_replacement": true,
+    "exact_draft_preserved": true,
+    "wire_frames_after_disabled_click_and_replacement": 4,
+    "confirmed_turn_copy": {
+      "selection": "clipboard",
+      "content": "{\"id\":\"8b04a43e-cf95-45bc-b240-ef9a2ebf258a\",\"status\":\"interrupted\",\"stopReason\":\"cancelled\",\"error\":null}",
+      "bytes": 106
+    }
+  },
+  "acceptance_limits": [
+    "no remote CI result",
+    "no real model or Windows native run",
+    "Host takeover not implemented",
+    "process smoke covers Host restart; native QA covers surviving Host window replacement"
+  ],
+  "artifacts": {
+    "after-close-receipt.json": "dd0a89f6ed4890cdcce04384dc1d59cbdfc7cbb06a12a87429ec8d88b2b288fb",
+    "cancel-wire.jsonl": "72a2f2a825e035c16d456fe856a8a4f8f503f1fc45fdbfc1f595076a5b410f61",
+    "close1.json": "73fc60b365393039195dcc291b2aad80ebf738d1daef5473ecd3f7d55cfc34a4",
+    "close2.json": "71406baeccce4db3cbae5310ed06133cf1dbaa848c3bd09f74e486778776fd92",
+    "draft-replacement.json": "ee2f6fb666b9014321937c42f1feffee0e95a44075ba546d7b17db331719d99f",
+    "draft.json": "ee2f6fb666b9014321937c42f1feffee0e95a44075ba546d7b17db331719d99f",
+    "fleetpane-acp-cancel-archive.log": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "fleetpane-acp-cancel-before-stop.png": "66ff9668b32c44cbebdb2633f7bf89b7c677dca78a567cd63c09a4270fb5a7a9",
+    "fleetpane-acp-cancel-before.log": "9536b66eb3ce3f4ad8639d808adb2aeed010c35be3a158604a7461b188fca108",
+    "fleetpane-acp-cancel-build.log": "670036c54f61d004a08723e2a9bf0e827116fe537c95eb7160534e6ef0c45800",
+    "fleetpane-acp-cancel-clippy.log": "371ba46e06aa3aaa34961b327ecd33b14eca0495d591d267183c9d608c210a97",
+    "fleetpane-acp-cancel-concurrency.log": "a9e8443359af5c70978915a70b42ef994b329c5c512f5f1da2c5969efa05f69f",
+    "fleetpane-acp-cancel-desktop-build.log": "df54f9808e4e87e3a44d8b72ae06fbf578228f4f4fd733662eff1deeca9ddc79",
+    "fleetpane-acp-cancel-desktop-clippy.log": "a2ddbac658f99dd6f7e053c532d63dc59cea1bc04673bdc8b7e3c8a6fc8eebff",
+    "fleetpane-acp-cancel-desktop-tests.log": "ec11af93b5e1b11b62977c5d5bcd2b427196218f2a3dbc0bf55a2ec4f21f0fbd",
+    "fleetpane-acp-cancel-history-tests.log": "fcee52b068d8218d79971d55639de54daa1a88dc36fb8a0d350c65976c90efe0",
+    "fleetpane-acp-cancel-info.log": "d1be4deeaa05f88781c8b86027848f0a87eab53b8d35be4a9cfd83bd5bf8cdd9",
+    "fleetpane-acp-cancel-lifecycle.log": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "fleetpane-acp-cancel-order.log": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e",
+    "fleetpane-acp-cancel-process-before.log": "98633f4349d13ffd2e4435012f5acaac1557070071cdca10a07d196ea1e7a687",
+    "fleetpane-acp-cancel-replacement.png": "20ded1f19e9f67086080c42090e83bc808040b9d35c1cdcc0659b3f2709b520b",
+    "fleetpane-acp-cancel-settled-final.png": "89355701cb5d01856fefeda98b5849c8e97386519ab0300ab0439fb08281974d",
+    "fleetpane-acp-cancel-smoke.log": "842af69a547189afdb80a17d3edf34aa5c9e92b549eb031144e591b47b9592ba",
+    "fleetpane-acp-cancel-stop.log": "14a8544945d8a8c92361a66d7259a6937340f18b79b706dc05a9b4e61e778e68",
+    "fleetpane-acp-cancel-stopping.png": "3fcac0a2b57722cf32f74f1892cb0ac117573a82b80598fae3a5f6a4322a731d",
+    "fleetpane-acp-cancel-tests.log": "8b2d3562f260fb7a6e35a43a055b1068d68a7664d726f642e47015056de351bb",
+    "fleetpane-acp-cancel-tools.log": "02085376330ba97b7413ea29939f37b378335c83b07dce7e031963da1da71ea8",
+    "fleetpane-acp-cancel-windows-clippy.log": "623fd4d25232cf5376fcbdbe2318e05680707aeebae400f344e1acc9950abd7f",
+    "host.log": "a0a304da7acd7b569d6bedd08182b1fe51f18281cd35aa766614db19340b732b",
+    "init-receipt.json": "03f5a66a3e7bb107ae1f44b0211a2563422025c0f4eea2412f2b7902d153efed",
+    "native-383044.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-389214.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-driver.py": "166027d591424d32b753b4dd1c41f463242c4285550c5e60fbf39d6031aa77a4",
+    "prompt-count.txt": "5d9a42260fd5016d04c01603aa6dcd9bb74f66ddd00b3b941abf2005c93ba226",
+    "read-receipt.json": "169472d6bf363a97721f0ef4b2c677bf085dced8043245592842eee44867b16e",
+    "replacement-receipt.json": "169472d6bf363a97721f0ef4b2c677bf085dced8043245592842eee44867b16e",
+    "settle-receipt.json": "22024bfd7ea090927582a38acf58e1aeb4000353e6d73a770c935acd34855bc8",
+    "stopping-receipt.json": "3af0760b2e2759de8252ceee1683190d600c27e94f2a3fbcd740e65908272ecf",
+    "turn-copy.json": "7de9715420e10d9c7be7eb5d442af457e972b6a9c0c489ad4991c1ea21cc7f13"
+  }
+}

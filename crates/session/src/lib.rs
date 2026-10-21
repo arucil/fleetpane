@@ -8,18 +8,37 @@ use std::collections::BTreeMap;
 
 #[cfg(unix)]
 pub mod client;
+#[cfg(unix)]
+pub mod terminals;
 
 pub mod acp;
+#[cfg(unix)]
+pub mod appearance;
+#[cfg(unix)]
+pub mod attention;
 pub mod content;
 #[cfg(unix)]
 pub mod creations;
 pub mod directory;
+#[cfg(unix)]
+pub mod files;
 pub mod history;
 pub mod hosts;
 pub mod models;
+#[cfg(unix)]
+pub mod paseo_import;
+pub mod progress;
 pub mod questions;
 #[cfg(unix)]
+pub mod recent_directories;
+#[cfg(unix)]
 pub mod routing;
+#[cfg(unix)]
+pub mod session_tree;
+#[cfg(unix)]
+pub mod wait;
+#[cfg(unix)]
+pub mod workspace_pins;
 
 pub const MAX_ITEMS: usize = 500;
 pub const MAX_CONVERSATION_BYTES: usize = 2 * 1024 * 1024;
@@ -37,6 +56,9 @@ pub struct Thread {
     pub history_paging: bool,
     #[serde(default)]
     pub config_options: Vec<acp::ConfigOption>,
+    pub acp_modes: Option<fleetpane_runtime::acp::modes::State>,
+    /// ACP metadata uses provider timestamp strings, never Codex epoch units.
+    pub acp_session_info: Option<fleetpane_runtime::acp::SessionInfo>,
     pub status: ThreadStatus,
     pub turns: Vec<Turn>,
     #[serde(default)]
@@ -47,6 +69,8 @@ pub struct Thread {
 pub struct ThreadStatus {
     #[serde(rename = "type")]
     pub kind: String,
+    #[serde(default, rename = "cancelRequested")]
+    pub cancel_requested: bool,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -55,6 +79,31 @@ pub struct Turn {
     pub status: String,
     pub items: Vec<Item>,
     pub error: Option<Value>,
+    /// ACP prompt settlement; absent for providers that do not expose this field.
+    #[serde(rename = "stopReason", skip_serializing_if = "Option::is_none")]
+    pub stop_reason: Option<StopReason>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum StopReason {
+    EndTurn,
+    MaxTokens,
+    MaxTurnRequests,
+    Refusal,
+    Cancelled,
+}
+
+impl StopReason {
+    pub fn description(self) -> &'static str {
+        match self {
+            Self::EndTurn => "End of turn",
+            Self::MaxTokens => "Token limit reached",
+            Self::MaxTurnRequests => "Turn request limit reached",
+            Self::Refusal => "Refused by provider",
+            Self::Cancelled => "Cancelled",
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -101,6 +150,9 @@ impl Thread {
     }
 
     pub fn validate(&self) -> Result<(), Error> {
+        if let Some(modes) = &self.acp_modes {
+            modes.validate().map_err(Error::Projection)?;
+        }
         if self
             .turns
             .iter()
@@ -131,7 +183,9 @@ impl Thread {
             "turn/plan/updated"
                 | "thread/status/changed"
                 | "thread/name/updated"
+                | "thread/acpSessionInfo/updated"
                 | "thread/config/updated"
+                | "thread/acpModes/updated"
                 | "turn/started"
                 | "turn/completed"
                 | "item/started"
@@ -150,6 +204,18 @@ impl Thread {
             return Ok(false);
         }
         match envelope.method.as_str() {
+            "thread/acpSessionInfo/updated" => {
+                let name = params
+                    .get("threadName")
+                    .ok_or_else(|| Error::Projection("ACP metadata lacks title snapshot".into()))?;
+                let info = params
+                    .get("sessionInfo")
+                    .ok_or_else(|| Error::Projection("ACP metadata lacks info snapshot".into()))?;
+                let name = serde_json::from_value(name.clone())?;
+                let info = serde_json::from_value(info.clone())?;
+                self.name = name;
+                self.acp_session_info = Some(info);
+            }
             "turn/plan/updated" => {
                 if self
                     .task_plan
@@ -163,6 +229,16 @@ impl Thread {
                         plan,
                     });
                 }
+            }
+            "thread/acpModes/updated" => {
+                let modes: fleetpane_runtime::acp::modes::State = serde_json::from_value(
+                    params
+                        .get("modes")
+                        .cloned()
+                        .ok_or_else(|| Error::Projection("ACP mode update lacks state".into()))?,
+                )?;
+                modes.validate().map_err(Error::Projection)?;
+                self.acp_modes = Some(modes);
             }
             "thread/config/updated" => {
                 self.config_options =
@@ -198,6 +274,7 @@ impl Thread {
                     }
                     existing.status = turn.status;
                     existing.error = turn.error;
+                    existing.stop_reason = turn.stop_reason;
                 } else {
                     self.turns.push(turn);
                 }
@@ -307,6 +384,27 @@ mod tests {
     use serde_json::json;
 
     #[test]
+    fn cancellation_status_stays_active_until_provider_settlement() {
+        let mut thread = thread();
+        assert!(!thread.status.cancel_requested);
+        thread
+            .apply(&event(
+                "thread/status/changed",
+                json!({"threadId":"thread-1","status":{"type":"active","cancelRequested":true}}),
+            ))
+            .unwrap();
+        assert!(thread.status.cancel_requested);
+        assert!(!thread.can_send());
+        thread
+            .apply(&event(
+                "thread/status/changed",
+                json!({"threadId":"thread-1","status":{"type":"idle"}}),
+            ))
+            .unwrap();
+        assert!(!thread.status.cancel_requested);
+    }
+
+    #[test]
     fn task_plan_replacement_is_thread_scoped_and_old_replay_cannot_regress_a_read() {
         let mut thread = thread();
         let mut changed = event(
@@ -368,6 +466,49 @@ mod tests {
     }
 
     #[test]
+    fn mode_updates_are_scoped_validated_metadata_without_timeline_changes() {
+        let mut thread = thread();
+        let modes = json!({"currentModeId":"code","availableModes":[{"id":"code","name":"Code"}]});
+        assert!(
+            !thread
+                .apply(&event(
+                    "thread/acpModes/updated",
+                    json!({"threadId":"other","modes":modes})
+                ))
+                .unwrap()
+        );
+        assert!(thread.acp_modes.is_none());
+        thread
+            .apply(&event(
+                "thread/acpModes/updated",
+                json!({"threadId":"thread-1","modes":modes}),
+            ))
+            .unwrap();
+        assert_eq!(thread.acp_modes.as_ref().unwrap().current_name(), "Code");
+        assert!(thread.turns.is_empty());
+        let saved = serde_json::to_value(&thread).unwrap();
+        for invalid in [json!(null), json!({"currentModeId":"","availableModes":[]})] {
+            assert!(
+                thread
+                    .apply(&event(
+                        "thread/acpModes/updated",
+                        json!({"threadId":"thread-1","modes":invalid})
+                    ))
+                    .is_err()
+            );
+            assert_eq!(serde_json::to_value(&thread).unwrap(), saved);
+        }
+        let mut invalid = saved;
+        invalid["acpModes"]["currentModeId"] = json!("");
+        assert!(
+            serde_json::from_value::<Thread>(invalid)
+                .unwrap()
+                .validate()
+                .is_err()
+        );
+    }
+
+    #[test]
     fn streamed_items_are_reconciled_by_identity_and_completion_keeps_history() {
         let mut thread = thread();
         thread.apply(&event("turn/started", json!({"threadId":"thread-1","turn":{"id":"turn-1","status":"inProgress","items":[]}}))).unwrap();
@@ -382,6 +523,45 @@ mod tests {
         assert_eq!(thread.turns[0].items.len(), 1);
         assert_eq!(thread.turns[0].items[0].text().unwrap(), "Hello 世界");
         assert!(thread.can_send());
+    }
+
+    #[test]
+    fn stop_reason_survives_snapshots_and_completion_updates() {
+        for reason in [
+            "end_turn",
+            "max_tokens",
+            "max_turn_requests",
+            "refusal",
+            "cancelled",
+        ] {
+            let mut thread = thread();
+            thread.apply(&event("turn/started", json!({"threadId":"thread-1","turn":{"id":"turn-1","status":"inProgress","items":[]}}))).unwrap();
+            thread.apply(&event("turn/completed", json!({"threadId":"thread-1","turn":{"id":"turn-1","status":"completed","items":[],"stopReason":reason}}))).unwrap();
+            let saved = serde_json::to_value(&thread).unwrap();
+            assert_eq!(saved["turns"][0]["stopReason"], reason);
+            let reloaded: Thread = serde_json::from_value(saved).unwrap();
+            assert_eq!(
+                serde_json::to_value(reloaded).unwrap()["turns"][0]["stopReason"],
+                reason
+            );
+        }
+    }
+
+    #[test]
+    fn absent_stop_reason_keeps_other_providers_compatible_but_unknown_is_rejected() {
+        let mut thread = thread();
+        thread.apply(&event("turn/completed", json!({"threadId":"thread-1","turn":{"id":"turn-1","status":"completed","items":[]}}))).unwrap();
+        assert!(thread.turns[0].stop_reason.is_none());
+        assert!(
+            serde_json::to_value(&thread).unwrap()["turns"][0]
+                .get("stopReason")
+                .is_none()
+        );
+        let before = serde_json::to_value(&thread).unwrap();
+        for invalid in [json!("future_success"), json!(4)] {
+            assert!(thread.apply(&event("turn/completed", json!({"threadId":"thread-1","turn":{"id":"turn-1","status":"completed","items":[],"stopReason":invalid}}))).is_err());
+            assert_eq!(serde_json::to_value(&thread).unwrap(), before);
+        }
     }
 
     #[test]
@@ -468,6 +648,39 @@ mod tests {
     }
 
     #[test]
+    fn acp_info_projection_updates_atomically_without_touching_conversation() {
+        let mut thread = thread();
+        let turns = serde_json::to_value(&thread.turns).unwrap();
+        let mut change = event(
+            "thread/acpSessionInfo/updated",
+            json!({"threadId":"thread-1","threadName":"中文 title","sessionInfo":{"updatedAt":"2026-10-21T01:00:00Z","_meta":{"opaque":[false,null]}}}),
+        );
+        assert!(thread.apply(&change).unwrap());
+        assert_eq!(thread.title(), "中文 title");
+        assert_eq!(
+            thread
+                .acp_session_info
+                .as_ref()
+                .unwrap()
+                .updated_at
+                .as_deref(),
+            Some("2026-10-21T01:00:00Z")
+        );
+        assert_eq!(serde_json::to_value(&thread.turns).unwrap(), turns);
+        change.message["params"]["threadId"] = json!("other");
+        assert!(!thread.apply(&change).unwrap());
+        change.message["params"]["threadId"] = json!("thread-1");
+        change.message["params"]["sessionInfo"]["updatedAt"] = json!(42);
+        change.message["params"]["threadName"] = json!("bad");
+        assert!(thread.apply(&change).is_err());
+        assert_eq!(thread.title(), "中文 title");
+        change.message["params"]["threadName"] = Value::Null;
+        change.message["params"]["sessionInfo"] = json!({"updatedAt":null,"_meta":null});
+        thread.apply(&change).unwrap();
+        assert!(thread.name.is_none());
+    }
+
+    #[test]
     fn active_and_unknown_statuses_do_not_admit_another_turn() {
         let mut thread = thread();
         thread.status.kind = "futureState".into();
@@ -478,6 +691,7 @@ mod tests {
             status: "inProgress".into(),
             items: vec![],
             error: None,
+            stop_reason: None,
         });
         assert!(!thread.can_send());
     }
@@ -494,6 +708,7 @@ mod tests {
             status: "completed".into(),
             items: vec![item],
             error: None,
+            stop_reason: None,
         });
         assert!(thread.validate().is_err());
     }

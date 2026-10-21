@@ -1,0 +1,117 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "desktop_binary_sha256": "85915f0505d1e153464d07dbd862095ee75e76686f6475d72f783f79204228c4",
+  "host_binary_sha256": "b1284d5d88f792e8d8376f0564b0257c136b3f5c94618bd4a354d55a3477d6ac",
+  "source_sha256": {
+    "crates/session/src/content.rs": "17e57de9dbd6cce7cafbf0846f41e47ef77e08dfc6b9e66ced3f9b70c84ba6eb",
+    "apps/desktop/src/conversation_item.rs": "0f7e4e215ce1a13296a752d9b9117b87925e797e9298c2aa5b428d82d059eb83",
+    "apps/desktop/src/conversation_item/resources.rs": "6a7085cbff5a599e89a1cff291a27facdb2a258f4255618950e4bb99d7de4876",
+    "scripts/resource_fixture.py": "40ce62e4831e116de42f2a4b7d1988114058dab8cf5a9143b519c184fbaf2637",
+    "scripts/resources-smoke.py": "84e9eb4920b7917544f3ad94bba50ae5e378c22f0bf2386205ab72dc4f6f0871",
+    "scripts/acp-fixture.py": "a52a49e08f24305869c46c7e7b594379d3050df23131f33577e99ea666c9a7f0",
+    "scripts/provider-fixture.py": "8b0e3608323b620f041de797049e76f2c76fef8975597e65b0160f15136af501",
+    ".github/workflows/ci.yml": "432a1f3c12ca1ef8a1eb4e4e15e40c5d0b0c22645b5bb7f0698e4806614d8d64"
+  },
+  "checks": {
+    "root_tests": 165,
+    "desktop_tests": 16,
+    "strict_clippy_root_and_desktop": true,
+    "build_root_and_desktop": true,
+    "format_root_and_desktop": true,
+    "git_diff_check": true,
+    "synthetic_resource_cases": 16,
+    "acp_restart_exact_histories": 8,
+    "existing_acp_tools_smoke": true,
+    "python_fixture_compile": true,
+    "native_exact_clipboard_reads": 10,
+    "unix_ci_step_added_not_remote_run": true,
+    "ci_default_resource_smoke_passed_locally": true
+  },
+  "native": {
+    "workspace": "fleetpane-resources-20261021",
+    "stopped": true,
+    "apps": [
+      {
+        "id": "app-3008131",
+        "exit_code": 0,
+        "accepted": "MCP cards and copy only; initial ACP endpoint excluded"
+      },
+      {
+        "id": "app-3015487",
+        "exit_code": 0,
+        "accepted": "ACP archive cards, copy and reload at original endpoint"
+      }
+    ],
+    "host_groups_gone": [
+      3008124,
+      3008127,
+      3015471
+    ],
+    "acp_prompt_count_after_archive_reload": 8,
+    "all_recorded_provider_pids_gone": [
+      3006249,
+      3007581,
+      3007669,
+      3015473,
+      3008129,
+      3007483,
+      3008126
+    ]
+  },
+  "private_evidence_root": "/tmp/fleetpane-replay-151-20261021",
+  "private_evidence_sha256": {
+    "copy-acp-link.json": "24ebec2f036d3266bbd14c62d8decb5b1d87fd97b994a1923812765189b4cb4f",
+    "copy-acp-long.json": "c395d468500978be03f773364eca1ddc2b9644d22d27fa41db56b9e93317139e",
+    "copy-acp-reload.json": "9d09152dbe06635270a3381a52aa99080a3ed4dc603a70fddc63fc721a81b3b5",
+    "copy-acp-text.json": "9d09152dbe06635270a3381a52aa99080a3ed4dc603a70fddc63fc721a81b3b5",
+    "copy-binary.json": "706393eaa6cf9c67a6e807ffe43ced0694f6cbb1d2b77542640e8cffdde95fe0",
+    "copy-empty.json": "ff8a5acab37ba0b01ca4cd300fe2351952a65a78d2c3a355d85bb8238a28448c",
+    "copy-link.json": "24ebec2f036d3266bbd14c62d8decb5b1d87fd97b994a1923812765189b4cb4f",
+    "copy-long.json": "c395d468500978be03f773364eca1ddc2b9644d22d27fa41db56b9e93317139e",
+    "copy-markdown.json": "860e93050885fa6d51b955f2906b2c90e1fb344ca14f3cd4a76e4906d6220d80",
+    "copy-text.json": "9d09152dbe06635270a3381a52aa99080a3ed4dc603a70fddc63fc721a81b3b5",
+    "native-archived-setup.json": "0748cadab87056ad27cd8929583ccffd94b7f13af472c9ccb1d56efa836c33dc",
+    "native-cleanup.json": "6d267581d161e3154480667811b2ac407c51e7e20d3020f9a5b153d5cf105264",
+    "native-setup-first.json": "e68971f8d7f2913b7259c709910f20c10bdc578bd24aee83a0f121bf1cf0ac43",
+    "resources-accepted/acp/binary.json": "d6007aba7e3d5698d8b5b8303c24450dcd9f5fc5df377bd04e87a9fa0145aeb1",
+    "resources-accepted/acp/empty.json": "5b245b5c1d4ce3aa0342b20714fc3d02ab5f18326aace4c77b0e588378a3bc16",
+    "resources-accepted/acp/fixture-acp-sessions.json": "527b64c39991d04f0d955a7c36354c208a9fac1cad5dc2c20925a19c1026c917",
+    "resources-accepted/acp/future.json": "eee2fcab2850796461a3b2f714ce511a3cc8f02e021960255783767e4e7b82ec",
+    "resources-accepted/acp/history.json": "bf64be3ccb746910f630ef9338b88d606231cf82363f982ca3b227e25d180514",
+    "resources-accepted/acp/invalid.json": "5136b8b6df687f6baf3f36a3df54a749ad8767a1b25040873e8da6bb63ef1ff2",
+    "resources-accepted/acp/link.json": "a54c4dd50c924cccb9fa4d01b514d35821b23f6cbfebb7afe524e8b9fd16c5a2",
+    "resources-accepted/acp/long.json": "d71a3aed03305e6bb462559a85a0eb3816956998a5e207f3e0c0da19dfe76586",
+    "resources-accepted/acp/markdown.json": "6e4fd9527cea383fef814a365108bddcda715d10099aaa58ab924d3d01a85d8b",
+    "resources-accepted/acp/text.json": "4e052e2ebd5cf0845e45a47e0c46c3dcc4bc3dd5a393b6f2e176b7581016391a",
+    "resources-accepted/codex/binary.json": "2098e85d238498155a9255cf36180722ca175ed12bd55c6ffe181ba892adc696",
+    "resources-accepted/codex/empty.json": "5ac2530125bdd36e2d394312d6181009f9585d75b4aba1cda2b8d4cd9af9fbe8",
+    "resources-accepted/codex/future.json": "94d1c78ba9061c3d7ff19bb765832abca179258f297ae55f07f14aceb9fd2e56",
+    "resources-accepted/codex/history.json": "e7c3ae7b928b3b73eac02b5f4e929eb75084008b023df63f1faaf92a6f599bbf",
+    "resources-accepted/codex/invalid.json": "3c82ac0429308fcd3f810fcba34b35ae1b4c6a8ca6e14a849b2ed00c2468140f",
+    "resources-accepted/codex/link.json": "ec3f511ea7f07d87cd8540a68f8ca8c666bbaf10b6456d782365f70c3567e2f8",
+    "resources-accepted/codex/long.json": "46af04f5fe5d64b5352d24cf51e6fa0f117765cdb7662d0d928b322208959ca5",
+    "resources-accepted/codex/markdown.json": "cdcf6ae8ebd39c3a97ab62b062412c8abd53642913f722c5896778a40165c802",
+    "resources-accepted/codex/text.json": "1a969e6dddff327ca831d930eb9ec581cc37c2006472718ad9903b99adbc0760",
+    "resources-accepted/process-receipt.json": "3180b9044f1a94c27acb38be16b206a84d7949eed940b2c3b814900e2aaa393b",
+    "provider-cleanup.json": "4320552d94c1d6413fa30bdf3f8b9b4c4231302a2499d52d1f951fef431b1d7a",
+    "ci-default-smoke.log": "2b0800dea0ead9a1357933939def5b229db938be4324f05df85ffdec574a5836"
+  },
+  "public_evidence_sha256": {
+    "clipboard-receipt.json": "a7cc926681cb2b2ccb9c3dfec6284a7ae2ef4ff808143772958f04c6f3bf067f",
+    "native-acp-text.png": "4aa5bb5534d252d05219761ec091fd2b624b2bf9c6e04f4e23851b2304217a59",
+    "native-future.png": "762e3ef83f40994aace33680c03ef1bd8e5a4fe806ba9d2f18b11bd3baed22ab",
+    "native-invalid.png": "6fdfb78e633b4dccc6460c32efe372f6bbad640dd74a7d80701f175e8363b250",
+    "native-link.png": "e3f6686a5292d01764f84203a0ab9895ea9ef7788810d6b3b2efdeb4bb8999d7",
+    "native-long-tail.png": "31a88b3bd08772c7ae2ff55dd292f18be798faf81ab9a70d60218ba9a89822a2",
+    "native-markdown.png": "b7cebbd4fd7c1e30ce7e3e3105d334d4644ab8e5b2c0e7f89c5d51692a6646dc",
+    "native-text.png": "c6c649cd23df7ca9668468b95fac399b57a2eac5b6688c7ddd4db775640d8095",
+    "process-receipt.json": "3180b9044f1a94c27acb38be16b206a84d7949eed940b2c3b814900e2aaa393b"
+  },
+  "limits": [
+    "Synthetic providers only; no new external OpenCodex/DeepSeek call, CI, release, remote, cross-platform or performance acceptance.",
+    "No resource fetching, URI validation, binary preview, audio or outgoing embedded-context creation.",
+    "Malformed content uses existing whole-result projection error; full-item Copy keeps raw siblings.",
+    "Codex desktop fixture is seeded from captured process results; ACP restart uses actual observed archive.",
+    "First ACP native setup used a separate empty archive; corrected to original owned socket directory. First smoke snapshot-key harness error corrected."
+  ]
+}

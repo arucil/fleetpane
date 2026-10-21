@@ -1,0 +1,225 @@
+{
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "model-a",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "synthetic",
+          "name": "Synthetic",
+          "options": [
+            {
+              "name": "Synthetic A",
+              "value": "model-a"
+            },
+            {
+              "name": "Synthetic B",
+              "value": "model-b"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "currentValue": "low",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "name": "High",
+          "value": "high"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fleetpane-stop-reasons-qa/workspace",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "01acf3a8-b9d8-4d6c-8eff-61b0d9c2b871",
+  "name": null,
+  "preview": "DeepSeek Harness",
+  "status": {
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "d52bd848-7a2c-4ee1-8cf0-01f70bd26139",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[settlement-gate]",
+              "type": "text"
+            }
+          ],
+          "id": "user:d52bd848-7a2c-4ee1-8cf0-01f70bd26139",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Observed output 中文; waiting for protocol settlement.",
+              "type": "text"
+            }
+          ],
+          "id": "d52bd848-7a2c-4ee1-8cf0-01f70bd26139:agent_message_chunk:stream",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "max_tokens"
+    },
+    {
+      "error": null,
+      "id": "d09c1cf5-72b4-498f-b852-51168ed1c598",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[stop:refusal]",
+              "type": "text"
+            }
+          ],
+          "id": "user:d09c1cf5-72b4-498f-b852-51168ed1c598",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Observed output 中文; waiting for protocol settlement.",
+              "type": "text"
+            }
+          ],
+          "id": "d09c1cf5-72b4-498f-b852-51168ed1c598:agent_message_chunk:stream",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "refusal"
+    },
+    {
+      "error": null,
+      "id": "f1462712-5509-4132-8e4c-94bd48cf0d21",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[stop:max_turn_requests]",
+              "type": "text"
+            }
+          ],
+          "id": "user:f1462712-5509-4132-8e4c-94bd48cf0d21",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Observed output 中文; waiting for protocol settlement.",
+              "type": "text"
+            }
+          ],
+          "id": "f1462712-5509-4132-8e4c-94bd48cf0d21:agent_message_chunk:stream",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "max_turn_requests"
+    },
+    {
+      "error": null,
+      "id": "38d9ec66-15f0-4bcf-ae33-201d99ef51fe",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[stop:cancelled][stop:end_turn]",
+              "type": "text"
+            }
+          ],
+          "id": "user:38d9ec66-15f0-4bcf-ae33-201d99ef51fe",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "Synthetic ACP reasoning"
+          ],
+          "id": "38d9ec66-15f0-4bcf-ae33-201d99ef51fe:agent_thought_chunk:thought",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "content": [
+              {
+                "content": {
+                  "text": "Synthetic ACP tool output",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "other",
+            "rawInput": {
+              "text": "[stop:cancelled][stop:end_turn]"
+            },
+            "sessionUpdate": "tool_call_update",
+            "status": "completed",
+            "title": "Synthetic tool",
+            "toolCallId": "call-2e126016-76ee-4d71-95a4-4c8599f2ca5b"
+          },
+          "id": "38d9ec66-15f0-4bcf-ae33-201d99ef51fe:tool:call-2e126016-76ee-4d71-95a4-4c8599f2ca5b",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            {
+              "text": "**ACP** Echo: [stop:cancelled][stop:end_turn]",
+              "type": "text"
+            }
+          ],
+          "id": "38d9ec66-15f0-4bcf-ae33-201d99ef51fe:agent_message_chunk:answer",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    },
+    {
+      "error": null,
+      "id": "0ddfea8c-091f-402b-95de-ec22732ec56b",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[stop:cancelled]",
+              "type": "text"
+            }
+          ],
+          "id": "user:0ddfea8c-091f-402b-95de-ec22732ec56b",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Observed output 中文; waiting for protocol settlement.",
+              "type": "text"
+            }
+          ],
+          "id": "0ddfea8c-091f-402b-95de-ec22732ec56b:agent_message_chunk:stream",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "interrupted",
+      "stopReason": "cancelled"
+    }
+  ]
+}

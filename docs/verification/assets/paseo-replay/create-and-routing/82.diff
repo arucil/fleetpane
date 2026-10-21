@@ -1,0 +1,398 @@
+diff --git a/packages/app/src/app/index.tsx b/packages/app/src/app/index.tsx
+index c5dc68638..cc09fa8d7 100644
+--- a/packages/app/src/app/index.tsx
++++ b/packages/app/src/app/index.tsx
+@@ -14,7 +14,7 @@ import { useSession } from "@/contexts/session-context";
+ export default function HomeScreen() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+-  const { agents, createAgent } = useSession();
++  const { agents } = useSession();
+   const [showCreateModal, setShowCreateModal] = useState(false);
+ 
+   // Keyboard animation
+@@ -34,11 +34,6 @@ export default function HomeScreen() {
+     setShowCreateModal(true);
+   }
+ 
+-  function handleCreateAgentConfirm(workingDir: string, mode: string) {
+-    createAgent({ cwd: workingDir, autoStart: true });
+-    setShowCreateModal(false);
+-  }
+-
+   return (
+     <View style={styles.container}>
+       {/* Header */}
+@@ -60,7 +55,6 @@ export default function HomeScreen() {
+       <CreateAgentModal
+         isVisible={showCreateModal}
+         onClose={() => setShowCreateModal(false)}
+-        onCreateAgent={handleCreateAgentConfirm}
+       />
+     </View>
+   );
+diff --git a/packages/app/src/components/create-agent-modal.tsx b/packages/app/src/components/create-agent-modal.tsx
+index 083990d2c..d6e7e16f8 100644
+--- a/packages/app/src/components/create-agent-modal.tsx
++++ b/packages/app/src/components/create-agent-modal.tsx
+@@ -1,5 +1,5 @@
+ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+-import { View, Text, Pressable, ScrollView } from "react-native";
++import { View, Text, Pressable, ScrollView, ActivityIndicator } from "react-native";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
+ import Animated, { useAnimatedStyle } from "react-native-reanimated";
+@@ -18,11 +18,12 @@ import type {
+ import { StyleSheet } from "react-native-unistyles";
+ import { theme as defaultTheme } from "@/styles/theme";
+ import { useRecentPaths } from "@/hooks/use-recent-paths";
++import { useSession } from "@/contexts/session-context";
++import { useRouter } from "expo-router";
+ 
+ interface CreateAgentModalProps {
+   isVisible: boolean;
+   onClose: () => void;
+-  onCreateAgent: (workingDir: string, mode: string) => void;
+ }
+ 
+ const MODES = [
+@@ -41,16 +42,19 @@ const MODES = [
+ export function CreateAgentModal({
+   isVisible,
+   onClose,
+-  onCreateAgent,
+ }: CreateAgentModalProps) {
+   const bottomSheetRef = useRef<BottomSheetModal>(null);
+   const insets = useSafeAreaInsets();
+   const { recentPaths, addRecentPath } = useRecentPaths();
+   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
++  const { ws, createAgent } = useSession();
++  const router = useRouter();
+ 
+   const [workingDir, setWorkingDir] = useState("");
+   const [selectedMode, setSelectedMode] = useState("plan");
+   const [errorMessage, setErrorMessage] = useState("");
++  const [isLoading, setIsLoading] = useState(false);
++  const [pendingRequestId, setPendingRequestId] = useState<string | null>(null);
+ 
+   const snapPoints = useMemo(() => ["90%"], []);
+ 
+@@ -86,17 +90,24 @@ export function CreateAgentModal({
+           <Pressable
+             style={[
+               styles.createButton,
+-              !workingDir.trim() && styles.createButtonDisabled,
++              (!workingDir.trim() || isLoading) && styles.createButtonDisabled,
+             ]}
+             onPress={handleCreate}
+-            disabled={!workingDir.trim()}
++            disabled={!workingDir.trim() || isLoading}
+           >
+-            <Text style={styles.createButtonText}>Create Agent</Text>
++            {isLoading ? (
++              <View style={styles.loadingContainer}>
++                <ActivityIndicator color={defaultTheme.colors.palette.white} />
++                <Text style={styles.createButtonText}>Creating...</Text>
++              </View>
++            ) : (
++              <Text style={styles.createButtonText}>Create Agent</Text>
++            )}
+           </Pressable>
+         </Animated.View>
+       </BottomSheetFooter>
+     ),
+-    [insets.bottom, workingDir, animatedFooterStyle]
++    [insets.bottom, workingDir, animatedFooterStyle, isLoading]
+   );
+ 
+   useEffect(() => {
+@@ -105,12 +116,42 @@ export function CreateAgentModal({
+     }
+   }, [isVisible]);
+ 
++  // Listen for agent_created events
++  useEffect(() => {
++    if (!pendingRequestId) return;
++
++    const unsubscribe = ws.on("agent_created", (message) => {
++      if (message.type !== "agent_created") return;
++
++      const { agentId, requestId } = message.payload;
++
++      // Check if this is the response to our request
++      if (requestId === pendingRequestId) {
++        console.log("[CreateAgentModal] Agent created:", agentId);
++        setIsLoading(false);
++        setPendingRequestId(null);
++        handleClose();
++
++        // Navigate to the agent page
++        router.push(`/agent/${agentId}`);
++      }
++    });
++
++    return () => {
++      unsubscribe();
++    };
++  }, [pendingRequestId, ws, router]);
++
+   async function handleCreate() {
+     if (!workingDir.trim()) {
+       setErrorMessage("Working directory is required");
+       return;
+     }
+ 
++    if (isLoading) {
++      return;
++    }
++
+     const path = workingDir.trim();
+ 
+     // Save to recent paths
+@@ -121,8 +162,26 @@ export function CreateAgentModal({
+       // Continue anyway - don't block agent creation
+     }
+ 
+-    onCreateAgent(path, selectedMode);
+-    handleClose();
++    // Generate request ID
++    const requestId = crypto.randomUUID();
++
++    setIsLoading(true);
++    setPendingRequestId(requestId);
++    setErrorMessage("");
++
++    // Create the agent
++    try {
++      createAgent({
++        cwd: path,
++        initialMode: selectedMode,
++        requestId,
++      });
++    } catch (error) {
++      console.error("[CreateAgentModal] Failed to create agent:", error);
++      setErrorMessage("Failed to create agent. Please try again.");
++      setIsLoading(false);
++      setPendingRequestId(null);
++    }
+   }
+ 
+   function handleClose() {
+@@ -130,9 +189,12 @@ export function CreateAgentModal({
+   }
+ 
+   function handleDismiss() {
++    // Reset all state
+     setWorkingDir("");
+     setSelectedMode("plan");
+     setErrorMessage("");
++    setIsLoading(false);
++    setPendingRequestId(null);
+     onClose();
+   }
+ 
+@@ -168,7 +230,7 @@ export function CreateAgentModal({
+           <View style={styles.formSection}>
+             <Text style={styles.label}>Working Directory</Text>
+             <BottomSheetTextInput
+-              style={styles.input}
++              style={[styles.input, isLoading && styles.inputDisabled]}
+               placeholder="/path/to/project"
+               placeholderTextColor={defaultTheme.colors.mutedForeground}
+               value={workingDir}
+@@ -178,6 +240,7 @@ export function CreateAgentModal({
+               }}
+               autoCapitalize="none"
+               autoCorrect={false}
++              editable={!isLoading}
+             />
+             {errorMessage && (
+               <Text style={styles.errorText}>{errorMessage}</Text>
+@@ -214,9 +277,11 @@ export function CreateAgentModal({
+                 <Pressable
+                   key={mode.value}
+                   onPress={() => setSelectedMode(mode.value)}
++                  disabled={isLoading}
+                   style={[
+                     styles.modeOption,
+                     selectedMode === mode.value && styles.modeOptionSelected,
++                    isLoading && styles.modeOptionDisabled,
+                   ]}
+                 >
+                   <View style={styles.modeOptionContent}>
+@@ -296,6 +361,9 @@ const styles = StyleSheet.create((theme) => ({
+     borderColor: theme.colors.border,
+     fontSize: theme.fontSize.base,
+   },
++  inputDisabled: {
++    opacity: theme.opacity[50],
++  },
+   helperText: {
+     color: theme.colors.mutedForeground,
+     fontSize: theme.fontSize.sm,
+@@ -320,6 +388,9 @@ const styles = StyleSheet.create((theme) => ({
+     borderColor: theme.colors.palette.blue[500],
+     backgroundColor: theme.colors.muted,
+   },
++  modeOptionDisabled: {
++    opacity: theme.opacity[50],
++  },
+   modeOptionContent: {
+     flexDirection: "row",
+     alignItems: "center",
+@@ -381,6 +452,11 @@ const styles = StyleSheet.create((theme) => ({
+     fontSize: theme.fontSize.base,
+     fontWeight: theme.fontWeight.semibold,
+   },
++  loadingContainer: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++  },
+   recentPathsContainer: {
+     flexDirection: "row",
+     gap: theme.spacing[2],
+@@ -398,6 +474,6 @@ const styles = StyleSheet.create((theme) => ({
+   recentPathChipText: {
+     color: theme.colors.foreground,
+     fontSize: theme.fontSize.sm,
+-    fontWeight: theme.fontWeight.medium,
++    fontWeight: theme.fontWeight.semibold,
+   },
+ }));
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 99b6cbde8..33853dcca 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -120,7 +120,7 @@ interface SessionContextValue {
+ 
+   // Helpers
+   sendAgentMessage: (agentId: string, message: string) => void;
+-  createAgent: (options: { cwd: string; autoStart?: boolean }) => void;
++  createAgent: (options: { cwd: string; initialMode?: string; requestId?: string }) => void;
+   setAgentMode: (agentId: string, modeId: string) => void;
+   respondToPermission: (requestId: string, agentId: string, sessionId: string, selectedOptionIds: string[]) => void;
+ }
+@@ -259,14 +259,61 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       }));
+     });
+ 
++    // Audio output
++    const unsubAudioOutput = ws.on("audio_output", (message) => {
++      if (message.type !== "audio_output") return;
++      const { audio, format, id } = message.payload;
++
++      console.log("[Session] Received audio output:", id, "format:", format);
++
++      // Create Blob-like object for React Native
++      // React Native doesn't support creating Blobs from binary data
++      const audioBlob = {
++        type: format,
++        size: audio.length,
++        arrayBuffer: async () => {
++          // Convert base64 to ArrayBuffer
++          const binaryString = atob(audio);
++          const bytes = new Uint8Array(binaryString.length);
++          for (let i = 0; i < binaryString.length; i++) {
++            bytes[i] = binaryString.charCodeAt(i);
++          }
++          return bytes.buffer;
++        },
++      } as Blob;
++
++      // Play audio
++      setIsPlayingAudio(true);
++      audioPlayer.play(audioBlob)
++        .then(() => {
++          console.log("[Session] Audio playback complete:", id);
++          setIsPlayingAudio(false);
++
++          // Send confirmation to server
++          const msg: WSInboundMessage = {
++            type: "session",
++            message: {
++              type: "audio_played",
++              id,
++            },
++          };
++          ws.send(msg);
++        })
++        .catch((error) => {
++          console.error("[Session] Audio playback failed:", error);
++          setIsPlayingAudio(false);
++        });
++    });
++
+     return () => {
+       unsubSessionState();
+       unsubAgentCreated();
+       unsubAgentStatus();
+       unsubAgentUpdate();
+       unsubPermissionRequest();
++      unsubAudioOutput();
+     };
+-  }, [ws]);
++  }, [ws, audioPlayer, setIsPlayingAudio]);
+ 
+   const sendAgentMessage = useCallback((agentId: string, message: string) => {
+     // Generate unique message ID for deduplication
+@@ -310,7 +357,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     ws.send(msg);
+   }, [ws]);
+ 
+-  const createAgent = useCallback((options: { cwd: string; autoStart?: boolean }) => {
++  const createAgent = useCallback((options: { cwd: string; initialMode?: string; requestId?: string }) => {
+     const msg: WSInboundMessage = {
+       type: "session",
+       message: {
+diff --git a/packages/server/src/server/messages.ts b/packages/server/src/server/messages.ts
+index 06ba89fa5..426a2aaf4 100644
+--- a/packages/server/src/server/messages.ts
++++ b/packages/server/src/server/messages.ts
+@@ -63,6 +63,7 @@ export const CreateAgentRequestMessageSchema = z.object({
+   type: z.literal("create_agent_request"),
+   cwd: z.string(),
+   initialMode: z.string().optional(),
++  requestId: z.string().optional(),
+ });
+ 
+ export const SetAgentModeMessageSchema = z.object({
+@@ -188,6 +189,7 @@ export const AgentCreatedMessageSchema = z.object({
+     })).optional(),
+     title: z.string().optional(),
+     cwd: z.string(),
++    requestId: z.string().optional(),
+   }),
+ });
+ 
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 10a4f34c3..191c54348 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -466,7 +466,7 @@ export class Session {
+           break;
+ 
+         case "create_agent_request":
+-          await this.handleCreateAgentRequest(msg.cwd, msg.initialMode);
++          await this.handleCreateAgentRequest(msg.cwd, msg.initialMode, msg.requestId);
+           break;
+ 
+         case "set_agent_mode":
+@@ -697,7 +697,8 @@ export class Session {
+    */
+   private async handleCreateAgentRequest(
+     cwd: string,
+-    initialMode?: string
++    initialMode?: string,
++    requestId?: string
+   ): Promise<void> {
+     console.log(
+       `[Session ${this.clientId}] Creating agent in ${cwd} with mode ${
+@@ -736,6 +737,7 @@ export class Session {
+           availableModes: agentInfo?.availableModes ?? undefined,
+           title: agentInfo?.title ?? undefined,
+           cwd: agentInfo?.cwd || cwd,
++          requestId,
+         },
+       });
+       console.log(

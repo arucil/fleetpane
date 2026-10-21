@@ -1,0 +1,31 @@
+    Finished `test` profile [unoptimized] target(s) in 1.35s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-0f3d3cbf1f13dad6)
+
+running 24 tests
+test paseo_import::history::dsh::canonical_generation_names ... ok
+test paseo_import::tests::dsh_paths_match_utf16_and_truncation_contract ... ok
+test paseo_import::continuation::tests::fork_replies_must_create_an_independent_idle_session ... ok
+test paseo_import::tests::batch_plan_rejects_invalid_selections_before_writing ... ok
+test paseo_import::tests::malformed_duplicate_and_symlink_sources_fail_explicitly ... ok
+test paseo_import::tests::missing_workspace_retains_history_bindings_and_stale_preview_refuses_writes ... ok
+test paseo_import::tests::preview_import_identity_paging_and_no_secret_copy ... ok
+test paseo_import::tests::linked_git_workspace_is_registered_in_place_without_changing_branch_or_files ... ok
+test paseo_import::tests::binding_reopens_and_only_one_dispatch_attempt_wins ... ok
+test paseo_import::tests::reprepare_and_dispatch_attempt_cannot_both_win ... ok
+test paseo_import::tests::transaction_failure_rolls_back_registration_and_all_session_metadata ... ok
+test paseo_import::tests::replacing_unattempted_binding_requires_current_id_and_fences_old_dispatch ... ok
+test paseo_import::tests::unrelated_session_changes_do_not_invalidate_workspace_preview ... ok
+test paseo_import::tests::dsh_concatenated_zstd_frames_and_workspace_failure_report ... ok
+test paseo_import::tests::codex_complete_snapshot_is_paged_durable_and_preserves_raw_records ... ok
+test paseo_import::tests::fork_export_survives_source_removal_preserves_raw_records_and_refuses_tampering ... ok
+test paseo_import::tests::batch_partial_failures_stale_selection_and_idempotent_resume ... ok
+test paseo_import::tests::batch_history_paging_and_incomplete_tail_warning ... ok
+test paseo_import::tests::dsh_v4_selects_latest_generation_and_preserves_native_tool_result ... ok
+test paseo_import::tests::schema_eight_upgrade_preserves_archives_and_requires_the_new_binding_table ... ok
+test paseo_import::tests::dsh_refuses_unsupported_or_corrupt_latest_generation_instead_of_old_snapshot ... ok
+test paseo_import::tests::incomplete_final_line_is_visible_and_corrupt_interior_never_publishes ... ok
+test paseo_import::tests::batch_cancellation_finishes_current_snapshot_and_resume_keeps_it ... ok
+test paseo_import::tests::fork_refuses_partial_and_non_self_contained_history ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 116 filtered out; finished in 3.32s
+

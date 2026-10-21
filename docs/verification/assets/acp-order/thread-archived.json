@@ -1,0 +1,162 @@
+{
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "model-a",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "synthetic",
+          "name": "Synthetic",
+          "options": [
+            {
+              "name": "Synthetic A",
+              "value": "model-a"
+            },
+            {
+              "name": "Synthetic B",
+              "value": "model-b"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "currentValue": "low",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "name": "High",
+          "value": "high"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fleetpane-acp-order-qa/workspace",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "50de3112-0f15-42cb-ba7d-89c897102868",
+  "name": null,
+  "preview": "DeepSeek Harness",
+  "status": {
+    "type": "archived"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "[chronology]",
+              "type": "text"
+            }
+          ],
+          "id": "user:a3bb7845-5c65-439a-81c9-3afc53a98f60",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Before 中文\n  keep spaces ",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:segment:1",
+          "type": "acpMessage"
+        },
+        {
+          "call": {
+            "rawOutput": "original result 中文",
+            "sessionUpdate": "tool_call_update",
+            "status": "completed",
+            "title": "First chronological tool",
+            "toolCallId": "chronology-tool"
+          },
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:tool:chronology-tool",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            {
+              "text": "After first tool",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:segment:3",
+          "type": "acpMessage"
+        },
+        {
+          "content": [
+            "Interleaved thought 中文"
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_thought_chunk:segment:4",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "content": [
+            {
+              "text": "Tail before tool update",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:segment:5",
+          "type": "acpMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "New after tool update",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:segment:6",
+          "type": "acpMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "Explicit message one two",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:id:stream",
+          "type": "acpMessage"
+        },
+        {
+          "call": {
+            "rawOutput": "second result",
+            "sessionUpdate": "tool_call",
+            "status": "completed",
+            "title": "Second chronological tool",
+            "toolCallId": "chronology-second"
+          },
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:tool:chronology-second",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            {
+              "text": "Anonymous final 中文",
+              "type": "text"
+            }
+          ],
+          "id": "a3bb7845-5c65-439a-81c9-3afc53a98f60:agent_message_chunk:segment:9",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  ]
+}

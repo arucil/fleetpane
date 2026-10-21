@@ -1,0 +1,53 @@
+commit 94862b73f46794717a42f27d8c802d7e8e31fa4d
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Nov 15 19:46:37 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Nov 15 19:46:37 2025 +0100
+
+    Adjust AgentInput controls for send-only state
+
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 69cfc4a88..856863c6a 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -242,7 +242,7 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const hasImages = selectedImages.length > 0;
+   const hasSendableContent = hasText || hasImages;
+   const shouldShowSendButton = !isAgentRunning && hasSendableContent;
+-  const shouldShowDictateButton = !isAgentRunning && !hasSendableContent;
++  const shouldShowVoiceControls = !isAgentRunning && !hasSendableContent;
+ 
+   const overlayAnimatedStyle = useAnimatedStyle(() => {
+     return {
+@@ -388,20 +388,17 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+                   </Pressable>
+                 </>
+               ) : shouldShowSendButton ? (
+-                <>
+-                  <Pressable
+-                    onPress={handleSendMessage}
+-                    disabled={!ws.isConnected || isProcessing}
+-                    style={[
+-                      styles.sendButton,
+-                      (!ws.isConnected || isProcessing) && styles.buttonDisabled,
+-                    ]}
+-                  >
+-                    <ArrowUp size={20} color="white" />
+-                  </Pressable>
+-                  {realtimeButton}
+-                </>
+-              ) : shouldShowDictateButton ? (
++                <Pressable
++                  onPress={handleSendMessage}
++                  disabled={!ws.isConnected || isProcessing}
++                  style={[
++                    styles.sendButton,
++                    (!ws.isConnected || isProcessing) && styles.buttonDisabled,
++                  ]}
++                >
++                  <ArrowUp size={20} color="white" />
++                </Pressable>
++              ) : shouldShowVoiceControls ? (
+                 <>
+                   <Pressable
+                     onPress={handleVoicePress}

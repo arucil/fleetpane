@@ -1,0 +1,68 @@
+{
+  "final_pid": 808556,
+  "running_binary_matches_disk": true,
+  "native_explicit_retry_new_receipt": true,
+  "prior_report_unchanged": true,
+  "all_source_and_complete_archive_hashes_unchanged": true,
+  "snapshots": 4,
+  "saved_workspaces": 1,
+  "saved_sessions": 5,
+  "provider_and_host_started": false,
+  "final_attempt": {
+    "id": "196eed3a-8b56-494d-bc7b-728b922a6f7c",
+    "position": 4,
+    "state": "completed",
+    "writer_active": false,
+    "progress": {
+      "workspaces_done": 1,
+      "workspaces_total": 1,
+      "histories_available": 4,
+      "histories_failed": 1,
+      "current_workspace": null,
+      "current_session": null
+    },
+    "error": null,
+    "source": "/tmp/fp-paseo-receipts-native/paseo",
+    "target": "Migration QA"
+  },
+  "final_results": {
+    "summary": {
+      "id": "196eed3a-8b56-494d-bc7b-728b922a6f7c",
+      "position": 4,
+      "state": "completed",
+      "writer_active": false,
+      "progress": {
+        "workspaces_done": 1,
+        "workspaces_total": 1,
+        "histories_available": 4,
+        "histories_failed": 1,
+        "current_workspace": null,
+        "current_session": null
+      },
+      "error": null,
+      "source": "/tmp/fp-paseo-receipts-native/paseo",
+      "target": "Migration QA"
+    },
+    "results": [
+      {
+        "source_id": "workspace-one",
+        "name": "迁移工作区",
+        "imported_id": "3c25e744-574c-4ec8-b021-70931fa79f52",
+        "reused": true,
+        "registration_error": null,
+        "error": null,
+        "session_count": 5,
+        "histories_available": 4,
+        "history_failures": [
+          [
+            "62c03b93-db3d-4744-91f8-07442535dc56",
+            "Imported unsupported-one (unsupported-one): Paseo import: history import currently supports Codex and DeepSeek Harness"
+          ]
+        ],
+        "history_warnings": [],
+        "histories_finished": true
+      }
+    ],
+    "next": null
+  }
+}

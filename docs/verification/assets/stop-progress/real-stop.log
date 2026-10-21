@@ -1,0 +1,20 @@
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 37810)
+Traceback (most recent call last):
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/http/server.py", line 424, in handle_one_request
+    method()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/wait-smoke.py", line 81, in do_POST
+    self.wfile.write(data)
+  File "/home/amlo/.local/share/mise/installs/python/3.12/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+{"provider": "codex-cli 0.163.0", "loopback_requests": 1, "external_model": false, "same_host_provider": true, "exact_terminal_status": "interrupted", "stop_reply": {}, "stale_stop_refused": true}

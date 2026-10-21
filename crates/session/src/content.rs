@@ -26,9 +26,23 @@ pub struct ToolCall {
     pub raw_input: Option<Value>,
     pub content: Option<Vec<Value>>,
     pub raw_output: Option<Value>,
+    pub name: Option<String>,
+    pub kind: Option<String>,
+    pub locations: Option<Vec<fleetpane_runtime::acp::tool_calls::Location>>,
 }
 
 impl ToolCall {
+    pub fn display_title(&self) -> &str {
+        if self.title.is_empty() {
+            self.name
+                .as_deref()
+                .filter(|name| !name.is_empty())
+                .unwrap_or("Tool call")
+        } else {
+            &self.title
+        }
+    }
+
     pub fn parts(&self) -> Result<Vec<Part>, Error> {
         self.content
             .iter()
@@ -52,7 +66,31 @@ impl ToolCall {
 pub enum Part {
     Text(String),
     Image(Image),
+    Resource(Resource),
+    ResourceLink(ResourceLink),
     Unknown(Value),
+}
+
+/// Inline protocol data, not permission to read the resource's URI.
+/// Keep both payload fields when supplied; the raw Item retains extensions.
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct Resource {
+    pub uri: String,
+    pub mime_type: Option<String>,
+    pub text: Option<String>,
+    pub blob: Option<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct ResourceLink {
+    pub uri: String,
+    pub name: String,
+    pub title: Option<String>,
+    pub description: Option<String>,
+    pub mime_type: Option<String>,
+    pub size: Option<u64>,
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -286,6 +324,20 @@ fn decode_part(value: &Value, mcp: bool) -> Result<Part, Error> {
         Some("image") => Part::Image(Image::Url(
             serde_json::from_value::<Url>(value.clone())?.url,
         )),
+        Some("resource") => {
+            #[derive(Deserialize)]
+            struct Embedded {
+                resource: Resource,
+            }
+            let resource = serde_json::from_value::<Embedded>(value.clone())?.resource;
+            if resource.text.is_none() && resource.blob.is_none() {
+                return Err(Error::Projection(
+                    "Embedded resource lacks text or blob contents".into(),
+                ));
+            }
+            Part::Resource(resource)
+        }
+        Some("resource_link") => Part::ResourceLink(serde_json::from_value(value.clone())?),
         _ => Part::Unknown(value.clone()),
     })
 }
@@ -293,6 +345,75 @@ fn decode_part(value: &Value, mcp: bool) -> Result<Part, Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn embedded_resources_and_links_are_recognized_in_tool_results() {
+        let result: McpResult = serde_json::from_value(serde_json::json!({"content":[
+            {"type":"resource","resource":{"uri":"test:///notes.txt","text":"  原文\n\n"}},
+            {"type":"resource_link","uri":"test:///report.pdf","name":"report.pdf","size":0}
+        ]}))
+        .unwrap();
+        for part in result.parts().unwrap() {
+            assert!(
+                !matches!(part, Part::Unknown(_)),
+                "resource rendered as raw JSON"
+            );
+        }
+    }
+
+    #[test]
+    fn resources_keep_exact_payloads_empty_values_and_raw_extensions() {
+        let raw = json!({"id":"r","type":"acpMessage","content":[
+            {"type":"resource","resource":{"uri":"test:///a","mimeType":"text/plain","text":"  原文\r\n\n","blob":"AA==","_meta":{"x":false}},"annotations":{"priority":0}},
+            {"type":"resource","resource":{"uri":"test:///empty","text":""}},
+            {"type":"resource_link","uri":"test:///zero","name":"zero","title":"","size":0,"_meta":{"x":42}},
+            {"type":"resource","resource":{"uri":"test:///blob","blob":""}}
+        ]});
+        let item = item(raw.clone());
+        let Some(Content::AgentParts(parts)) = item.content().unwrap() else {
+            panic!("agent parts")
+        };
+        let Part::Resource(resource) = &parts[0] else {
+            panic!("resource")
+        };
+        assert_eq!(resource.text.as_deref(), Some("  原文\r\n\n"));
+        assert_eq!(resource.blob.as_deref(), Some("AA=="));
+        assert!(
+            matches!(&parts[1], Part::Resource(resource) if resource.text.as_deref() == Some(""))
+        );
+        assert!(
+            matches!(&parts[2], Part::ResourceLink(link) if link.size == Some(0) && link.title.as_deref() == Some(""))
+        );
+        assert!(
+            matches!(&parts[3], Part::Resource(resource) if resource.blob.as_deref() == Some(""))
+        );
+        // Item serialization, not the renderer's projection, owns unknown metadata.
+        assert!(item.text().unwrap().contains("\"x\": false"));
+        assert_eq!(serde_json::to_value(item).unwrap(), raw);
+    }
+
+    #[test]
+    fn known_resource_errors_remain_explicit_and_future_content_remains_raw() {
+        for block in [
+            json!({"type":"resource"}),
+            json!({"type":"resource","resource":{"uri":"test:///missing"}}),
+            json!({"type":"resource","resource":{"uri":"test:///bad","text":false}}),
+            json!({"type":"resource_link","uri":"test:///missing-name"}),
+            json!({"type":"resource_link","uri":"test:///bad-size","name":"bad","size":"0"}),
+        ] {
+            let call: ToolCall = serde_json::from_value(json!({"title":"read","status":"completed","content":[{"type":"content","content":block}]})).unwrap();
+            assert!(call.parts().is_err());
+        }
+        let block = json!({"type":"future_resource","resource":{"text":"future"}});
+        assert_eq!(decode_part(&block, true).unwrap(), Part::Unknown(block));
+    }
+    #[test]
+    fn tool_metadata_and_empty_titles_keep_original_json_semantics() {
+        let tool: ToolCall = serde_json::from_value(serde_json::json!({"title":"","name":"read_file","kind":"read","status":"pending","rawInput":false,"rawOutput":0,"locations":[{"path":"/synthetic/file.rs","line":0}]})).unwrap();
+        assert_eq!(tool.display_title(), "read_file");
+        assert_eq!(tool.raw_input, Some(serde_json::json!(false)));
+        assert_eq!(tool.raw_output, Some(serde_json::json!(0)));
+        assert_eq!(tool.locations.unwrap()[0].line, Some(0));
+    }
     use serde_json::json;
 
     fn item(value: Value) -> Item {

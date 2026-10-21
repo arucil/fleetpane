@@ -1,0 +1,14 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 2.96s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-9c42c15a90689dbb)
+
+running 6 tests
+test wait::tests::attention_binds_acp_requests_to_active_turn_and_codex_turn_ids_exactly ... ok
+test wait::tests::outcomes_preserve_failure_refusal_unknown_and_omit_transcript ... ok
+test wait::tests::missing_and_repeating_history_are_errors_not_completion ... ok
+test wait::tests::completion_before_a_stale_read_reply_is_still_observed ... ok
+test wait::tests::pages_find_the_exact_turn_and_backlog_uses_delivered_cursor_across_owner_change ... ok
+test wait::tests::deadline_includes_a_stalled_initial_read_and_never_sends_cancellation ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 86 filtered out; finished in 0.05s
+

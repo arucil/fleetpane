@@ -1,0 +1,19 @@
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 5.40s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-111b93d308106099)
+
+running 1 test
+
+thread 'host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline' (1693631) panicked at src/host_view/row_changes.rs:58:13:
+metadata thread/name/updated rebuilt unchanged conversation rows
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline ... FAILED
+
+failures:
+
+failures:
+    host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin fleetpane-desktop`

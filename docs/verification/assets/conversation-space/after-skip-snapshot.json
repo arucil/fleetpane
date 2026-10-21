@@ -1,0 +1,111 @@
+{
+  "protocol": 3,
+  "host_id": "ce398b78-5bd7-4357-aacb-3d1833b358d6",
+  "host_pid": 2746779,
+  "provider_pid": 2746784,
+  "provider_info": {
+    "agentCapabilities": {
+      "promptCapabilities": {
+        "image": true
+      },
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "ce398b78-5bd7-4357-aacb-3d1833b358d6",
+    "controller_id": "898d84fb-25af-4ef7-a5d6-aca6582d3fdf",
+    "generation": 8
+  },
+  "sequence": 121,
+  "operation_ids": [
+    "63497759-853f-4fef-b73e-4c78d9d911bf",
+    "d70295a9-dad0-4bed-9f8d-b27c7f42a422",
+    "ad9916c6-d0ba-45bc-aed4-7499806f3c23",
+    "7f3987a8-9f8a-4730-81e9-ec9ab4629fda",
+    "013ebd4f-4011-4125-9e9a-94cd665c70ee",
+    "5dbe7379-db70-4118-b136-60126a673dca",
+    "b8bbeb2d-b436-4d7e-8e81-9b00d8b96ea1",
+    "721c60bf-7053-4ee1-a66f-13c7dac8ceab",
+    "e8237ad9-b9ac-4ece-afc8-39baa8fe5112"
+  ],
+  "journal_total": 9,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "eb3e8688-4050-48f9-86a0-b4f7966e8ef3",
+        "turn_id": "2f57db6a-91d4-429a-99c4-6e3c59f08498"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "eb3e8688-4050-48f9-86a0-b4f7966e8ef3",
+        "threadId": "eb3e8688-4050-48f9-86a0-b4f7966e8ef3",
+        "toolCall": {
+          "content": [
+            {
+              "content": {
+                "text": "Proposed settings before approval \u4e2d\u6587",
+                "type": "text"
+              },
+              "type": "content"
+            }
+          ],
+          "kind": "edit",
+          "locations": [
+            {
+              "line": 42,
+              "path": "/tmp/fleetpane-layout-20261021/review-settings.md"
+            }
+          ],
+          "name": "write_file",
+          "rawInput": {
+            "attempt": 0,
+            "content": "# New settings \u4e2d\u6587\nKeep exact content.",
+            "enabled": false,
+            "file_path": "/tmp/fleetpane-layout-20261021/review-settings.md"
+          },
+          "title": "Review settings \u4e2d\u6587",
+          "toolCallId": "reviewed"
+        }
+      }
+    }
+  ],
+  "fault": null,
+  "fault_scope": null
+}

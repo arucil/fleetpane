@@ -1,7 +1,7 @@
 //! Durable mutation receipts. One bounded blocking task at a time from the Host loop.
 
 use crate::{
-    Operation, OperationEntry as Entry, OperationPage as Page, Outcome,
+    FaultScope, Operation, OperationEntry as Entry, OperationPage as Page, Outcome,
     lifecycle::{Admission, Mode},
 };
 use rusqlite::{Connection, OptionalExtension, params};
@@ -16,9 +16,22 @@ use std::{
 use uuid::Uuid;
 
 type Error = Box<dyn std::error::Error + Send + Sync>;
-const SCHEMA: u32 = 2;
+const SCHEMA: u32 = 3;
 const MAX_PAGES: u32 = 65_536; // 256 MiB at the fixed 4096-byte page size.
 const PAGE_SIZE: usize = 32;
+
+fn archive_bounds(connection: &Connection) -> Result<(usize, usize), Error> {
+    let (rows,bytes): (i64,i64) = connection.query_row(
+        "SELECT count(*),coalesce(sum(length(CAST(data AS BLOB))+length(CAST(session AS BLOB))+length(CAST(parent AS BLOB))+length(CAST(id AS BLOB))),0) FROM acp_archive", [],
+        |row| Ok((row.get(0)?,row.get(1)?))
+    )?;
+    if !(0..=64_064).contains(&rows) || !(0..=16 * 1024 * 1024).contains(&bytes) {
+        return Err(
+            "ACP archive exceeds 64064 rows or 16 MiB; no history was silently discarded".into(),
+        );
+    }
+    Ok((rows.try_into()?, bytes.try_into()?))
+}
 
 #[derive(Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -32,6 +45,8 @@ struct Database {
     _lock: File,
     id: Uuid,
     host: Uuid,
+    archive_rows: usize,
+    archive_bytes: usize,
 }
 
 /// The Host awaits each task; neither an unbounded worker queue nor filesystem
@@ -148,18 +163,20 @@ impl Database {
                 |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?)),
             )
             .optional()?;
-        let (id, initialize_admission) = if let Some((version, id, previous)) = existing {
-            if !matches!(version, 1 | SCHEMA) || previous != binding {
+        let (id, initialize_admission, initialize_archive) = if let Some((version, id, previous)) =
+            existing
+        {
+            if !matches!(version, 1 | 2 | SCHEMA) || previous != binding {
                 return Err("journal schema or provider/workspace binding differs; use its original configuration or a separate socket".into());
             }
-            (Uuid::parse_str(&id)?, version == 1)
+            (Uuid::parse_str(&id)?, version == 1, version < 3)
         } else {
             let id = Uuid::new_v4();
             transaction.execute(
                 "INSERT INTO metadata VALUES (1,?1,?2,?3)",
                 params![SCHEMA, id.to_string(), binding],
             )?;
-            (id, true)
+            (id, true, true)
         };
         if initialize_admission {
             transaction.execute_batch(
@@ -172,6 +189,17 @@ impl Database {
         // A current journal must already have its fence. Missing or invalid
         // state is corruption, never permission to reopen mutation admission.
         Self::read_admission(&transaction)?;
+        if initialize_archive {
+            transaction.execute_batch(
+                "CREATE TABLE acp_archive (
+                 position INTEGER PRIMARY KEY,
+                 kind TEXT NOT NULL CHECK(kind IN ('session','turn','item')),
+                 session TEXT NOT NULL, parent TEXT NOT NULL, id TEXT NOT NULL,
+                 data TEXT NOT NULL, UNIQUE(kind,session,parent,id));",
+            )?;
+        }
+        // A v3 store must already contain its archive, even when it is empty.
+        let (archive_rows, archive_bytes) = archive_bounds(&transaction)?;
         transaction.execute("UPDATE metadata SET version=?1 WHERE singleton=1", [SCHEMA])?;
         // No replay: a committed admission does not prove whether the provider
         // received it, nor whether a side effect happened before the crash.
@@ -185,6 +213,8 @@ impl Database {
             _lock: lock,
             id,
             host,
+            archive_rows,
+            archive_bytes,
         })
     }
 
@@ -240,6 +270,30 @@ impl Database {
         if changed != 1 {
             return Err("journal completion identity/state mismatch".into());
         }
+        Ok(())
+    }
+
+    fn fail(&mut self, reason: &str, scope: FaultScope) -> Result<(), Error> {
+        let transaction = self.connection.transaction()?;
+        let pending = {
+            let mut statement = transaction
+                .prepare("SELECT id,method FROM operations WHERE host=?1 AND state='accepted'")?;
+            statement
+                .query_map([self.host.to_string()], |row| {
+                    Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
+                })?
+                .collect::<Result<Vec<_>, _>>()?
+        };
+        let outcome = serde_json::to_string(&Outcome::Unknown(reason.to_owned()))?;
+        for (id, method) in pending {
+            if scope.includes(&method) {
+                transaction.execute(
+                    "UPDATE operations SET state='unknown',outcome=?1,completed_sequence=NULL WHERE id=?2 AND host=?3 AND state='accepted'",
+                    params![outcome, id, self.host.to_string()],
+                )?;
+            }
+        }
+        transaction.commit()?;
         Ok(())
     }
 
@@ -304,6 +358,79 @@ impl Database {
 }
 
 impl Journal {
+    pub(crate) async fn archive_write(
+        &self,
+        rows: Vec<crate::acp::archive::Row>,
+    ) -> Result<(), Error> {
+        self.run(move |db| {
+            let mut count=db.archive_rows;
+            let mut bytes=db.archive_bytes;
+            let transaction = db.connection.transaction()?;
+            for row in rows {
+                let data=serde_json::to_string(&row.data)?;
+                let previous: Option<i64> = transaction.query_row(
+                    "SELECT length(CAST(data AS BLOB)) FROM acp_archive WHERE kind=?1 AND session=?2 AND parent=?3 AND id=?4",
+                    params![row.kind,row.session,row.parent,row.id], |row| row.get(0)
+                ).optional()?;
+                match previous {
+                    Some(previous)=>bytes=bytes.checked_sub(usize::try_from(previous)?).ok_or("ACP archive size accounting mismatch")?,
+                    None=>{count+=1;bytes+=row.session.len()+row.parent.len()+row.id.len();}
+                }
+                bytes+=data.len();
+                if count > 64_064 || bytes > 16 * 1024 * 1024 {
+                    return Err("ACP archive exceeds 64064 rows or 16 MiB; no history was silently discarded".into());
+                }
+                transaction.execute(
+                    "INSERT INTO acp_archive(kind,session,parent,id,data) VALUES (?1,?2,?3,?4,?5)
+                     ON CONFLICT(kind,session,parent,id) DO UPDATE SET data=excluded.data",
+                    params![
+                        row.kind,
+                        row.session,
+                        row.parent,
+                        row.id,
+                        data
+                    ],
+                )?;
+            }
+            transaction.commit()?;
+            db.archive_rows=count;
+            db.archive_bytes=bytes;
+            Ok(())
+        })
+        .await
+    }
+
+    pub(crate) async fn archive_read(&self) -> Result<Vec<crate::acp::archive::Row>, Error> {
+        self.run(|db| {
+            archive_bounds(&db.connection)?;
+            let mut statement = db.connection.prepare(
+                "SELECT kind,session,parent,id,data FROM acp_archive
+                 ORDER BY CASE kind WHEN 'session' THEN 0 WHEN 'turn' THEN 1 ELSE 2 END,position",
+            )?;
+            let rows = statement.query_map([], |row| {
+                Ok((
+                    row.get::<_, String>(0)?,
+                    row.get::<_, String>(1)?,
+                    row.get::<_, String>(2)?,
+                    row.get::<_, String>(3)?,
+                    row.get::<_, String>(4)?,
+                ))
+            })?;
+            rows.map(|row| {
+                let (kind, session, parent, id, data) = row?;
+                Ok(crate::acp::archive::Row {
+                    kind,
+                    session,
+                    parent,
+                    id,
+                    data: serde_json::from_str(&data)?,
+                })
+            })
+            .collect()
+        })
+        .await
+    }
+
     pub async fn open(directory: PathBuf, binding: String, host: Uuid) -> Result<Self, Error> {
         let database =
             tokio::task::spawn_blocking(move || Database::open(&directory, &binding, host))
@@ -363,12 +490,8 @@ impl Journal {
         })
         .await
     }
-    pub async fn fail(&self, reason: String) -> Result<(), Error> {
-        self.run(move |db| {
-            db.connection.execute("UPDATE operations SET state='unknown',outcome=?1,completed_sequence=NULL WHERE state='accepted'",
-                [serde_json::to_string(&Outcome::Unknown(reason))?])?;
-            Ok(())
-        }).await
+    pub async fn fail(&self, reason: String, scope: FaultScope) -> Result<(), Error> {
+        self.run(move |db| db.fail(&reason, scope)).await
     }
 }
 
@@ -377,9 +500,9 @@ mod tests {
     use super::*;
     use serde_json::json;
 
-    struct Directory(PathBuf);
+    pub(super) struct Directory(pub(super) PathBuf);
     impl Directory {
-        fn new() -> Self {
+        pub(super) fn new() -> Self {
             let path =
                 std::env::temp_dir().join(format!("fleetpane-journal-test-{}", Uuid::new_v4()));
             crate::unix::prepare_directory(&path).unwrap();
@@ -427,6 +550,43 @@ mod tests {
         assert!(matches!(uncertain.outcome, Outcome::Unknown(_)));
         finished.completed_sequence = None;
         assert_eq!(db.get(finished.id).unwrap(), Some(finished));
+    }
+
+    #[test]
+    fn provider_failure_keeps_terminal_receipts_pending_until_their_own_result() {
+        let directory = Directory::new();
+        let mut db = Database::open(&directory.0, "synthetic", Uuid::new_v4()).unwrap();
+        let mut terminal = operation();
+        terminal.method = "fleetpane/terminal/input".into();
+        let provider = operation();
+        let mut future = operation();
+        future.method = "fleetpane/terminal/future".into();
+        for op in [&terminal, &provider, &future] {
+            db.admit(op).unwrap();
+        }
+        db.fail("provider exited", FaultScope::Provider).unwrap();
+        assert!(matches!(
+            db.get(terminal.id).unwrap().unwrap().outcome,
+            Outcome::Accepted
+        ));
+        for op in [provider, future] {
+            assert!(matches!(
+                db.get(op.id).unwrap().unwrap().outcome,
+                Outcome::Unknown(_)
+            ));
+        }
+        terminal.outcome = Outcome::Finished(json!({"id":terminal.id,"result":{}}));
+        terminal.completed_sequence = Some(1);
+        db.finish(&terminal).unwrap();
+        let mut close = operation();
+        close.method = "fleetpane/terminal/close".into();
+        db.admit(&close).unwrap();
+        db.fail("journal unavailable", FaultScope::Host).unwrap();
+        assert!(matches!(
+            db.get(close.id).unwrap().unwrap().outcome,
+            Outcome::Unknown(_)
+        ));
+        assert_eq!(db.get(terminal.id).unwrap(), Some(terminal));
     }
 
     #[test]
@@ -513,7 +673,9 @@ mod tests {
         let mut db = Database::open(&directory.0, "synthetic", Uuid::new_v4()).unwrap();
         // Recreate the previous journal layout, then exercise the real migration.
         db.connection
-            .execute_batch("DROP TABLE admission; UPDATE metadata SET version=1")
+            .execute_batch(
+                "DROP TABLE admission; DROP TABLE acp_archive; UPDATE metadata SET version=1",
+            )
             .unwrap();
         let operation = operation();
         db.admit(&operation).unwrap();
@@ -534,5 +696,139 @@ mod tests {
         let ready = drained.change(1, Mode::Ready).unwrap();
         db.set_admission(&drained, &ready).unwrap();
         assert_eq!(db.admission().unwrap().generation, 2);
+    }
+}
+
+#[cfg(test)]
+mod archive_tests {
+    use super::*;
+    use crate::acp::archive::Row;
+    use serde_json::json;
+
+    fn row(id: &str, text: &str) -> Row {
+        Row {
+            kind: "item".into(),
+            session: "synthetic".into(),
+            parent: "turn".into(),
+            id: id.into(),
+            data: json!({"id":id,"type":"acpMessage","text":text}),
+        }
+    }
+
+    #[tokio::test]
+    async fn archive_upserts_preserve_order_and_transaction_failures_preserve_rows_and_budget() {
+        let directory = tests::Directory::new();
+        let journal = Journal::open(directory.0.clone(), "synthetic".into(), Uuid::new_v4())
+            .await
+            .unwrap();
+        journal
+            .archive_write(vec![row("z", "中文"), row("a", "second")])
+            .await
+            .unwrap();
+        journal
+            .archive_write(vec![row("z", "changed 中文")])
+            .await
+            .unwrap();
+        let rows = journal.archive_read().await.unwrap();
+        assert_eq!(
+            rows.iter().map(|r| r.id.as_str()).collect::<Vec<_>>(),
+            vec!["z", "a"]
+        );
+        assert_eq!(rows[0].data["text"], "changed 中文");
+        journal.run(|db| {
+            assert_eq!(archive_bounds(&db.connection)?,(db.archive_rows,db.archive_bytes));
+            db.connection.execute_batch("CREATE TRIGGER fail_archive BEFORE INSERT ON acp_archive WHEN NEW.id='bad' BEGIN SELECT RAISE(FAIL,'synthetic archive failure'); END;")?;
+            Ok(())
+        }).await.unwrap();
+        assert!(
+            journal
+                .archive_write(vec![row("z", "must roll back"), row("bad", "fail")])
+                .await
+                .is_err()
+        );
+        assert_eq!(
+            journal.archive_read().await.unwrap()[0].data["text"],
+            "changed 中文"
+        );
+        journal
+            .run(|db| {
+                assert_eq!(
+                    archive_bounds(&db.connection)?,
+                    (db.archive_rows, db.archive_bytes)
+                );
+                Ok(())
+            })
+            .await
+            .unwrap();
+        drop(journal);
+        let journal = Journal::open(directory.0.clone(), "synthetic".into(), Uuid::new_v4())
+            .await
+            .unwrap();
+        assert_eq!(journal.archive_read().await.unwrap().len(), 2);
+    }
+
+    #[tokio::test]
+    async fn v2_upgrade_keeps_admission_and_current_missing_malformed_or_oversize_archive_fails() {
+        let directory = tests::Directory::new();
+        let journal = Journal::open(directory.0.clone(), "synthetic".into(), Uuid::new_v4())
+            .await
+            .unwrap();
+        let admission = journal.admission().await.unwrap();
+        let draining = admission.change(0, Mode::Draining).unwrap();
+        journal
+            .set_admission(admission, draining.clone())
+            .await
+            .unwrap();
+        journal
+            .run(|db| {
+                db.connection
+                    .execute_batch("DROP TABLE acp_archive; UPDATE metadata SET version=2")?;
+                Ok(())
+            })
+            .await
+            .unwrap();
+        drop(journal);
+        let journal = Journal::open(directory.0.clone(), "synthetic".into(), Uuid::new_v4())
+            .await
+            .unwrap();
+        assert_eq!(journal.admission().await.unwrap(), draining);
+        assert!(journal.archive_read().await.unwrap().is_empty());
+        journal
+            .archive_write(vec![row("one", "valid")])
+            .await
+            .unwrap();
+        journal
+            .run(|db| {
+                db.connection
+                    .execute("UPDATE acp_archive SET data='{'", [])?;
+                Ok(())
+            })
+            .await
+            .unwrap();
+        assert!(journal.archive_read().await.is_err());
+        journal
+            .run(|db| {
+                db.connection.execute(
+                    "UPDATE acp_archive SET data=?1",
+                    ["x".repeat(16 * 1024 * 1024)],
+                )?;
+                Ok(())
+            })
+            .await
+            .unwrap();
+        assert!(journal.archive_read().await.is_err());
+        journal
+            .run(|db| {
+                db.connection.execute_batch("DROP TABLE acp_archive")?;
+                Ok(())
+            })
+            .await
+            .unwrap();
+        drop(journal);
+        assert!(
+            Journal::open(directory.0.clone(), "synthetic".into(), Uuid::new_v4())
+                .await
+                .is_err()
+        );
     }
 }

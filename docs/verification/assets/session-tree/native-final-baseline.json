@@ -1,0 +1,81 @@
+{
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "a9495bc6-c140-4ba4-a766-1e1a45421092",
+    "host_pid": 3288497,
+    "provider_pid": 3288553,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "a9495bc6-c140-4ba4-a766-1e1a45421092",
+      "controller_id": "4927b050-0f4d-4326-9658-5480ad7b2ea1",
+      "generation": 2
+    },
+    "sequence": 28,
+    "operation_ids": [
+      "8fa649cd-8042-435b-a467-88777818da86",
+      "8d570af3-a3b8-4f30-ba03-098d7b73df0b"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "child",
+          "turn_id": "child-turn-1"
+        },
+        {
+          "thread_id": "other-0",
+          "turn_id": "other-0-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "approval-child-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-child-turn-1",
+          "threadId": "child",
+          "turnId": "child-turn-1"
+        }
+      },
+      {
+        "id": "approval-other-0-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-other-0-turn-1",
+          "threadId": "other-0",
+          "turnId": "other-0-turn-1"
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  },
+  "drafts": [
+    {
+      "key": {
+        "socket": "/tmp/fleetpane-replay-175-20261021/native/host/control.sock",
+        "host_id": "a9495bc6-c140-4ba4-a766-1e1a45421092",
+        "thread_id": "root",
+        "cwd": "/tmp/fleetpane-replay-175-20261021/native"
+      },
+      "revision": 1,
+      "text": "保留主会话草稿\n检查子会话  \n不发送",
+      "attempt": null
+    }
+  ],
+  "host_executable_sha256": "35a993859a0f59d62b1b19c0e0ae137753a96c41eadbb252415e8143135a2e10"
+}

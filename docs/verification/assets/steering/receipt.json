@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-20",
+  "source": {
+    "base": "c91d269247207a08898e264c81083df4fbd4e745",
+    "follow_up_changes": "uncommitted",
+    "files_sha256": {
+      "apps/host/src/main.rs": "c6525c7d78087815d9e67a49eefc9370a72d488d5ebb466a29cb1a7198b7d13a",
+      "apps/desktop/src/host_view.rs": "120df28af60ee2140ceb2fe65f3563163d6339383b7e344a3a7250ba597dfe7d",
+      "crates/session/src/client.rs": "55442e5b7c5386c176a0897265d84962aacd6b19dfed438bbc4be90342dfaa4a",
+      "crates/session/src/drafts.rs": "a42716019ce0f216b32a7f1e7265221f19730fe7786a50d4f724a38322038adf",
+      "crates/session/src/storage.rs": "db8dff78768b6bc988994c4f73364070df118ea0536fcb8836e66a091232fb00",
+      "scripts/provider-fixture.py": "b7273b3c49e1856b67178dbe3527ba4aba585b95589404b1fd220fa3d32d29cd",
+      "scripts/steering-smoke.py": "05619fd4aa25c717d1ad162d51dfa4e937daa070cf852a25ce3ebdf695bd6245"
+    }
+  },
+  "native": {
+    "desktop_pid": 820793,
+    "desktop_sha256": "9251203658dc6ea99e264002c35859aa0e0a8c0b24e5c12a2f76e1d94f356b4e",
+    "fixture_follow_ups": 2,
+    "same_turn": true,
+    "window_replacement_preserved_snapshots": true,
+    "recovered_exact_draft": true,
+    "real_opencodex_history_rendered": true
+  },
+  "host_artifacts": [
+    {
+      "name": "Codex",
+      "sha256": "7871ba4c306d1a0add2650ad3595c78056cbc95352d9edddf44409ce1589af54",
+      "stopped": true
+    },
+    {
+      "name": "DeepSeek ACP",
+      "sha256": "7871ba4c306d1a0add2650ad3595c78056cbc95352d9edddf44409ce1589af54",
+      "stopped": true
+    },
+    {
+      "name": "Real OpenCodex",
+      "sha256": "7871ba4c306d1a0add2650ad3595c78056cbc95352d9edddf44409ce1589af54",
+      "stopped": true
+    }
+  ],
+  "real_opencodex": {
+    "version": "0.163.0",
+    "turn_count": 1,
+    "turn_id": "01a1592b-632a-7453-8351-5393a9b91e92",
+    "status": "completed",
+    "ack": {
+      "turnId": "01a1592b-632a-7453-8351-5393a9b91e92"
+    },
+    "items": [
+      {
+        "type": "userMessage",
+        "content": [
+          {
+            "text": "This is an isolated streaming UI check. No tools or file access. Write a numbered list of one hundred geometric shapes. Follow any subsequent instruction that changes this request.",
+            "text_elements": [],
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "type": "userMessage",
+        "content": [
+          {
+            "text": "Change of plan: stop the numbered list. Reply exactly STEER-LIVE-901. Do not call tools or inspect files.",
+            "text_elements": [],
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "type": "agentMessage",
+        "text": "STEER-LIVE-901"
+      }
+    ]
+  },
+  "process_smoke": {
+    "ok": true,
+    "exact_turn_no_new_turn": true,
+    "text_exact": true,
+    "same_UUID_once": true,
+    "stale_drain_refused": true,
+    "pending_approval_unchanged": true,
+    "wrong_ack_preserves_attempt": true,
+    "ACP_unsupported_no_start": true,
+    "controller_kill_host_restart_no_replay": true
+  },
+  "verification": {
+    "root_tests": 92,
+    "desktop_tests": 4,
+    "strict_clippy_both_manifests": true,
+    "same_turn_native_follow_ups": 2,
+    "ACP_live_follow_ups": "unsupported",
+    "alias_smokes": [
+      "workspaces",
+      "diffs",
+      "worktrees"
+    ]
+  },
+  "cleanup": {
+    "owned_hosts_providers_stopped": true,
+    "owned_sockets_removed": true,
+    "native_window_closed": true,
+    "isolated_workspace_stopped": true,
+    "shared_runtime_restarted": false
+  },
+  "pushed_foundation_CI": {
+    "headSha": "c91d269247207a08898e264c81083df4fbd4e745",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/arucil/fleetpane/actions/runs/39419922181",
+    "jobs": [
+      {
+        "name": "desktop-linux",
+        "conclusion": "success"
+      },
+      {
+        "name": "rust (ubuntu-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "rust (windows-latest)",
+        "conclusion": "success"
+      },
+      {
+        "name": "rust (macos-latest)",
+        "conclusion": "success"
+      }
+    ],
+    "excludes_uncommitted_follow_ups": true
+  }
+}

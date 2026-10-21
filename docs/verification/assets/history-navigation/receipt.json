@@ -1,0 +1,75 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted source; owned native QA",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "20edca26ec1e3e595a741f8f28f35548513644dbc5e974d9cc7da9fae947c8b4",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237",
+    "scripts/acp-fixture.py": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711",
+    "crates/session/src/storage.rs": "81d13dc714e6272bd454383ad3a21f6d19aea021d5d95bf5fb541f118813d9ef"
+  },
+  "desktop_sha256": "11e1e8035ec835a7bf3bbb5a83dae3edef8a7f38b12ba074b6f27a8c4fb9f11e",
+  "host_sha256": "b36010f9e691f2188843abae32f2be9b76d3551d2e48cd98f1e0d4e0e2e87132",
+  "framework_checked": {
+    "package": "gpui-pre 0.3.9 used by gpui-kit 0.7.3",
+    "list_source_sha256": "42704328bf8f1f5c75b0129dfaf4052e475f2de1bcfec3a2c6f92f518c6cb573",
+    "behavior": "tail intent, unknown geometric end, set_follow_mode tail anchoring and existing owning-view notification on user scroll inspected before implementation"
+  },
+  "fixture_adaptation": {
+    "base_sha256": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711",
+    "adapted_sha256": "7e0d7da0de0a19ffb9d537255e5d6751811b1e96874313510fd07330c092e6e7",
+    "patch": "qa-fixture.patch"
+  },
+  "native": {
+    "workspace": "fleetpane-history-navigation-20261021",
+    "desktop": "app-2676081",
+    "main_session": "9816dacd-08c3-4b46-859a-f9afade3dc1b",
+    "other_session": "ca076cb7-ad82-4be0-a1e3-5c9c2f108c3e",
+    "scope": [
+      "history page and scroll up",
+      "explicit return and button disappearance",
+      "paused content during streaming",
+      "resume following growing last row twice",
+      "exact saved draft and unrelated permission preserved",
+      "native Stop and normal close",
+      "actual 900x560 control reachability"
+    ],
+    "limits": [
+      "900x560 can have zero timeline height",
+      "Pre-paint screenshot 07 and maximized resize 13 excluded",
+      "First raw stream-start probe was rejected before admission due to wrong request field; corrected with operation_id before the accepted stream"
+    ]
+  },
+  "checks": {
+    "fmt": "cargo fmt --manifest-path apps/desktop/Cargo.toml",
+    "clippy": "cargo clippy --manifest-path apps/desktop/Cargo.toml --locked --all-targets -- -D warnings",
+    "tests": "cargo test --manifest-path apps/desktop/Cargo.toml --locked (11 pass)",
+    "build": "cargo build --manifest-path apps/desktop/Cargo.toml --locked"
+  },
+  "artifacts": {
+    "after-jump.json": "052772dfaded412d43a4b0a8ed50abbe868172cda352777f73a0689ca1c86334",
+    "before-jump.json": "052772dfaded412d43a4b0a8ed50abbe868172cda352777f73a0689ca1c86334",
+    "cleanup.json": "d3332edac202368656c763d5d0b3a328772e481ccdb0549d93b7636160a86c40",
+    "desktop-build.log": "ffa01e372f582b36ce95d88379dff937691b88eb6feb95895a684813f9d2fb46",
+    "desktop-clippy.log": "67198521a0066e974a8843806a82025f0bfc3a46c95d6a086730b85992b88f62",
+    "desktop-tests.log": "2ae5ecf1099505177f9e910d32387db93cba61ed6236d9b2a62d0a7c3d24269d",
+    "detached-again.png": "63c9165881e16d23b9e34debf7b27ee94c40918a80e966ec7919c460e93d6aa4",
+    "draft-after-jump.json": "df18ffdef6509a6249713c229f3a6251341623947d1606643441398006b88d92",
+    "draft-before-jump.json": "df18ffdef6509a6249713c229f3a6251341623947d1606643441398006b88d92",
+    "earlier.png": "45e0c1dccb5123741cbd9225f50d48beb2c1d9ec600b24a93bf1de81c538db0f",
+    "final-draft.json": "df18ffdef6509a6249713c229f3a6251341623947d1606643441398006b88d92",
+    "final-snapshot.json": "c9ae6c0aa12089e9c27839483d67f29dcf84427a6681619ebf8ef05b049d2323",
+    "fixture-acp-sessions.json": "bc093479d042d74a6109ba37d5cbac6a8d79f10b79ea82ae8b335b9e0253964a",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "follow-grown.png": "f894810a130957cd2da974ab295d826c025f9bea0aa1e2040676a0b9f3228e3c",
+    "follow.png": "747b6630ddb9936f667030dcce8a852dd8f77a26e1ccc0c1613360f6a3334cb9",
+    "latest.png": "de5fedd42516187a7ffd1578f1f299833b118ca63a1728d0756948519e23db25",
+    "observed-main.json": "e6231adbfd38dc48f739f3aff160faaed7560b3bc6da77822c0ba431b9784c46",
+    "qa-fixture.patch": "ebcd5a09cdc0e818204bb7f12c5012b2d8de6ca361e86cda8503da178ae5b285",
+    "setup.json": "89b70204a805da24b10de7a54929456ceef95c57acfdda6be96bcc5892420776",
+    "small.png": "2675e3618f2407d619b1d725ee7f3f820de7b6213cf19ca012dada37efd0e174",
+    "stream-follow-snapshot.json": "84b9839e5d86a51c9551aea8da1f39df5b3c32ea0aa87c3ce3844ec9be7f5140",
+    "stream-paused.png": "b3e62c24144a2a6f2b96aff2c826f2a70a60ba5142aecd42c271679bebbb791e",
+    "stream-start.json": "97024f088d8c4e02d6e17086e1913988f8affe5dc5a03b56ab8cc7e88a105530",
+    "final-audit.log": "307d9baf319d36504629f034d65cf29287c4d5e643c88244d58a01ebb83469f0"
+  }
+}

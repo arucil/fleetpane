@@ -1,0 +1,39 @@
+diff --git a/packages/app/src/components/agent-stream-view.tsx b/packages/app/src/components/agent-stream-view.tsx
+index dbca06d13..685c6b14c 100644
+--- a/packages/app/src/components/agent-stream-view.tsx
++++ b/packages/app/src/components/agent-stream-view.tsx
+@@ -42,7 +42,7 @@ export function AgentStreamView({
+   onPermissionResponse,
+ }: AgentStreamViewProps) {
+   const scrollViewRef = useRef<ScrollView>(null);
+-  const bottomSheetRef = useRef<BottomSheetModal>(null);
++  const bottomSheetRef = useRef<BottomSheetModal | null>(null);
+   const insets = useSafeAreaInsets();
+   const [selectedToolCall, setSelectedToolCall] = useState<{
+     toolName: string;
+diff --git a/packages/app/src/components/orchestrator-messages-view.tsx b/packages/app/src/components/orchestrator-messages-view.tsx
+index a6f2442da..51adf34e9 100644
+--- a/packages/app/src/components/orchestrator-messages-view.tsx
++++ b/packages/app/src/components/orchestrator-messages-view.tsx
+@@ -20,7 +20,7 @@ interface OrchestratorMessagesViewProps {
+ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessagesViewProps>(
+   function OrchestratorMessagesView({ messages, currentAssistantMessage, onArtifactClick }, ref) {
+     const { theme } = useUnistyles();
+-    const bottomSheetRef = useRef<BottomSheetModal>(null);
++    const bottomSheetRef = useRef<BottomSheetModal | null>(null);
+     const [selectedToolCall, setSelectedToolCall] = useState<{
+       toolName: string;
+       status: 'executing' | 'completed' | 'failed';
+diff --git a/packages/app/src/components/tool-call-bottom-sheet.tsx b/packages/app/src/components/tool-call-bottom-sheet.tsx
+index cff7f806e..552691385 100644
+--- a/packages/app/src/components/tool-call-bottom-sheet.tsx
++++ b/packages/app/src/components/tool-call-bottom-sheet.tsx
+@@ -9,7 +9,7 @@ import {
+ } from "@gorhom/bottom-sheet";
+ 
+ interface ToolCallBottomSheetProps {
+-  bottomSheetRef: React.RefObject<BottomSheetModal>;
++  bottomSheetRef: React.RefObject<BottomSheetModal | null>;
+   toolName?: string;
+   status?: "pending" | "in_progress" | "executing" | "completed" | "failed";
+   args?: any;

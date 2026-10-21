@@ -1,0 +1,162 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "dirty_worktree": true,
+  "source_sha256": {
+    "crates/runtime/src/lib.rs": "759e503081f3bc3bd2db88e6221bee3eaf34cea1f1c574d2755967d8e4ffee87",
+    "crates/session/src/lib.rs": "aeb9706ba29cc1fd226472b2c6ac1f76e00ec1cbc0d6f6033de6ac5e4a1e0724",
+    "crates/session/src/session_tree.rs": "b987035a95e15de0ec96637858a4a379d002ec14a6241f32268c65da47dbc15f",
+    "crates/session/src/session_tree/tests.rs": "205020e6f6a67bbeeefa8e5a6c3f22f7cbbf632025bf8c4b0997b9a709a2fadb",
+    "apps/host/src/main.rs": "b3ddc23527ed66a1a18c9d52a3e89f2f3385989fd1da1350cef7f701129c0ab0",
+    "apps/desktop/src/main.rs": "829c3652ab42142e17b07f9b596a04a852b5858271d3c0b77a862fcb97e575ea",
+    "apps/desktop/src/host_view.rs": "00aa7501b703e841d084e57c1779a683f3e98cd65c936ce4401136bedc1d5e93",
+    "apps/desktop/src/host_view/observe.rs": "90edc32516567126ad500f272e69a8bda77b16a32e00b1a98bf8806ee73734e1",
+    "apps/desktop/src/session_tree_view.rs": "c8aa1b4faea212b6360e3c2b4b4c733a140ba29e132e2f94f865c154ac6f6d63",
+    "scripts/provider-fixture.py": "e7d3f1dbd9ba5771e69ab16cab9b09d29a107154e7d25d0d971c688cec8cab28",
+    "scripts/session-tree-smoke.py": "32d1d370b214386757275cfa0781aa6bd926c41490202818e1be3cc330fe5473",
+    "scripts/codex-session-smoke.py": "96f1b487b591d27801ca12ff69f5944da078f9fc4290a0ac74bdd4ccc25e890c"
+  },
+  "artifacts": {
+    "final_host_cli": {
+      "path": "target/debug/fleetpane-host",
+      "sha256": "34e4511efd3fb236a07be1d69c5ae88b88f64baa2eb7c9f14e1b504e2a338b0d"
+    },
+    "final_desktop": {
+      "path": "apps/desktop/target/debug/fleetpane-desktop",
+      "sha256": "8b24efb8ef521e8196f3ef81f456c5803e21c7b66870e99a0660a201571abe30"
+    },
+    "native_feature_desktop_before_snapshot_invalidation": {
+      "desktop_sha256": "e46589040a2c599b813e9b7dd6dc380b71156e25f9cdb580387f1229ca17017b",
+      "sources": {
+        "apps/desktop/src/host_view.rs": "6bba86ab50906bf3d6c7bf7b24db3590e42456fa89eac1bec1e3b300346629a5",
+        "apps/desktop/src/host_view/observe.rs": "fc46c150c9a5368da82219fe84052ef6890dfe1528197e0344eb3472068d13fb",
+        "apps/desktop/src/session_tree_view.rs": "c8aa1b4faea212b6360e3c2b4b4c733a140ba29e132e2f94f865c154ac6f6d63",
+        "crates/session/src/session_tree.rs": "b987035a95e15de0ec96637858a4a379d002ec14a6241f32268c65da47dbc15f",
+        "crates/runtime/src/lib.rs": "759e503081f3bc3bd2db88e6221bee3eaf34cea1f1c574d2755967d8e4ffee87"
+      }
+    },
+    "native_feature_running_host_sha256": "35a993859a0f59d62b1b19c0e0ae137753a96c41eadbb252415e8143135a2e10",
+    "replacement_running_host_sha256": "34e4511efd3fb236a07be1d69c5ae88b88f64baa2eb7c9f14e1b504e2a338b0d"
+  },
+  "checks": {
+    "root_tests": 176,
+    "desktop_tests": 19,
+    "root_and_desktop_strict_clippy": "passed",
+    "root_and_desktop_format": "passed",
+    "both_builds": "passed",
+    "python_ruff_check_format": "passed",
+    "provider_inventory_nodes": 113,
+    "provider_loaded_contexts": 110,
+    "codex": {
+      "provider": "codex-cli 0.163.0",
+      "historyMode": "paginated",
+      "create_send_failed_read_list": "PASS",
+      "rename_global_title_workspace_filters": "PASS",
+      "model_catalog_explicit_model_effort_http_readback": "PASS",
+      "archived_history_restore_explicit_resume": "PASS",
+      "read_only_archived_session_tree": "PASS",
+      "local_model_requests": 2,
+      "real_llm_turn": false
+    },
+    "native_exact_draft_bytes": 49,
+    "native_draft_revision": 1,
+    "native_stale_copy_unchanged": true,
+    "native_ids_copied": [
+      "child",
+      "grandchild",
+      "ephemeral"
+    ],
+    "native_pending_requests_preserved": 2,
+    "native_mutations": "Only two owned fixture setup turn/start calls per full native run",
+    "native_small_window": "1100x650 Stop visible; existing approval controls reachable",
+    "read_only_foreign_owner_refresh_preserved": true,
+    "host_replacement_detaches_tree_without_claim": true
+  },
+  "cleanup": [
+    {
+      "host_pid": 3288497,
+      "provider_pid": 3288553,
+      "host_gone": true,
+      "provider_gone": true,
+      "socket_removed": true,
+      "desktop_pids": [
+        3292302,
+        3318414
+      ],
+      "desktop_exit_codes": [
+        0,
+        0
+      ],
+      "workspace": "fleetpane-tree-20261021",
+      "workspace_stopped": true
+    },
+    {
+      "initial_host_pid": 3380795,
+      "initial_provider_pid": 3380801,
+      "replacement_host_pid": 3405744,
+      "replacement_provider_pid": 3405776,
+      "all_four_processes_gone": true,
+      "socket_removed": true,
+      "desktop_pid": 3387921,
+      "desktop_exit_signal": 15,
+      "desktop_exit_scope": "workspace stop sent SIGTERM before graceful window exit was confirmed",
+      "workspace": "fleetpane-tree-replace-20261021",
+      "workspace_stopped": true
+    }
+  ],
+  "history": {
+    "last_ordinal": 179,
+    "last_revision": "561e164b02beb33c0c622045ce9ebfc38f3ad39e",
+    "prior_174_unchanged": true,
+    "next_ordinal": 180,
+    "next_revision": "7284efd0fe7401c1ccf8b06dddf8f28861d37386",
+    "receipt": "../paseo-replay/session-tree/receipt.json"
+  },
+  "limits": [
+    "Observational, multi-request inventory; no background-resource census or safe archive authorization.",
+    "ACP ancestry, real multi-agent/model acceptance, native voice, live Session Host handoff and performance comparison not established.",
+    "The first native Host predates an empty-history validation token refactor; its runtime query source is unchanged. Hashes are separate.",
+    "Descendant/selection/small-window screenshots predate shared snapshot adoption; collector and tree renderer bytes are unchanged. Final root/error/replacement checks use the final desktop.",
+    "Two initial desktop instances exited 0. Third workspace stop delivered SIGTERM before graceful desktop exit was confirmed; subsequent Host/draft/pending readback passed.",
+    "No CI, deployment, macOS/Windows QA, release, commit or push."
+  ],
+  "evidence_sha256": {
+    "codex-smoke.json": "3c945edcc846b40883ce1275a4412b7483b3e93a1458aa0b50c1cfa46bddc0b0",
+    "descendants.png": "50a13572d41635c4f1190dea9ecc80904591c8ea37b04e17a8cb57ca88ee9884",
+    "desktop-build.log": "49aa5d6b8458e4f955fd5a3c86d735a7d6a484cd1f1067cfe2eb694a377ea1cf",
+    "desktop-clippy.log": "8bd78e8c5314b41902d63e644087bf621765f6341b9cebfa51e503e3c077ddab",
+    "desktop-tests.log": "e26fb5793de9063f516612b4ce08f0a7fb78c63a44f23afbdd19378fb4bd1b62",
+    "detached-after-replacement.png": "7f582665c04cdb55f4e259a9fd2837efd1cd80b35bd20f4edc08f7a5a60c3492",
+    "ephemeral.png": "791d0498a081519213e65c868f3d7681a2612dfa57daa024719f23be7b877792",
+    "final-tree.png": "5662184f5223f6702de4bedaf22f26b7f754622fdc1ed6f43c2a17e1bf9323f0",
+    "fork-selection.png": "a0b6b1a87bb850efcca3c7fd973d4e60056dfad368d1f894eea5feade0fe65f3",
+    "host-build.log": "9f3a84e34b17b1aa2a80fac1b2b12e8328e55167b32009d6948812c67a02ecde",
+    "native-after-desktop-close.json": "43600cf92ed390f51932f6899b97265d2bc4660599bd1df78e87c71d8de3367c",
+    "native-after-refresh.json": "101eede02064897e8537a966e8c08e5fc0b8f165b424a0c3dbb036b906913c9f",
+    "native-after-refusal.json": "3a1e1cf8b461a5e687feb4abaef93b10a5f7f4f4f48d7d61533ddd2219c9d7e8",
+    "native-cleanup.json": "aeb9d48a47b294b355529465c987c81dfe7d2b473b23913df21bc4c71c66bc7e",
+    "native-copied-tree.json": "f8e0bcd37eb4d855ce5bbfa8bc85d6bd06b9ee962835f5169051524ee55ab6f4",
+    "native-feature-source-binding.json": "05bddf223241c54a93a0c1d30e1ef0f60d5f993878326b8638e797ea1bf9dee5",
+    "native-final-baseline.json": "b79f3e99941abc81c87af9587608ef64bfd06a7d6fe7b388b58d7884d498fbf2",
+    "native-mutations.json": "77f19cc45d13af21356f923c7f02410126140f07d598cbbfa82fc4dbcccc3d2e",
+    "native-small-window.json": "43600cf92ed390f51932f6899b97265d2bc4660599bd1df78e87c71d8de3367c",
+    "read-only-before.png": "da569ca585e27089ecc117364bfea09d189b277bf99ea46e304fdb520c1aaf2e",
+    "refused-retained.png": "8ca981c113ab7224b85d601e65f7c21a88d8b1b5b6e1246deca0605809f35649",
+    "replacement-after-refusal.json": "3dd530e47af5f975d2f03afec7b1d07214b9869603a1062f962a8d09b1bd96ae",
+    "replacement-after-replacement.json": "ac8c612fc56ff09885ddb4b16e9ccc48c56137361a038eafc2b1add220ffec56",
+    "replacement-after-workspace-stop.json": "48e662b1eaa398790a6c539d83866c69bbcc31702192da191af6e632ba721b96",
+    "replacement-before-replacement.json": "7a382b6bd7e66e76a35d665e983a6046fd34ef9d97ef4be5d2c62eb18c5cfb6d",
+    "replacement-before.json": "92e88ab8b5f25906194dbb9e9bd7a08883bc85f34cbfbba4319a40a6b456e1cd",
+    "replacement-cleanup.json": "92364c0ccd7f2dc23048c875379c81c18f09369af27d981df29c86a784bda376",
+    "replacement-copied-tree.json": "fea5d1d4099d16379c8c7b3f8d2d5061b639936e201e00dcd807edd3e7e672d5",
+    "replacement-fenced.json": "c8e0b606f5cd208b8502ac2039efd827c93b23f70575b37052397e2ae74a9fc3",
+    "replacement-final-baseline.json": "074b1975a45c1ac667e860cc96725cd157adcc635e2adc4f84308bd03d47eaa6",
+    "replacement-mutations.json": "cbdefe5c5a20581bbbdae0223a11904d851e0948c16664e76f3e6d50631ff765",
+    "replacement-read-only-tree.json": "55a28dc238ab5de070367075165df70b7cd4a45fc37545cbc3fc3d5349f220d5",
+    "restore-smoke.json": "deeb0f6caf669631b9e746d4464f5b38f9e6ce3139ae31eb07f09032b0e8ee42",
+    "root-clippy.log": "9fb5a045cd90b343f86313c13a80fc4a00b4d5db074facea523b3b0d8d1fc289",
+    "root-tests.log": "47a8de1f9c424221fa5eba233f5ce8e5994f530f602633d7564f2f55df1105f2",
+    "small-active-approval.png": "a17b702a253f25351f66bbd0a4c420afff647906d2432aa0cc01cbc37486cc49",
+    "small-active-child.png": "0d3e94cabd020023f3c53f83b0cbebb515b1b14dad3394870b6bee012a0005ec",
+    "tree-smoke.json": "7e5ff6e6112d2573d8510dd4ed3d9cbf5d36ffd4c6e83df5e59083b1a3781718"
+  }
+}

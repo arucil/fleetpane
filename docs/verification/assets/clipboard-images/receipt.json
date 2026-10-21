@@ -1,0 +1,124 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "desktop_binary_sha256": "3e57c0377bfdc25bef9d766ba16a2b84ba351108d63927514155d5d92a2061d4",
+  "host_binary_sha256": "34c3c4b8b5230db89c08a788be0bb3bab6e1095420b0e6be2b8e26a184e77236",
+  "native_serving_host_binary_sha256": {
+    "3054546": "b1284d5d88f792e8d8376f0564b0257c136b3f5c94618bd4a354d55a3477d6ac",
+    "3077815": "34c3c4b8b5230db89c08a788be0bb3bab6e1095420b0e6be2b8e26a184e77236"
+  },
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "668c5d5ca6e47202697107d79e323174606e48c5863471193b6538c2a7eb535e",
+    "apps/desktop/src/host_view/images.rs": "1c68d007704242136b9271038f296c41fe005cf76fb8c4a2c61c7f392b685148",
+    "crates/runtime/src/attachments/store.rs": "b7bfe0e55afd0b5b57108a6c2edfbe5f65892676f9870f70ae9f881eb7451108",
+    "crates/runtime/src/attachments/tests.rs": "5f8b9637d4e4b88e487de943c263dba0a151116f1ae3e2d9875479cda347c3da"
+  },
+  "checks": {
+    "root_tests": 165,
+    "desktop_tests": 19,
+    "strict_root_clippy": true,
+    "strict_desktop_clippy": true,
+    "format_checks": true,
+    "diff_check": true,
+    "images_smoke": true,
+    "native_exact_sends": 2
+  },
+  "native": {
+    "workspace": "fleetpane-clipboard-20261021",
+    "stopped": true,
+    "apps": [
+      {
+        "id": "app-3055545",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3066647",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3074101",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3078213",
+        "exit_code": 0
+      }
+    ],
+    "same_host_pid_across_desktop_reopen": 3054546,
+    "same_provider_pid_across_desktop_reopen": 3054549,
+    "unsupported_capability_host": 3077815,
+    "exact_saved_draft_and_assets": true,
+    "validation_errors_preserved_revision": true,
+    "owned_cleanup": {
+      "pids_gone": {
+        "3054546": true,
+        "3054549": true,
+        "3077815": true,
+        "3077818": true
+      },
+      "sockets_gone": {
+        "/tmp/fleetpane-replay-162-20261021/native/host/control.sock": true,
+        "/tmp/fleetpane-replay-162-20261021/native/unsupported-provider/host/control.sock": true
+      }
+    }
+  },
+  "private_evidence_root": "/tmp/fleetpane-replay-162-20261021",
+  "private_evidence_sha256": {
+    "native/after-paste-draft.json": "45c5d09164eefd1ca0b949bb15807351d446101facd98078ecbb10e88a39cb30",
+    "native/after-send.json": "d1983a0272fa6153983a6d203830121ee8c4d40731df7d1f396d1b8212c82a8e",
+    "native/before-reopen.json": "2e47283e85ecc03f712b9b240ca14c15e6ac02f297f8dfe19318a127d2a142d9",
+    "native/broken-refused.json": "d2e869271b1fd767e075e21ab62c02d3b37eda50e816719d643179e8513e5129",
+    "native/cleanup.json": "bd77735155bdedd2e6ef1ba8eaaac0385559ea57601d584cf9553203f0832885",
+    "native/created.json": "a3830f1623e27f8eb41862c74b3096614ea06bc815131d746cb899272afc60a6",
+    "native/duplicate-refused.json": "d2e869271b1fd767e075e21ab62c02d3b37eda50e816719d643179e8513e5129",
+    "native/exact-send.json": "a2f892a522804aaf55be5b2bb8ef5f7d0f44898de3fda596730570be5644acf9",
+    "native/fifth-paste.json": "2e47283e85ecc03f712b9b240ca14c15e6ac02f297f8dfe19318a127d2a142d9",
+    "native/first-image.json": "acb2fc335890c04483c01458880be9ec0798b0b8eda97174c645db7c4456b90c",
+    "native/fourth-paste.json": "2e47283e85ecc03f712b9b240ca14c15e6ac02f297f8dfe19318a127d2a142d9",
+    "native/image-only-draft.json": "92b3d56d70ce1bdf4a4b58a5fd96468e0ac2297711091d3bbdc01d046b112f21",
+    "native/image-only-sent.json": "855f74667f7a0e4b29ea80aa2b3993bcee975243e0079c5ed0c0cdf2c1c6c275",
+    "native/native-apps.json": "36b8c191548b591ba0a26c7640f6faba3ad84023902de24ff5c85ec84f6d6b67",
+    "native/reopened.json": "e1739740cbb006d5e6952ef2e61d899e25e43b81ea0bc3cd4a892bb7e11872e1",
+    "native/second-paste.json": "1b2d9963df72c976808b7c7089bc9460da33b7fd1d280d1a8c573f09d6fd913e",
+    "native/serving-host-binaries.json": "bb7a60b76ca61b5346a08b5bb20475ad9795377fc2397b99d13c35abbf3db3e5",
+    "native/setup.json": "2a8292d0396d6388c84266c048611b0367d48a6ec5e93562cc16860acbd2a2da",
+    "native/text-and-image.json": "d2e869271b1fd767e075e21ab62c02d3b37eda50e816719d643179e8513e5129",
+    "native/third-paste.json": "57062cf28d8b7e72e714d1f8b92717f80f4b940b59fc41863617f55a54d7740a",
+    "native/unsupported-provider/created.json": "057ed6e655ccbf02778e685d0e9bce4a39c1c3c25f2280a784cb55bce89dd36f",
+    "native/unsupported-provider/fixture-acp-sessions.json": "6bd4d110b47b607f755a087b5105b09bc2709bfc0ee20f3fb1cadd62d93c0b5a",
+    "native/unsupported-provider/refused.json": "2f2bf2791ec62e40089b9c25abf3829134910c0d215b4b433d2774e1d76590bc",
+    "native/unsupported-provider/setup.json": "0f4e25994e92672ad964dc45d100914b0ab527bd13e95648ca0c75cd6b7d5a73",
+    "native/unsupported-refused.json": "d2e869271b1fd767e075e21ab62c02d3b37eda50e816719d643179e8513e5129",
+    "native/workspace-stop.json": "04c40c46169f0040f59b91e14b3823fb1270167e7a13c4b8aa64a77b7843a7f6"
+  },
+  "public_evidence_sha256": {
+    "after-paste.png": "ac9be3bab73fc298b45343c887c39248f5d76647e7c73f33feeac7c08286cfab",
+    "before-paste.png": "1ce091f4014f9cffd30d40d9ea589a47b561dfb5b3a42d83fb02175fc96ca310",
+    "broken-refused.png": "22435017b50d4221dc05f009e8af77b04e00fa859a0e879c709b7756bcfebea2",
+    "desktop-build.log": "7b6d0d10bf0f811390fac3c632d6637deae499ed419d3c8ddfe96611e183e068",
+    "desktop-clippy.log": "a20e7e1ac747ee0e873cbfc8eac388cc7da8deebd49554bda335ae624c7f7eda",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "951294dd3ecf797f1c591d874cf8f89ea1eac74aac3e7980ab4c42bd273754c2",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "draft-readback.json": "47cd219f046bc6907f6c6a6b6d0a55ec251d304e6dae5ddfe1e1811977d60af9",
+    "duplicate-refused.png": "6a12a4fc3c572c83132a794decbd873ed9e0874d8f8af5b5737902cec95fa4df",
+    "exact-send.json": "a2f892a522804aaf55be5b2bb8ef5f7d0f44898de3fda596730570be5644acf9",
+    "fifth-refused.png": "fda81b09f8a5710c684312b7806b91c60c8fd72154de8311f263226525cbd506",
+    "host-build.log": "d4810ac6ac4dd77ea692d63d9d81f391ab40be1dc6d205a030748cb09b3e3a8f",
+    "image-only.png": "c3ef5c3995aab858766ba3a72e5356e8f766cfcead17e8ed197dd7d08c5e4bc5",
+    "images-smoke.log": "f35ab2e47c8ad4b7b8d14510b31b322177139af24960f19de88f58afe19c1f73",
+    "reopened.png": "746bcef8b6f28f324f6365485a27d653e5c28f430d3c1ed5a40ecc96a44967e7",
+    "root-clippy.log": "f85ec72eff8822cf71e9eee5b25a9f23a39acd9e624adc0704b988ff630a045c",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-tests.log": "419a5e7e8a49ee85b8c798978213ffd7e5455869babc507520a6f68f989f813e",
+    "runtime-tests.log": "c2e7a221a19e25f32e567f267b3bac04b6f6803ea56ec52dfe5f696021ff0516",
+    "unsupported-provider.png": "9c61843d8c38622186e3f791a5ec85976ed9ffd9263b7234b04f762be8ac58e4",
+    "unsupported-refused.png": "0aae589f4e42ae3dbeff836acf86f393df0e2b5f350a909647e72660282e4294",
+    "wire.jsonl": "5a35702e19bff0a2bc95bfc3be5d8d525b2a09ceee945b1a65fb5e20fd89da20"
+  },
+  "limits": [
+    "Native clipboard PNG on Linux X11 and synthetic providers; other formats have unit/policy coverage only.",
+    "First native Codex-shaped Host uses prior binary; separate ACP Host and image process smoke use the new Host binary.",
+    "No fresh external provider vision, remote CI, Wayland/macOS/Windows, copied-file attachments, drop, GC, clipboard latency or oversized native clipboard acceptance.",
+    "Before-build executable hash was not captured; baseline screenshot and candidate/source hashes are retained."
+  ]
+}

@@ -1,0 +1,587 @@
+commit 8d591da6712a6ae807cda7a455a7361f334f0967
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 21:56:44 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 21:56:44 2025 +0200
+
+    refactor: add dynamic input height, agent sorting, and last activity tracking
+
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 7d084d8ee..f03b2326e 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -1,4 +1,10 @@
+-import { View, TextInput, Pressable } from "react-native";
++import {
++  View,
++  TextInput,
++  Pressable,
++  NativeSyntheticEvent,
++  TextInputContentSizeChangeEventData,
++} from "react-native";
+ import { useState } from "react";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
+@@ -10,6 +16,9 @@ interface AgentInputAreaProps {
+   agentId: string;
+ }
+ 
++const MIN_INPUT_HEIGHT = 40;
++const MAX_INPUT_HEIGHT = 160;
++
+ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+   const { ws, sendAgentMessage, sendAgentAudio } = useSession();
+@@ -17,6 +26,7 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const audioRecorder = useAudioRecorder();
+ 
+   const [userInput, setUserInput] = useState("");
++  const [inputHeight, setInputHeight] = useState(MIN_INPUT_HEIGHT);
+   const [isRecording, setIsRecording] = useState(false);
+   const [isProcessing, setIsProcessing] = useState(false);
+ 
+@@ -25,6 +35,7 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+ 
+     const message = userInput.trim();
+     setUserInput("");
++    setInputHeight(MIN_INPUT_HEIGHT);
+     setIsProcessing(true);
+ 
+     try {
+@@ -73,6 +84,24 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+     }
+   }
+ 
++  function handleContentSizeChange(
++    event: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
++  ) {
++    const contentHeight = event.nativeEvent.contentSize.height;
++    const boundedHeight = Math.min(
++      MAX_INPUT_HEIGHT,
++      Math.max(MIN_INPUT_HEIGHT, contentHeight),
++    );
++
++    setInputHeight((currentHeight) => {
++      if (Math.abs(currentHeight - boundedHeight) < 1) {
++        return currentHeight;
++      }
++
++      return boundedHeight;
++    });
++  }
++
+   const hasText = userInput.trim().length > 0;
+ 
+   return (
+@@ -83,8 +112,13 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+         onChangeText={setUserInput}
+         placeholder="Message agent..."
+         placeholderTextColor={theme.colors.mutedForeground}
+-        style={styles.textInput}
++        style={[
++          styles.textInput,
++          { height: inputHeight, minHeight: MIN_INPUT_HEIGHT, maxHeight: MAX_INPUT_HEIGHT },
++        ]}
+         multiline
++        scrollEnabled={inputHeight >= MAX_INPUT_HEIGHT}
++        onContentSizeChange={handleContentSizeChange}
+         editable={!isRecording && ws.isConnected}
+       />
+ 
+@@ -143,16 +177,14 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+ const styles = StyleSheet.create((theme) => ({
+   container: {
+     flexDirection: "row",
+-    alignItems: "center",
++    alignItems: "flex-end",
+     paddingHorizontal: theme.spacing[4],
+     paddingVertical: theme.spacing[4],
+     gap: theme.spacing[3],
+-    height: 88,
++    minHeight: 88,
+   },
+   textInput: {
+     flex: 1,
+-    minHeight: 40,
+-    maxHeight: 80,
+     paddingHorizontal: theme.spacing[4],
+     paddingVertical: theme.spacing[2],
+     backgroundColor: theme.colors.muted,
+diff --git a/packages/app/src/components/agent-list.tsx b/packages/app/src/components/agent-list.tsx
+index ff95dd669..8025fb0fa 100644
+--- a/packages/app/src/components/agent-list.tsx
++++ b/packages/app/src/components/agent-list.tsx
+@@ -3,6 +3,7 @@ import { router } from "expo-router";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import type { Agent } from "@/contexts/session-context";
+ import type { AgentStatus } from "@server/server/acp/types";
++import { formatTimeAgo } from "@/utils/time";
+ 
+ interface AgentListProps {
+   agents: Map<string, Agent>;
+@@ -48,7 +49,11 @@ function getStatusLabel(status: AgentStatus): string {
+ 
+ export function AgentList({ agents }: AgentListProps) {
+   const { theme } = useUnistyles();
+-  const agentArray = Array.from(agents.values());
++  
++  // Sort agents by lastActivityAt (most recent first)
++  const agentArray = Array.from(agents.values()).sort((a, b) => {
++    return b.lastActivityAt.getTime() - a.lastActivityAt.getTime();
++  });
+ 
+   function handleAgentPress(agentId: string) {
+     router.push(`/agent/${agentId}`);
+@@ -59,6 +64,7 @@ export function AgentList({ agents }: AgentListProps) {
+       {agentArray.map((agent) => {
+         const statusColor = getStatusColor(agent.status);
+         const statusLabel = getStatusLabel(agent.status);
++        const timeAgo = formatTimeAgo(agent.lastActivityAt);
+ 
+         return (
+           <Pressable
+@@ -77,14 +83,14 @@ export function AgentList({ agents }: AgentListProps) {
+                 {agent.title || "New Agent"}
+               </Text>
+ 
+-              <View style={styles.directoryRow}>
+-                <Text
+-                  style={styles.agentDirectory}
+-                  numberOfLines={1}
+-                >
+-                  {agent.cwd}
+-                </Text>
++              <Text
++                style={styles.agentDirectory}
++                numberOfLines={1}
++              >
++                {agent.cwd}
++              </Text>
+ 
++              <View style={styles.statusRow}>
+                 <View style={styles.statusBadge}>
+                   <View
+                     style={[styles.statusDot, { backgroundColor: statusColor }]}
+@@ -93,6 +99,10 @@ export function AgentList({ agents }: AgentListProps) {
+                     {statusLabel}
+                   </Text>
+                 </View>
++
++                <Text style={styles.timeAgo}>
++                  {timeAgo}
++                </Text>
+               </View>
+             </View>
+           </Pressable>
+@@ -128,15 +138,16 @@ const styles = StyleSheet.create((theme) => ({
+     color: theme.colors.foreground,
+     marginBottom: theme.spacing[1],
+   },
+-  directoryRow: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    gap: theme.spacing[2],
+-  },
+   agentDirectory: {
+-    flex: 1,
+     fontSize: theme.fontSize.sm,
+     color: theme.colors.mutedForeground,
++    marginBottom: theme.spacing[1],
++  },
++  statusRow: {
++    flexDirection: "row",
++    alignItems: "center",
++    justifyContent: "space-between",
++    gap: theme.spacing[2],
+   },
+   statusBadge: {
+     flexDirection: "row",
+@@ -152,4 +163,8 @@ const styles = StyleSheet.create((theme) => ({
+     fontSize: theme.fontSize.xs,
+     fontWeight: theme.fontWeight.semibold,
+   },
++  timeAgo: {
++    fontSize: theme.fontSize.xs,
++    color: theme.colors.mutedForeground,
++  },
+ }));
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index 3d1368ee1..7988a0df4 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -1,13 +1,14 @@
+-import { useEffect } from "react";
+-import { View, Pressable, StyleSheet as RNStyleSheet } from "react-native";
+-import { usePathname } from "expo-router";
++import { useEffect, useState } from "react";
++import { View, Pressable, Text } from "react-native";
++import { usePathname, useRouter } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+-import { AudioLines } from "lucide-react-native";
++import { AudioLines, Users, Plus } from "lucide-react-native";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useSession } from "@/contexts/session-context";
+ import { useFooterControls, FOOTER_HEIGHT } from "@/contexts/footer-controls-context";
+ import { RealtimeControls } from "./realtime-controls";
++import { CreateAgentModal } from "./create-agent-modal";
+ import Animated, {
+   FadeIn,
+   FadeOut,
+@@ -21,13 +22,17 @@ export function GlobalFooter() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+   const pathname = usePathname();
++  const router = useRouter();
+   const { isRealtimeMode, startRealtime } = useRealtime();
+   const { ws } = useSession();
+   const { controls } = useFooterControls();
++  const [showCreateModal, setShowCreateModal] = useState(false);
+ 
+   // Determine current screen type
+   const isAgentScreen = pathname?.startsWith("/agent/");
+ 
++  const agentControlsHeight = useSharedValue(FOOTER_HEIGHT);
++
+   const hasRegisteredControls = !!controls;
+   const showAgentControls = isAgentScreen && hasRegisteredControls;
+ 
+@@ -53,6 +58,19 @@ export function GlobalFooter() {
+     [bottomInset],
+   );
+ 
++  const containerAnimatedStyle = useAnimatedStyle(
++    () => {
++      "worklet";
++      const agentHeight = Math.max(agentControlsHeight.value, FOOTER_HEIGHT);
++      const expandedHeight = agentHeight - (agentHeight - FOOTER_HEIGHT) * transition.value;
++
++      return {
++        height: expandedHeight + bottomInset,
++      };
++    },
++    [bottomInset],
++  );
++
+   const realtimeAnimatedStyle = useAnimatedStyle(() => {
+     return {
+       opacity: transition.value,
+@@ -74,19 +92,22 @@ export function GlobalFooter() {
+           styles.container,
+           {
+             paddingBottom: insets.bottom,
+-            height: FOOTER_HEIGHT + insets.bottom,
+           },
++          containerAnimatedStyle,
+           keyboardAnimatedStyle,
+         ]}
+       >
+         <View style={styles.content}>
+           <Animated.View
+-            style={[RNStyleSheet.absoluteFillObject, agentControlsAnimatedStyle]}
++            onLayout={(event) => {
++              agentControlsHeight.value = Math.max(event.nativeEvent.layout.height, FOOTER_HEIGHT);
++            }}
++            style={[styles.absoluteBottomFill, agentControlsAnimatedStyle]}
+           >
+             {controls}
+           </Animated.View>
+           <Animated.View
+-            style={[RNStyleSheet.absoluteFillObject, realtimeAnimatedStyle]}
++            style={[styles.absoluteBottomFill, realtimeAnimatedStyle]}
+           >
+             <RealtimeControls />
+           </Animated.View>
+@@ -157,7 +178,13 @@ const styles = StyleSheet.create((theme) => ({
+   },
+   content: {
+     flex: 1,
+-    height: FOOTER_HEIGHT,
++    minHeight: FOOTER_HEIGHT,
++  },
++  absoluteBottomFill: {
++    position: "absolute",
++    left: 0,
++    right: 0,
++    bottom: 0,
+   },
+   centeredButtonContainer: {
+     padding: theme.spacing[6],
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 5db590eeb..7c88d6529 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -56,6 +56,7 @@ export interface Agent {
+   id: string;
+   status: AgentStatus;
+   createdAt: Date;
++  lastActivityAt: Date;
+   type: "claude";
+   sessionId: string | null;
+   error: string | null;
+@@ -170,6 +171,9 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+         new Map(
+           agentsList.map((agentInfo) => {
+             const createdAt = new Date(agentInfo.createdAt);
++            const lastActivityAt = agentInfo.lastActivityAt 
++              ? new Date(agentInfo.lastActivityAt) 
++              : createdAt;
+             return [
+               agentInfo.id,
+               {
+@@ -177,6 +181,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+                 status: agentInfo.status as AgentStatus,
+                 type: agentInfo.type,
+                 createdAt,
++                lastActivityAt,
+                 title: agentInfo.title ?? null,
+                 cwd: agentInfo.cwd,
+                 sessionId: agentInfo.sessionId ?? null,
+@@ -201,11 +206,13 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+ 
+       console.log("[Session] Agent created:", agentId);
+ 
++      const now = new Date();
+       const agent: Agent = {
+         id: agentId,
+         status: status as AgentStatus,
+         type,
+-        createdAt: new Date(),
++        createdAt: now,
++        lastActivityAt: now,
+         title: title ?? null,
+         cwd,
+         sessionId: null,
+@@ -233,6 +240,9 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       setAgents((prev) => {
+         const next = new Map(prev);
+         const createdAt = new Date(info.createdAt);
++        const lastActivityAt = info.lastActivityAt 
++          ? new Date(info.lastActivityAt) 
++          : createdAt;
+         const existing = next.get(agentId);
+ 
+         const normalizedAgent: Agent = {
+@@ -240,6 +250,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+           status: info.status as AgentStatus,
+           type: info.type,
+           createdAt,
++          lastActivityAt,
+           title: info.title ?? null,
+           cwd: info.cwd,
+           sessionId: info.sessionId ?? null,
+@@ -288,6 +299,10 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+         const existingAgent = prev.get(agentId);
+         if (!existingAgent) return prev;
+ 
++        const lastActivityAt = info.lastActivityAt 
++          ? new Date(info.lastActivityAt) 
++          : existingAgent.lastActivityAt;
++
+         const updatedAgent: Agent = {
+           ...existingAgent,
+           status: info.status as AgentStatus,
+@@ -297,6 +312,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+           availableModes: info.availableModes ?? null,
+           title: info.title ?? null,
+           cwd: info.cwd,
++          lastActivityAt,
+         };
+ 
+         return new Map(prev).set(agentId, updatedAgent);
+diff --git a/packages/app/src/utils/time.ts b/packages/app/src/utils/time.ts
+new file mode 100644
+index 000000000..4b26e6f2f
+--- /dev/null
++++ b/packages/app/src/utils/time.ts
+@@ -0,0 +1,37 @@
++/**
++ * Format a date as a human-friendly relative time string
++ * Examples: "just now", "5m ago", "2h ago", "3d ago", "Jan 15"
++ */
++export function formatTimeAgo(date: Date): string {
++  const now = new Date();
++  const diffMs = now.getTime() - date.getTime();
++  const diffSec = Math.floor(diffMs / 1000);
++  const diffMin = Math.floor(diffSec / 60);
++  const diffHour = Math.floor(diffMin / 60);
++  const diffDay = Math.floor(diffHour / 24);
++
++  if (diffSec < 10) {
++    return "just now";
++  }
++
++  if (diffMin < 1) {
++    return `${diffSec}s ago`;
++  }
++
++  if (diffHour < 1) {
++    return `${diffMin}m ago`;
++  }
++
++  if (diffDay < 1) {
++    return `${diffHour}h ago`;
++  }
++
++  if (diffDay < 7) {
++    return `${diffDay}d ago`;
++  }
++
++  // For older dates, show abbreviated month and day
++  const month = date.toLocaleDateString("en-US", { month: "short" });
++  const day = date.getDate();
++  return `${month} ${day}`;
++}
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index b19b9d9e2..6df9d3ce9 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -42,6 +42,7 @@ interface ManagedAgent {
+   id: string;
+   cwd: string;
+   createdAt: Date;
++  lastActivityAt: Date;
+   title: string;
+   options: AgentOptions;
+   subscribers: Set<AgentUpdateCallback>;
+@@ -166,10 +167,15 @@ export class AgentManager {
+         console.log(
+           `[AgentManager] Loading agent ${persistedAgent.id} as uninitialized`
+         );
++        const createdAt = new Date(persistedAgent.createdAt);
++        const lastActivityAt = persistedAgent.lastActivityAt
++          ? new Date(persistedAgent.lastActivityAt)
++          : createdAt;
+         const agent: ManagedAgent = {
+           id: persistedAgent.id,
+           cwd: expandTilde(persistedAgent.cwd),
+-          createdAt: new Date(persistedAgent.createdAt),
++          createdAt,
++          lastActivityAt,
+           title: persistedAgent.title,
+           options: persistedAgent.options,
+           subscribers: new Set(),
+@@ -225,6 +231,7 @@ export class AgentManager {
+       id: agentId,
+       cwd,
+       createdAt,
++      lastActivityAt: createdAt,
+       title: "",
+       options: agentOptions,
+       subscribers: new Set(),
+@@ -250,6 +257,7 @@ export class AgentManager {
+       sessionId: null,
+       options: agent.options,
+       createdAt: createdAt.toISOString(),
++      lastActivityAt: agent.lastActivityAt.toISOString(),
+       cwd: agent.cwd,
+     });
+ 
+@@ -553,6 +561,7 @@ export class AgentManager {
+         id: agent.id,
+         status,
+         createdAt: agent.createdAt,
++        lastActivityAt: agent.lastActivityAt,
+         type: "claude" as const,
+         sessionId,
+         error: error ?? null,
+@@ -617,6 +626,7 @@ export class AgentManager {
+       id: agent.id,
+       status,
+       createdAt: agent.createdAt,
++      lastActivityAt: agent.lastActivityAt,
+       type: "claude",
+       sessionId: runtime?.sessionId ?? null,
+       error: error ?? null,
+@@ -1000,6 +1010,7 @@ export class AgentManager {
+         sessionId: runtime.sessionId,
+         options: agent.options,
+         createdAt: agent.createdAt.toISOString(),
++        lastActivityAt: agent.lastActivityAt.toISOString(),
+         cwd: agent.cwd,
+       });
+ 
+@@ -1056,6 +1067,9 @@ export class AgentManager {
+     const agent = this.agents.get(agentId);
+     if (!agent) return;
+ 
++    // Update last activity timestamp
++    agent.lastActivityAt = new Date();
++
+     // Augment update with stable message IDs for deduplication
+     let enrichedUpdate: EnrichedSessionNotification;
+ 
+@@ -1286,17 +1300,6 @@ export class AgentManager {
+       console.log(
+         `[Agent ${agentId}] Permission request emitted: ${requestId}`
+       );
+-
+-      // Set a timeout to auto-reject after 5 minutes if no response
+-      setTimeout(() => {
+-        if (agent.pendingPermissions.has(requestId)) {
+-          console.warn(
+-            `[Agent ${agentId}] Permission request ${requestId} timed out`
+-          );
+-          agent.pendingPermissions.delete(requestId);
+-          reject(new Error("Permission request timed out"));
+-        }
+-      }, 5 * 60 * 1000); // 5 minutes
+     });
+   }
+ 
+@@ -1459,6 +1462,7 @@ export class AgentManager {
+               sessionId: runtime.sessionId,
+               options: agent.options,
+               createdAt: agent.createdAt.toISOString(),
++              lastActivityAt: agent.lastActivityAt.toISOString(),
+               cwd: agent.cwd,
+             });
+             console.log(`[Agent ${agent.id}] State persisted`);
+diff --git a/packages/server/src/server/acp/agent-persistence.ts b/packages/server/src/server/acp/agent-persistence.ts
+index 2ea49d842..01c2fa9fa 100644
+--- a/packages/server/src/server/acp/agent-persistence.ts
++++ b/packages/server/src/server/acp/agent-persistence.ts
+@@ -25,6 +25,7 @@ export const PersistedAgentSchema = z.object({
+   sessionId: z.string().nullable(), // ACP protocol session ID (null for uninitialized agents)
+   options: AgentOptionsSchema, // Required field with discriminated union
+   createdAt: z.string(),
++  lastActivityAt: z.string().optional(), // Migration: optional for backward compatibility
+   cwd: z.string(),
+ });
+ 
+@@ -52,6 +53,11 @@ export class AgentPersistence {
+         try {
+           const validated = PersistedAgentSchema.parse(agent);
+ 
++          // Migration: if lastActivityAt is missing, default to createdAt
++          if (!validated.lastActivityAt) {
++            validated.lastActivityAt = validated.createdAt;
++          }
++
+           if (
+             validated.options.type === "claude" &&
+             validated.options.sessionId !== null
+diff --git a/packages/server/src/server/acp/types.ts b/packages/server/src/server/acp/types.ts
+index 286f33d51..9a8905c65 100644
+--- a/packages/server/src/server/acp/types.ts
++++ b/packages/server/src/server/acp/types.ts
+@@ -116,6 +116,7 @@ export interface AgentInfo {
+   id: string;
+   status: AgentStatus;
+   createdAt: Date;
++  lastActivityAt: Date;
+   type: "claude";
+   sessionId: string | null;
+   error: string | null;
+diff --git a/packages/server/src/server/messages.ts b/packages/server/src/server/messages.ts
+index e1242a821..12f04e8fc 100644
+--- a/packages/server/src/server/messages.ts
++++ b/packages/server/src/server/messages.ts
+@@ -10,6 +10,7 @@ const AgentInfoSchema = z.object({
+   id: z.string(),
+   status: z.string(),
+   createdAt: z.date(),
++  lastActivityAt: z.date(),
+   type: z.literal("claude"),
+   sessionId: z.string().nullable(),
+   error: z.string().nullable(),

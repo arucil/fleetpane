@@ -7,11 +7,34 @@ use crate::{
 use rusqlite::{OptionalExtension, params};
 use rustix::process::{Pid, Signal, kill_process_group};
 use serde::{Deserialize, Serialize};
-use std::{os::unix::process::CommandExt, path::PathBuf, process::Stdio, time::Duration};
+use std::{
+    fs::{File, OpenOptions},
+    os::unix::{
+        fs::{OpenOptionsExt, PermissionsExt},
+        process::CommandExt,
+    },
+    path::{Path, PathBuf},
+    process::Stdio,
+    time::Duration,
+};
 use uuid::Uuid;
 
 fn invalid(message: impl std::fmt::Display) -> Error {
     Error::Input(format!("Worktree: {message}"))
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum BranchMode {
+    #[default]
+    New,
+    Existing,
+}
+
+impl BranchMode {
+    fn is_new(&self) -> bool {
+        *self == Self::New
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -25,6 +48,10 @@ pub struct Plan {
     pub path: PathBuf,
     pub cwd: PathBuf,
     pub branch: String,
+    // Old new-branch plans retain their wire shape. Older strict readers refuse
+    // the new mode instead of interpreting it as a request to create a branch.
+    #[serde(default, skip_serializing_if = "BranchMode::is_new")]
+    pub branch_mode: BranchMode,
     pub base_ref: String,
     pub commit: String,
 }
@@ -76,10 +103,78 @@ fn validate_inputs(branch: &str, base: &str) -> Result<(), Error> {
         || base.contains('\0')
     {
         return Err(invalid(
-            "choose a new branch (1–255 bytes) and an existing commit/ref (1–1024 bytes)",
+            "choose a branch (1–255 bytes) and an existing commit/ref (1–1024 bytes)",
         ));
     }
     Ok(())
+}
+
+fn validate_commit(commit: &str) -> Result<(), Error> {
+    if !matches!(commit.len(), 40 | 64) || !commit.bytes().all(|byte| byte.is_ascii_hexdigit()) {
+        return Err(invalid(
+            "Git did not resolve the baseline to a full commit ID",
+        ));
+    }
+    Ok(())
+}
+
+async fn existing_branch(root: &Path, branch: &str) -> Result<String, Error> {
+    let reference = format!("refs/heads/{branch}");
+    let output = git(
+        root,
+        &[
+            "for-each-ref",
+            "--format=%(refname)%00%(objectname)%00%(worktreepath)",
+            "--count=2",
+            &reference,
+        ],
+    )
+    .await?;
+    let line = output
+        .strip_suffix(b"\n")
+        .ok_or_else(|| invalid("local branch does not exist"))?;
+    let fields: Vec<_> = line.split(|byte| *byte == 0).collect();
+    if fields.len() != 3 || fields[0] != reference.as_bytes() {
+        return Err(invalid(
+            "local branch does not exist; remote branches are not guessed or fetched",
+        ));
+    }
+    if !fields[2].is_empty() {
+        return Err(invalid(
+            "local branch is already checked out in another worktree",
+        ));
+    }
+    let commit = String::from_utf8(fields[1].to_vec()).map_err(invalid)?;
+    validate_commit(&commit)?;
+    Ok(commit)
+}
+
+// This lock is shared by linked worktrees and by independent controller stores.
+// External Git commands do not participate; Git's own checks and post-validation
+// still apply. Do not unlink a flock file: that would create a second lock inode.
+fn repository_lock(common: &Path) -> Result<File, Error> {
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .truncate(false)
+        .mode(0o600)
+        .custom_flags(
+            (rustix::fs::OFlags::NOFOLLOW.bits() | rustix::fs::OFlags::NONBLOCK.bits())
+                .try_into()
+                .map_err(invalid)?,
+        )
+        .open(common.join("fleetpane-worktree-create.lock"))
+        .map_err(invalid)?;
+    let metadata = file.metadata().map_err(invalid)?;
+    if !metadata.is_file() || metadata.permissions().mode() & 0o077 != 0 {
+        return Err(invalid(
+            "repository creation lock must be a private regular file",
+        ));
+    }
+    rustix::fs::flock(&file, rustix::fs::FlockOperation::NonBlockingLockExclusive)
+        .map_err(|error| invalid(format!("another Fleetpane worktree creation holds this repository; no attempt was made: {error}")))?;
+    Ok(file)
 }
 
 impl Store {
@@ -91,11 +186,37 @@ impl Store {
         branch: String,
         base_ref: String,
     ) -> Result<Job, Error> {
+        self.plan_worktree_mode(id, source_id, branch, base_ref, BranchMode::New)
+            .await
+    }
+
+    /// Attaches an unoccupied local branch; the expected tip is rechecked before
+    /// dispatch and after checkout. Never fetches, guesses, resets or forces it.
+    pub async fn plan_existing_worktree(
+        &self,
+        id: Uuid,
+        source_id: Uuid,
+        branch: String,
+    ) -> Result<Job, Error> {
+        let base_ref = format!("refs/heads/{branch}");
+        self.plan_worktree_mode(id, source_id, branch, base_ref, BranchMode::Existing)
+            .await
+    }
+
+    async fn plan_worktree_mode(
+        &self,
+        id: Uuid,
+        source_id: Uuid,
+        branch: String,
+        base_ref: String,
+        branch_mode: BranchMode,
+    ) -> Result<Job, Error> {
         validate_inputs(&branch, &base_ref)?;
         if let Some(job) = self.find_worktree(id).await? {
             if job.plan.source_id != source_id
                 || job.plan.branch != branch
                 || job.plan.base_ref != base_ref
+                || job.plan.branch_mode != branch_mode
             {
                 return Err(invalid("UUID already belongs to a different worktree plan"));
             }
@@ -111,39 +232,38 @@ impl Store {
             &["check-ref-format", &format!("refs/heads/{branch}")],
         )
         .await?;
-        let existing = git(
-            &state.root,
-            &[
-                "for-each-ref",
-                "--format=%(refname)",
-                "--count=1",
-                &format!("refs/heads/{branch}"),
-            ],
-        )
-        .await?;
-        if !existing.is_empty() {
-            return Err(invalid(
-                "branch already exists or has conflicting child refs; choose a new branch",
-            ));
-        }
-        let commit = text(
-            git(
+        let commit = if branch_mode == BranchMode::Existing {
+            existing_branch(&state.root, &branch).await?
+        } else {
+            let existing = git(
                 &state.root,
                 &[
-                    "rev-parse",
-                    "--verify",
-                    "--end-of-options",
-                    &format!("{base_ref}^{{commit}}"),
+                    "for-each-ref",
+                    "--format=%(refname)",
+                    "--count=1",
+                    &format!("refs/heads/{branch}"),
                 ],
             )
-            .await?,
-        )?;
-        if !matches!(commit.len(), 40 | 64) || !commit.bytes().all(|byte| byte.is_ascii_hexdigit())
-        {
-            return Err(invalid(
-                "Git did not resolve the baseline to a full commit ID",
-            ));
-        }
+            .await?;
+            if !existing.is_empty() {
+                return Err(invalid(
+                    "branch already exists or has conflicting child refs; choose a new branch",
+                ));
+            }
+            text(
+                git(
+                    &state.root,
+                    &[
+                        "rev-parse",
+                        "--verify",
+                        "--end-of-options",
+                        &format!("{base_ref}^{{commit}}"),
+                    ],
+                )
+                .await?,
+            )?
+        };
+        validate_commit(&commit)?;
         let relative = source
             .registration
             .directory
@@ -181,6 +301,7 @@ impl Store {
             cwd: path.join(relative),
             path,
             branch,
+            branch_mode,
             base_ref,
             commit,
         };
@@ -193,6 +314,7 @@ impl Store {
         if stored.plan.source_id != plan.source_id
             || stored.plan.branch != plan.branch
             || stored.plan.base_ref != plan.base_ref
+            || stored.plan.branch_mode != plan.branch_mode
         {
             return Err(invalid("UUID already belongs to a different worktree plan"));
         }
@@ -230,6 +352,22 @@ impl Store {
     /// The attempted transition is committed before invoking Git, including when
     /// the controller exits before it can observe/persist Git's outcome.
     pub async fn apply_worktree(&self, id: Uuid) -> Result<Job, Error> {
+        let store = self.clone();
+        // An admitted checkout owns its runtime, repository lock and child until
+        // completion/deadline if its async caller goes away while this process lives.
+        // Process termination still leaves an unresolved attempted receipt.
+        tokio::task::spawn_blocking(move || {
+            tokio::runtime::Builder::new_current_thread()
+                .enable_all()
+                .build()
+                .map_err(invalid)?
+                .block_on(store.apply_worktree_owned(id))
+        })
+        .await
+        .map_err(invalid)?
+    }
+
+    async fn apply_worktree_owned(&self, id: Uuid) -> Result<Job, Error> {
         let job = self.worktree_job(id).await?;
         if job.state != State::Prepared {
             return Err(invalid(
@@ -242,6 +380,7 @@ impl Store {
         let git_state = overview
             .git
             .ok_or_else(|| invalid("source is not a Git workspace"))?;
+        let _lock = repository_lock(&git_state.common_directory)?;
         if source.project_id != plan.project_id
             || source.registration.directory != plan.source.directory
             || source.registration.project != plan.source.project
@@ -253,6 +392,13 @@ impl Store {
             ));
         }
         absent(plan.path.clone()).await?;
+        if plan.branch_mode == BranchMode::Existing
+            && existing_branch(&git_state.root, &plan.branch).await? != plan.commit
+        {
+            return Err(invalid(
+                "local branch moved since preview; prepare a new plan",
+            ));
+        }
         self.job(move |db| {
             let changed = db.execute(
                 "UPDATE worktree_jobs SET state=?1 WHERE id=?2 AND state=?3",
@@ -343,8 +489,8 @@ fn decode(row: (i64, String, String)) -> Result<Job, StorageError> {
     })
 }
 
-// Checkout may invoke configured Git filters. Bound the entire process group,
-// including cancellation; do not leave a writer running after reporting timeout.
+// Checkout may invoke configured Git filters. Bound the entire process group;
+// the owning worker keeps the repository lock until the child has been reaped.
 struct Group(Option<Pid>);
 impl Group {
     fn kill(&mut self) -> Result<(), Error> {
@@ -378,17 +524,18 @@ async fn add(root: &std::path::Path, plan: &Plan) -> Result<(), Error> {
             "-C",
         ])
         .arg(root)
-        .args([
-            "worktree",
-            "add",
-            "--quiet",
-            "--no-track",
-            "-b",
-            &plan.branch,
-            "--",
-        ])
-        .arg(&plan.path)
-        .arg(&plan.commit);
+        .args(["worktree", "add", "--quiet", "--no-guess-remote"]);
+    match plan.branch_mode {
+        BranchMode::New => {
+            command
+                .args(["--no-track", "-b", &plan.branch, "--"])
+                .arg(&plan.path)
+                .arg(&plan.commit);
+        }
+        BranchMode::Existing => {
+            command.arg("--").arg(&plan.path).arg(&plan.branch);
+        }
+    }
     for (name, _) in std::env::vars_os() {
         if name.as_encoded_bytes().starts_with(b"GIT_") {
             command.env_remove(name);
@@ -448,6 +595,10 @@ async fn add(root: &std::path::Path, plan: &Plan) -> Result<(), Error> {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "worktrees/tests.rs"]
+mod creation_tests;
 
 #[cfg(test)]
 mod tests {

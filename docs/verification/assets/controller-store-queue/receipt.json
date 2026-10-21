@@ -1,0 +1,94 @@
+{
+  "recorded_utc": "2026-10-20T21:52:03.678700+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted work; local proof only",
+  "source_sha256": {
+    "crates/session/src/storage.rs": "81d13dc714e6272bd454383ad3a21f6d19aea021d5d95bf5fb541f118813d9ef",
+    "crates/session/src/recent_directories.rs": "260dd424072cf5a7f2056082e19fdd72f72a017772ecf3a8ed9f70d2ffa78a76",
+    "crates/session/src/workspace_pins.rs": "362a6452a89d4f108aaea77f7b965d59f5f1ee13e5c9a06eec4bdf9c21bde089",
+    "Cargo.lock": "246df098f8c96c7256e4ca5d5afac1e9b2727e1f52e55ae125701ffa176eb18d",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "b36010f9e691f2188843abae32f2be9b76d3551d2e48cd98f1e0d4e0e2e87132",
+    "apps/desktop/target/debug/fleetpane-desktop": "830131b0f210a6c766400d3527925f4f60bc9b8971922801159c29d836240bba"
+  },
+  "checks": {
+    "images-smoke": "images-smoke.log",
+    "root-tests": "root-tests.log",
+    "storage-tests": "storage-tests.log",
+    "host-build": "host-build.log",
+    "desktop-build": "desktop-build.log",
+    "fmt": "fmt.log",
+    "session-tests": "session-tests.log",
+    "recent-directories-smoke": "recent-directories-smoke.log",
+    "desktop-clippy": "desktop-clippy.log",
+    "fmt-check": "fmt-check.log",
+    "windows-check": "windows-check.log",
+    "drafts-smoke": "drafts-smoke.log",
+    "desktop-tests": "desktop-tests.log",
+    "regression-after": "regression-after.log",
+    "appearance-smoke": "appearance-smoke.log",
+    "root-clippy": "root-clippy.log",
+    "workspace-pins-smoke": "workspace-pins-smoke.log"
+  },
+  "results": {
+    "new_regression_before": "FAIL database is locked",
+    "new_regression_after": "PASS",
+    "full_workspace": "149 tests passed",
+    "desktop": "11 tests passed",
+    "final_strengthening": "All 6 storage tests passed after also dropping every Store handle while the cancelled job continues",
+    "cross_process_smokes": [
+      "recent-directories",
+      "workspace-pins",
+      "drafts (one CAS winner)",
+      "appearance",
+      "images"
+    ]
+  },
+  "limits": [
+    "No remote CI or release",
+    "No new native interaction acceptance",
+    "No cross-process fairness or elimination of external SQLite busy errors",
+    "No performance/capacity claim",
+    "SQLite busy timeout unchanged; no retries"
+  ],
+  "artifacts": {
+    "appearance-smoke.log": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830",
+    "desktop-build.log": "ee90c256cd0a78d547b4d8391b049cd82edd55d7222ce16a7b25901295f9dd41",
+    "desktop-clippy.log": "ae802684e45205ba97bf63a895296f6d40dd2127eda058e09b10397c7a348606",
+    "desktop-tests.log": "63014e4b7f59a80184df536cb78659f472a224de8cc1cba11c93d20a1b36e9b9",
+    "drafts-smoke.log": "05361a36b2ab7163bfcc3c1505ca0c0980e6954d69593d1ab4b39e13fb75510d",
+    "fmt-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "host-build.log": "8dd49b95c81de0ced536e0b586f33bab9c60a4138f44acb748bf1e8decccbce6",
+    "images-smoke.log": "f35ab2e47c8ad4b7b8d14510b31b322177139af24960f19de88f58afe19c1f73",
+    "original-concurrency-failure.log": "b51edd4a0d90c6592a915e98b0b77c368190ad097063987531ec8a5db7316c48",
+    "recent-directories-smoke.log": "7bad9c6749f582ec77aaf4e74f122710953d6abd4505a601c7bdd119d3163b66",
+    "regression-after.log": "c53e62577d25a1bd37dc225a985ab929951a64861553ee97af6e6205f34be1f7",
+    "regression-before.log": "864734265fc63f9b48818df9cad45b0de0ebb753814a2d3efa2fb09fbac7e03f",
+    "root-clippy.log": "847ee0fda81ac08a681566bb133493eb7f5acfbea3855fbb95660bafcb220149",
+    "root-tests.log": "94cec4f096b4e01a6d077ffc0f423dfd7ce889f074cf413f22aabbe68622ef5b",
+    "session-tests.log": "9a67d3852f0639776f0ee0c53576bb960be0937f161e9b10284af3c74940a846",
+    "storage-tests.log": "016549da6e686c05898b544c1e1931c45e94e384d88f2894d22eded2cb2c2eb5",
+    "windows-check.log": "3fe980a0f9709b0a2d093ea2a65202e1e589d4893ac71be4272c165923b9e527",
+    "workspace-pins-smoke.log": "2b6114c9073a5568d4ccbfe1407c4ca870442924727aa5b6eeec36b6d8cb7069",
+    "final-audit.log": "ac98d5bc2c20ec728a0b7e89dd87216d8eb02658af7d1dc25c250126b28c2681"
+  },
+  "commands": {
+    "fmt-check": "cargo fmt --all --check",
+    "root-clippy": "cargo clippy --locked --workspace --all-targets -- -D warnings",
+    "root-tests": "cargo test --locked --workspace",
+    "storage-tests": "cargo test --locked -p fleetpane-session storage::tests::",
+    "windows-check": "cargo check --locked --workspace --all-targets --target x86_64-pc-windows-gnu",
+    "host-build": "cargo build --locked -p fleetpane-host",
+    "desktop-clippy": "cargo clippy --manifest-path apps/desktop/Cargo.toml --locked --all-targets -- -D warnings",
+    "desktop-tests": "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "desktop-build": "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "recent-directories-smoke": "python3 scripts/recent-directories-smoke.py",
+    "workspace-pins-smoke": "python3 scripts/workspace-pins-smoke.py",
+    "drafts-smoke": "python3 scripts/drafts-smoke.py",
+    "appearance-smoke": "python3 scripts/appearance-smoke.py",
+    "images-smoke": "python3 scripts/images-smoke.py"
+  }
+}

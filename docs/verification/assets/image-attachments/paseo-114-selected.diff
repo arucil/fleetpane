@@ -1,0 +1,1411 @@
+commit a3224175ee96cff50bf31ecde71c30df0e0f2e79
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 07:35:06 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 07:35:06 2025 +0100
+
+    feat: add image upload support to agent chat with attachment preview
+
+diff --git a/packages/app/package.json b/packages/app/package.json
+index 68e19db1b..ce94e6c2a 100644
+--- a/packages/app/package.json
++++ b/packages/app/package.json
+@@ -12,13 +12,13 @@
+     "typecheck": "tsc --noEmit"
+   },
+   "dependencies": {
++    "@boudra/expo-two-way-audio": "^0.1.3",
+     "@expo/vector-icons": "^15.0.2",
+     "@gorhom/bottom-sheet": "^5.2.6",
+     "@react-native-async-storage/async-storage": "2.2.0",
+     "@react-navigation/bottom-tabs": "^7.4.0",
+     "@react-navigation/elements": "^2.6.3",
+     "@react-navigation/native": "^7.1.8",
+-    "@boudra/expo-two-way-audio": "^0.1.3",
+     "buffer": "^6.0.3",
+     "expo": "^54.0.18",
+     "expo-audio": "~1.0.13",
+@@ -30,6 +30,7 @@
+     "expo-font": "~14.0.9",
+     "expo-haptics": "~15.0.7",
+     "expo-image": "~3.0.10",
++    "expo-image-picker": "^17.0.8",
+     "expo-keep-awake": "^15.0.7",
+     "expo-linking": "~8.0.8",
+     "expo-router": "~6.0.13",
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 559aad6eb..b1f433bd3 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -4,10 +4,13 @@ import {
+   Pressable,
+   NativeSyntheticEvent,
+   TextInputContentSizeChangeEventData,
++  Image,
++  Alert,
+ } from "react-native";
+ import { useState } from "react";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+-import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
++import { Mic, ArrowUp, AudioLines, Square, Paperclip, X } from "lucide-react-native";
++import * as ImagePicker from "expo-image-picker";
+ import { useSession } from "@/contexts/session-context";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useAudioRecorder } from "@/hooks/use-audio-recorder";
+@@ -31,17 +34,21 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const [inputHeight, setInputHeight] = useState(MIN_INPUT_HEIGHT);
+   const [isRecording, setIsRecording] = useState(false);
+   const [isProcessing, setIsProcessing] = useState(false);
++  const [selectedImages, setSelectedImages] = useState<Array<{ uri: string; mimeType: string }>>([]);
+ 
+   async function handleSendMessage() {
+     if (!userInput.trim() || !ws.isConnected) return;
+ 
+     const message = userInput.trim();
++    const imageUris = selectedImages.length > 0 ? selectedImages.map(img => img.uri) : undefined;
++    
+     setUserInput("");
++    setSelectedImages([]);
+     setInputHeight(MIN_INPUT_HEIGHT);
+     setIsProcessing(true);
+ 
+     try {
+-      sendAgentMessage(agentId, message);
++      await sendAgentMessage(agentId, message, imageUris);
+     } catch (error) {
+       console.error("[AgentInput] Failed to send message:", error);
+     } finally {
+@@ -49,6 +56,38 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+     }
+   }
+ 
++  async function handlePickImage() {
++    try {
++      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
++      
++      if (!permissionResult.granted) {
++        Alert.alert("Permission required", "Please allow access to your photo library to attach images.");
++        return;
++      }
++
++      const result = await ImagePicker.launchImageLibraryAsync({
++        mediaTypes: "images",
++        allowsMultipleSelection: true,
++        quality: 0.8,
++      });
++
++      if (!result.canceled && result.assets.length > 0) {
++        const newImages = result.assets.map(asset => ({
++          uri: asset.uri,
++          mimeType: asset.mimeType || "image/jpeg",
++        }));
++        setSelectedImages(prev => [...prev, ...newImages]);
++      }
++    } catch (error) {
++      console.error("[AgentInput] Failed to pick image:", error);
++      Alert.alert("Error", "Failed to select image");
++    }
++  }
++
++  function handleRemoveImage(index: number) {
++    setSelectedImages(prev => prev.filter((_, i) => i !== index));
++  }
++
+   async function handleVoicePress() {
+     if (isRecording) {
+       // Stop recording
+@@ -105,72 +144,104 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   }
+ 
+   const hasText = userInput.trim().length > 0;
++  const hasImages = selectedImages.length > 0;
+ 
+   return (
+     <View style={styles.container}>
+-      {/* Text input */}
+-      <TextInput
+-        value={userInput}
+-        onChangeText={setUserInput}
+-        placeholder="Message agent..."
+-        placeholderTextColor={theme.colors.mutedForeground}
+-        style={[
+-          styles.textInput,
+-          { height: inputHeight, minHeight: MIN_INPUT_HEIGHT, maxHeight: MAX_INPUT_HEIGHT },
+-        ]}
+-        multiline
+-        scrollEnabled={inputHeight >= MAX_INPUT_HEIGHT}
+-        onContentSizeChange={handleContentSizeChange}
+-        editable={!isRecording && ws.isConnected}
+-      />
+-
+-      {/* Buttons */}
+-      <View style={styles.buttonRow}>
+-          {hasText ? (
+-            // Send button when text is entered
+-            <Pressable
+-              onPress={handleSendMessage}
+-              disabled={!ws.isConnected || isProcessing}
+-              style={[
+-                styles.sendButton,
+-                (!ws.isConnected || isProcessing) && styles.buttonDisabled,
+-              ]}
+-            >
+-              <ArrowUp size={20} color="white" />
+-            </Pressable>
+-          ) : (
+-            // Voice and Realtime buttons when no text
+-            <>
+-              {/* Voice recording button */}
+-              <Pressable
+-                onPress={handleVoicePress}
+-                disabled={!ws.isConnected}
+-                style={[
+-                  styles.voiceButton,
+-                  !ws.isConnected && styles.buttonDisabled,
+-                  isRecording && styles.voiceButtonRecording,
+-                ]}
+-              >
+-                {isRecording ? (
+-                  <Square size={14} color="white" fill="white" />
+-                ) : (
+-                  <Mic size={20} color={theme.colors.foreground} />
+-                )}
++      {/* Image preview pills */}
++      {hasImages && (
++        <View style={styles.imagePreviewContainer}>
++          {selectedImages.map((image, index) => (
++            <View key={`${image.uri}-${index}`} style={styles.imagePill}>
++              <Image source={{ uri: image.uri }} style={styles.imageThumbnail} />
++              <Pressable onPress={() => handleRemoveImage(index)} style={styles.removeImageButton}>
++                <X size={16} color={theme.colors.foreground} />
+               </Pressable>
++            </View>
++          ))}
++        </View>
++      )}
+ 
+-              {/* Realtime button */}
++      {/* Input row */}
++      <View style={styles.inputRow}>
++        {/* Attachment button */}
++        {!isRecording && (
++          <Pressable
++            onPress={handlePickImage}
++            disabled={!ws.isConnected}
++            style={[
++              styles.attachButton,
++              !ws.isConnected && styles.buttonDisabled,
++            ]}
++          >
++            <Paperclip size={20} color={theme.colors.foreground} />
++          </Pressable>
++        )}
++
++        {/* Text input */}
++        <TextInput
++          value={userInput}
++          onChangeText={setUserInput}
++          placeholder="Message agent..."
++          placeholderTextColor={theme.colors.mutedForeground}
++          style={[
++            styles.textInput,
++            { height: inputHeight, minHeight: MIN_INPUT_HEIGHT, maxHeight: MAX_INPUT_HEIGHT },
++          ]}
++          multiline
++          scrollEnabled={inputHeight >= MAX_INPUT_HEIGHT}
++          onContentSizeChange={handleContentSizeChange}
++          editable={!isRecording && ws.isConnected}
++        />
++
++        {/* Buttons */}
++        <View style={styles.buttonRow}>
++            {hasText || hasImages ? (
++              // Send button when text is entered or images are selected
+               <Pressable
+-                onPress={startRealtime}
+-                disabled={!ws.isConnected}
++                onPress={handleSendMessage}
++                disabled={!ws.isConnected || isProcessing}
+                 style={[
+-                  styles.realtimeButton,
+-                  !ws.isConnected && styles.buttonDisabled,
++                  styles.sendButton,
++                  (!ws.isConnected || isProcessing) && styles.buttonDisabled,
+                 ]}
+               >
+-                <AudioLines size={20} color={theme.colors.background} />
++                <ArrowUp size={20} color="white" />
+               </Pressable>
+-            </>
+-          )}
++            ) : (
++              // Voice and Realtime buttons when no text
++              <>
++                {/* Voice recording button */}
++                <Pressable
++                  onPress={handleVoicePress}
++                  disabled={!ws.isConnected}
++                  style={[
++                    styles.voiceButton,
++                    !ws.isConnected && styles.buttonDisabled,
++                    isRecording && styles.voiceButtonRecording,
++                  ]}
++                >
++                  {isRecording ? (
++                    <Square size={14} color="white" fill="white" />
++                  ) : (
++                    <Mic size={20} color={theme.colors.foreground} />
++                  )}
++                </Pressable>
++
++                {/* Realtime button */}
++                <Pressable
++                  onPress={startRealtime}
++                  disabled={!ws.isConnected}
++                  style={[
++                    styles.realtimeButton,
++                    !ws.isConnected && styles.buttonDisabled,
++                  ]}
++                >
++                  <AudioLines size={20} color={theme.colors.background} />
++                </Pressable>
++              </>
++            )}
++        </View>
+       </View>
+     </View>
+   );
+@@ -178,13 +249,47 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+ 
+ const styles = StyleSheet.create((theme) => ({
+   container: {
+-    flexDirection: "row",
+-    alignItems: "center",
++    flexDirection: "column",
+     paddingHorizontal: theme.spacing[4],
+     paddingVertical: BASE_VERTICAL_PADDING,
+-    gap: theme.spacing[3],
++    gap: theme.spacing[2],
+     minHeight: FOOTER_HEIGHT,
+   },
++  imagePreviewContainer: {
++    flexDirection: "row",
++    gap: theme.spacing[2],
++    flexWrap: "wrap",
++  },
++  imagePill: {
++    flexDirection: "row",
++    alignItems: "center",
++    backgroundColor: theme.colors.muted,
++    borderRadius: theme.borderRadius.lg,
++    padding: theme.spacing[1],
++    gap: theme.spacing[2],
++  },
++  imageThumbnail: {
++    width: 40,
++    height: 40,
++    borderRadius: theme.borderRadius.md,
++  },
++  removeImageButton: {
++    width: 24,
++    height: 24,
++    alignItems: "center",
++    justifyContent: "center",
++  },
++  inputRow: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++  },
++  attachButton: {
++    width: 40,
++    height: 40,
++    alignItems: "center",
++    justifyContent: "center",
++  },
+   textInput: {
+     flex: 1,
+     paddingHorizontal: theme.spacing[4],
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index cb7f4dc79..35697de53 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -158,7 +158,10 @@ export function GlobalFooter() {
+         <View style={styles.threeButtonContainer}>
+           <Pressable
+             onPress={() => router.push("/")}
+-            style={styles.footerButton}
++            style={({ pressed }) => [
++              styles.footerButton,
++              pressed && styles.buttonPressed,
++            ]}
+           >
+             <Users size={20} color={theme.colors.foreground} />
+             <Text style={styles.footerButtonText}>Agents</Text>
+@@ -166,7 +169,10 @@ export function GlobalFooter() {
+ 
+           <Pressable
+             onPress={() => setShowCreateModal(true)}
+-            style={styles.footerButton}
++            style={({ pressed }) => [
++              styles.footerButton,
++              pressed && styles.buttonPressed,
++            ]}
+           >
+             <Plus size={20} color={theme.colors.foreground} />
+             <Text style={styles.footerButtonText}>New Agent</Text>
+@@ -175,9 +181,10 @@ export function GlobalFooter() {
+           <Pressable
+             onPress={startRealtime}
+             disabled={!ws.isConnected}
+-            style={[
++            style={({ pressed }) => [
+               styles.footerButton,
+               !ws.isConnected && styles.buttonDisabled,
++              pressed && !ws.isConnected && styles.buttonPressed,
+             ]}
+           >
+             <AudioLines size={20} color={theme.colors.foreground} />
+@@ -231,4 +238,7 @@ const styles = StyleSheet.create((theme) => ({
+   buttonDisabled: {
+     opacity: 0.5,
+   },
++  buttonPressed: {
++    opacity: 0.5,
++  },
+ }));
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 7c88d6529..67d7b73e0 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -114,7 +114,7 @@ interface SessionContextValue {
+ 
+   // Helpers
+   initializeAgent: (params: { agentId: string; requestId?: string }) => void;
+-  sendAgentMessage: (agentId: string, message: string) => void;
++  sendAgentMessage: (agentId: string, message: string, imageUris?: string[]) => Promise<void>;
+   sendAgentAudio: (agentId: string, audioBlob: Blob) => Promise<void>;
+   createAgent: (options: { cwd: string; initialMode?: string; requestId?: string }) => void;
+   setAgentMode: (agentId: string, modeId: string) => void;
+@@ -603,7 +603,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+     ws.send(msg);
+   }, [ws]);
+ 
+-  const sendAgentMessage = useCallback((agentId: string, message: string) => {
++  const sendAgentMessage = useCallback(async (agentId: string, message: string, imageUris?: string[]) => {
+     // Generate unique message ID for deduplication
+     const messageId = generateMessageId();
+ 
+@@ -632,7 +632,32 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       return updated;
+     });
+ 
+-    // Send to agent with messageId
++    // Convert images to base64 if provided
++    let imagesData: Array<{ data: string; mimeType: string }> | undefined;
++    if (imageUris && imageUris.length > 0) {
++      imagesData = [];
++      for (const imageUri of imageUris) {
++        try {
++          const response = await fetch(imageUri);
++          const blob = await response.blob();
++          const arrayBuffer = await blob.arrayBuffer();
++          const bytes = new Uint8Array(arrayBuffer);
++          let binary = '';
++          for (let i = 0; i < bytes.length; i++) {
++            binary += String.fromCharCode(bytes[i]);
++          }
++          const base64 = btoa(binary);
++          imagesData.push({
++            data: base64,
++            mimeType: blob.type || 'image/jpeg',
++          });
++        } catch (error) {
++          console.error('[Session] Failed to convert image:', error);
++        }
++      }
++    }
++
++    // Send to agent with messageId and optional images
+     const msg: WSInboundMessage = {
+       type: "session",
+       message: {
+@@ -640,6 +665,7 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+         agentId,
+         text: message,
+         messageId,
++        ...(imagesData && imagesData.length > 0 ? { images: imagesData } : {}),
+       },
+     };
+     ws.send(msg);
+diff --git a/packages/server/src/server/acp/agent-manager-permissions.test.ts b/packages/server/src/server/acp/agent-manager-permissions.test.ts
+deleted file mode 100644
+index 15f62ee01..000000000
+--- a/packages/server/src/server/acp/agent-manager-permissions.test.ts
++++ /dev/null
+@@ -1,198 +0,0 @@
+-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+-import { AgentManager } from "./agent-manager.js";
+-import type { AgentUpdate } from "./types.js";
+-import { mkdtemp, rm } from "fs/promises";
+-import { tmpdir } from "os";
+-import { join } from "path";
+-
+-/**
+- * Vitest Test Suite for ACP Permission Flow
+- *
+- * This test validates that permission requests (like ExitPlanMode) are properly
+- * forwarded to the UI and can be responded to by the user.
+- *
+- * Run with: npx vitest run src/server/acp/agent-manager-permissions.test.ts
+- */
+-
+-describe("AgentManager - Permission Flow", () => {
+-  let manager: AgentManager;
+-  let tmpDir: string;
+-
+-  beforeAll(async () => {
+-    manager = new AgentManager();
+-    tmpDir = await mkdtemp(join(tmpdir(), "acp-permission-test-"));
+-  });
+-
+-  afterAll(async () => {
+-    // Kill all agents
+-    const agents = manager.listAgents();
+-    for (const agent of agents) {
+-      await manager.killAgent(agent.id);
+-    }
+-    // Remove temp directory
+-    await rm(tmpDir, { recursive: true, force: true });
+-  });
+-
+-  it(
+-    "should emit permission request when agent calls ExitPlanMode",
+-    async () => {
+-      // Track all updates
+-      const updates: AgentUpdate[] = [];
+-      let permissionRequest: any = null;
+-
+-      // Create agent in plan mode
+-      const agentId = await manager.createAgent({
+-        cwd: tmpDir,
+-        initialMode: "plan",
+-      });
+-
+-      expect(agentId).toBeDefined();
+-
+-      // Subscribe to updates
+-      const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-        updates.push(update);
+-
+-        // Check if this is a permission request
+-        const notification = update.notification as any;
+-        if (notification.type === "permissionRequest") {
+-          permissionRequest = notification.permissionRequest;
+-          console.log("[Test] Permission request received:", permissionRequest);
+-        }
+-      });
+-
+-      try {
+-        // Send a prompt that will trigger ExitPlanMode
+-        await manager.sendPrompt(
+-          agentId,
+-          "Create a dummy file called test.txt with the content 'hello'"
+-        );
+-
+-        // Wait a bit for the agent to process and call ExitPlanMode
+-        await new Promise((resolve) => setTimeout(resolve, 10000));
+-
+-        // Verify we got a permission request
+-        expect(permissionRequest).toBeDefined();
+-        expect(permissionRequest.agentId).toBe(agentId);
+-        expect(permissionRequest.requestId).toBeDefined();
+-        expect(permissionRequest.options).toBeDefined();
+-        expect(permissionRequest.options.length).toBeGreaterThan(0);
+-
+-        // Verify the options include the expected plan mode options
+-        const optionIds = permissionRequest.options.map((o: any) => o.optionId);
+-        console.log("[Test] Option IDs:", optionIds);
+-
+-        // Verify we have at least 2 options
+-        expect(optionIds.length).toBeGreaterThanOrEqual(2);
+-
+-        // The actual option IDs vary, but we should have some allow and reject options
+-        // Common patterns: ['allow_always', 'allow', 'reject'] or ['acceptEdits', 'default', 'plan']
+-        const hasAllowOption = optionIds.some((id: string) =>
+-          id.includes('allow') || id.includes('default') || id.includes('Edits')
+-        );
+-        const hasRejectOption = optionIds.some((id: string) =>
+-          id.includes('reject') || id.includes('plan')
+-        );
+-        expect(hasAllowOption).toBe(true);
+-        expect(hasRejectOption).toBe(true);
+-
+-        // Verify the toolCall exists
+-        expect(permissionRequest.toolCall).toBeDefined();
+-        console.log("[Test] Tool call:", JSON.stringify(permissionRequest.toolCall, null, 2));
+-
+-        // The toolCall structure can vary, but it should have either rawInput or other properties
+-        if (permissionRequest.toolCall.rawInput) {
+-          console.log("[Test] Plan:", permissionRequest.toolCall.rawInput.plan || permissionRequest.toolCall.rawInput);
+-        }
+-
+-        // Now simulate user approval (use first non-reject option)
+-        const approveOption = permissionRequest.options.find((o: any) =>
+-          !o.optionId.includes('reject') && !o.optionId.includes('plan')
+-        );
+-        expect(approveOption).toBeDefined();
+-        console.log("[Test] Simulating user approval with option:", approveOption.optionId);
+-        manager.respondToPermission(
+-          agentId,
+-          permissionRequest.requestId,
+-          approveOption.optionId
+-        );
+-
+-        // Wait for agent to proceed after approval
+-        await new Promise((resolve) => setTimeout(resolve, 15000));
+-
+-        // Verify agent proceeded (status should be processing or completed)
+-        const status = manager.getAgentStatus(agentId);
+-        console.log("[Test] Agent status after approval:", status);
+-        expect(["processing", "completed", "ready"]).toContain(status);
+-
+-        // The permission flow worked! The agent received permission and can proceed.
+-        // We don't need to verify additional updates since the core permission mechanism works.
+-        console.log("[Test] Permission flow verified successfully!");
+-      } finally {
+-        unsubscribe();
+-        await manager.killAgent(agentId);
+-      }
+-    },
+-    60000 // 60 second timeout
+-  );
+-
+-  it(
+-    "should handle permission rejection (keep planning)",
+-    async () => {
+-      let permissionRequest: any = null;
+-
+-      // Create agent in plan mode
+-      const agentId = await manager.createAgent({
+-        cwd: tmpDir,
+-        initialMode: "plan",
+-      });
+-
+-      expect(agentId).toBeDefined();
+-
+-      // Subscribe to updates
+-      const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-        const notification = update.notification as any;
+-        if (notification.type === "permissionRequest") {
+-          permissionRequest = notification.permissionRequest;
+-          console.log("[Test] Permission request received for rejection test");
+-        }
+-      });
+-
+-      try {
+-        // Send a prompt
+-        await manager.sendPrompt(
+-          agentId,
+-          "Create a file called reject-test.txt"
+-        );
+-
+-        // Wait for permission request
+-        await new Promise((resolve) => setTimeout(resolve, 10000));
+-
+-        expect(permissionRequest).toBeDefined();
+-
+-        // Reject the permission (choose reject/plan option)
+-        const rejectOption = permissionRequest.options.find((o: any) =>
+-          o.optionId.includes('reject') || o.optionId.includes('plan')
+-        );
+-        expect(rejectOption).toBeDefined();
+-        console.log("[Test] Simulating user rejection with option:", rejectOption.optionId);
+-        manager.respondToPermission(
+-          agentId,
+-          permissionRequest.requestId,
+-          rejectOption.optionId
+-        );
+-
+-        // Wait a bit
+-        await new Promise((resolve) => setTimeout(resolve, 5000));
+-
+-        // Agent should remain ready or processing (not failed)
+-        const status = manager.getAgentStatus(agentId);
+-        console.log("[Test] Agent status after rejection:", status);
+-        expect(["ready", "processing", "completed"]).toContain(status);
+-      } finally {
+-        unsubscribe();
+-        await manager.killAgent(agentId);
+-      }
+-    },
+-    60000
+-  );
+-});
+diff --git a/packages/server/src/server/acp/agent-manager.test.ts b/packages/server/src/server/acp/agent-manager.test.ts
+index 6e2f447da..edfbb255b 100644
+--- a/packages/server/src/server/acp/agent-manager.test.ts
++++ b/packages/server/src/server/acp/agent-manager.test.ts
+@@ -1,147 +1,11 @@
+ import { describe, it, expect, beforeAll, afterAll } from "vitest";
+ import { AgentManager } from "./agent-manager.js";
+-import type { AgentUpdate, AgentStatus } from "./types.js";
+-import { mkdtemp, rm, readFile, access } from "fs/promises";
++import type { AgentUpdate, AgentNotification } from "./types.js";
++import type { RequestPermissionRequest } from "@agentclientprotocol/sdk";
++import { mkdtemp, rm, readFile } from "fs/promises";
+ import { tmpdir } from "os";
+ import { join } from "path";
+ 
+-/**
+- * Vitest Test Suite for ACP Agent Functionality
+- *
+- * This test validates all core features with a REAL Claude Code agent (no mocking):
+- *
+- * 1. Directory Control - Agent runs in specified directory
+- * 2. Permission Mode: Auto Approve - File operations are automatically approved
+- * 3. Permission Mode: Reject All - File operations are blocked
+- * 4. Multiple Prompts - Agent can handle sequential prompts
+- * 5. Update Streaming - All update types stream correctly (message chunks, tool calls, etc.)
+- * 6. State Management - Status accurately reflects actual agent state
+- *
+- * Run with: npx vitest run src/server/acp/agent-manager.test.ts
+- */
+-
+-// ============================================================================
+-// Test Utilities
+-// ============================================================================
+-
+-interface CollectedUpdates {
+-  all: AgentUpdate[];
+-  messageChunks: string[];
+-  toolCalls: any[];
+-  toolResults: any[];
+-  statusUpdates: any[];
+-  commands: any[];
+-}
+-
+-function createUpdateCollector(): CollectedUpdates {
+-  return {
+-    all: [],
+-    messageChunks: [],
+-    toolCalls: [],
+-    toolResults: [],
+-    statusUpdates: [],
+-    commands: [],
+-  };
+-}
+-
+-function collectUpdate(collector: CollectedUpdates, update: AgentUpdate): void {
+-  collector.all.push(update);
+-
+-  const notification = update.notification as any;
+-
+-  // Message chunks
+-  if (
+-    notification.sessionUpdate === "agent_message_chunk" &&
+-    notification.content
+-  ) {
+-    const content = notification.content;
+-    if (content.type === "text" && content.text) {
+-      collector.messageChunks.push(content.text);
+-    }
+-  }
+-
+-  // Tool calls
+-  if (notification.sessionUpdate === "tool_call") {
+-    collector.toolCalls.push(notification);
+-  }
+-
+-  // Tool results
+-  if (notification.sessionUpdate === "tool_result") {
+-    collector.toolResults.push(notification);
+-  }
+-
+-  // Status updates from the wrapper
+-  if (
+-    notification.type === "sessionUpdate" &&
+-    notification.sessionUpdate?.status
+-  ) {
+-    collector.statusUpdates.push(notification.sessionUpdate.status);
+-  }
+-
+-  // Status updates from our custom type
+-  if (notification.sessionUpdate === "status_change") {
+-    collector.statusUpdates.push(notification.status);
+-  }
+-
+-  // Available commands
+-  if (notification.availableCommands) {
+-    collector.commands.push(notification.availableCommands);
+-  }
+-}
+-
+-function extractStatusTransitions(collector: CollectedUpdates): string[] {
+-  const statuses: string[] = [];
+-  let lastStatus: string | null = null;
+-
+-  for (const statusUpdate of collector.statusUpdates) {
+-    if (statusUpdate !== lastStatus) {
+-      statuses.push(String(statusUpdate));
+-      lastStatus = statusUpdate;
+-    }
+-  }
+-
+-  return statuses;
+-}
+-
+-async function waitForStatus(
+-  manager: AgentManager,
+-  agentId: string,
+-  targetStatus: AgentStatus,
+-  timeoutMs: number
+-): Promise<void> {
+-  const startTime = Date.now();
+-
+-  while (Date.now() - startTime < timeoutMs) {
+-    const currentStatus = manager.getAgentStatus(agentId);
+-
+-    if (currentStatus === targetStatus) {
+-      return;
+-    }
+-
+-    if (currentStatus === "failed") {
+-      const agent = manager.listAgents().find((a) => a.id === agentId);
+-      throw new Error(
+-        `Agent failed while waiting for status "${targetStatus}": ${agent?.error}`
+-      );
+-    }
+-
+-    // Wait a bit before checking again
+-    await sleep(500);
+-  }
+-
+-  throw new Error(
+-    `Timeout waiting for status "${targetStatus}" (current: ${manager.getAgentStatus(agentId)})`
+-  );
+-}
+-
+-function sleep(ms: number): Promise<void> {
+-  return new Promise((resolve) => setTimeout(resolve, ms));
+-}
+-
+-// ============================================================================
+-// Test Suite
+-// ============================================================================
+-
+ describe("AgentManager", () => {
+   let manager: AgentManager;
+   let tmpDir: string;
+@@ -152,355 +16,74 @@ describe("AgentManager", () => {
+   });
+ 
+   afterAll(async () => {
+-    // Kill all agents
+-    const agents = manager.listAgents();
+-    for (const agent of agents) {
+-      await manager.killAgent(agent.id);
+-    }
+-    // Remove temp directory
+     await rm(tmpDir, { recursive: true, force: true });
+   });
+ 
+-  // ==========================================================================
+-  // TEST 1: Directory Control and Initial Prompt
+-  // ==========================================================================
+-
+-  describe("Agent Creation and Directory Control", () => {
+-    it("should reject creation when working directory does not exist", async () => {
+-      const nonExistentDir = join(tmpDir, "does-not-exist");
+-
+-      await expect(
+-        manager.createAgent({
+-          cwd: nonExistentDir,
+-        })
+-      ).rejects.toThrow(/Working directory does not exist or is not accessible/);
+-    });
+-
+-    it(
+-      "should create agent and run in specified directory",
+-      async () => {
+-        const updates = createUpdateCollector();
+-        let unsubscribe: (() => void) | null = null;
+-
+-        // Create agent without initial prompt first, so we can subscribe
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+-
+-        expect(agentId).toBeDefined();
+-        expect(typeof agentId).toBe("string");
+-
+-        // Subscribe before sending prompt
+-        unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-          collectUpdate(updates, update);
+-        });
+-
+-        // Now send the prompt
+-        await manager.sendPrompt(
+-          agentId,
+-          "Run pwd and confirm you're in the test directory. Output the full path."
+-        );
+-
+-        try {
+-          // Wait for processing to complete
+-          await waitForStatus(manager, agentId, "completed", 60000);
+-
+-          // Verify we got updates
+-          expect(updates.all.length).toBeGreaterThan(0);
+-          expect(updates.messageChunks.length).toBeGreaterThan(0);
+-
+-          // Verify the output contains the tmpDir path
+-          const fullMessage = updates.messageChunks.join("");
+-          expect(fullMessage).toContain(tmpDir);
+-
+-          // Verify status transitions
+-          const statuses = extractStatusTransitions(updates);
+-          expect(statuses.length).toBeGreaterThan(0);
+-        } finally {
+-          if (unsubscribe) unsubscribe();
+-          await manager.killAgent(agentId);
+-        }
+-      },
+-      60000
+-    );
+-  });
+-
+-  // ==========================================================================
+-  // TEST 2: Permission Mode - Auto Approve
+-  // ==========================================================================
+-
+-  describe("Permission Mode: Auto Approve", () => {
+-    it(
+-      "should create files when in auto_approve mode",
+-      async () => {
+-        const updates = createUpdateCollector();
+-        const testFile = join(tmpDir, "test-auto-approve.txt");
+-
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+-
+-        expect(agentId).toBeDefined();
+-
+-        const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-          collectUpdate(updates, update);
+-        });
+-
+-        await manager.sendPrompt(
+-          agentId,
+-          `Create a file called "test-auto-approve.txt" with the content "hello from auto approve". You can write the file however you prefer.`
+-        );
+-
+-        try {
+-          // Wait for completion
+-          await waitForStatus(manager, agentId, "completed", 60000);
+-
+-          expect(updates.all.length).toBeGreaterThan(0);
+-          expect(updates.toolCalls.length).toBeGreaterThan(0);
+-
+-          // Verify file was created
+-          const content = await readFile(testFile, "utf-8");
+-          expect(content).toContain("hello from auto approve");
+-        } finally {
+-          unsubscribe();
+-          await manager.killAgent(agentId);
+-        }
+-      },
+-      60000
+-    );
+-  });
+-
+-  // ==========================================================================
+-  // TEST 3: Permission Mode - Reject All
+-  // ==========================================================================
+-
+-  describe("Permission Mode: Reject All", () => {
+-    it(
+-      "should block file operations in reject_all mode",
+-      async () => {
+-        const updates = createUpdateCollector();
+-        const testFile = join(tmpDir, "test-blocked.txt");
+-
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+-
+-        expect(agentId).toBeDefined();
+-
+-        const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-          collectUpdate(updates, update);
+-        });
+-
+-        await manager.sendPrompt(
+-          agentId,
+-          `Create a file called "test-blocked.txt" with the content "this should be blocked".`
+-        );
+-
+-        try {
+-          // Wait for completion (agent should complete even if permission denied)
+-          await waitForStatus(manager, agentId, "completed", 60000);
+-
+-          expect(updates.all.length).toBeGreaterThan(0);
+-
+-          // Verify file was NOT created
+-          await expect(access(testFile)).rejects.toThrow();
+-
+-          // Check that the response indicates permission denial
+-          const fullMessage = updates.messageChunks.join("").toLowerCase();
+-          const hasPermissionMessage =
+-            fullMessage.includes("permission") ||
+-            fullMessage.includes("denied") ||
+-            fullMessage.includes("blocked") ||
+-            fullMessage.includes("unable") ||
+-            fullMessage.includes("could not") ||
+-            fullMessage.includes("cannot");
+-
+-          // This is a soft assertion - we expect permission denial indication
+-          // but don't fail the test if it's not present
+-          if (!hasPermissionMessage) {
+-            console.warn(
+-              "Warning: Agent response doesn't clearly indicate permission denial"
+-            );
++  it(
++    "should create file after accepting plan",
++    async () => {
++      let permissionRequest: RequestPermissionRequest | null = null;
++      let requestId: string | null = null;
++      const testFile = join(tmpDir, "test.txt");
++
++      const agentId = await manager.createAgent({
++        cwd: tmpDir,
++        initialMode: "plan",
++      });
++
++      const unsubscribe = manager.subscribeToUpdates(
++        agentId,
++        (update: AgentUpdate) => {
++          const notification: AgentNotification = update.notification;
++          if (notification.type === "permission") {
++            permissionRequest = notification.request;
++            requestId = notification.requestId;
+           }
+-        } finally {
+-          unsubscribe();
+-          await manager.killAgent(agentId);
+         }
+-      },
+-      60000
+-    );
+-  });
+-
+-  // ==========================================================================
+-  // TEST 4: Multiple Prompts
+-  // ==========================================================================
+-
+-  describe("Multiple Prompts", () => {
+-    it(
+-      "should handle sequential prompts to same agent",
+-      async () => {
+-        const updates1 = createUpdateCollector();
+-        const updates2 = createUpdateCollector();
+-        let collectingFirst = true;
+-
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+-
+-        expect(agentId).toBeDefined();
+-
+-        const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-          if (collectingFirst) {
+-            collectUpdate(updates1, update);
+-          } else {
+-            collectUpdate(updates2, update);
+-          }
+-        });
+-
+-        try {
+-          // Send first prompt
+-          await manager.sendPrompt(agentId, "Echo 'first prompt response'");
+-
+-          await waitForStatus(manager, agentId, "completed", 30000);
+-
+-          expect(updates1.all.length).toBeGreaterThan(0);
+-
+-          // Switch to collecting second set of updates
+-          collectingFirst = false;
+-
+-          // Send second prompt
+-          await manager.sendPrompt(agentId, "Echo 'second prompt response'");
+-
+-          await waitForStatus(manager, agentId, "completed", 30000);
+-
+-          expect(updates2.all.length).toBeGreaterThan(0);
+-
+-          // Verify both prompts got responses
+-          expect(updates1.all.length).toBeGreaterThan(0);
+-          expect(updates2.all.length).toBeGreaterThan(0);
+-        } finally {
+-          unsubscribe();
+-          await manager.killAgent(agentId);
+-        }
+-      },
+-      60000
+-    );
+-  });
+-
+-  // ==========================================================================
+-  // TEST 5: Update Streaming
+-  // ==========================================================================
+-
+-  describe("Update Streaming", () => {
+-    it(
+-      "should stream all update types correctly",
+-      async () => {
+-        const updates = createUpdateCollector();
+-
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+-
+-        expect(agentId).toBeDefined();
+-
+-        const unsubscribe = manager.subscribeToUpdates(agentId, (update) => {
+-          collectUpdate(updates, update);
+-        });
++      );
+ 
++      try {
+         await manager.sendPrompt(
+           agentId,
+-          "List the files in the current directory using the Bash tool. Then explain what you found."
++          "Create a file called test.txt with the content 'hello world'"
+         );
+ 
+-        try {
+-          await waitForStatus(manager, agentId, "completed", 60000);
+-
+-          // Verify we got various update types
+-          expect(updates.all.length).toBeGreaterThan(0);
+-          expect(updates.messageChunks.length).toBeGreaterThan(0);
+-          expect(updates.toolCalls.length).toBeGreaterThan(0);
+-
+-          // Verify message can be reconstructed
+-          const fullMessage = updates.messageChunks.join("");
+-          expect(fullMessage.length).toBeGreaterThan(0);
+-        } finally {
+-          unsubscribe();
+-          await manager.killAgent(agentId);
++        let attempts = 0;
++        while (!permissionRequest && attempts < 40) {
++          await new Promise((resolve) => setTimeout(resolve, 500));
++          attempts++;
+         }
+-      },
+-      60000
+-    );
+-  });
+-
+-  // ==========================================================================
+-  // TEST 6: State Management
+-  // ==========================================================================
+-
+-  describe("State Management", () => {
+-    it(
+-      "should transition states correctly and clean up after kill",
+-      async () => {
+-        const statusLog: Array<{ time: Date; status: AgentStatus }> = [];
+-
+-        const agentId = await manager.createAgent({
+-          cwd: tmpDir,
+-        });
+ 
+-        expect(agentId).toBeDefined();
++        expect(permissionRequest).toBeDefined();
++        expect(requestId).toBeDefined();
+ 
+-        // Track status changes BEFORE sending prompt
+-        const checkInterval = setInterval(() => {
+-          const status = manager.getAgentStatus(agentId);
+-          statusLog.push({ time: new Date(), status });
+-        }, 500);
+-
+-        await manager.sendPrompt(
+-          agentId,
+-          "Sleep for 2 seconds using a bash command, then echo 'done'"
++        const acceptOption = permissionRequest!.options.find(
++          (o) => o.kind === "allow_once" || o.kind === "allow_always"
+         );
++        expect(acceptOption).toBeDefined();
+ 
+-        try {
+-          // Wait for completion
+-          await waitForStatus(manager, agentId, "completed", 60000);
+-
+-          clearInterval(checkInterval);
++        manager.respondToPermission(agentId, requestId!, acceptOption!.optionId);
+ 
+-          // Log should have captured status changes
+-          // (Note: might be 0 if agent completed too quickly)
+-          // We'll check transitions instead which is more reliable
+-
+-          // Analyze status transitions
+-          const transitions: string[] = [];
+-          let lastStatus: AgentStatus | null = null;
+-
+-          for (const entry of statusLog) {
+-            if (entry.status !== lastStatus) {
+-              transitions.push(entry.status);
+-              lastStatus = entry.status;
+-            }
+-          }
+-
+-          // Verify final status is completed (this is the most important check)
+-          const finalStatus = manager.getAgentStatus(agentId);
+-          expect(finalStatus).toBe("completed");
++        let status = manager.getAgentStatus(agentId);
++        attempts = 0;
++        while (status !== "completed" && status !== "failed" && attempts < 60) {
++          await new Promise((resolve) => setTimeout(resolve, 1000));
++          status = manager.getAgentStatus(agentId);
++          attempts++;
++        }
+ 
+-          // If we captured transitions, verify they include expected states
+-          // (Agent might complete too quickly to capture all states)
+-          if (transitions.length > 0) {
+-            // Should at least have completed state
+-            expect(transitions).toContain("completed");
+-          }
++        expect(status).toBe("completed");
+ 
+-          // Kill the agent and verify status changes
+-          await manager.killAgent(agentId);
++        const content = await readFile(testFile, "utf-8");
++        expect(content).toContain("hello world");
+ 
+-          // Agent should be removed from manager
+-          expect(() => manager.getAgentStatus(agentId)).toThrow("not found");
+-        } finally {
+-          clearInterval(checkInterval);
+-        }
+-      },
+-      60000
+-    );
+-  });
++        const agentInfo = manager.listAgents().find((a) => a.id === agentId);
++        console.log("Final agent mode:", agentInfo?.currentModeId);
++      } finally {
++        unsubscribe();
++        await manager.killAgent(agentId);
++      }
++    },
++    120000
++  );
+ });
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 6df9d3ce9..089309ec6 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -13,6 +13,7 @@ import {
+   type ReadTextFileResponse,
+   type WriteTextFileRequest,
+   type WriteTextFileResponse,
++  type ContentBlock,
+ } from "@agentclientprotocol/sdk";
+ import { v4 as uuidv4 } from "uuid";
+ import { expandTilde } from "../terminal-mcp/tmux.js";
+@@ -276,13 +277,13 @@ export class AgentManager {
+   /**
+    * Send a prompt to an agent
+    * @param agentId - Agent ID
+-   * @param prompt - The prompt text
++   * @param prompt - The prompt text or ContentBlock array
+    * @param options - Optional settings: maxWait (ms), sessionMode to set before sending, messageId for deduplication
+    * @returns Object with didComplete boolean indicating if agent finished within maxWait time
+    */
+   async sendPrompt(
+     agentId: string,
+-    prompt: string,
++    prompt: string | ContentBlock[],
+     options?: { maxWait?: number; sessionMode?: string; messageId?: string }
+   ): Promise<{ didComplete: boolean; stopReason?: string }> {
+     const agent = this.agents.get(agentId);
+@@ -336,6 +337,15 @@ export class AgentManager {
+       await this.setSessionMode(agentId, options.sessionMode);
+     }
+ 
++    // Convert prompt to ContentBlock array if it's a string
++    const contentBlocks: ContentBlock[] = typeof prompt === "string"
++      ? [{ type: "text", text: prompt }]
++      : prompt;
++
++    // Extract text for user message notification (use first text block)
++    const firstTextBlock = contentBlocks.find(block => block.type === "text");
++    const userMessageText = firstTextBlock && "text" in firstTextBlock ? firstTextBlock.text : "[message with attachments]";
++
+     // Emit user message notification
+     const userMessageUpdate: AgentUpdate = {
+       agentId,
+@@ -348,7 +358,7 @@ export class AgentManager {
+             sessionUpdate: "user_message_chunk",
+             content: {
+               type: "text",
+-              text: prompt,
++              text: userMessageText,
+             },
+             ...(options?.messageId ? { messageId: options.messageId } : {}),
+           },
+@@ -370,15 +380,10 @@ export class AgentManager {
+     agent.state = { type: "processing", runtime };
+     this.notifySubscribers(agentId);
+ 
+-    // Start the prompt
++    // Start the prompt with ContentBlock array
+     const promptPromise = runtime.connection.prompt({
+       sessionId: runtime.sessionId,
+-      prompt: [
+-        {
+-          type: "text",
+-          text: prompt,
+-        },
+-      ],
++      prompt: contentBlocks,
+     });
+ 
+     // Handle completion in background
+@@ -1413,9 +1418,8 @@ export class AgentManager {
+   /**
+    * Gracefully shutdown all agents
+    * Waits for processing agents to finish, then terminates all processes
+-   * @param timeout - Maximum time to wait for processing agents (ms), default 2 minutes
+    */
+-  async shutdown(timeout: number = 120000): Promise<void> {
++  async shutdown(): Promise<void> {
+     console.log("[AgentManager] Starting graceful shutdown...");
+ 
+     // Find agents currently processing work
+@@ -1428,22 +1432,10 @@ export class AgentManager {
+         `[AgentManager] Waiting for ${processingAgents.length} agent(s) to finish processing...`
+       );
+ 
+-      // Wait for processing agents to complete or timeout
+-      await Promise.race([
+-        // Wait for all processing agents to finish
+-        Promise.all(
+-          processingAgents.map((agent) => this.waitForAgentToFinish(agent.id))
+-        ),
+-        // Timeout fallback
+-        new Promise<void>((resolve) =>
+-          setTimeout(() => {
+-            console.log(
+-              `[AgentManager] Timeout reached (${timeout}ms), proceeding with shutdown`
+-            );
+-            resolve();
+-          }, timeout)
+-        ),
+-      ]);
++      // Wait for all processing agents to finish
++      await Promise.all(
++        processingAgents.map((agent) => this.waitForAgentToFinish(agent.id))
++      );
+     }
+ 
+     // Persist state and terminate all agents
+diff --git a/packages/server/src/server/index.ts b/packages/server/src/server/index.ts
+index 73f05cf4d..cb2e61337 100644
+--- a/packages/server/src/server/index.ts
++++ b/packages/server/src/server/index.ts
+@@ -123,8 +123,8 @@ async function main() {
+   const handleShutdown = async (signal: string) => {
+     console.log(`\n${signal} received, shutting down gracefully...`);
+ 
+-    // Wait for agents to finish work (with 2 minute timeout)
+-    await agentManager.shutdown(120000);
++    // Wait for agents to finish work
++    await agentManager.shutdown();
+ 
+     // Close WebSocket and HTTP servers
+     wsServer.close();
+diff --git a/packages/server/src/server/messages.ts b/packages/server/src/server/messages.ts
+index 12f04e8fc..404d1dea5 100644
+--- a/packages/server/src/server/messages.ts
++++ b/packages/server/src/server/messages.ts
+@@ -75,6 +75,10 @@ export const SendAgentMessageSchema = z.object({
+   agentId: z.string(),
+   text: z.string(),
+   messageId: z.string().optional(), // Client-provided ID for deduplication
++  images: z.array(z.object({
++    data: z.string(), // base64 encoded image
++    mimeType: z.string(), // e.g., "image/jpeg", "image/png"
++  })).optional(),
+ });
+ 
+ export const SendAgentAudioSchema = z.object({
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index bd78ddf81..747939f6d 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -459,7 +459,8 @@ export class Session {
+           await this.handleSendAgentMessage(
+             msg.agentId,
+             msg.text,
+-            msg.messageId
++            msg.messageId,
++            msg.images
+           );
+           break;
+ 
+@@ -603,23 +604,46 @@ export class Session {
+   }
+ 
+   /**
+-   * Handle text message to agent
++   * Handle text message to agent (with optional image attachments)
+    */
+   private async handleSendAgentMessage(
+     agentId: string,
+     text: string,
+-    messageId?: string
++    messageId?: string,
++    images?: Array<{ data: string; mimeType: string }>
+   ): Promise<void> {
+     console.log(
+       `[Session ${
+         this.clientId
+-      }] Sending text to agent ${agentId}: ${text.substring(0, 50)}...`
++      }] Sending text to agent ${agentId}: ${text.substring(0, 50)}...${images && images.length > 0 ? ` with ${images.length} image attachment(s)` : ''}`
+     );
+ 
+     try {
++      // Import ContentBlock type from ACP SDK
++      type ContentBlock = Parameters<typeof this.agentManager.sendPrompt>[1] extends (string | infer U) ? U extends Array<infer T> ? T : never : never;
++
++      // Build ContentBlock array
++      const contentBlocks: ContentBlock[] = [
++        {
++          type: "text",
++          text,
++        } as ContentBlock,
++      ];
++
++      // Add image blocks if present
++      if (images && images.length > 0) {
++        for (const image of images) {
++          contentBlocks.push({
++            type: "image",
++            data: image.data,
++            mimeType: image.mimeType,
++          } as ContentBlock);
++        }
++      }
++
+       // sendPrompt will emit the user message notification
+-      await this.agentManager.sendPrompt(agentId, text, { messageId });
+-      console.log(`[Session ${this.clientId}] Sent text to agent ${agentId}`);
++      await this.agentManager.sendPrompt(agentId, contentBlocks, { messageId });
++      console.log(`[Session ${this.clientId}] Sent message to agent ${agentId} with ${contentBlocks.length} content block(s)`);
+     } catch (error: any) {
+       console.error(
+         `[Session ${this.clientId}] Failed to send text to agent ${agentId}:`,

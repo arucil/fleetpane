@@ -1,0 +1,123 @@
+{
+  "synthetic_only": true,
+  "host_sha256": "b1284d5d88f792e8d8376f0564b0257c136b3f5c94618bd4a354d55a3477d6ac",
+  "cases": [
+    {
+      "provider": "codex",
+      "case": "text",
+      "thread_id": "fixture-thread-1",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "long",
+      "thread_id": "fixture-thread-2",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "markdown",
+      "thread_id": "fixture-thread-3",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "empty",
+      "thread_id": "fixture-thread-4",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "binary",
+      "thread_id": "fixture-thread-5",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "link",
+      "thread_id": "fixture-thread-6",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "invalid",
+      "thread_id": "fixture-thread-7",
+      "exact_reload": true
+    },
+    {
+      "provider": "codex",
+      "case": "future",
+      "thread_id": "fixture-thread-8",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "text",
+      "thread_id": "7247667e-4186-4ac5-bb5b-44cd97d1ffc1",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "long",
+      "thread_id": "a13c7667-b277-4e91-93b6-a0add5986bfd",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "markdown",
+      "thread_id": "cc3137b3-e205-4304-845f-8ab1425b9ff4",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "empty",
+      "thread_id": "b07f709c-41f8-4bd0-900f-b90bb04adada",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "binary",
+      "thread_id": "b9f0b51a-10fa-4cef-9fd0-38e037937466",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "link",
+      "thread_id": "0dea9e2f-4039-4413-bb43-9a81a57ec371",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "invalid",
+      "thread_id": "c577ac20-b3fa-4d6f-9d8a-e3be485506cd",
+      "exact_reload": true
+    },
+    {
+      "provider": "acp",
+      "case": "future",
+      "thread_id": "25e9557e-a2df-4b9e-bed6-edb7b2c741d8",
+      "exact_reload": true
+    }
+  ],
+  "cleanup": [
+    {
+      "provider": "codex",
+      "pid": 3007481,
+      "exit_code": 0
+    },
+    {
+      "provider": "acp",
+      "pid": 3007576,
+      "exit_code": 0
+    },
+    {
+      "provider": "acp",
+      "pid": 3007667,
+      "exit_code": 0
+    }
+  ],
+  "acp_archive_restart": {
+    "threads": 8,
+    "exact_turns": true
+  }
+}

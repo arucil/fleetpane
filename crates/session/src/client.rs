@@ -46,6 +46,10 @@ pub enum Command {
         config_id: String,
         value: String,
     },
+    Mode {
+        thread_id: String,
+        mode_id: String,
+    },
     List(crate::directory::PageRequest),
     Models {
         cursor: Option<String>,
@@ -54,12 +58,20 @@ pub enum Command {
         thread_id: String,
         name: String,
     },
+    Restore {
+        thread_id: String,
+    },
     Create {
         cwd: String,
     },
     Open {
         thread_id: String,
         resume: bool,
+    },
+    Fork {
+        thread_id: String,
+        path: PathBuf,
+        cwd: String,
     },
     Inspect {
         thread_id: String,
@@ -69,7 +81,13 @@ pub enum Command {
     Send {
         thread_id: String,
         text: String,
+        images: Vec<fleetpane_runtime::attachments::Image>,
         options: crate::models::TurnOptions,
+    },
+    Steer {
+        thread_id: String,
+        turn_id: String,
+        text: String,
     },
     Stop {
         thread_id: String,
@@ -78,6 +96,10 @@ pub enum Command {
 }
 
 impl Command {
+    pub fn is_composer_input(&self) -> bool {
+        matches!(self, Self::Send { .. } | Self::Steer { .. })
+    }
+
     pub fn permitted_by(
         &self,
         admission: &fleetpane_runtime::lifecycle::Admission,
@@ -88,6 +110,33 @@ impl Command {
 
     pub(crate) fn rpc(&self) -> Result<(&'static str, Value), Error> {
         Ok(match self {
+            Self::Fork {
+                thread_id,
+                path,
+                cwd,
+            } => {
+                if thread_id.is_empty()
+                    || thread_id.len() > 4096
+                    || !path.is_absolute()
+                    || !std::path::Path::new(cwd).is_absolute()
+                    || cwd.len() > 4096
+                {
+                    return Err(Error::Input(
+                        "Fork requires a session identity and absolute snapshot/workspace paths"
+                            .into(),
+                    ));
+                }
+                (
+                    "thread/fork",
+                    json!({"threadId":thread_id,"path":path,"cwd":cwd,"excludeTurns":true,"deferGoalContinuation":true}),
+                )
+            }
+            Self::Restore { thread_id } => {
+                if thread_id.is_empty() || thread_id.len() > 4096 {
+                    return Err(Error::Input("Invalid session identity for restore".into()));
+                }
+                ("thread/unarchive", json!({"threadId":thread_id}))
+            }
             Self::Tasks { thread_id } => {
                 if thread_id.is_empty() || thread_id.len() > 4096 {
                     return Err(Error::Input("Invalid task-plan session identity".into()));
@@ -97,6 +146,10 @@ impl Command {
                     json!({"threadId":thread_id}),
                 )
             }
+            Self::Mode { thread_id, mode_id } => (
+                "acp/mode/set",
+                json!({"threadId":thread_id,"modeId":mode_id}),
+            ),
             Self::Config {
                 thread_id,
                 config_id,
@@ -165,15 +218,25 @@ impl Command {
             Self::Send {
                 thread_id,
                 text,
+                images,
                 options,
             } => {
-                if text.trim().is_empty() || text.len() > MAX_PROMPT_BYTES {
+                fleetpane_runtime::attachments::validate(images).map_err(Error::Input)?;
+                if (text.trim().is_empty() && images.is_empty()) || text.len() > MAX_PROMPT_BYTES {
                     return Err(Error::Input(
-                        "Message must contain text and fit within 64 KiB.".into(),
+                        "Message requires text or images; text must fit within 64 KiB.".into(),
                     ));
                 }
-                let mut params =
-                    json!({"threadId":thread_id,"input":[{"type":"text","text":text}]});
+                let mut input = Vec::new();
+                if !text.trim().is_empty() {
+                    input.push(json!({"type":"text","text":text}));
+                }
+                input.extend(
+                    images
+                        .iter()
+                        .map(|image| json!({"type":"fleetpaneImage","image":image})),
+                );
+                let mut params = json!({"threadId":thread_id,"input":input});
                 if let Some(model) = options.model() {
                     params["model"] = json!(model);
                 }
@@ -182,12 +245,105 @@ impl Command {
                 }
                 ("turn/start", params)
             }
-            Self::Stop { thread_id, turn_id } => (
-                "turn/interrupt",
-                json!({"threadId":thread_id,"turnId":turn_id}),
-            ),
+            Self::Stop { thread_id, turn_id } => {
+                if [thread_id, turn_id]
+                    .iter()
+                    .any(|id| id.is_empty() || id.len() > 512)
+                {
+                    return Err(Error::Input(
+                        "Stop requires session and turn IDs of 1 to 512 bytes.".into(),
+                    ));
+                }
+                (
+                    "turn/interrupt",
+                    json!({"threadId":thread_id,"turnId":turn_id}),
+                )
+            }
+            Self::Steer {
+                thread_id,
+                turn_id,
+                text,
+            } => {
+                if thread_id.is_empty()
+                    || turn_id.is_empty()
+                    || thread_id.len() > 4096
+                    || turn_id.len() > 4096
+                    || text.trim().is_empty()
+                    || text.len() > MAX_PROMPT_BYTES
+                {
+                    return Err(Error::Input("Follow-up requires session and turn IDs up to 4 KiB and nonempty text up to 64 KiB.".into()));
+                }
+                (
+                    "turn/steer",
+                    json!({"threadId":thread_id,"expectedTurnId":turn_id,"input":[{"type":"text","text":text}]}),
+                )
+            }
         })
     }
+
+    pub fn validate_completed(&self, completed: &Completed) -> Result<(), Error> {
+        if let Self::Fork { thread_id, cwd, .. } = self {
+            let thread: crate::Thread = serde_json::from_value(
+                completed
+                    .result
+                    .get("thread")
+                    .cloned()
+                    .ok_or_else(|| Error::Protocol("Fork reply lacks a thread".into()))?,
+            )
+            .map_err(|e| Error::Protocol(e.to_string()))?;
+            thread
+                .validate()
+                .map_err(|error| Error::Protocol(error.to_string()))?;
+            if thread.id == *thread_id
+                || thread.id.is_empty()
+                || thread.cwd != *cwd
+                || !thread.turns.is_empty()
+                || thread.status.kind != "idle"
+            {
+                return Err(Error::Protocol("Fork reply did not create an idle, metadata-only session in the selected workspace; inspect its receipt before proceeding".into()));
+            }
+        }
+        if let Self::Restore { thread_id } = self {
+            let thread: crate::Thread = serde_json::from_value(
+                completed
+                    .result
+                    .get("thread")
+                    .cloned()
+                    .ok_or_else(|| Error::Protocol("Restore reply lacks a thread".into()))?,
+            )
+            .map_err(|error| Error::Protocol(error.to_string()))?;
+            thread
+                .validate()
+                .map_err(|error| Error::Protocol(error.to_string()))?;
+            if thread.id != *thread_id {
+                return Err(Error::Protocol(
+                    "Restore reply belongs to another session; do not resend automatically".into(),
+                ));
+            }
+        }
+        if let Self::Mode { .. } = self {
+            let modes: fleetpane_runtime::acp::modes::State = serde_json::from_value(
+                completed
+                    .result
+                    .get("modes")
+                    .cloned()
+                    .ok_or_else(|| Error::Protocol("ACP mode result lacks state".into()))?,
+            )
+            .map_err(|error| Error::Protocol(format!("invalid ACP mode result: {error}")))?;
+            modes.validate().map_err(Error::Protocol)?;
+        }
+        if let Self::Steer { turn_id, .. } = self {
+            validate_steer_ack(&completed.result, turn_id)?;
+        }
+        Ok(())
+    }
+}
+
+pub(crate) fn validate_steer_ack(result: &Value, expected: &str) -> Result<(), Error> {
+    if result.get("turnId").and_then(Value::as_str) != Some(expected) {
+        return Err(Error::Protocol("Follow-up acknowledgement does not match the expected active turn; do not resend automatically.".into()));
+    }
+    Ok(())
 }
 
 pub struct Completed {
@@ -215,6 +371,37 @@ pub async fn snapshot(socket: &std::path::Path) -> Result<Snapshot, Error> {
 }
 
 impl Connection {
+    /// Return the admission receipt without waiting for provider acknowledgement.
+    /// Stop progress remains authoritative in the Host snapshot.
+    pub async fn request_stop(
+        &self,
+        command: &Command,
+        operation_id: Uuid,
+    ) -> Result<Operation, Error> {
+        if !matches!(command, Command::Stop { .. }) {
+            return Err(Error::Input(
+                "Stop admission requires a Stop command".into(),
+            ));
+        }
+        let (method, params) = command.rpc()?;
+        self.check_stop_capability().await?;
+        self.admit_rpc(method, params, operation_id).await
+    }
+
+    async fn check_stop_capability(&self) -> Result<(), Error> {
+        let state = snapshot(&self.socket).await?;
+        if state.activity.stopping.is_none() {
+            return Err(Error::Input("This Host does not report Stop progress. Select an updated Host before stopping a turn.".into()));
+        }
+        if state.owner.as_ref() != Some(&self.lease) {
+            return Err(Error::Rejected {
+                code: "stale_controller".into(),
+                message: "Controller ownership changed before Stop; refresh before continuing."
+                    .into(),
+            });
+        }
+        Ok(())
+    }
     /// A Host-level admission fence, committed before the returned confirmation.
     /// On transport loss reread snapshot; do not infer whether it committed.
     pub async fn set_admission(
@@ -257,6 +444,25 @@ impl Connection {
 
     pub async fn execute(&self, command: &Command, operation_id: Uuid) -> Result<Completed, Error> {
         let (method, params) = command.rpc()?;
+        if matches!(command, Command::Stop { .. }) {
+            self.check_stop_capability().await?;
+        }
+        let completed = self.execute_rpc(method, params, operation_id).await?;
+        command
+            .validate_completed(&completed)
+            .map_err(|error| Error::Uncertain {
+                id: operation_id,
+                reason: error.to_string(),
+            })?;
+        Ok(completed)
+    }
+
+    pub(crate) async fn execute_rpc(
+        &self,
+        method: &str,
+        params: Value,
+        operation_id: Uuid,
+    ) -> Result<Completed, Error> {
         if fleetpane_runtime::is_query_method(method) {
             // Reads have no side effects to reconcile. A failed read is visible and
             // can be explicitly refreshed; it never creates a pending mutation.
@@ -274,22 +480,7 @@ impl Connection {
                 _ => Err(Error::Protocol("expected query result".into())),
             };
         }
-        let response = call(
-            &self.socket,
-            Request::Execute {
-                lease: self.lease.clone(),
-                operation_id,
-                method: method.into(),
-                params,
-            },
-        )
-        .await;
-        let mut operation = match response {
-            Ok(Response::Operation(operation)) => operation,
-            Ok(_) => return Err(Error::Protocol("expected operation admission".into())),
-            Err(Error::Transport(_)) => return Err(Error::Pending(operation_id)),
-            Err(error) => return Err(error),
-        };
+        let mut operation = self.admit_rpc(method, params, operation_id).await?;
         let deadline = tokio::time::Instant::now() + Duration::from_secs(20);
         loop {
             if !matches!(operation.outcome, Outcome::Accepted) {
@@ -303,6 +494,30 @@ impl Connection {
                 Ok(operation) => operation,
                 Err(_) => return Err(Error::Pending(operation_id)),
             };
+        }
+    }
+
+    async fn admit_rpc(
+        &self,
+        method: &str,
+        params: Value,
+        operation_id: Uuid,
+    ) -> Result<Operation, Error> {
+        let response = call(
+            &self.socket,
+            Request::Execute {
+                lease: self.lease.clone(),
+                operation_id,
+                method: method.into(),
+                params,
+            },
+        )
+        .await;
+        match response {
+            Ok(Response::Operation(operation)) => Ok(operation),
+            Ok(_) => Err(Error::Protocol("expected operation admission".into())),
+            Err(Error::Transport(_)) => Err(Error::Pending(operation_id)),
+            Err(error) => Err(error),
         }
     }
 
@@ -435,6 +650,177 @@ fn provider_result(message: Value, sequence: u64) -> Result<Completed, Error> {
 
 #[cfg(test)]
 mod tests {
+    #[tokio::test(flavor = "current_thread")]
+    async fn stop_admission_returns_pending_receipt_without_waiting_and_refuses_legacy_host() {
+        use super::*;
+        use tokio::{
+            io::{AsyncBufReadExt, AsyncWriteExt, BufReader},
+            net::UnixListener,
+        };
+        let directory = std::path::PathBuf::from("/tmp")
+            .join(format!("fleetpane-stop-client-{}", Uuid::new_v4()));
+        fleetpane_runtime::unix::prepare_directory(&directory).unwrap();
+        let socket = directory.join("control.sock");
+        let listener = UnixListener::bind(&socket).unwrap();
+        let mut state = fleetpane_runtime::State::new(1, json!({}));
+        let Response::Lease(lease) = state.claim(
+            PROTOCOL_VERSION,
+            state.snapshot().host_id,
+            0,
+            Uuid::new_v4(),
+        ) else {
+            panic!("claim")
+        };
+        let connection = Connection {
+            socket: socket.clone(),
+            lease: lease.clone(),
+        };
+        let operation_id = Uuid::new_v4();
+        let server = tokio::spawn(async move {
+            for step in 0..3 {
+                let (stream, _) = listener.accept().await.unwrap();
+                let mut stream = BufReader::new(stream);
+                let mut line = String::new();
+                stream.read_line(&mut line).await.unwrap();
+                let request: Request = serde_json::from_str(&line).unwrap();
+                let reply = if step == 1 {
+                    let Request::Execute {
+                        operation_id: id,
+                        method,
+                        params,
+                        ..
+                    } = request
+                    else {
+                        panic!("must submit Stop, never poll operation")
+                    };
+                    assert_eq!(id, operation_id);
+                    assert_eq!(method, "turn/interrupt");
+                    assert_eq!(params, json!({"threadId":"session","turnId":"turn"}));
+                    Response::Operation(Operation {
+                        id,
+                        method,
+                        params,
+                        outcome: Outcome::Accepted,
+                        completed_sequence: None,
+                    })
+                } else {
+                    assert!(matches!(request, Request::Snapshot));
+                    let mut snapshot = state.snapshot();
+                    if step == 2 {
+                        snapshot.activity.stopping = None;
+                    }
+                    Response::Snapshot(snapshot)
+                };
+                stream
+                    .get_mut()
+                    .write_all(format!("{}\n", serde_json::to_string(&reply).unwrap()).as_bytes())
+                    .await
+                    .unwrap();
+            }
+        });
+        let command = Command::Stop {
+            thread_id: "session".into(),
+            turn_id: "turn".into(),
+        };
+        let operation = tokio::time::timeout(
+            Duration::from_secs(2),
+            connection.request_stop(&command, operation_id),
+        )
+        .await
+        .unwrap()
+        .unwrap();
+        assert_eq!(operation.id, operation_id);
+        assert!(matches!(operation.outcome, Outcome::Accepted));
+        assert!(
+            matches!(connection.request_stop(&command,Uuid::new_v4()).await,Err(Error::Input(message)) if message.contains("does not report Stop progress"))
+        );
+        server.await.unwrap();
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+
+    #[test]
+    fn mode_rpc_requires_a_valid_confirmed_state() {
+        use super::*;
+        let command = Command::Mode {
+            thread_id: "s".into(),
+            mode_id: "code".into(),
+        };
+        assert_eq!(
+            command.rpc().unwrap(),
+            ("acp/mode/set", json!({"threadId":"s","modeId":"code"}))
+        );
+        for result in [
+            json!({}),
+            json!({"modes":null}),
+            json!({"modes":{"currentModeId":"","availableModes":[]}}),
+        ] {
+            assert!(
+                command
+                    .validate_completed(&Completed {
+                        result,
+                        sequence: 1
+                    })
+                    .is_err()
+            );
+        }
+        command.validate_completed(&Completed { result:json!({"modes":{"currentModeId":"newer-provider-mode","availableModes":[]}}), sequence:2 }).unwrap();
+    }
+
+    #[test]
+    fn steer_requires_exact_turn_and_preserves_text_without_new_turn_options() {
+        use super::*;
+        let text = "追加中文\n  keep indentation ";
+        let command = Command::Steer {
+            thread_id: "s".into(),
+            turn_id: "t".into(),
+            text: text.into(),
+        };
+        let (method, params) = command.rpc().unwrap();
+        assert_eq!(method, "turn/steer");
+        assert_eq!(
+            params,
+            json!({"threadId":"s","expectedTurnId":"t","input":[{"type":"text","text":text}]})
+        );
+        assert!(
+            !command
+                .permitted_by(&fleetpane_runtime::lifecycle::Admission {
+                    mode: fleetpane_runtime::lifecycle::Mode::Draining,
+                    generation: 1
+                })
+                .unwrap()
+        );
+        for turn in ["t", "wrong", ""] {
+            assert_eq!(
+                command
+                    .validate_completed(&Completed {
+                        sequence: 4,
+                        result: json!({"turnId":turn})
+                    })
+                    .is_ok(),
+                turn == "t"
+            );
+        }
+        assert!(
+            command
+                .validate_completed(&Completed {
+                    sequence: 4,
+                    result: json!({"turn":{"id":"t"}})
+                })
+                .is_err()
+        );
+        for (thread, turn, text) in [("", "t", "hi"), ("s", "", "hi"), ("s", "t", " ")] {
+            assert!(
+                Command::Steer {
+                    thread_id: thread.into(),
+                    turn_id: turn.into(),
+                    text: text.into()
+                }
+                .rpc()
+                .is_err()
+            );
+        }
+    }
+
     use super::*;
 
     #[tokio::test(flavor = "current_thread")]
@@ -532,6 +918,7 @@ mod tests {
             Command::Send {
                 thread_id: "t".into(),
                 text: " \n".into(),
+                images: Vec::new(),
                 options: crate::models::TurnOptions::default()
             }
             .rpc()
@@ -541,6 +928,7 @@ mod tests {
             Command::Send {
                 thread_id: "t".into(),
                 text: "x".repeat(MAX_PROMPT_BYTES + 1),
+                images: Vec::new(),
                 options: crate::models::TurnOptions::default()
             }
             .rpc()
@@ -549,6 +937,7 @@ mod tests {
         let (_, params) = Command::Send {
             thread_id: "t".into(),
             text: "你好\nworld".into(),
+            images: Vec::new(),
             options: crate::models::TurnOptions::default(),
         }
         .rpc()
@@ -581,6 +970,7 @@ mod tests {
         let (_, params) = Command::Send {
             thread_id: "t".into(),
             text: "hi".into(),
+            images: Vec::new(),
             options: crate::models::TurnOptions::new(
                 &catalog,
                 Some("wire-model".into()),
@@ -628,5 +1018,41 @@ mod tests {
             )),
             Err(Error::Provider(_))
         ));
+    }
+}
+
+#[cfg(test)]
+mod restore_tests {
+    use super::*;
+    #[test]
+    fn restore_is_a_fenced_mutation_and_requires_the_original_reply_identity() {
+        let command = Command::Restore {
+            thread_id: "exact-id".into(),
+        };
+        let (method, params) = command.rpc().unwrap();
+        assert_eq!(method, "thread/unarchive");
+        assert_eq!(params, json!({"threadId":"exact-id"}));
+        assert!(!fleetpane_runtime::is_query_method(method));
+        let draining = fleetpane_runtime::lifecycle::Admission {
+            generation: 1,
+            mode: fleetpane_runtime::lifecycle::Mode::Draining,
+        };
+        assert!(!command.permitted_by(&draining).unwrap());
+        let mut reply = Completed {
+            result: json!({"thread":{"id":"other-id","cwd":"/synthetic","preview":"archived","name":null,"historyMode":"paginated","status":{"type":"notLoaded"},"turns":[]}}),
+            sequence: 1,
+        };
+        assert!(command.validate_completed(&reply).is_err());
+        reply.result["thread"]["id"] = json!("exact-id");
+        command.validate_completed(&reply).unwrap();
+        reply.result = json!({});
+        assert!(command.validate_completed(&reply).is_err());
+        assert!(
+            Command::Restore {
+                thread_id: String::new()
+            }
+            .rpc()
+            .is_err()
+        );
     }
 }

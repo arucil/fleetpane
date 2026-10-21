@@ -1,0 +1,234 @@
+commit 9299bb5d4c083341c4af283e4616459558848fe5
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:19:19 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:19:19 2025 +0200
+
+    refactor: restore agent status bar and clean up input area layout
+    
+    - Add AgentStatusBar back to agent screen layout above controls
+    - Remove duplicate mode badge from AgentInputArea (now only in status bar)
+    - Simplify AgentInputArea to horizontal layout matching RealtimeControls
+    - Set both controls to height: 88 for consistent sizing
+    - Remove conditional rendering that caused component to unmount
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index 656d118cf..cacb88bfd 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -7,13 +7,16 @@ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { BackHeader } from "@/components/headers/back-header";
+ import { AgentStreamView } from "@/components/agent-stream-view";
+ import { AgentInputArea } from "@/components/agent-input-area";
++import { AgentStatusBar } from "@/components/agent-status-bar";
+ import { useSession } from "@/contexts/session-context";
++import { useRealtime } from "@/contexts/realtime-context";
+ 
+ export default function AgentScreen() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+   const { id } = useLocalSearchParams<{ id: string }>();
+   const { agents, agentStreamState, pendingPermissions, respondToPermission } = useSession();
++  const { isRealtimeMode } = useRealtime();
+ 
+   // Keyboard animation
+   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+@@ -60,13 +63,19 @@ export default function AgentScreen() {
+           }
+         />
+ 
+-        {/* Agent Input - will hide itself when realtime is active */}
+-        <ReanimatedAnimated.View
+-          entering={FadeIn.duration(250).delay(100)}
+-          style={[styles.inputContainer, { paddingBottom: insets.bottom }]}
+-        >
+-          <AgentInputArea agentId={id!} />
+-        </ReanimatedAnimated.View>
++        {/* Footer area - status bar + controls */}
++        <View style={[styles.footerContainer, { paddingBottom: insets.bottom }]}>
++          {/* Status bar - always visible, floating above controls */}
++          <AgentStatusBar agentId={id!} />
++          
++          {/* Controls - only show AgentInputArea when not in realtime mode */}
++          {/* When in realtime mode, GlobalFooter handles showing RealtimeControls */}
++          {!isRealtimeMode && (
++            <View style={styles.controlsContainer}>
++              <AgentInputArea agentId={id!} />
++            </View>
++          )}
++        </View>
+       </ReanimatedAnimated.View>
+     </View>
+   );
+@@ -80,8 +89,10 @@ const styles = StyleSheet.create((theme) => ({
+   content: {
+     flex: 1,
+   },
+-  inputContainer: {
++  footerContainer: {
+     backgroundColor: theme.colors.background,
++  },
++  controlsContainer: {
+     borderTopWidth: theme.borderWidth[1],
+     borderTopColor: theme.colors.border,
+   },
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 48d09cb72..7d084d8ee 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -1,11 +1,10 @@
+-import { View, TextInput, Pressable, Text } from "react-native";
++import { View, TextInput, Pressable } from "react-native";
+ import { useState } from "react";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+-import { Mic, ArrowUp, AudioLines, Square, ChevronDown } from "lucide-react-native";
++import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
+ import { useSession } from "@/contexts/session-context";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useAudioRecorder } from "@/hooks/use-audio-recorder";
+-import { ModeSelectorModal } from "./mode-selector-modal";
+ 
+ interface AgentInputAreaProps {
+   agentId: string;
+@@ -13,21 +12,13 @@ interface AgentInputAreaProps {
+ 
+ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+-  const { agents, ws, sendAgentMessage, sendAgentAudio, setAgentMode } = useSession();
+-  const { isRealtimeMode, startRealtime } = useRealtime();
++  const { ws, sendAgentMessage, sendAgentAudio } = useSession();
++  const { startRealtime } = useRealtime();
+   const audioRecorder = useAudioRecorder();
+ 
+   const [userInput, setUserInput] = useState("");
+   const [isRecording, setIsRecording] = useState(false);
+   const [isProcessing, setIsProcessing] = useState(false);
+-  const [showModeSelector, setShowModeSelector] = useState(false);
+-
+-  const agent = agents.get(agentId);
+-
+-  // Hide when realtime is active - global footer takes over
+-  if (isRealtimeMode) {
+-    return null;
+-  }
+ 
+   async function handleSendMessage() {
+     if (!userInput.trim() || !ws.isConnected) return;
+@@ -82,10 +73,6 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+     }
+   }
+ 
+-  function handleModeChange(modeId: string) {
+-    setAgentMode(agentId, modeId);
+-  }
+-
+   const hasText = userInput.trim().length > 0;
+ 
+   return (
+@@ -101,26 +88,8 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+         editable={!isRecording && ws.isConnected}
+       />
+ 
+-      {/* Controls row */}
+-      <View style={styles.controlsRow}>
+-        {/* Mode badge - only show if agent has modes */}
+-        {agent && agent.availableModes && agent.availableModes.length > 0 && (
+-          <Pressable
+-            onPress={() => setShowModeSelector(true)}
+-            style={({ pressed }) => [
+-              styles.modeBadge,
+-              pressed && styles.modeBadgePressed,
+-            ]}
+-          >
+-            <Text style={styles.modeBadgeText}>
+-              {agent.availableModes?.find(m => m.id === agent.currentModeId)?.name || agent.currentModeId || 'default'}
+-            </Text>
+-            <ChevronDown size={14} color={theme.colors.mutedForeground} />
+-          </Pressable>
+-        )}
+-
+-        {/* Buttons */}
+-        <View style={styles.buttonRow}>
++      {/* Buttons */}
++      <View style={styles.buttonRow}>
+           {hasText ? (
+             // Send button when text is entered
+             <Pressable
+@@ -166,64 +135,35 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+               </Pressable>
+             </>
+           )}
+-        </View>
+       </View>
+-
+-      {/* Mode selector modal */}
+-      <ModeSelectorModal
+-        visible={showModeSelector}
+-        agent={agent || null}
+-        onModeChange={handleModeChange}
+-        onClose={() => setShowModeSelector(false)}
+-      />
+     </View>
+   );
+ }
+ 
+ const styles = StyleSheet.create((theme) => ({
+   container: {
+-    padding: theme.spacing[4],
++    flexDirection: "row",
++    alignItems: "center",
++    paddingHorizontal: theme.spacing[4],
++    paddingVertical: theme.spacing[4],
+     gap: theme.spacing[3],
++    height: 88,
+   },
+   textInput: {
+-    minHeight: 44,
+-    maxHeight: 120,
++    flex: 1,
++    minHeight: 40,
++    maxHeight: 80,
+     paddingHorizontal: theme.spacing[4],
+-    paddingVertical: theme.spacing[3],
++    paddingVertical: theme.spacing[2],
+     backgroundColor: theme.colors.muted,
+     borderRadius: theme.borderRadius.lg,
+     color: theme.colors.foreground,
+     fontSize: theme.fontSize.base,
+   },
+-  controlsRow: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    justifyContent: "space-between",
+-    gap: theme.spacing[2],
+-  },
+-  modeBadge: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    gap: theme.spacing[2],
+-    paddingHorizontal: theme.spacing[3],
+-    paddingVertical: theme.spacing[2],
+-    backgroundColor: theme.colors.muted,
+-    borderRadius: theme.borderRadius.full,
+-  },
+-  modeBadgePressed: {
+-    backgroundColor: theme.colors.accent,
+-  },
+-  modeBadgeText: {
+-    color: theme.colors.mutedForeground,
+-    fontSize: theme.fontSize.xs,
+-    fontWeight: theme.fontWeight.semibold,
+-    textTransform: "capitalize",
+-  },
+   buttonRow: {
+     flexDirection: "row",
+     alignItems: "center",
+     gap: theme.spacing[2],
+-    marginLeft: "auto",
+   },
+   sendButton: {
+     width: 40,

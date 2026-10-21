@@ -1,0 +1,87 @@
+{
+  "protocol": 3,
+  "host_id": "75313866-bbca-4ca1-859e-261502501c6b",
+  "host_pid": 2675403,
+  "provider_pid": 2675409,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "75313866-bbca-4ca1-859e-261502501c6b",
+    "controller_id": "5390b27c-9b8e-4406-bb10-7ee4aeda3a1a",
+    "generation": 69
+  },
+  "sequence": 160,
+  "operation_ids": [
+    "da40b715-4b9c-4a64-b466-2541ba579e40",
+    "5730d241-41be-49a4-bdbf-afd0f7e2a350",
+    "c646f2a5-bc91-4182-9adf-20ef060df9a5",
+    "b7cdfaaf-16be-4cb4-b2f5-7a676e2c5d2e",
+    "a10a729e-b56b-4caf-8ef5-289bf1a4d4a8",
+    "2f86559d-f406-4f9b-ac5b-87eb9cbc09b6",
+    "afa7fcdd-5b3b-4fbb-9f20-7714dc669b51",
+    "cc4c8a8d-3abc-4696-90eb-284876d94f8b",
+    "69e9158c-e7aa-4aa5-8227-81214a3fdf50",
+    "0e420b76-b820-4ebe-833b-a640c0075f0b",
+    "5ebed893-6c41-4c30-8a0a-7cb164eda3ac"
+  ],
+  "journal_total": 11,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "ca076cb7-ad82-4be0-a1e3-5c9c2f108c3e",
+        "turn_id": "1988b5b0-d4a5-44e7-bf38-077d25c969e2"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "ca076cb7-ad82-4be0-a1e3-5c9c2f108c3e",
+        "threadId": "ca076cb7-ad82-4be0-a1e3-5c9c2f108c3e",
+        "toolCall": {
+          "title": "Synthetic tool",
+          "toolCallId": "call-4def2307-ee09-487b-afca-0e497d8d95da"
+        }
+      }
+    }
+  ],
+  "fault": null,
+  "fault_scope": null
+}

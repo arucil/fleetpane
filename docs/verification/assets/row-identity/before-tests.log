@@ -1,0 +1,17 @@
+
+running 6 tests
+test host_view::row_changes::tests::content_events_invalidate_rows_but_foreign_and_unapplied_events_do_not ... ok
+test host_view::row_changes::tests::item_named_status_does_not_replace_the_turn_card ... FAILED
+test host_view::row_changes::tests::delimiters_in_provider_ids_do_not_alias_other_turn_items ... FAILED
+test host_view::row_changes::tests::pagination_reorder_edits_removal_and_thread_switch_use_identity ... ok
+test host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline ... ok
+test host_view::row_changes::tests::streaming_tail_updates_one_card_without_touching_1200_retained_cards ... ok
+
+failures:
+
+failures:
+    host_view::row_changes::tests::delimiters_in_provider_ids_do_not_alias_other_turn_items
+    host_view::row_changes::tests::item_named_status_does_not_replace_the_turn_card
+
+test result: FAILED. 4 passed; 2 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.17s
+

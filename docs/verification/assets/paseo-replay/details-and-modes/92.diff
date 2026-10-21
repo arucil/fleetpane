@@ -1,0 +1,505 @@
+diff --git a/packages/app/src/components/agent-status-bar.tsx b/packages/app/src/components/agent-status-bar.tsx
+new file mode 100644
+index 000000000..9a7ecd4e0
+--- /dev/null
++++ b/packages/app/src/components/agent-status-bar.tsx
+@@ -0,0 +1,145 @@
++import { View, Text, Pressable } from "react-native";
++import { StyleSheet, useUnistyles } from "react-native-unistyles";
++import { ChevronDown } from "lucide-react-native";
++import { useSession } from "@/contexts/session-context";
++import { useState } from "react";
++import { ModeSelectorModal } from "./mode-selector-modal";
++
++interface AgentStatusBarProps {
++  agentId: string;
++}
++
++export function AgentStatusBar({ agentId }: AgentStatusBarProps) {
++  const { theme } = useUnistyles();
++  const { agents, setAgentMode } = useSession();
++  const [showModeSelector, setShowModeSelector] = useState(false);
++
++  const agent = agents.get(agentId);
++
++  if (!agent) {
++    return null;
++  }
++
++  function handleModeChange(modeId: string) {
++    setAgentMode(agentId, modeId);
++  }
++
++  function getStatusLabel(status: string): string {
++    switch (status) {
++      case "ready":
++        return "Ready";
++      case "processing":
++        return "Working";
++      case "completed":
++        return "Completed";
++      case "failed":
++        return "Failed";
++      case "killed":
++        return "Stopped";
++      default:
++        return status;
++    }
++  }
++
++  function getStatusColor(status: string): string {
++    switch (status) {
++      case "ready":
++        return theme.colors.palette.green[500];
++      case "processing":
++        return theme.colors.palette.blue[500];
++      case "completed":
++        return theme.colors.palette.gray[500];
++      case "failed":
++        return theme.colors.palette.red[500];
++      case "killed":
++        return theme.colors.palette.orange[500];
++      default:
++        return theme.colors.mutedForeground;
++    }
++  }
++
++  return (
++    <View style={styles.container}>
++      {/* Agent Mode Badge */}
++      {agent.availableModes && agent.availableModes.length > 0 && (
++        <Pressable
++          onPress={() => setShowModeSelector(true)}
++          style={({ pressed }) => [
++            styles.modeBadge,
++            pressed && styles.modeBadgePressed,
++          ]}
++        >
++          <Text style={styles.modeBadgeText}>
++            {agent.availableModes?.find((m) => m.id === agent.currentModeId)?.name ||
++              agent.currentModeId ||
++              "default"}
++          </Text>
++          <ChevronDown size={14} color={theme.colors.mutedForeground} />
++        </Pressable>
++      )}
++
++      {/* Agent Status Indicator */}
++      <View style={styles.statusIndicator}>
++        <View
++          style={[
++            styles.statusDot,
++            { backgroundColor: getStatusColor(agent.status) },
++          ]}
++        />
++        <Text style={styles.statusText}>{getStatusLabel(agent.status)}</Text>
++      </View>
++
++      {/* Mode selector modal */}
++      <ModeSelectorModal
++        visible={showModeSelector}
++        agent={agent}
++        onModeChange={handleModeChange}
++        onClose={() => setShowModeSelector(false)}
++      />
++    </View>
++  );
++}
++
++const styles = StyleSheet.create((theme) => ({
++  container: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[3],
++    paddingHorizontal: theme.spacing[4],
++    paddingTop: theme.spacing[2],
++    paddingBottom: theme.spacing[1],
++  },
++  modeBadge: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++    paddingHorizontal: theme.spacing[3],
++    paddingVertical: theme.spacing[2],
++    backgroundColor: theme.colors.muted,
++    borderRadius: theme.borderRadius.full,
++  },
++  modeBadgePressed: {
++    backgroundColor: theme.colors.accent,
++  },
++  modeBadgeText: {
++    color: theme.colors.mutedForeground,
++    fontSize: theme.fontSize.xs,
++    fontWeight: theme.fontWeight.semibold,
++    textTransform: "capitalize",
++  },
++  statusIndicator: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++  },
++  statusDot: {
++    width: 8,
++    height: 8,
++    borderRadius: 4,
++  },
++  statusText: {
++    color: theme.colors.mutedForeground,
++    fontSize: theme.fontSize.xs,
++    fontWeight: theme.fontWeight.semibold,
++  },
++}));
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index ef0d5eeb7..27b1ff1f2 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -26,6 +26,7 @@ import type {
+   EnrichedSessionNotification,
+   EnrichedSessionUpdate,
+ } from "./types.js";
++import { AgentPersistence, type PersistedAgent } from "./agent-persistence.js";
+ 
+ interface PendingPermission {
+   requestId: string;
+@@ -107,6 +108,153 @@ class ACPClient implements Client {
+  */
+ export class AgentManager {
+   private agents = new Map<string, ManagedAgent>();
++  private persistence = new AgentPersistence();
++
++  /**
++   * Initialize the agent manager and load persisted agents
++   */
++  async initialize(): Promise<void> {
++    console.log("[AgentManager] Initializing and loading persisted agents...");
++    const persistedAgents = await this.persistence.load();
++
++    for (const persistedAgent of persistedAgents) {
++      try {
++        console.log(`[AgentManager] Resuming agent ${persistedAgent.id} with session ${persistedAgent.sessionId}`);
++        await this.resumeAgent(persistedAgent);
++      } catch (error) {
++        console.error(`[AgentManager] Failed to resume agent ${persistedAgent.id}:`, error);
++        // Remove failed agent from persistence
++        await this.persistence.remove(persistedAgent.id);
++      }
++    }
++
++    console.log(`[AgentManager] Loaded ${this.agents.size} agents`);
++  }
++
++  /**
++   * Resume an existing agent from persisted data
++   */
++  async resumeAgent(persisted: PersistedAgent): Promise<string> {
++    const agentId = persisted.id;
++    const cwd = expandTilde(persisted.cwd);
++
++    // Validate that the working directory exists
++    try {
++      await access(cwd, constants.R_OK | constants.X_OK);
++    } catch (error) {
++      throw new Error(
++        `Working directory does not exist or is not accessible: ${cwd}`
++      );
++    }
++
++    // Spawn the ACP process without any special flags
++    const agentProcess = spawn("npx", ["@boudra/claude-code-acp"], {
++      stdio: ["pipe", "pipe", "pipe"],
++      cwd,
++    });
++
++    // Create streams for ACP communication
++    const input = Writable.toWeb(agentProcess.stdin);
++    const output = Readable.toWeb(agentProcess.stdout);
++    const stream = ndJsonStream(input, output);
++
++    // Create the ACP client and connection
++    const client = new ACPClient(
++      agentId,
++      (id, update) => {
++        this.handleSessionNotification(id, update);
++      },
++      (id, params) => {
++        return this.handlePermissionRequest(id, params);
++      }
++    );
++    const connection = new ClientSideConnection(() => client, stream);
++
++    // Create the managed agent record
++    const agent: ManagedAgent = {
++      id: agentId,
++      status: "initializing",
++      createdAt: new Date(persisted.createdAt),
++      process: agentProcess,
++      connection,
++      subscribers: new Set(),
++      updates: [],
++      cwd,
++      title: persisted.title,
++      titleGenerationTriggered: true, // Already has a title
++      pendingPermissions: new Map(),
++      currentAssistantMessageId: null,
++      currentThoughtId: null,
++      sessionId: persisted.sessionId,
++    };
++
++    this.agents.set(agentId, agent);
++
++    // Handle process errors
++    agentProcess.on("error", (error) => {
++      this.handleAgentError(agentId, `Process error: ${error.message}`);
++    });
++
++    agentProcess.on("exit", (code, signal) => {
++      const agent = this.agents.get(agentId);
++      if (!agent) return;
++
++      if (agent.status !== "completed" && agent.status !== "killed") {
++        this.handleAgentError(
++          agentId,
++          `Process exited unexpectedly: code=${code}, signal=${signal}`
++        );
++      }
++    });
++
++    // Capture stderr for debugging
++    agentProcess.stderr.on("data", (data) => {
++      console.error(`[Agent ${agentId}] stderr:`, data.toString());
++    });
++
++    try {
++      // Initialize the connection
++      await agent.connection.initialize({
++        protocolVersion: PROTOCOL_VERSION,
++        clientCapabilities: {
++          fs: {
++            readTextFile: true,
++            writeTextFile: true,
++          },
++        },
++      });
++
++      // Use the loadSession API to resume the existing session
++      console.log(`[Agent ${agentId}] Loading session ${persisted.sessionId} via loadSession API`);
++      const sessionResponse = await agent.connection.loadSession({
++        sessionId: persisted.sessionId,
++        cwd,
++        mcpServers: [],
++      });
++
++      console.log(`[Agent ${agentId}] Session loaded:`, JSON.stringify(sessionResponse, null, 2));
++
++      // Store session modes from response
++      if (sessionResponse.modes) {
++        agent.currentModeId = sessionResponse.modes.currentModeId;
++        agent.availableModes = sessionResponse.modes.availableModes;
++        console.log(
++          `[Agent ${agentId}] Session loaded with mode: ${agent.currentModeId}`,
++          `Available modes:`, agent.availableModes?.map(m => m.id).join(', ')
++        );
++      }
++
++      agent.status = "ready";
++
++      return agentId;
++    } catch (error) {
++      this.handleAgentError(
++        agentId,
++        `Resume failed: ${error instanceof Error ? error.message : String(error)}`
++      );
++      throw error;
++    }
++  }
+ 
+   /**
+    * Create a new agent
+@@ -126,7 +274,7 @@ export class AgentManager {
+     }
+ 
+     // Spawn the ACP process
+-    const agentProcess = spawn("npx", ["@zed-industries/claude-code-acp"], {
++    const agentProcess = spawn("npx", ["@boudra/claude-code-acp"], {
+       stdio: ["pipe", "pipe", "pipe"],
+       cwd,
+     });
+@@ -231,6 +379,17 @@ export class AgentManager {
+ 
+       agent.status = "ready";
+ 
++      // Persist the new agent
++      if (agent.sessionId) {
++        await this.persistence.upsert({
++          id: agentId,
++          title: agent.title || `Agent ${agentId.slice(0, 8)}`,
++          sessionId: agent.sessionId,
++          createdAt: agent.createdAt.toISOString(),
++          cwd: agent.cwd,
++        });
++      }
++
+       // If an initial prompt was provided, send it
+       if (options.initialPrompt) {
+         console.log(`[Agent ${agentId}] Sending initial prompt`);
+@@ -433,6 +592,9 @@ export class AgentManager {
+     // This ensures subscribers can still query agent info
+     this.notifySubscribers(agentId);
+ 
++    // Remove from persistence
++    await this.persistence.remove(agentId);
++
+     // Kill the process
+     agent.process.kill("SIGTERM");
+ 
+@@ -717,7 +879,7 @@ export class AgentManager {
+   /**
+    * Set the title for an agent
+    */
+-  setAgentTitle(agentId: string, title: string): void {
++  async setAgentTitle(agentId: string, title: string): Promise<void> {
+     const agent = this.agents.get(agentId);
+     if (!agent) {
+       throw new Error(`Agent ${agentId} not found`);
+@@ -725,6 +887,11 @@ export class AgentManager {
+ 
+     agent.title = title;
+     console.log(`[Agent ${agentId}] Title set to: "${title}"`);
++
++    // Persist the title update
++    if (agent.sessionId) {
++      await this.persistence.updateTitle(agentId, title);
++    }
+   }
+ 
+   /**
+diff --git a/packages/server/src/server/acp/agent-persistence.ts b/packages/server/src/server/acp/agent-persistence.ts
+new file mode 100644
+index 000000000..c5001ecfc
+--- /dev/null
++++ b/packages/server/src/server/acp/agent-persistence.ts
+@@ -0,0 +1,100 @@
++import { promises as fs } from "fs";
++import path from "path";
++import { fileURLToPath } from "url";
++import { dirname } from "path";
++
++const __filename = fileURLToPath(import.meta.url);
++const __dirname = dirname(__filename);
++
++export interface PersistedAgent {
++  id: string;
++  title: string;
++  sessionId: string;
++  createdAt: string;
++  cwd: string;
++}
++
++export class AgentPersistence {
++  private persistencePath: string;
++
++  constructor() {
++    // Store agents.json in the project root
++    this.persistencePath = path.join(__dirname, "../../../agents.json");
++  }
++
++  /**
++   * Load all persisted agents
++   */
++  async load(): Promise<PersistedAgent[]> {
++    try {
++      const data = await fs.readFile(this.persistencePath, "utf-8");
++      return JSON.parse(data);
++    } catch (error) {
++      // File doesn't exist or is invalid, return empty array
++      console.log("[AgentPersistence] No existing agents found or file is invalid");
++      return [];
++    }
++  }
++
++  /**
++   * Save agents to disk
++   */
++  async save(agents: PersistedAgent[]): Promise<void> {
++    try {
++      await fs.writeFile(
++        this.persistencePath,
++        JSON.stringify(agents, null, 2),
++        "utf-8"
++      );
++      console.log(`[AgentPersistence] Saved ${agents.length} agents to disk`);
++    } catch (error) {
++      console.error("[AgentPersistence] Failed to save agents:", error);
++      throw error;
++    }
++  }
++
++  /**
++   * Add or update an agent
++   */
++  async upsert(agent: PersistedAgent): Promise<void> {
++    const agents = await this.load();
++    const existingIndex = agents.findIndex((a) => a.id === agent.id);
++
++    if (existingIndex >= 0) {
++      agents[existingIndex] = agent;
++      console.log(`[AgentPersistence] Updated agent ${agent.id}`);
++    } else {
++      agents.push(agent);
++      console.log(`[AgentPersistence] Added new agent ${agent.id}`);
++    }
++
++    await this.save(agents);
++  }
++
++  /**
++   * Remove an agent
++   */
++  async remove(agentId: string): Promise<void> {
++    const agents = await this.load();
++    const filtered = agents.filter((a) => a.id !== agentId);
++
++    if (filtered.length < agents.length) {
++      await this.save(filtered);
++      console.log(`[AgentPersistence] Removed agent ${agentId}`);
++    }
++  }
++
++  /**
++   * Update agent title
++   */
++  async updateTitle(agentId: string, title: string): Promise<void> {
++    const agents = await this.load();
++    const agent = agents.find((a) => a.id === agentId);
++
++    if (agent) {
++      agent.title = title;
++      await this.save(agents);
++      console.log(`[AgentPersistence] Updated title for agent ${agentId}: "${title}"`);
++    }
++  }
++}
+\ No newline at end of file
+diff --git a/packages/server/src/server/index.ts b/packages/server/src/server/index.ts
+index 91864a3ef..9543fcf39 100644
+--- a/packages/server/src/server/index.ts
++++ b/packages/server/src/server/index.ts
+@@ -60,7 +60,7 @@ function createServer() {
+   return app;
+ }
+ 
+-function main() {
++async function main() {
+   const port = parseInt(process.env.PORT || "6767", 10);
+ 
+   const app = createServer();
+@@ -68,7 +68,8 @@ function main() {
+ 
+   // Initialize global agent manager
+   const agentManager = new AgentManager();
+-  console.log("✓ Global agent manager initialized");
++  await agentManager.initialize(); // Load persisted agents
++  console.log("✓ Global agent manager initialized with persisted agents");
+ 
+   // Initialize WebSocket server
+   const wsServer = new VoiceAssistantWebSocketServer(httpServer, agentManager);

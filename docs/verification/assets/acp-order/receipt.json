@@ -1,0 +1,128 @@
+{
+  "verified_local_date": "2026-10-21 Asia/Shanghai",
+  "verified_at_utc": "2026-10-20T18:25:13.274726+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "uncommitted": true,
+  "source_sha256": {
+    "crates/runtime/src/acp.rs": "72e991ca651f9a0b4dfa9b76d5918b36c279bbe01946c58f9f0b2a31a4b05efd",
+    "crates/runtime/src/acp/history.rs": "a62d79c80b6cc0463dc715c2bec8b3e8c23e5321c52ac0f21a550faca1035b98",
+    "scripts/acp-fixture.py": "0512fc58d9083bd66045ccc8d5832c36d454808db07a65e8dd1bf1f4ff518459",
+    "scripts/acp-order-smoke.py": "d9fce5cab84cce6322f8cdf9ece0f9f4151663a1b07bc2a846fb9e70eb47ce77",
+    ".github/workflows/ci.yml": "beb7f1436841b12fb25deb178aee6ba73cbeb02695256ff624ada7dbe95436f6"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "59effff4203b830cb040159b6c4d9e9e871498a0fbad76ce7684845a0dde5935",
+    "apps/desktop/target/debug/fleetpane-desktop": "efa0dec0d9901f48560eca2397b7d5197126e2c17c0da43a41e6932320a43477"
+  },
+  "root_tests_passed": 120,
+  "desktop_tests_passed": 9,
+  "root_desktop_clippy_warnings_denied": "PASS",
+  "windows_gnu_root_clippy": "PASS; not native Windows acceptance",
+  "debug_builds": "PASS",
+  "before_fix": {
+    "unit_regressions_failed": 2,
+    "old_binary_process_reproduction_failed": true,
+    "logs": [
+      "before.log",
+      "process-before.log"
+    ]
+  },
+  "native": {
+    "workspace": "fleetpane-acp-order",
+    "provider": "private ACP fixture; no real model run",
+    "before": {
+      "socket": "/tmp/fleetpane-acp-order-qa/private/control.sock",
+      "host_id": "96313cb3-6b61-463b-a7dd-43c7d7bd0568",
+      "pids": [
+        266623,
+        266625
+      ],
+      "thread": "50de3112-0f15-42cb-ba7d-89c897102868",
+      "binary_sha256": {
+        "target/debug/fleetpane-host": "59effff4203b830cb040159b6c4d9e9e871498a0fbad76ce7684845a0dde5935",
+        "apps/desktop/target/debug/fleetpane-desktop": "efa0dec0d9901f48560eca2397b7d5197126e2c17c0da43a41e6932320a43477"
+      }
+    },
+    "after_restart": {
+      "host_id": "9dcbee10-a8b9-4c3b-a00e-fdea1398846f",
+      "pids": [
+        271424,
+        271429
+      ]
+    },
+    "turns_and_item_ids_exact_after_restart": true,
+    "first_and_last_native_copies_exact_before_after_restart": true,
+    "tool_expand_and_full_copy_verified": true,
+    "draft_kept_at_old_incarnation_no_transfer": true,
+    "prompt_file_exact": "[chronology]\n",
+    "resume_or_send_in_archive": false,
+    "normal_exit_codes": [
+      0,
+      0
+    ],
+    "stderr_empty": true
+  },
+  "history_cursor": {
+    "last_ordinal": 54,
+    "last_revision": "cc3dbb88cb1a2bbf12378de49afb9aaf9f986813",
+    "next_ordinal": 55,
+    "next_revision": "0f1450381af0449fbd093d9361a920abe68f15dd"
+  },
+  "owned_processes_absent": {
+    "266623": true,
+    "266625": true,
+    "271424": true,
+    "271429": true,
+    "266648": true,
+    "271442": true
+  },
+  "workspace_stopped": true,
+  "remote_ci": "not run",
+  "limits": [
+    "No new real-provider acceptance",
+    "No reconstruction of already merged historical messages",
+    "No macOS/Windows native QA or measured performance gain",
+    "Explicit same-ID chunks preserve one message across interleaving"
+  ],
+  "artifacts_sha256": {
+    "01-latest-items.png": "e8a3d085b47469635ebfcaaef73b127b66c6212cd039bfa3b5cbd89ea2aa8e27",
+    "02-first-items.png": "5a37d8315c468df4b879b589fe0ef8cfc716eee524c3df250942ecc590d6a418",
+    "03-first-tool-expanded.png": "5c0916e05a5d138ea18902657a52e246024686e496855c59d340231547be5eed",
+    "04-draft-and-tool.png": "bf39a40bb8223cfc2c8f40874eb3328b6217d0ddbf3f1eac6af0d7f58bc2e0d8",
+    "05-archived-tail.png": "105c97c49442de23ead7f201ec132e1f1b576fa418175bda7ecb295fb1ee3e48",
+    "06-archived-first-items.png": "aa1a78c64b674eca0fd7871ed711e9612a4025ef586c702c30a1ae28ad04aa80",
+    "07-archived-reload.png": "e62a13374aa47e7aafb8642f91032ded92f5cc233ea3df50f2a6d228d56fb013",
+    "app-266648.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-266648.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-271442.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-271442.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archived-clipboard-readback.json": "072d43142fe8273271baf847dad7c7c649d89f5c85503cd756d3e24ad8744c89",
+    "before.log": "6557f3cd652b53e3294f7caf5a4e4823a387d72932131b603fc2d0df77c4ea3b",
+    "desktop-build.log": "2822223ff57470530893c74434e4ea5695c6fb8aac1b813f7f21c8278accbb2a",
+    "desktop-clippy.log": "92a114813f7a17dc6debf8e4d10c631d0a021f2503bb7ffbb103244bad1ff6dd",
+    "desktop-test.log": "ca8a2750b521d399dae647f7e1319754a753ed0533d7b50ec97a26da196aad00",
+    "draft-readback.json": "982fd44e507ea3ad30179ec39f01a7fa4448ac5110133bc35371857f3a0b2f24",
+    "expected-copy.json": "3ca458fc5489a37cabc7a5612164738ce67bd0e6428e450f03ec969ebe42fa4b",
+    "final-snapshot.json": "531533489607a9b3dac95de729cc7695d31442e47255a19c1f79a636ecf5509c",
+    "host-build.log": "9ab7aac18a92baf8cfea16e4a26cfa3dde43a53be103bf27b36ed1e17b8ff40d",
+    "host-restarted.log": "321b20e42babbabe84704934d02d20f52e26b3ec1d0b04129524dbfcce5ef474",
+    "host.log": "818ae4e11d4783b324326b0270af60a3ff506147f9a307a0b06b78fdbeb7064c",
+    "native-clipboard-readback.json": "ce5559f619736cc19f6027f106f01094fc94e5c11078549dc3289e273005e930",
+    "process-before.log": "d0148c75b030316dbd1a0ba8e7daf8702e535bfcb9a59c774c69308524765f32",
+    "restarted-state.json": "ff5f440b93a6367f368770550bef728c4dd5110a4ca2ded38d81475a34aaf43a",
+    "root-clippy.log": "5494a1b7b472807cd985e57e78d485f1cf19a1c99adf2d29d261a54f800fc5e7",
+    "root-tests.log": "303d56cc952b34310de903bce0e4adca422aa22130ed330da9a44aa14c12192d",
+    "runtime.log": "f5cb287a1133b46b899016c92f27687f35f249a8ae3cff422ef21c6fdddee483",
+    "smoke-acp-archive.json": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "smoke-acp-order.json": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e",
+    "smoke-acp-stop.json": "14a8544945d8a8c92361a66d7259a6937340f18b79b706dc05a9b4e61e778e68",
+    "smoke-acp.json": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "smoke-appearance.json": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830",
+    "smoke-concurrency.json": "20ac63de1b16bdf37cb115b7b5fde346184c29a5bdb315b025816ee9dfa8a68e",
+    "state.json": "47cd617a2b7ac9251a5d9dd799960ef968a0d4fa5cb65b0cf23cd1e8e81fe318",
+    "targeted.log": "27f4816bbbd8fffdc3c4f0da4b49fd4267d916b2e0e0966d937f0777b6b9898d",
+    "thread-archived.json": "73c06c71dbcd9a6a501bca369dd71b96d4f5eb6d61d069cb52f6de7a801b925f",
+    "thread-before.json": "938d505369d442e7e9784d7c43e842f4bc8f9a5754a781bead02a560520f5d03",
+    "windows-clippy.log": "d7fd76a3f62763d18981949e39ccd928943d2af8cd1c6e054bb2b4327490a77f"
+  }
+}

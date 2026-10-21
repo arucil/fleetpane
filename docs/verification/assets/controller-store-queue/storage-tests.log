@@ -1,0 +1,14 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 1.70s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-9c42c15a90689dbb)
+
+running 6 tests
+test storage::tests::system_directory_alias_is_supported_but_leaf_symlinks_are_refused ... ok
+test storage::tests::queued_cancellation_skips_action_and_failure_releases_next_job_in_order ... ok
+test storage::tests::missing_v1_creation_table_is_not_reinitialized ... ok
+test storage::tests::v2_migration_preserves_workspace_identity ... ok
+test storage::tests::v1_migration_preserves_creation_bindings_and_attempts ... ok
+test storage::tests::cancelled_job_keeps_alias_opens_queued_without_blocking_other_stores ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 78 filtered out; finished in 2.43s
+

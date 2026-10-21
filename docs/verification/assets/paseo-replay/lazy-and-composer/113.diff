@@ -1,0 +1,82 @@
+commit faf087b3a62dee362b56c919528bc64df3b8d12c
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 22:14:15 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 22:14:15 2025 +0200
+
+    refactor: standardize footer height calculations and alignment across components
+
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index f03b2326e..559aad6eb 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -11,6 +11,7 @@ import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
+ import { useSession } from "@/contexts/session-context";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useAudioRecorder } from "@/hooks/use-audio-recorder";
++import { FOOTER_HEIGHT } from "@/contexts/footer-controls-context";
+ 
+ interface AgentInputAreaProps {
+   agentId: string;
+@@ -18,6 +19,7 @@ interface AgentInputAreaProps {
+ 
+ const MIN_INPUT_HEIGHT = 40;
+ const MAX_INPUT_HEIGHT = 160;
++const BASE_VERTICAL_PADDING = (FOOTER_HEIGHT - MIN_INPUT_HEIGHT) / 2;
+ 
+ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+@@ -177,11 +179,11 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+ const styles = StyleSheet.create((theme) => ({
+   container: {
+     flexDirection: "row",
+-    alignItems: "flex-end",
++    alignItems: "center",
+     paddingHorizontal: theme.spacing[4],
+-    paddingVertical: theme.spacing[4],
++    paddingVertical: BASE_VERTICAL_PADDING,
+     gap: theme.spacing[3],
+-    minHeight: 88,
++    minHeight: FOOTER_HEIGHT,
+   },
+   textInput: {
+     flex: 1,
+diff --git a/packages/app/src/components/realtime-controls.tsx b/packages/app/src/components/realtime-controls.tsx
+index 82fe099a4..8a164dae0 100644
+--- a/packages/app/src/components/realtime-controls.tsx
++++ b/packages/app/src/components/realtime-controls.tsx
+@@ -4,6 +4,10 @@ import { MicOff, Square } from "lucide-react-native";
+ import { VolumeMeter } from "./volume-meter";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useSession } from "@/contexts/session-context";
++import { FOOTER_HEIGHT } from "@/contexts/footer-controls-context";
++
++const CONTROL_BUTTON_SIZE = 48;
++const VERTICAL_PADDING = (FOOTER_HEIGHT - CONTROL_BUTTON_SIZE) / 2;
+ 
+ export function RealtimeControls() {
+   const { theme } = useUnistyles();
+@@ -70,8 +74,8 @@ const styles = StyleSheet.create((theme) => ({
+     alignItems: "center",
+     justifyContent: "space-between",
+     paddingHorizontal: theme.spacing[4],
+-    paddingVertical: theme.spacing[4],
+-    height: 88,
++    paddingVertical: VERTICAL_PADDING,
++    height: FOOTER_HEIGHT,
+   },
+   volumeContainer: {
+     flex: 1,
+diff --git a/packages/app/src/contexts/footer-controls-context.tsx b/packages/app/src/contexts/footer-controls-context.tsx
+index 7c7af8930..5d15330ea 100644
+--- a/packages/app/src/contexts/footer-controls-context.tsx
++++ b/packages/app/src/contexts/footer-controls-context.tsx
+@@ -1,7 +1,7 @@
+ import { createContext, useCallback, useContext, useMemo, useState } from "react";
+ import type { ReactNode } from "react";
+ 
+-export const FOOTER_HEIGHT = 88;
++export const FOOTER_HEIGHT = 75;
+ 
+ interface FooterControlsContextValue {
+   controls: ReactNode | null;

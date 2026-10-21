@@ -1,0 +1,419 @@
+commit 9feec81047d5ff221ec6f90e22775199556690ad
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Nov 16 18:02:13 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Nov 16 18:02:13 2025 +0100
+
+    feat: improve audio streaming and add wait-for-agent cancellation support
+
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 1b7b4496b..13247f273 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -276,6 +276,15 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+   const [fileExplorer, setFileExplorer] = useState<Map<string, AgentFileExplorerState>>(new Map());
+   const activeAudioGroupsRef = useRef<Set<string>>(new Set());
+ 
++  // Buffer for streaming audio chunks
++  interface AudioChunk {
++    chunkIndex: number;
++    audio: string; // base64
++    format: string;
++    id: string;
++  }
++  const audioChunkBuffersRef = useRef<Map<string, AudioChunk[]>>(new Map());
++
+   const focusedAgentId = focusedAgentOverride ?? orchestratorFocusedAgentId;
+   const setFocusedAgentId = useCallback((agentId: string | null) => {
+     setFocusedAgentOverride(agentId);
+@@ -500,61 +509,108 @@ export function SessionProvider({ children, serverUrl }: SessionProviderProps) {
+       const data = message.payload;
+       const playbackGroupId = data.groupId ?? data.id;
+       const isFinalChunk = data.isLastChunk ?? true;
++      const chunkIndex = data.chunkIndex ?? 0;
++
+       activeAudioGroupsRef.current.add(playbackGroupId);
+       setIsPlayingAudio(true);
+ 
++      // Buffer the chunk
++      if (!audioChunkBuffersRef.current.has(playbackGroupId)) {
++        audioChunkBuffersRef.current.set(playbackGroupId, []);
++      }
++
++      const buffer = audioChunkBuffersRef.current.get(playbackGroupId)!;
++      buffer.push({
++        chunkIndex,
++        audio: data.audio,
++        format: data.format,
++        id: data.id,
++      });
++
++      // Only play when we receive the final chunk
++      if (!isFinalChunk) {
++        console.log(`[Session] Buffered chunk ${chunkIndex} for group ${playbackGroupId}`);
++        return;
++      }
++
++      // We have all chunks - sort by index and concatenate
++      console.log(`[Session] Received final chunk for group ${playbackGroupId}, total chunks: ${buffer.length}`);
++      buffer.sort((a, b) => a.chunkIndex - b.chunkIndex);
++
+       let playbackFailed = false;
++      const chunkIds = buffer.map(chunk => chunk.id);
+ 
+       try {
+-        // Create blob-like object with correct mime type (React Native compatible)
+         const mimeType =
+           data.format === "mp3" ? "audio/mpeg" : `audio/${data.format}`;
+-        const base64Audio = data.audio;
++
++        // Decode each chunk separately and concatenate binary data
++        const decodedChunks: Uint8Array[] = [];
++        let totalSize = 0;
++
++        for (const chunk of buffer) {
++          const binaryString = atob(chunk.audio);
++          const bytes = new Uint8Array(binaryString.length);
++          for (let i = 0; i < binaryString.length; i++) {
++            bytes[i] = binaryString.charCodeAt(i);
++          }
++          decodedChunks.push(bytes);
++          totalSize += bytes.length;
++        }
++
++        // Concatenate all decoded chunks
++        const concatenatedBytes = new Uint8Array(totalSize);
++        let offset = 0;
++        for (const chunk of decodedChunks) {
++          concatenatedBytes.set(chunk, offset);
++          offset += chunk.length;
++        }
++
++        console.log(`[Session] Playing concatenated audio: ${buffer.length} chunks, ${totalSize} bytes`);
+ 
+         // Create a Blob-like object that works in React Native
+         const audioBlob = {
+           type: mimeType,
+-          size: Math.ceil((base64Audio.length * 3) / 4), // Approximate size from base64
++          size: totalSize,
+           arrayBuffer: async () => {
+-            // Convert base64 to ArrayBuffer
+-            const binaryString = atob(base64Audio);
+-            const bytes = new Uint8Array(binaryString.length);
+-            for (let i = 0; i < binaryString.length; i++) {
+-              bytes[i] = binaryString.charCodeAt(i);
+-            }
+-            return bytes.buffer;
++            return concatenatedBytes.buffer;
+           },
+         } as Blob;
+ 
+-        // Play audio
++        // Play concatenated audio
+         await audioPlayer.play(audioBlob);
+ 
+-        // Send confirmation back to server
+-        const confirmMessage: WSInboundMessage = {
+-          type: "session",
+-          message: {
+-            type: "audio_played",
+-            id: data.id,
+-          },
+-        };
+-        ws.send(confirmMessage);
++        // Send confirmation for all chunks
++        for (const chunkId of chunkIds) {
++          const confirmMessage: WSInboundMessage = {
++            type: "session",
++            message: {
++              type: "audio_played",
++              id: chunkId,
++            },
++          };
++          ws.send(confirmMessage);
++        }
+       } catch (error: any) {
+         playbackFailed = true;
+         console.error("[Session] Audio playback error:", error);
+ 
+-        // Still send confirmation even on error to prevent server from waiting
+-        const confirmMessage: WSInboundMessage = {
+-          type: "session",
+-          message: {
+-            type: "audio_played",
+-            id: data.id,
+-          },
+-        };
+-        ws.send(confirmMessage);
+-      } finally {
+-        if (isFinalChunk || playbackFailed) {
+-          activeAudioGroupsRef.current.delete(playbackGroupId);
++        // Still send confirmation for all chunks even on error
++        for (const chunkId of chunkIds) {
++          const confirmMessage: WSInboundMessage = {
++            type: "session",
++            message: {
++              type: "audio_played",
++              id: chunkId,
++            },
++          };
++          ws.send(confirmMessage);
+         }
++      } finally {
++        // Clean up buffer and active group
++        audioChunkBuffersRef.current.delete(playbackGroupId);
++        activeAudioGroupsRef.current.delete(playbackGroupId);
++
+         if (activeAudioGroupsRef.current.size === 0) {
+           setIsPlayingAudio(false);
+         }
+diff --git a/packages/app/src/hooks/use-speechmatics-audio.ts b/packages/app/src/hooks/use-speechmatics-audio.ts
+index 58508921d..57afe3589 100644
+--- a/packages/app/src/hooks/use-speechmatics-audio.ts
++++ b/packages/app/src/hooks/use-speechmatics-audio.ts
+@@ -1,6 +1,7 @@
+ import { useState, useEffect, useRef, useCallback } from "react";
+ import {
+   initialize,
++  useMicrophonePermissions,
+   toggleRecording,
+   tearDown,
+   useExpoTwoWayAudioEventListener,
+@@ -56,6 +57,8 @@ function concatenateUint8Arrays(arrays: Uint8Array[]): Uint8Array {
+ export function useSpeechmaticsAudio(
+   config: SpeechmaticsAudioConfig
+ ): SpeechmaticsAudio {
++  const [microphonePermission, requestMicrophonePermission] =
++    useMicrophonePermissions();
+   const [isActive, setIsActive] = useState(false);
+   const [isSpeaking, setIsSpeaking] = useState(false);
+   const [isDetecting, setIsDetecting] = useState(false);
+@@ -279,6 +282,24 @@ export function useSpeechmaticsAudio(
+     )
+   );
+ 
++  const ensureMicrophonePermission = useCallback(async () => {
++    let permissionStatus = microphonePermission;
++
++    if (!permissionStatus?.granted) {
++      try {
++        permissionStatus = await requestMicrophonePermission();
++      } catch (err) {
++        throw new Error("Failed to request microphone permission");
++      }
++    }
++
++    if (!permissionStatus?.granted) {
++      throw new Error(
++        "Microphone permission is required to capture audio. Please enable microphone access in system settings."
++      );
++    }
++  }, [microphonePermission, requestMicrophonePermission]);
++
+   async function start(): Promise<void> {
+     if (isActive) {
+       console.log("[SpeechmaticsAudio] Already active");
+@@ -286,6 +307,8 @@ export function useSpeechmaticsAudio(
+     }
+ 
+     try {
++      await ensureMicrophonePermission();
++
+       // Initialize audio if not already initialized
+       if (!audioInitialized) {
+         console.log("[SpeechmaticsAudio] Initializing audio...");
+diff --git a/packages/server/src/server/agent/mcp-server.ts b/packages/server/src/server/agent/mcp-server.ts
+index 25c99603b..da2378388 100644
+--- a/packages/server/src/server/agent/mcp-server.ts
++++ b/packages/server/src/server/agent/mcp-server.ts
+@@ -24,6 +24,10 @@ import { curateAgentActivity } from "./activity-curator.js";
+ import { AGENT_PROVIDER_DEFINITIONS } from "./provider-manifest.js";
+ import { AgentRegistry } from "./agent-registry.js";
+ import { createWorktree } from "../../utils/worktree.js";
++import {
++  WaitForAgentTracker,
++  type WaitForAgentCanceler,
++} from "./wait-for-agent-tracker.js";
+ 
+ export interface AgentMcpServerOptions {
+   agentManager: AgentManager;
+@@ -103,6 +107,7 @@ async function serializeSnapshotWithMetadata(
+ async function waitForAgentEvent(
+   agentManager: AgentManager,
+   agentId: string,
++  tracker: WaitForAgentTracker,
+   signal?: AbortSignal
+ ): Promise<{
+   status: AgentLifecycleStatus;
+@@ -142,6 +147,19 @@ async function waitForAgentEvent(
+       resolve({ status: currentStatus, permission });
+     };
+ 
++    const unregister = tracker.register(agentId, (reason) => {
++      cleanup();
++      reject(
++        Object.assign(
++          new Error(reason ?? "wait_for_agent cancelled"),
++          {
++            name: "AbortError",
++          }
++        )
++      );
++    });
++    cleanupFns.push(unregister);
++
+     const unsubscribe = agentManager.subscribe(
+       (event) => {
+         if (event.type === "agent_state") {
+@@ -329,7 +347,12 @@ export async function createAgentMcpServer(
+       },
+     },
+     async ({ agentId }, { signal }) => {
+-      const result = await waitForAgentEvent(agentManager, agentId, signal);
++      const result = await waitForAgentEvent(
++        agentManager,
++        agentId,
++        waitTracker,
++        signal
++      );
+       const activity = buildActivityPayload(agentManager, agentId);
+ 
+       return {
+diff --git a/packages/server/src/server/agent/wait-for-agent-tracker.test.ts b/packages/server/src/server/agent/wait-for-agent-tracker.test.ts
+new file mode 100644
+index 000000000..e8d53c23f
+--- /dev/null
++++ b/packages/server/src/server/agent/wait-for-agent-tracker.test.ts
+@@ -0,0 +1,40 @@
++import { describe, expect, it, vi } from "vitest";
++import { WaitForAgentTracker } from "./wait-for-agent-tracker";
++
++describe("WaitForAgentTracker", () => {
++  it("registers and cancels waiters per agent", () => {
++    const tracker = new WaitForAgentTracker();
++    const cancelA = vi.fn();
++    const cancelB = vi.fn();
++
++    const unregisterA = tracker.register("agent-a", cancelA);
++    tracker.register("agent-a", cancelB);
++
++    expect(tracker.cancel("agent-a", "test")).toBe(true);
++    expect(cancelA).toHaveBeenCalledWith("test");
++    expect(cancelB).toHaveBeenCalledWith("test");
++
++    // Subsequent cancels should no-op once cleared
++    expect(tracker.cancel("agent-a")).toBe(false);
++
++    // Unregister removes callback without triggering it
++    const cancelC = vi.fn();
++    const unregisterC = tracker.register("agent-b", cancelC);
++    unregisterC();
++    expect(tracker.cancel("agent-b")).toBe(false);
++    expect(cancelC).not.toHaveBeenCalled();
++  });
++
++  it("supports cancelling all waiters", () => {
++    const tracker = new WaitForAgentTracker();
++    const cancelA = vi.fn();
++    const cancelB = vi.fn();
++
++    tracker.register("agent-a", cancelA);
++    tracker.register("agent-b", cancelB);
++
++    expect(tracker.cancelAll()).toBe(2);
++    expect(cancelA).toHaveBeenCalled();
++    expect(cancelB).toHaveBeenCalled();
++  });
++});
+diff --git a/packages/server/src/server/agent/wait-for-agent-tracker.ts b/packages/server/src/server/agent/wait-for-agent-tracker.ts
+new file mode 100644
+index 000000000..bc4776364
+--- /dev/null
++++ b/packages/server/src/server/agent/wait-for-agent-tracker.ts
+@@ -0,0 +1,58 @@
++export type WaitForAgentCanceler = (agentId: string, reason?: string) => boolean;
++
++/**
++ * Tracks long-running wait_for_agent tool calls so they can be cancelled
++ * explicitly (e.g., when a realtime barge-in aborts the current turn).
++ */
++export class WaitForAgentTracker {
++  private waiters = new Map<string, Set<(reason?: string) => void>>();
++
++  register(agentId: string, cancel: (reason?: string) => void): () => void {
++    if (!this.waiters.has(agentId)) {
++      this.waiters.set(agentId, new Set());
++    }
++    const waitersForAgent = this.waiters.get(agentId)!;
++    waitersForAgent.add(cancel);
++
++    return () => {
++      const current = this.waiters.get(agentId);
++      if (!current) {
++        return;
++      }
++      current.delete(cancel);
++      if (current.size === 0) {
++        this.waiters.delete(agentId);
++      }
++    };
++  }
++
++  cancel(agentId: string, reason?: string): boolean {
++    const waitersForAgent = this.waiters.get(agentId);
++    if (!waitersForAgent || waitersForAgent.size === 0) {
++      return false;
++    }
++
++    this.waiters.delete(agentId);
++    for (const cancel of waitersForAgent) {
++      try {
++        cancel(reason);
++      } catch (error) {
++        console.warn(
++          `[WaitForAgentTracker] Cancel callback failed for ${agentId}:`,
++          error
++        );
++      }
++    }
++    return true;
++  }
++
++  cancelAll(reason?: string): number {
++    let cancelled = 0;
++    for (const agentId of Array.from(this.waiters.keys())) {
++      if (this.cancel(agentId, reason)) {
++        cancelled += 1;
++      }
++    }
++    return cancelled;
++  }
++}
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 21a1e3f7c..bd1ea75d6 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -1587,7 +1587,23 @@ export class Session {
+       `[Session ${this.clientId}] Buffered audio chunk (${chunkBuffer.length} bytes, chunks: ${this.audioBuffer.chunks.length}${this.audioBuffer.isPCM ? `, PCM bytes: ${this.audioBuffer.totalPCMBytes}` : ""})`
+     );
+ 
++    // In realtime mode, only process audio when the user has finished speaking (isLast = true)
++    // This prevents partial transcriptions from being sent to the LLM
++    if (this.isRealtimeMode) {
++      if (!msg.isLast) {
++        console.log(
++          `[Session ${this.clientId}] Realtime mode: buffering audio, waiting for speech end`
++        );
++        return;
++      }
++      console.log(
++        `[Session ${this.clientId}] Realtime mode: speech ended, processing complete audio`
++      );
++    }
++
++    // In non-realtime mode, use streaming threshold to process chunks
+     const reachedStreamingThreshold =
++      !this.isRealtimeMode &&
+       this.audioBuffer.isPCM &&
+       this.audioBuffer.totalPCMBytes >= MIN_STREAMING_SEGMENT_BYTES;
+ 

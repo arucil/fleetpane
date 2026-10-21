@@ -1,0 +1,139 @@
+{
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "deepseek-official",
+          "name": "DeepSeek",
+          "options": [
+            {
+              "name": "deepseek-v4-flash",
+              "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+            },
+            {
+              "name": "DeepSeek-V41-Flash",
+              "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+            },
+            {
+              "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+              "name": "DeepSeek-V4-Pro",
+              "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "category": "thought_level",
+      "currentValue": "high",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "description": "Use for simple tasks that do not need reasoning.",
+          "name": "Off",
+          "value": "off"
+        },
+        {
+          "description": "Prefer for routine or latency-sensitive tasks.",
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "description": "The default balance for most tasks.",
+          "name": "High",
+          "value": "high"
+        },
+        {
+          "description": "Reserve for the hardest quality-first tasks.",
+          "name": "Max",
+          "value": "max"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fleetpane-acp-archive-qa/real/workspace",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "221c1921-6bd0-4b8e-bf31-d0f56b033cec",
+  "name": null,
+  "preview": "DeepSeek Harness",
+  "status": {
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "d8f9b7e0-f3f5-48a6-9388-2e09ef586169",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "Read sample.txt with the read tool, then reply in Chinese Markdown with a heading and a short table showing the compass value. Do not modify files.",
+              "type": "text"
+            }
+          ],
+          "id": "user:d8f9b7e0-f3f5-48a6-9388-2e09ef586169",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "We need read sample.txt with read tool, reply Chinese Markdown heading and short table showing compass value. Need inspect file. Working dir given. Use read."
+          ],
+          "id": "d8f9b7e0-f3f5-48a6-9388-2e09ef586169:agent_thought_chunk:0ae9753b-a521-4d6d-a224-99643d18d9e0",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "content": [
+              {
+                "content": {
+                  "text": "<path>/tmp/fleetpane-acp-archive-qa/real/workspace/sample.txt</path>\n<type>file</type>\n<content>\n1: Fleetpane archive acceptance: compass=north\n\n(End of file - total 1 lines)\n</content>",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "other",
+            "rawInput": {
+              "file_path": "/tmp/fleetpane-acp-archive-qa/real/workspace/sample.txt"
+            },
+            "sessionUpdate": "tool_call_update",
+            "status": "completed",
+            "title": "read",
+            "toolCallId": "call_00_ZrOvIgh4XKj5jcBBkqae6153"
+          },
+          "id": "d8f9b7e0-f3f5-48a6-9388-2e09ef586169:tool:call_00_ZrOvIgh4XKj5jcBBkqae6153",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            "Need reply in Chinese Markdown with heading and short table showing compass value. Do not modify files. Could simply:\n\n## 罗盘读数\n\n| 项目 | 值 |\n| --- | --- |\n| 罗盘方向 | north（北） |\n\nNeed likely just that. Ensure Chinese."
+          ],
+          "id": "d8f9b7e0-f3f5-48a6-9388-2e09ef586169:agent_thought_chunk:86dc8252-7122-4e68-8fff-938577892bff",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "content": [
+            {
+              "text": "## 罗盘读数\n\n| 项目 | 值 |\n| --- | --- |\n| 罗盘方向 | north（北） |",
+              "type": "text"
+            }
+          ],
+          "id": "d8f9b7e0-f3f5-48a6-9388-2e09ef586169:agent_message_chunk:86dc8252-7122-4e68-8fff-938577892bff",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  ]
+}

@@ -4,12 +4,18 @@ use serde_json::{Value, json};
 use std::collections::BTreeMap;
 use uuid::Uuid;
 
+#[cfg(unix)]
+pub(crate) mod archive;
 mod history;
+pub mod modes;
+pub mod tool_calls;
 
 #[derive(Default)]
 pub struct Batch {
     pub wire: Vec<Value>,
     pub events: Vec<Value>,
+    #[cfg(unix)]
+    pub(crate) archive: Vec<archive::Row>,
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -18,21 +24,63 @@ struct Summary {
     session_id: String,
     cwd: String,
     title: Option<String>,
+    #[serde(flatten)]
+    info: SessionInfo,
 }
 
-#[derive(Serialize)]
+/// Provider-owned ACP metadata. Timestamp strings and extension values remain opaque.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SessionInfo {
+    pub updated_at: Option<String>,
+    #[serde(rename = "_meta")]
+    pub meta: Option<serde_json::Map<String, Value>>,
+}
+
+fn patch_field<T: serde::de::DeserializeOwned>(
+    update: &Value,
+    key: &str,
+    old: &mut T,
+) -> Result<(), String> {
+    if let Some(value) = update.get(key) {
+        *old = serde_json::from_value(value.clone())
+            .map_err(|error| format!("invalid ACP session info {key}: {error}"))?;
+    }
+    Ok(())
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct Session {
     summary: Summary,
     config: Vec<Value>,
+    #[serde(default)]
+    modes: Option<modes::State>,
+    #[serde(skip)]
+    mode_update_version: u64,
     turns: Vec<Value>,
     active: Option<String>,
+    #[serde(skip, default = "resident")]
+    resident: bool,
+    /// Only adjacent unidentified chunks belong to the same display segment.
+    /// Ephemeral: archived turns never accept further chunks after restoration.
+    #[serde(skip)]
+    anonymous_stream: Option<(String, usize)>,
+    /// Cancellation is an in-process request, never evidence of prompt settlement.
+    #[serde(skip)]
+    cancelling: bool,
+}
+
+fn resident() -> bool {
+    true
 }
 
 impl Session {
     fn thread(&self, include_turns: bool) -> Value {
         json!({"id":self.summary.session_id,"cwd":self.summary.cwd,"name":self.summary.title,
-            "preview":"DeepSeek Harness", "historyMode":"acp-observed", "historyPaging":true, "configOptions":self.config,
-            "status":{"type":if self.active.is_some() {"active"} else {"idle"}},
+            "acpSessionInfo":self.summary.info,
+            "preview":"DeepSeek Harness", "historyMode":"acp-observed", "historyPaging":true, "configOptions":self.config, "acpModes":self.modes,
+            "status":{"type":if !self.resident {"archived"} else if self.active.is_some() {"active"} else {"idle"},"cancelRequested":self.cancelling},
             "turns":if include_turns {self.turns.clone()} else {vec![]}})
     }
 }
@@ -50,6 +98,7 @@ enum Pending {
     Resume {
         host: String,
         id: String,
+        include_turns: bool,
     },
     Prompt {
         id: String,
@@ -59,6 +108,12 @@ enum Pending {
         host: String,
         id: String,
     },
+    Mode {
+        host: String,
+        id: String,
+        requested: String,
+        revision: u64,
+    },
 }
 
 pub struct Adapter {
@@ -67,6 +122,8 @@ pub struct Adapter {
     pending: BTreeMap<String, Pending>,
     permissions: BTreeMap<String, Value>,
     directory_generation: Uuid,
+    #[cfg(unix)]
+    dirty: std::collections::BTreeSet<String>,
 }
 
 impl Default for Adapter {
@@ -77,6 +134,8 @@ impl Default for Adapter {
             pending: BTreeMap::new(),
             permissions: BTreeMap::new(),
             directory_generation: Uuid::new_v4(),
+            #[cfg(unix)]
+            dirty: Default::default(),
         }
     }
 }
@@ -94,6 +153,9 @@ fn notification(method: &str, params: Value) -> Value {
 }
 fn reply(id: &str, result: Value) -> Value {
     json!({"id":id,"result":result})
+}
+fn cancelled_permission(id: &Value) -> Value {
+    json!({"jsonrpc":"2.0","id":id,"result":{"outcome":{"outcome":"cancelled"}}})
 }
 fn rejected(id: &str, message: impl ToString) -> Value {
     json!({"id":id,"error":{"code":-32602,"message":message.to_string()}})
@@ -126,11 +188,33 @@ impl Adapter {
 
     /// Input already has a fenced Host identity. Unsupported commands are explicit errors.
     pub fn dispatch(&mut self, host: String, method: &str, params: Value) -> Result<Batch, String> {
+        self.dispatch_inner(host, method, params, None)
+    }
+
+    #[cfg(unix)]
+    pub(crate) fn dispatch_images(
+        &mut self,
+        host: String,
+        params: Value,
+        prompt: &crate::attachments::Prompt,
+    ) -> Result<Batch, String> {
+        self.dispatch_inner(host, "turn/start", params, Some(prompt))
+    }
+
+    fn dispatch_inner(
+        &mut self,
+        host: String,
+        method: &str,
+        params: Value,
+        prompt: Option<&crate::attachments::Prompt>,
+    ) -> Result<Batch, String> {
         let mut batch = Batch::default();
-        if let Err(error) = self.command(&host, method, &params, &mut batch) {
+        if let Err(error) = self.command(&host, method, &params, &mut batch, prompt) {
             batch.events.push(rejected(&host, error));
         }
         self.validate()?;
+        #[cfg(unix)]
+        self.archive_batch(&mut batch)?;
         Ok(batch)
     }
 
@@ -140,6 +224,7 @@ impl Adapter {
         method: &str,
         params: &Value,
         batch: &mut Batch,
+        prompt: Option<&crate::attachments::Prompt>,
     ) -> Result<(), String> {
         match method {
             "thread/start" => {
@@ -158,6 +243,10 @@ impl Adapter {
                 );
             }
             "thread/list" => {
+                if history::flag(params, "archived", false)? {
+                    return Err("DeepSeek ACP does not advertise provider archive listing".into());
+                }
+
                 if params
                     .get("searchTerm")
                     .is_some_and(|v| !v.is_null() && v != "")
@@ -234,7 +323,18 @@ impl Adapter {
             "thread/resume" => {
                 let id = string(params, "threadId")?;
                 let include_turns = !history::flag(params, "excludeTurns", false)?;
-                if self.sessions.contains_key(id) {
+                if self
+                    .pending
+                    .values()
+                    .any(|pending| matches!(pending,Pending::Resume{id:current,..} if current==id))
+                {
+                    return Err("Wait for the pending ACP context resume to settle".into());
+                }
+                if self
+                    .sessions
+                    .get(id)
+                    .is_some_and(|session| session.resident)
+                {
                     self.read_observed(host, id, include_turns, batch)?;
                 } else {
                     let summary = self
@@ -247,6 +347,7 @@ impl Adapter {
                         Pending::Resume {
                             host: host.into(),
                             id: id.into(),
+                            include_turns,
                         },
                         batch,
                     );
@@ -264,21 +365,36 @@ impl Adapter {
                     kind: String,
                     text: String,
                 }
-                let input: Vec<Text> = serde_json::from_value(
-                    params.get("input").cloned().ok_or("prompt has no input")?,
-                )
-                .map_err(|e| e.to_string())?;
-                if input.is_empty()
-                    || input
+                let (wire, content) = if let Some(prompt) = prompt {
+                    (prompt.wire.clone(), prompt.display.clone())
+                } else {
+                    let input: Vec<Text> = serde_json::from_value(
+                        params.get("input").cloned().ok_or("prompt has no input")?,
+                    )
+                    .map_err(|e| e.to_string())?;
+                    if input.is_empty()
+                        || input
+                            .iter()
+                            .any(|t| t.kind != "text" || t.text.trim().is_empty())
+                    {
+                        return Err(
+                            "Use text or verified Fleetpane image attachments for this ACP prompt"
+                                .into(),
+                        );
+                    }
+                    let content: Vec<Value> = input
                         .iter()
-                        .any(|t| t.kind != "text" || t.text.trim().is_empty())
-                {
-                    return Err("Only nonempty text prompts are supported by this ACP slice".into());
-                }
+                        .map(|t| json!({"type":"text","text":t.text}))
+                        .collect();
+                    (content.clone(), content)
+                };
                 let session = self
                     .sessions
                     .get_mut(id)
                     .ok_or("Resume the ACP session before sending")?;
+                if !session.resident {
+                    return Err("Resume the ACP session before sending".into());
+                }
                 if session.active.is_some() {
                     return Err("ACP session already has an active prompt".into());
                 }
@@ -286,6 +402,8 @@ impl Adapter {
                 let turn = json!({"id":turn_id,"status":"inProgress","items":[],"error":null});
                 session.turns.push(turn.clone());
                 session.active = Some(turn_id.clone());
+                session.cancelling = false;
+                session.anonymous_stream = None;
                 batch.events.push(notification(
                     "thread/status/changed",
                     json!({"threadId":id,"status":{"type":"active"}}),
@@ -294,10 +412,6 @@ impl Adapter {
                     "turn/started",
                     json!({"threadId":id,"turn":turn}),
                 ));
-                let content: Vec<Value> = input
-                    .iter()
-                    .map(|t| json!({"type":"text","text":t.text}))
-                    .collect();
                 let item =
                     json!({"id":format!("user:{turn_id}"),"type":"userMessage","content":content});
                 session.turns.last_mut().expect("created turn")["items"]
@@ -310,7 +424,7 @@ impl Adapter {
                 ));
                 self.rpc(
                     "session/prompt",
-                    json!({"sessionId":id,"prompt":content}),
+                    json!({"sessionId":id,"prompt":wire}),
                     Pending::Prompt {
                         id: id.into(),
                         turn: turn_id,
@@ -325,21 +439,54 @@ impl Adapter {
             }
             "turn/interrupt" => {
                 let id = string(params, "threadId")?;
-                let session = self.sessions.get(id).ok_or("ACP session is not resident")?;
+                let session = self
+                    .sessions
+                    .get_mut(id)
+                    .ok_or("ACP session is not resident")?;
+                if !session.resident {
+                    return Err("Resume the ACP session before cancellation".into());
+                }
                 if session.active.as_deref() != Some(string(params, "turnId")?) {
                     return Err("Stop targets a different or finished ACP prompt".into());
                 }
-                batch.wire.push(
-                    json!({"jsonrpc":"2.0","method":"session/cancel","params":{"sessionId":id}}),
-                );
+                if !session.cancelling {
+                    session.cancelling = true;
+                    batch.wire.push(
+                        json!({"jsonrpc":"2.0","method":"session/cancel","params":{"sessionId":id}}),
+                    );
+                    // ACP requires answers now; waiting for prompt settlement can deadlock
+                    // a provider that is itself waiting for these permission responses.
+                    let requests: Vec<_> = self
+                        .permissions
+                        .iter()
+                        .filter(|(_, p)| p["params"]["threadId"] == id)
+                        .map(|(key, p)| (key.clone(), p["id"].clone()))
+                        .collect();
+                    for (key, request_id) in requests {
+                        batch.wire.push(cancelled_permission(&request_id));
+                        self.permissions.remove(&key);
+                        batch.events.push(notification(
+                            "serverRequest/resolved",
+                            json!({"threadId":id,"requestId":request_id}),
+                        ));
+                    }
+                    batch.events.push(notification(
+                        "thread/status/changed",
+                        json!({"threadId":id,"status":{"type":"active","cancelRequested":true}}),
+                    ));
+                }
                 batch.events.push(reply(host, json!({})));
             }
+            "acp/mode/set" => self.set_mode(host, params, batch)?,
             "acp/config/set" => {
                 let id = string(params, "threadId")?;
                 self.configuration_settled(id)?;
                 let config_id = string(params, "configId")?;
                 let value = string(params, "value")?;
                 let session = self.sessions.get(id).ok_or("ACP session is not resident")?;
+                if !session.resident {
+                    return Err("Resume the ACP session before configuration changes".into());
+                }
                 if session.active.is_some() {
                     return Err("Change ACP configuration between prompts".into());
                 }
@@ -377,7 +524,7 @@ impl Adapter {
         if self
             .pending
             .values()
-            .any(|pending| matches!(pending, Pending::Config { id: current, .. } if current == id))
+            .any(|pending| matches!(pending, Pending::Config { id: current, .. } | Pending::Mode { id: current, .. } if current == id))
         {
             return Err("Wait for the pending ACP configuration change to settle".into());
         }
@@ -426,12 +573,16 @@ impl Adapter {
                     if self.permissions.contains_key(&request_id.to_string()) {
                         return Err("ACP reused a pending permission ID".into());
                     }
-                    let mut pending = params.clone();
-                    pending["threadId"] = json!(id);
-                    let request = json!({"id":request_id,"method":method,"params":pending});
-                    self.permissions
-                        .insert(request_id.to_string(), request.clone());
-                    batch.events.push(request);
+                    if session.cancelling {
+                        batch.wire.push(cancelled_permission(request_id));
+                    } else {
+                        let mut pending = params.clone();
+                        pending["threadId"] = json!(id);
+                        let request = json!({"id":request_id,"method":method,"params":pending});
+                        self.permissions
+                            .insert(request_id.to_string(), request.clone());
+                        batch.events.push(request);
+                    }
                 }
                 _ if message.get("id").is_some() => {
                     batch.wire.push(json!({"jsonrpc":"2.0","id":message["id"],"error":{"code":-32601,"message":"Fleetpane does not provide this ACP client capability"}}));
@@ -478,6 +629,7 @@ impl Adapter {
                     json!({"threadId":id,"turn":completion}),
                 ));
                 session.active = None;
+                session.cancelling = false;
                 batch.events.push(notification(
                     "thread/status/changed",
                     json!({"threadId":id,"status":{"type":"idle"}}),
@@ -500,7 +652,8 @@ impl Adapter {
                     Pending::New { host, .. }
                     | Pending::List { host, .. }
                     | Pending::Resume { host, .. }
-                    | Pending::Config { host, .. } => host,
+                    | Pending::Config { host, .. }
+                    | Pending::Mode { host, .. } => host,
                     Pending::Prompt { .. } => unreachable!(),
                 }
                 .clone();
@@ -512,6 +665,8 @@ impl Adapter {
             }
         }
         self.validate()?;
+        #[cfg(unix)]
+        self.archive_batch(&mut batch)?;
         Ok(batch)
     }
 
@@ -531,35 +686,59 @@ impl Adapter {
                     session_id: id.clone(),
                     cwd,
                     title: None,
+                    info: SessionInfo::default(),
                 };
                 let session = Session {
                     summary: summary.clone(),
                     config: config(result)?,
+                    modes: modes::parse(result)?,
+                    mode_update_version: 0,
                     turns: vec![],
                     active: None,
+                    resident: true,
+                    anonymous_stream: None,
+                    cancelling: false,
                 };
                 batch
                     .events
                     .push(reply(&host, json!({"thread":session.thread(true)})));
                 self.summaries.insert(id.clone(), summary);
+                #[cfg(unix)]
+                self.dirty.insert(id.clone());
                 self.sessions.insert(id, session);
             }
-            Pending::Resume { host, id } => {
+            Pending::Resume {
+                host,
+                id,
+                include_turns,
+            } => {
                 let summary = self
                     .summaries
                     .get(&id)
                     .ok_or("ACP resume summary disappeared")?
                     .clone();
+                let turns = self
+                    .sessions
+                    .get(&id)
+                    .map(|s| s.turns.clone())
+                    .unwrap_or_default();
                 let session = Session {
                     summary,
                     config: config(result)?,
-                    turns: vec![],
+                    modes: modes::parse(result)?,
+                    mode_update_version: 0,
+                    turns,
                     active: None,
+                    resident: true,
+                    anonymous_stream: None,
+                    cancelling: false,
                 };
-                batch
-                    .events
-                    .push(reply(&host, json!({"thread":session.thread(true)})));
-                self.sessions.insert(id, session);
+                #[cfg(unix)]
+                self.dirty.insert(id.clone());
+                self.sessions.insert(id.clone(), session);
+                if let Err(error) = self.read_observed(&host, &id, include_turns, batch) {
+                    batch.events.push(rejected(&host, error));
+                }
             }
             Pending::List { host, cwd, first } => {
                 let persisted: Vec<Summary> = serde_json::from_value(
@@ -587,7 +766,7 @@ impl Adapter {
                 for row in &rows {
                     seen.insert(row.session_id.clone());
                 }
-                for row in persisted {
+                for mut row in persisted {
                     if row.session_id.is_empty() {
                         return Err("ACP session identity is empty".into());
                     }
@@ -595,7 +774,19 @@ impl Adapter {
                         return Err("ACP session workspace is not absolute".into());
                     }
                     if let Some(session) = self.sessions.get_mut(&row.session_id) {
-                        session.summary.title = row.title.clone();
+                        if session.summary.cwd != row.cwd {
+                            return Err(
+                                "ACP listed a different workspace for an observed session".into()
+                            );
+                        }
+                        if session.resident {
+                            // A list response may have been captured before a live update.
+                            row = session.summary.clone();
+                        } else {
+                            session.summary = row.clone();
+                            #[cfg(unix)]
+                            self.dirty.insert(row.session_id.clone());
+                        }
                     }
                     self.summaries.insert(row.session_id.clone(), row.clone());
                     if seen.insert(row.session_id.clone()) {
@@ -609,12 +800,25 @@ impl Adapter {
                     .transpose()?;
                 self.list_reply(&host, cwd, rows, next, batch)?;
             }
+            Pending::Mode {
+                host,
+                id,
+                requested,
+                revision,
+            } => {
+                if !result.is_object() {
+                    return Err("ACP mode response must be an object".into());
+                }
+                self.mode_response(&host, &id, requested, revision, batch)?;
+            }
             Pending::Config { host, id } => {
                 let options = config(result)?;
                 self.sessions
                     .get_mut(&id)
                     .ok_or("ACP config session disappeared")?
                     .config = options.clone();
+                #[cfg(unix)]
+                self.dirty.insert(id.clone());
                 batch.events.push(notification(
                     "thread/config/updated",
                     json!({"threadId":id,"configOptions":options}),
@@ -656,7 +860,7 @@ impl Adapter {
         };
         let data: Vec<_> = rows.iter().take(100).map(|row| {
             if let Some(session) = self.sessions.get(&row.session_id) {session.thread(false)} else {
-                json!({"id":row.session_id,"cwd":row.cwd,"name":row.title,"preview":"DeepSeek Harness","historyMode":"acp-observed","status":{"type":"notLoaded"},"turns":[]})
+                json!({"id":row.session_id,"cwd":row.cwd,"name":row.title,"acpSessionInfo":row.info,"preview":"DeepSeek Harness","historyMode":"acp-observed","status":{"type":"notLoaded"},"turns":[]})
             }
         }).collect();
         batch
@@ -671,10 +875,45 @@ impl Adapter {
             .sessions
             .get_mut(id)
             .ok_or("ACP update targets an unowned session")?;
+        if !session.resident {
+            return Err("ACP update targets an inactive archived session".into());
+        }
         let update = params.get("update").ok_or("ACP update lacks payload")?;
         let kind = string(update, "sessionUpdate")?;
+        if kind == "session_info_update" {
+            // Validate the whole patch before changing either metadata index.
+            let mut summary = session.summary.clone();
+            patch_field(update, "title", &mut summary.title)?;
+            patch_field(update, "updatedAt", &mut summary.info.updated_at)?;
+            patch_field(update, "_meta", &mut summary.info.meta)?;
+            batch.events.push(notification(
+                "thread/acpSessionInfo/updated",
+                json!({"threadId":id,"threadName":summary.title,"sessionInfo":summary.info}),
+            ));
+            session.summary = summary.clone();
+            self.summaries.insert(id.into(), summary);
+            #[cfg(unix)]
+            self.dirty.insert(id.into());
+            return Ok(());
+        }
+        if kind == "current_mode_update" {
+            let current = string(update, "currentModeId")?.to_owned();
+            let modes = session.modes.get_or_insert_with(|| modes::State {
+                current_mode_id: current.clone(),
+                available_modes: vec![],
+                meta: None,
+            });
+            modes.current_mode_id = current;
+            session.mode_update_version += 1;
+            #[cfg(unix)]
+            self.dirty.insert(id.into());
+            batch.events.push(modes::updated(id, modes));
+            return Ok(());
+        }
         if kind == "config_option_update" {
             session.config = config(update)?;
+            #[cfg(unix)]
+            self.dirty.insert(id.into());
             batch.events.push(notification(
                 "thread/config/updated",
                 json!({"threadId":id,"configOptions":session.config}),
@@ -685,6 +924,9 @@ impl Adapter {
             return Ok(());
         } // Not displayed by the current common projection.
         let turn=session.active.as_ref().ok_or("ACP emitted conversation activity without a Host prompt; autonomous turns need a separate boundary contract")?.clone();
+        if !matches!(kind, "agent_message_chunk" | "agent_thought_chunk") {
+            session.anonymous_stream = None;
+        }
         if kind == "plan" {
             let plan = crate::tasks::Plan::from_acp(id, &turn, update)?;
             batch.events.push(plan.notification());
@@ -696,21 +938,29 @@ impl Adapter {
         let item = match kind {
             "agent_message_chunk" | "agent_thought_chunk" => {
                 let content = update.get("content").ok_or("ACP message has no content")?;
-                let message_id = update
-                    .get("messageId")
-                    .and_then(Value::as_str)
-                    .unwrap_or("stream");
-                let identity = format!("{turn}:{kind}:{message_id}");
-                let index = if let Some(index) = items.iter().position(|i| i["id"] == identity) {
-                    index
+                let message_id = update.get("messageId").and_then(Value::as_str);
+                let identity = message_id.map_or_else(
+                    || format!("{turn}:{kind}:segment:{}", items.len()),
+                    |id| format!("{turn}:{kind}:id:{id}"),
+                );
+                let existing = if message_id.is_some() {
+                    items.iter().position(|item| item["id"] == identity)
                 } else {
+                    session
+                        .anonymous_stream
+                        .as_ref()
+                        .filter(|(previous_kind, _)| previous_kind == kind)
+                        .map(|(_, index)| *index)
+                };
+                let index = existing.unwrap_or_else(|| {
                     items.push(if kind == "agent_thought_chunk" {
                         json!({"id":identity,"type":"reasoning","summary":[],"content":[]})
                     } else {
                         json!({"id":identity,"type":"acpMessage","content":[]})
                     });
                     items.len() - 1
-                };
+                });
+                session.anonymous_stream = message_id.is_none().then(|| (kind.to_owned(), index));
                 let entry = &mut items[index];
                 if kind == "agent_thought_chunk" {
                     if string(content, "type")? != "text" {
@@ -745,25 +995,19 @@ impl Adapter {
             "tool_call" | "tool_call_update" => {
                 let call = string(update, "toolCallId")?;
                 let identity = format!("{turn}:tool:{call}");
-                let index = if let Some(index) = items.iter().position(|i| i["id"] == identity) {
-                    index
-                } else {
-                    if kind != "tool_call" {
-                        return Err("ACP tool update precedes tool call".into());
-                    }
-                    string(update, "title")?;
-                    string(update, "status")?;
+                let existing = items.iter().position(|i| i["id"] == identity);
+                if existing.is_none() && kind != "tool_call" {
+                    return Err("ACP tool update precedes tool call".into());
+                }
+                let merged =
+                    tool_calls::merge(existing.map(|index| &items[index]["call"]), update)?;
+                let index = existing.unwrap_or_else(|| {
                     items.push(json!({"id":identity,"type":"acpToolCall","call":{}}));
                     items.len() - 1
-                };
+                });
                 let entry = &mut items[index];
                 let was_completed = entry["call"]["status"] == "completed";
-                let fields = update.as_object().ok_or("ACP tool call is not an object")?;
-                for (key, value) in fields {
-                    if !value.is_null() {
-                        entry["call"][key] = value.clone();
-                    }
-                }
+                entry["call"] = merged;
                 if !was_completed
                     && entry["call"]["status"] == "completed"
                     && entry["call"]["title"] == "todo_write"
@@ -829,6 +1073,9 @@ impl Adapter {
         }
         let mut bytes = 0;
         for session in self.sessions.values() {
+            if let Some(modes) = &session.modes {
+                modes.validate()?;
+            }
             let size = serde_json::to_vec(session)
                 .map_err(|e| e.to_string())?
                 .len();
@@ -871,6 +1118,29 @@ fn choice_exists(options: &Value, value: &str) -> bool {
 mod tests {
     use super::*;
 
+    #[test]
+    fn advertised_modes_are_projected_and_switchable() {
+        let mut adapter = Adapter::default();
+        let created = adapter
+            .dispatch("create".into(), "thread/start", json!({"cwd":cwd()}))
+            .unwrap();
+        let modes = json!({"currentModeId":"ask", "availableModes":[{"id":"ask","name":"Ask"},{"id":"code","name":"Code","description":"Change files"}]});
+        let result = adapter.receive(json!({"jsonrpc":"2.0","id":created.wire[0]["id"],"result":{"sessionId":"s","modes":modes}})).unwrap();
+        assert_eq!(result.events[0]["result"]["thread"]["acpModes"], modes);
+        let change = adapter
+            .dispatch(
+                "mode".into(),
+                "acp/mode/set",
+                json!({"threadId":"s","modeId":"code"}),
+            )
+            .unwrap();
+        assert_eq!(change.wire[0]["method"], "session/set_mode");
+        assert_eq!(
+            change.wire[0]["params"],
+            json!({"sessionId":"s","modeId":"code"})
+        );
+    }
+
     fn cwd() -> std::path::PathBuf {
         std::env::temp_dir().join("fleetpane-synthetic")
     }
@@ -899,6 +1169,234 @@ mod tests {
     }
     fn update(adapter: &mut Adapter, value: Value) -> Batch {
         adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":value}})).unwrap()
+    }
+
+    #[test]
+    fn minimal_tool_call_defaults_and_interleaved_updates_keep_one_card() {
+        let mut adapter = setup();
+        start(&mut adapter);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call","toolCallId":"a","title":"First","name":"read_file","locations":[{"path":cwd().join("file.rs"),"line":0}],"rawInput":false}),
+        );
+        assert_eq!(
+            adapter.sessions["s"].turns[0]["items"][1]["call"]["status"],
+            "pending"
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call","toolCallId":"b","title":"Second","status":"in_progress","rawOutput":{"old":true}}),
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call_update","toolCallId":"a","title":"","status":"completed","rawOutput":0}),
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call_update","toolCallId":"b","rawOutput":{"new":true},"status":"failed"}),
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call_update","toolCallId":"a","title":null,"name":null,"rawInput":null,"rawOutput":null,"locations":[],"content":[]}),
+        );
+        let items = adapter.sessions["s"].turns[0]["items"].as_array().unwrap();
+        assert_eq!(items.len(), 3);
+        let a = &items[1]["call"];
+        assert_eq!(a["title"], "");
+        assert_eq!(a["name"], "read_file");
+        assert_eq!(a["kind"], "other");
+        assert_eq!(a["rawInput"], false);
+        assert_eq!(a["rawOutput"], 0);
+        assert_eq!(a["locations"], json!([]));
+        assert_eq!(items[2]["call"]["rawOutput"], json!({"new":true}));
+        assert_eq!(items[2]["call"]["status"], "failed");
+    }
+
+    #[test]
+    fn invalid_tool_patch_is_rejected_before_changing_a_card() {
+        let mut adapter = setup();
+        start(&mut adapter);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"tool_call","toolCallId":"a","title":"Original","status":"pending"}),
+        );
+        for patch in [
+            json!({"title":42}),
+            json!({"status":false}),
+            json!({"name":[]}),
+            json!({"kind":0}),
+            json!({"locations":[{"path":false}]}),
+            json!({"locations":[{"path":cwd(),"line":-1}]}),
+            json!({"content":{}}),
+        ] {
+            let before = adapter.sessions["s"].thread(true);
+            let mut patch = patch;
+            patch["sessionUpdate"] = json!("tool_call_update");
+            patch["toolCallId"] = json!("a");
+            assert!(adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":patch}})).is_err());
+            assert_eq!(adapter.sessions["s"].thread(true), before);
+        }
+    }
+
+    #[test]
+    fn session_info_is_idle_metadata_and_preserves_omitted_fields() {
+        let mut adapter = setup();
+        let batch = update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update",
+            "title":"  中文 title  ","updatedAt":"2026-10-21T09:08:07+08:00",
+            "_meta":{"vendor":{"opaque":[1,true,null]}}}),
+        );
+        assert!(batch.wire.is_empty());
+        assert_eq!(batch.events.len(), 1);
+        assert_eq!(batch.events[0]["method"], "thread/acpSessionInfo/updated");
+        let before = adapter.sessions["s"].thread(true);
+        assert_eq!(before["name"], "  中文 title  ");
+        assert_eq!(
+            before["acpSessionInfo"]["updatedAt"],
+            "2026-10-21T09:08:07+08:00"
+        );
+        assert_eq!(before["turns"], json!([]));
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update","updatedAt":null}),
+        );
+        let after = adapter.sessions["s"].thread(true);
+        assert_eq!(after["name"], before["name"]);
+        assert!(after["acpSessionInfo"]["updatedAt"].is_null());
+        assert_eq!(
+            after["acpSessionInfo"]["_meta"],
+            before["acpSessionInfo"]["_meta"]
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update","title":null,"_meta":null}),
+        );
+        assert!(adapter.sessions["s"].thread(true)["name"].is_null());
+        assert!(adapter.summaries["s"].title.is_none());
+    }
+
+    #[test]
+    fn session_info_during_prompt_does_not_create_or_split_history() {
+        let mut adapter = setup();
+        start(&mut adapter);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"before "}}),
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update","title":"During prompt"}),
+        );
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"after"}}),
+        );
+        let items = adapter.sessions["s"].turns[0]["items"].as_array().unwrap();
+        assert_eq!(items.len(), 2);
+        assert_eq!(items[1]["content"][0]["text"], "before after");
+    }
+
+    #[test]
+    fn malformed_session_info_never_partially_changes_metadata() {
+        for patch in [
+            json!({"title":42}),
+            json!({"title":"new","updatedAt":42}),
+            json!({"title":"new","_meta":[]}),
+        ] {
+            let mut adapter = setup();
+            let before = adapter.sessions["s"].thread(true);
+            let mut update = patch;
+            update["sessionUpdate"] = json!("session_info_update");
+            let error = adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":update}})).err().unwrap();
+            assert!(error.contains("invalid ACP session info"), "{error}");
+            assert_eq!(adapter.sessions["s"].thread(true), before);
+            assert!(adapter.summaries["s"].title.is_none());
+        }
+    }
+
+    #[test]
+    fn resident_info_is_not_replaced_by_a_stale_list_response() {
+        let mut adapter = setup();
+        let list = adapter
+            .dispatch("list".into(), "thread/list", json!({}))
+            .unwrap();
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update","title":"Live 中文"}),
+        );
+        let result = adapter.receive(json!({"jsonrpc":"2.0","id":list.wire[0]["id"],"result":{"sessions":[{"sessionId":"s","cwd":cwd(),"title":"old"}]}})).unwrap();
+        assert_eq!(
+            result.events.last().unwrap()["result"]["data"][0]["name"],
+            "Live 中文"
+        );
+        assert_eq!(adapter.summaries["s"].title.as_deref(), Some("Live 中文"));
+    }
+
+    #[test]
+    fn anonymous_chunks_keep_tool_and_role_boundaries_without_trimming() {
+        let mut adapter = setup();
+        start(&mut adapter);
+        for value in [
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":" Before 中文\n"}}),
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"  second line "}}),
+            json!({"sessionUpdate":"tool_call","toolCallId":"call","title":"Read","status":"in_progress"}),
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":" After "}}),
+            json!({"sessionUpdate":"agent_thought_chunk","content":{"type":"text","text":" thought "}}),
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":" Tail "}}),
+            json!({"sessionUpdate":"tool_call_update","toolCallId":"call","status":"completed","rawOutput":"exact result"}),
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":" New "}}),
+        ] {
+            update(&mut adapter, value);
+        }
+        let items = adapter.sessions["s"].turns[0]["items"].as_array().unwrap();
+        assert_eq!(
+            items
+                .iter()
+                .map(|item| item["type"].as_str().unwrap())
+                .collect::<Vec<_>>(),
+            [
+                "userMessage",
+                "acpMessage",
+                "acpToolCall",
+                "acpMessage",
+                "reasoning",
+                "acpMessage",
+                "acpMessage"
+            ]
+        );
+        assert_eq!(
+            items[1]["content"][0]["text"],
+            " Before 中文\n  second line "
+        );
+        assert_eq!(items[2]["call"]["status"], "completed");
+        assert_eq!(items[3]["content"][0]["text"], " After ");
+        assert_eq!(items[4]["content"][0], " thought ");
+        assert_eq!(items[5]["content"][0]["text"], " Tail ");
+        assert_eq!(items[6]["content"][0]["text"], " New ");
+    }
+
+    #[test]
+    fn explicit_message_identity_survives_interleaving_and_cannot_alias_anonymous() {
+        let mut adapter = setup();
+        start(&mut adapter);
+        for value in [
+            json!({"sessionUpdate":"agent_message_chunk","messageId":"stream","content":{"type":"text","text":"one"}}),
+            json!({"sessionUpdate":"tool_call","toolCallId":"call","title":"Read","status":"completed"}),
+            json!({"sessionUpdate":"agent_message_chunk","messageId":"stream","content":{"type":"text","text":"two"}}),
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"anonymous"}}),
+        ] {
+            update(&mut adapter, value);
+        }
+        let items = adapter.sessions["s"].turns[0]["items"].as_array().unwrap();
+        assert_eq!(items.len(), 4);
+        assert_eq!(items[1]["content"][0]["text"], "onetwo");
+        assert_eq!(items[3]["content"][0]["text"], "anonymous");
+        let ids: std::collections::BTreeSet<_> = items
+            .iter()
+            .map(|item| item["id"].as_str().unwrap())
+            .collect();
+        assert_eq!(ids.len(), items.len());
     }
 
     #[test]
@@ -1035,6 +1533,52 @@ mod tests {
     }
 
     #[test]
+    fn prompt_admission_and_activity_are_not_settlement() {
+        for (reason, status) in [
+            ("end_turn", "completed"),
+            ("max_tokens", "completed"),
+            ("max_turn_requests", "completed"),
+            ("refusal", "completed"),
+            ("cancelled", "interrupted"),
+        ] {
+            let mut adapter = setup();
+            let wire = start(&mut adapter);
+            let activity = update(
+                &mut adapter,
+                json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"Observed output is not a completion signal"}}),
+            );
+            assert!(
+                activity
+                    .events
+                    .iter()
+                    .all(|event| event["method"] != "turn/completed")
+            );
+            assert!(adapter.sessions["s"].active.is_some());
+            assert_eq!(adapter.sessions["s"].turns[0]["status"], "inProgress");
+            let batch = adapter
+                .receive(json!({"jsonrpc":"2.0","id":wire,"result":{"stopReason":reason}}))
+                .unwrap();
+            let ended = batch
+                .events
+                .iter()
+                .find(|event| event["method"] == "turn/completed")
+                .unwrap();
+            assert_eq!(ended["params"]["turn"]["stopReason"], reason);
+            assert_eq!(ended["params"]["turn"]["status"], status);
+            assert!(adapter.sessions["s"].active.is_none());
+        }
+        let mut adapter = setup();
+        let wire = start(&mut adapter);
+        assert!(
+            adapter
+                .receive(
+                    json!({"jsonrpc":"2.0","id":wire,"result":{"stopReason":"future_success"}})
+                )
+                .is_err()
+        );
+    }
+
+    #[test]
     fn settlement_does_not_reemit_large_turn() {
         let mut adapter = setup();
         let wire = start(&mut adapter);
@@ -1082,11 +1626,30 @@ mod tests {
     }
 
     #[test]
-    fn cancellation_waits_for_settlement_and_resolves_permission() {
+    fn cancellation_answers_permissions_before_settlement_and_isolates_sessions() {
         let mut adapter = setup();
         let wire = start(&mut adapter);
+        let create = adapter
+            .dispatch("other".into(), "thread/start", json!({"cwd":cwd()}))
+            .unwrap();
+        adapter
+            .receive(
+                json!({"jsonrpc":"2.0","id":create.wire[0]["id"],"result":{"sessionId":"other"}}),
+            )
+            .unwrap();
+        adapter
+            .dispatch(
+                "other-send".into(),
+                "turn/start",
+                json!({"threadId":"other","input":[{"type":"text","text":"hello"}]}),
+            )
+            .unwrap();
+        adapter.receive(json!({"jsonrpc":"2.0","id":17,"method":"session/request_permission","params":{"sessionId":"other","options":[{"optionId":"skip","name":"Skip","kind":"reject_once"}]}})).unwrap();
         let request = json!({"jsonrpc":"2.0","id":"permission-1","method":"session/request_permission","params":{"sessionId":"s","options":[{"optionId":"skip","name":"Skip","kind":"reject_once"}]}});
-        adapter.receive(request).unwrap();
+        adapter.receive(request.clone()).unwrap();
+        let mut second = request.clone();
+        second["id"] = json!(16);
+        adapter.receive(second).unwrap();
         assert!(
             adapter
                 .permission_response(
@@ -1104,16 +1667,69 @@ mod tests {
             )
             .unwrap();
         assert!(stop.wire[0].get("id").is_none());
+        assert_eq!(
+            stop.wire.len(),
+            3,
+            "Stop must answer both pending permissions"
+        );
+        for reply in &stop.wire[1..] {
+            assert_eq!(reply["result"], json!({"outcome":{"outcome":"cancelled"}}));
+            assert!(reply["id"] == 16 || reply["id"] == "permission-1");
+        }
+        assert_eq!(
+            stop.events
+                .iter()
+                .filter(|e| e["method"] == "serverRequest/resolved")
+                .count(),
+            2
+        );
+        assert_eq!(
+            adapter.sessions["s"].thread(true)["status"]["cancelRequested"],
+            true
+        );
+        assert_eq!(adapter.permissions.len(), 1);
+        assert!(adapter.permissions.contains_key("17"));
+        assert!(
+            adapter
+                .permission_response(
+                    &json!("permission-1"),
+                    &json!({"outcome":{"outcome":"selected","optionId":"skip"}})
+                )
+                .is_err()
+        );
+        let repeat = adapter
+            .dispatch(
+                "repeat-stop".into(),
+                "turn/interrupt",
+                json!({"threadId":"s","turnId":turn}),
+            )
+            .unwrap();
+        assert!(repeat.wire.is_empty(), "Do not send cancellation twice");
+        let mut late = request;
+        late["id"] = json!("late-permission");
+        let late = adapter.receive(late).unwrap();
+        assert!(
+            late.events.is_empty(),
+            "No actionable approval during cancellation"
+        );
+        assert_eq!(
+            late.wire[0]["result"],
+            json!({"outcome":{"outcome":"cancelled"}})
+        );
         assert!(adapter.sessions["s"].active.is_some());
         let ended = adapter
             .receive(json!({"jsonrpc":"2.0","id":wire,"result":{"stopReason":"cancelled"}}))
             .unwrap();
         assert_eq!(ended.events[0]["params"]["turn"]["status"], "interrupted");
         assert_eq!(
-            ended.events.last().unwrap()["method"],
-            "serverRequest/resolved"
+            ended.events.last().unwrap()["params"]["status"]["type"],
+            "idle"
         );
-        assert!(adapter.permissions.is_empty());
+        assert_ne!(
+            adapter.sessions["s"].thread(true)["status"]["cancelRequested"],
+            true
+        );
+        assert_eq!(adapter.permissions.len(), 1);
     }
 
     #[test]

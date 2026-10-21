@@ -1,0 +1,44 @@
+[
+  {
+    "content": [
+      {
+        "text": "[tool-progress]",
+        "type": "text"
+      }
+    ],
+    "id": "user:93b41aa1-28fe-42c7-9617-b5645b1510f2",
+    "type": "userMessage"
+  },
+  {
+    "call": {
+      "content": [],
+      "kind": "read",
+      "locations": [],
+      "name": "read_file",
+      "rawInput": {
+        "final": false
+      },
+      "rawOutput": 0,
+      "sessionUpdate": "tool_call_update",
+      "status": "completed",
+      "title": "",
+      "toolCallId": "minimal"
+    },
+    "id": "93b41aa1-28fe-42c7-9617-b5645b1510f2:tool:minimal",
+    "type": "acpToolCall"
+  },
+  {
+    "call": {
+      "content": [],
+      "kind": "other",
+      "locations": [],
+      "rawOutput": false,
+      "sessionUpdate": "tool_call",
+      "status": "failed",
+      "title": "Second tool failed",
+      "toolCallId": "failed"
+    },
+    "id": "93b41aa1-28fe-42c7-9617-b5645b1510f2:tool:failed",
+    "type": "acpToolCall"
+  }
+]

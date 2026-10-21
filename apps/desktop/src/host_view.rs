@@ -1,13 +1,20 @@
+mod attention;
+mod continuation;
 mod draft;
+mod images;
+mod observe;
+mod progress;
+mod recent;
+mod row_changes;
+mod stopping;
 mod tasks;
-use crate::conversation_item::{ItemView, Row};
+use crate::conversation_item::{ItemView, OpenFile, Row};
 use crate::question_view::{AnswerEvent, QuestionView};
 use fleetpane_runtime::Snapshot;
 use fleetpane_session::questions::{self, Request as QuestionRequest};
 use fleetpane_session::{
     Thread, Turn,
     client::{self, Command, Completed, Connection, Error},
-    content::{Content, Part},
     directory::{Directory, Page, PageRequest, Query},
     history::{History, Request as HistoryRequest},
     models::{Catalog, Page as ModelPage, TurnOptions},
@@ -40,10 +47,20 @@ struct QuestionEntry {
     _subscription: Subscription,
 }
 
+fn composer_max_rows(window: &Window) -> usize {
+    // Leave room for pending requests and Stop in the minimum-size window.
+    if window.viewport_size().height < px(680.) {
+        3
+    } else {
+        6
+    }
+}
+
 pub struct HostView {
     socket: PathBuf,
     connection: Option<Connection>,
     snapshot: Option<Snapshot>,
+    attention_target: Option<fleetpane_session::attention::Item>,
     directory: Directory,
     directory_changed: bool,
     models: Catalog,
@@ -54,19 +71,28 @@ pub struct HostView {
     rename: Entity<InputState>,
     rename_target: Option<String>,
     thread: Option<Thread>,
+    // Membership observed from provider directory; separate from loaded status.
+    selected_archived: bool,
+    session_tree: Option<Entity<crate::session_tree_view::SessionTreeView>>,
     history: Option<History>,
     rows: Vec<Row>,
     questions: Vec<QuestionEntry>,
+    permission_preview: Option<(Row, Entity<ItemView>)>,
     item_views: BTreeMap<String, Entity<ItemView>>,
+    file_subscriptions: BTreeMap<String, Subscription>,
+    permission_file_subscription: Option<Subscription>,
     timeline: ListState,
     directory_scroll: UniformListScrollHandle,
     workspace: Entity<InputState>,
     composer: Entity<TextareaState>,
     draft: draft::State,
+    recent: recent::State,
     tasks: tasks::State,
     busy: bool,
     poll_paused: bool,
     polling: bool,
+    observer_polled_at: Option<std::time::Instant>,
+    observer_error: Option<String>,
     revision: u64,
     cursor: u64,
     error: Option<String>,
@@ -78,10 +104,24 @@ pub struct HostView {
         fleetpane_session::creations::Store,
         fleetpane_session::creations::Intent,
     )>,
+    continuation: Option<continuation::State>,
     _subscriptions: Vec<Subscription>,
 }
 
+#[derive(Clone)]
+pub(crate) struct FileRequest {
+    pub thread_id: String,
+    pub cwd: String,
+    pub target: fleetpane_session::files::Target,
+}
+impl EventEmitter<FileRequest> for HostView {}
+
 impl HostView {
+    pub(crate) fn matches_file_request(&self, request: &FileRequest) -> bool {
+        self.thread
+            .as_ref()
+            .is_some_and(|thread| thread.id == request.thread_id && thread.cwd == request.cwd)
+    }
     pub fn prepare_creation(
         &mut self,
         store: fleetpane_session::creations::Store,
@@ -167,8 +207,12 @@ impl HostView {
     ) -> Self {
         let workspace =
             cx.new(|cx| InputState::new(window, cx).placeholder("Absolute workspace directory"));
-        let composer =
-            cx.new(|cx| TextareaState::new(window, cx).placeholder("Message · Enter adds a line"));
+        let mut max_rows = composer_max_rows(window);
+        let composer = cx.new(|cx| {
+            TextareaState::new(window, cx)
+                .auto_grow(1, max_rows)
+                .placeholder("Message · Enter adds a line")
+        });
         let subscription = cx.subscribe_in(&composer, window, |this, input, event, window, cx| {
             if matches!(event, InputEvent::Change) {
                 let text = input.read(cx).value().to_string();
@@ -181,6 +225,14 @@ impl HostView {
             cx.new(|cx| InputState::new(window, cx).placeholder("Exact workspace directory"));
         let rename = cx.new(|cx| InputState::new(window, cx).placeholder("Session name"));
         let mut subscriptions = vec![subscription];
+        subscriptions.push(cx.observe_window_bounds(window, move |this, window, cx| {
+            let rows = composer_max_rows(window);
+            if rows != max_rows {
+                max_rows = rows;
+                this.composer
+                    .update(cx, |input, cx| input.set_auto_grow(1, rows, cx));
+            }
+        }));
         for input in [&search, &filter_workspace, &rename] {
             subscriptions.push(cx.subscribe(input, |_, _, event, cx| {
                 if matches!(event, InputEvent::Change) {
@@ -212,6 +264,7 @@ impl HostView {
             socket,
             connection: None,
             snapshot: None,
+            attention_target: None,
             directory: Directory::default(),
             directory_changed: false,
             models: Catalog::default(),
@@ -222,11 +275,16 @@ impl HostView {
             rename,
             rename_target: None,
             thread: None,
+            selected_archived: false,
+            session_tree: None,
             tasks: tasks::State::default(),
             history: None,
             rows: Vec::new(),
             questions: Vec::new(),
+            permission_preview: None,
             item_views: BTreeMap::new(),
+            file_subscriptions: BTreeMap::new(),
+            permission_file_subscription: None,
             // List scrolling uses measured heights. With zero leading overdraw,
             // older rows remain zero-height and scrolling stops at the first
             // measured row. Measure one viewport on either side as we scroll.
@@ -235,9 +293,12 @@ impl HostView {
             workspace,
             composer,
             draft: draft::State::new(draft_directory),
+            recent: recent::State::default(),
             busy: false,
             poll_paused: false,
             polling: false,
+            observer_polled_at: None,
+            observer_error: None,
             revision: 0,
             cursor: 0,
             error: None,
@@ -246,9 +307,11 @@ impl HostView {
             creation_target: None,
             workspace_target: None,
             creation_intent: None,
+            continuation: None,
             _subscriptions: subscriptions,
         };
         view.connect(false, window, cx);
+        view.update_recent(recent::Action::Load, window, cx);
         cx.spawn_in(window, async move |this, cx| {
             loop {
                 cx.background_executor()
@@ -264,6 +327,17 @@ impl HostView {
         })
         .detach();
         view
+    }
+
+    fn adopt_snapshot(&mut self, state: Snapshot) {
+        if self
+            .snapshot
+            .as_ref()
+            .is_some_and(|old| old.host_id != state.host_id)
+        {
+            self.session_tree = None;
+        }
+        self.snapshot = Some(state);
     }
 
     fn owns(&self) -> bool {
@@ -287,7 +361,7 @@ impl HostView {
         let task = cx.background_executor().spawn(async move {
             background(async move {
                 let state = client::snapshot(&socket).await?;
-                let connection = if take_control || state.owner.is_none() {
+                let connection = if take_control {
                     Some(Connection::claim(socket, &state).await?)
                 } else {
                     existing.filter(|connection| state.owner.as_ref() == Some(&connection.lease))
@@ -315,9 +389,11 @@ impl HostView {
                             .is_some_and(|old| old.host_id != state.host_id)
                         {
                             this.questions.clear();
+                            this.permission_preview = None;
                         }
-                        this.snapshot = Some(state);
+                        this.adopt_snapshot(state);
                         this.sync_questions(window, cx);
+                        this.sync_permission_preview(cx);
                         for entry in &this.questions {
                             entry.view.update(cx, |view, cx| view.allow_submit(cx));
                         }
@@ -352,14 +428,54 @@ impl HostView {
         }
         if matches!(
             command,
-            Command::Send { .. } | Command::Open { .. } | Command::Inspect { .. }
-        ) && !self.draft_can_navigate()
+            Command::Send { .. }
+                | Command::Steer { .. }
+                | Command::Open { .. }
+                | Command::Inspect { .. }
+                | Command::Fork { .. }
+        ) && !draft::observes_selected(&command, self.thread.as_ref())
+            && !self.draft_can_navigate()
         {
             self.error=Some("Finish saving or resolving the current draft before opening another session or sending.".into());
             cx.notify();
             return;
         }
-        if matches!(command, Command::Send { .. }) && !self.draft_sendable() {
+        if self.selected_archived
+            && match &command {
+                Command::Send { thread_id, .. }
+                | Command::Steer { thread_id, .. }
+                | Command::Inspect {
+                    thread_id,
+                    resume: true,
+                }
+                | Command::Open {
+                    thread_id,
+                    resume: true,
+                } => self
+                    .thread
+                    .as_ref()
+                    .is_some_and(|selected| &selected.id == thread_id),
+                _ => false,
+            }
+        {
+            self.error = Some("Restore this archived session before continuing its context".into());
+            cx.notify();
+            return;
+        }
+        if command.is_composer_input() && !self.draft_sendable() {
+            return;
+        }
+        if command.is_composer_input()
+            && let Some(stop) = self.snapshot.as_ref().and_then(|state| {
+                state.activity.stopping.as_ref()?.iter().find(|stop| {
+                    self.thread
+                        .as_ref()
+                        .is_some_and(|thread| thread.id == stop.thread_id)
+                })
+            })
+        {
+            self.error = Some(stop.description().into());
+            cx.notify();
             return;
         }
         if let Some(state) = &self.snapshot {
@@ -388,6 +504,10 @@ impl HostView {
         let Some(connection) = self.connection.clone() else {
             return;
         };
+        if matches!(command, Command::Stop { .. }) {
+            self.request_stop(connection, command, window, cx);
+            return;
+        }
         self.busy = true;
         if matches!(command, Command::Models { .. }) {
             self.models_requested = true;
@@ -424,9 +544,33 @@ impl HostView {
         } else {
             None
         };
-        let operation = creation.as_ref().map_or_else(Uuid::new_v4, |(_, id)| *id);
+        let continuation = if matches!(command, Command::Fork { .. }) {
+            let Some(state) = &mut self.continuation else {
+                self.busy = false;
+                self.error = Some("Prepare an imported history first".into());
+                cx.notify();
+                return;
+            };
+            if state.intent.attempted
+                || !matches!(&command,Command::Fork {thread_id,path,cwd} if *thread_id==state.intent.thread_id && *path==state.intent.path && *cwd==state.intent.cwd)
+            {
+                self.busy = false;
+                self.error=Some("Fork already attempted or differs from its saved binding. Check saved fork status.".into());
+                cx.notify();
+                return;
+            }
+            state.intent.attempted = true;
+            Some((state.store.clone(), state.intent.clone()))
+        } else {
+            None
+        };
+        let operation = continuation
+            .as_ref()
+            .map(|(_, intent)| intent.id)
+            .or_else(|| creation.as_ref().map(|(_, id)| *id))
+            .unwrap_or_else(Uuid::new_v4);
         let operation_command = command.clone();
-        let saved_draft = if matches!(command, Command::Send { .. }) {
+        let saved_draft = if command.is_composer_input() {
             self.draft.record.clone()
         } else {
             None
@@ -438,6 +582,10 @@ impl HostView {
                     fleetpane_session::creations::Store::open(draft_directory)
                         .await?
                         .send_draft(&draft, &connection, operation, &operation_command)
+                        .await
+                } else if let Some((store, intent)) = continuation {
+                    store
+                        .dispatch_paseo_continuation(intent.session_id, intent.id, &connection)
                         .await
                 } else if let Some((store, id)) = creation {
                     store.dispatch(id, &connection).await
@@ -466,10 +614,10 @@ impl HostView {
         cx: &mut Context<Self>,
     ) {
         self.busy = false;
-        if matches!(command, Command::Send { .. }) {
+        if command.is_composer_input() {
             self.draft.record = None;
         }
-        let sent_command = matches!(command, Command::Send { .. });
+        let sent_command = command.is_composer_input();
         match result {
             Ok(completed) => {
                 if let Err(error) = self.apply_reply(&command, completed, window, cx) {
@@ -492,6 +640,16 @@ impl HostView {
                             })
                         }
                     }
+                    Command::Fork { .. } => self.thread.as_ref().and_then(|thread| {
+                        if let Some(history) = &self.history {
+                            history.next().map(Command::History)
+                        } else {
+                            Some(Command::Open {
+                                thread_id: thread.id.clone(),
+                                resume: false,
+                            })
+                        }
+                    }),
                     Command::History(HistoryRequest::Turns { .. }) => self
                         .history
                         .as_ref()
@@ -500,7 +658,14 @@ impl HostView {
                     _ => None,
                 } {
                     self.command(next, window, cx);
-                } else if matches!(command, Command::Rename { .. } | Command::Create { .. }) {
+                } else if matches!(
+                    command,
+                    Command::Rename { .. }
+                        | Command::Create { .. }
+                        | Command::Restore { .. }
+                        | Command::Fork { .. }
+                ) || self.take_continuation_refresh(&command)
+                {
                     self.command(Command::List(self.directory.refresh()), window, cx);
                 } else if matches!(command, Command::Models { .. }) {
                     if let Some(cursor) = self.models.next_cursor.clone() {
@@ -541,7 +706,25 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) -> Result<(), Box<dyn std::error::Error>> {
+        command.validate_completed(&completed)?;
         match command {
+            Command::Mode { thread_id, .. } => {
+                let modes: fleetpane_runtime::acp::modes::State = serde_json::from_value(
+                    completed
+                        .result
+                        .get("modes")
+                        .cloned()
+                        .ok_or("ACP mode result lacks state")?,
+                )?;
+                modes.validate()?;
+                if let Some(thread) = self
+                    .thread
+                    .as_mut()
+                    .filter(|thread| &thread.id == thread_id)
+                {
+                    thread.acp_modes = Some(modes);
+                }
+            }
             Command::Config { thread_id, .. } => {
                 if let Some(thread) = self.thread.as_mut().filter(|t| &t.id == thread_id) {
                     thread.config_options = serde_json::from_value(
@@ -562,9 +745,31 @@ impl HostView {
             Command::List(request) => {
                 let page: Page = serde_json::from_value(completed.result)?;
                 self.directory.apply(request, page)?;
+                if self.thread.as_ref().is_some_and(|selected| {
+                    self.directory
+                        .threads
+                        .iter()
+                        .any(|row| row.id == selected.id)
+                }) {
+                    self.selected_archived = request.query.archived;
+                }
                 if request.cursor.is_none() {
                     self.directory_changed = false;
                     self.directory_scroll.scroll_to_item(0, ScrollStrategy::Top);
+                }
+            }
+            Command::Restore { thread_id } => {
+                if self
+                    .thread
+                    .as_ref()
+                    .is_some_and(|thread| &thread.id == thread_id)
+                {
+                    self.selected_archived = false;
+                }
+                if self.directory.query.archived {
+                    self.directory
+                        .threads
+                        .retain(|thread| &thread.id != thread_id);
                 }
             }
             Command::Rename { thread_id, name } => {
@@ -604,19 +809,43 @@ impl HostView {
                 }
                 self.rebuild_rows(cx);
             }
-            Command::Create { .. } | Command::Open { .. } | Command::Inspect { .. } => {
+            Command::Create { .. }
+            | Command::Open { .. }
+            | Command::Inspect { .. }
+            | Command::Fork { .. } => {
                 #[derive(Deserialize)]
                 struct Opened {
                     thread: Thread,
                 }
                 let thread: Thread = serde_json::from_value::<Opened>(completed.result)?.thread;
                 thread.validate()?;
+                if draft::observes_selected(command, self.thread.as_ref())
+                    && self
+                        .thread
+                        .as_ref()
+                        .is_some_and(|current| current.cwd != thread.cwd)
+                {
+                    return Err("Session directory changed during history hydration; existing draft retained".into());
+                }
                 if matches!(command, Command::Create { .. }) {
+                    self.update_recent(
+                        recent::Action::Remember(PathBuf::from(&thread.cwd)),
+                        window,
+                        cx,
+                    );
                     self.creation_target = None;
                     self.creation_intent = None;
                     self.workspace_target = None;
                 }
-                self.history = if matches!(command, Command::Inspect { .. })
+                if matches!(command, Command::Fork { .. })
+                    && let Some(state) = &mut self.continuation
+                {
+                    state.resolution = Some(fleetpane_session::creations::Resolution::Created {
+                        thread_id: thread.id.clone(),
+                    });
+                    state.refresh_directory = true;
+                }
+                self.history = if matches!(command, Command::Inspect { .. } | Command::Fork { .. })
                     && thread.supports_history_pages()
                 {
                     if !thread.turns.is_empty() {
@@ -637,7 +866,19 @@ impl HostView {
                 {
                     *old = metadata;
                 }
+                self.selected_archived =
+                    if matches!(command, Command::Fork { .. } | Command::Create { .. }) {
+                        false
+                    } else if self.directory.threads.iter().any(|row| row.id == thread.id) {
+                        self.directory.query.archived
+                    } else {
+                        self.thread.as_ref().is_some_and(|old| old.id == thread.id)
+                            && self.selected_archived
+                    };
                 self.rename_target = None;
+                if self.thread.as_ref().is_none_or(|old| old.id != thread.id) {
+                    self.session_tree = None;
+                }
                 self.thread = Some(thread);
                 self.cursor = completed.sequence;
                 self.poll_paused = self.history.is_some();
@@ -670,13 +911,25 @@ impl HostView {
                 }
                 // Do not skip notifications emitted before turn/start replied.
             }
+            Command::Steer { .. } => {
+                self.composer
+                    .update(cx, |input, cx| input.set_value("", window, cx));
+                // Acceptance is not delivery: only provider events add history.
+            }
             Command::Stop { .. } => { /* Completion remains provider-authoritative. */ }
         }
         Ok(())
     }
 
     fn poll(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        if self.busy || self.poll_paused || self.polling {
+        if self.busy || self.polling {
+            return;
+        }
+        if !self.owns() {
+            self.observe(window, cx);
+            return;
+        }
+        if self.poll_paused {
             return;
         }
         let Some(connection) = self.connection.clone() else {
@@ -698,12 +951,15 @@ impl HostView {
                 }
                 match result {
                     Ok((state, events)) => {
+                        let mut rows_changed = false;
                         let mut changed = this.snapshot.as_ref().is_none_or(|old| {
                             old.owner != state.owner
                                 || old.pending_requests != state.pending_requests
+                                || old.activity.stopping != state.activity.stopping
+                                || old.activity.turns != state.activity.turns
                                 || old.fault != state.fault
                         });
-                        this.snapshot = Some(state);
+                        this.adopt_snapshot(state);
                         this.sync_questions(window, cx);
                         for event in events {
                             if event.sequence <= this.cursor {
@@ -711,7 +967,11 @@ impl HostView {
                             }
                             if matches!(
                                 event.message.get("method").and_then(Value::as_str),
-                                Some("thread/name/updated" | "thread/status/changed")
+                                Some(
+                                    "thread/name/updated"
+                                        | "thread/status/changed"
+                                        | "thread/acpSessionInfo/updated"
+                                )
                             ) {
                                 let id = event
                                     .message
@@ -743,11 +1003,15 @@ impl HostView {
                                 } else {
                                     thread.apply(&event)
                                 } {
-                                    Ok(applied) => changed |= applied,
+                                    Ok(applied) => {
+                                        changed |= applied;
+                                        rows_changed |= row_changes::affects_rows(&event, applied);
+                                    }
                                     Err(error) => {
                                         this.error = Some(error.to_string());
                                         this.poll_paused = true;
                                         changed = true;
+                                        rows_changed = true;
                                         break;
                                     }
                                 }
@@ -755,7 +1019,11 @@ impl HostView {
                             this.cursor = event.sequence;
                         }
                         if changed {
-                            this.rebuild_rows(cx);
+                            if rows_changed {
+                                this.rebuild_rows(cx);
+                            } else {
+                                this.sync_permission_preview(cx);
+                            }
                             cx.notify();
                         }
                     }
@@ -856,46 +1124,41 @@ impl HostView {
     }
 
     fn rebuild_rows(&mut self, cx: &mut Context<Self>) {
+        self.sync_permission_preview(cx);
         let mut rows = Vec::new();
         if let Some(thread) = &self.thread {
-            for turn in &thread.turns {
-                let error = turn
-                    .error
-                    .as_ref()
-                    .map_or_else(String::new, Value::to_string);
-                rows.push(Row {
-                    id: format!("{}:{}:status", thread.id, turn.id),
-                    label: format!("Turn · {}", turn.status),
-                    content: Content::Message(if error.is_empty() {
-                        vec![]
-                    } else {
-                        vec![Part::Text(error.clone())]
-                    }),
-                    copy: error,
-                    error: None,
-                });
-                for item in &turn.items {
-                    if let Some(row) =
-                        Row::item(format!("{}:{}:{}", thread.id, turn.id, item.id), item)
-                    {
-                        rows.push(row);
-                    }
-                }
-            }
+            rows = Row::conversation(thread);
+            let changes = row_changes::plan(&self.rows, &rows);
             self.item_views
-                .retain(|id, _| rows.iter().any(|row| &row.id == id));
-            for row in &rows {
+                .retain(|id, _| changes.retained.contains(id.as_str()));
+            self.file_subscriptions
+                .retain(|id, _| changes.retained.contains(id.as_str()));
+            for index in changes.updated {
+                let row = &rows[index];
                 if let Some(view) = self.item_views.get(&row.id) {
                     view.update(cx, |view, cx| view.set_row(row.clone(), cx));
                 } else {
-                    self.item_views.insert(
-                        row.id.clone(),
-                        cx.new(|cx| ItemView::new(row.clone(), thread.cwd.clone(), cx)),
-                    );
+                    let view = cx.new(|cx| ItemView::new(row.clone(), thread.cwd.clone(), cx));
+                    let session = thread.id.clone();
+                    let subscription =
+                        cx.subscribe(&view, move |this, _, event: &OpenFile, cx| {
+                            if this.thread.as_ref().is_some_and(|thread| {
+                                thread.id == session && thread.cwd == event.cwd
+                            }) {
+                                cx.emit(FileRequest {
+                                    thread_id: session.clone(),
+                                    cwd: event.cwd.clone(),
+                                    target: event.target.clone(),
+                                });
+                            }
+                        });
+                    self.file_subscriptions.insert(row.id.clone(), subscription);
+                    self.item_views.insert(row.id.clone(), view);
                 }
             }
         } else {
             self.item_views.clear();
+            self.file_subscriptions.clear();
         }
         let first = self
             .rows
@@ -912,6 +1175,65 @@ impl HostView {
         self.timeline
             .splice(first..self.rows.len() - suffix, rows.len() - first - suffix);
         self.rows = rows;
+    }
+
+    fn sync_permission_preview(&mut self, cx: &mut Context<Self>) {
+        let pending = self
+            .snapshot
+            .as_ref()
+            .and_then(|state| {
+                state
+                    .pending_requests
+                    .iter()
+                    .find(|pending| {
+                        let target = pending.pointer("/params/threadId").and_then(Value::as_str);
+                        target.is_none()
+                            || self
+                                .thread
+                                .as_ref()
+                                .is_some_and(|thread| Some(thread.id.as_str()) == target)
+                    })
+                    .map(|pending| (state.host_id, pending))
+            })
+            .filter(|(_, pending)| pending["method"] == "session/request_permission");
+        let Some((host, pending)) = pending else {
+            self.permission_preview = None;
+            self.permission_file_subscription = None;
+            return;
+        };
+        let row = Row::permission(
+            format!("permission:{host}:{}", pending["id"]),
+            pending,
+            self.thread.as_ref(),
+        );
+        if let Some((previous, view)) = &mut self.permission_preview
+            && previous.id == row.id
+        {
+            if previous != &row {
+                view.update(cx, |view, cx| view.set_row(row.clone(), cx));
+                *previous = row;
+            }
+        } else {
+            let cwd = self
+                .thread
+                .as_ref()
+                .map_or_else(String::new, |thread| thread.cwd.clone());
+            let view = cx.new(|cx| ItemView::permission(row.clone(), cwd, cx));
+            let session = self.thread.as_ref().map(|thread| thread.id.clone());
+            self.permission_file_subscription =
+                Some(cx.subscribe(&view, move |this, _, event: &OpenFile, cx| {
+                    if this.thread.as_ref().is_some_and(|thread| {
+                        Some(&thread.id) == session.as_ref() && thread.cwd == event.cwd
+                    }) {
+                        cx.emit(FileRequest {
+                            thread_id: session.clone().expect("selected session checked"),
+                            cwd: event.cwd.clone(),
+                            target: event.target.clone(),
+                        });
+                    }
+                }));
+            self.permission_preview = Some((row, view));
+        }
     }
 
     fn save_name(&mut self, window: &mut Window, cx: &mut Context<Self>) {
@@ -936,6 +1258,7 @@ impl HostView {
             query: Query {
                 search: text(&self.search),
                 cwd: text(&self.filter_workspace),
+                archived: self.directory.query.archived,
             },
             cursor: None,
         };
@@ -951,6 +1274,7 @@ impl HostView {
                 Command::Send {
                     thread_id: thread.id.clone(),
                     text: self.composer.read(cx).value().to_string(),
+                    images: self.draft_images().to_vec(),
                     options: {
                         let options = self
                             .turn_options
@@ -964,6 +1288,25 @@ impl HostView {
                         }
                         options
                     },
+                },
+                window,
+                cx,
+            );
+        }
+    }
+
+    fn steer(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if !self.is_acp()
+            && self.draft_images().is_empty()
+            && !self.poll_paused
+            && let Some(thread) = &self.thread
+            && let Some(turn) = thread.active_turn()
+        {
+            self.command(
+                Command::Steer {
+                    thread_id: thread.id.clone(),
+                    turn_id: turn.id.clone(),
+                    text: self.composer.read(cx).value().to_string(),
                 },
                 window,
                 cx,
@@ -995,17 +1338,61 @@ impl HostView {
     }
 
     fn acp_options(&self, cx: &mut Context<Self>) -> AnyElement {
-        let blocked = self.busy
-            || !self.owns()
-            || self.pending.is_some()
-            || self.draining()
-            || self.thread.as_ref().is_none_or(|t| !t.can_send());
+        let unavailable = self.busy || !self.owns() || self.pending.is_some() || self.draining();
+        let blocked = unavailable || self.thread.as_ref().is_none_or(|t| !t.can_send());
         let mut row = div()
             .flex()
             .flex_wrap()
             .gap_2()
             .child("Session configuration");
         if let Some(thread) = &self.thread {
+            if let Some(modes) = &thread.acp_modes {
+                let owner = cx.entity().downgrade();
+                let thread_id = thread.id.clone();
+                let choices = modes.available_modes.clone();
+                let current = modes.current_mode_id.clone();
+                row = row.child(
+                    Button::new("acp-mode")
+                        .small()
+                        .label(format!("Mode: {}", modes.current_name()))
+                        .disabled(
+                            unavailable
+                                || !matches!(thread.status.kind.as_str(), "idle" | "active")
+                                || choices.is_empty(),
+                        )
+                        .dropdown_menu_with_anchor(Anchor::BottomLeft, move |mut menu, _, _| {
+                            menu = menu.scrollable(true).max_h(px(320.));
+                            for choice in &choices {
+                                let owner = owner.clone();
+                                let id = thread_id.clone();
+                                let mode_id = choice.id.clone();
+                                let label = choice.description.as_ref().map_or_else(
+                                    || choice.name.clone(),
+                                    |description| format!("{} — {description}", choice.name),
+                                );
+                                menu = menu.item(
+                                    PopupMenuItem::new(label)
+                                        .checked(current == choice.id)
+                                        .on_click(move |_, window, cx| {
+                                            if let Some(entity) = owner.upgrade() {
+                                                entity.update(cx, |this, cx| {
+                                                    this.command(
+                                                        Command::Mode {
+                                                            thread_id: id.clone(),
+                                                            mode_id: mode_id.clone(),
+                                                        },
+                                                        window,
+                                                        cx,
+                                                    )
+                                                });
+                                            }
+                                        }),
+                                );
+                            }
+                            menu
+                        }),
+                );
+            }
             for option in &thread.config_options {
                 let owner = cx.entity().downgrade();
                 let thread_id = thread.id.clone();
@@ -1053,6 +1440,60 @@ impl HostView {
             }
         }
         row.into_any_element()
+    }
+
+    fn render_history_navigation(&self, blocked: bool, cx: &mut Context<Self>) -> AnyElement {
+        let show_latest = !self.rows.is_empty() && !self.timeline.is_following_tail();
+        div()
+            .when(self.history.is_some() || show_latest, |view| {
+                view.px_4()
+                    .pb_2()
+                    .flex()
+                    .items_center()
+                    .justify_between()
+                    .gap_2()
+                    .children(self.history.as_ref().map(|history| {
+                        let next = history.next();
+                        let count = self.thread.as_ref().map_or(0, |thread| {
+                            thread
+                                .turns
+                                .iter()
+                                .map(|turn| turn.items.len())
+                                .sum::<usize>()
+                        });
+                        let label = if history.at_limit {
+                            "Loaded history limit reached · Reload for recent messages".to_owned()
+                        } else if next.is_none() {
+                            format!("Beginning of conversation · {count} loaded")
+                        } else {
+                            format!("Load earlier messages · {count} loaded")
+                        };
+                        Button::new("history-earlier")
+                            .small()
+                            .ghost()
+                            .label(label)
+                            .disabled(blocked || next.is_none())
+                            .on_click(cx.listener(move |this, _, window, cx| {
+                                if let Some(request) = &next {
+                                    this.command(Command::History(request.clone()), window, cx);
+                                }
+                            }))
+                    }))
+                    .when(show_latest, |view| {
+                        view.child(
+                            Button::new("history-latest")
+                                .small()
+                                .label("Jump to latest")
+                                .on_click(cx.listener(|this, _, _, cx| {
+                                    // Kit's tail mode anchors at the end, including
+                                    // a growing last row, and resumes stream follow.
+                                    this.timeline.set_follow_mode(FollowMode::Tail);
+                                    cx.notify();
+                                })),
+                        )
+                    })
+            })
+            .into_any_element()
     }
 
     fn render_options(&self, cx: &mut Context<Self>) -> AnyElement {
@@ -1225,7 +1666,7 @@ impl HostView {
             let _closed = this.update_in(cx, |this, _, cx| {
                 this.busy = false;
                 match result {
-                    Ok(state) => { this.snapshot = Some(state); this.error = None; },
+                    Ok(state) => { this.adopt_snapshot(state); this.error = None; },
                     Err(error) => { this.error = Some(format!("Could not confirm admission state: {error}. Reconnect to read the saved state before retrying.")); },
                 }
                 cx.notify();
@@ -1300,9 +1741,24 @@ impl HostView {
 }
 
 impl Render for HostView {
-    fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let owns = self.owns();
         let blocked = self.busy || !owns || self.pending.is_some();
+        let stopping = self
+            .snapshot
+            .as_ref()
+            .and_then(|state| {
+                state.activity.stopping.as_ref()?.iter().find(|stop| {
+                    self.thread
+                        .as_ref()
+                        .is_some_and(|thread| thread.id == stop.thread_id)
+                })
+            })
+            .cloned();
+        let stop_supported = self
+            .snapshot
+            .as_ref()
+            .is_some_and(|state| state.activity.stopping.is_some());
         let title = self
             .thread
             .as_ref()
@@ -1310,17 +1766,36 @@ impl Render for HostView {
                 thread.title().to_owned()
             });
         let send_disabled = blocked
+            || stopping.is_some()
             || !self.draft_sendable()
+            || self.selected_archived
             || self.draining()
             || self.poll_paused
             || self.thread.as_ref().is_none_or(|thread| !thread.can_send())
-            || self.composer.read(cx).value().trim().is_empty();
+            || (self.composer.read(cx).value().trim().is_empty() && self.draft_images().is_empty())
+            || (!self.draft_images().is_empty() && !self.supports_images());
         let send_disabled = send_disabled
             || self
                 .thread
                 .as_ref()
                 .and_then(|thread| self.turn_options.get(&thread.id))
                 .is_some_and(|options| options.validate(&self.models).is_err());
+        let active_turn = self.thread.as_ref().and_then(Thread::active_turn).is_some();
+        let cancel_requested = stopping.as_ref().is_some_and(|stop| !stop.can_retry())
+            || self
+                .thread
+                .as_ref()
+                .is_some_and(|thread| thread.status.cancel_requested);
+        let steer_disabled = blocked
+            || stopping.is_some()
+            || cancel_requested
+            || !self.draft_images().is_empty()
+            || !self.draft_sendable()
+            || self.draining()
+            || self.poll_paused
+            || !active_turn
+            || self.is_acp()
+            || self.composer.read(cx).value().trim().is_empty();
         let approvals = self
             .snapshot
             .as_ref()
@@ -1384,7 +1859,7 @@ impl Render for HostView {
                             } else {
                                 "Read only · take control to work"
                             })
-                            .when(self.busy, |row| row.child("Working…"))
+                            .when(self.busy, |row| row.child("Applying action…"))
                             .when(owns, |row| {
                                 row.child(Button::new("host-admission")
                                     .small().ghost()
@@ -1415,14 +1890,15 @@ impl Render for HostView {
                             }),
                     ),
             )
+            .child(self.attention_banner(cx))
             .when(self.draining(), |view| {
                 let state = self.snapshot.as_ref().expect("draining Host snapshot");
                 view.child(div().px_6().py_2().text_sm().border_b_1().border_color(cx.theme().border)
-                    .child(format!("Draining · {} active turns · {} pending answers · {} in-flight operations · {} uncertain receipts. New work is paused; reads, answers and Stop remain available. Host stays running.", state.activity.turns.len(), state.pending_requests.len(), state.activity.in_flight_operations, state.activity.unknown_operations))
+                    .child(format!("Draining · {} active turns · {} live terminals · {} pending answers · {} in-flight operations · {} uncertain receipts. New work is paused; reads, terminal input, answers and Stop remain available. Host stays running.", state.activity.turns.len(), state.activity.terminal_ids.len(), state.pending_requests.len(), state.activity.in_flight_operations, state.activity.unknown_operations))
                     .children(state.activity.turns.iter().take(3).map(|turn| div().text_xs().child(format!("Session {} · turn {}", turn.thread_id, turn.turn_id.as_deref().unwrap_or("awaiting identity")))))
                     .when(state.activity.turns.len() > 3, |row| row.child("First 3 shown. The Host snapshot lists all observed active turns.")))
             })
-            .children(self.error.as_ref().map(|error| {
+            .children(self.error.iter().chain(self.observer_error.iter()).map(|error| {
                 div()
                     .px_6()
                     .py_2()
@@ -1480,6 +1956,7 @@ impl Render for HostView {
                             .bg(cx.theme().sidebar)
                             .border_r_1()
                             .border_color(cx.theme().border)
+                            .child(div().id("host-session-controls").max_h((window.viewport_size().height-px(340.)).max(px(180.))).overflow_y_scroll().flex_shrink_0()
                             .child(
                                 div()
                                     .p_4()
@@ -1488,10 +1965,12 @@ impl Render for HostView {
                                     .gap_2()
                                     .child("Workspace directory")
                                     .child(Input::new(&self.workspace))
+                                    .child(self.render_recent(cx))
+                                    .child(self.render_continuation(cx))
                                     .child(
                                         Button::new("new-session")
                                             .label("New session")
-                                            .disabled(blocked || self.draining())
+                                            .disabled(blocked || self.draining() || self.recent.busy)
                                             .on_click(cx.listener(|this, _, window, cx| {
                                                 this.command(
                                                     Command::Create {
@@ -1515,6 +1994,18 @@ impl Render for HostView {
                                     .flex_col()
                                     .gap_2()
                                     .child("Filter sessions")
+                                    .child(div().flex().gap_2()
+                                        .children([false,true].map(|archived| {
+                                            Button::new(if archived {"archived-sessions"}else{"active-sessions"}).small()
+                                                .label(if archived {"Archived"}else{"Sessions"})
+                                                .selected(self.directory.query.archived == archived)
+                                                .disabled(blocked || self.is_acp())
+                                                .on_click(cx.listener(move |this,_,window,cx| {
+                                                    let mut request = this.directory.refresh();
+                                                    request.query.archived = archived;
+                                                    this.command(Command::List(request),window,cx);
+                                                }))
+                                        })))
                                     .child(
                                         Input::new(&self.search)
                                             .aria_label("Title filter")
@@ -1610,6 +2101,7 @@ impl Render for HostView {
                                             })),
                                     ),
                             )
+                            )
                             .when(
                                 self.directory.threads.is_empty() && !self.busy && owns,
                                 |pane| {
@@ -1630,7 +2122,7 @@ impl Render for HostView {
                                             .map(|ix| {
                                                 let thread = &this.directory.threads[ix];
                                                 let id = thread.id.clone();
-                                                let resume = thread.status.kind == "notLoaded";
+                                                let resume = thread.status.kind == "notLoaded" && !this.directory.query.archived;
                                                 let label: String =
                                                     thread.title().chars().take(50).collect();
                                                 div()
@@ -1718,6 +2210,7 @@ impl Render for HostView {
                         div()
                             .flex_1()
                             .min_w_0()
+                            .min_h_0()
                             .flex()
                             .flex_col()
                             .child(
@@ -1734,6 +2227,19 @@ impl Render for HostView {
                                         self.thread.as_ref().map(|thread| thread.id.clone()),
                                         |row, id| {
                                             row.child(
+                                                Button::new("inspect-session-tree")
+                                                    .small().ghost().label("Session tree")
+                                                    .disabled(self.is_acp() || self.snapshot.is_none())
+                                                    .on_click(cx.listener(move |this, _, window, cx| {
+                                                        if let (Some(state), Some(thread)) = (&this.snapshot, &this.thread) {
+                                                            let socket = this.socket.clone();
+                                                            let host = state.host_id;
+                                                            let root = thread.id.clone();
+                                                            this.session_tree = Some(cx.new(|cx| crate::session_tree_view::SessionTreeView::new(socket, host, root, window, cx)));
+                                                            cx.notify();
+                                                        }
+                                                    })),
+                                            ).child(
                                                 Button::new("reload-thread")
                                                     .small()
                                                     .label("Reload conversation")
@@ -1831,17 +2337,12 @@ impl Render for HostView {
                                         }),
                                 )
                             })
-                            .children(self.history.as_ref().map(|history| {
-                                let next = history.next();
-                                let count = self.thread.as_ref().map_or(0, |thread| thread.turns.iter().map(|turn| turn.items.len()).sum::<usize>());
-                                let label = if history.at_limit { "Loaded history limit reached · Reload for recent messages".to_owned() }
-                                    else if next.is_none() { format!("Beginning of conversation · {count} loaded") } else { format!("Load earlier messages · {count} loaded") };
-                                div().px_4().pb_2().child(Button::new("history-earlier").small().ghost().label(label)
-                                    .disabled(blocked || next.is_none())
-                                    .on_click(cx.listener(move |this, _, window, cx| {
-                                        if let Some(request) = &next { this.command(Command::History(request.clone()), window, cx); }
-                                    })))
-                            }))
+                            .child(self.render_history_navigation(blocked, cx))
+                            .child(
+                                // Split the space left AFTER the header/editor.
+                                // Details may use half; the virtual list keeps
+                                // the rest even when task/approval content grows.
+                                div().id("conversation-body").flex().flex_col().flex_1().min_h_0()
                             .child(
                                 list(
                                     self.timeline.clone(),
@@ -1853,6 +2354,17 @@ impl Render for HostView {
                                 .flex_1()
                                 .min_h_0(),
                             )
+                            .child(div().id("session-interactions")
+                            .min_h_0()
+                            .flex_shrink_0()
+                            .max_h(relative(0.5))
+                            .overflow_y_scroll()
+                            .child(div().flex().flex_col().flex_shrink_0()
+                            .when(self.session_tree.is_some(), |pane| pane.child(
+                                Button::new("close-session-tree").small().ghost().label("Close session tree")
+                                    .on_click(cx.listener(|this, _, _, cx| {this.session_tree = None;cx.notify();}))
+                            ))
+                            .children(self.session_tree.clone())
                             .when(self.thread.is_some(), |view| view.child(self.render_tasks(cx)))
                             .children(self.thread.as_ref().filter(|thread| {
                                 thread.history_mode.as_deref() == Some("legacy")
@@ -1864,8 +2376,31 @@ impl Render for HostView {
                                     .bg(cx.theme().muted)
                                     .child("Older session: some command history may be unavailable. New sessions preserve tool history.")
                             }))
-                            .children(self.thread.as_ref().filter(|thread|thread.history_mode.as_deref()==Some("acp-observed")).map(|_| {
-                                div().px_4().py_2().text_sm().bg(cx.theme().muted).child("DeepSeek ACP: context can resume; previous messages are not replayed. Showing activity observed by this Host.")
+                            .children(self.thread.as_ref().filter(|thread|thread.history_mode.as_deref()==Some("acp-observed")).map(|thread| {
+                                let id=thread.id.clone();
+                                div().px_4().py_2().text_sm().bg(cx.theme().muted)
+                                    .child("DeepSeek ACP: showing activity observed by Fleetpane. Earlier provider messages are not imported. Unknown turns have no confirmed outcome.")
+                                    .when(thread.status.kind=="archived",|view| view.child(
+                                        Button::new("resume-acp-context").small().label("Resume context")
+                                            .disabled(self.busy || self.pending.is_some() || !self.owns())
+                                            .on_click(cx.listener(move |this,_,window,cx| this.command(Command::Inspect{thread_id:id.clone(),resume:true},window,cx)))
+                                    ))
+                            }))
+                            .children(self.thread.as_ref().filter(|_| self.selected_archived).map(|thread| {
+                                let id = thread.id.clone();
+                                div().px_4().py_2().text_sm().bg(cx.theme().muted)
+                                    .child("Listed as archived · history is read-only until restored. Restoring adds this session to Sessions; it does not start a turn or restore descendants.")
+                                    .child(Button::new("restore-session").small().label("Restore to sessions")
+                                        .disabled(blocked || self.draining() || self.is_acp())
+                                        .on_click(cx.listener(move |this,_,window,cx|this.command(Command::Restore {thread_id:id.clone()},window,cx))))
+                            }))
+                            .children(self.thread.as_ref().filter(|thread| !self.selected_archived && !self.is_acp() && thread.status.kind == "notLoaded").map(|thread| {
+                                let id = thread.id.clone();
+                                div().px_4().py_2().text_sm()
+                                    .child("Context is not loaded. Resume explicitly to continue; this does not send a message.")
+                                    .child(Button::new("resume-codex-context").small().label("Resume context")
+                                        .disabled(blocked || self.draining())
+                                        .on_click(cx.listener(move |this,_,window,cx|this.command(Command::Inspect {thread_id:id.clone(),resume:true},window,cx))))
                             }))
                             .children(other_requests.first().map(|pending| {
                                 let thread_id = pending
@@ -1921,20 +2456,8 @@ impl Render for HostView {
                                     let key = pending
                                         .get("id")
                                         .map_or_else(|| "missing".into(), Value::to_string);
-                                    let details = if pending.get("method").and_then(Value::as_str) == Some("session/request_permission") {
-                                        let call_id = pending.pointer("/params/toolCall/toolCallId");
-                                        let call = self.thread.iter().flat_map(|t| &t.turns).flat_map(|t| &t.items)
-                                            .filter_map(|item| item.fields.get("call"))
-                                            .find(|call| call.get("toolCallId").is_some_and(|id| Some(id) == call_id));
-                                        let title = call.and_then(|call| call.get("title")).and_then(Value::as_str)
-                                            .or_else(|| pending.pointer("/params/toolCall/title").and_then(Value::as_str))
-                                            .unwrap_or("Tool permission");
-                                        let input = call.and_then(|call| call.get("rawInput"));
-                                        match input {
-                                            Some(input) => format!("{title}\n{input}"),
-                                            None => title.to_owned(),
-                                        }
-                                    } else { pending.to_string() };
+                                    let is_acp_permission = pending["method"] == "session/request_permission";
+                                    let review_valid = self.permission_preview.as_ref().is_some_and(|(row, _)| row.error.is_none());
                                     let mut permission_buttons = div().flex().flex_wrap().gap_2();
                                     let mut permission_error = None;
                                     match fleetpane_session::acp::Permission::decode(&pending) {
@@ -1945,7 +2468,7 @@ impl Render for HostView {
                                                 permission_buttons = permission_buttons.child(
                                                     Button::new(SharedString::from(format!("acp-permission:{key}:{choice}")))
                                                         .label(option.name)
-                                                        .disabled(blocked)
+                                                        .disabled(blocked || !review_valid)
                                                         .on_click(cx.listener(move |this, _, window, cx| {
                                                             this.answer_acp(pending.clone(), choice.clone(), window, cx)
                                                         })),
@@ -1975,8 +2498,9 @@ impl Render for HostView {
                                                 .max_h_24()
                                                 .overflow_y_scroll()
                                                 .text_sm()
-                                                .child(details),
+                                            .when(!is_acp_permission, |details| details.child(pending.to_string())),
                                         )
+                                        .children(is_acp_permission.then(|| self.permission_preview.as_ref().map(|(_, view)| view.clone())).flatten())
                                         .children(supported.then(||
                                             div()
                                                 .flex()
@@ -2020,6 +2544,17 @@ impl Render for HostView {
                                         .child(permission_buttons)
                                 },
                             ))
+                            .when(!has_question, |region| region.child(
+                                div().p_4().flex().flex_col().gap_2()
+                                    .child(self.render_draft(cx))
+                                    .child(self.render_options(cx))
+                                    .child(self.render_images(blocked, cx))
+                                    .when(active_turn && self.is_acp() && !cancel_requested, |pane| pane.child(
+                                        div().text_xs().text_color(cx.theme().muted_foreground)
+                                            .child("DeepSeek ACP does not support live follow-ups. Stop the turn before sending a new message.")
+                                    ))
+                            ))
+                            )))
                             .child(
                                 div()
                                     .p_4()
@@ -2027,12 +2562,28 @@ impl Render for HostView {
                                     .border_color(cx.theme().border)
                                     .flex()
                                     .flex_col()
+                                    .flex_shrink_0()
                                     .gap_2()
+                                    .child(self.render_progress(cx))
+                                    .when(cancel_requested || stopping.is_some(), |pane| pane.child(
+                                        div().text_xs().text_color(cx.theme().muted_foreground)
+                                            .child(stopping.as_ref().map_or("Stop requested. Waiting for the agent to finish cancellation.", |stop| stop.description()))
+                                            .children(stopping.as_ref().and_then(|stop| stop.error.clone()).map(|error| div().text_color(cx.theme().danger).child(error)))
+                                    ))
+                                    .when(active_turn && !stop_supported, |pane| pane.child(
+                                        div().text_xs().text_color(cx.theme().muted_foreground)
+                                            .child("This Host does not report Stop progress. Select an updated Host before stopping a turn.")
+                                    ))
                                     .when(!has_question, |pane| {
-                                        pane.child(self.render_draft(cx)).child(self.render_options(cx)).child(
+                                        pane.child(
                                             Textarea::new(&self.composer)
-                                                .h(rems(6.))
                                                 .aria_label("Message")
+                                                .on_paste({
+                                                    let view = cx.entity();
+                                                    move |clipboard, window, cx| view.update(cx, |this, cx| {
+                                                        this.paste_images(clipboard, window, cx)
+                                                    })
+                                                })
                                                 .readonly(blocked || self.thread.is_none() || !self.draft_editable()),
                                         )
                                     })
@@ -2041,6 +2592,12 @@ impl Render for HostView {
                                             .flex()
                                             .gap_2()
                                             .justify_end()
+                                            .when(active_turn && !self.is_acp(), |row| row.child(
+                                                Button::new("steer-turn")
+                                                    .label("Send to active turn")
+                                                    .disabled(steer_disabled || has_question)
+                                                    .on_click(cx.listener(|this, _, window, cx| this.steer(window, cx)))
+                                            ))
                                             .child(
                                                 Button::new("send-message")
                                                     .label("Send")
@@ -2058,8 +2615,8 @@ impl Render for HostView {
                                                 |row, (thread_id, turn_id)| {
                                                     row.child(
                                                         Button::new("stop-turn")
-                                                            .label("Stop turn")
-                                                            .disabled(blocked)
+                                                            .label(if cancel_requested { "Stopping…" } else if stopping.as_ref().is_some_and(|stop| stop.can_retry()) { "Retry Stop" } else { "Stop turn" })
+                                                            .disabled(blocked || cancel_requested || !stop_supported)
                                                             .on_click(cx.listener(
                                                                 move |this, _, window, cx| {
                                                                     this.command(

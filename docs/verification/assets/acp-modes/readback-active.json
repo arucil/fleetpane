@@ -1,0 +1,279 @@
+{
+  "state": {
+    "protocol": 3,
+    "host_id": "9b1f7a1e-b21c-4952-b10e-666a446539f5",
+    "host_pid": 1363092,
+    "provider_pid": 1363124,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "9b1f7a1e-b21c-4952-b10e-666a446539f5",
+      "controller_id": "3a160bf2-0382-4dd7-aa98-b5bac47df24e",
+      "generation": 3
+    },
+    "sequence": 23,
+    "operation_ids": [
+      "899c6fc0-6be7-4dc0-9d87-b0c93e66c2ca",
+      "11abdff8-78ac-451e-a14a-ca6920a68f88",
+      "af7a4bc6-29e0-442b-b193-c0f37b290259",
+      "b55a33bd-a016-4655-9d8c-4c3c5854d01c",
+      "4a37afce-463b-4bad-b04c-275c48026079",
+      "3f29842f-0cc4-44cd-8b2c-6cd155b87319"
+    ],
+    "journal_total": 6,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "2e411388-c97e-4625-b3e2-3552077e58cf",
+          "turn_id": "91c6ba67-d90b-4f29-a343-854072eb3c60"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "2e411388-c97e-4625-b3e2-3552077e58cf",
+          "threadId": "2e411388-c97e-4625-b3e2-3552077e58cf",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-d095ba15-5c22-466a-8550-ea3b0c9bb489"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  },
+  "current": {
+    "acpModes": {
+      "availableModes": [
+        {
+          "id": "ask",
+          "name": "Ask"
+        },
+        {
+          "description": "Change files 中文",
+          "id": "code",
+          "name": "Code"
+        },
+        {
+          "description": "Synthetic rejection",
+          "id": "restricted",
+          "name": "Restricted"
+        }
+      ],
+      "currentModeId": "ask"
+    },
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-modes-native-20261021",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "2e411388-c97e-4625-b3e2-3552077e58cf",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "active"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "91c6ba67-d90b-4f29-a343-854072eb3c60",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission]",
+                "type": "text"
+              }
+            ],
+            "id": "user:91c6ba67-d90b-4f29-a343-854072eb3c60",
+            "type": "userMessage"
+          },
+          {
+            "content": [
+              "Synthetic ACP reasoning"
+            ],
+            "id": "91c6ba67-d90b-4f29-a343-854072eb3c60:agent_thought_chunk:id:thought",
+            "summary": [],
+            "type": "reasoning"
+          },
+          {
+            "call": {
+              "content": [],
+              "kind": "other",
+              "locations": [],
+              "rawInput": {
+                "text": "[permission]"
+              },
+              "sessionUpdate": "tool_call",
+              "status": "in_progress",
+              "title": "Synthetic tool",
+              "toolCallId": "call-d095ba15-5c22-466a-8550-ea3b0c9bb489"
+            },
+            "id": "91c6ba67-d90b-4f29-a343-854072eb3c60:tool:call-d095ba15-5c22-466a-8550-ea3b0c9bb489",
+            "type": "acpToolCall"
+          }
+        ],
+        "status": "inProgress"
+      }
+    ]
+  },
+  "other": {
+    "acpModes": {
+      "availableModes": [
+        {
+          "id": "ask",
+          "name": "Ask"
+        },
+        {
+          "description": "Change files 中文",
+          "id": "code",
+          "name": "Code"
+        },
+        {
+          "description": "Synthetic rejection",
+          "id": "restricted",
+          "name": "Restricted"
+        }
+      ],
+      "currentModeId": "ask"
+    },
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-modes-native-20261021",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "ae3b1469-c3a7-48b5-9d6e-731c38d732ae",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "idle"
+    },
+    "turns": []
+  }
+}

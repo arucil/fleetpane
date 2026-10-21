@@ -1,0 +1,111 @@
+{
+  "host_pid": 2719845,
+  "control": "/tmp/fleetpane-existing-worktree-20261021/native/host/control.sock",
+  "source": {
+    "position": 1,
+    "id": "fb4e0c16-f268-42ad-9321-2b353e437540",
+    "project_id": "8f0ba596-247c-40c1-9b87-49be806abdd8",
+    "endpoint": {
+      "name": "QA ACP",
+      "socket": "/tmp/fleetpane-existing-worktree-20261021/native/host/control.sock"
+    },
+    "directory": {
+      "path": "/tmp/fleetpane-existing-worktree-20261021/native/repo/sub",
+      "device": 66311,
+      "inode": 59247520
+    },
+    "project": {
+      "path": "/tmp/fleetpane-existing-worktree-20261021/native/repo/.git",
+      "device": 66311,
+      "inode": 59247521
+    },
+    "kind": "git"
+  },
+  "main_session": "9ca5d7db-7708-4041-b9d6-fee87e23b760",
+  "permission_session": "148ea6e5-7629-4d25-b42c-faf399a327b6",
+  "base": "816564d660e00f0682619ed2dbc32a2b975bc108",
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "6304a822-9a8b-47bb-8693-df5ecd3ad28f",
+    "host_pid": 2719845,
+    "provider_pid": 2719847,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "6304a822-9a8b-47bb-8693-df5ecd3ad28f",
+      "controller_id": "1a2b6772-0a20-40d9-8eac-b9542516550c",
+      "generation": 3
+    },
+    "sequence": 15,
+    "operation_ids": [
+      "416316ee-3fb7-4392-a144-2d1a82f8e38e",
+      "3bb9d2b8-7a65-49d1-ac32-733e0802acbd",
+      "1ed3cef5-14f1-4fb0-9ca7-5e02a770270d",
+      "b5540722-927d-4c74-b710-5b4858865bd9"
+    ],
+    "journal_total": 4,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "148ea6e5-7629-4d25-b42c-faf399a327b6",
+          "turn_id": "6821d9bb-d0ed-437b-86d5-8643965d93ef"
+        },
+        {
+          "thread_id": "9ca5d7db-7708-4041-b9d6-fee87e23b760",
+          "turn_id": "ff084e45-79c3-480c-8dfe-1f2421a9ff5c"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "148ea6e5-7629-4d25-b42c-faf399a327b6",
+          "threadId": "148ea6e5-7629-4d25-b42c-faf399a327b6",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-b363d46c-2a4c-4a3c-9109-219024409461"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+}

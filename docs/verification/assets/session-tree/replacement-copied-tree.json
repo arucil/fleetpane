@@ -1,0 +1,108 @@
+{
+  "host_id": "8cfdf993-5f53-4dec-94c3-f8a46db092b3",
+  "root_id": "root",
+  "sequence_before": 13,
+  "sequence_after": 18,
+  "scanned_nodes": 7,
+  "rows": [
+    {
+      "metadata": {
+        "id": "root",
+        "sessionId": "tree",
+        "parentThreadId": null,
+        "forkedFromId": null,
+        "cwd": "/tmp/fleetpane-replay-175-20261021/native",
+        "name": "Root workspace",
+        "preview": "root",
+        "ephemeral": false,
+        "status": {
+          "type": "idle",
+          "cancelRequested": false
+        }
+      },
+      "depth": 0,
+      "archived": false,
+      "loaded": true,
+      "active_turn": null,
+      "pending_requests": 0
+    },
+    {
+      "metadata": {
+        "id": "child",
+        "sessionId": "tree",
+        "parentThreadId": "root",
+        "forkedFromId": null,
+        "cwd": "/tmp/fleetpane-replay-175-20261021/native",
+        "name": "Child agent",
+        "preview": "[approval]",
+        "ephemeral": false,
+        "status": {
+          "type": "active",
+          "cancelRequested": false
+        }
+      },
+      "depth": 1,
+      "archived": false,
+      "loaded": true,
+      "active_turn": {
+        "thread_id": "child",
+        "turn_id": "child-turn-1"
+      },
+      "pending_requests": 1
+    },
+    {
+      "metadata": {
+        "id": "grandchild",
+        "sessionId": "tree",
+        "parentThreadId": "child",
+        "forkedFromId": null,
+        "cwd": "/tmp/fleetpane-replay-175-20261021/native",
+        "name": "Archived grandchild",
+        "preview": "grandchild",
+        "ephemeral": false,
+        "status": {
+          "type": "idle",
+          "cancelRequested": false
+        }
+      },
+      "depth": 2,
+      "archived": true,
+      "loaded": false,
+      "active_turn": null,
+      "pending_requests": 0
+    },
+    {
+      "metadata": {
+        "id": "ephemeral",
+        "sessionId": "tree",
+        "parentThreadId": "root",
+        "forkedFromId": null,
+        "cwd": "/tmp/fleetpane-replay-175-20261021/native",
+        "name": "Ephemeral helper",
+        "preview": "ephemeral",
+        "ephemeral": true,
+        "status": {
+          "type": "idle",
+          "cancelRequested": false
+        }
+      },
+      "depth": 1,
+      "archived": null,
+      "loaded": true,
+      "active_turn": null,
+      "pending_requests": 0
+    }
+  ],
+  "unresolved_same_session": [
+    "orphan"
+  ],
+  "other_loaded_contexts": 1,
+  "unassigned_requests": 0,
+  "in_flight_mutations": 0,
+  "unknown_operations": 0,
+  "warnings": [
+    "Multi-request observation; session state can change during and after inspection. This is not permission to archive or proof of quiescence.",
+    "Background commands and other provider resources are not enumerated; idle or unloaded metadata is not a resource-complete shutdown receipt.",
+    "Some sessions with the same sessionId have unresolved parent chains; subtree impact is incomplete."
+  ]
+}

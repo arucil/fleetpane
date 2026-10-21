@@ -1,11 +1,15 @@
 //! Existing local directories. Host/provider lifetime and ownership stay separate.
+use crate::file_locations::Locations;
+use crate::files_view::FilesView;
 use crate::host_view::background;
+use crate::paseo_import_view::PaseoImportView;
+use crate::terminal_view::TerminalView;
 use fleetpane_session::{
     creations::Store,
     diffs::{Content, FileDiff, Scope},
     hosts::Endpoint,
     workspaces::{Kind, Overview, Workspace},
-    worktrees::{Job, State},
+    worktrees::{BranchMode, Job, State},
 };
 use gpui_kit::component::{
     ActiveTheme, Disableable, Selectable, Sizable,
@@ -27,9 +31,11 @@ enum Action {
     Apply(Uuid),
     Check(Uuid),
     Diff(Uuid, Scope, String),
+    Pin(Uuid, bool),
 }
 enum Reply {
-    List(Vec<Workspace>, Vec<Job>),
+    List(Vec<Workspace>, Vec<Job>, Vec<Workspace>),
+    Pinned(Vec<Workspace>),
     Registered(Vec<Workspace>, Overview),
     Inspected(Overview),
     Use(Workspace),
@@ -49,8 +55,10 @@ pub struct WorkspaceView {
     host: usize,
     input: Entity<InputState>,
     branch: Entity<InputState>,
+    branch_mode: BranchMode,
     base: Entity<InputState>,
     records: Vec<Workspace>,
+    pins: Vec<Workspace>,
     jobs: Vec<Job>,
     job: Option<Job>,
     overview: Option<Overview>,
@@ -58,11 +66,32 @@ pub struct WorkspaceView {
     scope: Scope,
     busy: bool,
     error: Option<String>,
+    files: Option<Entity<FilesView>>,
+    files_subscription: Option<Subscription>,
+    file_locations: Locations,
+    terminals: Option<Entity<TerminalView>>,
+    terminal_subscription: Option<Subscription>,
+    migration: Option<Entity<PaseoImportView>>,
+    migration_observation: Option<Subscription>,
+    migration_continuation: Option<Subscription>,
 }
 
 impl EventEmitter<Workspace> for WorkspaceView {}
+impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
+    pub(crate) fn close_status(&self, cx: &App) -> Result<bool, String> {
+        if self
+            .migration
+            .as_ref()
+            .is_some_and(|view| view.read(cx).is_busy())
+        {
+            return Ok(false);
+        }
+        self.terminals
+            .as_ref()
+            .map_or(Ok(true), |view| view.read(cx).close_status())
+    }
     pub fn new(
         directory: PathBuf,
         hosts: Vec<Endpoint>,
@@ -72,7 +101,7 @@ impl WorkspaceView {
     ) -> Self {
         let input =
             cx.new(|cx| InputState::new(window, cx).placeholder("Absolute existing directory"));
-        let branch = cx.new(|cx| InputState::new(window, cx).placeholder("New branch name"));
+        let branch = cx.new(|cx| InputState::new(window, cx).placeholder("Local branch name"));
         let base = cx.new(|cx| {
             let mut input = InputState::new(window, cx).placeholder("Base ref or commit");
             input.set_value("HEAD", window, cx);
@@ -84,8 +113,10 @@ impl WorkspaceView {
             host,
             input,
             branch,
+            branch_mode: BranchMode::New,
             base,
             records: vec![],
+            pins: vec![],
             jobs: vec![],
             job: None,
             overview: None,
@@ -93,10 +124,22 @@ impl WorkspaceView {
             scope: Scope::Unstaged,
             busy: false,
             error: None,
+            files: None,
+            files_subscription: None,
+            file_locations: Locations::default(),
+            terminals: None,
+            terminal_subscription: None,
+            migration: None,
+            migration_observation: None,
+            migration_continuation: None,
         }
     }
 
     pub fn open(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if let Some(files) = &self.files {
+            files.update(cx, |view, cx| view.focus(window, cx));
+            return;
+        }
         self.input.update(cx, |input, cx| input.focus(window, cx));
         self.run(Action::List(None), window, cx);
     }
@@ -107,8 +150,10 @@ impl WorkspaceView {
         }
         self.busy = true;
         self.error = None;
-        self.diff = None;
-        if !matches!(action, Action::List(_) | Action::Diff(..)) {
+        if !matches!(action, Action::Pin(..)) {
+            self.diff = None;
+        }
+        if !matches!(action, Action::List(_) | Action::Diff(..) | Action::Pin(..)) {
             self.overview = None;
             self.job = None;
         }
@@ -116,6 +161,7 @@ impl WorkspaceView {
         let endpoint = self.hosts[self.host].clone();
         let path = PathBuf::from(self.input.read(cx).value().as_str());
         let branch = self.branch.read(cx).value().to_string();
+        let branch_mode = self.branch_mode;
         let base = self.base.read(cx).value().to_string();
         let task = cx.background_executor().spawn(async move {
             background(async move {
@@ -124,7 +170,11 @@ impl WorkspaceView {
                     Action::List(before) => Ok(Reply::List(
                         store.workspaces(before).await?,
                         store.worktree_jobs(None).await?,
+                        store.pinned_workspaces().await?,
                     )),
+                    Action::Pin(id, pinned) => {
+                        Ok(Reply::Pinned(store.set_workspace_pinned(id, pinned).await?))
+                    }
                     Action::Register(kind) => {
                         let workspace = store.register_workspace(endpoint, path, kind).await?;
                         let overview = workspace.inspect().await?;
@@ -139,9 +189,15 @@ impl WorkspaceView {
                         Ok(Reply::Use(workspace))
                     }
                     Action::Plan(source) => {
-                        let job = store
-                            .plan_worktree(Uuid::new_v4(), source, branch, base)
-                            .await?;
+                        let id = Uuid::new_v4();
+                        let job = match branch_mode {
+                            BranchMode::New => {
+                                store.plan_worktree(id, source, branch, base).await?
+                            }
+                            BranchMode::Existing => {
+                                store.plan_existing_worktree(id, source, branch).await?
+                            }
+                        };
                         Ok(Reply::Job(
                             job,
                             store.worktree_jobs(None).await?,
@@ -177,7 +233,8 @@ impl WorkspaceView {
             let _closed = this.update_in(cx, |this, _, cx| {
                 this.busy = false;
                 match reply {
-                    Ok(Reply::List(records,jobs)) => { this.records = records; this.jobs=jobs; }
+                    Ok(Reply::List(records,jobs,pins)) => { this.records = records; this.jobs=jobs; this.pins=pins; }
+                    Ok(Reply::Pinned(pins)) => this.pins=pins,
                     Ok(Reply::Registered(records, overview)) => {
                         this.records = records;
                         this.overview = Some(overview);
@@ -218,13 +275,176 @@ impl WorkspaceView {
     }
 }
 
+impl WorkspaceView {
+    fn open_terminals(
+        &mut self,
+        workspace: Workspace,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        let view = cx.new(|cx| TerminalView::new(workspace, window, cx));
+        self.terminal_subscription = Some(cx.subscribe_in(&view, window, |this, _, _, _, cx| {
+            this.terminals = None;
+            this.terminal_subscription = None;
+            cx.notify();
+        }));
+        self.terminals = Some(view);
+        cx.notify();
+    }
+
+    fn open_files(&mut self, workspace: Workspace, window: &mut Window, cx: &mut Context<Self>) {
+        let location = self.file_locations.get(&workspace);
+        let view = cx.new(|cx| FilesView::new(workspace.clone(), location, window, cx));
+        self.files_subscription =
+            Some(
+                cx.subscribe_in(&view, window, move |this, _, location, window, cx| {
+                    this.file_locations.save(&workspace, location.clone());
+                    this.files = None;
+                    this.files_subscription = None;
+                    this.input.update(cx, |input, cx| input.focus(window, cx));
+                    cx.notify();
+                }),
+            );
+        self.files = Some(view);
+        cx.notify();
+    }
+
+    fn workspace_row(
+        &self,
+        workspace: &Workspace,
+        index: usize,
+        shortcut: bool,
+        cx: &Context<Self>,
+    ) -> Div {
+        let id = workspace.id;
+        let pinned = self.pins.iter().any(|workspace| workspace.id == id);
+        let path = workspace.registration.directory.path.to_string_lossy();
+        let name = workspace
+            .registration
+            .directory
+            .path
+            .file_name()
+            .map(|name| name.to_string_lossy())
+            .unwrap_or_else(|| path.clone());
+        let branch = self.jobs.iter().find_map(|job| match job.state {
+            State::Completed { workspace_id } if workspace_id == id => {
+                Some(job.plan.branch.as_str())
+            }
+            _ => None,
+        });
+        div()
+            .py_2()
+            .flex()
+            .flex_col()
+            .gap_1()
+            .child(
+                div()
+                    .flex()
+                    .items_center()
+                    .gap_1()
+                    .child(
+                        div().flex_1().min_w_0().child(
+                            Button::new((
+                                if shortcut {
+                                    "inspect-pinned"
+                                } else {
+                                    "inspect-workspace"
+                                },
+                                index,
+                            ))
+                            .small()
+                            .ghost()
+                            .w_full()
+                            .selected(
+                                self.overview
+                                    .as_ref()
+                                    .is_some_and(|overview| overview.workspace.id == id),
+                            )
+                            .label(format!(
+                                "{} · {}",
+                                workspace.registration.endpoint.name,
+                                branch.unwrap_or(name.as_ref())
+                            ))
+                            .disabled(self.busy)
+                            .on_click(cx.listener(
+                                move |this, _, window, cx| {
+                                    this.run(Action::Inspect(id), window, cx)
+                                },
+                            )),
+                        ),
+                    )
+                    .child(
+                        Button::new((
+                            if shortcut {
+                                "unpin-shortcut"
+                            } else {
+                                "pin-workspace"
+                            },
+                            index,
+                        ))
+                        .small()
+                        .label(if pinned { "Unpin" } else { "Pin" })
+                        .disabled(self.busy)
+                        .on_click(cx.listener(
+                            move |this, _, window, cx| {
+                                this.run(Action::Pin(id, !pinned), window, cx)
+                            },
+                        )),
+                    ),
+            )
+            .child(div().text_xs().truncate().child(path.into_owned()))
+            .when(shortcut, |view| {
+                view.child(
+                    Button::new(("open-pinned-workspace", index))
+                        .small()
+                        .label("Use workspace")
+                        .disabled(self.busy)
+                        .on_click(cx.listener(move |this, _, window, cx| {
+                            this.run(Action::Use(id), window, cx)
+                        })),
+                )
+            })
+    }
+}
+
 impl Render for WorkspaceView {
     fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        if let Some(migration) = &self.migration {
+            let busy = migration.read(cx).is_busy();
+            return div()
+                .size_full()
+                .flex()
+                .flex_col()
+                .child(
+                    Button::new("leave-paseo-import")
+                        .small()
+                        .label("Back to workspaces")
+                        .disabled(busy)
+                        .on_click(cx.listener(|this, _, window, cx| {
+                            this.migration = None;
+                            this.migration_observation = None;
+                            this.run(Action::List(None), window, cx);
+                        })),
+                )
+                .child(div().flex_1().min_h_0().child(migration.clone()));
+        }
+        if let Some(files) = &self.files {
+            return div().size_full().child(files.clone());
+        }
+        if let Some(terminals) = &self.terminals {
+            return div().size_full().child(terminals.clone());
+        }
         let host_names: Vec<String> = self.hosts.iter().map(|host| host.name.clone()).collect();
         let owner = cx.entity().downgrade();
         let selected = self.host;
         div().size_full().flex().flex_col().gap_3().p_4()
             .child(div().text_lg().child("Projects & workspaces"))
+            .child(Button::new("open-paseo-import").small().label("Import from Paseo").disabled(self.busy).on_click(cx.listener(|this,_,window,cx| {
+                let view=cx.new(|cx|PaseoImportView::new(this.directory.clone(),this.hosts[this.host].clone(),window,cx));
+                this.migration_observation=Some(cx.observe(&view,|_,_,cx|cx.notify()));
+                this.migration_continuation=Some(cx.subscribe(&view,|_,_,event:&crate::paseo_import_view::Continuation,cx|cx.emit(event.clone())));
+                this.migration=Some(view);cx.notify();
+            })))
             .child(div().text_sm().child("Register an existing Git workspace or ordinary folder. Registration and Refresh do not create a worktree or start an agent."))
             .child(div().flex().items_center().gap_2()
                 .child(Button::new("workspace-host").small().label(self.hosts[self.host].name.clone()).disabled(self.busy).dropdown_menu_with_anchor(Anchor::BottomLeft,move |mut menu,_,_| {
@@ -249,16 +469,12 @@ impl Render for WorkspaceView {
                         .when(self.records.len()==32,|view|view.child(Button::new("older-workspaces").small().label("Older").disabled(self.busy).on_click(cx.listener(|this,_,window,cx| { let before=this.records.last().map(|workspace|workspace.position); this.run(Action::List(before),window,cx); }))))
                     )
                     .child(div().id("workspace-records").flex_1().min_h_0().overflow_y_scroll()
+                        .when(!self.pins.is_empty(), |view| view
+                            .child(div().text_sm().child(format!("Pinned · {} / 32", self.pins.len())))
+                            .children(self.pins.iter().enumerate().map(|(index, workspace)| self.workspace_row(workspace, index, true, cx)))
+                            .child(div().mt_3().text_sm().child("Saved workspaces")))
                         .when(self.records.is_empty(),|view|view.child("No saved workspaces."))
-                        .children(self.records.iter().enumerate().map(|(index, workspace)| {
-                            let id=workspace.id;
-                            let path=workspace.registration.directory.path.to_string_lossy();
-                            let name=workspace.registration.directory.path.file_name().map(|name|name.to_string_lossy()).unwrap_or_else(||path.clone());
-                            let created_branch=self.jobs.iter().find_map(|job|match job.state { State::Completed{workspace_id} if workspace_id==id=>Some(job.plan.branch.as_str()),_=>None });
-                            div().py_2().flex().flex_col().gap_1()
-                                .child(Button::new(("inspect-workspace",index)).small().ghost().selected(self.overview.as_ref().is_some_and(|overview|overview.workspace.id==id)).label(format!("{} · {}",workspace.registration.endpoint.name,created_branch.unwrap_or(name.as_ref()))).disabled(self.busy).on_click(cx.listener(move |this,_,window,cx|this.run(Action::Inspect(id),window,cx))))
-                                .child(div().text_xs().truncate().child(path.into_owned()))
-                        }))
+                        .children(self.records.iter().enumerate().map(|(index, workspace)| self.workspace_row(workspace, index, false, cx)))
                         .when(!self.jobs.is_empty(),|view|view.child(div().mt_3().text_sm().child("Recent worktree creations (up to 32)")))
                         .children(self.jobs.iter().enumerate().map(|(index,job)| {
                             let id=job.plan.id;
@@ -272,14 +488,14 @@ impl Render for WorkspaceView {
                         let id=job.plan.id;
                         let copy_path=job.plan.path.to_string_lossy().into_owned();
                         view.child(div().text_sm().child(format!("Worktree creation {id}")))
-                            .child(div().text_sm().child(format!("Host: {} · new branch: {}",job.plan.source.endpoint.name,job.plan.branch)))
-                            .child(div().text_sm().child(format!("Base: {} → {}",job.plan.base_ref,job.plan.commit)))
+                            .child(div().text_sm().child(format!("Host: {} · {} branch: {}",job.plan.source.endpoint.name,if job.plan.branch_mode==BranchMode::New { "new" } else { "existing local" },job.plan.branch)))
+                            .child(div().text_sm().child(format!("{}: {} → {}",if job.plan.branch_mode==BranchMode::New { "Base" } else { "Expected tip" },job.plan.base_ref,job.plan.commit)))
                             .child(div().text_sm().truncate().child(format!("Worktree: {}",job.plan.path.display())))
                             .child(div().text_sm().truncate().child(format!("Session directory: {}",job.plan.cwd.display())))
                             .child(Button::new("copy-worktree-path").small().label("Copy worktree path").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy_path.clone()))))
                             .child(Button::new("check-worktree-job").small().label("Check saved status").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Check(id),window,cx))))
                             .when(job.state==State::Prepared,|view|view
-                                .child("Ready to create this directory and branch at the pinned commit. No setup script or session will start.")
+                                .child(if job.plan.branch_mode==BranchMode::New { "Ready to create this directory and branch at the pinned commit. No setup script or session will start." } else { "Ready to check out this local branch. Its tip and availability must still match this preview. No setup script or session will start." })
                                 .child(Button::new("apply-worktree-plan").small().label("Create this worktree").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Apply(id),window,cx)))))
                             .when(job.state==State::Attempted,|view|view.child("Attempt recorded; outcome is incomplete or still running. Inspect the directory and branch with Git. This attempt cannot be resent."))
                             .when_some(match &job.state { State::Failed{error}=>Some(error),_=>None },|view,error|view.child(div().text_color(cx.theme().danger).child(error.clone())))
@@ -289,9 +505,13 @@ impl Render for WorkspaceView {
                     })
                     .when_some(self.overview.as_ref().filter(|_| self.diff.is_none()),|view,overview| {
                         let id=overview.workspace.id;
+                        let workspace=overview.workspace.clone();
                         let registration=&overview.workspace.registration;
                         let copy_path=registration.directory.path.to_string_lossy().into_owned();
-                        view.child(div().text_sm().child(format!("Workspace {}",id)))
+                        let terminal_workspace=workspace.clone();
+                        view.child(Button::new("browse-workspace-files").small().label("Browse files").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.open_files(workspace.clone(),window,cx))))
+                            .child(Button::new("open-workspace-terminals").small().label("Terminals").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.open_terminals(terminal_workspace.clone(),window,cx))))
+                            .child(div().text_sm().child(format!("Workspace {}",id)))
                             .child(div().text_sm().child(format!("Project {}",overview.workspace.project_id)))
                             .child(div().w_full().min_w_0().text_sm().truncate().child(registration.directory.path.to_string_lossy().into_owned()))
                             .child(div().flex().gap_2()
@@ -303,8 +523,11 @@ impl Render for WorkspaceView {
                             .when_some(overview.git.as_ref(),|view,git|view
                                 .child(div().text_sm().child("Create an independent worktree from this workspace"))
                                 .child(div().flex().gap_2()
-                                    .child(div().flex_1().min_w_0().child(div().text_xs().child("New branch")).child(Input::new(&self.branch).disabled(self.busy)))
-                                    .child(div().flex_1().min_w_0().child(div().text_xs().child("Base ref or commit")).child(Input::new(&self.base).disabled(self.busy)))
+                                    .child(Button::new("worktree-new-branch").small().label("New branch").selected(self.branch_mode==BranchMode::New).disabled(self.busy).on_click(cx.listener(|this,_,_,cx| { this.branch_mode=BranchMode::New; cx.notify(); })))
+                                    .child(Button::new("worktree-existing-branch").small().label("Existing local branch").selected(self.branch_mode==BranchMode::Existing).disabled(self.busy).on_click(cx.listener(|this,_,_,cx| { this.branch_mode=BranchMode::Existing; cx.notify(); }))))
+                                .child(div().flex().gap_2()
+                                    .child(div().flex_1().min_w_0().child(div().text_xs().child(if self.branch_mode==BranchMode::New { "New branch" } else { "Existing local branch" })).child(Input::new(&self.branch).disabled(self.busy)))
+                                    .when(self.branch_mode==BranchMode::New,|view|view.child(div().flex_1().min_w_0().child(div().text_xs().child("Base ref or commit")).child(Input::new(&self.base).disabled(self.busy))))
                                     .child(Button::new("plan-worktree").small().label("Preview worktree").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Plan(id),window,cx)))))
                                 .child(div().text_sm().child(format!("{} · HEAD {}",git.branch.as_deref().unwrap_or("Detached HEAD"),git.head.as_deref().unwrap_or("unborn"))))
                                 .child(div().text_sm().child(format!("{} · {} changed paths",if git.linked_worktree { "Linked worktree" } else { "Main checkout" },git.changes.len())))

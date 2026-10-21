@@ -1,0 +1,23 @@
+    Finished `test` profile [unoptimized] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-06c31a04208080ef)
+
+running 1 test
+test tests::stop_reason_survives_snapshots_and_completion_updates ... FAILED
+
+failures:
+
+---- tests::stop_reason_survives_snapshots_and_completion_updates stdout ----
+
+thread 'tests::stop_reason_survives_snapshots_and_completion_updates' (104540) panicked at crates/session/src/lib.rs:400:13:
+assertion `left == right` failed
+  left: Null
+ right: "end_turn"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::stop_reason_survives_snapshots_and_completion_updates
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 66 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

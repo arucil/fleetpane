@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "message": "workspace app log read",
+  "status": {
+    "id": "fp-paseo-receipts",
+    "session_id": "session-fp-paseo-receipts-1792575675132-583193",
+    "purpose": "Fleetpane saved migration report and crash recovery native QA",
+    "user_acknowledged_hidden_workspace": true,
+    "user_acknowledged_unenforced_policy": false,
+    "ready": true,
+    "started_at_unix": 1792575675,
+    "display": ":94",
+    "width": 1500,
+    "height": 1100,
+    "runtime_dir": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts",
+    "socket_path": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts/control.sock",
+    "xauthority_path": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts/Xauthority",
+    "daemon_pid": 583676,
+    "x_server_pid": 583787,
+    "window_manager_pid": 584039,
+    "last_event_sequence": 43,
+    "apps": []
+  },
+  "apps": [
+    {
+      "id": "app-808556",
+      "name": "Fleetpane-receipts-final",
+      "pid": 808556,
+      "process_group_id": 808556,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fp-paseo-receipts-native/hosts.json",
+        "--preferences-dir",
+        "/tmp/fp-paseo-receipts-native/preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "PASEO_HOME",
+          "value": "/tmp/fp-paseo-receipts-native/paseo"
+        },
+        {
+          "name": "CODEX_HOME",
+          "value": "/tmp/fp-paseo-receipts-native/codex"
+        },
+        {
+          "name": "DSH_HOME",
+          "value": "/tmp/fp-paseo-receipts-native/dsh"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts/apps/app-808556.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts/apps/app-808556.stderr.log",
+      "started_at_unix": 1792576099,
+      "running": true,
+      "exit_status": null
+    }
+  ],
+  "app_log": {
+    "app_id": "app-808556",
+    "stream": "stderr",
+    "path": "/run/user/1000/agent-workspace-linux/fp-paseo-receipts/apps/app-808556.stderr.log",
+    "content": "MESA-EGL: warning: DRI3 error: Could not get DRI3 device\nMESA-EGL: warning: Ensure your X server supports DRI3 to get accelerated rendering\n",
+    "bytes_read": 140,
+    "truncated": false
+  }
+}

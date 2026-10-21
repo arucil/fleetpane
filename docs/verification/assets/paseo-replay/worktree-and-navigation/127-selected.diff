@@ -1,0 +1,113 @@
+commit d47019919e8082b308b7cdd507fb01fabc808aad
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 15:03:33 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 15:03:33 2025 +0100
+
+    refactor(ui): improve footer controls layout and add scroll-to-bottom button
+    
+    Simplify agent screen layout by removing redundant status bar container and consolidating all footer controls into the input area component. Add smooth fade animations for realtime mode transitions and a floating scroll-to-bottom button for better UX.
+    
+    Changes:
+    - Consolidate status bar and controls into AgentInputArea for cleaner layout hierarchy
+    - Add scroll-to-bottom button to AgentStreamView with fade animations
+    - Fix realtime controls stacking on non-agent screens
+    - Add lastActivityAt serialization to MCP server agent responses
+    - Remove unnecessary layout wrapper in agent screen
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/components/agent-stream-view.tsx b/packages/app/src/components/agent-stream-view.tsx
+index d64a35486..2f8b689a2 100644
+--- a/packages/app/src/components/agent-stream-view.tsx
++++ b/packages/app/src/components/agent-stream-view.tsx
+@@ -3,6 +3,8 @@ import { View, Text, ScrollView, Pressable } from "react-native";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { BottomSheetModal } from "@gorhom/bottom-sheet";
++import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
++import { ChevronDown } from "lucide-react-native";
+ import {
+   AssistantMessage,
+   UserMessage,
+@@ -64,9 +66,21 @@ export function AgentStreamView({
+       contentSize.height - contentOffset.y - layoutMeasurement.height;
+     // Consider user "at bottom" if within 10px of the end
+     const nearBottom = distanceFromBottom < 10;
++    console.log('[AgentStreamView] Scroll:', { 
++      contentHeight: contentSize.height, 
++      scrollY: contentOffset.y, 
++      layoutHeight: layoutMeasurement.height,
++      distanceFromBottom, 
++      nearBottom,
++      currentIsNearBottom: isNearBottom
++    });
+     setIsNearBottom(nearBottom);
+   }
+ 
++  function scrollToBottom() {
++    scrollViewRef.current?.scrollToEnd({ animated: true });
++  }
++
+   return (
+     <View style={stylesheet.container}>
+       {/* Content list */}
+@@ -189,6 +203,22 @@ export function AgentStreamView({
+           ))}
+       </ScrollView>
+ 
++      {/* Scroll to bottom button */}
++      {!isNearBottom && (
++        <Animated.View
++          style={stylesheet.scrollToBottomContainer}
++          entering={FadeIn.duration(200)}
++          exiting={FadeOut.duration(200)}
++        >
++          <Pressable
++            style={stylesheet.scrollToBottomButton}
++            onPress={scrollToBottom}
++          >
++            <ChevronDown size={24} color={stylesheet.scrollToBottomIcon.color} />
++          </Pressable>
++        </Animated.View>
++      )}
++
+       <ToolCallBottomSheet
+         bottomSheetRef={bottomSheetRef}
+         selectedToolCall={selectedToolCall}
+@@ -365,6 +395,33 @@ const stylesheet = StyleSheet.create((theme) => ({
+     fontSize: theme.fontSize.sm,
+     textAlign: "center",
+   },
++  scrollToBottomContainer: {
++    position: "absolute",
++    bottom: 16,
++    left: 0,
++    right: 0,
++    alignItems: "center",
++    pointerEvents: "box-none",
++  },
++  scrollToBottomButton: {
++    width: 48,
++    height: 48,
++    borderRadius: 24,
++    backgroundColor: theme.colors.muted,
++    alignItems: "center",
++    justifyContent: "center",
++    shadowColor: "#000",
++    shadowOffset: {
++      width: 0,
++      height: 2,
++    },
++    shadowOpacity: 0.25,
++    shadowRadius: 3.84,
++    elevation: 5,
++  },
++  scrollToBottomIcon: {
++    color: theme.colors.foreground,
++  },
+ }));
+ 
+ const permissionStyles = StyleSheet.create((theme) => ({

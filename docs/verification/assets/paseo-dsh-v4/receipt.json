@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-21",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "working_tree": "uncommitted",
+  "sources": {
+    "crates/session/src/paseo_import/history.rs": "00652331d750aae1750d99c2f52dc4e3d6dc23a89ac556e87d8c12eff7b56bc3",
+    "crates/session/src/paseo_import/history/dsh.rs": "535ae7ce6c5229013d76e4d6a4c73646a31a673de75f8f35db7d9befb6f7511c",
+    "crates/session/src/paseo_import/tests.rs": "cfe5584703ee631898c55cad5e0015087cc5e78e30589fe70eabd40e6bb5bcb6",
+    "scripts/paseo-dsh-v4-smoke.py": "46b10748dffa8c8ef990ff4b341981b77262343fd7c33fe347109e35b58f67ea",
+    ".github/workflows/ci.yml": "ab6b62149a4ceb5fc26a844559866fc7431e78ebeaec8166959b997fd63f7c82",
+    "apps/desktop/src/paseo_import_view.rs": "b11e7df4c5140db4cad4a89a73e9154492125da2ffbc233efd167679bf9199f8"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "3ac3b30e4915d36984ae55d73f70e6be1a8fc0398e057de5bafae98f0b783c1d",
+    "apps/desktop/target/debug/fleetpane-desktop": "b3f70b7369cce830106167bdefe27d54edf421e06983903dbcd2d9aeb2694df0"
+  },
+  "installed_dsh_version": "0.2.0-rc.2",
+  "provider_source_sha256": {
+    "dsh-session/lib/index.js": "87ea85e2fb5318bf1f826db9a1c88c1b26d3ea328027a7f32b211880c4d62b9d",
+    "dsh-session-format-v3-to-v4/lib/index.js": "382a3f28b95e0b9504969ac6f407f909aef0ba4699c3175d36c0ef91b31cfde2",
+    "dsh-session-persistence-jsonl/lib/index.js": "ff434eb61b14d106b99d3a73bf97708ac8f8e0905a6462621d634ea28515d3ff"
+  },
+  "baseline_cli": "old binary silently chooses coexisting v3; reproduced",
+  "checks": {
+    "workspace_tests": 211,
+    "migration_tests": 24,
+    "desktop_tests": 19,
+    "python_tests": 15,
+    "root_clippy": "pass",
+    "desktop_clippy": "pass",
+    "plain_v4_smoke": "pass",
+    "installed_dsh_codec_zstd_smoke": "pass",
+    "existing_import_batch_fork_smokes": "pass",
+    "ruff_check": "pass",
+    "ruff_format": "pass",
+    "root_format": "pass",
+    "desktop_format": "pass",
+    "diff_check": "pass"
+  },
+  "native": {
+    "pid": 4166118,
+    "binary_sha256": "b3f70b7369cce830106167bdefe27d54edf421e06983903dbcd2d9aeb2694df0",
+    "on_disk_sha256": "b3f70b7369cce830106167bdefe27d54edf421e06983903dbcd2d9aeb2694df0",
+    "source_unchanged": true,
+    "native_markdown_exact": true,
+    "native_tool_exact": true,
+    "replacement_pid": 17177,
+    "replacement_binary_sha256": "b3f70b7369cce830106167bdefe27d54edf421e06983903dbcd2d9aeb2694df0",
+    "unchanged_archive_after_native_reopen": true
+  },
+  "real_readback": {
+    "real_dsh_v4_readonly_copy": true,
+    "source_records": 86,
+    "projected_items": 51,
+    "first_page_items": 13,
+    "warning": null,
+    "source_unchanged": true,
+    "no_host_started": true
+  },
+  "artifacts": {
+    "cleanup.json": "d44aab39a44668d626e8202289b8509820709d1eaadafa1dd0ac22a1022c35ad",
+    "native-page.json": "cc2717e28efea277f0fdc74daf4a368ff45ddc0e8c8547cc7373fb278db6435f",
+    "cli-plain.log": "83b0fce78131952c697b0be928c0ff0d34b97fce1f173cc8b56c61d012732823",
+    "reopened-history.png": "d798171d966995eb08ba1da341d637dbb240f71b10dec06e6dfaed1b3af59692",
+    "build-host.log": "63bd8a3ac13f8b1c160887cdaf9b30715b07e638d60df463cb8815f661518191",
+    "history.png": "e2a5fe873c4965c41ba1edc67fc78937f5d1152aa36d1e640bcd70252ca3f2e8",
+    "clippy-desktop.log": "5b7022de506eeab05db4d1c1af53127bfe6cfcf0617dbdc4086e1b09c6aa42ae",
+    "tests-workspace.log": "2bee891c48774e636b483400fa38a5495c37a31eaf65b01be223391244c27c21",
+    "tests-import.log": "8e60dbeaecc5a5d58cea800df58ecbf62ae6d1006aebc9ba3b4913a3cea82382",
+    "cli-dsh-codec.log": "93c102de3f76f4d76d01b70fa3cac4cac3ca7c6e8eb29f3b21d5fb1b1933d8f5",
+    "clipboard-markdown.json": "8ed1b3507e9b2fd29f5dabc25cd4521d47877e4757f59a03fcb5f19b05429f00",
+    "native-process.json": "9d4cb273027c4ba234e6700f63a697feaca2002b3da52a5108bf0f0e7edeab13",
+    "clippy-root.log": "e76c452e7aaf95dfbfc5ff72532a9a814c584796b3ee8a2a64298188ecb44c83",
+    "clipboard-tool.json": "365a843b4555b3a4cad6909da92d11e4e0206b3bc1f89737e2016f2ee2710b23",
+    "build-desktop.log": "31c30712b934c7adafc4f55674caa28d74ab6c44c9357839f2e25b328470e7a1",
+    "cli-batch.log": "f0b4330d39b5cca07eeaa1d8341155b7accc2aea1733fcae6f12f205aa1e0b79",
+    "tests-desktop.log": "070ba91c5f5a975479db899974c168306ba08a155bf96c23806adeda85b98a9e",
+    "python-tests.log": "b8d912143a0adc8e92016fe5291ae35c1c80f4ad5d2b7108b404a3c6b142ef75",
+    "before-cli.log": "24fa749193d1d3ce25047246c4b99bc9f600bc38f1a6058e13f3a634e0b4f646",
+    "real-summary.json": "bdc89876e8f6ef346a9e2cec02a6eaa6fc1730646772925189e11a2ccb7a0485",
+    "cli-import.log": "566b1d5f7291a66822e28a9fd639c21f3eac418820232c100a3d0e109a119b62",
+    "cli-fork.log": "3c773a18685436e81a14952baa3d40b3957a75671ad624fca1661dec42f74ef6",
+    "tool.png": "dca51ed95b8640695476f68a21c25ac9c0e0a6d83ca060454d05cb56a094ebbe",
+    "ruff-check.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "ruff-format.log": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+    "fmt-root.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fmt-desktop.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "not_claimed": [
+    "remote CI",
+    "new external model turn",
+    "DeepSeek context continuation",
+    "existing snapshot refresh",
+    "full migration",
+    "replacement readiness",
+    "commit",
+    "push"
+  ]
+}

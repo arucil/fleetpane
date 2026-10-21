@@ -1,0 +1,209 @@
+diff --git a/packages/app/src/app/_layout.tsx b/packages/app/src/app/_layout.tsx
+index 2e7b449c1..982cc17af 100644
+--- a/packages/app/src/app/_layout.tsx
++++ b/packages/app/src/app/_layout.tsx
+@@ -7,6 +7,7 @@ import { SessionProvider } from "@/contexts/session-context";
+ import { RealtimeProvider } from "@/contexts/realtime-context";
+ import { useSettings } from "@/hooks/use-settings";
+ import { View, ActivityIndicator } from "react-native";
++import { GlobalFooter } from "@/components/global-footer";
+ 
+ function ProvidersWrapper({ children }: { children: React.ReactNode }) {
+   const { settings, isLoading } = useSettings();
+@@ -40,23 +41,26 @@ export default function RootLayout() {
+         <KeyboardProvider>
+           <BottomSheetModalProvider>
+             <ProvidersWrapper>
+-              <Stack
+-                screenOptions={{
+-                  headerShown: false,
+-                  animation: "slide_from_right",
+-                  animationDuration: 250,
+-                  gestureEnabled: true,
+-                  gestureDirection: "horizontal",
+-                  fullScreenGestureEnabled: true,
+-                  animationMatchesGesture: true,
+-                }}
+-              >
+-                <Stack.Screen name="index" />
+-                <Stack.Screen name="orchestrator" />
+-                <Stack.Screen name="agent/[id]" />
+-                <Stack.Screen name="settings" />
+-                <Stack.Screen name="audio-test" />
+-              </Stack>
++              <View style={{ flex: 1 }}>
++                <Stack
++                  screenOptions={{
++                    headerShown: false,
++                    animation: "slide_from_right",
++                    animationDuration: 250,
++                    gestureEnabled: true,
++                    gestureDirection: "horizontal",
++                    fullScreenGestureEnabled: true,
++                    animationMatchesGesture: true,
++                  }}
++                >
++                  <Stack.Screen name="index" />
++                  <Stack.Screen name="orchestrator" />
++                  <Stack.Screen name="agent/[id]" />
++                  <Stack.Screen name="settings" />
++                  <Stack.Screen name="audio-test" />
++                </Stack>
++                <GlobalFooter />
++              </View>
+             </ProvidersWrapper>
+           </BottomSheetModalProvider>
+         </KeyboardProvider>
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index 4776a0634..7d26106be 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -6,7 +6,7 @@ import ReanimatedAnimated, { useAnimatedStyle } from "react-native-reanimated";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { BackHeader } from "@/components/headers/back-header";
+ import { AgentStreamView } from "@/components/agent-stream-view";
+-import { GlobalFooter } from "@/components/global-footer";
++import { AgentInputArea } from "@/components/agent-input-area";
+ import { useSession } from "@/contexts/session-context";
+ 
+ export default function AgentScreen() {
+@@ -60,8 +60,10 @@ export default function AgentScreen() {
+           }
+         />
+ 
+-        {/* Footer */}
+-        <GlobalFooter agentId={id} />
++        {/* Agent Input - will hide itself when realtime is active */}
++        <View style={[styles.inputContainer, { paddingBottom: insets.bottom }]}>
++          <AgentInputArea agentId={id!} />
++        </View>
+       </ReanimatedAnimated.View>
+     </View>
+   );
+@@ -75,6 +77,11 @@ const styles = StyleSheet.create((theme) => ({
+   content: {
+     flex: 1,
+   },
++  inputContainer: {
++    backgroundColor: theme.colors.background,
++    borderTopWidth: theme.borderWidth[1],
++    borderTopColor: theme.colors.border,
++  },
+   errorContainer: {
+     flex: 1,
+     alignItems: "center",
+diff --git a/packages/app/src/app/index.tsx b/packages/app/src/app/index.tsx
+index cc09fa8d7..30e393f03 100644
+--- a/packages/app/src/app/index.tsx
++++ b/packages/app/src/app/index.tsx
+@@ -7,7 +7,6 @@ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { HomeHeader } from "@/components/headers/home-header";
+ import { EmptyState } from "@/components/empty-state";
+ import { AgentList } from "@/components/agent-list";
+-import { GlobalFooter } from "@/components/global-footer";
+ import { CreateAgentModal } from "@/components/create-agent-modal";
+ import { useSession } from "@/contexts/session-context";
+ 
+@@ -46,9 +45,6 @@ export default function HomeScreen() {
+         ) : (
+           <EmptyState onCreateAgent={handleCreateAgent} />
+         )}
+-
+-        {/* Footer */}
+-        <GlobalFooter />
+       </ReanimatedAnimated.View>
+ 
+       {/* Create Agent Modal */}
+diff --git a/packages/app/src/app/orchestrator.tsx b/packages/app/src/app/orchestrator.tsx
+index e9665339c..bb54d8857 100644
+--- a/packages/app/src/app/orchestrator.tsx
++++ b/packages/app/src/app/orchestrator.tsx
+@@ -6,7 +6,6 @@ import ReanimatedAnimated, { useAnimatedStyle } from "react-native-reanimated";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { BackHeader } from "@/components/headers/back-header";
+ import { OrchestratorMessagesView } from "@/components/orchestrator-messages-view";
+-import { GlobalFooter } from "@/components/global-footer";
+ import { useSession } from "@/contexts/session-context";
+ import type { ScrollView } from "react-native";
+ import type { Artifact } from "@/components/artifact-drawer";
+@@ -47,9 +46,6 @@ export default function OrchestratorScreen() {
+           currentAssistantMessage={currentAssistantMessage}
+           onArtifactClick={handleArtifactClick}
+         />
+-
+-        {/* Footer */}
+-        <GlobalFooter />
+       </ReanimatedAnimated.View>
+     </View>
+   );
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 6c1804d67..bf07025fc 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -14,7 +14,7 @@ interface AgentInputAreaProps {
+ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+   const { agents, ws, sendAgentMessage, setAgentMode } = useSession();
+-  const { startRealtime } = useRealtime();
++  const { isRealtimeMode, startRealtime } = useRealtime();
+   const audioRecorder = useAudioRecorder();
+ 
+   const [userInput, setUserInput] = useState("");
+@@ -24,6 +24,11 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+ 
+   const agent = agents.get(agentId);
+ 
++  // Hide when realtime is active - global footer takes over
++  if (isRealtimeMode) {
++    return null;
++  }
++
+   async function handleSendMessage() {
+     if (!userInput.trim() || !ws.isConnected) return;
+ 
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index c7168faf7..9b158513c 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -1,21 +1,17 @@
+ import { View, Pressable } from "react-native";
+-import { usePathname } from "expo-router";
++import { usePathname, useLocalSearchParams } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { AudioLines } from "lucide-react-native";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useSession } from "@/contexts/session-context";
+ import { RealtimeControls } from "./realtime-controls";
+-import { AgentInputArea } from "./agent-input-area";
+ 
+-interface GlobalFooterProps {
+-  agentId?: string;
+-}
+-
+-export function GlobalFooter({ agentId }: GlobalFooterProps) {
++export function GlobalFooter() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+   const pathname = usePathname();
++  const params = useLocalSearchParams();
+   const { isRealtimeMode, startRealtime } = useRealtime();
+   const { ws } = useSession();
+ 
+@@ -33,13 +29,9 @@ export function GlobalFooter({ agentId }: GlobalFooterProps) {
+     );
+   }
+ 
+-  // If on agent screen, show full input area
+-  if (isAgentScreen && agentId) {
+-    return (
+-      <View style={[styles.container, { paddingBottom: insets.bottom }]}>
+-        <AgentInputArea agentId={agentId} />
+-      </View>
+-    );
++  // If on agent screen and realtime is off, hide footer (agent has its own controls)
++  if (isAgentScreen) {
++    return null;
+   }
+ 
+   // For home and orchestrator screens, show centered realtime button

@@ -1,0 +1,240 @@
+{
+  "OpenCodex QA": {
+    "snapshot": {
+      "protocol": 3,
+      "host_id": "c2027720-77a1-441d-85ee-bfce9d456840",
+      "host_pid": 459673,
+      "provider_pid": 459712,
+      "provider_info": {
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "c2027720-77a1-441d-85ee-bfce9d456840",
+        "controller_id": "3cc026f5-382f-44eb-9236-d799c6bbad2c",
+        "generation": 1
+      },
+      "sequence": 27,
+      "operation_ids": [
+        "9f1ee7d4-0581-40e4-b69b-5968d74e6985",
+        "88b0d2ff-5bcb-4cad-a138-6adee63696e5",
+        "f2f3b6a9-562d-4d44-b40e-536355dbae31",
+        "34f6fb5b-d083-48de-a224-711eefb18b82",
+        "2f71eca2-604b-4a3a-a398-18b8bec6b1b5",
+        "ce0e15f5-3b66-400c-a83c-5fed8ed1ee00"
+      ],
+      "journal_total": 6,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    "list": {
+      "message": {
+        "id": "query:71eed156-8ad6-4dec-9140-49c14987f2d9",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/alpha 中文",
+              "historyMode": "paginated",
+              "id": "fixture-thread-1",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/alpha 中文",
+              "historyMode": "paginated",
+              "id": "fixture-thread-2",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/beta space",
+              "historyMode": "paginated",
+              "id": "fixture-thread-3",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/gamma",
+              "historyMode": "paginated",
+              "id": "fixture-thread-4",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/delta",
+              "historyMode": "paginated",
+              "id": "fixture-thread-5",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/save-failure",
+              "historyMode": "paginated",
+              "id": "fixture-thread-6",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "sequence": 28
+    },
+    "recent": []
+  },
+  "DeepSeek QA": {
+    "snapshot": {
+      "protocol": 3,
+      "host_id": "ed45e0b2-59c0-4cc9-95da-47a38eebdb5f",
+      "host_pid": 459757,
+      "provider_pid": 459781,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "ed45e0b2-59c0-4cc9-95da-47a38eebdb5f",
+        "controller_id": "fbcc4862-50bf-4491-bf95-db3402fa7eb6",
+        "generation": 1
+      },
+      "sequence": 8,
+      "operation_ids": [
+        "cc8102ec-641e-4c99-b41d-a0633fe281e0"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    "list": {
+      "message": {
+        "id": "query:d13bbe1e-8091-4cdf-bf8a-38cb8e62fcda",
+        "result": {
+          "data": [
+            {
+              "acpSessionInfo": {
+                "_meta": null,
+                "updatedAt": null
+              },
+              "configOptions": [
+                {
+                  "category": "model",
+                  "currentValue": "model-a",
+                  "id": "model",
+                  "name": "Model",
+                  "options": [
+                    {
+                      "group": "synthetic",
+                      "name": "Synthetic",
+                      "options": [
+                        {
+                          "name": "Synthetic A",
+                          "value": "model-a"
+                        },
+                        {
+                          "name": "Synthetic B",
+                          "value": "model-b"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select"
+                },
+                {
+                  "currentValue": "low",
+                  "id": "reasoning_effort",
+                  "name": "Reasoning effort",
+                  "options": [
+                    {
+                      "name": "Low",
+                      "value": "low"
+                    },
+                    {
+                      "name": "High",
+                      "value": "high"
+                    }
+                  ],
+                  "type": "select"
+                }
+              ],
+              "cwd": "/tmp/fleetpane-recent-qa/other-host",
+              "historyMode": "acp-observed",
+              "historyPaging": true,
+              "id": "5cceede4-9315-48a3-b30c-0c3f755b3a47",
+              "name": null,
+              "preview": "DeepSeek Harness",
+              "status": {
+                "cancelRequested": false,
+                "type": "idle"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "sequence": 9
+    },
+    "recent": [
+      "/tmp/fleetpane-recent-qa/other-host"
+    ]
+  }
+}

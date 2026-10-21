@@ -1,0 +1,79 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted work; no commit/push/release",
+  "source_sha256": {
+    "crates/session/src/wait.rs": "568b60e613a90b0175ca1a7ad4ee9352f3307f328612783783c62fae868c05b3",
+    "crates/session/src/wait/tests.rs": "d8f60661ad9bdd4a512435aa0e15be1e3839652537210376d7a0fae151eb806a",
+    "crates/session/src/lib.rs": "1438e3a64660c2f95d2b0086a9896b8754d6e37f730cc37c31c37eaa9bb4f902",
+    "apps/host/src/main.rs": "35bcd7569f90c790cadd1976cd2bf7bea5bece751e4ad1a4156d8a42dc9b8123",
+    "scripts/wait-smoke.py": "ea331b056d857f34f9eda7267046d7393c4d56a464cf876036fb04af49f80791",
+    "scripts/acp-fixture.py": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711",
+    "scripts/provider-fixture.py": "d5b828cce52e282300b347c11068565fdf881a1c9591e17e06dc6b40e20b71d3",
+    "Cargo.lock": "246df098f8c96c7256e4ca5d5afac1e9b2727e1f52e55ae125701ffa176eb18d",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237"
+  },
+  "host_binary_sha256": "a6375b97b56f583d0e4c244f32c3ae8efb2a3445ac92b6bdc307ccc3dbfa906b",
+  "checks": {
+    "rust_tests": 157,
+    "targeted_wait_tests": 6,
+    "format": "pass",
+    "strict_all_target_clippy": "pass",
+    "host_build": "pass",
+    "desktop_check": "pass",
+    "process": "Codex/ACP fixtures and installed Codex 0.163.0 with one gated loopback SSE response; pass"
+  },
+  "regression": "stale active query reply after completion previously yielded TimedOut; pre-lookup event cursor observes exact completion",
+  "cleanup": [
+    {
+      "run": "process",
+      "host_pids": [
+        2808070,
+        2808052,
+        2807843,
+        2807495
+      ],
+      "providers": [
+        2807506,
+        2807845,
+        2808055,
+        2808072
+      ],
+      "processes_gone_or_zombie": true,
+      "sockets_removed": true
+    },
+    {
+      "run": "process-final",
+      "host_pids": [
+        2816812,
+        2816806,
+        2816750,
+        2816621
+      ],
+      "providers": [
+        2816623,
+        2816752,
+        2816808,
+        2816814
+      ],
+      "processes_gone_or_zombie": true,
+      "sockets_removed": true
+    }
+  ],
+  "limits": [
+    "Unix CLI and protocol; no new native UI",
+    "No external model, hosted CI or release acceptance",
+    "250ms observational polling; expired cursor/lookup conflict/incarnation loss are explicit errors",
+    "No MCP server, curated transcript or measured speedup"
+  ],
+  "artifacts": {
+    "before-race.log": "c9f6072a14bad3704695338f6a6c318f964f2c5b974578dc0535ca46fde89864",
+    "build.log": "c1f2736fbb18e4446c3167aafbbdf8847dc65a00c72b772605f3b1de11aafc6c",
+    "clippy.log": "6f0d0cb34fb56bb66eff3ef5fa4a60c0bbff251d865c5751d9ef3486e2cd213e",
+    "desktop-check.log": "20ef513b007d8308481c6a5b13ed5407e445bf87deabe8127bb6671765b55daa",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "process-final.log": "5bacb2ca1917f7b74c1d9cf16dcd2a6c851dbb5433e9338b9876b808591ba55a",
+    "process.json": "4ffa1d42e5410e819b9862b4ac0ef4cc5feef181576d47660445704fcc421527",
+    "targeted.log": "1a18a0edaaca061cf1e0f1fe2f64c0668228d81ca810ff0e7a5ce615b71fe896",
+    "tests.log": "425b3d774a7022eac8dd3f613991936339eb0db9ba8302f350d23923ee4b2cab"
+  }
+}

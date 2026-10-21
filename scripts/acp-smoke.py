@@ -195,6 +195,8 @@ def main():
             assert wait(ended, "failure settles")["turns"][-1]["status"] == "failed"
             assert snapshot()["provider_pid"] == state["provider_pid"]
             assert snapshot()["host_pid"] == state["host_pid"]
+            before_restart = command("open", identity)["thread"]
+            before_prompts = (root / "prompt-count.txt").read_text()
         finally:
             stop(process)
         process = start()
@@ -202,13 +204,19 @@ def main():
             listed = command("list")["data"]
             assert (
                 listed[0]["id"] == identity
-                and listed[0]["status"]["type"] == "notLoaded"
+                and listed[0]["status"]["type"] == "archived"
             )
+            archived = command("open", identity)["thread"]
+            assert archived["status"]["type"] == "archived"
+            assert archived["turns"] == before_restart["turns"]
+            assert run("send", identity, "must not run before resume").returncode != 0
+            assert (root / "prompt-count.txt").read_text() == before_prompts
             resumed = command("inspect", identity, "--resume")["thread"]
             assert resumed["turns"] == [] and resumed["historyMode"] == "acp-observed"
             assert resumed["configOptions"][0]["currentValue"] == "model-b"
+            assert command("open", identity)["thread"]["turns"] == before_restart["turns"]
             command("send", identity, "after resume")
-            assert len(wait(ended, "resumed prompt")["turns"]) == 1
+            assert len(wait(ended, "resumed prompt")["turns"]) == len(before_restart["turns"]) + 1
         finally:
             stop(process)
         print(
@@ -217,7 +225,7 @@ def main():
                     "provider": "synthetic-acp-v1",
                     "shared_commands_stream_tool_config": "PASS",
                     "exact_permission_handoff_fencing": "PASS",
-                    "cancel_failure_and_resume_without_fake_replay": "PASS",
+                    "cancel_failure_and_resume_preserve_observed_history": "PASS",
                     "same_prompt_id_executes_once": True,
                 }
             )

@@ -1,0 +1,600 @@
+{
+  "codex_fixture": {
+    "completed": {
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "thread_id": "fixture-thread-1",
+      "turn_id": "fixture-thread-1-turn-1",
+      "sequence": 12,
+      "outcome": "finished",
+      "turn": {
+        "id": "fixture-thread-1-turn-1",
+        "status": "completed",
+        "items": [],
+        "error": null
+      }
+    },
+    "attention": {
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "thread_id": "fixture-thread-2",
+      "turn_id": "fixture-thread-2-turn-1",
+      "sequence": 26,
+      "outcome": "attention",
+      "requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ]
+    },
+    "interrupted": {
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "thread_id": "fixture-thread-1",
+      "turn_id": "fixture-thread-1-turn-2",
+      "sequence": 31,
+      "outcome": "finished",
+      "turn": {
+        "id": "fixture-thread-1-turn-2",
+        "status": "interrupted",
+        "items": [],
+        "error": null
+      }
+    },
+    "failed": {
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "thread_id": "fixture-thread-1",
+      "turn_id": "fixture-thread-1-turn-3",
+      "sequence": 44,
+      "outcome": "finished",
+      "turn": {
+        "id": "fixture-thread-1-turn-3",
+        "status": "failed",
+        "items": [],
+        "error": {
+          "message": "Synthetic turn failure"
+        }
+      }
+    },
+    "before_wait": {
+      "protocol": 3,
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "host_pid": 2816621,
+      "provider_pid": 2816623,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+        "controller_id": "89a6647c-4f33-4bf7-b196-06d476228822",
+        "generation": 5
+      },
+      "sequence": 24,
+      "operation_ids": [
+        "92d96066-e971-403e-be6d-306833ae864f",
+        "53e6c510-8f66-4eea-bba6-729cecd41dab",
+        "7178b015-6bc4-4850-8263-d6ae205a9f79",
+        "c888758d-1f6b-426e-aa08-e12db572c176",
+        "53022939-1794-4dcc-b11e-b989ad937cbc"
+      ],
+      "journal_total": 5,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-2"
+          },
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    },
+    "after_stop": {
+      "protocol": 3,
+      "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+      "host_pid": 2816621,
+      "provider_pid": 2816623,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "32cd1058-eef6-4b95-a1bb-a317094ac4e1",
+        "controller_id": "197c55bb-fe70-414a-ae00-528925cdd93b",
+        "generation": 6
+      },
+      "sequence": 33,
+      "operation_ids": [
+        "92d96066-e971-403e-be6d-306833ae864f",
+        "53e6c510-8f66-4eea-bba6-729cecd41dab",
+        "7178b015-6bc4-4850-8263-d6ae205a9f79",
+        "c888758d-1f6b-426e-aa08-e12db572c176",
+        "53022939-1794-4dcc-b11e-b989ad937cbc",
+        "326a914e-c229-4145-a6f3-fea395277a2d"
+      ],
+      "journal_total": 6,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    },
+    "provider_loss_error": "fleetpane-host: unexpected host response: Host fault while waiting: provider output closed\n"
+  },
+  "acp_fixture": {
+    "refusal": {
+      "host_id": "cbb65dd2-6ba9-44d3-9ccf-1893244c42ee",
+      "thread_id": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+      "turn_id": "74a9b37c-3129-45ac-bfb7-987f895794fc",
+      "sequence": 17,
+      "outcome": "finished",
+      "turn": {
+        "id": "74a9b37c-3129-45ac-bfb7-987f895794fc",
+        "status": "completed",
+        "items": [],
+        "error": null,
+        "stopReason": "refusal"
+      }
+    },
+    "permission": {
+      "host_id": "cbb65dd2-6ba9-44d3-9ccf-1893244c42ee",
+      "thread_id": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+      "turn_id": "0a59435f-665b-4c72-a844-0068427ea778",
+      "sequence": 25,
+      "outcome": "attention",
+      "requests": [
+        {
+          "id": 11,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+            "threadId": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-6b94b87f-a36d-471e-ab8c-ecdc58c64057"
+            }
+          }
+        }
+      ]
+    },
+    "unknown_after_restart": {
+      "host_id": "7ed536b4-3766-4a98-92e4-6c5bb1795e59",
+      "thread_id": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+      "turn_id": "e0e2fb8b-7fd2-43c5-b229-d9237183e3ee",
+      "sequence": 2,
+      "outcome": "unknown",
+      "turn": {
+        "id": "e0e2fb8b-7fd2-43c5-b229-d9237183e3ee",
+        "status": "unknown",
+        "items": [],
+        "error": {
+          "message": "Host stopped before ACP prompt settlement. Inspect provider state before manually retrying; nothing was replayed."
+        }
+      }
+    },
+    "host_loss_error": "fleetpane-host: host transport: Connection refused (os error 111)\n",
+    "before_wait": {
+      "protocol": 3,
+      "host_id": "cbb65dd2-6ba9-44d3-9ccf-1893244c42ee",
+      "host_pid": 2816750,
+      "provider_pid": 2816752,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "cbb65dd2-6ba9-44d3-9ccf-1893244c42ee",
+        "controller_id": "b5283a97-cb4f-42fc-bdac-b9a224508d45",
+        "generation": 5
+      },
+      "sequence": 24,
+      "operation_ids": [
+        "6825ecee-bf93-4dff-acb3-a5aeb5d061f6",
+        "7a7d3c0f-b5e7-4c8e-891c-20e44280424e",
+        "22e9c6f8-5d49-43fb-bb91-c5b96d810dae",
+        "71fd80b2-7d00-4f08-b031-e8f7edbf8f9b",
+        "9e2bc6fa-0d49-4d16-a710-0b2727e11ac8"
+      ],
+      "journal_total": 5,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "8b35c053-e5e0-488f-9a08-79320be884c1",
+            "turn_id": "b2ece021-844c-4484-a885-aadc90085555"
+          },
+          {
+            "thread_id": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+            "turn_id": "0a59435f-665b-4c72-a844-0068427ea778"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "8b35c053-e5e0-488f-9a08-79320be884c1",
+            "threadId": "8b35c053-e5e0-488f-9a08-79320be884c1",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-9973c54d-5eac-42d2-b336-1d7f11f2bf35"
+            }
+          }
+        },
+        {
+          "id": 11,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+            "threadId": "bd8e3a0c-94a0-4fc3-9db2-4835c11ea28a",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-6b94b87f-a36d-471e-ab8c-ecdc58c64057"
+            }
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    },
+    "restart_read": {
+      "protocol": 3,
+      "host_id": "7ed536b4-3766-4a98-92e4-6c5bb1795e59",
+      "host_pid": 2816806,
+      "provider_pid": 2816808,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "7ed536b4-3766-4a98-92e4-6c5bb1795e59",
+        "controller_id": "89e463f2-9459-4436-a121-d2f6491df1c5",
+        "generation": 1
+      },
+      "sequence": 1,
+      "operation_ids": [],
+      "journal_total": 7,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    }
+  },
+  "installed_codex": {
+    "provider": "codex-cli 0.163.0",
+    "model": "one gated loopback SSE response; no external model",
+    "result": {
+      "host_id": "37837474-9d8b-4f79-b20c-fb28e16b99da",
+      "thread_id": "01a15b8a-1767-79e0-a335-d9741dd72914",
+      "turn_id": "01a15b8a-17cb-7171-a8ad-b908a079179c",
+      "sequence": 18,
+      "outcome": "finished",
+      "turn": {
+        "id": "01a15b8a-17cb-7171-a8ad-b908a079179c",
+        "status": "completed",
+        "items": [],
+        "error": null
+      }
+    },
+    "before": {
+      "protocol": 3,
+      "host_id": "37837474-9d8b-4f79-b20c-fb28e16b99da",
+      "host_pid": 2816812,
+      "provider_pid": 2816814,
+      "provider_info": {
+        "codexHome": "/tmp/fleetpane-wait-20261021/process-final/real-codex-home",
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneTerminalVersion": 1,
+        "platformFamily": "unix",
+        "platformOs": "linux",
+        "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+      },
+      "owner": {
+        "host_id": "37837474-9d8b-4f79-b20c-fb28e16b99da",
+        "controller_id": "c47cf85e-ba11-4fab-a378-d82dd50c631d",
+        "generation": 2
+      },
+      "sequence": 9,
+      "operation_ids": [
+        "80967b68-4555-4f72-a376-656e8730d111",
+        "9c65ecc7-dd95-4249-ade6-3984f11975f1"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "01a15b8a-1767-79e0-a335-d9741dd72914",
+            "turn_id": "01a15b8a-17cb-7171-a8ad-b908a079179c"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    "after": {
+      "protocol": 3,
+      "host_id": "37837474-9d8b-4f79-b20c-fb28e16b99da",
+      "host_pid": 2816812,
+      "provider_pid": 2816814,
+      "provider_info": {
+        "codexHome": "/tmp/fleetpane-wait-20261021/process-final/real-codex-home",
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneTerminalVersion": 1,
+        "platformFamily": "unix",
+        "platformOs": "linux",
+        "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+      },
+      "owner": {
+        "host_id": "37837474-9d8b-4f79-b20c-fb28e16b99da",
+        "controller_id": "c47cf85e-ba11-4fab-a378-d82dd50c631d",
+        "generation": 2
+      },
+      "sequence": 18,
+      "operation_ids": [
+        "80967b68-4555-4f72-a376-656e8730d111",
+        "9c65ecc7-dd95-4249-ade6-3984f11975f1"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    }
+  },
+  "owned_cleanup": [
+    {
+      "host_pid": 2816812,
+      "exit_code": 0
+    },
+    {
+      "host_pid": 2816806,
+      "exit_code": 0
+    },
+    {
+      "host_pid": 2816750,
+      "exit_code": -9
+    },
+    {
+      "host_pid": 2816621,
+      "exit_code": 0
+    }
+  ],
+  "providers_gone_or_zombie": [
+    2816623,
+    2816752,
+    2816808,
+    2816814
+  ]
+}

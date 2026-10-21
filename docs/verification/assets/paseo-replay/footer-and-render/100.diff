@@ -1,0 +1,107 @@
+commit ce2ca53c5883240ae69c41c593b7b5a8270396cc
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:47:37 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:47:37 2025 +0200
+
+    feat: restore keyboard animation for footer controls
+    
+    Added useReanimatedKeyboardAnimation to GlobalFooter to animate the entire
+    footer (status bar + controls) up when keyboard opens. Uses translateY
+    transform to shift footer above keyboard with smooth native timing.
+    
+    Applied to all footer variants:
+    - Agent screen with registered controls
+    - Realtime mode on non-agent screens
+    - Button mode on non-agent screens
+    
+    Maintains all recent fixes (portal architecture, tight spacing, smooth
+    transitions) while restoring the keyboard avoidance behavior.
+    
+    Implementation by Codex.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index 0f3e2ea4f..3d1368ee1 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -15,6 +15,7 @@ import Animated, {
+   withTiming,
+   useSharedValue,
+ } from "react-native-reanimated";
++import { useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
+ 
+ export function GlobalFooter() {
+   const { theme } = useUnistyles();
+@@ -31,6 +32,8 @@ export function GlobalFooter() {
+   const showAgentControls = isAgentScreen && hasRegisteredControls;
+ 
+   const transition = useSharedValue(isRealtimeMode ? 1 : 0);
++  const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
++  const bottomInset = insets.bottom;
+ 
+   useEffect(() => {
+     if (showAgentControls) {
+@@ -38,6 +41,18 @@ export function GlobalFooter() {
+     }
+   }, [isRealtimeMode, showAgentControls]);
+ 
++  const keyboardAnimatedStyle = useAnimatedStyle(
++    () => {
++      "worklet";
++      const absoluteHeight = Math.abs(keyboardHeight.value);
++      const shift = Math.max(0, absoluteHeight - bottomInset);
++      return {
++        transform: [{ translateY: -shift }],
++      };
++    },
++    [bottomInset],
++  );
++
+   const realtimeAnimatedStyle = useAnimatedStyle(() => {
+     return {
+       opacity: transition.value,
+@@ -54,13 +69,14 @@ export function GlobalFooter() {
+ 
+   if (showAgentControls) {
+     return (
+-      <View
++      <Animated.View
+         style={[
+           styles.container,
+           {
+             paddingBottom: insets.bottom,
+             height: FOOTER_HEIGHT + insets.bottom,
+           },
++          keyboardAnimatedStyle,
+         ]}
+       >
+         <View style={styles.content}>
+@@ -75,7 +91,7 @@ export function GlobalFooter() {
+             <RealtimeControls />
+           </Animated.View>
+         </View>
+-      </View>
++      </Animated.View>
+     );
+   }
+ 
+@@ -93,6 +109,7 @@ export function GlobalFooter() {
+             paddingBottom: insets.bottom,
+             height: FOOTER_HEIGHT + insets.bottom,
+           },
++          keyboardAnimatedStyle,
+         ]}
+         entering={FadeIn.duration(400)}
+         exiting={FadeOut.duration(250)}
+@@ -113,6 +130,7 @@ export function GlobalFooter() {
+           paddingBottom: insets.bottom,
+           height: FOOTER_HEIGHT + insets.bottom,
+         },
++        keyboardAnimatedStyle,
+       ]}
+     >
+       <View style={styles.centeredButtonContainer}>

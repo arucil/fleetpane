@@ -1,0 +1,26 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+    Finished `test` profile [unoptimized] target(s) in 2.42s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_runtime-5aec065a82877275)
+
+running 2 tests
+
+thread 'acp::tests::session_info_is_idle_metadata_and_preserves_omitted_fields' (295305) panicked at crates/runtime/src/acp.rs:989:119:
+called `Result::unwrap()` on an `Err` value: "ACP emitted conversation activity without a Host prompt; autonomous turns need a separate boundary contract"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test acp::tests::session_info_is_idle_metadata_and_preserves_omitted_fields ... FAILED
+
+thread 'acp::tests::session_info_during_prompt_does_not_create_or_split_history' (295304) panicked at crates/runtime/src/acp.rs:1023:9:
+assertion `left == right` failed
+  left: 4
+ right: 2
+test acp::tests::session_info_during_prompt_does_not_create_or_split_history ... FAILED
+
+failures:
+
+failures:
+    acp::tests::session_info_during_prompt_does_not_create_or_split_history
+    acp::tests::session_info_is_idle_metadata_and_preserves_omitted_fields
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-runtime --lib`

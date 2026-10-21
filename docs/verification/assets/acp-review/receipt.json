@@ -1,0 +1,314 @@
+{
+  "verified_at": "2026-10-20T19:36:53.555575+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "branch": "feat/session-host-foundation",
+  "worktree": "uncommitted; no commit or push",
+  "provider": "private deterministic ACP and Codex fixtures; no real model request",
+  "tests": {
+    "root": 132,
+    "desktop": 9,
+    "python_history": 13,
+    "clippy": "root, desktop, Windows GNU cross-target; warnings denied"
+  },
+  "history": {
+    "first_ordinal": 1,
+    "last_ordinal": 77,
+    "last_revision": "0893a9dc3313b6dbb9abdb69521953a53b353573",
+    "next_revision": "a930c4156a68f00a0fd1ca883aeee41f60a2d678",
+    "next_ordinal": 78
+  },
+  "sources": {
+    "crates/session/src/acp.rs": "df8c4a36edc5b248bd69a3022b86a8285e77931f3f5e510e95bc6b4edb174354",
+    "apps/desktop/src/conversation_item.rs": "318ae3e9ea225789283e7367dee1b9c58af520651efcf9988403e1ba4c9a0b18",
+    "apps/desktop/src/host_view.rs": "458d066f2a612fc234236ba4f48c347aad20be92385765ab88c9d941b9c681dd",
+    "scripts/acp-fixture.py": "02b4aadf07b70665ddf4fc8405ac58eb27795da23a584362ae20bf9a76ee31a0",
+    "scripts/acp-review-smoke.py": "a0e3b7f8d8a08b6ed42345d7143d5b5396c0ee3c9b1b6998463b4ccd37b1e56d",
+    ".github/workflows/ci.yml": "8dd5ea900b7a257fd0c0958013ee778e4ed3c549f62cc10bf4cea57523fe05c2",
+    "docs/reference/paseo-replay.json": "f23bb17ea282afe3c4ef1117cb357413fe0dd3e38a328365ecd4085985c8ad09",
+    "docs/reference/paseo-replay.md": "0080c378b2586ef3e57c2125f49eb1e4409ad5fc677754152487e4f7a7adcbaf",
+    "README.md": "455b6c8dd1670699938f20ff2b09fe8596f201302d8fd55b042d6bd7aaa2b5f7",
+    "docs/status.md": "7c37806f2ba0c9cd6be5ffa0df1a7f52b1b83e4408630228fb88047526779449",
+    "docs/parity.md": "35d6c4f98795ca5455f7501b3cb2e4445988e2bea69b9891ed85ec5dacdc5470",
+    "docs/adr/0037-acp-permission-review.md": "760d4a642aa258ef8eb36ead7cd2de852c9c5cd70413b44d813c93c1c535a283",
+    "docs/verification/2026-10-21-acp-review.md": "deb3193880689af55ebd0b0df9acd0d5a58ce7e7bc68baeeb10bf12b0958abdf"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "0236a410d9acac27026bbd85b868a798599dce5593e9ae6afb267ee3096d7824",
+    "apps/desktop/target/debug/fleetpane-desktop": "4692df0b31d1f647e06beb6ddf8ecc1119237b9e00edbaa47e5af152a78a4120"
+  },
+  "cleanup_processes": {
+    "402991": true,
+    "402993": true,
+    "403035": true,
+    "403036": true,
+    "403055": true,
+    "403078": true,
+    "409468": true,
+    "409470": true,
+    "409480": true,
+    "414392": true,
+    "418759": true,
+    "424265": true,
+    "431868": true,
+    "439428": true,
+    "439430": true,
+    "439768": true
+  },
+  "workspace": {
+    "id": "fleetpane-acp-review-20261021",
+    "stopped": true
+  },
+  "native": {
+    "host_id": "22a6d1ab-8184-4b72-8eb7-daaa07390e0b",
+    "provider_pid": 409470,
+    "main_apps": [
+      424265,
+      431868
+    ],
+    "question_app": 439768,
+    "request_copy_and_replacement_exact": true,
+    "draft_copy_exact": true,
+    "native_choices": [
+      "reject-one",
+      "allow-one",
+      "cancelled"
+    ],
+    "other_session_usable_after_stop": true,
+    "native_codex_question_submitted": true
+  },
+  "acceptance_limits": [
+    "private fixtures; no new real DeepSeek/OpenCodex acceptance",
+    "Linux hidden software rendering; no performance or native Windows claim",
+    "no remote CI, durable permission audit, Host takeover or full parity"
+  ],
+  "artifacts": {
+    "before-pending.json": {
+      "bytes": 4990,
+      "sha256": "8f3d71fb47da1225c74109a1a80ad58f6e855976983300bac02a3b160ea6742b"
+    },
+    "before.png": {
+      "bytes": 136609,
+      "sha256": "4a3d0efc2acbe7c6b463cdc1f76a9e00c9819a82cc768fa43df65e132f13e9bc"
+    },
+    "boolean.png": {
+      "bytes": 148258,
+      "sha256": "7317c9e32e853eb364071e2237322fd5592079e570bcc29216c15aa8c90a48f1"
+    },
+    "build.log": {
+      "bytes": 142,
+      "sha256": "6c321587de8ab87d710c734cacee4127794a6a3ade05805f0e97c3d2facdbc71"
+    },
+    "cancel.log": {
+      "bytes": 342,
+      "sha256": "842af69a547189afdb80a17d3edf34aa5c9e92b549eb031144e591b47b9592ba"
+    },
+    "cancelled.png": {
+      "bytes": 131690,
+      "sha256": "2a99f8585cb5b77cfd2de1086046f042695f5d43a359ae99bc523f85cac81ef7"
+    },
+    "cleanup.json": {
+      "bytes": 290,
+      "sha256": "18b90250382788ac5014421dde79f84be208ce9e73112e365b92e0edd7048415"
+    },
+    "clippy.log": {
+      "bytes": 232,
+      "sha256": "cab59a516191d2fd20805eaa288519a21e365980cb53d8eb27a119419a89f824"
+    },
+    "codex.log": {
+      "bytes": 258,
+      "sha256": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0"
+    },
+    "desktop-build.log": {
+      "bytes": 148,
+      "sha256": "71c346eddf723a704194104a8918c26a7b9a43a53030eaf3980bb7b5df1dd4a5"
+    },
+    "desktop-clippy.log": {
+      "bytes": 148,
+      "sha256": "c691a9d17cfa2cb98cf7cd4ec49bd492d5002ca840e8eb8778ce9122254cc413"
+    },
+    "desktop-tests.log": {
+      "bytes": 1185,
+      "sha256": "781f88c0fbc7031c74727a54aa6d5706f8e3726e12e855d1a0baf2a21ef16417"
+    },
+    "fields.png": {
+      "bytes": 144532,
+      "sha256": "95464b8295c8f903213a05ee0e320db8bbc2f51a2ff4f4e3fd72c9cb26bf850c"
+    },
+    "history-tests.log": {
+      "bytes": 112,
+      "sha256": "f79f24bdd1c880dbddfc3248b60dc298887517669956c3343b8842e2db4492e0"
+    },
+    "info.log": {
+      "bytes": 353,
+      "sha256": "d1be4deeaa05f88781c8b86027848f0a87eab53b8d35be4a9cfd83bd5bf8cdd9"
+    },
+    "lifecycle.log": {
+      "bytes": 224,
+      "sha256": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873"
+    },
+    "native-app-403078.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-409480.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-414392.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-418759.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-424265.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-431868.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-439768.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-before-close-pending.json": {
+      "bytes": 10236,
+      "sha256": "d1de8c5a12fadc0d01461c5ab2c62ccfbc9b4331adf5e2dfbd4334f11ec06b83"
+    },
+    "native-boolean-pending.json": {
+      "bytes": 5211,
+      "sha256": "f067d8c99808a584b1f82f0ca35e1e9d6b78639224afe40f2d75f4f27252bdb3"
+    },
+    "native-cancelled-review.json": {
+      "bytes": 4432,
+      "sha256": "3edfb414cb762440ed7c5ccfec33839465db1ac22feda765c1f199a74ed8bbcd"
+    },
+    "native-clipboard-and-closes.json": {
+      "bytes": 15861,
+      "sha256": "af77919116c92f716cbd9f47dbb535841c993f7e426436ea58eadf44ce7be33d"
+    },
+    "native-final-before-answer.json": {
+      "bytes": 5920,
+      "sha256": "7754bbfcc4e3517ae75d6fb865ce4b0b48d4d959ede47f1426f1b451231ef102"
+    },
+    "native-final-receipt.json": {
+      "bytes": 3723,
+      "sha256": "72c2b63e8ac187350d6367eb3f437eab8da483804cf015a00adfa34c1a4d0386"
+    },
+    "native-init-receipt.json": {
+      "bytes": 4978,
+      "sha256": "f0037000e49ab500cf26f4c5ba4754f99a8184c2d5fed6da70fe66495715759b"
+    },
+    "native-other-receipt.json": {
+      "bytes": 5920,
+      "sha256": "789c32ae367f01c42c220aee10c30517366953a95b7ef967814ab815a6db22c7"
+    },
+    "native-plan-pending.json": {
+      "bytes": 10236,
+      "sha256": "eced242b51b1661e84972575fbd1859db4befb485484e8d9ad62b3f075f24424"
+    },
+    "native-prompts.txt": {
+      "bytes": 33,
+      "sha256": "25f076461d231b7f8f77145ba6265ae4b285db00c7440eb1daa988ee6a37c3b1"
+    },
+    "native-qa-driver.py": {
+      "bytes": 2931,
+      "sha256": "ff0d958f39a39537c832b70f09de333c66ba571a7dbf40fc9d024fba83e7c8b2"
+    },
+    "native-question-driver.py": {
+      "bytes": 2929,
+      "sha256": "4457a2879c13a7410aa2f625e1eb22430e94e5afb44d3c22ace03aaa87dd24d2"
+    },
+    "native-question-submitted.json": {
+      "bytes": 1861,
+      "sha256": "30d8bede1e8086e5c340832dc0b19201c7979c7f098096754cb5fae7b8e97f4f"
+    },
+    "native-replacement-pending.json": {
+      "bytes": 10236,
+      "sha256": "3684cd18eae0015b684009e408d6bf44327ea7ef641be8ee3a5b54b52ac7a423"
+    },
+    "order.log": {
+      "bytes": 306,
+      "sha256": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e"
+    },
+    "other-final.png": {
+      "bytes": 144350,
+      "sha256": "1829bbb8ba2b21ab78a7cff62d011b574731f2472dec678505696cc640b3a461"
+    },
+    "other.png": {
+      "bytes": 150367,
+      "sha256": "a5957c7038f5e2255913b7baeed0b59ccd9a65ccf40f8ea7204be00c6900ea16"
+    },
+    "plan-tail.png": {
+      "bytes": 148864,
+      "sha256": "eabca6a13da5e572e40eaef6074b91373566fbd1be3cf346f8c36448e21ab205"
+    },
+    "plan.png": {
+      "bytes": 139547,
+      "sha256": "c6c41eccccfb2a49674115a23bd5feaa4261eb5ed0aac1796c145e4d73cf2fb2"
+    },
+    "question-answer.png": {
+      "bytes": 111211,
+      "sha256": "f815fcdebe0bd2a35a39c677fb4273a39efddcb6b6d35855adf0d280570f3438"
+    },
+    "question-page1.png": {
+      "bytes": 123849,
+      "sha256": "a132cbabf8ebee91a018e3e6b7cd907e06ca8ab48ffafa04578165eba809e570"
+    },
+    "question-submitted.png": {
+      "bytes": 119372,
+      "sha256": "7cbe2b6e378d5570c635166565c9f00a4a2c6c4c4a357d595aca78981f51cba2"
+    },
+    "replacement-steady.png": {
+      "bytes": 138226,
+      "sha256": "36b6ea0cb8a7f90027920deba6d84ade92377ef1d973178738e69658895bb586"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-0-answer.json": {
+      "bytes": 62,
+      "sha256": "25588872f6877c7b89fe6271af451726b3408b868d73627994a240e0cb6d09da"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-0.json": {
+      "bytes": 780,
+      "sha256": "028787a065dedaf03368aa7c9fa08a3b324d2aaddfb887d863940989563c53dd"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-1-answer.json": {
+      "bytes": 61,
+      "sha256": "c56a42b642284b084f08d5263748ee59baa252a2c0318d485d279fa81b38dcfb"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-1.json": {
+      "bytes": 6312,
+      "sha256": "d33e7e4fdf2479a2a9bd59a924b614801feb65e376b15fb5b854417af027b899"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-2-answer.json": {
+      "bytes": 37,
+      "sha256": "eb13dd98dba01fd53412b64e656264d04facc0729b90f8c8289b860f034d2ec7"
+    },
+    "review-91825e8b-2c7f-4e85-ab61-a8744ccc78e8-2.json": {
+      "bytes": 377,
+      "sha256": "4e1449fc938fe42671a907d0eca757ebee1a716d9a49e9c24ab601f199165f37"
+    },
+    "small-final-scrolled.png": {
+      "bytes": 112732,
+      "sha256": "404b4be8b827d1dbe9e577627f1ec0de9203ae1936eace9601937c8b6fd01d35"
+    },
+    "smoke.log": {
+      "bytes": 337,
+      "sha256": "42cae969dafa018475d8680d419953a9b2c531b5c3301a803a31c3a0ef71f525"
+    },
+    "tests.log": {
+      "bytes": 13287,
+      "sha256": "efdec4f032e41aa6534a71c2d6fe21c0513b3ebcdde3ba6b296a5be7261987df"
+    },
+    "tools.log": {
+      "bytes": 334,
+      "sha256": "02085376330ba97b7413ea29939f37b378335c83b07dce7e031963da1da71ea8"
+    },
+    "windows-clippy.log": {
+      "bytes": 232,
+      "sha256": "f296ad6d0d7469eabff2294478792454d72f0f64d6aafc53689b8f518b3accb2"
+    }
+  }
+}

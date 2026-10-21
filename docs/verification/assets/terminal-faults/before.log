@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/terminal-smoke.py", line 432, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/terminal-smoke.py", line 399, in main
+    assert terminal("close", fault_terminal["id"], mutation=True)["closed"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/terminal-smoke.py", line 87, in terminal
+    return cli(
+           ^^^^
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/terminal-smoke.py", line 43, in cli
+    assert (result.returncode == 0) == ok, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (('terminal', PosixPath('/tmp/fp-terminal-4skikrn2/codex/state'), 'dbcd2726-d0b2-4fbf-b938-121cd3430677', '--take-control', 'close', 'c43f2c8d-7b18-4772-b639-92135df98f2b'), '', 'fleetpane-host: provider_unavailable: provider output closed\n')

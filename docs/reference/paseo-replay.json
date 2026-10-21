@@ -1,0 +1,2944 @@
+{
+  "version": 1,
+  "ordering": "git rev-list --reverse --topo-order TARGETS; parent before child; ordinals valid only for these captured tips",
+  "roots": [
+    "fee0f4fd285d2549ddad8d265fd4df69d1740bd0"
+  ],
+  "captured_sources": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+    }
+  ],
+  "indexed_unique_commits": 6187,
+  "review_batch": {
+    "first_ordinal": 1,
+    "last_ordinal": 193,
+    "last_revision": "9feec81047d5ff221ec6f90e22775199556690ad",
+    "next_revision": "95bacf8fc7dd7ba86b7442011c624109e5315174",
+    "next_ordinal": 194
+  },
+  "entries": [
+    {
+      "ordinal": 1,
+      "revision": "fee0f4fd285d2549ddad8d265fd4df69d1740bd0",
+      "date": "2025-10-13T14:03:54+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/mcp-server/src/index.ts",
+        "packages/mcp-server/src/tmux.ts",
+        "packages/mcp-server/src/http-server.ts",
+        "packages/web/app/hooks/use-webrtc-voice.ts",
+        "packages/web/app/api/session/route.ts",
+        "packages/web/app/api/auth/route.ts"
+      ],
+      "finding": "Original tmux MCP terminal control and WebRTC voice client. Shell commands and captured text are distinct from later structured provider events.",
+      "fleetpane_action": "terminal-foundation"
+    },
+    {
+      "ordinal": 2,
+      "revision": "cd3413982ab183cf007123066b1fe013ed93659d",
+      "date": "2025-10-13T14:18:15+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/package.json",
+        "vercel.json"
+      ],
+      "finding": "Web build dependency and Vercel monorepo build configuration; no new native workflow.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 3,
+      "revision": "09a9dad1c4db6194987012ce834aca817d6bc8e2",
+      "date": "2025-10-13T14:26:02+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/tsconfig.json"
+      ],
+      "finding": "Actual diff changes TypeScript module resolution and strict build settings; vague subject is not a feature description.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 4,
+      "revision": "205307da22449e65445b65d8cb42a84e3a276123",
+      "date": "2025-10-13T14:33:01+02:00",
+      "category": "branding",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "packages/web/package.json",
+        "vercel.json"
+      ],
+      "finding": "Rename package metadata and adjust deployment configuration. Keep Fleetpane independent.",
+      "fleetpane_action": "reference-only"
+    },
+    {
+      "ordinal": 5,
+      "revision": "89b096f3f6ef902499d27fca39e91b3896c679f2",
+      "date": "2025-10-13T14:42:08+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/next.config.js"
+      ],
+      "finding": "Remove the web asset URL prefix. Native packaging has a different boundary.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 6,
+      "revision": "ad98a3f265b4497134d778ff719c34a4e67bb5f5",
+      "date": "2025-10-13T14:47:16+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "vercel.json"
+      ],
+      "finding": "Remove the root Vercel config; not a product capability.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 7,
+      "revision": "31b7dea2a73a1b45613e0d28559cf9212d254d99",
+      "date": "2025-10-13T14:52:37+02:00",
+      "category": "dependency-metadata",
+      "inspection": "changed-path-inventory",
+      "paths_inspected": [
+        "package-lock.json"
+      ],
+      "finding": "Lockfile rename/dependency churn identified from the changed-path inventory; package payloads not audited.",
+      "fleetpane_action": "metadata-only"
+    },
+    {
+      "ordinal": 8,
+      "revision": "255501f68a8c82ca014179f1157605b1b33afb96",
+      "date": "2025-10-13T14:54:44+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "packages/web/package.json"
+      ],
+      "finding": "Move/add the Tailwind native-build dependency in manifests; no terminal behavior change.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 9,
+      "revision": "0789bdc8c621cd745494b40ae8747919bc6deb69",
+      "date": "2025-10-13T15:00:10+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        ".tool-versions",
+        "package-lock.json"
+      ],
+      "finding": "Pin Node toolchain and update platform package records; no Rust equivalent dependency needed.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 10,
+      "revision": "d1487bdd03312b4ac331a9161e68c08efff5956a",
+      "date": "2025-10-13T15:01:48+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/package.json"
+      ],
+      "finding": "Declare the CSS engine dependency in the web package.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 11,
+      "revision": "0eedb4ddd0e3b4bfb23cc58ee87959443b1b6e71",
+      "date": "2025-10-13T15:02:10+02:00",
+      "category": "dependency-metadata",
+      "inspection": "changed-path-inventory",
+      "paths_inspected": [
+        "package-lock.json"
+      ],
+      "finding": "Lockfile-only platform binary records identified; package payloads not audited.",
+      "fleetpane_action": "metadata-only"
+    },
+    {
+      "ordinal": 12,
+      "revision": "95363e1802821199fa25e68c608f178c74d6e6b4",
+      "date": "2025-10-13T15:03:48+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/vercel.json"
+      ],
+      "finding": "Despite the generated subject claiming no staged change, the commit adds a web Vercel configuration.",
+      "fleetpane_action": "web-build-only"
+    },
+    {
+      "ordinal": 13,
+      "revision": "5dd1aae70dd2858c27a50e9860bf39a4244475de",
+      "date": "2025-10-13T15:29:38+02:00",
+      "category": "branding",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/mcp-server/src/index.ts",
+        "packages/mcp-server/package.json",
+        "package.json"
+      ],
+      "finding": "Rename MCP server/tools descriptions and package integration; retain workflow semantics rather than historical names.",
+      "fleetpane_action": "reference-only"
+    },
+    {
+      "ordinal": 14,
+      "revision": "b70c0cfc73ba9bdae7a06cc853e77da2951b5d3b",
+      "date": "2025-10-14T11:54:17+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/app/api/session/route.ts",
+        "packages/web/app/hooks/use-livekit-voice.ts",
+        "packages/agent-python/agent.py"
+      ],
+      "finding": "Web session minting changes from OpenAI realtime to LiveKit; adds Python agent and explicit room/media cleanup in the client.",
+      "fleetpane_action": "voice-later-per-prd"
+    },
+    {
+      "ordinal": 15,
+      "revision": "1bd3852659b3d807bd7acf80be70f306e532adbf",
+      "date": "2025-10-14T11:57:50+02:00",
+      "category": "guidance",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        ".claude/CLAUDE.md",
+        "README.md",
+        "packages/mcp-server/README.md"
+      ],
+      "finding": "Add contributor guidance and remove READMEs. Historical agent instructions are data, not Fleetpane instructions.",
+      "fleetpane_action": "guidance-only"
+    },
+    {
+      "ordinal": 16,
+      "revision": "605e5c3e87fb21f515780822a1889ad14e42a617",
+      "date": "2025-10-14T12:22:35+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/mcp-server/src/index.ts",
+        "packages/mcp-server/src/tmux.ts"
+      ],
+      "finding": "Flatten exposed tmux hierarchy to named terminals under a default session; list/create/read/rename/close remain separate operations. Initial cwd is sent as a cd command with a delay at this stage.",
+      "fleetpane_action": "terminal-foundation"
+    },
+    {
+      "ordinal": 17,
+      "revision": "f3b8cc689d364cd04073a8f54690b7c842579b7a",
+      "date": "2025-10-14T13:11:57+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/mcp-server/src/index.ts",
+        "packages/mcp-server/src/tmux.ts"
+      ],
+      "finding": "Pass cwd at terminal creation instead of typing cd; add current-command metadata and preserve manual terminal names. Historical process probes and swallowed errors are not adopted.",
+      "fleetpane_action": "terminal-foundation"
+    },
+    {
+      "ordinal": 18,
+      "revision": "1bceb3cb4bf3b9a1b8130521d46fef1527af31f0",
+      "date": "2025-10-14T17:46:29+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/mcp-server/src/index.ts",
+        "packages/mcp-server/src/tmux.ts"
+      ],
+      "finding": "Resolve terminal display names, reject duplicate names and expand home paths on creation. Keep stable typed IDs beneath mutable labels in Fleetpane.",
+      "fleetpane_action": "terminal-foundation"
+    },
+    {
+      "ordinal": 19,
+      "revision": "dabcf63ebc527289a64345119d58662b272f1065",
+      "date": "2025-10-14T18:00:08+02:00",
+      "category": "diagnostics",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/web/app/api/session/route.ts"
+      ],
+      "finding": "Adds LiveKit credential/token-setup debug fields to logging; do not reproduce secret logging. No new user workflow.",
+      "fleetpane_action": "do-not-port-logging"
+    },
+    {
+      "ordinal": 20,
+      "revision": "40b199e32909412ef128e935c3b130fbaf910828",
+      "date": "2025-10-19T15:41:42+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/daemon/terminal-manager.ts",
+        "packages/voice-assistant/src/server/agent/orchestrator.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "Adds local TypeScript voice/text orchestrator and in-memory conversations; terminal manager still uses the global voice-dev session. Global broadcasts and terminal namespace do not establish conversation isolation.",
+      "fleetpane_action": "host-owned-pty-foundation"
+    },
+    {
+      "ordinal": 21,
+      "revision": "c3049b8fa0b7d4c7ffc00d813f7922bb890bcc0c",
+      "date": "2025-10-19T16:23:13+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/index.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "Despite the Prompt is too long subject, removes old Python/MCP/web packages and consolidates the TypeScript app; switches LLM tool schema/provider and adjusts event forwarding. Historical instruction binary and deleted dependency payloads were not audited.",
+      "fleetpane_action": "preserve-rust-provider-adapters"
+    },
+    {
+      "ordinal": 22,
+      "revision": "81bdba0d48ee05c6291905ceeb9ddf869b862492",
+      "date": "2025-10-19T16:57:25+02:00",
+      "category": "configuration",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/orchestrator.ts",
+        "packages/voice-assistant/src/server/agent/stt-openai.ts",
+        "packages/voice-assistant/src/server/agent/tts-openai.ts"
+      ],
+      "finding": "Vite/OpenAI service and transcription settings evolve alongside user-message broadcasting; do not recreate web build churn in the native engine.",
+      "fleetpane_action": "voice-prd-p2"
+    },
+    {
+      "ordinal": 23,
+      "revision": "d7a387d911f5f8ed9f1b281ab3681cbf545aa407",
+      "date": "2025-10-19T17:22:43+02:00",
+      "category": "streaming",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/agent/orchestrator.ts"
+      ],
+      "finding": "Moves to ordered full-stream text/tool events, flushes text at tool boundaries, and prepares speech segments. Error formatting no longer assumes every thrown value has message.",
+      "fleetpane_action": "preserve-ordered-structured-items"
+    },
+    {
+      "ordinal": 24,
+      "revision": "0bfda11c1f0b2a7faed89a712bdfc0c13be1a5ea",
+      "date": "2025-10-19T23:23:32+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/ui/components/ToolCallCard.tsx",
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/agent/tts-manager.ts"
+      ],
+      "finding": "Adds expandable tool input/result cards, explicit call IDs, cancellation signals and playback acknowledgements; Playwright MCP integration is a separate extension concern.",
+      "fleetpane_action": "existing-tool-cards-and-explicit-identity"
+    },
+    {
+      "ordinal": 25,
+      "revision": "853a73cc05447528beaf7702a04c1a7cc137ff40",
+      "date": "2025-10-20T00:04:35+02:00",
+      "category": "lifecycle",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/daemon/tmux.ts",
+        "packages/voice-assistant/src/server/daemon/terminal-manager.ts"
+      ],
+      "finding": "Replaces a one-second wait with terminal-content settling (one second quiet, polling every 100 ms); removes a catch that fabricated empty terminal metadata. Quiet screen content is not process completion.",
+      "fleetpane_action": "use-pty-exit-status-and-byte-cursors"
+    },
+    {
+      "ordinal": 26,
+      "revision": "07dae1c520f473ccce6c5a60cf3ec4d3499d64a3",
+      "date": "2025-10-20T00:05:29+02:00",
+      "category": "error-handling",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/orchestrator.ts",
+        "packages/voice-assistant/src/ui/components/ToolCallCard.tsx",
+        "packages/voice-assistant/src/ui/App.tsx"
+      ],
+      "finding": "Propagates tool and stream errors and associates failed state with toolCallId; tool errors should remain inspectable rather than appearing completed.",
+      "fleetpane_action": "retain-visible-errors-and-receipts"
+    },
+    {
+      "ordinal": 27,
+      "revision": "65c6f81605347ee4a77a7e90e5b9772314eadbde",
+      "date": "2025-10-20T00:18:41+02:00",
+      "category": "lifecycle",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/orchestrator.ts",
+        "packages/voice-assistant/src/server/agent/tts-manager.ts",
+        "packages/voice-assistant/src/ui/lib/audio-playback.ts"
+      ],
+      "finding": "Separates assistant-history append from speech playback and rejects interrupted audio promises. The stream-error branch still depends on accumulated response data; source intent is not proof that every partial response survives.",
+      "fleetpane_action": "separate-content-retention-from-playback"
+    },
+    {
+      "ordinal": 28,
+      "revision": "14230c681f8e1cf3d738392dbb6222df4a533a97",
+      "date": "2025-10-20T11:19:16+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/types.ts",
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/agent/orchestrator.ts",
+        "packages/voice-assistant/src/server/agent/playwright-mcp.ts",
+        "packages/voice-assistant/src/ui/components/ArtifactDrawer.tsx",
+        "packages/voice-assistant/src/ui/lib/audio-realtime.ts"
+      ],
+      "finding": "Adds realtime VAD, typed markdown/code/image/diff artifacts and lazy Playwright tools. Artifact source resolution can read files or execute command strings; do not copy these unbounded and unconstrained boundaries.",
+      "fleetpane_action": "keep-native-rich-content; voice-P2; diff-deferred"
+    },
+    {
+      "ordinal": 29,
+      "revision": "13b5fab4568220f85616cd3c79785b5726719f7e",
+      "date": "2025-10-20T12:47:09+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/playwright-mcp.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts",
+        "packages/voice-assistant/src/ui/lib/audio-realtime.ts",
+        "packages/voice-assistant/vite.config.ts"
+      ],
+      "finding": "Copies VAD/ONNX assets, changes speech thresholds and Playwright image handling, and replaces the aborted controller per request. New input can abort existing work in this early voice design.",
+      "fleetpane_action": "voice-P2; preserve-explicit-turn-ownership"
+    },
+    {
+      "ordinal": 30,
+      "revision": "845cfca6ebea41213660f210f034de4dd2d474d9",
+      "date": "2025-10-20T13:12:55+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/index.ts",
+        "packages/voice-assistant/src/server/types.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "Adds idle/transcribing/LLM phases, abort_request, pending audio segments and a ten-second buffer timeout. Disconnect clears timers and buffers; this is audio segmentation, not terminal command completion.",
+      "fleetpane_action": "voice-P2; keep-bounded-independent-domains"
+    },
+    {
+      "ordinal": 31,
+      "revision": "e79a92813b6caf2f65f26fce1672fcc929e18369",
+      "date": "2025-10-20T14:10:38+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/terminal-mcp/index.ts",
+        "packages/voice-assistant/src/terminal-mcp/server.ts"
+      ],
+      "finding": "The schema-wrapper subject understates the change: a separately constructible TerminalManager-backed MCP server with structured create/list/capture/text/keys/rename/kill tools is also added. Names and quiet-screen settling still define this early API.",
+      "fleetpane_action": "share-typed-terminal-engine; no-MCP-server-added"
+    },
+    {
+      "ordinal": 32,
+      "revision": "30fc716b02b2a9e99656c9d1eee9c221308d03ba",
+      "date": "2025-10-20T14:23:54+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/index.ts"
+      ],
+      "finding": "Moves terminal MCP under server, removes the direct daemon manager and test HTTP endpoint, connects client/server with InMemoryTransport and merges lazily cached tool sets. Rename metadata was checked; dependencies and copied manager payloads were not re-audited.",
+      "fleetpane_action": "retain-Rust-Session-Host-and-shared-command-boundary"
+    },
+    {
+      "ordinal": 33,
+      "revision": "8365fb889b07b61f178c26b2e8a55c90e95d6654",
+      "date": "2025-10-20T14:29:47+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "ClientSession consolidates per-client abort, phase, audio buffers and timers previously spread across maps. Socket close/error calls cleanup and deletes its conversation. Fleetpane must preserve Host-owned resources across controller disconnect rather than adopt that early lifetime.",
+      "fleetpane_action": "independent-terminal-fault-domains"
+    },
+    {
+      "ordinal": 34,
+      "revision": "af67235997052b435ab3c2db1a9e50b0991fe8ab",
+      "date": "2025-10-20T15:28:28+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/messages.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "Extracts transport-independent Session orchestration, in-memory messages, per-session STT/TTS managers and discriminated Zod envelopes. Session owns cancellation/cleanup; socket callback transports messages. In-memory history and comments about partial replies are not durable recovery proof.",
+      "fleetpane_action": "retain-shared-Rust-engine; independent-terminal-fault-domains"
+    },
+    {
+      "ordinal": 35,
+      "revision": "c5b24d3dfc7b4b55f951e5b7809f8e95374c2fa5",
+      "date": "2025-10-20T16:14:25+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/agent/tts-manager.ts",
+        "packages/voice-assistant/src/server/session.ts"
+      ],
+      "finding": "Moves streaming into Session, tracks currentStreamPromise, waits for prior cleanup, and records structured provider messages at finish/abort instead of plain assistant text. Pending TTS gates tool events. These changes expose ordering and cancellation ownership; comment claims are not recovery evidence.",
+      "fleetpane_action": "retain-provider-owned-turn-identity-and-structured-history"
+    },
+    {
+      "ordinal": 36,
+      "revision": "97f2ff2cac7bfaeef8ee77dd860ba513a5112abb",
+      "date": "2025-10-20T16:19:34+02:00",
+      "category": "lifecycle",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/tts-manager.ts",
+        "packages/voice-assistant/src/server/session.ts"
+      ],
+      "finding": "Passes an optional abort signal through TTS playback; pending confirmation is removed on abort and its listener cleaned after settlement. Synthesis itself is not canceled here. Historical agent instructions were excluded.",
+      "fleetpane_action": "voice-P2; distinguish-canceling-waiter-from-canceling-underlying-work"
+    },
+    {
+      "ordinal": 37,
+      "revision": "d2de52c57db0421f74b1eb867bd9a7ce2e76c3db",
+      "date": "2025-10-20T16:40:57+02:00",
+      "category": "lifecycle",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/tts-manager.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts"
+      ],
+      "finding": "Checks TTS cancellation before and after synthesis and resolves an interrupted playback waiter rather than rejecting it; WebSocket changes are logging/formatting. This prevents output after cancellation but does not prove synthesis cancellation or durable conversation recovery.",
+      "fleetpane_action": "voice-P2; preserve-exact-resource-and-request-identity"
+    },
+    {
+      "ordinal": 38,
+      "revision": "ee315bb9a004a4ae141efe6b57c51c6e16183231",
+      "date": "2025-10-20T18:14:08+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/.gitignore",
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/index.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/terminal-mcp/server.ts",
+        "packages/voice-assistant/src/ui/App.tsx",
+        "packages/voice-assistant/src/ui/lib/audio-playback.ts"
+      ],
+      "finding": "Defers abort until transcription contains text; client pauses/resumes on false speech detection. Adds pre-turn debug JSON dumps, replaces step-by-step finish accumulation with response messages, and removes onAbort accumulation. Terminal MCP returns structuredContent only. A debug dump is not restoration or an atomic durable history store.",
+      "fleetpane_action": "native-terminal-screen; retain-typed-provider-history-and-explicit-recovery-limits"
+    },
+    {
+      "ordinal": 39,
+      "revision": "f832c43a1115502752a2bef2ecdcf62e9375f6af",
+      "date": "2025-10-20T18:33:00+02:00",
+      "category": "interaction",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/ui/App.tsx"
+      ],
+      "finding": "Allows text entry/send while realtime audio is active. Prompt diff metadata and selected artifact-guideline text were observed; historical instructions were not adopted or audited in full.",
+      "fleetpane_action": "retain-explicit-text-input-alongside-other-activity"
+    },
+    {
+      "ordinal": 40,
+      "revision": "7d0a58761979454b650ac86513585132a54b168c",
+      "date": "2025-10-20T21:04:29+02:00",
+      "category": "boundary",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/index.ts",
+        "packages/voice-assistant/src/server/terminal-mcp/tmux.ts",
+        "packages/voice-assistant/src/ui/App.tsx",
+        "packages/voice-assistant/scripts/process-conversation.ts"
+      ],
+      "finding": "Changes tmux invocation from shell interpolation to execFile argv, but retains text trimming, character-by-character calls and delayed Enter. Adds an explicit cancel control and Basic auth with hardcoded demo credentials; changes debug dumps to inspect() although the debug reader expects JSON. These are not a secure runtime or restoration contract.",
+      "fleetpane_action": "retain-typed-process-arguments-and-explicit-cancel; do-not-copy-demo-auth-or-debug-dump-format"
+    },
+    {
+      "ordinal": 41,
+      "revision": "b267ca3958beb7800376f338ee79cc2a7d9dc90a",
+      "date": "2025-10-20T22:22:41+02:00",
+      "category": "types",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/terminal-mcp/tmux.ts"
+      ],
+      "finding": "Selected tmux diff changes optional command output to nullable output and otherwise formats argument lists. Prompt metadata shows extensive rewrites; prompt text and screenshot content were not audited. No observed new terminal error-handling behavior follows merely from the commit title.",
+      "fleetpane_action": "retain-explicit-optional-output-and-error-types"
+    },
+    {
+      "ordinal": 42,
+      "revision": "37a363da6deafcd056a6d5bfc693782ed16419bb",
+      "date": "2025-10-21T12:54:39+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/agent/llm-openai.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts",
+        "packages/voice-assistant/src/server/terminal-mcp/server.ts",
+        "packages/voice-assistant/src/server/terminal-mcp/terminal-manager.ts",
+        "packages/voice-assistant/src/server/terminal-mcp/tmux.ts"
+      ],
+      "finding": "Conversation-specific MCP/tmux ownership, stable command IDs, retained exited panes and exit codes replace name-only commands. Session cleanup still kills its tmux resources on socket close, which conflicts with Fleetpane Host ownership. Reads of command IDs are not scoped back to the conversation beyond session existence. A save/load import references persistence.ts absent in this tree. Selected command-test assertions and Vitest configuration were read, not executed.",
+      "fleetpane_action": "retain-Host/workspace-identity-and-detach-lifetime; expose-real-native-exit-status"
+    },
+    {
+      "ordinal": 43,
+      "revision": "4f2c2fc14a263f4ff969186a1fa9f747ad1a4310",
+      "date": "2025-10-21T14:50:07+02:00",
+      "category": "persistence-acp",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/persistence.ts",
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/acp/types.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts",
+        "packages/voice-assistant/src/server/index.ts",
+        "packages/voice-assistant/src/server/messages.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/server/websocket-server.ts",
+        "packages/voice-assistant/src/ui/components/ConversationSelector.tsx",
+        "packages/voice-assistant/src/ui/components/ActiveProcesses.tsx",
+        "packages/voice-assistant/src/ui/lib/conversation-storage.ts"
+      ],
+      "inspection_scope": "Full persistence, agent-manager, ACP types, selector, process pills and local selection-storage files; Session integration diff plus constructor/save/load paths, WebSocket load paths, API conversation routes and MCP create-agent tool. Other MCP tools, mobile spec, prompt, dependency payloads and historical test runs excluded.",
+      "finding": "Introduces file-backed conversations, conversation selection/deletion, and session-owned ACP child agents. Persistence errors can look absent or empty; writes are non-atomic. Agent completion uses a two-second quiet timer, ask_user auto-approves, update arrays are unbounded, and socket cleanup kills agents. Preserve completed and unfinished Host-observed ACP activity without copying these failure or ownership semantics; saved activity is separate from provider residency.",
+      "fleetpane_action": "durable-observed-acp-history"
+    },
+    {
+      "ordinal": 44,
+      "revision": "cf977968c62ed6d85398aacceabd2e682a521a10",
+      "date": "2025-10-21T15:49:55+02:00",
+      "category": "provider-state",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/acp/agent-manager.test.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts",
+        "packages/voice-assistant/src/server/acp/test-comprehensive.ts",
+        "packages/voice-assistant/src/server/acp/types.ts",
+        "packages/voice-assistant/src/server/messages.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/ui/App.tsx",
+        "packages/voice-assistant/src/ui/components/ActiveProcesses.tsx"
+      ],
+      "inspection_scope": "Changed-source hunks for the listed paths, including selected changed test assertions/options; no dependency audit or historical process/test execution.",
+      "finding": "Moves ACP options from client permission switches to provider session modes, adds mode metadata and setSessionMode, and sends live agents/commands on conversation load. Mode metadata and approvals are different contracts: the client still auto-approves requests, heuristic completion and unsafe casts remain, and session-state read failures may emit empty lists. Native command pills describe retained exit state but are not interactive terminals. Keep advertised choices and exact approvals separate; recover snapshots from Host ownership rather than socket-owned resource recreation.",
+      "fleetpane_action": "provider-aware-options-and-independent-host-recovery"
+    },
+    {
+      "ordinal": 45,
+      "revision": "d883436395d3c0d15cfe68b0dee8052630989149",
+      "date": "2025-10-21T16:34:11+02:00",
+      "category": "json-boundaries",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts",
+        "packages/voice-assistant/src/server/acp/types.ts"
+      ],
+      "inspection_scope": "Full changed hunks in manager, MCP output schemas/handlers and AgentInfo; create-agent MCP context also read. Historical MCP server/tests not executed.",
+      "finding": "Replaces undefined-valued agent metadata with explicit null in MCP structured results and nullable schemas. Absence, unknown availability and empty lists are distinct contracts; JSON cannot carry JavaScript undefined. Fleetpane uses typed serde JSON boundaries and explicit unsupported-command errors; this is not evidence of a Fleetpane agent MCP bridge.",
+      "fleetpane_action": "retain-typed-json-boundaries-mcp-exposure-open"
+    },
+    {
+      "ordinal": 46,
+      "revision": "cba8780bca7072797475f3cd368e84025acc106c",
+      "date": "2025-10-21T16:49:23+02:00",
+      "category": "prompt-settlement",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/messages.ts"
+      ],
+      "inspection_scope": "Full changed manager and message-schema hunks. Historical tests/provider processes not executed.",
+      "finding": "Replaces two-second quiet completion with the actual ACP prompt reply and stopReason, while making corresponding agent metadata nullable. Fleetpane already settles from that reply; review exposed a separate real gap: typed session projection discarded stopReason, hiding refusal and limits in native turn rows. Preserve the exact reason across events, snapshots and pages and display/copy it without redefining protocol completion as task success.",
+      "fleetpane_action": "preserve-and-display-explicit-acp-stop-reasons"
+    },
+    {
+      "ordinal": 47,
+      "revision": "5b53f4a7ce4a3f3095817ff26c3afb73de15e5ce",
+      "date": "2025-10-21T16:54:47+02:00",
+      "category": "nonblocking-prompt-admission",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts"
+      ],
+      "inspection_scope": "Full changed manager sendPrompt and MCP send-agent schema/handler hunks. No historical MCP execution.",
+      "finding": "Returns immediately by default and optionally waits for completion without cancelling a still-running prompt. Background completion owns final state; a caller timeout is not cancellation. Fleetpane already separates Host admission from prompt settlement with independent session progress. Verify quiet output remains active, exact settlement reasons survive restart and a second session runs concurrently. Do not add heuristic timers or a duplicate maxWait API without a consumer.",
+      "fleetpane_action": "verify-admission-separate-from-settlement"
+    },
+    {
+      "ordinal": 48,
+      "revision": "f2daa86d30560df29db2cfcc81708536c5a224ee",
+      "date": "2025-10-21T16:59:59+02:00",
+      "category": "activity-projection",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/activity-curator.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts"
+      ],
+      "inspection_scope": "Full new activity-curator source and changed MCP activity-schema/handler hunks; no historical tests/process execution.",
+      "finding": "Adds a default human-readable activity result with raw output opt-in. The historical curator groups messages, thoughts, tools and plans across time, trims text, shortens IDs, reads only the latest partial tool update and invents a low-priority color for unknown priorities. Retain Fleetpane ordered cards, exact copies, merged tool identity and byte-bounded pages. An external curated MCP activity API remains unimplemented; source review is not that capability.",
+      "fleetpane_action": "retain-ordered-bounded-activity-mcp-curation-open"
+    },
+    {
+      "ordinal": 49,
+      "revision": "ca43aae5346b124715039f8c68754cb1e16e9dc8",
+      "date": "2025-10-21T15:24:44+02:00",
+      "category": "mobile-scaffold",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-mobile/app/_layout.tsx",
+        "packages/voice-mobile/app/(tabs)/_layout.tsx",
+        "packages/voice-mobile/app/(tabs)/index.tsx",
+        "packages/voice-mobile/app/(tabs)/explore.tsx",
+        "packages/voice-mobile/package.json",
+        "packages/voice-mobile/app.json",
+        "packages/voice-mobile/metro.config.js",
+        "packages/voice-mobile/tsconfig.json",
+        "package.json",
+        "packages/voice-assistant/package.json"
+      ],
+      "inspection_scope": "Full listed starter screens/layouts and package/config sources; assets, lockfile payloads, generic starter helpers, modal and reset script excluded. No Expo build or runtime.",
+      "finding": "Initial Expo/NativeWind application is still the starter Home/Explore app, not an Agent workflow. Keep mobile clients as PRD P2 and native GPUI Kit as the desktop architecture; do not replay historical framework or dependency churn.",
+      "fleetpane_action": "retain-mobile-client-p2-boundary"
+    },
+    {
+      "ordinal": 50,
+      "revision": "795c10e3c950b92911d018632eff6e705d40ba32",
+      "date": "2025-10-21T15:53:49+02:00",
+      "category": "merge-integration",
+      "inspection": "merge-graph-and-subtree-identities",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server",
+        "packages/voice-assistant/src/ui",
+        "packages/voice-mobile"
+      ],
+      "inspection_scope": "Parent identities and second-parent changed paths; immutable subtree object equality verifies server/UI equal parent 2 (ordinal 44) and mobile equal parent 1 (49). No additional runtime/source-hunk audit.",
+      "finding": "Merges reviewed server/UI state into the mobile scaffold branch. Tree equality establishes no new server/UI or mobile behavior in this merge; manifest changes came from scaffold 49. A merge label does not establish mobile acceptance.",
+      "fleetpane_action": "graph-reconciliation-no-new-workflow"
+    },
+    {
+      "ordinal": 51,
+      "revision": "85e4e9ddaa5440a2226906b10323f4d6c83a7924",
+      "date": "2025-10-21T18:15:05+02:00",
+      "category": "mobile-settings-and-conversation-selection",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/messages.ts",
+        "packages/voice-assistant/src/server/session.ts",
+        "packages/voice-assistant/src/ui/hooks/useWebSocket.ts",
+        "packages/voice-mobile/hooks/use-settings.ts",
+        "packages/voice-mobile/hooks/use-websocket.ts",
+        "packages/voice-mobile/app/settings.tsx",
+        "packages/voice-mobile/components/conversation-selector.tsx",
+        "packages/voice-mobile/app/index.tsx"
+      ],
+      "inspection_scope": "Full changed server messages/session/browser hook hunks and full mobile settings/WebSocket hooks; settings screen save/reset/validation region (1-140), selector list/delete/select region (1-145), main settings/audio flags and conversation-switch handler regions. Root-level app/settings.tsx, remaining render/audio/message code, assets, docs and dependencies excluded; no mobile execution.",
+      "finding": "Adds mobile conversation list/delete protocol, local settings, agent views and voice scaffolding. Settings hooks can mask load failures with defaults and optimistically update before storage; reconnect cleanup can schedule a new socket and send only warns while disconnected. Main switches clear input before reconnect; deletion is not runtime-aware archive. Preserve explicit errors and per-session drafts. Theme is stored in settings but absent from the inspected main theme use; implement real device-local native appearance with transactional persistence, independent of Host/provider configuration. Mobile/audio remain separate unaccepted work.",
+      "fleetpane_action": "persistent-device-appearance-and-explicit-storage-errors"
+    },
+    {
+      "ordinal": 52,
+      "category": "merge-integration",
+      "inspection": "merge-graph-subtrees-and-conflict-hunk",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp",
+        "packages/voice-assistant/src/server/messages.ts",
+        "packages/voice-assistant/src/ui",
+        "packages/voice-mobile",
+        "app"
+      ],
+      "inspection_scope": "Parent identities and second-parent changed paths; ACP subtree equals parent 1 (48), mobile/UI/app subtrees equal parent 2 (51). Full nullable-field conflict hunk in messages.ts read. Other merged source behavior remains limited to prior ledger scopes; no historical runtime.",
+      "finding": "Integrates mobile branch and reviewed ACP serialization/settlement/curation changes without a new independently implemented workflow. messages.ts retains nullable agent fields from 45. Do not count a merge as fresh mobile acceptance.",
+      "fleetpane_action": "merge-reconciliation-no-new-workflow",
+      "revision": "13f8e31295ad58a1fe047aa09df591f50a5647ce",
+      "date": "2025-10-21T18:15:41+02:00"
+    },
+    {
+      "ordinal": 53,
+      "category": "activity-ordering",
+      "inspection": "full-changed-source",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/activity-curator.ts"
+      ],
+      "inspection_scope": "Entire resulting curator and changed-path/numstat metadata read; no historical tests or MCP runtime.",
+      "finding": "Replaces grouped output with a sequential loop, but separate message/thought buffers can still reorder alternating roles; whitespace is trimmed and unknown types are omitted. Fleetpane replay uncovered a concrete anonymous-chunk ordering bug and collision with explicit messageId stream. Preserve explicit message identity, split unidentified chunks at tool/role boundaries and verify durable/native order rather than copying text curation.",
+      "fleetpane_action": "fix-anonymous-acp-stream-segmentation",
+      "revision": "6106e5f65f2a8becf71c0dbfab6a7aa31493fd51",
+      "date": "2025-10-21T19:49:44+02:00"
+    },
+    {
+      "ordinal": 54,
+      "category": "session-mode-and-activity-metadata",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/voice-assistant/src/server/acp/agent-manager.ts",
+        "packages/voice-assistant/src/server/acp/mcp-server.ts"
+      ],
+      "inspection_scope": "Full changed hunks in both files plus sendPrompt 213-302 control/settlement/wait context. No execution of historical provider/MCP tests.",
+      "finding": "Adds sessionMode before prompt dispatch and currentModeId to MCP activity. Current official ACP prefers configOptions over modes. Fleetpane already exposes provider-advertised options through shared configuration and blocks prompts until pending configuration settles; do not add a duplicate per-prompt mode shim or a timer-based completion API. Legacy modes-only providers and external activity MCP remain unsupported/unaccepted.",
+      "fleetpane_action": "retain-shared-advertised-config-boundary-legacy-modes-open",
+      "revision": "cc3dbb88cb1a2bbf12378de49afb9aaf9f986813",
+      "date": "2025-10-21T19:56:51+02:00"
+    },
+    {
+      "ordinal": 55,
+      "category": "mobile-realtime-audio",
+      "inspection": "selected-full-source-and-integration-regions",
+      "paths_inspected": [
+        "packages/voice-mobile/hooks/use-realtime-audio.ts",
+        "packages/voice-mobile/hooks/use-audio-recorder.ts",
+        "packages/voice-mobile/app/index.tsx",
+        "packages/voice-mobile/package.json"
+      ],
+      "inspection_scope": "Full 269-line realtime hook, complete changed recorder/package hunks, and main audio callback (90-155) plus toggle (782-850) regions. Message/selector/artifact styling, instruction binary, lock payload and other main render/audio code excluded; no Android/audio runtime.",
+      "finding": "Adds opt-in VAD/audio recording, callback-driven speech segments, microphone permission requests and stop paths. Source joins base64 chunks while labelling output WAV, retains an unbounded active-speech buffer, uses asynchronous interval polling and an empty-dependency cleanup that captures initial activity. These are source-level design risks, not observed Android failures. Borrow explicit activation/ownership and useful errors, not encoding assumptions, hidden polling errors or lifecycle coupling. Voice/mobile remain PRD P2.",
+      "fleetpane_action": "record-audio-lifecycle-boundaries-retain-p2",
+      "revision": "0f1450381af0449fbd093d9361a920abe68f15dd",
+      "date": "2025-10-21T21:33:14+02:00"
+    },
+    {
+      "ordinal": 56,
+      "category": "mobile-build-metadata",
+      "inspection": "full-changed-config-diff",
+      "paths_inspected": [
+        "packages/voice-mobile/app.json"
+      ],
+      "inspection_scope": "Only changed path and full hunk read; no dependency/build runtime.",
+      "finding": "Despite a Maven-repository subject, the actual diff only adds the iOS bundleIdentifier. Classify by source rather than title; no Rust desktop capability.",
+      "fleetpane_action": "historical-mobile-build-only",
+      "revision": "492017d139a4ec914f43f2529dc876ddc7fdda3c",
+      "date": "2025-10-21T21:40:48+02:00"
+    },
+    {
+      "ordinal": 57,
+      "category": "mobile-platform-minimum",
+      "inspection": "full-changed-config-diff",
+      "paths_inspected": [
+        "packages/voice-mobile/app.json"
+      ],
+      "inspection_scope": "Full sole changed config hunk; no Android build.",
+      "finding": "Adds android.minSdkVersion 26 directly in Expo config. This is platform/dependency configuration, not evidence of working VAD or a Fleetpane feature.",
+      "fleetpane_action": "historical-mobile-build-only",
+      "revision": "931a38634d38ef02cace7caa01daa127880c2277",
+      "date": "2025-10-21T22:14:12+02:00"
+    },
+    {
+      "ordinal": 58,
+      "category": "mobile-native-build-scaffold",
+      "inspection": "selected-config-and-platform-source",
+      "paths_inspected": [
+        "packages/voice-mobile/app.json",
+        "app.json",
+        "package.json",
+        "android/build.gradle",
+        "android/gradle.properties",
+        "android/app/build.gradle",
+        "android/app/src/main/AndroidManifest.xml"
+      ],
+      "inspection_scope": "Full changed Expo/root manifest/package hunks, root Gradle repositories and properties, Android application manifest; app Gradle entry/plugin and namespace/defaultConfig regions only. Other generated Java/Kotlin, wrappers, assets, locks and remaining app Gradle omitted. No Expo prebuild, dependency installation, emulator or audio runtime.",
+      "finding": "Moves minSdkVersion 26 into expo-build-properties, adds root Expo/React Native dependencies/scripts and generated Android scaffold. App Gradle reads minimum SDK from root project settings; root repositories include JitPack. Keep Rust/GPUI Kit desktop build intact and require separate mobile/audio acceptance when prioritised. Generated build assets and SDK metadata do not establish recording, permissions or correct audio frames.",
+      "fleetpane_action": "retain-native-desktop-build-and-mobile-p2",
+      "revision": "8235d8d1b1fdc3fccee467c9be238fecd2734972",
+      "date": "2025-10-21T22:19:12+02:00"
+    },
+    {
+      "ordinal": 59,
+      "revision": "e646f410be1686e6ec127f9501d1c9c4636a0dc6",
+      "date": "2025-10-22T09:06:18+02:00",
+      "category": "app-server-split-and-audio",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/index.ts",
+        "packages/app/app/index.tsx",
+        "packages/app/hooks/use-websocket.ts",
+        "packages/app/components/active-processes.tsx",
+        "packages/app/components/agent-stream-view.tsx",
+        "packages/app/components/conversation-selector.tsx",
+        "packages/app/hooks/use-settings.ts",
+        "packages/app/hooks/use-realtime-audio.ts",
+        "packages/app/tsconfig.json",
+        "packages/app/package.json",
+        "packages/app/app.json",
+        "package.json"
+      ],
+      "inspection_scope": "All 75 R100 source renames checked for identical blob IDs. Changed hunks compared against old voice-mobile/voice-assistant paths for server bootstrap, main-screen audio wiring, selector/settings keys, imports, package/config changes; full new realtime audio hook. Remaining main-screen render, removed browser implementation, assets, binaries, lock payloads and agent instructions excluded. No historical app/audio execution.",
+      "finding": "Splits app/server and removes Vite/browser serving. Changes persisted device keys without a visible migration in inspected hunks. Audio hook still uses Expo recording, unsigned PCM RMS, joined base64 and an initial-state cleanup closure; these are source risks, not measured failures. Fleetpane retains schema-based device preference migration, owned resources and bounded native IO; optional audio remains P2.",
+      "fleetpane_action": "retain-native-host-boundaries-and-versioned-preferences"
+    },
+    {
+      "ordinal": 60,
+      "revision": "37156b5b80aa54f99ff242e1719be266bd639334",
+      "date": "2025-10-22T10:51:17+02:00",
+      "category": "mobile-build-dependency-cleanup",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "package.json",
+        "packages/app/app.json",
+        "packages/app/package.json",
+        "packages/server/package.json"
+      ],
+      "inspection_scope": "Full selected manifest/config hunks only; remaining 38 paths including removed generated Android/duplicate settings were metadata-only. No dependency installation or mobile build.",
+      "finding": "Removes accidental root Expo/RN dependencies, adjusts overrides and Kotlin/SDK/app dependencies. Framework/build cleanup does not establish runtime parity or justify changing the Rust build.",
+      "fleetpane_action": "retain-rust-build-and-mobile-p2"
+    },
+    {
+      "ordinal": 61,
+      "revision": "c30ef34ef73be2d3b60ba4328aca53ae675aed32",
+      "date": "2025-10-22T11:06:45+02:00",
+      "category": "pcm-sample-sign-and-audio-lifecycle",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/app.json",
+        "packages/app/hooks/use-realtime-audio.ts"
+      ],
+      "inspection_scope": "Full changed config/audio hunks; agent instruction file excluded. No microphone or background-audio runtime test.",
+      "finding": "Fixes signed little-endian PCM amplitude and floors sample count; enables background audio plugin settings. Correct sample interpretation and resource cleanup need separate real audio acceptance.",
+      "fleetpane_action": "record-voice-encoding-and-lifecycle-requirements"
+    },
+    {
+      "ordinal": 62,
+      "revision": "32d4944c58e986ca9df56c9da0800e12a39e5693",
+      "date": "2025-10-22T14:38:46+02:00",
+      "category": "speech-audio-and-style-migration",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/index.ts",
+        "packages/server/src/server/agent/tts-openai.ts",
+        "packages/app/hooks/use-websocket.ts",
+        "packages/app/hooks/use-speechmatics-audio.ts",
+        "packages/app/styles/unistyles.ts"
+      ],
+      "inspection_scope": "Full changed server/TTS and websocket hunks; audio helper/init/microphone/teardown/send/start/stop/cleanup regions (1-190,263-352), excluding remaining detection branches. Full small Unistyles setup. Full main render, style conversion, assets and dependency payloads excluded; no audio runtime.",
+      "finding": "Uses PCM TTS and binary chunk joining with a WAV header; optional Speechmatics recording has explicit start/stop cleanup. Initial theme is fixed dark. Public static serving precedes auth in inspected server code. Do not copy old credentials or infer mobile/audio acceptance from migration.",
+      "fleetpane_action": "retain-optional-audio-boundaries-and-native-appearance"
+    },
+    {
+      "ordinal": 63,
+      "revision": "2d1ab5bf79a822589ccdb907710789d482fbc1a1",
+      "date": "2025-10-22T15:00:38+02:00",
+      "category": "adaptive-theme-and-babel",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/babel.config.js",
+        "packages/app/styles/unistyles.ts",
+        "packages/app/styles/theme.ts"
+      ],
+      "inspection_scope": "Full small Babel and Unistyles setup; theme exports/shared structure at lines 202-226 only, not the entire palette or component style migration. No historical visual runtime.",
+      "finding": "Adds theme registration and adaptive light/dark behavior. Fleetpane already has independently verified device System/Light/Dark with persistence and visible write errors.",
+      "fleetpane_action": "covered-by-device-appearance-slice"
+    },
+    {
+      "ordinal": 64,
+      "revision": "89641a18e7aeda7575f5763a4a12ed20c345fd92",
+      "date": "2025-10-22T15:48:53+02:00",
+      "category": "app-source-reorganization",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/index.ts",
+        "packages/app/package.json",
+        "packages/app/tsconfig.json",
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "inspection_scope": "All 19 R100 renames verified by equal blob IDs. Full selected entrypoint/package/alias changes and small layout; remaining moves/deletions and render/style changes metadata-only. No build.",
+      "finding": "Moves app source under src, registers styles after router entry and removes obsolete audio dependencies. Reorganization alone adds no user workflow to the Rust application.",
+      "fleetpane_action": "retain-existing-native-module-boundaries"
+    },
+    {
+      "ordinal": 65,
+      "revision": "de5aba41868caa22402e36986c5641e2d31d525c",
+      "date": "2025-10-22T16:50:07+02:00",
+      "category": "keyboard-layout-and-selector",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/components/connection-status.tsx",
+        "packages/app/src/components/conversation-selector.tsx"
+      ],
+      "inspection_scope": "Full changed layout/connection-status hunks, selector delete/list subscription and fetch/confirmation region (60-115). Remaining selector formatting, main keyboard/render, docs and screenshot instructions excluded; no historical execution.",
+      "finding": "KeyboardProvider wraps layout; selector refreshes after deletion and replaces a deleted current conversation. Keep explicit destructive actions and draft identity; full deletion lifecycle remains a separate gap.",
+      "fleetpane_action": "retain-explicit-lifecycle-and-draft-identity"
+    },
+    {
+      "ordinal": 66,
+      "revision": "e1e14b147310b6efa75ae2d5a4a0f9053856a0b6",
+      "date": "2025-10-22T18:00:59+02:00",
+      "category": "workspace-validation-and-volume-meter",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/app/src/hooks/use-speechmatics-audio.ts",
+        "packages/app/src/components/volume-meter.tsx"
+      ],
+      "inspection_scope": "Full changed manager/cwd-test and audio-hook hunks; volume meter lines 1-95 only. Main render/style wiring and agent prompt excluded. Historical test not executed.",
+      "finding": "Checks workspace readability/searchability before spawn and adds a regression case. Exposes/reset volume state and animates meter bars. Fleetpane keeps existing workspace validation; voice remains P2 and no native microphone claim follows.",
+      "fleetpane_action": "retain-workspace-validation-and-voice-p2"
+    },
+    {
+      "ordinal": 67,
+      "revision": "674977d6f8b0297f8dee7e7d10678ed1212e0a9d",
+      "date": "2025-10-22T18:10:29+02:00",
+      "category": "agent-status-and-typed-activity",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/session.ts",
+        "packages/app/src/types/agent-activity.ts",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full changed server manager/session hunks; activity union definitions lines 1-80 and stream grouping/status-control region 83-107. Remaining parser/grouping functions, agent-activity renderers and other stream view regions excluded; no historical test/runtime.",
+      "finding": "Propagates agent status and typed activity into UI, while delaying deletion by 100ms and using loose casts/catches. Fleetpane separates session metadata from prompt activity and persists before publication; idle ACP session_info_update fault and active-turn pollution were reproduced with failing regressions, then fixed without a timer delay.",
+      "fleetpane_action": "implement-acp-session-info-independent-of-prompt"
+    },
+    {
+      "ordinal": 68,
+      "revision": "015d0f0e273e080bb3dc658068c88abf90e92e7a",
+      "date": "2025-10-22T18:17:53+02:00",
+      "category": "unified-tool-progress",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/src/types/agent-activity.ts",
+        "packages/app/src/components/agent-activity.tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full changed hunks in all three paths; unchanged parser/render implementation not audited and no historical React Native runtime.",
+      "finding": "Groups by tool ID with a stable insertion position and retains text boundaries; upstream merges object input/output by spreading and uses truthiness, casts and placeholder rows. Fleetpane already patches stable tool cards. New regressions and the previous built Host reproduce invalid rejection of optional initial status; typed-boundary merge now defaults initial pending/other, preserves null/omitted values, replaces supplied JSON/collections, and shows tool name/kind/locations without inventing a new card.",
+      "fleetpane_action": "implement-minimal-tool-defaults-and-native-metadata"
+    },
+    {
+      "ordinal": 69,
+      "revision": "8b9561b379ad41df611406bd97861abdfcca8fba",
+      "date": "2025-10-22T19:06:59+02:00",
+      "category": "voice-mode-drift-and-mute",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/tts-manager.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts",
+        "packages/app/src/hooks/use-speechmatics-audio.ts",
+        "packages/app/src/app/index.tsx"
+      ],
+      "inspection_scope": "Full changed server TTS/messages/session and microphone-hook hunks. Main-screen drift acknowledgement, mode-ref, status removal, toggle notification and selected mute wiring regions only (first 245 diff lines, plus source 975-1028). Remaining main render/styles and volume-meter implementation excluded. No voice runtime.",
+      "finding": "Captures generation mode with audio and acknowledges skipped playback on mode drift; adds server mode state, muted capture and segment timer. Existing errors must remain visible in Fleetpane rather than copying console-only failures. Voice is still optional PRD P2 and needs ownership, correct framing and real microphone/playback acceptance.",
+      "fleetpane_action": "record-voice-mode-and-muted-lifecycle-requirements"
+    },
+    {
+      "ordinal": 70,
+      "revision": "ce07b5492096b03926dc8adbab5264614e9d847b",
+      "date": "2025-10-22T19:42:13+02:00",
+      "category": "empty-state-and-status-noise",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/styles/theme.ts",
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "inspection_scope": "Full changed small theme/server hunks; main diff through line 152 includes mode-start/failure message removal, empty-state condition and input layout. Remaining style blocks excluded. No historical visual runtime.",
+      "finding": "Adds an empty conversation prompt and removes welcome/status messages from the timeline; some audio failures become console-only. Fleetpane keeps connection/fault UI distinct from conversation rows and retains actionable boundary errors. No new claim for native visual parity or voice acceptance.",
+      "fleetpane_action": "retain-visible-state-and-actionable-errors"
+    },
+    {
+      "ordinal": 71,
+      "revision": "eb0d04904e93d3274af60b0ba0c149c9b3001cb8",
+      "date": "2025-10-22T20:08:40+02:00",
+      "category": "provider-process-ownership",
+      "inspection": "selected-source-or-config",
+      "paths_inspected": [
+        "packages/server/src/server/index.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "inspection_scope": "Full changed hunks for global manager construction, constructor injection, initial state and client cleanup. Unchanged shutdown/agent-manager internals not audited. Historical runtime not executed.",
+      "finding": "Moves AgentManager out of each WebSocket Session and removes agent termination on client cleanup, sending initial global state on connect. This matches the existing independent Fleetpane Host/controller lifetime boundary. Native replacement is verified separately; this historical change does not prove durable process takeover or Host update safety.",
+      "fleetpane_action": "covered-by-independent-session-host-and-controller-replacement"
+    },
+    {
+      "ordinal": 72,
+      "revision": "2c72d02cc745bb79e9eb03d0299373aabfd7380e",
+      "date": "2025-10-22T20:29:59+02:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "ORCHESTRATOR-AGENT-SPEC.md"
+      ],
+      "inspection_scope": "Read architecture proposal lines 1-185; no executable implementation or historical runtime run.",
+      "finding": "Proposes separate per-agent history/input routing and app-level realtime orchestrator. Message target belongs to explicit selected view; proposal does not prove storage, ownership or recovery.",
+      "fleetpane_action": "Keep typed shared Host commands scoped by session; realtime voice remains deferred."
+    },
+    {
+      "ordinal": 73,
+      "revision": "b86e5fbb3fb1696cd07c08b6d337f9532a734908",
+      "date": "2025-10-22T22:06:00+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "inspection_scope": "Full changed manager/messages hunks; session diff first160lines and source575-655; modal source1-95. Remaining session/main/render/type/style changes excluded.",
+      "finding": "Creates an agent then applies requested mode; routes text/audio by agentId, emits user text before prompt, and adds create/mode UI. Modal hardcodes plan/bypass modes; partial audio buffering remains TODO.",
+      "fleetpane_action": "Use provider-discovered configuration and Host admission receipts; do not copy hardcoded bypass, optimistic execution claims or placeholder audio routing."
+    },
+    {
+      "ordinal": 74,
+      "revision": "70bdbd74eb6440f3f9204e55a0561c2d43683f35",
+      "date": "2025-10-22T22:38:15+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full changed server message/session hunks only; frontend stream reducer/type/UI changes excluded.",
+      "finding": "Adds optional client messageId to user echo and sends in-memory updates when websocket reconnects. Echo ID is not durable command dedup or an atomic snapshot/event barrier.",
+      "fleetpane_action": "Retain Host operation identity, sequenced reads and durable observed archive; do not replay pending permissions as ordinary history."
+    },
+    {
+      "ordinal": 75,
+      "revision": "30bf4d1b6396cc9f5dab4d00b69f86e7771edcae",
+      "date": "2025-10-23T08:36:42+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-manager-permissions.test.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Manager source340-370 and716-825, test diff first170lines; session source148-174/759-781. Other paths, full test remainder and historical execution excluded.",
+      "finding": "Per-agent pending promise map forwards tool/options to UI, resolves exact request and deletes entry; five-minute timeout rejects. Cancel marks ready immediately without resolving permissions. Test uses real model prompts and fixed waits, not cancellation proof.",
+      "fleetpane_action": "ADR0036 answers pending and in-flight permissions cancelled immediately, isolates other sessions, rejects stale answers and waits for provider settlement; deterministic fixture plus native acceptance."
+    },
+    {
+      "ordinal": 76,
+      "revision": "c6cdc09a0b5ba5d797aaefe3dfda9466e5d0ad8e",
+      "date": "2025-10-23T08:37:53+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/hooks/use-websocket.ts",
+        "packages/app/src/types/stream.ts",
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full layout/websocket hunks and first205 combined diff lines including the new test; index diff1-155 and source1060-1097; stream-view diff1-205; stream source75-205/218-390. Sidebar, remaining index/render/styles/type/test regions excluded.",
+      "finding": "Adds per-agent permission cards from the request toolCall, exact offered options and local pending map. Stable IDs group text, but repeated chunks still append: the logging test title is not proof of packet-level idempotency. UI deletes permission immediately after websocket send, before receipt.",
+      "fleetpane_action": "ADR0037 previews request fields before execution, fills omissions only from current owned turn, preserves full raw request/copy, uses Host answer receipts and isolates sessions. Keep Host event-sequence dedup; do not discard legitimate identical text chunks or infer file/command semantics from vendor fields."
+    },
+    {
+      "ordinal": 77,
+      "revision": "0893a9dc3313b6dbb9abdb69521953a53b353573",
+      "date": "2025-10-23T09:01:38+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/activity-curator.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "inspection_scope": "Full selected types hunks; manager diff1-245; full selected curator/messages hunks. Frontend, session routing, title generator, MCP and tsconfig changes excluded.",
+      "finding": "Discriminated union separates session, permission and status notifications; manager owns user echoes and unwraps typed session notifications for activity summaries. Message schema relaxes rawInput shape and adds reject_always. Curator still filters raw JSON by truthiness.",
+      "fleetpane_action": "Use typed PermissionTool fields with arbitrary raw JSON including false/zero, preserve unknown request fields in copy, and keep transient permissions separate from observed conversation history; no new MCP/voice scope."
+    },
+    {
+      "ordinal": 78,
+      "revision": "a930c4156a68f00a0fd1ca883aeee41f60a2d678",
+      "date": "2025-10-23T09:22:11+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        ".claude/CLAUDE.md",
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "inspection_scope": "Full hunks for all three changed text paths; historical instructions treated only as source material.",
+      "finding": "Creation modal keeps its action footer outside the scroll body and uses keyboard/safe-area padding; conversation switch clears the current stream map. The Codex note is developer guidance, not an integration or current instruction.",
+      "fleetpane_action": "Keep native actions reachable and session state scoped. Existing workbench retains separate Host views and drafts; no mobile keyboard or branding port."
+    },
+    {
+      "ordinal": 79,
+      "revision": "8177aa0c2afb61ade8068b10ff9708a2d5f49bdd",
+      "date": "2025-10-23T11:11:20+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/app/orchestrator.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full selected layout/page/list hunks and context source1-391. Home index, other headers/footer/input/audio context, stream/server types and image assets excluded.",
+      "finding": "Moves agent state above routes, adds list-to-agent navigation and filters each agent permission map. Orchestrator artifact handling remains TODO; optimistic user echoes and immediate local permission deletion do not prove provider receipt.",
+      "fleetpane_action": "Keep retained per-Host views, typed Session Host projections and acknowledged permission lifecycle. Existing list/open workflows cover the desktop seam; mobile navigation, voice and artifact management remain incomplete."
+    },
+    {
+      "ordinal": 80,
+      "revision": "85a0e46ba941faef6357915d557cda8bec8db26a",
+      "date": "2025-10-23T11:26:36+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-recent-paths.ts",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/terminal-mcp/tmux.ts"
+      ],
+      "inspection_scope": "Full selected hooks/modal/manager/tmux hunks plus tmux source378-397 for expandTilde. App/icon/empty-state/header changes excluded.",
+      "finding": "Adds three recent paths and prefill chips. Hook updates state before durable write and records attempted paths before creation response; server expands tilde from its own home.",
+      "fleetpane_action": "ADR0038 adds exact per-endpoint MRU preferences after validated successful native creation, shared CLI/read/forget, transactional limits and independent save-error reporting. Selection only prefills, prepared bindings stay fixed. Retain absolute input until host-side home expansion has its own contract."
+    },
+    {
+      "ordinal": 81,
+      "revision": "542707ecddcb359240a59ccae5b607d5a0d4d420",
+      "date": "2025-10-23T11:53:38+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json",
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "inspection_scope": "Full three selected text diffs plus modal source102-143; package-lock contents excluded.",
+      "finding": "Adds BottomSheetModalProvider, a 90-percent creation sheet, keyboard-aware fixed footer, pan/backdrop dismiss and recent-path prefill. Still closes after dispatch and records the path before creation acknowledgement.",
+      "fleetpane_action": "Keep the desktop creation panel and existing small-window acceptance. Do not add mobile navigation dependencies or copy dispatch-as-success semantics; native recents remain success-bound."
+    },
+    {
+      "ordinal": 82,
+      "revision": "41be2d40963cd6407ecde667f18dd01bc542c642",
+      "date": "2025-10-23T12:04:12+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full five changed source diffs plus server session source697-774.",
+      "finding": "Correlates successful agent_created by requestId, shows loading, disables editing/mode controls, then navigates. Server errors remain uncorrelated activity logs, and sheet dismissal drops pending UI state. Also changes audio playback acknowledgement.",
+      "fleetpane_action": "Existing Host operation UUIDs, typed results, busy/pending/uncertain states and durable group creation intents cover the command seam. Preserve status lookup and no blind resend. Voice remains PRD P2; no new historical mobile/runtime acceptance."
+    },
+    {
+      "ordinal": 83,
+      "revision": "91d691f31d552334a5d4cf868e1411dceb6bf0e1",
+      "date": "2025-10-23T12:22:42+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full three changed source diffs.",
+      "finding": "Resets assistant/thought message IDs for each new prompt; maps global activity logs to tool/result/error/transcript messages; swaps request-ID helper. Audio errors emit audio_played, so that acknowledgement is not proof of playback success.",
+      "fleetpane_action": "Keep session/turn-scoped ordered ACP history and explicit message identity; preserve raw values. Existing chronology and permission evidence apply. Global activity aggregation and audio playback remain incomplete; do not report failed playback as success."
+    },
+    {
+      "ordinal": 84,
+      "revision": "027ae59ae757553ac231216d3a2f6888f30d989b",
+      "date": "2025-10-23T12:29:21+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/realtime-controls.tsx"
+      ],
+      "inspection_scope": "Full changed realtime-controls diff.",
+      "finding": "The realtime Stop button explicitly stops local playback before ending the realtime session.",
+      "fleetpane_action": "Retain this lifecycle requirement for future P2 voice implementation. Existing agent Stop and provider cancellation are separate contracts; no voice feature or acceptance added."
+    },
+    {
+      "ordinal": 85,
+      "revision": "10189514ddd5c5d21303d023ed5c55fa3414baba",
+      "date": "2025-10-23T12:35:28+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/app/orchestrator.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full six changed text diffs.",
+      "finding": "Mounts one GlobalFooter above routes and keeps the agent-specific text input in the agent screen; realtime mode hides that input. Route-scoped agent identity and local form state remain significant.",
+      "fleetpane_action": "Keep retained per-Host/session drafts and separately owned app appearance controls. Do not move agent commands into one unscoped global composer. Mobile voice/footer layout remains deferred."
+    },
+    {
+      "ordinal": 86,
+      "revision": "74fffcd8a3e20a224fb2b54983184c7a11c5d8e4",
+      "date": "2025-10-23T13:15:18+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full four selected creation/ACP/server diffs. Other page/input/footer/context and audio-hook diffs excluded.",
+      "finding": "Navigates before dismissing creation sheet; forwards the actual stored permission requestId rather than generating another UUID. Processing-agent prompts auto-cancel, wait 100 ms, swallow cancellation errors, then proceed.",
+      "fleetpane_action": "Preserve exact pending permission identity and typed replies. Keep Codex follow-up semantics and explicit ACP cancellation until settlement; reject timer-based assumptions and error swallowing. Existing cancellation/request-preview evidence covers these boundaries. No mobile navigation or audio initialization claim."
+    },
+    {
+      "ordinal": 87,
+      "revision": "15320819a7bf03033e08934c6bae1bf2c580efa2",
+      "date": "2025-10-23T20:01:52+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/components/orchestrator-messages-view.tsx",
+        "packages/app/src/components/tool-call-bottom-sheet.tsx",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full seven selected diffs; excludes both audio hooks.",
+      "finding": "Adds selected-snapshot tool details with JSON scrolling; dismiss-then-route supersedes ordinal 86 ordering. Session title generation waits for the user chunk and five updates. Audio dependency declaration inspected; hook internals excluded.",
+      "fleetpane_action": "Existing session/turn-scoped rich tool details and exact request previews remain the contract. No mobile navigation, voice behavior or heuristic title generation port."
+    },
+    {
+      "ordinal": 88,
+      "revision": "e7306ab495d11d17dab02721116a437574f0dca7",
+      "date": "2025-10-23T20:03:57+02:00",
+      "category": "tooling",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "inspection_scope": "Full package.json diff only; dependency lock contents excluded.",
+      "finding": "Selected source adds a TypeScript typecheck script; the dependency-update title does not describe this selected change.",
+      "fleetpane_action": "Retain required native Rust checks; no uninspected dependency or behavior claim."
+    },
+    {
+      "ordinal": 89,
+      "revision": "a0f45f2cfcb2ba1a1a0e7aa7af77021ef19e0972",
+      "date": "2025-10-23T20:06:11+02:00",
+      "category": "tooling",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/orchestrator-messages-view.tsx",
+        "packages/app/src/components/tool-call-bottom-sheet.tsx"
+      ],
+      "inspection_scope": "Full three selected component diffs; audio hook excluded.",
+      "finding": "Fixes nullable bottom-sheet ref typing across selected detail components.",
+      "fleetpane_action": "No React ref port needed; native weak entity handles and existing detail workflow remain."
+    },
+    {
+      "ordinal": 90,
+      "revision": "29e6da853686b222626b71715f5dbf9555ed8908",
+      "date": "2025-10-23T22:12:02+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/orchestrator-messages-view.tsx",
+        "packages/app/src/components/tool-call-bottom-sheet.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/types/shared.ts",
+        "packages/app/src/types/stream.ts"
+      ],
+      "inspection_scope": "Full six selected text diffs; screenshot binary excluded.",
+      "finding": "Replaces loose tool payloads with tagged structures and adds text extraction/horizontal raw JSON scrolling. Selected snapshot remains separate from later updates. No Claude settings workflow appears in these selected files despite the title.",
+      "fleetpane_action": "Keep typed runtime tool snapshots, meaningful null/falsy semantics and live identity reconciliation already verified; no settings feature inferred from title or screenshot."
+    },
+    {
+      "ordinal": 91,
+      "revision": "d24bf65fe9354f9f6666c8b57eaf97e9e48fd5b9",
+      "date": "2025-10-23T22:46:09+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/styles/theme.ts"
+      ],
+      "inspection_scope": "Partial hunks: raw 91.diff lines 1-300 (full agent-stream-view), 762-899 (message tool-call behavior), 1012-1021 (full theme export). Remaining message markdown/activity/style and tool-call-bottom-sheet style hunks excluded; retained raw artifact also contains unread hunks.",
+      "finding": "Inspected hunks add kind icons/spinner, permission preview heuristics for file/command/plan limited to 500 characters, and a theme export.",
+      "fleetpane_action": "Existing request-first exact preview/raw copy and tool details cover this behavior without truncated heuristic inputs. No full message or bottom-sheet style audit claimed."
+    },
+    {
+      "ordinal": 92,
+      "revision": "3483bd9afdc2abfc55e91b08fdc99bea2b36f3d2",
+      "date": "2025-10-24T11:17:05+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-status-bar.tsx",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "inspection_scope": "Full four selected status/mode and persistence/server diffs; remaining app, volume, dependency and agents.json paths excluded.",
+      "finding": "Adds current mode selector from availableModes and JSON persistence/startup resume of agents. Persistence errors become empty lists, writes are non-atomic, and failed startup resume removes saved entries.",
+      "fleetpane_action": "Implement optional ACP v1 modes, live metadata updates, exact advertised mode RPC, serial mutation admission and durable confirmed state. Keep explicit archive resume and no replay/deletion on failure; do not copy destructive fallback or automatic provider startup restoration."
+    },
+    {
+      "ordinal": 93,
+      "revision": "9299bb5d4c083341c4af283e4616459558848fe5",
+      "date": "2025-10-24T11:19:19+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Restores the mode/status bar, removes the duplicate mode selector from input, changes text controls to an 88px row and conditionally unmounts them for realtime.",
+      "fleetpane_action": "Keep the existing persistent native composer/configuration area and exact session drafts. No mobile controls or claimed mount preservation inferred from the commit message."
+    },
+    {
+      "ordinal": 94,
+      "revision": "7f15e7ebe387208d5d6b2d6d74955969ea4a15e9",
+      "date": "2025-10-24T11:19:58+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Removes duplicate safe-area bottom padding while realtime controls are shown by the global footer.",
+      "fleetpane_action": "No native safe-area port; existing native composer and Stop acceptance remains separate."
+    },
+    {
+      "ordinal": 95,
+      "revision": "465aa1cd78f85cee8523d9800a52591e50c29bb1",
+      "date": "2025-10-24T11:23:37+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Keeps text controls mounted and animates opacity with pointer gating; agent realtime controls use a corresponding local animation value.",
+      "fleetpane_action": "Retain native entities and drafts without introducing timing as a synchronization rule. Voice transitions retain their PRD priority."
+    },
+    {
+      "ordinal": 96,
+      "revision": "6f4d47848c2c9cbbdf4bd892c8c9c8c6be9b6660",
+      "date": "2025-10-24T11:25:12+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Switches invisible text controls to absolute layout when opacity crosses a threshold so their fixed height no longer reserves space.",
+      "fleetpane_action": "No opacity-dependent native layout. Existing visible fixed composer remains the desktop contract."
+    },
+    {
+      "ordinal": 97,
+      "revision": "f2fe25de23e771d89d1ccc938abb159a5a96ef20",
+      "date": "2025-10-24T11:36:17+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/global-footer.tsx",
+        "packages/app/src/contexts/footer-controls-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Adds footer registration context, stable registered controls, one shared transition value and stacked absolute controls in a fixed-height container. Registers by agent identity and unmount cleanup; adds content footer padding subsequently removed by 99.",
+      "fleetpane_action": "Keep session-scoped native composer ownership and explicit draft persistence. Do not import a global unkeyed footer registration or transient keyboard layout architecture."
+    },
+    {
+      "ordinal": 98,
+      "revision": "cc00d82f8f7c78d01f8c465016e6b98564840d57",
+      "date": "2025-10-24T11:37:29+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Removes 24px status-container padding introduced in 97.",
+      "fleetpane_action": "No corresponding native padding change supported by evidence."
+    },
+    {
+      "ordinal": 99,
+      "revision": "13f59102b9b304919cee88c4c6ab07d77504a28d",
+      "date": "2025-10-24T11:41:52+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Removes footer-height padding from keyboard avoidance, superseding that part of 97.",
+      "fleetpane_action": "Keep desktop native layout; do not reproduce the historical duplicated reserved footer area."
+    },
+    {
+      "ordinal": 100,
+      "revision": "ce2ca53c5883240ae69c41c593b7b5a8270396cc",
+      "date": "2025-10-24T11:47:37+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Translates all global footer variants by the animated keyboard height less safe-area inset.",
+      "fleetpane_action": "No mobile keyboard animation port or runtime claim; native IME acceptance remains separate."
+    },
+    {
+      "ordinal": 101,
+      "revision": "ff02b500e0058d08b6a2600f97834f7a0733de0e",
+      "date": "2025-10-24T15:52:47+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/contexts/realtime-context.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/hooks/use-audio-player.ts"
+      ],
+      "inspection_scope": "Full text diffs of every changed path, as retained in the batch receipt. No historical mobile/voice runtime acceptance.",
+      "finding": "Memoizes message/tool components and adds a one-frame content-ready delay; pressed list styling. Permission removal waits for server confirmation. Voice flags gate a suppressed TTS queue with 100ms polling and explicit clear/stop rejection.",
+      "fleetpane_action": "Keep exact confirmed permission resolution and defer voice work by PRD priority. Fix the concrete native poll hot path: metadata/directory refresh no longer reconstructs selected history rows; preview reconciliation remains live. No timing workaround or measured UI speedup claim."
+    },
+    {
+      "ordinal": 102,
+      "revision": "dd4fa90c5a3680d7c0f68e81f0c38b02bcf04d6c",
+      "date": "2025-10-24T17:09:37+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/index.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Claude resume selects a private internal ID from provider metadata, persists it separately and broadcasts exact permission_resolved identity. Selected server index hunk passes STT confidence into initialization; STT implementations excluded.",
+      "fleetpane_action": "Keep opaque ACP identity, strict durable observed archives and exact confirmed permission resolution. Do not invent Claude-private alias behavior without provider compatibility evidence."
+    },
+    {
+      "ordinal": 103,
+      "revision": "8d93eeb5c510e48fe183fa994b22d16a285337a7",
+      "date": "2025-10-24T18:10:12+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Switches declared adapter to local file dependency; persists nullable Claude ID from notifications and refuses resume before first internal ID. Removes mobile screen transitions; persistence overwrites protocol ID with Claude ID on load.",
+      "fleetpane_action": "Keep protocol and provider identity semantics explicit; no dependency payload audit or Claude runtime acceptance. Do not copy nullable fallback identities or silent empty-on-corruption loading."
+    },
+    {
+      "ordinal": 104,
+      "revision": "3115c702bf342964ff1378fbd49fcc7e23b9fb76",
+      "date": "2025-10-24T20:18:25+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/acp/mcp-server.ts",
+        "packages/server/src/server/acp/types.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Refactors managed agents to tagged runtime states and lazy initialization, cached initialization promise, explicit new/load, pending mode and preserved errors. Reading persisted agents no longer launches all processes. Auto-cancel still sleeps 100ms and continues after failure.",
+      "fleetpane_action": "Existing Fleetpane archive/read stays observational; explicit context resume is distinct from history reads. Keep cancellation settlement and durable errors, with no timed resend or restoration failure deletion."
+    },
+    {
+      "ordinal": 105,
+      "revision": "64d1518a6f2d2bc9ef57d04a6e7480b3b30055c1",
+      "date": "2025-10-25T15:14:44+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "AGENTS.md",
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Despite subject Prompt is too long, actual selected paths add explicit initialize_agent_request and agent_initialized with optional request correlation, clear client stream caches on session state and stop boot-time history replay. Creation eagerly initializes its new agent.",
+      "fleetpane_action": "Keep bounded paged history reads separate from explicit runtime resume and UUID creation receipts. Full history replacement is not gap-free event reconciliation; no context truncation feature inferred from title."
+    },
+    {
+      "ordinal": 106,
+      "revision": "d2313b9d1c1540fbe8a1de66788e14a2eca68cbd",
+      "date": "2025-10-25T18:49:42+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Both changed server paths only reformat union types and call sites; no hook memoization exists in this commit despite its subject.",
+      "fleetpane_action": "Reference only; no product capability inferred."
+    },
+    {
+      "ordinal": 107,
+      "revision": "42e5f864a640286feb1c191fb3959c83975fc884",
+      "date": "2025-10-25T18:50:56+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Selected manager diff is predominantly formatting and adds prompt failure logging; excluded agents.json is runtime data. Existing request timeout and auto-cancel contexts are not new behavior in this patch.",
+      "fleetpane_action": "Keep typed error propagation and explicit cancellation; do not invent persistence changes from the subject."
+    },
+    {
+      "ordinal": 108,
+      "revision": "1fd9b776800cd922f7279e4cdc9ca7037c601db0",
+      "date": "2025-10-25T19:37:13+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/hooks/use-websocket.ts",
+        "packages/server/package.json",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Actually memoizes useWebSocket return, replaces one-frame content-ready gating with awaiting initialized stream state, upgrades declared adapter to 0.8.3 and stops subscribing every listed agent at session boot.",
+      "fleetpane_action": "Keep state-driven loading, bounded snapshots/pages and on-demand views. No dependency payload or historical mobile runtime acceptance."
+    },
+    {
+      "ordinal": 109,
+      "revision": "c277f3fd7cb30b4757341e946397a37192ee820c",
+      "date": "2025-10-25T20:50:12+02:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Selected root package declaration adds claude-code-acp 0.8.3; lockfile and saved agents excluded.",
+      "fleetpane_action": "Reference dependency declaration only; no runtime feature or SDK audit."
+    },
+    {
+      "ordinal": 110,
+      "revision": "1d6de732b6a180279f4204db34a089d83c2ca827",
+      "date": "2025-10-25T21:20:27+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Shutdown waits for processing agents or two-minute timeout, persists their metadata then SIGTERM, waits one second; server signal handler closes HTTP/WS and has another forced-exit timer. Development watcher changes.",
+      "fleetpane_action": "Do not port deadline-based process termination into upgrades. Retain independent Session Host, durable admission drain, queries/answers/Stop and resource-complete retirement requirement. Explicit Host stop remains separate from update continuity."
+    },
+    {
+      "ordinal": 111,
+      "revision": "8d591da6712a6ae807cda7a455a7361f334f0967",
+      "date": "2025-10-25T21:56:44+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/global-footer.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/utils/time.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Dynamic text height is clamped, list sorts by lastActivityAt and renders relative age. Manager timestamps notifications and persists activity at create/start/shutdown; removes automatic permission timeout.",
+      "fleetpane_action": "Use existing GPUI Kit auto-grow with bounded viewport and explicit flex/scroll ownership. Keep drafts exact and pending permissions without arbitrary timeout. Activity sorting/relative age remain separate work; opaque provider updatedAt must not be replaced with invented local timestamps."
+    },
+    {
+      "ordinal": 112,
+      "revision": "a405c29ab12217efc49f55b7420e439c010f00cf",
+      "date": "2025-10-25T21:59:10+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Replaces non-agent centered realtime button with Agents, New Agent and Realtime actions and wires the shared creation modal.",
+      "fleetpane_action": "Native workbench already exposes session and creation navigation; voice remains PRD P2. No historical mobile or voice acceptance."
+    },
+    {
+      "ordinal": 113,
+      "revision": "faf087b3a62dee362b56c919528bc64df3b8d12c",
+      "date": "2025-10-25T22:14:15+02:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/realtime-controls.tsx",
+        "packages/app/src/contexts/footer-controls-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. Saved agents and lockfiles excluded; 102 also excludes STT implementations. No dependency payload audit or historical app runtime acceptance.",
+      "finding": "Shares FOOTER_HEIGHT=75 and derives vertical padding for agent/realtime controls instead of separate fixed heights.",
+      "fleetpane_action": "Keep native layout sizing and bounded composer; do not duplicate mobile constants or recreate voice controls."
+    },
+    {
+      "ordinal": 114,
+      "revision": "a3224175ee96cff50bf31ecde71c30df0e0f2e79",
+      "date": "2025-10-26T07:35:06+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/global-footer.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/acp/agent-manager-permissions.test.ts",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/index.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full diffs of the ten listed paths, including deleted/replaced tests. Saved agents and lockfile excluded. No package payload audit or historical app/model execution.",
+      "finding": "Adds multiple image selection, previews and text/image ACP content. Image-only button is enabled but send still rejects empty text; selection clears before conversion, failed images can be omitted, and stored user history loses the images. Also removes the two-minute processing shutdown deadline and replaces broad permission/manager tests with a live plan/file scenario whose printed mode state is not asserted.",
+      "fleetpane_action": "Implement local immutable image assets, typed descriptors, one revisioned text/image draft, exact UUID recovery, native picker/preview/remove/image-only send, pre-admission asset checks and capability-gated ACP or Codex localImage dispatch. Local native and actual Codex/loopback transport evidence; installed DSH advertises image:false. Retain Host drain/resource inventory design; indefinite wait is not complete Host retirement. Remote upload, incoming large-image echoes, real model vision, GC and full-size viewer remain open."
+    },
+    {
+      "revision": "0cc9666df0721aae724d2ce28776434b79c252cd",
+      "date": "2025-10-26T07:41:27+01:00",
+      "ordinal": 115,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Handles current_mode_update by changing runtime.currentModeId; resets saved agent fixture data outside the selected source path.",
+      "fleetpane_action": "Existing ACP v1 mode metadata handles active/idle updates and late-ACK ordering; no copied saved agents or provider-private identity alias."
+    },
+    {
+      "revision": "a81a8a86b81a8ca22a9ac09f334c4b5b13453e21",
+      "date": "2025-10-26T07:44:33+01:00",
+      "ordinal": 116,
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Changes printed final mode to an acceptEdits assertion in the live plan/file test.",
+      "fleetpane_action": "Retain deterministic mode transition, permission and UI evidence; a historical live test assertion is not Fleetpane runtime acceptance."
+    },
+    {
+      "revision": "9f22acfead06078fe2a71660f018057107decdf4",
+      "date": "2025-10-26T07:53:51+01:00",
+      "ordinal": 117,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Persists runtime/session metadata before kill and stops deleting the persistent record, enabling later resume attempts.",
+      "fleetpane_action": "Retain observed archive, original session identity, durable receipts and explicit context resume; stopping is separate from deleting saved history."
+    },
+    {
+      "revision": "604e3594372a66f303bd273630cb494b00727f82",
+      "date": "2025-10-26T07:59:35+01:00",
+      "ordinal": 118,
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Adds a manager-replacement prompt test, but clears both persisted ACP and provider options session IDs during kill, causing a fresh session rather than proving the old context resumed.",
+      "fleetpane_action": "Do not clear session identity to make a continuation test pass; keep archived observations and uncertain work without automatic replay."
+    },
+    {
+      "revision": "1d8e86985b75b7e154a0b04d982767ee2d4e64bf",
+      "date": "2025-10-26T08:29:52+01:00",
+      "ordinal": 119,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Centralizes agent serialization/update persistence, preserves session IDs by state and updates Claude private IDs in managed options before persisting. Added session ID checks are console output, not equality assertions; removes separate persistence title update.",
+      "fleetpane_action": "Use protocol ACP IDs and Host-owned observed archive, not Claude-private _meta aliases; existing restart/resume evidence keeps identity and saved observations distinct from provider context."
+    },
+    {
+      "revision": "b1faab72ceaf815c3c29276f5ea1987ed709a970",
+      "date": "2025-10-26T08:57:57+01:00",
+      "ordinal": 120,
+      "category": "dependency",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Selected package diff upgrades Claude ACP 0.8.3 to 0.8.4 only; test becomes it.only and prints restored history/IDs without asserting context identity. Manager changes are formatting and a force-kill log. The subject does not establish Express optional-dependency behavior.",
+      "fleetpane_action": "No adapter payload compatibility claim from a version string. Keep all tests enabled and compare actual original IDs/context; do not adopt process.killed as proof of exit or a fixed force-kill timer for Host retirement."
+    },
+    {
+      "revision": "7d1ef63c8f9d1dce0efeca368dc510c7010d9a83",
+      "date": "2025-10-26T09:07:41+01:00",
+      "ordinal": 121,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Replaces fetch/blob/byte-loop/btoa conversion with synchronous Expo File.base64Sync and file.type or JPEG fallback; per-image conversion errors are still logged and skipped.",
+      "fleetpane_action": "Existing local asset import remains off the UI thread, checks actual image bytes, preserves originals and fails the selection without silently dropping images. No Expo library/runtime audit."
+    },
+    {
+      "revision": "fdaf403f13cf23fa814cfc5e8ad05067d9cf21b5",
+      "date": "2025-10-26T09:51:18+01:00",
+      "ordinal": 122,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Upgrades declared Claude ACP to 0.8.5, adds deleteAgent separately from kill and tracks managers for afterEach deletion; cleanup errors are logged and it.only remains.",
+      "fleetpane_action": "Keep stopping, metadata retention and deletion separate. Fleetpane archive deletion/retention UI remains open; no copied cleanup fallback, new Claude acceptance or implicit Host/provider destruction."
+    },
+    {
+      "revision": "7fee9d4dc42ed41a1a2f9b0934cfff0772e9678d",
+      "date": "2025-10-26T09:52:43+01:00",
+      "ordinal": 123,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/acp/agent-manager.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Adds console error logging for the already failed refusal stop-reason branch.",
+      "fleetpane_action": "Existing typed ACP refusal and explicit stop reasons remain observable in history/UI; logs alone are not task-success evidence."
+    },
+    {
+      "revision": "4323d7d193623d4335011eabd71e3b92ca2851f4",
+      "date": "2025-10-26T10:18:51+01:00",
+      "ordinal": 124,
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. Saved agents and lockfiles excluded; no dependency payload audit or historical app/model execution.",
+      "finding": "Emits an additional agent_status after current_mode_update so selectors change before turn completion; fetches full agent info and catches/logs errors.",
+      "fleetpane_action": "Existing session-scoped mode metadata projection refreshes during active/idle turns without rebuilding the timeline for metadata-only events. Retain verified permission/mode/draft continuity."
+    },
+    {
+      "ordinal": 125,
+      "revision": "dcfdccf07f1bea64f8cca00ad405e3d8e93159a4",
+      "date": "2025-10-26T13:28:05+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/websocket-server.ts",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Adds worktree slug input and fixes footer callback dependencies; handles worktreeName with server-side tilde expansion and adds a shell Git utility. Utility infers repository shape from .git files, catches branch/worktree errors as missing-branch fallback, prunes globally and copies .env. Also emits audio transcription IDs, but the corresponding message schema fields arrive in 126.",
+      "fleetpane_action": "Keep existing shared typed planned/pinned worktree engine, identity checks, exact selected subdirectory and durable one-attempt failure evidence. Do not copy branch-error fallback, global prune, automatic .env copying or local-home assumptions into remote routing; existing-branch checkout, removal and supervised interrupted-Git recovery remain open."
+    },
+    {
+      "ordinal": 126,
+      "revision": "c4bb10d3c925c2dd41f00074a72a388c95f8d1b9",
+      "date": "2025-10-26T13:48:14+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/acp/mcp-server.ts",
+        "test-worktree-agent.ts",
+        "test-worktree-e2e.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Adds worktreeName and transcription requestId to transport schemas and MCP worktree creation. New manual tests use the current real repository and direct manager/Session entry points, leave worktrees for manual cleanup, and include a type assertion; the first prints didComplete without asserting it. Voice overlay and frontend changes were not inspected.",
+      "fleetpane_action": "Shared GUI/CLI worktree planning and existing isolated Git/native acceptance already cover the selected subdirectory and provider cwd. Do not use direct Session tests as real WebSocket/browser acceptance or run destructive historical scripts against a user checkout. Voice remains PRD P2 and unimplemented."
+    },
+    {
+      "ordinal": 127,
+      "revision": "d47019919e8082b308b7cdd507fb01fabc808aad",
+      "date": "2025-10-26T15:03:33+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Selected path adds a floating scroll-to-bottom button, animations, a 10-pixel bottom threshold and verbose scroll logging. Other footer/screen/MCP changes in this commit were not inspected.",
+      "fleetpane_action": "Add explicit native Jump to latest using Kit follow-tail intent and existing scroll invalidation. Native page/upscroll, return, pause/resume of growing stream, exact draft and unrelated approval retention, Stop and normal close verified with private ACP fixture. Small-window controls remain reachable but minimum timeline height, unread counts and scroll restoration remain open."
+    },
+    {
+      "ordinal": 128,
+      "revision": "e82a7410e774f36e7f78b52c61418eb19d681c28",
+      "date": "2025-10-26T15:05:11+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. 128, 129 and 131 cover all changed paths; 130 excludes saved server agents.json. No historical app execution, saved-agent import or mobile acceptance.",
+      "finding": "Initial scroll changes from always animated to instant first load, and verbose scroll logs are removed.",
+      "fleetpane_action": "Keep existing Kit tail intent before first row population, without copying a React ref/animation effect. Existing tail navigation evidence is separate; no new frame-by-frame no-flash acceptance."
+    },
+    {
+      "ordinal": 129,
+      "revision": "985e9db6db12d3737c04996e37b0b49f096146c5",
+      "date": "2025-10-26T15:08:52+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. 128, 129 and 131 cover all changed paths; 130 excludes saved server agents.json. No historical app execution, saved-agent import or mobile acceptance.",
+      "finding": "Mobile keyboard SharedValue is passed into the stream and adds animated content bottom padding.",
+      "fleetpane_action": "Mobile-specific layout; keep desktop Kit layout and anchors. No mobile keyboard/IME acceptance or implementation is inferred."
+    },
+    {
+      "ordinal": 130,
+      "revision": "cf7e14e36b0e231347f77dd244c1b23e3fc77899",
+      "date": "2025-10-26T16:19:30+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. 128, 129 and 131 cover all changed paths; 130 excludes saved server agents.json. No historical app execution, saved-agent import or mobile acceptance.",
+      "finding": "Replaces outer keyboard padding with translateY in a clipped wrapper, updates shared inset, and reverts the preceding stream padding/prop. Saved agents are excluded.",
+      "fleetpane_action": "Treat successive fixes as evidence of mobile layout coupling, not a prescription for desktop transforms. Existing minimum timeline height remains an open separate issue."
+    },
+    {
+      "ordinal": 131,
+      "revision": "2c1b5b13fe0c1ef5106919eb9d1da64a6e75ed18",
+      "date": "2025-10-26T16:28:55+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of listed paths. 128, 129 and 131 cover all changed paths; 130 excludes saved server agents.json. No historical app execution, saved-agent import or mobile acceptance.",
+      "finding": "Per-agent initialization map is set before requests, cleared on handshake/history results, and used to guard client initialization. First scroll state resets on agent ID and waits for nonempty rows.",
+      "fleetpane_action": "Keep explicit context resume separate from observational reads, per-session pending ACP Resume admission, durable UUID receipts and UI busy gates. Client map is not a replacement for Host admission. Kit already resets tail intent on session selection; no additional initialization or scroll patch claimed."
+    },
+    {
+      "ordinal": 132,
+      "revision": "700840da5a69b592279a818b7eeb55a10d6c732c",
+      "date": "2025-10-26T17:04:22+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/server/agents/agent-type-definitions.ts"
+      ],
+      "inspection_scope": "Full text diffs of both changed paths. No historical runtime, dependency execution or list performance acceptance.",
+      "finding": "ScrollView becomes inverted FlatList with reversed derived rows, stable IDs, initial/window limits, visible-position settings and pending permissions in the header. Initialization still uses interaction callback and timer; plans/artifacts/null remain omitted. Agent definitions describe Claude/Codex spawn, persistence and modes; historical Codex npx ACP has no resume.",
+      "fleetpane_action": "Keep existing virtual GPUI rows, bounded pages and explicit tail intent. Reproduced zero-height conversation at 900x560; now bound scrollable details to half the actual remaining conversation body and move configuration/attachments into it. Preserve editor and Send/Stop. Native before/after, exact copy/text/image send, history, model overlay, target-isolated Skip/Stop and cross-Host two-question submission verified; no speedup, timer or universal minimum-height claim."
+    },
+    {
+      "ordinal": 133,
+      "revision": "edf47a24bcd564eeb8428afb14f6dd8365e0003d",
+      "date": "2025-10-26T18:03:03+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-activity.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/server/agents/agent-type-definitions.ts",
+        "packages/app/src/types/shared.ts",
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/acp/agent-types.ts",
+        "packages/server/src/server/acp/mcp-server.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of 16 listed source/config/test paths. Excludes saved agents.json and five deleted manual ACP scripts. Dependency manifest metadata only; no package audit, installation or historical execution.",
+      "finding": "Shared Claude/Codex definitions now reach creation schema, selected type, spawn and persistence. Static mode fallback can replace absent/invalid runtime modes; unsupported resume creates a new session. MCP creation remains Claude-only, tests remain Claude-focused. Thought card strips outer formatting; scroll distinguishes user drag from programmatic movement.",
+      "fleetpane_action": "Keep independent named Hosts and configured provider lifetimes, toolkit-independent types, advertised runtime mode catalogs and explicit context resume. Do not import static permission presets, unsupported-resume replacement or thought trimming. Pre-creation mode/profile preferences, provider launcher/install and orchestration MCP remain separate gaps; existing selection/modes/archive evidence is not new end-to-end acceptance."
+    },
+    {
+      "ordinal": 134,
+      "revision": "70a1852e5759741a6b32df62842b01c766a3f109",
+      "date": "2025-10-26T20:37:14+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full text diffs of both listed UI paths, including all modal lifecycle/animation/layout hunks. Excludes saved server agents.json. No historical or mobile runtime execution.",
+      "finding": "Native mobile Modal replaces bottom sheet, with mounted/visible state, animation-completion form reset/navigation, split components and compact/wide selectors. MRU is still saved before creation; close can dismiss an in-flight request. Keyboard footer uses translation; footer change adds diagnostics.",
+      "fleetpane_action": "Keep GPUI Kit and retained desktop creation form; preserve explicit operation receipts rather than infer completion from dismissal/animation. Recent-directory write follows successful creation with visible independent failure. Current native creation and small-window proofs remain scoped; no mobile animation or close-during-in-flight acceptance claimed."
+    },
+    {
+      "ordinal": 135,
+      "revision": "086dde30cc8f22dbfde0e4c149dca2638c026a1d",
+      "date": "2025-10-26T22:19:16+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/vitest.config.ts"
+      ],
+      "inspection_scope": "Full text diffs of seven listed permission/transport/test paths; some include Git Diff transport code, read for context only. Excludes four route/header/Git Diff UI paths. Git Diff expansion remains user-deferred. No historical test execution.",
+      "finding": "New turn resolves pending agent permissions as cancelled and notifies subscribers before clearing them. Refusal becomes completed while retaining stop reason. Added live-agent test only asserts nonfailure/usable state and absence of error; single-thread Vitest is test configuration. Also adds unbounded git diff HEAD request/response transport.",
+      "fleetpane_action": "Retain active-prompt admission and explicit target-specific approval/Stop. Do not let new message implicitly cancel permission. Existing cancellation tests/readbacks preserve other sessions, and explicit refusal reason remains visible. No Git Diff expansion, historical live-model test pass or test-serialization workaround added."
+    },
+    {
+      "ordinal": 136,
+      "revision": "c5446e808d6e359a6157e90a4f66de5a0b4e9208",
+      "date": "2025-10-26T22:30:43+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-status-bar.tsx"
+      ],
+      "inspection_scope": "Full text diffs of three listed UI paths. Excludes Git Diff screen; agent header diff includes its menu placement only. No mobile or historical runtime execution.",
+      "finding": "Menu position measures anchor/content and clamps to window on layout/resize. Composer moves full-width text above controls, places attachment/status together and reduces status to a dot. Voice controls retain existing branches.",
+      "fleetpane_action": "Keep Kit anchored overlay and full-width bounded editor. Final layout proof covers model overlay and resize, exact text/image send and visible messages at 900x560. Preserve textual status and stop reason rather than rely only on color. Voice remains PRD P2 and Git Diff expansion stays deferred."
+    },
+    {
+      "ordinal": 137,
+      "revision": "54c19f89bf5295d733c44f2e88f00ac5905a4f15",
+      "date": "2025-10-26T22:36:24+01:00",
+      "category": "configuration",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        ".gitignore"
+      ],
+      "inspection_scope": "Full text diff of .gitignore only. Excludes Git Diff screen and deleted saved agents.json. Subject is metadata for uninspected paths, not a claimed source review.",
+      "finding": "Runtime agent file is added to ignore rules. The selected path establishes no Git Diff refresh behavior; title alone is not source evidence.",
+      "fleetpane_action": "Keep Host journals/controller stores in explicitly supplied external data directories; examples and published acceptance use synthetic fixtures. No runtime-file migration or Git Diff implementation from this metadata."
+    },
+    {
+      "ordinal": 138,
+      "revision": "6a88c585e3e98d65bd8a1d73c58faf4c3360b60e",
+      "date": "2025-10-26T22:42:29+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/styles/theme.ts"
+      ],
+      "inspection_scope": "Full text diffs of both changed paths. No historical application, contrast measurement or accessibility acceptance.",
+      "finding": "Dropdown now uses semantic popover color and changes dark popover background from #09090b to #18181b.",
+      "fleetpane_action": "Keep Kit semantic menu/theme defaults and existing device appearance contract. Accepted model menu screenshot confirms visible overlay in the covered Linux workflow; no hardcoded historical palette or quantitative contrast claim added."
+    },
+    {
+      "ordinal": 139,
+      "revision": "1d22fe46e77b6d3255417159d005de0366d6da3c",
+      "date": "2025-10-30T19:59:10+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/agent-prompt.md",
+        "packages/server/src/server/acp/mcp-server.ts"
+      ],
+      "inspection_scope": "Full text diffs of all three changed paths, including prompt changes read solely as product/reference data, not current instructions. No historical app or model execution.",
+      "finding": "Adds quote styles and simplifies orchestration prompt/confirmation rules; MCP result enums accept Claude/Codex but this diff does not make MCP creation configurable.",
+      "fleetpane_action": "Keep Kit Markdown quotes and exact native Copy already verified. Historical prompt is not current policy; typed protocol/provider capabilities remain authoritative."
+    },
+    {
+      "ordinal": 140,
+      "revision": "a118fd3315fd9136f0b8ea23a9bc0567a514db5c",
+      "date": "2025-11-03T11:47:15+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-types.ts",
+        "packages/server/src/server/acp/mcp-server.ts"
+      ],
+      "inspection_scope": "Full text diffs of five listed source/test paths. Excludes historical AGENTS files, agent prompt, lockfile, app manifest and two manual worktree scripts. No historical live-agent test execution or dependency installation.",
+      "finding": "Prompt sending drops maxWait. New abortable permission/status wait returns existing permission or null when no longer active; idle/initializing semantics must not prove specific task success. MCP creation now takes shared agent type; user messages gain exact long-press copy and Claude static modes add default.",
+      "fleetpane_action": "Add shared exact-turn observer and read-only CLI wait using existing lease, metadata history and Host events. Distinguish finished/unknown/attention/timeout without claiming, answering, sending, stopping or replaying. Pre-lookup cursor fixes reproduced stale-read/earlier-completion false timeout. Six targeted and 157 final Rust tests, strict Clippy, desktop check, process fixtures and installed Codex gated loopback pass. Public MCP/curated activity export remain open."
+    },
+    {
+      "ordinal": 141,
+      "revision": "30686df548b97a3a7b816140b3d87b7f505e50d7",
+      "date": "2025-11-07T09:50:27+01:00",
+      "category": "dependency-metadata",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "inspection_scope": "Full text diff of app package manifest only. Excludes package-lock.json and historical .claude/CLAUDE.md. Dependency metadata inspection, not package audit or execution.",
+      "finding": "expo-clipboard constraint changes from ~6.0.3 to ~8.0.7. No native behavior follows from the manifest alone.",
+      "fleetpane_action": "Keep native GPUI clipboard and existing exact copy evidence; no Expo dependency installed or historical instructions adopted."
+    },
+    {
+      "ordinal": 142,
+      "revision": "c5b30ed8787080202e484299c644e3fcaf1f787b",
+      "date": "2025-11-07T20:36:23+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/file-explorer/service.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full text diffs of five listed source paths, including transport schemas and handler. Excludes app layout and agent screen. No historical runtime, filesystem or dependency execution.",
+      "finding": "Adds cwd-relative directory and text/image/binary previews with typed request/response and agent lookup. Service uses lexical path confinement, follows stat/read symlinks, unbounded parallel stats and whole-file reads; image extension allowlist/base64 is not bounded decode acceptance.",
+      "fleetpane_action": "Keep Fleetpane descriptor-relative nofollow engine, saved root identity and worker/byte/entry/deadline bounds. Existing native text preview stays read-only. Add scoped bounded navigation metadata; file image preview remains open rather than copying unbounded historical reads."
+    },
+    {
+      "ordinal": 143,
+      "revision": "f766a18d7b09ff64a03a2908fda0aeb510402b96",
+      "date": "2025-11-11T18:15:46+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full text diffs of both changed UI/context paths. No historical runtime execution or claim that the old caches are bounded.",
+      "finding": "Moves current directory into per-agent context and initializes only when its listing is absent. File selection remains local to the screen and resets on directory changes; preview appears only when selected.",
+      "fleetpane_action": "Remember at most 32 window-local directory/selected-file locations keyed by workspace UUID, Host socket and saved root identity. Reopen and folder refresh re-read through the shared engine; errors stay visible with no root fallback. Two new cache tests, 13 desktop tests, strict Clippy/build and final native reopen/refresh/cross-host/link/delete checks pass; complete Codex/ACP snapshots unchanged. No restart or scroll restoration claim."
+    },
+    {
+      "ordinal": 144,
+      "revision": "b2c89df7c758ea189a244855bb094c57b7bc3915",
+      "date": "2025-11-14T19:02:54+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/server/src/server/file-explorer/service.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-types.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.test.ts"
+      ],
+      "inspection_scope": "Full text diffs of nine listed file-explorer/message/service/ACP/SDK/Codex adapter and test paths. Excludes nine manifest, lock, investigation, input, Git Diff sheet, capability and Claude adapter/test paths. No historical runtime, dependency installation or SDK test execution.",
+      "finding": "Adds route path/file navigation, inline-code path heuristics, copy path, mtime sorting and file preview transitions. Legacy ACP configuration advertises persistence via static flags/environment. Separate new Codex SDK adapter starts/resumes native IDs, declares modes/capabilities and reads whole rollout files via depth-limited but otherwise unbounded scans with swallowed I/O/parse errors. ACK-style resume tests do not prove remembered context; historical tests were not run.",
+      "fleetpane_action": "Add shared explicit-link decoding and identity-confined file/directory open, CLI raw path open and native retained-conversation overlay. Exact endpoint/cwd lookup reuses saved root identity; Markdown line anchors, tool paths, Go/Enter, full-byte copy, refresh, refusal and Host/draft preservation verified. Fix reproduced nonpaginated history hydration blocked by draft loading and preview metadata squeezed by a fixed-height textarea. 159 root and 15 desktop tests, strict Clippy, process and native evidence pass. Keep negotiated app-server/ACP archive; no historical flags/SDK or unbounded rollout scans. Inline-code guessing, OS deep links, media and deferred Git Diff expansion remain open."
+    },
+    {
+      "ordinal": 145,
+      "revision": "8a0a6d9488428f5eafe487e663463d25c73e2ba8",
+      "date": "2025-11-14T19:14:23+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.test.ts"
+      ],
+      "inspection_scope": "Full changed text for all 2 listed paths. No historical runtime, dependency installation or test execution.",
+      "finding": "Claude native-handle fallback, synchronous whole-JSONL history with sidechain filtering and swallowed parse/I/O failures, once-only history drain and fixed 120-second permission rejection. Codex test weakens ACK checks and no longer isolates its session directory.",
+      "fleetpane_action": "Keep bounded Host observations, explicit context resume and visible errors. New 125-second process proof preserves original permissions and unrelated snapshots. Do not copy timeout decisions or weaken provider evidence."
+    },
+    {
+      "ordinal": 146,
+      "revision": "1dfb7913b17c9639d72b45902dfb463fed1b3aba",
+      "date": "2025-11-14T19:25:37+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "inspection_scope": "Full changed text for all 1 listed paths. No historical runtime, dependency installation or test execution.",
+      "finding": "Manager adds shared clients, distinct runtime/native IDs, scoped state/stream subscriptions, permission routing, cached configuration and a last-2000-event in-memory timeline without a byte bound. Generator lifetime and removal-before-close do not establish durable execution; refresh/history failures become defaults.",
+      "fleetpane_action": "Keep independent Host drivers, negotiated capabilities, bounded paged timeline and durable receipts. Add global pending inventory from authoritative snapshots, including unopened Hosts, rather than cached manager state."
+    },
+    {
+      "ordinal": 147,
+      "revision": "0f3668c9ed74da4a1224565719df27ef9735e78f",
+      "date": "2025-11-14T19:40:46+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "inspection_scope": "Full changed text for all 2 listed paths. No historical runtime, dependency installation or test execution.",
+      "finding": "Synthetic Codex SDK stub emits requests and a failed turn. respondToPermission removes the local entry and appends local permission history; no provider answer transport is present in the inspected implementation. Local resolved assertions do not prove execution permission.",
+      "fleetpane_action": "Keep provider response frames, original IDs and controller fences. New process/native evidence reads exact ACP outcomes, rejects stale/duplicate decisions and isolates colliding IDs. No new real-model Codex approval claim."
+    },
+    {
+      "ordinal": 148,
+      "revision": "5a2b84ee6f2bd008582e7867e9f0fe660eed9ad2",
+      "date": "2025-11-14T19:59:34+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "inspection_scope": "Full changed text for all 2 listed paths. No historical runtime, dependency installation or test execution.",
+      "finding": "Claude caches tool-use IDs and groups partial starts/results. Command/file-change records use tool/input heuristics, successful-result paths and post-execution existsSync. Tool start emits permission-granted metadata. Historical pwd/file tests were inspected but not run.",
+      "fleetpane_action": "Retain structured tool IDs/status/raw content and supplied paths without guessing grants or scanning files during render. Existing tool cards and file navigation remain authoritative; user-deferred Git Diff expansion stays deferred."
+    },
+    {
+      "ordinal": 149,
+      "revision": "90b0094aae9b666ca714571fe7ec02e9eb457f2c",
+      "date": "2025-11-14T20:20:17+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.ts"
+      ],
+      "inspection_scope": "Full changed text for all 1 listed paths. No historical runtime, dependency installation or test execution.",
+      "finding": "Cached whole-file JSON registry stores configuration, title, timestamps, status and native handle. Invalid records skip; read/parse errors become an empty loaded cache. Direct file replacement is not transactional. Snapshot updates set local activity time.",
+      "fleetpane_action": "Keep private transactional SQLite state, Host journal/archive, explicit unknowns and original provider identity. Do not introduce an empty-registry fallback or silently create a new session under an old identity."
+    },
+    {
+      "ordinal": 150,
+      "revision": "8cf808b14d31bdeccde47a707e80c36f8c0c0151",
+      "date": "2025-11-15T02:06:09+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/agent-registry.test.ts",
+        "packages/server/src/server/agent/provider-manifest.ts",
+        "packages/server/src/server/persistence-hooks.ts",
+        "packages/server/src/server/persistence-hooks.test.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "inspection_scope": "Full changed text of seven listed manager/registry/manifest/persistence/bootstrap paths. Other 48 paths excluded, including messages/session, UI, MCP, removed ACP, documentation, scripts and dependencies. No historical runtime, dependency installation or tests.",
+      "finding": "Selected manager/registry/manifest/persistence/bootstrap paths add generator return cancellation, registry lookup and last-mode seed, static modes, fire-and-forget snapshot persistence and serial startup restoration. Missing native handle creates a fresh session under the old managed ID; shutdown closes all agents. Tests assert mocked resume/create and registry/config round trips, not execution continuity.",
+      "fleetpane_action": "Keep replaceable controllers, independent Hosts, explicit resume, negotiated modes and durable unknowns. Attention remains observational with explicit takeover and refreshing read-only source state. 162 root/15 desktop tests, 125-second process and native exact-answer/draft proof pass. No new lifecycle daemon, migration or historical runtime acceptance."
+    },
+    {
+      "ordinal": 151,
+      "revision": "c37e499562fdf2349debd5b5f2afa16574eef296",
+      "date": "2025-11-15T11:58:41+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-sidebar.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/components/tool-call-bottom-sheet.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/activity-curator.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.test.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/providers/claude-agent.history.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.test.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full changed text for all 20 listed paths; 3 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Common tool_call/user_message events, saved-session discovery and resume UI; refresh resumes a replacement provider session, closes the old session and clears client history. Registry temp/rename and heuristic recovery are not execution handoff. Whole-file discovery and text extraction have limits; raw event/status inference is not authoritative.",
+      "fleetpane_action": "Keep explicit Host incarnation/thread identity, observed archive, lease fencing and separate Inspect/Resume/Reload. Do not copy refresh replacement, automatic send interruption, unbounded discovery or corruption repair. Add explicit supplied resource projections rather than arbitrary nested output inference."
+    },
+    {
+      "ordinal": 152,
+      "revision": "1d9f6a0df397be34218ba9917509dd21ee4b3865",
+      "date": "2025-11-15T12:22:14+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-bottom-sheet.tsx"
+      ],
+      "inspection_scope": "Full changed text for all 1 listed paths; 3 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Tool sheet adds inferred read/command/edit previews, nested-key extraction with depth limits and raw argument/result sections. Empty values and input/output identity require care; patch presentation is part of this historical change.",
+      "fleetpane_action": "Use protocol-tagged content and exact source Copy; resource cards fill the observed raw-JSON gap. Keep Git Diff expansion deferred and avoid speculative nested-key extraction."
+    },
+    {
+      "ordinal": 153,
+      "revision": "6da27613aa83c3a9b0d130c8bdb5de56c87be547",
+      "date": "2025-11-15T12:43:01+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/types/stream.ts",
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full changed text for all 4 listed paths; 1 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Adjacent same-provider todo rows consolidate; task cards show latest snapshot and completion count. Permission cards infer plan/command/read/change previews from proposed input. The referenced parser utility is not inspected here. Manual test script logs outcomes rather than enforcing assertions.",
+      "fleetpane_action": "Existing negotiated task panel and request-carried permission previews remain the contracts. Per-turn task timeline and historical runtime execution remain unaccepted; resource rendering does not infer permission or execution status."
+    },
+    {
+      "ordinal": 154,
+      "revision": "3ba748ce7c0732bddf72740b59df67485f2f923e",
+      "date": "2025-11-15T12:44:35+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx"
+      ],
+      "inspection_scope": "Full changed text for all 1 listed paths; 1 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Only the agent-menu label changes from Refresh from disk to Refresh. The replacement-session behavior introduced in 151 is unchanged.",
+      "fleetpane_action": "Retain observational conversation reload and explicit context resume; a shorter label does not make provider replacement safe."
+    },
+    {
+      "ordinal": 155,
+      "revision": "b5daa1fa663ea013e992302219d104bc23f53977",
+      "date": "2025-11-15T12:49:19+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "inspection_scope": "Full changed text for all 1 listed paths; 1 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Resume list excludes active native persistence/session IDs before local filtering. IDs are not provider-namespaced, and discovery is still a bounded saved-result selection rather than an exhaustive searchable directory.",
+      "fleetpane_action": "Retain endpoint, Host incarnation and provider/thread identity. No active/saved filter or provider-private alias adoption is implemented in this resource slice."
+    },
+    {
+      "ordinal": 156,
+      "revision": "bd77d53e0250fa42a80ee1f4bec1fcdc97755c28",
+      "date": "2025-11-15T13:29:55+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/types/stream.ts",
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full changed text for all 4 listed paths; 1 other paths excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Tool pills receive result/error and bounded inline previews. Status is inferred from explicit regexes, recursive raw object fields, output presence, success flags and exit codes; explicit completed may precede error evidence. Manual console cases cover start/update/failure but are not run here.",
+      "fleetpane_action": "Preserve reported statuses and raw payloads. Render explicit ACP/MCP resource blocks with bounded previews, complete copy and visible projection errors. Synthetic process/native acceptance does not validate historical provider or heuristic status behavior."
+    },
+    {
+      "ordinal": 157,
+      "revision": "900cc00c03bef266f8f01f54630a2fc1fff92051",
+      "date": "2025-11-15T13:49:16+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; 1 plan path excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Tool pills gain highlighted styling and optional pre-parsed edit/read/command fields. Fallback parser hooks still run even when supplied parsed fields are selected. The referenced parser implementation is not inspected in this path.",
+      "fleetpane_action": "Keep existing GPUI Kit native cards and typed protocol projections. Investigate card identity using current source rather than copying historical parser or styling assumptions."
+    },
+    {
+      "ordinal": 158,
+      "revision": "e3895ddaf50bc1079346eaa673f02a1695f03a7f",
+      "date": "2025-11-15T14:15:38+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; 1 plan path excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Manual hydration script adds raw input/output-array preservation, late-ID reconciliation and parsed read/command/edit-body cases. Outcomes are console pass/fail messages, not enforced assertions. Historical script was not executed.",
+      "fleetpane_action": "Preserve raw source and explicit IDs. Two new regressions exercise the same native conversation row builder as production; do not claim historical provider hydration acceptance."
+    },
+    {
+      "ordinal": 159,
+      "revision": "1003d450046c415489eff0493f2726208d20f1a3",
+      "date": "2025-11-15T14:35:40+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; 1 plan path excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Assistant/thought IDs gain state-length suffixes. Tool call matching case-folds IDs without provider scoping in the primary search, then uses unfinished same-provider/server/tool candidates and optional name/kind filters before FIFO matching. Raw events accumulate in arrays and parsed previews are recomputed. Manual live/hydration cases cover two anonymous starts and two completions.",
+      "fleetpane_action": "Keep exact provider identity and existing typed updates; do not associate anonymous tools by FIFO or normalize IDs. Fix the separately reproduced Fleetpane status/item and delimiter key collisions with tagged tuples, retaining per-tuple cache updates."
+    },
+    {
+      "ordinal": 160,
+      "revision": "b85deb2906a7dc9eb36b09cbb8e5912461d03159",
+      "date": "2025-11-15T14:48:56+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; 1 plan path excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Permission React keys add agent ID with request ID, otherwise a name/title/index fallback. A truthiness test treats missing and other falsy IDs alike; fallback display metadata is not authoritative request identity.",
+      "fleetpane_action": "Retain original numeric/string request IDs and Host-incarnation fencing. This slice changes conversation row keys only; existing permission controls and their identity are unchanged."
+    },
+    {
+      "ordinal": 161,
+      "revision": "320328b0cad8c0a6960a036760f97f5ff15ec49e",
+      "date": "2025-11-15T14:56:13+01:00",
+      "category": "platform",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "inspection_scope": "Full changed text of all 3 listed paths; 1 plan path excluded. No historical runtime, dependency installation or test execution.",
+      "finding": "Three UI paths disable Reanimated entry/exit transitions on Android with an upstream-crash reference; stream view also forwards pre-parsed tool bodies. Historical crash and upstream issue were not reproduced or verified.",
+      "fleetpane_action": "No Android animation guard is added to the Rust desktop. Preserve selected-path review separately from platform runtime claims; native identity correction is verified on Linux only."
+    },
+    {
+      "ordinal": 162,
+      "revision": "a57315d78d5e5107ac5bd383fb671266d71281a7",
+      "date": "2025-11-15T15:06:43+01:00",
+      "category": "tests",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "test-idempotent-stream.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Console-only stream outcomes become node:test assertions; duplicate application of each text chunk is removed from the deterministic-hydration case. Claude tool-body fixtures gain explicit MCP use/result shapes and an ID-stability-after-removal case is added. Production reducer changes are not part of this commit.",
+      "fleetpane_action": "Keep enforced Rust regression assertions and exact provider IDs. Existing row-identity and stream/archive tests remain separate evidence; deterministic hydration does not establish arbitrary delta replay idempotence."
+    },
+    {
+      "ordinal": 163,
+      "revision": "ddd10f05663bad2b2fb96826507f74fbe349b4a6",
+      "date": "2025-11-15T15:26:49+01:00",
+      "category": "tests",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "packages/app/package.json",
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/vitest.config.ts"
+      ],
+      "inspection_scope": "Full changed text of all 4 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Root test script delegates to workspaces; app gains Vitest, Node environment and aliases. The moved stream suite registers 18 cases, including retaining repeated-text hydrated user messages for Claude/Codex, tool bodies/statuses, whitespace, permissions, todo consolidation and timeline IDs after shrinkage. Historical tests were not run.",
+      "fleetpane_action": "Use the existing Rust unit/process/native layers rather than adding a JavaScript harness. Keep historical test intent distinct from current acceptance and preserve separate duplicate-text messages."
+    },
+    {
+      "ordinal": 164,
+      "revision": "1886898bf2c81444677c85211eb1c4f016c770ad",
+      "date": "2025-11-15T15:36:22+01:00",
+      "category": "platform",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/hooks/use-image-attachment-picker.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Picker logic moves to a hook with permission-state requests, concurrent-open ref guard, pending Android result recovery, MediaTypeOptions.Images and visible errors with finally cleanup. The caller appends selected assets; historical crash and permission behavior were not reproduced.",
+      "fleetpane_action": "Retain the existing native picker, explicit picking/importing states and failure-preserving draft. Independently fill PRD AG-04/UX-03 clipboard input through the pinned Kit hook and shared byte/file asset publication; do not claim this commit implements clipboard paste."
+    },
+    {
+      "ordinal": 165,
+      "revision": "edcfdf970dbaf12c7750cba79eabb43f900d187b",
+      "date": "2025-11-15T16:28:57+01:00",
+      "category": "stream",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/vitest.config.ts"
+      ],
+      "inspection_scope": "Full changed text of all 5 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Provider badges are added. Timeline IDs check post-prune collisions including users; failed tool state wins and completion is sticky. Metadata fallback matches anonymous tools by provider/server/name and optional kind/display name, but the existing early return still prevents the fallback when no unfinished anonymous candidate exists. Claude history extracts tool-like blocks before text; mixed user text can be lost. Vitest adds an alias. Extracted parser, diff viewer, bottom-sheet deletion and provider tests are excluded.",
+      "fleetpane_action": "Keep exact provider tool IDs, tagged timeline identities and explicit typed data. Do not port metadata guessing as canonical identity or claim the excluded parser was reviewed. Git Diff expansion remains deferred. Direct terminal input independently fills the earlier PRD terminal gap."
+    },
+    {
+      "ordinal": 166,
+      "revision": "af7d7cedb092f235406e24da0b12d2ea836bfa20",
+      "date": "2025-11-15T16:33:10+01:00",
+      "category": "stream",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/src/types/stream.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Removes the early return blocking metadata fallback after completed tool calls. A regression fixture expects replayed anonymous run metadata to reuse a completed call rather than append a third pill. This fixes reachability of the fallback introduced in 165; historical tests were not run.",
+      "fleetpane_action": "Retain explicit call IDs and conservative anonymous boundaries; do not identify a new anonymous call from an old tool name alone. Existing Rust timeline/tool regressions remain distinct from this historical test."
+    },
+    {
+      "ordinal": 167,
+      "revision": "e26219c96742fb61b3ad68fb70c5feb476f761d2",
+      "date": "2025-11-15T17:33:56+01:00",
+      "category": "stream",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/components/tool-call-preview.test.ts",
+        "packages/app/src/components/tool-call-preview.ts"
+      ],
+      "inspection_scope": "Full changed text of all 3 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Message rendering delegates preview input selection to a helper; supplied parsed arrays take precedence and a nullish command uses fallback parsing. Fallback parsers still run before that selection even when supplied data exists. Added tests check supplied array identity and edit-body fallback. Historical tests were not run.",
+      "fleetpane_action": "Reuse existing typed native command/tool projections and retained cards. No Git Diff viewer expansion, new parser adoption or historical hydration acceptance is claimed."
+    },
+    {
+      "ordinal": 168,
+      "revision": "b45583a2b2c78ee94edb646ed4266285ef845a66",
+      "date": "2025-11-15T17:36:15+01:00",
+      "category": "stream",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/types/shared.ts",
+        "packages/app/src/types/stream.harness.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "inspection_scope": "Full changed text of all 6 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Centralizes PendingPermission.key for maps/rendering, using agent prefix and id/metadata/name/title/kind-plus-JSON fallback. Falsy IDs and metadata aliases remain possible. Claude history preserves text beside user tool-result blocks; Codex rollout extraction includes user role and trims/joins text fields. A new harness has full live bodies but a completed hydrated fixture without those bodies while expecting parsed content; it was not executed and cannot establish reconstruction from absent data.",
+      "fleetpane_action": "Keep original JSON request IDs and Host incarnation/ownership fences. Preserve provider text rather than adopting trimming or private-history aliases. Do not import bodyless tool metadata as recovered content. Session lifecycle and restoration remain explicit later work."
+    },
+    {
+      "ordinal": 169,
+      "revision": "19d172cc8d4c5bc5a5651bf4f77f2c8b801fa3e4",
+      "date": "2025-11-15T17:40:05+01:00",
+      "category": "docs",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Adds a proposed Delete agent action that removes only the local registry entry, retaining provider persistence. This is a historical plan, not an implemented workflow or current instruction.",
+      "fleetpane_action": "Retain AG-01/WS-05 archive/restore requirements; registry hiding is not provider archival or safe runtime retirement."
+    },
+    {
+      "ordinal": 170,
+      "revision": "e208f1c5bde1bf16022ca7edcc918295cfe1c3ed",
+      "date": "2025-11-15T17:41:15+01:00",
+      "category": "stream",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/src/types/stream.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Fallback anonymous tool IDs now use the state-aware collision check, including tool prefix. Added regression retains two completed anonymous tools with identical metadata and timestamp, requiring distinct IDs. Historical tests were not run.",
+      "fleetpane_action": "Keep explicit provider call identity and existing Rust anonymous segmentation/tagged row identities; no metadata-only fuzzy equivalence."
+    },
+    {
+      "ordinal": 171,
+      "revision": "37d0fe0637ff3bd64cb422a0b173e9c43369755c",
+      "date": "2025-11-15T17:47:51+01:00",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/vitest.config.ts"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Switches app Vitest pool to forks. The comment attributes startup failures to Expo native tooling and worker_threads process.send stubs and says the pool permits reaching intentional failures. That explanation and historical execution were not reproduced.",
+      "fleetpane_action": "Keep layered Rust tests, native acceptance and required process evidence distinct. Do not recreate the historical JavaScript worker configuration or claim the suite became green."
+    },
+    {
+      "ordinal": 172,
+      "revision": "66b465a1329e1d7f99297e53772ba6c68b658594",
+      "date": "2025-11-15T17:49:41+01:00",
+      "category": "platform",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-image-attachment-picker.ts"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Changes the picker mediaTypes from the deprecated enum to an asserted array containing images. The selected hook diff has no additional runtime behavior or historical crash proof.",
+      "fleetpane_action": "Keep the native picker and clipboard contracts already covered by separate Rust/Linux acceptance; no Expo dependency or assertion casting is adopted."
+    },
+    {
+      "ordinal": 173,
+      "revision": "2a02f41182024fc245cf05afebb0109d098951d5",
+      "date": "2025-11-15T18:13:04+01:00",
+      "category": "lifecycle",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full changed text of all 5 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Adds state-aware Cancel controls while retaining realtime toggling, long-press Delete sheet, websocket cancel/delete messages and deleted-state cleanup. Server delete calls closeAgent and registry.remove, catches/logs either failure, then still emits agent_deleted. The UI description promises registry-only removal but close is attempted. Exact closeAgent internals and historical runtime were not inspected/run here.",
+      "fleetpane_action": "Preserve explicit Stop with provider settlement and existing permission isolation. Do not port success after failed deletion or call provider archival mere registry hiding. Implement real provider archive browsing/restoration separately; active archive mutation still needs tree impact and explicit-stop acceptance."
+    },
+    {
+      "ordinal": 174,
+      "revision": "e7b8cc373c6477af6d430b011ce42a34d0093783",
+      "date": "2025-11-15T18:18:14+01:00",
+      "category": "protocol",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/json-utils.ts",
+        "packages/server/src/server/terminal-mcp/server.ts"
+      ],
+      "inspection_scope": "Full changed text of all 3 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Wraps agent/terminal MCP structuredContent in a recursive JSON helper. It rejects undefined and unsupported primitive types but permits all JavaScript numbers including non-finite values; seen objects are skipped rather than cycles rejected and arrays bypass the seen set. This is not proof of universally JSON-serializable data. Historical MCP runtime/tests were not run.",
+      "fleetpane_action": "Continue typed serde_json values at RPC/MCP boundaries and explicit errors. Do not reproduce JavaScript validation workarounds or claim public Fleetpane MCP activity/export is implemented."
+    },
+    {
+      "ordinal": 175,
+      "revision": "673c6f1594d13285a19071d2c1d5874f5b526226",
+      "date": "2025-11-15T18:21:02+01:00",
+      "category": "voice",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/realtime-context.tsx"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Speech-start now sends abort_request after stopping local playback; its catch logs failures. The request carries no original turn identity. Historical playback/voice behavior was not executed.",
+      "fleetpane_action": "Keep original Host/thread/turn identity fences for cancellation. Native voice remains missing at PRD P2; foreground focus alone never authorizes cancelling another session."
+    },
+    {
+      "ordinal": 176,
+      "revision": "377fa196f8d251c165b253f3034f5a2f28502fa0",
+      "date": "2025-11-15T18:26:37+01:00",
+      "category": "voice",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/tts-manager.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full changed text of all 2 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "The first input-audio chunk marks speech once, aborts the current LLM and resolves/clears pending playback promises; new TTS is suppressed while the speech flag is set and state is reset at transcription/empty/error boundaries. Resolving pending promises is not evidence that audio played.",
+      "fleetpane_action": "Retain distinct observed completion, cancellation and uncertainty. Do not port playback promise settlement as a shutdown or resource-release receipt; no Rust voice acceptance."
+    },
+    {
+      "ordinal": 177,
+      "revision": "8202985bad4f2e14baafb8d222ba9596bb7cd6ad",
+      "date": "2025-11-15T18:35:13+01:00",
+      "category": "voice",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/contexts/realtime-context.tsx",
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "inspection_scope": "Full changed text of all 3 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "The agent screen sets/clears focusedAgentId and speech-start sends cancel_agent_request for the focused agent before abort_request. Focus addresses an agent but supplies no original turn identity.",
+      "fleetpane_action": "Keep UI selection separate from runtime ownership and exact cancellation target. Native session inspection captures a fixed Host/root and closes on selection or Host changes; voice remains unimplemented."
+    },
+    {
+      "ordinal": 178,
+      "revision": "104aae95dadc170924beddf58613c6cfdcb8a992",
+      "date": "2025-11-15T18:41:31+01:00",
+      "category": "voice",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "handleAbort clears pending TTS segments, the partial buffer and segment timeout and aborts in-flight TTS before cancellation logging. No historical runtime or audible behavior was tested.",
+      "fleetpane_action": "Explicit lifecycle work must enumerate owned resources and pending results; idle metadata alone is insufficient. This batch supplies observational ancestry only, not safe archive/stop/Host upgrade."
+    },
+    {
+      "ordinal": 179,
+      "revision": "561e164b02beb33c0c622045ce9ebfc38f3ad39e",
+      "date": "2025-11-15T18:54:37+01:00",
+      "category": "plan",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "inspection_scope": "Full changed text of all 1 listed paths; excluded paths listed in the review receipt. No historical runtime, dependency installation or test execution.",
+      "finding": "Only plan.md changes. It marks streaming PCM/STT items complete and references docs/streaming-stt-vad.md; this commit does not supply the referenced implementation or document. Checklist claims are not runtime evidence.",
+      "fleetpane_action": "Do not mark voice/STT, streaming playback, native microphone, VAD or cancellation parity complete. Continue feature acceptance with source and owned runtime receipts."
+    },
+    {
+      "ordinal": 180,
+      "revision": "7284efd0fe7401c1ccf8b06dddf8f28861d37386",
+      "date": "2025-11-15T19:06:53+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/agent/tts-manager.ts",
+        "packages/server/src/server/agent/tts-openai.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Raw streamed TTS chunks share group IDs; confirmation decrements a group counter without per-chunk deduplication, and playback errors still confirm. Stream-ready timing is not completion or independent chunk decodability.",
+      "fleetpane_action": "voice-P2-missing"
+    },
+    {
+      "ordinal": 181,
+      "revision": "24a245bd1707f8d496e916d07ea74d29f30d941f",
+      "date": "2025-11-15T19:18:39+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Manual focus overrides latest-running agent selection; timestamps choose a presentation target, not ownership or a cancellation scope.",
+      "fleetpane_action": "preserve-explicit-session-selection"
+    },
+    {
+      "ordinal": 182,
+      "revision": "4bd36c0808d9ae2d86e1d953f044d40788654a19",
+      "date": "2025-11-15T19:21:57+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/realtime-context.tsx"
+      ],
+      "finding": "Speech starts abort only the orchestrator; removal of focused-agent cancellation preserves independent work. Audio becomes PCM16k chunk plus final flag.",
+      "fleetpane_action": "preserve-other-session-work"
+    },
+    {
+      "ordinal": 183,
+      "revision": "9dcc8314b203e90f4411a6f7fc160079c4a91b44",
+      "date": "2025-11-15T19:31:27+01:00",
+      "category": "observability",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/realtime-context.tsx",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Date.now telemetry measures playback state and handleAbort latency, without proving audible stop or provider/resource teardown.",
+      "fleetpane_action": "separate-acknowledgement-and-settlement"
+    },
+    {
+      "ordinal": 184,
+      "revision": "8e6508f01fe6b089ea42b5785c08af68c6637502",
+      "date": "2025-11-15T19:41:40+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/src/types/stream.ts"
+      ],
+      "finding": "Codex raw item events become command, file-change, MCP and web-search tool calls. Call IDs are preferred and command output is trimmed; two reducer cases cover command/MCP only.",
+      "fleetpane_action": "existing-typed-appserver-items"
+    },
+    {
+      "ordinal": 185,
+      "revision": "ec8aee2c12ff84eafad78d39820665d4735230a6",
+      "date": "2025-11-15T19:44:21+01:00",
+      "category": "ui",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Cancel text becomes a 40px square icon with Stop agent accessibility label. Connection state disables it; no acknowledgement/completion tracking is added.",
+      "fleetpane_action": "host-owned-stop-progress"
+    },
+    {
+      "ordinal": 186,
+      "revision": "94862b73f46794717a42f27d8c802d7e8e31fa4d",
+      "date": "2025-11-15T19:46:37+01:00",
+      "category": "ui",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Send-only state hides realtime/voice controls while sendable text/images are present; no turn protocol change.",
+      "fleetpane_action": "existing-explicit-send-stop"
+    },
+    {
+      "ordinal": 187,
+      "revision": "42a51124af16ead2cb437a4635d84c79ca585f49",
+      "date": "2025-11-15T19:51:57+01:00",
+      "category": "ui",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-status-bar.tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Working indicator moves from status dot into stream; running status drives animated dots and list extraData; this is observed agent status, not a UI command promise.",
+      "fleetpane_action": "shared-observed-agent-progress"
+    },
+    {
+      "ordinal": 188,
+      "revision": "adda0d92d0a413b8eb2212b2eda6c4856426dcda",
+      "date": "2025-11-15T20:17:47+01:00",
+      "category": "typing",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/types/stream.harness.test.ts",
+        "packages/app/src/types/stream.test.ts",
+        "packages/app/src/types/stream.ts",
+        "packages/server/package.json",
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/tsconfig.server.json",
+        "packages/server/tsconfig.server.typecheck.json"
+      ],
+      "finding": "Agent tool status union/type guard, normalized statuses and test narrowing; separate no-emit rootDir plus server alias. Historical typecheck/tests not executed.",
+      "fleetpane_action": "existing-rust-type-boundaries"
+    },
+    {
+      "ordinal": 189,
+      "revision": "7bdafee8182502d3e60a169b45c53f186b98f076",
+      "date": "2025-11-15T20:24:53+01:00",
+      "category": "typing",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Codex rollout discriminants and payload types replace any; guards still validate mainly outer tags, malformed lines are skipped and text is trimmed.",
+      "fleetpane_action": "retain-typed-appserver-not-private-rollout-parsing"
+    },
+    {
+      "ordinal": 190,
+      "revision": "b39497d08f8ece60d4b779287db1a3fb19b13378",
+      "date": "2025-11-15T20:29:23+01:00",
+      "category": "ui",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/headers/back-header.tsx",
+        "packages/app/src/components/headers/home-header.tsx",
+        "packages/app/src/components/headers/screen-header.tsx"
+      ],
+      "finding": "Home/back headers share ScreenHeader slots, safe-area padding and border. No new domain behavior.",
+      "fleetpane_action": "existing-native-workbench-shell"
+    },
+    {
+      "ordinal": 191,
+      "revision": "b046dae7990560c580ae97efbb04c4746dcd16d4",
+      "date": "2025-11-15T20:45:09+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "package.json",
+        "packages/app/app.json",
+        "packages/app/package.json",
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/components/conversation-selector.tsx",
+        "packages/app/src/hooks/use-recent-paths.ts",
+        "packages/app/src/hooks/use-settings.ts",
+        "packages/app/src/hooks/use-speechmatics-audio.ts",
+        "packages/app/src/types/stream.test.ts",
+        "packages/server/package.json",
+        "packages/server/src/server/agent/llm-openai.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Renames packages, identifiers and local storage keys without migration in these changes; also changes microphone PCM buffering/minimum chunks and server WAV wrapping, not merely branding.",
+      "fleetpane_action": "independent-brand-and-revisioned-local-storage-voice-p2"
+    },
+    {
+      "ordinal": 192,
+      "revision": "e1bcb97e29f95edba8a5a7ba5e115efc252e8077",
+      "date": "2025-11-16T13:55:13+01:00",
+      "category": "assets",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/app.json"
+      ],
+      "finding": "Inspected app.json adaptive-icon background from pale to black; PNG assets excluded and not adopted.",
+      "fleetpane_action": "independent-brand-no-paseo-assets"
+    },
+    {
+      "ordinal": 193,
+      "revision": "9feec81047d5ff221ec6f90e22775199556690ad",
+      "date": "2025-11-16T18:02:13+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/hooks/use-speechmatics-audio.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/wait-for-agent-tracker.test.ts",
+        "packages/server/src/server/agent/wait-for-agent-tracker.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Buffers playback chunks until final then concatenates and acknowledges every chunk even on failure; adds mic permission gate, realtime speech-end buffer and wait cancellation tracker/test. MCP references waitTracker without declaration/initialization in this tree; no historical runtime claim.",
+      "fleetpane_action": "retain-exact-turn-observer-stop-independent-voice-p2"
+    }
+  ],
+  "workflow_status": {
+    "terminal-foundation": "partial; Linux Host-owned PTY/shared CLI/native ANSI screen and explicit plus direct keyboard input verified with owned real shells and fixture providers. Native cursor/paste modes, exact Unicode paste, bounded receipt-ordered input, deferred close and same-shell reopen covered. Selection/IME, mouse/query replies, automatic geometry and Host update recovery remain open; no throughput or parity claim.",
+    "voice": "missing; retain PRD P2 and on-demand boundary",
+    "web-build": "not a Rust feature; do not recreate deployment churn",
+    "device-appearance": "partial; shared revisioned System/Light/Dark and Linux native OS events, corruption/conflict/failure/reopen/normal-close verified; other preferences and macOS/Windows native acceptance remain open",
+    "activity-chronology": "partial; anonymous tool/role segmentation and explicit message identity fixed with two pre-fix regressions, old-binary reproduction, shared process/restart and native copy/reload/archive acceptance; raw activity MCP and reconstruction of old merged records remain open",
+    "recent-directories": "partial; exact endpoint-scoped local MRU and native creation/selection/forget/reopen/failure verified; absolute paths only, no automatic cross-window refresh",
+    "bounded-composer": "partial; exact multiline native input/copy/send, image, approval/Stop and question controls verified at 900x560 with messages visible after details allocation. Details scroll within half the remaining body; general pane sizing, large outer banners, IME and accessibility remain open.",
+    "local-image-attachments": "partial; picker plus native Linux X11 clipboard image paste, revisioned image-only/text+image drafts, exact native synthetic sends/reopen and capability/validation refusal verified. Existing supported ACP and actual Codex app-server/loopback file-image evidence remains separate. Installed DSH image support was not refreshed; remote upload, full-size viewer, drop, copied-file attachments, large incoming echoes, GC and external vision acceptance remain open.",
+    "persistent-session-identity": "partial; original ACP IDs and observed journal history retain explicit context resume. Codex provider archive listing/read/restore now has typed CLI/native fixture and installed 0.163.0 process acceptance. Restore preserves identity/history/drafts, does not send/resume/restore descendants, and uses fenced durable mutation receipts. Active archive mutation, tree impact, deletion UI, provider-private alias adoption and complete runtime restoration remain open.",
+    "conversation-tail-navigation": "partial; native return/stream follow, history paging and independent details scrolling with retained exact draft/other-session permission verified. No unread count, remote/read-only acceptance or cross-window scroll restoration.",
+    "exact-turn-observation": "partial; shared Unix CLI wait and six regressions plus protocol fixtures and installed Codex/gated loopback verified. No takeover/answer/Stop/send; explicit timeout, fault, expired cursor and unknown after restart. Public MCP, curated activity export, remote and performance acceptance remain open.",
+    "workspace-file-navigation": "partial; shared typed local open, explicit Markdown anchors, tool/change paths and retained-conversation file overlay verified with native exact copy, Go/Enter, refresh, refusal and independent Host/draft preservation. Saved exact endpoint/cwd roots retain identity fences; initial explicit registration covered. No inline-code guessing, OS deep links, forced delayed-reply acceptance, restart/anchor/scroll persistence, Back/Forward, editing, search/watch or media preview.",
+    "attention": "partial; read-only multi-Host pending requests, exact identity/source/filter/copy, original fenced native answers and external-resolution observation verified locally. Completion/failure/unread, request age, notification/mute/tray and keyboard-next remain open.",
+    "supplied-resources": "partial; explicit ACP/MCP embedded-resource and resource-link projection, bounded native literal/Markdown previews, metadata, complete text/URI/base64 copy and archive/reload verified locally. No fetching, binary decoding, outgoing context, audio, URI validation or fresh external model acceptance.",
+    "conversation-row-identity": "verified locally for covered native cache collisions; tagged kind/thread/turn/item tuples, two pre-fix regressions, native paginated before/after, independent expansion and exact Copy/reload. No fuzzy missing-ID matching, conflicting-provider-history repair or external-provider acceptance.",
+    "session-ancestry": "partial; bounded read-only Codex ancestry and loaded contexts are locally verified in shared engine, CLI and Linux native UI. Archived/ephemeral descendants, forks, pending requests, stale failures, drain and lease/Host changes covered. Observation is non-atomic and excludes background resources; safe archive/stop and live Host handoff remain open. ACP explicitly unsupported.",
+    "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance."
+  },
+  "limits": [
+    "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
+    "Dependency payloads, full prompt text and historical agent instruction compliance are not audited",
+    "Source review is not runtime acceptance",
+    "Existing Rust Session Host architecture and user-deferred Git Diff work remain in effect"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "response": "query",
+  "data": {
+    "message": {
+      "id": "query:d11b4bad-4ad0-4b6e-8185-7a8dca03bce9",
+      "result": {
+        "thread": {
+          "cwd": "/tmp/fleetpane-replay-169-20261021/native/workspace",
+          "fixtureArchived": false,
+          "historyMode": "paginated",
+          "id": "archived-ok",
+          "name": "Archived 中文 session",
+          "preview": "恢复后的下一条消息\n  preserve draft",
+          "status": {
+            "type": "idle"
+          },
+          "turns": [
+            {
+              "error": null,
+              "id": "turn-archived-ok",
+              "items": [
+                {
+                  "content": [
+                    {
+                      "text": "Archived request 中文\n  exact indentation",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "user-archived-ok",
+                  "type": "userMessage"
+                },
+                {
+                  "id": "assistant-archived-ok",
+                  "text": "# Preserved history\n\n**Archive** keeps this content.\n\n```rust\nlet value = 42;\n```",
+                  "type": "agentMessage"
+                }
+              ],
+              "status": "completed"
+            },
+            {
+              "error": null,
+              "fixtureOptions": {},
+              "id": "archived-ok-turn-2",
+              "items": [
+                {
+                  "content": [
+                    {
+                      "text": "恢复后的下一条消息\n  preserve draft",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "user-archived-ok-turn-2",
+                  "type": "userMessage"
+                },
+                {
+                  "id": "assistant-archived-ok-turn-2",
+                  "text": "Echo: 恢复后的下一条消息\n  preserve draft",
+                  "type": "agentMessage"
+                }
+              ],
+              "status": "completed"
+            }
+          ]
+        }
+      }
+    },
+    "sequence": 30
+  }
+}

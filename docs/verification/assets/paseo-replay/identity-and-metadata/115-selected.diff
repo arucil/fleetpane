@@ -1,0 +1,30 @@
+commit 0cc9666df0721aae724d2ce28776434b79c252cd
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 07:41:27 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 07:41:27 2025 +0100
+
+    chore: reset agents.json and add mode change handling to agent manager
+
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 089309ec6..8d8ace904 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -1115,6 +1115,17 @@ export class AgentManager {
+         agent.currentAssistantMessageId = null;
+         agent.currentThoughtId = null;
+       }
++
++      // Handle mode changes
++      if (update.update.sessionUpdate === "current_mode_update") {
++        const newModeId = update.update.currentModeId;
++        const runtime = this.getRuntime(agent);
++
++        if (runtime && runtime.currentModeId !== newModeId) {
++          console.log(`[Agent ${agentId}] Mode changed: ${runtime.currentModeId} -> ${newModeId}`);
++          runtime.currentModeId = newModeId;
++        }
++      }
+     }
+ 
+     // Create agent update with enriched notification wrapped in discriminated union

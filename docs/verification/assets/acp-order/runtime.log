@@ -1,0 +1,55 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+    Finished `test` profile [unoptimized] target(s) in 1.82s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_runtime-5aec065a82877275)
+
+running 41 tests
+test acp::archive::tests::chunk_writes_only_the_updated_item_and_archive_identity_damage_is_an_error ... ok
+test acp::tests::acp_plans_are_full_task_updates_instead_of_unknown_history_items ... ok
+test acp::tests::anonymous_chunks_keep_tool_and_role_boundaries_without_trimming ... ok
+test acp::archive::tests::restart_keeps_observed_items_but_never_restores_residency_or_pending_permissions ... ok
+test acp::tests::chunks_merge_by_message_and_partial_tool_updates_keep_input ... ok
+test acp::tests::deepseek_completed_todos_report_plans_without_inventing_priority ... ok
+test acp::tests::cancellation_waits_for_settlement_and_resolves_permission ... ok
+test acp::tests::configuration_is_serialized_across_controllers ... ok
+test acp::tests::malformed_activity_and_dispatch_capacity_fail_explicitly ... ok
+test acp::tests::explicit_message_identity_survives_interleaving_and_cannot_alias_anonymous ... ok
+test lifecycle::tests::activity_bounds_and_malformed_known_notifications_are_explicit ... ok
+test lifecycle::tests::activity_requires_exact_completion_and_retains_known_turn_on_idle ... ok
+test lifecycle::tests::admission_cas_and_conservative_allowlist ... ok
+test tasks::tests::provider_formats_replace_clear_and_preserve_future_statuses ... ok
+test acp::tests::prompt_admission_and_activity_are_not_settlement ... ok
+test terminal::tests::input_labels_size_and_drain_are_bounded ... ok
+test tests::approval_is_not_resolved_by_reconnect_or_handoff ... ok
+test tests::completions_cannot_cross_operation_targets ... ok
+test terminal::host::tests::byte_cursor_reports_loss_and_preserves_non_utf8_and_whitespace ... ok
+test tests::handoff_fences_old_writes_and_preserves_accepted_result ... ok
+test tests::provider_fault_preserves_terminal_admission_receipts_and_owner_fences ... ok
+test tests::expired_cursor_and_conflicting_id_do_not_silently_lose_or_repeat_work ... ok
+test tests::provider_resolution_removes_only_the_matching_pending_approval ... ok
+test tests::queries_are_fenced_allowlisted_and_bounded_until_provider_completion ... ok
+test acp::tests::inactive_only_provider_directory_keeps_residents_and_paginates_without_loss ... ok
+test tests::query_response_namespace_cannot_complete_a_mutation_with_the_same_uuid ... ok
+test tests::queries_do_not_consume_or_evict_mutation_identities ... ok
+test acp::tests::settlement_does_not_reemit_large_turn ... ok
+test tests::provider_limits_preserve_deliverable_snapshots_and_event_pages ... ok
+test acp::archive::tests::failed_resume_keeps_archive_and_large_resume_uses_the_existing_frame_boundary ... ok
+test tasks::tests::bounded_cache_survives_event_expiry_and_does_not_infer_completion ... ok
+test journal::tests::corruption_version_and_unsafe_files_are_rejected ... ok
+test acp::history::tests::invalid_scopes_flags_and_limits_are_rejected_without_provider_io ... ok
+test journal::tests::disk_budget_failures_never_publish_admission_or_completion ... ok
+test acp::history::tests::encoded_byte_pages_keep_every_entry_and_anchor_across_append ... ok
+test journal::archive_tests::archive_upserts_preserve_order_and_transaction_failures_preserve_rows_and_budget ... ok
+test journal::tests::restart_recovers_unknown_and_keeps_finished_receipt_without_old_watermark ... ok
+test journal::tests::admission_migrates_v1_and_survives_restarts_without_reopening_writes ... ok
+test journal::tests::provider_failure_keeps_terminal_receipts_pending_until_their_own_result ... ok
+test journal::tests::missing_or_invalid_saved_admission_never_defaults_to_ready ... ok
+test journal::archive_tests::v2_upgrade_keeps_admission_and_current_missing_malformed_or_oversize_archive_fails ... ok
+
+test result: ok. 41 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
+   Doc-tests fleetpane_runtime
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

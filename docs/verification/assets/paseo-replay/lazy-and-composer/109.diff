@@ -1,0 +1,21 @@
+commit c277f3fd7cb30b4757341e946397a37192ee820c
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 20:50:12 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 20:50:12 2025 +0200
+
+    chore: add claude-code-acp dependency to root package and update agent state
+
+diff --git a/package.json b/package.json
+index 6b31c33a7..2658364ee 100644
+--- a/package.json
++++ b/package.json
+@@ -32,5 +32,8 @@
+   "license": "MIT",
+   "overrides": {
+     "lightningcss": "1.30.1"
++  },
++  "dependencies": {
++    "@boudra/claude-code-acp": "^0.8.3"
+   }
+ }

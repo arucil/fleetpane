@@ -1,0 +1,37 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+    Finished `test` profile [unoptimized] target(s) in 1.32s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_runtime-5aec065a82877275)
+
+running 29 tests
+test acp::archive::tests::restart_keeps_observed_items_but_never_restores_residency_or_pending_permissions ... ok
+test acp::archive::tests::idle_info_is_archived_without_turns_and_old_rows_remain_readable ... ok
+test acp::archive::tests::chunk_writes_only_the_updated_item_and_archive_identity_damage_is_an_error ... ok
+test acp::archive::tests::modes_survive_restart_and_resume_replaces_the_catalog ... ok
+test acp::modes::tests::idle_updates_and_late_ack_keep_newer_provider_state ... ok
+test acp::tests::advertised_modes_are_projected_and_switchable ... ok
+test acp::tests::chunks_merge_by_message_and_partial_tool_updates_keep_input ... ok
+test acp::tests::acp_plans_are_full_task_updates_instead_of_unknown_history_items ... ok
+test acp::tests::cancellation_answers_permissions_before_settlement_and_isolates_sessions ... ok
+test acp::tests::configuration_is_serialized_across_controllers ... ok
+test acp::modes::tests::active_modes_preserve_permissions_and_stop_and_are_serial_per_session ... ok
+test acp::modes::tests::failed_modes_do_not_change_state_and_invalid_requests_never_dispatch ... ok
+test acp::tests::explicit_message_identity_survives_interleaving_and_cannot_alias_anonymous ... ok
+test acp::tests::minimal_tool_call_defaults_and_interleaved_updates_keep_one_card ... ok
+test acp::tests::deepseek_completed_todos_report_plans_without_inventing_priority ... ok
+test acp::tests::resident_info_is_not_replaced_by_a_stale_list_response ... ok
+test acp::tests::inactive_only_provider_directory_keeps_residents_and_paginates_without_loss ... ok
+test acp::tests::invalid_tool_patch_is_rejected_before_changing_a_card ... ok
+test acp::tests::malformed_activity_and_dispatch_capacity_fail_explicitly ... ok
+test acp::tests::anonymous_chunks_keep_tool_and_role_boundaries_without_trimming ... ok
+test acp::tests::prompt_admission_and_activity_are_not_settlement ... ok
+test acp::tests::malformed_session_info_never_partially_changes_metadata ... ok
+test acp::modes::tests::malformed_catalogs_updates_and_responses_are_visible_errors ... ok
+test acp::tests::session_info_is_idle_metadata_and_preserves_omitted_fields ... ok
+test acp::tests::session_info_during_prompt_does_not_create_or_split_history ... ok
+test acp::tests::settlement_does_not_reemit_large_turn ... ok
+test acp::archive::tests::failed_resume_keeps_archive_and_large_resume_uses_the_existing_frame_boundary ... ok
+test acp::history::tests::encoded_byte_pages_keep_every_entry_and_anchor_across_append ... ok
+test acp::history::tests::invalid_scopes_flags_and_limits_are_rejected_without_provider_io ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.15s
+

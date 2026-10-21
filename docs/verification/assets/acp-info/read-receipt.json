@@ -1,0 +1,183 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": {
+        "opaque": [
+          false,
+          {
+            "key": "中文"
+          }
+        ]
+      },
+      "updatedAt": "2026-10-21T09:08:07+08:00"
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-info-qa",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "d1a5b5b4-dc11-489f-9933-4c2024e90375",
+    "name": "Awaiting approval 中文",
+    "preview": "DeepSeek Harness",
+    "status": {
+      "type": "active"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "1a8a1baf-0cd6-48da-8cc8-f7cf526634a7",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission]",
+                "type": "text"
+              }
+            ],
+            "id": "user:1a8a1baf-0cd6-48da-8cc8-f7cf526634a7",
+            "type": "userMessage"
+          },
+          {
+            "content": [
+              "Synthetic ACP reasoning"
+            ],
+            "id": "1a8a1baf-0cd6-48da-8cc8-f7cf526634a7:agent_thought_chunk:id:thought",
+            "summary": [],
+            "type": "reasoning"
+          },
+          {
+            "call": {
+              "kind": "other",
+              "rawInput": {
+                "text": "[permission]"
+              },
+              "sessionUpdate": "tool_call",
+              "status": "in_progress",
+              "title": "Synthetic tool",
+              "toolCallId": "call-0f9c67f1-ccb6-4a51-803c-5888f452c8aa"
+            },
+            "id": "1a8a1baf-0cd6-48da-8cc8-f7cf526634a7:tool:call-0f9c67f1-ccb6-4a51-803c-5888f452c8aa",
+            "type": "acpToolCall"
+          }
+        ],
+        "status": "inProgress"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "dab574c8-aaea-48d7-acaa-bae6e491b84a",
+    "host_pid": 305938,
+    "provider_pid": 305940,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "dab574c8-aaea-48d7-acaa-bae6e491b84a",
+      "controller_id": "e43b2dfa-b963-476a-83a6-24f61128e870",
+      "generation": 6
+    },
+    "sequence": 19,
+    "operation_ids": [
+      "2e35ad64-8b51-40ee-8c8c-5068a4eab8c2",
+      "5a81d99c-e4f6-4a8d-bbda-3f76c88e6258"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "d1a5b5b4-dc11-489f-9933-4c2024e90375",
+          "turn_id": "1a8a1baf-0cd6-48da-8cc8-f7cf526634a7"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "d1a5b5b4-dc11-489f-9933-4c2024e90375",
+          "threadId": "d1a5b5b4-dc11-489f-9933-4c2024e90375",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-0f9c67f1-ccb6-4a51-803c-5888f452c8aa"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+}

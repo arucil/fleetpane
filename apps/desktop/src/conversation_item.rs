@@ -1,6 +1,7 @@
 use fleetpane_session::{
-    Item,
+    Item, Turn,
     content::{Content, Image as Attachment, Part},
+    files::{Link, Target},
 };
 use gpui_kit::component::{
     ActiveTheme, Sizable,
@@ -9,14 +10,16 @@ use gpui_kit::component::{
     text::{TextView, TextViewState},
 };
 use gpui_kit::{
-    AnyElement, App, ClipboardItem, Context, Entity, Image, ImageFormat, ImageSource, ObjectFit,
-    Render, ScrollHandle, SharedString, SharedUri, StyledImage, Subscription, Window, div, img,
-    prelude::*, rems,
+    AnyElement, ClipboardItem, Context, Entity, Image, ImageFormat, ImageSource, ObjectFit, Render,
+    ScrollHandle, SharedString, SharedUri, StyledImage, Subscription, Window, div, img, prelude::*,
+    rems,
 };
 use serde_json::Value;
 use std::{path::Path, sync::Arc};
 
 const PREVIEW_BYTES: usize = 16 * 1024;
+
+mod resources;
 
 #[derive(Clone, PartialEq)]
 pub(super) struct Row {
@@ -28,7 +31,67 @@ pub(super) struct Row {
 }
 
 impl Row {
-    pub fn item(id: String, item: &Item) -> Option<Self> {
+    pub fn conversation(thread: &fleetpane_session::Thread) -> Vec<Self> {
+        let mut rows = Vec::new();
+        for turn in &thread.turns {
+            rows.push(Self::turn(&thread.id, turn));
+            for item in &turn.items {
+                if let Some(row) = Self::item(&thread.id, &turn.id, item) {
+                    rows.push(row);
+                }
+            }
+        }
+        rows
+    }
+
+    pub fn permission(
+        id: String,
+        pending: &Value,
+        thread: Option<&fleetpane_session::Thread>,
+    ) -> Self {
+        let review = fleetpane_session::acp::Permission::decode(pending)
+            .and_then(|request| request.ok_or_else(|| "Not an ACP permission".into()))
+            .and_then(|request| request.review(thread));
+        match review {
+            Ok(tool) => Self {
+                id,
+                label: format!("Tool permission · {}", tool.display_title()),
+                content: Content::Tool(tool),
+                copy: pending.to_string(),
+                error: None,
+            },
+            Err(error) => Self {
+                id,
+                label: "Invalid tool permission".into(),
+                content: Content::Unknown(pending.clone()),
+                copy: pending.to_string(),
+                error: Some(error),
+            },
+        }
+    }
+
+    pub fn turn(thread_id: &str, turn: &Turn) -> Self {
+        let mut label = format!("Turn · {}", turn.status);
+        if let Some(reason) = turn.stop_reason {
+            label.push_str(" · ");
+            label.push_str(reason.description());
+        }
+        Self {
+            id: row_key(&["turn", thread_id, &turn.id]),
+            label,
+            content: Content::Message(
+                turn.error
+                    .as_ref()
+                    .map(|error| Part::Text(error.to_string()))
+                    .into_iter()
+                    .collect(),
+            ),
+            copy: serde_json::json!({"id":turn.id,"status":turn.status,"stopReason":turn.stop_reason,"error":turn.error}).to_string(),
+            error: None,
+        }
+    }
+
+    pub fn item(thread_id: &str, turn_id: &str, item: &Item) -> Option<Self> {
         let content = item.content();
         if matches!(content, Ok(None)) {
             return None;
@@ -49,7 +112,7 @@ impl Row {
             Content::Markdown(_) => "Assistant".into(),
             Content::Message(_) => "You".into(),
             Content::AgentParts(_) => "Assistant".into(),
-            Content::Tool(call) => call.title.clone(),
+            Content::Tool(call) => call.display_title().into(),
             Content::Command(_) => "Command".into(),
             Content::Mcp(call) => format!("{} · {}", call.server, call.tool),
             Content::Files(_) => "Changed files".into(),
@@ -63,13 +126,19 @@ impl Row {
             label
         };
         Some(Self {
-            id,
+            id: row_key(&["item", thread_id, turn_id, &item.id]),
             label,
             content,
             copy,
             error,
         })
     }
+}
+
+/// Provider IDs are opaque strings. A tagged tuple preserves boundaries,
+/// empty IDs, case, quotes and Unicode without delimiter or hash collisions.
+fn row_key(parts: &[&str]) -> String {
+    serde_json::to_string(parts).expect("string identity tuples serialize")
 }
 
 enum Block {
@@ -87,6 +156,17 @@ enum Block {
         _subscription: Subscription,
     },
     Error(SharedString),
+    File {
+        target: Target,
+        label: SharedString,
+    },
+    Resource(Box<resources::ResourceBlock>),
+}
+
+#[derive(Clone)]
+pub(super) struct OpenFile {
+    pub cwd: String,
+    pub target: Target,
 }
 
 pub(super) struct ItemView {
@@ -95,10 +175,21 @@ pub(super) struct ItemView {
     blocks: Vec<Block>,
     details: Vec<Block>,
     expanded: bool,
+    permission: bool,
     details_scroll: ScrollHandle,
+    link_error: Option<String>,
 }
 
+impl gpui_kit::EventEmitter<OpenFile> for ItemView {}
+
 impl ItemView {
+    pub fn permission(row: Row, cwd: String, cx: &mut Context<Self>) -> Self {
+        let mut view = Self::new(row, cwd, cx);
+        view.expanded = true;
+        view.permission = true;
+        view
+    }
+
     pub fn new(row: Row, cwd: String, cx: &mut Context<Self>) -> Self {
         let mut view = Self {
             row,
@@ -106,7 +197,9 @@ impl ItemView {
             blocks: Vec::new(),
             details: Vec::new(),
             expanded: false,
+            permission: false,
             details_scroll: ScrollHandle::new(),
+            link_error: None,
         };
         view.prepare(cx);
         view
@@ -117,6 +210,7 @@ impl ItemView {
             return;
         }
         self.row = row;
+        self.link_error = None;
         self.prepare(cx);
         cx.notify();
     }
@@ -141,7 +235,7 @@ impl ItemView {
             }
             Content::Message(parts) => self.blocks.extend(parts.iter().map(|part| match part {
                 Part::Text(value) => text(value),
-                _ => part_block(part, &self.cwd),
+                _ => part_block(part, &self.cwd, cx),
             })),
             Content::AgentParts(parts) => {
                 for part in parts {
@@ -150,11 +244,30 @@ impl ItemView {
                             cx.new(|cx| TextViewState::markdown(value, cx)),
                         ));
                     } else {
-                        self.blocks.push(part_block(part, &self.cwd));
+                        self.blocks.push(part_block(part, &self.cwd, cx));
                     }
                 }
             }
             Content::Tool(call) => {
+                if let Some(name) = &call.name {
+                    self.details.push(text(&format!("Tool: {name}")));
+                }
+                if let Some(kind) = &call.kind {
+                    self.details.push(text(&format!("Kind: {kind}")));
+                }
+                for location in call.locations.iter().flatten() {
+                    let label = location.line.map_or_else(
+                        || location.path.clone(),
+                        |line| format!("{}:{line}", location.path),
+                    );
+                    self.details.push(Block::File {
+                        target: Target {
+                            path: location.path.clone(),
+                            line: None,
+                        },
+                        label: label.into(),
+                    });
+                }
                 if let Some(input) = &call.raw_input {
                     self.details.push(text("Input"));
                     self.details.push(code(&pretty(input)));
@@ -162,7 +275,7 @@ impl ItemView {
                 match call.parts() {
                     Ok(parts) => self
                         .details
-                        .extend(parts.iter().map(|part| part_block(part, &self.cwd))),
+                        .extend(parts.iter().map(|part| part_block(part, &self.cwd, cx))),
                     Err(error) => self.details.push(Block::Error(error.to_string().into())),
                 }
                 if let Some(output) = &call.raw_output {
@@ -194,7 +307,7 @@ impl ItemView {
                     match result.parts() {
                         Ok(parts) => self
                             .details
-                            .extend(parts.iter().map(|part| part_block(part, &self.cwd))),
+                            .extend(parts.iter().map(|part| part_block(part, &self.cwd, cx))),
                         Err(error) => self.details.push(Block::Error(error.to_string().into())),
                     }
                     if let Some(structured) = &result.structured_content {
@@ -204,6 +317,15 @@ impl ItemView {
                 }
             }
             Content::Files(changes) => {
+                for change in &changes.changes {
+                    self.blocks.push(Block::File {
+                        target: Target {
+                            path: change.path.clone(),
+                            line: None,
+                        },
+                        label: change.path.clone().into(),
+                    });
+                }
                 let patch = changes
                     .changes
                     .iter()
@@ -291,7 +413,7 @@ impl ItemView {
 }
 
 impl Render for ItemView {
-    fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let copy = self.row.copy.clone();
         let status = self.status();
         let failed = self.failed();
@@ -351,18 +473,28 @@ impl Render for ItemView {
                     .child(format!("Invalid item: {error}"))
             }))
             .child(
-                div()
-                    .flex()
-                    .flex_col()
-                    .gap_2()
-                    .children(self.blocks.iter().map(|block| render_block(block, cx))),
+                div().flex().flex_col().gap_2().children(
+                    self.blocks
+                        .iter()
+                        .enumerate()
+                        .map(|(index, block)| render_block(block, index, cx)),
+                ),
             )
+            .children(self.link_error.iter().map(|error| {
+                div()
+                    .text_color(cx.theme().danger)
+                    .mb_2()
+                    .child(error.clone())
+            }))
             .when(self.expanded, |row| {
                 row.child(
                     div()
                         .id("details-content")
                         .mt_2()
-                        .max_h(rems(24.))
+                        .when(self.permission, |details| {
+                            details.max_h(window.viewport_size().height * 0.2)
+                        })
+                        .when(!self.permission, |details| details.max_h(rems(24.)))
                         .overflow_y_scroll()
                         .track_scroll(&self.details_scroll)
                         .on_scroll_wheel(move |_, _, cx| {
@@ -373,15 +505,63 @@ impl Render for ItemView {
                         .flex()
                         .flex_col()
                         .gap_2()
-                        .children(self.details.iter().map(|block| render_block(block, cx))),
+                        .children(
+                            self.details
+                                .iter()
+                                .enumerate()
+                                .map(|(index, block)| render_block(block, index, cx)),
+                        ),
                 )
             })
     }
 }
 
-fn render_block(block: &Block, cx: &App) -> AnyElement {
+fn render_block(block: &Block, index: usize, cx: &mut Context<ItemView>) -> AnyElement {
     match block {
-        Block::Markdown(state) => TextView::new(state).w_full().into_any_element(),
+        Block::Resource(resource) => resource.render(index, cx),
+        Block::Markdown(state) => {
+            let owner = cx.entity().downgrade();
+            TextView::new(state)
+                .w_full()
+                .on_link_click(move |href, _, _, cx| {
+                    if let Some(view) = owner.upgrade() {
+                        view.update(cx, |this, cx| match Link::parse(href) {
+                            Ok(Link::Web(url)) => {
+                                this.link_error = None;
+                                cx.open_url(&url);
+                                cx.notify();
+                            }
+                            Ok(Link::Local(target)) => {
+                                this.link_error = None;
+                                cx.emit(OpenFile {
+                                    cwd: this.cwd.clone(),
+                                    target,
+                                });
+                                cx.notify();
+                            }
+                            Err(error) => {
+                                this.link_error = Some(error.to_string());
+                                cx.notify();
+                            }
+                        });
+                    }
+                })
+                .into_any_element()
+        }
+        Block::File { target, label } => {
+            let target = target.clone();
+            Button::new(("open-file", index))
+                .small()
+                .ghost()
+                .label(format!("Open {}", preview(label)))
+                .on_click(cx.listener(move |this, _, _, cx| {
+                    cx.emit(OpenFile {
+                        cwd: this.cwd.clone(),
+                        target: target.clone(),
+                    })
+                }))
+                .into_any_element()
+        }
         Block::Text { text, code: true } => div()
             .p_3()
             .bg(cx.theme().muted)
@@ -451,10 +631,14 @@ fn pretty(value: &Value) -> String {
     serde_json::to_string_pretty(value).expect("JSON value serializes")
 }
 
-fn part_block(part: &Part, cwd: &str) -> Block {
+fn part_block(part: &Part, cwd: &str, cx: &mut Context<ItemView>) -> Block {
     match part {
         Part::Text(value) => code(value),
         Part::Image(image) => image_block(image, cwd),
+        Part::Resource(resource) => {
+            Block::Resource(Box::new(resources::ResourceBlock::embedded(resource, cx)))
+        }
+        Part::ResourceLink(link) => Block::Resource(Box::new(resources::ResourceBlock::link(link))),
         Part::Unknown(value) => code(&pretty(value)),
     }
 }
@@ -550,8 +734,37 @@ mod tests {
         assert!(shown.ends_with("Copy retains the full item.]"));
         let item: Item =
             serde_json::from_value(json!({"id":"a","type":"agentMessage","text":value})).unwrap();
-        let row = Row::item("thread:turn:a".into(), &item).unwrap();
+        let row = Row::item("thread", "turn", &item).unwrap();
         assert_eq!(row.copy.len(), PREVIEW_BYTES * 3);
+    }
+
+    #[test]
+    fn turn_rows_distinguish_stop_reasons_and_copy_original_metadata() {
+        for (reason, label) in [
+            ("end_turn", "End of turn"),
+            ("max_tokens", "Token limit reached"),
+            ("max_turn_requests", "Turn request limit reached"),
+            ("refusal", "Refused by provider"),
+            ("cancelled", "Cancelled"),
+        ] {
+            let turn: Turn = serde_json::from_value(json!({"id":"turn","status":"completed","items":[],"error":null,"stopReason":reason})).unwrap();
+            let row = Row::turn("thread", &turn);
+            assert_eq!(row.label, format!("Turn · completed · {label}"));
+            let copied: Value = serde_json::from_str(&row.copy).unwrap();
+            assert_eq!(copied["stopReason"], reason);
+            assert_eq!(copied["id"], "turn");
+            assert!(matches!(row.content, Content::Message(parts) if parts.is_empty()));
+        }
+        let turn: Turn = serde_json::from_value(json!({"id":"failed","status":"failed","items":[],"error":{"message":"Original failure"}})).unwrap();
+        let row = Row::turn("thread", &turn);
+        assert_eq!(row.label, "Turn · failed");
+        assert_eq!(
+            serde_json::from_str::<Value>(&row.copy).unwrap()["error"],
+            turn.error.unwrap()
+        );
+        assert!(
+            matches!(row.content, Content::Message(parts) if matches!(&parts[..], [Part::Text(error)] if error.contains("Original failure")))
+        );
     }
 
     #[test]

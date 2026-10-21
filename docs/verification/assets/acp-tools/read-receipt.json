@@ -1,0 +1,157 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-tools-qa-final",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "13ecc88a-9f71-4d96-9151-e010463f26ab",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "93b41aa1-28fe-42c7-9617-b5645b1510f2",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[tool-progress]",
+                "type": "text"
+              }
+            ],
+            "id": "user:93b41aa1-28fe-42c7-9617-b5645b1510f2",
+            "type": "userMessage"
+          },
+          {
+            "call": {
+              "content": [],
+              "kind": "read",
+              "locations": [],
+              "name": "read_file",
+              "rawInput": {
+                "final": false
+              },
+              "rawOutput": 0,
+              "sessionUpdate": "tool_call_update",
+              "status": "completed",
+              "title": "",
+              "toolCallId": "minimal"
+            },
+            "id": "93b41aa1-28fe-42c7-9617-b5645b1510f2:tool:minimal",
+            "type": "acpToolCall"
+          },
+          {
+            "call": {
+              "content": [],
+              "kind": "other",
+              "locations": [],
+              "rawOutput": false,
+              "sessionUpdate": "tool_call",
+              "status": "failed",
+              "title": "Second tool failed",
+              "toolCallId": "failed"
+            },
+            "id": "93b41aa1-28fe-42c7-9617-b5645b1510f2:tool:failed",
+            "type": "acpToolCall"
+          }
+        ],
+        "status": "completed",
+        "stopReason": "end_turn"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "49b66252-b7d3-49e6-92d4-eb92eaea54ac",
+    "host_pid": 348807,
+    "provider_pid": 348815,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "49b66252-b7d3-49e6-92d4-eb92eaea54ac",
+      "controller_id": "eaa09c51-5e4b-40ea-ba4b-07d01c04cea4",
+      "generation": 6
+    },
+    "sequence": 19,
+    "operation_ids": [
+      "5bad3b52-68ba-492a-8bd3-0a7e91f21530",
+      "c3079eee-6426-42a7-ace3-079bf33c08ba"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  }
+}

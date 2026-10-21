@@ -1,0 +1,101 @@
+{
+  "protocol": 3,
+  "host_id": "eea5b8a5-5c4e-4e01-88c6-734a17f9477b",
+  "host_pid": 1867122,
+  "provider_pid": 1867124,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "eea5b8a5-5c4e-4e01-88c6-734a17f9477b",
+    "controller_id": "42bee8d8-e8c0-4959-a65e-67d1830f7e72",
+    "generation": 4
+  },
+  "sequence": 15,
+  "operation_ids": [
+    "42287d30-72ba-4647-84d4-6ef4f0771dcc",
+    "e2d14863-8f7e-415e-a037-2a3e7adb9a49",
+    "df9d5708-4079-4890-a7f6-c3be9c143ecf"
+  ],
+  "journal_total": 3,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "216cfbd2-ccb0-44b7-ab65-42fc08bda3ba",
+        "turn_id": "909d9c71-fb3a-43cb-a57c-7831507b6f1b"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "216cfbd2-ccb0-44b7-ab65-42fc08bda3ba",
+        "threadId": "216cfbd2-ccb0-44b7-ab65-42fc08bda3ba",
+        "toolCall": {
+          "content": [
+            {
+              "content": {
+                "text": "Proposed settings before approval \u4e2d\u6587",
+                "type": "text"
+              },
+              "type": "content"
+            }
+          ],
+          "kind": "edit",
+          "locations": [
+            {
+              "line": 42,
+              "path": "/tmp/fleetpane-composer-native-20261021/review-settings.md"
+            }
+          ],
+          "name": "write_file",
+          "rawInput": {
+            "attempt": 0,
+            "content": "# New settings \u4e2d\u6587\nKeep exact content.",
+            "enabled": false,
+            "file_path": "/tmp/fleetpane-composer-native-20261021/review-settings.md"
+          },
+          "title": "Review settings \u4e2d\u6587",
+          "toolCallId": "reviewed"
+        }
+      }
+    }
+  ],
+  "fault": null,
+  "fault_scope": null
+}

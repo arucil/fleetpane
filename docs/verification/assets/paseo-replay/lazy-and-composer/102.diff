@@ -1,0 +1,289 @@
+commit dd4fa90c5a3680d7c0f68e81f0c38b02bcf04d6c
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 17:09:37 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 17:09:37 2025 +0200
+
+    fix: resolve session resumption issue by storing Claude's internal session ID
+    
+    - Add discriminated union for agent options with proper type (claude)
+    - Store Claude's internal session ID separately from ACP session ID
+    - Use Zod schema validation for persisted agents
+    - Use correct session ID when resuming agents (Claude ID for Claude agents)
+    - Update to @boudra/claude-code-acp@0.8.1 which extracts Claude session ID
+
+diff --git a/packages/server/package.json b/packages/server/package.json
+index acb308faf..7ce8e0858 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -18,7 +18,7 @@
+   "dependencies": {
+     "@agentclientprotocol/sdk": "^0.4.9",
+     "@ai-sdk/openai": "^2.0.52",
+-    "@boudra/claude-code-acp": "^0.8.0",
++    "@boudra/claude-code-acp": "^0.8.1",
+     "@deepgram/sdk": "^3.4.0",
+     "@modelcontextprotocol/sdk": "^1.20.1",
+     "@openrouter/ai-sdk-provider": "^1.2.0",
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 27b1ff1f2..88b2be878 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -225,15 +225,28 @@ export class AgentManager {
+       });
+ 
+       // Use the loadSession API to resume the existing session
+-      console.log(`[Agent ${agentId}] Loading session ${persisted.sessionId} via loadSession API`);
++      // If this is a Claude agent, use the Claude's internal session ID for resumption
++      const sessionIdToResume = persisted.options.type === "claude"
++        ? persisted.options.sessionId
++        : persisted.sessionId;
++
++      console.log(`[Agent ${agentId}] Loading session - ACP: ${persisted.sessionId}, Claude: ${sessionIdToResume}`);
+       const sessionResponse = await agent.connection.loadSession({
+-        sessionId: persisted.sessionId,
++        sessionId: sessionIdToResume,
+         cwd,
+         mcpServers: [],
+       });
+ 
+       console.log(`[Agent ${agentId}] Session loaded:`, JSON.stringify(sessionResponse, null, 2));
+ 
++      // Extract Claude's session ID from the response metadata if available
++      const claudeSessionId = sessionResponse._meta?.claudeSessionId as string | undefined;
++      if (claudeSessionId && persisted.options.type === "claude" && persisted.options.sessionId !== claudeSessionId) {
++        console.log(`[Agent ${agentId}] Updating Claude session ID from ${persisted.options.sessionId} to ${claudeSessionId}`);
++        persisted.options.sessionId = claudeSessionId;
++        await this.persistence.upsert(persisted);
++      }
++
+       // Store session modes from response
+       if (sessionResponse.modes) {
+         agent.currentModeId = sessionResponse.modes.currentModeId;
+@@ -357,6 +370,13 @@ export class AgentManager {
+       const sessionResponse = await agent.connection.newSession(sessionParams);
+ 
+       agent.sessionId = sessionResponse.sessionId;
++
++      // Extract Claude's internal session ID from metadata
++      const claudeSessionId = sessionResponse._meta?.claudeSessionId as string | undefined;
++      if (claudeSessionId) {
++        console.log(`[Agent ${agentId}] Claude session ID: ${claudeSessionId}, ACP session ID: ${sessionResponse.sessionId}`);
++      }
++
+       console.log(`[Agent ${agentId}] newSession response:`, JSON.stringify(sessionResponse, null, 2));
+ 
+       // Store session modes from response
+@@ -385,6 +405,10 @@ export class AgentManager {
+           id: agentId,
+           title: agent.title || `Agent ${agentId.slice(0, 8)}`,
+           sessionId: agent.sessionId,
++          options: {
++            type: "claude",
++            sessionId: claudeSessionId || agent.sessionId, // Use Claude's internal session ID if available
++          },
+           createdAt: agent.createdAt.toISOString(),
+           cwd: agent.cwd,
+         });
+@@ -1030,6 +1054,32 @@ export class AgentManager {
+ 
+     // Remove from pending
+     agent.pendingPermissions.delete(requestId);
++
++    // Emit permission_resolved notification so UI can update
++    const agentUpdate: AgentUpdate = {
++      agentId,
++      timestamp: new Date(),
++      notification: {
++        type: 'permission_resolved',
++        requestId,
++        agentId,
++        optionId,
++      },
++    };
++
++    // Store the update in history
++    agent.updates.push(agentUpdate);
++
++    // Notify all subscribers (including Session which will forward to WebSocket)
++    for (const subscriber of agent.subscribers) {
++      try {
++        subscriber(agentUpdate);
++      } catch (error) {
++        console.error(`[Agent ${agentId}] Subscriber error:`, error);
++      }
++    }
++
++    console.log(`[Agent ${agentId}] Permission resolved notification emitted: ${requestId}`);
+   }
+ 
+   /**
+diff --git a/packages/server/src/server/acp/agent-persistence.ts b/packages/server/src/server/acp/agent-persistence.ts
+index c5001ecfc..e47149f2a 100644
+--- a/packages/server/src/server/acp/agent-persistence.ts
++++ b/packages/server/src/server/acp/agent-persistence.ts
+@@ -2,17 +2,33 @@ import { promises as fs } from "fs";
+ import path from "path";
+ import { fileURLToPath } from "url";
+ import { dirname } from "path";
++import { z } from "zod";
+ 
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = dirname(__filename);
+ 
+-export interface PersistedAgent {
+-  id: string;
+-  title: string;
+-  sessionId: string;
+-  createdAt: string;
+-  cwd: string;
+-}
++// Zod schema for agent options (discriminated union)
++export const AgentOptionsSchema = z.discriminatedUnion("type", [
++  z.object({
++    type: z.literal("claude"),
++    sessionId: z.string(), // Claude's internal session ID
++  }),
++  // Add more agent types here in the future
++]);
++
++export type AgentOptions = z.infer<typeof AgentOptionsSchema>;
++
++// Zod schema for persisted agent
++export const PersistedAgentSchema = z.object({
++  id: z.string(),
++  title: z.string(),
++  sessionId: z.string(), // ACP protocol session ID (for backward compatibility)
++  options: AgentOptionsSchema, // Required field with discriminated union
++  createdAt: z.string(),
++  cwd: z.string(),
++});
++
++export type PersistedAgent = z.infer<typeof PersistedAgentSchema>;
+ 
+ export class AgentPersistence {
+   private persistencePath: string;
+@@ -23,12 +39,26 @@ export class AgentPersistence {
+   }
+ 
+   /**
+-   * Load all persisted agents
++   * Load all persisted agents with Zod validation
+    */
+   async load(): Promise<PersistedAgent[]> {
+     try {
+       const data = await fs.readFile(this.persistencePath, "utf-8");
+-      return JSON.parse(data);
++      const parsed = JSON.parse(data);
++
++      // Validate each agent with Zod schema
++      const agents: PersistedAgent[] = [];
++      for (const agent of parsed) {
++        try {
++          const validated = PersistedAgentSchema.parse(agent);
++          agents.push(validated);
++        } catch (zodError) {
++          console.error(`[AgentPersistence] Invalid agent data for ${agent.id}:`, zodError);
++          // Skip invalid agents
++        }
++      }
++
++      return agents;
+     } catch (error) {
+       // File doesn't exist or is invalid, return empty array
+       console.log("[AgentPersistence] No existing agents found or file is invalid");
+diff --git a/packages/server/src/server/acp/types.ts b/packages/server/src/server/acp/types.ts
+index bc68b5b6b..c57aee9da 100644
+--- a/packages/server/src/server/acp/types.ts
++++ b/packages/server/src/server/acp/types.ts
+@@ -24,6 +24,7 @@ export interface EnrichedSessionNotification extends Omit<SessionNotification, '
+ export type AgentNotification =
+   | { type: 'session'; notification: EnrichedSessionNotification }
+   | { type: 'permission'; requestId: string; request: RequestPermissionRequest }
++  | { type: 'permission_resolved'; requestId: string; agentId: string; optionId: string }
+   | { type: 'status'; status: AgentStatus; error?: string };
+ 
+ /**
+diff --git a/packages/server/src/server/index.ts b/packages/server/src/server/index.ts
+index 9543fcf39..dc9913ced 100644
+--- a/packages/server/src/server/index.ts
++++ b/packages/server/src/server/index.ts
+@@ -80,7 +80,14 @@ async function main() {
+     console.log("✓ OpenAI client initialized");
+ 
+     // Initialize STT (Whisper)
+-    initializeSTT({ apiKey });
++    const sttConfidenceThreshold = process.env.STT_CONFIDENCE_THRESHOLD
++      ? parseFloat(process.env.STT_CONFIDENCE_THRESHOLD)
++      : undefined; // Will default to -3.0 in stt-openai.ts
++
++    initializeSTT({
++      apiKey,
++      confidenceThreshold: sttConfidenceThreshold
++    });
+ 
+     // Initialize TTS
+     const ttsVoice = (process.env.TTS_VOICE || "alloy") as
+diff --git a/packages/server/src/server/messages.ts b/packages/server/src/server/messages.ts
+index 426a2aaf4..a7740f8aa 100644
+--- a/packages/server/src/server/messages.ts
++++ b/packages/server/src/server/messages.ts
+@@ -298,6 +298,15 @@ export const AgentPermissionRequestMessageSchema = z.object({
+   }),
+ });
+ 
++export const AgentPermissionResolvedMessageSchema = z.object({
++  type: z.literal("agent_permission_resolved"),
++  payload: z.object({
++    agentId: z.string(),
++    requestId: z.string(),
++    optionId: z.string(),
++  }),
++});
++
+ export const SessionOutboundMessageSchema = z.discriminatedUnion("type", [
+   ActivityLogMessageSchema,
+   AssistantChunkMessageSchema,
+@@ -313,6 +322,7 @@ export const SessionOutboundMessageSchema = z.discriminatedUnion("type", [
+   ListConversationsResponseMessageSchema,
+   DeleteConversationResponseMessageSchema,
+   AgentPermissionRequestMessageSchema,
++  AgentPermissionResolvedMessageSchema,
+ ]);
+ 
+ export type SessionOutboundMessage = z.infer<
+@@ -334,6 +344,7 @@ export type SessionStateMessage = z.infer<typeof SessionStateMessageSchema>;
+ export type ListConversationsResponseMessage = z.infer<typeof ListConversationsResponseMessageSchema>;
+ export type DeleteConversationResponseMessage = z.infer<typeof DeleteConversationResponseMessageSchema>;
+ export type AgentPermissionRequestMessage = z.infer<typeof AgentPermissionRequestMessageSchema>;
++export type AgentPermissionResolvedMessage = z.infer<typeof AgentPermissionResolvedMessageSchema>;
+ 
+ // Type exports for payload types
+ export type ActivityLogPayload = z.infer<typeof ActivityLogPayloadSchema>;
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index b92c53a93..64a03cd8c 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -190,6 +190,22 @@ export class Session {
+           return;
+         }
+ 
++        // Handle permission resolved notifications
++        if (notification.type === "permission_resolved") {
++          this.emit({
++            type: "agent_permission_resolved",
++            payload: {
++              agentId: notification.agentId,
++              requestId: notification.requestId,
++              optionId: notification.optionId,
++            },
++          });
++          console.log(
++            `[Session ${this.clientId}] Forwarded permission resolved for agent ${agentId} with requestId ${notification.requestId}`
++          );
++          return;
++        }
++
+         // Handle status updates
+         if (notification.type === "status") {
+           const status = notification.status;

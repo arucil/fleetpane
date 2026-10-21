@@ -199,12 +199,15 @@ mod tests {
                 mode,
             },
             activity: Activity {
+                stopping: Some(Vec::new()),
+                terminal_ids: Vec::new(),
                 turns: Vec::new(),
                 in_flight_operations: 0,
                 unknown_operations: 0,
             },
             pending_requests: Vec::new(),
             fault: None,
+            fault_scope: None,
         }
     }
 

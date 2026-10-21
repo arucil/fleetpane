@@ -1,0 +1,64 @@
+{
+  "apps": [
+    {
+      "id": "app-2747549",
+      "pid": 2747549,
+      "name": "Fleetpane layout baseline",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/tmp/fleetpane-layout-20261021/before-desktop",
+        "--hosts",
+        "/tmp/fleetpane-layout-20261021/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-layout-20261021/prefs"
+      ],
+      "running": false,
+      "exit_code": 0,
+      "started_at_unix": 1792535451,
+      "stopped_at_unix": 1792535525
+    },
+    {
+      "id": "app-2752409",
+      "pid": 2752409,
+      "name": "Fleetpane remaining space layout",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-layout-20261021/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-layout-20261021/prefs"
+      ],
+      "running": false,
+      "exit_code": 0,
+      "started_at_unix": 1792535562,
+      "stopped_at_unix": 1792535725
+    },
+    {
+      "id": "app-2759419",
+      "pid": 2759419,
+      "name": "Fleetpane question layout regression",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-layout-20261021/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-layout-20261021/prefs"
+      ],
+      "running": false,
+      "exit_code": 0,
+      "started_at_unix": 1792535739,
+      "stopped_at_unix": 1792535842
+    }
+  ],
+  "workspace": {
+    "id": "fleetpane-layout-20261021",
+    "ok": true,
+    "ready": false
+  },
+  "close_method": "Alt+F4; workspace_wait_app observes normal exit"
+}

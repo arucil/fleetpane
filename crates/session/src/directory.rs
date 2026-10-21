@@ -11,6 +11,8 @@ const MAX_BYTES: usize = 8 * 1024 * 1024;
 pub struct Query {
     pub search: Option<String>,
     pub cwd: Option<String>,
+    /// Provider archive membership, independent of runtime status.
+    pub archived: bool,
 }
 
 impl Query {
@@ -53,7 +55,7 @@ impl PageRequest {
         Ok(
             serde_json::json!({"limit": PAGE_SIZE, "cursor": self.cursor,
             "searchTerm": self.query.search, "cwd": self.query.cwd,
-            "sortKey": "updated_at", "sortDirection": "desc"}),
+            "sortKey": "updated_at", "sortDirection": "desc", "archived": self.query.archived}),
         )
     }
 }
@@ -188,6 +190,7 @@ mod tests {
         let mut directory = Directory::default();
         let first = PageRequest {
             query: Query {
+                archived: false,
                 search: Some("中文".into()),
                 cwd: Some(std::env::temp_dir().join("synthetic").display().to_string()),
             },
@@ -224,6 +227,7 @@ mod tests {
         assert!(directory.apply(&next, page(&["b", "b"], None)).is_err());
         let wrong = PageRequest {
             query: Query {
+                archived: false,
                 search: Some("other".into()),
                 cwd: None,
             },
@@ -270,6 +274,7 @@ mod tests {
         assert!(
             PageRequest {
                 query: Query {
+                    archived: false,
                     search: None,
                     cwd: Some("relative".into())
                 },
@@ -287,5 +292,61 @@ mod tests {
                 .apply(&PageRequest::default(), oversized)
                 .is_err()
         );
+    }
+}
+
+#[cfg(test)]
+mod archive_scope_tests {
+    use super::*;
+
+    #[test]
+    fn archive_membership_is_part_of_the_paging_scope() {
+        let mut directory = Directory::default();
+        let first = PageRequest::default();
+        assert_eq!(first.params().unwrap()["archived"], false);
+        directory
+            .apply(
+                &first,
+                Page {
+                    data: vec![],
+                    next_cursor: Some("active-page".into()),
+                },
+            )
+            .unwrap();
+        let next = directory.next().unwrap();
+        let mut wrong = next.clone();
+        wrong.query.archived = true;
+        assert!(
+            directory
+                .apply(
+                    &wrong,
+                    Page {
+                        data: vec![],
+                        next_cursor: None
+                    }
+                )
+                .is_err()
+        );
+        assert_eq!(directory.next_cursor.as_deref(), Some("active-page"));
+        assert!(!directory.query.archived);
+        let archived = PageRequest {
+            query: Query {
+                archived: true,
+                ..Query::default()
+            },
+            cursor: None,
+        };
+        assert_eq!(archived.params().unwrap()["archived"], true);
+        directory
+            .apply(
+                &archived,
+                Page {
+                    data: vec![],
+                    next_cursor: Some("archive-page".into()),
+                },
+            )
+            .unwrap();
+        assert!(directory.query.archived);
+        assert_eq!(directory.next().unwrap().query, archived.query);
     }
 }

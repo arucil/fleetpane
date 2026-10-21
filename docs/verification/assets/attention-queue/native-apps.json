@@ -1,0 +1,283 @@
+{
+  "workspace": "fleetpane-attention-20261021",
+  "stopped": true,
+  "accepted": [
+    "app-2968375",
+    "app-2969646"
+  ],
+  "nonaccepted_stale_binary": "app-2952554",
+  "apps": [
+    {
+      "id": "app-2945546",
+      "name": "attention-proof",
+      "pid": 2945546,
+      "process_group_id": 2945546,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/native-hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-replay-145-20261021/native-prefs"
+      ],
+      "env": [
+        {
+          "name": "XDG_CONFIG_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-config"
+        },
+        {
+          "name": "XDG_DATA_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-data"
+        },
+        {
+          "name": "XDG_CACHE_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-cache"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2945546.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2945546.stderr.log",
+      "started_at_unix": 1792540499,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792540571,
+      "runtime_seconds": 72
+    },
+    {
+      "id": "app-2952554",
+      "name": "accepted-attention",
+      "pid": 2952554,
+      "process_group_id": 2952554,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/native-hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-replay-145-20261021/native-prefs"
+      ],
+      "env": [
+        {
+          "name": "XDG_CONFIG_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-config"
+        },
+        {
+          "name": "XDG_DATA_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-data"
+        },
+        {
+          "name": "XDG_CACHE_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-cache"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2952554.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2952554.stderr.log",
+      "started_at_unix": 1792540639,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792540665,
+      "runtime_seconds": 26
+    },
+    {
+      "id": "app-2954705",
+      "name": "final-attention",
+      "pid": 2954705,
+      "process_group_id": 2954705,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/native-hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-replay-145-20261021/native-prefs"
+      ],
+      "env": [
+        {
+          "name": "XDG_CONFIG_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-config"
+        },
+        {
+          "name": "XDG_DATA_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-data"
+        },
+        {
+          "name": "XDG_CACHE_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/native-cache"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2954705.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2954705.stderr.log",
+      "started_at_unix": 1792540710,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792540904,
+      "runtime_seconds": 194
+    },
+    {
+      "id": "app-2955539",
+      "pid": 2955539,
+      "process_group_id": 2955539,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "/tmp/fleetpane-replay-145-20261021/clipboard.py",
+        "request"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2955539.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2955539.stderr.log",
+      "started_at_unix": 1792540728,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792540728,
+      "runtime_seconds": 0
+    },
+    {
+      "id": "app-2963995",
+      "name": "before-unowned-claim",
+      "pid": 2963995,
+      "process_group_id": 2963995,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "dbus-run-session",
+        "--",
+        "/tmp/fleetpane-replay-145-20261021/before-observer-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/unowned-hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-replay-145-20261021/unowned-prefs"
+      ],
+      "env": [
+        {
+          "name": "XDG_CONFIG_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/unowned-config"
+        },
+        {
+          "name": "XDG_DATA_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/unowned-data"
+        },
+        {
+          "name": "XDG_CACHE_HOME",
+          "value": "/tmp/fleetpane-replay-145-20261021/unowned-cache"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2963995.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2963995.stderr.log",
+      "started_at_unix": 1792540979,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792540982,
+      "runtime_seconds": 3
+    },
+    {
+      "id": "app-2968375",
+      "name": "fixed-unowned",
+      "pid": 2968375,
+      "process_group_id": 2968375,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/unowned-hosts.json"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "LIBGL_ALWAYS_SOFTWARE",
+          "value": "1"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2968375.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2968375.stderr.log",
+      "started_at_unix": 1792541154,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792541173,
+      "runtime_seconds": 19
+    },
+    {
+      "id": "app-2969646",
+      "name": "accepted-observer-attention",
+      "pid": 2969646,
+      "process_group_id": 2969646,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-replay-145-20261021/native-hosts.json"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "LIBGL_ALWAYS_SOFTWARE",
+          "value": "1"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2969646.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2969646.stderr.log",
+      "started_at_unix": 1792541173,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792541407,
+      "runtime_seconds": 234
+    },
+    {
+      "id": "app-2970913",
+      "pid": 2970913,
+      "process_group_id": 2970913,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "-c",
+        "import json,subprocess,hashlib;from pathlib import Path;r=Path('/tmp/fleetpane-replay-145-20261021');d=subprocess.check_output(['xclip','-selection','clipboard','-out']);s=json.loads((r/'accepted-before.json').read_text());assert json.loads(d)==s['snapshots'][1]['pending_requests'][0];p={'exact':True,'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest()};(r/'accepted-copy-request.json').write_text(json.dumps(p,indent=2));print(p)"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2970913.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2970913.stderr.log",
+      "started_at_unix": 1792541202,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792541202,
+      "runtime_seconds": 0
+    },
+    {
+      "id": "app-2977569",
+      "pid": 2977569,
+      "process_group_id": 2977569,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "/tmp/fleetpane-replay-145-20261021/clipboard.py",
+        "draft"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2977569.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-attention-20261021/apps/app-2977569.stderr.log",
+      "started_at_unix": 1792541382,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792541382,
+      "runtime_seconds": 0
+    }
+  ]
+}

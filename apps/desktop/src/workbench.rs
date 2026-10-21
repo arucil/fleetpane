@@ -1,4 +1,6 @@
 //! Retain separate Host views; switching never transfers a lease or resumes a session.
+mod attention;
+mod files;
 use crate::host_view::{HostView, background};
 use crate::workspace_view::WorkspaceView;
 use fleetpane_session::hosts::{Configuration, Endpoint};
@@ -19,6 +21,7 @@ struct Slot {
     endpoint: Endpoint,
     view: Option<Entity<HostView>>,
     observation: Option<Subscription>,
+    file_subscription: Option<Subscription>,
 }
 
 pub struct Workbench {
@@ -37,6 +40,9 @@ pub struct Workbench {
     browsing_workspaces: bool,
     workspace_view: Option<Entity<WorkspaceView>>,
     workspace_subscription: Option<Subscription>,
+    continuation_subscription: Option<Subscription>,
+    file_navigation: files::State,
+    attention: attention::State,
     creation_directory: Option<std::path::PathBuf>,
     creations: Vec<Intent>,
     records_busy: bool,
@@ -46,7 +52,9 @@ pub struct Workbench {
 
 impl Workbench {
     fn open_chooser(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.leave_attention();
         self.choosing = true;
+        self.file_navigation = files::State::default();
         self.browsing_workspaces = false;
         self.route_notice = None;
         self.workspace
@@ -80,6 +88,7 @@ impl Workbench {
                     endpoint,
                     view: None,
                     observation: None,
+                    file_subscription: None,
                 })
                 .collect(),
             selected: 0,
@@ -96,6 +105,9 @@ impl Workbench {
             browsing_workspaces: false,
             workspace_view: None,
             workspace_subscription: None,
+            continuation_subscription: None,
+            file_navigation: files::State::default(),
+            attention: attention::State::default(),
             creation_directory,
             creations: Vec::new(),
             records_busy: false,
@@ -103,6 +115,24 @@ impl Workbench {
             _input_subscription: subscription,
         };
         value.select(0, window, cx);
+        cx.spawn_in(window, async move |this, cx| {
+            loop {
+                cx.background_executor()
+                    .timer(std::time::Duration::from_secs(2))
+                    .await;
+                if this
+                    .update_in(cx, |this, window, cx| {
+                        if this.attention.active {
+                            this.refresh_attention(window, cx);
+                        }
+                    })
+                    .is_err()
+                {
+                    break;
+                }
+            }
+        })
+        .detach();
         let owner = cx.entity().downgrade();
         window.on_window_should_close(cx, move |window, cx| {
             owner
@@ -122,16 +152,21 @@ impl Workbench {
                     .map_err(|error| format!("{}: {error}", slot.endpoint.name))?;
             }
         }
+        if let Some(view) = &self.workspace_view {
+            ready &= view.read(cx).close_status(cx)?;
+        }
         Ok(ready)
     }
 
-    fn request_close(&mut self, window: &mut Window, cx: &mut Context<Self>) -> bool {
+    pub(crate) fn is_closing(&self) -> bool {
+        self.closing
+    }
+
+    pub(crate) fn request_close(&mut self, window: &mut Window, cx: &mut Context<Self>) -> bool {
         match self.drafts_saved(cx) {
             Ok(true) => true,
             Err(error) => {
-                self.close_error = Some(format!(
-                    "Window remains open because a draft is unsaved. Copy your text, then resolve the save error. {error}"
-                ));
+                self.close_error = Some(format!("Window remains open: {error}"));
                 cx.notify();
                 false
             }
@@ -140,7 +175,8 @@ impl Workbench {
                     return false;
                 }
                 self.closing = true;
-                self.close_error = Some("Saving drafts before closing…".into());
+                self.close_error =
+                    Some("Waiting for local saves and terminal input before closing…".into());
                 cx.spawn_in(window, async move |this, cx| {
                     loop {
                         cx.background_executor()
@@ -155,9 +191,8 @@ impl Workbench {
                                 Ok(false) => true,
                                 Err(error) => {
                                     this.closing = false;
-                                    this.close_error = Some(format!(
-                                        "Draft save failed; window remains open. {error}"
-                                    ));
+                                    this.close_error =
+                                        Some(format!("Window remains open: {error}"));
                                     cx.notify();
                                     false
                                 }
@@ -175,6 +210,8 @@ impl Workbench {
     }
 
     fn select(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        self.leave_attention();
+        self.file_navigation = files::State::default();
         let slot = &mut self.slots[index];
         if slot.view.is_none() {
             let socket = slot.endpoint.socket.clone();
@@ -184,6 +221,11 @@ impl Workbench {
                 .expect("local Host configuration has a controller directory");
             let view = cx.new(|cx| HostView::new(socket, directory, window, cx));
             slot.observation = Some(cx.observe(&view, |_, _, cx| cx.notify()));
+            slot.file_subscription = Some(cx.subscribe_in(
+                &view,
+                window,
+                move |this, _, request, window, cx| this.open_file(index, request, window, cx),
+            ));
             slot.view = Some(view);
         }
         self.selected = index;
@@ -200,6 +242,8 @@ impl Workbench {
     }
 
     fn open_workspaces(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.leave_attention();
+        self.file_navigation = files::State::default();
         let Some(directory) = self.creation_directory.clone() else {
             return;
         };
@@ -216,12 +260,22 @@ impl Workbench {
                     cx,
                 )
             });
-            self.workspace_subscription=Some(cx.subscribe_in(&view,window,|this,_,workspace,window,cx| {
+            self.workspace_subscription=Some(cx.subscribe_in(&view,window,|this,_,workspace:&fleetpane_session::workspaces::Workspace,window,cx| {
                 if !this.browsing_workspaces { return; }
                 let index=this.slots.iter().position(|slot|slot.endpoint.socket==workspace.registration.endpoint.socket).expect("workspace target validated against configured Hosts");
                 this.select(index,window,cx);
                 this.slots[index].view.as_ref().expect("selected Host initialized").update(cx,|view,cx|view.prepare_workspace(workspace.clone(),window,cx));
                 this.route_notice=Some("Saved workspace prepared. Choose New session; take control first if needed. Directory identity is rechecked before creation.".into());
+                cx.notify();
+            }));
+            self.continuation_subscription=Some(cx.subscribe_in(&view,window,|this,_,event:&crate::paseo_import_view::Continuation,window,cx| {
+                if !this.browsing_workspaces {return;}
+                let Some(index)=this.slots.iter().position(|s|s.endpoint.socket==event.intent.target.endpoint.socket) else {
+                    this.route_notice=Some("The saved fork targets a Host absent from this configuration. Restore its endpoint to check the original operation.".into());cx.notify();return;
+                };
+                this.select(index,window,cx);
+                let result=this.slots[index].view.as_ref().expect("selected Host initialized").update(cx,|view,cx|view.prepare_continuation(event.clone(),cx));
+                this.route_notice=Some(match result {Ok(())=>"Saved Codex history prepared. Take control if needed, then choose Fork saved context. This creates an independent session.".into(),Err(e)=>e});
                 cx.notify();
             }));
             self.workspace_view = Some(view);
@@ -656,6 +710,15 @@ impl Render for Workbench {
                                         this.select(index, window, cx)
                                     }))
                             }))
+                            .child(
+                                Button::new("open-attention")
+                                    .small()
+                                    .label("Attention")
+                                    .selected(self.attention.active)
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        this.open_attention(window, cx)
+                                    })),
+                            )
                             .when(self.creation_directory.is_some(), |bar| {
                                 bar.child(
                                     Button::new("open-workspaces")
@@ -682,6 +745,9 @@ impl Render for Workbench {
                 },
             )
             .when(self.choosing, |root| root.child(self.route_bar(cx)))
+            .when(self.attention.active, |root| {
+                root.child(self.attention_view(cx))
+            })
             .when(self.browsing_workspaces, |root| {
                 root.child(
                     div().flex_1().min_h_0().child(
@@ -696,14 +762,33 @@ impl Render for Workbench {
                     .iter()
                     .map(|message| div().px_4().py_2().text_sm().child(message.clone())),
             )
-            .when(!self.choosing && !self.browsing_workspaces, |root| {
-                root.child(
-                    div()
-                        .flex_1()
-                        .min_h_0()
-                        .id(("host-content", self.selected))
-                        .child(selected.view.clone().expect("selected Host initialized")),
-                )
+            .when(self.file_navigation.pending.is_some(), |root| {
+                root.child(div().px_4().py_2().child("Opening workspace file…"))
             })
+            .children(self.file_navigation.error.iter().map(|error| {
+                div()
+                    .px_4()
+                    .py_2()
+                    .text_color(cx.theme().danger)
+                    .child(error.clone())
+            }))
+            .when_some(self.file_navigation.view.as_ref(), |root, view| {
+                root.child(div().flex_1().min_h_0().child(view.clone()))
+            })
+            .when(
+                !self.choosing
+                    && !self.browsing_workspaces
+                    && !self.attention.active
+                    && self.file_navigation.view.is_none(),
+                |root| {
+                    root.child(
+                        div()
+                            .flex_1()
+                            .min_h_0()
+                            .id(("host-content", self.selected))
+                            .child(selected.view.clone().expect("selected Host initialized")),
+                    )
+                },
+            )
     }
 }

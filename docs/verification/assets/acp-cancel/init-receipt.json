@@ -1,0 +1,179 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-cancel-qa",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "active"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "8b04a43e-cf95-45bc-b240-ef9a2ebf258a",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission-cancel-gate]",
+                "type": "text"
+              }
+            ],
+            "id": "user:8b04a43e-cf95-45bc-b240-ef9a2ebf258a",
+            "type": "userMessage"
+          }
+        ],
+        "status": "inProgress"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "bef6fe9f-105e-4358-b68d-bd25a362aa48",
+    "host_pid": 382734,
+    "provider_pid": 382737,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "bef6fe9f-105e-4358-b68d-bd25a362aa48",
+      "controller_id": "a9c43239-8e34-4977-a2ec-c707466a24cd",
+      "generation": 3
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "b36602f1-2a2d-4203-bfd4-e33ad5c49b7c",
+      "98e7afff-cc28-4db5-9b8d-d2c213f83f26"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+          "turn_id": "8b04a43e-cf95-45bc-b240-ef9a2ebf258a"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+          "threadId": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+          "toolCall": {
+            "title": "Cancellation gate",
+            "toolCallId": "gated"
+          }
+        }
+      },
+      {
+        "id": 11,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+          "threadId": "2f2edc21-bdb7-45c0-b313-59fd0437bad4",
+          "toolCall": {
+            "title": "Cancellation gate",
+            "toolCallId": "gated"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+}

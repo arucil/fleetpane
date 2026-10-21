@@ -1,0 +1,215 @@
+{
+  "thread": {
+    "acpSessionInfo": {
+      "_meta": null,
+      "updatedAt": null
+    },
+    "configOptions": [
+      {
+        "category": "model",
+        "currentValue": "model-a",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "name": "Synthetic A",
+                "value": "model-a"
+              },
+              {
+                "name": "Synthetic B",
+                "value": "model-b"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "currentValue": "low",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cwd": "/tmp/fleetpane-acp-review-qa",
+    "historyMode": "acp-observed",
+    "historyPaging": true,
+    "id": "91825e8b-2c7f-4e85-ab61-a8744ccc78e8",
+    "name": null,
+    "preview": "DeepSeek Harness",
+    "status": {
+      "cancelRequested": false,
+      "type": "active"
+    },
+    "turns": [
+      {
+        "error": null,
+        "id": "311275e6-eba3-413d-9d8a-231643b72486",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "[permission-review]",
+                "type": "text"
+              }
+            ],
+            "id": "user:311275e6-eba3-413d-9d8a-231643b72486",
+            "type": "userMessage"
+          },
+          {
+            "call": {
+              "content": [],
+              "kind": "other",
+              "locations": [],
+              "rawInput": {
+                "command": "old-command",
+                "old": true
+              },
+              "sessionUpdate": "tool_call",
+              "status": "pending",
+              "title": "Old operation",
+              "toolCallId": "reviewed"
+            },
+            "id": "311275e6-eba3-413d-9d8a-231643b72486:tool:reviewed",
+            "type": "acpToolCall"
+          }
+        ],
+        "status": "inProgress"
+      }
+    ]
+  },
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "22a6d1ab-8184-4b72-8eb7-daaa07390e0b",
+    "host_pid": 409468,
+    "provider_pid": 409470,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "22a6d1ab-8184-4b72-8eb7-daaa07390e0b",
+      "controller_id": "b3e5586a-bb18-4922-8555-2f7eed64ee2a",
+      "generation": 8
+    },
+    "sequence": 50,
+    "operation_ids": [
+      "86299c01-e1c5-4165-958d-5b2b7fd517db",
+      "e8668ecf-d30b-4775-8f12-f0db8f3dd22b",
+      "966e3911-4708-4543-8594-74dced11bd1d",
+      "abc7a47e-8281-4e37-b4be-ddc193623cad"
+    ],
+    "journal_total": 4,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "45fe267e-ce3e-4522-b43b-20957ca3e9e8",
+          "turn_id": "cc640246-8428-4921-aa19-6e75bd37cb8c"
+        },
+        {
+          "thread_id": "91825e8b-2c7f-4e85-ab61-a8744ccc78e8",
+          "turn_id": "311275e6-eba3-413d-9d8a-231643b72486"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 11,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "45fe267e-ce3e-4522-b43b-20957ca3e9e8",
+          "threadId": "45fe267e-ce3e-4522-b43b-20957ca3e9e8",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-1921d2a4-2c2b-4c4a-b673-625a4549c54c"
+          }
+        }
+      },
+      {
+        "id": 12,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "91825e8b-2c7f-4e85-ab61-a8744ccc78e8",
+          "threadId": "91825e8b-2c7f-4e85-ab61-a8744ccc78e8",
+          "toolCall": {
+            "content": [
+              {
+                "content": {
+                  "text": "Review detail 000 中文\nReview detail 001 中文\nReview detail 002 中文\nReview detail 003 中文\nReview detail 004 中文\nReview detail 005 中文\nReview detail 006 中文\nReview detail 007 中文\nReview detail 008 中文\nReview detail 009 中文\nReview detail 010 中文\nReview detail 011 中文\nReview detail 012 中文\nReview detail 013 中文\nReview detail 014 中文\nReview detail 015 中文\nReview detail 016 中文\nReview detail 017 中文\nReview detail 018 中文\nReview detail 019 中文\nReview detail 020 中文\nReview detail 021 中文\nReview detail 022 中文\nReview detail 023 中文\nReview detail 024 中文\nReview detail 025 中文\nReview detail 026 中文\nReview detail 027 中文\nReview detail 028 中文\nReview detail 029 中文\nReview detail 030 中文\nReview detail 031 中文\nReview detail 032 中文\nReview detail 033 中文\nReview detail 034 中文\nReview detail 035 中文\nReview detail 036 中文\nReview detail 037 中文\nReview detail 038 中文\nReview detail 039 中文\nReview detail 040 中文\nReview detail 041 中文\nReview detail 042 中文\nReview detail 043 中文\nReview detail 044 中文\nReview detail 045 中文\nReview detail 046 中文\nReview detail 047 中文\nReview detail 048 中文\nReview detail 049 中文\nReview detail 050 中文\nReview detail 051 中文\nReview detail 052 中文\nReview detail 053 中文\nReview detail 054 中文\nReview detail 055 中文\nReview detail 056 中文\nReview detail 057 中文\nReview detail 058 中文\nReview detail 059 中文\nReview detail 060 中文\nReview detail 061 中文\nReview detail 062 中文\nReview detail 063 中文\nReview detail 064 中文\nReview detail 065 中文\nReview detail 066 中文\nReview detail 067 中文\nReview detail 068 中文\nReview detail 069 中文\nReview detail 070 中文\nReview detail 071 中文\nReview detail 072 中文\nReview detail 073 中文\nReview detail 074 中文\nReview detail 075 中文\nReview detail 076 中文\nReview detail 077 中文\nReview detail 078 中文\nReview detail 079 中文\nReview detail 080 中文\nReview detail 081 中文\nReview detail 082 中文\nReview detail 083 中文\nReview detail 084 中文\nReview detail 085 中文\nReview detail 086 中文\nReview detail 087 中文\nReview detail 088 中文\nReview detail 089 中文\nReview detail 090 中文\nReview detail 091 中文\nReview detail 092 中文\nReview detail 093 中文\nReview detail 094 中文\nReview detail 095 中文\nReview detail 096 中文\nReview detail 097 中文\nReview detail 098 中文\nReview detail 099 中文\nReview detail 100 中文\nReview detail 101 中文\nReview detail 102 中文\nReview detail 103 中文\nReview detail 104 中文\nReview detail 105 中文\nReview detail 106 中文\nReview detail 107 中文\nReview detail 108 中文\nReview detail 109 中文\nReview detail 110 中文\nReview detail 111 中文\nReview detail 112 中文\nReview detail 113 中文\nReview detail 114 中文\nReview detail 115 中文\nReview detail 116 中文\nReview detail 117 中文\nReview detail 118 中文\nReview detail 119 中文\nReview detail 120 中文\nReview detail 121 中文\nReview detail 122 中文\nReview detail 123 中文\nReview detail 124 中文\nReview detail 125 中文\nReview detail 126 中文\nReview detail 127 中文\nReview detail 128 中文\nReview detail 129 中文\nReview detail 130 中文\nReview detail 131 中文\nReview detail 132 中文\nReview detail 133 中文\nReview detail 134 中文\nReview detail 135 中文\nReview detail 136 中文\nReview detail 137 中文\nReview detail 138 中文\nReview detail 139 中文\nReview detail 140 中文\nReview detail 141 中文\nReview detail 142 中文\nReview detail 143 中文\nReview detail 144 中文\nReview detail 145 中文\nReview detail 146 中文\nReview detail 147 中文\nReview detail 148 中文\nReview detail 149 中文\nReview detail 150 中文\nReview detail 151 中文\nReview detail 152 中文\nReview detail 153 中文\nReview detail 154 中文\nReview detail 155 中文\nReview detail 156 中文\nReview detail 157 中文\nReview detail 158 中文\nReview detail 159 中文\nReview detail 160 中文\nReview detail 161 中文\nReview detail 162 中文\nReview detail 163 中文\nReview detail 164 中文\nReview detail 165 中文\nReview detail 166 中文\nReview detail 167 中文\nReview detail 168 中文\nReview detail 169 中文\nReview detail 170 中文\nReview detail 171 中文\nReview detail 172 中文\nReview detail 173 中文\nReview detail 174 中文\nReview detail 175 中文\nReview detail 176 中文\nReview detail 177 中文\nReview detail 178 中文\nReview detail 179 中文",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "think",
+            "rawInput": {
+              "plan": "# Proposed plan 中文\n1. Review changes.\n2. Wait for approval."
+            },
+            "title": "Review plan 中文",
+            "toolCallId": "standalone-review"
+          }
+        }
+      }
+    ],
+    "fault": null,
+    "fault_scope": null
+  }
+}

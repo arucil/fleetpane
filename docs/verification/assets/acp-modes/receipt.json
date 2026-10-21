@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "date": "2026-10-21",
+  "base_revision": "c91d269247207a08898e264c81083df4fbd4e745",
+  "implementation": "uncommitted working tree",
+  "root_tests": 143,
+  "desktop_tests": 9,
+  "history_tests": 13,
+  "provider": "private synthetic ACP v1, no model calls",
+  "native_workspace": {
+    "id": "fleetpane-modes-20261021",
+    "state": "stopped",
+    "size": [
+      1680,
+      1100
+    ]
+  },
+  "cleanup": {
+    "processes": [
+      {
+        "pid": 1363092,
+        "exists": false
+      },
+      {
+        "pid": 1363124,
+        "exists": false
+      },
+      {
+        "pid": 1363347,
+        "exists": false
+      },
+      {
+        "pid": 1503212,
+        "exists": false
+      },
+      {
+        "pid": 1558913,
+        "exists": false
+      },
+      {
+        "pid": 1558933,
+        "exists": false
+      },
+      {
+        "pid": 1559866,
+        "exists": false
+      }
+    ],
+    "native_window_exit_codes": [
+      0,
+      0,
+      0
+    ]
+  },
+  "clipboard_readbacks": {
+    "after_denial": "Mode QA draft 中文\n  keep indentation",
+    "after_window_replacement": "Pending mode draft 中文\n  retain spaces"
+  },
+  "remote_ci": "not run",
+  "source_sha256": {
+    "crates/runtime/src/acp.rs": "80cdf65ba4cf945b78b13e342b29d100697bbc9d2125a2334719efde49ac2458",
+    "crates/runtime/src/acp/modes.rs": "412b9a2178096398483ed376e49e8f1edfc68f7f093a3608fb24583b4b840604",
+    "crates/runtime/src/acp/archive.rs": "914d09e0f399741239d7d9bb2e1f8665cb78164f0bc15200558ff303d38f660e",
+    "crates/runtime/src/acp/history.rs": "d7b604cdcea2cccd732721fd8177f32a06d45533f5994d300e24c46e3446123a",
+    "crates/session/src/lib.rs": "418c05e4d32403ec268899968c55f02f9afb730df78c3b10bd781b475f7ec22f",
+    "crates/session/src/client.rs": "b0456f8d7e77a4875a07dac8fead584fa0cd4ace092b312705490c6d79657c7b",
+    "apps/host/src/main.rs": "25771c30a45575b6ff1bc46f164a6d24e043c600334958f259f08ed1def7b037",
+    "apps/desktop/src/host_view.rs": "11dade5a0e8234293246b6016821c50efc14c00c0b33399b1eb2a953540d2065",
+    "scripts/acp-fixture.py": "c88b29fda4aaeb4fa9f1cf16136e83fec9da178ce21725a7b4d3a0360b999910",
+    "scripts/acp-modes-smoke.py": "5d18adb54f57b1054bae268a9902c8deab8bd21e8d5331f72bb7a18dd8c3857a",
+    ".github/workflows/ci.yml": "1078e05bbe537bbb7b01cea98a53fa7f5a1c6e66bcd547cdf2fa8db04a7383c5",
+    "docs/reference/paseo-replay.json": "6bf81ba0b64c162fc7570ae569083c8cab7d2ebb3362801a1a7c0826560a2cf0",
+    "docs/adr/0039-acp-v1-session-modes.md": "3452f6d658d26e371a73abf2eec6c9780f9f53f4bca7646e9571182c2d9fa7a6",
+    "docs/verification/2026-10-21-acp-modes.md": "18a45bc467ad53a425f8eaf4cad2724ada47d0af0b31ce8bc47dc73a920f42e3",
+    "README.md": "707bee19cae042abdfc57d7e0a3bfefc99c7d704bc9abce96aa05ecf654d4cee",
+    "docs/status.md": "8a944b9ea1f52661be5a4f0171c9881ef6aa753ceabc01d7d7a96be056fc348d",
+    "docs/parity.md": "00d6eb5ba1a4ddaad8cb551dde6233758690c8cb47e48f2793ba3eb3ae6a0d81",
+    "docs/reference/paseo-replay.md": "10eee51b10f9b1cf4595d579adbb33e56edf1f9c19663200787d676acaa28ff8"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "dbb372b706a63cb18726813a70e9948fd7c4e1f11335e2259624e1365ba30f3d",
+    "apps/desktop/target/debug/fleetpane-desktop": "c4c06cdfd1f7762bd626567581ba3356e6b950127bc6b2fa2ed2f848ef7a10e0"
+  },
+  "artifacts": {
+    "01-initial.png": "bbab1db65a253b02f6af15e9cf4e4172a2a992ef49c7d65a83b09717be2f47e8",
+    "02-controlled.png": "2c5bb8208a8b45371417e0d5a859ea06609c3f3a852a7f775a2da986aea01c56",
+    "03-selected.png": "1ddf18265799a32ca0f25ca417d778d46c6e32044d4bc53fcefc608316405bcc",
+    "04-settled.png": "2ed7413852d8e041663726c4afc06b287a14148c45c5f963cf53b6b259602e98",
+    "05-menu.png": "3a5fb7221caf34395aaf83aef4f2bbc1e5007cdb1c6caec3da0f4af8cb24ef10",
+    "06-menu-settled.png": "8f8d8defce448eeda6327a8a168c0ef5e73a67b6bfff10719e359ccd84a00254",
+    "07-code-draft.png": "91954b7ecc2dba35a5f94a4747931c1727afcfe1891059126d6fea49473265fd",
+    "08-denied.png": "4e90212a36a31d0a2a1d8402b5dbd3d5f66bd7c8841f994744eb53eb40d183fa",
+    "09-permission.png": "aaa1b54eead72de88ee66d91c27ab29242d9e337663bf56f1d65f709ab271008",
+    "10-active-menu.png": "968d8772f424221eec5752ff3b71d6be9443bb1d66193f794c5554519516ff03",
+    "11-active-ask.png": "5614ff00b8542f8fdda5ab2fec287a2ee4d9d6595c0006c38397f398d641d94b",
+    "12-replacement.png": "1e6c226d8ebaf57dd02777f7448ab77cff98943e4870f2104c0ab3a6a5163358",
+    "13-stopped.png": "07b9b41085b1f25837d31c7b87b77b66abc5dafe1ef2f7fbb0e389222fdd5524",
+    "14-other-session.png": "ce683c196b318b0103e84fd8d02eddc80c5a8ada4cd767366a77eb0d704ed580",
+    "15-archive.png": "c3985a77462b146672279a43b495c2d4f4c3274a24887838442ff5f8bc60e3d9",
+    "16-resume.png": "418914d752ca3766daef19a7ab4506bad14aa619804072bb236bcb17bceae4cc",
+    "17-fresh-menu.png": "3ba8f4325fdcee5a0dd0d618bec3b736275cf14725cb5c81c32be023782bd6e1",
+    "cleanup.json": "53df8409be55de8f6c09397203c6b0419004285312a3b15e59e1e61ac601519a",
+    "draft-after-denial.json": "d8200c5335e3f59b49e4431b410bcd109e391d8b91ee0d2d4982cbb6593496d2",
+    "host-final.log": "96b03733e046a261b56cabf30589fe187ae2b3c82b4d5ec6c1a0c7e96bedd9bd",
+    "host.log": "fb6ca59578f0be1d2274ec85963f3c7fcd5c46ba29815f632bd8b5792ef14731",
+    "metadata-final.json": "d05918e56cbcfb1ab73047b4e51d3602268ad0e0dc1b6120c863901a5ca20a04",
+    "metadata.json": "206c0b8c5be39614dd056a355890f238e5c95f3ff98437f01823fa5f7cd0838a",
+    "mode-wire.jsonl": "80bc43568406122f50a49db8722997ee5416235fae3070bae19487b5d2cbadbe",
+    "modes-after.log": "304bbb36ceafcc01126a58d2267b0d9a129d12ba3654fe341a5c90bf7478d0cb",
+    "modes-before.log": "fd0fa2d1994cdc898a6fca43d5e9a052b5468d86b3595321cf9d08dc0b4ca98f",
+    "modes-build.log": "79ac617b9823dde3c5c82bc39528915cac98e0ac4b70bc24c0366ee9b10b75f8",
+    "modes-client-final.log": "1bf913c974cf827b2eb51a7881e0fa6284240fbef250cfd59c7b4055aa72ee4e",
+    "modes-clippy.log": "cc96042c68be9307f206d01fb62f7105f8979c96eac63dd44809fbda8eaf812c",
+    "modes-desktop-build.log": "209086ed8107aa2fa23e79f7ab486605a921b2b190a5c576575632376b8b70df",
+    "modes-desktop-clippy.log": "1d6240bd1972bbe092e3d1cdc69e0f6de652f6f7737955880d34131db9055fcb",
+    "modes-desktop-test.log": "c96f82cd804cc6a6c55769b439de66e4264f9ddf7facd0719d8b9c00fc4fff73",
+    "modes-existing-acp.log": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "modes-existing-archive.log": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "modes-existing-cancel.log": "842af69a547189afdb80a17d3edf34aa5c9e92b549eb031144e591b47b9592ba",
+    "modes-existing-info.log": "d1be4deeaa05f88781c8b86027848f0a87eab53b8d35be4a9cfd83bd5bf8cdd9",
+    "modes-existing-order.log": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e",
+    "modes-final-desktop-build.log": "3e700508de0f34075d156d9f796497442fac05d725095d6191a651d023c87080",
+    "modes-final-host-build.log": "da7cfef73c46bf4b8a4345991384cc1f60d5640e0ed4b4bbc2ddaa80e9c80c3e",
+    "modes-history-validation.log": "2322ac0a2a5bc324da6afa6b150c21e39f2b024d358f4063cc426ca3ed59885d",
+    "modes-python-tests.log": "f7ca0d857ac13e63fbb436ed589f85f134949cb62d018934f2b4692bf1bc42c8",
+    "modes-runtime.log": "fdc0f487ad385f637f415beec90aa2eba203b59024b92ae365598405d0181467",
+    "modes-smoke.log": "85d6528b4bcdbe0dc4109bac51b9748f49632da666a0fd97ba887343a70f2962",
+    "modes-windows-clippy.log": "8627ba4c906b9db37e26fa4103cce5da212de3e2dbbdab5ca56c053c141beca3",
+    "modes-workspace.log": "cccccc3f9a21dbc64dde6a87106c6e8678435a96c23f0ae55f15817ef35f86ed",
+    "native-1363347.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-1503212.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-1559866.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "prompt-count.txt": "093c696b09b6ec71f91edac1c3204295914bb44792fc5b645b13b4f6e716d28a",
+    "provider-final-sessions.json": "fae17bbc25eefbc7d4d8e2df404c6fe549d0c5bdbf9357a6526ff4e7c4d87a3f",
+    "provider-sessions.json": "a1cbd5d54ccadd3ec58c1f489f1427a3ae83230e3a8edd3132025f12a17d0533",
+    "readback-active.json": "d73bec6eb30f59265550dac179bab57945bfb5560bdfc740e1604bdbb7388905",
+    "readback-native-archive.json": "91539d0f21dbf3d9e29c544bb2e8b4656c88841e654e6b8683b0552d25954915",
+    "readback-native-resume.json": "8863b9716f994a8eced683634d280da24b814d178b2de6411292296ae287e985",
+    "readback-provider-update.json": "0a47f9c2719033c0af0c4b2da6d691477fc56e509983454b4003387e718961a9",
+    "readback-stopped.json": "f16a345c0c29f3d85daa0bea66597665a6716edd4ea6f14f27e766da4389a21d",
+    "snapshot-code.json": "c44a085d1d6eb29318e57ef40488b173720f1fac7ba6e11878ce3866fa0096ce",
+    "snapshot-permission-before.json": "5d99fb201a557304c925806127df706489a052bc1da034496755207b8b0bd398",
+    "snapshot-window-replacement.json": "5e8b2f6e32769d5f5c75a5b1d3cee14f2a341266c4e27ddec240c244b19f4593"
+  },
+  "final_native_binary_hashes_at_launch": {
+    "target/debug/fleetpane-host": "dbb372b706a63cb18726813a70e9948fd7c4e1f11335e2259624e1365ba30f3d",
+    "apps/desktop/target/debug/fleetpane-desktop": "c4c06cdfd1f7762bd626567581ba3356e6b950127bc6b2fa2ed2f848ef7a10e0"
+  }
+}

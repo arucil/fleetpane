@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "message": "workspace app app-1521972 killed",
+  "status": {
+    "id": "fp-paseo-scratch",
+    "session_id": "session-fp-paseo-scratch-1792577172392-1515708",
+    "purpose": "Fleetpane abandoned migration file cleanup native QA",
+    "user_acknowledged_hidden_workspace": true,
+    "user_acknowledged_unenforced_policy": false,
+    "ready": true,
+    "started_at_unix": 1792577172,
+    "display": ":91",
+    "width": 1500,
+    "height": 1100,
+    "runtime_dir": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch",
+    "socket_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/control.sock",
+    "xauthority_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/Xauthority",
+    "daemon_pid": 1515741,
+    "x_server_pid": 1515752,
+    "window_manager_pid": 1515824,
+    "last_event_sequence": 25,
+    "apps": []
+  },
+  "apps": [
+    {
+      "id": "app-1521972",
+      "name": "Fleetpane-scratch",
+      "pid": 1521972,
+      "process_group_id": 1521972,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fp-paseo-scratch-ui/hosts.json",
+        "--preferences-dir",
+        "/tmp/fp-paseo-scratch-ui/preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "PASEO_HOME",
+          "value": "/tmp/fp-paseo-scratch-ui/paseo"
+        },
+        {
+          "name": "CODEX_HOME",
+          "value": "/tmp/fp-paseo-scratch-ui/codex"
+        },
+        {
+          "name": "DSH_HOME",
+          "value": "/tmp/fp-paseo-scratch-ui/dsh"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/apps/app-1521972.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/apps/app-1521972.stderr.log",
+      "started_at_unix": 1792577202,
+      "running": false,
+      "exit_status": "signal: 15 (SIGTERM)",
+      "exit_signal": 15,
+      "stopped_at_unix": 1792577552,
+      "runtime_seconds": 350
+    }
+  ]
+}

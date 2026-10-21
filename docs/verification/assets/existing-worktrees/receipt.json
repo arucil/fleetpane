@@ -1,0 +1,113 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted source; no commit/push/release",
+  "source_sha256": {
+    "crates/session/src/worktrees.rs": "5cdcf19230da6f892038d5e888abcdd1f769714e5bec96aecf12dcb575ae310a",
+    "crates/session/src/worktrees/tests.rs": "17328f3af85d5b770450fb1b0521c18aa8f1fc49f5ca2b7acadf09f6aadca7f4",
+    "crates/session/src/workspaces.rs": "2618a0f302192cbf31766d1cf9f21ccbb3adef90b35a227500548ff21d9df82f",
+    "crates/session/src/storage.rs": "81d13dc714e6272bd454383ad3a21f6d19aea021d5d95bf5fb541f118813d9ef",
+    "apps/host/src/main.rs": "9a1f3c267754c218cc49a348af25fa7d4952a4404f3375d45adb04ca73b0dff7",
+    "apps/desktop/src/workspace_view.rs": "99fab09fd423c070b139a3237be98f066e7dece074fecffb0ad1aee67902b63f",
+    "scripts/existing-worktrees-smoke.py": "6a572ef928d9d779a4f4afc1ca0817b4b6f46035775d48cae15a485cc8636408",
+    "scripts/worktrees-smoke.py": "027fe3a42cd7cba7da926e2640a02ee9c90f3322680a8038b7b517a2ab6768b6",
+    "scripts/acp-fixture.py": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711",
+    "scripts/provider-fixture.py": "d5b828cce52e282300b347c11068565fdf881a1c9591e17e06dc6b40e20b71d3",
+    "Cargo.lock": "246df098f8c96c7256e4ca5d5afac1e9b2727e1f52e55ae125701ffa176eb18d",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237"
+  },
+  "binaries_sha256": {
+    "target/debug/fleetpane-host": "ae3177128612a54c1431eca1ea3a4911f5f992079ad4b4504309e6d7c0338fcf",
+    "apps/desktop/target/debug/fleetpane-desktop": "97dfd526b1fba38041cc9964a4c37d26721be0f09c04be38a86aff0f33146b43"
+  },
+  "git_version": "git version 2.56.0",
+  "checks": {
+    "root": "151 tests, format, strict all-target Clippy, build",
+    "desktop": "11 tests, format, strict all-target Clippy, build",
+    "cross_check": "Windows GNU engine check only",
+    "real_git_process": "existing-worktrees-smoke.py and original worktrees-smoke.py (120-second deadline)",
+    "targeted": "3 worktree tests including real checkout and cancelled async awaiter"
+  },
+  "native": {
+    "workspace": "fleetpane-existing-worktree-20261021",
+    "apps": [
+      {
+        "id": "app-2720454",
+        "exit_code": 0
+      },
+      {
+        "id": "app-2723998",
+        "exit_code": 0
+      }
+    ],
+    "host_pid": 2719845,
+    "provider_pid": 2719847,
+    "scope": [
+      "existing branch preview/reopen/apply",
+      "native stale tip error/prepared target absent",
+      "explicit new-session exact worktree subdirectory readback",
+      "original draft and independent approval retained",
+      "independent edit",
+      "900x560 client controls",
+      "normal close and owned process/workspace cleanup"
+    ],
+    "limits": [
+      "protocol fixtures, not external model acceptance",
+      "no closing during active checkout acceptance",
+      "process exit can leave Git running; no detached supervisor",
+      "cooperative repository lock does not fence external Git",
+      "late mismatch can leave checkout and catalog entry",
+      "branch picker, worktree removal/setup/reconciliation and performance remain open"
+    ]
+  },
+  "qa_corrections": [
+    "Git probe rejected existing branch --no-track; command modes separated",
+    "Required fixture filter lacked clean command; fixture now supplies clean=cat",
+    "Strict Clippy removed unnecessary let-return without suppression",
+    "Final snapshot assertion narrowed only after isolating event sequence 27 -> 30 from query replies; mutation/owner/activity/approval/draft unchanged",
+    "Comment-only lifecycle clarification rebuilt to identical accepted binaries"
+  ],
+  "artifacts": {
+    "after-create.json": "d7ce558102c77e4e5015febbc3bd693ffe288bdb07fe3cb93660085d278ff927",
+    "after-new-session.json": "34efd472977e7d1c077030ddfac2553501029073e41ddad27709cb5b9edc0b96",
+    "after-preview.json": "d7ce558102c77e4e5015febbc3bd693ffe288bdb07fe3cb93660085d278ff927",
+    "after-stale.json": "d7ce558102c77e4e5015febbc3bd693ffe288bdb07fe3cb93660085d278ff927",
+    "before-worktree.json": "d7ce558102c77e4e5015febbc3bd693ffe288bdb07fe3cb93660085d278ff927",
+    "cleanup.json": "69cc07ffb2c7664aa673e95c4ab4a1971f41c7a497ad11b80d1b02d3f7857a92",
+    "completed.json": "90d6d70c9ef992a352d402b67ef43498cf3486127a283354c985713e741e1810",
+    "created.png": "39895d03c26a99a74c0b9fe7e3b0ee7219e42b4004eea085dc570f968241b192",
+    "desktop-build.log": "eaeffeac3cc079a66c7adf94edd6ec54382dacdfb22e8a44ad54124c0eba04c8",
+    "desktop-clippy.log": "67198521a0066e974a8843806a82025f0bfc3a46c95d6a086730b85992b88f62",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "54f46df57e3791cb43c7377f3fedf2ea808a1cdc1d4ba6dc2795567382bf6ed6",
+    "draft-before.json": "bae8e6de86cee29aed45dd58f28bcd5f8dc035e926a58940abe4841bcbdf2db0",
+    "draft-final.json": "bae8e6de86cee29aed45dd58f28bcd5f8dc035e926a58940abe4841bcbdf2db0",
+    "existing-smoke.log": "cb93479ab6dde38177b4643ba14a406ff8f10f8add830b800a643dc3fda1a875",
+    "final-build-identity.json": "2484f623de726bd63443101f765f9f060e7b02c4626a72e96cad03566e6009bc",
+    "final-desktop-build.log": "950cd4a1276946158d3ee5efe4cf9550736d860b0e4ceabe7b97026a77d242aa",
+    "final-desktop-clippy.log": "b0783dbca87de9958e5f8106c1e09245757a264193304689437b9582948f34af",
+    "final-host-build.log": "fbe8d1d0d4799ac66f4e23a93e5ff3935c24ab30e9f2716c216b5178c6b2d471",
+    "final-root-clippy.log": "5eb23b6729879ec470b430f2ccfcdf63ee16aa6bee2cdae9efddbefd9600b9b5",
+    "final-root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-snapshot.json": "520431e52ecf0c8012ff25b5674da76bde9b2539e56c68bf05b4e258f138a27a",
+    "host-build.log": "82e138fcfd101c46f92c22111755420e95b352abd7ca2a21d2e6e98069ab6947",
+    "new-branch-final.log": "a84cf3f3290d2fe700b4f74d5db2fdb05233197d4a9cc868cfcba6098221b7a4",
+    "old-draft.png": "b5801c51e345ebd2475541a82a44a1bb6249a66b772d494f284b9e029c6af14b",
+    "prepared.json": "ac1db74a003050269c95644ff03ae89ca74be8dd81754999c16bf5c2517af53c",
+    "preview.png": "6639a1beb82ff3c731f35fe23a9ac853e2e94699dda3d5a08295830ca1c5054d",
+    "reopened.png": "9fe07c88e59081123e65611edf9abfde17129e8b968b4f7336dfe1dc0b39b022",
+    "root-clippy-first.log": "a0123acde6b3386d1035ed92765dcdcd15d9dedb2a0050a5eedf1bda5c2c1d17",
+    "root-clippy.log": "71453f235dcf7b4c6b4e66e03f923e65bef81060ccc8bbe8386f6ab6927129f2",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-tests.log": "b8497da33fd3559520caadda98106586aa6ad6683cf645fe4143aa123e42ad70",
+    "sessions-final.json": "6037bb2b6b44b557360920c440185e7023dcae2d1481e73aa100cf051e9d4a4e",
+    "setup.json": "61f7257346578a0db1f1a33edfc0a403d43d27be554215b1f2d3aa2c305e6ba1",
+    "small.png": "923a49e8fb222ee10fe8863c6200810d80bbebe1ab36581e7074ab753b3b6393",
+    "stale-prepared.json": "69eb79ad6796a7c9730f982331b418d23caa803ebe7c506a7f9877bc5b77e4c7",
+    "stale-refused.json": "69eb79ad6796a7c9730f982331b418d23caa803ebe7c506a7f9877bc5b77e4c7",
+    "stale-refused.png": "689ec5d347e5b2e55140a800f2b7ab7d2c248a87da232b05ccb4420d110df586",
+    "targeted-tests.log": "8b731ce3aa247a25d798260ee12406e8933875b197ed33da06a5d3608aded8e5",
+    "windows-check.log": "e2d77b6a2cc9b44852891e54683ab309efd3ca6441c9b08b1198c25b23af18af",
+    "workspace-cleanup.json": "bd789c3e67a1ad5c538146bb487f8afb9122fdf54312b1ef3a6ab373b3001cd3",
+    "final-audit.log": "633ffbf02bc580ea61e05b6bfa8cd6d1a1047ebcff703292092e2058beacd557"
+  }
+}

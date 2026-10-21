@@ -1,0 +1,127 @@
+{
+  "base_revision": "c91d269247207a08898e264c81083df4fbd4e745",
+  "scope": "Responsive composer only; source review102-113 separate; private ACP fixture not live model or release performance",
+  "sources": {
+    "apps/desktop/src/host_view.rs": "a170702102a0fbb57e5d88d5a8b7a2b214ec689971d4fd16f8792177a9c610c0",
+    "apps/desktop/src/host_view/draft.rs": "0a948e7d2fc332c5a6f9c035b77661021fb4b4d5add9ed2138bec466f9c45d42",
+    "apps/desktop/Cargo.toml": "0dcde701d0869208b2fe7c47c84e2bf6fe97e9e100b0b2503f65e73204708d6b",
+    "apps/desktop/Cargo.lock": "60540f13f91b4eb127ccab1f67054d4eace380607b6d0b24e03ca568e80b6ca8",
+    "scripts/acp-fixture.py": "c88b29fda4aaeb4fa9f1cf16136e83fec9da178ce21725a7b4d3a0360b999910"
+  },
+  "binary": {
+    "path": "apps/desktop/target/debug/fleetpane-desktop",
+    "sha256": "c141e3b2a0477bf356456aff11b2d3fbbf4fccd253b4ab9b8b73278b5daa3545",
+    "final_pid": 1901683,
+    "final_captures": "23-35; 01-22 are intermediate/reproduction evidence"
+  },
+  "host": {
+    "host_pid": 1867122,
+    "provider_pid": 1867124,
+    "sessions": [
+      "216cfbd2-ccb0-44b7-ab65-42fc08bda3ba",
+      "7eddfd74-b456-4597-8d34-0a94a940f117"
+    ],
+    "host_sha256": "dbb372b706a63cb18726813a70e9948fd7c4e1f11335e2259624e1365ba30f3d"
+  },
+  "native": {
+    "workspace_id": "fleetpane-composer-20261021",
+    "workspace_stopped": true,
+    "screen": [
+      1680,
+      1100
+    ],
+    "windows": [
+      [
+        1100,
+        720
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "exact_clipboard": true,
+    "final_assertions": "assertions.json",
+    "cleanup": "cleanup.json"
+  },
+  "checks": {
+    "desktop_tests": 11,
+    "desktop_clippy": "pass, warnings denied",
+    "desktop_build": "pass, locked",
+    "history_tests": 13,
+    "fmt": "pass",
+    "diff_check": "pass",
+    "remote_ci": "not run",
+    "root_windows": "unchanged code, not rerun"
+  },
+  "artifacts": {
+    "01-start.png": "4f2ddcb3ba6d858e1731d153cf3fcfc58057c2410c6f32a540ea828afcfa2dc0",
+    "02-directory.png": "47dcdcd331118e9749fbf82e581d8fec5eac92c2111a53fd5e196e2e069381d0",
+    "03-directory-settled.png": "1dd938612ce25692686739c0013722ea57e343563689e8763ad6993672f57e4e",
+    "04-short.png": "589443370e4af79814c1c192284fba32778e7784c077e8fceeb39c9b01eedfe6",
+    "05-long.png": "ba09f3a505fa534506332a7a5bb0cc75bda9517ea6a0b1afa6f3bfb160b9eeae",
+    "06-long-end.png": "4f022b1fc08aa8b98749205fb2691d942a200c83145e09477623e8f5e0ae54b0",
+    "07-three-lines.png": "1c1d0dffc3474af7c9140c90023578c01ca7c4f6927e7ee4c84e152132472a33",
+    "08-shrunk.png": "7fe6c35e9ba79011ca3ba52c20b4ae08bad4eda1cbf0ec8f12f2b0ac4c92bccc",
+    "09-small-long.png": "4b12f255b6080b16ee4f6cbb1f348578b790faf631d693117f22d9565f0e293d",
+    "10-small-scroll.png": "9d102cecb2aa5f9344090c570cea7e19b45357ee4cf949f5c5f66e3b65a5108d",
+    "11-small-scroll-text.png": "cb20b7e4ddd9eef560e19a2e191975d61f4076178caaf2b7073a9ff78deba505",
+    "12-fixed-small.png": "76532e265932268ca5e3fb6daa0e6ecbcdb3ffd8d30c008bef25c5c06b9e80a8",
+    "13-fixed-scroll.png": "518442c9fa706f4a6d8f8c7180b261aa46ebce5511c434c91d0d137bf4e17fba",
+    "14-review-draft.png": "c97779d661887a465ec28237c9696a765dd75923c43896652a2afcbe9e9f08d7",
+    "15-review-pending.png": "24b6858de1d842bbb28bef9e7d8c198664f8793ae3e13f15460f2ac5c4f675c3",
+    "16-review-settled.png": "e93805ab6f9c4d6ed1f09ec7d4a341e713b8f7c1a778f5393c5ec9cd4d719a42",
+    "17-small-permission-scroll.png": "61ec29800acfeb8aec42ecc709d31ee3e6c63c5992b0715da8d70fa957dbda11",
+    "18-small-pending-long.png": "88715147839c27143576ffec98373bdbe11ef278fb9f84d60b25204fdd76f1e2",
+    "19-bound-small.png": "0fdee922d1c5ed8f1499c8420521f7d3e77abbaad6582b18633c56319595066c",
+    "20-bound-permission.png": "2a150d1bff36c14190a8688ad837b7e2aa5558a5e7111611dd32246a0875a0ff",
+    "21-bound-owner.png": "e45387baac8aef903aee47fa7b6da410a4093ef22f4a806e0c4dd18503969e1d",
+    "22-bound-pending-draft.png": "96e76aa869749118961a08da7a5e23e2ae02f39f695b7e069a08316f947dbae9",
+    "23-final-owner.png": "bfefe036cfe5063f9161c788c8a4fc694d5ef8e734498d5e003da399267292b1",
+    "24-final-small.png": "c41fa28bca6ff3b5c5a08176286a45ec230a8e772051f34ad70f94eec63e4453",
+    "25-final-small-permission.png": "b589ef35eded61b79e52b85d7ddc5418cf4e83790e4e710e6fcf94c2fcbacd77",
+    "26-final-small-text-end.png": "c3467058d7c6f1931680ad5a6ecf026a2151162a2eff48a965026e74d41e4a58",
+    "27-final-next-request.png": "f5d3637a364695a9e9c6f68bd5b3f25ec9a55c3e02e95e2210369fbfd3316392",
+    "28-final-next-settled.png": "800aeff7a451ba7f8a15e997ed2e98ae0362d0cecfc69d960eb475b8569c0b7c",
+    "29-final-boolean.png": "05f513f8370169fa7f7c5391c7c62c3a4b5aa884a9754d40aeda290efe2027c9",
+    "30-final-large-long.png": "ca85ede8b8c4231f4d0356c55176107c6736e667b4166ef754341479c2bcec61",
+    "31-final-small-again.png": "c97a6779a99664c8e3558abec88c05063ef4538c7e835b3fbd97d85cb138f4e7",
+    "32-final-stopped.png": "8d77da5393983adda8832ae63fd2ed0a66b3954b8dccfdb1c7ae7edb71a5199b",
+    "33-final-three-line-send.png": "3688d50e5519e0aac2f9239836bf7b58f3e6063942cd034dfa50b25e39d3c837",
+    "34-final-sent.png": "9d5525c37e99eca6762b79a44cc820c1a1f9dd27476668d8ef45a778ca21f7d3",
+    "35-final-sent-settled.png": "d7ea40bca1877a77b5b8629801910e03c310d4d354fe1c0c46f32f94899ed2c7",
+    "after-choice.json": "7134dc0de737d92bafa8304b5b8b79f8e97ff8a944d82b53784ca1ee2487ae21",
+    "after-send-drafts.json": "d4fa41e8a8445a45ecd6014cd6af8b24b4d7e3ce0ffe8da8acb48319c85b5f31",
+    "after-send-final.json": "1195235dd68652e49628bb15189e2abaa43387586f1f31a07fabad7b6127398a",
+    "after-stop-final.json": "0c177376cd8d07b1bb81d87a8e5a40860b4100ed6e2e013775bc3597d64659b1",
+    "assertions.json": "f5484fe59a04911515b0968d7d4d7062041f0e866bb17e1537d2800c07f9b620",
+    "before-send-final.json": "c546a2d31ddec833cb76dbc953230507cfe963e025cba48b6958649fe6a96624",
+    "before-stop-final.json": "760302d795a87ce4ff2121a9dfbf85959386714b8698230bbcce0dd11ba36783",
+    "before-stop.json": "04ad75cb1b8d5cbeee6f5a8dc84c3e6f1c713154094acf06dd4c2a6809d06181",
+    "cleanup.json": "8a25c6dc06052aaaac8a591be98f61bfdc0104ce743256feb1ad37d7e5210d68",
+    "clipboard-long.json": "1d80eca6c9d6a8ca1d8c126c9935876ff83dc5a5d118e7ed5cf8554879d76753",
+    "desktop-build-final.log": "96fa0bcfd9f0a450beec912358f7f0b82c47951c925d7af05ab38e621413c321",
+    "desktop-clippy-final.log": "de494b53d703968525d4d5e4700ec4b46638d026b9fb143796734f5825b47069",
+    "desktop-final.sha256": "b6219128d9cdfd56247d9076793f1128f2645369489e2c9b56445435b831ff43",
+    "desktop-layout.sha256": "5dbfaadd41df5654c4c99f4e65d89a85b9514d1a449df2b25f0c5847dd6a9ec3",
+    "desktop-tests-final.log": "a30d333e4a4636d8bfc9a429c9759786fca2e0b127a0e29d5503bfd2e195e12e",
+    "desktop-viewport-candidate.sha256": "233fcbf3bb7fad45257f253d52afcb1a0be492d14fcaee211f7ebd31311008bb",
+    "desktop.sha256": "79c01975d673074eef0f31c79b8b8a295bc451f11b03ee2745d9057ffc49d5e1",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-clipboard.json": "6aa46186795aeb8e8b7649301f450726a745e32f1bcf35dd45e28289dc51a46d",
+    "final-pending-drafts.json": "b2648ee8fa8f2c83be55d476d01db0e6c0294c604c44e8c02362ca434dcec5fe",
+    "fixture-acp-sessions.json": "93c4247c6cb9640597d3c27f0d476f7cc8b8717e2dfede61963ccb7b03e71886",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "history-tests.log": "eac354d262884b55eee6cb0a749eba815fdafe58d67c1b6adb69f15eea8d44d7",
+    "host.log": "8c3f4256d681cd8aca4445616cecc88f3ee687a14f8147c11e09b10d2702f194",
+    "long-draft.json": "5338506e1bc171f35db6484967cb09300293305d5d1ebd825c29b1022379bcce",
+    "metadata.json": "9c7925269a82abb85a9e3361694903a98dc4090dc7ac1babfa573c09ff2061ec",
+    "prompt-count.txt": "980bd3bebfc9d1bf596aac1e43a67628bed9a6b4d2b349fda6c7fe858cc8c0ff",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-0-answer.json": "25588872f6877c7b89fe6271af451726b3408b868d73627994a240e0cb6d09da",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-0.json": "ae221b763d54f69637b07ad0badd80d48520ca951dbc11beb05c10beeb2145f8",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-1-answer.json": "c56a42b642284b084f08d5263748ee59baa252a2c0318d485d279fa81b38dcfb",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-1.json": "8a9973927509e6f8fcfdda806470077084d195cef445c32a1b2f2811db891177",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-2-answer.json": "eb13dd98dba01fd53412b64e656264d04facc0729b90f8c8289b860f034d2ec7",
+    "review-216cfbd2-ccb0-44b7-ab65-42fc08bda3ba-2.json": "6d630b6d3066587567624c1980b5ab54cd150042e78d05d2e915bfe3e43e7771"
+  }
+}

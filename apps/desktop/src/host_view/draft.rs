@@ -1,16 +1,26 @@
 use super::*;
+use fleetpane_runtime::attachments::Image;
 use fleetpane_session::{
     creations::Store,
     drafts::{Draft, Key, Status},
 };
+
+#[derive(Clone, PartialEq, Eq)]
+struct Content {
+    text: String,
+    images: Vec<Image>,
+}
 
 pub(super) struct State {
     pub directory: PathBuf,
     pub record: Option<Draft>,
     loading: bool,
     saving: bool,
-    saving_text: Option<String>,
-    dirty: Option<String>,
+    saving_content: Option<Content>,
+    dirty: Option<Content>,
+    pub(super) importing: bool,
+    pub(super) picking: bool,
+    pub(super) images_error: Option<String>,
     error: Option<String>,
     notice: Option<String>,
 }
@@ -22,12 +32,21 @@ impl State {
             record: None,
             loading: false,
             saving: false,
-            saving_text: None,
+            saving_content: None,
             dirty: None,
+            importing: false,
+            picking: false,
+            images_error: None,
             error: None,
             notice: None,
         }
     }
+}
+
+/// Hydrating the already-selected metadata is an observation, not navigation.
+pub(super) fn observes_selected(command: &Command, thread: Option<&Thread>) -> bool {
+    matches!(command, Command::Open {thread_id,resume:false}
+        if thread.is_some_and(|thread| &thread.id == thread_id))
 }
 
 impl HostView {
@@ -37,11 +56,16 @@ impl HostView {
         {
             return Err(error.clone());
         }
-        Ok(!self.draft.saving && self.draft.dirty.is_none())
+        Ok(!self.draft.importing
+            && !self.draft.saving
+            && self.draft.dirty.is_none()
+            && !self.recent.busy)
     }
 
     pub(super) fn draft_can_navigate(&self) -> bool {
         !self.draft.loading
+            && !self.draft.importing
+            && !self.draft.picking
             && !self.draft.saving
             && self.draft.dirty.is_none()
             && self.draft.error.is_none()
@@ -79,12 +103,18 @@ impl HostView {
         {
             return;
         }
-        if self.draft.loading || self.draft.saving || self.draft.dirty.is_some() {
+        if self.draft.picking
+            || self.draft.importing
+            || self.draft.loading
+            || self.draft.saving
+            || self.draft.dirty.is_some()
+        {
             return;
         }
         self.draft.loading = true;
         self.draft.error = None;
         self.draft.notice = None;
+        self.draft.images_error = None;
         self.draft.record = None;
         let directory = self.draft.directory.clone();
         let task = cx.background_executor().spawn(async move {
@@ -128,23 +158,66 @@ impl HostView {
     }
 
     pub(super) fn edit_draft(&mut self, text: String, window: &mut Window, cx: &mut Context<Self>) {
+        self.edit_content(
+            Content {
+                text,
+                images: self.draft_images().to_vec(),
+            },
+            window,
+            cx,
+        );
+    }
+
+    pub(super) fn draft_images(&self) -> &[Image] {
+        if let Some(content) = self
+            .draft
+            .dirty
+            .as_ref()
+            .or(self.draft.saving_content.as_ref())
+        {
+            &content.images
+        } else {
+            self.draft
+                .record
+                .as_ref()
+                .map_or(&[], |draft| draft.images.as_slice())
+        }
+    }
+
+    pub(super) fn edit_images(
+        &mut self,
+        images: Vec<Image>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        self.edit_content(
+            Content {
+                text: self.composer.read(cx).value().to_string(),
+                images,
+            },
+            window,
+            cx,
+        );
+    }
+
+    fn edit_content(&mut self, content: Content, window: &mut Window, cx: &mut Context<Self>) {
         let Some(record) = &self.draft.record else {
             return;
         };
         if self.draft.loading || record.attempt.is_some() {
             return;
         }
-        if self
+        let current = self
             .draft
             .dirty
             .as_ref()
-            .or(self.draft.saving_text.as_ref())
-            .unwrap_or(&record.text)
-            == &text
+            .or(self.draft.saving_content.as_ref());
+        if current.is_some_and(|current| current == &content)
+            || (current.is_none() && record.text == content.text && record.images == content.images)
         {
             return;
         }
-        self.draft.dirty = Some(text);
+        self.draft.dirty = Some(content);
         self.draft.notice = None;
         self.save_draft(window, cx);
     }
@@ -153,19 +226,19 @@ impl HostView {
         if self.draft.saving || self.draft.error.is_some() {
             return;
         }
-        let (Some(record), Some(text)) = (self.draft.record.clone(), self.draft.dirty.take())
+        let (Some(record), Some(content)) = (self.draft.record.clone(), self.draft.dirty.take())
         else {
             return;
         };
         self.draft.saving = true;
-        self.draft.saving_text = Some(text.clone());
+        self.draft.saving_content = Some(content.clone());
         let directory = self.draft.directory.clone();
-        let saving_text = text.clone();
+        let saving_content = content.clone();
         let task = cx.background_executor().spawn(async move {
             background(async move {
                 Store::open(directory)
                     .await?
-                    .edit_draft(&record, text)
+                    .edit_content(&record, content.text, content.images)
                     .await
             })
         });
@@ -173,7 +246,7 @@ impl HostView {
             let result = task.await;
             let _closed = this.update_in(cx, |this, window, cx| {
                 this.draft.saving = false;
-                this.draft.saving_text = None;
+                this.draft.saving_content = None;
                 match result {
                     Ok(record) => {
                         this.draft.record = Some(record);
@@ -185,7 +258,7 @@ impl HostView {
                     }
                     Err(error) => {
                         if this.draft.dirty.is_none() {
-                            this.draft.dirty = Some(saving_text);
+                            this.draft.dirty = Some(saving_content);
                         }
                         this.draft.error = Some(error.to_string());
                     }
@@ -289,5 +362,29 @@ impl HostView {
                         },
                     ),
             )
+    }
+}
+
+#[cfg(test)]
+mod hydration_tests {
+    use super::{Command, Thread, observes_selected};
+    #[test]
+    fn same_thread_read_can_follow_metadata_while_draft_loads_without_relaxing_navigation() {
+        let thread: Thread = serde_json::from_value(serde_json::json!({"id":"one","cwd":"/fixture","preview":"","status":{"type":"idle"},"turns":[]})).unwrap();
+        let read = |id: &str, resume| Command::Open {
+            thread_id: id.into(),
+            resume,
+        };
+        assert!(observes_selected(&read("one", false), Some(&thread)));
+        assert!(!observes_selected(&read("other", false), Some(&thread)));
+        assert!(!observes_selected(&read("one", true), Some(&thread)));
+        assert!(!observes_selected(&read("one", false), None));
+        assert!(!observes_selected(
+            &Command::Inspect {
+                thread_id: "one".into(),
+                resume: false
+            },
+            Some(&thread)
+        ));
     }
 }

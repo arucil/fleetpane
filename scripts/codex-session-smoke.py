@@ -7,6 +7,8 @@ Uses an empty CODEX_HOME and a loopback model provider. No account or LLM calls.
 import json
 import os
 import signal
+import socket as unix_socket
+import uuid
 import subprocess
 import tempfile
 import threading
@@ -145,6 +147,93 @@ stream_max_retries = 0
                     ], filtered
                     assert command("list", "--search", "missing-title")["data"] == []
                     assert command("list", "--cwd", str(root / "other"))["data"] == []
+
+                    # Archive is fixture setup against this owned idle session only.
+                    # Product archive mutation still requires tree/explicit-stop work.
+                    def rpc(request):
+                        with unix_socket.socket(unix_socket.AF_UNIX) as stream:
+                            stream.settimeout(10)
+                            stream.connect(str(socket))
+                            stream.sendall(json.dumps(request).encode() + b"\n")
+                            return json.loads(stream.makefile("rb").readline())
+
+                    owner = rpc({"command": "snapshot"})["data"]["owner"]
+                    archive_id = str(uuid.uuid4())
+                    admitted = rpc(
+                        {
+                            "command": "execute",
+                            "lease": owner,
+                            "operation_id": archive_id,
+                            "method": "thread/archive",
+                            "params": {"threadId": thread["id"]},
+                        }
+                    )
+                    assert admitted["response"] == "operation", admitted
+                    deadline = time.monotonic() + 15
+                    while True:
+                        archive = rpc(
+                            {"command": "operation", "operation_id": archive_id}
+                        )["data"]
+                        if archive["outcome"]["state"] != "accepted":
+                            assert archive["outcome"]["state"] == "finished", archive
+                            assert "error" not in archive["outcome"]["response"], (
+                                archive
+                            )
+                            break
+                        assert time.monotonic() < deadline, archive
+                        time.sleep(0.02)
+                    assert not command("list")["data"]
+                    archived = command(
+                        "list", "--archived", "--search", "中文目录", "--cwd", str(root)
+                    )["data"]
+                    assert [row["id"] for row in archived] == [thread["id"]]
+                    preserved = command("open", thread["id"])["thread"]
+                    assert (
+                        preserved["turns"][0]["items"] == renamed["turns"][0]["items"]
+                    )
+                    assert RejectingProvider.calls == 1
+                    before_tree = rpc({"command": "snapshot"})["data"]
+                    tree_reply = subprocess.run(
+                        [str(binary), "session", str(socket), "tree", thread["id"]],
+                        capture_output=True,
+                        text=True,
+                        timeout=35,
+                        check=False,
+                    )
+                    assert tree_reply.returncode == 0, tree_reply.stderr
+                    tree = json.loads(tree_reply.stdout)
+                    assert (
+                        len(tree["rows"]) == 1
+                        and tree["rows"][0]["metadata"]["id"] == thread["id"]
+                    )
+                    assert tree["rows"][0]["archived"] is True
+                    after_tree = rpc({"command": "snapshot"})["data"]
+                    for key in (
+                        "host_id",
+                        "host_pid",
+                        "provider_pid",
+                        "owner",
+                        "journal_total",
+                        "pending_requests",
+                        "activity",
+                    ):
+                        assert after_tree[key] == before_tree[key], (
+                            key,
+                            before_tree,
+                            after_tree,
+                        )
+                    assert RejectingProvider.calls == 1
+                    restored = command("restore", thread["id"])["thread"]
+                    assert (
+                        restored["id"] == thread["id"]
+                        and restored["status"]["type"] == "notLoaded"
+                    )
+                    assert not command("list", "--archived")["data"]
+                    assert command("list")["data"][0]["id"] == thread["id"]
+                    assert RejectingProvider.calls == 1, (
+                        "restoring must not send a turn"
+                    )
+                    command("inspect", thread["id"], "--resume")
                     page = command("models")
                     models = page["data"]
                     while page["nextCursor"]:
@@ -194,6 +283,8 @@ stream_max_retries = 0
                                 "create_send_failed_read_list": "PASS",
                                 "rename_global_title_workspace_filters": "PASS",
                                 "model_catalog_explicit_model_effort_http_readback": "PASS",
+                                "archived_history_restore_explicit_resume": "PASS",
+                                "read_only_archived_session_tree": "PASS",
                                 "local_model_requests": RejectingProvider.calls,
                                 "real_llm_turn": False,
                             }

@@ -1,0 +1,74 @@
+{
+  "session_id": "4349af70-99e5-4e21-bb99-0ab8ae475bd4",
+  "items": [
+    {
+      "id": "paseo-2",
+      "type": "userMessage",
+      "content": [
+        {
+          "text": "迁移后的历史问题",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "paseo-3-0",
+      "type": "agentMessage",
+      "text": "## DeepSeek v4 历史\n\n最新历史 **完整保留**。\n\n| Version | State |\n| --- | --- |\n| v4 | Saved |"
+    },
+    {
+      "id": "paseo-4",
+      "type": "acpToolCall",
+      "call": {
+        "rawInput": "{\"path\":\"sample.txt\"}",
+        "status": "historical",
+        "title": "read"
+      },
+      "source": {
+        "arguments": "{\"path\":\"sample.txt\"}",
+        "callId": "v4-call",
+        "name": "read"
+      }
+    },
+    {
+      "id": "paseo-5",
+      "type": "acpToolCall",
+      "call": {
+        "rawOutput": [
+          {
+            "text": "V4_TOOL_RESULT\n中文结果 retained",
+            "type": "text"
+          }
+        ],
+        "status": "historical",
+        "title": "Tool result"
+      },
+      "source": {
+        "message": {
+          "content": [
+            {
+              "text": "V4_TOOL_RESULT\n中文结果 retained",
+              "type": "text"
+            }
+          ],
+          "id": "result",
+          "role": "tool",
+          "source": {
+            "callId": "v4-call",
+            "kind": "tool"
+          },
+          "toolCallId": "v4-call"
+        }
+      }
+    }
+  ],
+  "next": null,
+  "status": {
+    "session_id": "4349af70-99e5-4e21-bb99-0ab8ae475bd4",
+    "rows": 4,
+    "source_records": 6,
+    "source": "/tmp/fp-dsh-v4-native/dsh/sessions/--tmp-fp-dsh-v4-native-~5DE5~4F5C~533A~0020with~0020spaces--/dsh-v4/session.v4.jsonl.zstd",
+    "source_bytes": 929,
+    "warning": null
+  }
+}

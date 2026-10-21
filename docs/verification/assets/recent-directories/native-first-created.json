@@ -1,0 +1,108 @@
+{
+  "OpenCodex QA": {
+    "snapshot": {
+      "protocol": 3,
+      "host_id": "c2027720-77a1-441d-85ee-bfce9d456840",
+      "host_pid": 459673,
+      "provider_pid": 459712,
+      "provider_info": {
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "c2027720-77a1-441d-85ee-bfce9d456840",
+        "controller_id": "3cc026f5-382f-44eb-9236-d799c6bbad2c",
+        "generation": 1
+      },
+      "sequence": 4,
+      "operation_ids": [
+        "9f1ee7d4-0581-40e4-b69b-5968d74e6985"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    "list": {
+      "message": {
+        "id": "query:844f815b-dfd3-4262-a2c7-56bfb7bb420f",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fleetpane-recent-qa/alpha 中文",
+              "historyMode": "paginated",
+              "id": "fixture-thread-1",
+              "name": null,
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      },
+      "sequence": 5
+    },
+    "recent": [
+      "/tmp/fleetpane-recent-qa/alpha 中文"
+    ]
+  },
+  "DeepSeek QA": {
+    "snapshot": {
+      "protocol": 3,
+      "host_id": "ed45e0b2-59c0-4cc9-95da-47a38eebdb5f",
+      "host_pid": 459757,
+      "provider_pid": 459781,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": null,
+      "sequence": 0,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    "list": null,
+    "recent": [
+      "/tmp/fleetpane-recent-qa/other-host"
+    ]
+  }
+}

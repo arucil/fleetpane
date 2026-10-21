@@ -1,0 +1,27 @@
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 8.55s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-9cb32179e20657e2)
+
+running 19 tests
+test file_locations::tests::recently_opened_workspace_survives_bounded_eviction_and_updates_in_place ... ok
+test conversation_item::tests::long_commands_use_a_summary_without_losing_the_script ... ok
+test conversation_item::tests::codex_patch_variants_parse_as_diff_files ... ok
+test file_locations::tests::restores_selection_and_isolates_workspace_host_and_root_identity ... ok
+test files_view::tests::source_line_preview_preserves_newlines_bounds_and_explicit_missing_line ... ok
+test host_view::row_changes::tests::pagination_reorder_edits_removal_and_thread_switch_use_identity ... ok
+test conversation_item::tests::invalid_image_data_is_visible_failure ... ok
+test files_view::tests::preview_preserves_utf8_and_caps_display_only ... ok
+test conversation_item::resources::tests::resource_preview_is_bounded_without_trimming_the_copy_payload ... ok
+test conversation_item::tests::previews_keep_utf8_and_copy_source_is_complete ... ok
+test conversation_item::tests::turn_rows_distinguish_stop_reasons_and_copy_original_metadata ... ok
+test terminal_view::tests::polling_preserves_one_explicit_action_and_never_repeats_it ... ok
+test host_view::row_changes::tests::content_events_invalidate_rows_but_foreign_and_unapplied_events_do_not ... ok
+test host_view::row_changes::tests::item_named_status_does_not_replace_the_turn_card ... ok
+test host_view::draft::hydration_tests::same_thread_read_can_follow_metadata_while_draft_loads_without_relaxing_navigation ... ok
+test host_view::row_changes::tests::delimiters_in_provider_ids_do_not_alias_other_turn_items ... ok
+test host_view::row_changes::tests::metadata_keeps_row_inputs_unchanged_and_does_not_rebuild_the_timeline ... ok
+test host_view::images::tests::clipboard_text_falls_through_and_image_batches_are_bounded ... ok
+test host_view::row_changes::tests::streaming_tail_updates_one_card_without_touching_1200_retained_cards ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+

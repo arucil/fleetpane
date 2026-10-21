@@ -1,0 +1,60 @@
+{
+  "request": {
+    "command": "execute",
+    "lease": {
+      "host_id": "75313866-bbca-4ca1-859e-261502501c6b",
+      "controller_id": "5390b27c-9b8e-4406-bb10-7ee4aeda3a1a",
+      "generation": 69
+    },
+    "method": "turn/start",
+    "params": {
+      "threadId": "9816dacd-08c3-4b46-859a-f9afade3dc1b",
+      "input": [
+        {
+          "type": "text",
+          "text": "[burst]"
+        }
+      ]
+    },
+    "operation_id": "22073723-db60-48a9-8817-4053c0d0ef75"
+  },
+  "response": {
+    "response": "operation",
+    "data": {
+      "id": "22073723-db60-48a9-8817-4053c0d0ef75",
+      "method": "turn/start",
+      "params": {
+        "input": [
+          {
+            "text": "[burst]",
+            "type": "text"
+          }
+        ],
+        "threadId": "9816dacd-08c3-4b46-859a-f9afade3dc1b"
+      },
+      "outcome": {
+        "state": "finished",
+        "response": {
+          "id": "22073723-db60-48a9-8817-4053c0d0ef75",
+          "result": {
+            "admission": "host-dispatched",
+            "turn": {
+              "error": null,
+              "id": "3428135f-f8ed-4f61-932c-5d33786a977c",
+              "items": [],
+              "status": "inProgress"
+            }
+          }
+        }
+      },
+      "completed_sequence": 164
+    }
+  },
+  "response_before_correction": {
+    "response": "error",
+    "data": {
+      "code": "invalid_request",
+      "message": "missing field `operation_id`"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/concurrency-smoke.py", line 315, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/concurrency-smoke.py", line 203, in main
+    assert events["response"] == "events", events
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'response': 'error', 'data': {'code': 'resync_required', 'message': 'event cursor expired or belongs to another host; read snapshot'}}

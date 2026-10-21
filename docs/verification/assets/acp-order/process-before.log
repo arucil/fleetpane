@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-order-smoke.py", line 110, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-order-smoke.py", line 72, in main
+    assert [item["type"] for item in items] == [
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'content': [{'text': '[chronology]', 'type': 'text'}], 'id': 'user:325cd9b4-2164-48ef-826e-4a6aac054bb2', 'type': 'userMessage'}, {'content': [{'text': 'Before 中文\n  keep spaces After first toolTail before tool updateNew after tool updateExplicit message one twoAnonymous final 中文', 'type': 'text'}], 'id': '325cd9b4-2164-48ef-826e-4a6aac054bb2:agent_message_chunk:stream', 'type': 'acpMessage'}, {'call': {'rawOutput': 'original result 中文', 'sessionUpdate': 'tool_call_update', 'status': 'completed', 'title': 'First chronological tool', 'toolCallId': 'chronology-tool'}, 'id': '325cd9b4-2164-48ef-826e-4a6aac054bb2:tool:chronology-tool', 'type': 'acpToolCall'}, {'content': ['Interleaved thought 中文'], 'id': '325cd9b4-2164-48ef-826e-4a6aac054bb2:agent_thought_chunk:stream', 'summary': [], 'type': 'reasoning'}, {'call': {'rawOutput': 'second result', 'sessionUpdate': 'tool_call', 'status': 'completed', 'title': 'Second chronological tool', 'toolCallId': 'chronology-second'}, 'id': '325cd9b4-2164-48ef-826e-4a6aac054bb2:tool:chronology-second', 'type': 'acpToolCall'}]

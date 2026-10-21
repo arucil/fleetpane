@@ -1,0 +1,703 @@
+commit b046dae7990560c580ae97efbb04c4746dcd16d4
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Nov 15 20:45:09 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Nov 15 20:45:09 2025 +0100
+
+    refactor: rebrand project from voice-dev to paseo across all packages and configs
+
+diff --git a/package.json b/package.json
+index f41619156..d7d6406d7 100644
+--- a/package.json
++++ b/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "voice-dev",
++  "name": "paseo",
+   "version": "1.0.0",
+   "private": true,
+   "workspaces": [
+@@ -7,20 +7,20 @@
+     "packages/app"
+   ],
+   "scripts": {
+-    "dev": "npm run dev --workspace=@voice-dev/server",
+-    "dev:app": "npm run start --workspace=@voice-dev/app",
++    "dev": "npm run dev --workspace=@paseo/server",
++    "dev:app": "npm run start --workspace=@paseo/app",
+     "build": "npm run build --workspaces --if-present",
+     "typecheck": "npm run typecheck --workspaces --if-present",
+     "test": "npm run test --workspaces --if-present",
+-    "start": "npm run start --workspace=@voice-dev/server",
+-    "android": "npm run android --workspace=@voice-dev/app",
+-    "ios": "npm run ios --workspace=@voice-dev/app",
+-    "web": "npm run web --workspace=@voice-dev/app"
++    "start": "npm run start --workspace=@paseo/server",
++    "android": "npm run android --workspace=@paseo/app",
++    "ios": "npm run ios --workspace=@paseo/app",
++    "web": "npm run web --workspace=@paseo/app"
+   },
+   "devDependencies": {
+     "typescript": "^5.9.3"
+   },
+-  "description": "Voice-controlled development environment with OpenAI Realtime API",
++  "description": "Paseo: voice-controlled development environment with OpenAI Realtime API",
+   "keywords": [
+     "openai",
+     "realtime",
+diff --git a/packages/app/app.json b/packages/app/app.json
+index 227587664..acb08273b 100644
+--- a/packages/app/app.json
++++ b/packages/app/app.json
+@@ -1,11 +1,11 @@
+ {
+   "expo": {
+-    "name": "Voice Dev",
+-    "slug": "voice-dev",
++    "name": "Paseo",
++    "slug": "paseo",
+     "version": "1.0.0",
+     "orientation": "portrait",
+     "icon": "./assets/images/icon.png",
+-    "scheme": "voicedev",
++    "scheme": "paseo",
+     "userInterfaceStyle": "automatic",
+     "newArchEnabled": true,
+     "runtimeVersion": {
+@@ -19,7 +19,7 @@
+       "infoPlist": {
+         "NSMicrophoneUsageDescription": "This app needs access to the microphone for voice commands."
+       },
+-      "bundleIdentifier": "com.moboudra.voicedev"
++      "bundleIdentifier": "com.moboudra.paseo"
+     },
+     "android": {
+       "adaptiveIcon": {
+@@ -34,7 +34,7 @@
+         "android.permission.RECORD_AUDIO",
+         "android.permission.MODIFY_AUDIO_SETTINGS"
+       ],
+-      "package": "com.moboudra.voicedev"
++      "package": "com.moboudra.paseo"
+     },
+     "web": {
+       "output": "static",
+diff --git a/packages/app/package.json b/packages/app/package.json
+index 1b4701452..32195cf35 100644
+--- a/packages/app/package.json
++++ b/packages/app/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "@voice-dev/app",
++  "name": "@paseo/app",
+   "main": "index.ts",
+   "version": "1.0.0",
+   "scripts": {
+diff --git a/packages/app/src/components/agent-list.tsx b/packages/app/src/components/agent-list.tsx
+index debcfd65e..aa2f29855 100644
+--- a/packages/app/src/components/agent-list.tsx
++++ b/packages/app/src/components/agent-list.tsx
+@@ -129,7 +129,7 @@ export function AgentList({ agents }: AgentListProps) {
+               {actionAgent?.title || "Delete agent"}
+             </Text>
+             <Text style={styles.sheetSubtitle}>
+-              Removing this agent only deletes it from Voice Dev. Claude/Codex keeps the original project.
++              Removing this agent only deletes it from Paseo. Claude/Codex keeps the original project.
+             </Text>
+             <Pressable
+               style={[styles.sheetButton, styles.sheetDeleteButton]}
+diff --git a/packages/app/src/components/conversation-selector.tsx b/packages/app/src/components/conversation-selector.tsx
+index 7f4219249..27a3ec5f5 100644
+--- a/packages/app/src/components/conversation-selector.tsx
++++ b/packages/app/src/components/conversation-selector.tsx
+@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
+ import { StyleSheet } from "react-native-unistyles";
+ import type { UseWebSocketReturn } from "../hooks/use-websocket";
+ 
+-const STORAGE_KEY = "@voice-dev:conversation-id";
++const STORAGE_KEY = "@paseo:conversation-id";
+ 
+ interface Conversation {
+   id: string;
+diff --git a/packages/app/src/hooks/use-recent-paths.ts b/packages/app/src/hooks/use-recent-paths.ts
+index 1b049823e..e4127f995 100644
+--- a/packages/app/src/hooks/use-recent-paths.ts
++++ b/packages/app/src/hooks/use-recent-paths.ts
+@@ -1,7 +1,7 @@
+ import { useState, useEffect, useCallback } from 'react';
+ import AsyncStorage from '@react-native-async-storage/async-storage';
+ 
+-const STORAGE_KEY = '@voice-dev:recent-paths';
++const STORAGE_KEY = '@paseo:recent-paths';
+ const MAX_RECENT_PATHS = 3;
+ 
+ export interface UseRecentPathsReturn {
+diff --git a/packages/app/src/hooks/use-settings.ts b/packages/app/src/hooks/use-settings.ts
+index bca6dafd5..4bbafc8cb 100644
+--- a/packages/app/src/hooks/use-settings.ts
++++ b/packages/app/src/hooks/use-settings.ts
+@@ -1,7 +1,7 @@
+ import { useState, useEffect, useCallback } from 'react';
+ import AsyncStorage from '@react-native-async-storage/async-storage';
+ 
+-const STORAGE_KEY = '@voice-dev:settings';
++const STORAGE_KEY = '@paseo:settings';
+ 
+ export interface Settings {
+   serverUrl: string;
+diff --git a/packages/app/src/hooks/use-speechmatics-audio.ts b/packages/app/src/hooks/use-speechmatics-audio.ts
+index 94feb769c..58508921d 100644
+--- a/packages/app/src/hooks/use-speechmatics-audio.ts
++++ b/packages/app/src/hooks/use-speechmatics-audio.ts
+@@ -9,7 +9,7 @@ import {
+ } from "@boudra/expo-two-way-audio";
+ 
+ export interface SpeechmaticsAudioConfig {
+-  onAudioSegment?: (audioData: string) => void;
++  onAudioSegment?: (segment: { audioData: string; isLast: boolean }) => void;
+   onSpeechStart?: () => void;
+   onSpeechEnd?: () => void;
+   onError?: (error: Error) => void;
+@@ -31,79 +31,6 @@ export interface SpeechmaticsAudio {
+   segmentDuration: number;
+ }
+ 
+-/**
+- * Convert raw PCM data to WAV format by adding WAV headers
+- */
+-function pcmToWav(
+-  pcmBase64: string,
+-  sampleRate: number = 16000,
+-  channels: number = 1,
+-  bitsPerSample: number = 16
+-): string {
+-  const pcmBinary = atob(pcmBase64);
+-  const pcmLength = pcmBinary.length;
+-
+-  const byteRate = sampleRate * channels * (bitsPerSample / 8);
+-  const blockAlign = channels * (bitsPerSample / 8);
+-  const dataSize = pcmLength;
+-  const fileSize = 44 + dataSize;
+-
+-  const wavBuffer = new Uint8Array(fileSize);
+-  const view = new DataView(wavBuffer.buffer);
+-
+-  let offset = 0;
+-
+-  // RIFF chunk descriptor
+-  writeString(view, offset, "RIFF");
+-  offset += 4;
+-  view.setUint32(offset, fileSize - 8, true);
+-  offset += 4;
+-  writeString(view, offset, "WAVE");
+-  offset += 4;
+-
+-  // fmt sub-chunk
+-  writeString(view, offset, "fmt ");
+-  offset += 4;
+-  view.setUint32(offset, 16, true);
+-  offset += 4;
+-  view.setUint16(offset, 1, true);
+-  offset += 2;
+-  view.setUint16(offset, channels, true);
+-  offset += 2;
+-  view.setUint32(offset, sampleRate, true);
+-  offset += 4;
+-  view.setUint32(offset, byteRate, true);
+-  offset += 4;
+-  view.setUint16(offset, blockAlign, true);
+-  offset += 2;
+-  view.setUint16(offset, bitsPerSample, true);
+-  offset += 2;
+-
+-  // data sub-chunk
+-  writeString(view, offset, "data");
+-  offset += 4;
+-  view.setUint32(offset, dataSize, true);
+-  offset += 4;
+-
+-  // Copy PCM data
+-  for (let i = 0; i < pcmLength; i++) {
+-    wavBuffer[offset + i] = pcmBinary.charCodeAt(i);
+-  }
+-
+-  // Convert to base64
+-  let binary = "";
+-  for (let i = 0; i < wavBuffer.length; i++) {
+-    binary += String.fromCharCode(wavBuffer[i]);
+-  }
+-  return btoa(binary);
+-}
+-
+-function writeString(view: DataView, offset: number, str: string): void {
+-  for (let i = 0; i < str.length; i++) {
+-    view.setUint8(offset + i, str.charCodeAt(i));
+-  }
+-}
+-
+ function uint8ArrayToBase64(bytes: Uint8Array): string {
+   let binary = "";
+   for (let i = 0; i < bytes.length; i++) {
+@@ -143,6 +70,38 @@ export function useSpeechmaticsAudio(
+   const speechDetectionStartRef = useRef<number | null>(null);
+   const speechConfirmedRef = useRef(false);
+   const detectionSilenceStartRef = useRef<number | null>(null);
++  const bufferedBytesRef = useRef(0);
++
++  const PCM_SAMPLE_RATE = 16000;
++  const PCM_CHANNELS = 1;
++  const PCM_BITS_PER_SAMPLE = 16;
++  const PCM_BYTES_PER_MS =
++    (PCM_SAMPLE_RATE * PCM_CHANNELS * (PCM_BITS_PER_SAMPLE / 8)) / 1000;
++  const MIN_CHUNK_DURATION_MS = 1000;
++  const MIN_CHUNK_BYTES = Math.round(
++    PCM_BYTES_PER_MS * MIN_CHUNK_DURATION_MS
++  );
++
++  const flushBufferedAudio = useCallback(
++    (isLast: boolean) => {
++      if (audioBufferRef.current.length === 0) {
++        bufferedBytesRef.current = 0;
++        return;
++      }
++
++      const combinedBinary = concatenateUint8Arrays(audioBufferRef.current);
++      const pcmBase64 = uint8ArrayToBase64(combinedBinary);
++
++      config.onAudioSegment?.({
++        audioData: pcmBase64,
++        isLast,
++      });
++
++      audioBufferRef.current = [];
++      bufferedBytesRef.current = 0;
++    },
++    [config]
++  );
+ 
+   const VOLUME_THRESHOLD = config.volumeThreshold;
+   const SILENCE_DURATION_MS = config.silenceDuration;
+@@ -178,9 +137,17 @@ export function useSpeechmaticsAudio(
+         // Start buffering from first spike to capture beginning of speech
+         if (speechDetectionStartRef.current !== null || isSpeakingRef.current) {
+           audioBufferRef.current.push(pcmData);
++          bufferedBytesRef.current += pcmData.length;
++
++          if (
++            speechConfirmedRef.current &&
++            bufferedBytesRef.current >= MIN_CHUNK_BYTES
++          ) {
++            flushBufferedAudio(false);
++          }
+         }
+       },
+-      [isActive, isMuted]
++      [isActive, isMuted, flushBufferedAudio, MIN_CHUNK_BYTES]
+     )
+   );
+ 
+@@ -215,6 +182,7 @@ export function useSpeechmaticsAudio(
+             speechDetectionStartRef.current = Date.now();
+             detectionSilenceStartRef.current = null;
+             audioBufferRef.current = [];
++            bufferedBytesRef.current = 0;
+             setIsDetecting(true);
+           } else {
+             // Volume is back above threshold - reset grace period
+@@ -264,6 +232,7 @@ export function useSpeechmaticsAudio(
+               speechDetectionStartRef.current = null;
+               detectionSilenceStartRef.current = null;
+               audioBufferRef.current = [];
++              bufferedBytesRef.current = 0;
+               setIsDetecting(false);
+             }
+           }
+@@ -292,15 +261,7 @@ export function useSpeechmaticsAudio(
+               config.onSpeechEnd?.();
+ 
+               // Send buffered audio segment
+-              if (audioBufferRef.current.length > 0) {
+-                const combinedBinary = concatenateUint8Arrays(
+-                  audioBufferRef.current
+-                );
+-                const combinedPcmBase64 = uint8ArrayToBase64(combinedBinary);
+-                const wavAudio = pcmToWav(combinedPcmBase64, 16000, 1, 16);
+-                config.onAudioSegment?.(wavAudio);
+-                audioBufferRef.current = [];
+-              }
++              flushBufferedAudio(true);
+             }
+           }
+         }
+@@ -313,6 +274,7 @@ export function useSpeechmaticsAudio(
+         SPEECH_CONFIRMATION_MS,
+         DETECTION_GRACE_PERIOD_MS,
+         config,
++        flushBufferedAudio,
+       ]
+     )
+   );
+@@ -365,6 +327,7 @@ export function useSpeechmaticsAudio(
+ 
+     // Reset state
+     audioBufferRef.current = [];
++    bufferedBytesRef.current = 0;
+     isSpeakingRef.current = false;
+     speechConfirmedRef.current = false;
+     speechDetectionStartRef.current = null;
+@@ -387,6 +350,7 @@ export function useSpeechmaticsAudio(
+       if (newMuted) {
+         // Clear any ongoing speech detection/speaking state
+         audioBufferRef.current = [];
++        bufferedBytesRef.current = 0;
+         isSpeakingRef.current = false;
+         speechConfirmedRef.current = false;
+         speechDetectionStartRef.current = null;
+diff --git a/packages/app/src/types/stream.test.ts b/packages/app/src/types/stream.test.ts
+index 0f7a16427..d5236a90f 100644
+--- a/packages/app/src/types/stream.test.ts
++++ b/packages/app/src/types/stream.test.ts
+@@ -441,14 +441,14 @@ function testToolCallParsedPayloadHydration() {
+             tool_use_id: commandCallId,
+             result: {
+               command: 'pwd',
+-              output: '/Users/dev/voice-dev',
++              output: '/Users/dev/paseo',
+             },
+             metadata: { exit_code: 0 },
+           },
+           output: {
+             result: {
+               command: 'pwd',
+-              output: '/Users/dev/voice-dev',
++              output: '/Users/dev/paseo',
+             },
+             metadata: { exit_code: 0 },
+           },
+@@ -477,7 +477,7 @@ function testToolCallParsedPayloadHydration() {
+   const commandPass = Boolean(
+     commandEntry?.payload.data.parsedCommand &&
+       commandEntry.payload.data.parsedCommand.command === 'pwd' &&
+-      commandEntry.payload.data.parsedCommand.output?.includes('/voice-dev')
++      commandEntry.payload.data.parsedCommand.output?.includes('/paseo')
+   );
+ 
+   assert.ok(readPass, 'Read payload should persist across hydration');
+diff --git a/packages/server/package.json b/packages/server/package.json
+index 85763b613..b6c106896 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -1,7 +1,7 @@
+ {
+-  "name": "@voice-dev/server",
++  "name": "@paseo/server",
+   "version": "0.1.0",
+-  "description": "Voice assistant backend server",
++  "description": "Paseo backend server",
+   "type": "module",
+   "scripts": {
+     "dev": "NODE_ENV=development node --watch --import tsx src/server/index.ts",
+diff --git a/packages/server/src/server/agent/llm-openai.ts b/packages/server/src/server/agent/llm-openai.ts
+index 354c571a8..8252d9ae5 100644
+--- a/packages/server/src/server/agent/llm-openai.ts
++++ b/packages/server/src/server/agent/llm-openai.ts
+@@ -22,7 +22,7 @@ async function getTerminalMcpClient(): Promise<McpClient> {
+   }
+ 
+   // Create Terminal MCP server
+-  const server = await createTerminalMcpServer({ sessionName: "__voice-dev" });
++  const server = await createTerminalMcpServer({ sessionName: "__paseo" });
+ 
+   // Create linked transport pair
+   const [clientTransport, serverTransport] =
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 2c67126f7..21a1e3f7c 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -57,6 +57,16 @@ const ACTIVE_TITLE_GENERATIONS = new Set<string>();
+ 
+ type ProcessingPhase = "idle" | "transcribing" | "llm";
+ 
++const PCM_SAMPLE_RATE = 16000;
++const PCM_CHANNELS = 1;
++const PCM_BITS_PER_SAMPLE = 16;
++const PCM_BYTES_PER_MS =
++  (PCM_SAMPLE_RATE * PCM_CHANNELS * (PCM_BITS_PER_SAMPLE / 8)) / 1000;
++const MIN_STREAMING_SEGMENT_DURATION_MS = 1000;
++const MIN_STREAMING_SEGMENT_BYTES = Math.round(
++  PCM_BYTES_PER_MS * MIN_STREAMING_SEGMENT_DURATION_MS
++);
++
+ /**
+  * Type for present_artifact tool arguments
+  */
+@@ -69,6 +79,42 @@ interface PresentArtifactArgs {
+   title: string;
+ }
+ 
++interface AudioBufferState {
++  chunks: Buffer[];
++  format: string;
++  isPCM: boolean;
++  totalPCMBytes: number;
++}
++
++function convertPCMToWavBuffer(
++  pcmBuffer: Buffer,
++  sampleRate: number,
++  channels: number,
++  bitsPerSample: number
++): Buffer {
++  const headerSize = 44;
++  const wavBuffer = Buffer.alloc(headerSize + pcmBuffer.length);
++  const byteRate = (sampleRate * channels * bitsPerSample) / 8;
++  const blockAlign = (channels * bitsPerSample) / 8;
++
++  wavBuffer.write("RIFF", 0);
++  wavBuffer.writeUInt32LE(36 + pcmBuffer.length, 4);
++  wavBuffer.write("WAVE", 8);
++  wavBuffer.write("fmt ", 12);
++  wavBuffer.writeUInt32LE(16, 16);
++  wavBuffer.writeUInt16LE(1, 20);
++  wavBuffer.writeUInt16LE(channels, 22);
++  wavBuffer.writeUInt32LE(sampleRate, 24);
++  wavBuffer.writeUInt32LE(byteRate, 28);
++  wavBuffer.writeUInt16LE(blockAlign, 32);
++  wavBuffer.writeUInt16LE(bitsPerSample, 34);
++  wavBuffer.write("data", 36);
++  wavBuffer.writeUInt32LE(pcmBuffer.length, 40);
++  pcmBuffer.copy(wavBuffer, 44);
++
++  return wavBuffer;
++}
++
+ /**
+  * Session represents a single client conversation session.
+  * It owns all state management, orchestration logic, and message processing.
+@@ -91,7 +137,7 @@ export class Session {
+   // Audio buffering for interruption handling
+   private pendingAudioSegments: Array<{ audio: Buffer; format: string }> = [];
+   private bufferTimeout: NodeJS.Timeout | null = null;
+-  private audioBuffer: { chunks: Buffer[]; format: string } | null = null;
++  private audioBuffer: AudioBufferState | null = null;
+ 
+   // Conversation history
+   private messages: ModelMessage[] = [];
+@@ -1499,73 +1545,151 @@ export class Session {
+   ): Promise<void> {
+     await this.handleRealtimeSpeechStart();
+ 
+-    // Decode base64
+-    const audioBuffer = Buffer.from(msg.audio, "base64");
++    const chunkBuffer = Buffer.from(msg.audio, "base64");
++    const chunkFormat = msg.format || "audio/wav";
++    const isPCMChunk = chunkFormat.toLowerCase().includes("pcm");
++
++    if (!this.audioBuffer) {
++      this.audioBuffer = {
++        chunks: [],
++        format: chunkFormat,
++        isPCM: isPCMChunk,
++        totalPCMBytes: 0,
++      };
++    }
+ 
+-    if (!msg.isLast) {
+-      // Buffer the chunk
+-      if (!this.audioBuffer) {
+-        this.audioBuffer = { chunks: [], format: msg.format };
++    // If the format changes mid-stream, flush what we have first
++    if (this.audioBuffer.isPCM !== isPCMChunk) {
++      console.log(
++        `[Session ${this.clientId}] Audio format changed mid-stream (${this.audioBuffer.isPCM ? "pcm" : this.audioBuffer.format} → ${chunkFormat}), flushing current buffer`
++      );
++      const finalized = this.finalizeBufferedAudio();
++      if (finalized) {
++        await this.processCompletedAudio(finalized.audio, finalized.format);
+       }
+-      this.audioBuffer.chunks.push(audioBuffer);
++      this.audioBuffer = {
++        chunks: [],
++        format: chunkFormat,
++        isPCM: isPCMChunk,
++        totalPCMBytes: 0,
++      };
++    } else if (!this.audioBuffer.isPCM) {
++      // Keep latest format info for non-PCM blobs
++      this.audioBuffer.format = chunkFormat;
++    }
++
++    this.audioBuffer.chunks.push(chunkBuffer);
++    if (this.audioBuffer.isPCM) {
++      this.audioBuffer.totalPCMBytes += chunkBuffer.length;
++    }
++
++    console.log(
++      `[Session ${this.clientId}] Buffered audio chunk (${chunkBuffer.length} bytes, chunks: ${this.audioBuffer.chunks.length}${this.audioBuffer.isPCM ? `, PCM bytes: ${this.audioBuffer.totalPCMBytes}` : ""})`
++    );
++
++    const reachedStreamingThreshold =
++      this.audioBuffer.isPCM &&
++      this.audioBuffer.totalPCMBytes >= MIN_STREAMING_SEGMENT_BYTES;
++
++    if (!msg.isLast && !reachedStreamingThreshold) {
++      return;
++    }
++
++    const bufferedState = this.audioBuffer;
++    const finalized = this.finalizeBufferedAudio();
++    if (!finalized) {
++      return;
++    }
++
++    if (!msg.isLast && reachedStreamingThreshold) {
+       console.log(
+-        `[Session ${this.clientId}] Buffered audio chunk (${audioBuffer.length} bytes, total: ${this.audioBuffer.chunks.length})`
++        `[Session ${this.clientId}] Minimum chunk duration reached (~${MIN_STREAMING_SEGMENT_DURATION_MS}ms, ${
++          bufferedState?.totalPCMBytes ?? 0
++        } PCM bytes) – triggering STT`
+       );
+     } else {
+-      // Complete segment received
+-      const allChunks = this.audioBuffer
+-        ? [...this.audioBuffer.chunks, audioBuffer]
+-        : [audioBuffer];
+-      const format = this.audioBuffer?.format || msg.format;
+-      const currentSegmentAudio = Buffer.concat(allChunks);
+-
+       console.log(
+-        `[Session ${this.clientId}] Complete audio segment (${currentSegmentAudio.length} bytes, ${allChunks.length} chunks)`
++        `[Session ${this.clientId}] Complete audio segment (${finalized.audio.length} bytes, ${bufferedState?.chunks.length ?? 0} chunk(s))`
+       );
++    }
+ 
+-      // Clear chunk buffer
+-      this.audioBuffer = null;
++    await this.processCompletedAudio(finalized.audio, finalized.format);
++  }
+ 
+-      // Decision: buffer or process?
+-      const shouldBuffer =
+-        this.processingPhase === "transcribing" &&
+-        this.pendingAudioSegments.length === 0;
++  private finalizeBufferedAudio():
++    | { audio: Buffer; format: string }
++    | null {
++    if (!this.audioBuffer) {
++      return null;
++    }
+ 
+-      if (shouldBuffer) {
+-        // Currently transcribing first segment - buffer this one
+-        console.log(
+-          `[Session ${this.clientId}] Buffering audio segment (phase: ${this.processingPhase})`
+-        );
+-        this.pendingAudioSegments.push({
+-          audio: currentSegmentAudio,
+-          format,
+-        });
+-        this.setBufferTimeout();
+-      } else if (this.pendingAudioSegments.length > 0) {
+-        // We have buffered segments - add this one and process all together
+-        this.pendingAudioSegments.push({
+-          audio: currentSegmentAudio,
+-          format,
+-        });
+-        console.log(
+-          `[Session ${this.clientId}] Processing ${this.pendingAudioSegments.length} buffered segments together`
+-        );
++    const bufferState = this.audioBuffer;
++    this.audioBuffer = null;
+ 
+-        // Clear pending segments and timeout
+-        const pendingSegments = [...this.pendingAudioSegments];
+-        this.pendingAudioSegments = [];
+-        this.clearBufferTimeout();
++    if (bufferState.isPCM) {
++      const pcmBuffer = Buffer.concat(bufferState.chunks);
++      const wavBuffer = convertPCMToWavBuffer(
++        pcmBuffer,
++        PCM_SAMPLE_RATE,
++        PCM_CHANNELS,
++        PCM_BITS_PER_SAMPLE
++      );
++      return {
++        audio: wavBuffer,
++        format: "audio/wav",
++      };
++    }
+ 
+-        // Concatenate all segments
+-        const allSegmentAudios = pendingSegments.map((s) => s.audio);
+-        const combinedAudio = Buffer.concat(allSegmentAudios);
++    return {
++      audio: Buffer.concat(bufferState.chunks),
++      format: bufferState.format,
++    };
++  }
+ 
+-        await this.processAudio(combinedAudio, format);
+-      } else {
+-        // Normal flow - no buffering needed
+-        await this.processAudio(currentSegmentAudio, format);
+-      }
++  private async processCompletedAudio(
++    audio: Buffer,
++    format: string
++  ): Promise<void> {
++    const shouldBuffer =
++      this.processingPhase === "transcribing" &&
++      this.pendingAudioSegments.length === 0;
++
++    if (shouldBuffer) {
++      console.log(
++        `[Session ${this.clientId}] Buffering audio segment (phase: ${this.processingPhase})`
++      );
++      this.pendingAudioSegments.push({
++        audio,
++        format,
++      });
++      this.setBufferTimeout();
++      return;
+     }
++
++    if (this.pendingAudioSegments.length > 0) {
++      this.pendingAudioSegments.push({
++        audio,
++        format,
++      });
++      console.log(
++        `[Session ${this.clientId}] Processing ${this.pendingAudioSegments.length} buffered segments together`
++      );
++
++      const pendingSegments = [...this.pendingAudioSegments];
++      this.pendingAudioSegments = [];
++      this.clearBufferTimeout();
++
++      const combinedAudio = Buffer.concat(
++        pendingSegments.map((segment) => segment.audio)
++      );
++      const combinedFormat =
++        pendingSegments[pendingSegments.length - 1].format;
++
++      await this.processAudio(combinedAudio, combinedFormat);
++      return;
++    }
++
++    await this.processAudio(audio, format);
+   }
+ 
+   /**
+@@ -2086,7 +2210,11 @@ export class Session {
+ 
+     if (this.audioBuffer) {
+       console.log(
+-        `[Session ${this.clientId}] Clearing partial audio buffer (${this.audioBuffer.chunks.length} chunk(s))`
++        `[Session ${this.clientId}] Clearing partial audio buffer (${this.audioBuffer.chunks.length} chunk(s)${
++          this.audioBuffer.isPCM
++            ? `, ${this.audioBuffer.totalPCMBytes} PCM bytes`
++            : ""
++        })`
+       );
+       this.audioBuffer = null;
+     }

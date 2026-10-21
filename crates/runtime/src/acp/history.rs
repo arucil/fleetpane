@@ -201,13 +201,19 @@ mod tests {
         adapter.sessions.insert(
             "s".into(),
             Session {
+                modes: None,
+                mode_update_version: 0,
                 summary: Summary {
                     session_id: "s".into(),
                     cwd: "/synthetic".into(),
                     title: None,
+                    info: super::super::SessionInfo::default(),
                 },
                 config: vec![],
                 active: None,
+                resident: true,
+                anonymous_stream: None,
+                cancelling: false,
                 turns: vec![json!({"id":"t","status":"completed","error":null,"items":items})],
             },
         );

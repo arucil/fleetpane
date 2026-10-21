@@ -1,0 +1,29 @@
+commit 6f4d47848c2c9cbbdf4bd892c8c9c8c6be9b6660
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:25:12 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:25:12 2025 +0200
+
+    fix: use absolute positioning for hidden AgentInputArea to prevent layout space
+    
+    AgentInputArea was still taking up 88px height when opacity was 0, creating
+    a gap between status bar and realtime controls. Now switches to position
+    absolute when hidden (opacity < 0.5) to remove from layout flow completely.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index aab38637f..d0236c850 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -36,6 +36,8 @@ export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps)
+   const animatedStyle = useAnimatedStyle(() => {
+     return {
+       opacity: opacity.value,
++      // When hidden, use absolute positioning to remove from layout flow
++      position: opacity.value < 0.5 ? ("absolute" as const) : ("relative" as const),
+       // When hidden, disable pointer events so GlobalFooter's controls are interactive
+       pointerEvents: opacity.value < 0.5 ? ("none" as const) : ("auto" as const),
+     };

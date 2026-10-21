@@ -1,0 +1,47 @@
+commit 13f59102b9b304919cee88c4c6ab07d77504a28d
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:41:52 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:41:52 2025 +0200
+
+    fix: remove excessive bottom padding causing gap between status bar and controls
+    
+    The animated keyboard style was adding FOOTER_HEIGHT + insets.bottom as padding,
+    creating a massive gap. Removed footer height from padding calculation - keyboard
+    padding only needs to account for keyboard height, not footer.
+    
+    Fixed by Codex.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index faf7371da..1cd3a6347 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -10,7 +10,7 @@ import { AgentStreamView } from "@/components/agent-stream-view";
+ import { AgentInputArea } from "@/components/agent-input-area";
+ import { AgentStatusBar } from "@/components/agent-status-bar";
+ import { useSession } from "@/contexts/session-context";
+-import { FOOTER_HEIGHT, useFooterControls } from "@/contexts/footer-controls-context";
++import { useFooterControls } from "@/contexts/footer-controls-context";
+ 
+ export default function AgentScreen() {
+   const { theme } = useUnistyles();
+@@ -21,14 +21,13 @@ export default function AgentScreen() {
+ 
+   // Keyboard animation
+   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+-  const footerHeight = FOOTER_HEIGHT + insets.bottom;
+   const bottomInset = insets.bottom;
+   const animatedKeyboardStyle = useAnimatedStyle(() => {
+     "worklet";
+     const absoluteHeight = Math.abs(keyboardHeight.value);
+     const padding = Math.max(0, absoluteHeight - bottomInset);
+     return {
+-      paddingBottom: footerHeight + padding,
++      paddingBottom: padding,
+     };
+   });
+ 

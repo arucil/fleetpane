@@ -1,0 +1,18 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 3.70s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-0f3d3cbf1f13dad6)
+
+running 10 tests
+test paseo_import::tests::dsh_paths_match_utf16_and_truncation_contract ... ok
+test paseo_import::tests::malformed_duplicate_and_symlink_sources_fail_explicitly ... ok
+test paseo_import::tests::unrelated_session_changes_do_not_invalidate_workspace_preview ... ok
+test paseo_import::tests::missing_workspace_retains_history_bindings_and_stale_preview_refuses_writes ... ok
+test paseo_import::tests::transaction_failure_rolls_back_registration_and_all_session_metadata ... ok
+test paseo_import::tests::preview_import_identity_paging_and_no_secret_copy ... ok
+test paseo_import::tests::dsh_concatenated_zstd_frames_and_workspace_failure_report ... ok
+test paseo_import::tests::codex_complete_snapshot_is_paged_durable_and_preserves_raw_records ... ok
+test paseo_import::tests::linked_git_workspace_is_registered_in_place_without_changing_branch_or_files ... ok
+test paseo_import::tests::incomplete_final_line_is_visible_and_corrupt_interior_never_publishes ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 116 filtered out; finished in 0.56s
+

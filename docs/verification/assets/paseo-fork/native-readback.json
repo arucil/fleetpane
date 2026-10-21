@@ -1,0 +1,78 @@
+{
+  "source_and_archives_unchanged": true,
+  "thread": {
+    "cwd": "/tmp/fleetpane-fork-ui-fresh/工作区 with space",
+    "historyMode": "paginated",
+    "id": "forked-fixture-2",
+    "name": "Forked 中文 history",
+    "preview": "继续验证迁移后的独立会话",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "id": "imported-turn",
+        "items": [
+          {
+            "id": "saved-1",
+            "text": "Remember this imported value: FLEETPANE_IMPORTED_CONTEXT_中文_42",
+            "type": "agentMessage"
+          },
+          {
+            "id": "saved-2",
+            "text": "## Saved context\n\nFLEETPANE_IMPORTED_CONTEXT_中文_42",
+            "type": "agentMessage"
+          }
+        ],
+        "status": "completed"
+      },
+      {
+        "error": null,
+        "fixtureOptions": {},
+        "id": "forked-fixture-2-turn-2",
+        "items": [
+          {
+            "content": [
+              {
+                "text": "继续验证迁移后的独立会话",
+                "type": "text"
+              }
+            ],
+            "id": "user-forked-fixture-2-turn-2",
+            "type": "userMessage"
+          },
+          {
+            "id": "assistant-forked-fixture-2-turn-2",
+            "text": "Echo: 继续验证迁移后的独立会话",
+            "type": "agentMessage"
+          }
+        ],
+        "status": "completed"
+      }
+    ]
+  },
+  "effects": [
+    {
+      "id": "497a6b9c-e495-44b1-8ec7-ad3b2e43e362",
+      "method": "thread/fork",
+      "params": {
+        "cwd": "/tmp/fleetpane-fork-ui-fresh/工作区 with space",
+        "deferGoalContinuation": true,
+        "excludeTurns": true,
+        "path": "/tmp/fleetpane-fork-ui-fresh/hosts.creations/paseo-forks/6abccf24-52b4-4540-a94d-553af4931d59.jsonl",
+        "threadId": "ac7dd2f5-d142-45ea-b73f-7174d33724a4"
+      }
+    },
+    {
+      "id": "9e0fcfa1-9237-4315-b891-c570fb074db4",
+      "method": "thread/fork",
+      "params": {
+        "cwd": "/tmp/fleetpane-fork-ui-fresh/工作区 with space",
+        "deferGoalContinuation": true,
+        "excludeTurns": true,
+        "path": "/tmp/fleetpane-fork-ui-fresh/final.creations/paseo-forks/d322d7aa-e96e-45ad-8576-bd91c5a80b37.jsonl",
+        "threadId": "ac7dd2f5-d142-45ea-b73f-7174d33724a4"
+      }
+    }
+  ]
+}

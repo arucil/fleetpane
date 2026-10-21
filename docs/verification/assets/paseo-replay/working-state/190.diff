@@ -1,0 +1,275 @@
+commit b39497d08f8ece60d4b779287db1a3fb19b13378
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Nov 15 20:29:23 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Nov 15 20:29:23 2025 +0100
+
+    refactor headers into shared screen shell
+
+diff --git a/packages/app/src/components/headers/back-header.tsx b/packages/app/src/components/headers/back-header.tsx
+index 9817e90bc..7ee9e7dcd 100644
+--- a/packages/app/src/components/headers/back-header.tsx
++++ b/packages/app/src/components/headers/back-header.tsx
+@@ -1,71 +1,45 @@
+-import { View, Pressable, Text } from "react-native";
++import type { ReactNode } from "react";
++import { Pressable, Text } from "react-native";
+ import { router } from "expo-router";
+-import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { ArrowLeft } from "lucide-react-native";
++import { ScreenHeader } from "./screen-header";
+ 
+ interface BackHeaderProps {
+   title?: string;
+-  rightContent?: React.ReactNode;
++  rightContent?: ReactNode;
+ }
+ 
+ export function BackHeader({ title, rightContent }: BackHeaderProps) {
+   const { theme } = useUnistyles();
+-  const insets = useSafeAreaInsets();
+ 
+   return (
+-    <View style={styles.header}>
+-      <View style={{ paddingTop: insets.top + 12 }}>
+-        <View style={styles.headerRow}>
+-          {/* Left side - Back button */}
+-          <View style={styles.headerLeft}>
+-            <Pressable
+-              onPress={() => router.back()}
+-              style={styles.backButton}
+-            >
+-              <ArrowLeft size={20} color={theme.colors.foreground} />
+-            </Pressable>
+-            {title && (
+-              <Text style={styles.title} numberOfLines={1}>
+-                {title}
+-              </Text>
+-            )}
+-          </View>
+-
+-          {/* Right side */}
+-          <View style={styles.headerRight}>
+-            {rightContent}
+-          </View>
+-        </View>
+-      </View>
+-    </View>
++    <ScreenHeader
++      left={
++        <>
++          <Pressable
++            onPress={() => router.back()}
++            style={styles.backButton}
++          >
++            <ArrowLeft size={20} color={theme.colors.foreground} />
++          </Pressable>
++          {title && (
++            <Text style={styles.title} numberOfLines={1}>
++              {title}
++            </Text>
++          )}
++        </>
++      }
++      right={rightContent}
++      leftStyle={styles.left}
++    />
+   );
+ }
+ 
+ const styles = StyleSheet.create((theme) => ({
+-  header: {
+-    backgroundColor: theme.colors.background,
+-  },
+-  headerRow: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    justifyContent: "space-between",
+-    paddingHorizontal: theme.spacing[3],
+-    paddingBottom: theme.spacing[2],
+-    borderBottomWidth: theme.borderWidth[1],
+-    borderBottomColor: theme.colors.border,
+-  },
+-  headerLeft: {
+-    flex: 1,
+-    flexDirection: "row",
+-    alignItems: "center",
++  left: {
+     gap: theme.spacing[3],
+   },
+-  headerRight: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    gap: theme.spacing[2],
+-  },
+   backButton: {
+     padding: theme.spacing[3],
+     borderRadius: theme.borderRadius.lg,
+diff --git a/packages/app/src/components/headers/home-header.tsx b/packages/app/src/components/headers/home-header.tsx
+index ebe9ce124..b1cfe6b87 100644
+--- a/packages/app/src/components/headers/home-header.tsx
++++ b/packages/app/src/components/headers/home-header.tsx
+@@ -1,8 +1,8 @@
+-import { View, Pressable } from "react-native";
++import { Pressable } from "react-native";
+ import { router } from "expo-router";
+-import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { Settings, MessageSquare, Plus } from "lucide-react-native";
++import { ScreenHeader } from "./screen-header";
+ 
+ interface HomeHeaderProps {
+   onCreateAgent: () => void;
+@@ -10,64 +10,35 @@ interface HomeHeaderProps {
+ 
+ export function HomeHeader({ onCreateAgent }: HomeHeaderProps) {
+   const { theme } = useUnistyles();
+-  const insets = useSafeAreaInsets();
+ 
+   return (
+-    <View style={styles.header}>
+-      <View style={{ paddingTop: insets.top + 12 }}>
+-        <View style={styles.headerRow}>
+-          {/* Left side - Settings */}
+-          <View style={styles.headerLeft}>
+-            <Pressable
+-              onPress={() => router.push("/settings")}
+-              style={styles.iconButton}
+-            >
+-              <Settings size={20} color={theme.colors.foreground} />
+-            </Pressable>
+-          </View>
+-
+-          {/* Right side - Activity and New Agent */}
+-          <View style={styles.headerRight}>
+-            <Pressable
+-              onPress={() => router.push("/orchestrator")}
+-              style={styles.iconButton}
+-            >
+-              <MessageSquare size={20} color={theme.colors.foreground} />
+-            </Pressable>
+-            <Pressable onPress={onCreateAgent} style={styles.iconButton}>
+-              <Plus size={20} color={theme.colors.foreground} />
+-            </Pressable>
+-          </View>
+-        </View>
+-      </View>
+-    </View>
++    <ScreenHeader
++      left={
++        <Pressable
++          onPress={() => router.push("/settings")}
++          style={styles.iconButton}
++        >
++          <Settings size={20} color={theme.colors.foreground} />
++        </Pressable>
++      }
++      right={
++        <>
++          <Pressable
++            onPress={() => router.push("/orchestrator")}
++            style={styles.iconButton}
++          >
++            <MessageSquare size={20} color={theme.colors.foreground} />
++          </Pressable>
++          <Pressable onPress={onCreateAgent} style={styles.iconButton}>
++            <Plus size={20} color={theme.colors.foreground} />
++          </Pressable>
++        </>
++      }
++    />
+   );
+ }
+ 
+ const styles = StyleSheet.create((theme) => ({
+-  header: {
+-    backgroundColor: theme.colors.background,
+-  },
+-  headerRow: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    justifyContent: "space-between",
+-    paddingHorizontal: theme.spacing[3],
+-    paddingBottom: theme.spacing[2],
+-    borderBottomWidth: theme.borderWidth[1],
+-    borderBottomColor: theme.colors.border,
+-  },
+-  headerLeft: {
+-    flex: 1,
+-    flexDirection: "row",
+-    alignItems: "center",
+-    gap: theme.spacing[2],
+-  },
+-  headerRight: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    gap: theme.spacing[2],
+-  },
+   iconButton: {
+     padding: theme.spacing[3],
+     borderRadius: theme.borderRadius.lg,
+diff --git a/packages/app/src/components/headers/screen-header.tsx b/packages/app/src/components/headers/screen-header.tsx
+new file mode 100644
+index 000000000..907eb263e
+--- /dev/null
++++ b/packages/app/src/components/headers/screen-header.tsx
+@@ -0,0 +1,58 @@
++import type { ReactNode } from "react";
++import { View, type StyleProp, type ViewStyle } from "react-native";
++import { useSafeAreaInsets } from "react-native-safe-area-context";
++import { StyleSheet, useUnistyles } from "react-native-unistyles";
++
++interface ScreenHeaderProps {
++  left?: ReactNode;
++  right?: ReactNode;
++  leftStyle?: StyleProp<ViewStyle>;
++  rightStyle?: StyleProp<ViewStyle>;
++}
++
++/**
++ * Shared frame for the home/back headers so we only maintain padding, border,
++ * and safe-area logic in one place.
++ */
++export function ScreenHeader({ left, right, leftStyle, rightStyle }: ScreenHeaderProps) {
++  const insets = useSafeAreaInsets();
++  const { theme } = useUnistyles();
++
++  return (
++    <View style={styles.header}>
++      <View style={[styles.inner, { paddingTop: insets.top + 12 }]}>
++        <View style={styles.row}>
++          <View style={[styles.left, leftStyle]}>{left}</View>
++          <View style={[styles.right, rightStyle]}>{right}</View>
++        </View>
++      </View>
++    </View>
++  );
++}
++
++const styles = StyleSheet.create((theme) => ({
++  header: {
++    backgroundColor: theme.colors.background,
++  },
++  inner: {},
++  row: {
++    flexDirection: "row",
++    alignItems: "center",
++    justifyContent: "space-between",
++    paddingHorizontal: theme.spacing[3],
++    paddingBottom: theme.spacing[2],
++    borderBottomWidth: theme.borderWidth[1],
++    borderBottomColor: theme.colors.border,
++  },
++  left: {
++    flex: 1,
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++  },
++  right: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++  },
++}));

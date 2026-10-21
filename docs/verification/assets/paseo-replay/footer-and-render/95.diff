@@ -1,0 +1,178 @@
+commit 465aa1cd78f85cee8523d9800a52591e50c29bb1
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:23:37 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:23:37 2025 +0200
+
+    fix: smooth transition between text and realtime controls with coordinated animations
+    
+    - Keep AgentInputArea always mounted, animate opacity (0→1 / 1→0) instead of unmounting
+    - Use controlled opacity animation for GlobalFooter's RealtimeControls on agent screen
+    - Both controls fade in/out over 250ms, synchronized for smooth cross-fade
+    - Disable pointer events on hidden controls to prevent interaction issues
+    - Keep FadeIn/FadeOut behavior on non-agent screens (home, orchestrator) unchanged
+    
+    This eliminates the layout "push" effect where GlobalFooter would take up space
+    while fading in, causing visible jank. Now both controls overlay and cross-fade
+    smoothly without affecting layout.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index 85fde7cb0..eab03d0a1 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -68,13 +68,11 @@ export default function AgentScreen() {
+           {/* Status bar - always visible, floating above controls */}
+           <AgentStatusBar agentId={id!} />
+           
+-          {/* Controls - only show AgentInputArea when not in realtime mode */}
+-          {/* When in realtime mode, GlobalFooter handles showing RealtimeControls */}
+-          {!isRealtimeMode && (
+-            <View style={styles.controlsContainer}>
+-              <AgentInputArea agentId={id!} />
+-            </View>
+-          )}
++          {/* Controls - AgentInputArea always mounted, fades in/out */}
++          {/* When in realtime mode, GlobalFooter's RealtimeControls overlays this */}
++          <View style={styles.controlsContainer}>
++            <AgentInputArea agentId={id!} isRealtimeMode={isRealtimeMode} />
++          </View>
+         </View>
+       </ReanimatedAnimated.View>
+     </View>
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index 7d084d8ee..aab38637f 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -1,16 +1,22 @@
+ import { View, TextInput, Pressable } from "react-native";
+-import { useState } from "react";
++import { useState, useEffect } from "react";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
+ import { useSession } from "@/contexts/session-context";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useAudioRecorder } from "@/hooks/use-audio-recorder";
++import Animated, {
++  useAnimatedStyle,
++  withTiming,
++  useSharedValue,
++} from "react-native-reanimated";
+ 
+ interface AgentInputAreaProps {
+   agentId: string;
++  isRealtimeMode: boolean;
+ }
+ 
+-export function AgentInputArea({ agentId }: AgentInputAreaProps) {
++export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+   const { ws, sendAgentMessage, sendAgentAudio } = useSession();
+   const { startRealtime } = useRealtime();
+@@ -20,6 +26,21 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const [isRecording, setIsRecording] = useState(false);
+   const [isProcessing, setIsProcessing] = useState(false);
+ 
++  // Animated opacity for smooth transitions
++  const opacity = useSharedValue(isRealtimeMode ? 0 : 1);
++
++  useEffect(() => {
++    opacity.value = withTiming(isRealtimeMode ? 0 : 1, { duration: 250 });
++  }, [isRealtimeMode]);
++
++  const animatedStyle = useAnimatedStyle(() => {
++    return {
++      opacity: opacity.value,
++      // When hidden, disable pointer events so GlobalFooter's controls are interactive
++      pointerEvents: opacity.value < 0.5 ? ("none" as const) : ("auto" as const),
++    };
++  });
++
+   async function handleSendMessage() {
+     if (!userInput.trim() || !ws.isConnected) return;
+ 
+@@ -76,7 +97,7 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const hasText = userInput.trim().length > 0;
+ 
+   return (
+-    <View style={styles.container}>
++    <Animated.View style={[styles.container, animatedStyle]}>
+       {/* Text input */}
+       <TextInput
+         value={userInput}
+@@ -136,7 +157,7 @@ export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+             </>
+           )}
+       </View>
+-    </View>
++    </Animated.View>
+   );
+ }
+ 
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index f4f2b8632..b290a8574 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -1,3 +1,4 @@
++import { useEffect } from "react";
+ import { View, Pressable } from "react-native";
+ import { usePathname } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+@@ -6,7 +7,13 @@ import { AudioLines } from "lucide-react-native";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useSession } from "@/contexts/session-context";
+ import { RealtimeControls } from "./realtime-controls";
+-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
++import Animated, { 
++  FadeIn, 
++  FadeOut,
++  useAnimatedStyle,
++  withTiming,
++  useSharedValue,
++} from "react-native-reanimated";
+ 
+ export function GlobalFooter() {
+   const { theme } = useUnistyles();
+@@ -22,13 +29,36 @@ export function GlobalFooter() {
+   // Hidden when: on agent screen AND realtime is off
+   const shouldHide = isAgentScreen && !isRealtimeMode;
+ 
++  // Controlled opacity for agent screen transitions (synced with AgentInputArea)
++  const realtimeOpacity = useSharedValue(isRealtimeMode ? 1 : 0);
++
++  useEffect(() => {
++    if (isAgentScreen) {
++      // On agent screen, use controlled animation for smooth cross-fade
++      realtimeOpacity.value = withTiming(isRealtimeMode ? 1 : 0, { duration: 250 });
++    }
++  }, [isRealtimeMode, isAgentScreen]);
++
++  const realtimeAnimatedStyle = useAnimatedStyle(() => {
++    return {
++      opacity: realtimeOpacity.value,
++      pointerEvents: realtimeOpacity.value > 0.5 ? ("auto" as const) : ("none" as const),
++    };
++  });
++
+   // If realtime is active, show realtime controls
+   if (isRealtimeMode) {
+     return (
+       <Animated.View
+-        entering={FadeIn.duration(400)}
+-        exiting={FadeOut.duration(250)}
+-        style={[styles.container, { paddingBottom: insets.bottom }]}
++        style={[
++          styles.container, 
++          { paddingBottom: insets.bottom },
++          // Use controlled opacity on agent screen for smooth transition
++          isAgentScreen && realtimeAnimatedStyle
++        ]}
++        // Keep FadeIn/FadeOut for non-agent screens (home, orchestrator, etc)
++        entering={!isAgentScreen ? FadeIn.duration(400) : undefined}
++        exiting={!isAgentScreen ? FadeOut.duration(250) : undefined}
+       >
+         <RealtimeControls />
+       </Animated.View>

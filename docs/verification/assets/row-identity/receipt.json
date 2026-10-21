@@ -1,0 +1,73 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "before_desktop_binary_sha256": "85915f0505d1e153464d07dbd862095ee75e76686f6475d72f783f79204228c4",
+  "desktop_binary_sha256": "27f3b1111521630bd161ce4f03d74c529828ba13103aa841c70821a809a2dd83",
+  "host_binary_sha256": "b1284d5d88f792e8d8376f0564b0257c136b3f5c94618bd4a354d55a3477d6ac",
+  "source_sha256": {
+    "apps/desktop/src/conversation_item.rs": "d27d9f1e5ff96211c4434201c71133633dee5ad2c5ad037fc0b4408ed62acc34",
+    "apps/desktop/src/host_view.rs": "98ffcdfda213ff8d99db1d9a90f8a2c20e320df0f9d2dba4d2a4b5f70f528d81",
+    "apps/desktop/src/host_view/row_changes.rs": "8f06051a43a88d749c34885aa1812d77748af6f35401e7e30735b375fb7bacec"
+  },
+  "checks": {
+    "pre_fix_regressions_failed": 2,
+    "desktop_tests": 18,
+    "strict_desktop_clippy": true,
+    "desktop_build": true,
+    "desktop_format": true,
+    "git_diff_check": true,
+    "core_unchanged_not_retested": true,
+    "native_exact_copies": 5
+  },
+  "native": {
+    "workspace": "fleetpane-identity-20261021",
+    "stopped": true,
+    "apps": [
+      {
+        "id": "app-3031793",
+        "exit_code": 0
+      },
+      {
+        "id": "app-3035140",
+        "exit_code": 0
+      }
+    ],
+    "same_host_pid_across_apps": 3031693,
+    "same_provider_pid_across_apps": 3031695,
+    "before_wrong_cards_observed": true,
+    "after_correct_paginated_cards": true,
+    "independent_expansion": true,
+    "reload_copy_identical": true,
+    "owned_runtime_gone": true
+  },
+  "private_evidence_root": "/tmp/fleetpane-replay-157-20261021",
+  "private_evidence_sha256": {
+    "after-copy-second.json": "1db9f8e95464ada5c4742650a4a0046f6029171c859992e0e2283b4b5221715b",
+    "after-copy-turn.json": "feb0a9f7389faf371750260233dd784ed414bb9eceb1ca3f2a68021b773ad0fc",
+    "after-copy-first.json": "ef0abd559e8a7c5cd23d28d21677bf45b48dc63261377a75d144be3dfcba3844",
+    "after-copy-reload-second.json": "1db9f8e95464ada5c4742650a4a0046f6029171c859992e0e2283b4b5221715b",
+    "after-copy-status-item.json": "86f07ddba2fa1afb2234605932375f591ee504fa02af499faf80effabbbc5f6e",
+    "setup.json": "c9494aa8f39fede2b605b40ec711deb906113d0cab5e6314ec779a91dfd78254",
+    "after-snapshot.json": "640ea9570fdf34df1a5c1994070858596f91ae0dba41a8b939fc9fa075580d31",
+    "cleanup.json": "db23630bd9a92fb4a24eccb97f38351c4c89c377bb68e7167272473e013be3c8",
+    "native-apps.json": "4c186be0dc6d89cc5df79ef5981f72e1e74553c9935a7aaeef38876d6d464dd0",
+    "workspace-stop.json": "f1f3e02e54ad0fa81f95cfe3c33cfe9492a5584f6578682a7a31c56a28d612af",
+    "before-copy-error.json": "5e60d20fefe849de24c44bd02673b94c00cf5e80d8763ca3979ce7723f7683cc"
+  },
+  "public_evidence_sha256": {
+    "after-native-independent.png": "3252472b863f1e9d0d770e4d0862ad49e0bd11a0f4128a451a5ee5cdc1e4d375",
+    "after-native-paged.png": "00f2b8160ac17492b30956d08008b7745efb76b12fe1a89019d2a90dd4001d75",
+    "after-native-reload.png": "dcf55d4f0ba6312574638f9bef270123c1d257b1160f899537adacec7a95a875",
+    "after-native-second-output.png": "2b6977cbc8a8d2e9e90c4f2b3cc956290878e1059f5f87960633a69224225060",
+    "after-tests.log": "b8c5a9d410ca8c8b28166dc4bc2f95bd0f3aac31a6fa3de741acc03e9d26a4d0",
+    "before-native-paged.png": "b91c442803d3d7d310fa674ffeaaeec440f691a05882981d458be9f46490d5b7",
+    "before-native-wrong-command.png": "55347b55988acc30f863814aaf0a283f9b63a8258dd3c192f39a0c8b61d0efca",
+    "before-tests.log": "d0642bb37f72332d0edf40a6ef5167c03f6ca852e73429ae5e7f9c0924e7d0f1",
+    "clipboard-receipt.json": "5446a9be1d63f5a55562e599f51a4b8500285deb04e35db2f760852faec39497",
+    "history.json": "32023b6bb4acde7623f11ec0e37ee6a7ce237143a132ce9a9cd11d390462cfbb"
+  },
+  "limits": [
+    "Synthetic Codex-shaped history on Linux; no fresh external provider, remote CI, cross-platform or performance acceptance.",
+    "Exact duplicate/conflicting provider IDs within one turn, missing-ID matching and permission identity are outside this row-key fix.",
+    "Before-fix Copy produced no readable STRING target and is excluded from clipboard acceptance; native before-fix screenshots establish wrong card content."
+  ]
+}

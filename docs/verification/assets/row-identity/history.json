@@ -1,0 +1,63 @@
+[
+  {
+    "id": "identity-thread",
+    "cwd": "/tmp/fleetpane-replay-157-20261021/native",
+    "preview": "Timeline identity regression",
+    "name": "Timeline identity regression",
+    "historyMode": "paginated",
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "id": "a:b",
+        "status": "completed",
+        "error": null,
+        "items": [
+          {
+            "id": "status",
+            "type": "agentMessage",
+            "text": "Distinct status content 中文"
+          },
+          {
+            "id": "c",
+            "type": "commandExecution",
+            "command": "printf 'FIRST_TOOL'",
+            "cwd": "/tmp/fleetpane-replay-157-20261021/native",
+            "status": "completed",
+            "aggregatedOutput": "FIRST_TOOL_OUTPUT\n  Exact 中文  \n",
+            "exitCode": 0,
+            "durationMs": 1
+          }
+        ]
+      },
+      {
+        "id": "a",
+        "status": "completed",
+        "error": null,
+        "items": [
+          {
+            "id": "b:c",
+            "type": "commandExecution",
+            "command": "printf 'SECOND_TOOL'",
+            "cwd": "/tmp/fleetpane-replay-157-20261021/native",
+            "status": "completed",
+            "aggregatedOutput": "SECOND_TOOL_OUTPUT\n  Exact 中文  \n",
+            "exitCode": 0,
+            "durationMs": 1
+          },
+          {
+            "id": "Case",
+            "type": "agentMessage",
+            "text": "Upper-case identity"
+          },
+          {
+            "id": "case",
+            "type": "agentMessage",
+            "text": "Lower-case identity"
+          }
+        ]
+      }
+    ]
+  }
+]

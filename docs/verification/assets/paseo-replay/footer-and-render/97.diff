@@ -1,0 +1,476 @@
+commit f2fe25de23e771d89d1ccc938abb159a5a96ef20
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:36:17 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:36:17 2025 +0200
+
+    refactor: implement footer controls context for smooth transitions
+    
+    Codex implemented a portal/context architecture to eliminate layout jank:
+    
+    - Created FooterControlsProvider context with register/unregister methods
+    - GlobalFooter now reserves fixed height (88px + insets) for all modes
+    - Both AgentInputArea and RealtimeControls stack absolutely in same space
+    - Single shared Reanimated value drives cross-fade (250ms)
+    - Agent screen registers controls via context instead of rendering inline
+    - Content padding adjusted to account for footer height
+    - Borders and safe area moved to shared container
+    - AgentInputArea simplified to pure component (no internal animations)
+    
+    This guarantees:
+    - No layout shifts during transitions
+    - Smooth cross-fade between control modes
+    - No gaps or double borders
+    - Both controls never occupy layout space simultaneously
+    
+    Implementation by OpenAI Codex per architectural recommendation.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/_layout.tsx b/packages/app/src/app/_layout.tsx
+index 983456c98..143c2ccf2 100644
+--- a/packages/app/src/app/_layout.tsx
++++ b/packages/app/src/app/_layout.tsx
+@@ -9,6 +9,7 @@ import { useSettings } from "@/hooks/use-settings";
+ import { View, ActivityIndicator } from "react-native";
+ import { GlobalFooter } from "@/components/global-footer";
+ import { useUnistyles } from "react-native-unistyles";
++import { FooterControlsProvider } from "@/contexts/footer-controls-context";
+ 
+ function AppContainer({ children }: { children: React.ReactNode }) {
+   const { theme } = useUnistyles();
+@@ -52,26 +53,28 @@ export default function RootLayout() {
+         <KeyboardProvider>
+           <BottomSheetModalProvider>
+             <ProvidersWrapper>
+-              <AppContainer>
+-                <Stack
+-                  screenOptions={{
+-                    headerShown: false,
+-                    animation: "slide_from_right",
+-                    animationDuration: 250,
+-                    gestureEnabled: true,
+-                    gestureDirection: "horizontal",
+-                    fullScreenGestureEnabled: true,
+-                    animationMatchesGesture: true,
+-                  }}
+-                >
+-                  <Stack.Screen name="index" />
+-                  <Stack.Screen name="orchestrator" />
+-                  <Stack.Screen name="agent/[id]" />
+-                  <Stack.Screen name="settings" />
+-                  <Stack.Screen name="audio-test" />
+-                </Stack>
+-                <GlobalFooter />
+-              </AppContainer>
++              <FooterControlsProvider>
++                <AppContainer>
++                  <Stack
++                    screenOptions={{
++                      headerShown: false,
++                      animation: "slide_from_right",
++                      animationDuration: 250,
++                      gestureEnabled: true,
++                      gestureDirection: "horizontal",
++                      fullScreenGestureEnabled: true,
++                      animationMatchesGesture: true,
++                    }}
++                  >
++                    <Stack.Screen name="index" />
++                    <Stack.Screen name="orchestrator" />
++                    <Stack.Screen name="agent/[id]" />
++                    <Stack.Screen name="settings" />
++                    <Stack.Screen name="audio-test" />
++                  </Stack>
++                  <GlobalFooter />
++                </AppContainer>
++              </FooterControlsProvider>
+             </ProvidersWrapper>
+           </BottomSheetModalProvider>
+         </KeyboardProvider>
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index eab03d0a1..a198f9e6b 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -1,31 +1,34 @@
++import { useEffect, useMemo } from "react";
+ import { View, Text } from "react-native";
+ import { useLocalSearchParams } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
+-import ReanimatedAnimated, { useAnimatedStyle, FadeIn } from "react-native-reanimated";
++import ReanimatedAnimated, { useAnimatedStyle } from "react-native-reanimated";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { BackHeader } from "@/components/headers/back-header";
+ import { AgentStreamView } from "@/components/agent-stream-view";
+ import { AgentInputArea } from "@/components/agent-input-area";
+ import { AgentStatusBar } from "@/components/agent-status-bar";
+ import { useSession } from "@/contexts/session-context";
+-import { useRealtime } from "@/contexts/realtime-context";
++import { FOOTER_HEIGHT, useFooterControls } from "@/contexts/footer-controls-context";
+ 
+ export default function AgentScreen() {
+   const { theme } = useUnistyles();
+   const insets = useSafeAreaInsets();
+   const { id } = useLocalSearchParams<{ id: string }>();
+   const { agents, agentStreamState, pendingPermissions, respondToPermission } = useSession();
+-  const { isRealtimeMode } = useRealtime();
++  const { registerFooterControls, unregisterFooterControls } = useFooterControls();
+ 
+   // Keyboard animation
+   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
++  const footerHeight = FOOTER_HEIGHT + insets.bottom;
++  const bottomInset = insets.bottom;
+   const animatedKeyboardStyle = useAnimatedStyle(() => {
+     "worklet";
+     const absoluteHeight = Math.abs(keyboardHeight.value);
+-    const padding = Math.max(0, absoluteHeight - insets.bottom);
++    const padding = Math.max(0, absoluteHeight - bottomInset);
+     return {
+-      paddingBottom: padding,
++      paddingBottom: footerHeight + padding,
+     };
+   });
+ 
+@@ -35,6 +38,24 @@ export default function AgentScreen() {
+     Array.from(pendingPermissions.entries()).filter(([_, perm]) => perm.agentId === id)
+   );
+ 
++  const agentControls = useMemo(() => {
++    if (!id) return null;
++    return <AgentInputArea agentId={id} />;
++  }, [id]);
++
++  useEffect(() => {
++    if (!agentControls || !agent) {
++      unregisterFooterControls();
++      return;
++    }
++
++    registerFooterControls(agentControls);
++
++    return () => {
++      unregisterFooterControls();
++    };
++  }, [agentControls, agent, registerFooterControls, unregisterFooterControls]);
++
+   if (!agent) {
+     return (
+       <View style={styles.container}>
+@@ -63,16 +84,9 @@ export default function AgentScreen() {
+           }
+         />
+ 
+-        {/* Footer area - status bar + controls */}
+-        <View style={[styles.footerContainer, !isRealtimeMode && { paddingBottom: insets.bottom }]}>
+-          {/* Status bar - always visible, floating above controls */}
++        {/* Footer area - status bar pinned within screen */}
++        <View style={styles.footerContainer}>
+           <AgentStatusBar agentId={id!} />
+-          
+-          {/* Controls - AgentInputArea always mounted, fades in/out */}
+-          {/* When in realtime mode, GlobalFooter's RealtimeControls overlays this */}
+-          <View style={styles.controlsContainer}>
+-            <AgentInputArea agentId={id!} isRealtimeMode={isRealtimeMode} />
+-          </View>
+         </View>
+       </ReanimatedAnimated.View>
+     </View>
+@@ -89,10 +103,7 @@ const styles = StyleSheet.create((theme) => ({
+   },
+   footerContainer: {
+     backgroundColor: theme.colors.background,
+-  },
+-  controlsContainer: {
+-    borderTopWidth: theme.borderWidth[1],
+-    borderTopColor: theme.colors.border,
++    paddingBottom: theme.spacing[6],
+   },
+   errorContainer: {
+     flex: 1,
+diff --git a/packages/app/src/components/agent-input-area.tsx b/packages/app/src/components/agent-input-area.tsx
+index d0236c850..7d084d8ee 100644
+--- a/packages/app/src/components/agent-input-area.tsx
++++ b/packages/app/src/components/agent-input-area.tsx
+@@ -1,22 +1,16 @@
+ import { View, TextInput, Pressable } from "react-native";
+-import { useState, useEffect } from "react";
++import { useState } from "react";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { Mic, ArrowUp, AudioLines, Square } from "lucide-react-native";
+ import { useSession } from "@/contexts/session-context";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useAudioRecorder } from "@/hooks/use-audio-recorder";
+-import Animated, {
+-  useAnimatedStyle,
+-  withTiming,
+-  useSharedValue,
+-} from "react-native-reanimated";
+ 
+ interface AgentInputAreaProps {
+   agentId: string;
+-  isRealtimeMode: boolean;
+ }
+ 
+-export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps) {
++export function AgentInputArea({ agentId }: AgentInputAreaProps) {
+   const { theme } = useUnistyles();
+   const { ws, sendAgentMessage, sendAgentAudio } = useSession();
+   const { startRealtime } = useRealtime();
+@@ -26,23 +20,6 @@ export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps)
+   const [isRecording, setIsRecording] = useState(false);
+   const [isProcessing, setIsProcessing] = useState(false);
+ 
+-  // Animated opacity for smooth transitions
+-  const opacity = useSharedValue(isRealtimeMode ? 0 : 1);
+-
+-  useEffect(() => {
+-    opacity.value = withTiming(isRealtimeMode ? 0 : 1, { duration: 250 });
+-  }, [isRealtimeMode]);
+-
+-  const animatedStyle = useAnimatedStyle(() => {
+-    return {
+-      opacity: opacity.value,
+-      // When hidden, use absolute positioning to remove from layout flow
+-      position: opacity.value < 0.5 ? ("absolute" as const) : ("relative" as const),
+-      // When hidden, disable pointer events so GlobalFooter's controls are interactive
+-      pointerEvents: opacity.value < 0.5 ? ("none" as const) : ("auto" as const),
+-    };
+-  });
+-
+   async function handleSendMessage() {
+     if (!userInput.trim() || !ws.isConnected) return;
+ 
+@@ -99,7 +76,7 @@ export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps)
+   const hasText = userInput.trim().length > 0;
+ 
+   return (
+-    <Animated.View style={[styles.container, animatedStyle]}>
++    <View style={styles.container}>
+       {/* Text input */}
+       <TextInput
+         value={userInput}
+@@ -159,7 +136,7 @@ export function AgentInputArea({ agentId, isRealtimeMode }: AgentInputAreaProps)
+             </>
+           )}
+       </View>
+-    </Animated.View>
++    </View>
+   );
+ }
+ 
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index b290a8574..0f3e2ea4f 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -1,14 +1,15 @@
+ import { useEffect } from "react";
+-import { View, Pressable } from "react-native";
++import { View, Pressable, StyleSheet as RNStyleSheet } from "react-native";
+ import { usePathname } from "expo-router";
+ import { useSafeAreaInsets } from "react-native-safe-area-context";
+ import { StyleSheet, useUnistyles } from "react-native-unistyles";
+ import { AudioLines } from "lucide-react-native";
+ import { useRealtime } from "@/contexts/realtime-context";
+ import { useSession } from "@/contexts/session-context";
++import { useFooterControls, FOOTER_HEIGHT } from "@/contexts/footer-controls-context";
+ import { RealtimeControls } from "./realtime-controls";
+-import Animated, { 
+-  FadeIn, 
++import Animated, {
++  FadeIn,
+   FadeOut,
+   useAnimatedStyle,
+   withTiming,
+@@ -21,44 +22,80 @@ export function GlobalFooter() {
+   const pathname = usePathname();
+   const { isRealtimeMode, startRealtime } = useRealtime();
+   const { ws } = useSession();
++  const { controls } = useFooterControls();
+ 
+   // Determine current screen type
+   const isAgentScreen = pathname?.startsWith("/agent/");
+ 
+-  // Determine if footer should be visible
+-  // Hidden when: on agent screen AND realtime is off
+-  const shouldHide = isAgentScreen && !isRealtimeMode;
++  const hasRegisteredControls = !!controls;
++  const showAgentControls = isAgentScreen && hasRegisteredControls;
+ 
+-  // Controlled opacity for agent screen transitions (synced with AgentInputArea)
+-  const realtimeOpacity = useSharedValue(isRealtimeMode ? 1 : 0);
++  const transition = useSharedValue(isRealtimeMode ? 1 : 0);
+ 
+   useEffect(() => {
+-    if (isAgentScreen) {
+-      // On agent screen, use controlled animation for smooth cross-fade
+-      realtimeOpacity.value = withTiming(isRealtimeMode ? 1 : 0, { duration: 250 });
++    if (showAgentControls) {
++      transition.value = withTiming(isRealtimeMode ? 1 : 0, { duration: 250 });
+     }
+-  }, [isRealtimeMode, isAgentScreen]);
++  }, [isRealtimeMode, showAgentControls]);
+ 
+   const realtimeAnimatedStyle = useAnimatedStyle(() => {
+     return {
+-      opacity: realtimeOpacity.value,
+-      pointerEvents: realtimeOpacity.value > 0.5 ? ("auto" as const) : ("none" as const),
++      opacity: transition.value,
++      pointerEvents: transition.value > 0.5 ? ("auto" as const) : ("none" as const),
+     };
+   });
+ 
+-  // If realtime is active, show realtime controls
++  const agentControlsAnimatedStyle = useAnimatedStyle(() => {
++    return {
++      opacity: 1 - transition.value,
++      pointerEvents: transition.value < 0.5 ? ("auto" as const) : ("none" as const),
++    };
++  });
++
++  if (showAgentControls) {
++    return (
++      <View
++        style={[
++          styles.container,
++          {
++            paddingBottom: insets.bottom,
++            height: FOOTER_HEIGHT + insets.bottom,
++          },
++        ]}
++      >
++        <View style={styles.content}>
++          <Animated.View
++            style={[RNStyleSheet.absoluteFillObject, agentControlsAnimatedStyle]}
++          >
++            {controls}
++          </Animated.View>
++          <Animated.View
++            style={[RNStyleSheet.absoluteFillObject, realtimeAnimatedStyle]}
++          >
++            <RealtimeControls />
++          </Animated.View>
++        </View>
++      </View>
++    );
++  }
++
++  if (isAgentScreen) {
++    return null;
++  }
++
++  // Determine if realtime is active on non-agent screens
+   if (isRealtimeMode) {
+     return (
+       <Animated.View
+         style={[
+-          styles.container, 
+-          { paddingBottom: insets.bottom },
+-          // Use controlled opacity on agent screen for smooth transition
+-          isAgentScreen && realtimeAnimatedStyle
++          styles.container,
++          {
++            paddingBottom: insets.bottom,
++            height: FOOTER_HEIGHT + insets.bottom,
++          },
+         ]}
+-        // Keep FadeIn/FadeOut for non-agent screens (home, orchestrator, etc)
+-        entering={!isAgentScreen ? FadeIn.duration(400) : undefined}
+-        exiting={!isAgentScreen ? FadeOut.duration(250) : undefined}
++        entering={FadeIn.duration(400)}
++        exiting={FadeOut.duration(250)}
+       >
+         <RealtimeControls />
+       </Animated.View>
+@@ -66,18 +103,16 @@ export function GlobalFooter() {
+   }
+ 
+   // For home and orchestrator screens, show centered realtime button
+-  // On agent screens, don't render at all
+-  if (shouldHide) {
+-    return null;
+-  }
+-
+   return (
+     <Animated.View
+       entering={FadeIn.duration(250)}
+       exiting={FadeOut.duration(250)}
+       style={[
+         styles.container,
+-        { paddingBottom: insets.bottom }
++        {
++          paddingBottom: insets.bottom,
++          height: FOOTER_HEIGHT + insets.bottom,
++        },
+       ]}
+     >
+       <View style={styles.centeredButtonContainer}>
+@@ -102,8 +137,9 @@ const styles = StyleSheet.create((theme) => ({
+     borderTopWidth: theme.borderWidth[1],
+     borderTopColor: theme.colors.border,
+   },
+-  realtimeContainer: {
+-    backgroundColor: theme.colors.background,
++  content: {
++    flex: 1,
++    height: FOOTER_HEIGHT,
+   },
+   centeredButtonContainer: {
+     padding: theme.spacing[6],
+diff --git a/packages/app/src/contexts/footer-controls-context.tsx b/packages/app/src/contexts/footer-controls-context.tsx
+new file mode 100644
+index 000000000..7c7af8930
+--- /dev/null
++++ b/packages/app/src/contexts/footer-controls-context.tsx
+@@ -0,0 +1,49 @@
++import { createContext, useCallback, useContext, useMemo, useState } from "react";
++import type { ReactNode } from "react";
++
++export const FOOTER_HEIGHT = 88;
++
++interface FooterControlsContextValue {
++  controls: ReactNode | null;
++  registerFooterControls: (controls: ReactNode) => void;
++  unregisterFooterControls: () => void;
++}
++
++const FooterControlsContext = createContext<FooterControlsContextValue | undefined>(undefined);
++
++export function FooterControlsProvider({ children }: { children: ReactNode }) {
++  const [controls, setControls] = useState<ReactNode | null>(null);
++
++  const registerFooterControls = useCallback((nextControls: ReactNode) => {
++    setControls(nextControls);
++  }, []);
++
++  const unregisterFooterControls = useCallback(() => {
++    setControls(null);
++  }, []);
++
++  const value = useMemo(
++    () => ({
++      controls,
++      registerFooterControls,
++      unregisterFooterControls,
++    }),
++    [controls, registerFooterControls, unregisterFooterControls],
++  );
++
++  return (
++    <FooterControlsContext.Provider value={value}>
++      {children}
++    </FooterControlsContext.Provider>
++  );
++}
++
++export function useFooterControls() {
++  const context = useContext(FooterControlsContext);
++
++  if (!context) {
++    throw new Error("useFooterControls must be used within a FooterControlsProvider");
++  }
++
++  return context;
++}

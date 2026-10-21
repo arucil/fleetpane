@@ -1,0 +1,163 @@
+{
+  "first": {
+    "ok": true,
+    "apps": [
+      {
+        "id": "app-305947",
+        "name": "Fleetpane ACP metadata",
+        "pid": 305947,
+        "process_group_id": 305947,
+        "mount_isolation": "host",
+        "network_isolation": "host",
+        "command": [
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--host",
+          "/tmp/fleetpane-acp-info-qa/private/control.sock",
+          "--preferences-dir",
+          "/tmp/fleetpane-acp-info-qa/preferences"
+        ],
+        "cwd": "/home/amlo/Projects/Rust/fleetpane",
+        "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-305947.stdout.log",
+        "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-305947.stderr.log",
+        "started_at_unix": 1792521542,
+        "running": true,
+        "exit_status": null
+      }
+    ],
+    "windows": [
+      {
+        "id": "4194305",
+        "title": "Fleetpane",
+        "pid": 305947,
+        "app_id": "app-305947",
+        "visible": true,
+        "geometry": {
+          "x": 290,
+          "y": 198,
+          "width": 1100,
+          "height": 720,
+          "screen": 0
+        }
+      }
+    ],
+    "message": "app launched and window found in workspace"
+  },
+  "first_close": {
+    "ok": true,
+    "apps": [
+      {
+        "id": "app-305947",
+        "name": "Fleetpane ACP metadata",
+        "pid": 305947,
+        "process_group_id": 305947,
+        "mount_isolation": "host",
+        "network_isolation": "host",
+        "command": [
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--host",
+          "/tmp/fleetpane-acp-info-qa/private/control.sock",
+          "--preferences-dir",
+          "/tmp/fleetpane-acp-info-qa/preferences"
+        ],
+        "cwd": "/home/amlo/Projects/Rust/fleetpane",
+        "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-305947.stdout.log",
+        "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-305947.stderr.log",
+        "started_at_unix": 1792521542,
+        "running": false,
+        "exit_status": "exit status: 0",
+        "exit_code": 0,
+        "stopped_at_unix": 1792521747,
+        "runtime_seconds": 205
+      }
+    ],
+    "message": "workspace app stopped"
+  },
+  "archive": {
+    "ok": true,
+    "apps": [
+      {
+        "id": "app-313835",
+        "name": "Fleetpane ACP metadata archive",
+        "pid": 313835,
+        "process_group_id": 313835,
+        "mount_isolation": "host",
+        "network_isolation": "host",
+        "command": [
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--host",
+          "/tmp/fleetpane-acp-info-qa/private/control.sock",
+          "--preferences-dir",
+          "/tmp/fleetpane-acp-info-qa/preferences"
+        ],
+        "cwd": "/home/amlo/Projects/Rust/fleetpane",
+        "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-313835.stdout.log",
+        "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-313835.stderr.log",
+        "started_at_unix": 1792521758,
+        "running": true,
+        "exit_status": null
+      }
+    ],
+    "windows": [
+      {
+        "id": "4194305",
+        "title": "Fleetpane",
+        "pid": 313835,
+        "app_id": "app-313835",
+        "visible": true,
+        "geometry": {
+          "x": 290,
+          "y": 198,
+          "width": 1100,
+          "height": 720,
+          "screen": 0
+        }
+      }
+    ],
+    "message": "app launched and window found in workspace"
+  },
+  "archive_close": {
+    "ok": true,
+    "apps": [
+      {
+        "id": "app-313835",
+        "name": "Fleetpane ACP metadata archive",
+        "pid": 313835,
+        "process_group_id": 313835,
+        "mount_isolation": "host",
+        "network_isolation": "host",
+        "command": [
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--host",
+          "/tmp/fleetpane-acp-info-qa/private/control.sock",
+          "--preferences-dir",
+          "/tmp/fleetpane-acp-info-qa/preferences"
+        ],
+        "cwd": "/home/amlo/Projects/Rust/fleetpane",
+        "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-313835.stdout.log",
+        "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-info-20261021/apps/app-313835.stderr.log",
+        "started_at_unix": 1792521758,
+        "running": false,
+        "exit_status": "exit status: 0",
+        "exit_code": 0,
+        "stopped_at_unix": 1792521836,
+        "runtime_seconds": 78
+      }
+    ],
+    "message": "workspace app stopped"
+  },
+  "cleanup": {
+    "ok": true,
+    "apps": [],
+    "message": "workspace stopped"
+  },
+  "idle_draft_clipboard": {
+    "selection": "clipboard",
+    "content": "保留草稿 中文\nsecond line stays",
+    "bytes": 37
+  },
+  "pending_draft_clipboard": {
+    "selection": "clipboard",
+    "content": "等待期间草稿 中文\nnever auto send",
+    "bytes": 41
+  }
+}

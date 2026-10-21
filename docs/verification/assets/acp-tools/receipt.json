@@ -1,0 +1,126 @@
+{
+  "verified_at": "2026-10-20T19:03:16.185990+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "branch": "feat/session-host-foundation",
+  "worktree": "uncommitted; no commit or push",
+  "provider": "private deterministic ACP fixture; no new DSH/OpenCodex model run",
+  "tests": {
+    "root": 129,
+    "desktop": 9,
+    "python_history": 13,
+    "clippy": "root, desktop and Windows GNU cross-target; warnings denied"
+  },
+  "desktop": "hidden Linux workspace; software rendering, no performance claim",
+  "history": {
+    "first_ordinal": 1,
+    "last_ordinal": 71,
+    "last_revision": "eb0d04904e93d3274af60b0ba0c149c9b3001cb8",
+    "next_revision": "2c72d02cc745bb79e9eb03d0299373aabfd7380e",
+    "next_ordinal": 72
+  },
+  "sources": {
+    "crates/runtime/src/acp.rs": "b728b559670b07a91f03ead87a0b220c30947b3fad34f23d62685ff962e3817b",
+    "crates/runtime/src/acp/tool_calls.rs": "75d42f95cbe3bea55914226ed7b8056b7ed5129009568c2d07f596a7927b41f6",
+    "crates/session/src/content.rs": "10d18309650132b7a9f92959898aec4ebe7fafa6b74d16f7e901999ebb4470a3",
+    "apps/desktop/src/conversation_item.rs": "8ed17c109b7c9d4b2ba9e1b449fb9378b0079093b2b8d7efa39dd4edd84e221a",
+    "scripts/acp-fixture.py": "52115087fb7977407ec89d789c8f82714411f418f28d0b5eade74371b71f1de0",
+    "scripts/acp-tools-smoke.py": "f6642b6810f3ccacd69a0ab525c9c810bd648d94b9ddd80575fad96670d6e96d",
+    ".github/workflows/ci.yml": "d800fa9f362b07b0b228785f681c1bde8a4c27c45d3af914379f0359010bd743",
+    "docs/reference/paseo-replay.json": "4c15fd634bd2f7848f0496f6883897e5e7826775cc8ae3a610b1c33d99e386e9"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "1b2a58e802697e5454d5264b4b1821d4e89af24db46af95cc33841afa0ce55a3",
+    "apps/desktop/target/debug/fleetpane-desktop": "6f2db9fa67e4c9010660dbc123aa4be8c36c397ea71e1fd70d5ec3009cc318f1"
+  },
+  "cleanup_processes": [
+    {
+      "pid": 341188,
+      "exists": false
+    },
+    {
+      "pid": 341197,
+      "exists": false
+    },
+    {
+      "pid": 341932,
+      "exists": false
+    },
+    {
+      "pid": 348807,
+      "exists": false
+    },
+    {
+      "pid": 348815,
+      "exists": false
+    },
+    {
+      "pid": 348850,
+      "exists": false
+    },
+    {
+      "pid": 355143,
+      "exists": false
+    },
+    {
+      "pid": 355146,
+      "exists": false
+    },
+    {
+      "pid": 356088,
+      "exists": false
+    }
+  ],
+  "remote_ci": "not run",
+  "limits": [
+    "Location display has no file navigation",
+    "Tool content remains source text; richer diffs/terminals/media remain partial",
+    "Updates without an observed initial tool remain explicit errors",
+    "No full parity or Host takeover claim"
+  ],
+  "artifacts": {
+    "01-pending.png": "ca66b2fa6e4bc1412f1d147be93e10bd93f6ed26f99cbcb4680ec77d4e37b6a6",
+    "02-pending-expanded.png": "45d39510f4531d334f010ac193b0a071ca2a32562018a8afb501e750cd9a84fd",
+    "03-in-progress-expanded.png": "f5356dd4852441aac0d233178cf93dc5d4ca3e55cd2c4e76a66261ca2b15c9cd",
+    "04-completed-expanded.png": "a035087142dd5740b9b8f8b097e15f884487526684eb9b260ffdd56977ac71a0",
+    "05-cleared-collections.png": "13473b4a95012042e0d42d661aca708f144e9967bb44af733967fb61d20cdc4a",
+    "06-second-failed.png": "1ca5315d53816432221aadcb286f3b6706ba431b55412f02777ff568ea26d4ff",
+    "07-failed-expanded.png": "106c5f2dff190e85ade942b137afce8ad5221cbf540bc5713d8a4c67846d80b2",
+    "08-copy-failed-observed.png": "bb18715bd95cb2b0abf72b3fcbd6d5e863cc6f7df17a4412d44fd46d071562e2",
+    "09-archive.png": "3352bd594d9e60e635b7356b1dd6e36465a22f513c6fc2f3d2d159f09e4b3ca5",
+    "10-archive-expanded.png": "a712ee1f7c8b78c641e2752c46e27158ce733e916ad1529ec0fd796c96362fa0",
+    "11-archive-reload.png": "6eebed3a50b32235e500ad075107218612645ad3d191a964fdadd44531828189",
+    "automated-acp.json": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "automated-after.log": "d0f7d591595b7c38e95c3f0b49f4732b793d4798dff40a3bdd234015b85c26ec",
+    "automated-archive.json": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "automated-before.log": "bafd1260b76f9860925bfa510965e85e8f255e03b5a31055d9a516186835e2ad",
+    "automated-build.log": "e9be5c129d4c38f3554695c327cd1ee44d90fd46a323e49ebe55cc3f0b352a45",
+    "automated-clippy.log": "bcae32dc2c713220abd65c7d2695afe8b4fe737b8e6c86bb8c3c319c3ff42a88",
+    "automated-concurrency.json": "123c4740aa61f9583c6bc4c4ea5c8b89cda6f654845589bceb2cf5488d9fbc30",
+    "automated-desktop-build.log": "3e78a4331ff54bddd00d12ad29f36126521f5c38b3289165758741511614a3c1",
+    "automated-desktop-clippy.log": "46a891edab57af41a9a2cc2dba663347867b900734f05655845536a89eb8c725",
+    "automated-desktop-tests.log": "04d63d280c87932495ffb51d2e1c3a2724bc54069909e4694c0a49332ec1c4d6",
+    "automated-info.json": "d1be4deeaa05f88781c8b86027848f0a87eab53b8d35be4a9cfd83bd5bf8cdd9",
+    "automated-order.json": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e",
+    "automated-process-before.log": "6fc88308f1218e555c69ff34583e600ceaac7d91e09b5f1346e05a5e7dfc4e9d",
+    "automated-python-tests.log": "15e27aeec529cd3a8afa86a5e64be97a984f304b8f8b23174657a612202bc049",
+    "automated-smoke.json": "02085376330ba97b7413ea29939f37b378335c83b07dce7e031963da1da71ea8",
+    "automated-stop.json": "14a8544945d8a8c92361a66d7259a6937340f18b79b706dc05a9b4e61e778e68",
+    "automated-tests.log": "e7ba4513b5a0e81a82d937b81da9e92603c3f66de27a4a290297fd0db38b9706",
+    "automated-windows-clippy.log": "b629c4ed9674f64e7636434147b28d30ccf18c171359b12fa27b4fdbf1e02c4d",
+    "final-archive-items.json": "a84f80a752cdab5fcb416c377cade58663803fb916a9d9177400b30fc63d37f1",
+    "fixture-acp-sessions.json": "ca5d07f31456c5a5da089b68055512e4993420943cf0ff7be215e65e79774043",
+    "init-receipt.json": "a5605e2d0889db00af3370c53d3ca4337742d049810fd242daedab63c526d249",
+    "native-archive.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-driver.py": "6ae08382441ebdf4cd1314340685439df2781115833fe83ccfeb0587ac2475a0",
+    "native-live.stderr.log": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4",
+    "native-tools.json": "f9eee1fb2d698a2238d75e3ae180e7136c1438093a7577383a98223572213b48",
+    "prompt-count.txt": "35f3fea4a96b56129af5d32f721a76ef6b4afe890caced0eec97c5de4ab626f8",
+    "read-receipt.json": "d1afef38004f11ca27fbe6b7d39531ace1251c55ee9259dadf4da8238fe059a5",
+    "restart-receipt.json": "ba12f81d7fdc560b0b7f0cbb022272ee24410fc01108f0cd7a2186aeeb411dc8",
+    "stage-1-snapshot.json": "4f93a4940ab5a40ea2ca6e170bc50956eede271391426cba84970e4625a6508d",
+    "stage-2-snapshot.json": "a36274aadfcd99ef38a67ed0387a600acee6bd85c6ffd7054215775a19a4beee",
+    "stage-3-snapshot.json": "4588cd1158d4df8c0b94d1ade50e2188bb5ecbb67e38263d891f13e56b1a3f41",
+    "stage-4-snapshot.json": "a3faa156538a0851ee517195f76869ce0b471a1edc56f635141014ac8696faac",
+    "synthetic-settings.json": "7187d1e8e2a4d61b1dc5dfedb22d703a462df21470e0c145365b20fb3ed467c3"
+  }
+}

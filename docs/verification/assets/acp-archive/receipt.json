@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-21",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "uncommitted local work; no remote CI or release acceptance",
+  "source_sha256": {
+    "crates/runtime/src/acp.rs": "5f9e76a55004c3c97c01b978ba2cf26b8a3f837813c0672f706d1eac32c6891c",
+    "crates/runtime/src/acp/archive.rs": "4591cc36c539bf89f5cdc17bb75dabfa000fd39ca8145f6f60b40837db8e38aa",
+    "crates/runtime/src/acp/history.rs": "b60f3fb09429ffc16f42955fc4d73669a610fc06a4e86af31146eeb46ae5f32c",
+    "crates/runtime/src/journal.rs": "403e1b825c0819905794312e9a99e2e1d294808c7f2bad4875e3515d29d78538",
+    "crates/runtime/src/unix.rs": "60e68cd8b137dc15b6c4d9726831a29a57895aeffa78b362c07b9a435bdbfeb1",
+    "apps/desktop/src/host_view.rs": "17f1558a15010671da5ff9ac7f31a6ddf4d4e14a8cf3ff3a42377b8550be43e5",
+    "scripts/acp-smoke.py": "3019cd68dda20e843f429d41126d3bce3b1e566bbc9fb7ed865e66cf425cf1e7",
+    "scripts/acp-archive-smoke.py": "d6023874df672d5793dfe354a0b3b066b8c0e9fb5b04336596ed512ff6df6ff5",
+    ".github/workflows/ci.yml": "2d91abe4de42eb32857d69afdde0578c2b8d4fba6391c5355fcd9d00f1750e9b",
+    "Cargo.lock": "026e1d8a12ff8db8533ae5bdceda7a3d61dd56996e030ca448ba4e96963f2d00",
+    "apps/desktop/Cargo.lock": "60540f13f91b4eb127ccab1f67054d4eace380607b6d0b24e03ca568e80b6ca8"
+  },
+  "final_binaries_sha256": {
+    "target/debug/fleetpane-host": "e74bc2a88af041702df17d8c6ad3d23202ef55eb21f71f77383e270bf3cfdcbd",
+    "apps/desktop/target/debug/fleetpane-desktop": "1785599eb9953ec5ca21280a05a968f0d69ee807e50a5f0292318e4b140d7cd3"
+  },
+  "tests": {
+    "root_passed": 112,
+    "desktop_passed": 8,
+    "linux_root_and_desktop_clippy": "PASS -D warnings",
+    "windows_root_clippy": "PASS x86_64-pc-windows-gnu; compile only",
+    "fmt_and_diff_check": "PASS"
+  },
+  "process_regressions": {
+    "after.json": {
+      "provider": "synthetic-acp-v1",
+      "shared_commands_stream_tool_config": "PASS",
+      "exact_permission_handoff_fencing": "PASS",
+      "cancel_failure_and_resume_preserve_observed_history": "PASS",
+      "same_prompt_id_executes_once": true
+    },
+    "process.json": {
+      "provider": "synthetic-acp-v1",
+      "kill_restart_retains_exact_items_and_order": "PASS",
+      "unknown_turn_and_no_prompt_or_permission_replay": "PASS",
+      "read_only_archive_and_explicit_resume": "PASS",
+      "other_session_and_stale_cursor_isolation": "PASS",
+      "archive_failure_fences_host_before_publication": "PASS",
+      "corrupt_archive_refuses_startup": "PASS",
+      "owned_host_provider_pids_removed": 6
+    },
+    "history.json": {
+      "provider": "synthetic ACP",
+      "observed_history_bytes": 1449683,
+      "items": 26,
+      "page_sizes": [
+        5,
+        4,
+        4,
+        4,
+        4,
+        5
+      ],
+      "metadata_only_read_resume": "PASS",
+      "scoped_stable_cursors": "PASS",
+      "oversize_full_read_is_error_not_host_fault": "PASS",
+      "send_after_paging_same_runtime": "PASS"
+    },
+    "journal.json": {
+      "settled_before_crash": 300,
+      "durable_receipts": 302,
+      "exact_side_effects": 302,
+      "resident_ids": 1,
+      "historical_result": "finished",
+      "crashed_result": "unknown",
+      "duplicate_replay": false,
+      "historical_event_watermark": null
+    }
+  },
+  "concurrency": {
+    "system": {
+      "platform": "Linux-7.2.11-arch1-1-x86_64-with-glibc2.44",
+      "python": "3.12.12"
+    },
+    "binary_sha256": "eb38aadc3ce896d66439e3f77aab3dbdd072ca6adc458196964431db295206da",
+    "fixture_sha256": "4fa3a6f605daf672b9e5b36da97069c99f37a90a270703c8dd2b0ea20c5ffc5b",
+    "provider": "synthetic ACP, one Python thread per session",
+    "sessions": 20,
+    "simultaneously_active": 20,
+    "configured_chunks_per_second": 200,
+    "completed": 19,
+    "interrupted": 1,
+    "exact_text_and_single_execution": true,
+    "same_host_provider_across_controller_replacement": true,
+    "samples": 71,
+    "snapshot_plus_metadata_ms": {
+      "p50": 147.446,
+      "p95": 389.676,
+      "p99": 431.948
+    },
+    "sampled_rss_peak_kib": {
+      "host": 13016,
+      "fixture_provider": 18704,
+      "probe": 21524,
+      "combined": 52976
+    },
+    "ui_latency_measured": false,
+    "real_model_capacity_measured": false
+  },
+  "concurrency_identity_limit": "Earlier development binary before archived-status refinement and Unix-only backend gating; no final-binary performance assertion or comparison",
+  "fixture_native": {
+    "evidence": [
+      "unknown-turn.png",
+      "archived-draft.png",
+      "resumed-draft.png",
+      "new-turn.png",
+      "older-history.png",
+      "older-markdown.png",
+      "native-readback.json"
+    ],
+    "copied_original_user_utf8_bytes": 32,
+    "preserved_draft_on_explicit_resume": true,
+    "manual_new_prompt_once": true,
+    "exact_older_items_retained": true,
+    "binary_identity_limit": "Earlier native run lacks binary SHA attestation; later Linux changes were tests and Unix archive gating",
+    "cleanup": {
+      "pids": [
+        4172449,
+        4172458,
+        4172659,
+        4172664,
+        4185592,
+        4185594,
+        4176484,
+        4186227,
+        5271
+      ],
+      "all_absent": true,
+      "socket_absent": true
+    }
+  },
+  "real_dsh": {
+    "provider": "installed DeepSeek Harness 0.2.0-rc.2",
+    "host_ids": [
+      "4ff7401f-1a8c-4492-8ec8-5894077ed482",
+      "b28b6c2c-c54a-497a-b363-c757f770b7a6"
+    ],
+    "pids": [
+      22756,
+      22758,
+      23241,
+      23243
+    ],
+    "thread": "221c1921-6bd0-4b8e-bf31-d0f56b033cec",
+    "completed_turns": 2,
+    "exact_prior_items_after_restart_and_resume": true,
+    "fresh_read_after_resume": "compass=east",
+    "default_config": [
+      {
+        "category": "model",
+        "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+        "id": "model",
+        "name": "Model",
+        "options": [
+          {
+            "group": "deepseek-official",
+            "name": "DeepSeek",
+            "options": [
+              {
+                "name": "deepseek-v4-flash",
+                "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+              },
+              {
+                "name": "DeepSeek-V41-Flash",
+                "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+              },
+              {
+                "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+                "name": "DeepSeek-V4-Pro",
+                "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+              }
+            ]
+          }
+        ],
+        "type": "select"
+      },
+      {
+        "category": "thought_level",
+        "currentValue": "high",
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "options": [
+          {
+            "description": "Use for simple tasks that do not need reasoning.",
+            "name": "Off",
+            "value": "off"
+          },
+          {
+            "description": "Prefer for routine or latency-sensitive tasks.",
+            "name": "Low",
+            "value": "low"
+          },
+          {
+            "description": "The default balance for most tasks.",
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "description": "Reserve for the hardest quality-first tasks.",
+            "name": "Max",
+            "value": "max"
+          }
+        ],
+        "type": "select"
+      }
+    ],
+    "cleanup": {
+      "all_owned_pids_absent": true,
+      "socket_absent": true,
+      "temporary_credential_removed": true
+    }
+  },
+  "final_binary_native": {
+    "state": {
+      "socket": "/tmp/fleetpane-acp-archive-qa/real/private/control.sock",
+      "pids": [
+        60311,
+        60319
+      ],
+      "host": "0f5804a8-7372-41a8-a436-1da4e118771a",
+      "thread": "221c1921-6bd0-4b8e-bf31-d0f56b033cec",
+      "binaries": {
+        "target/debug/fleetpane-host": "e74bc2a88af041702df17d8c6ad3d23202ef55eb21f71f77383e270bf3cfdcbd",
+        "apps/desktop/target/debug/fleetpane-desktop": "1785599eb9953ec5ca21280a05a968f0d69ee807e50a5f0292318e4b140d7cd3"
+      }
+    },
+    "copied_saved_tool_utf8_bytes": 619,
+    "exact_saved_tool_copy": true,
+    "paged_chinese_markdown_table": true,
+    "explicit_resume_retains_exact_two_turns": true,
+    "no_new_prompt": true,
+    "evidence": [
+      "real-archived-native.png",
+      "real-archived-tool.png",
+      "real-archived-markdown.png",
+      "real-native-resumed.png",
+      "real-native-readback.json",
+      "real-native-tool-copy.json"
+    ],
+    "cleanup": {
+      "pids": [
+        60311,
+        60319,
+        63990
+      ],
+      "all_absent": true,
+      "socket_absent": true,
+      "task_private_dsh_home_removed": true
+    }
+  },
+  "paseo_history": {
+    "reviewed_through_ordinal": 44,
+    "revision": "cf977968c62ed6d85398aacceabd2e682a521a10",
+    "next_ordinal": 45,
+    "next_revision": "d883436395d3c0d15cfe68b0dee8052630989149"
+  },
+  "limits": [
+    "Host-observed history only; no DSH private transcript import",
+    "Unknown turns have no inferred outcome or automatic replay",
+    "No live Host upgrade or process takeover",
+    "No archive eviction/deletion UI or unbounded history",
+    "Windows compile check only; no Windows/macOS runtime acceptance",
+    "No remote CI/release or performance improvement claim"
+  ],
+  "evidence_sha256": {
+    "build.log": "740423a289c7b41b734e4529bd13f4ef50d06c02745c2b69aee43050b7ebbf67",
+    "clippy.log": "9a052aac22552d17ad695e7e329a94cd4ed16f03c269c7c898febd9cb58bd258",
+    "process.json": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "real-receipt.json": "4f1172114067b48f0480c42594355e8c8eb9c0268e9632962047004420cd1368",
+    "root-tests.log": "78f9ad641ce450e685722ea800cb482e7d7491046c34021673a88f70bbc396c5",
+    "journal.json": "fbff345103470708c64a596aec9b26ef9067242c99ee1c64ca336b12284d2663",
+    "real-native-readback.json": "b182762654f9571847ca983f30a77346b4a964150c317baaf6738b90938ebd9e",
+    "terminals.json": "1ad7f8312497afd476eb9245c652e27932225ef084644c0613bca412f1e0ee1b",
+    "new-turn.png": "d8dec55329fab6f4cf31fc0824e7852e0fb0d2d017a1c293b4e3e5a64325fd9d",
+    "desktop-build.log": "5a0fdcb207e5134cab5ffebd835ea4a9284b69c521df25b7d8912fb2bbb7f1e3",
+    "baseline-source.json": "fc5206b4a51954c8250bf3609e131bc66c781ff87c794ae230b5109392f4743c",
+    "windows-clippy.log": "136c4f2ea92839ba149feabaeda5f012441a245669787f054088b68d8acd4c09",
+    "archived-draft.png": "d294a156589bdcb343796d292761ec6cd4db8e3549cf116bd5cc2ff7995809f2",
+    "history.json": "1c7cfb46d6a00ea9bd12bdefb5af11206fccbb9b96aad083f41c6e95a517b1be",
+    "native-before.json": "1302ebc6b49633722fba3c06f5d7aa6207acee5d17a4472d6359cb5d1fd52459",
+    "real-archived-markdown.png": "787f3a62bc8491b66ea84d8e3b90549c2ccc3cc110e6353683ce349914f6b29c",
+    "older-markdown.png": "2b55c790d8431c84e4e049aa2d7376673e12cfaa79b8865f389db3d77f7e477c",
+    "before.json": "30f220c83def4ab4d5096c3e3c90b397b0dea32645110db33daf3b2cc0682392",
+    "concurrency.json": "601f2f16530c88e8b64ed1b5a793ccd200d64dde72c7df42945a507979dcd105",
+    "resumed-draft.png": "76d646e573defe1c2094ecc9ec5dc18cf77c6d09a57419fcf18a74b4f8ff3636",
+    "desktop-clippy.log": "72e965c68accbfb74550d8b7de753881f90fa9657b190a5b8c5ee563a7547035",
+    "real-after.json": "b182762654f9571847ca983f30a77346b4a964150c317baaf6738b90938ebd9e",
+    "windows-target.log": "831ad8906cd548d1be0b512110752469e0a5b4f23e8ea459eb4bf438761bef31",
+    "real-native-state.json": "f6749f1c3eb612f3f0d2ead55355e11454d4418a9915ba47df502642175df8f7",
+    "real-native-tool-copy.json": "a82f18c4262a91510a43984ccd41311445ef09f7007f1c75434b9959faa0a6fa",
+    "tests.log": "f80f4059be19802aef7e3c312b21f27213a69f5a0d6fc77405bc3f48fab9984f",
+    "older-history.png": "63572db88594a93a0c9c45285fa7ea18d1c62a318dd588cb4a5ee6d217177645",
+    "native-readback.json": "f392c2035872fbdb006d4ec3b39311c1707031426ace144742f937c85679bada",
+    "native-state.json": "8c0304e63d5ed855c0a1d0ff50802b9b76fd1a269fe1562bb8df681f0f6349f2",
+    "real-native-resumed.png": "900cee1010132e7f311600ce5894afa80801a8369192a8d9dd3487cc4ebf9619",
+    "desktop-tests.log": "2017c32d4057731afbc7d8ddc651ec48bc04902aebd1bbfeb8eeb5af59a0b9ba",
+    "real-before.json": "33c6ba01a706c06d94ba75fb14e459c9b2398ca4a4682822cf1ab0566dbf060a",
+    "real-archived-native.png": "104b82efc2b96ff1e35a2b0ac58f3508358a7b65d344c65834768571ff9fd94d",
+    "after.json": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "real-native-cleanup.json": "d136c7a275bd931a57393727a7461da1f8d25c8d4b6642e3d683c3caabbd72ff",
+    "unknown-turn.png": "4eb70a886e4fdbe4673462d07e2235676ed7334626ce6ccf62805432122bc766",
+    "real-archived-tool.png": "005718aa4dce17a070d28d60abfbb86b07a3d15631de6aeab94bddc0dc46d40a"
+  }
+}

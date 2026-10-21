@@ -1,0 +1,155 @@
+{
+  "verified_local_date": "2026-10-21 Asia/Shanghai",
+  "verified_at_utc": "2026-10-20T18:12:45Z",
+  "branch": "feat/session-host-foundation",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "uncommitted": true,
+  "root_tests_passed": 118,
+  "desktop_tests_passed": 9,
+  "linux_root_and_desktop_clippy_warnings_denied": "PASS",
+  "root_windows_gnu_clippy": "PASS; Unix preferences excluded",
+  "root_and_desktop_debug_builds": "PASS",
+  "remote_ci": "not run",
+  "source_sha256": {
+    "crates/session/src/appearance.rs": "ac28acf67cb19b6304140d8f348dbf615340a4e8945c67bf7564e6879d0d2112",
+    "crates/session/src/storage.rs": "b83f5a8ea4458ab8cc46ec3c15bab66a395a32fe2fa7ad1fe037a6708ec5fde6",
+    "crates/session/src/lib.rs": "d21ba08b3d0790ef9a95c49b38a4df9acd8da098c896d03b0a1408b07aec5a4e",
+    "crates/session/src/drafts.rs": "75ca404ae475fbf7b32ae689ecd0ab1dc6b012816a53f6fbff3e25de5b8fbc96",
+    "crates/session/src/workspace_pins.rs": "8f183ce6b61f7001e433192679ee66602cfa0ee94612a50439c44db141b8114c",
+    "apps/desktop/src/appearance.rs": "017ed96f3621a37c65982177f0494ed2d7066f9047e7ff70142408d70374b483",
+    "apps/desktop/src/main.rs": "a490578880adfa87230cbd8aed50970cb62b1d81f79777cce248264565d10dde",
+    "apps/desktop/src/workbench.rs": "6056bedb8c82d74a2a930f42fc1eed766a5963839e739cf18b75b2e353287774",
+    "apps/host/src/main.rs": "8201b89f84d0fe61f6edddc0cb24b33eba60cf4b9e8295904e67c6d7df9388ae",
+    "scripts/appearance-smoke.py": "0b3e357f95dc07df278210152f3eec63523f99d7642b38e68a1ecfcbde570732",
+    ".github/workflows/ci.yml": "73b94b1754b187d1bce1e9f7f70160babf6a3f42843c3ca2184daf92cf96fe25"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "aae4480ffdea32ecb01ad5af1348390e6f3200e295b56b848f6b581b6173752f",
+    "apps/desktop/target/debug/fleetpane-desktop": "3d5c7f1609b164d727a9efcb0073a2ea5aba6ed7416d52077082e5495b484a29"
+  },
+  "history_cursor": {
+    "ordinal": 51,
+    "revision": "85e4e9ddaa5440a2226906b10323f4d6c83a7924",
+    "next_revision": "13f8e31295ad58a1fe047aa09df591f50a5647ce"
+  },
+  "native": {
+    "workspace": "fleetpane-appearance",
+    "screen": [
+      1300,
+      1000
+    ],
+    "window": [
+      1260,
+      930
+    ],
+    "provider": "private deterministic ACP fixture",
+    "host_uuid": "9e914c3b-571d-44fe-897e-242878bf2cda",
+    "host_provider_pids": [
+      229799,
+      229801
+    ],
+    "pending_permission_preserved_exactly": true,
+    "draft_preserved_exactly": "保留草稿 中文\n第二行 **markdown**\n关闭时保存 ✓",
+    "final_saved": {
+      "revision": 4,
+      "value": {
+        "theme": "light"
+      }
+    },
+    "os_events": "installed xdg-desktop-portal + gtk backend, private D-Bus, isolated keyfile GSettings",
+    "portal_observations": [
+      {
+        "scheme": "default",
+        "value": 0
+      },
+      {
+        "scheme": "prefer-dark",
+        "value": 1
+      },
+      {
+        "scheme": "prefer-light",
+        "value": 2
+      }
+    ],
+    "fixed_light_ignores_os_dark": true,
+    "system_follows_event_without_revision_change": true,
+    "stale_write_error_no_theme_or_revision_overwrite": true,
+    "injected_update_failure_visible_preserves_dark_revision_3": true,
+    "appearance_close_wait_then_exit_0": true,
+    "draft_close_wait_then_exit_0": true,
+    "unknown_stored_theme_visible_and_not_overwritten": true,
+    "normal_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "no_prompt_or_permission_answer_sent_during_theme_testing": true
+  },
+  "cleanup": {
+    "workspace_stopped": true,
+    "host_group_signalled": 229799,
+    "remaining_private_bus_children_signalled": [],
+    "desktop_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "owned_pids_absent": {
+      "229799": true,
+      "229801": true,
+      "202129": true,
+      "202641": true,
+      "202661": true,
+      "229837": true,
+      "237422": true,
+      "240206": true
+    }
+  },
+  "limits": [
+    "No macOS or Windows native acceptance",
+    "No new real-provider run or performance gain claim",
+    "No automatic cross-process preference sync",
+    "No forced process termination save guarantee",
+    "Font/language/shortcut/notification/layout preferences remain open"
+  ],
+  "artifacts_sha256": {
+    "01-system-dark.png": "21b39392013c5aff7d8f851061994a7f5b89de0bd1c6cc96c41c7ac4bc50c4e6",
+    "02-system-menu.png": "ce20086f712f858c5db2ff2e36dc160cf6a5b21d016dc3c0bdb378429a74327e",
+    "03-fixed-light.png": "0cd8bed9874db96c028d37c4c7cebff23d4c7293902e6261b0799fe14904ee87",
+    "04-light-os-dark.png": "f7993a12f487203c06eda60e414fc06712c85f3b7ae322200bae97f308b5ff80",
+    "05-system-dark.png": "5dc963856c48e10880cf19afe1b5932b6a9b91838d8047f9e5a585ed41b2754d",
+    "06-system-light-event.png": "ecf7ef1a2c62c56e9ac262c8fc5735136c7f50f8c18015ecdd3241851106e51f",
+    "07-stale-write-refused.png": "299ecf03bbdcdb85fd033ca55b000c8cc09696610b276556ff87b6cb26594c6c",
+    "08-reload-dark.png": "336317c21400679327e79ac546dce14da5698b70148ed1145662f8cc59cb2d01",
+    "09-write-failure.png": "cd9401a237284fb8c9531ee4b1d7708dd60796f2c12b201378e3f07dd1f79285",
+    "10-appearance-close-wait.png": "7fe25717ec2f7408f0069c587e8535d6a468f6962ab95e938569b9c635c77518",
+    "11-reopened-light-draft.png": "367335b9f4496c41c9b90f5afd30ebe4dadad04dc92aca433e5d082d544a8efa",
+    "12-draft-close-wait.png": "02092782f04289ee29f1d6b67c18897abe5268a6fdb519ff00f8ce19e4a22971",
+    "13-invalid-preferences.png": "d97c7d956dc8614ee26be1d5ef7c9257424d5523fc66fbea5bbe0e8a614ecfb1",
+    "after.json": "492fb92fa1d9d3e844b9ee3553b0f38af825461412a3cbffe66131002eb0a1f4",
+    "app-229837.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-229837.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-237422.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-237422.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-240206.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app-240206.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "before.json": "d960357cd4dced9a392fe94c86b7ea43bee59fed82136ca5f582470e11806180",
+    "cleanup.json": "d0058cd35526e0761a155e4a06a2816040ae75366c1735dec8e8c8356357d28a",
+    "desktop-build.log": "1380465f0306f2bc0d6e9327c1b711d0e83222adc978c911f7d4f02523a8946f",
+    "desktop-clippy.log": "16d8ffda2f1f1188f7e2dd62606fe281ecc08885dbd4e248f0ba33360b96e9d6",
+    "desktop-tests.log": "4d5f5b8b79244603ac9d779288dd6e0e0aca2a48a9c0cbb7ce91910b4e36e03e",
+    "draft-readback.json": "703a7e8c458efed9a1e8beb5c3f1759f56006d359d54e4909a55962748596e4c",
+    "host-build.log": "553ae718432e5b78a0182dac0d468ddd463886f6b1ed5ad3cf6c726d814b8640",
+    "host-state.json": "4d3c3b7e352fc33075413240f24b5227b0eb40ae6ca2d8c19c3ae2292510cde0",
+    "preferences-readback.json": "45e17fc977800cde53eaece97afcf2cabfb0b0819979c33ad689b32c90c4a6ed",
+    "root-clippy.log": "57a1675620e3e2c0c34a7d668d05b509b7466e6bda7155273bfe51f4226bb7a5",
+    "root-tests.log": "12588c5bafee7c9094093936c9b72cadbe6c3447a19ea4420fadf334cad8b650",
+    "smoke-acp-archive.json": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3",
+    "smoke-appearance.json": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830",
+    "smoke-files.json": "436857b8683082337c2a78d64677aef7f0e205256b33e3792b2e4e738259e0fd",
+    "smoke-session.json": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0",
+    "smoke-terminal.json": "b800d5987a6313b2787fa6b8b2fb2c81f2c5931a3a704a8744ddfeb7e54fd8a4",
+    "smoke-workspace-pins.json": "2b6114c9073a5568d4ccbfe1407c4ca870442924727aa5b6eeec36b6d8cb7069",
+    "windows-clippy.log": "d5db9af9500786031946dd31b1375a824536252351ad58609cba1a9af9e26b01"
+  }
+}

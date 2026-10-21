@@ -1,0 +1,60 @@
+{
+  "snapshot": {
+    "protocol": 3,
+    "host_id": "2c36a186-3818-4dd8-921c-bea5624f8116",
+    "host_pid": 3922149,
+    "provider_pid": 3922162,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "2c36a186-3818-4dd8-921c-bea5624f8116",
+      "controller_id": "2cc40dca-b9f3-4010-8161-b70debb836b2",
+      "generation": 3
+    },
+    "sequence": 7,
+    "operation_ids": [
+      "52184a9b-7da0-4eb3-bac9-48549a5a7b3f",
+      "e830eb04-d406-48ff-a04f-9579ba51e2b7",
+      "b42eb3bd-7ee2-4238-b760-04211ad23063"
+    ],
+    "journal_total": 3,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1",
+          "operation_id": "b42eb3bd-7ee2-4238-b760-04211ad23063",
+          "phase": "awaiting_completion",
+          "terminal_status": null,
+          "error": null
+        }
+      ],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  },
+  "steer_after_stop_ack": {
+    "response": "error",
+    "data": {
+      "code": "stop_pending",
+      "message": "Stop acknowledged. Waiting for the original turn to finish."
+    }
+  }
+}

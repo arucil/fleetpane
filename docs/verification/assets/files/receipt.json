@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-20",
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "changes": "uncommitted; includes previous follow-up and pin slices",
+  "source_sha256": {
+    "crates/session/src/files.rs": "5adb4d4dd6c5ccd3d9e1c0a5e14e4361b304421040f95a0d2eff2079ee1ad6de",
+    "crates/session/Cargo.toml": "8799f25c5e2777b59700c606f2c6a2eb5044de684fb2cc38eaaca68cf43e171a",
+    "crates/session/src/lib.rs": "d92d3a961c8c1393ba0437ae5c8f89c1589151fe8ce1efc846b6998931a993c8",
+    "apps/desktop/src/files_view.rs": "41875ab3356e87f250a9f4b3446d50e21d5b0323e24d237d4582d6984ed10839",
+    "apps/desktop/src/workspace_view.rs": "36398f314c8fa7aeb5355b7c68ade6a823d4ed28a07efeba7b203eb1c280f155",
+    "apps/desktop/src/main.rs": "7fa2c1ed06c715e623e3df7e6c1678488b728fadb2cac378c2842dc775b86ded",
+    "apps/host/src/main.rs": "1dc21f21f51f486a8cad6ed5f21d3604dae648e74fad6e53f9d468681dd5bc5c",
+    "scripts/files-smoke.py": "4b419ad631ce9da372a77f93eb7752880c5529653654c6167ed894ca288e7acd"
+  },
+  "artifacts": {
+    "desktop_sha256": "14fe31fedcceaab20384cecf939a358d02bab3db8ae4e9d7a31e68e5028fbb40",
+    "final_cli_sha256": "bc4bbc74b33e8da6ff9dbd0b12bd17b92b6cdb0413142bb0aeaaf09422d0fe21",
+    "fixture_hosts": [
+      {
+        "name": "Codex",
+        "sha256": "9862620f33dade84b1c8a6ee3733103fcf54d0d89ae910c29a6019eab1f41a30"
+      },
+      {
+        "name": "DeepSeek ACP",
+        "sha256": "9862620f33dade84b1c8a6ee3733103fcf54d0d89ae910c29a6019eab1f41a30"
+      }
+    ]
+  },
+  "process_smoke": {
+    "ok": true,
+    "real_git_workspace": true,
+    "nested_unicode_newline_exact": true,
+    "long_empty_binary_large": true,
+    "directory_and_nonUTF8_limits_explicit": true,
+    "traversal_symlink_fifo_refused": true,
+    "replacement_refused_recovery": true,
+    "file_hashes_unchanged": true,
+    "full_host_snapshots_unchanged": true,
+    "owned_hosts_stopped": true
+  },
+  "native": {
+    "exact_Chinese_CRLF_copy": true,
+    "preview_readonly_paste_refused": true,
+    "long_copy_bytes": 60015,
+    "long_copy_exact": true,
+    "long_preview_notice": true,
+    "binary_large_empty_notices": true,
+    "directory_limit_refused": true,
+    "replaced_directory_refused_recovered": true,
+    "external_edit_explicit_reload": true,
+    "file_hashes_after_restoring_QA_edits": {
+      "binary": "06eb7d6a69ee19e5fbdf749018d3d2abfa04bcbd1365db312eb86dc7169389b8",
+      "long.txt": "e694438b5915a885ab4f4ef73977758b6fcd54e35ea3c55c331b4d0f6c76af04",
+      "large": "9408817bc040328d1c403ff97e94cea3dfd3a361b2fb7ecc7af75ff3a5157139",
+      "empty": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "目录/hello.txt": "b19cae42304a7ab63bb2a16ea1f1e503d659382b868dcda92f10d6f6478d3702"
+    },
+    "both_complete_host_snapshots_unchanged": true,
+    "desktop_pid": 3873181,
+    "desktop_sha256": "14fe31fedcceaab20384cecf939a358d02bab3db8ae4e9d7a31e68e5028fbb40"
+  },
+  "verification": {
+    "root_tests": 99,
+    "desktop_tests": 5,
+    "strict_clippy_both_manifests": true,
+    "pin_process_regression": "passed",
+    "remote_CI_new_changes": "not run"
+  },
+  "cleanup": {
+    "native_window_stopped": true,
+    "workspace_stopped": true,
+    "owned_hosts_providers_stopped": true,
+    "sockets_removed": true,
+    "shared_runtime_restarted": false
+  }
+}

@@ -1,0 +1,50 @@
+commit 9f22acfead06078fe2a71660f018057107decdf4
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 07:53:51 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 07:53:51 2025 +0100
+
+    fix(agent-manager): persist agent state before killing to enable resumption
+
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 8d8ace904..894fad92a 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -499,7 +499,7 @@ export class AgentManager {
+ 
+   /**
+    * Kill an agent
+-   * Terminates the process and removes it from the manager
++   * Terminates the process but keeps it in persistence for resumption
+    */
+   async killAgent(agentId: string): Promise<void> {
+     const agent = this.agents.get(agentId);
+@@ -509,15 +509,25 @@ export class AgentManager {
+ 
+     const runtime = this.getRuntime(agent);
+ 
++    // Persist current state before killing
++    if (runtime) {
++      await this.persistence.upsert({
++        id: agent.id,
++        title: agent.title || `Agent ${agent.id.slice(0, 8)}`,
++        sessionId: runtime.sessionId,
++        options: agent.options,
++        createdAt: agent.createdAt.toISOString(),
++        lastActivityAt: agent.lastActivityAt.toISOString(),
++        cwd: agent.cwd,
++      });
++    }
++
+     agent.state = { type: "killed" };
+ 
+     // Notify subscribers BEFORE removing from manager
+     // This ensures subscribers can still query agent info
+     this.notifySubscribers(agentId);
+ 
+-    // Remove from persistence
+-    await this.persistence.remove(agentId);
+-
+     // Kill the process
+     if (runtime) {
+       runtime.process.kill("SIGTERM");

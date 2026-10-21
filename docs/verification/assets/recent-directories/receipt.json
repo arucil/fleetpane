@@ -1,0 +1,295 @@
+{
+  "verified_at": "2026-10-20T19:53:49.841221+00:00",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "branch": "feat/session-host-foundation",
+  "worktree": "uncommitted; no commit or push",
+  "provider": "task-owned Codex/ACP fixtures; no real model request",
+  "tests": {
+    "root": 135,
+    "desktop": 9,
+    "python_history": 13,
+    "clippy": "root, desktop, Windows GNU cross-target; warnings denied"
+  },
+  "history": {
+    "first_ordinal": 1,
+    "last_ordinal": 80,
+    "last_revision": "85a0e46ba941faef6357915d557cda8bec8db26a",
+    "next_revision": "542707ecddcb359240a59ccae5b607d5a0d4d420",
+    "next_ordinal": 81
+  },
+  "sources": {
+    "crates/session/src/recent_directories.rs": "f17dd220ff10f1971f0e497bb933cff17235648edddc7b47644a05c44b558f97",
+    "crates/session/src/storage.rs": "bcbbccd34d2dca91dc9a66b8920c3b1cb28b96cc2cce401123d9da41fa669c14",
+    "crates/session/src/lib.rs": "cbb2ace42b990ead45d3af37884dec86dbf1376f8bea6fd72b888644a4990170",
+    "crates/session/src/appearance.rs": "e97c40612141cea0f2335c14ccaf1b2fd6a70035650a7061e951a0eeb8270006",
+    "crates/session/src/drafts.rs": "ea8319949e8a9d581a8bb0512c86f4e7dcb1f7eaa63407fd963c22889944ee42",
+    "crates/session/src/workspace_pins.rs": "8f03429619ab844c8c9f8f64f425c330ab8e162e8887b4b37b66410314b14686",
+    "apps/host/src/main.rs": "20615c971e672804da2b83993b6c789360d49bc5266e7f98a9744c8187a0ab80",
+    "apps/desktop/src/host_view.rs": "96a8128b77cb4bd21eaef46e9733969e6e127b7be9ebb460731de999bd11ee43",
+    "apps/desktop/src/host_view/recent.rs": "0daa42293a415c208e4e0ec36d1d7c59282a349ff43397ddc96e6f8ec04aca49",
+    "apps/desktop/src/host_view/draft.rs": "0a948e7d2fc332c5a6f9c035b77661021fb4b4d5add9ed2138bec466f9c45d42",
+    "apps/desktop/src/workbench.rs": "98ee2ae4e42408cdf192e5393f209c47d5be630770d2af659efb480ea5c21713",
+    "scripts/recent-directories-smoke.py": "b36461b68abcbebcccc99decc957b2dc0c26190d15c1843a4e696b8a8f9290a6",
+    "scripts/appearance-smoke.py": "75cd2d1b3cecc68e03369313e328f0ffd8b62361b4d308eeca382239443a4406",
+    ".github/workflows/ci.yml": "fb38daa128e3f683507998c019d57b5f4877706f05e55894454d71ea1938eea9",
+    "README.md": "2c358c32d4d6bbcc8ff00b3c31e0dbb8591020f0a77a7e3f53c1a6441d180265",
+    "docs/status.md": "35e133d8d8883b804ae777309b45701c01b24269df3ddb3b4f4186498fc81fb7",
+    "docs/parity.md": "0c9fc1f6543d9820029cb5011f2f91f105efc87ce57e0aa93b70dedd8c9ed4d5",
+    "docs/reference/paseo-replay.md": "bfef3a510c4dbc68d261ed3c95c337c0ec1f3b2e267c6c31a8acf2324c3aaaff",
+    "docs/reference/paseo-replay.json": "4d432e0e06bc1f16d82fc5d483f2f656fffd267ff9c88c5d7590686395b811f1",
+    "docs/adr/0038-recent-workspace-directories.md": "471f4194d1572aff2f0d42812e59beef6c23a6ac40d7274eef7ad20920c651d9",
+    "docs/verification/2026-10-21-recent-directories.md": "f0889de61151ff97ddeb2f5c3dcefc8d7fcbaafaf34457e2037cf19f644d9120"
+  },
+  "binaries": {
+    "target/debug/fleetpane-host": "8eae23ac37f636e2fad2ad7cd4beebe52496c28b182fb78b95c880e3463ce5ee",
+    "apps/desktop/target/debug/fleetpane-desktop": "1128b0d170a32824dca72242d0d2b5d077a443cdd5cec7b6a5574e5f500a4e1a"
+  },
+  "native_binary_provenance": "Final rebuilt binary hashed before offline run. Main native run precedes test-only old-schema fixture corrections; no product implementation changed between these phases.",
+  "cleanup_processes": {
+    "459673": true,
+    "459712": true,
+    "459757": true,
+    "459781": true,
+    "460634": true,
+    "460635": true,
+    "460649": true,
+    "460679": true,
+    "468085": true,
+    "469913": true,
+    "476574": true,
+    "476575": true,
+    "476584": true,
+    "476609": true
+  },
+  "workspaces_stopped": [
+    "fleetpane-recent-20261021",
+    "fleetpane-recent-offline-20261021"
+  ],
+  "native": {
+    "main_apps": [
+      460679,
+      468085,
+      469913
+    ],
+    "final_offline_app": 476609,
+    "session_counts": {
+      "Codex": 6,
+      "ACP": 1
+    },
+    "exact_path_copy": true,
+    "mru_order_and_dedup": true,
+    "prefill_and_forget_preserve_sessions_and_operations": true,
+    "save_failure_separate_from_successful_creation": true,
+    "normal_close_waits_for_local_job": true,
+    "offline_prefill_after_resize": true
+  },
+  "open_issue": {
+    "symptom": "Offline first paint after Host switch incomplete in two captures; full repaint after maximize",
+    "root_cause": "not established",
+    "workaround_added": false,
+    "acceptance": "offline first paint remains open"
+  },
+  "acceptance_limits": [
+    "private fixture interactions; no real model, CI or deployment claim",
+    "hidden Linux software rendering; no performance or native Windows/macOS acceptance",
+    "absolute paths only; no Host takeover or full parity"
+  ],
+  "artifacts": {
+    "appearance.log": {
+      "bytes": 319,
+      "sha256": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830"
+    },
+    "build.log": {
+      "bytes": 142,
+      "sha256": "5285017542d3bad23362eeaa597bad5c7f2c4f60843cb13b7207c35c8079d420"
+    },
+    "cleared.png": {
+      "bytes": 81770,
+      "sha256": "390d199c305926ae5ec1e354028a3ba84df364576231494d1cc8ba6187d2b5a2"
+    },
+    "clippy.log": {
+      "bytes": 388,
+      "sha256": "d2a8a0ef607ec21e408389cd7c094e23ad6a48f2e218be6a88245ae3b06cba82"
+    },
+    "close-guard.png": {
+      "bytes": 86110,
+      "sha256": "a651edcb273f0985a6f0caba208237b05ca631cf36d0cfe558391b0651d2bf1e"
+    },
+    "creations.log": {
+      "bytes": 152,
+      "sha256": "49a1fadd166598a0b723cdbb81aa993255166afe8672a5aed8d69e7a89c6d988"
+    },
+    "desktop-build.log": {
+      "bytes": 148,
+      "sha256": "30443cc913e88f5146761cebc769453ff2fe3088345ea07bd4df2b1161641b98"
+    },
+    "desktop-clippy.log": {
+      "bytes": 238,
+      "sha256": "5697c0a5b41fb9f489f852585a603f181b944b6aadc09d8ee647e08b50fca745"
+    },
+    "desktop-tests.log": {
+      "bytes": 1379,
+      "sha256": "5259fbdfdda2524e626e76b4a47ce69ee866a85436b6c0b768bbeba226ba4552"
+    },
+    "drafts.log": {
+      "bytes": 306,
+      "sha256": "05361a36b2ab7163bfcc3c1505ca0c0980e6954d69593d1ab4b39e13fb75510d"
+    },
+    "history-tests.log": {
+      "bytes": 112,
+      "sha256": "1850ef12a2ae59448688cf3c7a1848efd09cd305b571c077531d4cd8e544a10f"
+    },
+    "host-b.png": {
+      "bytes": 79745,
+      "sha256": "b3a6558d977d854adf4611d7a954ff3fc3a0f47eb1b8cc2ac905060880177b8e"
+    },
+    "initial.png": {
+      "bytes": 79201,
+      "sha256": "505b683af49c649c2da86fece17aeac480ae698971ca86c077e3938046c53c20"
+    },
+    "invalid.png": {
+      "bytes": 121801,
+      "sha256": "e0f7c4857f92e06310998ef108870881f04f268cb4a8feca679685e5e180c137"
+    },
+    "max.png": {
+      "bytes": 101787,
+      "sha256": "451e025145a77614369cdc6f1131d01a8059183761792dab68f308397a4cc982"
+    },
+    "native-acp-created.json": {
+      "bytes": 6547,
+      "sha256": "3715afe75b5f83c8e5cbf54483145ff6adeda89ff6986668eb75b145623440da"
+    },
+    "native-after-prefill.json": {
+      "bytes": 2634,
+      "sha256": "523beaa5cedb19f9b96847f93629e87acd158a519c8b7618ce8b36b70941189a"
+    },
+    "native-app-460679.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-468085.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-469913.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-app-476609.stderr.log": {
+      "bytes": 140,
+      "sha256": "87d070519e61243f05d28b5e3b9ffe1bfa2646480de63df770070b1cfe4439a4"
+    },
+    "native-before-prefill.json": {
+      "bytes": 2634,
+      "sha256": "6c88a3921cd6b1e2a84938b00d6afe52d79afc6f2526baf5d0ef2877a6caf721"
+    },
+    "native-cleared.json": {
+      "bytes": 6812,
+      "sha256": "c0b6128b512251860f4f8cad541ecd26fe74d8d09b74d5ee576d300e3844e4bd"
+    },
+    "native-created-while-locked.json": {
+      "bytes": 3173,
+      "sha256": "b4eaf8a8691ee0e056ae6b8b72ee3a91b13ab3f7eecfd2564c5eb9e394a005c8"
+    },
+    "native-final.json": {
+      "bytes": 6813,
+      "sha256": "b2c8baace47a3450e93dabe3f58d1b349b141d52f070bc08698d950696701f89"
+    },
+    "native-first-created.json": {
+      "bytes": 2634,
+      "sha256": "87f2e891b99b6b7dc77f857ffdd910bdf3b354620a75798403e3fd408e703f5f"
+    },
+    "native-host-switch.json": {
+      "bytes": 4619,
+      "sha256": "3bf24181208787df473640aa4c61513c66ead330cea4468c825235b644f0f0cc"
+    },
+    "native-invalid-directory.json": {
+      "bytes": 6547,
+      "sha256": "2f445aea9c9d60cbb3e68457db688ac9e9a27b285e720887ff44ef33ea08d78c"
+    },
+    "native-lock-driver.py": {
+      "bytes": 378,
+      "sha256": "b3372b7afe8bfa9945c8d5df7a2b56f2f31098c495745bcdfd528391d3afeec2"
+    },
+    "native-meta.json": {
+      "bytes": 3132,
+      "sha256": "fb7bd27ac1db08cf8869b301fe2c1b5c2b6dcb3db544723a0df5766a6373f7ad"
+    },
+    "native-qa-driver.py": {
+      "bytes": 2948,
+      "sha256": "1d65e0b73244403508584d25bf1df0f9205e3bc7b040d09c84e3d8028242ee25"
+    },
+    "native-recovered.json": {
+      "bytes": 6941,
+      "sha256": "8ff5d5276ed03d5afab82ed905ee7afd458d535f2a9ee8a012a589135ff7869e"
+    },
+    "native-replacement.json": {
+      "bytes": 6941,
+      "sha256": "09d9d657637346444ed1d9b40aa7aacaa6f4690ade4a5852d840405d4a4526ac"
+    },
+    "native-three-recent.json": {
+      "bytes": 4274,
+      "sha256": "e2df0a9067fa70f8678fa14076efa33e4269e5af0951f2271abe1bd11f2866cb"
+    },
+    "offline-binary-sha256.txt": {
+      "bytes": 64,
+      "sha256": "b3e03f88d40d4b786f2f68339cee86285755a544f02e9e82df0c557f2514e5ad"
+    },
+    "offline-initial.png": {
+      "bytes": 88574,
+      "sha256": "17886a4d5fd00956d4752874150ab8ece3f253c9039a123a9b4ebfe64abb278f"
+    },
+    "offline-menu.png": {
+      "bytes": 90570,
+      "sha256": "003e59f99758f8c4dba96d76694cdbb78a5fad5f3628b86ee05eddfa216d6a8f"
+    },
+    "offline-prefill.png": {
+      "bytes": 87853,
+      "sha256": "9a3b79a5fc656e5819c13a63623ad1f7484ac4e2a26cb3ea5b4e89b48cf9236e"
+    },
+    "offline-steady.png": {
+      "bytes": 87927,
+      "sha256": "9590921543b13378391cb41eaabacc1fba25e1f625a627390ed474959b9e6090"
+    },
+    "pins.log": {
+      "bytes": 311,
+      "sha256": "2b6114c9073a5568d4ccbfe1407c4ca870442924727aa5b6eeec36b6d8cb7069"
+    },
+    "recovered.png": {
+      "bytes": 124459,
+      "sha256": "a1589ba5da446f6d6a5e7885132146b01df5fd4b378a4847909f7bf76b7ba3ac"
+    },
+    "replacement.png": {
+      "bytes": 91156,
+      "sha256": "11e763a4c3d1d345f72bb3094a2099212d4b0953579bbbc9d49c80edd428a2ad"
+    },
+    "save-failed.png": {
+      "bytes": 139722,
+      "sha256": "193ae2935aedfbd2ba86403e06eb4df3c51b6c95cdc0b4d8045df4d035f552b6"
+    },
+    "small-menu.png": {
+      "bytes": 96681,
+      "sha256": "3253c1b77db3be1b21ffb33ea0ae5776a12d8387665d658256e8888cf0bffc22"
+    },
+    "smoke.log": {
+      "bytes": 160,
+      "sha256": "7bad9c6749f582ec77aaf4e74f122710953d6abd4505a601c7bdd119d3163b66"
+    },
+    "tests.log": {
+      "bytes": 13586,
+      "sha256": "b44372e6264a3cf6f6f828d9323daa7f233eebc3de325c7cd040da3651753112"
+    },
+    "three.png": {
+      "bytes": 125165,
+      "sha256": "eca5a51e8132ae2ea49658328b71e2989393ec6e49a478280bd3d50cdc553eac"
+    },
+    "unit.log": {
+      "bytes": 653,
+      "sha256": "981a2f94e36f4a61b41c43042585cb41c34748178099bbae22c25199ae27e9fc"
+    },
+    "windows-clippy.log": {
+      "bytes": 232,
+      "sha256": "f199c087e9934994e8d715c203143905cac9ed7000b64a527f8e76a1a2f3d721"
+    }
+  }
+}

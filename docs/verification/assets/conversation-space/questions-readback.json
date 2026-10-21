@@ -1,0 +1,69 @@
+{
+  "response": "query",
+  "data": {
+    "message": {
+      "id": "query:02a25dbc-08a2-4644-9a0c-78246b73d20d",
+      "result": {
+        "thread": {
+          "cwd": "/tmp/fleetpane-layout-20261021",
+          "historyMode": "paginated",
+          "id": "fixture-thread-1",
+          "name": null,
+          "preview": "[questions]",
+          "status": {
+            "type": "idle"
+          },
+          "turns": [
+            {
+              "error": null,
+              "fixtureOptions": {},
+              "id": "fixture-thread-1-turn-1",
+              "items": [
+                {
+                  "content": [
+                    {
+                      "text": "Visible Codex history",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "user-fixture-thread-1-turn-1",
+                  "type": "userMessage"
+                },
+                {
+                  "id": "assistant-fixture-thread-1-turn-1",
+                  "text": "Echo: Visible Codex history",
+                  "type": "agentMessage"
+                }
+              ],
+              "status": "completed"
+            },
+            {
+              "error": null,
+              "fixtureOptions": {},
+              "id": "fixture-thread-1-turn-2",
+              "items": [
+                {
+                  "content": [
+                    {
+                      "text": "[questions]",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "user-fixture-thread-1-turn-2",
+                  "type": "userMessage"
+                },
+                {
+                  "id": "assistant-fixture-thread-1-turn-2",
+                  "text": "Echo: Answers received: {\"answers\": {\"language\": {\"answers\": [\"Rust (Recommended)\"]}, \"notes\": {\"answers\": [\"user_note: \u5e03\u5c40\u9a8c\u8bc1  exact note\"]}}}",
+                  "type": "agentMessage"
+                }
+              ],
+              "status": "completed"
+            }
+          ]
+        }
+      }
+    },
+    "sequence": 30
+  }
+}

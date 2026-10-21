@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-21",
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "uncommitted": true,
+  "platform": "Linux",
+  "providers": "Codex/ACP protocol fixtures; real PTYs; no model requests",
+  "sources": {
+    "crates/runtime/src/lib.rs": "43c2e5e0989559cf490de7b9ef1df2b69e2768f02daf3b6769da7660e56e2b79",
+    "crates/runtime/src/journal.rs": "183a8d1de22c7076226020aeecd7d01e3203efb0aee0e2a47c88ac214be6fbc1",
+    "crates/runtime/src/unix.rs": "c409cff39d2b952c7282f97ffa361ee4fbc935e23dc66e5a382277af7f50a4d9",
+    "crates/runtime/src/terminal.rs": "c23d4c580486bdea7acdd2124ba980e9d90b585dad053845d1d8dab55b8f9db0",
+    "crates/runtime/src/terminal/host.rs": "15a86e0f9a854e00753db6d9cbab9ff0257fdaa857e5cb3263c16a5a0d5f7a46",
+    "crates/session/src/routing.rs": "7506c9003b19ca9ae94d8fd5ec99f7fc612ba1260c0b154900e7445b3e62647a",
+    "scripts/terminal-smoke.py": "2d9100ba1c83af693b11c2c8d82e74b55a8b5e01db3666d3123bc95d7744a0b3",
+    "docs/reference/paseo-replay.json": "5ad4e03902325d833c2989b66ff5ad97ae49c3974dae447f104a4619c46fb580"
+  },
+  "binary_sha256": "0324d1d2e5f5644410f5ffb6dd4e29575ed9213517ea936efc30b4e22c70b4ed",
+  "logs": {
+    "before.log": {
+      "sha256": "08663fec6de23e7fe1c4943db60c4ebbe6f96ec6a3b9e4ec80379e3c37cd3ff8",
+      "bytes": 928
+    },
+    "smoke.json": {
+      "sha256": "a1119a41c55e64ee9fc7068e912b03e1e9e059f98b511d69395fbb9e9cae845f",
+      "bytes": 1613
+    },
+    "tests.log": {
+      "sha256": "a5902ca0be7f87cfbd62b96b24f2871e90e655724dc910ed95f6c7dd21aea0bc",
+      "bytes": 10745
+    },
+    "clippy.log": {
+      "sha256": "0befa378e7d1b7347014a22515944b8e88121bde177f21f28f9b930a0279fcd9",
+      "bytes": 322
+    },
+    "build.log": {
+      "sha256": "015482073d7e3abb6c641ecb607be61042d1c7b525ce14aedeac7714fe603a57",
+      "bytes": 142
+    },
+    "desktop-tests.log": {
+      "sha256": "4f54405a0ac0427d76b34aa8895e44e96b5c5cfb676bc15ec880c0914c5d7dc1",
+      "bytes": 1224
+    },
+    "desktop-clippy.log": {
+      "sha256": "ea635cf55c5415ae95c8008d1e730b1b51f4bd854481b335d7cc9871c49f4a4f",
+      "bytes": 328
+    },
+    "session.log": {
+      "sha256": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0",
+      "bytes": 258
+    },
+    "drain.log": {
+      "sha256": "78f7643249e280be2671142dc62b9ebde692877ae27416750612d0c4e470bf57",
+      "bytes": 664
+    },
+    "acp.log": {
+      "sha256": "30f220c83def4ab4d5096c3e3c90b397b0dea32645110db33daf3b2cc0682392",
+      "bytes": 218
+    },
+    "journal.log": {
+      "sha256": "fbff345103470708c64a596aec9b26ef9067242c99ee1c64ca336b12284d2663",
+      "bytes": 226
+    },
+    "query.log": {
+      "sha256": "00da5133503abc7dc9281246319af1c789934314fdc23a031c6e7dca3b91f204",
+      "bytes": 238
+    },
+    "runtime.log": {
+      "sha256": "dee9ad92e77eb274c42de9e8914e59520a64a30a9da56e89479c8c0a10e05036",
+      "bytes": 189
+    },
+    "reader-tests.log": {
+      "sha256": "57fe39b00c82f9e5d7c8a20a6eca4c55cdcf75f84e124c096395e9e52eb9e7a2",
+      "bytes": 112
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    }
+  },
+  "test_counts": {
+    "tests.log": 104,
+    "desktop-tests.log": 7
+  },
+  "history_review": {
+    "first_ordinal": 1,
+    "last_ordinal": 34,
+    "last_revision": "af67235997052b435ab3c2db1a9e50b0991fe8ab",
+    "next_revision": "c5b24d3dfc7b4b55f951e5b7809f8e95374c2fa5",
+    "next_ordinal": 35
+  },
+  "cleanup": [
+    {
+      "kind": "host_pid",
+      "pid": 2399287,
+      "absent": true
+    },
+    {
+      "kind": "provider_pid",
+      "pid": 2399289,
+      "absent": true
+    },
+    {
+      "kind": "shell_pid",
+      "pid": 2399295,
+      "absent": true
+    },
+    {
+      "kind": "fault_shell_pid",
+      "pid": 2400354,
+      "absent": true
+    },
+    {
+      "kind": "journal_shell_pid",
+      "pid": 2400677,
+      "absent": true
+    },
+    {
+      "kind": "host_pid",
+      "pid": 2400699,
+      "absent": true
+    },
+    {
+      "kind": "provider_pid",
+      "pid": 2400702,
+      "absent": true
+    },
+    {
+      "kind": "shell_pid",
+      "pid": 2400710,
+      "absent": true
+    },
+    {
+      "kind": "fault_shell_pid",
+      "pid": 2402064,
+      "absent": true
+    },
+    {
+      "kind": "journal_shell_pid",
+      "pid": 2402924,
+      "absent": true
+    }
+  ],
+  "limits": [
+    "No native terminal rendering or visual acceptance in this receipt",
+    "No provider recovery, Host update/handoff or terminal restart recovery",
+    "No real model, cross-platform, performance, remote CI or release acceptance"
+  ]
+}

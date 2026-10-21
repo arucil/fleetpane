@@ -1,0 +1,112 @@
+{
+  "d1fee6d1-23f2-4e83-aed7-a7d4532d0f34": {
+    "sessionId": "d1fee6d1-23f2-4e83-aed7-a7d4532d0f34",
+    "cwd": "/tmp/fleetpane-layout-20261021",
+    "title": "Synthetic ACP",
+    "configOptions": [
+      {
+        "id": "model",
+        "name": "Model",
+        "type": "select",
+        "category": "model",
+        "currentValue": "model-a",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "value": "model-a",
+                "name": "Synthetic A"
+              },
+              {
+                "value": "model-b",
+                "name": "Synthetic B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "type": "select",
+        "currentValue": "low",
+        "options": [
+          {
+            "value": "low",
+            "name": "Low"
+          },
+          {
+            "value": "high",
+            "name": "High"
+          }
+        ]
+      }
+    ],
+    "prompts": [
+      "Visible history baseline \u4e2d\u6587",
+      "[burst]",
+      "[tasks-future]",
+      "\u7b2c01\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c02\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c03\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c04\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c05\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c06\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c07\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c08\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c09\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c10\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c11\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c12\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c13\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c14\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c15\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c16\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c17\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c18\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c19\u884c  preserve exact text, double spaces and trailing spaces  \n\u7b2c20\u884c  preserve exact text, double spaces and trailing spaces  \n"
+    ],
+    "imagePrompts": [
+      [
+        {
+          "sha256": "1123213ba5d25c063664ab0c64d8991b03837d716b60fde0b700741cb86d35f3",
+          "bytes": 140,
+          "mimeType": "image/png"
+        }
+      ]
+    ]
+  },
+  "eb3e8688-4050-48f9-86a0-b4f7966e8ef3": {
+    "sessionId": "eb3e8688-4050-48f9-86a0-b4f7966e8ef3",
+    "cwd": "/tmp/fleetpane-layout-20261021",
+    "title": "Synthetic ACP",
+    "configOptions": [
+      {
+        "id": "model",
+        "name": "Model",
+        "type": "select",
+        "category": "model",
+        "currentValue": "model-a",
+        "options": [
+          {
+            "group": "synthetic",
+            "name": "Synthetic",
+            "options": [
+              {
+                "value": "model-a",
+                "name": "Synthetic A"
+              },
+              {
+                "value": "model-b",
+                "name": "Synthetic B"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "reasoning_effort",
+        "name": "Reasoning effort",
+        "type": "select",
+        "currentValue": "low",
+        "options": [
+          {
+            "value": "low",
+            "name": "Low"
+          },
+          {
+            "value": "high",
+            "name": "High"
+          }
+        ]
+      }
+    ],
+    "prompts": [
+      "[permission-review]"
+    ]
+  }
+}

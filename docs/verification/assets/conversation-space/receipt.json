@@ -1,0 +1,130 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted source; local Linux native fixtures; no commit/push/release",
+  "before_binary_sha256": "97dfd526b1fba38041cc9964a4c37d26721be0f09c04be38a86aff0f33146b43",
+  "accepted_binary_sha256": "9866e2863e7de6331e144f3aaef330e2b4adbb56fb99ab3f10d53f424b41f363",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "a426bd20bde68101337b3d44d6645ab8ed47d8fc91aba61853848b7df45b1dd9",
+    "apps/desktop/src/host_view/draft.rs": "0ff348c7229d7adbe5a86e3225fa56bc85889bc72e9a479c2eb0355073e6403b",
+    "apps/desktop/src/conversation_item.rs": "318ae3e9ea225789283e7367dee1b9c58af520651efcf9988403e1ba4c9a0b18",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237",
+    "scripts/acp-fixture.py": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711",
+    "scripts/provider-fixture.py": "d5b828cce52e282300b347c11068565fdf881a1c9591e17e06dc6b40e20b71d3"
+  },
+  "checks": [
+    "desktop format",
+    "desktop all-target strict Clippy",
+    "11 desktop tests",
+    "locked native build"
+  ],
+  "native": {
+    "workspace": "fleetpane-layout-20261021",
+    "apps": [
+      {
+        "id": "app-2747549",
+        "pid": 2747549,
+        "name": "Fleetpane layout baseline",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/tmp/fleetpane-layout-20261021/before-desktop",
+          "--hosts",
+          "/tmp/fleetpane-layout-20261021/hosts.json",
+          "--preferences-dir",
+          "/tmp/fleetpane-layout-20261021/prefs"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792535451,
+        "stopped_at_unix": 1792535525
+      },
+      {
+        "id": "app-2752409",
+        "pid": 2752409,
+        "name": "Fleetpane remaining space layout",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--hosts",
+          "/tmp/fleetpane-layout-20261021/hosts.json",
+          "--preferences-dir",
+          "/tmp/fleetpane-layout-20261021/prefs"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792535562,
+        "stopped_at_unix": 1792535725
+      },
+      {
+        "id": "app-2759419",
+        "pid": 2759419,
+        "name": "Fleetpane question layout regression",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--hosts",
+          "/tmp/fleetpane-layout-20261021/hosts.json",
+          "--preferences-dir",
+          "/tmp/fleetpane-layout-20261021/prefs"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792535739,
+        "stopped_at_unix": 1792535842
+      }
+    ],
+    "scope": [
+      "900x560 before/after",
+      "exact draft copy/send and original PNG readback",
+      "history and details independent scrolling",
+      "Skip and Stop target isolation",
+      "model overlay and resize",
+      "two-question Codex fixture submission; separate ACP Host unchanged"
+    ],
+    "all_readback_assertions": true,
+    "owned_cleanup": true
+  },
+  "limits": [
+    "No external model/hosted CI/release acceptance",
+    "No universal height guarantee under unbounded outer banners",
+    "No FPS, IME, image picker or keyboard-only reacceptance"
+  ],
+  "artifacts": {
+    "accessories.png": "f09a420d5f76b2e84a87622ff3c18c64f9fb916e85c2b5ff5d6ef19c6944363d",
+    "acp-closed-snapshot.json": "33dbe6664b8f5be54a732ea5590afab4482a386cb6cea2bf28a722dddd8bca54",
+    "after-scroll-drafts.json": "14b004259a399863155c31d94d8dfcfd013bf8aefd532fe5698bce34f691d360",
+    "after-scroll-snapshot.json": "67fee83620b18a8b39fe825dcf555092390f6dac612bba6ea97b393bd0be64d5",
+    "after-send-snapshot.json": "6412b05212341f5e11aaffe400de11fa9da43bffc7b6f0d2a217cd6079e40a91",
+    "after-skip-snapshot.json": "e7beec2b41e5c2e475311d091b1b06f2f837dcc68032be4b8746fe6b075f54ee",
+    "after-stop-snapshot.json": "33dbe6664b8f5be54a732ea5590afab4482a386cb6cea2bf28a722dddd8bca54",
+    "after.png": "3d103cfe7f79046721453ef247eb975f84fefa0111da7aae44b1f3b66055134d",
+    "answered.png": "25fbc93fa2f86b64be77618fd4365b19b668f22b10d73aac1a3dad0a1616191d",
+    "approval.png": "5425c5d5e5146acd8530b45dd0063e9b5c3a80061f45098bbdd79dde62c090dd",
+    "before-small-drafts.json": "14b004259a399863155c31d94d8dfcfd013bf8aefd532fe5698bce34f691d360",
+    "before-small-snapshot.json": "fa8ae370a72064b424f23db1317106bf9947393eff30581133632ee94bbbe895",
+    "before.png": "0445b2ab761c147c9c26e87d3a48824a42674bac664eba8e2b4d059cb854725c",
+    "build.log": "391c14d78b65f437727230a6acc00b3bce827e8c585955c40853dc367f5f6aef",
+    "cleanup.json": "acdcf922bf1a5edbeb4a4202f238dc2157bf946204ae0aec76d77db75868fc3f",
+    "clippy.log": "5a5c48cc268d7b5542ced11c4fd3e4274c444f8fef44f140e351a6c03eb4ff02",
+    "copy-readback.json": "abe7f75e3a9a094fb2227883b3ee700320a552b493ac8aaa2acfca8a11d09a24",
+    "draft-initial.json": "ade8ff3f59e321413ebe50540bcb90bac7827dc3432998f31ea92c324c3a55be",
+    "draft.txt": "5aa3022623688f6e7dc2c5210462524b17db618f5b29c20c69e0df22ff1d531d",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "history.png": "85ac3a21cfbd8cd74dfa5edace3fb9f8dcf02de9c58c7ceb8198ba2e2df61bff",
+    "layout.diff": "49b6eafd51fbfc18a3b704b61e97e0c61adc087b5b453c396bb760d4625b99c4",
+    "menu.png": "2cb34bfdd7209c7c42422739c30b0aa8b31d1a06c9f663eb46ed48f2ac72005c",
+    "native-cleanup.json": "cd23b2fb3c36789ebdc348a4027b2e0dd79445ea87f58c8c7c53d931fae5810e",
+    "question.png": "9bbea460fcc16aec5e5b1ad5a31810ddd8a74cb51706944a638f707334a49968",
+    "questions-final-snapshot.json": "1a0d0ed6ab94590ecb357e99c06628295b4debf247a50f1af6b45dbd3c192272",
+    "questions-finished-snapshot.json": "33dbe6664b8f5be54a732ea5590afab4482a386cb6cea2bf28a722dddd8bca54",
+    "questions-readback.json": "ab7b0ab48a0cd457ae5c05ed6eeda6377bd0c67d270ba704774b0e881e63c13c",
+    "questions-setup.json": "8ed35ed2dc000c8f10f85992c851271eb5708ab8a337e21594e0c66111713ba2",
+    "sent-fixture.json": "50b5d8f27dfc98936482d06e4255aa8ed5b6d615ea9813a514ffe67d102cf998",
+    "sent.png": "99a7587fa34f8b4273180e9c97b32c8937f61c6a8f03cd700465424de46c65cb",
+    "setup.json": "a5cd058a2af3c9a9d4801621e926dce03270c1a81d69335f53954a3f8d091f73",
+    "synthetic.png": "1123213ba5d25c063664ab0c64d8991b03837d716b60fde0b700741cb86d35f3",
+    "tests.log": "ea25d8047e6b6b00ce4656637694389883eafd17c44999d0bdb48b8a99115fa0"
+  }
+}

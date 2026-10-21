@@ -1,0 +1,102 @@
+{
+  "ok": true,
+  "message": "workspace stopped",
+  "status": {
+    "id": "default",
+    "session_id": "session-default-1792573573237-119938",
+    "purpose": "Fleetpane synthetic DSH v4 offline archive native acceptance",
+    "user_acknowledged_hidden_workspace": true,
+    "user_acknowledged_unenforced_policy": false,
+    "ready": false,
+    "started_at_unix": 1792573573,
+    "display": ":92",
+    "width": 1500,
+    "height": 1100,
+    "runtime_dir": "/run/user/1000/agent-workspace-linux/default",
+    "socket_path": "/run/user/1000/agent-workspace-linux/default/control.sock",
+    "xauthority_path": "/run/user/1000/agent-workspace-linux/default/Xauthority",
+    "daemon_pid": 3956850,
+    "x_server_pid": 3956967,
+    "window_manager_pid": 3957403,
+    "last_event_sequence": 44,
+    "apps": []
+  },
+  "apps": [
+    {
+      "id": "app-4166118",
+      "name": "fleetpane-dsh-v4",
+      "pid": 4166118,
+      "process_group_id": 4166118,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fp-dsh-v4-native/hosts.json",
+        "--preferences-dir",
+        "/tmp/fp-dsh-v4-native/preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "PASEO_HOME",
+          "value": "/tmp/fp-dsh-v4-native/paseo"
+        },
+        {
+          "name": "DSH_HOME",
+          "value": "/tmp/fp-dsh-v4-native/dsh"
+        },
+        {
+          "name": "CODEX_HOME",
+          "value": "/tmp/fp-dsh-v4-native/unused-codex"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/default/apps/app-4166118.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/default/apps/app-4166118.stderr.log",
+      "started_at_unix": 1792573790,
+      "running": false,
+      "exit_status": "signal: 15 (SIGTERM)",
+      "exit_signal": 15,
+      "stopped_at_unix": 1792574144,
+      "runtime_seconds": 354
+    },
+    {
+      "id": "app-17177",
+      "name": "fleetpane-dsh-v4-reopen",
+      "pid": 17177,
+      "process_group_id": 17177,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fp-dsh-v4-native/hosts.json",
+        "--preferences-dir",
+        "/tmp/fp-dsh-v4-native/preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "env": [
+        {
+          "name": "PASEO_HOME",
+          "value": "/tmp/fp-dsh-v4-native/paseo"
+        },
+        {
+          "name": "DSH_HOME",
+          "value": "/tmp/fp-dsh-v4-native/dsh"
+        },
+        {
+          "name": "CODEX_HOME",
+          "value": "/tmp/fp-dsh-v4-native/unused-codex"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/default/apps/app-17177.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/default/apps/app-17177.stderr.log",
+      "started_at_unix": 1792573975,
+      "running": false,
+      "exit_status": "signal: 15 (SIGTERM)",
+      "exit_signal": 15,
+      "stopped_at_unix": 1792574145,
+      "runtime_seconds": 170
+    }
+  ]
+}

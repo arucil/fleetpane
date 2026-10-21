@@ -1,0 +1,145 @@
+commit d2313b9d1c1540fbe8a1de66788e14a2eca68cbd
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 18:49:42 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 18:49:42 2025 +0200
+
+    refactor: memoize useWebSocket return value and improve formatting consistency
+
+diff --git a/packages/server/src/server/acp/types.ts b/packages/server/src/server/acp/types.ts
+index 56a551f3a..286f33d51 100644
+--- a/packages/server/src/server/acp/types.ts
++++ b/packages/server/src/server/acp/types.ts
+@@ -1,21 +1,43 @@
+-import type { SessionNotification, RequestPermissionRequest, ClientSideConnection } from "@agentclientprotocol/sdk";
++import type {
++  SessionNotification,
++  RequestPermissionRequest,
++  ClientSideConnection,
++} from "@agentclientprotocol/sdk";
+ import type { ChildProcess } from "child_process";
+ 
+ /**
+  * Extended update types with messageId for proper deduplication
+  * messageId is optional since some sources may not provide it
+  */
+-type UserMessageChunkWithId = Extract<SessionNotification['update'], { sessionUpdate: 'user_message_chunk' }> & { messageId?: string };
+-type AgentMessageChunkWithId = Extract<SessionNotification['update'], { sessionUpdate: 'agent_message_chunk' }> & { messageId?: string };
+-type AgentThoughtChunkWithId = Extract<SessionNotification['update'], { sessionUpdate: 'agent_thought_chunk' }> & { messageId?: string };
++type UserMessageChunkWithId = Extract<
++  SessionNotification["update"],
++  { sessionUpdate: "user_message_chunk" }
++> & { messageId?: string };
++type AgentMessageChunkWithId = Extract<
++  SessionNotification["update"],
++  { sessionUpdate: "agent_message_chunk" }
++> & { messageId?: string };
++type AgentThoughtChunkWithId = Extract<
++  SessionNotification["update"],
++  { sessionUpdate: "agent_thought_chunk" }
++> & { messageId?: string };
+ 
+ export type EnrichedSessionUpdate =
+   | UserMessageChunkWithId
+   | AgentMessageChunkWithId
+   | AgentThoughtChunkWithId
+-  | Exclude<SessionNotification['update'], { sessionUpdate: 'user_message_chunk' | 'agent_message_chunk' | 'agent_thought_chunk' }>;
++  | Exclude<
++      SessionNotification["update"],
++      {
++        sessionUpdate:
++          | "user_message_chunk"
++          | "agent_message_chunk"
++          | "agent_thought_chunk";
++      }
++    >;
+ 
+-export interface EnrichedSessionNotification extends Omit<SessionNotification, 'update'> {
++export interface EnrichedSessionNotification
++  extends Omit<SessionNotification, "update"> {
+   update: EnrichedSessionUpdate;
+ }
+ 
+@@ -23,10 +45,15 @@ export interface EnrichedSessionNotification extends Omit<SessionNotification, '
+  * Discriminated union for all notification types in the agent update stream
+  */
+ export type AgentNotification =
+-  | { type: 'session'; notification: EnrichedSessionNotification }
+-  | { type: 'permission'; requestId: string; request: RequestPermissionRequest }
+-  | { type: 'permission_resolved'; requestId: string; agentId: string; optionId: string }
+-  | { type: 'status'; status: AgentStatus; error?: string };
++  | { type: "session"; notification: EnrichedSessionNotification }
++  | { type: "permission"; requestId: string; request: RequestPermissionRequest }
++  | {
++      type: "permission_resolved";
++      requestId: string;
++      agentId: string;
++      optionId: string;
++    }
++  | { type: "status"; status: AgentStatus; error?: string };
+ 
+ /**
+  * Status of an agent
+@@ -64,7 +91,11 @@ export interface AgentRuntime {
+  * Discriminated union for agent state
+  */
+ export type ManagedAgentState =
+-  | { type: "uninitialized"; persistedSessionId: string | null; lastError?: string }
++  | {
++      type: "uninitialized";
++      persistedSessionId: string | null;
++      lastError?: string;
++    }
+   | {
+       type: "initializing";
+       persistedSessionId: string | null;
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 1e30b2d16..cbaec27fe 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -284,7 +284,8 @@ export class Session {
+     const hasUserMessage = updates.some(
+       (update) =>
+         update.notification.type === "session" &&
+-        update.notification.notification.update.sessionUpdate === "user_message_chunk"
++        update.notification.notification.update.sessionUpdate ===
++          "user_message_chunk"
+     );
+ 
+     // Need at least one user message and some additional updates (3-5) for context
+@@ -467,14 +468,15 @@ export class Session {
+           break;
+ 
+         case "create_agent_request":
+-          await this.handleCreateAgentRequest(msg.cwd, msg.initialMode, msg.requestId);
++          await this.handleCreateAgentRequest(
++            msg.cwd,
++            msg.initialMode,
++            msg.requestId
++          );
+           break;
+ 
+         case "initialize_agent_request":
+-          await this.handleInitializeAgentRequest(
+-            msg.agentId,
+-            msg.requestId
+-          );
++          await this.handleInitializeAgentRequest(msg.agentId, msg.requestId);
+           break;
+ 
+         case "set_agent_mode":
+@@ -790,8 +792,12 @@ export class Session {
+       this.subscribeToAgent(agentId);
+ 
+       // Auto-initialize agent immediately on explicit creation so it's ready to use
+-      console.log(`[Session ${this.clientId}] Auto-initializing agent ${agentId}`);
+-      const { info } = await this.agentManager.initializeAgentAndGetHistory(agentId);
++      console.log(
++        `[Session ${this.clientId}] Auto-initializing agent ${agentId}`
++      );
++      const { info } = await this.agentManager.initializeAgentAndGetHistory(
++        agentId
++      );
+ 
+       // Emit agent_created message with initialized info
+       this.emit({

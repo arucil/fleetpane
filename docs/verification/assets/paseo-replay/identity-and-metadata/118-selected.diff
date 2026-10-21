@@ -1,0 +1,88 @@
+commit 604e3594372a66f303bd273630cb494b00727f82
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 07:59:35 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 07:59:35 2025 +0100
+
+    test(agent-manager): add test for loading persisted agent and sending new prompt
+
+diff --git a/packages/server/src/server/acp/agent-manager.test.ts b/packages/server/src/server/acp/agent-manager.test.ts
+index cec348030..75bcb1d46 100644
+--- a/packages/server/src/server/acp/agent-manager.test.ts
++++ b/packages/server/src/server/acp/agent-manager.test.ts
+@@ -86,4 +86,55 @@ describe("AgentManager", () => {
+     },
+     120000
+   );
++
++  it(
++    "should load persisted agent and send new prompt",
++    async () => {
++      const agentId = await manager.createAgent({
++        cwd: tmpDir,
++      });
++
++      await manager.sendPrompt(agentId, "echo 'first message'");
++
++      let status = manager.getAgentStatus(agentId);
++      let attempts = 0;
++      while (status !== "completed" && status !== "failed" && attempts < 60) {
++        await new Promise((resolve) => setTimeout(resolve, 1000));
++        status = manager.getAgentStatus(agentId);
++        attempts++;
++      }
++
++      expect(status).toBe("completed");
++
++      await manager.killAgent(agentId);
++
++      const newManager = new AgentManager();
++      await newManager.initialize();
++
++      const agents = newManager.listAgents();
++      const loadedAgent = agents.find((a) => a.id === agentId);
++
++      expect(loadedAgent).toBeDefined();
++      expect(loadedAgent?.id).toBe(agentId);
++      expect(loadedAgent?.cwd).toBe(tmpDir);
++
++      await newManager.sendPrompt(agentId, "echo 'second message'");
++
++      status = newManager.getAgentStatus(agentId);
++      attempts = 0;
++      while (status !== "completed" && status !== "failed" && attempts < 60) {
++        await new Promise((resolve) => setTimeout(resolve, 1000));
++        status = newManager.getAgentStatus(agentId);
++        attempts++;
++      }
++
++      expect(status).toBe("completed");
++
++      const finalUpdates = newManager.getAgentUpdates(agentId);
++      expect(finalUpdates.length).toBeGreaterThan(0);
++
++      await newManager.killAgent(agentId);
++    },
++    120000
++  );
+ });
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 894fad92a..76185ec83 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -510,12 +510,13 @@ export class AgentManager {
+     const runtime = this.getRuntime(agent);
+ 
+     // Persist current state before killing
++    // Clear sessionId so next start creates a new session
+     if (runtime) {
+       await this.persistence.upsert({
+         id: agent.id,
+         title: agent.title || `Agent ${agent.id.slice(0, 8)}`,
+-        sessionId: runtime.sessionId,
+-        options: agent.options,
++        sessionId: null,
++        options: { ...agent.options, sessionId: null },
+         createdAt: agent.createdAt.toISOString(),
+         lastActivityAt: agent.lastActivityAt.toISOString(),
+         cwd: agent.cwd,

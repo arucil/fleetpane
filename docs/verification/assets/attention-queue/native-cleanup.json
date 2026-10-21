@@ -1,0 +1,76 @@
+{
+  "host_groups": [
+    {
+      "host_pid": 2945431,
+      "members": [
+        {
+          "pid": 2945431,
+          "cmdline": "/home/amlo/Projects/Rust/fleetpane/target/debug/fleetpane-host serve /tmp/fleetpane-replay-145-20261021/native-0/host/control.sock /tmp/fleetpane-replay-145-20261021/native-0 python3 /home/amlo/Projects/Rust/fleetpane/scripts/provider-fixture.py",
+          "exe_sha256": "4f3a3de3015b6b92aad091ed46e00af493cf133645eb407e19964e4fce85af84"
+        },
+        {
+          "pid": 2945433,
+          "cmdline": "/home/amlo/.local/share/mise/installs/python/3.12.12/bin/python3.12 /home/amlo/Projects/Rust/fleetpane/scripts/provider-fixture.py",
+          "exe_sha256": "4304de9fdcd8465bbf4bf0814bb7abadd6d33971bab26ae38d1080c355fec983"
+        }
+      ]
+    },
+    {
+      "host_pid": 2945438,
+      "members": [
+        {
+          "pid": 2945438,
+          "cmdline": "/home/amlo/Projects/Rust/fleetpane/target/debug/fleetpane-host serve-acp /tmp/fleetpane-replay-145-20261021/native-1/host/control.sock /tmp/fleetpane-replay-145-20261021/native-1 python3 /home/amlo/Projects/Rust/fleetpane/scripts/acp-fixture.py",
+          "exe_sha256": "4f3a3de3015b6b92aad091ed46e00af493cf133645eb407e19964e4fce85af84"
+        },
+        {
+          "pid": 2945448,
+          "cmdline": "/home/amlo/.local/share/mise/installs/python/3.12.12/bin/python3.12 /home/amlo/Projects/Rust/fleetpane/scripts/acp-fixture.py",
+          "exe_sha256": "4304de9fdcd8465bbf4bf0814bb7abadd6d33971bab26ae38d1080c355fec983"
+        }
+      ]
+    },
+    {
+      "host_pid": 2945457,
+      "members": [
+        {
+          "pid": 2945457,
+          "cmdline": "/home/amlo/Projects/Rust/fleetpane/target/debug/fleetpane-host serve-acp /tmp/fleetpane-replay-145-20261021/native-2/host/control.sock /tmp/fleetpane-replay-145-20261021/native-2 python3 /home/amlo/Projects/Rust/fleetpane/scripts/acp-fixture.py",
+          "exe_sha256": "4f3a3de3015b6b92aad091ed46e00af493cf133645eb407e19964e4fce85af84"
+        },
+        {
+          "pid": 2945459,
+          "cmdline": "/home/amlo/.local/share/mise/installs/python/3.12.12/bin/python3.12 /home/amlo/Projects/Rust/fleetpane/scripts/acp-fixture.py",
+          "exe_sha256": "4304de9fdcd8465bbf4bf0814bb7abadd6d33971bab26ae38d1080c355fec983"
+        }
+      ]
+    },
+    {
+      "host_pid": 2964381,
+      "members": [
+        {
+          "pid": 2964381,
+          "cmdline": "/home/amlo/Projects/Rust/fleetpane/target/debug/fleetpane-host serve /tmp/fleetpane-replay-145-20261021/unowned/host/control.sock /tmp/fleetpane-replay-145-20261021/unowned python3 /home/amlo/Projects/Rust/fleetpane/scripts/provider-fixture.py",
+          "exe_sha256": "2f1cf6b23a9f77d9fb6c58b313db391cd2a8b535c749e55241eae9a0dcca7d9f"
+        },
+        {
+          "pid": 2964383,
+          "cmdline": "/home/amlo/.local/share/mise/installs/python/3.12.12/bin/python3.12 /home/amlo/Projects/Rust/fleetpane/scripts/provider-fixture.py",
+          "exe_sha256": "4304de9fdcd8465bbf4bf0814bb7abadd6d33971bab26ae38d1080c355fec983"
+        }
+      ]
+    }
+  ],
+  "all_processes_gone": true,
+  "sockets_removed": [
+    "/tmp/fleetpane-replay-145-20261021/native-0/host/control.sock",
+    "/tmp/fleetpane-replay-145-20261021/native-1/host/control.sock",
+    "/tmp/fleetpane-replay-145-20261021/native-2/host/control.sock",
+    "/tmp/fleetpane-replay-145-20261021/unowned/host/control.sock"
+  ],
+  "unowned_generations_gone": [
+    2963964,
+    2964381
+  ],
+  "desktop_binary_sha256": "58c3516a4c47c9c87d73f02d367f577ca31c9fa7e420f46555b5178056cbde9f"
+}

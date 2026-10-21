@@ -1,0 +1,82 @@
+{
+  "captured_sources": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+    }
+  ],
+  "review_batch": {
+    "first_ordinal": 125,
+    "last_ordinal": 127,
+    "last_revision": "d47019919e8082b308b7cdd507fb01fabc808aad",
+    "next_revision": "e82a7410e774f36e7f78b52c61418eb19d681c28",
+    "next_ordinal": 128
+  },
+  "prior_entries_1_to_124_unchanged_sha256": "11728847b6bf02ca40aaa4f7453f8d6c05a80a4714242dac42c563b80e2be3fe",
+  "selected_entries": [
+    {
+      "ordinal": 125,
+      "revision": "dcfdccf07f1bea64f8cca00ad405e3d8e93159a4",
+      "date": "2025-10-26T13:28:05+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/websocket-server.ts",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Adds worktree slug input and fixes footer callback dependencies; handles worktreeName with server-side tilde expansion and adds a shell Git utility. Utility infers repository shape from .git files, catches branch/worktree errors as missing-branch fallback, prunes globally and copies .env. Also emits audio transcription IDs, but the corresponding message schema fields arrive in 126.",
+      "fleetpane_action": "Keep existing shared typed planned/pinned worktree engine, identity checks, exact selected subdirectory and durable one-attempt failure evidence. Do not copy branch-error fallback, global prune, automatic .env copying or local-home assumptions into remote routing; existing-branch checkout, removal and supervised interrupted-Git recovery remain open."
+    },
+    {
+      "ordinal": 126,
+      "revision": "c4bb10d3c925c2dd41f00074a72a388c95f8d1b9",
+      "date": "2025-10-26T13:48:14+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/acp/mcp-server.ts",
+        "test-worktree-agent.ts",
+        "test-worktree-e2e.ts"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Adds worktreeName and transcription requestId to transport schemas and MCP worktree creation. New manual tests use the current real repository and direct manager/Session entry points, leave worktrees for manual cleanup, and include a type assertion; the first prints didComplete without asserting it. Voice overlay and frontend changes were not inspected.",
+      "fleetpane_action": "Shared GUI/CLI worktree planning and existing isolated Git/native acceptance already cover the selected subdirectory and provider cwd. Do not use direct Session tests as real WebSocket/browser acceptance or run destructive historical scripts against a user checkout. Voice remains PRD P2 and unimplemented."
+    },
+    {
+      "ordinal": 127,
+      "revision": "d47019919e8082b308b7cdd507fb01fabc808aad",
+      "date": "2025-10-26T15:03:33+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "inspection_scope": "Full text diffs of the listed paths. 125 covers all five changed text paths; 126 excludes voice/frontend/dummy/lock/saved-agent changes; 127 covers only agent-stream-view. No historical app, live model or unsafe manual test execution.",
+      "finding": "Selected path adds a floating scroll-to-bottom button, animations, a 10-pixel bottom threshold and verbose scroll logging. Other footer/screen/MCP changes in this commit were not inspected.",
+      "fleetpane_action": "Add explicit native Jump to latest using Kit follow-tail intent and existing scroll invalidation. Native page/upscroll, return, pause/resume of growing stream, exact draft and unrelated approval retention, Stop and normal close verified with private ACP fixture. Small-window controls remain reachable but minimum timeline height, unread counts and scroll restoration remain open."
+    }
+  ],
+  "artifacts": {
+    "125-selected.diff": "6162c4dd0efdd51b698195acf362006bb4f21c555d5c521d52fcc2800215e818",
+    "126-selected.diff": "2fafcd806659e453acba081b3a10062a2eaa679a8d78c124d3cb9e73b316ba1d",
+    "127-selected.diff": "e52607169cb843ce7174efeba843dd85393816e3c3664192d73b8d2ee42ebc5a"
+  },
+  "limits": [
+    "Explicit selected paths only; 126 voice/frontend excluded; 127 other footer/screen/MCP changes excluded",
+    "Source review is not historical runtime acceptance",
+    "No historical live-model/manual-script run",
+    "Existing worktree contract and new navigation each have separate evidence",
+    "User-deferred Git Diff remains deferred"
+  ]
+}

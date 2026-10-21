@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-21",
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "uncommitted local development verification; no remote CI or release",
+  "source_sha256": {
+    "crates/session/src/lib.rs": "fce7854bd4d3ec598db1a65a6d4570c68d1e143d87a9e512b564cd19015dab2a",
+    "apps/desktop/src/conversation_item.rs": "cf5fddeb54cfbc76410404a65b1615d6d7e4c5a81b49ea15c9c117c570c96cba",
+    "apps/desktop/src/host_view.rs": "b96c100978db39a851403d737c6ef74367c664247f316a4baf826eab482846e4",
+    "crates/runtime/src/acp.rs": "aff39ea91c0efccdd418e2c136eb0d15a20b24c7dd22f86c75770b7af3938af3",
+    "scripts/acp-fixture.py": "641b1ffca96411481d34fb7e87a3f9946b5f31876f5dceafdfd0ee98ee240f77",
+    "scripts/acp-stop-smoke.py": "e5ecb593adc23184c127739a90877c78f6ca44e7ea9fba718fbce3ba7cc43c3d",
+    ".github/workflows/ci.yml": "87d9023b9a78f263dbb70bdfc6654957bb1114e077d8a4131a0294c364140f14",
+    "Cargo.lock": "026e1d8a12ff8db8533ae5bdceda7a3d61dd56996e030ca448ba4e96963f2d00",
+    "apps/desktop/Cargo.lock": "60540f13f91b4eb127ccab1f67054d4eace380607b6d0b24e03ca568e80b6ca8"
+  },
+  "binaries_sha256": {
+    "target/debug/fleetpane-host": "5e66ddbdf5fbc05db7af4c832d1feddfb6dd15db57f6f8b789606f3596879ed4",
+    "apps/desktop/target/debug/fleetpane-desktop": "799c52346f3831423f304f24f0d841fca3abf917ec5ae6a6969ff7aa1abe5b13"
+  },
+  "root_tests_passed": 115,
+  "desktop_tests_passed": 9,
+  "linux_clippy": "PASS -D warnings for root and desktop",
+  "windows_check": "PASS root cross-target Clippy x86_64-pc-windows-gnu; no runtime/linking claim",
+  "regression_before_fix": {
+    "test": "stop_reason_survives_snapshots_and_completion_updates",
+    "exit_code": 101,
+    "observed": "Null instead of end_turn",
+    "log": "before.log"
+  },
+  "process": {
+    "provider": "synthetic ACP",
+    "admission_before_settlement": "PASS",
+    "silence_over_two_seconds_is_not_completion": "PASS",
+    "independent_session_progress_while_first_waits": "PASS",
+    "exact_stop_reasons_full_and_paged": [
+      "end_turn",
+      "max_tokens",
+      "max_turn_requests",
+      "refusal",
+      "cancelled"
+    ],
+    "exact_history_after_restart_without_replay": "PASS",
+    "owned_host_provider_pids_removed": 4
+  },
+  "native": {
+    "state": {
+      "socket": "/tmp/fleetpane-stop-reasons-qa/private/control.sock",
+      "pids": [
+        124365,
+        124367,
+        141938,
+        141940
+      ],
+      "host": "d6fb7717-8306-4dd2-a208-be98327b440c",
+      "thread": "01acf3a8-b9d8-4d6c-8eff-61b0d9c2b871",
+      "binaries": {
+        "target/debug/fleetpane-host": "5e66ddbdf5fbc05db7af4c832d1feddfb6dd15db57f6f8b789606f3596879ed4",
+        "apps/desktop/target/debug/fleetpane-desktop": "799c52346f3831423f304f24f0d841fca3abf917ec5ae6a6969ff7aa1abe5b13"
+      },
+      "host_after_restart": "370de6a3-b62a-466c-ab3e-f44df4b82341",
+      "desktop_pids": [
+        124985,
+        145477
+      ]
+    },
+    "reasons_in_observed_turn_order": [
+      "max_tokens",
+      "refusal",
+      "max_turn_requests",
+      "end_turn",
+      "cancelled"
+    ],
+    "retained_row_updates_after_actual_reply": true,
+    "copies": {
+      "max_tokens": {
+        "selection": "clipboard",
+        "content": "{\"id\":\"d52bd848-7a2c-4ee1-8cf0-01f70bd26139\",\"status\":\"completed\",\"stopReason\":\"max_tokens\",\"error\":null}",
+        "bytes": 105
+      },
+      "refusal": {
+        "selection": "clipboard",
+        "content": "{\"id\":\"d09c1cf5-72b4-498f-b852-51168ed1c598\",\"status\":\"completed\",\"stopReason\":\"refusal\",\"error\":null}",
+        "bytes": 102
+      },
+      "cancelled_after_restart": {
+        "selection": "clipboard",
+        "content": "{\"id\":\"0ddfea8c-091f-402b-95de-ec22732ec56b\",\"status\":\"interrupted\",\"stopReason\":\"cancelled\",\"error\":null}",
+        "bytes": 106
+      },
+      "window_close": {
+        "message": "workspace app stopped",
+        "apps": [
+          {
+            "pid": 145477,
+            "running": false,
+            "exit_code": 0,
+            "exit_status": "exit status: 0"
+          }
+        ]
+      }
+    },
+    "exact_turns_after_restart": true,
+    "archived_reason_without_resume": true,
+    "fixture_input_note": "The ordinary end_turn prompt is a combined literal bracket-string echo; cancellation is verified separately by its own prompt. Raw prompt log retained.",
+    "cleanup": {
+      "host_provider_pids": [
+        124365,
+        124367,
+        141938,
+        141940
+      ],
+      "all_absent": true,
+      "control_socket_absent": true,
+      "titlebar_close_exit_code": 0,
+      "host_healthy_after_desktop_close": true,
+      "private_fixture_only": true
+    },
+    "all_desktop_pids_absent": true,
+    "owned_hidden_workspace_sockets_absent": true
+  },
+  "other_process_checks": [
+    "session-smoke",
+    "acp-smoke",
+    "acp-history-smoke",
+    "acp-archive-smoke"
+  ],
+  "paseo_history": {
+    "first_ordinal": 1,
+    "last_ordinal": 48,
+    "last_revision": "f2daa86d30560df29db2cfcc81708536c5a224ee",
+    "next_revision": "ca43aae5346b124715039f8c68754cb1e16e9dc8",
+    "next_ordinal": 49
+  },
+  "limits": [
+    "Synthetic stop conditions; no real-model refusal/limit acceptance",
+    "No performance/capacity comparison",
+    "Windows compile check only; no Mac/Windows runtime acceptance",
+    "Host upgrades and external Agent MCP API remain open",
+    "Prior archive receipt is an older immutable source/binary snapshot"
+  ],
+  "evidence_sha256": {
+    "clippy.log": "5cb247255964d1edbb5c229fe545a07f51bf432459c6c5feecc6fe9f90ae10f0",
+    "process.json": "14a8544945d8a8c92361a66d7259a6937340f18b79b706dc05a9b4e61e778e68",
+    "cleanup.json": "b69d3f392cb5cec1edb5928fd0e471a560837163b4882214f001d9552c7b979a",
+    "acp.json": "6f6364f95b6f7d5da72762353410b474cfb77eed66461524d47206ec0a8a6873",
+    "native-window-close-observation.json": "9273e520cc713f4d699de5783095808761f1a7b885c17cf0681568c8d78ddd5a",
+    "native-copy.json": "72c5650ae42560229cdebb7b3e52f6ec1f21d37ab1a00b6e83675c011d8dca8c",
+    "archived.png": "2412c8579251a6582d0f2749a990c10e2b6905dcab6466e75b38d68fbf291abc",
+    "desktop-build.log": "9d459d62de5640fcd6841f212ac085d8938ec8272b7179c79d53fbf633b022d5",
+    "session.json": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0",
+    "windows-clippy.log": "fb3539b1af62f4d092a20ae6ba3b403c2fc0f6392d54d4b13810e19699875cfe",
+    "max_turn_requests.png": "9e08111de143d5f83e7ba6ef03889256027b5f65537e0528ecdf8ac3c4fa6149",
+    "native-before.json": "c5d7cabf3b7fa962b7da2934675b7577450b6d8da95e8d723109dd1f38ef58a2",
+    "end_turn.png": "10f1c5e888e1a54370219214403adf2ccb79d7feb4ebc55f8e70d7ebcedef63c",
+    "max_tokens.png": "67f3f4fe0499aee63305cd00b2d297cb1c2563911cf4b4dfbfcdf86d56f35c6e",
+    "desktop-clippy.log": "4fa4f33843c5c14a0c0db25634d22dfd0d053fb7c611f517b992278b044dbd09",
+    "cancelled.png": "2fdf715835df54c3cfa67c2e0aecfe6eda85d2680e5e8c0dc2400e8cc96800b3",
+    "refusal.png": "38720f76c8799b28a35d78f55630b272da2a237b626639d0767c8cf63e869585",
+    "tests.log": "f0d4be1600333bb46c7b196d21eb1c7903dd36b87b806b0b114275ccdb781528",
+    "native-after.json": "b1d43a3257fabfb318cd8f720d12f7b49f0c35b96ed0ec07f4ac12b1781aeca7",
+    "native-state.json": "2862e0c63f1a3eb0aa7dc5efd4745ff36260b7acc0eee33dc71634463b94030a",
+    "acp-history.json": "1c7cfb46d6a00ea9bd12bdefb5af11206fccbb9b96aad083f41c6e95a517b1be",
+    "desktop-tests.log": "bff044e4d260fa38559a3e7a7a968066cf35cdec6bf8f2cb65b34db9cdc94065",
+    "quiet.png": "13e5ad728fa6dda2763796f2415b32e37c1d8d9b3ebca937ab6a64913115aa38",
+    "before.log": "991af63253fd7eb4131585498a094d47e91f3a225a6ba36dfbdf72831160e6b7",
+    "native-prompt-count.txt": "21ccea68e7753cd22b9c7f3dbd2166157ef835690b14511f0d0ee275574ff0d8",
+    "acp-archive.json": "40024b8e0a65ae5f42dc65f367916c783d8836c6ef36d35c61275d1df41926d3"
+  }
+}

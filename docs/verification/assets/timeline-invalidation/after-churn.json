@@ -1,0 +1,198 @@
+{
+  "state": {
+    "protocol": 3,
+    "host_id": "8cea29d4-b658-4dab-b1e8-aa7dea22a697",
+    "host_pid": 1718881,
+    "provider_pid": 1718884,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "8cea29d4-b658-4dab-b1e8-aa7dea22a697",
+      "controller_id": "596d2d25-31bb-4257-a69c-8be75f237afc",
+      "generation": 6
+    },
+    "sequence": 346,
+    "operation_ids": [
+      "eaa003b3-b788-4824-8444-6765a29c1d47",
+      "75ed9ce6-9b43-477a-83a0-f2939955d628",
+      "28a0c954-1a40-4be4-b8b9-865e634c1686"
+    ],
+    "journal_total": 3,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "fault": null,
+    "fault_scope": null
+  },
+  "conversation": {
+    "records": 27,
+    "sha256": "f1f86e3fecd657cb5ab639346b8c4310a43a1643cad91d5176c72ed616aa122d"
+  },
+  "sessions": {
+    "94640a77-2710-46bb-a7ad-b055343a5228": {
+      "active": null,
+      "config": [
+        {
+          "category": "model",
+          "currentValue": "model-a",
+          "id": "model",
+          "name": "Model",
+          "options": [
+            {
+              "group": "synthetic",
+              "name": "Synthetic",
+              "options": [
+                {
+                  "name": "Synthetic A",
+                  "value": "model-a"
+                },
+                {
+                  "name": "Synthetic B",
+                  "value": "model-b"
+                }
+              ]
+            }
+          ],
+          "type": "select"
+        },
+        {
+          "currentValue": "low",
+          "id": "reasoning_effort",
+          "name": "Reasoning effort",
+          "options": [
+            {
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "name": "High",
+              "value": "high"
+            }
+          ],
+          "type": "select"
+        }
+      ],
+      "modes": {
+        "availableModes": [
+          {
+            "id": "ask",
+            "name": "Ask"
+          },
+          {
+            "description": "Change files 中文",
+            "id": "code",
+            "name": "Code"
+          },
+          {
+            "description": "Synthetic rejection",
+            "id": "restricted",
+            "name": "Restricted"
+          }
+        ],
+        "currentModeId": "ask"
+      },
+      "summary": {
+        "_meta": null,
+        "cwd": "/tmp/fleetpane-invalidation-native-20261021",
+        "sessionId": "94640a77-2710-46bb-a7ad-b055343a5228",
+        "title": "Background metadata 099",
+        "updatedAt": null
+      },
+      "turns": []
+    },
+    "af382f41-4417-4368-982c-65229322c7bf": {
+      "active": null,
+      "config": [
+        {
+          "category": "model",
+          "currentValue": "model-a",
+          "id": "model",
+          "name": "Model",
+          "options": [
+            {
+              "group": "synthetic",
+              "name": "Synthetic",
+              "options": [
+                {
+                  "name": "Synthetic A",
+                  "value": "model-a"
+                },
+                {
+                  "name": "Synthetic B",
+                  "value": "model-b"
+                }
+              ]
+            }
+          ],
+          "type": "select"
+        },
+        {
+          "currentValue": "low",
+          "id": "reasoning_effort",
+          "name": "Reasoning effort",
+          "options": [
+            {
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "name": "High",
+              "value": "high"
+            }
+          ],
+          "type": "select"
+        }
+      ],
+      "modes": {
+        "availableModes": [
+          {
+            "id": "ask",
+            "name": "Ask"
+          },
+          {
+            "description": "Change files 中文",
+            "id": "code",
+            "name": "Code"
+          },
+          {
+            "description": "Synthetic rejection",
+            "id": "restricted",
+            "name": "Restricted"
+          }
+        ],
+        "currentModeId": "code"
+      },
+      "summary": {
+        "_meta": null,
+        "cwd": "/tmp/fleetpane-invalidation-native-20261021",
+        "sessionId": "af382f41-4417-4368-982c-65229322c7bf",
+        "title": "Selected heavy history 099",
+        "updatedAt": null
+      },
+      "turns": []
+    }
+  }
+}

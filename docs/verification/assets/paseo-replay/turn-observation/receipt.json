@@ -1,0 +1,58 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "scope": "Selected path diffs only; no copied implementation, historical execution or dependency audit",
+  "prior_138_entries_unchanged": true,
+  "prior_ledger_sha256": "27dc30182d92ee0225c3c7f7708a24ed9a36007da82cfb1563361bfc23bc6707",
+  "prior_entries_canonical_sha256": "30c9261634e5ce66ba4122e05f2765664648983452ac781fb3957fbe2a4814dd",
+  "reviewed": [
+    {
+      "ordinal": 139,
+      "revision": "1d22fe46e77b6d3255417159d005de0366d6da3c",
+      "paths": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/agent-prompt.md",
+        "packages/server/src/server/acp/mcp-server.ts"
+      ],
+      "diff_sha256": "435568088c3092ab71ad17b5c0ec10429fbb91c0052a2fae98ff1fe9cf2d3b76",
+      "diff_bytes": 13440,
+      "diff_lines": 387,
+      "scope": "Full text diffs of all three changed paths, including prompt changes read solely as product/reference data, not current instructions. No historical app or model execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/1d22fe46e77b6d3255417159d005de0366d6da3c"
+    },
+    {
+      "ordinal": 140,
+      "revision": "a118fd3315fd9136f0b8ea23a9bc0567a514db5c",
+      "paths": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-types.ts",
+        "packages/server/src/server/acp/mcp-server.ts"
+      ],
+      "diff_sha256": "59b6ecdc72d75414418645cb1302cb12182f5518b06f29e1b96885c21bb22caf",
+      "diff_bytes": 27147,
+      "diff_lines": 721,
+      "scope": "Full text diffs of five listed source/test paths. Excludes historical AGENTS files, agent prompt, lockfile, app manifest and two manual worktree scripts. No historical live-agent test execution or dependency installation.",
+      "source": "https://github.com/getpaseo/paseo/commit/a118fd3315fd9136f0b8ea23a9bc0567a514db5c"
+    },
+    {
+      "ordinal": 141,
+      "revision": "30686df548b97a3a7b816140b3d87b7f505e50d7",
+      "paths": [
+        "packages/app/package.json"
+      ],
+      "diff_sha256": "87ea736053d1436b5b6ca90ccc9471a8d04306f867f4e4beab1ecc44c6b47df7",
+      "diff_bytes": 758,
+      "diff_lines": 21,
+      "scope": "Full text diff of app package manifest only. Excludes package-lock.json and historical .claude/CLAUDE.md. Dependency metadata inspection, not package audit or execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/30686df548b97a3a7b816140b3d87b7f505e50d7"
+    }
+  ],
+  "cursor": {
+    "first_ordinal": 1,
+    "last_ordinal": 141,
+    "last_revision": "30686df548b97a3a7b816140b3d87b7f505e50d7",
+    "next_revision": "c5b30ed8787080202e484299c644e3fcaf1f787b",
+    "next_ordinal": 142
+  }
+}

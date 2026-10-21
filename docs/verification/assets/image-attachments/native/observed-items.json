@@ -1,0 +1,54 @@
+[
+  {
+    "content": [
+      {
+        "text": "**ACP** Echo: ",
+        "type": "text"
+      }
+    ],
+    "id": "1e72a17e-4d19-4f3b-a502-4103b226034a:agent_message_chunk:id:answer",
+    "type": "acpMessage"
+  },
+  {
+    "content": [
+      "Synthetic ACP reasoning"
+    ],
+    "id": "1e72a17e-4d19-4f3b-a502-4103b226034a:agent_thought_chunk:id:thought",
+    "summary": [],
+    "type": "reasoning"
+  },
+  {
+    "call": {
+      "content": [
+        {
+          "content": {
+            "text": "Synthetic ACP tool output",
+            "type": "text"
+          },
+          "type": "content"
+        }
+      ],
+      "kind": "other",
+      "locations": [],
+      "rawInput": {
+        "text": ""
+      },
+      "sessionUpdate": "tool_call_update",
+      "status": "completed",
+      "title": "Synthetic tool",
+      "toolCallId": "call-b5cec22a-3eeb-4fe9-8beb-a2f06729dfad"
+    },
+    "id": "1e72a17e-4d19-4f3b-a502-4103b226034a:tool:call-b5cec22a-3eeb-4fe9-8beb-a2f06729dfad",
+    "type": "acpToolCall"
+  },
+  {
+    "content": [
+      {
+        "path": "/tmp/fleetpane-images-20261021/native-accepted/host/control.sock.attachments/ba488d6744bb1b2504adbbedeb54c226e083475b20057105caf9399735bc4e50.png",
+        "type": "localImage"
+      }
+    ],
+    "id": "user:1e72a17e-4d19-4f3b-a502-4103b226034a",
+    "type": "userMessage"
+  }
+]

@@ -1,0 +1,22 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 3.29s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-9c42c15a90689dbb)
+
+running 1 test
+test wait::tests::completion_before_a_stale_read_reply_is_still_observed ... FAILED
+
+failures:
+
+---- wait::tests::completion_before_a_stale_read_reply_is_still_observed stdout ----
+
+thread 'wait::tests::completion_before_a_stale_read_reply_is_still_observed' (2812074) panicked at crates/session/src/wait/tests.rs:192:5:
+Missed completion: Report { host_id: bef26f92-4881-4570-8e32-42dcae32a561, thread_id: "s", turn_id: "target", sequence: None, outcome: TimedOut }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    wait::tests::completion_before_a_stale_read_reply_is_still_observed
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.10s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

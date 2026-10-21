@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "base_revision": "c91d269247207a08898e264c81083df4fbd4e745",
+  "changes": "uncommitted",
+  "source_capture": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "url": "https://github.com/getpaseo/paseo",
+      "revision": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "url": "https://github.com/DonutLabs-ai/paseo",
+      "revision": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+    }
+  ],
+  "reference_checkout": {
+    "head": "a486b0558168c08890890e787d55cfb88c0d7256",
+    "index_sha256": "1300bf650646c333489cc0f676938be0ecd053e0e4dd6b98e8a2116a0d7ce385",
+    "status_sha256": "591924615ab42603690d333a71e5ef209f29c77d2310b9bac1b4871978524e4a"
+  },
+  "checkout_unchanged": true,
+  "root_index": {
+    "roots": [
+      "fee0f4fd285d2549ddad8d265fd4df69d1740bd0"
+    ],
+    "unique_commits": 6187,
+    "upstream": 6015,
+    "fork": 6058,
+    "common": 5886,
+    "fork_exclusive": 172,
+    "upstream_exclusive": 129,
+    "all_parents_precede_children": true
+  },
+  "review": {
+    "first_ordinal": 1,
+    "last_ordinal": 19,
+    "last_revision": "dabcf63ebc527289a64345119d58662b272f1065",
+    "next_revision": "40b199e32909412ef128e935c3b130fbaf910828",
+    "next_ordinal": 20
+  },
+  "reviewed_entries": 19,
+  "next_batch": {
+    "after": "dabcf63ebc527289a64345119d58662b272f1065",
+    "take": 25,
+    "returned": 25,
+    "has_more": true,
+    "next_after": "cf977968c62ed6d85398aacceabd2e682a521a10"
+  },
+  "existing_modes": {
+    "checkpoint_delta": 0,
+    "reference_delta": 680
+  },
+  "report_sha256": {
+    "roots.json": "b1482fa9239300cdab3d7edc05d952903359f6294d53ff3c39a15df0c5d23131",
+    "first-batch.json": "99f5361effe4f3c964548c04c8b865f5fe67357ca1a321222729821da2e73fab",
+    "next-batch.json": "6f9bd2bf97a09f9e13f32643fd609ec8ccdebec1cb4df503114952c04685e863"
+  },
+  "source_sha256": {
+    "scripts/paseo-history.py": "0a29f99f204bb9f993aaaa204ce2b3303fa586d0ee6f63bee1e55c348ccec3c1",
+    "scripts/tests/paseo_history_test.py": "f8b794d311f8d4d3d758ea7e488d59a9c37434250da6b7b1faa4126134d77405",
+    "docs/reference/paseo-replay.json": "198a708016ec6ee4db16d28b0195444382cdd70df79c2d305a39b39ea4fdcabf"
+  },
+  "limits": [
+    "Full indexing is not full semantic review",
+    "First 19 commits inspected; dependency payloads not audited",
+    "No new product/runtime feature or native GUI changed in this correction",
+    "No terminal acceptance, historical application execution, commit, push or remote CI"
+  ],
+  "checks": {
+    "python_tests": 13,
+    "python_result": "passed",
+    "ruff": "passed",
+    "format": "passed",
+    "git_diff_check": "passed",
+    "test_log_sha256": "f91d5a1d322609d30b287f91e6eca58c3005830f479f926ab88cfa0533fff797"
+  }
+}

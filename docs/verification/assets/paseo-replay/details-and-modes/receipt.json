@@ -1,0 +1,85 @@
+{
+  "scope": "continuous scoped review 87-92; ordinal91 partial hunks only, raw artifact includes unread hunks",
+  "captured_sources": [
+    {
+      "name": "upstream",
+      "ref": "refs/remotes/upstream/main",
+      "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624"
+    },
+    {
+      "name": "donut-fork",
+      "ref": "refs/remotes/origin/main",
+      "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e"
+    }
+  ],
+  "prefix_1_86_unchanged": true,
+  "next": {
+    "first_ordinal": 1,
+    "last_ordinal": 92,
+    "last_revision": "3483bd9afdc2abfc55e91b08fdc99bea2b36f3d2",
+    "next_revision": "9299bb5d4c083341c4af283e4616459558848fe5",
+    "next_ordinal": 93
+  },
+  "inspected_paths": {
+    "87": [
+      "packages/app/package.json",
+      "packages/app/src/components/agent-stream-view.tsx",
+      "packages/app/src/components/create-agent-modal.tsx",
+      "packages/app/src/components/message.tsx",
+      "packages/app/src/components/orchestrator-messages-view.tsx",
+      "packages/app/src/components/tool-call-bottom-sheet.tsx",
+      "packages/server/src/server/session.ts"
+    ],
+    "88": [
+      "packages/app/package.json"
+    ],
+    "89": [
+      "packages/app/src/components/agent-stream-view.tsx",
+      "packages/app/src/components/orchestrator-messages-view.tsx",
+      "packages/app/src/components/tool-call-bottom-sheet.tsx"
+    ],
+    "90": [
+      "packages/app/src/components/agent-stream-view.tsx",
+      "packages/app/src/components/orchestrator-messages-view.tsx",
+      "packages/app/src/components/tool-call-bottom-sheet.tsx",
+      "packages/app/src/contexts/session-context.tsx",
+      "packages/app/src/types/shared.ts",
+      "packages/app/src/types/stream.ts"
+    ],
+    "91": [
+      "packages/app/src/components/agent-stream-view.tsx",
+      "packages/app/src/components/message.tsx",
+      "packages/app/src/styles/theme.ts"
+    ],
+    "92": [
+      "packages/app/src/components/agent-status-bar.tsx",
+      "packages/server/src/server/acp/agent-manager.ts",
+      "packages/server/src/server/acp/agent-persistence.ts",
+      "packages/server/src/server/index.ts"
+    ]
+  },
+  "ordinal91_read_raw_line_ranges": [
+    [
+      1,
+      300
+    ],
+    [
+      762,
+      899
+    ],
+    [
+      1012,
+      1021
+    ]
+  ],
+  "artifacts": {
+    "87.diff": "ceb44e08af017dcd5c0385e87ff504c95ab99d9357496f939c535440f2e26a93",
+    "88.diff": "6846970c7e88beff9f4ec6badcbecf333f16b18728a7ef04a1a6699d564e9526",
+    "89.diff": "1c4c964f1d7600da396766a7f041efbbdfc18d814be2b7b919d11ace2c58a8c7",
+    "90.diff": "f4fb78449de247c6b38c678f09d180e3626db9efb9b3cd286d0496e34c3d54a0",
+    "91.diff": "a91d36d773a91bf803b3882d5c069357afcab1f43c2ffbc98504a1400622f654",
+    "92.diff": "0dda39e3fade2d85b5cd9beeb0e85119c46ca9445b39c864980bc81072c43674",
+    "history-tests.log": "f7ca0d857ac13e63fbb436ed589f85f134949cb62d018934f2b4692bf1bc42c8",
+    "validation.log": "2322ac0a2a5bc324da6afa6b150c21e39f2b024d358f4063cc426ca3ed59885d"
+  }
+}

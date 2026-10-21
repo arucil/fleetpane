@@ -1,0 +1,774 @@
+[
+  {
+    "kind": "session",
+    "id": "9816dacd-08c3-4b46-859a-f9afade3dc1b",
+    "parent": "",
+    "data": {
+      "active": null,
+      "config": [
+        {
+          "category": "model",
+          "currentValue": "model-a",
+          "id": "model",
+          "name": "Model",
+          "options": [
+            {
+              "group": "synthetic",
+              "name": "Synthetic",
+              "options": [
+                {
+                  "name": "Synthetic A",
+                  "value": "model-a"
+                },
+                {
+                  "name": "Synthetic B",
+                  "value": "model-b"
+                }
+              ]
+            }
+          ],
+          "type": "select"
+        },
+        {
+          "currentValue": "low",
+          "id": "reasoning_effort",
+          "name": "Reasoning effort",
+          "options": [
+            {
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "name": "High",
+              "value": "high"
+            }
+          ],
+          "type": "select"
+        }
+      ],
+      "modes": null,
+      "summary": {
+        "_meta": null,
+        "cwd": "/tmp/fleetpane-history-navigation-20261021",
+        "sessionId": "9816dacd-08c3-4b46-859a-f9afade3dc1b",
+        "title": null,
+        "updatedAt": null
+      },
+      "turns": []
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "parent": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 00",
+          "type": "text"
+        }
+      ],
+      "id": "user:cf8f37ee-d143-426b-88da-b07cf027ec4f",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:agent_thought_chunk:id:thought",
+    "parent": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:tool:call-2d8f6ef6-6b6f-4e0d-8514-a404136b45aa",
+    "parent": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 00"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-2d8f6ef6-6b6f-4e0d-8514-a404136b45aa"
+      },
+      "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:tool:call-2d8f6ef6-6b6f-4e0d-8514-a404136b45aa",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:agent_message_chunk:id:answer",
+    "parent": "cf8f37ee-d143-426b-88da-b07cf027ec4f",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 00",
+          "type": "text"
+        }
+      ],
+      "id": "cf8f37ee-d143-426b-88da-b07cf027ec4f:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "parent": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 01",
+          "type": "text"
+        }
+      ],
+      "id": "user:0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:agent_thought_chunk:id:thought",
+    "parent": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:tool:call-36c5c58d-8238-4b1b-8fce-314d8d2f874b",
+    "parent": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 01"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-36c5c58d-8238-4b1b-8fce-314d8d2f874b"
+      },
+      "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:tool:call-36c5c58d-8238-4b1b-8fce-314d8d2f874b",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:agent_message_chunk:id:answer",
+    "parent": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 01",
+          "type": "text"
+        }
+      ],
+      "id": "0605165b-d889-4d9f-8c9a-bc344c7f3b7b:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "700df26f-db90-408a-9a45-6e85d9fea46a",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "700df26f-db90-408a-9a45-6e85d9fea46a",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:700df26f-db90-408a-9a45-6e85d9fea46a",
+    "parent": "700df26f-db90-408a-9a45-6e85d9fea46a",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 02",
+          "type": "text"
+        }
+      ],
+      "id": "user:700df26f-db90-408a-9a45-6e85d9fea46a",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "700df26f-db90-408a-9a45-6e85d9fea46a:agent_thought_chunk:id:thought",
+    "parent": "700df26f-db90-408a-9a45-6e85d9fea46a",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "700df26f-db90-408a-9a45-6e85d9fea46a:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "700df26f-db90-408a-9a45-6e85d9fea46a:tool:call-9459c898-b3ff-48cd-af78-78579334e3d4",
+    "parent": "700df26f-db90-408a-9a45-6e85d9fea46a",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 02"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-9459c898-b3ff-48cd-af78-78579334e3d4"
+      },
+      "id": "700df26f-db90-408a-9a45-6e85d9fea46a:tool:call-9459c898-b3ff-48cd-af78-78579334e3d4",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "700df26f-db90-408a-9a45-6e85d9fea46a:agent_message_chunk:id:answer",
+    "parent": "700df26f-db90-408a-9a45-6e85d9fea46a",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 02",
+          "type": "text"
+        }
+      ],
+      "id": "700df26f-db90-408a-9a45-6e85d9fea46a:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "parent": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 03",
+          "type": "text"
+        }
+      ],
+      "id": "user:6cefd642-3680-4af5-9771-9cb6c5d85956",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:agent_thought_chunk:id:thought",
+    "parent": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:tool:call-c4a92146-6ee4-4a09-a379-3a96af7564f1",
+    "parent": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 03"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-c4a92146-6ee4-4a09-a379-3a96af7564f1"
+      },
+      "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:tool:call-c4a92146-6ee4-4a09-a379-3a96af7564f1",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:agent_message_chunk:id:answer",
+    "parent": "6cefd642-3680-4af5-9771-9cb6c5d85956",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 03",
+          "type": "text"
+        }
+      ],
+      "id": "6cefd642-3680-4af5-9771-9cb6c5d85956:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "fea854e4-c144-4259-8805-b405e1e78ac2",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "fea854e4-c144-4259-8805-b405e1e78ac2",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:fea854e4-c144-4259-8805-b405e1e78ac2",
+    "parent": "fea854e4-c144-4259-8805-b405e1e78ac2",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 04",
+          "type": "text"
+        }
+      ],
+      "id": "user:fea854e4-c144-4259-8805-b405e1e78ac2",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "fea854e4-c144-4259-8805-b405e1e78ac2:agent_thought_chunk:id:thought",
+    "parent": "fea854e4-c144-4259-8805-b405e1e78ac2",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "fea854e4-c144-4259-8805-b405e1e78ac2:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "fea854e4-c144-4259-8805-b405e1e78ac2:tool:call-9342469c-d18a-4122-b694-e99b7f640dfe",
+    "parent": "fea854e4-c144-4259-8805-b405e1e78ac2",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 04"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-9342469c-d18a-4122-b694-e99b7f640dfe"
+      },
+      "id": "fea854e4-c144-4259-8805-b405e1e78ac2:tool:call-9342469c-d18a-4122-b694-e99b7f640dfe",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "fea854e4-c144-4259-8805-b405e1e78ac2:agent_message_chunk:id:answer",
+    "parent": "fea854e4-c144-4259-8805-b405e1e78ac2",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 04",
+          "type": "text"
+        }
+      ],
+      "id": "fea854e4-c144-4259-8805-b405e1e78ac2:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "parent": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 05",
+          "type": "text"
+        }
+      ],
+      "id": "user:e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:agent_thought_chunk:id:thought",
+    "parent": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:tool:call-01441ff9-c6d8-4174-8489-2c7991874414",
+    "parent": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 05"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-01441ff9-c6d8-4174-8489-2c7991874414"
+      },
+      "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:tool:call-01441ff9-c6d8-4174-8489-2c7991874414",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:agent_message_chunk:id:answer",
+    "parent": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 05",
+          "type": "text"
+        }
+      ],
+      "id": "e59348d6-492d-495b-8dd2-ed1e7bfc73fa:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "parent": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 06",
+          "type": "text"
+        }
+      ],
+      "id": "user:9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:agent_thought_chunk:id:thought",
+    "parent": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:tool:call-da19d1b9-1fd4-4857-8b47-cdfae7159e29",
+    "parent": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 06"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-da19d1b9-1fd4-4857-8b47-cdfae7159e29"
+      },
+      "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:tool:call-da19d1b9-1fd4-4857-8b47-cdfae7159e29",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:agent_message_chunk:id:answer",
+    "parent": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 06",
+          "type": "text"
+        }
+      ],
+      "id": "9b48ba96-2eb6-46f3-803b-ac82922ecdb2:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+      "items": [],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "parent": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "data": {
+      "content": [
+        {
+          "text": "Navigation turn 07",
+          "type": "text"
+        }
+      ],
+      "id": "user:52eebe37-0b07-43fb-80b8-c68804e7be0f",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:agent_thought_chunk:id:thought",
+    "parent": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "data": {
+      "content": [
+        "Synthetic ACP reasoning"
+      ],
+      "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:agent_thought_chunk:id:thought",
+      "summary": [],
+      "type": "reasoning"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:tool:call-6b5862e5-f5ed-4b10-bd65-601f5ed77c0c",
+    "parent": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "data": {
+      "call": {
+        "content": [
+          {
+            "content": {
+              "text": "Synthetic ACP tool output",
+              "type": "text"
+            },
+            "type": "content"
+          }
+        ],
+        "kind": "other",
+        "locations": [],
+        "rawInput": {
+          "text": "Navigation turn 07"
+        },
+        "sessionUpdate": "tool_call_update",
+        "status": "completed",
+        "title": "Synthetic tool",
+        "toolCallId": "call-6b5862e5-f5ed-4b10-bd65-601f5ed77c0c"
+      },
+      "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:tool:call-6b5862e5-f5ed-4b10-bd65-601f5ed77c0c",
+      "type": "acpToolCall"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:agent_message_chunk:id:answer",
+    "parent": "52eebe37-0b07-43fb-80b8-c68804e7be0f",
+    "data": {
+      "content": [
+        {
+          "text": "**ACP** Echo: Navigation turn 07",
+          "type": "text"
+        }
+      ],
+      "id": "52eebe37-0b07-43fb-80b8-c68804e7be0f:agent_message_chunk:id:answer",
+      "type": "acpMessage"
+    }
+  },
+  {
+    "kind": "turn",
+    "id": "3428135f-f8ed-4f61-932c-5d33786a977c",
+    "parent": "",
+    "data": {
+      "error": null,
+      "id": "3428135f-f8ed-4f61-932c-5d33786a977c",
+      "items": [],
+      "status": "interrupted",
+      "stopReason": "cancelled"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "user:3428135f-f8ed-4f61-932c-5d33786a977c",
+    "parent": "3428135f-f8ed-4f61-932c-5d33786a977c",
+    "data": {
+      "content": [
+        {
+          "text": "[burst]",
+          "type": "text"
+        }
+      ],
+      "id": "user:3428135f-f8ed-4f61-932c-5d33786a977c",
+      "type": "userMessage"
+    }
+  },
+  {
+    "kind": "item",
+    "id": "3428135f-f8ed-4f61-932c-5d33786a977c:agent_message_chunk:id:burst",
+    "parent": "3428135f-f8ed-4f61-932c-5d33786a977c",
+    "data": {
+      "content": [
+        {
+          "text": "chunk-00 你好\nchunk-01 你好\nchunk-02 你好\nchunk-03 你好\nchunk-04 你好\nchunk-05 你好\nchunk-06 你好\nchunk-07 你好\nchunk-08 你好\nchunk-09 你好\nchunk-10 你好\nchunk-11 你好\nchunk-12 你好\nchunk-13 你好\nchunk-14 你好\nchunk-15 你好\nchunk-16 你好\nchunk-17 你好\nchunk-18 你好\nchunk-19 你好\nchunk-20 你好\nchunk-21 你好\nchunk-22 你好\nchunk-23 你好\nchunk-24 你好\nchunk-25 你好\nchunk-26 你好\nchunk-27 你好\nchunk-28 你好\nchunk-29 你好\nchunk-30 你好\nchunk-31 你好\nchunk-32 你好\nchunk-33 你好\nchunk-34 你好\nchunk-35 你好\nchunk-36 你好\nchunk-37 你好\nchunk-38 你好\nchunk-39 你好\nchunk-40 你好\nchunk-41 你好\nchunk-42 你好\nchunk-43 你好\nchunk-44 你好\nchunk-45 你好\nchunk-46 你好\nchunk-47 你好\nchunk-48 你好\nchunk-49 你好\nchunk-50 你好\nchunk-51 你好\nchunk-52 你好\nchunk-53 你好\nchunk-54 你好\nchunk-55 你好\nchunk-56 你好\nchunk-57 你好\nchunk-58 你好\nchunk-59 你好\nchunk-60 你好\nchunk-61 你好\nchunk-62 你好\nchunk-63 你好\nchunk-64 你好\nchunk-65 你好\nchunk-66 你好\nchunk-67 你好\nchunk-68 你好\nchunk-69 你好\nchunk-70 你好\nchunk-71 你好\nchunk-72 你好\nchunk-73 你好\nchunk-74 你好\nchunk-75 你好\nchunk-76 你好\nchunk-77 你好\nchunk-78 你好\nchunk-79 你好\nchunk-80 你好\nchunk-81 你好\nchunk-82 你好\nchunk-83 你好\nchunk-84 你好\nchunk-85 你好\nchunk-86 你好\nchunk-87 你好\nchunk-88 你好\nchunk-89 你好\nchunk-90 你好\nchunk-91 你好\nchunk-92 你好\nchunk-93 你好\nchunk-94 你好\nchunk-95 你好\nchunk-96 你好\nchunk-97 你好\nchunk-98 你好\nchunk-99 你好\nchunk-100 你好\nchunk-101 你好\nchunk-102 你好\nchunk-103 你好\nchunk-104 你好\nchunk-105 你好\nchunk-106 你好\nchunk-107 你好\nchunk-108 你好\nchunk-109 你好\nchunk-110 你好\nchunk-111 你好\nchunk-112 你好\nchunk-113 你好\nchunk-114 你好\nchunk-115 你好\nchunk-116 你好\nchunk-117 你好\nchunk-118 你好\nchunk-119 你好\nchunk-120 你好\nchunk-121 你好\nchunk-122 你好\nchunk-123 你好\nchunk-124 你好\nchunk-125 你好\nchunk-126 你好\nchunk-127 你好\nchunk-128 你好\nchunk-129 你好\nchunk-130 你好\nchunk-131 你好\nchunk-132 你好\nchunk-133 你好\nchunk-134 你好\nchunk-135 你好\nchunk-136 你好\nchunk-137 你好\nchunk-138 你好\nchunk-139 你好\nchunk-140 你好\nchunk-141 你好\nchunk-142 你好\nchunk-143 你好\nchunk-144 你好\nchunk-145 你好\nchunk-146 你好\nchunk-147 你好\nchunk-148 你好\nchunk-149 你好\nchunk-150 你好\nchunk-151 你好\nchunk-152 你好\nchunk-153 你好\nchunk-154 你好\nchunk-155 你好\nchunk-156 你好\nchunk-157 你好\nchunk-158 你好\nchunk-159 你好\nchunk-160 你好\nchunk-161 你好\nchunk-162 你好\nchunk-163 你好\nchunk-164 你好\nchunk-165 你好\nchunk-166 你好\nchunk-167 你好\nchunk-168 你好\nchunk-169 你好\nchunk-170 你好\nchunk-171 你好\nchunk-172 你好\nchunk-173 你好\nchunk-174 你好\nchunk-175 你好\nchunk-176 你好\nchunk-177 你好\nchunk-178 你好\nchunk-179 你好\nchunk-180 你好\nchunk-181 你好\nchunk-182 你好\nchunk-183 你好\nchunk-184 你好\nchunk-185 你好\nchunk-186 你好\nchunk-187 你好\nchunk-188 你好\nchunk-189 你好\nchunk-190 你好\nchunk-191 你好\nchunk-192 你好\nchunk-193 你好\nchunk-194 你好\nchunk-195 你好\nchunk-196 你好\nchunk-197 你好\nchunk-198 你好\nchunk-199 你好\nchunk-200 你好\nchunk-201 你好\nchunk-202 你好\nchunk-203 你好\nchunk-204 你好\nchunk-205 你好\nchunk-206 你好\nchunk-207 你好\nchunk-208 你好\nchunk-209 你好\nchunk-210 你好\nchunk-211 你好\nchunk-212 你好\nchunk-213 你好\nchunk-214 你好\nchunk-215 你好\nchunk-216 你好\nchunk-217 你好\nchunk-218 你好\nchunk-219 你好\nchunk-220 你好\nchunk-221 你好\nchunk-222 你好\nchunk-223 你好\nchunk-224 你好\nchunk-225 你好\nchunk-226 你好\nchunk-227 你好\nchunk-228 你好\nchunk-229 你好\nchunk-230 你好\nchunk-231 你好\nchunk-232 你好\nchunk-233 你好\nchunk-234 你好\nchunk-235 你好\nchunk-236 你好\nchunk-237 你好\nchunk-238 你好\n",
+          "type": "text"
+        }
+      ],
+      "id": "3428135f-f8ed-4f61-932c-5d33786a977c:agent_message_chunk:id:burst",
+      "type": "acpMessage"
+    }
+  }
+]

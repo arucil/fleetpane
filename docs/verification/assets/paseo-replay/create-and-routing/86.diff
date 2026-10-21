@@ -1,0 +1,88 @@
+diff --git a/packages/app/src/components/create-agent-modal.tsx b/packages/app/src/components/create-agent-modal.tsx
+index 2fc69fed4..ef31660e2 100644
+--- a/packages/app/src/components/create-agent-modal.tsx
++++ b/packages/app/src/components/create-agent-modal.tsx
+@@ -131,10 +131,14 @@ export function CreateAgentModal({
+         console.log("[CreateAgentModal] Agent created:", agentId);
+         setIsLoading(false);
+         setPendingRequestId(null);
+-        handleClose();
+ 
+-        // Navigate to the agent page
++        // Navigate to the agent page BEFORE closing modal
++        // This prevents race condition on Android where router.push() happens
++        // while the modal is unmounting, causing NullPointerException
+         router.push(`/agent/${agentId}`);
++
++        // Close modal after navigation starts
++        handleClose();
+       }
+     });
+ 
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index fa531c9f7..ef0d5eeb7 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -268,6 +268,20 @@ export class AgentManager {
+       throw new Error(`Agent ${agentId} is ${agent.status}`);
+     }
+ 
++    // Auto-cancel if agent is currently processing
++    // This allows users to interrupt stuck agents by sending a new message
++    if (agent.status === "processing") {
++      console.log(`[Agent ${agentId}] Auto-cancelling current task before new prompt`);
++      try {
++        await this.cancelAgent(agentId);
++        // Small delay to allow cancellation to propagate
++        await new Promise(resolve => setTimeout(resolve, 100));
++      } catch (error) {
++        console.warn(`[Agent ${agentId}] Cancel failed, continuing with new prompt:`, error);
++        // Continue anyway - the new prompt might still work
++      }
++    }
++
+     // Reset message IDs for new turn - ensures each prompt gets fresh responses
+     agent.currentAssistantMessageId = null;
+     agent.currentThoughtId = null;
+@@ -784,6 +798,7 @@ export class AgentManager {
+         timestamp: new Date(),
+         notification: {
+           type: 'permission',
++          requestId,  // Pass the requestId that we stored in pendingPermissions
+           request: params,
+         },
+       };
+diff --git a/packages/server/src/server/acp/types.ts b/packages/server/src/server/acp/types.ts
+index 37d981012..bc68b5b6b 100644
+--- a/packages/server/src/server/acp/types.ts
++++ b/packages/server/src/server/acp/types.ts
+@@ -23,7 +23,7 @@ export interface EnrichedSessionNotification extends Omit<SessionNotification, '
+  */
+ export type AgentNotification =
+   | { type: 'session'; notification: EnrichedSessionNotification }
+-  | { type: 'permission'; request: RequestPermissionRequest }
++  | { type: 'permission'; requestId: string; request: RequestPermissionRequest }
+   | { type: 'status'; status: AgentStatus; error?: string };
+ 
+ /**
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 191c54348..8dcf4830d 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -178,14 +178,14 @@ export class Session {
+             type: "agent_permission_request",
+             payload: {
+               agentId,
+-              requestId: uuidv4(), // Generate request ID
++              requestId: notification.requestId, // Use the requestId from AgentManager
+               sessionId: permissionRequest.sessionId,
+               toolCall: permissionRequest.toolCall,
+               options: permissionRequest.options,
+             },
+           });
+           console.log(
+-            `[Session ${this.clientId}] Forwarded permission request for agent ${agentId}`
++            `[Session ${this.clientId}] Forwarded permission request for agent ${agentId} with requestId ${notification.requestId}`
+           );
+           return;
+         }

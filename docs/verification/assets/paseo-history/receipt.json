@@ -1,0 +1,112 @@
+{
+  "hosts": [
+    {
+      "name": "Synthetic history",
+      "socket": "/tmp/fleetpane-upstream-20261020/host/control.sock",
+      "host_pid": 4057088,
+      "host_id": "201ba72a-0b19-4219-a8b0-686196bb492d",
+      "provider_pid": 4057111,
+      "stopped": true
+    }
+  ],
+  "source_base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "workspace_id": "fleetpane-history-qa",
+  "history_reader": {
+    "reference": "a486b0558168c08890890e787d55cfb88c0d7256",
+    "sources": [
+      {
+        "name": "upstream",
+        "ref": "refs/remotes/upstream/main",
+        "baseline": "a486b0558168c08890890e787d55cfb88c0d7256",
+        "target": "068f272a00ffef3f00ec30ec4cfa3a631be97624",
+        "new_commits": 608
+      },
+      {
+        "name": "donut-fork",
+        "ref": "refs/remotes/origin/main",
+        "baseline": "a486b0558168c08890890e787d55cfb88c0d7256",
+        "target": "798b5bb9cabc1ebd309fd08e0cbbe8651541b21e",
+        "new_commits": 551
+      }
+    ],
+    "unique_commits": 680,
+    "merges": 16,
+    "fork_exclusive_commits": 72,
+    "incremental_commits": 0,
+    "worktree_unchanged": true,
+    "source_observation": {
+      "head": "a486b0558168c08890890e787d55cfb88c0d7256",
+      "index_sha256": "1300bf650646c333489cc0f676938be0ecd053e0e4dd6b98e8a2116a0d7ce385",
+      "status_sha256": "591924615ab42603690d333a71e5ef209f29c77d2310b9bac1b4871978524e4a"
+    }
+  },
+  "desktop": {
+    "pid": 4057116,
+    "window_id": "4194305",
+    "window_closed_normally": true,
+    "process_absent_after_workspace_stop": true,
+    "binary_sha256": "94718c3c66a4a60bc9ad425ce56399290f2456ecb992f5d0182e7f2cc5d4a12e"
+  },
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "500041eb54ec49ec3f2ed01583831bc3f29f5ba93ff2c50f19818907ca03a64a",
+    "apps/desktop/src/host_view/row_changes.rs": "e225a118190edd6ea0c6eb34e98af85b6edea8025dbdcd3975fa66d0702c0156",
+    "scripts/paseo-history.py": "ef8e54085980603d1d7b1495cf82edc7ec04942cd626170fabd10d57c8874d28",
+    "scripts/tests/paseo_history_test.py": "f44e5a2adf73b6f6d63d8bb8a37ca30ea667fc70fa947776892b808b96b5725b",
+    "docs/reference/paseo-history.json": "561941111361d75851cb03f7825cb73025ac37f5d2658e82874933db8d4b76d1",
+    ".github/workflows/ci.yml": "e88f355a7edbd584f2dc17905fdee884e83ec55dd2f0b396a188a45759a4456d"
+  },
+  "native": {
+    "expanded_card_after_new_turn": true,
+    "chinese_reply_rendered": true,
+    "exact_output_with_trailing_spaces": true,
+    "other_session_output_distinct": true,
+    "same_copy_after_switch_pagination": true,
+    "same_copy_after_reload_pagination": true,
+    "original_clipboard_bytes": 218
+  },
+  "hosts_cleaned": true,
+  "hidden_workspace_stopped": true,
+  "checks": {
+    "rust_workspace": {
+      "status": "passed",
+      "log_sha256": "2797839db2b0681a37f83cdcc1c8d2abbad64ccb26675932baa5a3764ebe9d26"
+    },
+    "desktop_tests": {
+      "status": "passed",
+      "log_sha256": "4cdd1a34af4cdb2572bf066ca399e74d4537a24912f0022af550f096a488c024"
+    },
+    "reader_tests": {
+      "status": "passed",
+      "log_sha256": "4fe5f2355d9aa065bb8ad8a202ddac52d10ba52d00cf366d93446005832e749e"
+    },
+    "workspace_clippy": {
+      "status": "passed",
+      "log_sha256": "f694a9e074374d315f58b8a63ce849858b1b8708cf56b3d194218605bd2a9d6e"
+    },
+    "desktop_clippy": {
+      "status": "passed",
+      "log_sha256": "077a30f649a19e2b107a3c8a919606b6bba89e1dce6fcb5d7138fc4fc0ec3773"
+    },
+    "desktop_build": {
+      "status": "passed",
+      "log_sha256": "df28e1ac49512852ff0ab5e619cc96b151cfe69729cb470b1e660ff5af97b9c8"
+    },
+    "history_smoke": {
+      "status": "passed",
+      "log_sha256": "8adf99c475b774eed3e3e867d92711ad0bb354cc02df63ec8cc0beafa6ee3f96"
+    }
+  },
+  "limits": [
+    "Local uncommitted changes; no new remote CI",
+    "Reader counts do not mean exhaustive review",
+    "No release UI latency or full-workload performance claim",
+    "Full conversation row projection still runs per update",
+    "File editing remains pending"
+  ],
+  "asset_sha256": {
+    "reloaded.png": "beaa5965eb822d6315d8a56da7f8a0afb6641d9d10b85fb343f0988b7a1a09eb",
+    "other-session.png": "dfdc36aed982d32c53c5ce1b0a158fbbfd25c11b799ccebbe33807fe942dcab3",
+    "retained.png": "023c8c0d349b59d98d776527c148df76557a486b89003b26dd5d761357e0d93a",
+    "new-reply.png": "b5fd4474b7846682d45c2ebfe8d9d2db7f421da51fe98c318767dabd01d8c52f"
+  }
+}

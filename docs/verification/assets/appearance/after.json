@@ -1,0 +1,78 @@
+{
+  "protocol": 3,
+  "host_id": "9e914c3b-571d-44fe-897e-242878bf2cda",
+  "host_pid": 229799,
+  "provider_pid": 229801,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "9e914c3b-571d-44fe-897e-242878bf2cda",
+    "controller_id": "208932c8-6e3f-47dc-8904-b835039f985b",
+    "generation": 12
+  },
+  "sequence": 34,
+  "operation_ids": [
+    "77baf20d-e52a-4f24-8b25-6c8acd25fd50",
+    "7733f78b-03c2-483b-99c8-8f7cfa8fe63e",
+    "8e6b1a1d-914c-4dfc-bff9-7bcaaf646b9c"
+  ],
+  "journal_total": 3,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "a9c32174-a3ab-420f-a606-011d4da2205b",
+        "turn_id": "c97e172f-e401-4d88-aa8c-238014549e14"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "a9c32174-a3ab-420f-a606-011d4da2205b",
+        "threadId": "a9c32174-a3ab-420f-a606-011d4da2205b",
+        "toolCall": {
+          "title": "Synthetic tool",
+          "toolCallId": "call-4faaa922-7d5a-4cf9-b89f-cfb0980997b5"
+        }
+      }
+    }
+  ],
+  "fault": null,
+  "fault_scope": null
+}

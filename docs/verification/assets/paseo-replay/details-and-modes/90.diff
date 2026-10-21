@@ -1,0 +1,784 @@
+diff --git a/packages/app/src/components/agent-stream-view.tsx b/packages/app/src/components/agent-stream-view.tsx
+index 685c6b14c..9f57dad9f 100644
+--- a/packages/app/src/components/agent-stream-view.tsx
++++ b/packages/app/src/components/agent-stream-view.tsx
+@@ -3,34 +3,16 @@ import { View, Text, ScrollView, Pressable } from 'react-native';
+ import { useSafeAreaInsets } from 'react-native-safe-area-context';
+ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+ import { BottomSheetModal } from '@gorhom/bottom-sheet';
+-import type { AgentStatus } from '@server/server/acp/types';
+ import { AssistantMessage, UserMessage, ActivityLog, ToolCall } from './message';
+ import { ToolCallBottomSheet } from './tool-call-bottom-sheet';
+ import type { StreamItem } from '@/types/stream';
++import type { SelectedToolCall, PendingPermission, AgentInfo } from '@/types/shared';
+ 
+ export interface AgentStreamViewProps {
+   agentId: string;
+-  agent: {
+-    id: string;
+-    status: AgentStatus;
+-    createdAt: Date;
+-    type: 'claude';
+-  };
++  agent: AgentInfo;
+   streamItems: StreamItem[];
+-  pendingPermissions: Map<
+-    string,
+-    {
+-      agentId: string;
+-      requestId: string;
+-      sessionId: string;
+-      toolCall: any;
+-      options: Array<{
+-        kind: string;
+-        name: string;
+-        optionId: string;
+-      }>;
+-    }
+-  >;
++  pendingPermissions: Map<string, PendingPermission>;
+   onPermissionResponse: (requestId: string, optionId: string) => void;
+ }
+ 
+@@ -44,26 +26,14 @@ export function AgentStreamView({
+   const scrollViewRef = useRef<ScrollView>(null);
+   const bottomSheetRef = useRef<BottomSheetModal | null>(null);
+   const insets = useSafeAreaInsets();
+-  const [selectedToolCall, setSelectedToolCall] = useState<{
+-    toolName: string;
+-    status: 'executing' | 'completed' | 'failed';
+-    args: any;
+-    result?: any;
+-    error?: any;
+-  } | null>(null);
++  const [selectedToolCall, setSelectedToolCall] = useState<SelectedToolCall | null>(null);
+ 
+   // Auto-scroll to bottom when new items arrive
+   useEffect(() => {
+     scrollViewRef.current?.scrollToEnd({ animated: true });
+   }, [streamItems]);
+ 
+-  function handleOpenToolCallDetails(toolCall: {
+-    toolName: string;
+-    status: 'executing' | 'completed' | 'failed';
+-    args: any;
+-    result?: any;
+-    error?: any;
+-  }) {
++  function handleOpenToolCallDetails(toolCall: SelectedToolCall) {
+     setSelectedToolCall(toolCall);
+     bottomSheetRef.current?.present();
+   }
+@@ -114,28 +84,42 @@ export function AgentStreamView({
+                 );
+ 
+               case 'tool_call': {
+-                // Map status: pending/in_progress -> executing, completed -> completed, failed -> failed
+-                const toolStatus = item.status === 'pending' || item.status === 'in_progress'
+-                  ? 'executing' as const
+-                  : item.status === 'completed'
+-                  ? 'completed' as const
+-                  : 'failed' as const;
++                const { payload } = item;
+ 
+-                return (
+-                  <ToolCall
+-                    key={item.id}
+-                    toolName={item.title}
+-                    args={item.rawInput}
+-                    result={item.rawOutput}
+-                    status={toolStatus}
+-                    onOpenDetails={() => handleOpenToolCallDetails({
+-                      toolName: item.title,
+-                      status: toolStatus,
+-                      args: item.rawInput,
+-                      result: item.rawOutput,
+-                    })}
+-                  />
+-                );
++                // Extract data based on source
++                if (payload.source === 'acp') {
++                  const data = payload.data;
++                  // Map ACP status to display status
++                  const toolStatus = data.status === 'pending' || data.status === 'in_progress'
++                    ? 'executing' as const
++                    : data.status === 'completed'
++                    ? 'completed' as const
++                    : 'failed' as const;
++
++                  return (
++                    <ToolCall
++                      key={item.id}
++                      toolName={data.title ?? 'Unknown Tool'}
++                      args={data.rawInput}
++                      result={data.rawOutput}
++                      status={toolStatus}
++                      onOpenDetails={() => handleOpenToolCallDetails({ payload })}
++                    />
++                  );
++                } else {
++                  // Orchestrator tool call
++                  const data = payload.data;
++                  return (
++                    <ToolCall
++                      key={item.id}
++                      toolName={data.toolName}
++                      args={data.arguments}
++                      result={data.result}
++                      status={data.status}
++                      onOpenDetails={() => handleOpenToolCallDetails({ payload })}
++                    />
++                  );
++                }
+               }
+ 
+               case 'plan':
+@@ -167,11 +151,7 @@ export function AgentStreamView({
+ 
+       <ToolCallBottomSheet
+         bottomSheetRef={bottomSheetRef}
+-        toolName={selectedToolCall?.toolName}
+-        status={selectedToolCall?.status}
+-        args={selectedToolCall?.args}
+-        result={selectedToolCall?.result}
+-        error={selectedToolCall?.error}
++        selectedToolCall={selectedToolCall}
+       />
+     </View>
+   );
+diff --git a/packages/app/src/components/orchestrator-messages-view.tsx b/packages/app/src/components/orchestrator-messages-view.tsx
+index 51adf34e9..8cf6da8e6 100644
+--- a/packages/app/src/components/orchestrator-messages-view.tsx
++++ b/packages/app/src/components/orchestrator-messages-view.tsx
+@@ -10,6 +10,7 @@ import {
+ } from "@/components/message";
+ import { ToolCallBottomSheet } from "./tool-call-bottom-sheet";
+ import type { MessageEntry } from "@/contexts/session-context";
++import type { SelectedToolCall } from "@/types/shared";
+ 
+ interface OrchestratorMessagesViewProps {
+   messages: MessageEntry[];
+@@ -21,13 +22,7 @@ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessa
+   function OrchestratorMessagesView({ messages, currentAssistantMessage, onArtifactClick }, ref) {
+     const { theme } = useUnistyles();
+     const bottomSheetRef = useRef<BottomSheetModal | null>(null);
+-    const [selectedToolCall, setSelectedToolCall] = useState<{
+-      toolName: string;
+-      status: 'executing' | 'completed' | 'failed';
+-      args: any;
+-      result?: any;
+-      error?: any;
+-    } | null>(null);
++    const [selectedToolCall, setSelectedToolCall] = useState<SelectedToolCall | null>(null);
+ 
+     function handleOpenToolCallDetails(toolCall: {
+       toolName: string;
+@@ -36,7 +31,20 @@ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessa
+       result?: any;
+       error?: any;
+     }) {
+-      setSelectedToolCall(toolCall);
++      // Wrap orchestrator tool call in payload structure
++      setSelectedToolCall({
++        payload: {
++          source: 'orchestrator',
++          data: {
++            toolCallId: `orchestrator_${Date.now()}`, // Generate a simple ID
++            toolName: toolCall.toolName,
++            arguments: toolCall.args,
++            result: toolCall.result,
++            error: toolCall.error,
++            status: toolCall.status,
++          },
++        },
++      });
+       bottomSheetRef.current?.present();
+     }
+ 
+@@ -133,11 +141,7 @@ export const OrchestratorMessagesView = forwardRef<ScrollView, OrchestratorMessa
+ 
+       <ToolCallBottomSheet
+         bottomSheetRef={bottomSheetRef}
+-        toolName={selectedToolCall?.toolName}
+-        status={selectedToolCall?.status}
+-        args={selectedToolCall?.args}
+-        result={selectedToolCall?.result}
+-        error={selectedToolCall?.error}
++        selectedToolCall={selectedToolCall}
+       />
+     </>
+     );
+diff --git a/packages/app/src/components/tool-call-bottom-sheet.tsx b/packages/app/src/components/tool-call-bottom-sheet.tsx
+index 552691385..9cdd76649 100644
+--- a/packages/app/src/components/tool-call-bottom-sheet.tsx
++++ b/packages/app/src/components/tool-call-bottom-sheet.tsx
+@@ -1,5 +1,7 @@
+ import React, { useCallback, useMemo } from "react";
+ import { View, Text, StyleSheet } from "react-native";
++import { useSafeAreaInsets } from "react-native-safe-area-context";
++import { ScrollView } from "react-native-gesture-handler";
+ import {
+   BottomSheetModal,
+   BottomSheetView,
+@@ -7,24 +9,18 @@ import {
+   BottomSheetBackdrop,
+   BottomSheetBackdropProps,
+ } from "@gorhom/bottom-sheet";
++import type { SelectedToolCall } from "@/types/shared";
+ 
+ interface ToolCallBottomSheetProps {
+   bottomSheetRef: React.RefObject<BottomSheetModal | null>;
+-  toolName?: string;
+-  status?: "pending" | "in_progress" | "executing" | "completed" | "failed";
+-  args?: any;
+-  result?: any;
+-  error?: any;
++  selectedToolCall: SelectedToolCall | null;
+ }
+ 
+ export function ToolCallBottomSheet({
+   bottomSheetRef,
+-  toolName,
+-  status,
+-  args,
+-  result,
+-  error,
++  selectedToolCall,
+ }: ToolCallBottomSheetProps) {
++  const insets = useSafeAreaInsets();
+   const snapPoints = useMemo(() => ["80%"], []);
+ 
+   const renderBackdrop = useCallback(
+@@ -39,35 +35,48 @@ export function ToolCallBottomSheet({
+     []
+   );
+ 
+-  const statusColor = useMemo(() => {
+-    switch (status) {
+-      case "completed":
+-        return "#22c55e";
+-      case "failed":
+-        return "#ef4444";
+-      case "executing":
+-      case "in_progress":
+-        return "#3b82f6";
+-      case "pending":
+-      default:
+-        return "#6b7280";
++  // Extract data based on source
++  const { toolName, args, result, error } = useMemo(() => {
++    if (!selectedToolCall) {
++      return {
++        toolName: "Tool Call",
++        args: undefined,
++        result: undefined,
++        error: undefined,
++      };
+     }
+-  }, [status]);
+ 
+-  const statusLabel = useMemo(() => {
+-    switch (status) {
+-      case "in_progress":
+-      case "executing":
+-        return "Executing";
+-      case "completed":
+-        return "Completed";
+-      case "failed":
+-        return "Failed";
+-      case "pending":
+-      default:
+-        return "Pending";
++    const { payload } = selectedToolCall;
++
++    if (payload.source === "acp") {
++      const data = payload.data;
++
++      const content = data.content
++        ?.flatMap((item) => {
++          if (item.type === "content" && item.content.type === "text") {
++            return [item.content.text];
++          }
++          return [];
++        })
++        .join("\n");
++
++      return {
++        toolName: data.kind ?? "Unknown Tool",
++        args: data.rawInput,
++        result: content,
++        error: undefined, // ACP doesn't have a separate error field
++      };
++    } else {
++      // Orchestrator tool call
++      const data = payload.data;
++      return {
++        toolName: data.toolName,
++        args: data.arguments,
++        result: data.result,
++        error: data.error,
++      };
+     }
+-  }, [status]);
++  }, [selectedToolCall]);
+ 
+   return (
+     <BottomSheetModal
+@@ -77,62 +86,77 @@ export function ToolCallBottomSheet({
+       enablePanDownToClose={true}
+       handleIndicatorStyle={styles.handleIndicator}
+       backgroundStyle={styles.background}
++      topInset={insets.top}
+     >
+-      <BottomSheetView style={styles.container}>
+-        <View style={styles.header}>
+-          <Text style={styles.toolName}>{toolName || "Tool Call"}</Text>
+-          <View style={[styles.statusBadge, { backgroundColor: statusColor }]}>
+-            <Text style={styles.statusText}>{statusLabel}</Text>
+-          </View>
+-        </View>
++      {/* Header */}
++      <View style={styles.header}>
++        <Text style={styles.toolName}>{toolName || "Tool Call"}</Text>
++      </View>
+ 
+-        <BottomSheetScrollView
+-          style={styles.scrollView}
+-          contentContainerStyle={styles.scrollContent}
+-        >
+-          {args !== undefined && (
+-            <View style={styles.section}>
+-              <Text style={styles.sectionTitle}>Arguments</Text>
+-              <View style={styles.jsonContainer}>
+-                <Text style={styles.jsonText}>
+-                  {JSON.stringify(args, null, 2)}
+-                </Text>
+-              </View>
+-            </View>
+-          )}
++      {/* Scrollable content */}
++      <BottomSheetScrollView
++        contentContainerStyle={styles.sheetContent}
++        showsVerticalScrollIndicator={true}
++      >
++        {/* Content sections */}
++        {args !== undefined && (
++          <View style={styles.section}>
++            <Text style={styles.sectionTitle}>Arguments</Text>
++            <ScrollView
++              horizontal
++              style={styles.jsonContainer}
++              contentContainerStyle={styles.jsonContent}
++              showsHorizontalScrollIndicator={true}
++              nestedScrollEnabled={true}
++            >
++              <Text style={styles.jsonText}>
++                {JSON.stringify(args, null, 2)}
++              </Text>
++            </ScrollView>
++          </View>
++        )}
+ 
+-          {result !== undefined && (
+-            <View style={styles.section}>
+-              <Text style={styles.sectionTitle}>Result</Text>
+-              <View style={styles.jsonContainer}>
+-                <Text style={styles.jsonText}>
+-                  {JSON.stringify(result, null, 2)}
+-                </Text>
+-              </View>
+-            </View>
+-          )}
++        {result !== undefined && (
++          <View style={styles.section}>
++            <Text style={styles.sectionTitle}>Result</Text>
++            <ScrollView
++              horizontal
++              style={styles.jsonContainer}
++              contentContainerStyle={styles.jsonContent}
++              showsHorizontalScrollIndicator={true}
++              nestedScrollEnabled={true}
++            >
++              <Text style={styles.jsonText}>
++                {typeof result === "string"
++                  ? result
++                  : JSON.stringify(result, null, 2)}
++              </Text>
++            </ScrollView>
++          </View>
++        )}
+ 
+-          {error !== undefined && (
+-            <View style={styles.section}>
+-              <Text style={styles.sectionTitle}>Error</Text>
+-              <View style={[styles.jsonContainer, styles.errorContainer]}>
+-                <Text style={[styles.jsonText, styles.errorText]}>
+-                  {JSON.stringify(error, null, 2)}
+-                </Text>
+-              </View>
+-            </View>
+-          )}
+-        </BottomSheetScrollView>
+-      </BottomSheetView>
++        {error !== undefined && (
++          <View style={styles.section}>
++            <Text style={styles.sectionTitle}>Error</Text>
++            <ScrollView
++              horizontal
++              style={[styles.jsonContainer, styles.errorContainer]}
++              contentContainerStyle={styles.jsonContent}
++              showsHorizontalScrollIndicator={true}
++              nestedScrollEnabled={true}
++            >
++              <Text style={[styles.jsonText, styles.errorText]}>
++                {JSON.stringify(error, null, 2)}
++              </Text>
++            </ScrollView>
++          </View>
++        )}
++      </BottomSheetScrollView>
+     </BottomSheetModal>
+   );
+ }
+ 
+ const styles = StyleSheet.create({
+-  container: {
+-    flex: 1,
+-    backgroundColor: "#1f2937",
+-  },
+   handleIndicator: {
+     backgroundColor: "#4b5563",
+   },
+@@ -140,41 +164,25 @@ const styles = StyleSheet.create({
+     backgroundColor: "#1f2937",
+   },
+   header: {
+-    flexDirection: "row",
+-    alignItems: "center",
+-    justifyContent: "space-between",
+     paddingHorizontal: 20,
+-    paddingVertical: 16,
++    paddingTop: 4,
++    paddingBottom: 16,
+     borderBottomWidth: 1,
+     borderBottomColor: "#374151",
++    backgroundColor: "#1f2937",
+   },
+   toolName: {
+     fontSize: 18,
+     fontWeight: "600",
+     color: "#f9fafb",
+-    flex: 1,
+   },
+-  statusBadge: {
+-    paddingHorizontal: 8,
+-    paddingVertical: 4,
+-    borderRadius: 4,
+-    marginLeft: 12,
+-  },
+-  statusText: {
+-    fontSize: 12,
+-    fontWeight: "600",
+-    color: "#fff",
+-    textTransform: "capitalize",
+-  },
+-  scrollView: {
+-    flex: 1,
+-  },
+-  scrollContent: {
+-    paddingHorizontal: 20,
+-    paddingVertical: 16,
++  sheetContent: {
++    paddingTop: 20,
++    paddingBottom: 20,
+   },
+   section: {
+     marginBottom: 20,
++    paddingHorizontal: 20,
+   },
+   sectionTitle: {
+     fontSize: 14,
+@@ -187,15 +195,19 @@ const styles = StyleSheet.create({
+   jsonContainer: {
+     backgroundColor: "#111827",
+     borderRadius: 8,
+-    padding: 12,
+     borderWidth: 1,
+     borderColor: "#374151",
++    // Natural height based on content
++  },
++  jsonContent: {
++    padding: 12,
+   },
+   jsonText: {
+     fontFamily: "monospace",
+     fontSize: 12,
+     color: "#e5e7eb",
+     lineHeight: 18,
++    // Text maintains whitespace and formatting
+   },
+   errorContainer: {
+     borderColor: "#ef4444",
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 246b1f850..c8e1941a5 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useRef, ReactNode, useCallback, us
+ import { useWebSocket, type UseWebSocketReturn } from "@/hooks/use-websocket";
+ import { useAudioPlayer } from "@/hooks/use-audio-player";
+ import { reduceStreamUpdate, generateMessageId, type StreamItem } from "@/types/stream";
++import type { PendingPermission } from "@/types/shared";
+ import type {
+   ActivityLogPayload,
+   SessionInboundMessage,
+@@ -77,17 +78,6 @@ export interface Command {
+   exitCode: number | null;
+ }
+ 
+-export interface PendingPermission {
+-  agentId: string;
+-  requestId: string;
+-  sessionId: string;
+-  toolCall: any;
+-  options: Array<{
+-    kind: string;
+-    name: string;
+-    optionId: string;
+-  }>;
+-}
+ 
+ interface SessionContextValue {
+   // WebSocket
+diff --git a/packages/app/src/types/shared.ts b/packages/app/src/types/shared.ts
+new file mode 100644
+index 000000000..4d5895c53
+--- /dev/null
++++ b/packages/app/src/types/shared.ts
+@@ -0,0 +1,33 @@
++import type { AgentStatus } from '@server/server/acp/types';
++import type { RequestPermissionRequest } from '@agentclientprotocol/sdk';
++import type { ToolCallPayload } from './stream';
++
++/**
++ * Generic tool call selection for bottom sheet
++ * Reuses ToolCallPayload so we don't duplicate shapes
++ */
++export interface SelectedToolCall {
++  payload: ToolCallPayload;
++}
++
++/**
++ * Pending permission structure
++ * Uses actual ACP types instead of any
++ */
++export interface PendingPermission {
++  agentId: string;
++  requestId: string;
++  sessionId: string;
++  toolCall: RequestPermissionRequest['toolCall'];
++  options: RequestPermissionRequest['options'];
++}
++
++/**
++ * Agent info for UI display
++ */
++export interface AgentInfo {
++  id: string;
++  status: AgentStatus;
++  createdAt: Date;
++  type: 'claude';
++}
+\ No newline at end of file
+diff --git a/packages/app/src/types/stream.ts b/packages/app/src/types/stream.ts
+index 4155767ba..5f80b71ed 100644
+--- a/packages/app/src/types/stream.ts
++++ b/packages/app/src/types/stream.ts
+@@ -1,4 +1,5 @@
+ import type { AgentNotification } from '@server/server/acp/types';
++import type { SessionNotification } from '@agentclientprotocol/sdk';
+ 
+ /**
+  * Simple hash function for deterministic ID generation
+@@ -89,18 +90,30 @@ export interface ThoughtItem {
+   timestamp: Date;
+ }
+ 
++// Extract the actual ACP tool_call type from SDK
++type ACPToolCall = Extract<SessionNotification['update'], { sessionUpdate: 'tool_call' }>;
++
++// Orchestrator tool call data (from activity_log messages)
++interface OrchestratorToolCallData {
++  toolCallId: string;
++  toolName: string;
++  arguments: unknown;
++  result?: unknown;
++  error?: unknown;
++  status: 'executing' | 'completed' | 'failed';
++}
++
++// Tagged union for tool call sources
++export type ToolCallPayload =
++  | { source: 'acp'; data: ACPToolCall }
++  | { source: 'orchestrator'; data: OrchestratorToolCallData };
++
++// Simplified ToolCallItem with payload
+ export interface ToolCallItem {
+   kind: 'tool_call';
+   id: string;
+-  toolCallId: string;
+-  title: string;
+-  status: 'pending' | 'in_progress' | 'completed' | 'failed';
+-  toolKind?: 'read' | 'edit' | 'delete' | 'move' | 'search' | 'execute' | 'think' | 'fetch' | 'switch_mode' | 'other';
+-  rawInput?: Record<string, unknown>;
+-  rawOutput?: Record<string, unknown>;
+-  content?: unknown[];
+-  locations?: unknown[];
+   timestamp: Date;
++  payload: ToolCallPayload;
+ }
+ 
+ export interface PlanItem {
+@@ -132,6 +145,9 @@ export interface ArtifactItem {
+   timestamp: Date;
+ }
+ 
++// Extract ACP types for tool calls
++type ACPToolCallUpdate = Extract<SessionNotification['update'], { sessionUpdate: 'tool_call_update' }>;
++
+ /**
+  * Parsed notification types (internal representation before converting to StreamItem)
+  */
+@@ -139,8 +155,8 @@ type ParsedNotification =
+   | { kind: 'user_message_chunk'; text: string; messageId?: string }
+   | { kind: 'agent_message_chunk'; text: string; messageId?: string }
+   | { kind: 'agent_thought_chunk'; text: string; messageId?: string }
+-  | { kind: 'tool_call'; toolCallId: string; title: string; status?: string; toolKind?: string; rawInput?: any; rawOutput?: any; content?: any[]; locations?: any[] }
+-  | { kind: 'tool_call_update'; toolCallId: string; title?: string | null; status?: string | null; toolKind?: string | null; rawInput?: any; rawOutput?: any; content?: any[] | null; locations?: any[] | null }
++  | { kind: 'tool_call'; data: ACPToolCall }
++  | { kind: 'tool_call_update'; data: ACPToolCallUpdate }
+   | { kind: 'plan'; entries: Array<{ content: string; status: string; priority: string }> }
+   | { kind: 'current_mode_update'; currentModeId: string }
+   | { kind: 'available_commands_update'; availableCommands: Array<{ name: string; description: string }> }
+@@ -198,31 +214,19 @@ function parseNotification(notification: AgentNotification): ParsedNotification
+       };
+     }
+ 
+-    case 'tool_call':
++    case 'tool_call': {
+       return {
+-        kind: 'tool_call',
+-        toolCallId: update.toolCallId,
+-        title: update.title,
+-        status: update.status,
+-        toolKind: update.kind,
+-        rawInput: update.rawInput,
+-        rawOutput: update.rawOutput,
+-        content: update.content,
+-        locations: update.locations,
++        kind: 'tool_call' as const,
++        data: update as ACPToolCall,
+       };
++    }
+ 
+-    case 'tool_call_update':
++    case 'tool_call_update': {
+       return {
+-        kind: 'tool_call_update',
+-        toolCallId: update.toolCallId,
+-        title: update.title,
+-        status: update.status,
+-        toolKind: update.kind,
+-        rawInput: update.rawInput,
+-        rawOutput: update.rawOutput,
+-        content: update.content,
+-        locations: update.locations,
++        kind: 'tool_call_update' as const,
++        data: update as ACPToolCallUpdate,
+       };
++    }
+ 
+     case 'plan':
+       return {
+@@ -346,16 +350,22 @@ export function reduceStreamUpdate(
+   // Tool call updates - find existing and merge
+   if (parsed.kind === 'tool_call_update') {
+     return state.map(item => {
+-      if (item.kind === 'tool_call' && item.toolCallId === parsed.toolCallId) {
++      if (item.kind === 'tool_call' &&
++          item.payload.source === 'acp' &&
++          item.payload.data.toolCallId === parsed.data.toolCallId) {
++        // Merge the update data with existing ACP data
++        const updatedData = { ...item.payload.data };
++
++        // Apply non-null updates from parsed.data
++        Object.entries(parsed.data).forEach(([key, value]) => {
++          if (value !== undefined && value !== null) {
++            (updatedData as any)[key] = value;
++          }
++        });
++
+         return {
+           ...item,
+-          ...(parsed.title !== undefined && parsed.title !== null ? { title: parsed.title } : {}),
+-          ...(parsed.status !== undefined && parsed.status !== null ? { status: parsed.status as any } : {}),
+-          ...(parsed.toolKind !== undefined && parsed.toolKind !== null ? { toolKind: parsed.toolKind as any } : {}),
+-          ...(parsed.rawInput ? { rawInput: { ...item.rawInput, ...parsed.rawInput } } : {}),
+-          ...(parsed.rawOutput ? { rawOutput: { ...item.rawOutput, ...parsed.rawOutput } } : {}),
+-          ...(parsed.content !== undefined && parsed.content !== null ? { content: parsed.content } : {}),
+-          ...(parsed.locations !== undefined && parsed.locations !== null ? { locations: parsed.locations } : {}),
++          payload: { source: 'acp' as const, data: updatedData },
+           timestamp,
+         };
+       }
+@@ -366,7 +376,9 @@ export function reduceStreamUpdate(
+   // New tool call - check if exists first (server may send multiple notifications for same tool)
+   if (parsed.kind === 'tool_call') {
+     const existingIndex = state.findIndex(
+-      item => item.kind === 'tool_call' && item.toolCallId === parsed.toolCallId
++      item => item.kind === 'tool_call' &&
++              item.payload.source === 'acp' &&
++              item.payload.data.toolCallId === parsed.data.toolCallId
+     );
+ 
+     if (existingIndex >= 0) {
+@@ -375,13 +387,7 @@ export function reduceStreamUpdate(
+         if (idx === existingIndex && item.kind === 'tool_call') {
+           return {
+             ...item,
+-            title: parsed.title,
+-            status: (parsed.status as any) || item.status,
+-            toolKind: (parsed.toolKind as any) || item.toolKind,
+-            rawInput: parsed.rawInput ? { ...item.rawInput, ...parsed.rawInput } : item.rawInput,
+-            rawOutput: parsed.rawOutput ? { ...item.rawOutput, ...parsed.rawOutput } : item.rawOutput,
+-            content: parsed.content || item.content,
+-            locations: parsed.locations || item.locations,
++            payload: { source: 'acp' as const, data: parsed.data },
+             timestamp,
+           };
+         }
+@@ -390,19 +396,14 @@ export function reduceStreamUpdate(
+     }
+ 
+     // Create new tool call
+-    return [...state, {
++    const newToolCall: ToolCallItem = {
+       kind: 'tool_call',
+-      id: parsed.toolCallId,
+-      toolCallId: parsed.toolCallId,
+-      title: parsed.title,
+-      status: (parsed.status as any) || 'pending',
+-      toolKind: parsed.toolKind as any,
+-      rawInput: parsed.rawInput,
+-      rawOutput: parsed.rawOutput,
+-      content: parsed.content,
+-      locations: parsed.locations,
++      id: parsed.data.toolCallId,
+       timestamp,
+-    }];
++      payload: { source: 'acp', data: parsed.data },
++    };
++
++    return [...state, newToolCall];
+   }
+ 
+   // Plan - replace existing or create new (uses constant ID since only one plan exists)

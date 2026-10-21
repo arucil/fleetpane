@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-20",
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "changes": "uncommitted; includes previous active-turn slice",
+  "source_sha256": {
+    "crates/session/src/workspace_pins.rs": "5f8aae6ea8cd7105c3273565c5fad70ed8cd9e78721ea7b224f58db244b4a758",
+    "crates/session/src/workspaces.rs": "2618a0f302192cbf31766d1cf9f21ccbb3adef90b35a227500548ff21d9df82f",
+    "crates/session/src/storage.rs": "fb5915626600e5cceb5bf1653ec587e1a7a555478c9035ef3f45d58efa637886",
+    "crates/session/src/drafts.rs": "41c3c01957feabe3234453336721150f938ba92108c91e0ba3e2ba628fc68bb3",
+    "apps/desktop/src/workspace_view.rs": "08abe481e6cfd6c7ba6b484beaf32ec242065aac05fca3990e63088577d96d9e",
+    "apps/host/src/main.rs": "71fa6ebf0c82a753c94baf076956bf03d82e5ccc0ffd49d1c62e6a2772b4b80b",
+    "scripts/workspace-pins-smoke.py": "8060bc31184acc3a5a2e4a03578ae2e24a335202bce21ae700ebca3b4547017b"
+  },
+  "artifacts": {
+    "desktop_sha256": "f56ec499fe0488c355a48f25b6dce3c802603e433ecbfc67768a411b6609084e",
+    "hosts": [
+      {
+        "name": "Codex",
+        "sha256": "8c371294dcdd11ca5bc300ed5175e220bc7ede6182594ac9735d4936fb3d00d2"
+      },
+      {
+        "name": "DeepSeek ACP",
+        "sha256": "8c371294dcdd11ca5bc300ed5175e220bc7ede6182594ac9735d4936fb3d00d2"
+      }
+    ]
+  },
+  "process_smoke": {
+    "ok": true,
+    "older_page_pins_restored": true,
+    "same_path_hosts_isolated": true,
+    "explicit_idempotent_assignment": true,
+    "parallel_same_pin_once": true,
+    "unpin_preserves_catalog_and_drafts": true,
+    "offline_replaced_metadata_access": true,
+    "complete_host_snapshots_unchanged": true,
+    "owned_hosts_stopped": true
+  },
+  "native": {
+    "saved_workspace_count": 36,
+    "initial_pin_order": [
+      "b5b18957-18f0-44ad-9b90-313f15a8e7d5",
+      "6e4e08d7-6abc-495e-a34f-0b15ddd50f0b"
+    ],
+    "restored_order": [
+      "b5b18957-18f0-44ad-9b90-313f15a8e7d5",
+      "6e4e08d7-6abc-495e-a34f-0b15ddd50f0b"
+    ],
+    "final_pins": [
+      {
+        "id": "6e4e08d7-6abc-495e-a34f-0b15ddd50f0b",
+        "host": "DeepSeek ACP",
+        "path": "/tmp/fleetpane-pins-20261020/常用 中文"
+      }
+    ],
+    "replacement_preserved_complete_host_snapshots": true,
+    "unpin_preserved_complete_host_snapshots": true,
+    "quick_use_correct_host_and_cwd": true,
+    "replaced_directory_use_refused": true
+  },
+  "verification": {
+    "root_tests": 95,
+    "desktop_tests": 4,
+    "strict_clippy_both_manifests": true,
+    "schema": 5,
+    "remote_CI_for_new_changes": "not run"
+  },
+  "cleanup": {
+    "owned_hosts_providers_stopped": true,
+    "desktop_processes_stopped": true,
+    "sockets_removed": true,
+    "workspace_stopped": true,
+    "shared_runtime_restarted": false
+  }
+}

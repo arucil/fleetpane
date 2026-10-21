@@ -1,0 +1,27 @@
+commit cc00d82f8f7c78d01f8c465016e6b98564840d57
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Fri Oct 24 11:37:29 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Fri Oct 24 11:37:29 2025 +0200
+
+    fix: remove excessive padding between status bar and footer controls
+    
+    Removed 24px bottom padding from footerContainer that was creating a large
+    gap between AgentStatusBar and the GlobalFooter controls below.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/app/agent/[id].tsx b/packages/app/src/app/agent/[id].tsx
+index a198f9e6b..faf7371da 100644
+--- a/packages/app/src/app/agent/[id].tsx
++++ b/packages/app/src/app/agent/[id].tsx
+@@ -103,7 +103,6 @@ const styles = StyleSheet.create((theme) => ({
+   },
+   footerContainer: {
+     backgroundColor: theme.colors.background,
+-    paddingBottom: theme.spacing[6],
+   },
+   errorContainer: {
+     flex: 1,

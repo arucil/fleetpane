@@ -1,0 +1,169 @@
+{
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "uncommitted",
+  "build_profile": "dev",
+  "provider": "synthetic Codex protocol fixture; PTYs are real shells",
+  "native_window": {
+    "width": 1300,
+    "height": 900,
+    "workspace_id": "fleetpane-native-terminal",
+    "app_pids": [
+      2937914,
+      3249453
+    ]
+  },
+  "binaries": {
+    "desktop": "277343e8e53483ed33846089f3b1c5361feb831358ce495af3a293729a7195f6",
+    "native_serving_host": "062b1124363e96564419dffc2d3e27813c2bb00f39dd0b75a97b8291e8cb15ec",
+    "final_host_after_help_text": "c56883d08d5502b6bfd44251413d80657cccdacaffccc6069bbae6c61ce88a74"
+  },
+  "sources": {
+    "Cargo.lock": "026e1d8a12ff8db8533ae5bdceda7a3d61dd56996e030ca448ba4e96963f2d00",
+    "crates/session/Cargo.toml": "08dfa64440d42b87ae7630454c05f6841070969b43cf7be177e547a6e99098ab",
+    "crates/session/src/terminals/screen.rs": "99acd2b39ed4ed129f4a5325cf5ec1a0368507831eff4a45d46a689fa0be8369",
+    "apps/desktop/Cargo.lock": "60540f13f91b4eb127ccab1f67054d4eace380607b6d0b24e03ca568e80b6ca8",
+    "apps/desktop/src/terminal_view.rs": "aeb388867c5ed187dc87129324f76dea4728879dfd4aa6a71dcea56687d86107",
+    "apps/desktop/src/workspace_view.rs": "d035dfa041fd95a242eb39691c0de02f924a84ff1ab15c73b7835f988e73c764",
+    "apps/desktop/src/main.rs": "8339e4d30a78ca1cb0e01e5fb68b36015002cb13d568e8a3601376e5ed9d5548",
+    "crates/runtime/src/unix.rs": "c409cff39d2b952c7282f97ffa361ee4fbc935e23dc66e5a382277af7f50a4d9",
+    "crates/runtime/src/lib.rs": "43c2e5e0989559cf490de7b9ef1df2b69e2768f02daf3b6769da7660e56e2b79",
+    "crates/runtime/src/journal.rs": "183a8d1de22c7076226020aeecd7d01e3203efb0aee0e2a47c88ac214be6fbc1"
+  },
+  "tests": {
+    "root": 107,
+    "desktop": 8
+  },
+  "history": {
+    "first_ordinal": 1,
+    "last_ordinal": 38,
+    "last_revision": "ee315bb9a004a4ae141efe6b57c51c6e16183231",
+    "next_revision": "f832c43a1115502752a2bef2ecdcf62e9375f6af",
+    "next_ordinal": 39
+  },
+  "side_effects": {
+    "sent-once": {
+      "bytes": "once",
+      "sha256": "200651a8b2d5912f692db89468a7d47d86a3ed6844f48f1b15f2be1d9c9a7e5e"
+    },
+    "after-provider-once": {
+      "bytes": "once",
+      "sha256": "200651a8b2d5912f692db89468a7d47d86a3ed6844f48f1b15f2be1d9c9a7e5e"
+    }
+  },
+  "clipboard": {
+    "first_screen_utf8_bytes": 64,
+    "first_screen": "RED BOLD UNDERLINE\n中文 é λ 日本語\nprogress 20%\nsh-5.3$ ",
+    "scrollback_first": "SCROLL 077 中文",
+    "scrollback_last": "SCROLL 100 中文",
+    "scrollback_utf8_bytes": 431
+  },
+  "limits": [
+    "Initial render/resize/alternate images precede scheduler/draft fix; final interaction images use corrected binary",
+    "Host behavior sources unchanged during native acceptance; final Host build changes only help text",
+    "No native lost-reply/IME/raw-key/Host-update recovery acceptance",
+    "No remote CI or performance claim"
+  ],
+  "cleanup": {
+    "recorded_pids_absent": [
+      2889114,
+      2889124,
+      2937914,
+      2966575,
+      3048114,
+      3249453,
+      3442362,
+      3442366
+    ],
+    "socket_removed": true,
+    "workspace_stopped": true
+  },
+  "exit_status_addendum": {
+    "desktop_binary_sha256": "793f96cfe54bf3545c9245598c59d1a910dfed4ccd90a8a8896444ad65ed5056",
+    "host_binary_sha256": "c56883d08d5502b6bfd44251413d80657cccdacaffccc6069bbae6c61ce88a74",
+    "view_source_sha256": "3817a36e5f26c0c3250e50316c032ec4c7608060e7dcd4d738406839ae56f623",
+    "test_count": 8,
+    "host_pid": 3616516,
+    "provider_pid": 3616588,
+    "app_pid": 3668379,
+    "terminals": [
+      {
+        "id": "254d94ab-9d1e-40ac-9454-4c33cdec98d9",
+        "pid": 3682896,
+        "exit": {
+          "code": 7,
+          "signal": null
+        }
+      },
+      {
+        "id": "8eb67476-db0d-4c8a-bb92-e0bb388fc400",
+        "pid": 3705348,
+        "exit": {
+          "code": null,
+          "signal": 15
+        }
+      }
+    ],
+    "late_output_evidence": {
+      "exit_code": 7,
+      "output_eof_before": false,
+      "output_eof_after": true,
+      "late_utf8": "LATE_OUTPUT 中文"
+    },
+    "cleanup": {
+      "recorded_pids_absent": [
+        3616516,
+        3616588,
+        3668379,
+        3682896,
+        3705348
+      ],
+      "socket_removed": true,
+      "workspace_stopped": true,
+      "pty_process_groups_absent": true
+    }
+  },
+  "latest_review_cursor": {
+    "first_ordinal": 1,
+    "last_ordinal": 42,
+    "last_revision": "37a363da6deafcd056a6d5bfc693782ed16419bb",
+    "next_revision": "4f2c2fc14a263f4ff969186a1fa9f747ad1a4310",
+    "next_ordinal": 43
+  },
+  "artifacts_sha256": {
+    "after-detach.json": "e43b407db7c44bf096b9ede3cfc086c857d57c16f8d770d81b2ea2fd7b94db92",
+    "after-provider-fault.json": "59d9ff8add3b9f2bd36ea0a6314e1c9fade7dce6288d8b8881519b461c0ea354",
+    "alternate.png": "348161c947c58caede768adc7ef6d103d27eccbeba56f930264cbbe1a467f105",
+    "before-detach.json": "35f0a088f8db16f00d7b1249ca4929c91b486e25d019c376ea7e9b590bb73917",
+    "clippy.log": "0bf5d5103e2f5d66acff3a72eb308061eaccf0696bf1b1607b2364c0c68eeddf",
+    "desktop-build.log": "f9654283c29f7b89585a00f547b9bd4344828d75f96a6045d141b30d75ed310b",
+    "desktop-clippy.log": "68e04e48a52a759368663da6ed45098cb7d2f3c778b7756861e76f2d40fcaf57",
+    "desktop-tests.log": "fd82d462d7b4ab3b5567830e0adc6ff2dfc4ad974c1f9a6aa9ca46eccb1d7b66",
+    "draft-isolation.png": "9f3efc8e2b8b7a4742e859109f4d5ad54995955f288017903c75cd2669cf7b15",
+    "draft-restored.png": "c810aa3053fcfccb09c1a9bf3b55b93ae15530879a3bb55321e371d83064ade2",
+    "exit-build.log": "fcaa0fc9d73ed555f869ca03dccad70bfaa53ebc1883c49751aca168929ee03d",
+    "exit-clippy.log": "22e69ca36b31d2bcccd59f95d6224d49388d321516d044a4d62092864fb796d1",
+    "exit-tests.log": "c037a6a677d76b9c1c2d2b9f34cf1aa255f3bbdaa446742402ddbbe7446a9316",
+    "exited-eof.json": "627f4e0b6750f8939b18c54190cc81d507ea44fd6d0f1d3cf986116b25c43f5d",
+    "exited-output-open.png": "f6b176f02e6c85b650d02884a436d3f29c1f0e4c01ad013e5b790027c8f53c35",
+    "exited-with-open-output.json": "a886f88c31302217e5256a7b6cb3ce79a39fdbe864bf9b8e68cac77640735281",
+    "final-host-clippy.log": "a9de3c1d3b53fa998479c2ecb436a9e3e5d15c8c2211c023774a4c106d169120",
+    "host-build.log": "e0c981bcfdb738f385aebb21532392e092e2a48d2144eb9ed4741e2b1854faea",
+    "host-replaced.png": "209a2d8f76534a15959e975d1625f5c3edf832d4ae1e6d485a30ede997f70f49",
+    "host-snapshot.json": "f3f44ed9fb3fef33c1ebc0411da5ffb46abeca68a1bca46691082f62392508ab",
+    "late-output.png": "50c17e0946ecf0cdadd2922c3f1500aab5a4c2bbc6a92440ed128ca2b3311c6b",
+    "ownership-lost.png": "244f55f1b460083eedb279989fdc295b487a4ac21c48c7f08f7ac7e2b00275f3",
+    "process-smoke.json": "15d87977c96e3fec2c2b4d1255d8eb7e037f0cf1c3a03c87331b0973c968ed44",
+    "provider-fault-closed.png": "f6437f32f78e8f8cc0447e44b3bf9d7c90ee664580e83a613c5054dfde97fb31",
+    "provider-fault-input.png": "1e4f7e2c865d482ae642349f953435705cd45356096e1317a3d1035dbe6d724c",
+    "render.png": "2e36988eae197d14a472b7185d2cf68de534b3f20143428fda341a8608b20f21",
+    "resized.png": "64b7135cf18f19cf00a1e40a3cc7abf4945a3f4013928360154eb17808fd2c1e",
+    "scrollback.png": "6524c4235711bfbae67a94cfb73ecfe880ade65b4cb94bc016cd3ee2f9e99bac",
+    "signal-exit.json": "a7137a63135aa74225567f45724591690eefeacb1b39ace51cf76692654d7ce5",
+    "signal.png": "aeb427054bc3cdb26f9cc8eb8d916155b33dd09a4ae8ebb299ae77d48c4d4dab",
+    "snapshot-after-provider-fault.json": "b953c0e9cc42f56f473b6de05cea2faf4062e5e3ae8c485b009fb33115ade270",
+    "snapshot-before-provider-fault.json": "ff2053eb8bbb71bb13769505d9d0bdca52fb022e57f2cb41d1cd9920dc446946",
+    "snapshot-restarted.json": "910d6b7312a0bde348dd2a8fcd48e8327255269fc1a25cf2c2788630a0be1d4e",
+    "tests.log": "167e48d68df893d7a4e1a6419a6f635b975d8d5f37eecbb855ffe20e0ca923f9"
+  },
+  "next_work": "Ordinal 43: persistence/session/ACP manager review started; persistence.ts and Session integration inspected, rest pending. Continue bounded provider-aware history design after review; do not equate retained history with active-process recovery."
+}

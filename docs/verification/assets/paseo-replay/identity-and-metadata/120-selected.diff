@@ -1,0 +1,338 @@
+commit b1faab72ceaf815c3c29276f5ea1987ed709a970
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 08:57:57 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 08:57:57 2025 +0100
+
+    chore(deps): upgrade claude-code-acp to v0.8.4 and mark express dependencies as optional
+
+diff --git a/packages/server/package.json b/packages/server/package.json
+index 3e7d5bb17..24bc71095 100644
+--- a/packages/server/package.json
++++ b/packages/server/package.json
+@@ -19,7 +19,7 @@
+   "dependencies": {
+     "@agentclientprotocol/sdk": "^0.4.9",
+     "@ai-sdk/openai": "^2.0.52",
+-    "@boudra/claude-code-acp": "^0.8.3",
++    "@boudra/claude-code-acp": "^0.8.4",
+     "@deepgram/sdk": "^3.4.0",
+     "@modelcontextprotocol/sdk": "^1.20.1",
+     "@openrouter/ai-sdk-provider": "^1.2.0",
+diff --git a/packages/server/src/server/acp/agent-manager.test.ts b/packages/server/src/server/acp/agent-manager.test.ts
+index 955f8cce3..61fafce61 100644
+--- a/packages/server/src/server/acp/agent-manager.test.ts
++++ b/packages/server/src/server/acp/agent-manager.test.ts
+@@ -19,85 +19,51 @@ describe("AgentManager", () => {
+     await rm(tmpDir, { recursive: true, force: true });
+   });
+ 
+-  it(
+-    "should create file after accepting plan",
+-    async () => {
+-      let permissionRequest: RequestPermissionRequest | null = null;
+-      let requestId: string | null = null;
+-      const testFile = join(tmpDir, "test.txt");
+-
+-      const agentId = await manager.createAgent({
+-        cwd: tmpDir,
+-        initialMode: "plan",
+-      });
+-
+-      const unsubscribe = manager.subscribeToUpdates(
+-        agentId,
+-        (update: AgentUpdate) => {
+-          const notification: AgentNotification = update.notification;
+-          if (notification.type === "permission") {
+-            permissionRequest = notification.request;
+-            requestId = notification.requestId;
+-          }
+-        }
+-      );
+-
+-      try {
+-        await manager.sendPrompt(
+-          agentId,
+-          "Create a file called test.txt with the content 'hello world'"
+-        );
+-
+-        let attempts = 0;
+-        while (!permissionRequest && attempts < 40) {
+-          await new Promise((resolve) => setTimeout(resolve, 500));
+-          attempts++;
+-        }
+-
+-        expect(permissionRequest).toBeDefined();
+-        expect(requestId).toBeDefined();
+-
+-        const acceptOption = permissionRequest!.options.find(
+-          (o) => o.kind === "allow_once" || o.kind === "allow_always"
+-        );
+-        expect(acceptOption).toBeDefined();
+-
+-        manager.respondToPermission(agentId, requestId!, acceptOption!.optionId);
+-
+-        let status = manager.getAgentStatus(agentId);
+-        attempts = 0;
+-        while (status !== "completed" && status !== "failed" && attempts < 60) {
+-          await new Promise((resolve) => setTimeout(resolve, 1000));
+-          status = manager.getAgentStatus(agentId);
+-          attempts++;
++  it("should create file after accepting plan", async () => {
++    let permissionRequest: RequestPermissionRequest | null = null;
++    let requestId: string | null = null;
++    const testFile = join(tmpDir, "test.txt");
++
++    const agentId = await manager.createAgent({
++      cwd: tmpDir,
++      initialMode: "plan",
++    });
++
++    const unsubscribe = manager.subscribeToUpdates(
++      agentId,
++      (update: AgentUpdate) => {
++        const notification: AgentNotification = update.notification;
++        if (notification.type === "permission") {
++          permissionRequest = notification.request;
++          requestId = notification.requestId;
+         }
++      }
++    );
+ 
+-        expect(status).toBe("completed");
+-
+-        const content = await readFile(testFile, "utf-8");
+-        expect(content).toContain("hello world");
++    try {
++      await manager.sendPrompt(
++        agentId,
++        "Create a file called test.txt with the content 'hello world'"
++      );
+ 
+-        const agentInfo = manager.listAgents().find((a) => a.id === agentId);
+-        expect(agentInfo?.currentModeId).toBe("acceptEdits");
+-      } finally {
+-        unsubscribe();
+-        await manager.killAgent(agentId);
++      let attempts = 0;
++      while (!permissionRequest && attempts < 40) {
++        await new Promise((resolve) => setTimeout(resolve, 500));
++        attempts++;
+       }
+-    },
+-    120000
+-  );
+ 
+-  it(
+-    "should load persisted agent and send new prompt",
+-    async () => {
+-      const agentId = await manager.createAgent({
+-        cwd: tmpDir,
+-      });
++      expect(permissionRequest).toBeDefined();
++      expect(requestId).toBeDefined();
++
++      const acceptOption = permissionRequest!.options.find(
++        (o) => o.kind === "allow_once" || o.kind === "allow_always"
++      );
++      expect(acceptOption).toBeDefined();
+ 
+-      await manager.sendPrompt(agentId, "echo 'first message'");
++      manager.respondToPermission(agentId, requestId!, acceptOption!.optionId);
+ 
+       let status = manager.getAgentStatus(agentId);
+-      let attempts = 0;
++      attempts = 0;
+       while (status !== "completed" && status !== "failed" && attempts < 60) {
+         await new Promise((resolve) => setTimeout(resolve, 1000));
+         status = manager.getAgentStatus(agentId);
+@@ -106,45 +72,82 @@ describe("AgentManager", () => {
+ 
+       expect(status).toBe("completed");
+ 
+-      const agentBeforeKill = manager.listAgents().find((a) => a.id === agentId);
+-      const claudeSessionId = manager.getClaudeSessionId(agentId);
+-      console.log("Before kill - ACP Session ID:", agentBeforeKill?.sessionId);
+-      console.log("Before kill - Claude Session ID:", claudeSessionId);
+-      console.log("Working directory:", tmpDir);
++      const content = await readFile(testFile, "utf-8");
++      expect(content).toContain("hello world");
+ 
++      const agentInfo = manager.listAgents().find((a) => a.id === agentId);
++      expect(agentInfo?.currentModeId).toBe("acceptEdits");
++    } finally {
++      unsubscribe();
+       await manager.killAgent(agentId);
++    }
++  }, 120000);
++
++  it.only("should load persisted agent and send new prompt", async () => {
++    const agentId = await manager.createAgent({
++      cwd: tmpDir,
++    });
++
++    await manager.sendPrompt(agentId, "echo 'first message'");
++
++    let status = manager.getAgentStatus(agentId);
++    let attempts = 0;
++    while (status !== "completed" && status !== "failed" && attempts < 60) {
++      await new Promise((resolve) => setTimeout(resolve, 1000));
++      status = manager.getAgentStatus(agentId);
++      attempts++;
++    }
++
++    expect(status).toBe("completed");
++
++    const agentBeforeKill = manager.listAgents().find((a) => a.id === agentId);
++    const claudeSessionId = manager.getClaudeSessionId(agentId);
++    console.log("Before kill - ACP Session ID:", agentBeforeKill?.sessionId);
++    console.log("Before kill - Claude Session ID:", claudeSessionId);
++    console.log("Working directory:", tmpDir);
++
++    await manager.killAgent(agentId);
++
++    const newManager = new AgentManager();
++    await newManager.initialize();
+ 
+-      const newManager = new AgentManager();
+-      await newManager.initialize();
++    const agents = newManager.listAgents();
++    const loadedAgent = agents.find((a) => a.id === agentId);
++    const loadedClaudeSessionId = newManager.getClaudeSessionId(agentId);
+ 
+-      const agents = newManager.listAgents();
+-      const loadedAgent = agents.find((a) => a.id === agentId);
+-      const loadedClaudeSessionId = newManager.getClaudeSessionId(agentId);
++    console.log("After reload - ACP Session ID:", loadedAgent?.sessionId);
++    console.log("After reload - Claude Session ID:", loadedClaudeSessionId);
+ 
+-      console.log("After reload - ACP Session ID:", loadedAgent?.sessionId);
+-      console.log("After reload - Claude Session ID:", loadedClaudeSessionId);
++    expect(loadedAgent).toBeDefined();
++    expect(loadedAgent?.id).toBe(agentId);
++    expect(loadedAgent?.cwd).toBe(tmpDir);
+ 
+-      expect(loadedAgent).toBeDefined();
+-      expect(loadedAgent?.id).toBe(agentId);
+-      expect(loadedAgent?.cwd).toBe(tmpDir);
++    await newManager.initializeAgentAndGetHistory(agentId);
++    await new Promise((resolve) => setTimeout(resolve, 2000));
++    const persistedUpdates = newManager.getAgentUpdates(agentId);
+ 
+-      await newManager.sendPrompt(agentId, "echo 'second message'");
++    console.log(
++      "Persisted updates:",
++      JSON.stringify(persistedUpdates, null, 2)
++    );
+ 
++    await newManager.sendPrompt(agentId, "echo 'second message'");
++
++    status = newManager.getAgentStatus(agentId);
++    attempts = 0;
++    while (status !== "completed" && status !== "failed" && attempts < 60) {
++      await new Promise((resolve) => setTimeout(resolve, 1000));
+       status = newManager.getAgentStatus(agentId);
+-      attempts = 0;
+-      while (status !== "completed" && status !== "failed" && attempts < 60) {
+-        await new Promise((resolve) => setTimeout(resolve, 1000));
+-        status = newManager.getAgentStatus(agentId);
+-        attempts++;
+-      }
++      attempts++;
++    }
+ 
+-      expect(status).toBe("completed");
++    expect(status).toBe("completed");
++
++    const finalUpdates = newManager.getAgentUpdates(agentId);
++    expect(finalUpdates.length).toBeGreaterThan(0);
+ 
+-      const finalUpdates = newManager.getAgentUpdates(agentId);
+-      expect(finalUpdates.length).toBeGreaterThan(0);
++    console.log("Final updates:", finalUpdates);
+ 
+-      await newManager.killAgent(agentId);
+-    },
+-    120000
+-  );
++    await newManager.killAgent(agentId);
++  }, 120000);
+ });
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index 9ebf5584d..9b1e133d6 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -62,9 +62,7 @@ interface ManagedAgent {
+ 
+ type UpdateAgentCallback = (
+   agentId: string,
+-  updateFn: (
+-    agent: ManagedAgent
+-  ) => boolean | void | Promise<boolean | void>,
++  updateFn: (agent: ManagedAgent) => boolean | void | Promise<boolean | void>,
+   options?: { sessionId: string | null }
+ ) => Promise<void>;
+ 
+@@ -113,7 +111,10 @@ class ACPClient implements Client {
+ 
+   async sessionUpdate(params: SessionNotification): Promise<void> {
+     if (params.update.sessionUpdate === "agent_message_chunk") {
+-      console.log(`[Agent ${this.agentId}] Message chunk update:`, JSON.stringify(params, null, 2));
++      console.log(
++        `[Agent ${this.agentId}] Message chunk update:`,
++        JSON.stringify(params, null, 2)
++      );
+     }
+ 
+     // Check if this update contains a Claude session ID
+@@ -349,13 +350,15 @@ export class AgentManager {
+     }
+ 
+     // Convert prompt to ContentBlock array if it's a string
+-    const contentBlocks: ContentBlock[] = typeof prompt === "string"
+-      ? [{ type: "text", text: prompt }]
+-      : prompt;
++    const contentBlocks: ContentBlock[] =
++      typeof prompt === "string" ? [{ type: "text", text: prompt }] : prompt;
+ 
+     // Extract text for user message notification (use first text block)
+-    const firstTextBlock = contentBlocks.find(block => block.type === "text");
+-    const userMessageText = firstTextBlock && "text" in firstTextBlock ? firstTextBlock.text : "[message with attachments]";
++    const firstTextBlock = contentBlocks.find((block) => block.type === "text");
++    const userMessageText =
++      firstTextBlock && "text" in firstTextBlock
++        ? firstTextBlock.text
++        : "[message with attachments]";
+ 
+     // Emit user message notification
+     const userMessageUpdate: AgentUpdate = {
+@@ -540,6 +543,7 @@ export class AgentManager {
+     if (runtime) {
+       setTimeout(() => {
+         if (!runtime.process.killed) {
++          console.log(`[Agent ${agentId}] Force killing process`);
+           runtime.process.kill("SIGKILL");
+         }
+       }, 5000);
+@@ -898,9 +902,7 @@ export class AgentManager {
+ 
+   private async updateAgent(
+     agentId: string,
+-    updateFn: (
+-      agent: ManagedAgent
+-    ) => boolean | void | Promise<boolean | void>,
++    updateFn: (agent: ManagedAgent) => boolean | void | Promise<boolean | void>,
+     options?: { sessionId: string | null }
+   ): Promise<void> {
+     const agent = this.agents.get(agentId);
+@@ -1185,7 +1187,9 @@ export class AgentManager {
+         const runtime = this.getRuntime(agent);
+ 
+         if (runtime && runtime.currentModeId !== newModeId) {
+-          console.log(`[Agent ${agentId}] Mode changed: ${runtime.currentModeId} -> ${newModeId}`);
++          console.log(
++            `[Agent ${agentId}] Mode changed: ${runtime.currentModeId} -> ${newModeId}`
++          );
+           runtime.currentModeId = newModeId;
+         }
+       }

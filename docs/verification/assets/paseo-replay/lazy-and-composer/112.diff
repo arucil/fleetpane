@@ -1,0 +1,140 @@
+commit a405c29ab12217efc49f55b7420e439c010f00cf
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sat Oct 25 21:59:10 2025 +0200
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sat Oct 25 21:59:10 2025 +0200
+
+    feat: replace single realtime button with three-button footer navigation
+    
+    Replace the centered realtime button in the global footer with three buttons:
+    - Agents: Navigate to home screen
+    - New Agent: Open create agent modal
+    - Realtime: Start realtime mode (existing functionality)
+    
+    This provides easier access to core navigation actions from any non-agent screen.
+    
+    🤖 Generated with [Claude Code](https://claude.com/claude-code)
+    
+    Co-Authored-By: Claude <noreply@anthropic.com>
+
+diff --git a/packages/app/src/components/global-footer.tsx b/packages/app/src/components/global-footer.tsx
+index 7988a0df4..cb7f4dc79 100644
+--- a/packages/app/src/components/global-footer.tsx
++++ b/packages/app/src/components/global-footer.tsx
+@@ -140,33 +140,57 @@ export function GlobalFooter() {
+     );
+   }
+ 
+-  // For home and orchestrator screens, show centered realtime button
++  // For home and orchestrator screens, show three buttons
+   return (
+-    <Animated.View
+-      entering={FadeIn.duration(250)}
+-      exiting={FadeOut.duration(250)}
+-      style={[
+-        styles.container,
+-        {
+-          paddingBottom: insets.bottom,
+-          height: FOOTER_HEIGHT + insets.bottom,
+-        },
+-        keyboardAnimatedStyle,
+-      ]}
+-    >
+-      <View style={styles.centeredButtonContainer}>
+-        <Pressable
+-          onPress={startRealtime}
+-          disabled={!ws.isConnected}
+-          style={[
+-            styles.centeredRealtimeButton,
+-            !ws.isConnected && styles.buttonDisabled,
+-          ]}
+-        >
+-          <AudioLines size={24} color="white" />
+-        </Pressable>
+-      </View>
+-    </Animated.View>
++    <>
++      <Animated.View
++        entering={FadeIn.duration(250)}
++        exiting={FadeOut.duration(250)}
++        style={[
++          styles.container,
++          {
++            paddingBottom: insets.bottom,
++            height: FOOTER_HEIGHT + insets.bottom,
++          },
++          keyboardAnimatedStyle,
++        ]}
++      >
++        <View style={styles.threeButtonContainer}>
++          <Pressable
++            onPress={() => router.push("/")}
++            style={styles.footerButton}
++          >
++            <Users size={20} color={theme.colors.foreground} />
++            <Text style={styles.footerButtonText}>Agents</Text>
++          </Pressable>
++
++          <Pressable
++            onPress={() => setShowCreateModal(true)}
++            style={styles.footerButton}
++          >
++            <Plus size={20} color={theme.colors.foreground} />
++            <Text style={styles.footerButtonText}>New Agent</Text>
++          </Pressable>
++
++          <Pressable
++            onPress={startRealtime}
++            disabled={!ws.isConnected}
++            style={[
++              styles.footerButton,
++              !ws.isConnected && styles.buttonDisabled,
++            ]}
++          >
++            <AudioLines size={20} color={theme.colors.foreground} />
++            <Text style={styles.footerButtonText}>Realtime</Text>
++          </Pressable>
++        </View>
++      </Animated.View>
++
++      <CreateAgentModal
++        isVisible={showCreateModal}
++        onClose={() => setShowCreateModal(false)}
++      />
++    </>
+   );
+ }
+ 
+@@ -186,18 +210,23 @@ const styles = StyleSheet.create((theme) => ({
+     right: 0,
+     bottom: 0,
+   },
+-  centeredButtonContainer: {
+-    padding: theme.spacing[6],
+-    alignItems: "center",
+-    justifyContent: "center",
++  threeButtonContainer: {
++    flexDirection: "row",
++    padding: theme.spacing[4],
++    gap: theme.spacing[3],
+   },
+-  centeredRealtimeButton: {
+-    width: 56,
+-    height: 56,
+-    borderRadius: theme.borderRadius.full,
+-    backgroundColor: theme.colors.palette.blue[600],
++  footerButton: {
++    flex: 1,
++    flexDirection: "column",
+     alignItems: "center",
+     justifyContent: "center",
++    paddingVertical: theme.spacing[3],
++    gap: theme.spacing[1],
++  },
++  footerButtonText: {
++    color: theme.colors.foreground,
++    fontSize: theme.fontSize.xs,
++    fontWeight: theme.fontWeight.normal,
+   },
+   buttonDisabled: {
+     opacity: 0.5,

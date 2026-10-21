@@ -23,6 +23,38 @@ ROOT = Path(__file__).resolve().parents[1]
 SESSIONS = 20
 
 
+def start_turns(identities, operation, snapshot, consume=None, input_text="[burst]"):
+    # Capture BEFORE any operation/read that may race a completion. A later
+    # snapshot's sequence is not a safe starting cursor for earlier turns.
+    boundary = snapshot()["sequence"]
+    turns = {}
+    for identity in identities:
+        turns[identity] = operation(
+            "turn/start",
+            {
+                "threadId": identity,
+                "input": [{"type": "text", "text": input_text}],
+            },
+        )["turn"]["id"]
+        if consume is not None:
+            boundary = consume(boundary, turns)
+    return boundary, turns
+
+
+def completed_targets(events, turns):
+    finished = set()
+    for event in events:
+        message = event["message"]
+        if message.get("method") != "turn/completed":
+            continue
+        params = message["params"]
+        thread = params["threadId"]
+        if thread in turns and params["turn"]["id"] == turns[thread]:
+            assert params["turn"]["status"] in {"completed", "interrupted", "failed"}
+            finished.add(thread)
+    return finished
+
+
 def percentile(values, fraction):
     return round(sorted(values)[max(0, math.ceil(len(values) * fraction) - 1)], 3)
 
@@ -114,6 +146,38 @@ def main():
             assert value["response"] == "lease", value
             return value["data"]
 
+        def failure(reason, boundary, targets, finished):
+            # Preserve the owned system before TemporaryDirectory removes it.
+            # Capture errors are evidence too; never turn them into success.
+            def capture(request):
+                try:
+                    return raw(request)
+                except (OSError, ValueError) as error:
+                    return {"capture_error": str(error)}
+
+            diagnostics = {
+                "reason": reason,
+                "boundary": boundary,
+                "finished": sorted(finished),
+                "targets": targets,
+                "snapshot": capture({"command": "snapshot"}),
+                "turns": {
+                    identity: capture(
+                        {
+                            "command": "query",
+                            "lease": lease,
+                            "method": "thread/turns/list",
+                            "params": {"threadId": identity},
+                        }
+                    )
+                    for identity in targets
+                },
+                "host_log": log_path.read_text(),
+            }
+            if args.output:
+                args.output.write_text(json.dumps(diagnostics, indent=2))
+            return json.dumps(diagnostics)
+
         try:
             deadline = time.monotonic() + 15
             while "ready:" not in log_path.read_text():
@@ -125,22 +189,34 @@ def main():
                 operation("thread/start", {"cwd": str(root)})["thread"]["id"]
                 for _ in range(SESSIONS)
             ]
-            turns = {
-                identity: operation(
-                    "turn/start",
+            finished = set()
+
+            def consume(boundary, targets):
+                events = raw(
                     {
-                        "threadId": identity,
-                        "input": [{"type": "text", "text": "[burst]"}],
-                    },
-                )["turn"]["id"]
-                for identity in identities
-            }
-            active = [
-                query("thread/turns/list", {"threadId": identity})["data"][0]["status"]
-                for identity in identities
-            ]
-            assert active == ["inProgress"] * SESSIONS, active
-            boundary = snapshot()["sequence"]
+                        "command": "events",
+                        "host_id": initial["host_id"],
+                        "after": boundary,
+                    }
+                )
+                assert events["response"] == "events", failure(
+                    events, boundary, targets, finished
+                )
+                finished.update(completed_targets(events["data"], targets))
+                return events["data"][-1]["sequence"] if events["data"] else boundary
+
+            boundary, turns = start_turns(identities, operation, snapshot, consume)
+            active = []
+            for identity in identities:
+                active.append(
+                    query("thread/turns/list", {"threadId": identity})["data"][0][
+                        "status"
+                    ]
+                )
+                boundary = consume(boundary, turns)
+            assert active == ["inProgress"] * SESSIONS, failure(
+                active, boundary, turns, finished
+            )
             old_lease = lease
             lease = claim(snapshot())
             stale = raw(
@@ -153,7 +229,6 @@ def main():
             )
             assert stale["response"] == "error", stale
             started = time.monotonic()
-            finished = set()
             cancelled = False
             deadline = started + 20
             peak_rss = {"host": 0, "fixture_provider": 0, "probe": 0, "combined": 0}
@@ -172,20 +247,7 @@ def main():
                     initial["host_pid"],
                     initial["provider_pid"],
                 )
-                events = raw(
-                    {
-                        "command": "events",
-                        "host_id": state["host_id"],
-                        "after": boundary,
-                    }
-                )
-                assert events["response"] == "events", events
-                for event in events["data"]:
-                    message = event["message"]
-                    if message.get("method") == "turn/completed":
-                        finished.add(message["params"]["threadId"])
-                if events["data"]:
-                    boundary = events["data"][-1]["sequence"]
+                boundary = consume(boundary, turns)
                 if not cancelled and time.monotonic() - started >= 1:
                     operation(
                         "turn/interrupt",
@@ -209,7 +271,12 @@ def main():
                         peak_rss[name] = max(peak_rss[name], resident_kib)
                         combined += resident_kib
                 peak_rss["combined"] = max(peak_rss["combined"], combined)
-                assert time.monotonic() < deadline, "concurrent prompt settlement"
+                if time.monotonic() >= deadline:
+                    raise AssertionError(
+                        failure(
+                            "concurrent prompt settlement", boundary, turns, finished
+                        )
+                    )
                 time.sleep(0.01)
             counts = []
             for index, identity in enumerate(identities):

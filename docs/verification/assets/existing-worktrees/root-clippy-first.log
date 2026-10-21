@@ -1,0 +1,38 @@
+    Checking fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+error: returning the result of a `let` binding from a block
+   --> crates/session/src/worktrees.rs:265:13
+    |
+253 | /             let commit = text(
+254 | |                 git(
+255 | |                     &state.root,
+256 | |                     &[
+...   |
+263 | |                 .await?,
+264 | |             )?;
+    | |_______________- unnecessary `let` binding
+265 |               commit
+    |               ^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.98.0/index.html#let_and_return
+    = note: `-D clippy::let-and-return` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::let_and_return)]`
+help: return the expression directly
+    |
+253 ~             
+254 ~             text(
+255 +                 git(
+256 +                     &state.root,
+257 +                     &[
+258 +                         "rev-parse",
+259 +                         "--verify",
+260 +                         "--end-of-options",
+261 +                         &format!("{base_ref}^{{commit}}"),
+262 +                     ],
+263 +                 )
+264 +                 .await?,
+265 +             )?
+    |
+
+error: could not compile `fleetpane-session` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `fleetpane-session` (lib test) due to 1 previous error

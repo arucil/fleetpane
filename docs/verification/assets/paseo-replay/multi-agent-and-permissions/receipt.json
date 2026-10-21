@@ -1,0 +1,113 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "scope": "Selected diffs only; no copied implementation or historical runtime/test acceptance",
+  "prior_132_entries_unchanged": true,
+  "prior_ledger_sha256": "665f0ca00462ce8aaee5678b8b86b81a2f46c9e5abed6ec00ed5b81261312cec",
+  "prior_entries_canonical_sha256": "1fc17ae0f5bc67c2038cc7d4c7fa5e62a8715ea64184e61da84d5e1b90256a1f",
+  "reviewed": [
+    {
+      "ordinal": 133,
+      "revision": "edf47a24bcd564eeb8428afb14f6dd8365e0003d",
+      "paths": [
+        "packages/app/src/components/agent-activity.tsx",
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/server/agents/agent-type-definitions.ts",
+        "packages/app/src/types/shared.ts",
+        "packages/server/package.json",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/acp/agent-persistence.ts",
+        "packages/server/src/server/acp/agent-types.ts",
+        "packages/server/src/server/acp/mcp-server.ts",
+        "packages/server/src/server/acp/types.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "diff_sha256": "07d30077cbfe8e5522433882a867c0f4f54eabd9ffc622c0b2f99ac281a1f6f5",
+      "diff_bytes": 49628,
+      "diff_lines": 1460,
+      "scope": "Full text diffs of 16 listed source/config/test paths. Excludes saved agents.json and five deleted manual ACP scripts. Dependency manifest metadata only; no package audit, installation or historical execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/edf47a24bcd564eeb8428afb14f6dd8365e0003d"
+    },
+    {
+      "ordinal": 134,
+      "revision": "70a1852e5759741a6b32df62842b01c766a3f109",
+      "paths": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/global-footer.tsx"
+      ],
+      "diff_sha256": "3b3cdb62db6dbbdd64b14c2d9c3c21639a80f05130c6d40e7354b79e69d0c9f1",
+      "diff_bytes": 42251,
+      "diff_lines": 1275,
+      "scope": "Full text diffs of both listed UI paths, including all modal lifecycle/animation/layout hunks. Excludes saved server agents.json. No historical or mobile runtime execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/70a1852e5759741a6b32df62842b01c766a3f109"
+    },
+    {
+      "ordinal": 135,
+      "revision": "086dde30cc8f22dbfde0e4c149dca2638c026a1d",
+      "paths": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/acp/agent-manager.test.ts",
+        "packages/server/src/server/acp/agent-manager.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/vitest.config.ts"
+      ],
+      "diff_sha256": "35433f9bddb784b2e1aae08e6bb281c5b4528121ff78a14ef157026f77df2ad8",
+      "diff_bytes": 16329,
+      "diff_lines": 457,
+      "scope": "Full text diffs of seven listed permission/transport/test paths; some include Git Diff transport code, read for context only. Excludes four route/header/Git Diff UI paths. Git Diff expansion remains user-deferred. No historical test execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/086dde30cc8f22dbfde0e4c149dca2638c026a1d"
+    },
+    {
+      "ordinal": 136,
+      "revision": "c5446e808d6e359a6157e90a4f66de5a0b4e9208",
+      "paths": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/agent-status-bar.tsx"
+      ],
+      "diff_sha256": "dd08c4270a7cd76ede7066525e0caea0971dd75ad2b924febd1df159270db28a",
+      "diff_bytes": 15903,
+      "diff_lines": 435,
+      "scope": "Full text diffs of three listed UI paths. Excludes Git Diff screen; agent header diff includes its menu placement only. No mobile or historical runtime execution.",
+      "source": "https://github.com/getpaseo/paseo/commit/c5446e808d6e359a6157e90a4f66de5a0b4e9208"
+    },
+    {
+      "ordinal": 137,
+      "revision": "54c19f89bf5295d733c44f2e88f00ac5905a4f15",
+      "paths": [
+        ".gitignore"
+      ],
+      "diff_sha256": "b0be19b756211b081449a0f41734eef9e9068cf4e50bea4bf5f1cd02e46e132f",
+      "diff_bytes": 837,
+      "diff_lines": 27,
+      "scope": "Full text diff of .gitignore only. Excludes Git Diff screen and deleted saved agents.json. Subject is metadata for uninspected paths, not a claimed source review.",
+      "source": "https://github.com/getpaseo/paseo/commit/54c19f89bf5295d733c44f2e88f00ac5905a4f15"
+    },
+    {
+      "ordinal": 138,
+      "revision": "6a88c585e3e98d65bd8a1d73c58faf4c3360b60e",
+      "paths": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/styles/theme.ts"
+      ],
+      "diff_sha256": "4db263a03b7135bdd94eeeaa50305f84e0446bae92700d7304d408b9ea8c191a",
+      "diff_bytes": 1632,
+      "diff_lines": 42,
+      "scope": "Full text diffs of both changed paths. No historical application, contrast measurement or accessibility acceptance.",
+      "source": "https://github.com/getpaseo/paseo/commit/6a88c585e3e98d65bd8a1d73c58faf4c3360b60e"
+    }
+  ],
+  "cursor": {
+    "first_ordinal": 1,
+    "last_ordinal": 138,
+    "last_revision": "6a88c585e3e98d65bd8a1d73c58faf4c3360b60e",
+    "next_revision": "1d22fe46e77b6d3255417159d005de0366d6da3c",
+    "next_ordinal": 139
+  }
+}

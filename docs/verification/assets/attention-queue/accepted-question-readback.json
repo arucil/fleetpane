@@ -1,0 +1,41 @@
+{
+  "operationId": "c364ed92-ae15-47e6-b939-ec9d26ea74db",
+  "result": {
+    "thread": {
+      "cwd": "/tmp/fleetpane-replay-145-20261021/native-0",
+      "historyMode": "paginated",
+      "id": "fixture-thread-1",
+      "name": null,
+      "preview": "[questions]",
+      "status": {
+        "type": "idle"
+      },
+      "turns": [
+        {
+          "error": null,
+          "fixtureOptions": {},
+          "id": "fixture-thread-1-turn-1",
+          "items": [
+            {
+              "content": [
+                {
+                  "text": "[questions]",
+                  "type": "text"
+                }
+              ],
+              "id": "user-fixture-thread-1-turn-1",
+              "type": "userMessage"
+            },
+            {
+              "id": "assistant-fixture-thread-1-turn-1",
+              "text": "Echo: Answers received: {\"answers\": {\"language\": {\"answers\": [\"Rust (Recommended)\"]}, \"notes\": {\"answers\": [\"user_note: 队列来源验证\\n exact  trailing\"]}}}",
+              "type": "agentMessage"
+            }
+          ],
+          "status": "completed"
+        }
+      ]
+    }
+  },
+  "sequence": 34
+}

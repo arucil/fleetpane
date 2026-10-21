@@ -1,0 +1,23 @@
+commit 7fee9d4dc42ed41a1a2f9b0934cfff0772e9678d
+Author:     Mohamed Boudra <boudra.moha@gmail.com>
+AuthorDate: Sun Oct 26 09:52:43 2025 +0100
+Commit:     Mohamed Boudra <boudra.moha@gmail.com>
+CommitDate: Sun Oct 26 09:52:43 2025 +0100
+
+    refactor(agent-manager): add error logging for agent prompt refusal
+
+diff --git a/packages/server/src/server/acp/agent-manager.ts b/packages/server/src/server/acp/agent-manager.ts
+index a0c75328f..a58cae9b5 100644
+--- a/packages/server/src/server/acp/agent-manager.ts
++++ b/packages/server/src/server/acp/agent-manager.ts
+@@ -417,6 +417,10 @@ export class AgentManager {
+             stopReason: response.stopReason,
+           };
+         } else if (response.stopReason === "refusal") {
++          console.error(
++            `[Agent ${agentId}] Agent refused to process the prompt`,
++            response
++          );
+           agent.state = {
+             type: "failed",
+             lastError: "Agent refused to process the prompt",

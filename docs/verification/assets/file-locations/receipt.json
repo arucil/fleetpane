@@ -1,0 +1,115 @@
+{
+  "base_head": "c91d269247207a08898e264c81083df4fbd4e745",
+  "state": "retained uncommitted source; local Linux synthetic native acceptance; no commit/push/release",
+  "before_binary_sha256": "9866e2863e7de6331e144f3aaef330e2b4adbb56fb99ab3f10d53f424b41f363",
+  "accepted_binary_sha256": "3dd64905f430a002d28af4ced0acf61f2b5804938a127d0272279c816531294a",
+  "source_sha256": {
+    "apps/desktop/src/file_locations.rs": "e212c31771a1425b1b0b1b307d01a075252207e2e8a4c2a5523ac9e3ef2b0cce",
+    "apps/desktop/src/files_view.rs": "cb116c20891d0130ac4ee1bf8101d1bf514cfea9a8fb3b7586d1eacde09173c7",
+    "apps/desktop/src/workspace_view.rs": "42d40c2999cd529edf3c0be674bf34f552b0baeee60103eff602f36d4f3099f7",
+    "apps/desktop/src/main.rs": "9fbc9177030e3137928682fcc474f4613b0679902bb68657cdf16557f57cfab7",
+    "apps/desktop/Cargo.lock": "ce335ae81ec926f2ede3214652263c23b7cf09895f301598e31cce14b7fcf237",
+    "crates/session/src/files.rs": "5adb4d4dd6c5ccd3d9e1c0a5e14e4361b304421040f95a0d2eff2079ee1ad6de",
+    "scripts/provider-fixture.py": "d5b828cce52e282300b347c11068565fdf881a1c9591e17e06dc6b40e20b71d3",
+    "scripts/acp-fixture.py": "a0039a684f27b9423c2a55a5cb589829fc1a82846fd19fe5de4c459275f77711"
+  },
+  "artifact_sha256": {
+    "before-root.png": "185f7d546162c1ffd7848220321feed4972703d703509bc24062b3911b7e0853",
+    "reopen.png": "615ee194bde1d5696621e0fe3e13c818228bcb65b16c68d0bb82dc276da8abb3",
+    "refresh.png": "8b8a9b462c47f59d2051ee05bbec6db908de51391b58b09303b0ab7b26baf163",
+    "first-host.png": "21f9f3883d97f0cd77bb9b1e19503245a42cfaa33564f102c9146ff7ce0da769",
+    "other-root.png": "6474228a2a0a0f8098b2a10bfa7883ae0feb51debc811aa256d01a304d64eeaa",
+    "other-host.png": "02c33cdfe5823555fe257210ab43ed061392aa32c0b0634e1801ab73fd942605",
+    "link-refused.png": "80251e5f230aa34f732666253f621c2935c6c3a9cbe71549c1bc5df0b4c1fe96",
+    "missing-file.png": "b1bfdb29e5f3056dbdc0baf82aceda3009efe59596f10e4f763b018f7815f9bf",
+    "snapshots-before.json": "4f16d1ffdbbbfd0a76ec4863d445f21fd46c842f576cbdf678cb89e38ec93cc2",
+    "snapshots-after.json": "4f16d1ffdbbbfd0a76ec4863d445f21fd46c842f576cbdf678cb89e38ec93cc2",
+    "clipboard.json": "d2adcd120a9cf5dc39648937edbac4776eddcdda6c908b579c8dcbf6a3ba5294",
+    "cleanup.json": "dde329047d54179ba2edb4ff3cc7e1698ea99529f803721fc02d3aa7fc4a99d8",
+    "apps.json": "dddc6ca858a2eadad5201878e7cc5072e660629ffaac43dcacdcd805b81da5f4",
+    "clippy.log": "12072f01cd6d2a427f27aff13d6d47bad7ba1a93706f54e722a88e63e6c9553a",
+    "tests.log": "4be93e2ecc60637c99fc864de90582995af0fbd5224deb4452c9b8d5e7dc7ff7",
+    "build.log": "c63c8f6f2fabea5abbb46f538414389d3bcdb07c102b2032d1366fb5d06ddcc0"
+  },
+  "checks": [
+    "desktop fmt check",
+    "all-target strict Clippy",
+    "13 desktop tests",
+    "locked native build"
+  ],
+  "native": {
+    "workspace": "fleetpane-files-location-20261021",
+    "apps": [
+      {
+        "id": "app-2846963",
+        "pid": 2846963,
+        "name": "before",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/tmp/fleetpane-replay-142-20261021/before-desktop",
+          "--hosts",
+          "/tmp/fleetpane-replay-142-20261021/hosts.json"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792537626,
+        "stopped_at_unix": 1792537743
+      },
+      {
+        "id": "app-2852280",
+        "pid": 2852280,
+        "name": "after",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--hosts",
+          "/tmp/fleetpane-replay-142-20261021/hosts.json",
+          "--preferences-dir",
+          "/tmp/fleetpane-replay-142-20261021/prefs"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792537743,
+        "stopped_at_unix": 1792537881
+      },
+      {
+        "id": "app-2859618",
+        "pid": 2859618,
+        "name": "final",
+        "command": [
+          "dbus-run-session",
+          "--",
+          "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+          "--hosts",
+          "/tmp/fleetpane-replay-142-20261021/hosts.json",
+          "--preferences-dir",
+          "/tmp/fleetpane-replay-142-20261021/prefs"
+        ],
+        "running": false,
+        "exit_code": 0,
+        "started_at_unix": 1792537890,
+        "stopped_at_unix": 1792537977
+      }
+    ],
+    "complete_host_snapshots_unchanged": true,
+    "hidden_workspace_stopped": true,
+    "cleanup": {
+      "complete_snapshots_unchanged": true,
+      "owned_processes": {
+        "2846448": "gone",
+        "2846454": "gone",
+        "2846469": "gone",
+        "2846472": "gone"
+      },
+      "sockets_removed": true
+    }
+  },
+  "limits": [
+    "synthetic Codex/ACP protocol providers, no external model",
+    "window-local paths only, no restart/scroll recovery",
+    "no file editing/media preview or Git Diff expansion",
+    "no performance/accessibility/IME/hosted-CI/release acceptance"
+  ]
+}

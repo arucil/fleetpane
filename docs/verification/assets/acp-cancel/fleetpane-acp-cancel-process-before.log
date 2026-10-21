@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-cancel-smoke.py", line 134, in <module>
+    main()
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-cancel-smoke.py", line 88, in main
+    wait(lambda: (root / f"cancel-{identity}-answered.json").exists())
+  File "/home/amlo/Projects/Rust/fleetpane/scripts/acp-cancel-smoke.py", line 29, in wait
+    assert time.monotonic() < deadline, "private tool fixture timed out"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: private tool fixture timed out

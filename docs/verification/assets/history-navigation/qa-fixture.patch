@@ -1,0 +1,13 @@
+--- scripts/acp-fixture.py
++++ acp-navigation-fixture.py
+@@ -608,8 +608,8 @@
+         elif text == "[tasks-clear]":
+             plan([])
+     if text == "[burst]":
+-        for index in range(50):
+-            if stop.wait(0.1):
++        for index in range(300):
++            if stop.wait(0.3):
+                 break
+             update(
+                 identity,

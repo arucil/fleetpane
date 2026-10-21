@@ -1,0 +1,22 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 3.42s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-9c42c15a90689dbb)
+
+running 1 test
+test storage::tests::cancelled_job_keeps_alias_opens_queued_without_blocking_other_stores ... FAILED
+
+failures:
+
+---- storage::tests::cancelled_job_keeps_alias_opens_queued_without_blocking_other_stores stdout ----
+
+thread 'storage::tests::cancelled_job_keeps_alias_opens_queued_without_blocking_other_stores' (2650385) panicked at crates/session/src/storage.rs:183:9:
+alias open must remain queued, got Ok(Err(Input("Local state: database is locked")))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    storage::tests::cancelled_job_keeps_alias_opens_queued_without_blocking_other_stores
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 82 filtered out; finished in 2.07s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

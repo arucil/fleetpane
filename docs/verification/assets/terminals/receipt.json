@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-20",
+  "base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "uncommitted": true,
+  "platform": "Linux",
+  "providers": "Codex and ACP protocol fixtures; real POSIX PTYs; no model requests",
+  "history_review": {
+    "through_ordinal": 27,
+    "through_revision": "65c6f81605347ee4a77a7e90e5b9772314eadbde",
+    "next_ordinal": 28,
+    "next_revision": "14230c681f8e1cf3d738392dbb6222df4a533a97",
+    "scope": "selected paths recorded per commit; not all-file audit"
+  },
+  "sources": {
+    "Cargo.toml": "5508cf12b05efe93861bbc837a9adba41dc4a2a96f42e2cd85186d0ea8a0883d",
+    "Cargo.lock": "50f5dcc7e9c34b6802b736d737ab434c4c94db4f17c8e195b51e2e62743d0da0",
+    "apps/desktop/Cargo.lock": "5ef6e1d24a613ecc4b7a910832354f65ba6b7bb540dfd18e98d5904507284e93",
+    "crates/runtime/Cargo.toml": "837d6e59b78b04891862be6e59c37138cbaae073d885006a152834de54ae98e4",
+    "crates/runtime/src/lib.rs": "34656b8ae9cf3825483aec5cbab850c15cd0350ab907b6e7b7d6cae11b63babc",
+    "crates/runtime/src/lifecycle.rs": "a3eb5ebc48c7dd31bf6e9850e5c55f4f603d263b83fc6b3463071de38deda173",
+    "crates/runtime/src/unix.rs": "06e8c9d8ce32b426265cba2c13ad5c2cd79b9b9b70d22915dedbf5677e834f2f",
+    "crates/runtime/src/terminal.rs": "c23d4c580486bdea7acdd2124ba980e9d90b585dad053845d1d8dab55b8f9db0",
+    "crates/runtime/src/terminal/host.rs": "15a86e0f9a854e00753db6d9cbab9ff0257fdaa857e5cb3263c16a5a0d5f7a46",
+    "crates/session/src/client.rs": "c8b9aff8a6c278db8e658c3d29648b75ee8e45474fe98c19c51beccce9c9ab39",
+    "crates/session/src/terminals.rs": "d189a84306e0514cd2e3b1dac098c846b7d8fa543a21dbeb70f060a3251fba62",
+    "crates/session/src/lib.rs": "c797051ad2b796744065f1a6cef9146a72bb9b56921f7c247aab6b199d4c1824",
+    "crates/session/src/routing.rs": "fb84d9b9e92b19cc4857243cb4e55f25004fa0e8c7d0d2968851ee0db6e5cffc",
+    "apps/host/src/main.rs": "8f2de5a20bff9a472db3ef458cb1916e250c43a971bdaae9e87a66c5dd244b2b",
+    "apps/desktop/src/host_view.rs": "f860a17a54e7fa3ae1d7d414a2326c320ef4c311066b57a50cb817d4135af288",
+    "scripts/terminal-smoke.py": "24c92a2acb429cad48ec8d0b61bf39340c581843cc1b8c5324057b684cf95812",
+    "docs/reference/paseo-replay.json": "d1e1fb1d091836bf14349e2b91d62aef2b7ab6f0010a216445046cc11b28bf50"
+  },
+  "binary_sha256": "e2f4c0c792c86c8f7b753c18b790654c579a17c4b60977fa23af815eef2b7728",
+  "logs": {
+    "smoke.json": {
+      "sha256": "2c1fc0c30718a990737760b2592265fd572221b731da889b000762da5e567e55",
+      "bytes": 1123
+    },
+    "tests.log": {
+      "sha256": "67940fe7a6c64afe34a0427b9ef85d617a78a458bde3964f1c17a92cbd6f4dfe",
+      "bytes": 10404
+    },
+    "clippy.log": {
+      "sha256": "8ac3e3c834e234de72e535be1ef9e3eaa93b5a2f81951ab4a7bf5665fdc61dd5",
+      "bytes": 232
+    },
+    "build.log": {
+      "sha256": "4912b76b68d00a7e9afd0fe7462595c047917df49be4adf8f1c03e848f06af57",
+      "bytes": 142
+    },
+    "desktop-tests.log": {
+      "sha256": "7c45bcf2510922c45c12fb9e150301df1d8b7d60f8cd4acd76d939207dde6ae2",
+      "bytes": 1083
+    },
+    "desktop-clippy.log": {
+      "sha256": "a008714c671cdfc90ab810a259fdc6abc9662316569e4d3d594a0713357657e0",
+      "bytes": 238
+    },
+    "session.log": {
+      "sha256": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0",
+      "bytes": 258
+    },
+    "drain.log": {
+      "sha256": "78f7643249e280be2671142dc62b9ebde692877ae27416750612d0c4e470bf57",
+      "bytes": 664
+    },
+    "acp.log": {
+      "sha256": "30f220c83def4ab4d5096c3e3c90b397b0dea32645110db33daf3b2cc0682392",
+      "bytes": 218
+    },
+    "reader-tests.log": {
+      "sha256": "284d3dea830be230ad5e2e08993b65f42d9aecc760d873f8114d3cf934480de7",
+      "bytes": 112
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    }
+  },
+  "rust_test_counts": {
+    "tests.log": 101,
+    "desktop-tests.log": 7
+  },
+  "cleanup": [
+    {
+      "kind": "host_pid",
+      "pid": 2070343,
+      "absent": true
+    },
+    {
+      "kind": "provider_pid",
+      "pid": 2070345,
+      "absent": true
+    },
+    {
+      "kind": "shell_pid",
+      "pid": 2070355,
+      "absent": true
+    },
+    {
+      "kind": "fault_shell_pid",
+      "pid": 2071552,
+      "absent": true
+    },
+    {
+      "kind": "host_pid",
+      "pid": 2071558,
+      "absent": true
+    },
+    {
+      "kind": "provider_pid",
+      "pid": 2071561,
+      "absent": true
+    },
+    {
+      "kind": "shell_pid",
+      "pid": 2071572,
+      "absent": true
+    },
+    {
+      "kind": "fault_shell_pid",
+      "pid": 2072859,
+      "absent": true
+    }
+  ],
+  "limits": [
+    "No native terminal emulator or visual interaction acceptance",
+    "No Host restart/handoff recovery",
+    "Provider fault fence still rejects terminal mutations including close; reproduced",
+    "No macOS/Windows runtime acceptance or real-provider co-existence claim",
+    "No perf, remote CI, commit, push or release claim"
+  ]
+}

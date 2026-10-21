@@ -1,0 +1,224 @@
+{
+  "date": "2026-10-21",
+  "worktree_base": "c91d269247207a08898e264c81083df4fbd4e745",
+  "source_state": "uncommitted working tree; hashes identify the implementation verified here",
+  "source_sha256": {
+    "crates/session/src/paseo_import.rs": "ae382bbec90fc9f41f70d445abe81698e3374be7c50449f0b0c6069bcb1990b8",
+    "crates/session/src/paseo_import/history.rs": "ec27c4d2016f2ecafa2184c1d5ce15e15916faab94187ae5d33574f99508a1f0",
+    "crates/session/src/paseo_import/scratch.rs": "0176edc40a5d6c3b0b1472468036aa49c1433836e45573d83e879a40fed5abfc",
+    "crates/session/src/paseo_import/scratch/tests.rs": "b8363ccb82b4208a2e232c6351b96727ee6289194407983e233a477eeb2d3493",
+    "apps/host/src/main.rs": "d5b4be91695fb8ae57d6bb265c3ad18613afda7d104d1daa60e14126012e30ee",
+    "apps/desktop/src/paseo_import_view.rs": "41f387098fbec65f0097b569dbc8e886c7a3e8ee8cfdaffd3ba5d804b8724a01",
+    "apps/desktop/src/paseo_import_view/scratch.rs": "72427256762e131b3b0c94b43e2487cd0f0ee7b1f85d043cfa8d6bcf00b2807a",
+    "scripts/paseo-scratch-smoke.py": "5f98fc206f4f165f54ec863d2c134c8f5c2768d233c4c32f3f0155efd0ce8cf7",
+    "scripts/paseo-receipts-smoke.py": "edc312823b49b16ffd3a2748c28dd87457f3648ba309170ed626a98d1612e66a",
+    ".github/workflows/ci.yml": "e9856d819fa2933ec7a88b990fa1a52c929e64223bafbc991983f30719c9465b"
+  },
+  "binaries_sha256": {
+    "target/debug/fleetpane-host": "87c1f439f492285f3a7ac9e1103d8cf86617ed2e5588e188631bd50afe3ed981",
+    "apps/desktop/target/debug/fleetpane-desktop": "be25ffe9f8f7b56e88e70e885951c09252ef030fcec773c312c04cb02bd78a36"
+  },
+  "automated": {
+    "workspace_tests": 223,
+    "desktop_tests": 19,
+    "paseo_import_tests": 36,
+    "scratch_tests": 5,
+    "python_script_tests": 15,
+    "workspace_clippy": "pass",
+    "desktop_clippy": "pass",
+    "format_checks": "pass",
+    "single_batch_v4_and_synthetic_fork_smokes": "pass",
+    "paused_killed_copy_smoke": "pass"
+  },
+  "commands": [
+    "cargo test -p fleetpane-session paseo_import::scratch --locked",
+    "cargo test -p fleetpane-session paseo_import --locked",
+    "cargo test --workspace --locked",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings",
+    "cargo fmt --all --check",
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml --all --check",
+    "cargo build -p fleetpane-host --locked",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/paseo-scratch-smoke.py --keep /tmp/fp-paseo-scratch-final",
+    "python3 scripts/paseo-import-smoke.py",
+    "python3 scripts/paseo-batch-smoke.py",
+    "python3 scripts/paseo-dsh-v4-smoke.py",
+    "python3 scripts/paseo-fork-smoke.py",
+    "python3 -m unittest discover -s scripts/tests -p '*_test.py' -v",
+    "python3 -m py_compile scripts/paseo-scratch-smoke.py scripts/paseo-receipts-smoke.py",
+    "git diff --check"
+  ],
+  "process_smoke": {
+    "paused_writer_retained": true,
+    "killed_copy_collected": true,
+    "read_only_size_preview": true,
+    "unexpected_entry_no_partial_deletion": true,
+    "repeat_collection_empty": true,
+    "legacy_files_retained": true,
+    "published_histories_readable_and_unchanged": true,
+    "source_unchanged": true,
+    "status": {
+      "files": 2,
+      "bytes": 16904,
+      "removed": false,
+      "legacy_files_retained": 2
+    },
+    "removed": {
+      "files": 2,
+      "bytes": 16904,
+      "removed": true,
+      "legacy_files_retained": 2
+    }
+  },
+  "native": {
+    "native_cleanup_after_refusal": true,
+    "source_unchanged": true,
+    "published_unchanged": true,
+    "legacy_unchanged": true,
+    "reports_unchanged": true,
+    "status": {
+      "files": 0,
+      "bytes": 0,
+      "removed": false,
+      "legacy_files_retained": 1
+    },
+    "history_rows": {
+      "8f20c1b6-e39c-4baa-a322-3d1cb2a29bea": 2,
+      "593787cf-8fee-417e-aead-dd3017cf441f": 60000,
+      "75b3e7ef-64d9-469e-a4e6-b4934399b886": 2,
+      "bd99dc5e-6c0a-447f-81e0-1414abb10541": 45
+    },
+    "host_never_started": true,
+    "desktop_pid": 1521972,
+    "desktop_sha256": "be25ffe9f8f7b56e88e70e885951c09252ef030fcec773c312c04cb02bd78a36",
+    "host_sha256": "87c1f439f492285f3a7ac9e1103d8cf86617ed2e5588e188631bd50afe3ed981",
+    "reopened_pid": 1579035,
+    "reopened_same_binary": true,
+    "native_empty_check_after_reopen": true,
+    "native_history_after_cleanup": true,
+    "final_hashes_and_reports_unchanged": true,
+    "window_closed_process_still_running_after_3s": true
+  },
+  "workspace": {
+    "id": "fp-paseo-scratch",
+    "display_size": [
+      1500,
+      1100
+    ],
+    "window_size": [
+      1100,
+      720
+    ],
+    "cleanup": {
+      "ok": true,
+      "message": "workspace stopped",
+      "status": {
+        "id": "fp-paseo-scratch",
+        "session_id": "session-fp-paseo-scratch-1792577172392-1515708",
+        "purpose": "Fleetpane abandoned migration file cleanup native QA",
+        "user_acknowledged_hidden_workspace": true,
+        "user_acknowledged_unenforced_policy": false,
+        "ready": false,
+        "started_at_unix": 1792577172,
+        "display": ":91",
+        "width": 1500,
+        "height": 1100,
+        "runtime_dir": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch",
+        "socket_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/control.sock",
+        "xauthority_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/Xauthority",
+        "daemon_pid": 1515741,
+        "x_server_pid": 1515752,
+        "window_manager_pid": 1515824,
+        "last_event_sequence": 44,
+        "apps": []
+      },
+      "apps": [
+        {
+          "id": "app-1579035",
+          "name": "Fleetpane-scratch-reopen",
+          "pid": 1579035,
+          "process_group_id": 1579035,
+          "mount_isolation": "host",
+          "network_isolation": "host",
+          "command": [
+            "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+            "--hosts",
+            "/tmp/fp-paseo-scratch-ui/hosts.json",
+            "--preferences-dir",
+            "/tmp/fp-paseo-scratch-ui/preferences"
+          ],
+          "cwd": "/home/amlo/Projects/Rust/fleetpane",
+          "env": [
+            {
+              "name": "PASEO_HOME",
+              "value": "/tmp/fp-paseo-scratch-ui/paseo"
+            },
+            {
+              "name": "CODEX_HOME",
+              "value": "/tmp/fp-paseo-scratch-ui/codex"
+            },
+            {
+              "name": "DSH_HOME",
+              "value": "/tmp/fp-paseo-scratch-ui/dsh"
+            }
+          ],
+          "stdout_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/apps/app-1579035.stdout.log",
+          "stderr_path": "/run/user/1000/agent-workspace-linux/fp-paseo-scratch/apps/app-1579035.stderr.log",
+          "started_at_unix": 1792577552,
+          "running": false,
+          "exit_status": "signal: 15 (SIGTERM)",
+          "exit_signal": 15,
+          "stopped_at_unix": 1792577808,
+          "runtime_seconds": 256
+        }
+      ]
+    }
+  },
+  "limits": [
+    "synthetic fixtures; no new real provider/model verification",
+    "hosted CI not run for this working tree",
+    "no legacy-file deletion, automatic collection or archive quotas",
+    "macOS and Windows native not verified",
+    "window-close did not exit within 3 seconds; app terminated explicitly before reopening",
+    "no power-loss simulation or fault-injected partial unlink",
+    "no throughput/performance measurement",
+    "no commit or push"
+  ],
+  "artifacts_sha256": {
+    "before.json": "7f2887f4faa67f4d24359a95b09960e617587f781746f326f07b698580321342",
+    "scratch-tests.log": "cfaaef6cbdd28aa8b1ea612b1f4d7e822d43745ba0655bb907fb62032c5a3e30",
+    "import-tests.log": "225a246b0b8620e8277402175c3eb966bdf2a041b13eddbc203ccbc702c22e44",
+    "root-tests.log": "3bfd1fb32e055598cce5ad3d19e7f9f311c2249dc09d808ff8d4c325ea5704e4",
+    "root-clippy.log": "90058916daf08c23c6c17e04b717fb168acf3b9daf5f80f7a04e0d0bef44f2b7",
+    "desktop-tests.log": "0a9a53eb34ae62279ae0b237c721e2ac57db61eb219e69f674b415cc50f63054",
+    "desktop-clippy.log": "80883594745657fad28e157e242379bb6e2aacbcd3a566d88aeee02cb1934eaf",
+    "desktop-check.log": "5a1ffe2317123cfc1b128c3d3132a8a33a3f331a1a4ef52fda941c90ffa9b128",
+    "desktop-build.log": "a3bf94a62381e0d7a1c5b3194a7c6700ac8ea9a41e77397d33fe16be416780ba",
+    "host-build.log": "633430eb9c64f4209969e94f299fee03e988a1e3bf9729000c5c44d841cb72e9",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "process-final.log": "01a37a988f51a9001ffb0d822c354f36d7a51ea0526ac89d07b25280a30b7128",
+    "single-smoke.log": "566b1d5f7291a66822e28a9fd639c21f3eac418820232c100a3d0e109a119b62",
+    "batch-smoke.log": "f0b4330d39b5cca07eeaa1d8341155b7accc2aea1733fcae6f12f205aa1e0b79",
+    "dsh-smoke.log": "83b0fce78131952c697b0be928c0ff0d34b97fce1f173cc8b56c61d012732823",
+    "fork-smoke.log": "3c773a18685436e81a14952baa3d40b3957a75671ad624fca1661dec42f74ef6",
+    "python-tests.log": "60ae891f98221eeb04509832c2d1fba41380f212e76ac1707fbf26aac8906db7",
+    "native-before.json": "dd46e51421a3b1cbbe402459399f3c1bad8c0d7945dc065c510d7dc1e43fda08",
+    "native-refusal.json": "3c0de879b931687790660edda1ad4390d8c6402f0426ca06b7f6a25a659e6190",
+    "native-receipt.json": "64c7a2055a0d0d433cbc8efa705c7f42b650bda565a948664cd1e567b8e5f8dd",
+    "launch.json": "3709b10400958e1f529846d269f8a8712745356449c7ff6b88baac87c395b436",
+    "relaunch.json": "ddd229a7bc3b98e63936d8d12cfea6b10798c9d17d39f93df3f996dfaa380107",
+    "closed-app.json": "ce44307e35c6a3f6fea65091dbf8e2300f65cd426b1b92c27650372168097e37",
+    "terminate-closed-app.json": "191fdc98b9ca834a8ba86c665d5ed2d5e784616601104fc8e3d33e1f610b22f2",
+    "reopen-app-log.json": "10a3955337f4391d193491d4ec86bb0217d29a2ccee9ed5eb3d663cd3c3a6176",
+    "cleanup.json": "5a3f16d48255af913ca003420a7828d40ebe3502dfca86627b0849613b0ac217",
+    "native-preview.png": "33187cd9fecf8cb286ab636c902ea6abf1e7b287230e15782209f05872b641d6",
+    "native-active-refusal.png": "0659f4359cff70a0f68c008115bdb7e3edf77a6eb15385ecb94bbbfa7b492a39",
+    "native-cleared.png": "0679c8a6fd3753cb772c35d81fa5dda2d1f1c6bb5f8ee85abf820b01d7e0fc4c",
+    "native-reopen-empty.png": "00cb5a670bc2622aaf6cc1cdb75f241c1406a8f176e4081d3402c21dacd43fcf",
+    "native-history-after-cleanup.png": "7b1f9ee088d5ace59130fd3f1599b0ec076990e79dddbc26e6502d93e953547b"
+  }
+}

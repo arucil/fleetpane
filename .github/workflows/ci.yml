@@ -24,8 +24,58 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo test --workspace --locked
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - if: runner.os == 'Linux'
+        run: python3 -m unittest discover -s scripts/tests -p '*_test.py'
       - if: runner.os != 'Windows'
         run: cargo build -p fleetpane-host --locked
+      - name: Device appearance persistence
+        if: runner.os != 'Windows'
+        run: python3 scripts/appearance-smoke.py
+      - name: ACP activity chronology
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-order-smoke.py
+      - name: ACP idle session metadata
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-info-smoke.py
+      - name: ACP v1 session modes
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-modes-smoke.py
+      - name: ACP tool call snapshots
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-tools-smoke.py
+      - name: Supplied ACP and MCP resources
+        if: runner.os != 'Windows'
+        run: python3 scripts/resources-smoke.py
+      - name: ACP permission cancellation
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-cancel-smoke.py
+      - name: Stop acknowledgement and exact-turn completion
+        if: runner.os != 'Windows'
+        run: python3 scripts/stop-progress-smoke.py
+      - name: ACP permission review
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-review-smoke.py
+      - name: Recent workspace directories
+        if: runner.os != 'Windows'
+        run: python3 scripts/recent-directories-smoke.py
+      - name: Offline Paseo workspace and history migration
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-import-smoke.py
+      - name: Bulk Paseo workspace and history migration
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-batch-smoke.py
+      - name: Interrupted Paseo migration receipts and retry
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-receipts-smoke.py
+      - name: Abandoned Paseo copy collection
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-scratch-smoke.py
+      - name: DeepSeek v4 offline history migration
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-dsh-v4-smoke.py
+      - name: Independent Paseo Codex history fork
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-fork-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/runtime-smoke.py
       - if: runner.os != 'Windows'
@@ -42,6 +92,12 @@ jobs:
         run: python3 scripts/acp-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/acp-history-smoke.py
+      - name: ACP archive crash and storage boundaries
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-archive-smoke.py
+      - name: ACP admission and explicit stop reasons
+        if: runner.os != 'Windows'
+        run: python3 scripts/acp-stop-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/concurrency-smoke.py
       - if: runner.os != 'Windows'
@@ -57,9 +113,19 @@ jobs:
       - if: runner.os != 'Windows'
         run: python3 scripts/drafts-smoke.py
       - if: runner.os != 'Windows'
+        run: python3 scripts/images-smoke.py
+      - if: runner.os != 'Windows'
+        run: python3 scripts/steering-smoke.py
+      - if: runner.os != 'Windows'
         run: python3 scripts/tasks-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/workspaces-smoke.py
+      - if: runner.os != 'Windows'
+        run: python3 scripts/workspace-pins-smoke.py
+      - if: runner.os != 'Windows'
+        run: python3 scripts/files-smoke.py
+      - if: runner.os == 'Linux'
+        run: python3 scripts/terminal-smoke.py
       - if: runner.os != 'Windows'
         run: python3 scripts/diffs-smoke.py
       - if: runner.os != 'Windows'

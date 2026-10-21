@@ -11,6 +11,8 @@ import threading
 import time
 from pathlib import Path
 
+from resource_fixture import blocks as resource_blocks
+
 lock = threading.Lock()
 approval_operation = None
 state_lock = threading.RLock()
@@ -25,6 +27,19 @@ parser.add_argument(
 )
 parser.add_argument(
     "--models", type=Path, help="Reload synthetic model catalog on each model/list"
+)
+parser.add_argument(
+    "--tree-control",
+    type=Path,
+    help="Reload synthetic session inventory faults on reads",
+)
+parser.add_argument(
+    "--stop-control",
+    type=Path,
+    help="Control synthetic interrupt acknowledgement/completion ordering",
+)
+parser.add_argument(
+    "--stop-effects", type=Path, help="Record synthetic interrupt submissions"
 )
 parser.add_argument(
     "--rename-admission-marker",
@@ -52,6 +67,12 @@ parser.add_argument(
     "--hold-send",
     action="store_true",
     help="Hold turn/start after recording its synthetic side effect",
+)
+parser.add_argument(
+    "--steer-effects", type=Path, help="Fsync synthetic turn/steer receipts"
+)
+parser.add_argument(
+    "--hold-steer", action="store_true", help="Hold a steer response after receipt"
 )
 args = parser.parse_args()
 if args.history:
@@ -120,6 +141,29 @@ def finish_turn(thread_id, turn_id, status):
 
 def stream(thread_id, turn_id, text):
     stop = running[turn_id]
+    if text.startswith("[resource-") and text.endswith("]"):
+        case = text[len("[resource-") : -1]
+        item = {
+            "id": f"resource-{turn_id}",
+            "type": "mcpToolCall",
+            "server": "synthetic",
+            "tool": f"resource_{case}",
+            "status": "completed",
+            "arguments": False,
+            "result": {"content": resource_blocks(case)},
+            "error": None,
+        }
+        with state_lock:
+            turn = next(
+                turn for turn in threads[thread_id]["turns"] if turn["id"] == turn_id
+            )
+            turn["items"].append(item)
+            notify(
+                "item/completed",
+                {"threadId": thread_id, "turnId": turn_id, "item": item},
+            )
+        finish_turn(thread_id, turn_id, "completed")
+        return
     if text in ("[tasks]", "[tasks-wait]", "[tasks-clear]", "[tasks-future]"):
         entries = [
             {"step": "检查现有实现", "status": "completed", "priority": "high"},
@@ -289,8 +333,51 @@ def stream(thread_id, turn_id, text):
     finish_turn(thread_id, turn_id, "failed" if text == "[fail]" else "completed")
 
 
+def controlled_interrupt(message):
+    if args.stop_effects:
+        with args.stop_effects.open("a") as output:
+            output.write(json.dumps(message) + "\n")
+            output.flush()
+            os.fsync(output.fileno())
+    control = json.loads(args.stop_control.read_text())
+    mode = control["mode"]
+    if mode == "reject":
+        send(
+            {
+                "id": message["id"],
+                "error": {"code": -32600, "message": "Synthetic stop rejection"},
+            }
+        )
+        return
+    if mode == "ack-first":
+        send({"id": message["id"], "result": {}})
+        notify(
+            "thread/status/changed",
+            {"threadId": message["params"]["threadId"], "status": {"type": "idle"}},
+        )
+    elif mode == "completion-first":
+        finish_turn(
+            message["params"]["threadId"], message["params"]["turnId"], "interrupted"
+        )
+    elif mode != "unanswered":
+        raise ValueError(f"Unknown synthetic stop mode {mode}")
+    while not json.loads(args.stop_control.read_text()).get("release", False):
+        time.sleep(0.01)
+    if mode != "completion-first":
+        finish_turn(
+            message["params"]["threadId"], message["params"]["turnId"], "interrupted"
+        )
+    if mode != "ack-first":
+        send({"id": message["id"], "result": {}})
+
+
 def session(message):
     method, params = message["method"], message["params"]
+    if method == "turn/interrupt" and args.stop_control:
+        threading.Thread(
+            target=controlled_interrupt, args=(message,), daemon=True
+        ).start()
+        return
     if method in ("thread/turns/list", "thread/items/list") and args.history_page_delay:
         time.sleep(args.history_page_delay)
     with state_lock:
@@ -315,8 +402,43 @@ def session(message):
                 "data": models[offset:end],
                 "nextCursor": str(end) if end < len(models) else None,
             }
+        elif method == "thread/loaded/list":
+            control = (
+                json.loads(args.tree_control.read_text()) if args.tree_control else {}
+            )
+            if control.get("fail"):
+                send(
+                    {
+                        "id": message["id"],
+                        "error": {
+                            "code": -32600,
+                            "message": "Synthetic tree inventory failure",
+                        },
+                    }
+                )
+                return
+            ids = [
+                thread["id"]
+                for thread in threads.values()
+                if thread.get("fixtureLoaded", False)
+            ]
+            if "loadedIds" in control:
+                ids = control["loadedIds"]
+            cursor = params.get("cursor")
+            offset = int(cursor) if cursor else 0
+            end = offset + params["limit"]
+            result = {
+                "data": ids[offset:end],
+                "nextCursor": str(end) if end < len(ids) else None,
+            }
         elif method == "thread/list":
-            filtered = list(threads.values())
+            filtered = [
+                thread
+                for thread in threads.values()
+                if bool(thread.get("fixtureArchived", False))
+                == params.get("archived", False)
+                and thread.get("fixtureListed", True)
+            ]
             if params.get("searchTerm"):
                 term = params["searchTerm"].casefold()
                 filtered = [
@@ -328,7 +450,7 @@ def session(message):
                 filtered = [
                     thread for thread in filtered if thread["cwd"] == params["cwd"]
                 ]
-            query = {key: params.get(key) for key in ("searchTerm", "cwd")}
+            query = {key: params.get(key) for key in ("searchTerm", "cwd", "archived")}
             cursor = params.get("cursor")
             offset = 0
             if cursor:
@@ -404,8 +526,56 @@ def session(message):
             }
             threads[thread_id] = thread
             result = {"thread": thread}
+        elif method == "thread/fork":
+            assert params["excludeTurns"] is True and params["deferGoalContinuation"] is True
+            records = [json.loads(line) for line in Path(params["path"]).read_text().splitlines()]
+            assert records[0]["payload"]["id"] == params["threadId"]
+            if args.creation_effects:
+                with args.creation_effects.open("a") as effects:
+                    effects.write(json.dumps(message) + "\n")
+                    effects.flush()
+                    os.fsync(effects.fileno())
+            if args.hold_creation:
+                return
+            thread_id = f"forked-fixture-{len(threads) + 1}"
+            thread = {"id":thread_id,"cwd":params["cwd"],"preview":"Imported context","name":"Forked 中文 history","historyMode":"paginated","status":{"type":"idle"},"turns":[{"id":"imported-turn","status":"completed","items":[{"id":f"saved-{i}","type":"agentMessage","text":record["payload"]["content"][0]["text"]} for i,record in enumerate(records) if record.get("type")=="response_item" and record["payload"].get("type")=="message"]}]}
+            threads[thread_id] = thread
+            result = {"thread":{**copy.deepcopy(thread),"turns":[]}}
+        elif method == "thread/unarchive":
+            thread = threads[params["threadId"]]
+            if thread.get("name") == "[restore-fail]":
+                send(
+                    {
+                        "id": message["id"],
+                        "error": {
+                            "code": -32600,
+                            "message": "Synthetic restore refusal",
+                        },
+                    }
+                )
+                return
+            thread["fixtureArchived"] = False
+            result = {"thread": {**copy.deepcopy(thread), "turns": []}}
         elif method in ("thread/read", "thread/resume"):
+            if method == "thread/resume":
+                if threads[params["threadId"]].get("fixtureArchived", False):
+                    send(
+                        {
+                            "id": message["id"],
+                            "error": {
+                                "code": -32600,
+                                "message": "Restore the archived fixture before resuming",
+                            },
+                        }
+                    )
+                    return
+                if threads[params["threadId"]]["status"]["type"] == "notLoaded":
+                    threads[params["threadId"]]["status"] = {"type": "idle"}
             thread = copy.deepcopy(threads[params["threadId"]])
+            if method == "thread/read" and args.tree_control:
+                control = json.loads(args.tree_control.read_text())
+                if control.get("wrongReadIdentity") == thread["id"]:
+                    thread["id"] = "another-original-session"
             if params.get("excludeTurns") or params.get("includeTurns") is False:
                 thread["turns"] = []
             result = {"thread": thread}
@@ -449,7 +619,9 @@ def session(message):
                     }
                 )
                 return
-            text = params["input"][0]["text"]
+            text = "".join(
+                part["text"] for part in params["input"] if part["type"] == "text"
+            )
             if args.send_effects:
                 with args.send_effects.open("a") as effects:
                     effects.write(json.dumps(message) + "\n")
@@ -491,7 +663,7 @@ def session(message):
             item = {
                 "id": f"user-{turn_id}",
                 "type": "userMessage",
-                "content": [{"type": "text", "text": text}],
+                "content": copy.deepcopy(params["input"]),
             }
             turn["items"].append(item)
             notify(
@@ -503,6 +675,46 @@ def session(message):
                 target=stream, args=(thread_id, turn_id, text), daemon=True
             ).start()
             return
+        elif method == "turn/steer":
+            thread_id = params["threadId"]
+            turn_id = params["expectedTurnId"]
+            thread = threads[thread_id]
+            active = next(
+                (t for t in thread["turns"] if t["status"] == "inProgress"), None
+            )
+            if active is None or active["id"] != turn_id:
+                send(
+                    {
+                        "id": message["id"],
+                        "error": {
+                            "code": -32600,
+                            "message": "expected active turn does not match",
+                        },
+                    }
+                )
+                return
+            text = params["input"][0]["text"]
+            if args.steer_effects:
+                with args.steer_effects.open("a") as output:
+                    output.write(json.dumps(params, ensure_ascii=False) + "\n")
+                    output.flush()
+                    os.fsync(output.fileno())
+            if args.hold_steer:
+                return
+            if text == "[bad-steer-ack]":
+                send({"id": message["id"], "result": {"turnId": "wrong-turn"}})
+                return
+            item = {
+                "id": f"steer-{turn_id}-{len(active['items'])}",
+                "type": "userMessage",
+                "content": [{"type": "text", "text": text}],
+            }
+            active["items"].append(item)
+            notify(
+                "item/completed",
+                {"threadId": thread_id, "turnId": turn_id, "item": item},
+            )
+            result = {"turnId": turn_id}
         elif method == "turn/interrupt":
             finish_turn(params["threadId"], params["turnId"], "interrupted")
             result = {}
@@ -544,13 +756,17 @@ for line in sys.stdin:
     elif method in (
         "model/list",
         "thread/list",
+        "thread/loaded/list",
         "thread/name/set",
         "thread/start",
+        "thread/fork",
         "thread/read",
+        "thread/unarchive",
         "thread/resume",
         "thread/turns/list",
         "thread/items/list",
         "turn/start",
+        "turn/steer",
         "turn/interrupt",
     ):
         session(message)

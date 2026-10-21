@@ -1,0 +1,31 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+    Finished `test` profile [unoptimized] target(s) in 1.87s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_runtime-5aec065a82877275)
+
+running 4 tests
+test acp::tests::invalid_tool_patch_is_rejected_before_changing_a_card ... FAILED
+test acp::tests::minimal_tool_call_defaults_and_interleaved_updates_keep_one_card ... FAILED
+test acp::tests::chunks_merge_by_message_and_partial_tool_updates_keep_input ... ok
+test acp::tests::anonymous_chunks_keep_tool_and_role_boundaries_without_trimming ... ok
+
+failures:
+
+---- acp::tests::invalid_tool_patch_is_rejected_before_changing_a_card stdout ----
+
+thread 'acp::tests::invalid_tool_patch_is_rejected_before_changing_a_card' (331734) panicked at crates/runtime/src/acp.rs:1067:13:
+assertion failed: adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":patch}})).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- acp::tests::minimal_tool_call_defaults_and_interleaved_updates_keep_one_card stdout ----
+
+thread 'acp::tests::minimal_tool_call_defaults_and_interleaved_updates_keep_one_card' (331735) panicked at crates/runtime/src/acp.rs:1035:119:
+called `Result::unwrap()` on an `Err` value: "ACP title must contain a string"
+
+
+failures:
+    acp::tests::invalid_tool_patch_is_rejected_before_changing_a_card
+    acp::tests::minimal_tool_call_defaults_and_interleaved_updates_keep_one_card
+
+test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-runtime --lib`

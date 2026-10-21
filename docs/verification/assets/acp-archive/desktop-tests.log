@@ -1,0 +1,18 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 10.48s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-111b93d308106099)
+
+running 8 tests
+test conversation_item::tests::invalid_image_data_is_visible_failure ... ok
+test conversation_item::tests::long_commands_use_a_summary_without_losing_the_script ... ok
+test host_view::row_changes::tests::pagination_reorder_edits_removal_and_thread_switch_use_identity ... ok
+test terminal_view::tests::polling_preserves_one_explicit_action_and_never_repeats_it ... ok
+test conversation_item::tests::codex_patch_variants_parse_as_diff_files ... ok
+test files_view::tests::preview_preserves_utf8_and_caps_display_only ... ok
+test conversation_item::tests::previews_keep_utf8_and_copy_source_is_complete ... ok
+test host_view::row_changes::tests::streaming_tail_updates_one_card_without_touching_1200_retained_cards ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+

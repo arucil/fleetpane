@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "message": "workspace app stopped",
+  "status": {
+    "id": "fleetpane-acp-cancel-20261021",
+    "session_id": "session-fleetpane-acp-cancel-20261021-1792523428361-119938",
+    "purpose": "Fleetpane Stop pending permissions isolated native QA",
+    "user_acknowledged_hidden_workspace": true,
+    "user_acknowledged_unenforced_policy": false,
+    "ready": true,
+    "started_at_unix": 1792523428,
+    "display": ":90",
+    "width": 1680,
+    "height": 1100,
+    "runtime_dir": "/run/user/1000/agent-workspace-linux/fleetpane-acp-cancel-20261021",
+    "socket_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-cancel-20261021/control.sock",
+    "xauthority_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-cancel-20261021/Xauthority",
+    "daemon_pid": 382613,
+    "x_server_pid": 382614,
+    "window_manager_pid": 382624,
+    "last_event_sequence": 28,
+    "apps": []
+  },
+  "apps": [
+    {
+      "id": "app-383044",
+      "pid": 383044,
+      "process_group_id": 383044,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--host",
+        "/tmp/fleetpane-acp-cancel-qa/private/control.sock",
+        "--preferences-dir",
+        "/tmp/fleetpane-acp-cancel-qa/preferences"
+      ],
+      "cwd": "/home/amlo/Projects/Rust/fleetpane",
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-cancel-20261021/apps/app-383044.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-acp-cancel-20261021/apps/app-383044.stderr.log",
+      "started_at_unix": 1792523448,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792523555,
+      "runtime_seconds": 107
+    }
+  ],
+  "agent_mode": {
+    "control_mode": "active",
+    "allows_agent_mutation": true,
+    "headless": false,
+    "ready_for_x11_workspace": true,
+    "ready_for_host_viewer": false,
+    "viewer_available": false,
+    "viewer_unavailable_reason": "no host display is ready; workspace_doctor.ready_for_host_viewer=false"
+  },
+  "target_handles": {
+    "workspace_id": "fleetpane-acp-cancel-20261021",
+    "app_ids": [
+      "app-383044"
+    ]
+  }
+}
