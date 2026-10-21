@@ -1,5 +1,6 @@
 //! Retain separate Host views; switching never transfers a lease or resumes a session.
 mod attention;
+mod completion;
 mod diagnostics;
 mod files;
 mod host_choice;
@@ -157,7 +158,7 @@ impl Workbench {
         if let Some(error) = &self.host_choice.error {
             return Err(error.clone());
         }
-        let mut ready = !self.host_choice.busy;
+        let mut ready = !self.host_choice.busy && !self.attention.review_busy;
         for slot in &self.slots {
             if let Some(view) = &slot.view {
                 ready &= view

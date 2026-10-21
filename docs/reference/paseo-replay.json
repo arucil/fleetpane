@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 307,
-    "last_revision": "9aacc26eb6bea6fda5d5d48a59976adf2e200182",
-    "next_revision": "d3ad27e10a1e2b739c12c6e9d95201978765f015",
-    "next_ordinal": 308
+    "last_ordinal": 317,
+    "last_revision": "b8de55f31bc6e3119dbcb54e9797d7750ffd39b3",
+    "next_revision": "f06170fceed8170aff38f8d51b4c4acca0e402e6",
+    "next_ordinal": 318
   },
   "entries": [
     {
@@ -4412,6 +4412,126 @@
       ],
       "finding": "Adds bounded wait timeout and cleans listeners while the agent continues. Historical timeout returns snapshot lifecycle or guessed idle; Fleetpane existing exact-turn wait reports timed_out/unknown explicitly.",
       "fleetpane_action": "keep-existing-read-only-exact-turn-wait; no-implicit-cancel"
+    },
+    {
+      "ordinal": 308,
+      "revision": "d3ad27e10a1e2b739c12c6e9d95201978765f015",
+      "date": "2025-12-03T21:03:48+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "Curated activity now reports shown/total counts and removes raw output option. Fleetpane keeps bounded exact Copy and explicit feed eviction; no new MCP server claimed.",
+      "fleetpane_action": "bounded-review-counts"
+    },
+    {
+      "ordinal": 309,
+      "revision": "5cbeb973916b9f5eecf113ae9c213ffae8649453",
+      "date": "2025-12-03T21:54:55+07:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Removes nested deep-freeze and readonly Map wrapper; constructor dispatch to overridden set caused failures. Keep Rust ownership and existing typed snapshot boundaries, without copying mutable JS views.",
+      "fleetpane_action": "rust-ownership-existing"
+    },
+    {
+      "ordinal": 310,
+      "revision": "98c24f22a0fdac10ff86b5e6f9f65b7b44cd761c",
+      "date": "2025-12-03T22:25:30+07:00",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/home-footer.tsx",
+        "packages/app/src/contexts/footer-controls-context.tsx"
+      ],
+      "finding": "Screen-owned HomeFooter replaces global footer registry, with host selection and mobile keyboard layout. Inspected these two paths only; retain native per-Host composers; voice/mobile remain separate.",
+      "fleetpane_action": "native-host-owned-composers"
+    },
+    {
+      "ordinal": 311,
+      "revision": "2a541d97c9c505655a1f4cb4541005561d7d3742",
+      "date": "2025-12-03T22:55:14+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Capture inputs for MCP and server tool blocks as well as tool_use. Existing ACP/Codex cards preserve typed raw inputs including false; Claude adapter remains outside current scope.",
+      "fleetpane_action": "existing-tool-input-contract"
+    },
+    {
+      "ordinal": 312,
+      "revision": "fd36c9b8e24e5efccbf8a7a36b89263b20c3fbfc",
+      "date": "2025-12-03T23:03:45+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Adds isolated Playwright MCP contexts. Preserve isolated native QA; does not authorize injecting browser tools into user sessions or adding a Claude provider.",
+      "fleetpane_action": "isolated-qa-existing"
+    },
+    {
+      "ordinal": 313,
+      "revision": "a6d2ea31532825c5edc423d514358f1984c5fcd5",
+      "date": "2025-12-20T12:56:59+07:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Expose tool input in client projection and parse JSON tool output without legacy nesting. Do not infer structured data from arbitrary output text; keep provider-supplied types. Historical CLAUDE and investigation document were not inspected.",
+      "fleetpane_action": "existing-tool-input-contract"
+    },
+    {
+      "ordinal": 314,
+      "revision": "0f1758709d66cab621486faaf622af46e56de45e",
+      "date": "2025-12-04T11:27:08Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Requires Attention uses finished/error/permission flags from lifecycle transitions, persisted and broadcast. Its running-to-idle inference and single flag can mask newer outcomes. Implement explicit terminal-turn records independently of pending requests, retaining outcome after local review. UI paths were not inspected in this batch.",
+      "fleetpane_action": "explicit-terminal-result-review"
+    },
+    {
+      "ordinal": 315,
+      "revision": "5466ea1967395d6cf3410d2214b3f428a27e1426",
+      "date": "2025-12-20T12:57:33+07:00",
+      "category": "merge",
+      "inspection": "metadata-only",
+      "paths_inspected": [],
+      "finding": "Merge metadata and parent identities inspected only; branch changes recorded at their own revisions. No historical runtime execution.",
+      "fleetpane_action": "merge-metadata-only"
+    },
+    {
+      "ordinal": 316,
+      "revision": "fb30160cda4710c01b27993eee3530986f57877a",
+      "date": "2025-12-20T05:57:54Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Clear attention accepts a single ID or list and dispatches manager clears concurrently; inspected server message/session diff only, not orchestrator prompt or UI. Fleetpane reviews exact displayed completion tuples transactionally in local storage, never answering or hiding pending requests.",
+      "fleetpane_action": "atomic-local-result-review"
+    },
+    {
+      "ordinal": 317,
+      "revision": "b8de55f31bc6e3119dbcb54e9797d7750ffd39b3",
+      "date": "2025-12-20T12:58:17+07:00",
+      "category": "merge",
+      "inspection": "metadata-only",
+      "paths_inspected": [],
+      "finding": "Merge metadata and parent identities inspected only; branch changes recorded at their own revisions.",
+      "fleetpane_action": "merge-metadata-only"
     }
   ],
   "workflow_status": {

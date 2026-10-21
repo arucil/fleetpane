@@ -37,11 +37,12 @@ def main():
         with sqlite3.connect(database) as db:
             db.execute("DROP TRIGGER reject_selection")
             db.execute("INSERT INTO drafts VALUES('retained',7,'exact legacy draft')")
+            db.execute("DROP TABLE attention_reviews")
             db.execute("DROP TABLE host_selection")
             db.execute("PRAGMA user_version=10")
         assert command("get") == {"revision": 0, "socket": None}
         with sqlite3.connect(database) as db:
-            assert db.execute("PRAGMA user_version").fetchone()[0] == 11
+            assert db.execute("PRAGMA user_version").fetchone()[0] == 12
             assert db.execute("SELECT data FROM drafts").fetchone()[0] == "exact legacy draft"
         command("set", 0, config, "A")
         with sqlite3.connect(database) as db:

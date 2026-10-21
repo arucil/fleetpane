@@ -1,0 +1,546 @@
+{
+  "base_revision": "ade3216f3b133e96154fd949b9a8e9933385d229",
+  "workspace": "fleetpane-results-20261022",
+  "platform": "Linux X11 software-rendered private fixtures",
+  "before": [
+    {
+      "protocol": 3,
+      "host_id": "aac48407-a6aa-4009-bff1-83ea9ba1de8d",
+      "host_pid": 1709616,
+      "provider_pid": 1709618,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "aac48407-a6aa-4009-bff1-83ea9ba1de8d",
+        "controller_id": "c9b49b59-0908-497e-a96c-97267b33f75d",
+        "generation": 5
+      },
+      "sequence": 29,
+      "operation_ids": [
+        "e3deb131-59ed-47d0-8e54-769fe34ceea8",
+        "fd2ac142-80c7-4742-b06c-67787bf2e3b4",
+        "2f21d1a3-c883-4ddf-b183-cb51d64fa936",
+        "267f15a9-5d9e-408c-adcc-0764f412b926",
+        "234197b4-23cb-4795-b1d2-f536a01a1011"
+      ],
+      "journal_total": 5,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792607351173,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-1",
+            "kind": "completed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 22,
+            "observed_unix_ms": 1792607351807,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-2",
+            "kind": "failed",
+            "stop_reason": null
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "host_pid": 1709641,
+      "provider_pid": 1709644,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+        "controller_id": "ce39caf7-b267-4d05-ad75-7b7b2ef06f2b",
+        "generation": 7
+      },
+      "sequence": 40,
+      "operation_ids": [
+        "132a7f1e-253d-41af-83dc-9cf6c6078f14",
+        "d83a5755-adca-454a-a457-7485105ed4c4",
+        "44193694-c93c-42ee-95b0-ab3938014033",
+        "c8a5c9af-f25d-4dcd-a0c1-55b6cca2eba1",
+        "4ba0af18-bde6-40bd-9a7f-99d3438e2000",
+        "e9cc2a7b-b5dc-410a-9d64-6bbff1e7cfcc",
+        "4d8b9422-612f-445d-bd99-d808128e7eb2"
+      ],
+      "journal_total": 7,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "turn_id": "404f8af3-a121-4966-8615-96e4b04d78a4"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "threadId": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-9bac3239-f204-4f0c-af20-d3419ec376a0"
+            }
+          }
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792607352478,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "b5f65ecc-7259-467e-bdcb-0f77bb6eb076",
+            "kind": "completed",
+            "stop_reason": "end_turn"
+          },
+          {
+            "sequence": 17,
+            "observed_unix_ms": 1792607352560,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "09385e15-1ffc-47a1-90df-896b1f338f55",
+            "kind": "failed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 24,
+            "observed_unix_ms": 1792607352659,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "e31b9a89-3f28-4b21-be91-a6b40ef7d87d",
+            "kind": "completed",
+            "stop_reason": "refusal"
+          },
+          {
+            "sequence": 31,
+            "observed_unix_ms": 1792607352766,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "09b1ffee-521d-453d-b7a7-1450616debb0",
+            "kind": "interrupted",
+            "stop_reason": "cancelled"
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    }
+  ],
+  "after_native_source": [
+    {
+      "protocol": 3,
+      "host_id": "aac48407-a6aa-4009-bff1-83ea9ba1de8d",
+      "host_pid": 1709616,
+      "provider_pid": 1709618,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "aac48407-a6aa-4009-bff1-83ea9ba1de8d",
+        "controller_id": "da1b655e-137e-4c7b-aedc-7a43fcbf90d2",
+        "generation": 7
+      },
+      "sequence": 39,
+      "operation_ids": [
+        "e3deb131-59ed-47d0-8e54-769fe34ceea8",
+        "fd2ac142-80c7-4742-b06c-67787bf2e3b4",
+        "2f21d1a3-c883-4ddf-b183-cb51d64fa936",
+        "267f15a9-5d9e-408c-adcc-0764f412b926",
+        "234197b4-23cb-4795-b1d2-f536a01a1011"
+      ],
+      "journal_total": 5,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792607351173,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-1",
+            "kind": "completed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 22,
+            "observed_unix_ms": 1792607351807,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-2",
+            "kind": "failed",
+            "stop_reason": null
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "host_pid": 1709641,
+      "provider_pid": 1709644,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+        "controller_id": "0e852b21-7e87-4a72-bae5-3e864288c69a",
+        "generation": 8
+      },
+      "sequence": 44,
+      "operation_ids": [
+        "132a7f1e-253d-41af-83dc-9cf6c6078f14",
+        "d83a5755-adca-454a-a457-7485105ed4c4",
+        "44193694-c93c-42ee-95b0-ab3938014033",
+        "c8a5c9af-f25d-4dcd-a0c1-55b6cca2eba1",
+        "4ba0af18-bde6-40bd-9a7f-99d3438e2000",
+        "e9cc2a7b-b5dc-410a-9d64-6bbff1e7cfcc",
+        "4d8b9422-612f-445d-bd99-d808128e7eb2"
+      ],
+      "journal_total": 7,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "turn_id": "404f8af3-a121-4966-8615-96e4b04d78a4"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "threadId": "ed1285bd-8329-49c8-a63b-8db5e1766b34",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-9bac3239-f204-4f0c-af20-d3419ec376a0"
+            }
+          }
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792607352478,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "b5f65ecc-7259-467e-bdcb-0f77bb6eb076",
+            "kind": "completed",
+            "stop_reason": "end_turn"
+          },
+          {
+            "sequence": 17,
+            "observed_unix_ms": 1792607352560,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "09385e15-1ffc-47a1-90df-896b1f338f55",
+            "kind": "failed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 24,
+            "observed_unix_ms": 1792607352659,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "e31b9a89-3f28-4b21-be91-a6b40ef7d87d",
+            "kind": "completed",
+            "stop_reason": "refusal"
+          },
+          {
+            "sequence": 31,
+            "observed_unix_ms": 1792607352766,
+            "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+            "turn_id": "09b1ffee-521d-453d-b7a7-1450616debb0",
+            "kind": "interrupted",
+            "stop_reason": "cancelled"
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    }
+  ],
+  "changed_snapshot_fields": [
+    [
+      "owner",
+      "sequence"
+    ],
+    [
+      "owner",
+      "sequence"
+    ]
+  ],
+  "reviews": [
+    {
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "sequence": 11,
+      "record": {
+        "sequence": 11,
+        "observed_unix_ms": 1792607352478,
+        "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+        "turn_id": "b5f65ecc-7259-467e-bdcb-0f77bb6eb076",
+        "kind": "completed",
+        "stop_reason": "end_turn"
+      }
+    },
+    {
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "sequence": 17,
+      "record": {
+        "sequence": 17,
+        "observed_unix_ms": 1792607352560,
+        "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+        "turn_id": "09385e15-1ffc-47a1-90df-896b1f338f55",
+        "kind": "failed",
+        "stop_reason": null
+      }
+    },
+    {
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "sequence": 24,
+      "record": {
+        "sequence": 24,
+        "observed_unix_ms": 1792607352659,
+        "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+        "turn_id": "e31b9a89-3f28-4b21-be91-a6b40ef7d87d",
+        "kind": "completed",
+        "stop_reason": "refusal"
+      }
+    },
+    {
+      "host_id": "7dab5fb4-7cd5-4612-95a5-4b817214c49b",
+      "sequence": 31,
+      "record": {
+        "sequence": 31,
+        "observed_unix_ms": 1792607352766,
+        "thread_id": "109d719b-c919-4277-9d3a-791daf1a9759",
+        "turn_id": "09b1ffee-521d-453d-b7a7-1450616debb0",
+        "kind": "interrupted",
+        "stop_reason": "cancelled"
+      }
+    },
+    {
+      "host_id": "aac48407-a6aa-4009-bff1-83ea9ba1de8d",
+      "sequence": 22,
+      "record": {
+        "sequence": 22,
+        "observed_unix_ms": 1792607351807,
+        "thread_id": "fixture-thread-1",
+        "turn_id": "fixture-thread-1-turn-2",
+        "kind": "failed",
+        "stop_reason": null
+      }
+    }
+  ],
+  "drafts": [
+    [
+      "{\"socket\":\"/tmp/fp-results-native-1022/0/host/control.sock\",\"host_id\":\"aac48407-a6aa-4009-bff1-83ea9ba1de8d\",\"thread_id\":\"fixture-thread-1\",\"cwd\":\"/tmp/fp-results-native-1022/0\"}",
+      "{\"key\":{\"socket\":\"/tmp/fp-results-native-1022/0/host/control.sock\",\"host_id\":\"aac48407-a6aa-4009-bff1-83ea9ba1de8d\",\"thread_id\":\"fixture-thread-1\",\"cwd\":\"/tmp/fp-results-native-1022/0\"},\"revision\":1,\"text\":\"\u5b8c\u6210\u5ba1\u9605\u8349\u7a3f\\nkeep exact \u4e2d\u6587\",\"attempt\":null}"
+    ]
+  ],
+  "fixture_host_pids_stopped": [
+    1709616,
+    1709641
+  ],
+  "normal_desktop_exit_not_claimed": true,
+  "hashes": {
+    "target/debug/fleetpane-host": "7abf45664f38bb7ac20bf5d735510e2002d920cd77cacbee18bcd3661080a90a",
+    "apps/desktop/target/debug/fleetpane-desktop": "ea0e5091d4f14d895cbd071792f6c3c3e76a9ab24343b1961752530acff7233b"
+  }
+}

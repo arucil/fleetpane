@@ -9,6 +9,7 @@ use serde_json::Value;
 use uuid::Uuid;
 
 pub mod navigation;
+pub mod review;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -118,6 +119,9 @@ pub struct Host {
     pub host_id: Option<Uuid>,
     pub items: Vec<Item>,
     pub error: Option<String>,
+    pub completions: Vec<review::Item>,
+    /// Missing on an older Host, not an empty supported feed.
+    pub completion_evicted: Option<u64>,
 }
 
 #[derive(Debug, Serialize)]
@@ -139,8 +143,27 @@ fn project(probe: Probe) -> Host {
             host_id: None,
             items: vec![],
             error: Some(error),
+            completions: vec![],
+            completion_evicted: None,
         },
         ProbeResult::Available { snapshot } => {
+            let completions = snapshot
+                .attention
+                .as_ref()
+                .map(|feed| {
+                    feed.records
+                        .iter()
+                        .rev()
+                        .map(|record| review::Item {
+                            endpoint: endpoint.clone(),
+                            host_id: snapshot.host_id,
+                            record: record.clone(),
+                            reviewed: false,
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+            let completion_evicted = snapshot.attention.as_ref().map(|feed| feed.evicted);
             let items = snapshot
                 .pending_requests
                 .iter()
@@ -153,12 +176,16 @@ fn project(probe: Probe) -> Host {
                     host_id: Some(snapshot.host_id),
                     items,
                     error: snapshot.fault.clone(),
+                    completions,
+                    completion_evicted,
                 },
                 Err(error) => Host {
                     endpoint,
                     host_id: Some(snapshot.host_id),
                     items: vec![],
                     error: Some(error.to_string()),
+                    completions,
+                    completion_evicted,
                 },
             }
         }
@@ -180,6 +207,21 @@ pub async fn collect(configuration: Configuration) -> Result<Report, Error> {
         observed_unix_ms,
         hosts,
     })
+}
+
+/// Completion review receipts are local to this controller store. Reading them
+/// does not claim a Host and cannot alter pending requests or provider outcomes.
+pub async fn collect_reviewed(
+    configuration: Configuration,
+    store: &crate::creations::Store,
+) -> Result<Report, Error> {
+    let mut report = collect(configuration).await?;
+    for host in &mut report.hosts {
+        host.completions = store
+            .completion_reviews(std::mem::take(&mut host.completions))
+            .await?;
+    }
+    Ok(report)
 }
 
 #[cfg(test)]

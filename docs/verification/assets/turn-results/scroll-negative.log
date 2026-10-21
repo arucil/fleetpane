@@ -1,0 +1,23 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 4.66s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-2b4a416202786742)
+
+running 1 test
+test host_view::completion::tests::opening_a_source_turn_suspends_tail_following ... FAILED
+
+failures:
+
+---- host_view::completion::tests::opening_a_source_turn_suspends_tail_following stdout ----
+
+thread 'host_view::completion::tests::opening_a_source_turn_suspends_tail_following' (1743565) panicked at src/host_view/completion.rs:156:9:
+the next layout must keep the selected turn visible
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    host_view::completion::tests::opening_a_source_turn_suspends_tail_following
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin fleetpane-desktop`

@@ -206,6 +206,7 @@ mod tests {
                 unknown_operations: 0,
             },
             pending_requests: Vec::new(),
+            attention: Some(Box::default()),
             fault: None,
             fault_scope: None,
         }

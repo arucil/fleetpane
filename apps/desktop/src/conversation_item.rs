@@ -97,7 +97,7 @@ impl Row {
             label.push_str(reason.description());
         }
         Self {
-            id: row_key(&["turn", thread_id, &turn.id]),
+            id: Self::turn_key(thread_id, &turn.id),
             label,
             content: Content::Message(
                 turn.error
@@ -113,6 +113,10 @@ impl Row {
 
     pub fn item_key(thread_id: &str, turn_id: &str, item_id: &str) -> String {
         row_key(&["item", thread_id, turn_id, item_id])
+    }
+
+    pub fn turn_key(thread_id: &str, turn_id: &str) -> String {
+        row_key(&["turn", thread_id, turn_id])
     }
 
     pub fn item(thread_id: &str, turn_id: &str, item: &Item) -> Option<Self> {

@@ -156,14 +156,14 @@ async fn checkpoints_are_atomic_and_result_and_summary_pages_do_not_repeat_or_sk
 async fn schema_nine_upgrade_preserves_data_and_current_schema_damage_is_an_error() {
     let (store, _) = fixture().await;
     store.job(|db|{
-        db.execute_batch("INSERT INTO drafts(key,revision,data) VALUES('saved',2,'exact bytes'); DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; PRAGMA user_version=9;")?;Ok(())
+        db.execute_batch("INSERT INTO drafts(key,revision,data) VALUES('saved',2,'exact bytes'); DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; PRAGMA user_version=9;")?;Ok(())
     }).await.unwrap();
     let reopened = Store::open(store.root().into()).await.unwrap();
     reopened
         .job(|db| {
             assert_eq!(
                 db.query_row("PRAGMA user_version", [], |r| r.get::<_, i64>(0))?,
-                11
+                12
             );
             assert_eq!(
                 db.query_row("SELECT data FROM drafts WHERE key='saved'", [], |r| r

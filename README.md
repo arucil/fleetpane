@@ -481,16 +481,28 @@ original JSON or open its checked source. Read-only viewing does not take contro
 use **Take control**, then **Open pending session** to review in the original
 conversation. External decisions update read-only views automatically. The queue
 refreshes every two seconds while open and keeps unavailable Hosts visible.
-Completion/unread notifications, mute/tray settings and request age remain open.
+**Turn results** shows explicit completed, failed and interrupted turns with ACP
+stop reasons. Each Host retains at most 64 results/64 KiB for its current run;
+eviction and unavailable or older Hosts remain visible. **Mark reviewed** and
+**Mark shown results reviewed** save exact local receipts and preserve the
+original outcome and pending requests. **Open source** checks the original Host,
+then uses explicit control and bounded history inspection. Older turns may need
+**Load earlier messages**. Reviews survive desktop replacement in controller-store
+schema 12; the Host result feed does not survive Host restart. OS notifications,
+mute/tray settings and request age remain open.
 
 ```sh
 cargo run -p fleetpane-host -- attention /path/to/hosts.json
+cargo run -p fleetpane-host -- attention /path/to/hosts.json /path/to/controller-store
+cargo run -p fleetpane-host -- attention-review /path/to/controller-store /path/to/exact-results.json
 python3 scripts/attention-smoke.py --evidence-dir /tmp/fleetpane-attention-proof
+python3 scripts/completion-smoke.py
 ```
 
 The smoke check holds synthetic requests for 125 seconds by default and verifies
 exact provider answers, controller fencing and cross-Host isolation.
 [Local acceptance and limits](docs/verification/2026-10-21-attention-queue.md).
+[Turn-result acceptance and limits](docs/verification/2026-10-22-turn-results.md).
 
 Conversation details (tasks, approvals, questions, model options and attachments)
 now scroll within at most half the space remaining above the fixed editor.

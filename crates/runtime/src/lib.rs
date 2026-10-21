@@ -7,6 +7,7 @@ use uuid::Uuid;
 
 pub mod acp;
 pub mod attachments;
+pub mod attention;
 #[cfg(unix)]
 pub mod journal;
 pub mod lifecycle;
@@ -103,6 +104,9 @@ pub struct Snapshot {
     pub admission: lifecycle::Admission,
     pub activity: lifecycle::Activity,
     pub pending_requests: Vec<Value>,
+    /// None means an older Host cannot provide completion review records.
+    #[serde(default)]
+    pub attention: Option<Box<attention::Feed>>,
     pub fault: Option<String>,
     #[serde(default)]
     pub fault_scope: Option<FaultScope>,
@@ -270,6 +274,7 @@ impl State {
                     unknown_operations: 0,
                 },
                 pending_requests: Vec::new(),
+                attention: Some(Box::default()),
                 fault: None,
                 fault_scope: None,
             },
@@ -534,12 +539,20 @@ impl State {
         if bytes + 1 > MAX_PROVIDER_FRAME {
             return Err("provider message exceeds frame limit".into());
         }
-        self.activity.record(&message)?;
         let sequence = self
             .snapshot
             .sequence
             .checked_add(1)
             .ok_or("event sequence exhausted")?;
+        let attention = attention::Record::from_event(&message, sequence)?;
+        if let Some(record) = &attention {
+            self.snapshot
+                .attention
+                .as_ref()
+                .expect("new Host has attention feed")
+                .check(record)?;
+        }
+        self.activity.record(&message)?;
         let mut query_id = None;
         if let Some(method) = message.get("method") {
             if !method.is_string() {
@@ -631,6 +644,13 @@ impl State {
         }
         if let Some(plan) = plan {
             self.tasks.record(plan);
+        }
+        if let Some(record) = attention {
+            self.snapshot
+                .attention
+                .as_mut()
+                .expect("new Host has attention feed")
+                .record(record);
         }
         self.snapshot.sequence = sequence;
         let query_reply = query_id.map(|id| QueryReply {

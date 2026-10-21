@@ -28,7 +28,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host operations SOCKET [--cursor CURSOR] | operation SOCKET UUID: read-only durable receipts.\nfleetpane-host hosts CONFIG.json: read-only parallel snapshots of configured local Hosts, without claiming control."
         );
         println!(
-            "fleetpane-host attention CONFIG.json: read-only pending approvals/questions across configured Hosts; unavailable Hosts remain explicit. No takeover, answer, resume or timeout decision."
+            "fleetpane-host attention CONFIG.json [CONTROLLER_STORE]: observe pending approvals/questions and up to 64 retained terminal turns per Host. Optional store includes local review receipts; no takeover, answer or resume.\nfleetpane-host attention-review CONTROLLER_STORE SELECTION.json: mark exact completion records reviewed locally, preserving failures and pending requests."
         );
         println!(
             "fleetpane-host host-diagnostics CONFIG.json [HOST_NAME]: read-only endpoint checks, protocol, process identity, admission, fault and activity counts. Omits provider initialization data and request payloads; never claims or resumes."
@@ -804,15 +804,29 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             println!("{}", serde_json::to_string_pretty(&reports)?);
             Ok(())
         }
-        "attention" if args.len() == 2 => {
+        "attention" if args.len() == 2 || args.len() == 3 => {
             let configuration =
                 fleetpane_session::hosts::Configuration::read(std::path::Path::new(&args[1]))?;
-            println!(
-                "{}",
-                serde_json::to_string_pretty(
-                    &fleetpane_session::attention::collect(configuration).await?
-                )?
-            );
+            let report = if let Some(directory) = args.get(2) {
+                let store = fleetpane_session::creations::Store::open(directory.into()).await?;
+                fleetpane_session::attention::collect_reviewed(configuration, &store).await?
+            } else {
+                fleetpane_session::attention::collect(configuration).await?
+            };
+            println!("{}", serde_json::to_string_pretty(&report)?);
+            Ok(())
+        }
+        "attention-review" if args.len() == 3 => {
+            let path = std::path::Path::new(&args[2]);
+            if std::fs::metadata(path)?.len() > 1024 * 1024 {
+                return Err("completion review input exceeds 1 MiB".into());
+            }
+            let items: Vec<fleetpane_session::attention::review::Item> =
+                serde_json::from_slice(&std::fs::read(path)?)?;
+            let count = items.len();
+            let store = fleetpane_session::creations::Store::open((&args[1]).into()).await?;
+            store.review_completions(items).await?;
+            println!("{}", serde_json::json!({"reviewed":count}));
             Ok(())
         }
         "host-diagnostics" if args.len() == 2 || args.len() == 3 => {

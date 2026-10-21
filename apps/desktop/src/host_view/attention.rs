@@ -10,6 +10,7 @@ impl HostView {
         cx: &mut Context<Self>,
     ) {
         self.directory_target = None;
+        self.completion_target = None;
         self.attention_target = Some(item);
         if self.owns() {
             self.open_attention_target(window, cx);

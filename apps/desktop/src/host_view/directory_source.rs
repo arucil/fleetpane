@@ -9,6 +9,7 @@ impl HostView {
         cx: &mut Context<Self>,
     ) {
         self.attention_target = None;
+        self.completion_target = None;
         self.directory_target = Some(source);
         self.open_directory_target(window, cx);
         cx.notify();

@@ -1,4 +1,5 @@
 mod attention;
+mod completion;
 mod continuation;
 mod directory_source;
 mod draft;
@@ -63,6 +64,8 @@ pub struct HostView {
     connection: Option<Connection>,
     snapshot: Option<Snapshot>,
     attention_target: Option<fleetpane_session::attention::Item>,
+    completion_target: Option<fleetpane_session::attention::review::Item>,
+    completion_reveal: bool,
     directory_target: Option<fleetpane_session::fleet_directory::Source>,
     directory: Directory,
     directory_changed: bool,
@@ -280,6 +283,8 @@ impl HostView {
             connection: None,
             snapshot: None,
             attention_target: None,
+            completion_target: None,
+            completion_reveal: false,
             directory_target: None,
             directory: Directory::default(),
             directory_changed: false,
@@ -1252,6 +1257,7 @@ impl HostView {
             .map(|(index, row)| (row.id.clone(), index))
             .collect();
         self.rows = rows;
+        self.reveal_completion();
     }
 
     fn sync_permission_preview(&mut self, cx: &mut Context<Self>) {
@@ -1970,6 +1976,7 @@ impl Render for HostView {
                     ),
             )
             .child(self.attention_banner(cx))
+            .child(self.completion_banner(cx))
             .child(self.directory_source_banner(cx))
             .when(self.draining(), |view| {
                 let state = self.snapshot.as_ref().expect("draining Host snapshot");

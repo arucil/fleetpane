@@ -5,13 +5,16 @@ use fleetpane_session::attention::{self, Item, Kind, Report};
 
 pub(super) struct State {
     pub active: bool,
-    busy: bool,
-    report: Option<Report>,
+    pub(super) busy: bool,
+    pub(super) report: Option<Report>,
     items: Vec<Item>,
-    error: Option<String>,
-    navigation_error: Option<String>,
-    opening: Option<uuid::Uuid>,
-    filter: Filter,
+    pub(super) completions: Vec<attention::review::Item>,
+    pub(super) show_completions: bool,
+    pub(super) review_busy: bool,
+    pub(super) error: Option<String>,
+    pub(super) navigation_error: Option<String>,
+    pub(super) opening: Option<uuid::Uuid>,
+    pub(super) filter: Filter,
     cursor: Cursor,
     selection_notice: Option<String>,
     focus: FocusHandle,
@@ -25,6 +28,9 @@ impl State {
             busy: false,
             report: None,
             items: vec![],
+            completions: vec![],
+            show_completions: false,
+            review_busy: false,
             error: None,
             navigation_error: None,
             opening: None,
@@ -58,14 +64,22 @@ impl Workbench {
     }
 
     pub(super) fn refresh_attention(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        if self.attention.busy {
+        if self.attention.busy || self.attention.review_busy {
             return;
         }
         self.attention.busy = true;
         let configuration = self.configuration.clone();
-        let task = cx
-            .background_executor()
-            .spawn(async move { background(attention::collect(configuration)) });
+        let directory = self.creation_directory.clone();
+        let task = cx.background_executor().spawn(async move {
+            background(async move {
+                if let Some(directory) = directory {
+                    let store = Store::open(directory).await?;
+                    attention::collect_reviewed(configuration, &store).await
+                } else {
+                    attention::collect(configuration).await
+                }
+            })
+        });
         cx.spawn_in(window, async move |this, cx| {
             let result = task.await;
             let _closed = this.update_in(cx, |this, _, cx| {
@@ -73,8 +87,10 @@ impl Workbench {
                 match result {
                     Ok(mut report) => {
                         this.attention.items.clear();
+                        this.attention.completions.clear();
                         for host in &mut report.hosts {
                             this.attention.items.append(&mut host.items);
+                            this.attention.completions.append(&mut host.completions);
                         }
                         this.reconcile_attention();
                         this.attention.report = Some(report);
@@ -152,6 +168,9 @@ impl Workbench {
         if !self.attention.focus.is_focused(window) {
             return;
         }
+        if self.attention.show_completions {
+            return;
+        }
         let key = &event.keystroke;
         let mods = key.modifiers;
         if mods.alt || mods.platform || mods.shift {
@@ -225,6 +244,9 @@ impl Workbench {
     }
 
     pub(super) fn attention_view(&self, cx: &mut Context<Self>) -> impl IntoElement {
+        if self.attention.show_completions {
+            return self.completion_view(cx).into_any_element();
+        }
         let indices: Vec<_> = self
             .attention
             .items
@@ -244,6 +266,7 @@ impl Workbench {
             .child(div().p_4().flex().flex_wrap().gap_3().items_center()
                 .child(Button::new("attention-back").small().label("Back to Host").on_click(cx.listener(|this,_,window,cx|{this.select(this.selected,window,cx);})))
                 .child(format!("Observed pending requests · {}",self.attention.items.len()))
+                .child(Button::new("attention-completions").small().label(format!("Turn results ({})",self.attention.completions.iter().filter(|item|!item.reviewed).count())).on_click(cx.listener(|this,_,_,cx|{this.attention.show_completions=true;cx.notify();})))
                 .child(Button::new("attention-refresh").small().label(if self.attention.busy{"Checking…"}else{"Refresh"}).disabled(self.attention.busy).on_click(cx.listener(|this,_,window,cx|this.refresh_attention(window,cx)))))
             .child(div().px_4().pb_2().text_sm().child("Checks all configured Hosts every 2 seconds while open. Review and answer in the original session."))
             .child(div().px_4().pb_2().text_sm().child("↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies request · Ctrl+R refreshes"))
@@ -274,6 +297,6 @@ impl Workbench {
                             .child(Button::new(("attention-open",row)).small().label("Open source").disabled(item.thread_id.is_none()||this.attention.opening.is_some()||this.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.open_attention_item(open.clone(),window,cx))))
                             .child(Button::new(("attention-copy",row)).small().ghost().label("Copy original request").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(&raw).expect("JSON request serializes"))))))
                 }).collect()
-            })).track_scroll(&self.attention.scroll).flex_1().min_h_0())
+            })).track_scroll(&self.attention.scroll).flex_1().min_h_0()).into_any_element()
     }
 }

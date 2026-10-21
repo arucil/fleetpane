@@ -233,7 +233,7 @@ mod tests {
         let (root, store) = fixture().await;
         let workspace = register(&store, root.clone(), "Local").await;
         store.job(|db| {
-            db.execute_batch("INSERT INTO drafts(key,revision,data) VALUES('saved',7,'exact legacy bytes'); DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; PRAGMA user_version=4;")?;
+            db.execute_batch("INSERT INTO drafts(key,revision,data) VALUES('saved',7,'exact legacy bytes'); DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; PRAGMA user_version=4;")?;
             Ok(())
         }).await.unwrap();
         let reopened = Store::open(root.join("state")).await.unwrap();
@@ -254,7 +254,7 @@ mod tests {
                 );
                 assert_eq!(
                     db.query_row("PRAGMA user_version", [], |row| row.get::<_, i64>(0))?,
-                    11
+                    12
                 );
                 db.execute("DROP TABLE workspace_pins", [])?;
                 Ok(())

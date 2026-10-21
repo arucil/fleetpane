@@ -55,6 +55,9 @@ jobs:
       - name: Stop acknowledgement and exact-turn completion
         if: runner.os != 'Windows'
         run: python3 scripts/stop-progress-smoke.py
+      - name: Terminal turn results and local reviews
+        if: runner.os != 'Windows'
+        run: python3 scripts/completion-smoke.py
       - name: ACP permission review
         if: runner.os != 'Windows'
         run: python3 scripts/acp-review-smoke.py

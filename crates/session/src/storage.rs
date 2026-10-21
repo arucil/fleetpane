@@ -131,7 +131,7 @@ impl Store {
                 }
                 transaction.execute_batch("CREATE TABLE creations(position INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, route TEXT NOT NULL, cwd TEXT NOT NULL, target TEXT NOT NULL, attempted INTEGER NOT NULL CHECK(attempted IN (0,1)));")?;
             }
-            1..=11 => {
+            1..=12 => {
                 transaction.prepare(
                     "SELECT position,id,route,cwd,target,attempted FROM creations LIMIT 0",
                 )?;
@@ -196,6 +196,12 @@ impl Store {
             transaction.execute_batch("CREATE TABLE host_selection(singleton INTEGER PRIMARY KEY CHECK(singleton=1), revision INTEGER NOT NULL CHECK(revision>0), socket TEXT NOT NULL); PRAGMA user_version=11;")?;
         } else {
             transaction.prepare("SELECT singleton,revision,socket FROM host_selection LIMIT 0")?;
+        }
+        if version < 12 {
+            transaction.execute_batch("CREATE TABLE attention_reviews(socket TEXT NOT NULL, host_id TEXT NOT NULL, sequence INTEGER NOT NULL CHECK(sequence>0), record TEXT NOT NULL, PRIMARY KEY(socket,host_id,sequence)); PRAGMA user_version=12;")?;
+        } else {
+            transaction
+                .prepare("SELECT socket,host_id,sequence,record FROM attention_reviews LIMIT 0")?;
         }
         transaction.commit()?;
         Ok(database)
@@ -358,7 +364,7 @@ mod tests {
                     [id.to_string()],
                 )?;
                 db.execute_batch(
-                    "DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; PRAGMA user_version=1;",
+                    "DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; PRAGMA user_version=1;",
                 )?;
                 Ok(())
             })
@@ -399,7 +405,7 @@ mod tests {
         store
             .job(|db| {
                 db.execute_batch(
-                    "DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; PRAGMA user_version=2;",
+                    "DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; PRAGMA user_version=2;",
                 )?;
                 Ok(())
             })
@@ -430,7 +436,7 @@ mod tests {
     async fn missing_v1_creation_table_is_not_reinitialized() {
         let directory = std::env::temp_dir().join(format!("fp-state-{}", Uuid::new_v4()));
         let store = Store::open(directory.clone()).await.unwrap();
-        store.job(|db| { db.execute_batch("DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; DROP TABLE creations; PRAGMA user_version=1;")?;Ok(()) }).await.unwrap();
+        store.job(|db| { db.execute_batch("DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; DROP TABLE creations; PRAGMA user_version=1;")?;Ok(()) }).await.unwrap();
         assert!(Store::open(directory.clone()).await.is_err());
         let db = Database::open(directory.join("creations.sqlite3")).unwrap();
         let version: u32 = db
