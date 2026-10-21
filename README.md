@@ -62,6 +62,12 @@ independent details and exact clipboard checks have
 
 **Hide sessions / Show sessions** toggles the current Host’s directory with Ctrl+B (Cmd+B on macOS). The conversation, drafts and pending requests stay open. Visibility is local to the window and Host; [Linux acceptance](docs/verification/2026-10-22-sidebar-toggle.md).
 
+**Switch session** opens a bounded cross-Host search palette with Ctrl+K
+(Cmd+K on macOS). Search title, Host, cwd or ID, use arrows and Enter to open
+saved history, and Esc to return to the previous input. Omitted rows and missing
+pages are explicit; **All sessions** provides paging and archived history.
+Selection preserves explicit takeover and drafts. [Local verification](docs/verification/2026-10-22-session-switcher.md).
+
 ## Try the native desktop
 
 On Unix, **Workspaces → Import from Paseo** previews a local Paseo home, saves a

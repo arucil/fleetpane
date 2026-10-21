@@ -9,6 +9,7 @@ use std::time::Duration;
 use uuid::Uuid;
 
 pub mod order;
+pub mod switcher;
 
 #[derive(Serialize)]
 pub struct Observation {

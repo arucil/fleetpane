@@ -1,5 +1,10 @@
 # Functional parity with donut-paseo
 
+The bounded cross-Host session switcher now uses Ctrl/Cmd+K and Kit search,
+with exact source identity, explicit omissions and read-only takeover boundaries.
+[Local fixture evidence](verification/2026-10-22-session-switcher.md) covers drafts,
+window replacement and 900×560; full-index search and IME remain open.
+
 ACP advertised commands (2026-10-22): live exact-session command menus prepare
 ordinary drafts without sending. Idle/pending replacement, empty lists,
 archive/resume expiry, exact Copy, Chinese drafts, window replacement and

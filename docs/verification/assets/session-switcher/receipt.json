@@ -1,0 +1,58 @@
+{
+  "scope": "Linux X11 owned native fixtures; no external models, IME, other platform or remote CI acceptance",
+  "source_base": "cf31770",
+  "commands": [
+    "cargo test --workspace --locked",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings",
+    "cargo fmt --all -- --check",
+    "cargo fmt --manifest-path apps/desktop/Cargo.toml -- --check"
+  ],
+  "checks": {
+    "bounded_rows": 200,
+    "omitted": 1,
+    "more_hosts": 2,
+    "explicit_offline_and_no_lease": true,
+    "read_only_exact_target_no_takeover": true,
+    "explicit_codex_b_takeovers": 2,
+    "colliding_id_exact_history": "same-003 / Codex B",
+    "draft_utf8_bytes": 33,
+    "draft_exact": "切换器草稿  \n第二行 exact",
+    "escape_restores_input": true,
+    "tab_and_shift_tab_stay_in_search": true,
+    "minimum_window": [
+      900,
+      560
+    ],
+    "normal_window_replacement": true,
+    "activity_pending_id_fault_unchanged": true
+  },
+  "limits": [
+    "first metadata page per Host; explicit omission count and All sessions for paging",
+    "nonarchived palette; archived browse remains All sessions",
+    "no IME, installed provider, macOS, Windows, remote or performance acceptance"
+  ],
+  "artifact_sha256": {
+    "desktop-build.log": "4132fe499c81f4248a5d441de249949376eef5219d3b6f0f692273c4671a0a3d",
+    "desktop-clippy.log": "5c365ed880fabe4e750f900eda483338b034681cc705f0be2b717a63690be689",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "ea6bbfbd8da73dc4d73960272add912e3a348ab9c92261d6e9b5b6f7fdafadb9",
+    "final-escape.png": "dab05925e46b74fad7960fd6fa051383366b5de3e0ba419f4b546da7e30ae8d3",
+    "min-filter.png": "3c7a06803ddd69d796784b4d018ce895dc36a7cf69382f3cea22384512d82e14",
+    "min-history.png": "b1a79079b97b9773d0c5e60f6628eb53750fec5c6d857bf45d2cc935c05b9dd3",
+    "no-match.png": "7336330f1627790173dd3240216d6f1b72756d5c428f4da9995da7ce1390e0a3",
+    "root-clippy.log": "37a86b38e6fddcea09d36444429bab33b1506927eb2381aa14d2e5c1e83429c9",
+    "root-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-tests.log": "60d04f3699fa659181f2f9751e6db54acf864b6a74371ebd8b4135f7d20c45c5",
+    "switcher-tests.log": "05132505f188c0f77a8e730a751d694abf6c9c5ee6ff925377e457f35afd4b83"
+  },
+  "binary_sha256": "19e15921187300d61170befc44e5d5c1fec3e14e985363c7de7f7a9c6a098906",
+  "source_sha256": {
+    "apps/desktop/src/main.rs": "be0ae3957732b578e7ff058c44479338c059f1dbc8c5afe3e10c98a45c1455fa",
+    "apps/desktop/src/workbench.rs": "a9697d2a50afac6f01be262c4162f034de35c65f409969e6d5e958122c4c99da",
+    "apps/desktop/src/workbench/switcher.rs": "dfaafa6f7be80a4c4057c69414b34f538794e9d791aa79e5fc3c7656a571bb24",
+    "crates/session/src/fleet_directory.rs": "5bd5ad5c6041cd006457780c0932472fd144474909243cade8a38d4f4df57a87",
+    "crates/session/src/fleet_directory/switcher.rs": "b8703edd6ae671086248e407b61ce7da843cf203de613fb61068994057d8d1cc"
+  }
+}

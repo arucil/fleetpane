@@ -5,6 +5,11 @@ mod diagnostics;
 mod files;
 mod host_choice;
 mod sessions;
+mod switcher;
+
+pub(crate) fn init(cx: &mut App) {
+    switcher::init(cx);
+}
 use crate::host_view::{HostView, background};
 use crate::workspace_view::WorkspaceView;
 use fleetpane_session::hosts::{Configuration, Endpoint};
@@ -48,6 +53,7 @@ pub struct Workbench {
     file_navigation: files::State,
     attention: attention::State,
     sessions: sessions::State,
+    switcher: switcher::State,
     host_choice: host_choice::State,
     diagnostics: diagnostics::State,
     creation_directory: Option<std::path::PathBuf>,
@@ -131,6 +137,7 @@ impl Workbench {
             file_navigation: files::State::default(),
             attention: attention::State::new(cx),
             sessions: sessions::State::new(window, cx),
+            switcher: switcher::State::new(window, cx),
             host_choice: host_choice::State::default(),
             diagnostics: diagnostics::State::new(cx),
             creation_directory,
@@ -703,9 +710,23 @@ impl Workbench {
 }
 
 impl Render for Workbench {
-    fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let selected = &self.slots[self.selected];
         div()
+            .relative()
+            .key_context("FleetpaneWorkbench")
+            .capture_action(cx.listener(|this, _: &switcher::Toggle, window, cx| {
+                cx.stop_propagation();
+                this.toggle_switcher(window, cx);
+            }))
+            .capture_action(cx.listener(|this, _: &switcher::Close, window, cx| {
+                cx.stop_propagation();
+                this.close_switcher(window, cx);
+            }))
+            .capture_action(cx.listener(|this, _: &switcher::FocusSearch, window, cx| {
+                cx.stop_propagation();
+                this.focus_switcher(window, cx);
+            }))
             .size_full()
             .flex()
             .flex_col()
@@ -766,6 +787,14 @@ impl Render for Workbench {
                                     .selected(self.sessions.active)
                                     .on_click(cx.listener(|this, _, window, cx| {
                                         this.open_sessions(window, cx)
+                                    })),
+                            )
+                            .child(
+                                Button::new("open-session-switcher")
+                                    .small()
+                                    .label("Switch session")
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        this.toggle_switcher(window, cx)
                                     })),
                             )
                             .child(
@@ -859,5 +888,6 @@ impl Render for Workbench {
                     )
                 },
             )
+            .child(self.switcher_view(window, cx))
     }
 }

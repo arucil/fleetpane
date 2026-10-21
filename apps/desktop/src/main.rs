@@ -516,6 +516,8 @@ fn main() {
             gpui_kit::init(cx);
             #[cfg(unix)]
             terminal_view::init(cx);
+            #[cfg(unix)]
+            workbench::init(cx);
             cx.on_window_closed(|cx, _| {
                 if cx.windows().is_empty() {
                     // GPUI's X11 close callback still borrows platform state.
