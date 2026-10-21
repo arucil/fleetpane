@@ -201,7 +201,7 @@ mod tests {
             .unwrap();
         store
             .job(|db| {
-                db.execute_batch("DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; PRAGMA user_version=6;")?;
+                db.execute_batch("DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; PRAGMA user_version=6;")?;
                 Ok(())
             })
             .await

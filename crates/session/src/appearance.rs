@@ -188,7 +188,7 @@ mod tests {
         store
             .job(|db| {
                 db.execute_batch(
-                    "DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; PRAGMA user_version=5;",
+                    "DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; PRAGMA user_version=5;",
                 )?;
                 Ok(())
             })

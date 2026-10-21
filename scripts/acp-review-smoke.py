@@ -20,13 +20,13 @@ def main():
         process = None
         generation = 0
 
-        def wait(probe):
+        def wait(probe, label="private review fixture timed out"):
             deadline = time.monotonic() + 12
             while True:
                 value = probe()
                 if value:
                     return value
-                assert time.monotonic() < deadline, "private review fixture timed out"
+                assert time.monotonic() < deadline, label() if callable(label) else label
                 time.sleep(0.025)
 
         def snapshot():
@@ -54,8 +54,12 @@ def main():
                      "python3", str(ROOT / "scripts/acp-fixture.py")],
                     stdout=subprocess.DEVNULL, stderr=output, start_new_session=True,
                 )
-            wait(lambda: process.poll() is None and control.exists()
-                 and "ready:" in log.read_text())
+            def ready():
+                if process.poll() is not None:
+                    raise RuntimeError(f"ACP review Host generation {generation} exited {process.returncode}: {log.read_text()}")
+                return control.exists() and "ready:" in log.read_text()
+
+            wait(ready, lambda: f"ACP review Host generation {generation} startup timed out; pid={process.pid}; status={process.poll()}; log={log.read_text()}")
 
         def stop():
             if process is not None and process.poll() is None:

@@ -1,0 +1,121 @@
+{
+  "base_head": "5959ee8e8c8739c1c1aa7ef5a7d188f6a93d633f",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "2aa69f500c405be9d7c521f68cadf74b22787d0ae0769a1596deb87d22834b73",
+    "apps/desktop/src/workbench.rs": "25a74db7afa470dd753fba7c3ea12cf65eced984b85f6820e8cd0b5bd5683801",
+    "apps/host/src/main.rs": "dfa5df1285c588b6061036b30a8bf2b47c7924c2a84081b8b4ab7013a2fbcc87",
+    "crates/session/src/appearance.rs": "2ca9d30255d39d27a8b6530c0196470a50542f94ce676b8593ee399e503f98cd",
+    "crates/session/src/drafts.rs": "200bc697a36be07f3a44887117618de2483c0034591985932d4d05716820c2cd",
+    "crates/session/src/lib.rs": "c7937ba6ae1854755c1bafd07abeb54817191e33bd7af77f2c1fd944aa66fc89",
+    "crates/session/src/paseo_import/batch/receipts/tests.rs": "c8da21dbf9d9b5e5e6f1df9a83ffa9863402edd112916810773fe3ff6b5b1d06",
+    "crates/session/src/paseo_import/tests.rs": "f06a4ca27ca5baa3608dc76c1c55f9c6206f428ea7f8c49685d4f951e8f4277c",
+    "crates/session/src/recent_directories.rs": "c9a4c3955941ac0c13988a4fb739ee26140bda304be690b5bb0d15785c5587c0",
+    "crates/session/src/storage.rs": "1ce19fa699296adb105eb2b4386bee5b7d7a2bd3afc2146b2a9c3384d8c46626",
+    "crates/session/src/workspace_pins.rs": "c7090195dc6005a4e75b728b9a56038f4086c74351054a7bfd9df53e7e79244e",
+    "scripts/acp-review-smoke.py": "28bdc761866a1c11eeea0bb21cf1aaf309d89196f9d58d306baa7db15a81bf80",
+    "scripts/appearance-smoke.py": "1491d06f7a051fae039512b4a080a27a080574a1a09710b327450dbd5d15ebc2",
+    "scripts/paseo-import-smoke.py": "f1b4ee41acbc13ebd5edafcbbf89aea3104d45a266235fa56950d30a074bb542",
+    "scripts/recent-directories-smoke.py": "fc925b3a87b52a52c02109ab07d4986ace958abf00fb10dcf12906fed4e9bbec",
+    "apps/desktop/src/workbench/host_choice.rs": "e8ff284d4bc293fd4a142dd16192061cb6234cf975794a629743df4fd65a7bba",
+    "crates/session/src/host_selection.rs": "00b6e23e7c0e6c7396180cf77af4c2166c2bed3665bb8917d9f234e29f9d4f9e",
+    "scripts/host-choice-smoke.py": "2d9e522e9873041c0a362d862a587611324401f2e69a84a794104cfcc2a3f5a3"
+  },
+  "final_desktop_sha256": "875e8b9bab348eb54b37eb4dfe690e307c67d212bb5c901f39faa1888fc85dcf",
+  "host_sha256": "4c66e3f2aaa6b93071c3efa64153b0c6a96977687cd300163ccd56907d48e901",
+  "checks": {
+    "tests": {
+      "file": "tests.log",
+      "sha256": "3ddf39fddf7bcb3c0917d457335b32110a1d20eb186a948298eb1545a7f3500d"
+    },
+    "clippy": {
+      "file": "clippy.log",
+      "sha256": "5256652ca01a1a7127b9c9da3bcc7b08be98fc21c55f3f7b6257012f74cfb684"
+    },
+    "build": {
+      "file": "build.log",
+      "sha256": "c0ed7bd91d059192a0f4a152d8a210ed9ba74c947266414681441d3426a9a2d7"
+    },
+    "desktop-tests": {
+      "file": "desktop-tests.log",
+      "sha256": "449b8ac11d11ae703db3a0fd7b532df9dc242336a10d4c29262e33548fe7925b"
+    },
+    "desktop-clippy": {
+      "file": "desktop-clippy.log",
+      "sha256": "cb55e50fc17c83ec34e8a2285f7c05b7299b8b18e063566f26b8234e6a6ee25d"
+    },
+    "desktop-build": {
+      "file": "desktop-build.log",
+      "sha256": "ee82270fd1f056c5a38e6f7390a87124309d58794dc2c48795f25cdbc5bfd732"
+    },
+    "python-tests": {
+      "file": "python-tests.log",
+      "sha256": "31d7d53a755a42d3a5b829c441b01753e582405b13fa9cd8b96d30d08821f611"
+    },
+    "smoke": {
+      "file": "smoke.log",
+      "sha256": "16c6fa532ddf6651ca6c4d956bada530d77dad1d5c71fdcc730da015e8042707"
+    },
+    "appearance": {
+      "file": "appearance.log",
+      "sha256": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830"
+    },
+    "recent": {
+      "file": "recent.log",
+      "sha256": "7bad9c6749f582ec77aaf4e74f122710953d6abd4505a601c7bdd119d3163b66"
+    },
+    "import": {
+      "file": "import.log",
+      "sha256": "566b1d5f7291a66822e28a9fd639c21f3eac418820232c100a3d0e109a119b62"
+    },
+    "directory": {
+      "file": "directory.log",
+      "sha256": "e75f1848224a170fc9971452327940f880b8818a5c3dbadb6c11c35fb0d3c324"
+    },
+    "acp-review": {
+      "file": "acp-review.log",
+      "sha256": "42cae969dafa018475d8680d419953a9b2c531b5c3301a803a31c3a0ef71f525"
+    }
+  },
+  "snapshot_equality": true,
+  "normal_close_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "direct_window_destruction_pids_needing_cleanup": [
+    1707741,
+    1711694
+  ],
+  "owned_pids": [
+    1705756,
+    1705765,
+    1705790,
+    1705794,
+    1705845,
+    1705848,
+    1705902,
+    1705905
+  ],
+  "all_owned_host_provider_processes_exited": true,
+  "workspace_stopped": true,
+  "final_record": {
+    "revision": 7,
+    "socket": "/tmp/fp-choice-native/0/host/control.sock"
+  },
+  "previous_ci": {
+    "head": "5959ee8",
+    "run": 39612953372,
+    "conclusion": "failure",
+    "failed_step": "Ubuntu ACP review restart readiness",
+    "cause": "unconfirmed; startup stderr not retained in original failure",
+    "other_jobs": "macOS/windows/desktop-linux success"
+  },
+  "limits": [
+    "synthetic providers",
+    "native Linux only",
+    "initial native binary hash not retained; final binary rechecked after a status-message-only refinement",
+    "original CI startup cause unconfirmed; diagnostic patch only"
+  ]
+}

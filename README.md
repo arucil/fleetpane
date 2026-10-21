@@ -1023,3 +1023,22 @@ result is non-atomic and does not enumerate background resources or authorize
 archive/stop. ACP does not advertise this capability. See
 [verification](docs/verification/2026-10-21-session-tree.md) and
 [ADR 0056](docs/adr/0056-observe-session-ancestry.md).
+
+The native workbench remembers the selected local Host in the configuration's
+controller store (schema 11). Restore uses the exact socket path across Host
+rename/reorder. Offline targets stay selected; absent targets show an explicit
+notice and preserve the saved choice. Switching and restoring never take control
+or resume a session. Reload choice reads current preferences without navigating;
+Remember current Host explicitly saves after a conflict. Keep previous choice
+retains the old record after a failed save. Normal titlebar close waits for saves.
+
+```sh
+fleetpane-host host-choice /absolute/controller-store get
+fleetpane-host host-choice /absolute/controller-store set 0 /absolute/hosts.json "OpenCodex"
+python3 scripts/host-choice-smoke.py
+```
+
+The CLI requires the last observed revision. This selection is scoped to the
+controller store; moving the configuration may change its default store location.
+It does not restore a selected session. Older schema-10 binaries cannot open an
+upgraded store. See [local evidence](docs/verification/2026-10-21-preferred-host.md).

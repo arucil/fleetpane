@@ -1,0 +1,21 @@
+rust (ubuntu-latest)	ACP permission review	﻿2026-10-21T14:01:25.5116253Z ##[group]Run python3 scripts/acp-review-smoke.py
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5116670Z ^[[36;1mpython3 scripts/acp-review-smoke.py^[[0m
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5166792Z shell: /usr/bin/bash -e {0}
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5167067Z env:
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5167412Z   CARGO_HOME: /home/runner/.cargo
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5167687Z   CARGO_INCREMENTAL: 0
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5167918Z   CARGO_TERM_COLOR: always
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5168173Z   CACHE_ON_FAILURE: false
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:25.5168409Z ##[endgroup]
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2398079Z Traceback (most recent call last):
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2399309Z   File "/home/runner/work/fleetpane/fleetpane/scripts/acp-review-smoke.py", line 137, in <module>
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2400454Z     main()
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2401317Z   File "/home/runner/work/fleetpane/fleetpane/scripts/acp-review-smoke.py", line 126, in main
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2407966Z     start()
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2408642Z   File "/home/runner/work/fleetpane/fleetpane/scripts/acp-review-smoke.py", line 57, in start
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2409720Z     wait(lambda: process.poll() is None and control.exists()
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2410703Z   File "/home/runner/work/fleetpane/fleetpane/scripts/acp-review-smoke.py", line 29, in wait
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2411494Z     assert time.monotonic() < deadline, "private review fixture timed out"
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2411997Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2412375Z AssertionError: private review fixture timed out
+rust (ubuntu-latest)	ACP permission review	2026-10-21T14:01:38.2576120Z ##[error]Process completed with exit code 1.

@@ -25,6 +25,8 @@ pub mod files;
 #[cfg(unix)]
 pub mod fleet_directory;
 pub mod history;
+#[cfg(unix)]
+pub mod host_selection;
 pub mod hosts;
 pub mod models;
 #[cfg(unix)]

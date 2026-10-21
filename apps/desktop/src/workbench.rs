@@ -1,6 +1,7 @@
 //! Retain separate Host views; switching never transfers a lease or resumes a session.
 mod attention;
 mod files;
+mod host_choice;
 mod sessions;
 use crate::host_view::{HostView, background};
 use crate::workspace_view::WorkspaceView;
@@ -45,6 +46,7 @@ pub struct Workbench {
     file_navigation: files::State,
     attention: attention::State,
     sessions: sessions::State,
+    host_choice: host_choice::State,
     creation_directory: Option<std::path::PathBuf>,
     creations: Vec<Intent>,
     records_busy: bool,
@@ -112,13 +114,14 @@ impl Workbench {
             file_navigation: files::State::default(),
             attention: attention::State::default(),
             sessions: sessions::State::new(window, cx),
+            host_choice: host_choice::State::default(),
             creation_directory,
             creations: Vec::new(),
             records_busy: false,
             resolution: None,
             _input_subscription: subscription,
         };
-        value.select(0, window, cx);
+        value.load_host_choice(true, window, cx);
         cx.spawn_in(window, async move |this, cx| {
             loop {
                 cx.background_executor()
@@ -147,7 +150,10 @@ impl Workbench {
     }
 
     fn drafts_saved(&self, cx: &App) -> Result<bool, String> {
-        let mut ready = true;
+        if let Some(error) = &self.host_choice.error {
+            return Err(error.clone());
+        }
+        let mut ready = !self.host_choice.busy;
         for slot in &self.slots {
             if let Some(view) = &slot.view {
                 ready &= view
@@ -213,7 +219,7 @@ impl Workbench {
         }
     }
 
-    fn select(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+    fn show_host(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
         self.sessions.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
@@ -677,6 +683,7 @@ impl Render for Workbench {
             .flex()
             .flex_col()
             .bg(cx.theme().background)
+            .child(self.host_choice_bar(cx))
             .when_some(self.close_error.as_ref(), |view, error| {
                 view.child(
                     div()
@@ -805,7 +812,10 @@ impl Render for Workbench {
                             .flex_1()
                             .min_h_0()
                             .id(("host-content", self.selected))
-                            .child(selected.view.clone().expect("selected Host initialized")),
+                            .children(selected.view.clone())
+                            .when(selected.view.is_none(), |root| {
+                                root.child("Loading saved Host choice…")
+                            }),
                     )
                 },
             )

@@ -31,6 +31,9 @@ jobs:
       - name: Device appearance persistence
         if: runner.os != 'Windows'
         run: python3 scripts/appearance-smoke.py
+      - name: Preferred Host persistence
+        if: runner.os != 'Windows'
+        run: python3 scripts/host-choice-smoke.py
       - name: ACP activity chronology
         if: runner.os != 'Windows'
         run: python3 scripts/acp-order-smoke.py

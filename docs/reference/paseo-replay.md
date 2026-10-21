@@ -25,8 +25,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 202 个提交 `4ab79b1a5`（提交日期 2025-11-26；本地审查 2026-10-21）。**
-下一条是第 203 个 `59967aad8`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 203 个提交 `59967aad8`（提交日期 2025-11-26；本地审查 2026-10-21）。**
+下一条是第 204 个 `04d51fbe1`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6187 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -988,3 +988,22 @@ Clippy 和构建通过。原生分页、独立展开、五次正确复制及重�
 [本轮验证](../verification/2026-10-21-fleet-directory.md)覆盖共享 CLI/引擎与
 Linux 原生分组、搜索、分页、明确错误和精确来源打开；不是实时全局索引或
 跨 Host runtime 迁移验收。下一条从 **203 · `59967aad87dc96e7602611e2ede402103c6bea5f`** 继续。
+
+## 第 203 条：多 Host rollout 的状态与选择
+
+**203 · `59967aad87dc96e7602611e2ede402103c6bea5f`** 的七个选定路径包括
+连接 context、background SessionHost、create modal、session hook 及三个工具文件。
+角色分开的 accessor 避免重复连接；connection state 改为可穷举状态；缺失来源可以
+显式 unavailable。模型请求针对选定 Host，取消旧 timer，并按 idle 调度其他 Host。
+当前 Host 选择仍持久化，切换和 background action 新增日志。其余 route/settings/
+session 调用点只做补充 hunk 检查；锁文件、plan、Git Diff 等没有完整审计。
+选定 diff 的字节数/哈希及未覆盖路径见
+[审查回执](../verification/assets/paseo-replay/preferred-host/receipt.json)。
+
+Fleetpane 已有 endpoint 独立的惰性 view、显式接管及跨 Host 目录。这一轮补
+配置本地的 Host 选择持久化：按 socket 路径恢复，改名/重排不改变来源；离线继续
+显示原 Host，配置移除保留旧记录并提示；revision 冲突和写失败显式处理，正常关闭
+等待保存。引擎、CLI、Linux 原生恢复/小窗口/冲突及权限不变有
+[单独证据](../verification/2026-10-21-preferred-host.md)。不复制 mobile timer、全量
+模型预取或携带路径/内容的 analytics；不声称完成 registry、远程连接或跨 Host 迁移。
+前 202 条记录保持不变。下一条为 **204 · `04d51fbe100e4b303039053aa55f992a53322502`**。

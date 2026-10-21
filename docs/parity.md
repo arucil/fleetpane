@@ -183,3 +183,9 @@ partial errors ([evidence](verification/2026-10-21-fleet-directory.md)).
 Provider ordering remains in effect; remote connections, registry editing,
 subscriptions and global activity sorting remain open. Seven new source paths
 were inspected; the other 26 changed paths remain outside this review scope.
+
+Preferred Host (2026-10-21): exact configuration-local endpoint selection now survives
+window replacement and Host rename/reorder. Offline/missing endpoints, explicit
+conflict/save-failure handling and normal close have [local evidence](verification/2026-10-21-preferred-host.md).
+Session/scroll restoration, editable registry and remote connections remain open.
+Scoped chronological review reaches 203 (`59967aad8`); 204 (`04d51fbe1`) is next.

@@ -64,6 +64,9 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host recent STORE list SOCKET | remember SOCKET CWD | clear SOCKET: device-local directory suggestions; no Host RPC or session creation."
         );
         println!(
+            "fleetpane-host host-choice STORE get | set EXPECTED_REVISION CONFIG HOST: remember a configuration-local Host endpoint; no Host RPC or control transfer."
+        );
+        println!(
             "fleetpane-host image SOCKET import ABSOLUTE_FILE: validate and durably save a local PNG/JPEG/WebP asset. Drafts: attach KEY_JSON REVISION FILE... | remove-image KEY_JSON REVISION INDEX. Images are sent only by an explicit draft send; live follow-ups remain text-only."
         );
         println!(
@@ -231,6 +234,29 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                         "appearance STORE get | set EXPECTED_REVISION system|light|dark".into(),
                     );
                 }
+            };
+            println!("{}", serde_json::to_string(&result)?);
+            Ok(())
+        }
+        "host-choice" if args.len() >= 3 => {
+            let store =
+                fleetpane_session::creations::Store::open(std::path::absolute(&args[1])?).await?;
+            let result = match &args[2..] {
+                [verb] if verb == "get" => store.host_selection().await?,
+                [verb, revision, config, host] if verb == "set" => {
+                    let configuration = fleetpane_session::hosts::Configuration::read(
+                        std::path::Path::new(config),
+                    )?;
+                    let endpoint = configuration
+                        .hosts
+                        .iter()
+                        .find(|endpoint| endpoint.name == *host)
+                        .ok_or("Host is absent from configuration")?;
+                    store
+                        .save_host_selection(revision.parse()?, endpoint.socket.clone())
+                        .await?
+                }
+                _ => return Err("host-choice STORE get | set EXPECTED_REVISION CONFIG HOST".into()),
             };
             println!("{}", serde_json::to_string(&result)?);
             Ok(())

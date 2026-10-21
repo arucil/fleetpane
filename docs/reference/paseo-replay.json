@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 202,
-    "last_revision": "4ab79b1a50144dc0f4b47aa9a4cf0f6170f80338",
-    "next_revision": "59967aad87dc96e7602611e2ede402103c6bea5f",
-    "next_ordinal": 203
+    "last_ordinal": 203,
+    "last_revision": "59967aad87dc96e7602611e2ede402103c6bea5f",
+    "next_revision": "04d51fbe100e4b303039053aa55f992a53322502",
+    "next_ordinal": 204
   },
   "entries": [
     {
@@ -3054,6 +3054,24 @@
       ],
       "finding": "Seven new source files define explicit per-daemon accessors, grouped metadata, running-first sorting, registry/default migration, connection states and source-specific routing that rejects unavailable targets. Background autoConnect excludes the active daemon to avoid duplicate connections. Other changed routes, request hook, settings and session internals not inspected.",
       "fleetpane_action": "fleet-session-directory"
+    },
+    {
+      "ordinal": 203,
+      "revision": "59967aad87dc96e7602611e2ede402103c6bea5f",
+      "date": "2025-11-26T08:47:49Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/components/multi-daemon-session-host.tsx",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/hooks/use-daemon-session.ts",
+        "packages/app/src/utils/analytics.ts",
+        "packages/app/src/utils/daemons.ts",
+        "packages/app/src/utils/exhaustive.ts"
+      ],
+      "finding": "Seven selected diffs: role-indexed primary/background accessors avoid duplicate connections; typed connection transitions and source-specific unavailable results; selected and idle provider-model scheduling with cleanup; local active-Host preference remains explicit and action sources are logged. Fleetpane retains one lazy view per endpoint and uses configuration-local revisioned selection rather than adopting mobile timers or prompt/path analytics. Other routes/settings/session callers had supplementary hunk inspection only. Lock payload, tooling, plan and Git Diff not audited.",
+      "fleetpane_action": "preferred-host"
     }
   ],
   "workflow_status": {
@@ -3075,7 +3093,8 @@
     "session-ancestry": "partial; bounded read-only Codex ancestry and loaded contexts are locally verified in shared engine, CLI and Linux native UI. Archived/ephemeral descendants, forks, pending requests, stale failures, drain and lease/Host changes covered. Observation is non-atomic and excludes background resources; safe archive/stop and live Host handoff remain open. ACP explicitly unsupported.",
     "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance.",
     "streamed-reasoning": "partial; three typed indexed Codex deltas, history per-item boundaries and retained native card updates verified locally with regressions and gated synthetic provider. Exact Copy/reload, Stop and independent permission covered; external model and non-Linux native acceptance remain open.",
-    "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open."
+    "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open.",
+    "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
