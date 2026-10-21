@@ -180,12 +180,14 @@ fn repository_guard_refuses_parallel_symlink_fifo_and_public_lock_files() {
         "preserve"
     );
     fs::remove_file(&path).unwrap();
-    rustix::fs::mkfifoat(
-        rustix::fs::CWD,
-        &path,
-        rustix::fs::Mode::RUSR | rustix::fs::Mode::WUSR,
-    )
-    .unwrap();
+    assert!(
+        Command::new("mkfifo")
+            .args(["-m", "600"])
+            .arg(&path)
+            .status()
+            .unwrap()
+            .success()
+    );
     assert!(repository_lock(&fixture.0).is_err());
     fs::remove_dir_all(&fixture.0).unwrap();
 }

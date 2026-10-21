@@ -624,7 +624,14 @@ mod tests {
         std::fs::write(base.join("outside"), "outside data").unwrap();
         symlink(&base, path.join("escape")).unwrap();
         symlink(base.join("outside"), path.join("outside-link")).unwrap();
-        rustix::fs::mkfifoat(rustix::fs::CWD, path.join("pipe"), Mode::RUSR | Mode::WUSR).unwrap();
+        assert!(
+            std::process::Command::new("mkfifo")
+                .args(["-m", "600"])
+                .arg(path.join("pipe"))
+                .status()
+                .unwrap()
+                .success()
+        );
         for name in [
             "",
             ".",

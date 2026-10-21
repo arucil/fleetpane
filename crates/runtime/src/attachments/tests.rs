@@ -132,14 +132,14 @@ mod local {
         symlink(source, &path).unwrap();
         assert!(store.load(saved).await.is_err());
         let fifo = temp.0.join("fifo");
-        rustix::fs::mknodat(
-            rustix::fs::CWD,
-            &fifo,
-            rustix::fs::FileType::Fifo,
-            rustix::fs::Mode::RUSR | rustix::fs::Mode::WUSR,
-            0,
-        )
-        .unwrap();
+        assert!(
+            std::process::Command::new("mkfifo")
+                .args(["-m", "600"])
+                .arg(&fifo)
+                .status()
+                .unwrap()
+                .success()
+        );
         assert!(store.import(fifo).await.is_err());
     }
 

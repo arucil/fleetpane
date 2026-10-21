@@ -214,7 +214,7 @@ async fn result_pages_obey_encoded_byte_budget_and_oversize_reads_fail_explicitl
 
 #[tokio::test]
 async fn worker_lock_rejects_symlinks_public_files_and_special_files() {
-    use std::os::unix::{ffi::OsStrExt, fs::symlink};
+    use std::os::unix::fs::symlink;
     let (store, _) = fixture().await;
     for kind in ["symlink", "public", "fifo"] {
         let id = Uuid::new_v4();
@@ -226,13 +226,14 @@ async fn worker_lock_rejects_symlinks_public_files_and_special_files() {
                 std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o644)).unwrap();
             }
             "fifo" => {
-                let name = std::ffi::CString::new(path.as_os_str().as_bytes()).unwrap();
-                rustix::fs::mkfifoat(
-                    rustix::fs::CWD,
-                    name.as_c_str(),
-                    rustix::fs::Mode::RUSR | rustix::fs::Mode::WUSR,
-                )
-                .unwrap();
+                assert!(
+                    std::process::Command::new("mkfifo")
+                        .args(["-m", "600"])
+                        .arg(&path)
+                        .status()
+                        .unwrap()
+                        .success()
+                );
             }
             _ => unreachable!(),
         }
