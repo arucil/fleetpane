@@ -160,7 +160,7 @@ def exercise(data, real=False, port=0, opencodex=False):
             assert not replacement["attempted"] and not Model.requests
             intent=replacement
         fork=cli("paseo-import","fork",store,session,"--take-control")["thread"]
-        assert fork["id"]!=intent["thread_id"] and fork["cwd"]==str(data["cwd"])
+        assert fork["id"]!=intent["thread_id"] and fork["cwd"]==str(data["cwd"].resolve())
         assert fork["status"]["type"]=="idle" and fork["turns"]==[]
         assert not Model.requests, "fork unexpectedly contacted the model"
         assert cli("paseo-import","fork-status",store,session)=={"status":"created","thread_id":fork["id"]}
