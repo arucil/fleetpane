@@ -168,3 +168,9 @@ The concurrency checker now drains startup events and matches exact turn IDs;
 recovery remain unaccepted. Normal titlebar close now has [separate Linux
 acceptance](verification/2026-10-21-native-close.md); the automation's direct X
 window destruction remains non-graceful.
+
+Reasoning deltas (2026-10-21): indexed Codex summary/raw-text live updates and
+per-item history boundaries now have [local native and regression evidence](verification/2026-10-21-streamed-reasoning.md).
+Empty items stay hidden, Copy preserves fields, and Stop retains its exact-turn
+contract. External model and cross-platform native reasoning acceptance remain open.
+Scoped-path chronological review reaches 195 (`47a99f566`); 196 (`6aa9b1c72`) is next.

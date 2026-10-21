@@ -1,0 +1,29 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 5.68s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-2bea4bef44077932)
+
+running 2 tests
+test reasoning::tests::reasoning_invalid_targets_indices_and_payloads_fail_without_altering_items ... FAILED
+test reasoning::tests::reasoning_stream_keeps_independent_parts_exact_text_and_item_identity ... FAILED
+
+failures:
+
+---- reasoning::tests::reasoning_invalid_targets_indices_and_payloads_fail_without_altering_items stdout ----
+
+thread 'reasoning::tests::reasoning_invalid_targets_indices_and_payloads_fail_without_altering_items' (3801095) panicked at crates/session/src/reasoning.rs:71:13:
+assertion failed: thread.apply(&event("item/reasoning/summaryTextDelta", extra)).is_err()
+
+---- reasoning::tests::reasoning_stream_keeps_independent_parts_exact_text_and_item_identity stdout ----
+
+thread 'reasoning::tests::reasoning_stream_keeps_independent_parts_exact_text_and_item_identity' (3801096) panicked at crates/session/src/reasoning.rs:39:13:
+ignored item/reasoning/summaryPartAdded
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    reasoning::tests::reasoning_invalid_targets_indices_and_payloads_fail_without_altering_items
+    reasoning::tests::reasoning_stream_keeps_independent_parts_exact_text_and_item_identity
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 154 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

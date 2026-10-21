@@ -270,6 +270,13 @@ limit text sections visibly to 16 KiB; Copy retains the full item within those
 transport bounds. Byte-aware pages and a history window with eviction remain
 necessary for complete traversal of arbitrarily large conversations.
 
+Codex reasoning now updates during generation from indexed summary and raw-text
+events. **Show details** expands literal text; **Copy** retains the complete
+reasoning fields. Empty items stay hidden until content arrives. History page
+boundaries avoid appending already-snapshotted deltas twice.
+[Reasoning verification](docs/verification/2026-10-21-streamed-reasoning.md)
+covers Linux native live updates, exact copy/reload, Stop and session isolation.
+
 [Rich-rendering checks](docs/verification/2026-10-19-rich-rendering.md) cover native
 Markdown, command status/output, MCP text/image results, supplied file diffs, local
 and data URL images, failure states and empty reasoning. The final build also

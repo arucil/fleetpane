@@ -1,0 +1,84 @@
+{
+  "base_head": "ffbc49db81b55f915b67eba4f24353a0ee9d28de",
+  "source_sha256": {
+    "crates/session/src/lib.rs": "281080b668f772f2550744d33ecccd5bd59eba0aa105494e8f45a80617677176",
+    "crates/session/src/reasoning.rs": "dfce0c8bd5e0732f93738578362d8691b7fb7fc7dc59eef8dcfe4f50903a0622",
+    "crates/session/src/history.rs": "64549b5f717745b579e61070bbb87f4503b438896a246bbbbdfdb9fa05faa0a0",
+    "apps/desktop/src/host_view/row_changes.rs": "87dc5b27d1722b97cc0bac976ee0233cbc2d506944162a495670014216cba33e",
+    "scripts/provider-fixture.py": "7552976c55ab6f84a1aa035c111b075d4bcf6803129a6619d6e2cd0a900966e5"
+  },
+  "binary_sha256": {
+    "before_desktop": "eb8f1646940aaea814a3078f62434eeb1b4a30a1f4ebcdf7ea784bd7299910fa",
+    "fixed_desktop": "7621ff11ca5011ac3b0244998d58aa22a916ce4a3666ddbfaa8fce2cfac8a187",
+    "host_used_for_native": "af23a8b60832dbd4dbb099f781e92181b9d0c7a744b2b6f4adf438a5662f9206",
+    "current_host": "7c447b6fbd6a086a8e09a2ee26ea916c5045a04df7330a436792f7d3f1649e39"
+  },
+  "checks": {
+    "workspace_tests": 229,
+    "desktop_tests": 20,
+    "python_tests": 15,
+    "strict_root_desktop_clippy": "PASS",
+    "root_desktop_fmt": "PASS",
+    "root_host_desktop_build": "PASS",
+    "process_smokes": [
+      "session",
+      "history",
+      "acp-order"
+    ],
+    "pre_fix_regressions_failed": 2,
+    "schema": "installed codex-cli 0.163.0; generate-json-schema"
+  },
+  "native": {
+    "workspace": "fleetpane-reasoning-20261021",
+    "host_id": "14e65cc8-f5c1-4904-a6b5-ac6f1dced3da",
+    "host_pid": 3898726,
+    "provider_pid": 3898883,
+    "reasoning_copy_bytes": 141,
+    "draft_copy_bytes": 29,
+    "after_reload_exact": true,
+    "second_live_copy_exact": true,
+    "independent_permission_preserved": true,
+    "first_turn_completed": true,
+    "second_turn_interrupted": true,
+    "both_desktops_exit_code": 0,
+    "owned_runtime_cleaned": true,
+    "workspace_stopped": true
+  },
+  "artifacts_sha256": {
+    "ReasoningSummaryPartAddedNotification.json": "c8dfcb82d773d0f5d297ae1a47749e2b719013e82030a3af5d4550f9feb8eed6",
+    "ReasoningSummaryTextDeltaNotification.json": "895bdca00b4674634c25a5c4d1f82e55e65767d81ddcac4bb7b00aa3d438e62f",
+    "ReasoningTextDeltaNotification.json": "16cdc13080a7523b44f00fb6fdb660c56a7c4c8cda96b2f9b87b7e72264170fb",
+    "acp-order-smoke.log": "e915d0156c7739dc7e9af799ee26ae456516e8758e1a7d733fe53ca8455c426e",
+    "after-close-state.json": "df6c0a5744c5c541edfe071d682d444ac5fd8e3029c14a9356321eaae5d68d14",
+    "after-stop-state.json": "df6c0a5744c5c541edfe071d682d444ac5fd8e3029c14a9356321eaae5d68d14",
+    "before-live-state.json": "1aa42dd2128e2ac720f2c3a4fb8621a08d4f107ada8c1a55df7f8945148c63fb",
+    "before-sent.png": "2b63b62a03e4d97ea08ea6f4cf2fb629c398c79c426c9f452edce551eb6bd720",
+    "cleanup.json": "2b261283f618c0df43c90971d009db938b7ba02733f6606a29aee44467283cc0",
+    "clipboard.json": "a1f05e2f97dd696a8854feb2567336252b44c6d077ca622c70a2845a3e71bc8c",
+    "clippy.log": "fa94e734709858264f3f0b8f46f49666757d0d911fc3afee92e69ede945ac196",
+    "desktop-build.log": "96e584f3ec362ce6c36d2a734d52fdb4c6a1554b81bbfcda3861f489e3f89828",
+    "desktop-clippy.log": "95f5c754fcf9a1ad501ba03158f5bd26866c362039f4edfac946e7565a2a2267",
+    "desktop-processes.json": "f54340f25952d88611b31a84d3bfeeaac56bd4ebd2c3f92e4e3ae0835a6810a0",
+    "desktop-tests.log": "8bdcabf2dd3ac24e494594dbaadf5971f6d3273131dcc949a0f2f20f7289fc35",
+    "fixed-reload.png": "a9fd3e5ee23c17101245003ccd4831aee45cf7212286b620957286476c11c207",
+    "green.log": "febf420ae74d9c65deb24977bfdc4fd14661ba9b77c1d18c903f87d0740d4ac0",
+    "history-smoke.log": "8adf99c475b774eed3e3e867d92711ad0bb354cc02df63ec8cc0beafa6ee3f96",
+    "host-build.log": "353a249d5265279b68deb6cc6fdbba8467ee29a1e6a18b46cf42508f2f4caf16",
+    "python-tests.log": "1475c7de5ac3ab6c3e31305ef3e3a3e0a3de7b7358eee05f359f1ceba5c56e57",
+    "red.log": "1bf2b47a7e85c35223b896f701e07880bc9070435acbe80b992c5b96e3165a9b",
+    "second-live-first.png": "672c97911c4db7aff929190cceca39405f43c5126f3d09b13028d756564715b1",
+    "second-live-update.png": "4012832a971309dbdd90a65ca1d22d569399a9f5ba4ca5ba3c964a19185f631c",
+    "second-stop-settled.png": "133217d4e7bfe23fccb62e8de0bb38db40e5d91d9e30533de07c19d7b1c749ce",
+    "session-smoke.log": "cbb7cca2eb2c8a914b6b5973ef05a90e3d89e382a560aca5b1769cb04b1394c0",
+    "stage-one-events.json": "be80b1b3dbd693cfe4dfd3a455407c976698211473dde38afb0555b04cf7c8c0",
+    "tests.log": "52422fd0a0423597ae0a42ebf21df57195e6c47546f021b9d1d570fd8dcc767b"
+  },
+  "limits": [
+    "synthetic provider native only",
+    "no external model or new OpenCodex/DeepSeek runtime acceptance",
+    "no non-Linux native acceptance",
+    "no performance claim",
+    "remote CI separate after push"
+  ],
+  "log_normalization": "Only trailing empty lines removed from three copied logs; private originals retained."
+}

@@ -1,0 +1,59 @@
+{
+  "protocol": 3,
+  "host_id": "14e65cc8-f5c1-4904-a6b5-ac6f1dced3da",
+  "host_pid": 3898726,
+  "provider_pid": 3898883,
+  "provider_info": {
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "codex",
+    "fleetpaneTerminalVersion": 1,
+    "userAgent": "synthetic-provider/1"
+  },
+  "owner": {
+    "host_id": "14e65cc8-f5c1-4904-a6b5-ac6f1dced3da",
+    "controller_id": "be6f1688-e973-4c77-b939-515664f6357c",
+    "generation": 7
+  },
+  "sequence": 57,
+  "operation_ids": [
+    "33af85a2-2b14-433b-b99b-922ee538af62",
+    "ef5a11d2-5ab7-4714-8238-c162b4412b86",
+    "2a8417e9-13e0-449c-bfcf-b1af206cc90a",
+    "319e8887-b64b-422e-aca0-4342331e8d97",
+    "946f12b5-341a-4538-863e-3aed3d32c7a3",
+    "d3a94baa-b172-4cf0-84d0-c999508467a4",
+    "090ffdcc-cd4a-460d-a6bc-a42d9b7a60ea",
+    "ba019139-f6d4-4d97-8bc7-8909de1f0a63"
+  ],
+  "journal_total": 8,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "fixture-thread-2",
+        "turn_id": "fixture-thread-2-turn-1"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": "approval-fixture-thread-2-turn-1",
+      "method": "item/commandExecution/requestApproval",
+      "params": {
+        "command": "synthetic approval; no command runs",
+        "itemId": "command-fixture-thread-2-turn-1",
+        "threadId": "fixture-thread-2",
+        "turnId": "fixture-thread-2-turn-1"
+      }
+    }
+  ],
+  "fault": null,
+  "fault_scope": null
+}

@@ -25,8 +25,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 194 个提交 `95bacf8fc`（提交日期 2025-11-22；本地审查 2026-10-21）。**
-下一条是第 195 个 `47a99f566`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 195 个提交 `47a99f566`（提交日期 2025-11-23；本地审查 2026-10-21）。**
+下一条是第 196 个 `6aa9b1c72`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6187 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -903,3 +903,26 @@ Clippy 和构建通过。原生分页、独立展开、五次正确复制及重�
   但所读 persistence hook 仍逐条 resume/create，不能据此声称启动已完全惰性化。
 
 下一条从第 195 条 `47a99f5668b39dda45446a572bf7f5bd80c907e8` 继续。
+
+## 第 195 条：思考增量、模型目录与中断边界
+
+本批读完八个选定源码路径的全部改动文本，共 32,430 diff bytes。
+路径、未读文件和哈希见[回执](../verification/assets/paseo-replay/streamed-reasoning/receipt.json)；
+前 194 条记录保持原样，没有运行历史版本或复制实现。
+
+- timeline thought 加 loading/ready；其他消息、工具、权限及 turn 事件会把
+  所有 active thoughts 标为 ready，hydrate 结束也统一 ready。Fleetpane
+  修复了已复现的当前 Codex 思考增量漏处理，沿用精确 item 身份和历史分页边界；
+  不用另一事件推断原 turn 停止或整个 Agent 已完成。
+- Codex interrupt 调用异步迭代器 return，失败仅记录警告。调用返回不能证明
+  provider/子进程已退出；保留现有 Host-owned Stop 的两个完成门槛。
+- 加 provider model 请求/回包和新目录进程；Codex 读取单页 model/list，
+  回收时使用延迟信号。Fleetpane 保留已有 Host 连接及完整分页目录，不为
+  每次开模型菜单新建 app server。客户端的 provider-wide requestId 缓存也不
+  替代精确 Host/session 作用域。
+- 创建后的初始消息改走共享发送路径；refresh 会先中断已有运行 Agent。
+  保留显式创建/发送回执，观察或 Reload 不会自动中断用户任务。
+
+共享事件处理、边界测试及 Linux 原生验证见
+[思考增量验证](../verification/2026-10-21-streamed-reasoning.md)。
+下一条为 **196 · `6aa9b1c72e79a3bccb05049423e3c9865ef776af`**。

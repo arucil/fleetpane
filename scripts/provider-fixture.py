@@ -23,6 +23,9 @@ questions = {}
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument(
+    "--reasoning-control", type=Path, help="Gate synthetic reasoning stream stages"
+)
+parser.add_argument(
     "--history", type=Path, help="Load synthetic thread data for GUI checks"
 )
 parser.add_argument(
@@ -141,6 +144,49 @@ def finish_turn(thread_id, turn_id, status):
 
 def stream(thread_id, turn_id, text):
     stop = running[turn_id]
+    if text == "[reasoning]":
+        reasoning = {
+            "id": f"reasoning-{turn_id}", "type": "reasoning",
+            "summary": [], "content": [],
+        }
+
+        def publish(method, **fields):
+            notify(method, {"threadId": thread_id, "turnId": turn_id,
+                            "itemId": reasoning["id"], **fields})
+
+        def gate(stage):
+            if args.reasoning_control:
+                while json.loads(args.reasoning_control.read_text())["stage"] < stage:
+                    if stop.wait(0.025):
+                        return False
+            return not stop.is_set()
+
+        with state_lock:
+            turn = next(t for t in threads[thread_id]["turns"] if t["id"] == turn_id)
+            turn["items"].append(reasoning)
+            notify("item/started", {"threadId": thread_id, "turnId": turn_id,
+                                    "item": copy.deepcopy(reasoning)})
+            reasoning["summary"].append("  实时思考\n")
+            publish("item/reasoning/summaryPartAdded", summaryIndex=0)
+            publish("item/reasoning/summaryTextDelta", summaryIndex=0,
+                    delta=reasoning["summary"][0])
+        if not gate(1):
+            return
+        with state_lock:
+            reasoning["summary"][0] += "**continued**  "
+            publish("item/reasoning/summaryTextDelta", summaryIndex=0, delta="**continued**  ")
+            reasoning["summary"].append("Second part 中文")
+            publish("item/reasoning/summaryPartAdded", summaryIndex=1)
+            publish("item/reasoning/summaryTextDelta", summaryIndex=1, delta=reasoning["summary"][1])
+            reasoning["content"].append("Raw detail\n  exact spaces  ")
+            publish("item/reasoning/textDelta", contentIndex=0, delta=reasoning["content"][0])
+        if not gate(2):
+            return
+        with state_lock:
+            notify("item/completed", {"threadId": thread_id, "turnId": turn_id,
+                                      "item": copy.deepcopy(reasoning)})
+        finish_turn(thread_id, turn_id, "completed")
+        return
     if text.startswith("[resource-") and text.endswith("]"):
         case = text[len("[resource-") : -1]
         item = {

@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 194,
-    "last_revision": "95bacf8fc7dd7ba86b7442011c624109e5315174",
-    "next_revision": "47a99f5668b39dda45446a572bf7f5bd80c907e8",
-    "next_ordinal": 195
+    "last_ordinal": 195,
+    "last_revision": "47a99f5668b39dda45446a572bf7f5bd80c907e8",
+    "next_revision": "6aa9b1c72e79a3bccb05049423e3c9865ef776af",
+    "next_ordinal": 196
   },
   "entries": [
     {
@@ -2934,6 +2934,25 @@
       ],
       "finding": "File navigation history, per-folder scroll and visible gallery image requests; UI-memory drafts and queue auto-flush on running-to-any-nonrunning transition, plus send-now cancels without settlement. Server restart exits after 250ms. Branch/worktree options, explicit history priming and persisted-record listing added. Registry restore still resumes/creates in the inspected hook; no historical runtime/test execution.",
       "fleetpane_action": "bounded-workspace-images; retain-pinned-worktrees-durable-drafts-exact-turn-and-session-host; queue-gallery-navigation-restart-lifecycle-remain-partial"
+    },
+    {
+      "ordinal": 195,
+      "revision": "47a99f5668b39dda45446a572bf7f5bd80c907e8",
+      "date": "2025-11-23T14:12:53+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/agent/model-catalog.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Thought loading/ready transitions and hydration finalization; single-page subprocess model catalog and provider-wide request cache; generator-return interrupt and initial prompt common send path. Eight complete selected source diffs, no historical execution or omitted UI/provider/tests inspected.",
+      "fleetpane_action": "indexed-reasoning-deltas-and-history-watermarks; retain-existing-paged-catalog-exact-turn-stop-and-explicit-send"
     }
   ],
   "workflow_status": {
@@ -2953,7 +2972,8 @@
     "supplied-resources": "partial; explicit ACP/MCP embedded-resource and resource-link projection, bounded native literal/Markdown previews, metadata, complete text/URI/base64 copy and archive/reload verified locally. No fetching, binary decoding, outgoing context, audio, URI validation or fresh external model acceptance.",
     "conversation-row-identity": "verified locally for covered native cache collisions; tagged kind/thread/turn/item tuples, two pre-fix regressions, native paginated before/after, independent expansion and exact Copy/reload. No fuzzy missing-ID matching, conflicting-provider-history repair or external-provider acceptance.",
     "session-ancestry": "partial; bounded read-only Codex ancestry and loaded contexts are locally verified in shared engine, CLI and Linux native UI. Archived/ephemeral descendants, forks, pending requests, stale failures, drain and lease/Host changes covered. Observation is non-atomic and excludes background resources; safe archive/stop and live Host handoff remain open. ACP explicitly unsupported.",
-    "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance."
+    "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance.",
+    "streamed-reasoning": "partial; three typed indexed Codex deltas, history per-item boundaries and retained native card updates verified locally with regressions and gated synthetic provider. Exact Copy/reload, Stop and independent permission covered; external model and non-Linux native acceptance remain open."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

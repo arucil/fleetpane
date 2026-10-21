@@ -1,0 +1,594 @@
+{
+  "response": "events",
+  "data": [
+    {
+      "sequence": 1,
+      "message": {
+        "id": "33af85a2-2b14-433b-b99b-922ee538af62",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-reasoning-20261021",
+            "historyMode": "paginated",
+            "id": "fixture-thread-1",
+            "name": null,
+            "preview": "New conversation",
+            "status": {
+              "type": "idle"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "message": {
+        "id": "ef5a11d2-5ab7-4714-8238-c162b4412b86",
+        "result": {}
+      }
+    },
+    {
+      "sequence": 3,
+      "message": {
+        "method": "thread/name/updated",
+        "params": {
+          "threadId": "fixture-thread-1",
+          "threadName": "Reasoning stream"
+        }
+      }
+    },
+    {
+      "sequence": 4,
+      "message": {
+        "id": "2a8417e9-13e0-449c-bfcf-b1af206cc90a",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-reasoning-20261021",
+            "historyMode": "paginated",
+            "id": "fixture-thread-2",
+            "name": null,
+            "preview": "New conversation",
+            "status": {
+              "type": "idle"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    {
+      "sequence": 5,
+      "message": {
+        "id": "319e8887-b64b-422e-aca0-4342331e8d97",
+        "result": {}
+      }
+    },
+    {
+      "sequence": 6,
+      "message": {
+        "method": "thread/name/updated",
+        "params": {
+          "threadId": "fixture-thread-2",
+          "threadName": "Independent approval"
+        }
+      }
+    },
+    {
+      "sequence": 7,
+      "message": {
+        "method": "thread/status/changed",
+        "params": {
+          "status": {
+            "activeFlags": [],
+            "type": "active"
+          },
+          "threadId": "fixture-thread-2"
+        }
+      }
+    },
+    {
+      "sequence": 8,
+      "message": {
+        "method": "turn/started",
+        "params": {
+          "threadId": "fixture-thread-2",
+          "turn": {
+            "error": null,
+            "fixtureOptions": {},
+            "id": "fixture-thread-2-turn-1",
+            "items": [],
+            "status": "inProgress"
+          }
+        }
+      }
+    },
+    {
+      "sequence": 9,
+      "message": {
+        "method": "item/completed",
+        "params": {
+          "item": {
+            "content": [
+              {
+                "text": "[approval]",
+                "type": "text"
+              }
+            ],
+            "id": "user-fixture-thread-2-turn-1",
+            "type": "userMessage"
+          },
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 10,
+      "message": {
+        "id": "946f12b5-341a-4538-863e-3aed3d32c7a3",
+        "result": {
+          "turn": {
+            "error": null,
+            "fixtureOptions": {},
+            "id": "fixture-thread-2-turn-1",
+            "items": [],
+            "status": "inProgress"
+          }
+        }
+      }
+    },
+    {
+      "sequence": 11,
+      "message": {
+        "id": "approval-fixture-thread-2-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-2-turn-1",
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 12,
+      "message": {
+        "id": "query:36af5d94-6bfc-4704-8859-80864b03dc7f",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fleetpane-reasoning-20261021",
+              "historyMode": "paginated",
+              "id": "fixture-thread-1",
+              "name": "Reasoning stream",
+              "preview": "New conversation",
+              "status": {
+                "type": "idle"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-reasoning-20261021",
+              "historyMode": "paginated",
+              "id": "fixture-thread-2",
+              "name": "Independent approval",
+              "preview": "[approval]",
+              "status": {
+                "activeFlags": [],
+                "type": "active"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 13,
+      "message": {
+        "id": "query:02be1652-421d-4bf6-b7f7-b7411b7f6f9c",
+        "result": {
+          "data": [
+            {
+              "defaultReasoningEffort": "medium",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Balanced \u6d4b\u8bd5\u6a21\u578b",
+              "hidden": false,
+              "id": "fixture-balanced",
+              "isDefault": true,
+              "model": "fixture-balanced",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic medium",
+                  "reasoningEffort": "medium"
+                },
+                {
+                  "description": "Synthetic high",
+                  "reasoningEffort": "high"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "low",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Quick \u6d4b\u8bd5\u6a21\u578b",
+              "hidden": false,
+              "id": "fixture-quick",
+              "isDefault": false,
+              "model": "fixture-quick",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic low",
+                  "reasoningEffort": "low"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "none",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Basic \u00b7 no reasoning control",
+              "hidden": false,
+              "id": "fixture-basic",
+              "isDefault": false,
+              "model": "fixture-basic",
+              "supportedReasoningEfforts": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 14,
+      "message": {
+        "id": "query:e13658ae-ea38-4c0b-ad9a-d11909fce64d",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-reasoning-20261021",
+            "historyMode": "paginated",
+            "id": "fixture-thread-1",
+            "name": "Reasoning stream",
+            "preview": "New conversation",
+            "status": {
+              "type": "idle"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    {
+      "sequence": 15,
+      "message": {
+        "id": "query:c8310f73-9c07-4967-ac6b-d9a7d14431ec",
+        "result": {
+          "backwardsCursor": null,
+          "data": [],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 16,
+      "message": {
+        "method": "thread/status/changed",
+        "params": {
+          "status": {
+            "activeFlags": [],
+            "type": "active"
+          },
+          "threadId": "fixture-thread-1"
+        }
+      }
+    },
+    {
+      "sequence": 17,
+      "message": {
+        "method": "turn/started",
+        "params": {
+          "threadId": "fixture-thread-1",
+          "turn": {
+            "error": null,
+            "fixtureOptions": {},
+            "id": "fixture-thread-1-turn-1",
+            "items": [],
+            "status": "inProgress"
+          }
+        }
+      }
+    },
+    {
+      "sequence": 18,
+      "message": {
+        "method": "item/completed",
+        "params": {
+          "item": {
+            "content": [
+              {
+                "text": "[reasoning]",
+                "type": "text"
+              }
+            ],
+            "id": "user-fixture-thread-1-turn-1",
+            "type": "userMessage"
+          },
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 19,
+      "message": {
+        "id": "d3a94baa-b172-4cf0-84d0-c999508467a4",
+        "result": {
+          "turn": {
+            "error": null,
+            "fixtureOptions": {},
+            "id": "fixture-thread-1-turn-1",
+            "items": [],
+            "status": "inProgress"
+          }
+        }
+      }
+    },
+    {
+      "sequence": 20,
+      "message": {
+        "method": "item/started",
+        "params": {
+          "item": {
+            "content": [],
+            "id": "reasoning-fixture-thread-1-turn-1",
+            "summary": [],
+            "type": "reasoning"
+          },
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 21,
+      "message": {
+        "method": "item/reasoning/summaryPartAdded",
+        "params": {
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "summaryIndex": 0,
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 22,
+      "message": {
+        "method": "item/reasoning/summaryTextDelta",
+        "params": {
+          "delta": "  \u5b9e\u65f6\u601d\u8003\n",
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "summaryIndex": 0,
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 23,
+      "message": {
+        "id": "query:bf4f9917-5e3d-4205-9570-b0d608f9aa77",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fleetpane-reasoning-20261021",
+              "historyMode": "paginated",
+              "id": "fixture-thread-1",
+              "name": "Reasoning stream",
+              "preview": "[reasoning]",
+              "status": {
+                "activeFlags": [],
+                "type": "active"
+              },
+              "turns": []
+            },
+            {
+              "cwd": "/tmp/fleetpane-reasoning-20261021",
+              "historyMode": "paginated",
+              "id": "fixture-thread-2",
+              "name": "Independent approval",
+              "preview": "[approval]",
+              "status": {
+                "activeFlags": [],
+                "type": "active"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 24,
+      "message": {
+        "id": "query:62b77e31-bf4b-4489-b8fc-231a1eb27d10",
+        "result": {
+          "data": [
+            {
+              "defaultReasoningEffort": "medium",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Balanced \u6d4b\u8bd5\u6a21\u578b",
+              "hidden": false,
+              "id": "fixture-balanced",
+              "isDefault": true,
+              "model": "fixture-balanced",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic medium",
+                  "reasoningEffort": "medium"
+                },
+                {
+                  "description": "Synthetic high",
+                  "reasoningEffort": "high"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "low",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Quick \u6d4b\u8bd5\u6a21\u578b",
+              "hidden": false,
+              "id": "fixture-quick",
+              "isDefault": false,
+              "model": "fixture-quick",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic low",
+                  "reasoningEffort": "low"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "none",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Basic \u00b7 no reasoning control",
+              "hidden": false,
+              "id": "fixture-basic",
+              "isDefault": false,
+              "model": "fixture-basic",
+              "supportedReasoningEfforts": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 25,
+      "message": {
+        "id": "query:74cb99da-9b0f-4e3f-9591-f6369c9b16c4",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fleetpane-reasoning-20261021",
+            "historyMode": "paginated",
+            "id": "fixture-thread-1",
+            "name": "Reasoning stream",
+            "preview": "[reasoning]",
+            "status": {
+              "activeFlags": [],
+              "type": "active"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    {
+      "sequence": 26,
+      "message": {
+        "id": "query:083118ac-0848-4e22-b84f-40a6ae7a9957",
+        "result": {
+          "backwardsCursor": null,
+          "data": [
+            {
+              "error": null,
+              "fixtureOptions": {},
+              "id": "fixture-thread-1-turn-1",
+              "items": [],
+              "status": "inProgress"
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 27,
+      "message": {
+        "id": "query:d380b6eb-7fba-4704-8061-0a5183d2cd4d",
+        "result": {
+          "backwardsCursor": null,
+          "data": [
+            {
+              "item": {
+                "content": [],
+                "id": "reasoning-fixture-thread-1-turn-1",
+                "summary": [
+                  "  \u5b9e\u65f6\u601d\u8003\n"
+                ],
+                "type": "reasoning"
+              },
+              "turnId": "fixture-thread-1-turn-1"
+            },
+            {
+              "item": {
+                "content": [
+                  {
+                    "text": "[reasoning]",
+                    "type": "text"
+                  }
+                ],
+                "id": "user-fixture-thread-1-turn-1",
+                "type": "userMessage"
+              },
+              "turnId": "fixture-thread-1-turn-1"
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 28,
+      "message": {
+        "method": "item/reasoning/summaryTextDelta",
+        "params": {
+          "delta": "**continued**  ",
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "summaryIndex": 0,
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 29,
+      "message": {
+        "method": "item/reasoning/summaryPartAdded",
+        "params": {
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "summaryIndex": 1,
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 30,
+      "message": {
+        "method": "item/reasoning/summaryTextDelta",
+        "params": {
+          "delta": "Second part \u4e2d\u6587",
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "summaryIndex": 1,
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    },
+    {
+      "sequence": 31,
+      "message": {
+        "method": "item/reasoning/textDelta",
+        "params": {
+          "contentIndex": 0,
+          "delta": "Raw detail\n  exact spaces  ",
+          "itemId": "reasoning-fixture-thread-1-turn-1",
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      }
+    }
+  ]
+}

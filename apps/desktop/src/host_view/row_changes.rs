@@ -51,6 +51,45 @@ mod tests {
     use serde_json::json;
 
     #[test]
+    fn streamed_reasoning_appears_and_only_updates_its_retained_card() {
+        let mut thread: fleetpane_session::Thread = serde_json::from_value(json!({
+            "id":"s","cwd":"/synthetic","preview":"","status":{"type":"active"},
+            "turns":[{"id":"t","status":"inProgress","items":[
+                {"id":"r","type":"reasoning","summary":[],"content":[]},
+                {"id":"a","type":"agentMessage","text":"Keep this card"}
+            ]}]
+        }))
+        .unwrap();
+        let hidden = Row::conversation(&thread);
+        assert_eq!(hidden.len(), 2);
+        let mut event = fleetpane_runtime::Event {
+            sequence: 1,
+            message: json!({"method":"item/reasoning/summaryTextDelta","params":{
+                "threadId":"s","turnId":"t","itemId":"r","summaryIndex":0,"delta":"思考 "
+            }}),
+        };
+        let applied = thread.apply(&event).unwrap();
+        assert!(affects_rows(&event, applied));
+        let visible = Row::conversation(&thread);
+        assert_eq!(visible.len(), 3);
+        assert_eq!(plan(&hidden, &visible).updated, [1]);
+        let identity = visible[1].id.clone();
+        event.message["params"]["delta"] = json!("continued");
+        let applied = thread.apply(&event).unwrap();
+        assert!(affects_rows(&event, applied));
+        let updated = Row::conversation(&thread);
+        assert_eq!(plan(&visible, &updated).updated, [1]);
+        assert_eq!(updated[1].id, identity);
+        assert!(
+            matches!(&updated[1].content, Content::Reasoning(text) if text == "思考 continued")
+        );
+        assert_eq!(
+            serde_json::from_str::<serde_json::Value>(&updated[1].copy).unwrap()["summary"],
+            json!(["思考 continued"])
+        );
+    }
+
+    #[test]
     fn item_named_status_does_not_replace_the_turn_card() {
         let thread: fleetpane_session::Thread = serde_json::from_value(json!({
             "id":"s","cwd":"/synthetic","preview":"","status":{"type":"idle"},

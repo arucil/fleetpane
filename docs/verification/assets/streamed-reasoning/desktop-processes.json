@@ -1,0 +1,48 @@
+[
+  {
+    "id": "app-3899710",
+    "name": "before-reasoning",
+    "pid": 3899710,
+    "process_group_id": 3899710,
+    "mount_isolation": "host",
+    "network_isolation": "host",
+    "command": [
+      "/tmp/fleetpane-reasoning-20261021/before-desktop",
+      "--host",
+      "/tmp/fleetpane-reasoning-20261021/host/control.sock",
+      "--preferences-dir",
+      "/tmp/fleetpane-reasoning-20261021/preferences"
+    ],
+    "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-reasoning-20261021/apps/app-3899710.stdout.log",
+    "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-reasoning-20261021/apps/app-3899710.stderr.log",
+    "started_at_unix": 1792583613,
+    "running": false,
+    "exit_status": "exit status: 0",
+    "exit_code": 0,
+    "stopped_at_unix": 1792583703,
+    "runtime_seconds": 90
+  },
+  {
+    "id": "app-3926146",
+    "name": "fixed-reasoning",
+    "pid": 3926146,
+    "process_group_id": 3926146,
+    "mount_isolation": "host",
+    "network_isolation": "host",
+    "command": [
+      "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+      "--host",
+      "/tmp/fleetpane-reasoning-20261021/host/control.sock",
+      "--preferences-dir",
+      "/tmp/fleetpane-reasoning-20261021/preferences"
+    ],
+    "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-reasoning-20261021/apps/app-3926146.stdout.log",
+    "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-reasoning-20261021/apps/app-3926146.stderr.log",
+    "started_at_unix": 1792583703,
+    "running": false,
+    "exit_status": "exit status: 0",
+    "exit_code": 0,
+    "stopped_at_unix": 1792584047,
+    "runtime_seconds": 344
+  }
+]

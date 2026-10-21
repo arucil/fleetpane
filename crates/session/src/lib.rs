@@ -29,6 +29,7 @@ pub mod models;
 pub mod paseo_import;
 pub mod progress;
 pub mod questions;
+mod reasoning;
 #[cfg(unix)]
 pub mod recent_directories;
 #[cfg(unix)]
@@ -191,6 +192,9 @@ impl Thread {
                 | "item/started"
                 | "item/completed"
                 | "item/agentMessage/delta"
+                | "item/reasoning/summaryPartAdded"
+                | "item/reasoning/summaryTextDelta"
+                | "item/reasoning/textDelta"
         ) {
             return Ok(false);
         }
@@ -204,6 +208,7 @@ impl Thread {
             return Ok(false);
         }
         match envelope.method.as_str() {
+            method if reasoning::is_delta(method) => reasoning::apply(self, method, params)?,
             "thread/acpSessionInfo/updated" => {
                 let name = params
                     .get("threadName")

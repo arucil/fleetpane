@@ -238,6 +238,90 @@ mod tests {
     }
 
     #[test]
+    fn reasoning_replay_obeys_item_page_boundaries_for_all_three_notifications() {
+        let mut thread = thread();
+        let mut history = History::new(thread.id.clone());
+        apply(
+            &mut history,
+            &mut thread,
+            json!({"data":[turn("recent")],"nextCursor":null}),
+            2,
+        );
+        apply(
+            &mut history,
+            &mut thread,
+            json!({"data":[{"turnId":"recent","item":{
+            "id":"r","type":"reasoning","summary":["Snapshot"],"content":["Raw"]
+        }}],"nextCursor":"older"}),
+            10,
+        );
+        for (method, extra) in [
+            (
+                "item/reasoning/summaryTextDelta",
+                json!({"summaryIndex":0,"delta":" stale"}),
+            ),
+            ("item/reasoning/summaryPartAdded", json!({"summaryIndex":1})),
+            (
+                "item/reasoning/textDelta",
+                json!({"contentIndex":0,"delta":" stale"}),
+            ),
+        ] {
+            let mut params = json!({"threadId":"t","turnId":"recent","itemId":"r"});
+            params
+                .as_object_mut()
+                .unwrap()
+                .extend(extra.as_object().unwrap().clone());
+            assert!(
+                !history
+                    .apply_event(&mut thread, &event(10, method, params))
+                    .unwrap()
+            );
+        }
+        apply(
+            &mut history,
+            &mut thread,
+            json!({"data":[{"turnId":"recent","item":item("old","Earlier")}],"nextCursor":null}),
+            20,
+        );
+        // An older page cannot cover newer deltas to the already loaded item.
+        for (method, extra) in [
+            (
+                "item/reasoning/summaryTextDelta",
+                json!({"summaryIndex":0,"delta":" 中文"}),
+            ),
+            ("item/reasoning/summaryPartAdded", json!({"summaryIndex":1})),
+            (
+                "item/reasoning/summaryTextDelta",
+                json!({"summaryIndex":1,"delta":"Second"}),
+            ),
+            (
+                "item/reasoning/textDelta",
+                json!({"contentIndex":0,"delta":" continued"}),
+            ),
+        ] {
+            let mut params = json!({"threadId":"t","turnId":"recent","itemId":"r"});
+            params
+                .as_object_mut()
+                .unwrap()
+                .extend(extra.as_object().unwrap().clone());
+            assert!(
+                history
+                    .apply_event(&mut thread, &event(15, method, params))
+                    .unwrap()
+            );
+        }
+        assert_eq!(
+            thread.turns[0].items[1].fields["summary"],
+            json!(["Snapshot 中文", "Second"])
+        );
+        assert_eq!(
+            thread.turns[0].items[1].fields["content"],
+            json!(["Raw continued"])
+        );
+        assert_eq!(thread.turns[0].items[0].text().unwrap(), "Earlier");
+    }
+
+    #[test]
     fn acp_item_replacements_obey_page_watermarks_without_reverting_later_content() {
         let mut thread = thread();
         thread.history_mode = Some("acp-observed".into());
@@ -610,16 +694,23 @@ impl History {
             }
         } else if matches!(
             method,
-            Some("item/started" | "item/completed" | "item/agentMessage/delta")
+            Some(
+                "item/started"
+                    | "item/completed"
+                    | "item/agentMessage/delta"
+                    | "item/reasoning/summaryPartAdded"
+                    | "item/reasoning/summaryTextDelta"
+                    | "item/reasoning/textDelta"
+            )
         ) && let Some(turn_id) = event
             .message
             .pointer("/params/turnId")
             .and_then(Value::as_str)
         {
-            let item_id = if method == Some("item/agentMessage/delta") {
-                event.message.pointer("/params/itemId")
-            } else {
+            let item_id = if matches!(method, Some("item/started" | "item/completed")) {
                 event.message.pointer("/params/item/id")
+            } else {
+                event.message.pointer("/params/itemId")
             };
             if self.covered(turn_id, item_id.and_then(Value::as_str), event.sequence) {
                 return Ok(false);
