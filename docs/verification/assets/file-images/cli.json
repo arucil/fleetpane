@@ -1,0 +1,41 @@
+{
+  "offline": true,
+  "exact_bytes": 1329,
+  "exact_sha256": "1c0c896b8d029a0632503a2b70ef3f9964dc04b5277ee4507e7c5053fed4a94b",
+  "notices": {
+    "corrupt.png": {
+      "kind": "unavailable",
+      "reason": "Image format: The image format could not be determined"
+    },
+    "truncated": {
+      "kind": "unavailable",
+      "reason": "Image dimensions: unexpected end of file"
+    },
+    "unsupported.gif": {
+      "kind": "unavailable",
+      "reason": "Image attachments support PNG, JPEG and WebP"
+    },
+    "huge.png": {
+      "kind": "unavailable",
+      "reason": "Invalid image attachment identity, name or bounds"
+    },
+    "large.png": {
+      "kind": "too_large",
+      "limit": 8388608
+    },
+    "large.txt": {
+      "kind": "too_large",
+      "limit": 262144
+    }
+  },
+  "refusals": {
+    "link.png": "fleetpane-host: Workspace files: only regular files and directories can be opened; links and special files are not followed\n",
+    "pipe.png": "fleetpane-host: Workspace files: only regular files and directories can be opened; links and special files are not followed\n",
+    "../outside.png": "fleetpane-host: Workspace files: choose a relative path within the saved workspace (no parent traversal, up to 4 KiB / 64 components)\n",
+    "/tmp/fp-file-images-i5z6v4in/outside.png": "fleetpane-host: Workspace files: file path is outside the saved workspace\n"
+  },
+  "reload_preserved": true,
+  "delete_rejected": true,
+  "replaced_root_rejected": true,
+  "host_binary_sha256": "af23a8b60832dbd4dbb099f781e92181b9d0c7a744b2b6f4adf438a5662f9206"
+}

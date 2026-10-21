@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 193,
-    "last_revision": "9feec81047d5ff221ec6f90e22775199556690ad",
-    "next_revision": "95bacf8fc7dd7ba86b7442011c624109e5315174",
-    "next_ordinal": 194
+    "last_ordinal": 194,
+    "last_revision": "95bacf8fc7dd7ba86b7442011c624109e5315174",
+    "next_revision": "47a99f5668b39dda45446a572bf7f5bd80c907e8",
+    "next_ordinal": 195
   },
   "entries": [
     {
@@ -2914,6 +2914,26 @@
       ],
       "finding": "Buffers playback chunks until final then concatenates and acknowledges every chunk even on failure; adds mic permission gate, realtime speech-end buffer and wait cancellation tracker/test. MCP references waitTracker without declaration/initialization in this tree; no historical runtime claim.",
       "fleetpane_action": "retain-exact-turn-observer-stop-independent-voice-p2"
+    },
+    {
+      "ordinal": 194,
+      "revision": "95bacf8fc7dd7ba86b7442011c624109e5315174",
+      "date": "2025-11-22T23:20:42+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx",
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/persistence-hooks.ts",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "finding": "File navigation history, per-folder scroll and visible gallery image requests; UI-memory drafts and queue auto-flush on running-to-any-nonrunning transition, plus send-now cancels without settlement. Server restart exits after 250ms. Branch/worktree options, explicit history priming and persisted-record listing added. Registry restore still resumes/creates in the inspected hook; no historical runtime/test execution.",
+      "fleetpane_action": "bounded-workspace-images; retain-pinned-worktrees-durable-drafts-exact-turn-and-session-host; queue-gallery-navigation-restart-lifecycle-remain-partial"
     }
   ],
   "workflow_status": {
@@ -2928,7 +2948,7 @@
     "persistent-session-identity": "partial; original ACP IDs and observed journal history retain explicit context resume. Codex provider archive listing/read/restore now has typed CLI/native fixture and installed 0.163.0 process acceptance. Restore preserves identity/history/drafts, does not send/resume/restore descendants, and uses fenced durable mutation receipts. Active archive mutation, tree impact, deletion UI, provider-private alias adoption and complete runtime restoration remain open.",
     "conversation-tail-navigation": "partial; native return/stream follow, history paging and independent details scrolling with retained exact draft/other-session permission verified. No unread count, remote/read-only acceptance or cross-window scroll restoration.",
     "exact-turn-observation": "partial; shared Unix CLI wait and six regressions plus protocol fixtures and installed Codex/gated loopback verified. No takeover/answer/Stop/send; explicit timeout, fault, expired cursor and unknown after restart. Public MCP, curated activity export, remote and performance acceptance remain open.",
-    "workspace-file-navigation": "partial; shared typed local open, explicit Markdown anchors, tool/change paths and retained-conversation file overlay verified with native exact copy, Go/Enter, refresh, refusal and independent Host/draft preservation. Saved exact endpoint/cwd roots retain identity fences; initial explicit registration covered. No inline-code guessing, OS deep links, forced delayed-reply acceptance, restart/anchor/scroll persistence, Back/Forward, editing, search/watch or media preview.",
+    "workspace-file-navigation": "partial; shared local text/image open, explicit Markdown anchors, tool/change paths and retained conversation overlays. Bounded original PNG/JPEG/WebP bytes, metadata, reload, fitted Linux native rendering and explicit notices verified separately. No gallery, embedded Markdown-file images, inline-code guessing, OS deep links, forced delayed replies, restart/anchor/scroll persistence, Back/Forward, editing, search/watch or other media.",
     "attention": "partial; read-only multi-Host pending requests, exact identity/source/filter/copy, original fenced native answers and external-resolution observation verified locally. Completion/failure/unread, request age, notification/mute/tray and keyboard-next remain open.",
     "supplied-resources": "partial; explicit ACP/MCP embedded-resource and resource-link projection, bounded native literal/Markdown previews, metadata, complete text/URI/base64 copy and archive/reload verified locally. No fetching, binary decoding, outgoing context, audio, URI validation or fresh external model acceptance.",
     "conversation-row-identity": "verified locally for covered native cache collisions; tagged kind/thread/turn/item tuples, two pre-fix regressions, native paginated before/after, independent expansion and exact Copy/reload. No fuzzy missing-ID matching, conflicting-provider-history repair or external-provider acceptance.",

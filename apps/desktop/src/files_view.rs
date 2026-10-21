@@ -1,5 +1,6 @@
 //! Read-only file navigation; filesystem work stays in the shared session engine.
 use crate::{file_locations::Location, host_view::background};
+use base64::{Engine, engine::general_purpose::STANDARD};
 use fleetpane_session::{
     files::{Content, Kind, Listing, Opened, Readback, Target},
     workspaces::Workspace,
@@ -10,7 +11,7 @@ use gpui_kit::component::{
     input::{Input, InputEvent, InputState, Textarea, TextareaState},
 };
 use gpui_kit::{prelude::*, *};
-use std::num::NonZeroUsize;
+use std::{num::NonZeroUsize, sync::Arc};
 
 enum Action {
     List(String, Option<Target>),
@@ -19,8 +20,8 @@ enum Action {
 }
 enum Reply {
     Listed(Listing, Option<Target>),
-    Read(Readback, Option<NonZeroUsize>),
-    Opened(Opened, Option<NonZeroUsize>),
+    Read(Readback, Option<NonZeroUsize>, Option<Arc<Image>>),
+    Opened(Opened, Option<NonZeroUsize>, Option<Arc<Image>>),
 }
 pub struct FilesView {
     workspace: Workspace,
@@ -32,6 +33,7 @@ pub struct FilesView {
     listing: Option<Listing>,
     file: Option<Readback>,
     preview: Option<Entity<TextareaState>>,
+    image: Option<Arc<Image>>,
     busy: bool,
     error: Option<String>,
     scroll: UniformListScrollHandle,
@@ -62,6 +64,20 @@ fn source_preview(text: &str, line: Option<NonZeroUsize>) -> Result<&str, String
             })?
     };
     Ok(preview(&text[start..]))
+}
+
+// Called in the existing bounded command worker, never in render or the UI callback.
+fn prepare_image(file: &Readback) -> Result<Option<Arc<Image>>, fleetpane_session::client::Error> {
+    let Content::Image { image, data_base64 } = &file.content else {
+        return Ok(None);
+    };
+    let format = ImageFormat::from_mime_type(&image.mime_type).ok_or_else(|| {
+        fleetpane_session::client::Error::Input("Unsupported workspace image format".into())
+    })?;
+    let bytes = STANDARD.decode(data_base64).map_err(|error| {
+        fleetpane_session::client::Error::Input(format!("Invalid workspace image bytes: {error}"))
+    })?;
+    Ok(Some(Arc::new(Image::from_bytes(format, bytes))))
 }
 
 impl FilesView {
@@ -127,6 +143,7 @@ impl FilesView {
                 this.go(window, cx);
             }
         });
+        cx.on_release(|this, cx| this.clear_image(cx)).detach();
         let mut value = Self {
             workspace,
             location: location.clone(),
@@ -137,6 +154,7 @@ impl FilesView {
             listing: None,
             file: None,
             preview: None,
+            image: None,
             busy: false,
             error: None,
             scroll: UniformListScrollHandle::new(),
@@ -163,15 +181,27 @@ impl FilesView {
         );
     }
 
+    fn clear_image(&mut self, cx: &mut App) {
+        if let Some(image) = self.image.take() {
+            ImageSource::from(image).remove_asset(cx);
+        }
+    }
+
     fn show_file(
         &mut self,
         file: Readback,
+        image: Option<Arc<Image>>,
         line: Option<NonZeroUsize>,
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
         self.location.file = Some(file.path.clone());
         self.line = line;
+        self.clear_image(cx);
+        self.image = image;
+        if self.image.is_some() && line.is_some() {
+            self.error = Some("Source line anchors apply to text files; showing the image.".into());
+        }
         self.preview = match &file.content {
             Content::Text { text } => match source_preview(text, line) {
                 Ok(text) => Some(cx.new(|cx| {
@@ -202,14 +232,19 @@ impl FilesView {
                         .list_files(&path)
                         .await
                         .map(|listing| Reply::Listed(listing, selected)),
-                    Action::Read(path, line) => workspace
-                        .read_file(&path)
-                        .await
-                        .map(|file| Reply::Read(file, line)),
-                    Action::Open(target) => workspace
-                        .open_path(&target.path)
-                        .await
-                        .map(|opened| Reply::Opened(opened, target.line)),
+                    Action::Read(path, line) => workspace.read_file(&path).await.and_then(|file| {
+                        let image = prepare_image(&file)?;
+                        Ok(Reply::Read(file, line, image))
+                    }),
+                    Action::Open(target) => {
+                        workspace.open_path(&target.path).await.and_then(|opened| {
+                            let image = match &opened {
+                                Opened::File(file) => prepare_image(file)?,
+                                Opened::Directory(_) => None,
+                            };
+                            Ok(Reply::Opened(opened, target.line, image))
+                        })
+                    }
                 }
             })
         });
@@ -230,12 +265,15 @@ impl FilesView {
                         this.listing = Some(listing);
                         this.file = None;
                         this.preview = None;
+                        this.clear_image(cx);
                         this.line = None;
                         this.scroll.scroll_to_item(0, ScrollStrategy::Top);
                         restore = selected;
                     }
-                    Ok(Reply::Read(file, line)) => this.show_file(file, line, window, cx),
-                    Ok(Reply::Opened(Opened::Directory(listing), _)) => {
+                    Ok(Reply::Read(file, line, image)) => {
+                        this.show_file(file, image, line, window, cx)
+                    }
+                    Ok(Reply::Opened(Opened::Directory(listing), _, _)) => {
                         this.location = Location {
                             directory: listing.path.clone(),
                             file: None,
@@ -246,10 +284,11 @@ impl FilesView {
                         this.listing = Some(listing);
                         this.file = None;
                         this.preview = None;
+                        this.clear_image(cx);
                         this.line = None;
                         this.scroll.scroll_to_item(0, ScrollStrategy::Top);
                     }
-                    Ok(Reply::Opened(Opened::File(file), line)) => {
+                    Ok(Reply::Opened(Opened::File(file), line, image)) => {
                         this.location.directory = file
                             .path
                             .rsplit_once('/')
@@ -259,9 +298,16 @@ impl FilesView {
                             input.set_value(file.path.clone(), window, cx)
                         });
                         this.listing = None;
-                        this.show_file(file, line, window, cx);
+                        this.show_file(file, image, line, window, cx);
                     }
-                    Err(error) => this.error = Some(error.to_string()),
+                    Err(error) => {
+                        this.error = Some(error.to_string());
+                        this.file = None;
+                        this.preview = None;
+                        this.clear_image(cx);
+                        this.line = None;
+                        this.location.file = None;
+                    }
                 }
                 if let Some(target) = restore {
                     this.run(Action::Read(target.path, target.line), window, cx);
@@ -310,7 +356,7 @@ impl Render for FilesView {
                     })).flex_1().min_h_0().track_scroll(&self.scroll))
                     .child(div().text_xs().child("Links and special files are listed without following them.")))
                 .child(div().flex_1().min_w_0().flex().flex_col().gap_2()
-                    .when(self.file.is_none(),|view|view.child("Choose a file to preview. UTF-8 text up to 256 KiB; larger and binary files show an explicit notice."))
+                    .when(self.file.is_none(),|view|view.child("Choose a file to preview. UTF-8 text up to 256 KiB; PNG, JPEG and WebP up to 8 MiB / 16 megapixels."))
                     .when_some(self.file.as_ref(),|view,file| {
                         let reload=file.path.clone();
                         let copy_path=file.path.clone();
@@ -324,11 +370,17 @@ impl Render for FilesView {
                                     .when(text.len()>PREVIEW_BYTES,|view|view.child(div().text_sm().child("Preview shows up to 16 KiB from the selected line. Copy full text includes the complete loaded file.")))
                                     .when(text.is_empty(),|view|view.child("Empty file"))
                             }
+                            Content::Image {image, ..}=>view.child(format!("{} · {} × {} pixels", image.mime_type, image.width, image.height)),
+                            Content::Unavailable {reason}=>view.child(div().text_color(cx.theme().danger).child(format!("Image preview unavailable: {reason}"))),
                             Content::Binary=>view.child("Binary or non-UTF-8 file; text preview is unavailable."),
-                            Content::TooLarge {limit}=>view.child(format!("File exceeds the {limit}-byte text limit; no partial content was loaded.")),
+                            Content::TooLarge {limit}=>view.child(format!("File exceeds the {limit}-byte preview limit; no partial content was loaded.")),
                         }
                     })
-                    .when_some(self.line,|view,line|view.child(div().text_sm().child(format!("From source line {line}"))))
+                    .when_some(self.image.as_ref(), |view,source|view.child(
+                        div().relative().flex_1().min_h_0().overflow_hidden().child(img(ImageSource::from(source.clone())).absolute().top_0().left_0().size_full().object_fit(ObjectFit::Contain)
+                            .with_loading(||div().child("Loading image…").into_any_element())
+                            .with_fallback(||div().child("Image renderer could not display the validated file.").into_any_element()))))
+                    .when_some(self.line.filter(|_|self.preview.is_some()),|view,line|view.child(div().text_sm().child(format!("From source line {line}"))))
                     .when_some(self.preview.as_ref(),|view,state|view.child(div().flex_1().min_h_0().overflow_hidden().child(Textarea::new(state).readonly(true).h_full())))))
     }
 }

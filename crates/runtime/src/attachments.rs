@@ -63,7 +63,8 @@ impl Image {
     }
 
     #[cfg(any(unix, test))]
-    fn inspect(bytes: &[u8], name: String) -> Result<Self, String> {
+    /// Validate encoded bytes and dimensions without importing an attachment.
+    pub fn inspect(bytes: &[u8], name: String) -> Result<Self, String> {
         if bytes.is_empty() || bytes.len() as u64 > MAX_IMAGE_BYTES {
             return Err("Image must contain data and fit within 8 MiB".into());
         }

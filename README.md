@@ -729,10 +729,17 @@ fleetpane-host workspace /absolute/hosts.creations read WORKSPACE_UUID src/main.
 fleetpane-host workspace /absolute/hosts.creations open WORKSPACE_UUID ./src/main.rs
 ```
 
-Editing, recursive trees, watching/search, media preview and large-file streaming
-remain open. See [the decision](docs/adr/0026-read-only-workspace-files.md)
+PNG, JPEG and WebP files have a fitted image preview, type and pixel dimensions.
+Images are validated from their bytes, bounded to 8 MiB, 8192 pixels per dimension
+and 16 Mi-pixels. Reload observes external changes; corrupt/unsupported/oversized
+images show explicit notices. The shared CLI result includes the original bytes
+as base64 plus SHA-256 and metadata. Images are never imported as attachments.
+
+Editing, recursive trees, watching/search, galleries, embedded Markdown-file images,
+other media and large-file streaming remain open. See [the decision](docs/adr/0026-read-only-workspace-files.md)
 and [engine verification](docs/verification/2026-10-20-workspace-files.md), plus
-[conversation navigation acceptance](docs/verification/2026-10-21-file-navigation.md).
+[conversation navigation acceptance](docs/verification/2026-10-21-file-navigation.md) and
+[image preview acceptance](docs/verification/2026-10-21-file-images.md).
 
 ## Pin frequently used workspaces
 

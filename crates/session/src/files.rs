@@ -1,5 +1,7 @@
 //! Demand-loaded local file observations, independent of Host/provider lifetime.
 use crate::{client::Error, workspaces::Workspace};
+use base64::{Engine, engine::general_purpose::STANDARD};
+use fleetpane_runtime::attachments::{Image, MAX_IMAGE_BYTES};
 use rustix::fs::{AtFlags, Dir, FileType, Mode, OFlags, open, openat, statat};
 use serde::Serialize;
 use std::{
@@ -46,6 +48,8 @@ pub struct Listing {
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum Content {
     Text { text: String },
+    Image { image: Image, data_base64: String },
+    Unavailable { reason: String },
     Binary,
     TooLarge { limit: usize },
 }
@@ -346,20 +350,65 @@ fn readback(workspace: &Workspace, path: &str) -> Result<Readback, Error> {
     let anchor = root(workspace)?;
     let mut file = target(&anchor, path)?;
     let before = file.metadata().map_err(invalid)?;
-    let content = if before.len() > u64::try_from(MAX_TEXT_BYTES).map_err(invalid)? {
-        Content::TooLarge {
-            limit: MAX_TEXT_BYTES,
-        }
+    // Inspect a bounded header first; extensions alone cannot identify image data.
+    let mut bytes = Vec::new();
+    (&mut file)
+        .take(32)
+        .read_to_end(&mut bytes)
+        .map_err(invalid)?;
+    let format = image::guess_format(&bytes).ok();
+    let extension = Path::new(path)
+        .extension()
+        .and_then(|s| s.to_str())
+        .map(str::to_ascii_lowercase);
+    let expected_image = extension.as_deref().is_some_and(|s| {
+        matches!(
+            s,
+            "png"
+                | "jpg"
+                | "jpeg"
+                | "webp"
+                | "gif"
+                | "bmp"
+                | "tif"
+                | "tiff"
+                | "avif"
+                | "svg"
+                | "ico"
+                | "heic"
+        )
+    });
+    let is_image = format.is_some() || expected_image;
+    let limit = if is_image {
+        usize::try_from(MAX_IMAGE_BYTES).map_err(invalid)?
     } else {
-        let mut bytes = Vec::new();
+        MAX_TEXT_BYTES
+    };
+    let content = if before.len() > u64::try_from(limit).map_err(invalid)? {
+        Content::TooLarge { limit }
+    } else {
         (&mut file)
-            .take(u64::try_from(MAX_TEXT_BYTES + 1).map_err(invalid)?)
+            .take(u64::try_from((limit + 1).saturating_sub(bytes.len())).map_err(invalid)?)
             .read_to_end(&mut bytes)
             .map_err(invalid)?;
-        if bytes.len() > MAX_TEXT_BYTES {
-            return Err(invalid("file grew beyond 256 KiB while reading; refresh"));
+        if bytes.len() > limit {
+            return Err(invalid(
+                "file grew beyond its preview limit while reading; refresh",
+            ));
         }
-        if bytes.contains(&0) {
+        if is_image {
+            let name = Path::new(path)
+                .file_name()
+                .and_then(|s| s.to_str())
+                .ok_or_else(|| invalid("invalid image name"))?;
+            match Image::inspect(&bytes, name.into()) {
+                Ok(image) => Content::Image {
+                    image,
+                    data_base64: STANDARD.encode(bytes),
+                },
+                Err(reason) => Content::Unavailable { reason },
+            }
+        } else if bytes.contains(&0) {
             Content::Binary
         } else {
             match String::from_utf8(bytes) {
@@ -614,6 +663,77 @@ mod tests {
                 Content::Binary
             ));
         }
+        std::fs::remove_dir_all(base).unwrap();
+    }
+
+    fn encoded(format: image::ImageFormat, width: u32, height: u32) -> Vec<u8> {
+        let mut bytes = std::io::Cursor::new(Vec::new());
+        image::RgbImage::from_pixel(width, height, image::Rgb([12, 180, 90]))
+            .write_to(&mut bytes, format)
+            .unwrap();
+        bytes.into_inner()
+    }
+
+    #[tokio::test]
+    async fn image_bytes_are_validated_preserved_and_reloaded_without_trusting_extensions() {
+        let _guard = SERIAL.lock().await;
+        let (base, workspace) = fixture().await;
+        let root = base.join("work");
+        for (name, format) in [
+            ("图.png", image::ImageFormat::Png),
+            ("image.jpg", image::ImageFormat::Jpeg),
+            ("no-extension", image::ImageFormat::WebP),
+        ] {
+            let bytes = encoded(format, 37, 19);
+            std::fs::write(root.join(name), &bytes).unwrap();
+            let result = workspace.read_file(name).await.unwrap();
+            let Content::Image { image, data_base64 } = result.content else {
+                panic!("expected image for {name}")
+            };
+            assert_eq!((image.width, image.height), (37, 19));
+            assert_eq!(STANDARD.decode(data_base64).unwrap(), bytes);
+            assert_eq!(image.bytes, result.size);
+            assert_eq!(image, Image::inspect(&bytes, name.into()).unwrap());
+        }
+        let bytes = encoded(image::ImageFormat::Png, 400, 300);
+        std::fs::write(root.join("图.png"), &bytes).unwrap();
+        let Opened::File(result) = workspace.open_path("图.png").await.unwrap() else {
+            panic!("expected file")
+        };
+        assert!(matches!(result.content, Content::Image {image, ..} if image.width == 400));
+        assert_eq!(std::fs::read(root.join("图.png")).unwrap(), bytes);
+        std::fs::remove_dir_all(base).unwrap();
+    }
+
+    #[tokio::test]
+    async fn image_corruption_format_and_dimensions_have_explicit_notices() {
+        let _guard = SERIAL.lock().await;
+        let (base, workspace) = fixture().await;
+        let root = base.join("work");
+        for (name, bytes) in [
+            ("corrupt.png", b"broken".to_vec()),
+            (
+                "truncated",
+                encoded(image::ImageFormat::Png, 1, 1)[..35].to_vec(),
+            ),
+            ("huge.png", encoded(image::ImageFormat::Png, 8193, 1)),
+            ("unsupported", b"GIF89a".to_vec()),
+        ] {
+            std::fs::write(root.join(name), bytes).unwrap();
+            assert!(
+                matches!(
+                    workspace.read_file(name).await.unwrap().content,
+                    Content::Unavailable { .. }
+                ),
+                "{name}"
+            );
+        }
+        let mut large = encoded(image::ImageFormat::Png, 1, 1);
+        large.resize(MAX_IMAGE_BYTES as usize + 1, 0);
+        std::fs::write(root.join("large.png"), large).unwrap();
+        assert!(
+            matches!(workspace.read_file("large.png").await.unwrap().content, Content::TooLarge {limit} if limit as u64 == MAX_IMAGE_BYTES)
+        );
         std::fs::remove_dir_all(base).unwrap();
     }
 

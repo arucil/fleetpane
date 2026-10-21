@@ -1,0 +1,26 @@
+   Compiling fleetpane-runtime v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/runtime)
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 19.12s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-2bea4bef44077932)
+
+running 3 tests
+
+thread 'files::tests::image_bytes_are_validated_preserved_and_reloaded_without_trusting_extensions' (3136166) panicked at crates/session/src/files.rs:641:76:
+expected image for 图.png
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test files::tests::image_bytes_are_validated_preserved_and_reloaded_without_trusting_extensions ... FAILED
+test drafts::tests::image_drafts_keep_cas_identity_and_refuse_dropped_or_steered_attachments ... ok
+
+thread 'files::tests::image_corruption_format_and_dimensions_have_explicit_notices' (3136167) panicked at crates/session/src/files.rs:667:13:
+corrupt.png
+test files::tests::image_corruption_format_and_dimensions_have_explicit_notices ... FAILED
+
+failures:
+
+failures:
+    files::tests::image_bytes_are_validated_preserved_and_reloaded_without_trusting_extensions
+    files::tests::image_corruption_format_and_dimensions_have_explicit_notices
+
+test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 151 filtered out; finished in 0.15s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`
