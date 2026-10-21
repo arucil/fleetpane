@@ -832,6 +832,10 @@ Refreshing keeps the forward branch; opening a new location after Back replaces
 it. Missing or replaced paths show an error without advancing the history cursor.
 Closing the view discards this history. [Verification and limits](docs/verification/2026-10-21-file-history.md).
 
+Modified terminal Enter now retains control/alt/shift combinations through CSI-u
+encoding; ordinary Enter stays carriage return. Programs interpret those bytes.
+[Native raw PTY verification](docs/verification/2026-10-22-modified-enter.md).
+
 Explicit Markdown file links and structured tool/change paths open the same
 read-only view over the retained conversation. **Back to conversation** restores
 the composer and draft. Markdown `#L2`, `#L2-L3` and `:2` anchors select the original

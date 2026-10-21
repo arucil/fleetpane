@@ -157,6 +157,9 @@ pub fn encode(key: Key<'_>, application_cursor: bool) -> Option<Vec<u8>> {
             .into_bytes(),
         );
     }
+    if key.name == "enter" && modifier != 1 {
+        return Some(format!("\x1b[13;{modifier}u").into_bytes());
+    }
     let mut bytes = match key.name {
         "enter" => vec![13],
         "escape" => vec![27],
@@ -208,6 +211,42 @@ pub fn paste(text: &str, bracketed: bool) -> Result<Vec<u8>, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn modified_enter_keeps_each_modifier_and_never_aliases_plain_return() {
+        for bits in 0..8 {
+            let key = Key {
+                name: "enter",
+                shift: bits & 1 != 0,
+                alt: bits & 2 != 0,
+                control: bits & 4 != 0,
+                ..Key::default()
+            };
+            let expected = if bits == 0 {
+                vec![13]
+            } else {
+                format!("\x1b[13;{}u", bits + 1).into_bytes()
+            };
+            for application_cursor in [false, true] {
+                assert_eq!(
+                    encode(Key { ..key }, application_cursor).unwrap(),
+                    expected,
+                    "modifier bits {bits}, application cursor {application_cursor}"
+                );
+            }
+        }
+        assert!(
+            encode(
+                Key {
+                    name: "enter",
+                    platform: true,
+                    shift: true,
+                    ..Key::default()
+                },
+                false
+            )
+            .is_none()
+        );
+    }
     #[test]
     fn ordered_packets_pause_without_replaying_uncertain_input() {
         let mut q = Queue::default();

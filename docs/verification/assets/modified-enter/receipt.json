@@ -1,0 +1,62 @@
+{
+  "base_revision": "d58ea30",
+  "source_sha256": {
+    "crates/session/src/terminals/input.rs": "sha256:f590a75fc9c81bb541915f65ff87dbb95ac40140eb65372cf1d4012b81241bc9",
+    "apps/desktop/src/terminal_view/keyboard.rs": "sha256:8020f0e81f8b3006c77075fb786377cae230280a39b2a43b8be235e3211aa11b"
+  },
+  "native_binary_sha256": "sha256:dafb2b7d53d90959075b775fddac9aa15673fd770a50b5e0097bd3091a345201",
+  "host_binary_sha256": "sha256:d15a3fed95f396037a8e33cb799ccb371296a1d1b040cee96f4ecd0e028cec99",
+  "checks": [
+    "cargo fmt --all -- --check",
+    "cargo test --workspace --locked",
+    "cargo clippy --workspace --locked --all-targets -- -D warnings",
+    "cargo build -p fleetpane-host --locked",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --locked --all-targets -- -D warnings",
+    "cargo build --manifest-path apps/desktop/Cargo.toml --locked",
+    "python3 scripts/terminal-smoke.py"
+  ],
+  "workspace_tests_passed": 301,
+  "desktop_tests_passed": 36,
+  "pre_fix_regression": "failed: Shift+Enter produced [13], expected CSI 13;2u",
+  "native": {
+    "raw_capture_bytes": 51,
+    "raw_exact": true,
+    "same_shell_pid": 3622917,
+    "input_sequence_before": 1,
+    "input_sequence_after": 10,
+    "text_editor_draft_bytes": 22,
+    "text_editor_shift_enter_did_not_send": true,
+    "independent_acp_snapshot_identical": true
+  },
+  "cleanup": {
+    "isolated_desktop_stopped": true,
+    "terminal_closed_explicitly": true,
+    "hosts_absent": {
+      "codex": true,
+      "acp": true
+    }
+  },
+  "artifacts_sha256": {
+    "before.log": "sha256:f89af2d7a4d14c0d914c6b33cba1fec53dff7635d22ac6aba62cf2ace15ecb8f",
+    "capture.py": "sha256:bab411f4779e35c61c5a77c8bc712ea3f9f8c8e4a7a0ecf0661baa6979f1b375",
+    "captured.png": "sha256:779e0bc7a79319e1c187f93ca6207a6cbd069cb0c1eeebd4484aafdd3dfcb400",
+    "clippy.log": "sha256:97091324f0404a5758a423b3043ddab95abde3f380d17ddd18984ade220c305f",
+    "desktop-build.log": "sha256:2dce6176e98d218518cba04e8b649239300602ab7edcc773dc3a1c70748c1c66",
+    "desktop-clippy.log": "sha256:e7fd6c8766dec125cac8727ede6a4a16dafa757e3f019a59f2d832a1960246dd",
+    "desktop-tests.log": "sha256:d33031f11eb42237405b8d7d0a62a24266087958d5766bd96e1bbaf9fa3986a9",
+    "host-build.log": "sha256:1b3ca46afc9aea537dc68abb49c3cf1a426823abc7cb1aac66bffd43ff038bf4",
+    "independent-after.json": "sha256:34c83f4d63305c83bda38cdbc0b3f2a3a454caa42503becfbaa812840568ef80",
+    "independent-before.json": "sha256:34c83f4d63305c83bda38cdbc0b3f2a3a454caa42503becfbaa812840568ef80",
+    "readback.json": "sha256:7c3e5e59fce4168f6bdd670fe974efd37a232a644a98a60746b0caabcf0af074",
+    "setup.py": "sha256:edadcb5bbef471c9a8a9192a20ba66a920aa35b6ebc291a5f3af588be91320bf",
+    "terminal-after.json": "sha256:9aaec519226b468b3805c8d66c6e69bf8f4ba0526f4335992449a9a2cf31915c",
+    "terminal-smoke.log": "sha256:c47c511a5510a3b8430955f965f89592dee3831a8932cd2e6da84b66d23b7405",
+    "terminal.json": "sha256:783d19af41172598acb581cd0f28fe582f57396c318690ca36e6ba6c71ca830c",
+    "tests.log": "sha256:4a374fa3d4c55a3909690404cd279dda5d52fa3ad7b521069754d24ea131067e"
+  },
+  "limits": [
+    "Linux X11 fixture only",
+    "No installed terminal-application, IME, other-platform or negotiation acceptance"
+  ]
+}

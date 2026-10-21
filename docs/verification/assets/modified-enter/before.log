@@ -1,0 +1,24 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 5.93s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 1 test
+test terminals::input::tests::modified_enter_keeps_each_modifier_and_never_aliases_plain_return ... FAILED
+
+failures:
+
+---- terminals::input::tests::modified_enter_keeps_each_modifier_and_never_aliases_plain_return stdout ----
+
+thread 'terminals::input::tests::modified_enter_keeps_each_modifier_and_never_aliases_plain_return' (3618160) panicked at crates/session/src/terminals/input.rs:227:17:
+assertion `left == right` failed: modifier bits 1, application cursor false
+  left: [13]
+ right: [27, 91, 49, 51, 59, 50, 117]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    terminals::input::tests::modified_enter_keeps_each_modifier_and_never_aliases_plain_return
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 210 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`
