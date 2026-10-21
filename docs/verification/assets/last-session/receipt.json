@@ -1,0 +1,68 @@
+{
+  "scope": "Linux X11 private fixtures; no installed provider, IME, other platforms or remote acceptance",
+  "base_revision": "e625e1c96e8ccab0c1970458eb9c60f80e006c98",
+  "root_tests": 298,
+  "desktop_tests": 37,
+  "checks": {
+    "exact_draft_utf8_bytes": 40,
+    "draft": "恢复上次会话 中文  \n保留 draft",
+    "startup_no_automatic_takeover_resume_send": true,
+    "explicit_control_then_exact_saved_inspection": true,
+    "conflicting_revision_retained": 2,
+    "close_refuses_unsaved_choice": true,
+    "reload_and_normal_close_exit": 0,
+    "archived_saved_target": "archived-120",
+    "archived_history_send_disabled": true,
+    "minimum_window": [
+      900,
+      560
+    ],
+    "host_resources_pending_requests_fault_operation_ids_preserved": true,
+    "complete_independent_host_snapshots_unchanged": true
+  },
+  "limits": [
+    "800 directory metadata entries / 10-second check",
+    "explicit control required before inspection",
+    "no scroll/layout restore or automatic model context resume",
+    "changed Host/cwd/archive membership explicitly refused",
+    "no installed provider or remote CI acceptance"
+  ],
+  "commands": [
+    "cargo test --workspace --locked",
+    "cargo clippy --workspace --all-targets --locked -- -D warnings",
+    "cargo test --manifest-path apps/desktop/Cargo.toml --locked",
+    "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings",
+    "python3 scripts/last-session-smoke.py",
+    "python3 scripts/last-session-observation-smoke.py"
+  ],
+  "binary_sha256": "4a9a1b82b93cc39aebfe000bc7804e89d31fe978037913a152c1b8d497d5278d",
+  "source_sha256": {
+    "crates/session/src/session_selection.rs": "215485213abbc080f590ab653dfd782ec297ee9e5b601f222f7a404a4a5cfba8",
+    "crates/session/src/storage.rs": "21c67b35645fa03914b896dfcfddec92c1ae80ec76c6559dc92b5704178d3219",
+    "apps/host/src/main.rs": "520d749399b74f1833efacb60ccf0eaf251a3746423e228414ebabbe9caf7c08",
+    "apps/desktop/src/host_view.rs": "b43a8eebdef4655c9878a4a9318efd3c355e9320910ab24b00d0448b93b2eee8",
+    "apps/desktop/src/host_view/last_session.rs": "fc8ca849930272051d7c564675b3a29937fb7909bfed12d065647a6a7579aa8f",
+    "apps/desktop/src/host_view/draft.rs": "93b74a0c5e7877ae5372d534a868cde7b65acfccbd51267d487a58b920e6326f"
+  },
+  "artifact_sha256": {
+    "appearance-smoke.log": "f2a087b9df34b6dce601d1f21d0c877a021f398aaa686a303dacd4c1b26b4830",
+    "archived-900.png": "9ab162fb8a82252f7e5d8e3cc5d478cf05a1cd1ae16a8f9604bda42625bf19a1",
+    "archived-restored.png": "5eb772c6e36c2c07157cda04183fe41b0ba36bf05387f326718ed1e5896d1acd",
+    "close-conflict.png": "8df22ae7836b974db3486bb1d430719bb3c3435059c5b6a28928f31e1da35627",
+    "core-clippy.log": "fcc5917e1ae8de188c877768565bb1162a2c4505264f786c83556a8eb1377064",
+    "desktop-build.log": "ca5d450781e78bb6a5a700c755b211198f1bc5d414bcefcb2239545a8b3cc556",
+    "desktop-clippy.log": "29584eb9dc37fc23ac66b887c86e74c2a31fee2aed3d733a536d3d3f3418b429",
+    "desktop-tests.log": "056c3b9668979ed48537671a0c571909a487ce76879b477b57662dc66433b494",
+    "final-build-conflict.png": "ec611545766608dba5640a2a133f83c4658600dcf8fd1be20225d9212ed743ed",
+    "final-build-startup.png": "a0564b5ece34897f74e9fb68b889423ebf6081a22c1a34a7ff6a5ec9bd2d95c3",
+    "final-restored-current.png": "d622401731defc1a581910efb706ed01af9c8daf554e0bc4e73454680d071a90",
+    "host-build.log": "be5456b16bf985815937ac327c2780b1daa53fe537b4eea57a4de8bbd5a758c8",
+    "host-choice-smoke.log": "16c6fa532ddf6651ca6c4d956bada530d77dad1d5c71fdcc730da015e8042707",
+    "import-smoke.log": "566b1d5f7291a66822e28a9fd639c21f3eac418820232c100a3d0e109a119b62",
+    "observation-smoke.log": "8ce3126e42051630609c099a871820ba3b6e8fcba8131c0ff773c2295bf0ef4c",
+    "recent-smoke.log": "7bad9c6749f582ec77aaf4e74f122710953d6abd4505a601c7bdd119d3163b66",
+    "restored-900.png": "9188ff9eb3265bb57efa741188acdc99b5cbd49b7ddd0f667b5d76678135ec40",
+    "root-tests.log": "46bb6924d5d364a28129b4fad8cedc89c69d07cc21e87616319235a170d6a3a1",
+    "store-smoke.log": "57d5f7c9db54451264a0147e831adc7a8de6bcfd0d0d6c4613a0707ebe2d40c2"
+  }
+}

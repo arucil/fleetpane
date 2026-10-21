@@ -1122,7 +1122,7 @@ archive/stop. ACP does not advertise this capability. See
 [ADR 0056](docs/adr/0056-observe-session-ancestry.md).
 
 The native workbench remembers the selected local Host in the configuration's
-controller store (schema 11). Restore uses the exact socket path across Host
+controller store (introduced in schema 11, current schema 13). Restore uses the exact socket path across Host
 rename/reorder. Offline targets stay selected; absent targets show an explicit
 notice and preserve the saved choice. Switching and restoring never take control
 or resume a session. Reload choice reads current preferences without navigating;
@@ -1137,8 +1137,28 @@ python3 scripts/host-choice-smoke.py
 
 The CLI requires the last observed revision. This selection is scoped to the
 controller store; moving the configuration may change its default store location.
-It does not restore a selected session. Older schema-10 binaries cannot open an
-upgraded store. See [local evidence](docs/verification/2026-10-21-preferred-host.md).
+Host choice does not open a session. Older binaries cannot open an upgraded
+store; the current schema is 13. See [local evidence](docs/verification/2026-10-21-preferred-host.md).
+
+Each Host view also remembers its last inspected session in that controller
+store. **Open last session** requires explicit control, checks exact Host UUID,
+session ID, cwd and archive membership, then opens saved history without context
+resume or Send. Startup does not automatically inspect or take control. The check
+is bounded to 800 metadata rows / 10 seconds; unavailable or changed sources
+require a fresh explicit selection. Conflicting writes retain the old record;
+**Reload choice**, **Remember current** and **Keep previous choice** expose the
+recovery choices. Normal close waits for local saves.
+
+```sh
+fleetpane-host last-session /absolute/controller-store /absolute/host.sock get
+fleetpane-host last-session /absolute/controller-store /absolute/host.sock check
+python3 scripts/last-session-smoke.py
+python3 scripts/last-session-observation-smoke.py
+```
+
+`get` and revisioned `set REVISION TARGET_JSON` use only local state. `check`
+observes the existing Host without claiming/resuming. See
+[local evidence](docs/verification/2026-10-22-last-session.md).
 
 All sessions defaults to **Activity**: fresh active sessions first, then provider
 update time. **By Host** retains provider page order. Ordering covers loaded rows

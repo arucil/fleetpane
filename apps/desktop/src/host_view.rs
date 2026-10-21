@@ -5,6 +5,7 @@ mod continuation;
 mod directory_source;
 mod draft;
 mod images;
+mod last_session;
 mod mcp;
 mod observe;
 mod progress;
@@ -84,6 +85,7 @@ pub struct HostView {
     thread: Option<Thread>,
     // Membership observed from provider directory; separate from loaded status.
     selected_archived: bool,
+    last_session: last_session::State,
     session_tree: Option<Entity<crate::session_tree_view::SessionTreeView>>,
     session_tree_subscription: Option<Subscription>,
     tree_opening: Option<Uuid>,
@@ -312,6 +314,7 @@ impl HostView {
             rename_target: None,
             thread: None,
             selected_archived: false,
+            last_session: last_session::State::default(),
             session_tree: None,
             session_tree_subscription: None,
             tree_opening: None,
@@ -358,6 +361,7 @@ impl HostView {
             _subscriptions: subscriptions,
         };
         view.connect(false, window, cx);
+        view.load_last_session(window, cx);
         view.update_recent(recent::Action::Load, window, cx);
         cx.spawn_in(window, async move |this, cx| {
             loop {
@@ -777,7 +781,10 @@ impl HostView {
                 self.pending = Some((id, command));
                 self.pending_uncertain = true;
             }
-            Err(error) => self.error = Some(error.to_string()),
+            Err(error) => {
+                self.last_session.take_restoring(&command);
+                self.error = Some(error.to_string());
+            }
         }
         if sent_command {
             self.load_draft(false, window, cx);
@@ -792,6 +799,9 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) -> Result<(), Box<dyn std::error::Error>> {
+        // Consume the restoration attempt even when validation/decoding fails;
+        // a later manual inspection must not inherit stale archive membership.
+        let restored = self.last_session.take_restoring(command);
         command.validate_completed(&completed)?;
         match command {
             Command::Mcp { cursor } => {
@@ -867,6 +877,7 @@ impl HostView {
                     .is_some_and(|thread| &thread.id == thread_id)
                 {
                     self.selected_archived = false;
+                    self.remember_session(window, cx);
                 }
                 if self.directory.query.archived {
                     self.directory
@@ -922,6 +933,14 @@ impl HostView {
                 }
                 let thread: Thread = serde_json::from_value::<Opened>(completed.result)?.thread;
                 thread.validate()?;
+                if let Some(target) = &restored {
+                    let host_id = self
+                        .snapshot
+                        .as_ref()
+                        .ok_or("Saved session has no Host observation")?
+                        .host_id;
+                    target.check(host_id, &thread.id, &thread.cwd)?;
+                }
                 if draft::observes_selected(command, self.thread.as_ref())
                     && self
                         .thread
@@ -978,7 +997,9 @@ impl HostView {
                                 .as_ref()
                                 .is_some_and(|state| state.host_id == source.host_id)
                     });
-                self.selected_archived = if directory_open {
+                self.selected_archived = if let Some(target) = &restored {
+                    target.archived
+                } else if directory_open {
                     self.directory_target
                         .as_ref()
                         .expect("matching directory source")
@@ -1006,6 +1027,7 @@ impl HostView {
                     }
                 }
                 self.thread = Some(thread);
+                self.remember_session(window, cx);
                 self.cursor = completed.sequence;
                 self.poll_paused = self.history.is_some();
                 self.timeline.reset(0);
@@ -2183,6 +2205,7 @@ impl Render for HostView {
             .child(self.attention_banner(cx))
             .child(self.completion_banner(cx))
             .child(self.directory_source_banner(cx))
+            .child(self.last_session_banner(cx))
             .when_some(self.answer_copy_notice.as_ref(), |view, notice| {
                 view.child(div().px_4().py_1().flex().items_center().gap_2()
                     .child(div().flex_1().min_w_0().text_xs().child(notice.clone()))

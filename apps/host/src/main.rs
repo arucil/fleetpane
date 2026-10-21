@@ -70,6 +70,9 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host host-choice STORE get | set EXPECTED_REVISION CONFIG HOST: remember a configuration-local Host endpoint; no Host RPC or control transfer."
         );
         println!(
+            "fleetpane-host last-session STORE SOCKET get | set EXPECTED_REVISION TARGET_JSON | check: exact device-local inspected session. Get/set use no Host RPC; check explicitly observes up to 800 directory entries without takeover or resume."
+        );
+        println!(
             "fleetpane-host image SOCKET import ABSOLUTE_FILE: validate and durably save a local PNG/JPEG/WebP asset. Drafts: attach KEY_JSON REVISION FILE... | remove-image KEY_JSON REVISION INDEX. Images are sent only by an explicit draft send; live follow-ups remain text-only."
         );
         println!(
@@ -239,6 +242,44 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 }
             };
             println!("{}", serde_json::to_string(&result)?);
+            Ok(())
+        }
+        "last-session" if args.len() >= 4 => {
+            let store =
+                fleetpane_session::creations::Store::open(std::path::absolute(&args[1])?).await?;
+            let socket = PathBuf::from(&args[2]);
+            let saved = match &args[3..] {
+                [verb] if verb == "get" => store.session_selection(socket).await?,
+                [verb] if verb == "check" => {
+                    let saved = store.session_selection(socket.clone()).await?;
+                    saved
+                        .target
+                        .as_ref()
+                        .ok_or("no saved session")?
+                        .observe(socket)
+                        .await?;
+                    saved
+                }
+                [verb, revision, target] if verb == "set" => {
+                    if target.len() > 16 * 1024 {
+                        return Err("last-session target exceeds 16 KiB".into());
+                    }
+                    store
+                        .save_session_selection(
+                            socket,
+                            revision.parse()?,
+                            serde_json::from_str(target)?,
+                        )
+                        .await?
+                }
+                _ => {
+                    return Err(
+                        "last-session STORE SOCKET get | set EXPECTED_REVISION TARGET_JSON | check"
+                            .into(),
+                    );
+                }
+            };
+            println!("{}", serde_json::to_string(&saved)?);
             Ok(())
         }
         "host-choice" if args.len() >= 3 => {

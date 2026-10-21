@@ -1,5 +1,12 @@
 # Functional parity with donut-paseo
 
+Last inspected session recovery is locally verified for shared/CLI/Linux native
+fixtures: exact Host/session/directory/archive identity, explicit opening after
+takeover, retained Chinese draft and conflicting write refusal.
+[Evidence](verification/2026-10-22-last-session.md). Complete tabs/scroll/layout
+restoration remains open. Chronological scoped review now reaches ordinal 1650;
+this is a source-review cursor, not a parity completion count.
+
 The bounded cross-Host session switcher now uses Ctrl/Cmd+K and Kit search,
 with exact source identity, explicit omissions and read-only takeover boundaries.
 [Local fixture evidence](verification/2026-10-22-session-switcher.md) covers drafts,

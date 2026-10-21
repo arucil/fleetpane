@@ -175,7 +175,7 @@ mod tests {
             .save_appearance(0, Preferences { theme: Theme::Dark })
             .await
             .unwrap();
-        store.job(|db| {db.execute_batch("INSERT INTO drafts VALUES('saved',7,'exact legacy data'); DROP TABLE attention_reviews; DROP TABLE host_selection; PRAGMA user_version=10;")?;Ok(())}).await.unwrap();
+        store.job(|db| {db.execute_batch("INSERT INTO drafts VALUES('saved',7,'exact legacy data'); DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; PRAGMA user_version=10;")?;Ok(())}).await.unwrap();
         let reopened = Store::open(root.clone()).await.unwrap();
         assert_eq!(reopened.host_selection().await.unwrap(), Saved::default());
         assert_eq!(reopened.appearance().await.unwrap(), appearance);

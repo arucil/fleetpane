@@ -763,3 +763,5 @@ pub mod diffs;
 
 #[cfg(unix)]
 pub mod drafts;
+#[cfg(unix)]
+pub mod session_selection;

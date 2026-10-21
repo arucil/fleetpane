@@ -51,6 +51,9 @@ pub(super) fn observes_selected(command: &Command, thread: Option<&Thread>) -> b
 
 impl HostView {
     pub(crate) fn draft_close_status(&self) -> Result<bool, String> {
+        if let Some(error) = &self.last_session.error {
+            return Err(error.clone());
+        }
         if self.draft.dirty.is_some()
             && let Some(error) = &self.draft.error
         {
@@ -59,6 +62,7 @@ impl HostView {
         Ok(!self.draft.importing
             && !self.draft.saving
             && self.draft.dirty.is_none()
+            && !self.last_session.busy
             && !self.recent.busy)
     }
 
