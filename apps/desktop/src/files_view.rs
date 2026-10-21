@@ -2,6 +2,7 @@
 use crate::{
     file_locations::{History, Location, Visit},
     host_view::background,
+    image_navigation,
 };
 use base64::{Engine, engine::general_purpose::STANDARD};
 use fleetpane_session::{
@@ -21,6 +22,7 @@ enum Action {
     Restore(Visit),
     Read(String, Option<NonZeroUsize>),
     Open(Target),
+    ImageStep { path: String, forward: bool },
 }
 struct PreparedFile {
     file: Readback,
@@ -36,6 +38,10 @@ enum Reply {
     ),
     Read(Readback, Option<NonZeroUsize>, Option<Arc<Image>>),
     Opened(Opened, Option<NonZeroUsize>, Option<Arc<Image>>),
+    ImageStep(
+        Listing,
+        Result<PreparedFile, fleetpane_session::client::Error>,
+    ),
 }
 pub struct FilesView {
     workspace: Workspace,
@@ -290,6 +296,20 @@ impl FilesView {
         let task = cx.background_executor().spawn(async move {
             background(async move {
                 match action {
+                    Action::ImageStep { path, forward } => {
+                        let parent = path.rsplit_once('/').map_or("", |(parent, _)| parent);
+                        let listing = workspace.list_files(parent).await?;
+                        let file = match image_navigation::destination(&listing, &path, forward) {
+                            Ok(destination) => {
+                                workspace.read_file(&destination).await.and_then(|file| {
+                                    let image = prepare_image(&file)?;
+                                    Ok(PreparedFile { file, image })
+                                })
+                            }
+                            Err(error) => Err(fleetpane_session::client::Error::Input(error)),
+                        };
+                        Ok(Reply::ImageStep(listing, file))
+                    }
                     Action::List(path) => workspace.list_files(&path).await.map(Reply::Listed),
                     Action::Restore(visit) => {
                         let listing = workspace.list_files(&visit.location.directory).await?;
@@ -324,6 +344,20 @@ impl FilesView {
                 this.busy = false;
                 let mut success = reply.is_ok();
                 match reply {
+                    Ok(Reply::ImageStep(listing, file)) => {
+                        this.listing = Some(listing);
+                        match file {
+                            Ok(prepared) => {
+                                this.show_file(prepared.file, prepared.image, None, window, cx)
+                            }
+                            Err(error) => {
+                                this.error = Some(format!(
+                                    "Image navigation failed; previous preview retained: {error}"
+                                ));
+                                success = false;
+                            }
+                        }
+                    }
                     Ok(Reply::Restored(listing, file, visit)) => {
                         this.location = Location {
                             directory: listing.path.clone(),
@@ -435,6 +469,82 @@ impl FilesView {
         .detach();
         cx.notify();
     }
+
+    fn render_image_navigation(&self, cx: &mut Context<Self>) -> AnyElement {
+        let Some(file) = &self.file else {
+            return div().into_any_element();
+        };
+        if !image_navigation::named_image(&file.path) {
+            return div().into_any_element();
+        }
+        let Some(listing) = &self.listing else {
+            return Button::new("load-image-list")
+                .small()
+                .label("Load image list")
+                .disabled(self.busy)
+                .on_click(cx.listener(|this, _, window, cx| {
+                    this.run(
+                        Action::Restore(Visit {
+                            location: this.location.clone(),
+                            line: this.line,
+                            top: None,
+                        }),
+                        window,
+                        cx,
+                    )
+                }))
+                .into_any_element();
+        };
+        let Some(position) = image_navigation::position(listing, &file.path) else {
+            return div()
+                .text_sm()
+                .child("Current image is absent from the image list. Refresh folder to update it.")
+                .into_any_element();
+        };
+        div()
+            .flex()
+            .flex_wrap()
+            .items_center()
+            .gap_2()
+            .children([false, true].map(|forward| {
+                let path = file.path.clone();
+                Button::new(if forward {
+                    "next-workspace-image"
+                } else {
+                    "previous-workspace-image"
+                })
+                .small()
+                .label(if forward {
+                    "Next image"
+                } else {
+                    "Previous image"
+                })
+                .disabled(
+                    self.busy
+                        || if forward {
+                            position.next.is_none()
+                        } else {
+                            position.previous.is_none()
+                        },
+                )
+                .on_click(cx.listener(move |this, _, window, cx| {
+                    this.run(
+                        Action::ImageStep {
+                            path: path.clone(),
+                            forward,
+                        },
+                        window,
+                        cx,
+                    )
+                }))
+            }))
+            .child(div().text_sm().child(format!(
+                "Image {} of {} · PNG/JPEG/WebP names",
+                position.index + 1,
+                position.total
+            )))
+            .into_any_element()
+    }
 }
 
 impl Render for FilesView {
@@ -496,6 +606,7 @@ impl Render for FilesView {
                             Content::TooLarge {limit}=>view.child(format!("File exceeds the {limit}-byte preview limit; no partial content was loaded.")),
                         }
                     })
+                    .child(self.render_image_navigation(cx))
                     .when_some(self.image.as_ref(), |view,source|view.child(
                         div().relative().flex_1().min_h_0().overflow_hidden().child(img(ImageSource::from(source.clone())).absolute().top_0().left_0().size_full().object_fit(ObjectFit::Contain)
                             .with_loading(||div().child("Loading image…").into_any_element())

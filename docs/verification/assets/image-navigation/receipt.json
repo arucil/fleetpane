@@ -1,0 +1,111 @@
+{
+  "base_head": "72b2e7a0ef913820617ac4c1b2b0f2a8db63239b",
+  "source_sha256": {
+    "apps/desktop/src/files_view.rs": "209dd48c1eefcad559190dfb4ebb9b62d43f7a58e091ee853921b2e605cd5dcd",
+    "apps/desktop/src/image_navigation.rs": "bf9f0bbaf269964c11ec7028889b5a215f3d9b909d069e9e3fc2a8c1be9d1276",
+    "apps/desktop/src/main.rs": "85c3002d0c505588b28f39ecdff5ac90bc6c1e73194062dc5bc69700d60be142"
+  },
+  "binary_sha256": {
+    "before": "3c1526a38f53a3175ba02482c9462bc80903c709d63f03995d3157c57336c269",
+    "candidate": "da58903a2b44b074a00b56f6278112c5618f2dbca618191ef921d25eb07102ba",
+    "host": "7c447b6fbd6a086a8e09a2ee26ea916c5045a04df7330a436792f7d3f1649e39"
+  },
+  "native": {
+    "workspace": "fleetpane-image-navigation-20261021",
+    "host_pid": 729931,
+    "provider_pid": 729962,
+    "candidate_pid": 745118,
+    "synthetic_fixture": true,
+    "external_model": false,
+    "png_jpeg_webp_rendered": true,
+    "corrupt_not_skipped": true,
+    "fresh_external_image_dimensions": [
+      320,
+      160
+    ],
+    "fresh_added_image_dimensions": [
+      150,
+      75
+    ],
+    "unicode_path_copy": {
+      "text": "02 中文 space.JPEG",
+      "bytes": 20
+    },
+    "added_path_copy": {
+      "text": "02-added.png",
+      "bytes": 12
+    },
+    "removed_current_retained_explicit_old_preview": true,
+    "read_denial_retained_preview_and_explicit_retry": true,
+    "symlink_special_directory_excluded": true,
+    "replaced_root_refused": true,
+    "image_history_and_direct_load": true,
+    "small_window": [
+      900,
+      560
+    ],
+    "unchanged_full_host_snapshots": true
+  },
+  "snapshot_sha256": {
+    "before.json": "9a579a05ffb67381bcd54179c1019f087e4b92a52db5efc2e344cd917c4d7cb6",
+    "after-replace.json": "9a579a05ffb67381bcd54179c1019f087e4b92a52db5efc2e344cd917c4d7cb6",
+    "after-gallery.json": "9a579a05ffb67381bcd54179c1019f087e4b92a52db5efc2e344cd917c4d7cb6",
+    "after-close.json": "9a579a05ffb67381bcd54179c1019f087e4b92a52db5efc2e344cd917c4d7cb6"
+  },
+  "checks": {
+    "desktop_tests": 25,
+    "new_navigation_tests": 3,
+    "python_tests": 15,
+    "desktop_fmt": "PASS",
+    "desktop_strict_clippy": "PASS",
+    "desktop_build": "PASS",
+    "file_images_smoke": "PASS",
+    "file_navigation_smoke": "PASS"
+  },
+  "cleanup": {
+    "workspace_stopped": true,
+    "host_provider_exited": true,
+    "control_socket_removed": true,
+    "before_titlebar_exit_code": 0,
+    "candidate_final_exit_code": 0,
+    "candidate_close_timing": "Immediate close readback still alive; final record after workspace stop exit 0. Exact exit/stop ordering unconfirmed."
+  },
+  "limits": [
+    "Linux native fixture run; no external model or cross-platform runtime acceptance",
+    "Candidates use filenames; no extensionless discovery, thumbnail grid, zoom or watcher",
+    "Directory listing and selected-file reading are separate observations",
+    "Normal candidate titlebar-close timing not accepted in this run"
+  ],
+  "artifacts_sha256": {
+    "root-replaced.png": "c30f47f2953f53f5ecd1a83a5e294cf4bd95e91420432553eb2cdce81e347052",
+    "images-smoke.log": "257e4f420633c565e7e86b98a6cb18c8816b073ce25fe76535e786e16214609b",
+    "navigation-smoke.log": "75781ad7f34c79505f6f1f67f1fcb4c7ba6c7814aee92b0b9de318a790c69e37",
+    "last-fresh.png": "55b9007aafa9ba5d67a335cb3a36d98b044408bcca6fe681000947990eed22e1",
+    "loaded-list.png": "3cff19cd8cce6fbf41ae96a077dd6745c101ce64a72a1f48640fbe8f2e9c342f",
+    "forward.png": "1daa32dae2f1dfc5538159627ed156d73ec19a5a1507859a3cb68fa54e3554a6",
+    "retry.png": "b734c9f2e6e01a09bdb12c90ddd400aecaa78161d99e5f4d94d747fdbbd089ac",
+    "link-excluded.png": "32741f01e9d3237649f1096823b49bf68cb846a2a179d0436aef3908e7ccbcc2",
+    "corrupt.png": "2052a7f3381b5e2c1c37f61f6474d7507b969f16fcbd816e750ac431d2356162",
+    "desktop-build.log": "2b133ec34a5a1eddba7597f5c0a74c705e70fbb416ea2fbde66c2fb3a8d290a2",
+    "current-missing.png": "102e95cc7c246fd4945bb4422fdc8a4103251df0f4b1c1baa1e76271a1a0942f",
+    "added.png": "5b1e3b283009c8abea43104f41c6e9a339a196ddf9d7ca6c222ffae4054a9d18",
+    "before-image.png": "1294234e0c3940e06ff62a0d8e7128c986ff2ff9b9bb030afba6843b4b2172b0",
+    "desktop-clippy.log": "99465d17b9bece1f8e13afa03d4f4ba07eea8b1fdcbcf02dc0005c8270d36f51",
+    "back-first.png": "a2981b5b2339356334a3d9ea39731c22eef2a646cccf271b6541b066a803b1e0",
+    "jpeg.png": "34712c7d86ebdda4c2f3172db2aeb7a89ca764829e39183e473f0d674a166083",
+    "first.png": "3f765b673e16d9895e1e6bb691ff4d2205c05e358f0c4908760b6ab03f7fe53e",
+    "python-tests.log": "3ad853ab70eb0961013d8185fbcfc2535d72193b2edc71eca9c195e1ef085aa7",
+    "desktop-tests.log": "23bc46e9e297a3c39ebdfcd9a6172fe1134da40b959b8578ff317de1595ecc7b",
+    "read-refused.png": "b168ea8065fb8d781cdd5834c9df9d738978d89be08108e093fe9dc80eeb8dde",
+    "back-missing.png": "0ba752120088eb50f745f64efc83379ef61c0807cb098089c1e818eb2bee541a",
+    "small-previous.png": "7ec13c73034200d31e6a3cb4c6aed21dfe1d28094ab69521394b547dd91f8189",
+    "direct.png": "2bf66b0eb267898cad279ed9442d8e0f5ba8ebaa7de0fb8d9f57763ea0f3386c",
+    "webp.png": "ee94fee1972a5d41f361ca477148f5c8cabb538d126db638327d081b9a390bcc"
+  },
+  "log_normalization": {
+    "desktop-tests.log": {
+      "original_sha256": "5d029856f8297d69769dfddceb5ed31867a4ec46c24bfab5c34c42adcd5b3709",
+      "change": "Removed trailing blank line; test result unchanged."
+    }
+  }
+}

@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 198,
-    "last_revision": "a95184cc5a8adc850dbc88267b1f2f13f47e3f26",
-    "next_revision": "30d1b63b2bef2719309381ac6e28078a79d39078",
-    "next_ordinal": 199
+    "last_ordinal": 201,
+    "last_revision": "7d8979e125a1a7e0feabd2546fa8c75c3298512e",
+    "next_revision": "4ab79b1a50144dc0f4b47aa9a4cf0f6170f80338",
+    "next_ordinal": 202
   },
   "entries": [
     {
@@ -2994,6 +2994,48 @@
       ],
       "finding": "Agent menu displays cwd/model/branch; branch replies filtered by optional request/cwd. Disconnected initialize/refresh requests queued in unbounded frontend memory and flushed on connect; stream marks initialization complete.",
       "fleetpane_action": "retain-explicit-observation-and-fenced-lifecycle-receipts; do-not-auto-replay-lifecycle-on-reconnect"
+    },
+    {
+      "ordinal": 199,
+      "revision": "30d1b63b2bef2719309381ac6e28078a79d39078",
+      "date": "2025-11-24T22:31:41+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/model-resolver.ts",
+        "packages/server/src/server/agent/model-resolver.test.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Selected diffs add lazy create/import modal mounting, ref-backed per-agent text/image drafts, model normalization/default catalog lookup and model snapshot serialization. Audio messages distinguish transcribe_only/auto_run and carry confidence/debug metadata; automatic run still interrupts before send. Resolver falls back to the first model or undefined on catalog failure.",
+      "fleetpane_action": "retain-durable-scoped-drafts-and-explicit-provider-model-options; voice-remains-P2; do-not-copy-silent-model-fallback"
+    },
+    {
+      "ordinal": 200,
+      "revision": "cc4a210ebe40bc6b97bbb05a68b419bf0306408f",
+      "date": "2025-11-24T22:33:49+01:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/app.json"
+      ],
+      "finding": "Expo slug changes from paseo to voice-mobile for EAS. No native Rust workflow change.",
+      "fleetpane_action": "mobile-build-only"
+    },
+    {
+      "ordinal": 201,
+      "revision": "7d8979e125a1a7e0feabd2546fa8c75c3298512e",
+      "date": "2025-11-24T23:16:31+01:00",
+      "category": "build",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/app.json"
+      ],
+      "finding": "Historical iOS plist adds ITSAppUsesNonExemptEncryption=false. This declaration is not an audit of actual encryption use and is not a Fleetpane packaging decision.",
+      "fleetpane_action": "reference-only"
     }
   ],
   "workflow_status": {
@@ -3008,7 +3050,7 @@
     "persistent-session-identity": "partial; original ACP IDs and observed journal history retain explicit context resume. Codex provider archive listing/read/restore now has typed CLI/native fixture and installed 0.163.0 process acceptance. Restore preserves identity/history/drafts, does not send/resume/restore descendants, and uses fenced durable mutation receipts. Active archive mutation, tree impact, deletion UI, provider-private alias adoption and complete runtime restoration remain open.",
     "conversation-tail-navigation": "partial; native return/stream follow, history paging and independent details scrolling with retained exact draft/other-session permission verified. No unread count, remote/read-only acceptance or cross-window scroll restoration.",
     "exact-turn-observation": "partial; shared Unix CLI wait and six regressions plus protocol fixtures and installed Codex/gated loopback verified. No takeover/answer/Stop/send; explicit timeout, fault, expired cursor and unknown after restart. Public MCP, curated activity export, remote and performance acceptance remain open.",
-    "workspace-file-navigation": "partial; shared local text/image open, explicit Markdown anchors, tool/change paths and retained conversation overlays. Linux native bounded Back/Forward, fresh file reads, exact copy, path-based directory row recovery, missing/link refusal and unchanged full Host snapshot verified. History lives only within the open view; no gallery, embedded Markdown-file images, preview-scroll or cross-view history persistence, inline-code guessing, OS deep links, forced delayed replies, editing or search/watch.",
+    "workspace-file-navigation": "partial; shared local text/image open, explicit Markdown anchors, tool/change paths and retained conversation overlays. Linux native bounded Back/Forward, fresh file reads, exact copy, path-based directory row recovery, missing/link refusal and unchanged full Host snapshot verified. History lives only within the open view; filename-based sequential image navigation with fresh list/read, explicit notices, exact path copy, native PNG/JPEG/WebP and small-window acceptance; no thumbnail grid/zoom, embedded Markdown-file images, preview-scroll or cross-view history persistence, inline-code guessing, OS deep links, forced delayed replies, editing or search/watch.",
     "attention": "partial; read-only multi-Host pending requests, exact identity/source/filter/copy, original fenced native answers and external-resolution observation verified locally. Completion/failure/unread, request age, notification/mute/tray and keyboard-next remain open.",
     "supplied-resources": "partial; explicit ACP/MCP embedded-resource and resource-link projection, bounded native literal/Markdown previews, metadata, complete text/URI/base64 copy and archive/reload verified locally. No fetching, binary decoding, outgoing context, audio, URI validation or fresh external model acceptance.",
     "conversation-row-identity": "verified locally for covered native cache collisions; tagged kind/thread/turn/item tuples, two pre-fix regressions, native paginated before/after, independent expansion and exact Copy/reload. No fuzzy missing-ID matching, conflicting-provider-history repair or external-provider acceptance.",

@@ -709,6 +709,12 @@ and [local verification](docs/verification/2026-10-20-session-drafts.md).
 
 ## Browse workspace files
 
+PNG/JPEG/WebP filenames offer **Previous image**, **Next image** and position/count
+within the current directory. Each step refreshes the listing and reads one image;
+corrupt files show their own preview error. Direct path opens offer **Load image
+list**. Failed neighbor reads keep the prior preview for explicit retry. See
+[native verification and limits](docs/verification/2026-10-21-image-navigation.md).
+
 Inspect a saved workspace and choose **Browse files**. Navigate one directory at
 a time with **Root**, **Up** or a file/directory path and **Go** or **Enter**.
 Relative, `./` and absolute paths within the saved root are accepted. **Refresh folder**
@@ -748,7 +754,7 @@ and 16 Mi-pixels. Reload observes external changes; corrupt/unsupported/oversize
 images show explicit notices. The shared CLI result includes the original bytes
 as base64 plus SHA-256 and metadata. Images are never imported as attachments.
 
-Editing, recursive trees, watching/search, galleries, embedded Markdown-file images,
+Editing, recursive trees, watching/search, thumbnail grids/zoom, embedded Markdown-file images,
 other media and large-file streaming remain open. See [the decision](docs/adr/0026-read-only-workspace-files.md)
 and [engine verification](docs/verification/2026-10-20-workspace-files.md), plus
 [conversation navigation acceptance](docs/verification/2026-10-21-file-navigation.md) and

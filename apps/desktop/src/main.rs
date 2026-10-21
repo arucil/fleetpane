@@ -22,6 +22,8 @@ mod file_locations;
 #[cfg(unix)]
 mod files_view;
 #[cfg(unix)]
+mod image_navigation;
+#[cfg(unix)]
 mod paseo_import_view;
 #[cfg(unix)]
 mod session_tree_view;
