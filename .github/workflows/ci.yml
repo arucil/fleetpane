@@ -70,6 +70,9 @@ jobs:
       - name: Abandoned Paseo copy collection
         if: runner.os != 'Windows'
         run: python3 scripts/paseo-scratch-smoke.py
+      - name: Cooperative Paseo CLI signal stop
+        if: runner.os != 'Windows'
+        run: python3 scripts/paseo-signals-smoke.py
       - name: DeepSeek v4 offline history migration
         if: runner.os != 'Windows'
         run: python3 scripts/paseo-dsh-v4-smoke.py

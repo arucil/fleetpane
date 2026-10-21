@@ -17,6 +17,11 @@ review cursor separates complete indexing from inspected behavior. It guides
 missing-workflow implementation; recent deltas are supplemental. It does not
 attest the installed application.
 
+CLI batch migration also has [cooperative signal Stop](verification/2026-10-21-paseo-signals.md):
+Ctrl+C/SIGTERM finishes the current unit and saves a stopped report for explicit
+retry. This extends offline migration reliability; it does not transfer running
+Paseo providers.
+
 | Workflow / observable result | Reference source or scenario | Fleetpane status and next acceptance |
 | --- | --- | --- |
 | Find and revisit pending requests across Hosts | PRD ATT-01–05; per-agent request/status and registry evolution in history 145–150 | **Partial, locally verified** read-only global inventory, approval/question/other filters, exact raw copy and checked source routing. Explicit takeover, external-resolution refresh, original native answers and exact draft preservation covered ([evidence](verification/2026-10-21-attention-queue.md)). Missing completion/failure/unread, request creation times, keyboard-next, notification deduplication and configurable mute/tray. |

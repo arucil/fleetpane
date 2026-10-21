@@ -1,6 +1,9 @@
 use std::process::ExitCode;
 
 #[cfg(unix)]
+mod migration;
+
+#[cfg(unix)]
 async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     use fleetpane_runtime::unix::{Config, request, run};
     use std::{
@@ -70,7 +73,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             use fleetpane_session::{
                 creations::Store,
                 hosts::Configuration,
-                paseo_import::{self, BatchControl, BatchPlan, Roots},
+                paseo_import::{self, BatchPlan, Roots},
             };
             match &args[1..] {
                 [verb,directory] if verb=="scratch-status" || verb=="clean-scratch" => {
@@ -111,7 +114,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 [verb,directory,path] if verb=="batch" => {
                     let plan=BatchPlan::read(std::path::Path::new(path))?;
                     let store=Store::open(std::path::absolute(directory)?).await?;
-                    println!("{}",serde_json::to_string(&store.import_paseo_batch(plan,BatchControl::default()).await?)?);
+                    println!("{}",serde_json::to_string(&migration::run(&store,migration::Selection::Plan(plan)).await?)?);
                 }
                 [verb,directory] if verb=="batches" => {
                     let store=Store::open(std::path::absolute(directory)?).await?;
@@ -127,7 +130,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                     let value=match verb.as_str() {
                         "batch-status"=>serde_json::to_string(&store.paseo_batch(id).await?)?,
                         "batch-results"=>serde_json::to_string(&store.paseo_batch_results(id,None).await?)?,
-                        "retry-batch"=>serde_json::to_string(&store.retry_paseo_batch(id,BatchControl::default()).await?)?,
+                        "retry-batch"=>serde_json::to_string(&migration::run(&store,migration::Selection::Retry(id)).await?)?,
                         _=>unreachable!(),
                     };
                     println!("{value}");

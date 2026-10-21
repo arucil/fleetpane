@@ -1,0 +1,51 @@
+{
+  "verified_at": "2026-10-21T10:48:50.708346+00:00",
+  "base_head": "c5d10f4af7418f7372f3eda195a51ff6aee12b94",
+  "source_state": "working tree; content hashes bind the implementation",
+  "source_sha256": {
+    "apps/host/src/main.rs": "a253a303cf6f80bf4044c84e7bb128f1037fcf2ba76c1e76fe8278a5af0da6db",
+    "apps/host/src/migration.rs": "a09948c3e55fc57fea23fdef4b7c1af4bc536ff281b709e7552b2047ace37f8b",
+    "scripts/paseo-signals-smoke.py": "a4d46b99a761e20a317eb983deede9f8df733ba8944b60ff27f8a9dc0cfafb14",
+    "crates/session/src/paseo_import/batch.rs": "ebe48c1f4b604523441d7251ff442b6b5c7c374aa46bb02b636057ae564e87e0",
+    "crates/session/src/paseo_import/batch/receipts.rs": "031c0672c9100df6db892724c06101f81ee45febb2d259b580245e1fc9bf465a"
+  },
+  "binary_sha256": "2e51fc6e64b527d156975140c8619b1710648612a8b923b1d45005e9e9189614",
+  "process_outcomes": {
+    "sigint_finishes_current_copy": true,
+    "sigterm_retry_finishes_current_copy": true,
+    "repeated_signal_preserves_worker": true,
+    "stopped_reports_durable": true,
+    "explicit_retry_new_attempt": true,
+    "original_reports_unchanged": true,
+    "completed_archive_unchanged": true,
+    "source_unchanged": true,
+    "no_scratch_left": true,
+    "host_never_started": true,
+    "first_batch": "0b5e7c4d-1bc0-4e23-8d1c-30fe464f5999",
+    "second_batch": "0a4bfaac-b1ac-454f-8331-8293fd87f072",
+    "final_batch": "831aed5b-8441-4888-9bc1-17c975aba188"
+  },
+  "checks": {
+    "workspace_tests": 223,
+    "clippy": "workspace all targets warnings denied",
+    "format": "pass",
+    "python_syntax": "pass"
+  },
+  "artifact_sha256": {
+    "clippy.log": "13a70bba1689eb8b77c1ecff3226cc8ec08a4230e6f3f484a8145c9d2336198d",
+    "final-report.json": "234c1453879fc43b8b3c15ee8cb081b8a365e951e7dcaf0ad515fdf475131ef7",
+    "format.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "process.log": "b40ab125146d871690557bc469f5df504c8c5978303333e02cdd4288c7a78a3e",
+    "signals-receipt.json": "d551e055c7c33d66a28eaf160ab3efb675e422021e0c5b671f094044fec0dd25",
+    "source-after.json": "fede517a3747f564a3be0f39e6a340252f8342d2787d272c1a8c9e7a242e8b0c",
+    "source-before.json": "fede517a3747f564a3be0f39e6a340252f8342d2787d272c1a8c9e7a242e8b0c",
+    "workspace-tests.log": "2ad77ae76faffc60a94aad13f8e3ceaf91edaa22560ea1cc3667ba26e17e5d98",
+    "zy-second-saved.json": "11d7f1c793e2a74f02b1edbabcc864a1d60501abf73b7df473fbc0436182a39d",
+    "zy-second-stderr.log": "da78391bac152a6c40c79a990ee88289a114d94f46da32e996a469ba55645361",
+    "zy-second-stdout.json": "779155b3d74caf1504313358a982781e68783c6598be70a29b91f63a00a4871b",
+    "zz-first-saved.json": "8ca4e7b8d660f55fcf50833bf576217ff411fb1fc585ab10e37b62407e99ba83",
+    "zz-first-stderr.log": "7b3fb61be0abf06330913f3f07cc534755d86712dcd1a101f449a9f7fe6f50a4",
+    "zz-first-stdout.json": "c84cceeaffc42f5a890d0e2397b0182f81389fcea0e75ea3161757a75d486665"
+  },
+  "log_normalization": "workspace test log trailing blank lines removed; content unchanged"
+}

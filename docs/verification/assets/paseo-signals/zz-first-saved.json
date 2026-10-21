@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "id": "0b5e7c4d-1bc0-4e23-8d1c-30fe464f5999",
+    "position": 1,
+    "state": "stopped",
+    "writer_active": false,
+    "progress": {
+      "workspaces_done": 0,
+      "workspaces_total": 1,
+      "histories_available": 1,
+      "histories_failed": 0,
+      "current_workspace": null,
+      "current_session": null
+    },
+    "error": null,
+    "source": "/tmp/fleetpane-signals-final-20261021/paseo",
+    "target": "Migration QA"
+  },
+  "plan": {
+    "home": "/tmp/fleetpane-signals-final-20261021/paseo",
+    "workspaces": [
+      {
+        "workspace_id": "workspace-one",
+        "revision": "5f8ef50a77268681df19b03b1be09b1fd7d2a8eab325a2e15b98e68496b68c36"
+      }
+    ],
+    "endpoint": {
+      "name": "Migration QA",
+      "socket": "/tmp/fleetpane-signals-final-20261021/unstarted.sock"
+    },
+    "roots": {
+      "codex": "/tmp/fleetpane-signals-final-20261021/codex",
+      "dsh": "/tmp/fleetpane-signals-final-20261021/dsh"
+    }
+  }
+}

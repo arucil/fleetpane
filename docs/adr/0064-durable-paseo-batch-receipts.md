@@ -46,10 +46,12 @@ explicit refresh/retry. It never claims a Host or launches a provider for copyin
 Completion means the selection was checked; per-workspace registration errors,
 history failures/warnings and incomplete traversal remain separate.
 
-Signal-aware CLI cancellation, global archive quotas, stale temporary-file
-collection, later synchronization and active-session ownership transfer remain
-separate work. [Local acceptance](../verification/2026-10-21-paseo-receipts.md).
+Global archive quotas, later synchronization and active-session ownership
+transfer remain separate work. [Local acceptance](../verification/2026-10-21-paseo-receipts.md).
 
 Follow-up [ADR 0065](0065-explicit-paseo-scratch-collection.md) adds explicit
 lock-gated collection for new versioned scratch files. Older temporary files
 remain retained; automatic collection and quotas remain open.
+
+Follow-up [ADR 0066](0066-cooperative-cli-migration-signals.md) connects CLI
+SIGINT/SIGTERM to the existing cooperative Stop and durable reports.

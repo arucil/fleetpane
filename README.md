@@ -47,6 +47,13 @@ identities and complete snapshots are reused. An interrupted attempt stays
 unconfirmed; another active worker prevents retry. Selection check completion
 does not imply every history succeeded. [Recovery contract](docs/adr/0064-durable-paseo-batch-receipts.md).
 
+CLI `batch` and `retry-batch` handle Ctrl+C/SIGINT and SIGTERM as **Stop after
+current copy**. They finish the current unit, save a stopped report and print one
+complete JSON result (`cancelled: true`), then exit successfully. Repeated signals
+keep waiting for the same copy. SIGKILL, power loss and storage failures still
+require interrupted-report inspection. This signal handling does not apply to
+standalone history-copy commands. [Signal verification](docs/verification/2026-10-21-paseo-signals.md).
+
 After an interrupted copy, **Check temporary files** shows the unused file count
 and bytes; **Clear unused temporary files** removes that version's scratch files.
 Both actions refuse an active history copy or context export. Source transcripts,
@@ -846,6 +853,7 @@ python3 scripts/recent-directories-smoke.py       # Unix; device-local exact MRU
 python3 scripts/appearance-smoke.py              # Unix; device preference persistence, migration, conflicts and failures
 python3 scripts/paseo-receipts-smoke.py          # Unix; process death, durable reports and explicit retry
 python3 scripts/paseo-scratch-smoke.py           # Unix; paused/killed copies and explicit scratch collection
+python3 scripts/paseo-signals-smoke.py           # Unix; SIGINT/SIGTERM finish the current copy and save Stop
 python3 scripts/paseo-fork-smoke.py              # Unix; saved context fork, stale binding and interrupted-operation recovery
 python3 scripts/paseo-fork-smoke.py --real       # optional; real Codex app-server, local rejecting model, no account
 python3 scripts/paseo-fork-smoke.py --opencodex  # optional; one real model turn through existing loopback proxy
