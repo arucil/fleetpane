@@ -1138,3 +1138,5 @@ All sessions defaults to **Activity**: fresh active sessions first, then provide
 update time. **By Host** retains provider page order. Ordering covers loaded rows
 only; each Host has independent Load more controls in its summary, and unavailable
 rows say Last observed. Filtering, sorting and opening never resume or send.
+
+Turn headers offer **Copy loaded answer** for assistant text currently loaded in that turn. Earlier pages are never fetched by Copy; the notice reports copied bytes and excluded non-text blocks. [Verification and scope](docs/verification/2026-10-22-turn-answer-copy.md).

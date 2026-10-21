@@ -14,7 +14,7 @@ mod session_settings;
 mod stopping;
 mod tasks;
 mod tree_navigation;
-use crate::conversation_item::{ItemView, OpenFile, Row};
+use crate::conversation_item::{CopyAnswer, ItemView, OpenFile, Row};
 use crate::question_view::{AnswerEvent, QuestionView};
 use fleetpane_runtime::Snapshot;
 use fleetpane_session::questions::{self, Request as QuestionRequest};
@@ -94,6 +94,8 @@ pub struct HostView {
     permission_preview: Option<(Row, Entity<ItemView>)>,
     item_views: BTreeMap<String, Entity<ItemView>>,
     file_subscriptions: BTreeMap<String, Subscription>,
+    answer_subscriptions: BTreeMap<String, Subscription>,
+    answer_copy_notice: Option<String>,
     permission_file_subscription: Option<Subscription>,
     timeline: ListState,
     interactions_scroll: ScrollHandle,
@@ -321,6 +323,8 @@ impl HostView {
             permission_preview: None,
             item_views: BTreeMap::new(),
             file_subscriptions: BTreeMap::new(),
+            answer_subscriptions: BTreeMap::new(),
+            answer_copy_notice: None,
             permission_file_subscription: None,
             // List scrolling uses measured heights. With zero leading overdraw,
             // older rows remain zero-height and scrolling stops at the first
@@ -991,6 +995,7 @@ impl HostView {
                 }
                 self.rename_target = None;
                 if self.thread.as_ref().is_none_or(|old| old.id != thread.id) {
+                    self.answer_copy_notice = None;
                     self.interactions_scroll.set_offset(point(px(0.), px(0.)));
                     self.session_tree = None;
                     self.session_tree_subscription = None;
@@ -1273,12 +1278,34 @@ impl HostView {
                 .retain(|id, _| changes.retained.contains(id.as_str()));
             self.file_subscriptions
                 .retain(|id, _| changes.retained.contains(id.as_str()));
+            self.answer_subscriptions
+                .retain(|id, _| changes.retained.contains(id.as_str()));
             for index in changes.updated {
                 let row = &rows[index];
                 if let Some(view) = self.item_views.get(&row.id) {
                     view.update(cx, |view, cx| view.set_row(row.clone(), cx));
                 } else {
                     let view = cx.new(|cx| ItemView::new(row.clone(), thread.cwd.clone(), cx));
+                    if row.answer_turn.is_some() {
+                        let session = thread.id.clone();
+                        let subscription = cx.subscribe(&view, move |this, _, event: &CopyAnswer, cx| {
+                            let result = this.thread.as_ref()
+                                .filter(|thread| thread.id == session)
+                                .ok_or_else(|| fleetpane_session::Error::Projection("Answer source is no longer selected".into()))
+                                .and_then(|thread| fleetpane_session::turn_output::loaded_answer(thread, &event.turn_id));
+                            match result {
+                                Ok(answer) => {
+                                    let bytes = answer.text.len();
+                                    cx.write_to_clipboard(ClipboardItem::new_string(answer.text));
+                                    this.answer_copy_notice = Some(format!("Copied {bytes} bytes from {} loaded assistant messages · {} non-text parts excluded. Earlier pages are not fetched.", answer.text_items, answer.non_text_parts));
+                                }
+                                Err(error) => this.answer_copy_notice = Some(format!("Answer was not copied: {error}")),
+                            }
+                            cx.notify();
+                        });
+                        self.answer_subscriptions
+                            .insert(row.id.clone(), subscription);
+                    }
                     let session = thread.id.clone();
                     let subscription =
                         cx.subscribe(&view, move |this, _, event: &OpenFile, cx| {
@@ -1299,6 +1326,7 @@ impl HostView {
         } else {
             self.item_views.clear();
             self.file_subscriptions.clear();
+            self.answer_subscriptions.clear();
         }
         let first = self
             .rows
@@ -2154,6 +2182,12 @@ impl Render for HostView {
             .child(self.attention_banner(cx))
             .child(self.completion_banner(cx))
             .child(self.directory_source_banner(cx))
+            .when_some(self.answer_copy_notice.as_ref(), |view, notice| {
+                view.child(div().px_4().py_1().flex().items_center().gap_2()
+                    .child(div().flex_1().min_w_0().text_xs().child(notice.clone()))
+                    .child(Button::new("dismiss-answer-copy").small().ghost().label("Dismiss")
+                        .on_click(cx.listener(|this, _, _, cx| {this.answer_copy_notice=None;cx.notify();}))))
+            })
             .when(self.draining(), |view| {
                 let state = self.snapshot.as_ref().expect("draining Host snapshot");
                 view.child(div().px_6().py_2().text_sm().border_b_1().border_color(cx.theme().border)

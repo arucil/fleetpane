@@ -252,3 +252,5 @@ Codex supplied web-search cards (2026-10-22) now have [local projection/native e
 Supplied command actions and compact conversations (2026-10-22): ordered typed actions, separate read links, complete Copy and retained drafts/window replacement have [local native evidence](verification/2026-10-22-command-actions.md). At 900×560 optional settings use explicit Session options while composer and approval/Stop stay reachable; arbitrary-content and cross-platform acceptance remain open.
 
 Creation directory validation (2026-10-22): the Host rejects invalid paths before fresh admission for both current providers, retains exact cwd and original duplicate receipts. [Local native/process evidence](verification/2026-10-22-creation-directory.md) separates preflight observation from provider use.
+
+Loaded turn answer copy (2026-10-22, replay 633) has [separate native evidence](verification/2026-10-22-turn-answer-copy.md). The action exports assistant text from loaded items only, preserves exact whitespace and excludes other roles/tools/media. Explicit paging, refusal, draft retention and window replacement are covered.

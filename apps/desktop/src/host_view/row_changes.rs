@@ -514,6 +514,7 @@ mod tests {
             content: Content::Markdown(format!("Synthetic message {id}")),
             copy: format!("Exact copy {id}"),
             error: None,
+            answer_turn: None,
         }
     }
 

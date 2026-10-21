@@ -28,6 +28,7 @@ pub(super) struct Row {
     pub content: Content,
     pub copy: String,
     pub error: Option<String>,
+    pub answer_turn: Option<String>,
 }
 
 impl Row {
@@ -79,6 +80,7 @@ impl Row {
                 content: Content::Tool(tool),
                 copy: pending.to_string(),
                 error: None,
+                answer_turn: None,
             },
             Err(error) => Self {
                 id,
@@ -86,6 +88,7 @@ impl Row {
                 content: Content::Unknown(pending.clone()),
                 copy: pending.to_string(),
                 error: Some(error),
+                answer_turn: None,
             },
         }
     }
@@ -108,6 +111,7 @@ impl Row {
             ),
             copy: serde_json::json!({"id":turn.id,"status":turn.status,"stopReason":turn.stop_reason,"error":turn.error}).to_string(),
             error: None,
+            answer_turn: Some(turn.id.clone()),
         }
     }
 
@@ -174,6 +178,7 @@ impl Row {
             content,
             copy,
             error,
+            answer_turn: None,
         })
     }
 }
@@ -212,6 +217,10 @@ pub(super) struct OpenFile {
     pub target: Target,
 }
 
+pub(super) struct CopyAnswer {
+    pub turn_id: String,
+}
+
 pub(super) struct ItemView {
     row: Row,
     cwd: String,
@@ -224,6 +233,7 @@ pub(super) struct ItemView {
 }
 
 impl gpui_kit::EventEmitter<OpenFile> for ItemView {}
+impl gpui_kit::EventEmitter<CopyAnswer> for ItemView {}
 
 impl ItemView {
     pub fn permission(row: Row, cwd: String, cx: &mut Context<Self>) -> Self {
@@ -571,6 +581,13 @@ impl Render for ItemView {
                             .child(self.row.label.clone()),
                     )
                     .children(status.map(|status| div().text_xs().text_color(color).child(status)))
+                    .when_some(self.row.answer_turn.as_ref(), |header, turn| {
+                        let turn_id = turn.clone();
+                        header.child(Button::new("copy-loaded-answer").small().ghost()
+                            .label("Copy loaded answer")
+                            .tooltip("Copy assistant text loaded for this turn. Earlier pages and non-text content are excluded.")
+                            .on_click(cx.listener(move |_, _, _, cx| cx.emit(CopyAnswer {turn_id:turn_id.clone()}))))
+                    })
                     .when(!self.details.is_empty(), |header| {
                         header.child(
                             Button::new("details")
