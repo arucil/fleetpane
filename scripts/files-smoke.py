@@ -2,11 +2,13 @@
 """Bounded, read-only real filesystem observations beside running Codex/ACP Hosts."""
 
 import hashlib
+import errno
 import json
 import os
 import signal
 import socket
 import subprocess
+import sys
 import sys
 import tempfile
 import time
@@ -106,8 +108,14 @@ def main():
             for index in range(501):
                 (folder / "many" / str(index)).touch()
             (folder / "non-utf8").mkdir()
-            with open(os.fsencode(folder / "non-utf8") + b"/\xff", "wb") as file:
-                file.write(b"data")
+            invalid_name_created = False
+            try:
+                with open(os.fsencode(folder / "non-utf8") + b"/\xff", "wb") as file:
+                    file.write(b"data")
+                invalid_name_created = True
+            except OSError as error:
+                if sys.platform != "darwin" or error.errno != errno.EILSEQ:
+                    raise
             initial = {
                 str(p.relative_to(folder)): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in folder.rglob("*")
@@ -160,8 +168,10 @@ def main():
                     "a/../empty",
                 ]:
                     observe(workspace, "read", path, ok=False)
-                for path in ["many", "non-utf8", "outside", "../"]:
+                for path in ["many", "outside", "../"]:
                     observe(workspace, "files", path, ok=False)
+                if invalid_name_created:
+                    observe(workspace, "files", "non-utf8", ok=False)
                 # A rejected read does not poison the next request.
                 assert observe(workspace, "read", "empty")["content"]["kind"] == "text"
             folder.rename(root / "kept")

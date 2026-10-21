@@ -186,6 +186,7 @@ for(const row of encoded) process.stdout.write(zstdCompressSync(Buffer.from(JSON
 
 
 def check(root, binary, codec, before):
+    root = root.resolve()
     home, dsh, config, path = fixture(root, codec)
     store = root / "hosts.creations"
 
