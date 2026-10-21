@@ -1,5 +1,8 @@
 //! Read-only file navigation; filesystem work stays in the shared session engine.
-use crate::{file_locations::Location, host_view::background};
+use crate::{
+    file_locations::{History, Location, Visit},
+    host_view::background,
+};
 use base64::{Engine, engine::general_purpose::STANDARD};
 use fleetpane_session::{
     files::{Content, Kind, Listing, Opened, Readback, Target},
@@ -14,12 +17,23 @@ use gpui_kit::{prelude::*, *};
 use std::{num::NonZeroUsize, sync::Arc};
 
 enum Action {
-    List(String, Option<Target>),
+    List(String),
+    Restore(Visit),
     Read(String, Option<NonZeroUsize>),
     Open(Target),
 }
+struct PreparedFile {
+    file: Readback,
+    image: Option<Arc<Image>>,
+}
+
 enum Reply {
-    Listed(Listing, Option<Target>),
+    Listed(Listing),
+    Restored(
+        Listing,
+        Result<Option<PreparedFile>, fleetpane_session::client::Error>,
+        Visit,
+    ),
     Read(Readback, Option<NonZeroUsize>, Option<Arc<Image>>),
     Opened(Opened, Option<NonZeroUsize>, Option<Arc<Image>>),
 }
@@ -28,6 +42,7 @@ pub struct FilesView {
     location: Location,
     back_label: &'static str,
     line: Option<NonZeroUsize>,
+    history: History,
     path: Entity<InputState>,
     _path_subscription: Subscription,
     listing: Option<Listing>,
@@ -87,13 +102,10 @@ impl FilesView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) -> Self {
-        let action = Action::List(
-            location.directory.clone(),
-            location
-                .file
-                .clone()
-                .map(|path| Target { path, line: None }),
-        );
+        let action = Action::Restore(Visit {
+            location: location.clone(),
+            ..Visit::default()
+        });
         Self::build(
             workspace,
             location,
@@ -149,6 +161,7 @@ impl FilesView {
             location: location.clone(),
             back_label,
             line: None,
+            history: History::default(),
             path,
             _path_subscription: subscription,
             listing: None,
@@ -218,9 +231,58 @@ impl FilesView {
         };
         self.file = Some(file);
     }
+    fn top_entry(&self) -> Option<String> {
+        let listing = self.listing.as_ref()?;
+        if listing.entries.is_empty() {
+            return None;
+        }
+        let state = self.scroll.0.borrow();
+        let index = match &state.deferred_scroll_to_item {
+            Some(pending) => pending.item_index,
+            None => {
+                let size = state.last_item_size?;
+                // UniformList virtualizes its children; ScrollHandle's child index
+                // is not the index in our directory. Use the uniform row geometry.
+                let row = f32::from(size.contents.height) / listing.entries.len() as f32;
+                (-f32::from(state.base_handle.offset().y) / row)
+                    .max(0.0)
+                    .floor() as usize
+            }
+        };
+        listing.entries.get(index).map(|entry| entry.path.clone())
+    }
+
+    fn navigate(&mut self, forward: bool, window: &mut Window, cx: &mut Context<Self>) {
+        if let Some((index, visit)) = self.history.destination(forward) {
+            self.run_navigation(Action::Restore(visit), Some(index), window, cx);
+        }
+    }
+
     fn run(&mut self, action: Action, window: &mut Window, cx: &mut Context<Self>) {
+        self.run_navigation(action, None, window, cx);
+    }
+
+    fn run_navigation(
+        &mut self,
+        action: Action,
+        destination: Option<usize>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
         if self.busy {
             return;
+        }
+        self.history
+            .remember_scroll(&self.location, self.line, self.top_entry());
+        if let Action::Restore(visit) = &action {
+            let attempted = visit
+                .location
+                .file
+                .as_ref()
+                .unwrap_or(&visit.location.directory);
+            self.path.update(cx, |input, cx| {
+                input.set_value(attempted.clone(), window, cx)
+            });
         }
         self.busy = true;
         self.error = None;
@@ -228,10 +290,18 @@ impl FilesView {
         let task = cx.background_executor().spawn(async move {
             background(async move {
                 match action {
-                    Action::List(path, selected) => workspace
-                        .list_files(&path)
-                        .await
-                        .map(|listing| Reply::Listed(listing, selected)),
+                    Action::List(path) => workspace.list_files(&path).await.map(Reply::Listed),
+                    Action::Restore(visit) => {
+                        let listing = workspace.list_files(&visit.location.directory).await?;
+                        let file = match &visit.location.file {
+                            Some(path) => workspace.read_file(path).await.and_then(|file| {
+                                let image = prepare_image(&file)?;
+                                Ok(Some(PreparedFile { file, image }))
+                            }),
+                            None => Ok(None),
+                        };
+                        Ok(Reply::Restored(listing, file, visit))
+                    }
                     Action::Read(path, line) => workspace.read_file(&path).await.and_then(|file| {
                         let image = prepare_image(&file)?;
                         Ok(Reply::Read(file, line, image))
@@ -252,9 +322,42 @@ impl FilesView {
             let reply = task.await;
             let _closed = this.update_in(cx, |this, window, cx| {
                 this.busy = false;
-                let mut restore = None;
+                let mut success = reply.is_ok();
                 match reply {
-                    Ok(Reply::Listed(listing, selected)) => {
+                    Ok(Reply::Restored(listing, file, visit)) => {
+                        this.location = Location {
+                            directory: listing.path.clone(),
+                            file: None,
+                        };
+                        let top = visit
+                            .top
+                            .as_ref()
+                            .and_then(|path| {
+                                listing.entries.iter().position(|entry| &entry.path == path)
+                            })
+                            .unwrap_or(0);
+                        this.listing = Some(listing);
+                        this.file = None;
+                        this.preview = None;
+                        this.clear_image(cx);
+                        this.line = None;
+                        this.scroll.scroll_to_item_strict(top, ScrollStrategy::Top);
+                        match file {
+                            Ok(Some(prepared)) => this.show_file(
+                                prepared.file,
+                                prepared.image,
+                                visit.line,
+                                window,
+                                cx,
+                            ),
+                            Ok(None) => {}
+                            Err(error) => {
+                                this.error = Some(error.to_string());
+                                success = false;
+                            }
+                        }
+                    }
+                    Ok(Reply::Listed(listing)) => {
                         this.location = Location {
                             directory: listing.path.clone(),
                             file: None,
@@ -267,8 +370,7 @@ impl FilesView {
                         this.preview = None;
                         this.clear_image(cx);
                         this.line = None;
-                        this.scroll.scroll_to_item(0, ScrollStrategy::Top);
-                        restore = selected;
+                        this.scroll.scroll_to_item_strict(0, ScrollStrategy::Top);
                     }
                     Ok(Reply::Read(file, line, image)) => {
                         this.show_file(file, image, line, window, cx)
@@ -286,7 +388,7 @@ impl FilesView {
                         this.preview = None;
                         this.clear_image(cx);
                         this.line = None;
-                        this.scroll.scroll_to_item(0, ScrollStrategy::Top);
+                        this.scroll.scroll_to_item_strict(0, ScrollStrategy::Top);
                     }
                     Ok(Reply::Opened(Opened::File(file), line, image)) => {
                         this.location.directory = file
@@ -309,8 +411,23 @@ impl FilesView {
                         this.location.file = None;
                     }
                 }
-                if let Some(target) = restore {
-                    this.run(Action::Read(target.path, target.line), window, cx);
+                if success {
+                    let selected = this
+                        .location
+                        .file
+                        .as_ref()
+                        .unwrap_or(&this.location.directory);
+                    this.path.update(cx, |input, cx| {
+                        input.set_value(selected.clone(), window, cx)
+                    });
+                    this.history.accept(
+                        Visit {
+                            location: this.location.clone(),
+                            line: this.line,
+                            top: this.top_entry(),
+                        },
+                        destination,
+                    );
                 }
                 cx.notify();
             });
@@ -326,14 +443,17 @@ impl Render for FilesView {
         div().size_full().flex().flex_col().gap_3().p_4()
             .child(div().flex().items_center().gap_3()
                 .child(Button::new("back-workspaces").small().label(self.back_label).on_click(cx.listener(|this,_,_,cx|cx.emit(this.location.clone()))))
-                .child(div().text_lg().child("Workspace files · Read only")))
+                .child(div().text_lg().child("Workspace files · Read only"))
+                .child(div().flex_1())
+                .child(Button::new("files-back").small().label("Back").disabled(self.busy || self.history.destination(false).is_none()).on_click(cx.listener(|this,_,window,cx|this.navigate(false,window,cx))))
+                .child(Button::new("files-forward").small().label("Forward").disabled(self.busy || self.history.destination(true).is_none()).on_click(cx.listener(|this,_,window,cx|this.navigate(true,window,cx)))))
             .child(div().text_sm().truncate().child(format!("{} · {}",self.workspace.registration.endpoint.name,self.workspace.registration.directory.path.display())))
             .child(div().flex().items_center().gap_2()
-                .child(Button::new("files-root").small().label("Root").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.run(Action::List(String::new(), None),window,cx))))
+                .child(Button::new("files-root").small().label("Root").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.run(Action::List(String::new()),window,cx))))
                 .child(Button::new("files-up").small().label("Up").disabled(self.busy || folder.is_empty()).on_click(cx.listener(|this,_,window,cx| {
-                    let folder=this.folder();let parent=folder.rsplit_once('/').map_or("",|(parent,_)|parent).to_owned();this.run(Action::List(parent, None),window,cx);
+                    let folder=this.folder();let parent=folder.rsplit_once('/').map_or("",|(parent,_)|parent).to_owned();this.run(Action::List(parent),window,cx);
                 })))
-                .child(Button::new("files-refresh").small().label("Refresh folder").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.run(Action::List(this.folder(), this.location.file.clone().map(|path|Target {path,line:this.line})),window,cx))))
+                .child(Button::new("files-refresh").small().label("Refresh folder").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.run(Action::Restore(Visit {location:this.location.clone(),line:this.line,top:this.top_entry()}),window,cx))))
                 .child(div().flex_1().min_w_0().child(Input::new(&self.path).disabled(self.busy)))
                 .child(Button::new("files-go").small().label("Go").disabled(self.busy).on_click(cx.listener(|this,_,window,cx|this.go(window,cx)))))
             .when(self.busy,|view|view.child(div().text_sm().child("Reading…")))
@@ -351,7 +471,7 @@ impl Render for FilesView {
                             div().h_9().min_w_0().child(Button::new(("workspace-file",index)).w_full().small().ghost().label(label)
                                 .selected(this.location.file.as_ref() == Some(&path))
                                 .disabled(this.busy || !matches!(kind,Kind::Directory|Kind::File))
-                                .on_click(cx.listener(move|this,_,window,cx|this.run(if kind==Kind::Directory {Action::List(path.clone(), None)} else {Action::Read(path.clone(), None)},window,cx))))
+                                .on_click(cx.listener(move|this,_,window,cx|this.run(if kind==Kind::Directory {Action::List(path.clone())} else {Action::Read(path.clone(), None)},window,cx))))
                         }).collect()
                     })).flex_1().min_h_0().track_scroll(&self.scroll))
                     .child(div().text_xs().child("Links and special files are listed without following them.")))

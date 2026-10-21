@@ -1,6 +1,6 @@
 //! Window-local, bounded navigation metadata. File contents are always re-read.
 use fleetpane_session::workspaces::{Directory, Workspace};
-use std::{collections::VecDeque, path::PathBuf};
+use std::{collections::VecDeque, num::NonZeroUsize, path::PathBuf};
 use uuid::Uuid;
 
 const MAX_LOCATIONS: usize = 32;
@@ -9,6 +9,68 @@ const MAX_LOCATIONS: usize = 32;
 pub struct Location {
     pub directory: String,
     pub file: Option<String>,
+}
+
+/// Paths only: revisiting a location always observes the filesystem again.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct Visit {
+    pub location: Location,
+    pub line: Option<NonZeroUsize>,
+    pub top: Option<String>,
+}
+
+#[derive(Default)]
+pub struct History {
+    visits: VecDeque<Visit>,
+    cursor: Option<usize>,
+}
+
+impl History {
+    pub fn destination(&self, forward: bool) -> Option<(usize, Visit)> {
+        let cursor = self.cursor?;
+        let index = if forward {
+            cursor.checked_add(1)?
+        } else {
+            cursor.checked_sub(1)?
+        };
+        self.visits.get(index).cloned().map(|visit| (index, visit))
+    }
+
+    pub fn remember_scroll(
+        &mut self,
+        location: &Location,
+        line: Option<NonZeroUsize>,
+        top: Option<String>,
+    ) {
+        if let Some(cursor) = self.cursor {
+            let current = &mut self.visits[cursor];
+            if &current.location == location && current.line == line {
+                current.top = top;
+            }
+        }
+    }
+
+    /// Called only after the entire read succeeds. Failed visits never move the cursor.
+    pub fn accept(&mut self, visit: Visit, destination: Option<usize>) {
+        if let Some(index) = destination {
+            self.visits[index] = visit;
+            self.cursor = Some(index);
+            return;
+        }
+        if let Some(cursor) = self.cursor {
+            let current = &self.visits[cursor];
+            if current.location == visit.location && current.line == visit.line {
+                self.visits[cursor] = visit;
+                return;
+            }
+            self.visits.truncate(cursor + 1);
+        }
+        if self.visits.len() == MAX_LOCATIONS {
+            self.visits.pop_front();
+        }
+        self.visits.push_back(visit);
+        self.cursor = Some(self.visits.len() - 1);
+    }
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -88,6 +150,61 @@ mod tests {
             directory: "目录".into(),
             file: Some("目录/原文.txt".into()),
         }
+    }
+
+    fn visit(file: &str) -> Visit {
+        Visit {
+            location: Location {
+                directory: "目录".into(),
+                file: Some(format!("目录/{file}")),
+            },
+            line: None,
+            top: None,
+        }
+    }
+
+    #[test]
+    fn history_commits_only_success_and_preserves_forward_on_refresh() {
+        let mut history = History::default();
+        history.accept(visit("a"), None);
+        history.remember_scroll(&visit("a").location, None, Some("目录/anchor".into()));
+        history.accept(visit("b"), None);
+        let (index, previous) = history.destination(false).unwrap();
+        assert_eq!(previous.top.as_deref(), Some("目录/anchor"));
+        history.remember_scroll(&Location::default(), None, Some("failed-target".into()));
+        assert_eq!(history.visits[1].top, None);
+        // Preparing a destination, including a failed read, changes no history.
+        assert_eq!(history.cursor, Some(1));
+        assert!(history.destination(true).is_none());
+        history.accept(previous.clone(), Some(index));
+        history.accept(previous, None);
+        assert_eq!(history.visits.len(), 2);
+        assert_eq!(history.destination(true).unwrap().1, visit("b"));
+        history.accept(visit("c"), None);
+        assert!(history.destination(true).is_none());
+        assert_eq!(history.visits.len(), 2);
+        assert_eq!(
+            history.destination(false).unwrap().1.location,
+            visit("a").location
+        );
+    }
+
+    #[test]
+    fn history_keeps_line_identity_and_bounds_only_metadata() {
+        let mut history = History::default();
+        for line in 1..=MAX_LOCATIONS + 3 {
+            let mut next = visit("same.txt");
+            next.line = NonZeroUsize::new(line);
+            history.accept(next, None);
+        }
+        assert_eq!(history.visits.len(), MAX_LOCATIONS);
+        for _ in 1..MAX_LOCATIONS {
+            let (index, previous) = history.destination(false).unwrap();
+            history.accept(previous, Some(index));
+        }
+        assert!(history.destination(false).is_none());
+        assert_eq!(history.visits[0].line.unwrap().get(), 4);
+        assert!(History::default().destination(true).is_none());
     }
 
     #[test]

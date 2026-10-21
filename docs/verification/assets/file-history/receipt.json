@@ -1,0 +1,100 @@
+{
+  "base_head": "8eb1c5de6fe2afbe6ecc4817cd0ea3f17e871ce6",
+  "source_sha256": {
+    "apps/desktop/src/files_view.rs": "b8ad411db42d0ec2664f2d8220ff345cb1a803747af0a29402530ee92245f1f5",
+    "apps/desktop/src/file_locations.rs": "3b5ca160cbc3771774a18a65bf9a01f45579c0193d4499b936396f5329c71832"
+  },
+  "binary_sha256": {
+    "before": "7621ff11ca5011ac3b0244998d58aa22a916ce4a3666ddbfaa8fce2cfac8a187",
+    "final": "3c1526a38f53a3175ba02482c9462bc80903c709d63f03995d3157c57336c269",
+    "host": "7c447b6fbd6a086a8e09a2ee26ea916c5045a04df7330a436792f7d3f1649e39"
+  },
+  "native": {
+    "workspace": "fleetpane-file-history-20261021",
+    "host_pid": 4096656,
+    "provider_pid": 4096659,
+    "fixture": "scripts/acp-fixture.py; isolated private root and controller",
+    "final_desktop_pid": 4136429,
+    "back_restores_top_entry": "file-39.txt",
+    "exact_clipboard_bytes": [
+      31,
+      22,
+      33,
+      31
+    ],
+    "source_edits_observed": true,
+    "missing_file_keeps_cursor": true,
+    "replaced_directory_link_refused": true,
+    "refresh_preserves_forward": true,
+    "new_visit_truncates_forward": true,
+    "image_forward": true,
+    "reopen_keeps_last_location_discards_history": true,
+    "full_host_snapshots_equal": true,
+    "unrelated_pending_request_retained": true
+  },
+  "snapshot_sha256": {
+    "before.json": "444aabc0078693c31a6dae6627cb29d7b868ba3d738edb476cf38f0fd958402c",
+    "after-first.json": "444aabc0078693c31a6dae6627cb29d7b868ba3d738edb476cf38f0fd958402c",
+    "after-final.json": "444aabc0078693c31a6dae6627cb29d7b868ba3d738edb476cf38f0fd958402c",
+    "after-close.json": "444aabc0078693c31a6dae6627cb29d7b868ba3d738edb476cf38f0fd958402c"
+  },
+  "checks": {
+    "desktop_tests": 22,
+    "strict_desktop_clippy": "PASS",
+    "desktop_fmt": "PASS",
+    "desktop_build": "PASS",
+    "process_smokes": [
+      "files",
+      "file-navigation",
+      "file-images"
+    ],
+    "python_tests": 15
+  },
+  "limits": [
+    "Linux native with synthetic ACP provider; no external model",
+    "32 visits per open view; no preview scroll or cross-view history persistence",
+    "Initial implementation restored the file but reset directory scroll; actual UniformList row geometry fixed, final binary reverified",
+    "X window close tool left processes alive; workspace_stop cleaned all three desktops; no normal titlebar-close acceptance in this run"
+  ],
+  "cleanup": {
+    "host_pid": 4096656,
+    "provider_pid": 4096659,
+    "both_exited": true,
+    "socket_removed": true,
+    "snapshot_equal_before_after_close": true,
+    "desktop_states": {
+      "4099412": "absent",
+      "4110939": "absent",
+      "4136429": "absent"
+    },
+    "desktop_termination": "workspace_stop after workspace_close_window left live processes; normal titlebar close was not exercised",
+    "workspace_stopped": true
+  },
+  "artifacts_sha256": {
+    "before-files.png": "449060e097413f5e8b09b68180d0f79688361ff201143a3c7bcc182d6e691e41",
+    "final-back-scroll.png": "54e291c1278a161641ca4294d9f51104b85e010f2258722a5601877e5244c5c4",
+    "final-forward-after-refresh.png": "dd682fbb1f9153f3be940f541429e61b1212eb6967fb539a5ba4bb054ee83576",
+    "final-missing.png": "315338194b5f0c60d06bea0aa9fd4c5e9e62ac54a7f47562c9b4db2a6e744e2f",
+    "final-image-branch.png": "d883390a3da3d0fc970bf0d0c30fa2834670b753a3a1b21d0680e3798fae5354",
+    "final-image-forward.png": "9ed1e65ab7a8537a590e59d134021432a01a5e45b9720591c4b626c455cbb83e",
+    "final-fresh-text.png": "d78404b29dc006f77ba53abed6a9790ef1b8185f7927471696e7cf283bb4f0ca",
+    "final-link-refused.png": "2dd42d5578b31817993c9b39f7f57cf8f9c9695d42e1798efc480acc1e4f029e",
+    "final-retry-fresh.png": "a1d3a1e35ba0a4e368294568335d87d2ed75536e51fd9b5c3539f804d5e0a805",
+    "final-reopen.png": "2aa987830878c8ea8032c485eee14fe5e65e6d858fe814f1b21a520be978f1c8",
+    "desktop-tests.log": "59640aff951d4b3becd1244fbf923c060e308fbd27346c6f3e020c471eeb9ae8",
+    "desktop-clippy.log": "f202a6bc62b53cf561c0179ff9a72fd88f05b7ecfde0e1a685bb2b6454764b68",
+    "desktop-build.log": "415f5c75974eddb378fb953bbc3e492e1ccfb3e1be828cd37f7b3ddcabb109d5",
+    "files-smoke.log": "436857b8683082337c2a78d64677aef7f0e205256b33e3792b2e4e738259e0fd",
+    "navigation-smoke.log": "75781ad7f34c79505f6f1f67f1fcb4c7ba6c7814aee92b0b9de318a790c69e37",
+    "images-smoke.log": "257e4f420633c565e7e86b98a6cb18c8816b073ce25fe76535e786e16214609b",
+    "clipboard.json": "e843eefd3e22236eeb8751018b9f69c84a30f3bedfcf69c6efd49b6e8e86e8a2",
+    "cleanup.json": "2751fd7dc8810902366ecc293aaeddc7f15cd511916251f501f1daa9100724be",
+    "python-tests.log": "57dafe839a0c1509a52bb827987e838ecba76c3e5fc684bb328c1bb27bdd1364"
+  },
+  "log_normalization": {
+    "desktop-tests.log": {
+      "original_sha256": "3d3e9b2ff1a3ae68ce354d2b9987e5d012cdb0e4b83eb851c1dff71919496e7b",
+      "change": "removed trailing blank line; test output unchanged"
+    }
+  }
+}
