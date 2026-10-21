@@ -1,7 +1,10 @@
 # Functional parity with donut-paseo
 
-Updated 2026-10-21. The user's target is donut-paseo's functional completeness.
-Milestones sequence delivery; they do not remove features from the final target.
+Updated 2026-10-21. The user's target is donut-paseo's useful workflow completeness,
+with selective adoption rather than an identical port. OpenCodex and DeepSeek
+Harness are the current provider scope; Kimi and GLM are excluded. Other providers
+need an actual use case before inclusion. Milestones sequence delivery within
+this scope.
 There is no overall readiness percentage. A visible control, protocol schema or
 passing synthetic test does not establish a complete production workflow.
 
@@ -28,7 +31,7 @@ Paseo providers.
 | Add a project, open an existing directory, create an isolated or shared workspace | `screens/new-workspace-screen.tsx`, `e2e/browser/new-workspace.spec.ts` | **Partial, locally verified**: durable per-Host catalog, existing folders, main/linked Git status, saved-cwd sessions and pinned-base independent worktree/new-branch creation. Selected subdirectory, window reopen, one-attempt dispatch, retained failure, source identity and independent edits covered. Existing local-branch checkout now verifies tip/occupancy, cross-store guard, cancelled awaiter and native reopen/apply/session cwd ([evidence](verification/2026-10-21-existing-worktrees.md)). Missing worktree removal/archive, setup scripts, external Git fencing and supervised recovery of interrupted Git; [catalog](verification/2026-10-20-workspaces.md), [creation](verification/2026-10-20-worktree-creation.md). |
 | Navigate many workspaces and tabs; rename, pin and preserve layout | `screens/workspace/workspace-tab-model.ts`, `e2e/browser/sidebar-workspace-pin-shortcut.spec.ts` | **Partial, locally verified** durable local workspace pins, independent of catalog pagination; native same-path Host separation, reopen, unpin preservation and checked quick-use verified ([evidence](verification/2026-10-20-workspace-pins.md)). Missing workspace tabs/layout, rename, pin shortcuts, drag ordering and restored selection; the flat session directory is still not equivalent. |
 | Keep unsent text across session switches and desktop replacement | `stores/draft-store/persistence.ts`, `stores/draft-store/state.ts`, `stores/draft-store/draft-keys.ts` | **Partial, locally verified** private revisioned session drafts, exact multiline/Unicode restoration, concurrent-window conflict handling, successful-send clearing and conservative pending-send recovery. Normal close waits for coalesced writes. Missing options/media/question drafts, pre-creation drafts and restored selection; earlier Host incarnations use CLI recovery. [Evidence](verification/2026-10-20-session-drafts.md). |
-| Create, reopen and continue sessions with the installed provider configuration | `docs/providers.md`, `messages.ts` provider/session schemas | **Partial, locally verified** for covered OpenCodex and DeepSeek workflows. Missing full provider catalog/selection, account setup and equivalent support for other reference providers. |
+| Create, reopen and continue sessions with the installed provider configuration | `docs/providers.md`, `messages.ts` provider/session schemas | **Partial, locally verified** for covered OpenCodex and DeepSeek workflows. Missing account setup and remaining workflows for these providers. Other reference providers are not a current acceptance prerequisite; Kimi/GLM are out of scope. |
 | Choose model/reasoning and provider-specific options | `e2e/browser/agent-profile-modeless-preferences.spec.ts` | **Partial, locally verified** model/effort controls for Codex and ACP. ACP v1 advertised session modes are also locally verified, including active changes, provider updates and archive/resume ([evidence](verification/2026-10-21-acp-modes.md)). Missing profiles, permission presets, v2 negotiation and workspace defaults. |
 | Send, stop, steer an active turn, queue input and recover ambiguous outcomes | `docs/providers.md` active-turn steering contract, `e2e/browser/permission-steer.real.spec.ts` | **Partial, locally verified** send/stop with explicit ACP stop reasons plus explicit Codex same-turn follow-up, durable draft/operation identity, exact acknowledgement and no new-turn fallback ([evidence](verification/2026-10-20-active-turn-follow-ups.md)). Real OpenCodex receipt, same-turn user item and final response verified. [Host-owned Stop progress](verification/2026-10-21-stop-progress.md) now separately gates acknowledgement and exact-turn settlement, with native explicit retry and other-session isolation. DeepSeek ACP follow-up is explicitly unsupported; cross-provider queues, cancellation of unread steers and permission-clear semantics remain open. |
 | Inspect live and saved Markdown, tools, images, supplied diffs and unknown blocks | `e2e/browser/paseo-tool-call-details.codex.real.spec.ts`, `agent-tab-image-stability.spec.ts` | **Partial, locally verified** for covered content; ACP tool defaults, exact patch semantics, name/kind/location details and retained expansion/copy now have [separate acceptance](verification/2026-10-21-acp-tools.md); local image selection/send has [separate evidence](verification/2026-10-21-image-attachments.md); native clipboard image drafts/reopen/send and refusal have [separate acceptance](verification/2026-10-21-clipboard-images.md); explicit conversation file/line navigation now has [separate acceptance](verification/2026-10-21-file-navigation.md). Remote upload, full-size media, Mermaid and complete content/sandbox limits remain open. |
@@ -189,3 +192,11 @@ window replacement and Host rename/reorder. Offline/missing endpoints, explicit
 conflict/save-failure handling and normal close have [local evidence](verification/2026-10-21-preferred-host.md).
 Session/scroll restoration, editable registry and remote connections remain open.
 Scoped chronological review reaches 203 (`59967aad8`); 204 (`04d51fbe1`) is next.
+
+
+Cross-Host directory filters (2026-10-21): provider Archived/Sessions membership,
+exact workspace and title searches now share bounded provider queries in the CLI
+and native All sessions view. Source opening preserves archive membership even
+when runtime status is idle, with explicit restore and exact draft preservation.
+ACP archive listing remains unsupported and visible; see [acceptance](verification/2026-10-21-directory-filters.md).
+Scoped review reaches 207 (`5807f62f1`); next is 208 (`db87f331f`).

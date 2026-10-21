@@ -9,12 +9,14 @@ pub(super) struct State {
     pub active: bool,
     groups: Vec<Group>,
     search: Entity<InputState>,
+    workspace: Entity<InputState>,
     query: Query,
     busy: bool,
     paging: Option<usize>,
     filter: Option<usize>,
     error: Option<String>,
     _subscription: Subscription,
+    _workspace_subscription: Subscription,
 }
 
 impl State {
@@ -27,16 +29,27 @@ impl State {
                 this.refresh_sessions(window, cx);
             }
         });
+        let workspace = cx.new(|cx| {
+            InputState::new(window, cx).placeholder("Exact workspace directory (optional)")
+        });
+        let workspace_subscription =
+            cx.subscribe_in(&workspace, window, |this, _, event, window, cx| {
+                if matches!(event, InputEvent::PressEnter { .. }) {
+                    this.refresh_sessions(window, cx);
+                }
+            });
         Self {
             active: false,
             groups: Vec::new(),
             search,
+            workspace,
             query: Query::default(),
             busy: false,
             paging: None,
             filter: None,
             error: None,
             _subscription: subscription,
+            _workspace_subscription: workspace_subscription,
         }
     }
 }
@@ -57,13 +70,19 @@ impl Workbench {
     }
 
     fn refresh_sessions(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.filter_sessions(self.sessions.query.archived, window, cx);
+    }
+
+    fn filter_sessions(&mut self, archived: bool, window: &mut Window, cx: &mut Context<Self>) {
         if self.sessions.busy || self.sessions.paging.is_some() {
             return;
         }
         let search = self.sessions.search.read(cx).value().trim().to_owned();
+        let cwd = self.sessions.workspace.read(cx).value().trim().to_owned();
         let query = Query {
             search: (!search.is_empty()).then_some(search),
-            ..Query::default()
+            cwd: (!cwd.is_empty()).then_some(cwd),
+            archived,
         };
         if let Err(error) = query.validate() {
             self.sessions.error = Some(error.to_string());
@@ -153,17 +172,21 @@ impl Workbench {
             return;
         }
         let group = &self.sessions.groups[index];
-        if !group.can_open() {
-            return;
-        }
-        let host_id = group.host_id.expect("observed directory Host");
+        let source = match group.source(&id) {
+            Ok(source) => source,
+            Err(error) => {
+                self.sessions.error = Some(error.to_string());
+                cx.notify();
+                return;
+            }
+        };
         self.select(index, window, cx);
         self.slots[index]
             .view
             .as_ref()
             .expect("selected Host initialized")
             .update(cx, |view, cx| {
-                view.prepare_directory_session(host_id, id, window, cx)
+                view.prepare_directory_session(source, window, cx)
             });
     }
 
@@ -191,10 +214,13 @@ impl Workbench {
                 .child(div().flex_1().child(Input::new(&self.sessions.search)))
                 .child(Button::new("sessions-refresh").small().label(if self.sessions.busy { "Checking…" } else { "Search / Refresh" }).disabled(blocked).on_click(cx.listener(|this,_,window,cx|this.refresh_sessions(window,cx)))))
             .child(div().px_4().pb_2().text_sm().child("All configured Hosts · metadata only · 100 per page · refresh explicitly. Opening never resumes or sends a message."))
+            .child(div().px_4().pb_2().flex().items_center().gap_2()
+                .children([false,true].map(|archived| Button::new(if archived {"fleet-archived"}else{"fleet-unarchived"}).small().label(if archived {"Archived"}else{"Sessions"}).selected(self.sessions.query.archived==archived).disabled(blocked).on_click(cx.listener(move |this,_,window,cx|this.filter_sessions(archived,window,cx)))))
+                .child(div().flex_1().min_w_0().child(Input::new(&self.sessions.workspace))))
             .child(div().px_4().pb_2().flex().flex_wrap().gap_2()
                 .child(Button::new("sessions-all-hosts").small().ghost().label("All Hosts").selected(self.sessions.filter.is_none()).on_click(cx.listener(|this,_,_,cx|{this.sessions.filter=None;cx.notify();})))
                 .children(self.sessions.groups.iter().enumerate().map(|(index,group)|Button::new(("sessions-host-filter",index)).small().ghost().label(format!("{} · {}{}",group.endpoint.name,group.directory.threads.len(),if group.error.is_some(){" !"}else{""})).selected(self.sessions.filter==Some(index)).on_click(cx.listener(move|this,_,_,cx|{this.sessions.filter=Some(index);cx.notify();})))))
-            .child(div().px_4().pb_2().text_xs().child(format!("Applied title filter: {}", self.sessions.query.search.as_deref().unwrap_or("all titles"))))
+            .child(div().px_4().pb_2().text_xs().truncate().child(format!("Applied: {} · title: {} · workspace: {}", if self.sessions.query.archived {"Archived"}else{"Sessions"}, self.sessions.query.search.as_deref().unwrap_or("all titles"), self.sessions.query.cwd.as_deref().unwrap_or("all directories"))))
             .children(self.sessions.error.iter().map(|error| div().px_4().text_color(cx.theme().danger).child(error.clone())))
             .child(uniform_list("fleet-sessions", rows.len(), cx.processor(move |this, range: std::ops::Range<usize>, _, cx| {
                 range.map(|row| {

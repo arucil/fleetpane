@@ -21,6 +21,15 @@ pub struct Report {
     pub error: Option<String>,
 }
 
+/// An observed source includes provider archive membership, independently of
+/// runtime status. Opening history must retain that membership until restored.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Source {
+    pub host_id: Uuid,
+    pub thread_id: String,
+    pub archived: bool,
+}
+
 /// A failed refresh retains rows only for the same query and marks them stale.
 pub struct Group {
     pub endpoint: Endpoint,
@@ -62,6 +71,19 @@ impl Group {
 
     pub fn can_open(&self) -> bool {
         self.host_id.is_some() && self.error.is_none()
+    }
+
+    pub fn source(&self, id: &str) -> Result<Source, Error> {
+        if !self.can_open() || !self.directory.threads.iter().any(|thread| thread.id == id) {
+            return Err(Error::Input(
+                "Session is not in the current observed directory; refresh before opening".into(),
+            ));
+        }
+        Ok(Source {
+            host_id: self.host_id.expect("fresh observed directory has a Host"),
+            thread_id: id.to_owned(),
+            archived: self.directory.query.archived,
+        })
     }
 }
 
@@ -349,5 +371,57 @@ mod tests {
         g.apply(&next, Ok(observation(host, "second", None)));
         assert_eq!(g.directory.threads.len(), 2);
         assert!(g.can_open());
+    }
+
+    #[test]
+    fn source_preserves_archive_membership_even_with_idle_runtime_status() {
+        let mut g = group();
+        let host = Uuid::new_v4();
+        let request = PageRequest {
+            query: Query {
+                archived: true,
+                cwd: Some("/synthetic".into()),
+                ..Query::default()
+            },
+            cursor: None,
+        };
+        g.apply(&request, Ok(observation(host, "saved", None)));
+        assert_eq!(
+            g.source("saved").unwrap(),
+            Source {
+                host_id: host,
+                thread_id: "saved".into(),
+                archived: true
+            }
+        );
+        assert!(g.source("absent").is_err());
+        g.apply(&request, Err(Error::Transport("offline".into())));
+        assert!(g.source("saved").is_err());
+        g.apply(
+            &PageRequest::default(),
+            Ok(observation(host, "saved", None)),
+        );
+        assert!(!g.source("saved").unwrap().archived);
+    }
+
+    #[test]
+    fn switching_archive_query_never_reuses_rows_or_cursors_on_failure() {
+        let mut g = group();
+        g.apply(
+            &PageRequest::default(),
+            Ok(observation(Uuid::new_v4(), "active", Some("active-page"))),
+        );
+        let archived = PageRequest {
+            query: Query {
+                archived: true,
+                ..Query::default()
+            },
+            cursor: None,
+        };
+        g.apply(&archived, Err(Error::Transport("unavailable".into())));
+        assert!(g.directory.threads.is_empty());
+        assert!(g.directory.next().is_none());
+        assert!(!g.can_open());
+        assert_eq!(g.directory.query, archived.query);
     }
 }

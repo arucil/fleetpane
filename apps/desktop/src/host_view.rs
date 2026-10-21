@@ -62,7 +62,7 @@ pub struct HostView {
     connection: Option<Connection>,
     snapshot: Option<Snapshot>,
     attention_target: Option<fleetpane_session::attention::Item>,
-    directory_target: Option<(Uuid, String)>,
+    directory_target: Option<fleetpane_session::fleet_directory::Source>,
     directory: Directory,
     directory_changed: bool,
     models: Catalog,
@@ -870,16 +870,19 @@ impl HostView {
                     *old = metadata;
                 }
                 let directory_open = matches!(command, Command::Inspect { resume: false, .. })
-                    && self.directory_target.as_ref().is_some_and(|(host_id, id)| {
-                        id == &thread.id
+                    && self.directory_target.as_ref().is_some_and(|source| {
+                        source.thread_id == thread.id
                             && self
                                 .snapshot
                                 .as_ref()
-                                .is_some_and(|state| state.host_id == *host_id)
+                                .is_some_and(|state| state.host_id == source.host_id)
                     });
-                self.selected_archived = if directory_open
-                    || matches!(command, Command::Fork { .. } | Command::Create { .. })
-                {
+                self.selected_archived = if directory_open {
+                    self.directory_target
+                        .as_ref()
+                        .expect("matching directory source")
+                        .archived
+                } else if matches!(command, Command::Fork { .. } | Command::Create { .. }) {
                     false
                 } else if self.directory.threads.iter().any(|row| row.id == thread.id) {
                     self.directory.query.archived

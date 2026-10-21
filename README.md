@@ -4,7 +4,9 @@ A native Rust foundation for managing fleets of coding-agent sessions.
 
 Fleetpane is an independent project. The first implementation includes a GPUI Kit
 session directory, a read-only Paseo CLI, and Host-backed Codex/DeepSeek ACP conversations.
-The target is donut-paseo functional completeness; [the parity inventory](docs/parity.md)
+The target is donut-paseo's useful workflows with OpenCodex and DeepSeek Harness,
+not an identical port or every provider. Kimi/GLM are outside the current scope;
+[the parity inventory](docs/parity.md)
 records what remains. This prototype is not a replacement release.
 The Unix Session Host keeps its provider connection alive across control-client replacement. These are
 foundations, not a usable replacement release. No performance gain is claimed.
@@ -14,6 +16,13 @@ See the [product requirements](docs/prd.md), [behavior status](docs/status.md), 
 The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
+
+**All sessions** can search titles across configured Hosts and filter by exact
+workspace directory or **Sessions / Archived** provider membership. CLI uses
+`fleetpane-host sessions CONFIG.json --archived [--cwd DIRECTORY] [--search TITLE]`.
+Opening archived history retains its original Host and read-only state until
+explicitly restored. DeepSeek's unsupported provider archive listing stays
+visible. [Verification](docs/verification/2026-10-21-directory-filters.md).
 
 Native conversation identities now keep turn status and item cards distinct,
 including provider IDs containing separators. Synthetic before/after pagination,

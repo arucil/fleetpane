@@ -22,10 +22,13 @@ Fleetpane 是面向大量并行编程 Agent 会话的原生桌面工作台。
 | 主要产品参考 | Paseo；选择性吸收 cmux、Conductor、Zed 的工作流设计 |
 | 桌面工具包 | 已选择 GPUI Kit；当前固定 0.7.3，输入法、终端和可访问性仍须分别验收 |
 | 首版平台 | 工作假设：Linux 桌面和 Linux headless host 优先；macOS、Windows 保留架构边界，另行验收 |
-| 首版 Agent | 优先验证用户常用的 OpenCodex 和 DeepSeek Harness；完整 provider 覆盖仍按参考行为逐项补齐 |
-| 当前实现 | 共享 CLI／GPUI Kit 会话命令、Unix Session Host、同窗口本地多 Host、Codex 和 DeepSeek ACP、模型选项、富内容与有界历史分页已有局部证据。自有控制 daemon、持久恢复、终端、工作区开发工具和完整 provider 覆盖尚未完成，详见行为状态表 |
+| 首版 Agent | OpenCodex 和 DeepSeek Harness；不要求覆盖 Paseo 的全部 provider，Kimi、GLM 不在当前适配范围 |
+| 当前实现 | 共享 CLI／GPUI Kit 会话命令、Unix Session Host、同窗口本地多 Host、Codex 和 DeepSeek ACP、模型选项、富内容与有界历史分页已有局部证据；各工作流及剩余缺口以行为状态表为准 |
 
 用户已确认 Rust、GPUI Kit、Session Host 和 donut-paseo 功能完成度目标。
+2026-10-21 补充范围：以日常工作流完成度为目标，选择性借鉴 Paseo，
+无需一模一样移植；优先做好 OpenCodex 和 DeepSeek Harness，不适配 Kimi、GLM。
+其他 provider 只有出现实际需求时再单独评估，不作为当前替换验收的前置条件。
 平台验收范围、下文实施优先级及性能数值仍是产品提案；编写需求不启动真实会话迁移或运行时升级。
 
 ## 2. 用户、问题和成功标准
@@ -74,7 +77,7 @@ Fleetpane 是面向大量并行编程 Agent 会话的原生桌面工作台。
 公开文档和本地 fork 可能不同，移植时应逐项核对。
 
 不复制竞品的私有实现、视觉资产或未经许可证审查的代码。
-首版可分阶段交付，最终功能完成度目标不因此缩减。参考中尚未移植的能力必须明确列出，
+首版可分阶段交付，用户确认范围内的功能完成度目标不因此缩减。参考中有用但尚未移植的能力必须明确列出，
 不能用一条会话链路通过代替整个产品完成；竞品的性能宣传也不是 Fleetpane 的基准证据。
 
 ## 4. 核心概念与状态
@@ -300,7 +303,7 @@ Paseo CLI / SDK / 插件也不自动成为 Fleetpane 兼容接口；不支持的
 
 | ID | 优先级 | 内容和要点 | 进入条件 / 验收边界 |
 | --- | --- | --- | --- |
-| EXT-01 | P1 | Claude Code 和 ACP provider；能力矩阵与原生认证 | 复用 Host 生命周期合同，但每个 provider 单独验证中断、历史、审批和故障行为 |
+| EXT-01 | 按需 | OpenCodex / DeepSeek Harness 之外的 provider；能力矩阵与原生认证 | 有实际需求后独立评估；Kimi、GLM 不在当前范围。每个新 provider 单独验证中断、历史、审批和故障行为 |
 | EXT-02 | P1 | macOS 桌面和 Host 产品验收；多主机聚合目录 | 编译成功不等于产品支持；验证输入、通知、服务生命周期和账号边界 |
 | EXT-03 | P1 | 正文全文搜索、历史锚点和上下文分叉 | 结果能跳转原条目；区分复制摘要 / 历史与 provider 原生 fork；不隐式回滚文件 |
 | EXT-04 | P1 | Diff 行评论、可选文件编辑和审查反馈到 Agent | 反馈绑定路径、基线和行范围；编辑冲突可见；不把整个共享目录的修改都认作单一会话产物 |
@@ -461,7 +464,7 @@ provider 版本和进程清单；保留原始样本、p50 / p95 / p99、内存�
 | M1：运行内核纵向切片 | 独立 Host、Codex adapter、控制 daemon、统一 CLI 命令、操作身份、审批及交接协议 | 不依赖 GUI，完成创建 → 执行 → 审批 → 升级控制端 → 同一 turn 完成；通过 FLOW-04 / 05 的 fixture 和隔离真机验证 |
 | M2：桌面工作区闭环 | 原生目录和会话、草稿、时间线、待处理队列、worktree、文件、终端、Diff、布局与基础设置 | FLOW-01 / 02 / 03 / 08 / 10 / 11 通过；W1 可测；现有 Paseo 仍可独立使用 |
 | M3：日常使用候选版 | SSH、基础搜索、版本化持久化、导入预览 / 小范围迁移、安装和更新流程、故障恢复 | 所有 P0 和 FLOW 场景具备证据；W0–W3 性能门槛与稳定性通过；从参考工具迁移一批空闲会话后可日常工作 |
-| M4：扩大覆盖 | 交付 P1 工作包：其他 provider、macOS、多主机、编辑 / Git / 审查、自动化、profiles / skills / MCP、冷归档与用量视图 | 每项扩展独立验收；新 provider 不能借用 Codex 的通过结果声明兼容 |
+| M4：扩大覆盖 | 交付范围内 P1 工作包：macOS、多主机、编辑 / Git / 审查、自动化、profiles / skills / MCP、冷归档与用量视图；其他 provider 按需评估 | 每项扩展独立验收；新 provider 不能借用 Codex 的通过结果声明兼容 |
 | 后续评估 | 交付 P2 工作包：Windows、跨设备、relay、浏览器、语音、复杂插件和外部事件集成 | 核心稳定，确认实际需求与维护成本后排期 |
 
 代码边界建议为 protocol / domain、provider adapters、session host、control daemon、
@@ -520,7 +523,7 @@ client、CLI 和 desktop。具体 crate 拆分按纵向切片演进，不为了�
 
 | 项目 | 当前提案 / 风险 | 收敛点 |
 | --- | --- | --- |
-| 首版平台与 Agent | Linux + Codex 为工作假设 | M0 冻结；若调整，重排产品验收和 provider 依赖 |
+| 首版平台与 Agent | Linux 优先；Agent 为 OpenCodex 和 DeepSeek Harness，Kimi、GLM 不在范围内 | 平台仍需 M0 验收；新 provider 按实际需求独立评估 |
 | GPUI 与终端 | toolkit 不自动提供完整终端、输入法或可访问性 | M0 原生原型与可选方案比较，记录 ADR |
 | Host 粒度与资源 | 每会话一进程可能昂贵；全部集中又扩大故障影响 | 基于进程成本、账号边界、并发和故障隔离实验决定 |
 | 原生协议演进 | Codex app-server 仍有实验性接口；不同版本能力不同 | 固定支持版本和升级兼容矩阵；探针失败时拒绝不兼容操作 |

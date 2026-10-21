@@ -1,0 +1,85 @@
+{
+  "base_head": "bd31dbb645e6337f560058c6f6c16921a46bb517",
+  "desktop_sha256": "3369fb93545728df80ae1387609211dd85449c58aa60d662b0fbd38062b5fd06",
+  "host_sha256": "a639b6f13d30cc49727f2098720d9bb7367e3c3f67ec7e7c32d4bb59ceb306aa",
+  "native": {
+    "archive_pages_b": [
+      100,
+      200,
+      237
+    ],
+    "workspace_pages_b": [
+      100,
+      137
+    ],
+    "history_copy": "Archived history from Codex B 000",
+    "history_copy_bytes": 33,
+    "draft": "B 归档草稿\n保持原会话 archived-000",
+    "draft_bytes": 43,
+    "window_sizes": [
+      [
+        1100,
+        720
+      ],
+      [
+        900,
+        560
+      ]
+    ],
+    "acp_snapshot_preserved_except_query_sequence": true,
+    "restore_mutations_b": 1,
+    "no_turn_send_or_answer": true,
+    "first_window_normal_exit_code": 0,
+    "reopened_draft_checked": true,
+    "second_window_normal_exit_code": 0,
+    "final_close_preserved_snapshots_except_sequence": true,
+    "restore_method": "thread/unarchive",
+    "restore_thread": "archived-000"
+  },
+  "checks": {
+    "tests": {
+      "sha256": "68687f4930af7ca5f06c9838b86025c4e04eedb7e32d46462a8b756587dc30d2",
+      "tail": "passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n   Doc-tests fleetpane_session\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n"
+    },
+    "clippy": {
+      "sha256": "c19f69e8c4a7b44e2907abeb7bbac99527c23f133f4bad8c87305fb5a4c2e5b9",
+      "tail": " fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)\n    Checking fleetpane-host v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/host)\n    Finished `dev` profile [unoptimized] target(s) in 5.72s\n"
+    },
+    "desktop-build": {
+      "sha256": "43e8b50f44656550f2f66559e43003d3179b48dc383d2fbe7d80c7d311e7559f",
+      "tail": "ane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)\n   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)\n    Finished `dev` profile [unoptimized] target(s) in 24.25s\n"
+    },
+    "desktop-tests": {
+      "sha256": "8ebbfed67cb56bc1d9d8eef915699a990b57786a8af0ebcfe0d9921bd420ac77",
+      "tail": "ded ... ok\ntest host_view::row_changes::tests::streaming_tail_updates_one_card_without_touching_1200_retained_cards ... ok\n\ntest result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s\n\n"
+    },
+    "desktop-clippy": {
+      "sha256": "b44d1d36aea2f4564ba9e5f377b527f44a948e71a884525bdd593c8c685e4353",
+      "tail": "    Checking fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)\n    Finished `dev` profile [unoptimized] target(s) in 5.98s\n"
+    },
+    "python-tests": {
+      "sha256": "40f8f5883f5c2e20fe96049e1808752514786e07682d63c09e45624e8ab32216",
+      "tail": "...............\n----------------------------------------------------------------------\nRan 15 tests in 1.986s\n\nOK\n"
+    },
+    "acp-review": {
+      "sha256": "42cae969dafa018475d8680d419953a9b2c531b5c3301a803a31c3a0ef71f525",
+      "tail": "act_choices_and_stale_controller_fencing\": \"PASS\", \"other_session_and_late_answer_isolation\": \"PASS\", \"review_does_not_rewrite_tools_or_execute_operations\": \"PASS\", \"archive_without_permission_or_prompt_replay\": \"PASS\"}\n"
+    },
+    "host-choice": {
+      "sha256": "16c6fa532ddf6651ca6c4d956bada530d77dad1d5c71fdcc730da015e8042707",
+      "tail": "PASS: exact Unicode Host choice, stale write/refusal, failed commit, v10 upgrade and corruption preservation; no Host started\n"
+    },
+    "directory": {
+      "sha256": "0ef031512a0e366ed15b68d80d0ff504149b4268adf75da300543979f2e35199",
+      "tail": "{\"provider\": \"synthetic\", \"paged_sessions\": 237, \"global_title_workspace_filters\": \"PASS\", \"rename_readback_notification_errors_fencing\": \"PASS\", \"same_host_and_provider\": true}\n"
+    }
+  },
+  "source_sha256": {
+    "apps/desktop/src/workbench/sessions.rs": "2d3883b6f9c7e89588539514bd8ce42fb5a778783596f0a1e5d1da6c986c133a",
+    "apps/desktop/src/host_view.rs": "a3de84de331bee714904a1d696af47481a0babab99cb707f76df3ffa71d01f30",
+    "apps/desktop/src/host_view/directory_source.rs": "e1c744c5c4d1f38f4e6f1611167f12e3f28ff44d8e5a706cced42fc910784fd4",
+    "apps/host/src/main.rs": "6b68ca89e5165280691b3bbab8b8a98b3e80652603c1bb3ba68720f7d92d1cf2",
+    "crates/session/src/fleet_directory.rs": "3ef9f12d6c0195ce14696e06a313ef10ff1dffef55a97ffdbe43de4189ade549",
+    "scripts/fleet-directory-smoke.py": "660d848c2d82d3a35c760a8f266b06ed88a3d257ef088e81f046d9d8740b7082"
+  }
+}

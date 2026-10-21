@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 203,
-    "last_revision": "59967aad87dc96e7602611e2ede402103c6bea5f",
-    "next_revision": "04d51fbe100e4b303039053aa55f992a53322502",
-    "next_ordinal": 204
+    "last_ordinal": 207,
+    "last_revision": "5807f62f1a824d0d07b54a4775c009f5afe81a13",
+    "next_revision": "db87f331fbf2d8e735095f9c1bac2c0e5fc8110e",
+    "next_ordinal": 208
   },
   "entries": [
     {
@@ -3072,6 +3072,58 @@
       ],
       "finding": "Seven selected diffs: role-indexed primary/background accessors avoid duplicate connections; typed connection transitions and source-specific unavailable results; selected and idle provider-model scheduling with cleanup; local active-Host preference remains explicit and action sources are logged. Fleetpane retains one lazy view per endpoint and uses configuration-local revisioned selection rather than adopting mobile timers or prompt/path analytics. Other routes/settings/session callers had supplementary hunk inspection only. Lock payload, tooling, plan and Git Diff not audited.",
       "fleetpane_action": "preferred-host"
+    },
+    {
+      "ordinal": 204,
+      "revision": "04d51fbe100e4b303039053aa55f992a53322502",
+      "date": "2025-11-26T17:26:25+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/app/src/hooks/use-daemon-session.ts",
+        "packages/app/src/components/create-agent-modal.tsx"
+      ],
+      "finding": "Selected diffs rename visible daemon wording and registry labels to Host. Fleetpane retains its distinction between a configured Host and an independent Session Host. No terminology-only rewrite of internal runtime names is needed.",
+      "fleetpane_action": "directory-filters"
+    },
+    {
+      "ordinal": 205,
+      "revision": "3524b0facbfeb0c90ab355a0b430485c75536dac",
+      "date": "2025-11-26T17:39:07+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "finding": "Settings removes Set Active and active-card badges. Restart actions use the card-specific connection. Fleetpane retains a local navigation choice, without treating it as mutation authority or a global action source.",
+      "fleetpane_action": "directory-filters"
+    },
+    {
+      "ordinal": 206,
+      "revision": "e6d2998904c95918b0fe453268e102be0f7a26d2",
+      "date": "2025-11-26T17:51:25+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/contexts/daemon-registry-context.tsx"
+      ],
+      "finding": "Registry removes defaultDaemon/isDefault normalization; active fallback changes to the first registry entry. Fleetpane keeps validated configuration and explicit endpoint identity. It does not invent an endpoint after deleting the final configured Host.",
+      "fleetpane_action": "directory-filters"
+    },
+    {
+      "ordinal": 207,
+      "revision": "5807f62f1a824d0d07b54a4775c009f5afe81a13",
+      "date": "2025-11-26T18:04:40+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Creation/resume navigation captures the requested server identity rather than the later active selection. Aggregation removes active-server dependence but still guesses a fallback registry source. Fleetpane keeps source-specific actions and never assigns rows to a guessed Host. This batch adds archive/workspace filters and retains observed archive membership on exact source opening.",
+      "fleetpane_action": "directory-filters"
     }
   ],
   "workflow_status": {
@@ -3094,12 +3146,14 @@
     "agent-progress": "partial; shared snapshot-backed running/waiting/Stop/sync/unknown/archived states and four regression tests; Linux native working, ack-before-completion, independent permission decline, 38-byte draft switch/reopen and stable Host/provider verified with fixtures. Stale/fault semantics unit-only; no new external provider or performance acceptance.",
     "streamed-reasoning": "partial; three typed indexed Codex deltas, history per-item boundaries and retained native card updates verified locally with regressions and gated synthetic provider. Exact Copy/reload, Stop and independent permission covered; external model and non-Linux native acceptance remain open.",
     "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open.",
-    "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch."
+    "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch.",
+    "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
     "Dependency payloads, full prompt text and historical agent instruction compliance are not audited",
     "Source review is not runtime acceptance",
-    "Existing Rust Session Host architecture and user-deferred Git Diff work remain in effect"
+    "Existing Rust Session Host architecture and user-deferred Git Diff work remain in effect",
+    "Selective workflow adoption: current providers are OpenCodex and DeepSeek Harness; Kimi/GLM are excluded. Other providers need an actual use case, not reference parity alone."
   ]
 }

@@ -31,7 +31,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host attention CONFIG.json: read-only pending approvals/questions across configured Hosts; unavailable Hosts remain explicit. No takeover, answer, resume or timeout decision."
         );
         println!(
-            "fleetpane-host sessions CONFIG.json [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]: observe 100-session metadata pages across configured Hosts without acquiring control. Failed Hosts have explicit errors in the JSON report."
+            "fleetpane-host sessions CONFIG.json [--archived] [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]: observe 100-session metadata pages across configured Hosts without acquiring control. Failed Hosts have explicit errors in the JSON report."
         );
         println!(
             "fleetpane-host route CONFIG.json GROUP: read-only ready-Host recommendation in an explicit route group; never creates or claims."
@@ -743,27 +743,29 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             let mut host = None;
             let mut cursor = None;
             let mut host_id = None;
-            for option in args[2..].chunks(2) {
-                match option {
-                    [flag, text] if flag == "--search" && query.search.is_none() => {
-                        query.search = Some(text.clone())
-                    }
-                    [flag, path] if flag == "--cwd" && query.cwd.is_none() => {
-                        query.cwd = Some(path.clone())
-                    }
-                    [flag, name] if flag == "--host" && host.is_none() => host = Some(name.clone()),
-                    [flag, value] if flag == "--cursor" && cursor.is_none() => {
-                        cursor = Some(value.clone())
-                    }
-                    [flag, value] if flag == "--host-id" && host_id.is_none() => {
-                        host_id = Some(value.parse::<uuid::Uuid>()?)
-                    }
-                    _ => {
-                        return Err(
-                            "sessions CONFIG [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]".into(),
-                        );
-                    }
+            let mut options = args[2..].iter();
+            while let Some(flag) = options.next() {
+                if flag == "--archived" && !query.archived {
+                    query.archived = true;
+                    continue;
                 }
+                let destination = match flag.as_str() {
+                    "--search" if query.search.is_none() => &mut query.search,
+                    "--cwd" if query.cwd.is_none() => &mut query.cwd,
+                    "--host" if host.is_none() => &mut host,
+                    "--cursor" if cursor.is_none() => &mut cursor,
+                    "--host-id" if host_id.is_none() => {
+                        host_id = Some(options.next().ok_or("--host-id needs a UUID")?.parse::<uuid::Uuid>()?);
+                        continue;
+                    }
+                    _ => return Err("Unknown or duplicate sessions flag; use --archived, --search TITLE, --cwd ABSOLUTE_DIRECTORY, --host NAME, --cursor CURSOR or --host-id UUID".into()),
+                };
+                *destination = Some(
+                    options
+                        .next()
+                        .ok_or("sessions filter flag needs a value")?
+                        .clone(),
+                );
             }
             if cursor.is_some() && (host.is_none() || host_id.is_none())
                 || host_id.is_some() && host.is_none()
@@ -773,6 +775,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                         .into(),
                 );
             }
+            query.validate()?;
             let reports = if let Some(name) = host {
                 let endpoint = configuration
                     .hosts

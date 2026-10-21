@@ -5,6 +5,10 @@
 后续以本文件和[逐提交审查记录](paseo-replay.json)为入口；
 [近期增量指南](paseo-history.md)保留作补充，不能代替从头审查。
 
+2026-10-21 用户明确无需一模一样移植。沿历史发现有用工作流，结合 Fleetpane
+架构取舍；OpenCodex 和 DeepSeek Harness 优先，Kimi、GLM 不在当前适配范围。
+审查到 provider 专属提交时记录取舍，不把全部 provider 覆盖作为替换门槛。
+
 ## 起点、顺序和当前进度
 
 真正的共同根提交是
@@ -25,8 +29,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 203 个提交 `59967aad8`（提交日期 2025-11-26；本地审查 2026-10-21）。**
-下一条是第 204 个 `04d51fbe1`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 207 个提交 `5807f62f1`（提交日期 2025-11-26；本地审查 2026-10-21）。**
+下一条是第 208 个 `db87f331f`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6187 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1007,3 +1011,27 @@ Fleetpane 已有 endpoint 独立的惰性 view、显式接管及跨 Host 目录�
 [单独证据](../verification/2026-10-21-preferred-host.md)。不复制 mobile timer、全量
 模型预取或携带路径/内容的 analytics；不声称完成 registry、远程连接或跨 Host 迁移。
 前 202 条记录保持不变。下一条为 **204 · `04d51fbe100e4b303039053aa55f992a53322502`**。
+
+
+## 第 204–207 条：显示名称与明确的 Host 来源
+
+[限定路径回执](../verification/assets/paseo-replay/directory-filters/receipt.json)
+记录八个选定 diff（共 28,256 bytes）的路径、完整 SHA 与哈希；
+其他路径保持未完整审查，前 203 条记录不变，没有运行历史版本。
+
+- **204 · `04d51fbe1`**：创建、连接错误和 registry 的显示用语改为 Host。
+  Fleetpane 保留配置 Host 与独立 Session Host 的含义，不因此改名全部内部对象。
+- **205 · `3524b0fac`**：settings 去除 Set Active 和高亮；重启使用卡片对应连接。
+  保留 Fleetpane 本地导航偏好，导航选择不代表全局执行来源或控制权。
+- **206 · `e6d299890`**：registry 去除 defaultDaemon/isDefault，fallback 改为首项。
+  仍会在移除最后一个 Host 后生成本机地址；Fleetpane 不复制隐式 endpoint 或吞错。
+- **207 · `5807f62f1`**：创建/恢复捕获请求时的 server ID，用于完成后的导航；
+  聚合移除 active 来源依赖，但无分组时仍猜测首项。Fleetpane 按实际来源打开，
+  不把其他 Host 的相同 thread ID 归到当前选项。
+
+这一轮补齐全局目录的归档/工作目录筛选，并把来源中的归档成员身份一路保留到
+只读历史和显式恢复；这与 provider 报告的 runtime status 分开。
+[独立证据](../verification/2026-10-21-directory-filters.md)覆盖共享查询、分页、
+Linux 原生筛选/打开/恢复、中文草稿与另一 Host 的原审批。
+不因这组历史新增 provider 适配；Kimi、GLM 按用户范围排除。
+下一条为 **208 · `db87f331fbf2d8e735095f9c1bac2c0e5fc8110e`**。
