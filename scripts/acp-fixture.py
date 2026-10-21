@@ -10,6 +10,7 @@ import threading
 import time
 import uuid
 from pathlib import Path
+from fixture_files import publish_json
 from resource_fixture import blocks as resource_blocks
 
 lock = threading.RLock()
@@ -326,8 +327,8 @@ def prompt(message):
             pending["ready"].wait()
             with lock:
                 permissions.pop(key)
-                Path(f"review-{identity}-{index}-answer.json").write_text(
-                    json.dumps(pending["result"])
+                publish_json(
+                    Path(f"review-{identity}-{index}-answer.json"), pending["result"]
                 )
             if stop.is_set():
                 break
