@@ -1,0 +1,22 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 4.83s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 1 test
+test appearance::tests::first_launch_creates_missing_appearance_ancestors_privately ... FAILED
+
+failures:
+
+---- appearance::tests::first_launch_creates_missing_appearance_ancestors_privately stdout ----
+
+thread 'appearance::tests::first_launch_creates_missing_appearance_ancestors_privately' (1242801) panicked at crates/session/src/appearance.rs:132:58:
+called `Result::unwrap()` on an `Err` value: Input("Local state: No such file or directory (os error 2)")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    appearance::tests::first_launch_creates_missing_appearance_ancestors_privately
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 177 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p fleetpane-session --lib`

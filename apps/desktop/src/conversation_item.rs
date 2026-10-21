@@ -31,6 +31,26 @@ pub(super) struct Row {
 }
 
 impl Row {
+    fn failed(&self) -> bool {
+        self.error.is_some()
+            || match &self.content {
+                Content::Command(command) => {
+                    command.status == "failed" || command.exit_code.is_some_and(|exit| exit != 0)
+                }
+                Content::Mcp(call) => {
+                    call.status == "failed"
+                        || call.error.is_some()
+                        || call
+                            .result
+                            .as_ref()
+                            .is_some_and(|result| result.is_error == Some(true))
+                }
+                Content::Tool(call) => call.status == "failed",
+                Content::Files(changes) => changes.status == "failed",
+                _ => false,
+            }
+    }
+
     pub fn conversation(thread: &fleetpane_session::Thread) -> Vec<Self> {
         let mut rows = Vec::new();
         for turn in &thread.turns {
@@ -391,32 +411,13 @@ impl ItemView {
         }
         Some(label)
     }
-
-    fn failed(&self) -> bool {
-        self.row.error.is_some()
-            || match &self.row.content {
-                Content::Command(command) => {
-                    command.status == "failed" || command.exit_code.is_some_and(|exit| exit != 0)
-                }
-                Content::Mcp(call) => {
-                    call.status == "failed"
-                        || call.error.is_some()
-                        || call
-                            .result
-                            .as_ref()
-                            .is_some_and(|result| result.is_error == Some(true))
-                }
-                Content::Files(changes) => changes.status == "failed",
-                _ => false,
-            }
-    }
 }
 
 impl Render for ItemView {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let copy = self.row.copy.clone();
         let status = self.status();
-        let failed = self.failed();
+        let failed = self.row.failed();
         let details_scroll = self.details_scroll.clone();
         let color = if failed {
             cx.theme().danger
@@ -711,6 +712,27 @@ mod tests {
     use super::*;
     use fleetpane_session::content::FileChange;
     use serde_json::json;
+
+    #[test]
+    fn tool_failures_use_the_same_error_presentation_as_codex() {
+        for (status, output, expected) in [
+            ("failed", json!(false), true),
+            ("failed", json!({"message":"Original error 中文"}), true),
+            ("completed", json!(false), false),
+            ("pending", Value::Null, false),
+            ("in_progress", json!(0), false),
+            ("future_status", Value::Null, false),
+        ] {
+            let source = json!({"id":"tool","type":"acpToolCall","call":{
+                "title":"Read settings","status":status,"rawOutput":output
+            }});
+            let item: Item = serde_json::from_value(source.clone()).unwrap();
+            let row = Row::item("thread", "turn", &item).unwrap();
+            assert_eq!(row.failed(), expected, "{status}: {output}");
+            let copied: Value = serde_json::from_str(&row.copy).unwrap();
+            assert_eq!(copied["call"], source["call"]);
+        }
+    }
 
     #[test]
     fn codex_patch_variants_parse_as_diff_files() {

@@ -4,7 +4,7 @@ use rusqlite::{Connection as Database, OpenFlags, TransactionBehavior};
 use std::{
     collections::HashMap,
     fs::OpenOptions,
-    os::unix::fs::{OpenOptionsExt, PermissionsExt},
+    os::unix::fs::{DirBuilderExt, OpenOptionsExt, PermissionsExt},
     path::PathBuf,
     sync::{Arc, LazyLock, Mutex, Weak},
     time::Duration,
@@ -63,6 +63,14 @@ impl Store {
     }
 
     fn queue(directory: PathBuf) -> Result<Arc<JobQueue<()>>, StorageError> {
+        // First launch may not have application/configuration ancestors yet.
+        // Create only missing parents privately; the final leaf and database
+        // still pass the existing non-symlink/private permission checks.
+        let parent = directory.parent().ok_or("store directory needs a parent")?;
+        std::fs::DirBuilder::new()
+            .recursive(true)
+            .mode(0o700)
+            .create(parent)?;
         fleetpane_runtime::unix::prepare_directory(&directory)?;
         let directory = std::fs::canonicalize(directory)?;
         let mut queues = QUEUES.lock().map_err(|_| "store queue registry poisoned")?;

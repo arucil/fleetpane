@@ -124,6 +124,57 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn first_launch_creates_missing_appearance_ancestors_privately() {
+        use std::os::unix::fs::PermissionsExt;
+        let root =
+            std::env::temp_dir().join(format!("fp-first-appearance-{}", uuid::Uuid::new_v4()));
+        std::fs::create_dir(&root).unwrap();
+        let directory = root.join("config/fleetpane/preferences");
+        let store = Store::open(directory.clone()).await.unwrap();
+        assert_eq!(store.appearance().await.unwrap(), Saved::default());
+        for path in [
+            root.join("config"),
+            root.join("config/fleetpane"),
+            directory,
+        ] {
+            assert_eq!(
+                std::fs::metadata(path).unwrap().permissions().mode() & 0o777,
+                0o700
+            );
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[tokio::test]
+    async fn first_launch_preserves_existing_parents_and_refuses_invalid_leaves() {
+        use std::os::unix::fs::{PermissionsExt, symlink};
+        let root =
+            std::env::temp_dir().join(format!("fp-first-appearance-{}", uuid::Uuid::new_v4()));
+        std::fs::create_dir(&root).unwrap();
+        std::fs::set_permissions(&root, std::fs::Permissions::from_mode(0o755)).unwrap();
+        let store = Store::open(root.join("fleetpane/preferences"))
+            .await
+            .unwrap();
+        assert_eq!(store.appearance().await.unwrap(), Saved::default());
+        assert_eq!(
+            std::fs::metadata(&root).unwrap().permissions().mode() & 0o777,
+            0o755
+        );
+        let public = root.join("public-leaf");
+        std::fs::create_dir(&public).unwrap();
+        std::fs::set_permissions(&public, std::fs::Permissions::from_mode(0o755)).unwrap();
+        assert!(Store::open(public).await.is_err());
+        let link = root.join("link");
+        symlink(root.join("fleetpane/preferences"), &link).unwrap();
+        assert!(Store::open(link).await.is_err());
+        let file = root.join("file");
+        std::fs::write(&file, b"keep").unwrap();
+        assert!(Store::open(file.join("preferences")).await.is_err());
+        assert_eq!(std::fs::read(file).unwrap(), b"keep");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[tokio::test]
     async fn persistence_conflicts_and_failed_commit_keep_the_last_saved_value() {
         let (root, store) = fixture().await;
         assert_eq!(store.appearance().await.unwrap(), Saved::default());

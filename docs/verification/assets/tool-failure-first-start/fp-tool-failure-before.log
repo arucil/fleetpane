@@ -1,0 +1,25 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 31.41s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-2b4a416202786742)
+
+running 1 test
+test conversation_item::tests::tool_failures_use_the_same_error_presentation_as_codex ... FAILED
+
+failures:
+
+---- conversation_item::tests::tool_failures_use_the_same_error_presentation_as_codex stdout ----
+
+thread 'conversation_item::tests::tool_failures_use_the_same_error_presentation_as_codex' (1211983) panicked at src/conversation_item.rs:730:13:
+assertion `left == right` failed: failed: false
+  left: false
+ right: true
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    conversation_item::tests::tool_failures_use_the_same_error_presentation_as_codex
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 27 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin fleetpane-desktop`

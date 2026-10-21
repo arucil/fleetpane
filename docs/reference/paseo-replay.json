@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 225,
-    "last_revision": "b97ae99b2b3a11db5b29d144c9b12232af6a737d",
-    "next_revision": "2c84447ec261b2e57e01c2de081d623c9dd9e507",
-    "next_ordinal": 226
+    "last_ordinal": 268,
+    "last_revision": "ad804cb1fe29424a63bb8ec4b85d36cf951a8445",
+    "next_revision": "27ec2b5c679096f76c7c9baad6dccefb48c81f20",
+    "next_ordinal": 269
   },
   "entries": [
     {
@@ -3381,6 +3381,559 @@
       ],
       "finding": "Android flavor and cleartext-LAN configuration; environment defaults seed a registry, while Test reports socket reasons. Fleetpane retains explicit validated local configuration and independent diagnostics; no Android or implicit endpoint port.",
       "fleetpane_action": "platform-specific-no-port"
+    },
+    {
+      "ordinal": 226,
+      "revision": "2c84447ec261b2e57e01c2de081d623c9dd9e507",
+      "date": "2025-11-28T10:10:31Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/stores/session-store.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Dictation processing begins before stop; same commit also replaces a client store and adds cancellable agent waits. Read selected diff sections, not the full 1,222-line commit. Keep explicit Host-owned Stop and shared command/wait boundaries; voice remains P2.",
+      "fleetpane_action": "retain-shared-commands-and-stop"
+    },
+    {
+      "ordinal": 227,
+      "revision": "1b019c4688dbb6b77d7923da024b27115a56b0f7",
+      "date": "2025-11-28T11:39:31+01:00",
+      "category": "platform-config",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/package.json",
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/server/package.json",
+        "packages/server/scripts/dev-runner.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Android command corrections and explicit Node child IPC restart. Do not port implicit personal endpoints or exit-delay restart: Rust Session Hosts retain provider ownership independently of desktop replacement.",
+      "fleetpane_action": "platform-specific-no-port"
+    },
+    {
+      "ordinal": 228,
+      "revision": "3dc517366dd98b5d7afb9d61f80279955a13df8c",
+      "date": "2025-11-28T12:48:21Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "MCP create/send now record user prompts before streaming. Fleetpane GUI/CLI already use the same typed send entry point and ACP durable user item; no second MCP mutation path. Historical catch-and-continue persistence is not adopted.",
+      "fleetpane_action": "existing-shared-send"
+    },
+    {
+      "ordinal": 229,
+      "revision": "ae4678bca88359b7996cf082f434cd22d3d61274",
+      "date": "2025-11-28T17:44:07Z",
+      "category": "performance",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/app/src/hooks/use-websocket.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Suppress individual historical replay notifications when sending a history snapshot; log message metadata. Fleetpane history pages remain observational and preserve original IDs/cursors without replay. No payload logging or implicit endpoint port.",
+      "fleetpane_action": "existing-paged-history"
+    },
+    {
+      "ordinal": 230,
+      "revision": "e80989ea78aaddc51c3d37e8cd7daaf682f50bcf",
+      "date": "2025-11-28T18:20:33Z",
+      "category": "performance",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Selected projection diffs remove duplicate raw provider envelopes and derive tool display from results. Preserve Fleetpane unknown fields and exact Copy while bounding pages; historical claimed payload percentages were not reproduced.",
+      "fleetpane_action": "retain-typed-bounded-content"
+    },
+    {
+      "ordinal": 231,
+      "revision": "eea28d59c91d8c848cebf4307cd00f2b223bb92d",
+      "date": "2025-11-28T18:52:13Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude SDK string result content is recovered alongside file records. Fleetpane already preserves ACP content and arbitrary rawOutput, including false/zero; no Claude-specific adapter requested.",
+      "fleetpane_action": "existing-acp-result-retention"
+    },
+    {
+      "ordinal": 232,
+      "revision": "7278a9515fdc5167ca4ab21d8425a80d87ae9d8c",
+      "date": "2025-11-28T19:01:00Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Resolve creation cwd once to avoid history lookup under different daemon cwd. Fleetpane validates explicit absolute workspace paths and exact endpoint binding.",
+      "fleetpane_action": "existing-absolute-workspaces"
+    },
+    {
+      "ordinal": 233,
+      "revision": "a7df671144186a18912c2b87d85f29557c6fa0ce",
+      "date": "2025-11-28T19:05:41Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx"
+      ],
+      "finding": "Heuristic tool output rendered the same data as command/read/raw JSON; suppress duplicate sections. Fleetpane typed command/content views do not infer shell/file behavior from arbitrary result strings.",
+      "fleetpane_action": "retain-typed-content"
+    },
+    {
+      "ordinal": 234,
+      "revision": "38b08fec0c0849d456e5611a633d71dade2eac68",
+      "date": "2025-11-28T19:24:52Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Selected diff sections add discriminated command/file/read results, including an unbounded quadratic line diff. Fleetpane retains protocol-driven content and bounded previews. ACP failed-card styling omission reproduced and fixed with a pre-fix regression plus native readback; richer ACP diffs stay open.",
+      "fleetpane_action": "fix-acp-failure-presentation"
+    },
+    {
+      "ordinal": 235,
+      "revision": "4001b7dc0ae527df7bedb119ca93defce0735f09",
+      "date": "2025-11-28T19:38:42Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Remove client heuristics, retain raw JSON for unknown results; adapter accepts both old_str and old_string. Keep typed ACP/Codex boundary and unknown source Copy; do not infer file edits from success text.",
+      "fleetpane_action": "retain-typed-content"
+    },
+    {
+      "ordinal": 236,
+      "revision": "bf04b7d5dfab06594033ede6e342f0660cef9665",
+      "date": "2025-11-28T19:46:55Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Codex SDK output and exit code actually use aggregated_output/exit_code. Fleetpane app-server commandExecution already decodes aggregatedOutput/exitCode with multiline exact Copy and explicit nonzero failure.",
+      "fleetpane_action": "existing-command-output"
+    },
+    {
+      "ordinal": 237,
+      "revision": "4311c3aebd3d2a4973dee744dec51031c933affc",
+      "date": "2025-11-28T19:57:46Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-agent.ts"
+      ],
+      "finding": "Restore apply_patch records with structured file edits from rollout data; live SDK lacked hunks. Fleetpane already renders supplied Codex file changes, never reconstructs them by reading cwd. Git Diff expansion remains deferred.",
+      "fleetpane_action": "existing-supplied-file-content"
+    },
+    {
+      "ordinal": 238,
+      "revision": "53d91a319ebb3a38c9e148429758cc76f197dd70",
+      "date": "2025-11-29T01:04:33Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx"
+      ],
+      "finding": "Actually consume pre-parsed command/edit/read props, fixing restored Codex details. Fleetpane uses one content decoder for live/history/imported rows; existing source-provided patches retained.",
+      "fleetpane_action": "existing-shared-content-decoder"
+    },
+    {
+      "ordinal": 239,
+      "revision": "7c1517d83035a8238eef4e8af4b713da264c08b4",
+      "date": "2025-11-29T05:08:56Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/contexts/daemon-connections-context.tsx",
+        "packages/app/src/hooks/use-audio-recorder.native.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Selected sections cover stable recorder references/callbacks, cancel intent and default Playwright MCP. No automatic browser package launch or Claude adapter port; voice remains P2 and existing isolated QA uses explicit owned processes.",
+      "fleetpane_action": "selective-provider-and-voice-deferral"
+    },
+    {
+      "ordinal": 240,
+      "revision": "6b9fbb83c0c1ac13b0a2af1e6e42e82601d14e59",
+      "date": "2025-11-29T11:41:11Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/json-utils.ts"
+      ],
+      "finding": "Cancel waits on interrupt/kill and sanitize unsupported JS values. Rust serialized protocol values already have explicit types; do not hide internal serialization bugs through null coercion. Stop acknowledgement and exact turn completion remain separate.",
+      "fleetpane_action": "retain-explicit-wait-boundaries"
+    },
+    {
+      "ordinal": 241,
+      "revision": "36facf4bfdb5feee8eb52cefd86794c4b1d031ba",
+      "date": "2025-11-29T21:39:46Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Selected diff sections show per-HTTP-session MCP instances, abort/subscription lifetime cleanup, last assistant output and foreground/background waits. Keep independent Host/controller identities and existing wait CLI; no MCP server introduced.",
+      "fleetpane_action": "retain-host-session-isolation"
+    },
+    {
+      "ordinal": 242,
+      "revision": "5660935a4bc25b1afbd8cd539a648fba2d35be88",
+      "date": "2025-11-29T22:05:47Z",
+      "category": "performance",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Remove eager provider restoration before listen; list lightweight persisted metadata and initialize explicitly. Fleetpane already keeps archive open separate from context resume; ACP archive startup still loads observed items and is not claimed metadata-only.",
+      "fleetpane_action": "retain-explicit-resume-track-archive-scaling"
+    },
+    {
+      "ordinal": 243,
+      "revision": "898b8ce5a1e1f25df18ec3e4b6ff0766a8d08bba",
+      "date": "2025-11-29T22:44:03Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Selected diffs add typed lifecycle and in-flight initialization map per client session; lazy send/open calls load the provider once locally. Fleetpane keeps archive observation read-only and lease-fenced context mutation. Later global initialization fix must be read too.",
+      "fleetpane_action": "retain-explicit-resume"
+    },
+    {
+      "ordinal": 244,
+      "revision": "0dfa2f04bd4c8c81c63afd92565e6ebf7854e270",
+      "date": "2025-11-29T23:24:25Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.test.ts",
+        "packages/server/src/server/agent/agent-registry.ts"
+      ],
+      "finding": "Config changes no longer seed lifecycle fields before a snapshot; absent identity is explicit. Keep Fleetpane durable mutation receipt/config state separate from provider runtime observation.",
+      "fleetpane_action": "existing-state-boundaries"
+    },
+    {
+      "ordinal": 245,
+      "revision": "2794a5b63c43fc862a416e830990625333240313",
+      "date": "2025-11-30T00:02:37Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/agent-projections.test.ts"
+      ],
+      "finding": "Read pure persistence/wire projection and selected test setup. Avoid a second mutable snapshot and toolkit-dependent state; retain opaque provider fields and exact falsy/null JSON. Tests were not run and full test diff not audited.",
+      "fleetpane_action": "existing-engine-projections"
+    },
+    {
+      "ordinal": 246,
+      "revision": "8a708aab8b3aaf48bade2c56da7638c09aa08b85",
+      "date": "2025-11-30T00:02:47Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Selected sections convert lifecycle to discriminated unions, copy/freeze views and remove intermediate snapshots. Several transitions still use assertions; Fleetpane keeps owned Rust state and protocol types rather than copying generic deep-freeze code.",
+      "fleetpane_action": "existing-rust-state-boundaries"
+    },
+    {
+      "ordinal": 247,
+      "revision": "7aec97332311dfc6cc42920cbcf659b5f168c88a",
+      "date": "2025-11-30T00:03:00Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/agent-registry.test.ts"
+      ],
+      "finding": "Registry now persists projected lifecycle plus config together and retains stored titles; selected fixture setup inspected, not full tests. Fleetpane archive batches commit before publication and fail closed on storage failure.",
+      "fleetpane_action": "existing-durable-archive-boundaries"
+    },
+    {
+      "ordinal": 248,
+      "revision": "e2924f75236717ce7a8b5b8badb20cb7dcd4b0d3",
+      "date": "2025-11-30T00:14:00Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/messages.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Selected diffs route session and permission payloads through one ManagedAgent projection. Keep shared engine/CLI/native projection and provider-specific source semantics.",
+      "fleetpane_action": "existing-shared-projection"
+    },
+    {
+      "ordinal": 249,
+      "revision": "34f13d4439235c77573c54e564971eff936705ac",
+      "date": "2025-11-30T00:32:27Z",
+      "category": "documentation",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/AGENT_REFACTOR_PROPOSAL.md"
+      ],
+      "finding": "Status documentation records removal of mutable intermediate snapshots and remaining schema. This is documentation of intended design, not evidence of tests or performance.",
+      "fleetpane_action": "documentation-no-port"
+    },
+    {
+      "ordinal": 250,
+      "revision": "315dbe20f3ca310a39b9905406ef01e1364dc508",
+      "date": "2025-11-30T01:06:01Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Remove stale raw-field expectation after provider envelope dedup. Fleetpane checks actual typed source records; historical test edits do not establish live provider acceptance.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 251,
+      "revision": "c4c0787286950ddc609fead02ff31415925a4f66",
+      "date": "2025-11-30T01:22:04Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/terminal-mcp/terminal-manager.test.ts"
+      ],
+      "finding": "Missing-path test accounts for terminal line wrapping, still brittle across platform wording. Keep typed exit-code and terminal-screen contracts instead of copying shell error phrases.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 252,
+      "revision": "20cdf4788e68561603aeea2ab0fb51cae402639e",
+      "date": "2025-11-30T01:24:12Z",
+      "category": "repository-hygiene",
+      "inspection": "metadata-only",
+      "paths_inspected": [],
+      "finding": "Inspected changed-path metadata for deletion of accidental agents.json temporary records; their contents were not read or imported. Public Fleetpane examples and evidence remain synthetic.",
+      "fleetpane_action": "repository-hygiene-no-port"
+    },
+    {
+      "ordinal": 253,
+      "revision": "9993c73f90bd206b0d60bc8f88c1ea92ea185fd3",
+      "date": "2025-11-30T01:25:09Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Recognize both legacy files array and structured file_write/file_edit in tests. Fleetpane tests source protocol variants, not provider-name heuristics; no Claude integration claim.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 254,
+      "revision": "035a77f198ecd65a3d9c5d6c997599fcb000ed4e",
+      "date": "2025-11-30T01:29:11Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Hydration tests read result instead of removed raw and add credential-based skipping. Keep fixture and real-model evidence separate; unavailable external runs cannot be counted passing.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 255,
+      "revision": "143c0a0713e10d8ecb06dc3b35454c7b3d3dc936",
+      "date": "2025-11-30T01:30:25Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/terminal-mcp/tmux.ts"
+      ],
+      "finding": "Strip ANSI from plain tmux capture while retaining color mode. Fleetpane already parses terminal bytes into screen cells; do not replace the terminal parser with this limited regex.",
+      "fleetpane_action": "existing-terminal-parser"
+    },
+    {
+      "ordinal": 256,
+      "revision": "8271d0f2debdd2c31f29e64b115c56204683043c",
+      "date": "2025-11-30T01:35:53Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Removes credential skipping introduced in 254. Follow actual diff across subsequent reversals rather than assuming tests passed from commit text.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 257,
+      "revision": "6ed6fb7e6f9989c6397e1e037442b34152e8cdc1",
+      "date": "2025-11-30T01:43:22Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts",
+        "packages/server/src/server/terminal-mcp/terminal-manager.test.ts"
+      ],
+      "finding": "Align hydration result shape and ANSI/platform-aware terminal assertions, while reintroducing optional real-provider suite gating. Deterministic fixtures and explicit external verification remain separate.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 258,
+      "revision": "1adee92dd16173b7236cc80ef3b24f974cf27034",
+      "date": "2025-11-30T01:46:30Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Again removes real-provider gating; message accuses a previous agent but diff only proves the gate removal. No historical test execution inferred.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 259,
+      "revision": "3030287d14557dde121df29bf2b0d2bf7a01151f",
+      "date": "2025-11-30T01:56:30Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Re-adds integration flag declarations but suite is still unconditional at this revision; title does not prove skipping.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 260,
+      "revision": "218bcb59db11a3c9ad170c0e81281efcf32b64af",
+      "date": "2025-11-30T01:57:43Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "finding": "Now actually switches suite to the conditional describe. Keep external-provider unavailability explicit; tests were not run.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 261,
+      "revision": "03b4799bc68aaa612b7a37ebd95164ac777a1b21",
+      "date": "2025-11-30T01:58:04Z",
+      "category": "test",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/terminal-mcp/terminal-manager.test.ts"
+      ],
+      "finding": "Extract the missing-path assertion helper without changing its supported alternatives. Fleetpane uses real PTY exit/ANSI fixtures and exact identity checks.",
+      "fleetpane_action": "test-lesson-no-port"
+    },
+    {
+      "ordinal": 262,
+      "revision": "51d31bb76d9ad78dbd1d1e41a5e605846775af30",
+      "date": "2025-11-30T02:16:14Z",
+      "category": "architecture",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/persistence-hooks.ts",
+        "packages/server/src/server/persistence-hooks.test.ts"
+      ],
+      "finding": "Remove unused eager restore implementation and its obsolete test. Keep explicit lazy context resume; no need to retain dormant migration code.",
+      "fleetpane_action": "existing-explicit-resume"
+    },
+    {
+      "ordinal": 263,
+      "revision": "f38287ff4c6a6f1ca59a4221734ac50ed73cbecb",
+      "date": "2025-11-30T02:26:19Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Initialization promise moves from each client to module scope and is removed only if still current. Fleetpane mutation authority and UUID receipts provide a different boundary; cross-controller observation never initializes contexts.",
+      "fleetpane_action": "retain-host-owned-context-commands"
+    },
+    {
+      "ordinal": 264,
+      "revision": "cc34ea722a60888c22bb4d42f10cfdecd198554d",
+      "date": "2025-11-30T02:26:26Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/agent-registry.test.ts"
+      ],
+      "finding": "Preserve original createdAt during later resume/projection. Keep provider metadata distinct from observation/read times; do not fabricate recency from reconnect.",
+      "fleetpane_action": "existing-provider-time-semantics"
+    },
+    {
+      "ordinal": 265,
+      "revision": "b8d942cb6b0e3a63ecab5e9f815963c4802720a0",
+      "date": "2025-11-30T02:46:44Z",
+      "category": "configuration",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/config.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Selected diffs add configurable home/port. Fleetpane already has explicit socket/config/state paths. Native first-launch reproduction found absent parent directories; private store parent creation now fixed with two tests and fresh native preference save/reopen. No implicit network fallback.",
+      "fleetpane_action": "fix-first-start-local-state"
+    },
+    {
+      "ordinal": 266,
+      "revision": "fa84d4c0c98b403e2525aa4f5131f69a29075d44",
+      "date": "2025-11-30T02:49:55Z",
+      "category": "documentation",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/README.md"
+      ],
+      "finding": "Document isolated home/port blue-green invocation. Fleetpane already separates Host sockets/controller stores; separate instances do not themselves prove running-session handoff.",
+      "fleetpane_action": "existing-isolated-host-config"
+    },
+    {
+      "ordinal": 267,
+      "revision": "cb2ee687e9a468bec157677df7417ba55a640045",
+      "date": "2025-11-30T11:04:08+08:00",
+      "category": "merge",
+      "inspection": "metadata-only",
+      "paths_inspected": [],
+      "finding": "Inspected merge parents and stat only; combines the preceding reviewed refactor branch. No additional source audit or historical runtime claim.",
+      "fleetpane_action": "merge-metadata-only"
+    },
+    {
+      "ordinal": 268,
+      "revision": "ad804cb1fe29424a63bb8ec4b85d36cf951a8445",
+      "date": "2025-12-01T11:37:02Z",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/mcp-server.test.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "MCP create_agent gains a required short title, persists it and renames the tool. Fleetpane keeps optional provider-supplied titles; Codex rename exists and ACP provider rename remains explicitly unsupported. No new universal required-title rule or Claude adapter.",
+      "fleetpane_action": "selective-title-contract"
     }
   ],
   "workflow_status": {
@@ -3407,7 +3960,9 @@
     "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim.",
     "host-diagnostics": "partial; shared CLI and Linux native count-only observational endpoint checks, protocol/drain/fault status, single/all refresh, exact JSON copy, offline recovery, preserved drafts/pending requests and late-result navigation covered with owned fixtures. No remote auth, registry editing, live update or external-model claim.",
     "automatic-read-recovery": "partial; Linux native same-Host original-cursor replay, draft editing/copy, minimize/reactivate, protocol framing refusal, identity revocation, competing lease and pending ACP preservation covered with owned synthetic providers. Cursor expiry stays explicit; no automatic writes, context resume, remote or OS suspend acceptance.",
-    "loaded-activity-order": "partial; shared loaded-row projection, exact provider time semantics, stale-last ordering and Linux native source/paging/draft/replacement verified locally. Full-index/realtime activity, keyboard directory navigation and accessibility remain open."
+    "loaded-activity-order": "partial; shared loaded-row projection, exact provider time semantics, stale-last ordering and Linux native source/paging/draft/replacement verified locally. Full-index/realtime activity, keyboard directory navigation and accessibility remain open.",
+    "tool-failure-presentation": "partial; known ACP failed status now uses the same native danger presentation as Codex/MCP; pre-fix regression, 224-byte exact source Copy and retained 51-byte draft/replacement verified locally with owned ACP fixture. Unknown status/output remains preserved. No external-model or non-Linux native acceptance.",
+    "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
