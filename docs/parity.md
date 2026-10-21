@@ -1,5 +1,10 @@
 # Functional parity with donut-paseo
 
+CLI Send and Codex live follow-up now accept prompt files or stdin with exact
+UTF-8 preservation and validation before Host control. [Local CLI evidence](verification/2026-10-22-prompt-input.md)
+covers the 64 KiB boundary, FIFO refusal and unchanged Host on input errors;
+this is separate from GUI and external-provider acceptance.
+
 Last inspected session recovery is locally verified for shared/CLI/Linux native
 fixtures: exact Host/session/directory/archive identity, explicit opening after
 takeover, retained Chinese draft and conflicting write refusal.

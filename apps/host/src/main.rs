@@ -4,6 +4,9 @@ use std::process::ExitCode;
 mod migration;
 
 #[cfg(unix)]
+mod prompt;
+
+#[cfg(unix)]
 async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     use fleetpane_runtime::unix::{Config, request, run};
     use std::{
@@ -17,6 +20,9 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         );
         println!(
             "History: inspect THREAD [--resume] | history-turns THREAD [--cursor CURSOR] | history-items THREAD TURN [--cursor CURSOR]. Native views use these bounded commands; open requests full history."
+        );
+        println!(
+            "Prompt input for send THREAD and steer THREAD TURN: choose exactly one of TEXT, --prompt TEXT, --prompt-file PATH or --stdin; use -- TEXT for a literal starting with '-'. Exact UTF-8 text is limited to 64 KiB. Files must be regular files. Input is validated before contacting a Host. Only send accepts --model/--effort."
         );
         println!(
             "Wait: session SOCKET wait THREAD TURN [--timeout-ms 1..3600000] (default 30000). Read-only: returns finished, unknown, attention or timed_out; never takes control, answers, sends or stops. Requires an existing controller for the initial history read."
@@ -1103,42 +1109,34 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                         cursor,
                     })
                 }
-                [verb, id, text, flags @ ..] if verb == "send" => {
-                    for pair in flags.chunks(2) {
-                        let [flag, value] = pair else {
-                            return Err("send flags require a value".into());
-                        };
-                        let target = match flag.as_str() {
-                            "--model" => &mut requested_model,
-                            "--effort" => &mut requested_effort,
-                            _ => return Err(format!("unsupported send flag {flag}").into()),
-                        };
-                        if target.is_some() {
-                            return Err(format!("duplicate send flag {flag}").into());
-                        }
-                        *target = Some(value.clone());
-                    }
-                    if requested_model.is_none() && requested_effort.is_some() {
-                        return Err("--effort requires --model".into());
-                    }
+                [verb, id, flags @ ..] if verb == "send" => {
+                    let input = prompt::Input::parse(flags, true)?;
+                    let text = input.read(&mut io::stdin().lock())?;
+                    requested_model = input.model;
+                    requested_effort = input.effort;
                     Command::Send {
                         thread_id: id.clone(),
-                        text: text.clone(),
+                        text,
                         images: Vec::new(),
                         options: TurnOptions::default(),
                     }
                 }
-                [verb, id, turn, text] if verb == "steer" => Command::Steer {
-                    thread_id: id.clone(),
-                    turn_id: turn.clone(),
-                    text: text.clone(),
-                },
+                [verb, id, turn, flags @ ..] if verb == "steer" => {
+                    let input = prompt::Input::parse(flags, false)?;
+                    Command::Steer {
+                        thread_id: id.clone(),
+                        turn_id: turn.clone(),
+                        text: input.read(&mut io::stdin().lock())?,
+                    }
+                }
                 [verb, id, turn] if verb == "stop" => Command::Stop {
                     thread_id: id.clone(),
                     turn_id: turn.clone(),
                 },
                 _ => return Err("invalid session command; use --help".into()),
             };
+            // Validate local input before observing or claiming a Host lease.
+            command.validate()?;
             let state = client::snapshot(&socket).await?;
             if matches!(command, Command::Tasks { .. }) {
                 let lease = state

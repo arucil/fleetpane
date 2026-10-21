@@ -403,7 +403,17 @@ cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --tak
 cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --take-control models
 # Choose MODEL and EFFORT from the returned provider capabilities:
 cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --take-control send THREAD_ID "Hello" --model MODEL --effort EFFORT
+# Preserve multiline UTF-8 input, including CRLF, indentation and trailing newlines:
+cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --take-control send THREAD_ID --prompt-file /absolute/prompt.txt
+cat /absolute/prompt.txt | cargo run -p fleetpane-host -- session /tmp/fleetpane-example/control.sock --take-control send THREAD_ID --stdin
 ```
+
+Send and live follow-up accept exactly one text source: positional `TEXT`,
+`--prompt TEXT`, `--prompt-file PATH`, or `--stdin`. Use `-- TEXT` for a literal
+starting with a dash. Text must be nonblank UTF-8 and fit within 64 KiB; file
+input requires a regular file. Parsing and input errors occur before contacting
+the Host or taking control. Model and reasoning options remain available on Send.
+[Local CLI evidence](docs/verification/2026-10-22-prompt-input.md).
 
 To observe an exact turn, use **wait** with its session and turn IDs:
 
@@ -886,6 +896,7 @@ and does not approve pending tools or start another turn.
 
 ```sh
 fleetpane-host session /absolute/control.sock --take-control steer SESSION TURN TEXT
+fleetpane-host session /absolute/control.sock --take-control steer SESSION TURN --prompt-file /absolute/followup.txt
 fleetpane-host draft /absolute/hosts.creations steer KEY_JSON REVISION TURN --take-control
 ```
 

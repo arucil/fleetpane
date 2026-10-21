@@ -99,6 +99,11 @@ pub enum Command {
 }
 
 impl Command {
+    /// Validate local input without connecting to a Host or claiming control.
+    pub fn validate(&self) -> Result<(), Error> {
+        self.rpc().map(|_| ())
+    }
+
     pub fn is_composer_input(&self) -> bool {
         matches!(self, Self::Send { .. } | Self::Steer { .. })
     }
