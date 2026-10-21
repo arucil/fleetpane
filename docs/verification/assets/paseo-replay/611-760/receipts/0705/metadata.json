@@ -1,0 +1,44 @@
+{
+  "ordinal": 705,
+  "revision": "250a320ff2be144fe649b6c9615e3fd4a97e2946",
+  "date": "2026-01-23T14:47:37+07:00",
+  "committer_date": "2026-01-23T14:47:37+07:00",
+  "parents": [
+    "3459faabc4d579df19b47dff3e4335523b144acc"
+  ],
+  "subject": "Fix E2E tests: gate on credentials and parse agentId robustly",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/orchestration.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-codex.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/streaming.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:dd5e4fdd8f7c8299ea02fc1567e91eca3cb197f17f8f6f7e54d931242e6c39cc",
+  "diff_tree_digest": "sha256:1747127f16fe014dd30345557d4270cb7e9691322da2db2f1e663038c123d18e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-e2e/orchestration.e2e.test.ts",
+      "old_lines": [
+        122,
+        127
+      ],
+      "new_lines": [
+        122,
+        152
+      ],
+      "diff_block_lines": [
+        7,
+        42
+      ],
+      "hunk_header": "@@ -121,9 +121,34 @@ describe(\"daemon E2E\", () => {",
+      "substantive_changed_lines": 26,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 66,
+  "receipt_file": "receipts/0705/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

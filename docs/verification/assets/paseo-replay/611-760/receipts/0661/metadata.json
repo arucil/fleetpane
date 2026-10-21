@@ -1,0 +1,40 @@
+{
+  "ordinal": 661,
+  "revision": "1c9d9367c194e35b1196d01b55db9874b303c76f",
+  "date": "2026-01-17T12:07:00+07:00",
+  "committer_date": "2026-01-17T12:07:00+07:00",
+  "parents": [
+    "d964415eba30a90e78f3751213223bcc77e2660c"
+  ],
+  "subject": "fix(server): remove CI-based test exclusions from vitest config",
+  "diff_tree_paths": [
+    "M\tpackages/server/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:c7492e477104315a7ce8b94f68e657a35bbfb5cf8220ef7fc33f778f0beb5104",
+  "diff_tree_digest": "sha256:b5a31bab677d94d624882545e957e9707a7ee723e777daee4154e10a6ddf9714",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        23,
+        39
+      ],
+      "new_lines": [
+        21,
+        25
+      ],
+      "diff_block_lines": [
+        12,
+        30
+      ],
+      "hunk_header": "@@ -23,17 +21,5 @@ export default defineConfig({",
+      "substantive_changed_lines": 12,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 13,
+  "receipt_file": "receipts/0661/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

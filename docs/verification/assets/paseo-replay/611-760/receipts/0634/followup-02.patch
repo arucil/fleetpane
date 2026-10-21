@@ -1,0 +1,49 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[334,341],"new_lines":[394,438],"diff_block_lines":[117,163],"hunk_header":"@@ -316,26 +323,116 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":16,"comparison":"parent"}
++
++    // No heartbeat (legacy client or just connected) → notify
++    if (clientState.deviceType === null) {
++      return true;
+     }
+-    return false;
++
++    // Rule 2: If THIS client is not stale and actively looking at a different agent → notify them
++    if (!clientState.isStale && clientState.appVisible && clientState.focusedAgentId !== null) {
++      return true;
++    }
++
++    // Rule 3: If THIS client is not stale but just switched tabs (not focused on anything) → no notification
++    // User is present at the computer, they'll come back
++    if (!clientState.isStale) {
++      return false;
++    }
++
++    // Rule 4: THIS client is stale - check if another client will handle it
++    const hasActiveWebClient = allClientStates.some(
++      (state) => state.deviceType === "web" && !state.isStale
++    );
++
++    if (clientState.deviceType === "mobile") {
++      // Mobile only notifies if web is also stale (user truly away)
++      // If web is active, they'll see it there
++      return !hasActiveWebClient;
++    }
++
++    if (clientState.deviceType === "web") {
++      // Stale web: notify only if no other client can handle it
++      // Other client = mobile or unknown (no heartbeat)
++      const hasOtherClient = allClientStates.some(
++        (state) => state !== clientState && (state.deviceType === "mobile" || state.deviceType === null)
++      );
++      return !hasOtherClient;
++    }
++
++    // Fallback: notify
++    return true;
+   }
+ 
+   /**
+-   * Broadcast an attention_required event to all clients with shouldNotify computed
++   * Broadcast an attention_required event to all clients with per-client shouldNotify
+    */
+   private broadcastAgentAttention(params: {

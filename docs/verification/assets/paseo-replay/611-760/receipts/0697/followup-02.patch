@@ -1,0 +1,54 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":null,"new_lines":[1636,1687],"diff_block_lines":[109,160],"hunk_header":"@@ -1588,9 +1602,96 @@ export class Session {","substantive_changed_lines":40,"comparison":"parent"}
++        worktreePath: worktree.worktreePath,
++        branchName: worktree.branchName,
++        cleanupOnFailure: false,
++      });
++
++      await this.safeAppendTimelineItem(agentId, {
++        type: "tool_call",
++        name: "paseo_worktree_setup",
++        callId,
++        status: "completed",
++        output: {
++          worktreePath: worktree.worktreePath,
++          commands: results.map((result) => ({
++            command: result.command,
++            cwd: result.cwd,
++            exitCode: result.exitCode,
++            output: `${result.stdout ?? ""}${result.stderr ? `\n${result.stderr}` : ""}`.trim(),
++          })),
++        },
++      });
++    } catch (error: any) {
++      if (error instanceof WorktreeSetupError) {
++        results = error.results;
++      }
++      const message = error instanceof Error ? error.message : String(error);
++      await this.safeAppendTimelineItem(agentId, {
++        type: "tool_call",
++        name: "paseo_worktree_setup",
++        callId,
++        status: "failed",
++        output: {
++          worktreePath: worktree.worktreePath,
++          commands: results.map((result) => ({
++            command: result.command,
++            cwd: result.cwd,
++            exitCode: result.exitCode,
++            output: `${result.stdout ?? ""}${result.stderr ? `\n${result.stderr}` : ""}`.trim(),
++          })),
++        },
++        error: { message },
++      });
++    }
++  }
++
++  private async safeAppendTimelineItem(
++    agentId: string,
++    item: AgentTimelineItem
++  ): Promise<boolean> {
++    try {
++      await this.agentManager.appendTimelineItem(agentId, item);
++      return true;
++    } catch (error) {

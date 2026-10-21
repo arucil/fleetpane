@@ -1,0 +1,42 @@
+{
+  "ordinal": 685,
+  "revision": "ca8d09434b124ed30ac0377f3398b9302c65c504",
+  "date": "2026-01-22T08:52:30+07:00",
+  "committer_date": "2026-01-22T08:52:30+07:00",
+  "parents": [
+    "42fb56890b00cfce4f8e64de9bde1bea53b21dec"
+  ],
+  "subject": "fix(app): improve host removal flow",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/utils/tauri-window.ts"
+  ],
+  "source_receipt_digest": "sha256:533351ce5f1e7cf2968df03dc5ca25827364997cb884963114298ff7024690b2",
+  "diff_tree_digest": "sha256:bed2a20eeed79bacfc4687e7d9d07d06edce4faa940b9cfcf0164733097e356a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/settings.tsx",
+      "old_lines": [
+        546,
+        549
+      ],
+      "new_lines": [
+        546,
+        564
+      ],
+      "diff_block_lines": [
+        5,
+        24
+      ],
+      "hunk_header": "@@ -546,4 +546,19 @@ export default function SettingsScreen() {",
+      "substantive_changed_lines": 10,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 69,
+  "receipt_file": "receipts/0685/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

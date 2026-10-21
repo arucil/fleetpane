@@ -1,0 +1,54 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[16,17],"new_lines":[16,67],"diff_block_lines":[6,57],"hunk_header":"@@ -16,4 +16,69 @@ export function deriveProjectKey(cwd: string): string {","substantive_changed_lines":23,"comparison":"parent"}
+ }
+ 
++/**
++ * Produces a stable grouping key from a git remote URL.
++ *
++ * Waterfall:
++ * - Prefer a GitHub key (normalizes SSH/HTTPS to the same key).
++ * - Fallback to a generic host/path key (still normalized across SSH/HTTPS).
++ */
++export function deriveRemoteProjectKey(remoteUrl: string | null): string | null {
++  if (!remoteUrl) {
++    return null;
++  }
++
++  const trimmed = remoteUrl.trim();
++  if (!trimmed) {
++    return null;
++  }
++
++  // Support the common forms:
++  // - git@github.com:owner/repo.git
++  // - https://github.com/owner/repo(.git)
++  // - ssh://git@github.com/owner/repo(.git)
++  let host: string | null = null;
++  let path: string | null = null;
++
++  // SSH scp-like form: user@host:owner/repo(.git)
++  const scpLike = trimmed.match(/^[^@]+@([^:]+):(.+)$/);
++  if (scpLike) {
++    host = scpLike[1] ?? null;
++    path = scpLike[2] ?? null;
++  } else if (trimmed.includes("://")) {
++    try {
++      const parsed = new URL(trimmed);
++      host = parsed.hostname || null;
++      path = parsed.pathname ? parsed.pathname.replace(/^\//, "") : null;
++    } catch {
++      // Fall through to best-effort parsing below.
++    }
++  }
++
++  if (!host || !path) {
++    return null;
++  }
++
++  let cleanedPath = path.trim().replace(/^\/+/, "").replace(/\/+$/, "");
++  if (cleanedPath.endsWith(".git")) {
++    cleanedPath = cleanedPath.slice(0, -4);
++  }
++
++  // Best-effort: owner/repo is the common case.
++  // If the path is longer (e.g. groups/subgroups/repo), still keep it.

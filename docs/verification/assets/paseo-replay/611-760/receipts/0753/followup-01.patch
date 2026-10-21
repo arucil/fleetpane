@@ -1,0 +1,54 @@
+FILE packages/app/src/stores/section-order-store.ts
+RANGE {"path":"packages/app/src/stores/section-order-store.ts","old_lines":null,"new_lines":[21,72],"diff_block_lines":[27,78],"hunk_header":"@@ -0,0 +1,79 @@","substantive_changed_lines":27,"comparison":"parent"}
++      setProjectOrder: (order) => set({ projectOrder: order }),
++
++      moveProject: (fromIndex, toIndex) =>
++        set((state) => {
++          const newOrder = [...state.projectOrder];
++          const [removed] = newOrder.splice(fromIndex, 1);
++          if (removed !== undefined) {
++            newOrder.splice(toIndex, 0, removed);
++          }
++          return { projectOrder: newOrder };
++        }),
++    }),
++    {
++      name: "section-order",
++      storage: createJSONStorage(() => AsyncStorage),
++      partialize: (state) => ({
++        projectOrder: state.projectOrder,
++      }),
++    }
++  )
++);
++
++/**
++ * Sort project groups according to persisted order.
++ * Projects not in the persisted order appear at the end in their original order.
++ */
++export function sortProjectsByStoredOrder<T extends { projectKey: string }>(
++  groups: T[],
++  storedOrder: string[]
++): T[] {
++  if (storedOrder.length === 0) {
++    return groups;
++  }
++
++  const orderMap = new Map(storedOrder.map((key, index) => [key, index]));
++
++  return [...groups].sort((a, b) => {
++    const aIndex = orderMap.get(a.projectKey);
++    const bIndex = orderMap.get(b.projectKey);
++
++    // Both have stored order - sort by stored order
++    if (aIndex !== undefined && bIndex !== undefined) {
++      return aIndex - bIndex;
++    }
++
++    // Only a has stored order - a comes first
++    if (aIndex !== undefined) {
++      return -1;
++    }
++
++    // Only b has stored order - b comes first
++    if (bIndex !== undefined) {

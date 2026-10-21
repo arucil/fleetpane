@@ -1,0 +1,72 @@
+{
+  "ordinal": 729,
+  "revision": "dc4839e2c01639a28e69afae817e7e51a89440f8",
+  "date": "2026-01-24T20:20:56+07:00",
+  "committer_date": "2026-01-24T20:20:56+07:00",
+  "parents": [
+    "3e2d403f1b277d14d5b9aa121cd93905fe55adb8"
+  ],
+  "subject": "Fix agent routing and E2E create flow",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/agent/[[...route]].tsx",
+    "A\tpackages/app/src/app/agent/[id].tsx",
+    "A\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "A\tpackages/app/src/app/agent/index.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/home-footer.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx",
+    "A\tpackages/app/src/stores/create-flow-store.ts"
+  ],
+  "source_receipt_digest": "sha256:d6e3555682be9716f3d79087c0628707c6bd29dbff56c3a3a0793fc8ed638e2c",
+  "diff_tree_digest": "sha256:bef3fabeac56976d43fdea92c038e117a3d9c610c08865c1c4bf2520e1cd3b7a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/agent/[[...route]].tsx",
+      "old_lines": [
+        8,
+        43
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        14,
+        49
+      ],
+      "hunk_header": "@@ -1,109 +0,0 @@",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 256,
+  "receipt_file": "receipts/0729/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0729/followup-01.patch",
+      "source_receipt_digest": "sha256:1f15e83d986e6c70984252477db5a769482cec6aa1a46dd3b11aee8881049513",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/stores/create-flow-store.ts",
+          "old_lines": null,
+          "new_lines": [
+            1,
+            27
+          ],
+          "diff_block_lines": [
+            6,
+            33
+          ],
+          "hunk_header": "@@ -0,0 +1,27 @@",
+          "substantive_changed_lines": 18,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

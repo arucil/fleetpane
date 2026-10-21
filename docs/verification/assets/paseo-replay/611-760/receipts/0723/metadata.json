@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 723,
+  "revision": "6b28167fdd5503c64eec4dea7ce8641d7ab284f8",
+  "date": "2026-01-24T19:01:23+07:00",
+  "committer_date": "2026-01-24T19:01:23+07:00",
+  "parents": [
+    "21cff48d3f079f571573fcb553f13de9552f6df4",
+    "b498c9ea814fa7a7cfca6563f968ee98496064d1"
+  ],
+  "subject": "Merge audit/streaming-asr-tail: streaming ASR partials and env host reset",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/hooks/use-dictation.shared.ts",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "M\tpackages/server/src/server/agent/openai-realtime-transcription.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:4e68ec051e12bfabd66cf747e14faffbab445a747325447d1ae326114d23047b",
+  "diff_tree_digest": "sha256:6d2bf978bc22b7764f1e88a50e65c458dacd4d6c355835fd37f8915150787a32",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/dictation-controls.tsx",
+      "old_lines": [
+        170,
+        186
+      ],
+      "new_lines": [
+        172,
+        192
+      ],
+      "diff_block_lines": [
+        18,
+        53
+      ],
+      "hunk_header": "@@ -170,19 +172,32 @@ export function DictationOverlay({",
+      "substantive_changed_lines": 32,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 32,
+  "available_substantive_changed_lines": 292,
+  "receipt_file": "receipts/0723/selected.patch",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,54 @@
+FILE packages/app/src/screens/agent/draft-agent-screen.tsx
+RANGE {"path":"packages/app/src/screens/agent/draft-agent-screen.tsx","old_lines":null,"new_lines":[647,698],"diff_block_lines":[653,704],"hunk_header":"@@ -0,0 +1,1029 @@","substantive_changed_lines":42,"comparison":"parent"}
++      if (isAttachWorktree && !selectedWorktreePath) {
++        const message = "Select a worktree to attach";
++        dispatch({ type: "DRAFT_SET_ERROR", message });
++        throw new Error(message);
++      }
++      if (baseBranchError) {
++        dispatch({ type: "DRAFT_SET_ERROR", message: baseBranchError });
++        throw new Error(baseBranchError);
++      }
++      const createAgent = sessionMethods?.createAgent;
++      if (!createAgent) {
++        dispatch({ type: "DRAFT_SET_ERROR", message: "Host is not connected" });
++        throw new Error("Host is not connected");
++      }
++      const attempt = {
++        messageId: generateMessageId(),
++        text: trimmedPrompt,
++        timestamp: new Date(),
++      };
++      const modeId =
++        modeOptions.length > 0 && selectedMode !== "" ? selectedMode : undefined;
++      const trimmedModel = selectedModel.trim();
++      const config: AgentSessionConfig = {
++        provider: selectedProvider,
++        cwd: resolvedWorkingDir,
++        ...(modeId ? { modeId } : {}),
++        ...(trimmedModel ? { model: trimmedModel } : {}),
++      };
++      const effectiveBaseBranch = baseBranch.trim();
++      const effectiveWorktreeSlug =
++        isCreateWorktree && !worktreeSlug ? createNameId() : worktreeSlug;
++      if (isCreateWorktree && !worktreeSlug && effectiveWorktreeSlug) {
++        setWorktreeSlug(effectiveWorktreeSlug);
++      }
++      const gitOptions =
++        isCreateWorktree && !isNonGitDirectory && effectiveWorktreeSlug
++          ? {
++              createWorktree: true,
++              createNewBranch: true,
++              newBranchName: effectiveWorktreeSlug,
++              worktreeSlug: effectiveWorktreeSlug,
++              baseBranch: effectiveBaseBranch,
++            }
++          : undefined;
++
++      void persistFormPreferences();
++      if (Platform.OS === "web") {
++        (document.activeElement as HTMLElement | null)?.blur?.();
++      }
++      Keyboard.dismiss();
++      dispatch({ type: "SUBMIT", attempt });
++

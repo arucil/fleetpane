@@ -1,0 +1,38 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[1021,1050],"new_lines":[938,952],"diff_block_lines":[156,191],"hunk_header":"@@ -1021,47 +938,25 @@ function DaemonCard({","substantive_changed_lines":22,"comparison":"parent"}
+ 
+   const waitForDaemonRestart = useCallback(async () => {
+-    const maxAttempts = 12;
+-    const retryDelayMs = 2500;
+     const disconnectTimeoutMs = 7000;
+-    const reconnectTimeoutMs = 10000;
++    const reconnectTimeoutMs = 30000;
+ 
++    // Wait for disconnect first
+     if (isConnectedRef.current) {
+       await waitForCondition(() => !isConnectedRef.current, disconnectTimeoutMs);
+     }
+ 
+-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+-      try {
+-        await testServerConnection(directWsUrl);
+-        const reconnected = await waitForCondition(() => isConnectedRef.current, reconnectTimeoutMs);
++    // Wait for auto-reconnect
++    const reconnected = await waitForCondition(() => isConnectedRef.current, reconnectTimeoutMs);
+ 
+-        if (isScreenMountedRef.current) {
+-          setIsRestarting(false);
+-          if (!reconnected) {
+-            Alert.alert(
+-              "Host reachable",
+-              `${daemon.label} came back online but Paseo has not reconnected yet.`
+-            );
+-          }
+-        }
+-        return;
+-      } catch (error) {
+-        console.warn(
+-          `[Settings] Restart poll attempt ${attempt}/${maxAttempts} failed for ${daemon.label}`,
+-          error
++    if (isScreenMountedRef.current) {
++      setIsRestarting(false);

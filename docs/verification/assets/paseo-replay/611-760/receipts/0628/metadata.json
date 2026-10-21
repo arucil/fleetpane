@@ -1,0 +1,86 @@
+{
+  "ordinal": 628,
+  "revision": "32fe3bd4a036f3947c43a7a7eb693d19534d3819",
+  "date": "2026-01-11T23:46:14+07:00",
+  "committer_date": "2026-01-11T23:46:14+07:00",
+  "parents": [
+    "f81fd1c01aa01fc11cebc026a7eec48aec2edf5c"
+  ],
+  "subject": "Add OS notifications for agent attention",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/utils/os-notifications.ts"
+  ],
+  "source_receipt_digest": "sha256:2ca2a5aadab46da49bd764f961595792dcacd91e0b88c6acd285d2cca0bd0d5c",
+  "diff_tree_digest": "sha256:24fa010e61e77dd94fa2078da8a6d724094d4bbcdd62eeb30e5465779084dc92",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        64,
+        65
+      ],
+      "new_lines": [
+        66,
+        129
+      ],
+      "diff_block_lines": [
+        28,
+        91
+      ],
+      "hunk_header": "@@ -64,4 +66,108 @@ const derivePendingPermissionKey = (",
+      "substantive_changed_lines": 40,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 40,
+  "available_substantive_changed_lines": 552,
+  "receipt_file": "receipts/0628/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0628/followup-01.patch",
+      "source_receipt_digest": "sha256:bb6b28bfb42e0cf69f8e1a1814a8d4ff94d356a6e9815494505af74dbe41362f",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/os-notifications.ts",
+          "old_lines": null,
+          "new_lines": [
+            1,
+            52
+          ],
+          "diff_block_lines": [
+            7,
+            58
+          ],
+          "hunk_header": "@@ -0,0 +1,128 @@",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0628/followup-02.patch",
+      "source_receipt_digest": "sha256:10224bdbc0f99b32634bda215ba04ca053b9f222323170c5c02148cb904edfab",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": null,
+          "new_lines": [
+            442,
+            493
+          ],
+          "diff_block_lines": [
+            143,
+            194
+          ],
+          "hunk_header": "@@ -330,4 +436,83 @@ export function SessionProvider({",
+          "substantive_changed_lines": 41,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

@@ -1,0 +1,54 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":null,"new_lines":[147,198],"diff_block_lines":[153,204],"hunk_header":"@@ -0,0 +1,215 @@","substantive_changed_lines":35,"comparison":"parent"}
++  const now = Date.now();
++
++  for (const agent of agents) {
++    const isRunningOrAttention =
++      agent.status === "running" || agent.requiresAttention;
++    const isRecentlyActive =
++      now - agent.lastActivityAt.getTime() < ACTIVE_GRACE_PERIOD_MS;
++    const isActive = isRunningOrAttention || isRecentlyActive;
++
++    if (isActive) {
++      activeAgents.push(agent);
++    } else {
++      inactiveAgents.push(agent);
++    }
++  }
++
++  // Group active agents by project
++  const projectMap = new Map<string, AggregatedAgent[]>();
++  for (const agent of activeAgents) {
++    const projectKey = deriveProjectKey(agent.cwd);
++    const existing = projectMap.get(projectKey) || [];
++    existing.push(agent);
++    projectMap.set(projectKey, existing);
++  }
++
++  // Sort agents within each project by lastActivityAt (newest first)
++  const activeGroups: ProjectGroup[] = [];
++  for (const [projectKey, projectAgents] of projectMap) {
++    projectAgents.sort(
++      (a, b) => b.lastActivityAt.getTime() - a.lastActivityAt.getTime()
++    );
++    activeGroups.push({
++      projectKey,
++      projectName: deriveProjectName(projectKey),
++      agents: projectAgents,
++    });
++  }
++
++  // Sort project groups by most recent activity
++  activeGroups.sort((a, b) => {
++    const aRecent = a.agents[0]?.lastActivityAt.getTime() ?? 0;
++    const bRecent = b.agents[0]?.lastActivityAt.getTime() ?? 0;
++    return bRecent - aRecent;
++  });
++
++  // Group inactive agents by date
++  const dateMap = new Map<string, AggregatedAgent[]>();
++  for (const agent of inactiveAgents) {
++    const dateLabel = deriveDateGroup(agent.lastActivityAt);
++    const existing = dateMap.get(dateLabel) || [];
++    existing.push(agent);
++    dateMap.set(dateLabel, existing);

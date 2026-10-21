@@ -1,0 +1,54 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":null,"new_lines":[442,493],"diff_block_lines":[143,194],"hunk_header":"@@ -330,4 +436,83 @@ export function SessionProvider({","substantive_changed_lines":41,"comparison":"parent"}
++    const subscription = AppState.addEventListener("change", (nextState) => {
++      appStateRef.current = nextState;
++    });
++
++    return () => {
++      subscription.remove();
++    };
++  }, []);
++
++  const notifyAgentAttention = useCallback(
++    (params: {
++      agentId: string;
++      reason: "finished" | "error" | "permission";
++      timestamp: string;
++    }) => {
++      const appState = appStateRef.current;
++      const session = useSessionStore.getState().sessions[serverId];
++      const focusedAgentId = session?.focusedAgentId ?? null;
++      if (params.reason === "error") {
++        return;
++      }
++      const isActive = appState ? appState === "active" : true;
++      const isAwayFromAgent = !isActive || focusedAgentId !== params.agentId;
++      if (!isAwayFromAgent) {
++        return;
++      }
++
++      const timestampMs = new Date(params.timestamp).getTime();
++      const lastNotified = attentionNotifiedRef.current.get(params.agentId);
++      if (lastNotified && lastNotified >= timestampMs) {
++        return;
++      }
++      attentionNotifiedRef.current.set(params.agentId, timestampMs);
++
++      const title =
++        params.reason === "permission"
++          ? "Agent needs permission"
++          : "Agent finished";
++      let preview: string | null = null;
++
++      if (params.reason === "finished") {
++        const head = session?.agentStreamHead.get(params.agentId) ?? [];
++        const tail = session?.agentStreamTail.get(params.agentId) ?? [];
++        const lastMessage =
++          findLatestAssistantMessageText(head) ??
++          findLatestAssistantMessageText(tail);
++        preview = buildNotificationPreview(lastMessage);
++      } else if (params.reason === "permission") {
++        const permissionRequest = getLatestPermissionRequest(
++          session,
++          params.agentId
++        );

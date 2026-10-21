@@ -1,0 +1,31 @@
+FILE packages/app/react-native-web.d.ts
+RANGE {"path":"packages/app/react-native-web.d.ts","old_lines":null,"new_lines":[1,7],"diff_block_lines":[6,13],"hunk_header":"@@ -0,0 +1,7 @@","substantive_changed_lines":3,"comparison":"parent"}
+@@ -0,0 +1,7 @@
++import "react-native";
++
++declare module "react-native" {
++  interface PressableStateCallbackType {
++    hovered?: boolean;
++  }
++}
+FILE packages/app/src/hooks/use-audio-player.native.ts
+RANGE {"path":"packages/app/src/hooks/use-audio-player.native.ts","old_lines":[57,62],"new_lines":[57,62],"diff_block_lines":[5,13],"hunk_header":"@@ -57,6 +57,6 @@ export function useAudioPlayer(options?: AudioPlayerOptions) {","substantive_changed_lines":4,"comparison":"parent"}
+@@ -57,6 +57,6 @@ export function useAudioPlayer(options?: AudioPlayerOptions) {
+   const suppressedQueueRef = useRef<QueuedAudio[]>([]);
+   const isProcessingQueueRef = useRef(false);
+-  const playbackTimeoutRef = useRef<number | null>(null);
+-  const checkIntervalRef = useRef<number | null>(null);
++  const playbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
++  const checkIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+ 
+   async function play(audioData: Blob): Promise<number> {
+FILE packages/app/tsconfig.json
+RANGE {"path":"packages/app/tsconfig.json","old_lines":[13,17],"new_lines":[13,18],"diff_block_lines":[5,12],"hunk_header":"@@ -13,5 +13,6 @@","substantive_changed_lines":3,"comparison":"parent"}
+@@ -13,5 +13,6 @@
+     ".expo/types/**/*.ts",
+     "expo-env.d.ts",
+-    "nativewind-env.d.ts"
++    "nativewind-env.d.ts",
++    "react-native-web.d.ts"
+   ]
+ }

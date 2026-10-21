@@ -1,0 +1,43 @@
+{
+  "ordinal": 621,
+  "revision": "018e3b6a8c17daabbb58b20685cee91f8a618eca",
+  "date": "2026-01-11T00:10:26+07:00",
+  "committer_date": "2026-01-11T00:10:26+07:00",
+  "parents": [
+    "a0abf4a79f3523ae00736c375864c42b3f1bdebe"
+  ],
+  "subject": "feat(app): extract tool call details for inline/sheet display",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "A\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx"
+  ],
+  "source_receipt_digest": "sha256:09a91f722409dc818806f2e77e4d6e979f297890ab3e9817787e9cc281aa385b",
+  "diff_tree_digest": "sha256:3008331fff92b20baf0c5651033527e86e4d3c7369290254dbb94685fa40695f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message.tsx",
+      "old_lines": [
+        1158,
+        1177
+      ],
+      "new_lines": [
+        1157,
+        1192
+      ],
+      "diff_block_lines": [
+        53,
+        102
+      ],
+      "hunk_header": "@@ -1158,20 +1157,36 @@ export const ToolCall = memo(function ToolCall({",
+      "substantive_changed_lines": 30,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 30,
+  "available_substantive_changed_lines": 520,
+  "receipt_file": "receipts/0621/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

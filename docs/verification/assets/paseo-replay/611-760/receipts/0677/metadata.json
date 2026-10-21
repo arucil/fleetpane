@@ -1,0 +1,77 @@
+{
+  "ordinal": 677,
+  "revision": "cba3ad2721604c72ab8163609d7075287c611f56",
+  "date": "2026-01-21T08:16:11+07:00",
+  "committer_date": "2026-01-21T08:16:11+07:00",
+  "parents": [
+    "513138ac134e63df7c30e54ebb86a0870f347885"
+  ],
+  "subject": "chore: checkpoint",
+  "diff_tree_paths": [
+    "A\tpackages/relay/src/live-relay.e2e.test.ts",
+    "A\tpackages/relay/wrangler.toml",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-cli-full-access-ipc.test.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-mcp-agent-commands.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-mcp-agent.commands.test.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-mcp-agent.resume-errors.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/daemon-restart-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:ec58c285e2b2f1ac3222118583bfcda1c4a26d352d5874120fe671b4c3ef4bd5",
+  "diff_tree_digest": "sha256:bea8a22de5b3c94364ad468683428d7bf5e11fbb177ea1f7e303f8e4af461de5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+      "old_lines": [
+        1933,
+        1934
+      ],
+      "new_lines": [
+        1935,
+        1970
+      ],
+      "diff_block_lines": [
+        18,
+        53
+      ],
+      "hunk_header": "@@ -1933,4 +1935,247 @@ function normalizeCommand(command: Command): string {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 1342,
+  "receipt_file": "receipts/0677/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0677/followup-01.patch",
+      "source_receipt_digest": "sha256:e6d4a3b4a459caf1cf6b2fc3ee33d3d573fdf58fb498c7e9d9653183a30a13ab",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+          "old_lines": [
+            3269,
+            3272
+          ],
+          "new_lines": [
+            3523,
+            3551
+          ],
+          "diff_block_lines": [
+            299,
+            328
+          ],
+          "hunk_header": "@@ -3269,4 +3523,29 @@ class CodexMcpAgentSession implements AgentSession {",
+          "substantive_changed_lines": 18,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

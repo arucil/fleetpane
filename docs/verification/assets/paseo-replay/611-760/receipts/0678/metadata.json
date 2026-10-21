@@ -1,0 +1,42 @@
+{
+  "ordinal": 678,
+  "revision": "4a903124807700f85878daca11d3fb7085248264",
+  "date": "2026-01-21T08:23:42+07:00",
+  "committer_date": "2026-01-21T08:23:42+07:00",
+  "parents": [
+    "cba3ad2721604c72ab8163609d7075287c611f56"
+  ],
+  "subject": "feat: emit connection offer",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "A\tpackages/server/src/server/connection-offer.ts",
+    "A\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts"
+  ],
+  "source_receipt_digest": "sha256:2470602e565d52692495c86e692d18b46dff1c16d6cb76b14b01ac85aa637401",
+  "diff_tree_digest": "sha256:0128497fa703bfbcabee713c758c73d6765995adac9ecec6bceb0a989e6ae6cb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/connection-offer.ts",
+      "old_lines": null,
+      "new_lines": [
+        3,
+        38
+      ],
+      "diff_block_lines": [
+        9,
+        44
+      ],
+      "hunk_header": "@@ -0,0 +1,113 @@",
+      "substantive_changed_lines": 26,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 237,
+  "receipt_file": "receipts/0678/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

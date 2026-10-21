@@ -1,0 +1,64 @@
+{
+  "ordinal": 627,
+  "revision": "f81fd1c01aa01fc11cebc026a7eec48aec2edf5c",
+  "date": "2026-01-11T22:36:34+07:00",
+  "committer_date": "2026-01-11T22:36:34+07:00",
+  "parents": [
+    "0ec2fc62db5866981c031042ea04c8652a6e8050"
+  ],
+  "subject": "Add command autocomplete and stream spacing updates",
+  "diff_tree_paths": [
+    "A\t.tasks/5eee8cb7.md",
+    "A\t.tasks/89c1d14c.md",
+    "M\t.tasks/933d0b5b.md",
+    "A\t.tasks/947a21cd.md",
+    "A\t.tasks/a1e6eec8.md",
+    "A\t01-main-screen.png",
+    "A\t02-agent-screen.png",
+    "A\t02-sidebar-open.png",
+    "A\t03-after-slash.png",
+    "A\t03-agent-screen.png",
+    "A\t04-after-slash.png",
+    "A\t05-autocomplete-visible.png",
+    "A\tpackages/app/01-initial-state.png",
+    "A\tpackages/app/maestro/command-autocomplete.yaml",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/components/command-autocomplete.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "A\tpackages/app/src/hooks/use-agent-commands-query.ts",
+    "M\tpackages/app/src/lib/send-rpc-request.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:9e206b050013b8a876503177d77dc4747887c6a95729508df8adb99607428df5",
+  "diff_tree_digest": "sha256:8c355277a0da78749e8ca7a21eb38cd7f1950becb301fedde6e29e8eb3fc7f05",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        370,
+        373
+      ],
+      "new_lines": [
+        399,
+        460
+      ],
+      "diff_block_lines": [
+        44,
+        106
+      ],
+      "hunk_header": "@@ -370,4 +399,62 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 35,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 35,
+  "available_substantive_changed_lines": 716,
+  "receipt_file": "receipts/0627/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

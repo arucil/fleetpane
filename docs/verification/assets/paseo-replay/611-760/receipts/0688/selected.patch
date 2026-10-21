@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/agent-response-loop.ts
+RANGE {"path":"packages/server/src/server/agent/agent-response-loop.ts","old_lines":null,"new_lines":[6,41],"diff_block_lines":[12,47],"hunk_header":"@@ -0,0 +1,204 @@","substantive_changed_lines":24,"comparison":"parent"}
++import { getAgentProviderDefinition } from "./provider-manifest.js";
++
++export type JsonSchema = Record<string, unknown>;
++
++export type AgentCaller = (prompt: string) => Promise<string>;
++
++export class StructuredAgentResponseError extends Error {
++  readonly lastResponse: string;
++  readonly validationErrors: string[];
++
++  constructor(message: string, options: { lastResponse: string; validationErrors: string[] }) {
++    super(message);
++    this.name = "StructuredAgentResponseError";
++    this.lastResponse = options.lastResponse;
++    this.validationErrors = options.validationErrors;
++  }
++}
++
++export interface StructuredAgentResponseOptions<T> {
++  caller: AgentCaller;
++  prompt: string;
++  schema: z.ZodType<T> | JsonSchema;
++  maxRetries?: number;
++  schemaName?: string;
++}
++
++export interface StructuredAgentGenerationOptions<T> {
++  manager: AgentManager;
++  agentConfig: AgentSessionConfig;
++  agentId?: string;
++  prompt: string;
++  schema: z.ZodType<T> | JsonSchema;
++  maxRetries?: number;
++  schemaName?: string;
++}
++

@@ -1,0 +1,66 @@
+{
+  "ordinal": 612,
+  "revision": "b90c17a919004978fc35519f4c433516c1953d95",
+  "date": "2026-01-09T18:00:34+07:00",
+  "committer_date": "2026-01-09T18:00:34+07:00",
+  "parents": [
+    "1a2498e9e781cc3c57529cd2fb24f4fa6d6268f8"
+  ],
+  "subject": "perf: optimize agent stream view rendering",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx"
+  ],
+  "source_receipt_digest": "sha256:b764b53653e7e66ac494082798846df42602005cacee0a962ee641256bd78659",
+  "diff_tree_digest": "sha256:7f78e36d03f4603d72e68fa9a5844005a6dee939847d1aaf860bfb650cf0cbed",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-view.tsx",
+      "old_lines": [
+        241,
+        293
+      ],
+      "new_lines": [
+        241,
+        258
+      ],
+      "diff_block_lines": [
+        6,
+        69
+      ],
+      "hunk_header": "@@ -241,94 +241,97 @@ export function AgentStreamView({",
+      "substantive_changed_lines": 50,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 50,
+  "available_substantive_changed_lines": 168,
+  "receipt_file": "receipts/0612/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0612/followup-01.patch",
+      "source_receipt_digest": "sha256:053892d0bb09731e998609d9128b21e46273e0d43c8bf3a667b7d22bf1c4354c",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            326,
+            334
+          ],
+          "new_lines": [
+            322,
+            337
+          ],
+          "diff_block_lines": [
+            160,
+            180
+          ],
+          "hunk_header": "@@ -241,94 +241,97 @@ export function AgentStreamView({",
+          "substantive_changed_lines": 10,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

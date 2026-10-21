@@ -1,0 +1,21 @@
+FILE packages/app/package.json
+RANGE {"path":"packages/app/package.json","old_lines":[15,19],"new_lines":[15,21],"diff_block_lines":[5,13],"hunk_header":"@@ -15,5 +15,7 @@","substantive_changed_lines":4,"comparison":"parent"}
+@@ -15,5 +15,7 @@
+     "test": "vitest run",
+     "test:e2e": "playwright test",
+-    "test:e2e:ui": "playwright test --ui"
++    "test:e2e:ui": "playwright test --ui",
++    "build:web": "expo export --platform web",
++    "deploy:web": "npm run build:web && wrangler pages deploy dist --project-name paseo-app"
+   },
+   "dependencies": {
+FILE packages/app/package.json
+RANGE {"path":"packages/app/package.json","old_lines":[89,93],"new_lines":[91,96],"diff_block_lines":[14,21],"hunk_header":"@@ -89,5 +91,6 @@","substantive_changed_lines":3,"comparison":"parent"}
+@@ -89,5 +91,6 @@
+     "playwright": "^1.56.1",
+     "typescript": "~5.9.2",
+-    "vitest": "^3.2.4"
++    "vitest": "^3.2.4",
++    "wrangler": "^4.59.1"
+   }
+ }

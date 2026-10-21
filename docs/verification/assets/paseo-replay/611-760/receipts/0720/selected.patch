@@ -1,0 +1,38 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[422,454],"new_lines":[419,425],"diff_block_lines":[43,78],"hunk_header":"@@ -422,93 +419,36 @@ export default function SettingsScreen() {","substantive_changed_lines":29,"comparison":"parent"}
+   );
+ 
+-  const handleOpenDaemonForm = useCallback((profile?: DaemonProfile) => {
+-    if (profile) {
+-      setDaemonFormMode("manual");
+-      setPairSubMode("choose");
+-      setDaemonForm({
+-        id: profile.id,
+-        label: profile.label,
+-        endpoint: profile.endpoints?.[0] ?? "",
+-        offerUrl: "",
+-      });
+-    } else {
+-      setDaemonFormMode("choose");
+-      setPairSubMode("choose");
+-      setDaemonForm({ id: null, label: "", endpoint: "", offerUrl: "" });
+-    }
+-    setIsDaemonFormVisible(true);
+-  }, []);
+-
+-  const handleCloseDaemonForm = useCallback(() => {
+-    setIsDaemonFormVisible(false);
+-    setDaemonFormMode("choose");
+-    setPairSubMode("choose");
+-    setDaemonForm({ id: null, label: "", endpoint: "", offerUrl: "" });
++  const handleEditDaemon = useCallback((profile: DaemonProfile) => {
++    setEditingDaemon(profile);
++    setEditLabel(profile.label ?? "");
+   }, []);
+ 
+-  const handleSubmitDaemonForm = useCallback(async () => {
+-    if (daemonFormMode === "manual") {
+-      const raw = daemonForm.endpoint.trim();
+-      if (raw.includes("://") || raw.includes("/")) {
+-        Alert.alert("Invalid host", "Manual hosts must be entered as host:port (no ws://, no /ws).");
+-        return;

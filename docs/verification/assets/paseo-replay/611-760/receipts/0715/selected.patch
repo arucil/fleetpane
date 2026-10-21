@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[448,449],"new_lines":[495,530],"diff_block_lines":[70,105],"hunk_header":"@@ -448,4 +495,42 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":27,"comparison":"parent"}
+   }, []);
+ 
++  const handleOpenViewMenu = useCallback((event: any) => {
++    const { pageX, pageY } = event?.nativeEvent ?? {};
++    setViewMenuAnchor({
++      left: typeof pageX === "number" ? pageX : 0,
++      top: typeof pageY === "number" ? pageY : 0,
++    });
++    setViewMenuVisible(true);
++  }, []);
++
++  const handleCloseViewMenu = useCallback(() => {
++    setViewMenuVisible(false);
++    setViewMenuHeight(0);
++  }, []);
++
++  const handleViewMenuLayout = useCallback((event: LayoutChangeEvent) => {
++    const { height } = event.nativeEvent.layout;
++    setViewMenuHeight((current) => (current === height ? current : height));
++  }, []);
++
++  const handleOpenShipMenu = useCallback((event: any) => {
++    const { pageX, pageY } = event?.nativeEvent ?? {};
++    setShipMenuAnchor({
++      left: typeof pageX === "number" ? pageX : 0,
++      top: typeof pageY === "number" ? pageY : 0,
++    });
++    setShipMenuVisible(true);
++  }, []);
++
++  const handleCloseShipMenu = useCallback(() => {
++    setShipMenuVisible(false);
++    setShipMenuHeight(0);
++  }, []);
++
++  const handleShipMenuLayout = useCallback((event: LayoutChangeEvent) => {

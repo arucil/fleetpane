@@ -1,0 +1,14 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[241,246],"new_lines":[251,259],"diff_block_lines":[36,47],"hunk_header":"@@ -241,6 +251,9 @@ export function groupAgents(","substantive_changed_lines":5,"comparison":"parent"}
+@@ -241,6 +251,9 @@ export function groupAgents(
+   }
+ 
+-  // Group active agents by project
+-  const projectMap = new Map<string, AggregatedAgent[]>();
++  // Group active agents by project, tracking truly active vs recently active
++  const projectMap = new Map<
++    string,
++    { trulyActive: AggregatedAgent[]; recentlyActive: AggregatedAgent[] }
++  >();
+   for (const agent of activeAgents) {
+     const remoteKey = deriveRemoteProjectKey(

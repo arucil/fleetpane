@@ -1,0 +1,11 @@
+FILE packages/app/src/hooks/use-favicon-status.ts
+RANGE {"path":"packages/app/src/hooks/use-favicon-status.ts","old_lines":[68,72],"new_lines":[68,74],"diff_block_lines":[5,13],"hunk_header":"@@ -68,5 +68,7 @@ function updateFavicon(status: FaviconStatus, colorScheme: ColorScheme) {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -68,5 +68,7 @@ function updateFavicon(status: FaviconStatus, colorScheme: ColorScheme) {
+ 
+ function getSystemColorScheme(): ColorScheme {
+-  if (typeof window === "undefined") return "dark";
++  if (Platform.OS !== "web" || typeof window === "undefined" || typeof window.matchMedia !== "function") {
++    return "dark";
++  }
+   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+ }

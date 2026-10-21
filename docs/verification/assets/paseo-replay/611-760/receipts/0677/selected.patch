@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/providers/codex-mcp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-mcp-agent.ts","old_lines":[1933,1934],"new_lines":[1935,1970],"diff_block_lines":[18,53],"hunk_header":"@@ -1933,4 +1935,247 @@ function normalizeCommand(command: Command): string {","substantive_changed_lines":25,"comparison":"parent"}
+ }
+ 
++function resolveCodexHomeDir(): string {
++  return process.env.CODEX_HOME ?? path.join(os.homedir(), ".codex");
++}
++
++function tokenizeCommandArgs(args: string): string[] {
++  const tokens: string[] = [];
++  let current = "";
++  let quote: "'" | "\"" | null = null;
++  for (let i = 0; i < args.length; i += 1) {
++    const ch = args[i]!;
++    if (quote) {
++      if (ch === quote) {
++        quote = null;
++        continue;
++      }
++      if (ch === "\\" && i + 1 < args.length) {
++        const next = args[i + 1]!;
++        if (next === quote || next === "\\" || next === "n" || next === "t") {
++          i += 1;
++          current += next === "n" ? "\n" : next === "t" ? "\t" : next;
++          continue;
++        }
++      }
++      current += ch;
++      continue;
++    }
++
++    if (ch === "'" || ch === "\"") {
++      quote = ch;
++      continue;
++    }
++
++    if (/\s/.test(ch)) {
++      if (current) {

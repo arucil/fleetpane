@@ -1,0 +1,38 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[103,106],"new_lines":[112,145],"diff_block_lines":[35,70],"hunk_header":"@@ -103,10 +112,82 @@ export function AgentList({","substantive_changed_lines":25,"comparison":"parent"}
+   }, [actionAgent, deleteAgent]);
+ 
+-  const renderAgentItem = useCallback<ListRenderItem<AggregatedAgent>>(
+-    ({ item: agent }) => {
++  const deriveBranchLabel = useCallback((checkout: CheckoutStatusPayload | null): string | null => {
++    if (!checkout || !checkout.isGit) {
++      return null;
++    }
++    const currentBranch: string | null = checkout.currentBranch ?? null;
++    const baseRef: string | null = checkout.baseRef ?? null;
++    if (!currentBranch) {
++      return null;
++    }
++    if (baseRef && currentBranch === baseRef) {
++      return null;
++    }
++    return currentBranch;
++  }, []);
++
++  const deriveProjectPath = useCallback(
++    (agent: AggregatedAgent, checkout: CheckoutStatusPayload | null): string => {
++      const basePath = checkout?.isGit ? (checkout.repoRoot ?? agent.cwd) : agent.cwd;
++      const worktreeMarker = ".paseo/worktrees/";
++      const idx = basePath.indexOf(worktreeMarker);
++      if (idx !== -1) {
++        const afterMarker = basePath.slice(idx + worktreeMarker.length);
++        const slashIdx = afterMarker.indexOf("/");
++        if (slashIdx !== -1) {
++          return afterMarker.slice(slashIdx + 1);
++        }
++        return afterMarker;
++      }
++      return basePath;
++    },
++    []
++  );

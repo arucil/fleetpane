@@ -1,0 +1,54 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[855,889],"new_lines":[983,1004],"diff_block_lines":[350,401],"hunk_header":"@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([","substantive_changed_lines":38,"comparison":"parent"}
++    const flushed = flushHeadToTail(nextTail, nextHead);
++    if (flushed !== nextTail) {
++      nextTail = flushed;
++      changedTail = true;
+     }
+-    nextBuffer = null;
+-    changedBuffer = true;
++    nextHead = [];
++    changedHead = true;
+   };
+ 
+-  if (event.type === "timeline") {
+-    if (event.item.type === "assistant_message") {
+-      const { chunk, hasContent } = normalizeChunk(event.item.text);
+-      if (!chunk) {
+-        return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
+-      }
+-      if (!hasContent && !nextBuffer) {
+-        return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
+-      }
+-      if (nextBuffer) {
+-        const updatedText = `${nextBuffer.text}${chunk}`;
+-        if (updatedText !== nextBuffer.text) {
+-          nextBuffer = { ...nextBuffer, text: updatedText };
+-          changedBuffer = true;
+-        }
+-      } else {
+-        const idSeed = chunk.trim() || chunk;
+-        nextBuffer = {
+-          id: createUniqueTimelineId(nextStream, "assistant", idSeed, timestamp),
+-          text: chunk,
+-          timestamp,
+-        };
+-        changedBuffer = true;
+-      }
+-      return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
++  // Handle turn completion events - flush everything
++  if (STREAM_COMPLETION_EVENTS.has(event.type)) {
++    flushHead();
++    // Also finalize any remaining thoughts in tail
++    const finalized = finalizeActiveThoughts(nextTail);
++    if (finalized !== nextTail) {
++      nextTail = finalized;
++      changedTail = true;
+     }
++    return { tail: nextTail, head: nextHead, changedTail, changedHead };
++  }
+ 
+-    if (nextBuffer) {
+-      commitBuffer();
+-    }
++  const incomingKind = getEventItemKind(event);

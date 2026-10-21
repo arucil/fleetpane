@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 610,
-    "last_revision": "666a0f2fa62a3310abde4779a90f7c2bd2756209",
-    "next_revision": "1a2498e9e781cc3c57529cd2fb24f4fa6d6268f8",
-    "next_ordinal": 611
+    "last_ordinal": 760,
+    "last_revision": "96b211a2cf70742e48308ccf407f27eb1614a000",
+    "next_revision": "f7935f9cc14e0097d9fcf136305ea0b4d14414e4",
+    "next_ordinal": 761
   },
   "entries": [
     {
@@ -8200,6 +8200,2161 @@
       ],
       "finding": "Generated slug truncated to fifty characters, preferably at a hyphen.",
       "fleetpane_action": "Keep explicit validated branch names; generated names, if added, must preserve preview identity."
+    },
+    {
+      "ordinal": 611,
+      "revision": "1a2498e9e781cc3c57529cd2fb24f4fa6d6268f8",
+      "date": "2026-01-09T13:01:26+07:00",
+      "category": "architecture-removal",
+      "finding": "Selected removal deletes singleton terminal and Playwright MCP client construction; session hunks also remove command hydration and tmux cleanup. This is removal of an old orchestration layer, not evidence that user terminals are unnecessary.",
+      "fleetpane_action": "Keep Session Host ownership and native terminal; do not reintroduce a second MCP-managed terminal/browser lifecycle.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/llm-openai.ts",
+        "packages/server/src/server/session.ts",
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/utils/path.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:6d6cbb26176a7d3f03b9c22e5732108303245893bd490ed5b33955b32877569b"
+    },
+    {
+      "ordinal": 612,
+      "revision": "b90c17a919004978fc35519f4c433516c1953d95",
+      "date": "2026-01-09T18:00:34+07:00",
+      "category": "render-performance",
+      "finding": "Stream row dispatch changes from a newly created function to useCallback while retaining typed user/assistant/tool branches. The sampled hunk stops before callback dependencies; no measured speedup established. Supplement reads callback dependencies: inline-path handler and agent.cwd; memoization is dependency-bound, no benchmark run.",
+      "fleetpane_action": "Existing bounded virtualization covers the broad need; inspect stable row identity/invalidation when implementing GPUI stream updates, without copying React hooks.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:14101a209c9da773fed4fb0d8fa040beb6e0f0c29edc608374c8ab8b9c1c1b00"
+    },
+    {
+      "ordinal": 613,
+      "revision": "2d03e86bcb4cf8f64511760776006e325d40f236",
+      "date": "2026-01-09T19:00:41+07:00",
+      "category": "workspace-isolation",
+      "finding": "Worktree-enabled form adds editable base-branch controls, explicit confirm/cancel and branch error display. Mnemonic generation implementation was not in this initial selected hunk. Server supplement replaces sanitized branch-derived slug with createNameId, using supplied worktreeSlug unchanged when truthy.",
+      "fleetpane_action": "Candidate gap: explicit isolated worktree launch with user-selected base and visible creation errors, if Fleetpane lacks it; not Git Diff. Current Fleetpane already has pinned new-worktree preview/apply and explicit existing-worktree attachment with real Git/native evidence; setup scripts and safe removal remain separate gaps.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a18990d505d4766d28a20ad44270c5fde467450340e348011e81bbf49e143295"
+    },
+    {
+      "ordinal": 614,
+      "revision": "584b0413a5a77ffbf960a5a43b40bd4caa8266b9",
+      "date": "2026-01-09T19:11:35+07:00",
+      "category": "readability",
+      "finding": "Shared font scale increases xs/base from 10/14 to 12/16 and all larger tokens by two points. This is a readability change, not a new workflow.",
+      "fleetpane_action": "Use native typography and accessibility scaling; no missing workflow inferred.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/styles/theme.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:8b9ec5dd2ba63184f6567a18c1cae1dcb4fef9d43a884a6ae1c16953376e3c63"
+    },
+    {
+      "ordinal": 615,
+      "revision": "42129926ae9d36d0ad4a9f1213f26bab04a45a89",
+      "date": "2026-01-10T22:44:57+07:00",
+      "category": "artifact-download",
+      "finding": "Download changes to resumable API with authenticated headers, byte percentage, average speed and ETA; cancelled download becomes an error before sharing result URI. Screenshot additions are only path-listed.",
+      "fleetpane_action": "Candidate artifact export workflow: explicit destination, progress/cancel and final receipt; validate local-file scope before adopting remote download machinery. Current Fleetpane already verifies confined file/image previews, Back/Forward/root recovery and atomic raw local no-overwrite export; remote download/progress/cancel remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c5ea17170c70831fa05fb6c068df68cd383b2aaf5a131a432d942ffdcbadc1f5"
+    },
+    {
+      "ordinal": 616,
+      "revision": "f073be0b98312417510a6d0d928c0948b1e358ba",
+      "date": "2026-01-10T23:37:13+07:00",
+      "category": "tool-display",
+      "finding": "DiffViewer renders segmented word changes with add/remove highlight while retaining unsplit line rendering. Parser correctness is not established by this display hunk.",
+      "fleetpane_action": "Git Diff remains deferred; do not add diff workflow from this commit. Reuse only general typed tool detail readability principles.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/diff-viewer.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:6df6de6f98870e10ae1ca2e4f81e8a1d438ab54c8fc075eafbec05fc41f47ddb"
+    },
+    {
+      "ordinal": 617,
+      "revision": "5aebb418df684ca55dadb66d93dfb437feda2065",
+      "date": "2026-01-10T23:47:37+07:00",
+      "category": "composer-sizing",
+      "finding": "Native input removes fixed height, retains min/max bounds and always enables scrolling; web retains measured height. Only 13 substantive changed lines exist in selected patch.",
+      "fleetpane_action": "Keep GPUI multiline composer bounded and scrollable; native text measurement should own growth.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:87c1a14c1975898b39dfdf4882dd25e61fa6b569767d33838335af78974566d1"
+    },
+    {
+      "ordinal": 618,
+      "revision": "3ea26d75040f217388dbc9a1f73e9cb043aa27ba",
+      "date": "2026-01-10T23:49:24+07:00",
+      "category": "binary-only",
+      "finding": "diff-tree lists deletion of 22 temporary PNG files; two binary deletion headers read, image contents not decoded.",
+      "fleetpane_action": "No Fleetpane product change; keep transient QA captures outside source history.",
+      "inspection": "binary-metadata-only",
+      "paths_inspected": [
+        "packages/app/01-diff-sidebar-open.png",
+        "packages/app/02-after-vertical-scroll.png"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b3f9e0ab6ca2075df45ab2a318828243d284ede6c673626515018332a6241ec7"
+    },
+    {
+      "ordinal": 619,
+      "revision": "90481980454ed8247a646ddfe553e1d1ee0c1a44",
+      "date": "2026-01-10T23:51:06+07:00",
+      "category": "import-only",
+      "finding": "Only changed source is ScrollView import moving from react-native to gesture-handler; surrounding usage is unchanged in this patch.",
+      "fleetpane_action": "No GPUI integration to copy; verify nested scrolling with native hit-testing when tool details grow.",
+      "inspection": "import-only-source-change",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ccf69757339207e1fa1735a79012ef36715c40ba10dcc3f35c5a912230ca6924"
+    },
+    {
+      "ordinal": 620,
+      "revision": "a0abf4a79f3523ae00736c375864c42b3f1bdebe",
+      "date": "2026-01-10T23:55:44+07:00",
+      "category": "tool-read-details",
+      "finding": "Read tool details show file path, optional offset/limit and nested horizontal/vertical content scroll views. Empty content is hidden by truthiness.",
+      "fleetpane_action": "Existing typed tools cover the main capability; ensure read ranges, empty successful reads and bounded selectable content are represented explicitly.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:083b522abf7ee60d33b3b572f8600eb8c04f11b21746cd01e22090fe326844fd"
+    },
+    {
+      "ordinal": 621,
+      "revision": "018e3b6a8c17daabbb58b20685cee91f8a618eca",
+      "date": "2026-01-11T00:10:26+07:00",
+      "category": "tool-details",
+      "finding": "ToolCall now opens a sheet on mobile and toggles inline details on desktop, reusing parsed display and errors with a max height of 400.",
+      "fleetpane_action": "Audit existing typed tools for inline expansion and stable scroll; use a shared typed detail model with native presentation.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:3415c10fded44c9eb1a60206b327c2ce4bcfbc0058b58020aeccf2c96bf3219f"
+    },
+    {
+      "ordinal": 622,
+      "revision": "f5810c18ac45e359cd8408eec1c84d26228c7e79",
+      "date": "2026-01-11T00:20:29+07:00",
+      "category": "tool-errors",
+      "finding": "Shell parser accepts either success output or structured error content; unknown result shapes still produce empty output, which can hide information.",
+      "fleetpane_action": "Preserve raw unknown tool results and failure status alongside typed rendering; do not silently replace unrecognized output with empty text.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/utils/tool-call-parsers.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:868f36fef71330374bfee8b82a1ce655a8f4dc3197ef07e43db3c9efa045096a"
+    },
+    {
+      "ordinal": 623,
+      "revision": "7fe10f9b4ad319d9a56cd8800a9dbeee9e29f4b0",
+      "date": "2026-01-11T09:29:00+07:00",
+      "category": "file-navigation-recovery",
+      "finding": "Amid deletion of reports/scripts/screenshots, explorer error state gains Go to workspace when activePath is not root; Retry remains available.",
+      "fleetpane_action": "Useful bounded explorer recovery: retain error plus explicit workspace-root navigation; do not claim deleted reports prove current behavior. Current Fleetpane already verifies confined file/image previews, Back/Forward/root recovery and atomic raw local no-overwrite export; remote download/progress/cancel remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:2c59a1307aac902a116f4634c239f4478d3abe0e731af4eeb4cfc68a41e325c1"
+    },
+    {
+      "ordinal": 624,
+      "revision": "ebabcc09e58283a398c8ef64fdb1301db96f432c",
+      "date": "2026-01-11T16:00:25+07:00",
+      "category": "stream-model-refactor",
+      "finding": "Head/tail supplement keeps assistant/thought increments in head, flushes on kind transition/nonstreamable input and turn completion, and finalizes thoughts on completion; legacy wrapper remains. No eviction bound is visible in these hunks. OpenCode integration was not fully inspected.",
+      "fleetpane_action": "Existing bounded virtualized history already addresses this area; preserve stable committed rows and explicit streaming transitions, without treating head/tail separation as a memory bound. Unsupported OpenCode stays excluded.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx",
+        "packages/app/src/types/stream.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:56f975f48e3207d29ae53424c88ca3e09a1361a0cffea6698c4690baadaea8f8"
+    },
+    {
+      "ordinal": 625,
+      "revision": "e57cad2660c0ae2483bea9707715eefbc03a0720",
+      "date": "2026-01-11T16:21:59+07:00",
+      "category": "launch-preferences",
+      "finding": "User provider changes restore that provider's saved model/mode; server, model and mode selections persist through dedicated preference setters.",
+      "fleetpane_action": "Useful small workflow: persist launch preferences per supported provider/workspace, validate stale capabilities and preserve explicit current user edits.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:1f8fd5cd02afd66a17514b7fec136ba3fba8f50d2b3458f075d5ee85ac59d392"
+    },
+    {
+      "ordinal": 626,
+      "revision": "0ec2fc62db5866981c031042ea04c8652a6e8050",
+      "date": "2026-01-11T17:16:08+07:00",
+      "category": "provider-commands",
+      "finding": "Production Claude session lists SDK supportedCommands, executes slash prompts, extracts local-command-stdout from user messages, falls back to assistant text, and throws turn failure; probe helper separately implements input queue.",
+      "fleetpane_action": "Useful capability-backed command discovery design, implemented independently for Codex app-server/DeepSeek ACP only where supported. Do not copy Claude output-tag parsing.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/poc-commands/investigate-command-output.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0259f647768aa91e8b084925d136cd9fae8acb13222d726a55b3fdd213f5b6e3"
+    },
+    {
+      "ordinal": 627,
+      "revision": "f81fd1c01aa01fc11cebc026a7eec48aec2edf5c",
+      "date": "2026-01-11T22:36:34+07:00",
+      "category": "command-discovery",
+      "finding": "Autocomplete supports cyclic arrow navigation, Tab/Enter insertion and refocus; Escape clears the entire draft. Commands are inserted rather than sent.",
+      "fleetpane_action": "Potential supported-provider command palette; preserve draft on Escape and distinguish completion from execution. Claude-only catalog is not in scope.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c527657593f484bf08fd5cd282f0cdf835046f8ecd92afa11f9031e1766f51a5"
+    },
+    {
+      "ordinal": 628,
+      "revision": "32fe3bd4a036f3947c43a7a7eb693d19534d3819",
+      "date": "2026-01-11T23:46:14+07:00",
+      "category": "attention-preview",
+      "finding": "Notification helper normalizes/truncates text to 220 chars, searches latest assistant row and resolves pending permissions; dispatch/permission policy not yet read. Dispatch supplement explicitly skips error notifications, suppresses currently viewed session, and deduplicates by agent/timestamp before preview lookup. OS adapter requests permission through shared in-flight state.",
+      "fleetpane_action": "Candidate attention workflow, pending dispatch inspection; default privacy-safe previews and navigation to exact session/request using Host event identity. Current Fleetpane has pending attention and bounded terminal-turn results/local review; OS delivery/mute/tray and durable full inbox remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/utils/os-notifications.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:84d3e99e29db0b3c30bcfa41c6de18203917a0b6d048318175bb7b0084a839a8"
+    },
+    {
+      "ordinal": 629,
+      "revision": "7c2e959c196cca46789c160597e702d181fa7823",
+      "date": "2026-01-11T23:56:56+07:00",
+      "category": "metadata-cleanup",
+      "finding": "Deletes task documents and adds .tasks/ ignore rule. Selected deleted OpenCode task is historical planning data, not implemented API proof. Exact .gitignore changed range also read.",
+      "fleetpane_action": "No Fleetpane product action; ignore transient task metadata locally when appropriate and never import historical instructions as authority.",
+      "inspection": "historical-document/config-metadata",
+      "paths_inspected": [
+        ".tasks/90e02e62.md",
+        ".gitignore"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d3659d7c8ad39b2534e437b72649a7f27744e3d4e9a879db902e3af1843d0b23"
+    },
+    {
+      "ordinal": 630,
+      "revision": "868f9fb57127b47820d3bd24ec730cdf42665c96",
+      "date": "2026-01-12T13:30:20+07:00",
+      "category": "test-infrastructure",
+      "finding": "Selected browser helper covers home/settings navigation, working-directory selection, host fallback and agent creation by Enter. Large client/lifecycle refactor paths were listed but not read.",
+      "fleetpane_action": "Use as scenario ideas only for native acceptance; no claim that new daemon client, lifecycle or tests passed.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/app.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7a4be915098eb373cab170de665a2f7f65b20b07d4155b8fc02b68a02bb337c7"
+    },
+    {
+      "ordinal": 631,
+      "revision": "2fa7ec17cbe3aa418bda5d520baabc3433dd01dd",
+      "date": "2026-01-13T11:06:21+07:00",
+      "category": "approval-wire-format",
+      "finding": "Codex permission mapping changes from requiring an explicit exec-approval tag to treating missing tags as Codex exec approval; only explicitly non-exec tags use MCP ElicitResult. Supplement confirms explicit non-exec variant resolves MCP accept/decline/cancel; default resolves Codex approved/denied/abort plus denial reason.",
+      "fleetpane_action": "Existing explicit approval receipts should retain negotiated wire types; test untagged and mismatched request variants rather than transplanting MCP assumptions to app-server.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:766800530a300a1a76be590800bf66879b77e278adc0a0ced828f116ef876041"
+    },
+    {
+      "ordinal": 632,
+      "revision": "7f7f5c53e62cc073ca41e386529d140b6e83306f",
+      "date": "2026-01-13T11:50:13+07:00",
+      "category": "attention-routing",
+      "finding": "Server checks all connected sessions for focused agent activity within 60 seconds and computes shouldNotify as its negation. Focus freshness is a coarse suppression signal.",
+      "fleetpane_action": "Candidate native attention notifications for completion/error/permission; suppress only on observable foreground engagement, retain pending badge, deduplicate by event/request identity. Current Fleetpane has pending attention and bounded terminal-turn results/local review; OS delivery/mute/tray and durable full inbox remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b1c4a4e834541ad0c0769110e0580ae4dc8225622458b80d07a2772b0df044c5"
+    },
+    {
+      "ordinal": 633,
+      "revision": "4803589ea1e588daec6f4f393814fe77cd66a581",
+      "date": "2026-01-13T12:06:33+07:00",
+      "category": "copy-turn",
+      "finding": "New turn copy component obtains content lazily, ignores empty string, writes clipboard and sets copied feedback; sampled hunk does not show grouping/content assembly. Stream supplement identifies end-of-turn by next user message or idle stream end, wiring lazy collection; content collection implementation remains uninspected.",
+      "fleetpane_action": "Implemented independent exact loaded-answer copy by turn ID, with explicit partial-history scope, no-text refusal and exact native clipboard/draft/window replacement verification. See ADR0093.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d24ced63aa60b61352c27e941b05697c2650834d6ab133c6b508c34743b8e2db"
+    },
+    {
+      "ordinal": 634,
+      "revision": "34a49c147fc47ade09d4ee4f94c56e5063a2f93c",
+      "date": "2026-01-13T16:07:34+07:00",
+      "category": "attention-routing",
+      "finding": "Per-client routing suppresses all notifications when any visible/fresh client watches the agent. Fresh visible client focused elsewhere is notified; fresh client with null focus is suppressed; stale mobile is suppressed if any fresh web client exists. Counterexample: fresh web with null focus plus stale mobile can leave no notification recipient. Initialization also coalesces per-agent promises with timeout.",
+      "fleetpane_action": "Prioritize native attention inbox/badge and OS notification with explicit event identity, privacy and focus policy. Test no-focus/hidden/stale recipients; do not let heuristic suppression remove durable pending attention. Current Fleetpane has pending attention and bounded terminal-turn results/local review; OS delivery/mute/tray and durable full inbox remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:4253d9a1ed0fe08e943c77267b147f2a7e9d8161a8e7800090d02c1da1f69dae"
+    },
+    {
+      "ordinal": 635,
+      "revision": "70e2d66dd58279059d673891457b731ef8e8ce05",
+      "date": "2026-01-14T10:07:54+07:00",
+      "category": "appearance",
+      "finding": "Settings adds light/dark/auto appearance controls. Diff-tree also includes draft store and relay implementation, neither read in this initial sample. Draft supplement persists create draft plus drafts keyed by agentId through AsyncStorage; server identity is absent from that key in inspected store.",
+      "fleetpane_action": "Native system appearance setting is optional polish; draft persistence already belongs to Fleetpane architecture, remote relay needs separate authenticated design evidence.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/stores/draft-store.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:38490acd5f889411efc4a6c7a788b9e91e5dee16dfda1f5b05d3ff6e923be163"
+    },
+    {
+      "ordinal": 636,
+      "revision": "070073be6ba6b2422996b753eac7eaddfdb2bcc4",
+      "date": "2026-01-14T16:52:24+07:00",
+      "category": "website",
+      "finding": "New landing route sets title/description and decorative hero/butterflies. Sample does not include FAQ body.",
+      "fleetpane_action": "No native workflow gap; marketing claims are not runtime evidence.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/website/src/routes/index.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:bf0f0513a0db32f802bcc69f9e6f56376a3aa43d4aa9dabb3dc472805e3ba7d6"
+    },
+    {
+      "ordinal": 637,
+      "revision": "92e141f19c82fa80664c9d155a22369df65a88e4",
+      "date": "2026-01-14T18:36:19+07:00",
+      "category": "documentation-shell",
+      "finding": "Docs route creates getting-started/best-practices navigation and mobile header with active-link styling.",
+      "fleetpane_action": "Keep onboarding/help discoverable if needed; do not infer operational instructions or missing app behavior from docs shell.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/website/src/routes/docs.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7d7dac2626bda8b2c6a63f882df09c7582705a9d620568594e23d156fd995f2f"
+    },
+    {
+      "ordinal": 638,
+      "revision": "358b9aded9d044f4803f1125c290220842dd16b7",
+      "date": "2026-01-14T18:36:51+07:00",
+      "category": "deployment-config",
+      "finding": "App workflow runs on selected main path changes or dispatch, installs workspace, typechecks then deploys web to Cloudflare with secret reference.",
+      "fleetpane_action": "No Fleetpane workflow gap; source workflow is not proof a historical deployment or check passed.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        ".github/workflows/deploy-app.yml"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0481ef585f84ee2befb54ab4599024c687d1bfa7d37b95e2998e27a1c6a0667d"
+    },
+    {
+      "ordinal": 639,
+      "revision": "51ed99b8a8d5435b9f66cbce8d946f7043bbc1e0",
+      "date": "2026-01-14T18:37:41+07:00",
+      "category": "website-animation",
+      "finding": "Added butterfly component defines vector arithmetic, normalization with zero guard and angle interpolation entry. Assets are path-listed only.",
+      "fleetpane_action": "No native rewrite action; exclude ornamental website behavior from product parity.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/website/src/components/butterfly.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:dff1e3ff38e32bb57811e5c802fc0dcba9024aeeba24df824abcafee0b9ec843"
+    },
+    {
+      "ordinal": 640,
+      "revision": "b8a8965ba7d805babdd319ab53f10a391cffb6df",
+      "date": "2026-01-14T18:38:26+07:00",
+      "category": "dependency-only",
+      "finding": "Workspace config registers website/dev script and lockfile adds Cloudflare dependency graph; selected lock entries are metadata, not runtime logic.",
+      "fleetpane_action": "No product action or Rust dependency parity requirement.",
+      "inspection": "dependency/config-metadata",
+      "paths_inspected": [
+        "package-lock.json",
+        "package.json"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:f4332ff2cb233db69f3f51d2ce64063889a5fa40487b983bf012bdf024ff941d"
+    },
+    {
+      "ordinal": 641,
+      "revision": "bf6c97357f081351586c010d3454a6d332bb9693",
+      "date": "2026-01-14T18:59:14+07:00",
+      "category": "deployment-config",
+      "finding": "Deploy setup adds GitHub scoped registry and a GH_PACKAGES_TOKEN secret reference to installation; only four substantive config additions are present.",
+      "fleetpane_action": "No native workflow; later 642 changes credential source, not proof of successful installation.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        ".github/workflows/deploy-app.yml"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b0a95e8aca16392f23327e9301cfbef8f75011ea8c6ed360294a656f2489ab69"
+    },
+    {
+      "ordinal": 642,
+      "revision": "b756bedbe79835ffa38aeab63064553e5c4ecb0e",
+      "date": "2026-01-14T19:08:11+07:00",
+      "category": "deployment-config",
+      "finding": "Single token reference changes GH_PACKAGES_TOKEN to GITHUB_TOKEN, following 641.",
+      "fleetpane_action": "No product action; verify package permissions in any independent CI rather than assume this credential source works.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        ".github/workflows/deploy-app.yml"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c58027bdf918a3ac7e6f830f741b2bd1ed09a841a404ce4ad3f3f529ebada0dc"
+    },
+    {
+      "ordinal": 643,
+      "revision": "f1827731ed52e017b4208496317b82e5c7867425",
+      "date": "2026-01-14T19:11:01+07:00",
+      "category": "type-definitions",
+      "finding": "Adds hovered property augmentation, uses actual timer return types and includes the augmentation file in TypeScript config; complete small patch read.",
+      "fleetpane_action": "No direct Rust action; model native platform state/timer ownership explicitly.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/react-native-web.d.ts",
+        "packages/app/src/hooks/use-audio-player.native.ts",
+        "packages/app/tsconfig.json"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:9d658cc9080a874831fba5b7634472965b8c704e0dca8af36a2e5051897832c2"
+    },
+    {
+      "ordinal": 644,
+      "revision": "6c9abe08541f0c52279f91e5e3259c13d76ea68f",
+      "date": "2026-01-14T19:12:50+07:00",
+      "category": "build-config",
+      "finding": "App scripts add Expo web export and wrangler deployment plus wrangler dev dependency.",
+      "fleetpane_action": "No Fleetpane product gap; native distribution needs independent packaging.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:30f72a4ff7cc234f3b1d792f99409795c30f9ed801f3b17bf16fa6052a19c8f6"
+    },
+    {
+      "ordinal": 645,
+      "revision": "83b989124edc543ce2b0017ff2f4ee65e2e9eaca",
+      "date": "2026-01-14T19:17:47+07:00",
+      "category": "status-hook-wiring",
+      "finding": "Selected changed behavior invokes useFaviconStatus inside AppWithSidebar; remaining import-order changes are not in receipt. Supplement confirms unistyles side-effect import is moved to first import before router/components.",
+      "fleetpane_action": "Native dock/tray status could complement attention workflow; hook call alone proves no status semantics.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:09e1e3f83521a4b7b844a7dfa92b1dc811964343ff2f575c0e112252e76205c4"
+    },
+    {
+      "ordinal": 646,
+      "revision": "6ac2ef7366ce252a5007851adae074cf4c02de30",
+      "date": "2026-01-14T19:19:04+07:00",
+      "category": "attention-status",
+      "finding": "Favicon derivation prioritizes any running agent over agents requiring attention. Thus one running session can mask another session's attention in this aggregate indicator. Supplement shows web DOM link update and matchMedia system theme handling; 655 later guards missing matchMedia but does not change sampled running-before-attention precedence.",
+      "fleetpane_action": "For native aggregate badge, prioritize actionable permission/error attention over background running; retain per-session reasons.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-favicon-status.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a76388475727b02d9b626a1e5ae13ff48bf3cdd5cce113b06e9960744e3a282a"
+    },
+    {
+      "ordinal": 647,
+      "revision": "cc815f6fa2aedf2157e1b51215bef58247ebc0e5",
+      "date": "2026-01-14T19:22:57+07:00",
+      "category": "binary-only",
+      "finding": "diff-tree lists app/favicon/notification PNG additions and replacements; two binary headers read, pixels not inspected.",
+      "fleetpane_action": "No workflow inferred from icon names; native status indicators need semantics and accessibility, not copied assets.",
+      "inspection": "binary-metadata-only",
+      "paths_inspected": [
+        "packages/app/assets/images/android-icon-foreground.png",
+        "packages/app/assets/images/favicon-dark-attention.png"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a12922abf0870544b2ff7cd9e9fd07bb5992b6f148c493e2fc2fba5d2fdc43b3"
+    },
+    {
+      "ordinal": 648,
+      "revision": "aa090748a62e6e398deaefa9fc998bef3947147b",
+      "date": "2026-01-14T19:23:27+07:00",
+      "category": "bounded-git-diff",
+      "finding": "Session moves from concatenated diff to per-file processing, marks binary files and begins line-count guard for oversized files. CLAUDE path was listed only and not used as instructions.",
+      "fleetpane_action": "Git Diff remains deferred. Generalize budgeted artifact handling only when relevant to existing explorer, without claiming complete limits from this partial hunk.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:94f3e50da0e4d51494994cc3858dc07bedb405bcde909f3624edbd93a1af0114"
+    },
+    {
+      "ordinal": 649,
+      "revision": "347389965c888fc86bb0d501cc29282c6ce30835",
+      "date": "2026-01-14T19:37:03+07:00",
+      "category": "test-gating",
+      "finding": "OpenCode integration suite becomes skipIf CI=true because it requires a real server.",
+      "fleetpane_action": "Unsupported provider; historical skipped coverage cannot establish acceptance.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:99ba163d439e4ed5b42e9b29d1dcd36ab6e3581cc81f5856fb31a418499b2862"
+    },
+    {
+      "ordinal": 650,
+      "revision": "1cbe185ac5230c3054d67932f5bc83241ad27b84",
+      "date": "2026-01-14T19:42:46+07:00",
+      "category": "test-gating",
+      "finding": "Reverts local suite skip from 649 and centrally excludes e2e plus OpenCode integration paths in CI. This relocates exclusions rather than restoring CI coverage.",
+      "fleetpane_action": "Keep explicit native unit/integration/real-provider acceptance statuses; no skipped suite represented as passing.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.test.ts",
+        "packages/server/vitest.config.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:66418b109b84064b4e497778d0a21eb349df756c7343b648ee454de57ded9100"
+    },
+    {
+      "ordinal": 651,
+      "revision": "b6ab9f3bc11b2534ca798ae0b6e89540277a501f",
+      "date": "2026-01-14T19:44:33+07:00",
+      "category": "test-gating",
+      "finding": "CI exclusion list expands to Codex MCP, Claude command, worktree and terminal-manager tests; nine substantive config lines available.",
+      "fleetpane_action": "Acceptance needs separately executed provider/worktree/terminal checks; broad CI label cannot cover these excluded suites.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/vitest.config.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:65d1c65f0a65c1d3721831300cae5685ce58237200a60408313f7c9df78eb86a"
+    },
+    {
+      "ordinal": 652,
+      "revision": "86ea9966fcc541e67baa55be3d1f3c95cbf290de",
+      "date": "2026-01-14T19:47:09+07:00",
+      "category": "test-gating",
+      "finding": "Adds Claude agent suite to CI exclusions; remaining hunk is comment-only.",
+      "fleetpane_action": "No product change; reinforces explicit coverage limits of 649-652.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/vitest.config.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c06d81af907f7a414a44dec8324a3c2600eb53fa2d672965c60c07dc41aa2b96"
+    },
+    {
+      "ordinal": 653,
+      "revision": "02b3f83ae2609c80bd20b051f632c06653400275",
+      "date": "2026-01-15T10:00:01+07:00",
+      "category": "task-orchestration",
+      "finding": "Task CLI adds fail state command and model-to-CLI mapping: gpt-* uses Codex, other model aliases use Claude. Sample stops at runner signature.",
+      "fleetpane_action": "Avoid automatic copying of autonomous planner loops; possible future user-visible task execution should use supported Host providers and explicit budgets/control.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/tasks/cli.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d3e319ab488c8442dfc4ce0a8dfca19b7a1d820c224c2d34d85cf9a9014a9fc7"
+    },
+    {
+      "ordinal": 654,
+      "revision": "5289be9c0646a5755927162aa844f6e02559ea94",
+      "date": "2026-01-15T10:09:39+07:00",
+      "category": "task-prompt",
+      "finding": "Planner prompt adds test-first dependency pairs and demands failure for missing behavior rather than import/syntax problems. This is prompt text, not enforced validation.",
+      "fleetpane_action": "No new workflow; use scenario as design guidance only, never equate prompt wording with enforced acceptance.",
+      "inspection": "embedded-prompt/help-source",
+      "paths_inspected": [
+        "packages/server/src/tasks/cli.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:df54f54ec6008592876da94d702a7093062d02a62b394f19415fad2a78744e99"
+    },
+    {
+      "ordinal": 655,
+      "revision": "ef853914d5e5968938d4bbe9dff8e2777b1fde99",
+      "date": "2026-01-15T15:10:08+07:00",
+      "category": "history-replay-and-session-list",
+      "finding": "Manager now leaves updatedAt unchanged for fromHistory events, avoiding replay making old activity look live. Session list adds cwd/relative time; favicon guard checks platform/window/matchMedia function before reading system scheme.",
+      "fleetpane_action": "Existing directory/history needs restart/replay recency invariants; do not bump user-visible activity on hydration. Keep configured/runtime and historical/live event identity distinct.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx",
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/app/src/hooks/use-favicon-status.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:3543887bed76fe94a229144bbba3c2e7810b4af649357116ff0e5ef355c64530"
+    },
+    {
+      "ordinal": 656,
+      "revision": "b8f056060fb02651def2d22ca92e5a405228950d",
+      "date": "2026-01-15T17:16:01+07:00",
+      "category": "observability",
+      "finding": "Logger resolves level/format from env before persisted config and defaults; env values are asserted into union without runtime validation in sampled code.",
+      "fleetpane_action": "Host diagnostics can use structured bounded logs with validated settings; no need to port pino or its unchecked enum assertions.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/logger.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:842dfd0399ac8cfc0f7b32d4ed142318f3f24236063e3657b4b33a6e11f0d937"
+    },
+    {
+      "ordinal": 657,
+      "revision": "ed50c168adb550cb4aa8bd567fce01202dd6fb08",
+      "date": "2026-01-16T16:19:49+07:00",
+      "category": "creation-failure-draft",
+      "finding": "Home replaces status subscription/pending request ref with awaited createAgent, clears prompt only on success, navigates using returned ID, retains error and rethrows on failure, and resets loading in finally. Broader panel refactor not fully inspected.",
+      "fleetpane_action": "Existing exact drafts/Host receipts should preserve text/images on create failure and clear only after identity-bound acceptance. Test response shape before draft deletion; no new panel parity required.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:9ea8a943ade25526bbc3656b6d61fa26fb1c8980fe36ca362cc0f738ecc3f89e"
+    },
+    {
+      "ordinal": 658,
+      "revision": "f733f2852dc6aca2a2b6ede40e06d45a07e5aa2b",
+      "date": "2026-01-16T16:25:53+07:00",
+      "category": "layout-polish",
+      "finding": "Agent content row gap moves from spacing[1] to [0], internal icon/text gap from [0] to [2]; four changed style lines.",
+      "fleetpane_action": "No missing workflow; choose native spacing consistently.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:043c13df4257e9a6ceffc7c22fc638d485d9e7babc37d3a39bf3b227d0a24a42"
+    },
+    {
+      "ordinal": 659,
+      "revision": "420f25f1e9f09270ba0a6b52d5beadf4ca8d0cb0",
+      "date": "2026-01-16T20:23:07+07:00",
+      "category": "permission-details-refactor",
+      "finding": "Permission card removes bespoke command/read/edit/raw sections and replaces them with shared ToolCallDetailsContent(maxHeight=200). Imports use unified parser. Download-store/e2e/icon implementation outside this sample.",
+      "fleetpane_action": "Existing typed tools should share parser/presentation for approval and completed call, while preserving exact command/cwd/error/raw unknown details; removal alone is not loss of permission context.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ecb6d358a3e1a460b1df9e306df714f212d055c0631dbfbb7b6666ca33932c31"
+    },
+    {
+      "ordinal": 660,
+      "revision": "d964415eba30a90e78f3751213223bcc77e2660c",
+      "date": "2026-01-17T11:46:38+07:00",
+      "category": "task-help",
+      "finding": "Task run help describes optional planner, worker/judge loop, steering and replanning after repeated failures; sampled text is CLI help, not proof of runtime enforcement.",
+      "fleetpane_action": "Do not add autonomous orchestration for parity. A future task runner must expose control/budget/acceptance separately; existing Host fencing remains authoritative.",
+      "inspection": "embedded-prompt/help-source",
+      "paths_inspected": [
+        "packages/server/src/tasks/cli.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ef0c5e9f3fa1a7315ff0f404466a92af628f4228a690480f93473d72dd9da39b"
+    },
+    {
+      "ordinal": 661,
+      "revision": "1c9d9367c194e35b1196d01b55db9874b303c76f",
+      "date": "2026-01-17T12:07:00+07:00",
+      "category": "test-gating-revert",
+      "finding": "Removes CI-dependent provider/e2e exclusions from 650-652, leaving only node_modules exclusion. This restores configured discovery, not evidence tests passed.",
+      "fleetpane_action": "Report serial reversal explicitly; acceptance remains unverified and must use actual native/provider runs.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/vitest.config.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:41f16ee1a942eca339e01b8ede0e6f2299849c6dba44e59f46e8cdbf1172895c"
+    },
+    {
+      "ordinal": 662,
+      "revision": "45096acdcbb63b72ea4b30d92c5c06b50adafbfd",
+      "date": "2026-01-17T13:09:42+07:00",
+      "category": "test-maintenance",
+      "finding": "Claude command tests receive required logger, hook timeout rises 30 to 60 seconds, dist is excluded from discovery; six substantive changed lines.",
+      "fleetpane_action": "No product workflow; timeout change alone does not establish root cause or correctness.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+        "packages/server/vitest.config.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:70d0ff5b3210719e01eac61ecc13ff9a7ffad6c1f7d8939132c6d038e02ccd9e"
+    },
+    {
+      "ordinal": 663,
+      "revision": "07ca5222c1df65ee23731ae556df0675af22cb39",
+      "date": "2026-01-17T13:10:02+07:00",
+      "category": "test-maintenance",
+      "finding": "Registry/manager/MCP test fixtures receive test logger dependencies. Sample includes historical as any private-tool access, not adopted.",
+      "fleetpane_action": "Keep tests aligned with typed Host dependencies; no unsafe assertion copying and no claim these tests passed.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.test.ts",
+        "packages/server/src/server/agent/agent-registry.test.ts",
+        "packages/server/src/server/agent/mcp-server.test.ts",
+        "packages/server/src/server/agent/providers/claude-agent.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:67d3bd5fe6f4f22fedd7f7650b006a77fbf903a580e83c2b65e429f0959690c8"
+    },
+    {
+      "ordinal": 664,
+      "revision": "a89c96ce0dfac6f72fb90ff86d8bc5f3c9219dde",
+      "date": "2026-01-17T13:10:15+07:00",
+      "category": "test-maintenance",
+      "finding": "E2E daemon config uses listen and empty CORS origins, lifecycle calls daemon.start instead of directly listening; sample covers repeated fixture updates.",
+      "fleetpane_action": "Use production startup path in acceptance harness so setup tests actual lifecycle; no new product gap.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-mcp.e2e.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ef1513d28e5343b830a87863dcda484aa79d9b3423795c842c43d4d2114092b1"
+    },
+    {
+      "ordinal": 665,
+      "revision": "1e8f0ca5c976e63b1ed0dd13f6af02a396b85990",
+      "date": "2026-01-17T14:46:38+07:00",
+      "category": "auth-preflight",
+      "finding": "Claude auth preflight accepts env credentials, credentials-file existence or merely config-directory existence. Directory presence is not authenticated readiness.",
+      "fleetpane_action": "For supported providers expose separate installed/configured/authenticated health states; require actual handshake to establish auth, never inspect secret contents for discovery.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/claude-auth.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7c98734c657b1d0a20a2abc7a45143bf921f7a2cc93b53ecfb5006aff0f71db2"
+    },
+    {
+      "ordinal": 666,
+      "revision": "1c011480407fdc925d39fea2c34b10e01a847ef7",
+      "date": "2026-01-17T15:23:53+07:00",
+      "category": "resume-identity-fix",
+      "finding": "Removes base.continue=true while retaining base.resume=claudeSessionId; also strips verbose debug logs/counters and keeps superseded-turn check.",
+      "fleetpane_action": "Cross-provider lesson: resume exact saved session identity, never combine with a broad continue-latest flag. Current Codex/DeepSeek behavior still requires its own protocol verification.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:aa8e2aa295b96bd725850ca4ac50406a19c932986a3ef78db58c7ba3926d2f3d"
+    },
+    {
+      "ordinal": 667,
+      "revision": "fa8dc1a20a0726b64db9ad51f2fc449d18f3a6ed",
+      "date": "2026-01-17T15:56:52+07:00",
+      "category": "provider-timeout",
+      "finding": "OpenCode createSession races API call against 10-second rejection without visible cancellation; another hunk switches title generation setup/model. Timeout does not cancel remote side effect.",
+      "fleetpane_action": "Unsupported provider stays excluded; for existing Host creation, timeout must retain request receipt/reconciliation and prevent orphaned resources.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts",
+        "packages/server/src/services/agent-title-generator.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0b6c840acc0fb5e571da2493025a4c17f724c364251e8b35b294de4885de3e9a"
+    },
+    {
+      "ordinal": 668,
+      "revision": "8979f5ce6441a2958719b76de185313d272074c9",
+      "date": "2026-01-17T16:18:22+07:00",
+      "category": "task-feedback",
+      "finding": "Judge prompt requires persistent specific feedback notes for next worker, changes verdict guidance. These are instructions embedded in source, not enforced evidence.",
+      "fleetpane_action": "No autonomous loop parity requirement; any future workflow should store structured verdict, evidence and next action rather than parse prose/XML as acceptance.",
+      "inspection": "embedded-prompt/help-source",
+      "paths_inspected": [
+        "packages/server/src/tasks/cli.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:daa073ab8f726408704e50783c3c50cd656dd7da9511e927fef84a274a0dd71f"
+    },
+    {
+      "ordinal": 669,
+      "revision": "4967144c2406db7461c3b64a19af91b50f828847",
+      "date": "2026-01-17T16:27:26+07:00",
+      "category": "test-removal",
+      "finding": "Deletes already skipped OpenCode tests including user-text role isolation and multi-turn context scenarios; removal is not a behavior fix.",
+      "fleetpane_action": "Unsupported provider; retain role isolation/context scenario ideas for actual Codex/DeepSeek acceptance.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:aeca63c739ee33236054cb1c93ef842940c32794bd3b762f8a9484af43a8637b"
+    },
+    {
+      "ordinal": 670,
+      "revision": "668288b4f994e2877bd72db9eebe8b718aba9827",
+      "date": "2026-01-17T16:35:01+07:00",
+      "category": "test-model-choice",
+      "finding": "OpenCode tests choose first available model matching nano/mini identifiers then fallback; nine substantive lines available.",
+      "fleetpane_action": "No product change; model-dependent tests need explicit identity/capability evidence, not assumptions from model name.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:32b8d433e9d944be2df36cddb4c3655a9705c75122e8c9328441105f52966b6c"
+    },
+    {
+      "ordinal": 671,
+      "revision": "bbc227bc81c81e33ee7baf7a1ddc73c3c68cea87",
+      "date": "2026-01-17T16:38:35+07:00",
+      "category": "ci-preflight",
+      "finding": "Workflow checks Claude alternative credential env vars and mandatory OpenAI variable, fails with variable names when missing. Presence check does not authenticate credentials.",
+      "fleetpane_action": "No product gap; separate configured and authenticated provider states, and never print secret values.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        ".github/workflows/server-ci.yml"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0d42e97209ad3aa22523dcef8e7af5b5740a57505275fd92815161c6669f1fe5"
+    },
+    {
+      "ordinal": 672,
+      "revision": "12f617dd10171261f0cf3a1e0784f7b7084c9767",
+      "date": "2026-01-17T16:43:41+07:00",
+      "category": "auth-preflight-removal",
+      "finding": "Deletes filesystem/env auth-preflight function from 665, including false-positive config-directory check; retained replacement content is not in sample.",
+      "fleetpane_action": "Record correction of presence-based readiness assumption; actual supported-provider handshake remains necessary.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/test-utils/claude-auth.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:1e216255cbb1cb02851decf075818d6ddb45bffa4fb0bb628d03752765b60bcf"
+    },
+    {
+      "ordinal": 673,
+      "revision": "d9c487dd540979e8fb8f49b8e105ce264a06b8e6",
+      "date": "2026-01-20T10:09:35+07:00",
+      "category": "terminal-lifecycle",
+      "finding": "Terminal manager indexes sessions by cwd and ID, lazily creates a terminal on getTerminals, names new terminals by count, and supports kill/list/killAll cleanup. Sampled UI removes sub-agent menu; Tauri shell not reviewed in full.",
+      "fleetpane_action": "Terminal is already baseline. Keep enumeration side-effect-free or name creation explicitly; Host owns lifecycle/drain. Separate terminal feature from legacy MCP removal in 611.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/server/src/terminal/terminal-manager.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:9876a2a4c61ef240d52b7840918dd30251765f3c485b09d765712a19eedf04c8"
+    },
+    {
+      "ordinal": 674,
+      "revision": "687ea706b175f4fc7011665289b4d8603580c12c",
+      "date": "2026-01-20T12:12:29+07:00",
+      "category": "launch-precedence",
+      "finding": "combineInitialValues gives explicit initial serverId precedence, then option serverId, otherwise stored preferences drive defaults; null and undefined are distinguished.",
+      "fleetpane_action": "For per-provider launch preferences, use documented precedence: explicit launch intent over persisted defaults; regression check stale default cannot override current selection.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:24838e7a102af92d95063da80527497198edff2e032ea848f07ac1ac339e70de"
+    },
+    {
+      "ordinal": 675,
+      "revision": "facd99ab13d1d09682b0335d672a128ec6baf48e",
+      "date": "2026-01-20T13:09:22+07:00",
+      "category": "voice-lifecycle",
+      "finding": "Recorder stop cancels in-flight start attempt, awaits start/stop serialization and stops only if recording; catch-to-undefined on prior mutex rejection is visible.",
+      "fleetpane_action": "Voice remains P2. When scheduled, model start/stop/cancel as owned attempts and retain meaningful errors rather than silent catches.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-audio-recorder.native.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:56c6c6bb5cfc084fe50f7fb7f06a87942c402d36252194b290724ba65c934eb1"
+    },
+    {
+      "ordinal": 676,
+      "revision": "513138ac134e63df7c30e54ebb86a0870f347885",
+      "date": "2026-01-20T13:36:06+07:00",
+      "category": "clone-launch-config",
+      "finding": "New-agent route reads selected agent and copies server/provider/mode/model/cwd into launch parameters; absent identity resolves empty form. It does not copy transcript in this hunk.",
+      "fleetpane_action": "Useful candidate: New session with these settings, clearly distinguished from resume/fork; validate supported capabilities and require safe explicit permission mode selection.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d9fd809a54a84bc55b66e1976ba39139a6c0fe52b47cda3b322d0070d9401e9d"
+    },
+    {
+      "ordinal": 677,
+      "revision": "cba3ad2721604c72ab8163609d7075287c611f56",
+      "date": "2026-01-21T08:16:11+07:00",
+      "category": "codex-command-parser",
+      "finding": "Codex adds home-dir resolution and custom argument tokenizer handling quotes, escapes and whitespace. Full command discovery and resume handling are not read in sample. Production supplement lists Codex skills/custom prompts, expands prompts: files into run input, and maps other commands to $skill prompts. Full path authorization/token expansion semantics remain uninspected.",
+      "fleetpane_action": "Potential native command discovery only through supported protocol; avoid homegrown shell parsing or executing stale prompt-file commands without capability/argument validation.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-mcp-agent.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:da355c52ef63ad140d0f90b2eccdcfc7e2872fade62ae3331e90340bf584c0f3"
+    },
+    {
+      "ordinal": 678,
+      "revision": "4a903124807700f85878daca11d3fb7085248264",
+      "date": "2026-01-21T08:23:42+07:00",
+      "category": "remote-connection-offer",
+      "finding": "Versioned offer schema includes session ID, endpoint array and daemon public key; endpoint builder distinguishes loopback, wildcard and LAN. Key format is only nonempty string in sample.",
+      "fleetpane_action": "Remote authentication remains known gap. Versioned pairing offer is useful design input, but endpoint/key presence is not trust or authorization.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/connection-offer.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b81679c904adff9267f1e4576d9d0278f7d565c87e2808abdf8c2b5e9f66a905"
+    },
+    {
+      "ordinal": 679,
+      "revision": "fd5e8206a7698822f784cc96d6e65a06f823145f",
+      "date": "2026-01-21T09:27:16+07:00",
+      "category": "relay-lifecycle",
+      "finding": "Relay controller owns stopped flag, socket and reconnect timer; stop clears timer and closes socket. Handshake/encryption behavior is not in sample.",
+      "fleetpane_action": "Remote auth requires independent trust, replay and lifecycle design; do not adopt plaintext relay or equate lifecycle cleanup with security.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/relay-transport.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:bee71ca33bafc2593f8c6ef90da4e1fd6494754ac00c49f2feb1c999cbb1bf3b"
+    },
+    {
+      "ordinal": 680,
+      "revision": "e1b85d8f95f1148627ae5e371b1d35712aaa46cb",
+      "date": "2026-01-21T11:16:32+07:00",
+      "category": "platform-bundling",
+      "finding": "Tauri window helper adds runtime/window platform guards and Metro-ignored dynamic import; existing any assertions remain visible. Eight substantive changed lines available.",
+      "fleetpane_action": "No GPUI parity work; native window APIs avoid this WebView bundling boundary.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/utils/tauri-window.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:aeabad1fab89a0965872d5d66ccabcd5f212a22bf12b110994d81acbfce56749"
+    },
+    {
+      "ordinal": 681,
+      "revision": "ebb97a018453e4a0634bf96d7569df1063ff00e1",
+      "date": "2026-01-21T11:16:35+07:00",
+      "category": "artifact-preview",
+      "finding": "Explorer conditionally replaces directory view with inline desktop preview, back control, path/title and loading/empty state.",
+      "fleetpane_action": "Existing bounded explorer can add preview/back without losing directory selection/scroll; verify preview errors and binary/oversize states before calling parity complete. Current Fleetpane already verifies confined file/image previews, Back/Forward/root recovery and atomic raw local no-overwrite export; remote download/progress/cancel remain open.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:f4485e4913e2adabc7737325788aab0ef20d6d454a48ffeebb98abeb763fb5f0"
+    },
+    {
+      "ordinal": 682,
+      "revision": "ae9a98223f8707aca3f43a59f3176c155f050a97",
+      "date": "2026-01-21T11:43:16+07:00",
+      "category": "voice-storage-refactor",
+      "finding": "Deletes old persistence module whose conversation directory was cwd-relative; diff-tree adds voice-conversation store and renames stack references. Replacement migration not read in sample.",
+      "fleetpane_action": "Voice P2 and existing workspace/history migration remain baseline; avoid conflating voice and agent session identity, no migration guarantee inferred.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/persistence.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:e87da21cd16f022c01a5d521125cb9807e56753bba7f82f3bc0de781abcac89a"
+    },
+    {
+      "ordinal": 683,
+      "revision": "ddbcc272f13519e31a5d8759662bf27c2cd5d5d9",
+      "date": "2026-01-21T14:55:23+07:00",
+      "category": "remote-host-form",
+      "finding": "Manual host form moves from ws URL validation to normalized host:port, rejects schemes/paths, saves endpoint list; pairing/relay paths are only listed in initial sample.",
+      "fleetpane_action": "Remote auth remains known gap; define authenticated endpoint negotiation before shipping manual remote connection, including secure transport selection.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b338fe4baab7cb35f4901a4bbe129d73cd6917750e3229dbf7e233c364fdbdc8"
+    },
+    {
+      "ordinal": 684,
+      "revision": "42fb56890b00cfce4f8e64de9bde1bea53b21dec",
+      "date": "2026-01-21T15:13:34+07:00",
+      "category": "thought-presentation",
+      "finding": "Stream wraps existing virtualized list in ThinkingSheetProvider while retaining row IDs and scroll handling. Actual thought content rendering not read.",
+      "fleetpane_action": "Existing Markdown/typed tools baseline; optional summary expansion for provider-exposed reasoning only, no hidden chain-of-thought inference.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7ae0dfd215f1b2e0b44d537618182c4d49af828518b86b53d1eb8ec7292dffc0"
+    },
+    {
+      "ordinal": 685,
+      "revision": "ca8d09434b124ed30ac0377f3398b9302c65c504",
+      "date": "2026-01-22T08:52:30+07:00",
+      "category": "host-removal",
+      "finding": "Web host removal uses browser confirm if available but defaults to confirmed=true if absent, then calls removal with error alert.",
+      "fleetpane_action": "If remote profiles arrive, provide native explicit remove action with visible failure; avoid fail-open confirmation fallback. Host removal is not session destruction.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:86023306a4f8c9d7553640ee2769d3b4504876c432be66008ada407fdcb89d69"
+    },
+    {
+      "ordinal": 686,
+      "revision": "7157a43a7480d634284d5eef5a4b601c3f394537",
+      "date": "2026-01-22T09:24:08+07:00",
+      "category": "pairing-scanner",
+      "finding": "Scanner accepts scanned string containing #offer=, deduplicates last scan, invokes registry upsert and returns to settings; errors reset scan key and alert. Permission-request rejection is swallowed in effect. Registry cryptographic validation is not in these hunks.",
+      "fleetpane_action": "Remote auth remains known gap. QR parsing/import is not authentication; design endpoint/key validation, explicit trust and revocation before remote enablement.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/pair-scan.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0bc0c9d02f38793d6ab53a3e7a86cd25637a19a0e8620ca49bca7a744ff2ba29"
+    },
+    {
+      "ordinal": 687,
+      "revision": "88490a9af103a4a6a6e16a98f0bbe2d526c2edb0",
+      "date": "2026-01-22T10:43:18+07:00",
+      "category": "managed-worktree",
+      "finding": "Creates repo/.paseo/worktrees/<slug> and automatically appends tracked .gitignore entry. Listing filters git worktree porcelain by resolved managed prefix; delete checks prefix then runs git worktree remove --force and recursive cleanup.",
+      "fleetpane_action": "Useful isolated launch/attach workflow, but do not copy implicit tracked edits or force delete. Use canonical ownership, dirty-state review, explicit cleanup and Host receipts. Later 726 relocates root and 744 resolves subdirectory ownership. Current Fleetpane already has pinned new-worktree preview/apply and explicit existing-worktree attachment with real Git/native evidence; setup scripts and safe removal remain separate gaps.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b9af7d8bd859974c044e371ee1e7e47c0ade57bca87d83adc9c87486ae2a1ba0"
+    },
+    {
+      "ordinal": 688,
+      "revision": "cc2bdbf01f2036d3daa48e8984d3deaedd0f03ca",
+      "date": "2026-01-22T12:23:01+07:00",
+      "category": "structured-generation",
+      "finding": "Introduces caller/schema/retry option types and domain error retaining last response and validation errors; actual validation loop not sampled. Supplement shows JSON-schema validator uses unsafe constructor/value assertions and strict:false; Zod/schema dispatch builds validation and retry prompts. Do not port these type escapes.",
+      "fleetpane_action": "No new end-user workflow inferred. Existing typed Host protocol should reject invalid data explicitly, without automatic agent retries hiding internal bugs.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-response-loop.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:93b415383ded1196246713abbf6377f648e8aa13db68f5c0131d704799765e13"
+    },
+    {
+      "ordinal": 689,
+      "revision": "ef9c538842f02cf1e30737592e06dab820c2c000",
+      "date": "2026-01-22T14:01:57+07:00",
+      "category": "agent-metadata",
+      "finding": "set_title tool constrains length, requires managed caller identity, resolves caller agent and rejects trimmed-empty title. Ownership helper checks managed-root containment and Git worktree-list membership, including descendant cwd, stronger than 692 prompt substring heuristic.",
+      "fleetpane_action": "Potential session title/metadata editing can improve directory; bind updates to Host session and explicit capability, not model-provided arbitrary target IDs.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:5fc22a7479402514c9b3a32f28e962423f5555c454f600b01da09f323d2273be"
+    },
+    {
+      "ordinal": 690,
+      "revision": "d41267e8a578c056af15390b33451ba0386aaa10",
+      "date": "2026-01-22T20:37:12+07:00",
+      "category": "checkout-rpc",
+      "finding": "Client adds request-ID correlated checkout status RPC with timeout and queue bypass, begins base/uncommitted diff API. Ship loop behavior not read.",
+      "fleetpane_action": "Git Diff and automatic shipping remain deferred; generic correlated Host receipt pattern is already baseline.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client-v2.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:642cd229918adfb9a5c8cd56f5d77856aa3001e082fb92ca2073c5a3c907802a"
+    },
+    {
+      "ordinal": 691,
+      "revision": "6770e8d510bc20d8bb101459a5b2716d95e92a44",
+      "date": "2026-01-22T21:31:45+07:00",
+      "category": "connection-health",
+      "finding": "Restart UI removes active probe/retry loop and waits for established connection to disconnect then auto-reconnect with 30-second limit. No longer treats probe reachability as readiness.",
+      "fleetpane_action": "For Host health, observe real session transport/handshake instead of side probes that alter status; show reconnect pending distinctly.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c15b88459dea23f1473f3ece3eab11505d6d50d78039c84b0d569e3fef537c2c"
+    },
+    {
+      "ordinal": 692,
+      "revision": "746d4130822f0cc4f1dcb912cdfb57cae666c6ad",
+      "date": "2026-01-22T21:46:44+07:00",
+      "category": "agent-metadata-instructions",
+      "finding": "Self-identification prompt now conditionally asks branch naming based on cwd substring .paseo/worktrees and asks title once for multi-step work.",
+      "fleetpane_action": "Prompt heuristic cannot prove ownership. Host must validate canonical worktree identity before branch mutation; title UX can be independent of model behavior.",
+      "inspection": "embedded-prompt/help-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/self-identification-instructions.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c617869c3a4e29d96346f0241af85423cd97667f65fc1caaf1ff2420dc5a330d"
+    },
+    {
+      "ordinal": 693,
+      "revision": "53155ebcc995a19e3a53c27bbb1433b4b3c3d9ff",
+      "date": "2026-01-23T08:37:15+07:00",
+      "category": "worktree-attach",
+      "finding": "Launch form adds create/attach distinctions and queries managed worktree list only when connected, repository available and attach mode selected; query surfaces server error. Supplement confirms explicit none/create/attach modes, generated slug for create and mandatory worktree selection for attach.",
+      "fleetpane_action": "Strong candidate gap: start new session in existing isolated checkout, with clear checkout identity; keep Git Diff/ship deferred. Current Fleetpane already has pinned new-worktree preview/apply and explicit existing-worktree attachment with real Git/native evidence; setup scripts and safe removal remain separate gaps.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:14231477b74f4faef3f97e07bc7e648ed7d8a48946eed1219095a5c5dcc074ad"
+    },
+    {
+      "ordinal": 694,
+      "revision": "f8ba0ff239d4228c12ee25acc62b020fa27de8f6",
+      "date": "2026-01-23T10:14:46+07:00",
+      "category": "tool-normalization",
+      "finding": "Parsers map multiple namespaced title/branch tools to readable names and extract title/name/branch principal text; changed test expects configured model fallback but runtime extractor is not changed here.",
+      "fleetpane_action": "Existing typed tools should normalize provider names without conflating configured model with confirmed runtime model; test expectation alone is not implementation evidence.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/utils/extract-agent-model.test.ts",
+        "packages/app/src/utils/tool-call-parsers.ts",
+        "packages/server/src/utils/tool-call-parsers.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:335d2d24633c16f5324cd08afcf4a537974acbec83faff0b92300085ee14a850"
+    },
+    {
+      "ordinal": 695,
+      "revision": "8154a05fa5117fbb656071720c6d0f56fc21099b",
+      "date": "2026-01-23T10:17:10+07:00",
+      "category": "ignore-config",
+      "finding": "Adds .paseo/ to this repo's tracked ignore file; one substantive config line.",
+      "fleetpane_action": "No product gap; explicit repo commit differs from automatic tracked-file mutation in 687.",
+      "inspection": "historical-document/config-metadata",
+      "paths_inspected": [
+        ".gitignore"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ca90379b2108616d913325dde027ae0ad1d469c049cdaa4f616575263d1438a0"
+    },
+    {
+      "ordinal": 696,
+      "revision": "27c493922c8a1e53b53814adc731e80507cc147a",
+      "date": "2026-01-23T11:23:56+07:00",
+      "category": "git-diff-refactor",
+      "finding": "Deletes legacy highlighted-diff query hook keyed by server/agent with panel visibility dependencies. Replacement async parser not sampled.",
+      "fleetpane_action": "Git Diff remains deferred; no missing native workflow or performance conclusion from removed hook.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-highlighted-diff-query.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:619e96aae6754ad00ae50ebbc8386e588ecfcb38d3fe07b4a6e0541078c7e363"
+    },
+    {
+      "ordinal": 697,
+      "revision": "69f32da90d723241b1ff1b24fec2b524628fac10",
+      "date": "2026-01-23T11:28:48+07:00",
+      "category": "async-worktree-setup",
+      "finding": "Creation preparation returns worktreeConfig and launches setup with void runAsyncWorktreeSetup after agent creation path. Setup appends running/completed/failed tool events, captures command cwd/exit/output, and keeps worktree on failure. Initial prompt ordering outside selected hunks is unknown.",
+      "fleetpane_action": "Isolation workflow needs visible setup progress/failure plus a specified ready-to-run gate; do not assert a demonstrated race without initial prompt path. Keep failed resources recoverable with receipts.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:61ab71ec4dfeb6780fb022d170ead7c28bc3cc9999397b77495abab81993b910"
+    },
+    {
+      "ordinal": 698,
+      "revision": "cb39f4c5c23cbefc3c87458b4170273c7351409c",
+      "date": "2026-01-23T11:28:50+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 697. Async worktree setup and config split enter first-parent view. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:706938e0b6800d22afeb5bd4c3ad925b8de45dcd958161b438a2913c7c661e1e"
+    },
+    {
+      "ordinal": 699,
+      "revision": "f0cafb4607b727a449111f99b658de8b77304167",
+      "date": "2026-01-23T12:59:13+07:00",
+      "category": "worktree-refresh",
+      "finding": "Changing worktree mode to create/attach now refetches repository info; callback depends on refetch function. Five substantive lines total.",
+      "fleetpane_action": "Validate branch/base state at launch and refresh on explicit worktree action; persisted repo snapshot is not authoritative.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:f348d2a246a2e8070bc99660e1d314da4061164b1fd78dc3aa04350bfb0f2dd6"
+    },
+    {
+      "ordinal": 700,
+      "revision": "912a69422165d88cd6a5c36e612781b4d743f110",
+      "date": "2026-01-23T13:41:33+07:00",
+      "category": "metadata-propagation",
+      "finding": "Title tool routes through new manager.setTitle, which persists title then emits agent state; tests change spy from registry to manager.",
+      "fleetpane_action": "Metadata updates should reach directory subscribers after durable write; validate readback because emitState must use refreshed title source.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.test.ts",
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:6ef3b9df266daf3fbeaa024b9babec11d3e884b4e222691dde694c9be22edd9f"
+    },
+    {
+      "ordinal": 701,
+      "revision": "938d57c8aed098d5bbc60891f8e33f57762ca641",
+      "date": "2026-01-23T14:18:06+07:00",
+      "category": "session-visibility",
+      "finding": "Manager filters internal agents out of listAgents and global state/stream subscribers while allowing specific-agent subscribers.",
+      "fleetpane_action": "Separate automation/helper sessions from user directory when needed; preserve diagnostics/audit and enforce authorization separately because hiding is not access control.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:10585ef73d16aedbc19f66ec36b21f8fbf7931fda828f7e6b197971fa97aa741"
+    },
+    {
+      "ordinal": 702,
+      "revision": "3ff6d6c712ececbe627a327fde363330166d52d9",
+      "date": "2026-01-23T13:51:30+07:00",
+      "category": "prompt-integrity",
+      "finding": "Helper prepends internal instruction tag only when no leading tag exists, and begins stripping leading tag for display. Tag prefix alone can suppress injection; metadata is mixed into user text.",
+      "fleetpane_action": "Keep Host instructions structurally separate from exact user draft/transcript; avoid sentinel tags that permit user content to shadow metadata or be silently stripped.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/paseo-instructions-tag.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:2b13dff337027dc527187c80971401694ed1cab67eaf406aa758c4665301c890"
+    },
+    {
+      "ordinal": 703,
+      "revision": "2b27b7146702e0eb23af648f8af5f2a96ce4d331",
+      "date": "2026-01-23T13:53:52+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 697/699. Async setup/config split enters branch merged with main; other changes path-listed only. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b82bf2789ab4d2d25365d3bda4f5a8f3a91c24385f2e3c8af77cd071c112adba"
+    },
+    {
+      "ordinal": 704,
+      "revision": "3459faabc4d579df19b47dff3e4335523b144acc",
+      "date": "2026-01-23T14:01:29+07:00",
+      "category": "test-persistence",
+      "finding": "Voice test waits for nonempty parseable JSON, retries catch-all read/parse failures and times out; this accommodates mid-write files without proving atomic persistence.",
+      "fleetpane_action": "Voice remains P2; existing history migration should use atomic publication and explicit parse errors rather than treat flaky JSON polling as production fix.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/voice-conversations.e2e.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:6ed6bc56feda5090a262c82330f82241dbce21feb1bbd47b001f510dd2e6eb92"
+    },
+    {
+      "ordinal": 705,
+      "revision": "250a320ff2be144fe649b6c9615e3fd4a97e2946",
+      "date": "2026-01-23T14:47:37+07:00",
+      "category": "test-output-normalization",
+      "finding": "Orchestration test recursively extracts child agentId from JSON string/direct object/structuredContent, returning null on parse errors.",
+      "fleetpane_action": "Existing typed tool layer needs schema-versioned envelopes and raw error retention; test helper is not proof of runtime normalization.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/server/src/server/daemon-e2e/orchestration.e2e.test.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:dc98227542efab4906fc212c45b46eecc9297c49f199e1dbdbbcd44cf13b029d"
+    },
+    {
+      "ordinal": 706,
+      "revision": "6f845093b455bfb833b9c6119976f11ee410838f",
+      "date": "2026-01-23T14:47:39+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 702/704/705. Internal instruction tag helper enters first-parent view alongside test changes. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/paseo-instructions-tag.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:03522f66d1958766a41e6e8f0c892949d69ba74f24f9689a4af8a793d24c41bf"
+    },
+    {
+      "ordinal": 707,
+      "revision": "a6869d55c1fe3bcac963f43fdb66f9dda419425f",
+      "date": "2026-01-23T13:29:30+07:00",
+      "category": "archive-navigation",
+      "finding": "After worktree archive success, diff pane navigates to new-agent route because associated agents are archived; only two substantive added calls exist.",
+      "fleetpane_action": "If managed worktree archive is added, redirect safely and retain recoverable history; Git Diff/ship remains deferred.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7cc2b943b57fb4c9646e56afed1cf7541182884e2e9f365fc7b8a20e180d41ef"
+    },
+    {
+      "ordinal": 708,
+      "revision": "0852f4e6d087f00914fad4d8d870b575204f9c4c",
+      "date": "2026-01-23T15:10:36+07:00",
+      "category": "test-isolation",
+      "finding": "E2E global setup starts Metro on dynamic port with BROWSER=none and logs; config consumes port env and agent-not-found gains test ID.",
+      "fleetpane_action": "Use isolated native UI/Host test instances and explicit endpoints; no historical pass claim or new workflow.",
+      "inspection": "test/config-source",
+      "paths_inspected": [
+        "packages/app/e2e/global-setup.ts",
+        "packages/app/playwright.config.ts",
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:121bd902bcd1670ab6c79c37ad24ee59c5f3b8f5fd7a3fb491b08c1920708242"
+    },
+    {
+      "ordinal": 709,
+      "revision": "23cd46233648f3d2325358a37e7e4ce77c9b9e0e",
+      "date": "2026-01-23T15:10:38+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 707/708. Dynamic Metro setup and archive router.replace are present in first-parent diff. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/e2e/global-setup.ts",
+        "packages/app/playwright.config.ts",
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ddcade84be5137473b00cd4c76d9ec172d3305f0b48c85862620acf5a863c955"
+    },
+    {
+      "ordinal": 710,
+      "revision": "eab8713c24108b634196d484c9c811b77ccaf9e8",
+      "date": "2026-01-23T15:27:42+07:00",
+      "category": "checkout-schema",
+      "finding": "Checkout status becomes discriminated Git/non-Git/managed-worktree schemas; owned worktree requires nonnull baseRef while non-Git fields are null.",
+      "fleetpane_action": "For candidate worktree workflow, persist creation base/ownership identity and expose typed unavailable/error states. Git merge UI remains deferred.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/shared/messages.ts",
+        "packages/server/src/utils/worktree-metadata.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:1c6d2a96072fdd800e203fd849a3acf409036f0b47b2cc5e3315ec557b99a759"
+    },
+    {
+      "ordinal": 711,
+      "revision": "907b9f9fbd71eaaa6e6b4e6a9c3e893d918d55f6",
+      "date": "2026-01-23T15:46:44+07:00",
+      "category": "request-coalescing",
+      "finding": "Checkout status client coalesces implicit requests by agent and clears only matching promise on settle; timeout increases to 60s. Full cleanup catch not in sample.",
+      "fleetpane_action": "Git Diff deferred; apply generic in-flight request identity to existing Host reads only if needed, including rejection/timeout cleanup and no mutation coalescing.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client-v2.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:461090ed6ed3535ea9048fb6ce63e4fe4fd27595f0555b42f79cc7bc6b17cc81"
+    },
+    {
+      "ordinal": 712,
+      "revision": "0ff0293a973127f6361aabc015e7fd7c158b4ece",
+      "date": "2026-01-23T18:55:14+07:00",
+      "category": "voice-streaming",
+      "finding": "Dictation sender introduces dictationId, ordered segments, send sequence, streamReady and start generation/promise state. Sample states intended buffer responsibilities but not complete send logic.",
+      "fleetpane_action": "Voice P2; eventual stream design needs bounded buffers and explicit sequence/attempt ownership, not parity copying now.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/dictation/dictation-stream-sender.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:112b710c7b70f25a166e34fd1da79d8ba7d4749872ae91aa47af920873821d52"
+    },
+    {
+      "ordinal": 713,
+      "revision": "a0cab29e1aff338f4c586b80a228a32d1ff4b035",
+      "date": "2026-01-23T18:55:21+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 712. Dictation segment enqueue/flush and generation state enter first-parent view. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/dictation/dictation-stream-sender.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:7fb588a9f5d304347ffdcf26a21caea8edc0fba46dd5afea73e2296022bc4d6a"
+    },
+    {
+      "ordinal": 714,
+      "revision": "2b55d3ae6a4dba44abd5696d79d52bbb1a74426d",
+      "date": "2026-01-23T22:59:31+07:00",
+      "category": "git-shipping-ui",
+      "finding": "Changes pane selects Commit/Create PR/Merge primary action with disabled and pending mutation flags.",
+      "fleetpane_action": "Explicitly deferred Git Diff/ship workflow; no Fleetpane gap counted.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d02e0214ac4584c7a80ec92dc6afc8342c4f46b53edb7eb02cb1489703720700"
+    },
+    {
+      "ordinal": 715,
+      "revision": "b919a3cdd91d287c4908cbd0c0db417b164f68b8",
+      "date": "2026-01-24T08:52:31+07:00",
+      "category": "git-menu-ui",
+      "finding": "Adds view/ship menu anchors and visible/layout state using page coordinates with zero fallback; any event types are historical source.",
+      "fleetpane_action": "Deferred Git workflow; use native typed popup anchors elsewhere, no copying unsafe event parsing.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:de2865117aeb4154933477026b4e113b6ebc4e4cd5d937587a05efaf3d7025cb"
+    },
+    {
+      "ordinal": 716,
+      "revision": "657644b5e7970bd4ce98268cfd19619f371095a8",
+      "date": "2026-01-24T14:08:01+07:00",
+      "category": "ui-provider-refactor",
+      "finding": "Sample removes old root provider nesting as layout is restructured; dropdown components/dependency changes only path-listed.",
+      "fleetpane_action": "No native workflow conclusion from provider nesting; GPUI should own popup focus and keyboard routing independently.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b72b0a0dab576700926d44d7c9f08467486bf53b54ee9fd20ed5cf4596f5c9f4"
+    },
+    {
+      "ordinal": 717,
+      "revision": "1b61fabde534bc8c44670c55603fdfdadbb44927",
+      "date": "2026-01-24T15:45:39+07:00",
+      "category": "dev-isolation",
+      "finding": "Dev script finds daemon/Metro ports, configures matching CORS/autoconnect, starts concurrently with browser auto-open disabled.",
+      "fleetpane_action": "Use isolated Host socket/state namespace for native development; port discovery alone has bind race and does not isolate persistent state, addressed partially in 719.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "scripts/dev.sh"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:32ac829c0b10b7aa5cae068ca02c8a18d0aee1f2e1291c23e1b5cfabfa1e4101"
+    },
+    {
+      "ordinal": 718,
+      "revision": "b86075040db1f2114a8ec6902a7c108cc495252d",
+      "date": "2026-01-24T16:10:58+07:00",
+      "category": "session-location",
+      "finding": "Agent list derives branch label only for Git/non-base branch and rewrites managed worktree paths for display via substring parsing.",
+      "fleetpane_action": "Candidate worktree UX needs stable project/checkout labels from Host metadata, not path-string heuristics that obscure identity.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:76747b95b7fa61f5ecdc2c4721f6c80b225464db1d1bf94c7df1da2579336ab3"
+    },
+    {
+      "ordinal": 719,
+      "revision": "f8f37ace589b3a186ac0fb421f69b3f0a8c99f44",
+      "date": "2026-01-24T16:40:13+07:00",
+      "category": "dev-state-isolation",
+      "finding": "Adds temporary PASEO_HOME and EXIT removal trap plus display, complementing dynamic ports in 717.",
+      "fleetpane_action": "Native test/dev instances should isolate state explicitly; destructive temp cleanup must remain owned. This does not prove child processes fully drained.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "scripts/dev.sh"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:16cb00d8f3606dc426ae3177f785715f906c36378a9c133d441c1d198b9c5198"
+    },
+    {
+      "ordinal": 720,
+      "revision": "9b82c02fd23d1f9f4f94ba63134070bb28d4249d",
+      "date": "2026-01-24T17:01:12+07:00",
+      "category": "onboarding-refactor",
+      "finding": "Settings removes large inline add-host form and begins focused label editing; new welcome/add-host/pair components and default-host changes are path-listed only.",
+      "fleetpane_action": "Existing same-user Host can have direct local onboarding; remote onboarding remains behind real authentication, no missing behavior inferred from file names.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:38d689fc130107181a80c66603e4d85f8dc86bbebd568f696d404d4de38d20a2"
+    },
+    {
+      "ordinal": 721,
+      "revision": "21cff48d3f079f571573fcb553f13de9552f6df4",
+      "date": "2026-01-24T17:46:11+07:00",
+      "category": "storage-lifecycle",
+      "finding": "New per-project AgentStorage upsert atomically writes record then removes old path; remove independently unlinks known path and clears caches, swallowing unlink errors. Directory loader skips inaccessible project dirs and logs/skips invalid records. No serialization between upsert/remove visible here.",
+      "fleetpane_action": "Persistent history already baseline. Require write/delete fencing, durable absence readback and explicit partial load errors; 744 later serializes writes/deletion and scans duplicate records.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-registry.ts",
+        "packages/server/src/server/agent/agent-storage.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c20627a5f74eb32c485ae4bfed5e8bc886003494d035544846af066ff74f5691"
+    },
+    {
+      "ordinal": 722,
+      "revision": "b498c9ea814fa7a7cfca6563f968ee98496064d1",
+      "date": "2026-01-24T19:00:58+07:00",
+      "category": "voice-ui",
+      "finding": "Dictation overlay groups volume/timer and begins conditional transcript display. Actual partial-transcript ordering or host reset not read in sampled hunk.",
+      "fleetpane_action": "Voice remains P2; partial text needs attempt identity, replacement semantics and cancellation, not a reason to expand scope now.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/dictation-controls.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c2006337e2227cf14c1f545046415d5f9b5b9644ef24917f3dfd2755ad847bbf"
+    },
+    {
+      "ordinal": 723,
+      "revision": "6b28167fdd5503c64eec4dea7ce8641d7ab284f8",
+      "date": "2026-01-24T19:01:23+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 722. Partial-transcript overlay layout enters first-parent view; host reset uninspected. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/components/dictation-controls.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:f24ec4aabfd1202ba101ac02c42170a6db041e4e16df6c5cfee249fb6efc315f"
+    },
+    {
+      "ordinal": 724,
+      "revision": "e9b1021cb94bf1ab898b3c3d02547993db4796e4",
+      "date": "2026-01-24T19:04:21+07:00",
+      "category": "feature-removal",
+      "finding": "Deletes orchestrator screen that aggregated all session messages, sorted by timestamp and chose first streaming assistant; thought/conversation components also deleted by path list. Thinking is added to shared tool-detail summary, so deleted dedicated thought sheet does not imply reasoning display was removed; merge 725 selected renderer confirms shared plain-text selectable display.",
+      "fleetpane_action": "Do not recreate cross-session transcript mixing or legacy orchestrator parity. Per-session Host identity and bounded history remain authoritative.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/orchestrator.tsx",
+        "packages/app/src/components/tool-call-details.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d1148951fc6cbaf006c7f0d927868c74eded0312e5584ad21fffe888f1eae611"
+    },
+    {
+      "ordinal": 725,
+      "revision": "56399bcb42a91dfda7705cc8a68b9b64959db156",
+      "date": "2026-01-24T19:04:39+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 724. Shared thinking tool renderer displays selectable plain text with maxHeight while dedicated sheets are removed. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-details.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d8f06eb7395f8ab46941e25b95f38087f34318e1f93264274d33deebcafc1c87"
+    },
+    {
+      "ordinal": 726,
+      "revision": "8fe30eae75aef069acde60b49cfb7713e96b8411",
+      "date": "2026-01-24T21:24:48+07:00",
+      "category": "git-shipping",
+      "finding": "Changes pane adds merge-from-base and push mutations, requires clean target for merge and surfaces response/error status with refresh. Worktree utility moves managed root from repo/.paseo/worktrees to resolved Paseo home/worktrees/<project>; normalizes ownership with realpath fallback and retains Git membership checks from prior helper. Project slug derives remote repo basename, so cross-repo uniqueness must not be inferred.",
+      "fleetpane_action": "Git Diff/ship remains deferred. State flags in UI are not server safety guarantees.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:6de57f37529eafd3ddd753f2cd92a8f12d523820ad5ad12f30f369f1823b58af"
+    },
+    {
+      "ordinal": 727,
+      "revision": "6ecf88b502962d6283438f44c4b825316b96d613",
+      "date": "2026-01-24T19:18:07+07:00",
+      "category": "draft-route-refactor",
+      "finding": "Replaces old route files; sampled deletion resolves legacy agent ID by searching all server sessions and retaining server label/identity. New draft screen paths only listed. Draft screen supplement validates attachment/base, captures message attempt, resolves provider/cwd/mode/model and constructs create-worktree options before SUBMIT.",
+      "fleetpane_action": "Fleetpane existing exact drafts should preserve Host/session identity through creation; no need for web routing parity.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx",
+        "packages/app/src/screens/agent/draft-agent-screen.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:1a5da375a6a237fee388375d800efed4d24593a0e79d6fd59074844b30070be9"
+    },
+    {
+      "ordinal": 728,
+      "revision": "3e2d403f1b277d14d5b9aa121cd93905fe55adb8",
+      "date": "2026-01-24T19:29:56+07:00",
+      "category": "draft-readiness",
+      "finding": "New optional catch-all route distinguishes draft/legacy/ready segments and derives readiness from agent existence plus initializing map.",
+      "fleetpane_action": "Creation transition must wait for exact Host receipt, not broad map presence; keep user draft visible and editable during failure/retry.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[[...route]].tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a82f1251ccbbc31e87ea26106145a4369a39537f746e85b9d5385461c6ab140f"
+    },
+    {
+      "ordinal": 729,
+      "revision": "dc4839e2c01639a28e69afae817e7e51a89440f8",
+      "date": "2026-01-24T20:20:56+07:00",
+      "category": "routing-replacement",
+      "finding": "Deletes catch-all readiness routing from 728 and restores explicit route files; adds create-flow store by path list. This is a quick architectural replacement, not additive feature. New create-flow store records serverId, nullable agentId, messageId, text and timestamp; updateAgentId mutates current singleton pending attempt without expected-attempt argument. Concurrent-create fencing cannot be inferred.",
+      "fleetpane_action": "Validate native draft-to-session transition using existing control receipts; avoid copying routing churn. Concrete store semantics need targeted source read.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[[...route]].tsx",
+        "packages/app/src/stores/create-flow-store.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b9ea91d5a6496526ef2e0bdb818b885e48c92a11c4609e08d8ad0315e9da3f05"
+    },
+    {
+      "ordinal": 730,
+      "revision": "c71134c78eda20b7122e3c7d3256cc7c926315b4",
+      "date": "2026-01-24T21:25:22+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 727-729. Legacy route wrapper delegates to extracted screen as draft/create-flow refactor enters first-parent view. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[id].tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:540596949490cb32917918439cdaa8c5fe544fdeb9ec6dda2e9f7786e9c4b852"
+    },
+    {
+      "ordinal": 731,
+      "revision": "1b0094e7d93915d19e0fdea307ecc61af1b9938b",
+      "date": "2026-01-24T21:08:02+07:00",
+      "category": "layout-simplification",
+      "finding": "Removes GitBranch and Folder icon JSX from explorer tabs while retaining text and press handlers; 14 substantive removed lines read.",
+      "fleetpane_action": "No missing workflow; native tab labels/accessibility remain design choice.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/explorer-sidebar.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b24f83c5a49a327e156128bb67f2e03b24ac84c4de7dcb11e64c727670b579d9"
+    },
+    {
+      "ordinal": 732,
+      "revision": "237aa4067476d9970b7cd8a2ed34c78e09de7e77",
+      "date": "2026-01-24T21:25:30+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 731. Explorer tab icon JSX is removed relative to first parent. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/components/explorer-sidebar.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:e54f6ba3321182cba424966bdab32f66620502bdcd5b062dcd8b6fc1b54e4807"
+    },
+    {
+      "ordinal": 733,
+      "revision": "22d48ea312b78c852a3a443a243c7b70aaa4d0a5",
+      "date": "2026-01-24T21:26:43+07:00",
+      "category": "diagnostics",
+      "finding": "waitFor creates timeout Error at caller site before promise/timer and rejects that object after removing waiter; three substantive changes.",
+      "fleetpane_action": "Existing Host request errors should retain operation/session/request context and origin; small diagnostics improvement if current traces lose call site.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client-v2.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:89fcd4b85d697c1b98ffed0dc5d779246319af0a980f0836a367e648c9d25faa"
+    },
+    {
+      "ordinal": 734,
+      "revision": "0d9d95c3409f2b710af466aa3f553113b209c2b0",
+      "date": "2026-01-24T21:26:55+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 733. waitFor Error is allocated at caller and used for timeout rejection. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client-v2.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:39b9dd72078f255fd456f4c9fa07ab160c54dd173e3c710fb8534eff78ac096d"
+    },
+    {
+      "ordinal": 735,
+      "revision": "1f91de5cbcbba9696a0a71fa1e28f433dad5ff4e",
+      "date": "2026-01-24T22:12:07+07:00",
+      "category": "git-view-ui",
+      "finding": "Removes Working/Base dropdown JSX and adjusts status spinner layout; replacement view UI and server/dev changes are not sampled.",
+      "fleetpane_action": "Git Diff remains deferred; no native workflow added from menu churn.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:4217b53a0ac039cc1936ad56f2d870de5936f3688b2c1e0c7d2a447796db1c5b"
+    },
+    {
+      "ordinal": 736,
+      "revision": "9af2957ca0c83c717d2dd5e580f0b5480f81044c",
+      "date": "2026-01-24T21:43:51+07:00",
+      "category": "stale-launch-preferences",
+      "finding": "Form state resolver now receives valid registry server IDs derived from daemons and passed with current state. Actual invalid-ID fallback branch not yet sampled. Supplement reads actual condition: stored serverId is accepted only if validServerIds contains it; explicit initial serverId still takes precedence.",
+      "fleetpane_action": "Launch preference candidate needs stale-host validation and explicit unavailable selection state; do not silently target another Host.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:63363b09755cfc4b058b82073411904d3f78cd346502d4e241da298e5697e917"
+    },
+    {
+      "ordinal": 737,
+      "revision": "63c765b209567e8a11bb8d0ee8160fb4cd5f7733",
+      "date": "2026-01-24T22:07:07+07:00",
+      "category": "dev-isolation-reversal",
+      "finding": "Comments out temporary-home creation/cleanup from 719 and changes listen from loopback to 0.0.0.0; dynamic ports remain.",
+      "fleetpane_action": "Do not copy exposure or shared dev state into same-user Unix Host. Dev isolation improvement in 719 is explicitly reversed here.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "scripts/dev.sh"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:9ca83a574349f023a689c5c31c01b5e9fbee096482f182a3395cf3ac3918e331"
+    },
+    {
+      "ordinal": 738,
+      "revision": "6503d3b4082985e63bd3324b16486f8407f77356",
+      "date": "2026-01-24T22:05:44+07:00",
+      "category": "location-display-refactor",
+      "finding": "Extracted branch/project display helper centralizes logic; managed worktree display now returns all text after marker rather than stripping first path component as in 718.",
+      "fleetpane_action": "Use stable checkout metadata for project/worktree labels; record label evolution rather than infer path substring proves ownership.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/utils/agent-display-info.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:70f47c93e55a851285b168d02e914fa078ec4c46cf91332d8346e020f48e46ec"
+    },
+    {
+      "ordinal": 739,
+      "revision": "8584f21bfbfcbe504bb094f83a85a1c27725f1fc",
+      "date": "2026-01-24T22:06:14+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 736. Form resolver receives live registry server IDs; actual fallback condition inspected in 736 supplement. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:1555539bda1fe21aa1a7ca1d8c5fc76830eea77edf754cbf052e24b3b0c1344d"
+    },
+    {
+      "ordinal": 740,
+      "revision": "1d3785dc7feff782748d3073a4c20d9a8f700158",
+      "date": "2026-01-24T22:07:10+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 738. Shared branch/project labels enter main; worktree labels use substring suffix. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/utils/agent-display-info.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:019589251f9e9bda4894cc3c050bf1366f3e35c81bb2269a85fe2d739913888f"
+    },
+    {
+      "ordinal": 741,
+      "revision": "fb07df3fd1b2486c77e33103c25597c0b02f4db9",
+      "date": "2026-01-24T22:13:32+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 738/740. Shared display helper enters git panel branch, plus path-listed form/dev changes. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/app/src/utils/agent-display-info.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a39d907f86b1401669c79f8d398e37d26fab2c2bb76e1bea5403f203be386be9"
+    },
+    {
+      "ordinal": 742,
+      "revision": "504fb83fa905513bc3adfafff26e819b66c1997a",
+      "date": "2026-01-24T22:21:28+07:00",
+      "category": "metadata-policy-change",
+      "finding": "Changes push label, shrinks header subtitle and replaces guarded multi-step title instructions with unconditional MUST call set_title after understanding task. Removes read-only/slash/short-request exemptions from 692.",
+      "fleetpane_action": "Do not adopt model-driven mandatory metadata side effects for read-only sessions; user title editing/local suggested titles can remain separate from task authorization.",
+      "inspection": "embedded-prompt/help-source",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx",
+        "packages/app/src/components/headers/menu-header.tsx",
+        "packages/server/src/server/agent/self-identification-instructions.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:9bbbeb441a78b40bf880bbf54eeebf0db14e47b5c2da7493554d55caae016c90"
+    },
+    {
+      "ordinal": 743,
+      "revision": "ef612abfc15b2855fb7c5fa97f0f720625878ae8",
+      "date": "2026-01-24T23:06:00+07:00",
+      "category": "touch-layout",
+      "finding": "Mobile header height becomes 56 versus desktop 48, mobile menu/folder/overflow icons 20 versus 16; 11 substantive lines read.",
+      "fleetpane_action": "No desktop workflow gap; native touch/accessibility sizing should follow actual target input devices.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/headers/menu-header.tsx",
+        "packages/app/src/components/headers/screen-header.tsx",
+        "packages/app/src/constants/layout.ts",
+        "packages/app/src/screens/agent/agent-ready-screen.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:053a04ca343923afb025684a94e0f41dfff6966f43094e70c3cd1f2895486b8d"
+    },
+    {
+      "ordinal": 744,
+      "revision": "084177da16d3aed15e7ab345a2cec515a12ef389",
+      "date": "2026-01-24T23:34:09+07:00",
+      "category": "storage-delete-and-worktree-fix",
+      "finding": "AgentStorage serializes pending upserts per ID, skips writes while deleting, marks deletion and waits pending writes, scans legacy/duplicate locations, then unlinks candidates. Non-ENOENT unlink failures only warn; scan errors can still be ignored. Worktree cleanup resolves Git top-level and registered membership so cwd below worktree root is recognized.",
+      "fleetpane_action": "Retain regression scenarios for delete/write overlap, restart absence and subdirectory archive; do not treat warn-and-continue unlink as durable deletion success. Existing Host drain/fencing remains required.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-storage.ts",
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:f7d49eda2e4bec6010d49a85a3c1847ca8020135dff70e63c3dfb9becb164499"
+    },
+    {
+      "ordinal": 745,
+      "revision": "d4011408f73dae1fea3ef38470a2829ecdc4172c",
+      "date": "2026-01-24T23:34:55+07:00",
+      "category": "merge-integration",
+      "finding": "Explicit first-parent diff-tree and selected patch read; integrates lineage 744. Per-agent serialized upsert/deleting guard enters first-parent view; delete half inspected at 744. Other first-parent paths and second-parent path inventory retained; no complete conflict-resolution audit claimed.",
+      "fleetpane_action": "Follow underlying behavior/action; do not count integration merge as another product feature or infer historical test pass.",
+      "inspection": "merge-first-parent-selected-source",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-storage.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0c5a6efc05b161cc50f4849d50295f6c66295ee89bbbf5b6b0f45dbc954fae67"
+    },
+    {
+      "ordinal": 746,
+      "revision": "9d0dd8b19e7241a2c239df056d7f4a5b98ea5d59",
+      "date": "2026-01-25T08:42:00+07:00",
+      "category": "directory-grouping",
+      "finding": "Actual grouping partitions running/attention/recent sessions into project groups, sorts by recency, and date-groups inactive sessions. Grouped-list removal UI disables when Host offline and describes deletion as Paseo-only. Initial import sample is not behavioral evidence.",
+      "fleetpane_action": "Candidate native project/date facets over existing bounded history; expose local/Host/provider identity and precise deletion scope. Keep global paging, attention visibility and no per-row subprocess fanout.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/grouped-agent-list.tsx",
+        "packages/app/src/utils/agent-grouping.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:5decd2d305961db141b6fe68dad6831793b4950a344afb32f6275e05ff9dcd89"
+    },
+    {
+      "ordinal": 747,
+      "revision": "ccd175b4b73195391b1f4a8377a84304fa936c3e",
+      "date": "2026-01-25T09:35:07+07:00",
+      "category": "voice-debug-retention",
+      "finding": "Session concatenates retained PCM chunks to WAV and persists debug audio by session/dictation ID, caching output path. Gating and retention limits not sampled.",
+      "fleetpane_action": "Voice P2; any later debug capture must be opt-in, bounded and retention-controlled with explicit privacy behavior.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:2700f05e888d54358c1856e3d11afc759e6bfa6b2eff1286657319ab86f0441c"
+    },
+    {
+      "ordinal": 748,
+      "revision": "aa979f523046b56f627a1282258ecb6dd3bb4fd1",
+      "date": "2026-01-25T09:41:17+07:00",
+      "category": "directory-identities",
+      "finding": "Grouping normalizes common SSH/HTTPS Git remote forms to remote:host/path and prefers remote identity across worktrees. Details sheet exposes Agent ID and Persistence session ID with copy, success toast and copy-failure toast. Root adds ToastProvider.",
+      "fleetpane_action": "Useful directory details/copy workflow: expose Fleetpane session/Host identity and provider resume ID distinctly, retain local checkout identity under remote grouping, and bound refresh work.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx",
+        "packages/app/src/utils/agent-grouping.ts",
+        "packages/app/src/components/agent-details-sheet.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:5320ef1f47531e27d9b618f8b3ca31b130ff31443bc32852afcc3c06e0d6d437"
+    },
+    {
+      "ordinal": 749,
+      "revision": "d1a47c22f911f5721164c7e601902d1809f81ac5",
+      "date": "2026-01-25T09:45:29+07:00",
+      "category": "project-label-fix",
+      "finding": "Project name helper recognizes remote:github.com/ prefix and preserves owner/repo suffix instead of only last path segment; sheet horizontal padding decreases.",
+      "fleetpane_action": "Useful distinction for duplicate repository names; if grouping added, retain full canonical identity separate from friendly label.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-details-sheet.tsx",
+        "packages/app/src/utils/agent-grouping.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:a5cbfc3b52f6b75b74740a186fac1b27799f396bef142a650982b624d1fc03fb"
+    },
+    {
+      "ordinal": 750,
+      "revision": "be235e14d70164b858af5fb6c4ae7eb63b62a851",
+      "date": "2026-01-25T20:40:00+07:00",
+      "category": "history-date-sections",
+      "finding": "List groups agents into Today/Yesterday/This week/This month/Older in fixed order, skipping empty buckets and renders section headers.",
+      "fleetpane_action": "Existing bounded directory may benefit from date/project facets and stable selection; validate date boundaries, global bounds and no per-row repository RPC fanout.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:87f3782fdd77748eb4bb56c657c163212d80d2cb4d2720a9d9df5b5becafc284"
+    },
+    {
+      "ordinal": 751,
+      "revision": "fe5ab731e0e89df60df82e82dab6cbb8b46a3a49",
+      "date": "2026-01-26T14:09:07+07:00",
+      "category": "directory-bounds",
+      "finding": "Grouping separates running/attention sessions from recently active and limits inactive per project while retaining all truly active. Sample stops before limit value/application completes. Supplement confirms cap is five recent inactive sessions per project, exposes activeCount/totalCount, and still shows every running/attention session. This is a presentation cap, not bounded source enumeration.",
+      "fleetpane_action": "Directory candidate needs global paging and durable All sessions access; never hide pending approvals behind caps. Per-project truncation is not global boundedness.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/utils/agent-grouping.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:ec51a152f839e28cdb1830977b0d0275f15015cf545807f41fa42d45237ed523"
+    },
+    {
+      "ordinal": 752,
+      "revision": "6095bf975b82c39c3615edc506754eee2810a411",
+      "date": "2026-01-26T14:30:41+07:00",
+      "category": "directory-navigation",
+      "finding": "Sidebar replaces list footer View more with persistent All agents footer action and compact settings icon.",
+      "fleetpane_action": "Useful companion to bounded directory: always-visible full history entry and clear compact-versus-all semantics, retaining search/selection.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:0afe62bccec4157b398cba779c3e1906b9b2b4a326508ac465bf82f7488d0525"
+    },
+    {
+      "ordinal": 753,
+      "revision": "c233c99cd323597c21c1c4bc824aa32e3131d901",
+      "date": "2026-01-26T18:03:51+07:00",
+      "category": "directory-order",
+      "finding": "Native drag adapter coordinates gesture refs. Section-order store persists project keys in AsyncStorage; moveProject splices indices and sorter prioritizes stored keys, leaving unknown groups at end.",
+      "fleetpane_action": "Lower-priority optional ordering for project facets; preserve stable identity through regrouping, validate indices and provide keyboard reorder. Avoid pulling React-native dependency/patch into GPUI.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/draggable-list.native.tsx",
+        "packages/app/src/stores/section-order-store.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:370b94e01e6e0f31a01cc330f0f80b4743315fdc9d634b70e1246adff049c035"
+    },
+    {
+      "ordinal": 754,
+      "revision": "637967fa14d45e1b2e506b9026cd1e915b4d94f1",
+      "date": "2026-01-26T20:38:39+07:00",
+      "category": "project-icons",
+      "finding": "Project icon utility defines ordered filename patterns, preferred asset directories and ignored build/dependency dirs. Actual bounded search/decode logic not read. Supplement reads recursive directory traversal with maxDepth default three and manual PNG/JPEG/GIF/WEBP dimension parsing. Depth alone does not bound entry count/bytes or symlink scope; full decoding/security not verified.",
+      "fleetpane_action": "Optional directory polish, not a core missing workflow; any repository image decode must respect file/byte/dimension budgets and avoid network fetch by default.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/utils/project-icon.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:47b8b2c6376d50eb1a90f4153947b2ff5b7fbb14d3d18687a5fd2e3645aa35ad"
+    },
+    {
+      "ordinal": 755,
+      "revision": "766585d1cb44acd7c5cbffc3d1c046a9f75ceadb",
+      "date": "2026-01-27T13:06:01+07:00",
+      "category": "git-shipping-ui",
+      "finding": "Changes pane adds explicit primary Commit button with pending spinner and secondary menu. Icon/query changes only path-listed. Small icon supplement adds favico filename aliases; not a new product workflow.",
+      "fleetpane_action": "Git Diff/ship remains deferred; no gap counted from this toolbar change.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx",
+        "packages/server/src/utils/project-icon.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:b0c03d92024204b55b53e2ef6d9eae38efc2b2f69ed0cb623a0379c9237a9e05"
+    },
+    {
+      "ordinal": 756,
+      "revision": "024dbdfda8f2214fefdbcd014eb0171116c015ef",
+      "date": "2026-01-27T13:08:51+07:00",
+      "category": "action-feedback-removal",
+      "finding": "Removes actionStatus state and success/reset messages for commit/PR/merge/push while retaining refresh and actionError; empty base comparison now names base ref.",
+      "fleetpane_action": "Git workflow deferred; do not generalize transient message removal into absence of all feedback. Later 758 introduces action success state.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d1a51119865b674d77429393648814abc5be5367b4a6894023e82ca9095b1e36"
+    },
+    {
+      "ordinal": 757,
+      "revision": "971da6f48aed5c314a55c4e00cd154cc940660f2",
+      "date": "2026-01-27T13:11:13+07:00",
+      "category": "layout-stability",
+      "finding": "Commit/ship spinners receive fixed dimensions matching text line height, which is also added; eight substantive lines.",
+      "fleetpane_action": "Use stable native action geometry during pending states; no missing workflow.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:d178ac3a87fb149c6aa60b2e1caafe75fcaf1314236afb19e06483b5ad3bb0d2"
+    },
+    {
+      "ordinal": 758,
+      "revision": "a18739319fa19626a23d05b1254401108baa30d4",
+      "date": "2026-01-27T13:38:56+07:00",
+      "category": "action-feedback",
+      "finding": "Introduces generic action-status hook with pending/success states, one-second success interval and timer cleanup. Actual transition body not fully sampled. Transition supplement schedules reset after success and trigger casts undefined to generic mutation variables; effect depends on whole mutation object. Repeated render/timer behavior is a review concern, not reproduced runtime failure.",
+      "fleetpane_action": "Useful general feedback detail only; existing Host operation receipts remain durable authority, transient success cannot substitute for them.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/git-diff-pane.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:2b607806d113bde1bdef160349a2d08e6f23a5db8200ae48d0994fdf0e700178"
+    },
+    {
+      "ordinal": 759,
+      "revision": "c615d422caec0f11f3606e968ad7b8081a01bf20",
+      "date": "2026-01-27T13:48:04+07:00",
+      "category": "hover-polish",
+      "finding": "Sidebar new-agent button replaces hover background callback with child-rendered foreground icon/text and changes label casing.",
+      "fleetpane_action": "No missing native workflow; hover/keyboard focus must remain accessible.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/app/src/components/sliding-sidebar.tsx"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:06f4e370edb24ffb5f351bcc050c4d892210366a90b0a7da3ca9e64708f6a858"
+    },
+    {
+      "ordinal": 760,
+      "revision": "96b211a2cf70742e48308ccf407f27eb1614a000",
+      "date": "2026-01-28T13:25:48+07:00",
+      "category": "checkout-target-refactor",
+      "finding": "Checkout PR request handler replaces agentId lookup with cwd request target and generates text by cwd; diff-tree indicates broad checkout schema/query change. Schemas replace agentId with required cwd across checkout reads/mutations; status in-flight map now keys cwd. Shared checkout identity across sessions is explicit, but full runtime/authorization behavior not audited.",
+      "fleetpane_action": "Git Diff/ship deferred. Cwd-only operations still require Host workspace/ownership validation; do not claim full authorization or dedup correctness from partial hunk.",
+      "inspection": "selected-source/config",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts",
+        "packages/server/src/shared/messages.ts",
+        "packages/server/src/client/daemon-client-v2.ts"
+      ],
+      "source_receipt": "../verification/assets/paseo-replay/611-760/review.json",
+      "source_receipt_digest": "sha256:c8fb8358f939148f39409827cfe2ccafed58c9f0ad8312654d296e6d0512d53d"
     }
   ],
   "workflow_status": {
@@ -8241,7 +10396,8 @@
     "composer-shortcut": "partial; focused native platform Enter invokes existing Send/Steer gates, exact Chinese multiline/rejection/draft/reopen verified with Linux synthetic Codex; IME/other platforms/ACP shortcut native limits retained",
     "file-export": "partial; shared raw local copy and Linux native exact binary/fresh-source/error/900x560/draft workflows verified. 64 MiB and private atomic no-overwrite publication. Long-blocked write/close, crash cleanup, system picker/share and remote download remain open",
     "image-drop": "partial; existing conversation native local paths reuse picker importer; Linux X11 exact names/hash/draft/reopen/four-image send verified. Initial creation, remote URIs and other platform drop acceptance open",
-    "sidebar-toggle": "partial; native per-Host window-local button/platform key; Linux X11 exact draft/filter/focus/pending snapshots and 900x560 validated; persistence and other platforms unaccepted"
+    "sidebar-toggle": "partial; native per-Host window-local button/platform key; Linux X11 exact draft/filter/focus/pending snapshots and 900x560 validated; persistence and other platforms unaccepted",
+    "loaded-answer-copy": "Covered shared/Linux native exact loaded assistant-only text, pagination scope, no-text clipboard refusal, retained draft and normal replacement verified. No complete transcript/media export or automatic history reads."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

@@ -1,0 +1,96 @@
+{
+  "ordinal": 664,
+  "revision": "a89c96ce0dfac6f72fb90ff86d8bc5f3c9219dde",
+  "date": "2026-01-17T13:10:15+07:00",
+  "committer_date": "2026-01-17T13:10:15+07:00",
+  "parents": [
+    "07ca5222c1df65ee23731ae556df0675af22cb39"
+  ],
+  "subject": "fix(server): pass logger to agent clients in e2e tests",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts"
+  ],
+  "source_receipt_digest": "sha256:4ca87d8eedf3c505c5a620460055c1b4c0165e7a0fa9a67874b834e74f15008e",
+  "diff_tree_digest": "sha256:0242e2ed0711f398459a330f14f50a8f94801e784692ec34c982e0f61dfeb361",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+      "old_lines": [
+        130,
+        135
+      ],
+      "new_lines": [
+        130,
+        136
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -130,6 +130,7 @@ describe(\"agent MCP end-to-end\", () => {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+      "old_lines": [
+        171,
+        177
+      ],
+      "new_lines": [
+        172,
+        176
+      ],
+      "diff_block_lines": [
+        14,
+        22
+      ],
+      "hunk_header": "@@ -171,7 +172,5 @@ describe(\"agent MCP end-to-end\", () => {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+      "old_lines": [
+        331,
+        336
+      ],
+      "new_lines": [
+        330,
+        336
+      ],
+      "diff_block_lines": [
+        30,
+        38
+      ],
+      "hunk_header": "@@ -331,6 +330,7 @@ describe(\"agent MCP end-to-end\", () => {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/agent-mcp.e2e.test.ts",
+      "old_lines": [
+        385,
+        391
+      ],
+      "new_lines": [
+        385,
+        389
+      ],
+      "diff_block_lines": [
+        39,
+        47
+      ],
+      "hunk_header": "@@ -385,7 +385,5 @@ describe(\"agent MCP end-to-end\", () => {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 66,
+  "receipt_file": "receipts/0664/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

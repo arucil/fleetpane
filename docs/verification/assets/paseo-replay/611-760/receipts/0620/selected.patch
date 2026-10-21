@@ -1,0 +1,40 @@
+FILE packages/app/src/components/tool-call-sheet.tsx
+RANGE {"path":"packages/app/src/components/tool-call-sheet.tsx","old_lines":[219,222],"new_lines":[219,255],"diff_block_lines":[5,42],"hunk_header":"@@ -219,4 +219,37 @@ function ToolCallSheetContent({ data, onClose }: ToolCallSheetContentProps) {","substantive_changed_lines":31,"comparison":"parent"}
+@@ -219,4 +219,37 @@ function ToolCallSheetContent({ data, onClose }: ToolCallSheetContentProps) {
+         </View>
+       );
++    } else if (toolCallDisplay.type === "read") {
++      // Read tool: show file path and content
++      sections.push(
++        <View key="read" style={styles.section}>
++          <Text style={styles.sectionTitle}>File</Text>
++          <View style={styles.fileBadge}>
++            <Text style={styles.fileBadgeText}>{toolCallDisplay.filePath}</Text>
++          </View>
++          {(toolCallDisplay.offset !== undefined || toolCallDisplay.limit !== undefined) ? (
++            <Text style={styles.rangeText}>
++              {toolCallDisplay.offset !== undefined ? `Offset: ${toolCallDisplay.offset}` : ""}
++              {toolCallDisplay.offset !== undefined && toolCallDisplay.limit !== undefined ? " • " : ""}
++              {toolCallDisplay.limit !== undefined ? `Limit: ${toolCallDisplay.limit}` : ""}
++            </Text>
++          ) : null}
++          {toolCallDisplay.content ? (
++            <ScrollView
++              style={styles.scrollArea}
++              contentContainerStyle={styles.scrollContent}
++              nestedScrollEnabled
++              showsVerticalScrollIndicator={true}
++            >
++              <ScrollView
++                horizontal
++                nestedScrollEnabled
++                showsHorizontalScrollIndicator={true}
++              >
++                <Text style={styles.scrollText}>{toolCallDisplay.content}</Text>
++              </ScrollView>
++            </ScrollView>
++          ) : null}
++        </View>
++      );
+     } else {
+       // Generic tool: show input/output as key-value pairs

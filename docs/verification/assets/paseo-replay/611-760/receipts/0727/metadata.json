@@ -1,0 +1,78 @@
+{
+  "ordinal": 727,
+  "revision": "6ecf88b502962d6283438f44c4b825316b96d613",
+  "date": "2026-01-24T19:18:07+07:00",
+  "committer_date": "2026-01-24T19:18:07+07:00",
+  "parents": [
+    "56399bcb42a91dfda7705cc8a68b9b64959db156"
+  ],
+  "subject": "refactor agent route for draft→chat transition",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/sidebar-new-agent-clones-selected.spec.ts",
+    "A\tpackages/app/src/app/agent/[...route].tsx",
+    "D\tpackages/app/src/app/agent/[id].tsx",
+    "D\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "A\tpackages/app/src/app/agent/index.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/home-footer.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "A\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "A\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:046710ff31415f18b4e2665aa24ced746aa201299e7052f17fc0bd6fa38de2fd",
+  "diff_tree_digest": "sha256:26484366c146e6c2d23bd7d70c3e1814b44dc24be655a9deec23b9b522432a70",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/agent/[id].tsx",
+      "old_lines": [
+        9,
+        44
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        15,
+        50
+      ],
+      "hunk_header": "@@ -1,209 +0,0 @@",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 3342,
+  "receipt_file": "receipts/0727/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0727/followup-01.patch",
+      "source_receipt_digest": "sha256:7df10f7c6ff981f1a907bc1811877b4b06933ba4e8b56d27d20939e380f5f613",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/screens/agent/draft-agent-screen.tsx",
+          "old_lines": null,
+          "new_lines": [
+            647,
+            698
+          ],
+          "diff_block_lines": [
+            653,
+            704
+          ],
+          "hunk_header": "@@ -0,0 +1,1029 @@",
+          "substantive_changed_lines": 42,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

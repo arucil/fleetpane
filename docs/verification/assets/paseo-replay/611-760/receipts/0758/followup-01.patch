@@ -1,0 +1,40 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[40,41],"new_lines":[70,107],"diff_block_lines":[49,86],"hunk_header":"@@ -36,6 +38,70 @@ import {","substantive_changed_lines":24,"comparison":"parent"}
++    };
++  }, []);
++
++  // Watch for mutation success to trigger success display
++  useEffect(() => {
++    if (mutation.isSuccess && !mutation.isPending) {
++      setShowSuccess(true);
++      successTimeoutRef.current = setTimeout(() => {
++        setShowSuccess(false);
++        mutation.reset();
++      }, SUCCESS_DISPLAY_MS);
++    }
++  }, [mutation.isSuccess, mutation.isPending, mutation]);
++
++  const status: ActionStatus = mutation.isPending
++    ? "pending"
++    : showSuccess
++      ? "success"
++      : "idle";
++
++  const trigger = useCallback(() => {
++    onTrigger?.();
++    mutation.mutate(undefined as TVariables);
++  }, [mutation, onTrigger]);
++
++  return { status, trigger };
++}
++
++function openURLInNewTab(url: string): void {
++  if (Platform.OS === "web") {
++    window.open(url, "_blank", "noopener");
++  } else {
++    void Linking.openURL(url);
++  }
++}
++
+ const DIFF_PANE_LOG_TAG = "[GitDiffPane]";
+ const DIFF_FILE_LOG_TAG = "[DiffFileSection]";

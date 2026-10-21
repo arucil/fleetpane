@@ -1,0 +1,82 @@
+{
+  "ordinal": 708,
+  "revision": "0852f4e6d087f00914fad4d8d870b575204f9c4c",
+  "date": "2026-01-23T15:10:36+07:00",
+  "committer_date": "2026-01-23T15:10:36+07:00",
+  "parents": [
+    "a6869d55c1fe3bcac963f43fdb66f9dda419425f"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/playwright.config.ts",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx"
+  ],
+  "source_receipt_digest": "sha256:4f6cb292099ae8e0b66697869478966625fa737538fe3eea5e848880fe39abc2",
+  "diff_tree_digest": "sha256:0a6594b6aac010e636b0f92df2746ebd7971b299c735c2f1ba2f58e2162fd1b9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/e2e/global-setup.ts",
+      "old_lines": [
+        80,
+        83
+      ],
+      "new_lines": [
+        82,
+        108
+      ],
+      "diff_block_lines": [
+        17,
+        44
+      ],
+      "hunk_header": "@@ -80,4 +82,27 @@ export default async function globalSetup() {",
+      "substantive_changed_lines": 14,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/app/playwright.config.ts",
+      "old_lines": [
+        1,
+        5
+      ],
+      "new_lines": [
+        1,
+        7
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -1,5 +1,7 @@",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/app/src/app/agent/[serverId]/[agentId].tsx",
+      "old_lines": [
+        563,
+        567
+      ],
+      "new_lines": [
+        563,
+        567
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -563,5 +563,5 @@ function AgentScreenContent({",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 54,
+  "receipt_file": "receipts/0708/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

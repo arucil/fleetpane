@@ -1,0 +1,38 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[307,342],"new_lines":[308,309],"diff_block_lines":[12,47],"hunk_header":"@@ -307,40 +308,42 @@ export default function RootLayout() {","substantive_changed_lines":33,"comparison":"parent"}
+   return (
+     <GestureHandlerRootView style={{ flex: 1 }}>
+-      <SafeAreaProvider>
+-        <KeyboardProvider>
+-          <BottomSheetModalProvider>
+-            <QueryProvider>
+-              <DaemonRegistryProvider>
+-                <DaemonConnectionsProvider>
+-                  <MultiDaemonSessionHost />
+-                  <ProvidersWrapper>
+-                    <SidebarAnimationProvider>
+-                      <HorizontalScrollProvider>
+-                        <AppWithSidebar>
+-                        <Stack
+-                          screenOptions={{
+-                            headerShown: false,
+-                            animation: "none",
+-                          }}
+-                        >
+-                          <Stack.Screen name="index" />
+-                          <Stack.Screen name="agents" />
+-                          <Stack.Screen name="orchestrator" />
+-                          <Stack.Screen name="agent/[id]" options={{ gestureEnabled: false }} />
+-                          <Stack.Screen name="agent/[serverId]/[agentId]" options={{ gestureEnabled: false }} />
+-                          <Stack.Screen name="settings" />
+-                          <Stack.Screen name="audio-test" />
+-                          <Stack.Screen name="pair-scan" />
+-                        </Stack>
+-                      </AppWithSidebar>
+-                      </HorizontalScrollProvider>
+-                    </SidebarAnimationProvider>
+-                  </ProvidersWrapper>
+-                </DaemonConnectionsProvider>
+-              </DaemonRegistryProvider>
+-            </QueryProvider>
+-          </BottomSheetModalProvider>

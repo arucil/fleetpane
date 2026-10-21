@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/agent-registry.ts
+RANGE {"path":"packages/server/src/server/agent/agent-registry.ts","old_lines":[10,45],"new_lines":null,"diff_block_lines":[16,51],"hunk_header":"@@ -1,229 +0,0 @@","substantive_changed_lines":30,"comparison":"parent"}
+-import type { AgentSessionConfig } from "./agent-sdk-types.js";
+-
+-const SERIALIZABLE_CONFIG_SCHEMA = z
+-  .object({
+-    modeId: z.string().nullable().optional(),
+-    model: z.string().nullable().optional(),
+-    extra: z.record(z.any()).nullable().optional(),
+-  })
+-  .nullable()
+-  .optional();
+-
+-const PERSISTENCE_HANDLE_SCHEMA = z
+-  .object({
+-    provider: z.string(),
+-    sessionId: z.string(),
+-    nativeHandle: z.any().optional(),
+-    metadata: z.record(z.any()).optional(),
+-  })
+-  .nullable()
+-  .optional();
+-
+-const STORED_AGENT_SCHEMA = z.object({
+-  id: z.string(),
+-  provider: z.string(),
+-  cwd: z.string(),
+-  createdAt: z.string(),
+-  updatedAt: z.string(),
+-  lastActivityAt: z.string().optional(),
+-  lastUserMessageAt: z.string().nullable().optional(),
+-  title: z.string().nullable().optional(),
+-  lastStatus: AgentStatusSchema.default("closed"),
+-  lastModeId: z.string().nullable().optional(),
+-  config: SERIALIZABLE_CONFIG_SCHEMA,
+-  runtimeInfo: z
+-    .object({
+-      provider: z.string(),

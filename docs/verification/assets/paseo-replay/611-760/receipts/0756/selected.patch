@@ -1,0 +1,67 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[365,369],"new_lines":[365,368],"diff_block_lines":[5,10],"hunk_header":"@@ -365,5 +365,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -365,5 +365,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+   const [diffModeOverride, setDiffModeOverride] = useState<"uncommitted" | "base" | null>(null);
+   const [actionError, setActionError] = useState<string | null>(null);
+-  const [actionStatus, setActionStatus] = useState<string | null>(null);
+   const [shipDefault, setShipDefault] = useState<"merge" | "pr">("merge");
+   const { status, isLoading: isStatusLoading, isFetching: isStatusFetching, isError: isStatusError, error: statusError, refresh: refreshStatus } =
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[536,540],"new_lines":[535,538],"diff_block_lines":[11,16],"hunk_header":"@@ -536,5 +535,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -536,5 +535,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+     onSuccess: () => {
+       setActionError(null);
+-      setActionStatus("Commit created.");
+       void refreshDiff();
+       void refreshStatus();
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[542,546],"new_lines":[540,543],"diff_block_lines":[17,22],"hunk_header":"@@ -542,5 +540,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -542,5 +540,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+     onError: (err) => {
+       const message = err instanceof Error ? err.message : "Failed to commit";
+-      setActionStatus(null);
+       setActionError(message);
+     },
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[560,569],"new_lines":[557,564],"diff_block_lines":[23,33],"hunk_header":"@@ -560,10 +557,8 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -560,10 +557,8 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+     onSuccess: () => {
+       setActionError(null);
+-      setActionStatus("PR created.");
+       void refreshPrStatus();
+     },
+     onError: (err) => {
+       const message = err instanceof Error ? err.message : "Failed to create PR";
+-      setActionStatus(null);
+       setActionError(message);
+     },
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[587,591],"new_lines":[582,585],"diff_block_lines":[34,39],"hunk_header":"@@ -587,5 +582,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -587,5 +582,4 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+     onSuccess: () => {
+       setActionError(null);
+-      setActionStatus("Merged to base.");
+       void refreshDiff();
+       void refreshStatus();
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[638,647],"new_lines":[629,636],"diff_block_lines":[58,68],"hunk_header":"@@ -638,10 +629,8 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -638,10 +629,8 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+     onSuccess: () => {
+       setActionError(null);
+-      setActionStatus("Pushed branch.");
+       void refreshStatus();
+     },
+     onError: (err) => {
+       const message = err instanceof Error ? err.message : "Failed to push";
+-      setActionStatus(null);
+       setActionError(message);
+     },
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[767,771],"new_lines":[754,758],"diff_block_lines":[81,87],"hunk_header":"@@ -767,5 +754,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -767,5 +754,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+       <View style={styles.emptyContainer}>
+         <Text style={styles.emptyText}>
+-          {diffMode === "uncommitted" ? "No uncommitted changes" : "No base changes"}
++          {diffMode === "uncommitted" ? "No uncommitted changes" : `No changes vs ${baseRefLabel}`}
+         </Text>
+       </View>

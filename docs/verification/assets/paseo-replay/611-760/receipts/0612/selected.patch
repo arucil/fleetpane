@@ -1,0 +1,66 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[241,293],"new_lines":[241,258],"diff_block_lines":[6,69],"hunk_header":"@@ -241,94 +241,97 @@ export function AgentStreamView({","substantive_changed_lines":50,"comparison":"parent"}
+   }
+ 
+-  function renderStreamItem({ item }: ListRenderItemInfo<StreamItem>) {
+-    let content: React.ReactNode = null;
+-
+-    switch (item.kind) {
+-      case "user_message":
+-        content = (
+-          <UserMessage
+-            message={item.text}
+-            timestamp={item.timestamp.getTime()}
+-          />
+-        );
+-        break;
+-
+-      case "assistant_message":
+-        content = (
+-          <AssistantMessage
+-            message={item.text}
+-            timestamp={item.timestamp.getTime()}
+-            onInlinePathPress={handleInlinePathPress}
+-          />
+-        );
+-        break;
+-
+-      case "thought":
+-        content = <AgentThoughtMessage message={item.text} status={item.status} />;
+-        break;
++  const renderStreamItem = useCallback(
++    ({ item }: ListRenderItemInfo<StreamItem>) => {
++      let content: React.ReactNode = null;
+ 
+-      case "tool_call": {
+-        const { payload } = item;
+-
+-        if (payload.source === "agent") {
+-          const data = payload.data;
++      switch (item.kind) {
++        case "user_message":
+           content = (
+-            <ToolCall
+-              toolName={data.name}
+-              args={data.input}
+-              result={data.result}
+-              error={data.error}
+-              status={data.status as "executing" | "completed" | "failed"}
+-              parsedEditEntries={data.parsedEdits}
+-              parsedReadEntries={data.parsedReads}
+-              parsedCommandDetails={data.parsedCommand ?? null}
+-              cwd={agent.cwd}
++            <UserMessage
++              message={item.text}
++              timestamp={item.timestamp.getTime()}
+             />
+           );
+-        } else {
+-          const data = payload.data;
++          break;
++
++        case "assistant_message":
+           content = (
+-            <ToolCall
+-              toolName={data.toolName}
+-              args={data.arguments}

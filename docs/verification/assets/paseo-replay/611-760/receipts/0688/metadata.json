@@ -1,0 +1,66 @@
+{
+  "ordinal": 688,
+  "revision": "cc2bdbf01f2036d3daa48e8984d3deaedd0f03ca",
+  "date": "2026-01-22T12:23:01+07:00",
+  "committer_date": "2026-01-22T12:23:01+07:00",
+  "parents": [
+    "88490a9af103a4a6a6e16a98f0bbe2d526c2edb0"
+  ],
+  "subject": "Add structured agent helper and checkout git fixes",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/server/package.json",
+    "A\tpackages/server/src/server/agent/agent-response-loop.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/agent-response-loop.test.ts",
+    "A\tpackages/server/src/server/agent/agent-response-loop.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/utils/checkout-git.test.ts",
+    "A\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:3bef6f5fb53506ecbd5a7773ac25148030cb9db18afaac9744f51d6630a9b52c",
+  "diff_tree_digest": "sha256:6085c91d21f76d271d5cc9c8445ad13f74474c6747674478dc992cdedb9e8f02",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-response-loop.ts",
+      "old_lines": null,
+      "new_lines": [
+        6,
+        41
+      ],
+      "diff_block_lines": [
+        12,
+        47
+      ],
+      "hunk_header": "@@ -0,0 +1,204 @@",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 716,
+  "receipt_file": "receipts/0688/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0688/followup-01.patch",
+      "source_receipt_digest": "sha256:3939a3d28442f9b6d95edee0fe13be6d368eb829ac30b8caf13590b589cd45cb",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-response-loop.ts",
+          "old_lines": null,
+          "new_lines": [
+            71,
+            122
+          ],
+          "diff_block_lines": [
+            77,
+            128
+          ],
+          "hunk_header": "@@ -0,0 +1,204 @@",
+          "substantive_changed_lines": 36,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

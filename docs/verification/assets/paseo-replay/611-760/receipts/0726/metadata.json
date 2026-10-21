@@ -1,0 +1,107 @@
+{
+  "ordinal": 726,
+  "revision": "8fe30eae75aef069acde60b49cfb7713e96b8411",
+  "date": "2026-01-24T21:24:48+07:00",
+  "committer_date": "2026-01-24T21:24:48+07:00",
+  "parents": [
+    "56399bcb42a91dfda7705cc8a68b9b64959db156"
+  ],
+  "subject": "feat(checkout): add merge-from-base and push operations for worktree branches",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:06e48c99926557e7fdb8fc0b845f95169c2c5d01328aaa874f9db8708518be9d",
+  "diff_tree_digest": "sha256:3cec0d7526c491067687ce3f702795c83ddd5bc02f69139186d60d4c5207e861",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        586,
+        587
+      ],
+      "new_lines": [
+        586,
+        621
+      ],
+      "diff_block_lines": [
+        6,
+        41
+      ],
+      "hunk_header": "@@ -586,4 +586,54 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 828,
+  "receipt_file": "receipts/0726/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0726/followup-01.patch",
+      "source_receipt_digest": "sha256:0ff0b0a2ff479cc5e139d2d2d75dd077151abc458b571f9d8d841ad14500ada5",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            316,
+            319
+          ],
+          "new_lines": [
+            318,
+            367
+          ],
+          "diff_block_lines": [
+            23,
+            74
+          ],
+          "hunk_header": "@@ -316,15 +318,85 @@ function generateWorktreeSlug(): string {",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0726/followup-02.patch",
+      "source_receipt_digest": "sha256:5a2a30a39ac904b5aea52a708894392a35b7908bb2b694caeb81e188ae0014cc",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            320,
+            330
+          ],
+          "new_lines": [
+            377,
+            402
+          ],
+          "diff_block_lines": [
+            84,
+            113
+          ],
+          "hunk_header": "@@ -316,15 +318,85 @@ function generateWorktreeSlug(): string {",
+          "substantive_changed_lines": 18,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

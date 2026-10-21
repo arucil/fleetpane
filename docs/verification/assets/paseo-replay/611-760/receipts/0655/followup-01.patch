@@ -1,0 +1,12 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[880,884],"new_lines":[880,887],"diff_block_lines":[5,14],"hunk_header":"@@ -880,5 +880,8 @@ export class AgentManager {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -880,5 +880,8 @@ export class AgentManager {
+     options?: { fromHistory?: boolean }
+   ): void {
+-    agent.updatedAt = new Date();
++    // Only update timestamp for live events, not history replay
++    if (!options?.fromHistory) {
++      agent.updatedAt = new Date();
++    }
+ 
+     switch (event.type) {

@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[832,834],"new_lines":[846,880],"diff_block_lines":[56,91],"hunk_header":"@@ -832,5 +846,84 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":32,"comparison":"parent"}
+         {isGit ? (
+           <View style={styles.headerRight}>
+-            {canShowShip ? (
++            {showCommitAsPrimary ? (
++              <View style={styles.shipSplitButton}>
++                <Pressable
++                  testID="changes-commit-primary"
++                  style={[
++                    styles.shipPrimaryButton,
++                    commitDisabled && styles.shipPrimaryButtonDisabled,
++                  ]}
++                  onPress={() => commitMutation.mutate()}
++                  disabled={commitDisabled}
++                  accessibilityRole="button"
++                  accessibilityLabel="Commit changes"
++                >
++                  {commitMutation.isPending ? (
++                    <ActivityIndicator size="small" color={theme.colors.foreground} />
++                  ) : (
++                    <Text style={styles.shipPrimaryText}>Commit</Text>
++                  )}
++                </Pressable>
++                <DropdownMenu>
++                  <DropdownMenuTrigger
++                    testID="changes-commit-caret"
++                    style={styles.shipCaretButton}
++                    accessibilityRole="button"
++                    accessibilityLabel="More options"
++                  >
++                    <ChevronDown size={16} color={theme.colors.foregroundMuted} />
++                  </DropdownMenuTrigger>
++                  <DropdownMenuContent align="end" width={260} testID="changes-commit-menu">
++                    {canShowShip ? (
++                      <>
++                        <DropdownMenuItem
++                          testID="changes-commit-menu-merge"

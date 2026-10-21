@@ -1,0 +1,21 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[181,187],"new_lines":[182,187],"diff_block_lines":[11,20],"hunk_header":"@@ -181,7 +182,6 @@ export function slugify(input: string): string {","substantive_changed_lines":5,"comparison":"parent"}
+@@ -181,7 +182,6 @@ export function slugify(input: string): string {
+ }
+ 
+-function sanitizeWorktreeSlug(input: string): string {
+-  const slug = slugify(input);
+-  return slug.length > 0 ? slug : "worktree";
++function generateWorktreeSlug(): string {
++  return createNameId();
+ }
+ 
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[207,211],"new_lines":[207,211],"diff_block_lines":[21,27],"hunk_header":"@@ -207,5 +207,5 @@ export async function createWorktree({","substantive_changed_lines":2,"comparison":"parent"}
+@@ -207,5 +207,5 @@ export async function createWorktree({
+   // Determine worktree directory based on repo type
+   let worktreePath: string;
+-  const desiredSlug = sanitizeWorktreeSlug(worktreeSlug ?? branchName);
++  const desiredSlug = worktreeSlug || generateWorktreeSlug();
+ 
+   if (repoInfo.type === "bare") {

@@ -1,0 +1,38 @@
+FILE packages/website/src/components/butterfly.tsx
+RANGE {"path":"packages/website/src/components/butterfly.tsx","old_lines":null,"new_lines":[3,38],"diff_block_lines":[9,44],"hunk_header":"@@ -0,0 +1,353 @@","substantive_changed_lines":19,"comparison":"parent"}
++// --- Vector math utilities ---
++
++interface Vec2 {
++  x: number
++  y: number
++}
++
++function vec2(x: number, y: number): Vec2 {
++  return { x, y }
++}
++
++function add(a: Vec2, b: Vec2): Vec2 {
++  return { x: a.x + b.x, y: a.y + b.y }
++}
++
++function sub(a: Vec2, b: Vec2): Vec2 {
++  return { x: a.x - b.x, y: a.y - b.y }
++}
++
++function scale(v: Vec2, s: number): Vec2 {
++  return { x: v.x * s, y: v.y * s }
++}
++
++function length(v: Vec2): number {
++  return Math.sqrt(v.x * v.x + v.y * v.y)
++}
++
++function normalize(v: Vec2): Vec2 {
++  const len = length(v)
++  if (len === 0) return { x: 0, y: 0 }
++  return { x: v.x / len, y: v.y / len }
++}
++
++function lerpAngle(a: number, b: number, t: number): number {
++  // Handle angle wrapping for smooth interpolation
++  let diff = b - a

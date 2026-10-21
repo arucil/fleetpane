@@ -1,0 +1,38 @@
+FILE packages/app/src/dictation/dictation-stream-sender.ts
+RANGE {"path":"packages/app/src/dictation/dictation-stream-sender.ts","old_lines":null,"new_lines":[2,37],"diff_block_lines":[8,43],"hunk_header":"@@ -0,0 +1,189 @@","substantive_changed_lines":16,"comparison":"parent"}
++import type { DaemonClientV2 } from "@server/client/daemon-client-v2";
++
++export type DictationStreamSenderParams = {
++  client: DaemonClientV2 | null;
++  format: string;
++  createDictationId?: () => string;
++};
++
++type DictationFinishResult = { dictationId: string; text: string };
++
++/**
++ * Small, non-React state machine for dictation streaming.
++ *
++ * Responsibilities:
++ * - Maintain an ordered buffer of base64 PCM segments
++ * - Start/restart a dictation stream (dictationId)
++ * - Send missing segments (seq) when connected
++ * - Finish/cancel the stream
++ *
++ * This class intentionally keeps sending synchronous (no internal async mutex),
++ * so enqueues can't "miss" a flush due to in-flight await/coalescing bugs.
++ */
++export class DictationStreamSender {
++  private client: DaemonClientV2 | null;
++  private readonly format: string;
++  private readonly createDictationId: () => string;
++
++  private dictationId: string | null = null;
++  private sendSeq = 0;
++  private segments: string[] = [];
++  private streamReady = false;
++
++  private startGeneration = 0;
++  private startPromise: Promise<void> | null = null;
++
++  constructor(params: DictationStreamSenderParams) {

@@ -1,0 +1,17 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[215,221],"new_lines":[219,231],"diff_block_lines":[21,35],"hunk_header":"@@ -215,7 +219,13 @@ interface GroupAgentsOptions {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -215,7 +219,13 @@ interface GroupAgentsOptions {
+ }
+ 
++const MAX_INACTIVE_PER_PROJECT = 5;
++
+ /**
+  * Groups agents into active (by project) and inactive (by date) sections.
+- * Active = running, requires attention, or had activity within the last 5 minutes.
++ * Active = running, requires attention, or had activity within the grace period (24 hours).
++ *
++ * Within each project group:
++ * - All truly active agents (running/requires attention) are always shown
++ * - Recently active (within grace period but not running) are limited to MAX_INACTIVE_PER_PROJECT
+  */
+ export function groupAgents(

@@ -1,0 +1,38 @@
+FILE packages/server/src/server/daemon-e2e/orchestration.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/orchestration.e2e.test.ts","old_lines":[122,127],"new_lines":[122,152],"diff_block_lines":[7,42],"hunk_header":"@@ -121,9 +121,34 @@ describe(\"daemon E2E\", () => {","substantive_changed_lines":26,"comparison":"parent"}
+         ) {
+-          // The output contains the agentId
+-          const output = createAgentCall.output as { agentId?: string };
+-          if (output.agentId) {
+-            childAgentId = output.agentId;
+-          }
++          const output = createAgentCall.output as unknown;
++          const tryExtract = (value: unknown): string | null => {
++            if (!value) return null;
++            if (typeof value === "string") {
++              try {
++                return tryExtract(JSON.parse(value));
++              } catch {
++                return null;
++              }
++            }
++            if (typeof value !== "object") return null;
++            const asObj = value as Record<string, unknown>;
++            const direct = asObj.agentId;
++            if (typeof direct === "string") return direct;
++            const structured = asObj.structuredContent;
++            if (structured && typeof structured === "object") {
++              const nested = (structured as Record<string, unknown>).agentId;
++              if (typeof nested === "string") return nested;
++            }
++            if (typeof structured === "string") {
++              try {
++                return tryExtract(JSON.parse(structured));
++              } catch {
++                return null;
++              }
++            }
++            return null;
++          };
++
++          childAgentId = tryExtract(output);

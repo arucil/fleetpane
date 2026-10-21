@@ -1,0 +1,54 @@
+FILE packages/server/src/server/agent/agent-manager.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.test.ts","old_lines":[102,109],"new_lines":[103,112],"diff_block_lines":[11,22],"hunk_header":"@@ -102,8 +103,10 @@ class TestAgentSession implements AgentSession {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -102,8 +103,10 @@ class TestAgentSession implements AgentSession {
+ 
+ describe("AgentManager", () => {
++  const logger = createTestLogger();
++
+   test("normalizeConfig does not inject default model when omitted", async () => {
+     const workdir = mkdtempSync(join(tmpdir(), "agent-manager-test-"));
+     const registryPath = join(workdir, "agents.json");
+-    const registry = new AgentRegistry(registryPath);
++    const registry = new AgentRegistry(registryPath, logger);
+     const manager = new AgentManager({
+       clients: {
+FILE packages/server/src/server/agent/agent-registry.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-registry.test.ts","old_lines":[95,103],"new_lines":[96,105],"diff_block_lines":[11,22],"hunk_header":"@@ -95,9 +96,10 @@ describe(\"AgentRegistry\", () => {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -95,9 +96,10 @@ describe("AgentRegistry", () => {
+   let filePath: string;
+   let registry: AgentRegistry;
++  const logger = createTestLogger();
+ 
+   beforeEach(() => {
+     tmpDir = mkdtempSync(path.join(os.tmpdir(), "agent-registry-"));
+     filePath = path.join(tmpDir, "agents.json");
+-    registry = new AgentRegistry(filePath);
++    registry = new AgentRegistry(filePath, logger);
+   });
+ 
+FILE packages/server/src/server/agent/mcp-server.test.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.test.ts","old_lines":[46,52],"new_lines":[47,55],"diff_block_lines":[11,21],"hunk_header":"@@ -46,7 +47,9 @@ function createTestDeps(): TestDeps {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -46,7 +47,9 @@ function createTestDeps(): TestDeps {
+ 
+ describe("create_agent MCP tool", () => {
++  const logger = createTestLogger();
++
+   it("requires a concise title no longer than 40 characters", async () => {
+     const { agentManager, agentRegistry } = createTestDeps();
+-    const server = await createAgentMcpServer({ agentManager, agentRegistry });
++    const server = await createAgentMcpServer({ agentManager, agentRegistry, logger });
+     const tool = (server as any)._registeredTools["create_agent"];
+     expect(tool).toBeDefined();
+FILE packages/server/src/server/agent/providers/claude-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.test.ts","old_lines":[113,120],"new_lines":[115,123],"diff_block_lines":[17,27],"hunk_header":"@@ -113,8 +115,9 @@ async function startAgentMcpServer(): Promise<AgentMcpServerHandle> {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -113,8 +115,9 @@ async function startAgentMcpServer(): Promise<AgentMcpServerHandle> {
+   const registryDir = mkdtempSync(path.join(os.tmpdir(), "agent-mcp-registry-"));
+   const registryPath = path.join(registryDir, "agents.json");
+-  const agentRegistry = new AgentRegistry(registryPath);
++  const agentRegistry = new AgentRegistry(registryPath, testLogger);
+   const agentManager = new AgentManager({
+     clients: {},
+     registry: agentRegistry,
++    logger: testLogger,
+   });
+ 

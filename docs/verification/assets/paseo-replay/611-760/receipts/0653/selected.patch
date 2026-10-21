@@ -1,0 +1,38 @@
+FILE packages/server/src/tasks/cli.ts
+RANGE {"path":"packages/server/src/tasks/cli.ts","old_lines":[411,420],"new_lines":[427,456],"diff_block_lines":[62,97],"hunk_header":"@@ -411,12 +427,67 @@ program","substantive_changed_lines":23,"comparison":"parent"}
+   });
+ 
++program
++  .command("fail <id>")
++  .description("Mark as failed (catastrophically stuck)")
++  .action(async (id) => {
++    await store.fail(id);
++    console.log(`${id} -> failed`);
++  });
++
+ // Agent runner
+-async function makePrompt(
+-  task: Task,
+-  scopeId: string | undefined
+-): Promise<string> {
+-  const scopeArg = scopeId ? ` --scope ${scopeId}` : "";
+ 
+-  // Build parent context from ancestor chain
++interface AgentConfig {
++  cli: "claude" | "codex";
++  model?: string;
++}
++
++function getAgentConfig(model: ModelName): AgentConfig {
++  if (model.startsWith("gpt-")) {
++    return { cli: "codex", model };
++  }
++  // Claude CLI accepts aliases directly: haiku, sonnet, opus
++  return { cli: "claude", model };
++}
++
++function runAgentWithModel(
++  prompt: string,
++  model: ModelName,
++  logFile: string
++): { success: boolean; output: string } {

@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[856,860],"new_lines":[850,853],"diff_block_lines":[38,43],"hunk_header":"@@ -856,5 +850,4 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -856,5 +850,4 @@ class ClaudeAgentSession implements AgentSession {
+     if (this.claudeSessionId) {
+       base.resume = this.claudeSessionId;
+-      base.continue = true;
+     }
+     return base;

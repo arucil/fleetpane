@@ -1,0 +1,38 @@
+FILE packages/server/src/server/test-utils/claude-auth.ts
+RANGE {"path":"packages/server/src/server/test-utils/claude-auth.ts","old_lines":[14,49],"new_lines":null,"diff_block_lines":[20,55],"hunk_header":"@@ -1,102 +1,42 @@","substantive_changed_lines":19,"comparison":"parent"}
+- * @throws Error with actionable message if Claude credentials are unavailable
+- */
+-export function validateClaudeAuth(): void {
+-  // Check for environment variables first (preferred for CI)
+-  const sessionTokenEnv = process.env.CLAUDE_SESSION_TOKEN;
+-  const apiKeyEnv = process.env.ANTHROPIC_API_KEY;
+-
+-  if (sessionTokenEnv || apiKeyEnv) {
+-    return;
+-  }
+-
+-  // Check for credentials file in the default config directory
+-  const configDir = process.env.CLAUDE_CONFIG_DIR ?? path.join(homedir(), ".claude");
+-  const credentialsPath = path.join(configDir, ".credentials.json");
+-
+-  if (existsSync(credentialsPath)) {
+-    return;
+-  }
+-
+-  // Check if Claude config directory exists (suggests Claude Code is installed)
+-  // OAuth users won't have .credentials.json but will have the config directory
+-  if (existsSync(configDir)) {
+-    // Claude is installed, assume OAuth or other auth method is configured
+-    return;
+-  }
+-
+-  // No credentials found via any known method
+-  throw new Error(
+-    "Claude credentials not found. Please provide credentials via:\n" +
+-    "  1. Environment variables: CLAUDE_SESSION_TOKEN or ANTHROPIC_API_KEY\n" +
+-    "  2. Local config file: ~/.claude/.credentials.json\n" +
+-    "  3. OAuth login: Run `claude login` to authenticate\n" +
+-    "\n" +
+-    "For CI: Set CLAUDE_SESSION_TOKEN or ANTHROPIC_API_KEY in GitHub Actions secrets\n" +
+-    "For local development: Run `claude login` or create ~/.claude/.credentials.json"
+-  );

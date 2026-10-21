@@ -1,0 +1,38 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[1017,1052],"new_lines":[999,1000],"diff_block_lines":[59,94],"hunk_header":"@@ -1017,185 +999,5 @@ function PermissionRequestCard({","substantive_changed_lines":31,"comparison":"parent"}
+       ) : null}
+ 
+-      {commandDetails ? (
+-        <View style={permissionStyles.section}>
+-          <Text
+-            style={[
+-              permissionStyles.sectionTitle,
+-              { color: theme.colors.foregroundMuted },
+-            ]}
+-          >
+-            Command
+-          </Text>
+-          {commandDetails.command ? (
+-            <View style={permissionStyles.metadataRow}>
+-              <Text
+-                style={[
+-                  permissionStyles.metadataLabel,
+-                  { color: theme.colors.foregroundMuted },
+-                ]}
+-              >
+-                Command
+-              </Text>
+-              <Text
+-                style={[
+-                  permissionStyles.metadataValue,
+-                  { color: theme.colors.foreground },
+-                ]}
+-              >
+-                {commandDetails.command}
+-              </Text>
+-            </View>
+-          ) : null}
+-          {commandDetails.cwd ? (
+-            <View style={permissionStyles.metadataRow}>
+-              <Text
+-                style={[

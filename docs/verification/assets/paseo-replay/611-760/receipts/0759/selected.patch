@@ -1,0 +1,23 @@
+FILE packages/app/src/components/sliding-sidebar.tsx
+RANGE {"path":"packages/app/src/components/sliding-sidebar.tsx","old_lines":[202,214],"new_lines":[202,215],"diff_block_lines":[5,25],"hunk_header":"@@ -202,13 +202,14 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {","substantive_changed_lines":11,"comparison":"parent"}
+@@ -202,13 +202,14 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {
+               <View style={styles.sidebarHeader}>
+                 <Pressable
+-                  style={({ hovered }) => [
+-                    styles.newAgentButton,
+-                    hovered && styles.newAgentButtonHovered,
+-                  ]}
++                  style={styles.newAgentButton}
+                   testID="sidebar-new-agent"
+                   onPress={handleCreateAgentCleanMobile}
+                 >
+-                  <Plus size={18} color={theme.colors.foreground} />
+-                  <Text style={styles.newAgentButtonText}>New Agent</Text>
++                  {({ hovered }) => (
++                    <>
++                      <Plus size={18} color={hovered ? theme.colors.foreground : theme.colors.foregroundMuted} />
++                      <Text style={[styles.newAgentButtonText, hovered && styles.newAgentButtonTextHovered]}>New agent</Text>
++                    </>
++                  )}
+                 </Pressable>
+               </View>

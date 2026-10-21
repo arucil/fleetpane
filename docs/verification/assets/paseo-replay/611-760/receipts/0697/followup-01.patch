@@ -1,0 +1,11 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1352,1355],"new_lines":[1357,1364],"diff_block_lines":[27,35],"hunk_header":"@@ -1352,4 +1357,8 @@ export class Session {","substantive_changed_lines":0,"comparison":"parent"}
+@@ -1352,4 +1357,8 @@ export class Session {
+       }
+ 
++      if (worktreeConfig) {
++        void this.runAsyncWorktreeSetup(snapshot.id, worktreeConfig);
++      }
++
+       this.sessionLogger.info(
+         { agentId: snapshot.id, provider: snapshot.provider },

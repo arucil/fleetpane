@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 730,
+  "revision": "c71134c78eda20b7122e3c7d3256cc7c926315b4",
+  "date": "2026-01-24T21:25:22+07:00",
+  "committer_date": "2026-01-24T21:25:22+07:00",
+  "parents": [
+    "8fe30eae75aef069acde60b49cfb7713e96b8411",
+    "dc4839e2c01639a28e69afae817e7e51a89440f8"
+  ],
+  "subject": "Merge branch 'fix/e2e-home-routing'",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/sidebar-new-agent-clones-selected.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/agent/[id].tsx",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "A\tpackages/app/src/app/agent/index.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/home-footer.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "A\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "A\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx",
+    "A\tpackages/app/src/stores/create-flow-store.ts"
+  ],
+  "source_receipt_digest": "sha256:6edb1b21a261b72180ad7ed046dd99f2894586125af10514a8ad37351d072866",
+  "diff_tree_digest": "sha256:39f01b51b2249805951506f070f58fe7ce5e3510ddaefbc1ea234053e8af07eb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/agent/[id].tsx",
+      "old_lines": [
+        10,
+        44
+      ],
+      "new_lines": [
+        2,
+        3
+      ],
+      "diff_block_lines": [
+        16,
+        51
+      ],
+      "hunk_header": "@@ -1,209 +1,8 @@",
+      "substantive_changed_lines": 25,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 3452,
+  "receipt_file": "receipts/0730/selected.patch",
+  "supplementary_receipts": []
+}

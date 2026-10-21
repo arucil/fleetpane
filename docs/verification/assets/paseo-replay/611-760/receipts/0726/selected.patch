@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[586,587],"new_lines":[586,621],"diff_block_lines":[6,41],"hunk_header":"@@ -586,4 +586,54 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":25,"comparison":"parent"}
+   });
+ 
++  const mergeFromBaseMutation = useMutation({
++    mutationFn: async () => {
++      if (!client) {
++        throw new Error("Daemon client unavailable");
++      }
++      const payload = await client.checkoutMergeFromBase(agentId, {
++        baseRef,
++        requireCleanTarget: true,
++      });
++      if (payload.error) {
++        throw new Error(payload.error.message);
++      }
++      return payload;
++    },
++    onSuccess: () => {
++      setActionError(null);
++      setActionStatus("Merged from base.");
++      void refreshDiff();
++      void refreshStatus();
++    },
++    onError: (err) => {
++      const message = err instanceof Error ? err.message : "Failed to merge from base";
++      setActionStatus(null);
++      setActionError(message);
++    },
++  });
++
++  const pushMutation = useMutation({
++    mutationFn: async () => {
++      if (!client) {
++        throw new Error("Daemon client unavailable");
++      }
++      const payload = await client.checkoutPush(agentId);
++      if (payload.error) {

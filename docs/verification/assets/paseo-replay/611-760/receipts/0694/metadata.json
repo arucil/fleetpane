@@ -1,0 +1,78 @@
+{
+  "ordinal": 694,
+  "revision": "f8ba0ff239d4228c12ee25acc62b020fa27de8f6",
+  "date": "2026-01-23T10:14:46+07:00",
+  "committer_date": "2026-01-23T10:14:46+07:00",
+  "parents": [
+    "53155ebcc995a19e3a53c27bbb1433b4b3c3d9ff"
+  ],
+  "subject": "Fix agent model fallback and title/branch tool parsing",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/extract-agent-model.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:601b6599ae73e8e16d3fccf3ac80b40bab2c93e7b6697bf2533d8abdae032e8f",
+  "diff_tree_digest": "sha256:5fd8ead2e74de43ec454b34a6d8a44d47cc2e316f38093245baad6d3acd6f70f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/extract-agent-model.test.ts",
+      "old_lines": [
+        12,
+        16
+      ],
+      "new_lines": [
+        12,
+        16
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -12,5 +12,5 @@ describe(\"extractAgentModel\", () => {",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/app/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        1162,
+        1165
+      ],
+      "new_lines": [
+        1162,
+        1171
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -1162,4 +1162,10 @@ const TOOL_NAME_MAP: Record<string, string> = {",
+      "substantive_changed_lines": 6,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/utils/tool-call-parsers.ts",
+      "old_lines": [
+        23,
+        26
+      ],
+      "new_lines": [
+        23,
+        29
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -23,4 +23,7 @@ const PrincipalParamSchema = z.union([",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 13,
+  "receipt_file": "receipts/0694/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

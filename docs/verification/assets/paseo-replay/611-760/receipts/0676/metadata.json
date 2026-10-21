@@ -1,0 +1,47 @@
+{
+  "ordinal": 676,
+  "revision": "513138ac134e63df7c30e54ebb86a0870f347885",
+  "date": "2026-01-20T13:36:06+07:00",
+  "committer_date": "2026-01-20T13:36:06+07:00",
+  "parents": [
+    "facd99ab13d1d09682b0335d672a128ec6baf48e"
+  ],
+  "subject": "Fix e2e daemon isolation and fast model defaults",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/create-agent.spec.ts",
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "A\tpackages/app/e2e/sidebar-new-agent-clones-selected.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts"
+  ],
+  "source_receipt_digest": "sha256:cbad1f4a0a9d9c8b02abcf09415e9b8d3df04c517792691729782d8eab725f6b",
+  "diff_tree_digest": "sha256:1d77a522c12db32b19641de84d6677b4702c37073bb755cc0a12ffd5ba728b0c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sliding-sidebar.tsx",
+      "old_lines": [
+        25,
+        28
+      ],
+      "new_lines": [
+        26,
+        53
+      ],
+      "diff_block_lines": [
+        11,
+        39
+      ],
+      "hunk_header": "@@ -25,4 +26,28 @@ interface SlidingSidebarProps {",
+      "substantive_changed_lines": 16,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 118,
+  "receipt_file": "receipts/0676/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

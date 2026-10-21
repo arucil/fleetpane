@@ -1,0 +1,38 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[952,963],"new_lines":[960,986],"diff_block_lines":[24,59],"hunk_header":"@@ -952,19 +960,33 @@ export class DaemonClientV2 {","substantive_changed_lines":24,"comparison":"parent"}
+       requestId: resolvedRequestId,
+     });
+-    const response = this.waitFor(
+-      (msg) => {
+-        if (msg.type !== "checkout_status_response") {
+-          return null;
+-        }
+-        if (msg.payload.requestId !== resolvedRequestId) {
+-          return null;
++
++    const responsePromise = (async () => {
++      const response = this.waitFor(
++        (msg) => {
++          if (msg.type !== "checkout_status_response") {
++            return null;
++          }
++          if (msg.payload.requestId !== resolvedRequestId) {
++            return null;
++          }
++          return msg.payload;
++        },
++        60000,
++        { skipQueue: true }
++      );
++      this.sendSessionMessage(message);
++      return response;
++    })();
++
++    if (!requestId) {
++      this.checkoutStatusInFlight.set(agentId, responsePromise);
++      responsePromise.finally(() => {
++        if (this.checkoutStatusInFlight.get(agentId) === responsePromise) {
++          this.checkoutStatusInFlight.delete(agentId);
+         }
+-        return msg.payload;
+-      },

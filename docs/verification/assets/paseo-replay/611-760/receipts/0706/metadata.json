@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 706,
+  "revision": "6f845093b455bfb833b9c6119976f11ee410838f",
+  "date": "2026-01-23T14:47:39+07:00",
+  "committer_date": "2026-01-23T14:47:39+07:00",
+  "parents": [
+    "938d57c8aed098d5bbc60891f8e33f57762ca641",
+    "250a320ff2be144fe649b6c9615e3fd4a97e2946"
+  ],
+  "subject": "Merge branch 'fix/initial-prompt-instructions'",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/agent/paseo-instructions-tag.test.ts",
+    "A\tpackages/server/src/server/agent/paseo-instructions-tag.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-mcp-agent.paseo-instructions.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/orchestration.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-codex.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/streaming.e2e.test.ts",
+    "A\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/voice-conversations.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:256d2be3bd57a72adc4c2ef182c7ea3696c0d875c5e5cec10d44a4a7b21aa642",
+  "diff_tree_digest": "sha256:64bb34cf0efb39ecfed09f48695b0e9ce76a7586943141a3113f220f015c0370",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/paseo-instructions-tag.ts",
+      "old_lines": null,
+      "new_lines": [
+        1,
+        36
+      ],
+      "diff_block_lines": [
+        7,
+        42
+      ],
+      "hunk_header": "@@ -0,0 +1,48 @@",
+      "substantive_changed_lines": 19,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 292,
+  "receipt_file": "receipts/0706/selected.patch",
+  "supplementary_receipts": []
+}

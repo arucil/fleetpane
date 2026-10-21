@@ -1,0 +1,38 @@
+FILE packages/server/src/shared/messages.ts
+RANGE {"path":"packages/server/src/shared/messages.ts","old_lines":[967,968],"new_lines":[967,1002],"diff_block_lines":[6,41],"hunk_header":"@@ -967,19 +967,48 @@ const AheadBehindSchema = z.object({","substantive_changed_lines":28,"comparison":"parent"}
+ });
+ 
++const CheckoutStatusCommonSchema = z.object({
++  agentId: z.string(),
++  cwd: z.string(),
++  error: CheckoutErrorSchema.nullable(),
++  requestId: z.string(),
++});
++
++const CheckoutStatusNotGitSchema = CheckoutStatusCommonSchema.extend({
++  isGit: z.literal(false),
++  isPaseoOwnedWorktree: z.literal(false),
++  repoRoot: z.null(),
++  currentBranch: z.null(),
++  isDirty: z.null(),
++  baseRef: z.null(),
++  aheadBehind: z.null(),
++});
++
++const CheckoutStatusGitNonPaseoSchema = CheckoutStatusCommonSchema.extend({
++  isGit: z.literal(true),
++  isPaseoOwnedWorktree: z.literal(false),
++  repoRoot: z.string(),
++  currentBranch: z.string().nullable(),
++  isDirty: z.boolean(),
++  baseRef: z.string().nullable(),
++  aheadBehind: AheadBehindSchema.nullable(),
++});
++
++const CheckoutStatusGitPaseoSchema = CheckoutStatusCommonSchema.extend({
++  isGit: z.literal(true),
++  isPaseoOwnedWorktree: z.literal(true),
++  repoRoot: z.string(),
++  currentBranch: z.string().nullable(),
++  isDirty: z.boolean(),
++  baseRef: z.string(),

@@ -1,0 +1,41 @@
+FILE packages/server/src/terminal/terminal-manager.ts
+RANGE {"path":"packages/server/src/terminal/terminal-manager.ts","old_lines":null,"new_lines":[50,88],"diff_block_lines":[56,94],"hunk_header":"@@ -0,0 +1,88 @@","substantive_changed_lines":22,"comparison":"parent"}
++      return session;
++    },
++
++    getTerminal(id: string): TerminalSession | undefined {
++      return terminalsById.get(id);
++    },
++
++    killTerminal(id: string): void {
++      const session = terminalsById.get(id);
++      if (!session) return;
++
++      session.kill();
++      terminalsById.delete(id);
++
++      const terminals = terminalsByCwd.get(session.cwd);
++      if (terminals) {
++        const index = terminals.indexOf(session);
++        if (index !== -1) {
++          terminals.splice(index, 1);
++        }
++        if (terminals.length === 0) {
++          terminalsByCwd.delete(session.cwd);
++        }
++      }
++    },
++
++    listDirectories(): string[] {
++      return Array.from(terminalsByCwd.keys());
++    },
++
++    killAll(): void {
++      for (const session of terminalsById.values()) {
++        session.kill();
++      }
++      terminalsByCwd.clear();
++      terminalsById.clear();
++    },
++  };
++}

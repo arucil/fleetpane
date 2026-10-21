@@ -1,0 +1,51 @@
+{
+  "ordinal": 747,
+  "revision": "ccd175b4b73195391b1f4a8377a84304fa936c3e",
+  "date": "2026-01-25T09:35:07+07:00",
+  "committer_date": "2026-01-25T09:35:07+07:00",
+  "parents": [
+    "9d0dd8b19e7241a2c239df056d7f4a5b98ea5d59"
+  ],
+  "subject": "Capture dictation/TTS debug audio and show dictation errors",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "M\tpackages/server/.env.example",
+    "M\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/agent/dictation-debug.ts",
+    "A\tpackages/server/src/server/agent/recordings-debug.ts",
+    "M\tpackages/server/src/server/agent/stt-debug.ts",
+    "A\tpackages/server/src/server/agent/tts-debug.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:f2dd169bc8e6140a4ce827d97f056f057ea87a716e6b50eea538300c19beeaaa",
+  "diff_tree_digest": "sha256:2850288df2bdadd0f1100f9d2da4b80cf8e19677829bf5fa9b4a414a3736f199",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1300,
+        1301
+      ],
+      "new_lines": [
+        1311,
+        1346
+      ],
+      "diff_block_lines": [
+        39,
+        74
+      ],
+      "hunk_header": "@@ -1300,4 +1311,63 @@ export class Session {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 237,
+  "receipt_file": "receipts/0747/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

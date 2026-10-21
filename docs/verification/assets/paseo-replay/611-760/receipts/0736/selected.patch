@@ -1,0 +1,35 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[105,109],"new_lines":[106,111],"diff_block_lines":[11,18],"hunk_header":"@@ -105,5 +106,6 @@ function resolveFormState(","substantive_changed_lines":3,"comparison":"parent"}
+@@ -105,5 +106,6 @@ function resolveFormState(
+   availableModels: AgentModelDefinition[] | null,
+   userModified: UserModifiedFields,
+-  currentState: FormState
++  currentState: FormState,
++  validServerIds: Set<string>
+ ): FormState {
+   // Start with current state - we only update non-user-modified fields
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[241,244],"new_lines":[244,255],"diff_block_lines":[30,42],"hunk_header":"@@ -241,4 +244,12 @@ export function useAgentFormState(","substantive_changed_lines":4,"comparison":"parent"}
+@@ -241,4 +244,12 @@ export function useAgentFormState(
+   } = useFormPreferences();
+ 
++  const { daemons } = useDaemonRegistry();
++
++  // Build a set of valid server IDs for preference validation
++  const validServerIds = useMemo(
++    () => new Set(daemons.map((d) => d.id)),
++    [daemons]
++  );
++
+   // Track which fields the user has explicitly modified
+   const [userModified, setUserModified] = useState<UserModifiedFields>(INITIAL_USER_MODIFIED);
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[304,308],"new_lines":[315,320],"diff_block_lines":[43,50],"hunk_header":"@@ -304,5 +315,6 @@ export function useAgentFormState(","substantive_changed_lines":3,"comparison":"parent"}
+@@ -304,5 +315,6 @@ export function useAgentFormState(
+       availableModels,
+       userModified,
+-      formStateRef.current
++      formStateRef.current,
++      validServerIds
+     );
+ 

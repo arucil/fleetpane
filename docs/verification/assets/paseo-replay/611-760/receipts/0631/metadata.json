@@ -1,0 +1,75 @@
+{
+  "ordinal": 631,
+  "revision": "2fa7ec17cbe3aa418bda5d520baabc3433dd01dd",
+  "date": "2026-01-13T11:06:21+07:00",
+  "committer_date": "2026-01-13T11:06:21+07:00",
+  "parents": [
+    "868f9fb57127b47820d3bd24ec730cdf42665c96"
+  ],
+  "subject": "WIP: Refactor and polyfill updates",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/index.ts",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/message.tsx",
+    "A\tpackages/app/src/polyfills/crypto.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:5ca32957a43a279fd2e070dfa72c44697592be191cf6725b0138ce82ac509f74",
+  "diff_tree_digest": "sha256:5e4c1aa2aaef68655faf2994928079ac65a2ae7082dd9fc0af440c0610d37de0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+      "old_lines": [
+        3137,
+        3161
+      ],
+      "new_lines": [
+        3137,
+        3144
+      ],
+      "diff_block_lines": [
+        5,
+        34
+      ],
+      "hunk_header": "@@ -3137,25 +3137,8 @@ class CodexMcpAgentSession implements AgentSession {",
+      "substantive_changed_lines": 21,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 128,
+  "receipt_file": "receipts/0631/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0631/followup-01.patch",
+      "source_receipt_digest": "sha256:4b025f97f83c280ef1cca516e0b0322a2292fec70a0ccdeeaff03d81358af10a",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/providers/codex-mcp-agent.ts",
+          "old_lines": [
+            3163,
+            3175
+          ],
+          "new_lines": [
+            3146,
+            3172
+          ],
+          "diff_block_lines": [
+            35,
+            66
+          ],
+          "hunk_header": "@@ -3163,13 +3146,27 @@ class CodexMcpAgentSession implements AgentSession {",
+          "substantive_changed_lines": 20,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

@@ -1,0 +1,38 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[638,639],"new_lines":[681,716],"diff_block_lines":[177,212],"hunk_header":"@@ -638,4 +681,47 @@ export default function SettingsScreen() {","substantive_changed_lines":31,"comparison":"parent"}
+           </View>
+ 
++          {/* Appearance */}
++          <View style={styles.section}>
++            <Text style={styles.sectionTitle}>Appearance</Text>
++            <View style={styles.themeToggleContainer}>
++              <Pressable
++                style={[
++                  styles.themeToggleButton,
++                  settings.theme === "light" && styles.themeToggleButtonActive,
++                ]}
++                onPress={() => handleThemeChange("light")}
++              >
++                <Sun size={16} color={settings.theme === "light" ? defaultTheme.colors.foreground : defaultTheme.colors.mutedForeground} />
++                <Text style={[styles.themeToggleText, settings.theme === "light" && styles.themeToggleTextActive]}>
++                  Light
++                </Text>
++              </Pressable>
++              <Pressable
++                style={[
++                  styles.themeToggleButton,
++                  settings.theme === "dark" && styles.themeToggleButtonActive,
++                ]}
++                onPress={() => handleThemeChange("dark")}
++              >
++                <Moon size={16} color={settings.theme === "dark" ? defaultTheme.colors.foreground : defaultTheme.colors.mutedForeground} />
++                <Text style={[styles.themeToggleText, settings.theme === "dark" && styles.themeToggleTextActive]}>
++                  Dark
++                </Text>
++              </Pressable>
++              <Pressable
++                style={[
++                  styles.themeToggleButton,
++                  settings.theme === "auto" && styles.themeToggleButtonActive,
++                ]}
++                onPress={() => handleThemeChange("auto")}

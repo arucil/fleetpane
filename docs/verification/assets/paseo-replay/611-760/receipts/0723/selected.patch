@@ -1,0 +1,38 @@
+FILE packages/app/src/components/dictation-controls.tsx
+RANGE {"path":"packages/app/src/components/dictation-controls.tsx","old_lines":[170,186],"new_lines":[172,192],"diff_block_lines":[18,53],"hunk_header":"@@ -170,19 +172,32 @@ export function DictationOverlay({","substantive_changed_lines":32,"comparison":"first-parent"}
+ 
+       <View style={overlayStyles.centerContainer}>
+-        <VolumeMeter
+-          volume={volume}
+-          isMuted={false}
+-          isDetecting
+-          isSpeaking={false}
+-          orientation="horizontal"
+-        />
+-        <Text
+-          style={[
+-            overlayStyles.timerText,
+-            { color: theme.colors.palette.white },
+-          ]}
+-        >
+-          {formatDuration(duration)}
+-        </Text>
++        <View style={overlayStyles.meterRow}>
++          <VolumeMeter
++            volume={volume}
++            isMuted={false}
++            isDetecting
++            isSpeaking={false}
++            orientation="horizontal"
++          />
++          <Text
++            style={[
++              overlayStyles.timerText,
++              { color: theme.colors.palette.white },
++            ]}
++          >
++            {formatDuration(duration)}
++          </Text>
++        </View>
++        {!!transcript && (
++          <Text

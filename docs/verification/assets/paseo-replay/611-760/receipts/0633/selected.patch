@@ -1,0 +1,38 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[255,256],"new_lines":[256,291],"diff_block_lines":[12,47],"hunk_header":"@@ -255,4 +256,76 @@ export const assistantMessageStylesheet = StyleSheet.create((theme) => ({","substantive_changed_lines":23,"comparison":"parent"}
+ }));
+ 
++const turnCopyButtonStylesheet = StyleSheet.create((theme) => ({
++  container: {
++    alignSelf: "flex-start",
++    padding: theme.spacing[2],
++    marginLeft: theme.spacing[4],
++  },
++  iconColor: {
++    color: theme.colors.mutedForeground,
++  },
++  iconHoveredColor: {
++    color: theme.colors.foreground,
++  },
++}));
++
++interface TurnCopyButtonProps {
++  getContent: () => string;
++}
++
++export const TurnCopyButton = memo(function TurnCopyButton({
++  getContent,
++}: TurnCopyButtonProps) {
++  const [copied, setCopied] = useState(false);
++  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
++
++  const handleCopy = useCallback(async () => {
++    const content = getContent();
++    if (!content) {
++      return;
++    }
++
++    await Clipboard.setStringAsync(content);
++    setCopied(true);
++
++    if (copyTimeoutRef.current) {

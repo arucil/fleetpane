@@ -1,0 +1,101 @@
+{
+  "ordinal": 666,
+  "revision": "1c011480407fdc925d39fea2c34b10e01a847ef7",
+  "date": "2026-01-17T15:23:53+07:00",
+  "committer_date": "2026-01-17T15:23:53+07:00",
+  "parents": [
+    "1e8f0ca5c976e63b1ed0dd13f6af02a396b85990"
+  ],
+  "subject": "fix(server): remove continue option that overrides resume session ID",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:f45a3cbc663377aa52401bfae1b7e6525ac37701b9f20c516660bfd6df7acc0c",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        586,
+        595
+      ],
+      "new_lines": [
+        585,
+        590
+      ],
+      "diff_block_lines": [
+        11,
+        21
+      ],
+      "hunk_header": "@@ -586,10 +585,6 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 4,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        971,
+        981
+      ],
+      "new_lines": [
+        963,
+        970
+      ],
+      "diff_block_lines": [
+        50,
+        61
+      ],
+      "hunk_header": "@@ -971,11 +963,8 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        984,
+        995
+      ],
+      "new_lines": [
+        973,
+        981
+      ],
+      "diff_block_lines": [
+        62,
+        74
+      ],
+      "hunk_header": "@@ -984,12 +973,9 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/0666/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0666/followup-01.patch",
+      "source_receipt_digest": "sha256:37938ca14e26d24b5c4b9542908a414a0be98ba4d28f414c9b7e82ff051acb88",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+          "old_lines": [
+            856,
+            860
+          ],
+          "new_lines": [
+            850,
+            853
+          ],
+          "diff_block_lines": [
+            38,
+            43
+          ],
+          "hunk_header": "@@ -856,5 +850,4 @@ class ClaudeAgentSession implements AgentSession {",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

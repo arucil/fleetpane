@@ -1,0 +1,38 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2151,2159],"new_lines":[2195,2224],"diff_block_lines":[107,142],"hunk_header":"@@ -2151,11 +2195,74 @@ export class Session {","substantive_changed_lines":24,"comparison":"parent"}
+       }
+ 
+-      const combinedDiff = trackedDiff + untrackedDiff;
++      // Step 3: Fetch diffs per-file, respecting limits
++      const allFiles: ParsedDiffFile[] = [];
++
++      for (const stats of fileStats) {
++        const totalLines = stats.additions + stats.deletions;
++
++        // Handle binary files
++        if (stats.isBinary) {
++          allFiles.push({
++            path: stats.path,
++            isNew: !stats.isTracked,
++            isDeleted: false,
++            additions: 0,
++            deletions: 0,
++            hunks: [],
++            status: "binary",
++          });
++          continue;
++        }
+ 
+-      // Parse and highlight the diff
+-      const highlightedFiles = await parseAndHighlightDiff(
+-        combinedDiff,
+-        agent.cwd
+-      );
++        // Handle files that are too large
++        if (totalLines > MAX_DIFF_LINES) {
++          allFiles.push({
++            path: stats.path,
++            isNew: !stats.isTracked,
++            isDeleted: false,
++            additions: stats.additions,
++            deletions: stats.deletions,

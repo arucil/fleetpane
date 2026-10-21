@@ -1,0 +1,75 @@
+{
+  "ordinal": 724,
+  "revision": "e9b1021cb94bf1ab898b3c3d02547993db4796e4",
+  "date": "2026-01-24T19:04:21+07:00",
+  "committer_date": "2026-01-24T19:04:21+07:00",
+  "parents": [
+    "9b82c02fd23d1f9f4f94ba63134070bb28d4249d"
+  ],
+  "subject": "Remove unused components and clean up codebase",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/app.config.js",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/orchestrator.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "D\tpackages/app/src/components/agent-thought-content.tsx",
+    "D\tpackages/app/src/components/conversation-selector.tsx",
+    "D\tpackages/app/src/components/headers/home-header.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "D\tpackages/app/src/components/orchestrator-messages-view.tsx",
+    "D\tpackages/app/src/components/thinking-sheet.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:6356ada1de8c602ede90198651c42e20c0f688f5ae34a2d3dd1f6477d05a0ee7",
+  "diff_tree_digest": "sha256:be1ba607ec28c120246c272b6d26c33967336e56168f91d97e7fc18f45cee260",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/orchestrator.tsx",
+      "old_lines": [
+        12,
+        47
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        18,
+        53
+      ],
+      "hunk_header": "@@ -1,83 +0,0 @@",
+      "substantive_changed_lines": 27,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1165,
+  "receipt_file": "receipts/0724/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0724/followup-01.patch",
+      "source_receipt_digest": "sha256:55716a9b661ee68274f531ec20f0fc7381ef0bde1c9177d1da4d1b7d16184e8e",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/tool-call-details.tsx",
+          "old_lines": [
+            88,
+            91
+          ],
+          "new_lines": [
+            88,
+            99
+          ],
+          "diff_block_lines": [
+            5,
+            17
+          ],
+          "hunk_header": "@@ -88,4 +88,12 @@ function summarizeToolCallDisplay(display: ToolCallDisplay): ToolCallDisplaySumm",
+          "substantive_changed_lines": 6,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

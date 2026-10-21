@@ -1,0 +1,65 @@
+{
+  "ordinal": 645,
+  "revision": "83b989124edc543ce2b0017ff2f4ee65e2e9eaca",
+  "date": "2026-01-14T19:17:47+07:00",
+  "committer_date": "2026-01-14T19:17:47+07:00",
+  "parents": [
+    "6c9abe08541f0c52279f91e5e3259c13d76ea68f"
+  ],
+  "subject": "fix: import unistyles config before components",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx"
+  ],
+  "source_receipt_digest": "sha256:a45ee918c63fbb3ce1a42c7aaf15897e0b994c7f52d8991b5d3b7f1b87a6ca2d",
+  "diff_tree_digest": "sha256:e778c6c10a6b7702aeb908091c9f57c4f389d3ed7cb274345ca80a0c2ce1d4c5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        195,
+        198
+      ],
+      "new_lines": [
+        197,
+        201
+      ],
+      "diff_block_lines": [
+        15,
+        20
+      ],
+      "hunk_header": "@@ -195,4 +197,5 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {",
+      "substantive_changed_lines": 1,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 1,
+  "receipt_file": "receipts/0645/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0645/followup-01.patch",
+      "source_receipt_digest": "sha256:2b0f082fc1e74bddff6c68e327566124417c3a557eafcfdb82f80264203d0276",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/app/_layout.tsx",
+          "old_lines": [
+            1,
+            2
+          ],
+          "new_lines": [
+            1,
+            3
+          ],
+          "diff_block_lines": [
+            5,
+            8
+          ],
+          "hunk_header": "@@ -1,2 +1,3 @@",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

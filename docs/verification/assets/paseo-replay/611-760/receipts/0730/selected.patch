@@ -1,0 +1,38 @@
+FILE packages/app/src/app/agent/[id].tsx
+RANGE {"path":"packages/app/src/app/agent/[id].tsx","old_lines":[10,44],"new_lines":[2,3],"diff_block_lines":[16,51],"hunk_header":"@@ -1,209 +1,8 @@","substantive_changed_lines":25,"comparison":"first-parent"}
++import { LegacyAgentIdScreen } from "@/screens/agent/legacy-agent-id-screen";
+ 
+-type AgentMatch = {
+-  serverId: string;
+-  serverLabel: string;
+-  agent: Agent;
+-};
+-
+-export default function LegacyAgentRedirectScreen() {
+-  const { id } = useLocalSearchParams<{ id: string }>();
+-  const router = useRouter();
+-  const { theme } = useUnistyles();
+-  const { connectionStates } = useDaemonConnections();
+-  const sessionDirectory = useSessionDirectory();
+-  const agentId = typeof id === "string" ? id.trim() : undefined;
+-
+-  const matches = useMemo<AgentMatch[]>(() => {
+-    if (!agentId) {
+-      return [];
+-    }
+-
+-    const results: AgentMatch[] = [];
+-    sessionDirectory.forEach((session, serverId) => {
+-      if (!session) {
+-        return;
+-      }
+-      const agent = session.agents.get(agentId);
+-      if (!agent) {
+-        return;
+-      }
+-      const serverLabel = connectionStates.get(serverId)?.daemon.label ?? serverId;
+-      results.push({ serverId, serverLabel, agent });
+-    });
+-
+-    return results;
+-  }, [agentId, sessionDirectory, connectionStates]);

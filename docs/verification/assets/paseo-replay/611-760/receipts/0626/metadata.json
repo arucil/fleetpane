@@ -1,0 +1,68 @@
+{
+  "ordinal": 626,
+  "revision": "0ec2fc62db5866981c031042ea04c8652a6e8050",
+  "date": "2026-01-11T17:16:08+07:00",
+  "committer_date": "2026-01-11T17:16:08+07:00",
+  "parents": [
+    "e57cad2660c0ae2483bea9707715eefbc03a0720"
+  ],
+  "subject": "feat(agent): add command support to ClaudeAgentSession",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/index.tsx",
+    "A\tpackages/server/src/poc-commands/commands-poc.test.ts",
+    "A\tpackages/server/src/poc-commands/investigate-command-output.ts",
+    "A\tpackages/server/src/poc-commands/run-poc.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:61d7da9da8e4111a0b23fd78d50408afc923be41faa701d5bd3ce8c0d70ef3ed",
+  "diff_tree_digest": "sha256:d1cb151548eff6c5d269065ee5a2e1006c9aa2afade7efb333410db1aefe49c5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/poc-commands/investigate-command-output.ts",
+      "old_lines": null,
+      "new_lines": [
+        9,
+        72
+      ],
+      "diff_block_lines": [
+        15,
+        78
+      ],
+      "hunk_header": "@@ -0,0 +1,189 @@",
+      "substantive_changed_lines": 39,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 39,
+  "available_substantive_changed_lines": 441,
+  "receipt_file": "receipts/0626/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0626/followup-01.patch",
+      "source_receipt_digest": "sha256:55aca67c1b8f170468d286a49be1dc9531f4ba7a4c7c9e37c50853ee4b65a76b",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+          "old_lines": [
+            721,
+            723
+          ],
+          "new_lines": [
+            723,
+            774
+          ],
+          "diff_block_lines": [
+            18,
+            69
+          ],
+          "hunk_header": "@@ -721,4 +723,53 @@ class ClaudeAgentSession implements AgentSession {",
+          "substantive_changed_lines": 31,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

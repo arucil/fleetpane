@@ -1,0 +1,38 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[1636,1637],"new_lines":[1670,1705],"diff_block_lines":[87,122],"hunk_header":"@@ -1636,4 +1670,92 @@ export function SessionProvider({","substantive_changed_lines":22,"comparison":"parent"}
+   );
+ 
++  const INIT_TIMEOUT_MS = 10000;
++
++  const ensureAgentIsInitialized = useCallback(
++    (agentId: string): Promise<void> => {
++      const key = getInitKey(serverId, agentId);
++
++      // If we already have a promise (resolved or in-flight), return it
++      const existing = agentInitializationPromises.get(key);
++      if (existing) {
++        return existing.promise;
++      }
++
++      // Create a deferred promise
++      let resolve: () => void;
++      let reject: (error: Error) => void;
++      const promise = new Promise<void>((res, rej) => {
++        resolve = res;
++        reject = rej;
++      });
++
++      const deferred: DeferredInit = {
++        promise,
++        resolve: resolve!,
++        reject: reject!,
++      };
++      agentInitializationPromises.set(key, deferred);
++
++      // Set up timeout
++      const timeoutId = setTimeout(() => {
++        const entry = agentInitializationPromises.get(key);
++        if (entry === deferred) {
++          agentInitializationPromises.delete(key);
++          deferred.reject(new Error(`Agent initialization timed out after ${INIT_TIMEOUT_MS}ms`));
++        }

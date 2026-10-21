@@ -1,0 +1,56 @@
+{
+  "ordinal": 720,
+  "revision": "9b82c02fd23d1f9f4f94ba63134070bb28d4249d",
+  "date": "2026-01-24T17:01:12+07:00",
+  "committer_date": "2026-01-24T17:01:12+07:00",
+  "parents": [
+    "f8f37ace589b3a186ac0fb421f69b3f0a8c99f44"
+  ],
+  "subject": "Add welcome onboarding and remove default localhost host",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "A\tpackages/app/e2e/host-onboarding-direct.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "A\tpackages/app/src/components/adaptive-modal-sheet.tsx",
+    "A\tpackages/app/src/components/add-host-method-modal.tsx",
+    "A\tpackages/app/src/components/add-host-modal.tsx",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "A\tpackages/app/src/components/pair-link-modal.tsx",
+    "A\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "A\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts"
+  ],
+  "source_receipt_digest": "sha256:bbbc2aa7647a86f558aaa683ffb3ea3c4106e2c797b851dbd0da04e168827394",
+  "diff_tree_digest": "sha256:5f51135f356a929ae431fb056ad5f6107c88ca26cc777669fd9150627909b0e5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/settings.tsx",
+      "old_lines": [
+        422,
+        454
+      ],
+      "new_lines": [
+        419,
+        425
+      ],
+      "diff_block_lines": [
+        43,
+        78
+      ],
+      "hunk_header": "@@ -422,93 +419,36 @@ export default function SettingsScreen() {",
+      "substantive_changed_lines": 29,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 29,
+  "available_substantive_changed_lines": 1150,
+  "receipt_file": "receipts/0720/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

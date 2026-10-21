@@ -1,0 +1,20 @@
+FILE packages/app/src/components/agent-details-sheet.tsx
+RANGE {"path":"packages/app/src/components/agent-details-sheet.tsx","old_lines":[134,138],"new_lines":[134,138],"diff_block_lines":[5,11],"hunk_header":"@@ -134,5 +134,5 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":2,"comparison":"parent"}
+@@ -134,5 +134,5 @@ const styles = StyleSheet.create((theme) => ({
+     borderColor: theme.colors.surface2,
+     backgroundColor: theme.colors.surface1,
+-    paddingHorizontal: theme.spacing[5],
++    paddingHorizontal: theme.spacing[4],
+     paddingVertical: theme.spacing[4],
+     gap: theme.spacing[3],
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[149,152],"new_lines":[149,156],"diff_block_lines":[5,13],"hunk_header":"@@ -149,4 +149,8 @@ export function parseRepoShortNameFromRemoteUrl(","substantive_changed_lines":3,"comparison":"parent"}
+@@ -149,4 +149,8 @@ export function parseRepoShortNameFromRemoteUrl(
+  */
+ export function deriveProjectName(projectKey: string): string {
++  const githubRemotePrefix = "remote:github.com/";
++  if (projectKey.startsWith(githubRemotePrefix)) {
++    return projectKey.slice(githubRemotePrefix.length) || projectKey;
++  }
+   const segments = projectKey.split("/").filter(Boolean);
+   return segments[segments.length - 1] || projectKey;

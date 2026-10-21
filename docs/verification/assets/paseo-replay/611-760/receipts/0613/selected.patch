@@ -1,0 +1,43 @@
+FILE packages/app/src/components/agent-form/agent-form-dropdowns.tsx
+RANGE {"path":"packages/app/src/components/agent-form/agent-form-dropdowns.tsx","old_lines":[782,785],"new_lines":[823,862],"diff_block_lines":[71,111],"hunk_header":"@@ -782,4 +823,40 @@ export function GitOptionsSection({","substantive_changed_lines":33,"comparison":"parent"}
+@@ -782,4 +823,40 @@ export function GitOptionsSection({
+       </Pressable>
+ 
++      {useWorktree ? (
++        <View style={styles.baseBranchRow}>
++          <Text style={styles.baseBranchLabel}>Base branch:</Text>
++          {isEditingBranch ? (
++            <View style={styles.baseBranchEditRow}>
++              <TextInput
++                ref={inputRef}
++                style={styles.baseBranchInput}
++                value={editedBranch}
++                onChangeText={setEditedBranch}
++                autoCapitalize="none"
++                autoCorrect={false}
++                placeholder="branch name"
++                placeholderTextColor={defaultTheme.colors.mutedForeground}
++                onSubmitEditing={handleConfirmEdit}
++              />
++              <Pressable onPress={handleConfirmEdit} hitSlop={8} style={styles.baseBranchIconButton}>
++                <Check size={16} color={defaultTheme.colors.palette.green[500]} />
++              </Pressable>
++              <Pressable onPress={handleCancelEdit} hitSlop={8} style={styles.baseBranchIconButton}>
++                <X size={16} color={defaultTheme.colors.mutedForeground} />
++              </Pressable>
++            </View>
++          ) : (
++            <Pressable onPress={handleStartEdit} style={styles.baseBranchValueRow}>
++              <Text style={styles.baseBranchValue}>{displayBranch}</Text>
++              <Pencil size={14} color={defaultTheme.colors.mutedForeground} />
++            </Pressable>
++          )}
++        </View>
++      ) : null}
++
++      {baseBranchError ? (
++        <Text style={styles.errorText}>{baseBranchError}</Text>
++      ) : null}
++
+       {repoError ? (
+         <Text style={styles.errorText}>{repoError}</Text>

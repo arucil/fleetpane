@@ -1,0 +1,38 @@
+FILE packages/server/src/server/relay-transport.ts
+RANGE {"path":"packages/server/src/server/relay-transport.ts","old_lines":null,"new_lines":[2,37],"diff_block_lines":[8,43],"hunk_header":"@@ -0,0 +1,135 @@","substantive_changed_lines":27,"comparison":"parent"}
++import type pino from "pino";
++
++type RelayTransportOptions = {
++  logger: pino.Logger;
++  attachSocket: (ws: WebSocket) => Promise<void>;
++  relayEndpoint: string; // "host:port"
++  sessionId: string;
++};
++
++export type RelayTransportController = {
++  stop: () => Promise<void>;
++};
++
++export function startRelayTransport({
++  logger,
++  attachSocket,
++  relayEndpoint,
++  sessionId,
++}: RelayTransportOptions): RelayTransportController {
++  const relayLogger = logger.child({ module: "relay-transport" });
++
++  let stopped = false;
++  let ws: WebSocket | null = null;
++  let reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
++  let reconnectAttempt = 0;
++
++  const stop = async (): Promise<void> => {
++    stopped = true;
++    if (reconnectTimeout) {
++      clearTimeout(reconnectTimeout);
++      reconnectTimeout = null;
++    }
++    if (ws) {
++      try {
++        ws.close();
++      } catch {

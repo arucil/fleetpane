@@ -1,0 +1,40 @@
+{
+  "ordinal": 665,
+  "revision": "1e8f0ca5c976e63b1ed0dd13f6af02a396b85990",
+  "date": "2026-01-17T14:46:38+07:00",
+  "committer_date": "2026-01-17T14:46:38+07:00",
+  "parents": [
+    "a89c96ce0dfac6f72fb90ff86d8bc5f3c9219dde"
+  ],
+  "subject": "fix(server): use default Claude auth in e2e tests, add fail-fast preflight",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "A\tpackages/server/src/server/test-utils/claude-auth.ts",
+    "M\tpackages/server/src/server/test-utils/claude-config.ts"
+  ],
+  "source_receipt_digest": "sha256:3c7b17f39ce29eebf4f76ebafecd04b101180eca4e0fd33b8ebbd80900e843cb",
+  "diff_tree_digest": "sha256:cbe495b5b6e07df2b35f3391d97e06f34c99aa0a7ec76dda3ee47d2a75f6c8c7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/test-utils/claude-auth.ts",
+      "old_lines": null,
+      "new_lines": [
+        14,
+        49
+      ],
+      "diff_block_lines": [
+        20,
+        55
+      ],
+      "hunk_header": "@@ -0,0 +1,102 @@",
+      "substantive_changed_lines": 19,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 155,
+  "receipt_file": "receipts/0665/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

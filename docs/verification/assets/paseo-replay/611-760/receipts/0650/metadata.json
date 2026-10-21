@@ -1,0 +1,77 @@
+{
+  "ordinal": 650,
+  "revision": "1cbe185ac5230c3054d67932f5bc83241ad27b84",
+  "date": "2026-01-14T19:42:46+07:00",
+  "committer_date": "2026-01-14T19:42:46+07:00",
+  "parents": [
+    "347389965c888fc86bb0d501cc29282c6ce30835"
+  ],
+  "subject": "test: exclude e2e and integration tests in CI",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:61c2697c32a49e41a795f401c379ac6fb54d0f4cc3d8bef5036ad788d40e1804",
+  "diff_tree_digest": "sha256:2ee8dcc58a386ddcf6c7a6542ba6cec006e6f60252eef84eae8367288ab0e089",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.test.ts",
+      "old_lines": [
+        73,
+        80
+      ],
+      "new_lines": [
+        73,
+        77
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -73,8 +73,5 @@ async function collectTurnEvents(",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        2,
+        5
+      ],
+      "new_lines": [
+        2,
+        7
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -2,4 +2,6 @@ import path from \"node:path\";",
+      "substantive_changed_lines": 1,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        21,
+        24
+      ],
+      "new_lines": [
+        23,
+        30
+      ],
+      "diff_block_lines": [
+        12,
+        20
+      ],
+      "hunk_header": "@@ -21,4 +23,8 @@ export default defineConfig({",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/0650/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

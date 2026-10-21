@@ -1,0 +1,54 @@
+FILE packages/server/src/server/agent/agent-storage.ts
+RANGE {"path":"packages/server/src/server/agent/agent-storage.ts","old_lines":null,"new_lines":[101,152],"diff_block_lines":[107,158],"hunk_header":"@@ -0,0 +1,302 @@","substantive_changed_lines":35,"comparison":"parent"}
++
++    this.cache.set(record.id, record);
++    this.pathById.set(record.id, discoveredPath);
++    return record;
++  }
++
++  async upsert(record: StoredAgentRecord): Promise<void> {
++    await this.load();
++    const nextPath = this.buildRecordPath(record);
++    const previousPath = this.pathById.get(record.id);
++
++    await fs.mkdir(path.dirname(nextPath), { recursive: true });
++    await writeFileAtomically(nextPath, JSON.stringify(record, null, 2));
++
++    if (previousPath && previousPath !== nextPath) {
++      try {
++        await fs.unlink(previousPath);
++      } catch {
++        // ignore cleanup errors
++      }
++    }
++
++    this.cache.set(record.id, record);
++    this.pathById.set(record.id, nextPath);
++  }
++
++  async remove(agentId: string): Promise<void> {
++    await this.load();
++    const existingPath =
++      this.pathById.get(agentId) ?? (await this.findAgentPathById(agentId));
++    if (existingPath) {
++      try {
++        await fs.unlink(existingPath);
++      } catch {
++        // ignore removal errors
++      }
++    }
++
++    this.cache.delete(agentId);
++    this.pathById.delete(agentId);
++  }
++
++  async applySnapshot(
++    agent: ManagedAgent,
++    options?: { title?: string | null; internal?: boolean }
++  ): Promise<void> {
++    await this.load();
++    const existing = (await this.get(agent.id)) ?? null;
++    const hasTitleOverride =
++      options !== undefined && Object.prototype.hasOwnProperty.call(options, "title");
++    const hasInternalOverride =
++      options !== undefined && Object.prototype.hasOwnProperty.call(options, "internal");

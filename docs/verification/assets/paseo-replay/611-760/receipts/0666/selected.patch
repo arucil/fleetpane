@@ -1,0 +1,42 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[586,595],"new_lines":[585,590],"diff_block_lines":[11,21],"hunk_header":"@@ -586,10 +585,6 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":4,"comparison":"parent"}
+@@ -586,10 +585,6 @@ class ClaudeAgentSession implements AgentSession {
+     });
+ 
+-    let eventCount = 0;
+     try {
+-      console.error(`[CLAUDE-AGENT:stream] starting for-await-of loop on queue`);
+       for await (const event of queue) {
+-        eventCount++;
+-        console.error(`[CLAUDE-AGENT:stream] yielding event #${eventCount}: type=${event.type}${event.type === "timeline" ? ` item.type=${(event as any).item?.type}` : ""}`);
+         yield event;
+         if (
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[971,981],"new_lines":[963,970],"diff_block_lines":[50,61],"hunk_header":"@@ -971,11 +963,8 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -971,11 +963,8 @@ class ClaudeAgentSession implements AgentSession {
+     };
+     let completedNormally = false;
+-    let eventCount = 0;
+     try {
+       for await (const sdkEvent of this.processPrompt(message, turnId)) {
+-        eventCount++;
+         // Check if this turn has been superseded before pushing events
+         if (this.currentTurnId !== turnId) {
+-          console.error(`[CLAUDE-AGENT:forwardPromptEvents] turn superseded, breaking. currentTurnId=${this.currentTurnId} ourTurnId=${turnId}`);
+           break;
+         }
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[984,995],"new_lines":[973,981],"diff_block_lines":[62,74],"hunk_header":"@@ -984,12 +973,9 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -984,12 +973,9 @@ class ClaudeAgentSession implements AgentSession {
+           queue.push(event);
+           if (event.type === "turn_completed") {
+-            console.error(`[CLAUDE-AGENT:forwardPromptEvents] turn_completed pushed`);
+             completedNormally = true;
+           }
+         }
+       }
+-      console.error(`[CLAUDE-AGENT:forwardPromptEvents] processPrompt loop done, eventCount=${eventCount} completedNormally=${completedNormally}`);
+     } catch (error) {
+-      console.error(`[CLAUDE-AGENT:forwardPromptEvents] ERROR: ${error}`);
+       if (!this.turnCancelRequested && this.currentTurnId === turnId) {
+         queue.push({

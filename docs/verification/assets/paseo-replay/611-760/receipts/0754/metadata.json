@@ -1,0 +1,109 @@
+{
+  "ordinal": 754,
+  "revision": "637967fa14d45e1b2e506b9026cd1e915b4d94f1",
+  "date": "2026-01-26T20:38:39+07:00",
+  "committer_date": "2026-01-26T20:38:39+07:00",
+  "parents": [
+    "c233c99cd323597c21c1c4bc824aa32e3131d901"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "A\tpackages/app/src/hooks/use-project-icon-query.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/utils/project-icon.test.ts",
+    "A\tpackages/server/src/utils/project-icon.ts"
+  ],
+  "source_receipt_digest": "sha256:75176b4138a03816f95cd39f2f0925440173941837eeab76d7b4a3d954a5471b",
+  "diff_tree_digest": "sha256:3a70f72a7eae7911b417fe536932b7772fd984f2f72403e5b8ea697712559dea",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/project-icon.ts",
+      "old_lines": null,
+      "new_lines": [
+        6,
+        41
+      ],
+      "diff_block_lines": [
+        12,
+        47
+      ],
+      "hunk_header": "@@ -0,0 +1,406 @@",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 551,
+  "receipt_file": "receipts/0754/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0754/followup-01.patch",
+      "source_receipt_digest": "sha256:1c5c57c7fb41f5599806ff5cd8f5a2832b1a833411b5544c1a49d5d1ad225425",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/project-icon.ts",
+          "old_lines": null,
+          "new_lines": [
+            81,
+            132
+          ],
+          "diff_block_lines": [
+            87,
+            138
+          ],
+          "hunk_header": "@@ -0,0 +1,406 @@",
+          "substantive_changed_lines": 32,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0754/followup-02.patch",
+      "source_receipt_digest": "sha256:257494d469a5f1bdfe85f65e38aede5c41eb23fd21422ecf1a7a5a51fcbea060",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/project-icon.ts",
+          "old_lines": null,
+          "new_lines": [
+            241,
+            292
+          ],
+          "diff_block_lines": [
+            247,
+            298
+          ],
+          "hunk_header": "@@ -0,0 +1,406 @@",
+          "substantive_changed_lines": 29,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0754/followup-03.patch",
+      "source_receipt_digest": "sha256:1c2a20f9c647e76085c0d9556324611a2a46b63aca60f9af5e970130d45986ba",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/project-icon.ts",
+          "old_lines": null,
+          "new_lines": [
+            61,
+            112
+          ],
+          "diff_block_lines": [
+            67,
+            118
+          ],
+          "hunk_header": "@@ -0,0 +1,406 @@",
+          "substantive_changed_lines": 31,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

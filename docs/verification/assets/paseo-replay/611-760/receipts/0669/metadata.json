@@ -1,0 +1,40 @@
+{
+  "ordinal": 669,
+  "revision": "4967144c2406db7461c3b64a19af91b50f828847",
+  "date": "2026-01-17T16:27:26+07:00",
+  "committer_date": "2026-01-17T16:27:26+07:00",
+  "parents": [
+    "8979f5ce6441a2958719b76de185313d272074c9"
+  ],
+  "subject": "fix(server): remove skipped OpenCode tests to meet timing requirements",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts"
+  ],
+  "source_receipt_digest": "sha256:c00eba2b38dd1c7754a3b5eb1c906c9a5f7cef6148ca4725e8680d8c6bde0bf2",
+  "diff_tree_digest": "sha256:14a116d1224c0409d7120502cbf24921f81912cab080091f58e9956d06efd383",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.test.ts",
+      "old_lines": [
+        161,
+        196
+      ],
+      "new_lines": [
+        161,
+        162
+      ],
+      "diff_block_lines": [
+        13,
+        48
+      ],
+      "hunk_header": "@@ -161,189 +161,4 @@ describe(\"OpenCodeAgentClient\", () => {",
+      "substantive_changed_lines": 22,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 153,
+  "receipt_file": "receipts/0669/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

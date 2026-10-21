@@ -1,0 +1,44 @@
+FILE packages/server/src/server/agent/agent-mcp.e2e.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-mcp.e2e.test.ts","old_lines":[130,135],"new_lines":[130,136],"diff_block_lines":[5,13],"hunk_header":"@@ -130,6 +130,7 @@ describe(\"agent MCP end-to-end\", () => {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -130,6 +130,7 @@ describe("agent MCP end-to-end", () => {
+ 
+       const daemonConfig: PaseoDaemonConfig = {
+-        port,
++        listen: `${port}`,
+         paseoHome,
++        corsAllowedOrigins: [],
+         agentMcpRoute: "/mcp/agents",
+         agentMcpAllowedHosts: [`127.0.0.1:${port}`, `localhost:${port}`],
+FILE packages/server/src/server/agent/agent-mcp.e2e.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-mcp.e2e.test.ts","old_lines":[171,177],"new_lines":[172,176],"diff_block_lines":[14,22],"hunk_header":"@@ -171,7 +172,5 @@ describe(\"agent MCP end-to-end\", () => {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -171,7 +172,5 @@ describe("agent MCP end-to-end", () => {
+ 
+       const daemon = await createPaseoDaemon(daemonConfig, pino({ level: "silent" }));
+-      await new Promise<void>((resolve) => {
+-        daemon.httpServer.listen(port, () => resolve());
+-      });
++      await daemon.start();
+ 
+       const transport = new StreamableHTTPClientTransport(
+FILE packages/server/src/server/agent/agent-mcp.e2e.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-mcp.e2e.test.ts","old_lines":[331,336],"new_lines":[330,336],"diff_block_lines":[30,38],"hunk_header":"@@ -331,6 +330,7 @@ describe(\"agent MCP end-to-end\", () => {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -331,6 +330,7 @@ describe("agent MCP end-to-end", () => {
+ 
+       const daemonConfig: PaseoDaemonConfig = {
+-        port,
++        listen: `${port}`,
+         paseoHome,
++        corsAllowedOrigins: [],
+         agentMcpRoute: "/mcp/agents",
+         agentMcpAllowedHosts: [`127.0.0.1:${port}`, `localhost:${port}`],
+FILE packages/server/src/server/agent/agent-mcp.e2e.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-mcp.e2e.test.ts","old_lines":[385,391],"new_lines":[385,389],"diff_block_lines":[39,47],"hunk_header":"@@ -385,7 +385,5 @@ describe(\"agent MCP end-to-end\", () => {","substantive_changed_lines":3,"comparison":"parent"}
+@@ -385,7 +385,5 @@ describe("agent MCP end-to-end", () => {
+ 
+       const daemon = await createPaseoDaemon(daemonConfig, pino({ level: "silent" }));
+-      await new Promise<void>((resolve) => {
+-        daemon.httpServer.listen(port, () => resolve());
+-      });
++      await daemon.start();
+ 
+       const transport = new StreamableHTTPClientTransport(

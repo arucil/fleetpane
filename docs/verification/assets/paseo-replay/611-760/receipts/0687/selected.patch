@@ -1,0 +1,38 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[186,187],"new_lines":[192,227],"diff_block_lines":[26,61],"hunk_header":"@@ -186,4 +192,131 @@ function generateWorktreeSlug(): string {","substantive_changed_lines":25,"comparison":"parent"}
+ }
+ 
++function getPaseoWorktreesRoot(repoRoot: string): string {
++  return join(repoRoot, ".paseo", "worktrees");
++}
++
++function ensurePaseoIgnoredForRepo(repoInfo: RepoInfo): {
++  updated: boolean;
++  skipped: boolean;
++  path?: string;
++} {
++  if (repoInfo.type === "bare") {
++    return { updated: false, skipped: true };
++  }
++
++  const gitignorePath = join(repoInfo.path, ".gitignore");
++  const existing = existsSync(gitignorePath)
++    ? readFileSync(gitignorePath, "utf8")
++    : "";
++  const hasEntry = /^\.paseo\/?$/m.test(existing);
++
++  if (hasEntry) {
++    return { updated: false, skipped: false, path: gitignorePath };
++  }
++
++  const needsNewline = existing.length > 0 && !existing.endsWith("\n");
++  const nextContents = `${existing}${needsNewline ? "\n" : ""}.paseo/\n`;
++  writeFileSync(gitignorePath, nextContents);
++  return { updated: true, skipped: false, path: gitignorePath };
++}
++
++export async function ensurePaseoIgnored(cwd: string): Promise<{
++  updated: boolean;
++  skipped: boolean;
++  path?: string;
++}> {

@@ -1,0 +1,39 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[791,806],"new_lines":[822,849],"diff_block_lines":[149,185],"hunk_header":"@@ -791,16 +822,28 @@ export function hydrateStreamState(","substantive_changed_lines":16,"comparison":"parent"}
+@@ -791,16 +822,28 @@ export function hydrateStreamState(
+   events: Array<{ event: AgentStreamEventPayload; timestamp: Date }>
+ ): StreamItem[] {
+-  const hydrated = events.reduce<StreamItem[]>((state, { event, timestamp }) => {
+-    return reduceStreamUpdate(state, event, timestamp);
+-  }, []);
++  const hydrated = events.reduce<StreamItem[]>(
++    (state, { event, timestamp }) => {
++      return reduceStreamUpdate(state, event, timestamp);
++    },
++    []
++  );
+ 
+   return finalizeActiveThoughts(hydrated);
+ }
+ 
+-export type StreamingBufferEntry = {
+-  id: string;
+-  text: string;
+-  timestamp: Date;
+-};
++/**
++ * Streamable item kinds - items that can be incrementally streamed
++ * and should be buffered in the head before committing to tail.
++ */
++type StreamableKind = "assistant_message" | "thought";
++
++const STREAMABLE_KINDS = new Set<StreamItem["kind"]>([
++  "assistant_message",
++  "thought",
++]);
++
++function isStreamableKind(kind: StreamItem["kind"]): kind is StreamableKind {
++  return STREAMABLE_KINDS.has(kind);
++}
+ 
+ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload["type"]>([

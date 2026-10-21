@@ -1,0 +1,38 @@
+FILE packages/app/src/hooks/use-audio-recorder.native.ts
+RANGE {"path":"packages/app/src/hooks/use-audio-recorder.native.ts","old_lines":[267,291],"new_lines":[263,278],"diff_block_lines":[81,116],"hunk_header":"@@ -266,74 +262,73 @@ export function useAudioRecorder(config?: AudioCaptureConfig) {","substantive_changed_lines":21,"comparison":"parent"}
+ 
+-    // Guard against duplicate stop calls
+-    if (!recorder.isRecording && !recordingIntentRef.current) {
+-      console.error('[AudioRecorder] Attempted to stop when not recording. Recorder state:', {
+-        isRecording: recorder.isRecording,
+-        hasRecordingIntent: recordingIntentRef.current,
+-        hasRecordingStartTime: !!recordingStartTime,
+-      });
+-      throw new Error('Not recording');
++    // Cancel any in-flight start attempt and serialize stop/cleanup.
++    attemptGuardRef.current.cancel();
++    if (startStopMutexRef.current) {
++      await startStopMutexRef.current.catch(() => undefined);
+     }
+ 
+-    stopRequestedRef.current = true;
+-
+     try {
+-      // Stop recording
+-      if (recorder.isRecording) {
+-        await recorder.stop();
+-      } else {
+-        console.warn('[AudioRecorder] Recorder already stopped before stop() call, continuing cleanup.');
+-      }
++      const stopPromise = (async () => {
++        // Stop recording
++        if (recorder.isRecording) {
++          await recorder.stop();
++        } else {
++          console.warn('[AudioRecorder] Recorder already stopped before stop() call, continuing cleanup.');
++        }
+ 
+-      // Get URI from recorder
+-      let uri = recorder.uri;
+-      console.log('[AudioRecorder] Initial URI from recorder:', uri);
+-

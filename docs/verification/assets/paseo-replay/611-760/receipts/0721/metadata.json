@@ -1,0 +1,101 @@
+{
+  "ordinal": 721,
+  "revision": "21cff48d3f079f571573fcb553f13de9552f6df4",
+  "date": "2026-01-24T17:46:11+07:00",
+  "committer_date": "2026-01-24T17:46:11+07:00",
+  "parents": [
+    "9b82c02fd23d1f9f4f94ba63134070bb28d4249d"
+  ],
+  "subject": "refactor(server): switch agent registry to AgentStorage",
+  "diff_tree_paths": [
+    "M\tpackages/server/README.md",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "D\tpackages/server/src/server/agent/agent-registry.test.ts",
+    "D\tpackages/server/src/server/agent/agent-registry.ts",
+    "M\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "A\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/daemon-e2e/daemon-restart-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts"
+  ],
+  "source_receipt_digest": "sha256:f1e05ccb3084c525273b03deae9156b2abb2cb82ed105e90609d1bac0ce4bfdc",
+  "diff_tree_digest": "sha256:ee7d078371ab126d8bdc5dbe608bc2f8360d7f31dcf4ee6315d20ff18af054e1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-registry.ts",
+      "old_lines": [
+        10,
+        45
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        16,
+        51
+      ],
+      "hunk_header": "@@ -1,229 +0,0 @@",
+      "substantive_changed_lines": 30,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 30,
+  "available_substantive_changed_lines": 999,
+  "receipt_file": "receipts/0721/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0721/followup-01.patch",
+      "source_receipt_digest": "sha256:a2635f97b5faf2b4e8a6567608d64a00d04feb0ed8f0d8d81ac5c50d926fc347",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-storage.ts",
+          "old_lines": null,
+          "new_lines": [
+            211,
+            262
+          ],
+          "diff_block_lines": [
+            217,
+            268
+          ],
+          "hunk_header": "@@ -0,0 +1,302 @@",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0721/followup-02.patch",
+      "source_receipt_digest": "sha256:66bfb05e74287daf354cee1164ca3a671f47fd7f294f92b6ed21867ce7d919b5",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-storage.ts",
+          "old_lines": null,
+          "new_lines": [
+            101,
+            152
+          ],
+          "diff_block_lines": [
+            107,
+            158
+          ],
+          "hunk_header": "@@ -0,0 +1,302 @@",
+          "substantive_changed_lines": 35,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

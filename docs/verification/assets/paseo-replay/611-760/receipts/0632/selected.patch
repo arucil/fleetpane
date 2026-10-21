@@ -1,0 +1,38 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":null,"new_lines":[319,354],"diff_block_lines":[25,60],"hunk_header":"@@ -310,3 +315,53 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":25,"comparison":"parent"}
++   * Check if any connected client is actively viewing the specified agent
++   */
++  private isAnyClientActiveOnAgent(agentId: string): boolean {
++    const now = Date.now();
++    const activityThresholdMs = 60_000;
++
++    for (const [, session] of this.sessions) {
++      const activity = session.getClientActivity();
++      if (
++        activity !== null &&
++        activity.focusedAgentId === agentId &&
++        now - activity.lastActivityAt.getTime() < activityThresholdMs
++      ) {
++        return true;
++      }
++    }
++    return false;
++  }
++
++  /**
++   * Broadcast an attention_required event to all clients with shouldNotify computed
++   */
++  private broadcastAgentAttention(params: {
++    agentId: string;
++    provider: AgentProvider;
++    reason: "finished" | "error" | "permission";
++  }): void {
++    const shouldNotify = !this.isAnyClientActiveOnAgent(params.agentId);
++
++    const message = wrapSessionMessage({
++      type: "agent_stream",
++      payload: {
++        agentId: params.agentId,
++        event: {
++          type: "attention_required",
++          provider: params.provider,

@@ -1,0 +1,51 @@
+FILE packages/app/src/stores/draft-store.ts
+RANGE {"path":"packages/app/src/stores/draft-store.ts","old_lines":null,"new_lines":[16,64],"diff_block_lines":[22,70],"hunk_header":"@@ -0,0 +1,64 @@","substantive_changed_lines":28,"comparison":"parent"}
++  getDraftInput: (agentId: string) => DraftInput | undefined;
++  saveDraftInput: (agentId: string, draft: DraftInput) => void;
++  clearDraftInput: (agentId: string) => void;
++  getCreateModalDraft: () => DraftInput | null;
++  saveCreateModalDraft: (draft: DraftInput | null) => void;
++}
++
++type DraftStore = DraftStoreState & DraftStoreActions;
++
++export const useDraftStore = create<DraftStore>()(
++  persist(
++    (set, get) => ({
++      drafts: {},
++      createModalDraft: null,
++
++      getDraftInput: (agentId) => {
++        return get().drafts[agentId];
++      },
++
++      saveDraftInput: (agentId, draft) => {
++        set((state) => ({
++          drafts: {
++            ...state.drafts,
++            [agentId]: draft,
++          },
++        }));
++      },
++
++      clearDraftInput: (agentId) => {
++        set((state) => {
++          const { [agentId]: _, ...rest } = state.drafts;
++          return { drafts: rest };
++        });
++      },
++
++      getCreateModalDraft: () => {
++        return get().createModalDraft;
++      },
++
++      saveCreateModalDraft: (draft) => {
++        set({ createModalDraft: draft });
++      },
++    }),
++    {
++      name: "paseo-drafts",
++      storage: createJSONStorage(() => AsyncStorage),
++    }
++  )
++);

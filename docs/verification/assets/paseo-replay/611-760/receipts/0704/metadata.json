@@ -1,0 +1,41 @@
+{
+  "ordinal": 704,
+  "revision": "3459faabc4d579df19b47dff3e4335523b144acc",
+  "date": "2026-01-23T14:01:29+07:00",
+  "committer_date": "2026-01-23T14:01:29+07:00",
+  "parents": [
+    "2b27b7146702e0eb23af648f8af5f2a96ce4d331"
+  ],
+  "subject": "Stabilize tests after merge",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/voice-conversations.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:98cba87cba820a47dad133b5dc70d00f031b24d216897ce66196d9886f6179ad",
+  "diff_tree_digest": "sha256:fb8c93a41b97837418c35847dd11403daf59a832b02e5abcf86321cedc82f50e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/voice-conversations.e2e.test.ts",
+      "old_lines": [
+        21,
+        24
+      ],
+      "new_lines": [
+        21,
+        48
+      ],
+      "diff_block_lines": [
+        5,
+        33
+      ],
+      "hunk_header": "@@ -21,4 +21,28 @@ async function waitForFile(filepath: string, timeoutMs = 5000): Promise<void> {",
+      "substantive_changed_lines": 15,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 25,
+  "receipt_file": "receipts/0704/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

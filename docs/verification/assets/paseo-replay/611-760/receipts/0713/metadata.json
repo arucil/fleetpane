@@ -1,0 +1,81 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 713,
+  "revision": "a0cab29e1aff338f4c586b80a228a32d1ff4b035",
+  "date": "2026-01-23T18:55:21+07:00",
+  "committer_date": "2026-01-23T18:55:21+07:00",
+  "parents": [
+    "907b9f9fbd71eaaa6e6b4e6a9c3e893d918d55f6",
+    "0ff0293a973127f6361aabc015e7fd7c158b4ece"
+  ],
+  "subject": "Merge branch 'lockdown-dictation-e2e'",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/volume-meter.tsx",
+    "A\tpackages/app/src/dictation/dictation-stream-sender.test.ts",
+    "A\tpackages/app/src/dictation/dictation-stream-sender.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.d.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.native.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.types.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "A\tpackages/app/src/hooks/use-dictation.d.ts",
+    "A\tpackages/app/src/hooks/use-dictation.shared.ts",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/agent/openai-realtime-transcription.ts",
+    "A\tpackages/server/src/server/agent/pcm16-resampler.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:3ad5d41db8dc55639bc2f48ef4345fa245e0ca43bcb0554fe05b79b2abcbb7df",
+  "diff_tree_digest": "sha256:61162cd32d3f6116ee838395684e6db5cc6c2e14c5c7fd2388bd2ad4a9b15b03",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/dictation/dictation-stream-sender.ts",
+      "old_lines": null,
+      "new_lines": [
+        2,
+        37
+      ],
+      "diff_block_lines": [
+        8,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,189 @@",
+      "substantive_changed_lines": 16,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 1737,
+  "receipt_file": "receipts/0713/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0713/followup-01.patch",
+      "source_receipt_digest": "sha256:7091f8b62bcaf7fba17ee17ae7c4e760b3b274a87cf56e98aeb12a70b0f388e0",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/dictation/dictation-stream-sender.ts",
+          "old_lines": null,
+          "new_lines": [
+            69,
+            120
+          ],
+          "diff_block_lines": [
+            75,
+            126
+          ],
+          "hunk_header": "@@ -0,0 +1,189 @@",
+          "substantive_changed_lines": 34,
+          "comparison": "first-parent"
+        }
+      ]
+    }
+  ]
+}

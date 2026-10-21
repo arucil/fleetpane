@@ -1,0 +1,66 @@
+FILE packages/server/src/poc-commands/investigate-command-output.ts
+RANGE {"path":"packages/server/src/poc-commands/investigate-command-output.ts","old_lines":null,"new_lines":[9,72],"diff_block_lines":[15,78],"hunk_header":"@@ -0,0 +1,189 @@","substantive_changed_lines":39,"comparison":"parent"}
++
++import {
++  query,
++  type SDKUserMessage,
++  type SDKMessage,
++} from "@anthropic-ai/claude-agent-sdk";
++
++class Pushable<T> implements AsyncIterable<T> {
++  private queue: T[] = [];
++  private resolvers: Array<(value: IteratorResult<T, void>) => void> = [];
++  private closed = false;
++
++  push(item: T) {
++    if (this.closed) return;
++    if (this.resolvers.length > 0) {
++      const resolve = this.resolvers.shift()!;
++      resolve({ value: item, done: false });
++    } else {
++      this.queue.push(item);
++    }
++  }
++
++  end() {
++    this.closed = true;
++    while (this.resolvers.length > 0) {
++      const resolve = this.resolvers.shift()!;
++      resolve({ value: undefined, done: true });
++    }
++  }
++
++  [Symbol.asyncIterator](): AsyncIterator<T, void> {
++    return {
++      next: (): Promise<IteratorResult<T, void>> => {
++        if (this.queue.length > 0) {
++          const value = this.queue.shift();
++          if (value !== undefined) {
++            return Promise.resolve({ value, done: false });
++          }
++        }
++        if (this.closed) {
++          return Promise.resolve({ value: undefined, done: true });
++        }
++        return new Promise<IteratorResult<T, void>>((resolve) => {
++          this.resolvers.push(resolve);
++        });
++      },
++    };
++  }
++}
++
++async function investigateCommand(commandName: string): Promise<void> {
++  console.log(`\n${"=".repeat(60)}`);
++  console.log(`Investigating: /${commandName}`);
++  console.log("=".repeat(60));
++
++  const input = new Pushable<SDKUserMessage>();
++
++  const claudeQuery = query({
++    prompt: input,
++    options: {
++      cwd: process.cwd(),
++      permissionMode: "plan",
++      includePartialMessages: true, // Include streaming partial messages
++      settingSources: ["user", "project"],

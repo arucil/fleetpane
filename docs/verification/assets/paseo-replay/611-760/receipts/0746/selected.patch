@@ -1,0 +1,38 @@
+FILE packages/app/src/components/grouped-agent-list.tsx
+RANGE {"path":"packages/app/src/components/grouped-agent-list.tsx","old_lines":null,"new_lines":[1,36],"diff_block_lines":[7,42],"hunk_header":"@@ -0,0 +1,625 @@","substantive_changed_lines":0,"comparison":"parent"}
++import {
++  View,
++  Text,
++  Pressable,
++  Modal,
++  RefreshControl,
++  SectionList,
++  type ViewToken,
++  type SectionListRenderItem,
++} from "react-native";
++import {
++  useCallback,
++  useMemo,
++  useRef,
++  useState,
++  type ReactElement,
++} from "react";
++import { router, usePathname } from "expo-router";
++import { StyleSheet, useUnistyles } from "react-native-unistyles";
++import { useQueryClient } from "@tanstack/react-query";
++import { ChevronDown, ChevronRight } from "lucide-react-native";
++import { formatTimeAgo } from "@/utils/time";
++import { shortenPath } from "@/utils/shorten-path";
++import { deriveBranchLabel, deriveProjectPath } from "@/utils/agent-display-info";
++import {
++  groupAgents,
++  parseRepoShortNameFromRemoteUrl,
++  type ProjectGroup,
++  type DateGroup,
++} from "@/utils/agent-grouping";
++import { type AggregatedAgent } from "@/hooks/use-aggregated-agents";
++import { useSessionStore } from "@/stores/session-store";
++import {
++  CHECKOUT_STATUS_STALE_TIME,
++  checkoutStatusQueryKey,
++  useCheckoutStatusCacheOnly,

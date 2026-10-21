@@ -1,0 +1,32 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[320,330],"new_lines":[377,402],"diff_block_lines":[84,113],"hunk_header":"@@ -316,15 +318,85 @@ function generateWorktreeSlug(): string {","substantive_changed_lines":18,"comparison":"parent"}
++}
++
++async function getPaseoWorktreesRoot(repoRoot: string, paseoHome?: string): Promise<string> {
++  const home = paseoHome ? resolve(paseoHome) : resolvePaseoHome();
++  const project = await detectWorktreeProject(repoRoot);
++  return join(home, "worktrees", project);
++}
++
++function normalizePathForOwnership(input: string): string {
++  try {
++    return realpathSync(input);
++  } catch {
++    return resolve(input);
++  }
+ }
+ 
+ export async function isPaseoOwnedWorktreeCwd(
+-  cwd: string
++  cwd: string,
++  options?: { paseoHome?: string }
+ ): Promise<PaseoWorktreeOwnership> {
+   const repoInfo = await detectRepoInfo(cwd);
+-  const worktreesRoot = getPaseoWorktreesRoot(repoInfo.path);
+-  const resolvedRoot = resolve(worktreesRoot) + sep;
+-  const resolvedCwd = resolve(cwd);
++  const worktreesRoot = await getPaseoWorktreesRoot(repoInfo.path, options?.paseoHome);
++  const resolvedRoot = normalizePathForOwnership(worktreesRoot) + sep;
++  const resolvedCwd = normalizePathForOwnership(cwd);
+ 
+   if (!resolvedCwd.startsWith(resolvedRoot)) {

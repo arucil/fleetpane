@@ -1,0 +1,175 @@
+{
+  "ordinal": 659,
+  "revision": "420f25f1e9f09270ba0a6b52d5beadf4ca8d0cb0",
+  "date": "2026-01-16T20:23:07+07:00",
+  "committer_date": "2026-01-16T20:23:07+07:00",
+  "parents": [
+    "f733f2852dc6aca2a2b6ede40e06d45a07e5aa2b"
+  ],
+  "subject": "feat: add download toast, e2e permission tests, and update favicons",
+  "diff_tree_paths": [
+    "D\t01-main-screen.png",
+    "D\t02-agent-screen.png",
+    "D\t02-sidebar-open.png",
+    "D\t03-after-slash.png",
+    "D\t03-agent-screen.png",
+    "D\t04-after-slash.png",
+    "D\t05-autocomplete-visible.png",
+    "D\tPRODUCTION.md",
+    "D\tlogo.png",
+    "D\tpackages/app/01-initial-state.png",
+    "M\tpackages/app/assets/images/favicon-dark-attention.png",
+    "M\tpackages/app/assets/images/favicon-dark-attention.svg",
+    "M\tpackages/app/assets/images/favicon-dark-running.png",
+    "M\tpackages/app/assets/images/favicon-dark-running.svg",
+    "M\tpackages/app/assets/images/favicon-dark.png",
+    "M\tpackages/app/assets/images/favicon-dark.svg",
+    "M\tpackages/app/assets/images/favicon-light-attention.png",
+    "M\tpackages/app/assets/images/favicon-light-attention.svg",
+    "M\tpackages/app/assets/images/favicon-light-running.png",
+    "M\tpackages/app/assets/images/favicon-light-running.svg",
+    "M\tpackages/app/assets/images/favicon-light.png",
+    "M\tpackages/app/assets/images/favicon-light.svg",
+    "M\tpackages/app/assets/images/favicon.png",
+    "M\tpackages/app/assets/images/icon.png",
+    "M\tpackages/app/assets/images/splash-icon.png",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "A\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "A\tpackages/app/e2e/permission-prompt.spec.ts",
+    "M\tpackages/app/playwright.config.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/components/download-toast.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "A\tpackages/app/src/stores/download-store.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts"
+  ],
+  "source_receipt_digest": "sha256:8aa25ba4f4d219dfc46a500df03237596703155716b413e89cb59bdd5038ca9b",
+  "diff_tree_digest": "sha256:7c9868ee773174534c3c67f77a47b2907aa69d9f98badde445d5cf637865c213",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-view.tsx",
+      "old_lines": [
+        1017,
+        1052
+      ],
+      "new_lines": [
+        999,
+        1000
+      ],
+      "diff_block_lines": [
+        59,
+        94
+      ],
+      "hunk_header": "@@ -1017,185 +999,5 @@ function PermissionRequestCard({",
+      "substantive_changed_lines": 31,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 31,
+  "available_substantive_changed_lines": 1260,
+  "receipt_file": "receipts/0659/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0659/followup-01.patch",
+      "source_receipt_digest": "sha256:ebe7571ef2b58a0745e041392d914bd42994cae83405f2a9ae50bce3a2bd60ad",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            49,
+            57
+          ],
+          "new_lines": [
+            47,
+            52
+          ],
+          "diff_block_lines": [
+            17,
+            28
+          ],
+          "hunk_header": "@@ -49,9 +47,6 @@ import type { Agent } from \"@/contexts/session-context\";",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0659/followup-02.patch",
+      "source_receipt_digest": "sha256:efac8b12181e668ec6cd304dcb5adeb0ced3e8cd0f7cd2fe9fab54f0364f0d14",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            1017,
+            1068
+          ],
+          "new_lines": [
+            999,
+            1000
+          ],
+          "diff_block_lines": [
+            59,
+            110
+          ],
+          "hunk_header": "@@ -1017,185 +999,5 @@ function PermissionRequestCard({",
+          "substantive_changed_lines": 45,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0659/followup-03.patch",
+      "source_receipt_digest": "sha256:efac8b12181e668ec6cd304dcb5adeb0ced3e8cd0f7cd2fe9fab54f0364f0d14",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            1017,
+            1068
+          ],
+          "new_lines": [
+            999,
+            1000
+          ],
+          "diff_block_lines": [
+            59,
+            110
+          ],
+          "hunk_header": "@@ -1017,185 +999,5 @@ function PermissionRequestCard({",
+          "substantive_changed_lines": 45,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0659/followup-04.patch",
+      "source_receipt_digest": "sha256:8f9f7562bfda44fc84b6b8f01fe8f25194f386100250ec2b079bf88a88a6be76",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            1191,
+            1201
+          ],
+          "new_lines": [
+            1001,
+            1003
+          ],
+          "diff_block_lines": [
+            233,
+            244
+          ],
+          "hunk_header": "@@ -1017,185 +999,5 @@ function PermissionRequestCard({",
+          "substantive_changed_lines": 9,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

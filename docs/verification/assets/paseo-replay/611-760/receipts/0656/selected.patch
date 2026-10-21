@@ -1,0 +1,38 @@
+FILE packages/server/src/server/logger.ts
+RANGE {"path":"packages/server/src/server/logger.ts","old_lines":null,"new_lines":[2,37],"diff_block_lines":[8,43],"hunk_header":"@@ -0,0 +1,62 @@","substantive_changed_lines":25,"comparison":"parent"}
++import type { PersistedConfig } from "./persisted-config.js";
++
++export type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "fatal";
++export type LogFormat = "pretty" | "json";
++
++export interface ResolvedLogConfig {
++  level: LogLevel;
++  format: LogFormat;
++}
++
++export function resolveLogConfig(
++  persistedConfig: PersistedConfig | undefined
++): ResolvedLogConfig {
++  const envLevel = process.env.PASEO_LOG as LogLevel | undefined;
++  const envFormat = process.env.PASEO_LOG_FORMAT as LogFormat | undefined;
++
++  const level: LogLevel =
++    envLevel ?? persistedConfig?.log?.level ?? "info";
++  const format: LogFormat =
++    envFormat ?? persistedConfig?.log?.format ?? "pretty";
++
++  return { level, format };
++}
++
++let rootLogger: pino.Logger | undefined;
++
++export function createRootLogger(
++  persistedConfig: PersistedConfig | undefined
++): pino.Logger {
++  const config = resolveLogConfig(persistedConfig);
++
++  const transport =
++    config.format === "pretty"
++      ? {
++          target: "pino-pretty",
++          options: {

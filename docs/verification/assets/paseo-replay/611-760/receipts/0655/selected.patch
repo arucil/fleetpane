@@ -1,0 +1,38 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[109,124],"new_lines":[126,148],"diff_block_lines":[49,84],"hunk_header":"@@ -109,24 +126,26 @@ export function AgentList({","substantive_changed_lines":28,"comparison":"parent"}
+         >
+           {({ hovered }) => (
+-          <View style={styles.agentContent}>
+-            <View style={styles.row}>
+-              {statusColor && (
+-                <View style={[styles.statusDot, { backgroundColor: statusColor }]} />
+-              )}
+-              <Text
+-                style={[
+-                  styles.agentTitle,
+-                  (isSelected || hovered) && styles.agentTitleHighlighted,
+-                ]}
+-                numberOfLines={1}
+-              >
+-                {agent.title || "New Agent"}
++            <View style={styles.agentContent}>
++              <View style={styles.row}>
++                {statusColor && (
++                  <View
++                    style={[styles.statusDot, { backgroundColor: statusColor }]}
++                  />
++                )}
++                <Text
++                  style={[
++                    styles.agentTitle,
++                    (isSelected || hovered) && styles.agentTitleHighlighted,
++                  ]}
++                  numberOfLines={1}
++                >
++                  {agent.title || "New Agent"}
++                </Text>
++              </View>
++
++              <Text style={styles.secondaryRow} numberOfLines={1}>
++                {agent.cwd.replace(/^\/(?:Users|home)\/[^/]+/, "~")} · {timeAgo}
+               </Text>

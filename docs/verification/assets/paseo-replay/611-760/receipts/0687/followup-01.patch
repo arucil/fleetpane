@@ -1,0 +1,54 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[188,189],"new_lines":[271,322],"diff_block_lines":[105,156],"hunk_header":"@@ -186,4 +192,131 @@ function generateWorktreeSlug(): string {","substantive_changed_lines":35,"comparison":"parent"}
++export async function listPaseoWorktrees({
++  cwd,
++}: {
++  cwd: string;
++}): Promise<PaseoWorktreeInfo[]> {
++  const repoInfo = await detectRepoInfo(cwd);
++  const worktreesRoot = getPaseoWorktreesRoot(repoInfo.path);
++  const { stdout } = await execAsync("git worktree list --porcelain", {
++    cwd: repoInfo.path,
++    env: READ_ONLY_GIT_ENV,
++  });
++
++  const rootPrefix = resolve(worktreesRoot) + sep;
++  return parseWorktreeList(stdout).filter((entry) =>
++    resolve(entry.path).startsWith(rootPrefix)
++  );
++}
++
++export async function deletePaseoWorktree({
++  cwd,
++  worktreePath,
++  worktreeSlug,
++}: {
++  cwd: string;
++  worktreePath?: string;
++  worktreeSlug?: string;
++}): Promise<void> {
++  if (!worktreePath && !worktreeSlug) {
++    throw new Error("worktreePath or worktreeSlug is required");
++  }
++
++  const repoInfo = await detectRepoInfo(cwd);
++  const worktreesRoot = getPaseoWorktreesRoot(repoInfo.path);
++  const targetPath = worktreePath ?? join(worktreesRoot, worktreeSlug!);
++  const resolvedRoot = resolve(worktreesRoot) + sep;
++  const resolvedTarget = resolve(targetPath);
++
++  if (!resolvedTarget.startsWith(resolvedRoot)) {
++    throw new Error("Refusing to delete non-Paseo worktree");
++  }
++
++  await execAsync(`git worktree remove "${targetPath}" --force`, {
++    cwd: repoInfo.path,
++  });
++
++  if (existsSync(targetPath)) {
++    rmSync(targetPath, { recursive: true, force: true });
++  }
++}
++
+ 
+ /**

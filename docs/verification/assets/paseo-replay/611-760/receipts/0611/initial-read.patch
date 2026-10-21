@@ -1,0 +1,338 @@
+diff --git a/packages/app/src/contexts/session-context.tsx b/packages/app/src/contexts/session-context.tsx
+index 12c5e9706..2f1ea87fb 100644
+--- a/packages/app/src/contexts/session-context.tsx
++++ b/packages/app/src/contexts/session-context.tsx
+@@ -35,5 +35,4 @@ export type {
+   ProviderModelState,
+   Agent,
+-  Command,
+   ExplorerEntry,
+   ExplorerFile,
+@@ -76,12 +75,4 @@ const SESSION_SNAPSHOT_STORAGE_PREFIX = "@paseo:session-snapshot:";
+ type PersistedSessionSnapshot = {
+   agents: AgentSnapshotPayload[];
+-  commands: Array<{
+-    id: string;
+-    name: string;
+-    workingDirectory: string;
+-    currentCommand: string;
+-    isDead: boolean;
+-    exitCode: number | null;
+-  }>;
+   savedAt: string;
+ };
+@@ -98,5 +89,5 @@ async function loadPersistedSessionSnapshot(serverId: string): Promise<Persisted
+     }
+     const parsed = JSON.parse(raw) as PersistedSessionSnapshot;
+-    if (!Array.isArray(parsed?.agents) || !Array.isArray(parsed?.commands)) {
++    if (!Array.isArray(parsed?.agents)) {
+       return null;
+     }
+@@ -108,9 +99,8 @@ async function loadPersistedSessionSnapshot(serverId: string): Promise<Persisted
+ }
+ 
+-async function persistSessionSnapshot(serverId: string, snapshot: { agents: AgentSnapshotPayload[]; commands: any[] }) {
++async function persistSessionSnapshot(serverId: string, snapshot: { agents: AgentSnapshotPayload[] }) {
+   try {
+     const payload: PersistedSessionSnapshot = {
+       agents: snapshot.agents,
+-      commands: snapshot.commands,
+       savedAt: new Date().toISOString(),
+     };
+@@ -242,5 +232,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+   const setAgents = useSessionStore((state) => state.setAgents);
+   const setAgentLastActivity = useSessionStore((state) => state.setAgentLastActivity);
+-  const setCommands = useSessionStore((state) => state.setCommands);
+   const setPendingPermissions = useSessionStore((state) => state.setPendingPermissions);
+   const setGitDiffs = useSessionStore((state) => state.setGitDiffs);
+@@ -369,11 +358,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+ 
+       setPendingPermissions(serverId, pendingPermissions);
+-      const commandEntries = snapshot.commands ?? [];
+-      setCommands(serverId, (prev) => {
+-        if (prev.size > 0) {
+-          return prev;
+-        }
+-        return new Map(commandEntries.map((command) => [command.id, command]));
+-      });
+       setHasHydratedAgents(serverId, true);
+     };
+@@ -384,5 +366,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+       isMounted = false;
+     };
+-  }, [serverId, setAgents, setCommands, setPendingPermissions, setHasHydratedAgents]);
++  }, [serverId, setAgents, setPendingPermissions, setHasHydratedAgents]);
+ 
+   const updateExplorerState = useCallback(
+@@ -633,7 +615,7 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+       }
+ 
+-      const { agents: agentsList, commands: commandsList } = message.payload;
++      const { agents: agentsList } = message.payload;
+ 
+-      console.log("[Session] ✅ Received session_state:", agentsList.length, "agents,", commandsList.length, "commands");
++      console.log("[Session] ✅ Received session_state:", agentsList.length, "agents");
+       setInitializingAgents(serverId, new Map());
+ 
+@@ -652,6 +634,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+       }
+ 
+-      const normalizedCommands = commandsList.map((command) => command);
+-
+       setAgents(serverId, agents);
+ 
+@@ -662,5 +642,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+ 
+       setPendingPermissions(serverId, pendingPermissions);
+-      setCommands(serverId, new Map(normalizedCommands.map((command: any) => [command.id, command])));
+       setAgentStreamState(serverId, (prev) => {
+         if (prev.size === 0) {
+@@ -717,5 +696,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+         return changed ? next : prev;
+       });
+-      void persistSessionSnapshot(serverId, { agents: agentsList, commands: normalizedCommands });
++      void persistSessionSnapshot(serverId, { agents: agentsList });
+       setHasHydratedAgents(serverId, true);
+       updateConnectionStatus(serverId, { status: "online", lastOnlineAt: new Date().toISOString(), sessionReady: true });
+@@ -1272,5 +1251,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid
+       unsubAgentDeleted();
+     };
+-  }, [ws, audioPlayer, serverId, setIsPlayingAudio, setMessages, setCurrentAssistantMessage, setAgentStreamState, setAgentStreamingBuffer, clearAgentStreamingBuffer, setInitializingAgents, setAgents, setAgentLastActivity, setCommands, setPendingPermissions, setGitDiffs, setFileExplorer, setProviderModels, setHasHydratedAgents, updateConnectionStatus, getSession, saveDraftInput]);
++  }, [ws, audioPlayer, serverId, setIsPlayingAudio, setMessages, setCurrentAssistantMessage, setAgentStreamState, setAgentStreamingBuffer, clearAgentStreamingBuffer, setInitializingAgents, setAgents, setAgentLastActivity, setPendingPermissions, setGitDiffs, setFileExplorer, setProviderModels, setHasHydratedAgents, updateConnectionStatus, getSession, saveDraftInput]);
+ 
+   const initializeAgent = useCallback(({ agentId, requestId }: { agentId: string; requestId?: string }) => {
+diff --git a/packages/server/src/server/session.ts b/packages/server/src/server/session.ts
+index 5fcccf571..b55f2bd4c 100644
+--- a/packages/server/src/server/session.ts
++++ b/packages/server/src/server/session.ts
+@@ -37,6 +37,4 @@ import {
+ import { experimental_createMCPClient } from "ai";
+ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+-import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
+-import { createTerminalMcpServer } from "./terminal-mcp/index.js";
+ import { fetchProviderModelCatalog } from "./agent/model-catalog.js";
+ import { AgentManager } from "./agent/agent-manager.js";
+@@ -53,5 +51,4 @@ import type {
+ } from "./agent/agent-sdk-types.js";
+ import { AgentRegistry, type StoredAgentRecord } from "./agent/agent-registry.js";
+-import { expandTilde } from "./terminal-mcp/tmux.js";
+ import {
+   listDirectoryEntries,
+@@ -64,5 +61,4 @@ import {
+   isTitleGeneratorInitialized,
+ } from "../services/agent-title-generator.js";
+-import type { TerminalManager } from "./terminal-mcp/terminal-manager.js";
+ import {
+   createWorktree,
+@@ -71,4 +67,5 @@ import {
+   validateBranchSlug,
+ } from "../utils/worktree.js";
++import { expandTilde } from "../utils/path.js";
+ 
+ type AgentMcpClientConfig = {
+@@ -229,11 +226,4 @@ export class Session {
+ 
+   // Per-session MCP client and tools
+-  private terminalMcpClient: Awaited<
+-    ReturnType<typeof experimental_createMCPClient>
+-  > | null = null;
+-  private terminalTools: ToolSet | null = null;
+-  private terminalManager: TerminalManager | null = null;
+-  private terminalInitPromise: Promise<void> | null = null;
+-  private terminalInitError: Error | null = null;
+   private agentMcpClient: Awaited<
+     ReturnType<typeof experimental_createMCPClient>
+@@ -280,21 +270,5 @@ export class Session {
+     this.sttManager = new STTManager(this.conversationId);
+ 
+-    // Initialize terminal + agent MCP clients asynchronously, but keep promise handles to avoid orphaned rejections
+-    this.terminalInitPromise = this.initializeTerminalMcp().catch((error) => {
+-      const normalizedError =
+-        error instanceof Error
+-          ? error
+-          : new Error(
+-              typeof error === "string"
+-                ? error
+-                : "Unknown terminal initialization error"
+-            );
+-      this.terminalInitError = normalizedError;
+-      console.error(
+-        `[Session ${this.clientId}] Terminal MCP init failed:`,
+-        normalizedError
+-      );
+-    });
+-
++    // Initialize agent MCP client asynchronously
+     void this.initializeAgentMcp();
+     this.subscribeToAgentEvents();
+@@ -440,48 +414,4 @@ export class Session {
+   }
+ 
+-  /**
+-   * Initialize Terminal MCP client for this session
+-   */
+-  private async initializeTerminalMcp(): Promise<void> {
+-    try {
+-      // Create Terminal Manager directly
+-      const { TerminalManager } = await import(
+-        "./terminal-mcp/terminal-manager.js"
+-      );
+-      this.terminalManager = new TerminalManager(this.conversationId);
+-      await this.terminalManager.initialize();
+-
+-      // Create Terminal MCP server with conversation-specific session
+-      const server = await createTerminalMcpServer({
+-        sessionName: this.conversationId,
+-      });
+-
+-      // Create linked transport pair
+-      const [clientTransport, serverTransport] =
+-        InMemoryTransport.createLinkedPair();
+-
+-      // Connect server to its transport
+-      await server.connect(serverTransport);
+-
+-      // Create client connected to the other side
+-      this.terminalMcpClient = await experimental_createMCPClient({
+-        transport: clientTransport,
+-      });
+-
+-      // Get tools from the client
+-      this.terminalTools = (await this.terminalMcpClient.tools()) as ToolSet;
+-
+-      console.log(
+-        `[Session ${this.clientId}] Terminal MCP initialized with session ${this.conversationId}`
+-      );
+-    } catch (error) {
+-      console.error(
+-        `[Session ${this.clientId}] Failed to initialize Terminal MCP:`,
+-        error
+-      );
+-      throw error;
+-    }
+-  }
+-
+   /**
+    * Initialize Agent MCP client for this session
+@@ -2300,25 +2230,4 @@ export class Session {
+       const agents = [...liveAgents, ...persistedAgents];
+ 
+-      // Get live commands from terminal manager
+-      let commands: any[] = [];
+-      if (this.terminalInitPromise) {
+-        await this.terminalInitPromise;
+-      }
+-      if (this.terminalInitError) {
+-        console.error(
+-          `[Session ${this.clientId}] Skipping command listing due to terminal init failure:`,
+-          this.terminalInitError
+-        );
+-      } else if (this.terminalManager) {
+-        try {
+-          commands = await this.terminalManager.listCommands();
+-        } catch (error) {
+-          console.error(
+-            `[Session ${this.clientId}] Failed to list commands:`,
+-            error
+-          );
+-        }
+-      }
+-
+       // Emit session state
+       this.emit({
+@@ -2326,10 +2235,9 @@ export class Session {
+         payload: {
+           agents,
+-          commands,
+         },
+       });
+ 
+       console.log(
+-        `[Session ${this.clientId}] Sent session state: ${agents.length} agents, ${commands.length} commands`
++        `[Session ${this.clientId}] Sent session state: ${agents.length} agents`
+       );
+     } catch (error) {
+@@ -2715,19 +2623,5 @@ export class Session {
+       });
+ 
+-      // Wait for terminal MCP to initialize if needed
+-      if (!this.terminalTools) {
+-        console.log(
+-          `[Session ${this.clientId}] Waiting for terminal MCP initialization...`
+-        );
+-        // Wait up to 5 seconds for initialization
+-        const startTime = Date.now();
+-        while (!this.terminalTools && Date.now() - startTime < 5000) {
+-          await new Promise((resolve) => setTimeout(resolve, 100));
+-        }
+-        if (!this.terminalTools) {
+-          throw new Error("Terminal MCP failed to initialize");
+-        }
+-      }
+-
++      // Wait for agent MCP to initialize if needed
+       if (!this.agentTools) {
+         console.log(
+@@ -2745,5 +2639,5 @@ export class Session {
+       }
+ 
+-      const allTools = await getAllTools(this.terminalTools, this.agentTools ?? undefined);
++      const allTools = getAllTools(this.agentTools ?? undefined);
+ 
+       const result = await streamText({
+@@ -3240,34 +3134,5 @@ export class Session {
+     this.sttManager.cleanup();
+ 
+-    // Kill tmux session for this conversation
+-    try {
+-      console.log(
+-        `[Session ${this.clientId}] Killing tmux session ${this.conversationId}`
+-      );
+-      await execAsync(`tmux kill-session -t ${this.conversationId}`);
+-      console.log(
+-        `[Session ${this.clientId}] Tmux session ${this.conversationId} killed`
+-      );
+-    } catch (error) {
+-      // Session might not exist or already be killed - that's okay
+-      console.log(
+-        `[Session ${this.clientId}] Tmux session cleanup (session may not exist):`,
+-        error instanceof Error ? error.message : String(error)
+-      );
+-    }
+-
+     // Close MCP clients
+-    if (this.terminalMcpClient) {
+-      try {
+-        await this.terminalMcpClient.close();
+-        console.log(`[Session ${this.clientId}] Terminal MCP client closed`);
+-      } catch (error) {
+-        console.error(
+-          `[Session ${this.clientId}] Failed to close Terminal MCP client:`,
+-          error
+-        );
+-      }
+-    }
+-
+     if (this.agentMcpClient) {
+       try {
+diff --git a/packages/server/src/utils/path.ts b/packages/server/src/utils/path.ts
+new file mode 100644
+index 000000000..48d838f34
+--- /dev/null
++++ b/packages/server/src/utils/path.ts
+@@ -0,0 +1,15 @@
++import os from "os";
++
++/**
++ * Expand tilde in path to home directory
++ */
++export function expandTilde(path: string): string {
++  if (path.startsWith("~/")) {
++    const homeDir = process.env.HOME || os.homedir();
++    return path.replace("~", homeDir);
++  }
++  if (path === "~") {
++    return process.env.HOME || os.homedir();
++  }
++  return path;
++}

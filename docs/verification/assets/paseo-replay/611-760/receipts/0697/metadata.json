@@ -1,0 +1,120 @@
+{
+  "ordinal": 697,
+  "revision": "69f32da90d723241b1ff1b24fec2b524628fac10",
+  "date": "2026-01-23T11:28:48+07:00",
+  "committer_date": "2026-01-23T11:28:48+07:00",
+  "parents": [
+    "8154a05fa5117fbb656071720c6d0f56fc21099b"
+  ],
+  "subject": "Run worktree setup async and stream status",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:ba25a0c87fdea919b7ddf3e2c544b15d89110a06c201f927f2f9ba018a0bea0b",
+  "diff_tree_digest": "sha256:13542411c30c7082be3c0a16c983f9618cb44c56b5a335d77b1aadaa35361475",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1588,
+        1594
+      ],
+      "new_lines": [
+        1602,
+        1635
+      ],
+      "diff_block_lines": [
+        73,
+        108
+      ],
+      "hunk_header": "@@ -1588,9 +1602,96 @@ export class Session {",
+      "substantive_changed_lines": 26,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 539,
+  "receipt_file": "receipts/0697/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0697/followup-01.patch",
+      "source_receipt_digest": "sha256:b50da73331d2ffceda99da2333a5e2091cf96c0f60c1c4c2419fce62aa4f73c7",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            1352,
+            1355
+          ],
+          "new_lines": [
+            1357,
+            1364
+          ],
+          "diff_block_lines": [
+            27,
+            35
+          ],
+          "hunk_header": "@@ -1352,4 +1357,8 @@ export class Session {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0697/followup-02.patch",
+      "source_receipt_digest": "sha256:a38db32c898ba46b91342c2a4892786d9aa72569bacca455bfc31755224be279",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": null,
+          "new_lines": [
+            1636,
+            1687
+          ],
+          "diff_block_lines": [
+            109,
+            160
+          ],
+          "hunk_header": "@@ -1588,9 +1602,96 @@ export class Session {",
+          "substantive_changed_lines": 40,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0697/followup-03.patch",
+      "source_receipt_digest": "sha256:460cac3e280f425e6ea681f10409bd4f0ff244b4061d5c3a96c6d91e47f18584",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            1307,
+            1311
+          ],
+          "new_lines": [
+            1312,
+            1316
+          ],
+          "diff_block_lines": [
+            20,
+            26
+          ],
+          "hunk_header": "@@ -1307,5 +1312,5 @@ export class Session {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

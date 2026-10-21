@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[36,39],"new_lines":[38,73],"diff_block_lines":[17,52],"hunk_header":"@@ -36,6 +38,70 @@ import {","substantive_changed_lines":15,"comparison":"parent"}
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
++  type ActionStatus,
+ } from "@/components/ui/dropdown-menu";
+ 
++// =============================================================================
++// Action Status Hook
++// =============================================================================
++// Tracks mutation state with a brief success phase before returning to idle.
++// State flow: idle → pending → success (1s) → idle
++// =============================================================================
++
++const SUCCESS_DISPLAY_MS = 1000;
++
++type ActionState = {
++  status: ActionStatus;
++  trigger: () => void;
++};
++
++function useActionStatus<TData, TError, TVariables, TContext>(
++  mutation: UseMutationResult<TData, TError, TVariables, TContext>,
++  onTrigger?: () => void
++): ActionState {
++  const [showSuccess, setShowSuccess] = useState(false);
++  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
++
++  // Clear timeout on unmount
++  useEffect(() => {
++    return () => {
++      if (successTimeoutRef.current) {
++        clearTimeout(successTimeoutRef.current);
++      }
++    };
++  }, []);
++
++  // Watch for mutation success to trigger success display

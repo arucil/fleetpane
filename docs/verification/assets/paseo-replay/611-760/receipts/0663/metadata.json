@@ -1,0 +1,99 @@
+{
+  "ordinal": 663,
+  "revision": "07ca5222c1df65ee23731ae556df0675af22cb39",
+  "date": "2026-01-17T13:10:02+07:00",
+  "committer_date": "2026-01-17T13:10:02+07:00",
+  "parents": [
+    "45096acdcbb63b72ea4b30d92c5c06b50adafbfd"
+  ],
+  "subject": "fix(server): use createTestLogger in unit tests",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-registry.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/wait-for-agent-tracker.test.ts",
+    "A\tpackages/server/src/test-utils/test-logger.ts"
+  ],
+  "source_receipt_digest": "sha256:849fafb07a906f0781500abed456094748ff8f1459ecffb13fe00981ec70f1c0",
+  "diff_tree_digest": "sha256:9943089758740b4c149d3aab691042d7a2b875daf7868c1b825f5a524fc8c16b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.test.ts",
+      "old_lines": [
+        102,
+        109
+      ],
+      "new_lines": [
+        103,
+        112
+      ],
+      "diff_block_lines": [
+        11,
+        22
+      ],
+      "hunk_header": "@@ -102,8 +103,10 @@ class TestAgentSession implements AgentSession {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/agent-registry.test.ts",
+      "old_lines": [
+        95,
+        103
+      ],
+      "new_lines": [
+        96,
+        105
+      ],
+      "diff_block_lines": [
+        11,
+        22
+      ],
+      "hunk_header": "@@ -95,9 +96,10 @@ describe(\"AgentRegistry\", () => {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/mcp-server.test.ts",
+      "old_lines": [
+        46,
+        52
+      ],
+      "new_lines": [
+        47,
+        55
+      ],
+      "diff_block_lines": [
+        11,
+        21
+      ],
+      "hunk_header": "@@ -46,7 +47,9 @@ function createTestDeps(): TestDeps {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.test.ts",
+      "old_lines": [
+        113,
+        120
+      ],
+      "new_lines": [
+        115,
+        123
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -113,8 +115,9 @@ async function startAgentMcpServer(): Promise<AgentMcpServerHandle> {",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 73,
+  "receipt_file": "receipts/0663/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

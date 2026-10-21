@@ -1,0 +1,73 @@
+{
+  "ordinal": 686,
+  "revision": "7157a43a7480d634284d5eef5a4b601c3f394537",
+  "date": "2026-01-22T09:24:08+07:00",
+  "committer_date": "2026-01-22T09:24:08+07:00",
+  "parents": [
+    "ca8d09434b124ed30ac0377f3398b9302c65c504"
+  ],
+  "subject": "feat(pairing): QR offer + app scanner",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/app.config.js",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/pairing-qr.ts"
+  ],
+  "source_receipt_digest": "sha256:0e185060a8b53092126e01b6932b96a819a3516674d0fbdc16ddf6c075cf3b34",
+  "diff_tree_digest": "sha256:cad902fd91b62fa9b7f3295bde8a8f6b3092347ce7a2ad50e2631682daab935c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/pair-scan.tsx",
+      "old_lines": null,
+      "new_lines": [
+        7,
+        42
+      ],
+      "diff_block_lines": [
+        13,
+        48
+      ],
+      "hunk_header": "@@ -0,0 +1,250 @@",
+      "substantive_changed_lines": 28,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 526,
+  "receipt_file": "receipts/0686/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0686/followup-01.patch",
+      "source_receipt_digest": "sha256:20532a2ae9a9d9d2016ad366b731c8e98ff3bf37466a144383327c651517d183",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/app/pair-scan.tsx",
+          "old_lines": null,
+          "new_lines": [
+            121,
+            172
+          ],
+          "diff_block_lines": [
+            127,
+            178
+          ],
+          "hunk_header": "@@ -0,0 +1,250 @@",
+          "substantive_changed_lines": 36,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

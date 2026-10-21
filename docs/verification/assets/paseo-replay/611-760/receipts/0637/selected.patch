@@ -1,0 +1,38 @@
+FILE packages/website/src/routes/docs.tsx
+RANGE {"path":"packages/website/src/routes/docs.tsx","old_lines":null,"new_lines":[2,37],"diff_block_lines":[8,43],"hunk_header":"@@ -0,0 +1,64 @@","substantive_changed_lines":28,"comparison":"parent"}
++import '~/styles.css'
++
++export const Route = createFileRoute('/docs')({
++  component: DocsLayout,
++})
++
++const navigation = [
++  { name: 'Getting started', href: '/docs' },
++  { name: 'Best practices', href: '/docs/best-practices' },
++]
++
++function DocsLayout() {
++  return (
++    <div className="min-h-screen bg-background">
++      {/* Mobile header */}
++      <header className="md:hidden border-b border-border p-4">
++        <Link to="/" className="flex items-center gap-3">
++          <img src="/logo.svg" alt="Paseo" className="w-6 h-6" />
++          <span className="text-lg font-medium">paseo</span>
++        </Link>
++        <nav className="flex gap-4 mt-4">
++          {navigation.map((item) => (
++            <Link
++              key={item.href}
++              to={item.href}
++              activeOptions={{ exact: true }}
++              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
++              activeProps={{ className: 'text-foreground' }}
++            >
++              {item.name}
++            </Link>
++          ))}
++        </nav>
++      </header>
++
++      <div className="max-w-5xl mx-auto flex">

@@ -1,0 +1,23 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[205,219],"new_lines":[338,350],"diff_block_lines":[157,177],"hunk_header":"@@ -205,15 +338,13 @@ export async function createWorktree({","substantive_changed_lines":9,"comparison":"parent"}
+@@ -205,15 +338,13 @@ export async function createWorktree({
+   const repoInfo = await detectRepoInfo(cwd);
+ 
++  // Ensure .paseo exists and is ignored
++  ensurePaseoIgnoredForRepo(repoInfo);
++
+   // Determine worktree directory based on repo type
+   let worktreePath: string;
+   const desiredSlug = worktreeSlug || generateWorktreeSlug();
+ 
+-  if (repoInfo.type === "bare") {
+-    worktreePath = join(repoInfo.path, desiredSlug);
+-  } else {
+-    const parentDir = dirname(repoInfo.path);
+-    const worktreeName = `${repoInfo.name}-${desiredSlug}`;
+-    worktreePath = join(parentDir, worktreeName);
+-  }
++  worktreePath = join(getPaseoWorktreesRoot(repoInfo.path), desiredSlug);
++  mkdirSync(dirname(worktreePath), { recursive: true });
+ 
+   // Check if branch already exists

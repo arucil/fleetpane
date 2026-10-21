@@ -1,0 +1,26 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[492,503],"new_lines":[492,508],"diff_block_lines":[5,28],"hunk_header":"@@ -492,12 +492,17 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(","substantive_changed_lines":13,"comparison":"parent"}
+@@ -492,12 +492,17 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(
+           style={[
+             styles.textInput,
+-            {
+-              height: inputHeight,
+-              minHeight: MIN_INPUT_HEIGHT,
+-              maxHeight: MAX_INPUT_HEIGHT,
+-            },
++            IS_WEB
++              ? {
++                  height: inputHeight,
++                  minHeight: MIN_INPUT_HEIGHT,
++                  maxHeight: MAX_INPUT_HEIGHT,
++                }
++              : {
++                  minHeight: MIN_INPUT_HEIGHT,
++                  maxHeight: MAX_INPUT_HEIGHT,
++                },
+           ]}
+           multiline
+-          scrollEnabled={inputHeight >= MAX_INPUT_HEIGHT}
++          scrollEnabled={IS_WEB ? inputHeight >= MAX_INPUT_HEIGHT : true}
+           onContentSizeChange={handleContentSizeChange}
+           editable={!isDictating && isConnected && !disabled}

@@ -1,0 +1,30 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[256,267],"new_lines":[256,259],"diff_block_lines":[12,24],"hunk_header":"@@ -256,12 +256,4 @@ function SidebarContent({","substantive_changed_lines":3,"comparison":"parent"}
+@@ -256,12 +256,4 @@ function SidebarContent({
+             onPress={() => onTabPress("changes")}
+           >
+-            <GitBranch
+-              size={16}
+-              color={
+-                activeTab === "changes"
+-                  ? theme.colors.foreground
+-                  : theme.colors.foregroundMuted
+-              }
+-            />
+             <Text
+               style={[
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[277,288],"new_lines":[269,272],"diff_block_lines":[25,37],"hunk_header":"@@ -277,12 +269,4 @@ function SidebarContent({","substantive_changed_lines":7,"comparison":"parent"}
+@@ -277,12 +269,4 @@ function SidebarContent({
+             onPress={() => onTabPress("files")}
+           >
+-            <Folder
+-              size={16}
+-              color={
+-                activeTab === "files"
+-                  ? theme.colors.foreground
+-                  : theme.colors.foregroundMuted
+-              }
+-            />
+             <Text
+               style={[

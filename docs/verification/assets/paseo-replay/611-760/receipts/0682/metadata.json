@@ -1,0 +1,57 @@
+{
+  "ordinal": 682,
+  "revision": "ae9a98223f8707aca3f43a59f3176c155f050a97",
+  "date": "2026-01-21T11:43:16+07:00",
+  "committer_date": "2026-01-21T11:43:16+07:00",
+  "parents": [
+    "ebb97a018453e4a0634bf96d7569df1063ff00e1"
+  ],
+  "subject": "refactor: rename conversation to voice conversation throughout stack",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/conversation-selector.tsx",
+    "M\tpackages/app/src/contexts/realtime-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/daemon-restart-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/permissions-claude.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/logger.test.ts",
+    "D\tpackages/server/src/server/persistence.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/voice-conversation-store.ts",
+    "A\tpackages/server/src/server/voice-conversations.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/websocket-session-bridge.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpaseo.json"
+  ],
+  "source_receipt_digest": "sha256:e518f88366d2b9c5a6b99412e8295b80033ab0ef1719abb362fcf6d68b529b32",
+  "diff_tree_digest": "sha256:6aa70e7827e8610c00e3f35d7c21439c3e1e159f74ce4edfe498e7428e661db3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/persistence.ts",
+      "old_lines": [
+        4,
+        39
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        10,
+        45
+      ],
+      "hunk_header": "@@ -1,173 +0,0 @@",
+      "substantive_changed_lines": 19,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 766,
+  "receipt_file": "receipts/0682/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

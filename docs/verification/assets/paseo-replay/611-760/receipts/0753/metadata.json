@@ -1,0 +1,77 @@
+{
+  "ordinal": 753,
+  "revision": "c233c99cd323597c21c1c4bc824aa32e3131d901",
+  "date": "2026-01-26T18:03:51+07:00",
+  "committer_date": "2026-01-26T18:03:51+07:00",
+  "parents": [
+    "6095bf975b82c39c3615edc506754eee2810a411"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "A\tpackages/app/src/components/draggable-list.native.tsx",
+    "A\tpackages/app/src/components/draggable-list.tsx",
+    "A\tpackages/app/src/components/draggable-list.types.ts",
+    "A\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/stores/section-order-store.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpatches/react-native-draggable-flatlist+4.0.3.patch"
+  ],
+  "source_receipt_digest": "sha256:7682ce1f5045451c884c93d039b83f06a1824b1870481fb4df86c39a8a85e7be",
+  "diff_tree_digest": "sha256:fcf53aaa4c96c99040a3cd37e300520a4eee873544b356dda67c9bec15051b33",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/draggable-list.native.tsx",
+      "old_lines": null,
+      "new_lines": [
+        2,
+        37
+      ],
+      "diff_block_lines": [
+        8,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,86 @@",
+      "substantive_changed_lines": 20,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 652,
+  "receipt_file": "receipts/0753/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0753/followup-01.patch",
+      "source_receipt_digest": "sha256:90c702dc23ae22b8d7af93536057f830b8fcf29fadd795a6f1331b6bc1db6512",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/stores/section-order-store.ts",
+          "old_lines": null,
+          "new_lines": [
+            21,
+            72
+          ],
+          "diff_block_lines": [
+            27,
+            78
+          ],
+          "hunk_header": "@@ -0,0 +1,79 @@",
+          "substantive_changed_lines": 27,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

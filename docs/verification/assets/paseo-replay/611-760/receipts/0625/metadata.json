@@ -1,0 +1,42 @@
+{
+  "ordinal": 625,
+  "revision": "e57cad2660c0ae2483bea9707715eefbc03a0720",
+  "date": "2026-01-11T16:21:59+07:00",
+  "committer_date": "2026-01-11T16:21:59+07:00",
+  "parents": [
+    "ebabcc09e58283a398c8ef64fdb1301db96f432c"
+  ],
+  "subject": "feat(app): extract form preferences into dedicated hook with per-provider storage",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-form-preferences.ts"
+  ],
+  "source_receipt_digest": "sha256:760175a4c6dc3185124ee0e3f454b79ec02ec9788fd5c1f7b8b26a9083456021",
+  "diff_tree_digest": "sha256:e11c896c3cd2e460c341e17bdaf41e74cb843124cf5a90c22cf538a755bf604e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        122,
+        151
+      ],
+      "new_lines": [
+        114,
+        153
+      ],
+      "diff_block_lines": [
+        63,
+        126
+      ],
+      "hunk_header": "@@ -122,32 +114,50 @@ export function useAgentFormState(",
+      "substantive_changed_lines": 48,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 48,
+  "available_substantive_changed_lines": 307,
+  "receipt_file": "receipts/0625/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,38 @@
+FILE packages/server/src/tasks/cli.ts
+RANGE {"path":"packages/server/src/tasks/cli.ts","old_lines":[79,79],"new_lines":[78,113],"diff_block_lines":[26,61],"hunk_header":"@@ -78,4 +77,87 @@ Body vs Notes:","substantive_changed_lines":25,"comparison":"parent"}
+   - When done: add a final note explaining what was done, then close
++
++---
++
++The Run Command (task run):
++
++  The run command executes an agent loop that works until acceptance criteria are met.
++  This can run for hours, days, or weeks for large epics.
++
++  Basic usage:
++    task run <scope-id>              # Run without planner (task must be well-defined)
++    task run <scope-id> --plan       # Run with planner (for larger epics)
++
++  Without --plan: The scoped task runs in a worker/judge loop. The worker implements,
++  the judge verifies. If not done, it loops. No breakdown happens - the task must be
++  atomic and well-defined from the start.
++
++  With --plan: The planner first breaks down the scope into subtasks, then workers
++  execute leaf tasks while the planner can reorganize as needed. Use this for epics
++  where you define WHAT you want but not HOW to achieve it.
++
++  When replanning happens:
++    - At the start (initial breakdown)
++    - When a task fails 5+ times (something is wrong with the approach)
++    - When you add a steering note (task steer <scope-id> "new direction")
++
++  Monitoring a running loop:
++    task plan <scope-id>             # See execution timeline and progress
++    task show <task-id>              # Check specific task details
++    tail -f task-run.*.log           # Follow the live log
++
++  Steering mid-run:
++    task steer <scope-id> "focus on X first"
++    task steer <scope-id> "skip Y, it's not needed"
++    task steer <scope-id> "run e2e tests every iteration"
++

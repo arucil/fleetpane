@@ -1,0 +1,80 @@
+{
+  "ordinal": 615,
+  "revision": "42129926ae9d36d0ad4a9f1213f26bab04a45a89",
+  "date": "2026-01-10T22:44:57+07:00",
+  "committer_date": "2026-01-10T22:44:57+07:00",
+  "parents": [
+    "584b0413a5a77ffbf960a5a43b40bd4caa8266b9"
+  ],
+  "subject": "feat(app): add maestro tests, download progress, and task hierarchy",
+  "diff_tree_paths": [
+    "A\tpackages/app/01-diff-sidebar-open.png",
+    "A\tpackages/app/02-after-vertical-scroll.png",
+    "A\tpackages/app/02-tabs-work.png",
+    "A\tpackages/app/03-after-horizontal-scroll-right.png",
+    "A\tpackages/app/03-after-vertical-scroll.png",
+    "A\tpackages/app/04-after-horizontal-scroll-right.png",
+    "A\tpackages/app/04-back-at-left-edge.png",
+    "A\tpackages/app/05-back-at-left-edge.png",
+    "A\tpackages/app/app-launched.png",
+    "A\tpackages/app/current-state.png",
+    "A\tpackages/app/dev-client.png",
+    "A\tpackages/app/diff-sidebar-open.png",
+    "A\tpackages/app/fail3.png",
+    "A\tpackages/app/launch-screen.png",
+    "A\tpackages/app/maestro-fail.png",
+    "A\tpackages/app/maestro-fail2.png",
+    "A\tpackages/app/maestro/flows/launch.yaml",
+    "A\tpackages/app/maestro/poc.yaml",
+    "A\tpackages/app/maestro/sidebar-swipe-bug.yaml",
+    "A\tpackages/app/manual-launch.png",
+    "A\tpackages/app/settings-screen.png",
+    "A\tpackages/app/sidebar-fail.png",
+    "A\tpackages/app/sidebar-fail2.png",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/agents.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/agent-activity.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/artifact-drawer.tsx",
+    "M\tpackages/app/src/components/diff-viewer.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/styles/markdown-styles.ts",
+    "M\tpackages/server/src/tasks/cli.ts",
+    "M\tpackages/server/src/tasks/task-store.test.ts",
+    "M\tpackages/server/src/tasks/task-store.ts",
+    "M\tpackages/server/src/tasks/types.ts"
+  ],
+  "source_receipt_digest": "sha256:f24907a685835b7ecdb792878102531a628b6bb43b9ef0f63a1a3c2ace419bdb",
+  "diff_tree_digest": "sha256:ec205cbed991e3fc61f4ebd7ac1167bcd98200f190dd5d19d73065a7b19cef70",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/file-explorer-pane.tsx",
+      "old_lines": [
+        468,
+        486
+      ],
+      "new_lines": [
+        479,
+        535
+      ],
+      "diff_block_lines": [
+        29,
+        90
+      ],
+      "hunk_header": "@@ -468,19 +479,57 @@ export function FileExplorerPane({",
+      "substantive_changed_lines": 35,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 35,
+  "available_substantive_changed_lines": 664,
+  "receipt_file": "receipts/0615/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

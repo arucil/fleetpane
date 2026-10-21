@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[673,674],"new_lines":[699,734],"diff_block_lines":[59,94],"hunk_header":"@@ -673,4 +699,86 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":27,"comparison":"parent"}
+   }
+ 
++  type PrimaryAction = {
++    key: "commit" | "create_pr" | "merge";
++    label: string;
++    testID: string;
++    disabled: boolean;
++    isPending: boolean;
++    onPress: () => void;
++  };
++
++  const primaryAction: PrimaryAction | null = useMemo(() => {
++    if (!isGit) {
++      return null;
++    }
++    if (showCommitAction) {
++      return {
++        key: "commit",
++        label: "Commit",
++        testID: "changes-primary-commit",
++        disabled: commitDisabled,
++        isPending: commitMutation.isPending,
++        onPress: () => commitMutation.mutate(),
++      };
++    }
++    if (showCreatePrAction) {
++      return {
++        key: "create_pr",
++        label: "Create PR",
++        testID: "changes-primary-create-pr",
++        disabled: prDisabled,
++        isPending: prMutation.isPending,
++        onPress: () => prMutation.mutate(),
++      };
++    }
++    if (showMergeAction) {

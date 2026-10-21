@@ -1,0 +1,38 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1300,1301],"new_lines":[1311,1346],"diff_block_lines":[39,74],"hunk_header":"@@ -1300,4 +1311,63 @@ export class Session {","substantive_changed_lines":25,"comparison":"parent"}
+   }
+ 
++  private async maybePersistDictationStreamAudio(dictationId: string): Promise<string | null> {
++    const state = this.dictationStreams.get(dictationId) ?? null;
++    if (!state) {
++      return null;
++    }
++    if (state.debugRecordingPath) {
++      return state.debugRecordingPath;
++    }
++    if (state.debugAudioChunks.length === 0) {
++      return null;
++    }
++
++    const pcmBuffer = Buffer.concat(state.debugAudioChunks);
++    const wavBuffer = convertPCMToWavBuffer(
++      pcmBuffer,
++      DICTATION_PCM_OUTPUT_RATE,
++      PCM_CHANNELS,
++      PCM_BITS_PER_SAMPLE
++    );
++
++    const path = await maybePersistDictationDebugAudio(
++      wavBuffer,
++      { sessionId: this.sessionId, dictationId, format: "audio/wav" },
++      this.sessionLogger
++    );
++    state.debugRecordingPath = path;
++    return path;
++  }
++
++  private async failAndCleanupDictationStream(
++    dictationId: string,
++    error: string,
++    retryable: boolean
++  ): Promise<void> {

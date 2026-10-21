@@ -1,0 +1,38 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[825,857],"new_lines":[825,831],"diff_block_lines":[25,60],"hunk_header":"@@ -825,65 +825,10 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":30,"comparison":"parent"}
+             {branchLabel}
+           </Text>
+-            {isStatusFetching && (
+-              <ActivityIndicator size="small" color={theme.colors.foregroundMuted} />
+-            )}
++          {isStatusFetching && (
++            <ActivityIndicator size="small" color={theme.colors.foregroundMuted} />
++          )}
+         </View>
+         {isGit ? (
+-          <DropdownMenu>
+-            <DropdownMenuTrigger
+-              testID="changes-view-selector"
+-              style={styles.viewSelector}
+-              accessibilityRole="button"
+-              accessibilityLabel="Change diff view"
+-            >
+-              <Text style={styles.viewSelectorText}>
+-                {diffMode === "uncommitted" ? "Working" : "Base"}
+-              </Text>
+-              <ChevronDown size={14} color={theme.colors.foregroundMuted} />
+-            </DropdownMenuTrigger>
+-            <DropdownMenuContent align="end" width={180} testID="changes-view-menu">
+-              <DropdownMenuItem
+-                testID="changes-mode-uncommitted"
+-                selected={diffMode === "uncommitted"}
+-                onSelect={() => setDiffMode("uncommitted")}
+-              >
+-                Working
+-              </DropdownMenuItem>
+-              <DropdownMenuItem
+-                testID="changes-mode-base"
+-                selected={diffMode === "base"}
+-                onSelect={() => setDiffMode("base")}
+-              >
+-                Base

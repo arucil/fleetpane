@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[73,80],"new_lines":[73,77],"diff_block_lines":[5,14],"hunk_header":"@@ -73,8 +73,5 @@ async function collectTurnEvents(","substantive_changed_lines":3,"comparison":"parent"}
+@@ -73,8 +73,5 @@ async function collectTurnEvents(
+ }
+ 
+-// Skip integration tests in CI - requires real OpenCode server
+-const shouldSkip = process.env.CI === "true";
+-
+-describe.skipIf(shouldSkip)("OpenCodeAgentClient", () => {
++describe("OpenCodeAgentClient", () => {
+   const buildConfig = (cwd: string): AgentSessionConfig => ({
+     provider: "opencode",
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[2,5],"new_lines":[2,7],"diff_block_lines":[5,11],"hunk_header":"@@ -2,4 +2,6 @@ import path from \"node:path\";","substantive_changed_lines":1,"comparison":"parent"}
+@@ -2,4 +2,6 @@ import path from "node:path";
+ import { defineConfig } from "vitest/config";
+ 
++const isCI = process.env.CI === "true";
++
+ export default defineConfig({
+   resolve: {
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[21,24],"new_lines":[23,30],"diff_block_lines":[12,20],"hunk_header":"@@ -21,4 +23,8 @@ export default defineConfig({","substantive_changed_lines":3,"comparison":"parent"}
+@@ -21,4 +23,8 @@ export default defineConfig({
+       },
+     },
++    // Skip e2e and integration tests in CI - they require real agent binaries
++    exclude: isCI
++      ? ["**/*.e2e.test.ts", "**/opencode-agent.test.ts", "**/node_modules/**"]
++      : ["**/node_modules/**"],
+   },
+ });

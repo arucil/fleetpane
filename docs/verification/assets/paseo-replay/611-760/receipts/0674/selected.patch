@@ -1,0 +1,30 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[194,197],"new_lines":[194,220],"diff_block_lines":[5,32],"hunk_header":"@@ -194,4 +194,27 @@ function resolveFormState(","substantive_changed_lines":13,"comparison":"parent"}
+@@ -194,4 +194,27 @@ function resolveFormState(
+ }
+ 
++function combineInitialValues(
++  initialValues: FormInitialValues | undefined,
++  initialServerId: string | null
++): FormInitialValues | undefined {
++  const hasExplicitServerId = initialValues?.serverId !== undefined;
++  const serverIdFromOptions = initialServerId === null ? undefined : initialServerId;
++
++  // If nobody provided initial values or an explicit serverId, let preferences drive defaults.
++  if (!initialValues && !hasExplicitServerId && serverIdFromOptions === undefined) {
++    return undefined;
++  }
++
++  if (hasExplicitServerId) {
++    return { ...initialValues, serverId: initialValues?.serverId };
++  }
++
++  if (serverIdFromOptions !== undefined) {
++    return { ...initialValues, serverId: serverIdFromOptions };
++  }
++
++  return initialValues;
++}
++
+ export function useAgentFormState(
+   options: UseAgentFormStateOptions = {}

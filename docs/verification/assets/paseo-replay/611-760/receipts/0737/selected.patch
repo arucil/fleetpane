@@ -1,0 +1,27 @@
+FILE scripts/dev.sh
+RANGE {"path":"scripts/dev.sh","old_lines":[10,16],"new_lines":[10,16],"diff_block_lines":[5,15],"hunk_header":"@@ -10,7 +10,7 @@ DAEMON_PORT=$(get-port 6767 6768 6769 6770 6771 6772 6773)","substantive_changed_lines":2,"comparison":"parent"}
+@@ -10,7 +10,7 @@ DAEMON_PORT=$(get-port 6767 6768 6769 6770 6771 6772 6773)
+ METRO_PORT=$(get-port 8081 8082 8083 8084 8085 8086 8087)
+ 
+-# Use a temporary PASEO_HOME to avoid conflicts between dev instances
+-export PASEO_HOME=$(mktemp -d "${TMPDIR:-/tmp}/paseo-dev.XXXXXX")
+-trap "rm -rf '$PASEO_HOME'" EXIT
++# # Use a temporary PASEO_HOME to avoid conflicts between dev instances
++# export PASEO_HOME=$(mktemp -d "${TMPDIR:-/tmp}/paseo-dev.XXXXXX")
++# trap "rm -rf '$PASEO_HOME'" EXIT
+ 
+ # Build CORS origins for this Expo instance
+FILE scripts/dev.sh
+RANGE {"path":"scripts/dev.sh","old_lines":[25,33],"new_lines":[25,33],"diff_block_lines":[16,27],"hunk_header":"@@ -25,9 +25,9 @@ echo \"\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550","substantive_changed_lines":3,"comparison":"parent"}
+@@ -25,9 +25,9 @@ echo "════════════════════════
+ echo "  Daemon:  http://localhost:${DAEMON_PORT}"
+ echo "  Metro:   http://localhost:${METRO_PORT}"
+-echo "  Home:    ${PASEO_HOME}"
++# echo "  Home:    ${PASEO_HOME}"
+ echo "══════════════════════════════════════════════════════"
+ 
+ # Export for child processes (overrides .env values)
+-export PASEO_LISTEN="127.0.0.1:${DAEMON_PORT}"
++export PASEO_LISTEN="0.0.0.0:${DAEMON_PORT}"
+ export PASEO_CORS_ORIGINS="${CORS_ORIGINS}"
+ 

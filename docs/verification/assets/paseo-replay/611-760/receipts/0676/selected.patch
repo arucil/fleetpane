@@ -1,0 +1,31 @@
+FILE packages/app/src/components/sliding-sidebar.tsx
+RANGE {"path":"packages/app/src/components/sliding-sidebar.tsx","old_lines":[25,28],"new_lines":[26,53],"diff_block_lines":[11,39],"hunk_header":"@@ -25,4 +26,28 @@ interface SlidingSidebarProps {","substantive_changed_lines":16,"comparison":"parent"}
+@@ -25,4 +26,28 @@ interface SlidingSidebarProps {
+ }
+ 
++function buildCreateAgentRouteFromSelectedAgentKey(selectedAgentKey?: string) {
++  if (!selectedAgentKey) {
++    return { pathname: "/" as const, params: {} as Record<string, string> };
++  }
++
++  const [serverId, agentId] = selectedAgentKey.split(":", 2);
++  if (!serverId || !agentId) {
++    return { pathname: "/" as const, params: {} as Record<string, string> };
++  }
++
++  const state = useSessionStore.getState();
++  const agent = state.sessions[serverId]?.agents.get(agentId);
++  if (!agent) {
++    return { pathname: "/" as const, params: {} as Record<string, string> };
++  }
++
++  const params: Record<string, string> = { serverId: agent.serverId };
++  if (agent.provider) params.provider = agent.provider;
++  if (agent.currentModeId) params.modeId = agent.currentModeId;
++  if (agent.model) params.model = agent.model;
++  if (agent.cwd) params.workingDir = agent.cwd;
++  return { pathname: "/" as const, params };
++}
++
+ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {
+   const { theme } = useUnistyles();

@@ -1,0 +1,38 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[926,927],"new_lines":[942,977],"diff_block_lines":[32,67],"hunk_header":"@@ -926,4 +942,236 @@ export class DaemonClientV2 {","substantive_changed_lines":27,"comparison":"parent"}
+   // ============================================================================
+ 
++  async getCheckoutStatus(
++    agentId: string,
++    requestId?: string
++  ): Promise<CheckoutStatusPayload> {
++    const resolvedRequestId = this.createRequestId(requestId);
++    const message = SessionInboundMessageSchema.parse({
++      type: "checkout_status_request",
++      agentId,
++      requestId: resolvedRequestId,
++    });
++    const response = this.waitFor(
++      (msg) => {
++        if (msg.type !== "checkout_status_response") {
++          return null;
++        }
++        if (msg.payload.requestId !== resolvedRequestId) {
++          return null;
++        }
++        return msg.payload;
++      },
++      20000,
++      { skipQueue: true }
++    );
++    this.sendSessionMessage(message);
++    return response;
++  }
++
++  async getCheckoutDiff(
++    agentId: string,
++    compare: { mode: "uncommitted" | "base"; baseRef?: string },
++    requestId?: string
++  ): Promise<CheckoutDiffPayload> {
++    const resolvedRequestId = this.createRequestId(requestId);
++    const message = SessionInboundMessageSchema.parse({

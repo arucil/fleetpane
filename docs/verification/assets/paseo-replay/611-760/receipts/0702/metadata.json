@@ -1,0 +1,50 @@
+{
+  "ordinal": 702,
+  "revision": "3ff6d6c712ececbe627a327fde363330166d52d9",
+  "date": "2026-01-23T13:51:30+07:00",
+  "committer_date": "2026-01-23T13:51:30+07:00",
+  "parents": [
+    "8154a05fa5117fbb656071720c6d0f56fc21099b"
+  ],
+  "subject": "Inject Paseo prompt instructions via first user message",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/agent/paseo-instructions-tag.test.ts",
+    "A\tpackages/server/src/server/agent/paseo-instructions-tag.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-mcp-agent.paseo-instructions.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "A\tpackages/server/src/server/messages.test.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:44cdaa8b33c88a9ba8d8e9878f8d9d635d31340dc84f41e44e0b58db79be53e0",
+  "diff_tree_digest": "sha256:b5e58046d069f3eee4652c79894fc9cd859f9178e520583785ae94e7285f9626",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/paseo-instructions-tag.ts",
+      "old_lines": null,
+      "new_lines": [
+        1,
+        36
+      ],
+      "diff_block_lines": [
+        7,
+        42
+      ],
+      "hunk_header": "@@ -0,0 +1,48 @@",
+      "substantive_changed_lines": 19,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 212,
+  "receipt_file": "receipts/0702/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,54 @@
+FILE packages/app/src/components/agent-details-sheet.tsx
+RANGE {"path":"packages/app/src/components/agent-details-sheet.tsx","old_lines":null,"new_lines":[14,65],"diff_block_lines":[20,71],"hunk_header":"@@ -0,0 +1,187 @@","substantive_changed_lines":38,"comparison":"parent"}
++  persistenceSessionId: string | null;
++};
++
++export function AgentDetailsSheet({
++  visible,
++  onClose,
++  agentId,
++  persistenceSessionId,
++}: AgentDetailsSheetProps) {
++  const toast = useToast();
++
++  const details = useMemo(
++    () => [
++      {
++        label: "Agent ID",
++        value: agentId,
++        testID: "agent-details-agent-id",
++        copyLabel: "agent id",
++      },
++      {
++        label: "Persistence session ID",
++        value: persistenceSessionId,
++        testID: "agent-details-persistence-session-id",
++        copyLabel: "session id",
++      },
++    ],
++    [agentId, persistenceSessionId]
++  );
++
++  const handleCopy = useCallback(
++    async (value: string | null, label: string) => {
++      if (!value) return;
++      try {
++        await Clipboard.setStringAsync(value);
++        toast.copied(label);
++      } catch {
++        toast.error("Copy failed");
++      }
++    },
++    [toast]
++  );
++
++  return (
++    <AdaptiveModalSheet
++      title="Agent Details"
++      visible={visible}
++      onClose={onClose}
++      testID="agent-details-sheet"
++      snapPoints={["45%", "70%"]}
++    >
++      {details.map((row) => (
++        <DetailRow

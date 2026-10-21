@@ -1,0 +1,54 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[890,909],"new_lines":[1004,1041],"diff_block_lines":[401,452],"hunk_header":"@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([","substantive_changed_lines":34,"comparison":"parent"}
++  const incomingKind = getEventItemKind(event);
+ 
+-    const reduced = reduceStreamUpdate(nextStream, event, timestamp);
+-    if (reduced !== nextStream) {
+-      nextStream = reduced;
+-      changedStream = true;
+-    }
+-    return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
++  // Check if we need to flush head before processing this event
++  if (shouldFlushHead(nextHead, incomingKind)) {
++    flushHead();
+   }
+ 
+-  if (STREAM_COMPLETION_EVENTS.has(event.type)) {
+-    commitBuffer();
+-    return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
++  // For streamable kinds, apply to head
++  if (incomingKind !== null && isStreamableKind(incomingKind)) {
++    const reduced = reduceStreamUpdate(nextHead, event, timestamp);
++    if (reduced !== nextHead) {
++      nextHead = reduced;
++      changedHead = true;
++    }
++    return { tail: nextTail, head: nextHead, changedTail, changedHead };
+   }
+ 
+-  const reduced = reduceStreamUpdate(nextStream, event, timestamp);
+-  if (reduced !== nextStream) {
+-    nextStream = reduced;
+-    changedStream = true;
++  // For non-streamable kinds or non-timeline events, apply to tail
++  const reduced = reduceStreamUpdate(nextTail, event, timestamp);
++  if (reduced !== nextTail) {
++    nextTail = reduced;
++    changedTail = true;
+   }
+-  return { stream: nextStream, buffer: nextBuffer, changedStream, changedBuffer };
++
++  return { tail: nextTail, head: nextHead, changedTail, changedHead };
++}
++
++// Legacy export for backwards compatibility during migration
++// TODO: Remove after all consumers are updated
++export type StreamingBufferEntry = {
++  id: string;
++  text: string;
++  timestamp: Date;
++};
++
++export function applyStreamEventWithBuffer(params: {
++  state: StreamItem[];
++  buffer: StreamingBufferEntry | null;

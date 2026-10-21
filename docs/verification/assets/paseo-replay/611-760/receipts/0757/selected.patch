@@ -1,0 +1,33 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[847,851],"new_lines":[847,851],"diff_block_lines":[5,11],"hunk_header":"@@ -847,5 +847,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -847,5 +847,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+                 >
+                   {commitMutation.isPending ? (
+-                    <ActivityIndicator size="small" color={theme.colors.foreground} />
++                    <ActivityIndicator size="small" color={theme.colors.foreground} style={styles.shipPrimarySpinner} />
+                   ) : (
+                     <Text style={styles.shipPrimaryText}>Commit</Text>
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[942,946],"new_lines":[942,946],"diff_block_lines":[12,18],"hunk_header":"@@ -942,5 +942,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -942,5 +942,5 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {
+                 >
+                   {shipPrimaryPending ? (
+-                    <ActivityIndicator size="small" color={theme.colors.foreground} />
++                    <ActivityIndicator size="small" color={theme.colors.foreground} style={styles.shipPrimarySpinner} />
+                   ) : (
+                     <Text style={styles.shipPrimaryText}>
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1152,1158],"new_lines":[1152,1163],"diff_block_lines":[19,31],"hunk_header":"@@ -1152,7 +1152,12 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":4,"comparison":"parent"}
+@@ -1152,7 +1152,12 @@ const styles = StyleSheet.create((theme) => ({
+   shipPrimaryText: {
+     fontSize: theme.fontSize.xs,
++    lineHeight: theme.fontSize.xs * 1.5,
+     color: theme.colors.foreground,
+     fontWeight: theme.fontWeight.medium,
+   },
++  shipPrimarySpinner: {
++    height: theme.fontSize.xs * 1.5,
++    width: theme.fontSize.xs * 1.5,
++  },
+   shipCaretButton: {
+     width: 36,

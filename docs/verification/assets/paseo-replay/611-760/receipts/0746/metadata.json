@@ -1,0 +1,88 @@
+{
+  "ordinal": 746,
+  "revision": "9d0dd8b19e7241a2c239df056d7f4a5b98ea5d59",
+  "date": "2026-01-25T08:42:00+07:00",
+  "committer_date": "2026-01-25T08:42:00+07:00",
+  "parents": [
+    "d4011408f73dae1fea3ef38470a2829ecdc4172c"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "A\tpackages/app/src/utils/agent-grouping.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:b04cf8efcdc85c207fbea8d52f106930f83ddb2612236855e87bdbc0f23395b9",
+  "diff_tree_digest": "sha256:cbc72dcb893bc238eac1886c066398a7f7673c2fc4e89a6b03b750dbe94072f5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/grouped-agent-list.tsx",
+      "old_lines": null,
+      "new_lines": [
+        1,
+        36
+      ],
+      "diff_block_lines": [
+        7,
+        42
+      ],
+      "hunk_header": "@@ -0,0 +1,625 @@",
+      "substantive_changed_lines": 0,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 0,
+  "available_substantive_changed_lines": 708,
+  "receipt_file": "receipts/0746/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0746/followup-01.patch",
+      "source_receipt_digest": "sha256:40066cdae14ded6f6e97062ad54da0d1969d80033efe47be5ed418cec268ec10",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": null,
+          "new_lines": [
+            147,
+            198
+          ],
+          "diff_block_lines": [
+            153,
+            204
+          ],
+          "hunk_header": "@@ -0,0 +1,215 @@",
+          "substantive_changed_lines": 35,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0746/followup-02.patch",
+      "source_receipt_digest": "sha256:163a9d547a455cdbef3888b92802547cf1a9a781fbefa0e26937bbc78869a510",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/grouped-agent-list.tsx",
+          "old_lines": null,
+          "new_lines": [
+            416,
+            467
+          ],
+          "diff_block_lines": [
+            422,
+            473
+          ],
+          "hunk_header": "@@ -0,0 +1,625 @@",
+          "substantive_changed_lines": 49,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

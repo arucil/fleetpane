@@ -1,0 +1,36 @@
+FILE packages/app/src/components/sliding-sidebar.tsx
+RANGE {"path":"packages/app/src/components/sliding-sidebar.tsx","old_lines":[280,294],"new_lines":[279,306],"diff_block_lines":[64,97],"hunk_header":"@@ -280,15 +279,28 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {","substantive_changed_lines":21,"comparison":"parent"}
+@@ -280,15 +279,28 @@ export function SlidingSidebar({ selectedAgentId }: SlidingSidebarProps) {
+         onRefresh={handleRefresh}
+         selectedAgentId={selectedAgentId}
+-        listFooterComponent={viewMoreButton}
+       />
+ 
+-      {/* Footer: Settings button */}
++      {/* Footer */}
+       <View style={styles.sidebarFooter}>
+         <Pressable
+-          style={styles.settingsButton}
++          style={styles.footerButton}
++          onPress={handleViewMore}
++        >
++          {({ hovered }) => (
++            <>
++              <Users size={18} color={hovered ? theme.colors.foreground : theme.colors.foregroundMuted} />
++              <Text style={[styles.footerButtonText, hovered && styles.footerButtonTextHovered]}>
++                All agents
++              </Text>
++            </>
++          )}
++        </Pressable>
++        <Pressable
++          style={styles.footerIconButton}
+           onPress={handleSettingsDesktop}
+         >
+-          <Settings size={20} color={theme.colors.foregroundMuted} />
+-          <Text style={styles.settingsButtonText}>Settings</Text>
++          {({ hovered }) => (
++            <Settings size={20} color={hovered ? theme.colors.foreground : theme.colors.foregroundMuted} />
++          )}
+         </Pressable>
+       </View>

@@ -1,0 +1,54 @@
+FILE packages/app/src/utils/os-notifications.ts
+RANGE {"path":"packages/app/src/utils/os-notifications.ts","old_lines":null,"new_lines":[1,52],"diff_block_lines":[7,58],"hunk_header":"@@ -0,0 +1,128 @@","substantive_changed_lines":34,"comparison":"parent"}
++import { Platform } from "react-native";
++import * as Notifications from "expo-notifications";
++
++type OsNotificationPayload = {
++  title: string;
++  body?: string;
++  data?: Record<string, unknown>;
++};
++
++let isNativeConfigured = false;
++let permissionState: "unknown" | "granted" | "denied" = "unknown";
++let permissionRequest: Promise<boolean> | null = null;
++
++function getWebNotificationConstructor(): {
++  permission: string;
++  requestPermission?: () => Promise<string>;
++  new (title: string, options?: { body?: string; data?: Record<string, unknown> }): unknown;
++} | null {
++  const NotificationConstructor = (globalThis as { Notification?: any }).Notification;
++  return NotificationConstructor ?? null;
++}
++
++async function configureNativeNotifications(): Promise<void> {
++  if (isNativeConfigured || Platform.OS === "web") {
++    return;
++  }
++  isNativeConfigured = true;
++
++  Notifications.setNotificationHandler({
++    handleNotification: async () => ({
++      shouldShowAlert: true,
++      shouldPlaySound: false,
++      shouldSetBadge: false,
++    }),
++  });
++}
++
++async function ensureNotificationPermission(): Promise<boolean> {
++  if (Platform.OS === "web") {
++    const NotificationConstructor = getWebNotificationConstructor();
++    if (!NotificationConstructor) {
++      return false;
++    }
++    if (NotificationConstructor.permission === "granted") {
++      return true;
++    }
++    if (NotificationConstructor.permission === "denied") {
++      return false;
++    }
++    if (permissionRequest) {
++      return permissionRequest;
++    }

@@ -1,0 +1,38 @@
+FILE packages/app/src/app/pair-scan.tsx
+RANGE {"path":"packages/app/src/app/pair-scan.tsx","old_lines":null,"new_lines":[7,42],"diff_block_lines":[13,48],"hunk_header":"@@ -0,0 +1,250 @@","substantive_changed_lines":28,"comparison":"parent"}
++import { useDaemonRegistry } from "@/contexts/daemon-registry-context";
++
++const styles = StyleSheet.create((theme) => ({
++  container: {
++    flex: 1,
++    backgroundColor: theme.colors.surface0,
++  },
++  header: {
++    paddingHorizontal: theme.spacing[6],
++    paddingTop: theme.spacing[6],
++    paddingBottom: theme.spacing[4],
++    flexDirection: "row",
++    justifyContent: "space-between",
++    alignItems: "center",
++  },
++  headerTitle: {
++    color: theme.colors.foreground,
++    fontSize: theme.fontSize.lg,
++    fontWeight: theme.fontWeight.semibold,
++  },
++  headerButtonText: {
++    color: theme.colors.palette.blue[400],
++    fontSize: theme.fontSize.base,
++    fontWeight: theme.fontWeight.medium,
++  },
++  body: {
++    flex: 1,
++    paddingHorizontal: theme.spacing[6],
++    paddingBottom: theme.spacing[6],
++  },
++  cameraWrap: {
++    flex: 1,
++    overflow: "hidden",
++    borderRadius: theme.borderRadius.xl,
++    backgroundColor: theme.colors.surface2,
++  },

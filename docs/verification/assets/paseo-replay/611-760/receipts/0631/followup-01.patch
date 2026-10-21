@@ -1,0 +1,34 @@
+FILE packages/server/src/server/agent/providers/codex-mcp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-mcp-agent.ts","old_lines":[3163,3175],"new_lines":[3146,3172],"diff_block_lines":[35,66],"hunk_header":"@@ -3163,13 +3146,27 @@ class CodexMcpAgentSession implements AgentSession {","substantive_changed_lines":20,"comparison":"parent"}
+@@ -3163,13 +3146,27 @@ class CodexMcpAgentSession implements AgentSession {
+             ? "cancel"
+             : "decline";
+-      content =
++      const content =
+         response.behavior === "allow" && response.updatedInput
+           ? response.updatedInput
+           : undefined;
++      const responsePayload: ElicitResult = {
++        action,
++        ...(content ? { content } : {}),
++      };
++      pending.resolve(responsePayload);
++      return;
+     }
+ 
+-    const responsePayload: ElicitResult = {
+-      action,
+-      ...(content ? { content } : {}),
++    // Default: Codex exec-approval format
++    const decision: CodexExecApprovalDecision =
++      response.behavior === "allow"
++        ? "approved"
++        : response.interrupt
++          ? "abort"
++          : "denied";
++    const reason = response.behavior === "deny" ? response.message : undefined;
++    const responsePayload: CodexExecApprovalResponse = {
++      decision,
++      ...(reason ? { reason } : {}),
+     };
+     pending.resolve(responsePayload);

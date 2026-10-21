@@ -1,0 +1,194 @@
+{
+  "ordinal": 760,
+  "revision": "96b211a2cf70742e48308ccf407f27eb1614a000",
+  "date": "2026-01-28T13:25:48+07:00",
+  "committer_date": "2026-01-28T13:25:48+07:00",
+  "parents": [
+    "c615d422caec0f11f3606e968ad7b8081a01bf20"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/hooks/checkout-status-revalidation.ts",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.test.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:6c1cb5e238f5247706863878c0b0803099e25565c5d7ebc3483f086295476439",
+  "diff_tree_digest": "sha256:c2d99ee019fb6e4a292dbf19441a79854f61e734691749b002b5d21e48a9e53b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3262,
+        3293
+      ],
+      "new_lines": [
+        3179,
+        3189
+      ],
+      "diff_block_lines": [
+        399,
+        434
+      ],
+      "hunk_header": "@@ -3262,37 +3179,17 @@ export class Session {",
+      "substantive_changed_lines": 22,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 482,
+  "receipt_file": "receipts/0760/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0760/followup-01.patch",
+      "source_receipt_digest": "sha256:fb688a977693d3bfae2a8efbe2eb06b5e38a72a3f000efe99ee3b5ed1d708b69",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            477,
+            483
+          ],
+          "new_lines": [
+            477,
+            481
+          ],
+          "diff_block_lines": [
+            5,
+            13
+          ],
+          "hunk_header": "@@ -477,7 +477,5 @@ const CheckoutDiffCompareSchema = z.object({",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            485,
+            489
+          ],
+          "new_lines": [
+            483,
+            487
+          ],
+          "diff_block_lines": [
+            14,
+            20
+          ],
+          "hunk_header": "@@ -485,5 +483,5 @@ export const CheckoutStatusRequestSchema = z.object({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            492,
+            496
+          ],
+          "new_lines": [
+            490,
+            494
+          ],
+          "diff_block_lines": [
+            21,
+            27
+          ],
+          "hunk_header": "@@ -492,5 +490,5 @@ export const CheckoutDiffRequestSchema = z.object({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            500,
+            504
+          ],
+          "new_lines": [
+            498,
+            502
+          ],
+          "diff_block_lines": [
+            28,
+            34
+          ],
+          "hunk_header": "@@ -500,5 +498,5 @@ export const CheckoutCommitRequestSchema = z.object({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            509,
+            513
+          ],
+          "new_lines": [
+            507,
+            511
+          ],
+          "diff_block_lines": [
+            35,
+            41
+          ],
+          "hunk_header": "@@ -509,5 +507,5 @@ export const CheckoutMergeRequestSchema = z.object({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/shared/messages.ts",
+          "old_lines": [
+            517,
+            521
+          ],
+          "new_lines": [
+            515,
+            519
+          ],
+          "diff_block_lines": [
+            42,
+            48
+          ],
+          "hunk_header": "@@ -517,5 +515,5 @@ export const CheckoutMergeFromBaseRequestSchema = z.object({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0760/followup-02.patch",
+      "source_receipt_digest": "sha256:935d3cb8b40a412471cd38a01773e55bfd50eddd674b82b393f02b13e04ca06c",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/client/daemon-client-v2.ts",
+          "old_lines": [
+            1131,
+            1142
+          ],
+          "new_lines": [
+            1131,
+            1141
+          ],
+          "diff_block_lines": [
+            5,
+            20
+          ],
+          "hunk_header": "@@ -1131,12 +1131,11 @@ export class DaemonClientV2 {",
+          "substantive_changed_lines": 7,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

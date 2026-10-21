@@ -1,0 +1,43 @@
+{
+  "ordinal": 668,
+  "revision": "8979f5ce6441a2958719b76de185313d272074c9",
+  "date": "2026-01-17T16:18:22+07:00",
+  "committer_date": "2026-01-17T16:18:22+07:00",
+  "parents": [
+    "fa8dc1a20a0726b64db9ad51f2fc449d18f3a6ed"
+  ],
+  "subject": "chore: upgrade claude-agent-sdk to 0.2.11 and improve task judge feedback",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/server/src/server/logger.ts",
+    "M\tpackages/server/src/tasks/cli.ts"
+  ],
+  "source_receipt_digest": "sha256:e763551675d036f20b1d6b6bd945690fe9af6ff8e4de4f2ffccb966bd4c859f3",
+  "diff_tree_digest": "sha256:90fb7ed8ffdda7c8b6286a5e5868ded15d71302ef60c914e0cc2af84682d14f9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/tasks/cli.ts",
+      "old_lines": [
+        972,
+        978
+      ],
+      "new_lines": [
+        972,
+        997
+      ],
+      "diff_block_lines": [
+        5,
+        32
+      ],
+      "hunk_header": "@@ -972,7 +972,26 @@ The ONLY question: Does the acceptance criterion pass when verified? Yes or No.",
+      "substantive_changed_lines": 14,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 136,
+  "receipt_file": "receipts/0668/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,60 @@
+{
+  "ordinal": 667,
+  "revision": "fa8dc1a20a0726b64db9ad51f2fc449d18f3a6ed",
+  "date": "2026-01-17T15:56:52+07:00",
+  "committer_date": "2026-01-17T16:11:12+07:00",
+  "parents": [
+    "1c011480407fdc925d39fea2c34b10e01a847ef7"
+  ],
+  "subject": "fix(server): OpenCode test auth with fail-fast and fix typecheck",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/services/agent-title-generator.ts"
+  ],
+  "source_receipt_digest": "sha256:c54a8a0d0a5893745175d480495764421613bd9b9456d4ff134834874bbd3f63",
+  "diff_tree_digest": "sha256:354283c6c4b4e8895e1b554bfc739118861809d4ca69b0a7145b1d2d3469231d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        203,
+        210
+      ],
+      "new_lines": [
+        203,
+        216
+      ],
+      "diff_block_lines": [
+        5,
+        21
+      ],
+      "hunk_header": "@@ -203,8 +203,14 @@ export class OpenCodeAgentClient implements AgentClient {",
+      "substantive_changed_lines": 7,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/src/services/agent-title-generator.ts",
+      "old_lines": [
+        42,
+        51
+      ],
+      "new_lines": [
+        42,
+        51
+      ],
+      "diff_block_lines": [
+        5,
+        21
+      ],
+      "hunk_header": "@@ -42,10 +42,10 @@ export async function generateAgentTitle(",
+      "substantive_changed_lines": 9,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 73,
+  "receipt_file": "receipts/0667/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

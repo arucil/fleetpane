@@ -1,0 +1,37 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[196,199],"new_lines":[203,236],"diff_block_lines":[60,94],"hunk_header":"@@ -196,4 +203,34 @@ function getPaseoWorktreesRoot(repoRoot: string): string {","substantive_changed_lines":22,"comparison":"parent"}
+@@ -196,4 +203,34 @@ function getPaseoWorktreesRoot(repoRoot: string): string {
+ }
+ 
++export async function isPaseoOwnedWorktreeCwd(
++  cwd: string
++): Promise<PaseoWorktreeOwnership> {
++  const repoInfo = await detectRepoInfo(cwd);
++  const worktreesRoot = getPaseoWorktreesRoot(repoInfo.path);
++  const resolvedRoot = resolve(worktreesRoot) + sep;
++  const resolvedCwd = resolve(cwd);
++
++  if (!resolvedCwd.startsWith(resolvedRoot)) {
++    return {
++      allowed: false,
++      repoRoot: repoInfo.path,
++      worktreeRoot: worktreesRoot,
++      worktreePath: resolvedCwd,
++    };
++  }
++
++  const worktrees = await listPaseoWorktrees({ cwd: repoInfo.path });
++  const allowed = worktrees.some((entry) => {
++    const worktreePath = resolve(entry.path);
++    return resolvedCwd === worktreePath || resolvedCwd.startsWith(worktreePath + sep);
++  });
++  return {
++    allowed,
++    repoRoot: repoInfo.path,
++    worktreeRoot: worktreesRoot,
++    worktreePath: resolvedCwd,
++  };
++}
++
+ function ensurePaseoIgnoredForRepo(repoInfo: RepoInfo): {
+   updated: boolean;

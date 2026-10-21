@@ -1,0 +1,54 @@
+FILE packages/app/src/hooks/use-favicon-status.ts
+RANGE {"path":"packages/app/src/hooks/use-favicon-status.ts","old_lines":null,"new_lines":[41,92],"diff_block_lines":[47,98],"hunk_header":"@@ -0,0 +1,98 @@","substantive_changed_lines":32,"comparison":"parent"}
++  }
++  const suffix = status === "none" ? "" : `-${status}`;
++  return `/assets/images/favicon-${colorScheme}${suffix}.png`;
++}
++
++function getOrCreateFaviconLink(): HTMLLinkElement | null {
++  if (typeof document === "undefined") return null;
++
++  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
++  if (!link) {
++    link = document.createElement("link");
++    link.rel = "icon";
++    link.type = "image/png";
++    document.head.appendChild(link);
++  }
++  return link;
++}
++
++function updateFavicon(status: FaviconStatus, colorScheme: ColorScheme) {
++  const link = getOrCreateFaviconLink();
++  if (!link) return;
++
++  const newHref = getFaviconUri(status, colorScheme);
++  if (link.href !== newHref) {
++    link.href = newHref;
++  }
++}
++
++function getSystemColorScheme(): ColorScheme {
++  if (typeof window === "undefined") return "dark";
++  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
++}
++
++export function useFaviconStatus() {
++  const { agents } = useAggregatedAgents();
++  const [colorScheme, setColorScheme] = useState<ColorScheme>(getSystemColorScheme);
++
++  // Listen for system color scheme changes
++  useEffect(() => {
++    if (Platform.OS !== "web" || typeof window === "undefined") return;
++
++    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
++    const handler = (e: MediaQueryListEvent) => {
++      setColorScheme(e.matches ? "dark" : "light");
++    };
++
++    mediaQuery.addEventListener("change", handler);
++    return () => mediaQuery.removeEventListener("change", handler);
++  }, []);
++
++  // Update favicon when agents or color scheme changes
++  useEffect(() => {

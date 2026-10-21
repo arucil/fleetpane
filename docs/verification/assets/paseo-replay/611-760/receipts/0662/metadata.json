@@ -1,0 +1,77 @@
+{
+  "ordinal": 662,
+  "revision": "45096acdcbb63b72ea4b30d92c5c06b50adafbfd",
+  "date": "2026-01-17T13:09:42+07:00",
+  "committer_date": "2026-01-17T13:09:42+07:00",
+  "parents": [
+    "1c9d9367c194e35b1196d01b55db9874b303c76f"
+  ],
+  "subject": "fix(server): increase hookTimeout and fix ClaudeAgentClient constructor",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:95066aa34deb952310af119e5efe15261b35552a157d1d8d4fc6ed8da31c68a5",
+  "diff_tree_digest": "sha256:4a0da7e52f06f074e3264a9cd6a7cf92bbbf4b63b9dfb51bb73624578c1b966b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+      "old_lines": [
+        29,
+        33
+      ],
+      "new_lines": [
+        30,
+        34
+      ],
+      "diff_block_lines": [
+        11,
+        17
+      ],
+      "hunk_header": "@@ -29,5 +30,5 @@ describe(\"ClaudeAgentSession Commands\", () => {",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        10,
+        14
+      ],
+      "new_lines": [
+        10,
+        14
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -10,5 +10,5 @@ export default defineConfig({",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        21,
+        25
+      ],
+      "new_lines": [
+        21,
+        25
+      ],
+      "diff_block_lines": [
+        12,
+        18
+      ],
+      "hunk_header": "@@ -21,5 +21,5 @@ export default defineConfig({",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/0662/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

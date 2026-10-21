@@ -1,0 +1,43 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[447,461],"new_lines":[445,474],"diff_block_lines":[17,57],"hunk_header":"@@ -447,15 +445,30 @@ export default function HomeScreen() {","substantive_changed_lines":26,"comparison":"parent"}
+@@ -447,15 +445,30 @@ export default function HomeScreen() {
+ 
+       void persistFormPreferences();
+-
+-      const requestId = generateMessageId();
+-      pendingRequestIdRef.current = requestId;
+       setIsLoading(true);
+-      createAgent({
+-        config,
+-        initialPrompt: trimmedPrompt,
+-        images,
+-        git: gitOptions,
+-        requestId,
+-      });
++
++      try {
++        const result = await createAgent({
++          config,
++          initialPrompt: trimmedPrompt,
++          images,
++          git: gitOptions,
++        });
++
++        // Success - clear prompt and navigate to agent
++        setPromptText("");
++        const agentId = (result as { id?: string })?.id;
++        if (agentId && selectedServerId) {
++          router.replace({
++            pathname: "/agent/[serverId]/[agentId]",
++            params: { serverId: selectedServerId, agentId },
++          });
++        }
++      } catch (error) {
++        const message = error instanceof Error ? error.message : "Failed to create agent";
++        setErrorMessage(message);
++        throw error; // Re-throw so AgentInputArea knows it failed
++      } finally {
++        setIsLoading(false);
++      }
+     },
+     [

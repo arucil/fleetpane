@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 703,
+  "revision": "2b27b7146702e0eb23af648f8af5f2a96ce4d331",
+  "date": "2026-01-23T13:53:52+07:00",
+  "committer_date": "2026-01-23T13:53:52+07:00",
+  "parents": [
+    "3ff6d6c712ececbe627a327fde363330166d52d9",
+    "f0cafb4607b727a449111f99b658de8b77304167"
+  ],
+  "subject": "Merge main",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "D\tpackages/app/src/hooks/use-highlighted-diff-query.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:a7d67b6bdf40e89c602fea8e62edeea7a4354095e73df33922f32fc4d1e6407d",
+  "diff_tree_digest": "sha256:fa0fca1231224242a7182357063387b45c6b026c36107df122f326b5be29eeec",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1593,
+        1599
+      ],
+      "new_lines": [
+        1607,
+        1640
+      ],
+      "diff_block_lines": [
+        73,
+        108
+      ],
+      "hunk_header": "@@ -1593,9 +1607,96 @@ export class Session {",
+      "substantive_changed_lines": 26,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 622,
+  "receipt_file": "receipts/0703/selected.patch",
+  "supplementary_receipts": []
+}

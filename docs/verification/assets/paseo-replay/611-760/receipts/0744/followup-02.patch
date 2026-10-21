@@ -1,0 +1,54 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[515,516],"new_lines":[515,566],"diff_block_lines":[6,57],"hunk_header":"@@ -515,4 +515,55 @@ export async function listPaseoWorktrees({","substantive_changed_lines":35,"comparison":"parent"}
+ }
+ 
++export async function resolvePaseoWorktreeRootForCwd(
++  cwd: string,
++  options?: { paseoHome?: string }
++): Promise<{ repoRoot: string; worktreeRoot: string; worktreePath: string } | null> {
++  let repoInfo: RepoInfo;
++  try {
++    repoInfo = await detectRepoInfo(cwd);
++  } catch {
++    return null;
++  }
++
++  const worktreesRoot = await getPaseoWorktreesRoot(repoInfo.path, options?.paseoHome);
++  const resolvedRoot = normalizePathForOwnership(worktreesRoot) + sep;
++
++  let worktreeRoot: string | null = null;
++  try {
++    const { stdout } = await execAsync(
++      "git rev-parse --path-format=absolute --show-toplevel",
++      { cwd, env: READ_ONLY_GIT_ENV }
++    );
++    const trimmed = stdout.trim();
++    worktreeRoot = trimmed.length > 0 ? trimmed : null;
++  } catch {
++    worktreeRoot = null;
++  }
++
++  if (!worktreeRoot) {
++    return null;
++  }
++
++  const resolvedWorktreeRoot = normalizePathForOwnership(worktreeRoot);
++  if (!resolvedWorktreeRoot.startsWith(resolvedRoot)) {
++    return null;
++  }
++
++  const knownWorktrees = await listPaseoWorktrees({
++    cwd: repoInfo.path,
++    paseoHome: options?.paseoHome,
++  });
++  const match = knownWorktrees.find((entry) => entry.path === resolvedWorktreeRoot);
++  if (!match) {
++    return null;
++  }
++
++  return {
++    repoRoot: repoInfo.path,
++    worktreeRoot: worktreesRoot,
++    worktreePath: match.path,
++  };
++}

@@ -1,0 +1,17 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[346,349],"new_lines":[347,351],"diff_block_lines":[11,16],"hunk_header":"@@ -346,4 +347,5 @@ interface GitDiffPaneProps {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -346,4 +347,5 @@ interface GitDiffPaneProps {
+ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {
+   const { theme } = useUnistyles();
++  const router = useRouter();
+   const queryClient = useQueryClient();
+   const client = useSessionStore(
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[556,559],"new_lines":[558,563],"diff_block_lines":[17,23],"hunk_header":"@@ -556,4 +558,6 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -556,4 +558,6 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {
+           Array.isArray(query.queryKey) && query.queryKey[0] === "paseoWorktreeList",
+       });
++      // Archiving a worktree also archives all its agents, so navigate to new agent screen
++      router.replace("/");
+     },
+     onError: (err) => {

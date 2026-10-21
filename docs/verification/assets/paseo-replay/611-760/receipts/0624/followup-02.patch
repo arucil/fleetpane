@@ -1,0 +1,54 @@
+FILE packages/app/src/types/stream.ts
+RANGE {"path":"packages/app/src/types/stream.ts","old_lines":[833,845],"new_lines":[931,971],"diff_block_lines":[280,331],"hunk_header":"@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([","substantive_changed_lines":26,"comparison":"parent"}
++    return false;
++  }
++
++  const lastHeadItem = head[head.length - 1];
++
++  // If incoming is not streamable, flush current head
++  if (!isStreamableKind(incomingKind)) {
++    return true;
++  }
++
++  // If incoming kind is different from current head kind, flush
++  if (lastHeadItem.kind !== incomingKind) {
++    return true;
++  }
++
++  return false;
++}
++
++export interface ApplyStreamEventResult {
++  tail: StreamItem[];
++  head: StreamItem[];
++  changedTail: boolean;
++  changedHead: boolean;
++}
++
++/**
++ * Apply a stream event using head/tail model.
++ *
++ * - Tail: committed history (rarely changes during streaming)
++ * - Head: active streaming items (frequently updated)
++ *
++ * Both use the same reduceStreamUpdate function. The difference is:
++ * - Streamable items (assistant_message, thought) go to head
++ * - Non-streamable items flush head to tail first, then go to tail
++ * - Turn completion events flush head to tail
++ */
++export function applyStreamEvent(params: {
++  tail: StreamItem[];
++  head: StreamItem[];
+   event: AgentStreamEventPayload;
+   timestamp: Date;
+-}): {
+-  stream: StreamItem[];
+-  buffer: StreamingBufferEntry | null;
+-  changedStream: boolean;
+-  changedBuffer: boolean;
+-} {
+-  const { state, buffer, event, timestamp } = params;
+-  let nextStream = state;
+-  let nextBuffer = buffer;
+-  let changedStream = false;
+-  let changedBuffer = false;

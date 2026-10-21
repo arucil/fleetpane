@@ -1,0 +1,15 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[88,91],"new_lines":[88,99],"diff_block_lines":[5,17],"hunk_header":"@@ -88,4 +88,12 @@ function summarizeToolCallDisplay(display: ToolCallDisplay): ToolCallDisplaySumm","substantive_changed_lines":6,"comparison":"parent"}
+@@ -88,4 +88,12 @@ function summarizeToolCallDisplay(display: ToolCallDisplay): ToolCallDisplaySumm
+       };
+     }
++    case "thinking": {
++      const contentLength = display.content.length;
++      return {
++        displayType: display.type,
++        totalChars: contentLength,
++        detail: { contentLength },
++      };
++    }
+     default:
+       return assertNever(display);

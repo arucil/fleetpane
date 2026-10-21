@@ -1,0 +1,65 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[370,373],"new_lines":[399,460],"diff_block_lines":[44,106],"hunk_header":"@@ -370,4 +399,62 @@ export function AgentInputArea({","substantive_changed_lines":35,"comparison":"parent"}
+@@ -370,4 +399,62 @@ export function AgentInputArea({
+   }, []);
+ 
++  // Handle command selection from autocomplete
++  const handleCommandSelect = useCallback(
++    (cmd: { name: string; description: string; argumentHint: string }) => {
++      setUserInput(`/${cmd.name} `);
++      messageInputRef.current?.focus();
++    },
++    [setUserInput]
++  );
++
++  // Handle keyboard navigation for command autocomplete
++  const handleCommandKeyPress = useCallback(
++    (event: { key: string; preventDefault: () => void }) => {
++      if (!showCommandAutocomplete || filteredCommands.length === 0) {
++        return false;
++      }
++
++      if (event.key === "ArrowUp") {
++        event.preventDefault();
++        setCommandSelectedIndex((prev) =>
++          prev > 0 ? prev - 1 : filteredCommands.length - 1
++        );
++        return true;
++      }
++
++      if (event.key === "ArrowDown") {
++        event.preventDefault();
++        setCommandSelectedIndex((prev) =>
++          prev < filteredCommands.length - 1 ? prev + 1 : 0
++        );
++        return true;
++      }
++
++      if (event.key === "Tab" || event.key === "Enter") {
++        event.preventDefault();
++        const selected = filteredCommands[commandSelectedIndex];
++        if (selected) {
++          handleCommandSelect(selected);
++        }
++        return true;
++      }
++
++      if (event.key === "Escape") {
++        event.preventDefault();
++        setUserInput("");
++        return true;
++      }
++
++      return false;
++    },
++    [
++      showCommandAutocomplete,
++      filteredCommands,
++      commandSelectedIndex,
++      handleCommandSelect,
++      setUserInput,
++    ]
++  );
++
+   const rightContent = (
+     <>

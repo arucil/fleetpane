@@ -1,0 +1,138 @@
+{
+  "ordinal": 748,
+  "revision": "aa979f523046b56f627a1282258ecb6dd3bb4fd1",
+  "date": "2026-01-25T09:41:17+07:00",
+  "committer_date": "2026-01-25T09:41:17+07:00",
+  "parents": [
+    "ccd175b4b73195391b1f4a8377a84304fa936c3e"
+  ],
+  "subject": "Add toast provider, agent details sheet, and remote-based grouping",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/agent-details-sheet.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/app/src/components/agent-details-sheet.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "A\tpackages/app/src/contexts/toast-context.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "A\tpackages/app/src/utils/agent-grouping.test.ts",
+    "M\tpackages/app/src/utils/agent-grouping.ts"
+  ],
+  "source_receipt_digest": "sha256:704abfe37b3f17a63aa6bf8094278068786952b784d7e3ee6006dd52d69c6b67",
+  "diff_tree_digest": "sha256:5b3cb9453d074b92d4446697a4717c318f1a4f61ec06a4e2471b4797d4c658f5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        339,
+        360
+      ],
+      "new_lines": [
+        340,
+        355
+      ],
+      "diff_block_lines": [
+        12,
+        47
+      ],
+      "hunk_header": "@@ -339,24 +340,26 @@ export default function RootLayout() {",
+      "substantive_changed_lines": 32,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 32,
+  "available_substantive_changed_lines": 521,
+  "receipt_file": "receipts/0748/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0748/followup-01.patch",
+      "source_receipt_digest": "sha256:306e767c60e81e48a70ab4fcfb49726c136981bc9f81d13a3bef767cc6ffc118",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": [
+            16,
+            17
+          ],
+          "new_lines": [
+            16,
+            67
+          ],
+          "diff_block_lines": [
+            6,
+            57
+          ],
+          "hunk_header": "@@ -16,4 +16,69 @@ export function deriveProjectKey(cwd: string): string {",
+          "substantive_changed_lines": 23,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0748/followup-02.patch",
+      "source_receipt_digest": "sha256:142c91ee5a7dd0b33f2c9255f2d5c8116fffff2de809d563055d35df3e9cee0c",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-details-sheet.tsx",
+          "old_lines": null,
+          "new_lines": [
+            33,
+            84
+          ],
+          "diff_block_lines": [
+            39,
+            90
+          ],
+          "hunk_header": "@@ -0,0 +1,187 @@",
+          "substantive_changed_lines": 39,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0748/followup-03.patch",
+      "source_receipt_digest": "sha256:acffe4f91d73be5d6d3a53f88dc789cdedbd586d573379127caac06948bd2d42",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": [
+            18,
+            19
+          ],
+          "new_lines": [
+            65,
+            84
+          ],
+          "diff_block_lines": [
+            55,
+            74
+          ],
+          "hunk_header": "@@ -16,4 +16,69 @@ export function deriveProjectKey(cwd: string): string {",
+          "substantive_changed_lines": 6,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0748/followup-04.patch",
+      "source_receipt_digest": "sha256:98be474bfccd113314caa0d66faf0b8d993211ad7cc1cf3db9178b8da9e00738",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-details-sheet.tsx",
+          "old_lines": null,
+          "new_lines": [
+            14,
+            65
+          ],
+          "diff_block_lines": [
+            20,
+            71
+          ],
+          "hunk_header": "@@ -0,0 +1,187 @@",
+          "substantive_changed_lines": 38,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

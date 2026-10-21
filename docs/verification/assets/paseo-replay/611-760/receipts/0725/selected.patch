@@ -1,0 +1,21 @@
+FILE packages/app/src/components/tool-call-details.tsx
+RANGE {"path":"packages/app/src/components/tool-call-details.tsx","old_lines":[228,231],"new_lines":[236,253],"diff_block_lines":[18,36],"hunk_header":"@@ -228,4 +236,18 @@ export function ToolCallDetailsContent({","substantive_changed_lines":12,"comparison":"first-parent"}
+@@ -228,4 +236,18 @@ export function ToolCallDetailsContent({
+       </View>
+     );
++  } else if (display.type === "thinking") {
++    // Thinking: display the content as plain text
++    sections.push(
++      <View key="thinking" style={styles.section}>
++        <ScrollView
++          style={[styles.scrollArea, { maxHeight }]}
++          contentContainerStyle={styles.scrollContent}
++          nestedScrollEnabled
++          showsVerticalScrollIndicator={true}
++        >
++          <Text selectable style={styles.scrollText}>{display.content}</Text>
++        </ScrollView>
++      </View>
++    );
+   } else {
+     // Generic tool: show input/output as key-value pairs

@@ -1,0 +1,46 @@
+{
+  "ordinal": 728,
+  "revision": "3e2d403f1b277d14d5b9aa121cd93905fe55adb8",
+  "date": "2026-01-24T19:29:56+07:00",
+  "committer_date": "2026-01-24T19:29:56+07:00",
+  "parents": [
+    "6ecf88b502962d6283438f44c4b825316b96d613"
+  ],
+  "subject": "fix agent create: keep draft view until agent ready",
+  "diff_tree_paths": [
+    "D\tpackages/app/src/app/agent/[...route].tsx",
+    "A\tpackages/app/src/app/agent/[[...route]].tsx",
+    "D\tpackages/app/src/app/agent/index.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/home-footer.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/agent/legacy-agent-id-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:3a42ce504198a9dcf8b0bc9a7ecf3f15968d92ef0b0ad7fd5228a0cd61af25d2",
+  "diff_tree_digest": "sha256:99fe1aea000eae8fb32b0d25a7feb8b5313fbb2576ca7b6f1e794c7726c6d167",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/agent/[[...route]].tsx",
+      "old_lines": null,
+      "new_lines": [
+        8,
+        43
+      ],
+      "diff_block_lines": [
+        14,
+        49
+      ],
+      "hunk_header": "@@ -0,0 +1,109 @@",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 122,
+  "receipt_file": "receipts/0728/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

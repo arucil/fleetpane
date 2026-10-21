@@ -1,0 +1,38 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[3262,3293],"new_lines":[3179,3189],"diff_block_lines":[399,434],"hunk_header":"@@ -3262,37 +3179,17 @@ export class Session {","substantive_changed_lines":22,"comparison":"parent"}
+     msg: Extract<SessionInboundMessage, { type: "checkout_pr_create_request" }>
+   ): Promise<void> {
+-    const { agentId, requestId } = msg;
+-    const agent = this.agentManager.getAgent(agentId);
+-    if (!agent) {
+-      this.emit({
+-        type: "checkout_pr_create_response",
+-        payload: {
+-          agentId,
+-          url: null,
+-          number: null,
+-          error: { code: "UNKNOWN", message: `Agent not found: ${agentId}` },
+-          requestId,
+-        },
+-      });
+-      return;
+-    }
++    const { cwd, requestId } = msg;
+ 
+     try {
+       let title = msg.title?.trim() ?? "";
+       let body = msg.body?.trim() ?? "";
++
+       if (!title || !body) {
+-        const generated = await this.generatePullRequestText(agent, msg.baseRef);
+-        if (!title) {
+-          title = generated.title;
+-        }
+-        if (!body) {
+-          body = generated.body;
+-        }
+-      }
+-      if (!title) {
+-        throw new Error("Pull request title is required");
++        const generated = await this.generatePullRequestText(cwd, msg.baseRef);
++        if (!title) title = generated.title;

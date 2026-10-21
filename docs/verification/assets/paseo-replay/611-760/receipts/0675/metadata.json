@@ -1,0 +1,48 @@
+{
+  "ordinal": 675,
+  "revision": "facd99ab13d1d09682b0335d672a128ec6baf48e",
+  "date": "2026-01-20T13:09:22+07:00",
+  "committer_date": "2026-01-20T13:09:22+07:00",
+  "parents": [
+    "687ea706b175f4fc7011665289b4d8603580c12c"
+  ],
+  "subject": "Fix dictation lifecycle and add real STT e2e",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "A\tpackages/app/e2e/fixtures/recording.wav",
+    "A\tpackages/app/e2e/fixtures/recording.webm",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/hooks/use-audio-recorder.native.ts",
+    "M\tpackages/app/src/hooks/use-audio-recorder.web.ts",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "A\tpackages/app/src/utils/attempt-guard.ts"
+  ],
+  "source_receipt_digest": "sha256:e22089ad45a34d9ac65e92daa6bb421f6763941b10aecf76c9d370405b085156",
+  "diff_tree_digest": "sha256:36e9604d9ed6ae1e4f0f2e659f12ac61bb7d5bd41b57aba9db4e400b351b4764",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-audio-recorder.native.ts",
+      "old_lines": [
+        267,
+        291
+      ],
+      "new_lines": [
+        263,
+        278
+      ],
+      "diff_block_lines": [
+        81,
+        116
+      ],
+      "hunk_header": "@@ -266,74 +262,73 @@ export function useAudioRecorder(config?: AudioCaptureConfig) {",
+      "substantive_changed_lines": 21,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 295,
+  "receipt_file": "receipts/0675/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

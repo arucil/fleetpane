@@ -1,0 +1,40 @@
+{
+  "ordinal": 651,
+  "revision": "b6ab9f3bc11b2534ca798ae0b6e89540277a501f",
+  "date": "2026-01-14T19:44:33+07:00",
+  "committer_date": "2026-01-14T19:44:33+07:00",
+  "parents": [
+    "1cbe185ac5230c3054d67932f5bc83241ad27b84"
+  ],
+  "subject": "test: exclude more integration tests in CI",
+  "diff_tree_paths": [
+    "M\tpackages/server/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:3e740fa8ca9d44f7aed3e4a7da900d26e73fc1971e024bca91a1764fbcfae69d",
+  "diff_tree_digest": "sha256:b5a31bab677d94d624882545e957e9707a7ee723e777daee4154e10a6ddf9714",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/vitest.config.ts",
+      "old_lines": [
+        25,
+        29
+      ],
+      "new_lines": [
+        25,
+        37
+      ],
+      "diff_block_lines": [
+        5,
+        19
+      ],
+      "hunk_header": "@@ -25,5 +25,13 @@ export default defineConfig({",
+      "substantive_changed_lines": 9,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 9,
+  "receipt_file": "receipts/0651/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,46 @@
+{
+  "ordinal": 674,
+  "revision": "687ea706b175f4fc7011665289b4d8603580c12c",
+  "date": "2026-01-20T12:12:29+07:00",
+  "committer_date": "2026-01-20T12:12:29+07:00",
+  "parents": [
+    "d9c487dd540979e8fb8f49b8e105ce264a06b8e6"
+  ],
+  "subject": "test(app): add E2E tests and improve form state with test coverage",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "A\tpackages/app/e2e/dictation-web.spec.ts",
+    "A\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "A\tpackages/app/src/hooks/use-agent-form-state.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:45c01e2a1ef65b00edbd642bed5a3d3131d508837d12c288a4b25a87c761ae51",
+  "diff_tree_digest": "sha256:144d7553b97708227b026a135be9e210f21e9dca2f8dc183a5c004bc423dbacd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        194,
+        197
+      ],
+      "new_lines": [
+        194,
+        220
+      ],
+      "diff_block_lines": [
+        5,
+        32
+      ],
+      "hunk_header": "@@ -194,4 +194,27 @@ function resolveFormState(",
+      "substantive_changed_lines": 13,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 162,
+  "receipt_file": "receipts/0674/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,54 @@
+FILE packages/server/src/utils/project-icon.ts
+RANGE {"path":"packages/server/src/utils/project-icon.ts","old_lines":null,"new_lines":[241,292],"diff_block_lines":[247,298],"hunk_header":"@@ -0,0 +1,406 @@","substantive_changed_lines":29,"comparison":"parent"}
++    entries = await readdir(dir);
++  } catch {
++    return null;
++  }
++
++  for (const entry of entries) {
++    if (ignoredDirs.has(entry)) {
++      continue;
++    }
++
++    const fullPath = join(dir, entry);
++    try {
++      const stats = await stat(fullPath);
++      if (stats.isDirectory()) {
++        const result = await searchDirRecursively(
++          fullPath,
++          patterns,
++          ignoredDirs,
++          maxDepth,
++          currentDepth + 1
++        );
++        if (result) {
++          return result;
++        }
++      }
++    } catch {
++      // Directory may be inaccessible, continue
++    }
++  }
++
++  return null;
++}
++
++/**
++ * Find a project icon/favicon in the given directory.
++ * Searches priority directories first, then falls back to scanning the root.
++ *
++ * @param projectDir - The root directory of the project to search
++ * @param maxDepth - Maximum depth to search (default: 3)
++ * @returns The absolute path to the found icon, or null if not found
++ */
++export async function findProjectIcon(
++  projectDir: string,
++  maxDepth: number = 3
++): Promise<string | null> {
++  const ignoredDirsSet = new Set(IGNORED_DIRS);
++
++  // First search priority directories
++  for (const priorityDir of PRIORITY_DIRS) {
++    const priorityPath = join(projectDir, priorityDir);
++    try {
++      const stats = await stat(priorityPath);

@@ -1,0 +1,12 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[73,77],"new_lines":[73,80],"diff_block_lines":[5,14],"hunk_header":"@@ -73,5 +73,8 @@ async function collectTurnEvents(","substantive_changed_lines":3,"comparison":"parent"}
+@@ -73,5 +73,8 @@ async function collectTurnEvents(
+ }
+ 
+-describe("OpenCodeAgentClient", () => {
++// Skip integration tests in CI - requires real OpenCode server
++const shouldSkip = process.env.CI === "true";
++
++describe.skipIf(shouldSkip)("OpenCodeAgentClient", () => {
+   const buildConfig = (cwd: string): AgentSessionConfig => ({
+     provider: "opencode",

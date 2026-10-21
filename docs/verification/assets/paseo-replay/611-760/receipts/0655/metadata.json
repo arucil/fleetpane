@@ -1,0 +1,100 @@
+{
+  "ordinal": 655,
+  "revision": "ef853914d5e5968938d4bbe9dff8e2777b1fde99",
+  "date": "2026-01-15T15:10:08+07:00",
+  "committer_date": "2026-01-15T15:10:08+07:00",
+  "parents": [
+    "5289be9c0646a5755927162aa844f6e02559ea94"
+  ],
+  "subject": "feat: improve agent stream view UI, fix history replay timestamps, and enhance planner/worker loop",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/styles/unistyles.ts",
+    "M\tpackages/server/scripts/dev-runner.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/tasks/cli.ts"
+  ],
+  "source_receipt_digest": "sha256:4fe3b65df7c4bf25d04e2d01f4b863a6e7fa1304c5a671d0d1d3415dd824a7c7",
+  "diff_tree_digest": "sha256:7e553f0d74b23880fdc597e2ffa8fdfe8f96fb8ae1d70402022850d6008ef8f4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        109,
+        124
+      ],
+      "new_lines": [
+        126,
+        148
+      ],
+      "diff_block_lines": [
+        49,
+        84
+      ],
+      "hunk_header": "@@ -109,24 +126,26 @@ export function AgentList({",
+      "substantive_changed_lines": 28,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 188,
+  "receipt_file": "receipts/0655/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0655/followup-01.patch",
+      "source_receipt_digest": "sha256:9175bb4a38fbdbb01afc778c2a0862b1372550d3688cfa2fb8eeddeb02cac6ff",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-manager.ts",
+          "old_lines": [
+            880,
+            884
+          ],
+          "new_lines": [
+            880,
+            887
+          ],
+          "diff_block_lines": [
+            5,
+            14
+          ],
+          "hunk_header": "@@ -880,5 +880,8 @@ export class AgentManager {",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0655/followup-02.patch",
+      "source_receipt_digest": "sha256:2bb37c237215e915f6ac0bb8aa7f77e4613ea39a20970ebbe29866c298c9dcdb",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/hooks/use-favicon-status.ts",
+          "old_lines": [
+            68,
+            72
+          ],
+          "new_lines": [
+            68,
+            74
+          ],
+          "diff_block_lines": [
+            5,
+            13
+          ],
+          "hunk_header": "@@ -68,5 +68,7 @@ function updateFavicon(status: FaviconStatus, colorScheme: ColorScheme) {",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

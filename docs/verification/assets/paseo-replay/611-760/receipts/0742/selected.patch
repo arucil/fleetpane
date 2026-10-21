@@ -1,0 +1,29 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[967,971],"new_lines":[967,971],"diff_block_lines":[5,11],"hunk_header":"@@ -967,5 +967,5 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -967,5 +967,5 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {
+                   onSelect={() => pushMutation.mutate()}
+                 >
+-                  Push branch
++                  Push to remote
+                 </DropdownMenuItem>
+                 <DropdownMenuSeparator />
+FILE packages/app/src/components/headers/menu-header.tsx
+RANGE {"path":"packages/app/src/components/headers/menu-header.tsx","old_lines":[77,81],"new_lines":[77,81],"diff_block_lines":[5,11],"hunk_header":"@@ -77,5 +77,5 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":2,"comparison":"parent"}
+@@ -77,5 +77,5 @@ const styles = StyleSheet.create((theme) => ({
+   },
+   subtitle: {
+-    fontSize: theme.fontSize.sm,
++    fontSize: 12,
+     fontWeight: "300",
+     color: theme.colors.foregroundMuted,
+FILE packages/server/src/server/agent/self-identification-instructions.ts
+RANGE {"path":"packages/server/src/server/agent/self-identification-instructions.ts","old_lines":[16,22],"new_lines":[16,20],"diff_block_lines":[5,13],"hunk_header":"@@ -16,7 +16,5 @@ export function getSelfIdentificationInstructions(","substantive_changed_lines":4,"comparison":"parent"}
+@@ -16,7 +16,5 @@ export function getSelfIdentificationInstructions(
+   const lines = [
+     "You are running under Paseo, an agent orchestration tool.",
+-    "Immediately after your first message where you understand the task and decide to do multi-step work, call set_title to self-identify. Call it exactly once per task—do not repeat.",
+-    "Skip set_title in plan/read-only modes or when running a slash command.",
+-    "Do not call set_title for short, fixed, or single-response requests (e.g., \"say X exactly\", yes/no, one-liners).",
++    "You MUST call set_title immediately after understanding the task. Call it exactly once per task—do not repeat.",
+   ];
+ 

@@ -1,0 +1,39 @@
+{
+  "ordinal": 672,
+  "revision": "12f617dd10171261f0cf3a1e0784f7b7084c9767",
+  "date": "2026-01-17T16:43:41+07:00",
+  "committer_date": "2026-01-17T16:43:41+07:00",
+  "parents": [
+    "bbc227bc81c81e33ee7baf7a1ddc73c3c68cea87"
+  ],
+  "subject": "fix(server): remove Claude auth filesystem preflight checks",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/test-utils/claude-auth.ts"
+  ],
+  "source_receipt_digest": "sha256:04aebcdeec6010fe833f5910e7287de93af6cbc597eb6a93e5ffe3697a790b48",
+  "diff_tree_digest": "sha256:43b9643f5dc430ede6c54a2910545bb72ac7df0380f31a344ae722817177d3af",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/test-utils/claude-auth.ts",
+      "old_lines": [
+        14,
+        49
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        20,
+        55
+      ],
+      "hunk_header": "@@ -1,102 +1,42 @@",
+      "substantive_changed_lines": 19,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 51,
+  "receipt_file": "receipts/0672/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

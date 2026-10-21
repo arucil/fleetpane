@@ -1,0 +1,9 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1307,1311],"new_lines":[1312,1316],"diff_block_lines":[20,26],"hunk_header":"@@ -1307,5 +1312,5 @@ export class Session {","substantive_changed_lines":0,"comparison":"parent"}
+@@ -1307,5 +1312,5 @@ export class Session {
+       }
+ 
+-      const sessionConfig = await this.buildAgentSessionConfig(
++      const { sessionConfig, worktreeConfig } = await this.buildAgentSessionConfig(
+         config,
+         git,

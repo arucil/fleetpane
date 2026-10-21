@@ -1,0 +1,68 @@
+{
+  "ordinal": 683,
+  "revision": "ddbcc272f13519e31a5d8759662bf27c2cd5d5d9",
+  "date": "2026-01-21T14:55:23+07:00",
+  "committer_date": "2026-01-21T14:55:23+07:00",
+  "parents": [
+    "ae9a98223f8707aca3f43a59f3176c155f050a97"
+  ],
+  "subject": "feat: migrate from wsUrl to endpoints + add relay transport and pairing",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "A\tpackages/app/e2e/manual-host-port.spec.ts",
+    "A\tpackages/app/e2e/migration-wsurl-to-hostport.spec.ts",
+    "A\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "A\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/e2e/sidebar-new-agent-clones-selected.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-daemon-client.ts",
+    "M\tpackages/app/src/stores/download-store.ts",
+    "A\tpackages/app/src/utils/daemon-endpoints.ts",
+    "A\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "D\tpackages/app/test-results/.last-run.json",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/capabilities/default.json",
+    "M\tpackages/desktop/src-tauri/src/lib.rs"
+  ],
+  "source_receipt_digest": "sha256:c32bce46a8beae7e738a1045ad39f60972fc2733ebad32287f95a4d7e9c7a7db",
+  "diff_tree_digest": "sha256:8da703c0f1909dfc956bd3f8f5d97cb597a37d80872a1add86a4fbcdb2d8f4be",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/settings.tsx",
+      "old_lines": [
+        462,
+        473
+      ],
+      "new_lines": [
+        479,
+        507
+      ],
+      "diff_block_lines": [
+        53,
+        88
+      ],
+      "hunk_header": "@@ -462,36 +479,68 @@ export default function SettingsScreen() {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 1484,
+  "receipt_file": "receipts/0683/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

@@ -1,0 +1,42 @@
+{
+  "ordinal": 632,
+  "revision": "7f7f5c53e62cc073ca41e386529d140b6e83306f",
+  "date": "2026-01-13T11:50:13+07:00",
+  "committer_date": "2026-01-13T11:50:13+07:00",
+  "parents": [
+    "2fa7ec17cbe3aa418bda5d520baabc3433dd01dd"
+  ],
+  "subject": "Add server-side client activity tracking for smart notifications",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "A\tpackages/server/src/server/client-activity.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:6e7b3986530e1e92ccb48d1cf5d8d3b4f3d020db2f0bcc9e5a0b21467319eaf3",
+  "diff_tree_digest": "sha256:9639fabb10c0f0ade1e1afa8e0f5f2f454b5f53f39a3e5d37754d9f9966828e7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": null,
+      "new_lines": [
+        319,
+        354
+      ],
+      "diff_block_lines": [
+        25,
+        60
+      ],
+      "hunk_header": "@@ -310,3 +315,53 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 202,
+  "receipt_file": "receipts/0632/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

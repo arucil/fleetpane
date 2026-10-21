@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/extract-agent-model.test.ts
+RANGE {"path":"packages/app/src/utils/extract-agent-model.test.ts","old_lines":[12,16],"new_lines":[12,16],"diff_block_lines":[5,11],"hunk_header":"@@ -12,5 +12,5 @@ describe(\"extractAgentModel\", () => {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -12,5 +12,5 @@ describe("extractAgentModel", () => {
+   });
+ 
+-  it("returns null when runtime model missing even if config model is set", () => {
++  it("returns configured model when runtime model is missing", () => {
+     const agent = {
+       model: "gpt-5.1-codex",
+FILE packages/app/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/app/src/utils/tool-call-parsers.ts","old_lines":[1162,1165],"new_lines":[1162,1171],"diff_block_lines":[5,15],"hunk_header":"@@ -1162,4 +1162,10 @@ const TOOL_NAME_MAP: Record<string, string> = {","substantive_changed_lines":6,"comparison":"parent"}
+@@ -1162,4 +1162,10 @@ const TOOL_NAME_MAP: Record<string, string> = {
+   read_file: "Read",
+   apply_patch: "Edit",
++  "agent-control.set_title": "Set title",
++  "agent-control.set_branch": "Set branch",
++  set_title: "Set title",
++  set_branch: "Set branch",
++  "mcp__agent-control__set_title": "Set title",
++  "mcp__agent-control__set_branch": "Set branch",
+ };
+ 
+FILE packages/server/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/server/src/utils/tool-call-parsers.ts","old_lines":[23,26],"new_lines":[23,29],"diff_block_lines":[5,12],"hunk_header":"@@ -23,4 +23,7 @@ const PrincipalParamSchema = z.union([","substantive_changed_lines":3,"comparison":"parent"}
+@@ -23,4 +23,7 @@ const PrincipalParamSchema = z.union([
+   z.object({ command: z.array(z.string()).nonempty() }).transform((d) => ({ type: "command" as const, value: d.command.join(" ") })),
+   // Other text params
++  z.object({ title: z.string() }).transform((d) => ({ type: "text" as const, value: d.title })),
++  z.object({ name: z.string() }).transform((d) => ({ type: "text" as const, value: d.name })),
++  z.object({ branch: z.string() }).transform((d) => ({ type: "text" as const, value: d.branch })),
+   z.object({ pattern: z.string() }).transform((d) => ({ type: "text" as const, value: d.pattern })),
+   z.object({ query: z.string() }).transform((d) => ({ type: "text" as const, value: d.query })),

@@ -1,0 +1,66 @@
+{
+  "ordinal": 633,
+  "revision": "4803589ea1e588daec6f4f393814fe77cd66a581",
+  "date": "2026-01-13T12:06:33+07:00",
+  "committer_date": "2026-01-13T12:06:33+07:00",
+  "parents": [
+    "7f7f5c53e62cc073ca41e386529d140b6e83306f"
+  ],
+  "subject": "Add copy button for assistant turns in agent stream",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx"
+  ],
+  "source_receipt_digest": "sha256:96851245f4dd4ed64f64ad603fad08a1c8dba1c8cc465908581d52d91b8d76d7",
+  "diff_tree_digest": "sha256:7f78e36d03f4603d72e68fa9a5844005a6dee939847d1aaf860bfb650cf0cbed",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message.tsx",
+      "old_lines": [
+        255,
+        256
+      ],
+      "new_lines": [
+        256,
+        291
+      ],
+      "diff_block_lines": [
+        12,
+        47
+      ],
+      "hunk_header": "@@ -255,4 +256,76 @@ export const assistantMessageStylesheet = StyleSheet.create((theme) => ({",
+      "substantive_changed_lines": 23,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 72,
+  "receipt_file": "receipts/0633/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0633/followup-01.patch",
+      "source_receipt_digest": "sha256:868a3a2b215800f7b9add15d1d326767de86f2dd7fb5c31c62b80ab832a39876",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/components/agent-stream-view.tsx",
+          "old_lines": [
+            392,
+            395
+          ],
+          "new_lines": [
+            413,
+            426
+          ],
+          "diff_block_lines": [
+            36,
+            50
+          ],
+          "hunk_header": "@@ -392,4 +413,14 @@ export function AgentStreamView({",
+          "substantive_changed_lines": 6,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

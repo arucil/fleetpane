@@ -1,0 +1,39 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[396,399],"new_lines":[396,405],"diff_block_lines":[5,15],"hunk_header":"@@ -396,4 +396,10 @@ export class AgentManager {","substantive_changed_lines":4,"comparison":"parent"}
+@@ -396,4 +396,10 @@ export class AgentManager {
+   }
+ 
++  async setTitle(agentId: string, title: string): Promise<void> {
++    const agent = this.requireAgent(agentId);
++    await this.registry?.setTitle(agentId, title);
++    this.emitState(agent);
++  }
++
+   async clearAgentAttention(agentId: string): Promise<void> {
+     const agent = this.requireAgent(agentId);
+FILE packages/server/src/server/agent/mcp-server.test.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.test.ts","old_lines":[21,24],"new_lines":[21,25],"diff_block_lines":[5,10],"hunk_header":"@@ -21,4 +21,5 @@ function createTestDeps(): TestDeps {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -21,4 +21,5 @@ function createTestDeps(): TestDeps {
+     recordUserMessage: vi.fn(),
+     setAgentMode: vi.fn(),
++    setTitle: vi.fn().mockResolvedValue(undefined),
+     getAgent: vi.fn(),
+     streamAgent: vi.fn(() => (async function* noop() {})()),
+FILE packages/server/src/server/agent/mcp-server.test.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.test.ts","old_lines":[119,123],"new_lines":[120,124],"diff_block_lines":[11,17],"hunk_header":"@@ -119,5 +120,5 @@ describe(\"create_agent MCP tool\", () => {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -119,5 +120,5 @@ describe("create_agent MCP tool", () => {
+     await tool.callback({ title: "  Fix auth  " });
+ 
+-    expect(spies.agentRegistry.setTitle).toHaveBeenCalledWith(
++    expect(spies.agentManager.setTitle).toHaveBeenCalledWith(
+       "agent-1",
+       "Fix auth"
+FILE packages/server/src/server/agent/mcp-server.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.ts","old_lines":[939,943],"new_lines":[939,943],"diff_block_lines":[5,11],"hunk_header":"@@ -939,5 +939,5 @@ export async function createAgentMcpServer(","substantive_changed_lines":2,"comparison":"parent"}
+@@ -939,5 +939,5 @@ export async function createAgentMcpServer(
+       }
+ 
+-      await agentRegistry.setTitle(agent.id, normalizedTitle);
++      await agentManager.setTitle(agent.id, normalizedTitle);
+       return {
+         content: [],

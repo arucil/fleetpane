@@ -1,0 +1,529 @@
+{
+  "ordinal": 611,
+  "revision": "1a2498e9e781cc3c57529cd2fb24f4fa6d6268f8",
+  "date": "2026-01-09T13:01:26+07:00",
+  "committer_date": "2026-01-09T13:01:26+07:00",
+  "parents": [
+    "666a0f2fa62a3310abde4779a90f7c2bd2756209"
+  ],
+  "subject": "refactor: remove terminal MCP, Playwright, and commands infrastructure",
+  "diff_tree_paths": [
+    "M\t.tasks/7ddb69c7.md",
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/active-processes.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/.gitignore",
+    "M\tpackages/server/agent-prompt.md",
+    "M\tpackages/server/src/server/agent/llm-openai.ts",
+    "M\tpackages/server/src/server/agent/model-resolver.ts",
+    "M\tpackages/server/src/server/agent/orchestrator-instructions.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/utils/path.ts"
+  ],
+  "source_receipt_digest": "sha256:2aa51a62bc99f3ec8d4d805c56447f7a2054315873fabf7599d0f10769ca9e09",
+  "diff_tree_digest": "sha256:4f8b8e9e93b4b8090c87e63ec9e340b6538463b3edec7e054ef25cec8a4e05ec",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/llm-openai.ts",
+      "old_lines": [
+        5,
+        68
+      ],
+      "new_lines": null,
+      "diff_block_lines": [
+        10,
+        73
+      ],
+      "hunk_header": "@@ -1,209 +1,9 @@",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 335,
+  "receipt_file": "receipts/0611/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0611/followup-01.patch",
+      "source_receipt_digest": "sha256:3276c9b53a7b2357e6edb9da5f25c8df0619ae8fd6f440d916014454b6283db2",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            2745,
+            2749
+          ],
+          "new_lines": [
+            2639,
+            2643
+          ],
+          "diff_block_lines": [
+            173,
+            179
+          ],
+          "hunk_header": "@@ -2745,5 +2639,5 @@ export class Session {",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0611/initial-read.patch",
+      "source_receipt_digest": "sha256:66d861f553c27d5c8f98d48ccc5df639700ae1b5879f798b8c3ca15fbbe1b42d",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            35,
+            39
+          ],
+          "new_lines": [
+            35,
+            38
+          ],
+          "diff_block_lines": [
+            5,
+            10
+          ],
+          "hunk_header": "@@ -35,5 +35,4 @@ export type {",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            76,
+            87
+          ],
+          "new_lines": [
+            75,
+            78
+          ],
+          "diff_block_lines": [
+            11,
+            23
+          ],
+          "hunk_header": "@@ -76,12 +75,4 @@ const SESSION_SNAPSHOT_STORAGE_PREFIX = \"@paseo:session-snapshot:\";",
+          "substantive_changed_lines": 8,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            98,
+            102
+          ],
+          "new_lines": [
+            89,
+            93
+          ],
+          "diff_block_lines": [
+            24,
+            30
+          ],
+          "hunk_header": "@@ -98,5 +89,5 @@ async function loadPersistedSessionSnapshot(serverId: string): Promise<Persisted",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            108,
+            116
+          ],
+          "new_lines": [
+            99,
+            106
+          ],
+          "diff_block_lines": [
+            31,
+            41
+          ],
+          "hunk_header": "@@ -108,9 +99,8 @@ async function loadPersistedSessionSnapshot(serverId: string): Promise<Persisted",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            242,
+            246
+          ],
+          "new_lines": [
+            232,
+            235
+          ],
+          "diff_block_lines": [
+            42,
+            47
+          ],
+          "hunk_header": "@@ -242,5 +232,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            369,
+            379
+          ],
+          "new_lines": [
+            358,
+            361
+          ],
+          "diff_block_lines": [
+            48,
+            59
+          ],
+          "hunk_header": "@@ -369,11 +358,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 5,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            384,
+            388
+          ],
+          "new_lines": [
+            366,
+            370
+          ],
+          "diff_block_lines": [
+            60,
+            66
+          ],
+          "hunk_header": "@@ -384,5 +366,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            633,
+            639
+          ],
+          "new_lines": [
+            615,
+            621
+          ],
+          "diff_block_lines": [
+            67,
+            76
+          ],
+          "hunk_header": "@@ -633,7 +615,7 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 4,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            652,
+            657
+          ],
+          "new_lines": [
+            634,
+            637
+          ],
+          "diff_block_lines": [
+            77,
+            83
+          ],
+          "hunk_header": "@@ -652,6 +634,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            662,
+            666
+          ],
+          "new_lines": [
+            642,
+            645
+          ],
+          "diff_block_lines": [
+            84,
+            89
+          ],
+          "hunk_header": "@@ -662,5 +642,4 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            717,
+            721
+          ],
+          "new_lines": [
+            696,
+            700
+          ],
+          "diff_block_lines": [
+            90,
+            96
+          ],
+          "hunk_header": "@@ -717,5 +696,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/app/src/contexts/session-context.tsx",
+          "old_lines": [
+            1272,
+            1276
+          ],
+          "new_lines": [
+            1251,
+            1255
+          ],
+          "diff_block_lines": [
+            97,
+            103
+          ],
+          "hunk_header": "@@ -1272,5 +1251,5 @@ export function SessionProvider({ children, serverUrl, serverId }: SessionProvid",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            37,
+            42
+          ],
+          "new_lines": [
+            37,
+            40
+          ],
+          "diff_block_lines": [
+            5,
+            11
+          ],
+          "hunk_header": "@@ -37,6 +37,4 @@ import {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            53,
+            57
+          ],
+          "new_lines": [
+            51,
+            54
+          ],
+          "diff_block_lines": [
+            12,
+            17
+          ],
+          "hunk_header": "@@ -53,5 +51,4 @@ import type {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            64,
+            68
+          ],
+          "new_lines": [
+            61,
+            64
+          ],
+          "diff_block_lines": [
+            18,
+            23
+          ],
+          "hunk_header": "@@ -64,5 +61,4 @@ import {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            71,
+            74
+          ],
+          "new_lines": [
+            67,
+            71
+          ],
+          "diff_block_lines": [
+            24,
+            29
+          ],
+          "hunk_header": "@@ -71,4 +67,5 @@ import {",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            229,
+            239
+          ],
+          "new_lines": [
+            226,
+            229
+          ],
+          "diff_block_lines": [
+            30,
+            41
+          ],
+          "hunk_header": "@@ -229,11 +226,4 @@ export class Session {",
+          "substantive_changed_lines": 7,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            280,
+            300
+          ],
+          "new_lines": [
+            270,
+            274
+          ],
+          "diff_block_lines": [
+            42,
+            64
+          ],
+          "hunk_header": "@@ -280,21 +270,5 @@ export class Session {",
+          "substantive_changed_lines": 12,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            440,
+            487
+          ],
+          "new_lines": [
+            414,
+            417
+          ],
+          "diff_block_lines": [
+            65,
+            113
+          ],
+          "hunk_header": "@@ -440,48 +414,4 @@ export class Session {",
+          "substantive_changed_lines": 21,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            2300,
+            2324
+          ],
+          "new_lines": [
+            2230,
+            2233
+          ],
+          "diff_block_lines": [
+            114,
+            139
+          ],
+          "hunk_header": "@@ -2300,25 +2230,4 @@ export class Session {",
+          "substantive_changed_lines": 14,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            2326,
+            2335
+          ],
+          "new_lines": [
+            2235,
+            2243
+          ],
+          "diff_block_lines": [
+            140,
+            151
+          ],
+          "hunk_header": "@@ -2326,10 +2235,9 @@ export class Session {",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            2715,
+            2733
+          ],
+          "new_lines": [
+            2623,
+            2627
+          ],
+          "diff_block_lines": [
+            152,
+            172
+          ],
+          "hunk_header": "@@ -2715,19 +2623,5 @@ export class Session {",
+          "substantive_changed_lines": 8,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            2745,
+            2749
+          ],
+          "new_lines": [
+            2639,
+            2643
+          ],
+          "diff_block_lines": [
+            173,
+            179
+          ],
+          "hunk_header": "@@ -2745,5 +2639,5 @@ export class Session {",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/server/session.ts",
+          "old_lines": [
+            3240,
+            3273
+          ],
+          "new_lines": [
+            3134,
+            3138
+          ],
+          "diff_block_lines": [
+            180,
+            214
+          ],
+          "hunk_header": "@@ -3240,34 +3134,5 @@ export class Session {",
+          "substantive_changed_lines": 18,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/utils/path.ts",
+          "old_lines": null,
+          "new_lines": [
+            1,
+            15
+          ],
+          "diff_block_lines": [
+            6,
+            21
+          ],
+          "hunk_header": "@@ -0,0 +1,15 @@",
+          "substantive_changed_lines": 7,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

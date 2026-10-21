@@ -1,0 +1,25 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[92,97],"new_lines":[92,100],"diff_block_lines":[5,16],"hunk_header":"@@ -92,6 +92,9 @@ describe(\"OpenCodeAgentClient\", () => {","substantive_changed_lines":5,"comparison":"parent"}
+@@ -92,6 +92,9 @@ describe("OpenCodeAgentClient", () => {
+     logger.info({ modelCount: models.length, elapsed: Date.now() - startTime }, "beforeAll: Retrieved models");
+ 
+-    // Prefer free models (especially gpt-4o-mini which is fast and cheap)
+-    const freeModel = models.find((m) =>
++    // Prefer fast models for tests - nano models are typically fastest
++    const fastModel = models.find((m) =>
++      m.id.includes("gpt-4.1-nano") ||
++      m.id.includes("gpt-5-nano") ||
++      m.id.includes("gpt-5.1-codex-mini") ||
+       m.id.includes("gpt-4o-mini") ||
+       m.id.includes("gpt-3.5") ||
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[99,104],"new_lines":[102,107],"diff_block_lines":[17,25],"hunk_header":"@@ -99,6 +102,6 @@ describe(\"OpenCodeAgentClient\", () => {","substantive_changed_lines":4,"comparison":"parent"}
+@@ -99,6 +102,6 @@ describe("OpenCodeAgentClient", () => {
+     );
+ 
+-    if (freeModel) {
+-      TEST_MODEL = freeModel.id;
++    if (fastModel) {
++      TEST_MODEL = fastModel.id;
+     } else if (models.length > 0) {
+       // Fallback to any available model

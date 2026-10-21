@@ -1,0 +1,30 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[259,266],"new_lines":[283,309],"diff_block_lines":[76,103],"hunk_header":"@@ -248,19 +261,49 @@ export function groupAgents(","substantive_changed_lines":13,"comparison":"parent"}
++    trulyActive.sort(
+       (a, b) => b.lastActivityAt.getTime() - a.lastActivityAt.getTime()
+     );
++    recentlyActive.sort(
++      (a, b) => b.lastActivityAt.getTime() - a.lastActivityAt.getTime()
++    );
++
++    // All truly active agents shown, limit recently active to MAX_INACTIVE_PER_PROJECT
++    const limitedRecentlyActive = recentlyActive.slice(
++      0,
++      MAX_INACTIVE_PER_PROJECT
++    );
++    const combinedAgents = [...trulyActive, ...limitedRecentlyActive];
++
++    // Re-sort combined list by lastActivityAt
++    combinedAgents.sort(
++      (a, b) => b.lastActivityAt.getTime() - a.lastActivityAt.getTime()
++    );
++
+     activeGroups.push({
+       projectKey,
+       projectName: deriveProjectName(projectKey),
+-      agents: projectAgents,
++      agents: combinedAgents,
++      activeCount: trulyActive.length,
++      totalCount: trulyActive.length + recentlyActive.length,
+     });
+   }

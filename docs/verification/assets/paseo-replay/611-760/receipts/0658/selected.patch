@@ -1,0 +1,15 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[265,274],"new_lines":[265,274],"diff_block_lines":[5,17],"hunk_header":"@@ -265,10 +265,10 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":4,"comparison":"parent"}
+@@ -265,10 +265,10 @@ const styles = StyleSheet.create((theme) => ({
+   agentContent: {
+     flex: 1,
+-    gap: theme.spacing[1],
++    gap: theme.spacing[0],
+   },
+   row: {
+     flexDirection: "row",
+     alignItems: "center",
+-    gap: theme.spacing[0],
++    gap: theme.spacing[2],
+   },
+   agentTitle: {

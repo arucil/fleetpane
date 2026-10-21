@@ -1,0 +1,178 @@
+{
+  "ordinal": 624,
+  "revision": "ebabcc09e58283a398c8ef64fdb1301db96f432c",
+  "date": "2026-01-11T16:00:25+07:00",
+  "committer_date": "2026-01-11T16:00:25+07:00",
+  "parents": [
+    "7fe10f9b4ad319d9a56cd8800a9dbeee9e29f4b0"
+  ],
+  "subject": "feat: add opencode provider and refactor stream model to head/tail architecture",
+  "diff_tree_paths": [
+    "A\t.tasks/1a4d69cf.md",
+    "A\t.tasks/4672647b.md",
+    "A\t.tasks/90e02e62.md",
+    "A\t.tasks/9b83b90a.md",
+    "A\t.tasks/b694a5c0.md",
+    "A\t.tasks/d0dc7bd2.md",
+    "A\t.tasks/ea3f3266.md",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "D\tpackages/app/src/components/create-agent-modal.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/stream-buffer.test.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/model-catalog.e2e.test.ts",
+    "D\tpackages/server/src/server/agent/model-catalog.ts",
+    "M\tpackages/server/src/server/agent/model-resolver.test.ts",
+    "M\tpackages/server/src/server/agent/model-resolver.ts",
+    "A\tpackages/server/src/server/agent/opencode-reasoning.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "A\tpackages/server/src/server/agent/provider-registry.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/messages.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/daemon-client.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts"
+  ],
+  "source_receipt_digest": "sha256:6e8c2b85dfd734b88a07830bb946f14c5392e5aae1460a475132655d0fdb7202",
+  "diff_tree_digest": "sha256:d8d90aae27a47302643bca252695fcb152445e75f767415237279aec03de8949",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index.tsx",
+      "old_lines": [
+        691,
+        754
+      ],
+      "new_lines": [
+        657,
+        658
+      ],
+      "diff_block_lines": [
+        116,
+        179
+      ],
+      "hunk_header": "@@ -691,109 +657,4 @@ export default function HomeScreen() {",
+      "substantive_changed_lines": 55,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 55,
+  "available_substantive_changed_lines": 5294,
+  "receipt_file": "receipts/0624/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0624/followup-01.patch",
+      "source_receipt_digest": "sha256:a7e663496a8ae0601a876e73796e5eeab04bb08b9c650f809608e290d41b0802",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/types/stream.ts",
+          "old_lines": [
+            791,
+            806
+          ],
+          "new_lines": [
+            822,
+            849
+          ],
+          "diff_block_lines": [
+            149,
+            185
+          ],
+          "hunk_header": "@@ -791,16 +822,28 @@ export function hydrateStreamState(",
+          "substantive_changed_lines": 16,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0624/followup-02.patch",
+      "source_receipt_digest": "sha256:e6f006a5099d43522e87e932e1854b92e3eb2150cdff27fd9c00a09a0d33503a",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/types/stream.ts",
+          "old_lines": [
+            833,
+            845
+          ],
+          "new_lines": [
+            931,
+            971
+          ],
+          "diff_block_lines": [
+            280,
+            331
+          ],
+          "hunk_header": "@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([",
+          "substantive_changed_lines": 26,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0624/followup-03.patch",
+      "source_receipt_digest": "sha256:fd76eaca3ee11df471c52142285d5713042cd5316d7350039a3fa69926b26bde",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/types/stream.ts",
+          "old_lines": [
+            855,
+            889
+          ],
+          "new_lines": [
+            983,
+            1004
+          ],
+          "diff_block_lines": [
+            350,
+            401
+          ],
+          "hunk_header": "@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([",
+          "substantive_changed_lines": 38,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0624/followup-04.patch",
+      "source_receipt_digest": "sha256:55341cfc6c7f86f892af4046cf39607b9f7b255d0774532a43d0ba7f14d38167",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/types/stream.ts",
+          "old_lines": [
+            890,
+            909
+          ],
+          "new_lines": [
+            1004,
+            1041
+          ],
+          "diff_block_lines": [
+            401,
+            452
+          ],
+          "hunk_header": "@@ -810,101 +853,230 @@ const STREAM_COMPLETION_EVENTS = new Set<AgentStreamEventPayload[\"type\"]>([",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

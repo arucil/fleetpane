@@ -1,0 +1,38 @@
+FILE packages/server/src/server/persistence.ts
+RANGE {"path":"packages/server/src/server/persistence.ts","old_lines":[4,39],"new_lines":null,"diff_block_lines":[10,45],"hunk_header":"@@ -1,173 +0,0 @@","substantive_changed_lines":19,"comparison":"parent"}
+-import { standardizePrompt } from "ai/internal";
+-
+-type LoggerLike = {
+-  child(bindings: Record<string, unknown>): LoggerLike;
+-  info(...args: any[]): void;
+-  debug(...args: any[]): void;
+-  error(...args: any[]): void;
+-};
+-
+-function getLogger(logger: LoggerLike): LoggerLike {
+-  return logger.child({ module: "persistence" });
+-}
+-
+-const CONVERSATIONS_DIR = join(process.cwd(), "conversations");
+-
+-interface ConversationMetadata {
+-  id: string;
+-  lastUpdated: Date;
+-  messageCount: number;
+-}
+-
+-interface ConversationData {
+-  conversationId: string;
+-  lastUpdated: string;
+-  messageCount: number;
+-  messages: ModelMessage[];
+-}
+-
+-/**
+- * Ensure conversations directory exists
+- */
+-async function ensureConversationsDir(): Promise<void> {
+-  await mkdir(CONVERSATIONS_DIR, { recursive: true });
+-}
+-
+-/**

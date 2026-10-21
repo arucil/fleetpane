@@ -1,0 +1,33 @@
+FILE packages/app/src/utils/tool-call-parsers.ts
+RANGE {"path":"packages/app/src/utils/tool-call-parsers.ts","old_lines":[912,922],"new_lines":[919,946],"diff_block_lines":[17,47],"hunk_header":"@@ -912,11 +919,28 @@ const ShellToolCallSchema = z","substantive_changed_lines":14,"comparison":"parent"}
+@@ -912,11 +919,28 @@ const ShellToolCallSchema = z
+       : data.input.command;
+ 
++    // Try parsing as success result first
+     const resultParsed = ShellResultSchema.safeParse(data.result);
+-    const output = resultParsed.success ? resultParsed.data.output : "";
++    if (resultParsed.success) {
++      return {
++        type: "shell" as const,
++        command,
++        output: resultParsed.data.output,
++      };
++    }
++
++    // Try parsing as error result
++    const errorParsed = ShellErrorResultSchema.safeParse(data.result);
++    if (errorParsed.success) {
++      return {
++        type: "shell" as const,
++        command,
++        output: errorParsed.data.content,
++      };
++    }
+ 
+     return {
+       type: "shell" as const,
+       command,
+-      output,
++      output: "",
+     };
+   });

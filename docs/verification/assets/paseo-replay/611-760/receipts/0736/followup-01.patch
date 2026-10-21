@@ -1,0 +1,13 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[178,185],"new_lines":[180,188],"diff_block_lines":[19,29],"hunk_header":"@@ -178,8 +180,9 @@ function resolveFormState(","substantive_changed_lines":2,"comparison":"parent"}
+@@ -178,8 +180,9 @@ function resolveFormState(
+ 
+   // 4. Resolve serverId (independent)
++  // Only use stored serverId if the host still exists in the registry
+   if (!userModified.serverId) {
+     if (initialValues?.serverId !== undefined) {
+       result.serverId = initialValues.serverId;
+-    } else if (preferences?.serverId) {
++    } else if (preferences?.serverId && validServerIds.has(preferences.serverId)) {
+       result.serverId = preferences.serverId;
+     }

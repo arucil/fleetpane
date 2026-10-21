@@ -1,0 +1,113 @@
+{
+  "ordinal": 613,
+  "revision": "2d03e86bcb4cf8f64511760776006e325d40f236",
+  "date": "2026-01-09T19:00:41+07:00",
+  "committer_date": "2026-01-09T19:00:41+07:00",
+  "parents": [
+    "b90c17a919004978fc35519f4c433516c1953d95"
+  ],
+  "subject": "feat: use mnemonic-id for worktree names",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/create-agent-modal.tsx",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:e89ce22683acbf8700c8dcdad67a1e2598b159bac593bc4f9662b5c086882f28",
+  "diff_tree_digest": "sha256:6e73351406461750ccfc4dbbcec53666c9cc38ca7a5a3b0d831f35185aafe5b7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+      "old_lines": [
+        782,
+        785
+      ],
+      "new_lines": [
+        823,
+        862
+      ],
+      "diff_block_lines": [
+        71,
+        111
+      ],
+      "hunk_header": "@@ -782,4 +823,40 @@ export function GitOptionsSection({",
+      "substantive_changed_lines": 33,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 33,
+  "available_substantive_changed_lines": 256,
+  "receipt_file": "receipts/0613/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0613/followup-01.patch",
+      "source_receipt_digest": "sha256:0c2ccff168bc3723691d61b1c2032834dd6e5c816a1d0265b173b3c97b98bd79",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            3,
+            6
+          ],
+          "new_lines": [
+            3,
+            7
+          ],
+          "diff_block_lines": [
+            5,
+            10
+          ],
+          "hunk_header": "@@ -3,4 +3,5 @@ import { promisify } from \"util\";",
+          "substantive_changed_lines": 0,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0613/followup-02.patch",
+      "source_receipt_digest": "sha256:626c950aecbbe65dbf57780d4f8626c3bfc393eb3aa422833958dc72778d6a1e",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            181,
+            187
+          ],
+          "new_lines": [
+            182,
+            187
+          ],
+          "diff_block_lines": [
+            11,
+            20
+          ],
+          "hunk_header": "@@ -181,7 +182,6 @@ export function slugify(input: string): string {",
+          "substantive_changed_lines": 5,
+          "comparison": "parent"
+        },
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            207,
+            211
+          ],
+          "new_lines": [
+            207,
+            211
+          ],
+          "diff_block_lines": [
+            21,
+            27
+          ],
+          "hunk_header": "@@ -207,5 +207,5 @@ export async function createWorktree({",
+          "substantive_changed_lines": 2,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

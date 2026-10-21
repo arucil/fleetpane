@@ -1,0 +1,80 @@
+{
+  "ordinal": 712,
+  "revision": "0ff0293a973127f6361aabc015e7fd7c158b4ece",
+  "date": "2026-01-23T18:55:14+07:00",
+  "committer_date": "2026-01-23T18:55:14+07:00",
+  "parents": [
+    "912a69422165d88cd6a5c36e612781b4d743f110"
+  ],
+  "subject": "Stream dictation via OpenAI Realtime and simplify retry UI",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/volume-meter.tsx",
+    "A\tpackages/app/src/dictation/dictation-stream-sender.test.ts",
+    "A\tpackages/app/src/dictation/dictation-stream-sender.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.d.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.native.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.types.ts",
+    "A\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "A\tpackages/app/src/hooks/use-dictation.d.ts",
+    "A\tpackages/app/src/hooks/use-dictation.shared.ts",
+    "M\tpackages/app/src/hooks/use-dictation.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "M\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/agent/openai-realtime-transcription.ts",
+    "A\tpackages/server/src/server/agent/pcm16-resampler.ts",
+    "M\tpackages/server/src/server/daemon-client-v2.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:37a5f5cbece6dc601ea6bf193e9cc4d960e4f0f7b5d57d9ef893ff898cee3be1",
+  "diff_tree_digest": "sha256:61162cd32d3f6116ee838395684e6db5cc6c2e14c5c7fd2388bd2ad4a9b15b03",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/dictation/dictation-stream-sender.ts",
+      "old_lines": null,
+      "new_lines": [
+        2,
+        37
+      ],
+      "diff_block_lines": [
+        8,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,189 @@",
+      "substantive_changed_lines": 16,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 1737,
+  "receipt_file": "receipts/0712/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0712/followup-01.patch",
+      "source_receipt_digest": "sha256:0f6018a93d07af5dfbd1c20f7c0c763c05c357809e875c200726de734722fdb8",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/dictation/dictation-stream-sender.ts",
+          "old_lines": null,
+          "new_lines": [
+            69,
+            120
+          ],
+          "diff_block_lines": [
+            75,
+            126
+          ],
+          "hunk_header": "@@ -0,0 +1,189 @@",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

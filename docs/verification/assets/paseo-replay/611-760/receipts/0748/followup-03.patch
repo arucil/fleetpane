@@ -1,0 +1,22 @@
+FILE packages/app/src/utils/agent-grouping.ts
+RANGE {"path":"packages/app/src/utils/agent-grouping.ts","old_lines":[18,19],"new_lines":[65,84],"diff_block_lines":[55,74],"hunk_header":"@@ -16,4 +16,69 @@ export function deriveProjectKey(cwd: string): string {","substantive_changed_lines":6,"comparison":"parent"}
++
++  // Best-effort: owner/repo is the common case.
++  // If the path is longer (e.g. groups/subgroups/repo), still keep it.
++  if (!cleanedPath.includes("/")) {
++    return null;
++  }
++
++  const cleanedHost = host.toLowerCase();
++
++  // GitHub normalization: treat github.com as a special "well-known" host to
++  // match the intended UX: group by repo even across different local worktrees.
++  if (cleanedHost === "github.com") {
++    return `remote:github.com/${cleanedPath}`;
++  }
++
++  return `remote:${cleanedHost}/${cleanedPath}`;
++}
++
+ /**
+  * Extracts the repo name from a git remote URL.

@@ -1,0 +1,143 @@
+{
+  "ordinal": 744,
+  "revision": "084177da16d3aed15e7ab345a2cec515a12ef389",
+  "date": "2026-01-24T23:34:09+07:00",
+  "committer_date": "2026-01-24T23:34:09+07:00",
+  "parents": [
+    "504fb83fa905513bc3adfafff26e819b66c1997a"
+  ],
+  "subject": "Persist agent deletion and support subdir worktree cleanup",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/delete-agent-persists.spec.ts",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:0925050d3797fba4cac766d03a90367428cd68031f1ce17b0b4ceea2c453fd7b",
+  "diff_tree_digest": "sha256:b4becf3c54b2bb8b85e40acf02331cfa8bce311cae99d86e56b6632155eabcc7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-storage.ts",
+      "old_lines": [
+        107,
+        124
+      ],
+      "new_lines": [
+        109,
+        132
+      ],
+      "diff_block_lines": [
+        13,
+        48
+      ],
+      "hunk_header": "@@ -107,31 +109,100 @@ export class AgentStorage {",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 268,
+  "receipt_file": "receipts/0744/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0744/followup-01.patch",
+      "source_receipt_digest": "sha256:9118d1295827cfc1bdb13d89fd337b2f5c03d7902c097aca468b778cc89a22a1",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-storage.ts",
+          "old_lines": [
+            126,
+            135
+          ],
+          "new_lines": [
+            151,
+            199
+          ],
+          "diff_block_lines": [
+            67,
+            118
+          ],
+          "hunk_header": "@@ -107,31 +109,100 @@ export class AgentStorage {",
+          "substantive_changed_lines": 27,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0744/followup-02.patch",
+      "source_receipt_digest": "sha256:2de15f57a5b37f8ef4c0167c780882a40dd3042aee66ea129f4e9859326d1e9e",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            515,
+            516
+          ],
+          "new_lines": [
+            515,
+            566
+          ],
+          "diff_block_lines": [
+            6,
+            57
+          ],
+          "hunk_header": "@@ -515,4 +515,55 @@ export async function listPaseoWorktrees({",
+          "substantive_changed_lines": 35,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0744/followup-03.patch",
+      "source_receipt_digest": "sha256:d3de2f761d5daa5aaf067373914600556231471106fe9e786243b710a73ea5dc",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-storage.ts",
+          "old_lines": [
+            132,
+            137
+          ],
+          "new_lines": [
+            194,
+            208
+          ],
+          "diff_block_lines": [
+            110,
+            127
+          ],
+          "hunk_header": "@@ -107,31 +109,100 @@ export class AgentStorage {",
+          "substantive_changed_lines": 11,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0744/followup-04.patch",
+      "source_receipt_digest": "sha256:93256d2bd85bd8519db8c7f592e1fa9a73a9ed028079153928e13a43411e3344",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/agent/agent-storage.ts",
+          "old_lines": [
+            125,
+            131
+          ],
+          "new_lines": [
+            139,
+            190
+          ],
+          "diff_block_lines": [
+            55,
+            106
+          ],
+          "hunk_header": "@@ -107,31 +109,100 @@ export class AgentStorage {",
+          "substantive_changed_lines": 26,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

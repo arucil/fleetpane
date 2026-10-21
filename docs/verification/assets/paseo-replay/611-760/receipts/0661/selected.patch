@@ -1,0 +1,21 @@
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[23,39],"new_lines":[21,25],"diff_block_lines":[12,30],"hunk_header":"@@ -23,17 +21,5 @@ export default defineConfig({","substantive_changed_lines":12,"comparison":"parent"}
+@@ -23,17 +21,5 @@ export default defineConfig({
+       },
+     },
+-    // Skip e2e and integration tests in CI - they require real agent binaries or cross-package imports
+-    exclude: isCI
+-      ? [
+-          "**/*.e2e.test.ts",
+-          "**/opencode-agent.test.ts",
+-          "**/codex-mcp-agent.test.ts",
+-          "**/claude-agent.test.ts",
+-          "**/claude-agent-commands.test.ts",
+-          "**/worktree.test.ts",
+-          "**/terminal-manager.test.ts",
+-          "**/node_modules/**",
+-        ]
+-      : ["**/node_modules/**"],
++    exclude: ["**/node_modules/**"],
+   },
+ });

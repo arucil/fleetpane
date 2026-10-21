@@ -1,0 +1,17 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[392,395],"new_lines":[413,426],"diff_block_lines":[36,50],"hunk_header":"@@ -392,4 +413,14 @@ export function AgentStreamView({","substantive_changed_lines":6,"comparison":"parent"}
+@@ -392,4 +413,14 @@ export function AgentStreamView({
+       const gap = getGapAbove(item, index);
+ 
++      // Check if this is the end of a turn (before a user message or end of stream when not running)
++      // In inverted list: index-1 is the next item (newer in time)
++      const nextItem = flatListData[index - 1];
++      const isEndOfTurn =
++        item.kind !== "user_message" &&
++        (nextItem?.kind === "user_message" ||
++          (nextItem === undefined && agent.status !== "running"));
++
++      const getContent = () => collectTurnContent(index);
++
+       return (
+         <View

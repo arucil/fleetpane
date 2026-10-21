@@ -1,0 +1,79 @@
+{
+  "ordinal": 693,
+  "revision": "53155ebcc995a19e3a53c27bbb1433b4b3c3d9ff",
+  "date": "2026-01-23T08:37:15+07:00",
+  "committer_date": "2026-01-23T08:37:15+07:00",
+  "parents": [
+    "746d4130822f0cc4f1dcb912cdfb57cae666c6ad"
+  ],
+  "subject": "feat(app): checkout diff pane styling and e2e test support",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "A\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "A\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "A\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/utils/extract-agent-model.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:e965d41c628bad3d222154af784183a9e468eaaffb21d05b1225d83d9fbf2e64",
+  "diff_tree_digest": "sha256:18703f21765a365683d21db2e4f0d0407d606349415feaf140ae2c953999af4e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index.tsx",
+      "old_lines": [
+        294,
+        302
+      ],
+      "new_lines": [
+        295,
+        324
+      ],
+      "diff_block_lines": [
+        16,
+        51
+      ],
+      "hunk_header": "@@ -294,11 +295,71 @@ export default function HomeScreen() {",
+      "substantive_changed_lines": 28,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 1242,
+  "receipt_file": "receipts/0693/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0693/followup-01.patch",
+      "source_receipt_digest": "sha256:8ce526d90bad8c99507d72f90f73aaa3d77d218acd704fca8636855acb847f23",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/app/index.tsx",
+          "old_lines": [
+            303,
+            304
+          ],
+          "new_lines": [
+            340,
+            365
+          ],
+          "diff_block_lines": [
+            67,
+            92
+          ],
+          "hunk_header": "@@ -294,11 +295,71 @@ export default function HomeScreen() {",
+          "substantive_changed_lines": 19,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

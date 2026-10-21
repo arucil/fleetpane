@@ -1,0 +1,54 @@
+FILE packages/server/src/utils/worktree-metadata.ts
+RANGE {"path":"packages/server/src/utils/worktree-metadata.ts","old_lines":null,"new_lines":[21,72],"diff_block_lines":[27,78],"hunk_header":"@@ -0,0 +1,87 @@","substantive_changed_lines":34,"comparison":"parent"}
++    const gitFileContent = readFileSync(gitPath, "utf8");
++    const match = gitFileContent.match(/gitdir:\s*(.+)/);
++    if (match?.[1]) {
++      const raw = match[1].trim();
++      return isAbsolute(raw) ? raw : resolve(worktreeRoot, raw);
++    }
++  } catch {
++    // If `.git` is a directory, readFileSync will throw; fall through.
++  }
++
++  return gitPath;
++}
++
++export function getPaseoWorktreeMetadataPath(worktreeRoot: string): string {
++  const gitDir = getGitDirForWorktreeRoot(worktreeRoot);
++  return join(gitDir, "paseo", "worktree.json");
++}
++
++export function normalizeBaseRefName(input: string): string {
++  const trimmed = input.trim();
++  if (!trimmed) {
++    throw new Error("Base branch is required");
++  }
++  if (trimmed.startsWith("origin/")) {
++    return trimmed.slice("origin/".length);
++  }
++  return trimmed;
++}
++
++export function writePaseoWorktreeMetadata(
++  worktreeRoot: string,
++  options: { baseRefName: string }
++): void {
++  const baseRefName = normalizeBaseRefName(options.baseRefName);
++  if (baseRefName === "HEAD") {
++    throw new Error("Base branch cannot be HEAD");
++  }
++  if (baseRefName.includes("..") || baseRefName.includes("@{")) {
++    throw new Error(`Invalid base branch: ${baseRefName}`);
++  }
++  if (!/^[0-9A-Za-z._/-]+$/.test(baseRefName)) {
++    throw new Error(`Invalid base branch: ${baseRefName}`);
++  }
++
++  const metadataPath = getPaseoWorktreeMetadataPath(worktreeRoot);
++  mkdirSync(join(getGitDirForWorktreeRoot(worktreeRoot), "paseo"), { recursive: true });
++  const metadata: PaseoWorktreeMetadata = { version: 1, baseRefName };
++  writeFileSync(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
++}
++
++export function readPaseoWorktreeMetadata(worktreeRoot: string): PaseoWorktreeMetadata | null {
++  const metadataPath = getPaseoWorktreeMetadataPath(worktreeRoot);

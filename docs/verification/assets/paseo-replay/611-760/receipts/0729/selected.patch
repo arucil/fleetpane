@@ -1,0 +1,38 @@
+FILE packages/app/src/app/agent/[[...route]].tsx
+RANGE {"path":"packages/app/src/app/agent/[[...route]].tsx","old_lines":[8,43],"new_lines":null,"diff_block_lines":[14,49],"hunk_header":"@@ -1,109 +0,0 @@","substantive_changed_lines":24,"comparison":"parent"}
+-import { useSessionStore } from "@/stores/session-store";
+-
+-type AgentRouteParams = {
+-  route?: string[] | string;
+-};
+-
+-function normalizeSegments(raw: AgentRouteParams["route"]): string[] {
+-  if (!raw) return [];
+-  if (Array.isArray(raw)) return raw.filter((s) => typeof s === "string" && s.length > 0);
+-  if (typeof raw === "string") return raw.length > 0 ? [raw] : [];
+-  return [];
+-}
+-
+-type RouteKind = "draft" | "legacy" | "ready";
+-
+-export default function AgentRoute() {
+-  const params = useLocalSearchParams<AgentRouteParams>();
+-  const segments = useMemo(() => normalizeSegments(params.route), [params.route]);
+-
+-  const routeKind: RouteKind =
+-    segments.length === 0 ? "draft" : segments.length === 1 ? "legacy" : "ready";
+-  const legacyAgentId = segments.length === 1 ? segments[0] : "";
+-  const serverId = segments.length >= 2 ? segments[0] : "";
+-  const agentId = segments.length >= 2 ? segments[1] : "";
+-
+-  const agent = useSessionStore((state) =>
+-    serverId && agentId ? state.sessions[serverId]?.agents?.get(agentId) : undefined
+-  );
+-  const isInitializingFromMap = useSessionStore((state) =>
+-    serverId && agentId
+-      ? state.sessions[serverId]?.initializingAgents?.get(agentId) ?? false
+-      : false
+-  );
+-  const isInitializing = agentId ? isInitializingFromMap !== false : false;
+-  const isAgentReady = Boolean(agent && !isInitializing);
+-

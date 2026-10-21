@@ -1,0 +1,66 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[122,151],"new_lines":[114,153],"diff_block_lines":[63,126],"hunk_header":"@@ -122,32 +114,50 @@ export function useAgentFormState(","substantive_changed_lines":48,"comparison":"parent"}
+   );
+ 
+-  const setSelectedServerIdFromUser = useCallback((value: string | null) => {
+-    userEditedPreferencesRef.current.serverId = true;
+-    setSelectedServerId(value);
+-  }, []);
++  const setSelectedServerIdFromUser = useCallback(
++    (value: string | null) => {
++      setSelectedServerId(value);
++      void updatePreferences({ serverId: value ?? undefined });
++    },
++    [updatePreferences]
++  );
+ 
+-  const setProviderFromUser = useCallback((provider: AgentProvider) => {
+-    userEditedPreferencesRef.current.provider = true;
+-    setSelectedProvider(provider);
+-    userEditedPreferencesRef.current.model = true;
+-    setSelectedModel("");
+-    userEditedPreferencesRef.current.mode = true;
+-    setSelectedMode("");
+-  }, []);
++  const setProviderFromUser = useCallback(
++    (provider: AgentProvider) => {
++      setSelectedProvider(provider);
++      void updatePreferences({ provider });
+ 
+-  const setModeFromUser = useCallback((modeId: string) => {
+-    userEditedPreferencesRef.current.mode = true;
+-    setSelectedMode(modeId);
+-  }, []);
++      // Restore per-provider preferences if available
++      const providerPrefs = getProviderPreferences(provider);
++      const providerDef = providerDefinitionMap.get(provider);
+ 
+-  const setModelFromUser = useCallback((modelId: string) => {
+-    userEditedPreferencesRef.current.model = true;
+-    setSelectedModel(modelId);
+-  }, []);
++      setSelectedModel(providerPrefs?.model ?? "");
++      setSelectedMode(providerPrefs?.mode ?? providerDef?.defaultModeId ?? "");
++    },
++    [getProviderPreferences, updatePreferences]
++  );
+ 
+-  const setWorkingDirFromUser = useCallback((value: string) => {
+-    userEditedPreferencesRef.current.workingDir = true;
+-    setWorkingDir(value);
+-  }, []);
++  const setModeFromUser = useCallback(
++    (modeId: string) => {
++      setSelectedMode(modeId);
++      void updateProviderPreferences(selectedProvider, { mode: modeId });
++    },
++    [selectedProvider, updateProviderPreferences]
++  );
++
++  const setModelFromUser = useCallback(
++    (modelId: string) => {
++      setSelectedModel(modelId);
++      void updateProviderPreferences(selectedProvider, { model: modelId });
++    },
++    [selectedProvider, updateProviderPreferences]
++  );

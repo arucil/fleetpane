@@ -1,0 +1,21 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[260,263],"new_lines":[260,264],"diff_block_lines":[5,10],"hunk_header":"@@ -260,4 +260,5 @@ export default function HomeScreen() {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -260,4 +260,5 @@ export default function HomeScreen() {
+   });
+   const repoInfo = repoInfoQuery.data ?? null;
++  const refetchRepoInfo = repoInfoQuery.refetch;
+   const repoRequestError = repoInfoQuery.error as Error | null;
+   const repoRequestStatus: "idle" | "loading" | "success" | "error" =
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[359,364],"new_lines":[360,368],"diff_block_lines":[11,21],"hunk_header":"@@ -359,6 +360,9 @@ export default function HomeScreen() {","substantive_changed_lines":4,"comparison":"parent"}
+@@ -359,6 +360,9 @@ export default function HomeScreen() {
+         setSelectedWorktreePath("");
+       }
++      if (mode !== "none") {
++        refetchRepoInfo();
++      }
+     },
+-    [worktreeSlug]
++    [worktreeSlug, refetchRepoInfo]
+   );
+ 

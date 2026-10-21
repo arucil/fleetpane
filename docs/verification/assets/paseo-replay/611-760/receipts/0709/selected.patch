@@ -1,0 +1,66 @@
+FILE packages/app/e2e/global-setup.ts
+RANGE {"path":"packages/app/e2e/global-setup.ts","old_lines":[80,83],"new_lines":[82,108],"diff_block_lines":[17,44],"hunk_header":"@@ -80,4 +82,27 @@ export default async function globalSetup() {","substantive_changed_lines":14,"comparison":"first-parent"}
+@@ -80,4 +82,27 @@ export default async function globalSetup() {
+   await relayServer.start();
+ 
++  // Start Metro bundler on dynamic port
++  const appDir = path.resolve(__dirname, '..');
++  metroProcess = spawn('npx', ['expo', 'start', '--web', '--port', String(metroPort)], {
++    cwd: appDir,
++    env: {
++      ...process.env,
++      BROWSER: 'none', // Don't auto-open browser
++    },
++    stdio: ['ignore', 'pipe', 'pipe'],
++    detached: false,
++  });
++
++  metroProcess.stdout?.on('data', (data: Buffer) => {
++    const lines = data.toString().split('\n').filter((l) => l.trim());
++    for (const line of lines) {
++      console.log(`[metro] ${line}`);
++    }
++  });
++
++  metroProcess.stderr?.on('data', (data: Buffer) => {
++    console.error(`[metro] ${data.toString().trim()}`);
++  });
++
+   const serverDir = path.resolve(__dirname, '../../..', 'packages/server');
+   const tsxBin = execSync('which tsx').toString().trim();
+FILE packages/app/playwright.config.ts
+RANGE {"path":"packages/app/playwright.config.ts","old_lines":[1,5],"new_lines":[1,7],"diff_block_lines":[5,13],"hunk_header":"@@ -1,5 +1,7 @@","substantive_changed_lines":2,"comparison":"first-parent"}
+@@ -1,5 +1,7 @@
+ import { defineConfig, devices } from '@playwright/test';
+ 
+-const baseURL = process.env.E2E_BASE_URL ?? 'http://localhost:8081';
++// E2E_METRO_PORT is set dynamically by global-setup.ts after finding a free port
++// This allows multiple test runs in parallel across different worktrees
++const baseURL = process.env.E2E_BASE_URL ?? `http://localhost:${process.env.E2E_METRO_PORT ?? '8081'}`;
+ 
+ export default defineConfig({
+FILE packages/app/src/app/agent/[serverId]/[agentId].tsx
+RANGE {"path":"packages/app/src/app/agent/[serverId]/[agentId].tsx","old_lines":[563,567],"new_lines":[563,567],"diff_block_lines":[5,11],"hunk_header":"@@ -563,5 +563,5 @@ function AgentScreenContent({","substantive_changed_lines":2,"comparison":"first-parent"}
+@@ -563,5 +563,5 @@ function AgentScreenContent({
+   if (!agent) {
+     return (
+-      <View style={styles.container}>
++      <View style={styles.container} testID="agent-not-found">
+         <MenuHeader title="Agent" />
+         <View style={styles.errorContainer}>
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[346,349],"new_lines":[347,351],"diff_block_lines":[10,15],"hunk_header":"@@ -346,4 +347,5 @@ interface GitDiffPaneProps {","substantive_changed_lines":1,"comparison":"first-parent"}
+@@ -346,4 +347,5 @@ interface GitDiffPaneProps {
+ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {
+   const { theme } = useUnistyles();
++  const router = useRouter();
+   const queryClient = useQueryClient();
+   const client = useSessionStore(
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[556,559],"new_lines":[558,562],"diff_block_lines":[16,21],"hunk_header":"@@ -556,4 +558,5 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {","substantive_changed_lines":1,"comparison":"first-parent"}
+@@ -556,4 +558,5 @@ export function GitDiffPane({ serverId, agentId }: GitDiffPaneProps) {
+           Array.isArray(query.queryKey) && query.queryKey[0] === "paseoWorktreeList",
+       });
++      router.replace("/");
+     },
+     onError: (err) => {

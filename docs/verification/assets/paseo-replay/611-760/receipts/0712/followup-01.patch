@@ -1,0 +1,54 @@
+FILE packages/app/src/dictation/dictation-stream-sender.ts
+RANGE {"path":"packages/app/src/dictation/dictation-stream-sender.ts","old_lines":null,"new_lines":[69,120],"diff_block_lines":[75,126],"hunk_header":"@@ -0,0 +1,189 @@","substantive_changed_lines":34,"comparison":"parent"}
++    this.startGeneration += 1;
++  }
++
++  resetStreamForReplay(): void {
++    this.dictationId = null;
++    this.sendSeq = 0;
++    this.streamReady = false;
++    this.startPromise = null;
++    this.startGeneration += 1;
++  }
++
++  enqueueSegment(base64Pcm: string): void {
++    this.segments.push(base64Pcm);
++
++    const client = this.client;
++    if (!client?.isConnected) {
++      return;
++    }
++
++    if (!this.dictationId) {
++      void this.restartStream("enqueue");
++      return;
++    }
++
++    this.flush();
++  }
++
++  flush(): number {
++    const client = this.client;
++    const dictationId = this.dictationId;
++    if (!client?.isConnected || !dictationId || !this.streamReady) {
++      return 0;
++    }
++
++    let sent = 0;
++    while (this.sendSeq < this.segments.length) {
++      const seq = this.sendSeq;
++      const audio = this.segments[seq]!;
++      client.sendDictationStreamChunk(dictationId, seq, audio, this.format);
++      this.sendSeq = seq + 1;
++      sent += 1;
++    }
++    return sent;
++  }
++
++  async restartStream(reason: string): Promise<void> {
++    const client = this.client;
++    if (!client?.isConnected) {
++      return;
++    }
++
++    this.startGeneration += 1;

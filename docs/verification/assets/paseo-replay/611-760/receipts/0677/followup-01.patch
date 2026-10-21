@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/codex-mcp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-mcp-agent.ts","old_lines":[3269,3272],"new_lines":[3523,3551],"diff_block_lines":[299,328],"hunk_header":"@@ -3269,4 +3523,29 @@ class CodexMcpAgentSession implements AgentSession {","substantive_changed_lines":18,"comparison":"parent"}
+@@ -3269,4 +3523,29 @@ class CodexMcpAgentSession implements AgentSession {
+   }
+ 
++  async listCommands(): Promise<AgentSlashCommand[]> {
++    const [skills, prompts] = await Promise.all([
++      listCodexSkills(this.config.cwd),
++      listCodexCustomPrompts(),
++    ]);
++    return [...skills, ...prompts];
++  }
++
++  async executeCommand(commandName: string, args?: string): Promise<AgentCommandResult> {
++    if (commandName.startsWith("prompts:")) {
++      const promptName = commandName.slice("prompts:".length);
++      const codexHome = resolveCodexHomeDir();
++      const promptPath = path.join(codexHome, "prompts", `${promptName}.md`);
++      const raw = await fs.readFile(promptPath, "utf8");
++      const parsed = parseFrontMatter(raw);
++      const expanded = expandCodexCustomPrompt(parsed.body, args);
++      const result = await this.run(expanded);
++      return { text: result.finalText, timeline: result.timeline, usage: result.usage };
++    }
++
++    const skillPrompt = args ? `$${commandName} ${args}` : `$${commandName}`;
++    const result = await this.run(skillPrompt);
++    return { text: result.finalText, timeline: result.timeline, usage: result.usage };
++  }
++
+   private async forwardPrompt(
+     prompt: string,

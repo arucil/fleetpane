@@ -1,0 +1,54 @@
+FILE packages/server/src/server/agent/agent-response-loop.ts
+RANGE {"path":"packages/server/src/server/agent/agent-response-loop.ts","old_lines":null,"new_lines":[71,122],"diff_block_lines":[77,128],"hunk_header":"@@ -0,0 +1,204 @@","substantive_changed_lines":36,"comparison":"parent"}
++}
++
++function buildJsonSchemaValidator<T>(schema: JsonSchema): SchemaValidator<T> {
++  const AjvConstructor = Ajv as unknown as {
++    new (options?: AjvOptions): {
++      compile: (input: JsonSchema) => ((value: unknown) => boolean) & {
++        errors?: ErrorObject[] | null;
++      };
++    };
++  };
++  const ajv = new AjvConstructor({ allErrors: true, strict: false });
++  const validate = ajv.compile(schema);
++  return {
++    jsonSchema: schema,
++    validate: (value) => {
++      const ok = validate(value);
++      if (ok) {
++        return { ok: true, value: value as T };
++      }
++      const errors = (validate.errors ?? []).map((error: ErrorObject) => {
++        const path = error.instancePath && error.instancePath.length > 0 ? error.instancePath : "(root)";
++        const message = error.message ?? "is invalid";
++        return `${path}: ${message}`;
++      });
++      return { ok: false, errors };
++    },
++  };
++}
++
++function buildValidator<T>(schema: z.ZodType<T> | JsonSchema, schemaName: string): SchemaValidator<T> {
++  if (isZodSchema(schema)) {
++    return buildZodValidator(schema, schemaName);
++  }
++  return buildJsonSchemaValidator(schema);
++}
++
++function buildBasePrompt(prompt: string, jsonSchema: JsonSchema): string {
++  const schemaText = JSON.stringify(jsonSchema, null, 2);
++  return [
++    prompt.trim(),
++    "",
++    "You must respond with JSON only that matches this JSON Schema:",
++    schemaText,
++  ].join("\n");
++}
++
++function buildRetryPrompt(basePrompt: string, errors: string[]): string {
++  const formattedErrors = errors.map((error) => `- ${error}`).join("\n");
++  return [
++    basePrompt,
++    "",
++    "Previous response was invalid with validation errors:",

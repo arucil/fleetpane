@@ -1,0 +1,38 @@
+FILE packages/server/src/server/connection-offer.ts
+RANGE {"path":"packages/server/src/server/connection-offer.ts","old_lines":null,"new_lines":[3,38],"diff_block_lines":[9,44],"hunk_header":"@@ -0,0 +1,113 @@","substantive_changed_lines":26,"comparison":"parent"}
++import { z } from "zod";
++
++export const ConnectionOfferV1Schema = z.object({
++  v: z.literal(1),
++  sessionId: z.string().min(1),
++  endpoints: z.array(z.string().min(1)).min(1),
++  daemonPublicKeyB64: z.string().min(1),
++});
++
++export type ConnectionOfferV1 = z.infer<typeof ConnectionOfferV1Schema>;
++
++type BuildOfferEndpointsArgs = {
++  listenHost: string;
++  port: number;
++  relayEnabled: boolean;
++  relayEndpoint: string;
++};
++
++export function buildOfferEndpoints({
++  listenHost,
++  port,
++  relayEnabled,
++  relayEndpoint,
++}: BuildOfferEndpointsArgs): string[] {
++  const endpoints: string[] = [];
++
++  const isLoopbackHost = listenHost === "127.0.0.1" || listenHost === "localhost";
++  const isWildcardHost =
++    listenHost === "0.0.0.0" || listenHost === "::" || listenHost === "[::]";
++
++  if (isWildcardHost) {
++    const lanIp = getPrimaryLanIp();
++    if (lanIp) {
++      endpoints.push(`${lanIp}:${port}`);
++    }
++  } else if (!isLoopbackHost) {

@@ -1,0 +1,18 @@
+FILE packages/server/src/client/daemon-client-v2.ts
+RANGE {"path":"packages/server/src/client/daemon-client-v2.ts","old_lines":[1131,1142],"new_lines":[1131,1141],"diff_block_lines":[5,20],"hunk_header":"@@ -1131,12 +1131,11 @@ export class DaemonClientV2 {","substantive_changed_lines":7,"comparison":"parent"}
+@@ -1131,12 +1131,11 @@ export class DaemonClientV2 {
+ 
+   async getCheckoutStatus(
+-    agentId: string,
+-    options?: { cwd?: string; requestId?: string }
++    cwd: string,
++    options?: { requestId?: string }
+   ): Promise<CheckoutStatusPayload> {
+     const requestId = options?.requestId;
+-    const cwd = options?.cwd;
+ 
+     if (!requestId) {
+-      const existing = this.checkoutStatusInFlight.get(agentId);
++      const existing = this.checkoutStatusInFlight.get(cwd);
+       if (existing) {
+         return existing;

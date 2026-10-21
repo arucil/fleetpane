@@ -1,0 +1,14 @@
+FILE .github/workflows/deploy-app.yml
+RANGE {"path":".github/workflows/deploy-app.yml","old_lines":[21,27],"new_lines":[21,31],"diff_block_lines":[5,16],"hunk_header":"@@ -21,7 +21,11 @@ jobs:","substantive_changed_lines":4,"comparison":"parent"}
+@@ -21,7 +21,11 @@ jobs:
+           node-version: '22'
+           cache: 'npm'
++          registry-url: 'https://npm.pkg.github.com'
++          scope: '@boudra'
+ 
+       - name: Install dependencies
+         run: npm install --workspace=@paseo/app --include-workspace-root
++        env:
++          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+ 
+       - name: Typecheck

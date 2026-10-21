@@ -1,0 +1,38 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[480,515],"new_lines":[494,495],"diff_block_lines":[65,100],"hunk_header":"@@ -480,52 +494,4 @@ export default function HomeScreen() {","substantive_changed_lines":27,"comparison":"parent"}
+   );
+ 
+-  useEffect(() => {
+-    if (!sessionClient) {
+-      return;
+-    }
+-    const unsubscribe = sessionClient.on("status", (message) => {
+-      if (message.type !== "status") {
+-        return;
+-      }
+-      const payload = message.payload as {
+-        status: string;
+-        agentId?: string;
+-        requestId?: string;
+-        error?: string;
+-      };
+-      const expectedRequestId = pendingRequestIdRef.current;
+-      if (!expectedRequestId || payload.requestId !== expectedRequestId) {
+-        return;
+-      }
+-      if (payload.status === "agent_create_failed") {
+-        pendingRequestIdRef.current = null;
+-        setIsLoading(false);
+-        setErrorMessage(payload.error ?? "Failed to create agent");
+-        return;
+-      }
+-      if (payload.status !== "agent_created" || !payload.agentId) {
+-        return;
+-      }
+-      if (!selectedServerId) {
+-        pendingRequestIdRef.current = null;
+-        setIsLoading(false);
+-        return;
+-      }
+-      pendingRequestIdRef.current = null;
+-      setIsLoading(false);

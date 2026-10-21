@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 698,
+  "revision": "cb39f4c5c23cbefc3c87458b4170273c7351409c",
+  "date": "2026-01-23T11:28:50+07:00",
+  "committer_date": "2026-01-23T11:28:50+07:00",
+  "parents": [
+    "27c493922c8a1e53b53814adc731e80507cc147a",
+    "69f32da90d723241b1ff1b24fec2b524628fac10"
+  ],
+  "subject": "Merge branch 'review/tool-call-display-parsing'",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/tool-calls.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:1f18206f0e0e51e03d4b0d403df5778f7ed10f971b0c10f4586c23387f62d671",
+  "diff_tree_digest": "sha256:13542411c30c7082be3c0a16c983f9618cb44c56b5a335d77b1aadaa35361475",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        1588,
+        1594
+      ],
+      "new_lines": [
+        1602,
+        1635
+      ],
+      "diff_block_lines": [
+        73,
+        108
+      ],
+      "hunk_header": "@@ -1588,9 +1602,96 @@ export class Session {",
+      "substantive_changed_lines": 26,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 539,
+  "receipt_file": "receipts/0698/selected.patch",
+  "supplementary_receipts": []
+}

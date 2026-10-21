@@ -1,0 +1,54 @@
+FILE packages/app/src/components/grouped-agent-list.tsx
+RANGE {"path":"packages/app/src/components/grouped-agent-list.tsx","old_lines":null,"new_lines":[416,467],"diff_block_lines":[422,473],"hunk_header":"@@ -0,0 +1,625 @@","substantive_changed_lines":49,"comparison":"parent"}
++              onRefresh={onRefresh}
++              tintColor={theme.colors.foregroundMuted}
++              colors={[theme.colors.foregroundMuted]}
++            />
++          ) : undefined
++        }
++      />
++
++      <Modal
++        visible={isActionSheetVisible}
++        animationType="fade"
++        transparent
++        onRequestClose={handleCloseActionSheet}
++      >
++        <View style={styles.sheetOverlay}>
++          <Pressable
++            style={styles.sheetBackdrop}
++            onPress={handleCloseActionSheet}
++          />
++          <View style={styles.sheetContainer}>
++            <View style={styles.sheetHandle} />
++            <Text style={styles.sheetTitle}>
++              {actionAgent?.title || "Delete agent"}
++            </Text>
++            <Text style={styles.sheetSubtitle}>
++              {isActionDaemonUnavailable
++                ? "This host is offline—actions will be available once it reconnects automatically."
++                : "Removing this agent only deletes it from Paseo. Claude/Codex keeps the original project."}
++            </Text>
++            <Pressable
++              disabled={!deleteAgent || isActionDaemonUnavailable}
++              style={[styles.sheetButton, styles.sheetDeleteButton]}
++              onPress={handleDeleteAgent}
++              testID="agent-action-delete"
++            >
++              <Text
++                style={[
++                  styles.sheetDeleteText,
++                  (!deleteAgent || isActionDaemonUnavailable) &&
++                    styles.sheetDeleteTextDisabled,
++                ]}
++              >
++                {isActionDaemonUnavailable ? "Host offline" : "Delete agent"}
++              </Text>
++            </Pressable>
++            <Pressable
++              style={[styles.sheetButton, styles.sheetCancelButton]}
++              onPress={handleCloseActionSheet}
++              testID="agent-action-cancel"
++            >
++              <Text style={styles.sheetCancelText}>Cancel</Text>
++            </Pressable>

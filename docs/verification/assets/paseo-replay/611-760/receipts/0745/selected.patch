@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/agent-storage.ts
+RANGE {"path":"packages/server/src/server/agent/agent-storage.ts","old_lines":[107,124],"new_lines":[109,132],"diff_block_lines":[13,48],"hunk_header":"@@ -107,31 +109,100 @@ export class AgentStorage {","substantive_changed_lines":24,"comparison":"first-parent"}
+   async upsert(record: StoredAgentRecord): Promise<void> {
+     await this.load();
+-    const nextPath = this.buildRecordPath(record);
+-    const previousPath = this.pathById.get(record.id);
++    const agentId = record.id;
++    const prev = this.pendingWrites.get(agentId) ?? Promise.resolve();
++    const next = prev.then(async () => {
++      if (this.deleting.has(agentId)) {
++        return;
++      }
+ 
+-    await fs.mkdir(path.dirname(nextPath), { recursive: true });
+-    await writeFileAtomically(nextPath, JSON.stringify(record, null, 2));
++      const nextPath = this.buildRecordPath(record);
++      const previousPath = this.pathById.get(agentId);
+ 
+-    if (previousPath && previousPath !== nextPath) {
+-      try {
+-        await fs.unlink(previousPath);
+-      } catch {
+-        // ignore cleanup errors
++      await fs.mkdir(path.dirname(nextPath), { recursive: true });
++      await writeFileAtomically(nextPath, JSON.stringify(record, null, 2));
++
++      if (previousPath && previousPath !== nextPath) {
++        try {
++          await fs.unlink(previousPath);
++        } catch {
++          // ignore cleanup errors
++        }
+       }
+-    }
+ 
+-    this.cache.set(record.id, record);
+-    this.pathById.set(record.id, nextPath);
++      this.cache.set(agentId, record);

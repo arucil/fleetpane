@@ -1,0 +1,43 @@
+{
+  "ordinal": 679,
+  "revision": "fd5e8206a7698822f784cc96d6e65a06f823145f",
+  "date": "2026-01-21T09:27:16+07:00",
+  "committer_date": "2026-01-21T09:27:16+07:00",
+  "parents": [
+    "4a903124807700f85878daca11d3fb7085248264"
+  ],
+  "subject": "feat: relay transport (plaintext)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-e2e/connection-offer.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "A\tpackages/server/src/server/relay-transport.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:77b0508c2fb953908c4c65c2322f819e85c0a7ae6e90a570e1a30e05f540d069",
+  "diff_tree_digest": "sha256:7ccf449ec8b1a9449c160e67fee6f28bd68da23d1a837fae437aceceeb4926de",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/relay-transport.ts",
+      "old_lines": null,
+      "new_lines": [
+        2,
+        37
+      ],
+      "diff_block_lines": [
+        8,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,135 @@",
+      "substantive_changed_lines": 27,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 189,
+  "receipt_file": "receipts/0679/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

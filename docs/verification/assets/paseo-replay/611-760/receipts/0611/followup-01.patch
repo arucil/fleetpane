@@ -1,0 +1,9 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2745,2749],"new_lines":[2639,2643],"diff_block_lines":[173,179],"hunk_header":"@@ -2745,5 +2639,5 @@ export class Session {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -2745,5 +2639,5 @@ export class Session {
+       }
+ 
+-      const allTools = await getAllTools(this.terminalTools, this.agentTools ?? undefined);
++      const allTools = getAllTools(this.agentTools ?? undefined);
+ 
+       const result = await streamText({

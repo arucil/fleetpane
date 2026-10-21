@@ -1,0 +1,31 @@
+FILE packages/server/src/server/voice-conversations.e2e.test.ts
+RANGE {"path":"packages/server/src/server/voice-conversations.e2e.test.ts","old_lines":[21,24],"new_lines":[21,48],"diff_block_lines":[5,33],"hunk_header":"@@ -21,4 +21,28 @@ async function waitForFile(filepath: string, timeoutMs = 5000): Promise<void> {","substantive_changed_lines":15,"comparison":"parent"}
+@@ -21,4 +21,28 @@ async function waitForFile(filepath: string, timeoutMs = 5000): Promise<void> {
+ }
+ 
++async function waitForJsonFile<T>(
++  filepath: string,
++  timeoutMs = 5000
++): Promise<T> {
++  const start = Date.now();
++  // eslint-disable-next-line no-constant-condition
++  while (true) {
++    if (existsSync(filepath)) {
++      try {
++        const raw = readFileSync(filepath, "utf8");
++        if (raw.trim().length > 0) {
++          return JSON.parse(raw) as T;
++        }
++      } catch {
++        // File may exist but still be mid-write; retry.
++      }
++    }
++    if (Date.now() - start > timeoutMs) {
++      throw new Error(`Timed out waiting for valid JSON: ${filepath}`);
++    }
++    await new Promise((r) => setTimeout(r, 50));
++  }
++}
++
+ describe("voice conversations - daemon E2E", () => {
+   test(

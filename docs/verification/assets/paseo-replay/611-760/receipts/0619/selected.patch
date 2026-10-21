@@ -1,0 +1,14 @@
+FILE packages/app/src/components/tool-call-sheet.tsx
+RANGE {"path":"packages/app/src/components/tool-call-sheet.tsx","old_lines":[7,11],"new_lines":[7,12],"diff_block_lines":[1,12],"hunk_header":"@@ -7,5 +7,6 @@ import React, {","substantive_changed_lines":0,"comparison":"parent"}
+diff --git a/packages/app/src/components/tool-call-sheet.tsx b/packages/app/src/components/tool-call-sheet.tsx
+index 9ff4411cc..e31b5afeb 100644
+--- a/packages/app/src/components/tool-call-sheet.tsx
++++ b/packages/app/src/components/tool-call-sheet.tsx
+@@ -7,5 +7,6 @@ import React, {
+   ReactNode,
+ } from "react";
+-import { View, Text, Pressable, ScrollView } from "react-native";
++import { View, Text, Pressable } from "react-native";
++import { ScrollView } from "react-native-gesture-handler";
+ import { StyleSheet } from "react-native-unistyles";
+ import { Fonts } from "@/constants/theme";

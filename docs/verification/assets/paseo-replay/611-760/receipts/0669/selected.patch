@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.test.ts","old_lines":[161,196],"new_lines":[161,162],"diff_block_lines":[13,48],"hunk_header":"@@ -161,189 +161,4 @@ describe(\"OpenCodeAgentClient\", () => {","substantive_changed_lines":22,"comparison":"parent"}
+   );
+ 
+-  test.concurrent.skip(
+-    "user prompt text never appears in assistant_message",
+-    async () => {
+-      const cwd = tmpCwd();
+-      const client = new OpenCodeAgentClient(logger);
+-      const session = await client.createSession(buildConfig(cwd));
+-
+-      const userMarker = "UNIQUE_USER_MARKER_XYZ789";
+-      const iterator = session.stream(`Reply with ACK only. ${userMarker}`);
+-      const turn = await collectTurnEvents(iterator);
+-
+-      // HARD ASSERT: Turn completed
+-      expect(turn.turnCompleted).toBe(true);
+-
+-      // HARD ASSERT: Got assistant response
+-      expect(turn.assistantMessages.length).toBeGreaterThan(0);
+-
+-      // HARD ASSERT: User marker never appears in ANY assistant message
+-      for (const msg of turn.assistantMessages) {
+-        expect(msg.text).not.toContain(userMarker);
+-      }
+-
+-      await session.close();
+-      rmSync(cwd, { recursive: true, force: true });
+-    },
+-    120_000
+-  );
+-
+-  test.concurrent.skip(
+-    "multi-turn preserves context",
+-    async () => {
+-      const cwd = tmpCwd();
+-      const client = new OpenCodeAgentClient(logger);
+-      const session = await client.createSession(buildConfig(cwd));

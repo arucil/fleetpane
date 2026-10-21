@@ -1,0 +1,38 @@
+FILE packages/server/src/utils/project-icon.ts
+RANGE {"path":"packages/server/src/utils/project-icon.ts","old_lines":null,"new_lines":[6,41],"diff_block_lines":[12,47],"hunk_header":"@@ -0,0 +1,406 @@","substantive_changed_lines":25,"comparison":"parent"}
++ * Patterns starting with '*' are glob patterns (e.g., icon-*.png).
++ */
++export const ICON_PATTERNS = [
++  "favicon.ico",
++  "favicon.png",
++  "favicon.svg",
++  "icon.png",
++  "icon.svg",
++  "app-icon.png",
++  "app-icon.svg",
++  "apple-touch-icon.png",
++  "icon-*.png",
++  "logo.png",
++  "logo.svg",
++];
++
++/**
++ * Directories to search first (in priority order).
++ */
++export const PRIORITY_DIRS = ["public", "static", "assets", "images", "img"];
++
++/**
++ * Directories to ignore during search.
++ */
++export const IGNORED_DIRS = [
++  ".git",
++  "node_modules",
++  "dist",
++  "build",
++  ".next",
++  ".nuxt",
++  ".output",
++  "coverage",
++  ".cache",
++  "vendor",
++  "src",

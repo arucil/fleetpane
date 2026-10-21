@@ -1,0 +1,8 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[3,6],"new_lines":[3,7],"diff_block_lines":[5,10],"hunk_header":"@@ -3,4 +3,5 @@ import { promisify } from \"util\";","substantive_changed_lines":0,"comparison":"parent"}
+@@ -3,4 +3,5 @@ import { promisify } from "util";
+ import { existsSync, readFileSync, rmSync } from "fs";
+ import { join, basename, dirname } from "path";
++import { createNameId } from "mnemonic-id";
+ 
+ interface PaseoConfig {

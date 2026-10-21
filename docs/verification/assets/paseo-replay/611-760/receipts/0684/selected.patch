@@ -1,0 +1,38 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[533,553],"new_lines":[534,550],"diff_block_lines":[12,47],"hunk_header":"@@ -533,60 +534,62 @@ export function AgentStreamView({","substantive_changed_lines":32,"comparison":"parent"}
+   return (
+     <ToolCallSheetProvider>
+-      <View style={stylesheet.container}>
+-        <MessageOuterSpacingProvider disableOuterSpacing>
+-          <FlatList
+-            ref={flatListRef}
+-            data={flatListData}
+-            renderItem={renderStreamItem}
+-            keyExtractor={(item) => item.id}
+-            contentContainerStyle={{
+-              paddingVertical: 0,
+-              flexGrow: 1,
+-            }}
+-            style={stylesheet.list}
+-            onScroll={handleScroll}
+-            scrollEventThrottle={16}
+-            ListEmptyComponent={
+-              <View style={[stylesheet.emptyState, stylesheet.contentWrapper]}>
+-                <Text style={stylesheet.emptyStateText}>
+-                  Start chatting with this agent...
+-                </Text>
++      <ThinkingSheetProvider>
++        <View style={stylesheet.container}>
++          <MessageOuterSpacingProvider disableOuterSpacing>
++            <FlatList
++              ref={flatListRef}
++              data={flatListData}
++              renderItem={renderStreamItem}
++              keyExtractor={(item) => item.id}
++              contentContainerStyle={{
++                paddingVertical: 0,
++                flexGrow: 1,
++              }}
++              style={stylesheet.list}
++              onScroll={handleScroll}
++              scrollEventThrottle={16}

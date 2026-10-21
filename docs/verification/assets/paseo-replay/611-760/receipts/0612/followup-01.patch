@@ -1,0 +1,23 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[326,334],"new_lines":[322,337],"diff_block_lines":[160,180],"hunk_header":"@@ -241,94 +241,97 @@ export function AgentStreamView({","substantive_changed_lines":10,"comparison":"parent"}
++          break;
+ 
+-    if (!content) {
+-      return null;
+-    }
++        default:
++          content = null;
++      }
+ 
+-    return <View style={stylesheet.streamItemWrapper}>{content}</View>;
+-  }
++      if (!content) {
++        return null;
++      }
++
++      return <View style={stylesheet.streamItemWrapper}>{content}</View>;
++    },
++    [handleInlinePathPress, agent.cwd]
++  );
+ 
+   const pendingPermissionItems = useMemo(

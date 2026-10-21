@@ -1,0 +1,115 @@
+{
+  "ordinal": 751,
+  "revision": "fe5ab731e0e89df60df82e82dab6cbb8b46a3a49",
+  "date": "2026-01-26T14:09:07+07:00",
+  "committer_date": "2026-01-26T14:09:07+07:00",
+  "parents": [
+    "be235e14d70164b858af5fb6c4ae7eb63b62a851"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/agent-grouping.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/daemon-e2e/checkout-debug.ts"
+  ],
+  "source_receipt_digest": "sha256:5716146cfa17d3a761bd6c02609af0118c2546bdf9136b52aeedda798c4de5b1",
+  "diff_tree_digest": "sha256:d71e1742206a8b59a4e93d59fb75533108f9c1e3edcd813cdefcf88fc7396828",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/agent-grouping.ts",
+      "old_lines": [
+        248,
+        260
+      ],
+      "new_lines": [
+        261,
+        291
+      ],
+      "diff_block_lines": [
+        49,
+        84
+      ],
+      "hunk_header": "@@ -248,19 +261,49 @@ export function groupAgents(",
+      "substantive_changed_lines": 18,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 159,
+  "receipt_file": "receipts/0751/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0751/followup-01.patch",
+      "source_receipt_digest": "sha256:77a3fbc98815b982121f1cbcfa6a7732e7a181e6a6691801fe988558c3efff92",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": [
+            259,
+            266
+          ],
+          "new_lines": [
+            283,
+            309
+          ],
+          "diff_block_lines": [
+            76,
+            103
+          ],
+          "hunk_header": "@@ -248,19 +261,49 @@ export function groupAgents(",
+          "substantive_changed_lines": 13,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0751/followup-02.patch",
+      "source_receipt_digest": "sha256:ed85188a72cd64b14207d527617f03e900c3d66da3ae49708221d93760b873e8",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": [
+            215,
+            221
+          ],
+          "new_lines": [
+            219,
+            231
+          ],
+          "diff_block_lines": [
+            21,
+            35
+          ],
+          "hunk_header": "@@ -215,7 +219,13 @@ interface GroupAgentsOptions {",
+          "substantive_changed_lines": 1,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0751/followup-03.patch",
+      "source_receipt_digest": "sha256:5f21327fcb5a35ca9348adeba7c4104796b7c6610a34fb4284ec630cc5655cd8",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/utils/agent-grouping.ts",
+          "old_lines": [
+            241,
+            246
+          ],
+          "new_lines": [
+            251,
+            259
+          ],
+          "diff_block_lines": [
+            36,
+            47
+          ],
+          "hunk_header": "@@ -241,6 +251,9 @@ export function groupAgents(",
+          "substantive_changed_lines": 5,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

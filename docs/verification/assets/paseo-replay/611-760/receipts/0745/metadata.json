@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 745,
+  "revision": "d4011408f73dae1fea3ef38470a2829ecdc4172c",
+  "date": "2026-01-24T23:34:55+07:00",
+  "committer_date": "2026-01-24T23:34:55+07:00",
+  "parents": [
+    "ef612abfc15b2855fb7c5fa97f0f720625878ae8",
+    "084177da16d3aed15e7ab345a2cec515a12ef389"
+  ],
+  "subject": "Merge branch 'fix-agent-archive-non-worktree'",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/delete-agent-persists.spec.ts",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:dd46e0bda589c78a6333ff3ce98b6445116b2f92f06686b56dfe307d26b3b26a",
+  "diff_tree_digest": "sha256:b4becf3c54b2bb8b85e40acf02331cfa8bce311cae99d86e56b6632155eabcc7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-storage.ts",
+      "old_lines": [
+        107,
+        124
+      ],
+      "new_lines": [
+        109,
+        132
+      ],
+      "diff_block_lines": [
+        13,
+        48
+      ],
+      "hunk_header": "@@ -107,31 +109,100 @@ export class AgentStorage {",
+      "substantive_changed_lines": 24,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 268,
+  "receipt_file": "receipts/0745/selected.patch",
+  "supplementary_receipts": []
+}

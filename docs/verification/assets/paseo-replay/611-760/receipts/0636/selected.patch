@@ -1,0 +1,38 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":null,"new_lines":[3,38],"diff_block_lines":[9,44],"hunk_header":"@@ -0,0 +1,380 @@","substantive_changed_lines":27,"comparison":"parent"}
++import '~/styles.css'
++
++export const Route = createFileRoute('/')({
++  head: () => ({
++    meta: [
++      { title: 'Paseo - Your dev environment, in your pocket' },
++      {
++        name: 'description',
++        content:
++          'Monitor and control your local AI coding agents from anywhere. Works with Claude Code and your existing setup.',
++      },
++    ],
++  }),
++  component: Home,
++})
++
++function Home() {
++  return (
++    <CursorFieldProvider>
++      {/* Hero section with background image */}
++      <div
++        className="relative min-h-[80vh] bg-cover bg-center bg-no-repeat overflow-hidden"
++        style={{ backgroundImage: 'url(/hero-bg.jpg)' }}
++      >
++        <div className="absolute inset-0 bg-background/70" />
++        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
++
++        {/* Left side butterflies - facing right */}
++        <FloatingButterfly
++          style={{ left: '5%', top: '15%' }}
++          size={38}
++          color="#e8976b"
++          delay={0}
++          duration={0.45}
++          direction="right"
++        />

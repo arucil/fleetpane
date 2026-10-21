@@ -1,0 +1,40 @@
+{
+  "ordinal": 680,
+  "revision": "e1b85d8f95f1148627ae5e371b1d35712aaa46cb",
+  "date": "2026-01-21T11:16:32+07:00",
+  "committer_date": "2026-01-21T11:16:32+07:00",
+  "parents": [
+    "fd5e8206a7698822f784cc96d6e65a06f823145f"
+  ],
+  "subject": "fix(app): guard Tauri window import for Metro",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/tauri-window.ts"
+  ],
+  "source_receipt_digest": "sha256:9189d7c7bbdd5069b4bdda22966418dc246dee4154cb7c70dcfa27ab65d9767e",
+  "diff_tree_digest": "sha256:3e6d1f1367da7c8738088d1a290007a13afbe8148f2ebd62cd0a76ae60f0eee3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tauri-window.ts",
+      "old_lines": [
+        5,
+        14
+      ],
+      "new_lines": [
+        5,
+        26
+      ],
+      "diff_block_lines": [
+        5,
+        29
+      ],
+      "hunk_header": "@@ -5,10 +5,22 @@ import { getIsTauriMac, TAURI_TRAFFIC_LIGHT_WIDTH, TAURI_TRAFFIC_LIGHT_HEIGHT }",
+      "substantive_changed_lines": 8,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 8,
+  "receipt_file": "receipts/0680/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

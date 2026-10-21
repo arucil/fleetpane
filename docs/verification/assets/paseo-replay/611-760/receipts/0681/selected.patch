@@ -1,0 +1,38 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[694,696],"new_lines":[704,738],"diff_block_lines":[57,92],"hunk_header":"@@ -694,5 +704,66 @@ export function FileExplorerPane({","substantive_changed_lines":32,"comparison":"parent"}
+       <View style={styles.content}>
+         <View style={styles.listSection}>
+-          {error ? (
++          {shouldShowInlinePreview ? (
++            <View style={styles.inlinePreviewContainer}>
++              <View style={styles.inlinePreviewHeader}>
++                <Pressable
++                  onPress={handleClosePreviewSheet}
++                  style={styles.inlinePreviewBackButton}
++                  accessibilityRole="button"
++                  accessibilityLabel="Back to files"
++                >
++                  <ArrowLeft size={18} color={theme.colors.foregroundMuted} />
++                </Pressable>
++
++                <View style={styles.inlinePreviewTitleContainer}>
++                  <Text style={styles.inlinePreviewTitle} numberOfLines={1}>
++                    {inlinePreviewTitle}
++                  </Text>
++                  {selectedEntryPath ? (
++                    <Text style={styles.inlinePreviewSubtitle} numberOfLines={1}>
++                      {selectedEntryPath}
++                    </Text>
++                  ) : null}
++                </View>
++              </View>
++
++              {isPreviewLoading && !preview ? (
++                <View style={styles.sheetCenterState}>
++                  <ActivityIndicator size="small" />
++                  <Text style={styles.loadingText}>Loading file...</Text>
++                </View>
++              ) : !preview ? (
++                <View style={styles.sheetCenterState}>
++                  <Text style={styles.emptyText}>No preview available yet</Text>
++                </View>

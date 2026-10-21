@@ -1,0 +1,91 @@
+{
+  "ordinal": 687,
+  "revision": "88490a9af103a4a6a6e16a98f0bbe2d526c2edb0",
+  "date": "2026-01-22T10:43:18+07:00",
+  "committer_date": "2026-01-22T10:43:18+07:00",
+  "parents": [
+    "7157a43a7480d634284d5eef5a4b601c3f394537"
+  ],
+  "subject": "Add .paseo worktree manager and e2e coverage",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:dc2b306bacaf8e5fa37f338c942070d8822ad7ad88447398aa9a1aa42fd65d6b",
+  "diff_tree_digest": "sha256:c7ed2f65e34435f3b0968810d6b657b751f60f9efa6f58f8d88a1f409653ec61",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/worktree.ts",
+      "old_lines": [
+        186,
+        187
+      ],
+      "new_lines": [
+        192,
+        227
+      ],
+      "diff_block_lines": [
+        26,
+        61
+      ],
+      "hunk_header": "@@ -186,4 +192,131 @@ function generateWorktreeSlug(): string {",
+      "substantive_changed_lines": 25,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 191,
+  "receipt_file": "receipts/0687/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0687/followup-01.patch",
+      "source_receipt_digest": "sha256:2e37cf8430edaa182bb4fa6a8bfe15ee2fab668037cfa9a3c635a731fe4ccb47",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            188,
+            189
+          ],
+          "new_lines": [
+            271,
+            322
+          ],
+          "diff_block_lines": [
+            105,
+            156
+          ],
+          "hunk_header": "@@ -186,4 +192,131 @@ function generateWorktreeSlug(): string {",
+          "substantive_changed_lines": 35,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0687/followup-02.patch",
+      "source_receipt_digest": "sha256:7d3c6f8852e2ec65e4e644bcecfe768d87f07254195da1f8ce4ab34918d08d45",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            205,
+            219
+          ],
+          "new_lines": [
+            338,
+            350
+          ],
+          "diff_block_lines": [
+            157,
+            177
+          ],
+          "hunk_header": "@@ -205,15 +338,13 @@ export async function createWorktree({",
+          "substantive_changed_lines": 9,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

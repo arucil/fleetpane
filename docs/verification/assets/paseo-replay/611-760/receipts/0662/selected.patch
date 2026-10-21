@@ -1,0 +1,27 @@
+FILE packages/server/src/server/agent/providers/claude-agent-commands.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent-commands.test.ts","old_lines":[29,33],"new_lines":[30,34],"diff_block_lines":[11,17],"hunk_header":"@@ -29,5 +30,5 @@ describe(\"ClaudeAgentSession Commands\", () => {","substantive_changed_lines":2,"comparison":"parent"}
+@@ -29,5 +30,5 @@ describe("ClaudeAgentSession Commands", () => {
+ 
+   beforeAll(async () => {
+-    client = new ClaudeAgentClient();
++    client = new ClaudeAgentClient({ logger: createTestLogger() });
+   });
+ 
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[10,14],"new_lines":[10,14],"diff_block_lines":[5,11],"hunk_header":"@@ -10,5 +10,5 @@ export default defineConfig({","substantive_changed_lines":2,"comparison":"parent"}
+@@ -10,5 +10,5 @@ export default defineConfig({
+   test: {
+     testTimeout: 30000,
+-    hookTimeout: 30000,
++    hookTimeout: 60000,
+     globals: true,
+     environment: "node",
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[21,25],"new_lines":[21,25],"diff_block_lines":[12,18],"hunk_header":"@@ -21,5 +21,5 @@ export default defineConfig({","substantive_changed_lines":2,"comparison":"parent"}
+@@ -21,5 +21,5 @@ export default defineConfig({
+       },
+     },
+-    exclude: ["**/node_modules/**"],
++    exclude: ["**/node_modules/**", "**/dist/**"],
+   },
+ });

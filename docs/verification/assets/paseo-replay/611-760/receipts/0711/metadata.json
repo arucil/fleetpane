@@ -1,0 +1,44 @@
+{
+  "ordinal": 711,
+  "revision": "907b9f9fbd71eaaa6e6b4e6a9c3e893d918d55f6",
+  "date": "2026-01-23T15:46:44+07:00",
+  "committer_date": "2026-01-23T15:46:44+07:00",
+  "parents": [
+    "eab8713c24108b634196d484c9c811b77ccaf9e8"
+  ],
+  "subject": "Dedup checkout status refetch and in-flight requests",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/hooks/checkout-status-revalidation.ts",
+    "A\tpackages/app/src/hooks/use-checkout-status-query.test.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "A\tpackages/server/src/client/daemon-client-v2.test.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts"
+  ],
+  "source_receipt_digest": "sha256:d1de83cf4efb563c79243d08a101e1f0c445d2ba2a270e0a04fa5c7c9754f215",
+  "diff_tree_digest": "sha256:dc1e2605c131cdc8fec9d4fc5bc1c6a287e91bb97d3aa31bf999daaef6f5c750",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        952,
+        963
+      ],
+      "new_lines": [
+        960,
+        986
+      ],
+      "diff_block_lines": [
+        24,
+        59
+      ],
+      "hunk_header": "@@ -952,19 +960,33 @@ export class DaemonClientV2 {",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 202,
+  "receipt_file": "receipts/0711/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

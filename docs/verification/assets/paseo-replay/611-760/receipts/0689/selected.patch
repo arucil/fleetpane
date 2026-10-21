@@ -1,0 +1,38 @@
+FILE packages/server/src/server/agent/mcp-server.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-server.ts","old_lines":[881,882],"new_lines":[898,933],"diff_block_lines":[36,71],"hunk_header":"@@ -881,4 +898,132 @@ export async function createAgentMcpServer(","substantive_changed_lines":24,"comparison":"parent"}
+   );
+ 
++  server.registerTool(
++    "set_title",
++    {
++      title: "Set Agent Title",
++      description: "Update the agent's title in the registry.",
++      inputSchema: {
++        title: z
++          .string()
++          .min(1)
++          .max(40)
++          .describe("Short descriptive title (<= 40 chars)."),
++      },
++      outputSchema: {
++        success: z.boolean(),
++        title: z.string(),
++      },
++    },
++    async ({ title }) => {
++      if (!callerAgentId) {
++        throw new AgentMcpToolError(
++          "NOT_ALLOWED",
++          "set_title can only be called by a managed agent"
++        );
++      }
++
++      const agent = agentManager.getAgent(callerAgentId);
++      if (!agent) {
++        throw new Error(`Agent ${callerAgentId} not found`);
++      }
++
++      const normalizedTitle = title.trim();
++      if (!normalizedTitle) {
++        throw new AgentMcpToolError("NOT_ALLOWED", "Title cannot be empty");
++      }

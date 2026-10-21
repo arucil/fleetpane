@@ -1,0 +1,38 @@
+FILE packages/app/src/components/draggable-list.native.tsx
+RANGE {"path":"packages/app/src/components/draggable-list.native.tsx","old_lines":null,"new_lines":[2,37],"diff_block_lines":[8,43],"hunk_header":"@@ -0,0 +1,86 @@","substantive_changed_lines":20,"comparison":"parent"}
++import { useCallback } from "react";
++import DraggableFlatList, {
++  type RenderItemParams,
++} from "react-native-draggable-flatlist";
++import { useUnistyles } from "react-native-unistyles";
++import type {
++  DraggableListProps,
++  DraggableRenderItemInfo,
++} from "./draggable-list.types";
++
++export type { DraggableListProps, DraggableRenderItemInfo };
++
++export function DraggableList<T>({
++  data,
++  keyExtractor,
++  renderItem,
++  onDragEnd,
++  style,
++  contentContainerStyle,
++  ListFooterComponent,
++  ListHeaderComponent,
++  ListEmptyComponent,
++  showsVerticalScrollIndicator = true,
++  refreshing,
++  onRefresh,
++  simultaneousGestureRef,
++  waitFor,
++}: DraggableListProps<T>) {
++  const { theme } = useUnistyles();
++
++  // Pass the ref directly to DraggableFlatList - it handles the gesture coordination
++  // The ref may not have .current set yet, but that's okay - DraggableFlatList will
++  // read it when the gesture is being recognized
++  const simultaneousHandlers = simultaneousGestureRef ? [simultaneousGestureRef] : undefined;
++
++  const handleRenderItem = useCallback(

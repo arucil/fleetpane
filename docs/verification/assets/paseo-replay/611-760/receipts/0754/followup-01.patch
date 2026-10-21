@@ -1,0 +1,54 @@
+FILE packages/server/src/utils/project-icon.ts
+RANGE {"path":"packages/server/src/utils/project-icon.ts","old_lines":null,"new_lines":[81,132],"diff_block_lines":[87,138],"hunk_header":"@@ -0,0 +1,406 @@","substantive_changed_lines":32,"comparison":"parent"}
++      continue;
++    }
++
++    const marker = buffer[offset + 1];
++    // SOF0-SOF2 markers contain dimensions
++    if (marker >= 0xc0 && marker <= 0xc2) {
++      const height = buffer.readUInt16BE(offset + 5);
++      const width = buffer.readUInt16BE(offset + 7);
++      return { width, height };
++    }
++
++    // Skip to next marker
++    const length = buffer.readUInt16BE(offset + 2);
++    offset += 2 + length;
++  }
++  return null;
++}
++
++function getGifDimensions(buffer: Buffer): ImageDimensions | null {
++  // GIF header: GIF87a or GIF89a
++  if (buffer.length < 10) return null;
++  if (buffer[0] !== 0x47 || buffer[1] !== 0x49 || buffer[2] !== 0x46) return null;
++  // Width and height at bytes 6-7 and 8-9 (little endian)
++  const width = buffer.readUInt16LE(6);
++  const height = buffer.readUInt16LE(8);
++  return { width, height };
++}
++
++function getWebpDimensions(buffer: Buffer): ImageDimensions | null {
++  // WEBP: RIFF....WEBP
++  if (buffer.length < 30) return null;
++  if (buffer.toString("ascii", 0, 4) !== "RIFF") return null;
++  if (buffer.toString("ascii", 8, 12) !== "WEBP") return null;
++
++  const chunkType = buffer.toString("ascii", 12, 16);
++  if (chunkType === "VP8 ") {
++    // Lossy format - dimensions at offset 26-27 and 28-29
++    const width = buffer.readUInt16LE(26) & 0x3fff;
++    const height = buffer.readUInt16LE(28) & 0x3fff;
++    return { width, height };
++  } else if (chunkType === "VP8L") {
++    // Lossless format
++    const bits = buffer.readUInt32LE(21);
++    const width = (bits & 0x3fff) + 1;
++    const height = ((bits >> 14) & 0x3fff) + 1;
++    return { width, height };
++  }
++  return null;
++}
++
++function getImageDimensions(buffer: Buffer, mimeType: string): ImageDimensions | null {
++  switch (mimeType) {

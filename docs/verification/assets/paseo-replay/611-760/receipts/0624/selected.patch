@@ -1,0 +1,66 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[691,754],"new_lines":[657,658],"diff_block_lines":[116,179],"hunk_header":"@@ -691,109 +657,4 @@ export default function HomeScreen() {","substantive_changed_lines":55,"comparison":"parent"}
+           </DropdownSheet>
+ 
+-          <DropdownSheet
+-            title="Agent"
+-            visible={openDropdown === "agent"}
+-            onClose={closeDropdown}
+-          >
+-            <View style={styles.agentSheetSection}>
+-              <Text style={styles.agentSheetSectionLabel}>Provider</Text>
+-              <View style={styles.dropdownSheetList}>
+-                {providerDefinitions.map((definition) => {
+-                  const isSelected = definition.id === selectedProvider;
+-                  return (
+-                    <Pressable
+-                      key={definition.id}
+-                      style={[
+-                        styles.dropdownSheetOption,
+-                        isSelected && styles.dropdownSheetOptionSelected,
+-                      ]}
+-                      onPress={() => {
+-                        setProviderFromUser(definition.id);
+-                      }}
+-                    >
+-                      <Text style={styles.dropdownSheetOptionLabel}>
+-                        {definition.label}
+-                      </Text>
+-                      {definition.description ? (
+-                        <Text style={styles.dropdownSheetOptionDescription}>
+-                          {definition.description}
+-                        </Text>
+-                      ) : null}
+-                    </Pressable>
+-                  );
+-                })}
+-              </View>
+-            </View>
+-
+-            <View style={styles.agentSheetSection}>
+-              <Text style={styles.agentSheetSectionLabel}>Model</Text>
+-              <View style={styles.dropdownSheetList}>
+-                <Pressable
+-                  style={[
+-                    styles.dropdownSheetOption,
+-                    !selectedModel && styles.dropdownSheetOptionSelected,
+-                  ]}
+-                  onPress={() => setModelFromUser("")}
+-                >
+-                  <Text style={styles.dropdownSheetOptionLabel}>
+-                    Automatic (provider default)
+-                  </Text>
+-                </Pressable>
+-                {availableModels.map((model) => {
+-                  const isSelected = model.id === selectedModel;
+-                  return (
+-                    <Pressable
+-                      key={model.id}
+-                      style={[
+-                        styles.dropdownSheetOption,
+-                        isSelected && styles.dropdownSheetOptionSelected,
+-                      ]}
+-                      onPress={() => setModelFromUser(model.id)}
+-                    >
+-                      <Text style={styles.dropdownSheetOptionLabel}>
+-                        {model.label}

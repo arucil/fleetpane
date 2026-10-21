@@ -1,0 +1,38 @@
+FILE packages/app/src/app/orchestrator.tsx
+RANGE {"path":"packages/app/src/app/orchestrator.tsx","old_lines":[12,47],"new_lines":null,"diff_block_lines":[18,53],"hunk_header":"@@ -1,83 +0,0 @@","substantive_changed_lines":27,"comparison":"parent"}
+-import type { MessageEntry } from "@/contexts/session-context";
+-
+-export default function OrchestratorScreen() {
+-  const { theme } = useUnistyles();
+-  const insets = useSafeAreaInsets();
+-  const sessionDirectory = useSessionDirectory();
+-  const scrollViewRef = useRef<ScrollView>(null);
+-  const [currentArtifact, setCurrentArtifact] = useState<Artifact | null>(null);
+-  const aggregatedMessages = useMemo(() => {
+-    const merged: MessageEntry[] = [];
+-    sessionDirectory.forEach((session) => {
+-      if (!session) {
+-        return;
+-      }
+-      merged.push(...session.messages);
+-    });
+-    merged.sort((left, right) => left.timestamp - right.timestamp);
+-    return merged;
+-  }, [sessionDirectory]);
+-
+-  const streamingAssistantMessage = useMemo(() => {
+-    for (const session of sessionDirectory.values()) {
+-      if (session?.currentAssistantMessage) {
+-        return session.currentAssistantMessage;
+-      }
+-    }
+-    return "";
+-  }, [sessionDirectory]);
+-
+-  // Keyboard animation
+-  const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+-  const animatedKeyboardStyle = useAnimatedStyle(() => {
+-    "worklet";
+-    const absoluteHeight = Math.abs(keyboardHeight.value);
+-    const padding = Math.max(0, absoluteHeight - insets.bottom);
+-    return {

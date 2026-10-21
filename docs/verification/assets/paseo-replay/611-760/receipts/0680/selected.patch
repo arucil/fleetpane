@@ -1,0 +1,27 @@
+FILE packages/app/src/utils/tauri-window.ts
+RANGE {"path":"packages/app/src/utils/tauri-window.ts","old_lines":[5,14],"new_lines":[5,26],"diff_block_lines":[5,29],"hunk_header":"@@ -5,10 +5,22 @@ import { getIsTauriMac, TAURI_TRAFFIC_LIGHT_WIDTH, TAURI_TRAFFIC_LIGHT_HEIGHT }","substantive_changed_lines":8,"comparison":"parent"}
+@@ -5,10 +5,22 @@ import { getIsTauriMac, TAURI_TRAFFIC_LIGHT_WIDTH, TAURI_TRAFFIC_LIGHT_HEIGHT }
+ let tauriWindow: any = null;
+ 
++// Runtime check for Tauri environment
++function isTauriEnvironment(): boolean {
++  return typeof window !== "undefined" &&
++    (window as any).__TAURI__ !== undefined;
++}
++
+ async function getTauriWindow() {
+   if (tauriWindow) return tauriWindow;
+-  if (!getIsTauriMac()) return null;
++
++  // Double-check: both environment check AND platform check
++  if (!isTauriEnvironment() || !getIsTauriMac()) {
++    return null;
++  }
+ 
+   try {
+-    const { getCurrentWindow } = await import("@tauri-apps/api/window");
++    // @metro-ignore tells Metro to skip bundling this import
++    // It will be resolved at runtime in Tauri's WebView
++    const { getCurrentWindow } = await import(/* @metro-ignore */ "@tauri-apps/api/window");
+     tauriWindow = getCurrentWindow();
+     return tauriWindow;

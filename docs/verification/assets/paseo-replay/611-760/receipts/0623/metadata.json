@@ -1,0 +1,86 @@
+{
+  "ordinal": 623,
+  "revision": "7fe10f9b4ad319d9a56cd8800a9dbeee9e29f4b0",
+  "date": "2026-01-11T09:29:00+07:00",
+  "committer_date": "2026-01-11T09:29:00+07:00",
+  "parents": [
+    "f5810c18ac45e359cd8408eec1c84d26228c7e79"
+  ],
+  "subject": "Prompt is too long",
+  "diff_tree_paths": [
+    "D\tCODEX_MCP_MISMATCH_REPORT.md",
+    "D\tCODEX_SDK_BINARY_INVESTIGATION.md",
+    "D\tMODEL_FETCHING_REPORT.md",
+    "D\tREPORT-claude-credentials-failure.md",
+    "D\tREPORT-claude-permission-tests.md",
+    "D\tREPORT-claude-streaming-regression.md",
+    "D\tREPORT-codex-history-bug.md",
+    "D\tREPORT-codex-image-attachment-test.md",
+    "D\tREPORT-codex-mcp-claude-parity.md",
+    "D\tREPORT-codex-mcp-go-live-audit.md",
+    "D\tREPORT-codex-mcp-refactor-review.md",
+    "D\tREPORT-codex-mcp-test-hang.md",
+    "D\tREPORT-codex-mcp-thread-item-mapping.md",
+    "D\tREPORT-codex-mcp-tool-call-coverage.md",
+    "D\tREPORT-daemon-client-design.md",
+    "D\tREPORT-daemon-e2e-audit.md",
+    "D\tREPORT-daemon-test-coverage.md",
+    "D\tREPORT-e2e-rerun.md",
+    "D\tREPORT-garbled-text-bug.md",
+    "D\tREPORT-image-attachment-investigation.md",
+    "D\tREPORT-mcp-jsonrpc-permission-callid.md",
+    "D\tREPORT-new-agent-page-deep-comparison.md",
+    "D\tREPORT-new-agent-page-review.md",
+    "D\tREPORT-refactor-validation-test-audit.md",
+    "D\tREPORT-test-audit.md",
+    "D\tREPORT-typecheck-code-quality.md",
+    "D\tdummy.txt",
+    "D\tmcp-smoke.txt",
+    "D\tmcp-test-server.mjs",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "D\tplan.md",
+    "D\tscreenshot-keyboard.png",
+    "D\tscreenshot-now.png",
+    "D\tscreenshot-test.png",
+    "D\tscreenshot-test2.png",
+    "D\tscreenshot-with-keyboard.png",
+    "D\tscreenshot.png",
+    "D\tscreenshot_before.png",
+    "D\ttest-audit.txt",
+    "D\ttest-codex-path-override.mjs",
+    "D\ttest-codex.txt",
+    "D\ttest-list-persisted.ts",
+    "D\ttest-models.mjs",
+    "D\ttest-models.ts",
+    "D\ttest-output-live-audit.txt",
+    "D\ttest-output.txt",
+    "D\ttool-call-display-investigation.md"
+  ],
+  "source_receipt_digest": "sha256:ff07a168e2450306df0f5fd32697b84e075ae4a9f1c18b63fe9b2ee0f928c6a1",
+  "diff_tree_digest": "sha256:93e4b9dc0db86166adecc2325c185fb9360a0236f24aad93e7a55ac949a4c7de",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/file-explorer-pane.tsx",
+      "old_lines": [
+        828,
+        834
+      ],
+      "new_lines": [
+        828,
+        844
+      ],
+      "diff_block_lines": [
+        19,
+        39
+      ],
+      "hunk_header": "@@ -828,7 +828,17 @@ export function FileExplorerPane({",
+      "substantive_changed_lines": 15,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 5258,
+  "receipt_file": "receipts/0623/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

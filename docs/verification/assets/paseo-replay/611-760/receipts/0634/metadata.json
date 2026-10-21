@@ -1,0 +1,101 @@
+{
+  "ordinal": 634,
+  "revision": "34a49c147fc47ade09d4ee4f94c56e5063a2f93c",
+  "date": "2026-01-13T16:07:34+07:00",
+  "committer_date": "2026-01-13T16:07:34+07:00",
+  "parents": [
+    "4803589ea1e588daec6f4f393814fe77cd66a581"
+  ],
+  "subject": "feat: add smart notification routing with device-aware heartbeats and push support",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/hooks/use-client-activity.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/stream.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/client-activity.e2e.test.ts",
+    "A\tpackages/server/src/server/push/push-service.ts",
+    "A\tpackages/server/src/server/push/token-store.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/services/agent-title-generator.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:106042278413ddb0058c74d4106311d42612d227b1bfbe41519018b46acf21b1",
+  "diff_tree_digest": "sha256:d9965c47cb655f8143a04d537cd6a503c81f6a78e0424a4e70c6df031928ede2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        1636,
+        1637
+      ],
+      "new_lines": [
+        1670,
+        1705
+      ],
+      "diff_block_lines": [
+        87,
+        122
+      ],
+      "hunk_header": "@@ -1636,4 +1670,92 @@ export function SessionProvider({",
+      "substantive_changed_lines": 22,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 879,
+  "receipt_file": "receipts/0634/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0634/followup-01.patch",
+      "source_receipt_digest": "sha256:195e451ea43909a0c81c689f1bef4aa3d4561415ba9753d474e961903d6f5d8d",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/websocket-server.ts",
+          "old_lines": [
+            334,
+            335
+          ],
+          "new_lines": [
+            352,
+            402
+          ],
+          "diff_block_lines": [
+            75,
+            126
+          ],
+          "hunk_header": "@@ -316,26 +323,116 @@ export class VoiceAssistantWebSocketServer {",
+          "substantive_changed_lines": 31,
+          "comparison": "parent"
+        }
+      ]
+    },
+    {
+      "receipt_file": "receipts/0634/followup-02.patch",
+      "source_receipt_digest": "sha256:c4bf3fdb3b6bbb427041fbfbafbdb26baffcc999bda69d5e7783a97e15296148",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/server/websocket-server.ts",
+          "old_lines": [
+            334,
+            341
+          ],
+          "new_lines": [
+            394,
+            438
+          ],
+          "diff_block_lines": [
+            117,
+            163
+          ],
+          "hunk_header": "@@ -316,26 +323,116 @@ export class VoiceAssistantWebSocketServer {",
+          "substantive_changed_lines": 16,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

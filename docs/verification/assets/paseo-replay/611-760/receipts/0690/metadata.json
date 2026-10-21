@@ -1,0 +1,49 @@
+{
+  "ordinal": 690,
+  "revision": "d41267e8a578c056af15390b33451ba0386aaa10",
+  "date": "2026-01-22T20:37:12+07:00",
+  "committer_date": "2026-01-22T20:37:12+07:00",
+  "parents": [
+    "ef9c538842f02cf1e30737592e06dab820c2c000"
+  ],
+  "subject": "feat(server): checkout RPCs + ship loop e2es",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "A\tpackages/server/src/server/agent/activity-curator.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-rollout-parsing.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/two-cycle-resume.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:5d9098f5fbe235beb2dd4bcd14ebcf50dff19f641a4b95a23c1b130ac8d48ce6",
+  "diff_tree_digest": "sha256:2bac4314088ffd19bf07be52f6779562887d1fb23c4507352247e46911b8fb91",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client-v2.ts",
+      "old_lines": [
+        926,
+        927
+      ],
+      "new_lines": [
+        942,
+        977
+      ],
+      "diff_block_lines": [
+        32,
+        67
+      ],
+      "hunk_header": "@@ -926,4 +942,236 @@ export class DaemonClientV2 {",
+      "substantive_changed_lines": 27,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1859,
+  "receipt_file": "receipts/0690/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

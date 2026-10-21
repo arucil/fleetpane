@@ -1,0 +1,14 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[1191,1201],"new_lines":[1001,1003],"diff_block_lines":[233,244],"hunk_header":"@@ -1017,185 +999,5 @@ function PermissionRequestCard({","substantive_changed_lines":9,"comparison":"parent"}
+-                permissionStyles.rawContentText,
+-                { color: theme.colors.foreground },
+-              ]}
+-            >
+-              {inputPreview}
+-            </Text>
+-          </View>
+-        </View>
+-      ) : null}
++      <ToolCallDetailsContent display={toolCallDisplay} maxHeight={200} />
+ 
+       <Text

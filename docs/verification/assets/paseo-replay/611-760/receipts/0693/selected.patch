@@ -1,0 +1,38 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[294,302],"new_lines":[295,324],"diff_block_lines":[16,51],"hunk_header":"@@ -294,11 +295,71 @@ export default function HomeScreen() {","substantive_changed_lines":28,"comparison":"parent"}
+     ? "No git repository detected. Git options are disabled for this directory."
+     : null;
++  const isCreateWorktree = worktreeMode === "create";
++  const isAttachWorktree = worktreeMode === "attach";
+ 
+-  const handleUseWorktreeChange = useCallback((value: boolean) => {
+-    setUseWorktree(value);
+-    if (value && !worktreeSlug) {
+-      setWorktreeSlug(createNameId());
+-    }
+-  }, [worktreeSlug]);
++  const worktreeListRoot = repoInfo?.repoRoot ?? trimmedWorkingDir;
++  const worktreeListQuery = useQuery({
++    queryKey: ["paseoWorktreeList", selectedServerId, worktreeListRoot],
++    queryFn: async () => {
++      const client = sessionClient;
++      if (!client) {
++        throw new Error("Daemon client unavailable");
++      }
++      const payload = await client.getPaseoWorktreeList({
++        repoRoot: worktreeListRoot || undefined,
++        cwd: worktreeListRoot ? undefined : trimmedWorkingDir || undefined,
++      });
++      if (payload.error) {
++        throw new Error(payload.error.message);
++      }
++      return payload.worktrees ?? [];
++    },
++    enabled:
++      isAttachWorktree &&
++      Boolean(worktreeListRoot || trimmedWorkingDir) &&
++      !repoAvailabilityError &&
++      Boolean(sessionClient) &&
++      isConnected &&
++      !isNonGitDirectory,
++    retry: false,

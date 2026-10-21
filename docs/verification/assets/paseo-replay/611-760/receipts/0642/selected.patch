@@ -1,0 +1,9 @@
+FILE .github/workflows/deploy-app.yml
+RANGE {"path":".github/workflows/deploy-app.yml","old_lines":[27,31],"new_lines":[27,31],"diff_block_lines":[5,11],"hunk_header":"@@ -27,5 +27,5 @@ jobs:","substantive_changed_lines":2,"comparison":"parent"}
+@@ -27,5 +27,5 @@ jobs:
+         run: npm install --workspace=@paseo/app --include-workspace-root
+         env:
+-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
++          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
+       - name: Typecheck

@@ -1,0 +1,38 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1588,1594],"new_lines":[1602,1635],"diff_block_lines":[73,108],"hunk_header":"@@ -1588,9 +1602,96 @@ export class Session {","substantive_changed_lines":26,"comparison":"first-parent"}
+ 
+     return {
+-      ...config,
+-      cwd,
++      sessionConfig: {
++        ...config,
++        cwd,
++      },
++      worktreeConfig,
+     };
+   }
+ 
++  private async runAsyncWorktreeSetup(
++    agentId: string,
++    worktree: WorktreeConfig
++  ): Promise<void> {
++    const callId = uuidv4();
++    let results: WorktreeSetupCommandResult[] = [];
++    try {
++      const started = await this.safeAppendTimelineItem(agentId, {
++        type: "tool_call",
++        name: "paseo_worktree_setup",
++        callId,
++        status: "running",
++        input: {
++          repoRoot: worktree.repoPath,
++          worktreePath: worktree.worktreePath,
++          branchName: worktree.branchName,
++        },
++      });
++      if (!started) {
++        return;
++      }
++
++      results = await runWorktreeSetupCommands({
++        repoRoot: worktree.repoPath,

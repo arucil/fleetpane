@@ -1,0 +1,75 @@
+{
+  "ordinal": 643,
+  "revision": "f1827731ed52e017b4208496317b82e5c7867425",
+  "date": "2026-01-14T19:11:01+07:00",
+  "committer_date": "2026-01-14T19:11:01+07:00",
+  "parents": [
+    "b756bedbe79835ffa38aeab63064553e5c4ecb0e"
+  ],
+  "subject": "fix: resolve type errors for CI deployment",
+  "diff_tree_paths": [
+    "A\tpackages/app/react-native-web.d.ts",
+    "M\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "M\tpackages/app/tsconfig.json"
+  ],
+  "source_receipt_digest": "sha256:b5f341f8e0ae79a11e91f5adbd4ba5d91eb6736b2aec8ed9d7a5e60e93b6e501",
+  "diff_tree_digest": "sha256:63f61dc6e1a3fb1ad577f4eae75056b990764c3bc28047e10d96a1bf1d94bc98",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/react-native-web.d.ts",
+      "old_lines": null,
+      "new_lines": [
+        1,
+        7
+      ],
+      "diff_block_lines": [
+        6,
+        13
+      ],
+      "hunk_header": "@@ -0,0 +1,7 @@",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/app/src/hooks/use-audio-player.native.ts",
+      "old_lines": [
+        57,
+        62
+      ],
+      "new_lines": [
+        57,
+        62
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -57,6 +57,6 @@ export function useAudioPlayer(options?: AudioPlayerOptions) {",
+      "substantive_changed_lines": 4,
+      "comparison": "parent"
+    },
+    {
+      "path": "packages/app/tsconfig.json",
+      "old_lines": [
+        13,
+        17
+      ],
+      "new_lines": [
+        13,
+        18
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -13,5 +13,6 @@",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/0643/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

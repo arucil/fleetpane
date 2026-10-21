@@ -1,0 +1,54 @@
+FILE packages/server/src/server/agent/agent-storage.ts
+RANGE {"path":"packages/server/src/server/agent/agent-storage.ts","old_lines":null,"new_lines":[211,262],"diff_block_lines":[217,268],"hunk_header":"@@ -0,0 +1,302 @@","substantive_changed_lines":34,"comparison":"parent"}
++      }
++      throw error;
++    }
++
++    for (const entry of entries) {
++      if (!entry.isDirectory()) {
++        continue;
++      }
++      const projectDir = path.join(this.baseDir, entry.name);
++      let files: Array<import("node:fs").Dirent> = [];
++      try {
++        files = await fs.readdir(projectDir, { withFileTypes: true });
++      } catch {
++        continue;
++      }
++
++      for (const file of files) {
++        if (!file.isFile() || !file.name.endsWith(".json")) {
++          continue;
++        }
++        const filePath = path.join(projectDir, file.name);
++        const record = await this.readRecordFile(filePath);
++        if (!record) {
++          continue;
++        }
++        records.push(record);
++        this.cache.set(record.id, record);
++        this.pathById.set(record.id, filePath);
++      }
++    }
++
++    return records;
++  }
++
++  private async readRecordFile(filePath: string): Promise<StoredAgentRecord | null> {
++    try {
++      const content = await fs.readFile(filePath, "utf8");
++      const parsed = JSON.parse(content);
++      return STORED_AGENT_SCHEMA.parse(parsed);
++    } catch (error) {
++      this.logger.error({ err: error, filePath }, "Skipping invalid agent record");
++      return null;
++    }
++  }
++
++  private buildRecordPath(record: StoredAgentRecord): string {
++    const projectDir = projectDirNameFromCwd(record.cwd);
++    return path.join(this.baseDir, projectDir, `${record.id}.json`);
++  }
++
++  private async findAgentPathById(agentId: string): Promise<string | null> {
++    let projects: Array<import("node:fs").Dirent> = [];

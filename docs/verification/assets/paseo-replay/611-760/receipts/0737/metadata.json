@@ -1,0 +1,58 @@
+{
+  "ordinal": 737,
+  "revision": "63c765b209567e8a11bb8d0ee8160fb4cd5f7733",
+  "date": "2026-01-24T22:07:07+07:00",
+  "committer_date": "2026-01-24T22:07:07+07:00",
+  "parents": [
+    "9af2957ca0c83c717d2dd5e580f0b5480f81044c"
+  ],
+  "subject": "chore(dev): use persistent PASEO_HOME and bind to all interfaces",
+  "diff_tree_paths": [
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:9eab3b027b1dad9722870e538967c9496e01a1e4b406c8296536add1bf7b9988",
+  "diff_tree_digest": "sha256:32934ce614c5a0e9e9d3a8b1b0b493b67f466b7c6e9c23217ae905ac1aaf368b",
+  "selected_hunk_ranges": [
+    {
+      "path": "scripts/dev.sh",
+      "old_lines": [
+        10,
+        16
+      ],
+      "new_lines": [
+        10,
+        16
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -10,7 +10,7 @@ DAEMON_PORT=$(get-port 6767 6768 6769 6770 6771 6772 6773)",
+      "substantive_changed_lines": 2,
+      "comparison": "parent"
+    },
+    {
+      "path": "scripts/dev.sh",
+      "old_lines": [
+        25,
+        33
+      ],
+      "new_lines": [
+        25,
+        33
+      ],
+      "diff_block_lines": [
+        16,
+        27
+      ],
+      "hunk_header": "@@ -25,9 +25,9 @@ echo \"════════════════════════",
+      "substantive_changed_lines": 3,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 5,
+  "receipt_file": "receipts/0737/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

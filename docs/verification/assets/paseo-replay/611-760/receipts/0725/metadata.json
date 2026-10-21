@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 725,
+  "revision": "56399bcb42a91dfda7705cc8a68b9b64959db156",
+  "date": "2026-01-24T19:04:39+07:00",
+  "committer_date": "2026-01-24T19:04:39+07:00",
+  "parents": [
+    "6b28167fdd5503c64eec4dea7ce8641d7ab284f8",
+    "e9b1021cb94bf1ab898b3c3d02547993db4796e4"
+  ],
+  "subject": "Merge branch 'dry-review'",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/app.config.js",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/orchestrator.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "D\tpackages/app/src/components/agent-thought-content.tsx",
+    "D\tpackages/app/src/components/conversation-selector.tsx",
+    "D\tpackages/app/src/components/headers/home-header.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "D\tpackages/app/src/components/orchestrator-messages-view.tsx",
+    "D\tpackages/app/src/components/thinking-sheet.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:3d2c0819edb71829d290f735b03e339fba04f682aa45daa793b81da84fac7cba",
+  "diff_tree_digest": "sha256:be1ba607ec28c120246c272b6d26c33967336e56168f91d97e7fc18f45cee260",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/tool-call-details.tsx",
+      "old_lines": [
+        228,
+        231
+      ],
+      "new_lines": [
+        236,
+        253
+      ],
+      "diff_block_lines": [
+        18,
+        36
+      ],
+      "hunk_header": "@@ -228,4 +236,18 @@ export function ToolCallDetailsContent({",
+      "substantive_changed_lines": 12,
+      "comparison": "first-parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 1165,
+  "receipt_file": "receipts/0725/selected.patch",
+  "supplementary_receipts": []
+}

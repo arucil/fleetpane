@@ -1,0 +1,76 @@
+{
+  "ordinal": 710,
+  "revision": "eab8713c24108b634196d484c9c811b77ccaf9e8",
+  "date": "2026-01-23T15:27:42+07:00",
+  "committer_date": "2026-01-23T15:27:42+07:00",
+  "parents": [
+    "23cd46233648f3d2325358a37e7e4ce77c9b9e0e"
+  ],
+  "subject": "Persist base branch for Paseo worktrees and gate merge action",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/checkout-ship.spec.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "A\tpackages/server/src/utils/worktree-metadata.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:f8d3c6236423ed1b071e92c6630d7b1d81b90461c3e25d786b189d8812731266",
+  "diff_tree_digest": "sha256:08f4a59d575d930ccb74b837a493ee7b0f4aff58b21a7182d37f31f880aee449",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        967,
+        968
+      ],
+      "new_lines": [
+        967,
+        1002
+      ],
+      "diff_block_lines": [
+        6,
+        41
+      ],
+      "hunk_header": "@@ -967,19 +967,48 @@ const AheadBehindSchema = z.object({",
+      "substantive_changed_lines": 28,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 489,
+  "receipt_file": "receipts/0710/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0710/followup-01.patch",
+      "source_receipt_digest": "sha256:7aef27d9188a49782d030c70481e213d530db29dfd9bcfc63f578600af71cfdf",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree-metadata.ts",
+          "old_lines": null,
+          "new_lines": [
+            21,
+            72
+          ],
+          "diff_block_lines": [
+            27,
+            78
+          ],
+          "hunk_header": "@@ -0,0 +1,87 @@",
+          "substantive_changed_lines": 34,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

@@ -1,0 +1,38 @@
+FILE packages/app/src/app/agent/[id].tsx
+RANGE {"path":"packages/app/src/app/agent/[id].tsx","old_lines":[9,44],"new_lines":null,"diff_block_lines":[15,50],"hunk_header":"@@ -1,209 +0,0 @@","substantive_changed_lines":25,"comparison":"parent"}
+-import type { Agent } from "@/contexts/session-context";
+-
+-type AgentMatch = {
+-  serverId: string;
+-  serverLabel: string;
+-  agent: Agent;
+-};
+-
+-export default function LegacyAgentRedirectScreen() {
+-  const { id } = useLocalSearchParams<{ id: string }>();
+-  const router = useRouter();
+-  const { theme } = useUnistyles();
+-  const { connectionStates } = useDaemonConnections();
+-  const sessionDirectory = useSessionDirectory();
+-  const agentId = typeof id === "string" ? id.trim() : undefined;
+-
+-  const matches = useMemo<AgentMatch[]>(() => {
+-    if (!agentId) {
+-      return [];
+-    }
+-
+-    const results: AgentMatch[] = [];
+-    sessionDirectory.forEach((session, serverId) => {
+-      if (!session) {
+-        return;
+-      }
+-      const agent = session.agents.get(agentId);
+-      if (!agent) {
+-        return;
+-      }
+-      const serverLabel = connectionStates.get(serverId)?.daemon.label ?? serverId;
+-      results.push({ serverId, serverLabel, agent });
+-    });
+-
+-    return results;
+-  }, [agentId, sessionDirectory, connectionStates]);

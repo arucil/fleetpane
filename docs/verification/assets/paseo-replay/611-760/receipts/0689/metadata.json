@@ -1,0 +1,75 @@
+{
+  "ordinal": 689,
+  "revision": "ef9c538842f02cf1e30737592e06dab820c2c000",
+  "date": "2026-01-22T14:01:57+07:00",
+  "committer_date": "2026-01-22T14:01:57+07:00",
+  "parents": [
+    "cc2bdbf01f2036d3daa48e8984d3deaedd0f03ca"
+  ],
+  "subject": "feat(server): self-identification tools",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/agent/agent-self-identification.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "A\tpackages/server/src/server/agent/self-identification-instructions.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "D\tpackages/server/src/services/agent-title-generator.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:f7542dc703ada79a7a60c92ade25a95b4738ac56a57115e9dec3a70cecaeb345",
+  "diff_tree_digest": "sha256:d2640387c67a4b16e1fe2dc7091a237934868036698f287b40a2207e67d0872f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/mcp-server.ts",
+      "old_lines": [
+        881,
+        882
+      ],
+      "new_lines": [
+        898,
+        933
+      ],
+      "diff_block_lines": [
+        36,
+        71
+      ],
+      "hunk_header": "@@ -881,4 +898,132 @@ export async function createAgentMcpServer(",
+      "substantive_changed_lines": 24,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 465,
+  "receipt_file": "receipts/0689/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0689/followup-01.patch",
+      "source_receipt_digest": "sha256:63af89ad016b6fa9343a14bb9b1f17b62693263faea13a24e756ca42ad3803e6",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/worktree.ts",
+          "old_lines": [
+            196,
+            199
+          ],
+          "new_lines": [
+            203,
+            236
+          ],
+          "diff_block_lines": [
+            60,
+            94
+          ],
+          "hunk_header": "@@ -196,4 +203,34 @@ function getPaseoWorktreesRoot(repoRoot: string): string {",
+          "substantive_changed_lines": 22,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

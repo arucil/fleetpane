@@ -1,0 +1,54 @@
+FILE packages/server/src/server/agent/agent-storage.ts
+RANGE {"path":"packages/server/src/server/agent/agent-storage.ts","old_lines":[125,131],"new_lines":[139,190],"diff_block_lines":[55,106],"hunk_header":"@@ -107,31 +109,100 @@ export class AgentStorage {","substantive_changed_lines":26,"comparison":"parent"}
++        if (this.pendingWrites.get(agentId) === next) {
++          this.pendingWrites.delete(agentId);
++        }
++      })
++    );
++
++    await next;
++  }
++
++  beginDelete(agentId: string): void {
++    this.deleting.add(agentId);
+   }
+ 
+   async remove(agentId: string): Promise<void> {
+     await this.load();
++    this.beginDelete(agentId);
++    await (this.pendingWrites.get(agentId) ?? Promise.resolve());
++    const candidates = new Set<string>();
++
+     const existingPath =
+       this.pathById.get(agentId) ?? (await this.findAgentPathById(agentId));
+     if (existingPath) {
++      candidates.add(existingPath);
++    }
++
++    // Remove any stray duplicate record files across project directories.
++    // This can happen across storage layout migrations or when a record path changes.
++    try {
++      const projects = await fs.readdir(this.baseDir, { withFileTypes: true });
++      for (const project of projects) {
++        if (!project.isDirectory()) {
++          continue;
++        }
++        const projectDir = path.join(this.baseDir, project.name);
++        candidates.add(path.join(projectDir, `${agentId}.json`));
++
++        // Support one more nesting layer (e.g. provider/version subfolders).
++        let entries: Array<import("node:fs").Dirent> = [];
++        try {
++          entries = await fs.readdir(projectDir, { withFileTypes: true });
++        } catch {
++          continue;
++        }
++        for (const entry of entries) {
++          if (!entry.isDirectory()) {
++            continue;
++          }
++          candidates.add(path.join(projectDir, entry.name, `${agentId}.json`));
++        }
++      }
++    } catch {
++      // ignore scan errors

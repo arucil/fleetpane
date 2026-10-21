@@ -1,0 +1,122 @@
+{
+  "ordinal": 657,
+  "revision": "ed50c168adb550cb4aa8bd567fce01202dd6fb08",
+  "date": "2026-01-16T16:19:49+07:00",
+  "committer_date": "2026-01-16T16:19:49+07:00",
+  "parents": [
+    "b8f056060fb02651def2d22ca92e5a405228950d"
+  ],
+  "subject": "refactor(app): unified panel state machine for mobile sidebars",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/create-agent.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "A\tpackages/app/e2e/preserve-prompt-on-error.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/agent/[serverId]/[agentId].tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/sliding-sidebar.tsx",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-git-diff-query.ts",
+    "M\tpackages/app/src/hooks/use-highlighted-diff-query.ts",
+    "D\tpackages/app/src/stores/explorer-sidebar-store.ts",
+    "A\tpackages/app/src/stores/panel-store.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "D\tpackages/app/src/stores/sidebar-store.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-registry.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/model-resolver.test.ts",
+    "M\tpackages/server/src/server/agent/model-resolver.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-mcp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/stt-debug.ts",
+    "M\tpackages/server/src/server/agent/stt-manager.ts",
+    "M\tpackages/server/src/server/agent/stt-openai.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/agent/tts-openai.ts",
+    "M\tpackages/server/src/server/agent/wait-for-agent-tracker.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/logger.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/persistence-hooks.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/persistence.ts",
+    "M\tpackages/server/src/server/push/push-service.ts",
+    "M\tpackages/server/src/server/push/token-store.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/services/agent-title-generator.ts",
+    "M\tpackages/server/src/tasks/cli.ts",
+    "M\tpackages/server/src/tasks/task-store.test.ts",
+    "M\tpackages/server/src/tasks/task-store.ts",
+    "M\tpackages/server/src/tasks/types.ts"
+  ],
+  "source_receipt_digest": "sha256:53a6f56f45f203efbc5f6e3e49e4012e990155373e94d72311bd6522921905bd",
+  "diff_tree_digest": "sha256:17fd6b4291ec2964378fbf970f2b1034f9e06bddd78a220f903bee1deca32f02",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index.tsx",
+      "old_lines": [
+        480,
+        515
+      ],
+      "new_lines": [
+        494,
+        495
+      ],
+      "diff_block_lines": [
+        65,
+        100
+      ],
+      "hunk_header": "@@ -480,52 +494,4 @@ export default function HomeScreen() {",
+      "substantive_changed_lines": 27,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1843,
+  "receipt_file": "receipts/0657/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0657/followup-01.patch",
+      "source_receipt_digest": "sha256:cce18599fb7de54968a89f418abd6a27509f6b9b3419a155b7ef5a683ebdac60",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/app/src/app/index.tsx",
+          "old_lines": [
+            447,
+            461
+          ],
+          "new_lines": [
+            445,
+            474
+          ],
+          "diff_block_lines": [
+            17,
+            57
+          ],
+          "hunk_header": "@@ -447,15 +445,30 @@ export default function HomeScreen() {",
+          "substantive_changed_lines": 26,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

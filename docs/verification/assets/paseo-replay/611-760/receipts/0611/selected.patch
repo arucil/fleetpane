@@ -1,0 +1,66 @@
+FILE packages/server/src/server/agent/llm-openai.ts
+RANGE {"path":"packages/server/src/server/agent/llm-openai.ts","old_lines":[5,68],"new_lines":null,"diff_block_lines":[10,73],"hunk_header":"@@ -1,209 +1,9 @@","substantive_changed_lines":24,"comparison":"parent"}
+-import { createTerminalMcpServer } from "../terminal-mcp/index.js";
+-
+-type McpClient = Awaited<ReturnType<typeof experimental_createMCPClient>>;
+-
+-/**
+- * Singleton MCP clients
+- */
+-let terminalMcpClient: McpClient | null = null;
+-
+-let playwrightMcpClient: McpClient | null = null;
+-
+-/**
+- * Get or create Terminal MCP client (singleton)
+- */
+-async function getTerminalMcpClient(): Promise<McpClient> {
+-  if (terminalMcpClient) {
+-    return terminalMcpClient;
+-  }
+-
+-  // Create Terminal MCP server
+-  const server = await createTerminalMcpServer({ sessionName: "__paseo" });
+-
+-  // Create linked transport pair
+-  const [clientTransport, serverTransport] =
+-    InMemoryTransport.createLinkedPair();
+-
+-  // Connect server to its transport
+-  await server.connect(serverTransport);
+-
+-  // Create client connected to the other side
+-  terminalMcpClient = await experimental_createMCPClient({
+-    transport: clientTransport,
+-  });
+-
+-  console.log("Terminal MCP client initialized");
+-
+-  return terminalMcpClient;
+-}
+-
+-/**
+- * Get or create Playwright MCP client (singleton)
+- */
+-async function getPlaywrightMcpClient(): Promise<McpClient> {
+-  if (playwrightMcpClient) {
+-    return playwrightMcpClient;
+-  }
+-
+-  const transport = new StdioClientTransport({
+-    command: "npx",
+-    args: ["@playwright/mcp", "--image-responses", "omit"],
+-  });
+-
+-  playwrightMcpClient = await experimental_createMCPClient({
+-    transport,
+-  });
+-
+-  console.log("Playwright MCP client initialized");
+-
+-  return playwrightMcpClient;
+-}
+-
+-/**
+- * Cache for merged MCP tools
+- */

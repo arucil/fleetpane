@@ -1,0 +1,23 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[828,834],"new_lines":[828,844],"diff_block_lines":[19,39],"hunk_header":"@@ -828,7 +828,17 @@ export function FileExplorerPane({","substantive_changed_lines":15,"comparison":"parent"}
+@@ -828,7 +828,17 @@ export function FileExplorerPane({
+             <View style={styles.centerState}>
+               <Text style={styles.errorText}>{error}</Text>
+-              <Pressable style={styles.retryButton} onPress={handleRetryDirectory}>
+-                <Text style={styles.retryButtonText}>Retry</Text>
+-              </Pressable>
++              <View style={styles.errorActions}>
++                <Pressable style={styles.retryButton} onPress={handleRetryDirectory}>
++                  <Text style={styles.retryButtonText}>Retry</Text>
++                </Pressable>
++                {activePath !== "." && (
++                  <Pressable
++                    style={styles.goToWorkspaceButton}
++                    onPress={() => requestDirectoryListing?.(agentId, ".")}
++                  >
++                    <Text style={styles.goToWorkspaceButtonText}>Go to workspace</Text>
++                  </Pressable>
++                )}
++              </View>
+             </View>
+           ) : showInitialListLoading ? (

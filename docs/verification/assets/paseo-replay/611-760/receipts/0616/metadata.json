@@ -1,0 +1,44 @@
+{
+  "ordinal": 616,
+  "revision": "f073be0b98312417510a6d0d928c0948b1e358ba",
+  "date": "2026-01-10T23:37:13+07:00",
+  "committer_date": "2026-01-10T23:37:13+07:00",
+  "parents": [
+    "42129926ae9d36d0ad4a9f1213f26bab04a45a89"
+  ],
+  "subject": "feat(app): improve tool call sheet with word-level diff and better UX",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/diff-viewer.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "A\tpackages/app/src/utils/tool-call-parsers.test.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts"
+  ],
+  "source_receipt_digest": "sha256:06864a6c2e8f6016ab5056ee20b07092c5d4a08efac11c284d3ea3e98bc5be11",
+  "diff_tree_digest": "sha256:7a6dc410fc63125a475626db6f8841ea8ce79240d5626204647949faef14e89e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/diff-viewer.tsx",
+      "old_lines": [
+        46,
+        60
+      ],
+      "new_lines": [
+        49,
+        82
+      ],
+      "diff_block_lines": [
+        28,
+        73
+      ],
+      "hunk_header": "@@ -46,15 +49,34 @@ export function DiffViewer({ diffLines, maxHeight = 280, emptyLabel = \"No change",
+      "substantive_changed_lines": 36,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 36,
+  "available_substantive_changed_lines": 711,
+  "receipt_file": "receipts/0616/selected.patch",
+  "comparison_basis": "parent",
+  "supplementary_receipts": []
+}

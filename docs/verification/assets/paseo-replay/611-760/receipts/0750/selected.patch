@@ -1,0 +1,38 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[214,218],"new_lines":[248,280],"diff_block_lines":[55,90],"hunk_header":"@@ -214,7 +248,35 @@ export function AgentList({","substantive_changed_lines":26,"comparison":"parent"}
+   );
+ 
+-  const renderAgentItem = useCallback<ListRenderItem<AggregatedAgent>>(
+-    ({ item: agent }) => <AgentListRow agent={agent} />,
+-    [AgentListRow]
++  const sections = useMemo((): AgentListSection[] => {
++    const order = ["Today", "Yesterday", "This week", "This month", "Older"] as const;
++    const buckets = new Map<string, AggregatedAgent[]>();
++    for (const agent of agents) {
++      const label = deriveDateSectionLabel(agent.lastActivityAt);
++      const existing = buckets.get(label) ?? [];
++      existing.push(agent);
++      buckets.set(label, existing);
++    }
++
++    const result: AgentListSection[] = [];
++    for (const label of order) {
++      const data = buckets.get(label);
++      if (!data || data.length === 0) {
++        continue;
++      }
++      result.push({ key: `date:${label}`, title: label, data });
++    }
++    return result;
++  }, [agents]);
++
++  const renderAgentItem: SectionListRenderItem<AggregatedAgent, AgentListSection> =
++    useCallback(({ item: agent }) => <AgentListRow agent={agent} />, [AgentListRow]);
++
++  const renderSectionHeader = useCallback(
++    ({ section }: { section: AgentListSection }) => (
++      <View style={styles.sectionHeader}>
++        <Text style={styles.sectionTitle}>{section.title}</Text>
++      </View>
++    ),
++    []

@@ -1,0 +1,14 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[49,57],"new_lines":[47,52],"diff_block_lines":[17,28],"hunk_header":"@@ -49,9 +47,6 @@ import type { Agent } from \"@/contexts/session-context\";","substantive_changed_lines":0,"comparison":"parent"}
+@@ -49,9 +47,6 @@ import type { Agent } from "@/contexts/session-context";
+ import { useSessionStore } from "@/stores/session-store";
+ import type { DaemonClientV2 } from "@server/client/daemon-client-v2";
+-import {
+-  extractCommandDetails,
+-  extractEditEntries,
+-  extractReadEntries,
+-} from "@/utils/tool-call-parsers";
++import { parseToolCallDisplay } from "@/utils/tool-call-parsers";
++import { ToolCallDetailsContent } from "./tool-call-details";
+ import { ToolCallSheetProvider } from "./tool-call-sheet";
+ import { createMarkdownStyles } from "@/styles/markdown-styles";

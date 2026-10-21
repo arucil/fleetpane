@@ -1,0 +1,74 @@
+{
+  "ordinal": 755,
+  "revision": "766585d1cb44acd7c5cbffc3d1c046a9f75ceadb",
+  "date": "2026-01-27T13:06:01+07:00",
+  "committer_date": "2026-01-27T13:06:01+07:00",
+  "parents": [
+    "637967fa14d45e1b2e506b9026cd1e915b4d94f1"
+  ],
+  "subject": "Update files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/grouped-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/server/src/client/daemon-client-v2.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/project-icon.test.ts",
+    "M\tpackages/server/src/utils/project-icon.ts"
+  ],
+  "source_receipt_digest": "sha256:565f74eb19f97eb73e124a89372394d5329c6fb7fc7571935c7e5b145f0bcfe9",
+  "diff_tree_digest": "sha256:706abf6adc3279d36bb4b6611e53e439ef2115b2a05f8565184c3f6a2f0d518d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        832,
+        834
+      ],
+      "new_lines": [
+        846,
+        880
+      ],
+      "diff_block_lines": [
+        56,
+        91
+      ],
+      "hunk_header": "@@ -832,5 +846,84 @@ export function GitDiffPane({ serverId, agentId, cwd }: GitDiffPaneProps) {",
+      "substantive_changed_lines": 32,
+      "comparison": "parent"
+    }
+  ],
+  "selected_substantive_changed_lines": 32,
+  "available_substantive_changed_lines": 417,
+  "receipt_file": "receipts/0755/selected.patch",
+  "supplementary_receipts": [
+    {
+      "receipt_file": "receipts/0755/followup-01.patch",
+      "source_receipt_digest": "sha256:ac36c7899f053e959a8bad1ce3cf91fa30fd80a3ab108ce235659f54e0d504a2",
+      "selected_hunk_ranges": [
+        {
+          "path": "packages/server/src/utils/project-icon.ts",
+          "old_lines": [
+            10,
+            13
+          ],
+          "new_lines": [
+            10,
+            16
+          ],
+          "diff_block_lines": [
+            5,
+            12
+          ],
+          "hunk_header": "@@ -10,4 +10,7 @@ export const ICON_PATTERNS = [",
+          "substantive_changed_lines": 3,
+          "comparison": "parent"
+        }
+      ]
+    }
+  ],
+  "comparison_basis": "parent"
+}

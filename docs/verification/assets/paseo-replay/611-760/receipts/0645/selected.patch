@@ -1,0 +1,8 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[195,198],"new_lines":[197,201],"diff_block_lines":[15,20],"hunk_header":"@@ -195,4 +197,5 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {","substantive_changed_lines":1,"comparison":"parent"}
+@@ -195,4 +197,5 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {
+ function AppWithSidebar({ children }: { children: ReactNode }) {
+   const pathname = usePathname();
++  useFaviconStatus();
+ 
+   // Parse selectedAgentKey directly from pathname

@@ -1,0 +1,28 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[303,304],"new_lines":[340,365],"diff_block_lines":[67,92],"hunk_header":"@@ -294,11 +295,71 @@ export default function HomeScreen() {","substantive_changed_lines":19,"comparison":"parent"}
++      ? "loading"
++      : worktreeListQuery.isError
++      ? "error"
++      : "ready";
++  const attachWorktreeError =
++    isAttachWorktree &&
++    worktreeOptionsStatus === "ready" &&
++    worktreeOptions.length > 0 &&
++    !selectedWorktreePath
++      ? "Select a worktree to attach"
++      : null;
++
++  const handleWorktreeModeChange = useCallback(
++    (mode: "none" | "create" | "attach") => {
++      setWorktreeMode(mode);
++      if (mode === "create" && !worktreeSlug) {
++        setWorktreeSlug(createNameId());
++      }
++      if (mode !== "attach") {
++        setSelectedWorktreePath("");
++      }
++    },
++    [worktreeSlug]
++  );
+ 
+   const validateWorktreeName = useCallback(
