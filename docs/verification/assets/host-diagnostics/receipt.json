@@ -1,0 +1,43 @@
+{
+  "base": "c031f7fffb4f3c9ff99b803de80d91bc8c700c5d",
+  "date": "2026-10-22",
+  "workspace": "fleetpane-host-health-20261021",
+  "source_sha256": {
+    "crates/session/src/hosts/diagnostics.rs": "5bb731f3c380247f9dffc63b18e6f9f3dbfb2e7b96d81ca4ca6da521068963cd",
+    "apps/host/src/main.rs": "6f53a8d43012dfcec1aec8911b3b26a44f6a74a9b25fe97a0671f5526256d2e8",
+    "apps/desktop/src/workbench.rs": "012df15ff8c6dca27b754e27bcd458208638f3d4835dd9c9441f6afd3f2caf45",
+    "apps/desktop/src/workbench/diagnostics.rs": "6ab91dfd763a5359cb32680c37de3d4dbe4a9f3d5f160672dd829aea602ebe88",
+    "apps/desktop/src/workbench/attention.rs": "481618ec1825daaedf340b4d77896319f2a6815b080c05896f3aa2b726c0943b",
+    "apps/desktop/src/workbench/sessions.rs": "6f33f6a804438c3bd9445df52645ddd505c6b12b3d65716114b244e1b532f06d",
+    "scripts/host-diagnostics-smoke.py": "0bbb78a5f945c3d222731c205f3065fcf50b547fc3a566b49df55357c7d875b5",
+    "crates/session/src/hosts.rs": "57d64a643817a4009adbca685baac67ba8087a3bfd2b98b3f31b74790c7644a0"
+  },
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "cf06cba5a17713e5a25423ad7cb87601d72a99896244f99b994e60bec639631f",
+    "apps/desktop/target/debug/fleetpane-desktop": "85ed98ed263f25d6f6fd42e348aaee6ed0bdddfe82f84a3e64e6c6f2f760405a"
+  },
+  "checks": {
+    "workspace_tests": 244,
+    "desktop_tests": 25,
+    "python_tests": 15,
+    "workspace_strict_clippy": "pass",
+    "desktop_strict_clippy": "pass",
+    "formats": "pass",
+    "desktop_build": "pass",
+    "eight_endpoint_process": "process.json"
+  },
+  "native": {
+    "initial_unchanged": "native-untouched.json",
+    "owned_unchanged": "native-owned.json",
+    "approval_copy_bytes": 852,
+    "recovered_copy_bytes": 696,
+    "draft_bytes": 41,
+    "small_window": [
+      900,
+      560
+    ],
+    "first_close_exit": 0,
+    "replacement_close_exit": 0,
+    "replacement_exact_draft_bytes": 41
+  }
+}

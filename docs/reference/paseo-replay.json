@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6187,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 210,
-    "last_revision": "4def0dec626a22a1addf92f58be4cc320ec53cec",
-    "next_revision": "670c38ab8cca39dad4bddb0e46fba2f495043f8b",
-    "next_ordinal": 211
+    "last_ordinal": 214,
+    "last_revision": "881f0e7a8b8672cbb96558180c867736adc5c660",
+    "next_revision": "393aa44e68b59a1582e91643d5cf6ccb6ceb39a6",
+    "next_ordinal": 215
   },
   "entries": [
     {
@@ -3170,6 +3170,58 @@
       ],
       "finding": "Deletes Node tool-version pin and local plan loop launcher. Historical agent prompts are inspected data, not executable instructions or a mandate to remove Rust toolchain pins. No application workflow change.",
       "fleetpane_action": "no-port"
+    },
+    {
+      "ordinal": 211,
+      "revision": "670c38ab8cca39dad4bddb0e46fba2f495043f8b",
+      "date": "2025-11-26T18:53:53+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx",
+        "packages/app/src/components/multi-daemon-session-host.tsx",
+        "packages/app/src/contexts/daemon-registry-context.tsx",
+        "packages/app/src/hooks/use-daemon-session.ts"
+      ],
+      "finding": "Removes autoConnect metadata and filtering, creates a session provider for each registered Host and revises unavailable text. Fleetpane retains lazy views and on-demand read-only checks; this does not require eager provider initialization.",
+      "fleetpane_action": "retain-lazy-local-hosts"
+    },
+    {
+      "ordinal": 212,
+      "revision": "4f00e0728449281603e974c919f80bf91ba35b28",
+      "date": "2025-11-26T19:02:47+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/components/create-agent-modal.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Creation requires an explicitly supplied valid Host; removes inferred first-Host fallback and aggregation of unidentified sessions under a guessed Host. Fleetpane keeps exact endpoint provenance and fenced explicit mutations.",
+      "fleetpane_action": "explicit-host-source"
+    },
+    {
+      "ordinal": 213,
+      "revision": "99b055d2f980b5ad8612d09a0c223a98e5d38cb0",
+      "date": "2025-11-26T19:09:19+01:00",
+      "category": "behavior",
+      "inspection": "source-or-config-diff",
+      "paths_inspected": [
+        "packages/app/src/app/settings.tsx"
+      ],
+      "finding": "Removes global settings Host selector, URL/Test form and implicit selected-Host writes; per-card tests remain. Fleetpane adds one observational diagnostic per endpoint with protocol/drain/fault separation, count-only output and explicit navigation.",
+      "fleetpane_action": "host-diagnostics"
+    },
+    {
+      "ordinal": 214,
+      "revision": "881f0e7a8b8672cbb96558180c867736adc5c660",
+      "date": "2025-11-26T19:15:47+01:00",
+      "category": "documentation",
+      "inspection": "documentation-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan claims per-card Test wiring/typecheck and records outstanding offline/Git Diff cleanup. Documentation is not runtime evidence; historical commands were not executed and user-deferred Git Diff remains deferred.",
+      "fleetpane_action": "no-runtime-port"
     }
   ],
   "workflow_status": {
@@ -3193,7 +3245,8 @@
     "streamed-reasoning": "partial; three typed indexed Codex deltas, history per-item boundaries and retained native card updates verified locally with regressions and gated synthetic provider. Exact Copy/reload, Stop and independent permission covered; external model and non-Linux native acceptance remain open.",
     "fleet-session-directory": "partial; shared observational multi-Host metadata pages, explicit per-Host errors and native grouped filters/paging/source preparation. Local verification documented separately; remote auth, registry editing, global activity ordering and subscriptions remain open.",
     "preferred-host": "partial; configuration-local endpoint preference, explicit missing/offline states, shared CLI/CAS and Linux native reopen/conflict/failure/close acceptance; no session selection restore, registry editing, remote auth, telemetry or global model prefetch.",
-    "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim."
+    "directory-filters": "partial; shared CLI and Linux native provider archive/workspace/title filters, exact source archive membership, explicit restore and independent ACP request preservation verified with private providers; unsupported ACP archive listing remains explicit. No automatic restore, complete-history search or real-provider refresh claim.",
+    "host-diagnostics": "partial; shared CLI and Linux native count-only observational endpoint checks, protocol/drain/fault status, single/all refresh, exact JSON copy, offline recovery, preserved drafts/pending requests and late-result navigation covered with owned fixtures. No remote auth, registry editing, live update or external-model claim."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

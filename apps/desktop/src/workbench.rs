@@ -1,5 +1,6 @@
 //! Retain separate Host views; switching never transfers a lease or resumes a session.
 mod attention;
+mod diagnostics;
 mod files;
 mod host_choice;
 mod sessions;
@@ -47,6 +48,7 @@ pub struct Workbench {
     attention: attention::State,
     sessions: sessions::State,
     host_choice: host_choice::State,
+    diagnostics: diagnostics::State,
     creation_directory: Option<std::path::PathBuf>,
     creations: Vec<Intent>,
     records_busy: bool,
@@ -56,6 +58,7 @@ pub struct Workbench {
 
 impl Workbench {
     fn open_chooser(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.diagnostics.active = false;
         self.leave_attention();
         self.sessions.active = false;
         self.choosing = true;
@@ -115,6 +118,7 @@ impl Workbench {
             attention: attention::State::new(cx),
             sessions: sessions::State::new(window, cx),
             host_choice: host_choice::State::default(),
+            diagnostics: diagnostics::State::new(cx),
             creation_directory,
             creations: Vec::new(),
             records_busy: false,
@@ -220,6 +224,7 @@ impl Workbench {
     }
 
     fn show_host(&mut self, index: usize, window: &mut Window, cx: &mut Context<Self>) {
+        self.diagnostics.active = false;
         self.sessions.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
@@ -253,6 +258,7 @@ impl Workbench {
     }
 
     fn open_workspaces(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.diagnostics.active = false;
         self.sessions.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
@@ -724,6 +730,15 @@ impl Render for Workbench {
                                     }))
                             }))
                             .child(
+                                Button::new("open-host-diagnostics")
+                                    .small()
+                                    .label("Hosts")
+                                    .selected(self.diagnostics.active)
+                                    .on_click(cx.listener(|this, _, window, cx| {
+                                        this.open_diagnostics(window, cx)
+                                    })),
+                            )
+                            .child(
                                 Button::new("open-all-sessions")
                                     .small()
                                     .label("All sessions")
@@ -773,6 +788,9 @@ impl Render for Workbench {
             .when(self.sessions.active, |root| {
                 root.child(self.sessions_view(cx))
             })
+            .when(self.diagnostics.active, |root| {
+                root.child(self.diagnostics_view(cx))
+            })
             .when(self.browsing_workspaces, |root| {
                 root.child(
                     div().flex_1().min_h_0().child(
@@ -805,6 +823,7 @@ impl Render for Workbench {
                     && !self.browsing_workspaces
                     && !self.attention.active
                     && !self.sessions.active
+                    && !self.diagnostics.active
                     && self.file_navigation.view.is_none(),
                 |root| {
                     root.child(

@@ -8,6 +8,9 @@ use std::{
 pub const MAX_HOSTS: usize = 8;
 pub const MAX_CONFIG_BYTES: usize = 16 * 1024;
 
+#[cfg(unix)]
+pub mod diagnostics;
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Endpoint {

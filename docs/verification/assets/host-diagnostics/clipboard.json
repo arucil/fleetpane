@@ -1,0 +1,22 @@
+{
+  "approval": {
+    "selection": "clipboard",
+    "content": "{\n  \"endpoint\": {\n    \"name\": \"DeepSeek permission\",\n    \"socket\": \"/tmp/fp-health-native-1021/1/host/control.sock\"\n  },\n  \"checked_at_unix_ms\": 1792598351595,\n  \"elapsed_ms\": 2,\n  \"expected_protocol\": 3,\n  \"status\": \"reachable\",\n  \"observation\": {\n    \"protocol\": 3,\n    \"host_id\": \"7c43739c-74fc-4b21-9f02-6f09265d169f\",\n    \"host_pid\": 3487292,\n    \"provider_pid\": 3487303,\n    \"owner\": {\n      \"host_id\": \"7c43739c-74fc-4b21-9f02-6f09265d169f\",\n      \"controller_id\": \"076e196a-88b3-4f16-9f6b-e25e6a6b94ac\",\n      \"generation\": 2\n    },\n    \"admission\": {\n      \"generation\": 0,\n      \"mode\": \"ready\"\n    },\n    \"sequence\": 8,\n    \"journal_total\": 2,\n    \"active_turns\": 1,\n    \"pending_requests\": 1,\n    \"in_flight_operations\": 0,\n    \"unknown_operations\": 0,\n    \"terminals\": 0,\n    \"stopping\": 0,\n    \"fault\": null,\n    \"fault_scope\": null\n  }\n}",
+    "bytes": 852
+  },
+  "offline_before": {
+    "selection": "clipboard",
+    "content": "{\n  \"endpoint\": {\n    \"name\": \"Offline\",\n    \"socket\": \"/tmp/fp-health-native-1021/missing/control.sock\"\n  },\n  \"checked_at_unix_ms\": 1792598496380,\n  \"elapsed_ms\": 0,\n  \"expected_protocol\": 3,\n  \"status\": \"unavailable\",\n  \"error\": \"No such file or directory (os error 2)\"\n}",
+    "bytes": 274
+  },
+  "offline_after": {
+    "selection": "clipboard",
+    "content": "{\n  \"endpoint\": {\n    \"name\": \"Offline\",\n    \"socket\": \"/tmp/fp-health-native-1021/missing/control.sock\"\n  },\n  \"checked_at_unix_ms\": 1792598569286,\n  \"elapsed_ms\": 0,\n  \"expected_protocol\": 3,\n  \"status\": \"reachable\",\n  \"observation\": {\n    \"protocol\": 3,\n    \"host_id\": \"3a547694-4590-4693-8d14-afb3f79188b0\",\n    \"host_pid\": 3522593,\n    \"provider_pid\": 3522600,\n    \"owner\": null,\n    \"admission\": {\n      \"generation\": 0,\n      \"mode\": \"ready\"\n    },\n    \"sequence\": 0,\n    \"journal_total\": 0,\n    \"active_turns\": 0,\n    \"pending_requests\": 0,\n    \"in_flight_operations\": 0,\n    \"unknown_operations\": 0,\n    \"terminals\": 0,\n    \"stopping\": 0,\n    \"fault\": null,\n    \"fault_scope\": null\n  }\n}",
+    "bytes": 696
+  },
+  "draft": {
+    "selection": "clipboard",
+    "content": "诊断时保留草稿\n  Rust ↔ DeepSeek",
+    "bytes": 41
+  }
+}

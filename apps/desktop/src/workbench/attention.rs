@@ -44,6 +44,7 @@ impl Workbench {
     }
 
     pub(super) fn open_attention(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.diagnostics.active = false;
         self.sessions.active = false;
         self.file_navigation = files::State::default();
         self.choosing = false;

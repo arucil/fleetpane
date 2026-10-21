@@ -1,0 +1,589 @@
+{
+  "binary_sha256": "cf06cba5a17713e5a25423ad7cb87601d72a99896244f99b994e60bec639631f",
+  "elapsed_seconds": 5.011778350017266,
+  "reports": [
+    {
+      "endpoint": {
+        "name": "Codex \u5f00\u53d1",
+        "socket": "/tmp/fp-health-native-1021/0/host/control.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 3,
+      "expected_protocol": 3,
+      "status": "reachable",
+      "observation": {
+        "protocol": 3,
+        "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+        "host_pid": 3487193,
+        "provider_pid": 3487207,
+        "owner": {
+          "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+          "controller_id": "f5dce795-5e15-4701-8ac9-38cf5b18b205",
+          "generation": 1
+        },
+        "admission": {
+          "generation": 0,
+          "mode": "ready"
+        },
+        "sequence": 1,
+        "journal_total": 1,
+        "active_turns": 0,
+        "pending_requests": 0,
+        "in_flight_operations": 0,
+        "unknown_operations": 0,
+        "terminals": 0,
+        "stopping": 0,
+        "fault": null,
+        "fault_scope": null
+      }
+    },
+    {
+      "endpoint": {
+        "name": "DeepSeek permission",
+        "socket": "/tmp/fp-health-native-1021/1/host/control.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 5,
+      "expected_protocol": 3,
+      "status": "reachable",
+      "observation": {
+        "protocol": 3,
+        "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+        "host_pid": 3487292,
+        "provider_pid": 3487303,
+        "owner": {
+          "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+          "controller_id": "076e196a-88b3-4f16-9f6b-e25e6a6b94ac",
+          "generation": 2
+        },
+        "admission": {
+          "generation": 0,
+          "mode": "ready"
+        },
+        "sequence": 8,
+        "journal_total": 2,
+        "active_turns": 1,
+        "pending_requests": 1,
+        "in_flight_operations": 0,
+        "unknown_operations": 0,
+        "terminals": 0,
+        "stopping": 0,
+        "fault": null,
+        "fault_scope": null
+      }
+    },
+    {
+      "endpoint": {
+        "name": "Draining",
+        "socket": "/tmp/fp-health-native-1021/2/host/control.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 3,
+      "expected_protocol": 3,
+      "status": "reachable",
+      "observation": {
+        "protocol": 3,
+        "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+        "host_pid": 3487354,
+        "provider_pid": 3487361,
+        "owner": {
+          "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+          "controller_id": "2812e150-9f5c-4f9b-a29a-ba1039082ff2",
+          "generation": 1
+        },
+        "admission": {
+          "generation": 1,
+          "mode": "draining"
+        },
+        "sequence": 0,
+        "journal_total": 0,
+        "active_turns": 0,
+        "pending_requests": 0,
+        "in_flight_operations": 0,
+        "unknown_operations": 0,
+        "terminals": 0,
+        "stopping": 0,
+        "fault": null,
+        "fault_scope": null
+      }
+    },
+    {
+      "endpoint": {
+        "name": "Provider fault",
+        "socket": "/tmp/fp-health-native-1021/3/host/control.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 3,
+      "expected_protocol": 3,
+      "status": "reachable",
+      "observation": {
+        "protocol": 3,
+        "host_id": "fd8ed72a-ae41-4e71-99b2-9ce80a0081a6",
+        "host_pid": 3487392,
+        "provider_pid": 3487397,
+        "owner": null,
+        "admission": {
+          "generation": 0,
+          "mode": "ready"
+        },
+        "sequence": 0,
+        "journal_total": 0,
+        "active_turns": 0,
+        "pending_requests": 0,
+        "in_flight_operations": 0,
+        "unknown_operations": 0,
+        "terminals": 0,
+        "stopping": 0,
+        "fault": "provider output closed",
+        "fault_scope": "provider"
+      }
+    },
+    {
+      "endpoint": {
+        "name": "Incompatible",
+        "socket": "/tmp/fp-health-native-1021/fake-0.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 4,
+      "expected_protocol": 3,
+      "status": "reachable",
+      "observation": {
+        "protocol": 999,
+        "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+        "host_pid": 3487193,
+        "provider_pid": 3487207,
+        "owner": {
+          "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+          "controller_id": "f5dce795-5e15-4701-8ac9-38cf5b18b205",
+          "generation": 1
+        },
+        "admission": {
+          "generation": 0,
+          "mode": "ready"
+        },
+        "sequence": 1,
+        "journal_total": 1,
+        "active_turns": 0,
+        "pending_requests": 0,
+        "in_flight_operations": 0,
+        "unknown_operations": 0,
+        "terminals": 0,
+        "stopping": 0,
+        "fault": null,
+        "fault_scope": null
+      }
+    },
+    {
+      "endpoint": {
+        "name": "Rejected",
+        "socket": "/tmp/fp-health-native-1021/fake-1.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 4,
+      "expected_protocol": 3,
+      "status": "unavailable",
+      "error": "fixture_refused: explicit refusal"
+    },
+    {
+      "endpoint": {
+        "name": "Offline",
+        "socket": "/tmp/fp-health-native-1021/missing/control.sock"
+      },
+      "checked_at_unix_ms": 1792598284492,
+      "elapsed_ms": 0,
+      "expected_protocol": 3,
+      "status": "unavailable",
+      "error": "No such file or directory (os error 2)"
+    },
+    {
+      "endpoint": {
+        "name": "Stalled",
+        "socket": "/tmp/fp-health-native-1021/fake-2.sock"
+      },
+      "checked_at_unix_ms": 1792598284493,
+      "elapsed_ms": 5003,
+      "expected_protocol": 3,
+      "status": "unavailable",
+      "error": "deadline has elapsed"
+    }
+  ],
+  "before": [
+    {
+      "protocol": 3,
+      "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+      "host_pid": 3487193,
+      "provider_pid": 3487207,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+        "controller_id": "f5dce795-5e15-4701-8ac9-38cf5b18b205",
+        "generation": 1
+      },
+      "sequence": 1,
+      "operation_ids": [
+        "48cf6048-8201-4a65-9edf-0db41486bc7d"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+      "host_pid": 3487292,
+      "provider_pid": 3487303,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+        "controller_id": "076e196a-88b3-4f16-9f6b-e25e6a6b94ac",
+        "generation": 2
+      },
+      "sequence": 8,
+      "operation_ids": [
+        "eaf7af00-c524-44da-9aec-c0d9d7bbfd7e",
+        "8e636f3f-5ed9-42ae-b8c7-2234b48077f1"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "turn_id": "ea80cf2e-0c8f-4f2a-9fc0-212d0c2050e2"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "threadId": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-b4d2f164-649c-4376-9fbc-3df45fc2e574"
+            }
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+      "host_pid": 3487354,
+      "provider_pid": 3487361,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+        "controller_id": "2812e150-9f5c-4f9b-a29a-ba1039082ff2",
+        "generation": 1
+      },
+      "sequence": 0,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 1,
+        "mode": "draining"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "fd8ed72a-ae41-4e71-99b2-9ce80a0081a6",
+      "host_pid": 3487392,
+      "provider_pid": 3487397,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": null,
+      "sequence": 0,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": "provider output closed",
+      "fault_scope": "provider"
+    }
+  ],
+  "after": [
+    {
+      "protocol": 3,
+      "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+      "host_pid": 3487193,
+      "provider_pid": 3487207,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "d92d7252-b647-4cb4-b50a-5f5786cb7435",
+        "controller_id": "f5dce795-5e15-4701-8ac9-38cf5b18b205",
+        "generation": 1
+      },
+      "sequence": 1,
+      "operation_ids": [
+        "48cf6048-8201-4a65-9edf-0db41486bc7d"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+      "host_pid": 3487292,
+      "provider_pid": 3487303,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "7c43739c-74fc-4b21-9f02-6f09265d169f",
+        "controller_id": "076e196a-88b3-4f16-9f6b-e25e6a6b94ac",
+        "generation": 2
+      },
+      "sequence": 8,
+      "operation_ids": [
+        "eaf7af00-c524-44da-9aec-c0d9d7bbfd7e",
+        "8e636f3f-5ed9-42ae-b8c7-2234b48077f1"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "turn_id": "ea80cf2e-0c8f-4f2a-9fc0-212d0c2050e2"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "threadId": "f45d12f2-1aed-4ad5-a586-f6c88922c582",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-b4d2f164-649c-4376-9fbc-3df45fc2e574"
+            }
+          }
+        }
+      ],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+      "host_pid": 3487354,
+      "provider_pid": 3487361,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "947db6b4-b6c3-487f-b753-8cd2efcc8844",
+        "controller_id": "2812e150-9f5c-4f9b-a29a-ba1039082ff2",
+        "generation": 1
+      },
+      "sequence": 0,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 1,
+        "mode": "draining"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "fd8ed72a-ae41-4e71-99b2-9ce80a0081a6",
+      "host_pid": 3487392,
+      "provider_pid": 3487397,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": null,
+      "sequence": 0,
+      "operation_ids": [],
+      "journal_total": 0,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "fault": "provider output closed",
+      "fault_scope": "provider"
+    }
+  ],
+  "fake_requests": [
+    [
+      {
+        "command": "snapshot"
+      }
+    ],
+    [
+      {
+        "command": "snapshot"
+      }
+    ],
+    [
+      {
+        "command": "snapshot"
+      }
+    ]
+  ]
+}

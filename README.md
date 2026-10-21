@@ -17,6 +17,14 @@ The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
 
+**Hosts** checks each configured local endpoint without taking control. Cards
+show the last check time, protocol, process/controller identity, drain/fault state
+and activity counts, with **Check**, **Check all** and **Copy diagnostics**.
+Checks omit provider initialization data and request payloads; local paths, process
+identities and error messages remain in copied JSON. CLI:
+`fleetpane-host host-diagnostics CONFIG.json [HOST_NAME]`. Results describe an
+observation, not permission to stop a Host. [Verification](docs/verification/2026-10-22-host-diagnostics.md).
+
 **Attention** filters pending requests by Host and kind. With the queue focused,
 Up/Down and Home/End select, Enter opens the original source, Ctrl+C copies the
 original request and Ctrl+R refreshes. A resolved or changed selection clears
@@ -918,6 +926,7 @@ python3 scripts/paseo-fork-smoke.py              # Unix; saved context fork, sta
 python3 scripts/paseo-fork-smoke.py --real       # optional; real Codex app-server, local rejecting model, no account
 python3 scripts/paseo-fork-smoke.py --opencodex  # optional; one real model turn through existing loopback proxy
 python3 scripts/concurrency-smoke.py             # Unix; 20 synthetic ACP streams, reads, cancel and handoff
+python3 scripts/host-diagnostics-smoke.py         # Unix; eight endpoints, timeout/protocol/fault and unchanged snapshots
 python3 scripts/multihost-smoke.py               # Unix; colliding IDs, permissions, read-only probes and one-Host loss
 python3 scripts/journal-smoke.py                 # Unix; durable receipts, crash unknowns and exact deduplication
 python3 scripts/drain-smoke.py                   # Unix; old/new Hosts, durable admission drain and answers/Stop

@@ -200,3 +200,13 @@ and native All sessions view. Source opening preserves archive membership even
 when runtime status is idle, with explicit restore and exact draft preservation.
 ACP archive listing remains unsupported and visible; see [acceptance](verification/2026-10-21-directory-filters.md).
 Scoped review reaches 207 (`5807f62f1`); next is 208 (`db87f331f`).
+
+
+Per-Host diagnostics (2026-10-22): native Hosts cards and shared
+`host-diagnostics CONFIG [HOST_NAME]` report count-only snapshot observations,
+protocol compatibility, drain/fault, controller/process identity and check timing.
+Single/all checks, exact JSON copy, 8 endpoints, stalled response isolation,
+900×560 scrolling, offline recovery and retained drafts/requests have
+[local acceptance](verification/2026-10-22-host-diagnostics.md). Remote auth,
+registry editing and safe Host retirement/update remain open.
+Scoped chronological review reaches 214 (`881f0e7a8`); next is 215 (`393aa44e6`).

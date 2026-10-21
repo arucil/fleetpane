@@ -56,6 +56,7 @@ impl State {
 
 impl Workbench {
     pub(super) fn open_sessions(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.diagnostics.active = false;
         self.leave_attention();
         self.file_navigation = files::State::default();
         self.choosing = false;

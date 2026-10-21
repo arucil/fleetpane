@@ -31,6 +31,9 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host attention CONFIG.json: read-only pending approvals/questions across configured Hosts; unavailable Hosts remain explicit. No takeover, answer, resume or timeout decision."
         );
         println!(
+            "fleetpane-host host-diagnostics CONFIG.json [HOST_NAME]: read-only endpoint checks, protocol, process identity, admission, fault and activity counts. Omits provider initialization data and request payloads; never claims or resumes."
+        );
+        println!(
             "fleetpane-host sessions CONFIG.json [--archived] [--search TITLE] [--cwd ABSOLUTE_DIRECTORY] [--host NAME [--cursor CURSOR --host-id UUID]]: observe 100-session metadata pages across configured Hosts without acquiring control. Failed Hosts have explicit errors in the JSON report."
         );
         println!(
@@ -810,6 +813,22 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                     &fleetpane_session::attention::collect(configuration).await?
                 )?
             );
+            Ok(())
+        }
+        "host-diagnostics" if args.len() == 2 || args.len() == 3 => {
+            let mut configuration =
+                fleetpane_session::hosts::Configuration::read(std::path::Path::new(&args[1]))?;
+            if let Some(name) = args.get(2) {
+                configuration
+                    .hosts
+                    .retain(|endpoint| endpoint.name == *name);
+                if configuration.hosts.is_empty() {
+                    return Err("configured Host name not found".into());
+                }
+                configuration.routes.clear();
+            }
+            let reports = fleetpane_session::hosts::diagnostics::collect(configuration).await?;
+            println!("{}", serde_json::to_string_pretty(&reports)?);
             Ok(())
         }
         "hosts" if args.len() == 2 => {
