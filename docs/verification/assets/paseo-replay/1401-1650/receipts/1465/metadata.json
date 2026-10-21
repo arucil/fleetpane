@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1465,
+  "revision": "ca787271b3f6f19abc5ee223a749ad5d751f1a36",
+  "date": "2026-03-08T17:06:05+07:00",
+  "committer_date": "2026-03-08T17:06:05+07:00",
+  "parents": [
+    "1e5e0f625dc0e72e44590de970e8ddcef4209657"
+  ],
+  "subject": "Support per-arch desktop builds and prune runtime artifacts",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:8beeb94129b6cfce81c2838884544a85ede88ed5644cd6c265c08a9ce4a80b2d",
+  "diff_tree_digest": "sha256:3f9d04aaac79cde1d3f52a8688c12dac850764a9f372ad742039f767be6711b7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-updates-section.tsx",
+      "old_lines": [
+        342,
+        345
+      ],
+      "new_lines": [
+        243,
+        256
+      ],
+      "diff_block_lines": [
+        159,
+        173
+      ],
+      "hunk_header": "@@ -341,5 +242,15 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 287,
+  "receipt_file": "receipts/1465/selected.patch"
+}

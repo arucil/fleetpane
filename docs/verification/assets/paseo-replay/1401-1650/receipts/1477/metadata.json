@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1477,
+  "revision": "a15b52efc83f8b23500bab12f8f35fade167d7a5",
+  "date": "2026-03-09T16:38:36+07:00",
+  "committer_date": "2026-03-09T16:38:36+07:00",
+  "parents": [
+    "7f11b93e0f12776c4d673139f55c320938883dcd"
+  ],
+  "subject": "feat: add diff stats and archive actions to workspace sidebar",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-source-of-truth.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/sidebar-project-row-model.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:addc6631fb545e9a81b81790a2c1c626d12835a217bd20ea3cc54598208b7ecf",
+  "diff_tree_digest": "sha256:b4e1f56e8c96881fd1d49559f19d8dfa26fb96dc40b30b501ddb923a0fed192c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        160,
+        166
+      ],
+      "new_lines": [
+        160,
+        185
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -159,22 +159,33 @@ function SessionRow({",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 396,
+  "receipt_file": "receipts/1477/selected.patch"
+}

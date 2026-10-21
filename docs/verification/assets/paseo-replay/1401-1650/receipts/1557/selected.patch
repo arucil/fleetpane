@@ -1,0 +1,9 @@
+FILE skills/paseo-loop/bin/loop.sh
+RANGE {"path":"skills/paseo-loop/bin/loop.sh","old_lines":[112,116],"new_lines":[112,116],"diff_block_lines":[5,11],"hunk_header":"@@ -112,5 +112,5 @@ if [[ \"$worker_provider\" == \"codex\" ]]; then","substantive_changed_lines":2}
+@@ -112,5 +112,5 @@ if [[ "$worker_provider" == "codex" ]]; then
+   worker_flags+=(--mode full-access --provider codex)
+ elif [[ "$worker_provider" == "claude" ]]; then
+-  worker_flags+=(--mode bypassPermissions)
++  worker_flags+=(--mode bypass)
+ fi
+ [[ -n "$worker_model" ]] && worker_flags+=(--model "$worker_model")

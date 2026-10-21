@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/connection-selection.ts
+RANGE {"path":"packages/app/src/utils/connection-selection.ts","old_lines":[26,53],"new_lines":[34,36],"diff_block_lines":[21,50],"hunk_header":"@@ -24,36 +32,21 @@ export function selectBestConnection(","substantive_changed_lines":22}
+-  const available = candidates
+-    .map((candidate, index) => ({ candidate, index }))
+-    .filter(({ candidate }) => {
+-      const probe = probeByConnectionId.get(candidate.connectionId);
+-      return probe?.status === "available";
+-    });
+-
+-  const byLatency = (left: { candidate: ConnectionCandidate; index: number }, right: { candidate: ConnectionCandidate; index: number }) => {
+-      const leftProbe = probeByConnectionId.get(left.candidate.connectionId);
+-      const rightProbe = probeByConnectionId.get(right.candidate.connectionId);
++  let bestConnectionId: string | null = null;
++  let bestLatency: number | null = null;
+ 
+-      const leftLatency =
+-        leftProbe && leftProbe.status === "available"
+-          ? leftProbe.latencyMs
+-          : Number.POSITIVE_INFINITY;
+-      const rightLatency =
+-        rightProbe && rightProbe.status === "available"
+-          ? rightProbe.latencyMs
+-          : Number.POSITIVE_INFINITY;
+-
+-      if (leftLatency === rightLatency) {
+-        return left.index - right.index;
+-      }
+-
+-      return leftLatency - rightLatency;
+-    };
+-
+-  if (available.length === 0) {

@@ -1,0 +1,8 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[444,447],"new_lines":[444,448],"diff_block_lines":[5,10],"hunk_header":"@@ -444,4 +444,5 @@ jobs:","substantive_changed_lines":1}
+@@ -444,4 +444,5 @@ jobs:
+ 
+       - name: Smoke check managed runtime for Windows
++        timeout-minutes: 12
+         env:
+           PASEO_MANAGED_SMOKE_SKIP_BUILD: "1"

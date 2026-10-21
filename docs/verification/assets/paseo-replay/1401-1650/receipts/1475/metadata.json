@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1475,
+  "revision": "02d74777b21a483dd36218abad9c7346f93b2622",
+  "date": "2026-03-09T15:42:35+07:00",
+  "committer_date": "2026-03-09T15:42:35+07:00",
+  "parents": [
+    "cf148ba3afa4ba8edbe42b643dbbfca7b495ca0c"
+  ],
+  "subject": "fix(ci): regenerate lockfile for cross-platform optional deps",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackage-lock.json",
+    "M\tpackages/app/metro.config.js"
+  ],
+  "source_receipt_digest": "sha256:8b00ef03b410c5c095f8b488f4bd5c504178a18fd57113489ca3426785378357",
+  "diff_tree_digest": "sha256:762a33bfaed697bbbb219df67c9d5cdf025ea106425384b661333fc39212978b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/metro.config.js",
+      "old_lines": [
+        14,
+        20
+      ],
+      "new_lines": [
+        14,
+        17
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -14,7 +14,4 @@ const customWebPlatform = (process.env.PASEO_WEB_PLATFORM ?? \"\")",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 19855,
+  "receipt_file": "receipts/1475/selected.patch"
+}

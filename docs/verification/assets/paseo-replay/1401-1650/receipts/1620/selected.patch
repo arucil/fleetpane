@@ -1,0 +1,10 @@
+FILE packages/server/src/server/workspace-registry.ts
+RANGE {"path":"packages/server/src/server/workspace-registry.ts","old_lines":[160,161],"new_lines":[162,169],"diff_block_lines":[44,51],"hunk_header":"@@ -154,8 +156,14 @@ class FileBackedRegistry<TRecord extends RegistryRecord> {","substantive_changed_lines":4}
++
++  private async enqueuePersist(): Promise<void> {
++    const nextPersist = this.persistQueue.then(() => this.persist())
++    this.persistQueue = nextPersist.catch(() => {})
++    await nextPersist
++  }
+ }
+ 

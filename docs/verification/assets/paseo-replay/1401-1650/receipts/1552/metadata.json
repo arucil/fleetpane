@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1552,
+  "revision": "b09a731d85b93fddaa3bb4acfb4f203403efc9c8",
+  "date": "2026-03-12T20:38:03+07:00",
+  "committer_date": "2026-03-12T20:38:03+07:00",
+  "parents": [
+    "554017b0b869cff69e0fd261e3a6b76f4d8c727a"
+  ],
+  "subject": "refactor: replace welcome message with server_info status payload",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/utils/test-daemon-connection.test.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "M\tpackages/desktop/scripts/validate-managed-runtime.mjs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/relay-transport.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:7753e21704136b0b165f0afcda47821696c0661de721c350b5daab919b0421b3",
+  "diff_tree_digest": "sha256:f78cd501fb1eb02503397c9b7ec8bc7b35dd22e91128429e90f61de185a1a91d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/runtime_manager.rs",
+      "old_lines": [
+        335,
+        339
+      ],
+      "new_lines": [
+        335,
+        362
+      ],
+      "diff_block_lines": [
+        7,
+        35
+      ],
+      "hunk_header": "@@ -334,6 +334,29 @@ fn bundled_runtime_root(app: &AppHandle) -> Result<PathBuf, String> {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 274,
+  "receipt_file": "receipts/1552/selected.patch"
+}

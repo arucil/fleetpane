@@ -1,0 +1,27 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[1105,1120],"new_lines":[1106,1126],"diff_block_lines":[23,47],"hunk_header":"@@ -1104,17 +1105,22 @@ export async function getCheckoutShortstat(","substantive_changed_lines":10}
+   const configured = await getConfiguredBaseRefForCwd(cwd, context);
+-  const baseRef = configured.baseRef ?? (await resolveBaseRef(cwd));
+-  if (!baseRef) {
++  const localBaseRef = configured.baseRef ?? (await resolveBaseRef(cwd));
++  if (!localBaseRef) {
+     return null;
+   }
+ 
+   const currentBranch = await getCurrentBranch(cwd);
+-  if (currentBranch === baseRef) {
++  if (currentBranch === localBaseRef) {
+     return null;
+   }
+ 
++  const comparisonBaseRef = await resolveBestComparisonBaseRef(
++    cwd,
++    normalizeLocalBranchRefName(localBaseRef)
++  );
++
+   let mergeBase: string;
+   try {
+-    const { stdout } = await execAsync(`git merge-base HEAD ${baseRef}`, {
++    const { stdout } = await execAsync(`git merge-base HEAD ${comparisonBaseRef}`, {
+       cwd,
+       env: READ_ONLY_GIT_ENV,

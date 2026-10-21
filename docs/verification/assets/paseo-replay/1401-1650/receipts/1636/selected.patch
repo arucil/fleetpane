@@ -1,0 +1,14 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1568,1570],"new_lines":[1562,1572],"diff_block_lines":[22,33],"hunk_header":"@@ -1561,10 +1560,13 @@ function WorkspaceScreenContent({","substantive_changed_lines":7}
+-                      )}
++                      {({ hovered, open }) => {
++                        const Icon = isMobile ? EllipsisVertical : Ellipsis;
++                        return (
++                          <Icon
++                            size={theme.iconSize.md}
++                            color={hovered || open ? theme.colors.foreground : theme.colors.foregroundMuted}
++                          />
++                        );
++                      }}
+                     </DropdownMenuTrigger>
+                     <DropdownMenuContent

@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1616,
+  "revision": "7f69166e97cddd1b4edbb1523ce8833c595958fc",
+  "date": "2026-03-11T21:26:58+07:00",
+  "committer_date": "2026-03-13T13:44:25+07:00",
+  "parents": [
+    "22687906560932e1b9a5b43c439a29d51fc55708"
+  ],
+  "subject": "refactor: extract detail display logic into helper functions",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:b453445bf3fef348da19d4cbc6faba3dcad8aa1c10b219193376ad1054af563a",
+  "diff_tree_digest": "sha256:7b4904c3a6f26d0b3accadc76a10eb444c5b6bab4a66197b08fabcb29ae941c1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/tool-call-display.ts",
+      "old_lines": [
+        58,
+        72
+      ],
+      "new_lines": [
+        63,
+        82
+      ],
+      "diff_block_lines": [
+        17,
+        46
+      ],
+      "hunk_header": "@@ -57,53 +62,82 @@ function formatErrorText(error: unknown): string | undefined {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 84,
+  "receipt_file": "receipts/1616/selected.patch"
+}

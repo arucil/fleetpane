@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-actions-split-button.tsx
+RANGE {"path":"packages/app/src/components/git-actions-split-button.tsx","old_lines":[0,0],"new_lines":[17,46],"diff_block_lines":[23,52],"hunk_header":"@@ -0,0 +1,192 @@","substantive_changed_lines":26}
++
++export function GitActionsSplitButton({ gitActions }: GitActionsSplitButtonProps) {
++  const { theme } = useUnistyles();
++
++  const getActionDisplayLabel = useCallback((action: GitAction): string => {
++    if (action.status === "pending") return action.pendingLabel;
++    if (action.status === "success") return action.successLabel;
++    return action.label;
++  }, []);
++
++  return (
++    <View style={styles.row}>
++      {gitActions.primary ? (
++        <View style={styles.splitButton}>
++          <Pressable
++            testID="changes-primary-cta"
++            style={({ hovered, pressed }) => [
++              styles.splitButtonPrimary,
++              (hovered || pressed) && styles.splitButtonPrimaryHovered,
++              gitActions.primary!.disabled && styles.splitButtonPrimaryDisabled,
++            ]}
++            onPress={gitActions.primary.handler}
++            disabled={gitActions.primary.disabled}
++            accessibilityRole="button"
++            accessibilityLabel={gitActions.primary.label}
++          >
++            {gitActions.primary.status === "pending" ? (
++              <ActivityIndicator
++                size="small"
++                color={theme.colors.foreground}

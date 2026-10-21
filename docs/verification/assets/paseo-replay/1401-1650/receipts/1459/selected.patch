@@ -1,0 +1,32 @@
+FILE packages/app/src/contexts/daemon-registry-context.tsx
+RANGE {"path":"packages/app/src/contexts/daemon-registry-context.tsx","old_lines":[73,75],"new_lines":[142,169],"diff_block_lines":[121,150],"hunk_header":"@@ -72,6 +141,387 @@ function normalizeEndpointOrNull(endpoint: string): string | null {","substantive_changed_lines":20}
+ 
+-function isDefaultLocalhostConnection(connection: HostConnection): boolean {
+-  return connection.type === 'direct' && connection.endpoint === DEFAULT_LOCALHOST_ENDPOINT
++function sleep(ms: number): Promise<void> {
++  return new Promise((resolve) => {
++    setTimeout(resolve, ms)
++  })
++}
++
++function normalizeManagedTransportConnection(input: {
++  transportType: string
++  transportPath: string
++}): HostConnection | null {
++  const transportPath = input.transportPath.trim()
++  if (!transportPath) {
++    return null
++  }
++
++  if (input.transportType === 'tcp') {
++    try {
++      const endpoint = normalizeHostPort(transportPath)
++      return {
++        id: `direct:${endpoint}`,
++        type: 'directTcp',
++        endpoint,
++      }
++    } catch {
++      return null
++    }
++  }

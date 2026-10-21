@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1479,
+  "revision": "a3e271a1e728c249ec01ad0135f1a52b11872023",
+  "date": "2026-03-09T17:42:27+07:00",
+  "committer_date": "2026-03-09T17:42:27+07:00",
+  "parents": [
+    "7b22fc5c3fc5086442418629f1005b3d10df6336"
+  ],
+  "subject": "fix: use freshest comparison base for git status and shortstat",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:d4cef580ede250a4867227a9dc02b12bc362e4c139fa42648390e6e55eac97d9",
+  "diff_tree_digest": "sha256:2e0ffc425c4bdc7726ea791f890d7fad042098b08743ce0f5f0e27a6f4b568cd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1105,
+        1120
+      ],
+      "new_lines": [
+        1106,
+        1126
+      ],
+      "diff_block_lines": [
+        23,
+        47
+      ],
+      "hunk_header": "@@ -1104,17 +1105,22 @@ export async function getCheckoutShortstat(",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 49,
+  "receipt_file": "receipts/1479/selected.patch"
+}

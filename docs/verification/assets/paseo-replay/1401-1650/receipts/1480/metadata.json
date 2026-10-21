@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1480,
+  "revision": "cc45c3772f4f25f1d279ea8ec132573be1d5be74",
+  "date": "2026-03-10T11:20:17+07:00",
+  "committer_date": "2026-03-10T11:20:17+07:00",
+  "parents": [
+    "a3e271a1e728c249ec01ad0135f1a52b11872023"
+  ],
+  "subject": "feat: add multi-platform downloads and improve homepage animations",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/screens/agents-screen.tsx",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/website/package.json",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:58af52216c2c9b9d38e4423ccf5401f264387b1569372275999ee110c1d1b65e",
+  "diff_tree_digest": "sha256:a69fa4803c143ea139f58c7019b1178a90ffeea8553325d99e4519ffa2633058",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/src/routes/index.tsx",
+      "old_lines": [
+        9,
+        10
+      ],
+      "new_lines": [
+        46,
+        64
+      ],
+      "diff_block_lines": [
+        52,
+        70
+      ],
+      "hunk_header": "@@ -6,5 +7,58 @@ import '~/styles.css'",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 685,
+  "receipt_file": "receipts/1480/selected.patch"
+}

@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1426,
+  "revision": "5b270444d58e2817718ce082292fe3ab6671ba02",
+  "date": "2026-03-06T14:49:06+07:00",
+  "committer_date": "2026-03-06T14:49:06+07:00",
+  "parents": [
+    "885b575d14ee8767abf513f84d265eaba3dc9816"
+  ],
+  "subject": "refactor: replace store-based keyboard action requests with direct dispatcher and simplify agent attention clearing",
+  "diff_tree_paths": [
+    "D\tPLAN_ITERATION_2_PROJECTS_WORKSPACES_TABS.md",
+    "D\tPLAN_ITERATION_3_WORKSPACE_HEADER_TABS_RESTORE.md",
+    "D\tPLAN_ITERATION_4_WORKSPACE_HEADER_LAYOUT_RESTORE.md",
+    "D\tPLAN_PROJECTS_WORKSPACES_TABS.md",
+    "D\tPLAN_WORKSPACE_SOT_CLEANUP.md",
+    "M\tpackages/app/e2e/dictation-web.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/contexts/session-timeline-bootstrap-policy.ts",
+    "M\tpackages/app/src/hooks/use-agent-initialization.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "A\tpackages/app/src/hooks/use-keyboard-action-handler.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "A\tpackages/app/src/keyboard/keyboard-action-dispatcher.test.ts",
+    "A\tpackages/app/src/keyboard/keyboard-action-dispatcher.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.test.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts",
+    "M\tpackages/app/src/utils/agent-attention.test.ts",
+    "M\tpackages/app/src/utils/agent-attention.ts"
+  ],
+  "source_receipt_digest": "sha256:7ff5e2ba81fce52737f1b87e7c1b0640977961960a8252e71c69934131ac2789",
+  "diff_tree_digest": "sha256:0c3e8bf276b8fb76e1a99aea0841d32b06b3cf3503b9cf1ccffb59b7f22a7b93",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        516,
+        536
+      ],
+      "new_lines": [
+        527,
+        538
+      ],
+      "diff_block_lines": [
+        62,
+        91
+      ],
+      "hunk_header": "@@ -514,48 +525,56 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 1231,
+  "receipt_file": "receipts/1426/selected.patch"
+}

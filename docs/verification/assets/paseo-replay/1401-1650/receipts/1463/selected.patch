@@ -1,0 +1,32 @@
+FILE MANAGED_CLI_GLOBAL_INSTALL_LOOP_PLAN.md
+RANGE {"path":"MANAGED_CLI_GLOBAL_INSTALL_LOOP_PLAN.md","old_lines":[4,33],"new_lines":[0,0],"diff_block_lines":[10,39],"hunk_header":"@@ -1,84 +0,0 @@","substantive_changed_lines":18}
+-
+-Implemented on this branch.
+-
+-The original plan was to replace the desktop app's state-file trampoline CLI install flow with a stable outer shim, a bundle-managed inner launcher, structured install results, UI fallback instructions, and Docker-like CLI default host resolution. That work now exists in code and this file records what shipped.
+-
+-## What Exists
+-
+-### Desktop runtime and launcher
+-
+-- The desktop runtime bundle is assembled by [build-managed-runtime.mjs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/scripts/build-managed-runtime.mjs).
+-- The Tauri runtime manager now maintains:
+-  - a stable inner launcher under `bin/`
+-  - a trivial outer PATH shim
+-  - structured CLI install/uninstall results
+-  - manual install instructions
+-- The old `--paseo-cli-shim <state-file>` trampoline is no longer the installed shim path.
+-
+-Relevant files:
+-
+-- [runtime_manager.rs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/src-tauri/src/runtime_manager.rs)
+-- [lib.rs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/src-tauri/src/lib.rs)
+-- [build-managed-runtime.mjs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/scripts/build-managed-runtime.mjs)
+-- [managed-daemon-smoke.mjs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/scripts/managed-daemon-smoke.mjs)
+-
+-### App UI and desktop bridge
+-
+-- The desktop bridge exposes a structured `CliShimResult` with explicit statuses and optional manual instructions.
+-- The desktop settings UI now:
+-  - warns that a permissions prompt may appear before install starts
+-  - opens a dedicated modal when manual install is required

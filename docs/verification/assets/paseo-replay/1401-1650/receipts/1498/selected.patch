@@ -1,0 +1,18 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[196,211],"new_lines":[196,198],"diff_block_lines":[7,22],"hunk_header":"@@ -195,17 +195,4 @@ jobs:","substantive_changed_lines":12}
+ 
+-      - name: Build signed macOS smoke artifact
+-        if: env.IS_SMOKE_TAG == 'true'
+-        env:
+-          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+-          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+-          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+-          APPLE_ID: ${{ secrets.APPLE_ID }}
+-          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+-        run: npm run tauri --workspace=@getpaseo/desktop build -- --target ${{ matrix.rust_target }}
+-
+       - name: Build and publish macOS Tauri release
+         if: env.IS_SMOKE_TAG != 'true'

@@ -1,0 +1,14 @@
+FILE packages/server/src/utils/project-icon.ts
+RANGE {"path":"packages/server/src/utils/project-icon.ts","old_lines":[27,30],"new_lines":[27,37],"diff_block_lines":[10,21],"hunk_header":"@@ -24,7 +24,14 @@ export const ICON_PATTERNS = [","substantive_changed_lines":8}
+  */
+-export const PRIORITY_DIRS = ["public", "static", "assets", "images", "img"];
++export const PRIORITY_DIRS = [
++  "public",
++  "static",
++  "priv/static",
++  "assets",
++  "images",
++  "img",
++];
+ 
+ /**

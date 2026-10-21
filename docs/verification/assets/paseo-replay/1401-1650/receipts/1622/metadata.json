@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1622,
+  "revision": "93a3a742ac005d8452671c2266ac428910179b12",
+  "date": "2026-03-15T10:40:20+07:00",
+  "committer_date": "2026-03-15T10:40:20+07:00",
+  "parents": [
+    "f275474feca60b155117f6b32c9b1404cac125a7",
+    "0abca5e0c72b31774c445df0bf30dc8d04b5b62f"
+  ],
+  "subject": "Merge branch 'quality-gate-verify-tests-standards'",
+  "diff_tree_paths": [
+    "M\tpackages/cli/tests/16-agent-update.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "D\tpackages/server/src/server/agent/providers/claude-agent-commands.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/checkout-ship.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/live-preferences.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/test-utils/paseo-daemon.ts"
+  ],
+  "source_receipt_digest": "sha256:ef43309c68837443972ab612456e55b83e3b13302aabfb0b9abf59d97f3f1d52",
+  "diff_tree_digest": "sha256:1b56c85b5e75a5387886ef115a6a0a26d5495c1e41cf911ce71023a80a67250c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        16,
+        18
+      ],
+      "new_lines": [
+        16,
+        38
+      ],
+      "diff_block_lines": [
+        13,
+        35
+      ],
+      "hunk_header": "@@ -10,9 +10,29 @@ import { isInitializeRequest } from \"@modelcontextprotocol/sdk/types.js\";",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 1917,
+  "receipt_file": "receipts/1622/selected.patch"
+}

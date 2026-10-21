@@ -1,0 +1,14 @@
+FILE packages/server/src/server/websocket-server.relay-reconnect.test.ts
+RANGE {"path":"packages/server/src/server/websocket-server.relay-reconnect.test.ts","old_lines":[39,41],"new_lines":[39,50],"diff_block_lines":[7,18],"hunk_header":"@@ -38,4 +38,13 @@ const sessionMock = vi.hoisted(() => {","substantive_changed_lines":8}
+     getClientActivity = vi.fn(() => null);
++    getRuntimeMetrics = vi.fn(() => ({
++      checkoutDiffTargetCount: 0,
++      checkoutDiffSubscriptionCount: 0,
++      checkoutDiffWatcherCount: 0,
++      checkoutDiffFallbackRefreshTargetCount: 0,
++      terminalDirectorySubscriptionCount: 0,
++      terminalSubscriptionCount: 0,
++      terminalStreamCount: 0,
++    }));
+     readonly args: Record<string, unknown>;
+ 

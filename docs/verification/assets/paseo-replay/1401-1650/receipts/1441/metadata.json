@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1441,
+  "revision": "a99edcc0b288b25985bd97b873266a65b259a5a0",
+  "date": "2026-03-06T23:19:12+07:00",
+  "committer_date": "2026-03-06T23:19:12+07:00",
+  "parents": [
+    "1985bd6669276718f2e366ecb90f2e94bf868334"
+  ],
+  "subject": "feat(app): auto-focus terminal on create/switch, stabilize sidebar ordering for new items",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts"
+  ],
+  "source_receipt_digest": "sha256:aca3ff3c66f1b488e6100d1f372206c2eb378e4be049bab15ad9860831dcf8e5",
+  "diff_tree_digest": "sha256:8dc09dca24f7f3ce090a44857538787125defc5f0ef625650aedf404793215fd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-sidebar-workspaces-list.ts",
+      "old_lines": [
+        298,
+        298
+      ],
+      "new_lines": [
+        315,
+        344
+      ],
+      "diff_block_lines": [
+        34,
+        63
+      ],
+      "hunk_header": "@@ -297,4 +314,33 @@ export function useSidebarWorkspacesList(options?: {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 217,
+  "receipt_file": "receipts/1441/selected.patch"
+}

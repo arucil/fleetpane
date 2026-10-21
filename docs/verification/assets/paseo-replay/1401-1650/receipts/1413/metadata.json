@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1413,
+  "revision": "92991ffdb897e3baa0498bcde4af1d23596fa0fd",
+  "date": "2026-03-04T14:17:39+07:00",
+  "committer_date": "2026-03-04T14:17:39+07:00",
+  "parents": [
+    "b21764fd40cb8f72048ac8475e8c708b25a0d66c"
+  ],
+  "subject": "refactor: remove draft agent routes and consolidate terminal output into session model",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "D\tpackages/app/src/app/h/[serverId]/agent/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "D\tpackages/app/src/app/h/[serverId]/new.tsx",
+    "M\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agents-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-session.test.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-output-session.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.test.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.ts",
+    "M\tpackages/app/src/utils/notification-routing.test.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts"
+  ],
+  "source_receipt_digest": "sha256:8430625e9fef2d331061d57a01ba5b636ad8f8182a5fb6f3f728698083fe26a1",
+  "diff_tree_digest": "sha256:42213d562685bd7593f92f5c314a7b7208944d41a645cd508abf261d7338ddb1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/terminal/runtime/terminal-output-session.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        52,
+        81
+      ],
+      "diff_block_lines": [
+        58,
+        87
+      ],
+      "hunk_header": "@@ -0,0 +1,215 @@",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 649,
+  "receipt_file": "receipts/1413/selected.patch"
+}

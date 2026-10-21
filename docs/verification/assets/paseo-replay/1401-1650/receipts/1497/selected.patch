@@ -1,0 +1,9 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[490,494],"new_lines":[490,494],"diff_block_lines":[5,11],"hunk_header":"@@ -490,5 +490,5 @@ try {","substantive_changed_lines":2}
+@@ -490,5 +490,5 @@ try {
+   await waitFor(async () => {
+     await execFileAsync(process.execPath, ["-e", `require("node:net").connect(${relayPort}, "127.0.0.1").on("connect", function () { this.end(); process.exit(0); }).on("error", () => process.exit(1));`]);
+-  }, 30_000, "relay HTTP endpoint to start");
++  }, 60_000, "relay HTTP endpoint to start");
+   await waitForRelayWebSocketReady(relayEndpoint, 60_000);
+ 

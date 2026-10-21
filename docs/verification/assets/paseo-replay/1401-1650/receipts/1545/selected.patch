@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[153,156],"new_lines":[167,193],"diff_block_lines":[38,67],"hunk_header":"@@ -151,11 +151,50 @@ function mergeCodexConfiguredDefaults(","substantive_changed_lines":21}
++
++function resolveBundledCodexBinary(): string | null {
++  const targetTriple = CODEX_TARGET_TRIPLE[process.platform]?.[process.arch];
++  if (!targetTriple) {
++    return null;
++  }
++  const platformPackage = CODEX_PLATFORM_PACKAGE[targetTriple];
++  if (!platformPackage) {
++    return null;
++  }
++  const binaryName = process.platform === "win32" ? "codex.exe" : "codex";
++  try {
++    const require = createRequire(import.meta.url);
++    const packageJsonPath = require.resolve(`${platformPackage}/package.json`);
++    const vendorRoot = path.join(path.dirname(packageJsonPath), "vendor");
++    const binaryPath = path.join(vendorRoot, targetTriple, "codex", binaryName);
++    if (existsSync(binaryPath)) {
++      return binaryPath;
++    }
++  } catch {
++    // Platform package not installed
++  }
++  return null;
++}
++
+ function resolveCodexBinary(): string {
+-  const codexPath = findExecutable("codex");
+-  if (codexPath) {
+-    return codexPath;
++  const bundled = resolveBundledCodexBinary();

@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1404,
+  "revision": "e9b57a5ac693c57fb6d580467e3e9479fc8d7696",
+  "date": "2026-03-03T23:29:48+07:00",
+  "committer_date": "2026-03-03T23:29:48+07:00",
+  "parents": [
+    "cb92f39e73548c45739e5310ca3021921d8c0dbd"
+  ],
+  "subject": "feat: simplify tab layout to CSS-driven sizing and throttle terminal state broadcasts",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/use-workspace-tab-layout.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:40857980f3cbd60284cb4d708855a550da200ad62a7105c2b17f3a43c626c41a",
+  "diff_tree_digest": "sha256:3fa1f9c266b9efa1852e44d39471f5dc8de397259a78ebd9e6bd6821ea70c091",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-tab-layout.ts",
+      "old_lines": [
+        80,
+        102
+      ],
+      "new_lines": [
+        73,
+        87
+      ],
+      "diff_block_lines": [
+        62,
+        91
+      ],
+      "hunk_header": "@@ -76,67 +69,35 @@ export function computeWorkspaceTabLayout(",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 254,
+  "receipt_file": "receipts/1404/selected.patch"
+}

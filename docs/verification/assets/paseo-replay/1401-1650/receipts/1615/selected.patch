@@ -1,0 +1,32 @@
+FILE packages/server/src/server/speech/speech-config-resolver.ts
+RANGE {"path":"packages/server/src/server/speech/speech-config-resolver.ts","old_lines":[58,75],"new_lines":[62,74],"diff_block_lines":[16,45],"hunk_header":"@@ -57,43 +61,58 @@ function resolveRequestedSpeechProviders(params: {","substantive_changed_lines":27}
+ 
+-  const dictationSttProviderFromConfig =
+-    params.env.PASEO_DICTATION_STT_PROVIDER ??
+-    params.persisted.features?.dictation?.stt?.provider;
+-  const voiceSttProviderFromConfig =
+-    params.env.PASEO_VOICE_STT_PROVIDER ??
+-    params.persisted.features?.voiceMode?.stt?.provider;
+-  const voiceTtsProviderFromConfig =
+-    params.env.PASEO_VOICE_TTS_PROVIDER ??
+-    params.persisted.features?.voiceMode?.tts?.provider;
+-  const dictationEnabled =
+-    OptionalBooleanFlagSchema.parse(
+-      params.env.PASEO_DICTATION_ENABLED ?? params.persisted.features?.dictation?.enabled
+-    ) ?? true;
+-  const voiceModeEnabled =
+-    OptionalBooleanFlagSchema.parse(
+-      params.env.PASEO_VOICE_MODE_ENABLED ?? params.persisted.features?.voiceMode?.enabled
+-    ) ?? true;
++  const featureProviders = {
++    dictationStt: {
++      configuredValue:
++        params.env.PASEO_DICTATION_STT_PROVIDER ??
++        params.persisted.features?.dictation?.stt?.provider,
++      enabled: resolveOptionalBooleanFlag(
++        params.env.PASEO_DICTATION_ENABLED ?? params.persisted.features?.dictation?.enabled
++      ),
++    },
++    voiceStt: {
++      configuredValue:
++        params.env.PASEO_VOICE_STT_PROVIDER ??

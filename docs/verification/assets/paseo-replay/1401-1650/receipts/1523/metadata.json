@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1523,
+  "revision": "d51f18a2f728496aa866b2947bba0030a3cdb543",
+  "date": "2026-03-10T22:44:54+07:00",
+  "committer_date": "2026-03-10T22:44:54+07:00",
+  "parents": [
+    "006db65f0838efa2585e084bd79b55ae7f28bab3"
+  ],
+  "subject": "Add workflow step to strip CUDA providers before Linux AppImage build",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:3568b8300deeee6b0f6b32c30e9a471130de4e5f8555c872b854c1e133612dc9",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        304,
+        307
+      ],
+      "new_lines": [
+        304,
+        312
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -304,4 +304,9 @@ jobs:",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1523/selected.patch"
+}

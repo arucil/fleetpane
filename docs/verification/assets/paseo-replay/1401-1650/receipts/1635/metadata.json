@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1635,
+  "revision": "5701543746ec76352c6c89e2ea7121589457d71d",
+  "date": "2026-03-15T12:52:29+07:00",
+  "committer_date": "2026-03-15T12:52:29+07:00",
+  "parents": [
+    "57db31c662afb64fd7bac913225e8a291d428fff"
+  ],
+  "subject": "refactor: move startup logic to app-support, improve welcome screen UI",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/app-support/index-startup.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/index-startup.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts"
+  ],
+  "source_receipt_digest": "sha256:7cf4f2d2be12eeb5d6abe0138f559c221825c98604ee802a3264c8b8ef50497c",
+  "diff_tree_digest": "sha256:1c9de6fb20007e86d846f4d9cbcb9752e80f4c59c83fb1fcf128baeb39f13f50",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/welcome-screen.tsx",
+      "old_lines": [
+        149,
+        160
+      ],
+      "new_lines": [
+        184,
+        204
+      ],
+      "diff_block_lines": [
+        158,
+        185
+      ],
+      "hunk_header": "@@ -112,49 +120,85 @@ export function WelcomeScreen({ onHostAdded }: WelcomeScreenProps) {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 191,
+  "receipt_file": "receipts/1635/selected.patch"
+}

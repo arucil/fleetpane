@@ -1,0 +1,32 @@
+FILE packages/app/e2e/host-selection.spec.ts
+RANGE {"path":"packages/app/e2e/host-selection.spec.ts","old_lines":[27,51],"new_lines":[31,39],"diff_block_lines":[15,44],"hunk_header":"@@ -26,26 +30,10 @@ test('new agent respects serverId in the URL', async ({ page }) => {","substantive_changed_lines":18}
+   const nowIso = new Date().toISOString();
+-  const testDaemon = {
++  const testDaemon = buildSeededHost({
+     serverId,
+-    label: 'localhost',
+-    connections: [
+-      {
+-        id: `direct:127.0.0.1:${daemonPort}`,
+-        type: 'direct',
+-        endpoint: `127.0.0.1:${daemonPort}`,
+-      },
+-    ],
+-    preferredConnectionId: `direct:127.0.0.1:${daemonPort}`,
+-    createdAt: nowIso,
+-    updatedAt: nowIso,
+-  };
+-  const createAgentPreferences = {
+-    serverId: testDaemon.serverId,
+-    provider: 'codex',
+-    providerPreferences: {
+-      claude: { model: 'haiku' },
+-      codex: { model: 'gpt-5.1-codex-mini', thinkingOptionId: 'low' },
+-    },
+-  };
++    endpoint: `127.0.0.1:${daemonPort}`,
++    nowIso,
++  });
++  const createAgentPreferences = buildCreateAgentPreferences(testDaemon.serverId);
+ 
+   await page.goto('/settings');

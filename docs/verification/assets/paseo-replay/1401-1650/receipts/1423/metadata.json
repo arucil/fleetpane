@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1423,
+  "revision": "6dc49ccbc79477f8284c6bb781b7597b204621dc",
+  "date": "2026-03-05T11:28:02+07:00",
+  "committer_date": "2026-03-05T11:28:02+07:00",
+  "parents": [
+    "6f2b967599a756f4817e5117ea8f6ea992498c79"
+  ],
+  "subject": "feat: add workspace and tab navigation keyboard shortcuts",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/helpers/workspace-ui.ts",
+    "A\tpackages/app/e2e/terminal-responsiveness-benchmark.spec.ts",
+    "M\tpackages/app/e2e/workspace-sidebar-content-sync.spec.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.ts",
+    "A\tpackages/app/src/stores/keyboard-shortcuts-store.test.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.ts"
+  ],
+  "source_receipt_digest": "sha256:9f6bbad0e60361188a716779873efe6f650a8d25b963bb7d3b5d6ce403d00fbd",
+  "diff_tree_digest": "sha256:fdd3ab815926e0117287762f108f6eb4de3e80dc1b209aa8f804aaa6f435fe70",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        127,
+        127
+      ],
+      "new_lines": [
+        147,
+        176
+      ],
+      "diff_block_lines": [
+        48,
+        77
+      ],
+      "hunk_header": "@@ -124,25 +135,226 @@ const SHORTCUT_BINDINGS: readonly KeyboardShortcutBinding[] = [",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 779,
+  "receipt_file": "receipts/1423/selected.patch"
+}

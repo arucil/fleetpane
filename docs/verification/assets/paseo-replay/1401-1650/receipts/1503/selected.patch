@@ -1,0 +1,17 @@
+FILE packages/desktop/scripts/build-managed-runtime.mjs
+RANGE {"path":"packages/desktop/scripts/build-managed-runtime.mjs","old_lines":[247,250],"new_lines":[250,263],"diff_block_lines":[20,34],"hunk_header":"@@ -246,5 +249,15 @@ async function ensureWorkspaceBuilds() {","substantive_changed_lines":9}
+   await ensureDir(tarballRoot);
+-  const result = runCommand("npm", ["pack", "--json", "--pack-destination", tarballRoot], {
++  const npmExecPath = process.env.npm_execpath;
++  if (!npmExecPath) {
++    throw new Error("Missing npm_execpath while building managed runtime.");
++  }
++  const result = runCommand(process.execPath, [
++    npmExecPath,
++    "pack",
++    "--json",
++    "--pack-destination",
++    tarballRoot,
++  ], {
+     cwd: packageRoot,
+   });

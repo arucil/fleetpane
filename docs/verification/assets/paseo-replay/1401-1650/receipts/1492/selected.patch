@@ -1,0 +1,21 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[107,109],"new_lines":[104,122],"diff_block_lines":[15,33],"hunk_header":"@@ -106,4 +103,20 @@ jobs:","substantive_changed_lines":14}
+ 
++      - name: Build packaged app for macOS smoke
++        env:
++          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
++          APPLE_ID: ${{ secrets.APPLE_ID }}
++          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
++          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
++          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
++          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
++        run: npm run tauri --workspace=@getpaseo/desktop build -- --target ${{ matrix.rust_target }}
++
++      - name: Smoke check managed runtime for macOS
++        env:
++          PASEO_MANAGED_SMOKE_SKIP_BUILD: "1"
++          PASEO_MANAGED_SMOKE_RUST_TARGET: ${{ matrix.rust_target }}
++        run: npm run smoke:managed-daemon --workspace=@getpaseo/desktop
++
+       - name: Sign bundled managed runtime for macOS
+         env:

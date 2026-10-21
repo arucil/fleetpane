@@ -1,0 +1,8 @@
+FILE packages/desktop/src-tauri/src/runtime_manager.rs
+RANGE {"path":"packages/desktop/src-tauri/src/runtime_manager.rs","old_lines":[822,825],"new_lines":[822,826],"diff_block_lines":[5,10],"hunk_header":"@@ -822,4 +822,5 @@ pub fn run_managed_cli_from_current_process(args: Vec<String>) -> Result<i32, St","substantive_changed_lines":1}
+@@ -822,4 +822,5 @@ pub fn run_managed_cli_from_current_process(args: Vec<String>) -> Result<i32, St
+         resource_dirs.push(contents_dir.join("Resources"));
+         resource_dirs.push(contents_dir.join("resources"));
++        resource_dirs.push(contents_dir.join("lib").join("Paseo").join("resources"));
+     }
+     let bundled_root = resource_dirs

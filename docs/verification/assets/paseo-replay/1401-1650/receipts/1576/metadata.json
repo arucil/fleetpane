@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1576,
+  "revision": "ee8a81d2e16dbefb1ea2e348db719a0b748b4f9a",
+  "date": "2026-03-13T10:32:33+07:00",
+  "committer_date": "2026-03-13T10:32:33+07:00",
+  "parents": [
+    "bed03be33285bf7af5583bdc07dd782a81bccd02"
+  ],
+  "subject": "feat(server): support Grep tool in Claude tool-call mapping",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.ts"
+  ],
+  "source_receipt_digest": "sha256:7d11f8de97326016332ac3548aa92fa4c641c6e300a46331d635c165e5ee7160",
+  "diff_tree_digest": "sha256:908874e95da0d0346caa76518719b8ba06632e0779fa8c9a00f7424b53615df2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts",
+      "old_lines": [
+        97,
+        100
+      ],
+      "new_lines": [
+        97,
+        106
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -97,4 +97,10 @@ const ClaudeToolDetailPass2Schema = z.union([",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/1576/selected.patch"
+}

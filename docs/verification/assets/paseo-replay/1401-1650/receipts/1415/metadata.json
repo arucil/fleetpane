@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1415,
+  "revision": "430ad54d77e4bb1709debccf4b9a0ae87ed31439",
+  "date": "2026-03-04T15:28:55+07:00",
+  "committer_date": "2026-03-04T15:28:55+07:00",
+  "parents": [
+    "f47ea7afe5db7ee4146e746deced377983370797"
+  ],
+  "subject": "refactor: use confirmDialog and unique draft agent IDs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-agent-autocomplete.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcut-routing.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:43ec023eabd31a18d35dd6ff71f97772b0f3a7c8f303fb87b17577d0f32d894f",
+  "diff_tree_digest": "sha256:fc0f27458475fa8a9e7eabf293c7b2744e220c886c059f15a6d948a9428e6d02",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        606,
+        620
+      ],
+      "new_lines": [
+        589,
+        603
+      ],
+      "diff_block_lines": [
+        47,
+        76
+      ],
+      "hunk_header": "@@ -594,29 +587,26 @@ function WorkspaceRowWithMenu({",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 74,
+  "receipt_file": "receipts/1415/selected.patch"
+}

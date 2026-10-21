@@ -1,0 +1,13 @@
+FILE packages/cli/tests/04-agent-ls.test.ts
+RANGE {"path":"packages/cli/tests/04-agent-ls.test.ts","old_lines":[61,66],"new_lines":[59,66],"diff_block_lines":[31,41],"hunk_header":"@@ -61,6 +59,8 @@ try {","substantive_changed_lines":5}
+@@ -61,6 +59,8 @@ try {
+   {
+     console.log('Test 3: paseo ls handles daemon not running')
+-    const result =
+-      await $`PASEO_HOST=localhost:${port} PASEO_HOME=${paseoHome} npx paseo ls`.nothrow()
++    const result = await runLocalPaseo(['ls'], {
++      PASEO_HOST: `localhost:${port}`,
++      PASEO_HOME: paseoHome,
++    })
+     // Should fail because daemon not running
+     assert.notStrictEqual(result.exitCode, 0, 'should fail when daemon not running')

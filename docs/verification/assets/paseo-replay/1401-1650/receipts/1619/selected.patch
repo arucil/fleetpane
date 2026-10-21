@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/send.ts
+RANGE {"path":"packages/cli/src/commands/agent/send.ts","old_lines":[79,79],"new_lines":[81,110],"diff_block_lines":[21,50],"hunk_header":"@@ -78,7 +80,55 @@ async function readImageFiles(imagePaths: string[]): Promise<Array<{ data: strin","substantive_changed_lines":21}
+ 
++async function resolvePromptInput(options: {
++  promptArgument: string | undefined
++  promptOption: string | undefined
++  promptFile: string | undefined
++}): Promise<string> {
++  const promptText = options.promptArgument?.trim()
++  const promptOptionText = options.promptOption?.trim()
++  const promptFilePath = options.promptFile?.trim()
++  const providedSourceCount = [promptText, promptOptionText, promptFilePath].filter(Boolean).length
++
++  if (providedSourceCount > 1) {
++    const error: CommandError = {
++      code: 'CONFLICTING_PROMPT_INPUT',
++      message: 'Provide exactly one of prompt argument, --prompt, or --prompt-file',
++    }
++    throw error
++  }
++
++  if (promptText) {
++    return options.promptArgument as string
++  }
++
++  if (promptOptionText) {
++    return options.promptOption as string
++  }
++
++  if (!promptFilePath) {
++    const error: CommandError = {
++      code: 'MISSING_PROMPT',

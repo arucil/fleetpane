@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-agent-visibility.ts
+RANGE {"path":"packages/app/src/screens/workspace/workspace-agent-visibility.ts","old_lines":[0,0],"new_lines":[2,31],"diff_block_lines":[8,37],"hunk_header":"@@ -0,0 +1,68 @@","substantive_changed_lines":22}
++
++function sortAgentsByCreatedAtDescending(agents: Agent[]): Agent[] {
++  const sorted = [...agents];
++  sorted.sort((left, right) => {
++    const createdAtDelta = right.createdAt.getTime() - left.createdAt.getTime();
++    if (createdAtDelta !== 0) {
++      return createdAtDelta;
++    }
++    return right.lastActivityAt.getTime() - left.lastActivityAt.getTime();
++  });
++  return sorted;
++}
++
++function trimNonEmpty(value: string | null | undefined): string | null {
++  if (!value) {
++    return null;
++  }
++  const trimmed = value.trim();
++  return trimmed.length > 0 ? trimmed : null;
++}
++
++export function deriveWorkspaceAgentVisibility(input: {
++  sessionAgents: Map<string, Agent> | undefined;
++  workspaceId: string;
++}): {
++  visibleAgents: Agent[];
++  lookupById: Map<string, Agent>;
++} {
++  const { sessionAgents, workspaceId } = input;
++  if (!sessionAgents || !workspaceId) {

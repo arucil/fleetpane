@@ -1,0 +1,12 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2747,2751],"new_lines":[2747,2754],"diff_block_lines":[5,14],"hunk_header":"@@ -2747,5 +2747,8 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":2}
+@@ -2747,5 +2747,8 @@ class ClaudeAgentSession implements AgentSession {
+       return;
+     }
+-    if (message.type === "system" && message.subtype === "init") {
++    // System metadata (init/hook callbacks/etc.) can precede the first prompt
++    // replay for a legitimate foreground run. Treating that as churn strands
++    // one-shot helper runs in autonomous fallback.
++    if (message.type === "system") {
+       return;
+     }

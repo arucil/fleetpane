@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/agent-manager.test.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.test.ts","old_lines":[1390,1390],"new_lines":[1391,1420],"diff_block_lines":[9,38],"hunk_header":"@@ -1388,9 +1388,44 @@ describe(\"AgentManager\", () => {","substantive_changed_lines":22}
++    let resolveAutonomousTurnStarted!: () => void;
++    const autonomousTurnStarted = new Promise<void>((resolve) => {
++      resolveAutonomousTurnStarted = resolve;
++    });
++    let resolveSecondRunningState!: () => void;
++    const secondRunningState = new Promise<void>((resolve) => {
++      resolveSecondRunningState = resolve;
++    });
++    manager.subscribe(
++      (event) => {
++        if (event.type === "agent_state" && event.agent.id === snapshot.id) {
++          if (event.agent.lifecycle !== "running") {
++            return;
++          }
++          runningStateEvents.push(event.agent.lifecycle);
++          if (runningStateEvents.length >= 2) {
++            resolveSecondRunningState();
++          }
++          return;
++        }
++
++        if (
++          event.type === "agent_stream" &&
++          event.agentId === snapshot.id &&
++          event.event.type === "turn_started"
++        ) {
++          resolveAutonomousTurnStarted();
++        }
++      },
++      { agentId: snapshot.id, replayState: true }

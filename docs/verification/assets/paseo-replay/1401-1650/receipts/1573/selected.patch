@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[405,408],"new_lines":[405,410],"diff_block_lines":[5,11],"hunk_header":"@@ -405,4 +405,6 @@ jobs:","substantive_changed_lines":2}
+@@ -405,4 +405,6 @@ jobs:
+             exit 1
+           fi
++          cp --remove-destination "$appdir_path/usr/share/applications/Paseo.desktop" "$appdir_path/Paseo.desktop"
++          cp --remove-destination "$appdir_path/Paseo.png" "$appdir_path/.DirIcon"
+           env | sort | grep -E '^(APPIMAGE|DESKTOP_VERSION|NO_STRIP|RELEASE_TAG|SOURCE_TAG|TAURI_)' || true
+           tools_dir="$(mktemp -d)"

@@ -1,0 +1,9 @@
+FILE packages/server/src/server/daemon-e2e/terminal.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/terminal.e2e.test.ts","old_lines":[476,480],"new_lines":[476,480],"diff_block_lines":[5,11],"hunk_header":"@@ -476,5 +476,5 @@ const shouldRun = !process.env.CI;","substantive_changed_lines":2}
+@@ -476,5 +476,5 @@ const shouldRun = !process.env.CI;
+ 
+   test(
+-    "applies stream backpressure window until client ack advances",
++    "caps terminal stream output within the backpressure window",
+     async () => {
+       const cwd = tmpCwd();

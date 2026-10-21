@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1535,
+  "revision": "78849fa0bfeef370bf077fdfb8b88dfa025d0267",
+  "date": "2026-03-11T14:51:47+07:00",
+  "committer_date": "2026-03-11T14:51:47+07:00",
+  "parents": [
+    "e5014a5f571161e4f93abe09d8e8f6fc0839863f"
+  ],
+  "subject": "Strip \\\\?\\ extended-length prefix from Windows resource paths",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:409a772345bc69cc142a9a8000059eb893e197d19371f2ec0d42e73ef6a1a8ee",
+  "diff_tree_digest": "sha256:fba278a6829566394c093a023e7bc43151a29fb7f1d4d0868e24d28c22c6821f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/runtime_manager.rs",
+      "old_lines": [
+        561,
+        565
+      ],
+      "new_lines": [
+        561,
+        566
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -561,5 +561,6 @@ fn dev_resource_root() -> PathBuf {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 5,
+  "receipt_file": "receipts/1535/selected.patch"
+}

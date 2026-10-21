@@ -1,0 +1,10 @@
+FILE skills/paseo/SKILL.md
+RANGE {"path":"skills/paseo/SKILL.md","old_lines":[148,152],"new_lines":[154,160],"diff_block_lines":[33,40],"hunk_header":"@@ -145,8 +151,10 @@ When working with agents, you must dig deep and challenge them rigorously:","substantive_changed_lines":4}
+ 
++- `paseo run` waits **forever** by default (no timeout). Use `--wait-timeout` to set a limit.
++- `paseo wait` also waits forever by default. Use `--timeout` to set a limit.
+ - Agent tasks can legitimately take 10, 20, or even 30+ minutes. This is normal.
+-- When `paseo wait` times out, **just re-run `paseo wait <id>`** — don't panic, don't start checking logs, don't inspect status. The agent is still working.
++- When a wait times out, **just re-run `paseo wait <id>`** — don't panic, don't start checking logs, don't inspect status. The agent is still working.
+ - Do NOT poll with `paseo ls`, `paseo inspect`, or `paseo logs` in a loop to "check on" the agent. This wastes your context window and accomplishes nothing.
+ - Only check logs/inspect if you have a **specific reason** to believe something is wrong (e.g., you sent a prompt and got an unexpected error back).

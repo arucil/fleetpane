@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1427,
+  "revision": "7f29baf915543817f0c1c4f840d40c011383e565",
+  "date": "2026-03-06T16:24:12+07:00",
+  "committer_date": "2026-03-06T16:24:12+07:00",
+  "parents": [
+    "5b270444d58e2817718ce082292fe3ab6671ba02"
+  ],
+  "subject": "refactor: add authoritative revalidation on app resume and reconnect",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:4b2ee14449897dedb58398e529f52291c88e54e07f4d1cc4912cf735d8281d52",
+  "diff_tree_digest": "sha256:6a650c9c1dce1370f633835da60ed4876cb17760b7e72e031b8989fd7526336b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        352,
+        352
+      ],
+      "new_lines": [
+        348,
+        377
+      ],
+      "diff_block_lines": [
+        54,
+        83
+      ],
+      "hunk_header": "@@ -350,4 +346,231 @@ function SessionProviderInternal({",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 270,
+  "receipt_file": "receipts/1427/selected.patch"
+}

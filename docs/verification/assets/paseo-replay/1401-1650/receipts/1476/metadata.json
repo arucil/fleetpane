@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1476,
+  "revision": "7f11b93e0f12776c4d673139f55c320938883dcd",
+  "date": "2026-03-09T16:09:48+07:00",
+  "committer_date": "2026-03-09T16:09:48+07:00",
+  "parents": [
+    "02d74777b21a483dd36218abad9c7346f93b2622"
+  ],
+  "subject": "fix: add missing Rust imports for Windows build and check in pending changes",
+  "diff_tree_paths": [
+    "D\tRUNTIME_SIMPLIFICATION_PLAN.md",
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/package.json",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:99ef4983a89e4efd951b48d935c15ae442e50f5489ab1791cd73ee3fab852218",
+  "diff_tree_digest": "sha256:cbb4299f003ed05ff54b1b2f23fd7a834d6f18cf32f75f3fbe5a8fa02ee7cda3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        62,
+        82
+      ],
+      "new_lines": [
+        39,
+        60
+      ],
+      "diff_block_lines": [
+        83,
+        112
+      ],
+      "hunk_header": "@@ -7,143 +7,84 @@ import {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 1008,
+  "receipt_file": "receipts/1476/selected.patch"
+}

@@ -1,0 +1,9 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[809,813],"new_lines":[809,813],"diff_block_lines":[5,11],"hunk_header":"@@ -809,5 +809,5 @@ export function AgentInputArea({","substantive_changed_lines":2}
+@@ -809,5 +809,5 @@ export function AgentInputArea({
+               client={client}
+               isReadyForDictation={isDictationReady}
+-              placeholder="Message agent..."
++              placeholder="Message the agent, tag @files, or use /commands and /skills"
+               autoFocus={autoFocus && isDesktopWebBreakpoint}
+               autoFocusKey={`${serverId}:${agentId}`}

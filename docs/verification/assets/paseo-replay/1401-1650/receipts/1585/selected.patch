@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2459,2459],"new_lines":[2455,2484],"diff_block_lines":[55,84],"hunk_header":"@@ -2458,4 +2454,64 @@ export class Session {","substantive_changed_lines":18}
+ 
++  private clearPendingVoiceSpeechStart(reason: string): void {
++    if (this.pendingVoiceSpeechTimer) {
++      clearTimeout(this.pendingVoiceSpeechTimer)
++      this.pendingVoiceSpeechTimer = null
++    }
++    if (this.pendingVoiceSpeechStartAt !== null) {
++      this.sessionLogger.debug({ reason }, 'Clearing provisional voice speech start')
++      this.pendingVoiceSpeechStartAt = null
++    }
++  }
++
++  private handleProvisionalVoiceSpeechStarted(): void {
++    if (this.speechInProgress || this.pendingVoiceSpeechTimer) {
++      return
++    }
++
++    const startedAt = Date.now()
++    this.pendingVoiceSpeechStartAt = startedAt
++    this.sessionLogger.info(
++      { confirmationMs: VOICE_INTERRUPT_CONFIRMATION_MS },
++      'Silero VAD provisional speech_started'
++    )
++    this.pendingVoiceSpeechTimer = setTimeout(() => {
++      this.pendingVoiceSpeechTimer = null
++      if (this.pendingVoiceSpeechStartAt !== startedAt || this.speechInProgress) {
++        return
++      }
++
++      this.pendingVoiceSpeechStartAt = null

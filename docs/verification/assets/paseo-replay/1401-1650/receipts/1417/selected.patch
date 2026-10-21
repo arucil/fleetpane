@@ -1,0 +1,32 @@
+FILE packages/app/src/app/h/[serverId]/index.tsx
+RANGE {"path":"packages/app/src/app/h/[serverId]/index.tsx","old_lines":[32,46],"new_lines":[53,69],"diff_block_lines":[56,85],"hunk_header":"@@ -24,31 +51,75 @@ export default function HostIndexRoute() {","substantive_changed_lines":22}
+-    visibleAgents.sort(
+-      (left, right) => right.lastActivityAt.getTime() - left.lastActivityAt.getTime()
+-    );
+-
+-    const primaryAgent = visibleAgents[0];
+-    if (primaryAgent?.cwd?.trim()) {
+-      router.replace(
+-        buildHostWorkspaceAgentTabRoute(
+-          serverId,
+-          primaryAgent.cwd.trim(),
+-          primaryAgent.id
+-        ) as any
+-      );
++    const rootRoute = buildHostRootRoute(serverId);
++    if (pathname !== rootRoute && pathname !== `${rootRoute}/`) {
+       return;
+     }
++    const timer = setTimeout(() => {
++      if (Platform.OS === "web" && typeof window !== "undefined") {
++        const currentPathname = window.location.pathname;
++        if (currentPathname !== rootRoute && currentPathname !== `${rootRoute}/`) {
++          return;
++        }
++
++        const initialPathname = readInitialNavigationPathname();
++        const initialWorkspaceTabRoute = initialPathname
++          ? parseHostWorkspaceTabRouteFromPathname(initialPathname)
++          : null;
++        if (
++          initialWorkspaceTabRoute &&

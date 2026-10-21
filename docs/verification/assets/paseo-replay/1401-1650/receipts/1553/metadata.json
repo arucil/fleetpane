@@ -1,0 +1,66 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1553,
+  "revision": "be93f8b240afc46c1c50cbf8107247825d52b33c",
+  "date": "2026-03-12T21:15:01+07:00",
+  "committer_date": "2026-03-12T21:15:01+07:00",
+  "parents": [
+    "b09a731d85b93fddaa3bb4acfb4f203403efc9c8"
+  ],
+  "subject": "refactor: remove performance monitoring and diagnostics infrastructure",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-responsiveness-benchmark.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/debug-tools.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/engine.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/host-runtime-diagnostics.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/index.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/perf-diagnostics-context.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/perf-diagnostics-provider.tsx",
+    "D\tpackages/app/src/runtime/perf-diagnostics/reporter.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/types.ts",
+    "D\tpackages/app/src/runtime/perf-diagnostics/use-perf-diagnostics.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "D\tpackages/app/src/utils/navigation-timing.ts",
+    "D\tpackages/app/src/utils/perf-diagnostics.ts",
+    "D\tpackages/app/src/utils/perf-monitor.ts",
+    "D\tpackages/app/src/utils/perf.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/app/src/utils/tool-call-parsers.ts",
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:93bf73820abc58cfd82f86f07413cbf825bedd511573df1c7ff7449a8c61776b",
+  "diff_tree_digest": "sha256:14713a149300c4a24124c0e9a729a1583a74788381b8175442170b1d2ea8d4aa",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        558,
+        587
+      ],
+      "new_lines": [
+        557,
+        557
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -557,53 +556,51 @@ export default function RootLayout() {",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1082,
+  "receipt_file": "receipts/1553/selected.patch"
+}

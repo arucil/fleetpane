@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.test.ts","old_lines":[54,54],"new_lines":[65,94],"diff_block_lines":[37,66],"hunk_header":"@@ -53,4 +64,40 @@ function useTempCodexSessionDir(): () => void {","substantive_changed_lines":25}
+ 
++function useTempCodexHome(prefix = "codex-home-"): { codexHome: string; cleanup: () => void } {
++  const codexHome = tmpCwd(prefix);
++  const prevCodexHome = process.env.CODEX_HOME;
++  const sharedCodexHome = process.env.CODEX_HOME ?? path.join(os.homedir(), ".codex");
++  const sharedAuthPath = path.join(sharedCodexHome, "auth.json");
++  if (!existsSync(sharedAuthPath)) {
++    throw new Error(`Codex auth file not found at ${sharedAuthPath}`);
++  }
++  copyFileSync(sharedAuthPath, path.join(codexHome, "auth.json"));
++  writeFileSync(
++    path.join(codexHome, "config.toml"),
++    [
++      'model = "gpt-5.2-codex"',
++      'model_reasoning_effort = "medium"',
++      `[projects."${process.cwd()}"]`,
++      'trust_level = "trusted"',
++      "[features]",
++      "unified_exec = true",
++      "shell_snapshot = true",
++    ].join("\n"),
++    "utf8"
++  );
++  process.env.CODEX_HOME = codexHome;
++  return {
++    codexHome,
++    cleanup: () => {
++      if (prevCodexHome === undefined) {
++        delete process.env.CODEX_HOME;
++      } else {

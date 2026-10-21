@@ -1,0 +1,64 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1454,
+  "revision": "b339c5e61deaa69160b6266e470e1e9a285af85d",
+  "date": "2026-03-08T12:54:08+07:00",
+  "committer_date": "2026-03-08T12:54:08+07:00",
+  "parents": [
+    "0c44e7db8086478739d778f0441fd00c27c493c2"
+  ],
+  "subject": "Fix bottom anchoring and Claude wake routing",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/agent-bottom-anchor.spec.ts",
+    "A\tpackages/app/e2e/helpers/agent-bottom-anchor.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.test.ts",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/components/agent-stream-web-virtualization.test.ts",
+    "A\tpackages/app/src/components/agent-stream-web-virtualization.ts",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "A\tpackages/app/src/components/use-bottom-anchor-controller.test.ts",
+    "A\tpackages/app/src/components/use-bottom-anchor-controller.ts",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-initialization.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-initialization.ts",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "A\tpackages/app/src/screens/agent/agent-ready-screen-bottom-anchor.ts",
+    "A\tpackages/app/src/screens/agent/agent-ready-screen.bottom-anchor.test.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake-simple.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2fba05e3d01bb7765aaeef7abb06410e90db5add584707e417f6a3a06c4cf0d0",
+  "diff_tree_digest": "sha256:d6a11656cc369f81b826c700443365718c94f9dd7c6b919d8948b54bb4de56c5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-view.tsx",
+      "old_lines": [
+        203,
+        203
+      ],
+      "new_lines": [
+        268,
+        297
+      ],
+      "diff_block_lines": [
+        148,
+        177
+      ],
+      "hunk_header": "@@ -195,10 +249,50 @@ export const AgentStreamView = forwardRef<AgentStreamViewHandle, AgentStreamView",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 2917,
+  "receipt_file": "receipts/1454/selected.patch"
+}

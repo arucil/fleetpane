@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1401,
+  "revision": "74ac17f91035d1a3fd39f8ac6a9a11da2c96840c",
+  "date": "2026-03-03T20:56:42+07:00",
+  "committer_date": "2026-03-03T20:56:42+07:00",
+  "parents": [
+    "73eabd2eeae2652649f3e9df8a9d0af14097f1da"
+  ],
+  "subject": "feat: workspace-level sidebar shortcuts with shortcut badges and desktop tabs extraction",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/use-workspace-tab-layout.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-layout.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-layout.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-tabs-types.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts",
+    "M\tpackages/app/src/utils/agent-grouping.test.ts",
+    "M\tpackages/app/src/utils/agent-grouping.ts",
+    "A\tpackages/app/src/utils/explorer-paths.test.ts",
+    "A\tpackages/app/src/utils/explorer-paths.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.ts"
+  ],
+  "source_receipt_digest": "sha256:9654a07f78e3c3bc0a0769ada8380bde0fb9ae3bdf51c6b78469ddb58248d48e",
+  "diff_tree_digest": "sha256:cc244a21568ebd1a68a783513bdd3bcc1623ab2887610f1f4569d055dd7c9ea0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-agent-list.tsx",
+      "old_lines": [
+        612,
+        628
+      ],
+      "new_lines": [
+        611,
+        625
+      ],
+      "diff_block_lines": [
+        158,
+        187
+      ],
+      "hunk_header": "@@ -611,32 +610,27 @@ export function SidebarAgentList({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 1412,
+  "receipt_file": "receipts/1401/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/terminal/runtime/terminal-output-session.ts
+RANGE {"path":"packages/app/src/terminal/runtime/terminal-output-session.ts","old_lines":[0,0],"new_lines":[52,81],"diff_block_lines":[58,87],"hunk_header":"@@ -0,0 +1,215 @@","substantive_changed_lines":23}
++
++  constructor(input: { maxOutputChars: number }) {
++    this.outputPump = new TerminalOutputPump({
++      maxOutputChars: input.maxOutputChars,
++      onSelectedOutputChunk: (chunk: TerminalOutputChunk) => {
++        this.deliveryQueue.enqueue(chunk);
++      },
++    });
++
++    this.deliveryQueue = new TerminalOutputDeliveryQueue({
++      onDeliver: (chunk: TerminalOutputDeliveryChunk) => {
++        const snapshotText = this.outputPump.readSnapshot({
++          terminalId: this.state.selectedTerminalId,
++        });
++        this.state = {
++          ...this.state,
++          snapshotText,
++          snapshotSequence: chunk.sequence,
++          chunkText: chunk.text,
++          chunkSequence: chunk.sequence,
++          chunkReplay: chunk.replay,
++        };
++        terminalDebugLog({
++          scope: "output-session",
++          event: "deliver",
++          details: {
++            selectedTerminalId: this.state.selectedTerminalId,
++            sequence: chunk.sequence,
++            replay: chunk.replay,
++            chunkLength: chunk.text.length,

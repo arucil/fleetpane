@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1507,
+  "revision": "51bbebcdd5ab6166b126be667f8046f1ddd90e40",
+  "date": "2026-03-10T18:12:09+07:00",
+  "committer_date": "2026-03-10T18:12:09+07:00",
+  "parents": [
+    "7b4ca8394bb86c406984f01f827d1cab65bd2540"
+  ],
+  "subject": "Fix Windows smoke npm invocation",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs"
+  ],
+  "source_receipt_digest": "sha256:7d99c53639890edd68a476a5fd27edc0c34dd57b24efb7ae939afc71d46244fa",
+  "diff_tree_digest": "sha256:f471ec70f8245a0c4aa705c9b179b108f8b072ff6ec503a62581bdd3506b88e2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/managed-daemon-smoke.mjs",
+      "old_lines": [
+        363,
+        368
+      ],
+      "new_lines": [
+        363,
+        372
+      ],
+      "diff_block_lines": [
+        5,
+        16
+      ],
+      "hunk_header": "@@ -363,6 +363,10 @@ async function ensurePackagedArtifact(binaryPath) {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1507/selected.patch"
+}

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1490,
+  "revision": "bf355aaaf37c1de6e4189d54ee2b442af852df7f",
+  "date": "2026-03-10T13:39:58+07:00",
+  "committer_date": "2026-03-10T13:39:58+07:00",
+  "parents": [
+    "98d91fd69655fabc6b79f08f627d5ec8b65e1465"
+  ],
+  "subject": "Sign macOS managed runtime artifacts",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "A\tpackages/desktop/scripts/sign-managed-runtime-macos.mjs"
+  ],
+  "source_receipt_digest": "sha256:09fa021c374cb5e92b246d50d09f9fc36839f83152f43f5e70386823c803b52a",
+  "diff_tree_digest": "sha256:470694a013bbd7f90582d9fd7d343d5d0f02d1cf937e3d126b5e06028be6386c",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        99,
+        102
+      ],
+      "new_lines": [
+        100,
+        108
+      ],
+      "diff_block_lines": [
+        11,
+        20
+      ],
+      "hunk_header": "@@ -99,4 +100,9 @@ jobs:",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 86,
+  "receipt_file": "receipts/1490/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/terminal/runtime/terminal-stream-controller.ts
+RANGE {"path":"packages/app/src/terminal/runtime/terminal-stream-controller.ts","old_lines":[178,188],"new_lines":[176,197],"diff_block_lines":[25,54],"hunk_header":"@@ -168,29 +169,34 @@ export class TerminalStreamController {","substantive_changed_lines":24}
++    const activeMatches =
++      Boolean(activeStream) &&
++      activeStream!.terminalId === input.terminalId &&
++      activeStream!.streamId === input.streamId;
++    if (activeMatches) {
++      this.attachGeneration += 1;
++      const generation = this.attachGeneration;
++      void this.detachActiveStream({ shouldDetach: false });
++      this.updateStatus({
++        terminalId: input.terminalId,
++        streamId: null,
++        isAttaching: true,
++        error:
++          this.options.reconnectErrorMessage ?? DEFAULT_RECONNECT_ERROR_MESSAGE,
++      });
++      void this.attachTerminal({
++        terminalId: input.terminalId,
++        generation,
++      });
+       return;
+     }
+ 
+-    this.attachGeneration += 1;
+-    const generation = this.attachGeneration;
+-    void this.detachActiveStream({ shouldDetach: false });
+-    this.updateStatus({
+-      terminalId: input.terminalId,
+-      streamId: null,
+-      isAttaching: true,
+-      error:

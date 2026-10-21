@@ -1,0 +1,31 @@
+FILE packages/desktop/src-tauri/src/runtime_manager.rs
+RANGE {"path":"packages/desktop/src-tauri/src/runtime_manager.rs","old_lines":[335,339],"new_lines":[335,362],"diff_block_lines":[7,35],"hunk_header":"@@ -334,6 +334,29 @@ fn bundled_runtime_root(app: &AppHandle) -> Result<PathBuf, String> {","substantive_changed_lines":15}
+     } else {
+-        log::info!("[runtime] resource_dir() unavailable");
++        log::info!("[runtime] resource_dir() unavailable, resolving from executable path");
+     }
++
++    // Fallback: resolve symlinks and search relative to the real executable location.
++    // Handles CLI symlink invocation where Tauri can't resolve resource_dir.
++    if let Ok(canonical) = std::env::current_exe().and_then(|p| p.canonicalize()) {
++        let exe_dir = dunce::simplified(&canonical);
++        if let Some(exe_dir) = exe_dir.parent() {
++            let mut candidates = vec![exe_dir.join("resources"), exe_dir.to_path_buf()];
++            if let Some(contents_dir) = exe_dir.parent() {
++                candidates.push(contents_dir.join("Resources"));
++                candidates.push(contents_dir.join("resources"));
++            }
++            for resource_dir in candidates {
++                if let Some(found) = bundled_runtime_root_from_resource_dir(&resource_dir) {
++                    log::info!(
++                        "[runtime] found bundled runtime (via exe fallback) at {}",
++                        found.display()
++                    );
++                    return Ok(found);
++                }
++            }
++        }
++    }
++
+     log::error!("[runtime] no managed runtime found");
+     Err("Managed runtime resources are not bundled with this desktop build.".to_string())

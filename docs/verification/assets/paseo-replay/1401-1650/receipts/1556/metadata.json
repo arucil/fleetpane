@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1556,
+  "revision": "16da3300e3ceaeca950cd97336c5c2f52f0a1c21",
+  "date": "2026-03-12T22:24:41+07:00",
+  "committer_date": "2026-03-12T22:24:41+07:00",
+  "parents": [
+    "69d8427bd9e7f405fa6a72a375eb7c19416bd75a"
+  ],
+  "subject": "fix: prevent Codex replacement stream from being killed by stale turn_completed notification",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d0a94457bcfaefc7349179cc971422411884ad4f873d9199a565a8fae472c958",
+  "diff_tree_digest": "sha256:50641a12b5f554722a3744b8a771f1d71df0a218c165c97de2cdb245445474dd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        2627,
+        2631
+      ],
+      "new_lines": [
+        2627,
+        2630
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -2627,5 +2627,4 @@ class CodexAppServerAgentSession implements AgentSession {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 98,
+  "receipt_file": "receipts/1556/selected.patch"
+}

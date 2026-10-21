@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1456,
+  "revision": "faa5aaab6f7b1895fc052610dbe855792caf932a",
+  "date": "2026-03-08T15:39:40+07:00",
+  "committer_date": "2026-03-08T15:39:40+07:00",
+  "parents": [
+    "03e1915316689fc9e87a3103dfd8be23123b4e0d"
+  ],
+  "subject": "Refine agent list attention handling",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/hooks/use-agent-attention-clear.ts",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "A\tpackages/app/src/hooks/use-all-agents-list.test.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agents-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/utils/agent-attention.test.ts",
+    "M\tpackages/app/src/utils/agent-attention.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:b118fc95231e6f84c7c2d7d7be7744a19d65f249e280e7f79dd932091871a713",
+  "diff_tree_digest": "sha256:d04d04c9d66e6c961aa06bc688fd96e9bf334d87d485d701097ba1adcd2a882c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        88,
+        91
+      ],
+      "new_lines": [
+        88,
+        115
+      ],
+      "diff_block_lines": [
+        77,
+        106
+      ],
+      "hunk_header": "@@ -81,40 +86,114 @@ function deriveDateSectionLabel(lastActivityAt: Date): string {",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 1167,
+  "receipt_file": "receipts/1456/selected.patch"
+}

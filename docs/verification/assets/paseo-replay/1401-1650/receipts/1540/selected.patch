@@ -1,0 +1,9 @@
+FILE packages/app/metro.config.js
+RANGE {"path":"packages/app/metro.config.js","old_lines":[1,4],"new_lines":[1,5],"diff_block_lines":[5,11],"hunk_header":"@@ -1,4 +1,5 @@","substantive_changed_lines":3}
+@@ -1,4 +1,5 @@
+ const { getDefaultConfig } = require("expo/metro-config");
+-const exclusionList = require("metro-config/src/defaults/exclusionList");
++const exclusionList =
++  require("@expo/metro/metro-config/defaults/exclusionList").default;
+ const { resolve } = require("metro-resolver");
+ const fs = require("fs");

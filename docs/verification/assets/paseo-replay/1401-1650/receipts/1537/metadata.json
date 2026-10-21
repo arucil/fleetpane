@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1537,
+  "revision": "c99b78f5b06f7f0fd33214c556cb5397c54da672",
+  "date": "2026-03-11T19:05:44+07:00",
+  "committer_date": "2026-03-11T19:05:44+07:00",
+  "parents": [
+    "327b31561040e96c0249254ac529d1899754d161"
+  ],
+  "subject": "Handle noisy shell output in executable lookup",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts"
+  ],
+  "source_receipt_digest": "sha256:7d1e22798b96b329de3133a49f08bce03eb686d196cd70e2d4519d5c35d88316",
+  "diff_tree_digest": "sha256:fb677b1473340ade5b0e7a7850f5c0eb6313d9f273ce92ba1d5f6e0c394c852b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        57,
+        59
+      ],
+      "new_lines": [
+        57,
+        84
+      ],
+      "diff_block_lines": [
+        7,
+        34
+      ],
+      "hunk_header": "@@ -56,4 +56,29 @@ export type ProviderCommandPrefix = {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 65,
+  "receipt_file": "receipts/1537/selected.patch"
+}

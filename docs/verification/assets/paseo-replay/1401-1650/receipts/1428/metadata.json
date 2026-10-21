@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1428,
+  "revision": "74c99a827da05c653f68932bdec435921c0fb180",
+  "date": "2026-03-06T16:18:19+07:00",
+  "committer_date": "2026-03-06T16:18:19+07:00",
+  "parents": [
+    "885b575d14ee8767abf513f84d265eaba3dc9816"
+  ],
+  "subject": "Fix workspace tab focus from route open intent",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/global-draft-to-existing-workspace-redirect.spec.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts"
+  ],
+  "source_receipt_digest": "sha256:f257cb1e22e6e9fb4291c61615429d98f7f71f985788f1b19e0f4cf8f8c2a5a9",
+  "diff_tree_digest": "sha256:e1dd9233c3bcbb7497b77a207fd15bd2e010c551d14a2834ab52d3b8813d50bb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        578,
+        582
+      ],
+      "new_lines": [
+        578,
+        592
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -577,6 +577,16 @@ function WorkspaceScreenContent({",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 247,
+  "receipt_file": "receipts/1428/selected.patch"
+}

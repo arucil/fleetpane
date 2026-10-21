@@ -1,0 +1,18 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[298,309],"new_lines":[298,309],"diff_block_lines":[89,104],"hunk_header":"@@ -297,13 +297,13 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {","substantive_changed_lines":8}
+     if (port === 6767) {
+-      Alert.alert("Port unavailable", "Managed TCP mode must not claim 127.0.0.1:6767.");
++      Alert.alert("Port unavailable", "Port 6767 is reserved. Choose a different port.");
+       return;
+     }
+ 
+     void confirmDialog({
+-      title: "Enable managed TCP",
++      title: "Enable network access",
+       message:
+-        "This exposes the managed daemon on a TCP listener. Relay remains available, but network exposure is no longer private to the desktop app.",
+-      confirmLabel: "Enable TCP",
++        "This makes the daemon reachable on your local network. Relay connections will continue to work.",
++      confirmLabel: "Enable",
+       cancelLabel: "Cancel",
+     })

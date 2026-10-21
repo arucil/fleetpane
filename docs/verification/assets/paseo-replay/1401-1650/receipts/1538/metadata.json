@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1538,
+  "revision": "4c6d21af4ae1ce3a7e1e284eb88af2a030eef2b2",
+  "date": "2026-03-11T19:01:49+07:00",
+  "committer_date": "2026-03-11T19:01:49+07:00",
+  "parents": [
+    "327b31561040e96c0249254ac529d1899754d161"
+  ],
+  "subject": "refactor(desktop): simplify managed runtime by removing state file and delegating to CLI daemon status",
+  "diff_tree_paths": [
+    "M\tpackages/app/metro.config.js",
+    "A\tpackages/app/src/app/index-startup.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "A\tpackages/app/src/app/welcome.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.test.ts",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/desktop/managed-runtime/managed-runtime.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/cli/tests/03-daemon.test.ts",
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/src/server/exports.ts",
+    "A\twindows-startup-refactor-plan.md"
+  ],
+  "source_receipt_digest": "sha256:88381ac3d01c807e0764eb06f3917a029b0e3347fe6a6bedb02cf1442df7245a",
+  "diff_tree_digest": "sha256:648cb8d22053df02ecec6157f47ea300de5d6b7cbf89442f16b22937b1262c8d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index-startup.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        2,
+        31
+      ],
+      "diff_block_lines": [
+        8,
+        37
+      ],
+      "hunk_header": "@@ -0,0 +1,41 @@",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 2064,
+  "receipt_file": "receipts/1538/selected.patch"
+}

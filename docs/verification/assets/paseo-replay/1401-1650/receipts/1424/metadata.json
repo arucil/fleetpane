@@ -1,0 +1,69 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1424,
+  "revision": "8371ea0c7d3717cdc1bbfd931b1eb7cbef91c0d9",
+  "date": "2026-03-05T14:21:16+07:00",
+  "committer_date": "2026-03-05T14:21:16+07:00",
+  "parents": [
+    "6dc49ccbc79477f8284c6bb781b7597b204621dc"
+  ],
+  "subject": "refactor: unify workspace tab management and add runtime metrics",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/create-agent.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "A\tpackages/app/e2e/helpers/workspace-tabs.ts",
+    "M\tpackages/app/e2e/helpers/workspace-ui.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/e2e/pairing-offer-parsing.spec.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/e2e/relay-stability.spec.ts",
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/e2e/terminal-responsiveness-benchmark.spec.ts",
+    "A\tpackages/app/e2e/workspace-draft-tab-retarget.spec.ts",
+    "M\tpackages/app/e2e/workspace-header-tabs-restore.spec.ts",
+    "M\tpackages/app/e2e/workspace-sidebar-content-sync.spec.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/use-workspace-tab-layout.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "A\tpackages/server/src/server/session.create-agent-title.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:4a063f8a950f3772e782d892e17eb22865f07ccb3a22b33c2512ee2f7516868d",
+  "diff_tree_digest": "sha256:b187f3e728721b031bbca71bf9d28857560790e0794d0e6d9e40c2c13221a3ab",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        485,
+        485
+      ],
+      "new_lines": [
+        492,
+        521
+      ],
+      "diff_block_lines": [
+        45,
+        74
+      ],
+      "hunk_header": "@@ -484,4 +491,82 @@ function WorkspaceScreenContent({",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 1086,
+  "receipt_file": "receipts/1424/selected.patch"
+}

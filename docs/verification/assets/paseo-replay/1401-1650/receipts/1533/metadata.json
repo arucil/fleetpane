@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1533,
+  "revision": "5bf698ff843f4d14795fd98e71f3fedfbb7f32ba",
+  "date": "2026-03-11T14:14:06+07:00",
+  "committer_date": "2026-03-11T14:14:06+07:00",
+  "parents": [
+    "eb5f011161a8b535a7c29a7586603f7a42142ced"
+  ],
+  "subject": "Add Windows support and improve cross-platform shell execution",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d27364288d610b24116b06a42562c420c2118b116e17fd8de820de7f7c1b17e5",
+  "diff_tree_digest": "sha256:2d786afd58b7648e581af247d5cc50a80e49fde19b7440d0db04670cc1eba809",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/runtime_manager.rs",
+      "old_lines": [
+        564,
+        574
+      ],
+      "new_lines": [
+        564,
+        584
+      ],
+      "diff_block_lines": [
+        8,
+        36
+      ],
+      "hunk_header": "@@ -562,13 +562,23 @@ fn dev_resource_root() -> PathBuf {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 85,
+  "receipt_file": "receipts/1533/selected.patch"
+}

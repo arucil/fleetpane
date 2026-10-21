@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[90,94],"new_lines":[91,116],"diff_block_lines":[14,43],"hunk_header":"@@ -89,22 +90,61 @@ export function applyProviderEnv(","substantive_changed_lines":15}
+ 
+-export function isCommandAvailable(command: string): boolean {
+-  const normalized = command.trim();
+-  if (!normalized) {
+-    return false;
++/**
++ * Resolve an executable name to its absolute path the way the user's shell would.
++ *
++ * On Unix we first try `$SHELL -lic "which <name>"` so that rc-file PATH
++ * additions (asdf, nvm, homebrew, nix, etc.) are visible — exactly as if the
++ * user opened a terminal and typed the command.  If that fails (e.g. the login
++ * shell itself errors) we fall back to a plain `which`.
++ *
++ * On Windows the system PATH is always available, so `where.exe` is sufficient.
++ */
++export function findExecutable(name: string): string | null {
++  const trimmed = name.trim();
++  if (!trimmed) {
++    return null;
++  }
++
++  if (trimmed.includes("/") || trimmed.includes("\\")) {
++    return existsSync(trimmed) ? trimmed : null;
++  }
++
++  if (platform() === "win32") {
++    try {
++      const out = execSync(`where.exe ${trimmed}`, { encoding: "utf8" }).trim();
++      const firstLine = out.split(/\r?\n/)[0]?.trim();
++      return firstLine || null;

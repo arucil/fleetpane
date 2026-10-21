@@ -1,0 +1,12 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[195,202],"new_lines":[195,199],"diff_block_lines":[5,14],"hunk_header":"@@ -195,8 +195,5 @@ jobs:","substantive_changed_lines":5}
+@@ -195,8 +195,5 @@ jobs:
+       - name: Build macOS app (smoke only)
+         if: env.IS_SMOKE_TAG == 'true'
+-        run: npm run tauri --workspace=@getpaseo/desktop build -- --target ${{ matrix.rust_target }}
+-        env:
+-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
++        run: npm run tauri --workspace=@getpaseo/desktop build -- --target ${{ matrix.rust_target }} --no-bundle
+ 
+   publish-linux:

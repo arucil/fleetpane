@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1442,
+  "revision": "8dd94757d7cfc00590b8c589f3e97b099637530f",
+  "date": "2026-03-06T17:36:29+01:00",
+  "committer_date": "2026-03-06T17:36:29+01:00",
+  "parents": [
+    "a99edcc0b288b25985bd97b873266a65b259a5a0"
+  ],
+  "subject": "fix(server): restore auto metadata generation",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:4aa0168c963d144d62ec2250cf066c5ba7075cd2880796c5007f0f9a69a2fe94",
+  "diff_tree_digest": "sha256:182648f06561300e8c09c8790cbb3af2969ff4318dfda54a66095f9334619955",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2747,
+        2751
+      ],
+      "new_lines": [
+        2747,
+        2754
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -2747,5 +2747,8 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 79,
+  "receipt_file": "receipts/1442/selected.patch"
+}

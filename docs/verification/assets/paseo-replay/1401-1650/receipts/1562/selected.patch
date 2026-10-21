@@ -1,0 +1,10 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[68,70],"new_lines":[62,68],"diff_block_lines":[14,21],"hunk_header":"@@ -60,11 +60,9 @@ jobs:","substantive_changed_lines":3}
+-          done
++          if [[ "$source_tag" =~ ^(desktop-(windows|linux|macos)-|desktop-)?v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
++            release_tag="v${BASH_REMATCH[3]}"
++          else
++            release_tag="$source_tag"
++          fi
+           echo "RELEASE_TAG=$release_tag" >> "$GITHUB_ENV"
+ 

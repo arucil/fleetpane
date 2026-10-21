@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1615,
+  "revision": "22687906560932e1b9a5b43c439a29d51fc55708",
+  "date": "2026-03-11T21:17:36+07:00",
+  "committer_date": "2026-03-13T13:44:25+07:00",
+  "parents": [
+    "3a02d1cdd6a9c53b94c3cd87eaeb547364ba2759"
+  ],
+  "subject": "refactor: consolidate speech provider config resolution logic",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts"
+  ],
+  "source_receipt_digest": "sha256:03836e0ee0487a37ebda4aed2a0280d958c70e6a1bc2959780b6b567eb0051e7",
+  "diff_tree_digest": "sha256:0c6120062d60eb6bb5b5767d864c544fa04993bb02244511491038d726b419f3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/speech-config-resolver.ts",
+      "old_lines": [
+        58,
+        75
+      ],
+      "new_lines": [
+        62,
+        74
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -57,43 +61,58 @@ function resolveRequestedSpeechProviders(params: {",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 55,
+  "receipt_file": "receipts/1615/selected.patch"
+}

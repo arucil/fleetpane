@@ -1,0 +1,13 @@
+FILE packages/desktop/scripts/build-managed-runtime.mjs
+RANGE {"path":"packages/desktop/scripts/build-managed-runtime.mjs","old_lines":[363,364],"new_lines":[363,373],"diff_block_lines":[8,18],"hunk_header":"@@ -361,4 +361,13 @@ async function pruneOnnxRuntime(runtimeRoot) {","substantive_changed_lines":6}
++    const archDir = path.join(onnxRoot, "linux", process.arch);
++    if (await pathExists(archDir)) {
++      const entries = await fs.readdir(archDir);
++      await Promise.all(
++        entries
++          .filter((name) => name.includes("cuda") || name.includes("tensorrt"))
++          .map((name) => fs.rm(path.join(archDir, name), { force: true }))
++      );
++    }
+     return;
+   }

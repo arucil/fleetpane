@@ -1,0 +1,32 @@
+FILE packages/app/e2e/helpers/agent-bottom-anchor.ts
+RANGE {"path":"packages/app/e2e/helpers/agent-bottom-anchor.ts","old_lines":[196,204],"new_lines":[216,237],"diff_block_lines":[35,64],"hunk_header":"@@ -194,38 +210,34 @@ export async function scrollUpFromBottom(page: Page, pixels: number): Promise<vo","substantive_changed_lines":26}
+   await scrollViewport.evaluate(
+-    (root: Element, amount: number) => {
+-      const scrollElement = root as HTMLElement;
+-
+-      const bottomOffset = Math.max(
+-        0,
+-        scrollElement.scrollHeight - scrollElement.clientHeight
+-      );
+-      scrollElement.scrollTop = Math.max(0, bottomOffset - amount);
++    (root: Element, input: { targetDistanceFromBottom: number }) => {
++      const candidates = [root, ...Array.from(root.querySelectorAll("*"))]
++        .filter((element): element is HTMLElement => element instanceof HTMLElement)
++        .filter((element) => {
++          const tagName = element.tagName.toLowerCase();
++          const isEditable =
++            tagName === "textarea" ||
++            tagName === "input" ||
++            element.getAttribute("contenteditable") === "true";
++          return !isEditable && element.scrollHeight - element.clientHeight > 1;
++        });
++      const scrollElement =
++        candidates.sort(
++          (left, right) =>
++            right.scrollHeight -
++            right.clientHeight -
++            (left.scrollHeight - left.clientHeight)
++        )[0] ?? (root as HTMLElement);
++      const maxOffset = Math.max(0, scrollElement.scrollHeight - scrollElement.clientHeight);
++      const nextOffset = Math.max(0, maxOffset - input.targetDistanceFromBottom);
++      scrollElement.scrollTop = nextOffset;

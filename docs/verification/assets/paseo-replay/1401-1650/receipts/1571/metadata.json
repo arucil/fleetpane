@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1571,
+  "revision": "36961f83bfddcaba06ccc539a273d982bfe53194",
+  "date": "2026-03-12T23:49:07+07:00",
+  "committer_date": "2026-03-12T23:49:07+07:00",
+  "parents": [
+    "6db99c03cb300e059b650132d998f695bee0f8b5"
+  ],
+  "subject": "fix(release): recover desktop r8 failures",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs"
+  ],
+  "source_receipt_digest": "sha256:efd2a22df36c488314657fe145206afbdd595eb6a4805fcd9f0ff105b6e2c0d3",
+  "diff_tree_digest": "sha256:09afa8de45ef86eee631b4b30ee9e2224b5ba6953b5297d3a2b80f1f1dd1e189",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        382,
+        385
+      ],
+      "new_lines": [
+        382,
+        388
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -382,4 +382,7 @@ jobs:",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 11,
+  "receipt_file": "receipts/1571/selected.patch"
+}

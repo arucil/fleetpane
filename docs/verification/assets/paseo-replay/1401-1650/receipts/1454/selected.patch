@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[203,203],"new_lines":[268,297],"diff_block_lines":[148,177],"hunk_header":"@@ -195,10 +249,50 @@ export const AgentStreamView = forwardRef<AgentStreamViewHandle, AgentStreamView","substantive_changed_lines":19}
++
++  useEffect(() => {
++    if (Platform.OS === "web" || !streamRenderStrategy.getFlatListInverted()) {
++      return;
++    }
++    const keyboardEvents = [
++      "keyboardWillShow",
++      "keyboardWillHide",
++      "keyboardDidShow",
++      "keyboardDidHide",
++      "keyboardWillChangeFrame",
++      "keyboardDidChangeFrame",
++    ] as const;
++    const subscriptions = keyboardEvents.map((eventName) =>
++      Keyboard.addListener(eventName, () => {
++        markNativeViewportSettling();
++      })
++    );
++    return () => {
++      for (const subscription of subscriptions) {
++        subscription.remove();
++      }
++      clearNativeViewportSettling();
++    };
++  }, [
++    clearNativeViewportSettling,
++    markNativeViewportSettling,
++    streamRenderStrategy,
++  ]);
+ 

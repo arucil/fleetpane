@@ -1,0 +1,32 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[685,685],"new_lines":[687,716],"diff_block_lines":[30,59],"hunk_header":"@@ -683,4 +683,116 @@ function CodeBlock({ children }: { children: React.ReactNode }) {","substantive_changed_lines":18}
++
++function highlightBash(code: string): React.ReactNode {
++  const tokens: React.ReactNode[] = []
++  let i = 0
++  let key = 0
++
++  while (i < code.length) {
++    // Comment (# not inside a word)
++    if (code[i] === '#' && (i === 0 || /[\s(]/.test(code[i - 1]))) {
++      const end = code.indexOf('\n', i)
++      const comment = end === -1 ? code.slice(i) : code.slice(i, end)
++      tokens.push(<span key={key++} className="text-white/30 italic">{comment}</span>)
++      i += comment.length
++      continue
++    }
++
++    // Double-quoted string
++    if (code[i] === '"') {
++      let j = i + 1
++      while (j < code.length && code[j] !== '"') {
++        if (code[j] === '\\') j++
++        j++
++      }
++      const str = code.slice(i, j + 1)
++      tokens.push(<span key={key++} className="text-green-400/80">{str}</span>)
++      i = j + 1
++      continue
++    }
++
++    // Single-quoted string

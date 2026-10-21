@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1416,
+  "revision": "7578846c2712a055545556b1380d80495cf5a446",
+  "date": "2026-03-04T15:37:46+07:00",
+  "committer_date": "2026-03-04T15:37:46+07:00",
+  "parents": [
+    "430ad54d77e4bb1709debccf4b9a0ae87ed31439"
+  ],
+  "subject": "refactor: add promoteDraftToAgent store action with tests",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts"
+  ],
+  "source_receipt_digest": "sha256:f17e1c037a88b934eb18abcc1607c84a22c0ad82d432b4bdbf294d476957aec2",
+  "diff_tree_digest": "sha256:1ed9b81d2ed34f9e377a506af74bddfadb1d7f1391b8d239cd823df7ce3319ea",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/workspace-tabs-store.ts",
+      "old_lines": [
+        268,
+        268
+      ],
+      "new_lines": [
+        274,
+        303
+      ],
+      "diff_block_lines": [
+        18,
+        47
+      ],
+      "hunk_header": "@@ -267,4 +273,80 @@ export const useWorkspaceTabsStore = create<WorkspaceTabsState>()(",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 144,
+  "receipt_file": "receipts/1416/selected.patch"
+}

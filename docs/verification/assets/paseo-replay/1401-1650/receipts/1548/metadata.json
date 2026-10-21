@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1548,
+  "revision": "9e6b45e2f0db424c4569f6cc80d2250a052821e9",
+  "date": "2026-03-12T11:19:33+07:00",
+  "committer_date": "2026-03-12T11:19:33+07:00",
+  "parents": [
+    "355e56db53c661dddbaed0cc977135e0a3a47b91"
+  ],
+  "subject": "refactor(cli): remove daemon update command and simplify status runtime info",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/daemon/runtime-toolchain.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "D\tpackages/cli/src/commands/daemon/update.ts",
+    "M\tpackages/server/src/server/logger.ts"
+  ],
+  "source_receipt_digest": "sha256:00f944602612b770f2a2676dbbe202f06856951d82237888f745b2506b7188f9",
+  "diff_tree_digest": "sha256:8efb463f6ccb45a78a6b6fde7eca3c750e3b6a484a93f80496673346cc705186",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/status.ts",
+      "old_lines": [
+        255,
+        273
+      ],
+      "new_lines": [
+        150,
+        170
+      ],
+      "diff_block_lines": [
+        154,
+        182
+      ],
+      "hunk_header": "@@ -254,20 +149,22 @@ export async function runStatusCommand(",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 230,
+  "receipt_file": "receipts/1548/selected.patch"
+}

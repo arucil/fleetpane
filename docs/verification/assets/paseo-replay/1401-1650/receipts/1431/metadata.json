@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1431,
+  "revision": "d5129322336e29269cb6b0cbcd352562edb4d8ac",
+  "date": "2026-03-06T22:23:03+07:00",
+  "committer_date": "2026-03-06T22:23:35+07:00",
+  "parents": [
+    "cb24822cacf0db3c0aedaedd717f2e5fdcd77669"
+  ],
+  "subject": "refactor: extract workspace terminal sessions, improve sidebar drag-and-drop with nestable lists, and consolidate tab presentation logic",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/terminal-pane.spec.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/draggable-list.native.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-presentation.tsx",
+    "A\tpackages/app/src/terminal/hooks/use-workspace-terminal-session-retention.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-session.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "A\tpackages/app/src/terminal/runtime/workspace-terminal-session.test.ts",
+    "A\tpackages/app/src/terminal/runtime/workspace-terminal-session.ts",
+    "M\tpackages/app/src/utils/sidebar-gesture-arbitration.test.ts",
+    "M\tpackages/app/src/utils/sidebar-gesture-arbitration.ts",
+    "M\tpackages/app/src/utils/terminal-attach.test.ts",
+    "M\tpackages/app/src/utils/terminal-attach.ts",
+    "M\tpatches/react-native-draggable-flatlist+4.0.3.patch"
+  ],
+  "source_receipt_digest": "sha256:ee8b410b8e739eddaf3a4e91cd9614ab803ffcc84b639e87b8c8913091aa4637",
+  "diff_tree_digest": "sha256:499a0fa78595eb379034be8fb95df95e8562cbbd1ff138e662abff94d1960d41",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        1148,
+        1160
+      ],
+      "new_lines": [
+        1174,
+        1191
+      ],
+      "diff_block_lines": [
+        392,
+        421
+      ],
+      "hunk_header": "@@ -1147,16 +1173,29 @@ export function SidebarWorkspaceList({",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 960,
+  "receipt_file": "receipts/1431/selected.patch"
+}

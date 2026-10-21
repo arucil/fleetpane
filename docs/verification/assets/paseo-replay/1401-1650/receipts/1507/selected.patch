@@ -1,0 +1,14 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[363,368],"new_lines":[363,372],"diff_block_lines":[5,16],"hunk_header":"@@ -363,6 +363,10 @@ async function ensurePackagedArtifact(binaryPath) {","substantive_changed_lines":5}
+@@ -363,6 +363,10 @@ async function ensurePackagedArtifact(binaryPath) {
+     return;
+   }
++  const npmExecPath = process.env.npm_execpath;
++  if (!npmExecPath) {
++    throw new Error("npm_execpath is required to build the packaged desktop artifact during smoke tests.");
++  }
+   try {
+-    await execFileAsync("npm", ["run", "build"], {
++    await execFileAsync(process.execPath, [npmExecPath, "run", "build"], {
+       cwd: desktopRoot,
+       env: process.env,

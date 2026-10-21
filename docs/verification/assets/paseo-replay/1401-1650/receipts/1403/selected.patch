@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[291,320],"new_lines":[197,197],"diff_block_lines":[167,196],"hunk_header":"@@ -272,65 +191,10 @@ function WorkspaceRow({","substantive_changed_lines":19}
+-      .runOnJS(true)
+-      .onTouchesDown((event) => {
+-        const touch = event.changedTouches[0]
+-        if (!touch) {
+-          return
+-        }
+-        touchStartRef.current = { x: touch.absoluteX, y: touch.absoluteY }
+-      })
+-      .onTouchesMove((event, stateManager) => {
+-        const touch = event.changedTouches[0]
+-        if (!touch || event.numberOfTouches !== 1) {
+-          stateManager.fail()
+-          return
+-        }
+-
+-        const start = touchStartRef.current
+-        if (!start) {
+-          touchStartRef.current = { x: touch.absoluteX, y: touch.absoluteY }
+-          return
+-        }
+-
+-        const dx = touch.absoluteX - start.x
+-        const dy = touch.absoluteY - start.y
+-        const distance = Math.sqrt(dx * dx + dy * dy)
+-
+-        if (!longPressArmedRef.current) {
+-          if (distance > CANCEL_SLOP_PX) {
+-            longPressCancelledRef.current = true
+-            stateManager.fail()
+-          }

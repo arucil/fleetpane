@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1498,
+  "revision": "dce7316931d3a5e9819d7219291cd4e68bdca6c9",
+  "date": "2026-03-10T16:45:34+07:00",
+  "committer_date": "2026-03-10T16:45:34+07:00",
+  "parents": [
+    "d69addaad27fbeb90bf4f743453e0cbafcbf6b90"
+  ],
+  "subject": "Skip duplicate smoke artifact rebuilds",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:ba1a68c8b550fd1e93ae92ed278251c83b495236553949081cf1b0a298258daa",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        196,
+        211
+      ],
+      "new_lines": [
+        196,
+        198
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -195,17 +195,4 @@ jobs:",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 24,
+  "receipt_file": "receipts/1498/selected.patch"
+}

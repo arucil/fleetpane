@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1638,
+  "revision": "a9d5502fad08b5a93f36d266b706500ae2e82891",
+  "date": "2026-03-15T13:50:52+07:00",
+  "committer_date": "2026-03-15T13:50:52+07:00",
+  "parents": [
+    "849f49b6228ca9b440787c7662927cb50f2804e0"
+  ],
+  "subject": "fix(app): route assistant file links to workspace files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/utils/inline-path.test.ts",
+    "M\tpackages/app/src/utils/inline-path.ts"
+  ],
+  "source_receipt_digest": "sha256:d14d5ebad883682e6fb2b01541638a6df14e67925288f8357486e08f3378d8c5",
+  "diff_tree_digest": "sha256:b8fcdfd7245e9fee530ba6099b64da71e1d2f71d252bf18f21112b868236020b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/inline-path.ts",
+      "old_lines": [
+        109,
+        117
+      ],
+      "new_lines": [
+        137,
+        158
+      ],
+      "diff_block_lines": [
+        52,
+        81
+      ],
+      "hunk_header": "@@ -104,16 +135,75 @@ export function parseFileProtocolUrl(value: string): InlinePathTarget | null {",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 295,
+  "receipt_file": "receipts/1638/selected.patch"
+}

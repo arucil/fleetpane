@@ -1,0 +1,9 @@
+FILE packages/app/package.json
+RANGE {"path":"packages/app/package.json","old_lines":[24,28],"new_lines":[24,28],"diff_block_lines":[5,11],"hunk_header":"@@ -24,5 +24,5 @@","substantive_changed_lines":2}
+@@ -24,5 +24,5 @@
+     "build:web": "expo export --platform web",
+     "build:web:tauri": "PASEO_WEB_PLATFORM=tauri expo export --platform web",
+-    "deploy:web": "npm run build:web && wrangler pages deploy dist --project-name paseo-app"
++    "deploy:web": "npm run build:web && wrangler pages deploy dist --project-name paseo-app --branch main"
+   },
+   "dependencies": {

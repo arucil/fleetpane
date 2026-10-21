@@ -1,0 +1,32 @@
+FILE packages/server/src/server/logger.ts
+RANGE {"path":"packages/server/src/server/logger.ts","old_lines":[140,140],"new_lines":[140,169],"diff_block_lines":[12,41],"hunk_header":"@@ -139,4 +139,35 @@ function normalizeLoggerConfigInput(config: LoggerConfigInput): PersistedConfig","substantive_changed_lines":19}
+ 
++function rotateOnRestart(filePath: string, maxFiles: number): void {
++  if (!existsSync(filePath)) return;
++
++  const dir = path.dirname(filePath);
++  const base = path.basename(filePath);
++  const now = new Date();
++  const pad = (n: number) => String(n).padStart(2, "0");
++  const ts = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
++
++  try {
++    renameSync(filePath, path.join(dir, `${ts}-00-${base}`));
++  } catch {
++    return;
++  }
++
++  // Clean up old rotated logs beyond maxFiles.
++  // Both our restart-rotated files (YYYYMMDD-HHMM-00-daemon.log) and
++  // rotating-file-stream's size-rotated files (YYYYMMDD-HHMM-NN-daemon.log)
++  // end with -${base} and sort chronologically by name.
++  const rotatedFiles = readdirSync(dir)
++    .filter((f) => f.endsWith(`-${base}`) && f !== base)
++    .sort()
++    .reverse();
++
++  for (const file of rotatedFiles.slice(maxFiles)) {
++    try {
++      unlinkSync(path.join(dir, file));
++    } catch {}
++  }

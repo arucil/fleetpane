@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[485,485],"new_lines":[492,521],"diff_block_lines":[45,74],"hunk_header":"@@ -484,4 +491,82 @@ function WorkspaceScreenContent({","substantive_changed_lines":21}
+ 
++  useEffect(() => {
++    if (!normalizedServerId || !normalizedWorkspaceId) {
++      return;
++    }
++
++    const agentIds = new Set(workspaceAgents.map((agent) => agent.id));
++    const terminalIds = new Set(terminals.map((terminal) => terminal.id));
++    const hasActivePendingDraftCreateInWorkspace = uiTabs.some((tab) => {
++      if (tab.target.kind !== "draft") {
++        return false;
++      }
++      const pending = pendingByDraftId[tab.target.draftId];
++      return pending?.serverId === normalizedServerId && pending.lifecycle === "active";
++    });
++
++    for (const agent of workspaceAgents) {
++      const representedByTarget = uiTabs.some(
++        (tab) => tab.target.kind === "agent" && tab.target.agentId === agent.id
++      );
++      const representedByDeterministicTabId = uiTabs.some(
++        (tab) => tab.tabId === `agent_${agent.id}`
++      );
++      if (
++        hasActivePendingDraftCreateInWorkspace &&
++        !representedByTarget &&
++        !representedByDeterministicTabId
++      ) {
++        continue;
++      }

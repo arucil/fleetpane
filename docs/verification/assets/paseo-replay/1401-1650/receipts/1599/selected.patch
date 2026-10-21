@@ -1,0 +1,22 @@
+FILE packages/server/src/server/daemon-e2e/git-operations.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/git-operations.e2e.test.ts","old_lines":[111,122],"new_lines":[112,127],"diff_block_lines":[34,53],"hunk_header":"@@ -109,14 +104,24 @@ async function waitForPathRemoved(","substantive_changed_lines":10}
++
++async function waitForCondition(options: {
++  timeoutMs: number;
++  label: string;
++  predicate: () => boolean | Promise<boolean>;
++}): Promise<void> {
+   const start = Date.now();
+   while (Date.now() - start < options.timeoutMs) {
+-    if (!existsSync(options.targetPath)) {
++    if (await options.predicate()) {
+       return;
+     }
+     await new Promise((resolve) => setTimeout(resolve, 50));
+   }
+-  throw new Error(
+-    `Timed out after ${options.timeoutMs}ms waiting for removal of ${options.label}: ${options.targetPath}`
+-  );
++  throw new Error(`Timed out after ${options.timeoutMs}ms waiting for ${options.label}`);
+ }
+ 

@@ -1,0 +1,14 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[394,398],"new_lines":[400,409],"diff_block_lines":[32,43],"hunk_header":"@@ -394,5 +400,10 @@ function AppWithSidebar({ children }: { children: ReactNode }) {","substantive_changed_lines":7}
+@@ -394,5 +400,10 @@ function AppWithSidebar({ children }: { children: ReactNode }) {
+ 
+   return (
+-    <AppContainer selectedAgentId={selectedAgentKey}>{children}</AppContainer>
++    <AppContainer
++      selectedAgentId={shouldShowAppChrome ? selectedAgentKey : undefined}
++      chromeEnabled={shouldShowAppChrome}
++    >
++      {children}
++    </AppContainer>
+   );
+ }

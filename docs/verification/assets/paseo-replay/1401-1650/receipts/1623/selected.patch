@@ -1,0 +1,32 @@
+FILE packages/cli/src/utils/duration.ts
+RANGE {"path":"packages/cli/src/utils/duration.ts","old_lines":[0,0],"new_lines":[5,34],"diff_block_lines":[11,40],"hunk_header":"@@ -0,0 +1,43 @@","substantive_changed_lines":19}
++ */
++export function parseDuration(input: string): number {
++  const trimmed = input.trim()
++
++  // If it's just a number, treat as seconds
++  if (/^\d+$/.test(trimmed)) {
++    return parseInt(trimmed, 10) * 1000
++  }
++
++  // Parse duration with units
++  let totalMs = 0
++  const regex = /(\d+)([smh])/g
++  let match
++  let hasMatch = false
++
++  while ((match = regex.exec(trimmed)) !== null) {
++    hasMatch = true
++    const value = parseInt(match[1], 10)
++    const unit = match[2]
++
++    switch (unit) {
++      case 's':
++        totalMs += value * 1000
++        break
++      case 'm':
++        totalMs += value * 60 * 1000
++        break
++      case 'h':
++        totalMs += value * 60 * 60 * 1000
++        break

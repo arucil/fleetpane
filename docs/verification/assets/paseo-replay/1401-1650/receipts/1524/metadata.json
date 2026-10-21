@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1524,
+  "revision": "cf4cae2c7dc8284ee8ead46711ce0ab642ecf8b7",
+  "date": "2026-03-10T22:59:36+07:00",
+  "committer_date": "2026-03-10T22:59:36+07:00",
+  "parents": [
+    "d51f18a2f728496aa866b2947bba0030a3cdb543"
+  ],
+  "subject": "Fix Linux AppImage: strip CUDA deps from onnxruntime binaries",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:e49c0e78d3c40bf5d0aabe1f16c3d4b9d263f56554fc382175eee08f5426cedf",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        305,
+        311
+      ],
+      "new_lines": [
+        305,
+        319
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -304,8 +304,16 @@ jobs:",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1524/selected.patch"
+}

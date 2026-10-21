@@ -1,0 +1,13 @@
+FILE packages/app/metro.config.cjs
+RANGE {"path":"packages/app/metro.config.cjs","old_lines":[30,36],"new_lines":[29,35],"diff_block_lines":[17,27],"hunk_header":"@@ -30,7 +29,7 @@ config.resolver.extraNodeModules = {","substantive_changed_lines":4}
+@@ -30,7 +29,7 @@ config.resolver.extraNodeModules = {
+   "react/jsx-dev-runtime": path.join(appNodeModulesRoot, "react/jsx-dev-runtime"),
+ };
+-config.resolver.blockList = exclusionList([
+-  new RegExp(`^${escapedAppSrcRoot}[\\\\/].*\\.(test|spec)\\.(ts|tsx)$`),
+-]);
++config.resolver.blockList = new RegExp(
++  `(^${escapedAppSrcRoot}${pathSeparatorPattern}.*\\.(test|spec)\\.(ts|tsx)$|${pathSeparatorPattern}__tests__${pathSeparatorPattern}.*)$`,
++);
+ 
+ function isLocalModuleImport(moduleName) {

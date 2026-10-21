@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-actions-policy.ts
+RANGE {"path":"packages/app/src/components/git-actions-policy.ts","old_lines":[0,0],"new_lines":[63,92],"diff_block_lines":[69,98],"hunk_header":"@@ -0,0 +1,256 @@","substantive_changed_lines":23}
++
++export function buildGitActions(input: BuildGitActionsInput): GitActions {
++  if (!input.isGit) {
++    return { primary: null, secondary: [], menu: [] };
++  }
++
++  const allActions = new Map<GitActionId, GitAction>();
++
++  allActions.set("commit", {
++    id: "commit",
++    label: "Commit",
++    pendingLabel: "Committing...",
++    successLabel: "Committed",
++    disabled: input.runtime.commit.disabled,
++    status: input.runtime.commit.status,
++    icon: input.runtime.commit.icon,
++    handler: input.runtime.commit.handler,
++  });
++
++  allActions.set("push", {
++    id: "push",
++    label: "Push",
++    pendingLabel: "Pushing...",
++    successLabel: "Pushed",
++    disabled: input.runtime.push.disabled || !input.hasRemote,
++    status: input.runtime.push.status,
++    description: input.hasRemote ? undefined : "No remote configured",
++    icon: input.runtime.push.icon,
++    handler: input.runtime.push.handler,
++  });

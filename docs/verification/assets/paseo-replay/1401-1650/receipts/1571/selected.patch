@@ -1,0 +1,10 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[382,385],"new_lines":[382,388],"diff_block_lines":[5,12],"hunk_header":"@@ -382,4 +382,7 @@ jobs:","substantive_changed_lines":3}
+@@ -382,4 +382,7 @@ jobs:
+       - name: Attempt manual Linux AppImage fallback
+         if: env.IS_SMOKE_TAG != 'true' && steps.linux_tauri.outcome == 'failure'
++        env:
++          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
++          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+         shell: bash
+         run: |

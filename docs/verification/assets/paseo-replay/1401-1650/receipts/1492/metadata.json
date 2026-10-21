@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1492,
+  "revision": "752d29c146a33fbf016b59595e48ca54d5627ecb",
+  "date": "2026-03-10T14:38:24+07:00",
+  "committer_date": "2026-03-10T14:38:24+07:00",
+  "parents": [
+    "36660b3cc19ad967bbf5fce42b740579b486046c"
+  ],
+  "subject": "Prebuild macOS smoke app in CI",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs"
+  ],
+  "source_receipt_digest": "sha256:78673221ce96a17fbc7ed8fcddc154efa94a7af665976927171759fa876605d2",
+  "diff_tree_digest": "sha256:2ae4c858e0063c368f913d55b84b10b804d3cae2fcdb0b621d5b425c6d0f43b6",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        107,
+        109
+      ],
+      "new_lines": [
+        104,
+        122
+      ],
+      "diff_block_lines": [
+        15,
+        33
+      ],
+      "hunk_header": "@@ -106,4 +103,20 @@ jobs:",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 34,
+  "receipt_file": "receipts/1492/selected.patch"
+}

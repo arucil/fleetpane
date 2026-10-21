@@ -1,0 +1,12 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[99,102],"new_lines":[100,108],"diff_block_lines":[11,20],"hunk_header":"@@ -99,4 +100,9 @@ jobs:","substantive_changed_lines":4}
+@@ -99,4 +100,9 @@ jobs:
+         run: npm run smoke:managed-daemon --workspace=@getpaseo/desktop
+ 
++      - name: Sign bundled managed runtime for macOS
++        env:
++          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
++        run: node ./packages/desktop/scripts/sign-managed-runtime-macos.mjs
++
+       - name: Set desktop version from tag
+         shell: bash

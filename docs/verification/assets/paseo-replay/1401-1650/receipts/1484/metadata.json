@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1484,
+  "revision": "7a4be5233cc36d8db11fbc9d20970b0b5dfd79e8",
+  "date": "2026-03-10T12:19:16+07:00",
+  "committer_date": "2026-03-10T12:19:16+07:00",
+  "parents": [
+    "965704da2013ab46371b8e57ca3815ddecad7da5"
+  ],
+  "subject": "Harden desktop smoke bootstrap check in CI",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs"
+  ],
+  "source_receipt_digest": "sha256:c9e12fd041c9aa2d9c37a00a6b45f40c4064bd1a7eb378689496fb5afed1960c",
+  "diff_tree_digest": "sha256:19e42e7b562a642101b988c6e4604a49feadcb57d6885ba2ec95e6f7b8236045",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/managed-daemon-smoke.mjs",
+      "old_lines": [
+        522,
+        530
+      ],
+      "new_lines": [
+        519,
+        544
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -516,17 +516,31 @@ try {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 27,
+  "receipt_file": "receipts/1484/selected.patch"
+}

@@ -1,0 +1,24 @@
+FILE packages/app/vitest.config.ts
+RANGE {"path":"packages/app/vitest.config.ts","old_lines":[33,41],"new_lines":[38,55],"diff_block_lines":[19,40],"hunk_header":"@@ -28,14 +28,28 @@ export default defineConfig({","substantive_changed_lines":10}
++      },
++      { find: "@", replacement: path.resolve(__dirname, "src") },
++      { find: "@server", replacement: path.resolve(__dirname, "../server/src") },
+       // Point to the ESM build so Vite can transform its imports and apply the
+       // react alias below (the CJS build uses require('react') which bypasses
+       // Vite alias resolution).
+-      "react-native": path.resolve(rootNodeModules, "react-native-web/dist/index.js"),
+-      react: path.resolve(appNodeModules, "react"),
+-      "react-dom": path.resolve(appNodeModules, "react-dom"),
+-    },
++      {
++        find: "react-native",
++        replacement: path.resolve(rootNodeModules, "react-native-web/dist/index.js"),
++      },
++      { find: "react", replacement: path.resolve(appNodeModules, "react") },
++      {
++        find: "react-dom",
++        replacement: path.resolve(appNodeModules, "react-dom"),
++      },
++    ],
+   },
+ });

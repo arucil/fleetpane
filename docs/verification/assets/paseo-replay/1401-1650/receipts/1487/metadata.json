@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1487,
+  "revision": "15e95691578800f21ee9dd8b8de4ea75c549cfbd",
+  "date": "2026-03-10T12:56:18+07:00",
+  "committer_date": "2026-03-10T12:56:18+07:00",
+  "parents": [
+    "483dd7cb6df99238b3a631bfdb1f93437a89fd99"
+  ],
+  "subject": "refactor: extract stream render model and segment-based rendering",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/components/agent-stream-render-model.test.ts",
+    "A\tpackages/app/src/components/agent-stream-render-model.ts",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/stream-strategy-native.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "M\tpackages/app/src/components/stream-strategy.ts",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/styles/theme.ts",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:8b424a4b85672ae91a4f0e008ec55809272f3fb092f5050749d83d48dfb14a9e",
+  "diff_tree_digest": "sha256:6bb8e0733765fe10def775cedd636d8cedef468e7f88efda833867869a941a52",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-render-model.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        58,
+        87
+      ],
+      "diff_block_lines": [
+        64,
+        93
+      ],
+      "hunk_header": "@@ -0,0 +1,178 @@",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 805,
+  "receipt_file": "receipts/1487/selected.patch"
+}

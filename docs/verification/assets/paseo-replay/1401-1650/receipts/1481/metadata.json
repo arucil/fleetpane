@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1481,
+  "revision": "f3acdedfb1d0159c7265e9527803917ef3b2ec70",
+  "date": "2026-03-10T11:41:49+07:00",
+  "committer_date": "2026-03-10T11:41:49+07:00",
+  "parents": [
+    "cc45c3772f4f25f1d279ea8ec132573be1d5be74"
+  ],
+  "subject": "Fix desktop release runtime bundling",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/app/src/components/ui/button.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs"
+  ],
+  "source_receipt_digest": "sha256:a19dd897cdf7d776d4a0162ddd4f6a921b5641051d3d904b724af70eceb6c635",
+  "diff_tree_digest": "sha256:cf16551142aab1af46ec5a6d2ed90c9e9e70ba78ec0c9c51cf10b6f3bf320692",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-updates-section.tsx",
+      "old_lines": [
+        436,
+        444
+      ],
+      "new_lines": [
+        436,
+        444
+      ],
+      "diff_block_lines": [
+        28,
+        38
+      ],
+      "hunk_header": "@@ -435,10 +435,10 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 34,
+  "receipt_file": "receipts/1481/selected.patch"
+}

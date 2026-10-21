@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[1148,1160],"new_lines":[1174,1191],"diff_block_lines":[392,421],"hunk_header":"@@ -1147,16 +1173,29 @@ export function SidebarWorkspaceList({","substantive_changed_lines":27}
+     <View style={styles.container}>
+-      <ScrollView
+-        style={styles.list}
+-        contentContainerStyle={styles.listContent}
+-        showsVerticalScrollIndicator={false}
+-        scrollEnabled={outerScrollEnabled}
+-        onScrollBeginDrag={() =>
+-          console.log('[sidebar-dnd-debug] outer scroll begin', { outerScrollEnabled })
+-        }
+-        testID="sidebar-project-workspace-list-scroll"
+-      >
+-        {content}
+-      </ScrollView>
++      {isNative ? (
++        <NestableScrollContainer
++          style={styles.list}
++          contentContainerStyle={styles.listContent}
++          showsVerticalScrollIndicator={false}
++          onScrollBeginDrag={() =>
++            console.log('[sidebar-dnd-debug] outer scroll begin')
++          }
++          testID="sidebar-project-workspace-list-scroll"
++        >
++          {content}
++        </NestableScrollContainer>
++      ) : (
++        <ScrollView
++          style={styles.list}
++          contentContainerStyle={styles.listContent}
++          showsVerticalScrollIndicator={false}

@@ -1,0 +1,12 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[304,307],"new_lines":[304,312],"diff_block_lines":[5,14],"hunk_header":"@@ -304,4 +304,9 @@ jobs:","substantive_changed_lines":4}
+@@ -304,4 +304,9 @@ jobs:
+         run: npm run validate:managed-runtime --workspace=@getpaseo/desktop
+ 
++      - name: Remove CUDA/TensorRT providers from onnxruntime
++        shell: bash
++        run: |
++          find packages/desktop/src-tauri/resources/managed-runtime -path '*/onnxruntime-node/bin/*' \( -name '*cuda*' -o -name '*tensorrt*' \) -delete || true
++
+       - name: Detect existing GitHub release state
+         if: env.IS_SMOKE_TAG != 'true'

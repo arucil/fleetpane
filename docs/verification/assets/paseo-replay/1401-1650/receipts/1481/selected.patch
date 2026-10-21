@@ -1,0 +1,13 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[436,444],"new_lines":[436,444],"diff_block_lines":[28,38],"hunk_header":"@@ -435,10 +435,10 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {","substantive_changed_lines":4}
+             {(managedLogs?.logPath ?? managedStatus?.logPath) ? (
+-              <Button variant="outline" size="sm" onPress={handleCopyLogPath}>
++              <Button variant="secondary" size="sm" onPress={handleCopyLogPath}>
+                 Copy path
+               </Button>
+             ) : null}
+             <Button
+-              variant="outline"
++              variant="secondary"
+               size="sm"
+               onPress={handleOpenLogs}

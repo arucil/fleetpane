@@ -1,0 +1,15 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[759,760],"new_lines":[759,771],"diff_block_lines":[8,20],"hunk_header":"@@ -757,4 +757,15 @@ function WorkspaceScreenContent({","substantive_changed_lines":7}
++  const handleOpenFileFromChat = useCallback(
++    ({ filePath }: { filePath: string }) => {
++      const normalizedFilePath = filePath.trim();
++      if (!normalizedFilePath) {
++        return;
++      }
++      handleOpenFileFromExplorer(normalizedFilePath);
++    },
++    [handleOpenFileFromExplorer]
++  );
++
+   const [isTabSwitcherOpen, setIsTabSwitcherOpen] = useState(false);
+   const [hoveredTabKey, setHoveredTabKey] = useState<string | null>(null);

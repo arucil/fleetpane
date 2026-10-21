@@ -1,0 +1,37 @@
+    if (disposed) {
+      return;
+    }
+    disposed = true;
+    if (stateBroadcastTimer) {
+      clearTimeout(stateBroadcastTimer);
+      stateBroadcastTimer = null;
+    }
+    stateBroadcastScheduled = false;
+    terminal.dispose();
+    listeners.clear();
+    rawListeners.clear();
+    exitListeners.clear();
+  }
+
+  function emitStateToListeners(): void {
+    stateBroadcastScheduled = false;
+    if (disposed || killed || listeners.size === 0) {
+      return;
+    }
+    const state = getState();
+    for (const listener of listeners) {
+      listener({ type: "full", state });
+    }
+  }
+
+  function scheduleStateBroadcast(): void {
+    if (disposed || killed || listeners.size === 0 || stateBroadcastScheduled) {
+      return;
+    }
+    stateBroadcastScheduled = true;
+    stateBroadcastTimer = setTimeout(() => {
+      stateBroadcastTimer = null;
+      emitStateToListeners();
+    }, STATE_BROADCAST_INTERVAL_MS);
+  }
+

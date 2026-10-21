@@ -1,0 +1,9 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1790,1794],"new_lines":[1790,1794],"diff_block_lines":[5,11],"hunk_header":"@@ -1790,5 +1790,5 @@ export class Session {","substantive_changed_lines":2}
+@@ -1790,5 +1790,5 @@ export class Session {
+     this.sessionLogger.info({ agentId }, `Archiving agent ${agentId}`)
+ 
+-    const { archivedAt, archivedRecord } = await this.archiveAgentState(agentId)
++    const { archivedAt } = await this.archiveAgentState(agentId)
+ 
+     this.emit({

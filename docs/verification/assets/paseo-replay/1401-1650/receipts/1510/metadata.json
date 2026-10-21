@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1510,
+  "revision": "90dfe36e3ec7c29059def337ae4bac7ad047106f",
+  "date": "2026-03-10T18:27:02+07:00",
+  "committer_date": "2026-03-10T18:27:02+07:00",
+  "parents": [
+    "7588c1791b7a483abcf372fe6a8091679d6ab743"
+  ],
+  "subject": "Speed up Windows desktop smoke",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:28ae0736bac8c33a2609afd46a1234eea9500aff4dae8a0e94a786666fb54a18",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        429,
+        432
+      ],
+      "new_lines": [
+        429,
+        445
+      ],
+      "diff_block_lines": [
+        7,
+        23
+      ],
+      "hunk_header": "@@ -428,5 +428,18 @@ jobs:",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 11,
+  "receipt_file": "receipts/1510/selected.patch"
+}

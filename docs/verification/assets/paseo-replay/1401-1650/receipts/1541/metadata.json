@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1541,
+  "revision": "e2cb67462d2006663e89cd5221d0f33b18ff6b32",
+  "date": "2026-03-11T21:08:08+07:00",
+  "committer_date": "2026-03-11T21:08:08+07:00",
+  "parents": [
+    "b60d25392642c9b55d3f3ae8d5d283a8ee31a207"
+  ],
+  "subject": "refactor(cli): extract common command options into reusable helpers",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/daemon/pair.ts",
+    "M\tpackages/cli/src/commands/permit/index.ts",
+    "M\tpackages/cli/src/commands/provider/index.ts",
+    "M\tpackages/cli/src/commands/speech/index.ts",
+    "M\tpackages/cli/src/commands/worktree/index.ts",
+    "A\tpackages/cli/src/utils/command-options.ts"
+  ],
+  "source_receipt_digest": "sha256:163db6d9a49ccedb753b092ff0d6d58b6552ff346c4f9d3571b52a6438c1cb05",
+  "diff_tree_digest": "sha256:736d1bd44ef41a6a5946a222a7442a628ab268b0ddec071575b5bb5c31a64159",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/cli.ts",
+      "old_lines": [
+        83,
+        112
+      ],
+      "new_lines": [
+        62,
+        62
+      ],
+      "diff_block_lines": [
+        51,
+        80
+      ],
+      "hunk_header": "@@ -59,100 +60,98 @@ export function createCli(): Command {",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 509,
+  "receipt_file": "receipts/1541/selected.patch"
+}

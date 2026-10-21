@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1598,
+  "revision": "4a01b9ec90ef4a25d3b0cc7dd09911b64307686c",
+  "date": "2026-03-11T00:54:01+07:00",
+  "committer_date": "2026-03-13T13:42:51+07:00",
+  "parents": [
+    "2f13806a2ca806767b327c3682552ad59761a6c0"
+  ],
+  "subject": "fix(tests): iteration 12",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/agent-scroll-submit-firefox.spec.ts",
+    "M\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/e2e/relay-stability.spec.ts"
+  ],
+  "source_receipt_digest": "sha256:f9b525f7b5a2944293dfdc48c3a317da5e6cd781054d334dbc0e2b724c9af16c",
+  "diff_tree_digest": "sha256:b16bd85ddeeb6d3037cb3579b9052820f7a3c8f579872348ac51541467abd3b3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/e2e/host-selection.spec.ts",
+      "old_lines": [
+        27,
+        51
+      ],
+      "new_lines": [
+        31,
+        39
+      ],
+      "diff_block_lines": [
+        15,
+        44
+      ],
+      "hunk_header": "@@ -26,26 +30,10 @@ test('new agent respects serverId in the URL', async ({ page }) => {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 78,
+  "receipt_file": "receipts/1598/selected.patch"
+}

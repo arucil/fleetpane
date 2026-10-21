@@ -1,0 +1,72 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1459,
+  "revision": "2d5d0dcacd6999c809acd02f17fe51fe593270ed",
+  "date": "2026-03-08T12:59:16+07:00",
+  "committer_date": "2026-03-08T15:40:02+07:00",
+  "parents": [
+    "faa5aaab6f7b1895fc052610dbe855792caf932a"
+  ],
+  "subject": "Add managed desktop daemon runtime support",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\t.gitignore",
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.test.ts",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/managed-runtime/managed-runtime.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/runtime/perf-diagnostics/host-runtime-diagnostics.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/stores/download-store.ts",
+    "M\tpackages/app/src/utils/connection-selection.test.ts",
+    "A\tpackages/app/src/utils/managed-tauri-daemon-transport.test.ts",
+    "A\tpackages/app/src/utils/managed-tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.test.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/daemon/pair.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/cli/tests/03-daemon.test.ts",
+    "M\tpackages/cli/tests/18-local-daemon-utils.test.ts",
+    "A\tpackages/cli/tests/28-client-ipc-targets.test.ts",
+    "M\tpackages/desktop/package.json",
+    "A\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "A\tpackages/desktop/scripts/managed-daemon-smoke.mjs",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "A\tpackages/desktop/src-tauri/resources/.gitkeep",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/main.rs",
+    "A\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/desktop/src-tauri/tauri.conf.json",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:92dcd83915f70bd28dfcb9c50f3e51d6d7c6448a0b28261a9aca45b5a18c544d",
+  "diff_tree_digest": "sha256:8da8573a2be6778ab63ef74d0aa74f41e8d024a6363180967cadcc8e5090e1ae",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/daemon-registry-context.tsx",
+      "old_lines": [
+        73,
+        75
+      ],
+      "new_lines": [
+        142,
+        169
+      ],
+      "diff_block_lines": [
+        121,
+        150
+      ],
+      "hunk_header": "@@ -72,6 +141,387 @@ function normalizeEndpointOrNull(endpoint: string): string | null {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 4101,
+  "receipt_file": "receipts/1459/selected.patch"
+}

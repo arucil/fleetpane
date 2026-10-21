@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1410,
+  "revision": "b5b4e609168eee61abd8e0263633c65023c744e0",
+  "date": "2026-03-04T11:57:22+07:00",
+  "committer_date": "2026-03-04T11:57:22+07:00",
+  "parents": [
+    "952ff0dd72007bbbb3e28d46e0052c8cd7682370"
+  ],
+  "subject": "feat: add explicit drag handles to sidebar lists and refactor workspace tab model",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/draggable-list.native.tsx",
+    "M\tpackages/app/src/components/draggable-list.types.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tabs-types.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:2aeb744b9d9654f528a482fc8feda12e1d74bf4e2731a42a6d43fadd8de8e3a4",
+  "diff_tree_digest": "sha256:ded43c62ea65b60d94e33a505799698852a5a6292d6b05362270580abf4b4147",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        172,
+        201
+      ],
+      "new_lines": [
+        159,
+        159
+      ],
+      "diff_block_lines": [
+        70,
+        99
+      ],
+      "hunk_header": "@@ -162,150 +155,26 @@ function WorkspaceStatusIndicator({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 1266,
+  "receipt_file": "receipts/1410/selected.patch"
+}

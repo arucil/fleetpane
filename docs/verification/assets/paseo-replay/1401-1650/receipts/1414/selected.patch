@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-draft-agent-tab.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-draft-agent-tab.tsx","old_lines":[324,345],"new_lines":[327,336],"diff_block_lines":[25,54],"hunk_header":"@@ -323,62 +326,73 @@ export function WorkspaceDraftAgentTab({","substantive_changed_lines":26}
+ 
++  const handleFilesDropped = useCallback((files: ImageAttachment[]) => {
++    addImagesRef.current?.(files);
++  }, []);
++
++  const handleAddImagesCallback = useCallback((addImages: (images: ImageAttachment[]) => void) => {
++    addImagesRef.current = addImages;
++  }, []);
++
+   return (
+-    <View style={styles.container}>
+-      <View style={styles.contentContainer}>
+-        {machine.tag === "creating" && draftAgent ? (
+-          <View style={styles.streamContainer}>
+-            <AgentStreamView
+-              agentId={tabId}
+-              serverId={serverId}
+-              agent={draftAgent}
+-              streamItems={optimisticStreamItems}
+-              pendingPermissions={EMPTY_PENDING_PERMISSIONS}
+-            />
+-          </View>
+-        ) : (
+-          <ScrollView style={styles.scrollView} contentContainerStyle={styles.configScrollContent}>
+-            <View style={styles.configSection}>
+-              <AgentConfigRow
+-                providerDefinitions={providerDefinitions}
+-                selectedProvider={selectedProvider}
+-                onSelectProvider={setProviderFromUser}
+-                modeOptions={modeOptions}

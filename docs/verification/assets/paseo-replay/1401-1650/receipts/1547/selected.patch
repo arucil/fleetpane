@@ -1,0 +1,10 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[3071,3074],"new_lines":[3071,3077],"diff_block_lines":[5,12],"hunk_header":"@@ -3071,4 +3071,7 @@ export class CodexAppServerAgentClient implements AgentClient {","substantive_changed_lines":2}
+@@ -3071,4 +3071,7 @@ export class CodexAppServerAgentClient implements AgentClient {
+   private spawnAppServer(): ChildProcessWithoutNullStreams {
+     const launchPrefix = resolveCodexLaunchPrefix(this.runtimeSettings);
++    this.logger.trace({
++      launchPrefix
++    }, "Spawning Codex app server");
+     return spawn(launchPrefix.command, [...launchPrefix.args, "app-server"], {
+       stdio: ["pipe", "pipe", "pipe"],

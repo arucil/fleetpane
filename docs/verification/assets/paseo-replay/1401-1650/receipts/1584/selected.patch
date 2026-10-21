@@ -1,0 +1,32 @@
+FILE packages/app/src/voice/audio-engine.native.ts
+RANGE {"path":"packages/app/src/voice/audio-engine.native.ts","old_lines":[41,41],"new_lines":[37,66],"diff_block_lines":[52,81],"hunk_header":"@@ -40,8 +36,90 @@ function parsePcmSampleRate(mimeType: string): number | null {","substantive_changed_lines":22}
+ 
++function resamplePcm16(pcm: Uint8Array, fromRate: number, toRate: number): Uint8Array {
++  if (fromRate === toRate) {
++    return pcm;
++  }
++
++  const inputSamples = Math.floor(pcm.length / 2);
++  const outputSamples = Math.floor((inputSamples * toRate) / fromRate);
++  const out = new Uint8Array(outputSamples * 2);
++  const ratio = fromRate / toRate;
++
++  const readInt16 = (sampleIndex: number): number => {
++    const i = sampleIndex * 2;
++    if (i + 1 >= pcm.length) {
++      return 0;
++    }
++    const lo = pcm[i]!;
++    const hi = pcm[i + 1]!;
++    let value = (hi << 8) | lo;
++    if (value & 0x8000) {
++      value = value - 0x10000;
++    }
++    return value;
++  };
++
++  const writeInt16 = (sampleIndex: number, value: number): void => {
++    const clamped = Math.max(-32768, Math.min(32767, Math.round(value)));
++    const i = sampleIndex * 2;
++    out[i] = clamped & 0xff;
++    out[i + 1] = (clamped >> 8) & 0xff;

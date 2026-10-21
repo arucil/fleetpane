@@ -1,0 +1,71 @@
+
+    if (parsed.kind === "thread_started") {
+      this.currentThreadId = parsed.threadId;
+      this.emitEvent({ type: "thread_started", provider: CODEX_PROVIDER, sessionId: parsed.threadId });
+      return;
+    }
+
+    if (parsed.kind === "turn_started") {
+      this.currentTurnId = parsed.turnId;
+      this.emittedItemStartedIds.clear();
+      this.emittedItemCompletedIds.clear();
+      this.emittedExecCommandStartedCallIds.clear();
+      this.emittedExecCommandCompletedCallIds.clear();
+      this.pendingCommandOutputDeltas.clear();
+      this.pendingFileChangeOutputDeltas.clear();
+      this.warnedIncompleteEditToolCallIds.clear();
+      this.emitEvent({ type: "turn_started", provider: CODEX_PROVIDER });
+      return;
+    }
+
+    if (parsed.kind === "turn_completed") {
+      if (parsed.status === "failed") {
+        this.emitEvent({
+          type: "turn_failed",
+          provider: CODEX_PROVIDER,
+          error: parsed.errorMessage ?? "Codex turn failed",
+        });
+      } else if (parsed.status === "interrupted") {
+        this.emitEvent({ type: "turn_canceled", provider: CODEX_PROVIDER, reason: "interrupted" });
+      } else {
+        this.emitEvent({ type: "turn_completed", provider: CODEX_PROVIDER, usage: this.latestUsage });
+      }
+      this.emittedItemStartedIds.clear();
+      this.emittedItemCompletedIds.clear();
+      this.emittedExecCommandStartedCallIds.clear();
+      this.emittedExecCommandCompletedCallIds.clear();
+      this.pendingCommandOutputDeltas.clear();
+      this.pendingFileChangeOutputDeltas.clear();
+      this.warnedIncompleteEditToolCallIds.clear();
+      return;
+    }
+
+    if (parsed.kind === "plan_updated") {
+      const items = planStepsToTodoItems(
+        parsed.plan.map((entry) => ({
+          step: entry.step ?? "",
+          status: entry.status ?? "pending",
+        }))
+      );
+      this.emitEvent({
+        type: "timeline",
+        provider: CODEX_PROVIDER,
+        item: { type: "todo", items },
+      });
+      return;
+    }
+
+    if (parsed.kind === "diff_updated") {
+      // NOTE: Codex app-server emits frequent `turn/diff/updated` notifications
+      // containing a full accumulated unified diff for the *entire turn*.
+      // This is not a concrete file-change tool call; it is progress telemetry.
+      // We intentionally do NOT store every diff update in the timeline.
+      return;
+    }
+
+    if (parsed.kind === "token_usage_updated") {
+      this.latestUsage = toAgentUsage(parsed.tokenUsage);
+      return;
+    }
+
+    if (parsed.kind === "agent_message_delta") {

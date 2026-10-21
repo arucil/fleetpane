@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-tab-layout.ts
+RANGE {"path":"packages/app/src/screens/workspace/workspace-tab-layout.ts","old_lines":[80,102],"new_lines":[73,87],"diff_block_lines":[62,91],"hunk_header":"@@ -76,67 +69,35 @@ export function computeWorkspaceTabLayout(","substantive_changed_lines":19}
+ 
+-  const preferredTabWidths = input.tabLabelLengths.map((rawLength) => {
++  const fullTabWidths = input.tabLabelLengths.map((rawLength) => {
+     const labelLength = Math.max(rawLength, 1);
+-    const preferred = input.metrics.tabBaseWidthWithClose + labelLength * input.metrics.charWidth;
+-    return clamp(preferred, minLabelWidth, input.metrics.maxTabWidth);
++    const estimatedWidth = baseTabWidth + estimateLabelWidth(labelLength) + input.metrics.closeButtonWidth;
++    return clamp(estimatedWidth, input.metrics.minTabWidth, input.metrics.maxTabWidth);
+   });
+-
+-  const preferredTotal = computeTotalRowWidth({
+-    tabWidths: preferredTabWidths,
++  const fullTotal = computeTotalRowWidth({
++    itemWidths: fullTabWidths,
+     tabGap: input.metrics.tabGap,
+     rowPaddingHorizontal: input.metrics.rowPaddingHorizontal,
+   });
+-
+-  if (preferredTotal <= availableWidth) {
+-    return {
+-      mode: "full",
+-      tabWidths: preferredTabWidths,
+-      shouldScroll: false,
+-      showLabels: true,
+-      showCloseButtons: true,
+-    };
++  if (fullTotal <= availableWidth) {
++    return { mode: "full", showLabels: true, showCloseButtons: true };
+   }
+ 

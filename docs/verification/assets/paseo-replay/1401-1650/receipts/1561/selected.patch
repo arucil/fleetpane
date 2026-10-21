@@ -1,0 +1,29 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[383,385],"new_lines":[391,417],"diff_block_lines":[30,56],"hunk_header":"@@ -382,4 +390,28 @@ jobs:","substantive_changed_lines":20}
+ 
++      - name: Inspect failed Linux AppImage build
++        if: env.IS_SMOKE_TAG != 'true' && steps.linux_tauri.outcome == 'failure'
++        shell: bash
++        run: |
++          set -euxo pipefail
++          appimage_dir="packages/desktop/src-tauri/target/release/bundle/appimage"
++          ls -R "$appimage_dir" || true
++          script_path="$(find "$appimage_dir" -maxdepth 2 -type f -name 'build_appimage.sh' | head -n 1)"
++          if [ -z "$script_path" ]; then
++            echo "::error::build_appimage.sh was not generated"
++            exit 1
++          fi
++          sed -n '1,240p' "$script_path"
++          env | sort | grep -E '^(APPIMAGE|DESKTOP_VERSION|NO_STRIP|RELEASE_TAG|SOURCE_TAG|TAURI_)' || true
++          (
++            cd "$(dirname "$script_path")"
++            bash -x "./$(basename "$script_path")"
++          ) || true
++
++      - name: Fail Linux release when AppImage bundling fails
++        if: env.IS_SMOKE_TAG != 'true' && steps.linux_tauri.outcome == 'failure'
++        shell: bash
++        run: exit 1
++
+       - name: Upload Linux release assets
+         if: env.IS_SMOKE_TAG != 'true'

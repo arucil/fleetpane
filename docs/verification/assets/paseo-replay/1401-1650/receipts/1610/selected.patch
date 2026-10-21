@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude-agent.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.test.ts","old_lines":[112,141],"new_lines":[73,73],"diff_block_lines":[87,116],"hunk_header":"@@ -111,1176 +72,134 @@ function extractToolCommand(detail: unknown): string | null {","substantive_changed_lines":21}
+ 
+-function isSleepCommandToolCall(item: ToolCallItem): boolean {
+-  const inputCommand = extractToolCommand(item.detail)?.toLowerCase() ?? "";
+-  return inputCommand.includes("sleep 60");
+-}
+-
+-function isPermissionCommandToolCall(item: ToolCallItem): boolean {
+-  if (item.name === "permission_request") {
+-    return false;
+-  }
+-  const inputCommand = extractToolCommand(item.detail)?.toLowerCase() ?? "";
+-  return inputCommand.includes("permission.txt");
+-}
+-
+-type AgentMcpServerHandle = {
+-  url: string;
+-  close: () => Promise<void>;
+-};
+-
+-async function startAgentMcpServer(): Promise<AgentMcpServerHandle> {
+-  const testLogger = createTestLogger();
+-  const app = express();
+-  app.use(express.json());
+-  const httpServer = createHTTPServer(app);
+-
+-  const registryDir = mkdtempSync(path.join(os.tmpdir(), "agent-mcp-registry-"));
+-  const storagePath = path.join(registryDir, "agents");
+-  const agentStorage = new AgentStorage(storagePath, testLogger);
+-  const agentManager = new AgentManager({
+-    clients: {},

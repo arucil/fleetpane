@@ -1,0 +1,31 @@
+FILE packages/cli/src/commands/daemon/status.ts
+RANGE {"path":"packages/cli/src/commands/daemon/status.ts","old_lines":[255,273],"new_lines":[150,170],"diff_block_lines":[154,182],"hunk_header":"@@ -254,20 +149,22 @@ export async function runStatusCommand(","substantive_changed_lines":16}
+   const owner = resolveOwnerLabel(state.pidInfo?.uid, state.pidInfo?.hostname)
+-  const resolvedNode = resolvePreferredNodePath({
+-    daemonPid: state.running ? state.pidInfo?.pid : null,
+-    fallbackNodePath: process.execPath,
+-  })
++  let daemonNode: string
++  if (!state.running) {
++    daemonNode = '-'
++  } else if (state.pidInfo?.pid) {
++    const fromPid = resolveNodePathFromPid(state.pidInfo.pid)
++    daemonNode = fromPid.nodePath ?? `unknown (${fromPid.error ?? 'could not resolve from PID'})`
++  } else {
++    daemonNode = 'unknown (no PID available)'
++  }
++  const cliNode = process.execPath
+   let status: DaemonStatus['status'] = state.running ? 'running' : 'stopped'
+   let runningAgents: number | null = null
+   let idleAgents: number | null = null
+   let note: string | undefined
+-  let runtimeNpm = '-'
+-  let latestCliVersion = 'unknown'
+-  let updateStatus = 'unknown'
+ 
+   if (!state.running && state.stalePidFile && state.pidInfo) {
+     note = `Stale PID file found for PID ${state.pidInfo.pid}`
+   }
+-  note = appendNote(note, resolvedNode.note)
+ 
+   if (state.running) {

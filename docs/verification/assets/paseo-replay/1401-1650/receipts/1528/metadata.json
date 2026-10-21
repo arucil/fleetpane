@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1528,
+  "revision": "443eb16e6708e28a56e82be9a5b206ebcba53919",
+  "date": "2026-03-11T11:09:41+07:00",
+  "committer_date": "2026-03-11T11:09:41+07:00",
+  "parents": [
+    "240dc26013b8294d5557e8e7617583c7c37a2bff"
+  ],
+  "subject": "Notarize macOS DMG to fix quarantine on bundled binaries",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:91c0b83bede7d2fd38d27830332dc05e6f6febd6bcb498b4007007818d17cb74",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        194,
+        194
+      ],
+      "new_lines": [
+        195,
+        224
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -193,4 +194,42 @@ jobs:",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 32,
+  "receipt_file": "receipts/1528/selected.patch"
+}

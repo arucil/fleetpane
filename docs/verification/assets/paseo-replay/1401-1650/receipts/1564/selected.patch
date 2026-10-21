@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[387,399],"new_lines":[387,408],"diff_block_lines":[14,43],"hunk_header":"@@ -386,21 +386,53 @@ jobs:","substantive_changed_lines":25}
+           appimage_dir="packages/desktop/src-tauri/target/release/bundle/appimage"
+-          ls -R "$appimage_dir" || true
+-          script_path="$(find "$appimage_dir" -maxdepth 2 -type f -name 'build_appimage.sh' | head -n 1)"
+-          if [ -z "$script_path" ]; then
+-            echo "::error::build_appimage.sh was not generated"
++          appdir_path="$appimage_dir/Paseo.AppDir"
++          if [ ! -d "$appdir_path" ]; then
++            echo "::error::AppDir was not generated at $appdir_path"
+             exit 1
+           fi
+-          sed -n '1,240p' "$script_path"
+           env | sort | grep -E '^(APPIMAGE|DESKTOP_VERSION|NO_STRIP|RELEASE_TAG|SOURCE_TAG|TAURI_)' || true
++          tools_dir="$(mktemp -d)"
++          curl -fsSL https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20251107-1/linuxdeploy-x86_64.AppImage -o "$tools_dir/linuxdeploy-x86_64.AppImage"
++          curl -fsSL https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/1-alpha-20250213-1/linuxdeploy-plugin-appimage-x86_64.AppImage -o "$tools_dir/linuxdeploy-plugin-appimage-x86_64.AppImage"
++          curl -fsSL https://raw.githubusercontent.com/tauri-apps/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh -o "$tools_dir/linuxdeploy-plugin-gtk.sh"
++          curl -fsSL https://raw.githubusercontent.com/tauri-apps/linuxdeploy-plugin-gstreamer/master/linuxdeploy-plugin-gstreamer.sh -o "$tools_dir/linuxdeploy-plugin-gstreamer.sh"
++          chmod +x "$tools_dir"/linuxdeploy*
++          export PATH="$tools_dir:$PATH"
++          export NO_STRIP=1
++          export APPIMAGE_EXTRACT_AND_RUN=1
+           (
+-            cd "$(dirname "$script_path")"
+-            bash -x "./$(basename "$script_path")"
+-          ) || true
++            cd "$appimage_dir"
++            "$tools_dir/linuxdeploy-x86_64.AppImage" \
++              --verbosity 2 \
++              --appdir "Paseo.AppDir" \
++              --plugin gtk \

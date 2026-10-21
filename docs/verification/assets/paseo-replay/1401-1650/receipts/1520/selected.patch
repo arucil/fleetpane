@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[333,337],"new_lines":[333,337],"diff_block_lines":[5,11],"hunk_header":"@@ -333,5 +333,5 @@ jobs:","substantive_changed_lines":2}
+@@ -333,5 +333,5 @@ jobs:
+           releaseDraft: ${{ env.RELEASE_DRAFT }}
+           prerelease: false
+-          args: --bundles appimage
++          args: --bundles appimage --verbose
+ 
+       - name: Build Linux app (smoke only)

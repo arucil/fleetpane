@@ -1,0 +1,17 @@
+FILE packages/website/src/routes/changelog.tsx
+RANGE {"path":"packages/website/src/routes/changelog.tsx","old_lines":[7,17],"new_lines":[8,14],"diff_block_lines":[12,26],"hunk_header":"@@ -2,16 +2,13 @@ import { Link, createFileRoute } from '@tanstack/react-router'","substantive_changed_lines":8}
+   head: () => ({
+-    meta: [
+-      { title: 'Changelog - Paseo' },
+-      {
+-        name: 'description',
+-        content:
+-          'Product updates, fixes, and improvements shipped in each Paseo release.',
+-      },
+-    ],
++    meta: pageMeta(
++      'Changelog - Paseo',
++      'Product updates, fixes, and improvements shipped in each Paseo release.',
++    ),
+   }),
+   component: Changelog,

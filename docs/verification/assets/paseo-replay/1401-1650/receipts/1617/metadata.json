@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1617,
+  "revision": "a4951383747aa6c24332a656d9f1e0edebc418b5",
+  "date": "2026-03-11T21:30:00+07:00",
+  "committer_date": "2026-03-13T13:44:25+07:00",
+  "parents": [
+    "7f69166e97cddd1b4edbb1523ce8833c595958fc"
+  ],
+  "subject": "refactor: simplify connection selection with linear scan",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/connection-selection.ts"
+  ],
+  "source_receipt_digest": "sha256:7a494b32514b45c3301c9b1cbd715525e2da162d87905cf13bd422d9ab6c5ed0",
+  "diff_tree_digest": "sha256:43365046d133507fd76b4b02aa7e1508328a031d38a6197704e4531f0782cada",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/connection-selection.ts",
+      "old_lines": [
+        26,
+        53
+      ],
+      "new_lines": [
+        34,
+        36
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -24,36 +32,21 @@ export function selectBestConnection(",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 40,
+  "receipt_file": "receipts/1617/selected.patch"
+}

@@ -1,0 +1,20 @@
+FILE packages/relay/src/dist-handshake-parity.test.ts
+RANGE {"path":"packages/relay/src/dist-handshake-parity.test.ts","old_lines":[8,13],"new_lines":[10,26],"diff_block_lines":[15,32],"hunk_header":"@@ -6,8 +7,20 @@ import { describe, expect, it } from \"vitest\";","substantive_changed_lines":8}
++
++function readBuiltEncryptedChannel(): string {
++  if (!existsSync(DIST_ENCRYPTED_CHANNEL_PATH)) {
++    execFileSync("npm", ["run", "build"], {
++      cwd: RELAY_PACKAGE_ROOT,
++      stdio: "inherit",
++    });
++  }
++
++  return readFileSync(DIST_ENCRYPTED_CHANNEL_PATH, "utf8");
++}
+ 
+ describe("relay dist handshake parity", () => {
+   it("keeps Node dist handshake message types in sync with src", () => {
+-    const distCode = readFileSync(DIST_ENCRYPTED_CHANNEL_PATH, "utf8");
++    const distCode = readBuiltEncryptedChannel();
+ 
+     expect(distCode).toContain('type: "e2ee_hello"');

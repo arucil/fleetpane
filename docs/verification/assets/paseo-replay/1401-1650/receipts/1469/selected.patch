@@ -1,0 +1,18 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[101,103],"new_lines":[101,116],"diff_block_lines":[7,22],"hunk_header":"@@ -100,4 +100,17 @@ jobs:","substantive_changed_lines":10}
+ 
++      - name: Detect existing GitHub release state
++        env:
++          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++        shell: bash
++        run: |
++          set -euo pipefail
++          if release_draft="$(gh release view "$RELEASE_TAG" --repo "${{ github.repository }}" --json isDraft --jq '.isDraft' 2>/dev/null)"; then
++            :
++          else
++            release_draft="false"
++          fi
++          echo "RELEASE_DRAFT=$release_draft" >> "$GITHUB_ENV"
++
+       - name: Build and publish macOS Tauri release
+         uses: tauri-apps/tauri-action@v0

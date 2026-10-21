@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[136,137],"new_lines":[163,191],"diff_block_lines":[93,122],"hunk_header":"@@ -135,5 +162,165 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":21}
+ 
+-function ProjectRow({
++function useLongPressDragInteraction(input: {
++  drag: () => void
++  menuController: ContextMenuController | null
++}) {
++  const didLongPressRef = useRef(false)
++  const didLongPressCleanupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
++  const longPressArmedRef = useRef(false)
++  const longPressCancelledRef = useRef(false)
++  const didStartDragRef = useRef(false)
++  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
++
++  useEffect(() => {
++    return () => {
++      if (!didLongPressCleanupTimerRef.current) {
++        return
++      }
++      clearTimeout(didLongPressCleanupTimerRef.current)
++      didLongPressCleanupTimerRef.current = null
++    }
++  }, [])
++
++  const openContextMenuAtTouchStart = useCallback(() => {
++    if (!input.menuController) {
++      return
++    }
++
++    const point = touchStartRef.current
++    if (!point) {

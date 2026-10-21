@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1443,
+  "revision": "604b41db9bd77fc21f5461e6821a1fe31e902345",
+  "date": "2026-03-06T23:42:38+07:00",
+  "committer_date": "2026-03-06T23:43:02+07:00",
+  "parents": [
+    "8dd94757d7cfc00590b8c589f3e97b099637530f"
+  ],
+  "subject": "refactor(app): extract project icon placeholder label logic",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/utils/project-display-name.test.ts",
+    "M\tpackages/app/src/utils/project-display-name.ts"
+  ],
+  "source_receipt_digest": "sha256:a17ee9439273a3879a9b80c7dbc2381a0c53ae972f47b988192cf5f0fa86d893",
+  "diff_tree_digest": "sha256:666634cbff7aac29de55b0e437b8b9735102b174dab7b62840c327688cc929c4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/project-display-name.ts",
+      "old_lines": [
+        10,
+        10
+      ],
+      "new_lines": [
+        10,
+        21
+      ],
+      "diff_block_lines": [
+        8,
+        19
+      ],
+      "hunk_header": "@@ -8,2 +8,14 @@ export function projectDisplayNameFromProjectId(projectId: string): string {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 24,
+  "receipt_file": "receipts/1443/selected.patch"
+}

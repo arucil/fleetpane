@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1460,
+  "revision": "2a1ef171078d92e63d4107344c039cfd16f631fe",
+  "date": "2026-03-08T14:57:16+07:00",
+  "committer_date": "2026-03-08T15:40:02+07:00",
+  "parents": [
+    "2d5d0dcacd6999c809acd02f17fe51fe593270ed"
+  ],
+  "subject": "feat: implement two-shim CLI install with fallback instructions",
+  "diff_tree_paths": [
+    "A\tMANAGED_CLI_GLOBAL_INSTALL_LOOP_PLAN.md",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/managed-runtime/managed-runtime.test.ts",
+    "M\tpackages/app/src/desktop/managed-runtime/managed-runtime.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/permit/index.ts",
+    "M\tpackages/cli/src/commands/provider/index.ts",
+    "M\tpackages/cli/src/commands/speech/index.ts",
+    "M\tpackages/cli/src/commands/worktree/index.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "M\tpackages/cli/tests/28-client-ipc-targets.test.ts",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/main.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:2b6230ff8a300e58de48ead41e157acf9a5de1331763dbaf3439a80928c22c21",
+  "diff_tree_digest": "sha256:6b4f5beb2d08b575b8ddef194400b1b0b2c9adac28d5361c587e5854e608ed8c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/utils/client.ts",
+      "old_lines": [
+        29,
+        29
+      ],
+      "new_lines": [
+        33,
+        62
+      ],
+      "diff_block_lines": [
+        24,
+        53
+      ],
+      "hunk_header": "@@ -26,5 +29,104 @@ type DaemonTarget =",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 1007,
+  "receipt_file": "receipts/1460/selected.patch"
+}

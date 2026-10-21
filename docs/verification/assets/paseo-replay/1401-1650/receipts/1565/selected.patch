@@ -1,0 +1,12 @@
+FILE packages/app/metro.config.cjs
+RANGE {"path":"packages/app/metro.config.cjs","old_lines":[19,24],"new_lines":[19,25],"diff_block_lines":[5,14],"hunk_header":"@@ -19,6 +19,7 @@ const config = getDefaultConfig(projectRoot);","substantive_changed_lines":5}
+@@ -19,6 +19,7 @@ const config = getDefaultConfig(projectRoot);
+ const defaultResolveRequest = config.resolver.resolveRequest ?? resolve;
+ const escapedAppSrcRoot = appSrcRoot
+-  .replace(/[|\\{}()[\]^$+*?.]/g, "\\$&")
+-  .replace(/\//g, "[\\\\/]");
++  .split(path.sep)
++  .map((segment) => segment.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&"))
++  .join("[\\\\/]");
+ 
+ config.resolver.extraNodeModules = {

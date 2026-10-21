@@ -1,0 +1,19 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[1029,1030],"new_lines":[1070,1086],"diff_block_lines":[97,113],"hunk_header":"@@ -1026,5 +1057,30 @@ class OpenCodeAgentSession implements AgentSession {","substantive_changed_lines":13}
++        : response.data
++            .filter((agent) => agent.mode === "primary" && agent.hidden !== true)
++            .filter((agent) => OPENCODE_MODE_IDS.has(agent.name))
++            .map((agent) => ({
++              id: agent.name,
++              label: agent.name.charAt(0).toUpperCase() + agent.name.slice(1),
++              description:
++                typeof agent.description === "string" && agent.description.trim().length > 0
++                  ? agent.description.trim()
++                  : DEFAULT_MODES.find((mode) => mode.id === agent.name)?.description,
++            }));
++
++    this.availableModesCache =
++      discoveredModes.length > 0 ? sortOpenCodeModes(discoveredModes) : DEFAULT_MODES;
++    return this.availableModesCache;
+   }
+ 

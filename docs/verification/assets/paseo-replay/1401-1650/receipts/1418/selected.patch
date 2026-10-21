@@ -1,0 +1,27 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[88,103],"new_lines":[100,120],"diff_block_lines":[37,61],"hunk_header":"@@ -87,17 +99,22 @@ export function WorkspaceDesktopTabsRow({","substantive_changed_lines":13}
+       closeButtonWidth: 22,
+-      compactLabelCharCap: 10,
+-      compactDenseLabelCharCap: 8,
++      compactLabelCharCap: 9,
++      compactDenseLabelCharCap: 7,
+     }),
+-    [theme.spacing]
++    [tabsActionsWidth, theme.spacing]
+   );
+ 
+   const { layout } = useWorkspaceTabLayout({
+     tabLabels: tabs.map((tab) => tab.label),
++    viewportWidthOverride: tabsContainerWidth > 0 ? tabsContainerWidth : null,
+     metrics: layoutMetrics,
+   });
+ 
+   return (
+-    <View style={styles.tabsContainer} testID="workspace-tabs-row">
++    <View
++      style={styles.tabsContainer}
++      testID="workspace-tabs-row"
++      onLayout={handleTabsContainerLayout}
++    >
+       <ScrollView
+         horizontal

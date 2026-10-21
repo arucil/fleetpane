@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1561,
+  "revision": "defcc54af2355b79b91e0c11a81ef59213512327",
+  "date": "2026-03-12T22:41:34+07:00",
+  "committer_date": "2026-03-12T22:41:34+07:00",
+  "parents": [
+    "fe84c5c9a3b997b40b8c91a96e92bf510358fe67"
+  ],
+  "subject": "fix(release): harden desktop recovery workflows",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "A\tscripts/metro-config-windows-loader-patch.cjs"
+  ],
+  "source_receipt_digest": "sha256:79b53f4a8e404029b88e4a5c72949c75cf39ee5ae0c290ee75101c4570db9d69",
+  "diff_tree_digest": "sha256:a72cfae5d793e2dba6b32c76b55b74ddd7a68fa3977bdd972225942c01cd5e73",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        383,
+        385
+      ],
+      "new_lines": [
+        391,
+        417
+      ],
+      "diff_block_lines": [
+        30,
+        56
+      ],
+      "hunk_header": "@@ -382,4 +390,28 @@ jobs:",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 43,
+  "receipt_file": "receipts/1561/selected.patch"
+}

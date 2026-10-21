@@ -1,0 +1,10 @@
+FILE packages/app/metro.config.js
+RANGE {"path":"packages/app/metro.config.js","old_lines":[14,20],"new_lines":[14,17],"diff_block_lines":[5,12],"hunk_header":"@@ -14,7 +14,4 @@ const customWebPlatform = (process.env.PASEO_WEB_PLATFORM ?? \"\")","substantive_changed_lines":2}
+@@ -14,7 +14,4 @@ const customWebPlatform = (process.env.PASEO_WEB_PLATFORM ?? "")
+ const config = getDefaultConfig(projectRoot);
+ const defaultResolveRequest = config.resolver.resolveRequest ?? resolve;
+-config.transformer.asyncRequireModulePath = require.resolve(
+-  "@expo/metro-config/build/async-require"
+-);
+ 
+ function isLocalModuleImport(moduleName) {

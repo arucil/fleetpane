@@ -1,0 +1,13 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[1,4],"new_lines":[1,10],"diff_block_lines":[5,15],"hunk_header":"@@ -1,4 +1,10 @@","substantive_changed_lines":2}
+@@ -1,4 +1,10 @@
+ # Changelog
+ 
++## 0.1.25 - 2026-03-11
++
++### Fixed
++- Fixed desktop app failing to start the built-in daemon on fresh macOS installs. The DMG was not notarized and code-signing stripped entitlements from the bundled Node runtime, causing Gatekeeper to block execution.
++- Fixed Linux AppImage build by restoring the AppImage bundle format and stripping CUDA dependencies from onnxruntime.
++
+ ## 0.1.24 - 2026-03-10
+ 

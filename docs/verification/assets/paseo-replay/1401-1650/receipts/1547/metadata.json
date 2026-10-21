@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1547,
+  "revision": "355e56db53c661dddbaed0cc977135e0a3a47b91",
+  "date": "2026-03-12T10:51:31+07:00",
+  "committer_date": "2026-03-12T10:51:31+07:00",
+  "parents": [
+    "a79134ec9e572bbc01d65a0668026a4fdd375fc3"
+  ],
+  "subject": "fix(server): add trace logging for Codex app server spawn",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:569d8156525645e33bb49816569e4e20729f3e5976487be04c9e500a05f9c0d5",
+  "diff_tree_digest": "sha256:828ea186fddb427974c0c27c61834729fc3fbea67233485523094159e6e9422b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        3071,
+        3074
+      ],
+      "new_lines": [
+        3071,
+        3077
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -3071,4 +3071,7 @@ export class CodexAppServerAgentClient implements AgentClient {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/1547/selected.patch"
+}

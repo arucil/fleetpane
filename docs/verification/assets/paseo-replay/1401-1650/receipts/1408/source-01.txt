@@ -1,0 +1,42 @@
+  visibleAgents: Agent[];
+  lookupById: Map<string, Agent>;
+} {
+  const { sessionAgents, workspaceId } = input;
+  if (!sessionAgents || !workspaceId) {
+    return {
+      visibleAgents: [],
+      lookupById: new Map<string, Agent>(),
+    };
+  }
+
+  const lookupById = new Map<string, Agent>();
+  const visible: Agent[] = [];
+  for (const agent of sessionAgents.values()) {
+    if ((trimNonEmpty(agent.cwd) ?? "") !== workspaceId) {
+      continue;
+    }
+    lookupById.set(agent.id, agent);
+    if (!agent.archivedAt) {
+      visible.push(agent);
+    }
+  }
+
+  return {
+    visibleAgents: sortAgentsByCreatedAtDescending(visible),
+    lookupById,
+  };
+}
+
+export function canOpenAgentTabFromRoute(input: {
+  agentId: string;
+  agentsHydrated: boolean;
+  workspaceAgentLookup: Map<string, Agent>;
+}): boolean {
+  if (!input.agentId.trim()) {
+    return false;
+  }
+  if (!input.agentsHydrated) {
+    return true;
+  }
+  return input.workspaceAgentLookup.has(input.agentId);
+}

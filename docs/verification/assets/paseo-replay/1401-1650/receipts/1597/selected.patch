@@ -1,0 +1,32 @@
+FILE packages/app/e2e/helpers/app.ts
+RANGE {"path":"packages/app/e2e/helpers/app.ts","old_lines":[48,76],"new_lines":[58,60],"diff_block_lines":[31,60],"hunk_header":"@@ -46,40 +50,18 @@ async function ensureE2EStorageSeeded(page: Page): Promise<void> {","substantive_changed_lines":21}
+   await page.evaluate(
+-    ({ expectedEndpoint, nowIso, expectedServerId }) => {
++    ({ daemon, preferences }) => {
+       localStorage.setItem('@paseo:e2e', '1');
+-      localStorage.setItem(
+-        '@paseo:daemon-registry',
+-        JSON.stringify([
+-          {
+-            serverId: expectedServerId,
+-            label: 'localhost',
+-            connections: [
+-              {
+-                id: `direct:${expectedEndpoint}`,
+-                type: 'direct',
+-                endpoint: expectedEndpoint,
+-              },
+-            ],
+-            preferredConnectionId: `direct:${expectedEndpoint}`,
+-            createdAt: nowIso,
+-            updatedAt: nowIso,
+-          },
+-        ])
+-      );
+-      localStorage.setItem(
+-        '@paseo:create-agent-preferences',
+-        JSON.stringify({
+-          serverId: expectedServerId,
+-          provider: 'codex',
+-          providerPreferences: {
+-            claude: { model: 'haiku' },

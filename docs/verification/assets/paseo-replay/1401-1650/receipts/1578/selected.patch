@@ -1,0 +1,26 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[472,481],"new_lines":[471,490],"diff_block_lines":[9,32],"hunk_header":"@@ -469,13 +469,22 @@ function MarkdownLink({","substantive_changed_lines":15}
+-    Platform.OS === "web"
+-      ? { onHoverIn: () => setHovered(true), onHoverOut: () => setHovered(false) }
+-      : {};
++  if (Platform.OS !== "web") {
++    return (
++      <Text
++        accessibilityRole="link"
++        onPress={() => onPress(href)}
++        style={style}
++      >
++        {children}
++      </Text>
++    );
++  }
++
+   return (
+     <Pressable
+       accessibilityRole="link"
+       onPress={() => onPress(href)}
+-      {...hoverProps}
++      onHoverIn={() => setHovered(true)}
++      onHoverOut={() => setHovered(false)}
+     >
+       <Text style={[style, hovered && { textDecorationLine: "underline" }]}>

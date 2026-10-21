@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/tool-call-detail-parser.ts","old_lines":[97,100],"new_lines":[97,106],"diff_block_lines":[5,15],"hunk_header":"@@ -97,4 +97,10 @@ const ClaudeToolDetailPass2Schema = z.union([","substantive_changed_lines":4}
+@@ -97,4 +97,10 @@ const ClaudeToolDetailPass2Schema = z.union([
+     toSearchToolDetail(input)
+   ),
++  toolDetailBranchByName("Grep", ToolSearchInputSchema, z.unknown(), (input) =>
++    toSearchToolDetail(input)
++  ),
++  toolDetailBranchByName("grep", ToolSearchInputSchema, z.unknown(), (input) =>
++    toSearchToolDetail(input)
++  ),
+   toolDetailBranchByName("Glob", ToolSearchInputSchema, z.unknown(), (input) =>
+     toSearchToolDetail(input)

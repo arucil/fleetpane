@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1468,
+  "revision": "06f8722f25560dc0e5856ae229dc5e415f3737c7",
+  "date": "2026-03-09T11:13:57+07:00",
+  "committer_date": "2026-03-09T11:13:57+07:00",
+  "parents": [
+    "e3552f6365d32442284382de7fe916a06fa4ae90"
+  ],
+  "subject": "Split stream rendering into platform-specific strategies",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "D\tpackages/app/src/app/+html.tsx",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/components/stream-strategy-native.tsx",
+    "A\tpackages/app/src/components/stream-strategy-web.tsx",
+    "A\tpackages/app/src/components/stream-strategy.ts",
+    "M\tpackages/app/src/components/use-bottom-anchor-controller.test.ts",
+    "M\tpackages/app/src/components/use-bottom-anchor-controller.ts"
+  ],
+  "source_receipt_digest": "sha256:4e83612ccb6f1c77a1d8dd97c75ad8f974c0cdf7ac776ebb22384a210f69941a",
+  "diff_tree_digest": "sha256:d2cb28078211724ee0a828c9b4c70348463e28df9c114a0df59063292b6b71e1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-render-strategy.ts",
+      "old_lines": [
+        119,
+        148
+      ],
+      "new_lines": [
+        1,
+        1
+      ],
+      "diff_block_lines": [
+        124,
+        153
+      ],
+      "hunk_header": "@@ -1,543 +1 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 2013,
+  "receipt_file": "receipts/1468/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[159,164],"new_lines":[170,195],"diff_block_lines":[33,62],"hunk_header":"@@ -155,26 +156,200 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":22}
++
++  const clearTimers = useCallback(() => {
++    if (dragArmTimerRef.current) {
++      clearTimeout(dragArmTimerRef.current)
++      dragArmTimerRef.current = null
++    }
++    if (contextMenuTimerRef.current) {
++      clearTimeout(contextMenuTimerRef.current)
++      contextMenuTimerRef.current = null
++    }
++  }, [])
+ 
+-  const handleLongPress = useCallback(() => {
+-    console.log('[sidebar-dnd-debug] long-press armed')
+-    void Haptics.selectionAsync().catch(() => {})
++  const openContextMenuAtStartPoint = useCallback(() => {
++    if (!input.menuController || !touchStartRef.current) {
++      return
++    }
++    const statusBarHeight = Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) : 0
++    input.menuController.setAnchorRect({
++      x: touchStartRef.current.x,
++      y: touchStartRef.current.y + statusBarHeight,
++      width: 0,
++      height: 0,
++    })
++    input.menuController.setOpen(true)
++    menuOpenedRef.current = true
+     didLongPressRef.current = true
+-  }, [])

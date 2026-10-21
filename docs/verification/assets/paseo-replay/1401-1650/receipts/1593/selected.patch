@@ -1,0 +1,20 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[586,587],"new_lines":[603,620],"diff_block_lines":[32,49],"hunk_header":"@@ -584,4 +600,21 @@ export function translateOpenCodeEvent(","substantive_changed_lines":13}
++          role === "assistant" &&
++          !state.emittedStructuredMessageIds.has(messageId) &&
++          typeof info.time === "object" &&
++          info.time !== null &&
++          "completed" in info.time
++        ) {
++          const text = stringifyStructuredAssistantMessage(info.structured);
++          if (text) {
++            state.emittedStructuredMessageIds.add(messageId);
++            events.push({
++              type: "timeline",
++              provider: "opencode",
++              item: { type: "assistant_message", text },
++            });
++          }
++        }
+       }
+       break;

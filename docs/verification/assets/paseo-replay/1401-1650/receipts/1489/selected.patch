@@ -1,0 +1,18 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[425,426],"new_lines":[430,445],"diff_block_lines":[18,33],"hunk_header":"@@ -423,4 +425,21 @@ await fs.writeFile(path.join(fakePaseoHome, \"sentinel.txt\"), \"do not touch\\n\", \"","substantive_changed_lines":11}
++let currentStepStartedAt = smokeStartedAt;
++const heartbeat = setInterval(() => {
++  const elapsedSeconds = Math.floor((Date.now() - smokeStartedAt) / 1000);
++  const currentStepSeconds = Math.floor((Date.now() - currentStepStartedAt) / 1000);
++  console.log(
++    `[managed-smoke] heartbeat elapsed=${elapsedSeconds}s currentStep=${JSON.stringify(currentStepLabel)} stepElapsed=${currentStepSeconds}s`
++  );
++  if (Date.now() - smokeStartedAt > smokeDeadlineMs) {
++    console.error(
++      `[managed-smoke] FAIL exceeded ${smokeDeadlineMs / 1000}s overall deadline during ${JSON.stringify(currentStepLabel)}`
++    );
++    process.exit(1);
++  }
++}, 30_000);
+ const managedEnv = {
+   ...process.env,

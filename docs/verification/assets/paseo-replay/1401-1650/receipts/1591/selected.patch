@@ -1,0 +1,25 @@
+FILE packages/app/src/attachments/store.ts
+RANGE {"path":"packages/app/src/attachments/store.ts","old_lines":[9,25],"new_lines":[9,25],"diff_block_lines":[7,29],"hunk_header":"@@ -8,18 +8,18 @@ async function createAttachmentStore(): Promise<AttachmentStore> {","substantive_changed_lines":12}
+     if (isTauriEnvironment()) {
+-      const { createDesktopAttachmentStore } = require(
+-        "@/desktop/attachments/desktop-attachment-store"
++      const { createDesktopAttachmentStore } = await import(
++        "../desktop/attachments/desktop-attachment-store"
+       );
+       return createDesktopAttachmentStore();
+     }
+ 
+-    const { createIndexedDbAttachmentStore } = require(
+-      "@/attachments/web/indexeddb-attachment-store"
++    const { createIndexedDbAttachmentStore } = await import(
++      "./web/indexeddb-attachment-store"
+     );
+     return createIndexedDbAttachmentStore();
+   }
+ 
+-  const { createNativeFileAttachmentStore } = require(
+-    "@/attachments/native/native-file-attachment-store"
++  const { createNativeFileAttachmentStore } = await import(
++    "./native/native-file-attachment-store"
+   );
+   return createNativeFileAttachmentStore();

@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1619,
+  "revision": "f12dc6127b6d4534c020eb16b75bdfb3c3a39a86",
+  "date": "2026-03-14T22:38:13+07:00",
+  "committer_date": "2026-03-14T22:38:13+07:00",
+  "parents": [
+    "e526f375c82d9ca0c7f3ff320ce8c863296ffcd5"
+  ],
+  "subject": "feat: add --prompt and --prompt-file options to agent send command",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/send.ts",
+    "M\tpackages/cli/tests/06-agent-send.test.ts",
+    "A\tscripts/fix-tests/overseer-loop.sh",
+    "A\tscripts/fix-tests/overseer.md",
+    "A\tscripts/fix-tests/run.sh",
+    "A\tscripts/fix-tests/verifier.md",
+    "A\tscripts/fix-tests/worker-app.md",
+    "A\tscripts/fix-tests/worker-server.md"
+  ],
+  "source_receipt_digest": "sha256:a731e4bf57d553f170a02ffc967cd9d9ddfdf378f9fb13c23df83bdcc22c2069",
+  "diff_tree_digest": "sha256:9ccf6ad4ec76580ba21d78a4cd3920723bead8e85b0eadf62e9f36cfd16491f8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/send.ts",
+      "old_lines": [
+        79,
+        79
+      ],
+      "new_lines": [
+        81,
+        110
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -78,7 +80,55 @@ async function readImageFiles(imagePaths: string[]): Promise<Array<{ data: strin",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 358,
+  "receipt_file": "receipts/1619/selected.patch"
+}

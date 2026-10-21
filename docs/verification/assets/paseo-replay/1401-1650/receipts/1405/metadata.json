@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1405,
+  "revision": "bf1cded8a1ac7b6839aabb9262cd549c10006471",
+  "date": "2026-03-04T10:01:11+07:00",
+  "committer_date": "2026-03-04T10:01:11+07:00",
+  "parents": [
+    "e9b57a5ac693c57fb6d580467e3e9479fc8d7696"
+  ],
+  "subject": "feat: rename sidebar-agent-list to sidebar-workspace-list and emit workspace updates on agent removal",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "D\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "A\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:d67a7c75e8d86a7fd7dacf0a835ef21fed3052a7ca9d78784d69353af713275c",
+  "diff_tree_digest": "sha256:fc5daada780129a899efdcc5b55ce5e3845f6a4ea2a351ff99ee62ff7673a2c1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        46,
+        75
+      ],
+      "diff_block_lines": [
+        52,
+        81
+      ],
+      "hunk_header": "@@ -0,0 +1,895 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 1149,
+  "receipt_file": "receipts/1405/selected.patch"
+}

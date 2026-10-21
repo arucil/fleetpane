@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1478,
+  "revision": "7b22fc5c3fc5086442418629f1005b3d10df6336",
+  "date": "2026-03-09T16:49:00+07:00",
+  "committer_date": "2026-03-09T16:49:00+07:00",
+  "parents": [
+    "a15b52efc83f8b23500bab12f8f35fade167d7a5"
+  ],
+  "subject": "refactor: extract Claude binary lookup into separate function",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:4076c99578f4684ecab94019dc713cf59c8c167b01ccb7caa2e64d041941faf7",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        365,
+        375
+      ],
+      "new_lines": [
+        365,
+        379
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -364,12 +364,16 @@ type ClaudeAgentSessionOptions = {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 18,
+  "receipt_file": "receipts/1478/selected.patch"
+}

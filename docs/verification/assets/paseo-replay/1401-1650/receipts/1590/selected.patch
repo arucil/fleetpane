@@ -1,0 +1,32 @@
+FILE packages/cli/tests/run-all.ts
+RANGE {"path":"packages/cli/tests/run-all.ts","old_lines":[39,39],"new_lines":[40,69],"diff_block_lines":[9,38],"hunk_header":"@@ -37,4 +37,56 @@ for (let i = 0; i < args.length; i++) {","substantive_changed_lines":18}
++
++async function runCommand(label: string, command: string): Promise<void> {
++  console.log(`\n${'─'.repeat(50)}`)
++  console.log(`🔧 ${label}...`)
++  console.log('─'.repeat(50))
++
++  const result = await $`bash -lc ${command}`.nothrow()
++  if (result.exitCode !== 0) {
++    const error = result.stderr || result.stdout || `Exit code: ${result.exitCode}`
++    console.error(`\n❌ ${label} failed`)
++    console.error(error)
++    throw new Error(error)
++  }
++}
++
++async function writeJsonSummary({
++  passed,
++  failed,
++  failures,
++}: {
++  passed: number
++  failed: number
++  failures: Failure[]
++}) {
++  if (!jsonOutputPath) {
++    return
++  }
++
++  await writeFile(
++    jsonOutputPath,

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[0,0],"new_lines":[46,75],"diff_block_lines":[52,81],"hunk_header":"@@ -0,0 +1,895 @@","substantive_changed_lines":21}
++
++function toProjectIconDataUri(icon: { mimeType: string; data: string } | null): string | null {
++  if (!icon) {
++    return null
++  }
++  return `data:${icon.mimeType};base64,${icon.data}`
++}
++
++interface SidebarWorkspaceListProps {
++  isOpen?: boolean
++  projects: SidebarProjectEntry[]
++  serverId: string | null
++  isRefreshing?: boolean
++  onRefresh?: () => void
++  onWorkspacePress?: () => void
++  listFooterComponent?: ReactElement | null
++  /** Gesture ref for coordinating with parent gestures (e.g., sidebar close) */
++  parentGestureRef?: MutableRefObject<GestureType | undefined>
++}
++
++interface ProjectRowProps {
++  project: SidebarProjectEntry
++  displayName: string
++  iconDataUri: string | null
++  collapsed: boolean
++  onToggle: () => void
++  onLongPress: () => void
++}
++
++interface WorkspaceRowProps {

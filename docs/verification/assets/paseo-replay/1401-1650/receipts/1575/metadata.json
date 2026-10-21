@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1575,
+  "revision": "bed03be33285bf7af5583bdc07dd782a81bccd02",
+  "date": "2026-03-13T10:24:01+07:00",
+  "committer_date": "2026-03-13T10:24:01+07:00",
+  "parents": [
+    "debe4b543ba3a339b31194c19711d93312c0eadf"
+  ],
+  "subject": "feat(app): support file:// protocol URLs for opening workspace files",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/utils/inline-path.test.ts",
+    "M\tpackages/app/src/utils/inline-path.ts"
+  ],
+  "source_receipt_digest": "sha256:f5fbac836548319bf321130ab3dc85b106632845e97039b058448777debb7139",
+  "diff_tree_digest": "sha256:9bc237a00af433c88e086cdd7ff8516996a649643b1be68c6816c072b57f8935",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/inline-path.ts",
+      "old_lines": [
+        81,
+        81
+      ],
+      "new_lines": [
+        83,
+        112
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -80,2 +82,63 @@ export function parseInlinePathToken(value: string): InlinePathTarget | null {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 101,
+  "receipt_file": "receipts/1575/selected.patch"
+}

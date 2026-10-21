@@ -1,0 +1,9 @@
+FILE packages/app/src/utils/scroll-jank-investigation.ts
+RANGE {"path":"packages/app/src/utils/scroll-jank-investigation.ts","old_lines":[367,371],"new_lines":[367,371],"diff_block_lines":[5,11],"hunk_header":"@@ -367,5 +367,5 @@ export function installScrollJankInvestigation(): void {","substantive_changed_lines":2}
+@@ -367,5 +367,5 @@ export function installScrollJankInvestigation(): void {
+     timerStats.timeout.active = timeoutHandles.size;
+     return timeoutId as unknown as ReturnType<typeof setTimeout>;
+-  }) as typeof setTimeout;
++  }) as unknown as typeof setTimeout;
+ 
+   globalThis.clearTimeout = ((timeoutId?: number) => {

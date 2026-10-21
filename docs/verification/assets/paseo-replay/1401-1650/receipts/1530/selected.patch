@@ -1,0 +1,16 @@
+FILE packages/desktop/scripts/sign-managed-runtime-macos.mjs
+RANGE {"path":"packages/desktop/scripts/sign-managed-runtime-macos.mjs","old_lines":[76,78],"new_lines":[76,89],"diff_block_lines":[7,20],"hunk_header":"@@ -75,4 +75,15 @@ function needsHardenedRuntime(fileKind) {","substantive_changed_lines":7}
+ 
++function extractEntitlements(file) {
++  const result = spawnSync("codesign", ["-d", "--entitlements", "-", "--xml", file], {
++    stdio: "pipe",
++    encoding: "utf8",
++  });
++  if (result.status !== 0 || !result.stdout || result.stdout.trim().length === 0) {
++    return null;
++  }
++  return result.stdout;
++}
++
+ async function main() {
+   const pointer = JSON.parse(

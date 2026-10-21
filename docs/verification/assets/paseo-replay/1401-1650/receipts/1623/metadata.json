@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1623,
+  "revision": "22c6df3f85577f945f0e19133b24479c543e6635",
+  "date": "2026-03-15T10:41:06+07:00",
+  "committer_date": "2026-03-15T10:41:06+07:00",
+  "parents": [
+    "93a3a742ac005d8452671c2266ac428910179b12"
+  ],
+  "subject": "feat(cli): add --wait-timeout option to run command",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts",
+    "A\tpackages/cli/src/utils/duration.ts"
+  ],
+  "source_receipt_digest": "sha256:1fc6d47f8c395c3f54f8a404648460266abcdd4b931ffb380b6577ec8de01315",
+  "diff_tree_digest": "sha256:96a8609dcbf2132b42b49c5ff7fb3e37e19fc0ae3df82f290716478647cdf555",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/utils/duration.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        5,
+        34
+      ],
+      "diff_block_lines": [
+        11,
+        40
+      ],
+      "hunk_header": "@@ -0,0 +1,43 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 65,
+  "receipt_file": "receipts/1623/selected.patch"
+}

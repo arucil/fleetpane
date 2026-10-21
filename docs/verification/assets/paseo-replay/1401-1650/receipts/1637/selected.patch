@@ -1,0 +1,19 @@
+FILE packages/app/src/components/ui/segmented-control.tsx
+RANGE {"path":"packages/app/src/components/ui/segmented-control.tsx","old_lines":[74,82],"new_lines":[76,86],"diff_block_lines":[19,35],"hunk_header":"@@ -73,10 +75,12 @@ export function SegmentedControl<T extends string>({","substantive_changed_lines":13}
+             ) : null}
+-            <Text
+-              style={[styles.label, labelSizeStyle, isSelected && styles.labelSelected]}
+-              numberOfLines={1}
+-            >
+-              {option.label}
+-            </Text>
++            {hideLabels ? null : (
++              <Text
++                style={[styles.label, labelSizeStyle, isSelected && styles.labelSelected]}
++                numberOfLines={1}
++              >
++                {option.label}
++              </Text>
++            )}
+           </Pressable>
+         );

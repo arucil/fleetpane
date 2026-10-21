@@ -1,0 +1,14 @@
+FILE packages/app/e2e/helpers/agent-bottom-anchor.ts
+RANGE {"path":"packages/app/e2e/helpers/agent-bottom-anchor.ts","old_lines":[173,183],"new_lines":[173,176],"diff_block_lines":[7,18],"hunk_header":"@@ -172,12 +172,5 @@ function getVisibleChatScroll(page: Page) {","substantive_changed_lines":9}
+   return getVisibleChatScroll(page).evaluate((root: Element) => {
+-    const rootElement = root as HTMLElement;
+-    const candidates = [rootElement, ...Array.from(rootElement.querySelectorAll("*"))];
+-    const scrollElement =
+-      candidates.find(
+-        (element) =>
+-          element instanceof HTMLElement &&
+-          element.scrollHeight - element.clientHeight > 1
+-      ) ?? rootElement;
++    const scrollElement = root as HTMLElement;
+ 
+     const offsetY = Math.max(0, scrollElement.scrollTop);

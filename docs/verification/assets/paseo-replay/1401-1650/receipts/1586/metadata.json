@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1586,
+  "revision": "3ae1102d13993ff9085ac0eb7d6c29fe20e3466c",
+  "date": "2026-03-14T22:04:09+07:00",
+  "committer_date": "2026-03-14T22:04:09+07:00",
+  "parents": [
+    "d1632d80e3fd72d3c9af4693d5547356cb4c691a"
+  ],
+  "subject": "feat: add agent ID/name resolution and provider/model syntax support",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/archive.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/tests/05-agent-run.test.ts",
+    "M\tpackages/cli/tests/21-run-output-schema-helper.test.ts",
+    "A\tpackages/cli/tests/29-agent-id-resolution.test.ts",
+    "M\tskills/paseo-loop/SKILL.md",
+    "M\tskills/paseo-loop/bin/loop.sh"
+  ],
+  "source_receipt_digest": "sha256:3d7a12f9135aca22ef483156321f81c1f7729527561e1a3fcb3a5c1716ca03e1",
+  "diff_tree_digest": "sha256:215301e790a1efd1896f12e9d98f38bc956544f16572ff780b07cab79605f8bd",
+  "selected_hunk_ranges": [
+    {
+      "path": "skills/paseo-loop/bin/loop.sh",
+      "old_lines": [
+        24,
+        32
+      ],
+      "new_lines": [
+        32,
+        54
+      ],
+      "diff_block_lines": [
+        44,
+        73
+      ],
+      "hunk_header": "@@ -23,28 +31,49 @@ EOF",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 596,
+  "receipt_file": "receipts/1586/selected.patch"
+}

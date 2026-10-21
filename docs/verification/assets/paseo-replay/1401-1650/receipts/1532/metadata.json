@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1532,
+  "revision": "eb5f011161a8b535a7c29a7586603f7a42142ced",
+  "date": "2026-03-11T14:01:07+07:00",
+  "committer_date": "2026-03-11T14:01:07+07:00",
+  "parents": [
+    "acfb933ee8114d8ee7df34aaf9f1c37ad88703d3"
+  ],
+  "subject": "Add screen orientation polyfill, refactor provider launch config, and update desktop runtime manager",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\t.gitignore",
+    "M\tpackage-lock.json",
+    "M\tpackages/app/index.ts",
+    "M\tpackages/app/package.json",
+    "A\tpackages/app/src/polyfills/screen-orientation.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:6f629ac85e870a70057576fd75b42ddbaac3badf9b8375979330cb04cacb5e0d",
+  "diff_tree_digest": "sha256:d3be21171ac3d7e882aab2df269bedf085c26d753edd58d518bfc6e65bc1585c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        90,
+        94
+      ],
+      "new_lines": [
+        91,
+        116
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -89,22 +90,61 @@ export function applyProviderEnv(",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 231,
+  "receipt_file": "receipts/1532/selected.patch"
+}

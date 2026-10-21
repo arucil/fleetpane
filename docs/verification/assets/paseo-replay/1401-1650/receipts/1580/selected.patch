@@ -1,0 +1,32 @@
+FILE packages/app/src/stores/panel-store.ts
+RANGE {"path":"packages/app/src/stores/panel-store.ts","old_lines":[153,175],"new_lines":[136,147],"diff_block_lines":[29,58],"hunk_header":"@@ -152,101 +135,50 @@ export const usePanelStore = create<PanelState>()(","substantive_changed_lines":21}
+       openAgentList: () =>
+-        set((state) => {
+-          const nextState = {
+-            mobileView: "agent-list" as const,
+-            desktop: { ...state.desktop, agentListOpen: true },
+-          };
+-          logPanelTransition("openAgentList", {
+-            fromMobileView: state.mobileView,
+-            toMobileView: nextState.mobileView,
+-            fromDesktopAgentListOpen: state.desktop.agentListOpen,
+-            toDesktopAgentListOpen: nextState.desktop.agentListOpen,
+-          });
+-          return nextState;
+-        }),
++        set((state) => ({
++          mobileView: "agent-list" as const,
++          desktop: { ...state.desktop, agentListOpen: true },
++        })),
+ 
+       openFileExplorer: () =>
+         set((state) => {
+           const resolvedTab = resolveExplorerTabFromActiveCheckout(state);
+-          const nextMobileView: MobilePanelView = "file-explorer";
+-          const nextDesktop = { ...state.desktop, fileExplorerOpen: true };
+-          const nextState = {
+-            mobileView: nextMobileView,
+-            desktop: nextDesktop,
++          return {
++            mobileView: "file-explorer" as MobilePanelView,
++            desktop: { ...state.desktop, fileExplorerOpen: true },

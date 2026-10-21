@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1469,
+  "revision": "8a60dc30d6d9ea291f9d34e4762e774ee06c828f",
+  "date": "2026-03-09T11:41:21+07:00",
+  "committer_date": "2026-03-09T11:41:21+07:00",
+  "parents": [
+    "06f8722f25560dc0e5856ae229dc5e415f3737c7"
+  ],
+  "subject": "feat(release): add draft GitHub release flow",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\t.github/workflows/release-notes-sync.yml",
+    "M\tCHANGELOG.md",
+    "M\tCLAUDE.md",
+    "M\tpackage.json",
+    "A\tscripts/finalize-current-release.mjs",
+    "M\tscripts/push-current-release-tag.mjs",
+    "M\tscripts/sync-release-notes-from-changelog.mjs"
+  ],
+  "source_receipt_digest": "sha256:204e2d8280024c8d678fd204d912e505dc4fb44da47e2ed357cc1f9eb3a62bcf",
+  "diff_tree_digest": "sha256:f80e34a498d45abb5904a8fc9dfecd72cf6da6c4610d56e8c84cf39a1415db7c",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        101,
+        103
+      ],
+      "new_lines": [
+        101,
+        116
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -100,4 +100,17 @@ jobs:",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 131,
+  "receipt_file": "receipts/1469/selected.patch"
+}

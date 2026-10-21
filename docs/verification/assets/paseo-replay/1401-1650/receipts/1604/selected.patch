@@ -1,0 +1,22 @@
+FILE packages/server/vitest.config.ts
+RANGE {"path":"packages/server/vitest.config.ts","old_lines":[5,10],"new_lines":[5,21],"diff_block_lines":[7,26],"hunk_header":"@@ -4,7 +4,18 @@ import { defineConfig } from \"vitest/config\";","substantive_changed_lines":9}
+   resolve: {
+-    alias: {
+-      "@server": path.resolve(__dirname, "./src"),
+-    },
++    alias: [
++      {
++        find: /^@getpaseo\/relay\/e2ee$/,
++        replacement: path.resolve(__dirname, "../relay/src/e2ee.ts"),
++      },
++      {
++        find: /^@getpaseo\/relay$/,
++        replacement: path.resolve(__dirname, "../relay/src/index.ts"),
++      },
++      {
++        find: "@server",
++        replacement: path.resolve(__dirname, "./src"),
++      },
++    ],
+   },
+   test: {

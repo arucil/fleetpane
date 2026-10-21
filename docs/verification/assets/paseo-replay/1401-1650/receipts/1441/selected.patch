@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-sidebar-workspaces-list.ts
+RANGE {"path":"packages/app/src/hooks/use-sidebar-workspaces-list.ts","old_lines":[298,298],"new_lines":[315,344],"diff_block_lines":[34,63],"hunk_header":"@@ -297,4 +314,33 @@ export function useSidebarWorkspacesList(options?: {","substantive_changed_lines":18}
+ 
++  useEffect(() => {
++    if (!serverId || projects.length === 0) {
++      return
++    }
++
++    const nextProjectOrder = appendMissingOrderKeys({
++      currentOrder: persistedProjectOrder,
++      visibleKeys: projects.map((project) => project.projectKey),
++    })
++    if (nextProjectOrder !== persistedProjectOrder) {
++      useSidebarOrderStore.getState().setProjectOrder(serverId, nextProjectOrder)
++    }
++
++    for (const project of projects) {
++      const workspaceOrderScopeKey = getWorkspaceOrderScopeKey(serverId, project.projectKey)
++      const persistedWorkspaceOrder =
++        persistedWorkspaceOrderByScope[workspaceOrderScopeKey] ?? EMPTY_ORDER
++      const nextWorkspaceOrder = appendMissingOrderKeys({
++        currentOrder: persistedWorkspaceOrder,
++        visibleKeys: project.workspaces.map((workspace) => workspace.workspaceKey),
++      })
++      if (nextWorkspaceOrder !== persistedWorkspaceOrder) {
++        useSidebarOrderStore
++          .getState()
++          .setWorkspaceOrder(serverId, project.projectKey, nextWorkspaceOrder)
++      }
++    }
++  }, [persistedProjectOrder, persistedWorkspaceOrderByScope, projects, serverId])
++

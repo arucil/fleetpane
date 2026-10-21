@@ -1,0 +1,14 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[70,73],"new_lines":[70,80],"diff_block_lines":[5,16],"hunk_header":"@@ -70,4 +70,11 @@ jobs:","substantive_changed_lines":6}
+@@ -70,4 +70,11 @@ jobs:
+           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
++      - name: Install Lightning CSS Windows binary
++        shell: bash
++        run: |
++          set -euo pipefail
++          version="$(node -p "require('./package.json').overrides.lightningcss")"
++          npm install --no-save "lightningcss-win32-x64-msvc@${version}"
++
+       - name: Build web app for Tauri
+         run: npm run build:web --workspace=@getpaseo/app

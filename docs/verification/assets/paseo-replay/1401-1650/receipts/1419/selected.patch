@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[446,460],"new_lines":[413,430],"diff_block_lines":[113,142],"hunk_header":"@@ -442,21 +409,35 @@ function WorkspaceScreenContent({","substantive_changed_lines":21}
+   useEffect(() => {
+-    const normalized = typeof routeTabId === "string" ? routeTabId.trim() : "";
+-    if (!normalized || !persistenceKey) {
++    if (!openIntent || !persistenceKey) {
+       return;
+     }
+-    if (normalized.startsWith("file_")) {
+-      const path = normalized.slice("file_".length).trim();
+-      if (!path) {
+-        return;
+-      }
+-      const tabId = openOrFocusTab({
+-        serverId: normalizedServerId,
+-        workspaceId: normalizedWorkspaceId,
+-        target: { kind: "file", path },
+-      });
++
++    const openParam = buildWorkspaceOpenIntentParam(openIntent);
++    if (!openParam) {
++      return;
++    }
++    const intentKey = `${normalizedServerId}:${normalizedWorkspaceId}:${openParam}`;
++    if (consumedOpenIntentsRef.current.has(intentKey)) {
++      return;
++    }
++    consumedOpenIntentsRef.current.add(intentKey);
++
++    if (openIntent.kind === "draft") {
++      const draftId = openIntent.draftId.trim();
++      const tabId =

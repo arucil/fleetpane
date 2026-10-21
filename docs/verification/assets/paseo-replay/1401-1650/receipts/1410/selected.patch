@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[172,201],"new_lines":[159,159],"diff_block_lines":[70,99],"hunk_header":"@@ -162,150 +155,26 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":18}
+-
+-  useEffect(() => {
+-    return () => {
+-      if (!didLongPressCleanupTimerRef.current) {
+-        return
+-      }
+-      clearTimeout(didLongPressCleanupTimerRef.current)
+-      didLongPressCleanupTimerRef.current = null
+-    }
+-  }, [])
+-
+-  const openContextMenuAtTouchStart = useCallback(() => {
+-    if (!input.menuController) {
+-      return
+-    }
+-
+-    const point = touchStartRef.current
+-    if (!point) {
+-      return
+-    }
+-
+-    const statusBarHeight = Platform.OS === 'android' ? (StatusBar.currentHeight ?? 0) : 0
+-    input.menuController.setAnchorRect({
+-      x: point.x,
+-      y: point.y + statusBarHeight,
+-      width: 0,
+-      height: 0,
+-    })
+-    input.menuController.setOpen(true)
+-  }, [input.menuController])

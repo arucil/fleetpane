@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1649,
+  "revision": "11f6494c201d1c81019c6d79a170b46d5e10b9ff",
+  "date": "2026-03-17T13:42:39+07:00",
+  "committer_date": "2026-03-17T14:42:39+08:00",
+  "parents": [
+    "9364da3414c6dab389c9d23ca8095cbe99f5c004"
+  ],
+  "subject": "fix: route Claude partial tool input through canonical mapping (#108) (#122)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/tool-call-details.tsx",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "A\tpackages/app/src/utils/tool-call-detail-state.test.ts",
+    "A\tpackages/app/src/utils/tool-call-detail-state.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/partial-json.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/partial-json.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/tool-call-mapper.test.ts"
+  ],
+  "source_receipt_digest": "sha256:75f6739977efc592b82157b042fc7b659d1ece1decd3014541f77574e27dafc0",
+  "diff_tree_digest": "sha256:b8e576f554b66e94e0d8b646b4d277df4b2f982a6acce31d30b5099761bdd0c4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/tool-call-detail-state.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        2,
+        31
+      ],
+      "diff_block_lines": [
+        8,
+        37
+      ],
+      "hunk_header": "@@ -0,0 +1,69 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 493,
+  "receipt_file": "receipts/1649/selected.patch"
+}

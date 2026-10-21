@@ -1,0 +1,32 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[146,146],"new_lines":[146,175],"diff_block_lines":[7,36],"hunk_header":"@@ -145,4 +145,68 @@ export function LeftSidebar({ selectedAgentId: _selectedAgentId }: LeftSidebarPr","substantive_changed_lines":13}
+ 
++  useEffect(() => {
++    console.log('[LeftSidebar] isOpen_changed', {
++      isOpen,
++      isMobile,
++      mobileView,
++      desktopAgentListOpen,
++    })
++  }, [desktopAgentListOpen, isMobile, isOpen, mobileView])
++
++  useEffect(() => {
++    console.log('[LeftSidebar] pathname_changed', {
++      pathname,
++      activeServerIdFromPath,
++      activeServerId,
++    })
++  }, [activeServerId, activeServerIdFromPath, pathname])
++
++  useEffect(() => {
++    console.log('[LeftSidebar] hosts_changed', {
++      hostCount: daemons.length,
++      serverIds: daemons.map((daemon) => daemon.serverId),
++      runtimeConnectionStatusSignature,
++    })
++  }, [daemons, runtimeConnectionStatusSignature])
++
++  useEffect(() => {
++    console.log('[LeftSidebar] active_host_changed', {
++      activeServerId,
++      activeHostLabel,

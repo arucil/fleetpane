@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[43,47],"new_lines":[43,47],"diff_block_lines":[5,11],"hunk_header":"@@ -43,5 +43,5 @@ jobs:","substantive_changed_lines":2}
+@@ -43,5 +43,5 @@ jobs:
+         uses: dtolnay/rust-toolchain@stable
+         with:
+-          targets: aarch64-apple-darwin
++          targets: aarch64-apple-darwin,x86_64-apple-darwin
+ 
+       - name: Install JS dependencies

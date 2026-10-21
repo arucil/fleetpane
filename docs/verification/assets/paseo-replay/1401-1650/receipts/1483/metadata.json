@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1483,
+  "revision": "965704da2013ab46371b8e57ca3815ddecad7da5",
+  "date": "2026-03-10T12:17:37+07:00",
+  "committer_date": "2026-03-10T12:17:37+07:00",
+  "parents": [
+    "f760255d50fed4ff5054457e4136554d45657afb"
+  ],
+  "subject": "refactor: extract settings styles and improve badge/button UI",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/ui/button.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-permission-row.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-permissions-section.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "A\tpackages/app/src/styles/settings.ts"
+  ],
+  "source_receipt_digest": "sha256:9a2a5e7144b755c55795313261f3acb7b6bd9663e54848688e3d25d1af9ccc26",
+  "diff_tree_digest": "sha256:632e24473aa8d77f6eb0abeac6c1613f5a9540a27a0d0c6075bdcb5e834ddd1c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message.tsx",
+      "old_lines": [
+        1481,
+        1481
+      ],
+      "new_lines": [
+        1486,
+        1515
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -1480,4 +1485,105 @@ const ExpandableBadge = memo(function ExpandableBadge({",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 457,
+  "receipt_file": "receipts/1483/selected.patch"
+}

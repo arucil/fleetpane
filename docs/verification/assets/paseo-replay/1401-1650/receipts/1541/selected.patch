@@ -1,0 +1,32 @@
+FILE packages/cli/src/cli.ts
+RANGE {"path":"packages/cli/src/cli.ts","old_lines":[83,112],"new_lines":[62,62],"diff_block_lines":[51,80],"hunk_header":"@@ -59,100 +60,98 @@ export function createCli(): Command {","substantive_changed_lines":24}
+-    .option('--base <branch>', 'Base branch for worktree (default: current branch)')
+-    .option('--image <path>', 'Attach image(s) to the initial prompt (can be used multiple times)', collectMultiple, [])
+-    .option('--cwd <path>', 'Working directory (default: current)')
+-    .option('--label <key=value>', 'Add label(s) to the agent (can be used multiple times)', collectMultiple, [])
+-    .option('--output-schema <schema>', 'Output JSON matching the provided schema file path or inline JSON schema')
+-    .option('--json', 'Output in JSON format')
+-    .option('--host <host>', 'Daemon host target (default: local socket/pipe, then localhost:6767)')
+-    .action(withOutput(runRunCommand))
+-
+-  program
+-    .command('attach')
+-    .description("Attach to a running agent's output stream")
+-    .argument('<id>', 'Agent ID (or prefix)')
+-    .option('--host <host>', 'Daemon host target (default: local socket/pipe, then localhost:6767)')
+-    .action(runAttachCommand)
+-
+-  program
+-    .command('logs')
+-    .description('View agent activity/timeline')
+-    .argument('<id>', 'Agent ID (or prefix)')
+-    .option('-f, --follow', 'Follow log output (streaming)')
+-    .option('--tail <n>', 'Show last n entries')
+-    .option('--filter <type>', 'Filter by event type (tools, text, errors, permissions)')
+-    .option('--since <time>', 'Show logs since timestamp')
+-    .option('--host <host>', 'Daemon host target (default: local socket/pipe, then localhost:6767)')
+-    .action(runLogsCommand)
+-
+-  program
+-    .command('stop')
+-    .description('Interrupt an agent if it is running (no-op for idle agents)')

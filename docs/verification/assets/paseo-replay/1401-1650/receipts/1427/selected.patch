@@ -1,0 +1,32 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[352,352],"new_lines":[348,377],"diff_block_lines":[54,83],"hunk_header":"@@ -350,4 +346,231 @@ function SessionProviderInternal({","substantive_changed_lines":21}
++  const hydrateWorkspaces = useCallback(
++    async (options?: { subscribe?: boolean; isCancelled?: () => boolean }) => {
++      if (!client || !isConnected) {
++        return;
++      }
++
++      const workspaces = new Map<string, WorkspaceDescriptor>();
++      let cursor: string | null = null;
++      let includeSubscribe = options?.subscribe ?? false;
++
++      while (true) {
++        const payload = await client.fetchWorkspaces({
++          sort: [{ key: "activity_at", direction: "desc" }],
++          ...(includeSubscribe ? { subscribe: {} } : {}),
++          page: cursor ? { limit: 200, cursor } : { limit: 200 },
++        });
++        if (options?.isCancelled?.()) {
++          return;
++        }
++
++        for (const entry of payload.entries) {
++          const workspace = normalizeWorkspaceDescriptor(entry);
++          workspaces.set(workspace.id, workspace);
++        }
++
++        if (!payload.pageInfo.hasMore || !payload.pageInfo.nextCursor) {
++          break;
++        }
++        cursor = payload.pageInfo.nextCursor;
++        includeSubscribe = false;

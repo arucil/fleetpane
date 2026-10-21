@@ -1,0 +1,17 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[41,43],"new_lines":[41,55],"diff_block_lines":[14,28],"hunk_header":"@@ -40,4 +40,16 @@ jobs:","substantive_changed_lines":9}
+ 
++      - name: Normalize release tag
++        shell: bash
++        run: |
++          set -euo pipefail
++          source_tag="${SOURCE_TAG}"
++          if [[ "$source_tag" == desktop-v* ]]; then
++            release_tag="v${source_tag#desktop-v}"
++          else
++            release_tag="$source_tag"
++          fi
++          echo "RELEASE_TAG=$release_tag" >> "$GITHUB_ENV"
++
+       - name: Setup Node
+         uses: actions/setup-node@v4

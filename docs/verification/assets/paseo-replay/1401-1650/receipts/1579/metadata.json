@@ -1,0 +1,88 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1579,
+  "revision": "80a2f8052c0e4c786085e9ecb7116907ec27aaef",
+  "date": "2026-03-13T20:53:55+07:00",
+  "committer_date": "2026-03-13T20:53:55+07:00",
+  "parents": [
+    "730f34753a9033789b09cf2a3f50bf70afa5e12d"
+  ],
+  "subject": "refactor(app): replace voice hooks with voice runtime and audio engine architecture",
+  "diff_tree_paths": [
+    "A\tpackages/app/assets/audio/thinking-tone.wav",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/realtime-voice-overlay.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/components/use-bottom-anchor-controller.test.ts",
+    "M\tpackages/app/src/components/use-bottom-anchor-controller.ts",
+    "M\tpackages/app/src/components/voice-compact-indicator.tsx",
+    "M\tpackages/app/src/components/voice-panel.tsx",
+    "M\tpackages/app/src/components/volume-meter.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "D\tpackages/app/src/hooks/use-audio-player.d.ts",
+    "D\tpackages/app/src/hooks/use-audio-player.native.ts",
+    "D\tpackages/app/src/hooks/use-audio-player.web.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.native.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "D\tpackages/app/src/hooks/use-speechmatics-audio.d.ts",
+    "D\tpackages/app/src/hooks/use-speechmatics-audio.native.ts",
+    "D\tpackages/app/src/hooks/use-speechmatics-audio.web.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/app/src/utils/pcm16-wav.ts",
+    "A\tpackages/app/src/utils/thinking-tone.native-pcm.ts",
+    "A\tpackages/app/src/utils/thinking-tone.test.ts",
+    "A\tpackages/app/src/utils/thinking-tone.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "A\tpackages/app/src/voice/audio-engine-types.ts",
+    "A\tpackages/app/src/voice/audio-engine.d.ts",
+    "A\tpackages/app/src/voice/audio-engine.native.ts",
+    "A\tpackages/app/src/voice/audio-engine.web.ts",
+    "M\tpackages/app/src/voice/speech-segmenter.ts",
+    "A\tpackages/app/src/voice/voice-runtime.test.ts",
+    "A\tpackages/app/src/voice/voice-runtime.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-rollout-parsing.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-rollout-timeline.ts",
+    "M\tpackages/server/src/server/agent/providers/tool-call-mapper-utils.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:e2121d3c29acdf077ee72e3c22b2fac99f91eed3b79323d66f2997823662fb95",
+  "diff_tree_digest": "sha256:9eb3afaf63fa25f4c74224e44ebed543e6af9fc0f03db6f74ddfbea96e704c57",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/left-sidebar.tsx",
+      "old_lines": [
+        146,
+        146
+      ],
+      "new_lines": [
+        146,
+        175
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -145,4 +145,68 @@ export function LeftSidebar({ selectedAgentId: _selectedAgentId }: LeftSidebarPr",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 4513,
+  "receipt_file": "receipts/1579/selected.patch"
+}

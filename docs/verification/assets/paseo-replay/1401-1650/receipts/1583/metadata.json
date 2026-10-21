@@ -1,0 +1,80 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1583,
+  "revision": "fc7369384bc97c18907e501ff4ba15bb25bd7a32",
+  "date": "2026-03-14T13:46:10+07:00",
+  "committer_date": "2026-03-14T13:46:10+07:00",
+  "parents": [
+    "c45b41447617271c7a53271a7f882040a7403252"
+  ],
+  "subject": "feat(voice): implement turn-detection and real-time audio streaming",
+  "diff_tree_paths": [
+    "A\tdocs/VOICE_TURN_DETECTION_PLAN.md",
+    "M\tpackages/app/e2e/workspace-draft-tab-retarget.spec.ts",
+    "M\tpackages/app/src/components/tool-call-sheet.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-menu.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-presentation.tsx",
+    "M\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/voice/audio-engine.native.ts",
+    "D\tpackages/app/src/voice/speech-segmenter.test.ts",
+    "D\tpackages/app/src/voice/speech-segmenter.ts",
+    "M\tpackages/app/src/voice/voice-runtime.test.ts",
+    "M\tpackages/app/src/voice/voice-runtime.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.test.ts",
+    "M\tpackages/server/src/server/agent/tts-manager.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/persisted-config.test.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/assets/silero_vad.onnx",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-onnx-node-loader.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-provider.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+    "M\tpackages/server/src/server/speech/providers/openai/runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/speech/speech-types.ts",
+    "A\tpackages/server/src/server/speech/turn-detection-provider.ts",
+    "A\tpackages/server/src/server/voice/fixed-duration-pcm-ring-buffer.test.ts",
+    "A\tpackages/server/src/server/voice/fixed-duration-pcm-ring-buffer.ts",
+    "A\tpackages/server/src/server/voice/voice-turn-controller.test.ts",
+    "A\tpackages/server/src/server/voice/voice-turn-controller.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:e5e53e6b836327cf16feff902010fd39ba1b30c7c2718078720bfa34a76a66db",
+  "diff_tree_digest": "sha256:b452702f421b08129d29be8d93082e49b730abb6a49a36168eaf197e65ee2cfd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+      "old_lines": [
+        289,
+        308
+      ],
+      "new_lines": [
+        299,
+        311
+      ],
+      "diff_block_lines": [
+        36,
+        65
+      ],
+      "hunk_header": "@@ -286,62 +297,19 @@ export function WorkspaceDesktopTabsRow({",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 3292,
+  "receipt_file": "receipts/1583/selected.patch"
+}

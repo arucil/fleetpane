@@ -1,0 +1,11 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[635,640],"new_lines":[635,640],"diff_block_lines":[26,34],"hunk_header":"@@ -635,6 +635,6 @@ try {","substantive_changed_lines":4}
+@@ -635,6 +635,6 @@ try {
+     : await runBundledRuntimeCli(
+         runtimeStatus.json.runtimeRoot,
+-        managedStart.json.managedHome,
+-        ["daemon", "pair", "--home", managedStart.json.managedHome],
++        managedStart.managedHome,
++        ["daemon", "pair", "--home", managedStart.managedHome],
+         managedEnv
+       );

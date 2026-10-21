@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1585,
+  "revision": "d1632d80e3fd72d3c9af4693d5547356cb4c691a",
+  "date": "2026-03-14T20:05:48+07:00",
+  "committer_date": "2026-03-14T20:05:48+07:00",
+  "parents": [
+    "cad4110e2480a86eb3a61ee9b371790d06010f20"
+  ],
+  "subject": "refactor(voice): defer speech confirmation and add diagnostics",
+  "diff_tree_paths": [
+    "D\tdocs/VOICE_TURN_DETECTION_PLAN.md",
+    "M\tpackages/app/src/components/dictation-controls.tsx",
+    "M\tpackages/app/src/components/realtime-voice-overlay.tsx",
+    "M\tpackages/app/src/components/voice-compact-indicator.tsx",
+    "M\tpackages/app/src/components/voice-panel.tsx",
+    "M\tpackages/app/src/components/volume-meter.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/voice/audio-engine.native.ts",
+    "M\tpackages/app/src/voice/voice-runtime.test.ts",
+    "M\tpackages/app/src/voice/voice-runtime.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+    "D\twindows-startup-refactor-plan.md"
+  ],
+  "source_receipt_digest": "sha256:66bef9b8c15fecc3285b7f07bf77fc031bfd0e2bbe9955f2cb54e9cc8971ecd7",
+  "diff_tree_digest": "sha256:29e3776bee053777e79b0886b933884dfb5971f855e1147f5d24299911697325",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        2459,
+        2459
+      ],
+      "new_lines": [
+        2455,
+        2484
+      ],
+      "diff_block_lines": [
+        55,
+        84
+      ],
+      "hunk_header": "@@ -2458,4 +2454,64 @@ export class Session {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 654,
+  "receipt_file": "receipts/1585/selected.patch"
+}

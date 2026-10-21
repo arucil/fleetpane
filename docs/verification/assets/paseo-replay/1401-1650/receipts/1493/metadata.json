@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1493,
+  "revision": "a0266e29e35f0529ae811b06352e5cd1bb3c7d2f",
+  "date": "2026-03-10T14:54:26+07:00",
+  "committer_date": "2026-03-10T14:54:26+07:00",
+  "parents": [
+    "752d29c146a33fbf016b59595e48ca54d5627ecb"
+  ],
+  "subject": "Avoid notarization in macOS smoke prebuild",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:f1b3332429508536e8d3a5bfd72be26e8c35b98f24d2dd91f27a09b8b9c21a94",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        105,
+        115
+      ],
+      "new_lines": [
+        105,
+        119
+      ],
+      "diff_block_lines": [
+        7,
+        29
+      ],
+      "hunk_header": "@@ -104,12 +104,16 @@ jobs:",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 18,
+  "receipt_file": "receipts/1493/selected.patch"
+}

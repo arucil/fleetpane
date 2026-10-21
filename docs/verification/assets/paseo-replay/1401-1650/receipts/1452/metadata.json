@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1452,
+  "revision": "870d95f35eff8396bd71d9016d538e9eda627577",
+  "date": "2026-03-07T21:35:18+07:00",
+  "committer_date": "2026-03-07T22:35:18+08:00",
+  "parents": [
+    "cfb9784ea9c056f0f1ffc19e95353553f341aef1"
+  ],
+  "subject": "fix(test): add missing getRuntimeMetrics mock to MockSession (#92)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts"
+  ],
+  "source_receipt_digest": "sha256:a48b8525955a969062b04668157dded4879b0508fbd14af61358f34987719d98",
+  "diff_tree_digest": "sha256:025bc3954133c93b322747df107d062814de97c9a7ada4b0168d3f88acb93c5d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.relay-reconnect.test.ts",
+      "old_lines": [
+        39,
+        41
+      ],
+      "new_lines": [
+        39,
+        50
+      ],
+      "diff_block_lines": [
+        7,
+        18
+      ],
+      "hunk_header": "@@ -38,4 +38,13 @@ const sessionMock = vi.hoisted(() => {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 8,
+  "receipt_file": "receipts/1452/selected.patch"
+}

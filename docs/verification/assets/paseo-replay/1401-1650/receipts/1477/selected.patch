@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[160,166],"new_lines":[160,185],"diff_block_lines":[7,36],"hunk_header":"@@ -159,22 +159,33 @@ function SessionRow({","substantive_changed_lines":26}
+         </View>
+-        <View style={styles.rowMetaRow}>
+-          <Text style={styles.sessionMetaText} numberOfLines={1}>
++        {isMobile && (
++          <View style={styles.rowMetaRow}>
++            <Text style={styles.sessionMetaText} numberOfLines={1}>
++              {projectPath}
++            </Text>
++            <Text style={styles.sessionMetaSeparator}>·</Text>
++            <Text style={styles.sessionMetaText}>{statusLabel}</Text>
++            <Text style={styles.sessionMetaSeparator}>·</Text>
++            <Text style={styles.sessionMetaText}>{timeAgo}</Text>
++            {agent.serverLabel ? (
++              <>
++                <Text style={styles.sessionMetaSeparator}>·</Text>
++                <Text style={styles.sessionMetaText} numberOfLines={1}>
++                  {agent.serverLabel}
++                </Text>
++              </>
++            ) : null}
++          </View>
++        )}
++      </View>
++      {!isMobile && (
++        <>
++          <Text style={styles.columnMeta} numberOfLines={1}>
+             {projectPath}
+           </Text>
+-          <Text style={styles.sessionMetaSeparator}>·</Text>
+-          <Text style={styles.sessionMetaText}>{statusLabel}</Text>

@@ -1,0 +1,32 @@
+FILE packages/server/src/shared/tool-call-display.ts
+RANGE {"path":"packages/server/src/shared/tool-call-display.ts","old_lines":[58,72],"new_lines":[63,82],"diff_block_lines":[17,46],"hunk_header":"@@ -57,53 +62,82 @@ function formatErrorText(error: unknown): string | undefined {","substantive_changed_lines":20}
+ 
+-export function buildToolCallDisplayModel(input: ToolCallDisplayInput): ToolCallDisplayModel {
+-  const lowerName = input.name.trim().toLowerCase();
+-
+-  let displayName = humanizeToolName(input.name);
+-  let summary: string | undefined;
++function buildFilePathDisplay(
++  displayName: string,
++  filePath: string,
++  cwd: string | undefined,
++): DetailDisplay {
++  return {
++    displayName,
++    summary: stripCwdPrefix(filePath, cwd),
++  };
++}
+ 
++function buildCanonicalDetailDisplay(input: ToolCallDisplayInput): DetailDisplay {
+   switch (input.detail.type) {
+     case "shell":
+-      displayName = "Shell";
+-      summary = input.detail.command;
+-      break;
++      return {
++        displayName: "Shell",
++        summary: input.detail.command,
++      };
+     case "read":
+-      displayName = "Read";
+-      summary = stripCwdPrefix(input.detail.filePath, input.cwd);

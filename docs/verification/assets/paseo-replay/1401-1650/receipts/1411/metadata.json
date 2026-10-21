@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1411,
+  "revision": "4f1783fc76f1e48611c422aa6931d9f11152a60e",
+  "date": "2026-03-04T12:25:14+07:00",
+  "committer_date": "2026-03-04T12:25:14+07:00",
+  "parents": [
+    "b5b4e609168eee61abd8e0263633c65023c744e0"
+  ],
+  "subject": "refactor: improve drag interaction and workspace identity normalization",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "A\tpackages/app/src/utils/workspace-identity.ts"
+  ],
+  "source_receipt_digest": "sha256:15e05cbe8bc6842fe453010c5999c7f4f0766ba63c63bf70a55f6f1c362ab95a",
+  "diff_tree_digest": "sha256:e99d078ba0a861f04556b117242f421b7c7221d7bcf5828c824758ae4067c36f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        159,
+        164
+      ],
+      "new_lines": [
+        170,
+        195
+      ],
+      "diff_block_lines": [
+        33,
+        62
+      ],
+      "hunk_header": "@@ -155,26 +156,200 @@ function WorkspaceStatusIndicator({",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 651,
+  "receipt_file": "receipts/1411/selected.patch"
+}

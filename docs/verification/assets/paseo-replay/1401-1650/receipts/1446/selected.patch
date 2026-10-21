@@ -1,0 +1,17 @@
+FILE packages/app/src/app/+html.tsx
+RANGE {"path":"packages/app/src/app/+html.tsx","old_lines":[9,18],"new_lines":[9,23],"diff_block_lines":[7,21],"hunk_header":"@@ -8,11 +8,16 @@ const webEcosystemStyles = /* css */ `","substantive_changed_lines":5}
+     touch-action: auto;
++    height: 100%;
++    background-color: #18181c;
++    color-scheme: dark;
+   }
+ 
+   body {
++    min-height: 100%;
+     overflow: auto;
+     overscroll-behavior: contain;
+     -webkit-user-select: text;
+     user-select: text;
++    background-color: #18181c;
+   }
+ 

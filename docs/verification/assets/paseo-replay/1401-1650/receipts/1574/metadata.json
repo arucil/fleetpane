@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1574,
+  "revision": "debe4b543ba3a339b31194c19711d93312c0eadf",
+  "date": "2026-03-13T09:58:01+07:00",
+  "committer_date": "2026-03-13T09:58:01+07:00",
+  "parents": [
+    "1c601e09b69012dd33ebc023e456e92ce70f5ab1"
+  ],
+  "subject": "fix(desktop): resolve linux appimage cli resources",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:e7369c429b758ecfaa9e44708ded2aafb670b9313217f7c25a4b0aee7d691b84",
+  "diff_tree_digest": "sha256:0b64686664b762c7bfe6fafdce303a0397d9f63e2e058e16b61cf0c6b58c6a9e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/runtime_manager.rs",
+      "old_lines": [
+        822,
+        825
+      ],
+      "new_lines": [
+        822,
+        826
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -822,4 +822,5 @@ pub fn run_managed_cli_from_current_process(args: Vec<String>) -> Result<i32, St",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 1,
+  "receipt_file": "receipts/1574/selected.patch"
+}

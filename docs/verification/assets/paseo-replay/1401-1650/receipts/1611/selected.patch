@@ -1,0 +1,32 @@
+FILE packages/server/src/server/daemon-e2e/terminal.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/terminal.e2e.test.ts","old_lines":[615,630],"new_lines":[646,664],"diff_block_lines":[43,72],"hunk_header":"@@ -614,21 +645,36 @@ const shouldRun = !process.env.CI;","substantive_changed_lines":22}
+       await waitForCondition(() => outputBytes > 0, 10000);
+-      await new Promise((resolve) => setTimeout(resolve, 800));
+-      const beforeAckBytes = outputBytes;
++      await waitForCondition(() => outputBytes >= 128 * 1024, 10000);
++      const beforeAckBytes = await waitForStableNumber(() => outputBytes, {
++        stableMs: 1000,
++        timeoutMs: 10000,
++      });
+       expect(beforeAckBytes).toBeGreaterThan(0);
++      expect(beforeAckBytes).toBeGreaterThan(128 * 1024);
+       expect(beforeAckBytes).toBeLessThan(320 * 1024);
+       expect(latestEndOffset).toBeGreaterThan(0);
+ 
+-      ws.send(
+-        encodeBinaryMuxFrame({
+-          channel: BinaryMuxChannel.Terminal,
+-          messageType: TerminalBinaryMessageType.Ack,
+-          streamId: streamId!,
+-          offset: latestEndOffset,
+-          payload: new Uint8Array(0),
+-        })
+-      );
++      let resumedAfterAck = false;
++      for (let attempt = 0; attempt < 20; attempt += 1) {
++        ws.send(
++          encodeBinaryMuxFrame({
++            channel: BinaryMuxChannel.Terminal,
++            messageType: TerminalBinaryMessageType.Ack,
++            streamId: streamId!,
++            offset: latestEndOffset,

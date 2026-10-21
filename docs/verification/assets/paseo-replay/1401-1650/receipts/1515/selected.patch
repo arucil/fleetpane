@@ -1,0 +1,32 @@
+FILE packages/app/src/components/command-center.tsx
+RANGE {"path":"packages/app/src/components/command-center.tsx","old_lines":[36,36],"new_lines":[70,99],"diff_block_lines":[52,81],"hunk_header":"@@ -34,8 +66,50 @@ export function CommandCenter() {","substantive_changed_lines":21}
++
++  useEffect(() => {
++    const row = rowRefs.current.get(activeIndex);
++    if (!row || typeof document === "undefined") {
++      return;
++    }
++    const scrollNode =
++      (resultsRef.current as
++        | (ScrollView & {
++            getScrollableNode?: () => HTMLElement | null;
++          })
++        | null)?.getScrollableNode?.() ?? null;
++    const rowEl = row as unknown as HTMLElement;
++
++    if (!scrollNode) {
++      rowEl.scrollIntoView?.({ block: "nearest" });
++      return;
++    }
++
++    const rowTop = rowEl.offsetTop;
++    const rowBottom = rowTop + rowEl.offsetHeight;
++    const visibleTop = scrollNode.scrollTop;
++    const visibleBottom = visibleTop + scrollNode.clientHeight;
++
++    if (rowTop < visibleTop) {
++      scrollNode.scrollTop = rowTop;
++      return;
++    }
++
++    if (rowBottom > visibleBottom) {

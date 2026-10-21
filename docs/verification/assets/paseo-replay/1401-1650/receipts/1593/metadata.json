@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1593,
+  "revision": "3994fa65c0b6cc308599700b299dab603b6ca06a",
+  "date": "2026-03-11T00:09:51+07:00",
+  "committer_date": "2026-03-13T13:42:51+07:00",
+  "parents": [
+    "10671cf999e90135df0592972d07870315127c89"
+  ],
+  "subject": "fix(tests): iteration 7",
+  "diff_tree_paths": [
+    "M\tpackages/cli/tests/e2e/run-output-schema.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts"
+  ],
+  "source_receipt_digest": "sha256:b454f5cd5dc9064e0f65127571329f7690d4c3a346228d370d0cb132c2e6cf38",
+  "diff_tree_digest": "sha256:f59844c0f850e41fc3705582e4866c46363b42cf4a5217b868a93652e0fe0f68",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        586,
+        587
+      ],
+      "new_lines": [
+        603,
+        620
+      ],
+      "diff_block_lines": [
+        32,
+        49
+      ],
+      "hunk_header": "@@ -584,4 +600,21 @@ export function translateOpenCodeEvent(",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 116,
+  "receipt_file": "receipts/1593/selected.patch"
+}

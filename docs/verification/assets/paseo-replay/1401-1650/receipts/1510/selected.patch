@@ -1,0 +1,19 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[429,432],"new_lines":[429,445],"diff_block_lines":[7,23],"hunk_header":"@@ -428,5 +428,18 @@ jobs:","substantive_changed_lines":11}
+ 
++      - name: Build packaged app for Windows smoke
++        shell: bash
++        run: |
++          set -euo pipefail
++          app_path="packages/desktop/src-tauri/target/release/Paseo.exe"
++          npm run tauri --workspace=@getpaseo/desktop build
++          if [[ ! -f "$app_path" ]]; then
++            echo "Expected Windows smoke app at $app_path"
++            exit 1
++          fi
++
+       - name: Smoke check managed runtime for Windows
++        env:
++          PASEO_MANAGED_SMOKE_SKIP_BUILD: "1"
+         run: npm run smoke:managed-daemon --workspace=@getpaseo/desktop
+ 

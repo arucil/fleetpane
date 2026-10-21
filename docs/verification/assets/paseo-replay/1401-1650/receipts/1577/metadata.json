@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1577,
+  "revision": "013f573cff1aa23783df01c9b8d0ceeb482c8179",
+  "date": "2026-03-13T12:26:14+07:00",
+  "committer_date": "2026-03-13T12:26:14+07:00",
+  "parents": [
+    "ee8a81d2e16dbefb1ea2e348db719a0b748b4f9a"
+  ],
+  "subject": "refactor: migrate to shell-env and custom desktop notifications bridge",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/desktop/notifications/desktop-notifications.ts",
+    "M\tpackages/app/src/hooks/use-agent-attention-clear.ts",
+    "A\tpackages/app/src/utils/app-visibility.ts",
+    "M\tpackages/app/src/utils/os-notifications.test.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/app/src/utils/tauri-attach-console.ts",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "A\tpackages/desktop/src-tauri/src/desktop_notifications.rs",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:5715de291735439c96113043873631695bcb58d81ff14cfbf8fd67da274f6748",
+  "diff_tree_digest": "sha256:70721f8461ced70723f9170d40c8b932255e82220880702ab3bb4571a149e234",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/notifications/desktop-notifications.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        21,
+        50
+      ],
+      "diff_block_lines": [
+        27,
+        56
+      ],
+      "hunk_header": "@@ -0,0 +1,58 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 698,
+  "receipt_file": "receipts/1577/selected.patch"
+}

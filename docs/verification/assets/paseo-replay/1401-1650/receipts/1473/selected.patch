@@ -1,0 +1,15 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[13,15],"new_lines":[16,28],"diff_block_lines":[15,27],"hunk_header":"@@ -12,4 +15,14 @@ on:","substantive_changed_lines":10}
+         type: string
++      platform:
++        description: "Optional desktop platform to build."
++        required: false
++        default: "all"
++        type: choice
++        options:
++          - all
++          - macos
++          - linux
++          - windows
+ 
+ concurrency:

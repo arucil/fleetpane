@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1569,
+  "revision": "999d100464c00d4b26d9b7111b709a1e2e58afad",
+  "date": "2026-03-12T23:33:50+07:00",
+  "committer_date": "2026-03-12T23:33:50+07:00",
+  "parents": [
+    "9190d86148e80a9d4b06bc5b1726d84e5e4bbc96"
+  ],
+  "subject": "fix(release): recover desktop runtime packaging",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs"
+  ],
+  "source_receipt_digest": "sha256:5500cc1e4ca42986054d5b17735792f4ace5447d6134ae793bc0676a29a30a4b",
+  "diff_tree_digest": "sha256:09afa8de45ef86eee631b4b30ee9e2224b5ba6953b5297d3a2b80f1f1dd1e189",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        405,
+        431
+      ],
+      "new_lines": [
+        405,
+        408
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -404,30 +404,7 @@ jobs:",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 99,
+  "receipt_file": "receipts/1569/selected.patch"
+}

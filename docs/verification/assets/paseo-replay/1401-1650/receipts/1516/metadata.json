@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1516,
+  "revision": "5609c895173cd2a017c514e9e25ae2ae94c04407",
+  "date": "2026-03-10T20:43:06+07:00",
+  "committer_date": "2026-03-10T20:43:06+07:00",
+  "parents": [
+    "4e4a75192162fe3097198004097c86c9837aefa2"
+  ],
+  "subject": "Simplify desktop release pipeline: single build, no process smoke test",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tpackages/desktop/package.json",
+    "A\tpackages/desktop/scripts/validate-managed-runtime.mjs"
+  ],
+  "source_receipt_digest": "sha256:9082a68219b57287191f0811170a2793444ea818176ebe8f46d8cb2f16f59fec",
+  "diff_tree_digest": "sha256:e6816b897d6bb0035678762d0cbf7c73c36cef3370a334ec399cd0bac667e00c",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        159,
+        184
+      ],
+      "new_lines": [
+        159,
+        160
+      ],
+      "diff_block_lines": [
+        132,
+        157
+      ],
+      "hunk_header": "@@ -117,68 +152,9 @@ jobs:",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 323,
+  "receipt_file": "receipts/1516/selected.patch"
+}

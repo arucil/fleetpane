@@ -1,0 +1,73 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1551,
+  "revision": "554017b0b869cff69e0fd261e3a6b76f4d8c727a",
+  "date": "2026-03-12T19:02:06+07:00",
+  "committer_date": "2026-03-12T19:02:06+07:00",
+  "parents": [
+    "9f089be946d8704344b01e4e29ffb476dc8188f1"
+  ],
+  "subject": "refactor: move daemon registry into host-runtime store",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/index-startup.ts",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "D\tpackages/app/src/components/multi-daemon-session-host.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/app/src/components/project-picker-modal.tsx",
+    "M\tpackages/app/src/components/voice-panel.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "D\tpackages/app/src/contexts/daemon-registry-context.test.ts",
+    "D\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/stores/download-store.ts",
+    "A\tpackages/app/src/types/host-connection.ts",
+    "M\tpackages/app/src/utils/connection-selection.test.ts",
+    "M\tpackages/app/src/utils/connection-selection.ts",
+    "A\tpackages/app/src/utils/tauri-attach-console.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.test.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/app/vitest.config.ts",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:94e56d3e16738465221a5b853b7da5204ec0dcb60bfdb445f3d2c7bef5d50289",
+  "diff_tree_digest": "sha256:1a72f32f80b7b2852b9f8cee1fe5dc886276ec239b76c7e1383a7e80c568ee21",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        143,
+        143
+      ],
+      "new_lines": [
+        161,
+        190
+      ],
+      "diff_block_lines": [
+        44,
+        73
+      ],
+      "hunk_header": "@@ -142,4 +160,77 @@ function PushNotificationRouter() {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1797,
+  "receipt_file": "receipts/1551/selected.patch"
+}

@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1417,
+  "revision": "26ea214d645a3a85e6ebf8d92f3772add5bce9ab",
+  "date": "2026-03-04T17:39:19+07:00",
+  "committer_date": "2026-03-04T17:39:19+07:00",
+  "parents": [
+    "7578846c2712a055545556b1380d80495cf5a446"
+  ],
+  "subject": "fix: canonicalize workspace tab routes and prevent orphan runs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/screens/workspace/use-workspace-tab-layout.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-route-canonicalization.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-route-canonicalization.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:7a712523b6c0ec746a046f10b4dd82b8e1b08ec87f26fd17bdcd4685c834c57a",
+  "diff_tree_digest": "sha256:7414d820ffe720e2c9fe419c69c5ebbf3cfdd38faeb4b4a7ecbd6a5947723b9e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/h/[serverId]/index.tsx",
+      "old_lines": [
+        32,
+        46
+      ],
+      "new_lines": [
+        53,
+        69
+      ],
+      "diff_block_lines": [
+        56,
+        85
+      ],
+      "hunk_header": "@@ -24,31 +51,75 @@ export default function HostIndexRoute() {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 570,
+  "receipt_file": "receipts/1417/selected.patch"
+}

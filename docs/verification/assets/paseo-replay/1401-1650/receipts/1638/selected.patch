@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/inline-path.ts
+RANGE {"path":"packages/app/src/utils/inline-path.ts","old_lines":[109,117],"new_lines":[137,158],"diff_block_lines":[52,81],"hunk_header":"@@ -104,16 +135,75 @@ export function parseFileProtocolUrl(value: string): InlinePathTarget | null {","substantive_changed_lines":23}
+-  const lineMatch = rawFragment.match(/^L([0-9]+)(?:-L?([0-9]+))?$/i);
+-  const lineStart = lineMatch?.[1] ? parseInt(lineMatch[1], 10) : undefined;
+-  const lineEnd = lineMatch?.[2] ? parseInt(lineMatch[2], 10) : undefined;
++  const lines = parseLineFragment(parsedUrl.hash);
++  if (!lines) {
++    return null;
++  }
+ 
+-  if (
+-    (lineStart !== undefined && (!Number.isFinite(lineStart) || lineStart <= 0)) ||
+-    (lineEnd !== undefined && (!Number.isFinite(lineEnd) || lineEnd <= 0)) ||
+-    (lineStart !== undefined && lineEnd !== undefined && lineEnd < lineStart)
+-  ) {
++  return {
++    raw: value,
++    path: normalizedPath,
++    ...lines,
++  };
++}
++
++export function parseAssistantFileLink(
++  value: string,
++  options: AssistantHrefParseOptions = {}
++): InlinePathTarget | null {
++  const fileUrlTarget = parseFileProtocolUrl(value);
++  if (fileUrlTarget) {
++    return fileUrlTarget;
++  }
++
++  const trimmed = value?.trim();

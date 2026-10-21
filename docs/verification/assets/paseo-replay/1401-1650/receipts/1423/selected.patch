@@ -1,0 +1,32 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[127,127],"new_lines":[147,176],"diff_block_lines":[48,77],"hunk_header":"@@ -124,25 +135,226 @@ const SHORTCUT_BINDINGS: readonly KeyboardShortcutBinding[] = [","substantive_changed_lines":24}
++      event.shiftKey &&
++      (event.code === "KeyT" || event.key.toLowerCase() === "t"),
++    when: (context) => !context.commandCenterOpen,
++    help: {
++      id: "workspace-tab-new",
++      section: "global",
++      label: "New agent tab",
++      keys: ["alt", "shift", "T"],
++    },
++  },
++  {
++    id: "workspace-tab-close-current-alt-shift-w",
++    action: "workspace.tab.close.current",
++    matches: (event) =>
++      !event.metaKey &&
++      !event.ctrlKey &&
++      event.altKey &&
++      event.shiftKey &&
++      (event.code === "KeyW" || event.key.toLowerCase() === "w"),
++    when: (context) => !context.commandCenterOpen,
++    help: {
++      id: "workspace-tab-close-current",
++      section: "global",
++      label: "Close current tab",
++      keys: ["alt", "shift", "W"],
++    },
++  },
++  {
++    id: "workspace-navigate-index-mod-digit-tauri",
++    action: "workspace.navigate.index",

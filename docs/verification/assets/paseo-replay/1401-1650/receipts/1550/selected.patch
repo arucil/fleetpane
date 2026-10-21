@@ -1,0 +1,31 @@
+FILE packages/app/src/runtime/host-runtime.ts
+RANGE {"path":"packages/app/src/runtime/host-runtime.ts","old_lines":[421,436],"new_lines":[423,438],"diff_block_lines":[16,44],"hunk_header":"@@ -420,17 +422,17 @@ function findConnectionById(","substantive_changed_lines":21}
+ 
+-function selectInitialConnectionId(host: HostProfile): string | null {
+-  if (host.connections.length === 0) {
+-    return null;
+-  }
+-  if (host.preferredConnectionId) {
+-    const preferred = host.connections.find(
+-      (connection) => connection.id === host.preferredConnectionId
+-    );
+-    if (preferred) {
+-      return preferred.id;
+-    }
+-  }
+-  return host.connections[0]?.id ?? null;
++function probeIntervalForConnection(
++  firstSeenAt: number,
++  isActiveOnline: boolean,
++  now: number
++): number {
++  if (isActiveOnline) {
++    return PROBE_STEADY_MS;
++  }
++  const age = now - firstSeenAt;
++  if (age < 10_000) return 2_000;
++  if (age < 30_000) return 5_000;
++  if (age < 60_000) return PROBE_STEADY_MS;
++  return PROBE_MAX_BACKOFF_MS;
+ }
+ 

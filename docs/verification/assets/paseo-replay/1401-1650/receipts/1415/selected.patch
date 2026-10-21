@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[606,620],"new_lines":[589,603],"diff_block_lines":[47,76],"hunk_header":"@@ -594,29 +587,26 @@ function WorkspaceRowWithMenu({","substantive_changed_lines":20}
+-          style: 'destructive',
+-          onPress: () => {
+-            void archiveWorktree({
+-              serverId: workspace.serverId,
+-              cwd: workspace.workspaceId,
+-              worktreePath: workspace.workspaceId,
+-            }).catch((error) => {
+-              const message = error instanceof Error ? error.message : 'Failed to archive worktree'
+-              toast.error(message)
+-            })
+-          },
+-        },
+-      ],
+-      { cancelable: true }
+-    )
++    void (async () => {
++      const confirmed = await confirmDialog({
++        title: 'Archive worktree?',
++        message: `Archive "${workspace.name}"?\n\nThis removes the worktree from the sidebar.`,
++        confirmLabel: 'Archive',
++        cancelLabel: 'Cancel',
++        destructive: true,
++      })
++
++      if (!confirmed) {
++        return
++      }
++
++      void archiveWorktree({
++        serverId: workspace.serverId,

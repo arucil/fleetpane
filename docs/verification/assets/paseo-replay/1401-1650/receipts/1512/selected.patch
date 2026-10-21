@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[433,437],"new_lines":[433,437],"diff_block_lines":[5,11],"hunk_header":"@@ -433,5 +433,5 @@ jobs:","substantive_changed_lines":2}
+@@ -433,5 +433,5 @@ jobs:
+           set -euo pipefail
+           app_path="packages/desktop/src-tauri/target/release/Paseo.exe"
+-          if npm run tauri --workspace=@getpaseo/desktop build; then
++          if npm run tauri --workspace=@getpaseo/desktop build -- --no-bundle; then
+             exit 0
+           fi

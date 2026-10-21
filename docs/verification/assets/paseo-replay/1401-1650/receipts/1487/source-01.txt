@@ -1,0 +1,72 @@
+  const { orderedTail, platform, isMobileBreakpoint } = params;
+  const shouldSplitHistory =
+    platform === "web" &&
+    !isMobileBreakpoint &&
+    orderedTail.length > getWebPartialVirtualizationThreshold();
+  const cacheKey = `${platform}:${isMobileBreakpoint}:${getWebMountedRecentStreamItems()}:${shouldSplitHistory}`;
+  let cachedByKey = splitHistoryCache.get(orderedTail);
+  if (!cachedByKey) {
+    cachedByKey = new Map();
+    splitHistoryCache.set(orderedTail, cachedByKey);
+  }
+  const cached = cachedByKey.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  if (!shouldSplitHistory) {
+    const unsplit = {
+      history: orderedTail,
+      segments: {
+        historyVirtualized: EMPTY_STREAM_ITEMS,
+        historyMounted: orderedTail,
+        liveHead: EMPTY_STREAM_ITEMS,
+      },
+    } satisfies Pick<AgentStreamRenderModel, "history" | "segments">;
+    cachedByKey.set(cacheKey, unsplit);
+    return unsplit;
+  }
+
+  const mountedWindowStart = findMountedWindowStart({
+    items: orderedTail,
+    minMountedCount: getWebMountedRecentStreamItems(),
+  });
+  const split = {
+    history: orderedTail,
+    segments: {
+      historyVirtualized: orderedTail.slice(0, mountedWindowStart),
+      historyMounted: orderedTail.slice(mountedWindowStart),
+      liveHead: EMPTY_STREAM_ITEMS,
+    },
+  } satisfies Pick<AgentStreamRenderModel, "history" | "segments">;
+  cachedByKey.set(cacheKey, split);
+  return split;
+}
+
+export function buildAgentStreamRenderModel(
+  input: BuildAgentStreamRenderModelInput
+): AgentStreamRenderModel {
+  const strategy = resolveStreamRenderStrategy({
+    platform: input.platform === "web" ? "web" : "native",
+    isMobileBreakpoint: input.isMobileBreakpoint,
+  });
+  const orderingCacheKey = `${input.platform}:${input.isMobileBreakpoint}`;
+  const orderedTail = getOrderedItems({
+    cache: orderedTailCache,
+    source: input.tail,
+    cacheKey: orderingCacheKey,
+    order: (items) =>
+      orderTailForStreamRenderStrategy({
+        strategy,
+        streamItems: items,
+      }),
+  });
+  const orderedHead = getOrderedItems({
+    cache: orderedHeadCache,
+    source: input.head,
+    cacheKey: orderingCacheKey,
+    order: (items) =>
+      orderHeadForStreamRenderStrategy({
+        strategy,
+        streamHead: items,
+      }),

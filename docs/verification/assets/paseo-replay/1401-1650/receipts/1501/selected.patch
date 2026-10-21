@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.redesign.test.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.redesign.test.ts","old_lines":[1450,1456],"new_lines":[1450,1458],"diff_block_lines":[5,15],"hunk_header":"@@ -1450,7 +1450,9 @@ describe(\"ClaudeAgentSession redesign invariants\", () => {","substantive_changed_lines":4}
+@@ -1450,7 +1450,9 @@ describe("ClaudeAgentSession redesign invariants", () => {
+ 
+     const logger = createTestLogger();
++    const claudeClient = new ClaudeAgentClient({ logger });
++    vi.spyOn(claudeClient, "isAvailable").mockResolvedValue(true);
+     const manager = new AgentManager({
+       clients: {
+-        claude: new ClaudeAgentClient({ logger }),
++        claude: claudeClient,
+       },
+       logger,

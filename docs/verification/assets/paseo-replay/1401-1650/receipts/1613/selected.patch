@@ -1,0 +1,8 @@
+FILE packages/server/src/server/daemon-client.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-client.e2e.test.ts","old_lines":[1128,1132],"new_lines":[1092,1094],"diff_block_lines":[117,122],"hunk_header":"@@ -1118,15 +1090,5 @@ describe(\"daemon client E2E\", () => {","substantive_changed_lines":4}
+-      const baseline = await import("node:fs/promises")
+-        .then((fs) => fs.readFile(baselinePath, "utf-8"))
+-        .then((text) => text.trim());
++      const baseline = (await readFile(fixturePath("recording.baseline.txt"), "utf-8")).trim();
+ 
+       await ctx.client.startDictationStream(dictationId, format);

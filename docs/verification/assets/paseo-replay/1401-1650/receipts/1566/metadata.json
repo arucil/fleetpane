@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1566,
+  "revision": "847e1d2c608d659047bff3fa1366a62d4e21e3c3",
+  "date": "2026-03-12T23:06:36+07:00",
+  "committer_date": "2026-03-12T23:06:36+07:00",
+  "parents": [
+    "970df6478b6dbe1cff1c33b573dc1e92005e2588"
+  ],
+  "subject": "fix(app): avoid metro exclusionList breakage on windows",
+  "diff_tree_paths": [
+    "M\tpackages/app/metro.config.cjs"
+  ],
+  "source_receipt_digest": "sha256:35a3b278e4bbe92c35d016ea8a1b344043a77dac0588c9ca7388b8857fe42040",
+  "diff_tree_digest": "sha256:e1159a0c0ffa814787af6136b0169de29a58edd226c8c00ce367e6c7587adb78",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/metro.config.cjs",
+      "old_lines": [
+        30,
+        36
+      ],
+      "new_lines": [
+        29,
+        35
+      ],
+      "diff_block_lines": [
+        17,
+        27
+      ],
+      "hunk_header": "@@ -30,7 +29,7 @@ config.resolver.extraNodeModules = {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/1566/selected.patch"
+}

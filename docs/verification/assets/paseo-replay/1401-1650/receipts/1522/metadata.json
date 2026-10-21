@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1522,
+  "revision": "006db65f0838efa2585e084bd79b55ae7f28bab3",
+  "date": "2026-03-10T22:44:32+07:00",
+  "committer_date": "2026-03-10T22:44:32+07:00",
+  "parents": [
+    "f21221c1e151714851c13633acdef78c6a798b5b"
+  ],
+  "subject": "Remove CUDA/TensorRT providers from onnxruntime-node in managed runtime",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs"
+  ],
+  "source_receipt_digest": "sha256:464c1fbc719caf1db3995bd36298cbdb529f3abed9d394c21e7d4aeacf96d85d",
+  "diff_tree_digest": "sha256:ff9a493ecfdd4ff86d3b0cb94daf1f3b3b9e55d2a518abf21cd04477e80c6097",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/build-managed-runtime.mjs",
+      "old_lines": [
+        363,
+        364
+      ],
+      "new_lines": [
+        363,
+        373
+      ],
+      "diff_block_lines": [
+        8,
+        18
+      ],
+      "hunk_header": "@@ -361,4 +361,13 @@ async function pruneOnnxRuntime(runtimeRoot) {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1522/selected.patch"
+}

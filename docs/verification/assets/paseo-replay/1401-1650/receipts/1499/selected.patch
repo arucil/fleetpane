@@ -1,0 +1,26 @@
+FILE packages/app/src/screens/open-project-screen.tsx
+RANGE {"path":"packages/app/src/screens/open-project-screen.tsx","old_lines":[17,31],"new_lines":[16,35],"diff_block_lines":[17,40],"hunk_header":"@@ -8,24 +8,28 @@ import { SidebarMenuToggle } from \"@/components/headers/menu-header\";","substantive_changed_lines":12}
++  const trafficLightPadding = useTrafficLightPadding();
++  const desktopAgentListOpen = usePanelStore((s) => s.desktop.agentListOpen);
+   const openAgentList = usePanelStore((s) => s.openAgentList);
++  const setProjectPickerOpen = useKeyboardShortcutsStore((s) => s.setProjectPickerOpen);
++
++  const isMobile = UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
++  const needsTrafficLightInset = !isMobile && !desktopAgentListOpen && getIsTauriMac();
++  const trafficLightInset = needsTrafficLightInset ? trafficLightPadding.left : 0;
+ 
+   useEffect(() => {
+-    const isMobile =
+-      UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
+     if (!isMobile) {
+       openAgentList();
+     }
+-  }, [openAgentList]);
++  }, [isMobile, openAgentList]);
+ 
+   return (
+     <View style={styles.container}>
+-      <View style={[styles.menuToggle, { paddingTop: insets.top }]}>
++      <View style={[styles.menuToggle, { paddingTop: insets.top, paddingLeft: trafficLightInset }]}>
+         <SidebarMenuToggle />
+       </View>

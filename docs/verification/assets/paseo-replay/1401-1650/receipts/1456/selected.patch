@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[88,91],"new_lines":[88,115],"diff_block_lines":[77,106],"hunk_header":"@@ -81,40 +86,114 @@ function deriveDateSectionLabel(lastActivityAt: Date): string {","substantive_changed_lines":25}
+-  onLongPress: (agent: AggregatedAgent) => void;
++function formatStatusLabel(status: AggregatedAgent["status"]): string {
++  switch (status) {
++    case "initializing":
++      return "Starting";
++    case "idle":
++      return "Idle";
++    case "running":
++      return "Running";
++    case "error":
++      return "Error";
++    case "closed":
++      return "Closed";
++    default:
++      return status;
++  }
+ }
+ 
+-function AgentListRow({
++function getVisibleColumns(input: {
++  isMobile: boolean;
++  showHostColumn: boolean;
++}): SessionColumnDefinition[] {
++  return SESSION_COLUMNS.filter((column) => {
++    if (!input.showHostColumn && column.requiresMultiHost) {
++      return false;
++    }
++    if (input.isMobile && !column.mobile) {
++      return false;
++    }

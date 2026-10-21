@@ -1,0 +1,90 @@
+use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
+use serde::Serialize;
+use std::collections::HashSet;
+use std::fs;
+use std::path::{Path, PathBuf};
+use std::process::Command;
+use std::sync::atomic::{AtomicU64, Ordering};
+#[cfg(target_os = "macos")]
+use tauri::menu::AboutMetadata;
+use tauri::menu::{Menu, MenuItemBuilder, MenuItemKind, PredefinedMenuItem, Submenu};
+use tauri::{AppHandle, Manager, WebviewWindow};
+use tauri_plugin_updater::UpdaterExt;
+
+mod runtime_manager;
+use runtime_manager::{
+    cli_symlink_instructions, close_local_daemon_transport, managed_daemon_logs,
+    managed_daemon_pairing, managed_daemon_status, managed_runtime_status,
+    open_local_daemon_transport, restart_managed_daemon, run_managed_cli_from_current_process,
+    send_local_daemon_transport_message, start_managed_daemon, stop_managed_daemon,
+    update_managed_daemon_tcp_settings, LocalTransportState,
+};
+
+// Store zoom as u64 bits (f64 * 100 as integer for atomic ops)
+static ZOOM_LEVEL: AtomicU64 = AtomicU64::new(100);
+
+fn get_zoom_factor() -> f64 {
+    ZOOM_LEVEL.load(Ordering::Relaxed) as f64 / 100.0
+}
+
+fn set_zoom_factor(webview: &WebviewWindow, factor: f64) {
+    let clamped = factor.clamp(0.5, 3.0);
+    ZOOM_LEVEL.store((clamped * 100.0) as u64, Ordering::Relaxed);
+    let _ = webview.set_zoom(clamped);
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DaemonUpdateCommandResult {
+    exit_code: i32,
+    stdout: String,
+    stderr: String,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AppUpdateCheckResult {
+    has_update: bool,
+    current_version: String,
+    latest_version: Option<String>,
+    body: Option<String>,
+    date: Option<String>,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AppUpdateInstallResult {
+    installed: bool,
+    version: Option<String>,
+    message: String,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct LocalDaemonVersionResult {
+    version: Option<String>,
+    error: Option<String>,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct AttachmentFileResult {
+    path: String,
+    byte_size: u64,
+}
+
+fn is_ignored_gui_launch_arg(arg: &str) -> bool {
+    arg.starts_with("-psn_")
+}
+
+fn parse_cli_passthrough_args_from_argv(args: &[String]) -> Option<Vec<String>> {
+    let effective = args
+        .iter()
+        .skip(1)
+        .filter(|arg| !is_ignored_gui_launch_arg(arg))
+        .cloned()
+        .collect::<Vec<_>>();
+    (!effective.is_empty()).then_some(effective)
+}
+
+pub fn try_run_pre_tauri_mode() -> Option<i32> {

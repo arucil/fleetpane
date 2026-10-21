@@ -1,0 +1,14 @@
+FILE packages/app/src/utils/project-display-name.ts
+RANGE {"path":"packages/app/src/utils/project-display-name.ts","old_lines":[10,10],"new_lines":[10,21],"diff_block_lines":[8,19],"hunk_header":"@@ -8,2 +8,14 @@ export function projectDisplayNameFromProjectId(projectId: string): string {","substantive_changed_lines":8}
++
++export function projectIconPlaceholderLabelFromDisplayName(
++  displayName: string
++): string {
++  const trimmedDisplayName = displayName.trim();
++  if (!trimmedDisplayName) {
++    return "";
++  }
++
++  const segments = trimmedDisplayName.split("/").filter(Boolean);
++  return segments[segments.length - 1] || trimmedDisplayName;
++}

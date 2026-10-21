@@ -1,0 +1,32 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[522,530],"new_lines":[519,544],"diff_block_lines":[13,42],"hunk_header":"@@ -516,17 +516,31 @@ try {","substantive_changed_lines":20}
++  const managedStart = managedBootstrap.json ?? await waitFor(
++    async () => {
++      const status = await runBinary(
++        packagedBinary,
++        ["--managed-headless", "daemon-status"],
++        managedEnv
++      );
++      assert.equal(status.json?.daemonRunning, true);
++      assert.ok(status.json?.daemonPid, "managed daemon pid should exist");
++      return status.json;
++    },
++    10_000,
++    "managed daemon bootstrap status"
++  );
++  assert.equal(managedStart.daemonRunning, true);
++  assert.ok(managedStart.daemonPid, "managed daemon pid should exist");
++  assert.equal(managedStart.runtimeRoot, runtimeStatus.json.runtimeRoot);
+   assert.ok(
+-    managedStart.json.transportType === "socket" || managedStart.json.transportType === "pipe",
++    managedStart.transportType === "socket" || managedStart.transportType === "pipe",
+     "managed daemon should default to private IPC transport"
+   );
+-  assert.notEqual(managedStart.json.transportPath, "127.0.0.1:6767");
+-  assertNoForbiddenPathsOrPorts(managedStart.json, forbiddenManagedReferences);
++  assert.notEqual(managedStart.transportPath, "127.0.0.1:6767");
++  assertNoForbiddenPathsOrPorts(managedStart, forbiddenManagedReferences);
+   assert.equal(await pathExists(managedRuntimeDir), false, "starting the daemon should not install a runtime copy");
+ 
+-  const managedPid = managedStart.json.daemonPid;
++  const managedPid = managedStart.daemonPid;

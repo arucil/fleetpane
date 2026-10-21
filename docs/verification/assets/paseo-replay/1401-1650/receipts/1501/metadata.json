@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1501,
+  "revision": "e73d40b2605fc85c96f4e4107ea646d51b481c5f",
+  "date": "2026-03-10T17:25:03+07:00",
+  "committer_date": "2026-03-10T17:25:03+07:00",
+  "parents": [
+    "89a25276a5d12ba2be97105e27295f3165b8efd2"
+  ],
+  "subject": "Fix release follow-up issues",
+  "diff_tree_paths": [
+    "M\t.github/workflows/server-ci.yml",
+    "M\tCHANGELOG.md",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts"
+  ],
+  "source_receipt_digest": "sha256:b0df410f1247ab6c2adc732ac764c96fd997ba0a3f295431c907f16ef20f18d4",
+  "diff_tree_digest": "sha256:8aaac9fc79e5a35038d6e03dd2baf468e928dc098ae3755227da23c923e6dd41",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+      "old_lines": [
+        1450,
+        1456
+      ],
+      "new_lines": [
+        1450,
+        1458
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -1450,7 +1450,9 @@ describe(\"ClaudeAgentSession redesign invariants\", () => {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 12,
+  "receipt_file": "receipts/1501/selected.patch"
+}

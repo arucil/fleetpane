@@ -1,0 +1,32 @@
+FILE MANAGED_CLI_GLOBAL_INSTALL_LOOP_PLAN.md
+RANGE {"path":"MANAGED_CLI_GLOBAL_INSTALL_LOOP_PLAN.md","old_lines":[4,22],"new_lines":[4,20],"diff_block_lines":[11,40],"hunk_header":"@@ -1,233 +1,84 @@","substantive_changed_lines":21}
+ 
+-Implement a proper desktop-managed CLI install flow for the desktop app.
++Implemented on this branch.
+ 
+-The current implementation installs a user-local shim and routes through the desktop app binary with `--paseo-cli-shim <state-file>`. The target design is:
++The original plan was to replace the desktop app's state-file trampoline CLI install flow with a stable outer shim, a bundle-managed inner launcher, structured install results, UI fallback instructions, and Docker-like CLI default host resolution. That work now exists in code and this file records what shipped.
+ 
+-- The installed PATH shim must be trivial and stable, like Tailscale.
+-- The installed PATH shim should forward argv to an inner executable/shim inside the app bundle.
+-- The inner executable/shim should resolve the bundled Node runtime and bundled `@getpaseo/cli` entrypoint and invoke the CLI directly.
+-- The CLI should gain Docker-like default connection resolution so the shim does not need to hardcode daemon transport details.
+-- The desktop install button should attempt a best-effort global install and clearly communicate that a permissions prompt may appear.
+-- If global install does not succeed, the app must present a fallback dialog with exact platform-specific terminal instructions.
++## What Exists
+ 
+-This work must be planned and implemented cleanly, not patched onto the current state-file trampoline design.
++### Desktop runtime and launcher
+ 
+-## Relevant Code And Current Behavior
++- The desktop runtime bundle is assembled by [build-managed-runtime.mjs](/Users/moboudra/.paseo/worktrees/1luy0po7/managed-daemon-bundle/packages/desktop/scripts/build-managed-runtime.mjs).
++- The Tauri runtime manager now maintains:
++  - a stable inner launcher under `bin/`
++  - a trivial outer PATH shim
++  - structured CLI install/uninstall results
++  - manual install instructions
++- The old `--paseo-cli-shim <state-file>` trampoline is no longer the installed shim path.
+ 
+-- `packages/desktop/src-tauri/src/runtime_manager.rs`
+-  - Contains managed runtime install logic, CLI shim install/uninstall logic, and the current `try_run_cli_shim_from_args()` trampoline path.
+-  - Today the installed shim calls the desktop app executable, passes `--paseo-cli-shim <state-file>`, and the app then resolves bundled Node + bundled CLI and execs them.

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1549,
+  "revision": "213f155c9ce25bf13f1af3864de905f0ccbee050",
+  "date": "2026-03-12T13:16:08+07:00",
+  "committer_date": "2026-03-12T13:16:08+07:00",
+  "parents": [
+    "9e6b45e2f0db424c4569f6cc80d2250a052821e9"
+  ],
+  "subject": "fix(desktop): fix Claude agent spawn from managed runtime and rotate logs on restart",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/logger.ts"
+  ],
+  "source_receipt_digest": "sha256:583707c7630d6e7491645a7ae6dfe4af2b67e527fdf50508ee9c5baef62d0939",
+  "diff_tree_digest": "sha256:b2b9cd3dac736b604fade75de942e489c59f4f4a36e138f0b3296e44760d0c9c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/logger.ts",
+      "old_lines": [
+        140,
+        140
+      ],
+      "new_lines": [
+        140,
+        169
+      ],
+      "diff_block_lines": [
+        12,
+        41
+      ],
+      "hunk_header": "@@ -139,4 +139,35 @@ function normalizeLoggerConfigInput(config: LoggerConfigInput): PersistedConfig",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 46,
+  "receipt_file": "receipts/1549/selected.patch"
+}

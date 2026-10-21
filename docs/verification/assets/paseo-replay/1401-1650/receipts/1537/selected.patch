@@ -1,0 +1,30 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[57,59],"new_lines":[57,84],"diff_block_lines":[7,34],"hunk_header":"@@ -56,4 +56,29 @@ export type ProviderCommandPrefix = {","substantive_changed_lines":17}
+ 
++function resolveExecutableFromWhichOutput(
++  name: string,
++  output: string,
++  source: "login-shell" | "which"
++): string | null {
++  const lines = output
++    .split(/\r?\n/)
++    .map((line) => line.trim())
++    .filter((line) => line.length > 0);
++  const candidate = lines.at(-1);
++
++  if (!candidate) {
++    return null;
++  }
++
++  if (!candidate.startsWith("/")) {
++    console.warn(
++      `[findExecutable] Ignoring non-absolute ${source} output for '${name}': ${JSON.stringify(candidate)}`
++    );
++    return null;
++  }
++
++  return candidate;
++}
++
+ export function resolveProviderCommandPrefix(
+   commandConfig: ProviderCommand | undefined,

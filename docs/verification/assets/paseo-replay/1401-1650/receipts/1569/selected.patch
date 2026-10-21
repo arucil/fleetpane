@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[405,431],"new_lines":[405,408],"diff_block_lines":[16,45],"hunk_header":"@@ -404,30 +404,7 @@ jobs:","substantive_changed_lines":25}
+           tools_dir="$(mktemp -d)"
+-          curl -fsSL https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20251107-1/linuxdeploy-x86_64.AppImage -o "$tools_dir/linuxdeploy-x86_64.AppImage"
+-          curl -fsSL https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/1-alpha-20250213-1/linuxdeploy-plugin-appimage-x86_64.AppImage -o "$tools_dir/linuxdeploy-plugin-appimage-x86_64.AppImage"
+-          curl -fsSL https://raw.githubusercontent.com/tauri-apps/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh -o "$tools_dir/linuxdeploy-plugin-gtk.sh"
+-          curl -fsSL https://raw.githubusercontent.com/tauri-apps/linuxdeploy-plugin-gstreamer/master/linuxdeploy-plugin-gstreamer.sh -o "$tools_dir/linuxdeploy-plugin-gstreamer.sh"
+-          chmod +x "$tools_dir"/linuxdeploy*
+-          export PATH="$tools_dir:$PATH"
+-          export NO_STRIP=1
+-          export APPIMAGE_EXTRACT_AND_RUN=1
+-          (
+-            cd "$appimage_dir"
+-            "$tools_dir/linuxdeploy-x86_64.AppImage" \
+-              --verbosity 2 \
+-              --appdir "Paseo.AppDir" \
+-              --plugin gtk \
+-              --plugin gstreamer \
+-              --output appimage
+-          )
+-          manual_appimage="$(find "$appimage_dir" -maxdepth 1 -type f -name '*.AppImage' | head -n 1)"
+-          if [ -z "$manual_appimage" ]; then
+-            echo "::error::Manual linuxdeploy run did not produce an AppImage"
+-            exit 1
+-          fi
+-          canonical_appimage="$appimage_dir/Paseo_${DESKTOP_VERSION}_amd64.AppImage"
+-          if [ "$manual_appimage" != "$canonical_appimage" ]; then
+-            mv "$manual_appimage" "$canonical_appimage"
+-          fi
++          curl -fsSL https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -o "$tools_dir/appimagetool-x86_64.AppImage"
++          chmod +x "$tools_dir/appimagetool-x86_64.AppImage"
++          ARCH=x86_64 APPIMAGE_EXTRACT_AND_RUN=1 "$tools_dir/appimagetool-x86_64.AppImage" "$appdir_path" "$canonical_appimage"

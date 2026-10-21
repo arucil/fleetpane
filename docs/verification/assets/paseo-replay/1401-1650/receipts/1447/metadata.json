@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1447,
+  "revision": "1d1c7058f130d1071a1cde0304ef47409b79fc07",
+  "date": "2026-03-07T12:32:49+07:00",
+  "committer_date": "2026-03-07T12:32:49+07:00",
+  "parents": [
+    "6b51088f39bb43b66055962d22ce0cdab21dd705"
+  ],
+  "subject": "feat: add agent delete command and bulk tab close operations",
+  "diff_tree_paths": [
+    "A\tcli-client-id",
+    "M\tpackages/app/e2e/workspace-header-tabs-restore.spec.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/components/synced-loader.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-bulk-close.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-bulk-close.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-presentation.tsx",
+    "A\tpackages/app/src/utils/status-loader.test.ts",
+    "A\tpackages/app/src/utils/status-loader.ts",
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/archive.ts",
+    "A\tpackages/cli/src/commands/agent/delete.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "M\tpackages/cli/tests/07-agent-stop.test.ts",
+    "A\tpackages/cli/tests/27-agent-delete.test.ts",
+    "M\tpackages/cli/tests/e2e/agent-lifecycle.test.ts",
+    "M\tpackages/cli/tests/e2e/agent-send.test.ts",
+    "M\tpackages/cli/tests/e2e/permissions.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2e9e49e6c70a88b69ca57f80d47d2a55f1f7e7e4bef708d6aeb6999b17b95c18",
+  "diff_tree_digest": "sha256:c451dcbec332563743d985d53e93dbb7e174803b1353be8b645cecae7bc65914",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/synced-loader.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        22,
+        51
+      ],
+      "diff_block_lines": [
+        28,
+        57
+      ],
+      "hunk_header": "@@ -0,0 +1,170 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 585,
+  "receipt_file": "receipts/1447/selected.patch"
+}

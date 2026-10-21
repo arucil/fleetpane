@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[2627,2631],"new_lines":[2627,2630],"diff_block_lines":[5,10],"hunk_header":"@@ -2627,5 +2627,4 @@ class CodexAppServerAgentSession implements AgentSession {","substantive_changed_lines":1}
+@@ -2627,5 +2627,4 @@ class CodexAppServerAgentSession implements AgentSession {
+       this.pendingFileChangeOutputDeltas.clear();
+       this.warnedIncompleteEditToolCallIds.clear();
+-      this.eventQueue?.end();
+       return;
+     }

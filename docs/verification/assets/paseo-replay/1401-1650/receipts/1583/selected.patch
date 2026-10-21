@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[289,308],"new_lines":[299,311],"diff_block_lines":[36,65],"hunk_header":"@@ -286,62 +297,19 @@ export function WorkspaceDesktopTabsRow({","substantive_changed_lines":24}
+-                    <>
++                  {menuEntries.map((entry) =>
++                    entry.kind === "separator" ? (
++                      <ContextMenuSeparator key={entry.key} />
++                    ) : (
+                       <ContextMenuItem
+-                        testID={`${contextMenuTestId}-copy-resume-command`}
+-                        onSelect={() => {
+-                          void onCopyResumeCommand(tab.agentId);
+-                        }}
++                        key={entry.key}
++                        testID={entry.testID}
++                        disabled={entry.disabled}
++                        destructive={entry.destructive}
++                        onSelect={entry.onSelect}
+                       >
+-                        Copy resume command
++                        {entry.label}
+                       </ContextMenuItem>
+-                      <ContextMenuItem
+-                        testID={`${contextMenuTestId}-copy-agent-id`}
+-                        onSelect={() => {
+-                          void onCopyAgentId(tab.agentId);
+-                        }}
+-                      >
+-                        Copy agent id
+-                      </ContextMenuItem>
+-                    </>
+-                  ) : null}
+-

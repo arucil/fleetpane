@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1503,
+  "revision": "2a0b0b9109869c6e5a091bc1b0d7bdba35e5a4a0",
+  "date": "2026-03-10T17:44:16+07:00",
+  "committer_date": "2026-03-10T17:44:16+07:00",
+  "parents": [
+    "f3338ee82412c70a7d576ecee69eed07c54daf8e"
+  ],
+  "subject": "Fix Windows runtime packaging",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs"
+  ],
+  "source_receipt_digest": "sha256:42b5688570a2813eef965dcc6271204a7c8fb313c8b7c6fc47fb36e458a8d293",
+  "diff_tree_digest": "sha256:493eb3a0320076f070ab25acda299f40f8037dc15d5bffadb0f7784b5449bd28",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/build-managed-runtime.mjs",
+      "old_lines": [
+        247,
+        250
+      ],
+      "new_lines": [
+        250,
+        263
+      ],
+      "diff_block_lines": [
+        20,
+        34
+      ],
+      "hunk_header": "@@ -246,5 +249,15 @@ async function ensureWorkspaceBuilds() {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 15,
+  "receipt_file": "receipts/1503/selected.patch"
+}

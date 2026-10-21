@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1403,
+  "revision": "cb92f39e73548c45739e5310ca3021921d8c0dbd",
+  "date": "2026-03-03T23:28:06+07:00",
+  "committer_date": "2026-03-03T23:28:16+07:00",
+  "parents": [
+    "f3796e2ba586e6a101b0af609e045fdc0d2ad835"
+  ],
+  "subject": "feat: workspace source-of-truth hard cut",
+  "diff_tree_paths": [
+    "A\tPLAN_WORKSPACE_SOT_CLEANUP.md",
+    "M\tpackages/app/metro.config.js",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-agent-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "D\tpackages/app/src/hooks/use-sidebar-agents-list.test.ts",
+    "D\tpackages/app/src/hooks/use-sidebar-agents-list.ts",
+    "A\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "A\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-header-source.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-source-of-truth.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "A\tpackages/app/src/utils/project-display-name.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:51a97afeef54faf5088edd38871fff6c82614e719d2236eb14ec29c12c13a7a8",
+  "diff_tree_digest": "sha256:8aa868cde965a0eb81378dfaef3aea029788bdb8bb070b4962212b4985a1c855",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-agent-list.tsx",
+      "old_lines": [
+        291,
+        320
+      ],
+      "new_lines": [
+        197,
+        197
+      ],
+      "diff_block_lines": [
+        167,
+        196
+      ],
+      "hunk_header": "@@ -272,65 +191,10 @@ function WorkspaceRow({",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 1909,
+  "receipt_file": "receipts/1403/selected.patch"
+}

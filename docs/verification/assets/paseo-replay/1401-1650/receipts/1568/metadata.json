@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1568,
+  "revision": "9190d86148e80a9d4b06bc5b1726d84e5e4bbc96",
+  "date": "2026-03-12T23:29:26+07:00",
+  "committer_date": "2026-03-12T23:29:26+07:00",
+  "parents": [
+    "4b5cb5a3e258c4c1b215daa5a27eeacaa091a487"
+  ],
+  "subject": "feat(app): improve image picker, markdown rendering, and UI interactions",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/components/ui/tooltip.tsx",
+    "A\tpackages/app/src/hooks/image-attachment-picker.test.ts",
+    "A\tpackages/app/src/hooks/image-attachment-picker.ts",
+    "M\tpackages/app/src/hooks/use-image-attachment-picker.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "A\tpackages/app/src/styles/markdown-styles.test.ts",
+    "M\tpackages/app/src/styles/markdown-styles.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "A\tpackages/app/src/utils/tauri-daemon-transport.test.ts",
+    "M\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/tauri.ts"
+  ],
+  "source_receipt_digest": "sha256:01ca6e5d238da2620e005621774360b8d4ad4bdca186052acdad3c43e00e4f8a",
+  "diff_tree_digest": "sha256:85a1134a4e599f5f9e898742773f7d1f84f10ae4df9309bd7d2bf93cb48a330d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/ui/tooltip.tsx",
+      "old_lines": [
+        279,
+        279
+      ],
+      "new_lines": [
+        310,
+        339
+      ],
+      "diff_block_lines": [
+        62,
+        91
+      ],
+      "hunk_header": "@@ -277,35 +308,84 @@ export function TooltipTrigger({",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 509,
+  "receipt_file": "receipts/1568/selected.patch"
+}

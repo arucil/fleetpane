@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1407,
+  "revision": "6de775695210823e64aef081f528b6ed325cf5b6",
+  "date": "2026-03-04T10:37:43+07:00",
+  "committer_date": "2026-03-04T10:37:43+07:00",
+  "parents": [
+    "3c066f5dd9bf560c1ff73c2fabfd43a5f970caac"
+  ],
+  "subject": "feat: add workspace-aware notification routing and clean up agent screen header",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/notification-routing.test.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts"
+  ],
+  "source_receipt_digest": "sha256:284cf6c2b6d34207ed23dde70c3f3c6d1a46c340e40398da3c05a324fdcc9bcd",
+  "diff_tree_digest": "sha256:3826ae0c852c82677ea8156d0f4803b70f5850c6b58b3ebb786841e78fce8924",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        291,
+        308
+      ],
+      "new_lines": [
+        288,
+        305
+      ],
+      "diff_block_lines": [
+        29,
+        58
+      ],
+      "hunk_header": "@@ -290,26 +287,25 @@ function useLongPressDragInteraction(input: {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 363,
+  "receipt_file": "receipts/1407/selected.patch"
+}

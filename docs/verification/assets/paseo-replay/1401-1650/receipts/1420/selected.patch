@@ -1,0 +1,9 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[793,797],"new_lines":[793,797],"diff_block_lines":[5,11],"hunk_header":"@@ -793,5 +793,5 @@ function ProjectBlock({","substantive_changed_lines":2}
+@@ -793,5 +793,5 @@ function ProjectBlock({
+             }
+             onWorkspacePress?.()
+-            router.push(workspaceRoute as any)
++            router.replace(workspaceRoute as any)
+           }}
+           drag={workspaceDrag}

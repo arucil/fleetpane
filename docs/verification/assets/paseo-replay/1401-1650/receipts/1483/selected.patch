@@ -1,0 +1,32 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[1481,1481],"new_lines":[1486,1515],"diff_block_lines":[22,51],"hunk_header":"@@ -1480,4 +1485,105 @@ const ExpandableBadge = memo(function ExpandableBadge({","substantive_changed_lines":20}
+ 
++  const containerStyle = useMemo(
++    () => [
++      expandableBadgeStylesheet.container,
++      !resolvedDisableOuterSpacing &&
++        (isLastInSequence
++          ? expandableBadgeStylesheet.containerLastInSequence
++          : expandableBadgeStylesheet.containerSpacing),
++      style,
++    ],
++    [isLastInSequence, resolvedDisableOuterSpacing, style]
++  );
++
++  const pressableStyle = useMemo(
++    () => [
++      expandableBadgeStylesheet.pressable,
++      isPressed && isInteractive
++        ? expandableBadgeStylesheet.pressablePressed
++        : null,
++      isExpanded && expandableBadgeStylesheet.pressableExpanded,
++    ],
++    [isExpanded, isInteractive, isPressed]
++  );
++
++  const accessibilityState = useMemo(
++    () => (isInteractive ? { expanded: isExpanded } : undefined),
++    [isExpanded, isInteractive]
++  );
++
++  const labelStyle = useMemo(

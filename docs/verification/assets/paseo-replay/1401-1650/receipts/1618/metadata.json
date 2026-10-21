@@ -1,0 +1,88 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1618,
+  "revision": "e526f375c82d9ca0c7f3ff320ce8c863296ffcd5",
+  "date": "2026-03-14T22:06:42+07:00",
+  "committer_date": "2026-03-14T22:06:42+07:00",
+  "parents": [
+    "3ae1102d13993ff9085ac0eb7d6c29fe20e3466c",
+    "a4951383747aa6c24332a656d9f1e0edebc418b5"
+  ],
+  "subject": "Merge branch 'fix-tests-suite-loop'",
+  "diff_tree_paths": [
+    "M\t.github/workflows/server-ci.yml",
+    "A\tfix-tests.sh",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/e2e/agent-bottom-anchor.spec.ts",
+    "M\tpackages/app/e2e/agent-scroll-submit-firefox.spec.ts",
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/fixtures.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/agent-bottom-anchor.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "A\tpackages/app/e2e/helpers/daemon-registry.ts",
+    "M\tpackages/app/e2e/host-removal.spec.ts",
+    "M\tpackages/app/e2e/host-selection.spec.ts",
+    "M\tpackages/app/e2e/manual-host-port.spec.ts",
+    "M\tpackages/app/e2e/relay-fallback-connect.spec.ts",
+    "M\tpackages/app/e2e/relay-stability.spec.ts",
+    "A\tpackages/app/src/attachments/store.test.ts",
+    "M\tpackages/app/src/attachments/store.ts",
+    "M\tpackages/app/src/utils/connection-selection.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.ts",
+    "M\tpackages/app/vitest.config.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/tests/03-daemon.test.ts",
+    "M\tpackages/cli/tests/04-agent-ls.test.ts",
+    "M\tpackages/cli/tests/15-provider.test.ts",
+    "M\tpackages/cli/tests/27-agent-delete.test.ts",
+    "M\tpackages/cli/tests/e2e/run-output-schema.test.ts",
+    "A\tpackages/cli/tests/helpers/local-cli.ts",
+    "M\tpackages/cli/tests/run-all.ts",
+    "A\tpackages/cli/tests/tmp/opencode-simple.ts",
+    "A\tpackages/cli/tests/tmp/opencode-structured-debug.ts",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/relay/src/dist-handshake-parity.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.test.ts",
+    "M\tpackages/server/src/server/agent/agent-response-loop.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/speech/speech-config-resolver.ts",
+    "M\tpackages/server/src/server/terminal-mcp/terminal-manager.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge-command.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:7a494b32514b45c3301c9b1cbd715525e2da162d87905cf13bd422d9ab6c5ed0",
+  "diff_tree_digest": "sha256:b9bfc69130e2d8c4e86a793a19d6431846ab9028fa21ec0811d80c1322ebe14f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/connection-selection.ts",
+      "old_lines": [
+        26,
+        53
+      ],
+      "new_lines": [
+        34,
+        36
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -24,36 +32,21 @@ export function selectBestConnection(",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 2725,
+  "receipt_file": "receipts/1618/selected.patch"
+}

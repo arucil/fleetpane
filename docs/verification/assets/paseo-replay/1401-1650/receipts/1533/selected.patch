@@ -1,0 +1,31 @@
+FILE packages/desktop/src-tauri/src/runtime_manager.rs
+RANGE {"path":"packages/desktop/src-tauri/src/runtime_manager.rs","old_lines":[564,574],"new_lines":[564,584],"diff_block_lines":[8,36],"hunk_header":"@@ -562,13 +562,23 @@ fn dev_resource_root() -> PathBuf {","substantive_changed_lines":19}
+-        let candidate = resource_dir.join("managed-runtime");
+-        if candidate.exists() {
+-            log::info!("[runtime] found bundled runtime at {}", candidate.display());
+-            return Ok(candidate);
++        // Tauri's bundle.resources preserves the source directory structure, so
++        // "resources/**/*" in tauri.conf.json places files at
++        // $RESOURCE/resources/managed-runtime/. Try the nested path first (installed
++        // builds), then the flat path for any future config changes.
++        for candidate in [
++            resource_dir.join("resources").join("managed-runtime"),
++            resource_dir.join("managed-runtime"),
++        ] {
++            if candidate.exists() {
++                log::info!("[runtime] found bundled runtime at {}", candidate.display());
++                return Ok(candidate);
++            }
++            log::info!(
++                "[runtime] no bundled runtime at {}",
++                candidate.display()
++            );
+         }
+-        log::info!(
+-            "[runtime] no bundled runtime at {}, checking dev path",
+-            candidate.display()
+-        );
++    } else {
++        log::info!("[runtime] resource_dir() unavailable, checking dev path");
+     }
+     let dev = dev_resource_root().join("managed-runtime");

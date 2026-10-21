@@ -1,0 +1,21 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[366,374],"new_lines":[367,381],"diff_block_lines":[13,31],"hunk_header":"@@ -365,10 +366,16 @@ function GetStarted() {","substantive_changed_lines":14}
+         </a>
+-        <span className="relative group inline-flex items-center justify-center rounded-lg border border-white/10 px-3 py-2 text-white/40 cursor-default">
+-          <GooglePlayIcon className="h-5 w-5 opacity-40" />
++        <a
++          href={androidApkHref}
++          target="_blank"
++          rel="noopener noreferrer"
++          className="relative group inline-flex items-center justify-center rounded-lg border border-white/20 px-3 py-2 text-white hover:bg-white/10 transition-colors"
++          aria-label="Download APK"
++        >
++          <AndroidIcon className="h-5 w-5" />
+           <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-white text-black text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+-            Coming soon
++            Download APK (Play Store coming soon)
+           </span>
+-        </span>
++        </a>
+         <ServerInstallButton />
+       </div>

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1536,
+  "revision": "327b31561040e96c0249254ac529d1899754d161",
+  "date": "2026-03-11T15:52:07+07:00",
+  "committer_date": "2026-03-11T15:52:07+07:00",
+  "parents": [
+    "78849fa0bfeef370bf077fdfb8b88dfa025d0267"
+  ],
+  "subject": "Suppress console windows on Windows and use ~/.paseo as default home",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:23716a5e0340953add0e73c7ef1ddce13205d16f942b4b994e358a9620f32ee9",
+  "diff_tree_digest": "sha256:9095f38514dbbfa6232e0616533077e4b7dd53a9ea3103aff2d84e7a1625eef2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/runtime_manager.rs",
+      "old_lines": [
+        496,
+        501
+      ],
+      "new_lines": [
+        496,
+        503
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -496,6 +496,8 @@ fn default_managed_home() -> PathBuf {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 14,
+  "receipt_file": "receipts/1536/selected.patch"
+}

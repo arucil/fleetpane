@@ -1,0 +1,32 @@
+FILE skills/paseo-loop/bin/loop.sh
+RANGE {"path":"skills/paseo-loop/bin/loop.sh","old_lines":[24,32],"new_lines":[32,54],"diff_block_lines":[44,73],"hunk_header":"@@ -23,28 +31,49 @@ EOF","substantive_changed_lines":20}
+ 
++parse_agent_spec() {
++  local spec="$1"
++  local default_provider="$2"
++  local default_model="$3"
++
++  if [[ -z "$spec" ]]; then
++    echo "$default_provider" "$default_model"
++    return
++  fi
++
++  if [[ "$spec" == */* ]]; then
++    echo "${spec%%/*}" "${spec#*/}"
++  else
++    echo "$spec" ""
++  fi
++}
++
+ # Defaults
+-max_iterations=10
+-worker_provider="codex"
+-worker_model=""
+-judge_provider="claude"
+-judge_model="sonnet"
+-plan=""
+-plan_file_input=""
++max_iterations=0
++archive=false
++worker_spec=""
++verifier_spec=""

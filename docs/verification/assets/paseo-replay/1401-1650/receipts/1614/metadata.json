@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1614,
+  "revision": "3a02d1cdd6a9c53b94c3cd87eaeb547364ba2759",
+  "date": "2026-03-11T21:11:10+07:00",
+  "committer_date": "2026-03-13T13:44:25+07:00",
+  "parents": [
+    "2e560677e7550401c166bce0e1b4fe73f9ecec48"
+  ],
+  "subject": "refactor: extract createShortcutTarget and simplify shortcut logic",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/sidebar-shortcuts.ts"
+  ],
+  "source_receipt_digest": "sha256:f7f1e770819bb037dec125ee7b1a66e95b58b4529832126f41fa9733bb329e2f",
+  "diff_tree_digest": "sha256:094ea7e2c6f094754f95ae1c88f5c3e79f41748e617b602e48265b8ca9a5c9d7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/sidebar-shortcuts.ts",
+      "old_lines": [
+        32,
+        47
+      ],
+      "new_lines": [
+        41,
+        52
+      ],
+      "diff_block_lines": [
+        21,
+        44
+      ],
+      "hunk_header": "@@ -31,17 +40,13 @@ export function buildSidebarShortcutModel(input: {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 21,
+  "receipt_file": "receipts/1614/selected.patch"
+}

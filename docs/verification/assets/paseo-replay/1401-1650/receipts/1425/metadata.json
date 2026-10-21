@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1425,
+  "revision": "885b575d14ee8767abf513f84d265eaba3dc9816",
+  "date": "2026-03-05T15:07:52+07:00",
+  "committer_date": "2026-03-05T15:07:56+07:00",
+  "parents": [
+    "8371ea0c7d3717cdc1bbfd931b1eb7cbef91c0d9"
+  ],
+  "subject": "refactor app draft status controls into input area",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/global-draft-create-status-controls.spec.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "A\tpackages/app/e2e/workspace-draft-create-status-controls.spec.ts",
+    "M\tpackages/app/src/attachments/store.ts",
+    "A\tpackages/app/src/components/agent-input-area.status-controls.test.ts",
+    "A\tpackages/app/src/components/agent-input-area.status-controls.ts",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "A\tpackages/app/src/components/agent-status-bar.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "A\tpackages/app/src/components/agent-status-bar.utils.ts",
+    "A\tpackages/app/src/hooks/use-draft-agent-create-flow.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/stores/draft-store.ts"
+  ],
+  "source_receipt_digest": "sha256:667654570d99e778e57e1a25e63b7174bb406f2e1e04e9bc664e4e3509298354",
+  "diff_tree_digest": "sha256:a3e718de3c2ec5c789eabadf1fb86147633a34461df7f052ccc7e0eab5a1afa0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        19,
+        32
+      ],
+      "new_lines": [
+        26,
+        44
+      ],
+      "diff_block_lines": [
+        42,
+        71
+      ],
+      "hunk_header": "@@ -8,154 +10,198 @@ import {",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 1519,
+  "receipt_file": "receipts/1425/selected.patch"
+}

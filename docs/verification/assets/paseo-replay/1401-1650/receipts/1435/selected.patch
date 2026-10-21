@@ -1,0 +1,20 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[159,160],"new_lines":[160,177],"diff_block_lines":[11,28],"hunk_header":"@@ -156,5 +156,22 @@ const SHORTCUT_BINDINGS: readonly KeyboardShortcutBinding[] = [","substantive_changed_lines":13}
++    matches: (event) =>
++      isMod(event) &&
++      !event.altKey &&
++      !event.shiftKey &&
++      (event.code === "KeyW" || event.key.toLowerCase() === "w"),
++    when: (context) => context.isTauri && !context.commandCenterOpen,
++    help: {
++      id: "workspace-tab-close-current",
++      section: "global",
++      label: "Close current tab",
++      keys: ["mod", "W"],
++      when: (context) => context.isTauri,
++    },
++  },
++  {
++    id: "workspace-tab-close-current-alt-shift-w-web",
+     action: "workspace.tab.close.current",
+     matches: (event) =>

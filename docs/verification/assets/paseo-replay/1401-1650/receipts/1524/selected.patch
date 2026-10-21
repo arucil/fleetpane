@@ -1,0 +1,18 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[305,311],"new_lines":[305,319],"diff_block_lines":[7,22],"hunk_header":"@@ -304,8 +304,16 @@ jobs:","substantive_changed_lines":6}
+ 
+-      - name: Remove CUDA/TensorRT providers from onnxruntime
++      - name: Strip CUDA dependencies from onnxruntime
+         shell: bash
+         run: |
+           find packages/desktop/src-tauri/resources/managed-runtime -path '*/onnxruntime-node/bin/*' \( -name '*cuda*' -o -name '*tensorrt*' \) -delete || true
++          # Remove CUDA shared library references from onnxruntime .so files so linuxdeploy
++          # doesn't try to bundle them (they're optional runtime deps, not needed for CPU inference)
++          for f in $(find packages/desktop/src-tauri/resources/managed-runtime -path '*/onnxruntime-node/bin/*' \( -name '*.so' -o -name '*.so.*' \)); do
++            for lib in $(patchelf --print-needed "$f" 2>/dev/null | grep -iE 'cublas|cudnn|cudart|cufft|curand|cusolver|cusparse|nccl|nvrtc|tensorrt|nvinfer'); do
++              echo "Removing needed $lib from $f"
++              patchelf --remove-needed "$lib" "$f"
++            done
++          done
+ 
+       - name: Detect existing GitHub release state

@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[558,587],"new_lines":[557,557],"diff_block_lines":[13,42],"hunk_header":"@@ -557,53 +556,51 @@ export default function RootLayout() {","substantive_changed_lines":27}
+     >
+-      <PerfDiagnosticsProvider scope="root_layout">
+-        <PortalProvider>
+-          <SafeAreaProvider>
+-            <KeyboardProvider>
+-              <BottomSheetModalProvider>
+-                <QueryProvider>
+-                  <HostRuntimeBootstrapProvider>
+-                    <PushNotificationRouter />
+-                    <HostSessionManager />
+-                    <ProvidersWrapper>
+-                      <SidebarAnimationProvider>
+-                        <HorizontalScrollProvider>
+-                          <ToastProvider>
+-                            <AppWithSidebar>
+-                              <Stack
+-                                screenOptions={{
+-                                  headerShown: false,
+-                                  animation: "none",
+-                                  contentStyle: {
+-                                    backgroundColor: darkTheme.colors.surface0,
+-                                  },
+-                                }}
+-                              >
+-                                <Stack.Screen name="index" />
+-                                <Stack.Screen name="settings" />
+-                                <Stack.Screen name="h/[serverId]/workspace/[workspaceId]" />
+-                                <Stack.Screen
+-                                  name="h/[serverId]/agent/[agentId]"
+-                                  options={{ gestureEnabled: false }}

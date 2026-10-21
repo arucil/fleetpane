@@ -1,0 +1,13 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[32,40],"new_lines":[32,39],"diff_block_lines":[5,15],"hunk_header":"@@ -32,9 +32,8 @@ concurrency:","substantive_changed_lines":3}
+@@ -32,9 +32,8 @@ concurrency:
+ env:
+   SOURCE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+-  REQUESTED_PLATFORM: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.platform || (startsWith(github.ref_name, 'desktop-windows-v') && 'windows' || startsWith(github.ref_name, 'desktop-linux-v') && 'linux' || startsWith(github.ref_name, 'desktop-macos-v') && 'macos' || 'all') }}
+ 
+ jobs:
+   publish-macos:
+-    if: ${{ env.REQUESTED_PLATFORM == 'all' || env.REQUESTED_PLATFORM == 'macos' }}
++    if: ${{ (github.event_name == 'workflow_dispatch' && (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'macos')) || (github.event_name == 'push' && (startsWith(github.ref_name, 'v') || startsWith(github.ref_name, 'desktop-v') || startsWith(github.ref_name, 'desktop-macos-v'))) }}
+     strategy:
+       matrix:

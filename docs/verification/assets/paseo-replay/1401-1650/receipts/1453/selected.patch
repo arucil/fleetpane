@@ -1,0 +1,32 @@
+FILE skills/paseo-loop/bin/loop.sh
+RANGE {"path":"skills/paseo-loop/bin/loop.sh","old_lines":[0,0],"new_lines":[3,32],"diff_block_lines":[9,38],"hunk_header":"@@ -0,0 +1,255 @@","substantive_changed_lines":23}
++
++usage() {
++  cat <<'EOF'
++Usage: loop.sh (--plan PROMPT | --plan-file PATH) --name NAME [options]
++
++Required:
++  --plan PROMPT           The implementation plan (given to both worker and judge)
++  --plan-file PATH        Read the plan from a file
++  --name NAME             Name prefix for agents (e.g. "fix-bug" → "fix-bug-work-1", "fix-bug-verify-1")
++
++Options:
++  --max-iterations N      Maximum loop iterations (default: 10)
++  --worktree NAME         Run all agents in this worktree (created on first use, reused after)
++  --worker-provider P     Worker provider: claude or codex (default: codex)
++  --worker-model M        Worker model (default: provider's default)
++  --judge-provider P      Judge provider: claude or codex (default: claude)
++  --judge-model M         Judge model (default: provider's default)
++  --thinking LEVEL        Thinking level for worker (default: medium)
++EOF
++  exit 1
++}
++
++# Defaults
++max_iterations=10
++worker_provider="codex"
++worker_model=""
++judge_provider="claude"
++judge_model="sonnet"
++plan=""
++plan_file_input=""

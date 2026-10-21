@@ -1,0 +1,32 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.test.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.test.ts","old_lines":[33,62],"new_lines":[33,33],"diff_block_lines":[7,36],"hunk_header":"@@ -32,304 +32,219 @@ function shortcutContext(","substantive_changed_lines":19}
+ 
+-describe("keyboard-shortcuts", () => {
+-  it("matches Mod+Shift+O to create new agent", () => {
+-    const match = resolveKeyboardShortcut({
+-      event: keyboardEvent({
+-        key: "O",
+-        code: "KeyO",
+-        metaKey: true,
+-        shiftKey: true,
+-      }),
+-      context: shortcutContext({ isMac: true }),
+-    });
+-
+-    expect(match?.action).toBe("agent.new");
+-  });
+-
+-  it("does not keep old Mod+Alt+N binding", () => {
+-    const match = resolveKeyboardShortcut({
+-      event: keyboardEvent({
+-        key: "n",
+-        code: "KeyN",
+-        metaKey: true,
+-        altKey: true,
+-      }),
+-      context: shortcutContext({ isMac: true }),
+-    });
+-
+-    expect(match).toBeNull();
+-  });
+-

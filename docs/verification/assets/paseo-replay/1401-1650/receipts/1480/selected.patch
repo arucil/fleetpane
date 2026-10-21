@@ -1,0 +1,21 @@
+FILE packages/website/src/routes/index.tsx
+RANGE {"path":"packages/website/src/routes/index.tsx","old_lines":[9,10],"new_lines":[46,64],"diff_block_lines":[52,70],"hunk_header":"@@ -6,5 +7,58 @@ import '~/styles.css'","substantive_changed_lines":12}
++
++function useDetectedPlatform(): Platform {
++  const [platform, setPlatform] = React.useState<Platform>('mac-silicon')
++
++  React.useEffect(() => {
++    const ua = navigator.userAgent.toLowerCase()
++    if (ua.includes('win')) {
++      setPlatform('windows')
++    } else if (ua.includes('linux') && !ua.includes('android')) {
++      setPlatform('linux')
++    } else if (ua.includes('mac')) {
++      setPlatform('mac-silicon')
++    }
++  }, [])
++
++  return platform
++}
+ 
+ export const Route = createFileRoute('/')({

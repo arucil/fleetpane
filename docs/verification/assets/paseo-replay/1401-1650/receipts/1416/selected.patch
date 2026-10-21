@@ -1,0 +1,32 @@
+FILE packages/app/src/stores/workspace-tabs-store.ts
+RANGE {"path":"packages/app/src/stores/workspace-tabs-store.ts","old_lines":[268,268],"new_lines":[274,303],"diff_block_lines":[18,47],"hunk_header":"@@ -267,4 +273,80 @@ export const useWorkspaceTabsStore = create<WorkspaceTabsState>()(","substantive_changed_lines":23}
+       },
++      promoteDraftToAgent: ({ serverId, workspaceId, draftTabId, agentId }) => {
++        const key = buildWorkspaceTabPersistenceKey({ serverId, workspaceId });
++        const normalizedDraftTabId = trimNonEmpty(draftTabId);
++        const normalizedAgentId = trimNonEmpty(agentId);
++        if (!key || !normalizedDraftTabId || !normalizedAgentId) {
++          return null;
++        }
++
++        const nextTabId = `agent_${normalizedAgentId}`;
++        let promotedTabId: string | null = null;
++
++        set((state) => {
++          const currentOrder = state.tabOrderByWorkspace[key] ?? [];
++          const currentTabs = state.uiTabsByWorkspace[key] ?? [];
++          const hasDraftInOrder = currentOrder.includes(normalizedDraftTabId);
++          const hasDraftInUiTabs = currentTabs.some((tab) => tab.tabId === normalizedDraftTabId);
++          if (!hasDraftInOrder && !hasDraftInUiTabs) {
++            return state;
++          }
++
++          const hasAgentTabInOrder = currentOrder.includes(nextTabId);
++          const nextOrder = hasAgentTabInOrder
++            ? currentOrder.filter((tabId) => tabId !== normalizedDraftTabId)
++            : currentOrder
++                .map((tabId) => (tabId === normalizedDraftTabId ? nextTabId : tabId))
++                .filter((tabId, index, arr) => arr.indexOf(tabId) === index);
++
++          const nextTabs = currentTabs.filter((tab) => tab.tabId !== normalizedDraftTabId);
++          const nextUiTabsByWorkspace =

@@ -1,0 +1,10 @@
+FILE packages/desktop/src-tauri/src/runtime_manager.rs
+RANGE {"path":"packages/desktop/src-tauri/src/runtime_manager.rs","old_lines":[561,565],"new_lines":[561,566],"diff_block_lines":[5,12],"hunk_header":"@@ -561,5 +561,6 @@ fn dev_resource_root() -> PathBuf {","substantive_changed_lines":3}
+@@ -561,5 +561,6 @@ fn dev_resource_root() -> PathBuf {
+ 
+ fn bundled_runtime_root(app: &AppHandle) -> Result<PathBuf, String> {
+-    if let Ok(resource_dir) = app.path().resource_dir() {
++    if let Ok(raw_resource_dir) = app.path().resource_dir() {
++        let resource_dir = dunce::simplified(&raw_resource_dir).to_path_buf();
+         // Tauri's bundle.resources preserves the source directory structure, so
+         // "resources/**/*" in tauri.conf.json places files at

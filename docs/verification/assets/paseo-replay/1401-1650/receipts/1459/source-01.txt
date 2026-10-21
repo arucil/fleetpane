@@ -1,0 +1,100 @@
+use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
+use futures_util::{SinkExt, StreamExt};
+use http::Request;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::env;
+use std::fs;
+use std::io;
+use std::path::{Path, PathBuf};
+use std::process::{Command, Stdio};
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::OnceLock;
+use std::sync::{Arc, Mutex};
+use tauri::{AppHandle, Emitter, Manager, State};
+use tokio::sync::mpsc;
+use tokio_tungstenite::tungstenite::client::IntoClientRequest;
+use tokio_tungstenite::tungstenite::Message;
+
+const LOCAL_TRANSPORT_EVENT_NAME: &str = "local-daemon-transport-event";
+const MANAGED_STATE_FILE: &str = "managed-state.json";
+const DEFAULT_MANAGED_HOME_BASENAME: &str = ".paseo";
+const DEFAULT_MANAGED_HOME_DIRNAME: &str = "managed-home";
+#[cfg(not(windows))]
+const SHORT_SOCKET_FILENAME: &str = "paseo.sock";
+const UNIX_CLIENT_URL: &str = "ws://localhost/ws";
+#[cfg(windows)]
+const PIPE_CLIENT_URL: &str = "ws://localhost/ws";
+#[cfg(windows)]
+const PIPE_PREFIX: &str = r"\\.\pipe\";
+const DEFAULT_MANAGED_TCP_HOST: &str = "127.0.0.1";
+const DEFAULT_MANAGED_TCP_PORT: u16 = 7771;
+
+static RUNTIME_INSTALL_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedRuntimeManifest {
+    pub runtime_id: String,
+    pub runtime_version: String,
+    pub platform: String,
+    pub arch: String,
+    pub created_at: String,
+    pub node_relative_path: String,
+    pub cli_entrypoint_relative_path: String,
+    pub cli_shim_relative_path: String,
+    pub server_runner_relative_path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BundledRuntimePointer {
+    runtime_id: String,
+    runtime_version: String,
+    relative_root: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct ManagedStateFile {
+    runtime_id: String,
+    runtime_root: String,
+    managed_home: String,
+    transport_type: String,
+    transport_path: String,
+    tcp_enabled: bool,
+    tcp_listen: Option<String>,
+    cli_shim_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct PidFile {
+    pid: Option<i64>,
+    hostname: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+struct ManagedPaths {
+    runtime_root: PathBuf,
+    managed_home: PathBuf,
+    transport_path: PathBuf,
+    logs_path: PathBuf,
+    state_file_path: PathBuf,
+    diagnostics_root: PathBuf,
+}
+
+#[derive(Debug, Clone)]
+struct ManagedTransportTarget {
+    transport_type: String,
+    transport_path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedTcpSettings {
+    pub enabled: bool,
+    pub host: String,
+    pub port: u16,
+}
+

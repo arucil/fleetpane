@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[143,143],"new_lines":[161,190],"diff_block_lines":[44,73],"hunk_header":"@@ -142,4 +160,77 @@ function PushNotificationRouter() {","substantive_changed_lines":20}
+ 
++function ManagedDaemonSession({ daemon }: { daemon: HostProfile }) {
++  const { client } = useHostRuntimeSession(daemon.serverId);
++
++  if (!client) {
++    return null;
++  }
++
++  return (
++    <SessionProvider
++      key={daemon.serverId}
++      serverId={daemon.serverId}
++      client={client}
++    >
++      {null}
++    </SessionProvider>
++  );
++}
++
++function HostSessionManager() {
++  const hosts = useHosts();
++
++  if (hosts.length === 0) {
++    return null;
++  }
++
++  return (
++    <>
++      {hosts.map((daemon) => (
++        <ManagedDaemonSession key={daemon.serverId} daemon={daemon} />

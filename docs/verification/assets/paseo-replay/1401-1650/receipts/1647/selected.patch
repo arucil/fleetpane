@@ -1,0 +1,9 @@
+FILE packages/app/src/components/project-picker-modal.tsx
+RANGE {"path":"packages/app/src/components/project-picker-modal.tsx","old_lines":[295,299],"new_lines":[296,300],"diff_block_lines":[11,17],"hunk_header":"@@ -295,5 +296,5 @@ export function ProjectPickerModal() {","substantive_changed_lines":2}
+@@ -295,5 +296,5 @@ export function ProjectPickerModal() {
+                           numberOfLines={1}
+                         >
+-                          {path}
++                          {shortenPath(path)}
+                         </Text>
+                       </View>

@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[125,125],"new_lines":[148,177],"diff_block_lines":[94,123],"hunk_header":"@@ -121,8 +142,78 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {","substantive_changed_lines":22}
++
++  const handleToggleDaemonManagement = useCallback(() => {
++    if (isUpdatingDaemonManagement) {
++      return;
++    }
++
++    if (!settings.manageBuiltInDaemon) {
++      setIsUpdatingDaemonManagement(true);
++      setStatusMessage(null);
++      void updateSettings({ manageBuiltInDaemon: true })
++        .then(() => {
++          setStatusMessage("Paseo will resume managing the built-in daemon on startup.");
++        })
++        .catch((error) => {
++          console.error("[Settings] Failed to update built-in daemon management", error);
++          Alert.alert("Error", "Unable to update built-in daemon management.");
++        })
++        .finally(() => {
++          setIsUpdatingDaemonManagement(false);
++        });
++      return;
++    }
++
++    void confirmDialog({
++      title: "Pause built-in daemon",
++      message:
++        "This will stop the built-in daemon immediately and prevent Paseo from auto-starting it on launch. Running agents and terminals connected to the built-in daemon will be stopped.",
++      confirmLabel: "Pause and stop",
++      cancelLabel: "Cancel",
++      destructive: true,

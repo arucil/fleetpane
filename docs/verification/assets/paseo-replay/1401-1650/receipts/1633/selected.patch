@@ -1,0 +1,32 @@
+FILE fix-tests.sh
+RANGE {"path":"fix-tests.sh","old_lines":[7,36],"new_lines":[0,0],"diff_block_lines":[13,42],"hunk_header":"@@ -1,83 +0,0 @@","substantive_changed_lines":20}
+-GREEN='\033[0;32m' YELLOW='\033[1;33m' NC='\033[0m'
+-log()  { echo -e "${GREEN}[fix-tests]${NC} $*"; }
+-warn() { echo -e "${YELLOW}[fix-tests]${NC} $*"; }
+-
+-if [ "$(git branch --show-current)" = "main" ]; then
+-  BRANCH="fix-tests-$(date +%s)"
+-  log "Creating branch $BRANCH"
+-  git checkout -b "$BRANCH"
+-fi
+-
+-read -r -d '' AGENT_PROMPT << 'PROMPT' || true
+-Find ONE failing test across the entire repo and fix it.
+-
+-The objective: get CI green on GitHub Actions. The build has been red for ages and it's embarrassing. Not all tests can run in GH Actions but MOST of them should.
+-
+-Use --bail 1 / --max-failures 1 / fail-fast ALWAYS. Do not run the whole suite. Find the first failure FAST.
+-
+-Auth is fully configured: CLAUDE_CODE_OAUTH_TOKEN and OPENAI_API_KEY are set. OpenCode uses free models needing no auth. All three providers work. There is zero reason to check for auth or skip tests based on environment.
+-
+-Work across all packages — server unit tests, server e2e, daemon tests, app unit tests, Playwright browser e2e, CLI integration tests. All of them.
+-
+-When a test fails:
+-- Outdated (tests removed/renamed APIs) → fix or delete if unnecessary
+-- Flaky (races, timing) → make it deterministic
+-- Too slow → make it fast or delete
+-
+-Do NOT weaken tests. Do NOT add conditionals. Do NOT introduce mocks — we use real environment on purpose because we want to test the REAL thing. Do NOT add auth gating or skip conditions. Do NOT implement new features to make a test pass. You are here to fix tests, not build features. If a test expects unimplemented behavior, delete it.
+-
+-While you're in a file, improve it:
+-- Refactor repeated code RUTHLESSLY. Extract shared helpers across test files.

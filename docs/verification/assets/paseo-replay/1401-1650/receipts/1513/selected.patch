@@ -1,0 +1,17 @@
+FILE packages/desktop/scripts/managed-daemon-smoke.mjs
+RANGE {"path":"packages/desktop/scripts/managed-daemon-smoke.mjs","old_lines":[489,495],"new_lines":[489,502],"diff_block_lines":[7,21],"hunk_header":"@@ -488,8 +488,15 @@ let startedTemporaryExternalDaemon = false;","substantive_changed_lines":7}
+ const forbiddenManagedReferences = ["127.0.0.1:6767", fakePaseoHome, managedRuntimeDir];
++const npmExecPath = process.env.npm_execpath;
++if (!npmExecPath) {
++  throw new Error("npm_execpath is required to launch wrangler during managed desktop smoke tests.");
++}
+ 
+ try {
+   logStep(`Starting isolated local relay on ${relayEndpoint}`);
+-  relayProcess = spawn(process.platform === "win32" ? "npx.cmd" : "npx", [
++  relayProcess = spawn(process.execPath, [
++    npmExecPath,
++    "exec",
++    "--",
+     "wrangler",
+     "dev",

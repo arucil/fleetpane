@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[291,308],"new_lines":[288,305],"diff_block_lines":[29,58],"hunk_header":"@@ -290,26 +287,25 @@ function useLongPressDragInteraction(input: {","substantive_changed_lines":19}
+ 
+-        const decision = decideLongPressMove({
+-          longPressArmed: longPressArmedRef.current,
+-          didStartDrag: didStartDragRef.current,
+-          startPoint: start,
+-          currentPoint: { x: touch.absoluteX, y: touch.absoluteY },
+-          cancelSlopPx: CANCEL_SLOP_PX,
+-          dragSlopPx: DRAG_SLOP_PX,
+-        })
++        if (didStartDragRef.current) {
++          return
++        }
+ 
+-        if (decision === 'cancel_long_press') {
+-          longPressCancelledRef.current = true
+-          stateManager.fail()
++        const dx = touch.absoluteX - start.x
++        const dy = touch.absoluteY - start.y
++        const distance = Math.sqrt(dx * dx + dy * dy)
++
++        if (!longPressArmedRef.current) {
++          if (distance > CANCEL_SLOP_PX) {
++            longPressCancelledRef.current = true
++          }
+           return
+         }
+ 
+-        if (decision === 'start_drag') {
++        if (distance > DRAG_SLOP_PX) {
+           didStartDragRef.current = true

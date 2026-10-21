@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1530,
+  "revision": "c37684b24618352fed2c608fa29fb5f9eeadf31e",
+  "date": "2026-03-11T11:36:21+07:00",
+  "committer_date": "2026-03-11T11:36:21+07:00",
+  "parents": [
+    "e2068e3d72bea99c79f52f3c6ab9646810f1879d"
+  ],
+  "subject": "Preserve entitlements when re-signing managed runtime binaries",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/scripts/sign-managed-runtime-macos.mjs"
+  ],
+  "source_receipt_digest": "sha256:9794199e1020418136d6ce979efb330c274f3c30f0d7190451d27c1eb7d3fc47",
+  "diff_tree_digest": "sha256:088782a7eb0632764fbb90bb9134c39636d34da0a954b6f4530231e3f5990e9b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/sign-managed-runtime-macos.mjs",
+      "old_lines": [
+        76,
+        78
+      ],
+      "new_lines": [
+        76,
+        89
+      ],
+      "diff_block_lines": [
+        7,
+        20
+      ],
+      "hunk_header": "@@ -75,4 +75,15 @@ function needsHardenedRuntime(fileKind) {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 17,
+  "receipt_file": "receipts/1530/selected.patch"
+}

@@ -1,0 +1,24 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[4,25],"diff_block_lines":[9,30],"hunk_header":"@@ -1,4 +1,25 @@","substantive_changed_lines":14}
++### Added
++- New workspace-first navigation model with workspace tabs, file tabs, and sortable tab groups.
++- Keyboard shortcuts for workspace and tab navigation, with shortcut badges in the sidebar.
++- Workspace-level archive actions with improved worktree archiving flow and context menu support.
++- In-chat task notifications rendered as synthetic tool-call events for clearer status tracking.
++
++### Improved
++- Desktop builds now ship as a universal macOS binary (Apple Silicon + Intel).
++- More reliable workspace routing and tab identity handling across refreshes and deep links.
++- Better sidebar drag-and-drop behavior with explicit drag handles and nested list interactions.
++- Smoother terminal/file rendering and WebGL-backed terminal performance improvements.
++- Stronger provider error surfacing and updated Claude model/runtime handling.
++
++### Fixed
++- Fixed orphan workspace runs caused by non-canonical tab routes.
++- Fixed mobile terminal tab remount/routing restore issues.
++- Fixed agent metadata title/branch update reliability.
++- Fixed stream/timeline ordering and cursor synchronization issues in the app.
++- Fixed reversed edge-wheel scroll behavior in chat/tool stream views.
++
+ ## 0.1.16 - 2026-02-22
+ ### Added

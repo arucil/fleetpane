@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1496,
+  "revision": "845cf68d38345d8d1287c5cc3cc6125da08ffd51",
+  "date": "2026-03-10T15:49:33+07:00",
+  "committer_date": "2026-03-10T15:49:33+07:00",
+  "parents": [
+    "2b17aa1a1df0c353b7059a50f22f928eb707a60e"
+  ],
+  "subject": "Refactor git actions and update React to 19.1.4",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/metro.config.js",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "A\tpackages/app/src/components/git-actions-split-button.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/headers/header-toggle-button.tsx",
+    "A\tpackages/app/src/components/icons/source-control-panel-icon.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/project-picker-modal.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "A\tpackages/app/src/hooks/use-git-actions.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "A\tpackages/app/src/screens/startup-splash-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-git-actions.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/website/package.json",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:5dca7bec78e1417bfae17a9b8e40e240b56c7b305c31fb84fc9281cab946c52b",
+  "diff_tree_digest": "sha256:1749c1e3ef2cb9cfa1e4d037066f448f097abb94d4ea958dc37a1e0ac7aa20db",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-actions-split-button.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        17,
+        46
+      ],
+      "diff_block_lines": [
+        23,
+        52
+      ],
+      "hunk_header": "@@ -0,0 +1,192 @@",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 1821,
+  "receipt_file": "receipts/1496/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[226,247],"new_lines":[221,231],"diff_block_lines":[62,91],"hunk_header":"@@ -225,48 +220,37 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {","substantive_changed_lines":25}
+ 
+-  const handleToggleCliShim = useCallback(() => {
+-    if (!showSection || isInstallingCli) {
++  const handleOpenCliSymlinkInstructions = useCallback(() => {
++    if (!showSection || isLoadingCliSymlinkInstructions) {
+       return
+     }
+-    setIsInstallingCli(true)
+-    const isInstalling = !cliShimStatus?.path
+-    setCliStatusMessage(
+-      isInstalling ? 'A permissions popup may appear while Paseo installs the CLI globally.' : null
+-    )
+-    const action = cliShimStatus?.path ? uninstallManagedCliShim : installManagedCliShim
+-    void action()
+-      .then((result) => {
+-        setCliStatusMessage(result.message)
+-        if (result.manualInstructions) {
+-          setCliInstallInstructions(result.manualInstructions)
+-          setIsCliInstallModalOpen(true)
+-        } else {
+-          setCliInstallInstructions(null)
+-          setIsCliInstallModalOpen(false)
+-        }
+-        return loadManagedStatus()
++    setIsLoadingCliSymlinkInstructions(true)
++    setCliStatusMessage(null)
++    void getCliSymlinkInstructions()
++      .then((instructions) => {
++        setCliSymlinkInstructions(instructions)
++        setIsCliSymlinkModalOpen(true)

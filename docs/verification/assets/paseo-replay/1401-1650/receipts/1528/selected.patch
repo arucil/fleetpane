@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[194,194],"new_lines":[195,224],"diff_block_lines":[13,42],"hunk_header":"@@ -193,4 +194,42 @@ jobs:","substantive_changed_lines":25}
+ 
++      - name: Notarize and re-upload DMG
++        if: env.IS_SMOKE_TAG != 'true'
++        env:
++          APPLE_ID: ${{ secrets.APPLE_ID }}
++          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
++          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
++          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
++          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++        shell: bash
++        run: |
++          set -euo pipefail
++          artifacts='${{ steps.tauri_build.outputs.artifactPaths }}'
++          dmg_path=$(echo "$artifacts" | jq -r '.[] | select(endswith(".dmg"))')
++          if [ -z "$dmg_path" ]; then
++            echo "::error::No DMG found in tauri build artifacts"
++            exit 1
++          fi
++          echo "DMG: $dmg_path"
++
++          echo "Signing DMG..."
++          codesign --force --sign "$APPLE_SIGNING_IDENTITY" --timestamp "$dmg_path"
++
++          echo "Submitting DMG for notarization..."
++          xcrun notarytool submit "$dmg_path" \
++            --apple-id "$APPLE_ID" \
++            --password "$APPLE_PASSWORD" \
++            --team-id "$APPLE_TEAM_ID" \
++            --wait
++

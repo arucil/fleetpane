@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1471,
+  "revision": "e3d7dabb87535a73d826b69e9d3c9d259af24417",
+  "date": "2026-03-09T12:58:41+07:00",
+  "committer_date": "2026-03-09T12:58:41+07:00",
+  "parents": [
+    "a90a7f454c1cafb096ad2048ad60238dd29aab79"
+  ],
+  "subject": "fix(ci): support desktop release retries",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "M\tscripts/postinstall-patches.mjs"
+  ],
+  "source_receipt_digest": "sha256:9a475a8545460c02c2585a5b1f07df480110017bd1843b3a7fbb082772b04b53",
+  "diff_tree_digest": "sha256:de95a4c1817323dc55b4776d1186e98ca977c873ab4633359582a544f9db49bd",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        41,
+        43
+      ],
+      "new_lines": [
+        41,
+        55
+      ],
+      "diff_block_lines": [
+        14,
+        28
+      ],
+      "hunk_header": "@@ -40,4 +40,16 @@ jobs:",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 49,
+  "receipt_file": "receipts/1471/selected.patch"
+}

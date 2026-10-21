@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[19,32],"new_lines":[26,44],"diff_block_lines":[42,71],"hunk_header":"@@ -8,154 +10,198 @@ import {","substantive_changed_lines":26}
+ 
+-function normalizeModelId(modelId: string | null | undefined): string | null {
+-  const normalized = typeof modelId === "string" ? modelId.trim() : "";
+-  if (!normalized || normalized.toLowerCase() === "default") {
+-    return null;
+-  }
+-  return normalized;
++type ControlledAgentStatusBarProps = {
++  providerOptions?: StatusOption[]
++  selectedProviderId?: string
++  onSelectProvider?: (providerId: string) => void
++  modeOptions?: StatusOption[]
++  selectedModeId?: string
++  onSelectMode?: (modeId: string) => void
++  modelOptions?: StatusOption[]
++  selectedModelId?: string
++  onSelectModel?: (modelId: string) => void
++  thinkingOptions?: StatusOption[]
++  selectedThinkingOptionId?: string
++  onSelectThinkingOption?: (thinkingOptionId: string) => void
++  disabled?: boolean
++  isModelLoading?: boolean
+ }
+ 
+-export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {
+-  const { theme } = useUnistyles();
+-  const IS_WEB = Platform.OS === "web";
+-  const [prefsOpen, setPrefsOpen] = useState(false);
+-  const dropdownMaxWidth = IS_WEB ? 360 : undefined;
++export interface DraftAgentStatusBarProps {

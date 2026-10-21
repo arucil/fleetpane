@@ -1,0 +1,18 @@
+FILE packages/cli/tests/27-agent-delete.test.ts
+RANGE {"path":"packages/cli/tests/27-agent-delete.test.ts","old_lines":[25,31],"new_lines":[28,42],"diff_block_lines":[20,35],"hunk_header":"@@ -21,11 +22,21 @@ $.verbose = false","substantive_changed_lines":6}
+ 
++async function runCli(args: string[]) {
++  return $`npm --prefix ${repoRoot} run cli -- ${args}`.nothrow()
++}
++
++async function runDelete(args: string[]) {
++  return $`PASEO_HOST=localhost:${port} PASEO_HOME=${paseoHome} npm --prefix ${repoRoot} run cli -- delete ${args}`.nothrow()
++}
++
+ try {
+   {
+     console.log('Test 1: delete --help shows options')
+-    const result = await $`npm run cli -- delete --help`.nothrow()
++    const result = await runDelete(['--help'])
+     assert.strictEqual(result.exitCode, 0, 'delete --help should exit 0')
+     assert(result.stdout.includes('--all'), 'help should mention --all flag')

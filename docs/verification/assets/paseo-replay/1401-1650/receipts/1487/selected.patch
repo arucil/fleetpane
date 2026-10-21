@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-stream-render-model.ts
+RANGE {"path":"packages/app/src/components/agent-stream-render-model.ts","old_lines":[0,0],"new_lines":[58,87],"diff_block_lines":[64,93],"hunk_header":"@@ -0,0 +1,178 @@","substantive_changed_lines":25}
++
++function getOrderedItems(params: {
++  cache: WeakMap<StreamItem[], Map<string, StreamItem[]>>;
++  source: StreamItem[];
++  cacheKey: string;
++  order: (items: StreamItem[]) => StreamItem[];
++}): StreamItem[] {
++  const { cache, source, cacheKey, order } = params;
++  let cachedByKey = cache.get(source);
++  if (!cachedByKey) {
++    cachedByKey = new Map();
++    cache.set(source, cachedByKey);
++  }
++  const cached = cachedByKey.get(cacheKey);
++  if (cached) {
++    return cached;
++  }
++  const ordered = order(source);
++  cachedByKey.set(cacheKey, ordered);
++  return ordered;
++}
++
++function splitOrderedTail(params: {
++  orderedTail: StreamItem[];
++  platform: "web" | "native";
++  isMobileBreakpoint: boolean;
++}): Pick<AgentStreamRenderModel, "history" | "segments"> {
++  const { orderedTail, platform, isMobileBreakpoint } = params;
++  const shouldSplitHistory =
++    platform === "web" &&

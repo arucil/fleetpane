@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[163,163],"new_lines":[163,192],"diff_block_lines":[64,93],"hunk_header":"@@ -162,4 +162,80 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":24}
+ 
++function ProjectLeadingVisual({
++  displayName,
++  iconDataUri,
++  workspace,
++  isArchiving = false,
++}: {
++  displayName: string
++  iconDataUri: string | null
++  workspace: SidebarWorkspaceEntry | null
++  isArchiving?: boolean
++}) {
++  const placeholderLabel = projectIconPlaceholderLabelFromDisplayName(displayName)
++  const placeholderInitial = placeholderLabel.charAt(0).toUpperCase()
++  const activeWorkspace = workspace
++  const shouldShowWorkspaceStatus =
++    activeWorkspace !== null && (isArchiving || activeWorkspace.statusBucket !== 'done')
++
++  return (
++    <View style={styles.projectLeadingVisualSlot}>
++      {shouldShowWorkspaceStatus && activeWorkspace ? (
++        <WorkspaceStatusIndicator bucket={activeWorkspace.statusBucket} loading={isArchiving} />
++      ) : iconDataUri ? (
++        <Image source={{ uri: iconDataUri }} style={styles.projectIcon} />
++      ) : (
++        <View style={styles.projectIconFallback}>
++          <Text style={styles.projectIconFallbackText}>{placeholderInitial}</Text>
++        </View>
++      )}
++    </View>

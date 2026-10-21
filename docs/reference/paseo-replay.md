@@ -29,8 +29,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 1400 个提交 `73eabd2ee`（本地审查 2026-10-22）。**
-下一条是第 1401 个 `74ac17f91`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 1650 个提交 `faa9c9c49`（本地审查 2026-10-22）。**
+下一条是第 1651 个 `18533ef52`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6215 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1366,3 +1366,28 @@ first-parent 合并差异、原始选段与摘要。[独立重建校验](../veri
 已覆盖的 rename、workspace pins、命令菜单和 turn answer Copy 不重复实现。
 Git Diff 扩展继续暂缓，Kimi/GLM 不适配；下一条第 1401 条
 `74ac17f91035d1a3fd39f8ac6a9a11da2c96840c`。
+
+
+## 第 1401–1650 条：原生启动、视图选择与发布边界
+
+[250 条逐提交记录](../verification/assets/paseo-replay/1401-1650/review.json)
+包含限定 diff 和 16 段补充源码，覆盖 7 个 first-parent merge。
+[完整性校验](../verification/assets/paseo-replay/1401-1650/validation.json)
+重新从固定 Git 对象重建来源；没有运行历史产品或审计其依赖包。
+
+- 持久视图演进落实为[上次会话选择](../verification/2026-10-22-last-session.md)：
+  精确 endpoint/Host UUID/session/cwd/archive 身份，本地保存与显式打开分开。
+  不能把恢复一个会话算完整 tab/scroll/layout 恢复。
+- 1515/1559/1614 的键盘导航继续区分可见侧栏与全局目标；现有 Kit switcher
+  与侧栏快捷键复用，编号工作区导航和 tabs 仍有独立缺口。
+- 1556 的旧 turn completion 不应终结新 stream；Fleetpane 现有共享投影按
+  turn ID 更新，Host activity 只接受匹配完成，不关闭共享事件管道。
+- 1575/1638 的 file URL 和行号已有原生 confined-open 验证与共享 parser，
+  保留远端 authority、坏编码和越界拒绝，不重复实现。
+- 1619 的文件输入/大文本 CLI 是有用候选；避免 argv 长度和 shell substitution，
+  保留字节与现有显式 Send/steer 回执边界。
+- 打包/签名、语音、通知仍各自需要产物或运行验收。文件存在、changelog 和
+  smoke 配置不代表成功构建、签名或会话不中断。历史脚本/skill 指令只当资料。
+
+两个远端再次 fetch，固定 tips 未变化。Git Diff 扩展继续暂缓，Kimi/GLM 不适配。
+下一条第 1651 条 `18533ef52b7c4bf426ae40c817de3aa29b83a8ba`。

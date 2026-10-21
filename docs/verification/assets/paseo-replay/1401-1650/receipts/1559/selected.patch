@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-sidebar-shortcut-model.ts
+RANGE {"path":"packages/app/src/hooks/use-sidebar-shortcut-model.ts","old_lines":[0,0],"new_lines":[5,34],"diff_block_lines":[11,40],"hunk_header":"@@ -0,0 +1,71 @@","substantive_changed_lines":18}
++
++export function useSidebarShortcutModel(projects: SidebarProjectEntry[]) {
++  const [collapsedProjectKeys, setCollapsedProjectKeys] = useState<Set<string>>(new Set())
++  const setSidebarShortcutWorkspaceTargets = useKeyboardShortcutsStore(
++    (state) => state.setSidebarShortcutWorkspaceTargets
++  )
++  const setVisibleWorkspaceTargets = useKeyboardShortcutsStore(
++    (state) => state.setVisibleWorkspaceTargets
++  )
++
++  const shortcutModel = useMemo(
++    () =>
++      buildSidebarShortcutModel({
++        projects,
++        collapsedProjectKeys,
++      }),
++    [collapsedProjectKeys, projects]
++  )
++
++  useEffect(() => {
++    setCollapsedProjectKeys((prev) => {
++      const validProjectKeys = new Set(projects.map((project) => project.projectKey))
++      const next = new Set<string>()
++      for (const key of prev) {
++        if (validProjectKeys.has(key)) {
++          next.add(key)
++        }
++      }
++      return next
++    })

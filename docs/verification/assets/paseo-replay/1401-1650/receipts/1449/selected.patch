@@ -1,0 +1,32 @@
+FILE packages/app/src/components/project-picker-modal.tsx
+RANGE {"path":"packages/app/src/components/project-picker-modal.tsx","old_lines":[0,0],"new_lines":[26,55],"diff_block_lines":[32,61],"hunk_header":"@@ -0,0 +1,379 @@","substantive_changed_lines":22}
++
++export function ProjectPickerModal() {
++  const { theme } = useUnistyles();
++  const toast = useToast();
++  const pathname = usePathname();
++  const { daemons } = useDaemonRegistry();
++
++  const open = useKeyboardShortcutsStore((s) => s.projectPickerOpen);
++  const setOpen = useKeyboardShortcutsStore((s) => s.setProjectPickerOpen);
++
++  const serverId = useMemo(() => {
++    const fromPath = parseServerIdFromPathname(pathname);
++    if (fromPath) return fromPath;
++    return daemons[0]?.serverId ?? null;
++  }, [pathname, daemons]);
++
++  const { client, isConnected } = useHostRuntimeSession(serverId ?? "");
++  const workspaces = useSessionStore((state) =>
++    serverId ? state.sessions[serverId]?.workspaces : undefined
++  );
++  const mergeWorkspaces = useSessionStore((state) => state.mergeWorkspaces);
++  const setHasHydratedWorkspaces = useSessionStore(
++    (state) => state.setHasHydratedWorkspaces
++  );
++
++  const inputRef = useRef<TextInput>(null);
++  const [query, setQuery] = useState("");
++  const [activeIndex, setActiveIndex] = useState(0);
++  const [isSubmitting, setIsSubmitting] = useState(false);
++

@@ -1,0 +1,9 @@
+FILE packages/app/src/stores/panel-store.ts
+RANGE {"path":"packages/app/src/stores/panel-store.ts","old_lines":[43,47],"new_lines":[43,47],"diff_block_lines":[5,11],"hunk_header":"@@ -43,5 +43,5 @@ export interface ExplorerCheckoutContext {","substantive_changed_lines":2}
+@@ -43,5 +43,5 @@ export interface ExplorerCheckoutContext {
+ }
+ 
+-export const DEFAULT_EXPLORER_SIDEBAR_WIDTH = Platform.OS === "web" ? 640 : 400;
++export const DEFAULT_EXPLORER_SIDEBAR_WIDTH = 400;
+ export const MIN_EXPLORER_SIDEBAR_WIDTH = 280;
+ // Upper bound is intentionally generous; desktop resizing enforces a min-chat-width constraint.

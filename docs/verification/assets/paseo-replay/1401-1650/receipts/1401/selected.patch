@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-agent-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-agent-list.tsx","old_lines":[612,628],"new_lines":[611,625],"diff_block_lines":[158,187],"hunk_header":"@@ -611,32 +610,27 @@ export function SidebarAgentList({","substantive_changed_lines":18}
+ 
+-  const rows = useMemo(() => {
+-    const next: SidebarTreeRow[] = []
+-    for (const project of projects) {
+-      next.push({
+-        kind: 'project',
+-        rowKey: `project:${project.projectKey}`,
+-        project,
+-        displayName: deriveProjectDisplayName({
+-          projectKey: project.projectKey,
+-          projectName: project.projectName,
+-        }),
+-      })
++  const viewModel = useMemo(
++    () =>
++      buildSidebarWorkspaceViewModel({
++        projects,
++        collapsedProjectKeys,
++        getProjectDisplayName: (project) =>
++          deriveProjectDisplayName({
++            projectKey: project.projectKey,
++            projectName: project.projectName,
++          }),
++      }),
++    [canonicalResyncNonce, collapsedProjectKeys, projects]
++  )
+ 
+-      if (collapsedProjectKeys.has(project.projectKey)) {
+-        continue
+-      }

@@ -1,0 +1,16 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[519,529],"new_lines":[519,527],"diff_block_lines":[7,20],"hunk_header":"@@ -518,12 +518,10 @@ jobs:","substantive_changed_lines":7}
+ 
+-      - name: Patch Metro loader for Windows absolute paths
++      - name: Build web app for Tauri
+         shell: pwsh
+         run: |
+           $patchPath = (Get-Item "$env:GITHUB_WORKSPACE/scripts/metro-config-windows-loader-patch.cjs").FullName
+-          "NODE_OPTIONS=--require=$patchPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+-
+-      - name: Build web app for Tauri
+-        run: npm run build:web --workspace=@getpaseo/app
++          $env:NODE_OPTIONS = "--require=$patchPath"
++          npm run build:web --workspace=@getpaseo/app
+ 
+       - name: Build managed runtime

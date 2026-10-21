@@ -1,0 +1,65 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1580,
+  "revision": "502dd2d2e27de0c358f0b70b77ea7dcd07e1f1dd",
+  "date": "2026-03-13T21:07:18+07:00",
+  "committer_date": "2026-03-13T21:07:18+07:00",
+  "parents": [
+    "80a2f8052c0e4c786085e9ecb7116907ec27aaef"
+  ],
+  "subject": "refactor(app): remove debug logging from voice and UI components",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/artifact-drawer.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/realtime-voice-overlay.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu-floating.ts",
+    "M\tpackages/app/src/components/voice-compact-indicator.tsx",
+    "M\tpackages/app/src/components/voice-panel.tsx",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/contexts/voice-context.tsx",
+    "M\tpackages/app/src/hooks/use-audio-recorder.native.ts",
+    "M\tpackages/app/src/hooks/use-audio-recorder.web.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.native.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "M\tpackages/app/src/hooks/use-explorer-open-gesture.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/stores/panel-store.ts",
+    "M\tpackages/app/src/styles/unistyles.ts",
+    "M\tpackages/app/src/utils/os-notifications.ts",
+    "M\tpackages/app/src/voice/audio-engine.native.ts",
+    "M\tpackages/app/src/voice/speech-segmenter.ts",
+    "M\tpackages/app/src/voice/voice-runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:540af28ad4ce3df2a88b3ab1b6570950e3b23977d9f425b16e6c47542f966b0e",
+  "diff_tree_digest": "sha256:cdbf3311e9107e267b45b53dce342d4b8c6178ebd4c6faa901cb7bf6421ac217",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/panel-store.ts",
+      "old_lines": [
+        153,
+        175
+      ],
+      "new_lines": [
+        136,
+        147
+      ],
+      "diff_block_lines": [
+        29,
+        58
+      ],
+      "hunk_header": "@@ -152,101 +135,50 @@ export const usePanelStore = create<PanelState>()(",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 845,
+  "receipt_file": "receipts/1580/selected.patch"
+}

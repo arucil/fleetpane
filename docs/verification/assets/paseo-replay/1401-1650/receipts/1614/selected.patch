@@ -1,0 +1,26 @@
+FILE packages/app/src/utils/sidebar-shortcuts.ts
+RANGE {"path":"packages/app/src/utils/sidebar-shortcuts.ts","old_lines":[32,47],"new_lines":[41,52],"diff_block_lines":[21,44],"hunk_header":"@@ -31,17 +40,13 @@ export function buildSidebarShortcutModel(input: {","substantive_changed_lines":15}
+     for (const workspace of project.workspaces) {
+-      visibleTargets.push({
+-        serverId: workspace.serverId,
+-        workspaceId: workspace.workspaceId,
+-      })
+-      const shortcutNumber =
+-        shortcutTargets.length < maxShortcuts ? shortcutTargets.length + 1 : null
+-      if (shortcutNumber !== null) {
+-        shortcutTargets.push({
+-          serverId: workspace.serverId,
+-          workspaceId: workspace.workspaceId,
+-        })
+-        shortcutIndexByWorkspaceKey.set(workspace.workspaceKey, shortcutNumber)
++      visibleTargets.push(createShortcutTarget(workspace))
++
++      if (shortcutTargets.length >= maxShortcuts) {
++        continue
+       }
++
++      const shortcutNumber = shortcutTargets.length + 1
++      shortcutTargets.push(createShortcutTarget(workspace))
++      shortcutIndexByWorkspaceKey.set(workspace.workspaceKey, shortcutNumber)
+     }
+   }

@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[365,375],"new_lines":[365,379],"diff_block_lines":[7,27],"hunk_header":"@@ -364,12 +364,16 @@ type ClaudeAgentSessionOptions = {","substantive_changed_lines":11}
+ 
+-function resolveClaudeBinary(): string {
++function whichClaude(): string | null {
+   try {
+-    const claudePath = execSync("which claude", { encoding: "utf8" }).trim();
+-    if (claudePath) {
+-      return claudePath;
+-    }
++    return execSync("which claude", { encoding: "utf8", env: process.env }).trim() || null;
+   } catch {
+-    // fall through
++    return null;
++  }
++}
++
++function resolveClaudeBinary(): string {
++  const claudePath = whichClaude();
++  if (claudePath) {
++    return claudePath;
+   }
+   throw new Error(

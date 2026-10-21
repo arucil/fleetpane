@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1602,
+  "revision": "e8b55eccabd4f777388a3d4f88e3396414d71d19",
+  "date": "2026-03-11T01:30:04+07:00",
+  "committer_date": "2026-03-13T13:43:34+07:00",
+  "parents": [
+    "40ebd1b730d4a962f923e5432b38b0bdcae5befa"
+  ],
+  "subject": "fix(tests): iteration 16",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/daemon-connectivity.spec.ts",
+    "M\tpackages/app/e2e/global-setup.ts",
+    "M\tpackages/app/e2e/helpers/agent-bottom-anchor.ts",
+    "M\tpackages/app/e2e/helpers/app.ts",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/src/server/terminal-mcp/terminal-manager.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge-command.test.ts",
+    "M\tpackages/server/src/server/voice-mcp-bridge.test.ts"
+  ],
+  "source_receipt_digest": "sha256:a0f9b74131683bcd0e48c6141a6eb65c92213a96abeb236f818b2a7de2c5c6da",
+  "diff_tree_digest": "sha256:f3a593df10e7814685532622d9aed644f6b8507561da0422aa5257567fea8e42",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/e2e/helpers/app.ts",
+      "old_lines": [
+        138,
+        146
+      ],
+      "new_lines": [
+        138,
+        164
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -137,12 +137,34 @@ async function assertE2EUsesSeededTestDaemon(page: Page): Promise<void> {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 90,
+  "receipt_file": "receipts/1602/selected.patch"
+}

@@ -1,0 +1,28 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[159,184],"new_lines":[159,160],"diff_block_lines":[132,157],"hunk_header":"@@ -117,68 +152,9 @@ jobs:","substantive_changed_lines":17}
+-          const tauriRe = /("version"\s*:\s*")([^"]+)(")/;
+-          if (!tauriRe.test(tauriConfText)) {
+-            throw new Error(`Failed to find version field in ${tauriConfPath}`);
+-          }
+-          fs.writeFileSync(tauriConfPath, tauriConfText.replace(tauriRe, `$1${version}$3`));
+-
+-          const cargoTomlPath = path.join('packages', 'desktop', 'src-tauri', 'Cargo.toml');
+-          const cargoLines = fs.readFileSync(cargoTomlPath, 'utf8').split(/\r?\n/);
+-          let inPackage = false;
+-          let updated = false;
+-          const nextLines = cargoLines.map((line) => {
+-            if (/^\[package\]\s*$/.test(line)) inPackage = true;
+-            else if (inPackage && /^\[/.test(line)) inPackage = false;
+-
+-            if (inPackage && /^version\s*=\s*".*"\s*$/.test(line)) {
+-              updated = true;
+-              return `version = "${version}"`;
+-            }
+-            return line;
+-          });
+-          if (!updated) throw new Error(`Failed to update Cargo package version in ${cargoTomlPath}`);
+-          fs.writeFileSync(cargoTomlPath, `${nextLines.join('\n')}\n`);
+-          NODE
+-
+       - name: Detect existing GitHub release state
+         if: env.IS_SMOKE_TAG != 'true'

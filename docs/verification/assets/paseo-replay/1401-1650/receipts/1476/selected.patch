@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[62,82],"new_lines":[39,60],"diff_block_lines":[83,112],"hunk_header":"@@ -7,143 +7,84 @@ import {","substantive_changed_lines":15}
+-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+-  const yesterdayStart = new Date(todayStart.getTime() - 24 * 60 * 60 * 1000);
++  const now = new Date()
++  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
++  const yesterdayStart = new Date(todayStart.getTime() - 24 * 60 * 60 * 1000)
+   const activityStart = new Date(
+     lastActivityAt.getFullYear(),
+     lastActivityAt.getMonth(),
+     lastActivityAt.getDate()
+-  );
++  )
+ 
+   if (activityStart.getTime() >= todayStart.getTime()) {
+-    return "Today";
++    return 'Today'
+   }
+   if (activityStart.getTime() >= yesterdayStart.getTime()) {
+-    return "Yesterday";
++    return 'Yesterday'
+   }
+ 
+-  const diffTime = todayStart.getTime() - activityStart.getTime();
+-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
++  const diffTime = todayStart.getTime() - activityStart.getTime()
++  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+   if (diffDays <= 7) {
+-    return "This week";
++    return 'This week'
+   }
+   if (diffDays <= 30) {

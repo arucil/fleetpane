@@ -1,0 +1,28 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[1875,1876],"new_lines":[1899,1924],"diff_block_lines":[44,69],"hunk_header":"@@ -1873,4 +1875,50 @@ export class Session {","substantive_changed_lines":12}
++
++  private async listUnarchivedAgentIdsWithinRoot(rootPath: string): Promise<Set<string>> {
++    const storedRecords = await this.agentStorage.list()
++    const archivedIds = new Set(
++      storedRecords
++        .filter((record) => this.isPathWithinRoot(rootPath, record.cwd) && Boolean(record.archivedAt))
++        .map((record) => record.id)
++    )
++    const activeIds = new Set(
++      storedRecords
++        .filter((record) => this.isPathWithinRoot(rootPath, record.cwd) && !record.archivedAt)
++        .map((record) => record.id)
++    )
++
++    for (const agent of this.agentManager.listAgents()) {
++      if (!this.isPathWithinRoot(rootPath, agent.cwd) || archivedIds.has(agent.id)) {
++        continue
++      }
++      activeIds.add(agent.id)
++    }
++
++    return activeIds
++  }
++
+   private async handleUpdateAgentRequest(
+     agentId: string,

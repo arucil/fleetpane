@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1644,
+  "revision": "cda08ec0339988d9f478b0c3f598f9c1c5c7309b",
+  "date": "2026-03-15T14:28:10+07:00",
+  "committer_date": "2026-03-15T14:28:10+07:00",
+  "parents": [
+    "21c585abecfb77097eeee6cd19f99b744c86b048"
+  ],
+  "subject": "feat(website): add og:title and og:description via pageMeta helper",
+  "diff_tree_paths": [
+    "A\tpackages/website/src/meta.ts",
+    "M\tpackages/website/src/routes/changelog.tsx",
+    "M\tpackages/website/src/routes/claude-code.tsx",
+    "M\tpackages/website/src/routes/codex.tsx",
+    "M\tpackages/website/src/routes/docs/best-practices.tsx",
+    "M\tpackages/website/src/routes/docs/cli.tsx",
+    "M\tpackages/website/src/routes/docs/configuration.tsx",
+    "M\tpackages/website/src/routes/docs/index.tsx",
+    "M\tpackages/website/src/routes/docs/security.tsx",
+    "M\tpackages/website/src/routes/docs/updates.tsx",
+    "M\tpackages/website/src/routes/docs/voice.tsx",
+    "M\tpackages/website/src/routes/docs/worktrees.tsx",
+    "M\tpackages/website/src/routes/index.tsx",
+    "M\tpackages/website/src/routes/opencode.tsx",
+    "M\tpackages/website/src/routes/privacy.tsx"
+  ],
+  "source_receipt_digest": "sha256:e05f584e33390348c0093a662f23aec00c6963b9a458e477608a88fb94b0ce0a",
+  "diff_tree_digest": "sha256:ebb4c302a1b3b515de0d8dcdd5ac7449fd6323cf7b7312a7cefebad1c471e23e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/src/routes/changelog.tsx",
+      "old_lines": [
+        7,
+        17
+      ],
+      "new_lines": [
+        8,
+        14
+      ],
+      "diff_block_lines": [
+        12,
+        26
+      ],
+      "hunk_header": "@@ -2,16 +2,13 @@ import { Link, createFileRoute } from '@tanstack/react-router'",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 111,
+  "receipt_file": "receipts/1644/selected.patch"
+}

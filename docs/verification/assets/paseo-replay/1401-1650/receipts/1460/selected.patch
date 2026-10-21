@@ -1,0 +1,32 @@
+FILE packages/cli/src/utils/client.ts
+RANGE {"path":"packages/cli/src/utils/client.ts","old_lines":[29,29],"new_lines":[33,62],"diff_block_lines":[24,53],"hunk_header":"@@ -26,5 +29,104 @@ type DaemonTarget =","substantive_changed_lines":17}
++
++export function normalizeDaemonHost(raw: string): string | null {
++  const trimmed = raw.trim()
++  if (!trimmed) {
++    return null
++  }
++
++  if (
++    trimmed.startsWith('unix://') ||
++    trimmed.startsWith('pipe://') ||
++    trimmed.startsWith('\\\\.\\pipe\\')
++  ) {
++    return trimmed.startsWith('\\\\.\\pipe\\') ? `pipe://${trimmed}` : trimmed
++  }
++
++  if (path.isAbsolute(trimmed)) {
++    return `unix://${trimmed}`
++  }
++
++  if (/^\d+$/.test(trimmed)) {
++    return `127.0.0.1:${trimmed}`
++  }
++
++  return trimmed.includes(':') ? trimmed : null
++}
++
++export function resolveDefaultDaemonHost(env: NodeJS.ProcessEnv = process.env): string {
++  return resolveDefaultDaemonHosts(env)[0] ?? DEFAULT_HOST
++}
++

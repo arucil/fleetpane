@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-input-area.tsx
+RANGE {"path":"packages/app/src/components/agent-input-area.tsx","old_lines":[516,536],"new_lines":[527,538],"diff_block_lines":[62,91],"hunk_header":"@@ -514,48 +525,56 @@ export function AgentInputArea({","substantive_changed_lines":18}
+-  // Keyboard-dispatched message-input actions are routed through store requests.
+-  useEffect(() => {
+-    if (!isScreenFocused) return
+-    if (!messageInputActionRequest) return
+-
+-    const currentKey = `${serverId}:${agentId}`
+-    if (messageInputActionRequest.agentKey !== currentKey) {
+-      return
+-    }
+-
+-    if (lastHandledMessageInputActionRequestIdRef.current === messageInputActionRequest.id) {
+-      return
++  const handleKeyboardAction = useCallback((action: KeyboardActionDefinition): boolean => {
++    if (!isScreenFocused) {
++      return false
+     }
+-    lastHandledMessageInputActionRequestIdRef.current = messageInputActionRequest.id
+ 
+-    if (messageInputActionRequest.kind !== 'focus') {
+-      messageInputRef.current?.runKeyboardAction(messageInputActionRequest.kind)
+-      clearMessageInputActionRequest(messageInputActionRequest.id)
+-      return
+-    }
++    switch (action.id) {
++      case 'message-input.focus':
++        if (Platform.OS !== 'web') {
++          messageInputRef.current?.focus()
++          return true
++        }
+ 

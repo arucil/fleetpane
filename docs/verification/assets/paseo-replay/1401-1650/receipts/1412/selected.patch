@@ -1,0 +1,32 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[9,9],"new_lines":[9,38],"diff_block_lines":[14,43],"hunk_header":"@@ -8,4 +8,33 @@ import type { PendingTerminalModifiers } from \"../utils/terminal-keys\";","substantive_changed_lines":26}
+ 
++function buildXtermThemeKey(theme: ITheme): string {
++  const values: Array<string> = [
++    theme.background,
++    theme.foreground,
++    theme.cursor,
++    theme.cursorAccent,
++    theme.selectionBackground,
++    theme.selectionForeground,
++    theme.black,
++    theme.red,
++    theme.green,
++    theme.yellow,
++    theme.blue,
++    theme.magenta,
++    theme.cyan,
++    theme.white,
++    theme.brightBlack,
++    theme.brightRed,
++    theme.brightGreen,
++    theme.brightYellow,
++    theme.brightBlue,
++    theme.brightMagenta,
++    theme.brightCyan,
++    theme.brightWhite,
++  ].map((value) => (typeof value === "string" ? value : ""));
++
++  return values.join("|");
++}
++

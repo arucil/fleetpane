@@ -1,0 +1,13 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[87,89],"new_lines":[88,98],"diff_block_lines":[13,23],"hunk_header":"@@ -86,4 +87,12 @@ jobs:","substantive_changed_lines":7}
+ 
++      - name: Restore Rust cache
++        uses: Swatinem/rust-cache@v2
++        with:
++          shared-key: desktop-release-macos-${{ matrix.rust_target }}
++          workspaces: |
++            .
++            packages/desktop/src-tauri -> target
++
+       - name: Install JS dependencies
+         run: npm ci

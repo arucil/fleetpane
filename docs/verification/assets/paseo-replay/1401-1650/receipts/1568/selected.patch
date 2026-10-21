@@ -1,0 +1,32 @@
+FILE packages/app/src/components/ui/tooltip.tsx
+RANGE {"path":"packages/app/src/components/ui/tooltip.tsx","old_lines":[279,279],"new_lines":[310,339],"diff_block_lines":[62,91],"hunk_header":"@@ -277,35 +308,84 @@ export function TooltipTrigger({","substantive_changed_lines":20}
++  const handleFocus = useCallback(
++    (e: any) => {
++      onFocus?.(e);
++      if (!ctx.enabled || disabled) return;
++      clearOpenTimer();
++      ctx.setOpen(true);
++    },
++    [clearOpenTimer, ctx, disabled, onFocus]
++  );
++
++  const handleBlur = useCallback(
++    (e: any) => {
++      onBlur?.(e);
++      close();
++    },
++    [close, onBlur]
++  );
++
++  const handlePress = useCallback(
++    (e: any) => {
++      onPress?.(e);
++      close();
++    },
++    [close, onPress]
++  );
++
++  const triggerProps = {
++    ...props,
++    disabled,
++    onHoverIn: handleHoverIn,

@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1466,
+  "revision": "2721ce331a21392a4dc0f36545fcce546619d0e1",
+  "date": "2026-03-08T20:48:13+07:00",
+  "committer_date": "2026-03-08T20:48:13+07:00",
+  "parents": [
+    "ca787271b3f6f19abc5ee223a749ad5d751f1a36"
+  ],
+  "subject": "Simplify managed runtime to execute in place from app bundle",
+  "diff_tree_paths": [
+    "A\tRUNTIME_SIMPLIFICATION_PLAN.md",
+    "M\tpackages/app/src/contexts/daemon-registry-context.test.ts",
+    "M\tpackages/app/src/contexts/daemon-registry-context.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/desktop/managed-runtime/managed-runtime.ts",
+    "A\tpackages/app/src/hooks/use-settings.test.ts",
+    "M\tpackages/app/src/hooks/use-settings.ts",
+    "M\tpackages/desktop/scripts/managed-daemon-smoke.mjs",
+    "M\tpackages/desktop/src-tauri/src/lib.rs",
+    "M\tpackages/desktop/src-tauri/src/runtime_manager.rs"
+  ],
+  "source_receipt_digest": "sha256:78909c6ee8bc1871f8c8c5a6d3ad9936fc8cb4d9ae6c4e2460efc08d205fe80b",
+  "diff_tree_digest": "sha256:bcece609cb73e967b13c4a74855b1d27a95d9304d61bcf6e13e009d46d1fefc8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-updates-section.tsx",
+      "old_lines": [
+        125,
+        125
+      ],
+      "new_lines": [
+        148,
+        177
+      ],
+      "diff_block_lines": [
+        94,
+        123
+      ],
+      "hunk_header": "@@ -121,8 +142,78 @@ export function LocalDaemonSection({ appVersion }: LocalDaemonSectionProps) {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 820,
+  "receipt_file": "receipts/1466/selected.patch"
+}

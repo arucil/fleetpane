@@ -1,0 +1,12 @@
+FILE packages/app/package.json
+RANGE {"path":"packages/app/package.json","old_lines":[8,13],"new_lines":[8,14],"diff_block_lines":[5,14],"hunk_header":"@@ -8,6 +8,7 @@","substantive_changed_lines":5}
+@@ -8,6 +8,7 @@
+     "reset-project": "node ./scripts/reset-project.js",
+     "android": "npm run android:development",
+-    "android:development": "APP_VARIANT=development expo prebuild --platform android --non-interactive && APP_VARIANT=development expo run:android --variant=debug",
+-    "android:production": "APP_VARIANT=production expo prebuild --platform android --non-interactive && APP_VARIANT=production expo run:android --variant=release",
++    "android:clear-autolinking-cache": "node -e \"require('node:fs').rmSync('android/build/generated/autolinking', { recursive: true, force: true })\"",
++    "android:development": "npm run android:clear-autolinking-cache && APP_VARIANT=development expo prebuild --platform android --non-interactive && APP_VARIANT=development expo run:android --variant=debug",
++    "android:production": "npm run android:clear-autolinking-cache && APP_VARIANT=production expo prebuild --platform android --non-interactive && APP_VARIANT=production expo run:android --variant=release",
+     "android:release": "npm run android:production",
+     "android:clean": "expo prebuild --platform android --clean --non-interactive",

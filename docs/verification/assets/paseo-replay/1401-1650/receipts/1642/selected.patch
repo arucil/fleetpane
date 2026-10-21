@@ -1,0 +1,12 @@
+FILE packages/website/src/routes/__root.tsx
+RANGE {"path":"packages/website/src/routes/__root.tsx","old_lines":[13,16],"new_lines":[13,21],"diff_block_lines":[5,14],"hunk_header":"@@ -13,4 +13,9 @@ export const Route = createRootRoute({","substantive_changed_lines":5}
+@@ -13,4 +13,9 @@ export const Route = createRootRoute({
+       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+       { name: 'theme-color', content: '#0a0a0a' },
++      { property: 'og:site_name', content: 'Paseo' },
++      { property: 'og:type', content: 'website' },
++      { property: 'og:image', content: 'https://paseo.sh/og-image.png' },
++      { name: 'twitter:card', content: 'summary_large_image' },
++      { name: 'twitter:image', content: 'https://paseo.sh/og-image.png' },
+     ],
+     links: [

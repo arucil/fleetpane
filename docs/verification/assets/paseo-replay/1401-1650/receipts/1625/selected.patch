@@ -1,0 +1,32 @@
+FILE packages/app/e2e/agent-bottom-anchor.spec.ts
+RANGE {"path":"packages/app/e2e/agent-bottom-anchor.spec.ts","old_lines":[17,46],"new_lines":[0,0],"diff_block_lines":[23,52],"hunk_header":"@@ -1,196 +0,0 @@","substantive_changed_lines":20}
+-
+-async function openWorkspaceAgentTab(page: Page, agentId: string) {
+-  const tab = page.getByTestId(`workspace-tab-agent_${agentId}`).first();
+-  await expect(tab).toBeVisible({ timeout: 30000 });
+-  const trigger = tab.getByRole("button").first();
+-  const clickableTarget = (await trigger.count()) > 0 ? trigger : tab;
+-  await clickableTarget.scrollIntoViewIfNeeded();
+-  await clickableTarget.click({ timeout: 5000 });
+-}
+-
+-function buildWorkspaceDraftUrl(workspaceUrl: string) {
+-  return `${workspaceUrl}?open=${encodeURIComponent("draft:new")}`;
+-}
+-
+-async function expectChatContainerKey(page: Page, expectedKey: string) {
+-  await expect
+-    .poll(async () => await getChatContainerKey(page))
+-    .toBe(expectedKey);
+-}
+-
+-test("direct load and refresh land at the bottom for history-backed chats", async ({
+-  page,
+-}) => {
+-  const repo = await createTempGitRepo("paseo-e2e-bottom-anchor-direct-");
+-  const client = await connectDaemonClient();
+-
+-  try {
+-    const agent = await seedBottomAnchorAgent({
+-      client,
+-      cwd: repo.path,

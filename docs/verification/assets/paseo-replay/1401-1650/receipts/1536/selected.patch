@@ -1,0 +1,13 @@
+FILE packages/desktop/src-tauri/src/runtime_manager.rs
+RANGE {"path":"packages/desktop/src-tauri/src/runtime_manager.rs","old_lines":[496,501],"new_lines":[496,503],"diff_block_lines":[5,15],"hunk_header":"@@ -496,6 +496,8 @@ fn default_managed_home() -> PathBuf {","substantive_changed_lines":6}
+@@ -496,6 +496,8 @@ fn default_managed_home() -> PathBuf {
+ 
+ #[cfg(not(target_os = "macos"))]
+-fn default_managed_home(root: &Path) -> PathBuf {
+-    root.join(DEFAULT_MANAGED_HOME_DIRNAME)
++fn default_managed_home() -> PathBuf {
++    dirs::home_dir()
++        .unwrap_or_else(|| PathBuf::from("/tmp"))
++        .join(DEFAULT_MANAGED_HOME_BASENAME)
+ }
+ 

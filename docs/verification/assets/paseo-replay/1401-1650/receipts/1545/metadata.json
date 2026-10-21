@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1545,
+  "revision": "91dde291467e05f768419edc45689724f0624d1d",
+  "date": "2026-03-12T10:25:53+07:00",
+  "committer_date": "2026-03-12T10:25:53+07:00",
+  "parents": [
+    "586b48e150490c64997b8962fbe3ba0f0efc67d3"
+  ],
+  "subject": "feat(server): bundle Codex and OpenCode binaries instead of requiring global installs",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/desktop/scripts/build-managed-runtime.mjs",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:9216c2d153f03388db785d6ada8f73f29e5383c57514361db13f5a15e11810d1",
+  "diff_tree_digest": "sha256:64ef3187c015d7afa84a54f6d9c5564e76ba0b6291e7eb4446c4203e467ca963",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        153,
+        156
+      ],
+      "new_lines": [
+        167,
+        193
+      ],
+      "diff_block_lines": [
+        38,
+        67
+      ],
+      "hunk_header": "@@ -151,11 +151,50 @@ function mergeCodexConfiguredDefaults(",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 367,
+  "receipt_file": "receipts/1545/selected.patch"
+}
