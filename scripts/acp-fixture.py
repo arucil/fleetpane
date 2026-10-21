@@ -10,6 +10,7 @@ import threading
 import time
 import uuid
 from pathlib import Path
+
 from fixture_files import publish_json
 from resource_fixture import blocks as resource_blocks
 
@@ -58,6 +59,8 @@ def metadata_inbox(path):
                     sessions[identity]["modes"]["currentModeId"] = patch[
                         "currentModeId"
                     ]
+                elif patch["sessionUpdate"] == "available_commands_update":
+                    sessions[identity]["availableCommands"] = patch["availableCommands"]
                 else:
                     assert patch["sessionUpdate"] == "session_info_update"
                     for key in ("title", "updatedAt", "_meta"):
@@ -338,13 +341,29 @@ def prompt(message):
         )
         return
     if text.startswith("[resource-") and text.endswith("]"):
-        case = text[len("[resource-"):-1]
-        update(identity, {"sessionUpdate": "tool_call", "toolCallId": "resource",
-                          "title": f"Resource {case}", "status": "pending", "rawInput": False})
-        update(identity, {"sessionUpdate": "tool_call_update", "toolCallId": "resource",
-                          "status": "completed", "content": [
-                              {"type": "content", "content": block}
-                              for block in resource_blocks(case)]})
+        case = text[len("[resource-") : -1]
+        update(
+            identity,
+            {
+                "sessionUpdate": "tool_call",
+                "toolCallId": "resource",
+                "title": f"Resource {case}",
+                "status": "pending",
+                "rawInput": False,
+            },
+        )
+        update(
+            identity,
+            {
+                "sessionUpdate": "tool_call_update",
+                "toolCallId": "resource",
+                "status": "completed",
+                "content": [
+                    {"type": "content", "content": block}
+                    for block in resource_blocks(case)
+                ],
+            },
+        )
         running.pop(identity)
         reply(message["id"], {"stopReason": "end_turn"})
         return

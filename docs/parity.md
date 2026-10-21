@@ -1,5 +1,11 @@
 # Functional parity with donut-paseo
 
+ACP advertised commands (2026-10-22): live exact-session command menus prepare
+ordinary drafts without sending. Idle/pending replacement, empty lists,
+archive/resume expiry, exact Copy, Chinese drafts, window replacement and
+900×560 have [local fixture evidence](verification/2026-10-22-acp-commands.md).
+Installed-provider advertisement, Codex command discovery and IME remain open.
+
 Updated 2026-10-21. The user's target is donut-paseo's useful workflow completeness,
 with selective adoption rather than an identical port. OpenCodex and DeepSeek
 Harness are the current provider scope; Kimi and GLM are excluded. Other providers

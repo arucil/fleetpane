@@ -1,4 +1,5 @@
 mod attention;
+mod commands;
 mod completion;
 mod continuation;
 mod directory_source;
@@ -2771,6 +2772,7 @@ impl Render for HostView {
                             .when(!has_question, |region| region.child(
                                 div().px_4().py(if compact {px(4.)} else {px(16.)}).flex().flex_col().gap_2()
                                     .child(self.render_draft(cx))
+                                    .child(self.render_commands(cx))
                                     .when(!compact || self.compact_details, |pane| pane.child(self.render_options(cx)))
                                     .when(!compact || self.compact_details || !self.draft_images().is_empty() || self.draft.images_error.is_some(), |pane| pane.child(self.render_images(blocked, cx)))
                                     .when(active_turn && self.is_acp() && !cancel_requested, |pane| pane.child(

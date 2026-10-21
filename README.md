@@ -1140,3 +1140,10 @@ only; each Host has independent Load more controls in its summary, and unavailab
 rows say Last observed. Filtering, sorting and opening never resume or send.
 
 Turn headers offer **Copy loaded answer** for assistant text currently loaded in that turn. Earlier pages are never fetched by Copy; the notice reports copied bytes and excluded non-text blocks. [Verification and scope](docs/verification/2026-10-22-turn-answer-copy.md).
+
+ACP sessions can advertise a **Commands** menu in the scrollable session options
+region. Selection fills an empty draft or replaces a slash prefix; **Send** runs
+the ordinary prompt. Existing arguments/prose stay intact. **Copy commands**
+preserves the complete current list. Unavailable and explicitly empty lists are
+distinct; a restarted/resumed provider must advertise again.
+[Verification and limits](docs/verification/2026-10-22-acp-commands.md).

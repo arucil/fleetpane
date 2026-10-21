@@ -202,6 +202,7 @@ mod tests {
             "s".into(),
             Session {
                 modes: None,
+                commands: None,
                 mode_update_version: 0,
                 summary: Summary {
                     session_id: "s".into(),

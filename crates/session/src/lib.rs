@@ -6,7 +6,6 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::BTreeMap;
 
-pub mod turn_output;
 #[cfg(unix)]
 pub mod client;
 #[cfg(unix)]
@@ -17,6 +16,7 @@ pub mod acp;
 pub mod appearance;
 #[cfg(unix)]
 pub mod attention;
+pub mod commands;
 pub mod content;
 #[cfg(unix)]
 pub mod creations;
@@ -43,6 +43,7 @@ pub mod routing;
 mod session_settings;
 #[cfg(unix)]
 pub mod session_tree;
+pub mod turn_output;
 #[cfg(unix)]
 pub mod wait;
 #[cfg(unix)]
@@ -75,6 +76,9 @@ pub struct Thread {
     #[serde(default)]
     pub config_options: Vec<acp::ConfigOption>,
     pub acp_modes: Option<fleetpane_runtime::acp::modes::State>,
+    /// Live ACP advertisement; None differs from an explicitly empty command list.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub acp_commands: Option<Vec<fleetpane_runtime::acp::commands::Command>>,
     /// ACP metadata uses provider timestamp strings, never Codex epoch units.
     pub acp_session_info: Option<fleetpane_runtime::acp::SessionInfo>,
     pub status: ThreadStatus,
@@ -172,6 +176,9 @@ impl Thread {
         if let Some(modes) = &self.acp_modes {
             modes.validate().map_err(Error::Projection)?;
         }
+        if let Some(commands) = &self.acp_commands {
+            fleetpane_runtime::acp::commands::validate(commands).map_err(Error::Projection)?;
+        }
         if self
             .turns
             .iter()
@@ -205,6 +212,7 @@ impl Thread {
                 | "thread/acpSessionInfo/updated"
                 | "thread/config/updated"
                 | "thread/acpModes/updated"
+                | "thread/acpCommands/updated"
                 | "thread/settings/updated"
                 | "turn/started"
                 | "turn/completed"
@@ -227,6 +235,10 @@ impl Thread {
             return Ok(false);
         }
         match envelope.method.as_str() {
+            "thread/acpCommands/updated" => {
+                self.apply_acp_commands(&params)?;
+                return Ok(true);
+            }
             "thread/settings/updated" => self.apply_session_settings(&params)?,
             method if reasoning::is_delta(method) => reasoning::apply(self, method, params)?,
             "thread/acpSessionInfo/updated" => {

@@ -6,6 +6,7 @@ use uuid::Uuid;
 
 #[cfg(unix)]
 pub(crate) mod archive;
+pub mod commands;
 mod history;
 pub mod modes;
 pub mod tool_calls;
@@ -56,6 +57,9 @@ struct Session {
     config: Vec<Value>,
     #[serde(default)]
     modes: Option<modes::State>,
+    /// Advertised availability is ephemeral and must be refreshed after resume.
+    #[serde(skip)]
+    commands: Option<Vec<commands::Command>>,
     #[serde(skip)]
     mode_update_version: u64,
     turns: Vec<Value>,
@@ -79,7 +83,7 @@ impl Session {
     fn thread(&self, include_turns: bool) -> Value {
         json!({"id":self.summary.session_id,"cwd":self.summary.cwd,"name":self.summary.title,
             "acpSessionInfo":self.summary.info,
-            "preview":"DeepSeek Harness", "historyMode":"acp-observed", "historyPaging":true, "configOptions":self.config, "acpModes":self.modes,
+            "preview":"DeepSeek Harness", "historyMode":"acp-observed", "historyPaging":true, "configOptions":self.config, "acpModes":self.modes, "acpCommands":self.commands,
             "status":{"type":if !self.resident {"archived"} else if self.active.is_some() {"active"} else {"idle"},"cancelRequested":self.cancelling},
             "turns":if include_turns {self.turns.clone()} else {vec![]}})
     }
@@ -692,6 +696,7 @@ impl Adapter {
                     summary: summary.clone(),
                     config: config(result)?,
                     modes: modes::parse(result)?,
+                    commands: None,
                     mode_update_version: 0,
                     turns: vec![],
                     active: None,
@@ -726,6 +731,7 @@ impl Adapter {
                     summary,
                     config: config(result)?,
                     modes: modes::parse(result)?,
+                    commands: None,
                     mode_update_version: 0,
                     turns,
                     active: None,
@@ -873,13 +879,24 @@ impl Adapter {
         let id = string(params, "sessionId")?;
         let session = self
             .sessions
-            .get_mut(id)
+            .get(id)
             .ok_or("ACP update targets an unowned session")?;
         if !session.resident {
             return Err("ACP update targets an inactive archived session".into());
         }
         let update = params.get("update").ok_or("ACP update lacks payload")?;
         let kind = string(update, "sessionUpdate")?;
+        if kind == "available_commands_update" {
+            let commands = commands::parse(update)?;
+            self.validate_with_commands(Some((id, &commands)))?;
+            batch.events.push(notification(
+                "thread/acpCommands/updated",
+                json!({"threadId":id,"commands":commands}),
+            ));
+            self.sessions.get_mut(id).expect("owned session").commands = Some(commands);
+            return Ok(());
+        }
+        let session = self.sessions.get_mut(id).expect("owned session");
         if kind == "session_info_update" {
             // Validate the whole patch before changing either metadata index.
             let mut summary = session.summary.clone();
@@ -1064,6 +1081,14 @@ impl Adapter {
     }
 
     fn validate(&self) -> Result<(), String> {
+        self.validate_with_commands(None)
+    }
+
+    /// Include ephemeral commands in retention limits and check replacements before mutation.
+    fn validate_with_commands(
+        &self,
+        replacement: Option<(&str, &[commands::Command])>,
+    ) -> Result<(), String> {
         if self.sessions.len() > 64
             || self.summaries.len() > 5000
             || self.pending.len() > 160
@@ -1072,13 +1097,24 @@ impl Adapter {
             return Err("ACP adapter capacity exceeded".into());
         }
         let mut bytes = 0;
-        for session in self.sessions.values() {
+        for (id, session) in &self.sessions {
             if let Some(modes) = &session.modes {
                 modes.validate()?;
             }
-            let size = serde_json::to_vec(session)
+            let mut size = serde_json::to_vec(session)
                 .map_err(|e| e.to_string())?
                 .len();
+            let commands = replacement
+                .filter(|(target, _)| *target == id)
+                .map(|(_, commands)| commands)
+                .or(session.commands.as_deref());
+            if let Some(commands) = commands {
+                commands::validate(commands)?;
+                size += b",\"commands\":".len()
+                    + serde_json::to_vec(commands)
+                        .map_err(|e| e.to_string())?
+                        .len();
+            }
             bytes += size;
             if size > 2 * 1024 * 1024
                 || session.turns.len() > 500
@@ -1169,6 +1205,285 @@ mod tests {
     }
     fn update(adapter: &mut Adapter, value: Value) -> Batch {
         adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":value}})).unwrap()
+    }
+
+    #[test]
+    fn advertised_commands_are_valid_idle_metadata() {
+        let mut adapter = setup();
+        let commands = json!([{"name":"web","description":"Search","input":{"hint":"query"}}]);
+        let batch = update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":commands}),
+        );
+        assert!(batch.wire.is_empty());
+        assert_eq!(batch.events.len(), 1);
+        assert_eq!(batch.events[0]["method"], "thread/acpCommands/updated");
+        assert_eq!(
+            batch.events[0]["params"],
+            json!({"threadId":"s","commands":commands})
+        );
+        assert_eq!(adapter.sessions["s"].thread(false)["acpCommands"], commands);
+        assert!(adapter.sessions["s"].turns.is_empty());
+        #[cfg(unix)]
+        assert!(batch.archive.is_empty());
+    }
+
+    #[test]
+    fn advertised_commands_replace_clear_and_project_exact_metadata() {
+        let mut adapter = setup();
+        assert!(adapter.sessions["s"].commands.is_none());
+        let commands = json!([{"name":"Web:查/找","description":"  Search\n", "input":{"hint":" query 中文 ","vendorInput":[false,null],"_meta":{"x":1}},"_meta":{"opaque":[1,true,null]},"future":{"retained":true}}]);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":commands}),
+        );
+        let read = adapter
+            .dispatch("read".into(), "thread/read", json!({"threadId":"s"}))
+            .unwrap();
+        assert_eq!(read.events[0]["result"]["thread"]["acpCommands"], commands);
+        let list = adapter
+            .dispatch("list".into(), "thread/list", json!({}))
+            .unwrap();
+        let listed = adapter
+            .receive(json!({"jsonrpc":"2.0","id":list.wire[0]["id"],"result":{"sessions":[]}}))
+            .unwrap();
+        assert_eq!(
+            listed.events[0]["result"]["data"][0]["acpCommands"],
+            commands
+        );
+        let replacement = json!([{"name":"test","description":"Test"}]);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":replacement}),
+        );
+        assert_eq!(
+            adapter.sessions["s"].thread(true)["acpCommands"],
+            replacement
+        );
+        let clear = update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":[]}),
+        );
+        assert_eq!(clear.events[0]["params"]["commands"], json!([]));
+        assert_eq!(adapter.sessions["s"].commands, Some(vec![]));
+        assert_eq!(adapter.sessions["s"].thread(true)["acpCommands"], json!([]));
+        assert!(adapter.sessions["s"].turns.is_empty());
+    }
+
+    #[test]
+    fn invalid_advertised_commands_retain_the_previous_complete_list() {
+        let mut adapter = setup();
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":[{"name":"original","description":"Keep"}]}),
+        );
+        let before = adapter.sessions["s"].thread(true);
+        let too_many: Vec<_> = (0..129)
+            .map(|i| json!({"name":format!("c{i}"),"description":""}))
+            .collect();
+        for commands in [
+            json!(null),
+            json!({}),
+            json!([{"name":"new","description":"valid"},{"name":"new","description":"duplicate"}]),
+            json!([{"name":"new","description":"valid"},{"name":"/invalid","description":"bad"}]),
+            json!([{"name":"new","description":"valid"},{"name":"invalid name","description":"bad"}]),
+            json!([{"name":"new","description":"valid"},{"name":"bad","description":"d","input":{"hint":3}}]),
+            json!([{"name":"new","description":"valid","future":{"huge":"x".repeat(65536)}}]),
+            json!(too_many),
+        ] {
+            assert!(adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"available_commands_update","availableCommands":commands}}})).is_err());
+            assert_eq!(adapter.sessions["s"].thread(true), before);
+            #[cfg(unix)]
+            assert!(adapter.dirty.is_empty());
+        }
+        assert!(adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"available_commands_update"}}})).is_err());
+        assert_eq!(adapter.sessions["s"].thread(true), before);
+    }
+
+    #[test]
+    fn advertised_commands_during_pending_prompt_preserve_history_and_permissions() {
+        let mut adapter = setup();
+        let prompt = start(&mut adapter);
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"before "}}),
+        );
+        adapter.receive(json!({"jsonrpc":"2.0","id":71,"method":"session/request_permission","params":{"sessionId":"s","options":[{"optionId":"yes","name":"Allow","kind":"allow_once"}]}})).unwrap();
+        let before = adapter.sessions["s"].thread(true);
+        let segment = adapter.sessions["s"].anonymous_stream.clone();
+        let permissions = adapter.permissions.clone();
+        let batch = update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":[{"name":"test","description":"Run tests"}]}),
+        );
+        assert!(batch.wire.is_empty());
+        assert_eq!(batch.events.len(), 1);
+        assert_eq!(batch.events[0]["method"], "thread/acpCommands/updated");
+        assert_eq!(adapter.sessions["s"].thread(true)["turns"], before["turns"]);
+        assert_eq!(
+            adapter.sessions["s"].thread(true)["status"],
+            before["status"]
+        );
+        assert_eq!(adapter.sessions["s"].anonymous_stream, segment);
+        assert_eq!(adapter.permissions, permissions);
+        assert!(adapter.pending.contains_key(prompt.as_str().unwrap()));
+        #[cfg(unix)]
+        assert!(batch.archive.is_empty());
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"agent_message_chunk","content":{"type":"text","text":"after"}}),
+        );
+        let items = adapter.sessions["s"].turns[0]["items"].as_array().unwrap();
+        assert_eq!(items.len(), 2);
+        assert_eq!(items[1]["content"][0]["text"], "before after");
+    }
+
+    #[test]
+    fn advertised_commands_require_an_owned_resident_target_and_stay_scoped() {
+        let mut adapter = setup();
+        let create = adapter
+            .dispatch("other".into(), "thread/start", json!({"cwd":cwd()}))
+            .unwrap();
+        adapter
+            .receive(
+                json!({"jsonrpc":"2.0","id":create.wire[0]["id"],"result":{"sessionId":"other"}}),
+            )
+            .unwrap();
+        let other = adapter.sessions["other"].thread(true);
+        let mut summary = adapter.summaries["s"].clone();
+        summary.session_id = "listed-only".into();
+        adapter.summaries.insert("listed-only".into(), summary);
+        let before = adapter.sessions["s"].thread(true);
+        for id in ["unknown", "listed-only"] {
+            let error = adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":id,"update":{"sessionUpdate":"available_commands_update","availableCommands":[]}}})).err().unwrap();
+            assert!(error.contains("unowned"), "{error}");
+            assert_eq!(adapter.sessions["s"].thread(true), before);
+        }
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":[]}),
+        );
+        assert_eq!(adapter.sessions["other"].thread(true), other);
+        adapter.sessions.get_mut("s").unwrap().resident = false;
+        let before = adapter.sessions["s"].thread(true);
+        let error = adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"available_commands_update","availableCommands":[]}}})).err().unwrap();
+        assert!(error.contains("archived"), "{error}");
+        assert_eq!(adapter.sessions["s"].thread(true), before);
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn advertised_commands_are_neither_archived_nor_restored_on_resume() {
+        let mut adapter = Adapter::default();
+        let create = adapter
+            .dispatch("create".into(), "thread/start", json!({"cwd":cwd()}))
+            .unwrap();
+        let created = adapter
+            .receive(json!({"jsonrpc":"2.0","id":create.wire[0]["id"],"result":{"sessionId":"s"}}))
+            .unwrap();
+        let first = created.archive;
+        assert_eq!(first.len(), 1);
+        assert!(adapter.sessions["s"].commands.is_none());
+        update(
+            &mut adapter,
+            json!({"sessionUpdate":"available_commands_update","availableCommands":[{"name":"web","description":"Search"}]}),
+        );
+        let metadata = update(
+            &mut adapter,
+            json!({"sessionUpdate":"session_info_update","title":"Archive next"}),
+        );
+        assert_eq!(metadata.archive.len(), 1);
+        assert!(
+            !metadata.archive[0]
+                .data
+                .as_object()
+                .unwrap()
+                .contains_key("commands")
+        );
+        assert!(
+            !serde_json::to_value(&adapter.sessions["s"])
+                .unwrap()
+                .as_object()
+                .unwrap()
+                .contains_key("commands")
+        );
+        let mut restored = Adapter::restore(metadata.archive).unwrap();
+        assert!(!restored.sessions["s"].resident);
+        assert!(restored.sessions["s"].commands.is_none());
+        let read = restored
+            .dispatch("read".into(), "thread/read", json!({"threadId":"s"}))
+            .unwrap();
+        assert!(read.events[0]["result"]["thread"]["acpCommands"].is_null());
+        let resume = restored
+            .dispatch("resume".into(), "thread/resume", json!({"threadId":"s"}))
+            .unwrap();
+        restored
+            .receive(json!({"jsonrpc":"2.0","id":resume.wire[0]["id"],"result":{}}))
+            .unwrap();
+        assert!(restored.sessions["s"].commands.is_none());
+        assert!(
+            Adapter::restore(first).unwrap().sessions["s"]
+                .commands
+                .is_none()
+        );
+    }
+
+    #[test]
+    fn advertised_command_text_uses_the_regular_prompt_without_overrides() {
+        let mut adapter = setup();
+        let batch = adapter
+            .dispatch(
+                "send".into(),
+                "turn/start",
+                json!({"threadId":"s","input":[{"type":"text","text":"/web  exact 中文 query"}]}),
+            )
+            .unwrap();
+        assert_eq!(batch.wire[0]["method"], "session/prompt");
+        assert_eq!(
+            batch.wire[0]["params"]["prompt"],
+            json!([{"type":"text","text":"/web  exact 中文 query"}])
+        );
+        assert!(batch.wire[0]["params"].get("model").is_none());
+    }
+
+    #[test]
+    fn advertised_commands_respect_total_session_and_adapter_limits_before_mutation() {
+        fn padded_session(mut session: Session, target: usize) -> Session {
+            session.config = vec![json!({"padding":""})];
+            let overhead = serde_json::to_vec(&session).unwrap().len();
+            session.config[0]["padding"] = json!("x".repeat(target - overhead));
+            assert_eq!(serde_json::to_vec(&session).unwrap().len(), target);
+            session
+        }
+        let mut adapter = setup();
+        let session = padded_session(adapter.sessions["s"].clone(), 2 * 1024 * 1024 - 64);
+        adapter.sessions.insert("s".into(), session);
+        adapter.validate().unwrap();
+        let error = adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"available_commands_update","availableCommands":[{"name":"web","description":"d".repeat(128)}]}}})).err().unwrap();
+        assert!(error.contains("2 MiB"), "{error}");
+        assert!(adapter.sessions["s"].commands.is_none());
+        adapter.validate().unwrap();
+
+        let prototype = adapter.sessions["s"].clone();
+        for i in 0..4 {
+            let id = format!("other-{i}");
+            let mut session = prototype.clone();
+            session.summary.session_id = id.clone();
+            adapter
+                .sessions
+                .insert(id, padded_session(session, 1600 * 1024));
+        }
+        // Leave less adapter headroom than a valid command advertisement needs.
+        let summary_bytes = serde_json::to_vec(&adapter.summaries).unwrap().len();
+        let remaining = 8 * 1024 * 1024 - 64 - summary_bytes - 4 * 1600 * 1024;
+        adapter
+            .sessions
+            .insert("s".into(), padded_session(prototype, remaining));
+        adapter.validate().unwrap();
+        let error = adapter.receive(json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"available_commands_update","availableCommands":[{"name":"web","description":"d".repeat(128)}]}}})).err().unwrap();
+        assert!(error.contains("8 MiB"), "{error}");
+        assert!(adapter.sessions["s"].commands.is_none());
+        adapter.validate().unwrap();
     }
 
     #[test]
