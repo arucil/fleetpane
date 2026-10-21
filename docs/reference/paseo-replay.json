@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 550,
-    "last_revision": "7a024ce7fd0a4ade26b225fd94a3b1e1e61b190d",
-    "next_revision": "09d4acce4c27bd301e7f7a3b283441c1a48dc535",
-    "next_ordinal": 551
+    "last_ordinal": 560,
+    "last_revision": "914cebc914659b0306f9c7d70f1ba1ce97b083af",
+    "next_revision": "8add1a66205d496868ae28bea581ee6b807388d2",
+    "next_ordinal": 561
   },
   "entries": [
     {
@@ -7441,6 +7441,135 @@
       ],
       "finding": "Native Expo File API replaces deprecated base64 reader; debug logs expose image URI structures.",
       "fleetpane_action": "Expo-specific API not ported; retain private native file handling without payload logs."
+    },
+    {
+      "ordinal": 551,
+      "revision": "09d4acce4c27bd301e7f7a3b283441c1a48dc535",
+      "date": "2025-12-29T11:02:02+07:00",
+      "category": "provider-contract",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude message conversion replaces flatMap with an explicitly typed text/image accumulation loop.",
+      "fleetpane_action": "No additional provider adapter; preserve current structured Codex/ACP input."
+    },
+    {
+      "ordinal": 552,
+      "revision": "0cb8bbcf6223700ff73761ef853a0b38d8a34caa",
+      "date": "2025-12-29T11:24:15+07:00",
+      "category": "composer",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx",
+        "packages/app/src/hooks/use-dictation.ts"
+      ],
+      "finding": "Dictation appends into draft instead of auto-send/queue; recording timer no longer resets during processing; hidden native text sizing added.",
+      "fleetpane_action": "Voice remains PRD P2; do not make transcription an implicit send."
+    },
+    {
+      "ordinal": 553,
+      "revision": "15b62448cba75b2833f43ede589b59385c4ffa4a",
+      "date": "2025-12-29T11:51:12+07:00",
+      "category": "performance",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Removes hidden native sizer added in previous commit and measures web height specifically after dictation; input background becomes opaque.",
+      "fleetpane_action": "Retain bounded Kit textarea and validate native height separately from source claims."
+    },
+    {
+      "ordinal": 554,
+      "revision": "57a86d011a3a44dba1a3c6063f8671bdc4a22709",
+      "date": "2025-12-29T12:12:13+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/file-download/token-store.ts",
+        "packages/server/src/server/file-explorer/service.ts",
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "One-use UUID tokens expire on consume; file metadata is scoped to an agent cwd before issue; token response carries name/MIME/size/error.",
+      "fleetpane_action": "Local raw file export is missing; adopt explicit bounded copy rather than recreate HTTP tokens for local Hosts."
+    },
+    {
+      "ordinal": 555,
+      "revision": "63247f73b39057a51b54a39ea485321d949604de",
+      "date": "2026-01-01T13:07:51+07:00",
+      "category": "files",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/file-explorer.tsx"
+      ],
+      "finding": "Download action requests token then uses browser download or Expo download/share sheet; web failure is only console warning; selected preview/menu/download hunks reviewed.",
+      "fleetpane_action": "Expose local export errors visibly and preserve exact bytes, filenames and no-overwrite boundary; remote/share-sheet unsupported."
+    },
+    {
+      "ordinal": 556,
+      "revision": "0c4d1c3a58953bd7ba21c1be6bfdbc4832c5c3c8",
+      "date": "2026-01-01T15:43:06+07:00",
+      "category": "performance",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/types/stream.ts",
+        "packages/app/src/stores/session-store.ts",
+        "packages/app/src/types/stream-buffer.test.ts"
+      ],
+      "finding": "Assistant chunks accumulate separately from history; tool/timeline and terminal events flush buffer; no-op events preserve stream reference and completed buffer IDs deduplicate.",
+      "fleetpane_action": "Existing retained sparse row projection already targets affected cards; do not add another buffer or infer message IDs from content."
+    },
+    {
+      "ordinal": 557,
+      "revision": "b3a1729df271f8091d4d702526c9a408ca907a1c",
+      "date": "2026-01-01T16:55:58+07:00",
+      "category": "navigation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-list.tsx",
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Switching an agent route replaces rather than stacks; list extraData includes selection; verbose state logs require perf logging.",
+      "fleetpane_action": "Keep Host/thread-scoped retained views and explicit draft/navigation identity; no browser route stack to port."
+    },
+    {
+      "ordinal": 558,
+      "revision": "8023aed98b95a14c0080b90630743e24f1bdb9d4",
+      "date": "2026-01-01T21:26:05+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx",
+        "packages/app/src/components/message.tsx",
+        "packages/app/src/components/orchestrator-messages-view.tsx"
+      ],
+      "finding": "Removes per-message streaming dot animation and uses common working indicator; changes its padding.",
+      "fleetpane_action": "Keep actual observed turn activity independent of message rendering; no extra animated dots needed."
+    },
+    {
+      "ordinal": 559,
+      "revision": "e3d25dc38ebdbb319d768fba51e1a481efce994e",
+      "date": "2026-01-01T21:31:36+07:00",
+      "category": "presentation",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Corrects indicator left padding to account for list container padding.",
+      "fleetpane_action": "Native geometry already has separate compact-window acceptance; do not copy React spacing constants."
+    },
+    {
+      "ordinal": 560,
+      "revision": "914cebc914659b0306f9c7d70f1ba1ce97b083af",
+      "date": "2026-01-03T15:23:41+07:00",
+      "category": "composer",
+      "inspection": "selected-diff-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx",
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Extracted MessageInput adds autofocus and Ctrl/Cmd+Enter forceSend, Shift newline and normal Enter queue/send; reviewed submit and sizing hunks.",
+      "fleetpane_action": "Added platform shortcut to focused native composer with existing Send/Steer gates; retain multiline Enter and exact text, never force interruption."
     }
   ],
   "workflow_status": {
@@ -7478,7 +7607,9 @@
     "supplied-command-actions": "Covered shared/Linux native fixture workflows verified: ordered actions, 970-byte raw Copy, separate bounded read navigation, retained 37-byte draft/replacement and compact options/approval controls. No external-model or performance claim.",
     "creation-directory-validation": "Covered shared/CLI/Linux native synthetic workflows verified: Host-local bounded directory observation before fresh admission, exact cwd, saved operation dedup after removal, visible errors and recovery. Provider still handles changes after preflight.",
     "command-read-paths": "covered local engine/native fixture; command cwd resolves literal relative paths, absolute paths retained, original conversation identity and workspace confinement remain; 33-byte exact file and 43-byte retained draft, journal zero.",
-    "creation-preferences": "partial; Host choice, recents and per-session drafts persist; provider/model defaults for fresh creation not yet stored."
+    "creation-preferences": "partial; Host choice, recents and per-session drafts persist; provider/model defaults for fresh creation not yet stored.",
+    "composer-shortcut": "partial; focused native platform Enter invokes existing Send/Steer gates, exact Chinese multiline/rejection/draft/reopen verified with Linux synthetic Codex; IME/other platforms/ACP shortcut native limits retained",
+    "file-export": "missing; read-only preview/full text copy available; raw local copy next, remote HTTP download/share remains unsupported"
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
