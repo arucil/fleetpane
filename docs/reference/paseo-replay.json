@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 334,
-    "last_revision": "07cf1baa4fa5a34ac63af6c977a7ad0c323b0a86",
-    "next_revision": "978a544f19610549e99a11be3603da4d88d7e6af",
-    "next_ordinal": 335
+    "last_ordinal": 376,
+    "last_revision": "adc56da129c6aca9c8dfd2fb983146472b9af021",
+    "next_revision": "38a4c70aec2f0010dd9a457f4e7fb8cc18c62f59",
+    "next_ordinal": 377
   },
   "entries": [
     {
@@ -4741,6 +4741,522 @@
       ],
       "finding": "Historical Git diff Playwright success report, not a test run in this task.",
       "fleetpane_action": "user-deferred-git-diff"
+    },
+    {
+      "ordinal": 335,
+      "revision": "978a544f19610549e99a11be3603da4d88d7e6af",
+      "date": "2025-12-21T17:12:45Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan for caller-linked children, root directory filtering and explicit child navigation.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 336,
+      "revision": "a574429a7bd24351d3e1fb1b470998bb1ae7ba2f",
+      "date": "2025-12-21T17:15:29Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/messages.ts"
+      ],
+      "finding": "Parent identity added to managed/runtime/config and payload types.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 337,
+      "revision": "dd697defbb08e987846da300d608e7a95d9a9633",
+      "date": "2025-12-21T17:18:19Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/mcp-server.ts"
+      ],
+      "finding": "MCP create accepts parent and registration retains it.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 338,
+      "revision": "cb78f29b3103a085034ca8811c49d2b05cdbf066",
+      "date": "2025-12-21T17:21:11Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx",
+        "packages/app/src/stores/session-store.ts",
+        "packages/app/src/types/agent-directory.ts"
+      ],
+      "finding": "Client normalization, directory and store retain parent identity.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 339,
+      "revision": "11afd22858e9588682e6f027bbf2ae2e39db605f",
+      "date": "2025-12-21T17:22:42Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-aggregated-agents.ts"
+      ],
+      "finding": "Homepage hides known children; does not resolve orphans or old nested ancestry.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 340,
+      "revision": "cdc17006daeed5662f628866262b72592e600b7c",
+      "date": "2025-12-21T17:25:02Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Parent menu derives children and opens exact server/agent route.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 341,
+      "revision": "99338d3b346c30f9859dd4d8cad58c3317d5fba4",
+      "date": "2025-12-21T17:30:34Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Shallow subscription attempts to stabilize allocated child objects.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 342,
+      "revision": "b2850aea23eefb6d5dac73fc22e29c67418a2bf7",
+      "date": "2025-12-21T17:36:58Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts",
+        "packages/server/src/server/agent/agent-sdk-types.ts",
+        "packages/server/src/server/agent/mcp-server.ts",
+        "packages/server/src/server/agent/providers/claude-agent.ts",
+        "packages/server/src/server/agent/providers/codex-agent.ts",
+        "packages/server/src/server/index.ts"
+      ],
+      "finding": "Per MCP transport caller ID from header, Claude session header injection; Codex setter explicitly no-op.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 343,
+      "revision": "2d147f9a9349e906cae9c17dcf1dbff2e6188423",
+      "date": "2025-12-21T17:45:25Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical partial test report finds omitted top-level storage identity.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 344,
+      "revision": "2e8444eaac6997906b1e26fa76f532164f82fd55",
+      "date": "2025-12-21T17:47:31Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-projections.ts",
+        "packages/server/src/server/agent/agent-registry.ts"
+      ],
+      "finding": "Stored record schema and projection retain parent.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 345,
+      "revision": "ba26f243b54ac5cc64aa3c45f30cb1c7c5bb4c97",
+      "date": "2025-12-21T17:55:48Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical partial test report includes stale storage and UI subscription errors.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 346,
+      "revision": "6cb0322dd7ee41673a06a4543568fd11d7b28bf9",
+      "date": "2025-12-21T18:03:53Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical report attributes storage failure to stale pre-fix records.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 347,
+      "revision": "c7294753ecb9b70c6df17b07bfdf9ea0a54cc67f",
+      "date": "2025-12-21T18:05:46Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Subscribe to stable Map and derive children separately; replaces insufficient shallow comparison.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 348,
+      "revision": "d3823a4dbdebc9f329cacd4d8e4b601ab7601d90",
+      "date": "2025-12-21T18:10:35Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical report records unresolved legacy ancestry and orphan handling.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 349,
+      "revision": "7f1a0cccf6f40103981e501941c5fb81a382eb64",
+      "date": "2025-12-21T18:13:36Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Plan for mobile tool detail sheet, scroll and structured arguments/results.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 350,
+      "revision": "676125a732ec1156981d7dbeee379aead7bc7129",
+      "date": "2025-12-21T18:18:10Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "finding": "New sheet/context handles structured tool args/results/errors, command, supplied edits and file content.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 351,
+      "revision": "09b7360a7ea75d29e83ff0b3475602662de98dba",
+      "date": "2025-12-21T18:22:29Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/message.tsx"
+      ],
+      "finding": "Tool cards trigger detail sheet; inline detail code removed. Selected added/relevant removed hunks reviewed.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 352,
+      "revision": "a8053bc0b595efabeeee28e94ced31afcb0d2915",
+      "date": "2025-12-21T18:24:07Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/agent-stream-view.tsx"
+      ],
+      "finding": "Agent stream scopes the tool sheet provider.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 353,
+      "revision": "5f429ad91d9fb0cecc348d16b925bd18ac6e2154",
+      "date": "2025-12-21T18:27:21Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical mobile detail test report; not executed here.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 354,
+      "revision": "0e7c90a1c0d843e4b0dd5164830140637ec47f0e",
+      "date": "2025-12-21T18:29:12Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical re-audit asserts sheet coverage; not current acceptance.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 355,
+      "revision": "4927e2b04e725364380a9f5e87c290fd50628a76",
+      "date": "2025-12-21T18:34:12Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical review identifies orchestrator tools outside required context.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 356,
+      "revision": "253af9988cb8588bbb8a7e535470637af562fa01",
+      "date": "2025-12-21T18:36:11Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/orchestrator-messages-view.tsx"
+      ],
+      "finding": "Orchestrator wraps its tools in the sheet provider.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 357,
+      "revision": "79d9ff68875b1ab61cc905a9044331fb413e61cf",
+      "date": "2025-12-21T18:40:00Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical test says pass but explicitly could not click actual orchestrator tools; acceptance remains partial.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 358,
+      "revision": "dd81774d841ec45da5ddc967e68131267fb52f21",
+      "date": "2025-12-21T18:44:10Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical re-review adds still-pending real orchestrator content test.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 359,
+      "revision": "22cb6dcecde52dc5ee78e8eca0975ef5f06a9c39",
+      "date": "2025-12-22T00:59:22Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Claude model report and pending shared workflow verification checklist.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 360,
+      "revision": "8c9d55414e93c3c30ae8873d760e80f91039854c",
+      "date": "2025-12-22T01:01:53Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Codex model report; individual model inference unverified here.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 361,
+      "revision": "a488349a31737f57182d86f803f86e300c7bd4de",
+      "date": "2025-12-22T01:04:48Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical root-only directory test report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 362,
+      "revision": "b13bd2c924521bc9bc73c43aec90ad2039d31861",
+      "date": "2025-12-22T01:06:34Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical child menu navigation test report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 363,
+      "revision": "3f0a08ad50dc63ba9dd06fb229eab986a873c890",
+      "date": "2025-12-22T01:08:16Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical failed back-navigation report; menu/router race is only a hypothesis in this report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 364,
+      "revision": "7d233777dbff022a942dd3a56306ecbf23ff6658",
+      "date": "2025-12-22T01:10:22Z",
+      "category": "session-hierarchy",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/app/agent/[serverId]/[agentId].tsx"
+      ],
+      "finding": "Actual fix reads parent ID for explicit back target; root falls back home.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 365,
+      "revision": "a8212e26c17d7cbd90fd57065295d317e2a0771a",
+      "date": "2025-12-22T01:11:53Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical successful back-navigation retest.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 366,
+      "revision": "a89b638ff305013b84dd012d06c3de07745d5423",
+      "date": "2025-12-22T01:14:47Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical mobile tool sheet report, not a Fleetpane native test.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 367,
+      "revision": "aaaca15267b93b6a68a0dd234a85454725184f5d",
+      "date": "2025-12-22T01:16:41Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical Git diff report; extension remains user-deferred.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 368,
+      "revision": "f826fb6965aa4ec1d548dde5f53b94be075ad6c3",
+      "date": "2025-12-22T01:17:30Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical all-pass checklist is not acceptance of later or current visuals.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 369,
+      "revision": "7f3ba3f5ce2da3426372e0522d4bf37fcda928b0",
+      "date": "2025-12-22T03:34:05Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Later visual test contradicts prior coverage: tool result unreadable; reported cause remains tentative.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 370,
+      "revision": "56a287a85db9e805f7e95beab9d1f0872a77a1a9",
+      "date": "2025-12-22T03:37:17Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "finding": "Replace gesture-handler scroll view and set tool-content backgrounds.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 371,
+      "revision": "bd3cfff30eeab5e8622e8825ef57381ea6dc97bf",
+      "date": "2025-12-22T03:39:42Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical readability retest report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 372,
+      "revision": "b601d96c236b834b32e2d8af7e5befc2b0d7fe00",
+      "date": "2025-12-22T03:54:49Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical dark-background pass is later explicitly contradicted.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 373,
+      "revision": "070314fa5f278a39f37b5a526a876f000df20eea",
+      "date": "2025-12-22T04:05:19Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "finding": "Actual card backgrounds applied to modal, container and content.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 374,
+      "revision": "b4be45e1ab44a75254fd232f7ecaaee71de0441e",
+      "date": "2025-12-22T04:06:56Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical corrected dark-background retest report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 375,
+      "revision": "825154f35a60dae7506dd9ca99c638c941bf8350",
+      "date": "2025-12-22T04:21:58Z",
+      "category": "tool-details",
+      "inspection": "selected-source-hunks",
+      "paths_inspected": [
+        "packages/app/src/components/tool-call-sheet.tsx"
+      ],
+      "finding": "Handle color and horizontal/vertical padding refined.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
+    },
+    {
+      "ordinal": 376,
+      "revision": "adc56da129c6aca9c8dfd2fb983146472b9af021",
+      "date": "2025-12-22T04:34:58Z",
+      "category": "documentation",
+      "inspection": "historical-report-or-plan-diff",
+      "paths_inspected": [
+        "plan.md"
+      ],
+      "finding": "Historical padding/handle retest report.",
+      "fleetpane_action": "explicit-revalidated-tree-history-navigation; preserve native tool cards; MCP agent spawning, root-only directories and provider orchestration remain separate"
     }
   ],
   "workflow_status": {
@@ -4770,7 +5286,8 @@
     "loaded-activity-order": "partial; shared loaded-row projection, exact provider time semantics, stale-last ordering and Linux native source/paging/draft/replacement verified locally. Full-index/realtime activity, keyboard directory navigation and accessibility remain open.",
     "tool-failure-presentation": "partial; known ACP failed status now uses the same native danger presentation as Codex/MCP; pre-fix regression, 224-byte exact source Copy and retained 51-byte draft/replacement verified locally with owned ACP fixture. Unknown status/output remains preserved. No external-model or non-Linux native acceptance.",
     "first-start-local-state": "covered local Linux workflow verified: missing controller/preference ancestors created 0700 with 0600 database; existing parents unchanged and invalid leaf/ancestor refused. Fresh native theme save/reopen and exact draft retained; non-Linux native acceptance open.",
-    "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim."
+    "sparse-conversation-projection": "verified locally for covered desktop fixtures; accepted item events project each exact changed target once per poll, retain unrelated cards and drafts, and match full projection. Structural/unknown events, pages and reloads retain full reconciliation. 32 desktop tests, native reasoning/tool Copy, expansion and replacement covered. No latency, whole-app memory or concurrency claim.",
+    "session-tree-navigation": "partial; exact revalidated history node/source navigation with Host/ancestry/session/cwd/archive checks, independent drafts, archived read-only content, visible refusal and unchanged pending approval verified in Linux native fixture; one window-local return source, no ancestry creation/MCP orchestration, atomic provider snapshot or ACP hierarchy claim"
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",

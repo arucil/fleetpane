@@ -89,6 +89,54 @@ fn parent_edges_include_archived_and_loaded_children_but_not_forks() {
 }
 
 #[test]
+fn navigation_targets_pin_host_ancestry_membership_and_workspace_but_allow_activity_changes() {
+    let mut idx = index(vec![
+        metadata("root", None),
+        metadata("child", Some("root")),
+    ]);
+    idx.get_mut("child").unwrap().1 = Some(true);
+    let mut view = project(&idx, &BTreeSet::new(), &state(), "root", 0).unwrap();
+    let target = view.target("child").unwrap();
+    assert!(target.archived);
+    assert_eq!(target.parent_thread_id.as_deref(), Some("root"));
+    assert_eq!(target.session_id, "tree");
+    assert_eq!(target.cwd, "/tmp");
+    assert!(view.target("outside").is_err());
+    view.rows[1].metadata.name = Some("new display name".into());
+    view.rows[1].pending_requests = 2;
+    view.rows[1].metadata.status.kind = "active".into();
+    assert!(target.validate(&view).is_ok());
+    for fault in [
+        "host",
+        "root",
+        "parent",
+        "membership",
+        "unknown",
+        "session",
+        "cwd",
+        "removed",
+    ] {
+        let mut changed = view.clone();
+        match fault {
+            "host" => changed.host_id = Uuid::new_v4(),
+            "root" => changed.root_id = "another-tree".into(),
+            "parent" => changed.rows[1].metadata.parent_thread_id = Some("other".into()),
+            "membership" => changed.rows[1].archived = Some(false),
+            "unknown" => changed.rows[1].archived = None,
+            "session" => changed.rows[1].metadata.session_id = "other".into(),
+            "cwd" => changed.rows[1].metadata.cwd = "/elsewhere".into(),
+            "removed" => {
+                changed.rows.pop();
+            }
+            _ => unreachable!(),
+        }
+        assert!(target.validate(&changed).is_err(), "{fault}");
+    }
+    view.rows[1].archived = None;
+    assert!(view.target("child").is_err());
+}
+
+#[test]
 fn incomplete_parent_chain_is_visible_and_cycles_or_inconsistent_session_ids_fail() {
     let mut idx = index(vec![
         metadata("root", None),

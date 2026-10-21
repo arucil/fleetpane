@@ -9,6 +9,13 @@ use gpui_kit::{prelude::*, *};
 use std::path::PathBuf;
 use uuid::Uuid;
 
+#[derive(Clone)]
+pub struct OpenSession {
+    pub target: session_tree::Target,
+    pub return_to: session_tree::Target,
+}
+impl EventEmitter<OpenSession> for SessionTreeView {}
+
 pub struct SessionTreeView {
     socket: PathBuf,
     host_id: Uuid,
@@ -86,16 +93,24 @@ impl Render for SessionTreeView {
                 let count=view.rows.len();
                 pane.child(format!("{} nodes · {} scanned · {} other loaded · {} unassigned requests · {} mutations in flight · {} unknown operations · sequence {}–{}",count,view.scanned_nodes,view.other_loaded_contexts,view.unassigned_requests,view.in_flight_mutations,view.unknown_operations,view.sequence_before,view.sequence_after))
                     .when(!view.unresolved_same_session.is_empty(),|pane|pane.child(div().text_color(cx.theme().danger).child(format!("Incomplete parent chains: {} related sessions; copy JSON for identities.",view.unresolved_same_session.len()))))
-                    .child(uniform_list("session-tree-nodes",count,cx.processor(|this,range:std::ops::Range<usize>,_,_cx| {
+                    .child(uniform_list("session-tree-nodes",count,cx.processor(|this,range:std::ops::Range<usize>,_,cx| {
                         let Some(view)=&this.view else{return Vec::new();};
                         range.map(|n| {
-                            let row=&view.rows[n];let id=row.metadata.id.clone();
+                            let row=&view.rows[n];let id=row.metadata.id.clone();let opening_id=id.clone();
                             let membership=match row.archived {Some(true)=>"archived",Some(false)=>"history",None=>"outside history"};
                             div().h(px(64.)).w_full().min_w_0().flex().items_center().gap_2()
                                 .child(div().w(px((row.depth.min(8)*12) as f32)).flex_shrink_0())
                                 .child(div().flex_1().min_w_0().flex().flex_col()
                                     .child(div().truncate().child(format!("{} · {}",row.metadata.title(),row.metadata.id)))
                                     .child(div().truncate().child(format!("depth {} · {} · {} · {} · {} pending{}",row.depth,row.metadata.status.kind,membership,if row.loaded {"loaded"}else{"unloaded"},row.pending_requests,if row.active_turn.is_some(){" · observed turn active"}else{""}))))
+                                .child(Button::new(("open-tree-node",n)).small().label("Open session")
+                                    .disabled(this.busy || this.error.is_some() || row.archived.is_none() || view.target(&view.root_id).is_err())
+                                    .on_click(cx.listener(move|this,_,_,cx| {
+                                        if let Some(view)=&this.view {
+                                            let targets=view.target(&opening_id).and_then(|target|Ok(OpenSession{target,return_to:view.target(&view.root_id)?}));
+                                            match targets {Ok(event)=>cx.emit(event),Err(error)=>{this.error=Some(error.to_string());cx.notify();}}
+                                        }
+                                    })))
                                 .child(Button::new(SharedString::from(format!("copy-tree-{id}"))).small().ghost().label("Copy ID").on_click(move |_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(id.clone()))))
                         }).collect()
                     })).track_scroll(&self.scroll).w_full().flex_shrink_0().h(px((count.min(2)*64) as f32)))

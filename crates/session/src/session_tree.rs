@@ -115,6 +115,71 @@ pub struct View {
     pub unknown_operations: u64,
     pub warnings: Vec<String>,
 }
+
+/// Exact observed ancestry and archive membership for explicit history navigation.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Target {
+    pub host_id: Uuid,
+    pub root_id: String,
+    pub thread_id: String,
+    pub session_id: String,
+    pub cwd: String,
+    pub parent_thread_id: Option<String>,
+    pub archived: bool,
+}
+
+impl View {
+    pub fn target(&self, id: &str) -> Result<Target, Error> {
+        let row = self
+            .rows
+            .iter()
+            .find(|row| row.metadata.id == id)
+            .ok_or_else(|| {
+                Error::Input("Session is outside the observed tree; refresh before opening".into())
+            })?;
+        Ok(Target {
+            host_id: self.host_id,
+            root_id: self.root_id.clone(),
+            thread_id: id.to_owned(),
+            session_id: row.metadata.session_id.clone(),
+            cwd: row.metadata.cwd.clone(),
+            parent_thread_id: row.metadata.parent_thread_id.clone(),
+            archived: row.archived.ok_or_else(|| {
+                Error::Input(
+                    "Archive membership is unavailable for this node; copy its ID for inspection"
+                        .into(),
+                )
+            })?,
+        })
+    }
+}
+
+impl Target {
+    pub fn validate(&self, view: &View) -> Result<(), Error> {
+        if view.target(&self.thread_id)? != *self {
+            return Err(Error::Input("Session tree identity, ancestry or archive membership changed; refresh before opening".into()));
+        }
+        Ok(())
+    }
+
+    /// Re-observes the original tree without resuming a provider context.
+    pub async fn confirm(
+        &self,
+        socket: &Path,
+        source: Option<&Target>,
+    ) -> Result<crate::fleet_directory::Source, Error> {
+        let view = inspect(socket, self.host_id, &self.root_id).await?;
+        self.validate(&view)?;
+        if let Some(source) = source {
+            source.validate(&view)?;
+        }
+        Ok(crate::fleet_directory::Source {
+            host_id: self.host_id,
+            thread_id: self.thread_id.clone(),
+            archived: self.archived,
+        })
+    }
+}
 type Index = BTreeMap<String, (Metadata, Option<bool>)>;
 
 fn project(

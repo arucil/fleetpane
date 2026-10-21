@@ -9,6 +9,8 @@ impl HostView {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        self.tree_return = None;
+        self.tree_opening = None;
         self.directory_target = None;
         self.completion_target = None;
         self.attention_target = Some(item);

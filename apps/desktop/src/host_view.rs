@@ -12,6 +12,7 @@ mod row_changes;
 mod session_settings;
 mod stopping;
 mod tasks;
+mod tree_navigation;
 use crate::conversation_item::{ItemView, OpenFile, Row};
 use crate::question_view::{AnswerEvent, QuestionView};
 use fleetpane_runtime::Snapshot;
@@ -81,6 +82,9 @@ pub struct HostView {
     // Membership observed from provider directory; separate from loaded status.
     selected_archived: bool,
     session_tree: Option<Entity<crate::session_tree_view::SessionTreeView>>,
+    session_tree_subscription: Option<Subscription>,
+    tree_opening: Option<Uuid>,
+    tree_return: Option<fleetpane_session::session_tree::Target>,
     history: Option<History>,
     rows: Vec<Row>,
     row_index: BTreeMap<String, usize>,
@@ -90,6 +94,7 @@ pub struct HostView {
     file_subscriptions: BTreeMap<String, Subscription>,
     permission_file_subscription: Option<Subscription>,
     timeline: ListState,
+    interactions_scroll: ScrollHandle,
     directory_scroll: UniformListScrollHandle,
     workspace: Entity<InputState>,
     composer: Entity<TextareaState>,
@@ -299,6 +304,9 @@ impl HostView {
             thread: None,
             selected_archived: false,
             session_tree: None,
+            session_tree_subscription: None,
+            tree_opening: None,
+            tree_return: None,
             tasks: tasks::State::default(),
             history: None,
             rows: Vec::new(),
@@ -313,6 +321,7 @@ impl HostView {
             // measured row. Measure one viewport on either side as we scroll.
             timeline,
             directory_scroll: UniformListScrollHandle::new(),
+            interactions_scroll: ScrollHandle::new(),
             workspace,
             composer,
             draft: draft::State::new(draft_directory),
@@ -370,6 +379,9 @@ impl HostView {
             .is_some_and(|old| old.host_id != state.host_id)
         {
             self.session_tree = None;
+            self.session_tree_subscription = None;
+            self.tree_opening = None;
+            self.tree_return = None;
         }
         self.snapshot = Some(state);
     }
@@ -935,7 +947,13 @@ impl HostView {
                 }
                 self.rename_target = None;
                 if self.thread.as_ref().is_none_or(|old| old.id != thread.id) {
+                    self.interactions_scroll.set_offset(point(px(0.), px(0.)));
                     self.session_tree = None;
+                    self.session_tree_subscription = None;
+                    self.tree_opening = None;
+                    if !directory_open {
+                        self.tree_return = None;
+                    }
                 }
                 self.thread = Some(thread);
                 self.cursor = completed.sequence;
@@ -2319,13 +2337,7 @@ impl Render for HostView {
                                                     .small().ghost().label("Session tree")
                                                     .disabled(self.is_acp() || self.snapshot.is_none())
                                                     .on_click(cx.listener(move |this, _, window, cx| {
-                                                        if let (Some(state), Some(thread)) = (&this.snapshot, &this.thread) {
-                                                            let socket = this.socket.clone();
-                                                            let host = state.host_id;
-                                                            let root = thread.id.clone();
-                                                            this.session_tree = Some(cx.new(|cx| crate::session_tree_view::SessionTreeView::new(socket, host, root, window, cx)));
-                                                            cx.notify();
-                                                        }
+                                                        this.show_session_tree(window,cx);
                                                     })),
                                             ).child(
                                                 Button::new("reload-thread")
@@ -2349,6 +2361,7 @@ impl Render for HostView {
                                     ),
                             )
                             .child(self.reported_session_settings(cx))
+                            .child(self.tree_navigation_banner(cx))
                             .when(self.thread.is_some(), |pane| {
                                 pane.child(
                                     div()
@@ -2448,10 +2461,11 @@ impl Render for HostView {
                             .flex_shrink_0()
                             .max_h(relative(0.5))
                             .overflow_y_scroll()
+                            .track_scroll(&self.interactions_scroll)
                             .child(div().flex().flex_col().flex_shrink_0()
                             .when(self.session_tree.is_some(), |pane| pane.child(
                                 Button::new("close-session-tree").small().ghost().label("Close session tree")
-                                    .on_click(cx.listener(|this, _, _, cx| {this.session_tree = None;cx.notify();}))
+                                    .on_click(cx.listener(|this, _, _, cx| {this.session_tree = None;this.session_tree_subscription=None;this.tree_opening=None;cx.notify();}))
                             ))
                             .children(self.session_tree.clone())
                             .when(self.thread.is_some(), |view| view.child(self.render_tasks(cx)))

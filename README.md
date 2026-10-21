@@ -1058,7 +1058,12 @@ Inspection uses the existing controller lease without taking control. It reads
 normal/archived metadata and loaded contexts, includes spawned descendants and
 shows pending requests, observed activity and incomplete ancestry. Forks remain
 independent. Use Refresh tree, Copy tree JSON or Copy ID; switching conversation
-closes the inspector. Failures retain explicitly stale observations.
+closes the inspector. Failures retain explicitly stale observations. **Open session**
+rechecks the observed identity, ancestry and archive membership before opening
+history; **Back to source session** returns to the session whose tree was opened.
+Both preserve saved drafts and require explicit control. Unknown archive membership
+remains inspection-only; opening never resumes or restores a context. See
+[navigation evidence](docs/verification/2026-10-22-tree-navigation.md).
 
 Reads are bounded to 5,000 nodes, 8 MiB metadata, depth 64 and 30 seconds. The
 result is non-atomic and does not enumerate background resources or authorize

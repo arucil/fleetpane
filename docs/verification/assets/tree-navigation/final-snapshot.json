@@ -1,0 +1,66 @@
+{
+  "protocol": 3,
+  "host_id": "dba8c2ee-b6cf-498f-9ec7-c950ea0d912a",
+  "host_pid": 1836419,
+  "provider_pid": 1836438,
+  "provider_info": {
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "codex",
+    "fleetpaneTerminalVersion": 1,
+    "userAgent": "synthetic-provider/1"
+  },
+  "owner": {
+    "host_id": "dba8c2ee-b6cf-498f-9ec7-c950ea0d912a",
+    "controller_id": "c4b058ae-f771-477d-982a-e02f674987e6",
+    "generation": 4
+  },
+  "sequence": 113,
+  "operation_ids": [
+    "53eb4de4-0867-4c37-8c48-f368765fcf06",
+    "98917cb2-cf1f-441e-86f4-e80dbdc16f89"
+  ],
+  "journal_total": 2,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "child",
+        "turn_id": "child-turn-3"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": "approval-child-turn-3",
+      "method": "item/commandExecution/requestApproval",
+      "params": {
+        "command": "synthetic approval; no command runs",
+        "itemId": "command-child-turn-3",
+        "threadId": "child",
+        "turnId": "child-turn-3"
+      }
+    }
+  ],
+  "attention": {
+    "records": [
+      {
+        "sequence": 11,
+        "observed_unix_ms": 1792609324550,
+        "thread_id": "child",
+        "turn_id": "child-turn-2",
+        "kind": "completed",
+        "stop_reason": null
+      }
+    ],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}
