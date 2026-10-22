@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-22",
+  "environment": "Linux X11 isolated workspace fp-model-search",
+  "binary_sha256": "8082e6151fce9a739ed4b8fcb96e294714dafbaf13b17fd1d99282520cac8774",
+  "source_sha256": "ff61d9548e2c302a6aa0492d3b55257a83767b108f06766e22fd378f27814034",
+  "host_snapshots_exactly_equal": {
+    "codex": true,
+    "acp": true
+  },
+  "original_copy_exact": true,
+  "fixture_sha256": "84ee4a8779e6cff58a71518857d3ff11c6534a27262cf2c83b21193e9371d9c8",
+  "large_file": {
+    "bytes": 94530,
+    "sha256": "9311987cff189a1ceff45eccf40a214d7ed5bf6e3e01c3f89aa2bd4563bf6171",
+    "tail_source_line": 7003,
+    "full_copy_verified": false
+  },
+  "checks": {
+    "desktop_test": "39 passed",
+    "desktop_clippy": "all targets -D warnings passed",
+    "desktop_format": "check passed",
+    "desktop_build": "passed"
+  },
+  "limits": [
+    "fixture providers only",
+    "no workspace-wide search",
+    "no regex or replacement",
+    "no IME or other-platform acceptance"
+  ]
+}

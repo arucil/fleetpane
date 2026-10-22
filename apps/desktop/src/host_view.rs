@@ -8,6 +8,7 @@ mod images;
 mod last_session;
 mod mcp;
 mod observe;
+mod outline;
 mod picker;
 mod progress;
 mod recent;
@@ -1627,13 +1628,15 @@ impl HostView {
     fn render_history_navigation(&self, blocked: bool, cx: &mut Context<Self>) -> AnyElement {
         let show_latest = !self.rows.is_empty() && !self.timeline.is_following_tail();
         div()
-            .when(self.history.is_some() || show_latest, |view| {
+            .when(self.thread.is_some() || show_latest, |view| {
                 view.px_4()
                     .pb_2()
                     .flex()
+                    .flex_wrap()
                     .items_center()
                     .justify_between()
                     .gap_2()
+                    .child(self.render_outline(cx))
                     .children(self.history.as_ref().map(|history| {
                         let next = history.next();
                         let count = self.thread.as_ref().map_or(0, |thread| {

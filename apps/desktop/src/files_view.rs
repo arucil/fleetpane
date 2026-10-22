@@ -885,6 +885,18 @@ impl Render for FilesView {
                                             .selected(self.text_mode == mode).disabled(self.busy)
                                             .on_click(cx.listener(move|this,_,_,cx|this.set_text_mode(mode,cx)))
                                     })))
+                                    .child(Button::new("find-workspace-file").small().label("Find")
+                                        .tooltip("Find in source · Ctrl/Cmd+F in the editor")
+                                        .disabled(self.busy || self.preview.is_none())
+                                        .on_click(cx.listener(|this,_,window,cx| {
+                                            this.set_text_mode(TextMode::Source,cx);
+                                            if let Some(preview) = &this.preview {
+                                                preview.update(cx,|state,cx| {
+                                                    state.focus(window,cx);
+                                                    state.open_search(false,cx);
+                                                });
+                                            }
+                                        })))
                                     .child(Button::new("copy-workspace-file").small().label("Copy full text").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(full.clone()))))
                                     .child(Button::new("wrap-workspace-file").small().label(if self.wrap {"Wrap: on"} else {"Wrap: off"}).selected(self.wrap).disabled(self.busy || self.preview.is_none() || self.text_mode != TextMode::Source).on_click(cx.listener(|this,_,window,cx| {
                                         this.wrap = !this.wrap;

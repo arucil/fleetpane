@@ -1,0 +1,69 @@
+[
+  {
+    "revision": "5d2a424868464ab53fab136e8c02e64759c7f4f7",
+    "parents": [
+      "1198cddf635cfa57767386c734cb91e7c1f52b93"
+    ],
+    "ordinal": null,
+    "source": "upstream",
+    "scope": "Complete documentation or package metadata diff; not historical runtime acceptance or dependency payload audit.",
+    "category": "release-notes",
+    "paths_inspected": [
+      "CHANGELOG.md"
+    ],
+    "patch_file": "5d2a4248.patch.gz",
+    "patch_sha256": "sha256:1aa13abd7d62a5756fe384166f6b7678725f22d9721722eccaaf9aef02d32207",
+    "finding": "Release notes describe connected Hosts, plugins, source-relative Markdown links, layout persistence, lazy translations and subscription-scoped setup output; this is documentation, not new executable behavior.",
+    "fleetpane_action": "Keep remote transport/plugins missing, Git Diff deferred and OpenCodex/DeepSeek scope. Source-relative Markdown links already have separate native acceptance. Preserve demand-driven bounded UI work and explicit subscriptions.",
+    "compression": "gzip"
+  },
+  {
+    "revision": "3fa625701eae6b3a07ccae18299200b1a7cf2776",
+    "parents": [
+      "5d2a424868464ab53fab136e8c02e64759c7f4f7"
+    ],
+    "ordinal": null,
+    "source": "upstream",
+    "scope": "Complete documentation or package metadata diff; not historical runtime acceptance or dependency payload audit.",
+    "category": "release-metadata",
+    "paths_inspected": [
+      "package-lock.json",
+      "package.json",
+      "packages/app/package.json",
+      "packages/cli/package.json",
+      "packages/client/package.json",
+      "packages/desktop/package.json",
+      "packages/expo-two-way-audio/package.json",
+      "packages/highlight/package.json",
+      "packages/plugin/package.json",
+      "packages/protocol/package.json",
+      "packages/relay/package.json",
+      "packages/server/package.json",
+      "packages/website/package.json",
+      "plugins/package.json"
+    ],
+    "patch_file": "3fa62570.patch.gz",
+    "patch_sha256": "sha256:4cc6cb43c463db43a2d817448ef4b932b517ca5e195bdac70cf252f489d6d387",
+    "finding": "Root/workspace packages and their lockfile entries change from 0.12.0 to 0.13.0-beta.1, including internal peer/dependency ranges. Inspected complete diff; no new source behavior or dependency payload audit.",
+    "fleetpane_action": "No Rust version bump or Node package port needed. Keep release packaging/updater an explicit separate gap.",
+    "compression": "gzip"
+  },
+  {
+    "revision": "68fa464cdf341dcc798cb76be4e37a1ab289aaeb",
+    "parents": [
+      "3fa625701eae6b3a07ccae18299200b1a7cf2776"
+    ],
+    "ordinal": null,
+    "source": "upstream",
+    "scope": "Complete one-line Nix build metadata diff only",
+    "category": "build-metadata",
+    "paths_inspected": [
+      "nix/npm-deps.hash"
+    ],
+    "patch_file": "68fa464c.patch.gz",
+    "patch_sha256": "sha256:aa8443a3e15c4c5a83a87d39686709fcf5472a9ad0038ad387507d2d3239b762",
+    "finding": "Only the Nix npm dependency fixed-output hash changes; title also mentions lockfile signatures, but no lockfile changes in this commit.",
+    "fleetpane_action": "No Rust behavior change required; preserve native packaging and updater as open acceptance.",
+    "compression": "gzip"
+  }
+]

@@ -31,6 +31,7 @@ pub mod host_selection;
 pub mod hosts;
 pub mod mcp;
 pub mod models;
+pub mod outline;
 #[cfg(unix)]
 pub mod paseo_import;
 pub mod progress;

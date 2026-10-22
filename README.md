@@ -1,9 +1,9 @@
 # Fleetpane
 
-Latest local additions: native Markdown file Source/Preview, conversation image
+Latest local additions: loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
 viewer and Codex/ACP context telemetry, with separate
 [behavior evidence](docs/status.md). Scoped history review covers the frozen
-6,215-commit DAG plus upstream `1198cddf` (remote tips checked 2026-10-22);
+6,215-commit DAG plus upstream deltas through `68fa464cd` (remote tips checked 2026-10-22);
 this tracks source review, while functional parity remains partial.
 
 
@@ -855,6 +855,10 @@ schemes and outside-root paths show errors. Inline code is not guessed as a path
 UTF-8 text files up to 256 KiB have a complete selectable read-only Kit editor
 with line numbers, syntax highlighting and a **Wrap: on/off** toggle. Unknown
 extensions remain plain text. Source links keep earlier lines reachable;
+**Find** opens Kit's source search (also Ctrl/Cmd+F in the editor), with case
+matching, occurrence navigation and Enter/Shift+Enter. From Markdown Preview it
+returns to Source. Reload/new files reset search. The source remains read-only.
+[Native Find evidence](docs/verification/2026-10-22-file-find.md).
 **Copy full text** preserves original line endings and whitespace. See
 [native verification](docs/verification/2026-10-22-text-preview.md). Binary, empty and oversized
 files have explicit messages. Listings are limited to 500 entries; symlinks and
@@ -1212,3 +1216,9 @@ the ordinary prompt. Existing arguments/prose stay intact. **Copy commands**
 preserves the complete current list. Unavailable and explicitly empty lists are
 distinct; a restarted/resumed provider must advertise again.
 [Verification and limits](docs/verification/2026-10-22-acp-commands.md).
+
+**Loaded prompts** beside the history controls opens a menu of currently loaded
+user messages. Selecting an entry scrolls to its exact message; **Jump to latest**
+resumes following output. Load earlier history explicitly to extend this menu.
+No send, resume, approval or review happens on selection.
+[Native acceptance](docs/verification/2026-10-22-prompt-outline.md).

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-22",
+  "environment": "Linux X11 isolated workspace fp-model-search",
+  "binary_sha256": "13e8e6f0cfc4428565f327f9dfe1f9e757b93cbd48cccbf803bf3bb6ac7bc2a1",
+  "sources": {
+    "apps/desktop/src/host_view/outline.rs": "016c7419bd7ba17bad171ae3dc2d5331c957e2621946b865a13572ae95019354",
+    "apps/desktop/src/host_view.rs": "b069565e9d17ff13cdaa14230664f815be1db0769c0f4e7430df8aa8cc182ded",
+    "crates/session/src/outline.rs": "e3b7ebaea713e02d604254a2e1ecbce820b7ab26e11d79019b703b58f3f74dbc"
+  },
+  "covered": [
+    "15 prompts across 14 turns",
+    "same IDs in separate turns",
+    "same-turn follow-up",
+    "image-only prompt",
+    "empty menu",
+    "900x560 scrolling",
+    "explicit history paging 1 to 2 to 3 prompts",
+    "suspend tail follow and explicit latest",
+    "42-byte exact draft after normal close and reopen",
+    "ACP pending permission retained"
+  ],
+  "navigation_only_exact_snapshot_equality": {
+    "paged": true,
+    "independent-acp": true,
+    "acp-own": true
+  },
+  "draft_bytes": 42,
+  "send_effects_file_exists": false,
+  "normal_close": {
+    "app_id": "app-545489",
+    "exit_code": 0
+  },
+  "limits": [
+    "Host-replacement rejection covered by identity checks, not forced native replacement",
+    "no full-index fetch or persisted reading position",
+    "no external model or installed-provider claim",
+    "ACP navigation fixture used an earlier task-owned Host binary: unrelated contextUsage query rejection remained visible; no provider restart to hide it"
+  ]
+}

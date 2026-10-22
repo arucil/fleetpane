@@ -77211,7 +77211,7 @@
     "persistent-session-identity": "partial; original ACP IDs and observed journal history retain explicit context resume. Codex provider archive listing/read/restore now has typed CLI/native fixture and installed 0.163.0 process acceptance. Restore preserves identity/history/drafts, does not send/resume/restore descendants, and uses fenced durable mutation receipts. Active archive mutation, tree impact, deletion UI, provider-private alias adoption and complete runtime restoration remain open.",
     "conversation-tail-navigation": "partial; native return/stream follow, history paging and independent details scrolling with retained exact draft/other-session permission verified. No unread count, remote/read-only acceptance or cross-window scroll restoration.",
     "exact-turn-observation": "partial; shared Unix CLI wait and six regressions plus protocol fixtures and installed Codex/gated loopback verified. No takeover/answer/Stop/send; explicit timeout, fault, expired cursor and unknown after restart. Public MCP, curated activity export, remote and performance acceptance remain open.",
-    "workspace-file-navigation": "partial; shared local text/image open, explicit Markdown anchors, tool/change paths and retained conversation overlays. Linux native bounded Back/Forward, fresh file reads, exact copy, path-based directory row recovery, missing/link refusal and unchanged full Host snapshot verified. History lives only within the open view; filename-based sequential image navigation with fresh list/read, explicit notices, exact path copy, native PNG/JPEG/WebP and small-window acceptance; no thumbnail grid/zoom, embedded Markdown-file images, preview-scroll or cross-view history persistence, inline-code guessing, OS deep links, forced delayed replies, editing or search/watch.",
+    "workspace-file-navigation": "partial; shared local text/image open, explicit Markdown anchors, tool/change paths and retained conversation overlays. Linux native bounded Back/Forward, fresh file reads, exact copy, path-based directory row recovery, missing/link refusal and unchanged full Host snapshot verified. History lives only within the open view; filename-based sequential image navigation with fresh list/read, explicit notices, exact path copy, native PNG/JPEG/WebP and small-window acceptance; no thumbnail grid/file-image zoom, embedded Markdown-file images, preview-scroll or cross-view history persistence, inline-code guessing, OS deep links, forced delayed replies, editing, workspace-wide search or watch; source Find uses Kit defaults and has separate Linux native acceptance.",
     "attention": "partial; read-only multi-Host pending requests, exact identity/source/filter/copy, original fenced native answers and external-resolution observation verified locally. Completion/failure/unread, request age, notification/mute/tray and keyboard-next remain open.",
     "supplied-resources": "partial; explicit ACP/MCP embedded-resource and resource-link projection, bounded native literal/Markdown previews, metadata, complete text/URI/base64 copy and archive/reload verified locally. No fetching, binary decoding, outgoing context, audio, URI validation or fresh external model acceptance.",
     "conversation-row-identity": "verified locally for covered native cache collisions; tagged kind/thread/turn/item tuples, two pre-fix regressions, native paginated before/after, independent expansion and exact Copy/reload. No fuzzy missing-ID matching, conflicting-provider-history repair or external-provider acceptance.",
@@ -77243,7 +77243,8 @@
     "acp-commands": "Covered shared/Host/Linux native fixtures verified: exact live advertisements, safe draft preparation, clear/isolation/archive expiry and window replacement. Installed provider/Codex discovery/IME acceptance open.",
     "complete-text-preview": "Covered Linux native fixture: complete bounded source, line gutter, highlighted Rust, wrap/horizontal scrolling, source anchors, exact Copy and retained draft verified. Editing/search/other platforms remain open.",
     "modified-terminal-enter": "Shared encoder and Linux native raw PTY verifies all control/alt/shift combinations, exact 51 bytes, focus separation and independent pending ACP preservation. Installed terminal programs/negotiation unaccepted.",
-    "composer-focus": "Covered Linux native fixtures: Ctrl/Cmd+L, palette/ownership guards, exact Chinese drafts and normal close/reopen. IME/other platforms unaccepted."
+    "composer-focus": "Covered Linux native fixtures: Ctrl/Cmd+L, palette/ownership guards, exact Chinese drafts and normal close/reopen. IME/other platforms unaccepted.",
+    "loaded-prompt-outline": "partial; shared loaded-order projection and Linux native Codex/ACP menu navigation verified, including paging, media-only inputs, duplicate IDs in separate turns, same-turn follow-up, 900x560, exact drafts after normal replacement, and unchanged navigation-only snapshots. Full-index lookup, active rail, persisted reading position, installed providers and other platforms remain open."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
@@ -77260,12 +77261,36 @@
       "ordinal": null,
       "scope": "complete documentation diff; separate from frozen numbering",
       "receipt_ledger": "../verification/assets/paseo-replay/latest-1198cddf/review.json"
+    },
+    {
+      "revision": "5d2a424868464ab53fab136e8c02e64759c7f4f7",
+      "parent": "1198cddf635cfa57767386c734cb91e7c1f52b93",
+      "source": "upstream",
+      "ordinal": null,
+      "scope": "Complete documentation or package metadata diff; not historical runtime acceptance or dependency payload audit.",
+      "receipt_ledger": "../verification/assets/paseo-replay/latest-3fa62570/review.json"
+    },
+    {
+      "revision": "3fa625701eae6b3a07ccae18299200b1a7cf2776",
+      "parent": "5d2a424868464ab53fab136e8c02e64759c7f4f7",
+      "source": "upstream",
+      "ordinal": null,
+      "scope": "Complete documentation or package metadata diff; not historical runtime acceptance or dependency payload audit.",
+      "receipt_ledger": "../verification/assets/paseo-replay/latest-3fa62570/review.json"
+    },
+    {
+      "revision": "68fa464cdf341dcc798cb76be4e37a1ab289aaeb",
+      "parent": "3fa625701eae6b3a07ccae18299200b1a7cf2776",
+      "source": "upstream",
+      "ordinal": null,
+      "scope": "Complete one-line Nix build metadata diff only",
+      "receipt_ledger": "../verification/assets/paseo-replay/latest-3fa62570/review.json"
     }
   ],
   "latest_remote_observation": {
-    "checked_at": "2026-10-22",
+    "checked_at": "2026-10-22T02:12:21.265745+00:00",
     "command": "git ls-remote upstream refs/heads/main; git ls-remote origin refs/heads/main",
-    "upstream": "1198cddf635cfa57767386c734cb91e7c1f52b93",
+    "upstream": "68fa464cdf341dcc798cb76be4e37a1ab289aaeb",
     "donut-fork": "2d0977759b168264adb3961a862eda8cd574f562",
     "pinned_numbering_unchanged": true
   }

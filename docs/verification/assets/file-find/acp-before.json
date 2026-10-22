@@ -1,0 +1,86 @@
+{
+  "protocol": 3,
+  "host_id": "9d6d14f2-f57e-4842-8da9-cc178c41187d",
+  "host_pid": 3674964,
+  "provider_pid": 3674966,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "synthetic-acp",
+      "version": "1"
+    },
+    "authMethods": [],
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "9d6d14f2-f57e-4842-8da9-cc178c41187d",
+    "controller_id": "d18dbff5-5af7-406b-9057-27a791b1cb0e",
+    "generation": 9
+  },
+  "sequence": 40,
+  "operation_ids": [
+    "ac7859bb-4ce6-442f-995c-63cd0179495c",
+    "598f9291-5de2-4164-97e5-5f2bd78066f5",
+    "dff2cb0c-9c9b-46df-97f2-48a6f00d0305",
+    "25f6f392-24c1-48e1-ba3f-7e4ddcff0caa",
+    "7272a953-d807-46df-b41c-621e40dd015e"
+  ],
+  "journal_total": 5,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "c19f37a2-267c-4867-9786-5c660c2b0d75",
+        "turn_id": "1861b69f-7460-402e-bcc0-c9406ac81890"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 10,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Run this tool",
+            "optionId": "allow-one"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Skip this tool",
+            "optionId": "reject-one"
+          }
+        ],
+        "sessionId": "c19f37a2-267c-4867-9786-5c660c2b0d75",
+        "threadId": "c19f37a2-267c-4867-9786-5c660c2b0d75",
+        "toolCall": {
+          "title": "Synthetic tool",
+          "toolCallId": "call-8be55bdd-5067-45af-89f4-d4323700361d"
+        }
+      }
+    }
+  ],
+  "attention": {
+    "records": [],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}
