@@ -56,3 +56,10 @@ Production validation order and drain behavior stay unchanged.
 
 `python3 scripts/drain-smoke.py` and `python3 scripts/creation-directory-smoke.py`
 pass locally after this follow-up. Remote acceptance remains separate.
+
+Exact `e4e39764790aebc04c6f2b84493d862f97b2e2f2` subsequently
+[passed all four CI jobs](https://github.com/arucil/fleetpane/actions/runs/39758600958):
+Linux/macOS/Windows workspace checks and Linux desktop. The
+[captured result](assets/ci-portability/passing-e4e3976.json) binds each job to that
+head. This verifies the repaired tests/smokes remotely; it is not macOS/Windows
+native GUI or a later commit's acceptance.

@@ -10,7 +10,7 @@ CLI uses the same private preference directory as desktop `--preferences-dir`:
 `fleetpane-host notification-policy STORE get` or
 `fleetpane-host notification-policy STORE set EXPECTED_REVISION < policy.json`.
 
-Latest local additions: workspace tab keyboard/menu navigation and saved order,
+Latest local additions: workspace tab drag/keyboard/menu navigation and saved order,
 loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
 viewer and Codex/ACP context telemetry, with separate
 [behavior evidence](docs/status.md) and [real OpenCodex/DeepSeek checks](docs/verification/2026-10-22-real-provider-outline-usage.md). Scoped history review covers the frozen
@@ -730,10 +730,18 @@ is Cmd+W; native acceptance currently covers Linux X11. The fixed **Tabs** menu
 shows these actions. Selection scrolls an overflowing strip into view; order
 survives normal close/reopen. [Navigation evidence](docs/verification/2026-10-22-workspace-tab-navigation.md).
 
+Drag a tab's label onto another tab to move it to that position. The selected
+workspace and its conversation, file and terminal views stay attached to their
+original identities; moving an inactive tab keeps the current view selected.
+Dropping outside cancels. Linux fixture checks include save failure/reload,
+exact drafts, real PTY input isolation and 900×560.
+[Drag evidence and limits](docs/verification/2026-10-22-workspace-tab-drag.md).
+
 Layout saves use revision checks. If a write fails, **Reload saved layout** reads
 the stored record; **Keep saved layout** pauses this window's layout writes and
 allows closing while retaining the previous record. Session drafts keep their
-own save guards. Conversation scroll, split panes, drag ordering and terminal
+own save guards. Conversation scroll, split panes, drag-edge autoscroll,
+cross-window moves and terminal
 text-draft persistence after tab closure are not included.
 [Behavior and verification](docs/verification/2026-10-22-workspace-tabs.md).
 

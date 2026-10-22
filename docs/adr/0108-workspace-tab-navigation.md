@@ -33,7 +33,8 @@ Failed draft saves refuse closure. Failed layout writes retain the previous
 stored layout and expose its existing reload/keep-saved controls; removal from
 the live tab strip alone does not assert a durable successful save.
 
-Drag ordering, splits, scroll restoration, configurable bindings, terminal
+Drag ordering now has [separate decision and acceptance](0112-workspace-tab-drag-order.md).
+Splits, scroll restoration, configurable bindings, terminal
 text-draft persistence after tab closure and cross-window synchronization remain
 separate work. Only Linux X11 has native acceptance for this addition.
 [Evidence](../verification/2026-10-22-workspace-tab-navigation.md).

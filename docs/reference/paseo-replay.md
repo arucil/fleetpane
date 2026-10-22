@@ -1589,3 +1589,10 @@ failed/unreviewed results remain inspectable. [Linux fixture acceptance](../veri
 covers original Host snapshots, normal close failure/reload, exact draft/window
 replacement and 900×560. Workspace scopes, OS delivery/sound/tray/dock and durable
 deduplication remain open. No history-review cursor or upstream-tip claim changes.
+
+Workspace-tab follow-up (2026-10-22): native same-window pointer dragging now
+reorders exact workspace UUIDs without replacing session/file/terminal views.
+The already inspected tab workflow has [Linux fixture acceptance](../verification/2026-10-22-workspace-tab-drag.md)
+for active/inactive moves, cancellation, save failure/reload, exact drafts,
+pending requests, real PTY isolation, replacement and 900×560. Cross-window moves,
+edge autoscroll and splits remain open. No source-review cursor or tip claim changes.

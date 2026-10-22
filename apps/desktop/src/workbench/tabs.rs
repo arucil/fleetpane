@@ -1,4 +1,5 @@
 //! Bounded workspace views and revisioned device-local layout persistence.
+mod drag;
 mod navigation;
 use super::*;
 use crate::{file_locations::Location, files_view::FilesView, terminal_view::TerminalView};
@@ -191,6 +192,12 @@ impl Workbench {
                                     && !this.attention.active
                                     && !this.diagnostics.active));
                         this.tabs.saved = Some(saved);
+                        if this.tabs.error.as_ref().is_some_and(|error| {
+                            this.close_error.as_deref()
+                                == Some(format!("Window remains open: {error}").as_str())
+                        }) {
+                            this.close_error = None;
+                        }
                         this.tabs.error = None;
                         this.tabs.saving_paused = false;
                         if this.tabs.visible
@@ -691,32 +698,7 @@ impl Workbench {
                                             }
                                             _ => format!("{host} · {name}"),
                                         };
-                                        div()
-                                .flex()
-                                .flex_shrink_0()
-                                .gap_1()
-                                .child(
-                                    Button::new(("workspace-tab", index))
-                                        .small()
-                                        .ghost()
-                                        .label(label)
-                                        .selected(
-                                            self.tabs_active() && self.tabs.selected == Some(id),
-                                        )
-                                        .on_click(cx.listener(move |this, _, window, cx| {
-                                            this.select_workspace_tab(id, window, cx)
-                                        })),
-                                )
-                                .child(
-                                    Button::new(("close-workspace-tab", index))
-                                        .small()
-                                        .ghost()
-                                        .label("×")
-                                        .tooltip("Close view; keep tasks and terminals running")
-                                        .on_click(cx.listener(move |this, _, window, cx| {
-                                            this.close_workspace_tab(id, window, cx)
-                                        })),
-                                )
+                                        self.workspace_tab_button(index, id, label, cx)
                                     },
                                 )),
                         ),

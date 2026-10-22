@@ -1,0 +1,384 @@
+{
+  "snapshots": {
+    "Codex": {
+      "protocol": 3,
+      "host_id": "0c251f08-f7a8-4ed1-a9e2-da209c75c32c",
+      "host_pid": 198062,
+      "provider_pid": 198070,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "0c251f08-f7a8-4ed1-a9e2-da209c75c32c",
+        "controller_id": "e209b045-e29b-4321-aaa6-733cb55c4285",
+        "generation": 7
+      },
+      "sequence": 21,
+      "operation_ids": [
+        "9b605458-6c76-4ca6-aa12-d85241a96f04",
+        "fe844cc0-21d8-4144-aeec-f2325692004d",
+        "a6d1f8fe-479e-4d21-92f8-f3f41d177332",
+        "69423f35-7434-413d-b447-f8f34f70a2fd",
+        "dbb54c45-4bfe-4631-8b62-366c55be6956"
+      ],
+      "journal_total": 5,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [
+          "7f29eb3c-272e-47ea-92d9-b916b1272d2a"
+        ],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-1"
+          },
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-1-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-1-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "选择实现语言？"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "补充要求（支持中文和换行）"
+              }
+            ],
+            "threadId": "fixture-thread-1",
+            "turnId": "fixture-thread-1-turn-1"
+          }
+        },
+        {
+          "id": "approval-fixture-thread-2-turn-1",
+          "method": "item/commandExecution/requestApproval",
+          "params": {
+            "command": "synthetic approval; no command runs",
+            "itemId": "command-fixture-thread-2-turn-1",
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        }
+      ],
+      "attention": {
+        "records": [],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    "DeepSeek-A": {
+      "protocol": 3,
+      "host_id": "91401146-76e4-44c0-82f3-d2464be89162",
+      "host_pid": 198071,
+      "provider_pid": 198073,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "91401146-76e4-44c0-82f3-d2464be89162",
+        "controller_id": "b304870f-6452-4f9a-85bb-aaf9d1e1594d",
+        "generation": 2
+      },
+      "sequence": 8,
+      "operation_ids": [
+        "ed90acc6-7350-4bbf-a73e-1a3d651e31ec",
+        "2be6a147-14d0-4fb1-8f30-19285d0d0a4f"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "832e15e6-d357-4d69-a2eb-77799b287d50",
+            "turn_id": "d0b5e5a6-3bd6-4f9f-a928-8523e3e4555e"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "832e15e6-d357-4d69-a2eb-77799b287d50",
+            "threadId": "832e15e6-d357-4d69-a2eb-77799b287d50",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-7c777555-c89a-4530-ba9f-62fbc30dde40"
+            }
+          }
+        }
+      ],
+      "attention": {
+        "records": [],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    "DeepSeek-B": {
+      "protocol": 3,
+      "host_id": "b82c0a95-320a-408d-9de1-29d1030b962f",
+      "host_pid": 198075,
+      "provider_pid": 198077,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "b82c0a95-320a-408d-9de1-29d1030b962f",
+        "controller_id": "6cadc595-6882-47cb-a2e9-fbcb6f1cc7d8",
+        "generation": 2
+      },
+      "sequence": 8,
+      "operation_ids": [
+        "88f50e35-eb4e-485c-a645-d89358669327",
+        "518ea7e4-42fd-492f-8b9f-46aa5e4138e1"
+      ],
+      "journal_total": 2,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "17e7844d-30c4-4615-826c-bea70c7c73a2",
+            "turn_id": "b3b326cb-f183-419f-9b39-2909f280b970"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "17e7844d-30c4-4615-826c-bea70c7c73a2",
+            "threadId": "17e7844d-30c4-4615-826c-bea70c7c73a2",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-c3e119ff-44dc-4faf-893f-64a8ef153c24"
+            }
+          }
+        }
+      ],
+      "attention": {
+        "records": [],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    }
+  },
+  "terminals": [
+    {
+      "closed": false,
+      "cols": 80,
+      "cwd": "/tmp/fp-tab-drag/alpha 中文",
+      "exit": null,
+      "id": "7f29eb3c-272e-47ea-92d9-b916b1272d2a",
+      "input_fault": null,
+      "label": "retained shell",
+      "next_input": 0,
+      "output_eof": false,
+      "output_fault": null,
+      "pid": 198160,
+      "rows": 24,
+      "workspace_id": "b5b3ad88-4c00-4ca1-b920-3feae0d921ac"
+    }
+  ],
+  "revision": 12,
+  "layout": {
+    "tabs": [
+      {
+        "workspace": "b5b3ad88-4c00-4ca1-b920-3feae0d921ac",
+        "socket": "/tmp/fp-tab-drag/Codex/host/control.sock",
+        "directory": "/tmp/fp-tab-drag/alpha 中文",
+        "device": 66311,
+        "inode": 63753412,
+        "session": {
+          "host_id": "0c251f08-f7a8-4ed1-a9e2-da209c75c32c",
+          "thread_id": "fixture-thread-1",
+          "cwd": "/tmp/fp-tab-drag/alpha 中文",
+          "archived": false
+        },
+        "panel": "terminal",
+        "files": {
+          "directory": "",
+          "file": "notes.md"
+        },
+        "terminal": [
+          "0c251f08-f7a8-4ed1-a9e2-da209c75c32c",
+          "7f29eb3c-272e-47ea-92d9-b916b1272d2a"
+        ],
+        "sidebar_width": 280,
+        "sidebar_visible": true
+      },
+      {
+        "workspace": "08f3927c-41cd-434b-8fb3-4527b851a453",
+        "socket": "/tmp/fp-tab-drag/DeepSeek-B/host/control.sock",
+        "directory": "/tmp/fp-tab-drag/alpha 中文",
+        "device": 66311,
+        "inode": 63753412,
+        "session": {
+          "host_id": "b82c0a95-320a-408d-9de1-29d1030b962f",
+          "thread_id": "17e7844d-30c4-4615-826c-bea70c7c73a2",
+          "cwd": "/tmp/fp-tab-drag/alpha 中文",
+          "archived": false
+        },
+        "panel": "conversation",
+        "files": {
+          "directory": "",
+          "file": null
+        },
+        "terminal": null,
+        "sidebar_width": 280,
+        "sidebar_visible": true
+      },
+      {
+        "workspace": "022b4f7c-f306-4681-95f2-e24d8d637abf",
+        "socket": "/tmp/fp-tab-drag/Codex/host/control.sock",
+        "directory": "/tmp/fp-tab-drag/beta",
+        "device": 66311,
+        "inode": 63753439,
+        "session": {
+          "host_id": "0c251f08-f7a8-4ed1-a9e2-da209c75c32c",
+          "thread_id": "fixture-thread-2",
+          "cwd": "/tmp/fp-tab-drag/beta",
+          "archived": false
+        },
+        "panel": "conversation",
+        "files": {
+          "directory": "",
+          "file": null
+        },
+        "terminal": null,
+        "sidebar_width": 280,
+        "sidebar_visible": true
+      },
+      {
+        "workspace": "faea6bf3-e44f-453f-a88a-358a545ec2cf",
+        "socket": "/tmp/fp-tab-drag/DeepSeek-A/host/control.sock",
+        "directory": "/tmp/fp-tab-drag/alpha 中文",
+        "device": 66311,
+        "inode": 63753412,
+        "session": {
+          "host_id": "91401146-76e4-44c0-82f3-d2464be89162",
+          "thread_id": "832e15e6-d357-4d69-a2eb-77799b287d50",
+          "cwd": "/tmp/fp-tab-drag/alpha 中文",
+          "archived": false
+        },
+        "panel": "conversation",
+        "files": {
+          "directory": "",
+          "file": null
+        },
+        "terminal": null,
+        "sidebar_width": 280,
+        "sidebar_visible": true
+      }
+    ],
+    "selected": "b5b3ad88-4c00-4ca1-b920-3feae0d921ac",
+    "visible": true
+  }
+}
