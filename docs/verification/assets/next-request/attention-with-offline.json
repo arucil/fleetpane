@@ -1,0 +1,189 @@
+{
+  "observed_unix_ms": 1792652394619,
+  "hosts": [
+    {
+      "endpoint": {
+        "name": "Codex",
+        "socket": "/tmp/fp-next-request/Codex/host/control.sock"
+      },
+      "host_id": "a43ab85c-aa67-44d0-95d0-317c69c80f79",
+      "items": [
+        {
+          "endpoint": {
+            "name": "Codex",
+            "socket": "/tmp/fp-next-request/Codex/host/control.sock"
+          },
+          "host_id": "a43ab85c-aa67-44d0-95d0-317c69c80f79",
+          "id": "questions-fixture-thread-1-turn-1",
+          "method": "item/tool/requestUserInput",
+          "kind": "question",
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1",
+          "title": "选择实现语言？",
+          "request": {
+            "id": "questions-fixture-thread-1-turn-1",
+            "method": "item/tool/requestUserInput",
+            "params": {
+              "isBlocking": true,
+              "itemId": "input-fixture-thread-1-turn-1",
+              "questions": [
+                {
+                  "header": "Language",
+                  "id": "language",
+                  "isOther": true,
+                  "isSecret": false,
+                  "options": [
+                    {
+                      "description": "Native performance and explicit ownership.",
+                      "label": "Rust (Recommended)"
+                    },
+                    {
+                      "description": "Simple concurrency and quick builds.",
+                      "label": "Go"
+                    }
+                  ],
+                  "question": "选择实现语言？"
+                },
+                {
+                  "header": "Details",
+                  "id": "notes",
+                  "isOther": false,
+                  "isSecret": false,
+                  "options": null,
+                  "question": "补充要求（支持中文和换行）"
+                }
+              ],
+              "threadId": "fixture-thread-1",
+              "turnId": "fixture-thread-1-turn-1"
+            }
+          }
+        },
+        {
+          "endpoint": {
+            "name": "Codex",
+            "socket": "/tmp/fp-next-request/Codex/host/control.sock"
+          },
+          "host_id": "a43ab85c-aa67-44d0-95d0-317c69c80f79",
+          "id": "approval-fixture-thread-2-turn-1",
+          "method": "item/commandExecution/requestApproval",
+          "kind": "approval",
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1",
+          "title": "synthetic approval; no command runs",
+          "request": {
+            "id": "approval-fixture-thread-2-turn-1",
+            "method": "item/commandExecution/requestApproval",
+            "params": {
+              "command": "synthetic approval; no command runs",
+              "itemId": "command-fixture-thread-2-turn-1",
+              "threadId": "fixture-thread-2",
+              "turnId": "fixture-thread-2-turn-1"
+            }
+          }
+        }
+      ],
+      "error": null,
+      "completions": [],
+      "completion_evicted": 0
+    },
+    {
+      "endpoint": {
+        "name": "DeepSeek-A",
+        "socket": "/tmp/fp-next-request/DeepSeek-A/host/control.sock"
+      },
+      "host_id": "dc7bb5c0-d14d-4d2d-b62c-eb828375ea87",
+      "items": [],
+      "error": null,
+      "completions": [
+        {
+          "endpoint": {
+            "name": "DeepSeek-A",
+            "socket": "/tmp/fp-next-request/DeepSeek-A/host/control.sock"
+          },
+          "host_id": "dc7bb5c0-d14d-4d2d-b62c-eb828375ea87",
+          "record": {
+            "sequence": 17,
+            "observed_unix_ms": 1792652160391,
+            "thread_id": "9e547056-c39c-4c2f-9a95-a4db628f277d",
+            "turn_id": "cc152250-fc56-4073-bd57-af3bbef08ec1",
+            "kind": "completed",
+            "stop_reason": "end_turn"
+          },
+          "reviewed": false
+        }
+      ],
+      "completion_evicted": 0
+    },
+    {
+      "endpoint": {
+        "name": "DeepSeek-B",
+        "socket": "/tmp/fp-next-request/DeepSeek-B/host/control.sock"
+      },
+      "host_id": "beb54fad-a79b-46e9-9449-c92db289c66e",
+      "items": [
+        {
+          "endpoint": {
+            "name": "DeepSeek-B",
+            "socket": "/tmp/fp-next-request/DeepSeek-B/host/control.sock"
+          },
+          "host_id": "beb54fad-a79b-46e9-9449-c92db289c66e",
+          "id": 10,
+          "method": "session/request_permission",
+          "kind": "approval",
+          "thread_id": "4b150837-163e-4ddd-8189-b66ac00b2055",
+          "turn_id": null,
+          "title": "Synthetic tool",
+          "request": {
+            "id": 10,
+            "method": "session/request_permission",
+            "params": {
+              "options": [
+                {
+                  "kind": "allow_once",
+                  "name": "Run this tool",
+                  "optionId": "allow-one"
+                },
+                {
+                  "kind": "reject_once",
+                  "name": "Skip this tool",
+                  "optionId": "reject-one"
+                }
+              ],
+              "sessionId": "4b150837-163e-4ddd-8189-b66ac00b2055",
+              "threadId": "4b150837-163e-4ddd-8189-b66ac00b2055",
+              "toolCall": {
+                "title": "Synthetic tool",
+                "toolCallId": "call-4ea9d84a-2210-4003-98f5-f6daad6c8317"
+              }
+            }
+          }
+        }
+      ],
+      "error": null,
+      "completions": [],
+      "completion_evicted": 0
+    },
+    {
+      "endpoint": {
+        "name": "Gate",
+        "socket": "/tmp/fp-next-request/gate.sock"
+      },
+      "host_id": "beb54fad-a79b-46e9-9449-c92db289c66e",
+      "items": [],
+      "error": null,
+      "completions": [],
+      "completion_evicted": 0
+    },
+    {
+      "endpoint": {
+        "name": "Offline",
+        "socket": "/tmp/fp-next-request/offline.sock"
+      },
+      "host_id": null,
+      "items": [],
+      "error": "host transport: No such file or directory (os error 2)",
+      "completions": [],
+      "completion_evicted": null
+    }
+  ]
+}

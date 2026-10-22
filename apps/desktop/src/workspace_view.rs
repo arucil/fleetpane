@@ -80,6 +80,22 @@ impl EventEmitter<Workspace> for WorkspaceView {}
 impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
+    pub(crate) fn shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
+        [&self.input, &self.branch, &self.base]
+            .iter()
+            .any(|input| crate::input_composition::active(input, window, cx))
+            || self.files.as_ref().is_some_and(|view| {
+                view.update(cx, |view, cx| view.tab_shortcut_blocked(window, cx))
+            })
+            || self.terminals.as_ref().is_some_and(|view| {
+                view.update(cx, |view, cx| view.tab_shortcut_blocked(window, cx))
+            })
+            || self
+                .migration
+                .as_ref()
+                .is_some_and(|view| view.update(cx, |view, cx| view.composing(window, cx)))
+    }
+
     pub(crate) fn export_pending(&self, cx: &App) -> bool {
         self.files
             .as_ref()

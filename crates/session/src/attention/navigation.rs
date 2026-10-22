@@ -40,6 +40,22 @@ pub struct Cursor {
 }
 
 impl Cursor {
+    /// Explicit global navigation wraps; the queue's ordinary arrows still stop
+    /// at its ends. This cursor is independent of the queue's visible filters.
+    pub fn cycle_next(&mut self, items: &[Item]) -> Option<usize> {
+        let filter = Filter::default();
+        let start = self.index(items, &filter).map_or(0, |index| index + 1);
+        let next = (start..items.len())
+            .chain(0..start)
+            .find(|index| items[*index].thread_id.is_some());
+        if let Some(index) = next {
+            self.select(&items[index]);
+        } else {
+            self.selected = None;
+        }
+        next
+    }
+
     pub fn index(&self, items: &[Item], filter: &Filter) -> Option<usize> {
         let selected = self.selected.as_ref()?;
         items.iter().position(|item| {
@@ -126,6 +142,25 @@ mod tests {
                 json!({"id":11,"method":"item/tool/requestUserInput","params":{"threadId":"other"}}),
             ),
         ]
+    }
+
+    #[test]
+    fn global_cycle_wraps_and_uses_exact_identity_across_refresh() {
+        let mut rows = rows();
+        let mut cursor = Cursor::default();
+        for expected in [0, 1, 3, 0] {
+            assert_eq!(cursor.cycle_next(&rows), Some(expected));
+        }
+        rows.swap(0, 1);
+        assert_eq!(cursor.cycle_next(&rows), Some(3));
+        rows.remove(3);
+        assert_eq!(cursor.cycle_next(&rows), Some(0));
+        rows[0].request["params"]["toolCall"]["title"] = json!("new scope");
+        assert_eq!(cursor.cycle_next(&rows), Some(0));
+        rows[0].host_id = Uuid::new_v4();
+        assert_eq!(cursor.cycle_next(&rows), Some(0));
+        assert_eq!(cursor.cycle_next(&rows[2..]), None);
+        assert_eq!(cursor.cycle_next(&[]), None);
     }
 
     #[test]

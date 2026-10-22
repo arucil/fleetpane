@@ -540,6 +540,10 @@ original JSON or open its checked source. Read-only viewing does not take contro
 use **Take control**, then **Open pending session** to review in the original
 conversation. External decisions update read-only views automatically. The queue
 refreshes every two seconds while open and keeps unavailable Hosts visible.
+**Next request** or Ctrl+Shift+J (Cmd+Shift+J on macOS) checks every configured
+Host and cycles through pending sources, independently of the queue filters.
+It preserves drafts and explicit control/answer requirements. Requests without
+a source session are skipped. [Linux verification and limits](docs/verification/2026-10-22-next-request.md).
 **Turn results** shows explicit completed, failed and interrupted turns with ACP
 stop reasons. Each Host retains at most 64 results/64 KiB for its current run;
 eviction and unavailable or older Hosts remain visible. **Mark reviewed** and

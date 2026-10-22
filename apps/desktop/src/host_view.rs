@@ -205,8 +205,17 @@ impl HostView {
     }
 
     pub fn focus(&self, window: &mut Window, cx: &mut Context<Self>) {
-        self.composer
-            .update(cx, |input, cx| input.focus(window, cx));
+        let question_pending = self.thread.as_ref().is_some_and(|thread| {
+            self.questions
+                .iter()
+                .any(|question| question.request.params.thread_id == thread.id)
+        });
+        if question_pending {
+            self.focus.focus(window, cx);
+        } else {
+            self.composer
+                .update(cx, |input, cx| input.focus(window, cx));
+        }
     }
 
     pub(crate) fn tab_close_status(&self) -> Result<bool, String> {
@@ -2195,6 +2204,11 @@ impl Render for HostView {
             })
             .map(|entry| entry.view.clone());
         let has_question = question_view.is_some();
+        if has_question && self.composer.focus_handle(cx).is_focused(window) {
+            // A newly received question replaces the composer. Keep shortcuts
+            // in the visible Host tree without moving an existing answer focus.
+            self.focus.focus(window, cx);
+        }
         div()
             .id("host-image-drop")
             .track_focus(&self.focus)

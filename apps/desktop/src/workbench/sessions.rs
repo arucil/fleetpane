@@ -25,6 +25,12 @@ pub(super) struct State {
 }
 
 impl State {
+    pub(super) fn composing(&self, window: &mut Window, cx: &mut App) -> bool {
+        [&self.search, &self.workspace]
+            .iter()
+            .any(|input| crate::input_composition::active(input, window, cx))
+    }
+
     pub fn new(window: &mut Window, cx: &mut Context<Workbench>) -> Self {
         let search = cx.new(|cx| {
             InputState::new(window, cx).placeholder("Search session titles across Hosts")

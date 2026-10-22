@@ -1,4 +1,5 @@
 //! The queue observes all configured Hosts without initializing their conversation views.
+mod next;
 use super::*;
 use fleetpane_session::attention::navigation::{Cursor, Filter, Movement};
 use fleetpane_session::attention::{self, Item, Kind, Report};
@@ -16,6 +17,8 @@ pub(super) struct State {
     pub(super) opening: Option<uuid::Uuid>,
     pub(super) filter: Filter,
     cursor: Cursor,
+    next_cursor: Cursor,
+    pub(super) next_pending: Option<uuid::Uuid>,
     selection_notice: Option<String>,
     focus: FocusHandle,
     scroll: UniformListScrollHandle,
@@ -36,6 +39,8 @@ impl State {
             opening: None,
             filter: Filter::default(),
             cursor: Cursor::default(),
+            next_cursor: Cursor::default(),
+            next_pending: None,
             selection_notice: None,
             focus: cx.focus_handle(),
             scroll: UniformListScrollHandle::new(),
@@ -47,6 +52,7 @@ impl Workbench {
     pub(super) fn leave_attention(&mut self) {
         self.attention.active = false;
         self.attention.opening = None;
+        self.attention.next_pending = None;
     }
 
     pub(super) fn open_attention(&mut self, window: &mut Window, cx: &mut Context<Self>) {
@@ -71,6 +77,7 @@ impl Workbench {
             return;
         }
         self.attention.busy = true;
+        let next_token = self.attention.next_pending;
         let configuration = self.configuration.clone();
         let directory = self.creation_directory.clone();
         let task = cx.background_executor().spawn(async move {
@@ -85,7 +92,7 @@ impl Workbench {
         });
         cx.spawn_in(window, async move |this, cx| {
             let result = task.await;
-            let _closed = this.update_in(cx, |this, _, cx| {
+            let _closed = this.update_in(cx, |this, window, cx| {
                 this.attention.busy = false;
                 match result {
                     Ok(mut report) => {
@@ -106,6 +113,15 @@ impl Workbench {
                             Some("Selection cleared: queue refresh failed.".into());
                     }
                 }
+                if this.attention.active && this.attention.next_pending.is_some() {
+                    if this.attention.next_pending != next_token {
+                        // The gesture arrived during an older read. Observe again
+                        // once, so it cannot navigate from a pre-gesture snapshot.
+                        this.refresh_attention(window, cx);
+                    } else {
+                        this.finish_next_request(window, cx);
+                    }
+                }
                 cx.notify();
             });
         })
@@ -117,6 +133,7 @@ impl Workbench {
         if self.attention.opening.is_some() || self.attention.error.is_some() {
             return;
         }
+        self.attention.next_pending = None;
         self.attention.cursor.select(&item);
         let token = uuid::Uuid::new_v4();
         self.attention.opening = Some(token);
@@ -132,6 +149,11 @@ impl Workbench {
                     return;
                 }
                 this.attention.opening = None;
+                if this.next_request_blocked(window, cx) || this.export_pending(cx) {
+                    this.attention.navigation_error = Some("Navigation cancelled while another operation is active. Choose the request again.".into());
+                    cx.notify();
+                    return;
+                }
                 match result {
                     Ok(()) => {
                         let index = this
@@ -178,6 +200,12 @@ impl Workbench {
         let mods = key.modifiers;
         if mods.alt || mods.platform || mods.shift {
             return;
+        }
+        if (!mods.control && matches!(key.key.as_str(), "up" | "down" | "home" | "end" | "enter"))
+            || (mods.control && key.key == "r")
+        {
+            self.attention.next_pending = None;
+            self.attention.opening = None;
         }
         if mods.control {
             match key.key.as_str() {
@@ -265,14 +293,14 @@ impl Workbench {
         div().flex_1().min_h_0().flex().flex_col()
             .track_focus(&self.attention.focus)
             .on_key_down(cx.listener(Self::attention_key))
-            .on_mouse_down(MouseButton::Left,cx.listener(|this,_,window,cx|this.attention.focus.focus(window,cx)))
+            .on_mouse_down(MouseButton::Left,cx.listener(|this,_,window,cx|{this.attention.next_pending=None;this.attention.opening=None;this.attention.focus.focus(window,cx);cx.notify();}))
             .child(div().p_4().flex().flex_wrap().gap_3().items_center()
                 .child(Button::new("attention-back").small().label("Back to Host").on_click(cx.listener(|this,_,window,cx|{this.select(this.selected,window,cx);})))
                 .child(format!("Observed pending requests · {}",self.attention.items.len()))
                 .child(Button::new("attention-completions").small().label(format!("Turn results ({})",self.attention.completions.iter().filter(|item|!item.reviewed).count())).on_click(cx.listener(|this,_,_,cx|{this.attention.show_completions=true;cx.notify();})))
                 .child(Button::new("attention-refresh").small().label(if self.attention.busy{"Checking…"}else{"Refresh"}).disabled(self.attention.busy).on_click(cx.listener(|this,_,window,cx|this.refresh_attention(window,cx)))))
             .child(div().px_4().pb_2().text_sm().child("Checks all configured Hosts every 2 seconds while open. Review and answer in the original session."))
-            .child(div().px_4().pb_2().text_sm().child("↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies request · Ctrl+R refreshes"))
+            .child(div().px_4().pb_2().text_sm().child(if cfg!(target_os="macos"){ "↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies · Ctrl+R refreshes · Cmd+Shift+J next across all Hosts" }else{ "↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies · Ctrl+R refreshes · Ctrl+Shift+J next across all Hosts" }))
             .child(div().px_4().pb_2().flex().flex_wrap().gap_2().children([(None,"All"),(Some(Kind::Approval),"Approvals"),(Some(Kind::Question),"Questions"),(Some(Kind::Other),"Other")].into_iter().enumerate().map(|(i,(kind,label))|Button::new(("attention-filter",i)).small().ghost().label(label).selected(self.attention.filter.kind==kind).on_click(cx.listener(move|this,_,window,cx|{this.attention.filter.kind=kind;this.reconcile_attention();this.attention.focus.focus(window,cx);cx.notify();})))))
             .child(div().px_4().pb_2().flex().flex_wrap().gap_2()
                 .child(Button::new("attention-all-hosts").small().ghost().label("All Hosts").selected(self.attention.filter.socket.is_none()).on_click(cx.listener(|this,_,window,cx|{this.attention.filter.socket=None;this.reconcile_attention();this.attention.focus.focus(window,cx);cx.notify();})))

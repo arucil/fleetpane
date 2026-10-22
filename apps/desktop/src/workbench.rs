@@ -748,15 +748,19 @@ impl Workbench {
 
 impl Render for Workbench {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        if window.focused(cx).is_none() {
+            self.focus.focus(window, cx);
+        }
         let selected = &self.slots[self.selected];
         let tab_content = self.tabs_content(window, cx);
         div()
             .relative()
             .key_context("FleetpaneWorkbench")
             .track_focus(&self.focus)
-            .capture_key_down(
-                cx.listener(|this, event, window, cx| this.tab_key(event, window, cx)),
-            )
+            .capture_key_down(cx.listener(|this, event, window, cx| {
+                this.next_request_key(event, window, cx);
+                this.tab_key(event, window, cx);
+            }))
             .capture_action(cx.listener(|this, _: &switcher::Toggle, window, cx| {
                 cx.stop_propagation();
                 this.toggle_switcher(window, cx);
@@ -849,6 +853,7 @@ impl Render for Workbench {
                                         this.open_attention(window, cx)
                                     })),
                             )
+                            .child(self.next_request_button(cx))
                             .when(self.creation_directory.is_some(), |bar| {
                                 bar.child(
                                     Button::new("open-workspaces")

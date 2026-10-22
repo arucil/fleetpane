@@ -1,5 +1,12 @@
 # Behavior status
 
+**Next request** and Ctrl/Cmd+Shift+J now refresh all Hosts and cycle checked
+pending sources independently of queue filters. Linux fixture acceptance covers
+colliding ACP request IDs, fresh-read/cancellation gates, exact retained drafts,
+startup/question focus, terminal input isolation, replacement and 900×560.
+[Evidence and limits](verification/2026-10-22-next-request.md). Notifications,
+complete mute/tray and real-provider approval acceptance remain open.
+
 First-turn CLI **wait** now observes exact Host activity without requiring
 materialized history. Successful start replies close the pre-notification
 activity gap; regressions, gated installed Codex and two real OpenCodex/DeepSeek
@@ -60,6 +67,7 @@ performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
+| Global next pending request | verified locally for covered shared/Linux native fixtures | Explicit fresh snapshot, exact-source cycling/wrap, independent filters, cancelled/late reads, startup/question focus and popup/palette/IME guards; native colliding requests, 38-byte draft/replacement, unchanged real PTY input and 900×560 covered. Actual IME, installed-provider approvals, other platforms, notifications and mute remain open. [Evidence](verification/2026-10-22-next-request.md), [ADR](adr/0109-global-next-pending-request.md). |
 | Workspace tab keyboard/menu navigation and order | verified locally for covered Linux X11 fixture and installed OpenCodex/DeepSeek workflows | Ctrl+PageUp/PageDown, positions 1–8/last, Shift movement, guarded close and revisioned saved order; 12-tab scrolling, exact three real drafts/replacement, zero shell input and pending ACP preservation covered. Popup isolation repaired during native QA. IME, other platforms, drag/splits and configurable keys remain open. The observed Codex first-turn wait race now has [separate repair and acceptance](verification/2026-10-22-wait-first-turn.md). [Evidence](verification/2026-10-22-workspace-tab-navigation.md), [ADR](adr/0108-workspace-tab-navigation.md). |
 | Workspace tabs and saved layout | verified locally for covered Linux native / installed OpenCodex and DeepSeek workflows | Up to 32 exact Host/workspace tabs, grouped catalog, separate session/draft, Conversation/Files/Terminal, file location, selected terminal and sidebar width/visibility; schema-14 migration, CAS/save failures and normal close guard. Three real sessions retain exact 38/37/43-byte drafts; same shell PID/input survives replacement and accepted shell command finishes after its tab closes. No automatic takeover/resume/send. No tab drag, split panes, conversation scroll or other-platform acceptance. [Evidence](verification/2026-10-22-workspace-tabs.md), [ADR](adr/0107-workspace-tabs-and-local-layout.md). |
 | Focus conversation composer | verified locally for Linux native fixture workflows | Ctrl/Cmd+L focuses an editable controlled conversation, preserving palettes/questions and IME guards. Codex/DeepSeek exact multiline drafts, normal close/reopen, 900×560 and read-only external takeover covered. Other platforms and actual IME remain unverified. [Evidence](verification/2026-10-22-composer-focus.md). |

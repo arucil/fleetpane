@@ -1562,3 +1562,15 @@ installed Codex turn-list-based CLI wait returned unsupported `list_turns`; the
 [first-turn repair](../verification/2026-10-22-wait-first-turn.md) now has independent
 regression and two-turn real OpenCodex/DeepSeek acceptance. The history review
 cursor remains unchanged.
+
+
+## Global next pending request: continued implementation
+
+The early request/status workflow reviewed at 145–150 now extends to an explicit
+all-Host next-request shortcut. It reuses Fleetpane's exact-source confirmation,
+retains the ownership/answer boundary and keeps the queue's filters independent.
+[Linux fixture acceptance](../verification/2026-10-22-next-request.md) covers
+colliding ACP request IDs, cancelled/fresh observational reads, draft/window
+replacement and terminal input isolation. Notification deduplication and full
+mute/tray behavior remain open. No source-review cursor or upstream-tip claim
+changes in this implementation slice.

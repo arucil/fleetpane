@@ -1,0 +1,46 @@
+[
+  {
+    "host": "Codex",
+    "request_id": "questions-fixture-thread-1-turn-1",
+    "result": {
+      "answers": {
+        "language": {
+          "answers": [
+            "Rust (Recommended)"
+          ]
+        },
+        "notes": {
+          "answers": [
+            "Next request validation 中文"
+          ]
+        }
+      }
+    },
+    "response": {
+      "response": "answered"
+    }
+  },
+  {
+    "host": "Codex",
+    "request_id": "approval-fixture-thread-2-turn-1",
+    "result": {
+      "decision": "decline"
+    },
+    "response": {
+      "response": "answered"
+    }
+  },
+  {
+    "host": "DeepSeek-B",
+    "request_id": 10,
+    "result": {
+      "outcome": {
+        "outcome": "selected",
+        "optionId": "reject-one"
+      }
+    },
+    "response": {
+      "response": "answered"
+    }
+  }
+]

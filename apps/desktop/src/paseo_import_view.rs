@@ -89,6 +89,12 @@ pub struct PaseoImportView {
     scroll: ScrollHandle,
 }
 impl PaseoImportView {
+    pub(crate) fn composing(&self, window: &mut Window, cx: &mut App) -> bool {
+        [&self.home, &self.codex, &self.dsh, &self.filter]
+            .iter()
+            .any(|input| crate::input_composition::active(input, window, cx))
+    }
+
     pub fn new(
         directory: PathBuf,
         endpoint: Endpoint,

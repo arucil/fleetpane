@@ -81,15 +81,30 @@ impl Workbench {
         {
             return;
         }
+        if self.tab_shortcut_blocked(window, cx) {
+            return;
+        }
+        // Consume even a refused close: the same chord must never enter a shell.
+        cx.stop_propagation();
+        if !event.is_held {
+            self.tab_command(command, window, cx);
+        }
+    }
+
+    pub(in crate::workbench) fn tab_shortcut_blocked(
+        &self,
+        window: &mut Window,
+        cx: &mut App,
+    ) -> bool {
         let Some(entry) = self
             .tabs
             .entries
             .iter()
             .find(|entry| Some(entry.saved.workspace) == self.tabs.selected)
         else {
-            return;
+            return false;
         };
-        let blocked = match entry.saved.panel {
+        match entry.saved.panel {
             fleetpane_session::workspace_layout::Panel::Conversation => {
                 entry.host.as_ref().is_some_and(|view| {
                     view.update(cx, |view, cx| view.tab_shortcut_blocked(window, cx))
@@ -105,14 +120,6 @@ impl Workbench {
                     view.update(cx, |view, cx| view.tab_shortcut_blocked(window, cx))
                 })
             }
-        };
-        if blocked {
-            return;
-        }
-        // Consume even a refused close: the same chord must never enter a shell.
-        cx.stop_propagation();
-        if !event.is_held {
-            self.tab_command(command, window, cx);
         }
     }
 

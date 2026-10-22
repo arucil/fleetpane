@@ -56,6 +56,8 @@ impl Workbench {
         if self.export_pending(cx) || self.closing {
             return;
         }
+        self.attention.next_pending = None;
+        self.attention.opening = None;
         self.switcher.generation += 1;
         self.switcher.return_focus = window.focused(cx);
         self.switcher.palette = cx.new(|cx| CommandState::new(window, cx));

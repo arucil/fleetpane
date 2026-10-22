@@ -1,0 +1,80 @@
+{
+  "base": "830b16a521730aa91495ad77f46b184f038e692f",
+  "source_state": "working tree including global next-request navigation and native focus corrections",
+  "environment": "Linux x86_64; isolated X11 :90; GPUI Kit 0.7.3; debug profile; Mesa software rendering",
+  "binary_sha256": {
+    "target/debug/fleetpane-host": "454c4adce764aefd9279fe0c0dac29ab30ec9e8c199e5e7290a56c4fa21bf758",
+    "apps/desktop/target/debug/fleetpane-desktop": "0cec607ca9d8adda95fd60757ae1735b8fb217c0ca9d410f676c9672daa0b54d"
+  },
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "417f8c55f200ec5a3141f7ed6708759fa04d11b619eae98a8273839e4b6ab742",
+    "apps/desktop/src/paseo_import_view.rs": "0eb199bba5b93a0898951c4509dc47697803f14032d5f0f67df233cea043ebd4",
+    "apps/desktop/src/workbench.rs": "aaaeff77ded4bd2a4a63782962f90c08d8b0270184aaca9ccc18e54dd33bac44",
+    "apps/desktop/src/workbench/attention.rs": "5d3c89b16026b35ea83e7e120af34ab3cd743e92cde29e2d632a0fd7b2385214",
+    "apps/desktop/src/workbench/sessions.rs": "2cdaccc6d8a8fbff055f4459727d8725ba2c237a320fffd8fc8856dcb785578d",
+    "apps/desktop/src/workbench/switcher.rs": "7d8e1724d9af5ae461ade8da5bc8a909bbac060030002fa5e5624dbd6da4e484",
+    "apps/desktop/src/workbench/tabs/navigation.rs": "53d482fdd51d0c88d87a77be195e516b7311499975fc4bc3cb7ef4b975719136",
+    "apps/desktop/src/workspace_view.rs": "c05dd2a05b9c09784c3f3ce2d0b877f394c590f46b489af18f576171ce6f3af1",
+    "crates/session/src/attention/navigation.rs": "cddd6ffdd70c331ccdbe01399ebdbfd56e7c2fb27fe7684116013089af1bf291",
+    "apps/desktop/src/workbench/attention/next.rs": "a2f23c8dd01039928f084ece7ad07dcb0cedf4a707e585efcd93944eb832347e"
+  },
+  "native_copies": {
+    "text": "待处理跳转草稿\n保留 Chinese  ",
+    "utf8_bytes": 38,
+    "before_and_after_normal_replacement": true
+  },
+  "navigation_snapshot_comparison": {
+    "initial_identical_except_observational_sequence": true,
+    "final_binary_identical_except_observational_sequence": true,
+    "resolved_request_same_id_other_host_unchanged": true,
+    "terminal_all_info_fields_unchanged": true
+  },
+  "gates": {
+    "tab_switch_cancel": "gate-wait-1",
+    "old_refresh": "gate-wait-2",
+    "post_gesture_read": "gate-wait-3",
+    "keyboard_cancel": {
+      "released": [
+        "gate-wait-21"
+      ]
+    }
+  },
+  "limits": [
+    "Synthetic providers; no model calls or installed-provider approval acceptance",
+    "Linux X11 only; no actual IME/macOS/Windows acceptance",
+    "Native source-navigation acceptance, not complete footer/question/permission layout",
+    "No notifications/mute/tray, timestamps, configurable shortcuts, performance, hosted CI, release or seamless Host upgrade claim"
+  ],
+  "cleanup": {
+    "hosts": {
+      "1765974": "gone",
+      "1765980": "gone",
+      "1765986": "gone"
+    },
+    "providers": {
+      "1765979": "gone",
+      "1765983": "gone",
+      "1765989": "gone"
+    },
+    "terminal": "gone",
+    "sockets": {
+      "/tmp/fp-next-request/Codex/host/control.sock": false,
+      "/tmp/fp-next-request/DeepSeek-A/host/control.sock": false,
+      "/tmp/fp-next-request/DeepSeek-B/host/control.sock": false
+    },
+    "desktops": {
+      "1769017": "gone",
+      "1801250": "gone",
+      "1956609": "gone",
+      "2004580": "gone",
+      "2046042": "gone"
+    },
+    "workspace": {
+      "1398925": "gone",
+      "1398945": "gone",
+      "1398991": "gone"
+    },
+    "gate_socket_removed": true,
+    "gate_server_exec_exit": 130
+  }
+}
