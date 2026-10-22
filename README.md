@@ -1,5 +1,11 @@
 # Fleetpane
 
+Saved workspace/project names and pin membership/order now refresh across local
+windows every two seconds while reads succeed. Open editors keep their text and
+original save revision; failed writes still need explicit recovery. Read failures
+show **Reload workspace updates**. [Contract](docs/adr/0121-workspace-preference-observation.md)
+and [Linux acceptance](docs/verification/2026-10-23-workspace-sync.md).
+
 **Workspaces → Pinned** now supports saved drag/Up/Down ordering. Concurrent
 changes require **Reload pins**; failures retain the saved order and block normal
 close until resolved or acknowledged. Newly pinned entries stay first.
@@ -1023,8 +1029,8 @@ Choose **Rename** on a saved or pinned row to save a local display name. Names
 accept 1–256 UTF-8 bytes on one line, with no surrounding whitespace or control
 characters. **Use default name** restores the existing directory/branch label.
 Another window's edit causes a revision conflict; **Reload name** reads its
-saved value and discards this editor's text. **Newest** refreshes catalog/pin
-labels. A failed save blocks normal window close until Reload name or explicit
+saved value and discards this editor's text. Catalog, pins and tabs automatically refresh saved labels; **Newest** also
+reloads the catalog page. A failed save blocks normal window close until Reload name or explicit
 Close name editor. Renaming requires no Host connection or directory access.
 
 ```sh
@@ -1043,7 +1049,8 @@ other Hosts and ordinary-folder registrations remain independent. Project names
 appear in group headings and workspace tabs while each workspace keeps its own
 label. The path below the group remains visible. Save, reset, reload, validation
 and failed-save close protection follow the workspace editor above. Changes in
-another window require **Newest** or **Reload name**.
+another window refresh labels automatically; **Reload name** deliberately
+discards editor text and reads the saved revision.
 
 ```sh
 # PROJECT_UUID is project_id from workspace list.
@@ -1055,6 +1062,19 @@ Schema 19 adds revisioned project labels and preserves all older rows; older
 controller binaries reject this schema. No directory or provider session is
 renamed. [Decision](docs/adr/0120-local-project-display-names.md) and
 [Linux fixture acceptance](docs/verification/2026-10-23-project-names.md).
+
+The shared read command returns requested saved workspace UUIDs and all pins in
+one database snapshot, without contacting a Host or inspecting a directory:
+
+```sh
+fleetpane-host workspace /absolute/hosts.creations preferences '["WORKSPACE_UUID"]'
+```
+
+At most 65 distinct workspace UUIDs plus 32 pins are read. A local window polls
+its open tabs/current catalog page and inspected entry; it does not reload tab
+layout, other catalog pages, recent directories or draft content. Read failures
+pause this observer until **Reload workspace updates** succeeds. Pending name/pin
+saves and failed-save recovery retain their own guards.
 
 ## Follow up during a Codex turn
 

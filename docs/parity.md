@@ -1,19 +1,25 @@
 # Functional parity with donut-paseo
 
+**Cross-window workspace updates** now have [Linux dual-process acceptance](verification/2026-10-23-workspace-sync.md):
+bounded local labels/pins observation, retained editor revisions/text, stale-write
+refusal, explicit failed-read recovery, pin-save guards, small windows and exact
+drafts/replacement. Tab layout, catalog membership, recent-directory observation,
+remote devices and other-platform GUI remain separate gaps.
+
 Local **project display names** now have [Linux fixture acceptance](verification/2026-10-23-project-names.md):
 main/linked worktree sharing by Host-scoped UUID, independent workspace labels,
 catalog/tab propagation, reset, conflicts, failed-save recovery, 900×560 and exact
-draft Copy across replacement. Automatic cross-window refresh and icons remain open.
+draft Copy across replacement. Cross-window refresh has separate acceptance above; icons remain open.
 
 Saved **pin order** now has [Linux fixture acceptance](verification/2026-10-23-workspace-pin-order.md):
 drag/Up/Down, exact-list concurrent-write refusal, rollback, offline entries,
 reload/keep close guards, normal replacement and exact native draft Copy.
-Other-window refresh remains explicit; cross-window drag and autoscroll are open.
+Other-window pin refresh has separate acceptance above; cross-window drag and autoscroll are open.
 
 Local **workspace display names** now have [Linux fixture acceptance](verification/2026-10-22-workspace-names.md):
 UUID-bound persistence, catalog/pin/tab propagation, reset, revision conflicts,
 offline edits, failed-save close guards, exact drafts/replacement and 900×560.
-Project naming has separate acceptance above; automatic cross-window refresh remains open.
+Project naming and automatic cross-window label refresh have separate acceptance above.
 
 Linux **system popups** now have [separate acceptance](verification/2026-10-22-system-popups.md):
 opt-in count-only aggregates, bounded replace/retract, exact actions, service

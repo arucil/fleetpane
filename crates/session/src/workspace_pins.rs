@@ -10,7 +10,7 @@ use uuid::Uuid;
 
 pub const MAX_PINNED_WORKSPACES: usize = 32;
 
-fn read(database: &Connection) -> Result<Vec<Workspace>, StorageError> {
+pub(crate) fn read(database: &Connection) -> Result<Vec<Workspace>, StorageError> {
     let mut statement = database.prepare(
         "SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspace_pins p \
          JOIN workspaces w ON w.id=p.workspace LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project ORDER BY p.position DESC LIMIT ?1",

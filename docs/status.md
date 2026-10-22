@@ -1,19 +1,28 @@
 # Behavior status
 
+**Cross-window workspace updates** now observe saved workspace/project names and
+pin membership/order from one bounded local snapshot. Background reads preserve
+editor text/CAS versions, local action ordering and failed-save recovery; errors
+pause updates until explicit reload. [Linux dual-process acceptance](verification/2026-10-23-workspace-sync.md)
+covers names/tabs, pins, conflicts, failure/recovery, 900×560 and exact drafts.
+This does not synchronize tab layout, catalog membership, recent directories or
+remote devices. Other-platform GUI remains open.
+
 **Project display names** now persist by the saved Host-scoped project UUID. Main
 checkouts and linked worktrees share their label; workspace names remain separate.
 Catalog/tab propagation, reset, stale writes, failed-save close/reload, schema-18
 upgrade, 900×560 and exact 43-byte native draft Copy/replacement have
 [Linux fixture acceptance](verification/2026-10-23-project-names.md). Automatic
-other-window refresh, project icons and other-platform GUI remain open.
+other-window refresh has separate acceptance above; project icons and
+other-platform GUI remain open.
 
 **Pinned workspace order** now persists through a shared GUI/CLI command.
 Workspaces provides drag handles and Up/Down; exact-list comparison refuses
 concurrent order/membership changes. Rollback, failure close guards, reload/keep,
 offline entries, 900×560, normal replacement and exact 43-byte native draft Copy
 have [Linux fixture acceptance](verification/2026-10-23-workspace-pin-order.md).
-New pins remain first. Automatic other-window refresh, drag-edge autoscroll and
-other-platform GUI remain open.
+New pins remain first. Automatic other-window refresh has separate acceptance
+above; drag-edge autoscroll and other-platform GUI remain open.
 
 **Active workspace pin shortcuts** now use Ctrl/Cmd+Shift+P or the Tabs menu,
 independently of catalog row rendering and Host availability. GUI/CLI share one
@@ -22,14 +31,14 @@ atomic local toggle; existing explicit pin assignments remain idempotent.
 covers one action per press/hold, same-path Host separation, cached list updates,
 failed-save close/recovery, real PTY input isolation, exact 43-byte drafts,
 normal replacement and 900×560. Pin ordering has separate acceptance above;
-other-platform GUI and automatic cross-window refresh remain open.
+other-platform GUI remains open; cross-window refresh has separate acceptance above.
 
 **Workspace display names** now persist by saved UUID through the same GUI/CLI
 revision-checked command. Catalog/pins and open tabs update independently of paths,
 Host ownership and sessions. Unicode, reset, stale/concurrent writes, schema-18
 migration, failed-save close guard/reload, exact 43-byte drafts, normal replacement
 and 900×560 have [Linux fixture acceptance](verification/2026-10-22-workspace-names.md).
-Labels changed in another window require explicit reload/refresh. Project naming has separate acceptance above;
+Automatic other-window label refresh and project naming have separate acceptance above;
 other-platform GUI and new installed-provider/model acceptance remain open.
 
 **Linux system popups** now opt in through Alerts and reuse the existing durable
@@ -167,9 +176,10 @@ performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
-| Local project display names | verified locally for covered engine/CLI/Linux fixture workflows | Schema-19 revisioned project UUID labels; Git main/linked sharing, independent endpoints/folder registrations, reset/CAS, rollback, corrupt-state refusal and exact preservation of all pre-upgrade rows. Native group/tab propagation, 900×560, failed-save close/reload, external-writer refusal, normal replacement and 43-byte draft Copy covered. Automatic other-window refresh, icons, installed-model and other-platform GUI remain open. [Evidence](verification/2026-10-23-project-names.md), [ADR](adr/0120-local-project-display-names.md). |
-| Local workspace pin order | verified locally for covered engine/CLI/Linux fixture workflows | Atomic exact-list order saves, stale concurrent refusal, full capacity/empty/no-op tests, newest pin ordering and mid-insert rollback. Drag/buttons, failure/close/reload/keep, offline entries, 900×560, two normal replacement cycles and exact 43-byte native draft Copy covered. Other-platform GUI, cross-window drag, autoscroll and automatic refresh remain open. [Evidence](verification/2026-10-23-workspace-pin-order.md), [ADR](adr/0119-local-workspace-pin-order.md). |
-| Local workspace display names | verified locally for covered shared engine/CLI/Linux native fixture workflows | Schema-18 UUID-bound names, exact Unicode, reset, independent Host labels, pin/register/reopen preservation, concurrent/stale-save refusal, rollback, offline/missing-directory edits and corrupt-state errors. Catalog/pin/tab propagation, failed-save close guard/reload, 43-byte native clipboard/draft replacement and 900×560 covered. Project naming has separate acceptance above; automatic other-window label refresh and new installed-model/other-platform GUI acceptance remain open. [Evidence](verification/2026-10-22-workspace-names.md), [ADR](adr/0117-local-workspace-display-names.md). |
+| Cross-window workspace preferences | verified locally for engine/CLI/Linux fixtures | Bounded single-transaction labels/pins observation; two native processes, unchanged editor text/CAS, stale-save refusal, pin-save close guards, explicit read failure recovery, 900×560 and exact 43-byte clipboard/replacement. No tab layout, catalog membership, recent-directory or remote-device sync. [Evidence](verification/2026-10-23-workspace-sync.md), [ADR](adr/0121-workspace-preference-observation.md). |
+| Local project display names | verified locally for covered engine/CLI/Linux fixture workflows | Schema-19 revisioned project UUID labels; Git main/linked sharing, independent endpoints/folder registrations, reset/CAS, rollback, corrupt-state refusal and exact preservation of all pre-upgrade rows. Native group/tab propagation, 900×560, failed-save close/reload, external-writer refusal, normal replacement and 43-byte draft Copy covered. Automatic other-window refresh has [separate acceptance](verification/2026-10-23-workspace-sync.md); icons, installed-model and other-platform GUI remain open. [Evidence](verification/2026-10-23-project-names.md), [ADR](adr/0120-local-project-display-names.md). |
+| Local workspace pin order | verified locally for covered engine/CLI/Linux fixture workflows | Atomic exact-list order saves, stale concurrent refusal, full capacity/empty/no-op tests, newest pin ordering and mid-insert rollback. Drag/buttons, failure/close/reload/keep, offline entries, 900×560, two normal replacement cycles and exact 43-byte native draft Copy covered. Automatic pin refresh has [separate acceptance](verification/2026-10-23-workspace-sync.md); other-platform GUI, cross-window drag and autoscroll remain open. [Evidence](verification/2026-10-23-workspace-pin-order.md), [ADR](adr/0119-local-workspace-pin-order.md). |
+| Local workspace display names | verified locally for covered shared engine/CLI/Linux native fixture workflows | Schema-18 UUID-bound names, exact Unicode, reset, independent Host labels, pin/register/reopen preservation, concurrent/stale-save refusal, rollback, offline/missing-directory edits and corrupt-state errors. Catalog/pin/tab propagation, failed-save close guard/reload, 43-byte native clipboard/draft replacement and 900×560 covered. Project naming has separate acceptance above; automatic other-window label refresh has [separate acceptance](verification/2026-10-23-workspace-sync.md); new installed-model/other-platform GUI acceptance remains open. [Evidence](verification/2026-10-22-workspace-names.md), [ADR](adr/0117-local-workspace-display-names.md). |
 | Retractable Linux system popups | verified locally for covered private D-Bus and Linux X11/Dunst fixture workflows | Opt-in persisted policy, two bounded count-only aggregates per window, unique server identity, old-generation action refusal, actual close on mute/disable/normal exit, source/policy reconciliation, explicit reconnect/no replay, 900×560 and exact 39-byte draft/replacement. 362 workspace and 49 desktop tests pass. OS silence/transient/expiry hints depend on the server; tray/dock, other platforms, native Wayland and new installed-model output remain unaccepted. [Evidence](verification/2026-10-22-system-popups.md), [ADR](adr/0116-linux-system-popups.md). |
 | Pending-request occurrence reminders and observation age | verified locally for covered shared/CLI/Linux native and installed-provider observations | Schema-17 cursor transactions, first-contact baseline, duplicate/ID-reuse identity, stale empty snapshots, local concurrency, scoped mute consumption, atomic failure/capacity rollback and migration. Native count-only reminder/click, visible failure/recovery, 900×560 and exact 44-byte draft/replacement/clipboard covered. Real OpenCodex and DeepSeek approvals with colliding ID 0 render separately and advance exact cursors without changing Host snapshots. Claims can be lost after commit; Linux OS output has separate acceptance above and acknowledged/cross-device delivery remains open. [Evidence](verification/2026-10-22-pending-reminders.md), [ADR](adr/0115-pending-request-reminders.md). |
 | Durable terminal-result reminders | verified locally for covered shared/CLI/Linux native workflows | Schema-16 endpoint/incarnation cursors, atomic policy/claim transaction, first-observation baseline, concurrent process/window deduplication, out-of-order reads, reviewed/muted consumption, capacity/failure refusal and migration. Native one-toast aggregate, result navigation without review, global mute, failed-write recovery, exact 49-byte draft/replacement and 900×560 covered. Real OpenCodex/DeepSeek model completions consumed through native inventory with matching cursors and unchanged post-model snapshots. At most once claims can be lost after commit; Linux OS delivery has separate acceptance above; cross-device inbox and durable Host feed remain open. Pending-request reminders have separate acceptance above. [Evidence](verification/2026-10-22-completion-reminders.md), [ADR](adr/0114-durable-completion-reminders.md). |

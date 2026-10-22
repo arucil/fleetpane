@@ -57,18 +57,33 @@ pub(super) struct State {
 }
 
 impl Workbench {
+    pub(super) fn workspace_preferences_busy(&self) -> bool {
+        self.tabs.pins.busy
+    }
+
+    pub(super) fn observed_workspace_ids(&self) -> Vec<Uuid> {
+        self.tabs
+            .entries
+            .iter()
+            .filter(|tab| tab.workspace.is_some())
+            .map(|tab| tab.saved.workspace)
+            .collect()
+    }
+
     pub(super) fn workspace_pin_save_failed(&self) -> bool {
         self.tabs.pins.close_status().is_err()
     }
 
-    pub(super) fn update_workspace_names(&mut self, workspaces: &[Workspace]) {
+    pub(super) fn update_workspace_names(&mut self, workspaces: &[Workspace]) -> bool {
+        let mut changed = false;
         for entry in &mut self.tabs.entries {
             if let Some(current) = &mut entry.workspace {
                 for fresh in workspaces {
-                    current.update_names_from(fresh);
+                    changed |= current.update_names_from(fresh);
                 }
             }
         }
+        changed
     }
     pub(super) fn tab_export_pending(&self, cx: &App) -> bool {
         self.tabs.entries.iter().any(|entry| {

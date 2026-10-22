@@ -1677,3 +1677,20 @@ native groups/tabs, concurrent refusal, rollback/reload/close protection,
 900×560, replacement and exact drafts. No code/assets were copied. Icons,
 automatic other-window refresh and other-platform GUI remain open. This does
 not advance the historical review cursor or assert new upstream freshness.
+
+
+## Local workspace preference observation: continued implementation
+
+Follow-through from sidebar label/pin observations in
+`packages/app/src/hooks/use-sidebar-pins.ts` at
+`a486b0558168c08890890e787d55cfb88c0d7256`. Fleetpane now reads revisioned
+workspace/project labels and saved pin membership/order in one bounded local
+snapshot, shared by desktop and CLI. The two-second desktop observer retains
+editor text/revisions and local write/failure guards; bad reads pause until an
+explicit reload. [Linux dual-process acceptance](../verification/2026-10-23-workspace-sync.md)
+covers native other-window changes, concurrent refusal, pin-save errors, read
+corruption/recovery, 900×560, normal replacement and exact 43-byte draft Copy.
+No code/assets were copied. Tab-layout sharing, catalog membership, recent
+directories, cross-device sync and other-platform GUI remain separate gaps.
+This closes the local automatic-label/pin-refresh follow-up; it does not advance
+the historical review cursor or assert new upstream freshness.

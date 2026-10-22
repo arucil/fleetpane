@@ -1,0 +1,51 @@
+{
+  "base": "125e0e0a61aabd0e916bddffedccceea95939413",
+  "source_sha256": {
+    "apps/desktop/src/workbench.rs": "772534f8f62ce3f00d6a4607bb79e025c3038f632cd693e06681e27385c74f21",
+    "apps/desktop/src/workbench/tabs.rs": "25650b2ce1b721061505d817fd76a6c1096734bc83461f19aeba90e49399e400",
+    "apps/desktop/src/workbench/tabs/pins.rs": "911c4b3ad5db97069ab54b598254e31898803806d8f5dc12d9bd9e7a3e8fc45c",
+    "apps/desktop/src/workbench/workspace_preferences.rs": "6bcf6a217b7f09463511fa43e1ba3582f3d8e8d5c756d1039fb2d65f131695e7",
+    "apps/desktop/src/workspace_view.rs": "11797d4c48c5e5536dbc87d487602d4047b73ff8dff5af29600ae9a6b366c316",
+    "apps/desktop/src/workspace_view/preferences.rs": "6f0a731563cc67e828bab2c4161933e784d3f54d343aa0a5b4173e545fe84182",
+    "apps/host/src/main.rs": "8f1f9b59e175936218cfe2b7eec8b256282e55d28718594a54ced25b92850682",
+    "crates/session/src/lib.rs": "d07205d611a4c05845cc0adc3e62ed79cfd4990d95e0d78205f412caaaf14e86",
+    "crates/session/src/workspace_pins.rs": "8a8738f4fec9a5285588b57e371bec4242b3d9e74964f73c1107f72f72818cd7",
+    "crates/session/src/workspace_preferences.rs": "788f7309dea133a39f1f94cee97e2d4437aae16efde8e7f45d9c4cc9ebe443ea",
+    "crates/session/src/workspace_preferences/tests.rs": "10d5c025ecdd9a863b3acdb511f02709b7ce134c8fc5cc5f61c49c119ef5e41c",
+    "crates/session/src/workspaces.rs": "557c014816fdd5c237cdf7e9d169755358618a25ea9e3693b11c4ad4ab7daaf4",
+    "scripts/workspace-names-smoke.py": "a4fa906b403832a09959b64c23d4098a4b08f5f95b5529e841d631b83865ef66"
+  },
+  "artifacts": {
+    "target/debug/fleetpane-host": "edeba3604778f82fb7bd820f32b9601ae6ca39efc9736a18dfb9e5087dd0d609",
+    "apps/desktop/target/debug/fleetpane-desktop": "a9757790635a2ce68e2da837a474e01f8553ab1813e38b298ddf302e255c511f"
+  },
+  "snapshot_intervals_exact": [
+    "renamed-by-b",
+    "after-auto-workspace",
+    "after-pin-move",
+    "project-by-b",
+    "before-refusal",
+    "external-order-while-failed",
+    "corrupt-read",
+    "repaired-and-unpinned",
+    "after-both-closed"
+  ],
+  "copy_bytes": 43,
+  "copies_equal": true,
+  "normal_gui_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "engine_tests": 379,
+  "desktop_tests": 51,
+  "python_tests": 22,
+  "remote_ci": "not run for this uncommitted source",
+  "limits": [
+    "Linux X11 software-rendered synthetic providers",
+    "No installed-provider call or release-performance claim",
+    "Tab layout, catalog membership and recent directory sync not implemented"
+  ],
+  "earlier_fixture_failure": "Initial fixture setup returned Pending(thread/start). Host reported client deadline elapsed; journal later records shutdown unknown. Fresh fixture succeeds. Exact cause unconfirmed; no timeout, retry or provider code changed."
+}

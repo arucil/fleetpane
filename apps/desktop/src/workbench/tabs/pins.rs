@@ -66,6 +66,7 @@ impl Workbench {
             return;
         };
         self.tabs.pins.busy = true;
+        self.workspace_preferences.changed();
         self.tabs.pins.notice = None;
         let task = cx.background_executor().spawn(async move {
             background(async move {

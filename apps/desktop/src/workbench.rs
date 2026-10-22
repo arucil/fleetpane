@@ -8,6 +8,7 @@ mod notifications;
 mod sessions;
 mod switcher;
 mod tabs;
+mod workspace_preferences;
 
 pub(crate) fn init(cx: &mut App) {
     switcher::init(cx);
@@ -55,6 +56,7 @@ pub struct Workbench {
     workspace_view: Option<Entity<WorkspaceView>>,
     workspace_subscription: Option<Subscription>,
     workspace_names_subscription: Option<Subscription>,
+    workspace_preferences: workspace_preferences::State,
     continuation_subscription: Option<Subscription>,
     file_navigation: files::State,
     attention: attention::State,
@@ -151,6 +153,7 @@ impl Workbench {
             workspace_view: None,
             workspace_subscription: None,
             workspace_names_subscription: None,
+            workspace_preferences: workspace_preferences::State::default(),
             continuation_subscription: None,
             file_navigation: files::State::default(),
             attention: attention::State::new(cx),
@@ -197,6 +200,7 @@ impl Workbench {
                         if !this.closing {
                             this.refresh_attention(window, cx);
                             this.load_notifications(false, window, cx);
+                            this.refresh_workspace_preferences(false, window, cx);
                         }
                     })
                     .is_err()
@@ -818,6 +822,7 @@ impl Render for Workbench {
             .bg(cx.theme().background)
             .child(self.host_choice_bar(window, cx))
             .child(self.tabs_bar(cx))
+            .child(self.workspace_preferences_status(cx))
             .when_some(self.close_error.as_ref(), |view, error| {
                 view.child(
                     div()

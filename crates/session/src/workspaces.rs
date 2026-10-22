@@ -323,15 +323,23 @@ impl Workspace {
 
     /// Independently merge observed labels; a project update also reaches sibling
     /// worktrees, without changing either workspace's registration or identity.
-    pub fn update_names_from(&mut self, fresh: &Self) {
-        if self.id == fresh.id && fresh.name.revision >= self.name.revision {
+    pub fn update_names_from(&mut self, fresh: &Self) -> bool {
+        let mut changed = false;
+        if self.id == fresh.id
+            && fresh.name.revision >= self.name.revision
+            && fresh.name != self.name
+        {
             self.name = fresh.name.clone();
+            changed = true;
         }
         if self.project_id == fresh.project_id
             && fresh.project_name.revision >= self.project_name.revision
+            && fresh.project_name != self.project_name
         {
             self.project_name = fresh.project_name.clone();
+            changed = true;
         }
+        changed
     }
 
     pub fn display_name(&self) -> std::borrow::Cow<'_, str> {
@@ -425,19 +433,7 @@ impl Store {
     }
 
     pub async fn workspace(&self, id: Uuid) -> Result<Workspace, Error> {
-        self.job(move |database| {
-            decode(
-                database
-                    .query_row(
-                        "SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.id=?1",
-                        [id.to_string()],
-                        workspace_row,
-                    )
-                    .optional()?
-                    .ok_or("workspace not found")?,
-            )
-        })
-        .await
+        self.job(move |database| read(database, id)).await
     }
 
     pub async fn workspaces(&self, before: Option<u64>) -> Result<Vec<Workspace>, Error> {
@@ -447,6 +443,13 @@ impl Store {
             statement.query_map([before], workspace_row)?.map(|row| decode(row?)).collect()
         }).await
     }
+}
+
+pub(crate) fn read(database: &rusqlite::Connection, id: Uuid) -> Result<Workspace, StorageError> {
+    decode(database.query_row(
+        "SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.id=?1",
+        [id.to_string()], workspace_row,
+    ).optional()?.ok_or("workspace not found")?)
 }
 
 pub(crate) fn save_registration(

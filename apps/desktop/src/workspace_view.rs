@@ -1,6 +1,7 @@
 //! Existing local directories. Host/provider lifetime and ownership stay separate.
 mod names;
 mod pins;
+mod preferences;
 use crate::file_locations::Locations;
 use crate::files_view::FilesView;
 use crate::host_view::background;
@@ -82,6 +83,7 @@ pub struct WorkspaceView {
     diff: Option<PresentedDiff>,
     scope: Scope,
     busy: bool,
+    preferences_epoch: u64,
     error: Option<String>,
     files: Option<Entity<FilesView>>,
     files_subscription: Option<Subscription>,
@@ -99,6 +101,7 @@ impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
     pub(crate) fn update_pins(&mut self, pins: Vec<Workspace>) {
+        self.preferences_epoch = self.preferences_epoch.wrapping_add(1);
         self.pins = pins;
     }
     pub(crate) fn name_save_failed(&self) -> bool {
@@ -192,6 +195,7 @@ impl WorkspaceView {
             diff: None,
             scope: Scope::Unstaged,
             busy: false,
+            preferences_epoch: 0,
             error: None,
             files: None,
             files_subscription: None,
@@ -218,6 +222,7 @@ impl WorkspaceView {
             return;
         }
         self.busy = true;
+        self.preferences_epoch = self.preferences_epoch.wrapping_add(1);
         let name_action = matches!(
             action,
             Action::Rename(..) | Action::RenameProject(..) | Action::ReloadName(..)

@@ -89,6 +89,12 @@ def main():
         assert next(w for w in workspace("list") if w["id"] == a["id"])["project_name"] == project_name
         assert next(w for w in workspace("pins") if w["id"] == a["id"])["project_name"] == project_name
         assert workspace("add", config, hosts[0]["name"], "folder", shared)["project_name"] == project_name
+        observation = workspace("preferences", json.dumps([a["id"], b["id"]]))
+        assert observation["workspaces"][0]["project_name"] == project_name
+        assert observation["workspaces"][1]["project_name"] == {"revision": 0, "value": None}
+        assert [w["id"] for w in observation["pins"]] == [a["id"], b["id"]]
+        workspace("preferences", json.dumps([a["id"], a["id"]]), ok=False)
+        assert "workspace not found" in workspace("preferences", '["00000000-0000-0000-0000-000000000000"]', ok=False)
         assert next(w for w in workspace("list") if w["id"] == b["id"])["project_name"] == {"revision": 0, "value": None}
         assert "changed in another window" in workspace("rename-project", project, 0, "stale", ok=False)
         for invalid in ["", " spaced", "line\nbreak", "界" * 86]:
@@ -109,6 +115,9 @@ def main():
         shared.rename(moved)
         assert workspace("rename", offline["id"], 0, "Offline name")["name"]["value"] == "Offline name"
         assert workspace("rename-project", offline["project_id"], 0, "Offline project")["value"] == "Offline project"
+        observation = workspace("preferences", json.dumps([offline["id"]]))
+        assert observation["workspaces"][0]["project_name"]["value"] == "Offline project"
+        assert observation["workspaces"][0]["name"]["value"] == "Offline name"
         assert [snapshot(i) for i in range(2)] == before
         assert (moved / "notes.md").read_text() == "# Workspace names\n\nExact file stays here.\n"
         for key in keys:

@@ -58,6 +58,8 @@ pub mod workspace_layout;
 pub mod workspace_names;
 #[cfg(unix)]
 pub mod workspace_pins;
+#[cfg(unix)]
+pub mod workspace_preferences;
 
 pub const MAX_ITEMS: usize = 500;
 pub const MAX_CONVERSATION_BYTES: usize = 2 * 1024 * 1024;
