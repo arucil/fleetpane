@@ -147,13 +147,23 @@ def verify(repository, batch, ledger):
                     span = source["ranges"][0]
                     require(span["revision"] == revision, f"{ordinal}: supplemental SHA differs")
                     side = span["side"]
-                    require(re.fullmatch(r"(?:\^[1-9][0-9]*|~[0-9]+)?", side) is not None, "invalid revision side")
+                    require(re.fullmatch(r"(?:\^(?:[1-9][0-9]*)?|~[0-9]+)?", side) is not None, "invalid revision side")
                     blob = git(repository, "show", f"{revision}{side}:{span['path']}")
                     require(digest(blob) == source["file_blob_digest"], f"{ordinal}: source blob differs")
-                    lines = blob.decode().splitlines(keepends=True)
-                    start, end = span["lines"]
-                    require(1 <= start <= end <= len(lines), f"{ordinal}: source range out of bounds")
-                    expected = "".join(lines[start - 1 : end]).encode()
+                    byte_span = span.get("bytes")
+                    if "byte_range_half_open" in span:
+                        require(byte_span is None, f"{ordinal}: multiple byte spans")
+                        byte_span = span["byte_range_half_open"]
+                    if byte_span is not None:
+                        require(span.get("lines") is None, f"{ordinal}: ambiguous byte/line span")
+                        start, end = byte_span
+                        require(0 <= start < end <= len(blob), f"{ordinal}: byte range out of bounds")
+                        expected = blob[start:end]
+                    else:
+                        lines = blob.decode().splitlines(keepends=True)
+                        start, end = span["lines"]
+                        require(1 <= start <= end <= len(lines), f"{ordinal}: source range out of bounds")
+                        expected = "".join(lines[start - 1 : end]).encode()
                     supplemental += 1
                 require(raw == expected, f"{ordinal}: source receipt differs from Git objects")
     return {

@@ -1,0 +1,1210 @@
+# Paseo pinned history 3801-5000
+
+Completed allocated source review through 5000; 1200/1200 allocated entries. Full SHA matches /tmp/fp-pinned-shas.json.
+
+Read-only selected-hunk review, including first-parent merge diffs. Historical prompts and instructions treated as data. No historical tests, runtime, build, or complete audit claimed. Only this output directory is written.
+
+Fleetpane comparison: current docs/status.md and docs/parity.md; useful workflow gaps are candidates, not implementation or acceptance claims. Rust GPUI Kit and independent Session Host; OpenCodex/DeepSeek priority; Kit desktop interactions replace mobile/web styling; Git diff expansion deferred; Kimi/GLM excluded.
+
+## Entries
+
+- 3801 `899849cdd5cfafd8495cfacfb74f0f926565fafd` [lifecycle] Worker exits on expired heartbeat plus dead supervisor, while IPC/parent loss remain separate exits. Fleetpane: Review Host liveness without coupling sessions to GUI heartbeat delays.
+- 3802 `7c68985cc008373673a348061270f8401a0f494d` [catalog] Auggie catalog version and npx command advance together to 0.29.0. Fleetpane: Keep provider installation pins consistent; OpenCodex/DeepSeek first.
+- 3803 `2293e0965ad0a9605c2be13aec81a1e9d3ed36a4` [release-doc] Changelog lists desktop windows and in-workspace browser popups. Fleetpane: Workspace tabs/browser lifecycle remain candidates, not verified behavior.
+- 3804 `211f5b41413723a6bc8e5069c21081e6ee7f0616` [release] Server internal dependencies move from beta.2 to 0.1.91. Fleetpane: Reference package alignment only.
+- 3805 `0cbb8238c2c59dc7ec734b2bdde90d8cadef6b26` [packaging] Nix dependency hash changes with lock signatures. Fleetpane: Consider reproducible packaging later.
+- 3806 `02ec9373996247953ecfdc04d240aa1efd7d2110` [catalog] Catalog search matches normalized title, ID and description. Fleetpane: Already covered by current Kit model search; installation catalog remains separate.
+- 3807 `b832d49a78a6484edbd2fb1a301ad3a3610c3708` [packaging] Gemfile adds multi_json beside fastlane. Fleetpane: No Rust desktop implementation required.
+- 3808 `9ce6a38792639061ad8bb326223c4615b339c0f2` [composer] Voice-button styling gains optional compact leading-space reservation. Fleetpane: Keep Kit composer geometry stable when optional controls change.
+- 3809 `6c3e2bd703a003f310d6d789ff4dd63f159e7552` [conversation] Restick without a pending request cancels queued frame and runs immediate verification. Fleetpane: Use as tail-follow regression candidate.
+- 3810 `09675578461ce846065154986ff91c4574e81ee6` [conversation] Native measurement change initializes verification when no pending request exists. Fleetpane: Compare streaming tail intent with existing Kit anchoring.
+- 3811 `378f1986ace0bdc795b6b1843f5e3aab70dee5bd` [test-config] Playwright video becomes always-on only with E2E_RECORD_VIDEO=1. Fleetpane: Reference evidence capture option; no test executed.
+- 3812 `bed8af7aa625543cc326dc7c0fe62e40b868d951` [files] Markdown file links call shared openExternalUrl instead of Linking.openURL. Fleetpane: External file-preview links remain a scoped native workflow candidate.
+- 3813 `dcdb178468bd5c0db55e157d1513aea94dd0d30d` [website] Landing page defines OMP SVG icon. Fleetpane: No priority provider adoption implied.
+- 3814 `e72b0773e629ed172f780d6eb275280d1446809e` [provider] Pi label normalization now detects vendor colon-space separators after whitespace normalization. Fleetpane: Preserve provider IDs independently from display labels.
+- 3815 `eca0a5bf67be40ac43b84929c8e100d44574e5cf` [updater] Manual/nonstable checks bypass stable rollout; valid future stable dates remain withheld. Fleetpane: Updater policy remains separate from Host session continuity.
+- 3816 `9f41904c6f274e2f11b715f2139b15a38f2390b1` [support] Issue template directs urgent/blocking reports to Discord. Fleetpane: No product implementation needed.
+- 3817 `c5bcec5c7108677231f2c63fb48de7b245356b76` [composer] Command option builder returns no options when autocomplete is hidden. Fleetpane: Keep draft autocomplete visibility explicit.
+- 3818 `e53d26699fbbbea79401387c8f67018ded7008dc` [routing] Known-host resolver checks route ID against registered host IDs. Fleetpane: Removed Host routes must resolve visibly rather than spin indefinitely.
+- 3819 `b83ee957d1f7785378320e1e1ef1bdcb049852f1` [ci] Non-Windows CI installs dependencies in a three-attempt Electron loop. Fleetpane: Electron install policy is not Rust runtime guidance.
+- 3820 `52a66cca7095c465ea5d51fc488bf70b5dc1ce97` [merge-ci] First-parent merge carries the same non-Windows Electron install loop. Fleetpane: Receipt records merge basis; no additional runtime conclusion.
+- 3821 `edd5a99832a47eaffd6d4dbe1306c510a78a9efc` [test-reference] OpenCode command expectation adds kind=command. Fleetpane: Preserve advertised command metadata; reference test unexecuted.
+- 3822 `dcbbaa8eceb2a495fa01b283248eedb9f99f2550` [platform] Windows editor lookup introduces extension detection before shim selection. Fleetpane: External editor launch remains a platform-specific gap candidate.
+- 3823 `e9f9759ba88fce274251537db962ca8284864fc6` [platform] Windows path helper replaces forward slashes with backslashes. Fleetpane: Normalize only at external Windows launch boundary.
+- 3824 `b3f44981a86c78e2bf2cd397c77ca6a572aa5de1` [acp] ACP loadSession uses capability-gated MCP servers: unsupported providers receive an empty list; startTurn rejects invalid lifecycle. Fleetpane: Check actual DeepSeek capabilities; avoid injecting unsupported MCP configuration.
+- 3825 `cfd72b815c7de4fedd50325d8bf25044ce65719d` [provider-doc] Catalog replaces DeepSeek-TUI entry with CodeWhale0.8.55 and codewhale serve --acp; website keeps old slug. Fleetpane: Reconcile DeepSeek generation/installation identity explicitly before adopting historical catalog naming.
+- 3826 `51d1d007ce96490454267b9d63d1af64bd9ee854` [imports] Import provider filters prepend All providers and use provider-ID label lookup. Fleetpane: Import selection UX remains separate from continuation correctness.
+- 3827 `27b62421283dbc05f17c53220f9938814dda15a6` [git-deferred] Push policy delegates pushable-commit checks and treats missing behind count as zero. Fleetpane: Git expansion deferred.
+- 3828 `a3959dd99ffe0b44b2ea2eaf8fdd6bf7deefc9d4` [catalog] Cline catalog and npx command advance from 3.0.20 to 3.0.23. Fleetpane: Keep paired version pins; no provider scope expansion.
+- 3829 `50ec8955eb935f8a7b6593adb9fcc84139b79261` [release-doc] Release notes advertise skills autocomplete and manual-rollout bypass. Fleetpane: Use underlying implementation receipts for behavior claims.
+- 3830 `cb37d026ad72f84ca4f70fc7af990159d94f23cc` [release] Server workspace package references advance to 0.1.92. Fleetpane: Packaging reference only.
+- 3831 `7512110e6ff44f34c9a47901d91b38af0f7dba50` [packaging] Nix dependency hash changes for this lock snapshot. Fleetpane: No behavior acceptance follows from hash update.
+- 3832 `56b1def06e82db5112d36afdef14f5fce5c0f96e` [provider] Claude model list adds Fable 5 with copied extended-thinking options. Fleetpane: No expansion beyond priority providers required.
+- 3833 `49e09ee66061e9fad430db62e95fefbb64d05355` [release-doc] 0.1.93 changelog announces the Claude model picker addition. Fleetpane: Release text is not provider acceptance evidence.
+- 3834 `5631eb17ea29cec91bb8baf05ad2efbc3d87abbc` [release] Server internal dependency references advance to 0.1.93. Fleetpane: Keep future Rust package releases coherent.
+- 3835 `915cbda8a7921a609dda3e27d5b4132580ce5ccc` [packaging] Nix dependency hash changes again. Fleetpane: Reference reproducibility mechanism only.
+- 3836 `e446d9009f05b5e69d7bd076196dd523ade2df61` [editor] Editor image map adds Antigravity asset; declaration/import excerpt only, no behavior inference. Fleetpane: External editor discovery is separate from an icon entry.
+- 3837 `7be9cc0d0b4096c2c312addc9d536e479214b0f7` [questions] Claude question normalizer gates handling on AskUserQuestion and array-shaped questions. Fleetpane: Preserve exact provider question contracts rather than invent options.
+- 3838 `8e6455f1d60ea6112ee733cb6391bdfc55437207` [workspace-doc] Docs describe projects containing working-directory workspaces with multiple agent/terminal/browser tabs. Fleetpane: Current workspace tabs/layout remain useful gaps.
+- 3839 `5ea586a926b9d4cc7f813bf4ddc65d6cb4084dd6` [imports] Pi import reads persisted session config before persistence import. Fleetpane: Retain provider model/settings when implementing supported continuation.
+- 3840 `f7bef366065c2a54dec8d55845fdab8e984b1cac` [website] Hero SVG changes from Copilot to Cursor. Fleetpane: No native workflow change inferred.
+- 3841 `201f427f622fb13f60cdc62b0d894f7d4f57ae95` [settings] Settings sidebar introduces an outer container with desktop-specific branch. Fleetpane: Kit settings scrolling and small-window usability need independent acceptance.
+- 3842 `6db285b1d999f918c264ff09b3ebd4a07c50ad03` [provider-doc] Claude page describes CLI/SDK usage and policy buckets. Fleetpane: Historical policy text is data, not current policy advice or instructions.
+- 3843 `a682476d117018bf6c58b4fee2a5e0c869d9cc20` [startup] Startup blocker returns none for non-desktop and checks any online Host on desktop. Fleetpane: Keep GUI startup distinct from independent Host availability.
+- 3844 `f639c4cba6fd6fd821daea24472c4e351259929b` [protocol] Known capabilities retain boolean validation/defaults; catchall accepts future boolean capability fields. Fleetpane: Keep extensible known/unknown capability boundaries in Host protocol; no provider acceptance inferred.
+- 3845 `2828dce65f93cb2472b881cbcae58cbc23e1c2a4` [questions] Primary action advances only answered, nonresponding intermediate questions. Fleetpane: Multi-question native interaction remains an acceptance candidate.
+- 3846 `b2cd61a6fe05ef5e9556d12796763e5bbbc823c4` [git-deferred] Scheduled Git refresh construction replaces queued-refresh merge helper. Fleetpane: Git/PR status expansion deferred.
+- 3847 `65342b338ac5aa6cc09a53bd36c148b6c8c768b8` [merge-git] First-parent merge includes scheduled Git refresh helper replacement. Fleetpane: Git expansion deferred; merge receipt retained.
+- 3848 `41cf070fd810a6f4ce816de899bff1503facd2ca` [packaging] Nix dependency hash changes for updated lock data. Fleetpane: No runtime claim.
+- 3849 `08ebe5e7e18792685855c6ccbf296c70ee021a74` [localization] Date-section labels switch through translation keys for today/yesterday. Fleetpane: Native localization remains separate from canonical provider facts.
+- 3850 `a70b5c1e1d8085ae2d39f501d279e7770d2a726b` [commands] Draft command-cache key includes Host/provider/normalized cwd/mode/model/thinking/features. Fleetpane: Use exact configuration identity for future pre-creation command caches.
+- 3851 `33f77e335fd17dcb79a9ecbccac8b397ceb8928c` [packaging] Nix dependency hash updated. Fleetpane: Packaging reference only.
+- 3852 `fd341de848b80ba3ae899ec24d2842250a669736` [merge-packaging] First-parent merge changes Nix dependency hash. Fleetpane: No new runtime conclusion.
+- 3853 `69f0fa07b4b321a8752ec9fb99a9106ecb32ac03` [docs] Chinese README retains unified multi-provider description and community links. Fleetpane: Localization reference; supported provider scope unchanged.
+- 3854 `d3a6bf80dde9aaf667f297dd95f9379bf4b23cde` [localization] Locale map adds native language names; declaration/import excerpt only, no behavior inference. Fleetpane: Keep display locale separate from provider identity.
+- 3855 `f5a7055e7ebe4d6ef19b76bba847e3eefb26fa92` [docs] README removes explicit ws/TLS self-hosted relay recipe. Fleetpane: Remote transport remains an independent gap.
+- 3856 `d802534e7bb5d21a989710c0e61d7423c5eb0714` [routing] Startup selection logic is refactored around hostExists. Fleetpane: Revalidate saved Host/workspace identity on refresh.
+- 3857 `9fb64f5a0b2ef984e79719ee042d07e7644546a2` [autocomplete] Applying completion now uses nextInput without injected trailing space. Fleetpane: Preserve exact composer text.
+- 3858 `c0614c32077d46d2f2d2aeb690d21c1607dc5f27` [merge-composer] First-parent merge removes automatic completion trailing space. Fleetpane: Retain exact drafts in Kit.
+- 3859 `62d9e656d749d47128392dc12baa3ef9c88903c5` [workspace] Retention prunes active-first, deduplicates Host/workspace keys, caps count and keeps inactive entries until hydration confirms absence. Fleetpane: Workspace tabs/layout need bounded native retention without terminating Host-owned sessions.
+- 3860 `1b6f9300a726b82609d62d29963b92bd9028b396` [terminal] Terminal listing filters through workspace-root ownership resolution. Fleetpane: Validate nested worktree terminal isolation.
+- 3861 `cd0aaed1e257fd95bbdd664063277be052c93c63` [routing] Workspace-selection fallback redirects to first registered Host if present. Fleetpane: Do not silently transfer Host authority.
+- 3862 `75aa626df5fd50f8ffadbe1cf8794afc5b46039f` [routing] Saved Host shell fallback uses first registered Host outside workspace branch. Fleetpane: Keep explicit unavailable-target state in Fleetpane.
+- 3863 `fa800ae78edd5c971852418f5f95e3b97dde0133` [terminal] Terminal profile argument parser whitespace-splits trimmed text; empty input means undefined, with no shell-quote parser shown. Fleetpane: Profiles remain useful; specify exact argument handling before adopting this parser.
+- 3864 `f242519623ab5945eeae2dabbc2c0343e24db215` [files] File-tab menu invokes copy callback with filePath. Fleetpane: Native exact-path copy remains independently scoped.
+- 3865 `f05544ef8f4211dba6e56e53cbd1bd268b8ad10f` [auth] MCP auth accepts constant-time capability token or password bearer; no password permits access. Fleetpane: Remote/MCP authentication needs explicit authority boundaries.
+- 3866 `e4c966b21ec06325bce16863c79755ca32ce6e68` [localization] Arabic settings adds edit/reset/save/saving labels. Fleetpane: Localization reference only.
+- 3867 `d84d5f66cdb76986eb16a4cacd5bf2ff19ccd08e` [merge-auth] First-parent merge carries capability/password MCP authorization. Fleetpane: Do not equate this with Fleetpane remote acceptance.
+- 3868 `c5da7505dadb6bea29ded0862388379173eb771a` [commands] Claude root-only command set includes clear/compact/context/debug; declaration/import excerpt only, no behavior inference. Fleetpane: Separate inline skills from root commands if advertised.
+- 3869 `3163e212fbcd1ab43a286b28ad80359779970449` [markdown] HTML-ish Markdown parser exposes write/skip/end and display-part splitting; declaration/import excerpt only, no behavior inference. Fleetpane: Sandboxed rich content remains a separate gap.
+- 3870 `21d7f8cb2a8b772ec037f2d1448a4b54789dfd58` [packaging] Nix dependency hash updated. Fleetpane: No runtime claim.
+- 3871 `f930956e5c7aa5ef4c4fe7c02369c96569a90f50` [docs] Update docs distinguish Stable/Beta and semver prerelease tags. Fleetpane: Packaging/updater roadmap reference.
+- 3872 `9e9d0ee305b0e30ac69334c9f9ed2e0b3aa56163` [compatibility] Protected Markdown ranges use copied-array sort instead of toSorted. Fleetpane: No Rust adoption needed.
+- 3873 `426547bfcc5aa884765bfca3fbb276b3c6ce6392` [composer] Default send dispatches queue only when configured, running and queue callback exists. Fleetpane: Explicit queued-input behavior remains open.
+- 3874 `7f8f42e92e12a7e0a3985d623019d69f0237843c` [catalog] Cline version and launch command advance together to 3.0.24. Fleetpane: Priority providers unchanged.
+- 3875 `e3a54025576ff90b16c30d4ae9c1a917127c8ba1` [release] Server internal packages advance to 0.1.94. Fleetpane: Release alignment only.
+- 3876 `fd0793dc02bb2deeb8ec022206dd44d5998bcdc4` [packaging] Nix dependency hash updated. Fleetpane: Packaging reference.
+- 3877 `9af18ef2f5cc2970275f54f654a293531b89a53d` [release-doc] Changelog fixes i18n PR/author attribution. Fleetpane: No behavior inference.
+- 3878 `00a6e636fb1f6abda45190009fd510efb17d1f3c` [mobile] Sidebar animation comments document stale Fabric transforms and settled-generation rebuilding. Fleetpane: Use native visibility ownership; no React workaround port.
+- 3879 `a3951495d413f199bf9ae2050568563b242381d6` [forms] FormField derives hint/error IDs and prioritizes errors. Fleetpane: Native profile forms should surface validation clearly.
+- 3880 `fb0c5b27f34bec4cb45ec3c47b8f12dc94ffb32f` [git-deferred] GitHub timeline normalization returns raw body when no image references exist. Fleetpane: PR expansion deferred.
+- 3881 `7e46f6a6471d1d701e6262ad896f7f7e9f7a200f` [website] Docs navigation checks matching descendants recursively. Fleetpane: No native workflow change required.
+- 3882 `4824cfd05be345b9818a1a3f7455ae1399a99af0` [packaging] Nix dependency hash updated. Fleetpane: Packaging reference.
+- 3883 `9c43e0222a86b8cacea04ed5f9b6c6b27905ff82` [mobile] New-workspace screen applies translate-mode keyboard shift style. Fleetpane: Native keyboard/focus acceptance is separate.
+- 3884 `736b2da1a293f79a551fe6de94f6faffa0bd130f` [attachments] File extension helper strips fragment/query before extension lookup. Fleetpane: General file attachments remain separate from verified image drops.
+- 3885 `85fa38bddef774936db92204084c3ac63d3b082c` [git-deferred] Arabic squash/merge/rebase labels become common merge wording. Fleetpane: Git expansion deferred.
+- 3886 `889d058658de7c3c6fc5c78c3158beb22e1a34da` [terminal] Workspace menu maps profile items with terminal-creation disabled gate. Fleetpane: Terminal profiles are a candidate gap.
+- 3887 `c4d544baf63c433e113cbfd8a023cd8a051cf9af` [rendering] Layout removes inline history layoutSegment construction at this site. Fleetpane: Inspect broader caching before any performance claim.
+- 3888 `a929ea9726bb62e19bf40d942cb3b44e980a5b00` [workspace] Project path handler becomes synchronous and removes local submitting setup. Fleetpane: Host-owned path validation already has separate acceptance.
+- 3889 `2c27f21a900073ec815697a90c9fbf3329c92c6c` [attachments] Raster classification checks MIME, falling back to extension only for empty MIME. Fleetpane: Keep SVG outside raster image send path.
+- 3890 `8cd51c8a47ce02f9daebeead258b8546a5e9907c` [composer] Image attachment menu uses image icon instead of paperclip. Fleetpane: Preserve clear image/file actions in Kit.
+- 3891 `b0ca08a452d6b5f6078fe24211dd7a86248db79c` [git-deferred] Checkout cache comments designate push and query paths as dirty-state inputs. Fleetpane: Git review expansion deferred.
+- 3892 `5b321c0644418de3800ac738401283f9a8bcd8c9` [catalog] Codebuddy pin and launch command advance to 2.106.1. Fleetpane: No provider scope expansion.
+- 3893 `fbd3dca7edb9b8fae2d72aa070f7f6d0a1b58925` [release-doc] Changelog advertises arbitrary attachments and SVG disk upload. Fleetpane: General attachments remain a candidate, not acceptance.
+- 3894 `10a556d6a15e3a04039beffb68e64e4a57b05f34` [release] Internal packages advance to 0.1.95. Fleetpane: Packaging reference.
+- 3895 `04a985bf23d7c3299c025c4148c7724cc8822d05` [packaging] Nix dependency hash updated. Fleetpane: No runtime claim.
+- 3896 `e0463ad17f31be5ac6154db147505477400d66ad` [mobile] Sidebar state removes settled-generation state/callback in selected hunk. Fleetpane: Do not port Fabric-specific lifecycle machinery.
+- 3897 `a9ea3c76a3394032ed71c4f5e7a235513a1d45ac` [release-doc] Release note explicitly limits fix to Android sidebar behavior. Fleetpane: No desktop acceptance implied.
+- 3898 `8ef75c091450ac98d50577f93b178bf2aaa18c84` [release] Internal packages advance to 0.1.96. Fleetpane: Release alignment only.
+- 3899 `f4687668e1f476f5c6e8927d07e367dd6c7dc956` [packaging] Nix dependency hash updated. Fleetpane: Packaging reference.
+- 3900 `a5c4ba4d89b0f963ac0c4cef8457feefeb9c329d` [history] Claude prompt normalizer trims text and preserves non-command nonempty input. Fleetpane: Keep imported command-message handling provider-specific.
+- 3901 `ef750e0a85e20618c90d4768ff3d26ec03bfe8b8` [attachments] AttachmentFrame signature/comment describes sent/read-only surfaces; no implementation behavior inference. Fleetpane: Compare full frame implementation before changing immutable sent-attachment UI.
+- 3902 `442a1b9a5a29007bbfd4c9bf4c3bd9517412c809` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3903 `72b67f48e3a9a6fff5b1619a0dcc196e043480de` [terminal] Output barrier waits after outstanding writes and rejects changed operation/terminal; timeout and write failure can also start barrier. Fleetpane: Native terminal replacement needs ownership fencing; do not assume callback-only completion.
+- 3904 `bf8f2510c852e8e0dfce08c0336eefdb4da99aad` [acp] Session listing starts passing cwd alongside cursor. Fleetpane: DeepSeek history needs source-side workspace filtering.
+- 3905 `f352072dace4d4b7bb23b9d6e280e0624db91a4f` [resolution] Module loads which and declares2s probe timeout; no executable-resolution behavior inferred from this excerpt. Fleetpane: Executable discovery remains a provider-setup gap requiring implementation review.
+- 3906 `21deb086739289a0ac39597a6f145596907ee86d` [routing] Workspace route ID normalizes as opaque identity. Fleetpane: Do not derive authority from display paths.
+- 3907 `0d76654ba0294297d5f42824b2be40a805e9317a` [terminal] Hooks card reads connected state and daemon config. Fleetpane: Terminal-agent integration remains optional scoped work.
+- 3908 `a6ec352f0745542b907ca7a166ab61edfd7aeda9` [acp] Selected hunk removes local child-exit waiting helper. Fleetpane: No shutdown behavior inferred beyond removal.
+- 3909 `43e17c1e7c16967d4f65bda5ee36f895fe369ba8` [config] Bootstrap reports configured appBaseUrl. Fleetpane: Remote/deeplink routing remains open.
+- 3910 `f4450cda51d78c16f2c2cc8a37a2d5d380f206c5` [theme] Provider search input uses themed muted placeholder. Fleetpane: Use native Kit theming.
+- 3911 `eb94b70848e738e3cc6ad915ded0ab78171b835d` [files] Selected hunk removes explorer refresh Pressable. Fleetpane: Keep explicit native refresh independently verified.
+- 3912 `71b5c35d9b3c7ae96ec01bc3f59e0da9df7b72d0` [archive] Selected hunk removes local worktree archive callback. Fleetpane: Workspace archival remains open.
+- 3913 `a4c44181646ef92e0cd8641191ebf6231e1455c3` [terminal] Activity state setter signature is expanded; declaration/import excerpt only, no behavior inference. Fleetpane: Inspect full transition logic before adoption.
+- 3914 `42969e40d59259f2ab2eb5f156ed8353deb8a066` [terminal] Terminal lookup includes descendant cwd buckets. Fleetpane: Check nested workspace ownership before listing.
+- 3915 `713a042dc5e01be219e5eb7d915203a0944c46c2` [terminal] Profile icon gets a dedicated leading wrapper. Fleetpane: Profiles remain a native gap.
+- 3916 `e84a3ff57407f05cf0d0e1dde68367df9b047b0b` [terminal] Clear-attention preserves activity state instead of forcing idle. Fleetpane: Separate attention acknowledgement from running state.
+- 3917 `754f6336c0c09460cabdd1aebab6f71bc7d4d3f8` [workspace] Selected hunk removes pinned-tab launch consumer. Fleetpane: Tabs/pins require independent routing design.
+- 3918 `1c9e78616fa11baf3913b1e37bc69f6df6089d60` [terminal] Selected hunk removes terminalsChanged event handler. Fleetpane: No full event-flow conclusion.
+- 3919 `af0437e6df44d619ffa59343cf9f6d6664735c60` [test-reference] Terminal helper checks attention reason alongside activity. Fleetpane: Useful isolation acceptance dimension; unexecuted.
+- 3920 `a4d4d42873b6f07019eeb5ed2849280fd48a7bd4` [metadata] Metadata result supplies title and branch separately. Fleetpane: Preserve session/workspace metadata identities.
+- 3921 `ba9f7740a8c9b58588a7bbd7537bb824962b0157` [workspace] Selected hunk removes fallback ID resolution by cwd. Fleetpane: Workspace identity must remain durable and explicit.
+- 3922 `9966e4932944e19340a47353e6e250ca56a50a86` [provider] Selected hunk replaces per-client availability mapping. Fleetpane: No availability correctness claim.
+- 3923 `c464c2bcb440cc5a7e367c29182edfe07ad7ea94` [tabs] Inline add-tab button accepts shortcuts and creation callback; declaration/import excerpt only, no behavior inference. Fleetpane: Workspace tabs remain a useful gap.
+- 3924 `36a136d8114f59449adcbf2c1ce1aeaa2def2602` [models] Selected hunk removes selector Pressable anchor setup. Fleetpane: Kit search already has separate acceptance.
+- 3925 `64b2949f083ff77c697e7d3171dc6d598c1cd78d` [workspace] Active placements switch from cwd to workspace-ID index. Fleetpane: Prefer durable workspace ownership over path aliases.
+- 3926 `e90f398ac07d79d28dd9854909cf63a33d9c0db5` [provider] Cursor model override with ACP fallback is removed. Fleetpane: No priority provider expansion.
+- 3927 `1812884ecd94b874ca951914d09e0dbce71f685a` [orchestration] Finish body includes child ID/title/reason and optional last answer. Fleetpane: Scoped child completion notifications remain open.
+- 3928 `f5d39446ccaf1591d5422b60e5e0eaf18271de37` [orchestration] Same finish-body formatter appears in this commit. Fleetpane: Keep exact child identity in future notifications.
+- 3929 `e77c8e2bf3cd109871d209eb9eb88ebd782ebfb4` [workspace] Hover card adds cwd row when display path exists. Fleetpane: Show exact workspace context.
+- 3930 `88b48c9d090e06ab66d434a7154a1d77ce007737` [shortcuts] Cmd+N maps to new workspace outside command center. Fleetpane: Configurable native shortcuts remain open.
+- 3931 `be3a1ea6c3ca64f83c3cecf160853fab79b9333f` [workspace] Workspace record builder expands destructured inputs; declaration/import excerpt only, no behavior inference. Fleetpane: No behavior inference from parameter reshaping.
+- 3932 `10664487fbde73f3f2f16dad31aac6bf5eec6d0a` [workspace] Hover title removes one-line truncation. Fleetpane: Long workspace names need native acceptance.
+- 3933 `3cf3a634230dcc57215735dcb35c9c54dd138068` [terminal] CLI opens project and checks workspace before terminal creation. Fleetpane: Use shared Host-owned workspace admission.
+- 3934 `37de9ea79617097924208d6c844a2f9476173ec2` [persistence] Pin-store hydration adds custom persisted/current merge. Fleetpane: Validate pinned identity across schema changes.
+- 3935 `0fef66283a9de61de5c37e586e86f765bde9a48b` [types] Permission sanitizer adds nullable overload signatures; declaration/import excerpt only, no behavior inference. Fleetpane: Keep request payload typing exact.
+- 3936 `e202ca5036f148e45a26014db9ae11b89b8c7aa5` [archive] Archive controller receives active selection and directory; declaration/import excerpt only, no behavior inference. Fleetpane: Workspace archive lifecycle remains open.
+- 3937 `fcb7f8e215239c0a6e9b02a706c74bd480c195bf` [metadata] Project metadata prompt keys drop agentTitle. Fleetpane: Keep title generation distinct from project Git prompts.
+- 3938 `c32b80a2eda5bc20e0aa582c00b5681f521aaeb1` [catalog] Codebuddy pin/command advance to 2.106.7. Fleetpane: Provider scope unchanged.
+- 3939 `8c509017fff319ffd366ef5c77af9a6ac2db28e3` [release] Server dependency hunk removes 0.1.96 references. Fleetpane: Release packaging only; target outside selected lines.
+- 3940 `7b4b27d877b7d71c7fc7e6854139fb56d0769309` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3941 `69741e0770737b23e770c4141b396e402a8afd9c` [mcp] Bootstrap removes session-ID transport lookup block. Fleetpane: MCP serving lifecycle needs broader review before adoption.
+- 3942 `7e5d7f7c6784ce9396bf1f5d275340b4d107d1c2` [workspace] Backing hook is renamed workspace isolation. Fleetpane: Use explicit isolation semantics in creation UI.
+- 3943 `a61118776a2ab670f67d37ed9b587a38237236d3` [style] Workspace section font shrinks from sm to xs. Fleetpane: Use Kit typography.
+- 3944 `14743fa0b09007718e785c31c2628128fbbe09a9` [test-reference] Smoke test consumes response instead of asserting 400. Fleetpane: No HTTP success or regression acceptance inferred.
+- 3945 `11abbcc6301b621828f37384a693523dd2de1240` [updater] Updater disables auto-install-on-quit only for Linux AppImage; runtime applies this helper during configuration. Fleetpane: Packaging/updater work must preserve independent Host sessions and use platform acceptance.
+- 3946 `1340a801448c9c11dd4fc670be92108add5fb836` [git-deferred] PR picker reads trimmed headRefName. Fleetpane: Git expansion deferred.
+- 3947 `0c9802b22b52c1e37979ea1d50f016d6767cefad` [workspace] Agent creation introduces explicit workspace-ID resolver inputs; declaration/import excerpt only, no behavior inference. Fleetpane: Preserve creation receipt/workspace binding.
+- 3948 `90d386b88e53bce6a054ad3a95fc4212fced6959` [release-doc] Release notes parse heading matching pushed stable/beta tag. Fleetpane: Future release automation reference.
+- 3949 `4a6503f1777a91ceb0fb59698991f47e4c0cd0dd` [composer] New-workspace composer enables externalKeyboardShift. Fleetpane: No desktop keyboard claim.
+- 3950 `e58de8c338e8978ca563cabdcdf0abcb441948f3` [style] Sessions sidebar replaces clock with history icon. Fleetpane: No workflow change.
+- 3951 `2bc48993a5fe7b7a04690b46d9719f7ac5cd1cc7` [metadata] Title prompt adds concise good/bad title examples. Fleetpane: Reference data only; no historical instructions followed.
+- 3952 `fc4c2aa367baa23bd6abdaef871d970961bb2083` [metadata] Generator config adds title-style key/default. Fleetpane: Workspace title preferences remain open.
+- 3953 `608a95015524086ba4f53994de91ad96a07483b9` [release-doc] Notes describe same-code independent workspaces and terminal activity. Fleetpane: Workspace lifecycle gaps remain.
+- 3954 `6fc52d85cbf953993d8450aafe0cc5aab33cd430` [release] Internal packages advance to 0.1.97-beta.2. Fleetpane: Packaging reference.
+- 3955 `6c0b5c7640c8dbee49ce9c776ba130b2e216de97` [provider] Snapshot warming runs only for resolved nonempty provider list. Fleetpane: Avoid repeated unnecessary provider probes.
+- 3956 `127b138a914d28c1fecef9162742a7c050cc828d` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3957 `35c2e5de8edbf8ed474c95b67f3556dc905ed3d3` [packaging] Same Nix hash transition appears here. Fleetpane: No runtime conclusion.
+- 3958 `b7ab1a1732dc467c73cd9e60ea0f64937531b978` [catalog] Agoragentic pin becomes 1.3.3. Fleetpane: Provider scope unchanged.
+- 3959 `a51c39eddfeff0cd2ebb81ed32cde2626eee5e5b` [release-doc] Notes claim repeated provider probes no longer freeze UI. Fleetpane: Not performance evidence.
+- 3960 `e4da3693e919dfeed1b170f582ab406318a3462d` [release] Internal packages advance to beta.3. Fleetpane: Packaging reference.
+- 3961 `4e899c644a7bc2986c91a9bf27d55ecc8e01dc85` [mobile] Keyboard shift gains shared context; declaration/import excerpt only, no behavior inference. Fleetpane: Kit focus/geometry is separate.
+- 3962 `3163c7d09bbef25e6edece133e04cc16e2f06321` [workspace] Selected hunk removes left workspace status wrapper. Fleetpane: No status correctness inferred.
+- 3963 `c8717e0c70762f1ee51606fd9802737359d7b1e8` [generated] Generated bundle changes xterm CSS module annotation to packages/app/node_modules path. Fleetpane: No terminal behavior inferred from inspected byte slice.
+- 3964 `afe7eb876c053522f4082d0254eb7b34b573e697` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3965 `7c1870e887b6ee31637e02e513815caf29920325` [packaging] Same hash transition appears here. Fleetpane: Packaging reference.
+- 3966 `de84c8f17996bd2c6b1337aa7447b4074e2dccd2` [style] Sidebar compact variant adds compact button style. Fleetpane: Use Kit density controls.
+- 3967 `1250f5cf4f46f4086fce188fd73508ec5f1a6b5a` [composer] Submission minimizes only when preserveHeightOnSubmit is false. Fleetpane: Check draft geometry across sends.
+- 3968 `df18bbc43ad8d61dbdf9638199ff085b911dcfb7` [protocol] Tool timeline payload becomes union including running/completed schemas; declaration/import excerpt only, no behavior inference. Fleetpane: Preserve typed lifecycle states.
+- 3969 `59299ac6355d09ac7882d241cf1f4d9157504955` [protocol] Same tool payload union appears here; declaration/import excerpt only, no behavior inference. Fleetpane: No validation acceptance claimed.
+- 3970 `61bfc5b6319226ec4e01dc3a8a5a7991e08ac6ce` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3971 `eb628765d75cf08007b02db6e11230098db79480` [packaging] Same hash transition appears here. Fleetpane: Packaging reference.
+- 3972 `ea2f768d3f3dcc93dc3676bcf3826cc75d87d0f3` [connection] Concurrent ping reuses current probe promise. Fleetpane: Observational liveness may coalesce safely.
+- 3973 `fe15b68e0640761fe4375e61200fb072afba35ac` [git-deferred] Git diff arguments include ignoreWhitespace option. Fleetpane: Git expansion deferred.
+- 3974 `31fcde2ea686cbb5b85ec3f8c47a5a6d928f6bc0` [state] Session updater retrieves exact serverId session before update. Fleetpane: Retain Host isolation.
+- 3975 `b3f81c0bf4cff01b5b528e0a01f77b323f428768` [workspace] Archived workspace restore recreates missing worktree from retained branch before clearing archived state, then emits workspace update. Fleetpane: Workspace/worktree restoration is a useful gap; directory failures must stay visible.
+- 3976 `00c57617d5ee16db8f9c3f932856e82ebaf6010e` [style] Session project-path text rendering changes. Fleetpane: No identity behavior inferred.
+- 3977 `d89affb5dc1710dd9d51b7eec5733e00d1184e0d` [rendering] Invisible agent-list view returns null. Fleetpane: Bound retained native UI resources.
+- 3978 `ef87b091460da7e3110f684cd24555505975f81f` [catalog] Codebuddy pin becomes 2.108.1. Fleetpane: Provider scope unchanged.
+- 3979 `3d5059ab051b594ca0333787a71ff8c79e3f6bea` [workspace] Session context builds workspace/project maps and cursor; declaration/import excerpt only, no behavior inference. Fleetpane: Full-index workspace loading remains separate.
+- 3980 `c3321ea8ffe99a18c3b960bbba6ba380f252fb4c` [git-deferred] PR label drops hash prefix. Fleetpane: Git expansion deferred.
+- 3981 `2064e308a74c2af806d78abc037c295bf6413d0f` [test-reference] Session expectation includes workspaceName and checkout cwd. Fleetpane: Reference test unexecuted.
+- 3982 `4f78d4f679603a1b0fb5d22e352f7b366effea9b` [catalog] Codebuddy pin becomes 2.108.2. Fleetpane: Provider scope unchanged.
+- 3983 `f876b80f7a4fdadd542528824781746726e3b6c2` [release-doc] Notes advertise archived workspace restoration after worktree removal. Fleetpane: Useful lifecycle gap; no implementation claim.
+- 3984 `9a09ccb3d6f71b31dc4317c22e11525688d0e707` [workspace] Session adds typed project.remove request handler; declaration/import excerpt only, no behavior inference. Fleetpane: Removal requires explicit Host-owned lifecycle.
+- 3985 `931ea9794284d36da40288b97cd3ef17b0fe809e` [shortcuts] Badge modifier resolves from platform/desktop context. Fleetpane: Shortcut hints must match actual bindings.
+- 3986 `01a2afa7c55e64c71a7d60083962da046ce52027` [markdown] Backtick parser saves after-open index before finding close. Fleetpane: Unmatched markers are regression candidates.
+- 3987 `8cc74fb75d690d5df2b284410d6ce0106bf219cb` [files] Parser comment adds filename:line:column line-target syntax; no parser behavior inference. Fleetpane: Read parser implementation before extending existing file navigation.
+- 3988 `5d0fbd1d371754cd7d189a4441183998d0a5d449` [shortcuts] Same platform-aware modifier helper appears here. Fleetpane: Native shortcut hints need independent acceptance.
+- 3989 `05e8d346134fc4d1be3a84f86db17e835b3cde07` [release-doc] Notes list project removal and unmatched-backtick fixes. Fleetpane: No historical QA claim.
+- 3990 `aff5fe651c0f4e6295b1a94214101fb94be4cf02` [catalog] Deepagents pin becomes 0.1.15. Fleetpane: Provider scope unchanged.
+- 3991 `ee3a7a2d285aaac2a15ba0b77e9c52151d47408f` [ci] Chromium installation receives ten-minute timeout. Fleetpane: No historical CI execution.
+- 3992 `112f1ace65530c23eca826695d45ed8fd7afebe6` [terminal] Workspace terminal resolver returns null without workspace refs. Fleetpane: Preserve explicit terminal ownership.
+- 3993 `1fc565118b6c04a64e887b4f42775f1bef9bb164` [ci] Chromium install drops with-deps flag. Fleetpane: CI reference only.
+- 3994 `0c6f0081155a8641f304fc8639b63d8657300289` [catalog] Dirac pin becomes 0.4.1. Fleetpane: Provider scope unchanged.
+- 3995 `de5307dfa04e57027875b8c3bc4218b3f26e78b0` [ci] Dependency-install step is replaced with retry-labelled step. Fleetpane: No retry policy adoption.
+- 3996 `60cf566b79938d62095f93faa07525d279f4a8e4` [release] Internal packages advance to 0.1.97. Fleetpane: Packaging reference.
+- 3997 `d0189f3f65e35d758fb232049834e3f584a1a8f4` [packaging] Nix dependency hash changes. Fleetpane: Packaging reference.
+- 3998 `b90baaff71fd985a0e91bc9d24f5ba76b9300d71` [voice] Selected hunk removes missing-OpenAI-credentials error text. Fleetpane: Voice configuration needs complete review.
+- 3999 `ccb8714a711e4bdf8247fa0da1abcfb4fd0bd1d9` [provider] OpenCode filters legacy full-access mode from discoveries. Fleetpane: Keep provider-advertised supported modes.
+- 4000 `e73b1c472412e6c0890d42acc0fa8f9d7d75d073` [directories] Suggestion candidates reject ignored directory names. Fleetpane: Bound directory autocomplete explicitly.
+- 4001 `f9660c7e897bda665e330599dfbeb3d7bacd5d72` [git] Spanish PR labels distinguish squash/merge. Fleetpane: Git expansion deferred.
+- 4002 `cda66ae5f3a085bde9578e67ae1f2b9af01aa145` [ui] Diagnostic copy button derives hovered/pressed style; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4003 `7af92120fef32448ea7174e12a908dcd8220f9f9` [host] Detach helper rejects nonstring titles. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4004 `2b0740ff84927216f21637f451dbcc7389183ade` [notification] Provider toast returns without notice. Fleetpane: Durable notifications/mute/tray remain candidate gaps.
+- 4005 `acea7f3d24e0c9e05a6ddb766c0a9b4541681e3b` [ui] Balance bar branches on positive nonnull limit. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4006 `d1481833e6f4297576ce55e9c02190cd5f848311` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4007 `4534754617ba2f2b6ae28b884cb0705dd8279a80` [ui] Workspace row callback gains translation hook. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4008 `ba8fe261eec1062db499174c54f616538940c666` [host] Managed server spawn sets cwd to home directory. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4009 `4354ad3e27116d7c83306c0fee012239dff68ab6` [test] Seed helper reads created.workspace. Fleetpane: Reference test/config inspected only; not executed.
+- 4010 `b8bf2345fde0b4fd588d871c9f848283fdabe199` [config] Shell-env stderr logging limit is 2000; declaration/import excerpt only, no behavior inference. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4011 `80fc11541f335bd8208ee1602f4f57b4502a8907` [auth] Agent relationship schema discriminates by kind; declaration/import excerpt only, no behavior inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4012 `6a3856b6395a1e1c6c7bb878f9ae2e625c6dafba` [excluded] Kimi usage module constructs path list. Fleetpane: Kimi/GLM excluded; no adoption.
+- 4013 `2c4e443ad78ab899dfda09d972e3dd296d2fe8e6` [files] Exact workspace suggestion is prepended then limit applied. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4014 `0718e7c91447ee61f0c5d46c58a53d0f9aa3e71d` [workspace] Existing workspace handling checks listActiveWorkspaces availability. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4015 `68bbc75df18350025ce87d93e46ad7ac923a2f78` [ui] Sidebar preference menu adds themed Settings icon. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4016 `b3661193af681e6808463552273705d9bb22f615` [workspace] Session projection returns workspace.projectId. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4017 `8bd6c617a30094c6bc4a6bf39307121a38565b1c` [workspace] Same projectId projection appears here. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4018 `3493e0492d0bd416fca5786c771e2c4ce2624636` [ui] Context meter geometry depends on percentage visibility. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4019 `4b45bab7e3f5df9b290ec0bc514d5149246370b1` [provider] Mode preference update requires client and provider. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4020 `fd2fed03a63365df6b33c0784a20980c67764006` [provider] Usage parser checks iterations is an array. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4021 `b0e6dbceef58fbabb422ff8e74741a679e655220` [host] Managed-process ID is removed when present. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4022 `27ecb3a7a9cd2aa880feba44c9da880b0cd1059d` [host] Same managed-process removal appears here. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4023 `25252d1b866cf8c013cfa841824e2f52b61221ab` [provider] Codex thread lookup prefers nativeHandle then sessionId. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4024 `7f748531749318c725d30f2be891f87731fc4004` [workspace] Shortcut model reads projects before collapsed state. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4025 `c2d7796b78f4fdae846979cf8819a630d4676f57` [excluded] Kimi paths use injected homeDir or OS home. Fleetpane: Kimi/GLM excluded; no adoption.
+- 4026 `5180708e26b9b8dfe07e583ff8813f1f0bd3cf34` [excluded] Same Kimi home-directory selection appears here. Fleetpane: Kimi/GLM excluded; no adoption.
+- 4027 `477975713839452a525502c92e5952cc5dafe531` [content] Protocol adds optional turnId at selected event; declaration/import excerpt only, no behavior inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4028 `1927dbb19045d6aed28c77fc5b527c831bd466e0` [content] Selected hunk removes that optional turnId declaration. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4029 `a924059dafc743d754914f9cb127836e25d06f69` [provider] Model ID normalizes string case/whitespace and checks empty. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4030 `02838ca8bc4c68a98f3665de8e5b04267bd24e8c` [test] Import test adds false-resolving unarchiveSnapshot mock. Fleetpane: Reference test/config inspected only; not executed.
+- 4031 `ecb74bc8fb78747c037442c2a4ea2b95c548a41e` [provider] Auggie catalog pin becomes 0.30.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4032 `ab433aa110f6e1b85876d818f42dee8a543e7c62` [doc] Notes advertise provider usage and Ultracode. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4033 `c38510d3470d5d9ae4512c01a5998df351c230ae` [pkg] Lockfile adds peer flag. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4034 `fbd86564ddf444a55898b85115301f209241feaf` [pkg] Internal packages advance to 0.1.98. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4035 `f2e7ac2dc1066386fdee2fcee71f4b87f73fdf75` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4036 `2d8acc1611a9ac5e5ac6aa9cc9f814e6530abb08` [doc] Troubleshooting frontmatter gains order/category. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4037 `9c86a410ea7781b215a45317c9da0795eb205b25` [pkg] Release code validates versioned x86_64 AppImage filename. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4038 `617cf8a7bf7f77b6fff0a65e9955ef53f12c7faf` [host] Trace logging now checks trace-level enablement. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4039 `cf4dd8616c2ef57269de903d61bbef7831992846` [workspace] Workspace effect requires focus/client/normalized Host/workspace IDs. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4040 `18f880e561d6c808107c21871b62b87b4dc76c05` [files] Checkout request expands home shorthand in cwd. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4041 `2b5cc727f0302ce7089ad6b320b66543eaca2858` [voice] PCM constants specify 16kHz mono; declaration/import excerpt only, no behavior inference. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4042 `26b2f25050fa4aa2ec21cc36a332ce849a744f9a` [git] Session wiring forwards Git mutation notification/options. Fleetpane: Git expansion deferred.
+- 4043 `c03e7b82b42e7b2ce6c2d65e96c3b5873792e687` [workspace] Compact sidebar state parser rejects nonstrings. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4044 `d9cd6ea0fd7ff42fa55096b9d133709fced9e74f` [config] Undefined preference updates return existing values. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4045 `a397d411dd70bc349955424137fd9ea89bf19357` [ui] PR loading skeleton uses stable three-row keys; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4046 `1970a14349ce094a603d5ab53d6a249aa19d4a15` [provider] Catalog selects client or modelClient before replacement-model branch. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4047 `78d46a8a828de0d0e3e5850311e697b921b438db` [host] Startup boots store then calls gated daemon start. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4048 `9170c2f0e6c331b8e0eb8cd5d05357cb67939cf2` [provider] Codebuddy catalog pin becomes 2.109.2. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4049 `f94b488c4fb663d764ffceeb97d3fb4c791fce8e` [provider] ACP clears submitted message only for matching turn ID. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4050 `12101914c2f49ae92c132f8a1fed3c0ecba26fc5` [doc] Notes advertise PR refresh and provider diagnostics sync. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4051 `7a817774b73f11a027c28ea7f3b86817ad85a871` [pkg] Internal packages advance to 0.1.99. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4052 `6fe320055dacc916acf2514924b6f3ba2d6b42ec` [ui] Mode tooltip conditionally shows active-composer cycle shortcut. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4053 `42e3f63decb2616553ba49d80250c44cdcee1d12` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4054 `79be6d8dba0a12f39b60bd6269faf4baafe0cc78` [provider] OpenCode generation acquisition checks shared newServerPromise. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4055 `2ef119c24b775ddf94d5c632e78a86ce30cdc9ee` [provider] Pi runtime construction receives commandsRpcType. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4056 `8c67415fdbb83ef3aa30aef03b0d588ddc253efd` [provider] Same OpenCode generation promise gate appears here. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4057 `0748149ec96ca1f7e644f561bf64fdf0cc4f38ab` [provider] ACP select options flatten and preserve choice.value IDs. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4058 `c5442ef0a24af06d32b35a21f7ac8d257917f8dd` [provider] Usage initializes empty and checks context token capacity. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4059 `36cdfaf51608f24fd0572fef6f97b407cb4a58c2` [provider] Codebuddy pin becomes 2.109.3. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4060 `e58725ee39d0e7c9748fabbcd8a70214f91d6250` [doc] Changelog advertises mode cycling and Copilot custom agents. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4061 `119afd728161de0d2b29974fb0f0e24f2d01157f` [pkg] Internal packages advance to 0.1.100. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4062 `70ea960153eb52d39a49d1a02bb190942f4b0a9b` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4063 `ecf4f9037ea4edffc7fc76d2325e716044d73d33` [doc] Release guide distinguishes preview from authorized publication; treated as data. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4064 `507345dbee4a76df0b0ce42b98765c067623f28e` [ui] Japanese translation resource is introduced; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4065 `484ffc4334a776f7326c12217fb9f674d6895188` [git] Commit-message generator adds Zod message schema; declaration/import excerpt only, no behavior inference. Fleetpane: Git expansion deferred.
+- 4066 `45a7a91768658d684bdce5ea4ecabca6ac8c5b8d` [content] Attachment prompt wraps supplied user text in user-prompt delimiters. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4067 `83123987d771abbb563b3753e7ec46c6efa95599` [git] Mutation service destructures workspace Git/GitHub/logger dependencies; declaration/import excerpt only, no behavior inference. Fleetpane: Git expansion deferred.
+- 4068 `1b9543023ed03367f4bf3a44bf7296301eb50fd8` [workspace] Provisioning service receives workspace/project registries and Git service; declaration/import excerpt only, no behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4069 `b625b69302006a5d4add4b8b87b581cf50ca15f5` [content] Provider image output uses paseo-attachments directory constant; declaration/import excerpt only, no behavior inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4070 `e4f32a4d8232846061251f9de7bc26cb7cf589f9` [git] Git observer introduces removed-state sentinel; declaration/import excerpt only, no behavior inference. Fleetpane: Git expansion deferred.
+- 4071 `0be5cc9daee9f78f9ee662a9e623de410e76ff25` [content] Agent-update service derives payload/filter types from protocol; declaration/import excerpt only, no behavior inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4072 `b561b108a700f07a9a7a4e18358b28a5b6720c07` [workspace] Session delegates script snapshot to workspaceScripts. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4073 `f9ff668a7119f7698cc83c1d65af6d85a6726520` [git] Checkout reads configured branch remote and merge ref. Fleetpane: Git expansion deferred.
+- 4074 `53e39e6d23f9ae1eaae854e6091c358aa29772e4` [ui] Japanese translation declaration appears here; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4075 `eaecd8d0a70e50f8720e321b10b116f4c0a670c6` [auth] MCP hunk removes separate message-type imports. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4076 `9960772fe95024f1092f2fc8661e5e0a03bf3b09` [ui] Brazilian Portuguese translation resource introduced; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4077 `3b5e34fe127bfc86d5ee30fea9f93724bf8f49e9` [conn] Binary-frame handling wraps promise rejection at transport boundary. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4078 `c00121273bd0bc1262cd04ad43d24ac9108366f8` [provider] Toolchain command execution receives shell option. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4079 `2cf041c4d8f53ffbe6b22aeb4a662a76caf3b622` [provider] Provider refresh resolves snapshot cwd and refreshes only requested provider. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4080 `f13c496ebce2f342da0e99e4c2accde7504b5844` [provider] Codebuddy pin becomes 2.110.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4081 `2692211ef91bba64f321e41d1a841c36b5bb3dba` [provider] Diagnostic model cache retains nonempty current models with Host/provider. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4082 `f12c9e9cfa810ce4df248f9530c1ec469fd7e297` [voice] Persisted config introduces OpenAI voice provider schema; declaration/import excerpt only, no behavior inference. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4083 `bdd9419189f301cc7f8c6e416be8d5590f40ac7b` [provider] Default-model resolution is optional, enabled unless explicitly disabled. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4084 `26f169866fbf713e56fb9506fe876defc9dc31d9` [ui] Diagnostic sheet defines two snap points and themed Copy; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4085 `d5cb4421b580a1a64fcbf2804462a72a0bbfd99f` [ui] Scrollable code derives surface style from tone. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4086 `4ba0ce44e59ad5957cabd2acdc2c7c199da011c5` [provider] Dimcode pin becomes 0.2.11. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4087 `a19e3305ada1987c6f9f32625f430fc189ffa6b9` [doc] Notes advertise troubleshooting reports and Claude image output. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4088 `bbde200aa20ca5c2d88e18223672031656360807` [pkg] Internal packages advance to 0.1.101. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4089 `d4cdd4d74977b926fcb24b23c31e23ab4eeed473` [content] Web messages add anywhere wrapping and line height. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4090 `3d6b4adc68dc426789974e7c0bbad9d783a34c1f` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4091 `4e2c06ec71dfe05cda6f9768e491f8783395fbf5` [auth] Web UI declares API/MCP/public exclusion path lists; no routing enforcement inference. Fleetpane: Remote HTTP routing remains a separate acceptance gap.
+- 4092 `1109e453bc256bcb5b6fc6de636d4d682148b2eb` [auth] Same API/MCP/public exclusion lists appear here; no routing enforcement inference. Fleetpane: Remote HTTP routing remains a separate acceptance gap.
+- 4093 `a49c658d1f8b2c94284947a5472eb793a0776592` [conn] Layout reads Host chooser and loaded-registry state. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4094 `c5c2ace698e3c7ec6555238ae187121cc059ac4a` [doc] Web UI page gains navigation category/order. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4095 `8c3b70979484e31af2cac55b32138a377b003b95` [config] Config normalization trims value and handles empty. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4096 `862154541a87738d5ef89f977a7eea84a0c19ec8` [provider] Minimax module defines separate global/China API bases; declaration/import excerpt only, no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4097 `28c5e55bd9ec9d579a5a8d9d6537a1eafc042bea` [files] Attachment extension normalization prepends dot then validates pattern. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4098 `2c9db5279c63d3e725ccc5aaa4b7c842df24f951` [pkg] Docker workflow offers optional npm version defaulting latest. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4099 `14a91d889c98f06a572c42867c4e849400e4f5c8` [doc] Contributing wording qualifies single-maintainer status. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4100 `3fbd82664dfaa3a2656881d5d4d2392418b59469` [workspace] New route reads optional serverId search parameter. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4101 `9ad49fca92d6f10df91ed602c974320d3a4190d6` [doc] Contributing prose explains gradual maintainer responsibility. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4102 `40265782d41f3f6fefc2871db860d63b826a9479` [ui] Host settings component reads translations and theme. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4103 `99643ad0854586ff4d0656dc2d1b268ddeadbc08` [terminal] Installed shell hook runs only with PASEO_TERMINAL_ID. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4104 `daf7042cd2fa0d53f1e82737e848abf566a36c48` [files] File-pane read enablement requires target/active tab/visible app. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4105 `85322c59682b21164e36c293b388cc4e5bd0fe79` [files] Project query debounce uses 250ms timer. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4106 `6277ba1ff9a43a19b4c68bd00c15c87530ddee62` [content] Highlight aliases map csharp and c# to cs; declaration/import excerpt only, no behavior inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4107 `28ea0914c5afcbd441022d96c32dd4caa55740c2` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4108 `1ce00dca1f6389585f9e5bbc6ed51b4c63aa05b0` [ui] Workspace sidebar left padding decreases. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4109 `07680cdd6952836e080b299c061af3f5f0aa4173` [ui] Workspace hover info gains row container. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4110 `d6b946720ef5e08199b3ff726f9f90a525964738` [ui] Combobox trigger bounds width to container. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4111 `8228bafc5df896145e7eb0636114ef2f24947ace` [terminal] Viewport scroll offset/height clamp nonnegative. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4112 `5ef118ea33f9b468115cb28f6aec41bef7f9e5d3` [provider] Snapshot cwd normalization trims/checks empty. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4113 `f275275074ecc7a786db15ffab3158de8e9fa40c` [provider] Provider shutdown calls process-tree termination when child exists. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4114 `65f1143e6a09b7849808787759ed2039be10d023` [files] Drop runtime delegates desktop byte reads. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4115 `24a1f1b8b90d7582a0481d82d31e235cfefb2251` [question] Pi extension results gain 30s default timeout; declaration/import excerpt only, no behavior inference. Fleetpane: Preserve Host-owned exact request/choice identity; native acceptance separate.
+- 4116 `a908384e5a1c15dbf58a33675e0a6d8f8a487b0e` [host] Git shows an empty parent diff despite the tests-related subject; supplemented worker source is unchanged-tree context only. Fleetpane: Do not credit historical test changes or QA from this commit subject.
+- 4117 `26a8a04651734e0bce192d4c1e558691ce529171` [workspace] Workspace fetch builds list and deduplicated empty-project map. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4118 `696a9f0119e5ec5a69fb025de9d7717e122e78f3` [ui] Project-picker results show only outside submission/open error. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4119 `47a71631e8630a3bedebaf7e15eb09e8f0d27860` [provider] Auggie pin becomes 0.31.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4120 `fc52b2812c0bb82eb78f0293a7ed16724e3ecfc2` [doc] Notes advertise daemon-served browser UI and Docker image. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4121 `c7e27fdd5b5d5a9a1d95912ec00cde8811674933` [pkg] Internal packages advance to 0.1.102-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4122 `d7b24ab1241335523fe48853970317304772e95a` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4123 `62bdb52eaa98533c9ab023dd198bf3f1e895ba66` [pkg] Docker workflow initializes source-build/prerelease flags false. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4124 `ab3ed565133fb8c1b16990042b0cf36efd122a5c` [config] Config resolution checks module directory basename server. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4125 `821d194fbe8262d454a4f53c803e89e0a691c174` [conn] Websocket helper strips IPv6 brackets. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4126 `276c1f48f1ef70d237e7ad50dc872173f8540750` [pkg] Docker workflow describes version required for publishing. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4127 `9b6aa993967b94fbad72c7d3f99c2de07b71f31c` [ui] Status label returns project name without Host label. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4128 `96573d0bcc87a9abe04e3deb0cea5c8e9816416d` [workspace] Navigation defines Host-root/workspace route names; declaration/import excerpt only, no behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4129 `4968969c874ae0dd2d6d8f495e5336db32ac0696` [ui] Web strategy separates presence of bottom-anchor request. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4130 `cb212b4e5c06d33877a4f02cbf383beba582a642` [workspace] Host index reads route Host and last workspace selection. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4131 `3288e1cfb9f6adf51ec5dbffda8f59f8bd0ba240` [workspace] Auto-name scheduling requires newly created directory workspace and prompt. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4132 `6a23bbd121a256bbe69ae5e16c916892eea5757b` [provider] OpenCode resolution throws when executable not found. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4133 `0d1c8db87d80a0d9147e2af3af5c9a93fded799a` [ui] Host-status settings slot becomes multiline JSX block. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4134 `57800a0f178797eaf8e2480ad8e501d20e8ce59e` [files] File drop backdrop adds themed upload icon. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4135 `b613bea9f6704e7398a24240f5c890aa54efa2e7` [conn] Daemon helper leaves nonstring input unchanged. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4136 `e63a97196850556958fa1682de49e3d81aa73a75` [host] Manager projection returns daemon status field. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4137 `85acaceb167b3136ab459de67c31b9d628aae284` [content] Layout branches on assistant-message item kind. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4138 `b5559dc1defb9c5de798fc0e9daa0b93ac2aaafb` [content] Stream merge destructures incoming event/kind/head and checks empty head. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4139 `a1afdfee5103761798af170f18b8df58caa38a55` [provider] Claude child-tool messages omit assistant timeline events at selected branch. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4140 `31d14ec8a757e1adc973f7d07e1b994b8f1712f6` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4141 `f31bc2b8b7c8e3d5565be7ff9ae4e36be376025b` [git] Push helper parses HEAD refspec and compares pushed/current branch. Fleetpane: Git expansion deferred.
+- 4142 `0614618d2fdcb1191fbb672b92738ad3e9d99ffd` [content] Same assistant-message layout condition appears here. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4143 `f94ec0e4308bd37cd63a1792e7f7c4de47cca908` [ui] Sidebar control variants distinguish header/compact with shortcuts; declaration/import excerpt only, no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4144 `efd7ab34204443e7b44f3731701440fe9069eae0` [test] Packaged smoke script creates temporary network server promise. Fleetpane: Reference test/config inspected only; not executed.
+- 4145 `111fdb81fd94587d31e4f6ff83d0c37faf409e77` [pkg] Manual update checks advance lastCheckedAt; automatic preserve prior value. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4146 `df36a958f85a0d94580c871ac8257d7444035f00` [host] CLI daemon status call supplies probe timeout. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4147 `811f52395ea7552f5e3fb5473f8fcbb6cb27054c` [files] URI helper attempts decodeURIComponent at parsing boundary. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4148 `cf2fccd01da8c7f1dd07763bee0e1a01efeaa925` [workspace] Project placement cache stores promise by workspace ID. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4149 `86775c18f396a3052e431e038a035fc2e4c4f0a2` [content] Layout requests below-turn neighboring item from strategy. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4150 `ad803005c87a75869749c826e81e610eb331aa4c` [ui] Host picker omits settings action without callback. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4151 `b5718748523d7db07bb8b8e6ca2a09d73babab38` [ui] Fork action leading icon uses supplied forkIcon. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4152 `68a169b29d0a4a5f2dc04220d218986fc8470cc3` [provider] Cline pin becomes 3.0.34. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4153 `0798f997c3b4084a5932c877e36aee75e4509a05` [doc] Notes list saved-workspace launch and no renaming existing workspace. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4154 `8eb9640f28352f14a66770e3036e5802aa736294` [pkg] Internal packages advance to 0.1.102-beta.2. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4155 `5fc53c576ef0d4dee55455ccc95660703f71b892` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4156 `7c6152663e2dc754e5c92a12a9ce0541a226689c` [pkg] Updater branches on available latestVersion for translated text. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4157 `4e28b0941b64e52eb5c0dfe4b65702a74e043cdc` [provider] Kiro declares 10s initial-command wait; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4158 `e9431517a00a3961ba05ca3bfdab2ba94f2194b8` [ui] Sidebar toggle callback binds exact serverId. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4159 `f91806defecbb14af44d509b3863f5fd1633e9a7` [voice] Config reads persisted OpenAI provider settings. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4160 `c2271ff0ca0f4be560b8711c0b0e381a4285273c` [content] Layout traversal advances with above-neighbor strategy. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4161 `beac4544fd0d76fc04db52e2ae3537d2a0127d9d` [provider] Factory Droid pin becomes 0.161.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4162 `e3eb633582371e3fea7719ed3ad1a28745412cb3` [doc] Selected changelog lines remove fork/browser entries from location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4163 `e32c50f2d7b55e12f5351452916a7c6888e393be` [pkg] Internal packages advance to 0.1.102. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4164 `7dad7a377c5aef4f0184ac4dc2d38e2a4a7c8767` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4165 `cb486c3a5a8f3b709d8f32032afb05b5b4871230` [voice] Local speech env-key list includes model directory; no behavior inference. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4166 `db03b1f3fd58c6324164314ac651661c77321da5` [doc] Japanese README adds VS Code extension link. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4167 `20385bdb50776d76d92e163fbda9b0d3064bb8b1` [auth] Handler declares browser automation request type; no behavior inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4168 `2b46caa20ed60ac70f2670e711c3d7edade02fe7` [question] Question step indicator returns null for one or fewer questions. Fleetpane: Preserve Host-owned exact request/choice identity; native acceptance separate.
+- 4169 `b8b66816ca6c700ec52e2d28045302696f80674a` [ui] Browser annotation intents declare fix; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4170 `bf5e3b47e7199341f6d644817a04a7537785ed9a` [workspace] Cron preset declares hourly expression; no execution inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4171 `31e9a210d07bcc6db7daa9343d9baec43cb8d85b` [ui] Mac shortcut combo becomes Cmd+O. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4172 `48d07dedb50cb5d22eba428f268b4107b3b8f917` [workspace] Project picker declares project prefix; no behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4173 `d3e8f77914fbb54d1facdb3abd9c7e7b1104752e` [workspace] Route parser refuses nonarray routes. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4174 `f41dde8c72f65858cf1c2c442a3ca204c575eac8` [provider] Claude name parser matches family and integer generation. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4175 `3708eddbcdb431d9d85ae6ccd03c37ebd9cf3f3c` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4176 `5a0ea3385e2034b70c6eefcfe7645180f3bba2bf` [provider] Catalog declares TRAE CLI ID/title; no runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4177 `22634693427c456ab408028e52212284cd8c2285` [provider] Usage schema allows nullish reset timestamp; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4178 `6513b56571cbfbb79c9ebfe15beb3add9efac857` [ui] Host-filter icon wrappers declared; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4179 `27f1f1d2073402c51e369eeca1bf7e1eaa188ac8` [workspace] Selected hunk removes conditional Host filter rendering. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4180 `807d0d6d695b71aa961e07f91c0c7829844046ee` [workspace] Project action resolves target or explicit none. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4181 `58fce6622b52f9b2884d8cc1d8fa4d79d112d946` [workspace] Same target-or-none action logic appears here. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4182 `3eed8c31a2f42030ba0010f146f83860f8834913` [files] Browser service resolves cwd or returns null. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4183 `adc0c017826f5f2dfe87577e47240ffab028ec8e` [ui] Screenshot error constructor sets no-frame message. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4184 `172de4fbc2e64eb58c698586466f98fe5b71c1e5` [workspace] Browser handler opens focused browser tab by workspace key. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4185 `6fea8305a7e834380c2310dcdc01bd190d08e00b` [ui] Screenshot capture awaits painted viewport at boundary. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4186 `d9615c1e98ac018fe98618c44ca997a45b47b6f3` [ui] Pixel capture queue chains by contents ID. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4187 `71ce96b60f5e42eeb412a2074bff8c0cc0fa5d0b` [auth] Browser command refuses mismatched workspace ownership as tab-not-found. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4188 `554e525186b73b35c35f64fa576e05a818d5cf0a` [auth] Browser tools declare HTTP-only/context messages; no enforcement inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4189 `b2ad9030051e4b53664572e055163edffc3b44da` [auth] Tool descriptor maps browser_back to back; no execution inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4190 `441b935b730acb6fa53a85bff468d524e5e0e37c` [test] Handler fake checks indexed response exists. Fleetpane: Reference test/config inspected only; not executed.
+- 4191 `742d47fe711e4d22e919f09c0cc239ad9120df3f` [auth] Browser output schema declares boolean ok; no behavior inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4192 `82993c2197c25394b0955440bb5fa5939091fd84` [test] MCP test builds tool catalog; no behavior inference. Fleetpane: Reference test/config inspected only; not executed.
+- 4193 `b2714ccd89c5b9f6dced133eba7173322de3e899` [ui] Browser menu wires translated DevTools action. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4194 `2ba3ad53ab3ada8d7d3efb7f0627f075757e5c67` [auth] Browser tool schema defaults fullPage false; no capture inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4195 `b0088303fda3938a87bc6bed4c85a513769b74a7` [content] Tool block mapper rejects nonrecord input. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4196 `9430a897e8e2249c0c13d7ecaaa2aac44cadacf8` [workspace] Resident browser logic trims/checks browserId. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4197 `4ca89f21f9e81a1d8e060125ed175e6e6c09c447` [test] Broker test expects pending count one after execute. Fleetpane: Reference test/config inspected only; not executed.
+- 4198 `6781521c8e49a217fd73037c51924c69d7bb8286` [test] Codex image-result test declares completed-tool/image scenario; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4199 `33ffeb4d42da6804ea735c69e7de51691ef5e4df` [ui] Capture preparation checks trimmed token in active set. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4200 `f22865df628ad4edd08346d569e35b4e2cf443f1` [test] Scenario script chooses target index one and calls renderer. Fleetpane: Reference test/config inspected only; not executed.
+- 4201 `cda1ba43cc47edb594c9e762e1cdba3309c2c833` [ui] Pixel capture refuses absent/destroyed host, then retries bridge within deadline. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4202 `1bf50349a5a6b214175190db6417095a0d087945` [ui] Resident lookup checks connected webview. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4203 `fec723c775ad3c9d3590b135be31c660f4b33103` [test] Capture harness initializes deadline and attempt count. Fleetpane: Reference test/config inspected only; not executed.
+- 4204 `6d55565d1924ae31aaf2f7652ce762e3fe23d000` [doc] Notes advertise opt-in browser automation/screenshots. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4205 `570e65249624fee1dbd48aedfa08b77b572ea5bc` [provider] Auggie pin becomes 0.32.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4206 `ccd2bb2bf323ac5c87e27ecb71e0a62947872194` [doc] Selected notes remove browser entries from location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4207 `a13fa4e614609084280160bef2c8d13a12d6cdc7` [pkg] Internal packages advance to 0.1.104-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4208 `cc212621308bd26fd07def5244c5ca199b0a2051` [test] Harness declares three fresh repeats and configurable soak; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4209 `ab62a023fd24c3b2ea03ad1325f83b04b8afa738` [ui] Browser contents interface removes background-throttling methods; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4210 `860fe92fdd380693d8c6e43137ef8bc61467da59` [ui] Browser resident replacement calls release for existing webview. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4211 `2a226b387293685e7f7772cff377ac862f3ed691` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4212 `e67e25628b6511e154aeca1f4178f022e2ece39a` [pkg] Same hash transition appears here. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4213 `8680bc223653c46a3434b2566c38096f29e8826d` [doc] Changelog beta heading advances to beta.2. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4214 `75b11ac93e319550a8b4aec1751391254bd549c4` [pkg] Internal packages advance to beta.2. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4215 `f1a8e9a5632894a11a045e6fac21d9bbb54b4775` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4216 `7cb0ccba60da03d2e4e2de40bba47c7ff0f87e40` [provider] Claude effort declaration lists low/medium/high/max; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4217 `8d3a43e05d1bc9f99ff48802934c8e9c6d4de4c8` [workspace] Browser handler opens tab in background. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4218 `6ce4e3f507a56e08e9e33fa9bfc01930af638667` [workspace] Tool descriptor declares Rename workspace; no behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4219 `f2262226383a531ba4c50e3274a99fa1a06bcedb` [pkg] Docker workflow path filter adds dockerignore. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4220 `b28f2914935ca269e8ea8819f497099a822d4d87` [auth] Broker remembers browser affinity only when pending request opts in. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4221 `9c220c245159d5661aa116e77f1130dfb41041d5` [auth] Handler narrows command through type assertion; no authorization inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4222 `e98d8c7a36f7f1e11cc6fd7bc05e863cf8182a10` [workspace] Auto-name error message distinguishes branch naming failure. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4223 `42d1a2e4e3dd2d4a95c9a4d6c87a03d768db81ca` [doc] Browser docs navigation category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4224 `3e28b9b59eba9f69b092a89f391aba7527012bf4` [provider] Cline pin becomes 3.0.37. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4225 `b3eb77981a51773142c862374229702a9216fcb2` [pkg] Internal packages advance to beta.3. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4226 `0ecf2fb8da812c22f2b5fb49ce5b6609674f59df` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4227 `9968f2ba50a547f81b5679ccbf32d19f3d39242e` [provider] Provider normalization declares snapshot payload type; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4228 `05f8dda1e300850684aabbbc9d3c883804b8bffe` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4229 `b1d11fccd5af7b14675db8e110dbb2b70d042a8a` [auth] Bootstrap constructs browser broker with empty options; no policy inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4230 `7ee2d6fd7e002cd5186450ed025947f0de25d238` [doc] Notes claim faster provider refresh; no measurement evidence. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4231 `391cf75ecef15d96c179380d208d6e42665b84cf` [pkg] Internal packages advance to beta.4. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4232 `5d25ed6bf84899402f06a36ccacff4d72a5a05ea` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4233 `61df45036663e20645dc157011e71d183cf3edd6` [provider] TRAE declares 10s command wait; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4234 `08a0d0c28d1b977758ebcebe8ee0c93be791f663` [workspace] Worktree teardown environment uses external-process/string-shell env builders. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4235 `d3186291210fd7463455b88e21b37713b95987a5` [config] Config accepts injected module URL, otherwise import.meta.url. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4236 `7c1da0077beb29b8bc6ccfa6e8791b6a5a3f7bfa` [config] Shell timeout uses default when env key absent. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4237 `f21c997b178adf56be88edc722287e8621ff8fd6` [host] Diagnostic source descriptor points getStatus at desktop daemon status; no behavior inference. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4238 `503a5a9e1ee760ee3b650bc7826516f7c8a26a11` [host] Settings restart management requires Electron, matching nonempty Host ID, desktopManaged and built-in management enabled. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4239 `783f43c58087d287b6d94ad8338bd9b82e981b29` [pkg] Windows launcher comments describe desktop-managed marker; no runtime inference. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4240 `d3e1fe48f656339847db9b1d4526e9c1e0443037` [draft] Creation helper trims initialPrompt. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4241 `d9b65e269f7c875713ecb55a31f0eb74e2441469` [ui] Model selector declares themed alert/chevron icons; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4242 `8d0b3e69e860a79f397c637c0fc46f0026910412` [provider] Cline pin becomes 3.0.38. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4243 `be756c9004e3b62559dd33cb44f8ef05a4219e62` [doc] TRAE changelog attribution adds second PR. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4244 `a85139c3f3747472816a9f9d1eebd78f1f029751` [pkg] Internal packages advance to beta.5. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4245 `06c3161008ce25711f665f09cb68aa1039d65cf7` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4246 `4fb70668f20ef7daac5e1055be9166d28bc30746` [host] Built-in-daemon option reads Electron/local daemon state. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4247 `5ec7ef97713d6a5f25fe13c7db7cf8729b6c0884` [host] Await timeout text distinguishes still-running agent from failure. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4248 `ed67e6e0f1ded49cf77c6e9328b8aed455dee0bd` [conn] Derived Host label replaces previous label only when previous was server ID. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4249 `fdc6a4a57de87db9f25a200237c6cc040da66810` [doc] Notes claim built-in tool context reduction; no measurement. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4250 `f3fdeab1310a158e5f97a5e950a5f4a054d6dce3` [pkg] Internal packages advance to 0.1.104. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4251 `1a03171f0c6fabf12ea55282b6b041ed373b442b` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4252 `c72bcb49e5068920e708aaab50ea7346fc4bddfe` [doc] Schedules CLI frontmatter sets order/category. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4253 `251d88a37a7904227129f67a5e8099f1a647033b` [voice] Dictation creates audio source with PCM callback. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4254 `6f3ab9898692ef4a20105ee8771a89b327abc255` [doc] Browser page navigation category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4255 `6ca1f4dac53ec28ed16c8d3a4fc33a8fb29c017a` [doc] Browser visibility wording narrows to desktop app. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4256 `cab0e4b3f820d666ea7bf9800c76d91dbd583569` [ui] Error boundary initializes resetKey zero; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4257 `3259a69466fd9b3a7748f9c0c47bd0ebb625f0a2` [ui] Tree indent constant declares 16px; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4258 `202c417347461e1644348834e841e629121902ad` [provider] Pi stats request casts response inside try boundary. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4259 `c7406a415da9c31a484646154f45e4f783a16204` [provider] Usage refresh returns if cannot fetch then invalidates query. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4260 `29a3261dd62fb8bd06772e9724e272c7b2fab618` [git] Diff whitespace option declares pilcrow icon; no behavior inference. Fleetpane: Git expansion deferred.
+- 4261 `d96d599466738ea7621d4b67d3c33419b991b1ae` [ui] Appearance section reads translations before JSX. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4262 `ebaecace2bd33230c4f27698e73a64e624828366` [content] Image attachment constants declare private directory mode 0700; no enforcement inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4263 `15d309110455f3f966b7e4492840f39b1bbdd92b` [provider] Structured-generation list adds minimax-m3 substring. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4264 `6af13793578bcdb032fcebac280e927f63c8e694` [ui] Layout creates agent-list gesture with chrome gate. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4265 `b2c6476817533e6dcbc3da83ce11e09b320a2746` [question] ACP config response selects by ID/category, returns currentValue if supplied, otherwise logs and returns requestedValue. Fleetpane: Keep provider-confirmed settings distinct from requested settings; do not copy unconfirmed fallback as acceptance.
+- 4266 `a743a2249640e9885e64a5b97209e4d651d6a626` [ui] Selected layout hunk removes surface wrapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4267 `cac71ee8f552550eb840ee304e48b874d234b908` [ui] Workspace-menu theme mappings declared; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4268 `a689ccb0af80819381fbaa74da87db78455e7a69` [provider] Codex activity type declares started/interacted/interrupted; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4269 `1f0285c06b06a830ef07e20e71787e384d0db96c` [ui] Layout constructs surface wrapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4270 `61a9117a6b75ee454ff83a376fd6be59a5e1c264` [files] Directory limit constants declare default30/max100; no enforcement inference. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4271 `3c2339f84148c84647a86b6ddddbdba36dd8e35b` [ui] Arabic search placeholder changes. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4272 `e6a316456d50f8f0dcfa319fbdea571b3cdbd2cc` [provider] Cline pin becomes 3.0.39. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4273 `4dd783c36aff39ad5e8e30b83e56a0223e2b02e0` [doc] Pi compatibility comment adds removal date/version, not executed instructions. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4274 `aa656772ef64301e47c89c0935d524bf34339159` [doc] Notes advertise diff tree and expanded reasoning preference. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4275 `8c639fd7963d1228c0eb5aecf705a3f7473b100b` [test] Project-picker input gains test ID. Fleetpane: Reference test/config inspected only; not executed.
+- 4276 `4c72bf02095ac21ed989f5a0d38e0fae589da4e4` [pkg] Internal packages advance to 0.1.105. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4277 `860fcb2e3502737d353b736868877d2207b33b19` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4278 `28a27b02d325b69f4685e776a2f28854b4cd6332` [ui] Explorer removes MobilePanelOverlay wrapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4279 `6c764f211a459fcdfed12b108b9f414f68255a11` [perf] Web virtualizer enabled flag uses shouldUseVirtualizer. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4280 `5d18edd31e56145911eb875a103eba181a3f4888` [test] Live relay test requires explicit RUN_LIVE_RELAY_E2E flag; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4281 `adc9b3b43cab6a0fd8531a9e5bff237e65f231f9` [ui] Loader declares stable dot keys/shared step; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4282 `c800c6a3f155df0e45e97a1771649f596a1f831e` [question] Codex elicitation parser requires thread/server/mode/message; URL mode and nonempty required-field schemas decline. Fleetpane: Priority-provider permission acceptance needs exact form/schema coverage; historical support is limited.
+- 4283 `ca5c786ccf5817e1ce7e1a26d537fb422ec3d54d` [host] Agent registration invokes accepting-registrations assertion. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4284 `ada0955334b84bce945d78dbe3cbbfebddc71132` [provider] Pi agent directory resolves explicit env then process env. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4285 `03dcda7c4153f28cfcd85d340cef576c294f3e33` [git] Actions derive active workspace key by identity. Fleetpane: Git expansion deferred.
+- 4286 `a017ddfc29611fe65ffa86920acd18b12689e863` [git] Policy initializes secondary remote actions and checks base branch. Fleetpane: Git expansion deferred.
+- 4287 `120842264e49106973e9bba6dd5b790b58354e16` [git] Paseo-owned worktree chooses archive-workspace action. Fleetpane: Git expansion deferred.
+- 4288 `f86226a1968fe257820142da159010e2b9578d5c` [provider] Codebuddy pin becomes 2.119.2. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4289 `3bbbfbc8801580d8cf1ea70a0e14a6df1f729f9d` [doc] Notes advertise Codex MCP approval support. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4290 `e98ba1beb1786c553a9f26352075650d678a7a6a` [pkg] Internal packages advance to 0.1.106-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4291 `51fea4b7e0df43f8ae89f83889acd00e4820719c` [doc] Freeze-fix note changes Android scope to mobile. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4292 `5ae53c7e557cedb69fa473da8cd0fd1a571104e3` [conn] Cutover helper constructs URL from origin; no proxy behavior inference. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4293 `144f951a790711b4ff4fd6427b5f30b1075c06c0` [conn] Same URL construction appears here; no proxy behavior inference. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4294 `a257a1c5f668a894cd7ee049cff3c59fdc3bcbbd` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4295 `d28e174b38e09bb413cce2eafa96dafb52c4e159` [pkg] Relay workflow removes push-main trigger. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4296 `92d70666018180e2ba0431ec976b7b3666723a50` [ui] Root stack options declare header hidden; no routing inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4297 `461be47c9124aad8033664f5a77b3afd66dbf002` [provider] OpenCode starts consumeEventStream task with abort controller. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4298 `5db070a4d9cf76f73e60212c264b2d536df864ca` [doc] Notes claim initial-turn reliability and no white flash; no runtime proof. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4299 `a1821d5863a8a4a78eb8a1124f13568bf26f33ff` [pkg] Internal packages advance to 0.1.106. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4300 `71c66823aa972dd176b6a5017066da405896102d` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4301 `c05e337cde9c88d3c86dc82d9e8bc26b336603b3` [config] Dev daemon command supplies isolated home/worktree/listen settings as config data. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4302 `e18cfb7639e76c4be52f891228fd98583cce8946` [provider] Matching turn ID clears active turn only. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4303 `cf6c014b6b99d62d51ede9d2c17f3c67e45c287b` [content] Timeline helper gates on tool_call type. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4304 `a9ba0392b79f98ab8503822875fcb957f20f24b5` [provider] ACP capabilities attach nonempty metadata while preserving capabilities. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4305 `18de06c2a44bad63069951eec25038aa0aa8ae32` [ui] Sidebar prop changes accessibilityLabel to label; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4306 `88397655f740fd9f4908f037bebfb0f78a3c5ae8` [provider] ACP selected hunk removes advertised file-read/write flags. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4307 `41d882859cae1cea403cac05d66c4521b0d37e3b` [content] ACP projection returns assistant_message shape. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4308 `66445adc078004021413f3eb6b54ea68229d2bb5` [ui] Provider label splits hyphen/underscore/whitespace. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4309 `ec93ca866e0f7d0d1110f7ca5d58a9b7da4e5c45` [ui] Workspace picker renders ComboboxItem. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4310 `2658132384281de3c79db7d9bab5ec7996daefa3` [terminal] Size-cache key JSON-encodes Host and cwd tuple. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4311 `a1581e66b05a786d234566898fcdce56cb13d95c` [content] iOS Markdown branches on selectable surface. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4312 `a788a0f84317a05cb45e8525830315bff0f11af4` [ui] Selected hunk removes animated scroll-to-bottom wrapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4313 `a849bc6bda4d14ed55acfc50240281090cdf5d09` [ui] Same wrapper removal appears here. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4314 `4a1534cacdb9c6767427319e21b2dd772e4438c3` [content] Command mapper recognizes Unix shell -c/-lc wrappers. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4315 `c2a1ac7c3b2f349bdf0295922ee11c2a9728640c` [provider] No-session mode appends explicit no-session argument. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4316 `1a4d7852a8b828ebb4a556a522a587d2caea0213` [provider] Creation mode returns undefined for explicitly empty catalog. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4317 `96e68fea76d9fc5e0a15a19e72396f9326a09dc4` [provider] Codebuddy pin becomes 2.119.3. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4318 `fc7c753382c113443d716e40c79acd9706a7b814` [doc] Notes advertise live subagent inspection and provider forks. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4319 `9553f4b32864707853723cdf8dcbebcd7bf4a6ea` [pkg] Internal packages advance to 0.1.107. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4320 `8cd83b3a915f56910b0dddd082a6bbeafa693e0c` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4321 `a1e81685a126a8a7b97626ed1bcc5495a1f7a395` [perf] Workspace list renders memoized row component; no performance measurement. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4322 `1f7efbd18590b1d5e90798bd9e30671829c520e6` [draft] Reducer retains optimistic or media-bearing user rows for reconciliation. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4323 `b6d49da4df380c3ece1176c3ad4af44ab7357763` [pkg] Android version derivation rejects non-semver. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4324 `d8a8ac252f39c97f05a3c91fbe901e7d889eb8f8` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4325 `bac302626f8e547616576925e368ee5b9676bc93` [provider] Manifest declares plan mode; no capability enforcement inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4326 `218097b7ccf413d9daf1afe841a2fed84debeeed` [ui] Project action renders accessible button callback. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4327 `13d6ad598e58bdce4be6292fa994804a8eba35d1` [draft] Migration returns existing drafts with no legacy entries. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4328 `fe9a486ac148c17a21e6464f1e9bc81ecf956502` [provider] Codex terminal interaction ID appends monotonic ordinal to base call ID. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4329 `f350c716b9fe671233b7466935e64449cb7875de` [workspace] Navigation prepares workspace tab when target exists. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4330 `f2ebac931c60ed423968f1aa07ba78c0a0b2776c` [pkg] CI removes non-Windows Electron retry step at selected site. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4331 `5e2a8b6633fe66a93cf17254a4f7db7969573f07` [ui] Help menu binds controlled open state. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4332 `b4ab0d9db6e5668218e5aaa34f15ef3dd133e3ec` [files] Hidden-directory constant includes .agents; no traversal behavior inference. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4333 `279e1aa91c0e8c1a3afa1ef0f4e1094e8ebbb239` [provider] Codebuddy catalog switches version to manual. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4334 `3b078240a84d55c88f16ee425e1489003235c678` [pkg] Nix workflow adds app/audio package path filters. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4335 `81113d15829ccbc890096929cf0532d1f325309c` [content] Tool group checks failed count before rendering failure branch. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4336 `f35b16b316594b693018cb5740b096fca99d5be1` [doc] Orchestration docs navigation category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4337 `9ea58aae0cfece29a8ca0b696bc5e197e550a69b` [commands] Workspace mode helper returns empty string without mode IDs. Fleetpane: Compare with live advertised command contracts; preserve exact draft and configuration identity.
+- 4338 `c0b801b80590d6bc75a72ca6de501d065c193cc7` [ui] Application menu exits without options, otherwise builds template. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4339 `1f5283f5a36926f31ec9cbf020072fe1dc35dfa7` [workspace] Directory skips missing workspace agent. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4340 `cd6c608c9e25a0a1c1332c70bb68209d4c612094` [provider] Pi prompt acknowledgement branches on agentInvoked=false. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4341 `d781b687115b65058d4a8ad2b9abdc9a4d0e9ef3` [ui] Changelog date formatter uses English long month. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4342 `1b8af2e58ee872014f5940071a924b24e25c65f3` [content] Virtualized renderer returns null for absent item. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4343 `50ed0d0ab11d8f5d9543096329436bb37c303ff0` [ui] Attachment lightbox wires translated dismiss control to close. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4344 `d706c4339b0e98133b839771b756accc4ea87078` [host] Run lookup returns explicit not_running if absent. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4345 `9c40cb76371247c2249e20fc708b4e02cd3360c6` [content] Provider image path normalization splits slash components. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4346 `77f6069ec142f58f3ccb85ed016adc90d076cfa1` [ui] Menu header branches on mobile icon. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4347 `38e4d9ad5d2498e228bd1d6215576763b21cc719` [content] Selected command header hunk removes latest-call state. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4348 `abfe955867f036e6e32d67cd9ab2d06c43c9e1b1` [workspace] Subagent track declares archive-finished control label/test ID; no mutation inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4349 `36738464339ff6d39c983294acfd2b82db762b3d` [content] Details renderer becomes callback; no performance inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4350 `5ddd5f3726782ef6793b6cfd304aab0097b089c0` [ui] Inactive sidebar disables pointer events and accessibility descendants. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4351 `4a5630bfcefc728b57cd8fcc5efc4923e786fe17` [ui] Composer CSS reserves stable scrollbar gutter. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4352 `319d9017c225a7b2d38027959f7de7a71d320ee9` [pkg] Website latest-release function uses cache context. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4353 `7f011d16c5785f02581d53f943a44cc811b8cb78` [draft] Persistence returns undefined without storage. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4354 `f06792ae89d6be21457b025a98d336929730e287` [host] Lock reclaim helper requires explicit reclaimStaleDesktopLock and desktopManaged; lock identity compares PID/start time. Fleetpane: Review independent Host lock ownership; do not infer stale/live-lock safety from this helper alone.
+- 4355 `04e893417e2e95c77a25a413edb675557813d727` [history] Activity projection checks absent cursor/message boundary. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4356 `9423b091b9ebe944dced8e1a28f698e27aa7c784` [ui] Selected hunk removes translation hook from details view. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4357 `328361667f20a74c791f18454e6a7de8576b3279` [workspace] Resident eligibility begins with browser existence check. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4358 `13e92f8a3075ef815da143573c5f6a78cd2458f9` [provider] ACP ignores branch when autonomous turn already exists. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4359 `6804882761fcb9a511338f1fed19b9ed45e99e45` [pkg] Android SDK path advances from1.0 to21.0. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4360 `37bde90d9f4aaf45c755f828ee25a6b189f18065` [content] Selected hunk removes assistant-boundary helper signature; no replacement inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4361 `90e0a0e353a90e12d91d88a91e64dda7984928c0` [ui] Command center adds fragment wrapper; no workflow inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4362 `dfe3330ef837d801dd8c4de499247aa7d7a63896` [workspace] Picker initial state sets empty query/index0/no error. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4363 `5ef1b9dbb118001729ac13ffc03b26d121bce809` [test] Package adds Vite path plugin and Vitest4.1.6. Fleetpane: Reference test/config inspected only; not executed.
+- 4364 `38cfe109c937a8bd8c33e7c5a2b5d625e252103f` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4365 `943d03ad995a613558752d2863b51e78419fba54` [workspace] Project-open helper branches success on registration result. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4366 `d791a0aa91236a28fe23b0be362f0baf0abf2fd1` [doc] Notes advertise project clone/create and workspace search. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4367 `75ea0d4534a2922e6f3072d805008474ac4728bd` [pkg] Internal packages advance to0.1.108. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4368 `8554b94cdb3c6374ce3fb10ac5dafb7a15eb3364` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4369 `64c819efeb6fa301b751f5382468ab1beaaa68af` [workspace] Browser profile partition declared persistent; no lifecycle inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4370 `75d784534f07b0ebb1a7ff35de7f15783e7000ac` [doc] Notes claim desktop updater connection/control repair. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4371 `42e101c81ea6a1ab9da6c49b36a55cafc1df9c8e` [pkg] Internal packages advance to0.1.109. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4372 `d7ca1b5a03f812d4147695c54ec55b58b72d8b79` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4373 `47532952f325912094593889b65c98ea5aa49912` [test] Selected hunk removes desktop smoke helper; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4374 `3e8dce7d7c9b1a3ef8e1ed8c18faa3d6f36da113` [workspace] Browser target is available only under Electron environment. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4375 `f4509fe04450be76eac7ab574b3944590f46f571` [provider] Installed targets are described and appended. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4376 `6aba0370aeea9973260a9dd594097d127e7dc834` [conn] Host setting reconnect branch checks marker and current connectivity. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4377 `e528a0db067cf32f2a615347290a1f72ac40a010` [ui] Provider section renders dropdown menu. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4378 `d42ab91971a92bf2e2a981848989c7ca6536a18e` [conn] Daemon parser refuses absent/nonobject input. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4379 `5da6548affc750e888db88ec3ded127dce649c0b` [workspace] Route recovery label distinguishes restore action. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4380 `0d3b717cf35ed5bb7887cb658631d5531333104b` [git] Commit row renders Pressable; no Git behavior inference. Fleetpane: Git expansion deferred.
+- 4381 `ccf29f4c5034fc1682e571eada1e501f2ae98b01` [workspace] Window-open decision declares deny/popup variants; no policy inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4382 `721ef03779fe4d3829a624926b852425b08e4ed6` [doc] Changelog says0.1.108 needs manual reinstall; historical notice only. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4383 `04c71c5890ed2980f258ed1859805a2343b905ec` [doc] Update notice is reformatted as blockquote. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4384 `7d80fdfd12c35a345c7220f5d1070aab9d1cf3d7` [host] Quit lifecycle awaits managed-daemon stop at boundary. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4385 `a1cd50c2ae45c11e618d34f55e7bb410d6cde9aa` [history] Import requires selected-session cwd, serializes by resolved mutation key and provisions/imports within selected workspace. Fleetpane: Check duplicate live import/restore against Host identity and existing migration receipts.
+- 4386 `d5baf1a7e6e6b5c4e32d1a57372a9703bc1a5e41` [provider] ACP event turn ID prefers supplied ID then active foreground. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4387 `623c05aa4d01e824d6381ba5d547a17834fa157f` [host] Quit lifecycle dispatches managed-daemon stop with rejection handling. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4388 `60855a0f3a7c13c2f22e07a0ae15657e57197cfe` [pkg] Release family helper retains major/minor components. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4389 `737f30c339bbd80390e9ffe8d67ad6b7fe939d24` [git] Commit diff shows loading branch only with zero files. Fleetpane: Git expansion deferred.
+- 4390 `6db7e53b6e0bf5eb69a11fb592480088828d38ad` [pkg] Internal packages advance to0.1.110. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4391 `d9a0b3e8d84d75b9b7fba6bb6d99ac3000190198` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4392 `d2308f483558d19bf5121cc0c2ad310f34d67f41` [auth] MCP response forwards visible content with type assertion; no safety inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4393 `a622860a3e37ce0a4fb657a3273cfaa5fa08d710` [ui] Desktop tabs add accessible exit-focus action. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4394 `9f5f5fce620684a5a5d2c74940c37482eb45feeb` [terminal] Terminal focus request runs when focus step fires. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4395 `04d1ebdce037180d31d9449adfa847468d90589a` [ui] Shortcut path delegates resolved action to performer. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4396 `a8ebd390fabb88e00b1c2d54890b6cf758eeb103` [git] Forge link formats line or line-range anchor. Fleetpane: Git expansion deferred.
+- 4397 `266d54463be65f01ef3e5e0d57505427d70e598e` [ui] Resize handle cancels only an existing highlight timer. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4398 `a7cbf4f61ddd5adf78970e8c6584b6e8f5c78880` [ui] Pointer helper returns separate mouse/touch movement. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4399 `70472dc945753c745de008d627035b549b150e31` [host] Aborted quit signal resolves false immediately. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4400 `bce2c50b9e16831ab395e1ea313698ba4dfa0b22` [terminal] Terminal focus admission requires focused workspace, visible app, ready client/renderer and connection; existing claimed key avoids repeat. Fleetpane: Native focus ownership is a separate acceptance invariant from PTY liveness.
+- 4401 `557fc42c890b8badcb60249fd0b30a2396f2b112` [config] Logger construction calls pino; no sink/redaction inference. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4402 `388f1d426c01a9b492d084c207dfd99ff2bc33af` [workspace] Browser resident listens for did-attach and reads contents ID. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4403 `263ccc2a19abaa1bff7991de688b4c591ef9613a` [terminal] Focus claim begins with workspace-focused gate. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4404 `dfada2a556a5013899214dea75fad874723f084c` [ui] OMP icon removes old rectangular SVG geometry. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4405 `df2b7cab46f42538c3c7240da14a8bc426eb0354` [doc] Release guide asks whole stable-to-HEAD classification; treated only as historical data. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4406 `293f55afc43200c69c9392b3b688be5580c658ab` [provider] Cline pin becomes3.0.44. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4407 `c0f80e2477d1c3781381d3a69dab6b35365bcf4b` [doc] Notes advertise forge integrations and native OMP. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4408 `0bec06c2db7d3ee071416cde80229eabd682b03e` [pkg] Internal packages advance to0.2.0-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4409 `6f753a142d5e276e4a7089ad17f76997ca44863f` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4410 `6c99efae52cccb5426f9c300fafaf50ab5447027` [pkg] Android build config selects large resource class. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4411 `1977d330edefb8d7c8c0f0673e911586d40a6262` [conn] Timeline synchronization activity follows app visibility. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4412 `39cb3dbb9c8784f9f25fce54fc429b848076fe0e` [conn] Session updater returns previous state for missing Host session. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4413 `a414f8ea8572412cae498bcb62cac9429cc13bdf` [content] Selected result declares list type; no full action inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4414 `a1de743ef67dde4fe7c48d045a3714f65dfa5e90` [content] Plain-text details component gains scrollable naming/style input; no scrolling acceptance. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4415 `b4a5b6a3ff94af056e30231b19cbdacbe0566c8f` [git] Git discovery logs warning and returns null on failure. Fleetpane: Git expansion deferred.
+- 4416 `745e8afe45f04374e26e85e69aa47bc52a11b390` [ui] Empty normalized shortcut query returns all sections. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4417 `d9abac0f8e4675c808377d24610a345cd9ca1978` [pkg] Claude Agent SDK pin advances to0.3.214. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4418 `99da5736db11b51bd6493604e53444aff9c4e317` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4419 `98f6611362e39cbd351cb6456cc642bd0dd79f27` [content] Tail-user resolution returns tail item/placement/index. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4420 `ffe76a7e5702d60d32c9c770dab9e7985cc1917a` [workspace] Schedule row hides selected content for agent target. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4421 `c97f823236107280eefcbff176e7c6676304e4bd` [git] Gitea service reads recent items through JSON-array command helper. Fleetpane: Git expansion deferred.
+- 4422 `05d1f838d83a8a6156365438f2a1baf0aac114b5` [ui] Presentation helper chooses overlay or input constant. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4423 `72752b7db6e7e98b87ee7e8ef8318a51272b8fb5` [doc] CLI docs describe schema output and incompatibility with background mode. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4424 `b4518cbf3352210cefec1715c00ad000c4abd20f` [provider] RPC timer helper rejects absent/nonfinite/nonpositive timeout. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4425 `fcaa84f0e4e8a60486cd7051fc55b979c851c6e9` [provider] OMP schema declares thinking enum beginning off; no capability inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4426 `791753271665c215c4f15569491d88f27d123edc` [conn] Visibility requires active app and native or visible document. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4427 `45bbb973a3a3d4b386b67f219dd2944b19c369c1` [ui] Command center renders themed plus icon. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4428 `c0622a7046651e6b3a9c43718df5f5a09703dd15` [doc] Website mockup removes prior icon imports; no behavior inference. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4429 `e0e50c9a8e1b9604a44b3cd57ac6c4ed518da061` [ui] Pair scanner removes corner overlay views. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4430 `2185779d6c51137006f6f52256c60dce118efae4` [provider] Notices declare mode/thinking changes apply next turn; no dispatch behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4431 `5ea311f243649571cf782c6cc1b078a06955b33f` [content] Record guard rejects null and arrays. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4432 `99dc8ddda5c823fbe1c7d7016840c8275e75e652` [host] Agent manager rethrows recorded close error. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4433 `8cc2ae0ba434ed4c500a7580fcab94f10cd53523` [history] Agent loading reads persisted record and checks archivedAt. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4434 `0cfb9b6b94429e08d1832fdcaf794904ccf327bc` [workspace] Disabled sidebar updater preserves previous entries. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4435 `c9bcfa7638a8d3fb4b29784938d3c0f04e84f79b` [provider] Provider return includes models; no model-discovery inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4436 `3d86c738ff70a9815cdd86c5602c9a5c420df619` [provider] Codex traversal tracks visited threads and caps at100. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4437 `0c68b26a8ba3f50f44ee4a1406a57ff4e61b1fc1` [test] Trace harness dynamically imports speech platform package helper; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4438 `07d988488e66de777443484847dc6d790d680042` [history] Projection returns first sequence only inside bounded range intersection. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4439 `e1bda8e49825883a94190a595e18969c8f5094a7` [draft] Canonical clientMessageId must equal optimistic row ID when supplied. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4440 `b3b1283d3bb684a969420bde1a4765dcd3e85430` [provider] OpenCode stopping branch exits unless state is stopping. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4441 `2ead7e7719097de9c2f75a1cf985bf11a9f6124d` [ui] Focus action delegates focusInput. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4442 `9292f58896e27b9d230e1f705f699ad4c4c8c98e` [workspace] Port allocation uses script only when explicitly configured. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4443 `4bda2dfea9e32166e85471ed16b38da2f64776a2` [files] File panel bar renders identified container; no file behavior inference. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4444 `345d8e5240a44a2af449e42b632ed69b5dbd892c` [git] Header removes pending-Git skeleton branch. Fleetpane: Git expansion deferred.
+- 4445 `8c92c7d423932923114e9718cb4ce8155fe33f03` [conn] Host choice prefers connected selected/local then first ordered Host. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4446 `1962816c1ea78cfb2176469250ec6104aa772a0e` [provider] Claude disabled-thinking support requires manifest flag; fallback effort is first declared option. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4447 `045de763f7b78575c869a875aaece089a7fe08b0` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4448 `187561e4335d2c83c099120d5b98fcd7e6cdd763` [provider] Provider directory discovery awaits readdir at filesystem boundary. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4449 `ddb6d97bf090e825a6ec6a9afa9e0c9516d9072e` [provider] Thinking catalog declares xhigh/max labels; no supported-runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4450 `aa6384babd0e8cc7e0d4ff9cfaf8a7eb469b3b79` [workspace] Session persists updated project through registry upsert. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4451 `f214261ae5567a55098b2952c788b9331a7ea27f` [history] Timeline fetch page constant changes100 to40 projected items. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4452 `afeb4d18f82884ccaf8fa0a967a16e9c03d46d89` [host] Bootstrap boots local store then invokes startIfEnabled with explicit shouldStart gate. Fleetpane: GUI startup policy must preserve independent Session Host ownership.
+- 4453 `8aa55db1e844f8b617071c158a7a3230c8703cc9` [ui] Tooltip portals noninteractive overlay. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4454 `d0456b1943358fd73775c7b14bfc705e837e4af3` [conn] Host runtime returns without snapshot client. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4455 `6acc82e9d3b0bd264d4afad2fd5a26c204ba2f3a` [provider] Generated Pi extension appends configured system prompt at before-agent-start hook. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4456 `fd4e13735c8d4d708bfc5d327f924c90963acd94` [ui] Dropdown exit callback runs after completed animation. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4457 `5605b2aa9402da7a66e22c7c75e712ac62ee663b` [git] Git discovery logs only non-not-repository failures at selected branch. Fleetpane: Git expansion deferred.
+- 4458 `2cb1b041dd359664eac50dd98b8c94e3d2e0e9d1` [conn] Auto-attach returns if target identity unchanged. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4459 `6755341fbbbbda56aff4b4ac5f274b8ad60b9e57` [conn] Same unchanged-target gate appears here. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4460 `d6dc309408b344a3d2b89ed8559ef76f7d72abb3` [ui] Workspace row removes explicit false idle-status reservation prop. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4461 `25cdda94924f2e25673ae9ea3657be58580057f7` [ui] Footer add-project style combines hovered state. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4462 `a8fb40e689500177af17cea6bc327c5c38bb9957` [ui] Pinned header declares36px minimum height; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4463 `b2139b1400133b8a456b92df5e559c709ee0aa0f` [conn] Pending visibility catchup chooses overlay before sync-failure silent state. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4464 `0707092131018d63a8d1a87a2dfb25a4a0a472bc` [ui] Root font CSS excludes explicitly marked monospace descendants. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4465 `ee431bb340a01a8e86dcb924137799b7a62fa8b6` [terminal] CLI executable helper returns containing directory or null. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4466 `9ca790df6ae7d95a0a448161bdd0327089f65829` [git] Commit section removes legend markup. Fleetpane: Git expansion deferred.
+- 4467 `5c93ac4aa5c927a5d064c9e3ba6bb85a4c5fae5b` [ui] Sidebar adds2px top padding. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4468 `c049e86fee48464961d9bc209c62ef641aecf9af` [draft] Selected stream filter expands optimistic-user condition; full predicate uninspected. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4469 `a4d11cda2bb3bfdcbd413c655f84cecbf274023a` [conn] Connected selective subscriptions delay removal by30s; re-visible agents cancel removal and membership is recomputed. Fleetpane: Selective history delivery/eviction remain candidates; measure resource use and preserve original cursors.
+- 4470 `d27c7ad5900ae6b093794ade81fe404fe1b16689` [draft] Reconciliation checks canonical index/item/user kind before local optimistic branch. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4471 `2cc1886a6ba78aaadb621d6e21a2f7e970048fdf` [ui] Settings switches imported control to shared UI Switch; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4472 `7d10791bad1768af1323fdd8441c39d869148ae6` [test] Viewed-chat test removes explicit subscription wait; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4473 `cf9dfcf9477e16582bdd50220618b1793b7333bd` [ui] Android maintain-visible-content option depends on sticky-bottom mode. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4474 `cb6d2f1459bd3398c495b9016994c772455bb54b` [files] Editor line navigation requires view/line and clamps to document length. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4475 `2ed1f4f353e2e0c1e7f25e94eb09e858a8f1f768` [files] Same bounded editor line navigation appears here. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4476 `309672c8e54f0e6af48463b3737b74a1c1352a7a` [git] Local commits query bounds rev-list count and excludes remotes. Fleetpane: Git expansion deferred.
+- 4477 `9603397aed3146058f0f52cac38423b147264b37` [ui] Sidebar list invalidates by active workspace key, disables its scrolling. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4478 `97cfcf830623056fdeb9af08cf0d90590a640c48` [content] Markdown removes old hard/softbreak span renderers. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4479 `21d9bdc644d9e4b0c4c337e6bac5c69c92e90dc9` [ui] Panel declares static animated content styles; no animation inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4480 `4a4556f49982df9519a62a9d8045000e45f57909` [test] Sidebar test explicitly clicks project show-more before waiting. Fleetpane: Reference test/config inspected only; not executed.
+- 4481 `14acb97662053bf3443f79f1f6c6d07e78e2249e` [provider] Provider payload handler refuses absent payload. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4482 `6cddc657cda45f3677b3423a4d6d42a142a187f4` [provider] Auggie pin becomes0.33.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4483 `14b25d4266aa72c9955ae835c61673bd39de0814` [doc] Notes advertise file editing and CLI workspace automation. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4484 `89a022e853101cc34e57c7c82998f17dd6e391a7` [pkg] Internal packages advance to0.2.0-beta.2. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4485 `f22a8ea8e0964fbfa119b667fd0aa38be0184c9c` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4486 `3a8d08ba91a93bc0490c32a664470c1aaa09ed97` [doc] Selected changelog lines remove sync/independent-folder notes from location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4487 `0afcc96370afa60f31093694d45c33a1d7874fbe` [doc] Claude page removes comparison with Claude Desktop SDK internals. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4488 `246c07fba58468e0044109f62055f589afd1f8c2` [workspace] CLI branches on newWorkspace option; full condition uninspected. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4489 `68993b7ab35239ec44eb69c169de3c43ae4f1903` [test] Windows smoke script propagates nonzero exit before marker. Fleetpane: Reference test/config inspected only; not executed.
+- 4490 `42ee5a5949d81993ecc5f83123d864f9f1cd228b` [ui] Archived-agent callout adds translated text/button. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4491 `bd937850b3fd2db5c698e74ebc55ce14a90c1b4b` [files] File drag-source effect requires element/enabled/Host/workspace and not disabled. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4492 `9952615c33d9b962a5f058b085115c1bbbef8483` [git] Diff manager ignores work without subscription. Fleetpane: Git expansion deferred.
+- 4493 `76a5edb020c8d5efc1da95a9834d84d3ebe50b2f` [workspace] Agent navigation returns without Host or agent ID. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4494 `512c9b31a8f022d93a9d1cbf3da0c4a21c7e8e28` [git] Diff pane renders dropdown; no diff behavior inference. Fleetpane: Git expansion deferred.
+- 4495 `10da5ca169dfc205b55b35a12280796cb546bbc8` [content] Advisor value normalization returns trimmed nonempty string only. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4496 `de69b2a2af34e865af235bcb28ba94b897fce7ff` [provider] Usage percentage rejects nonnumber values/nonpositive limit. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4497 `5dfe50ca749f8701b41956bc6bb88e69c11da0b5` [workspace] Agent route throws explicit unavailable-target-client error. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4498 `35f51714774744215c2e139704bb09524abfc455` [provider] Provider terminal messages retained when assistant role present. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4499 `894fa8516ee3846d2b2665a0cb7f5a799a94e149` [provider] RPC source field becomes optional string; no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4500 `30b871e8d2321fd37721a1c0065f2792f050e64e` [provider] Manifest declares write-approval mode; no runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4501 `e699f07a17dad19b8e24ae6956588089ffd2edef` [provider] No-turn completion exits if abort owner changed. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4502 `8b54d358183ec75cde03d48f548a96ee3ca5fbaf` [git] Diff option memoizes overflow style. Fleetpane: Git expansion deferred.
+- 4503 `780c6513f1597854cde776fdf081fa66991f15cf` [provider] Dirac pin becomes0.4.22. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4504 `dd8a111c30dcc6457a7c4eddaddc5346967fa57f` [doc] Notes advertise Changes tabs and attaching files. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4505 `8a1243e8d39800a5f759eea91f973fab2db37b62` [pkg] Internal packages advance to0.2.0-beta.3. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4506 `d1f19a5cdd3bfa36b218269669813cc7ef517686` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4507 `31c8dc3f05a9edb2908a47a6c64a244b9abc126a` [provider] OpenCode suppresses previously emitted user message ID. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4508 `8cf70d10bf438c5f1fb032b7028bba5949ec07a7` [git] Commit graph renders container; no graph behavior inference. Fleetpane: Git expansion deferred.
+- 4509 `8e063f0dfcf9137a8d9f7a77ceabad1e93adf83d` [ui] Model selector removes disabled header color mapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4510 `5e47cff58ecfa5c3d642aa7ff2a2089f0a0ae4b0` [provider] OMP custom message display extracts user text only when display predicate passes. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4511 `e8fb9bda6c4a2ebc4bccf33e330f9fdc01ae54cd` [ui] Thinking selector sets desktop minimum width200. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4512 `fd0deea1c15afc615df3cca9189922c632113b33` [pkg] FDroid config checks exactly one architecture before selecting ABI. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4513 `1ffa2f821a14c073867c430fd3d406c82294e1a4` [host] Selected session helper returns next; surrounding behavior uninspected. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4514 `2bffd6e71ee74b182b150e3e2aabe23070b35290` [provider] ACP resume throws without persistence handle. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4515 `eb83e2bb45545f38371e5a35a03e61a8060cfb37` [ui] Import pill uses computed label style. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4516 `a3438f96f893d6a8d61c9e4bf7f585b7e38eba9b` [files] Editor refresh requires view then converts snapshot content to document. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4517 `8a8f2baf8012be672c2af43cced12d01d57c70a0` [provider] ACP user_message_chunk dispatches dedicated handler. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4518 `b73592ccac74420750f7de691af4abad12b9f179` [ui] Overscroll predicate compares bottom distance to negative tolerance. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4519 `a290f74705bd544e1b1186d4b61e740a9be2e38d` [ui] Shimmer measurement differs web/native loading gate. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4520 `12612f66464f1c39ada3f7bf7763fd9a8765148d` [git] Metrics helper returns metric; no performance conclusion. Fleetpane: Git expansion deferred.
+- 4521 `1c95f8c37e014e01ac91b7b9c93999b842f24c6a` [workspace] Session emits updates for explicit workspace-ID list. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4522 `09cfdecbbf03f1ab378ad39adf8f316903b0be35` [perf] Query config removes infinite garbage-collection time; no memory measurement. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4523 `c469ac124acc637d8f7148cc97a07cfbe4577e2b` [git] Commit section branches on zero workspace commits. Fleetpane: Git expansion deferred.
+- 4524 `17c12e2e1a1ee20ac3991c4a2b5dca683af103d4` [provider] Agoragentic pin becomes1.3.6. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4525 `13bce0563005c95fd80cea71f4ad6b897e3ff1dc` [doc] Notes advertise mobile model selection and readable popovers. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4526 `b02acb882c8fab0653ed3c5a50b5f0b9fb23b7f8` [pkg] Internal packages advance tobeta.4. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4527 `4b5551d61cf958060d871a6c9621743e664cda6c` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4528 `fc10c79e2653e5e653fe8dc2d1364faaa0529e0e` [conn] State action returns closure applying store update; no transition inference. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4529 `48b14d27a5cc049345215663c6f73c193fb19a31` [provider] Selected hunk removes conditional provider actions menu. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4530 `08c522c986a4220868d933a4aabef8522761612b` [provider] OMP maps advisor message to tool-call before fallback. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4531 `7bd4afe848fcae59b4fb7e69c461ca242ef8cddb` [doc] Codex docs navigation category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4532 `779a56ed36326ee9e9fb47c17c572e93aa41d82d` [files] Pane removes Markdown-mode props at selected call site. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4533 `609f81bc11a6d34c859bf3820b853b41ab601eb5` [pkg] Mise derives Android SDK version from tool-versions. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4534 `afcd972dd080ed5f76253edb7c02364f7ea24594` [conn] Pairing QR calls QRCode.toString with UTF8 options. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4535 `0cb9ecf44be4274d2ed69257d2a4bfe75b953752` [conn] Same QR generation appears here. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4536 `7e97ab4a9cd353b8fe4d1f443f19ed672bc0734a` [provider] Factory Droid pin becomes0.179.0. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4537 `fbbdbdc571064de4fa0a51e307d896dc1df2faa5` [doc] Selected notes remove mobile selector entries from location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4538 `d98c5e77f77fbf386553eeeaf85177a3d374ef90` [pkg] Internal packages advance to0.2.0 stable. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4539 `f4136c6d3e86f96612266e098459bac8c23391e8` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4540 `517083396101d94bb26c5ecdd910076afa9826cd` [test] Catalog test expects unsupported pi-acp entry absent; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4541 `b218267c3cec718c13072cc4b831ac402939d946` [pkg] EAS config selects large resource class. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4542 `967edab49703913daa983f7e94aeff044bc9cfa6` [auth] Device authorization posts to hub API endpoint. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4543 `21597bdc1b6363f90675d9a56beb5b7efa2a418a` [files] Attachment MIME normalization strips parameters and lowercases supplied type. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4544 `21404fbdec19ba07ac780b7a1da9d93f3b4fffc2` [workspace] Script tool throws when management is unconfigured. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4545 `7250009ab7ee72142a08344b8a0b7a12af666e53` [terminal] Tab menu branches on terminal target and reads terminalId. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4546 `055db7454d1bb15ad0c4c874f8bc019b10e5dfb9` [conn] Websocket broadcast exits without writable sockets. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4547 `19565f6605a83083b5968cd5dc89e163510e9bed` [workspace] Command-center subtitle includes Host label only when showHost. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4548 `99440201bd91068c6f035d1194b5a96e6d0349ec` [provider] Claude helper lowercases provider name. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4549 `cf36b2cc40effd66206688bca0ef7979c5480eab` [workspace] Global pin action refuses missing Host/fields or cannot-pin. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4550 `e22c85373c1e770fe78f04bb6d5aa490cb7ea2e7` [conn] Service proxy parser returns null without match. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4551 `73e290bb5771322ef5fc43e5afca80a4bbf99e46` [git] Base-ref mismatch error names stored/requested refs. Fleetpane: Git expansion deferred.
+- 4552 `a5942ef2de4c5c838345499f566dee0897db0f74` [provider] OMP option marks default from explicit override or provider option. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4553 `bb3f5c5a2d77ad92452c739848d78231083dc862` [ui] Keyboard action refuses disabled entry, otherwise evaluates active predicate. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4554 `830c9b62c416607369c930614e543d51f077df42` [test] Relationship harness declares cleanup retry codes/attempt count; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4555 `457679d45a572c43ac399af232351fcb9f12e5be` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4556 `be52347d67cb1b4829907c603c52f713772367ac` [auth] Daemon execution rejects inactive relationship authority. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4557 `7ef3376b62837f4051df711232e1a72c9d3e4fde` [provider] Claude manifest declares Opus5 ID/label; no runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4558 `782b341b1ad941e11b4c9b0cea936af09ca7707f` [doc] Changelog announces Opus5. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4559 `36f38245cab51bbe0b43b6ac42fd41aa757064d9` [pkg] Internal packages advance to0.2.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4560 `8409e237ed14b95a2b06e2dc35ae693c9464a064` [provider] Same Opus5 declaration appears here; declaration/import excerpt only, no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4561 `65633004b23d6eeeda9321e04f096ca647694b2b` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4562 `51ab86bab6c43186181e0ca97261c8406a1e9625` [test] Provider test fixture declares Opus5; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4563 `c9fb31f709a771a18cae279c8506e24c5b6fb7ab` [provider] Manifest maps available models into thinking options. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4564 `e859d2df12eeeda1ee254431f2e922b236918278` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4565 `72c7d3fe3ed5308810e418151112be21de2f9492` [ui] Native scroll branch returns without active user scroll. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4566 `fe28850fad140f88243e4cdcc74d89a8ea2d62e7` [doc] Japanese README replaces community Go relay with official Elixir relay link. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4567 `392095c1b2cbad05fba86031b0521d80d747663b` [host] Settings migration resets keepRunningAfterQuit to default once. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4568 `07aa48cd6e957957d47f2151fb5960acae2e5656` [doc] Claude docs say reauthentication affects new sessions; historical claim only. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4569 `bb6231d55649ab336857a8cc717c1bb4582b61e9` [ui] Pane-focus exemption list removes contenteditable selector. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4570 `1a1ff8828f002fce08e239bae3d46aff75e22f52` [files] Editor reconfigures language/wrapping compartments by filename. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4571 `1d1132de9c513c2febc447755ae9720792b44ab1` [conn] Encrypted channel branches on binary-ciphertext option and binary message. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4572 `80c8a0839391c585275279095080ed1aa7c2c4d5` [host] Agent manager adds running-lifecycle condition; full predicate uninspected. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4573 `b97d6d13f3ff78dc93b7f8458cd1c74e00f294c6` [history] Pagination initial state clears requested progress key. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4574 `e1b1ca569d6979c424bff4556dd6ed9f49fdbc80` [files] File service resolves scoped path then opens read handle. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4575 `2acb10fce96ff65eae0cad9894ff7338139d417b` [ui] Command-center modal receives web overlay layer, native layer0. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4576 `5d397754bd905da6fab15761c1ae6a33454b2681` [doc] Notes advertise script management and terminal ID copy. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4577 `43cf858c3760679ec9be805ba8b903cdf20f7103` [pkg] Internal packages advance to0.2.3. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4578 `1f253d92e2175ce24b13e2ffc5919be68f9b1304` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4579 `fa1198c2be5cb0617501815f0295365ccc399d61` [draft] Send passes explicit client message ID to provider RPC. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4580 `c596e058cd215ba96639b104d7163e248013d82e` [config] Dev setup replaces shell home-seed command with seed-state script. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4581 `869edcbf11485e17dcbd66a333afdea72b3d5ffa` [git] Forge parser returns host/port/repository tuple. Fleetpane: Git expansion deferred.
+- 4582 `717f195f0cd123336ee262d70fb42d6fbce0604e` [content] Selected Markdown helper returns output; no transform inference. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4583 `1c8fabd293f27b2faf20ed2b6ac0dc6d16ae8b92` [provider] Codex request changes cwd array field name to cwds. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4584 `e59c94812b0dd6ceaf10a24eded08610e18caec7` [pkg] Root build:client delegates directly to client workspace build. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4585 `5bd317205c1e2283b84273452433a48fcc3e12ba` [auth] Host tool descriptor marks essential load mode and serializes parameters; no enforcement inference. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4586 `a6fdcb469cad68fdef4f7f84eb348d7c97e66d42` [doc] Japanese README adds community skin/theme loader link. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4587 `b55acfc60f559d0f1fcec5c6a71a60642bc8ec9e` [provider] RPC contextWindow becomes nullish number; no usage behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4588 `f8dd0fc2e05778070004f89e4f89babefdcaf14d` [ui] Shortcut descriptor declares project-pick action; no dispatch inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4589 `89c2fac3c6262ee57db35431b6dc44319af8dd2d` [files] File-manager action refuses missing target or empty path before opening. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4590 `cbbf6c1684fb0415b7949e684d152f5f7453e769` [workspace] Worktree include canonicalizes source root then reads entries. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4591 `f91a98434868847b7d31d3a11b7dad06d06f793c` [provider] Opus5 manifest description/default-priority changes; no selection inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4592 `f0d7eeb98cb0ed3f940502b42fde6ba2e5eca242` [provider] Grok auth parser rejects null/nonobject/arrays. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4593 `76e336a1beea5388404dfd5d2a31c8bfd39b6907` [pkg] CI checkout fetch depth becomes0. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4594 `fd7061a8b2bae685da53056cc986a71b362add7e` [pkg] Linux sandbox helper recognizes ENOENT only from Error with code. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4595 `fdee3236f75e9465fe0e239150ab0affe9d4bd23` [terminal] Zsh temp directory name includes username/process ID. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4596 `e241e02afbb24ead6e51cbf2ceb02b2897ac2d31` [history] Timestamp helper accepts positive numeric native timestamp. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4597 `963d4f92400c6511fc58fd1b44fb162c9d29d0af` [provider] Agent update projection returns agentId; full payload uninspected. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4598 `bbf3d0f9ccef3785d96b98ddcde2238a795a726a` [provider] Codex awaits connect then checks client availability. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4599 `504b687f8952a0a7ec5b5fdc772b946ddf903a18` [history] Pagination helper returns ready; surrounding transition uninspected. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4600 `fab975a0599c7f9e4fc5169bfa66842195eb305c` [history] Agent loader checks already-loaded agent before subsequent work. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4601 `ab240700753ef99058463040ec7482632b7f3264` [provider] Provider records interruptingTurnId only when supplied. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4602 `acb8506d1f3731b8241f06d6733f1aa4805c9dce` [history] Pagination clears requested progress key. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4603 `b897c59e9c72cc3b0721287e9860fc3200d41d38` [provider] Usage events merge into previous agent usage. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4604 `68a215d40c8102342df2d7720c364afd110a86ab` [files] Explorer root refresh requests dot without recording history. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4605 `891dd5a81316295fdcc254f5de9a11e3ba8c0ca6` [host] Agent launch awaits built launch context for resolved ID. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4606 `ee3a9b013b3509769af0cb39e865d626e0ede822` [workspace] Repository picker subtitle stops falling back to visibility. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4607 `16bbead5a47797cd5823695e6edf5044247c7b4a` [test] Process fake casts kill callback; no actual child behavior proof. Fleetpane: Reference test/config inspected only; not executed.
+- 4608 `9e5accee3c688e2a766f56c76d24b6b03a07b72d` [git] Diff-too-large state renders identified container. Fleetpane: Git expansion deferred.
+- 4609 `20e46e3e3fb5d2ca10298b2f816cf7dccfdd0579` [workspace] Structure counts shared keys within serverId-specific map. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4610 `c6df5ffd4d5072d67502f7ad2873045189ce10ab` [workspace] Rollback options interface removed at selected hunk; no cleanup behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4611 `8f8a373eeadf474ed7a80a3bc06dc5eddfdf6fb7` [doc] Notes advertise CLI thinking-level and project-switching shortcut. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4612 `2f913736fa37f3bd8f755a0ea238031ccadcb0f1` [pkg] Internal packages advance to0.2.4. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4613 `d1ce2b77f7adb13a7f9f3d1b778c9a2efdadf460` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4614 `b345e53a9b7a6ea15c9edb4f94da30def9660f24` [pkg] Linux AppImage appends Electron no-sandbox switch. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4615 `4d7d6a7d1b07d82da45c5059ba1a36343ea34286` [doc] Notes claim Debian launch repair; no package execution. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4616 `95257a6353824140199d5667e59f57c3b18bc7df` [doc] Debian fix wording becomes more general. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4617 `6fc491e6220fba6543bbbe4bf1b1f58cfe59228b` [pkg] Internal packages advance to0.2.5. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4618 `4e6f759da9d0e4277623087758fedb0c49a06560` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4619 `588fdc794bfc20014fa090e74d605266b0ad1a92` [doc] Issue contact renamed product discussion on Discord. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4620 `b18ad74ac64cf22cd7627891d9272a8a12b7d2b0` [doc] Contributing requests raw evidence/repro; historical text only. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4621 `710851ccb8cfd41f9b148780cd71090112d3a61f` [doc] Contributing describes draft/ready PR states; no action taken. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4622 `240d7f366dd95edf355ae958ceff431ed5cbbb31` [doc] Contact description includes feature requests. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4623 `b6f1274f47ba15eb81010e3ae01291ef5532eeec` [files] Editor conflict title distinguishes deleted/check-failed states. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4624 `774b417cc5603973d3c0e6fbab947cc5f2bf0c2f` [doc] PR template removes verification-claim prose at selected location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4625 `fe337b888df51d8f14008536e6fd75ddda44314d` [doc] PR category changes refactor to enhancement. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4626 `eb5e8ba7c5444ad5fab785f807ff068604dac1a9` [doc] PR template says read contributing; treated as data. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4627 `f3fee73976b0f1075dca309e5a5ef53534d3107f` [provider] OpenCode terminal boundary returns immediately. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4628 `91da0bac4dbc4c939bb764255abe0ccaf9389cb1` [ui] Skills integration picker adds translated accessibility label. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4629 `8e983c5d2773d4423b6a2089a8b5ba9e96cdd4cb` [content] Model drops duplicate observations and all observations after disposal. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4630 `d9b72e1c763a046d45f91f0ef0d56ffc39aec923` [provider] OpenCode runner-status events increment revision. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4631 `87ef631ac48fead7104b310c49c0d01e69eed3e0` [ui] Project icon returns null without icon or initial. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4632 `99eca19a76ff7012ab891b619f8a89881f868ef4` [workspace] Host project sorting compares project names by locale. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4633 `baa1c08ec8a16c19457d3bc23daf8d4a72733f3a` [doc] Historical SKILL text asks provider resolution; no instructions followed. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4634 `1ddca07d57b67855e793a0a891cba8136a4586fc` [git] Change-request metadata input is parsed through schema. Fleetpane: Git expansion deferred.
+- 4635 `35f985baff9667645b05bcde1cf92b9ee18a181c` [ui] Control contribution labels use translation keys. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4636 `de44c8cd666a8eb729e307597918ac0fb6b3e1be` [workspace] Creation screen requests checkout status for selected Host. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4637 `706ae3d9bb5700c7f2ba1235009011c001393e82` [provider] Task branch checks provider announcesTasks flag; full condition uninspected. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4638 `800bd2bef1dbb34568fd4efc8c6972cf10e2dd38` [workspace] Project edit sheet refuses close while saving. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4639 `d7ced4a77e1af062ab54911c999e4b4d397ef091` [test] Commit test captures starting repository SHA; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4640 `79fccb368d4ec036857430d6e94b54effba3a4d0` [pkg] App config removes appVersion runtime policy at selected site. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4641 `eb1c7def54b1d3b71726431ac7ce4236fda221b0` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4642 `3778d0ad7bf1de22df8f8937937d0c316eed0d61` [ui] Presentation overlay only receives pointer events while open. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4643 `d2de309fc3a2b1669caa700d045772f6c24d66aa` [auth] Pairing request fails visibly without client, otherwise requests offer. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4644 `9d19e903236847cb89c78c051982955e8576e9e0` [workspace] Hover card gates on workspace directory label instead of cwdDisplay. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4645 `a54cb66bf621aa6c198a9f9f86be7cd65ce643ce` [test] Supervision test reads Nix module before assertion; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4646 `c0dcb4433a7d21202db5c5856170f3b4399ba1e2` [pkg] Nix source filter excludes docs and GitHub directories. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4647 `5f575fcdd60a032f0265e3f9bb67b3708092cfbf` [doc] Coding guide states env-based Bash shebang; historical text only. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4648 `b560c1184cdb39db3215298c6776fcf89b3c14e7` [test] Terminal test waits for exact marker file45678; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4649 `b960594d44a1b52d3dfb07ea2d279e1329e4c15c` [pkg] Nix build traces desktop files through node script. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4650 `b151dfb88d21c659efb207ebb6d60c350e3bdb72` [pkg] Selected Nix hunk removes recursive buildNpmPackage declaration; no build inference. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4651 `6e74c924e61f246b144e15864d4ee34de1ef22ff` [pkg] Nix removes inline package version/Info.plist construction at selected hunk. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4652 `7d4100a02161047f2c1c8220c4191ff1e073897e` [pkg] Nix prepares build-local Electron distribution directory. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4653 `a8637d4bbcd9c71c5453613be498f60f4cdfaff8` [pkg] Mac Nix packaging disables identity/hardened runtime flags. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4654 `70ed70d36e2eabd3876a22931954319ec202c902` [pkg] Nix CI adds macos14 desktop build job. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4655 `6177d85e9959e851621fbb8828222717beca2a1c` [ui] Handled sidebar shortcut exits workspace focus mode. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4656 `a059af1edac759395a6b5b4b76471e73cacba186` [draft] Insert-text handler ignores empty text and checks separator whitespace. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4657 `ef63dd212bd16482494f9d369054dc49c0059487` [workspace] Registry update starts from existing workspace record. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4658 `014b20e5b29fd50eec79a28af042d05b5717f3aa` [doc] PR template asks user-flow-grounded reasoning; data only. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4659 `8b87299ce11acc976f75c15b47c8d243d236f2bc` [doc] Template adds intentional tradeoffs to scope section. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4660 `8021d2b6c9122add8052565e19ec71fad9ed2007` [history] Pagination returns dormant state; transition context uninspected. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4661 `47dcb64ac7f059ffffcc44c0dd456db942f64d1a` [test] Websocket test timeout increases20s to30s; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4662 `fb9f7fb98a49409c2fcdf63456cbe5c7421847c6` [ui] Command-center category limit declares5; no enforcement inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4663 `6d3d8068a4ec01c6b92926670b6d687a67013f67` [doc] Metadata prompt adds PR-refactor title example; not followed as instructions. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4664 `e35ad9f6921cb2d21aa830ed353c122663c492bb` [files] HTML preview allows fragments and rejects blocked navigation kind. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4665 `47c18a921371d75356f8a0f99e9c21cf9f2b36d4` [history] Conversation action awaits forkAgent with agentId. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4666 `b0a5c09ace58b41849b6c72331e92a749424d64a` [provider] ACP auto-accept helper requires feature value exactly true. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4667 `76abc50f822c4c3370d15614c88e7254a25411c6` [workspace] Branch picker ID prefixes exact refName. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4668 `429155b536101310de08d3577ea47a14a13e3da4` [ui] Project visual renders chevron only when enabled and present. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4669 `5a30affd7f55d71f341b79b99cb86f3bb097355d` [conn] Handler cleanup invokes unsubscribe callback. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4670 `9ddc3e0c4253b4cf3a1a7b864b7a92294cf2e8d4` [provider] Claude SDK options enable forwardSubagentText. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4671 `c8de1b165f3c99e991b1e3db7d6d266a7aad4363` [provider] Closed Codex connection throws typed closed error. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4672 `74e4a9f90c181a31d266e48f6ba62717e443c596` [test] Status badge test seeds project; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4673 `048b82f2a7b3ecc9b62bc5b817729f4ca2741863` [question] ACP permission display uses supplied title then snapshot title. Fleetpane: Preserve Host-owned exact request/choice identity; native acceptance separate.
+- 4674 `f888bae04de5bdace423db0ef0a83f15a6d26e3e` [workspace] Session queues updates for deduplicated workspace IDs. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4675 `0a106dd35fe7616d7bd41eba15237f82064debeb` [git] Diff structure comparison returns without prior fingerprint. Fleetpane: Git expansion deferred.
+- 4676 `26bdb1d1713e8f884950e560bdf067980f175213` [history] Timeline reducer checks before-pagination direction; full guard uninspected. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4677 `2b474f7df9fde418a4557feff01447d875f41207` [terminal] Selected hunk removes workspace-focused gesture wrapper. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4678 `0ad51e26a14ed7507b79b329d633f434e8f1b3e6` [files] Clipboard image reader returns null when image absent. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4679 `553ac53643b2cc861b94044798e67cadbb28c98e` [ui] Hover intent cancels only an existing timer. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4680 `ccb668b3b492df1b9eff45d3cff396d95f5cce48` [workspace] Sidebar workspace menu renders dropdown; no action behavior inference. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4681 `f682156302c5b0015e4b52d25f000e22cf20a147` [conn] Auto-attach cleanup exits without release keys then clears resolving counts. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4682 `2e188787ffed38f3846408dc61e88741b81e54ec` [git] Process scheduler option helper preserves undefined. Fleetpane: Git expansion deferred.
+- 4683 `fdb39d211181b09f77d88aade663526e4e058e0c` [pkg] Desktop icon handler returns without icon path. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4684 `5d15e40a2b057ec7775f9884861fb462e637a59d` [pkg] CLI ignored-argument prefixes include launch class/sandbox/debug flags; no filtering enforcement inference. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4685 `2948a435ed77a6c5edecee8a8857976b2a3445cf` [provider] Usage poller returns schedule callback; no interval inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4686 `04fe30a3e2c4ebe6715a22a35c86badfb7a57ef8` [terminal] Copy/paste actions render terminal action button. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4687 `adf33930b33260f0d7ff0623a745696432f6791b` [content] Markdown table export escapes literal pipe characters. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4688 `5c7623997c7c9093b4d0fe324249ab55c4833600` [workspace] Candidate selector returns candidate when no latest record. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4689 `4406bf588e468c3604b9c94544574ebf38d79c01` [ui] Host badge returns color comparison; full ordering uninspected. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4690 `ed4fc08f78e0e03cc5821acb6b4f49be85dd6fd1` [ui] Agent icon renders SVG; no provider behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4691 `777fe968f5bab50f63f25a61188482f6a15789fc` [terminal] Selected native input hunk removes pending-focus clear/read. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4692 `ab8151d33fc0c14d630ef79ae0ebcce118f56007` [files] File menu renders actions keyed by exact action key. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4693 `a361d1cb2fc1d494d01f487a676659506c51e4e1` [ui] Menu surface creates context-bridge callback; no lifecycle inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4694 `ec00d57e013d96027a369c367122b97671fbcf4f` [files] Explorer chooses file icon from entry name. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4695 `f25e68b8cc1c9a72e2c37deb37b51c18ee569527` [ui] Web scroll measurement requires positive client and scroll heights. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4696 `b4a4507fb2185d5ba78fbdd16e4ec118418ac7c9` [conn] Timeline sync branches on connected/selective mode and active visibility. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4697 `3a9d39b63a6838d9af3d5915a306806b87beda6e` [ui] Same positive-scroll-geometry predicate appears here. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4698 `74dea384566dee6e5458c107191c13bdc16b9960` [doc] Connectivity page category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4699 `fb657ebc20d6ab09cf0d6ac409132d5b38af7f5e` [git] PR picker identifier prefixes exact PR number. Fleetpane: Git expansion deferred.
+- 4700 `98c9878c573f1c5c91c1d9a703dc20b7eb3aec00` [pkg] Keyboard-controller dependency pin changes to1.21.12. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4701 `e238fea158ccbfac1a6d4663bd2a950c0f36d875` [terminal] Row selection rejects absolute row outside selection endpoints. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4702 `e90832eedda60be18b4b2bf1ccdb3f8314fb3867` [terminal] Native appended input sets shouldClear false unconditionally. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4703 `32705cb3f2ddb35af76fa345ab6163763b383b1c` [ui] Press highlight returns original Pressable without highlight style. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4704 `dc6f13e31edbaa5c8986063707e83b8d9e242138` [terminal] Custom glyph lookup tries light/heavy/block maps, else null. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4705 `56cb70fa5940f91e3f55fb661259350a49ff74c4` [ui] Menu item wraps depth provider. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4706 `bf6cd09d6c0914a94009a22d4b4e9a02c5570317` [ui] Menu context returns without selection callback. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4707 `22cb7f9996739f831f8f1f7be1d8de7e7b90a21a` [ui] Host badge comparator returns color result; full ordering uninspected. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4708 `8b9314b70afdbc84318bed6c90328b85e3e86b66` [workspace] Workspace metadata returns null without project visibility or Host badge. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4709 `bfec5a05b9fce991cdfeb4b554cf926bc31c6298` [ui] Workspace menu renders themed ellipsis. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4710 `683f38443cd67668480865a240fccbb271d81c7c` [ui] Press-highlight shape helper returns empty style for function-valued style. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4711 `238047eaa8b7031202bd872abf84f6387c17ac17` [ui] Composer removes compact-form sheet state at selected hunk. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4712 `df32e6ddcd8dc6785b249aee4d7ba107a2e1655e` [ui] Kebab remains visible while menu open. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4713 `7b6965856b8f8940f7ee6da1e625ce13ffeeeb5c` [git] Watcher helper returns fs-events before Linux branch. Fleetpane: Git expansion deferred.
+- 4714 `b020a1d1ede55fd217575b3485ab4643433d8a23` [git] Same watcher branch appears here. Fleetpane: Git expansion deferred.
+- 4715 `8e5b6876b48d183860971de7a9621125689d8f32` [content] Assistant stream item spreads activeItem instead of fixed kind. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4716 `7dbeff8290a0fbc640070867329834d5eea9ffa1` [provider] Snapshot cache key encodes serverId/cwd tuple. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4717 `1e392557f229f98ec4b8c95ace9e32879ed2b37f` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4718 `9194449952e71b72531376f481c414bebea63a61` [test] Workspace helper awaits project visibility with30s timeout. Fleetpane: Reference test/config inspected only; not executed.
+- 4719 `dac255cb99597159b0970d9ad8aa4c29760607be` [test] Same workspace helper expectation appears here. Fleetpane: Reference test/config inspected only; not executed.
+- 4720 `adf508a1c859a5e2875154c727ad26d82deca4a4` [terminal] Resize dispatch requires client/terminal/claim and records sent size. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4721 `d191fa66857c00451219aa7174b1c971da4c8d56` [pkg] Native version parser throws on unsupported version string. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4722 `8ac7cd476ceb60a5a905fdbcfbc825839c4899c4` [test] Relationship harness invokes launch(false); unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4723 `62f8b148047bef3051b83c79a962e42d5b43d724` [pkg] Desktop package excludes internal debug/task directories. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4724 `34c538602a63e2110ac7fe617bddc3280ac71b1f` [doc] Notes advertise mobile terminal selection and prompt outline. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4725 `9916e3d185587013ab6c7e38cc8e7df548e04052` [pkg] Internal packages advance to0.3.0-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4726 `d7f72d28050cd850fb8d718ab300aa2630a3cb50` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4727 `dfd18a44a7034df4cb521e52633f2f561604649f` [ui] Docs category opens when containing active page. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4728 `0b624b5585123f1401d2178508340766b2b31d7d` [doc] API docs describe401 for absent/invalid/revoked credentials; no runtime proof. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4729 `669253bdf6a973adc0cbe6cea6d86c3ab6121c06` [terminal] Focus branch checks canRequestFocusClaim; full inputs uninspected. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4730 `7808a2a7d87fdc8f77b1cd880d1c97ef28668823` [doc] Notes claim terminal resume updates; no runtime acceptance. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4731 `d227ff3e83cd7753034b54ad48d057e8af160133` [pkg] Internal packages advance tobeta.2. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4732 `aae9a474c2b95307df5fb19c5e3c5a38d235b39e` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4733 `1c43e4eea1de4e0bb6ade7b471fbfa857d9550b0` [pkg] Release anchor prefixes exact version. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4734 `781274ed1ae0a54f2f355817d97a346db411f909` [files] Directory suggestions reuse unexpired cached paths. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4735 `48bdc5610fde3aba9a86a2cd9bdc70b9289de6a8` [workspace] Settings reads last workspace for routed Host selection. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4736 `211489c65858510efb7de77bf6d5a8d34407ff87` [ui] Theme declares success/danger colors; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4737 `5d0560d4c1137d13478083883201e3bb3d39cc36` [workspace] Service summary ignores nonrunning and nonservice scripts. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4738 `076d9751b7215878a5ffd8124eeb57e90027f31e` [doc] Glossary distinguishes finishing scripts from long-running health-bearing services. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4739 `501260764379bca0cfbf479067dae0a7d1f443a3` [test] Host badge test asserts SVG stroke; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4740 `94b57f34add2de608ec8c41e99f4ce9c2e14ba9c` [content] Tool mapper explicitly recognizes task tool. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4741 `0728148657a1bdeabb2a3800af4d2df7ff51ab6a` [ui] Korean translations declared; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4742 `fb5cfb9fb90ac1957fe09653bce2667bfe1ec070` [voice] Audio activation returns when already active then sets up session. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4743 `9f845225211a7b0bcebafff5066e2cdca20d1ac9` [ui] Project status style distinguishes failed/running. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4744 `7f7e8923eb95c0f77426a286a47c7e6ddc1dd74f` [history] Replay joins known parent tool-use ID to outcome. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4745 `eb95a6eea6266fda5bd41f38e629566672aeaa13` [workspace] Resident preview refuses missing browser or nonpositive dimensions. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4746 `254e72ad50f63578aaa20a0bacbe6bad6d9baef4` [workspace] Same preview validation appears here. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4747 `212cd004054cca1df099ad7d8a185c38f77700ed` [test] Outline helper advances fake clock100ms; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4748 `c59b47b8a6f5c52fae8a023deb6ef9ed0d3ab1b4` [provider] Child callback rejects closed session or replaced child process. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4749 `e1b4058b7733a5d1fe1d311023c5027bdf38347d` [ui] Menu anchor formats horizontal/vertical position. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4750 `5465d66edd64dba0593aebb6cc1b42956c198120` [provider] OpenCode cache returns existing entry if present. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4751 `098122be8dc98a1c18633dc4315f5d429519c08e` [content] Markdown extraction returns null without Markdown. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4752 `73ba37a07aea419698b237cf45d78e59793cd5b4` [auth] Direct-header validation labels distinguish missing/invalid name. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4753 `f2054cc701f4cdaa43b509331a393956bc67decc` [workspace] Schedule model key concatenates provider/model with colon. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4754 `2298e9efdf160aa5eb48ea40a1320efd8d05d844` [ui] Width observation ignores null width. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4755 `e99eb7de3d8f7c19cac10e58930ebf65ba82344b` [content] Semantic selection returns null without selected region. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4756 `c1f7ed3198816327a44d2b979b47dc89bac086bd` [conn] Online/idle connection clears Host-scoped reconnect-toast state. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4757 `f4e8522050e63ce7eb8a539888e2241f50728599` [files] Output reader stops on zero-byte read and accumulates count. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4758 `9c05de6f127df1a1ac0e6a36e12e3e76ac483ed9` [ui] Tab presentation removes inline dot dimensions. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4759 `bb55e5bc0dcd7c2ec03f5ff4381b890fa9118cbd` [ui] Needs-input visual uses shared alert-size constant. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4760 `deb5e5c72938bb18eb48dd7197449dbc6f2ab100` [doc] Hub concepts describe request-to-agent-machine routing; no actual routing proof. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4761 `a9034ec64294644731fa3345f356f1fbe5e6cb38` [ui] Tab status-dot markup becomes expanded conditional block. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4762 `42bfd4e04c21ef9877c8d025cd0e2dd3cf170ab1` [terminal] Activity branch exits unless current state is working. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4763 `1e03e2d1200e595c6a9d229b21435e08d3955d4a` [doc] Daemon-registration docs replace name with friendly slug. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4764 `ef6d7b3b9add47107b2a57ec17f080a640675861` [doc] Hub YAML field table formatting changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4765 `b4357139bbd9a90bd77890087e8fa7b396eb1ad9` [provider] Manifest declares fast-mode support; no runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4766 `292a9c4c8c4a970951d5010c3f122c8977a05cc3` [doc] Korean README describes loop/advisor skills; not invoked. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4767 `c352632b74b679e3c45acd267282d20c962d5e53` [draft] Composer input branches on explicit readOnly flag. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4768 `3a6d6db9a508f39e9ada90ea885ec9a5a89cd197` [ui] Web strategy removes overflow-anchor none setting. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4769 `64058722e1dfcef4e607d3188b5367482e0d96dc` [auth] Configuration install client posts to API endpoint. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4770 `84b735fbeadd7e723108dd5c9b1d746174d80579` [content] Selection walker collects nested HTMLDivElement lines. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4771 `75a5065bb3de77aa3444b26936eb188c0423689e` [content] Semantic selection condition includes selectable nodes and anchors. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4772 `a5184fd08a987436a8595cf074437cc71af8244c` [conn] Websocket transport throws if runtime lacks WebSocket. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4773 `a06e4d60e981202d81ab8e54520d7cb61a62a143` [git] Git metadata rules filter by both/exact scope. Fleetpane: Git expansion deferred.
+- 4774 `6abfa242d8a9cc0a43a7399653e97875dc0b6fc3` [workspace] Creation screen removes reserved fixed row/isolation markup. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4775 `c9a9d8fdce944b5c3780a3fa1d3c223a6ee0d4a1` [workspace] Setup cleanup removes run only when map still owns same run object. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4776 `f842537142e1735b4ac7709bf7ba32e47f8e8126` [pkg] node-pty pin advances to1.2.0-beta.15. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4777 `fcc54621ca48456958c6f0f892db1d970baa562f` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4778 `bf38bd728cf8e29a89fa1a5db9f13f81395e5f22` [doc] Notes advertise Korean locale and custom direct-host headers. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4779 `86ff0a18c4f679da5b2f08e6810edf005f1040fc` [pkg] Internal packages advance to0.3.0-beta.3. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4780 `3ddebe72214a62349262963e64817580d25c0b85` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4781 `9b5f6f33f625829a182f73b6b4b2d46026729333` [ui] Sidebar padding increases from spacing2 to4. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4782 `5e197ad0cf314df519b63ba841aa93346fb88a00` [ui] Menu prop type becomes multiline declaration; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4783 `98d3281cad05f2836f6d5f9365faef0409c105b0` [provider] Provider skips supplied nonassistant message role. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4784 `dc19b45f23208e3530e4b737b3815d5e4578d708` [workspace] Resident browser dimensions round and clamp to minimum1px. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4785 `082ddb230312f5cd6d72b43fa77d06c59386c978` [doc] Notes claim Pi streaming and browser interactivity improvements. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4786 `a7c7a6e48245b6bfac039ef3f8e79c58050ba534` [pkg] Internal packages advance tobeta.4. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4787 `8d3881f640cd5d543ff0aef150589ff7dc87a7a2` [doc] Pi note is revised to crash-loop fix for0.84. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4788 `cc5ce1038d9785e06d9dd1c01095b37ddd4d6f5d` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4789 `b167ee02e18a553ae8b03ad832fa9bd6fead1904` [content] Highlighted text branches when segments absent. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4790 `31963855264bbb18749a565aad586f5f0eab2732` [doc] Selected changelog lines remove Pi/browser notes from location. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4791 `7392e1b7673f7c6eb5131aeef0c8e3e529bce199` [pkg] Internal packages advance to0.3.0 stable. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4792 `e36842b234048b9dc2f85eed179c153a97f4412a` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4793 `7ac4303d8f4029660d781cf950bc710d5f84d501` [doc] Release checklist lines removed at selected site; no historical instructions followed. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4794 `b669dad2211aa41e2f07705b905cf34f8fca16c7` [auth] Hub client delegates request with origin; full endpoint uninspected. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4795 `f0eb7cea4b97243cd8976e64bf5948c27445fb16` [provider] Agent config returns provider-configuration application result. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4796 `375d1d6fb879ab78bb3afeaf6374b16bd7f629f6` [auth] Same origin request delegation appears here. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4797 `3d420720c5fdd42ae6332b2e133b4a2c34811985` [doc] Security page navigation category/order changes. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4798 `0906d1d7bd3dc61197c928e65bbb096097cbf752` [provider] Codex skills discovery falls back to filesystem only for null cache; valid empty app-server skills suppress fallback. Fleetpane: Preserve authoritative empty advertisements; Codex command discovery remains a useful gap.
+- 4799 `2740c8206fe2f9000c62fd02d87c71a4c08dc534` [files] Exact-path suggestion removes Git-ignore filter at selected site. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4800 `638693a5d75c6b9e91513ad138a47d6f18dfab56` [ui] Error boundary reads safe-area insets and compact form factor. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4801 `1a117652fd320676f1768cc4c3339c7afba9fc3e` [excluded] Kimi model helper returns list unchanged when one or fewer models. Fleetpane: Kimi/GLM excluded; no adoption.
+- 4802 `b19db9537c37da2c08d5e00776591b88203ea50d` [question] Claude question helper returns empty metadata for nonquestion/invalid questions. Fleetpane: Preserve Host-owned exact request/choice identity; native acceptance separate.
+- 4803 `b9b3a24d58fb9f24f3960b4e9e9f15ffa5aa124c` [notification] Desktop notification settings return null outside desktop. Fleetpane: Durable notifications/mute/tray remain candidate gaps.
+- 4804 `1e0ce69c548ea0d266ed96fae58210816d5ff9fa` [ui] Resize handle overlay uses box-none pointer events. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4805 `49b257c55ac4d3153553b422d934c0578bd15160` [ui] Mobile trailing-tab style array declared; no menu behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4806 `cefb71dcacb6516425cf427dd655a640df27502e` [ui] Creation controls use desktop style only outside compact form. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4807 `ce7b3a90c007c1395a9cd25c46e20d882b2d79b7` [workspace] Auto-name update begins from current registry title. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4808 `8f38d049191a49e48e01863dee2c5d4934617783` [workspace] Creation placement preview returns null without route placement. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4809 `c28836b4e58091bb6ed8f15916305364a25422c3` [ui] Pure-black palette declares black surface0; no persistence inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4810 `90aa8bbefc0ff2918fbd8931b634278f46623d90` [ui] Shortcut resolver returns null for unassigned binding ID. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4811 `74cf1931b13b3f1397c3cbb0454cd87d3414a976` [ui] Shortcut help maps mod/meta to cmd/command on Mac. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4812 `8ffe7c75d5553ae1872c3dd48de6adcd8aa927d9` [git] Git target work checks closed flag; full guard uninspected. Fleetpane: Git expansion deferred.
+- 4813 `3bca9b7a9243cad067ad20539db768b3c961628e` [content] Marker lookup returns false without marker. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4814 `01a1d3b2b6a13f47e2774a3b64e4adee1d994632` [git] Supervisor watchdog restarts current nonshutting worker after15s heartbeat age, checked at1s interval. Fleetpane: Historical policy is later removed in4861; do not adopt a destructive stall-restart policy for independent Hosts.
+- 4815 `7761d122d88d11510cd0deaf7821d1d7b7bec39b` [test] Creation test closes agents and flushes shutdown; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4816 `fd9cc5d6932fadde3dabc83162199e41c7754a5a` [auth] Direct-host URI input receives translated label and advanced URI. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4817 `c77a6761afa4ecaf8be29c9de5205c1c85aa23d3` [pkg] Updater awaits check and returns null without result. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4818 `6ae6231d1fa745061808bf4873819d057aea5123` [content] Markdown code style removes computed lineHeight. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4819 `c0daf8e066e0d7379723a2a6ddea20afc71ead20` [ui] Workspace status dot combines overlay/color styles. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4820 `05dc2022c8af478ccbf94066d7bea9d7ce2e6284` [git] Fetch observer reads ref snapshot and signals before phase. Fleetpane: Git expansion deferred.
+- 4821 `5269c7b592b97b0113ec8cd9072f0b9a8163d502` [doc] Notes advertise unassigned/effective shortcuts and pure-black theme. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4822 `bfec7ac3adc5e8835e873ee75c7b325af6c7a8c3` [pkg] Internal packages advance to0.3.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4823 `b0a7d493aa3b100deef292e25ed2cc40eed8bb33` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4824 `ccb4e444ed556c3ae6a8a98a22c9499ce8287a85` [doc] Directive helper checks explicit directiveLabel true. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4825 `02c4bc76a6cdd0f0a2665cc85ff4702e6b28f169` [workspace] Add-project input binds current page value/change handler. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4826 `b7f137c2a0001e02536eb733d9a054f3500069c0` [ui] Project icon parser returns null without match. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4827 `05a0cabc0749c8d251e7540f60af6841c2952897` [auth] Bundle deployment rejects legacy TOML before reading resource. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4828 `7954babca6f9e62e55b4108a63a6cbbc05ac54e4` [content] Parsed index replaces current with matching entry. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4829 `48e65b407fd7df4d097df7c264fc168f2665ea4f` [files] File observer factory constructs service from backend/paths; no event behavior inference. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4830 `42f1d0b2894c644b9c71aea8e334bc6ef36411ea` [doc] API sample adds provider-event receipt and trigger-run IDs. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4831 `a98d154b6bea2a177b193ca731cbac87560d0ecb` [files] Search error formatting distinguishes daemon RPC error from ordinary Error. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4832 `ca2b63328675b9ebf3a9576ecfc5320b30c0cee9` [files] File actions map available actions with indexed metadata. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4833 `c5d5441c9c1c0cc6572d88212da74495acab400a` [voice] Dictation sender awaits drain result and checks timeout. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4834 `94bda1f92504e45b42780286d0c98b51aa4a4ef5` [workspace] Schedule-create dispatch delegates to schedule session handler. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4835 `df9e8e8f06d33527e4a63feabb63bb3725892b9f` [host] Bootstrap metadata supplies hostname and serverId; no identity enforcement inference. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4836 `29ae25d7aa44dadc91cfc77cd4c64d475bd18d8c` [ui] Ref helper ignores absent ref then handles callback ref. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4837 `6aa9f921560b0ee2333706a7756a39776be64042` [conn] Subscription renewal skips leases with more than half duration remaining. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4838 `334bf623709d91b9b9d5217fb17acc289ed16622` [host] Agent wait callback ignores stopped state and defaults terminal result to stop. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4839 `7253228dc537de4b612a26621e21a958f05de708` [ui] Native webview returns without current state or view ref. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4840 `b599d38a772f621e0001abfb90a769de11c8cd8b` [git] Diff horizontal surface provides offset context. Fleetpane: Git expansion deferred.
+- 4841 `36a13601dd1007bfc4097d605f2fd1327f785eb4` [config] Metadata-generation settings patch providers at I/O boundary. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4842 `8c003351d0b8ac154511bd5bb408450ad22e931b` [ui] Theme cycling selects next entry or first. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4843 `917e39495b9f53662e1eafb674cc1ff7a7492b85` [ui] Top-left content also renders for dev-build label. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4844 `b7ca1f7502dedc4091d5801be6f129ee64567e4a` [doc] Contributing removes misspelled acceptance/attribution lines. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4845 `07044136c8b0ecebac7d5e8309a54453c6049e95` [ui] Command contribution declares sidebar-grouping ID; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4846 `308e9af84591eb4ebfc023edca1028c5d6c6afe7` [ui] Profile glyph comparator returns color result; full ordering uninspected. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4847 `b2ff359b60e6a75d73c08103c2fb49890d9ce5ce` [workspace] Worktree creation resolves unique local branch name. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4848 `db6520bf368c2f0a0ec3163dc83a7968cbbe74fe` [content] Task panel hides empty tasks, otherwise renders supplied list. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4849 `a39959219fc5f4e7f06d4f13f57f9fc55641bdb8` [workspace] Rename reset branch checks supplied title conflict; full condition uninspected. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4850 `f24664b8826658885db7d0c644296d4b1823be11` [provider] Codex records nonempty root-compaction item ID in pending set. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4851 `cdb11631450c7d00c3b6b81270ad38c84a081de5` [notification] Finish message checks length limit and computes omitted count. Fleetpane: Durable notifications/mute/tray remain candidate gaps.
+- 4852 `163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed` [provider] JSONL metadata helper preserves undefined. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4853 `1c905a114e513f37e1af6419bd4dfc8294040753` [voice] Session context surfaces abort failure through toast.error. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4854 `b9d7d4b18eab5f2bf2390aeefb0cc224022874ee` [perf] Equality comparison begins with agent object identity; full comparator uninspected. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4855 `2f54c0e30984b76a7b539939e6519f53b1d45ba1` [workspace] Worktree setup reads source config at filesystem boundary. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4856 `40bdb9a0433e1e3f5413d337d479de267a03bf99` [test] Supervisor watchdog changes elapsed15s threshold to15 missed checks; test config covers16s suspension but was not run. Fleetpane: Sleep-aware liveness needs independent validation; this intermediate restart policy is superseded by4861.
+- 4857 `7b167784d7c692a4ff8676046698fb95e0fed43f` [provider] Cache projection retains version/hash/generatedAt/parsed compact snapshot. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4858 `23d7a8eaf9b31afae5d7d7d7f047eb2b36232403` [content] Document parser returns whole body with empty frontmatter when pattern absent. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4859 `5f5c585e68ffe580065fc9f4349a5b4384c442d1` [provider] Snapshot eviction sorts oldest-first then checks byte budget. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4860 `d012b6f0717e2c92c6f591c9e653f7409fd77fd9` [host] Diagnostics returns single diagnostic or joins batch text. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4861 `74f2158c454b09eb3558422ef094bd79a1c81eab` [host] Supplemented parent/current supervisor source confirms missed-heartbeat restart watchdog removal; supervisor-to-worker heartbeat remains. Fleetpane: Preserve Session Host work across stalls; explicit shutdown/resource retirement is a separate gap.
+- 4862 `6ed364ffe281d926b7a794f2f5bcde6cab411acd` [doc] Hub example branch includes execution ID template. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4863 `2c5c629db87360b573e7988dde781955ebf1a2e8` [provider] Cursor SQLite import uses double cast in historical source; no type-safety inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4864 `2f6b585a3a17d850be939638857d5dc685baf43e` [host] Quit request is idempotently ignored once requested. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4865 `b58ccf926988d0ab6ba70d405541922d4caf38de` [provider] Tool-status mapper returns running before shutdown case. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4866 `0ba7251280061532ccda6636a974873185f5e0dc` [git] Expanded diff file adds sticky-header index. Fleetpane: Git expansion deferred.
+- 4867 `124e512b580b8a7289b3c823e264ef0a9a2a6cbf` [workspace] Subagent track removes Pressable at selected site. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4868 `474b4e70b4482feba4231b74947622d59f55c872` [ui] Tree constants declare16px indent and shared row padding; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4869 `8e916fd2dca95381a0a795ec060432f868b2a6f5` [ui] Profile row removes prior glyph wrapper. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4870 `635a8be437f390841786c04955bc867ecb84d619` [provider] OpenCode config returns unchanged unless normalized legacy full-access mode. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4871 `94106a30ab302f1b164a4150244fae501690a9ed` [doc] Notes claim default-variant reset and settled Codex subagent repair. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4872 `0c6dbefa40e2c4948eb1550fc1b5749f01a8a7b0` [pkg] Internal packages advance to0.4.0-beta.1. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4873 `fc1cb82e023f652eccac6b69e91e4482b7b55a67` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4874 `4426a6b11fd9f1135d2e48076b83430a1531f973` [ui] Tab-label counter increments value by one; surrounding identity uninspected. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4875 `1b887e534b9de2317da704f64ec7e8e43194c2ae` [config] Cache version becomes4; persistence delay declared750ms; no migration inference. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4876 `ed0d4e6c5b3f21dc76f01d5cf14df8070bb5bcef` [doc] Notes claim old-cache startup fix and delegated-agent availability. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4877 `44b9980a707647bb15d7a969cf682f3e27279db2` [test] Cache test flushes writer; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4878 `781e07f4ea72f1dcb125c4c25cc7e53bac09b366` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4879 `9a7301d9a0963ea753bf0ce20b0ee61e0341d710` [test] Selected hunk removes malformed-row cache-clearing test; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4880 `c190fed27cb62f2f422f462e8c157abd1da870e7` [workspace] Setup status resolves config Git path then reads committed config. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4881 `36312352db88b2b5c4024465c40ff97fe48f67f0` [config] Preference projection includes provider only when defined. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4882 `9ca6f24315db187ef046582cf408f24ef1125bad` [provider] Selected provider hunk removes overlays array construction. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4883 `d0d60a4052ea5d067debb0413cbda2810e0a1467` [auth] Relationship controller awaits enrollments when requested and not forced. Fleetpane: Remote/MCP authority and resource lifecycle remain separate acceptance gaps.
+- 4884 `20bccd31a387b115339b54dfcc041ba1bebdb5ae` [host] Refresh operation runs through activity context when present. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4885 `1a6054138d895223fc913fe5aefdf0c1de36f484` [files] Watcher canary returns path descriptor; no liveness enforcement inference. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4886 `90f3d954151ca7a2ec8d7134464fbcafa61beaac` [workspace] Initialization plan declares replacement based on existing paseo directory. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4887 `9c195feb9bc6048406e1c71c44dfade9e7e8d905` [provider] Preferred mode applies only if advertised available. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4888 `0f2723074680d810a2be3ff7ee2adc9613dbba89` [content] Completed task renders checked-circle icon. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4889 `a4b92768d927694c042d468488484d1864081116` [provider] Refresh timeout defaults120s and caps integer timer; no scheduling inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4890 `52e4060d76aee227b5dec60386bc55c0d8dbf636` [ui] Icon filename patterns include wildcard Apple touch icon. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4891 `9c91dbbf425ba28803980fabaeeb414459e889c0` [doc] Historical release guide mandates PR/issue reading; not followed as task instructions. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4892 `2b9501a8108b40310f2652f13354c1e7173f513b` [provider] Command template declares Hermes resume syntax; no runtime inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4893 `6a1cc98fdf93ebdd0822a2d64b5445c8495ab6c2` [provider] Same Hermes template appears here; declaration/import excerpt only, no behavior inference. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4894 `a732cc5756c805f47c8d238de6f075dc9e632570` [ui] Model browser starts all view when profiles exist. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4895 `4149eeb4077778b4045061aabbd053d33dc39e47` [doc] Selected release guidance removes homepage/end-user wording. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4896 `4950d4c2ea188f4ad51211485c9d1ee95b180f21` [doc] Changelog rewords OpenCode/Codex fixes as fixed items. Fleetpane: Historical documentation only; no implementation or acceptance inferred.
+- 4897 `b44bb63cf4ce089ab5750b9fc621ed52827b2820` [pkg] Internal packages advance to0.4.0. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4898 `b5610928a585d465c3bb646d715b8ff1640e6add` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4899 `599846650cb412a1b3f835239f289ab8ead9f4f4` [test] Daemon-test cleanup exits if child already ended/signalled. Fleetpane: Reference test/config inspected only; not executed.
+- 4900 `373a98c64d62ea6a049d99a35dedeaef451137c7` [workspace] Icon cache key JSON-encodes Host/project/revision tuple. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4901 `b03dc804eb8cf9a1c15fbeca1e9f511e9daec2f1` [ui] Drag-list equality accepts same reference, rejects one missing value. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4902 `770b87a15cab539f658529e39281b26daff9c06d` [ui] Element selector resolves null for disconnected webview. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4903 `30195d3bd18854a7472c5e86dc8f0c9ccda8907a` [pkg] Paste plugin throws if React Native startup registration marker absent. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4904 `f0bd2c8483ff7961fdf6c0cd2070835741f6ac92` [conn] Timeline catchup checks ownership by agent/generation. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4905 `23853a1515d374b873f9d5749b532a81f022b1cd` [ui] Settings labels add Plugins and rename Host overview. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4906 `75bbca4a1bf0976cde868d653f66369ecd958538` [workspace] Archive-finished predicate distinguishes Paseo idle/error from delegated terminal states. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4907 `4748aad103bf3c4d4f23dacef37616450e490f4a` [config] Reload CLI emits text only for single result. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4908 `7f8a485a77f3ba0da303bc0546bd9d2c1e67b7f6` [git] Diff memo branches on enabled flag; full behavior uninspected. Fleetpane: Git expansion deferred.
+- 4909 `38f176595e0ffbbec19cff5079562e0596d431df` [provider] Select features map exact option IDs/labels. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4910 `8625f0543a11de5bd117b814afe828714d83a571` [workspace] Safe-archive path returns when Git explicitly dirty. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4911 `9a0c53d79056b2ce143cf6746df00f7331bf4afc` [provider] OpenCode message counter resets when timestamp changes. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4912 `d60d92e909bcde3df59e380e73cafc4134f7af1e` [workspace] Sidebar identity item uses kind-based test ID. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4913 `d4435bd0166a29721c5616f46107d540a6a54328` [perf] Memo equality compares scroll-container identity; full comparator uninspected. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4914 `d99258cdd00a7de5077ad18ee99c90c22ffb52c8` [content] Virtual item rendering returns null for missing item. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4915 `16120ebff1918f5c22b9d018ac301be9b70c3ce9` [config] Plugin page selects error content when logs query errors. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4916 `42245d139ad1f3ba93c3e691e9e0a7971169ea79` [draft] Canonical user event reconciles turn membership by clientMessageId. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4917 `a9e3be168c52a05bf9813e191f9c55617d34fd5b` [content] Markdown style adds computed small-text lineHeight. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4918 `acc4738caff58a0581adac4befda1fc91c4c377b` [ui] Model-flow mode distinguishes sheet from independent overlay. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4919 `d31372ef1230bebe6d2cb976c37b218aefc26995` [ui] Light semantic palette spreads surface colors; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4920 `8c4e54eacefca3248b0502c1275cfc4c391b0ca0` [ui] After-paint scheduler branches when browser animation-frame unavailable. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4921 `6dcf6a4b0880cd73aa29738e9f8aaba55b2cc388` [ui] Same animation-frame fallback branch appears here. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4922 `ab274d635e17c82efa3f74e842d59f211374b8c0` [ui] Split container renders Animated.View; no layout inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4923 `3136117906d2cf71b3ff49c618d6517b11e25a84` [content] Markdown code border rounds left corners to0. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4924 `90c97c1b1a97fe2ab15106420e4f54b599fabbb3` [draft] Height mirror requires mirror/source/window and HTMLElement source. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4925 `97ac9674950fde768ff3c34ad2fc1b6bacc44ccc` [test] Composer test seeds bottom-anchor workspace; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4926 `ac7796035d6f153cb757249c11e4665029c874ef` [workspace] Project settings adds translated back-to-projects button label. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4927 `ac4331456c997a5e3c161b91e87cce3af1fbb89e` [workspace] Creation branches on daemon target and absent path argument. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4928 `0eab0b78283e57f8baf21a9acb429079af573dbf` [content] Task progress label uses completed count and task length. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4929 `c8b2c8351fba3a94b39a57ca9d80494b86d5c2db` [content] Highlight parser map adds Nix language; no rendering acceptance. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4930 `f3202ac41960c13413aa2c307d9b34b7d97f4923` [content] Turn-continuity helper requires adjacent items and checks user-message boundary. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4931 `1917fdd1315085e4f390b08299a313077d050f3d` [content] Parser map adds Svelte language. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4932 `1e2089cef75e0f873d8e0f049aac7c50a8312d5d` [git] Check-ring helper returns segments; surrounding status logic uninspected. Fleetpane: Git expansion deferred.
+- 4933 `6d7606160e37ccab540c3b5a1aecf1e49ec724b0` [workspace] Snapshot reuses cache, otherwise freezes copied diffStat. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4934 `75adf538934f3777d8a9585060b226e996122bbe` [git] Diff props declare uncommitted/base mode and Forge; no behavior inference. Fleetpane: Git expansion deferred.
+- 4935 `d03cf147037fc1d67ec080ab40b342d8927bec96` [files] File header only dispatches click in working mode. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4936 `4d23905587aad422a568493b95ce9e9caae846b9` [ui] Selected component font shrinks base to small. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4937 `c7b103a2cdf5812fdcd5512ce85bbac32614c0e7` [files] Header memo rejects identity mismatch and accepts matching commit mode. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4938 `8f7b3e8d7552721b3d5cb63cefe6a12f4e410e5a` [ui] Tab helper returns null; surrounding branch uninspected. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4939 `9e6e148ba24dd96b9db5ef948c26539f047e0fba` [terminal] Native glyph paint draws rect only with final border-top value. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4940 `b362af6e323a7482ba3fe8543c911082f1f31832` [ui] Web surface clears only existing resize-settle timer. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4941 `58fe405801169a011ec9b8d39c2a4605c0958d86` [workspace] Layout focuses existing explorer pane or retains original layout. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4942 `ac6a0afdc7be689b922262aa91ef73dba11f2148` [ui] Control geometry removes horizontal padding/full radius at selected hunk. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4943 `7d3212e36588ec6ea98a819f171f9ca87f15b7cf` [ui] Electron bounds observer clears bounds when element missing. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4944 `b97993f8666e8dc34d9bf6aba450f13b05ce6c70` [terminal] Measurement object declares hasEveryGlyph method; no glyph-coverage inference. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4945 `a54b6c2020a0a2fc6ff86449425c1acc161cbd06` [git] Changes panel stays mounted after first mount behind active flag. Fleetpane: Git expansion deferred.
+- 4946 `5110e6e92a3280769821466581dc763026732290` [files] Header helper returns document-container style. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4947 `8655722296e3424b797176ed53d6cf96aa3e4b03` [git] Changes toolbar renders identified header; no Git behavior inference. Fleetpane: Git expansion deferred.
+- 4948 `60bafad3eed1dca546b0e8807c26dcd4e5732c3c` [ui] Menu Escape handler prevents default. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4949 `6ea1067bff17f0d54cd30890e46fe05286a4a442` [workspace] Split layout branch returns without maximized pane ID. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4950 `1e50f895f0e9141427ec20a4bce0810061d87f78` [terminal] Terminal presentation ref mirrors current presented state. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4951 `53ba0f0a2604a75066443915d82ae7952f31924a` [git] Branch switcher adds translated tooltip text. Fleetpane: Git expansion deferred.
+- 4952 `851dcb8d4a9a8cd19faa81b9c8a8cab4e2496460` [ui] Context-menu dynamic style callback receives pressed/hovered state. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4953 `f55f6d0599eeb903acbbb14f6523a5bc521a5ee0` [ui] Draggable-list dependency patch returns after manual pan activation. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4954 `311eb48922eaf160f8ca0a208129a5d3fc81f390` [pkg] Android dev/prod scripts build client before clean prebuild/run. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4955 `331bbd9faa8bf36bf844b746966f98d29a7b2220` [test] Changes-pane test reads border styles concurrently; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4956 `d7f892251f77851508af3b3ae2effa296157f98a` [pkg] Nix dependency hash changes. Fleetpane: Packaging reference only; no behavior acceptance.
+- 4957 `df3e646fbe976772c857500c14f76563a5f4b8da` [ui] Agent panel reserves overlay height/clearance only with tracks shown. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4958 `5ec26f0c093c801e777f51cb46b97b297591a4b4` [ui] Font-size settings persist only when next size differs. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4959 `3948bf4fd6a085b565ffc2b87943d831089cf7d8` [terminal] Profile terminal creation passes profile command with workspace directory/name. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4960 `7a61a642a9ca1c8f8dc87087bf6af5f4b6716cb5` [ui] Component introduces themed empty style; no behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4961 `75ccae13be63fdc102ce373629910f0b364ec1c1` [perf] Package declares explorer-toggle/workspace-switch profile scripts; unexecuted. Fleetpane: Performance hypothesis only; require full-process-tree/native measurements.
+- 4962 `f469223b7647ca632bef40d07a8ab3da473c7b3f` [ui] Composer clearance helper chooses compact/wide constants. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4963 `a6a533bc6a1989c291ab4c1e65fbb00c2b02c975` [ui] Tab dropdown renders translated agent fallback label. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4964 `1cc6712e517425f346c9ed106d861316105b4af8` [ui] Track-bar component signature removed at selected site; no replacement inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4965 `c859b59c99da4eb3d3354d2c98bf0b92b915e4a8` [ui] Track helper returns bar style object; no interaction inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4966 `5ed1a852d1c31b787103c70f246a8c3eb4fe8af4` [voice] Dictation controls font grows base to large. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4967 `3cc87494377415ad4bca76423e451168cb51f7a7` [ui] Client main renders screen container; no startup behavior inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4968 `ed8371d083a6f181bceaa4123b4a75337d8284ad` [workspace] Subagent track without summary returns total label and no status bucket. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4969 `2538dd1e7ba308bfe9b0a674f498ca9b330dcc71` [workspace] Tab cleanup returns current state without removed keys. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4970 `405c6e07a94040e39a5af6131441fe36309534b3` [git] Protocol exports GitHub runtime schema; no runtime behavior inference. Fleetpane: Git expansion deferred.
+- 4971 `6290c2f8ac7c0434c9135be5a027e6830ce755d5` [test] Appearance script expects initial14px size; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4972 `63a8b28e63c1f8e3d380e3d6a510efb38dd6ce29` [test] Appearance script checks13px theme-label computed style; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4973 `3003ae25d5334ef5244c52711cbe28bb4e2ef8c1` [test] Track test imports real reanimated/native modules; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4974 `17f06443dc1946605e1a116d39ca0fddc9a8e33f` [test] Vitest config includes JSX runtime/excludes reanimated from selected processing. Fleetpane: Reference test/config inspected only; not executed.
+- 4975 `78629f92effe792adb95256b581a3d28b543013c` [test] Smoke fixture disables explicit local dictation/detection; unexecuted. Fleetpane: Reference test/config inspected only; not executed.
+- 4976 `f9633dd359ce2fdcd108fb5b169aa7417363c60b` [voice] Archive extractor signature expands; no extraction safety inference. Fleetpane: Voice remains PRD-scoped; source review gives no runtime acceptance.
+- 4977 `b880a70e731ae709edb1d55e3eecbbdb2e05a9c3` [workspace] Archive-finished controls require both visibility flag and callback. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4978 `a87c11e8acda090c211ccae26f4e0834cc10625a` [ui] Track-actions signature expands; no interaction inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4979 `ff6424fa4ece04c68158ff47850e15b8282b3d80` [ui] Settings filters sections by desktop/web availability flags. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4980 `eb3591cee8b113d6c37611fff549acca7213e0e1` [ui] Workspace header menu returns fragment; no action inference. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4981 `41089607098a2c6aa570c7785fadadec241e3c46` [content] Operation display sorts copied ops by kind order then name. Fleetpane: Compare with existing content contracts; preserve exact supplied data.
+- 4982 `2347242cdfddef3097b47386efffecf2671f8077` [provider] Cursor reader returns null for absent path before I/O. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4983 `ba91e3ba7cd483468c5fdb72cbea41f00264edbf` [draft] Input interface declares composition start/end event hooks; no IME acceptance. Fleetpane: Preserve exact unsent drafts and explicit dispatch outcomes.
+- 4984 `4470cc4c56c1bfe845805a83c7e9db85ac2235ec` [ui] Overlay cleanup removes registered/focus-restoring entry with explicit restore flag. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4985 `cd2b6bca9dd0a10883e41c96fc5afa07b47c482d` [terminal] Native printable-key helper accepts one ASCII character space through tilde. Fleetpane: Compare with Host-owned PTY contracts; ownership and native interaction need separate proof.
+- 4986 `e2e97e48543d230dda2787a8dcea9679f3308d70` [ui] Adaptive input assigns callback/object refs explicitly. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4987 `ce9026f26470b5ff4c3e1f3e418ce437dda53def` [workspace] Workspace effect returns when route unfocused. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4988 `05ee7a1d31fac8d4f890e0ebed0ba52d75f51552` [host] Service hunk changes imported controller type; no behavior inference. Fleetpane: Preserve independent Session Host identity and lifecycle; candidate for scoped follow-up.
+- 4989 `0f2e58d4bbfe6a31a4a1ab88d4cd9b28e505f0e7` [conn] Agent panel renders explicit timeline-sync-failed translation. Fleetpane: Keep observational reconnect distinct from mutation replay and Host takeover.
+- 4990 `6db261f91142b76c57588d82eadacca7cf94cedf` [ui] Handler ID concatenates name/Host/workspace/optional pane segment. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4991 `5997cc1c174e14249d4e61ef6034e850d06a084f` [files] Layout file-target helper returns null for empty target path. Fleetpane: Compare with bounded read-only files; editing/watchers/general attachments remain separate.
+- 4992 `c779ef06c5617255c1dd4feaef419e91ffdc7e65` [workspace] Sidebar removes prior unpinned/filter header condition at selected site. Fleetpane: Workspace tabs/layout/lifecycle remain candidate gaps against current parity.
+- 4993 `c09be7efa2ded4d576363a9281625b13b850b10f` [history] Live source maps tool-use ID to existing canonical ID when present. Fleetpane: History import/continuation remains provider-specific and bounded.
+- 4994 `bd3f3c771466750dc5f6b8ef876e778c6f9f5921` [git] Workspace diff-tab branch checks absence of working diff tab. Fleetpane: Git expansion deferred.
+- 4995 `403a32ad9f38933e5a8f38fe77f9aa787e9d39c8` [provider] Steer admission serializes foreground mutation, drains/flushes events, rechecks exact active turn and installs an owned barrier. Fleetpane: Compare existing OpenCodex steering for exact-turn/race invariants; broader recovery still needs independent acceptance.
+- 4996 `5731f016c2200eb870c5b2c73b6baefc44151b29` [config] Settings initialization reads store and branches on needsWrite. Fleetpane: Keep configuration scope explicit; candidate only.
+- 4997 `25fbc939e061fbd6950647da0f797039a4a77165` [ui] Track renders supplied segments in order. Fleetpane: Adapt interaction through Rust GPUI Kit; native acceptance remains separate.
+- 4998 `f7e4606452c385b7472ca2085f037b2493e4151f` [provider] Claude snapshot operation returns on empty UUID list; broader SDK call uninspected. Fleetpane: Prioritize OpenCodex/DeepSeek; validate provider capability before adoption.
+- 4999 `f9e1def954550ec50c45ffa435f5fe1d57fc48f3` [provider] Claude autonomous turn creation refuses active foreground/pending interrupt and otherwise requires assistant-like message. Fleetpane: Provider-specific cancellation settlement must not invent new work from stale trailing output.
+- 5000 `f1eeef32ac41185c365753adff8f352bba13426d` [test] Tool-shimmer test sends websocket event before completion branch; unexecuted. Fleetpane: Reference test/config inspected only; not executed.

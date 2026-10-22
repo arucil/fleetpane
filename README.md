@@ -1,5 +1,12 @@
 # Fleetpane
 
+Latest local additions: native Markdown file Source/Preview, conversation image
+viewer and Codex/ACP context telemetry, with separate
+[behavior evidence](docs/status.md). Scoped history review covers the frozen
+6,215-commit DAG plus upstream `1198cddf` (remote tips checked 2026-10-22);
+this tracks source review, while functional parity remains partial.
+
+
 A native Rust foundation for managing fleets of coding-agent sessions.
 
 Fleetpane is an independent project. The first implementation includes a GPUI Kit

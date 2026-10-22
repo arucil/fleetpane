@@ -102,6 +102,28 @@ class ReviewReceiptTest(unittest.TestCase):
                     review.verify(self.repo, self.batch, self.ledger)
                 self.assertFalse((self.root / "outside").exists())
 
+    def test_supplemental_parent_byte_receipt_binds_exact_span(self):
+        data = self.git("show", f"{self.base}:fixture.txt")
+        excerpt = data[2:9]
+        (self.receipts / "source-01.txt").write_bytes(excerpt)
+        source = {
+            "file": "receipts/0002/source-01.txt", "sha256": review.digest(excerpt),
+            "file_blob_digest": review.digest(data),
+            "ranges": [{"revision": self.head, "side": "^", "path": "fixture.txt", "lines": None, "bytes": [2, 9]}],
+        }
+        self.rows[0]["source_receipts"].append(source)
+        self.save()
+        self.assertEqual(review.verify(self.repo, self.batch, self.ledger)["supplemental_source_receipts_checked"], 1)
+        source["ranges"][0]["byte_range_half_open"] = source["ranges"][0].pop("bytes")
+        source["ranges"][0]["side"] = "^1"
+        self.save()
+        self.assertEqual(review.verify(self.repo, self.batch, self.ledger)["supplemental_source_receipts_checked"], 1)
+        source["ranges"][0]["bytes"] = source["ranges"][0].pop("byte_range_half_open")
+        source["ranges"][0]["bytes"] = [0, len(data) + 1]
+        self.save()
+        with self.assertRaisesRegex(review.ReceiptError, "byte range out of bounds"):
+            review.verify(self.repo, self.batch, self.ledger)
+
     def test_supplemental_receipt_binds_exact_blob_and_line_range(self):
         data = self.git("show", f"{self.head}:fixture.txt")
         (self.receipts / "source-01.txt").write_bytes(data)

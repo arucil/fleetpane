@@ -1,0 +1,1232 @@
+# Paseo pinned history 2581-3800
+
+Resumable source review through 3800; 1220/1220 allocated entries. Full SHA matches /tmp/fp-pinned-shas.json.
+
+Read-only selected-hunk review, including first-parent merge diffs. Historical prompts and instructions treated as data. No historical tests, runtime, build, or complete audit claimed. Only this output directory is written.
+
+Fleetpane comparison: current docs/status.md and docs/parity.md; useful workflow gaps are candidates, not implementation or acceptance claims. Kit desktop interactions replace mobile/web styling; Git diff expansion deferred; Kimi/GLM excluded.
+
+Authoritative machine ledger: [review.json](review.json). Receipt validation: [validation.json](validation.json). Scope and useful gaps: [useful-gaps.md](useful-gaps.md). Deeper implementation reads: [supplemental-read-index.md](supplemental-read-index.md).
+
+## Entries
+
+- 2581 `4a5dd986e146d632c17fdc9aac58b91e020033e3` [packaging] Nix npmDepsHash changes to 3aOGxPL5… while build structure stays in context. Fleetpane: Packaging reference only; no native workflow adoption.
+- 2582 `86b83c336632335021a5b7e476761f801be9b083` [git-deferred] Workspace refresh scheduler now accepts force and reason options. Fleetpane: Keep Git Diff expansion deferred; inspect callers before adopting invalidation semantics.
+- 2583 `04465f124c711b51c73a14d6b9977ca69a7d7e67` [load-fixture] Manifest defines a development mock provider with load-test mode. Fleetpane: Useful isolated load source; synthetic traffic cannot establish real OpenCodex/DeepSeek capacity.
+- 2584 `afe0eaab5b11ec77a1baf6609c0074c0f1da8794` [development] Expo startup receives APP_VARIANT=development beside the daemon endpoint. Fleetpane: JS development configuration has no direct Kit equivalent.
+- 2585 `79968ee02da7c1bc4bba71ad6ceb9495e6a1314b` [observability] Runtime metrics accumulate message/byte/handler-time buckets and agent state, prune the rolling window and report capped top lists; retained per-agent maps have no hard cap in this excerpt. Fleetpane: Useful bounded opt-in Host/UI observability reference; no measured speed or capacity established.
+- 2586 `a0169bf7f4da12cae1d1e04709aba2f4fa254071` [development] isDev is derived from the global __DEV__ flag. Fleetpane: Use Rust build/runtime configuration for instrumentation gating.
+- 2587 `427664dfa7cfd7b49602e9db82326f72896cd2fd` [navigation] Workspace stack removes getId derived from server/workspace parameters. Fleetpane: Keep exact Host/session identities while evaluating retained native workspace navigation.
+- 2588 `bd748b6edc27c40f76fb4346121a475c6aa23fd9` [navigation] Unfocused workspace no longer immediately returns an empty View. Fleetpane: Retained native views must keep drafts without running unwanted background side effects.
+- 2589 `044546ae0c8f783ece98c965e51b7d7dc79e0496` [git-deferred] PR query and timeline enabled flags now require the sidebar to be open. Fleetpane: Visibility-scoped optional reads are useful; PR and Git expansion remain deferred.
+- 2590 `67eddbd6a92f4cb4f712936d9df6c15d73360f5c` [rendering] Sidebar animation context value is memoized around stable animation callbacks. Fleetpane: Translate invalidation boundaries to Kit; no React memoization port.
+- 2591 `53baa16beef235a17642e2de5771c1e7f1e42390` [git-deferred] Checkout diff hook removes the direct getCheckoutDiff query function. Fleetpane: Subscription ownership is a reference; defer Git Diff expansion.
+- 2592 `fb02bc879587cd6ebf556f5bb926d82015b39f0c` [layout] Header skeleton grows from width 190 to 220 and maxWidth from 45% to 100%. Fleetpane: Use native responsive layout; no workflow gap demonstrated by styling.
+- 2593 `002946d4dda0b6df149d73bae0ebb9a9dd090aaf` [interaction] Workspace wrapper receives drag attributes/listeners and activator ref alongside hover handlers. Fleetpane: Workspace drag ordering remains a candidate; do not copy historical unsafe casts.
+- 2594 `8600f183b1a4b5688897cb9c3dba07557b1c639d` [git-deferred] Check icon color switches from muted to foreground while hovered. Fleetpane: Native PR/check presentation is deferred with Git expansion.
+- 2595 `951fadc104ba03f08e12de39bc4e8b56a81d2e12` [protocol] Local ProviderModeSchema and ProviderSummarySchema definitions are removed from MCP shared code. Fleetpane: Confirm replacement schema before changing contracts; fragment alone does not prove nullable output handling.
+- 2596 `006894274eddc4a414232b63270c44a27cdf20c4` [desktop-dev] DevTools helper checks installHook.js in content scripts and reads extension manifest JSON. Fleetpane: Electron tooling is outside Rust Kit delivery.
+- 2597 `9ea75afd37ddec3c41f26f3879e940cea24c236e` [layout] Welcome actions render from an action collection with per-action key, primary styling and callback. Fleetpane: Native welcome/setup may use data-driven actions; no leak acceptance claim.
+- 2598 `f8411d121e5fccaa473752f3f19de81094e47528` [navigation] showMobileAgent returns unchanged state when already showing the agent. Fleetpane: Keep idempotent native navigation; mobile panel switches are not directly adopted.
+- 2599 `403fb03c9700598ddabe12053018fc73e26804b9` [navigation] Workspace selection equality compares serverId and workspaceId. Fleetpane: Retained views must include Host identity; tabs/layout remain open in capability docs.
+- 2600 `a6423f7f0adae013f285e56efc5cbeedd618eac2` [composer] Queue-message handler becomes useCallback while retaining empty-text/attachment gate. Fleetpane: Keep stable native composer handlers and exact drafts; broader 46-path commit not audited.
+- 2601 `b91749a316bbbef8dd7efcbbac72ecc8a3f2d532` [packaging] Nix dependency hash advances to PXt9441h… . Fleetpane: Packaging metadata reference only.
+- 2602 `ac45f23213619e77dde133f04a9eb5b2fc82d79f` [navigation] Sidebar workspace loading is enabled for compact layout even while closed. Fleetpane: Native collapsed UI must still load required navigation metadata; no mobile port.
+- 2603 `93095aa1d2aa128bfeea60e679de58d27f3368fa` [voice] Legacy dictation readiness accepts ready, revalidating and error_after_ready statuses. Fleetpane: Voice remains a candidate; readiness must distinguish retained usable state from first-load failure.
+- 2604 `067125bd4fbd63cfe837a11027e8adcc2ead7af6` [composer] Agent panel removes a direct Composer JSX invocation in the selected range. Fleetpane: Inspect replacement layout before defining native safe-area ownership; current fragment is limited.
+- 2605 `33ac657fed53749c9fc194148a9c1f3bd5f3d71c` [git-deferred] Workspace snapshots are stored directly instead of merging prior workspace data. Fleetpane: Authoritative snapshot replacement is relevant; Git stats expansion remains deferred.
+- 2606 `95c1d1fe0faf02ae352fa99a65d3ac822caff1d0` [focus] Agent panel reads isInteractive instead of isPaneFocused. Fleetpane: Native send/focus gates must distinguish visible panes from interactive panes.
+- 2607 `2cd296e38fd7d5b9f49f0e7f96c1977ee1a7d85f` [navigation] Shortcut model removes its local effect that pruned collapsed project keys. Fleetpane: Durable collapse state and workspace shortcuts remain open candidates; replacement ownership needs context.
+- 2608 `d913c4a9b755ef16fa1aae029fa44b6f034b975d` [mobile] Top-level BottomSheetModalProvider wrapper is removed in the displayed layout. Fleetpane: Native Kit modal ownership needs independent design; mobile provider relocation not copied.
+- 2609 `242f61937a8c114d248bf1a5880a2cef643d67a0` [terminal] Terminal creation uses useStableEvent and keeps pending-create guards. Fleetpane: Preserve one-attempt terminal creation with stable native event routing.
+- 2610 `4cbfe95473e125548fd9b16bac19ac555c884411` [provider-other] Pi adapter type explicitly lists abort, dispose, stats, messages and model capabilities. Fleetpane: Other provider reference only; prioritize OpenCodex/DeepSeek and do not infer cancellation behavior from types.
+- 2611 `1cfae98bf5a4d57125eb835095e6bd8adedbcaaa` [release] App package bumps internal audio/highlight/server packages from rc.2 to rc.3. Fleetpane: Historical release metadata only.
+- 2612 `8d321678266a78be034d76f4ce8e5993bb9fc897` [packaging] Nix npmDepsHash changes from PXt9441h… to wa+PE3X1… . Fleetpane: No native feature action.
+- 2613 `e09fd41adc37caef38e6802a04825fd054cbce66` [release] Release-note test helper switches cwd into a temporary changelog directory and restores it in finally. Fleetpane: Historical test source only; release synchronization behavior not established by this helper.
+- 2614 `831d990ef72f99b6e67b54d7e89fb17bbce9429a` [release] Release notes create_if_missing is now true only for explicit workflow_dispatch input. Fleetpane: Future release automation should distinguish update from deliberate creation.
+- 2615 `dfc814147a7e479089507a868cac043ddec5ae33` [updates] Settings adds a Release channel row before app update controls. Fleetpane: Native packaging/update channels remain open; keep Host lifetime separate from controller updates.
+- 2616 `970bf828b34fa6caefe86e9ac515084a7f3f3b41` [packaging] Nix npm dependency hash changes to 6v597rir… . Fleetpane: No native workflow change.
+- 2617 `76b9f89f68cae535cc0347c2c507a3aaab25870f` [release] Desktop release creation catches shell failure with a race-continuation message. Fleetpane: Do not adopt broad error masking; verify a release exists before treating failure as a race.
+- 2618 `c2c990e763a237707ceb6ae3ce6882cfd327aad7` [documentation] Changelog states release candidates are renamed beta starting 0.1.60-beta.1. Fleetpane: Historical release naming only.
+- 2619 `92e701be8f9c5ce9939a37c96efeddd0ca3da038` [terminal] Terminal panel removes its inline client.listTerminals query function and authority error construction. Fleetpane: Recheck replacement query ownership before adopting; native Host-owned terminals already exist.
+- 2620 `b01e274cceae14e090ee1806a48e73d732936ad9` [provider-refresh] Status-bar JSX removes a block of provider/model/mode/thinking props. Fleetpane: Broader provider refresh implementation is not proven by this fragment; live catalog refresh remains open.
+- 2621 `38320537366bd8e9933815ae77275d788258711b` [provider-refresh] refetchIfStale gains an optional selected provider and keeps a global refetch when absent. Fleetpane: Provider-scoped catalog refresh is a useful OpenCodex/DeepSeek follow-up.
+- 2622 `1a473ed7f3632194467849e6ff1252e13d4b82e4` [preferences] Model selection persists composer preference updates under the selected provider. Fleetpane: Provider creation defaults remain open; scope preferences by provider and preserve explicit choices.
+- 2623 `9877936d1370f30b164f53c87ac3bb4d5e130449` [orchestration] Agent-list timestamp parser returns zero for missing or invalid date strings. Fleetpane: Activity sorting needs explicit unknown-time handling; orchestration MCP remains a gap.
+- 2624 `32a20cbeeaab8ae40472a7274d5599d0f32ae6af` [merge-orchestration] First-parent merge repeats timestamp parsing with zero for missing/invalid timestamps. Fleetpane: Same sorting reference as 2623; merge receipt retained separately.
+- 2625 `515ba62be60c85c1b7e6ffbd55c1c06ef0feb944` [navigation] Sidebar collapse store removes its former Set-toggle implementation. Fleetpane: Persistence semantics require replacement context; native persisted layout remains open.
+- 2626 `ebf8a21c0844202f0a68d934541f04e234c66253` [automation] Schedule creation calls resolveScheduleProviderAndModel instead of the generic resolver. Fleetpane: Future scheduling must use explicit provider/model resolution; no automation implemented here.
+- 2627 `3e2faab7f81e8f93fab240cbbb853d6a00c0aca1` [git-deferred] Selected checkout diff code removes untracked-file change accumulation. Fleetpane: Committed-versus-working-tree comparison remains deferred; do not infer whole algorithm from deletion.
+- 2628 `cea97c83b31adc9b0b234ee7381e5f7a6489285c` [automation] Workspace keeps pending script terminal IDs and clears them on server/workspace change. Fleetpane: Scripts need exact workspace/run identity and explicit terminal lifecycle in the independent Host.
+- 2629 `f3cb19529cc3d11382e2b44dc61d963598a765e6` [lifecycle] Reloaded session close has a bounded wait and logs late close errors. Fleetpane: Host recovery must account for still-running provider resources; timeouts alone do not prove retirement.
+- 2630 `051507717c321ac7ffa1f04be76ce8431f2e4329` [interaction] Hover safe zone exits on pointerout with null relatedTarget and on window blur. Fleetpane: Native popovers should clear hover capture on focus loss.
+- 2631 `79bf5ac3c7b0f7c861bda096376de3a9e888f07e` [drag] clearDragState clears active ID and drag items. Fleetpane: Use explicit native drag cancellation.
+- 2632 `39db3ea5ff88ba7bb8ba3d36460c956e051d25ad` [automation] Exported spawnWorktreeScripts declaration is removed here. Fleetpane: Setup-script lifecycle remains open; inspect replacement before adoption.
+- 2633 `6a03873d8119e8ea882e8ffeccdf1fe5ccded6d3` [terminal] Output coalescer receives timers, flush delay and flush callback. Fleetpane: Consider bounded Host output batching; no latency claim.
+- 2634 `c402db8b1c555c0e4a38355201037b7ff3ffdfb0` [test-source] Keystroke stress suite creates a TerminalE2EHarness. Fleetpane: Useful scenario source only; not executed.
+- 2635 `a201e5a853ae68ddb0c8a5cac10f672567c2265d` [packaging] Nix npmDepsHash becomes IcmKAzb3… . Fleetpane: Packaging reference only.
+- 2636 `006d57d546fc524d01eeb2823e801bc3e6789630` [test-source] MCP schedule fixture invokes tool.callback instead of handler. Fleetpane: No native workflow change; test not run.
+- 2637 `ae2a301cb6e68e76883768df381e3f3d37822d4b` [test-source] Workspace health fixture now includes terminalId:null. Fleetpane: Preserve explicit nullable terminal identity in future scripts.
+- 2638 `abaa29e73c0cac8d3dba95e1a06dafe97dd06ca4` [ci] CI installs Chromium with Playwright system dependencies. Fleetpane: Historical web CI only.
+- 2639 `8dad42363541c2b887d9883b27f76d218332d6e9` [layout] User message container sets cursor:auto. Fleetpane: Use native text selection affordances.
+- 2640 `73b28a7f6049142494a73bb2377c75c5aabf0835` [notifications] Stable notification handler resolves server and agent IDs from data. Fleetpane: Notifications need exact Host/session routing; still open.
+- 2641 `807cce6ad9e1d7b5a2837818d91b9be07878a5e4` [workspace] Workspace menu removes Show setup item in selected JSX. Fleetpane: Setup-script UI remains a separate gap.
+- 2642 `27ddfb1ea74d44fc9e860b348027de05c1f62b26` [git-deferred] Incoming comparison removes numeric validation/working-tree commentary in selected deletion. Fleetpane: Git comparison expansion deferred; algorithm not fully reviewed.
+- 2643 `7e7cc1ad56f735a886502dc5ea6f5ac161143342` [acp] Logged NDJSON stream constructor accepts byte streams plus logger/provider. Fleetpane: Useful provider transport diagnostics; keep secrets out of logs.
+- 2644 `1582028902af8687b567bd411e59d313ba31ee73` [editors] Session adds TTL cache of available editor target descriptors. Fleetpane: External editor integration remains a candidate.
+- 2645 `3fe63d5a2caed8a2534304da0c1c9a2689e9611f` [navigation] Workspace effect exits when route is unfocused or identity prerequisites are absent. Fleetpane: Gate native view side effects without stopping Hosts.
+- 2646 `244c40a62f22f4d080aac8a1a48fbdc4dfa8e710` [test-source] Alternate-screen wait helper tracks visible text and render probe. Fleetpane: Acceptance scenario only; tests not executed.
+- 2647 `8ee3c6ae1d40fe56574d14de320ba4d48ff57dad` [packaging] Nix dependency hash becomes 5exQLdsy… . Fleetpane: Packaging reference only.
+- 2648 `7b9cc3d423c64de55b3aa83816d151a9b0ab309d` [test-source] Terminal assertion switches from visible text to full buffer text. Fleetpane: Distinguish retained history from visible rendering in future acceptance.
+- 2649 `42cdabdf573ca5430100a629c294bacf2504dc99` [mobile-tool] Android recorder checks command availability and exits on missing tools. Fleetpane: Mobile tooling outside native desktop scope.
+- 2650 `247983ee87aa3d91dc606a78e5a7feb8dbeac892` [history] Historical agent detail retains serverId, id and provider. Fleetpane: Keep exact source identity on history opening.
+- 2651 `184902dd0d8c969016f455ad837b0187561bc106` [history] Selected source also builds historical agent detail with server/provider identity. Fleetpane: Same identity reference; independent commit receipt retained.
+- 2652 `6503245493541ecc085fc90b2d19ca5be9881406` [git-deferred] GitHub polling stops without branch or GitHub remote URL. Fleetpane: Git/PR expansion deferred.
+- 2653 `77c8c91ab58ec5d3e376c4a59b836890a07411be` [development] Dev runner removes ignored SIGINT/SIGTERM handlers and synchronous spawn fragment. Fleetpane: Host supervision must handle signals explicitly; replacement not established here.
+- 2654 `80c319dc49666b3a9a81835ec4c164993929b7a4` [workspace] Project placement lookup gains refreshGit and fallback options. Fleetpane: Keep observational catalog reads separate from mutations.
+- 2655 `6edf19c7c62fef1a972dac223353840180891d3e` [onboarding] Welcome copy shows Connecting… only while saved Hosts connect. Fleetpane: Expose Host connection state without implying provider readiness.
+- 2656 `fc86ce2a5f8f85ff09d1dd0eb4e90e714f2b084e` [shortcuts] Escape binding changes from dictation cancel to agent interrupt action. Fleetpane: Native interrupt must target the active exact turn.
+- 2657 `9a39ba4be0d0587c27d3e92b22abada35beea39c` [cli] Label parser splits label strings at the first equals sign. Fleetpane: Useful optional metadata filtering; not current priority.
+- 2658 `6b210df4714be9e9c19667a109f0ce83da4fa433` [identity] Connection rejects resolved server ID differing from expected Host. Fleetpane: Preserve fail-closed Host identity; do not swallow cleanup errors.
+- 2659 `2706d5e9347845be6adb32b08705584d2486ce36` [connection] normalizeEndpointOrNull helper swallowing normalization exceptions is removed. Fleetpane: Native connection parsing should expose invalid inputs.
+- 2660 `f422dabf1ecd56f6c33356efef69776ea13da9b3` [liveness] Heartbeat callback becomes a stable event and keeps connected guard. Fleetpane: Stable controller liveness must not govern agent survival.
+- 2661 `3c5bfd6e3d6c4d10ac0cfa197556454c35515d1f` [mobile] Mobile workspace press invokes closeToAgent. Fleetpane: No direct Kit adoption.
+- 2662 `aef54d5180cef0d4baec3c134bf08a6364584e77` [rendering] Native shimmer overlay/MaskedView JSX is removed in selected source. Fleetpane: Native animation implementation independent; no performance claim.
+- 2663 `02fc3546866f34210ea9fab8162ca3e37d682fd1` [desktop] Electron node environment builder gains optional isPackaged. Fleetpane: Rust packaging requires its own explicit launch environment.
+- 2664 `e4badd95f4126e646ed36b8c3c6f4a4559d66e05` [copy] Turn Copy button receives dedicated container styling. Fleetpane: Existing loaded-answer Copy covers semantics; styling optional.
+- 2665 `6601db2673febf39a9f17276dab49f8c46cffbc1` [conversation] Assistant spacing returns default for non-assistant messages. Fleetpane: Keep grouping bounded by actual message kind/identity.
+- 2666 `7993dc02dc38b7679bec650faf8b91c94b9eb7f8` [layout] Stream style adds theme spacing margin above content. Fleetpane: Native spacing choice only.
+- 2667 `b6afc661318bc692ba2ccfbb347410f1e6944196` [desktop] Window controls padding resolver receives role, raw padding and sidebar state. Fleetpane: Use Kit platform titlebar/layout rules.
+- 2668 `43b9123c5c19bdf87c564e812c8a765ac38f135f` [drafts] Empty-workspace seed predicate receives focus, persistence and hydration readiness. Fleetpane: Avoid seeding drafts before identity/store readiness.
+- 2669 `9e3d8f0ec5868ce70340e5e97cf89566baa66eb7` [cli] CLI version reads package version and trims nonempty strings. Fleetpane: Native version should identify actual build artifact.
+- 2670 `fd05bf8bfff740bac5dd5cbd1deff54b760e0947` [codex] Plan implementation stops forcing fast_mode=false while still disabling plan_mode. Fleetpane: Preserve unrelated provider settings when implementing plans.
+- 2671 `9218f70df38865c7256cdffa856e9365c642db62` [analytics] Selected diff removes analytics event try/payload construction. Fleetpane: No telemetry implementation inferred; respect explicit observability scope.
+- 2672 `019bf657908aac8120379386f6acb4063be3e004` [lifecycle] Finalized foreground turn IDs are retained with a 50-entry bound. Fleetpane: Bound terminal-event dedup and preserve exact turn identity.
+- 2673 `a582fccef0628caade505330af11653a58c0ae86` [drafts] Draft tab extracts clear/setText/setAttachments callbacks. Fleetpane: Keep native draft callbacks stable without clearing unsent text.
+- 2674 `274a7fd2175d9cfe81be04adbb28882f432f71c9` [test-source] Supervision test reads package script to check signal-handling dev runner. Fleetpane: Source scenario only; no supervision runtime claim.
+- 2675 `dd98ae935912c9d1e199d4719f2b84550e8d0eb1` [git-deferred] PR checkout intent accepts PR number, optional ref and attachment. Fleetpane: Git writes/PR checkout deferred.
+- 2676 `e51fdada516817db7acadb3a05a0792a663fe86e` [documentation] Changelog describes Escape interrupt, fork branch prefixes and active-only ls. Fleetpane: Historical stated expectations; no runtime verification.
+- 2677 `713c90ea427e466e8248533e63b71db11536d63f` [workspace] Project changes expand to all registry workspaces with matching project IDs. Fleetpane: Useful scoped catalog invalidation across linked workspaces.
+- 2678 `a5e6cc2d2ba8956421ef0fd691a94c7fec982dcb` [documentation] Changelog claims notification and removed-folder fixes. Fleetpane: Claims are reference data, not proven behavior.
+- 2679 `c3589bdc84f8619b5f870c397e9ebefb295718e7` [packaging] Lockfile removes a peer flag while retaining license. Fleetpane: No native workflow change.
+- 2680 `027b3839fcb70a2fbaad0901697ee3551a3c39c1` [release] Internal app packages advance beta.1 to beta.2. Fleetpane: Historical release metadata.
+- 2681 `3a0161d051446dff09b71e8a6dca9513fa8ceb73` [packaging] Nix dependency hash becomes i9m6sVJ3… . Fleetpane: Packaging reference only.
+- 2682 `637109eab003292f934f950adcb09b7bb8151194` [hover] Safe-zone reentry now checks previous inside state before callback. Fleetpane: Native popovers should avoid repeated hover transitions.
+- 2683 `407b4b68b08029e22be8ebc3e76493f2ed64d530` [git-deferred] Rebase branch reader checks rebase-merge and rebase-apply head-name paths. Fleetpane: Git state expansion deferred.
+- 2684 `89efb007f94e7c3809d29dce70ba2cf098fcafcd` [lifecycle] turn_canceled is separated from turn_completed idle mapping. Fleetpane: Preserve explicit interrupted outcomes; target mapping not shown.
+- 2685 `d80c524e0ef025e2fa5bd5fb2d6a78dc99d8be97` [archive] History helper marks archived payloads and checks paged input/agent ID. Fleetpane: Archive projections must retain exact session identity.
+- 2686 `8e63274ce69f4d99f58d4d9c644e7b35fa65cb27` [orchestration] MCP child context includes path confinement and a no-op terminal killer. Fleetpane: Do not adopt incomplete resource cleanup; orchestration remains open.
+- 2687 `368ce0339ac9585ff81133f4907b49371529480d` [git-deferred] Composer GitHub query runs only while picker is open and connected. Fleetpane: Optional-read gating useful; Git expansion deferred.
+- 2688 `4b867c2f410df837295756480a53fbe2489aa98e` [rendering] Message comparison checks onToggle identity instead of callback presence. Fleetpane: Native retained details must receive current actions.
+- 2689 `484e453401f8167ebbbb1a892ba5df18120b4df9` [streaming] Dropped stale unit beyond cursor records a gap and breaks reduction. Fleetpane: Gap recovery must preserve ordering and exact stream lineage.
+- 2690 `c6680b30014b55c75c47598ecfb9d9c2ccbed385` [protocol] Selected diff removes local discriminated tool-detail schema definition. Fleetpane: Inspect replacement before changing native typed contracts.
+- 2691 `95c773ce6df1071d5f95f83fd91f13946c626b08` [release] Internal packages advance beta.2 to stable 0.1.60. Fleetpane: Historical packaging only.
+- 2692 `de57f301f9221565fc6cc9ca67cb61721a55879b` [packaging] Nix dependency hash becomes p7luf7/e… . Fleetpane: No native capability action.
+- 2693 `4d5889ff38be4ecfe8da61de1a75a3389672d6f2` [provider-other] Pi listModels registry-mapping method is removed here. Fleetpane: Other provider reference; prioritize OpenCodex/DeepSeek.
+- 2694 `b133285f6db4f835dd02f6f06e12ccbd1e8239e8` [models] baseModels chooses runtime models when profile models are empty, otherwise profile models. Fleetpane: Catalog overlay/default precedence needs explicit contract; live refresh remains open.
+- 2695 `1f8f8e4036e8a51445b8209faa0699c4ce03fedd` [layout] Container-width hook exposes threshold boolean and layout handler, initially below threshold. Fleetpane: Use native container bounds for responsive Kit controls.
+- 2696 `434b28fc8e97b42d6c1d9dc6fb744372b9921adc` [documentation] Configuration heading changes to Agent providers and removes old runtime-settings prose. Fleetpane: Reference docs only; no provider behavior inferred.
+- 2697 `4140e640feaec7675ff2cc804583557368d3950f` [attachments] String hash uses XOR and multiplication over character codes. Fleetpane: Preview cache identity needs content correctness; hash is not a security digest.
+- 2698 `3560fb58bbfd104f22cda3798585c5f08fc1b9f0` [documentation] Changelog describes additionalModels merging and extension discovery. Fleetpane: Treat as claimed behavior requiring implementation review.
+- 2699 `1f7b4eb10f60c62447b5485f0d0150064359d6a8` [release] Internal packages move from stable 0.1.60 to 0.1.61-beta.1. Fleetpane: Historical release only.
+- 2700 `339a0b6b43d014df51be5da9b4bd340d12407883` [packaging] Nix npmDepsHash becomes 20mGU+cF… . Fleetpane: No native workflow action.
+- 2701 `ce6393a93397c6d9ea82705a28f24a820357f0d4` [attachments] Preview key hashes MIME/path/size/modifiedAt/contentLength with null separators. Fleetpane: Use complete attachment identity; metadata keys alone cannot prove content freshness.
+- 2702 `38a41a71ff59386e962db86668ce0a71916ad77a` [documentation] Changelog date/version moves beta.1 April 22 to stable April 23. Fleetpane: Historical metadata only.
+- 2703 `8cc7e8951cb02b4160c2041ba4b3717ffd5ed011` [release] Internal packages move beta.1 to stable 0.1.61. Fleetpane: No native workflow action.
+- 2704 `9a35f35bab21b0f8b070234e5fde53f3de5be67f` [packaging] Nix dependency hash becomes OF3YosIW… . Fleetpane: Packaging reference only.
+- 2705 `f65f82bac9a0a310d972b627242294fe36b4a7f0` [release] Release notes creation is enabled for version-tag pushes as well as explicit dispatch. Fleetpane: Reconcile release ownership/races before adopting automation.
+- 2706 `9c5974735efc19e36bacadf5eb4972c2ed478228` [desktop] Node runner removes top-level main catch that printed and exited. Fleetpane: Replacement entrypoint error handling needs context; no runtime claim.
+- 2707 `c8b61f7ddcc777d51763392f0a0d1f0517f171d5` [test-source] Release-note test supplies contributor GitHub profile link in changelog input. Fleetpane: Formatting scenario only; not executed.
+- 2708 `e21ef2fc9b753d87a4b034065c5ec003a4e03617` [ci] Website deployment release trigger drops edited and retains published. Fleetpane: No native capability action.
+- 2709 `576cc0b66861f7ec29d77010cfbdf9ad44d4c223` [ui] CalloutDescriptionText wraps children with shared description styling. Fleetpane: Native Kit callout component optional.
+- 2710 `9abc0217e9a8d648d503aa6e1e4a69af9301ea9f` [conversation] Legacy groupActivities helper is removed in selected source. Fleetpane: Native grouping already exists; replacement not audited.
+- 2711 `083cd34db4dd6cd6b566c8f44d831f59b2f2f3e1` [conversation] Selected source again removes groupActivities implementation entry. Fleetpane: Independent receipt; no new native action inferred.
+- 2712 `dfc8223bcc414f68ff145fe17e95ed6a04bdb308` [git-deferred] Fallback helper changes from Git service constructor to cwd snapshot constructor. Fleetpane: Git expansion deferred; do not adopt fabricated success snapshots.
+- 2713 `3edf8125788255e4008b5ab923f108e47a3be3d1` [git-deferred] PR view candidate is passed through pickPullRequestCandidate. Fleetpane: Exact PR matching useful later; Git/PR work deferred.
+- 2714 `a62c7471d29aa1fa2e714997b6954cccf6099c7d` [documentation] Changelog advertises version-drift warning and immediate workspace display. Fleetpane: Packaging compatibility and catalog loading remain distinct candidates.
+- 2715 `e521e1f79d95982452d69c877b3b2fe2e0deddbf` [release] Internal packages advance 0.1.61 to 0.1.62. Fleetpane: Historical packaging only.
+- 2716 `75b8ae640cf0057fec3274371191d651b5d1d87c` [packaging] Nix dependency hash becomes OfKhiXXF… . Fleetpane: No native action.
+- 2717 `80102753e13a8f2195d1b929f99258981a4cbef7` [git-deferred] Worktree-query matcher recognizes normal and sidebar worktree keys. Fleetpane: Scoped invalidation reference; Git expansion deferred.
+- 2718 `26e6d97e81fc15f6909b57ff56b104132f3baf3b` [mobile-release] Android submission sets production track and completed status. Fleetpane: Outside desktop scope.
+- 2719 `9b25f8fc3659537df8815486b9890d69a0606e81` [mobile-release] Mobile workflow adds iOS review submission after upload. Fleetpane: Outside desktop scope.
+- 2720 `ce4b0d54c72a3bc3b34d01679925a1a69e6db1f1` [panes] SplitPaneViewProps interface is removed in selected diff. Fleetpane: Workspace split-pane layout remains an open candidate.
+- 2721 `9c88850de03077dd01a9da6f63479284ee2f7fab` [tooling] Oxlint config enables react/react-perf/unicorn plugins. Fleetpane: JS tooling only; no Rust lint changes.
+- 2722 `177153e5e811a279de41ccabaa7ff69c8e5bb665` [scrolling] Web scrollbar removes startWebDrag callback using an any event. Fleetpane: Use native scroll primitives; do not copy unsafe event typing.
+- 2723 `731c570b256222521516d8a4c59ce5f1a0659172` [types] BUSY_STATUSES annotation becomes Set<AgentLifecycleStatus>. Fleetpane: Keep precise lifecycle collection types.
+- 2724 `cda3d1d46c3f48fcfe86616aeaa86c43e6752880` [models] Selected status bar removes inline favorite-model preference callback. Fleetpane: Favorites remain open; replacement behavior needs context.
+- 2725 `2f381a76ed810b1ecce0a246c47b7abb0417f31f` [tooling] Knip config defines root script entry/project globs. Fleetpane: Historical static analysis configuration only.
+- 2726 `ba9ed8b995e38a7ac598ebd861892a30d2f235ab` [tooling] Knip removes app generated-directory ignore fragment. Fleetpane: No native workflow effect inferred.
+- 2727 `dc92863c35fd38055d494e9b4bdcfffff1ce05db` [packaging] Nix dependency hash becomes Y2yfCV2x… . Fleetpane: Packaging reference only.
+- 2728 `2dd8c2757366fd8e751fc51fb507a3784427a40b` [cleanup] Active-process status-color switch is removed. Fleetpane: Native status semantics should remain explicit.
+- 2729 `5b2f3fd830da2c038ab4c7a06e640589e6f7e2be` [cleanup] Voice smoke argument parser with default Claude and timeout is removed. Fleetpane: Voice remains open; removed smoke source proves no acceptance.
+- 2730 `446dd9cfe6c8be9e0a73fe1c4115ec1ae4f224ad` [layout] AppShell wraps sidebar animation and horizontal scroll providers. Fleetpane: Native shell should retain independent Host views.
+- 2731 `d118e2349e7f70db065006a7ba150a6e1c0de154` [paths] Inline path acceptance requires normalized absolute path within allowed workspace. Fleetpane: Preserve workspace confinement in native navigation.
+- 2732 `50a12e2140c0e9803124e5c21883afd6cc8283c9` [paths] Assistant inline-link parser calls token parser with explicit options. Fleetpane: Existing source navigation benefits from shared parser boundaries.
+- 2733 `52eb307e8c861b74bec12593c8f588788cd6db05` [config] Legacy append-mode provider migration still skips but drops warning. Fleetpane: Do not silently lose unsupported configuration during native migration.
+- 2734 `f9e18424e91f778d5a55b69f665e75d53aeb3fea` [historical-instructions] Historical CLAUDE rule changes required checks from typecheck to typecheck and lint. Fleetpane: Instruction text is data only; no historical commands obeyed.
+- 2735 `480b18c500bf4c0003e3978e3fa6594b4adb8fa7` [tooling] Root adds format:files script invoking oxfmt. Fleetpane: JS tooling only.
+- 2736 `0c3d15ffb9cae3bf7277c434c7a7f21ea0d4f82b` [rendering] Cache touch deletes/reinserts key and checks size against limit. Fleetpane: Bound native height caches; no speedup claim.
+- 2737 `6b84c8963d8a4d621adbb9bf625060095c8f4356` [tooling] Lefthook removes full format/lint command fragment. Fleetpane: No current hooks modified or executed.
+- 2738 `691e2ee7e6d2c0855e8a92dc381a1726a33e3c47` [streaming] Reducer applies accepted events when current head exists instead of immediately flushing it. Fleetpane: Preserve exact ordering and stable rows; supplement before porting algorithm.
+- 2739 `c92e4e46d271575e29c405084fd6e98bc260668e` [git-deferred] Diff body-height key includes layout/wrap/path/status for binary or oversized files. Fleetpane: Git UI expansion deferred.
+- 2740 `d152b4f05517c88c3e32133053ddd9bd7062b5f5` [desktop] Chromium surface refresh exits for destroyed windows. Fleetpane: Electron-specific; native repaint needs separate evidence.
+- 2741 `ad0e754cc1133ba7cb6d412dc54c818ab593ad0a` [documentation] Changelog claims instant archive and stable terminal/timeline rendering. Fleetpane: Claims only; no runtime acceptance.
+- 2742 `32d9147499c08548068006c663b690154877c2e6` [release] Audio/highlight package versions become 0.1.63-beta.1. Fleetpane: Historical release metadata.
+- 2743 `d0f7d93fc4c3bd1d5bc7df7fda045327f1bc637f` [packaging] Nix dependency hash changes O5AxXbwG… to 0Izp63gV… . Fleetpane: No native action.
+- 2744 `ef418d52925bc3247ab0bb712e248ad102933862` [git-deferred] Diff filename Text is limited to one line. Fleetpane: Git UI expansion deferred.
+- 2745 `231ebdcfb19ef382ff81fa11f33f4154809b8370` [terminal] External executable path replaces .asar with .asar.unpacked. Fleetpane: Electron packaging reference only; Host executable ownership stays independent.
+- 2746 `9a4528129fb8c2599b89600885fcecf042ae643c` [terminal] Emulator suppresses CSI n instead of CSI c, leaving device attributes to xterm. Fleetpane: Terminal negotiation/query responses need targeted native acceptance; no blanket suppression adoption.
+- 2747 `83689ef0c5d3564b61e352834fd40cae5a4bf7fd` [markdown] Inherited Markdown text memo adds overrideStyle to value/dependencies. Fleetpane: Native style propagation should preserve actual inherited overrides.
+- 2748 `2b37276577882a751ad3057ddff9aa0dc8f231f1` [terminal] Resize handler removes client/terminal/pane/workspace focus guard fragment. Fleetpane: Inspect replacement gating before changing native PTY resize authority.
+- 2749 `d3f9655e33e673381595fcd680d6e2ab7358b6bd` [automation] Schedule new-agent target resolves explicit provider/model from options. Fleetpane: Scheduling remains open; preserve provider identity.
+- 2750 `4b7199f53b16bfcd8ef231a3a0e3ad0a1cfe3666` [models] Additional model row receives profile model, delete state and ID-based delete callback. Fleetpane: Provider catalog customization remains a candidate after core refresh.
+- 2751 `db8934c53e9acb5b1ba0e5b0b134b6ac22cdfa5f` [test-source] Test constructs unsupported Gemini record for active-list exclusion/history preservation. Fleetpane: Preserve excluded-provider history without enabling provider launch; not executed.
+- 2752 `de428582134f636d94f1f3ed9d5b72d5d2679643` [workspace] Directory workspace creation classifies project membership before registry work. Fleetpane: Keep exact cwd/project classification in Host commands.
+- 2753 `4b3603604a1a9956b370c5c1aea7ac132c2c9263` [ui] Switch component uses 180ms in/out timing. Fleetpane: Use Kit switch primitives; timing not a workflow gap.
+- 2754 `4dd3b0006b6b7f2d9ee315f8bd361dd7b7863f39` [automation] Lifecycle commands accept nonempty string or array input. Fleetpane: Future setup/teardown configuration needs validated command forms.
+- 2755 `a8ffbc800301d75ace0179b739dda4f526cfe7dd` [packaging] Nix hash becomes 6Bf44iWd… . Fleetpane: Packaging only.
+- 2756 `cfc27f2576ee95b045d123b29337da96f65d1fc8` [packaging] Selected Nix hash change also becomes 6Bf44iWd… . Fleetpane: Separate commit receipt retained.
+- 2757 `ae3e88e7e168c6c59ced9476a23651160b653639` [startup] Layout removes inline async settings/store initialization fragment. Fleetpane: Bootstrap replacement requires context; no readiness claim.
+- 2758 `f9fcd6e032d6bd40b7b0e96308f504a3944b4b5c` [startup] Selected layout also removes inline bootstrap init fragment. Fleetpane: Separate receipt; independent Host lifetime retained.
+- 2759 `b7310b9e90f4cf23fbe4f6648e4b64448fd6c4c8` [lifecycle] Supplemental implementation retains quit helpers: only explicit keepRunningAfterQuit=false plus a desktop-managed daemon triggers stop; before-quit closes transports and serializes shutdown. Fleetpane: Preserve Fleetpane independent Session Host across Kit window close; Host stop/retirement remains a separate explicit lifecycle.
+- 2760 `1ec448d2b99335872645be1719fc7e3e2b6c8a79` [hosts] Runtime adds earliest-online Host selection by scanning per-Host snapshots. Fleetpane: Startup recovery should stay observational and preserve exact saved Host.
+- 2761 `521944f19b696fd7eabfb9dadaff5d7e4a86d71d` [paths] Shell file-path extractor refuses empty commands or commands containing shell operators. Fleetpane: Do not infer actionable paths from arbitrary compound shell text.
+- 2762 `5b47b6594fea80dcbb5c4c34a2d4146461d06abd` [models] Additional models render CustomModelRow keyed by model ID. Fleetpane: Catalog customization candidate; preserve opaque provider IDs.
+- 2763 `843d9234bd611b8be453fd75485a0a37c1397e47` [paths] Tool badges receive hover-controlled open-file button and handlers. Fleetpane: Native tool-file navigation exists; inspect only supported confined paths.
+- 2764 `a2c68cc689117f9ba4b762cb44a9dde9430ec8d1` [startup] Non-managed bootstrap path calls setupDesktopManagedConnection. Fleetpane: Separate connection setup from provider runtime ownership.
+- 2765 `18903bcecb466a77fb223402146d003fbcb669da` [rendering] Splash shimmer registration exits on native platform and duplicate registration. Fleetpane: Web animation only.
+- 2766 `712cb8fc86c5a8789b155910ce3e4686c65dedb5` [provider-other] Claude Grep parser uses explicit input/output schemas and mapper. Fleetpane: Other-provider reference; typed DeepSeek/OpenCodex tool mapping prioritized.
+- 2767 `219050a7abbb534adeb1423c4b8aaf65e7de321a` [workspace] Project hook adds unknown-to-error-string helper and all-descriptor fetch entry. Fleetpane: Complete catalog traversal remains bounded/explicit; body not reviewed.
+- 2768 `7f2592041b9a3791548199b67614cc71af2f030b` [workspace] Selected project hook repeats error conversion/fetch entry. Fleetpane: Separate receipt; no full traversal claim.
+- 2769 `feeb6c2aa6661731a8f871e9d3f7d81b2205bb94` [terminal] Query suppression registers primary/secondary/tertiary device attributes plus status queries. Fleetpane: Reconcile with 2746 before adopting terminal negotiation; no runtime claim.
+- 2770 `35de4b26e8e5bcfee68fb6ed1d1176e072a7e030` [tooling] App ignore file excludes Vitest failure screenshots. Fleetpane: No product action.
+- 2771 `88ea88162c2aff5fb06ea68f0e68a55d0665dad1` [automation] Setup-callout selector rejects non-Git project kinds. Fleetpane: Future setup prompts must reflect actual project type.
+- 2772 `291a124663d26f3d80a843a91b23d1e113277b4d` [ui] Sidebar description text uses shared description style. Fleetpane: Use native Kit callout if needed.
+- 2773 `a6b89bfdf7f8ca878a4243294041c7c4d2a551a1` [workspace] getCheckout normalizes cwd then requests checkout status. Fleetpane: Catalog read path reference; no Git expansion.
+- 2774 `941b4fb7608a5c56cf1911a022568082d83df846` [protocol] mainRepoRoot becomes optional nullable with default null. Fleetpane: Preserve explicit compatibility semantics without inventing repository roots.
+- 2775 `01f89c7c363b310d43885a0b1ca3e267374e3839` [ui] Sidebar PR color helper is replaced at entry by themed ExternalLink. Fleetpane: Git presentation deferred.
+- 2776 `151a2c513a3b8b0989fac5b87d2b4fd738cfd016` [documentation] Changelog advertises project config editor, startup restore, file links and provider toggles. Fleetpane: Use as candidate inventory only, not implementation proof.
+- 2777 `c69b42ac10f143ced5d1eda3401f82d46a3294ba` [release] Internal app package versions advance beta.1 to beta.2. Fleetpane: Historical release only.
+- 2778 `b7ee28659fc046d170b1f446919f315059f1a2fd` [packaging] Nix hash becomes Vx2BUw8s… . Fleetpane: Packaging only.
+- 2779 `f27598af987c30a40e138693ace1d42d33d510bf` [test-source] Desktop packaging test checks declared runtime workspace dependencies. Fleetpane: Useful packaging acceptance scenario; not run.
+- 2780 `f79af3ffbf4c04e74e11065b48d3bc2695bad56b` [release] Server internal dependencies advance beta.2 to beta.3. Fleetpane: Historical release only.
+- 2781 `d672bc19de955b5ddc0414aa9996501d1e127c07` [desktop] Node runner removes deletion of Electron environment flags. Fleetpane: Rust launch environment independent; no compatibility assertion.
+- 2782 `5e7a51364dfff963ee68648c6dfded8df616a470` [historical-instructions] Historical Paseo skill description expands agent commands to worktrees. Fleetpane: Reference data only; no skill or prompt instructions obeyed.
+- 2783 `c5c03ff956aea444f1639b7ffb410ab488d94ad5` [packaging] Nix hash becomes zXVV1Qui… . Fleetpane: Packaging only.
+- 2784 `eb9492f9b90d79cff3d6bfcb0e81630c2b8b3108` [packaging] Separate selected Nix change also becomes zXVV1Qui… . Fleetpane: Retain separate commit evidence.
+- 2785 `16cf9edfb1bf3b0aabf357d899a76b7ce46520b0` [test-source] Git service checkout fixture adds mainRepoRoot:null. Fleetpane: Nullable root scenario; not executed.
+- 2786 `8a025a6c7850f8bf614420301b9a6a315e335eac` [test-source] Primitive Git fixture adds mainRepoRoot:null. Fleetpane: Nullable root scenario; not executed.
+- 2787 `e8843a2875317c8a00bb2ba6f3432d35694d13e1` [test-source] Daemon-offline CLI test now passes explicit Claude provider. Fleetpane: Do not conflate provider validation and connection failure.
+- 2788 `d7659d3f0c7f84a38e1e1b5f4f197d4449a0ba66` [test-source] Membership expectation normalizes cwd through normalizeWorkspaceId. Fleetpane: Path normalization scenario only.
+- 2789 `08fbddae4a8abc043552417c774b5fb747d60592` [test-source] Provider test expects disabled instead of not available error. Fleetpane: Expose disabled and unavailable as distinct states.
+- 2790 `0daf3c209b7eb96ba6aaa3cb181eb879f532bce9` [test-source] Schedule create fixture expands its argv array formatting. Fleetpane: No workflow behavior inferred from displayed formatting.
+- 2791 `29689b15f054593f774d0d292159ea9d9e9b5f88` [test-source] Settings test expects accessible Inject Paseo tools switch instead of On/Off buttons. Fleetpane: Native settings need accessible named controls; not executed.
+- 2792 `175685a91230ad66c42ce2c56b1babfd51564521` [testability] Startup splash receives explicit test ID. Fleetpane: Native automation identifiers optional; no acceptance claim.
+- 2793 `1e5722c9964784e1dc2dc4e0dd44afe89f87da26` [test-source] Projects settings test navigates through Settings to /settings/projects. Fleetpane: Settings information architecture candidate.
+- 2794 `90032570ec83e97ad99376dbd6d2733489ae1ea1` [desktop-test] Desktop smoke entry runs only when dedicated environment flag is 1. Fleetpane: Isolated smoke capability reference; not invoked.
+- 2795 `e9ba84ec65f42338e28e139ed6e8049bfa543156` [paths] Open-file button renders independently of preceding conditional content. Fleetpane: Preserve tool-file affordance across badge variants.
+- 2796 `15df680a64b56ac8190b5cacb71b3e99434c177c` [config] applyProviderEnv merge helper is removed in selected source. Fleetpane: Inspect replacement before changing provider environment precedence.
+- 2797 `df49fbe0ac0cb885f8b478c19d992ffa257117cc` [voice] OpenAI transcription WebSocket URL can come from OPENAI_REALTIME_URL. Fleetpane: Configurable voice endpoint remains a candidate; no network call made.
+- 2798 `3b66b25f67fa1322e6d6af9d2c1de1f90e1795ca` [config] Selected source again removes applyProviderEnv entry. Fleetpane: Separate receipt; environment semantics not proven.
+- 2799 `7212cc259613dc356f500d4ae8b82060af81b1d8` [layout] Models section drops its container style while retaining header. Fleetpane: Native layout choice only.
+- 2800 `7827adeaf086840cc9fcc708d1944e721572241b` [worktrees] Fallback copy ignores ENOENT but rethrows other filesystem errors. Fleetpane: Setup config propagation remains open; broad preceding catch needs scrutiny.
+- 2801 `2ba523ce05016fe286723feb0b2910cf5c1cce17` [layout] Badge style removes flexShrink:1. Fleetpane: Native text truncation needs its own layout evidence.
+- 2802 `88f382cad3baf7330342bdc5ecdbc5e53e810b66` [lifecycle] QuittingOverlay stores quitting state and installs an effect. Fleetpane: GUI shutdown feedback must not terminate independent Hosts.
+- 2803 `40ce317ac2c620277de6f8a81d96af2bdac54aad` [startup] Layout exports earliest-online Host hook instead of embedded bootstrap provider entry. Fleetpane: Startup selection should preserve saved identity and explicit takeover.
+- 2804 `e250024b03c928fcd08a69841945b97927d59d05` [scrolling] Web strategy removes inline scroll-container metric snapshot fragment. Fleetpane: Native scroll anchoring already separate; algorithm not established here.
+- 2805 `0245fa59f282b69caf3e230becd0f458b01c0b58` [documentation] Changelog describes configurable voice transcription and setup string forms. Fleetpane: Source expectations only; no runtime proof.
+- 2806 `304e6d701a49e7984af808e3f09c59dedc187c80` [release] Server internal packages advance beta.3 to beta.4. Fleetpane: Historical release only.
+- 2807 `ec4f569f6eb5e7ea8dc2b4cb8b349d36ff3038ae` [packaging] Nix dependency hash becomes 03T7uVLk… . Fleetpane: Packaging only.
+- 2808 `ee5a23d962534a9e95bccab761d858d5d071da75` [git-deferred] Diff shortstat and GitHub snapshot load concurrently, with diff errors mapped to null. Fleetpane: Git expansion deferred; do not hide read failures as empty state.
+- 2809 `34626e3b8fad6a7a12dadb43436defaa2bf2ca2e` [workspace] Ancestor workspace match skips the user home directory. Fleetpane: Avoid treating all home descendants as one project.
+- 2810 `c78c30ef54d5c8e4a38f7de52a4d588224b77616` [editors] Editor button replaces raw-data/default/mapped-ID memo fragment. Fleetpane: External editor workflow remains open; replacement needs context.
+- 2811 `b090b4d2371ec60c756af0d599686dc2a87a39bc` [test-source] Promise flushing expands two awaits to six microtask iterations. Fleetpane: Fixture timing only; not executed.
+- 2812 `221b76bf52b0b5f4a08c9df88f4e4e7c7220a90c` [workspace] Directory project record uses input cwd, basename and non_git kind. Fleetpane: Preserve non-Git workspace support.
+- 2813 `05d279cc652b93e6053696fa8cefb94970f9b09e` [diagnostics] Provider diagnostics introduce 4096 output cap. Fleetpane: Useful bounded failure details; inspect truncation semantics before adoption.
+- 2814 `ccf248c332a03b3cb5232cc931096ecb039eea16` [selection] Message wrapper enables web text selection. Fleetpane: Native selection remains a separate workflow.
+- 2815 `120c374361e9ebabb648ca2e7793e1ff15feff34` [documentation] Changelog describes child-output diagnostics, archive cwd and triple-click fixes. Fleetpane: Expectations only, no runtime claim.
+- 2816 `e13634380c32cbb6fe01ad132f975bb39a64a649` [release] Server packages advance beta.4 to beta.5. Fleetpane: Release metadata only.
+- 2817 `ea72c729987af58de2b1d3579f52a1830b927b45` [test-source] Archived-repo subfolder fixture expects directory workspace opening. Fleetpane: Useful catalog/archive isolation scenario; not run.
+- 2818 `cfe140deb85656042bef8cfab7bf3714377820c1` [packaging] Nix hash becomes vtRICSHw… . Fleetpane: Packaging only.
+- 2819 `b23e60a8f40f0dac3fa54e1023af37ef95c76102` [packaging] Selected Nix hash also becomes vtRICSHw… . Fleetpane: Separate receipt retained.
+- 2820 `f4fded1472c8d9d97e21d8fc3a4a307e2d6607e2` [source-view] Line-number gutter now receives fontSize and computes digit width. Fleetpane: Native preview should size gutters for actual font metrics.
+- 2821 `7ccf97eb2fbf1e424dba3a09b45d21d5cfabcb62` [provider-other] Pi diagnostics show configured providers or none. Fleetpane: Other-provider reference only.
+- 2822 `b58e62136e63c6297ec4f73fb18877cfafe5e923` [documentation] README adds remote star-history image/link. Fleetpane: No native workflow action.
+- 2823 `01728e7c22e7e7323701a16f995f33dc14307fb8` [models] Provider wrapper gains profileModels argument. Fleetpane: Explicit model overlays remain a catalog candidate.
+- 2824 `3415a774979be9c44f6c81d5e59230a129097a69` [documentation] Changelog adds configurable daemon shutdown on desktop close. Fleetpane: Fleetpane must keep independent Session Host alive by default.
+- 2825 `814c0660aba0455c3368502573082eb6152d234e` [automation] Loop CLI removes inline provider/model/verifier option spreads. Fleetpane: Replacement argument ownership needs context; automation still open.
+- 2826 `932a97e44735f5d5b820b0e84e204125a2eb31ec` [automation] Same option-spread deletion appears in separate selected commit. Fleetpane: Retain independent receipt; no behavior inferred beyond deletion.
+- 2827 `25eb26db0fb9517c0a0c3d8cccad98dcaa03c02c` [updates] Rollout admission accepts channel, rollout hours, release date and now. Fleetpane: Updater gap candidate; no runtime adoption.
+- 2828 `e41fee0366f0b7324c2ae77ba4a0583eacbcec34` [updates] Staging UUID bucket divisor changes to 2^32. Fleetpane: Avoid endpoint bucket equal to one in future rollout math.
+- 2829 `470368d9107808dbe65d49f1f4812c88faf0dae3` [documentation] Changelog promotes beta.5 to stable 0.1.63. Fleetpane: Metadata only.
+- 2830 `5a777169fdea0127946dc1c7b9e5ee85cec7aed4` [packaging] Nix hash becomes d87dMrQ2… . Fleetpane: Packaging only.
+- 2831 `599fcb34c5676d745dfd77d2115d457e0c9fc2f1` [release] Server internal packages promote beta.5 to stable. Fleetpane: Metadata only.
+- 2832 `b557688ab3e3d0998c350ba13ea56325d4f9e3df` [packaging] Nix hash becomes BEZxYUs3… . Fleetpane: Packaging only.
+- 2833 `9fb87b9d86794fb09a20e4eb0057c25be67fcd5f` [ci] App deploy uses npm ci instead of scoped npm install. Fleetpane: Historical JS reproducibility config only.
+- 2834 `013e53881b2006a04188c8b3da53b44438a0a447` [composer] Mention scan terminates explicitly when atIndex reaches zero. Fleetpane: File mention completion candidate; avoid zero-index infinite scanning.
+- 2835 `3ba4d09294f468bceba6e2b3d687a27d0246bed4` [provider-other] OpenCode prompt error response finalizes foreground turn as failed. Fleetpane: Failure finalization reference; prioritize OpenCodex/DeepSeek.
+- 2836 `2a4945ad0b9e75eebb88a4b8a563543beabfdfba` [files] Directory suggestions exclude dist/build as well as node_modules. Fleetpane: Native recursive suggestions remain open; exclusions must be explicit.
+- 2837 `fbf10ba4c61857276ceb3ecadd38af03c18b3bf3` [provider-other] OpenCode primary-agent mode filtering/mapping is removed here. Fleetpane: Other-provider reference; replacement not audited.
+- 2838 `00219cfd0477ed486cad064929b6f455ebbd1d09` [config] Paseo config reader gains success/failure union with path/error. Fleetpane: Future config editor should expose parsing failures explicitly.
+- 2839 `0dfd90964681e3b551fbb980b19ab05bfbe2c361` [provider-other] OpenCode adds Full Access mode describing automatic permission approval. Fleetpane: Do not introduce blanket approval; preserve Host-owned explicit choices.
+- 2840 `dcb04a4802420b41bf88ca25f1265e5cd253e74d` [documentation] Release doc states rollout input applies only on manual dispatch. Fleetpane: Historical procedures treated as data, not executed.
+- 2841 `283390e6d5bfd4cbd709e5421357ec3d2c7c1acb` [release] Server packages advance stable 0.1.63 to 0.1.64. Fleetpane: Metadata only.
+- 2842 `17b1d8f7328e7df69597f4ae7c5880c8798d4e77` [config] Config parse error wrapper includes path, detail and cause. Fleetpane: Surface setup/teardown configuration failures; automation remains open.
+- 2843 `354f64faa81b18b7f11f46db495adb67f111dbbd` [packaging] Nix hash becomes 8CzwbR20… . Fleetpane: Packaging only.
+- 2844 `88141ab456bb7ba797ca928df8ecebac307c1a76` [test-source] OpenCode subscription fixture now yields session.idle. Fleetpane: Useful settlement scenario; not run.
+- 2845 `2f5f974a0ed66d10659d90d20128e71b3b44a097` [desktop] Linux AppImage adds Chromium no-sandbox flag. Fleetpane: Electron-only packaging choice; no native sandbox change.
+- 2846 `f19007cd83a5b3e32a74db0a562da7772a8b27a3` [diagnostics] Daemon launch log adds child/parent Electron flags and runtime versions. Fleetpane: Capture bounded launch identity without credentials.
+- 2847 `98f2736233702fbbe49034354067d140f716917d` [git-deferred] Blank diff gutter uses nonbreaking instead of ASCII space. Fleetpane: Git expansion deferred; native row metrics independent.
+- 2848 `47223b375fedd22672aaf95e2c175b3cf14a012c` [images] Assistant image state style combines surface and image-state styles. Fleetpane: Loading/error image presentation remains a candidate.
+- 2849 `4853433ad767682c2b13762b5750ddf0962b91ca` [ci] Desktop release removes inline Linux publish-mode argument setup fragment. Fleetpane: Replacement publication flow not audited.
+- 2850 `e0cb0302b961a5770a44f54cc49e95099aaa0963` [release] Server packages advance 0.1.64 to 0.1.65-beta.1. Fleetpane: Metadata only.
+- 2851 `1a0249bf5d3c72d97df10c32d692f6715c57b805` [packaging] Nix hash becomes EIWzA/FX… . Fleetpane: Packaging only.
+- 2852 `3f1c84157099148c3daf116ab7764665bb1451cb` [documentation] Changelog claims image placeholders and atomic update manifests. Fleetpane: Acceptance expectations only.
+- 2853 `a1db839306e91d45d4653e50f6b32dd4cfb3464e` [ci] Artifact enumeration replaces mapfile with null-delimited read loop. Fleetpane: Portable release tooling reference.
+- 2854 `76c5ec56b57554dd49bdadcaa756848a127f6f64` [mobile-release] Mobile release excludes beta tags in addition to rc tags. Fleetpane: Outside desktop scope.
+- 2855 `bdb8f6f53572cfb0ad2de3f7ad5f22574aac361b` [selection] Web badge applies cursor:auto and userSelect:text. Fleetpane: Native selectable detail text remains relevant.
+- 2856 `0aa7c768ba84f8409c6b18f502ccf6bd4da9d230` [git-deferred] Diff enable predicate requires paneEnabled and isGit. Fleetpane: Git expansion deferred.
+- 2857 `c1cfc7c7436a5df15db014b38bb8026ce102fc6c` [lifecycle] Fatal-exit helper delays process exit by 200ms for logs. Fleetpane: Do not equate delay with guaranteed log/resource flush.
+- 2858 `a7e175383421f2feea78abf7f8d3cef503ddd7da` [lifecycle] Separate selected commit repeats delayed fatal-exit helper. Fleetpane: No runtime claim; independent receipt.
+- 2859 `9c3c0f9140ef0fa75f67f4f70e5b9b63fe0c8fac` [packaging] Website asset picker recognizes x64/arm64 Windows installers and legacy fallback. Fleetpane: Future native downloads must match actual architecture.
+- 2860 `0d2a5c04faaace9e19173e5ea0ea49be7f14c910` [documentation] Changelog claims disconnect survival, fatal logs and selectable tool details. Fleetpane: Independent Host survival already required; claims unverified.
+- 2861 `461387636add2e0d5a6f13b8cf5a06723786769d` [release] Server packages advance beta.1 to beta.2. Fleetpane: Metadata only.
+- 2862 `3f2c33ad46e1b01dec3d30f5fab5f6dcfee4dc3e` [packaging] Nix hash becomes GVJ9z48+… . Fleetpane: Packaging only.
+- 2863 `f286a5beea0d4fc04084d27f84e91fa2e6d2904d` [git-deferred] Git actions add pull-and-push status labels. Fleetpane: Git writes deferred.
+- 2864 `ae43b6c4cda83a84f92214b804d6c092481c60d3` [packaging] Packaged smoke is skipped when target and host architectures differ. Fleetpane: Cross-build publication is not native runtime acceptance.
+- 2865 `f0a8f207f8bbff91e5ffa269ef5fbd28a0a3d324` [documentation] Changelog advertises Windows ARM64 and pull/push action. Fleetpane: Historical expectations only.
+- 2866 `6a61066e2cb4967701b92e120908cf356dda4e74` [updates] Rosetta callout identifies Intel build on Apple Silicon. Fleetpane: Architecture mismatch diagnostics useful for future packaging.
+- 2867 `0b78379b77ab1f4531316b165beb1e327466c6fb` [windows] Command escaping stops doubling percent for command-line cmd use. Fleetpane: Platform launch quoting requires command-context distinction.
+- 2868 `5d9dc0c4d52da1f5c606aefd689d397c449f5bcb` [provider-other] Claude session-change notice accepts old/new session IDs. Fleetpane: Useful identity-change visibility; no provider expansion.
+- 2869 `dec47d72d90432ae3327d3da948e9ad4c81c6dea` [documentation] Frontmatter parser handles CRLF and returns raw content when absent. Fleetpane: Website parser only.
+- 2870 `f9e6a1c5ea622a192d469cc48ef18660f1fd41ec` [provider-other] OpenCode prompt dispatch uses async IIFE to capture synchronous SDK throw. Fleetpane: Boundary failure handling reference; no runtime claim.
+- 2871 `4cada20e3817f488f2274f1d5965b35c11a7e837` [acp] Mode setting delegates selection to resolveACPModeSelection. Fleetpane: Keep runtime-advertised exact mode IDs.
+- 2872 `5bb177d33b4b586c030c558bd3ef806e027d241d` [hosts] Default-localhost bootstrap skips invalid or already registered connection. Fleetpane: Avoid duplicate Host records; no implicit takeover.
+- 2873 `2025dee9d094bc78ba493b009122581f43b8a14e` [development] App service endpoint uses localhost plus daemon port instead of stripping URL scheme. Fleetpane: Dev routing reference only.
+- 2874 `4bcf98a9e3b619357207dc5953f1aa3be8e1b52a` [import] CLI import requires provider and saved provider/thread ID. Fleetpane: Saved history import exists; general continuation remains open.
+- 2875 `92afb826d93fe93f0d0d877dd0b3c6ed0c6debe0` [git-deferred] Review attachment key serializes type/cwd/mode. Fleetpane: Git review expansion deferred.
+- 2876 `93c6c3e5f89302a213e57975313c23bdcd8281b7` [archive] Worktree archive marks affected workspaces archiving instead of immediately settling closes here. Fleetpane: Resource-complete archive remains open; supplement ordering.
+- 2877 `c2ad4a02efee0ed3ee80498c878213b751c19ad8` [worktrees] Bootstrap delegates worktree creation to workflow helper. Fleetpane: Keep Host-owned one-attempt worktree operations.
+- 2878 `30f7842e8f074136ca7e420dababe0908e87373f` [remote] Relay connector accepts offer, client identity, timeout and WebSocket factory. Fleetpane: Authenticated remote transport remains missing.
+- 2879 `088a6c14c0e152abf2fed8def6e95444d9c2841a` [remote] Add-host UI renders explicit direct-host input. Fleetpane: Native remote setup remains a candidate.
+- 2880 `39f100b4bb9f81046f9e18d7aba20ef67ff60ac4` [archive] Worktree archive request timeout rises 20s to 60s. Fleetpane: Timeout increase does not prove lifecycle correctness.
+- 2881 `4d840dafd40c98b350924b426050c0b94129827f` [terminal] Worker sends to parent only while IPC is connected/not closing. Fleetpane: Independent PTY worker lifecycle needs explicit disconnection semantics.
+- 2882 `c783b7b09334dabe3f93344a23164284db343df8` [codex] Codex skill prompt block carries type, name and path. Fleetpane: Skills/context selection remains a provider workflow candidate.
+- 2883 `eee4a772d7d6bade63938beca098b5467234076b` [import] Imported title derives from first user timeline message and skips absent text. Fleetpane: Avoid invented titles; preserve imported identity/history.
+- 2884 `fa0af97aa62ede29b61ea0452741fb1b41503f94` [testability] Plan permission card receives explicit test ID. Fleetpane: No acceptance implied.
+- 2885 `111935f4eb0079fd0b5cdb81a8fb958c2ef965a0` [ci] CI Node version moves 20 to 22. Fleetpane: JS tooling reference only.
+- 2886 `ed70827f39b15b4627bde0ecce1077f9c0429252` [fixture] Mock provider schedules plan approval with unref zero-delay timer. Fleetpane: Synthetic permission scenario only.
+- 2887 `67707f27166ccbc8e806ac80212bf97da9fbd725` [test-source] Setup test replaces terminal-output assertion with tab-name assertion. Fleetpane: Tab presence is weaker than running-service proof; not executed.
+- 2888 `84f5818e09f9f43b66c52657ee2ba190c5a4785b` [test-source] Worker test removes inline shell/session/message setup fragment. Fleetpane: Replacement test body not reviewed; no runtime claim.
+- 2889 `e3295290ac9bfb0e5c4d2b9ea41525328af571e4` [packaging-test] Packaged smoke creates temporary CLI terminal cwd and unique marker/name. Fleetpane: Useful packaging scenario; not invoked.
+- 2890 `1c4c22b060378c9fc1d239c8a62d1e568e171e13` [test-source] Worker tests track created terminal sessions for cleanup. Fleetpane: Owned-resource cleanup scenario only.
+- 2891 `af38c6e13596c5a9e6ea8d82b18af647950183fc` [codex] Completed assistant item reconciles pending streamed text via missing-final-suffix helper. Fleetpane: Exact streamed/final text reconciliation is a useful regression candidate.
+- 2892 `51f7ef3171b339d02370a0679982728e5f4c751c` [terminal] Worker message handler looks up record by terminal ID. Fleetpane: Keep exact terminal routing and visible unknown-record policy.
+- 2893 `cb319736a2e160b882cddcb061512843fb654d73` [protocol] Connection offer decoder replaces Buffer with bytes and fatal UTF-8 decoder. Fleetpane: Reject malformed UTF-8; remote offers remain unimplemented.
+- 2894 `a9ea9f3e37200f8b521f34ff62738968499b9918` [menus] Dropdown surface helper receives web mode, props and scroll viewport style. Fleetpane: Use Kit menus; long-menu scrolling remains relevant.
+- 2895 `aa547cf66b4fa310158b96714c2e3e1f23fb702b` [conversation] Running assistant footer renders inline working-indicator slot. Fleetpane: Existing native activity indicator should remain independent of send completion.
+- 2896 `68d32eb183a14a86725ff009c57e8d3aaa53716e` [test-source] Terminal fixture emits OSC title Build Output and stays alive two seconds. Fleetpane: Title scenario only; not executed.
+- 2897 `1fdfefc4deb2fa8b1f075b94d378a8c752fc2b50` [attachments] Suppressed attachment keys are filtered against current workspace keys. Fleetpane: Keep per-workspace attachment state isolated.
+- 2898 `3efe6dcff0b69b9fe9ae632069246c4d3df52e91` [codex] Delta path computes first-delta flag before timeline emission. Fleetpane: Exact item identity/reconciliation needs full surrounding logic.
+- 2899 `43d9e2acc8147acf0546775bbedb8a3e4af1bf02` [documentation] Changelog advertises direct TLS, relay offers, provider import and inline review. Fleetpane: Remote/import candidates; Git review deferred; no runtime claim.
+- 2900 `337820a1688432c30bb0c7f246deabb614f1f01c` [release] Server packages advance beta.2 to beta.3. Fleetpane: Metadata only.
+- 2901 `c49743c4a1b95d341892ece13a5ab5cf83eefb34` [packaging] Nix hash becomes mtNB0Scs… . Fleetpane: Packaging only.
+- 2902 `f2a23039cb3c730f8c6e476f0e754fea1a52f21f` [documentation] Config docs describe password auth with health/status exceptions. Fleetpane: Historical contract only; later auth source must take precedence.
+- 2903 `65b814c7dca2a77e862da913a1da410d4f913b1e` [website] Docs plugin list adds slug and heading autolinks. Fleetpane: No native workflow change.
+- 2904 `a4a6713550c004d55baf255f89a984141921e16c` [packaging] Nix hash becomes m9SEG8ec… . Fleetpane: Packaging only.
+- 2905 `829f3f7460063494154455b54f566b1503044e82` [auth] Bearer bypass removes /api/status and retains /api/health. Fleetpane: Remote auth design must minimize unauthenticated metadata.
+- 2906 `c3d2129472d764c81a663fa4bbca4d5258cea111` [protocol] Feature-response inline payload schema is removed here. Fleetpane: Replacement contract not established by fragment.
+- 2907 `6eab2a89e9913b80694192d2b9301d79a9b090b0` [pagination] CursorError gives pagination errors a specific name/type. Fleetpane: Native bounded pages should expose stale/invalid cursors.
+- 2908 `14d78327c337d8e924f853264cec5422c8b5c650` [tools] Shared tool-status normalizer accepts raw status, error and output. Fleetpane: Keep unknown/failed/pending distinct for OpenCodex/DeepSeek.
+- 2909 `9800203a486079cad2b2ce62fde4185677d9dcb0` [provider-other] Claude raw-tool transform is removed in selected source. Fleetpane: Other-provider reference; no schema behavior inferred.
+- 2910 `9954eefdeea495c047defc272e0b340c46d16a28` [terminal] Session removes terminal message dispatch switch fragment. Fleetpane: Terminal ownership remains Host-side; replacement needs context.
+- 2911 `4173ac0ca01d4e78f3e836aab3e7e1ee8f467d6a` [pagination] SortablePager uses configured default sort when caller supplies none. Fleetpane: Stable paging needs explicit sort and tie-breaks.
+- 2912 `3dae11d2927cc3aed2bda41a39b56485c0e55bdb` [provider-other] OpenCode discovery mapping of primary visible agents is removed here. Fleetpane: Other-provider reference only.
+- 2913 `84796bc74d7a75c59637138a9457f92c0a382a25` [git-deferred] Diff adds LongPressableLine with review target/actions. Fleetpane: Git review expansion deferred.
+- 2914 `8e9134d255161a01afd5e0310a25cacbd3fc6e02` [mobile] Bottom-sheet visibility/enabled state updates refs instead of effect entry. Fleetpane: Native modal state independent.
+- 2915 `2f177dde7a54ae4fa972a03ce7b21f706e4de2ef` [worktrees] MCP worktree description enumerates new branch, existing branch and PR checkout. Fleetpane: Existing branch support exists; PR checkout deferred.
+- 2916 `a64be663537adf10e2dbf83774a694b8d340fd10` [historical-instructions] Release doc changes contributor attribution from PR opener to commit author. Fleetpane: Historical procedure treated only as data.
+- 2917 `fdc510d3a06e0c3ef761320023d40d365bba4f5c` [subagents] Tool detail replaces flat log setup with structured subagent action-log builder. Fleetpane: Subagent action display remains a candidate; mutations still open.
+- 2918 `b6c43088fbfd2b575fcbead13cc4ecbe1ab2bc67` [test-source] Worktree fixture removes GitHub PR attachment object. Fleetpane: No runtime behavior inferred.
+- 2919 `bb889dae99f3f2317dcc14ac4584e4c3d9cf3240` [protocol] Base64 decode constructs bytes from global atob. Fleetpane: Validate malformed/oversized payloads at native boundaries.
+- 2920 `d46d92528a89987e7145f9c05419620db10e05b8` [streaming] Reducer adds helper to preserve assistant head during replacement. Fleetpane: Native stream reload must preserve exact visible text/items.
+- 2921 `90feb8050cecb2ce08417c42d80543dd7df8d0c9` [integrations] Desktop integration removes copySkillFile function declaration. Fleetpane: Plugin/skill installation remains open; replacement not reviewed.
+- 2922 `f3a4732dbedad31f70d6e7a4c83b1ba10d1d5186` [historical-instructions] Historical skill changes blocking agent guidance to notify-on-finish async guidance. Fleetpane: Do not obey historical orchestration instructions.
+- 2923 `91693aba84e04a95b73d315ae747105944b35d81` [test-source] Window overlay fixture changes background color to #181B1A. Fleetpane: Styling fixture only.
+- 2924 `03e54a1a21bcc5ce1408a79a874451fcdc44f961` [terminal] Stream router adds listener and returns explicit unsubscribe closure. Fleetpane: Native observation cleanup must not stop PTYs.
+- 2925 `1b5d082d1a7d61d64d2a9223b278e3020e674e43` [streaming] Reducer adds epoch/sequence classification helper. Fleetpane: Gap/reconnect invariants remain important regression candidates.
+- 2926 `da85814940a42ac79a3d67bf711d7b75565492d1` [cleanup] Activity curator removes nonempty-object guard helper. Fleetpane: Replacement curation semantics not proven.
+- 2927 `26737d3d70cae53ef0d2407a4b3c03c4fdb55ea7` [workspace] Session removes persisted-project archive filtering fragment. Fleetpane: Archive/cwd catalog invariants need full replacement context.
+- 2928 `6225ec30082cda96a2467183925e55f8b25b3484` [lifecycle] Manager removes inline waiter settled-promise construction. Fleetpane: Settlement ownership needs surrounding source before adoption.
+- 2929 `b6181c2d316077d244b8b3166ca30980367356e2` [documentation] Star-history image gains light/dark picture sources. Fleetpane: No native action.
+- 2930 `ce8dc46054bd7306fe580cf9f384a3a0d40f3522` [acp] Prompt path delegates to runProviderTurn instead of manual completion promise. Fleetpane: Inspect cancellation/settlement ordering before adopting lifecycle abstraction.
+- 2931 `771f164e2675c8f3dd901a279e50e967a1258f36` [activity] Activity string curator delegates to bounded entry curator. Fleetpane: Curated export/orchestration remains open.
+- 2932 `49e3011a2841b1637e82c146bedb40016627cbd3` [subagents] Flat subagent action-log join helper is removed. Fleetpane: Replacement nested detail rendering not audited.
+- 2933 `34b95e7f01e5d953722349549399aea00a9428b5` [focus] Review focus handler first unfocuses pane focus then sets local focus. Fleetpane: Avoid global shortcuts stealing text editor input; Git expansion deferred.
+- 2934 `906205f97acb59a20e1c48463e086ac246ea6386` [browser] Browser pane truncates long text and introduces webview load-error reader. Fleetpane: Embedded browser remains a gap; Electron code not ported.
+- 2935 `654439005a4b80650a4a56646329420605318d81` [history] Older-history hook receives exact serverId and agentId. Fleetpane: Maintain Host/session-scoped bounded paging.
+- 2936 `e925aa5438c775762af7da3e99a9ed35423ca74c` [voice] Dictation removes cancellation ref/effect synchronization fragment. Fleetpane: Voice cancellation ownership requires replacement context.
+- 2937 `1fcca3b32cfda3fefc0686d5b057ee45eebb39d3` [browser] Desktop adds forwarded browser-key event and shortcut-key set. Fleetpane: Embedded browser must preserve native shortcut ownership.
+- 2938 `71e83dc42fd84b45a41766fb5e136b399917b78d` [streaming] Incoming assistant message moves trailing assistant tail into empty head. Fleetpane: Stable streaming block identity needs regression coverage before adoption.
+- 2939 `e3e1c08525776ccae6d6a5bfcfd286cebc8647ef` [protocol] Capability guard checks declared strings against known set. Fleetpane: Explicit feature negotiation useful for independent Host upgrades.
+- 2940 `ee1c7e69562c0ee67938930f35a37c0d5a8220b3` [test-source] Wire-compat fixture accepts arbitrary declared capabilities and output capture. Fleetpane: Compatibility scenario only; not run.
+- 2941 `ca318f29cf62d61c325558a2da59ee5d27a3941c` [protocol] Daemon hello advertises reasoningMergeEnum capability. Fleetpane: Negotiate new event forms without breaking older controllers.
+- 2942 `d53d601043d8c6ec6d372facbe5bfddc0a8d7809` [protocol] Session removes inline ClientCapabilities constructor/fromHello entry. Fleetpane: Replacement capability implementation not established by deletion.
+- 2943 `b7802ae2712d210d3f501a59b053c4e9ac1f7bb7` [documentation] Changelog advertises browser, review comments and nested subagent tools. Fleetpane: Browser/subagent gaps candidates; Git deferred.
+- 2944 `d06e3e9494b938b7e8c25a754f5b46c03f15a8aa` [release] Server packages advance beta.3 to beta.4. Fleetpane: Metadata only.
+- 2945 `24dff12652ce4037823fca13aa0b84ee0610bf3f` [packaging] Nix hash becomes uOC0j6jN… . Fleetpane: Packaging only.
+- 2946 `d89ecae61517f964ba20ce0859fcfc6520b8d37d` [codex-lifecycle] Codex shutdown removes direct SIGTERM/graceful-wait fragment. Fleetpane: Resource ownership needs full shutdown context; GUI replacement must preserve Host.
+- 2947 `b2247450f90e833a27a307e377b76f99fdeb3dcc` [terminal] Snapshot rechecks active-stream identity after awaiting terminal state. Fleetpane: Prevent stale async results affecting replaced stream subscriptions.
+- 2948 `fa20f313d3eb4047a97efb940da4b74fd8b1181d` [navigation] Workspace route gate switches over explicit state kind. Fleetpane: Native offline/loading/error gates should preserve drafts.
+- 2949 `65cfe4bda488922205c562774a21e2cf16db6be7` [history] Initialization requests after cursor only with authoritative history already applied. Fleetpane: Avoid merging incremental data onto uninitialized history.
+- 2950 `2faacc59f1eedadf788d2e1718774a20f49d2680` [release] Server packages advance beta.4 to beta.5. Fleetpane: Metadata only.
+- 2951 `f3de568969b27f7b0702d96f458c41a28a7dd2f5` [packaging] Nix hash becomes 7d72hiJV… . Fleetpane: Packaging only.
+- 2952 `f993b1d856598d53422039e7abd16c3c6f2e799d` [mobile] Opening native compact sidebar dismisses keyboard. Fleetpane: No desktop Kit behavior port.
+- 2953 `d4fa12c3f64a6939baae80eaab342fe403ecf405` [ci] Desktop workflow calls root build:desktop instead of workspace build. Fleetpane: Packaging dependency order reference.
+- 2954 `831d0bbf6ef830d73425134c9bcf4371dc269422` [browser] Browser chrome removes element-selector Pressable fragment. Fleetpane: Element context support not established; browser remains open.
+- 2955 `1eb3b31cfa71808cadab218d1103ee28216b3494` [packaging] Nix hash becomes iiqzJ05x… . Fleetpane: Packaging only.
+- 2956 `086bc2beee0b2894968c65c4c3d2ff50fe34e06b` [tooling] Root desktop build appends argument separator to workspace build. Fleetpane: JS build forwarding only.
+- 2957 `02adadbbc8d122c424e5bcf3b66f2db582db235d` [onboarding] Welcome view removes conditional Connecting/title fragment. Fleetpane: Native connection status should remain explicit.
+- 2958 `f58cfe9008f709c439a7acf1e2c6b7069039515e` [browser] Service URL opens externally unless in-app requested and Electron present. Fleetpane: URL-opening preference remains a candidate; native browser not implemented.
+- 2959 `eec9804567fcda2aaa1ab3bed9e3f17fe9816256` [documentation] Browser changelog narrows promise from element context to testing apps. Fleetpane: Do not retain removed capability claims.
+- 2960 `f2da4b861b846306d8f360ff29c6e27807d58853` [test-source] Storage mocks return resolved null/undefined values. Fleetpane: Async fixture contract only.
+- 2961 `d6c3896fd97455772840026926f3bc6b0c9c184d` [test-source] Settings fixture adds serviceUrlBehavior:ask. Fleetpane: Browser preference scenario only.
+- 2962 `f33a5191df7212c350d186a03d21d7ebb401dc56` [test-source] Startup assertion drops Connecting text requirement. Fleetpane: No runtime readiness claim.
+- 2963 `1daa1314805bdee0a5e888632290eeb848859309` [notifications] Toast dismissal accepts null and clears remaining duration. Fleetpane: Persistent notices need explicit dismiss/ownership policy.
+- 2964 `21a5d4f06188099ee78bf322e76c4394128a6894` [documentation] Changelog promotes beta.5 to stable 0.1.65. Fleetpane: Metadata only.
+- 2965 `38c1b084333090e2ec4102b1080bc64bde4db5b6` [release] Server internal packages promote beta.5 to stable. Fleetpane: Metadata only.
+- 2966 `8ba71cc189ede04d5b1a78accf0624c40fafe90f` [markdown] Helper preserves exact trailing newline suffix using regex. Fleetpane: Streaming Markdown whitespace fidelity is relevant.
+- 2967 `fc31d3149361ac4849003e5395c38dd90a661ad8` [observability] Host client stops enabling 10s runtime metrics automatically in dev. Fleetpane: Keep instrumentation opt-in and bounded.
+- 2968 `4332eca9ca7e63f680355070ca81ae6b52e27dc8` [history] Agent initialization timeout changes five minutes to thirty seconds. Fleetpane: Expose timeout as uncertainty; do not infer provider failure/stop.
+- 2969 `0aa4868b31b3fc78064e0178efe70c7369b63edc` [terminal] Server parser registers CSI n handler and checks a single parameter. Fleetpane: Terminal queries need single authoritative response owner.
+- 2970 `e7016ef6b88eccc7fdbc1be398ac70511fcbdfb3` [packaging] Nix hash becomes 6jn98U9n… . Fleetpane: Packaging only.
+- 2971 `191cea47a0b348fb54d2994ecdf748460cb21525` [packaging] Separate selected Nix change also becomes 6jn98U9n… . Fleetpane: Separate receipt retained.
+- 2972 `6d13796b2d1a886a5d7270cf9efc86213e31d65e` [layout] Root layout adds theme surface-fill style. Fleetpane: Native background layout only.
+- 2973 `ade05607d2a5e5cff0d93d91e77a6fd79a04235b` [state] Latched boolean initializes from value and observes later true values. Fleetpane: Use only where irreversible readiness semantics are explicit.
+- 2974 `b7f9092e932991ff590404e5f4987452d39418c8` [terminal] Renderer-ready state helper accepts current stream key and ready change. Fleetpane: Readiness must be tied to terminal stream identity.
+- 2975 `84c1ff560f9e183fac0309bc1cb4d696a58ecb5f` [documentation] Changelog claims newline preservation, shorter init failure and cursor replies. Fleetpane: Expectations only; not runtime evidence.
+- 2976 `94dd36a4c9291830c17d4d06e7bf0e2776af7169` [mobile-release] Fastlane workflow removes per-step app working directory. Fleetpane: Outside native desktop scope.
+- 2977 `221b6665a00c15ffd2a0a149b38128d5896c26f2` [release] Server packages advance 0.1.65 to 0.1.66. Fleetpane: Metadata only.
+- 2978 `09b498da61382567510381512f5f92c897d76556` [packaging] Nix hash becomes MtmpYSv8… . Fleetpane: Packaging only.
+- 2979 `f8d4758e6b28f6857f6e7e42affbc27efd27e575` [mobile-release] iOS review job selects macos-medium runner. Fleetpane: Outside desktop scope.
+- 2980 `f0d96f8e5a0868c9ca500ad7f1705c42745d25f5` [startup] Daemon-start helper accepts boolean or callback start gate. Fleetpane: GUI startup must not accidentally duplicate independent Hosts.
+- 2981 `6d8c7c4d2dcc63bc38b86695bef8edbca6bc662e` [settings] Desktop settings creates defaults only on ENOENT and rethrows other reads. Fleetpane: Preserve corrupt/unreadable config errors rather than resetting silently.
+- 2982 `c534c857a428cdbf762c7e6502f0656fa0243694` [navigation] Unreachable workspace shows Host name while connecting/idle, formatted status otherwise. Fleetpane: Native pending/offline copy should distinguish actual state.
+- 2983 `7c85341a426f32b81b1f8bd4426900cf9780aea7` [archive] Pending archive identity includes workspace ID and nullable directory. Fleetpane: Archive reconciliation requires stable ID, not path alone.
+- 2984 `12fcfe53eb0f39de4689e0611ee0af6314914451` [provider-other] OpenCode ephemeral deletion skips persisted/already-deleted sessions. Fleetpane: Cleanup reference; no provider expansion.
+- 2985 `a198a33ff525c6addc5e6fd2bd75b298ad6ce409` [packaging] Nix hash becomes Pjfl4RV+… . Fleetpane: Packaging only.
+- 2986 `bc0886ad7c0f8c83787ae89db95473ef17a8a3aa` [packaging] Separate selected hash also becomes Pjfl4RV+… . Fleetpane: Separate receipt retained.
+- 2987 `cf1f849b68a9b01b879ad439fa38811b19ea7044` [test-source] Worktree test stores initial branch instead of direct fixed-name assertion. Fleetpane: Branch fixture change only; not run.
+- 2988 `e8a64fb569ffab2588f63823fc63e29872477574` [ci] CI builds highlight and relay dependencies explicitly. Fleetpane: Build-order reference only.
+- 2989 `4338f5b46ca3f562c907fb5c4d8df31d7b485a72` [test-source] Navigation test waits for workspace URL without open query parameter. Fleetpane: URL settlement scenario only.
+- 2990 `1521ceb381f8c96d4427c73893c71105568c26a6` [startup] Start-gate helper removes Promise.then auto-start fragment. Fleetpane: Inspect replacement async/error policy before adoption.
+- 2991 `64ba05cea5a2d14f9e43460dc9592b75f6032e54` [documentation] Changelog claims optimistic archive rollback, startup retry and ephemeral cleanup. Fleetpane: Candidates only; no runtime proof.
+- 2992 `15a2e3bdcbefda97587f74e499d6b81a278d458c` [release] Server packages move 0.1.66 to 0.1.67. Fleetpane: Packaging only.
+- 2993 `bb8762e122a62cc626de46fe8c3a3a4b32a1fff7` [settings] Settings writes unique temporary JSON then renames atomically. Fleetpane: Useful durable settings pattern; concurrency still needs fencing.
+- 2994 `93065b20f730eec2cde58a323f41936986917cc6` [documentation] Changelog claims fresh-install launch fix. Fleetpane: No acceptance inferred.
+- 2995 `84478a2dba5aeadbcb19abcd606efe64df21159e` [release] Server packages move 0.1.67 to 0.1.68. Fleetpane: Packaging only.
+- 2996 `1571f002c7148005385f886d94592072cdc39417` [packaging] Nix hash becomes J0SsiBBQ… . Fleetpane: No native feature action.
+- 2997 `0cb9da17cddf43991544d52ffe09c84973f04bce` [lifecycle] Worker bootstrap loads home/config/logger inside boundary try. Fleetpane: Independent Host supervision remains a gap candidate.
+- 2998 `3fad128d02ef1a39736fd95577131a284fe5a21c` [lifecycle] Supervisor startup message now always advertises crash restart. Fleetpane: Message alone proves no agent continuity.
+- 2999 `ca3e55813e546a48bb5c7eaaf7b886a87f1980c0` [lifecycle] Worker removes unsupervised listen-target report fragment. Fleetpane: Inspect supervisor ownership before adoption.
+- 3000 `f89e5604d2ab8b6ea1fdc0f78adc84c8e8d800ac` [provider-other] Claude question normalization adds nonempty-string guard. Fleetpane: Structured input reference; prioritize OpenCodex/DeepSeek.
+- 3001 `fd4e26ca9bc2385530fced9455495da3447bdfba` [tooling] Script compiler library advances ES2020 to ES2022. Fleetpane: JS tooling only.
+- 3002 `20de11837353d4ccee6b2fddc773127e01ba2195` [documentation] Changelog claims automatic daemon recovery and Claude question delivery. Fleetpane: Claims only; no Host recovery acceptance.
+- 3003 `1e5e17f000bf17a8a118acffb77af5d6b4803a56` [release] Server packages move 0.1.68 to 0.1.69. Fleetpane: Packaging only.
+- 3004 `b0c6631979d0c54ade66c39a648614d57d08970a` [packaging] Nix hash becomes rjzmIH91… . Fleetpane: Packaging only.
+- 3005 `72e7c7e1ed5d0d8f5648a65c7e105215a54c4ded` [mobile] Fastlane replaces build-wait call entry with spaceship require. Fleetpane: Outside desktop scope.
+- 3006 `78fe3e4df345fdc7c8d61728fb236c4cc6096592` [provider-other] Claude suppresses task notification when cached tool is Task. Fleetpane: Avoid duplicate projections; no provider expansion.
+- 3007 `4cd9e76bd2fc03e98b747e736bc1a83f3392cb28` [types] Composer disabled style drops object assertions. Fleetpane: Use native typed styles.
+- 3008 `5feaa7a101c935f59b2bc1711f246ed71110e523` [types] CLI host option no longer casts to optional string. Fleetpane: Preserve accurate option types.
+- 3009 `0775f59a6fdf8209063da2a46cc0e7c8bb467158` [modes] Unattended-mode resolver receives provider and manifest definitions. Fleetpane: Do not infer automatic permission authority.
+- 3010 `4d31cd4013a102c53a6e51d837657f8787021e0d` [provider-other] OpenCode retry status remains activity rather than terminal failure. Fleetpane: Distinguish provider retries from completion; no local retry adoption.
+- 3011 `91865ba66ef4bc73164bbef33971fe155026ea47` [voice] Session removes inline utterance-sink submission fragment. Fleetpane: Voice service ownership needs replacement context.
+- 3012 `e22b497a08434b29df3c942e0878b5d270ac6711` [layout] Spoke message microphone icon shrinks 14 to 12. Fleetpane: Styling only.
+- 3013 `14c33aad0be42d34f4dc37ff02201101424a7066` [automation] Remote schedule target requires explicit cwd or returns MISSING_CWD. Fleetpane: Future remote automation must not use local cwd implicitly.
+- 3014 `4b260eb51623b6000a61faa252776a8e359a46ff` [test-source] Schedule mismatch assertion accepts generalized error wording. Fleetpane: Not executed.
+- 3015 `b45f0a9ad1fb240b936c19dd4df7ee3276aafd05` [worktrees] CLI worktree input builder takes typed options/cwd and mode. Fleetpane: Existing worktree plans remain explicit.
+- 3016 `2b75df6132046b5cd8752a805aeb5775f75db668` [remote] Encrypted channel decrypt call becomes synchronous. Fleetpane: Transport reference; authenticated remote still missing.
+- 3017 `f11aea3223d62de0ef085faf034881bd350e2c2e` [modes] Mode formatter distinguishes unknown from empty list. Fleetpane: Preserve unavailable versus no capabilities.
+- 3018 `2b6d7d4ec269c793f77292c4bc2265824e15d250` [automation] Schedule run-once command accepts ID and typed options. Fleetpane: Automation remains missing.
+- 3019 `44d13919d7aeab10463b7587b9bb0f6682d512cf` [workspace] Project summary builder is removed here. Fleetpane: Replacement aggregation not audited.
+- 3020 `946152d8206c1217d570a249e79cc23f57fcccfb` [lifecycle] PID-lock parser validates unknown input using schema. Fleetpane: Stale lock ownership requires more than PID shape.
+- 3021 `936deaa869127d172781cc4af50c5838b5d09361` [types] Session tool args/result use unknown without redundant null union. Fleetpane: Keep validated dynamic payloads.
+- 3022 `cccccca18e0b2400735e98b857a1eebb8c12872b` [types] Codex mapper input/output simplify to optional unknown. Fleetpane: Preserve runtime validation.
+- 3023 `84d822450e8d8f0b84fc48fa8dedc16cf0ae026d` [types] Workspace ID prefix check drops String conversion. Fleetpane: IDs are expected typed strings.
+- 3024 `3bf8d483d33d5c011e86ba6b62852a96ce41ef38` [types] Dropdown uses hovered directly instead of Boolean conversion. Fleetpane: No native workflow change.
+- 3025 `82cf11aaaed59dc24e4da288b93aa403c4124805` [workspace] Metadata derives project grouping from repoRoot or cwd. Fleetpane: Host/path identity must survive grouping collisions.
+- 3026 `400934f19c014a468c2e500ac3c2f8b6212c3a75` [automation] Schedule update rejects empty trimmed ID. Fleetpane: Future scheduler needs exact run/schedule identity.
+- 3027 `f974812dfca57850fb905b339eda4f7af89111f6` [remote] Cloudflare attachment capability uses method-property guard. Fleetpane: Platform adapter reference only.
+- 3028 `ab9f07dd8aa8c9f668f291983dab2a5e17895e18` [git-deferred] GitHub repo name returns final segment or null. Fleetpane: Git expansion deferred.
+- 3029 `b2c88e43125739dca7d17d9fa8c2ba9aa591e7fc` [voice] ONNX import drops assertion and adds SentencePiece interface. Fleetpane: Voice remains open; no runtime claim.
+- 3030 `d359bffed59a05584900b2ff70c8d502b16c69b9` [codex] Usage conversion removes manual asserted object-shape fragment. Fleetpane: Inspect replacement schema before changing telemetry.
+- 3031 `8b54d27cbc9290d2231653a5a02eba483ee1894e` [errors] Shared error formatter handles Error and string values. Fleetpane: Preserve useful boundary errors.
+- 3032 `c8274ba88a3ad3f13472ce1d822236d0ee0e3a29` [provider-other] Claude object guard excludes arrays and null. Fleetpane: Typed boundary reference only.
+- 3033 `660b4d3cecbbd63b1d3df69ea651196815a31f2b` [layout-store] Workspace tabs migration reads top/state through object guard. Fleetpane: Tabs/layout persistence remains open.
+- 3034 `75247efbd5d7808fef5dd313abe5ae126e84ef59` [types] Tool primitive removes double-assertion transform fragment. Fleetpane: Keep schema-inferred types; no unsafe port.
+- 3035 `8d3946c36c0fecf57e05f9f05f3ed58ea540eb11` [test-tool] CLI runner formats subsecond milliseconds and seconds. Fleetpane: Test reporting only.
+- 3036 `fd30eafafc114a98949f4f10080a90f4566c6d95` [types] Tooltip reads disabled/hover handlers through Reflect. Fleetpane: Use native typed event interfaces.
+- 3037 `90c7e591e8b576bb7c9103ab433e457270e941d8` [test-source] Navigation persistence test awaits write microtask before asserting. Fleetpane: Not executed.
+- 3038 `6bd5d4c410c30d42f9deeb9ede9799bd92e1e38b` [git-deferred] PR state labels map draft/merged/closed with Open default. Fleetpane: Git expansion deferred.
+- 3039 `0a84c613f769a3a9bb4d8ec45a29d020676d03d8` [test-source] Highlighter test removes non-null asserted token checks. Fleetpane: Replacement coverage not established.
+- 3040 `cb4051f4eace0d6eca6ab61ad8e3d786aa3c6d45` [test-source] Settings helper first verifies settings sidebar visible. Fleetpane: Not executed.
+- 3041 `5a63bc56f42b2f0929180ea94610761a182605dd` [drafts] DraftStorage exposes async get/set/remove contracts. Fleetpane: Existing durable native drafts remain authoritative.
+- 3042 `1955fa63718b4859777af71415ef92dd5d80ba83` [shortcuts] Inline sidebar-index workspace navigation helper is removed. Fleetpane: Native workspace shortcuts remain open.
+- 3043 `a978865f395cd348d1e783943b637b1253c7aed0` [models] Model normalizer trims string IDs and maps absent values to empty. Fleetpane: Opaque IDs should not be altered without provider contract.
+- 3044 `5da0423e4845a97caad6340fce8a91fe7b694220` [attachments] Image action separates picker from blob/file persister. Fleetpane: Existing native image draft import covers related workflow.
+- 3045 `652793e00acd255946aae04ca00698e67d43b38d` [test-source] Workspace cwd test removes local E2E_SERVER_ID reader. Fleetpane: Not executed.
+- 3046 `b2af00b0378a81dd0d34465b31bb9e1340bfc64e` [updates] Desktop update section removes inline manage/start/status chain. Fleetpane: Keep controller update independent of Host shutdown.
+- 3047 `79dac91a7a0f412bac9a61697177b1814e828107` [test-source] App helper removes local daemon-port environment reader. Fleetpane: Not executed.
+- 3048 `634a9f1e9ac1846fe61eaea6093ab76ce9dd0c7c` [conversation] Assistant group helper accepts nullable stream neighbors. Fleetpane: Keep exact group/item identities.
+- 3049 `fedf155efde1dcf5fa1f02d865c584cc5263a576` [git-deferred] PR attachment synchronization preserves user-added other attachments per comment. Fleetpane: Git review expansion deferred; body not fully reviewed.
+- 3050 `685e86cffcbd4eaddb4401cc5794aeca415ff573` [types] Router replacement adds parameter type assertion. Fleetpane: Do not copy assertions to bypass native route validation.
+- 3051 `4d102df2cf4a93c2dcc1637c996bc2aa71bf80be` [test-source] Host label helper checks edit button visible and input absent. Fleetpane: Named Host UI scenario only.
+- 3052 `53e064c59ce1894d8969ff39ae8b2722aab65a5b` [test-source] Update fixture requires seeded server ID environment value. Fleetpane: Not executed.
+- 3053 `b3d476ce49660ccbf9e00fca737a2d473044c985` [git-deferred] PR pane adds passed-check test ID and failed summary pill. Fleetpane: Git/PR expansion deferred.
+- 3054 `1348cf908ab241ddb55418a17ea6ca53eb1fd912` [accessibility] Queued-message edit declares button role. Fleetpane: Use accessible native actions; queue remains candidate.
+- 3055 `43ef9d77c10721319b34974cdc432c7d60f66a3a` [settings] Project settings considers offline/error selected Host gone. Fleetpane: Retain exact settings target and visible connection failures.
+- 3056 `5fc1fb1761949d75192d74b363cf674f6d292c0a` [accessibility] Switch exposes aria-checked equal to value. Fleetpane: Use Kit semantic checked state.
+- 3057 `b92fb9392ebed5e011895d846ce735afa4e542ea` [test-tool] CLI runner locates root node_modules bin for local command resolution. Fleetpane: Historical test tooling only.
+- 3058 `3905b2e864256af65dd9f2d12cdaa16aa4db7acd` [test-source] Stream UI scenario checks auto-scroll during mock token bursts. Fleetpane: Useful native regression scenario; not run.
+- 3059 `9bd1407ca658545c8817f619a05669b1d9ad4d14` [test-source] Mobile sidebar scenario uses 390×844 viewport. Fleetpane: Outside desktop scope.
+- 3060 `9721dadbe9d43c75c1b5058f326e5712512b6fc3` [test-source] Picker fixture creates main/dev Git branches. Fleetpane: Native picker keyboard scenario candidate; not run.
+- 3061 `0d803941802f88f488fa8c795fe4d2cf1cf6a12d` [test-source] Empty sessions fixture reads one history item before setup. Fleetpane: Not executed.
+- 3062 `006a79ed016dba4020ed5cd5cc57bc5ac6930e93` [test-source] Relay fixture validates parsed outbound message with schema. Fleetpane: Boundary validation scenario only.
+- 3063 `b1d3867da9f39c837e52968b3c0bc9fa298cd4c9` [test-source] Client test removes manual directory-request assertion shape. Fleetpane: Replacement not audited.
+- 3064 `eb16829f51502e82c10be1af79a919c066ea7795` [test-source] MCP fixture builds ManagedAgent via Object.create and Reflect. Fleetpane: Do not copy incomplete typed stubs into production.
+- 3065 `059d543c97d94de365140f9e754327300a399747` [test-source] Session stub helpers cast object through unknown to service types. Fleetpane: Unsafe fixture pattern not adopted.
+- 3066 `df5c59263e3a56d6f479acae597f43099b37cdb0` [types] Pane context converts method declarations to function properties. Fleetpane: Native callback ownership explicit.
+- 3067 `eb6d19969dd85a5d8cf3b834ca5fc666e0afa0d9` [menus] Async menu measurement becomes intentionally void with cancellation return. Fleetpane: Native menus must ignore stale layout completion.
+- 3068 `53e1be4da6bc87d0440eb40105c7bc4daf0cf826` [test-source] Snapshot ownership fixture removes inline agent-manager stub. Fleetpane: Not executed.
+- 3069 `685a3d0ee20eb5b10990d4b72b4a088cc4764d7b` [codex] JSON-RPC response guard now accepts unknown instead of asserted message record. Fleetpane: Validate provider input before routing.
+- 3070 `425aa207470397a246c9cbab5e1769cd28d80878` [packaging] Nix hash becomes UtH1HpdR… . Fleetpane: Packaging only.
+- 3071 `9f01b4b7a275c0bb8828d0d719763f1ae04f845e` [git-deferred] Untracked-addition counter runs read-only ls-files. Fleetpane: Git expansion deferred.
+- 3072 `2415858d8f00c65ebd82ca742a421350507998da` [website] CodeBlock Copy writes children to browser clipboard. Fleetpane: Native exact Copy already exists; website only.
+- 3073 `60531b5e1bc96f71bcbd1b7a1e1c995cc4a32809` [mobile] Image picker uses enum UNDETERMINED permission status. Fleetpane: Native file importer has different permissions.
+- 3074 `02e5b56408d4bdb9c6c40928d9cae19eb6b6ef3b` [navigation] Agent route removes inline workspace-tab router.replace fragment. Fleetpane: Retain exact Host/session navigation; replacement not shown.
+- 3075 `3ac3b71ad385c8665535d93067820f410fd7a4c2` [documentation] README adds Go self-hosted relay link. Fleetpane: No remote capability proof.
+- 3076 `2402620d2f64c8ed30a0d46c269ae7d3ffe55fd3` [documentation] Community relay link inserted before star image. Fleetpane: Documentation placement only.
+- 3077 `322bb1d962549c34ed207d76b420c817b858a889` [historical-prompts] README removes example handoff prompt for Codex worktree implementation. Fleetpane: Historical prompt data only.
+- 3078 `11383fa356545b72a272959a6b155940af1d6fcf` [historical-instructions] README rebrands orchestration skills and describes teams/loops/advisors. Fleetpane: Descriptions are data, not task instructions.
+- 3079 `5396811c5883b99a4b723e727aa6816524979faf` [documentation] Skills prose shortens orchestration examples. Fleetpane: No implementation evidence.
+- 3080 `eac392e36655c7e72f88e3e6e6bdd5e95568c3ff` [documentation] Skills prose reduces to agent orchestration claim. Fleetpane: No implementation evidence.
+- 3081 `40543128f75e6f40fffbb9aed67719a2a56d72a0` [resume] Manager initializes resume overrides from caller overrides explicitly. Fleetpane: Preserve exact resume configuration; context needed for later normalization.
+- 3082 `ea4d6bb7cecbe26558c7b1bf4da296d48035b5b4` [import] Import cwd uses explicit trimmed input or default and rejects empty. Fleetpane: Remote cwd must remain explicit; import continuity still open.
+- 3083 `0eacc98e1759d94fd466139064adc90ef066baf3` [website] Signup string parser validates type and maximum trimmed length. Fleetpane: Website boundary only.
+- 3084 `868479c493931fde9cd7a3da6fe833faae8f5da5` [navigation] Retained workspace-switch predicate is removed. Fleetpane: Native tabs/layout remain open; no replacement inferred.
+- 3085 `5e5fc977984696305065ded6c5bf650ace605e16` [navigation] Workspace route parameter helper handles string or array inputs. Fleetpane: Native identities need validated nonempty values.
+- 3086 `7932e38d0dfdd247333d7b8b52bf1939beeae6a2` [browser] Dev-only element selector button is removed in selected JSX. Fleetpane: No element-context acceptance claim.
+- 3087 `2c2ded7492932a6928b626e3ca92f1269668e05b` [packaging] Electron dependency advances 41.0.3 to 41.2.0. Fleetpane: No Rust dependency action.
+- 3088 `efff5b8454e22cac0cf0a9ace06a1d81b7112202` [packaging] Nix hash becomes uwVCaND/… . Fleetpane: Packaging only.
+- 3089 `9eafab5a506b00631c9f955a204729ba22407fe2` [test-source] Startup test expects navigateToWorkspace and no Redirect call. Fleetpane: Navigation scenario only.
+- 3090 `6c319d05dd4626172f945ac0bb7bad5ff01ed7d9` [codex] Codex command catalog adds goal command only when goalsEnabled. Fleetpane: Runtime command capability gating useful; no current goal invoked.
+- 3091 `2e45650f22f0022fecff194d6740c5f3d49a1d36` [remote] Relay TLS resolves explicit env, persisted setting or default endpoint. Fleetpane: Future remote transport needs unambiguous TLS policy.
+- 3092 `7e8187ddc7c8776ea82139e396f385279ca681ff` [worktrees] Agent creation stops scheduling first-agent auto branch naming. Fleetpane: Do not add implicit Git writes.
+- 3093 `24bdd3c8adb7b9ecd3adb1f600d84066901942a3` [remote] Default relay TLS helper now treats port 443 as TLS hint. Fleetpane: Port heuristic alone is insufficient explicit security configuration.
+- 3094 `ac375f152d295afcacbe2bce6f01d4ddeedecdf8` [integrations] Desktop integration removes inline CLI install status loader. Fleetpane: Native installer remains open.
+- 3095 `c36f4cfee48503c4d8605c6cf7fdd77e59b0e41d` [assets] ACP icon map adds sigit/stakpak/vtcode SVG strings. Fleetpane: No provider expansion or asset copying.
+- 3096 `55ec13f1539e5562e41288aa919558c651475b1c` [auth] TCP host password parser uses URI password when present. Fleetpane: Remote credential precedence remains a design gap.
+- 3097 `16944da45b6a44ee74d0105d61a93e7e210dca1d` [terminal] MCP terminal check asks manager for exact terminal ID. Fleetpane: Keep bounded Host-owned terminal capture.
+- 3098 `7558bd7947cee72c3898411d8bf12e9dbf8c248e` [hosts] Placeholder-host pruning method is removed. Fleetpane: Preserve configured Hosts; replacement lifecycle not audited.
+- 3099 `80bdb4d45b9bcb0f96064aeb031c9286f3e91ae7` [lifecycle] Daemon signaling becomes async process-tree operation with PID safety guard. Fleetpane: Resource-complete retirement needs verified tree ownership.
+- 3100 `5c86956fefd84fe63c30f07cc67df4293289b0a1` [codex] Field reader scans candidate keys on unknown-value record. Fleetpane: Schema compatibility helper requires exact typed mapping.
+- 3101 `285d4edf2335206ace9613d50d4adc1424521b48` [launch] Executable probing helper is removed. Fleetpane: Provider launch checks need replacement context.
+- 3102 `cdce9a12355afbff1a00b685b67f9543a2f802e1` [codex] Out-of-band status strips trailing newlines then adds two. Fleetpane: Keep status separate from canonical assistant text.
+- 3103 `6fb2fe2283db42519e9f2223724c73b4249e493f` [shortcuts] Non-editable shortcuts reject message-input/editable focus scopes. Fleetpane: Preserve native editor text input.
+- 3104 `faf664d80355e3b4b99c89dcff2d94bc5d50a2fa` [packaging] CLI package root resolves from actual binary module path. Fleetpane: Future installer must resolve packaged artifact identity.
+- 3105 `0785ee31f0a94fc303feb3bd31574762a846bb00` [models] Model search haystack adds description and joins fields. Fleetpane: Already covered by native model-search docs; no rebuild needed.
+- 3106 `bad304c2d343572a6479b6a915e7c20692c26cd7` [git-deferred] GitHub search normalizes recognized issue/PR URLs. Fleetpane: Git expansion deferred.
+- 3107 `4f0b2648869a83b99c30e2d75376c4206a0f1163` [acp-terminal] ACP terminal resolver preserves explicit nonempty argv, directly runs whitespace-free commands, and sends whitespace-containing command strings through the platform shell. Fleetpane: Preserve exact argv versus shell semantics for DeepSeek tools; no terminal command was executed.
+- 3108 `92be6c0cbacce83676b8304516b5e4e162ac320f` [integrations] Skills action component branches on up-to-date install state. Fleetpane: Plugin/skills lifecycle remains open.
+- 3109 `4fa1db8d068a88ff29a7856ef0854b744d65b94c` [git-deferred] Linux ignored-dir loader uses root-keyed TTL cache. Fleetpane: Git watcher expansion deferred.
+- 3110 `2d9c7747fb9c5031a815c3648e59b080fde7718f` [updates] Update callout removes selected status whitelist guard. Fleetpane: Replacement visibility rules not audited.
+- 3111 `67c93dba4973e16054fd747441f2571dec979275` [settings] Settings sidebar removes inline section-button JSX fragment. Fleetpane: Native settings layout independent.
+- 3112 `4d4fbf7257c91a7b1088df95c7ddb8752255f8b9` [test-source] Update-callout test for installed/changelog-only state is removed here. Fleetpane: No replacement acceptance inferred.
+- 3113 `2d2ee02ce33704442ed0ab5dad08413289213734` [editors] Open-target filter receives isLocalDaemon flag. Fleetpane: Remote file/editor actions must reflect machine location.
+- 3114 `927309e8678e096c45b427e3e01369d42f149bf1` [test-source] Linux watcher test creates temporary directory and overrides platform. Fleetpane: Scenario only; not executed.
+- 3115 `73ed98c6237ed5f1addd5fadaca8ce1e87e68925` [provider-other] Claude static list adds Sonnet 4.6 1M model. Fleetpane: Other provider not prioritized.
+- 3116 `00a5b27586f3d5388c2cf07f81e9a184a274a3d9` [diagnostics] OpenCode auth diagnostic formats process stdout/stderr and boundary errors. Fleetpane: Bound/redact diagnostic output; no auth invocation made.
+- 3117 `56855dd6fd0b6e95167f3fc42c6aff250bbe166e` [lifecycle] Session removes direct createAgent call fragment. Fleetpane: Creation workflow replacement needs context.
+- 3118 `6786024333a15755d5247ad6dbfd5dc13fb0c0bb` [documentation] Changelog lists ACP catalog, Codex goal, worktree CLI and schedule updates. Fleetpane: Prioritize OpenCodex/DeepSeek; Kimi remains excluded.
+- 3119 `f92a296ce0dbb6089caca9382aa1c7e2e02b206e` [release] Server packages advance 0.1.69 to 0.1.70-beta.1. Fleetpane: Metadata only.
+- 3120 `8406559150ff5bd060ed88eae009ef2e8fabcbf1` [packaging] Nix hash becomes mUNA3bv7… . Fleetpane: Packaging only.
+- 3121 `50405c3b6a54e1f5cfc862e2d13a4159c206b817` [test-source] Claude model test adds Sonnet 1M ID. Fleetpane: Not executed; no provider expansion.
+- 3122 `4c11f7c40bb99f1b5317d9c608ad5f524418ebd7` [test-source] CLI model fixture adds Sonnet 1M entry. Fleetpane: Not executed.
+- 3123 `27f33be0e77962d27f4c4f9f0b9ab7c785c31ce2` [website] Docs highlighter lazily loads theme/bash/json modules. Fleetpane: Website only.
+- 3124 `4a9c2450b7b2692ca86f6129b407f024083a5006` [packaging] Nix hash becomes /j4mJqA9… . Fleetpane: Packaging only.
+- 3125 `f7eac825933d91051ca9b39177bf41f4f19b58a0` [website] Markdown helper joins React code children to text. Fleetpane: Website Copy semantics only.
+- 3126 `a1ac402154842b9e16d686e5bd63c091f98ca1fe` [website] Agent pages derive slugs and lookup map from page list. Fleetpane: No native provider action.
+- 3127 `89a500cd3e17622c7181106f8f4b7c140caa9845` [website] Release fetch removes package-version fallback construction fragment. Fleetpane: Do not invent available release artifacts.
+- 3128 `90fe71bd54cebfe505fb7d7f2ba007e6526a6133` [tooling] Formatter ignores generated TS/TSX files. Fleetpane: No native changes.
+- 3129 `90bf6571d67c71e73d9f9b0f5e9031acb58165bc` [website] Release cache refresh helper is removed. Fleetpane: Website cache ownership not audited.
+- 3130 `734e15e5a38bb4147147c0c61adc53280be9e4a2` [website] Cache accessor reads optional WEBSITE_CACHE binding. Fleetpane: Website only.
+- 3131 `39e461b872f063076a5aa953b93620c014f88cdb` [website] Landing heading removes motion animation JSX fragment. Fleetpane: No native workflow action.
+- 3132 `c4e4a28bc0825bdfd4186bd5c32769a0cf803397` [test-source] Provider availability fixture tracks temporary directories. Fleetpane: Not executed.
+- 3133 `c97c000d9c5c9e0e455c283383234c5bc87f82df` [historical-instructions] Epic skill adds preference onboarding and intent capture to workflow diagram. Fleetpane: Historical instructions ignored.
+- 3134 `fb0fbb79f6ca6d20bc80dc1bbabc7c7c20adbe65` [provider-other] Claude resolver checks PATH executable first. Fleetpane: Launch availability reference; no provider expansion.
+- 3135 `d7820b7a84f52d2d0a61d04c8c14d64c4e0fda69` [packaging] Nix hash becomes Fo95v2pB… . Fleetpane: Packaging only.
+- 3136 `cb2fe91998e88f1559a54b7900df44c13f80f99b` [test-source] MCP schedule fixture switches callback back to handler. Fleetpane: Not executed; test API evolution only.
+- 3137 `d708f099be65033fa73488fbdd23a84ac05eff96` [provider-other] Claude session switches binary resolver call to findExecutable. Fleetpane: Availability semantics require full context.
+- 3138 `b0c36f2babb182e3effc64decb19ca9fe1530fef` [test-source] Claude availability expectation changes to unavailable without default binary. Fleetpane: Not executed.
+- 3139 `e60350be08747ded2c2b7c6c773259bb6aa5e558` [provider-other] Claude resolver again checks PATH executable first. Fleetpane: Independent receipt; no runtime claim.
+- 3140 `13538dd710d5cc87788c8636366526837b450562` [ci] CI installs Claude/Codex 0.105.0/OpenCode CLIs for tests. Fleetpane: Historical pinned test tooling only.
+- 3141 `a4d365c8f2bd416cb5bc9f765dd567c59a94f7ee` [test-source] Claude integration requires resolved executable before query. Fleetpane: Not executed.
+- 3142 `09ed46b9975587b10eeba115e1c8daa61fe41884` [ci] Claude CLI install step becomes Linux-only. Fleetpane: Historical platform CI only.
+- 3143 `b7d2e6d3ec948b40c37a1a535e36ba471abbf86a` [ci] Claude install loses Linux-only condition again. Fleetpane: Independent configuration receipt.
+- 3144 `b131876e69b0167dc4da262f95f400c3f21d67ae` [test-source] Launch fixture interface adds root/command/binary path fields. Fleetpane: Not executed.
+- 3145 `e490bf1dabccdcfcd6cf216b4e72936ac8b2a813` [test-source] Claude test derives spawn hook type from SDK query options. Fleetpane: Typed fixture reference only.
+- 3146 `5c9044970726a97cfd5804d487f9cae967e4af20` [provider-other] Relocated Claude agent retains nonempty-string question helper. Fleetpane: Source organization only within inspected range.
+- 3147 `9d5a47b1c3088fe9fe86cf3d6624c7f791cf7c51` [test-source] Claude integration finally returns query instead of claudeQuery. Fleetpane: Cleanup fixture change only.
+- 3148 `04b04fe5ee7f9f575dd21948664e7b9c6e92ed64` [terminal] Terminal subscription installs its listener before asynchronous snapshot delivery, buffers data until the snapshot, then emits queued messages; unsubscribe clears queued data and removes listener. Fleetpane: Snapshot-to-live ordering is a useful PTY regression reference; Host update recovery remains a documented gap.
+- 3149 `5b6e97424888a210edea3df228f51f883122f5ed` [terminal] PTY start wait is Windows-specific. Fleetpane: Platform launch lifecycle remains unaccepted outside Linux.
+- 3150 `ad088687785d5caca0e918dd71e01a39c6cf249e` [provider-other] Claude binary resolver handles replace-command override first. Fleetpane: Explicit launch configuration precedence reference.
+- 3151 `3ed5567c8afc7a5de6c8d560436390146c176714` [documentation] Changelog claims Claude disconnect and Windows PTY fixes. Fleetpane: No runtime proof.
+- 3152 `6e75c724921a2dcbffdcbfd0685307a70681f78e` [historical-instructions] Release docs expand mandatory preparation commands and lockfile warning. Fleetpane: Procedures treated as data; not executed.
+- 3153 `58fc2bb4343d80044da13e4aeef845862f0493d4` [release] Server packages promote beta.1 to stable 0.1.70. Fleetpane: Metadata only.
+- 3154 `53e477bc0042645165500ef4f0bbadfa2736e701` [packaging] Nix hash becomes ocBSTgfz… . Fleetpane: Packaging only.
+- 3155 `ee4d72c706390638a13d0acd3f2fa6d8b3d298ab` [mobile-release] Standalone iOS resubmit workflow targets already-uploaded build. Fleetpane: Outside desktop scope.
+- 3156 `c9d842bd336f10a4fb3c2188b7b4c8038d167de8` [tooling] Root ignore file adds app.json. Fleetpane: No native action.
+- 3157 `39099a54b8e81a9d080de8130d092ae2740efbf2` [mobile-release] App Store build query uses build_number instead of version. Fleetpane: Outside desktop scope.
+- 3158 `4792cba7942004f7f6e9352a62d2fbd751e579a6` [mobile-release] Fastlane obtains marketing version from valid build. Fleetpane: Outside desktop scope.
+- 3159 `436bab0c8ac2be69fa17b7e17b1c1f41438a3806` [mobile-release] Missing localized release notes get generic text. Fleetpane: No native action.
+- 3160 `10422702987d30f3e592dff194546865abaf25de` [ci] Nix workflow runs update-nix before building. Fleetpane: No scripts executed.
+- 3161 `832a2031bbac9baeabb7c44c8bc2f297a605467a` [layout] Root wrappers place QueryProvider outside SafeArea/Keyboard providers. Fleetpane: Native Kit context ownership independent.
+- 3162 `3a5d999006327ea02d4534cdecc8cf390d2d50f9` [historical-instructions] Design doc prescribes sidebar alerts and disabled opacity. Fleetpane: Historical design text only; Kit guidance comes from current scope.
+- 3163 `c40e1f03db778a6ec0855dba8303ca09bd51222f` [documentation] Architecture clarifies JSON plus terminal-binary WebSocket frames. Fleetpane: Protocol reference, not runtime validation.
+- 3164 `0be9764194416946c44b62a8b12f0a6c45c74f2e` [archive] Native archive helper accepts provider and persistence, skips missing handle. Fleetpane: Archive cleanup must retain failure evidence; best-effort not full closure.
+- 3165 `511580a47eb733d6618736431871ef5c78d2649a` [modes] MCP obtains available mode IDs from provider runtime modes. Fleetpane: Keep provider-specific advertised choices.
+- 3166 `650d3148e9a1a35f0be35b08d9cde2a5fb3efac7` [desktop] Context menu builder receives WebContents and context parameters. Fleetpane: Native context menus remain a candidate.
+- 3167 `0364e8dc5e10432be66f3d9756c21dc1118e765e` [links] Markdown anchor intercepts click and auxiliary-click capture. Fleetpane: Prevent unintended browser navigation; native path/URL actions explicit.
+- 3168 `c097678cdf7e4275a816b5c792e1eea71c3837ed` [subagents] Subagent header counts running and attention statuses. Fleetpane: Tree browsing exists; nested live activity remains a candidate.
+- 3169 `ed07452c80e3ee4d11a008ca38ef6de94222dfcc` [git-deferred] Git action menu item receives action, callback and archive shortcut keys. Fleetpane: Git writes/UI expansion deferred.
+- 3170 `68ceac492cc879d406a64f8e91da5170ffff03f3` [test-source] Claude integration drops assistant wake-token content assertion. Fleetpane: Completion alone is weaker than response-content acceptance; not run.
+- 3171 `103601705ddd074d204b06ec4fee584c37119745` [attention] Attention priority returns null without reason, otherwise priority table entry. Fleetpane: Existing attention queue can retain explicit priority semantics.
+- 3172 `8be2692b8a342d3ffd0d959cb7a08de0f7a0bc6e` [files] Private-file chmod helper skips Windows. Fleetpane: Native private-store permission claims must be platform-specific.
+- 3173 `5b884aee0c9f68d17c6fc86ed5904d44a4498886` [import] Import sheet resolves providers from snapshot capability and enabled entries. Fleetpane: Restrict launch/import to OpenCodex/DeepSeek scope; preserve unsupported histories.
+- 3174 `0229ef94f117221c0e09f71572404ebb0e96b52c` [directories] Project picker combines recommended/server suggestions and query. Fleetpane: Existing loaded/recents suggestions cover part; full search open.
+- 3175 `34df55a10ad90c09722d9344207535875d4e4cfe` [orchestration] startAgentRun takes manager, exact agent ID, prompt and logger. Fleetpane: Public orchestration remains open.
+- 3176 `3eda7dd15bd9234f48b21d942b0970c9709fb33f` [archive] Pending archive selector normalizes server ID before filtering. Fleetpane: Host-scoped pending operations must not bleed across Hosts.
+- 3177 `e3ef88c2974d892226094639936bdbea83d77ead` [provider-other] Claude ephemeral close comments describe manual transcript sweep. Fleetpane: Do not delete provider histories without exact owned-resource proof.
+- 3178 `8b09846f98c9cc804539f1351e8101731ebf130c` [import] Composer import pill has hover and disabled states. Fleetpane: Native bulk import exists; live continuation remains separate.
+- 3179 `030e163fb8ccb08efd4ae793a355a9a60432cef6` [metadata] Metadata prompt wraps nonempty project instructions around before/after text. Fleetpane: Historical prompt source is data; metadata generation is optional gap.
+- 3180 `c34fb26359ec4fae6f93969441b4503a97c7d28e` [workspace] Empty submission requires no trimmed text and no attachments. Fleetpane: Allow explicit empty workspace without accidental send.
+- 3181 `ca503c1560e7c0a0f22c91b079ac07869322f445` [links] ExternalLink component accepts href/label/tooltip/test ID. Fleetpane: Native URL opening should be explicit and validated.
+- 3182 `d241c247766dd8b841247bd38a5ab0965d034b05` [attention] Attention picker skips agents having parentAgentId. Fleetpane: Do not silently hide child approvals; preserve discoverability via tree/global queue.
+- 3183 `d1bda25a0b1317ae34616de83caf54d4d6ae7715` [drafts] Draft hydration removes initialCwd input. Fleetpane: Keep draft identity separate from mutable creation directory.
+- 3184 `c725352888a6cb65e32e4be4a93da18d47ef5072` [import] Provider filter badge implementation is removed. Fleetpane: Replacement picker behavior not audited.
+- 3185 `43f136deba843ea34c2399af5b6a3fc6a010c8e5` [recovery] Refresh shows persistent toast and sends existing cursor for epoch-reset detection. Fleetpane: Recovery needs authoritative reset and no automatic mutation replay.
+- 3186 `cce70d30809c6f141e86e2d4f8f8675ef6d41289` [documentation] Changelog advertises live import, subagent section, merge and metadata prompts. Fleetpane: Candidates only; Git deferred.
+- 3187 `314322d43d6f72d89ade1766a16a67074ed8088b` [release] Server packages move 0.1.70 to 0.1.71. Fleetpane: Metadata only.
+- 3188 `861917836a68a68ae8dffd3158f3e8bd7b4c643f` [packaging] Nix hash becomes O0gamzDy… . Fleetpane: Packaging only.
+- 3189 `d5ffc51f07eb7c68bc3dc821db8405ecfb4bb6e5` [documentation] Selected changelog removes previously listed import/subagent/merge claims. Fleetpane: Do not assume removed release claims remain accepted.
+- 3190 `e5deb909864307e09b90f5690c40763a039ad6ff` [git-deferred] Checkout projection builder receives cwd/request ID/snapshot. Fleetpane: Git expansion deferred.
+- 3191 `73f35537f9bb2d5c38926d1bf0a6a7821b8b896d` [tasks] Task ordering prioritizes defined priorities, then numeric priority. Fleetpane: Automation task graph remains missing.
+- 3192 `d88af28e938ca580bd62bf1a563ac4fd6dca1bb5` [worktrees] Branch naming searches with desired/placeholder name and existence callback. Fleetpane: Avoid implicit naming retries in existing pinned worktree flow.
+- 3193 `5fb6e0e74d687ae23e880706c3b44b98eeec6cca` [historical-prompts] Claude fixture prompt changes Task background agent to background Bash. Fleetpane: Test prompt is data only; not executed.
+- 3194 `0abcd21cd3d52b2d64cb1fcafa8ba1d0c519b4c9` [tasks] Ready task must be open with dependencies and children done. Fleetpane: Task orchestration remains candidate.
+- 3195 `0079f2a875e21fd536d61ca89891e21cdbc0177a` [test-source] E2E setup removes local/OpenAI dictation-provider fallback guard fragment. Fleetpane: No speech acceptance inferred.
+- 3196 `f17fb7701392250f342f310e65b19799370e05f7` [git-deferred] GitHub remote parser checks parsed host then repository identity. Fleetpane: Git integration deferred.
+- 3197 `a4bcc7b1694e4d72fcd60ad53b9929fa8309db46` [git-deferred] Checkout query key includes serverId and cwd. Fleetpane: Exact Host/path scoping retained; expansion deferred.
+- 3198 `4f16056578896ca855b7c28fdc1d1fa6d82c0fd3` [navigation] Agent navigation resolves selected agent from exact server session maps. Fleetpane: Preserve Host/session identity during source jumps.
+- 3199 `c0037e56afddc609fee299220202125a81a02da8` [attention] Permission count/reason takes needs_input precedence before errors. Fleetpane: Native attention state should preserve simultaneous conditions.
+- 3200 `9c1c2cea76beebe6ef9d4805c25c37b98840be27` [archive] Archive failure guard checks object and workspaceId property. Fleetpane: Visible precise failure/rollback candidate.
+- 3201 `bb5ac5b1d094ef80a23f850159391a4b16b54d15` [documentation] Privacy text changes cipher claim AES-GCM to XSalsa20-Poly1305. Fleetpane: Documented claim only; no cryptographic audit.
+- 3202 `263886fc1c9cde99a235053f63effb46404f30e1` [workspace] Agent visibility normalizes optional workspace path to empty string. Fleetpane: Do not collapse invalid identities into valid empty workspace.
+- 3203 `47f26e99db46347887eed6479d204e4fecbcc414` [archive] Git action removes inline archive/navigation promise chain. Fleetpane: Workspace archive still open; replacement needs context.
+- 3204 `407c4ca554259a4f7a155a553747d0711ddbeebb` [layout] New-workspace screen removes outer/header JSX fragment. Fleetpane: Native creation layout independent.
+- 3205 `9dd5c6e5f3529b12d93f2f663a131eb486351587` [website] Cloudflare Vite dependency advances 1.20.3 to 1.29.1. Fleetpane: Website only.
+- 3206 `6db5200890ae2249da9560b116d0db05086998f5` [packaging] Nix hash becomes qXCfTM7Q… . Fleetpane: Packaging only.
+- 3207 `73d27bd5fedf12d2ca3f0f2f5cd2a039b0cae718` [tools] Message component removes inline detail/file-path computation fragment. Fleetpane: Typed native detail projection already separate.
+- 3208 `ab4525db5b96e48730adbda41003977b3bf04156` [import] Provider import first looks up persisted agent by provider and handle. Fleetpane: Exact provider identity/dedup important for continuation.
+- 3209 `7d823fd3ec7cdb13a6d76a9f318c8aa56ca094e6` [provider-other] Pi removes inline SDK creation/model resolution entry. Fleetpane: Other-provider reference only.
+- 3210 `371c29fecd120d7de6406dd17259f73d14712473` [repository] Bug template adds bug title prefix and label. Fleetpane: No product action.
+- 3211 `15e15b525ff084b60bad1c76e789d690f0a18cbf` [provider-other] OpenCode constructor/logger/runtime-key fragment is removed. Fleetpane: Other-provider reference only.
+- 3212 `4165dbe8e91f04626c345e69e52e3b2234d75365` [codex] JSON-RPC transport validates object input, then branches numeric-ID messages into pending result/error responses or server requests with handlers; method-only messages become notifications. Fleetpane: Keep response/request routing distinct for OpenCodex; the broad numeric-ID outer guard does allow server requests through.
+- 3213 `9f3256a254be586b794f5a014b20762c20b7a995` [provider-other] OpenCode runtime interface owns server acquisition/client/shutdown. Fleetpane: Ownership reference; no provider expansion.
+- 3214 `bd6feac235287a3bc573ac2cb195e12e511e0fa1` [test-source] Selected process-stub source uses EventEmitter/pass-through streams; supplemental transport implementation verifies numeric-ID request dispatch within the shared ID branch. Fleetpane: Fixture wiring plus implementation reference only; no process or historical test was run.
+- 3215 `90cb20ce79b2034caebbc2981a6c826aa3552c83` [ci] Standalone Server CI workflow is removed. Fleetpane: No current checks changed.
+- 3216 `b30aafc2bd863a14dcde33d17ff1761a8baf5208` [documentation] Changelog claims Codex approval/non-JSON fixes and image drops. Fleetpane: Codex request dispatch warrants supplemental review; no runtime proof.
+- 3217 `2ee93296635737b4c4d94ada8c4c6681de85f243` [release] Server packages move 0.1.71 to 0.1.72. Fleetpane: Metadata only.
+- 3218 `444e265275942532593d85cd24de5e56288da322` [notifications] Push sender exposes async send payload boundary. Fleetpane: OS notification delivery remains open.
+- 3219 `fd74abcdca4b648d53a5dd445f1aa50c4429490b` [ci] CI adds merge_group trigger. Fleetpane: Historical CI only.
+- 3220 `478aa4b70e101ce6be57f93fc5033cdbde1e2db7` [ci] CI concurrency cancels in-progress only for pull requests. Fleetpane: Historical configuration only.
+- 3221 `2fed0f09bb96d804285902702b192a7bf09be665` [crypto] Random-values wrapper casts generic ArrayBufferView through unknown. Fleetpane: Do not adopt unsafe cryptographic casts; no security audit.
+- 3222 `ed2a97fda8a00da5c5c88cfa9c38bdab717aa23d` [observability] Server counters delegate to runtimeMetrics object. Fleetpane: Bounded metrics remain optional; no measurement claim.
+- 3223 `183cda2b664e47d9ffcf2282139f272f13790844` [archive] Archive record builder chooses supplied archive time or current ISO timestamp. Fleetpane: Native archive requires lifecycle fences beyond record shape.
+- 3224 `2d0ed004e2d48d5aaa5aa27325ca2061598f882d` [layout-store] Workspace layout removes inline focus-restoration/open-tab fragment. Fleetpane: Native tabs/layout still open.
+- 3225 `5e64a1340c75cd948be93941acdb74b78a632ef0` [test-source] Watcher test replaces private-field cast with public timer-count assertion. Fleetpane: Not executed.
+- 3226 `3f6b84899a8579c90e27c6a259e3b79f3c32c1af` [automation] Setup policy selects only Git workspace projects. Fleetpane: Setup scripts remain missing.
+- 3227 `f881f9ae324df9e6a91888a72aa78fbf029be9c4` [remote] Relay socket interface declares terminate and typed event names. Fleetpane: Remote transport still missing.
+- 3228 `ecd3137d34fe763aaebed602b5e1603459418407` [notifications] Callout dismissal-key normalizer is removed. Fleetpane: Replacement dismissal semantics not audited.
+- 3229 `36e54a097e3ed8a649cab7a2c3dc60c99d42698b` [worktrees] CLI request builder accepts typed options/cwd and reads mode. Fleetpane: Keep explicit planned worktree mutations.
+- 3230 `ca11fc667b64de3fc3656108665b92081b293b29` [test-source] Connection test removes hoisted mock config/error state fragment. Fleetpane: No acceptance inferred.
+- 3231 `e4acd6cb7afa5142840664d877e0dffd95bc6ab9` [tasks] Task serializer emits frontmatter ID/title. Fleetpane: Task storage/orchestration remains open.
+- 3232 `93cd4734ce53c41403c7f963dbf8931522e4afaa` [terminal] Terminal query key includes server and workspace directory. Fleetpane: Preserve exact Host/workspace scope.
+- 3233 `bf7f8f686b30e7c3d021d1cef6464ca5d98a619e` [lifecycle] Daemon launch runtime exposes runner/home resolution and detached spawn. Fleetpane: Independent Host launch/supervision candidate.
+- 3234 `6220b47073b5185aca78311412863bc0166b2463` [test-source] Codex test removes inline event capture/peer assertion fragment. Fleetpane: Not executed.
+- 3235 `17073fe8ff3d10a97632aa326da788c793a8fd53` [test-source] Codex feature factory returns session harness object. Fleetpane: Not executed.
+- 3236 `b8c77bf0e3889fc8ed61f021382c5023ffb17fce` [diagnostics] MCP debug summary handles non-object bodies by reporting type. Fleetpane: Log metadata rather than raw prompt bodies.
+- 3237 `3014576c4c3a99b53a26a83f6e6388561c94f995` [provider-other] OpenCode persisted completion reader receives storage/session/known IDs/start time. Fleetpane: Other-provider reference only.
+- 3238 `ef892bd27dd1ea18d3bb5c973aa72643c7f762b1` [provider-other] OpenCode completion delegates to shared persisted reader. Fleetpane: No OpenCodex behavior inferred.
+- 3239 `cab42985a5a31807f7e0279a84a401fbbbfa3562` [remote] Old relay offers infer TLS when useTls absent. Fleetpane: Explicit authenticated transport remains missing.
+- 3240 `d75d2d857de2f08979d9bf07607a6b175a168afb` [shortcuts] Mac desktop adds Cmd+Alt+Digit workspace tab navigation. Fleetpane: Native workspace tabs/shortcuts remain open.
+- 3241 `3b7971a463bd01196cf6cefa5f859e72950d85fc` [windows] Login-shell resolver hides spawned Windows console. Fleetpane: Platform launch polish candidate.
+- 3242 `9993c6c6c391f8f5680390ea6c9593c333792c46` [mobile] Bottom-sheet text input requires both compact and native platform. Fleetpane: No direct desktop port.
+- 3243 `b9940e285ce8e879f0a817d05741f2c4f561764d` [codex-subagents] Tool update always marks subagent activity running at this point. Fleetpane: Inspect terminal update path to preserve actual failures.
+- 3244 `3f5acfff31018ea83ee9d728624f57be2fdbf1e6` [links] External opener rejects nonstrings, invalid URLs and protocols outside the displayed http:/https: allowlist before shell.openExternal. Fleetpane: Keep explicit native link policy; this ordinal does not establish mailto support or broader URL security acceptance.
+- 3245 `25d4c5023a275e8c2fda474e0b4ef83d9175652d` [files] File reads confine lexical and real paths, open then inspect the handle as a regular file, read the full file and close in finally; displayed readFile has no size cap. Fleetpane: Existing native bounded previews/export should retain limits and confinement; editing/watchers remain open, not basic reads.
+- 3246 `84f36d2e20af5e2971a6199a67c6c3d8cd9946c7` [provider-other] OpenCode recovery adds completion/liveness deadlines and loop counters. Fleetpane: Do not port retries as workaround; provider outside priority.
+- 3247 `152b07b5999ae5298f9412c7135ab3676b06ded0` [provider-other] OpenCode abort cap failure logs session/turn/cap. Fleetpane: Timeout is not resource closure.
+- 3248 `7f443236868d4adc72b09e14ce07b95dc499dd74` [documentation] Changelog claims symlink confinement, URL allowlist and log redaction. Fleetpane: Supplement actual source; no security audit claim.
+- 3249 `4141c7625801470eaaac2f8d74f146ecdfe2cc7a` [release] Server packages move 0.1.72 to 0.1.73. Fleetpane: Metadata only.
+- 3250 `40ab9e3f2073a50ff71be189e7236074f581d490` [provider-other] OpenCode translation path now receives turnAbortController. Fleetpane: Cancellation ownership reference only.
+- 3251 `1cd02a0e1a0de6f7dccb0cb6f0e2f8e055b26b68` [documentation] Changelog claims global OpenCode event-stream fix. Fleetpane: Other-provider claim only.
+- 3252 `33262843a51cc1fabc2715a00d43ce5231618a2f` [release] Server packages move 0.1.73 to 0.1.74. Fleetpane: Metadata only.
+- 3253 `d32462e9ee25fd07a8ba0cbe9f2d8a81c4d5f668` [codex-config] Custom Codex config normalizes an OpenAI base URL to /v1, maps provider ID/name and responses wire API, conditionally names OPENAI_API_KEY, and merges config into thread/start. Fleetpane: Reference for remaining OpenCodex setup with explicit endpoint/auth identity; this is historical code, not current installed-provider acceptance.
+- 3254 `a5c2b97e1d5af8d70b1d6a89904a97d2926e9974` [provider-other] Copilot session response transformer preserves responses without modes. Fleetpane: Other-provider reference only.
+- 3255 `95f45e4e2b7f780a8e287a02e4ec077ad5c2bd69` [observability] Manager traces end of stream handling before notifying waiters. Fleetpane: Bounded diagnostic tracing optional.
+- 3256 `0759932dad3c8ddaa1315eff517fa549a87267ae` [packaging] Nix updater writes hash to standalone nix/npm-deps.hash. Fleetpane: No script executed.
+- 3257 `3acc71b8ad357d0e10e841c7c5575619338391bc` [images] Native image extension parser accepts suffix before query/hash. Fleetpane: Native importer should validate bytes as well as extension.
+- 3258 `af4e0de9abf0f667874f107a6f4213dba528517c` [packaging] Standalone dependency hash becomes LczD9EmK… . Fleetpane: Packaging only.
+- 3259 `8f9b4c882804b7918ece683e597c5c5c3885d310` [ci] Nix checkout token falls back from app token to workflow token. Fleetpane: Historical CI permission context only.
+- 3260 `ce9474055e1b84bcba74c410d2b51e9a680e921d` [ci] Generated hash commit message adds skip-ci marker. Fleetpane: No commits made; historical config only.
+- 3261 `e0361ddd22682d888a9c4eb9272aa00b040be129` [ci] Nix build job removes contents-write override. Fleetpane: Historical permission change only.
+- 3262 `ed1943058a898184649d2bb8067cb9d0d1dfd727` [ci] Nix workflow skips fork PR scripts because checked-out code runs. Fleetpane: Trust-boundary reference; no CI audit.
+- 3263 `29277c900daa83f2bdc89029f51e7fbd122ba6ce` [ci] New Nix workflow triggers main pushes with path filter. Fleetpane: Historical config only.
+- 3264 `77c82dfdbdaa69b3a7ae085e1d203ad672ed5537` [ci] New Nix Update Hash workflow triggers main pushes. Fleetpane: Historical config only.
+- 3265 `6afdeef84aee04064fd8e04630af913aef269462` [layout] Sidebar removes border-style memo while retaining resize handle. Fleetpane: Native sidebar resizing already covered in docs.
+- 3266 `417abed6a53a602a59b6d2889a93a89f8a4a2053` [lifecycle] Desktop distinguishes running/unresponsive local process from connected daemon state. Fleetpane: Do not equate PID existence with serving Host health.
+- 3267 `1a8fdcd388d9af0b144eab4b733c7b895f33367a` [voice] Speech config finds first nonempty trimmed string. Fleetpane: Language/voice settings remain open.
+- 3268 `db0d63dd909a9d0536af6be8ffe214c9b9384b24` [codex-tools] Shell-wrapper mapper trims captured command and strips edge quotes. Fleetpane: Do not alter argv meaning without command parser contract.
+- 3269 `4570e65ce850778ae267c58a515394037fed0b63` [layout] Settings sidebar adds safe-area insets and memoized container style. Fleetpane: Native platform layout separate.
+- 3270 `defb4f82f7f3b3569a5a0337856be746da5ee3ae` [ci] Nix smoke cleanup signals and waits for tracked daemon PID. Fleetpane: Owned fixture cleanup only; not executed.
+- 3271 `751a07124fdb7f35b7775bdd8dbfecec58388b68` [automation] Schedule runAgent call gains boundary try after agent creation. Fleetpane: Failed-start cleanup needs full context; scheduler open.
+- 3272 `d198c68b9ebb2ee86ef33ad0cdeeaa790eaa8062` [resume] Codex ensureThreadLoaded wraps and rethrows thread/resume failures with thread ID; the session handler returns correlated agent_resume_failed RPC errors or agent_resumed status after hydration. Fleetpane: Retain exact Host/session/request failure correlation and original draft; resume RPC success cannot establish live-process transfer.
+- 3273 `985ad52ccece231fd46fc3516e22725990988cb8` [provider-other] Copilot allows old autopilot ID alias for allow-all mode. Fleetpane: Do not expand unattended permission authority.
+- 3274 `045b373168ee8b91f167dc77e61d8e6a62b80aa1` [documentation] Changelog advertises dictation language and declarative Nix packaging. Fleetpane: Voice/packaging candidates only.
+- 3275 `51d9563352c118a7c23f0c131deb799b42303d9e` [release] Server packages move 0.1.74 to 0.1.75. Fleetpane: Metadata only.
+- 3276 `1ddbdf54f15403180062e89b03458f18ac45c7b0` [packaging] Nix dependency hash becomes bMz+eumx… . Fleetpane: Packaging only.
+- 3277 `ad88682426fb86d5767d6c24fdbcc4ab6260f53f` [documentation] Changelog narrows Copilot wording and removes HEIC/schedule claims here. Fleetpane: No acceptance inferred from release prose.
+- 3278 `b9cea49f106eacd9a689c3b83d1a1695d26c19dc` [git-deferred] Attachment picker derives automatic PR selection from attachments. Fleetpane: Git expansion deferred; manual choice should win.
+- 3279 `47d236a2996e5430fe5ee064756a2e602d9a2cde` [acp] Generic ACP diagnostics resolve the launcher, run initialize and session/new in a temporary probe, summarize models/modes, close the probe in finally, and bound version command execution. Fleetpane: DeepSeek setup diagnostics are a useful gap beyond existing Host connectivity diagnostics; keep provider probes explicit and resource-owned.
+- 3280 `15cab6014c4b290ab25edc612cc81bfecfe02227` [worktrees] MCP worktree creation forces list refresh with explicit reason. Fleetpane: Catalog invalidation reference; no Git expansion.
+- 3281 `d24087c10adaad716f7ed43369f379d9788190fb` [hosts] Host update captures old/new active connection around profile replacement. Fleetpane: Connection updates must preserve exact runtime identity.
+- 3282 `b8a3eefd47b29c97c91dbc133c6a6f3966fcc906` [codex-tracing] Transport trace receives JSON-RPC request/notification and context. Fleetpane: Redact prompt/tool payloads; no trace invoked.
+- 3283 `16c27d740491990714ac6a31300cd322c96fabad` [provider-other] Claude env boolean parser trims/lowercases input. Fleetpane: Other-provider reference only.
+- 3284 `9d7d1e8500bd5f17b65425593f4e5a3db3e791e1` [terminal] Zsh integration switches config copy to private atomic write. Fleetpane: Useful private shell integration publication pattern.
+- 3285 `ea0bb81100be0999c71d12ebb4a7a5bd11fff364` [workspace] Reconciliation exits when workspaceUpdates is empty. Fleetpane: Avoid spurious metadata churn.
+- 3286 `c741185100f1ca8a40aa7cb682dee8f3a11a6810` [historical-instructions] Epic roles table removes refactor/implement/verify dispatch rules. Fleetpane: Historical instructions ignored.
+- 3287 `d18bfe90475e851347f91ff2003288354ce9dd52` [provider-other] Claude settings sources add local beside user/project. Fleetpane: No provider expansion.
+- 3288 `9eb1ddf29da4469b89d919d82c4baeb20bd53c2b` [provider-other] Cursor ACP constructor stores command and environment. Fleetpane: Other-provider reference only.
+- 3289 `65d14d44336e3b4df2ddd70b5df80433e616a5ae` [acp] ACP prompt rejection recognizes numeric-code/string-message JSON-RPC errors, serializes optional data into diagnostics, and finishes the exact turn as failed with message/code. Fleetpane: Preserve provider failure detail for DeepSeek without swallowing it or promoting diagnostics to successful conversation acceptance.
+- 3290 `72293f7f4ff617ff80404509aa76917367d7ae73` [git-deferred] GitHub PR search removes state/head argument fragment. Fleetpane: Git expansion deferred; replacement query not audited.
+- 3291 `81697f85b21ff7775f3e763c33b0eb274871d949` [mobile] iOS keyboard delegate creates custom root controller. Fleetpane: Outside native desktop scope.
+- 3292 `2bd2e8bc468cc7fad17a3fbaffae379bd0d2a013` [provider-other] Claude models combine hardcoded list with settings list, returning defaults if empty. Fleetpane: No provider expansion.
+- 3293 `77dc80b86fb3eb3d987379ec37148fca22d051f5` [packaging] Lockfile adds AWS S3 middleware version/integrity entry. Fleetpane: No native workflow action.
+- 3294 `6ed7dfc42a07d3657b3f52b902f061a1a888dd97` [provider-other] OpenCode accessible providers include connected IDs or API source. Fleetpane: Other-provider availability reference only.
+- 3295 `d30a3a72daf69911b3ee7c4897d4745e3aa76b1c` [packaging] Nix hash becomes SbtFhWw5… . Fleetpane: Packaging only.
+- 3296 `15631b815ba3abbaff6badf192df9a4977c19ca7` [codex] Codex run wrapper around runProviderTurn is removed. Fleetpane: Inspect session abstraction before adopting turn settlement changes.
+- 3297 `c6534b3a169ca945d7a4d18c6c3240796b6017e9` [features] MCP lists draft features by provider/cwd/optional mode. Fleetpane: Precreation capabilities remain a candidate.
+- 3298 `49fa72d70d7d74445a2efef128900c56671a09ef` [models] Snapshot manager creates unavailable unprobed entry from provider definition. Fleetpane: Distinguish unprobed from failed discovery in native UI.
+- 3299 `e2ecae0e7272d2dce3bd7fd7b8db5a0dea5ffdfd` [streaming] Assistant tail reuse now inspects incoming messageId. Fleetpane: Preserve item identity across reload and streaming.
+- 3300 `c3012ea5208cb0940df83021d96b3fa91e9dfbb0` [codex] Compaction trigger lookup resolves auto/manual by item ID. Fleetpane: Compaction visibility/commands remain a candidate.
+- 3301 `316eeee9ca4c1d0261f114bfb6470030ff53161e` [acp] Diagnostic mode display uses label instead of name. Fleetpane: Keep opaque IDs separate from human labels.
+- 3302 `e96cd16a0fb776a9fe03c160220ce3b89145156a` [codex-skills] Skill mapping inserts only absent names into name-keyed map. Fleetpane: Duplicate name/path identity needs explicit policy.
+- 3303 `bc329a2d85f5053e03386d64977372ed293f31b3` [git-deferred] Workspace checks summary counts success/failure statuses. Fleetpane: Git/PR expansion deferred.
+- 3304 `7a0606952ddf1492fd347dd698909da2b428e090` [development] Electron dev script enables configurable remote-debug port. Fleetpane: No browser/debug session touched.
+- 3305 `68fae1674080807ed906b870b96543eccb0e589c` [provider-other] Pi recovery policy defines compact capability and message role. Fleetpane: Other-provider reference only.
+- 3306 `ecc6a269bccea9efe02b55a84671d37428d8809d` [provider-other] Separate selected Pi policy repeats compact/message shape. Fleetpane: Separate receipt; no runtime claim.
+- 3307 `512702fe46a6dac90d3428be4b14a3cd31f47f24` [launch] Executable lookup changes parallel probes to candidate loop. Fleetpane: Ordered executable selection may reduce probes; no performance claim.
+- 3308 `f1e5640a269a392e8566befab6153486746035ea` [archive] Sidebar archive handler becomes async after-confirmation operation. Fleetpane: Workspace archive remains open; no mutation performed.
+- 3309 `5c7a6397da305d1f4de9af533d28f7401e1cd436` [historical-instructions] Epic skill requires Paseo MCP agents and forbids harness subagents. Fleetpane: Historical instructions ignored.
+- 3310 `05c12a9c5c2f927b7781001cf81c4ccddd02e16a` [worktrees] New worktree branch arguments add --no-track. Fleetpane: Avoid accidental remote tracking in planned branch creation.
+- 3311 `44292b2b6919da98d83d9014d5b4edc8555ee045` [worktrees] Checkout resolver receives selected picker item/current branch. Fleetpane: Explicit user branch selection must remain authoritative.
+- 3312 `eb7fa02ac81fcf1f4eb205b5180e694f877dc238` [git-deferred] Git policy adds direct/auto merge action models. Fleetpane: Git writes/PR operations deferred.
+- 3313 `e1ab779fe037fe7049ec1e4fe08f25418666a990` [terminal] Input-mode parser validates numeric first semicolon parameter. Fleetpane: Terminal negotiation remains an acceptance gap.
+- 3314 `8296c797ffb7357f6c3298dc5401b5e18074f8a6` [workspace] Project name editor starts from custom name and editing state. Fleetpane: Workspace/project rename remains open.
+- 3315 `2e8bced7072cbfb3ac6349cb13f36e020614406c` [git-deferred] Composer GitHub auto-attach hook retains latest params ref. Fleetpane: Git context expansion deferred.
+- 3316 `2dd77aae04e95b58b7a0535bee140931329ac6f8` [git-deferred] Auto-archive helper accepts cwd/PR/in-flight set/options. Fleetpane: Automatic destructive lifecycle not adopted.
+- 3317 `faa0d93cb8dc1016161f9d149a5d278b80c44976` [git-deferred] Tracked branch lookup returns null unless branch remote is origin. Fleetpane: Git expansion deferred.
+- 3318 `a19b780eca15b0ff423774b89ce63f4412286222` [provider-other] OpenCode retry-failure timer method is removed. Fleetpane: No local retry policy inferred.
+- 3319 `7e255a52499ae63701026ca079764de8417cb97f` [paths] Assistant file resolver exposes explicit prefetch/open actions. Fleetpane: Existing native read-only navigation; keep open separate from send.
+- 3320 `fbeda4510e3078d097efa7497c9a6ef29eabd4b7` [worktrees] Inline worktree source-project resolution helper is removed. Fleetpane: Replacement project ownership needs context.
+- 3321 `5a3fc96b76d006a1ddb169d9cdb3e450bb959f46` [documentation] Contribution text states single-maintainer selectivity. Fleetpane: Historical prose only.
+- 3322 `f27d39fb6388f88e8f16d1e10fa4c87a9aaac592` [protocol] Inline model-definition schema is removed. Fleetpane: Replacement schema not proven by fragment.
+- 3323 `2d3c9101f3a8f3c9289b9664c6f45fee97d90933` [git-deferred] Git ref existence helper gains checkout context. Fleetpane: Git expansion deferred.
+- 3324 `1962225647b61e1e73fbef67a33d874c45fa00df` [historical-instructions] Advisor skill adds examples invoking other skills from arguments. Fleetpane: Historical instructions/prompts ignored.
+- 3325 `a72c7f6c4b25c6a0d42afed4467195107c309efb` [images] User message image-preview mapping JSX is removed. Fleetpane: Replacement attachment rendering not audited.
+- 3326 `29d46c5d9240f7da5715ad471245d0ed69438cb4` [test-source] Shortstat call assertion allows extra context fields. Fleetpane: Not executed.
+- 3327 `57db997028893dbbb467975db76888cc0ed2d76d` [images] Separate selected change removes image thumbnail map JSX. Fleetpane: Independent receipt; no image behavior claim.
+- 3328 `37bb1682045dfab709bc4a5779c6b288a11b92ef` [time] Duration formatter entry with static default mode is removed. Fleetpane: Native timestamps/duration presentation candidate.
+- 3329 `12e24f9620f546a0ea2db59701bc0cd01c8a53d3` [provider-other] Claude Task cache suppresses duplicate task notifications. Fleetpane: Other-provider reference only.
+- 3330 `2f13c83c0e8f57ca08d3b8e7e10a66eae9395607` [tooling] Precommit formatting excludes package-lock.json. Fleetpane: No hooks invoked or changed.
+- 3331 `eed61d338ce0745efba7b8e870f36996856435e5` [markdown] Bullet-list renderer begins using parent AST parameter. Fleetpane: Nested Markdown layout candidate; full behavior not reviewed.
+- 3332 `5a74970d4acddf2f871bf56ef1ecc5f003cfa741` [packaging] Nix hash becomes 1NkvtCT9… . Fleetpane: Packaging only.
+- 3333 `1f79c4d039324f800c8f8d78a5ae538d3445a9f8` [updates] Desktop manual rollout default rises 24 to 36 hours. Fleetpane: Future updater policy requires explicit product choice.
+- 3334 `9bf36cdb56925e6591d332f7add0e40962976bf0` [git-deferred] Unborn-HEAD diff retries only recognized error using empty-tree base. Fleetpane: Git expansion deferred.
+- 3335 `bb6403e426dbfcafb3af9315569afccaf77fc737` [conversation] Bottom-turn footer resolver takes status/history/head/inversion. Fleetpane: Existing progress indicator should preserve exact turn state.
+- 3336 `dbe24b609db298f032e3fb7d8c1923f1b711902d` [provider-other] OpenCode emits turn_started before resolving slash invocation. Fleetpane: Turn admission ordering reference only.
+- 3337 `0d05ff7efd5e136332e98d2aed3f8254276cea5e` [paths] Markdown inline-code path component receives inherited/code/link styles. Fleetpane: Native path links already exist; rendering optional.
+- 3338 `6cbe4e6a144b35d2379cd765c445747757f82109` [documentation] Changelog advertises timestamps, auto review, compaction and archive. Fleetpane: Candidates only; Git archive deferred.
+- 3339 `160d861534edb9b5c52a2ff683a66f6e01818f75` [time] Live turn-header append helper is removed. Fleetpane: Timing reconciliation replacement not audited.
+- 3340 `39094078a92943db514ce982bc08ad16498e90c6` [release] Server packages move 0.1.75 to 0.1.76. Fleetpane: Metadata only.
+- 3341 `01eb1ad512c99af4dd617e6438e50ade5270a0c2` [packaging] Nix hash becomes vBudtcS/… . Fleetpane: Packaging only.
+- 3342 `5ea68dcdfa7246189f4926a03488256e79765b2e` [documentation] Changelog narrows external feature control to subagent fast mode. Fleetpane: Do not infer broader orchestration support.
+- 3343 `e309d82b41f39bc77a3eadeaeea0412835574086` [packaging] Root adds @vercel/nft dependency. Fleetpane: Packaging trace tool only.
+- 3344 `35c582913d1fba5beb5e3c6ee336c01998eb3ac9` [mobile] Sidebar adds explicit close Pressable/test ID. Fleetpane: Outside desktop scope.
+- 3345 `675817f0b259b2519beb54822b70bc3d2f3d0e85` [cli] Connection error adds remote-host/env hint. Fleetpane: Native errors should identify exact target and recovery action.
+- 3346 `5762055213337792d11e2fde3b3949616cc6475f` [packaging] Nix module removes inherited-user PATH construction fragment. Fleetpane: Provider executable environment needs full context.
+- 3347 `667f441cc01c62f22397000a880aefb719ad322b` [mobile-web] Compact-web zoom lock exits on non-web. Fleetpane: No native zoom policy change.
+- 3348 `4b02daed8abbf0fdd68f2f6ca7b3c73d724c7675` [commands] Client slash resolver looks up command map and receives text/attachment presence. Fleetpane: Separate local commands from advertised provider commands.
+- 3349 `618b4a30b17d828e141e7d95668cd3ab066e2e6c` [paths] Inline file-link component receives parsed path/workspace root. Fleetpane: Keep confined explicit navigation.
+- 3350 `a7dd0da2aa40237443874d69611eeb4f9dcf7ec5` [rendering] Working-indicator repeating animation effect is removed. Fleetpane: No performance or status behavior claim.
+- 3351 `f4a4e0c25c98748088eb8f7b857bd6701483d7b2` [mobile-release] iOS resubmit dispatch adds app_version input. Fleetpane: Outside desktop scope.
+- 3352 `1c38ffe0a94491dbd3da13f299f6335cf5347a43` [scrolling] Web scrollbar setup moves to layout effect. Fleetpane: Native scroll lifecycle independent.
+- 3353 `1812b1489897dc303b68c41419dd2c01d6b64223` [provider-other] OpenCode stored-session schema entry is removed. Fleetpane: Other-provider reference only.
+- 3354 `ec646db844db331374909896f76844f95a207029` [automation] Schedule update resolver accepts provider and nullable model. Fleetpane: Scheduler remains open; null must mean explicit clear.
+- 3355 `9324a5b67a0cf10280ac04a4cd2420e42b900af1` [modes] Status bar adds themed shield icons. Fleetpane: Permission semantics need provider contracts, not icon inference.
+- 3356 `952b58c0eb28be9dd5c69dd769b5455260d2285e` [development] Expo startup uses cross-env for development variant. Fleetpane: Cross-platform JS tooling only.
+- 3357 `f6afe0d86415d7236f93255a03404dd977f64796` [markdown] Fence language resolver normalizes first info token and leading dot. Fleetpane: Native code highlighting candidate; preserve exact Copy text.
+- 3358 `e379707a68325fb4eb010e43f340a85bf1b612cb` [git-deferred] Diff header removes inline directory/new-badge JSX fragment. Fleetpane: Git expansion deferred.
+- 3359 `91d257e10373e3681f0ad016cc4abd3d008be2d7` [layout] Host picker desktop minimum width becomes 280. Fleetpane: Native bounded host menu may use similar constraints.
+- 3360 `ed7944cf9ddcdd5eaf8ecd034cef7a558329bb59` [theme] Theme adds darkenRgba color transformation helper. Fleetpane: Native appearance already exists; no asset copying.
+- 3361 `bb5c3dae00124e1ff5a938b395ac147d591e400a` [theme] Light accent subtle desaturation changes .3 to .15. Fleetpane: Styling only.
+- 3362 `b3c272f72025b27de38c0206d0d266739a672b59` [git-deferred] Diff-path extractor is replaced at entry by header-format commentary. Fleetpane: Git expansion deferred; parsing body not shown.
+- 3363 `00e7ac9ec8ae5ed85b98482fd9fe16749d7cac1c` [provider-other] OpenCode stream startup logs ensure-readiness rejection. Fleetpane: Visible provider failure must remain separate from log-only handling.
+- 3364 `edb0ba888a9f25ee8b1dcbedf20120efdcbb4d9a` [terminal] Scrollback field strips nondigits before commit handler. Fleetpane: Configurable bounded scrollback remains a candidate.
+- 3365 `0e3a78b30861c8eee1b8afbd692e6d8aed1d9027` [test-source] Mobile sidebar close checks in-viewport test ID before forced click. Fleetpane: Not executed.
+- 3366 `686a25fb6549066ca09f479ebdbaeba99c3ea848` [paths] Equivalent-path helper selects Windows normalization for comparison. Fleetpane: Native identity must preserve platform path semantics.
+- 3367 `e27734b2180b3cd774f5cb2900752edefeb16bbf` [theme] User bubble background changes accentSubtle to surface3. Fleetpane: Styling only.
+- 3368 `c4e45af565c9ad84d530a472ecf223074837bfda` [tools] Tool-call merge helper receives existing item/data/timestamp. Fleetpane: Preserve opaque call IDs and patch semantics.
+- 3369 `efc9c2d3452d7d37591c398a1f1c0bf66befd63c` [tools] Tool equality stops requiring timestamp equality. Fleetpane: Metadata-only changes should not rebuild unchanged details.
+- 3370 `ee44b536f5ce947f61760666bf1bb4452fc7cd7c` [paths] File-link component relocates with parsed path/workspace props. Fleetpane: Existing native navigation remains.
+- 3371 `338a41991dc65a7f0327373d025ecd942871e12b` [remote] Relay config delegates TLS env resolution to helper. Fleetpane: Explicit TLS validation remains remote gap.
+- 3372 `1f7fc232b3ede94f50212ec6b9ffb7046755b66a` [history] History boundary checks matching tool call IDs before merge. Fleetpane: Avoid duplicate paged tool rows without crossing identities.
+- 3373 `b55aa042d448d105a8d14689329329f78567269e` [tabs] Tab removal considers open IDs and parent-tab mapping. Fleetpane: Workspace tabs/focus restoration remain open.
+- 3374 `721f1ee8d3e7828ecd58a514113294250966d7a9` [files] Suggestion helper matches absolute path/workspace root/query suffix. Fleetpane: Recursive file mentions/search remain open.
+- 3375 `a2d8ce07d6ac02872fc8ebf5104b4c0cb2d899cd` [provider-other] OpenCode commands come from SDK command.list(directory). Fleetpane: Provider command catalog reference only.
+- 3376 `b8154aa72b0502737b7f8046a80dd8e42b2d5fd7` [documentation] Changelog advertises local slash commands, highlighted code, Copy and scrollback. Fleetpane: Candidates only; no acceptance.
+- 3377 `2f638fe6eb7175ee5e2209596524c42dcb879d07` [release] Server packages move 0.1.76 to 0.1.77. Fleetpane: Metadata only.
+- 3378 `d4ebf1815cc30f876f70c94dbf3d9394c8e97525` [packaging] Nix hash becomes QAVSm74M… . Fleetpane: Packaging only.
+- 3379 `77b92b58f7d51a93b2a6dc034904622e77ba568e` [documentation] Selected changelog removes preceding feature list. Fleetpane: No retained release acceptance inferred.
+- 3380 `0d0012959af2281f5d453f6c9de6c991260c9d79` [historical-instructions] Release docs prescribe heartbeat instead of new-agent babysitting. Fleetpane: Historical operational instructions ignored.
+- 3381 `665d9cedb5c62db9d6931aa08e32a6627015869d` [documentation] Release docs remove submit:list command and state progression claim. Fleetpane: No command executed.
+- 3382 `1b2a28be471a668274a52262525e6cd88b0ec5f3` [documentation] Android docs say submission state lives on Expo dashboard. Fleetpane: Historical docs only.
+- 3383 `69fc6fe754f507ea08760ac21aee0755a191ec9b` [documentation] Android docs move final confirmation to Play Console tracks. Fleetpane: Historical docs only.
+- 3384 `82319f580592d5485087fa5307b2368db833eb12` [panes] Stable-mount wrapper returns existing group root unchanged. Fleetpane: Native pane stability candidate; tabs still open.
+- 3385 `028839b3cbef494f0190be4d1fef34eac0577137` [website] Docs group key derives prefix before first slash. Fleetpane: Website only.
+- 3386 `29ce6653fd34d595df41730b4907dec292210a07` [input] Adaptive input separates initial/reset/default props from value. Fleetpane: Native draft editor must preserve exact unsent text.
+- 3387 `120f5d94a9e4e6bb021de40af0a7a6043dbdab0d` [packaging] Bottom-sheet dependency advances 5.2.6 to 5.2.14. Fleetpane: No native dependency action.
+- 3388 `2866a129842fb4233a217f4e882734f177e22dd7` [packaging] Nix hash becomes zuTLTDFU… . Fleetpane: Packaging only.
+- 3389 `0419346d6a1444ec03caf10d145c26bf6462644e` [ci] CI pins OpenCode CLI 1.14.46. Fleetpane: Historical test tooling only.
+- 3390 `f7ef0e0b846e9354e5204d7d2b3fadcc4b1ba208` [documentation] Changelog claims searchable mobile pickers and stable layout switches. Fleetpane: Native search exists; tab/layout gap separate.
+- 3391 `2072265b98cbb42a7cad88aaf934746d312699a7` [test-source] OpenCode smoke requires environment opt-in plus binary availability. Fleetpane: Skipped tests are not passing; not run.
+- 3392 `68bce623c8ad6269a88f2174199318a400b3c4e1` [test-source] OpenCode smoke gate changes to canRunLiveOpenCodeTurns. Fleetpane: Not executed.
+- 3393 `1b9861846c9f9864809812bab8d9482c11641083` [historical-instructions] Release writing guide adds forbidden implementation-word examples. Fleetpane: Historical editorial instructions ignored.
+- 3394 `63fe5dd0dfe5d807b2b65344f487cbb63221bf01` [release] Server packages move 0.1.77 to 0.1.78. Fleetpane: Metadata only.
+- 3395 `8aa8f7a0cc65a82d92364b6d6133c60ef802b29f` [packaging] Nix hash becomes sRHRfPuh… . Fleetpane: Packaging only.
+- 3396 `501dcf373bc0fab3d75d7c29a11f3e6707ce4885` [voice] Composer hides voice button while agent running. Fleetpane: Voice remains missing; native Stop must stay available.
+- 3397 `339ca2fc83b2739581be55bcc74b0149da5737f2` [theme] Dictation timer uses accentForeground instead of palette white. Fleetpane: Styling only.
+- 3398 `b2cdbdaed83dc6a69f40da65af4311bc137de96f` [import] Import-pill action resolver checks submitting state. Fleetpane: Prevent import/create races without losing draft.
+- 3399 `fdecd75f94f687d08d0d8fd7096742f3381c6ee5` [provider-other] Claude project directory canonicalizes cwd. Fleetpane: Provider storage identity reference only.
+- 3400 `9bc62108239187965556111a84c066ecbc83343f` [mobile] Apple handheld detection considers user agent/platform/touch points. Fleetpane: Outside desktop scope.
+- 3401 `5a1c7f266c99d287dcb6a709ba02796c2eae184c` [git-deferred] Git runner adds core.quotepath=false for UTF-8 paths. Fleetpane: Unicode path reference; Git expansion deferred.
+- 3402 `aaabadb04bf10c70ff7e57b734d17c0d8d50f6fb` [desktop] Compositor watchdog JS probe resolves frame production once. Fleetpane: Electron-specific; native repaint requires separate evidence.
+- 3403 `8ff63a6d715ade95f293205c8b6a54b58018349c` [codex-subagents] Collaboration child error/errored states map to running, while explicit parent error and failed/canceled child aggregate states remain failures/cancellation. Fleetpane: Historical status semantics need provider-contract validation before reuse; no current OpenCodex failure behavior is established.
+- 3404 `383b380d8a4fd8b94d5a15231833b6ee8af772a1` [diagnostics] Session diagnostic reads PID lock and provider availability/errors. Fleetpane: Useful bounded Host setup diagnostics; no live query made.
+- 3405 `9ef7230417427f8872929f90c66eb118f723da30` [provider-other] ACP catalog adds Kiro CLI manual entry. Fleetpane: Other providers require use case; Kimi/GLM excluded.
+- 3406 `bc32b16b02f4425cd14c1211a707ceb7c5df476a` [remote] Encrypted channel removes inline handshaking/key/reset/open sequence. Fleetpane: Replacement session-key isolation needs context; no crypto audit.
+- 3407 `e38d0e0fa973de5e75f1142846e55c1b02c0df48` [models] MCP provider/model input refinement handles slash-containing strings. Fleetpane: Exact provider/model parsing needs complete contract.
+- 3408 `ce822f989feb90962dacc5b1b3f2181923a08ad9` [codex-launch] Windows Codex package-root helper uses LOCALAPPDATA or returns null. Fleetpane: Platform-specific OpenCodex launch candidate.
+- 3409 `cb964850359267d6b312aa1bce76d90c22d20d91` [provider-other] Pi dependencies change organization namespace. Fleetpane: No provider expansion.
+- 3410 `b41cb72da0b53edc5bf7aba44939335ae1b77d6b` [packaging] Nix hash becomes t6vqegES… . Fleetpane: Packaging only.
+- 3411 `0f6641c8c0a4828edc27c51edd85a5cbef6cb390` [paths] Inline assistant path-link export declaration is removed. Fleetpane: Replacement navigation not audited.
+- 3412 `0a2307d199740e0e43567a47843434504867708f` [provider-other] Claude records assistant-text presence when translated events contain text. Fleetpane: Other-provider lifecycle reference only.
+- 3413 `3743df09e6ec260713e5839cb3f7ce9888eb26ff` [rename] Adaptive rename modal takes visibility/title/initial value. Fleetpane: Native session rename exists; project/workspace rename open.
+- 3414 `2c561536e4da7af31b9e30e478087747e0f9f256` [paths] Separate selected change removes inline path-link export entry. Fleetpane: Independent receipt retained.
+- 3415 `8d65f8bc96569e6cd7ade4d75f485e7bdbc31236` [protocol] Unknown request error now suggests daemon upgrade and includes version. Fleetpane: Useful actionable version mismatch; preserve exact protocol failure.
+- 3416 `352e8fb6eb1e1226912d1f950cb70c3f27f41464` [assets] Provider icon map derives SVG entries from ACP catalog. Fleetpane: No asset copying/provider expansion.
+- 3417 `41c5eea678f1628a3f9643b4899f6cb00074147d` [acp] ACP reply normalization requires id without method and converts only all-digit string IDs whose numeric value is safe; a comment identifies DeepSeek TUI compatibility. Fleetpane: Keep DeepSeek Harness separate from TUI-specific compatibility and preserve opaque IDs unless the actual protocol requires normalization.
+- 3418 `f238cbc20c57c690e56baf989c9a3daa07fbff0e` [deepseek] DeepSeek TUI catalog description drops stdio-server detail. Fleetpane: DeepSeek Harness priority unchanged; catalog prose is not integration proof.
+- 3419 `bc7798af285bfebaaf10cf959266fdc5ea27ef49` [models] Provider grouping accepts definitions, model map, rows and query. Fleetpane: Native model search already covered; favorites/refresh remain open.
+- 3420 `5dd6b030f212884d90055a206530494b33638687` [models] Selector utility changes from flat rows to provider-building function. Fleetpane: Native grouping optional; preserve duplicate opaque IDs.
+- 3421 `84fb7e9e063a272883bc139905ea67d2edc615a9` [models] Selector removes inline provider-scoped row filtering. Fleetpane: Replacement selection ownership not audited.
+- 3422 `ad9b149bf79038d94dd7c163a3a4f260c17616d3` [editors] Undefined stored editor ID returns null explicitly. Fleetpane: Do not infer automatic editor default before hydration.
+- 3423 `da0e94fd180601bcffda76dfe41971c560c5bc73` [models] Provider-selection module builds rows using provider ID/label/models. Fleetpane: Keep exact provider/model tuples.
+- 3424 `306601a0c3a0f98d3b919a812e33022b46ef35cf` [settings] Reusable textarea accepts accessible label/value/change/placeholder. Fleetpane: Native config editing remains open.
+- 3425 `b7a856709280a90338956f7c507d69854ef7bc9a` [startup] Last-workspace storage exposes async read/write and unknown normalization. Fleetpane: Existing last-session recovery covers part; tabs/layout open.
+- 3426 `0e1c590a3b80c3e4418379922654fc47192bb856` [git-deferred] Shortstat errors become null before latestGit assignment. Fleetpane: Git expansion deferred; do not mask read failures as clean state.
+- 3427 `4cf985c25450d88b21b7767e01ee13c1dc08aae7` [mcp] Structured-content adapter returns existing content when present or absent structured data. Fleetpane: Model-visible inventory output candidate; no orchestration claim.
+- 3428 `a1a5119bc595984f572788a6eece8da38051f55d` [settings] Separate selected textarea definition repeats accessible controlled props. Fleetpane: Native config editor still open.
+- 3429 `8a6bdb2d01bc0420014ba0d79e9497418dd89ad2` [lifecycle] Worker argv resolver now receives devMode and branches outside dev. Fleetpane: Supervisor launch identity needs complete context.
+- 3430 `555d10f046b03dad67660e790d20d985a5061148` [packaging] Nix hash becomes vNhmXjWV… . Fleetpane: Packaging only.
+- 3431 `3786cf35693395c295dc208eae7ae97c05b8b767` [provider-other] Cursor constructor forwards explicit logger/command/env. Fleetpane: Other-provider reference only.
+- 3432 `0d495a9625271fb059b9eca9b87ad149daf93d95` [startup] Index removes effect navigating saved workspace. Fleetpane: Replacement startup recovery not proven by deletion.
+- 3433 `ca913728d9424f28e1e3ca1496184af564c53cbd` [remote] Nix adds nullable public relay TLS setting. Fleetpane: Future remote config needs client/server endpoint distinction.
+- 3434 `905a0985f95faff8eeb818887ecb3f17f64b7307` [launch-config] CLI env flags parse through key/value validator with INVALID_ENV. Fleetpane: Per-session env setup candidate; redact values.
+- 3435 `f933bf6b3ae050ef215cfb5715b2c685792a77be` [ui] FloatingSurface forwards native View ref and frame/style props. Fleetpane: Kit overlays independent.
+- 3436 `18a1bdcf72114441c6b8db76c47109db0351ed3e` [packaging] Nix hash becomes O1Rxdwx+… . Fleetpane: Packaging only.
+- 3437 `f1b3e253447c327ab9df051b086c94d2ecd6dfa1` [ui] Separate FloatingSurface definition repeats typed frame props. Fleetpane: No native workflow change.
+- 3438 `a3a8527a1ce41aaf53585ee42c92e8819f624caa` [shortcuts] Digit key map adds shifted punctuation variants. Fleetpane: Native shortcut matching needs keyboard-layout/IME acceptance.
+- 3439 `c88f6fb2c21803c131119635b42060babd586278` [documentation] Website narrows provider launch claim to local CLI or integration. Fleetpane: Do not claim indistinguishable provider behavior.
+- 3440 `e58ea31d6defcb6524db22e5cf67cab26af1915f` [test-source] File-link test removes wrapper helper declaration. Fleetpane: Not executed.
+- 3441 `9b2b511abe95ab9c2d7f65d09473c294ba2a9f44` [packaging] Nix hash becomes 33/pCJZ4… . Fleetpane: Packaging only.
+- 3442 `8c4f5940d6a6e1d6ed7c8dd7930495c365615556` [provider-other] Pi launch uses shared spawnProcess with envOverlay. Fleetpane: Explicit process ownership reference; no provider expansion.
+- 3443 `c7872d968bfe8ff5c88683dad7a24249c536e358` [documentation] Changelog claims Pi subprocess/extension/import support. Fleetpane: Other-provider claims only.
+- 3444 `8a69d66f8e5bb558ea63bc16ef0139118cff4a1b` [release] Server packages move 0.1.78 to 0.1.79-beta.1. Fleetpane: Metadata only.
+- 3445 `68d88f0928042b41520d290d86314261df3aa6b4` [packaging] Nix hash becomes FaJYHXCH… . Fleetpane: Packaging only.
+- 3446 `3bca1a72e8c8b414cb9e055da24adeacedb6dcfb` [lifecycle] Creation dispatch owns dependencies and worktree-request entry. Fleetpane: Keep durable one-attempt Host creation boundary.
+- 3447 `ea36f0879f338e9c1d021be7f1520a899497ef0f` [website] Claude marketing title shifts phone workflow to open-source app. Fleetpane: No native action.
+- 3448 `cae3deb6e7b9f2b59645f37986008639b78a9734` [website] Page metadata helper is removed. Fleetpane: Website only.
+- 3449 `3dd305082eda2ba4603afe0805cad2a5c77c2558` [documentation] Conductor comparison adds hero screenshot. Fleetpane: No parity evidence inferred.
+- 3450 `28415b35428dd9e48f167e9ffb3a141d40cc0e9e` [historical-instructions] Release docs redefine changelog range stable-to-stable, excluding beta boundaries. Fleetpane: Historical instructions ignored.
+- 3451 `dee8f485debf38ea33b9b4b9613223dd4095f1b8` [liveness] Client checkLiveness rejects disconnected transport and returns RTT shape. Fleetpane: Useful explicit connection probe; RTT is not provider/agent health.
+- 3452 `b94527fe1f35258349fe5114d4d82dbc69a6e3ac` [import] Import empty-state helper returns visibility/title from inputs. Fleetpane: Distinguish no sessions from discovery error.
+- 3453 `8865f41d5868f828305721834c00dacefa2fae62` [packaging] React/react-dom advance 19.1.0 to 19.1.4. Fleetpane: No native dependency action.
+- 3454 `e630e205db34d467671c40d7a4177e1cd8c69e09` [release] Server packages advance beta.1 to beta.2. Fleetpane: Metadata only.
+- 3455 `a837d3e5d17fe3486dbecc3630adbb56385ed91f` [packaging] React/react-dom revert 19.1.4 to 19.1.0. Fleetpane: No native dependency action.
+- 3456 `b5a78b7261b90f564e78776d41395142b7ff34e9` [packaging] Nix hash becomes 4cPb6I7d… . Fleetpane: Packaging only.
+- 3457 `0310fd3c3cbae15084d6b34e4e3fccc6812f3506` [packaging] Separate selected Nix hash also becomes 4cPb6I7d… . Fleetpane: Separate receipt retained.
+- 3458 `ad060e2f86ad1c635a50349640becdb6289ba50f` [import] Relocated import sheet resolves enabled snapshot providers. Fleetpane: OpenCodex/DeepSeek scope retained.
+- 3459 `57de8c3807e315305a7e91246fc2c194305efa03` [release] Server packages advance beta.2 to beta.3. Fleetpane: Metadata only.
+- 3460 `fac81f568a1e2992a2a72e00b3c54c5088274a89` [packaging] Nix hash becomes rJJSY78c… . Fleetpane: Packaging only.
+- 3461 `9fd93f83083b653e8da968d8220ff2d82a41c095` [packaging] Separate selected Nix hash also becomes rJJSY78c… . Fleetpane: Separate receipt retained.
+- 3462 `1e595ad9cb5aa35af8b5ef3c1ceb989de8630ecf` [packaging] Nix hash becomes a4fXFcmH… . Fleetpane: Packaging only.
+- 3463 `63b24ec261c735604e1729ae774e454965489a6a` [release] Separate server version change advances beta.2 to beta.3. Fleetpane: Independent receipt retained.
+- 3464 `698390bf1c7a5f8ca80ffd7943a21965931865ed` [provider-other] Pi resume template uses pi --session placeholder. Fleetpane: Other-provider reference only; no command executed.
+- 3465 `754f5a1f0b6c1dd842ad2d4cb050114206f7d877` [import] Import copy clarifies external CLI sessions. Fleetpane: Existing offline import distinct from running-process transfer.
+- 3466 `1ce30bac05c5f90f75bdae67e74d2ea8c60b2802` [documentation] Pi changelog shortens extension/process claims. Fleetpane: No runtime proof.
+- 3467 `a9f5b8ea4d467b23710e9effb38abb7d45ed10af` [release] Server packages promote beta.3 to stable 0.1.79. Fleetpane: Metadata only.
+- 3468 `6dc22483c5ffa5f95782398738529c903eb0f996` [packaging] Nix hash becomes ipuV4cM3… . Fleetpane: Packaging only.
+- 3469 `7dd9cbc506f136054df8b0f8d88bfd226956dd57` [web-styles] Inline Unistyles helper exits for frozen/already-tagged style objects. Fleetpane: No native styling port.
+- 3470 `3ec4e2c53608bc2436407a3ae19da987f4f461b0` [documentation] Changelog claims mobile dropdown crash fix. Fleetpane: Outside desktop acceptance.
+- 3471 `25c4cee01e169ee81de9b138bdfa8a1e3670d87f` [release] Server packages move 0.1.79 to 0.1.80. Fleetpane: Metadata only.
+- 3472 `db44a3e0e11ff364c5330ef055d0ec2c728ed247` [packaging] Nix hash becomes 02wVWuMb… . Fleetpane: Packaging only.
+- 3473 `af10e64f82b969b1741a52c2bc6fab1b76a8134c` [provider-other] Pi guard accepts nonnull non-array records. Fleetpane: Other-provider typed boundary reference.
+- 3474 `c46ff2e045fecd892d70046479379cf4429e97f2` [mobile-terminal] Native terminal bridge serializes theme as JSON key. Fleetpane: WebView-based mobile implementation not ported to Kit.
+- 3475 `369c5a44981f094b49a2bcb817cc050b8f5fb05f` [theme] Shortcut background switches computed opacity to surface2. Fleetpane: Styling only.
+- 3476 `5f11f602fb83e786bd35567d7f35f8016226ba1a` [links] Community component opens GitHub externally on action. Fleetpane: Native external URL policy should remain explicit.
+- 3477 `de7bf2fb01d56268f8d76ec0a016231f71f2313d` [shortcuts] Key matcher compares event.code when combo lacks key. Fleetpane: Native physical versus logical key semantics need platform acceptance.
+- 3478 `b151dfcfd59c77cbed1d9aa29c101d7a71c8e480` [layout] Segmented control removes maxWidth constraint. Fleetpane: Native layout choice only.
+- 3479 `8e0ebfcaaa98bf2a4069efbe98e0ad0f818f6650` [import] Import helper detects nonempty user prompt in timeline. Fleetpane: Avoid listing empty ephemeral histories as resumable conversations.
+- 3480 `f5f1ae7fa9062686cc5e5d3b18049414efbd1c33` [commands] Local quit command with immediate archive semantics is removed. Fleetpane: Keep archive explicit and resource-aware.
+- 3481 `789a559b31e57ee4413893599ff235ae1c822c4d` [theme] Adaptive input wrappers get themed placeholder color. Fleetpane: Native theme already exists.
+- 3482 `008e4e846f46d4cc509e0d29edce8104647f60e7` [menus] Autocomplete measures element window rectangle asynchronously. Fleetpane: Native popup anchor must reject stale layout completion.
+- 3483 `0962529d4865415ac91046d338b374be521fe5a2` [test-source] Stored-session import fixture adds firstPrompt. Fleetpane: Not executed.
+- 3484 `33892f0698cecaebb737c513165a16b06bcebf1b` [terminal] Xterm option renames overviewRuler to scrollbar with width eight. Fleetpane: Renderer-library setting only.
+- 3485 `84f1dfc8cb6c6f2a28be7b8d6a34837bd68b9a8f` [packaging] Nix hash becomes HyLHXzKm… . Fleetpane: Packaging only.
+- 3486 `846c9b9da3ef55514b41a501bd2a34a55bbafb29` [terminal] ANSI snapshot renderer entry concatenating scrollback/grid is removed. Fleetpane: Replacement restoration needs snapshot/live ordering review.
+- 3487 `83f205bd3d275f869a6f79afb123ab67f2384971` [copy] Rich clipboard preserves Markdown plain text plus rendered HTML meta charset. Fleetpane: Rich Copy remains a candidate beyond exact plain Copy.
+- 3488 `d43d30eeeb4cac6f0c1c7c7b3ffa4be83d3b100d` [metadata] Metadata generator removes special structured-response error catch fragment. Fleetpane: Failure semantics not inferred from deletion.
+- 3489 `68c893f6434869f424c9948e1424b5a2a3eb0b87` [provider-other] OpenCode MCP connect operation fragment is removed. Fleetpane: Provider MCP config remains open; no provider expansion.
+- 3490 `94bccf19bacddc6e87cbffea52650714d08c1bd0` [packaging] Nix hash becomes H18zIrry… . Fleetpane: Packaging only.
+- 3491 `79dcbdc1c1a2637ad9873cf3ec198716179bc55a` [git-deferred] Ahead-count logic returns null without base or when base equals branch. Fleetpane: Git expansion deferred.
+- 3492 `2a3cfc684b9efc69f53d2d4b2d8e4ec684bc0a9c` [git-deferred] Separate selected change repeats base/branch early return. Fleetpane: Separate receipt retained.
+- 3493 `c0d2f2005694922cd0190fdd13ff687174ecd532` [documentation] Changelog advertises PWA, Pi dialogs and community links. Fleetpane: No native parity acceptance.
+- 3494 `4c97ff8fa0727bb16dae6e3fa5e1d5949bb90c83` [release] Server packages move 0.1.80 to 0.1.81. Fleetpane: Metadata only.
+- 3495 `ba724956dfc41ad70ebfabca3762dae26d217937` [website] Docs Markdown actions retain copied state/effect. Fleetpane: Website only.
+- 3496 `62780448dc6baa7cf47d0e5d381fe563ff451db9` [scrolling] Bottom-anchor controller exposes mode/pending request/verification/blocked reason. Fleetpane: Useful explicit scroll-intent model; no runtime claim.
+- 3497 `7fbbb44ad639bb96d46def93e4c832e8e21eb23a` [packaging] Nix hash becomes s1HwJgif… . Fleetpane: Packaging only.
+- 3498 `5755ca77f8ab55b33b93d3bfc5a0a6e708103bcd` [provider-other] OpenCode usage mapping removes individual token assignments. Fleetpane: Other-provider telemetry replacement not audited.
+- 3499 `e966f70322c8c47c2e1da258d6d1a1d244150b4a` [provider-other] Separate selected usage deletion repeats token assignments. Fleetpane: Independent receipt retained.
+- 3500 `132e572d6ecdbba60878d9babec441fa608d28d4` [rewind] Composer restoration checks current text before replacing rewound text. Fleetpane: General rewind remains open; preserve nonempty unsent draft.
+- 3501 `a91dfb63c64658e03d7d4539fdded6463aa7201a` [provider-other] OpenCode session-error helper receives typed event/state/output list. Fleetpane: Other-provider reference only.
+- 3502 `6b35c0a640d01a8b071f911a77b6df3714737f7d` [provider-other] OpenCode permission actions begin with explicit deny ID/label. Fleetpane: Keep exact provider-supplied choices; no expansion.
+- 3503 `f137705f1eb16dd624ec1ec2ae3e4bed0181f72c` [models] Provider snapshots and loads are cwd-scoped; settings refresh invalidates selected providers across workspaces, current-load identity fences late results, and UI keys distinguish server/cwd from home. Fleetpane: Live OpenCodex/DeepSeek catalog refresh remains open in current docs; consider exact Host/cwd/provider scope, stale-result fencing and visible errors without copying path trimming.
+- 3504 `655d05add8887436941450ad2697dafc9e996cba` [provider-other] ACP catalog adds Devin manual entry. Fleetpane: No additional provider use case authorized.
+- 3505 `b7ea5b4c9dac9acdad3eeb778d00041289c1dc0d` [automation] Mobile workspace displays scripts button with exact server/workspace IDs. Fleetpane: Native script service remains missing.
+- 3506 `05eec04b10e7d3755c1288ce3b24f50691d7f45d` [observability] Latency formatter uses microseconds below one millisecond. Fleetpane: Formatting is not performance evidence.
+- 3507 `178708a44e0d9ba1049a033aed2979af424521a4` [provider-other] OpenCode task parser recognizes todowrite case-insensitively. Fleetpane: DeepSeek task projection already separately documented.
+- 3508 `8a2e5c786e085dde2f88b3f3c88854c73fb14bb7` [paths] URL decoder catches malformed percent encoding and returns original string. Fleetpane: Native literal path handling must avoid double decoding.
+- 3509 `1e682835658a0f88725d8aec25136f69caf2f692` [git-deferred] Git action gate drops origin divergence checks, retains clean/ahead conditions. Fleetpane: Git writes deferred.
+- 3510 `e40ad0c00e02f2fcdd232cb800d2adea6fd2645e` [terminal-links] Terminal suffix regex builder tracks row/column/end indices. Fleetpane: Terminal-to-file links remain a useful candidate.
+- 3511 `19289286a6fee7dc161198fe3da60433dcc6ad89` [terminal-drop] Terminal clears drop-state timeout only when one exists. Fleetpane: Terminal attachment workflow remains open.
+- 3512 `423956c6a0e4a650e8eec20329381ece0ba58683` [models] Next-mode resolver receives current/new provider and mode definition. Fleetpane: Provider defaults should not override explicit compatible choice.
+- 3513 `2252046f569765a4427f629b128ed75f419efb10` [mobile-terminal] WebView touch requests focus and sends stream-keyed focus message. Fleetpane: Mobile-only; native keyboard focus already separate.
+- 3514 `5dd2afaac9ceb3fb5e6d0629c6fac45b5e281008` [mobile-terminal] Terminal blurs on focused mobile workspace when non-agent view selected. Fleetpane: No desktop port.
+- 3515 `9806a893eda34a5a58d8da899315905c4ab5d3ee` [mobile-terminal] Modifier-button map JSX is removed. Fleetpane: Mobile keyboard UI outside scope.
+- 3516 `e312e0d6f33857933fe4a7bb4f5487c2d87af393` [mobile-terminal] Touch start records page coordinates for tap handling. Fleetpane: Outside desktop scope.
+- 3517 `f0730d5eac584d3af0c1e6201f2cb7cde177af68` [layout] Workspace screen removes inline header menu invocation. Fleetpane: Native layout independent.
+- 3518 `e5658654c041bc0fb722a43b5bcb17125db4d65c` [rewind] Rewind menu removes inline mode-button action list. Fleetpane: General rewind remains open; replacement not audited.
+- 3519 `53faba64cacd5431d457c76ffc997a99f60544d8` [streaming] Optimistic user append looks up exact server session before mutation. Fleetpane: Keep accepted/pending sends distinct; no implicit replay.
+- 3520 `893dd6d1fef2e0f30a969b2e4ad0be19362606d9` [tools] Write output accepts string and projects absent filePath/content. Fleetpane: Do not invent file edits from opaque output.
+- 3521 `d271597ee8ca72697cde001f60a3b5fab4cd30dd` [tools] XML tag reader extracts path/content via bounded tag-name regex. Fleetpane: Typed payload should take precedence over heuristic XML parsing.
+- 3522 `30a8bffc2421a4050225692d46ea016b080bff8b` [creation] Draft create attempt fails visibly when no Host is selected. Fleetpane: Maintain exact durable creation target and one dispatch.
+- 3523 `48d4e3e40826e1c920e6e9c41036e824c0536226` [creation] Agent panel removes inline pending-create selector. Fleetpane: Replacement pending ownership not established.
+- 3524 `6e56ee9e32b470915fb09e98947dc2d6af146857` [terminal] Server handles OSC color query ? by writing configured response to PTY. Fleetpane: Terminal response owner must avoid duplicate renderer replies.
+- 3525 `91b05b41114a5a131be556a30bb4d2ea1c227a4e` [menus] Autocomplete removes content-size layout callback. Fleetpane: Replacement anchor sizing not audited.
+- 3526 `22e014aaff8153c1daf1ef82ef1b9e1a69c1bec1` [layout] Workspace builds center-column/header element separately. Fleetpane: Native render isolation optional; no performance claim.
+- 3527 `bf69ebeddff961aaf23473fd4fbf7116b333b52b` [storage] Agent storage removes pending-write wait/latest-record/title fragment. Fleetpane: Storage ordering requires full replacement context.
+- 3528 `c31ab074e9107695cff100d190e1446f79a08f68` [menus] Autocomplete uses current anchor ref rather than earlier element binding. Fleetpane: Avoid stale popup measurements.
+- 3529 `6f16900b8a232107cca0b58803e5d02dc5cf48b8` [streaming] System-injected user envelope suppresses dispatch and waiter notification. Fleetpane: Do not hide genuine user messages; exact envelope validation needed.
+- 3530 `bde0efc9b00b96e71191c81c8a3b18ef79a765c8` [models] Snapshot hook removes loading-entry-triggered query invalidation. Fleetpane: Inspect refresh event ownership to avoid reload loops.
+- 3531 `483790d8c97b189984ae3ce9036f129c4273da87` [provider-other] Claude synthetic history excludes tool-result user entries. Fleetpane: Preserve genuine tool history; no provider expansion.
+- 3532 `a3071b46a4987349e8a17f5d32f8f54de7f975f2` [attachments] Canonical/optimistic user merge removes inline image/attachment preservation conditions. Fleetpane: Exact attachment reconciliation needs full context.
+- 3533 `1d38aacf5c756127a095da43dbe6cf4cbf180df5` [provider-other] OpenCode user event requires matching session ID and user role. Fleetpane: Exact provider/session routing reference.
+- 3534 `7e792e899aaeebc5aa8072b36b7d70fe28d7034f` [web-style] HTML body enables font smoothing flags. Fleetpane: No native action.
+- 3535 `4231dbbba48f538fd3f8397f3a8d98ff630aaff2` [attachments] Relocated image action keeps picker/persister separation. Fleetpane: Existing native import already covers related workflow.
+- 3536 `e74c7f95547637900bf14b7e9a690574566f9f11` [provider-other] OpenCode color reader accepts only matching hex strings. Fleetpane: Do not trust arbitrary provider styling payloads.
+- 3537 `fab721205dd70e68eda9d6b6fd830a6d4eba97dd` [rendering] Autocomplete opts out of React compiler memoization for shared-value captures. Fleetpane: React-specific, no native port.
+- 3538 `9c5f6007bef44d0e0d81391249be7f7a293b585d` [documentation] Changelog advertises rewind, cost, terminal drops/links and session permissions. Fleetpane: Rewind/terminal context are candidates; claims unverified.
+- 3539 `81407c5ffc19066ed02c31ce64503a56af908a52` [tabs] Tab test ID derives deterministic target ID rather than tab.key. Fleetpane: Native tabs should distinguish duplicate/Host identities.
+- 3540 `58e7fd0e3eac1666536d7484871cafc692349f72` [rewind] Rewind no longer closes menu immediately after successful callback. Fleetpane: General rewind still open.
+- 3541 `be7979fb34e50fb39f6884a77192060483c915cc` [test-source] Mode selector expectation changes ID spelling to display label. Fleetpane: Not executed.
+- 3542 `3ace6c5602d3df6da97939329d5b2dd95b7198d0` [test-source] Mode selector assertion is removed with TODO describing missing replacement draft modes. Fleetpane: Concrete source-documented gap; preserve native model/mode preferences across replacement.
+- 3543 `b492c7082537d9d5815954642e26b768560c1581` [release] Server packages move 0.1.81 to 0.1.82. Fleetpane: Metadata only.
+- 3544 `f79101a1f083faebc346d7abbe77b3ab842e9846` [packaging] Nix hash becomes WAxd4FSY… . Fleetpane: Packaging only.
+- 3545 `88914ccba6dac086c368f8131f8455f494fdff70` [composer] Control visibility includes hasDesktopExtras. Fleetpane: Native controls must remain reachable without model/thinking options.
+- 3546 `1d2c8b16488d0b9d5d89025db0726aaf1380730d` [automation] Cadence normalizer returns undefined for absent argument. Fleetpane: Scheduler remains open.
+- 3547 `3eb1ba7d7345f906f641c990449db01271fd5c1d` [automation] Cadence normalizer stops treating /__omit__ as absent. Fleetpane: Do not invent sentinel business semantics.
+- 3548 `74c8942a287d733ec737b96707268901868e01a7` [creation] Initial prompt startup resolves current agent or saved snapshot, checks absence. Fleetpane: Creation admission must surface start failures accurately.
+- 3549 `ed6caa11c0845316192d5b903e588f7a35d2e709` [documentation] Changelog claims create waits for startup, blank cadence and mode chip fixes. Fleetpane: Claims only, no runtime proof.
+- 3550 `0ab41fbd9aab98945d6777be613be683710660a4` [release] Server packages move 0.1.82 to 0.1.83. Fleetpane: Metadata only.
+- 3551 `6d205f88533d48e4b377b249dbf7d511bfe750b2` [permissions] Unattended detection combines parent mode and OpenCode auto-accept feature. Fleetpane: Do not propagate permission authority implicitly.
+- 3552 `153fa42a956c28bc66e0c5b48fdab043f1294e81` [markdown] List helper recognizes bullet/ordered lists and ancestor relation. Fleetpane: Native nested-list rendering candidate.
+- 3553 `5468089ac0e341c8a2c8d4dacf74ef68488e5b65` [packaging] Nix hash becomes uzF4Gueu… . Fleetpane: Packaging only.
+- 3554 `3cf92ad6c5aa1851ac06ebb1e943f04faccc0d16` [packaging] Separate Nix hash also becomes uzF4Gueu… . Fleetpane: Separate receipt retained.
+- 3555 `09bf981f1321b78f1f9d731d4747e72581493611` [scrolling] Stream render model uses base boundary directly instead of injected gap. Fleetpane: Native scroll anchoring needs its own evidence.
+- 3556 `a5b82d2a3b0eda47207f542901c8b2b396e67dbc` [mcp] Schema guard checks object, _def and safeParseAsync properties. Fleetpane: Runtime validation must verify actual callable contract.
+- 3557 `4911b627f23cb1df1644bc2e81e95acb30c08a7c` [protocol] Older clients get ShieldCheck for unsupported custom mode icon. Fleetpane: Capability fallback may change presentation, not permission semantics.
+- 3558 `aecb3000732c8ce66f9f98d72cc21a9dad76fbe4` [modes] After setMode, null readback falls back to requested mode. Fleetpane: Do not present unconfirmed provider state as confirmed without protocol guarantee.
+- 3559 `8a463c55c82d5a76ae4128b2f0d919d46f288ca8` [test-source] Hello test title generalizes to all client capabilities. Fleetpane: Not executed.
+- 3560 `5ad6cff039c71f3f8505da74a3c5a9d22bf2ea40` [theme] Mode icon color changes to muted foreground. Fleetpane: No permission behavior inferred.
+- 3561 `1908ab876525317aeeaa5e8639da8435e1e99b86` [composer] Context meter render function is renamed. Fleetpane: No native workflow gap established.
+- 3562 `8aa1530be1db0b0f4c96062d353095ca627e6f1f` [mobile] iOS Markdown uses selectable UITextView for cross-span selection. Fleetpane: Native desktop selection requires separate implementation.
+- 3563 `724a4994130c475372b035156c589b75bc7481ee` [packaging] Nix hash becomes uP/s4ZXF… . Fleetpane: Packaging only.
+- 3564 `a630986d069b1aaea58456b369bf928d0fee03cf` [rewind-style] Rewind trigger replaces fixed size with theme padding. Fleetpane: General rewind remains open.
+- 3565 `d594bce153605543ec2cbb7d0f97ccf1c78e9049` [commands] Command autocomplete scores name plus aliases. Fleetpane: Existing ACP command search may extend aliases if supplied.
+- 3566 `7aa49b29051adeadba3777746f862354d4144737` [documentation] New alternative page advertises multiple platforms/providers. Fleetpane: Marketing claims not acceptance.
+- 3567 `8307a0ca6fa9ba85cb75d0b742eb3e26c3a591d6` [documentation] Custom Codex docs describe env plus thread model_provider config mapping. Fleetpane: OpenCodex routing candidate; inspect actual config before changes.
+- 3568 `d787aefa4cae6ceb2fa69bbcb069c114966b1d46` [network] MCP client maps wildcard IPv4 host to loopback. Fleetpane: Bind address differs from connect address.
+- 3569 `9c2d47ab34ff0eb69149c849bbb8e12b4d725e07` [ci] Website deploy watches public-docs changes. Fleetpane: No native action.
+- 3570 `2894917a1cf23077a56b6103ee4efb1acaa3f750` [website] Header adds Reddit SVG component. Fleetpane: No asset copied.
+- 3571 `dbfd42da460993a86c69d97a59d2ee5330ed723c` [website] Header removes Reddit SVG component. Fleetpane: No native action.
+- 3572 `5d8dc800fcb8bad16a92212bf08ba8d357bbe8ed` [git-deferred] PR lookup target derives current branch/remote/merge config. Fleetpane: Git expansion deferred.
+- 3573 `fa1b3e88f033899c4b01b5fccc7c8bf47090954f` [git-deferred] Git facts may reuse recent cached snapshot under TTL. Fleetpane: Git expansion deferred; freshness remains explicit.
+- 3574 `698d54998359fda29408e201979130758250e39a` [website] Claude marketing title capitalization changes. Fleetpane: No native action.
+- 3575 `5a56835db39654a6ec4be4b939264fa6a9312378` [diagnostic-doc] Report attributes snapshot timeout to machine contention, explicitly not proven internal lock. Fleetpane: Historical evidence not rerun; do not claim current performance.
+- 3576 `5696cdb45574f74d20a0f5abb2efc40d6abf4c35` [provider-other] Creation helper recognizes OpenCode legacy full-access mode. Fleetpane: No provider expansion or permission default change.
+- 3577 `a4cb7431d8302f2baf4fa5f30101d5f63ede8c9d` [models] Selector removes GroupProviderButton declaration fragment. Fleetpane: Native search already exists; grouping optional.
+- 3578 `a025f17a73390a5a65da97384f5ce7907cd2d2e1` [test-source] Git primitive fixture adds typed checkout facts builder. Fleetpane: Not executed.
+- 3579 `e3eb333ddc3745f08815b6f2e92c6c4e4a988ceb` [provider-other] OpenCode edit transform projects path/old/new text and absent diff. Fleetpane: Other-provider reference only.
+- 3580 `00759e799453905a0a07648d0076f7859101a769` [test-source] DeepSeek TUI selection fixture changes provider default to explicit model rows. Fleetpane: DeepSeek Harness catalog acceptance remains separate.
+- 3581 `0ea41378a43591d1b838df1f2c6cd5f569fe19f6` [launch-config] Provider command-prefix resolver entry is removed. Fleetpane: Replacement executable/argv precedence needs context.
+- 3582 `53c14d9855dd9590746b81ad26931fd489a0e06d` [client-api] Client example constructs typed client from URL. Fleetpane: Public client API candidate; no connection made.
+- 3583 `5cede0a7bb53bb8b216ed9f43ce1273103ea2f87` [packaging] Nix hash becomes awOu46Sl… . Fleetpane: Packaging only.
+- 3584 `3ac182cffc845fbc80a4a38356706e73b45c6189` [attachments] Filesystem interface exposes metadata, mkdir, bytes/copy/base64 operations. Fleetpane: Native attachment storage already exists; retain bounded reads/private files.
+- 3585 `f20393dbb74be34b54388af363759b5ac18b9ed7` [git-deferred] Branch validation cache changes Map to LRUCache. Fleetpane: Git expansion deferred; bounded caches useful generally.
+- 3586 `3baba543a40be02d8a0f666651b1faa016ffcd1e` [provider-other] Resume templates add OpenCode --session. Fleetpane: No command executed/provider expansion.
+- 3587 `93189148f5992232c6d12e58f9f29ef76fa80559` [markdown] Code block removes inline keyed-line/token JSX mapping. Fleetpane: Replacement Copy/highlight fidelity not audited.
+- 3588 `f431ebee6d5b93fc7bdfc274a1ba5f627b78bb7d` [documentation] Blog metadata describes migration Tauri to Electron. Fleetpane: Historical rationale does not alter Rust GPUI Kit scope.
+- 3589 `990bca71b74722aeb25361879b1b6a11acb23b16` [website] Blog article gets layout classes. Fleetpane: No native action.
+- 3590 `c4f9874e1fdfc069ab699c7a2e25150896de8590` [types] Archive redirect helper declares Href return type. Fleetpane: Native archive navigation still open.
+- 3591 `0737c5c97319403212c542c2274d4b39fe1086f2` [test-source] Packaging test expects source maps and package src excluded. Fleetpane: Artifact-size scenario only; not run.
+- 3592 `8e4cbf8ca6f875f828c6671389fe8c631f62eef5` [voice] Local runtime removes inline Parakeet v2/v3 engine construction. Fleetpane: Replacement voice support not audited.
+- 3593 `a00152290fc5e20b3ebaba55b3a562aee235cf79` [ci] Unpublished macOS builds upload workflow artifacts. Fleetpane: Build artifact availability is not runtime acceptance.
+- 3594 `93c14cb8ad7f88dd9dc320be98f46f4544c56d82` [packaging] Nix hash becomes 7t2JUoMH… . Fleetpane: Packaging only.
+- 3595 `adb9a57cfc9647bf754156268e569176fa34b758` [packaging] Desktop build adds server dependencies and server build before export. Fleetpane: Packaged Host must match controller artifact compatibility.
+- 3596 `8234ecb7ba20deddd248184d4fd36ec3d18ddbc4` [ci] macOS workflow artifacts narrow to dmg files. Fleetpane: Historical release only.
+- 3597 `3176f844e788db680ad03e5491269bf06363d877` [models] MCP provider summary resolver is removed. Fleetpane: Replacement availability/model semantics not established.
+- 3598 `8262fb42afc926e76ad6c9033e3832e47ad544f4` [questions] Question core reads optional fields only when strings. Fleetpane: Existing native questions need exact validated payloads.
+- 3599 `e4188f5222f69185bf27bd22568bec15b5ea99ca` [historical-instructions] Release doc divides local preparation from user-authorized publication. Fleetpane: Historical instructions ignored; no release action.
+- 3600 `e02e8426d46f54192aa3ffd6ac3beba79f0b2066` [documentation] Changelog advertises OpenCode autoaccept and resume command. Fleetpane: No provider expansion or permission change.
+- 3601 `4b973ae9ec6ceed6a5d59b582d1da25066eb9ef9` [release] Server client dependency advances 0.1.83 to 0.1.84. Fleetpane: Metadata only.
+- 3602 `6d1aa1f41561c142cebb6e5b208453ad1d5080b4` [packaging] Nix hash becomes 25V9uu0h… . Fleetpane: Packaging only.
+- 3603 `24526a3b2327362cfe2ffcd2f36bdb2034d9a05b` [worktrees] Branch slug validator returns validity and optional error. Fleetpane: Existing worktree plans validate Git inputs independently.
+- 3604 `b6103a59da7f65905aa69ff4b15a0ac59ea908b3` [archive] Worktree archive collects live and stored descendants, marks archiving, awaits settled agent archives and terminal teardown, then deletes worktree even after logged teardown rejection and clears archiving in finally. Fleetpane: Active archive/resource closure and workspace archive remain useful gaps; do not port continue-after-teardown-failure deletion into Fleetpane.
+- 3605 `0170eba23316b87bb4c32090094ff667c746fe8c` [provider-other] Claude list adds Opus 4.8 1M model. Fleetpane: No provider expansion.
+- 3606 `342e92d0c75942103cff62fe2c13ae8c2db605e2` [documentation] Changelog claims preserved archived agents plus new Claude model. Fleetpane: History-retaining archive candidate; no runtime proof.
+- 3607 `b0a0cb4a99e5433a0e11a3a0720950d789aeefbe` [release] Server client dependency advances 0.1.84 to 0.1.85. Fleetpane: Metadata only.
+- 3608 `23502e474d18e1ba3b6d659eddd4380a59fc83ba` [packaging] Nix hash becomes PYbY3Lk9… . Fleetpane: Packaging only.
+- 3609 `2e1b907c63fe3762503edd9720bb5c3a2c2f907b` [test-source] Local-slash fixture removes inline openProject helper. Fleetpane: Not executed.
+- 3610 `65ace2088055ad16497c33162a8c5873be76d2c0` [history] Initial sync planner takes cursor and authoritative-history flag. Fleetpane: Existing bounded history should reject incremental reads without baseline.
+- 3611 `0ee76b2ea08eb4e5f1d9992750674431cc045c74` [test-source] Reducer test covers stale-epoch reset replacing old tail/head. Fleetpane: Useful native regression scenario; not run.
+- 3612 `f861aa2e88262c6ba6904d2e416858d0f2bb9504` [layout] Compact composer left padding changes six to five. Fleetpane: Styling only.
+- 3613 `bb2f540f299cf448e2c4200fff5f5fc7e0472423` [layout] Compact timeline horizontal padding increases spacing two to three. Fleetpane: Styling only.
+- 3614 `1350167dda5db69985535d90c8760c1f989e43b5` [mobile] Draft tab uses translate-mode keyboard-shift style. Fleetpane: Outside desktop scope.
+- 3615 `cfc9665f6af14dcc592209634348c02ff90cba55` [voice-doc] Voice example switches local Parakeet v3 to v2. Fleetpane: Historical config only.
+- 3616 `3585c802661f52450a076903a19734685d1fe8f3` [paths] Preview target trims separators while preserving root/drive roots. Fleetpane: Native file identity must preserve platform roots.
+- 3617 `cdcf3d8d55d206dba2d55455e17554a284074a4c` [paths] Separate selected preview target repeats root-preserving trim. Fleetpane: Independent receipt retained.
+- 3618 `04fb0f9b82e1f0015515b1fecf397f94a11b2617` [voice] Local STT factory entry is removed. Fleetpane: Replacement engine lifecycle not audited.
+- 3619 `d1eb9766536db8dd8cd07efc8761c03c2851c20e` [commands] Provider commands are filtered when client command name collides. Fleetpane: Local/provider command collision needs explicit visible precedence.
+- 3620 `524aef5d757de46fe6480eae8976e680c170a780` [voice] Model catalog adds Parakeet v3 archive URL/directory. Fleetpane: Voice remains missing; no download made.
+- 3621 `8b1bb90ce3b7a6e530e007c8d2ba3d6c025e1c20` [workspace] Project icon component gains projectKey prop. Fleetpane: Custom project presentation candidate.
+- 3622 `14d176a4e23fe5ba9eb80cc84f2c5b0cf9be2dd4` [git-deferred] Diff refresh button wraps explicit action in tooltip. Fleetpane: Git expansion deferred.
+- 3623 `25d6fc85158cf4bf3c1e23f054a0ccf1b334bdcd` [metadata] Structured generation resolves providers through cwd snapshot manager. Fleetpane: Metadata service candidate; priority providers only.
+- 3624 `38f0560f9b39c2115021e816bc11fc4418967ccb` [source-view] Highlighted line renders selectable Text and placeholder for empty tokens. Fleetpane: Native source preview exists; exact whitespace/Copy must remain.
+- 3625 `69d36c76fef7aa8fbcc495a66f50d5e20a47f311` [settings] About section gains raw appVersion alongside display text. Fleetpane: Expose actual artifact version for compatibility diagnostics.
+- 3626 `ef3b8a42fdb7746dec74055d25000b6b3b3a7ab3` [source-view] Separate selected highlighted-line implementation repeats selectable text. Fleetpane: Independent receipt retained.
+- 3627 `fcd93a23ac6d36af46a2b15119b2ffc1adc2915f` [documentation] Metadata docs describe title/branch/commit/PR generation scope. Fleetpane: No automatic Git writes adopted.
+- 3628 `7ed0ce97df28177d19237e94a4ba16571ce130e5` [voice] Worker bytes copy Buffer into owned Uint8Array ArrayBuffer. Fleetpane: Explicit transfer ownership useful; voice still missing.
+- 3629 `0803d5ff4142350aa5a097fa800a391f6b554094` [models] Provider error UI gets provider retry callback/state instead of serverId prop. Fleetpane: Live catalog refresh/retry remains open.
+- 3630 `c47f3190d8295d8b56dc80b792fba435d230d233` [provider-other] ACP catalog adds Grok subscription-gated entry. Fleetpane: No additional provider authorized.
+- 3631 `c1453b25a766d37a96543bd94d658ad9c32dbac1` [provider-other] Claude feature helper trims model ID or returns null. Fleetpane: Other-provider reference only.
+- 3632 `daae71d1a89ea5f327e6eb3a5d6c750576ca07e6` [website] Agent marketing page adds Grok. Fleetpane: No native action.
+- 3633 `64e3a7152d83a2d0aa44d60188c52af97896310a` [documentation] Electron blog draft flag changes true to false. Fleetpane: Rust Kit scope unchanged.
+- 3634 `c2b4f3aa188bd028454b284e818022dba5ab9e6b` [test-source] Project-icon mock adds null data-URI converter. Fleetpane: Not executed.
+- 3635 `654ebadaf5b9877a7f9878bf5df9c849122a5c9e` [documentation] Changelog advertises Grok, Claude fast mode and multilingual dictation. Fleetpane: Voice candidate; providers outside priority not adopted.
+- 3636 `9e0c9d066232807b2d2410c1842a328385b66d17` [release] Server client dependency advances 0.1.85 to 0.1.86. Fleetpane: Metadata only.
+- 3637 `9860dd36ef4ae70ccb87f862bd74501365850de9` [packaging] Nix hash becomes eMHk8Cy+… . Fleetpane: Packaging only.
+- 3638 `47414abc5e66c515c953ce1a0ac7b3c5d55dfbf1` [website] Footer removes Cloud link. Fleetpane: No native action.
+- 3639 `44863ec1ddb709faed4d64d3be92158cda1c1a0d` [provider-other] OpenCode helper checks whether session is parent-tracked. Fleetpane: Exact subagent identity reference only.
+- 3640 `3c3574d6702bab91ddb7e5b9e0bd794c31aac319` [packaging] Overrides pin Reanimated 4.3.1 and Worklets .8.3. Fleetpane: No native dependency action.
+- 3641 `e04bb942e2b5800854ef454424916aa2d27843dc` [packaging] Nix hash becomes B6xcv2Qf… . Fleetpane: Packaging only.
+- 3642 `eea5932a217bc32bf82d0241b09442549192a6e7` [mobile] Sheet tracker turns dismissing into closed and resets notified flag. Fleetpane: Native modal reopen state needs separate implementation.
+- 3643 `2a13a082b72ece1a072193b342ddc741076e018e` [documentation] Changelog claims OpenCode child permissions and Android crash fix. Fleetpane: No provider/native acceptance inferred.
+- 3644 `bb6a4db6e0379f2e5d13276f53737db03efae972` [release] Server client dependency advances 0.1.86 to 0.1.87. Fleetpane: Metadata only.
+- 3645 `2c756e9a8aae26621e20efa2cd6b31f53ca6110a` [packaging] Nix hash becomes ngMXsN0U… . Fleetpane: Packaging only.
+- 3646 `17aa957d3e6bef4fc7d0fb5dcdb63c7b6def5ed7` [test-source] Bottom-sheet regression repeatedly clicks visible backdrop. Fleetpane: Not executed; polling is fixture behavior.
+- 3647 `41cb1af036652a688a2ec9566df5a0438eee805e` [test-source] Backdrop test exits early when already hidden. Fleetpane: Not executed.
+- 3648 `c8ca503cc3650271a4d4ee2e648c5603dcb43b96` [terminal] Directory-change handler becomes async to address subdirectory PTYs. Fleetpane: Workspace root/subdirectory terminal visibility candidate.
+- 3649 `0e3eb9cf75497a3093f8066740a85b637a1ab84e` [hosts] Settings host option takes exact ID/label/local/selected props. Fleetpane: Named local Hosts already exist; remote setup separate.
+- 3650 `3d96ea63543068ef69687c6a7519099e9c44df37` [history] Reducer removes inline sequence-unit accumulation loop entry. Fleetpane: Replacement ordering algorithm not audited.
+- 3651 `8cf80c248629c6d20df93637b693ff2d73d522ca` [git-deferred] Tracked-diff size helper is replaced at entry with section interface. Fleetpane: Git expansion deferred.
+- 3652 `d1f37b5d72f9cc2d5bed549990271ca33c09fc81` [test-source] Real response-loop fixture starts Express JSON MCP HTTP server. Fleetpane: Not executed; no model call.
+- 3653 `67133e3ebcf996a195f43084e93b0b63cba4bfc5` [terminal] Inline resize handler/positive-size gate is removed. Fleetpane: Replacement resize authority needs context.
+- 3654 `f26a81798ba230d785c0bf15fdf31a750999e14d` [rendering] Stream memo comparator compares known capability keys individually. Fleetpane: Native metadata invalidation should avoid unnecessary row rebuilding.
+- 3655 `a1c8e1a1f95142c9e3de6cf8b190015273f95145` [appearance] Font override distinguishes absent from empty, using fallback for empty. Fleetpane: Custom fonts/text sizing remain open.
+- 3656 `794cbcef632761be6469bfd4649a8bdd11537c0c` [menus] Web menu releases fixed height by native ID. Fleetpane: Use Kit popup layout instead.
+- 3657 `4cc72a84e83f0a635cfba581b7d8e17babcaf2e8` [protocol] Inline terminal-cell schema is removed. Fleetpane: Replacement snapshot contract not audited.
+- 3658 `9f88b4e69c9c70f93f595443ea5c6f1dbca0e916` [appearance] Appearance boundary keys Fragment by appearanceKey. Fleetpane: Native appearance updates must preserve draft/session state.
+- 3659 `c60bc9f5ae8280493ac19633f452dc6dce589e4c` [packaging] Nix hash becomes vz+c4jwa… . Fleetpane: Packaging only.
+- 3660 `1821f2853ad01defa4a311109539df853519e5f0` [test-source] Terminal snapshot helper waits for onCommitted callback. Fleetpane: Render commit distinct from PTY/server readiness; not run.
+- 3661 `626022451443e3bcced18b234b615dd6ad44094c` [documentation] Changelog advertises themes/custom fonts/interface and code sizes. Fleetpane: Appearance exists; font preferences remain gaps.
+- 3662 `360110accc9395c17dbb069727ef653b5d108b7f` [test-source] Resize fixture adds typed buffer-line wrapping fields. Fleetpane: Not executed.
+- 3663 `2227540fadb1e6f6a18e090d70c7f0d19a244ac2` [layout] Context meter circle uses dynamic center coordinates. Fleetpane: Native meter layout independent.
+- 3664 `922a93af2f0704b0ab633d6e16a7cc88de9262f1` [test-config] Browser test project disables file parallelism. Fleetpane: No tests executed.
+- 3665 `632c48fde311a8220d1fc2c97ce09e3cd9ce1728` [automation] Cron timezone validation constructs Intl formatter and reports invalid zone. Fleetpane: Future scheduler needs explicit timezone validation.
+- 3666 `a3b0af9ac0b0e50e57df8ff35e1b91de5e8f1ec7` [markdown] Web Markdown span signature expands props. Fleetpane: No native behavior inferred.
+- 3667 `357c31d16ef26f9239dbe10843bb21cafc9ec656` [historical-instructions] Release docs add EAS workflow view/log commands. Fleetpane: Historical instructions not executed.
+- 3668 `eb7495d231fd3e5d1733675142255fb3a7a32ec1` [mobile-release] Fastlane enables reject_if_possible and generic en-US release notes. Fleetpane: Outside desktop scope.
+- 3669 `3095bcb76025f5558e3e6c35de682b5001d2ff7d` [desktop] Watchdog deliberately retains background throttling to avoid constant frames. Fleetpane: Native idle-power budget requires measurement, no inherited claim.
+- 3670 `f9f6ff2dbc7ffeef82f25c47933c5005cb255137` [history] Session selects canonical timeline projection explicitly. Fleetpane: Keep authoritative history distinct from derived display rows.
+- 3671 `13a1d5ffbac293a3e5691745be27b512c221c79c` [documentation] Release date moves May 31 to June 1. Fleetpane: Metadata only.
+- 3672 `0efa0f3c42475dc9c5a116751a6a9de5c1dbf5fe` [release] Server client dependency advances 0.1.87 to 0.1.88. Fleetpane: Metadata only.
+- 3673 `89ec358d00adfe20b611dc74cbd2abe156c6a281` [packaging] Nix hash becomes R2EUXh8w… . Fleetpane: Packaging only.
+- 3674 `7fb3dda20cc0e90b188f4f37e045da87e33fd01f` [automation] Schedule MCP handler drops every/target arguments in displayed signature. Fleetpane: Scheduler contract must be reviewed as versioned API.
+- 3675 `539d2969f19dd07c404b6360c71b8092b86b310e` [website] Landing page adds social-proof tweet data. Fleetpane: No native action.
+- 3676 `ae5dfc0b3cf472f859643bb14f7507757b00dcb7` [resize] Resize handle ignores pointer ID already tracked. Fleetpane: Native drag ownership should prevent duplicate starts.
+- 3677 `b8ccd543c4ab5bae437254d7d07810c9a46f72be` [archive] Archive still logs settled teardown failures, but WorktreeTeardownError from deletion is now retained/logged while workspace records are archived; unrelated deletion errors rethrow. Fleetpane: Resource-complete archive remains open; do not interpret metadata archive or logged teardown failure as successful resource retirement.
+- 3678 `8c6abcb41feb8f1c2f88df351980ae82d744849b` [mobile-markdown] Strong renderer adds selectable iOS composition logic entry. Fleetpane: No desktop acceptance claim.
+- 3679 `d406c29e16608c5eb011671392122bade4995a75` [worktrees] Worktree root resolver honors explicit root and expands tilde. Fleetpane: Configurable creation location remains candidate within confinement rules.
+- 3680 `a807eb0eb27a0e91174c4290eb52bf27c0861473` [website] Workflow marketing describes browser/review/commit/PR/merge. Fleetpane: No parity proof; Git deferred.
+- 3681 `a5c2f39f6509a8f705df2104b00b46d1b1f4468f` [website] Social proof row spacing changes. Fleetpane: No native action.
+- 3682 `1ede1bccf758b59a6fe5cdd15b75e5042c3852ac` [layout-persistence] Window state store exposes async load/save plus final synchronous save. Fleetpane: Persisted native window geometry/layout remains open.
+- 3683 `ce8ad8c68f287df4a4ad0bf5af928b63495521c8` [composer] Composer left-content args gain compact-layout flag. Fleetpane: Responsive native controls should remain reachable.
+- 3684 `541e4c04cfee79829e5320f6cb2c57bce1ad78e5` [layout] Compact breakpoint drops 768 to 500. Fleetpane: Native minimum-window behavior requires independent acceptance.
+- 3685 `eac5d93f781b791fc8730090cfa36398995c1e00` [website] Hero mock composer spacing changes. Fleetpane: No native action.
+- 3686 `f1a20a9fe9ceae8cd1b36c6df8f105111dffb0c6` [services] Service proxy listener owns error/listening promise handlers. Fleetpane: Public service proxy is missing; authentication/confinement require design.
+- 3687 `07ace19b69f8334321ac08ce0d3a751f088091a0` [git-deferred] GitHub polling resolves target separately from branch and remote URL. Fleetpane: Git expansion deferred.
+- 3688 `48bc2f31661feda9747fbb9c5abda3c267b1b053` [provider-other] Cline catalog moves pinned 2.18.0 to major 3. Fleetpane: No additional provider authorized.
+- 3689 `5666b3014af1cc78430edd4a5092d8898000d8a2` [provider-other] Pi custom-role message emits timeline text when nonempty. Fleetpane: Other-provider reference only.
+- 3690 `4f3116d28a777c120d3764329506be8491cfe3d9` [startup] Bootstrap removes main HTTP listen promise fragment. Fleetpane: Replacement server ownership not audited.
+- 3691 `14af053c66bcb8c4b01fab9bcd4821300fa31100` [subagents] Parent-agent label reader accepts only trimmed nonempty string. Fleetpane: Exact ancestry identity must be Host-scoped.
+- 3692 `4b9eff1759d64f84da7507c285decbe6813e33e5` [startup] Separate selected change repeats HTTP listener removal. Fleetpane: Independent receipt retained.
+- 3693 `539441b3d5e6c343755b39b23a058203929c0bb8` [documentation] Changelog advertises proxy links, custom worktree roots, window state and heartbeats. Fleetpane: Gap inventory only; no runtime proof.
+- 3694 `5aecd361941705f24e29623be4e18ea7f475bf83` [release] Server client dependency advances 0.1.88 to 0.1.89. Fleetpane: Metadata only.
+- 3695 `6f6c939624573d5a548c67300dae35800fd236c6` [provider-other] Agoragentic catalog moves 1.3.0 to 1.3.2. Fleetpane: No provider expansion/payment actions.
+- 3696 `0d98df4a003113caa85bbe253b8c0c1131709635` [packaging] Nix hash becomes RKIUil3E… . Fleetpane: Packaging only.
+- 3697 `b365d818f3b697411b6a85675544226e6bcc5bc8` [packaging] Separate selected Nix hash also becomes RKIUil3E… . Fleetpane: Separate receipt retained.
+- 3698 `b4fd965c439bfe560da8ac680a87e18b7a829c93` [mobile] Combobox opening dismisses keyboard. Fleetpane: Native desktop editor focus should not be dismissed blindly.
+- 3699 `9f67542bd5f2ef21aa4bba67fa494b2018658bea` [mobile] Keyboard-dismiss hook acts only when enabled/open. Fleetpane: Outside desktop scope.
+- 3700 `45f412456cb9f9806e0f89730636739b18006a9b` [theme] Switch thumb interpolates white to accent foreground. Fleetpane: Native Kit styling independent.
+- 3701 `fbaa0caedbd30c79727c2b71ef1c189256fa3f43` [acp] Submitted user text skips empty extracted text and records message ID. Fleetpane: Preserve exact text/attachment semantics; empty text can still carry media.
+- 3702 `bb18cf618a3468c49a53ab28584bfb8be4e76b8f` [storage] Atomic file helper creates parent directory before writing. Fleetpane: Private permission/conflict guarantees need full body.
+- 3703 `38d690e425cca55f58d56e53fbff9cb6b873d603` [attachments] Composer adds typed attachment-sheet item entry. Fleetpane: Native attachments already exist; broader context types remain open.
+- 3704 `510a2994204ecf9334cba170aefa0b1f8c6f31f9` [historical-instructions] Epic skill prescribes PR babysitting agents and heartbeat/review handling. Fleetpane: Historical instructions ignored; no agents/PRs touched.
+- 3705 `76ae8c19b0b327691f8c5ab84d66aa42f2cadb3e` [workspace] Active agent list filters archived and client-invisible providers. Fleetpane: Preserve historical unsupported sessions without launch.
+- 3706 `3634f5e2d87018337d051015344f4fe1700b5ae1` [layout] Width observer ignores zero/negative measurements. Fleetpane: Native hidden-layout handling should retain prior valid bounds.
+- 3707 `3681fd132b91fe383f079ca82f4ce76d1036e120` [git-deferred] GitHub blob path normalizes separators and rejects empty. Fleetpane: Git expansion deferred.
+- 3708 `c0a0e3a1c62509eb7eacf857f7f5ac7b10aa3229` [integrations] Managed-file manifest reader maps all read errors to null. Fleetpane: Do not adopt broad silent fallback for permission/corruption failures.
+- 3709 `e9a746d4ea370132a34d0b06c02f0ae81e293bd5` [paths] Workspace opener recognizes normalized drive-letter paths. Fleetpane: Native cross-platform path semantics remain explicit.
+- 3710 `91ef9301c2ce0afb41512e5e3644b1bc3a547790` [questions] Question navigation button receives index/total/active/responding. Fleetpane: Existing question paging should preserve per-request drafts.
+- 3711 `bd4889e2435be2d501fe661cc6599567951a8f27` [questions] Separate selected question navigation repeats typed state props. Fleetpane: Independent receipt retained.
+- 3712 `c44ad7ecd1341925fe5d9ad95a7f3b5252f9e7fb` [activity] Sessions sort by lastActivityAt instead of creation time. Fleetpane: Native loaded activity sorting already documented.
+- 3713 `b51024451836957226c4fe3cd97c9b969b11df35` [git-deferred] Default Git action prefers mergeable PR without shipDefault condition. Fleetpane: Git writes deferred.
+- 3714 `6d29092fe67daf704fa1e01c3e665d04adeb7583` [history] Timeline projection explicitly returns empty bounds when none exist. Fleetpane: Do not fabricate sequence cursor from projected rows.
+- 3715 `369adced529d61376dbe573a653dec1d89c47433` [git-deferred] Ahead/base comparison fragment is removed. Fleetpane: Git expansion deferred.
+- 3716 `b3ba1572b397a296eac1798f2fa1aed45543591e` [automation] Scheduled create preserves explicit mode/features or resolves unattended config. Fleetpane: Do not grant unattended authority implicitly; scheduler missing.
+- 3717 `bf81496a4f5bb4ed31b77ea1d2bdf81931facb72` [automation] Separate selected schedule config repeats explicit-mode precedence. Fleetpane: Independent receipt; no scheduler implementation.
+- 3718 `4c730611e680388ebcc3ee8f5f3ddb90d19bf444` [markdown-files] File pane adds inherited Markdown text styling entry. Fleetpane: Markdown-file rendering/media remains open.
+- 3719 `eba8de6ab57b1849adfeae715444aac27fc360e3` [codex-import] Saved-session listing removes per-thread eager timeline Promise.all fragment. Fleetpane: Lazy metadata discovery useful for bounded import; replacement not audited.
+- 3720 `6e8b7aaa07c90190338021fb0de35cf2014a9cd3` [git-deferred] PR auto-merge predicate requires feature flag/PR/URL. Fleetpane: Git expansion deferred.
+- 3721 `71ce96b9139bbf479ba4eb45c43031b0d4d269f4` [automation] Schedule startup derives provisional title from config/prompt. Fleetpane: Run identity must remain separate from title.
+- 3722 `31ae545289400557acd2a3d4c908c21b439e8f6e` [navigation] Workspaces header opens command center through explicit action. Fleetpane: Native session switcher exists; workspace search remains open.
+- 3723 `7f9582e1977ed73df7d0047db09a554ebba41251` [navigation] Separate selected header repeats command-center action. Fleetpane: Independent receipt retained.
+- 3724 `ffe4d4046c908998f0d3994fc2ad182625450cd4` [provider-other] CodeBuddy catalog advances 2.101.0 to 2.102.0. Fleetpane: No provider expansion.
+- 3725 `f6c0b60b7cc486a7552f45bc556c97eb6037a629` [workspace] Sidebar row removes inline kebab archive menu fragment. Fleetpane: Native workspace archive remains open.
+- 3726 `b345ef1242a0e49d89a1381636f495ac33fbb223` [creation] Optimistic create no longer substitutes for initializing agent state. Fleetpane: Show actual provider initialization separately from local admission.
+- 3727 `801140abb215e5bbed1487a540d70df60d27133d` [release] Server client dependency advances 0.1.89 to 0.1.90-beta.1. Fleetpane: Metadata only.
+- 3728 `f3b7dac768bd3d53a5d95c361a5ef04a46c65fe4` [models] Provider diagnostic footer receives fetch age/compact/refresh/add actions. Fleetpane: Live catalog refresh remains useful gap.
+- 3729 `3e3e944cf47ff2dde9201785fae3b4b3f2d76b0b` [mobile] Adaptive sheet calculates safe-area padding using compact/footer state. Fleetpane: Outside desktop scope.
+- 3730 `b0c4cc99ed8a53e44ea969d36d59bf62bd5d5cf2` [hosts] Settings selected Host is validated against known Host list. Fleetpane: Refuse stale Host identity without silent retargeting.
+- 3731 `f139966554201d3703e1c3701eb8294738e243cb` [desktop] Window-control padding delegates to resolver. Fleetpane: Native titlebar geometry independent.
+- 3732 `6dcf3ffd6ae34aec5adc9f5afc334b5612a4ada1` [workspace] Empty contributing-agent state returns null timestamp when no previous bucket. Fleetpane: Preserve unknown/done distinction; full transition not reviewed.
+- 3733 `de5fa4dc36b8cae635ed6214275a8f75fad1f932` [release] Root adds beta-tagged publish and dry-run scripts. Fleetpane: No publication executed.
+- 3734 `66a5bd8a88c89871c21b05e5870c43bd195f9ae7` [workspace] Sidebar removes inline scripts/service icon branch. Fleetpane: Scripts remain missing; no runtime claim.
+- 3735 `f9791d7ab64a82dffba73d9aea15d4a62dd2eb6f` [mobile] Explorer animation maps mobile agent-list/file-explorer view constants. Fleetpane: Outside desktop scope.
+- 3736 `e381117b1c705fc5c1875b97fbde9491cccd8e3d` [provider-other] OpenCode metadata call uses shared concurrency limiter plus 10s timeout. Fleetpane: Do not mask contention with retries; no performance claim.
+- 3737 `f0370a3c209736c3097ccc7a7becd4bbcb1d404a` [voice] Dictation sender checks send sequence against segment count. Fleetpane: Voice streaming ownership remains open.
+- 3738 `b9f3e59d4812307a220e83a6f950e766660d6cac` [packaging] Nix hash becomes MEG/ywKG… . Fleetpane: Packaging only.
+- 3739 `0b62e3bd7f1139ccdf528730edf39e7167e4547d` [packaging] Separate selected Nix hash also becomes MEG/ywKG… . Fleetpane: Separate receipt retained.
+- 3740 `cd8e0a5e0870dc947b2b65c63bef57a7162e2382` [rendering] Project-block comparator derives old/new active route selection. Fleetpane: Native sidebar invalidation can remain selection-scoped.
+- 3741 `38f8179bc1aa3433d452deebc8b1f3145f224cd8` [workspace] Sidebar removes inline unique project-icon request memo. Fleetpane: Replacement request ownership not audited.
+- 3742 `de9d796567888344bbd080bdcfe9dbbe3d07f4b5` [workspace] Separate selected change repeats icon-request memo removal. Fleetpane: Independent receipt retained.
+- 3743 `1b350ac09e09fbbd3d0b1fccd99b88fb35e95914` [test-source] Skills update test seeds managed/user files to check preservation. Fleetpane: Useful owned-file scenario; not run.
+- 3744 `3ecf86933fc2ea05f23706ba9f38bd484048930a` [provider-other] OpenCode unattended-create flag separates parent/unattended from mode omission. Fleetpane: Do not propagate permission authority without explicit user intent.
+- 3745 `88d44ab2c54fb7c9febd3881c09c24503e9cd011` [provider-other] OpenCode question form sets allowOther:true. Fleetpane: Native questions already have Other; provider contract remains exact.
+- 3746 `1bca88bd30a381b960fe93374fa7ec1e1e5498e5` [workspace] Effective status helper receives pending creates and agents. Fleetpane: Separate local pending creation from provider runtime status.
+- 3747 `1daa4587e5fbde857074a1605c377d84795d2b0d` [source-view] Highlight parser table adds Dart. Fleetpane: Native syntax coverage may extend selectively.
+- 3748 `74d42cb3d0c18ca81541d90a95e52bc5bbb28d7a` [source-view] Separate selected parser change also adds Dart. Fleetpane: Independent receipt retained.
+- 3749 `3d8ef237e3f4e9da738d28cd6fb4dd7fc08a848f` [tabs] Mounted-tab LRU input includes active ID, available IDs and cap. Fleetpane: Native tabs/layout remain open; bound retained views without killing Hosts.
+- 3750 `81d973ffc4be5bec005c9561d17f0059d8a41acd` [git-deferred] Diff pane memoizes mode trigger style. Fleetpane: Git expansion deferred.
+- 3751 `9dbc75e78ed9b1b5e8948b5807d7c735600fab59` [provider-other] Claude ACP catalog advances .40.0 to .41.0. Fleetpane: No provider expansion.
+- 3752 `7048cd5c863d076820159d4ba16766ff19588193` [release] Server client dependency promotes beta.1 to stable .90. Fleetpane: Metadata only.
+- 3753 `9e2c75a8a3439531acafb02c9b653715e15ed82c` [packaging] Nix hash becomes Pkrkjp8R… . Fleetpane: Packaging only.
+- 3754 `b5192e577ae9ca1cc8c97ed7b1df93fa663286b2` [startup] Desktop defines named connection-registration error type. Fleetpane: Expose registration failure separately from daemon process health.
+- 3755 `c3515d74b90736b3947cd8f50028635b2671b50e` [provider-other] Claude history path uses shared canonical project-dir helper. Fleetpane: Other-provider history reference only.
+- 3756 `9d3b037d4f016930e635aaf062de05213b7846e2` [release] Server client dependency advances .90 to .91-beta.1. Fleetpane: Metadata only.
+- 3757 `f30f2170232e442cdfdcd9de7fd3fdf9095fb7e9` [packaging] Nix hash becomes U04ZysdA… . Fleetpane: Packaging only.
+- 3758 `e961ceef980c8fd27cb37f7352c1f565bf776100` [workspace] Workspace header gains explicit new-workspace callback. Fleetpane: Native workspace tabs/search remain open.
+- 3759 `45cca8a406b6d95ec2690dfe34fd98232821350c` [mobile-markdown] iOS paragraph renderer gains containsImage flag. Fleetpane: No desktop port.
+- 3760 `abf129f56eb67ef954d0a8fd57f078a7d9998476` [markdown] Plain Markdown style flattens style then strips Unistyles metadata. Fleetpane: Native styling independent; preserve selectable text.
+- 3761 `dd329a4f529a792a78c6bcec3bfa48882fb95eaf` [mobile] Bottom-sheet wrapper removes inline scope-provider JSX. Fleetpane: Outside desktop scope.
+- 3762 `dfddda7969016acbe603e41a8a15fccd7158d2bb` [models] Snapshot refresh timeout supports positive option or environment override. Fleetpane: Timeout tuning cannot establish root cause of slow catalog discovery.
+- 3763 `350bc08fc423b8561ae3492f3b6431d538e50bbb` [paths] File link span declares accessible link and explicit press handler. Fleetpane: Existing native navigation should keep exact anchors.
+- 3764 `1377adbece752a97795f4001518ec4f7ce6aa5ff` [provider-other] Claude model loader gains optional configDir. Fleetpane: No provider expansion.
+- 3765 `df635b570a3a56c9d595296aadd856668e5aa36b` [desktop] Pending project-open store removes empty path for exact WebContents ID. Fleetpane: Native startup intents should be window-scoped and explicit.
+- 3766 `7124a82298ba8696b35da471c054ea65583f09e6` [auth] Download tokens are single-use and expire; the HTTP path consumes before open, checks opened-handle regular-file status and streams bytes with explicit errors. Fleetpane: Local raw export is already documented; retain this only as a remote-download reference, not a missing native export capability or reviewed full auth boundary.
+- 3767 `0d1eecc388f552017763ae1719799f4113e72851` [files] Suggestion ignore names expand to venv/env. Fleetpane: Native recursive suggestions remain open.
+- 3768 `c89177c211ed5b2896ec66a5544938259d887c4c` [paths] Separate selected file-link span repeats accessible press semantics. Fleetpane: Independent receipt retained.
+- 3769 `59b32ab3bef964e32ec480ae5206ca7f8d03ca6a` [integrations] Removed epic skill name stays in managed list for stale-copy deletion. Fleetpane: Only delete proven managed files; no installations touched.
+- 3770 `d35bffed8b5bb49d5e80af189b58dd30dc01606f` [config] Persisted config schema permits optional $schema string. Fleetpane: Config editor candidate; validate rest of document.
+- 3771 `44e9287389ecbcd93513061d8007359c611506e9` [provider-other] Claude MCP config converter becomes exported. Fleetpane: No provider expansion.
+- 3772 `d454fa3af4336a928e219efd69c39298eab435af` [worktrees] Invalid branch error records rejected branch name and named error. Fleetpane: Keep exact Git validation failures visible.
+- 3773 `e09a1591acb908227a493cc6dcaca9be814da635` [worktrees] Separate selected invalid-branch error repeats same fields. Fleetpane: Independent receipt retained.
+- 3774 `20c03355f99e973894a2e12e0e08b477e0970e13` [git-deferred] PR ship-default helper rejects base branch or disabled GitHub features. Fleetpane: Git writes deferred.
+- 3775 `9b21ccd7f1b80994eefd553e8de626c7f65a31aa` [auth] CLI classifies Password required versus Incorrect password errors. Fleetpane: Remote setup must distinguish absent and rejected credentials.
+- 3776 `7408de63007a605f543744b858be2244b0cb9b99` [release] Server client dependency advances .91-beta.1 to beta.2. Fleetpane: Metadata only.
+- 3777 `fd022bc44bdf3712de1de4f537c8ab03dad46291` [packaging] Nix hash becomes EpxQim3v… . Fleetpane: Packaging only.
+- 3778 `9a8912b3efb8e396a7ff30b00ba8e6f9f5db38a5` [browser] New-tab URL guard allows http/https/about:blank. Fleetpane: Embedded browser gap needs explicit URL policy.
+- 3779 `db4376d17a96212a1236ff6252ece1db5c5f8ebc` [uploads] Client upload rejects input without byte representation. Fleetpane: Remote upload remains missing; bounds/auth require full context.
+- 3780 `9c16bc474b435e93f4763cd6b9310563c044c2f6` [mobile] Command center focuses sheet input after 300ms timer. Fleetpane: Do not port delay workaround to native focus handling.
+- 3781 `2822c02543ec758961464d5ba35185a8d02de6b9` [codex] Non-originating app-server client info uses Codex daemon name/version .0. Fleetpane: Preserve truthful runtime identity; no usage attribution claim.
+- 3782 `0cf1717e04481198f93c7fc8e78afd5c0db2330a` [git-deferred] Auto-archive gate removes ahead-of-origin checks, retains dirty refusal. Fleetpane: Automatic Git archive not adopted.
+- 3783 `6aa73baaabddb4ad68b8a1175214322f0cdc8412` [voice] Speech worker truncation retains final maxChars suffix. Fleetpane: Bound diagnostics and mark truncation explicitly.
+- 3784 `59d48d235ac1217733176255b63d944f6f4f0060` [provider-other] Pi removes direct slash command mapping fragment. Fleetpane: Other-provider reference only.
+- 3785 `e1b27fc58485b2c958e8ece3c332cd3c42e6aed0` [provider-other] Separate selected Pi command mapping deletion repeats. Fleetpane: Independent receipt retained.
+- 3786 `69715a77e987a92c9442a5264416ed976fdc0b3b` [git-deferred] Pull/push refusal explains zero incoming or outgoing commits. Fleetpane: Git writes deferred.
+- 3787 `d55e1622cb0c553c7893cf69e7017837ad04eec7` [preferences] Form preferences parse schema or return defaults on failure. Fleetpane: Native preferences should expose corrupt data rather than silently reset.
+- 3788 `7c8b290e2febf9f3c4ff69b6c2b4498d96ab22f8` [development] Desktop dev script removes app-dir resolution/main build fragment. Fleetpane: Historical dev tooling only.
+- 3789 `893e3376b0c3ef56878a89879123b6848a1e91bd` [lifecycle] Daemon stop wait checks unreachable endpoint with timeout. Fleetpane: Unreachable transport alone does not prove all resources stopped.
+- 3790 `06a8f952dbbd67816b89566291977fe76176d6f8` [mcp-config] Internal MCP-strip helper returns unchanged config when no servers exist. Fleetpane: Explicit provider MCP config remains open.
+- 3791 `09a1fe46fee9ccafd74f453b2f95a227387536da` [provider-other] OpenCode history builder introduces compaction-summary suppression flag. Fleetpane: No OpenCodex behavior inferred.
+- 3792 `6524677960f1bc4b497abd6f6ed55830ec88fc70` [documentation] Development docs expand runtime-home contents and remove disposable checkout-home claim. Fleetpane: Historical docs only; no live state touched.
+- 3793 `afbb2e8bb86d4606e6bc3b75c5a4ae29b43b53e0` [lifecycle] Worker supervisor guard exits immediately on IPC disconnect, changed/dead parent or expired heartbeat; explicit shutdown/restart intents first attempt supervisor handoff. Fleetpane: Keep independent Session Host outside replaceable Kit/controller lifetimes; remaining update/retirement gaps must account for provider/tool/PTY resources.
+- 3794 `7d748436f4e155d3bc07f3b7d81f03149b735862` [website] Sponsor route renders SiteShell and Sponsor heading. Fleetpane: No native action.
+- 3795 `a1fbc91163f0c282c3b6f03063fcb1cbd20e0cd3` [provider-other] Pi registry factory now forwards options. Fleetpane: No provider expansion.
+- 3796 `a6d0046c975e30c4451894891b2233f2e7453f06` [excluded-provider] Kimi catalog renames title/description to Code CLI. Fleetpane: Kimi/GLM explicitly excluded; no adoption.
+- 3797 `b04ff0e6b83567fd12d0243e6d587f5604d0dd02` [cli] Global ls option changes from compatibility no-op to all-directory listing. Fleetpane: Native full-index/session discovery remains a gap beyond loaded directory.
+- 3798 `9d9f6905c6db200757091a614f951f000c2dfabf` [provider-other] OpenCode suppresses assistant deltas during compaction until idle. Fleetpane: Preserve canonical messages; provider outside priority.
+- 3799 `b0954d1616129a4d113eb75b4e177001507b40f2` [lifecycle] Worker lifecycle log helper takes home/message/structured fields. Fleetpane: Useful supervisor-loss evidence; no runtime log read.
+- 3800 `409d67ef65d1f2b9f10e9a9de736013045981c66` [test-source] E2E setup removes inline fake gh executable factory. Fleetpane: Not executed; replacement fixture not audited.

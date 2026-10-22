@@ -1,0 +1,33 @@
+{
+  "baseline_ordinal": 5000,
+  "baseline_revision": "f1eeef32ac41185c365753adff8f352bba13426d",
+  "end_of_pin": true,
+  "extra_upstream_revision": "1198cddf635cfa57767386c734cb91e7c1f52b93",
+  "extra_upstream_separate": true,
+  "review_entries": 1215,
+  "first_ordinal": 5001,
+  "last_ordinal": 6215,
+  "first_revision": "936fd4b6da6eeb923ca4cd57aa6aab77cfb22254",
+  "last_revision": "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c",
+  "next_ordinal": null,
+  "next_revision": null,
+  "first_parent_merge_entries": 46,
+  "selected_patch_receipts_checked": 1215,
+  "supplemental_source_receipts_checked": 134,
+  "supplemental_byte_receipts_checked": 2,
+  "pinned_index_sha256": "sha256:75c58728bcaff1b8d94ed303d574fcc365cab2e01950a8a1f757075935ece82c",
+  "review_json_sha256": "sha256:0bab391452bf48a16b072dd4132d49e9d342d09e13c82885479261937d7836eb",
+  "checks": [
+    "full SHA/index and contiguous ordinals",
+    "parents and first-parent merge comparison basis",
+    "git diff-tree raw paths and SHA256",
+    "selected patch reconstructed from indexed git source diff ranges",
+    "supplemental source exact blob/line or byte range and SHA256 with complete ledger linkage",
+    "original-file line counters match diff spans",
+    "baseline5000 and exact end-of-pin null next",
+    "extra upstream sole-parent identity and exact separate documentation receipt"
+  ],
+  "errors": [],
+  "tests_executed": false,
+  "scope": "Receipt integrity validation only; not historical application tests or full source audit."
+}

@@ -29,8 +29,11 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 2580 个提交 `64065061c`（本地审查 2026-10-22）。**
-下一条是第 2581 个 `4a5dd986e`。逐条记录明确列出实际读过的路径，
+**固定索引的连续限定路径审查已到第 6215 个提交 `ce67efa9e`（本地审查 2026-10-22）。**
+另单独审阅了最新上游文档提交 `1198cddf635cfa57767386c734cb91e7c1f52b93`，
+其父提交即固定上游 tip；原序号保持不变。2026-10-22 实查 upstream/main 为该 SHA，
+Donut fork/main 仍为 `2d0977759b168264adb3961a862eda8cd574f562`。
+这是限定源码审阅进度，不能据此声称功能已追平。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6215 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1490,3 +1493,30 @@ Kimi/GLM 专属适配继续排除，历史 skills/AGENTS/提示词只作参考�
 2026-10-22 重新 fetch：fork tip 未变化，上游前进一条到
 `1198cddf635cfa57767386c734cb91e7c1f52b93`。旧 6215 条的固定索引不重排；
 新增提交另保留 full SHA 和父节点补充，不能把最新 fetch 当成全部功能完成。
+
+
+## 第 2581–6215 条与最新上游：连续审阅完成，按工作流继续实现
+
+后三批共 3635 条记录保留独立的 selected-source、metadata/type-only、
+测试源码、构建配置和文档范围：
+
+| 范围 | 主要脉络与 Fleetpane 后续契约 | 审阅与来源验证 |
+| --- | --- | --- |
+| 2581–3800 | 模型目录加载身份、provider 启动/恢复诊断、归档资源关闭、Host 更新。不要把目录缓存、provider 存活和任务完成混为一谈。 | [记录及缺口](../verification/assets/paseo-replay/2581-3800/README.md)，1220 条，37 次 first-parent merge，34 个补充源码片段 |
+| 3801–5000 | 工作区 tabs/恢复、命令发现权限、终端 profile、取消/steer 的真实 turn 边界。Codex 已返回空列表时不能私自读取其他来源补成非空；请求设置不等于 provider 确认。 | [记录及缺口](../verification/assets/paseo-replay/3801-5000/README.md)，1200 条，34 次 first-parent merge，49 个补充片段 |
+| 5001–6215 | 可恢复归档/显式删除、DeepSeek 私有历史、稳定分页、创建前草稿、带目标身份的跨 Host 路由、用量与扩展生命周期。远程路径归目标 Host；不能复制自动重放未知结果的策略。 | [记录及缺口](../verification/assets/paseo-replay/5001-6215/README.md)，1215 条，46 次 first-parent merge，134 个补充行片段及 2 个字节片段 |
+
+每条的 SHA、父节点、实际路径和片段都可以从 Git 对象重建；通用验证器
+对三批全部通过，并支持 minified 文件的半开字节范围及父对象 `^`/`^1`。
+收据验证只证明来源，不证明历史测试运行过或功能已经移植。
+
+[最新 `1198cddf` 的单独记录](../verification/assets/paseo-replay/latest-1198cddf/review.json)
+只涉及 Paseo skill 文档：Host-qualified agent 地址、目标拥有的 workspace/path、
+registration ID 和跨 Host finish 通知。文档中的命令和指令没有执行，
+不能作为 Fleetpane 已有远程传输或通知的验收。后续更新继续使用完整 SHA
+比较这两个远端 tip，补充 DAG 新节点，避免重新给原索引编号。
+
+本轮选取并实现的原生能力是 Markdown 文件 Source/Preview、对话图片查看器和
+provider 上下文用量。各自原生与进程证据独立记录；其余工作流继续按
+`docs/parity.md` 的实际缺口推进，语音/远程/插件仍遵循既定优先级，
+Git Diff 扩展暂缓，Kimi/GLM 不适配。

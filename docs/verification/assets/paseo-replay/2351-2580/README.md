@@ -20,3 +20,7 @@ capture procedure; their `/tmp` paths are historical and need not be recreated.
 Passing provenance checks do not prove historical tests passed, every changed
 path was audited, or Fleetpane implements these workflows. Native acceptance is
 recorded independently.
+
+Validation also passed the portable verifier against all 230 records; the verifier
+regression tests cover recomputed-digest tampering, wrong SHA/comparison, unsafe
+archive entries and exact supplemental source range binding.

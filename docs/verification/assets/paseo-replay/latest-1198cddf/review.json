@@ -1,0 +1,60 @@
+{
+  "revision": "1198cddf635cfa57767386c734cb91e7c1f52b93",
+  "ordinal": null,
+  "pinned": false,
+  "parents": [
+    "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c"
+  ],
+  "comparison_basis": "first-parent",
+  "pinned_tip": "ce67efa9e7faa8024a60e78c7b6f0ecf5ca21c5c",
+  "diff_tree_digest": "sha256:dbd3f2480257c4597d1d4fa4b549b64a03dc92a2faad179cf8816b0a6a6918eb",
+  "source_receipt_digest": "sha256:fd9bdbb7c61e81bb21493c67a299fab4535a54f4902e120ddc7422cf22646958",
+  "receipt_file": "extra-upstream/selected.patch",
+  "changed_paths": [
+    "M\tskills/paseo/SKILL.md"
+  ],
+  "selected_hunk_ranges": [
+    {
+      "path": "skills/paseo/SKILL.md",
+      "old_lines": [
+        1,
+        10
+      ],
+      "new_lines": [
+        1,
+        31
+      ],
+      "hunk_header": "@@ -1,10 +1,31 @@"
+    },
+    {
+      "path": "skills/paseo/SKILL.md",
+      "old_lines": [
+        57,
+        63
+      ],
+      "new_lines": [
+        78,
+        84
+      ],
+      "hunk_header": "@@ -57,7 +78,7 @@ paseo script stop <name> [--cwd <path> | --workspace <workspace-id>]"
+    },
+    {
+      "path": "skills/paseo/SKILL.md",
+      "old_lines": [
+        106,
+        118
+      ],
+      "new_lines": [
+        127,
+        135
+      ],
+      "hunk_header": "@@ -106,13 +127,9 @@ Schedules have the full list/inspect/update/pause/resume/run-once/log/delete sur"
+    }
+  ],
+  "scope": "Complete documentation diff only; historical instructions treated as data and not executed; not runtime or full application audit.",
+  "category": "documentation-only",
+  "finding": "Skill diff documents exact serverId plus agentId routing, destination-owned paths/workspaces, registrationId updates and per-tool remote limits. Waiting section documents finish notifications across Hosts and removes polling guidance details.",
+  "fleetpane_action": "Authenticated Host registry, routed orchestration, destination workspace identity, scoped permissions and cross-Host finish notifications remain candidates; use Rust GPUI Kit controls and stable Session Hosts. Documentation alone does not prove notification delivery or live runtime continuity.",
+  "historical_instructions_followed": false,
+  "file_blob_digest": "sha256:4081a50ae285a7a4e48eda8f95ad230e660d3cf629e647e44aa0bf94b27279c3"
+}
