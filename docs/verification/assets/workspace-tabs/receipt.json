@@ -1,0 +1,589 @@
+{
+  "source_base": "97bf5f7",
+  "source_state": "working tree including workspace-tabs implementation",
+  "environment": "Linux x86_64, isolated X11 :91, Mesa software renderer; debug unoptimized GPUI Kit 0.7.3",
+  "providers": {
+    "opencodex": "installed Codex 0.163.0 through existing loopback proxy, gpt-6.1-sol",
+    "deepseek": "DSH 0.2.0-rc.2, deepseek-v4-flash"
+  },
+  "workspaces": [
+    {
+      "workspace": {
+        "position": 1,
+        "id": "76c690f8-74f1-4d63-921b-4f12f78f2aa6",
+        "project_id": "6d2280b5-71ca-4421-8425-3ef80fc394ae",
+        "endpoint": {
+          "name": "opencodex",
+          "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock"
+        },
+        "directory": {
+          "path": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306
+        },
+        "project": {
+          "path": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306
+        },
+        "kind": "folder"
+      },
+      "session": "01a161b0-ac51-75d2-a91e-25134bb7312a",
+      "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+      "token": "TABS-OPENCODEX-ALPHA"
+    },
+    {
+      "workspace": {
+        "position": 2,
+        "id": "9088a766-deba-4fa9-918f-d7e4434e6b27",
+        "project_id": "908c164e-a5ce-4d79-b260-4252dced978d",
+        "endpoint": {
+          "name": "opencodex",
+          "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock"
+        },
+        "directory": {
+          "path": "/tmp/fp-tabs-real/beta",
+          "device": 66311,
+          "inode": 59023496
+        },
+        "project": {
+          "path": "/tmp/fp-tabs-real/beta",
+          "device": 66311,
+          "inode": 59023496
+        },
+        "kind": "folder"
+      },
+      "session": "01a161b1-f962-7c71-b257-c5bb0ca2a6d5",
+      "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+      "token": "TABS-OPENCODEX-BETA"
+    },
+    {
+      "workspace": {
+        "position": 3,
+        "id": "092671b9-d7bf-4fef-ab1d-406dc16e52d3",
+        "project_id": "05f778cc-cc2e-4074-bd86-b76a32fc4390",
+        "endpoint": {
+          "name": "deepseek",
+          "socket": "/tmp/fp-tabs-real/deepseek/host/control.sock"
+        },
+        "directory": {
+          "path": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306
+        },
+        "project": {
+          "path": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306
+        },
+        "kind": "folder"
+      },
+      "session": "e8eb253a-7711-485b-8e56-5b80419700e2",
+      "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+      "token": "TABS-DEEPSEEK-ALPHA"
+    }
+  ],
+  "observations": {
+    "before-native.json": {
+      "opencodex": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "host_pid": 2465129,
+        "provider_pid": 2465154,
+        "owner": {
+          "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+          "controller_id": "f6c3b150-98d1-4972-88ba-45f0991a2fa3",
+          "generation": 8
+        },
+        "journal_total": 4,
+        "operation_ids": [
+          "049e8831-4af3-47b7-a39f-a86912642922",
+          "2059026e-482a-46b5-afe9-8bf3da560ac0",
+          "815e2786-062e-470a-85f8-67c0a7467437",
+          "0b67bce5-ac4f-4fcc-8769-10cdcf9782ba"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      },
+      "deepseek": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "host_pid": 2480644,
+        "provider_pid": 2480658,
+        "owner": {
+          "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+          "controller_id": "5323f522-d7c7-4251-8363-aa726e6ffd06",
+          "generation": 3
+        },
+        "journal_total": 2,
+        "operation_ids": [
+          "1f6e05bb-dc3b-481a-b259-53fffa2caf3f",
+          "062a69dd-5f84-43b8-94e5-14676d817464"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      }
+    },
+    "after-navigation.json": {
+      "opencodex": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "host_pid": 2465129,
+        "provider_pid": 2465154,
+        "owner": {
+          "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+          "controller_id": "f6c3b150-98d1-4972-88ba-45f0991a2fa3",
+          "generation": 8
+        },
+        "journal_total": 4,
+        "operation_ids": [
+          "049e8831-4af3-47b7-a39f-a86912642922",
+          "2059026e-482a-46b5-afe9-8bf3da560ac0",
+          "815e2786-062e-470a-85f8-67c0a7467437",
+          "0b67bce5-ac4f-4fcc-8769-10cdcf9782ba"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      },
+      "deepseek": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "host_pid": 2480644,
+        "provider_pid": 2480658,
+        "owner": {
+          "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+          "controller_id": "5323f522-d7c7-4251-8363-aa726e6ffd06",
+          "generation": 3
+        },
+        "journal_total": 2,
+        "operation_ids": [
+          "1f6e05bb-dc3b-481a-b259-53fffa2caf3f",
+          "062a69dd-5f84-43b8-94e5-14676d817464"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      }
+    },
+    "after-reopen.json": {
+      "opencodex": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "host_pid": 2465129,
+        "provider_pid": 2465154,
+        "owner": {
+          "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+          "controller_id": "0ff906ab-a38c-473a-85e4-cdb5c8532399",
+          "generation": 9
+        },
+        "journal_total": 4,
+        "operation_ids": [
+          "049e8831-4af3-47b7-a39f-a86912642922",
+          "2059026e-482a-46b5-afe9-8bf3da560ac0",
+          "815e2786-062e-470a-85f8-67c0a7467437",
+          "0b67bce5-ac4f-4fcc-8769-10cdcf9782ba"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      },
+      "deepseek": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "host_pid": 2480644,
+        "provider_pid": 2480658,
+        "owner": {
+          "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+          "controller_id": "cb941d14-0930-4618-ac0f-ca410dd5ec6a",
+          "generation": 4
+        },
+        "journal_total": 2,
+        "operation_ids": [
+          "1f6e05bb-dc3b-481a-b259-53fffa2caf3f",
+          "062a69dd-5f84-43b8-94e5-14676d817464"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      }
+    },
+    "before-terminal-reopen.json": {
+      "opencodex": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "host_pid": 2465129,
+        "provider_pid": 2465154,
+        "owner": {
+          "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+          "controller_id": "6e3354a8-707c-4102-b41a-9091194dcd5c",
+          "generation": 10
+        },
+        "journal_total": 6,
+        "operation_ids": [
+          "049e8831-4af3-47b7-a39f-a86912642922",
+          "2059026e-482a-46b5-afe9-8bf3da560ac0",
+          "815e2786-062e-470a-85f8-67c0a7467437",
+          "0b67bce5-ac4f-4fcc-8769-10cdcf9782ba",
+          "d12c0ed1-91d7-44f3-af41-10a3377ca6b3",
+          "2152d084-1233-4f01-9272-ef14f9db2923"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [
+            "2c71c9e8-279c-44b9-a750-eb891eb230e6"
+          ],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      },
+      "deepseek": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "host_pid": 2480644,
+        "provider_pid": 2480658,
+        "owner": {
+          "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+          "controller_id": "fcbf288d-dcc6-46aa-b85d-75035fd18b12",
+          "generation": 5
+        },
+        "journal_total": 2,
+        "operation_ids": [
+          "1f6e05bb-dc3b-481a-b259-53fffa2caf3f",
+          "062a69dd-5f84-43b8-94e5-14676d817464"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      }
+    },
+    "after-terminal-reopen.json": {
+      "opencodex": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "host_pid": 2465129,
+        "provider_pid": 2465154,
+        "owner": {
+          "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+          "controller_id": "6e3354a8-707c-4102-b41a-9091194dcd5c",
+          "generation": 10
+        },
+        "journal_total": 6,
+        "operation_ids": [
+          "049e8831-4af3-47b7-a39f-a86912642922",
+          "2059026e-482a-46b5-afe9-8bf3da560ac0",
+          "815e2786-062e-470a-85f8-67c0a7467437",
+          "0b67bce5-ac4f-4fcc-8769-10cdcf9782ba",
+          "d12c0ed1-91d7-44f3-af41-10a3377ca6b3",
+          "2152d084-1233-4f01-9272-ef14f9db2923"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [
+            "2c71c9e8-279c-44b9-a750-eb891eb230e6"
+          ],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      },
+      "deepseek": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "host_pid": 2480644,
+        "provider_pid": 2480658,
+        "owner": {
+          "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+          "controller_id": "fcbf288d-dcc6-46aa-b85d-75035fd18b12",
+          "generation": 5
+        },
+        "journal_total": 2,
+        "operation_ids": [
+          "1f6e05bb-dc3b-481a-b259-53fffa2caf3f",
+          "062a69dd-5f84-43b8-94e5-14676d817464"
+        ],
+        "pending_requests": [],
+        "activity": {
+          "stopping": [],
+          "terminal_ids": [],
+          "turns": [],
+          "in_flight_operations": 0,
+          "unknown_operations": 0
+        },
+        "fault": null
+      }
+    }
+  },
+  "terminal_before": [
+    {
+      "closed": false,
+      "cols": 80,
+      "cwd": "/tmp/fp-tabs-real/alpha 中文",
+      "exit": null,
+      "id": "2c71c9e8-279c-44b9-a750-eb891eb230e6",
+      "input_fault": null,
+      "label": "shell",
+      "next_input": 1,
+      "output_eof": false,
+      "output_fault": null,
+      "pid": 2658954,
+      "rows": 24,
+      "workspace_id": "76c690f8-74f1-4d63-921b-4f12f78f2aa6"
+    }
+  ],
+  "terminal_after": [
+    {
+      "closed": false,
+      "cols": 80,
+      "cwd": "/tmp/fp-tabs-real/alpha 中文",
+      "exit": null,
+      "id": "2c71c9e8-279c-44b9-a750-eb891eb230e6",
+      "input_fault": null,
+      "label": "shell",
+      "next_input": 1,
+      "output_eof": false,
+      "output_fault": null,
+      "pid": 2658954,
+      "rows": 24,
+      "workspace_id": "76c690f8-74f1-4d63-921b-4f12f78f2aa6"
+    }
+  ],
+  "drafts": [
+    {
+      "key": {
+        "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock",
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "thread_id": "01a161b0-ac51-75d2-a91e-25134bb7312a",
+        "cwd": "/tmp/fp-tabs-real/alpha 中文"
+      },
+      "revision": 1,
+      "text": "OpenCodex ALPHA 中文草稿\n第二行",
+      "attempt": null
+    },
+    {
+      "key": {
+        "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock",
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "thread_id": "01a161b1-f962-7c71-b257-c5bb0ca2a6d5",
+        "cwd": "/tmp/fp-tabs-real/beta"
+      },
+      "revision": 1,
+      "text": "OpenCodex BETA 独立草稿\n第二行",
+      "attempt": null
+    },
+    {
+      "key": {
+        "socket": "/tmp/fp-tabs-real/deepseek/host/control.sock",
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "thread_id": "e8eb253a-7711-485b-8e56-5b80419700e2",
+        "cwd": "/tmp/fp-tabs-real/alpha 中文"
+      },
+      "revision": 1,
+      "text": "DeepSeek 中文草稿，仅保存\n不发送",
+      "attempt": null
+    }
+  ],
+  "layout_before_injected_failure": {
+    "revision": 47,
+    "layout": {
+      "tabs": [
+        {
+          "workspace": "76c690f8-74f1-4d63-921b-4f12f78f2aa6",
+          "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock",
+          "directory": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306,
+          "session": {
+            "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+            "thread_id": "01a161b0-ac51-75d2-a91e-25134bb7312a",
+            "cwd": "/tmp/fp-tabs-real/alpha 中文",
+            "archived": false
+          },
+          "panel": "conversation",
+          "files": {
+            "directory": "",
+            "file": "notes.md"
+          },
+          "terminal": [
+            "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+            "2c71c9e8-279c-44b9-a750-eb891eb230e6"
+          ],
+          "sidebar_width": 400,
+          "sidebar_visible": true
+        },
+        {
+          "workspace": "9088a766-deba-4fa9-918f-d7e4434e6b27",
+          "socket": "/tmp/fp-tabs-real/opencodex/host/control.sock",
+          "directory": "/tmp/fp-tabs-real/beta",
+          "device": 66311,
+          "inode": 59023496,
+          "session": {
+            "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+            "thread_id": "01a161b1-f962-7c71-b257-c5bb0ca2a6d5",
+            "cwd": "/tmp/fp-tabs-real/beta",
+            "archived": false
+          },
+          "panel": "conversation",
+          "files": {
+            "directory": "",
+            "file": null
+          },
+          "terminal": null,
+          "sidebar_width": 320,
+          "sidebar_visible": true
+        },
+        {
+          "workspace": "092671b9-d7bf-4fef-ab1d-406dc16e52d3",
+          "socket": "/tmp/fp-tabs-real/deepseek/host/control.sock",
+          "directory": "/tmp/fp-tabs-real/alpha 中文",
+          "device": 66311,
+          "inode": 59023306,
+          "session": {
+            "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+            "thread_id": "e8eb253a-7711-485b-8e56-5b80419700e2",
+            "cwd": "/tmp/fp-tabs-real/alpha 中文",
+            "archived": false
+          },
+          "panel": "conversation",
+          "files": {
+            "directory": "",
+            "file": null
+          },
+          "terminal": null,
+          "sidebar_width": 320,
+          "sidebar_visible": true
+        }
+      ],
+      "selected": "76c690f8-74f1-4d63-921b-4f12f78f2aa6",
+      "visible": true
+    }
+  },
+  "limits": [
+    "same-user local Hosts only",
+    "three sessions and one shell, no stress or release comparison",
+    "actual IME not exercised; Chinese clipboard input and exact readback only",
+    "no arbitrary split layout, tab drag ordering or conversation scroll persistence",
+    "terminal text drafts are retained while tab is open, not persisted across closing it"
+  ],
+  "final_build_navigation": {
+    "opencodex": {
+      "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+      "host_pid": 2465129,
+      "provider_pid": 2465154,
+      "owner": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "controller_id": "78eed4d1-11ca-4c86-813e-7c812ebd64cd",
+        "generation": 11
+      },
+      "journal_total": 7,
+      "pending_requests": [],
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [
+          "2c71c9e8-279c-44b9-a750-eb891eb230e6"
+        ],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      }
+    },
+    "deepseek": {
+      "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+      "host_pid": 2480644,
+      "provider_pid": 2480658,
+      "owner": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "controller_id": "fcbf288d-dcc6-46aa-b85d-75035fd18b12",
+        "generation": 5
+      },
+      "journal_total": 2,
+      "pending_requests": [],
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      }
+    }
+  },
+  "final_build_explicit_claim": {
+    "opencodex": {
+      "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+      "host_pid": 2465129,
+      "provider_pid": 2465154,
+      "owner": {
+        "host_id": "668e7826-2c50-49f8-9a8e-a69a1f57d156",
+        "controller_id": "874d25c9-8008-4d74-8999-334dcd438b72",
+        "generation": 12
+      },
+      "journal_total": 7,
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [
+          "2c71c9e8-279c-44b9-a750-eb891eb230e6"
+        ],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      }
+    },
+    "deepseek": {
+      "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+      "host_pid": 2480644,
+      "provider_pid": 2480658,
+      "owner": {
+        "host_id": "63b37c4b-1d94-4633-b73b-9b790a8a3084",
+        "controller_id": "fcbf288d-dcc6-46aa-b85d-75035fd18b12",
+        "generation": 5
+      },
+      "journal_total": 2,
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      }
+    }
+  }
+}

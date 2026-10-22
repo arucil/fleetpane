@@ -1535,3 +1535,15 @@ Git Diff 扩展暂缓，Kimi/GLM 不适配。
 同日随后前进到 `68fa464cdf341dcc798cb76be4e37a1ab289aaeb`，
 完整 diff 仅更新 `nix/npm-deps.hash`；标题中的 lockfile signatures 没有对应
 改动文件。已写入同一增量记录，仍没有新增应用源码行为。
+
+
+## Workspace tabs: follow-through from the reviewed history
+
+The 1385–1430 persistence work and 3801–5000 tab evolution now inform
+Fleetpane's bounded, exact-source workspace tabs. Project grouping, independent
+view state and schema-14 layout restore have [separate Linux native and installed
+OpenCodex/DeepSeek acceptance](../verification/2026-10-22-workspace-tabs.md).
+Closing a tab leaves accepted shell work with its original Host; this does not
+transfer a provider process or accept Host updates. The source-review cursor is
+unchanged. Drag ordering, split panes, scroll persistence and other parity gaps
+remain explicit in `docs/parity.md`.

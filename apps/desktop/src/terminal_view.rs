@@ -91,6 +91,7 @@ enum Reply {
 pub struct TerminalView {
     workspace: Workspace,
     connection: Option<Connection>,
+    shared_control: Option<crate::host_view::workspace::Control>,
     host: Option<Snapshot>,
     terminals: Vec<Info>,
     selected: Option<Uuid>,
@@ -102,11 +103,44 @@ pub struct TerminalView {
     pending: Option<Pending>,
     error: Option<String>,
     polling: bool,
+    view_visible: bool,
+    restore_selected: Option<(Uuid, Uuid)>,
     keyboard: keyboard::Keyboard,
 }
 impl EventEmitter<()> for TerminalView {}
 
 impl TerminalView {
+    pub(crate) fn focus_input(&self, window: &mut Window, cx: &mut Context<Self>) {
+        self.input.update(cx, |input, cx| input.focus(window, cx));
+    }
+
+    pub(crate) fn socket(&self) -> &std::path::Path {
+        &self.workspace.registration.endpoint.socket
+    }
+    pub(crate) fn share_control(&mut self, control: crate::host_view::workspace::Control) {
+        self.connection = control.borrow().clone();
+        self.shared_control = Some(control);
+    }
+
+    pub(crate) fn tab_close_status(&self) -> Result<bool, String> {
+        Ok(self.close_status()? && !self.actions.busy && self.pending.is_none())
+    }
+    pub(crate) fn saved_selection(&self) -> Option<(Uuid, Uuid)> {
+        self.host
+            .as_ref()
+            .and_then(|host| self.selected.map(|id| (host.host_id, id)))
+            .or(self.restore_selected)
+    }
+    pub(crate) fn restore_selection(&mut self, selected: Option<(Uuid, Uuid)>) {
+        self.restore_selected = selected;
+    }
+    pub(crate) fn set_visible(&mut self, visible: bool) {
+        if let Some(control) = &self.shared_control {
+            self.connection = control.borrow().clone();
+        }
+        self.view_visible = visible;
+    }
+
     pub fn new(workspace: Workspace, window: &mut Window, cx: &mut Context<Self>) -> Self {
         let label = cx.new(|cx| {
             let mut input = InputState::new(window, cx).placeholder("Terminal name");
@@ -125,7 +159,7 @@ impl TerminalView {
                     .await;
                 if this
                     .update_in(cx, |this, window, cx| {
-                        if this.polling {
+                        if this.polling && this.view_visible {
                             this.run(Action::Refresh, window, cx);
                         }
                     })
@@ -139,6 +173,7 @@ impl TerminalView {
         let mut view = Self {
             workspace,
             connection: None,
+            shared_control: None,
             host: None,
             terminals: vec![],
             selected: None,
@@ -150,6 +185,8 @@ impl TerminalView {
             pending: None,
             error: None,
             polling: true,
+            view_visible: true,
+            restore_selected: None,
             keyboard: keyboard::Keyboard::new(cx),
         };
         view.run(Action::Refresh, window, cx);
@@ -157,6 +194,9 @@ impl TerminalView {
     }
 
     fn run(&mut self, action: Action, window: &mut Window, cx: &mut Context<Self>) {
+        if let Some(control) = &self.shared_control {
+            self.connection = control.borrow().clone();
+        }
         let mutation = matches!(
             action,
             Action::Create(_) | Action::Mutate(_) | Action::Send(_, _) | Action::Keyboard(_)
@@ -350,6 +390,13 @@ impl TerminalView {
                         }
                         this.host = Some(*state);
                         this.terminals = infos;
+                        if let Some((host,id))=this.restore_selected.take() {
+                            if this.host.as_ref().is_some_and(|state|state.host_id==host) && this.terminals.iter().any(|info|info.id==id) {
+                                this.select(id,window,cx);
+                            } else {
+                                this.error=Some("Saved terminal is absent or its Host was replaced. Choose an existing terminal explicitly.".into());
+                            }
+                        }
                         if this.selected == selected && let Some(output) = output {
                             let result = if let Some(screen) = &mut this.screen {
                                 screen.apply(output)
@@ -369,7 +416,10 @@ impl TerminalView {
                             this.screen = None;
                         }
                     }
-                    Ok(Reply::Claimed(connection)) => this.connection = Some(connection),
+                    Ok(Reply::Claimed(connection)) => {
+                        if let Some(control)=&this.shared_control {*control.borrow_mut()=Some(connection.clone());}
+                        this.connection=Some(connection);
+                    },
                     Ok(Reply::Changed(info)) => {
                         this.pending = None;
                         if pending.as_ref().is_some_and(|p|p.keyboard) {

@@ -317,6 +317,49 @@ impl WorkspaceView {
         cx.notify();
     }
 
+    fn grouped_workspaces(&self, cx: &Context<Self>) -> Vec<Div> {
+        let mut groups: Vec<Vec<(usize, &Workspace)>> = Vec::new();
+        for (index, workspace) in self.records.iter().enumerate() {
+            if let Some(group) = groups
+                .iter_mut()
+                .find(|group| group[0].1.project_id == workspace.project_id)
+            {
+                group.push((index, workspace));
+            } else {
+                groups.push(vec![(index, workspace)]);
+            }
+        }
+        groups
+            .into_iter()
+            .map(|group| {
+                let workspace = group[0].1;
+                let project = workspace
+                    .registration
+                    .project
+                    .path
+                    .to_string_lossy()
+                    .into_owned();
+                div()
+                    .mt_3()
+                    .child(
+                        div()
+                            .text_xs()
+                            .text_color(cx.theme().muted_foreground)
+                            .truncate()
+                            .child(format!(
+                                "{} · {}",
+                                workspace.registration.endpoint.name, project
+                            )),
+                    )
+                    .children(
+                        group.into_iter().map(|(index, workspace)| {
+                            self.workspace_row(workspace, index, false, cx)
+                        }),
+                    )
+            })
+            .collect()
+    }
+
     fn workspace_row(
         &self,
         workspace: &Workspace,
@@ -482,7 +525,7 @@ impl Render for WorkspaceView {
                             .children(self.pins.iter().enumerate().map(|(index, workspace)| self.workspace_row(workspace, index, true, cx)))
                             .child(div().mt_3().text_sm().child("Saved workspaces")))
                         .when(self.records.is_empty(),|view|view.child("No saved workspaces."))
-                        .children(self.records.iter().enumerate().map(|(index, workspace)| self.workspace_row(workspace, index, false, cx)))
+                        .children(self.grouped_workspaces(cx))
                         .when(!self.jobs.is_empty(),|view|view.child(div().mt_3().text_sm().child("Recent worktree creations (up to 32)")))
                         .children(self.jobs.iter().enumerate().map(|(index,job)| {
                             let id=job.plan.id;
@@ -524,7 +567,7 @@ impl Render for WorkspaceView {
                             .child(div().w_full().min_w_0().text_sm().truncate().child(registration.directory.path.to_string_lossy().into_owned()))
                             .child(div().flex().gap_2()
                                 .child(Button::new("refresh-workspace").small().label("Refresh").disabled(self.busy).on_click(cx.listener(move |this,_,window,cx|this.run(Action::Inspect(id),window,cx))))
-                                .child(Button::new("use-workspace").small().label(format!("Prepare on {}",registration.endpoint.name)).disabled(self.busy).on_click(cx.listener(move |this,_,window,cx|this.run(Action::Use(id),window,cx))))
+                                .child(Button::new("use-workspace").small().label("Open workspace").disabled(self.busy).on_click(cx.listener(move |this,_,window,cx|this.run(Action::Use(id),window,cx))))
                                 .child(Button::new("copy-workspace-path").small().label("Copy path").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(copy_path.clone()))))
                             )
                             .when(overview.git.is_none(),|view|view.child("Ordinary folder; Git inspection was not requested."))

@@ -9,7 +9,7 @@ use fleetpane_session::{
 pub(super) struct State {
     pub busy: bool,
     pub error: Option<String>,
-    saved: Option<Saved>,
+    pub(super) saved: Option<Saved>,
     desired: Option<Target>,
     pub restoring: Option<Target>,
 }
@@ -46,6 +46,10 @@ impl HostView {
                 this.last_session.busy = false;
                 match result {
                     Ok(saved) => {
+                        if this.workspace_scope.is_some() {
+                            cx.notify();
+                            return;
+                        }
                         this.last_session.saved = Some(saved);
                         this.save_last_session(window, cx);
                     }
@@ -63,6 +67,20 @@ impl HostView {
     }
 
     pub(super) fn remember_session(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.workspace_scope.is_some() {
+            if let (Some(snapshot), Some(thread)) = (&self.snapshot, &self.thread) {
+                self.last_session.saved = Some(Saved {
+                    revision: 0,
+                    target: Some(Target {
+                        host_id: snapshot.host_id,
+                        thread_id: thread.id.clone(),
+                        cwd: thread.cwd.clone(),
+                        archived: self.selected_archived,
+                    }),
+                });
+            }
+            return;
+        }
         let (Some(snapshot), Some(thread)) = (&self.snapshot, &self.thread) else {
             return;
         };
@@ -120,7 +138,7 @@ impl HostView {
         .detach();
     }
 
-    fn restore_last_session(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+    pub(super) fn restore_last_session(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         let Some(target) = self
             .last_session
             .saved

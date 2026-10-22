@@ -6,6 +6,7 @@ mod files;
 mod host_choice;
 mod sessions;
 mod switcher;
+mod tabs;
 
 pub(crate) fn init(cx: &mut App) {
     switcher::init(cx);
@@ -29,12 +30,14 @@ use gpui_kit::{prelude::*, *};
 struct Slot {
     endpoint: Endpoint,
     view: Option<Entity<HostView>>,
+    control: std::rc::Rc<std::cell::RefCell<Option<fleetpane_session::client::Connection>>>,
     observation: Option<Subscription>,
     file_subscription: Option<Subscription>,
 }
 
 pub struct Workbench {
     slots: Vec<Slot>,
+    tabs: tabs::State,
     selected: usize,
     closing: bool,
     close_error: Option<String>,
@@ -65,10 +68,12 @@ pub struct Workbench {
 
 impl Workbench {
     fn export_pending(&self, cx: &App) -> bool {
-        self.file_navigation
-            .view
-            .as_ref()
-            .is_some_and(|view| view.read(cx).export_pending())
+        self.tab_export_pending(cx)
+            || self
+                .file_navigation
+                .view
+                .as_ref()
+                .is_some_and(|view| view.read(cx).export_pending())
             || self
                 .workspace_view
                 .as_ref()
@@ -114,11 +119,13 @@ impl Workbench {
                 .cloned()
                 .map(|endpoint| Slot {
                     endpoint,
+                    control: Default::default(),
                     view: None,
                     observation: None,
                     file_subscription: None,
                 })
                 .collect(),
+            tabs: tabs::State::default(),
             selected: 0,
             closing: false,
             close_error: None,
@@ -147,6 +154,23 @@ impl Workbench {
             _input_subscription: subscription,
         };
         value.load_host_choice(true, window, cx);
+        value.load_tabs(true, window, cx);
+        cx.spawn_in(window, async move |this, cx| {
+            loop {
+                cx.background_executor()
+                    .timer(std::time::Duration::from_millis(250))
+                    .await;
+                if this
+                    .update_in(cx, |this, window, cx| {
+                        this.capture_tabs(window, cx);
+                    })
+                    .is_err()
+                {
+                    break;
+                }
+            }
+        })
+        .detach();
         cx.spawn_in(window, async move |this, cx| {
             loop {
                 cx.background_executor()
@@ -178,8 +202,11 @@ impl Workbench {
         if let Some(error) = &self.host_choice.error {
             return Err(error.clone());
         }
-        let mut ready =
-            !self.host_choice.busy && !self.attention.review_busy && !self.export_pending(cx);
+        self.tabs_close_status(cx)?;
+        let mut ready = self.tabs_ready(cx)?
+            && !self.host_choice.busy
+            && !self.attention.review_busy
+            && !self.export_pending(cx);
         for slot in &self.slots {
             if let Some(view) = &slot.view {
                 ready &= view
@@ -199,6 +226,7 @@ impl Workbench {
     }
 
     pub(crate) fn request_close(&mut self, window: &mut Window, cx: &mut Context<Self>) -> bool {
+        self.capture_tabs(window, cx);
         match self.drafts_saved(cx) {
             Ok(true) => true,
             Err(error) => {
@@ -218,8 +246,9 @@ impl Workbench {
                         cx.background_executor()
                             .timer(std::time::Duration::from_millis(25))
                             .await;
-                        let waiting =
-                            this.update_in(cx, |this, window, cx| match this.drafts_saved(cx) {
+                        let waiting = this.update_in(cx, |this, window, cx| {
+                            this.capture_tabs(window, cx);
+                            match this.drafts_saved(cx) {
                                 Ok(true) => {
                                     window.remove_window();
                                     false
@@ -232,7 +261,8 @@ impl Workbench {
                                     cx.notify();
                                     false
                                 }
-                            });
+                            }
+                        });
                         if !matches!(waiting, Ok(true)) {
                             break;
                         }
@@ -249,6 +279,7 @@ impl Workbench {
         if self.export_pending(cx) {
             return;
         }
+        self.tabs.visible = false;
         self.diagnostics.active = false;
         self.sessions.active = false;
         self.leave_attention();
@@ -260,7 +291,8 @@ impl Workbench {
                 .creation_directory
                 .clone()
                 .expect("local Host configuration has a controller directory");
-            let view = cx.new(|cx| HostView::new(socket, directory, window, cx));
+            let control = slot.control.clone();
+            let view = cx.new(|cx| HostView::new(socket, control, directory, window, cx));
             slot.observation = Some(cx.observe(&view, |_, _, cx| cx.notify()));
             slot.file_subscription = Some(cx.subscribe_in(
                 &view,
@@ -306,14 +338,17 @@ impl Workbench {
                     cx,
                 )
             });
-            self.workspace_subscription=Some(cx.subscribe_in(&view,window,|this,_,workspace:&fleetpane_session::workspaces::Workspace,window,cx| {
-                if !this.browsing_workspaces { return; }
-                let index=this.slots.iter().position(|slot|slot.endpoint.socket==workspace.registration.endpoint.socket).expect("workspace target validated against configured Hosts");
-                this.select(index,window,cx);
-                this.slots[index].view.as_ref().expect("selected Host initialized").update(cx,|view,cx|view.prepare_workspace(workspace.clone(),window,cx));
-                this.route_notice=Some("Saved workspace prepared. Choose New session; take control first if needed. Directory identity is rechecked before creation.".into());
-                cx.notify();
-            }));
+            self.workspace_subscription = Some(cx.subscribe_in(
+                &view,
+                window,
+                |this, _, workspace: &fleetpane_session::workspaces::Workspace, window, cx| {
+                    if !this.browsing_workspaces {
+                        return;
+                    }
+                    this.open_workspace_tab(workspace.clone(), window, cx);
+                    cx.notify();
+                },
+            ));
             self.continuation_subscription=Some(cx.subscribe_in(&view,window,|this,_,event:&crate::paseo_import_view::Continuation,window,cx| {
                 if !this.browsing_workspaces {return;}
                 let Some(index)=this.slots.iter().position(|s|s.endpoint.socket==event.intent.target.endpoint.socket) else {
@@ -712,6 +747,7 @@ impl Workbench {
 impl Render for Workbench {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
         let selected = &self.slots[self.selected];
+        let tab_content = self.tabs_content(window, cx);
         div()
             .relative()
             .key_context("FleetpaneWorkbench")
@@ -732,6 +768,7 @@ impl Render for Workbench {
             .flex_col()
             .bg(cx.theme().background)
             .child(self.host_choice_bar(cx))
+            .child(self.tabs_bar(cx))
             .when_some(self.close_error.as_ref(), |view, error| {
                 view.child(
                     div()
@@ -831,6 +868,7 @@ impl Render for Workbench {
                     )
                 },
             )
+            .when_some(tab_content, |root, content| root.child(content))
             .when(self.choosing, |root| root.child(self.route_bar(cx)))
             .when(self.attention.active, |root| {
                 root.child(self.attention_view(cx))
@@ -869,7 +907,8 @@ impl Render for Workbench {
                 root.child(div().flex_1().min_h_0().child(view.clone()))
             })
             .when(
-                !self.choosing
+                !self.tabs_active()
+                    && !self.choosing
                     && !self.browsing_workspaces
                     && !self.attention.active
                     && !self.sessions.active

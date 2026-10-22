@@ -274,6 +274,9 @@ impl FilesView {
         value.run(action, window, cx);
         value
     }
+    pub(crate) fn saved_location(&self) -> crate::file_locations::Location {
+        self.location.clone()
+    }
     pub fn focus(&self, window: &mut Window, cx: &mut Context<Self>) {
         self.path.update(cx, |path, cx| path.focus(window, cx));
     }

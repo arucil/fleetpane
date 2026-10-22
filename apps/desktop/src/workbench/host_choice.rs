@@ -7,7 +7,7 @@ use std::path::PathBuf;
 pub(super) struct State {
     saved: Option<Saved>,
     pub busy: bool,
-    selected_during_load: bool,
+    pub(super) selected_during_load: bool,
     desired: Option<PathBuf>,
     pub error: Option<String>,
     notice: Option<String>,
@@ -50,7 +50,7 @@ impl Workbench {
                 this.host_choice.busy=false;
                 match result {
                     Ok(saved)=>{
-                        if startup && !this.host_choice.selected_during_load && !this.sessions.active && !this.attention.active && !this.browsing_workspaces && !this.choosing {
+                        if startup && !this.host_choice.selected_during_load && !this.sessions.active && !this.attention.active && !this.browsing_workspaces && !this.choosing && !this.tabs.visible {
                             let index=saved.configured_index(&this.configuration);
                             if saved.socket.is_some() && index.is_none() {
                                 this.host_choice.notice=Some("Saved Host is absent from this configuration. The first Host is shown; the saved choice is retained.".into());

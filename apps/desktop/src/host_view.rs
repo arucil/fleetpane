@@ -19,6 +19,7 @@ mod stopping;
 mod tasks;
 mod tree_navigation;
 mod usage;
+pub(crate) mod workspace;
 use crate::conversation_item::{CopyAnswer, ItemView, OpenFile, Row};
 use crate::question_view::{AnswerEvent, QuestionView};
 use fleetpane_runtime::Snapshot;
@@ -70,6 +71,13 @@ fn composer_max_rows(window: &Window) -> usize {
 
 pub struct HostView {
     socket: PathBuf,
+    shared_control: workspace::Control,
+    workspace_scope: Option<fleetpane_session::workspaces::Workspace>,
+    view_visible: bool,
+    restore_workspace_session: bool,
+    workspace_directory_pending: bool,
+    directory_observed: bool,
+    initial_sidebar_width: u16,
     connection: Option<Connection>,
     snapshot: Option<Snapshot>,
     attention_target: Option<fleetpane_session::attention::Item>,
@@ -201,6 +209,9 @@ impl HostView {
             .update(cx, |input, cx| input.focus(window, cx));
     }
 
+    pub(crate) fn tab_close_status(&self) -> Result<bool, String> {
+        Ok(self.draft_close_status()? && !self.busy && self.pending.is_none())
+    }
     pub fn badge(&self) -> String {
         if self.recovery.blocked() || self.observer_error.is_some() {
             return "Updates unavailable".into();
@@ -235,6 +246,7 @@ impl HostView {
 
     pub fn new(
         socket: PathBuf,
+        shared_control: workspace::Control,
         draft_directory: PathBuf,
         window: &mut Window,
         cx: &mut Context<Self>,
@@ -307,6 +319,13 @@ impl HostView {
         timeline.set_follow_mode(FollowMode::Tail);
         let mut view = Self {
             socket,
+            shared_control,
+            workspace_scope: None,
+            view_visible: true,
+            restore_workspace_session: false,
+            workspace_directory_pending: false,
+            directory_observed: false,
+            initial_sidebar_width: 320,
             connection: None,
             snapshot: None,
             attention_target: None,
@@ -395,12 +414,28 @@ impl HostView {
     }
 
     fn adopt_snapshot(&mut self, state: Snapshot) {
+        self.sync_workspace_control();
+        if self.connection.as_ref().is_some_and(|connection| {
+            state.host_id == connection.lease.host_id
+                && state.owner.as_ref().map_or(0, |owner| owner.generation)
+                    < connection.lease.generation
+        }) {
+            return; // A query started before this window's explicit claim.
+        }
         if self.connection.as_ref().is_some_and(|connection| {
             connection.lease.host_id != state.host_id
                 || state.owner.as_ref() != Some(&connection.lease)
         }) {
             // Once a newer observation revokes our lease, never restore it implicitly.
-            self.connection = None;
+            let revoked = self.connection.take().expect("revoked connection");
+            let mut shared = self.shared_control.borrow_mut();
+            if shared
+                .as_ref()
+                .is_some_and(|current| current.lease == revoked.lease)
+            {
+                *shared = None;
+            }
+            drop(shared);
             self.poll_paused = self.thread.is_some();
             self.recovery.clear();
             self.error = Some("Host identity or controller changed. Take control explicitly and reload this session; retained content is a previous observation.".into());
@@ -440,7 +475,8 @@ impl HostView {
         self.error = None;
         self.revision += 1;
         let socket = self.socket.clone();
-        let existing = self.connection.clone();
+        let existing = self.shared_control.borrow().clone();
+        let previous_lease = existing.as_ref().map(|connection| connection.lease.clone());
         let task = cx.background_executor().spawn(async move {
             background(async move {
                 let state = client::snapshot(&socket).await?;
@@ -476,8 +512,25 @@ impl HostView {
                             this.questions.clear();
                             this.permission_preview = None;
                         }
-                        this.connection = connection;
-                        this.adopt_snapshot(state);
+                        if take_control
+                            || this
+                                .shared_control
+                                .borrow()
+                                .as_ref()
+                                .map(|c| c.lease.clone())
+                                == previous_lease
+                        {
+                            *this.shared_control.borrow_mut() = connection.clone();
+                        }
+                        this.sync_workspace_control();
+                        if this.connection.as_ref().is_none_or(|connection| {
+                            state.owner.as_ref().is_some_and(|owner| {
+                                owner.host_id != connection.lease.host_id
+                                    || owner.generation >= connection.lease.generation
+                            })
+                        }) {
+                            this.adopt_snapshot(state);
+                        }
                         this.sync_questions(window, cx);
                         this.sync_permission_preview(cx);
                         for entry in &this.questions {
@@ -492,7 +545,8 @@ impl HostView {
                                 || Command::List(this.directory.refresh()),
                                 |thread| Command::Inspect {
                                     thread_id: thread.id.clone(),
-                                    resume: thread.status.kind == "notLoaded",
+                                    resume: this.workspace_scope.is_none()
+                                        && thread.status.kind == "notLoaded",
                                 },
                             );
                             this.command(command, window, cx);
@@ -511,9 +565,45 @@ impl HostView {
     }
 
     fn command(&mut self, command: Command, window: &mut Window, cx: &mut Context<Self>) {
-        if self.busy || self.pending.is_some() || !self.can_act() {
+        self.sync_workspace_control();
+        if matches!(command, Command::Create { .. })
+            && let Some(workspace) = &self.workspace_scope
+        {
+            self.workspace_target = Some(workspace.clone());
+        }
+        let mut command = command;
+        if let Some(workspace) = &self.workspace_scope {
+            let cwd = workspace
+                .registration
+                .directory
+                .path
+                .to_str()
+                .expect("registered UTF-8 directory");
+            match &mut command {
+                Command::List(request) => request.query.cwd = Some(cwd.to_owned()),
+                Command::Create { cwd: requested } if requested != cwd => {
+                    self.error = Some(
+                        "Choose this tab's workspace directory before creating a session".into(),
+                    );
+                    cx.notify();
+                    return;
+                }
+                _ => {}
+            }
+        }
+
+        if self.busy || self.pending.is_some() {
             return;
         }
+        let connection = match self.execution_connection(&command) {
+            Ok(Some(connection)) => connection,
+            Ok(None) => return,
+            Err(error) => {
+                self.error = Some(error.to_string());
+                cx.notify();
+                return;
+            }
+        };
         if matches!(
             command,
             Command::Send { .. }
@@ -589,9 +679,6 @@ impl HostView {
                 }
             }
         }
-        let Some(connection) = self.connection.clone() else {
-            return;
-        };
         if matches!(command, Command::Stop { .. }) {
             self.request_stop(connection, command, window, cx);
             return;
@@ -870,6 +957,7 @@ impl HostView {
             Command::List(request) => {
                 let page: Page = serde_json::from_value(completed.result)?;
                 self.directory.apply(request, page)?;
+                self.directory_observed = true;
                 self.update_session_directories();
                 if self.thread.as_ref().is_some_and(|selected| {
                     self.directory
@@ -947,6 +1035,11 @@ impl HostView {
                 }
                 let thread: Thread = serde_json::from_value::<Opened>(completed.result)?.thread;
                 thread.validate()?;
+                if self.workspace_scope.as_ref().is_some_and(|workspace| {
+                    std::path::Path::new(&thread.cwd) != workspace.registration.directory.path
+                }) {
+                    return Err("Session belongs to another workspace; current selection and draft retained".into());
+                }
                 if let Some(target) = &restored {
                     let host_id = self
                         .snapshot
@@ -1088,10 +1181,29 @@ impl HostView {
     }
 
     fn poll(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        self.sync_workspace_control();
         if self.busy || self.polling {
             return;
         }
-        if !self.owns() {
+        if self.view_visible
+            && self.restore_workspace_session
+            && self.snapshot.is_some()
+            && !self.last_session.busy
+        {
+            self.restore_workspace_history(window, cx);
+            if self.busy {
+                return;
+            }
+        }
+        if self.view_visible && self.workspace_directory_pending {
+            let command = Command::List(self.directory.refresh());
+            if matches!(self.execution_connection(&command), Ok(Some(_))) {
+                self.workspace_directory_pending = false;
+                self.command(command, window, cx);
+                return;
+            }
+        }
+        if !self.view_visible || !self.owns() {
             self.observe(window, cx);
             return;
         }
@@ -2253,7 +2365,7 @@ impl Render for HostView {
             .child(
                 div().flex_1().min_h_0().child(
                     h_resizable("host-session-layout").with_state(&self.directory_layout)
-                    .child(resizable_panel().visible(self.directory_visible).size(px(320.)).flex_none()
+                    .child(resizable_panel().visible(self.directory_visible).size(px(f32::from(self.initial_sidebar_width))).flex_none()
                         .size_range(px(240.)..(window.viewport_size().width-px(480.)).min(px(520.)).max(px(240.)))
                         .child(div()
                             .size_full()
@@ -2277,7 +2389,7 @@ impl Render for HostView {
                                     .flex_col()
                                     .gap_2()
                                     .child("Workspace directory")
-                                    .child(Input::new(&self.workspace))
+                                    .child(Input::new(&self.workspace).disabled(self.workspace_scope.is_some()))
                                     .child(self.render_recent(cx))
                                     .child(self.render_continuation(cx))
                                     .child(
@@ -2327,7 +2439,7 @@ impl Render for HostView {
                                     .child(
                                         Input::new(&self.filter_workspace)
                                             .aria_label("Workspace filter")
-                                            .disabled(blocked),
+                                            .disabled(blocked || self.workspace_scope.is_some()),
                                     )
                                     .child(
                                         div()
@@ -2416,7 +2528,7 @@ impl Render for HostView {
                             )
                             )
                             .when(
-                                self.directory.threads.is_empty() && !self.busy && owns,
+                                self.directory_observed && self.directory.threads.is_empty() && !self.busy && owns,
                                 |pane| {
                                     pane.child(
                                         div()
@@ -2426,6 +2538,7 @@ impl Render for HostView {
                                     )
                                 },
                             )
+                            .when(!self.directory_observed && !self.busy, |pane| pane.child(div().px_4().text_sm().child("Session directory has not been loaded. Refresh to inspect it.")))
                             .child(
                                 uniform_list(
                                     "host-threads",

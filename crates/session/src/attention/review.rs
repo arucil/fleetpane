@@ -176,7 +176,7 @@ mod tests {
     async fn schema_eleven_upgrade_keeps_existing_state_and_missing_current_table_is_an_error() {
         let root = std::env::temp_dir().join(format!("fp-review-upgrade-{}", Uuid::new_v4()));
         let store = Store::open(root.clone()).await.unwrap();
-        store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE session_selection; DROP TABLE attention_reviews; PRAGMA user_version=11;")?;Ok(())}).await.unwrap();
+        store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; PRAGMA user_version=11;")?;Ok(())}).await.unwrap();
         let reopened = Store::open(root.clone()).await.unwrap();
         reopened.review_completions(vec![item()]).await.unwrap();
         reopened
@@ -189,7 +189,7 @@ mod tests {
                 );
                 assert_eq!(
                     db.query_row("PRAGMA user_version", [], |row| row.get::<_, i64>(0))?,
-                    13
+                    14
                 );
                 db.execute("DROP TABLE attention_reviews", [])?;
                 Ok(())

@@ -649,8 +649,9 @@ automatic failover; stale/uncertain creations are never replayed on another Host
 `fleetpane-host route hosts.json Codex` reports the same recommendation read-only,
 without claiming control or creating anything; no ready target returns a nonzero
 exit status. Configurations without `routes` retain manual selection. The file is
-reloaded when opening a window. Session selections remain memory-only; saved text
-drafts restore when their original session is reopened.
+reloaded when opening a window. Generic Host views retain their explicit last-session recovery. Workspace tabs
+now restore their selected sessions and bounded layout; saved text drafts remain
+independently bound to their original sessions.
 Group creation bindings persist in `hosts.creations/creations.sqlite3` for a
 `hosts.json` configuration. **Saved group creations** restores prepared work and
 checks attempted creations against their original Host, including after a window
@@ -682,6 +683,27 @@ provider recovery. See [ADR 0018](docs/adr/0018-durable-local-creation-intents.m
 Older clients reject the optional configuration field. No Host protocol or journal upgrade is
 needed for this slice. See [the decision](docs/adr/0017-explicit-ready-host-selection.md)
 and [local verification](docs/verification/2026-10-20-host-selection.md).
+
+## Workspace tabs and saved layout
+
+In **Workspaces**, choose **Open workspace** to open or select a tab. The loaded
+catalog groups entries by project. Up to 32 tabs keep their own conversation,
+files and terminal panels. Tab labels include their Host; equal directory names
+on different Hosts remain separate sources.
+
+Normal close/reopen restores tabs, selected session, file location, terminal
+selection and sidebar width/visibility. Restored history and terminal output are
+read-only until **Take control**; restoration does not resume provider contexts,
+send messages or start shells. Taking control is shared by tabs of that exact
+Host within the window. **Resume** remains explicit for an unloaded context.
+Closing a tab leaves its running tasks and shells with the Host.
+
+Layout saves use revision checks. If a write fails, **Reload saved layout** reads
+the stored record; **Keep saved layout** pauses this window's layout writes and
+allows closing while retaining the previous record. Session drafts keep their
+own save guards. Conversation scroll, split panes, drag ordering and terminal
+text-draft persistence after tab closure are not included.
+[Behavior and verification](docs/verification/2026-10-22-workspace-tabs.md).
 
 ## Saved projects and workspaces
 

@@ -107,6 +107,11 @@ impl Command {
         self.rpc().map(|_| ())
     }
 
+    pub fn is_query(&self) -> Result<bool, Error> {
+        let (method, _) = self.rpc()?;
+        Ok(fleetpane_runtime::is_query_method(method))
+    }
+
     pub fn is_composer_input(&self) -> bool {
         matches!(self, Self::Send { .. } | Self::Steer { .. })
     }
