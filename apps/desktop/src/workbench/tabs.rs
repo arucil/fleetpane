@@ -57,6 +57,10 @@ pub(super) struct State {
 }
 
 impl Workbench {
+    pub(super) fn workspace_pin_save_failed(&self) -> bool {
+        self.tabs.pins.close_status().is_err()
+    }
+
     pub(super) fn update_workspace_names(&mut self, workspaces: &[Workspace]) {
         for entry in &mut self.tabs.entries {
             if let Some(current) = &mut entry.workspace

@@ -1,5 +1,12 @@
 # Fleetpane
 
+**Workspaces → Pinned** now supports saved drag/Up/Down ordering. Concurrent
+changes require **Reload pins**; failures retain the saved order and block normal
+close until resolved or acknowledged. Newly pinned entries stay first.
+CLI: `fleetpane-host workspace STORE reorder-pins EXPECTED_UUIDS_JSON ORDER_UUIDS_JSON`.
+[Contract](docs/adr/0119-local-workspace-pin-order.md),
+[Linux fixture acceptance and limits](docs/verification/2026-10-23-workspace-pin-order.md).
+
 Saved workspaces now have device-local display names. **Workspaces → Rename**
 updates catalog entries, pins and open tabs with revision-checked saves; restore
 the default label with **Use default name**. Paths, sessions and drafts keep
@@ -1007,8 +1014,9 @@ fleetpane-host workspace /absolute/hosts.creations toggle-pin WORKSPACE_UUID
 
 This adds local quick access; workspace tabs now have separate saved-layout,
 navigation, drag ordering and pin shortcuts. Each `toggle-pin` invocation is one
-transition; use `pin ... on|off` for idempotent assignment. Pin ordering remains
-open. See [the decision](docs/adr/0025-local-workspace-pins.md)
+transition; use `pin ... on|off` for idempotent assignment. Pin ordering now has
+[separate acceptance](docs/verification/2026-10-23-workspace-pin-order.md).
+See [the decision](docs/adr/0025-local-workspace-pins.md)
 and [verification](docs/verification/2026-10-20-workspace-pins.md).
 
 Choose **Rename** on a saved or pinned row to save a local display name. Names

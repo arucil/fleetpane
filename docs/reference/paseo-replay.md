@@ -1650,3 +1650,15 @@ key-edge tracking for Kit's X11 repeat behavior. [Linux fixture acceptance](../v
 covers popup isolation, same-path/offline Hosts, real PTY input, cached pin lists,
 exact drafts and replacement. No history cursor or upstream freshness claim
 changes; pin ordering and other-platform native acceptance remain open.
+
+## Saved workspace pin order: continued implementation
+
+Follow-through from `packages/app/src/hooks/use-sidebar-pins.ts` and its test at
+`a486b0558168c08890890e787d55cfb88c0d7256`: saved order applies to existing pins,
+and newly pinned entries stay first. Fleetpane now exposes drag/Up/Down and one
+atomic exact-list GUI/CLI command. Different saved order or membership refuses
+stale actions without replay. [Linux fixture acceptance](../verification/2026-10-23-workspace-pin-order.md)
+covers offline/same-path endpoints, rollback, close/reload/keep, conflict recovery,
+900×560, replacement and exact drafts. This does not advance the history cursor
+or claim new upstream freshness; automatic cross-window refresh, cross-window
+drag, edge autoscroll and other-platform GUI remain open.

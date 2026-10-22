@@ -364,11 +364,13 @@ impl Workbench {
                 &view,
                 |this, view, event: &crate::workspace_view::NamesUpdated, cx| {
                     this.update_workspace_names(&event.0);
-                    if !view.read(cx).name_save_failed()
-                        && this.close_error.as_ref().is_some_and(|error| {
-                            error.starts_with("Window remains open: Workspace name save:")
-                        })
-                    {
+                    if this.close_error.as_ref().is_some_and(|error| {
+                        (!view.read(cx).name_save_failed()
+                            && error.starts_with("Window remains open: Workspace name save:"))
+                            || (!view.read(cx).pin_save_failed()
+                                && error.starts_with("Window remains open: Workspace pin save:")
+                                && !this.workspace_pin_save_failed())
+                    }) {
                         this.close_error = None;
                     }
                     cx.notify();

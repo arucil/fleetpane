@@ -1,0 +1,27 @@
+All commands from /home/amlo/Projects/Rust/fleetpane.
+
+cargo test --workspace --locked                         workspace-tests.log (370 pass)
+cargo test -p fleetpane-session workspace_pins --locked pin-tests.log (7 pass)
+cargo test --manifest-path apps/desktop/Cargo.toml --locked desktop-tests.log (51 pass)
+cargo clippy --workspace --all-targets --locked -- -D warnings workspace-clippy.log
+cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings desktop-clippy.log
+cargo fmt --all --check                                 pass
+cargo fmt --manifest-path apps/desktop/Cargo.toml --check pass
+git diff --check                                       pass
+cargo build -p fleetpane-host --locked                   pass
+cargo build --manifest-path apps/desktop/Cargo.toml --locked pass
+cargo check --workspace --locked --target x86_64-pc-windows-gnu windows-check.log
+python3 -m unittest discover -s scripts/tests -p '*_test.py' python-tests.log (22 pass)
+python3 scripts/workspace-pins-smoke.py                  pins-smoke.log
+
+Fixture: python3 scripts/workspace-names-smoke.py --fixture /tmp/fp-pin-order-native
+Seed saved workspace tabs: python3 /tmp/fp-pin-order-native/probe.py seed
+Local failure injection/removal: probe.py refuse / probe.py allow
+Each probe NAME captures exact local state and synthetic Host snapshots.
+
+Native workspace: agent-workspace-linux fp-pin-order, X11 :91.
+No host desktop input. LIBGL_ALWAYS_SOFTWARE=1.
+Launch: apps/desktop/target/debug/fleetpane-desktop --hosts /tmp/fp-pin-order-native/hosts.json --preferences-dir /tmp/fp-pin-order-native/preferences
+Normal close acceptance uses actual Alt+F4, not the automation close helper.
+Three actual normal exits are code 0; all remaining task apps and owned Hosts/providers were stopped.
+No new installed-model run or macOS/Windows/native Wayland GUI acceptance.

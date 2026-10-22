@@ -1,5 +1,6 @@
 //! Existing local directories. Host/provider lifetime and ownership stay separate.
 mod names;
+mod pins;
 use crate::file_locations::Locations;
 use crate::files_view::FilesView;
 use crate::host_view::background;
@@ -33,6 +34,8 @@ enum Action {
     Check(Uuid),
     Diff(Uuid, Scope, String),
     Pin(Uuid, bool),
+    OrderPins(Vec<Uuid>, Vec<Uuid>),
+    ReloadPins,
     Rename(Uuid, u64, Option<String>),
     ReloadName(Uuid),
 }
@@ -67,6 +70,8 @@ pub struct WorkspaceView {
     name_target: Option<Workspace>,
     name_saving: bool,
     name_error: Option<String>,
+    pin_saving: bool,
+    pin_error: Option<String>,
     records: Vec<Workspace>,
     pins: Vec<Workspace>,
     jobs: Vec<Job>,
@@ -97,6 +102,9 @@ impl WorkspaceView {
     pub(crate) fn name_save_failed(&self) -> bool {
         self.name_error.is_some()
     }
+    pub(crate) fn pin_save_failed(&self) -> bool {
+        self.pin_error.is_some()
+    }
     pub(crate) fn shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
         [&self.input, &self.branch, &self.base, &self.name_input]
             .iter()
@@ -122,7 +130,10 @@ impl WorkspaceView {
         if let Some(error) = &self.name_error {
             return Err(format!("Workspace name save: {error}"));
         }
-        if self.name_saving {
+        if let Some(error) = &self.pin_error {
+            return Err(format!("Workspace pin save: {error}"));
+        }
+        if self.name_saving || self.pin_saving {
             return Ok(false);
         }
         if self.export_pending(cx) {
@@ -168,6 +179,8 @@ impl WorkspaceView {
             name_target: None,
             name_saving: false,
             name_error: None,
+            pin_saving: false,
+            pin_error: None,
             records: vec![],
             pins: vec![],
             jobs: vec![],
@@ -203,11 +216,20 @@ impl WorkspaceView {
         }
         self.busy = true;
         let name_action = matches!(action, Action::Rename(..) | Action::ReloadName(..));
+        let pin_action = matches!(
+            action,
+            Action::Pin(..) | Action::OrderPins(..) | Action::ReloadPins
+        );
         self.name_saving = name_action;
+        self.pin_saving = pin_action;
         self.error = None;
         if !matches!(
             action,
-            Action::Pin(..) | Action::Rename(..) | Action::ReloadName(..)
+            Action::Pin(..)
+                | Action::OrderPins(..)
+                | Action::ReloadPins
+                | Action::Rename(..)
+                | Action::ReloadName(..)
         ) {
             self.diff = None;
         }
@@ -216,6 +238,8 @@ impl WorkspaceView {
             Action::List(_)
                 | Action::Diff(..)
                 | Action::Pin(..)
+                | Action::OrderPins(..)
+                | Action::ReloadPins
                 | Action::Rename(..)
                 | Action::ReloadName(..)
         ) {
@@ -240,6 +264,10 @@ impl WorkspaceView {
                     Action::Pin(id, pinned) => {
                         Ok(Reply::Pinned(store.set_workspace_pinned(id, pinned).await?))
                     }
+                    Action::OrderPins(expected, order) => Ok(Reply::Pinned(
+                        store.reorder_workspace_pins(expected, order).await?,
+                    )),
+                    Action::ReloadPins => Ok(Reply::Pinned(store.pinned_workspaces().await?)),
                     Action::Rename(id, revision, name) => Ok(Reply::Name(
                         store.rename_workspace(id, revision, name).await?,
                     )),
@@ -302,9 +330,14 @@ impl WorkspaceView {
             let _closed = this.update_in(cx, |this, window, cx| {
                 this.busy = false;
                 this.name_saving = false;
+                this.pin_saving = false;
                 match reply {
                     Ok(Reply::List(records,jobs,pins)) => { cx.emit(NamesUpdated(records.iter().chain(&pins).cloned().collect())); this.records = records; this.jobs=jobs; this.pins=pins; }
-                    Ok(Reply::Pinned(pins)) => this.pins=pins,
+                    Ok(Reply::Pinned(pins)) => {
+                        this.pin_error=None;
+                        cx.emit(NamesUpdated(pins.clone()));
+                        this.pins=pins;
+                    },
                     Ok(Reply::Registered(records, overview)) => {
                         this.records = records;
                         this.overview = Some(overview);
@@ -350,6 +383,7 @@ impl WorkspaceView {
                         }
                     }
                     Err(error) if name_action => this.name_error = Some(error.to_string()),
+                    Err(error) if pin_action => this.pin_error = Some(error.to_string()),
                     Err(error) => this.error = Some(error.to_string()),
                 }
                 cx.notify();
@@ -546,7 +580,7 @@ impl WorkspaceView {
                         ))
                         .small()
                         .label(if pinned { "Unpin" } else { "Pin" })
-                        .disabled(self.busy)
+                        .disabled(self.busy || self.pin_error.is_some())
                         .on_click(cx.listener(
                             move |this, _, window, cx| {
                                 this.run(Action::Pin(id, !pinned), window, cx)
@@ -555,6 +589,9 @@ impl WorkspaceView {
                     ),
             )
             .child(div().text_xs().truncate().child(path.into_owned()))
+            .when(shortcut, |view| {
+                view.child(self.pin_controls(workspace, index, cx))
+            })
             .when(shortcut, |view| {
                 view.child(
                     Button::new(("open-pinned-workspace", index))
@@ -624,6 +661,7 @@ impl Render for WorkspaceView {
             )
             .when(self.busy,|view|view.child(div().text_sm().child("Working…")))
             .children(self.error.iter().map(|error|div().text_sm().text_color(cx.theme().danger).child(error.clone())))
+            .child(self.pin_status(cx))
             .child(div().flex_1().min_h_0().flex().gap_4()
                 .child(div().w_80().flex_shrink_0().flex().flex_col().gap_2()
                     .child(div().flex().gap_2()
@@ -633,7 +671,7 @@ impl Render for WorkspaceView {
                     .child(div().id("workspace-records").flex_1().min_h_0().overflow_y_scroll()
                         .when(!self.pins.is_empty(), |view| view
                             .child(div().text_sm().child(format!("Pinned · {} / 32", self.pins.len())))
-                            .children(self.pins.iter().enumerate().map(|(index, workspace)| self.workspace_row(workspace, index, true, cx)))
+                            .children(self.pins.iter().enumerate().map(|(index, workspace)| self.pinned_row(workspace, index, cx)))
                             .child(div().mt_3().text_sm().child("Saved workspaces")))
                         .when(self.records.is_empty(),|view|view.child("No saved workspaces."))
                         .children(self.grouped_workspaces(cx))

@@ -1,0 +1,57 @@
+{
+  "source_base": "708d313ec5e6d1674bdc32fb9b1156e235eea4d2",
+  "native": "Linux x86_64 isolated X11 :91 GPUI Kit 0.7.3 debug Mesa software",
+  "desktop_sha256": "d76fa515d502d84d746f5e59c4739c8de73d5a04b57fba0bd88806b2625ad06c",
+  "clipboard": {
+    "before": {
+      "selection": "clipboard",
+      "content": "workspace rename 草稿\nkeep exact spaces  ",
+      "bytes": 43
+    },
+    "after": {
+      "selection": "clipboard",
+      "content": "workspace rename 草稿\nkeep exact spaces  ",
+      "bytes": 43
+    }
+  },
+  "source_files": {
+    "apps/desktop/src/workbench.rs": "4fbad5b0420103b9e0505ea9cd1f963c2f6692160e3d41bf37d35ae7173b5302",
+    "apps/desktop/src/workbench/tabs.rs": "8f7a94bdc579eb10d902ae3f58eb9cccf3ab8536b67e0e9aa1f1e656b241730b",
+    "apps/desktop/src/workspace_view.rs": "3341f52e19750ad2b7b1acd49453d9e921dda9eb8fa346e73367440b5d21f74a",
+    "apps/desktop/src/workspace_view/pins.rs": "e699d3ccd4497ae269ef94aa0b13acb7378955e6945be60de02213605bb23883",
+    "apps/host/src/main.rs": "d3593f5d0ddb29ea0e7cb88767a02de924dfb0b723155c90df200d72121e32de",
+    "crates/session/src/workspace_pins.rs": "ba6a92966141e39f03d7000ef2a75bae2d6f3c5d017135f27abf6a27342d1aee",
+    "scripts/workspace-pins-smoke.py": "f03e31590619552df27fb0ad206c75a74fca682859151165a362698463720a0d"
+  },
+  "checks": {
+    "workspace_tests": 370,
+    "desktop_tests": 51,
+    "python_tests": 22,
+    "pin_tests": 7
+  },
+  "native_results": {
+    "button_up_down": true,
+    "drag_reorder": true,
+    "cancelled_drop_unchanged": true,
+    "same_path_endpoint_identity": true,
+    "offline_reorder": true,
+    "failed_save_rollback_and_alt_f4_guard": true,
+    "reload_recovery": true,
+    "stale_list_refused": true,
+    "keep_saved_no_pin_write": true,
+    "small_900x560_action": true,
+    "two_normal_replacement_cycles": true,
+    "exact_43_byte_draft_copy": true,
+    "settled_pre_control_host_snapshots_exact": true,
+    "initial_history_read_only_sequence_changed": true,
+    "small_action_after_control_host_snapshots_exact": true
+  },
+  "limits": [
+    "No installed-model run for this local preference slice",
+    "No other-platform GUI or native Wayland acceptance",
+    "No automatic cross-window refresh or cross-window drag",
+    "No edge autoscroll or release benchmark",
+    "Earlier automation close calls removed windows without exiting; stopped during workspace cleanup",
+    "No new exact-head remote CI asserted"
+  ]
+}

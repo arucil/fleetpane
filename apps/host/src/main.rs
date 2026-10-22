@@ -49,7 +49,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host creation STORE plan CONFIG GROUP CWD UUID | send UUID [--take-control] | check UUID | list [BEFORE_POSITION]: durable Host binding; send is allowed once, check never resends."
         );
         println!(
-            "fleetpane-host workspace STORE add CONFIG HOST git|folder CWD | list [BEFORE_POSITION] | rename UUID EXPECTED_REVISION NAME | reset-name UUID EXPECTED_REVISION | pins | pin UUID on|off | toggle-pin UUID | files UUID [RELATIVE_DIRECTORY] | read UUID RELATIVE_FILE | open UUID LOCAL_PATH | export UUID RELATIVE_FILE ABSOLUTE_DESTINATION | inspect UUID | create UUID [--take-control]: existing local directories, stable IDs and read-only Git observations. Export creates a new local copy up to 64 MiB without overwrite. Pins are local preferences (up to 32); they do not contact a Host. Each toggle-pin invocation changes state once; pin on|off is idempotent. Creation is an explicit provider mutation. Read a file with: workspace STORE diff UUID staged|unstaged ROOT_RELATIVE_PATH."
+            "fleetpane-host workspace STORE add CONFIG HOST git|folder CWD | list [BEFORE_POSITION] | rename UUID EXPECTED_REVISION NAME | reset-name UUID EXPECTED_REVISION | pins | pin UUID on|off | toggle-pin UUID | reorder-pins EXPECTED_UUIDS_JSON ORDER_UUIDS_JSON | files UUID [RELATIVE_DIRECTORY] | read UUID RELATIVE_FILE | open UUID LOCAL_PATH | export UUID RELATIVE_FILE ABSOLUTE_DESTINATION | inspect UUID | create UUID [--take-control]: existing local directories, stable IDs and read-only Git observations. Export creates a new local copy up to 64 MiB without overwrite. Pins are local preferences (up to 32); they do not contact a Host. Each toggle-pin invocation changes state once; pin on|off is idempotent. Creation is an explicit provider mutation. Read a file with: workspace STORE diff UUID staged|unstaged ROOT_RELATIVE_PATH."
         );
         println!(
             "fleetpane-host worktree STORE plan SOURCE_WORKSPACE_UUID BRANCH BASE_REF UUID | plan-existing SOURCE_WORKSPACE_UUID LOCAL_BRANCH UUID | apply UUID | check UUID | list [BEFORE_POSITION]: preview a pinned baseline or an unoccupied local branch, then explicitly create once. Git mutation only; no provider/session is started."
@@ -641,6 +641,22 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                     "{}",
                     serde_json::to_string_pretty(&store.pinned_workspaces().await?)?
                 ),
+                [verb, expected, order] if verb == "reorder-pins" => {
+                    if expected.len() > 4096 || order.len() > 4096 {
+                        return Err("pin order JSON exceeds 4096 bytes".into());
+                    }
+                    println!(
+                        "{}",
+                        serde_json::to_string_pretty(
+                            &store
+                                .reorder_workspace_pins(
+                                    serde_json::from_str(expected)?,
+                                    serde_json::from_str(order)?
+                                )
+                                .await?
+                        )?
+                    );
+                }
                 [verb, id, revision, value] if verb == "rename" => {
                     println!(
                         "{}",

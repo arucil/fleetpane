@@ -5,6 +5,7 @@ use crate::{
     workspaces::{Workspace, decode, workspace_row},
 };
 use rusqlite::{Connection, TransactionBehavior};
+use std::collections::HashSet;
 use uuid::Uuid;
 
 pub const MAX_PINNED_WORKSPACES: usize = 32;
@@ -45,6 +46,53 @@ impl Store {
     pub async fn toggle_workspace_pinned(&self, id: Uuid) -> Result<Vec<Workspace>, Error> {
         self.job(move |database| update(database, id, Change::Toggle))
             .await
+    }
+
+    /// Replace only the order of the exact observed pin list. Membership changes
+    /// and concurrent reorderings require an explicit read before another save.
+    pub async fn reorder_workspace_pins(
+        &self,
+        expected: Vec<Uuid>,
+        order: Vec<Uuid>,
+    ) -> Result<Vec<Workspace>, Error> {
+        self.job(move |database| {
+            if expected.len() > MAX_PINNED_WORKSPACES
+                || order.len() != expected.len()
+                || expected.iter().collect::<HashSet<_>>().len() != expected.len()
+                || order.iter().collect::<HashSet<_>>() != expected.iter().collect()
+            {
+                return Err(
+                    "pin order must contain each observed workspace exactly once (at most 32)"
+                        .into(),
+                );
+            }
+            let transaction = database.transaction_with_behavior(TransactionBehavior::Immediate)?;
+            let current = read(&transaction)?;
+            if current
+                .iter()
+                .map(|workspace| workspace.id)
+                .collect::<Vec<_>>()
+                != expected
+            {
+                return Err(
+                    "workspace pins changed in another window; reload pins before reordering"
+                        .into(),
+                );
+            }
+            if expected != order {
+                transaction.execute("DELETE FROM workspace_pins", [])?;
+                for id in order.iter().rev() {
+                    transaction.execute(
+                        "INSERT INTO workspace_pins(workspace) VALUES(?1)",
+                        [id.to_string()],
+                    )?;
+                }
+            }
+            let pins = read(&transaction)?;
+            transaction.commit()?;
+            Ok(pins)
+        })
+        .await
     }
 }
 
@@ -104,6 +152,148 @@ mod tests {
     use super::*;
     use crate::{hosts::Endpoint, workspaces::Kind};
     use std::path::PathBuf;
+
+    fn ids(pins: &[Workspace]) -> Vec<Uuid> {
+        pins.iter().map(|workspace| workspace.id).collect()
+    }
+
+    #[tokio::test]
+    async fn order_survives_reopen_and_pin_commands_keep_newest_first() {
+        let (root, store) = fixture().await;
+        let mut expected = vec![];
+        for host in ["A", "B", "C"] {
+            let workspace = register(&store, root.clone(), host).await;
+            expected = ids(&store
+                .set_workspace_pinned(workspace.id, true)
+                .await
+                .unwrap());
+        }
+        let catalog = serde_json::to_value(store.workspaces(None).await.unwrap()).unwrap();
+        let order = vec![expected[1], expected[2], expected[0]];
+        store
+            .rename_workspace(order[0], 0, Some("研究 🚀".into()))
+            .await
+            .unwrap();
+        let saved = store
+            .reorder_workspace_pins(expected.clone(), order.clone())
+            .await
+            .unwrap();
+        assert_eq!(ids(&saved), order);
+        assert_eq!(saved[0].name.value.as_deref(), Some("研究 🚀"));
+        let reopened = Store::open(root.join("state")).await.unwrap();
+        assert_eq!(ids(&reopened.pinned_workspaces().await.unwrap()), order);
+        assert_eq!(
+            ids(&store.set_workspace_pinned(order[0], true).await.unwrap()),
+            order
+        );
+        let remaining = ids(&store.toggle_workspace_pinned(order[1]).await.unwrap());
+        assert_eq!(remaining, [order[0], order[2]]);
+        assert!(
+            store
+                .reorder_workspace_pins(order.clone(), expected)
+                .await
+                .unwrap_err()
+                .to_string()
+                .contains("changed in another window")
+        );
+        assert_eq!(
+            ids(&store.toggle_workspace_pinned(order[1]).await.unwrap()),
+            [order[1], order[0], order[2]]
+        );
+        store.rename_workspace(order[0], 1, None).await.unwrap();
+        let mut after = serde_json::to_value(store.workspaces(None).await.unwrap()).unwrap();
+        for workspace in after.as_array_mut().unwrap() {
+            workspace["name"]["revision"] = serde_json::json!(0);
+        }
+        assert_eq!(after, catalog);
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[tokio::test]
+    async fn invalid_orders_and_mid_write_failure_preserve_every_pin() {
+        let (root, store) = fixture().await;
+        let a = register(&store, root.clone(), "A").await;
+        let b = register(&store, root.clone(), "B").await;
+        store.set_workspace_pinned(a.id, true).await.unwrap();
+        let original = store.set_workspace_pinned(b.id, true).await.unwrap();
+        let expected = ids(&original);
+        for (old, order) in [
+            (expected.clone(), vec![a.id]),
+            (expected.clone(), vec![a.id, a.id]),
+            (vec![a.id, a.id], vec![a.id, b.id]),
+            (expected.clone(), vec![a.id, Uuid::new_v4()]),
+            (vec![Uuid::new_v4(); 33], vec![Uuid::new_v4(); 33]),
+        ] {
+            assert!(store.reorder_workspace_pins(old, order).await.is_err());
+            assert_eq!(
+                serde_json::to_value(store.pinned_workspaces().await.unwrap()).unwrap(),
+                serde_json::to_value(&original).unwrap()
+            );
+        }
+        // Fail on the second insertion: the preceding DELETE and INSERT roll back.
+        store.job(move |db| {
+            db.execute_batch(&format!("CREATE TRIGGER refuse_order BEFORE INSERT ON workspace_pins WHEN NEW.workspace='{}' BEGIN SELECT RAISE(ABORT,'owned order refusal'); END", a.id))?;
+            Ok(())
+        }).await.unwrap();
+        assert_eq!(
+            ids(&store
+                .reorder_workspace_pins(expected.clone(), expected.clone())
+                .await
+                .unwrap()),
+            expected
+        );
+        assert!(
+            store
+                .reorder_workspace_pins(expected.clone(), vec![a.id, b.id])
+                .await
+                .unwrap_err()
+                .to_string()
+                .contains("owned order refusal")
+        );
+        assert_eq!(
+            serde_json::to_value(store.pinned_workspaces().await.unwrap()).unwrap(),
+            serde_json::to_value(&original).unwrap()
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[tokio::test]
+    async fn concurrent_orders_commit_once_and_empty_order_is_valid() {
+        let (root, store) = fixture().await;
+        assert!(
+            store
+                .reorder_workspace_pins(vec![], vec![])
+                .await
+                .unwrap()
+                .is_empty()
+        );
+        let mut expected = vec![];
+        for index in 0..32 {
+            let workspace = register(&store, root.clone(), &format!("Host {index}")).await;
+            expected = ids(&store
+                .set_workspace_pinned(workspace.id, true)
+                .await
+                .unwrap());
+        }
+        let other = Store::open(root.join("state")).await.unwrap();
+        let mut first = expected.clone();
+        first.rotate_left(1);
+        let mut second = expected.clone();
+        second.reverse();
+        let (a, b) = tokio::join!(
+            store.reorder_workspace_pins(expected.clone(), first.clone()),
+            other.reorder_workspace_pins(expected, second.clone())
+        );
+        assert_eq!(usize::from(a.is_ok()) + usize::from(b.is_ok()), 1);
+        let (winner, loser) = match (a, b) {
+            (Ok(_), Err(error)) => (first, error),
+            (Err(error), Ok(_)) => (second, error),
+            _ => panic!("exactly one changed order must commit"),
+        };
+        assert!(loser.to_string().contains("changed in another window"));
+        assert_eq!(ids(&store.pinned_workspaces().await.unwrap()), winner);
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     #[tokio::test]
     async fn toggles_are_atomic_across_stores_and_failed_transitions_preserve_pins() {

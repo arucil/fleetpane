@@ -5,6 +5,7 @@ import json
 import os
 import signal
 import socket
+import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -157,6 +158,41 @@ def main():
                         writer.wait(timeout=5)
             assert [w["id"] for w in workspace("pins")] == expected
             assert workspace("list") == before
+            # Exact observed lists are the shared GUI/CLI concurrency boundary.
+            reordered = list(reversed(expected))
+
+            def reorder(old, order, ok=True):
+                return workspace("reorder-pins", json.dumps(old), json.dumps(order), ok=ok)
+
+            assert [w["id"] for w in reorder(expected, reordered)] == reordered
+            assert [w["id"] for w in workspace("pins")] == reordered
+            assert "changed in another window" in reorder(expected, expected, ok=False)
+            for invalid in [[a["id"]], [a["id"], a["id"]], [a["id"], str(uuid.uuid4())]]:
+                assert "exactly once" in reorder(reordered, invalid, ok=False)
+            assert "exactly once" in reorder([a["id"], a["id"]], reordered, ok=False)
+            assert "4096 bytes" in workspace("reorder-pins", "[" + " " * 4096 + "]", "[]", ok=False)
+            workspace("reorder-pins", "not-json", json.dumps(reordered), ok=False)
+            workspace("reorder-pins", json.dumps(reordered), '["not-a-uuid"]', ok=False)
+            with sqlite3.connect(store / "creations.sqlite3") as db:
+                db.execute("CREATE TRIGGER refuse_order BEFORE INSERT ON workspace_pins BEGIN SELECT RAISE(ABORT,'owned order refusal'); END")
+            assert "owned order refusal" in reorder(reordered, expected, ok=False)
+            assert [w["id"] for w in workspace("pins")] == reordered
+            with sqlite3.connect(store / "creations.sqlite3") as db:
+                db.execute("DROP TRIGGER refuse_order")
+            contenders = [subprocess.Popen(
+                [str(BINARY), "workspace", str(store), "reorder-pins", json.dumps(reordered), json.dumps(expected)],
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            ) for _ in range(2)]
+            try:
+                replies = [process.communicate(timeout=30) for process in contenders]
+            finally:
+                for process in contenders:
+                    if process.poll() is None:
+                        process.kill()
+                        process.wait(timeout=5)
+            assert sorted(process.returncode for process in contenders) == [0, 1], replies
+            assert [w["id"] for w in workspace("pins")] == expected
+            assert workspace("list") == before
             for state in ["on", "off"]:
                 workspace("pin", uuid.uuid4(), state, ok=False)
             workspace("pin", a["id"], "toggle", ok=False)
@@ -189,6 +225,9 @@ def main():
                     "same_path_hosts_isolated": True,
                     "explicit_idempotent_assignment": True,
                     "parallel_same_pin_once": True,
+                    "reordered_across_processes": True,
+                    "concurrent_order_one_winner": True,
+                    "invalid_stale_and_failed_orders_preserve_pins": True,
                     "unpin_preserves_catalog_and_drafts": True,
                     "offline_replaced_metadata_access": True,
                     "complete_host_snapshots_unchanged": True,
