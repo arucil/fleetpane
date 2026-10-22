@@ -241,7 +241,7 @@ def exercise(acp):
             )
             assert snapshot(old)["admission"] == drained["data"]
             for method, params in [
-                ("thread/start", {}),
+                ("thread/start", {"cwd": str(hosts[old]["home"])}),
                 ("thread/resume", {"threadId": identity}),
                 ("turn/start", {"threadId": identity}),
                 ("command/exec", {}),
@@ -350,7 +350,7 @@ def exercise(acp):
             start(old)
             assert snapshot(old)["host_id"] != before["host_id"]
             assert snapshot(old)["admission"] == drained["data"]
-            reject_new(old, "thread/start", {})
+            reject_new(old, "thread/start", {"cwd": str(hosts[old]["home"])})
             assert admission(old, "ready")["data"] == {"generation": 2, "mode": "ready"}
             execute(
                 old,

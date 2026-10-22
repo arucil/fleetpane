@@ -45,3 +45,14 @@ git diff --check
 retain the before/after evidence. No application runtime code or CI checks are
 disabled. macOS compilation/runtime and the full remote matrix require the next
 exact-head CI run; the earlier failures are not a passing result.
+
+The following `c20fc9c` CI run passed macOS compilation, model smoke and migration
+fixtures, then exposed an older drain smoke incompatibility on Linux and macOS.
+Since workspace validation now precedes admission, an empty `thread/start` fails
+with `invalid_workspace_directory` before reaching the drain fence. Reproduced
+locally. Supply the existing owned Host directory in both initial and post-crash
+drain probes; retain the exact `host_draining` and unchanged journal assertions.
+Production validation order and drain behavior stay unchanged.
+
+`python3 scripts/drain-smoke.py` and `python3 scripts/creation-directory-smoke.py`
+pass locally after this follow-up. Remote acceptance remains separate.
