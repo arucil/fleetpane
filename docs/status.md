@@ -3,6 +3,8 @@
 **Loaded prompts** now jumps to observed user messages, including same-turn
 follow-ups and image-only inputs. Paging, 900×560, ACP pending choices and exact
 draft retention have [Linux native evidence](verification/2026-10-22-prompt-outline.md).
+Two-turn installed OpenCodex/DeepSeek navigation and exact context telemetry Copy
+have [separate real-provider acceptance](verification/2026-10-22-real-provider-outline-usage.md).
 
 Read-only file **Find** exposes Kit's existing source search. Chinese, case
 matching, reload reset, Markdown Preview switching and line 7003 navigation have
@@ -17,7 +19,7 @@ image fetching now have [Linux fixture evidence](verification/2026-10-22-markdow
 Provider context observations show exact Codex/ACP counts, capacity/unavailable
 states and original parsed telemetry Copy, with independent pending choices and
 900×560 controls [verified locally](verification/2026-10-22-context-usage.md).
-Installed-provider telemetry, large-document Copy and other platforms remain open.
+Large-document Copy, broader provider versions and other platforms remain open.
 
 
 Provider choices now use native Kit search by name, ID and description. Duplicate

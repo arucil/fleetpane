@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-22",
+  "source_revision": "eab1e7b841fe6a948eab5d7b73f5392052aab673",
+  "desktop_binary_sha256": "13e8e6f0cfc4428565f327f9dfe1f9e757b93cbd48cccbf803bf3bb6ac7bc2a1",
+  "host_binary_sha256": "be591f12ebe94c56b2f92c81142f943a37fed6e60cb7f4548baf554b82778bc5",
+  "codex_version": "0.163.0",
+  "opencodex_proxy_version": "2.89.0",
+  "dsh_version": "0.2.0-rc.2",
+  "providers": [
+    {
+      "provider": "opencodex",
+      "host_id": "bcd526a9-54c8-4459-ad0c-792022b55e9d",
+      "provider_pid": 832173,
+      "completed_turns": 2,
+      "context_tokens": {
+        "used": 13684,
+        "capacity": 258400,
+        "percentage": 5.3
+      },
+      "exact_usage_copy": true,
+      "native_mutation_fields_unchanged": {
+        "host_id": true,
+        "provider_pid": true,
+        "pending_requests": true,
+        "activity": true,
+        "journal_total": true
+      }
+    },
+    {
+      "provider": "deepseek",
+      "host_id": "66ef554e-6877-417a-94f1-596595d835f3",
+      "provider_pid": 847503,
+      "completed_turns": 2,
+      "context_tokens": {
+        "used": 7692,
+        "capacity": 1000000,
+        "percentage": 0.8
+      },
+      "exact_usage_copy": true,
+      "native_mutation_fields_unchanged": {
+        "host_id": true,
+        "provider_pid": true,
+        "pending_requests": true,
+        "activity": true,
+        "journal_total": true
+      }
+    }
+  ],
+  "isolation": "Disposable provider homes and synthetic workspace; existing OpenCodex loopback proxy used unchanged; DSH credential copy kept private and removed after owned-provider shutdown.",
+  "test_harness_correction": "Initial probe incorrectly read activity.active_turns instead of activity.turns and opened before the running turn settled. Codex returned list_turns unsupported; bounded activity predicate corrected and the same completed turn read successfully. No product retry/fallback added.",
+  "limits": [
+    "Two tiny text-only turns per provider",
+    "No performance, soak, broad provider history, IME or other-platform acceptance"
+  ]
+}

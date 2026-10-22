@@ -1,0 +1,143 @@
+{
+  "acpCommands": null,
+  "acpModes": null,
+  "acpSessionInfo": {
+    "_meta": null,
+    "updatedAt": null
+  },
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "deepseek-official",
+          "name": "DeepSeek",
+          "options": [
+            {
+              "name": "deepseek-v4-flash",
+              "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+            },
+            {
+              "name": "DeepSeek-V41-Flash",
+              "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+            },
+            {
+              "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+              "name": "DeepSeek-V4-Pro",
+              "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "category": "thought_level",
+      "currentValue": "high",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "description": "Use for simple tasks that do not need reasoning.",
+          "name": "Off",
+          "value": "off"
+        },
+        {
+          "description": "Prefer for routine or latency-sensitive tasks.",
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "description": "The default balance for most tasks.",
+          "name": "High",
+          "value": "high"
+        },
+        {
+          "description": "Reserve for the hardest quality-first tasks.",
+          "name": "Max",
+          "value": "max"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fp-outline-real/workspace 中文",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "d25dacf2-600c-44b3-8c36-c8e7a3c01f81",
+  "name": null,
+  "preview": "DeepSeek Harness",
+  "status": {
+    "cancelRequested": false,
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "92c50098-2cde-432d-ad92-830bd3b0db71",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "这是 Fleetpane 独立测试。请只回复 OUTLINE-DEEPSEEK-1。不要使用工具或修改文件。",
+              "type": "text"
+            }
+          ],
+          "id": "user:92c50098-2cde-432d-ad92-830bd3b0db71",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "The user asks to reply only \"OUTLINE-DEEPSEEK-1\" and not use tools or modify files. Just comply."
+          ],
+          "id": "92c50098-2cde-432d-ad92-830bd3b0db71:agent_thought_chunk:id:cb42f4b9-d7c9-4b0b-8fda-4342f46751b5",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "content": [
+            {
+              "text": "OUTLINE-DEEPSEEK-1",
+              "type": "text"
+            }
+          ],
+          "id": "92c50098-2cde-432d-ad92-830bd3b0db71:agent_message_chunk:id:cb42f4b9-d7c9-4b0b-8fda-4342f46751b5",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    },
+    {
+      "error": null,
+      "id": "3c047c0f-1279-4fb0-9ab3-356f5da67339",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "这是 Fleetpane 独立测试。请只回复 OUTLINE-DEEPSEEK-2。不要使用工具或修改文件。",
+              "type": "text"
+            }
+          ],
+          "id": "user:3c047c0f-1279-4fb0-9ab3-356f5da67339",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            {
+              "text": "OUTLINE-DEEPSEEK-2",
+              "type": "text"
+            }
+          ],
+          "id": "3c047c0f-1279-4fb0-9ab3-356f5da67339:agent_message_chunk:id:fbd1f86b-8c6a-4be8-9ae5-47cf14d0a153",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  ]
+}

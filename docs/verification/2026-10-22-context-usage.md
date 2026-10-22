@@ -33,3 +33,7 @@ evidence, not installed-provider context runtime acceptance. ACP restoration is
 covered by archive and process tests. Codex observations remain memory-only and
 are unavailable after Host restart until new telemetry. Fixture Stop settlement,
 IME, other platforms and installed-provider runtime remain unaccepted.
+
+Installed OpenCodex and DSH runtime observations and exact native JSON Copy now
+have [separate two-turn acceptance](2026-10-22-real-provider-outline-usage.md).
+The synthetic edge cases above and real-provider scope remain distinct.

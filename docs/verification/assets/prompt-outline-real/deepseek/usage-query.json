@@ -1,0 +1,31 @@
+{
+  "response": "query",
+  "data": {
+    "message": {
+      "result": {
+        "observation": {
+          "capacityTokens": 1000000,
+          "observedAtUnixMs": 1792636182153,
+          "raw": {
+            "jsonrpc": "2.0",
+            "method": "session/update",
+            "params": {
+              "sessionId": "d25dacf2-600c-44b3-8c36-c8e7a3c01f81",
+              "update": {
+                "sessionUpdate": "usage_update",
+                "size": 1000000,
+                "used": 7692
+              }
+            }
+          },
+          "source": "acp_usage_update",
+          "threadId": "d25dacf2-600c-44b3-8c36-c8e7a3c01f81",
+          "turnId": "3c047c0f-1279-4fb0-9ab3-356f5da67339",
+          "usedTokens": 7692
+        },
+        "sequence": 20
+      }
+    },
+    "sequence": 20
+  }
+}

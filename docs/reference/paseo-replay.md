@@ -1528,7 +1528,7 @@ Git Diff 扩展暂缓，Kimi/GLM 不适配。
 `3fa625701eae6b3a07ccae18299200b1a7cf2776`；fork/main 保持不变。
 继续沿 `1198cddf6` 的后继完整读取了 `5d2a42486` 更新日志，以及
 `3fa625701` 全部 package/lockfile 版本 diff。没有新增应用源码行为。
-[两条记录与可重建 patch](../verification/assets/paseo-replay/latest-3fa62570/review.json)
+[发布记录与可重建 patch](../verification/assets/paseo-replay/latest-3fa62570/review.json)
 保持原 6215 编号不变。更新日志陈述不能作为 Rust 远程、插件、布局、通知
 已经实现的证据；Markdown 相对链接和上下文用量另有本地验收。
 

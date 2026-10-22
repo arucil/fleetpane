@@ -39,3 +39,8 @@ Full-session prompt indexing, automatic jump fetch, active-prompt rail, persiste
 scroll, native forced Host replacement, IME, external models and other platforms
 remain unverified or missing. Existing Host identity validation is not live
 session transfer acceptance.
+
+Installed OpenCodex/DSH now have [separate two-turn native acceptance](2026-10-22-real-provider-outline-usage.md).
+
+The hidden workspace and owned synthetic Hosts/providers were also stopped;
+[cleanup readback](assets/prompt-outline/cleanup.json) confirms their PIDs and sockets are gone.

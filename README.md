@@ -2,7 +2,7 @@
 
 Latest local additions: loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
 viewer and Codex/ACP context telemetry, with separate
-[behavior evidence](docs/status.md). Scoped history review covers the frozen
+[behavior evidence](docs/status.md) and [real OpenCodex/DeepSeek checks](docs/verification/2026-10-22-real-provider-outline-usage.md). Scoped history review covers the frozen
 6,215-commit DAG plus upstream deltas through `68fa464cd` (remote tips checked 2026-10-22);
 this tracks source review, while functional parity remains partial.
 

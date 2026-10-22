@@ -1,0 +1,79 @@
+{
+  "protocol": 3,
+  "host_id": "66ef554e-6877-417a-94f1-596595d835f3",
+  "host_pid": 847484,
+  "provider_pid": 847503,
+  "provider_info": {
+    "agentCapabilities": {
+      "mcpCapabilities": {
+        "http": true
+      },
+      "promptCapabilities": {
+        "audio": false,
+        "embeddedContext": false,
+        "image": false
+      },
+      "sessionCapabilities": {
+        "close": {},
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "deepseek-harness-acp",
+      "version": "0.0.1"
+    },
+    "authMethods": [],
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "66ef554e-6877-417a-94f1-596595d835f3",
+    "controller_id": "65d8add2-66dd-4174-9d11-28eda5685410",
+    "generation": 5
+  },
+  "sequence": 20,
+  "operation_ids": [
+    "c37a0a84-ba49-4fc0-beba-bbb2e59fde53",
+    "a54a1fa5-fcd8-487f-9071-fbbbb2a318e2",
+    "804507f7-ce6c-4294-a13a-f37ab0e1eac3"
+  ],
+  "journal_total": 3,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [],
+  "attention": {
+    "records": [
+      {
+        "sequence": 9,
+        "observed_unix_ms": 1792636181183,
+        "thread_id": "d25dacf2-600c-44b3-8c36-c8e7a3c01f81",
+        "turn_id": "92c50098-2cde-432d-ad92-830bd3b0db71",
+        "kind": "completed",
+        "stop_reason": "end_turn"
+      },
+      {
+        "sequence": 18,
+        "observed_unix_ms": 1792636182196,
+        "thread_id": "d25dacf2-600c-44b3-8c36-c8e7a3c01f81",
+        "turn_id": "3c047c0f-1279-4fb0-9ab3-356f5da67339",
+        "kind": "completed",
+        "stop_reason": "end_turn"
+      }
+    ],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}
