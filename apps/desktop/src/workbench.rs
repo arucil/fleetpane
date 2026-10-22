@@ -366,7 +366,7 @@ impl Workbench {
                     this.update_workspace_names(&event.0);
                     if this.close_error.as_ref().is_some_and(|error| {
                         (!view.read(cx).name_save_failed()
-                            && error.starts_with("Window remains open: Workspace name save:"))
+                            && error.starts_with("Window remains open: Name save:"))
                             || (!view.read(cx).pin_save_failed()
                                 && error.starts_with("Window remains open: Workspace pin save:")
                                 && !this.workspace_pin_save_failed())

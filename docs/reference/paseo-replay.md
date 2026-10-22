@@ -1662,3 +1662,18 @@ covers offline/same-path endpoints, rollback, close/reload/keep, conflict recove
 900×560, replacement and exact drafts. This does not advance the history cursor
 or claim new upstream freshness; automatic cross-window refresh, cross-window
 drag, edge autoscroll and other-platform GUI remain open.
+
+
+## Project display names: continued implementation
+
+Follow-through from `packages/app/src/projects/edit-form.ts` and
+`packages/app/src/components/project-edit-sheet.tsx` at
+`a486b0558168c08890890e787d55cfb88c0d7256`: custom project labels and an explicit
+reset to the derived name. Fleetpane uses its existing Host-scoped project UUID,
+shared by main/linked Git workspaces. Local schema 19, revision comparison and
+one transaction preserve independent workspace names and session/draft identity.
+[Linux fixture acceptance](../verification/2026-10-23-project-names.md) covers
+native groups/tabs, concurrent refusal, rollback/reload/close protection,
+900×560, replacement and exact drafts. No code/assets were copied. Icons,
+automatic other-window refresh and other-platform GUI remain open. This does
+not advance the historical review cursor or assert new upstream freshness.

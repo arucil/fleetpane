@@ -218,7 +218,7 @@ async fn invalid_batch_write_failure_policy_corruption_and_limit_roll_back() {
 #[tokio::test]
 async fn schema_sixteen_upgrade_preserves_claims_and_drafts_and_current_damage_fails() {
     let (root, store) = store().await;
-    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('kept',2,'draft 中文  '); INSERT INTO completion_alert_cursors VALUES('old','host',7); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; PRAGMA user_version=16;")?;Ok(())}).await.unwrap();
+    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('kept',2,'draft 中文  '); INSERT INTO completion_alert_cursors VALUES('old','host',7); DROP TABLE project_names; DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; PRAGMA user_version=16;")?;Ok(())}).await.unwrap();
     let upgraded = Store::open(root.clone()).await.unwrap();
     assert!(claim(&upgraded, &source()).await.items.is_empty());
     upgraded

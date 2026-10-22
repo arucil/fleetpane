@@ -305,7 +305,7 @@ mod tests {
         let root = root();
         let store = Store::open(root.clone()).await.unwrap();
         store.job(|db| {
-            db.execute_batch("INSERT INTO worktree_jobs(id,plan,state) VALUES('receipt','unchanged-plan','unchanged-state'); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; PRAGMA user_version=3;")?;
+            db.execute_batch("INSERT INTO worktree_jobs(id,plan,state) VALUES('receipt','unchanged-plan','unchanged-state'); DROP TABLE project_names; DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; PRAGMA user_version=3;")?;
             Ok(())
         }).await.unwrap();
         let reopened = Store::open(root.clone()).await.unwrap();
@@ -313,7 +313,7 @@ mod tests {
             .job(|db| {
                 assert_eq!(
                     db.query_row("PRAGMA user_version", [], |row| row.get::<_, i64>(0))?,
-                    18
+                    19
                 );
                 assert_eq!(
                     db.query_row(

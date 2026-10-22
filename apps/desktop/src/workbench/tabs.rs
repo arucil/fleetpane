@@ -63,11 +63,10 @@ impl Workbench {
 
     pub(super) fn update_workspace_names(&mut self, workspaces: &[Workspace]) {
         for entry in &mut self.tabs.entries {
-            if let Some(current) = &mut entry.workspace
-                && let Some(fresh) = workspaces.iter().find(|w| w.id == current.id)
-                && fresh.name.revision >= current.name.revision
-            {
-                current.name = fresh.name.clone();
+            if let Some(current) = &mut entry.workspace {
+                for fresh in workspaces {
+                    current.update_names_from(fresh);
+                }
             }
         }
     }
@@ -712,14 +711,7 @@ impl Workbench {
                                         let project = entry
                                             .workspace
                                             .as_ref()
-                                            .filter(|workspace| {
-                                                workspace.registration.project.path
-                                                    != entry.saved.directory
-                                            })
-                                            .and_then(|workspace| {
-                                                workspace.registration.project.path.file_name()
-                                            })
-                                            .map(|name| name.to_string_lossy());
+                                            .map(Workspace::project_display_name);
                                         let label = match project {
                                             Some(project) if project != name => {
                                                 format!("{host} · {project} / {name}")

@@ -52,6 +52,7 @@ pub struct Workspace {
     pub id: Uuid,
     pub project_id: Uuid,
     pub name: crate::workspace_names::Saved,
+    pub project_name: crate::workspace_names::Saved,
     #[serde(flatten)]
     pub registration: Registration,
 }
@@ -303,6 +304,36 @@ pub(crate) async fn inspect(
 }
 
 impl Workspace {
+    pub fn project_display_name(&self) -> std::borrow::Cow<'_, str> {
+        if let Some(name) = &self.project_name.value {
+            return std::borrow::Cow::Borrowed(name);
+        }
+        let path = &self.registration.project.path;
+        let path = if self.registration.kind == Kind::Git
+            && path.file_name().is_some_and(|name| name == ".git")
+        {
+            path.parent().unwrap_or(path)
+        } else {
+            path
+        };
+        path.file_name()
+            .unwrap_or(path.as_os_str())
+            .to_string_lossy()
+    }
+
+    /// Independently merge observed labels; a project update also reaches sibling
+    /// worktrees, without changing either workspace's registration or identity.
+    pub fn update_names_from(&mut self, fresh: &Self) {
+        if self.id == fresh.id && fresh.name.revision >= self.name.revision {
+            self.name = fresh.name.clone();
+        }
+        if self.project_id == fresh.project_id
+            && fresh.project_name.revision >= self.project_name.revision
+        {
+            self.project_name = fresh.project_name.clone();
+        }
+    }
+
     pub fn display_name(&self) -> std::borrow::Cow<'_, str> {
         match &self.name.value {
             Some(name) => std::borrow::Cow::Borrowed(name),
@@ -364,7 +395,7 @@ impl Store {
             .ok_or_else(|| invalid("non-UTF-8 workspace path"))?
             .to_owned();
         self.job(move |database| {
-            database.query_row("SELECT w.position,w.id,w.project,w.data,n.revision,n.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id WHERE w.endpoint=?1 AND w.cwd=?2 ORDER BY w.position DESC LIMIT 1", params![socket,cwd], workspace_row)
+            database.query_row("SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.endpoint=?1 AND w.cwd=?2 ORDER BY w.position DESC LIMIT 1", params![socket,cwd], workspace_row)
                 .optional()?.map(decode).transpose()
         }).await
     }
@@ -398,7 +429,7 @@ impl Store {
             decode(
                 database
                     .query_row(
-                        "SELECT w.position,w.id,w.project,w.data,n.revision,n.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id WHERE w.id=?1",
+                        "SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.id=?1",
                         [id.to_string()],
                         workspace_row,
                     )
@@ -412,7 +443,7 @@ impl Store {
     pub async fn workspaces(&self, before: Option<u64>) -> Result<Vec<Workspace>, Error> {
         let before = i64::try_from(before.unwrap_or(i64::MAX as u64)).map_err(invalid)?;
         self.job(move |database| {
-            let mut statement = database.prepare("SELECT w.position,w.id,w.project,w.data,n.revision,n.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id WHERE w.position < ?1 ORDER BY w.position DESC LIMIT 32")?;
+            let mut statement = database.prepare("SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.position < ?1 ORDER BY w.position DESC LIMIT 32")?;
             statement.query_map([before], workspace_row)?.map(|row| decode(row?)).collect()
         }).await
     }
@@ -442,26 +473,37 @@ pub(crate) fn save_registration(
         |row| row.get(0),
     )?;
     database.execute("INSERT INTO workspaces(id,project,endpoint,cwd,kind,identity,data) VALUES(?1,?2,?3,?4,?5,?6,?7) ON CONFLICT(endpoint,cwd,kind,identity,project) DO UPDATE SET data=excluded.data", params![Uuid::new_v4().to_string(),project,endpoint,cwd,kind,identity,serde_json::to_string(&registration)?])?;
-    let row = database.query_row("SELECT w.position,w.id,w.project,w.data,n.revision,n.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id WHERE w.endpoint=?1 AND w.cwd=?2 AND w.kind=?3 AND w.identity=?4 AND w.project=?5", params![endpoint,cwd,kind,identity,project], workspace_row)?;
+    let row = database.query_row("SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.endpoint=?1 AND w.cwd=?2 AND w.kind=?3 AND w.identity=?4 AND w.project=?5", params![endpoint,cwd,kind,identity,project], workspace_row)?;
     let workspace = decode(row)?;
     Ok(workspace)
 }
 
-type WorkspaceRow = (i64, String, String, String, Option<i64>, Option<String>);
+type WorkspaceRow = (
+    i64,
+    String,
+    String,
+    String,
+    Option<i64>,
+    Option<String>,
+    Option<i64>,
+    Option<String>,
+);
 
 pub(crate) fn workspace_row(row: &rusqlite::Row<'_>) -> rusqlite::Result<WorkspaceRow> {
-    if let rusqlite::types::ValueRef::Text(value) = row.get_ref(5)?
-        && value.len() > crate::workspace_names::MAX_NAME_BYTES
-    {
-        return Err(rusqlite::Error::FromSqlConversionFailure(
-            5,
-            rusqlite::types::Type::Text,
-            std::io::Error::new(
-                std::io::ErrorKind::InvalidData,
-                "workspace name exceeds 256 bytes",
-            )
-            .into(),
-        ));
+    for (column, subject) in [(5, "workspace"), (7, "project")] {
+        if let rusqlite::types::ValueRef::Text(value) = row.get_ref(column)?
+            && value.len() > crate::workspace_names::MAX_NAME_BYTES
+        {
+            return Err(rusqlite::Error::FromSqlConversionFailure(
+                column,
+                rusqlite::types::Type::Text,
+                std::io::Error::new(
+                    std::io::ErrorKind::InvalidData,
+                    format!("{subject} name exceeds 256 bytes"),
+                )
+                .into(),
+            ));
+        }
     }
     Ok((
         row.get(0)?,
@@ -470,24 +512,20 @@ pub(crate) fn workspace_row(row: &rusqlite::Row<'_>) -> rusqlite::Result<Workspa
         row.get(3)?,
         row.get(4)?,
         row.get(5)?,
+        row.get(6)?,
+        row.get(7)?,
     ))
 }
 
 pub(crate) fn decode(row: WorkspaceRow) -> Result<Workspace, StorageError> {
-    let name = match (row.4, row.5) {
-        (None, None) => crate::workspace_names::Saved::default(),
-        (Some(revision), value) if revision > 0 => crate::workspace_names::Saved {
-            revision: revision.try_into()?,
-            value,
-        },
-        _ => return Err("invalid workspace name revision".into()),
-    };
-    name.check()?;
+    let name = crate::workspace_names::Saved::decode(row.4, row.5, "workspace")?;
+    let project_name = crate::workspace_names::Saved::decode(row.6, row.7, "project")?;
     Ok(Workspace {
         position: row.0.try_into()?,
         id: row.1.parse()?,
         project_id: row.2.parse()?,
         name,
+        project_name,
         registration: serde_json::from_str(&row.3)?,
     })
 }

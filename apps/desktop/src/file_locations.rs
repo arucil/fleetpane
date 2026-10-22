@@ -131,6 +131,7 @@ mod tests {
             inode: 2,
         };
         Workspace {
+            project_name: Default::default(),
             name: Default::default(),
             id: Uuid::from_u128(id),
             position: 1,

@@ -83,15 +83,38 @@ def main():
         replies = [p.communicate(timeout=15) for p in contenders]
         assert sorted(p.returncode for p in contenders) == [0, 1], replies
         assert workspace("reset-name", a["id"], 2)["name"] == {"revision": 3, "value": None}
+        project = a["project_id"]
+        project_name = workspace("rename-project", project, 0, "项目 / release 🚀")
+        assert project_name == {"revision": 1, "value": "项目 / release 🚀"}
+        assert next(w for w in workspace("list") if w["id"] == a["id"])["project_name"] == project_name
+        assert next(w for w in workspace("pins") if w["id"] == a["id"])["project_name"] == project_name
+        assert workspace("add", config, hosts[0]["name"], "folder", shared)["project_name"] == project_name
+        assert next(w for w in workspace("list") if w["id"] == b["id"])["project_name"] == {"revision": 0, "value": None}
+        assert "changed in another window" in workspace("rename-project", project, 0, "stale", ok=False)
+        for invalid in ["", " spaced", "line\nbreak", "界" * 86]:
+            assert "project name must" in workspace("rename-project", project, 1, invalid, ok=False)
+        with sqlite3.connect(store / "creations.sqlite3") as db:
+            db.execute("CREATE TRIGGER refuse_project BEFORE UPDATE ON project_names BEGIN SELECT RAISE(ABORT,'owned project refusal'); END")
+        assert "owned project refusal" in workspace("reset-project-name", project, 1, ok=False)
+        assert next(w for w in workspace("list") if w["id"] == a["id"])["project_name"] == project_name
+        with sqlite3.connect(store / "creations.sqlite3") as db:
+            db.execute("DROP TRIGGER refuse_project")
+        argv = [str(BINARY), "workspace", str(store), "rename-project", project, "1"]
+        contenders = [subprocess.Popen([*argv, name], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) for name in ["First project", "Second project"]]
+        replies = [p.communicate(timeout=15) for p in contenders]
+        assert sorted(p.returncode for p in contenders) == [0, 1], replies
+        assert workspace("reset-project-name", project, 2) == {"revision": 3, "value": None}
+        assert next(w for w in workspace("list") if w["id"] == a["id"])["name"] == {"revision": 3, "value": None}
         moved = root / "moved 中文"
         shared.rename(moved)
         assert workspace("rename", offline["id"], 0, "Offline name")["name"]["value"] == "Offline name"
+        assert workspace("rename-project", offline["project_id"], 0, "Offline project")["value"] == "Offline project"
         assert [snapshot(i) for i in range(2)] == before
         assert (moved / "notes.md").read_text() == "# Workspace names\n\nExact file stays here.\n"
         for key in keys:
             saved = call("draft", store, "get", json.dumps(key))
             assert saved["text"] == draft and saved["revision"] == 1
-        print(json.dumps({"exact_identity": True, "same_path_other_host_independent": True, "pin_and_register_keep_name": True, "concurrent_winners": 1, "stale_refused": True, "failed_write_rolled_back": True, "reset_revision": 3, "offline_missing_directory": True, "host_snapshots_unchanged": True, "exact_drafts": True}))
+        print(json.dumps({"exact_identity": True, "same_path_other_host_independent": True, "pin_and_register_keep_name": True, "concurrent_winners": 1, "stale_refused": True, "failed_write_rolled_back": True, "reset_revision": 3, "project_names": True, "project_concurrent_winners": 1, "project_reset_revision": 3, "offline_missing_directory": True, "host_snapshots_unchanged": True, "exact_drafts": True}))
     finally:
         if not keep:
             for process in processes:

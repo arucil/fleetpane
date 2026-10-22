@@ -54,6 +54,7 @@ def main():
                           "cwd": "/synthetic/workspace"})
         draft = command("draft", store, "edit", key, 0, "保留草稿\nexact text")
         with sqlite3.connect(database) as db:
+            db.execute("DROP TABLE project_names")
             db.execute("DROP TABLE workspace_names")
             db.execute("DROP TABLE pending_alert_cursors")
             db.execute("DROP TABLE completion_alert_cursors")
@@ -73,7 +74,7 @@ def main():
         assert appearance("get") == {"revision": 0, "value": {"theme": "system"}}
         assert command("draft", store, "get", key) == draft
         with sqlite3.connect(database) as db:
-            assert db.execute("PRAGMA user_version").fetchone()[0] == 18
+            assert db.execute("PRAGMA user_version").fetchone()[0] == 19
         appearance("set", 0, "light")
         corrupt = '{"theme":"unrecognized"}'
         with sqlite3.connect(database) as db:

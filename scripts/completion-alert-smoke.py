@@ -81,7 +81,7 @@ def main():
         before = snapshots()
         database = prefs / "creations.sqlite3"
         with sqlite3.connect(database) as db:
-            assert db.execute("PRAGMA user_version").fetchone()[0] == 18
+            assert db.execute("PRAGMA user_version").fetchone()[0] == 19
             cursors = db.execute("SELECT * FROM completion_alert_cursors ORDER BY socket").fetchall()
             db.execute("CREATE TRIGGER refuse_claim BEFORE UPDATE ON completion_alert_cursors BEGIN SELECT RAISE(ABORT,'owned claim refusal'); END")
         assert "owned claim refusal" in claim(False)
@@ -94,7 +94,7 @@ def main():
             db.execute("DROP TRIGGER refuse_claim")
         assert len(claim()["items"]) == 2 and claim()["items"] == []
         assert snapshots() == before
-        print(json.dumps({"process_claims": [len(b["items"]) for b in batches], "global_mute_consumes": True, "unmute_replay": False, "failure_rolls_back": True, "full_host_snapshots_unchanged": True, "pending": 2, "schema": 18}))
+        print(json.dumps({"process_claims": [len(b["items"]) for b in batches], "global_mute_consumes": True, "unmute_replay": False, "failure_rolls_back": True, "full_host_snapshots_unchanged": True, "pending": 2, "schema": 19}))
     finally:
         if not keep:
             for process in processes:

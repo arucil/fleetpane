@@ -80,7 +80,7 @@ def check(root):
     log.write_bytes(saved)
     assert not (root/"unstarted.sock").exists()
     with sqlite3.connect(store/"creations.sqlite3") as db:
-        assert db.execute("PRAGMA user_version").fetchone()[0]==18
+        assert db.execute("PRAGMA user_version").fetchone()[0]==19
     print(json.dumps({"offline_workspace_and_history":"PASS","idempotent_import":"PASS","durable_paged_history":"PASS","explicit_unsupported_provider":"PASS","source_unchanged":"PASS","no_host_required":"PASS"}))
 
 if __name__=="__main__":

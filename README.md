@@ -605,7 +605,7 @@ eviction and unavailable or older Hosts remain visible. **Mark reviewed** and
 original outcome and pending requests. **Open source** checks the original Host,
 then uses explicit control and bounded history inspection. Older turns may need
 **Load earlier messages**. Reviews survive desktop replacement in controller-store
-schema 12 (current schema 18); the Host result feed does not survive Host restart.
+schema 12 (current schema 19); the Host result feed does not survive Host restart.
 Local alert mute now has separate acceptance above; OS delivery, tray/dock and
 request age remain open.
 
@@ -819,9 +819,9 @@ fleetpane-host workspace /absolute/hosts.creations create UUID # --take-control 
 The catalog shares the private 64 MiB controller store with creation intents.
 For `--hosts hosts.json`, keep `hosts.creations/creations.sqlite3`; `--host
 /absolute/control.sock` uses `/absolute/control.controller/creations.sqlite3`.
-Local-store schemas 1–17 upgrade transactionally to 18 and preserve creation
+Local-store schemas 1–18 upgrade transactionally to 19 and preserve creation
 bindings, attempt flags, workspace IDs and draft revisions. Older controller binaries reject
-schema 18. Host protocol and journal remain v3/schema 2. Worktree removal,
+schema 19. Host protocol and journal remain v3/schema 2. Worktree removal,
 workspace setup scripts, file editor and complete terminal interaction remain open. Session creation follows direct
 per-Host command receipts; this catalog does not add durable session ownership
 routing or ADR 0018 group creation bindings. Git observations have a 10-second
@@ -1034,8 +1034,27 @@ fleetpane-host workspace /absolute/hosts.creations reset-name WORKSPACE_UUID EXP
 
 Names are keyed by saved workspace UUID, independent across Hosts and separate
 from paths, provider-session names and project names. The current local store
-schema is 18. [Decision](docs/adr/0117-local-workspace-display-names.md) and
+schema is 19. [Decision](docs/adr/0117-local-workspace-display-names.md) and
 [verification](docs/verification/2026-10-22-workspace-names.md).
+
+Choose **Rename project** on a project group to name all its saved workspaces.
+Main Git checkouts and linked worktrees share the same project UUID on one Host;
+other Hosts and ordinary-folder registrations remain independent. Project names
+appear in group headings and workspace tabs while each workspace keeps its own
+label. The path below the group remains visible. Save, reset, reload, validation
+and failed-save close protection follow the workspace editor above. Changes in
+another window require **Newest** or **Reload name**.
+
+```sh
+# PROJECT_UUID is project_id from workspace list.
+fleetpane-host workspace /absolute/hosts.creations rename-project PROJECT_UUID EXPECTED_REVISION "研究 Fleet 🚀"
+fleetpane-host workspace /absolute/hosts.creations reset-project-name PROJECT_UUID EXPECTED_REVISION
+```
+
+Schema 19 adds revisioned project labels and preserves all older rows; older
+controller binaries reject this schema. No directory or provider session is
+renamed. [Decision](docs/adr/0120-local-project-display-names.md) and
+[Linux fixture acceptance](docs/verification/2026-10-23-project-names.md).
 
 ## Follow up during a Codex turn
 
@@ -1299,7 +1318,7 @@ archive/stop. ACP does not advertise this capability. See
 [ADR 0056](docs/adr/0056-observe-session-ancestry.md).
 
 The native workbench remembers the selected local Host in the configuration's
-controller store (introduced in schema 11, current schema 18). Restore uses the exact socket path across Host
+controller store (introduced in schema 11, current schema 19). Restore uses the exact socket path across Host
 rename/reorder. Offline targets stay selected; absent targets show an explicit
 notice and preserve the saved choice. Switching and restoring never take control
 or resume a session. Reload choice reads current preferences without navigating;
@@ -1315,7 +1334,7 @@ python3 scripts/host-choice-smoke.py
 The CLI requires the last observed revision. This selection is scoped to the
 controller store; moving the configuration may change its default store location.
 Host choice does not open a session. Older binaries cannot open an upgraded
-store; the current schema is 18. See [local evidence](docs/verification/2026-10-21-preferred-host.md).
+store; the current schema is 19. See [local evidence](docs/verification/2026-10-21-preferred-host.md).
 
 Each Host view also remembers its last inspected session in that controller
 store. **Open last session** requires explicit control, checks exact Host UUID,

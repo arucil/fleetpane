@@ -19,6 +19,27 @@ pub struct Saved {
 
 impl Saved {
     pub(crate) fn check(&self) -> Result<(), StorageError> {
+        self.check_for("workspace")
+    }
+
+    pub(crate) fn decode(
+        revision: Option<i64>,
+        value: Option<String>,
+        subject: &str,
+    ) -> Result<Self, StorageError> {
+        let name = match (revision, value) {
+            (None, None) => Self::default(),
+            (Some(revision), value) if revision > 0 => Self {
+                revision: revision.try_into()?,
+                value,
+            },
+            _ => return Err(format!("invalid {subject} name revision").into()),
+        };
+        name.check_for(subject)?;
+        Ok(name)
+    }
+
+    pub(crate) fn check_for(&self, subject: &str) -> Result<(), StorageError> {
         if let Some(value) = &self.value
             && (value.is_empty()
                 || value.len() > MAX_NAME_BYTES
@@ -27,7 +48,7 @@ impl Saved {
                     .chars()
                     .any(|c| c.is_control() || matches!(c, '\u{2028}' | '\u{2029}')))
         {
-            return Err("workspace name must be 1–256 UTF-8 bytes, on one line, without surrounding whitespace or control characters".into());
+            return Err(format!("{subject} name must be 1–256 UTF-8 bytes, on one line, without surrounding whitespace or control characters").into());
         }
         Ok(())
     }
@@ -45,7 +66,7 @@ impl Store {
         self.job(move |database| {
             let transaction = database.transaction_with_behavior(TransactionBehavior::Immediate)?;
             let workspace = decode(transaction.query_row(
-                "SELECT w.position,w.id,w.project,w.data,n.revision,n.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id WHERE w.id=?1",
+                "SELECT w.position,w.id,w.project,w.data,n.revision,n.value,pn.revision,pn.value FROM workspaces w LEFT JOIN workspace_names n ON n.workspace=w.id LEFT JOIN project_names pn ON pn.project=w.project WHERE w.id=?1",
                 [id.to_string()], workspace_row,
             ).optional()?.ok_or("workspace not found")?)?;
             if workspace.name.revision != expected_revision {
@@ -246,7 +267,7 @@ mod tests {
     async fn v17_upgrade_keeps_all_existing_state_and_missing_table_is_an_error() {
         let (root, store, w) = fixture().await;
         store.set_workspace_pinned(w.id, true).await.unwrap();
-        store.job(|db| { db.execute_batch("INSERT INTO drafts VALUES('kept',7,'草稿 exact  '); INSERT INTO pending_alert_cursors VALUES('socket','host',12); DROP TABLE workspace_names; PRAGMA user_version=17;")?; Ok(()) }).await.unwrap();
+        store.job(|db| { db.execute_batch("INSERT INTO drafts VALUES('kept',7,'草稿 exact  '); INSERT INTO pending_alert_cursors VALUES('socket','host',12); DROP TABLE project_names; DROP TABLE workspace_names; PRAGMA user_version=17;")?; Ok(()) }).await.unwrap();
         let reopened = Store::open(root.join("state")).await.unwrap();
         assert_eq!(
             reopened.workspace(w.id).await.unwrap().name,
@@ -257,7 +278,7 @@ mod tests {
             .job(|db| {
                 assert_eq!(
                     db.query_row("PRAGMA user_version", [], |r| r.get::<_, u32>(0))?,
-                    18
+                    19
                 );
                 assert_eq!(
                     db.query_row(
@@ -272,7 +293,7 @@ mod tests {
                         .get::<_, i64>(0))?,
                     12
                 );
-                db.execute_batch("DROP TABLE workspace_names;")?;
+                db.execute_batch("DROP TABLE project_names; DROP TABLE workspace_names;")?;
                 Ok(())
             })
             .await

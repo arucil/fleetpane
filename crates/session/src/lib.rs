@@ -37,6 +37,8 @@ pub mod outline;
 #[cfg(unix)]
 pub mod paseo_import;
 pub mod progress;
+#[cfg(unix)]
+pub mod project_names;
 pub mod questions;
 mod reasoning;
 #[cfg(unix)]

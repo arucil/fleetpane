@@ -38,6 +38,7 @@ enum Action {
     ReloadPins,
     Rename(Uuid, u64, Option<String>),
     ReloadName(Uuid),
+    RenameProject(Uuid, u64, Option<String>),
 }
 enum Reply {
     List(Vec<Workspace>, Vec<Job>, Vec<Workspace>),
@@ -68,6 +69,7 @@ pub struct WorkspaceView {
     base: Entity<InputState>,
     name_input: Entity<InputState>,
     name_target: Option<Workspace>,
+    name_is_project: bool,
     name_saving: bool,
     name_error: Option<String>,
     pin_saving: bool,
@@ -128,7 +130,7 @@ impl WorkspaceView {
     }
     pub(crate) fn close_status(&self, cx: &App) -> Result<bool, String> {
         if let Some(error) = &self.name_error {
-            return Err(format!("Workspace name save: {error}"));
+            return Err(format!("Name save: {error}"));
         }
         if let Some(error) = &self.pin_error {
             return Err(format!("Workspace pin save: {error}"));
@@ -161,7 +163,7 @@ impl WorkspaceView {
             cx.new(|cx| InputState::new(window, cx).placeholder("Absolute existing directory"));
         let branch = cx.new(|cx| InputState::new(window, cx).placeholder("Local branch name"));
         let name_input =
-            cx.new(|cx| InputState::new(window, cx).placeholder("Custom workspace name"));
+            cx.new(|cx| InputState::new(window, cx).placeholder("Custom display name"));
         let base = cx.new(|cx| {
             let mut input = InputState::new(window, cx).placeholder("Base ref or commit");
             input.set_value("HEAD", window, cx);
@@ -177,6 +179,7 @@ impl WorkspaceView {
             base,
             name_input,
             name_target: None,
+            name_is_project: false,
             name_saving: false,
             name_error: None,
             pin_saving: false,
@@ -215,7 +218,10 @@ impl WorkspaceView {
             return;
         }
         self.busy = true;
-        let name_action = matches!(action, Action::Rename(..) | Action::ReloadName(..));
+        let name_action = matches!(
+            action,
+            Action::Rename(..) | Action::RenameProject(..) | Action::ReloadName(..)
+        );
         let pin_action = matches!(
             action,
             Action::Pin(..) | Action::OrderPins(..) | Action::ReloadPins
@@ -229,6 +235,7 @@ impl WorkspaceView {
                 | Action::OrderPins(..)
                 | Action::ReloadPins
                 | Action::Rename(..)
+                | Action::RenameProject(..)
                 | Action::ReloadName(..)
         ) {
             self.diff = None;
@@ -241,6 +248,7 @@ impl WorkspaceView {
                 | Action::OrderPins(..)
                 | Action::ReloadPins
                 | Action::Rename(..)
+                | Action::RenameProject(..)
                 | Action::ReloadName(..)
         ) {
             self.overview = None;
@@ -272,6 +280,13 @@ impl WorkspaceView {
                         store.rename_workspace(id, revision, name).await?,
                     )),
                     Action::ReloadName(id) => Ok(Reply::Name(store.workspace(id).await?)),
+                    Action::RenameProject(id, revision, name) => {
+                        let mut workspace = store.workspace(id).await?;
+                        workspace.project_name = store
+                            .rename_project(workspace.project_id, revision, name)
+                            .await?;
+                        Ok(Reply::Name(workspace))
+                    }
                     Action::Register(kind) => {
                         let workspace = store.register_workspace(endpoint, path, kind).await?;
                         let overview = workspace.inspect().await?;
@@ -348,10 +363,11 @@ impl WorkspaceView {
                     }
                     Ok(Reply::Name(workspace)) => {
                         for record in this.records.iter_mut().chain(&mut this.pins) {
-                            if record.id == workspace.id { record.name = workspace.name.clone(); }
+                            record.update_names_from(&workspace);
                         }
-                        if let Some(overview) = &mut this.overview
-                            && overview.workspace.id == workspace.id { overview.workspace.name = workspace.name.clone(); }
+                        if let Some(overview) = &mut this.overview {
+                            overview.workspace.update_names_from(&workspace);
+                        }
                         this.name_target=Some(workspace.clone());
                         this.set_name_input(&workspace, window, cx);
                         this.name_error = None;
@@ -394,7 +410,14 @@ impl WorkspaceView {
     }
 
     fn set_name_input(&self, workspace: &Workspace, window: &mut Window, cx: &mut Context<Self>) {
-        let value = workspace.name.value.clone().unwrap_or_default();
+        let value = if self.name_is_project {
+            &workspace.project_name
+        } else {
+            &workspace.name
+        }
+        .value
+        .clone()
+        .unwrap_or_default();
         self.name_input
             .update(cx, |input, cx| input.set_value(value, window, cx));
     }
@@ -460,14 +483,44 @@ impl WorkspaceView {
                     .mt_3()
                     .child(
                         div()
-                            .text_xs()
-                            .text_color(cx.theme().muted_foreground)
-                            .truncate()
-                            .child(format!(
-                                "{} · {}",
-                                workspace.registration.endpoint.name, project
-                            )),
+                            .flex()
+                            .items_center()
+                            .gap_2()
+                            .child(
+                                div()
+                                    .flex_1()
+                                    .min_w_0()
+                                    .text_xs()
+                                    .text_color(cx.theme().muted_foreground)
+                                    .truncate()
+                                    .child(format!(
+                                        "{} · {}",
+                                        workspace.registration.endpoint.name,
+                                        workspace.project_display_name()
+                                    )),
+                            )
+                            .child(
+                                Button::new(SharedString::from(format!(
+                                    "rename-project-{}",
+                                    workspace.project_id
+                                )))
+                                .small()
+                                .label("Rename project")
+                                .disabled(self.busy || self.name_error.is_some())
+                                .on_click(cx.listener({
+                                    let workspace = workspace.clone();
+                                    move |this, _, window, cx| {
+                                        this.name_is_project = true;
+                                        this.name_target = Some(workspace.clone());
+                                        this.set_name_input(&workspace, window, cx);
+                                        this.name_input
+                                            .update(cx, |input, cx| input.focus(window, cx));
+                                        cx.notify();
+                                    }
+                                })),
+                            ),
                     )
+                    .child(div().text_xs().truncate().child(project))
                     .children(
                         group.into_iter().map(|(index, workspace)| {
                             self.workspace_row(workspace, index, false, cx)
@@ -561,6 +614,7 @@ impl WorkspaceView {
                         .on_click(cx.listener({
                             let workspace = workspace.clone();
                             move |this, _, window, cx| {
+                                this.name_is_project = false;
                                 this.name_target = Some(workspace.clone());
                                 this.set_name_input(&workspace, window, cx);
                                 this.name_input
