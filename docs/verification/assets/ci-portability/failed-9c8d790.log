@@ -1,0 +1,4 @@
+rust (macos-latest)	Run cargo test --workspace --locked	2026-10-22T09:35:20.2271850Z ^[[1m^[[91merror[E0425]^[[0m^[[1m: cannot find function `mknodat` in module `rustix::fs`^[[0m
+rust (macos-latest)	Run cargo test --workspace --locked	2026-10-22T09:35:20.2273900Z    ^[[1m^[[94m--> ^[[0mcrates/session/src/files/export.rs:209:21
+rust (macos-latest)	Run cargo test --workspace --locked	2026-10-22T09:35:20.2280550Z     ^[[1m^[[94m|^[[0m                     ^[[1m^[[91m^^^^^^^^[[0m ^[[1m^[[91mnot found in `rustix::fs`^[[0m
+rust (ubuntu-latest)	Device appearance persistence	2026-10-22T09:35:29.1758515Z AssertionError: fleetpane-host: Local state: table notification_preferences already exists in CREATE TABLE notification_preferences(singleton INTEGER PRIMARY KEY CHECK(singleton=1), revision INTEGER NOT NULL CHECK(revision>0), data TEXT NOT NULL); PRAGMA user_version=15; at offset 13

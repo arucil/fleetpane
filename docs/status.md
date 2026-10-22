@@ -1,5 +1,10 @@
 # Behavior status
 
+CI follow-up repairs old-schema process fixtures missed by the alert migration,
+the export test's Apple-incompatible FIFO setup and the model smoke's outdated
+missing-value expectation. Linux targeted regressions
+pass; [evidence and remote acceptance boundary](verification/2026-10-22-ci-portability.md).
+
 Device-local **Alerts** now persist global, Host, exact session and event-type
 mute. Attention counts omit muted items while the original queue, failed results
 and Next request remain available. CLI and native controls share validated CAS

@@ -149,7 +149,7 @@ impl Workspace {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::os::unix::fs::{PermissionsExt, symlink};
+    use std::os::unix::fs::{FileTypeExt, PermissionsExt, symlink};
 
     #[tokio::test]
     async fn export_preserves_raw_bytes_private_mode_and_never_overwrites() {
@@ -206,14 +206,20 @@ mod tests {
         let source = base.join("work/source");
         std::fs::write(&source, b"source").unwrap();
         symlink("source", base.join("work/link")).unwrap();
-        rustix::fs::mknodat(
-            rustix::fs::CWD,
-            base.join("work/pipe"),
-            FileType::Fifo,
-            Mode::RUSR | Mode::WUSR,
-            0,
-        )
-        .unwrap();
+        let pipe = base.join("work/pipe");
+        assert!(
+            std::process::Command::new("mkfifo")
+                .arg(&pipe)
+                .status()
+                .unwrap()
+                .success()
+        );
+        assert!(
+            std::fs::symlink_metadata(pipe)
+                .unwrap()
+                .file_type()
+                .is_fifo()
+        );
         let large = File::create(base.join("work/large")).unwrap();
         large.set_len(MAX_EXPORT_BYTES + 1).unwrap();
         let destination = base.join("output");

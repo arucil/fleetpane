@@ -130,7 +130,7 @@ def main():
                     (["--model", "wire-0", "--effort", "unsupported"], "not supported"),
                     (["--effort", "low"], "requires --model"),
                     (["--model", "wire-0", "--model", "wire-1"], "duplicate"),
-                    (["--model"], "require a value"),
+                    (["--model"], "--model requires a value"),
                 ]:
                     failed = run("send", thread, "must not send", *flags)
                     assert failed.returncode != 0 and error in failed.stderr, (
