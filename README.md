@@ -965,6 +965,18 @@ its saved draft. Picker, paste and drop keep the same four-image limits. Invalid
 batches preserve the draft; sending remains explicit.
 [Linux native verification](docs/verification/2026-10-22-image-drop.md).
 
+To check a recorded Paseo source-review batch against Git objects:
+
+```sh
+python3 scripts/paseo-review-verify.py /path/to/paseo docs/verification/assets/paseo-replay/2351-2580
+python3 -m unittest discover -s scripts/tests -p '*_test.py'
+```
+
+The verifier reads a batch's `receipts/` or `receipts.tar.gz` without extracting
+it. It reconstructs each inspected diff/source range and checks full SHAs,
+parent comparison, paths and hashes. This establishes receipt integrity, not
+complete source review or implemented feature parity.
+
 ## Workspace
 
 | Package | Responsibility |
