@@ -31,6 +31,9 @@ jobs:
       - name: Device appearance persistence
         if: runner.os != 'Windows'
         run: python3 scripts/appearance-smoke.py
+      - name: Local alert policy persistence
+        if: runner.os != 'Windows'
+        run: python3 scripts/notification-policy-smoke.py
       - name: Preferred Host persistence
         if: runner.os != 'Windows'
         run: python3 scripts/host-choice-smoke.py

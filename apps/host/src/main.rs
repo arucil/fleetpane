@@ -67,7 +67,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host terminal STORE WORKSPACE_UUID [--take-control] create LABEL | list | output ID AFTER_BYTE | input ID EXPECTED_INPUT TEXT | key ID EXPECTED_INPUT enter|interrupt|eof|tab|escape | resize ID ROWS COLS | rename ID LABEL | close ID. Host-owned POSIX shell; input never appends Enter. Output is raw bytes with explicit loss cursors; native screen and explicit-input panel available from Workspaces."
         );
         println!(
-            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC."
+            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC.\nfleetpane-host notification-policy STORE get | set EXPECTED_REVISION < policy.json: device-local alert preferences; no Host RPC."
         );
         println!(
             "fleetpane-host recent STORE list SOCKET | remember SOCKET CWD | clear SOCKET: device-local directory suggestions; no Host RPC or session creation."
@@ -225,6 +225,35 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 }
             };
             println!("{}", serde_json::to_string(&paths)?);
+            Ok(())
+        }
+        "notification-policy" if args.len() >= 3 => {
+            use fleetpane_session::{creations::Store, notifications::Preferences};
+            let input = match &args[2..] {
+                [verb] if verb == "get" => None,
+                [verb, revision] if verb == "set" => {
+                    let mut input = Vec::new();
+                    io::stdin().take(524289).read_to_end(&mut input)?;
+                    if input.len() > 524288 {
+                        return Err("notification policy exceeds 512 KiB".into());
+                    }
+                    let value: Preferences = serde_json::from_slice(&input)?;
+                    value.validate()?;
+                    Some((revision.parse()?, value))
+                }
+                _ => {
+                    return Err(
+                        "notification-policy STORE get | set EXPECTED_REVISION < policy.json"
+                            .into(),
+                    );
+                }
+            };
+            let store = Store::open(std::path::absolute(&args[1])?).await?;
+            let result = match input {
+                None => store.notifications().await?,
+                Some((revision, value)) => store.save_notifications(revision, value).await?,
+            };
+            println!("{}", serde_json::to_string(&result)?);
             Ok(())
         }
         "appearance" if args.len() >= 3 => {

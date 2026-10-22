@@ -1,5 +1,13 @@
 # Behavior status
 
+Device-local **Alerts** now persist global, Host, exact session and event-type
+mute. Attention counts omit muted items while the original queue, failed results
+and Next request remain available. CLI and native controls share validated CAS
+saves; schema-15 migration, failed-write close guard, original Host snapshots,
+44-byte draft/replacement and 900×560 have
+[Linux fixture acceptance](verification/2026-10-22-notification-policy.md).
+Workspace rules, OS popup/sound/tray/dock and delivery deduplication remain open.
+
 Installed OpenCodex/DeepSeek **approvals and Codex structured questions** now have
 [separate Linux native/model acceptance](verification/2026-10-22-real-provider-requests.md).
 Codex decisions follow its advertised list, with Host validation before writing;
@@ -12,8 +20,8 @@ Persistent policy amendments, file-change approvals and other platforms remain o
 pending sources independently of queue filters. Linux fixture acceptance covers
 colliding ACP request IDs, fresh-read/cancellation gates, exact retained drafts,
 startup/question focus, terminal input isolation, replacement and 900×560.
-[Evidence and limits](verification/2026-10-22-next-request.md). Notifications,
-complete mute/tray remain open; installed-provider request acceptance is linked above.
+[Evidence and limits](verification/2026-10-22-next-request.md). Local alert mute
+now has separate acceptance above; OS notification/tray remain open.
 
 First-turn CLI **wait** now observes exact Host activity without requiring
 materialized history. Successful start replies close the pre-notification
@@ -75,6 +83,7 @@ performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
+| Local alert policy and attention counts | verified locally for covered shared/CLI/Linux native fixtures | Global, Host endpoint, exact Host/session and six event-type scopes; muted requests remain actionable and terminal outcomes remain unreviewed. Private schema-15 migration, strict bounded JSON, CAS conflicts/failures, background-read ordering, normal close guard/reload, 44-byte draft replacement and 900×560 covered. Workspace rules, OS popup/sound/tray/dock, request age and delivery deduplication remain open. [Evidence](verification/2026-10-22-notification-policy.md), [ADR](adr/0111-device-local-alert-policy.md). |
 | Global next pending request | verified locally for covered shared/Linux native fixtures and installed providers | Explicit fresh snapshot, exact-source cycling/wrap, independent filters, cancelled/late reads, startup/question focus and popup/palette/IME guards; native colliding requests, 38-byte draft/replacement, unchanged real PTY input and 900×560 covered. Installed OpenCodex/DeepSeek requests have [separate native/model acceptance](verification/2026-10-22-real-provider-requests.md). Actual IME, other platforms, notifications and mute remain open. [Evidence](verification/2026-10-22-next-request.md), [ADR](adr/0109-global-next-pending-request.md). |
 | Workspace tab keyboard/menu navigation and order | verified locally for covered Linux X11 fixture and installed OpenCodex/DeepSeek workflows | Ctrl+PageUp/PageDown, positions 1–8/last, Shift movement, guarded close and revisioned saved order; 12-tab scrolling, exact three real drafts/replacement, zero shell input and pending ACP preservation covered. Popup isolation repaired during native QA. IME, other platforms, drag/splits and configurable keys remain open. The observed Codex first-turn wait race now has [separate repair and acceptance](verification/2026-10-22-wait-first-turn.md). [Evidence](verification/2026-10-22-workspace-tab-navigation.md), [ADR](adr/0108-workspace-tab-navigation.md). |
 | Workspace tabs and saved layout | verified locally for covered Linux native / installed OpenCodex and DeepSeek workflows | Up to 32 exact Host/workspace tabs, grouped catalog, separate session/draft, Conversation/Files/Terminal, file location, selected terminal and sidebar width/visibility; schema-14 migration, CAS/save failures and normal close guard. Three real sessions retain exact 38/37/43-byte drafts; same shell PID/input survives replacement and accepted shell command finishes after its tab closes. No automatic takeover/resume/send. No tab drag, split panes, conversation scroll or other-platform acceptance. [Evidence](verification/2026-10-22-workspace-tabs.md), [ADR](adr/0107-workspace-tabs-and-local-layout.md). |

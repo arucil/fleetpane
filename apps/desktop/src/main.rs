@@ -453,7 +453,7 @@ fn main() {
                 })));
         } else if arg == "--help" {
             println!(
-                "fleetpane-desktop [127.0.0.1:PORT] [--demo]\nfleetpane-desktop --host /absolute/private/control.sock\nfleetpane-desktop --hosts CONFIG.json\nUnix: optional --preferences-dir ABSOLUTE_DIRECTORY overrides device-local appearance storage.\nPaseo directory preview, synthetic demo, or named local Codex/ACP Hosts."
+                "fleetpane-desktop [127.0.0.1:PORT] [--demo]\nfleetpane-desktop --host /absolute/private/control.sock\nfleetpane-desktop --hosts CONFIG.json\nUnix: optional --preferences-dir ABSOLUTE_DIRECTORY overrides device-local appearance and alert storage.\nPaseo directory preview, synthetic demo, or named local Codex/ACP Hosts."
             );
             return;
         } else {
@@ -548,6 +548,7 @@ fn main() {
                                 workbench::Workbench::new(
                                     configuration,
                                     creation_directory,
+                                    preferences_directory.clone(),
                                     window,
                                     cx,
                                 )

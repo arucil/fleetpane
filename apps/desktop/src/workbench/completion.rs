@@ -111,7 +111,7 @@ impl Workbench {
         div().flex_1().min_h_0().flex().flex_col()
             .child(div().p_4().flex().flex_wrap().gap_2().items_center()
                 .child(Button::new("results-pending").small().label("Pending requests").on_click(cx.listener(|this,_,_,cx|{this.attention.show_completions=false;cx.notify();})))
-                .child(format!("Turn results · {count} unreviewed"))
+                .child(format!("Turn results · {count} unreviewed · {} alerts",self.result_alert_count()))
                 .child(Button::new("results-refresh").small().label("Refresh").disabled(self.attention.busy||self.attention.review_busy).on_click(cx.listener(|this,_,window,cx|this.refresh_attention(window,cx))))
                 .child(Button::new("results-review-visible").small().label("Mark shown results reviewed").disabled(count==0||self.attention.busy||self.attention.review_busy||self.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.review_turn_results(unread.clone(),window,cx)))))
             .child(div().px_4().pb_2().text_sm().child("Reviewing keeps the original outcome and never answers a pending request. Records cover this Host run; older results may have been evicted."))
@@ -130,12 +130,13 @@ impl Workbench {
                     let open=item.clone();let review=item.clone();
                     let raw=serde_json::to_string_pretty(item).expect("completion serializes");
                     div().h(px(144.)).px_4().py_3().border_b_1().border_color(cx.theme().border)
-                        .child(div().truncate().text_color(if item.record.kind==fleetpane_runtime::attention::Kind::Failed{cx.theme().danger}else{cx.theme().foreground}).child(format!("{} · {} · {}",item.endpoint.name,item.label(),if item.reviewed{"Reviewed"}else{"Unreviewed"})))
+                        .child(div().truncate().text_color(if item.record.kind==fleetpane_runtime::attention::Kind::Failed{cx.theme().danger}else{cx.theme().foreground}).child(format!("{} · {} · {}",item.endpoint.name,item.label(),this.result_alert_status(item))))
                         .child(div().text_sm().truncate().child(format!("Session {} · Turn {}",item.record.thread_id,item.record.turn_id)))
                         .child(div().text_xs().truncate().child(format!("Observed Unix ms {} · event {}",item.record.observed_unix_ms,item.record.sequence)))
                         .child(div().flex().gap_2()
                             .child(Button::new(("result-open",row)).small().label("Open source").disabled(this.attention.opening.is_some()||this.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.open_turn_result(open.clone(),window,cx))))
                             .child(Button::new(("result-review",row)).small().label("Mark reviewed").disabled(item.reviewed||this.attention.busy||this.attention.review_busy||this.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.review_turn_results(vec![review.clone()],window,cx))))
+                            .child(this.session_mute_button(format!("result-mute-{row}").into(),Some(fleetpane_session::notifications::Session {socket:item.endpoint.socket.clone(),host_id:item.host_id,thread_id:item.record.thread_id.clone()}),cx))
                             .child(Button::new(("result-copy",row)).small().ghost().label("Copy record").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(raw.clone())))))
                 }).collect()
             })).flex_1().min_h_0())

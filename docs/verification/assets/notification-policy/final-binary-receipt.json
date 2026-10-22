@@ -1,0 +1,70 @@
+{
+  "base_commit": "193e8e292ff33107c826a9add9132908c8be922a",
+  "desktop_sha256": "f6f25cbc9e892cd8cce8feff8d65d96671b282dd9ff37dd873b8993d77e0ceaf",
+  "host_sha256": "796eb34adc050a7a76ca47bd1514ca0427717c75f68ca4ddf713dc25a31032d4",
+  "desktop_pids": [
+    15778,
+    42123
+  ],
+  "workspace": "fleetpane-alert-final-20261022",
+  "checks": [
+    "fresh final builds after Unix-only module guard",
+    "6 initial alerts",
+    "4 raw pending with global mute",
+    "approval mute leaves 3 alerts",
+    "Codex Host mute leaves 2 alerts",
+    "exact question-session mute leaves 5 alerts",
+    "global mute preserves session rule",
+    "failed and completed results remain unreviewed",
+    "save failure preserves revision 3",
+    "normal Alt+F4 failure guard",
+    "explicit reload clears error and close guard",
+    "normal close and replacement preserve revision 8",
+    "900x560 settings",
+    "source snapshots unchanged including owner and operation identities"
+  ],
+  "limits": [
+    "44-byte draft and Next navigation were covered in the preceding native run",
+    "no external model calls",
+    "no OS delivery, workspace scopes, IME, performance or cross-platform native acceptance"
+  ],
+  "cleanup": {
+    "processes": [
+      {
+        "pid": 10594,
+        "state": "absent"
+      },
+      {
+        "pid": 10597,
+        "state": "absent"
+      },
+      {
+        "pid": 10600,
+        "state": "absent"
+      },
+      {
+        "pid": 10596,
+        "state": "absent"
+      },
+      {
+        "pid": 10599,
+        "state": "absent"
+      },
+      {
+        "pid": 10602,
+        "state": "absent"
+      },
+      {
+        "pid": 15778,
+        "state": "absent"
+      },
+      {
+        "pid": 42123,
+        "state": "absent"
+      }
+    ],
+    "host_sockets_absent": true,
+    "workspace_stopped": true,
+    "full_snapshot_equality": true
+  }
+}

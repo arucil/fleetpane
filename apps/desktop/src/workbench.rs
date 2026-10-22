@@ -4,6 +4,7 @@ mod completion;
 mod diagnostics;
 mod files;
 mod host_choice;
+mod notifications;
 mod sessions;
 mod switcher;
 mod tabs;
@@ -56,6 +57,7 @@ pub struct Workbench {
     continuation_subscription: Option<Subscription>,
     file_navigation: files::State,
     attention: attention::State,
+    notifications: notifications::State,
     sessions: sessions::State,
     switcher: switcher::State,
     host_choice: host_choice::State,
@@ -100,6 +102,7 @@ impl Workbench {
     pub fn new(
         configuration: Configuration,
         creation_directory: Option<std::path::PathBuf>,
+        preferences_directory: Result<std::path::PathBuf, String>,
         window: &mut Window,
         cx: &mut Context<Self>,
     ) -> Self {
@@ -145,6 +148,7 @@ impl Workbench {
             continuation_subscription: None,
             file_navigation: files::State::default(),
             attention: attention::State::new(cx),
+            notifications: notifications::State::new(preferences_directory),
             sessions: sessions::State::new(window, cx),
             switcher: switcher::State::new(window, cx),
             host_choice: host_choice::State::default(),
@@ -157,6 +161,8 @@ impl Workbench {
         };
         value.load_host_choice(true, window, cx);
         value.load_tabs(true, window, cx);
+        value.load_notifications(true, window, cx);
+        value.refresh_attention(window, cx);
         cx.spawn_in(window, async move |this, cx| {
             loop {
                 cx.background_executor()
@@ -180,8 +186,9 @@ impl Workbench {
                     .await;
                 if this
                     .update_in(cx, |this, window, cx| {
-                        if this.attention.active {
+                        if !this.closing {
                             this.refresh_attention(window, cx);
+                            this.load_notifications(false, window, cx);
                         }
                     })
                     .is_err()
@@ -201,6 +208,7 @@ impl Workbench {
     }
 
     fn drafts_saved(&self, cx: &App) -> Result<bool, String> {
+        let notifications_ready = self.notifications.close_status()?;
         if let Some(error) = &self.host_choice.error {
             return Err(error.clone());
         }
@@ -208,6 +216,7 @@ impl Workbench {
         let mut ready = self.tabs_ready(cx)?
             && !self.host_choice.busy
             && !self.attention.review_busy
+            && notifications_ready
             && !self.export_pending(cx);
         for slot in &self.slots {
             if let Some(view) = &slot.view {
@@ -778,6 +787,7 @@ impl Render for Workbench {
             .flex_col()
             .bg(cx.theme().background)
             .child(self.host_choice_bar(cx))
+            .child(self.notification_controls(cx))
             .child(self.tabs_bar(cx))
             .when_some(self.close_error.as_ref(), |view, error| {
                 view.child(
@@ -847,7 +857,7 @@ impl Render for Workbench {
                             .child(
                                 Button::new("open-attention")
                                     .small()
-                                    .label("Attention")
+                                    .label(self.attention_label())
                                     .selected(self.attention.active)
                                     .on_click(cx.listener(|this, _, window, cx| {
                                         this.open_attention(window, cx)

@@ -125,6 +125,7 @@ impl Workbench {
             .flex()
             .items_center()
             .gap_2()
+            .child(self.notifications_button(cx))
             .child(
                 div()
                     .flex_1()

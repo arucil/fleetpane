@@ -1,5 +1,15 @@
 # Fleetpane
 
+**Alerts** now saves device-local global, Host, exact session and event-type mute.
+Muted items stay in the real pending/results queue and Next request, while the
+alert count excludes them. Normal close waits for saves and displays failures.
+OS popup, sound, tray/dock and workspace rules remain open.
+[Linux fixture acceptance](docs/verification/2026-10-22-notification-policy.md).
+
+CLI uses the same private preference directory as desktop `--preferences-dir`:
+`fleetpane-host notification-policy STORE get` or
+`fleetpane-host notification-policy STORE set EXPECTED_REVISION < policy.json`.
+
 Latest local additions: workspace tab keyboard/menu navigation and saved order,
 loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
 viewer and Codex/ACP context telemetry, with separate
@@ -545,7 +555,7 @@ every configured Host, including unopened views. Filter by request type, copy th
 original JSON or open its checked source. Read-only viewing does not take control;
 use **Take control**, then **Open pending session** to review in the original
 conversation. External decisions update read-only views automatically. The queue
-refreshes every two seconds while open and keeps unavailable Hosts visible.
+refreshes every two seconds while the workbench window is open and keeps unavailable Hosts visible.
 **Next request** or Ctrl+Shift+J (Cmd+Shift+J on macOS) checks every configured
 Host and cycles through pending sources, independently of the queue filters.
 It preserves drafts and explicit control/answer requirements. Requests without
@@ -557,8 +567,9 @@ eviction and unavailable or older Hosts remain visible. **Mark reviewed** and
 original outcome and pending requests. **Open source** checks the original Host,
 then uses explicit control and bounded history inspection. Older turns may need
 **Load earlier messages**. Reviews survive desktop replacement in controller-store
-schema 12; the Host result feed does not survive Host restart. OS notifications,
-mute/tray settings and request age remain open.
+schema 12 (current schema 15); the Host result feed does not survive Host restart.
+Local alert mute now has separate acceptance above; OS delivery, tray/dock and
+request age remain open.
 
 ```sh
 cargo run -p fleetpane-host -- attention /path/to/hosts.json
@@ -1072,6 +1083,7 @@ python3 scripts/acp-cancel-smoke.py               # Unix; pending/late permissio
 python3 scripts/acp-review-smoke.py               # Unix; exact request details, choices, controller/session isolation
 python3 scripts/recent-directories-smoke.py       # Unix; device-local exact MRU, Host isolation, corruption/forget
 python3 scripts/appearance-smoke.py              # Unix; device preference persistence, migration, conflicts and failures
+python3 scripts/notification-policy-smoke.py     # Unix; local alert scopes, persistence, conflicts and bounded JSON
 python3 scripts/paseo-receipts-smoke.py          # Unix; process death, durable reports and explicit retry
 python3 scripts/paseo-scratch-smoke.py           # Unix; paused/killed copies and explicit scratch collection
 python3 scripts/paseo-signals-smoke.py           # Unix; SIGINT/SIGTERM finish the current copy and save Stop

@@ -8,7 +8,7 @@ pub(super) struct State {
     pub active: bool,
     pub(super) busy: bool,
     pub(super) report: Option<Report>,
-    items: Vec<Item>,
+    pub(super) items: Vec<Item>,
     pub(super) completions: Vec<attention::review::Item>,
     pub(super) show_completions: bool,
     pub(super) review_busy: bool,
@@ -297,9 +297,9 @@ impl Workbench {
             .child(div().p_4().flex().flex_wrap().gap_3().items_center()
                 .child(Button::new("attention-back").small().label("Back to Host").on_click(cx.listener(|this,_,window,cx|{this.select(this.selected,window,cx);})))
                 .child(format!("Observed pending requests · {}",self.attention.items.len()))
-                .child(Button::new("attention-completions").small().label(format!("Turn results ({})",self.attention.completions.iter().filter(|item|!item.reviewed).count())).on_click(cx.listener(|this,_,_,cx|{this.attention.show_completions=true;cx.notify();})))
+                .child(Button::new("attention-completions").small().label(format!("Turn results · {} alerts",self.result_alert_count())).on_click(cx.listener(|this,_,_,cx|{this.attention.show_completions=true;cx.notify();})))
                 .child(Button::new("attention-refresh").small().label(if self.attention.busy{"Checking…"}else{"Refresh"}).disabled(self.attention.busy).on_click(cx.listener(|this,_,window,cx|this.refresh_attention(window,cx)))))
-            .child(div().px_4().pb_2().text_sm().child("Checks all configured Hosts every 2 seconds while open. Review and answer in the original session."))
+            .child(div().px_4().pb_2().text_sm().child("Checks all configured Hosts every 2 seconds while this window is open. Review and answer in the original session."))
             .child(div().px_4().pb_2().text_sm().child(if cfg!(target_os="macos"){ "↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies · Ctrl+R refreshes · Cmd+Shift+J next across all Hosts" }else{ "↑ / ↓ · Home / End select · Enter opens source · Ctrl+C copies · Ctrl+R refreshes · Ctrl+Shift+J next across all Hosts" }))
             .child(div().px_4().pb_2().flex().flex_wrap().gap_2().children([(None,"All"),(Some(Kind::Approval),"Approvals"),(Some(Kind::Question),"Questions"),(Some(Kind::Other),"Other")].into_iter().enumerate().map(|(i,(kind,label))|Button::new(("attention-filter",i)).small().ghost().label(label).selected(self.attention.filter.kind==kind).on_click(cx.listener(move|this,_,window,cx|{this.attention.filter.kind=kind;this.reconcile_attention();this.attention.focus.focus(window,cx);cx.notify();})))))
             .child(div().px_4().pb_2().flex().flex_wrap().gap_2()
@@ -322,10 +322,11 @@ impl Workbench {
                         .when(selected==Some(indices[row]),|view|view.bg(cx.theme().secondary).border_l_4().border_color(cx.theme().primary))
                         .on_mouse_down(MouseButton::Left,cx.listener(move|this,_,window,cx|{this.attention.cursor.select(&select);this.attention.selection_notice=None;this.attention.focus.focus(window,cx);cx.notify();}))
                         .child(div().truncate().child(format!("{}{} · {:?} · {}",if selected==Some(indices[row]){"Selected · "}else{""},item.endpoint.name,item.kind,item.title)))
-                        .child(div().text_sm().truncate().child(format!("Session: {} · Request: {}",item.thread_id.as_deref().unwrap_or("no session target"),item.id)))
+                        .child(div().text_sm().truncate().child(format!("Session: {} · Request: {} · {}",item.thread_id.as_deref().unwrap_or("no session target"),item.id,this.pending_alert_status(item))))
                         .child(div().text_xs().truncate().child((match item.kind {Kind::Approval=>"Waiting for your decision",Kind::Question=>"Waiting for your answer",Kind::Other=>item.method.as_str()}).to_owned()))
                         .child(div().flex().gap_2()
                             .child(Button::new(("attention-open",row)).small().label("Open source").disabled(item.thread_id.is_none()||this.attention.opening.is_some()||this.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.open_attention_item(open.clone(),window,cx))))
+                            .child(this.session_mute_button(format!("attention-mute-{row}").into(), item.thread_id.as_ref().map(|id| fleetpane_session::notifications::Session {socket:item.endpoint.socket.clone(),host_id:item.host_id,thread_id:id.clone()}),cx))
                             .child(Button::new(("attention-copy",row)).small().ghost().label("Copy original request").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(&raw).expect("JSON request serializes"))))))
                 }).collect()
             })).track_scroll(&self.attention.scroll).flex_1().min_h_0()).into_any_element()

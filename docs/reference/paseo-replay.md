@@ -1580,3 +1580,12 @@ now validate supplied choices and pin response controls beside the input. Native
 ID collisions, cancel/allow, ACP reject/allow and Codex two-page questions have
 [separate acceptance](../verification/2026-10-22-real-provider-requests.md). No new
 history coverage or upstream-tip claim is implied.
+
+
+Local alert-policy follow-up (2026-10-22): PRD ATT-04/05 and reviewed notification
+routing now have additive global, Host, exact session and event-type mute, shared
+CLI/native persistence and truthful alert counts. Muted pending requests and
+failed/unreviewed results remain inspectable. [Linux fixture acceptance](../verification/2026-10-22-notification-policy.md)
+covers original Host snapshots, normal close failure/reload, exact draft/window
+replacement and 900×560. Workspace scopes, OS delivery/sound/tray/dock and durable
+deduplication remain open. No history-review cursor or upstream-tip claim changes.

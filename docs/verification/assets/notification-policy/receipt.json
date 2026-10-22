@@ -1,0 +1,92 @@
+{
+  "base_commit": "193e8e292ff33107c826a9add9132908c8be922a",
+  "desktop_sha256": "39e16ae0072b2c68392c074f54449ff0d008811ac1c062775efeabd8a151bbbd",
+  "host_sha256": "4fa9d1f289650eca2cb573acb7ad6e36879b6c6d9a0eb84a0f3fc6712ed35248",
+  "fixture_providers": true,
+  "external_models": false,
+  "desktop_pids": [
+    3958937,
+    4003928,
+    4022165,
+    4062311,
+    4073039,
+    4093786
+  ],
+  "owned_workspace": "fleetpane-alert-policy-20261022",
+  "checks": [
+    "global mute",
+    "Host mute",
+    "session mute",
+    "event type mute",
+    "truth queue retained",
+    "original pending IDs retained",
+    "normal Alt+F4 failure guard",
+    "reload clears guard",
+    "44-byte exact draft after replacement",
+    "900x560 controls",
+    "snapshot identity/activity/outcomes/admission/operations unchanged"
+  ],
+  "limits": [
+    "OS notifications, sound and tray/dock not implemented",
+    "workspace scope not implemented",
+    "deduplicated delivery and persistent inbox not implemented",
+    "no native cross-platform, IME, external-provider or performance acceptance",
+    "workspace_close_window removes X windows forcibly; only Alt+F4 is normal close proof"
+  ],
+  "cleanup": [
+    {
+      "host": "Codex",
+      "pid": 3954070,
+      "process_absent": true,
+      "owned_socket_unlinked_after_exit": true
+    },
+    {
+      "host": "DeepSeek-A",
+      "pid": 3954075,
+      "process_absent": true,
+      "owned_socket_unlinked_after_exit": true
+    },
+    {
+      "host": "DeepSeek-B",
+      "pid": 3954079,
+      "process_absent": true,
+      "owned_socket_unlinked_after_exit": true
+    },
+    {
+      "pid": 3954074,
+      "state": "absent"
+    },
+    {
+      "pid": 3954078,
+      "state": "absent"
+    },
+    {
+      "pid": 3954084,
+      "state": "absent"
+    },
+    {
+      "pid": 3958937,
+      "state": "absent"
+    },
+    {
+      "pid": 4003928,
+      "state": "absent"
+    },
+    {
+      "pid": 4022165,
+      "state": "absent"
+    },
+    {
+      "pid": 4062311,
+      "state": "absent"
+    },
+    {
+      "pid": 4073039,
+      "state": "absent"
+    },
+    {
+      "pid": 4093786,
+      "state": "absent"
+    }
+  ]
+}
