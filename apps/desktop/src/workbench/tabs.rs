@@ -1,4 +1,5 @@
 //! Bounded workspace views and revisioned device-local layout persistence.
+mod navigation;
 use super::*;
 use crate::{file_locations::Location, files_view::FilesView, terminal_view::TerminalView};
 use fleetpane_session::{
@@ -49,6 +50,7 @@ pub(super) struct State {
     pub busy: bool,
     error: Option<String>,
     saving_paused: bool,
+    scroll: ScrollHandle,
 }
 
 impl Workbench {
@@ -255,6 +257,7 @@ impl Workbench {
         };
         self.tabs.visible = true;
         self.tabs.selected = Some(id);
+        self.tabs.scroll.scroll_to_item(index);
         self.choosing = false;
         self.browsing_workspaces = false;
         self.sessions.active = false;
@@ -377,7 +380,7 @@ impl Workbench {
         {
             return;
         }
-        window.blur(cx);
+        window.focus(&self.focus, cx);
         self.tabs.entries[index].saved.panel = panel;
         let workspace = self.tabs.entries[index].workspace.clone();
         if let Some(workspace) = workspace {
@@ -642,39 +645,53 @@ impl Workbench {
             .when(!self.tabs.entries.is_empty(), |bar| {
                 bar.child(
                     div()
-                        .id("workspace-tabs")
-                        .px_4()
-                        .py_1()
                         .flex()
-                        .gap_2()
-                        .overflow_x_scroll()
-                        .children(self.tabs.entries.iter().enumerate().map(|(index, entry)| {
-                            let id = entry.saved.workspace;
-                            let name = entry
-                                .saved
-                                .directory
-                                .file_name()
-                                .unwrap_or(entry.saved.directory.as_os_str())
-                                .to_string_lossy();
-                            let host = self
-                                .slots
-                                .iter()
-                                .find(|slot| slot.endpoint.socket == entry.saved.socket)
-                                .map_or("Unavailable Host", |slot| slot.endpoint.name.as_str());
-                            let project = entry
-                                .workspace
-                                .as_ref()
-                                .and_then(|workspace| {
-                                    workspace.registration.project.path.file_name()
-                                })
-                                .map(|name| name.to_string_lossy());
-                            let label = match project {
-                                Some(project) if project != name => {
-                                    format!("{host} · {project} / {name}")
-                                }
-                                _ => format!("{host} · {name}"),
-                            };
+                        .min_w_0()
+                        .items_center()
+                        .gap_1()
+                        .px_2()
+                        .child(self.tab_menu(cx))
+                        .child(
                             div()
+                                .id("workspace-tabs")
+                                .flex_1()
+                                .min_w_0()
+                                .px_4()
+                                .py_1()
+                                .flex()
+                                .gap_2()
+                                .overflow_x_scroll()
+                                .track_scroll(&self.tabs.scroll)
+                                .children(self.tabs.entries.iter().enumerate().map(
+                                    |(index, entry)| {
+                                        let id = entry.saved.workspace;
+                                        let name = entry
+                                            .saved
+                                            .directory
+                                            .file_name()
+                                            .unwrap_or(entry.saved.directory.as_os_str())
+                                            .to_string_lossy();
+                                        let host = self
+                                            .slots
+                                            .iter()
+                                            .find(|slot| slot.endpoint.socket == entry.saved.socket)
+                                            .map_or("Unavailable Host", |slot| {
+                                                slot.endpoint.name.as_str()
+                                            });
+                                        let project = entry
+                                            .workspace
+                                            .as_ref()
+                                            .and_then(|workspace| {
+                                                workspace.registration.project.path.file_name()
+                                            })
+                                            .map(|name| name.to_string_lossy());
+                                        let label = match project {
+                                            Some(project) if project != name => {
+                                                format!("{host} · {project} / {name}")
+                                            }
+                                            _ => format!("{host} · {name}"),
+                                        };
+                                        div()
                                 .flex()
                                 .flex_shrink_0()
                                 .gap_1()
@@ -700,7 +717,9 @@ impl Workbench {
                                             this.close_workspace_tab(id, window, cx)
                                         })),
                                 )
-                        })),
+                                    },
+                                )),
+                        ),
                 )
             })
             .into_any_element()

@@ -24,7 +24,7 @@ pub(super) fn init(cx: &mut App) {
 }
 
 pub(super) struct State {
-    active: bool,
+    pub(super) active: bool,
     busy: bool,
     generation: u64,
     palette: Entity<CommandState>,

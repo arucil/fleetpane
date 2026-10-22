@@ -42,6 +42,13 @@ pub struct QuestionView {
 impl EventEmitter<AnswerEvent> for QuestionView {}
 
 impl QuestionView {
+    pub(crate) fn composing(&self, window: &mut Window, cx: &mut App) -> bool {
+        self.editors.iter().any(|editor| match editor {
+            Editor::Text(input) => crate::input_composition::active(input, window, cx),
+            Editor::Secret(input) => crate::input_composition::active(input, window, cx),
+        })
+    }
+
     pub fn new(request: Request, window: &mut Window, cx: &mut Context<Self>) -> Self {
         let mut subscriptions = Vec::new();
         let editors = request

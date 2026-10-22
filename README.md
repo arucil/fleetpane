@@ -1,6 +1,7 @@
 # Fleetpane
 
-Latest local additions: loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
+Latest local additions: workspace tab keyboard/menu navigation and saved order,
+loaded-prompt navigation, source Find, native Markdown file Source/Preview, conversation image
 viewer and Codex/ACP context telemetry, with separate
 [behavior evidence](docs/status.md) and [real OpenCodex/DeepSeek checks](docs/verification/2026-10-22-real-provider-outline-usage.md). Scoped history review covers the frozen
 6,215-commit DAG plus upstream deltas through `68fa464cd` (remote tips checked 2026-10-22);
@@ -698,6 +699,13 @@ send messages or start shells. Taking control is shared by tabs of that exact
 Host within the window. **Resume** remains explicit for an unloaded context.
 Closing a tab leaves its running tasks and shells with the Host.
 
+Use Ctrl+PageUp/PageDown to select tabs, Ctrl+1–8 for a position, Ctrl+9 for
+the last tab, and Ctrl+Shift+PageUp/PageDown to move the selected tab. Ctrl+Shift+W
+closes its view after save/input checks. On macOS the modifier is Cmd and close
+is Cmd+W; native acceptance currently covers Linux X11. The fixed **Tabs** menu
+shows these actions. Selection scrolls an overflowing strip into view; order
+survives normal close/reopen. [Navigation evidence](docs/verification/2026-10-22-workspace-tab-navigation.md).
+
 Layout saves use revision checks. If a write fails, **Reload saved layout** reads
 the stored record; **Keep saved layout** pauses this window's layout writes and
 allows closing while retaining the previous record. Session drafts keep their
@@ -925,8 +933,8 @@ fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID on
 fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID off
 ```
 
-This adds local quick access; workspace tabs, drag ordering, keyboard pin shortcuts
-and selection restoration remain open. See [the decision](docs/adr/0025-local-workspace-pins.md)
+This adds local quick access; workspace tabs now have separate saved-layout and
+navigation support. Drag ordering and keyboard pin shortcuts remain open. See [the decision](docs/adr/0025-local-workspace-pins.md)
 and [verification](docs/verification/2026-10-20-workspace-pins.md).
 
 ## Follow up during a Codex turn

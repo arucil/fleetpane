@@ -84,6 +84,17 @@ pub struct FilesView {
 }
 impl EventEmitter<Location> for FilesView {}
 
+impl FilesView {
+    pub(crate) fn tab_shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
+        crate::input_composition::active(&self.path, window, cx)
+            || crate::input_composition::active(&self.export_path, window, cx)
+            || self
+                .preview
+                .as_ref()
+                .is_some_and(|input| crate::input_composition::active(input, window, cx))
+    }
+}
+
 fn source_position(text: &str, line: Option<NonZeroUsize>) -> Result<Position, String> {
     let line = line.unwrap_or(NonZeroUsize::MIN).get();
     if line > 1 && text.match_indices('\n').nth(line - 2).is_none() {

@@ -110,6 +110,11 @@ pub struct TerminalView {
 impl EventEmitter<()> for TerminalView {}
 
 impl TerminalView {
+    pub(crate) fn tab_shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
+        crate::input_composition::active(&self.input, window, cx)
+            || crate::input_composition::active(&self.label, window, cx)
+    }
+
     pub(crate) fn focus_input(&self, window: &mut Window, cx: &mut Context<Self>) {
         self.input.update(cx, |input, cx| input.focus(window, cx));
     }

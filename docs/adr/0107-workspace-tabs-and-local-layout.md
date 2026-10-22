@@ -48,7 +48,9 @@ the Host. The tab stays open while local saves, accepted keyboard input or
 unresolved operations require attention. Reopening the catalog entry restores
 session drafts but does not promise the just-closed tab's panel/location.
 
-Conversation scroll, split panes, drag ordering, tab keyboard navigation,
+Conversation scroll, split panes, drag ordering,
 cross-window live synchronization, remote Hosts and terminal text-draft
 persistence across tab closure remain separate work. This design makes no
 release performance or replacement-readiness claim. [Evidence](../verification/2026-10-22-workspace-tabs.md).
+Keyboard navigation and explicit order changes are subsequently specified in
+[ADR 0108](0108-workspace-tab-navigation.md).

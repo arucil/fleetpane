@@ -36,6 +36,7 @@ struct Slot {
 }
 
 pub struct Workbench {
+    focus: FocusHandle,
     slots: Vec<Slot>,
     tabs: tabs::State,
     selected: usize,
@@ -113,6 +114,7 @@ impl Workbench {
             }
         });
         let mut value = Self {
+            focus: cx.focus_handle(),
             slots: configuration
                 .hosts
                 .iter()
@@ -751,6 +753,10 @@ impl Render for Workbench {
         div()
             .relative()
             .key_context("FleetpaneWorkbench")
+            .track_focus(&self.focus)
+            .capture_key_down(
+                cx.listener(|this, event, window, cx| this.tab_key(event, window, cx)),
+            )
             .capture_action(cx.listener(|this, _: &switcher::Toggle, window, cx| {
                 cx.stop_propagation();
                 this.toggle_switcher(window, cx);

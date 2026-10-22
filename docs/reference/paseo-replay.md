@@ -1547,3 +1547,16 @@ Closing a tab leaves accepted shell work with its original Host; this does not
 transfer a provider process or accept Host updates. The source-review cursor is
 unchanged. Drag ordering, split panes, scroll persistence and other parity gaps
 remain explicit in `docs/parity.md`.
+
+
+## Workspace tab navigation: continued implementation
+
+Keyboard/menu selection, guarded view closure, explicit adjacent order changes
+and overflow scrolling now extend the existing tab model with
+[Linux native and installed OpenCodex/DeepSeek evidence](../verification/2026-10-22-workspace-tab-navigation.md).
+Exact drafts and saved order survive normal replacement; original shell input
+and an independent pending ACP permission remain unchanged. This is continued
+implementation of reviewed workspace workflows, with no source-review cursor
+change or new upstream-tip claim. Drag ordering and splits remain open. The
+installed Codex turn-list-based CLI wait returned unsupported `list_turns`; that
+compatibility path needs separate repair and regression acceptance.

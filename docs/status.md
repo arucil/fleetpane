@@ -1,5 +1,11 @@
 # Behavior status
 
+Workspace tabs now support keyboard selection/close and saved reordering, plus
+a fixed **Tabs** menu and automatic strip scrolling. Linux native checks include
+three installed OpenCodex/DeepSeek sessions, exact drafts across replacement,
+12-tab overflow, PTY input isolation and retained pending permission.
+[Evidence and limits](verification/2026-10-22-workspace-tab-navigation.md).
+
 **Loaded prompts** now jumps to observed user messages, including same-turn
 follow-ups and image-only inputs. Paging, 900×560, ACP pending choices and exact
 draft retention have [Linux native evidence](verification/2026-10-22-prompt-outline.md).
@@ -49,6 +55,7 @@ performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
+| Workspace tab keyboard/menu navigation and order | verified locally for covered Linux X11 fixture and installed OpenCodex/DeepSeek workflows | Ctrl+PageUp/PageDown, positions 1–8/last, Shift movement, guarded close and revisioned saved order; 12-tab scrolling, exact three real drafts/replacement, zero shell input and pending ACP preservation covered. Popup isolation repaired during native QA. IME, other platforms, drag/splits and configurable keys remain open. Installed Codex wait returned unsupported list_turns and remains a separate gap. [Evidence](verification/2026-10-22-workspace-tab-navigation.md), [ADR](adr/0108-workspace-tab-navigation.md). |
 | Workspace tabs and saved layout | verified locally for covered Linux native / installed OpenCodex and DeepSeek workflows | Up to 32 exact Host/workspace tabs, grouped catalog, separate session/draft, Conversation/Files/Terminal, file location, selected terminal and sidebar width/visibility; schema-14 migration, CAS/save failures and normal close guard. Three real sessions retain exact 38/37/43-byte drafts; same shell PID/input survives replacement and accepted shell command finishes after its tab closes. No automatic takeover/resume/send. No tab drag, split panes, conversation scroll or other-platform acceptance. [Evidence](verification/2026-10-22-workspace-tabs.md), [ADR](adr/0107-workspace-tabs-and-local-layout.md). |
 | Focus conversation composer | verified locally for Linux native fixture workflows | Ctrl/Cmd+L focuses an editable controlled conversation, preserving palettes/questions and IME guards. Codex/DeepSeek exact multiline drafts, normal close/reopen, 900×560 and read-only external takeover covered. Other platforms and actual IME remain unverified. [Evidence](verification/2026-10-22-composer-focus.md). |
 | Modified terminal Enter | verified locally for shared encoder and Linux X11 real PTY fixture | All control/alt/shift Enter combinations retain CSI-u modifiers, plain Enter stays CR and platform shortcuts are not forwarded. Pre-fix regression, exact native 51-byte raw capture, same shell/input sequence, text-editor focus newline and independent pending ACP preservation covered. Installed terminal applications, other platforms and negotiation remain open. [Evidence](verification/2026-10-22-modified-enter.md). |

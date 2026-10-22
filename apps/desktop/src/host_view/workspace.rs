@@ -3,6 +3,24 @@ use super::*;
 pub(crate) type Control = std::rc::Rc<std::cell::RefCell<Option<Connection>>>;
 
 impl HostView {
+    pub(crate) fn tab_shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
+        self.picker.is_some()
+            || crate::input_composition::active(&self.composer, window, cx)
+            || [
+                &self.workspace,
+                &self.search,
+                &self.filter_workspace,
+                &self.rename,
+            ]
+            .iter()
+            .any(|input| crate::input_composition::active(input, window, cx))
+            || self.questions.iter().any(|question| {
+                question
+                    .view
+                    .update(cx, |view, cx| view.composing(window, cx))
+            })
+    }
+
     pub(crate) fn scope_workspace(
         &mut self,
         workspace: fleetpane_session::workspaces::Workspace,
