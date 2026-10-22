@@ -28,6 +28,7 @@ pub enum Movement {
 }
 
 struct Identity {
+    request_sequence: Option<u64>,
     socket: PathBuf,
     host_id: Uuid,
     request: Value,
@@ -64,6 +65,7 @@ impl Cursor {
                 && item.endpoint.socket == selected.socket
                 && item.host_id == selected.host_id
                 && item.request == selected.request
+                && item.request_sequence == selected.request_sequence
         })
     }
 
@@ -78,6 +80,7 @@ impl Cursor {
 
     pub fn select(&mut self, item: &Item) {
         self.selected = item.thread_id.as_ref().map(|_| Identity {
+            request_sequence: item.request_sequence,
             socket: item.endpoint.socket.clone(),
             host_id: item.host_id,
             request: item.request.clone(),
@@ -205,6 +208,9 @@ mod tests {
         assert!(!cursor.reconcile(&rows, &filter));
         assert_eq!(cursor.index(&rows, &filter), Some(0));
         rows.remove(0);
+        assert!(cursor.reconcile(&rows, &filter));
+        cursor.select(&rows[0]);
+        rows[0].request_sequence = Some(42);
         assert!(cursor.reconcile(&rows, &filter));
         assert_eq!(
             cursor.index(&rows, &filter),

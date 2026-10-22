@@ -1,0 +1,48 @@
+workspace
+    Finished `test` profile [unoptimized] target(s) in 14.39s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 98 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.21s
+test result: ok. 253 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.85s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+desktop
+    Finished `test` profile [unoptimized] target(s) in 16.89s
+test result: ok. 44 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s
+clippy
+    Finished `dev` profile [unoptimized] target(s) in 3.93s
+desktop-clippy
+    Finished `dev` profile [unoptimized] target(s) in 11.91s
+pending-process
+{"process_claims": [0, 2], "kinds": ["approval", "question"], "host_observation_time": true, "muted_consumed": true, "unmute_replay": false, "failure_rolls_back": true, "host_snapshots_unchanged_by_claims": true, "answered_occurrence_removed": true}
+pending-completion-process
+{"process_claims": [2, 0], "global_mute_consumes": true, "unmute_replay": false, "failure_rolls_back": true, "full_host_snapshots_unchanged": true, "pending": 2, "schema": 17}
+pending-policy-process
+notification policy smoke: persistence, CAS, exact scopes, invalid-input bounds and no Host dependency passed
+pending-appearance-process
+{"provider_process_started": false, "cli_round_trip_and_reopen": "PASS", "stale_writer_refused": "PASS", "failed_commit_keeps_saved_preference": "PASS", "schema_5_upgrade_preserves_exact_draft": "PASS", "corrupt_unknown_or_missing_current_data_not_defaulted": "PASS", "private_permissions_and_symlink_refusal": "PASS"}
+pending-host-choice-process
+PASS: exact Unicode Host choice, stale write/refusal, failed commit, v10 upgrade and corruption preservation; no Host started
+pending-last-session-process
+PASS: exact Unicode session choice, endpoint isolation, stale/failed writes, schema-12 upgrade and corruption preservation; no Host started or contacted
+pending-recent-process
+{"cli_mru_round_trip": "PASS", "exact_unicode_and_host_isolation": "PASS", "corruption_visible_without_overwrite": "PASS", "no_host_or_session_needed": "PASS"}
+pending-import-process
+{"offline_workspace_and_history": "PASS", "idempotent_import": "PASS", "durable_paged_history": "PASS", "explicit_unsupported_provider": "PASS", "source_unchanged": "PASS", "no_host_required": "PASS"}
+pending-attention-process
+PASS: read-only attention, 2.000s pending preservation, fenced original provider answer and cross-Host isolation
+pending-cancel-process
+{"provider": "private ACP fixture", "cancel_pending_and_late_permissions": "PASS", "wait_for_prompt_settlement": "PASS", "duplicate_stop_no_duplicate_wire": "PASS", "stale_answer_rejected": "PASS", "other_session_permission_unchanged": "PASS", "archive_no_replay_or_permission_restore": "PASS", "restart_mid_cancellation_is_unknown": "PASS"}
+pending-completion-results-process
+{"explicit_codex_acp_terminal_results": "PASS", "local_review_persistence_and_idempotency": "PASS", "failure_and_refusal_preserved": "PASS", "failed_write_not_marked_reviewed": "PASS", "independent_pending_requests_and_snapshots_unchanged": "PASS", "offline_host_explicit": "PASS"}
+
+python-script-tests
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 6.481s
+
+OK

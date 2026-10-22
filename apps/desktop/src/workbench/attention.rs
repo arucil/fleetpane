@@ -91,19 +91,23 @@ impl Workbench {
                 };
                 let observations =
                     fleetpane_session::notifications::delivery::Observation::from_report(&report);
-                let batch = match preferences {
-                    Ok(directory) => {
-                        async move {
-                            Store::open(directory)
-                                .await?
-                                .claim_completion_alerts(observations)
-                                .await
+                let pending =
+                    fleetpane_session::notifications::pending::Observation::from_report(&report);
+                let (batch, pending_batch) = match preferences {
+                    Ok(directory) => match Store::open(directory).await {
+                        Ok(store) => {
+                            let batch = store.claim_completion_alerts(observations).await;
+                            let pending = store.claim_pending_alerts(pending).await;
+                            (batch, pending)
                         }
-                        .await
-                    }
-                    Err(error) => Err(Error::Input(error)),
+                        Err(error) => {
+                            let message = error.to_string();
+                            (Err(error), Err(Error::Input(message)))
+                        }
+                    },
+                    Err(error) => (Err(Error::Input(error.clone())), Err(Error::Input(error))),
                 };
-                Ok((report, batch))
+                Ok((report, batch, pending_batch))
             })
         });
         cx.spawn_in(window, async move |this, cx| {
@@ -111,8 +115,7 @@ impl Workbench {
             let _closed = this.update_in(cx, |this, window, cx| {
                 this.attention.busy = false;
                 match result {
-                    Ok((mut report, batch)) => {
-                        this.finish_completion_reminders(batch, window, cx);
+                    Ok((mut report, batch, pending_batch)) => {
                         this.attention.items.clear();
                         this.attention.completions.clear();
                         for host in &mut report.hosts {
@@ -122,6 +125,8 @@ impl Workbench {
                         this.reconcile_attention();
                         this.attention.report = Some(report);
                         this.attention.error = None;
+                        this.finish_completion_reminders(batch, window, cx);
+                        this.finish_pending_reminders(pending_batch, window, cx);
                     }
                     Err(error) => {
                         this.attention.error = Some(error.to_string());
@@ -339,7 +344,7 @@ impl Workbench {
                         .when(selected==Some(indices[row]),|view|view.bg(cx.theme().secondary).border_l_4().border_color(cx.theme().primary))
                         .on_mouse_down(MouseButton::Left,cx.listener(move|this,_,window,cx|{this.attention.cursor.select(&select);this.attention.selection_notice=None;this.attention.focus.focus(window,cx);cx.notify();}))
                         .child(div().truncate().child(format!("{}{} · {:?} · {}",if selected==Some(indices[row]){"Selected · "}else{""},item.endpoint.name,item.kind,item.title)))
-                        .child(div().text_sm().truncate().child(format!("Session: {} · Request: {} · {}",item.thread_id.as_deref().unwrap_or("no session target"),item.id,this.pending_alert_status(item))))
+                        .child(div().text_sm().truncate().child(format!("{} · Session: {} · Request: {} · {}",this.attention.report.as_ref().map_or_else(||"Observation time unavailable".into(),|r|item.observation_label(r.observed_unix_ms)),item.thread_id.as_deref().unwrap_or("no session target"),item.id,this.pending_alert_status(item))))
                         .child(div().text_xs().truncate().child((match item.kind {Kind::Approval=>"Waiting for your decision",Kind::Question=>"Waiting for your answer",Kind::Other=>item.method.as_str()}).to_owned()))
                         .child(div().flex().gap_2()
                             .child(Button::new(("attention-open",row)).small().label("Open source").disabled(item.thread_id.is_none()||this.attention.opening.is_some()||this.attention.error.is_some()).on_click(cx.listener(move|this,_,window,cx|this.open_attention_item(open.clone(),window,cx))))

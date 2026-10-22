@@ -67,7 +67,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host terminal STORE WORKSPACE_UUID [--take-control] create LABEL | list | output ID AFTER_BYTE | input ID EXPECTED_INPUT TEXT | key ID EXPECTED_INPUT enter|interrupt|eof|tab|escape | resize ID ROWS COLS | rename ID LABEL | close ID. Host-owned POSIX shell; input never appends Enter. Output is raw bytes with explicit loss cursors; native screen and explicit-input panel available from Workspaces."
         );
         println!(
-            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC.\nfleetpane-host notification-policy STORE get | set EXPECTED_REVISION < policy.json: device-local alert preferences; no Host RPC.\nfleetpane-host completion-alerts HOSTS_JSON PREFERENCES_STORE [REVIEW_STORE]: atomically claim new terminal-result reminders; first Host observation baselines silently. Changes local notification cursors, never a Host or review status."
+            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC.\nfleetpane-host notification-policy STORE get | set EXPECTED_REVISION < policy.json: device-local alert preferences; no Host RPC.\nfleetpane-host completion-alerts HOSTS_JSON PREFERENCES_STORE [REVIEW_STORE]: atomically claim new terminal-result reminders; first Host observation baselines silently. Changes local notification cursors, never a Host or review status.\nfleetpane-host pending-alerts HOSTS_JSON PREFERENCES_STORE: claim new pending-request reminders; first observation baselines silently. Consumes local notification cursors; never answers or takes control."
         );
         println!(
             "fleetpane-host recent STORE list SOCKET | remember SOCKET CWD | clear SOCKET: device-local directory suggestions; no Host RPC or session creation."
@@ -900,6 +900,19 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 fleetpane_session::attention::collect(configuration).await?
             };
             println!("{}", serde_json::to_string_pretty(&report)?);
+            Ok(())
+        }
+        "pending-alerts" if args.len() == 3 => {
+            let configuration =
+                fleetpane_session::hosts::Configuration::read(std::path::Path::new(&args[1]))?;
+            let report = fleetpane_session::attention::collect(configuration).await?;
+            let observations =
+                fleetpane_session::notifications::pending::Observation::from_report(&report);
+            let store = fleetpane_session::creations::Store::open((&args[2]).into()).await?;
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&store.claim_pending_alerts(observations).await?)?
+            );
             Ok(())
         }
         "completion-alerts" if args.len() == 3 || args.len() == 4 => {

@@ -112,7 +112,7 @@ pub async fn collect(configuration: Configuration) -> Result<Vec<Report>, Error>
             .await
             {
                 Ok(Response::Snapshot(snapshot)) => ResultState::Reachable {
-                    observation: Box::new(snapshot.into()),
+                    observation: Box::new((*snapshot).into()),
                 },
                 Ok(Response::Error { code, message }) => ResultState::Unavailable {
                     error: format!("{code}: {message}"),

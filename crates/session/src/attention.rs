@@ -21,6 +21,8 @@ pub enum Kind {
 
 #[derive(Clone, Debug, Serialize)]
 pub struct Item {
+    pub request_sequence: Option<u64>,
+    pub observed_unix_ms: Option<u64>,
     pub endpoint: Endpoint,
     pub host_id: Uuid,
     pub id: Value,
@@ -34,7 +36,31 @@ pub struct Item {
 }
 
 impl Item {
-    fn from_request(endpoint: Endpoint, host_id: Uuid, request: Value) -> Result<Self, Error> {
+    /// Time since this Host observed the occurrence; never provider creation age.
+    pub fn observation_label(&self, now_unix_ms: u64) -> String {
+        match self.observed_unix_ms {
+            None => "Host observation time unavailable".into(),
+            Some(time) if time > now_unix_ms => {
+                "Host observation time is ahead of local clock".into()
+            }
+            Some(time) => {
+                let seconds = (now_unix_ms - time) / 1000;
+                if seconds < 60 {
+                    format!("Host observed {seconds}s ago")
+                } else if seconds < 3600 {
+                    format!("Host observed {}m ago", seconds / 60)
+                } else {
+                    format!("Host observed {}h ago", seconds / 3600)
+                }
+            }
+        }
+    }
+
+    pub(crate) fn from_request(
+        endpoint: Endpoint,
+        host_id: Uuid,
+        request: Value,
+    ) -> Result<Self, Error> {
         let id = request
             .get("id")
             .filter(|id| id.is_string() || id.is_number())
@@ -72,6 +98,8 @@ impl Item {
                 Kind::Other => method.clone(),
             });
         Ok(Self {
+            request_sequence: None,
+            observed_unix_ms: None,
             endpoint,
             host_id,
             id,
@@ -87,6 +115,7 @@ impl Item {
 
     /// Recheck the incarnation and original request, including changed details.
     pub fn validate(&self, snapshot: &Snapshot) -> Result<(), Error> {
+        fleetpane_runtime::pending::validate_snapshot(snapshot).map_err(invalid)?;
         if snapshot.host_id != self.host_id {
             return Err(invalid("Host was replaced; refresh the queue"));
         }
@@ -101,6 +130,18 @@ impl Item {
             return Err(invalid(
                 "request was resolved or changed; refresh the queue",
             ));
+        }
+        if let Some(sequence) = self.request_sequence
+            && !snapshot
+                .pending_observations
+                .as_ref()
+                .is_some_and(|observations| {
+                    observations
+                        .iter()
+                        .any(|o| o.id == self.id && o.sequence == sequence)
+                })
+        {
+            return Err(invalid("request occurrence changed; refresh the queue"));
         }
         if self.thread_id.is_none() {
             return Err(invalid(
@@ -117,6 +158,8 @@ impl Item {
 
 #[derive(Debug, Serialize)]
 pub struct Host {
+    /// Complete pending snapshot boundary, absent on legacy/unavailable Hosts.
+    pub pending_sequence: Option<u64>,
     pub endpoint: Endpoint,
     pub host_id: Option<Uuid>,
     pub items: Vec<Item>,
@@ -141,6 +184,7 @@ fn project(probe: Probe) -> Host {
     let endpoint = probe.endpoint;
     match probe.result {
         ProbeResult::Unavailable { error } => Host {
+            pending_sequence: None,
             endpoint,
             host_id: None,
             items: vec![],
@@ -171,27 +215,51 @@ fn project(probe: Probe) -> Host {
                 })
                 .unwrap_or_default();
             let completion_evicted = snapshot.attention.as_ref().map(|feed| feed.evicted);
-            let items = snapshot
-                .pending_requests
-                .iter()
-                .cloned()
-                .map(|request| {
-                    let mut item = Item::from_request(endpoint.clone(), snapshot.host_id, request)?;
-                    item.cwd = item
-                        .thread_id
-                        .as_ref()
-                        .and_then(|id| {
-                            snapshot
-                                .session_directories
+            let items = fleetpane_runtime::pending::validate_snapshot(&snapshot)
+                .map_err(invalid)
+                .and_then(|()| {
+                    snapshot
+                        .pending_requests
+                        .iter()
+                        .cloned()
+                        .map(|request| {
+                            let mut item =
+                                Item::from_request(endpoint.clone(), snapshot.host_id, request)?;
+                            if let Some(observations) = &snapshot.pending_observations {
+                                let observation =
+                                    observations.iter().find(|o| o.id == item.id).ok_or_else(
+                                        || invalid("Host omitted a pending request occurrence"),
+                                    )?;
+                                if observation.sequence == 0
+                                    || observation.sequence > snapshot.sequence
+                                {
+                                    return Err(invalid(
+                                        "Host has an invalid pending request occurrence",
+                                    ));
+                                }
+                                item.request_sequence = Some(observation.sequence);
+                                item.observed_unix_ms = Some(observation.observed_unix_ms);
+                            }
+                            item.cwd = item
+                                .thread_id
                                 .as_ref()
-                                .and_then(|feed| feed.directory(id))
+                                .and_then(|id| {
+                                    snapshot
+                                        .session_directories
+                                        .as_ref()
+                                        .and_then(|feed| feed.directory(id))
+                                })
+                                .map(str::to_owned);
+                            Ok::<_, Error>(item)
                         })
-                        .map(str::to_owned);
-                    Ok::<_, Error>(item)
-                })
-                .collect::<Result<Vec<_>, _>>();
+                        .collect::<Result<Vec<_>, _>>()
+                });
             match items {
                 Ok(items) => Host {
+                    pending_sequence: snapshot
+                        .pending_observations
+                        .as_ref()
+                        .map(|_| snapshot.sequence),
                     endpoint,
                     host_id: Some(snapshot.host_id),
                     items,
@@ -200,6 +268,7 @@ fn project(probe: Probe) -> Host {
                     completion_evicted,
                 },
                 Err(error) => Host {
+                    pending_sequence: None,
                     endpoint,
                     host_id: Some(snapshot.host_id),
                     items: vec![],
@@ -249,6 +318,41 @@ mod tests {
     use super::*;
     use serde_json::json;
 
+    #[test]
+    fn occurrence_projection_refuses_reused_selection_and_reports_observation_age() {
+        let mut state = fleetpane_runtime::State::new(42, json!({}));
+        let request =
+            json!({"id":1,"method":"session/request_permission","params":{"threadId":"same"}});
+        state.record(request.clone()).unwrap();
+        let snapshot = state.snapshot();
+        let host = project(Probe {
+            endpoint: endpoint("a"),
+            result: ProbeResult::Available {
+                snapshot: Box::new(snapshot.clone()),
+            },
+        });
+        let item = &host.items[0];
+        assert!(item.validate(&snapshot).is_ok());
+        let time = item.observed_unix_ms.unwrap();
+        assert_eq!(
+            item.observation_label(time + 61_000),
+            "Host observed 1m ago"
+        );
+        assert!(item.observation_label(time - 1).contains("ahead"));
+        state.answered(&json!(1));
+        state.record(request).unwrap();
+        assert!(item.validate(&state.snapshot()).is_err());
+        let mut damaged = snapshot;
+        damaged.pending_observations.as_mut().unwrap().clear();
+        let host = project(Probe {
+            endpoint: endpoint("a"),
+            result: ProbeResult::Available {
+                snapshot: Box::new(damaged),
+            },
+        });
+        assert!(host.error.is_some() && host.pending_sequence.is_none());
+    }
+
     fn endpoint(name: &str) -> Endpoint {
         Endpoint {
             name: name.into(),
@@ -256,9 +360,9 @@ mod tests {
         }
     }
     fn snapshot() -> Snapshot {
-        fleetpane_runtime::State::new(42, json!({"synthetic":true}))
-            .snapshot()
-            .clone()
+        let mut snapshot = fleetpane_runtime::State::new(42, json!({"synthetic":true})).snapshot();
+        snapshot.pending_observations = None;
+        snapshot
     }
 
     #[test]

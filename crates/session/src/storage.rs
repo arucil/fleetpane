@@ -131,7 +131,7 @@ impl Store {
                 }
                 transaction.execute_batch("CREATE TABLE creations(position INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, route TEXT NOT NULL, cwd TEXT NOT NULL, target TEXT NOT NULL, attempted INTEGER NOT NULL CHECK(attempted IN (0,1)));")?;
             }
-            1..=16 => {
+            1..=17 => {
                 transaction.prepare(
                     "SELECT position,id,route,cwd,target,attempted FROM creations LIMIT 0",
                 )?;
@@ -224,6 +224,12 @@ impl Store {
         } else {
             transaction
                 .prepare("SELECT socket,host_id,sequence FROM completion_alert_cursors LIMIT 0")?;
+        }
+        if version < 17 {
+            transaction.execute_batch("CREATE TABLE pending_alert_cursors(socket TEXT NOT NULL, host_id TEXT NOT NULL, sequence INTEGER NOT NULL CHECK(sequence>=0), PRIMARY KEY(socket,host_id)); PRAGMA user_version=17;")?;
+        } else {
+            transaction
+                .prepare("SELECT socket,host_id,sequence FROM pending_alert_cursors LIMIT 0")?;
         }
         transaction.commit()?;
         Ok(database)
@@ -386,7 +392,7 @@ mod tests {
                     [id.to_string()],
                 )?;
                 db.execute_batch(
-                    "DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; PRAGMA user_version=1;",
+                    "DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; PRAGMA user_version=1;",
                 )?;
                 Ok(())
             })
@@ -427,7 +433,7 @@ mod tests {
         store
             .job(|db| {
                 db.execute_batch(
-                    "DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; PRAGMA user_version=2;",
+                    "DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; PRAGMA user_version=2;",
                 )?;
                 Ok(())
             })
@@ -458,7 +464,7 @@ mod tests {
     async fn missing_v1_creation_table_is_not_reinitialized() {
         let directory = std::env::temp_dir().join(format!("fp-state-{}", Uuid::new_v4()));
         let store = Store::open(directory.clone()).await.unwrap();
-        store.job(|db| { db.execute_batch("DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; DROP TABLE creations; PRAGMA user_version=1;")?;Ok(()) }).await.unwrap();
+        store.job(|db| { db.execute_batch("DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; DROP TABLE paseo_sessions; DROP TABLE paseo_workspaces; DROP TABLE recent_directories; DROP TABLE appearance; DROP TABLE workspace_pins; DROP TABLE drafts; DROP TABLE worktree_jobs; DROP TABLE workspaces; DROP TABLE projects; DROP TABLE creations; PRAGMA user_version=1;")?;Ok(()) }).await.unwrap();
         assert!(Store::open(directory.clone()).await.is_err());
         let db = Database::open(directory.join("creations.sqlite3")).unwrap();
         let version: u32 = db

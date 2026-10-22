@@ -13,7 +13,9 @@ pub(super) struct State {
     error: Option<String>,
     save_failed: bool,
     delivery_error: Option<String>,
+    pending_delivery_error: Option<String>,
     reminder_items: Vec<fleetpane_session::attention::review::Item>,
+    pending_reminder_items: Vec<fleetpane_session::attention::Item>,
 }
 
 impl State {
@@ -27,7 +29,9 @@ impl State {
             error: None,
             save_failed: false,
             delivery_error: None,
+            pending_delivery_error: None,
             reminder_items: Vec::new(),
+            pending_reminder_items: Vec::new(),
         }
     }
     fn editable(&self) -> bool {
@@ -401,11 +405,11 @@ impl Workbench {
                     .child(Button::new("notifications-copy").small().ghost().label("Copy policy").disabled(selected.is_none()).on_click(cx.listener(|this,_,_,cx|{
                         if let Some(saved)=&this.notifications.saved {cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(saved).expect("policy serializes")));}
                     }))))
-                .child("New turn results show one in-app reminder. Reopening does not replay claimed results. System notifications are not available yet.")
+                .child("New requests and turn results show bounded in-app reminders. Reopening does not replay claimed results. System notifications are not available yet.")
                 .child("Muted items stay in Attention and Next request; unmuting does not replay them.")
                 .child("Workspace mute matches this Host and exact directory, including future sessions. Unknown directories remain included in alerts.")
                 .children(self.notifications.error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
-                .children(self.notifications.delivery_error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
+                .children(self.notifications.delivery_error.iter().chain(self.notifications.pending_delivery_error.iter()).map(|error|div().text_color(cx.theme().danger).child(error.clone())))
                 .child(div().flex().flex_wrap().gap_2().items_center().child("Mute event types:")
                     .children(Kind::ALL.into_iter().enumerate().map(|(i,kind)| {
                         let muted=selected.as_ref().is_some_and(|p|p.muted_kinds.contains(&kind));

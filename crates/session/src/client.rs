@@ -417,7 +417,7 @@ async fn call(socket: &std::path::Path, command: Request) -> Result<Response, Er
 
 pub async fn snapshot(socket: &std::path::Path) -> Result<Snapshot, Error> {
     match call(socket, Request::Snapshot).await? {
-        Response::Snapshot(snapshot) if snapshot.protocol == PROTOCOL_VERSION => Ok(snapshot),
+        Response::Snapshot(snapshot) if snapshot.protocol == PROTOCOL_VERSION => Ok(*snapshot),
         _ => Err(Error::Protocol(
             "snapshot or supported protocol missing".into(),
         )),
@@ -752,7 +752,7 @@ mod tests {
                     3 => Vec::new(), // Transport closes without a response.
                     4 => format!(
                         "{}\n",
-                        serde_json::to_string(&Response::Snapshot(state.snapshot())).unwrap()
+                        serde_json::to_string(&Response::snapshot(state.snapshot())).unwrap()
                     )
                     .into_bytes(),
                     5 => {
@@ -864,7 +864,7 @@ mod tests {
                     if step == 2 {
                         snapshot.activity.stopping = None;
                     }
-                    Response::Snapshot(snapshot)
+                    Response::snapshot(snapshot)
                 };
                 stream
                     .get_mut()

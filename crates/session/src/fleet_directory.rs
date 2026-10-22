@@ -259,12 +259,12 @@ mod tests {
             ..owner.clone()
         };
         let (endpoint, task, root) = scripted(vec![
-            Response::Snapshot(state(Some(owner.clone()), host)),
+            Response::snapshot(state(Some(owner.clone()), host)),
             Response::Query {
                 message: json!({"result":{"data":[],"nextCursor":null}}),
                 sequence: 2,
             },
-            Response::Snapshot(state(Some(replaced), host)),
+            Response::snapshot(state(Some(replaced), host)),
         ])
         .await;
         let error = read_page(&endpoint, Some(host), &PageRequest::default())
@@ -286,7 +286,7 @@ mod tests {
     #[tokio::test]
     async fn unowned_host_and_history_bearing_directory_are_explicit_errors() {
         let host = Uuid::new_v4();
-        let (endpoint, task, root) = scripted(vec![Response::Snapshot(state(None, host))]).await;
+        let (endpoint, task, root) = scripted(vec![Response::snapshot(state(None, host))]).await;
         assert!(
             read_page(&endpoint, None, &PageRequest::default())
                 .await
@@ -303,7 +303,7 @@ mod tests {
             generation: 1,
         };
         let (endpoint,task,root) = scripted(vec![
-            Response::Snapshot(state(Some(owner),host)),
+            Response::snapshot(state(Some(owner),host)),
             Response::Query {message:json!({"result":{"data":[{"id":"a","cwd":"/synthetic","preview":"a","turns":[{"id":"secret-history","status":"completed","items":[]}],"status":{"type":"idle"}}],"nextCursor":null}}),sequence:2},
         ]).await;
         assert!(

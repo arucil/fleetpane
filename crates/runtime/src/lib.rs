@@ -14,6 +14,7 @@ mod creation_directory;
 #[cfg(unix)]
 pub mod journal;
 pub mod lifecycle;
+pub mod pending;
 pub mod session_directories;
 pub mod stopping;
 pub mod tasks;
@@ -109,6 +110,9 @@ pub struct Snapshot {
     pub admission: lifecycle::Admission,
     pub activity: lifecycle::Activity,
     pub pending_requests: Vec<Value>,
+    /// None means an older Host has no request occurrence observations.
+    #[serde(default)]
+    pub pending_observations: Option<Vec<pending::Observation>>,
     /// None means an older Host cannot provide completion review records.
     #[serde(default)]
     pub attention: Option<Box<attention::Feed>>,
@@ -167,7 +171,7 @@ pub enum Request {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "response", content = "data", rename_all = "snake_case")]
 pub enum Response {
-    Snapshot(Snapshot),
+    Snapshot(Box<Snapshot>),
     Admission(lifecycle::Admission),
     Lease(Lease),
     Operation(Operation),
@@ -194,6 +198,10 @@ pub struct OperationPage {
 }
 
 impl Response {
+    pub fn snapshot(snapshot: Snapshot) -> Self {
+        Self::Snapshot(Box::new(snapshot))
+    }
+
     pub fn error(code: &str, message: impl Into<String>) -> Self {
         Self::Error {
             code: code.to_owned(),
@@ -284,6 +292,7 @@ impl State {
                     unknown_operations: 0,
                 },
                 pending_requests: Vec::new(),
+                pending_observations: Some(Vec::new()),
                 attention: Some(Box::default()),
                 session_directories: Some(Box::default()),
                 fault: None,
@@ -563,6 +572,7 @@ impl State {
             .checked_add(1)
             .ok_or("event sequence exhausted")?;
         let attention = attention::Record::from_event(&message, sequence)?;
+        let pending = pending::Observation::new(&message, sequence)?;
         let directory = session_directories::Record::from_message(&message)?;
         if let Some(record) = &attention {
             self.snapshot
@@ -627,7 +637,25 @@ impl State {
                     if pending_bytes + bytes + 1 > MAX_FRAME / 2 {
                         return Err("pending provider request byte capacity exceeded".into());
                     }
+                    let observations = self
+                        .snapshot
+                        .pending_observations
+                        .as_mut()
+                        .expect("new Host observes requests");
+                    let pending = pending.expect("request has an observation");
+                    if serde_json::to_vec(observations)
+                        .map_err(|e| e.to_string())?
+                        .len()
+                        + serde_json::to_vec(&pending)
+                            .map_err(|e| e.to_string())?
+                            .len()
+                        + 1
+                        > 64 * 1024
+                    {
+                        return Err("pending occurrence byte capacity exceeded".into());
+                    }
                     self.snapshot.pending_requests.push(message.clone());
+                    observations.push(pending);
                 }
             }
         } else if let Some(id) = message.get("id").and_then(Value::as_str) {
@@ -745,6 +773,11 @@ impl State {
         self.snapshot
             .pending_requests
             .retain(|request| request.get("id") != Some(id));
+        self.snapshot
+            .pending_observations
+            .as_mut()
+            .expect("new Host observes requests")
+            .retain(|observation| &observation.id != id);
     }
 
     pub fn fail(&mut self, reason: String) {
@@ -983,7 +1016,7 @@ mod tests {
                 .is_err()
         );
         assert!(
-            serde_json::to_vec(&Response::Snapshot(state.snapshot()))
+            serde_json::to_vec(&Response::snapshot(state.snapshot()))
                 .unwrap()
                 .len()
                 < MAX_FRAME

@@ -65,6 +65,8 @@ fn workspace_policy_covers_new_sessions_but_never_guesses_unknown_or_neighbor_pa
     };
     p.validate().unwrap();
     let mut item = attention::Item {
+        request_sequence: None,
+        observed_unix_ms: None,
         endpoint: crate::hosts::Endpoint {
             name: "Display name".into(),
             socket: s.socket.clone(),
@@ -243,6 +245,8 @@ fn invalid_duplicate_and_excessive_scopes_are_rejected() {
 fn pending_policy_preserves_opaque_payloads_and_accepts_only_string_event_types() {
     let s = session();
     let mut item = attention::Item {
+        request_sequence: None,
+        observed_unix_ms: None,
         endpoint: crate::hosts::Endpoint {
             name: "Synthetic".into(),
             socket: s.socket.clone(),
@@ -373,7 +377,7 @@ async fn persistence_cas_storage_failure_and_corruption_are_explicit() {
 async fn schema_fourteen_upgrade_preserves_drafts_and_current_table_damage_is_not_defaulted() {
     let root = std::env::temp_dir().join(format!("fp-alert-upgrade-{}", Uuid::new_v4()));
     let store = Store::open(root.clone()).await.unwrap();
-    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; PRAGMA user_version=14;")?;Ok(())}).await.unwrap();
+    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; PRAGMA user_version=14;")?;Ok(())}).await.unwrap();
     let upgraded = Store::open(root.clone()).await.unwrap();
     assert_eq!(upgraded.notifications().await.unwrap(), Saved::default());
     upgraded

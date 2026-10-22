@@ -330,7 +330,7 @@ async fn handle(
         Request::Snapshot => {
             let mut snapshot = state.snapshot();
             snapshot.activity.terminal_ids = terminals.live();
-            Response::Snapshot(snapshot)
+            Response::snapshot(snapshot)
         }
         Request::SetAdmission {
             lease,

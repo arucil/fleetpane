@@ -1604,3 +1604,13 @@ covers fixture pending requests/results, native policy failure/reload, Kit popup
 layout, exact drafts and real OpenCodex/DeepSeek completed-result counts. OS
 delivery/sound/tray/dock and durable deduplication remain open. No new history
 cursor coverage or upstream-tip claim is implied.
+
+
+## Pending-request reminders: continued implementation
+
+The ATT-01/05 implementation now extends local terminal-result claims to exact
+pending occurrences, using Host sequences to distinguish reused provider IDs.
+[Acceptance](../verification/2026-10-22-pending-reminders.md) separates source
+review, deterministic Codex/ACP process evidence, Linux native reminders and
+installed OpenCodex/DeepSeek request observations. No upstream history checkpoint
+or functional parity total changes. OS outputs and cross-device delivery remain open.

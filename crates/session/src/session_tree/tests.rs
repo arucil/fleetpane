@@ -204,7 +204,7 @@ async fn scripted(
     let host = first.host_id;
     let task = tokio::spawn(async move {
         let mut requests = vec![];
-        for response in std::iter::once(Response::Snapshot(first)).chain(responses) {
+        for response in std::iter::once(Response::snapshot(first)).chain(responses) {
             let (stream, _) = listener.accept().await.unwrap();
             let mut reader = BufReader::new(stream);
             let mut line = String::new();
@@ -247,7 +247,7 @@ async fn collection_borrows_one_lease_and_only_dispatches_bounded_metadata_queri
             page(vec![]),
             query(json!({"thread":value("ephemeral",Some("root"))})),
             page(vec![json!("root"), json!("ephemeral")]),
-            Response::Snapshot(last),
+            Response::snapshot(last),
         ],
     )
     .await;
@@ -314,7 +314,7 @@ async fn collection_rejects_owner_host_or_loaded_inventory_changes_without_parti
             }),
         ];
         if fault != "loaded" {
-            responses.push(Response::Snapshot(last));
+            responses.push(Response::snapshot(last));
         }
         let (result, requests) = scripted(first, responses).await;
         assert!(result.is_err(), "{fault}");

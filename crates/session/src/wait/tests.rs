@@ -115,8 +115,8 @@ async fn active_first_turn_uses_host_identity_before_history_materializes() {
     let mut finished = snapshot(&owner, 3);
     finished.owner = Some(lease(owner.host_id));
     let (mut connection, task, root) = scripted(vec![
-        Response::Snapshot(active),
-        Response::Snapshot(finished),
+        Response::snapshot(active),
+        Response::snapshot(finished),
         Response::Events(vec![Event {
             sequence: 3,
             message: json!({"method":"turn/completed","params":{"threadId":"s","turn":turn("target","completed")}}),
@@ -157,7 +157,7 @@ async fn incomplete_or_different_activity_still_requires_exact_history_lookup() 
             turn_id: turn_id.map(str::to_owned),
         }];
         let (mut connection, task, root) = scripted(vec![
-            Response::Snapshot(active),
+            Response::snapshot(active),
             query(json!({"data":[],"nextCursor":null}), 3),
         ])
         .await;
@@ -190,8 +190,8 @@ async fn active_wait_reports_attention_and_fault_without_provider_reads() {
             ];
         }
         let (mut connection, task, root) = scripted(vec![
-            Response::Snapshot(active),
-            Response::Snapshot(state),
+            Response::snapshot(active),
+            Response::snapshot(state),
             Response::Events(Vec::new()),
         ])
         .await;
@@ -230,11 +230,11 @@ async fn active_wait_deadline_and_host_incarnation_remain_fenced() {
         }];
         let responses = if replaced {
             active.host_id = Uuid::new_v4();
-            vec![Response::Snapshot(active)]
+            vec![Response::snapshot(active)]
         } else {
             vec![
-                Response::Snapshot(active.clone()),
-                Response::Snapshot(active),
+                Response::snapshot(active.clone()),
+                Response::snapshot(active),
                 Response::Events(Vec::new()),
             ]
         };
@@ -269,12 +269,12 @@ async fn pages_find_the_exact_turn_and_backlog_uses_delivered_cursor_across_owne
         message: json!({"method":"turn/completed","params":{"threadId":"s","turn":turn("target","failed")}}),
     };
     let (mut connection, task, root) = scripted(vec![
-        Response::Snapshot(snapshot(&owner, 1)),
+        Response::snapshot(snapshot(&owner, 1)),
         query(json!({"data":[turn("newer","completed")],"nextCursor":"older"}),2),
         query(json!({"data":[turn("target","inProgress")],"nextCursor":null}),4),
-        Response::Snapshot(state.clone()),
+        Response::snapshot(state.clone()),
         Response::Events(vec![Event { sequence:5, message:json!({"method":"turn/completed","params":{"threadId":"other","turn":turn("target","completed")}}) }]),
-        Response::Snapshot(state),
+        Response::snapshot(state),
         Response::Events(vec![completed]),
     ]).await;
     connection.lease = owner;
@@ -305,7 +305,7 @@ async fn missing_and_repeating_history_are_errors_not_completion() {
         ],
     ] {
         let owner = lease(Uuid::new_v4());
-        responses.insert(0, Response::Snapshot(snapshot(&owner, 0)));
+        responses.insert(0, Response::snapshot(snapshot(&owner, 0)));
         let (mut connection, task, root) = scripted(responses).await;
         connection.lease = owner;
         assert!(connection.wait_turn("s", "missing", 1000).await.is_err());
@@ -345,7 +345,7 @@ async fn completion_before_a_stale_read_reply_is_still_observed() {
                     if queried {
                         s.sequence = 4;
                     }
-                    Response::Snapshot(s)
+                    Response::snapshot(s)
                 }
                 Request::Events { after, .. } => Response::Events(if after < 3 {
                     vec![Event {
@@ -384,7 +384,7 @@ async fn deadline_includes_a_stalled_initial_read_and_never_sends_cancellation()
     task.await.unwrap();
     std::fs::remove_file(&connection.socket).unwrap();
     let listener = tokio::net::UnixListener::bind(&connection.socket).unwrap();
-    let initial = Response::Snapshot(snapshot(&connection.lease, 0));
+    let initial = Response::snapshot(snapshot(&connection.lease, 0));
     let blocked = tokio::spawn(async move {
         let (stream, _) = listener.accept().await.unwrap();
         let mut reader = BufReader::new(stream);

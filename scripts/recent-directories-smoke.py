@@ -30,7 +30,7 @@ def main():
         assert command("list",second) == [exact]
         database = store / "creations.sqlite3"
         with sqlite3.connect(database) as connection:
-            assert connection.execute("PRAGMA user_version").fetchone()[0] == 16
+            assert connection.execute("PRAGMA user_version").fetchone()[0] == 17
             connection.execute("UPDATE recent_directories SET cwd='broken-relative' WHERE socket=?",(str(second),))
         assert "absolute" in command("list",second,ok=False)
         assert "absolute" in command("remember",second,root/"new",ok=False)
