@@ -1289,8 +1289,17 @@ commands. Errors pause queued input for explicit inspection; uncertain packets
 are never automatically resent. Normal window close waits for accepted input.
 See [keyboard acceptance and limits](docs/verification/2026-10-21-terminal-keyboard.md).
 
-Native text selection, IME acceptance, terminal replies/mouse reporting, automatic geometry and Host
-update recovery remain open. One selected screen is retained (up to 60×200 cells
+Drag across the screen to select text from a fixed viewport, including scrollback.
+**Copy selection** or **Ctrl+Shift+C** copies exactly that selection; soft wraps
+join and printed trailing spaces remain. The snapshot stays fixed while background
+output continues. New terminal input is blocked until **Esc** clears the selection or
+**Live output** returns to the live screen. **Copy screen** copies the complete
+displayed viewport. Selection clears when changing shells or replacing the window.
+[Contract](docs/adr/0122-bounded-terminal-selection.md) and
+[Linux fixture acceptance](docs/verification/2026-10-23-terminal-selection.md).
+
+IME acceptance, word/keyboard selection, drag-edge autoscroll, terminal replies/mouse
+reporting, automatic geometry, other-platform GUI and Host update recovery remain open. One selected screen is retained (up to 60×200 cells
 and 1,000 scrollback lines); dropped Host output clears incomplete parser state
 and remains visibly flagged. Resize does not reflow prior lines. Terminal drafts
 and the panel's pending-operation selection are transient; durable operation

@@ -1,5 +1,6 @@
 //! Native PTY console. Shared commands own I/O; closing the view only detaches.
 mod keyboard;
+mod selection;
 gpui_kit::actions!(fleetpane_terminal, [ForwardTab, ReverseTab]);
 
 pub(crate) fn init(cx: &mut App) {
@@ -14,7 +15,8 @@ use fleetpane_session::{
     client::{Connection, Error, completed, snapshot},
     terminals::{
         Command, Info, Mutation, Output, Read,
-        screen::{Color, Grid, Screen},
+        screen::{Color, Screen},
+        selection::{Point as CellPoint, Selection, Viewport},
     },
     workspaces::Workspace,
 };
@@ -106,6 +108,7 @@ pub struct TerminalView {
     view_visible: bool,
     restore_selected: Option<(Uuid, Uuid)>,
     keyboard: keyboard::Keyboard,
+    selection: selection::State,
 }
 impl EventEmitter<()> for TerminalView {}
 
@@ -193,6 +196,7 @@ impl TerminalView {
             view_visible: true,
             restore_selected: None,
             keyboard: keyboard::Keyboard::new(cx),
+            selection: selection::State::default(),
         };
         view.run(Action::Refresh, window, cx);
         view
@@ -384,6 +388,7 @@ impl TerminalView {
                         }
                         let replaced = this.host.as_ref().is_some_and(|old| old.host_id != state.host_id);
                         if replaced {
+                            this.selection.clear();
                             this.keyboard.enabled = false;
                             this.connection = None;
                             this.selected = None;
@@ -417,6 +422,7 @@ impl TerminalView {
                                 this.polling = false;
                             }
                         } else if this.selected == selected && this.selected.is_some() {
+                            this.selection.clear();
                             this.selected = None;
                             this.screen = None;
                         }
@@ -478,6 +484,7 @@ impl TerminalView {
                 .insert(old, self.input.read(cx).value().to_string());
         }
         self.selected = Some(id);
+        self.selection.clear();
         self.screen = None;
         let draft = self.drafts.get(&id).cloned().unwrap_or_default();
         self.input
@@ -591,17 +598,28 @@ fn color(color: Color, default: u32) -> Hsla {
     rgb(value).into()
 }
 
-fn rows(grid: &Grid, family: SharedString) -> Vec<Div> {
-    let (height, width) = grid.size();
-    let cursor = grid.cursor_position();
-    (0..height.get())
-        .map(|row| {
+fn rows(
+    viewport: &Viewport,
+    selected: Option<&Selection>,
+    family: SharedString,
+    geometry: &std::rc::Rc<std::cell::RefCell<Vec<Option<selection::RowGeometry>>>>,
+    window: &mut Window,
+) -> Div {
+    let cursor = viewport.cursor();
+    geometry.borrow_mut().clear();
+    geometry
+        .borrow_mut()
+        .resize_with(viewport.rows().len(), || None);
+    let mut width = px(0.);
+    let rendered = viewport
+        .rows()
+        .iter()
+        .enumerate()
+        .map(|(row, cells)| {
             let mut text = String::new();
             let mut runs: Vec<TextRun> = vec![];
-            for col in 0..width.get() {
-                let cell = grid
-                    .cell(row, col)
-                    .expect("cell within validated dimensions");
+            let mut columns = Vec::new();
+            for (col, cell) in cells.iter().enumerate() {
                 if cell.is_wide_continuation() {
                     continue;
                 }
@@ -610,16 +628,31 @@ fn rows(grid: &Grid, family: SharedString) -> Vec<Div> {
                 } else {
                     " "
                 };
+                columns.push((text.len(), col as u16));
                 text.push_str(contents);
                 let mut fg = color(cell.fgcolor(), 0xdce2ec);
                 let mut bg = color(cell.bgcolor(), 0x171a20);
                 if cell.inverse()
-                    ^ (!grid.hide_cursor() && grid.scrollback() == 0 && cursor == (row, col))
+                    ^ (selected.is_none()
+                        && cursor
+                            == Some(CellPoint {
+                                row: row as u16,
+                                col: col as u16,
+                            }))
                 {
                     std::mem::swap(&mut fg, &mut bg);
                 }
                 if cell.dim() {
                     fg.a *= 0.65;
+                }
+                if selected.is_some_and(|selection| {
+                    selection.contains(CellPoint {
+                        row: row as u16,
+                        col: col as u16,
+                    })
+                }) {
+                    fg = rgb(0xffffff).into();
+                    bg = rgb(0x365b91).into();
                 }
                 let mut font = font(family.clone());
                 if cell.bold() {
@@ -651,19 +684,51 @@ fn rows(grid: &Grid, family: SharedString) -> Vec<Div> {
                     runs.push(run);
                 }
             }
+            let text: SharedString = text.into();
+            let line = window
+                .text_system()
+                .shape_line(text.clone(), px(14.), &runs, None);
+            width = width.max(line.width);
+            let geometry = geometry.clone();
             div()
+                .relative()
                 .h(px(18.))
+                .w_full()
                 .whitespace_nowrap()
                 .child(StyledText::new(text).with_runs(runs))
+                .child(
+                    canvas(
+                        move |bounds, _, _| {
+                            geometry.borrow_mut()[row] = Some(selection::RowGeometry {
+                                bounds,
+                                line,
+                                columns,
+                            });
+                        },
+                        |_, _, _, _| {},
+                    )
+                    .absolute()
+                    .left_0()
+                    .top_0()
+                    .size_full(),
+                )
         })
-        .collect()
+        .collect::<Vec<_>>();
+    div().w(width).flex().flex_col().children(rendered)
 }
 
 impl Render for TerminalView {
-    fn render(&mut self, _: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+    fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        if self.selection.selected.is_none() {
+            self.selection.displayed = self
+                .screen
+                .as_ref()
+                .map(|screen| Viewport::capture(screen.grid()));
+        }
         let writable = self.can_write();
         let info = self.screen.as_ref().map(|s| &s.info);
         let input_ready = writable
+            && self.selection.selected.is_none()
             && info.is_some_and(|i| !i.closed && i.exit.is_none() && i.input_fault.is_none());
         let id = self.selected;
         let wid = self.workspace.id;
@@ -706,13 +771,19 @@ impl Render for TerminalView {
                             .child(div().id("terminal-screen").track_focus(&self.keyboard.focus).when(self.keyboard.enabled,|view|view.key_context("FleetpaneTerminal"))
                                 .on_action(cx.listener(|this,_:&ForwardTab,window,cx|this.keyboard_tab(false,window,cx)))
                                 .on_action(cx.listener(|this,_:&ReverseTab,window,cx|this.keyboard_tab(true,window,cx)))
-                                .on_key_down(cx.listener(Self::keyboard_key)).on_click(cx.listener(|this,_,window,cx|{if this.keyboard.enabled {window.focus(&this.keyboard.focus,cx);}})).flex_1().min_h_0().overflow_scroll().p_2().bg(rgb(0x171a20)).text_size(px(14.)).font_family(cx.theme().mono_font_family.clone())
-                                .child(div().w(px(f32::from(screen.info.cols)*9.)).flex().flex_col().children(rows(screen.grid(),cx.theme().mono_font_family.clone()))))
+                                .on_key_down(cx.listener(Self::selection_key))
+                                .on_mouse_down(MouseButton::Left,cx.listener(Self::selection_start))
+                                .on_mouse_move(cx.listener(Self::selection_move))
+                                .on_mouse_up(MouseButton::Left,cx.listener(Self::selection_end))
+                                .on_mouse_up_out(MouseButton::Left,cx.listener(Self::selection_end)).on_click(cx.listener(|this,_,window,cx|{if this.keyboard.enabled {window.focus(&this.keyboard.focus,cx);}})).flex_1().min_h_0().overflow_scroll().p_2().bg(rgb(0x171a20)).text_size(px(14.)).line_height(px(18.)).font_family(cx.theme().mono_font_family.clone())
+                                .child(rows(self.selection.selected.as_ref().map(|selection| &selection.viewport).or(self.selection.displayed.as_ref()).expect("displayed terminal viewport"),self.selection.selected.as_ref(),cx.theme().mono_font_family.clone(),&self.selection.geometry,window)))
+                            .when(self.selection.selected.is_some(),|view|view.child(div().text_sm().child("Selection snapshot · output continues in background · Esc or Live output to return")))
                             .child(div().flex().gap_2()
-                                .child(Button::new("terminal-scroll-up").small().label("Page up").on_click(cx.listener(|this,_,_,cx|{if let Some(s)=&mut this.screen{s.scroll(20);}cx.notify();})))
-                                .child(Button::new("terminal-scroll-down").small().label("Page down").on_click(cx.listener(|this,_,_,cx|{if let Some(s)=&mut this.screen{s.scroll(-20);}cx.notify();})))
-                                .child(Button::new("terminal-live").small().label("Live output").on_click(cx.listener(|this,_,_,cx|{if let Some(s)=&mut this.screen{s.live();}cx.notify();})))
-                                .child(Button::new("terminal-copy-screen").small().label("Copy screen").on_click(cx.listener(|this,_,_,cx|{if let Some(s)=&this.screen{cx.write_to_clipboard(ClipboardItem::new_string(s.grid().contents()));}}))))
+                                .child(Button::new("terminal-scroll-up").small().label("Page up").on_click(cx.listener(|this,_,_,cx|{this.selection.clear();if let Some(s)=&mut this.screen{s.scroll(20);}cx.notify();})))
+                                .child(Button::new("terminal-scroll-down").small().label("Page down").on_click(cx.listener(|this,_,_,cx|{this.selection.clear();if let Some(s)=&mut this.screen{s.scroll(-20);}cx.notify();})))
+                                .child(Button::new("terminal-live").small().label("Live output").on_click(cx.listener(|this,_,_,cx|{this.selection.clear();if let Some(s)=&mut this.screen{s.live();}cx.notify();})))
+                                .child(Button::new("terminal-copy-selection").small().label("Copy selection").disabled(self.selection.selected.is_none()).on_click(cx.listener(|this,_,_,cx|{if let Some(selection)=&this.selection.selected{cx.write_to_clipboard(ClipboardItem::new_string(selection.text()));}})))
+                                .child(Button::new("terminal-copy-screen").small().label("Copy screen").on_click(cx.listener(|this,_,_,cx|{if let Some(s)=&this.screen{cx.write_to_clipboard(ClipboardItem::new_string(this.selection.selected.as_ref().map(|selection| selection.viewport.contents()).unwrap_or_else(||s.grid().contents())));}}))))
                     })
                     .when(self.screen.is_none(),|view|view.child(div().flex_1().child("Select a terminal, or take control and create one. Closing this panel keeps shells running.")))
                     .child(self.render_keyboard(cx))

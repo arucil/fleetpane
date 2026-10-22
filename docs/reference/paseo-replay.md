@@ -1694,3 +1694,21 @@ No code/assets were copied. Tab-layout sharing, catalog membership, recent
 directories, cross-device sync and other-platform GUI remain separate gaps.
 This closes the local automatic-label/pin-refresh follow-up; it does not advance
 the historical review cursor or assert new upstream freshness.
+
+
+## Native terminal selection: continued implementation
+
+Inspected `packages/app/src/terminal/native-renderer/terminal-selection.ts` and
+its `terminal-selection.test.ts` at
+`a486b0558168c08890890e787d55cfb88c0d7256`. The reference maps buffer coordinates
+to ranges, joins wrapped rows and invalidates unsafe coordinate epochs. Fleetpane
+now captures only the displayed cells for a drag, so streaming scrolls, alternate
+screen changes and resize cannot retarget the selection. Rust shared extraction
+preserves printed spaces and whole wide/combining characters; native hit testing
+uses shaped row bounds. No source/assets were copied.
+[Linux real-shell fixture acceptance](../verification/2026-10-23-terminal-selection.md)
+covers clipboard, scrollback, background output, input isolation, outside release,
+900×560 and window replacement. IME, word/keyboard selection, drag-edge autoscroll,
+conversation attachment and Host update recovery remain open. This is an
+implementation follow-through, not a history cursor advance or a new upstream
+freshness claim.

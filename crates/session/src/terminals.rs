@@ -8,6 +8,7 @@ use uuid::Uuid;
 
 pub mod input;
 pub mod screen;
+pub mod selection;
 
 /// Terminal results go to a terminal view, never the conversation projection.
 pub enum Command {

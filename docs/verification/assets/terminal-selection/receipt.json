@@ -1,0 +1,106 @@
+{
+  "base_head": "b9ffe870ebbddfb1059aa6e0aba700b54f5ff145",
+  "profile": "development",
+  "platform": "isolated Linux X11; software Vulkan rendering",
+  "reference": {
+    "repo": "https://github.com/getpaseo/paseo",
+    "sha": "a486b0558168c08890890e787d55cfb88c0d7256",
+    "paths": [
+      "packages/app/src/terminal/native-renderer/terminal-selection.ts",
+      "packages/app/src/terminal/native-renderer/terminal-selection.test.ts"
+    ],
+    "reuse": "behavioral reference only; no copied source/assets"
+  },
+  "desktop_binary_sha256": "6be7a9eec9d65f0e6834b7fe11b3143f69ac5696d749525ac7788e994cb59682",
+  "host_binary_sha256": "edeba3604778f82fb7bd820f32b9601ae6ca39efc9736a18dfb9e5087dd0d609",
+  "source_sha256": {
+    "crates/session/src/terminals.rs": "528e8d0a18cdead202eeffe652476e10aeb516b83a0baa89eda9f5c10d807390",
+    "crates/session/src/terminals/selection.rs": "fcb423f83a7a7e857b56f3b9b91258e1f328e8c2514315d2dada20c77777f299",
+    "apps/desktop/src/terminal_view.rs": "7eedff41c6545249cf479d577cabccadeaca9b7135f237926318aad974f6d29d",
+    "apps/desktop/src/terminal_view/selection.rs": "3253d19e9b306f6ced3b1dff24e3757bc45ef84daf5451a2cde2edae978e66c6",
+    "apps/desktop/src/terminal_view/keyboard.rs": "952b312aaf1dd26898e439d3cc2f258d2b5ec08391901e52f634ea52d1a1bc8e"
+  },
+  "checks": {
+    "engine-tests.log": {
+      "passed": 383
+    },
+    "desktop-tests.log": {
+      "passed": 51
+    },
+    "selection-tests.log": {
+      "passed": 4
+    },
+    "engine-clippy.log": "passed",
+    "desktop-clippy.log": "passed",
+    "desktop-build.log": "passed",
+    "engine-fmt.log": "passed",
+    "desktop-fmt.log": "passed",
+    "windows-check.log": "passed"
+  },
+  "native": {
+    "workspace": "fleetpane-terminal-selection-20261023",
+    "stopped": true,
+    "initial_candidate_app": "app-1416616",
+    "final_apps": [
+      "app-1635405",
+      "app-1663765"
+    ],
+    "all_native_apps_exit_code": 0,
+    "final_binary_identity_verified": true,
+    "host_pid": 1415087,
+    "shell_pids": [
+      1415222,
+      1415257
+    ],
+    "host_snapshots_unchanged_across_output": true,
+    "terminal_snapshots_unchanged_across_output": true,
+    "final_keyboard_input": {
+      "sequence_before_and_after_selection": 3,
+      "sequence_after_escape_and_explicit_ctrl_c": 4,
+      "other_shell_sequence": 0
+    },
+    "clipboard_ledger": "clipboard.json",
+    "cleanup": "cleanup.json"
+  },
+  "limits": [
+    "Local prototype; no new remote CI or model-provider claim",
+    "Initial trial precedes explicit mouse-up endpoint update; final app checks distinguished in clipboard ledger",
+    "Selection only captures displayed cells; no word/keyboard extension or drag-edge autoscroll",
+    "No IME, accessibility, other-platform GUI, automatic geometry, mouse/query replies or active Host update transfer acceptance",
+    "Alternate-screen/resize retention invariants have engine tests, not native acceptance",
+    "No performance claim"
+  ],
+  "evidence_sha256": {
+    "cleanup.json": "81d3054381116dac0cb54445595fbd2b5ea2f01d2732f548fb9639db4b73d463",
+    "clipboard.json": "4783d7104195581523d637c9da173b33bd8836d10d107fe9ae95645ea53d5f24",
+    "desktop-build.log": "b97b6a3020334de5f8159708034a44d3160a5e4025ee9d9130e8101245c3ffec",
+    "desktop-clippy.log": "6dad71d1fe6dc091c04bb1e86f011576fb6a42d0e57959dca01c2d5b95230390",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-tests.log": "b4ed92ec13669fdf8022e9bfe47719f8c51fdb2570627148083fb3f3396ef63a",
+    "engine-clippy.log": "c27a1f23ee58c062014ea0163fefc05abe0abcfc1de2cfff4445fdd40ef437c1",
+    "engine-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "engine-tests.log": "ca119bddfaf8bd63982b59befc1a41a08c603586055762df5d5c55dc8e79eb92",
+    "final-after.json": "397b153ef798123b4750cd0792f859896448bcf7694c262ca68b200621458820",
+    "final-ansi.png": "234a0ba36ec467270f2d754745f30dda8b7ca673556f23ee088be8bdc80556df",
+    "final-before.json": "7689d651892b0db2a5801c550288fed9e9750a3fe92ceb46c9ee1bc98ffcb6ea",
+    "final-blocked-input.json": "6a2af7098bd369247c7357d48d88a758dfdd09ae63c092ccc009ea6c47930fba",
+    "final-build.json": "c8aa9e11116026223d32c6da17aea0a6ca86c1f1e7fcb7ce0e7bd8f5a4176ca8",
+    "final-closed-terminals.json": "dfbb188ffc7e26a7857af88e748277722d9c659531f167982060cbcba4dac6ef",
+    "final-frozen-small.png": "e801d064b2895bec416bf9d0e250fd70baa7ca4444797285a01650fcacc0ab80",
+    "final-live.png": "645977f524b6691a3012784bef6d6114b272286977f2159280f8e88709748ec3",
+    "final-other-shell.png": "d75bd1d39a02f35cf9d2e72c6d458c352e973a175123b3c931cd522839645194",
+    "final-outside.png": "6c0a3da253aa072a641c0682ca329f63729aedc3375647ffaa4d5f6a76c59c35",
+    "final-reverse-settled.png": "fd2c57f9ffd85d63536dca091dbc390e36a463850b78023884fdc7aa0a07ce7f",
+    "final-small.png": "19584c917b18f1ae45ba08f5a72140c3fb70edc9f9853fbe61518bac20706411",
+    "final-soft-wrap.png": "926d34ce8348e61a8fb8799bb8fc101670419832aa3a61cae87d89d425f9648b",
+    "final-terminals-after.json": "18d667f0199849849dcfc41773c7442343dd4b0373301f19928d34e2413e1377",
+    "final-terminals-before.json": "18d667f0199849849dcfc41773c7442343dd4b0373301f19928d34e2413e1377",
+    "render.py": "d48bbc8ac9b136928aa9960b88f79a55ff98528df8eff7b5069d8bde582e169a",
+    "selection-tests.log": "093688ecac4164a445ccc027c3eb545ef8a1e0044ab5fe20a468521f57075564",
+    "session-tests.log": "52f4d6c98074b7857678d0acdb30a0f47c258ad047bf228ae3312efee712950b",
+    "setup.json": "52c2529865228bfc5dff819502f2401f3e9bf978014ee48ede55b4fb042d3fb2",
+    "terminal-smoke.log": "025ed7c9d77530e320ce74e64c711678749d4cbf896a9aed809c813529ea6226",
+    "windows-check.log": "b2f631e548357db6db995dbe5f9a01a397a0e223799756409e06429df755fab1"
+  },
+  "log_normalization": "Only excess final blank lines removed for repository whitespace checks; no output lines omitted."
+}
