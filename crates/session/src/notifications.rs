@@ -101,6 +101,9 @@ impl Workspace {
 #[serde(deny_unknown_fields)]
 pub struct Preferences {
     pub muted: bool,
+    /// Opt-in presentation setting; unsupported platforms keep their in-app reminders.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub system_popups: bool,
     pub muted_kinds: Vec<Kind>,
     pub muted_hosts: Vec<PathBuf>,
     pub muted_sessions: Vec<Session>,

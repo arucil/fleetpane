@@ -171,6 +171,7 @@ impl Workbench {
                 if this
                     .update_in(cx, |this, window, cx| {
                         this.capture_tabs(window, cx);
+                        this.poll_system_notifications(window, cx);
                     })
                     .is_err()
                 {
@@ -207,7 +208,7 @@ impl Workbench {
         value
     }
 
-    fn drafts_saved(&self, cx: &App) -> Result<bool, String> {
+    fn drafts_saved(&mut self, cx: &App) -> Result<bool, String> {
         let notifications_ready = self.notifications.close_status()?;
         if let Some(error) = &self.host_choice.error {
             return Err(error.clone());
@@ -228,6 +229,9 @@ impl Workbench {
         }
         if let Some(view) = &self.workspace_view {
             ready &= view.read(cx).close_status(cx)?;
+        }
+        if ready {
+            ready = self.notifications.system_close_ready();
         }
         Ok(ready)
     }

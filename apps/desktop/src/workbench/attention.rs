@@ -133,6 +133,7 @@ impl Workbench {
                         this.attention.cursor = Cursor::default();
                         this.attention.selection_notice =
                             Some("Selection cleared: queue refresh failed.".into());
+                        this.reconcile_completion_toast(window, cx);
                     }
                 }
                 if this.attention.active && this.attention.next_pending.is_some() {

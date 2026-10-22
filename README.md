@@ -1,5 +1,12 @@
 # Fleetpane
 
+Linux system popups are opt-in under **Alerts → System popups**. New pending
+requests and turn results use count-only, replaceable notifications, with the
+same mute scopes as in-app reminders. Disable/mute retracts owned popups; enabling,
+reopening or explicit reconnect never replays consumed items. The OS controls
+silence and presentation. [Contract](docs/adr/0116-linux-system-popups.md),
+[Linux acceptance and limits](docs/verification/2026-10-22-system-popups.md).
+
 Pending approvals/questions now have durable local reminder claims and one bounded
 Kit in-app aggregate. Host observation age appears in Attention; original requests
 remain actionable and muted occurrences do not replay on unmute.
@@ -20,7 +27,7 @@ Muted items stay in the real pending/results queue and Next request, while the
 alert count excludes them. Normal close waits for saves and displays failures.
 Workspace scopes cover future sessions on that Host and exact directory; unknown
 directories remain included. The bounded Kit popover keeps the conversation layout.
-OS popup, sound and tray/dock remain open.
+Linux OS popups have separate acceptance above; sound and tray/dock remain open.
 [Linux fixture acceptance](docs/verification/2026-10-22-notification-policy.md).
 [Workspace scope and real-provider evidence](docs/verification/2026-10-22-workspace-alert-policy.md).
 

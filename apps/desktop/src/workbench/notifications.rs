@@ -2,6 +2,7 @@
 use super::*;
 use fleetpane_session::notifications::{Kind, Preferences, Saved, Session, Workspace};
 mod delivery;
+mod system;
 const CLOSE_ERROR: &str = "Alert preferences were not saved. Reload alerts before closing.";
 
 pub(super) struct State {
@@ -16,6 +17,8 @@ pub(super) struct State {
     pending_delivery_error: Option<String>,
     reminder_items: Vec<fleetpane_session::attention::review::Item>,
     pending_reminder_items: Vec<fleetpane_session::attention::Item>,
+    system: system::Controller,
+    system_error: Option<String>,
 }
 
 impl State {
@@ -32,6 +35,8 @@ impl State {
             pending_delivery_error: None,
             reminder_items: Vec::new(),
             pending_reminder_items: Vec::new(),
+            system: Default::default(),
+            system_error: None,
         }
     }
     fn editable(&self) -> bool {
@@ -69,6 +74,9 @@ impl State {
             return Err(CLOSE_ERROR.into());
         }
         Ok(!self.busy)
+    }
+    pub(super) fn system_close_ready(&mut self) -> bool {
+        self.system.close_ready()
     }
 }
 
@@ -228,6 +236,96 @@ impl Workbench {
             });
         }).detach();
         cx.notify();
+    }
+
+    pub(super) fn poll_system_notifications(
+        &mut self,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        let (error, action) = self.notifications.system.poll();
+        if self.notifications.system_error != error {
+            self.notifications.system_error = error;
+            cx.notify();
+        }
+        if let Some(category) = action {
+            if self.closing
+                || self.notifications.error.is_some()
+                || self.notifications.system_error.is_some()
+                || !self
+                    .notifications
+                    .saved
+                    .as_ref()
+                    .is_some_and(|s| s.value.system_popups && !s.value.muted)
+                || self.next_request_blocked(window, cx)
+                || self.export_pending(cx)
+            {
+                return;
+            }
+            self.open_attention(window, cx);
+            self.attention.show_completions = category == system::Category::Results;
+            self.attention.filter.socket = None;
+            self.attention.filter.kind = None;
+            window.activate_window();
+            cx.notify();
+        }
+    }
+
+    fn system_notification_controls(&self, cx: &mut Context<Self>) -> AnyElement {
+        #[cfg(target_os = "linux")]
+        {
+            let enabled = self
+                .notifications
+                .saved
+                .as_ref()
+                .is_some_and(|s| s.value.system_popups);
+            div()
+                .flex()
+                .flex_wrap()
+                .gap_2()
+                .items_center()
+                .child(
+                    Button::new("notifications-system")
+                        .small()
+                        .ghost()
+                        .label(if enabled {
+                            "System popups · on"
+                        } else {
+                            "System popups · off"
+                        })
+                        .selected(enabled)
+                        .disabled(!self.notifications.editable() || self.closing)
+                        .on_click(cx.listener(|this, _, window, cx| {
+                            let Some(saved) = &this.notifications.saved else {
+                                return;
+                            };
+                            let mut value = saved.value.clone();
+                            value.system_popups = !value.system_popups;
+                            this.save_notifications(value, window, cx);
+                        })),
+                )
+                .when(self.notifications.system_error.is_some(), |row| {
+                    row.child(
+                        Button::new("notifications-system-reset")
+                            .small()
+                            .label("Reconnect popups")
+                            .disabled(self.closing)
+                            .on_click(cx.listener(|this, _, _, cx| {
+                                this.notifications.system.reset();
+                                this.notifications.system_error = None;
+                                cx.notify();
+                            })),
+                    )
+                })
+                .into_any_element()
+        }
+        #[cfg(not(target_os = "linux"))]
+        {
+            let _ = cx;
+            div()
+                .child("System popups are currently available on Linux.")
+                .into_any_element()
+        }
     }
 
     pub(super) fn attention_label(&self) -> String {
@@ -405,11 +503,13 @@ impl Workbench {
                     .child(Button::new("notifications-copy").small().ghost().label("Copy policy").disabled(selected.is_none()).on_click(cx.listener(|this,_,_,cx|{
                         if let Some(saved)=&this.notifications.saved {cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(saved).expect("policy serializes")));}
                     }))))
-                .child("New requests and turn results show bounded in-app reminders. Reopening does not replay claimed results. System notifications are not available yet.")
+                .child(self.system_notification_controls(cx))
+                .child("New requests and turn results show bounded in-app reminders. Optional system popups contain only counts and request silence. Reopening or enabling popups does not replay claimed items.")
                 .child("Muted items stay in Attention and Next request; unmuting does not replay them.")
                 .child("Workspace mute matches this Host and exact directory, including future sessions. Unknown directories remain included in alerts.")
                 .children(self.notifications.error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
                 .children(self.notifications.delivery_error.iter().chain(self.notifications.pending_delivery_error.iter()).map(|error|div().text_color(cx.theme().danger).child(error.clone())))
+                .children(self.notifications.system_error.iter().map(|error| div().text_color(cx.theme().danger).child(format!("System popups unavailable: {error}. Requests and results remain in Attention. Reconnect to use popups for future events."))))
                 .child(div().flex().flex_wrap().gap_2().items_center().child("Mute event types:")
                     .children(Kind::ALL.into_iter().enumerate().map(|(i,kind)| {
                         let muted=selected.as_ref().is_some_and(|p|p.muted_kinds.contains(&kind));

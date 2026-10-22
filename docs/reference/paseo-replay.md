@@ -1614,3 +1614,13 @@ pending occurrences, using Host sequences to distinguish reused provider IDs.
 review, deterministic Codex/ACP process evidence, Linux native reminders and
 installed OpenCodex/DeepSeek request observations. No upstream history checkpoint
 or functional parity total changes. OS outputs and cross-device delivery remain open.
+
+## Linux system popups: continued implementation
+
+Following the reviewed ATT notification workflows, durable pending/result claims
+now feed an opt-in Linux system presentation. Retained server handles and unique
+owner/generation checks support bounded replacement, actual mute/disable/normal
+close retraction and explicit recovery. [Private D-Bus and Dunst acceptance](../verification/2026-10-22-system-popups.md)
+covers native navigation, no replay, small windows and exact draft replacement.
+Sound/tray/dock, other-platform GUI and acknowledged delivery remain open. No
+history-review cursor or current-upstream-tip claim changes in this slice.

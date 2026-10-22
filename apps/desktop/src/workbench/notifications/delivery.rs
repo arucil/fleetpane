@@ -48,6 +48,11 @@ impl Workbench {
                     items.len()
                 );
                 self.notifications.reminder_items = items;
+                if saved.value.system_popups {
+                    self.notifications
+                        .system
+                        .show(system::Category::Results, message.clone());
+                }
                 let owner = cx.entity().downgrade();
                 window.push_notification(
                     Notification::new()
@@ -77,6 +82,7 @@ impl Workbench {
                 ));
                 window.remove_notification::<CompletionReminder>(cx);
                 self.notifications.reminder_items.clear();
+                self.notifications.system.clear(system::Category::Results);
             }
         }
     }
@@ -89,16 +95,33 @@ impl Workbench {
         self.reconcile_pending_toast(window, cx);
         // A policy change retracts an existing aggregate. Claimed results remain
         // consumed; no toast is resurrected when a narrower mute is removed.
-        let allowed = self.notifications.error.is_none()
+        let allowed = !self.closing
+            && self.attention.error.is_none()
+            && self.notifications.error.is_none()
             && self.notifications.saved.as_ref().is_some_and(|saved| {
-                self.notifications
-                    .reminder_items
-                    .iter()
-                    .all(|item| saved.value.result_allowed(item))
+                self.notifications.reminder_items.iter().all(|item| {
+                    saved.value.result_allowed(item)
+                        && self.reminder_host_available(&item.endpoint.socket, item.host_id)
+                        && self.attention.completions.iter().any(|current| {
+                            current.endpoint.socket == item.endpoint.socket
+                                && current.host_id == item.host_id
+                                && current.record == item.record
+                                && !current.reviewed
+                        })
+                })
             });
         if !allowed {
             window.remove_notification::<CompletionReminder>(cx);
             self.notifications.reminder_items.clear();
+        }
+        if !allowed
+            || !self
+                .notifications
+                .saved
+                .as_ref()
+                .is_some_and(|s| s.value.system_popups)
+        {
+            self.notifications.system.clear(system::Category::Results);
         }
     }
 
@@ -116,6 +139,7 @@ impl Workbench {
                 ));
                 window.remove_notification::<PendingReminder>(cx);
                 self.notifications.pending_reminder_items.clear();
+                self.notifications.system.clear(system::Category::Pending);
                 return;
             }
         };
@@ -149,6 +173,11 @@ impl Workbench {
             items.len()
         );
         self.notifications.pending_reminder_items = items;
+        if saved.value.system_popups {
+            self.notifications
+                .system
+                .show(system::Category::Pending, message.clone());
+        }
         let owner = cx.entity().downgrade();
         window.push_notification(
             Notification::new()
@@ -175,13 +204,16 @@ impl Workbench {
     }
 
     fn reconcile_pending_toast(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        let allowed = self.notifications.error.is_none()
+        let allowed = !self.closing
+            && self.attention.error.is_none()
+            && self.notifications.error.is_none()
             && self.notifications.saved.as_ref().is_some_and(|saved| {
                 self.notifications
                     .pending_reminder_items
                     .iter()
                     .all(|item| {
                         saved.value.pending_allowed(item)
+                            && self.reminder_host_available(&item.endpoint.socket, item.host_id)
                             && self.attention.items.iter().any(|current| {
                                 current.endpoint.socket == item.endpoint.socket
                                     && current.host_id == item.host_id
@@ -194,5 +226,24 @@ impl Workbench {
             window.remove_notification::<PendingReminder>(cx);
             self.notifications.pending_reminder_items.clear();
         }
+        if !allowed
+            || !self
+                .notifications
+                .saved
+                .as_ref()
+                .is_some_and(|s| s.value.system_popups)
+        {
+            self.notifications.system.clear(system::Category::Pending);
+        }
+    }
+
+    fn reminder_host_available(&self, socket: &std::path::Path, host_id: uuid::Uuid) -> bool {
+        self.attention.report.as_ref().is_some_and(|report| {
+            report.hosts.iter().any(|host| {
+                host.endpoint.socket == socket
+                    && host.host_id == Some(host_id)
+                    && host.error.is_none()
+            })
+        })
     }
 }

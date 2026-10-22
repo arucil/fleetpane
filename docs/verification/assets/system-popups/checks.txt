@@ -1,0 +1,14 @@
+PASS cargo test --workspace --locked (362)
+PASS cargo test --manifest-path apps/desktop/Cargo.toml --locked (49)
+PASS cargo clippy --workspace --all-targets --locked -- -D warnings
+PASS cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings
+PASS cargo fmt --all --check
+PASS cargo fmt --manifest-path apps/desktop/Cargo.toml --check
+PASS cargo build -p fleetpane-host --locked
+PASS cargo build --manifest-path apps/desktop/Cargo.toml --locked
+PASS cargo check --workspace --target x86_64-pc-windows-gnu --locked
+PASS python3 -m unittest discover -s scripts/tests -p *_test.py (22)
+PASS python3 scripts/notification-policy-smoke.py
+PASS python3 scripts/pending-alert-smoke.py
+PASS python3 scripts/completion-alert-smoke.py
+PASS git diff --check

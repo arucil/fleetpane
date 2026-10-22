@@ -34,6 +34,33 @@ fn complete_mute_dominates_every_kind_and_unknown_session_without_changing_sourc
     }
 }
 
+#[tokio::test]
+async fn system_popups_are_opt_in_and_persist_without_reinterpreting_mute_or_old_json() {
+    let old = json!({"muted":false,"muted_kinds":[],"muted_hosts":[],"muted_sessions":[]});
+    let mut policy: Preferences = serde_json::from_value(old.clone()).unwrap();
+    assert!(!policy.system_popups);
+    assert_eq!(serde_json::to_value(&policy).unwrap(), old);
+    let root = std::env::temp_dir().join(format!("fp-popup-policy-{}", Uuid::new_v4()));
+    let store = Store::open(root.clone()).await.unwrap();
+    policy.system_popups = true;
+    policy.muted = true;
+    let saved = store.save_notifications(0, policy).await.unwrap();
+    let reopened = Store::open(root.clone())
+        .await
+        .unwrap()
+        .notifications()
+        .await
+        .unwrap();
+    assert_eq!(reopened, saved);
+    for kind in Kind::ALL {
+        assert!(!allowed(&reopened.value, &session(), kind));
+    }
+    let mut invalid = old;
+    invalid["system_popups"] = json!("true");
+    assert!(serde_json::from_value::<Preferences>(invalid).is_err());
+    std::fs::remove_dir_all(root).unwrap();
+}
+
 #[test]
 fn session_mute_uses_endpoint_incarnation_and_thread_not_labels_or_request_ids() {
     let s = session();

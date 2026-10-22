@@ -1,0 +1,7 @@
+{
+  "normal_close_exit_code": 0,
+  "actual_close_notification": true,
+  "harness_proc_wait_timed_out": true,
+  "app_registry_verified_afterward": true,
+  "monitor_suffix": "member=Notify\n   string \"Fleetpane\"\n   uint32 0\n   string \"\"\n   string \"Fleetpane \u00b7 Requests need attention\"\n   string \"2 new requests \u00b7 1 approvals \u00b7 1 questions. Open Attention to inspect.\"\n   array [\n      string \"ad0c09f7-817c-4c5a-9810-d66a3272e953\"\n      string \"Open Attention\"\n   ]\n   array [\n      dict entry(\n         string \"transient\"\n         variant             boolean true\n      )\n      dict entry(\n         string \"suppress-sound\"\n         variant             boolean true\n      )\n   ]\n   int32 8000\nmethod call time=1792674604.798131 sender=:1.11 -> destination=:1.0 serial=40 path=/org/freedesktop/Notifications; interface=org.freedesktop.Notifications; member=CloseNotification\n   uint32 5\nsignal time=1792674604.798676 sender=:1.0 -> destination=:1.11 serial=21 path=/org/freedesktop/Notifications; interface=org.freedesktop.Notifications; member=NotificationClosed\n   uint32 5\n   uint32 3\nsignal time=1792674639.510297 sender=(null sender) -> destination=(null destination) serial=0 path=/org/freedesktop/DBus/Local; interface=org.freedesktop.DBus.Local; member=Disconnected\n"
+}
