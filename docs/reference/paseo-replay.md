@@ -1574,3 +1574,9 @@ colliding ACP request IDs, cancelled/fresh observational reads, draft/window
 replacement and terminal input isolation. Notification deduplication and full
 mute/tray behavior remain open. No source-review cursor or upstream-tip claim
 changes in this implementation slice.
+
+Installed-provider follow-up (2026-10-22): real OpenCodex and DeepSeek approvals
+now validate supplied choices and pin response controls beside the input. Native
+ID collisions, cancel/allow, ACP reject/allow and Codex two-page questions have
+[separate acceptance](../verification/2026-10-22-real-provider-requests.md). No new
+history coverage or upstream-tip claim is implied.

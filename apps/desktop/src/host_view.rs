@@ -1,3 +1,4 @@
+mod approvals;
 mod attention;
 mod commands;
 mod completion;
@@ -1949,7 +1950,7 @@ impl HostView {
     fn answer(
         &mut self,
         pending: Value,
-        accept: bool,
+        decision: fleetpane_runtime::approvals::Decision,
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
@@ -1963,7 +1964,7 @@ impl HostView {
         self.revision += 1;
         let task = cx
             .background_executor()
-            .spawn(async move { background(connection.answer(&pending, accept)) });
+            .spawn(async move { background(connection.answer(&pending, decision)) });
         cx.spawn_in(window, async move |this, cx| {
             let result = task.await;
             let _closed = this.update_in(cx, |this, _, cx| {
@@ -2204,6 +2205,7 @@ impl Render for HostView {
             })
             .map(|entry| entry.view.clone());
         let has_question = question_view.is_some();
+        let approval_pending = approvals.first().filter(|_| !has_question).cloned();
         if has_question && self.composer.focus_handle(cx).is_focused(window) {
             // A newly received question replaces the composer. Keep shortcuts
             // in the visible Host tree without moving an existing answer focus.
@@ -2704,7 +2706,7 @@ impl Render for HostView {
                             .child(self.render_history_navigation(blocked, cx))
                             .child(
                                 // Split the space left AFTER the header/editor.
-                                // Details may use half; the virtual list keeps
+                                // Pending review gets more room; the virtual list keeps
                                 // the rest even when task/approval content grows.
                                 div().id("conversation-body").flex().flex_col().flex_1().min_h_0()
                             .child(
@@ -2721,10 +2723,12 @@ impl Render for HostView {
                             .child(div().id("session-interactions")
                             .min_h_0()
                             .flex_shrink_0()
-                            .max_h(relative(if compact {0.35} else {0.5}))
+                            .max_h(relative(if approval_count > 0 {0.75} else if compact {0.35} else {0.5}))
                             .overflow_y_scroll()
                             .track_scroll(&self.interactions_scroll)
                             .child(div().flex().flex_col().flex_shrink_0()
+                            .children(approval_pending.as_ref().map(|pending| self.render_approval_details(pending, approval_count, cx)))
+                            .children(question_view)
                             .when(self.session_tree.is_some(), |pane| pane.child(
                                 Button::new("close-session-tree").small().ghost().label("Close session tree")
                                     .on_click(cx.listener(|this, _, _, cx| {this.session_tree = None;this.session_tree_subscription=None;this.tree_opening=None;cx.notify();}))
@@ -2805,113 +2809,6 @@ impl Render for HostView {
                                         )
                                     })
                             }))
-                            .children(question_view)
-                            .children(approvals.into_iter().take(1).filter(|_| !has_question).map(
-                                |pending| {
-                                    let supported = pending
-                                        .pointer("/params/threadId")
-                                        .and_then(Value::as_str)
-                                        .is_some()
-                                        && matches!(
-                                            pending.get("method").and_then(Value::as_str),
-                                            Some(
-                                                "item/commandExecution/requestApproval"
-                                                    | "item/fileChange/requestApproval"
-                                            )
-                                        );
-                                    let accept = pending.clone();
-                                    let decline = pending.clone();
-                                    let key = pending
-                                        .get("id")
-                                        .map_or_else(|| "missing".into(), Value::to_string);
-                                    let is_acp_permission = pending["method"] == "session/request_permission";
-                                    let review_valid = self.permission_preview.as_ref().is_some_and(|(row, _)| row.error.is_none());
-                                    let mut permission_buttons = div().flex().flex_wrap().gap_2();
-                                    let mut permission_error = None;
-                                    match fleetpane_session::acp::Permission::decode(&pending) {
-                                        Ok(Some(permission)) => {
-                                            for option in permission.options {
-                                                let choice = option.option_id;
-                                                let pending = pending.clone();
-                                                permission_buttons = permission_buttons.child(
-                                                    Button::new(SharedString::from(format!("acp-permission:{key}:{choice}")))
-                                                        .label(option.name)
-                                                        .disabled(blocked || !review_valid)
-                                                        .on_click(cx.listener(move |this, _, window, cx| {
-                                                            this.answer_acp(pending.clone(), choice.clone(), window, cx)
-                                                        })),
-                                                );
-                                            }
-                                        }
-                                        Ok(None) => {}
-                                        Err(error) => permission_error = Some(error),
-                                    }
-                                    div()
-                                        .p_4()
-                                        .border_t_1()
-                                        .border_color(cx.theme().border)
-                                        .child(format!(
-                                            "Provider request · 1 of {approval_count} pending"
-                                        ))
-                                        .children(questions::Request::decode(&pending).err().map(
-                                            |error| {
-                                                div()
-                                                    .text_color(cx.theme().danger)
-                                                    .child(error.to_string())
-                                            },
-                                        ))
-                                        .child(
-                                            div()
-                                                .id("approval-details")
-                                                .max_h_24()
-                                                .overflow_y_scroll()
-                                                .text_sm()
-                                            .when(!is_acp_permission, |details| details.child(pending.to_string())),
-                                        )
-                                        .children(is_acp_permission.then(|| self.permission_preview.as_ref().map(|(_, view)| view.clone())).flatten())
-                                        .children(supported.then(||
-                                            div()
-                                                .flex()
-                                                .gap_2()
-                                                .child(
-                                                    Button::new(SharedString::from(format!(
-                                                        "approve:{key}"
-                                                    )))
-                                                    .label("Allow once")
-                                                    .disabled(blocked || !supported)
-                                                    .on_click(cx.listener(
-                                                        move |this, _, window, cx| {
-                                                            this.answer(
-                                                                accept.clone(),
-                                                                true,
-                                                                window,
-                                                                cx,
-                                                            )
-                                                        },
-                                                    )),
-                                                )
-                                                .child(
-                                                    Button::new(SharedString::from(format!(
-                                                        "decline:{key}"
-                                                    )))
-                                                    .label("Decline")
-                                                    .disabled(blocked || !supported)
-                                                    .on_click(cx.listener(
-                                                        move |this, _, window, cx| {
-                                                            this.answer(
-                                                                decline.clone(),
-                                                                false,
-                                                                window,
-                                                                cx,
-                                                            )
-                                                        },
-                                                    )),
-                                                ),
-                                        ))
-                                        .children(permission_error.map(|error| div().text_color(cx.theme().danger).child(error)))
-                                        .child(permission_buttons)
-                                },
-                            ))
                             .when(!has_question, |region| region.child(
                                 div().px_4().py(if compact {px(4.)} else {px(16.)}).flex().flex_col().gap_2()
                                     .child(self.render_draft(cx))
@@ -2934,6 +2831,7 @@ impl Render for HostView {
                                     .flex_shrink_0()
                                     .gap_2()
                                     .child(self.render_progress(cx))
+                                    .children(approval_pending.map(|pending| self.render_approval_actions(pending, blocked, cx)))
                                     .when(cancel_requested || stopping.is_some(), |pane| pane.child(
                                         div().text_xs().text_color(cx.theme().muted_foreground)
                                             .child(stopping.as_ref().map_or("Stop requested. Waiting for the agent to finish cancellation.", |stop| stop.description()))

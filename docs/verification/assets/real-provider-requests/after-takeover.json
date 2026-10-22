@@ -1,0 +1,181 @@
+{
+  "OpenCodex": {
+    "protocol": 3,
+    "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+    "host_pid": 3182349,
+    "provider_pid": 3182352,
+    "provider_info": {
+      "codexHome": "/tmp/fp-real-requests-final/OpenCodex/provider-home",
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "platformFamily": "unix",
+      "platformOs": "linux",
+      "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+    },
+    "owner": {
+      "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+      "controller_id": "1a2ff083-6da9-4e07-b1ca-faaf4b16bb7a",
+      "generation": 3
+    },
+    "sequence": 33,
+    "operation_ids": [
+      "dd772fbc-73f6-4500-9032-e3d65aa51de9",
+      "4238e942-bef6-49f2-b37e-e28c54ba96ba"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "01a1629e-2656-79e1-b236-66d005c38b41",
+          "turn_id": "01a1629e-273e-7c91-b980-2f26311c4ed6"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 0,
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "availableDecisions": [
+            "accept",
+            {
+              "acceptWithExecpolicyAmendment": {
+                "execpolicy_amendment": [
+                  "/usr/bin/zsh",
+                  "-lc",
+                  "printf \"REQUEST-QA-20261022\\n\" > request-qa.txt"
+                ]
+              }
+            },
+            "cancel"
+          ],
+          "command": "/usr/bin/zsh -lc \"printf \\\"REQUEST-QA-20261022\\\\n\\\" > request-qa.txt\"",
+          "commandActions": [
+            {
+              "command": "printf \"REQUEST-QA-20261022\\n\" > request-qa.txt",
+              "type": "unknown"
+            }
+          ],
+          "cwd": "/tmp/fp-real-requests-final/OpenCodex/workspace",
+          "environmentId": "local",
+          "itemId": "exec-57b5a904-4bb0-4f24-b915-6bab7a5751cb",
+          "kind": "command",
+          "proposedExecpolicyAmendment": [
+            "/usr/bin/zsh",
+            "-lc",
+            "printf \"REQUEST-QA-20261022\\n\" > request-qa.txt"
+          ],
+          "reason": "Allow the requested command to create request-qa.txt in the current workspace?",
+          "startedAtMs": 1792655900434,
+          "threadId": "01a1629e-2656-79e1-b236-66d005c38b41",
+          "turnId": "01a1629e-273e-7c91-b980-2f26311c4ed6"
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "DeepSeek": {
+    "protocol": 3,
+    "host_id": "4833e8df-e19c-4c54-b4c7-f3994e67826b",
+    "host_pid": 3182597,
+    "provider_pid": 3182617,
+    "provider_info": {
+      "agentCapabilities": {
+        "mcpCapabilities": {
+          "http": true
+        },
+        "promptCapabilities": {
+          "audio": false,
+          "embeddedContext": false,
+          "image": false
+        },
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "deepseek-harness-acp",
+        "version": "0.0.1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "4833e8df-e19c-4c54-b4c7-f3994e67826b",
+      "controller_id": "668bb0fe-32b4-48d6-837e-0e9c59ce0a94",
+      "generation": 2
+    },
+    "sequence": 9,
+    "operation_ids": [
+      "7fe76987-e799-4ec6-a238-cd8e007cb31d",
+      "b6c54cbb-7314-41d7-ab1d-f7ed9bd47a10"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+          "turn_id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 0,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Allow once",
+              "optionId": "allow-once"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Reject",
+              "optionId": "reject-once"
+            }
+          ],
+          "sessionId": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+          "threadId": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+          "toolCall": {
+            "toolCallId": "call_00_QHJ3WUX0PVjPbg1PcnpH6899"
+          }
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

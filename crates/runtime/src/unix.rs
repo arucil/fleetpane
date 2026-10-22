@@ -520,8 +520,13 @@ async fn handle(
             if let Err(error) = state.authorize(&lease) {
                 return error.into();
             }
-            if !state.pending(&request_id) {
+            let Some(pending) = state.pending_request(&request_id) else {
                 return Response::error("unknown_request", "provider request is no longer pending");
+            };
+            if adapter.is_none()
+                && let Err(error) = crate::approvals::validate_response(pending, &result)
+            {
+                return Response::error("invalid_approval", error);
             }
             let message = if let Some(adapter) = adapter {
                 match adapter.permission_response(&request_id, &result) {

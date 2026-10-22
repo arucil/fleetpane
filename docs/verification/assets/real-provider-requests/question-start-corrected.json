@@ -1,0 +1,55 @@
+{
+  "request": {
+    "command": "execute",
+    "lease": {
+      "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+      "controller_id": "8e764eea-72d9-4587-ad79-fd7284b7dcb5",
+      "generation": 5
+    },
+    "operation_id": "ebd0b4b7-0d92-498a-99f3-b46d289d0936",
+    "method": "turn/start",
+    "params": {
+      "threadId": "01a162a2-27cd-7821-b666-ec89f74ced36",
+      "input": [
+        {
+          "type": "text",
+          "text": "This is synthetic GUI QA. Before any work, use request_user_input to ask TWO separate questions. Question 1 header Language: Choose the preferred language? options Rust (Recommended), Go, each with a short description. Question 2 header Theme: Choose a theme? options Dark (Recommended), Light, each with a short description. Ask both in one tool request. Wait for the human answers. Do not execute commands, use the network or change any files. After receiving answers, report them exactly and stop."
+        }
+      ],
+      "collaborationMode": {
+        "mode": "plan",
+        "settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "low"
+        }
+      }
+    }
+  },
+  "reply": {
+    "response": "operation",
+    "data": {
+      "id": "ebd0b4b7-0d92-498a-99f3-b46d289d0936",
+      "method": "turn/start",
+      "params": {
+        "collaborationMode": {
+          "mode": "plan",
+          "settings": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low"
+          }
+        },
+        "input": [
+          {
+            "text": "This is synthetic GUI QA. Before any work, use request_user_input to ask TWO separate questions. Question 1 header Language: Choose the preferred language? options Rust (Recommended), Go, each with a short description. Question 2 header Theme: Choose a theme? options Dark (Recommended), Light, each with a short description. Ask both in one tool request. Wait for the human answers. Do not execute commands, use the network or change any files. After receiving answers, report them exactly and stop.",
+            "type": "text"
+          }
+        ],
+        "threadId": "01a162a2-27cd-7821-b666-ec89f74ced36"
+      },
+      "outcome": {
+        "state": "accepted"
+      },
+      "completed_sequence": null
+    }
+  }
+}

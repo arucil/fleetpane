@@ -1,0 +1,121 @@
+{
+  "OpenCodex": {
+    "protocol": 3,
+    "host_id": "d7b5d872-0142-4357-812b-ed668cc14a50",
+    "host_pid": 3322999,
+    "provider_pid": 3323007,
+    "provider_info": {
+      "codexHome": "/tmp/fp-real-requests-hardened/OpenCodex/provider-home",
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "platformFamily": "unix",
+      "platformOs": "linux",
+      "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+    },
+    "owner": {
+      "host_id": "d7b5d872-0142-4357-812b-ed668cc14a50",
+      "controller_id": "da918091-ba7a-493e-a6cf-b61746e9e005",
+      "generation": 3
+    },
+    "sequence": 53,
+    "operation_ids": [
+      "a7852a82-7772-4d25-9a4d-b6fd383b6013",
+      "b4caed67-d6f9-4a20-8278-795dc3cff04f"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "attention": {
+      "records": [
+        {
+          "sequence": 53,
+          "observed_unix_ms": 1792656986892,
+          "thread_id": "01a162ad-a4f1-75d1-a5d7-8b03af8226d3",
+          "turn_id": "01a162ad-a5f8-7771-ab5f-60e6765d28fa",
+          "kind": "interrupted",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "DeepSeek": {
+    "protocol": 3,
+    "host_id": "c5d74a67-6d90-4e1d-a19a-3a6f2675283d",
+    "host_pid": 3323359,
+    "provider_pid": 3323400,
+    "provider_info": {
+      "agentCapabilities": {
+        "mcpCapabilities": {
+          "http": true
+        },
+        "promptCapabilities": {
+          "audio": false,
+          "embeddedContext": false,
+          "image": false
+        },
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "deepseek-harness-acp",
+        "version": "0.0.1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "c5d74a67-6d90-4e1d-a19a-3a6f2675283d",
+      "controller_id": "7ebba39d-63cb-442c-addf-c55a19d87ef2",
+      "generation": 3
+    },
+    "sequence": 15,
+    "operation_ids": [
+      "7ce90401-555e-4b1b-b78b-63105a503a07",
+      "36937686-d64f-4493-9c2a-178a5fcb51d5"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "9fecc7d0-69ee-4e83-9021-729078c7e3af",
+          "turn_id": "dd1b7b8e-0910-46b7-965a-52589af38521"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

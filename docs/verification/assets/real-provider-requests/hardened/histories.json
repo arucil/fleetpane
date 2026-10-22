@@ -1,0 +1,241 @@
+{
+  "OpenCodex": {
+    "message": {
+      "id": "query:93f15bde-522a-4b53-ba5d-926d5dbc2bbb",
+      "result": {
+        "readState": {
+          "firstUnread": null,
+          "revision": "initial:01a162ad-a4f1-75d1-a5d7-8b03af8226d3"
+        },
+        "thread": {
+          "agentNickname": null,
+          "agentRole": null,
+          "canAcceptDirectInput": true,
+          "cliVersion": "0.163.0",
+          "createdAt": 1792656909,
+          "cwd": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+          "daybreakEnabled": null,
+          "environments": [
+            {
+              "cwd": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+              "environmentId": "local",
+              "runtimeWorkspaceRoots": [
+                "/tmp/fp-real-requests-hardened/OpenCodex/workspace"
+              ]
+            }
+          ],
+          "ephemeral": false,
+          "extra": null,
+          "forkedFromId": null,
+          "gitInfo": null,
+          "historyMode": "paginated",
+          "id": "01a162ad-a4f1-75d1-a5d7-8b03af8226d3",
+          "model": "gpt-6.1-sol",
+          "modelProvider": "opencodex",
+          "name": null,
+          "originator": "fleetpane_host",
+          "parentThreadId": null,
+          "path": "/tmp/fp-real-requests-hardened/OpenCodex/provider-home/sessions/2026/10/22/rollout-2026-10-22T16-15-09-01a162ad-a4f1-75d1-a5d7-8b03af8226d3.jsonl",
+          "preview": "Synthetic local QA. Use the shell tool to run exactly this command in the current workspace: printf \"REQUEST-QA-20261022\\n\" > request-qa.txt . Do not use an alternative write tool. If approval is requested, wait for the human decision. Do not retry a denied action. After a decision, only summarize its outcome.",
+          "projectId": null,
+          "reasoningEffort": null,
+          "recencyAt": 1792656909,
+          "section": null,
+          "sectionEnteredAt": null,
+          "sessionId": "01a162ad-a4f1-75d1-a5d7-8b03af8226d3",
+          "source": "vscode",
+          "status": {
+            "type": "idle"
+          },
+          "threadSource": null,
+          "turns": [
+            {
+              "completedAt": 1792656986,
+              "durationMs": 77069,
+              "error": null,
+              "id": "01a162ad-a5f8-7771-ab5f-60e6765d28fa",
+              "items": [
+                {
+                  "clientId": null,
+                  "content": [
+                    {
+                      "text": "Synthetic local QA. Use the shell tool to run exactly this command in the current workspace: printf \"REQUEST-QA-20261022\\n\" > request-qa.txt . Do not use an alternative write tool. If approval is requested, wait for the human decision. Do not retry a denied action. After a decision, only summarize its outcome.",
+                      "text_elements": [],
+                      "type": "text"
+                    }
+                  ],
+                  "id": "01a162ad-a644-7323-9664-69428126ddee",
+                  "type": "userMessage"
+                },
+                {
+                  "delivery": null,
+                  "id": "msg_092d586709ddf297016ad9c613ec6881998b8cf04603aecb15",
+                  "memoryCitation": null,
+                  "phase": "commentary",
+                  "questions": null,
+                  "text": "I\u2019ll run the exact command in the current workspace. Writing the file requires approval under the read-only sandbox.\n",
+                  "type": "agentMessage"
+                }
+              ],
+              "itemsView": "full",
+              "rootTurnId": "01a162ad-a5f8-7771-ab5f-60e6765d28fa",
+              "startedAt": 1792656909,
+              "status": "interrupted"
+            }
+          ],
+          "updatedAt": 1792656986
+        }
+      }
+    },
+    "sequence": 55
+  },
+  "DeepSeek": {
+    "message": {
+      "id": "query:de19fbd4-b729-47af-b714-b02ea392f1bc",
+      "result": {
+        "thread": {
+          "acpCommands": null,
+          "acpModes": null,
+          "acpSessionInfo": {
+            "_meta": null,
+            "updatedAt": null
+          },
+          "configOptions": [
+            {
+              "category": "model",
+              "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+              "id": "model",
+              "name": "Model",
+              "options": [
+                {
+                  "group": "deepseek-official",
+                  "name": "DeepSeek",
+                  "options": [
+                    {
+                      "name": "deepseek-v4-flash",
+                      "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+                    },
+                    {
+                      "name": "DeepSeek-V41-Flash",
+                      "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+                    },
+                    {
+                      "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+                      "name": "DeepSeek-V4-Pro",
+                      "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+                    }
+                  ]
+                }
+              ],
+              "type": "select"
+            },
+            {
+              "category": "thought_level",
+              "currentValue": "high",
+              "id": "reasoning_effort",
+              "name": "Reasoning effort",
+              "options": [
+                {
+                  "description": "Use for simple tasks that do not need reasoning.",
+                  "name": "Off",
+                  "value": "off"
+                },
+                {
+                  "description": "Prefer for routine or latency-sensitive tasks.",
+                  "name": "Low",
+                  "value": "low"
+                },
+                {
+                  "description": "The default balance for most tasks.",
+                  "name": "High",
+                  "value": "high"
+                },
+                {
+                  "description": "Reserve for the hardest quality-first tasks.",
+                  "name": "Max",
+                  "value": "max"
+                }
+              ],
+              "type": "select"
+            }
+          ],
+          "cwd": "/tmp/fp-real-requests-hardened/DeepSeek/workspace",
+          "historyMode": "acp-observed",
+          "historyPaging": true,
+          "id": "9fecc7d0-69ee-4e83-9021-729078c7e3af",
+          "name": null,
+          "preview": "DeepSeek Harness",
+          "status": {
+            "cancelRequested": false,
+            "type": "active"
+          },
+          "turns": [
+            {
+              "error": null,
+              "id": "dd1b7b8e-0910-46b7-965a-52589af38521",
+              "items": [
+                {
+                  "content": [
+                    {
+                      "text": "Synthetic local permission QA: use the bash tool once to run printf \"DEEPSEEK-APPROVAL-QA\\n\" with sandbox_permissions set to danger-full-access and justification \"Verify the one-shot permission dialog in this isolated synthetic workspace\". Wait for the human permission decision. Do not retry if declined. Do not modify files or access the network.",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "user:dd1b7b8e-0910-46b7-965a-52589af38521",
+                  "type": "userMessage"
+                },
+                {
+                  "content": [
+                    "The user wants a synthetic permission QA: run a single bash command with printf and danger-full-access sandbox permissions with specific justification. They explicitly say wait for the human permission decision, do not retry if declined, don't modify files or access network.\n\nI should just do it once. The command: printf \"DEEPSEEK-APPROVAL-QA\\n\" with sandbox_permissions danger-full-access, justification as given. No other actions.\n\nNote: the approval may be asked through configured answerers. Let me just issue the single bash call.\n\nShould I create a todo? No, trivial single-step.\n\nLet me make the call."
+                  ],
+                  "id": "dd1b7b8e-0910-46b7-965a-52589af38521:agent_thought_chunk:id:e2c37f03-1cc0-43ad-844f-8dd2d2e46166",
+                  "summary": [],
+                  "type": "reasoning"
+                },
+                {
+                  "content": [
+                    {
+                      "text": "I'll run the single permission-check command exactly once, with the requested elevated permission and justification.",
+                      "type": "text"
+                    }
+                  ],
+                  "id": "dd1b7b8e-0910-46b7-965a-52589af38521:agent_message_chunk:id:e2c37f03-1cc0-43ad-844f-8dd2d2e46166",
+                  "type": "acpMessage"
+                },
+                {
+                  "call": {
+                    "content": [
+                      {
+                        "content": {
+                          "text": "Error: the user rejected escalating this command to \"danger-full-access\"; it stays denied, so stop and explain instead of working around it",
+                          "type": "text"
+                        },
+                        "type": "content"
+                      }
+                    ],
+                    "kind": "other",
+                    "locations": [],
+                    "rawInput": {
+                      "command": "printf \"DEEPSEEK-APPROVAL-QA\\n\"",
+                      "description": "Print approval QA marker line",
+                      "justification": "Verify the one-shot permission dialog in this isolated synthetic workspace",
+                      "sandbox_permissions": "danger-full-access"
+                    },
+                    "sessionUpdate": "tool_call_update",
+                    "status": "failed",
+                    "title": "bash",
+                    "toolCallId": "call_00_QUW8dMUoTkt1xhAxNrgy3737"
+                  },
+                  "id": "dd1b7b8e-0910-46b7-965a-52589af38521:tool:call_00_QUW8dMUoTkt1xhAxNrgy3737",
+                  "type": "acpToolCall"
+                }
+              ],
+              "status": "inProgress"
+            }
+          ]
+        }
+      }
+    },
+    "sequence": 16
+  }
+}

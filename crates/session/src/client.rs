@@ -605,7 +605,11 @@ impl Connection {
     }
 
     /// The two Codex execution/file approval contracts.
-    pub async fn answer(&self, pending: &Value, accept: bool) -> Result<(), Error> {
+    pub async fn answer(
+        &self,
+        pending: &Value,
+        decision: fleetpane_runtime::approvals::Decision,
+    ) -> Result<(), Error> {
         let method = pending.get("method").and_then(Value::as_str);
         if !matches!(
             method,
@@ -618,11 +622,9 @@ impl Connection {
         let id = pending
             .get("id")
             .ok_or_else(|| Error::Protocol("approval request has no ID".into()))?;
-        self.respond(
-            id.clone(),
-            json!({"decision":if accept { "accept" } else { "decline" }}),
-        )
-        .await
+        let result = json!({"decision":decision});
+        fleetpane_runtime::approvals::validate_response(pending, &result).map_err(Error::Input)?;
+        self.respond(id.clone(), result).await
     }
 
     pub async fn answer_questions(

@@ -1,0 +1,180 @@
+{
+  "OpenCodex": {
+    "protocol": 3,
+    "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+    "host_pid": 3182349,
+    "provider_pid": 3182352,
+    "provider_info": {
+      "codexHome": "/tmp/fp-real-requests-final/OpenCodex/provider-home",
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "platformFamily": "unix",
+      "platformOs": "linux",
+      "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+    },
+    "owner": {
+      "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+      "controller_id": "8e764eea-72d9-4587-ad79-fd7284b7dcb5",
+      "generation": 5
+    },
+    "sequence": 63,
+    "operation_ids": [
+      "dd772fbc-73f6-4500-9032-e3d65aa51de9",
+      "4238e942-bef6-49f2-b37e-e28c54ba96ba",
+      "77441244-dd4f-4e77-8bc7-6c2c06070268",
+      "ebd0b4b7-0d92-498a-99f3-b46d289d0936"
+    ],
+    "journal_total": 4,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "01a162a2-27cd-7821-b666-ec89f74ced36",
+          "turn_id": "01a162a3-b645-7f00-974e-c2154d069fa1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 1,
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "autoResolutionMs": null,
+          "isBlocking": true,
+          "itemId": "call_0fdfbdb599884a438c6a7bf2412769d2",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Use Rust for implementation.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Use Go for implementation.",
+                  "label": "Go"
+                }
+              ],
+              "question": "Choose the preferred language?"
+            },
+            {
+              "header": "Theme",
+              "id": "theme",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Use a dark appearance.",
+                  "label": "Dark (Recommended)"
+                },
+                {
+                  "description": "Use a light appearance.",
+                  "label": "Light"
+                }
+              ],
+              "question": "Choose a theme?"
+            }
+          ],
+          "threadId": "01a162a2-27cd-7821-b666-ec89f74ced36",
+          "turnId": "01a162a3-b645-7f00-974e-c2154d069fa1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [
+        {
+          "sequence": 49,
+          "observed_unix_ms": 1792656062197,
+          "thread_id": "01a1629e-2656-79e1-b236-66d005c38b41",
+          "turn_id": "01a1629e-273e-7c91-b980-2f26311c4ed6",
+          "kind": "interrupted",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "DeepSeek": {
+    "protocol": 3,
+    "host_id": "4833e8df-e19c-4c54-b4c7-f3994e67826b",
+    "host_pid": 3182597,
+    "provider_pid": 3182617,
+    "provider_info": {
+      "agentCapabilities": {
+        "mcpCapabilities": {
+          "http": true
+        },
+        "promptCapabilities": {
+          "audio": false,
+          "embeddedContext": false,
+          "image": false
+        },
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "deepseek-harness-acp",
+        "version": "0.0.1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "4833e8df-e19c-4c54-b4c7-f3994e67826b",
+      "controller_id": "7b735505-48ee-456e-8f6e-4d1b0daf44c3",
+      "generation": 3
+    },
+    "sequence": 20,
+    "operation_ids": [
+      "7fe76987-e799-4ec6-a238-cd8e007cb31d",
+      "b6c54cbb-7314-41d7-ab1d-f7ed9bd47a10"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [],
+    "attention": {
+      "records": [
+        {
+          "sequence": 18,
+          "observed_unix_ms": 1792656112164,
+          "thread_id": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+          "turn_id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c",
+          "kind": "completed",
+          "stop_reason": "end_turn"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

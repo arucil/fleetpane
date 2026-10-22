@@ -1,0 +1,311 @@
+[
+  {
+    "name": "OpenCodex",
+    "socket": "/tmp/fp-real-requests-hardened/OpenCodex/host/control.sock",
+    "host_pid": 3322999,
+    "directory": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+    "workspace": {
+      "position": 1,
+      "id": "d6b81fff-37b7-4d82-9382-36144c1b8ef1",
+      "project_id": "5b376298-37e6-4dd7-8eea-76220f7c45cf",
+      "endpoint": {
+        "name": "OpenCodex",
+        "socket": "/tmp/fp-real-requests-hardened/OpenCodex/host/control.sock"
+      },
+      "directory": {
+        "path": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+        "device": 66311,
+        "inode": 109524058
+      },
+      "project": {
+        "path": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+        "device": 66311,
+        "inode": 109524058
+      },
+      "kind": "folder"
+    },
+    "thread": {
+      "agentNickname": null,
+      "agentRole": null,
+      "canAcceptDirectInput": true,
+      "cliVersion": "0.163.0",
+      "createdAt": 1792656909,
+      "cwd": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+      "daybreakEnabled": null,
+      "environments": [
+        {
+          "cwd": "/tmp/fp-real-requests-hardened/OpenCodex/workspace",
+          "environmentId": "local",
+          "runtimeWorkspaceRoots": [
+            "/tmp/fp-real-requests-hardened/OpenCodex/workspace"
+          ]
+        }
+      ],
+      "ephemeral": false,
+      "extra": null,
+      "forkedFromId": null,
+      "gitInfo": null,
+      "historyMode": "paginated",
+      "id": "01a162ad-a4f1-75d1-a5d7-8b03af8226d3",
+      "model": "gpt-6.1-sol",
+      "modelProvider": "opencodex",
+      "name": null,
+      "originator": "fleetpane_host",
+      "parentThreadId": null,
+      "path": "/tmp/fp-real-requests-hardened/OpenCodex/provider-home/sessions/2026/10/22/rollout-2026-10-22T16-15-09-01a162ad-a4f1-75d1-a5d7-8b03af8226d3.jsonl",
+      "preview": "",
+      "projectId": null,
+      "reasoningEffort": null,
+      "recencyAt": 1792656909,
+      "section": null,
+      "sectionEnteredAt": null,
+      "sessionId": "01a162ad-a4f1-75d1-a5d7-8b03af8226d3",
+      "source": "vscode",
+      "status": {
+        "type": "idle"
+      },
+      "threadSource": null,
+      "turns": [],
+      "updatedAt": 1792656909
+    },
+    "snapshot_created": {
+      "protocol": 3,
+      "host_id": "d7b5d872-0142-4357-812b-ed668cc14a50",
+      "host_pid": 3322999,
+      "provider_pid": 3323007,
+      "provider_info": {
+        "codexHome": "/tmp/fp-real-requests-hardened/OpenCodex/provider-home",
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "platformFamily": "unix",
+        "platformOs": "linux",
+        "userAgent": "fleetpane_host/0.163.0 (EndeavourOS Rolling Release; x86_64) Konsole/260802 (fleetpane_host; 0.1.0)"
+      },
+      "owner": {
+        "host_id": "d7b5d872-0142-4357-812b-ed668cc14a50",
+        "controller_id": "b68a3bfb-e217-40df-ba61-a329ce4bc648",
+        "generation": 1
+      },
+      "sequence": 3,
+      "operation_ids": [
+        "a7852a82-7772-4d25-9a4d-b6fd383b6013"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "attention": {
+        "records": [],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    "prompt": "Synthetic local QA. Use the shell tool to run exactly this command in the current workspace: printf \"REQUEST-QA-20261022\\n\" > request-qa.txt . Do not use an alternative write tool. If approval is requested, wait for the human decision. Do not retry a denied action. After a decision, only summarize its outcome.",
+    "sent": {
+      "operationId": "b4caed67-d6f9-4a20-8278-795dc3cff04f",
+      "result": {
+        "turn": {
+          "completedAt": null,
+          "durationMs": null,
+          "error": null,
+          "id": "01a162ad-a5f8-7771-ab5f-60e6765d28fa",
+          "items": [],
+          "itemsView": "notLoaded",
+          "rootTurnId": "01a162ad-a5f8-7771-ab5f-60e6765d28fa",
+          "startedAt": null,
+          "status": "inProgress"
+        }
+      },
+      "sequence": 4
+    }
+  },
+  {
+    "name": "DeepSeek",
+    "socket": "/tmp/fp-real-requests-hardened/DeepSeek/host/control.sock",
+    "host_pid": 3323359,
+    "directory": "/tmp/fp-real-requests-hardened/DeepSeek/workspace",
+    "workspace": {
+      "position": 2,
+      "id": "eb3b7214-d86d-44a6-975e-205ecc02d7b8",
+      "project_id": "ae06df5b-2465-4709-a088-8e5f4b46281f",
+      "endpoint": {
+        "name": "DeepSeek",
+        "socket": "/tmp/fp-real-requests-hardened/DeepSeek/host/control.sock"
+      },
+      "directory": {
+        "path": "/tmp/fp-real-requests-hardened/DeepSeek/workspace",
+        "device": 66311,
+        "inode": 117052622
+      },
+      "project": {
+        "path": "/tmp/fp-real-requests-hardened/DeepSeek/workspace",
+        "device": 66311,
+        "inode": 117052622
+      },
+      "kind": "folder"
+    },
+    "thread": {
+      "acpCommands": null,
+      "acpModes": null,
+      "acpSessionInfo": {
+        "_meta": null,
+        "updatedAt": null
+      },
+      "configOptions": [
+        {
+          "category": "model",
+          "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+          "id": "model",
+          "name": "Model",
+          "options": [
+            {
+              "group": "deepseek-official",
+              "name": "DeepSeek",
+              "options": [
+                {
+                  "name": "deepseek-v4-flash",
+                  "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+                },
+                {
+                  "name": "DeepSeek-V41-Flash",
+                  "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+                },
+                {
+                  "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+                  "name": "DeepSeek-V4-Pro",
+                  "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+                }
+              ]
+            }
+          ],
+          "type": "select"
+        },
+        {
+          "category": "thought_level",
+          "currentValue": "high",
+          "id": "reasoning_effort",
+          "name": "Reasoning effort",
+          "options": [
+            {
+              "description": "Use for simple tasks that do not need reasoning.",
+              "name": "Off",
+              "value": "off"
+            },
+            {
+              "description": "Prefer for routine or latency-sensitive tasks.",
+              "name": "Low",
+              "value": "low"
+            },
+            {
+              "description": "The default balance for most tasks.",
+              "name": "High",
+              "value": "high"
+            },
+            {
+              "description": "Reserve for the hardest quality-first tasks.",
+              "name": "Max",
+              "value": "max"
+            }
+          ],
+          "type": "select"
+        }
+      ],
+      "cwd": "/tmp/fp-real-requests-hardened/DeepSeek/workspace",
+      "historyMode": "acp-observed",
+      "historyPaging": true,
+      "id": "9fecc7d0-69ee-4e83-9021-729078c7e3af",
+      "name": null,
+      "preview": "DeepSeek Harness",
+      "status": {
+        "cancelRequested": false,
+        "type": "idle"
+      },
+      "turns": []
+    },
+    "snapshot_created": {
+      "protocol": 3,
+      "host_id": "c5d74a67-6d90-4e1d-a19a-3a6f2675283d",
+      "host_pid": 3323359,
+      "provider_pid": 3323400,
+      "provider_info": {
+        "agentCapabilities": {
+          "mcpCapabilities": {
+            "http": true
+          },
+          "promptCapabilities": {
+            "audio": false,
+            "embeddedContext": false,
+            "image": false
+          },
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "deepseek-harness-acp",
+          "version": "0.0.1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "c5d74a67-6d90-4e1d-a19a-3a6f2675283d",
+        "controller_id": "57cf4bc4-ad79-4949-b678-bda58ddc8e3f",
+        "generation": 1
+      },
+      "sequence": 1,
+      "operation_ids": [
+        "7ce90401-555e-4b1b-b78b-63105a503a07"
+      ],
+      "journal_total": 1,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [],
+      "attention": {
+        "records": [],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    "prompt": "Synthetic local permission QA: use the bash tool once to run printf \"DEEPSEEK-APPROVAL-QA\\n\" with sandbox_permissions set to danger-full-access and justification \"Verify the one-shot permission dialog in this isolated synthetic workspace\". Wait for the human permission decision. Do not retry if declined. Do not modify files or access the network.",
+    "sent": {
+      "operationId": "36937686-d64f-4493-9c2a-178a5fcb51d5",
+      "result": {
+        "admission": "host-dispatched",
+        "turn": {
+          "error": null,
+          "id": "dd1b7b8e-0910-46b7-965a-52589af38521",
+          "items": [],
+          "status": "inProgress"
+        }
+      },
+      "sequence": 5
+    }
+  }
+]

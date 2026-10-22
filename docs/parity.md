@@ -3,7 +3,10 @@
 Global **Next request** / Ctrl/Cmd+Shift+J now has [Linux fixture acceptance](verification/2026-10-22-next-request.md):
 fresh all-Host observation, exact-source cycles independent of filters, cancelled
 late reads, retained drafts and terminal input isolation. Notifications, mute
-and installed-provider approval acceptance remain open.
+remain open. Installed OpenCodex/DeepSeek approvals and Codex questions have
+[separate Linux native/model acceptance](verification/2026-10-22-real-provider-requests.md),
+including real same-number requests, pinned response actions, explicit refusal and
+35-byte retained drafts across window replacement.
 
 Installed-provider compatibility follow-up (2026-10-22): the CLI wait's first-turn
 `list_turns is not supported yet` race is repaired. Successful start replies now

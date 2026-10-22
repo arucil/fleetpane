@@ -1,0 +1,76 @@
+{
+  "thread": {
+    "agentNickname": null,
+    "agentRole": null,
+    "canAcceptDirectInput": true,
+    "cliVersion": "0.163.0",
+    "createdAt": 1792656156,
+    "cwd": "/tmp/fp-real-requests-final/OpenCodex/workspace",
+    "daybreakEnabled": null,
+    "environments": [
+      {
+        "cwd": "/tmp/fp-real-requests-final/OpenCodex/workspace",
+        "environmentId": "local",
+        "runtimeWorkspaceRoots": [
+          "/tmp/fp-real-requests-final/OpenCodex/workspace"
+        ]
+      }
+    ],
+    "ephemeral": false,
+    "extra": null,
+    "forkedFromId": null,
+    "gitInfo": null,
+    "historyMode": "paginated",
+    "id": "01a162a2-27cd-7821-b666-ec89f74ced36",
+    "model": "gpt-6.1-sol",
+    "modelProvider": "opencodex",
+    "name": null,
+    "originator": "fleetpane_host",
+    "parentThreadId": null,
+    "path": "/tmp/fp-real-requests-final/OpenCodex/provider-home/sessions/2026/10/22/rollout-2026-10-22T16-02-36-01a162a2-27cd-7821-b666-ec89f74ced36.jsonl",
+    "preview": "",
+    "projectId": null,
+    "reasoningEffort": null,
+    "recencyAt": 1792656156,
+    "section": null,
+    "sectionEnteredAt": null,
+    "sessionId": "01a162a2-27cd-7821-b666-ec89f74ced36",
+    "source": "vscode",
+    "status": {
+      "type": "idle"
+    },
+    "threadSource": null,
+    "turns": [],
+    "updatedAt": 1792656156
+  },
+  "operation": {
+    "command": "admit",
+    "lease": {
+      "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+      "controller_id": "8e764eea-72d9-4587-ad79-fd7284b7dcb5",
+      "generation": 5
+    },
+    "operation_id": "b20e7cfb-c453-4624-927d-cc2104b5ea95",
+    "method": "turn/start",
+    "params": {
+      "threadId": "01a162a2-27cd-7821-b666-ec89f74ced36",
+      "input": [
+        {
+          "type": "text",
+          "text": "This is synthetic GUI QA. Before any work, use request_user_input to ask TWO separate questions. Question 1 header Language: Choose the preferred language? options Rust (Recommended), Go, each with a short description. Question 2 header Theme: Choose a theme? options Dark (Recommended), Light, each with a short description. Ask both in one tool request. Wait for the human answers. Do not execute commands, use the network or change any files. After receiving answers, report them exactly and stop."
+        }
+      ],
+      "collaborationMode": {
+        "mode": "plan",
+        "settings": {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "low"
+        }
+      }
+    }
+  },
+  "reply": {
+    "code": "invalid_request",
+    "message": "unknown variant `admit`, expected one of `snapshot`, `set_admission`, `claim`, `execute`, `query`, `operation`, `operations`, `events`, `respond`"
+  }
+}

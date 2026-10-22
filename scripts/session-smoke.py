@@ -175,6 +175,31 @@ def main():
                         == f"Echo: Approval: {decision}"
                     )
                     assert not state()["pending_requests"]
+                for decision in ("cancel", "accept"):
+                    command("send", thread_id, "[offered-approval]")
+                    pending = eventually(
+                        lambda: state()["pending_requests"], "offered approval retained"
+                    )[0]
+                    before = state()
+                    for invalid in ("decline", {"accept": None}):
+                        unoffered = raw({
+                            "command": "respond", "lease": before["owner"],
+                            "request_id": pending["id"], "result": {"decision": invalid},
+                        })
+                        assert unoffered["response"] == "error", unoffered
+                        assert unoffered["data"]["code"] == "invalid_approval", unoffered
+                    after = state()
+                    for key in ("host_id", "provider_pid", "owner", "sequence", "pending_requests", "journal_total", "operation_ids", "activity"):
+                        assert after[key] == before[key], key
+                    response = {
+                        "command": "respond", "lease": before["owner"],
+                        "request_id": pending["id"], "result": {"decision": decision},
+                    }
+                    assert raw(response)["response"] == "answered"
+                    assert raw(response)["data"]["code"] == "unknown_request"
+                    thread = eventually(completed, "offered decision reaches provider")
+                    assert thread["turns"][-1]["items"][-1]["text"] == f"Echo: Approval: {decision}"
+                    assert not state()["pending_requests"]
                 for custom in (False, True):
                     command("send", thread_id, "[questions]")
                     pending = eventually(
@@ -292,6 +317,7 @@ def main():
                             "approval_accept_decline_handoff": "PASS",
                             "failed_turn_visible": "PASS",
                             "questions_choice_other_unicode_handoff_validation_duplicate_stop": "PASS",
+                            "offered_approval_invalid_preserves_pending_cancel_accept_duplicate": "PASS",
                             "same_host_and_provider": True,
                         }
                     )

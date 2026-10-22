@@ -325,7 +325,7 @@ def stream(thread_id, turn_id, text):
                 if text == "[secret-question]"
                 else "Answers received: " + json.dumps(response, ensure_ascii=False)
             )
-    if text == "[approval]":
+    if text in ("[approval]", "[offered-approval]"):
         request_id = f"approval-{turn_id}"
         ready = threading.Event()
         with state_lock:
@@ -339,6 +339,9 @@ def stream(thread_id, turn_id, text):
                     "turnId": turn_id,
                     "itemId": f"command-{turn_id}",
                     "command": "synthetic approval; no command runs",
+                    **({"availableDecisions": ["accept", {"acceptWithExecpolicyAmendment": {
+                        "execpolicy_amendment": ["printf", "synthetic"]}}, "cancel"]}
+                       if text == "[offered-approval]" else {}),
                 },
             }
         )

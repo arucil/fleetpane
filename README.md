@@ -25,6 +25,12 @@ The [Paseo chronological review](docs/reference/paseo-replay.md) follows both
 lineages from their first commit, records each inspected batch and maps the
 evolution to Fleetpane's missing workflows. Recent deltas are supplemental.
 
+Codex approval buttons follow the provider’s offered decisions; invalid responses
+are rejected by the Host without losing the request. Codex/DeepSeek approval actions
+stay beside the input while details scroll. Real approval/permission and two-page
+Codex question workflows have [Linux native acceptance](docs/verification/2026-10-22-real-provider-requests.md).
+Policy amendments remain unsupported and inspectable.
+
 Provider-reported command actions preserve all reads, listings and searches with
 explicit bounded file navigation and complete original Copy. At compact window
 heights, **Session options** holds optional controls while pending requests and

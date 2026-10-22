@@ -1,0 +1,92 @@
+[
+  {
+    "provider": "OpenCodex",
+    "request": {
+      "command": "execute",
+      "lease": {
+        "host_id": "b62b7ffa-53a8-45a0-984c-36d18b7e9d6e",
+        "controller_id": "40141967-3ffa-4a69-b745-303a08b73348",
+        "generation": 6
+      },
+      "operation_id": "82ecc4c7-c91f-4920-9a7e-59ccf605a93a",
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a1629e-2656-79e1-b236-66d005c38b41",
+        "input": [
+          {
+            "type": "text",
+            "text": "Synthetic QA: use the shell to run printf \"ALLOW-QA-20261022\\n\" > allowed-qa.txt in the current workspace. Request approval for the read-only sandbox write and wait for the human decision. Do not use another write tool. Do not retry if rejected. After it runs, report the outcome."
+          }
+        ]
+      }
+    },
+    "reply": {
+      "id": "82ecc4c7-c91f-4920-9a7e-59ccf605a93a",
+      "method": "turn/start",
+      "params": {
+        "input": [
+          {
+            "text": "Synthetic QA: use the shell to run printf \"ALLOW-QA-20261022\\n\" > allowed-qa.txt in the current workspace. Request approval for the read-only sandbox write and wait for the human decision. Do not use another write tool. Do not retry if rejected. After it runs, report the outcome.",
+            "type": "text"
+          }
+        ],
+        "threadId": "01a1629e-2656-79e1-b236-66d005c38b41"
+      },
+      "outcome": {
+        "state": "accepted"
+      },
+      "completed_sequence": null
+    }
+  },
+  {
+    "provider": "DeepSeek",
+    "request": {
+      "command": "execute",
+      "lease": {
+        "host_id": "4833e8df-e19c-4c54-b4c7-f3994e67826b",
+        "controller_id": "7b735505-48ee-456e-8f6e-4d1b0daf44c3",
+        "generation": 3
+      },
+      "operation_id": "ba3b6736-6e05-40d1-9c9f-70747c646c21",
+      "method": "turn/start",
+      "params": {
+        "threadId": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+        "input": [
+          {
+            "type": "text",
+            "text": "Synthetic local permission QA: use the bash tool once to run printf \"DEEPSEEK-ALLOW-QA\\n\" with sandbox_permissions set to danger-full-access and justification \"Verify Allow once in this isolated synthetic workspace\". Wait for the human permission decision. Do not retry if declined. Do not modify files or access the network."
+          }
+        ]
+      }
+    },
+    "reply": {
+      "id": "ba3b6736-6e05-40d1-9c9f-70747c646c21",
+      "method": "turn/start",
+      "params": {
+        "input": [
+          {
+            "text": "Synthetic local permission QA: use the bash tool once to run printf \"DEEPSEEK-ALLOW-QA\\n\" with sandbox_permissions set to danger-full-access and justification \"Verify Allow once in this isolated synthetic workspace\". Wait for the human permission decision. Do not retry if declined. Do not modify files or access the network.",
+            "type": "text"
+          }
+        ],
+        "threadId": "765ee486-925a-45b3-8305-7aafb3cc8c30"
+      },
+      "outcome": {
+        "state": "finished",
+        "response": {
+          "id": "ba3b6736-6e05-40d1-9c9f-70747c646c21",
+          "result": {
+            "admission": "host-dispatched",
+            "turn": {
+              "error": null,
+              "id": "fca64666-75ff-4f55-adc7-2e7197be55d8",
+              "items": [],
+              "status": "inProgress"
+            }
+          }
+        }
+      },
+      "completed_sequence": 24
+    }
+  }
+]

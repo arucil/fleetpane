@@ -1,0 +1,150 @@
+{
+  "acpCommands": null,
+  "acpModes": null,
+  "acpSessionInfo": {
+    "_meta": null,
+    "updatedAt": null
+  },
+  "configOptions": [
+    {
+      "category": "model",
+      "currentValue": "[\"deepseek-official\",\"deepseek-v4-flash\"]",
+      "id": "model",
+      "name": "Model",
+      "options": [
+        {
+          "group": "deepseek-official",
+          "name": "DeepSeek",
+          "options": [
+            {
+              "name": "deepseek-v4-flash",
+              "value": "[\"deepseek-official\",\"deepseek-v4-flash\"]"
+            },
+            {
+              "name": "DeepSeek-V41-Flash",
+              "value": "[\"deepseek-official\",\"deepseek-flash\"]"
+            },
+            {
+              "description": "Stronger agentic coding, knowledge, and difficult reasoning; suited to complex or quality-critical tasks at higher cost.",
+              "name": "DeepSeek-V4-Pro",
+              "value": "[\"deepseek-official\",\"deepseek-v4-pro\"]"
+            }
+          ]
+        }
+      ],
+      "type": "select"
+    },
+    {
+      "category": "thought_level",
+      "currentValue": "high",
+      "id": "reasoning_effort",
+      "name": "Reasoning effort",
+      "options": [
+        {
+          "description": "Use for simple tasks that do not need reasoning.",
+          "name": "Off",
+          "value": "off"
+        },
+        {
+          "description": "Prefer for routine or latency-sensitive tasks.",
+          "name": "Low",
+          "value": "low"
+        },
+        {
+          "description": "The default balance for most tasks.",
+          "name": "High",
+          "value": "high"
+        },
+        {
+          "description": "Reserve for the hardest quality-first tasks.",
+          "name": "Max",
+          "value": "max"
+        }
+      ],
+      "type": "select"
+    }
+  ],
+  "cwd": "/tmp/fp-real-requests-final/DeepSeek/workspace",
+  "historyMode": "acp-observed",
+  "historyPaging": true,
+  "id": "765ee486-925a-45b3-8305-7aafb3cc8c30",
+  "name": null,
+  "preview": "DeepSeek Harness",
+  "status": {
+    "cancelRequested": false,
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "error": null,
+      "id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c",
+      "items": [
+        {
+          "content": [
+            {
+              "text": "Synthetic local permission QA: use the bash tool once to run printf \"DEEPSEEK-APPROVAL-QA\\n\" with sandbox_permissions set to danger-full-access and justification \"Verify the one-shot permission dialog in this isolated synthetic workspace\". Wait for the human permission decision. Do not retry if declined. Do not modify files or access the network.",
+              "type": "text"
+            }
+          ],
+          "id": "user:6f7b263c-e0e7-40ca-9f7d-281cb04d457c",
+          "type": "userMessage"
+        },
+        {
+          "content": [
+            "We need respond by making exactly one bash call with printf and sandbox_permissions danger-full-access, justification specified. Need wait for human permission decision. We should do it. No file mods or network. The command just printf. Use bash."
+          ],
+          "id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c:agent_thought_chunk:id:8369d179-aa69-48f2-8c89-925f702828c4",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "call": {
+            "content": [
+              {
+                "content": {
+                  "text": "Error: the user rejected escalating this command to \"danger-full-access\"; it stays denied, so stop and explain instead of working around it",
+                  "type": "text"
+                },
+                "type": "content"
+              }
+            ],
+            "kind": "other",
+            "locations": [],
+            "rawInput": {
+              "command": "printf \"DEEPSEEK-APPROVAL-QA\\n\"",
+              "description": "Print synthetic approval QA marker",
+              "justification": "Verify the one-shot permission dialog in this isolated synthetic workspace",
+              "sandbox_permissions": "danger-full-access"
+            },
+            "sessionUpdate": "tool_call_update",
+            "status": "failed",
+            "title": "bash",
+            "toolCallId": "call_00_QHJ3WUX0PVjPbg1PcnpH6899"
+          },
+          "id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c:tool:call_00_QHJ3WUX0PVjPbg1PcnpH6899",
+          "type": "acpToolCall"
+        },
+        {
+          "content": [
+            "We need stop, explain. Do not retry. Mention command was declined. No files modified, no network. The one-shot ask did display presumably. concise."
+          ],
+          "id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c:agent_thought_chunk:id:5a397b1f-cccd-4fed-8f54-0a841385842b",
+          "summary": [],
+          "type": "reasoning"
+        },
+        {
+          "content": [
+            {
+              "text": "The permission request for `danger-full-access` was declined, so I did not retry and did not run the command.\n\n- **Command requested:** `printf \"DEEPSEEK-APPROVAL-QA\\n\"`\n- **Result:** Rejected at the permission prompt; no output was produced.\n- **Side effects:** No files modified, no network access.",
+              "type": "text"
+            }
+          ],
+          "id": "6f7b263c-e0e7-40ca-9f7d-281cb04d457c:agent_message_chunk:id:5a397b1f-cccd-4fed-8f54-0a841385842b",
+          "type": "acpMessage"
+        }
+      ],
+      "status": "completed",
+      "stopReason": "end_turn"
+    }
+  ]
+}

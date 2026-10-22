@@ -6,6 +6,7 @@ use std::collections::{HashSet, VecDeque};
 use uuid::Uuid;
 
 pub mod acp;
+pub mod approvals;
 pub mod attachments;
 pub mod attention;
 #[cfg(unix)]
@@ -717,10 +718,14 @@ impl State {
     }
 
     pub fn pending(&self, id: &Value) -> bool {
+        self.pending_request(id).is_some()
+    }
+
+    pub fn pending_request(&self, id: &Value) -> Option<&Value> {
         self.snapshot
             .pending_requests
             .iter()
-            .any(|request| request.get("id") == Some(id))
+            .find(|request| request.get("id") == Some(id))
     }
 
     pub fn answered(&mut self, id: &Value) {
