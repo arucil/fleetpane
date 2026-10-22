@@ -439,6 +439,9 @@ lease and keeps that controller; omit `--take-control`. Timeout/Ctrl+C stops onl
 observation. It never answers, sends or stops a turn. Host replacement/fault and
 expired cursors are explicit errors. [Contract and limits](docs/adr/0047-observe-an-exact-turn.md),
 [local protocol evidence](docs/verification/2026-10-21-wait-turn.md).
+An exactly identified active turn uses Host activity/events without requiring
+first-turn history to be ready. Startup-reply ordering and two-turn real
+OpenCodex/DeepSeek checks have [separate evidence](docs/verification/2026-10-22-wait-first-turn.md).
 
 Session commands that acquire control use a separate controller;
 `--take-control` explicitly fences the previous owner. Do not use it against a

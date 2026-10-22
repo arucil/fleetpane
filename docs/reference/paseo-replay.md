@@ -1558,5 +1558,7 @@ Exact drafts and saved order survive normal replacement; original shell input
 and an independent pending ACP permission remain unchanged. This is continued
 implementation of reviewed workspace workflows, with no source-review cursor
 change or new upstream-tip claim. Drag ordering and splits remain open. The
-installed Codex turn-list-based CLI wait returned unsupported `list_turns`; that
-compatibility path needs separate repair and regression acceptance.
+installed Codex turn-list-based CLI wait returned unsupported `list_turns`; the
+[first-turn repair](../verification/2026-10-22-wait-first-turn.md) now has independent
+regression and two-turn real OpenCodex/DeepSeek acceptance. The history review
+cursor remains unchanged.

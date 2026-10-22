@@ -115,15 +115,16 @@ def check(root, real_codex):
         return session(endpoint, "send", thread, text)["turn"]["id"]
 
     def watcher(endpoint, thread, turn):
-        before = snap(endpoint)
         process = subprocess.Popen([str(BINARY), "session", str(endpoint), "wait", thread, turn, "--timeout-ms", "5000"],
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         observers.append(process)
-        # The read reply is published before this sequence advances. No fixed
-        # sleep is used to guess that the watcher initialized its history.
-        until(lambda: snap(endpoint)["sequence"] > before["sequence"] or process.poll() is not None)
-        assert process.poll() is None, process.communicate()
-        return process
+        # An active observer need not publish any query reply or advance the
+        # Host sequence. Assert that it remains pending before changing the turn.
+        try:
+            output, error = process.communicate(timeout=0.1)
+        except subprocess.TimeoutExpired:
+            return process
+        raise AssertionError(("wait finished before the gated turn", output, error))
 
     try:
         codex, _ = start("codex")
@@ -239,22 +240,31 @@ stream_max_retries = 0
             actual, _ = start("real", env=env, real=True)
             live = create(actual)
             turn = send(actual, live, "Reply with the loopback fixture result; do not use tools.")
-            assert Model.entered.wait(10)
             before_real = snap(actual)
-            assert observe(actual, live, turn, 75)["outcome"] == "timed_out"
+            evidence["installed_codex_initial"] = {"snapshot": before_real,
+                "events": raw(actual, {"command": "events", "host_id": before_real["host_id"], "after": 0})}
+            assert {"thread_id": live, "turn_id": turn} in before_real["activity"]["turns"]
+            immediate = observe(actual, live, turn, 75)
+            assert immediate["outcome"] == "timed_out", immediate
             unchanged(before_real, snap(actual))
+            # First-turn waiting must work even before Codex starts its HTTP
+            # request and materializes the paginated history.
+            assert Model.entered.wait(10)
             watching = watcher(actual, live, turn)
             Model.release.set()
             output, error = watching.communicate(timeout=12)
             assert watching.returncode == 0, error
             real_result = json.loads(output)
             assert real_result["outcome"] == "finished" and real_result["turn"]["status"] == "completed", real_result
+            settled = observe(actual, live, turn)
+            assert settled["outcome"] == "finished" and settled["turn"]["id"] == turn, settled
             assert Model.calls == 1
             after_real = snap(actual)
             for key in ("host_id", "host_pid", "provider_pid", "owner", "journal_total", "operation_ids"):
                 assert before_real[key] == after_real[key], key
             evidence["installed_codex"] = {"provider": subprocess.check_output(["codex", "--version"], env=env, text=True).strip(),
-                "model": "one gated loopback SSE response; no external model", "result": real_result,
+                "model": "one gated loopback SSE response; no external model", "immediate": immediate,
+                "result": real_result, "settled_history": settled,
                 "before": before_real, "after": after_real}
     finally:
         Model.release.set()

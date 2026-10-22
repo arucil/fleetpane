@@ -1,0 +1,472 @@
+{
+  "source_base": "b0a3e07d3ca232891cd1db484762730932a5eb58",
+  "source_state": "working tree with first-turn wait and Host start-reply activity correction",
+  "source_sha256": {
+    "crates/runtime/src/lib.rs": "1e9c669e0b58d442338c9061e74a5c4494c81abe051bf66ee79dbac46775be36",
+    "crates/runtime/src/lifecycle.rs": "1b09f7e8dcbf58b36470cb46621585ebe8ae645c46fde639aa72e1f93b990b0a",
+    "crates/session/src/wait.rs": "e9d7a82eef42adaa5b376cfd855487be4c0a41f008326610bf860dc58102134b",
+    "crates/session/src/wait/tests.rs": "0c7422e56553f858ddba5ec8b70898696f1448c15a905510f413a1c015ab034f",
+    "scripts/wait-smoke.py": "9889ad8b1dee8e9c5709dd0bf033472ddb4ba7a8d8eaf0ca8dce5be66df297aa",
+    "scripts/provider-fixture.py": "8f82315773568805dc9fb607df7143f4de661a60da15de45d535befb2a6c9aae",
+    "scripts/acp-fixture.py": "2bd4cf55dcd706e8f861d7971389431b280c6801bcd6c64c2e6f9c2e52dba350",
+    "Cargo.lock": "e47a75bb504e59669afe770484ff0a9b1b6c55c0ba4aa427302bc63af19fb83a",
+    "apps/desktop/Cargo.lock": "4fb7e7659cd7868aefe2bd68ff5096d4c4fe6d353907d250ad1f9e399e80a14d"
+  },
+  "host_binary_sha256": "454c4adce764aefd9279fe0c0dac29ab30ec9e8c199e5e7290a56c4fa21bf758",
+  "checks": {
+    "workspace": 327,
+    "desktop": 41,
+    "wait_regressions": 10,
+    "format": "pass",
+    "strict_clippy": "pass",
+    "host_build": "pass",
+    "desktop_format_and_clippy": "pass",
+    "protocol_wait_and_gated_installed_codex": "pass",
+    "installed_codex_drain_handoff": "pass",
+    "real_opencodex_turns": 2,
+    "real_deepseek_turns": 2
+  },
+  "real_provider_results": [
+    {
+      "provider": "opencodex",
+      "version": "codex-cli 0.163.0",
+      "turns": [
+        {
+          "thread_id": "01a161f9-d1fa-7e91-8244-842e3728d673",
+          "turn_id": "01a161f9-d2ae-7922-abf7-ef091ede9f23",
+          "outcome": "finished",
+          "assistant_text": "WAIT-OPENCODEX-1-20261022",
+          "repeated_outcome": "finished",
+          "older_target_during_second": null
+        },
+        {
+          "thread_id": "01a161f9-d1fa-7e91-8244-842e3728d673",
+          "turn_id": "01a161f9-e0d1-7743-b3c2-7e78b8433add",
+          "outcome": "finished",
+          "assistant_text": "WAIT-OPENCODEX-2-20261022",
+          "repeated_outcome": "finished",
+          "older_target_during_second": {
+            "host_id": "6b5ab0da-1ff1-49b3-a000-3d8d7d2bc911",
+            "thread_id": "01a161f9-d1fa-7e91-8244-842e3728d673",
+            "turn_id": "01a161f9-d2ae-7922-abf7-ef091ede9f23",
+            "sequence": 38,
+            "outcome": "finished",
+            "turn": {
+              "id": "01a161f9-d2ae-7922-abf7-ef091ede9f23",
+              "status": "completed",
+              "items": [],
+              "error": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "deepseek",
+      "version": "0.2.0-rc.2",
+      "turns": [
+        {
+          "thread_id": "67a30771-8b80-459b-b25c-b00d3e628d9c",
+          "turn_id": "24c8e67d-71b2-4fff-b6ea-ebb5678e8dc2",
+          "outcome": "finished",
+          "assistant_text": "WAIT-DEEPSEEK-1-20261022",
+          "repeated_outcome": "finished",
+          "older_target_during_second": null
+        },
+        {
+          "thread_id": "67a30771-8b80-459b-b25c-b00d3e628d9c",
+          "turn_id": "0ea2e8ae-db17-42a0-86ca-e2a9297762d2",
+          "outcome": "finished",
+          "assistant_text": "WAIT-DEEPSEEK-2-20261022",
+          "repeated_outcome": "finished",
+          "older_target_during_second": {
+            "host_id": "d0e01f10-b5ba-44e3-b7a8-0ec70aa3728f",
+            "thread_id": "67a30771-8b80-459b-b25c-b00d3e628d9c",
+            "turn_id": "24c8e67d-71b2-4fff-b6ea-ebb5678e8dc2",
+            "sequence": 18,
+            "outcome": "finished",
+            "turn": {
+              "id": "24c8e67d-71b2-4fff-b6ea-ebb5678e8dc2",
+              "status": "completed",
+              "items": [],
+              "error": null,
+              "stopReason": "end_turn"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "real_cleanup": [
+    {
+      "host_pid": 3981394,
+      "provider_pid": 3981397,
+      "exit_code": 0,
+      "socket_removed": true,
+      "processes_gone_or_zombie": true
+    },
+    {
+      "host_pid": 3979254,
+      "provider_pid": 3979309,
+      "exit_code": 0,
+      "socket_removed": true,
+      "processes_gone_or_zombie": true
+    }
+  ],
+  "private_credentials_removed": true,
+  "protocol_runs_cleanup": [
+    {
+      "run": "/tmp/fp-wait-materialization-before",
+      "pids": [
+        3558892,
+        3558884,
+        3558780,
+        3558487,
+        3558494,
+        3558783,
+        3558886,
+        3558894
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3558892,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3558884,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3558780,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3558487,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-immediate-before",
+      "pids": [
+        3583192,
+        3583183,
+        3583032,
+        3580459,
+        3580519,
+        3583041,
+        3583186,
+        3583194
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3583192,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3583183,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3583032,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3580459,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-materialization-after",
+      "pids": [
+        3762217,
+        3762208,
+        3762035,
+        3761623,
+        3761625,
+        3762047,
+        3762211,
+        3762224
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3762217,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3762208,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3762035,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3761623,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-start-race",
+      "pids": [
+        3769984,
+        3769976,
+        3769823,
+        3769541,
+        3769543,
+        3769826,
+        3769979,
+        3769988
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3769984,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3769976,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3769823,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3769541,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-start-reply-after",
+      "pids": [
+        3803928,
+        3803920,
+        3803834,
+        3803486,
+        3803489,
+        3803843,
+        3803922,
+        3803931
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3803928,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3803920,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3803834,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3803486,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-final",
+      "pids": [
+        3896832,
+        3896587,
+        3896361,
+        3895874,
+        3895892,
+        3896363,
+        3896633,
+        3896911
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 3896832,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3896587,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 3896361,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 3895874,
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "run": "/tmp/fp-wait-final-assert",
+      "pids": [
+        4018473,
+        4018455,
+        4017401,
+        4013031,
+        4013104,
+        4017455,
+        4018459,
+        4018475
+      ],
+      "gone_or_zombie": true,
+      "exits": [
+        {
+          "host_pid": 4018473,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 4018455,
+          "exit_code": 0
+        },
+        {
+          "host_pid": 4017401,
+          "exit_code": -9
+        },
+        {
+          "host_pid": 4013031,
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "wait-regression-before.log": {
+      "file": "wait-regression-before.log.gz",
+      "raw_bytes": 1057,
+      "raw_sha256": "c110f4c588efbe12c0f130e97bf0c6866ea78117dbbd8d12c054e2fa629aa1e1",
+      "gzip_sha256": "b55dafb0061fc930efe88fa282f4a176fa7cf225344f05d4241088509c8f2431"
+    },
+    "host-start-reply-before.log": {
+      "file": "host-start-reply-before.log.gz",
+      "raw_bytes": 1017,
+      "raw_sha256": "009666d38367511e2cf7a5a70564bff41699609a2410d7f21607045acfd4c2c1",
+      "gzip_sha256": "a8893fc2fbb5c33b2d0eb568db00eb812a483c73578f78c90372cc08bb2e8961"
+    },
+    "installed-immediate-before.log": {
+      "file": "installed-immediate-before.log.gz",
+      "raw_bytes": 1126,
+      "raw_sha256": "5fdf232fdf2014f2a8d1c244f531ef8d4c6af8aa352e053bf689dedfd503ae28",
+      "gzip_sha256": "9be6e09fdd5b2ad43465d779513dfe2aef6beaa2dde23dd4d183df2c3ef2fbb4"
+    },
+    "installed-after-wait-only.log": {
+      "file": "installed-after-wait-only.log.gz",
+      "raw_bytes": 1259,
+      "raw_sha256": "b03e4bac7c38a8723cda708e56ec1e2a8211eb971da2ae7180a16f587c1f0ad7",
+      "gzip_sha256": "013ef578b5e5f03611c7dc2386a898bc16bb51ccb316774d5074e7661cb5e521"
+    },
+    "installed-pre-fix-snapshot.json": {
+      "file": "installed-pre-fix-snapshot.json.gz",
+      "raw_bytes": 24135,
+      "raw_sha256": "ab60d14b44b82a0756f54922e30f197137132b64a0f523a8cd0d06498ec979bb",
+      "gzip_sha256": "748c65d0e51ee64bdf352f740b5091fac1fdb4fcd4861fb8044b18a70cb63395"
+    },
+    "workspace-tests.log": {
+      "file": "workspace-tests.log.gz",
+      "raw_bytes": 32452,
+      "raw_sha256": "e920d23ab186131f680edf61ae365ff60be2a8aeb6a63b09bbd728277f4e9ffe",
+      "gzip_sha256": "b1c9eccbd18443da013f4fd72a929e73a486a58db8168a864811db8d645ec7d7"
+    },
+    "workspace-clippy.log": {
+      "file": "workspace-clippy.log.gz",
+      "raw_bytes": 322,
+      "raw_sha256": "98e38e3c96eb13e874693e621d2c86eee775aed9f5b7b805c63e44ede035c8e4",
+      "gzip_sha256": "5e775ed28bfee1dbacfc06055de64f812e201bc6e53a1efc71c69a4e973759a3"
+    },
+    "host-build.log": {
+      "file": "host-build.log.gz",
+      "raw_bytes": 142,
+      "raw_sha256": "eada9c5f092f69f6adbfa762e9fe0b60b221d2f21ccb32fa0a33bf430d91c875",
+      "gzip_sha256": "2c8d5ae66a72ea880474620b075fb33b2f0937d63a3ac1f8f44fdef70ef6c6f5"
+    },
+    "workspace-fmt.log": {
+      "file": "workspace-fmt.log.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "desktop-tests.log": {
+      "file": "desktop-tests.log.gz",
+      "raw_bytes": 4767,
+      "raw_sha256": "29e4d612119f1e6bbeb97b8c5aa0897561662388ec9b67b14a3bdbe8a3f3653f",
+      "gzip_sha256": "396f8103c22fc5019837f37c986193cab029d684ea05aad291c5a5e31fd39684"
+    },
+    "desktop-clippy.log": {
+      "file": "desktop-clippy.log.gz",
+      "raw_bytes": 328,
+      "raw_sha256": "dcf59dd137a1db002784fb1b609e2c405f73a593ae4fba18588698beb8a92838",
+      "gzip_sha256": "b0f6aa06ed0ce6da8e12d674ee3edb5fcd675b77b2a9ab464bffa70a7fc44a19"
+    },
+    "desktop-fmt.log": {
+      "file": "desktop-fmt.log.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "wait-process-final.log": {
+      "file": "wait-process-final.log.gz",
+      "raw_bytes": 375,
+      "raw_sha256": "4232ae5e84b10765c9ee0e3e8f640ff980de0be97754150f4148ce4d3b3f7c07",
+      "gzip_sha256": "64df0dad7af098dd290ecc07c81748939ddb44c76c10e63afd9505cb4372ebe2"
+    },
+    "wait-process-final.json": {
+      "file": "wait-process-final.json.gz",
+      "raw_bytes": 28596,
+      "raw_sha256": "6e571e9756e84de911204881df035b5e8f07fc6c65688556ef877df2587ed5e6",
+      "gzip_sha256": "91221563d10d5309d514aef09295e8274c58a7ffe0bf7f43b6e7218262d8433a"
+    },
+    "runtime-drain-process.log": {
+      "file": "runtime-drain-process.log.gz",
+      "raw_bytes": 186,
+      "raw_sha256": "b7cc646b2e448a66823f8f1dbce24a94a987fd08b64d61e1e37066dc1b27107f",
+      "gzip_sha256": "a6fbdb3c9d5a0ef13bcd61373035622de83c15658dfeed0efe89f937fc4cccd9"
+    },
+    "real-providers-final.log": {
+      "file": "real-providers-final.log.gz",
+      "raw_bytes": 71,
+      "raw_sha256": "b40d7a8ec68f4654e6f86c5197fec790ab730c550d1c02d5ab0003e9fdaa13fa",
+      "gzip_sha256": "9252f863218c4be7fe6d8b1f6d6590d902b9ffdf035d32348150a972b884b6b4"
+    },
+    "real-providers-final.json": {
+      "file": "real-providers-final.json.gz",
+      "raw_bytes": 24693,
+      "raw_sha256": "b95cdb8add92a3a84ca79d5dec9aa3394d2aee9d6012de5115b747b7f80d4d31",
+      "gzip_sha256": "40e9faa129911373b735c105b133da2b553154a0e991b9474c4f41f8f8de50f7"
+    },
+    "real-providers-check.py": {
+      "file": "real-providers-check.py.gz",
+      "raw_bytes": 5511,
+      "raw_sha256": "bf81ddeffbfc205147027b9930d247899e56dea330fb66e3973662be0f65550f",
+      "gzip_sha256": "3abc63ce793df459337877ee96a9c73987f156398643fd6d990846bcc58b49fd"
+    },
+    "real-providers-extractor-failure.log": {
+      "file": "real-providers-extractor-failure.log.gz",
+      "raw_bytes": 233,
+      "raw_sha256": "b7706b0e5677e82a7b959e2000ac990f2f1b926c1e7c27e6a39603d2d4696fd8",
+      "gzip_sha256": "bed348e3cc8604b405c283f751a42d7b19b3c614f9494ef27693cfbdf817cf2b"
+    },
+    "real-providers-extractor-failure.json": {
+      "file": "real-providers-extractor-failure.json.gz",
+      "raw_bytes": 14142,
+      "raw_sha256": "2b5e4c5c7c4f12e511ea3e75da4b3769ce5d555bd825e0f0e1cfdbe2b43d0bb2",
+      "gzip_sha256": "35f3b3b0a93cd4c5377f9f3b894aa297fb9ffdd6fb7b7bbc5fff773bb0223e92"
+    }
+  },
+  "limits": [
+    "Linux local CLI/Host; shared desktop compile/tests only in this slice",
+    "Existing Hosts must be explicitly upgraded; no shared runtime restarted",
+    "Exact activity bypass only; missing/older targets retain paged history",
+    "No protocol/journal schema change, retry or completion inference",
+    "No hosted CI, release, remote, high-load or performance acceptance"
+  ]
+}

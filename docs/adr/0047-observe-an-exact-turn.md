@@ -23,9 +23,19 @@ request objects. A thread-only ACP permission is bound to the Host's active turn
 an explicit Codex turn ID must also match. Other sessions and later turns cannot
 satisfy the wait. Requests remain observations and may resolve after the report.
 
-Find the requested turn through metadata-only history pages, retaining no item
-transcript. Lookup has a 4,096-page bound and rejects repeating cursors/missing
-targets. Capture an event cursor **before** lookup: the query reply's sequence is
+An exact `(thread_id, turn_id)` in the initial Host activity snapshot identifies
+the running target without a provider history query. On installed Codex 0.163.0,
+`turn/start` can return before `turn/started`, while the first-turn history store
+still rejects `list_turns`. The Host now tracks the admitted start's thread and
+successful reply's in-progress turn. Pending starts retain bounded matching
+completion identities so a delayed reply cannot reactivate a finished turn,
+including when a newer turn has already started. Rejections never create activity;
+invalid known reply fields and exhausted bounds remain explicit errors.
+
+When activity does not identify the exact target, find it through metadata-only
+history pages, retaining no item transcript. Incomplete activity, other threads
+and other turns cannot bypass lookup. Lookup has a 4,096-page bound and rejects
+repeating cursors/missing targets. Capture an event cursor **before** lookup: the query reply's sequence is
 its arrival boundary, not a provider snapshot version. A completion can precede
 a delayed stale active read. A regression reproduced a false timeout before this
 correction. Replay from the earlier cursor; advance only to delivered events,
@@ -42,6 +52,7 @@ none triggers retry, takeover, resume, Stop or new prompt.
 
 No MCP server, activity transcript export, daemon supervisor or new UI is part of
 this change. Linux acceptance uses both protocol fixtures and the installed Codex
-app-server with a gated loopback SSE model. External models, remote transports,
-unbounded lookup, performance budgets and sustained high-rate cursor retention
-need separate acceptance. [Verification](../verification/2026-10-21-wait-turn.md).
+app-server with a gated loopback SSE model. Broader provider/model versions,
+remote transports, unbounded lookup, performance budgets and sustained high-rate cursor retention
+need separate acceptance. [Original verification](../verification/2026-10-21-wait-turn.md).
+[First-turn regression and real OpenCodex/DeepSeek acceptance](../verification/2026-10-22-wait-first-turn.md).

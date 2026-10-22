@@ -49,15 +49,18 @@ fn terminal(mut turn: Turn) -> Result<Option<Outcome>, Error> {
     })
 }
 
-fn attention(snapshot: &Snapshot, thread: &str, turn: &str) -> Vec<Value> {
-    // ACP permissions have no turnId. Bind those to the Host's active turn;
-    // Codex requests that include turnId must also match it exactly.
-    if !snapshot
+fn is_active(snapshot: &Snapshot, thread: &str, turn: &str) -> bool {
+    snapshot
         .activity
         .turns
         .iter()
         .any(|active| active.thread_id == thread && active.turn_id.as_deref() == Some(turn))
-    {
+}
+
+fn attention(snapshot: &Snapshot, thread: &str, turn: &str) -> Vec<Value> {
+    // ACP permissions have no turnId. Bind those to the Host's active turn;
+    // Codex requests that include turnId must also match it exactly.
+    if !is_active(snapshot, thread, turn) {
         return Vec::new();
     }
     snapshot
@@ -83,7 +86,8 @@ struct Page {
 
 impl Connection {
     /// The connection's existing lease fences initial history reads. Once the
-    /// target is found, Host events/snapshots survive controller replacement.
+    /// target is found in Host activity or history, Host events/snapshots
+    /// survive controller replacement.
     /// Dropping this future cancels observation only. A finite deadline also
     /// covers initial history I/O and backlog draining.
     pub async fn wait_turn(
@@ -133,39 +137,14 @@ impl Connection {
         // snapshot version. Replay from before lookup so a completion emitted
         // before a stale active query reply is still observed.
         let mut after = baseline.sequence;
-        let mut cursor = None;
-        let mut cursors = BTreeSet::new();
-        let mut found = None;
-        for _ in 0..MAX_LOOKUP_PAGES {
-            let request = history::Request::Turns {
-                thread_id: thread.into(),
-                cursor: cursor.clone(),
-            };
-            let (method, params) = request.rpc().map_err(|e| Error::Input(e.to_string()))?;
-            let reply = self.execute_rpc(method, params, Uuid::new_v4()).await?;
-            let page: Page = serde_json::from_value(reply.result)
-                .map_err(|e| Error::Protocol(format!("Invalid wait history page: {e}")))?;
-            if let Some(target) = page.data.into_iter().find(|candidate| candidate.id == turn) {
-                found = Some((reply.sequence, target));
-                break;
+        // Codex acknowledges the first turn before its paginated history is
+        // materialized. Exact Host activity already identifies that turn; do
+        // not require a history read to start observing it.
+        if !is_active(&baseline, thread, turn) {
+            let (sequence, target) = self.lookup_wait_turn(thread, turn).await?;
+            if let Some(outcome) = terminal(target)? {
+                return Ok((sequence, outcome));
             }
-            cursor = page.next_cursor;
-            let Some(next) = &cursor else {
-                return Err(Error::Input(
-                    "Turn was not found in this session's history".into(),
-                ));
-            };
-            if !cursors.insert(next.clone()) {
-                return Err(Error::Protocol("Wait history cursor repeated".into()));
-            }
-        }
-        let (sequence, target) = found.ok_or_else(|| {
-            Error::Input(format!(
-                "Turn lookup exceeded {MAX_LOOKUP_PAGES} history pages"
-            ))
-        })?;
-        if let Some(outcome) = terminal(target)? {
-            return Ok((sequence, outcome));
         }
         loop {
             let (state, events) = self.poll(after).await?;
@@ -208,6 +187,40 @@ impl Connection {
                 tokio::time::sleep(POLL_INTERVAL).await;
             }
         }
+    }
+
+    async fn lookup_wait_turn(&self, thread: &str, turn: &str) -> Result<(u64, Turn), Error> {
+        let mut cursor = None;
+        let mut cursors = BTreeSet::new();
+        let mut found = None;
+        for _ in 0..MAX_LOOKUP_PAGES {
+            let request = history::Request::Turns {
+                thread_id: thread.into(),
+                cursor: cursor.clone(),
+            };
+            let (method, params) = request.rpc().map_err(|e| Error::Input(e.to_string()))?;
+            let reply = self.execute_rpc(method, params, Uuid::new_v4()).await?;
+            let page: Page = serde_json::from_value(reply.result)
+                .map_err(|e| Error::Protocol(format!("Invalid wait history page: {e}")))?;
+            if let Some(target) = page.data.into_iter().find(|candidate| candidate.id == turn) {
+                found = Some((reply.sequence, target));
+                break;
+            }
+            cursor = page.next_cursor;
+            let Some(next) = &cursor else {
+                return Err(Error::Input(
+                    "Turn was not found in this session's history".into(),
+                ));
+            };
+            if !cursors.insert(next.clone()) {
+                return Err(Error::Protocol("Wait history cursor repeated".into()));
+            }
+        }
+        found.ok_or_else(|| {
+            Error::Input(format!(
+                "Turn lookup exceeded {MAX_LOOKUP_PAGES} history pages"
+            ))
+        })
     }
 }
 

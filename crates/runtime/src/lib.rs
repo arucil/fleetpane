@@ -462,6 +462,8 @@ impl State {
         }
         // Transport must check and commit the durable journal before dispatch.
         // Dropping settled RAM entries never removes their on-disk identity.
+        self.activity
+            .admitted(id, &operation.method, &operation.params);
         self.operations.push(operation);
         self.snapshot.operation_ids.push(id);
         if let Some(stop) = stop {
@@ -643,6 +645,7 @@ impl State {
                 if !matches!(operation.outcome, Outcome::Accepted) {
                     return Err("provider replied twice to the same operation".into());
                 }
+                self.activity.replied(id, &message)?;
                 operation.outcome = Outcome::Finished(message.clone());
                 operation.completed_sequence = Some(sequence);
             }
@@ -766,6 +769,63 @@ mod tests {
             Response::Lease(lease) => lease,
             other => panic!("expected lease: {other:?}"),
         }
+    }
+
+    #[test]
+    fn start_reply_identifies_activity_before_the_started_notification() {
+        let mut state = State::new(42, json!({}));
+        let lease = claim(&mut state, 0);
+        let id = Uuid::new_v4();
+        state
+            .admit(&lease, id, "turn/start".into(), json!({"threadId":"s"}))
+            .unwrap();
+        state.record(json!({"id":id.to_string(),"result":{"turn":{"id":"target","status":"inProgress"}}})).unwrap();
+        assert_eq!(
+            state.snapshot().activity.turns,
+            vec![lifecycle::ActiveTurn {
+                thread_id: "s".into(),
+                turn_id: Some("target".into())
+            }]
+        );
+        state.record(json!({"method":"thread/status/changed","params":{"threadId":"s","status":{"type":"idle"}}})).unwrap();
+        state
+            .record(
+                json!({"method":"turn/started","params":{"threadId":"s","turn":{"id":"target"}}}),
+            )
+            .unwrap();
+        assert_eq!(
+            state.snapshot().activity.turns[0].turn_id.as_deref(),
+            Some("target")
+        );
+    }
+
+    #[test]
+    fn completion_before_start_reply_cannot_reactivate_the_finished_turn() {
+        let mut state = State::new(42, json!({}));
+        let lease = claim(&mut state, 0);
+        let id = Uuid::new_v4();
+        state
+            .admit(&lease, id, "turn/start".into(), json!({"threadId":"s"}))
+            .unwrap();
+        state
+            .record(
+                json!({"method":"turn/started","params":{"threadId":"s","turn":{"id":"target"}}}),
+            )
+            .unwrap();
+        state.record(json!({"method":"turn/completed","params":{"threadId":"s","turn":{"id":"target","status":"completed"}}})).unwrap();
+        state
+            .record(
+                json!({"method":"turn/started","params":{"threadId":"s","turn":{"id":"newer"}}}),
+            )
+            .unwrap();
+        state.record(json!({"id":id.to_string(),"result":{"turn":{"id":"target","status":"inProgress"}}})).unwrap();
+        assert_eq!(
+            state.snapshot().activity.turns,
+            vec![lifecycle::ActiveTurn {
+                thread_id: "s".into(),
+                turn_id: Some("newer".into())
+            }]
+        );
     }
 
     #[test]

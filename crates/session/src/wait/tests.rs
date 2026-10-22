@@ -105,6 +105,160 @@ fn query(data: Value, sequence: u64) -> Response {
 }
 
 #[tokio::test]
+async fn active_first_turn_uses_host_identity_before_history_materializes() {
+    let owner = lease(Uuid::new_v4());
+    let mut active = snapshot(&owner, 2);
+    active.activity.turns = vec![fleetpane_runtime::lifecycle::ActiveTurn {
+        thread_id: "s".into(),
+        turn_id: Some("target".into()),
+    }];
+    let mut finished = snapshot(&owner, 3);
+    finished.owner = Some(lease(owner.host_id));
+    let (mut connection, task, root) = scripted(vec![
+        Response::Snapshot(active),
+        Response::Snapshot(finished),
+        Response::Events(vec![Event {
+            sequence: 3,
+            message: json!({"method":"turn/completed","params":{"threadId":"s","turn":turn("target","completed")}}),
+        }]),
+    ]).await;
+    connection.lease = owner;
+    let result = connection.wait_turn("s", "target", 1000).await;
+    if result.is_err() {
+        task.abort();
+        let _cancelled = task.await;
+        std::fs::remove_dir_all(root).unwrap();
+        panic!(
+            "An exactly identified active turn cannot depend on materialized history: {result:?}"
+        );
+    }
+    let report = result.unwrap();
+    assert!(matches!(report.outcome, Outcome::Finished { turn } if turn.id == "target"));
+    assert_eq!(report.sequence, Some(3));
+    let requests = task.await.unwrap();
+    assert!(matches!(
+        &requests[..],
+        [
+            Request::Snapshot,
+            Request::Snapshot,
+            Request::Events { after: 2, .. }
+        ]
+    ));
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[tokio::test]
+async fn incomplete_or_different_activity_still_requires_exact_history_lookup() {
+    for (thread_id, turn_id) in [("s", None), ("other", Some("target")), ("s", Some("other"))] {
+        let owner = lease(Uuid::new_v4());
+        let mut active = snapshot(&owner, 2);
+        active.activity.turns = vec![fleetpane_runtime::lifecycle::ActiveTurn {
+            thread_id: thread_id.into(),
+            turn_id: turn_id.map(str::to_owned),
+        }];
+        let (mut connection, task, root) = scripted(vec![
+            Response::Snapshot(active),
+            query(json!({"data":[],"nextCursor":null}), 3),
+        ])
+        .await;
+        connection.lease = owner;
+        assert!(matches!(connection.wait_turn("s", "target", 1000).await,
+            Err(Error::Input(message)) if message.contains("not found")));
+        let requests = task.await.unwrap();
+        assert!(
+            matches!(&requests[..], [Request::Snapshot, Request::Query { params, .. }] if params["threadId"] == "s")
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}
+
+#[tokio::test]
+async fn active_wait_reports_attention_and_fault_without_provider_reads() {
+    for fault in [false, true] {
+        let owner = lease(Uuid::new_v4());
+        let mut active = snapshot(&owner, 2);
+        active.activity.turns = vec![fleetpane_runtime::lifecycle::ActiveTurn {
+            thread_id: "s".into(),
+            turn_id: Some("target".into()),
+        }];
+        let mut state = active.clone();
+        if fault {
+            state.fault = Some("provider exited".into());
+        } else {
+            state.pending_requests = vec![
+                json!({"id":1,"method":"session/request_permission","params":{"threadId":"s"}}),
+            ];
+        }
+        let (mut connection, task, root) = scripted(vec![
+            Response::Snapshot(active),
+            Response::Snapshot(state),
+            Response::Events(Vec::new()),
+        ])
+        .await;
+        connection.lease = owner;
+        let result = connection.wait_turn("s", "target", 1000).await;
+        if fault {
+            assert!(
+                matches!(result, Err(Error::Protocol(message)) if message.contains("provider exited"))
+            );
+        } else {
+            assert!(
+                matches!(result.unwrap().outcome, Outcome::Attention { requests } if requests.len() == 1)
+            );
+        }
+        let requests = task.await.unwrap();
+        assert!(matches!(
+            &requests[..],
+            [
+                Request::Snapshot,
+                Request::Snapshot,
+                Request::Events { after: 2, .. }
+            ]
+        ));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}
+
+#[tokio::test]
+async fn active_wait_deadline_and_host_incarnation_remain_fenced() {
+    for replaced in [false, true] {
+        let owner = lease(Uuid::new_v4());
+        let mut active = snapshot(&owner, 2);
+        active.activity.turns = vec![fleetpane_runtime::lifecycle::ActiveTurn {
+            thread_id: "s".into(),
+            turn_id: Some("target".into()),
+        }];
+        let responses = if replaced {
+            active.host_id = Uuid::new_v4();
+            vec![Response::Snapshot(active)]
+        } else {
+            vec![
+                Response::Snapshot(active.clone()),
+                Response::Snapshot(active),
+                Response::Events(Vec::new()),
+            ]
+        };
+        let (mut connection, task, root) = scripted(responses).await;
+        connection.lease = owner;
+        let result = connection.wait_turn("s", "target", 25).await;
+        if replaced {
+            assert!(
+                matches!(result, Err(Error::Protocol(message)) if message.contains("incarnation"))
+            );
+        } else {
+            assert!(matches!(result.unwrap().outcome, Outcome::TimedOut));
+        }
+        let requests = task.await.unwrap();
+        assert!(
+            requests
+                .iter()
+                .all(|request| matches!(request, Request::Snapshot | Request::Events { .. }))
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}
+
+#[tokio::test]
 async fn pages_find_the_exact_turn_and_backlog_uses_delivered_cursor_across_owner_change() {
     let owner = lease(Uuid::new_v4());
     let mut state = snapshot(&owner, 9);

@@ -1,9 +1,13 @@
 # Functional parity with donut-paseo
 
-Installed-provider compatibility follow-up (2026-10-22): Codex 0.163.0 returned
-`list_turns is not supported yet` for the CLI wait history lookup. Session open
-readback succeeded, but wait needs its own capability-compatible lookup and
-regression coverage. [Observed evidence](verification/2026-10-22-workspace-tab-navigation.md).
+Installed-provider compatibility follow-up (2026-10-22): the CLI wait's first-turn
+`list_turns is not supported yet` race is repaired. Successful start replies now
+identify Host activity before notifications, and an exact active wait observes
+Host events without an initial history read. Regression tests, installed Codex
+with a gated model, and two real model turns each through OpenCodex and DeepSeek
+now have [separate acceptance](verification/2026-10-22-wait-first-turn.md).
+Other targets still require paged history; unsupported legacy storage is not
+silently retried or converted into completion.
 
 Conversation image dialogs now provide Fit/100%, two-axis scrolling, original
 source Copy and Kit modal close/focus restoration, with
