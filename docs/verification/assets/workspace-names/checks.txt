@@ -1,0 +1,23 @@
+PASS cargo test --workspace --locked (366) [workspace-tests.log.gz]
+PASS cargo clippy --workspace --all-targets --locked -- -D warnings [workspace-clippy.log.gz]
+PASS cargo build -p fleetpane-host --locked [host-build.log.gz]
+PASS cargo test --manifest-path apps/desktop/Cargo.toml --locked (49) [desktop-tests.log.gz]
+PASS cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings [desktop-clippy.log.gz]
+PASS cargo build --manifest-path apps/desktop/Cargo.toml --locked [desktop-build.log.gz]
+PASS python3 -m unittest discover -s scripts/tests -p *_test.py (22) [python-tests.log.gz]
+PASS python3 scripts/workspace-names-smoke.py [smoke.log.gz]
+PASS python3 scripts/workspace-pins-smoke.py [pins-smoke.log.gz]
+PASS python3 scripts/workspaces-smoke.py [workspaces-smoke.log.gz]
+PASS python3 scripts/completion-alert-smoke.py [completion-smoke-final.log.gz]
+PASS python3 scripts/{appearance,host-choice,last-session,recent-directories,paseo-import}-smoke.py (each separately) [migration-smokes.log.gz]
+PASS cargo fmt --all --check
+PASS cargo fmt --manifest-path apps/desktop/Cargo.toml --check
+PASS git diff --check
+Earlier migration-smokes log prints schema 17 for completion-alerts; final completion-smoke-final log reruns the corrected script and prints schema 18.
+Native final artifact exit 0; isolated workspace and owned Hosts stopped.
+Candidate CI is separate; base CI passed: https://github.com/arucil/fleetpane/actions/runs/39784854602
+FAIL before Unix module gate: cargo check --workspace --target x86_64-pc-windows-gnu --locked [windows-before.log.gz]
+PASS after Unix module gate: cargo check --workspace --target x86_64-pc-windows-gnu --locked [windows-after.log.gz]
+PASS after Unix module gate: cargo test -p fleetpane-session --locked workspace_names (4) [cfg-tests.log.gz]
+PASS after Unix module gate: cargo clippy --workspace --all-targets --locked -- -D warnings [cfg-clippy.log.gz]
+PASS after Unix module gate: cargo check --manifest-path apps/desktop/Cargo.toml --locked [cfg-desktop.log.gz]

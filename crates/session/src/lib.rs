@@ -53,6 +53,8 @@ pub mod wait;
 #[cfg(unix)]
 pub mod workspace_layout;
 #[cfg(unix)]
+pub mod workspace_names;
+#[cfg(unix)]
 pub mod workspace_pins;
 
 pub const MAX_ITEMS: usize = 500;

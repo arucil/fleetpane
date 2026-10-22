@@ -404,7 +404,7 @@ async fn persistence_cas_storage_failure_and_corruption_are_explicit() {
 async fn schema_fourteen_upgrade_preserves_drafts_and_current_table_damage_is_not_defaulted() {
     let root = std::env::temp_dir().join(format!("fp-alert-upgrade-{}", Uuid::new_v4()));
     let store = Store::open(root.clone()).await.unwrap();
-    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; PRAGMA user_version=14;")?;Ok(())}).await.unwrap();
+    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; PRAGMA user_version=14;")?;Ok(())}).await.unwrap();
     let upgraded = Store::open(root.clone()).await.unwrap();
     assert_eq!(upgraded.notifications().await.unwrap(), Saved::default());
     upgraded

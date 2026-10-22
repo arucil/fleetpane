@@ -55,6 +55,16 @@ pub(super) struct State {
 }
 
 impl Workbench {
+    pub(super) fn update_workspace_names(&mut self, workspaces: &[Workspace]) {
+        for entry in &mut self.tabs.entries {
+            if let Some(current) = &mut entry.workspace
+                && let Some(fresh) = workspaces.iter().find(|w| w.id == current.id)
+                && fresh.name.revision >= current.name.revision
+            {
+                current.name = fresh.name.clone();
+            }
+        }
+    }
     pub(super) fn tab_export_pending(&self, cx: &App) -> bool {
         self.tabs.entries.iter().any(|entry| {
             entry
@@ -673,11 +683,17 @@ impl Workbench {
                                     |(index, entry)| {
                                         let id = entry.saved.workspace;
                                         let name = entry
-                                            .saved
-                                            .directory
-                                            .file_name()
-                                            .unwrap_or(entry.saved.directory.as_os_str())
-                                            .to_string_lossy();
+                                            .workspace
+                                            .as_ref()
+                                            .map(Workspace::display_name)
+                                            .unwrap_or_else(|| {
+                                                entry
+                                                    .saved
+                                                    .directory
+                                                    .file_name()
+                                                    .unwrap_or(entry.saved.directory.as_os_str())
+                                                    .to_string_lossy()
+                                            });
                                         let host = self
                                             .slots
                                             .iter()
@@ -688,6 +704,10 @@ impl Workbench {
                                         let project = entry
                                             .workspace
                                             .as_ref()
+                                            .filter(|workspace| {
+                                                workspace.registration.project.path
+                                                    != entry.saved.directory
+                                            })
                                             .and_then(|workspace| {
                                                 workspace.registration.project.path.file_name()
                                             })

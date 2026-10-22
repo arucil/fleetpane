@@ -28,6 +28,9 @@ jobs:
         run: python3 -m unittest discover -s scripts/tests -p '*_test.py'
       - if: runner.os != 'Windows'
         run: cargo build -p fleetpane-host --locked
+      - name: Workspace display names
+        if: runner.os != 'Windows'
+        run: python3 scripts/workspace-names-smoke.py
       - name: Device appearance persistence
         if: runner.os != 'Windows'
         run: python3 scripts/appearance-smoke.py

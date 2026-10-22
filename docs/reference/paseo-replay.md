@@ -1624,3 +1624,16 @@ close retraction and explicit recovery. [Private D-Bus and Dunst acceptance](../
 covers native navigation, no replay, small windows and exact draft replacement.
 Sound/tray/dock, other-platform GUI and acknowledged delivery remain open. No
 history-review cursor or current-upstream-tip claim changes in this slice.
+
+## Workspace display names: continued implementation
+
+Follow through on the rename gap recorded at ordinal 3413,
+`3743df09e6ec260713e5839cb3f7ce9888eb26ff` (`components/rename-modal.tsx`).
+Fleetpane now persists a device-local name by saved workspace UUID and exposes
+one revision-checked command to GUI/CLI. Catalog/pins and matching tabs update
+without renaming paths or provider sessions. Reset retains revision history;
+stale writers and failed saves remain visible. [Linux fixture acceptance](../verification/2026-10-22-workspace-names.md)
+covers concurrent processes, offline edits, unchanged Host snapshots, failed-save
+close/reload, exact draft replacement and small windows. This closes the local
+workspace-label portion; project names and automatic cross-window refresh remain
+open. No history checkpoint or upstream freshness claim changes.

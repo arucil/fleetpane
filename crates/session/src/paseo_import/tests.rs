@@ -196,7 +196,7 @@ async fn schema_eight_upgrade_preserves_archives_and_requires_the_new_binding_ta
         .unwrap();
     f.store
         .job(|db| {
-            db.execute_batch("DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; PRAGMA user_version=8;")?;
+            db.execute_batch("DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; DROP TABLE attention_reviews; DROP TABLE host_selection; DROP TABLE paseo_batch_results; DROP TABLE paseo_batches; DROP TABLE paseo_continuations; PRAGMA user_version=8;")?;
             Ok(())
         })
         .await

@@ -1,0 +1,367 @@
+{
+  "desktop_sha256": "15f4d68ccf935c05fd0314cdb03a12c87048b0d463a173fa9c808f2bcdfefe4b",
+  "name_revision": 7,
+  "host_snapshots_exactly_unchanged": true,
+  "failed_save_close_refused": true,
+  "catalog_refresh_keeps_close_error": true,
+  "reload_clears_error": true,
+  "successful_save_after_trigger_removed": true,
+  "snapshots": [
+    {
+      "protocol": 3,
+      "host_id": "8560c4ce-0176-4ccd-a9d6-7f81db6b1913",
+      "host_pid": 764935,
+      "provider_pid": 764942,
+      "provider_info": {
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "codex",
+        "fleetpaneTerminalVersion": 1,
+        "userAgent": "synthetic-provider/1"
+      },
+      "owner": {
+        "host_id": "8560c4ce-0176-4ccd-a9d6-7f81db6b1913",
+        "controller_id": "525b3bef-3ee8-4b33-891e-5b194a6bb484",
+        "generation": 8
+      },
+      "sequence": 51,
+      "operation_ids": [
+        "64c84ca2-52b9-44f4-878e-a4da78e7249a",
+        "f693405b-8eba-4cf0-ae3a-ab892cd4e237",
+        "cdab95d0-fd96-47bb-a9ab-aa27f4bdbc88",
+        "813f3e8a-be42-439d-afd6-ee297f21d1ef",
+        "f8b89c50-d2a7-46d9-82ec-5a5595e3ece2",
+        "468135bc-8d12-404c-a8ac-4b234421c4a9",
+        "759e84e6-b331-45ff-97a9-aeaa0661fe19"
+      ],
+      "journal_total": 7,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "fixture-thread-2",
+            "turn_id": "fixture-thread-2-turn-1"
+          },
+          {
+            "thread_id": "fixture-thread-3",
+            "turn_id": "fixture-thread-3-turn-1"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-2-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "选择实现语言？"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "补充要求（支持中文和换行）"
+              }
+            ],
+            "threadId": "fixture-thread-2",
+            "turnId": "fixture-thread-2-turn-1"
+          }
+        },
+        {
+          "id": "questions-fixture-thread-3-turn-1",
+          "method": "item/tool/requestUserInput",
+          "params": {
+            "isBlocking": true,
+            "itemId": "input-fixture-thread-3-turn-1",
+            "questions": [
+              {
+                "header": "Language",
+                "id": "language",
+                "isOther": true,
+                "isSecret": false,
+                "options": [
+                  {
+                    "description": "Native performance and explicit ownership.",
+                    "label": "Rust (Recommended)"
+                  },
+                  {
+                    "description": "Simple concurrency and quick builds.",
+                    "label": "Go"
+                  }
+                ],
+                "question": "选择实现语言？"
+              },
+              {
+                "header": "Details",
+                "id": "notes",
+                "isOther": false,
+                "isSecret": false,
+                "options": null,
+                "question": "补充要求（支持中文和换行）"
+              }
+            ],
+            "threadId": "fixture-thread-3",
+            "turnId": "fixture-thread-3-turn-1"
+          }
+        }
+      ],
+      "pending_observations": [
+        {
+          "id": "questions-fixture-thread-2-turn-1",
+          "sequence": 29,
+          "observed_unix_ms": 1792676992141
+        },
+        {
+          "id": "questions-fixture-thread-3-turn-1",
+          "sequence": 35,
+          "observed_unix_ms": 1792676993127
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792676991393,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-1",
+            "kind": "completed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 22,
+            "observed_unix_ms": 1792676992032,
+            "thread_id": "fixture-thread-1",
+            "turn_id": "fixture-thread-1-turn-2",
+            "kind": "failed",
+            "stop_reason": null
+          }
+        ],
+        "evicted": 0
+      },
+      "session_directories": {
+        "records": [
+          {
+            "thread_id": "fixture-thread-1",
+            "cwd": "/tmp/fp-names-native/0"
+          },
+          {
+            "thread_id": "fixture-thread-2",
+            "cwd": "/tmp/fp-names-native/0"
+          },
+          {
+            "thread_id": "fixture-thread-3",
+            "cwd": "/tmp/fp-names-native/shared 中文"
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    },
+    {
+      "protocol": 3,
+      "host_id": "2fde8f05-2711-4b18-9de9-564fee398dee",
+      "host_pid": 765276,
+      "provider_pid": 765293,
+      "provider_info": {
+        "agentCapabilities": {
+          "sessionCapabilities": {
+            "close": {},
+            "list": {},
+            "resume": {}
+          }
+        },
+        "agentInfo": {
+          "name": "synthetic-acp",
+          "version": "1"
+        },
+        "authMethods": [],
+        "fleetpaneAttachmentVersion": 1,
+        "fleetpaneProvider": "deepseek-acp",
+        "fleetpaneTerminalVersion": 1,
+        "protocolVersion": 1
+      },
+      "owner": {
+        "host_id": "2fde8f05-2711-4b18-9de9-564fee398dee",
+        "controller_id": "384fe52d-2c78-4b44-9fea-2dc9b69f5e41",
+        "generation": 11
+      },
+      "sequence": 69,
+      "operation_ids": [
+        "6fb26e77-2f41-4229-8c1c-08433bc2a3e0",
+        "91901236-f166-450f-8e83-b4940ce88a55",
+        "9853e84d-4cf9-4e69-8e15-289dff8f19eb",
+        "2ff9597b-a578-4201-8c68-7f3c49bbcddf",
+        "cf7d44c0-4228-41f0-b7cb-69aa9049bb69",
+        "dc8fada3-354d-4e09-8bb5-0e40a38f409e",
+        "8c017934-adbe-4304-b86e-8b41e1a77173",
+        "1eb4e64c-3102-493e-829c-f3148ea791a4",
+        "11632e95-e7b4-4503-9e85-86408962302d"
+      ],
+      "journal_total": 9,
+      "admission": {
+        "generation": 0,
+        "mode": "ready"
+      },
+      "activity": {
+        "stopping": [],
+        "terminal_ids": [],
+        "turns": [
+          {
+            "thread_id": "25b45548-f8eb-4f81-887d-fbddf799cc67",
+            "turn_id": "52c76206-7b5f-4089-b54f-972fab7bfb4a"
+          },
+          {
+            "thread_id": "981c5b5a-ac51-4803-bc1d-d7ea3cc0385c",
+            "turn_id": "78f29d31-4e2b-408e-a4ae-4fe5152a7625"
+          }
+        ],
+        "in_flight_operations": 0,
+        "unknown_operations": 0
+      },
+      "pending_requests": [
+        {
+          "id": 10,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "981c5b5a-ac51-4803-bc1d-d7ea3cc0385c",
+            "threadId": "981c5b5a-ac51-4803-bc1d-d7ea3cc0385c",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-5f72c2ed-d64d-4579-9720-a1021b2ae873"
+            }
+          }
+        },
+        {
+          "id": 11,
+          "method": "session/request_permission",
+          "params": {
+            "options": [
+              {
+                "kind": "allow_once",
+                "name": "Run this tool",
+                "optionId": "allow-one"
+              },
+              {
+                "kind": "reject_once",
+                "name": "Skip this tool",
+                "optionId": "reject-one"
+              }
+            ],
+            "sessionId": "25b45548-f8eb-4f81-887d-fbddf799cc67",
+            "threadId": "25b45548-f8eb-4f81-887d-fbddf799cc67",
+            "toolCall": {
+              "title": "Synthetic tool",
+              "toolCallId": "call-56021b32-e14a-4c12-b8c8-8d666bd5a424"
+            }
+          }
+        }
+      ],
+      "pending_observations": [
+        {
+          "id": 10,
+          "sequence": 40,
+          "observed_unix_ms": 1792676992976
+        },
+        {
+          "id": 11,
+          "sequence": 48,
+          "observed_unix_ms": 1792676993312
+        }
+      ],
+      "attention": {
+        "records": [
+          {
+            "sequence": 11,
+            "observed_unix_ms": 1792676992632,
+            "thread_id": "cb191b49-2d84-405d-a9c4-347c534b0b8f",
+            "turn_id": "fed66b96-ac2b-490f-84c8-a439572ac307",
+            "kind": "completed",
+            "stop_reason": "end_turn"
+          },
+          {
+            "sequence": 17,
+            "observed_unix_ms": 1792676992694,
+            "thread_id": "cb191b49-2d84-405d-a9c4-347c534b0b8f",
+            "turn_id": "dc40364f-c3a3-4663-a151-356ca938eb47",
+            "kind": "failed",
+            "stop_reason": null
+          },
+          {
+            "sequence": 24,
+            "observed_unix_ms": 1792676992771,
+            "thread_id": "cb191b49-2d84-405d-a9c4-347c534b0b8f",
+            "turn_id": "e2b1962c-d83e-4633-9846-782c69ead0c9",
+            "kind": "completed",
+            "stop_reason": "refusal"
+          },
+          {
+            "sequence": 31,
+            "observed_unix_ms": 1792676992848,
+            "thread_id": "cb191b49-2d84-405d-a9c4-347c534b0b8f",
+            "turn_id": "a220120d-30b6-4e49-bede-3c5cb0725c0e",
+            "kind": "interrupted",
+            "stop_reason": "cancelled"
+          }
+        ],
+        "evicted": 0
+      },
+      "session_directories": {
+        "records": [
+          {
+            "thread_id": "cb191b49-2d84-405d-a9c4-347c534b0b8f",
+            "cwd": "/tmp/fp-names-native/1"
+          },
+          {
+            "thread_id": "981c5b5a-ac51-4803-bc1d-d7ea3cc0385c",
+            "cwd": "/tmp/fp-names-native/1"
+          },
+          {
+            "thread_id": "25b45548-f8eb-4f81-887d-fbddf799cc67",
+            "cwd": "/tmp/fp-names-native/shared 中文"
+          }
+        ],
+        "evicted": 0
+      },
+      "fault": null,
+      "fault_scope": null
+    }
+  ]
+}

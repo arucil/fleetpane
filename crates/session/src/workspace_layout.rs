@@ -308,6 +308,7 @@ mod tests {
             inode: saved.inode,
         };
         let mut workspace = Workspace {
+            name: Default::default(),
             position: 1,
             id: saved.workspace,
             project_id: Uuid::new_v4(),
@@ -394,7 +395,7 @@ mod tests {
     async fn schema_thirteen_migrates_without_losing_drafts() {
         let root = std::env::temp_dir().join(format!("fp-layout-upgrade-{}", Uuid::new_v4()));
         let store = Store::open(root.clone()).await.unwrap();
-        store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; PRAGMA user_version=13;")?;Ok(())}).await.unwrap();
+        store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft'); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; PRAGMA user_version=13;")?;Ok(())}).await.unwrap();
         let reopened = Store::open(root.clone()).await.unwrap();
         assert_eq!(reopened.workspace_layout().await.unwrap(), Saved::default());
         reopened

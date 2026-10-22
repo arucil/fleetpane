@@ -258,7 +258,7 @@ mod tests {
     async fn schema_upgrade_and_limits_do_not_replace_existing_state() {
         let root = std::env::temp_dir().join(format!("fp-last-{}", Uuid::new_v4()));
         let store = Store::open(root.clone()).await.unwrap();
-        store.job(|db| {db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact legacy draft'); DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; PRAGMA user_version=12;")?;Ok(())}).await.unwrap();
+        store.job(|db| {db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact legacy draft'); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; DROP TABLE notification_preferences; DROP TABLE workspace_layout; DROP TABLE session_selection; PRAGMA user_version=12;")?;Ok(())}).await.unwrap();
         let reopened = Store::open(root.clone()).await.unwrap();
         assert_eq!(
             reopened

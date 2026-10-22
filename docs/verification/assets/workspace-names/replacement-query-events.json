@@ -1,0 +1,170 @@
+{
+  "response": "events",
+  "data": [
+    {
+      "sequence": 42,
+      "message": {
+        "id": "query:75fe4788-12bb-48b1-955d-b8880001f9ec",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fp-names-native/shared 中文",
+              "historyMode": "paginated",
+              "id": "fixture-thread-3",
+              "name": null,
+              "preview": "[questions]",
+              "status": {
+                "activeFlags": [],
+                "type": "active"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 43,
+      "message": {
+        "id": "query:be93826b-fc16-4d22-bc03-191a29f180ff",
+        "result": {
+          "thread": {
+            "cwd": "/tmp/fp-names-native/shared 中文",
+            "historyMode": "paginated",
+            "id": "fixture-thread-3",
+            "name": null,
+            "preview": "[questions]",
+            "status": {
+              "activeFlags": [],
+              "type": "active"
+            },
+            "turns": []
+          }
+        }
+      }
+    },
+    {
+      "sequence": 44,
+      "message": {
+        "id": "query:ba1ea831-9b50-4519-a09e-78747d1a05d7",
+        "result": {
+          "backwardsCursor": null,
+          "data": [
+            {
+              "error": null,
+              "fixtureOptions": {},
+              "id": "fixture-thread-3-turn-1",
+              "items": [],
+              "status": "inProgress"
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 45,
+      "message": {
+        "id": "query:71d8bece-8b35-4e8b-895a-4ed4b5dd980e",
+        "result": {
+          "backwardsCursor": null,
+          "data": [
+            {
+              "item": {
+                "content": [
+                  {
+                    "text": "[questions]",
+                    "type": "text"
+                  }
+                ],
+                "id": "user-fixture-thread-3-turn-1",
+                "type": "userMessage"
+              },
+              "turnId": "fixture-thread-3-turn-1"
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 46,
+      "message": {
+        "id": "query:8fa13ad8-69f1-4675-85e0-4bb4daec98ab",
+        "result": {
+          "data": [
+            {
+              "defaultReasoningEffort": "medium",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Balanced 测试模型",
+              "hidden": false,
+              "id": "fixture-balanced",
+              "isDefault": true,
+              "model": "fixture-balanced",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic medium",
+                  "reasoningEffort": "medium"
+                },
+                {
+                  "description": "Synthetic high",
+                  "reasoningEffort": "high"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "low",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Quick 测试模型",
+              "hidden": false,
+              "id": "fixture-quick",
+              "isDefault": false,
+              "model": "fixture-quick",
+              "supportedReasoningEfforts": [
+                {
+                  "description": "Synthetic low",
+                  "reasoningEffort": "low"
+                }
+              ]
+            },
+            {
+              "defaultReasoningEffort": "none",
+              "description": "Synthetic provider capability; no external model call",
+              "displayName": "Basic · no reasoning control",
+              "hidden": false,
+              "id": "fixture-basic",
+              "isDefault": false,
+              "model": "fixture-basic",
+              "supportedReasoningEfforts": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    },
+    {
+      "sequence": 47,
+      "message": {
+        "id": "query:a71915ec-c896-48e3-8566-28c99f838357",
+        "result": {
+          "data": [
+            {
+              "cwd": "/tmp/fp-names-native/shared 中文",
+              "historyMode": "paginated",
+              "id": "fixture-thread-3",
+              "name": null,
+              "preview": "[questions]",
+              "status": {
+                "activeFlags": [],
+                "type": "active"
+              },
+              "turns": []
+            }
+          ],
+          "nextCursor": null
+        }
+      }
+    }
+  ]
+}

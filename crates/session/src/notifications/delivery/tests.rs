@@ -300,7 +300,7 @@ async fn schema_fifteen_upgrade_retains_policy_and_drafts_and_current_damage_is_
         )
         .await
         .unwrap();
-    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft 中文'); DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; PRAGMA user_version=15;")?;Ok(())}).await.unwrap();
+    store.job(|db|{db.execute_batch("INSERT INTO drafts VALUES('retained',7,'exact draft 中文'); DROP TABLE workspace_names; DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors; PRAGMA user_version=15;")?;Ok(())}).await.unwrap();
     let reopened = Store::open(root.clone()).await.unwrap();
     let source = observation();
     assert!(claim(&reopened, &source).await.items.is_empty());
@@ -315,7 +315,7 @@ async fn schema_fifteen_upgrade_retains_policy_and_drafts_and_current_damage_is_
             );
             assert_eq!(
                 db.query_row("PRAGMA user_version", [], |r| r.get::<_, u32>(0))?,
-                17
+                18
             );
             db.execute_batch(
                 "DROP TABLE pending_alert_cursors; DROP TABLE completion_alert_cursors;",

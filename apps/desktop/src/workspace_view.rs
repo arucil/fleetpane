@@ -1,4 +1,5 @@
 //! Existing local directories. Host/provider lifetime and ownership stay separate.
+mod names;
 use crate::file_locations::Locations;
 use crate::files_view::FilesView;
 use crate::host_view::background;
@@ -32,6 +33,8 @@ enum Action {
     Check(Uuid),
     Diff(Uuid, Scope, String),
     Pin(Uuid, bool),
+    Rename(Uuid, u64, Option<String>),
+    ReloadName(Uuid),
 }
 enum Reply {
     List(Vec<Workspace>, Vec<Job>, Vec<Workspace>),
@@ -41,7 +44,10 @@ enum Reply {
     Use(Workspace),
     Job(Job, Vec<Job>, Vec<Workspace>),
     Diff(Overview, FileDiff),
+    Name(Workspace),
 }
+
+pub(crate) struct NamesUpdated(pub Vec<Workspace>);
 
 struct PresentedDiff {
     file: FileDiff,
@@ -57,6 +63,10 @@ pub struct WorkspaceView {
     branch: Entity<InputState>,
     branch_mode: BranchMode,
     base: Entity<InputState>,
+    name_input: Entity<InputState>,
+    name_target: Option<Workspace>,
+    name_saving: bool,
+    name_error: Option<String>,
     records: Vec<Workspace>,
     pins: Vec<Workspace>,
     jobs: Vec<Job>,
@@ -77,11 +87,15 @@ pub struct WorkspaceView {
 }
 
 impl EventEmitter<Workspace> for WorkspaceView {}
+impl EventEmitter<NamesUpdated> for WorkspaceView {}
 impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
+    pub(crate) fn name_save_failed(&self) -> bool {
+        self.name_error.is_some()
+    }
     pub(crate) fn shortcut_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
-        [&self.input, &self.branch, &self.base]
+        [&self.input, &self.branch, &self.base, &self.name_input]
             .iter()
             .any(|input| crate::input_composition::active(input, window, cx))
             || self.files.as_ref().is_some_and(|view| {
@@ -102,6 +116,12 @@ impl WorkspaceView {
             .is_some_and(|view| view.read(cx).export_pending())
     }
     pub(crate) fn close_status(&self, cx: &App) -> Result<bool, String> {
+        if let Some(error) = &self.name_error {
+            return Err(format!("Workspace name save: {error}"));
+        }
+        if self.name_saving {
+            return Ok(false);
+        }
         if self.export_pending(cx) {
             return Ok(false);
         }
@@ -126,6 +146,8 @@ impl WorkspaceView {
         let input =
             cx.new(|cx| InputState::new(window, cx).placeholder("Absolute existing directory"));
         let branch = cx.new(|cx| InputState::new(window, cx).placeholder("Local branch name"));
+        let name_input =
+            cx.new(|cx| InputState::new(window, cx).placeholder("Custom workspace name"));
         let base = cx.new(|cx| {
             let mut input = InputState::new(window, cx).placeholder("Base ref or commit");
             input.set_value("HEAD", window, cx);
@@ -139,6 +161,10 @@ impl WorkspaceView {
             branch,
             branch_mode: BranchMode::New,
             base,
+            name_input,
+            name_target: None,
+            name_saving: false,
+            name_error: None,
             records: vec![],
             pins: vec![],
             jobs: vec![],
@@ -173,11 +199,23 @@ impl WorkspaceView {
             return;
         }
         self.busy = true;
+        let name_action = matches!(action, Action::Rename(..) | Action::ReloadName(..));
+        self.name_saving = name_action;
         self.error = None;
-        if !matches!(action, Action::Pin(..)) {
+        if !matches!(
+            action,
+            Action::Pin(..) | Action::Rename(..) | Action::ReloadName(..)
+        ) {
             self.diff = None;
         }
-        if !matches!(action, Action::List(_) | Action::Diff(..) | Action::Pin(..)) {
+        if !matches!(
+            action,
+            Action::List(_)
+                | Action::Diff(..)
+                | Action::Pin(..)
+                | Action::Rename(..)
+                | Action::ReloadName(..)
+        ) {
             self.overview = None;
             self.job = None;
         }
@@ -199,6 +237,10 @@ impl WorkspaceView {
                     Action::Pin(id, pinned) => {
                         Ok(Reply::Pinned(store.set_workspace_pinned(id, pinned).await?))
                     }
+                    Action::Rename(id, revision, name) => Ok(Reply::Name(
+                        store.rename_workspace(id, revision, name).await?,
+                    )),
+                    Action::ReloadName(id) => Ok(Reply::Name(store.workspace(id).await?)),
                     Action::Register(kind) => {
                         let workspace = store.register_workspace(endpoint, path, kind).await?;
                         let overview = workspace.inspect().await?;
@@ -254,16 +296,31 @@ impl WorkspaceView {
         });
         cx.spawn_in(window, async move |this, cx| {
             let reply = task.await;
-            let _closed = this.update_in(cx, |this, _, cx| {
+            let _closed = this.update_in(cx, |this, window, cx| {
                 this.busy = false;
+                this.name_saving = false;
                 match reply {
-                    Ok(Reply::List(records,jobs,pins)) => { this.records = records; this.jobs=jobs; this.pins=pins; }
+                    Ok(Reply::List(records,jobs,pins)) => { cx.emit(NamesUpdated(records.iter().chain(&pins).cloned().collect())); this.records = records; this.jobs=jobs; this.pins=pins; }
                     Ok(Reply::Pinned(pins)) => this.pins=pins,
                     Ok(Reply::Registered(records, overview)) => {
                         this.records = records;
                         this.overview = Some(overview);
                     }
-                    Ok(Reply::Inspected(overview)) => this.overview = Some(overview),
+                    Ok(Reply::Inspected(overview)) => {
+                        cx.emit(NamesUpdated(vec![overview.workspace.clone()]));
+                        this.overview = Some(overview);
+                    }
+                    Ok(Reply::Name(workspace)) => {
+                        for record in this.records.iter_mut().chain(&mut this.pins) {
+                            if record.id == workspace.id { record.name = workspace.name.clone(); }
+                        }
+                        if let Some(overview) = &mut this.overview
+                            && overview.workspace.id == workspace.id { overview.workspace.name = workspace.name.clone(); }
+                        this.name_target=Some(workspace.clone());
+                        this.set_name_input(&workspace, window, cx);
+                        this.name_error = None;
+                        cx.emit(NamesUpdated(vec![workspace]));
+                    }
                     Ok(Reply::Job(job,jobs,records)) => { this.job=Some(job); this.jobs=jobs; this.records=records; }
                     Ok(Reply::Diff(overview, file)) => {
                         let state = match &file.content {
@@ -289,6 +346,7 @@ impl WorkspaceView {
                             ));
                         }
                     }
+                    Err(error) if name_action => this.name_error = Some(error.to_string()),
                     Err(error) => this.error = Some(error.to_string()),
                 }
                 cx.notify();
@@ -296,6 +354,12 @@ impl WorkspaceView {
         })
         .detach();
         cx.notify();
+    }
+
+    fn set_name_input(&self, workspace: &Workspace, window: &mut Window, cx: &mut Context<Self>) {
+        let value = workspace.name.value.clone().unwrap_or_default();
+        self.name_input
+            .update(cx, |input, cx| input.set_value(value, window, cx));
     }
 }
 
@@ -430,7 +494,12 @@ impl WorkspaceView {
                             .label(format!(
                                 "{} · {}",
                                 workspace.registration.endpoint.name,
-                                branch.unwrap_or(name.as_ref())
+                                workspace
+                                    .name
+                                    .value
+                                    .as_deref()
+                                    .or(branch)
+                                    .unwrap_or(name.as_ref())
                             ))
                             .disabled(self.busy)
                             .on_click(cx.listener(
@@ -439,6 +508,29 @@ impl WorkspaceView {
                                 },
                             )),
                         ),
+                    )
+                    .child(
+                        Button::new((
+                            if shortcut {
+                                "rename-pinned"
+                            } else {
+                                "rename-workspace"
+                            },
+                            index,
+                        ))
+                        .small()
+                        .label("Rename")
+                        .disabled(self.busy || self.name_error.is_some())
+                        .on_click(cx.listener({
+                            let workspace = workspace.clone();
+                            move |this, _, window, cx| {
+                                this.name_target = Some(workspace.clone());
+                                this.set_name_input(&workspace, window, cx);
+                                this.name_input
+                                    .update(cx, |input, cx| input.focus(window, cx));
+                                cx.notify();
+                            }
+                        })),
                     )
                     .child(
                         Button::new((
@@ -549,9 +641,10 @@ impl Render for WorkspaceView {
                         }))
                     )
                 )
-                .child(div().flex_1().min_w_0().flex().flex_col().gap_2()
-                    .when(self.overview.is_none()&&self.job.is_none(),|view|view.child("Select a saved workspace to inspect its current directory."))
-                    .when_some(self.job.as_ref(),|view,job| {
+                .child(div().flex_1().min_w_0().min_h_0().flex().flex_col().gap_2()
+                    .when(self.name_target.is_some(),|view|view.child(div().id("workspace-name-editor").flex_1().min_h_0().overflow_y_scroll().child(self.name_editor(cx))))
+                    .when(self.name_target.is_none()&&self.overview.is_none()&&self.job.is_none(),|view|view.child("Select a saved workspace to inspect its current directory."))
+                    .when_some(self.job.as_ref().filter(|_|self.name_target.is_none()),|view,job| {
                         let id=job.plan.id;
                         let copy_path=job.plan.path.to_string_lossy().into_owned();
                         view.child(div().text_sm().child(format!("Worktree creation {id}")))
@@ -570,7 +663,7 @@ impl Render for WorkspaceView {
                                 .child("Completed and registered. Open the workspace to prepare a session.")
                                 .child(Button::new("open-created-worktree").small().label("Open workspace").disabled(self.busy).on_click(cx.listener(move|this,_,window,cx|this.run(Action::Inspect(workspace_id),window,cx)))))
                     })
-                    .when_some(self.overview.as_ref().filter(|_| self.diff.is_none()),|view,overview| {
+                    .when_some(self.overview.as_ref().filter(|_| self.diff.is_none() && self.name_target.is_none()),|view,overview| {
                         let id=overview.workspace.id;
                         let workspace=overview.workspace.clone();
                         let registration=&overview.workspace.registration;

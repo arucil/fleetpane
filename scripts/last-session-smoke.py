@@ -39,6 +39,7 @@ def main():
         with sqlite3.connect(database) as db:
             db.execute("DROP TRIGGER reject_last_session")
             db.execute("INSERT INTO drafts VALUES('retained',7,'exact legacy draft')")
+            db.execute("DROP TABLE workspace_names")
             db.execute("DROP TABLE pending_alert_cursors")
             db.execute("DROP TABLE completion_alert_cursors")
             db.execute("DROP TABLE notification_preferences")
@@ -47,7 +48,7 @@ def main():
             db.execute("PRAGMA user_version=12")
         assert run(a, "get") == {"revision": 0, "target": None}
         with sqlite3.connect(database) as db:
-            assert db.execute("PRAGMA user_version").fetchone()[0] == 17
+            assert db.execute("PRAGMA user_version").fetchone()[0] == 18
             assert db.execute("SELECT data FROM drafts").fetchone()[0] == "exact legacy draft"
         run(a, "set", 0, json.dumps(target))
         with sqlite3.connect(database) as db:

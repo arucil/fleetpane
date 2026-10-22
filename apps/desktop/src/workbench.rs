@@ -54,6 +54,7 @@ pub struct Workbench {
     browsing_workspaces: bool,
     workspace_view: Option<Entity<WorkspaceView>>,
     workspace_subscription: Option<Subscription>,
+    workspace_names_subscription: Option<Subscription>,
     continuation_subscription: Option<Subscription>,
     file_navigation: files::State,
     attention: attention::State,
@@ -145,6 +146,7 @@ impl Workbench {
             browsing_workspaces: false,
             workspace_view: None,
             workspace_subscription: None,
+            workspace_names_subscription: None,
             continuation_subscription: None,
             file_navigation: files::State::default(),
             attention: attention::State::new(cx),
@@ -353,6 +355,20 @@ impl Workbench {
                     cx,
                 )
             });
+            self.workspace_names_subscription = Some(cx.subscribe(
+                &view,
+                |this, view, event: &crate::workspace_view::NamesUpdated, cx| {
+                    this.update_workspace_names(&event.0);
+                    if !view.read(cx).name_save_failed()
+                        && this.close_error.as_ref().is_some_and(|error| {
+                            error.starts_with("Window remains open: Workspace name save:")
+                        })
+                    {
+                        this.close_error = None;
+                    }
+                    cx.notify();
+                },
+            ));
             self.workspace_subscription = Some(cx.subscribe_in(
                 &view,
                 window,
