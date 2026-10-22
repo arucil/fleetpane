@@ -1,0 +1,20 @@
+FILE packages/app/src/stores/session-store.ts
+RANGE {"path":"packages/app/src/stores/session-store.ts","old_lines":[144,146],"new_lines":[144,161],"diff_block_lines":[7,24],"hunk_header":"@@ -143,4 +143,19 @@ export function normalizeWorkspaceDescriptor(","substantive_changed_lines":10}
+ 
++export function mergeWorkspaceSnapshotWithExisting(input: {
++  incoming: WorkspaceDescriptor;
++  existing?: WorkspaceDescriptor | null;
++}): WorkspaceDescriptor {
++  const { incoming, existing } = input;
++  if (!existing || existing.id !== incoming.id) {
++    return incoming;
++  }
++
++  return {
++    ...incoming,
++    diffStat: incoming.diffStat ?? existing.diffStat,
++  };
++}
++
+ export type ExplorerEntryKind = "file" | "directory";
+ export type ExplorerFileKind = "text" | "image" | "binary";

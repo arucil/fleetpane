@@ -1,0 +1,21 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[70,72],"new_lines":[70,88],"diff_block_lines":[7,25],"hunk_header":"@@ -69,4 +69,20 @@ const HISTORY_STALE_AFTER_MS = 60_000;","substantive_changed_lines":12}
+ 
++function hasAgentUsageChanged(
++  incomingUsage: Agent["lastUsage"] | undefined,
++  currentUsage: Agent["lastUsage"] | undefined,
++): boolean {
++  const keys: Array<keyof NonNullable<Agent["lastUsage"]>> = [
++    "inputTokens",
++    "outputTokens",
++    "cachedInputTokens",
++    "totalCostUsd",
++    "contextWindowMaxTokens",
++    "contextWindowUsedTokens",
++  ];
++
++  return keys.some((key) => incomingUsage?.[key] !== currentUsage?.[key]);
++}
++
+ type AudioOutputPayload = Extract<SessionOutboundMessage, { type: "audio_output" }>["payload"];
+ 

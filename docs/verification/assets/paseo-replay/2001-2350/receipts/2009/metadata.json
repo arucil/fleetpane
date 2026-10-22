@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2009,
+  "revision": "a4326ec5c04ffa1049ff2f1e811dfb33acaa17dd",
+  "date": "2026-04-01T23:31:49+07:00",
+  "committer_date": "2026-04-01T23:58:00+07:00",
+  "parents": [
+    "cc09b61b190ea50891064ed5c8249f849c3cb1a9"
+  ],
+  "subject": "Fix Claude bypass mode after query restarts",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:9c349886417e43a77721ac7a5769a890d4787b9a3fa902c340a3b7fda5fb599b",
+  "diff_tree_digest": "sha256:b704bb0e8815caa32fb266201e733bc1bae172fb6ae10e1ccaa198da66d01f12",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1890,
+        1893
+      ],
+      "new_lines": [
+        1890,
+        1897
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -1890,4 +1890,8 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 49,
+  "receipt_file": "receipts/2009/selected.patch"
+}

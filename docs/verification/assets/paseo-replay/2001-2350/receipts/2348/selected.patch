@@ -1,0 +1,15 @@
+FILE packages/app/src/utils/terminal-keys.ts
+RANGE {"path":"packages/app/src/utils/terminal-keys.ts","old_lines":[91,93],"new_lines":[93,104],"diff_block_lines":[13,25],"hunk_header":"@@ -86,8 +86,19 @@ export function shouldInterceptDomTerminalKey(args: {","substantive_changed_lines":6}
+-  return hasPendingTerminalModifiers(args.pendingModifiers);
++  if (hasPendingTerminalModifiers(args.pendingModifiers)) {
++    return true;
++  }
++  // xterm.js sends plain \r for Enter regardless of modifiers.
++  // Intercept modified Enter so it gets CSI u encoding (Kitty keyboard protocol),
++  // which Claude Code and other TUI apps use for Shift+Enter newlines.
++  if (args.key === "Enter" && (args.shiftKey || args.ctrlKey || args.altKey || args.metaKey)) {
++    return true;
++  }
++  return false;
+ }
+ 

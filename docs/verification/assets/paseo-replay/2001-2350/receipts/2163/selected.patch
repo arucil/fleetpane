@@ -1,0 +1,13 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[5,11],"new_lines":[5,11],"diff_block_lines":[7,17],"hunk_header":"@@ -4,8 +4,8 @@","substantive_changed_lines":8}
+ ### Fixed
+-- Provider/model selector hydration on app connect — session state now seeds daemon feature flags immediately, so provider snapshots and model lists load reliably on first open instead of waiting for a later status refresh.
+-- Running agent model picker now stays scoped to the agent's current provider instead of exposing all providers from the shared snapshot cache.
+-- Provider snapshot warm-up now happens at the session layer instead of per workspace screen, so model data is prefetched consistently across entry points.
+-- Removed the remaining legacy provider/model fetch fallbacks in the app so draft and running-agent flows both use the same real-time provider snapshot path.
++- Models and providers now load reliably on first app connect instead of requiring a second status refresh.
++- Model picker on running agents now only shows models from the agent's own provider, not every provider on the server.
++- Model data is now prefetched consistently regardless of which screen you open first.
++- Draft and running-agent flows now share the same provider data path, eliminating stale model lists from legacy fallbacks.
+ 
+ ## 0.1.48 - 2026-04-05

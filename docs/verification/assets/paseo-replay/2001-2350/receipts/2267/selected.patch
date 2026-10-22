@@ -1,0 +1,22 @@
+FILE packages/app/src/constants/layout.ts
+RANGE {"path":"packages/app/src/constants/layout.ts","old_lines":[64,76],"new_lines":[64,73],"diff_block_lines":[13,32],"hunk_header":"@@ -63,14 +63,11 @@ export function getIsElectronRuntime(): boolean {","substantive_changed_lines":9}
+ 
+-export function isCompactFormFactor(): boolean {
+-  return UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
+-}
+-
+-export function isDesktopFormFactor(): boolean {
+-  return !isCompactFormFactor();
+-}
+-
+-export function isTouchDesktopFormFactor(): boolean {
+-  return Platform.OS !== "web" && isDesktopFormFactor();
++/**
++ * Reactive hook — re-renders the component when the breakpoint changes.
++ * Always use this instead of reading UnistylesRuntime.breakpoint directly.
++ */
++export function useIsCompactFormFactor(): boolean {
++  const { rt } = useUnistyles();
++  return rt.breakpoint === "xs" || rt.breakpoint === "sm";
+ }
+ 

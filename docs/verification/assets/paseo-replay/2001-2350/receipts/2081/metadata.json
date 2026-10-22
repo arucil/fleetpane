@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2081,
+  "revision": "9154f8fc4d45959c7988d39b66bf5965120387bc",
+  "date": "2026-04-04T14:35:41+07:00",
+  "committer_date": "2026-04-04T15:35:41+08:00",
+  "parents": [
+    "3d3e327378059cd2e53f5668196dbf140252a2e1"
+  ],
+  "subject": "fix(server): deduplicate workspaces by git worktree root (#190)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.test.ts",
+    "M\tpackages/app/src/utils/project-placement.test.ts",
+    "M\tpackages/app/src/utils/project-placement.ts",
+    "M\tpackages/server/src/poc-commands/commands-poc.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-sdk-behavior.test.ts",
+    "M\tpackages/server/src/server/loop-service.test.ts",
+    "M\tpackages/server/src/server/loop-service.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/workspace-registry-bootstrap.ts",
+    "M\tpackages/server/src/server/workspace-registry-model.test.ts",
+    "M\tpackages/server/src/server/workspace-registry-model.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:f61c601ab2e9024744e08fd6b57ba8d4c660970d08777e1d9fef6ae0944eb4f7",
+  "diff_tree_digest": "sha256:342af320cfe0d0922d1cbe04525d9417f92fc1d6002e86134cea58775425df7e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5150,
+        5151
+      ],
+      "new_lines": [
+        5180,
+        5203
+      ],
+      "diff_block_lines": [
+        104,
+        127
+      ],
+      "hunk_header": "@@ -5148,4 +5174,30 @@ export class Session {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 310,
+  "receipt_file": "receipts/2081/selected.patch"
+}

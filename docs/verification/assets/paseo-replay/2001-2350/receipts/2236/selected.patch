@@ -1,0 +1,22 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[359,365],"new_lines":[378,396],"diff_block_lines":[29,48],"hunk_header":"@@ -356,10 +356,41 @@ function WorkspaceHoverCardContent({","substantive_changed_lines":12}
++                  if (isService) {
++                    accessibilityStatus = isRunning ? getScriptHealthLabel(script.health) : "Stopped";
++                  } else if (isRunning) {
++                    accessibilityStatus = "Running";
++                  } else if (exitCode === 0) {
++                    accessibilityStatus = "Completed";
++                  } else if (exitCode !== null) {
++                    accessibilityStatus = `Failed (exit ${exitCode})`;
++                  } else {
++                    accessibilityStatus = "Stopped";
++                  }
++
+                   return (
+                     <Pressable
+                       key={script.hostname}
+                       accessibilityRole={isLinkable ? "link" : undefined}
+-                      accessibilityLabel={`${script.scriptName} script — ${isRunning ? getScriptHealthLabel(script.health) : "Stopped"}`}
++                      accessibilityLabel={`${script.scriptName} script — ${accessibilityStatus}`}
+                       testID={`hover-card-script-${script.scriptName}`}
+                       style={({ hovered }) => [

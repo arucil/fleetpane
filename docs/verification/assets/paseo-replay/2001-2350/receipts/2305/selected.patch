@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-actions-policy.ts
+RANGE {"path":"packages/app/src/components/git-actions-policy.ts","old_lines":[242,264],"new_lines":[253,274],"diff_block_lines":[95,124],"hunk_header":"@@ -241,62 +252,62 @@ function canMergeFromBase(input: BuildGitActionsInput): boolean {","substantive_changed_lines":15}
+ 
+-function getPullDescription(input: BuildGitActionsInput): string | undefined {
++function getPullUnavailableMessage(input: BuildGitActionsInput): string | undefined {
+   if (!input.hasRemote) {
+-    return "No remote";
++    return "Pull isn't available here because this branch is not connected to a remote yet";
+   }
+   if (input.hasUncommittedChanges) {
+-    return "Clean tree";
++    return "Pull isn't available while you have local changes so commit or stash them first";
+   }
+   if (input.behindOfOrigin === 0) {
+-    return "Nothing to pull";
++    return "Pull isn't available because this branch is already up to date";
+   }
+   return undefined;
+ }
+ 
+-function getPushDescription(input: BuildGitActionsInput): string | undefined {
++function getPushUnavailableMessage(input: BuildGitActionsInput): string | undefined {
+   if (!input.hasRemote) {
+-    return "No remote";
++    return "Push isn't available here because this branch is not connected to a remote yet";
+   }
+   if (input.behindOfOrigin > 0) {
+-    return "Pull first";
++    return "Push isn't available yet because there are newer changes to bring in first";
+   }
+   if (input.aheadOfOrigin === 0) {
+-    return "Nothing to push";

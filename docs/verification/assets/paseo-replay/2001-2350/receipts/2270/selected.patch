@@ -1,0 +1,17 @@
+FILE packages/desktop/src/main.ts
+RANGE {"path":"packages/desktop/src/main.ts","old_lines":[41,42],"new_lines":[60,74],"diff_block_lines":[32,46],"hunk_header":"@@ -39,4 +40,35 @@ const OPEN_PROJECT_EVENT = \"paseo:event:open-project\";","substantive_changed_lines":8}
++    );
++    const isWorktree = path.resolve(topLevel, ".git") !== commonDir;
++    if (isWorktree) {
++      app.setPath("userData", path.join(app.getPath("appData"), `Paseo-${devWorktreeName}`));
++      log.info("[worktree] isolated userData for worktree:", devWorktreeName);
++    } else {
++      devWorktreeName = null;
++    }
++  } catch {
++    devWorktreeName = null;
++  }
++}
++
+ // Allow users to pass Chromium flags via PASEO_ELECTRON_FLAGS for debugging
+ // rendering issues (e.g. "--disable-gpu --ozone-platform=x11").

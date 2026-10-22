@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/agent/reload.ts
+RANGE {"path":"packages/cli/src/commands/agent/reload.ts","old_lines":[0,0],"new_lines":[24,53],"diff_block_lines":[30,59],"hunk_header":"@@ -0,0 +1,106 @@","substantive_changed_lines":20}
++
++export function addReloadOptions(cmd: Command): Command {
++  return cmd
++    .description("Reload an agent (restarts the underlying process)")
++    .argument("<id>", "Agent ID, prefix, or name");
++}
++
++export interface AgentReloadOptions extends CommandOptions {
++  host?: string;
++}
++
++export type AgentReloadCommandResult = SingleResult<AgentReloadResult>;
++
++export async function runReloadCommand(
++  agentIdArg: string,
++  options: AgentReloadOptions,
++  _command: Command,
++): Promise<AgentReloadCommandResult> {
++  const host = getDaemonHost({ host: options.host as string | undefined });
++
++  if (!agentIdArg || agentIdArg.trim().length === 0) {
++    const error: CommandError = {
++      code: "MISSING_AGENT_ID",
++      message: "Agent ID is required",
++      details: "Usage: paseo agent reload <id-or-name>",
++    };
++    throw error;
++  }
++
++  let client;

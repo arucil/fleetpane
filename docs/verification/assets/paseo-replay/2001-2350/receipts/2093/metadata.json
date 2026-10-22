@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2093,
+  "revision": "a17f7d2d205d429eb5eb0ebbd2f552dad53b99c8",
+  "date": "2026-04-04T18:39:18+07:00",
+  "committer_date": "2026-04-04T19:21:12+07:00",
+  "parents": [
+    "c5a69a1ad92e60784b863d85bcecdb570234fdbe"
+  ],
+  "subject": "Fix forward-compatible provider handling for old app clients",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:bf82b085436827f425faa78c8cae4aca6f9a7f7bff372893ae9a3e1a39f9e82a",
+  "diff_tree_digest": "sha256:c3c09e56088ed270578034f7cd4735de907f1ed37407de8525e1fc7de90f1be6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        193,
+        194
+      ],
+      "new_lines": [
+        199,
+        216
+      ],
+      "diff_block_lines": [
+        14,
+        31
+      ],
+      "hunk_header": "@@ -191,4 +191,26 @@ const MAX_INITIAL_AGENT_TITLE_CHARS = Math.min(60, MAX_EXPLICIT_AGENT_TITLE_CHAR",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 42,
+  "receipt_file": "receipts/2093/selected.patch"
+}

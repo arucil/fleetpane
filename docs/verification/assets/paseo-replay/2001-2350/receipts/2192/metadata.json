@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2192,
+  "revision": "0defbc1dc3921497912bd8532c6195992a6b3e47",
+  "date": "2026-04-07T18:57:03+07:00",
+  "committer_date": "2026-04-07T18:57:03+07:00",
+  "parents": [
+    "76c6253ae08447af8a473161db434a213d52a8f8"
+  ],
+  "subject": "Normalize Codex paseo_voice.speak MCP calls and wrap spoken input",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/voice-config.ts"
+  ],
+  "source_receipt_digest": "sha256:9b65e3431247904ab8de242e5736099c38a2e8ec08846329d17dfb8fee521067",
+  "diff_tree_digest": "sha256:2a6d970b902d424876298bbf4dfc1b37a88feb2fdbc0127baa6e10f6ef2ea9b3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7023,
+        7026
+      ],
+      "new_lines": [
+        7025,
+        7034
+      ],
+      "diff_block_lines": [
+        29,
+        40
+      ],
+      "hunk_header": "@@ -7020,7 +7023,12 @@ export class Session {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 27,
+  "receipt_file": "receipts/2192/selected.patch"
+}

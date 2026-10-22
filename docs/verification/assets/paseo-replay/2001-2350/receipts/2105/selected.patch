@@ -1,0 +1,10 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,12],"diff_block_lines":[10,17],"hunk_header":"@@ -1,4 +1,12 @@","substantive_changed_lines":4}
++### Fixed
++- Voice activation in packaged builds — Silero VAD model is now copied out of the Electron asar archive so native code can read it.
++- App version sent in probe client hello so the daemon's version gate no longer hides Pi/Copilot from reconnected sessions.
++- `worktreeRoot` schema made backward-compatible for old clients and daemons that don't send the field.
++- Punycode deprecation warning (DEP0040) suppressed in CLI and desktop daemon entrypoints.
++
+ ## 0.1.45 - 2026-04-04
+ 

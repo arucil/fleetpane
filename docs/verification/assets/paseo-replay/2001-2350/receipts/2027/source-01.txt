@@ -1,0 +1,86 @@
+        inputDisposable.dispose();
+      },
+      disconnectResizeObserver: () => {
+        resizeObserver.disconnect();
+      },
+      removeWindowResize: () => {
+        window.removeEventListener("resize", windowResizeHandler);
+      },
+      removeWindowFocus: () => {
+        window.removeEventListener("focus", windowFocusHandler);
+      },
+      removeDocumentVisibilityChange: () => {
+        document.removeEventListener("visibilitychange", documentVisibilityChangeHandler);
+      },
+      removeVisualViewportResize: () => {
+        visualViewport?.removeEventListener("resize", visualViewportResizeHandler);
+      },
+      clearFitInterval: () => {
+        window.clearInterval(fitInterval);
+      },
+      clearFitTimeouts: () => {
+        for (const handle of fitTimeouts) {
+          window.clearTimeout(handle);
+        }
+      },
+      removeFontListeners: () => {
+        fontSet?.removeEventListener?.("loadingdone", fontReadyHandler);
+      },
+      removeTouchListeners,
+      restoreDocumentStyles,
+      restoreViewportStyles,
+      disposeFitAddon: () => {
+        fitAddon.dispose();
+      },
+      disposeWebglAddon: () => {
+        if (webglAddonRaf !== null) {
+          cancelAnimationFrame(webglAddonRaf);
+          webglAddonRaf = null;
+        }
+        try {
+          webglAddon?.dispose();
+        } catch {
+          // ignore
+        }
+        webglAddon = null;
+      },
+      disposeTerminal: () => {
+        terminal.dispose();
+      },
+    };
+
+    this.cleanup = () => {
+      disposables.disposeInput();
+      disposables.disconnectResizeObserver();
+      disposables.removeWindowResize();
+      disposables.removeWindowFocus();
+      disposables.removeDocumentVisibilityChange();
+      disposables.removeVisualViewportResize();
+      disposables.clearFitInterval();
+      disposables.clearFitTimeouts();
+      disposables.removeFontListeners();
+      disposables.removeTouchListeners();
+      disposables.disposeFitAddon();
+      disposables.disposeWebglAddon();
+      disposables.disposeTerminal();
+      disposables.restoreDocumentStyles();
+      disposables.restoreViewportStyles();
+    };
+  }
+
+  write(input: { text: string; suppressInput?: boolean; onCommitted?: () => void }): void {
+    if (input.text.length === 0) {
+      input.onCommitted?.();
+      return;
+    }
+    this.outputOperations.push({
+      type: "write",
+      text: input.text,
+      suppressInput: input.suppressInput ?? false,
+      ...(input.onCommitted ? { onCommitted: input.onCommitted } : {}),
+    });
+    this.processOutputQueue();
+  }
+
+  clear(input?: { onCommitted?: () => void }): void {
+    this.outputOperations.push({

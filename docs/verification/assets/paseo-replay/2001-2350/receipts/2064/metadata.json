@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2064,
+  "revision": "1ae2f9280e2e3fba9c4b73f1469e9cabab30d395",
+  "date": "2026-04-03T20:41:12+07:00",
+  "committer_date": "2026-04-03T20:41:26+07:00",
+  "parents": [
+    "49402b854fb40edb8f0dca93b33a31c377582951"
+  ],
+  "subject": "fix(website): fetch release version at runtime with asset validation",
+  "diff_tree_paths": [
+    "M\tpackages/website/src/components/landing-page.tsx",
+    "M\tpackages/website/src/downloads.tsx",
+    "A\tpackages/website/src/release.ts",
+    "M\tpackages/website/src/routes/__root.tsx",
+    "M\tpackages/website/src/routes/download.tsx",
+    "M\tpackages/website/vite.config.ts"
+  ],
+  "source_receipt_digest": "sha256:82e71e691c7b94cf269fccee2c78184cedfcec08a65e3c3952995502c87c9cd3",
+  "diff_tree_digest": "sha256:c24a3c4342466b3039772634c51d93aafe3a138d3c720338df2771e36a743d8d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/src/downloads.tsx",
+      "old_lines": [
+        53,
+        53
+      ],
+      "new_lines": [
+        33,
+        61
+      ],
+      "diff_block_lines": [
+        64,
+        93
+      ],
+      "hunk_header": "@@ -26,30 +31,33 @@ export interface DownloadOption {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 150,
+  "receipt_file": "receipts/2064/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[194,204],"new_lines":[196,218],"diff_block_lines":[91,120],"hunk_header":"@@ -193,40 +195,79 @@ const GITHUB_PR_STATE_LABELS: Record<PrHint[\"state\"], string> = {","substantive_changed_lines":20}
+ 
+-function HoverCardStatusIndicator({
+-  workspace,
++
++export function CheckStatusIndicator({
++  status,
++  size = 14,
+ }: {
+-  workspace: SidebarWorkspaceEntry;
++  status: string;
++  size?: number;
+ }): ReactElement | null {
+   const { theme } = useUnistyles();
+-  const showSyncedLoader = shouldRenderSyncedStatusLoader({ bucket: workspace.statusBucket });
+-
+-  if (showSyncedLoader) {
+-    return <SyncedLoader size={11} color={theme.colors.palette.amber[500]} />;
++  const iconSize = Math.round(size * 0.6);
++
++  if (!status || status === "none") return null;
++
++  if (status === "pending") {
++    return (
++      <View
++        style={{
++          width: size,
++          height: size,
++          borderRadius: size / 2,
++          borderWidth: 2,
++          borderColor: theme.colors.palette.amber[500],

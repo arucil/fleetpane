@@ -1,0 +1,22 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[244,252],"new_lines":[244,261],"diff_block_lines":[14,33],"hunk_header":"@@ -243,10 +243,19 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct","substantive_changed_lines":10}
+         textInputRef.current?.focus();
+-        return;
++        return true;
++      }
++
++      if (action === "send" || action === "dictation-confirm") {
++        if (isDictatingRef.current) {
++          sendAfterTranscriptRef.current = true;
++          confirmDictation();
++          return true;
++        }
++        return false;
+       }
+ 
+       if (action === "voice-toggle") {
+         handleToggleRealtimeVoiceShortcut();
+-        return;
++        return true;
+       }
+ 

@@ -1,0 +1,16 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[650,656],"new_lines":[652,662],"diff_block_lines":[19,32],"hunk_header":"@@ -649,8 +651,12 @@ function ControlledStatusBar({","substantive_changed_lines":9}
+                   onSelect={(selectedProviderId, modelId) => {
+-                    if (selectedProviderId !== provider) {
+-                      onSelectProvider?.(selectedProviderId);
++                    if (onSelectProviderAndModel) {
++                      onSelectProviderAndModel(selectedProviderId, modelId);
++                    } else {
++                      if (selectedProviderId !== provider) {
++                        onSelectProvider?.(selectedProviderId);
++                      }
++                      onSelectModel?.(modelId);
+                     }
+-                    onSelectModel?.(modelId);
+                   }}
+                   favoriteKeys={favoriteKeys}

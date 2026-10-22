@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[1227,1229],"new_lines":[1279,1306],"diff_block_lines":[161,190],"hunk_header":"@@ -1207,25 +1226,100 @@ class OpenCodeAgentSession implements AgentSession {","substantive_changed_lines":22}
+ 
+-  private notifySubscribers(event: AgentStreamEvent): void {
+-    const turnId = this.activeForegroundTurnId;
++  private finishForegroundTurn(
++    event: Extract<AgentStreamEvent, { type: "turn_completed" | "turn_failed" | "turn_canceled" }>,
++    turnId: string,
++  ): void {
++    if (this.activeForegroundTurnId !== turnId) {
++      return;
++    }
++    if (event.type === "turn_canceled" || event.type === "turn_failed") {
++      this.synthesizeInterruptedToolCalls(turnId);
++    } else {
++      this.runningToolCalls.clear();
++    }
++    this.activeForegroundTurnId = null;
++    this.notifySubscribers(event, turnId);
++  }
++
++  private trackToolCall(item: ToolCallTimelineItem): void {
++    if (item.status === "running") {
++      this.runningToolCalls.set(item.callId, item);
++      return;
++    }
++    this.runningToolCalls.delete(item.callId);
++  }
++
++  private synthesizeInterruptedToolCalls(turnId: string): void {
++    for (const item of this.runningToolCalls.values()) {
++      this.notifySubscribers(

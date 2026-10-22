@@ -1,0 +1,9 @@
+FILE packages/app/src/components/stream-strategy-native.tsx
+RANGE {"path":"packages/app/src/components/stream-strategy-native.tsx","old_lines":[314,318],"new_lines":[314,318],"diff_block_lines":[5,11],"hunk_header":"@@ -314,5 +314,5 @@ function NativeStreamViewport(props: StreamRenderInput & { strategy: StreamStrat","substantive_changed_lines":2}
+@@ -314,5 +314,5 @@ function NativeStreamViewport(props: StreamRenderInput & { strategy: StreamStrat
+       testID="agent-chat-scroll"
+       nativeID="agent-chat-scroll-native-virtualized"
+-      ListHeaderComponent={liveHeaderContent ? () => liveHeaderContent : undefined}
++      ListHeaderComponent={liveHeaderContent ?? undefined}
+       contentContainerStyle={baseListContentContainerStyle}
+       style={listStyle}

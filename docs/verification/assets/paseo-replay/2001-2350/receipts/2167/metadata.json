@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2167,
+  "revision": "d888c8f1262429555be4c66858f2ef68486f9ae0",
+  "date": "2026-04-06T20:28:12-06:00",
+  "committer_date": "2026-04-07T10:28:12+08:00",
+  "parents": [
+    "102ef06c30dc650d1756a8094c3b6e1a1b14ad08"
+  ],
+  "subject": "fix(server): bypass Copilot ACP prompts in autopilot (#206)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/acp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:c35a9003dea32d89568d052472801a1d91bd521de5228e5ffbf9815936e608d4",
+  "diff_tree_digest": "sha256:5eac3df76a9f625579eef48a3095f697f827ab5c129505b835ded5471294cba1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/acp-agent.ts",
+      "old_lines": [
+        1086,
+        1088
+      ],
+      "new_lines": [
+        1089,
+        1103
+      ],
+      "diff_block_lines": [
+        15,
+        29
+      ],
+      "hunk_header": "@@ -1085,4 +1088,16 @@ export class ACPAgentSession implements AgentSession, ACPClient {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 48,
+  "receipt_file": "receipts/2167/selected.patch"
+}

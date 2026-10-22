@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2187,
+  "revision": "82466aaa9fc595c9bae3fe13212fe8109747cc61",
+  "date": "2026-04-07T18:41:46+07:00",
+  "committer_date": "2026-04-07T18:41:46+07:00",
+  "parents": [
+    "d3e3a83a0dabdcb4809e3eb4602db8e9b557f947"
+  ],
+  "subject": "Reset Silero VAD between voice turns to prevent LSTM drift",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+    "M\tpackages/server/src/server/speech/turn-detection-provider.ts",
+    "M\tpackages/server/src/server/voice/voice-turn-controller.test.ts",
+    "M\tpackages/server/src/server/voice/voice-turn-controller.ts"
+  ],
+  "source_receipt_digest": "sha256:fb1b0ae96a25e6247e9a812c25bf857f6c28a8b287a3411d4ab7bc0f9bf1143d",
+  "diff_tree_digest": "sha256:872ad3d87ff4424ed225e7c1269f6c2a32eeaadc24a18f4e48c1513b5d766580",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+      "old_lines": [
+        148,
+        157
+      ],
+      "new_lines": [
+        194,
+        216
+      ],
+      "diff_block_lines": [
+        141,
+        170
+      ],
+      "hunk_header": "@@ -142,21 +189,83 @@ export class SherpaSileroVadSession extends EventEmitter implements TurnDetectio",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 130,
+  "receipt_file": "receipts/2187/selected.patch"
+}

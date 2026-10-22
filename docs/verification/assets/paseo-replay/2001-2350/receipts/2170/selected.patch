@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5793,5819],"new_lines":[5792,5796],"diff_block_lines":[13,42],"hunk_header":"@@ -5792,31 +5791,25 @@ export class Session {","substantive_changed_lines":22}
+     const descriptorsByWorkspaceId = new Map(all.map((entry) => [entry.id, entry] as const));
+-    const workspaceIdsToEmit = new Set<string>([
+-      workspaceId,
+-      ...changedWorkspaceIds,
+-    ]);
+ 
+-    for (const nextWorkspaceId of workspaceIdsToEmit) {
+-      const workspace = descriptorsByWorkspaceId.get(nextWorkspaceId);
+-      const nextWorkspace =
+-        workspace && this.matchesWorkspaceFilter({ workspace, filter: subscription.filter })
+-          ? workspace
+-          : null;
+-      if (
+-        options?.dedupeGitState &&
+-        this.shouldSkipWorkspaceGitWatchUpdate(nextWorkspaceId, nextWorkspace)
+-      ) {
+-        continue;
+-      }
+-      this.rememberWorkspaceGitWatchFingerprint(nextWorkspaceId, nextWorkspace);
+-
+-      if (!nextWorkspace) {
+-        this.bufferOrEmitWorkspaceUpdate(subscription, {
+-          kind: "remove",
+-          id: nextWorkspaceId,
+-        });
+-        continue;
+-      }
++    const workspace = descriptorsByWorkspaceId.get(workspaceId);
++    const nextWorkspace =
++      workspace && this.matchesWorkspaceFilter({ workspace, filter: subscription.filter })

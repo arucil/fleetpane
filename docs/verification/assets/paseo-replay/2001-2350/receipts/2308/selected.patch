@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/new-workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/new-workspace-screen.tsx","old_lines":[393,399],"new_lines":[369,393],"diff_block_lines":[123,152],"hunk_header":"@@ -392,14 +368,49 @@ export function NewWorkspaceScreen({","substantive_changed_lines":24}
+                 accessibilityRole="button"
+-                accessibilityLabel="Add GitHub issue or PR"
++                accessibilityLabel={
++                  selectedGithubItem
++                    ? `#${selectedGithubItem.number} ${selectedGithubItem.title}`
++                    : "Add GitHub issue or PR"
++                }
+               >
+-                <Plus size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
+-                <Text style={styles.badgeText} numberOfLines={1}>
+-                  Issue or PR
+-                </Text>
++                {selectedGithubItem ? (
++                  <>
++                    <View style={styles.badgeIcon}>
++                      {selectedGithubItem.kind === "pr" ? (
++                        <GitPullRequest size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
++                      ) : (
++                        <CircleDot size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
++                      )}
++                    </View>
++                    <Text style={styles.badgeText} numberOfLines={1}>
++                      #{selectedGithubItem.number} {selectedGithubItem.title}
++                    </Text>
++                    <Pressable
++                      onPress={() => openExternalUrl(selectedGithubItem.url)}
++                      accessibilityLabel="Open on GitHub"
++                      hitSlop={4}
++                    >
++                      {({ hovered }) => (

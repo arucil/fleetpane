@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2311,
+  "revision": "aa1d33f0a05e3cf29632d6d3ddc573e3972ca1b9",
+  "date": "2026-04-11T13:09:51+07:00",
+  "committer_date": "2026-04-11T13:09:51+07:00",
+  "parents": [
+    "3b8cfcbec65f892f22c6d3c12f5b67f94ee7c66e"
+  ],
+  "subject": "chore: checkpoint current worktree state",
+  "diff_tree_paths": [
+    "A\tdocs/ATTACHMENT_BASED_REVIEW_CONTEXT_PLAN.md",
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/screens/startup-splash-screen.tsx",
+    "M\tpackages/desktop/scripts/dev.sh",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/server/package.json"
+  ],
+  "source_receipt_digest": "sha256:239bf94a917952411c30d667fb10956aea453b95124a9afb2ba930a86253af90",
+  "diff_tree_digest": "sha256:0e991f498f9173a34469cfff6f1c0cc537789139f21fa33ad70f7f93a804092c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/daemon-manager.ts",
+      "old_lines": [
+        316,
+        319
+      ],
+      "new_lines": [
+        344,
+        351
+      ],
+      "diff_block_lines": [
+        109,
+        117
+      ],
+      "hunk_header": "@@ -310,10 +326,26 @@ async function startDaemon(): Promise<DesktopDaemonStatus> {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 405,
+  "receipt_file": "receipts/2311/selected.patch"
+}

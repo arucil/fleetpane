@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2328,
+  "revision": "dbc525c2adc4661fbce0e74929e00379d1c6c41f",
+  "date": "2026-04-12T12:00:45+07:00",
+  "committer_date": "2026-04-12T12:00:45+07:00",
+  "parents": [
+    "56512d852bac0e1f35470ac9c391bba2039bd135"
+  ],
+  "subject": "Delay shortcut badge display by 150ms to avoid sidebar re-renders on quick modifier taps",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/hooks/use-show-shortcut-badges.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts"
+  ],
+  "source_receipt_digest": "sha256:c68a2b1d033f303c413b35bd8efd1f42192fd0255da721ed098fdbb5fb15ee1a",
+  "diff_tree_digest": "sha256:1606910566c3275818f6d91d380825fe949d274ac7a826ec410f0838deb29d2f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/keyboard-shortcuts-store.ts",
+      "old_lines": [
+        28,
+        29
+      ],
+      "new_lines": [
+        31,
+        55
+      ],
+      "diff_block_lines": [
+        23,
+        47
+      ],
+      "hunk_header": "@@ -25,5 +28,28 @@ interface KeyboardShortcutsState {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 40,
+  "receipt_file": "receipts/2328/selected.patch"
+}

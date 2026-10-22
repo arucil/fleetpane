@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2329,
+  "revision": "b9269df3e4764fb7df5b88baad7c85f3b9694d9c",
+  "date": "2026-04-12T12:01:14+07:00",
+  "committer_date": "2026-04-12T12:01:14+07:00",
+  "parents": [
+    "dbc525c2adc4661fbce0e74929e00379d1c6c41f"
+  ],
+  "subject": "Add hidden agent tab intent to prevent reconciliation from re-adding closed tabs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-layout-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.ts"
+  ],
+  "source_receipt_digest": "sha256:bfe005bb4e67733ac11e3efd95d18c956106da49429282eb3dc023124c000b5b",
+  "diff_tree_digest": "sha256:82515bdc1816869f26cd4e8ff4301467536deb4bfa32d2210d763a8ae623e890",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/workspace-layout-store.ts",
+      "old_lines": [
+        95,
+        95
+      ],
+      "new_lines": [
+        98,
+        127
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -94,4 +97,46 @@ function trimNonEmpty(value: string | null | undefined): string | null {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 132,
+  "receipt_file": "receipts/2329/selected.patch"
+}

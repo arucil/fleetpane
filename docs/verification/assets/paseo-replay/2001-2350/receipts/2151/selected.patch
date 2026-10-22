@@ -1,0 +1,15 @@
+FILE packages/server/src/shared/messages.ts
+RANGE {"path":"packages/server/src/shared/messages.ts","old_lines":[1936,1940],"new_lines":[1976,1986],"diff_block_lines":[123,135],"hunk_header":"@@ -1927,14 +1958,29 @@ export const FetchAgentTimelineResponseMessageSchema = z","substantive_changed_lines":8}
+-      .strict(),
++      .transform((payload) => ({
++        ...payload,
++        startSeq: payload.startSeq ?? payload.startCursor?.seq ?? null,
++        endSeq: payload.endSeq ?? payload.endCursor?.seq ?? null,
++        hasOlder: payload.hasOlder ?? false,
++        hasNewer: payload.hasNewer ?? false,
++      })),
+   })
+-  .strict();
++  ;
+ 
+ export const SendAgentMessageResponseMessageSchema = z.object({

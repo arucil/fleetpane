@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[162,162],"new_lines":[190,219],"diff_block_lines":[107,136],"hunk_header":"@@ -161,4 +189,57 @@ function DiffLineView({","substantive_changed_lines":24}
+ 
++function SplitDiffCell({
++  line,
++  gutterWidth,
++  wrapLines,
++  showDivider = false,
++}: {
++  line: SplitDiffDisplayLine | null;
++  gutterWidth: number;
++  wrapLines: boolean;
++  showDivider?: boolean;
++}) {
++  return (
++    <View
++      style={[
++        styles.splitCell,
++        showDivider && styles.splitCellWithDivider,
++        !line && styles.emptySplitCell,
++        line?.type === "add" && styles.addLineContainer,
++        line?.type === "remove" && styles.removeLineContainer,
++        line?.type === "context" && styles.contextLineContainer,
++      ]}
++    >
++      <View style={[styles.lineNumberGutter, { width: gutterWidth }]}>
++        <Text
++          style={[
++            styles.lineNumberText,
++            line?.type === "add" && styles.addLineNumberText,
++            line?.type === "remove" && styles.removeLineNumberText,
++          ]}

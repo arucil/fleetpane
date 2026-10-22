@@ -1,0 +1,90 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2006,
+  "revision": "d75dd337737cd070ba0c152cb5d8d262f6f8ae0b",
+  "date": "2026-04-01T22:06:39+07:00",
+  "committer_date": "2026-04-01T22:06:39+07:00",
+  "parents": [
+    "f1ffecfcd4a2bbe67e2e2eac341c314f5e643dff",
+    "5b3ec572cb0035b6f1f19e1e2c526c07d72c7a9e"
+  ],
+  "subject": "Merge branch 'investigate/portless' into dev",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/workspace-setup.ts",
+    "A\tpackages/app/e2e/workspace-hover-card.spec.ts",
+    "A\tpackages/app/e2e/workspace-setup-streaming.spec.ts",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/components/workspace-hover-card.tsx",
+    "A\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/contexts/session-workspace-services.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/panels/register-panels.ts",
+    "A\tpackages/app/src/panels/setup-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-source-of-truth.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "A\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/stores/workspace-setup-store.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/sidebar-project-row-model.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.test.ts",
+    "M\tpackages/app/src/utils/workspace-tab-identity.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/service-health-monitor.test.ts",
+    "A\tpackages/server/src/server/service-health-monitor.ts",
+    "A\tpackages/server/src/server/service-proxy.test.ts",
+    "A\tpackages/server/src/server/service-proxy.ts",
+    "A\tpackages/server/src/server/service-status-projection.test.ts",
+    "A\tpackages/server/src/server/service-status-projection.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "A\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/components/landing-page.tsx"
+  ],
+  "source_receipt_digest": "sha256:71a414a2e1f2092cee734c952b582116820125163cc38f7db6b5d12ee730f511",
+  "diff_tree_digest": "sha256:d5a7a9116a6d3cb783f35513ee796bce76e2225236818088b5658903abede9f6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        841,
+        862
+      ],
+      "new_lines": [
+        843,
+        853
+      ],
+      "diff_block_lines": [
+        19,
+        48
+      ],
+      "hunk_header": "@@ -840,120 +842,130 @@ function WorkspaceRowInner({",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 4183,
+  "receipt_file": "receipts/2006/selected.patch"
+}

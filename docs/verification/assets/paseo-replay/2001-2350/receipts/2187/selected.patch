@@ -1,0 +1,32 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts","old_lines":[148,157],"new_lines":[194,216],"diff_block_lines":[141,170],"hunk_header":"@@ -142,21 +189,83 @@ export class SherpaSileroVadSession extends EventEmitter implements TurnDetectio","substantive_changed_lines":20}
+ 
+-  private syncDetectionState(): void {
++  close(): void {
++    this.reset();
++    this.connected = false;
++    this.windowTimestamp = 0;
++  }
++
++  private stepStateMachine(): void {
+     const detected = this.vad.isDetected();
+-    if (detected && !this.inSpeech) {
+-      this.inSpeech = true;
+-      this.emit("speech_started");
+-      return;
+-    }
++    const now = this.windowTimestamp;
++
++    switch (this.phase.state) {
++      case "idle": {
++        if (detected) {
++          this.logger.debug(
++            { now },
++            "[VAD] idle → confirming (detection started)",
++          );
++          this.phase = { state: "confirming", startedAt: now };
++        }
++        break;
++      }
+ 
+-    if (!detected && this.inSpeech && !this.vad.isEmpty()) {

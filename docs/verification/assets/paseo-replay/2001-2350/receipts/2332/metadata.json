@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2332,
+  "revision": "acb294b9ebeb5b5776d93b5a93cbde746763b46a",
+  "date": "2026-04-12T12:38:46+07:00",
+  "committer_date": "2026-04-12T12:38:46+07:00",
+  "parents": [
+    "cde10485d4d4c07a2fd21a2deb2a707c36a028c7"
+  ],
+  "subject": "Isolate branch switcher query from WorkspaceScreenContent to prevent 20ms re-renders",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/branch-switcher.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:e67cae6afea596b1e671bda126bf117a47fa2c879d8180470734cb35d2056a9d",
+  "diff_tree_digest": "sha256:ed58d1413140fd0836f2cb001e17905da81d51a9ff789fe090a3ca8ca5f8acb2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/branch-switcher.tsx",
+      "old_lines": [
+        9,
+        15
+      ],
+      "new_lines": [
+        13,
+        18
+      ],
+      "diff_block_lines": [
+        18,
+        27
+      ],
+      "hunk_header": "@@ -1,15 +1,18 @@",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 40,
+  "receipt_file": "receipts/2332/selected.patch"
+}

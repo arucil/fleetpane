@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2065,
+  "revision": "176942bbf1a319b9841d20934228e6dd87c1e607",
+  "date": "2026-04-03T21:33:05+07:00",
+  "committer_date": "2026-04-03T21:33:05+07:00",
+  "parents": [
+    "1ae2f9280e2e3fba9c4b73f1469e9cabab30d395"
+  ],
+  "subject": "fix(sidebar): persist projects/workspaces and add remove project menu",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/workspace-registry-model.test.ts",
+    "M\tpackages/server/src/server/workspace-registry-model.ts"
+  ],
+  "source_receipt_digest": "sha256:9a24b6e2055d99c577d393db130d7b1c5db761adcff342e3fde7218ca0737340",
+  "diff_tree_digest": "sha256:5b6cb3771dde5c07657ee0259ce31a5b386f0e7eabfd61cd017aec277faf777b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        794,
+        804
+      ],
+      "new_lines": [
+        794,
+        813
+      ],
+      "diff_block_lines": [
+        43,
+        72
+      ],
+      "hunk_header": "@@ -793,14 +793,53 @@ function ProjectHeaderRow({",
+      "substantive_changed_lines": 29
+    }
+  ],
+  "selected_substantive_changed_lines": 29,
+  "available_substantive_changed_lines": 283,
+  "receipt_file": "receipts/2065/selected.patch"
+}

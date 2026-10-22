@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2058,
+  "revision": "cacbbf4053f9a91f17cb2d1b75d9caf2cd8cf33b",
+  "date": "2026-04-03T18:49:28+07:00",
+  "committer_date": "2026-04-03T18:49:59+07:00",
+  "parents": [
+    "4ca04fc6619d058122ee8ba169d42efedbaf40ca"
+  ],
+  "subject": "fix(app): remove input event listener from scrollbar hook that raced with RNW controlled input",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/use-web-scrollbar.tsx"
+  ],
+  "source_receipt_digest": "sha256:c6a0deb36b7d45fa5c6eab89e4be3ecfdfd1b5f2fdb85ea01a2dd091f27dfc5b",
+  "diff_tree_digest": "sha256:b86e7cedeb1f3e81da180e555f26635fe4b3a6a0c71ac58b8a1ce4701a8886c0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/use-web-scrollbar.tsx",
+      "old_lines": [
+        78,
+        82
+      ],
+      "new_lines": [
+        78,
+        81
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -78,5 +78,4 @@ export function useWebElementScrollbar(",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/2058/selected.patch"
+}

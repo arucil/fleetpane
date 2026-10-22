@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2022,
+  "revision": "34c27fe77eb9428400241109dfa4fd888cf0d4fe",
+  "date": "2026-04-02T14:36:42+07:00",
+  "committer_date": "2026-04-02T14:36:42+07:00",
+  "parents": [
+    "b730d8394337d9df08c1f0f2f5c61b5ade3069bc"
+  ],
+  "subject": "refactor: simplify workspace setup dialog to single-step chat-first flow and stabilize worktree PASEO_HOME",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/workspace-setup-dialog.tsx",
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:2dd08a060afb540b442d7d3a5c02fde3a25713eae11787fd669ecbcd9629c3bc",
+  "diff_tree_digest": "sha256:b3f92c1d0d252521b66af2c3b7167977883a6ff79c39878b5e7cb88646789185",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-setup-dialog.tsx",
+      "old_lines": [
+        276,
+        294
+      ],
+      "new_lines": [
+        265,
+        275
+      ],
+      "diff_block_lines": [
+        35,
+        64
+      ],
+      "hunk_header": "@@ -266,71 +263,44 @@ export function WorkspaceSetupDialog() {",
+      "substantive_changed_lines": 28
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 209,
+  "receipt_file": "receipts/2022/selected.patch"
+}

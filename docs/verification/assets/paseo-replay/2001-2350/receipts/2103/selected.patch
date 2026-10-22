@@ -1,0 +1,12 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[746,749],"new_lines":[746,754],"diff_block_lines":[5,14],"hunk_header":"@@ -746,4 +746,9 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":4}
+@@ -746,4 +746,9 @@ export class VoiceAssistantWebSocketServer {
+         existing.externalDisconnectCleanupTimeout = null;
+       }
++      const newAppVersion = message.appVersion ?? null;
++      if (newAppVersion && newAppVersion !== existing.appVersion) {
++        existing.appVersion = newAppVersion;
++        existing.session.updateAppVersion(newAppVersion);
++      }
+       existing.sockets.add(ws);
+       this.sessions.set(ws, existing);

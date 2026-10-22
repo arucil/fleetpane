@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2302,
+  "revision": "497159ada888fcf1cec5fc67ff13185f947b507c",
+  "date": "2026-04-10T20:13:59+07:00",
+  "committer_date": "2026-04-10T20:13:59+07:00",
+  "parents": [
+    "e22fb519759b3b84358a1e0b70ac9a5325c75281"
+  ],
+  "subject": "Add pull action and restructure git actions policy",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-actions-policy.test.ts",
+    "M\tpackages/app/src/components/git-actions-policy.ts",
+    "M\tpackages/app/src/components/git-actions-split-button.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/hooks/use-git-actions.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-git-actions.tsx",
+    "M\tpackages/app/src/stores/checkout-git-actions-store.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:d531e96a7bcc87074cbd10fb157f0866a27fca7f27bffbb0713eb355ac35f310",
+  "diff_tree_digest": "sha256:09ce6732214a66d4ebe911d9607c11d5deaa4a6e895f1dd0bc46d0dd8d93828e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-actions-policy.ts",
+      "old_lines": [
+        194,
+        197
+      ],
+      "new_lines": [
+        212,
+        239
+      ],
+      "diff_block_lines": [
+        135,
+        164
+      ],
+      "hunk_header": "@@ -193,23 +211,66 @@ function buildPrAction(input: BuildGitActionsInput): GitAction {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 367,
+  "receipt_file": "receipts/2302/selected.patch"
+}

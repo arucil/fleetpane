@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2168,
+  "revision": "b2229a28b9390bc10e60ea01365d198b60df58a7",
+  "date": "2026-04-06T21:28:46-05:00",
+  "committer_date": "2026-04-07T10:28:46+08:00",
+  "parents": [
+    "d888c8f1262429555be4c66858f2ef68486f9ae0"
+  ],
+  "subject": "fix(server): reset session ID on query restart to prevent overwrite crash (#201)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:4c3ae306f039069ab7ebbf4d988cd201f1277b2ef530a6beb0a516a478c59bbb",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2691,
+        2698
+      ],
+      "new_lines": [
+        2700,
+        2712
+      ],
+      "diff_block_lines": [
+        26,
+        42
+      ],
+      "hunk_header": "@@ -2690,9 +2699,14 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 21,
+  "receipt_file": "receipts/2168/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[473,474],"new_lines":[472,501],"diff_block_lines":[43,72],"hunk_header":"@@ -472,12 +471,40 @@ export function WorkspaceDesktopTabsRow({","substantive_changed_lines":26}
+         />
++        <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
++          <TooltipTrigger asChild>
++            <Pressable
++              testID="workspace-new-tab"
++              onPress={() => onCreateDraftTab({ paneId })}
++              accessibilityRole="button"
++              accessibilityLabel="New tab"
++              style={styles.inlineNewTabButton}
++            >
++              {({ hovered, pressed }) => (
++                <Plus
++                  size={theme.iconSize.md}
++                  color={
++                    hovered || pressed ? theme.colors.foreground : theme.colors.foregroundMuted
++                  }
++                />
++              )}
++            </Pressable>
++          </TooltipTrigger>
++          <TooltipContent side="bottom" align="center" offset={8}>
++            <View style={styles.newTabTooltipRow}>
++              <Text style={styles.newTabTooltipText}>New tab</Text>
++              {newTabKeys ? (
++                <Shortcut chord={newTabKeys} style={styles.newTabTooltipShortcut} />
++              ) : null}
++            </View>
++          </TooltipContent>
++        </Tooltip>
+       </ScrollView>

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2270,
+  "revision": "201eb6a6719415a18c224a3a8713d76645d50414",
+  "date": "2026-04-10T10:11:55+07:00",
+  "committer_date": "2026-04-10T10:11:55+07:00",
+  "parents": [
+    "9f09a19a093fc40a1c331ea55219d2196ea07e7e"
+  ],
+  "subject": "Self-contained desktop dev script with worktree isolation",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/package.json",
+    "A\tpackages/desktop/scripts/dev.sh",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:50a11f6e3aa09db1ca033814c727fed374c7850bc036054505306e9651c9da70",
+  "diff_tree_digest": "sha256:d3ed26e0fcfd0fbb7dd6dd5c009b4aa551e4dab08cafd85c0934c196e4260cd7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/main.ts",
+      "old_lines": [
+        41,
+        42
+      ],
+      "new_lines": [
+        60,
+        74
+      ],
+      "diff_block_lines": [
+        32,
+        46
+      ],
+      "hunk_header": "@@ -39,4 +40,35 @@ const OPEN_PROJECT_EVENT = \"paseo:event:open-project\";",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 46,
+  "receipt_file": "receipts/2270/selected.patch"
+}

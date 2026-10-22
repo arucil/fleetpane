@@ -1,0 +1,69 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2267,
+  "revision": "c1ebb8c915ecc394a15e084be2e040d7edb6b2f0",
+  "date": "2026-04-09T23:44:38+07:00",
+  "committer_date": "2026-04-10T09:53:38+07:00",
+  "parents": [
+    "29af07e383a5a8b85e740b9371878d7556021968"
+  ],
+  "subject": "Refactor form factor check to reactive useIsCompactFormFactor",
+  "diff_tree_paths": [
+    "A\tdocs/DATA_MODEL.md",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/adaptive-modal-sheet.tsx",
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/app/src/components/question-form-card.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/toast-host.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:2d94b0a7550a73ef5ec2e60ea89a382f5f539dc791e7348ceeb26d88b3f79a0d",
+  "diff_tree_digest": "sha256:2f90dd949808f859330cfe0eab31d62219048ea9686a8aef38303a6cf5094f89",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/constants/layout.ts",
+      "old_lines": [
+        64,
+        76
+      ],
+      "new_lines": [
+        64,
+        73
+      ],
+      "diff_block_lines": [
+        13,
+        32
+      ],
+      "hunk_header": "@@ -63,14 +63,11 @@ export function getIsElectronRuntime(): boolean {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 367,
+  "receipt_file": "receipts/2267/selected.patch"
+}

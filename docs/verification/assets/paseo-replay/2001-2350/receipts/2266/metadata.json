@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2266,
+  "revision": "29af07e383a5a8b85e740b9371878d7556021968",
+  "date": "2026-04-09T20:05:07+07:00",
+  "committer_date": "2026-04-10T09:53:38+07:00",
+  "parents": [
+    "17bd036359e34d78fd4f4bf979517e7eeb324913"
+  ],
+  "subject": "Fix live agent refresh without persistence",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:e45d4a71faa2a737258b9e753d1def7a2a66611184d7b821f424ea18e787b8fe",
+  "diff_tree_digest": "sha256:5cc5155aca6ed0a5bd27676842100d8d48c08937eb46050ab2069d990510ab36",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3096,
+        3104
+      ],
+      "new_lines": [
+        3096,
+        3100
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -3096,9 +3096,5 @@ export class Session {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 96,
+  "receipt_file": "receipts/2266/selected.patch"
+}

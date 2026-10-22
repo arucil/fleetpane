@@ -1,0 +1,11 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1890,1893],"new_lines":[1890,1897],"diff_block_lines":[5,13],"hunk_header":"@@ -1890,4 +1890,8 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":1}
+@@ -1890,4 +1890,8 @@ class ClaudeAgentSession implements AgentSession {
+       includePartialMessages: true,
+       permissionMode: this.currentMode,
++      // Dynamic mode switching can recreate the underlying Claude query. Keep the
++      // bypass launch capability available so later setPermissionMode("bypassPermissions")
++      // calls do not fail after a model/thinking/rewind-driven restart.
++      allowDangerouslySkipPermissions: true,
+       agents: this.defaults?.agents,
+       canUseTool: this.handlePermissionRequest,

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2315,
+  "revision": "4de2766114852254d26eb363d650dc75e137f1a6",
+  "date": "2026-04-11T12:36:49+07:00",
+  "committer_date": "2026-04-11T12:36:49+07:00",
+  "parents": [
+    "30ffda6cae2437c9a818e918d47d1579cb4454ff"
+  ],
+  "subject": "Strip relay and pairing URLs from daemon logs",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/relay-transport.ts"
+  ],
+  "source_receipt_digest": "sha256:af51e46d5b0c3c36412eac161e63caac33f3be3e1f612d6dfb005d0fa0f2e04c",
+  "diff_tree_digest": "sha256:59077c11da3daf29d2b16cf2fa6e5bdc6eeb35b1e1d1c1798975e738133092db",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        122,
+        144
+      ],
+      "new_lines": [
+        120,
+        129
+      ],
+      "diff_block_lines": [
+        32,
+        61
+      ],
+      "hunk_header": "@@ -113,34 +116,19 @@ import type { AgentClient, AgentProvider } from \"./agent/agent-sdk-types.js\";",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 108,
+  "receipt_file": "receipts/2315/selected.patch"
+}

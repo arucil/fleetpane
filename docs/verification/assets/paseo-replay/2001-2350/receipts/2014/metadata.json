@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2014,
+  "revision": "99200eabbaa14fbd2910cf11a0d6e4ae7fe3efe6",
+  "date": "2026-04-02T09:42:12+07:00",
+  "committer_date": "2026-04-02T09:44:03+07:00",
+  "parents": [
+    "5f2bb87a171410967ee93a76ad56a50975ec6a5e"
+  ],
+  "subject": "fix(windows): quote shell args with spaces",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:3f1e470b503767838df1898ced5dbe87d8ddfbbf555643b8e1f95dd10286ab49",
+  "diff_tree_digest": "sha256:46849c8693497846892559803e7a8d517500412909506122cbf80b5c89b3ea80",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        3429,
+        3430
+      ],
+      "new_lines": [
+        3425,
+        3435
+      ],
+      "diff_block_lines": [
+        21,
+        31
+      ],
+      "hunk_header": "@@ -3421,10 +3422,14 @@ export class CodexAppServerAgentClient implements AgentClient {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/2014/selected.patch"
+}

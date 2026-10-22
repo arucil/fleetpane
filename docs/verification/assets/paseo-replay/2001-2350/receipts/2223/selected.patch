@@ -1,0 +1,20 @@
+FILE packages/desktop/src/integrations/integrations-manager.ts
+RANGE {"path":"packages/desktop/src/integrations/integrations-manager.ts","old_lines":[202,205],"new_lines":[202,218],"diff_block_lines":[7,24],"hunk_header":"@@ -201,5 +201,18 @@ export async function installCli(): Promise<InstallStatus> {","substantive_changed_lines":12}
+     }
+-    await fs.copyFile(installSourcePath, targetPath);
++    // Generate a thin .cmd trampoline that delegates to the bundled shim.
++    // Only the app install path is baked in — internal details (asar layout,
++    // entrypoint scripts) live in the bundled shim and update with the app.
++    const cmdContent = [
++      "@echo off",
++      `set "BUNDLED_CLI=${shimPath}"`,
++      `if not exist "%BUNDLED_CLI%" (`,
++      `  echo Paseo CLI not found at %BUNDLED_CLI% — is Paseo installed? 1>&2`,
++      `  exit /b 1`,
++      `)`,
++      `call "%BUNDLED_CLI%" %*`,
++      `exit /b %errorlevel%`,
++    ].join("\r\n");
++    await fs.writeFile(targetPath, cmdContent, "utf-8");
+   } else {
+     if (await pathOrSymlinkExists(targetPath)) {

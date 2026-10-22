@@ -1,0 +1,22 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[465,466],"new_lines":[540,559],"diff_block_lines":[177,196],"hunk_header":"@@ -419,48 +467,93 @@ function WorkspaceHoverCardContent({","substantive_changed_lines":15}
++                        disabled={startServiceMutation.isPending}
++                        onPress={(event) => {
++                          event.stopPropagation();
++                          startServiceMutation.mutate(service.serviceName);
++                        }}
++                      >
++                        {startServiceMutation.isPending &&
++                        startServiceMutation.variables === service.serviceName ? (
++                          <LoaderCircle
++                            size={12}
++                            color={theme.colors.foregroundMuted}
++                            style={styles.startServiceSpinner}
++                          />
++                        ) : (
++                          <Play size={12} color={theme.colors.foregroundMuted} fill="transparent" />
++                        )}
++                      </Pressable>
++                    )}
+                   </Pressable>
+                 ))}

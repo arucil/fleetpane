@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2286,
+  "revision": "b9a8ba054d04fdf0d5a1f228108a64c14fa4c3ef",
+  "date": "2026-04-10T16:55:04+07:00",
+  "committer_date": "2026-04-10T16:55:04+07:00",
+  "parents": [
+    "2f77674c5504f98ba51bfc087b4bc1ea86cd09d3"
+  ],
+  "subject": "fix(app): keep diff rows aligned for blank lines",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/utils/diff-layout.test.ts",
+    "M\tpackages/app/src/utils/diff-layout.ts",
+    "A\tpackages/app/src/utils/diff-rendering.test.ts",
+    "A\tpackages/app/src/utils/diff-rendering.ts"
+  ],
+  "source_receipt_digest": "sha256:66f261640939e0fa157673e0e2fc1b855540a34dda89fd952546cceaa8a3af93",
+  "diff_tree_digest": "sha256:93ca698a77d627bf9c72259c585969be6a7cc6e7c2fe8cbf7198c25ebb619546",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/diff-layout.ts",
+      "old_lines": [
+        63,
+        63
+      ],
+      "new_lines": [
+        69,
+        98
+      ],
+      "diff_block_lines": [
+        18,
+        47
+      ],
+      "hunk_header": "@@ -62,4 +68,37 @@ function toDisplayLine(input: {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 151,
+  "receipt_file": "receipts/2286/selected.patch"
+}

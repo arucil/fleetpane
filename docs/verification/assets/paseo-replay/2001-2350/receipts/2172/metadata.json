@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2172,
+  "revision": "7b1144dafe70500e071b8983eff5ff7d89f49f24",
+  "date": "2026-04-07T11:40:37+07:00",
+  "committer_date": "2026-04-07T11:40:37+07:00",
+  "parents": [
+    "940bc6243b49894954e66f3a168db4464c7e75ba"
+  ],
+  "subject": "feat(app): persist expanded state in file explorer and diff panes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/stores/panel-store.ts"
+  ],
+  "source_receipt_digest": "sha256:391e78eaa04331c58a5dedfde73c7a385f3b83ad58223996cdce049126b5a844",
+  "diff_tree_digest": "sha256:7538d3dc370e235ec146f9e6a63326ac3b15277be6c732ebe6d4bfb0e0ed9e4f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/file-explorer-pane.tsx",
+      "old_lines": [
+        205,
+        219
+      ],
+      "new_lines": [
+        230,
+        245
+      ],
+      "diff_block_lines": [
+        110,
+        139
+      ],
+      "hunk_header": "@@ -194,32 +213,44 @@ export function FileExplorerPane({",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 144,
+  "receipt_file": "receipts/2172/selected.patch"
+}

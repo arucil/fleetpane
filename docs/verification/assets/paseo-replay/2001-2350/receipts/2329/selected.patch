@@ -1,0 +1,32 @@
+FILE packages/app/src/stores/workspace-layout-store.ts
+RANGE {"path":"packages/app/src/stores/workspace-layout-store.ts","old_lines":[95,95],"new_lines":[98,127],"diff_block_lines":[20,49],"hunk_header":"@@ -94,4 +97,46 @@ function trimNonEmpty(value: string | null | undefined): string | null {","substantive_changed_lines":22}
+ 
++function addAgentIdToWorkspaceSet(
++  state: Record<string, Set<string>>,
++  workspaceKey: string,
++  agentId: string,
++): Record<string, Set<string>> {
++  const currentAgentIds = state[workspaceKey] ?? null;
++  if (currentAgentIds?.has(agentId)) {
++    return state;
++  }
++
++  const nextAgentIds = new Set(currentAgentIds ?? []);
++  nextAgentIds.add(agentId);
++  return {
++    ...state,
++    [workspaceKey]: nextAgentIds,
++  };
++}
++
++function removeAgentIdFromWorkspaceSet(
++  state: Record<string, Set<string>>,
++  workspaceKey: string,
++  agentId: string,
++): Record<string, Set<string>> {
++  const currentAgentIds = state[workspaceKey] ?? null;
++  if (!currentAgentIds?.has(agentId)) {
++    return state;
++  }
++
++  if (currentAgentIds.size === 1) {

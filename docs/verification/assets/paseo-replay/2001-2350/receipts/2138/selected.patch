@@ -1,0 +1,32 @@
+FILE packages/app/src/components/composer.tsx
+RANGE {"path":"packages/app/src/components/composer.tsx","old_lines":[612,641],"new_lines":[612,612],"diff_block_lines":[7,36],"hunk_header":"@@ -611,38 +611,42 @@ export function Composer({","substantive_changed_lines":27}
+ 
+-  const rightContent = (
+-    <View style={styles.rightControls}>
+-      {!isVoiceModeForAgent && hasAgent ? (
+-        <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
+-          <TooltipTrigger
+-            onPress={handleToggleRealtimeVoice}
+-            disabled={!isConnected || voice?.isVoiceSwitching}
+-            accessibilityLabel="Enable Voice mode"
+-            accessibilityRole="button"
+-            style={({ hovered }) => [
+-              styles.realtimeVoiceButton as any,
+-              (hovered ? styles.iconButtonHovered : undefined) as any,
+-              (!isConnected || voice?.isVoiceSwitching ? styles.buttonDisabled : undefined) as any,
+-            ]}
+-          >
+-            {voice?.isVoiceSwitching ? (
+-              <ActivityIndicator size="small" color="white" />
+-            ) : (
+-              <AudioLines size={buttonIconSize} color={theme.colors.foreground} />
+-            )}
+-          </TooltipTrigger>
+-          <TooltipContent side="top" align="center" offset={8}>
+-            <View style={styles.tooltipRow}>
+-              <Text style={styles.tooltipText}>Voice mode</Text>
+-              {voiceToggleKeys ? (
+-                <Shortcut chord={voiceToggleKeys} style={styles.tooltipShortcut} />
+-              ) : null}
+-            </View>
+-          </TooltipContent>

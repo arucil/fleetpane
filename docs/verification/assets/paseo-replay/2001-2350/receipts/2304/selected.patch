@@ -1,0 +1,32 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[830,830],"new_lines":[830,859],"diff_block_lines":[14,43],"hunk_header":"@@ -829,4 +829,44 @@ async function hasOriginRemote(cwd: string): Promise<boolean> {","substantive_changed_lines":19}
+ 
++async function resolveAbsoluteGitDir(cwd: string): Promise<string | null> {
++  try {
++    const { stdout } = await execAsync("git rev-parse --absolute-git-dir", {
++      cwd,
++      env: READ_ONLY_GIT_ENV,
++    });
++    const gitDir = stdout.trim();
++    return gitDir.length > 0 ? gitDir : null;
++  } catch {
++    return null;
++  }
++}
++
++async function abortGitPullConflictState(cwd: string): Promise<void> {
++  const gitDir = await resolveAbsoluteGitDir(cwd);
++  if (!gitDir) {
++    return;
++  }
++
++  const mergeHeadPath = resolve(gitDir, "MERGE_HEAD");
++  const rebaseMergePath = resolve(gitDir, "rebase-merge");
++  const rebaseApplyPath = resolve(gitDir, "rebase-apply");
++
++  if (existsSync(mergeHeadPath)) {
++    try {
++      await execAsync("git merge --abort", { cwd });
++    } catch {
++      // ignore
++    }

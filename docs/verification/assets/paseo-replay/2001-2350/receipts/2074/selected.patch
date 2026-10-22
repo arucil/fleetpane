@@ -1,0 +1,9 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[1403,1407],"new_lines":[1403,1407],"diff_block_lines":[5,11],"hunk_header":"@@ -1403,5 +1403,5 @@ export class DaemonClient {","substantive_changed_lines":2}
+@@ -1403,5 +1403,5 @@ export class DaemonClient {
+       requestId,
+       message,
+-      timeout: 15000,
++      timeout: 60000,
+       options: { skipQueue: true },
+       select: (msg) => {

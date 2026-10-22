@@ -1,0 +1,23 @@
+FILE packages/server/src/server/worktree-bootstrap.ts
+RANGE {"path":"packages/server/src/server/worktree-bootstrap.ts","old_lines":[762,764],"new_lines":[763,783],"diff_block_lines":[13,33],"hunk_header":"@@ -761,4 +762,22 @@ type SpawnWorkspaceScriptOptions = {","substantive_changed_lines":11}
+ 
++function isLoopbackListenHost(host: string | null | undefined): boolean {
++  if (!host) {
++    return true;
++  }
++
++  const normalizedHost = host.trim().toLowerCase();
++  return (
++    normalizedHost === "localhost" ||
++    normalizedHost === "127.0.0.1" ||
++    normalizedHost === "::1" ||
++    normalizedHost === "[::1]"
++  );
++}
++
++export function resolveServiceBindHost(daemonListenHost: string | null | undefined): string {
++  return isLoopbackListenHost(daemonListenHost) ? "127.0.0.1" : "0.0.0.0";
++}
++
+ export async function spawnWorkspaceScript(
+   options: SpawnWorkspaceScriptOptions,

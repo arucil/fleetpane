@@ -1,0 +1,32 @@
+FILE packages/app/src/components/explorer-sidebar.tsx
+RANGE {"path":"packages/app/src/components/explorer-sidebar.tsx","old_lines":[293,303],"new_lines":[301,321],"diff_block_lines":[70,99],"hunk_header":"@@ -292,23 +300,25 @@ export function ExplorerSidebar({","substantive_changed_lines":26}
+   return (
+-    <Animated.View style={[styles.desktopSidebar, resizeAnimatedStyle, { paddingTop: insets.top }]}>
+-      {/* Resize handle - absolutely positioned over left border */}
+-      <GestureDetector gesture={resizeGesture}>
+-        <View
+-          style={[styles.resizeHandle, Platform.OS === "web" && ({ cursor: "col-resize" } as any)]}
++    <Animated.View style={[explorerStaticStyles.desktopSidebar, resizeAnimatedStyle, { paddingTop: insets.top }]}>
++      <View style={[styles.desktopSidebarBorder, { flex: 1 }]}>
++        {/* Resize handle - absolutely positioned over left border */}
++        <GestureDetector gesture={resizeGesture}>
++          <View
++            style={[styles.resizeHandle, Platform.OS === "web" && ({ cursor: "col-resize" } as any)]}
++          />
++        </GestureDetector>
++
++        <SidebarContent
++          activeTab={explorerTab}
++          onTabPress={handleTabPress}
++          onClose={() => handleClose("desktop-close-button")}
++          serverId={serverId}
++          workspaceId={workspaceId}
++          workspaceRoot={workspaceRoot}
++          isGit={isGit}
++          isMobile={false}
++          onOpenFile={onOpenFile}
+         />
+-      </GestureDetector>
+-
+-      <SidebarContent
+-        activeTab={explorerTab}

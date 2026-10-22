@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2005,2005],"new_lines":[2005,2034],"diff_block_lines":[7,36],"hunk_header":"@@ -2004,4 +2004,38 @@ export class Session {","substantive_changed_lines":21}
+ 
++  private async archiveStoredAgentForClose(
++    agentId: string,
++  ): Promise<{ agentId: string; archivedAt: string }> {
++    const existing = await this.agentStorage.get(agentId);
++    if (!existing) {
++      throw new Error(`Agent not found: ${agentId}`);
++    }
++
++    if (existing.archivedAt) {
++      return {
++        agentId,
++        archivedAt: existing.archivedAt,
++      };
++    }
++
++    const archivedAt = new Date().toISOString();
++    const normalizedStatus =
++      existing.lastStatus === "running" || existing.lastStatus === "initializing"
++        ? "idle"
++        : existing.lastStatus;
++
++    await this.agentStorage.upsert({
++      ...existing,
++      archivedAt,
++      updatedAt: archivedAt,
++      lastStatus: normalizedStatus,
++      requiresAttention: false,
++      attentionReason: null,
++      attentionTimestamp: null,

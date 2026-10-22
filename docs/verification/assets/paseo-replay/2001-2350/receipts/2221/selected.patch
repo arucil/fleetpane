@@ -1,0 +1,28 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2817,2819],"new_lines":[2820,2845],"diff_block_lines":[31,56],"hunk_header":"@@ -2816,4 +2819,27 @@ export class Session {","substantive_changed_lines":14}
+ 
++      if (trimmedPrompt) {
++        scheduleAgentMetadataGeneration({
++          agentManager: this.agentManager,
++          agentId: snapshot.id,
++          cwd: snapshot.cwd,
++          initialPrompt: trimmedPrompt,
++          explicitTitle,
++          paseoHome: this.paseoHome,
++          logger: this.sessionLogger,
++        });
++
++        const started = await this.handleSendAgentMessage(
++          snapshot.id,
++          trimmedPrompt,
++          resolveClientMessageId(clientMessageId),
++          images,
++          outputSchema ? { outputSchema } : undefined,
++        );
++        if (!started.ok) {
++          throw new Error(started.error);
++        }
++      }
++
+       if (requestId) {
+         const agentPayload = await this.getAgentPayloadById(snapshot.id);

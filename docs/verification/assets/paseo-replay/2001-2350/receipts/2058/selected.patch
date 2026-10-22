@@ -1,0 +1,8 @@
+FILE packages/app/src/components/use-web-scrollbar.tsx
+RANGE {"path":"packages/app/src/components/use-web-scrollbar.tsx","old_lines":[78,82],"new_lines":[78,81],"diff_block_lines":[5,10],"hunk_header":"@@ -78,5 +78,4 @@ export function useWebElementScrollbar(","substantive_changed_lines":1}
+@@ -78,5 +78,4 @@ export function useWebElementScrollbar(
+ 
+     element.addEventListener("scroll", update, { passive: true });
+-    element.addEventListener("input", update, { passive: true });
+ 
+     const resizeObserver = new ResizeObserver(update);

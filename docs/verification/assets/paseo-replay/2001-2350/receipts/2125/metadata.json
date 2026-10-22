@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2125,
+  "revision": "6907f6e71d296e604b6c4a3bb1a44ed261008bd7",
+  "date": "2026-04-05T15:11:18+07:00",
+  "committer_date": "2026-04-05T15:11:18+07:00",
+  "parents": [
+    "84638ecd9ccd7e1533093a5f3859337bc0719ebb"
+  ],
+  "subject": "fix(desktop): resolve login shell environment at Electron startup",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "A\tpackages/desktop/src/login-shell-env.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/executable.test.ts",
+    "M\tpackages/server/src/utils/executable.ts"
+  ],
+  "source_receipt_digest": "sha256:218ab8bb5be273b9b56f32389664df6abe1b69bd92cd5da6f2031828512eff40",
+  "diff_tree_digest": "sha256:3c18b9b86d56a125bc479e4068a140864cbbcbe80a019e86442cf8268dd9886d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/login-shell-env.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        11,
+        40
+      ],
+      "diff_block_lines": [
+        17,
+        46
+      ],
+      "hunk_header": "@@ -0,0 +1,113 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 234,
+  "receipt_file": "receipts/2125/selected.patch"
+}

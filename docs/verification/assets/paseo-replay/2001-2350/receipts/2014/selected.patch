@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[3429,3430],"new_lines":[3425,3435],"diff_block_lines":[21,31],"hunk_header":"@@ -3421,10 +3422,14 @@ export class CodexAppServerAgentClient implements AgentClient {","substantive_changed_lines":6}
++      quoteWindowsCommand(launchPrefix.command),
++      [...launchPrefix.args, "app-server"].map((argument) => quoteWindowsArgument(argument)),
++      {
++        detached: process.platform !== "win32",
++        shell: process.platform === "win32",
++        stdio: ["pipe", "pipe", "pipe"],
++        env: buildCodexAppServerEnv(this.runtimeSettings, launchEnv),
++      },
++    );
+   }
+ 

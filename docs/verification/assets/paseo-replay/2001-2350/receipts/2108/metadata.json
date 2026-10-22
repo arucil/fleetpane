@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2108,
+  "revision": "5c1e869bc58f24115277640fb59ff573bd1b56e1",
+  "date": "2026-04-04T23:45:28+07:00",
+  "committer_date": "2026-04-04T23:45:28+07:00",
+  "parents": [
+    "a693ff560cf30e969a51742c9224f6e9b721d839"
+  ],
+  "subject": "fix: copy sherpa TTS samples to avoid external buffer crash",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts"
+  ],
+  "source_receipt_digest": "sha256:539696c942da75f7aa6420e43c5660cc993b62d907f7825c2d830ddfb58c4145",
+  "diff_tree_digest": "sha256:0c02aaa68bbaaf33a80154568e53825040bdccad0acf20a421bde53139aeb63b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts",
+      "old_lines": [
+        96,
+        100
+      ],
+      "new_lines": [
+        96,
+        100
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -96,5 +96,5 @@ export class SherpaOnnxTTS implements TextToSpeechProvider {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 3,
+  "receipt_file": "receipts/2108/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/pair-device-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/pair-device-section.tsx","old_lines":[0,0],"new_lines":[12,41],"diff_block_lines":[18,47],"hunk_header":"@@ -0,0 +1,187 @@","substantive_changed_lines":23}
++
++export function PairDeviceSection() {
++  const { theme } = useUnistyles();
++  const showSection = shouldUseDesktopDaemon();
++  const [copied, setCopied] = useState(false);
++
++  const pairingQuery = useQuery({
++    queryKey: ["desktop-daemon-pairing"],
++    queryFn: getDesktopDaemonPairing,
++    enabled: showSection,
++    staleTime: 5 * 60 * 1000,
++    retry: 1,
++  });
++
++  const qrQuery = useQuery({
++    queryKey: ["desktop-daemon-pairing-qr", pairingQuery.data?.url],
++    queryFn: () =>
++      QRCode.toDataURL(pairingQuery.data!.url!, {
++        errorCorrectionLevel: "M",
++        margin: 1,
++        width: 480,
++      }),
++    enabled: !!pairingQuery.data?.url,
++    staleTime: Infinity,
++  });
++
++  const handleCopyLink = useCallback(async () => {
++    if (!pairingQuery.data?.url) return;
++    await Clipboard.setStringAsync(pairingQuery.data.url);
++    setCopied(true);

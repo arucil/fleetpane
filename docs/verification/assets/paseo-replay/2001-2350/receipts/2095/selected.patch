@@ -1,0 +1,32 @@
+FILE packages/cli/src/classify.ts
+RANGE {"path":"packages/cli/src/classify.ts","old_lines":[0,0],"new_lines":[8,37],"diff_block_lines":[14,43],"hunk_header":"@@ -0,0 +1,70 @@","substantive_changed_lines":19}
++
++export function isPathLikeArg(arg: string): boolean {
++  return (
++    arg === "." ||
++    arg === ".." ||
++    arg.startsWith("./") ||
++    arg.startsWith("../") ||
++    arg.startsWith("/") ||
++    arg === "~" ||
++    arg.startsWith("~/") ||
++    /^[A-Za-z]:[\\/]/.test(arg)
++  );
++}
++
++export function expandUserPath(inputPath: string): string {
++  if (inputPath === "~") {
++    return homedir();
++  }
++
++  if (inputPath.startsWith("~/")) {
++    return path.join(homedir(), inputPath.slice(2));
++  }
++
++  return inputPath;
++}
++
++export function isExistingDirectory(input: { pathArg: string; cwd: string }): boolean {
++  const resolvedPath = path.resolve(input.cwd, expandUserPath(input.pathArg));
++
++  if (!existsSync(resolvedPath)) {

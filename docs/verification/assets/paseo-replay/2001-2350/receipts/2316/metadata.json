@@ -1,0 +1,65 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2316,
+  "revision": "cff41d78abd446a33d47a12e4b0d04b6b95ee6b0",
+  "date": "2026-04-11T12:46:42+07:00",
+  "committer_date": "2026-04-11T12:46:42+07:00",
+  "parents": [
+    "4de2766114852254d26eb363d650dc75e137f1a6"
+  ],
+  "subject": "Consolidate MCP server: remove voice bridge, add schedule/terminal/worktree tools",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/index.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/daemon/restart.ts",
+    "M\tpackages/cli/src/commands/daemon/start.ts",
+    "A\tpackages/server/scripts/test-mcp-inject.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "A\tpackages/server/src/server/agent/mcp-parity.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/agent/mcp-shared.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/persisted-config.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "D\tpackages/server/src/server/voice-mcp-bridge-command.test.ts",
+    "D\tpackages/server/src/server/voice-mcp-bridge-command.ts",
+    "D\tpackages/server/src/server/voice-mcp-bridge.test.ts",
+    "D\tpackages/server/src/server/voice-mcp-bridge.ts",
+    "M\tpackages/server/src/server/voice-types.ts",
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:54c8daad8b5ad6f331e8bb670820372f4e23455ebc8d54b4a38ee1c4a2a2e476",
+  "diff_tree_digest": "sha256:7da1a6c7d644c656d121d69af360fb188614e3afd79d30d70800582a82145793",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-management-mcp.ts",
+      "old_lines": [
+        60,
+        89
+      ],
+      "new_lines": [
+        78,
+        78
+      ],
+      "diff_block_lines": [
+        55,
+        84
+      ],
+      "hunk_header": "@@ -54,158 +70,14 @@ export interface AgentManagementMcpOptions {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 2246,
+  "receipt_file": "receipts/2316/selected.patch"
+}

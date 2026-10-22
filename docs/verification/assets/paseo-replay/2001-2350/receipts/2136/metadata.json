@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2136,
+  "revision": "8f83876a3cbd64b148078f0b7d2f03acb6ec7615",
+  "date": "2026-04-02T16:56:47+07:00",
+  "committer_date": "2026-04-05T22:28:11+07:00",
+  "parents": [
+    "25213ce83abaa61df84a5c21fb81e1513303ceeb"
+  ],
+  "subject": "fix(stream): restore live timeline emission and preserve timeline events",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:2a5c4e877704e98a02d6683b60fedf5b9bba4db7e727100efb8e8a4eb271c020",
+  "diff_tree_digest": "sha256:a75eed004927ddba325316c023c4038a55e12abee88185329eda9e9d8d306fae",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        2176,
+        2198
+      ],
+      "new_lines": [
+        2148,
+        2154
+      ],
+      "diff_block_lines": [
+        72,
+        95
+      ],
+      "hunk_header": "@@ -2175,24 +2147,8 @@ export class AgentManager {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 99,
+  "receipt_file": "receipts/2136/selected.patch"
+}

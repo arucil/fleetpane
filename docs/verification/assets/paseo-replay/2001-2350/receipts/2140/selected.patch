@@ -1,0 +1,22 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5184,5196],"new_lines":[5184,5198],"diff_block_lines":[37,56],"hunk_header":"@@ -5182,15 +5182,17 @@ export class Session {","substantive_changed_lines":11}
+-      warmCheckoutShortstatInBackground(workspace.directory);
++      warmCheckoutShortstatInBackground(workspace.directory, undefined, () => {
++        void this.emitWorkspaceUpdateForCwd(workspace.directory);
++      });
+     }
+ 
+     return {
+-      id: workspace.id,
+-      projectId: workspace.projectId,
++      id: String(workspace.id),
++      projectId: String(workspace.projectId),
+       projectDisplayName: resolvedProjectRecord?.displayName ?? String(workspace.projectId),
+       projectRootPath: resolvedProjectRecord?.directory ?? workspace.directory,
+       workspaceDirectory: workspace.directory,
+-      projectKind: resolvedProjectRecord?.kind ?? "directory",
+-      workspaceKind: workspace.kind,
++      projectKind: (resolvedProjectRecord?.kind ?? "directory") === "git" ? "git" : "non_git",
++      workspaceKind: workspace.kind === "checkout" ? "local_checkout" : workspace.kind,
+       name: workspace.displayName,
+       status: "done",

@@ -1,0 +1,26 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[103,105],"new_lines":[111,134],"diff_block_lines":[20,43],"hunk_header":"@@ -102,4 +110,25 @@ function getFallbackTabLabel(tab: WorkspaceTabDescriptor): string {","substantive_changed_lines":13}
+ 
++function useMiddleClickClose(onClose: () => void) {
++  const ref = useRef<View>(null);
++
++  useEffect(() => {
++    const node = ref.current as unknown as HTMLElement | null;
++    if (!node) return;
++
++    function handleAuxClick(event: MouseEvent) {
++      if (event.button === 1) {
++        event.preventDefault();
++        onClose();
++      }
++    }
++
++    node.addEventListener("auxclick", handleAuxClick);
++    return () => node.removeEventListener("auxclick", handleAuxClick);
++  }, [onClose]);
++
++  return ref;
++}
++
+ function TabChip({
+   tab,

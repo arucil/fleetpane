@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2107,
+  "revision": "a693ff560cf30e969a51742c9224f6e9b721d839",
+  "date": "2026-04-04T23:45:03+07:00",
+  "committer_date": "2026-04-04T23:45:03+07:00",
+  "parents": [
+    "c65a851205a611ce0e06c8f67d33fed9b9efa878"
+  ],
+  "subject": "fix: remove per-host \"Add connection\" button that blocked multi-host setups",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/settings-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:b865e685dee315758fcc9ec681ca2774624728d3081bece20e145986ecc9f48f",
+  "diff_tree_digest": "sha256:d6ddd60d8cf2996d3a0a6f01a2b8799df0ab39c17b9bfc902cf96a1bf656d835",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/settings-screen.tsx",
+      "old_lines": [
+        273,
+        284
+      ],
+      "new_lines": [
+        267,
+        274
+      ],
+      "diff_block_lines": [
+        32,
+        45
+      ],
+      "hunk_header": "@@ -272,13 +266,9 @@ function HostsSection(props: HostsSectionProps) {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/2107/selected.patch"
+}

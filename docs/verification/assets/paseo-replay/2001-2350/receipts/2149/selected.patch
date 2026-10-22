@@ -1,0 +1,19 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1296,1297],"new_lines":[1287,1303],"diff_block_lines":[17,33],"hunk_header":"@@ -1285,13 +1285,19 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":12}
++        const agent =
++          useSessionStore.getState().sessions[normalizedServerId]?.agents?.get(agentId) ?? null;
++        const isRunning = agent?.status === "running" || agent?.status === "initializing";
++
++        if (isRunning) {
++          const confirmed = await confirmDialog({
++            title: "Archive running agent?",
++            message: "This agent is still running. Archiving it will stop the agent and close the tab.",
++            confirmLabel: "Archive",
++            cancelLabel: "Cancel",
++            destructive: true,
++          });
++          if (!confirmed) {
++            return;
++          }
+         }
+ 

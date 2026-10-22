@@ -1,0 +1,14 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[7023,7026],"new_lines":[7025,7034],"diff_block_lines":[29,40],"hunk_header":"@@ -7020,7 +7023,12 @@ export class Session {","substantive_changed_lines":4}
+-    // interrupt-if-running, record message, then start a new stream.
+-    await this.handleSendAgentMessage(agentId, result.text);
++    await this.handleSendAgentMessage(
++      agentId,
++      result.text,
++      undefined,
++      undefined,
++      undefined,
++      { spokenInput: true },
++    );
+     await this.flushPendingAudioSegments("transcription complete");
+   }

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2156,
+  "revision": "c63240b18c301c0c71ffb7d5438c2170bb466bdf",
+  "date": "2026-04-06T23:37:22+07:00",
+  "committer_date": "2026-04-06T23:37:22+07:00",
+  "parents": [
+    "a5aca2312b76f5afb3394dee04e1d969e27d11f8"
+  ],
+  "subject": "feat(app): unified provider snapshot, resilient model selector, and UX polish",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-providers-snapshot.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:9cc821b9c29c7afe095ad8d7a09bd81ff9dbdea3cc01396809a9d73298d09503",
+  "diff_tree_digest": "sha256:bb442921544acd0c9c90bd6cca73ef2a149651ffe2cfe76b66783fd65725791b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        887,
+        901
+      ],
+      "new_lines": [
+        898,
+        916
+      ],
+      "diff_block_lines": [
+        50,
+        79
+      ],
+      "hunk_header": "@@ -886,34 +897,37 @@ export function AgentStatusBar({ agentId, serverId, onDropdownClose }: AgentStat",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 199,
+  "receipt_file": "receipts/2156/selected.patch"
+}

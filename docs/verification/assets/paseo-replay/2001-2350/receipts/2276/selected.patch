@@ -1,0 +1,9 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[397,401],"new_lines":[397,401],"diff_block_lines":[5,11],"hunk_header":"@@ -397,5 +397,5 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":2}
+@@ -397,5 +397,5 @@ export class VoiceAssistantWebSocketServer {
+           (origin === `http://${requestHost}` || origin === `https://${requestHost}`);
+ 
+-        if (!origin || allowedOrigins.has(origin) || sameOrigin) {
++        if (!origin || allowedOrigins.has("*") || allowedOrigins.has(origin) || sameOrigin) {
+           callback(true);
+         } else {

@@ -1,0 +1,11 @@
+FILE packages/app/src/screens/new-workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/new-workspace-screen.tsx","old_lines":[231,235],"new_lines":[231,237],"diff_block_lines":[5,13],"hunk_header":"@@ -231,5 +231,7 @@ export function NewWorkspaceScreen({","substantive_changed_lines":2}
+@@ -231,5 +231,7 @@ export function NewWorkspaceScreen({
+             images={chatDraft.images}
+             onChangeImages={chatDraft.setImages}
+-            clearDraft={chatDraft.clear}
++            clearDraft={() => {
++              // No-op: screen navigates away on success, text should stay for retry on error
++            }}
+             autoFocus
+             commandDraftConfig={composerState?.commandDraftConfig}

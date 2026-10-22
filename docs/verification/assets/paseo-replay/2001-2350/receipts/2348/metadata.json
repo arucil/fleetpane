@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2348,
+  "revision": "0095f6112161917960e1d71b13f9836ccc223907",
+  "date": "2026-04-12T22:10:16+07:00",
+  "committer_date": "2026-04-12T22:10:16+07:00",
+  "parents": [
+    "609d11ee8d7a6cfb1183ec2553cc0cd45172285c"
+  ],
+  "subject": "Fix Shift+Enter for multiline input in agent terminals",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/app/src/utils/terminal-keys.test.ts",
+    "M\tpackages/app/src/utils/terminal-keys.ts"
+  ],
+  "source_receipt_digest": "sha256:5d52898c8c541cdec4d9ff0cd8bfee0143ee9f6c2cf9a71feca07ff3c54b2f21",
+  "diff_tree_digest": "sha256:236ffe2d5a76e33f7894a0102c8380491d9b4ab6159129a8de64f74d0f473889",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/terminal-keys.ts",
+      "old_lines": [
+        91,
+        93
+      ],
+      "new_lines": [
+        93,
+        104
+      ],
+      "diff_block_lines": [
+        13,
+        25
+      ],
+      "hunk_header": "@@ -86,8 +86,19 @@ export function shouldInterceptDomTerminalKey(args: {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 66,
+  "receipt_file": "receipts/2348/selected.patch"
+}

@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2004,
+  "revision": "806079c7add8a9421574d49e756a667fc80d5521",
+  "date": "2026-03-31T16:22:51+07:00",
+  "committer_date": "2026-03-31T16:22:51+07:00",
+  "parents": [
+    "1f6ffa9e0e056661b9745c6c60a203187e399e5d"
+  ],
+  "subject": "Emit running state when workspace setup begins",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/workspace-setup-streaming.spec.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts"
+  ],
+  "source_receipt_digest": "sha256:94ffe0f2e44dfd9c1bb60d59acf47e88a2208ffde692c6900b1fe9b599f5f2dd",
+  "diff_tree_digest": "sha256:69ebde5ea468ea622a62cd3c056e744e975417ed63c843bd2cd2aa2068a1a22c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/worktree-session.ts",
+      "old_lines": [
+        678,
+        690
+      ],
+      "new_lines": [
+        680,
+        686
+      ],
+      "diff_block_lines": [
+        68,
+        83
+      ],
+      "hunk_header": "@@ -677,14 +679,8 @@ export async function createPaseoWorktreeInBackground(",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 227,
+  "receipt_file": "receipts/2004/selected.patch"
+}

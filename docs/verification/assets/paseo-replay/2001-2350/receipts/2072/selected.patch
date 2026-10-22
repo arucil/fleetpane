@@ -1,0 +1,20 @@
+FILE packages/app/src/components/welcome-screen.tsx
+RANGE {"path":"packages/app/src/components/welcome-screen.tsx","old_lines":[328,330],"new_lines":[348,365],"diff_block_lines":[44,61],"hunk_header":"@@ -327,4 +347,19 @@ export function WelcomeScreen({ onHostAdded }: WelcomeScreenProps) {","substantive_changed_lines":13}
+ 
++        {!showHostList && Platform.OS !== "web" && (
++          <>
++            <Text style={styles.setupHint}>
++              You need the Paseo desktop app or server running on your computer first.
++            </Text>
++            <Pressable
++              style={styles.setupLink}
++              onPress={() => openExternalUrl("https://paseo.sh")}
++            >
++              <Text style={styles.setupLinkText}>Get started at paseo.sh</Text>
++              <ExternalLink size={14} color={theme.colors.accent} />
++            </Pressable>
++          </>
++        )}
++
+         <View style={styles.actions}>
+           {actions.map((action) => {

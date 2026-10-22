@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2284,
+  "revision": "120c1b46a4c18e3d18bff3df38a5b4483e5d731a",
+  "date": "2026-04-10T15:12:32+07:00",
+  "committer_date": "2026-04-10T15:12:32+07:00",
+  "parents": [
+    "033c4bcbf21ff6d13ba7f5388d4a45ab1217edf8"
+  ],
+  "subject": "fix: remove terminal stream backpressure that caused 14MB snapshot thrashing",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:9c5fa224fa200ab69fc617efdb303d4601261f64d5bf1884a93743dee351f256",
+  "diff_tree_digest": "sha256:cf66e83f8ad132516bc18a4b772a81415228a15fb8e73a56d082d029d7fffab0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        8469,
+        8486
+      ],
+      "new_lines": [
+        8458,
+        8460
+      ],
+      "diff_block_lines": [
+        43,
+        60
+      ],
+      "hunk_header": "@@ -8468,19 +8457,4 @@ export class Session {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 26,
+  "receipt_file": "receipts/2284/selected.patch"
+}

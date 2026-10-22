@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2045,
+  "revision": "bb9ef76017a488a592e7d7076970bb744b7fc05e",
+  "date": "2026-04-03T11:15:02+07:00",
+  "committer_date": "2026-04-03T11:15:02+07:00",
+  "parents": [
+    "d6413404e0fd3e949c34024d8973b21d684b5154"
+  ],
+  "subject": "Fix OpenCode interrupt tool-call terminal state parity",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/opencode-send-interrupt.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:db09f869a2efe602b69d907fa45d69428c2dfbf68f5d35048ac271073d7b84ee",
+  "diff_tree_digest": "sha256:778397e56e67716fd2f2f3f73021827846170dbdf54812d45741a95138dd778c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        1227,
+        1229
+      ],
+      "new_lines": [
+        1279,
+        1306
+      ],
+      "diff_block_lines": [
+        161,
+        190
+      ],
+      "hunk_header": "@@ -1207,25 +1226,100 @@ class OpenCodeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 393,
+  "receipt_file": "receipts/2045/selected.patch"
+}

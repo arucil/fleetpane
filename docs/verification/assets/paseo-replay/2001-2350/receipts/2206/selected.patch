@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/host-routes.ts
+RANGE {"path":"packages/app/src/utils/host-routes.ts","old_lines":[337,358],"new_lines":[337,358],"diff_block_lines":[61,90],"hunk_header":"@@ -331,31 +331,31 @@ export function buildHostAgentDetailRoute(","substantive_changed_lines":16}
+ 
+-export function buildHostRootRoute(serverId: string): string {
++export function buildHostRootRoute(serverId: string) {
+   const normalized = trimNonEmpty(serverId);
+   if (!normalized) {
+-    return "/";
++    return "/" as const;
+   }
+-  return `/h/${encodeSegment(normalized)}`;
++  return `/h/${encodeSegment(normalized)}` as const;
+ }
+ 
+-export function buildHostSessionsRoute(serverId: string): string {
++export function buildHostSessionsRoute(serverId: string) {
+   const base = buildHostRootRoute(serverId);
+   if (base === "/") {
+-    return "/";
++    return "/" as const;
+   }
+-  return `${base}/sessions`;
++  return `${base}/sessions` as const;
+ }
+ 
+-export function buildHostOpenProjectRoute(serverId: string): string {
++export function buildHostOpenProjectRoute(serverId: string) {
+   const base = buildHostRootRoute(serverId);
+   if (base === "/") {
+-    return "/";
++    return "/" as const;
+   }

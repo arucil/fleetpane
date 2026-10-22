@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2174,
+  "revision": "29b6f2a86fa61b4f05ec72d568749b8a7202b245",
+  "date": "2026-04-07T11:40:59+07:00",
+  "committer_date": "2026-04-07T11:40:59+07:00",
+  "parents": [
+    "638c2086096ac6677b4716486d7250200dd2db07"
+  ],
+  "subject": "fix(server): prefer origin/{branch} over local branch for worktrees",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:cd56232e308b9fc50040e64331d54d8e9d96cf06653b8e0a95ad4aca6caddf52",
+  "diff_tree_digest": "sha256:3a68305164aeed89dd5e517a0fe667a5eeeb9c350b87340d8e5e6c9050c5fc5b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/worktree.ts",
+      "old_lines": [
+        929,
+        937
+      ],
+      "new_lines": [
+        929,
+        936
+      ],
+      "diff_block_lines": [
+        11,
+        22
+      ],
+      "hunk_header": "@@ -925,13 +925,12 @@ export async function createWorktree({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 51,
+  "receipt_file": "receipts/2174/selected.patch"
+}

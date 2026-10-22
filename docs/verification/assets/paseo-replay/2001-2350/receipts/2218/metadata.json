@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2218,
+  "revision": "75542c10d8f5685ad0041b1e30d1b812cd6d3db9",
+  "date": "2026-04-08T22:03:30+07:00",
+  "committer_date": "2026-04-09T18:54:46+07:00",
+  "parents": [
+    "0e3e9bcd0c2e116b2a36e3f5784e0172a90d3d3a"
+  ],
+  "subject": "fix(claude): filter <local-command-stdout> messages from timeline",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:66c3a397e80107c078e90a53676a07586d0a3845d7d4fcee9a269ecb9d45acfe",
+  "diff_tree_digest": "sha256:28da9254de1646d83bce5f2039b0213820da68307f8142eadc0236666e382b98",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        421,
+        424
+      ],
+      "new_lines": [
+        422,
+        435
+      ],
+      "diff_block_lines": [
+        9,
+        23
+      ],
+      "hunk_header": "@@ -419,6 +419,17 @@ function isClaudeNoResponsePlaceholderText(value: unknown): boolean {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 56,
+  "receipt_file": "receipts/2218/selected.patch"
+}

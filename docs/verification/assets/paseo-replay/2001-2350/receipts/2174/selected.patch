@@ -1,0 +1,14 @@
+FILE packages/server/src/utils/worktree.ts
+RANGE {"path":"packages/server/src/utils/worktree.ts","old_lines":[929,937],"new_lines":[929,936],"diff_block_lines":[11,22],"hunk_header":"@@ -925,13 +925,12 @@ export async function createWorktree({","substantive_changed_lines":6}
+   try {
+-    await execAsync(`git rev-parse --verify ${normalizedBaseBranch}`, { cwd });
++    await execAsync(`git rev-parse --verify origin/${normalizedBaseBranch}`, { cwd });
++    resolvedBaseBranch = `origin/${normalizedBaseBranch}`;
+   } catch {
+-    // Local branch doesn't exist, try remote (origin/{branch})
+     try {
+-      await execAsync(`git rev-parse --verify origin/${normalizedBaseBranch}`, { cwd });
+-      resolvedBaseBranch = `origin/${normalizedBaseBranch}`;
++      await execAsync(`git rev-parse --verify ${normalizedBaseBranch}`, { cwd });
+     } catch {
+       throw new Error(`Base branch not found: ${normalizedBaseBranch}`);

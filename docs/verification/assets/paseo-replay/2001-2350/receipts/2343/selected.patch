@@ -1,0 +1,12 @@
+FILE packages/app/vitest.config.ts
+RANGE {"path":"packages/app/vitest.config.ts","old_lines":[24,27],"new_lines":[24,32],"diff_block_lines":[5,14],"hunk_header":"@@ -24,4 +24,9 @@ export default defineConfig({","substantive_changed_lines":3}
+@@ -24,4 +24,9 @@ export default defineConfig({
+      */
+     pool: "forks",
++    poolOptions: {
++      forks: {
++        maxForks: 2,
++      },
++    },
+     server: {
+       deps: {

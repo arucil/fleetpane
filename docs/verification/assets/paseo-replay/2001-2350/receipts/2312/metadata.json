@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2312,
+  "revision": "28f45a41a562c4ae52b12f2f14ac434f8c1f7bb3",
+  "date": "2026-04-11T16:58:39+07:00",
+  "committer_date": "2026-04-11T16:58:39+07:00",
+  "parents": [
+    "aa1d33f0a05e3cf29632d6d3ddc573e3972ca1b9"
+  ],
+  "subject": "feat: add prompt attachment support across sessions",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/screens/new-workspace-screen.tsx",
+    "A\tpackages/app/src/utils/review-attachments.test.ts",
+    "A\tpackages/app/src/utils/review-attachments.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "A\tpackages/server/src/server/agent/prompt-attachments.test.ts",
+    "A\tpackages/server/src/server/agent/prompt-attachments.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "A\tpackages/server/src/shared/messages.attachments.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:79475fda34b8c1121896c29cc0c580db845e5729bd084962c172629db1fd15d6",
+  "diff_tree_digest": "sha256:2bd9192f302aa97731b5db26b059a181dd46f8416d1b056b0d13c7c1baaff12f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/worktree-session.ts",
+      "old_lines": [
+        306,
+        306
+      ],
+      "new_lines": [
+        339,
+        368
+      ],
+      "diff_block_lines": [
+        75,
+        104
+      ],
+      "hunk_header": "@@ -305,4 +338,54 @@ export async function resolveGitCreateBaseBranch(",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 669,
+  "receipt_file": "receipts/2312/selected.patch"
+}

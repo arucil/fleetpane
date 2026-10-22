@@ -1,0 +1,21 @@
+FILE packages/app/src/terminal/runtime/terminal-emulator-runtime.ts
+RANGE {"path":"packages/app/src/terminal/runtime/terminal-emulator-runtime.ts","old_lines":[289,290],"new_lines":[291,309],"diff_block_lines":[10,28],"hunk_header":"@@ -287,4 +287,23 @@ export class TerminalEmulatorRuntime {","substantive_changed_lines":9}
++        // Ctrl+C: copy selection to clipboard if text is selected, otherwise let xterm send SIGINT
++        if (key === "c" && terminal.hasSelection()) {
++          void navigator.clipboard.writeText(terminal.getSelection());
++          return false;
++        }
++
++        // Ctrl+V: paste from clipboard into terminal
++        if (key === "v") {
++          event.preventDefault();
++          void navigator.clipboard.readText().then((text) => {
++            if (text) {
++              terminal.paste(text);
++            }
++          });
++          return false;
++        }
++
+         return true;
+       }

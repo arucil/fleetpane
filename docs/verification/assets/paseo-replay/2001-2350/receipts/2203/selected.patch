@@ -1,0 +1,13 @@
+FILE packages/website/src/routes/__root.tsx
+RANGE {"path":"packages/website/src/routes/__root.tsx","old_lines":[54,57],"new_lines":[54,63],"diff_block_lines":[5,15],"hunk_header":"@@ -54,4 +54,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {","substantive_changed_lines":5}
+@@ -54,4 +54,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+       <head>
+         <HeadContent />
++        <script async src="https://plausible.io/js/pa-cKNUoWbeH_Iksb2fh82s3.js" />
++        <script
++          dangerouslySetInnerHTML={{
++            __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`,
++          }}
++        />
+       </head>
+       <body className="antialiased bg-background text-foreground">

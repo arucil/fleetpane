@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2230,
+  "revision": "fa2f501dc730c783c3218a12195ef687f94642b3",
+  "date": "2026-04-09T10:32:01+07:00",
+  "committer_date": "2026-04-09T18:56:10+07:00",
+  "parents": [
+    "02a7a170f6cef78c0f54380577b150fe2bede7d9"
+  ],
+  "subject": "Use advertised hostnames during pairing",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "D\tpackages/app/src/components/name-host-modal.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:fd03db0de071ccf04aeab6aa8e62f8d053d019c9479f8b96f6cda64ae2e25c36",
+  "diff_tree_digest": "sha256:d1c4a8ad6958b83fc8dfdf78b6c3c9c221dc6932125f5dcdf687486a5aff7062",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/welcome-screen.tsx",
+      "old_lines": [
+        417,
+        445
+      ],
+      "new_lines": [
+        387,
+        392
+      ],
+      "diff_block_lines": [
+        74,
+        103
+      ],
+      "hunk_header": "@@ -416,36 +386,9 @@ export function WelcomeScreen({ onHostAdded }: WelcomeScreenProps) {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 234,
+  "receipt_file": "receipts/2230/selected.patch"
+}

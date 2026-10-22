@@ -1,0 +1,27 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[479,487],"new_lines":[479,500],"diff_block_lines":[7,31],"hunk_header":"@@ -478,10 +478,23 @@ function ProvidersSection({ routeServerId }: ProvidersSectionProps) {","substantive_changed_lines":19}
+               const ProviderIcon = getProviderIcon(def.id);
++              const providerError =
++                status === "error" && typeof entry?.error === "string" && entry.error.trim().length > 0
++                  ? entry.error.trim()
++                  : null;
+ 
+               return (
+                 <View key={def.id} style={styles.audioRow}>
+-                  <View style={[styles.audioRowContent, { flexDirection: "row", alignItems: "center", gap: theme.spacing[2] }]}>
+-                    <ProviderIcon size={theme.iconSize.sm} color={theme.colors.foreground} />
+-                    <Text style={styles.audioRowTitle}>{def.label}</Text>
++                  <View style={styles.audioRowContent}>
++                    <View
++                      style={{ flexDirection: "row", alignItems: "center", gap: theme.spacing[2] }}
++                    >
++                      <ProviderIcon size={theme.iconSize.sm} color={theme.colors.foreground} />
++                      <Text style={styles.audioRowTitle}>{def.label}</Text>
++                    </View>
++                    {providerError ? (
++                      <Text style={styles.aboutErrorText} numberOfLines={3}>
++                        {providerError}
++                      </Text>
++                    ) : null}
+                   </View>
+                   <View style={styles.providerActions}>

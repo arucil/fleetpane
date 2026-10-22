@@ -1,0 +1,32 @@
+FILE packages/app/src/components/welcome-screen.tsx
+RANGE {"path":"packages/app/src/components/welcome-screen.tsx","old_lines":[417,445],"new_lines":[387,392],"diff_block_lines":[74,103],"hunk_header":"@@ -416,36 +386,9 @@ export function WelcomeScreen({ onHostAdded }: WelcomeScreenProps) {","substantive_changed_lines":21}
+         onClose={() => setIsPasteLinkOpen(false)}
+-        onSaved={({ profile, serverId, hostname, isNewHost }) => {
++        onSaved={({ profile, serverId }) => {
+           onHostAdded?.(profile);
+-          setPendingRedirectServerId(serverId);
+-          if (isNewHost) {
+-            setPendingNameHost({ serverId, hostname });
+-            return;
+-          }
+           finishOnboarding(serverId);
+         }}
+       />
+-
+-      {pendingNameHost && pendingRedirectServerId ? (
+-        <NameHostModal
+-          visible
+-          serverId={pendingNameHost.serverId}
+-          hostname={pendingNameHostname}
+-          onSkip={() => {
+-            const serverId = pendingRedirectServerId;
+-            setPendingNameHost(null);
+-            setPendingRedirectServerId(null);
+-            finishOnboarding(serverId);
+-          }}
+-          onSave={(label) => {
+-            const serverId = pendingRedirectServerId;
+-            void renameHost(pendingNameHost.serverId, label).finally(() => {
+-              setPendingNameHost(null);
+-              setPendingRedirectServerId(null);
+-              finishOnboarding(serverId);

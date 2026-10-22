@@ -1,0 +1,13 @@
+FILE packages/app/src/components/adaptive-modal-sheet.tsx
+RANGE {"path":"packages/app/src/components/adaptive-modal-sheet.tsx","old_lines":[56,63],"new_lines":[58,67],"diff_block_lines":[14,24],"hunk_header":"@@ -55,9 +57,11 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":4}
+   desktopScroll: {
+-    flex: 1,
++    flexShrink: 1,
++    minHeight: 0,
+   },
+   desktopContent: {
+     padding: theme.spacing[6],
+     gap: theme.spacing[4],
++    flexGrow: 1,
+   },
+   bottomSheetHandle: {

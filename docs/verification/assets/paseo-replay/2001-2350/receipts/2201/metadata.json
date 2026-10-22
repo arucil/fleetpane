@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2201,
+  "revision": "5c93fbc9557622b92de22be17038d11a1a5d11e6",
+  "date": "2026-04-08T08:59:02+07:00",
+  "committer_date": "2026-04-08T08:59:02+07:00",
+  "parents": [
+    "5ac7b3f7c7a9b3be0200adaafac1200cb92c8bce"
+  ],
+  "subject": "feat: emit usage_updated events for real-time token usage updates",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts"
+  ],
+  "source_receipt_digest": "sha256:0460e60ea5e6b3ef55342d4af0f1ac119522e07547ab98c6c746b09bc1cd4009",
+  "diff_tree_digest": "sha256:9fc41c4b74d6dec5a1501ca5806e4011ef4e098c90e9b99bf115866dfc275166",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1237,
+        1237
+      ],
+      "new_lines": [
+        1240,
+        1269
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -1236,4 +1239,52 @@ function readContextWindowUsedTokensFromTaskProgress(",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 368,
+  "receipt_file": "receipts/2201/selected.patch"
+}

@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2164,
+  "revision": "fd9dfb0cc83eb0d34314cc81475d2ac2d2a757f7",
+  "date": "2026-04-07T04:22:20+02:00",
+  "committer_date": "2026-04-07T10:22:20+08:00",
+  "parents": [
+    "03380cfad0298df28847f9aea26bcc897d0213de"
+  ],
+  "subject": "feat: add side-by-side diff layout and whitespace toggle (#208)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "A\tpackages/app/src/hooks/use-changes-preferences.test.ts",
+    "A\tpackages/app/src/hooks/use-changes-preferences.ts",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "A\tpackages/app/src/utils/diff-layout.test.ts",
+    "A\tpackages/app/src/utils/diff-layout.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/checkout-diff-manager.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/website/src/routeTree.gen.ts"
+  ],
+  "source_receipt_digest": "sha256:a81a8feba740e319466209183bc0e5e55405fbe179b415b03bc54034a6f249c5",
+  "diff_tree_digest": "sha256:b7fb9325bd3d8d308c5e317c370a249bc24bff4ddb60e18074c19e8ab6125feb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        162,
+        162
+      ],
+      "new_lines": [
+        190,
+        219
+      ],
+      "diff_block_lines": [
+        107,
+        136
+      ],
+      "hunk_header": "@@ -161,4 +189,57 @@ function DiffLineView({",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 826,
+  "receipt_file": "receipts/2164/selected.patch"
+}

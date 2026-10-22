@@ -1,0 +1,32 @@
+FILE packages/desktop/src/features/auto-updater.ts
+RANGE {"path":"packages/desktop/src/features/auto-updater.ts","old_lines":[40,40],"new_lines":[49,78],"diff_block_lines":[36,65],"hunk_header":"@@ -32,10 +35,73 @@ let downloading = false;","substantive_changed_lines":18}
++
++  autoUpdater.on("update-available", (info) => {
++    cachedUpdateInfo = info;
++    downloadedUpdateVersion = null;
++    downloading = true;
++  });
++
++  autoUpdater.on("update-downloaded", (info) => {
++    cachedUpdateInfo = info;
++    downloadedUpdateVersion = info.version;
++    downloading = false;
++  });
++
++  autoUpdater.on("update-not-available", () => {
++    cachedUpdateInfo = null;
++    downloadedUpdateVersion = null;
++    downloading = false;
++  });
++
++  autoUpdater.on("error", (error) => {
++    downloading = false;
++    console.error("[auto-updater] Updater event failed:", error);
++  });
++}
++
++function isReadyToInstallVersion(version: string): boolean {
++  return downloadedUpdateVersion === version;
++}
++
++function buildCheckResult(input: {

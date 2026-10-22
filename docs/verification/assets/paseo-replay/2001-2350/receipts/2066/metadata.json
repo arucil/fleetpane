@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2066,
+  "revision": "255c2665ccd88c3437ce1c210f9695050ef482ee",
+  "date": "2026-04-03T22:15:44+07:00",
+  "committer_date": "2026-04-03T22:15:44+07:00",
+  "parents": [
+    "176942bbf1a319b9841d20934228e6dd87c1e607"
+  ],
+  "subject": "feat(opencode): support custom agents and slash commands",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent-commands.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/opencode-custom-agents.real.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:6ca9d83d119c7008576d5982601060e95071194bb31ee037124b8ad33f6d7248",
+  "diff_tree_digest": "sha256:d98f5c017d44b5ee19da0c8472f81daa2efb8431bca0ba5714471b70fce48c17",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3045,
+        3045
+      ],
+      "new_lines": [
+        3054,
+        3083
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -3043,4 +3047,39 @@ export class Session {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 252,
+  "receipt_file": "receipts/2066/selected.patch"
+}

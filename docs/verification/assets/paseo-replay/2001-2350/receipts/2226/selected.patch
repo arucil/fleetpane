@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[279,292],"new_lines":[255,272],"diff_block_lines":[121,150],"hunk_header":"@@ -278,124 +254,136 @@ export function LocalDaemonSection({ appVersion, showLifecycleControls }: LocalD","substantive_changed_lines":28}
+       </View>
+-      <View style={settingsStyles.card}>
+-        <View style={settingsStyles.row}>
+-          <View style={settingsStyles.rowContent}>
+-            <Text style={settingsStyles.rowTitle}>Status</Text>
+-            <Text style={settingsStyles.rowHint}>Only the built-in desktop daemon is shown here.</Text>
+-          </View>
+-          <View style={styles.statusValueGroup}>
+-            <Text style={styles.valueText}>{daemonStatusStateText}</Text>
+-            <Text style={styles.valueSubtext}>{daemonStatusDetailText}</Text>
+-          </View>
++      {isLoading ? (
++        <View style={[settingsStyles.card, styles.loadingCard]}>
++          <ActivityIndicator size="small" color={theme.colors.foregroundMuted} />
+         </View>
+-        {showLifecycleControls ? (
+-          <>
++      ) : (
++        <>
++          <View style={settingsStyles.card}>
++            <View style={settingsStyles.row}>
++              <View style={settingsStyles.rowContent}>
++                <Text style={settingsStyles.rowTitle}>Status</Text>
++                <Text style={settingsStyles.rowHint}>
++                  Only the built-in desktop daemon is shown here.
++                </Text>
++              </View>
++              <View style={styles.statusValueGroup}>
++                <Text style={styles.valueText}>{daemonStatusStateText}</Text>
++                <Text style={styles.valueSubtext}>{daemonStatusDetailText}</Text>

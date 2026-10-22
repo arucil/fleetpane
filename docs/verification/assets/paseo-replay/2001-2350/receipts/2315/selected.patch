@@ -1,0 +1,32 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[122,144],"new_lines":[120,129],"diff_block_lines":[32,61],"hunk_header":"@@ -113,34 +116,19 @@ import type { AgentClient, AgentProvider } from \"./agent/agent-sdk-types.js\";","substantive_changed_lines":21}
+ 
+-function resolveVoiceMcpBridgeCommand(
+-  logger: Logger,
+-): { command: string; baseArgs: string[] } | null {
+-  try {
+-    const decision = resolveVoiceMcpBridgeFromRuntime({
+-      bootstrapModuleUrl: import.meta.url,
+-      execPath: process.execPath,
+-      explicitScriptPath: process.env.PASEO_MCP_STDIO_SOCKET_BRIDGE_SCRIPT,
+-    });
+-    logger.info(
+-      {
+-        source: decision.source,
+-        command: decision.resolved.command,
+-        baseArgs: decision.resolved.baseArgs,
+-      },
+-      "Resolved voice MCP bridge command",
+-    );
+-    return decision.resolved;
+-  } catch (err) {
+-    logger.warn({ err }, "Voice MCP bridge script not available — voice MCP via stdio disabled");
++function formatHostForHttpUrl(host: string): string {
++  return host.includes(":") && !host.startsWith("[") ? `[${host}]` : host;
++}
++
++function createAgentMcpBaseUrl(listenTarget: ListenTarget | null): string | null {
++  if (!listenTarget || listenTarget.type !== "tcp") {
+     return null;
+   }
++  return new URL(

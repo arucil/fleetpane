@@ -1,0 +1,32 @@
+FILE packages/desktop/src/login-shell-env.ts
+RANGE {"path":"packages/desktop/src/login-shell-env.ts","old_lines":[0,0],"new_lines":[11,40],"diff_block_lines":[17,46],"hunk_header":"@@ -0,0 +1,113 @@","substantive_changed_lines":20}
++
++function getSystemShell(): string {
++  const shell = process.env.SHELL;
++  if (shell) return shell;
++
++  try {
++    const info = userInfo();
++    if (info.shell && info.shell !== "/bin/false") return info.shell;
++  } catch {}
++
++  return process.platform === "darwin" ? "/bin/zsh" : "/bin/bash";
++}
++
++function resolveShellEnv(): Record<string, string> | undefined {
++  if (process.platform === "win32") return undefined;
++
++  const savedRunAsNode = process.env.ELECTRON_RUN_AS_NODE;
++  const savedNoAttach = process.env.ELECTRON_NO_ATTACH_CONSOLE;
++
++  const mark = randomUUID().replace(/-/g, "").slice(0, 12);
++  const regex = new RegExp(mark + "({.*})" + mark);
++
++  const shell = getSystemShell();
++  const name = basename(shell);
++
++  let command: string;
++  let shellArgs: string[];
++
++  if (/^(?:pwsh|powershell)(?:-preview)?$/.test(name)) {
++    command = `& '${process.execPath}' -p '''${mark}'' + JSON.stringify(process.env) + ''${mark}'''`;

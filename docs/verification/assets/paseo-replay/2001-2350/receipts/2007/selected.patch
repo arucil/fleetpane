@@ -1,0 +1,16 @@
+FILE packages/app/src/voice/voice-runtime.ts
+RANGE {"path":"packages/app/src/voice/voice-runtime.ts","old_lines":[1062,1067],"new_lines":[1065,1076],"diff_block_lines":[20,33],"hunk_header":"@@ -1061,7 +1064,13 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {","substantive_changed_lines":9}
+       if (isSpeaking) {
++        const shouldInterruptPlayback =
++          state.snapshot.phase === "playing" || playback.groups.size > 0;
++        const hadCue = cue.active || cue.timeout !== null || cue.playing;
+         resetPlaybackState();
+-        deps.engine.stop();
+-        deps.engine.clearQueue();
++        stopCue();
++        if (shouldInterruptPlayback && !hadCue) {
++          deps.engine.stop();
++          deps.engine.clearQueue();
++        }
+         getActiveSession()?.adapter.setAssistantAudioPlaying(false);
+       }

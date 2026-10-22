@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2116,
+  "revision": "c32bc847bfcfca1f71f4772ad95bed827d72def9",
+  "date": "2026-04-05T09:17:55+07:00",
+  "committer_date": "2026-04-05T09:21:45+07:00",
+  "parents": [
+    "7a2d9760817e6c25aed69314b0a2e5f6b4e7be6d"
+  ],
+  "subject": "feat(app): restore reload action for agent tabs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts"
+  ],
+  "source_receipt_digest": "sha256:0eeb4843da0dd46e85ba6c7678b9c53b437a20e8701f151b979695f5872e119c",
+  "diff_tree_digest": "sha256:d2a62f018008d220ba0727f31f7a73b780da517a91e0eb2a82e581c6b42c21e0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1369,
+        1370
+      ],
+      "new_lines": [
+        1379,
+        1397
+      ],
+      "diff_block_lines": [
+        63,
+        81
+      ],
+      "hunk_header": "@@ -1367,4 +1377,21 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 107,
+  "receipt_file": "receipts/2116/selected.patch"
+}

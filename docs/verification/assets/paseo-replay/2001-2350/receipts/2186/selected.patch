@@ -1,0 +1,32 @@
+FILE packages/app/src/components/message.tsx
+RANGE {"path":"packages/app/src/components/message.tsx","old_lines":[916,916],"new_lines":[922,951],"diff_block_lines":[19,48],"hunk_header":"@@ -914,4 +915,63 @@ export const AssistantMessage = memo(function AssistantMessage({","substantive_changed_lines":22}
++
++const speakMessageStylesheet = StyleSheet.create((theme) => ({
++  container: {
++    paddingHorizontal: theme.spacing[2],
++    paddingVertical: theme.spacing[3],
++  },
++  containerSpacing: {
++    marginBottom: theme.spacing[4],
++  },
++  header: {
++    flexDirection: "row",
++    alignItems: "center",
++    gap: theme.spacing[2],
++    marginBottom: theme.spacing[2],
++  },
++  headerLabel: {
++    fontFamily: Fonts.sans,
++    fontSize: 12,
++    fontWeight: "500",
++    color: theme.colors.foregroundMuted,
++  },
++  text: {
++    fontFamily: Fonts.sans,
++    fontSize: theme.fontSize.base,
++    lineHeight: 22,
++    color: theme.colors.foreground,
++  },
++}));
++
++export const SpeakMessage = memo(function SpeakMessage({

@@ -1,0 +1,22 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[2572,2573],"new_lines":[2578,2597],"diff_block_lines":[23,42],"hunk_header":"@@ -2569,5 +2569,29 @@ export class AgentManager {","substantive_changed_lines":10}
++          const models = await client.listModels();
++          const defaultModel = models.find((model) => model.isDefault) ?? models[0];
++          if (defaultModel) {
++            normalized.model = defaultModel.id;
++          }
++        } catch {
++          // Provider may not support model listing — leave model undefined
++        }
++      }
++    }
++
++    if (!normalized.modeId) {
++      try {
++        normalized.modeId =
++          getAgentProviderDefinition(normalized.provider).defaultModeId ?? undefined;
++      } catch {
++        // Unknown provider
++      }
+     }
+ 

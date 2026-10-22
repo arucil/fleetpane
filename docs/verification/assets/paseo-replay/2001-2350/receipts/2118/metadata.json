@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2118,
+  "revision": "a264058a3057185f1a94daf3c72038fc1fce9833",
+  "date": "2026-04-05T11:10:49+07:00",
+  "committer_date": "2026-04-05T11:10:49+07:00",
+  "parents": [
+    "702e2e7db93517d40e02429211b2de9b2686a195"
+  ],
+  "subject": "Remove noisy agent toasts and debug logging",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.ts",
+    "D\tpackages/app/src/hooks/use-delayed-history-refresh-toast.tsx",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/voice/audio-engine.native.ts",
+    "M\tpackages/app/src/voice/voice-runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:02bedcd8b3d68ba0cb67a3fc7b2b8a0bd25295bdcacae68bbeadc61082e8a779",
+  "diff_tree_digest": "sha256:3623878945b6e9cc8f4ccc504870855943e4a726f634ca4a23f43365cb0cbf09",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/voice/voice-runtime.ts",
+      "old_lines": [
+        455,
+        479
+      ],
+      "new_lines": [
+        368,
+        378
+      ],
+      "diff_block_lines": [
+        159,
+        184
+      ],
+      "hunk_header": "@@ -443,37 +360,19 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 471,
+  "receipt_file": "receipts/2118/selected.patch"
+}

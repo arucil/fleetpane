@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2148,
+  "revision": "f75e28a77f4698941bad018ef9a7e67ef790c072",
+  "date": "2026-04-06T10:54:56+07:00",
+  "committer_date": "2026-04-06T10:54:56+07:00",
+  "parents": [
+    "eabd561fde215f40f5ce175348a6d959f01d9efc"
+  ],
+  "subject": "feat: add CI check status to workspace sidebar and hover card",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:d5c0dfa07a3b82800b43e0e5fab313fba395f5982922519026286451b7208e94",
+  "diff_tree_digest": "sha256:f5d783a75a593b2808ec5ce0ba860b223ed88a6189e9d06bd4142bfbe0ff3769",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-hover-card.tsx",
+      "old_lines": [
+        340,
+        340
+      ],
+      "new_lines": [
+        341,
+        370
+      ],
+      "diff_block_lines": [
+        9,
+        38
+      ],
+      "hunk_header": "@@ -338,4 +338,44 @@ function WorkspaceHoverCardContent({",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 207,
+  "receipt_file": "receipts/2148/selected.patch"
+}

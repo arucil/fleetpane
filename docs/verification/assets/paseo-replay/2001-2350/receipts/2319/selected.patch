@@ -1,0 +1,14 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[198,201],"new_lines":[199,209],"diff_block_lines":[11,22],"hunk_header":"@@ -198,4 +199,11 @@ export async function createPaseoDaemon(","substantive_changed_lines":3}
+@@ -198,4 +199,11 @@ export async function createPaseoDaemon(
+   const elapsed = () => `${(performance.now() - bootstrapStart).toFixed(0)}ms`;
+   const daemonVersion = resolveDaemonVersion(import.meta.url);
++  const daemonConfigStore = new DaemonConfigStore(
++    config.paseoHome,
++    {
++      mcp: { injectIntoAgents: config.mcpInjectIntoAgents ?? true },
++    },
++    logger,
++  );
+ 
+   try {

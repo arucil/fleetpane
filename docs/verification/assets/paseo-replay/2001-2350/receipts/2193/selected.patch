@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[140,140],"new_lines":[140,169],"diff_block_lines":[14,43],"hunk_header":"@@ -139,4 +139,94 @@ interface DiffFileSectionProps {","substantive_changed_lines":23}
+ 
++function lineTypeBackground(type: DiffLine["type"] | undefined | null) {
++  if (!type) return styles.emptySplitCell;
++  if (type === "add") return styles.addLineContainer;
++  if (type === "remove") return styles.removeLineContainer;
++  if (type === "header") return styles.headerLineContainer;
++  return styles.contextLineContainer;
++}
++
++function DiffGutterCell({
++  lineNumber,
++  type,
++  gutterWidth,
++}: {
++  lineNumber: number | null;
++  type: DiffLine["type"] | undefined | null;
++  gutterWidth: number;
++}) {
++  return (
++    <View style={[styles.gutterCell, lineTypeBackground(type), { width: gutterWidth }]}>
++      <Text
++        style={[
++          styles.lineNumberText,
++          type === "add" && styles.addLineNumberText,
++          type === "remove" && styles.removeLineNumberText,
++        ]}
++      >
++        {lineNumber != null ? String(lineNumber) : ""}
++      </Text>
++    </View>

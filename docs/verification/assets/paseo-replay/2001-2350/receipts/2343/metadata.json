@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2343,
+  "revision": "7c18170d6a638654c45edec35d8797cb04cb07b0",
+  "date": "2026-04-12T15:06:10+07:00",
+  "committer_date": "2026-04-12T15:06:10+07:00",
+  "parents": [
+    "ca20945b93daa23c966125091618dbb7ecd93256"
+  ],
+  "subject": "Cap app vitest workers to 2 forks to reduce CPU pressure",
+  "diff_tree_paths": [
+    "M\tpackages/app/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:1f630d28c53906e130b9df4ad2daccf0d0c9e29fe577e54749ce028b65fbaa73",
+  "diff_tree_digest": "sha256:61777550cb265ef6c74cb5b80dba25faf681774ca2f0c2a957748e5ab331d68b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/vitest.config.ts",
+      "old_lines": [
+        24,
+        27
+      ],
+      "new_lines": [
+        24,
+        32
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -24,4 +24,9 @@ export default defineConfig({",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 3,
+  "receipt_file": "receipts/2343/selected.patch"
+}

@@ -1,0 +1,28 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[1221,1237],"new_lines":[1233,1246],"diff_block_lines":[70,95],"hunk_header":"@@ -1218,20 +1231,16 @@ class OpenCodeAgentSession implements AgentSession {","substantive_changed_lines":17}
+ 
+-    if (promptResponse.error) {
+-      const errorMsg = normalizeTurnFailureError(promptResponse.error);
+-      this.notifySubscribers({
+-        type: "turn_failed",
+-        provider: "opencode",
+-        error: errorMsg,
+-      });
+-      throw new Error(errorMsg);
++      if (promptResponse.error) {
++        const errorMsg = normalizeTurnFailureError(promptResponse.error);
++        this.notifySubscribers({
++          type: "turn_failed",
++          provider: "opencode",
++          error: errorMsg,
++        });
++        throw new Error(errorMsg);
++      }
+     }
+ 
+-    const turnId = this.createTurnId();
+-    this.activeForegroundTurnId = turnId;
+-    void this.consumeEventStream(turnId, turnAbortController);
+-
+     return { turnId };
+   }

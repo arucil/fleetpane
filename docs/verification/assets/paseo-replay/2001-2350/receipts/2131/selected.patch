@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[375,375],"new_lines":[387,416],"diff_block_lines":[51,80],"hunk_header":"@@ -373,9 +380,136 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg","substantive_changed_lines":23}
++  const [debouncedCwd, setDebouncedCwd] = useState<string | undefined>(undefined);
++  useEffect(() => {
++    const trimmed = formState.workingDir.trim();
++    const next = trimmed.length > 0 ? trimmed : undefined;
++    const timer = setTimeout(() => setDebouncedCwd(next), 180);
++    return () => clearTimeout(timer);
++  }, [formState.workingDir]);
++
++  const snapshotQueryKey = useMemo(
++    () => providersSnapshotQueryKey(formState.serverId, debouncedCwd),
++    [debouncedCwd, formState.serverId],
++  );
++
++  const providersSnapshotQuery = useQuery({
++    queryKey: snapshotQueryKey,
++    enabled: Boolean(
++      supportsProvidersSnapshot &&
++        isVisible &&
++        isTargetDaemonReady &&
++        formState.serverId &&
++        client &&
++        isConnected,
++    ),
++    staleTime: 60 * 1000,
++    queryFn: async () => {
++      if (!client) {
++        throw new Error("Host is not connected");
++      }
++      return client.getProvidersSnapshot({ cwd: debouncedCwd });
++    },

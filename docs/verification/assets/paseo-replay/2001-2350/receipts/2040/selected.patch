@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[303,323],"new_lines":[345,354],"diff_block_lines":[104,133],"hunk_header":"@@ -290,47 +330,34 @@ function ControlledStatusBar({","substantive_changed_lines":26}
++                    canSelectProvider={canSelectProviderInModelMenu}
++                    onSelect={(selectedProviderId, modelId) => {
++                      if (selectedProviderId === provider) {
++                        onSelectModel?.(modelId);
++                      }
++                    }}
++                    favoriteKeys={favoriteKeys}
++                    onToggleFavorite={onToggleFavoriteModel}
++                    isLoading={isModelLoading}
+                     disabled={modelDisabled}
+-                    onPress={() => handleSelectorPress("model")}
+-                    style={({ pressed, hovered }) => [
+-                      styles.modeBadge,
+-                      hovered && styles.modeBadgeHovered,
+-                      (pressed || openSelector === "model") && styles.modeBadgePressed,
+-                      modelDisabled && styles.disabledBadge,
+-                    ]}
+-                    accessibilityRole="button"
+-                    accessibilityLabel="Select agent model"
+-                    testID="agent-model-selector"
+-                  >
+-                    <ProviderIcon size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
+-                    <Text style={styles.modeBadgeText}>{displayModel}</Text>
+-                    <ChevronDown size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
+-                  </Pressable>
+-                </TooltipTrigger>
+-                <TooltipContent side="top" align="center" offset={8}>
+-                  <Text style={styles.tooltipText}>{getStatusSelectorHint("model")}</Text>
+-                </TooltipContent>
+-              </Tooltip>

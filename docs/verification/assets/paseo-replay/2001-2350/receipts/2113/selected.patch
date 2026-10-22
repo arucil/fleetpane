@@ -1,0 +1,10 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,12],"diff_block_lines":[10,17],"hunk_header":"@@ -1,4 +1,12 @@","substantive_changed_lines":4}
++### Fixed
++- Voice TTS in Electron — sherpa now requests copied buffers and the voice MCP bridge sets `ELECTRON_RUN_AS_NODE`, preventing "external buffers not allowed" crashes.
++- QR pairing in desktop — CLI JSON output parsing now tolerates Node deprecation warnings in stdout.
++- STT segment race condition — segment ID and audio buffer are snapshotted before the async transcription call, so rapid commits no longer interleave.
++- Per-host "Add connection" button removed — it blocked multi-host setups by scoping new connections to a single server.
++
+ ## 0.1.46 - 2026-04-04
+ 

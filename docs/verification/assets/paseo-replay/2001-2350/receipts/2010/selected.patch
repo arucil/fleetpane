@@ -1,0 +1,12 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[276,277],"new_lines":[281,290],"diff_block_lines":[13,22],"hunk_header":"@@ -274,4 +274,17 @@ export function findExecutable(","substantive_changed_lines":5}
++ */
++export function quoteWindowsCommand(command: string): string {
++  if (process.platform !== "win32") return command;
++  if (!command.includes(" ")) return command;
++  if (command.startsWith('"') && command.endsWith('"')) return command;
++  return `"${command}"`;
++}
++
+ export function isCommandAvailable(command: string): boolean {
+   return findExecutable(command) !== null;

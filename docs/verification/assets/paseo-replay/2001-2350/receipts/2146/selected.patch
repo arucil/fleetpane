@@ -1,0 +1,13 @@
+FILE packages/app/src/components/combined-model-selector.tsx
+RANGE {"path":"packages/app/src/components/combined-model-selector.tsx","old_lines":[171,176],"new_lines":[172,181],"diff_block_lines":[27,37],"hunk_header":"@@ -170,7 +171,11 @@ function ModelRow({","substantive_changed_lines":5}
+ 
+-  const item = (
++  const showDescription =
++    row.description && PROVIDERS_WITH_MODEL_DESCRIPTIONS.has(row.provider);
++
++  return (
+     <ComboboxItem
+       label={row.modelLabel}
++      description={showDescription ? row.description : undefined}
+       selected={isSelected}
+       disabled={disabled}

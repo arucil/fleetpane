@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[3045,3045],"new_lines":[3054,3083],"diff_block_lines":[22,51],"hunk_header":"@@ -3043,4 +3047,39 @@ export class Session {","substantive_changed_lines":18}
++      const modes = await this.providerRegistry[msg.provider].fetchModes({
++        cwd: msg.cwd ? expandTilde(msg.cwd) : undefined,
++      });
++      this.emit({
++        type: "list_provider_modes_response",
++        payload: {
++          provider: msg.provider,
++          modes,
++          error: null,
++          fetchedAt,
++          requestId: msg.requestId,
++        },
++      });
++    } catch (error) {
++      this.sessionLogger.error(
++        { err: error, provider: msg.provider },
++        `Failed to list modes for ${msg.provider}`,
++      );
++      this.emit({
++        type: "list_provider_modes_response",
++        payload: {
++          provider: msg.provider,
++          error: (error as Error)?.message ?? String(error),
++          fetchedAt,
++          requestId: msg.requestId,
++        },
++      });
++    }
++  }
++

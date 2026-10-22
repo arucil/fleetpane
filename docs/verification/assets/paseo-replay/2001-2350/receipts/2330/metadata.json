@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2330,
+  "revision": "0d340959d7b1b939e4bea8fdc436f7ba77846d60",
+  "date": "2026-04-12T12:10:14+07:00",
+  "committer_date": "2026-04-12T12:10:14+07:00",
+  "parents": [
+    "b9269df3e4764fb7df5b88baad7c85f3b9694d9c"
+  ],
+  "subject": "Gate workspace_update emissions to prevent unnecessary sidebar re-renders",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-source-of-truth.test.ts",
+    "M\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/sidebar-project-row-model.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.test.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:b232e1d27df7fd1985455b8348b615aaad8dc7c5914bc3190c370ab190952247",
+  "diff_tree_digest": "sha256:aa16cb04009a15cb2bb0751f31bfd19d77e2badf47075226b73912f9736857f7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-sidebar-workspaces-list.ts",
+      "old_lines": [
+        253,
+        266
+      ],
+      "new_lines": [
+        226,
+        229
+      ],
+      "diff_block_lines": [
+        76,
+        90
+      ],
+      "hunk_header": "@@ -252,15 +225,5 @@ function getWorkspaceOrderScopeKey(serverId: string, projectKey: string): string",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 106,
+  "receipt_file": "receipts/2330/selected.patch"
+}

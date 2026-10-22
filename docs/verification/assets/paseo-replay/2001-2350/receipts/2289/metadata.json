@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2289,
+  "revision": "1ea5e5a7694acd1e2f3cfd4a3fff9adca4c3f3d9",
+  "date": "2026-04-10T17:19:42+07:00",
+  "committer_date": "2026-04-10T17:19:42+07:00",
+  "parents": [
+    "49e67363b2bb335e1892d11b731218f0eb3fa402"
+  ],
+  "subject": "fix: remove dead backpressure code left over from terminal stream fix",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:e5cbd411a676ec036f3185964174092d6e778607306afc51b7bceb3b7c247950",
+  "diff_tree_digest": "sha256:1e13ae481ee79085d1aad1386345221d60dbff488c684ff518720c78a0537de0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        636,
+        648
+      ],
+      "new_lines": [
+        636,
+        638
+      ],
+      "diff_block_lines": [
+        7,
+        19
+      ],
+      "hunk_header": "@@ -635,14 +635,4 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 15,
+  "receipt_file": "receipts/2289/selected.patch"
+}

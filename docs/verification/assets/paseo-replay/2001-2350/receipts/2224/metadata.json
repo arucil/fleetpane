@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2224,
+  "revision": "f4b487df7822d7d457f8fbf5f7d369aeefdb02a3",
+  "date": "2026-04-08T21:10:11-05:00",
+  "committer_date": "2026-04-09T18:55:19+07:00",
+  "parents": [
+    "2a5ac7a0135eb7489dee4ae770816c896be8caa2"
+  ],
+  "subject": "Fix commands not loading for Pi agent (#225)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/acp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/pi-acp-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:8a4f98919a86dd946d011b0991847d30f54c4da454e0e1314080584c1d3880fe",
+  "diff_tree_digest": "sha256:d3e73b98cbc307fed2d9b48cde9f101fad7b7c421400e86db60d4979912a98f5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/acp-agent.ts",
+      "old_lines": [
+        878,
+        878
+      ],
+      "new_lines": [
+        896,
+        925
+      ],
+      "diff_block_lines": [
+        65,
+        94
+      ],
+      "hunk_header": "@@ -877,5 +895,57 @@ export class ACPAgentSession implements AgentSession, ACPClient {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 86,
+  "receipt_file": "receipts/2224/selected.patch"
+}

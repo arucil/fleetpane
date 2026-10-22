@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2325,
+  "revision": "f35b0b8b7d1489487a998fe99a080f8f74e68b59",
+  "date": "2026-04-12T10:23:49+07:00",
+  "committer_date": "2026-04-12T10:23:49+07:00",
+  "parents": [
+    "fb5e2608e05a4bf6670a29b652ee0f542ea5a0ec"
+  ],
+  "subject": "Split streaming markdown into memoized blocks for mobile perf (#260)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "A\tpackages/app/src/utils/__tests__/split-markdown-blocks.test.ts",
+    "A\tpackages/app/src/utils/split-markdown-blocks.ts"
+  ],
+  "source_receipt_digest": "sha256:860205c7c492b9aef1da559b19216a37a19463b83adcd49807a1be08de86a792",
+  "diff_tree_digest": "sha256:294dd5a0d319f4602a2de021de29d8a2018c71074485911a01bf83dab7bdf545",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/split-markdown-blocks.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        1,
+        30
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -0,0 +1,60 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 116,
+  "receipt_file": "receipts/2325/selected.patch"
+}

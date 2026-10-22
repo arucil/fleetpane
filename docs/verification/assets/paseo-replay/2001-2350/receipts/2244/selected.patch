@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[38,38],"new_lines":[38,67],"diff_block_lines":[8,37],"hunk_header":"@@ -36,6 +36,41 @@ env:","substantive_changed_lines":26}
++  create-release:
++    if: ${{ (github.event_name == 'push' && !startsWith(github.ref_name, 'desktop-macos-v') && !startsWith(github.ref_name, 'desktop-linux-v') && !startsWith(github.ref_name, 'desktop-windows-v')) || (github.event_name == 'workflow_dispatch' && github.event.inputs.platform == 'all') }}
++    permissions:
++      contents: write
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          sparse-checkout: scripts
++          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref }}
++
++      - name: Resolve release metadata
++        shell: bash
++        run: node scripts/emit-release-env.mjs --source-tag "$SOURCE_TAG" >> "$GITHUB_ENV"
++
++      - name: Create GitHub release
++        if: env.IS_SMOKE_TAG != 'true'
++        env:
++          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++        run: |
++          if gh release view "$RELEASE_TAG" --repo "${{ github.repository }}" > /dev/null 2>&1; then
++            echo "Release $RELEASE_TAG already exists, skipping creation"
++          else
++            prerelease_flag=""
++            if [[ "$IS_PRERELEASE" == "true" ]]; then
++              prerelease_flag="--prerelease"
++            fi
++            gh release create "$RELEASE_TAG" \
++              --repo "${{ github.repository }}" \
++              --title "Paseo $RELEASE_TAG" \

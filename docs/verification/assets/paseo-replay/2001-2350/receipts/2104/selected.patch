@@ -1,0 +1,22 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/silero-vad-provider.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/silero-vad-provider.ts","old_lines":[8,9],"new_lines":[23,42],"diff_block_lines":[28,47],"hunk_header":"@@ -5,5 +8,35 @@ import type {","substantive_changed_lines":12}
++ */
++export async function ensureSileroVadModel(modelsDir: string, logger: Logger): Promise<string> {
++  const destDir = path.join(modelsDir, SILERO_VAD_DIR);
++  const destPath = path.join(destDir, SILERO_VAD_FILE);
++
++  try {
++    const s = await stat(destPath);
++    if (s.isFile() && s.size > 0) return destPath;
++  } catch {
++    // not present yet
++  }
++
++  const bundledPath = resolveBundledSileroVadModelPath();
++  await mkdir(destDir, { recursive: true });
++  await copyFile(bundledPath, destPath);
++  logger.info({ destPath }, "Copied Silero VAD model to models directory");
++  return destPath;
++}
+ 
+ export class SherpaSileroTurnDetectionProvider implements TurnDetectionProvider {

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[790,819],"new_lines":[825,825],"diff_block_lines":[90,119],"hunk_header":"@@ -779,62 +823,46 @@ function PermissionRequestCard({","substantive_changed_lines":22}
+-          ]}
+-          onPress={() => {
+-            setRespondingAction("deny");
+-            handleResponse({
+-              behavior: "deny",
+-              message: "Denied by user",
+-            });
+-          }}
+-          disabled={isResponding}
+-        >
+-          {respondingAction === "deny" ? (
+-            <ActivityIndicator size="small" color={theme.colors.foregroundMuted} />
+-          ) : (
+-            <View style={permissionStyles.optionContent}>
+-              <X size={14} color={theme.colors.foregroundMuted} />
+-              <Text style={[permissionStyles.optionText, { color: theme.colors.foregroundMuted }]}>
+-                Deny
+-              </Text>
+-            </View>
+-          )}
+-        </Pressable>
+-
+-        <Pressable
+-          testID="permission-request-accept"
+-          style={({ pressed, hovered = false }) => [
+-            permissionStyles.optionButton,
+-            {
+-              backgroundColor: hovered ? theme.colors.surface2 : theme.colors.surface1,
+-              borderColor: theme.colors.borderAccent,
+-            },

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[886,911],"new_lines":[879,891],"diff_block_lines":[27,56],"hunk_header":"@@ -877,36 +875,18 @@ export function AgentStatusBar({ agentId, serverId, onDropdownClose }: AgentStat","substantive_changed_lines":16}
+-    staleTime: 5 * 60 * 1000,
+-    queryFn: async () => {
+-      if (!client || !agent) {
+-        throw new Error("Daemon client unavailable");
+-      }
+-      const payload = await client.listProviderModels(agent.provider, { cwd: agent.cwd });
+-      if (payload.error) {
+-        throw new Error(payload.error);
+-      }
+-      return payload.models ?? [];
+-    },
+-  });
+-
+   const snapshotModels = useMemo(() => {
+-    if (!supportsSnapshot || !snapshotEntries || !agent?.provider) {
++    if (!snapshotEntries || !agent?.provider) {
+       return null;
+     }
+     const entry = snapshotEntries.find((e) => e.provider === agent.provider);
+     return entry?.models ?? null;
+-  }, [supportsSnapshot, snapshotEntries, agent?.provider]);
++  }, [snapshotEntries, agent?.provider]);
+ 
+-  const models = supportsSnapshot ? snapshotModels : (legacyModelsQuery.data ?? null);
++  const models = snapshotModels;
+ 
+   const agentProviderDefinitions = useMemo(() => {
+-    if (supportsSnapshot && snapshotEntries) {
++    if (snapshotEntries) {
+       return AGENT_PROVIDER_DEFINITIONS.filter((d) =>

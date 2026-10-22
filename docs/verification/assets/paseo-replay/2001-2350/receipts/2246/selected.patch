@@ -1,0 +1,17 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[421,424],"new_lines":[422,435],"diff_block_lines":[9,23],"hunk_header":"@@ -419,6 +419,17 @@ function isClaudeNoResponsePlaceholderText(value: unknown): boolean {","substantive_changed_lines":8}
++
++function isClaudeLocalCommandStdout(value: unknown): boolean {
++  const normalized = normalizeClaudeTranscriptText(value);
++  return normalized !== null && LOCAL_COMMAND_STDOUT_PATTERN.test(normalized);
++}
++
+ function isClaudeTranscriptNoiseText(value: unknown): boolean {
+-  return isClaudeInterruptPlaceholderText(value) || isClaudeNoResponsePlaceholderText(value);
++  return (
++    isClaudeInterruptPlaceholderText(value) ||
++    isClaudeNoResponsePlaceholderText(value) ||
++    isClaudeLocalCommandStdout(value)
++  );
+ }
+ 

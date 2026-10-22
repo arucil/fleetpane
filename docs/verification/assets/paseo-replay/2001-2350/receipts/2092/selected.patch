@@ -1,0 +1,19 @@
+FILE skills/paseo-handoff/SKILL.md
+RANGE {"path":"skills/paseo-handoff/SKILL.md","old_lines":[32,41],"new_lines":[32,41],"diff_block_lines":[7,23],"hunk_header":"@@ -31,11 +31,11 @@ Parse `$ARGUMENTS` to determine:","substantive_changed_lines":14}
+ 
+-| User says | Provider | Model | Mode |
+-|---|---|---|---|
+-| *(nothing)* | `codex` | `gpt-5.4` | `full-access` |
+-| `codex` | `codex` | `gpt-5.4` | `full-access` |
+-| `claude` | `claude` | `opus` | `bypass` |
+-| `opus` | `claude` | `opus` | `bypass` |
+-| `sonnet` | `claude` | `sonnet` | `bypass` |
++| User says | --provider | Mode |
++|---|---|---|
++| *(nothing)* | `codex/gpt-5.4` | `full-access` |
++| `codex` | `codex/gpt-5.4` | `full-access` |
++| `claude` | `claude/opus` | `bypass` |
++| `opus` | `claude/opus` | `bypass` |
++| `sonnet` | `claude/sonnet` | `bypass` |
+ 
+ Default is **Codex** with `gpt-5.4`.

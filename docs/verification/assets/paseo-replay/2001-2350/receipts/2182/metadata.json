@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2182,
+  "revision": "21c776140388fb8529e0d89b48cb139c4347a68f",
+  "date": "2026-04-07T16:09:47+07:00",
+  "committer_date": "2026-04-07T16:09:47+07:00",
+  "parents": [
+    "682fc54778c5a83aadc3f24e02cd7006eb306bd1"
+  ],
+  "subject": "Defer workspace diff stats until post-bootstrap updates",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:cfb7b7e2d00776ca37c6959b7ac9c906ea1c5d38ad02bad8bc6310323f09af1c",
+  "diff_tree_digest": "sha256:e3274c53b8e5a2619c56da7c421536c6fca53570a29720b8e2159a4d7fe061e9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5808,
+        5835
+      ],
+      "new_lines": [
+        5832,
+        5834
+      ],
+      "diff_block_lines": [
+        111,
+        140
+      ],
+      "hunk_header": "@@ -5804,56 +5830,15 @@ export class Session {",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 357,
+  "receipt_file": "receipts/2182/selected.patch"
+}

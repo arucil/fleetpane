@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2082,
+  "revision": "65573499aff6d99ac0740ea4c153d4f8f46f28a8",
+  "date": "2026-04-04T14:42:24+07:00",
+  "committer_date": "2026-04-04T15:42:24+08:00",
+  "parents": [
+    "9154f8fc4d45959c7988d39b66bf5965120387bc"
+  ],
+  "subject": "feat(server): add Pi agent provider and re-enable Copilot (#191)",
+  "diff_tree_paths": [
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "A\tpackages/app/src/components/icons/pi-icon.tsx",
+    "M\tpackages/app/src/components/provider-icons.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "D\tpackages/server/src/server/agent/providers/claude-acp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/pi-acp-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "D\tpackages/server/src/server/daemon-e2e/claude-acp.real.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/pi.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:b2f747f99e51fee564c2ace28967e5affeab28662186007c01584bb0c6c2a6c5",
+  "diff_tree_digest": "sha256:0ac530814687648e484c6ca0c71081b3bdfddf7373030e2b36be0dd544480af9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/pi-acp-agent.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        42,
+        71
+      ],
+      "diff_block_lines": [
+        48,
+        77
+      ],
+      "hunk_header": "@@ -0,0 +1,147 @@",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 726,
+  "receipt_file": "receipts/2082/selected.patch"
+}

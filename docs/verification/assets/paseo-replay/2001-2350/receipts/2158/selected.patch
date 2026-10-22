@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[450,479],"new_lines":[420,420],"diff_block_lines":[68,97],"hunk_header":"@@ -436,155 +418,11 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg","substantive_changed_lines":21}
+-    staleTime: 60 * 1000,
+-    queryFn: async () => {
+-      if (!client) {
+-        throw new Error("Host is not connected");
+-      }
+-      const payload = await client.listAvailableProviders();
+-      if (payload.error) {
+-        throw new Error(payload.error);
+-      }
+-      return payload.providers.filter((entry) => entry.available).map((entry) => entry.provider);
+-    },
+-  });
+-  const legacyProviderDefinitions = useMemo(() => {
+-    const availableProviders = availableProvidersQuery.data;
+-    if (!availableProviders) {
+-      return [];
+-    }
+-    const available = new Set(availableProviders);
+-    return allProviderDefinitions.filter((definition) => available.has(definition.id));
+-  }, [availableProvidersQuery.data]);
+-  const legacyProviderDefinitionMap = useMemo(
+-    () =>
+-      new Map<AgentProvider, AgentProviderDefinition>(
+-        legacyProviderDefinitions.map((definition) => [definition.id, definition]),
+-      ),
+-    [legacyProviderDefinitions],
+-  );
+-
+-  // COMPAT(providersSnapshot): legacy fallback for daemons without snapshot support — remove when all daemons support snapshots
+-  const legacySelectedProviderModelsQuery = useQuery({

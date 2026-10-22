@@ -1,0 +1,9 @@
+FILE packages/server/src/server/logger.ts
+RANGE {"path":"packages/server/src/server/logger.ts","old_lines":[51,55],"new_lines":[51,55],"diff_block_lines":[5,11],"hunk_header":"@@ -51,5 +51,5 @@ const LOG_LEVEL_PRIORITIES: Record<LogLevel, number> = {","substantive_changed_lines":2}
+@@ -51,5 +51,5 @@ const LOG_LEVEL_PRIORITIES: Record<LogLevel, number> = {
+ const DEFAULT_CONSOLE_LEVEL: LogLevel = "info";
+ const DEFAULT_CONSOLE_FORMAT: LogFormat = "pretty";
+-const DEFAULT_FILE_LEVEL: LogLevel = "trace";
++const DEFAULT_FILE_LEVEL: LogLevel = "debug";
+ const DEFAULT_FILE_ROTATE_SIZE = "10m";
+ const DEFAULT_FILE_ROTATE_MAX_FILES = 2;

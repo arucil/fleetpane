@@ -1,0 +1,30 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5744,5746],"new_lines":[5752,5779],"diff_block_lines":[56,83],"hunk_header":"@@ -5743,4 +5751,29 @@ export class Session {","substantive_changed_lines":18}
+ 
++  private async reconcileAndEmitWorkspaceUpdates(): Promise<void> {
++    const subscription = this.workspaceUpdatesSubscription;
++    if (!subscription) {
++      return;
++    }
++    try {
++      const changedWorkspaceIds = await this.reconcileActiveWorkspaceRecords();
++      if (changedWorkspaceIds.size === 0) {
++        return;
++      }
++      const all = await this.listWorkspaceDescriptorsSnapshot();
++      const descriptorsByWorkspaceId = new Map(all.map((entry) => [entry.id, entry] as const));
++      for (const workspaceId of changedWorkspaceIds) {
++        const workspace = descriptorsByWorkspaceId.get(workspaceId) ?? null;
++        if (workspace && this.matchesWorkspaceFilter({ workspace, filter: subscription.filter })) {
++          this.bufferOrEmitWorkspaceUpdate(subscription, { kind: "upsert", workspace });
++        } else {
++          this.bufferOrEmitWorkspaceUpdate(subscription, { kind: "remove", id: workspaceId });
++        }
++      }
++    } catch (error) {
++      this.sessionLogger.error({ err: error }, "Background workspace reconciliation failed");
++    }
++  }
++
+   private async emitWorkspaceUpdateForCwd(
+     cwd: string,

@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/startup-splash-screen.tsx
+RANGE {"path":"packages/app/src/screens/startup-splash-screen.tsx","old_lines":[257,272],"new_lines":[279,296],"diff_block_lines":[34,63],"hunk_header":"@@ -256,65 +278,71 @@ export function StartupSplashScreen({ bootstrapState }: StartupSplashScreenProps","substantive_changed_lines":25}
+   return (
+-    <View style={[styles.container, styles.containerError]}>
++    <View style={styles.errorScreen}>
+       <TitlebarDragRegion />
+-      <View style={styles.errorContent}>
+-        <View style={styles.errorHeader}>
+-          <PaseoLogo size={64} />
+-          <Text style={[styles.title, styles.titleError]}>Something went wrong</Text>
+-        </View>
++      <ScrollView
++        style={styles.errorScrollView}
++        contentContainerStyle={styles.errorScrollContent}
++        showsVerticalScrollIndicator
++      >
++        <View style={styles.errorContent}>
++          <View style={styles.errorHeader}>
++            <PaseoLogo size={64} />
++            <Text style={[styles.title, styles.titleError]}>Something went wrong</Text>
++          </View>
+ 
+-        <Text style={styles.errorDescription}>
+-          The local server failed to start. If this keeps happening, please report the issue on GitHub and include the logs below.
+-        </Text>
++          <Text style={styles.errorDescription}>
++            The local server failed to start. If this keeps happening, please report the issue on GitHub and include the logs below.
++          </Text>
+ 
+-        <Text style={styles.errorMessage}>
+-          {bootstrapState.error}
+-        </Text>

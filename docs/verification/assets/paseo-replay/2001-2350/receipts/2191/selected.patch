@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2321,2330],"new_lines":[2319,2326],"diff_block_lines":[17,27],"hunk_header":"@@ -2321,10 +2319,8 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":2}
+@@ -2321,10 +2319,8 @@ class ClaudeAgentSession implements AgentSession {
+         this.activeForegroundTurnId = null;
+         this.lastForegroundPromptText = null;
+-        this.lastContextWindowUsedTokens = undefined;
+         this.cancelCurrentTurn = null;
+         this.syncTurnState("foreground turn terminal");
+       } else if (this.autonomousTurn) {
+         this.autonomousTurn = null;
+-        this.lastContextWindowUsedTokens = undefined;
+         this.syncTurnState("autonomous turn terminal");
+       }

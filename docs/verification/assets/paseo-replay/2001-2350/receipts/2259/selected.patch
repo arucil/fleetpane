@@ -1,0 +1,11 @@
+FILE packages/app/src/components/combined-model-selector.tsx
+RANGE {"path":"packages/app/src/components/combined-model-selector.tsx","old_lines":[349,353],"new_lines":[349,355],"diff_block_lines":[12,20],"hunk_header":"@@ -349,5 +349,7 @@ function ProviderSearchInput({","substantive_changed_lines":4}
+@@ -349,5 +349,7 @@ function ProviderSearchInput({
+   const { theme } = useUnistyles();
+   const inputRef = useRef<TextInput>(null);
+-  const InputComponent = Platform.OS === "web" ? TextInput : BottomSheetTextInput;
++  const isMobile =
++    UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
++  const InputComponent = isMobile ? BottomSheetTextInput : TextInput;
+ 
+   useEffect(() => {

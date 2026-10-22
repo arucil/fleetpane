@@ -1,0 +1,32 @@
+FILE packages/desktop/src/daemon/runtime-paths.ts
+RANGE {"path":"packages/desktop/src/daemon/runtime-paths.ts","old_lines":[249,249],"new_lines":[248,277],"diff_block_lines":[42,71],"hunk_header":"@@ -247,2 +246,33 @@ export function runCliPassthroughCommand(args: string[]): number {","substantive_changed_lines":19}
++
++export function runCliJsonCommand(args: string[]): unknown {
++  const invocation = createCliInvocation(args);
++  const result = spawnSync(invocation.command, invocation.args, {
++    env: invocation.env,
++    encoding: "utf-8",
++    stdio: ["ignore", "pipe", "pipe"],
++  });
++
++  if (result.error) {
++    throw result.error;
++  }
++
++  if (result.status !== 0) {
++    const stderr = typeof result.stderr === "string" ? result.stderr.trim() : "";
++    throw new Error(stderr.length > 0 ? stderr : `CLI command failed with exit code ${result.status}`);
++  }
++
++  const stdout = typeof result.stdout === "string" ? result.stdout.trim() : "";
++  if (stdout.length === 0) {
++    throw new Error("CLI command did not produce JSON output.");
++  }
++
++  try {
++    return JSON.parse(stdout) as unknown;
++  } catch (error) {
++    throw new Error(
++      `CLI command returned invalid JSON: ${error instanceof Error ? error.message : String(error)}`,
++    );
++  }

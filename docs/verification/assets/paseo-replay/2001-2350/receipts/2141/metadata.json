@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2141,
+  "revision": "93b2199c563b9b53f059d1e5c8a79ca6b8770256",
+  "date": "2026-04-06T08:35:02+07:00",
+  "committer_date": "2026-04-06T08:35:02+07:00",
+  "parents": [
+    "8d4d445c857be250dcc23e0eee2f4c428c7ac013"
+  ],
+  "subject": "fix: emit workspace update after shortstat cache warm",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:2cf71345e08671fbbb82ec438005260e3f9ae50ec895c0c5e5c6273a0904cea5",
+  "diff_tree_digest": "sha256:a1fc98c38f6bb2a2855dd9cb918858e5d2fcb78ef9e5e9c49e1fbb3458ca5af3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1346,
+        1350
+      ],
+      "new_lines": [
+        1346,
+        1354
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -1346,5 +1346,9 @@ export function getCachedCheckoutShortstat(cwd: string): CheckoutShortstat | nul",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 11,
+  "receipt_file": "receipts/2141/selected.patch"
+}

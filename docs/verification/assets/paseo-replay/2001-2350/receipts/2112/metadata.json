@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2112,
+  "revision": "bedf7926169e6cada056f31ace6680bb883ba723",
+  "date": "2026-04-05T00:53:50+07:00",
+  "committer_date": "2026-04-05T00:53:50+07:00",
+  "parents": [
+    "5db9942125d4997006425e1cfcdcea2ca2940286"
+  ],
+  "subject": "fix(voice): harden Electron speak TTS path",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/session.voice-mcp-config.test.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts",
+    "A\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts"
+  ],
+  "source_receipt_digest": "sha256:e2efc0eac99c6e849980049163d37445608f74ccce39acce0d0082c78f9ee36f",
+  "diff_tree_digest": "sha256:555899afb0d655439a40866551e169b86de0bfe2d2426261189303b0c69e651e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts",
+      "old_lines": [
+        68,
+        75
+      ],
+      "new_lines": [
+        68,
+        82
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -67,9 +67,16 @@ export class SherpaOnnxParakeetSTT implements SpeechToTextProvider {",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 106,
+  "receipt_file": "receipts/2112/selected.patch"
+}

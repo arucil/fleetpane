@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2277,
+  "revision": "1d41a50e1ff50b6569785328e9a91c77a3afb1dc",
+  "date": "2026-04-10T11:01:01+07:00",
+  "committer_date": "2026-04-10T11:01:01+07:00",
+  "parents": [
+    "32fe4b3beb8cc6215560f49b5a89d4bd622dbf70"
+  ],
+  "subject": "Background revalidate provider models when model selector opens",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-providers-snapshot.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx"
+  ],
+  "source_receipt_digest": "sha256:0f77e6315267a45b356a9624fb695878474f5f965324e07eb96dab37f69c50f8",
+  "diff_tree_digest": "sha256:79cefba325b71402fd4db368910bd7e4e9e624c7afb1be9d65f0c7a19e99b12d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/combined-model-selector.tsx",
+      "old_lines": [
+        543,
+        551
+      ],
+      "new_lines": [
+        545,
+        555
+      ],
+      "diff_block_lines": [
+        19,
+        31
+      ],
+      "hunk_header": "@@ -542,10 +544,12 @@ export function CombinedModelSelector({",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 26,
+  "receipt_file": "receipts/2277/selected.patch"
+}

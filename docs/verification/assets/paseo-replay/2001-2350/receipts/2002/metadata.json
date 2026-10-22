@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2002,
+  "revision": "266d04252817f3959e0d5eb59a62f04befa205c2",
+  "date": "2026-03-30T21:41:03+07:00",
+  "committer_date": "2026-03-30T21:41:03+07:00",
+  "parents": [
+    "0ba2f6b194d70cc146c190b52f8ff58bd878dc80"
+  ],
+  "subject": "feat(server): built-in service proxy — absorb portless into daemon",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/service-proxy.test.ts",
+    "A\tpackages/server/src/server/service-proxy.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:08dc1d9ba0e8a50ec2317e46bbf324e38a1b7d37331e78b846c3737035796546",
+  "diff_tree_digest": "sha256:6fcd41a1d82cdb7ce37b91182cc214b73d441bed5ff70947512f18bea5b6e491",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/service-proxy.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        34,
+        63
+      ],
+      "diff_block_lines": [
+        40,
+        69
+      ],
+      "hunk_header": "@@ -0,0 +1,262 @@",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 471,
+  "receipt_file": "receipts/2002/selected.patch"
+}

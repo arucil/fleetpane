@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2017,
+  "revision": "a91f79053c6abc700f2db273202ac2390226f4bd",
+  "date": "2026-04-02T10:51:00+07:00",
+  "committer_date": "2026-04-02T10:52:14+07:00",
+  "parents": [
+    "7b4db04a81dd9eba31a7de444bf0766df9dea7fb"
+  ],
+  "subject": "fix: themed scrollbar on message input and reusable scrollbar hooks",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "A\tpackages/app/src/components/use-web-scrollbar.tsx",
+    "M\tpackages/app/src/components/web-desktop-scrollbar.tsx",
+    "M\tpackages/app/src/styles/theme.ts"
+  ],
+  "source_receipt_digest": "sha256:ed6e829a2e639826536de51c96d473984abc60fc99ec53cf40b88319b8212c97",
+  "diff_tree_digest": "sha256:54d599c4af58e8889af30d4150b8188316cd758b2e70e5f3e37de5f631e068e2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        920,
+        949
+      ],
+      "new_lines": [
+        935,
+        935
+      ],
+      "diff_block_lines": [
+        52,
+        81
+      ],
+      "hunk_header": "@@ -912,40 +933,43 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 351,
+  "receipt_file": "receipts/2017/selected.patch"
+}

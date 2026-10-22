@@ -1,0 +1,32 @@
+FILE packages/website/src/downloads.tsx
+RANGE {"path":"packages/website/src/downloads.tsx","old_lines":[53,53],"new_lines":[33,61],"diff_block_lines":[64,93],"hunk_header":"@@ -26,30 +31,33 @@ export interface DownloadOption {","substantive_changed_lines":19}
+-];
++export function getDownloadOptions(version: string): DownloadOption[] {
++  const urls = downloadUrls(version);
++  return [
++    {
++      platform: "mac-silicon",
++      label: "Mac",
++      href: urls.macAppleSilicon,
++      icon: AppleIcon,
++    },
++    {
++      platform: "mac-intel",
++      label: "Mac Intel",
++      href: urls.macIntel,
++      icon: AppleIcon,
++    },
++    {
++      platform: "windows",
++      label: "Windows",
++      href: urls.windowsExe,
++      icon: WindowsIcon,
++    },
++    {
++      platform: "linux",
++      label: "Linux",
++      href: urls.linuxAppImage,
++      icon: LinuxIcon,
++    },
++  ];
++}

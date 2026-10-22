@@ -1,0 +1,18 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/sherpa-parakeet-stt.ts","old_lines":[68,75],"new_lines":[68,82],"diff_block_lines":[7,22],"hunk_header":"@@ -67,9 +67,16 @@ export class SherpaOnnxParakeetSTT implements SpeechToTextProvider {","substantive_changed_lines":7}
+         const prev = previousSegmentId;
++        const committedPcm16 = pcm16;
++        previousSegmentId = committedId;
++        segmentId = uuidv4();
++        pcm16 = Buffer.alloc(0);
+         (emitter as any).emit("committed", { segmentId: committedId, previousSegmentId: prev });
+ 
+         void (async () => {
+           try {
+-            const rt = await this.transcribeAudio(pcm16, `audio/pcm;rate=${requiredSampleRate}`);
++            const rt = await this.transcribeAudio(
++              committedPcm16,
++              `audio/pcm;rate=${requiredSampleRate}`,
++            );
+             (emitter as any).emit("transcript", {
+               segmentId: committedId,

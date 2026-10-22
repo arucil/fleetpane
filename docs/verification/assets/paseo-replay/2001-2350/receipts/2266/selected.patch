@@ -1,0 +1,13 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[3096,3104],"new_lines":[3096,3100],"diff_block_lines":[5,15],"hunk_header":"@@ -3096,9 +3096,5 @@ export class Session {","substantive_changed_lines":5}
+@@ -3096,9 +3096,5 @@ export class Session {
+       if (existing) {
+         await this.interruptAgentIfRunning(agentId);
+-        if (existing.persistence) {
+-          snapshot = await this.agentManager.reloadAgentSession(agentId);
+-        } else {
+-          snapshot = existing;
+-        }
++        snapshot = await this.agentManager.reloadAgentSession(agentId);
+       } else {
+         const record = await this.agentStorage.get(agentId);

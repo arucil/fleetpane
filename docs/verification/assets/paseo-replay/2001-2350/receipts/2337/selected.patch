@@ -1,0 +1,11 @@
+FILE packages/website/vite.config.ts
+RANGE {"path":"packages/website/vite.config.ts","old_lines":[42,45],"new_lines":[42,49],"diff_block_lines":[5,13],"hunk_header":"@@ -42,4 +42,8 @@ export default defineConfig((): UserConfig => {","substantive_changed_lines":3}
+@@ -42,4 +42,8 @@ export default defineConfig((): UserConfig => {
+       tsConfigPaths(),
+       tanstackStart({
++        router: {
++          quoteStyle: "double",
++          semicolons: true,
++        },
+         pages: sitemapPages,
+         sitemap: {

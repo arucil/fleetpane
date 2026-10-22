@@ -1,0 +1,13 @@
+FILE packages/server/src/server/agent/providers/pi-acp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/pi-acp-agent.ts","old_lines":null,"new_lines":null,"diff_block_lines":[1,11],"hunk_header":null,"substantive_changed_lines":0}
+diff --git a/packages/server/src/server/agent/providers/pi-acp-agent.ts b/packages/server/src/server/agent/providers/pi-acp-agent.ts
+index dc4637330..655ddcd45 100644
+--- a/packages/server/src/server/agent/providers/pi-acp-agent.ts
++++ b/packages/server/src/server/agent/providers/pi-acp-agent.ts
+@@ -12,5 +12,5 @@ import type {
+ import type { AgentCapabilityFlags, AgentModelDefinition } from "../agent-sdk-types.js";
+ import type { ProviderRuntimeSettings } from "../provider-launch-config.js";
+-import { isCommandAvailable } from "../provider-launch-config.js";
++import { isCommandAvailable } from "../../../utils/executable.js";
+ import {
+   ACPAgentClient,

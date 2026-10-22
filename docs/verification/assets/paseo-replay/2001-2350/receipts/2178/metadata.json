@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2178,
+  "revision": "161b2c237833c2cb3b36718262fbf395ed761a41",
+  "date": "2026-04-07T14:30:32+07:00",
+  "committer_date": "2026-04-07T14:30:32+07:00",
+  "parents": [
+    "52dfdb191358dc1b93ec8e7e8225dbb7553be77a"
+  ],
+  "subject": "fix(app): port optimistic workspace tab closing",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:507f7771c755b5c3d2516824422940181ab8447bed364a9c732abe20119c5b86",
+  "diff_tree_digest": "sha256:ad9566597aa06030feed3d2be91cd076a2a3600a39539ab03b26918c4ac18ab8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1266,
+        1270
+      ],
+      "new_lines": [
+        1258,
+        1275
+      ],
+      "diff_block_lines": [
+        50,
+        68
+      ],
+      "hunk_header": "@@ -1255,16 +1256,20 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 106,
+  "receipt_file": "receipts/2178/selected.patch"
+}

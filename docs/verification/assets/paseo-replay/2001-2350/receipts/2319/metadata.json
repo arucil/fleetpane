@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2319,
+  "revision": "9fd31bfa5a3b219b340d531e6b82558f590fb685",
+  "date": "2026-04-11T16:34:01+07:00",
+  "committer_date": "2026-04-11T16:34:01+07:00",
+  "parents": [
+    "fdc8d3c8db0dfb338be320e4cc53eba1b2207ed9"
+  ],
+  "subject": "Strip pairing URL from bootstrap log (re-apply after linter)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:7f4bc33752c459e93dc7c801b1ca02b1b63df1312eae543134411be7a1bf0bc7",
+  "diff_tree_digest": "sha256:2b85a4cc2846a3c1e95d3d54d5950c2805b1527b7f2841f1ef1d17033af1cb7f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        198,
+        201
+      ],
+      "new_lines": [
+        199,
+        209
+      ],
+      "diff_block_lines": [
+        11,
+        22
+      ],
+      "hunk_header": "@@ -198,4 +199,11 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 5,
+  "receipt_file": "receipts/2319/selected.patch"
+}

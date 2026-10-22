@@ -1,0 +1,8 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[984,987],"new_lines":[984,988],"diff_block_lines":[5,10],"hunk_header":"@@ -984,4 +984,5 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":1}
+@@ -984,4 +984,5 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)
+         canPruneAgentTabs &&
+         tab.target.kind === "agent" &&
++        !pinnedAgentIds.has(tab.target.agentId) &&
+         shouldPruneWorkspaceAgentTab({
+           agentId: tab.target.agentId,

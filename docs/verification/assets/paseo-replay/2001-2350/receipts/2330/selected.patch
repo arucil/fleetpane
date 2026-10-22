@@ -1,0 +1,17 @@
+FILE packages/app/src/hooks/use-sidebar-workspaces-list.ts
+RANGE {"path":"packages/app/src/hooks/use-sidebar-workspaces-list.ts","old_lines":[253,266],"new_lines":[226,229],"diff_block_lines":[76,90],"hunk_header":"@@ -252,15 +225,5 @@ function getWorkspaceOrderScopeKey(serverId: string, projectKey: string): string","substantive_changed_lines":12}
+ 
+-function toWorkspaceDescriptor(payload: {
+-  id: string;
+-  projectId: string;
+-  projectDisplayName: string;
+-  projectRootPath: string;
+-  projectKind: WorkspaceDescriptor["projectKind"];
+-  workspaceKind: WorkspaceDescriptor["workspaceKind"];
+-  name: string;
+-  status: WorkspaceDescriptor["status"];
+-  activityAt: string | null;
+-}): WorkspaceDescriptor {
++function toWorkspaceDescriptor(payload: WorkspaceDescriptorPayload): WorkspaceDescriptor {
+   return normalizeWorkspaceDescriptor(payload);
+ }

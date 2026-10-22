@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2094,
+  "revision": "fefe260f0a026502e195be439f799fd8dbdd8c08",
+  "date": "2026-04-04T19:16:07+07:00",
+  "committer_date": "2026-04-04T19:21:12+07:00",
+  "parents": [
+    "a17f7d2d205d429eb5eb0ebbd2f552dad53b99c8"
+  ],
+  "subject": "Fix Silero VAD crash: disable external buffers in CircularBuffer.get()",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts"
+  ],
+  "source_receipt_digest": "sha256:eed69858e92a4f1c3c3a6c3d089bbf6260fbc00a7023fb3c28a438213570283a",
+  "diff_tree_digest": "sha256:ea50abb771d33ad130b16070e00bdc3007516e7b3b6d821662b2290805ba443b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+      "old_lines": [
+        108,
+        112
+      ],
+      "new_lines": [
+        108,
+        112
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -108,5 +108,5 @@ export class SherpaSileroVadSession extends EventEmitter implements TurnDetectio",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/2094/selected.patch"
+}

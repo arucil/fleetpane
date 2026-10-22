@@ -1,0 +1,68 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2018,
+  "revision": "73e6a42141d8dfb2c6e2174ebabd18de4fd539d6",
+  "date": "2026-04-02T10:56:17+07:00",
+  "committer_date": "2026-04-02T10:56:17+07:00",
+  "parents": [
+    "060f3d457c82cecb405aea98064f6f3fbad09844",
+    "a91f79053c6abc700f2db273202ac2390226f4bd"
+  ],
+  "subject": "Merge remote-tracking branch 'origin/main' into dev",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/draggable-list.web.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/stream-strategy-web.tsx",
+    "A\tpackages/app/src/components/use-web-scrollbar.tsx",
+    "M\tpackages/app/src/components/web-desktop-scrollbar.tsx",
+    "M\tpackages/app/src/styles/theme.ts",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/expo-two-way-audio/package.json",
+    "M\tpackages/highlight/package.json",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/website/package.json"
+  ],
+  "source_receipt_digest": "sha256:d5415a3cf0a6723acbe138f69d11b3956593ab0edeaa5d63d66887777e953583",
+  "diff_tree_digest": "sha256:3b5512d48ef08991511a16844b4b75df913bbb14db5f8afaf73bd8e3e027e4e2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        922,
+        951
+      ],
+      "new_lines": [
+        937,
+        937
+      ],
+      "diff_block_lines": [
+        52,
+        81
+      ],
+      "hunk_header": "@@ -914,40 +935,43 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 554,
+  "receipt_file": "receipts/2018/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[682,699],"new_lines":[645,665],"diff_block_lines":[69,98],"hunk_header":"@@ -677,57 +643,32 @@ export function AgentStatusBar({ agentId, serverId }: AgentStatusBarProps) {","substantive_changed_lines":19}
+-    staleTime: 60 * 1000,
++  const agentProviderDefinitions = useMemo(() => {
++    const definition = AGENT_PROVIDER_DEFINITIONS.find((d) => d.id === agent?.provider);
++    return definition ? [definition] : [];
++  }, [agent?.provider]);
++
++  const agentProviderModelQuery = useQuery({
++    queryKey: ["providerModels", serverId, agent?.provider, agent?.cwd ?? ""],
++    enabled: Boolean(client && agent?.cwd && agent?.provider),
++    staleTime: 5 * 60 * 1000,
+     queryFn: async () => {
+-      if (!client) {
++      if (!client || !agent) {
+         throw new Error("Daemon client unavailable");
+       }
+-      const payload = await client.listAvailableProviders();
++      const payload = await client.listProviderModels(agent.provider, { cwd: agent.cwd });
+       if (payload.error) {
+         throw new Error(payload.error);
+       }
+-      return payload.providers.filter((entry) => entry.available).map((entry) => entry.provider);
++      return payload.models ?? [];
+     },
+   });
+ 
+-  const availableProviderDefinitions = useMemo(() => {
+-    const availableProviders = availableProvidersQuery.data;
+-    if (!availableProviders) {
+-      return [];
+-    }

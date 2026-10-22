@@ -1,0 +1,32 @@
+FILE packages/server/src/shared/messages.ts
+RANGE {"path":"packages/server/src/shared/messages.ts","old_lines":[1619,1629],"new_lines":[1619,1639],"diff_block_lines":[26,55],"hunk_header":"@@ -1608,33 +1608,48 @@ export const ArtifactMessageSchema = z.object({","substantive_changed_lines":23}
++  })
++  .transform((value) => ({
++    ...value,
++    worktreeRoot: null,
++  }));
+ 
+-export const ProjectCheckoutLiteGitNonPaseoPayloadSchema = z.object({
+-  cwd: z.string(),
+-  isGit: z.literal(true),
+-  currentBranch: z.string().nullable(),
+-  remoteUrl: z.string().nullable(),
+-  worktreeRoot: z.string(),
+-  isPaseoOwnedWorktree: z.literal(false),
+-  mainRepoRoot: z.null(),
+-});
++export const ProjectCheckoutLiteGitNonPaseoPayloadSchema = z
++  .object({
++    cwd: z.string(),
++    isGit: z.literal(true),
++    currentBranch: z.string().nullable(),
++    remoteUrl: z.string().nullable(),
++    worktreeRoot: z.string().optional(),
++    isPaseoOwnedWorktree: z.literal(false),
++    mainRepoRoot: z.null(),
++  })
++  .transform((value) => ({
++    ...value,
++    worktreeRoot: value.worktreeRoot ?? value.cwd,
++  }));
+ 

@@ -1,0 +1,16 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[259,261],"new_lines":[259,272],"diff_block_lines":[7,20],"hunk_header":"@@ -258,4 +258,15 @@ export function resolveCreateAgentTitles(options: {","substantive_changed_lines":8}
+ 
++export function resolveWaitForFinishError(options: {
++  status: "permission" | "error" | "idle";
++  final: AgentSnapshotPayload | null;
++}): string | null {
++  if (options.status !== "error") {
++    return null;
++  }
++  const message = options.final?.lastError;
++  return typeof message === "string" && message.trim().length > 0 ? message : "Agent failed";
++}
++
+ type ProcessingPhase = "idle" | "transcribing";
+ 

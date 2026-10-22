@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2051,
+  "revision": "44da0c67b2112c99344ed3bbf7e9e4b495b1f937",
+  "date": "2026-04-03T16:47:59+07:00",
+  "committer_date": "2026-04-03T16:53:14+07:00",
+  "parents": [
+    "55c4e58aa3eb406038a0e87b9e23ee82ba6abbd7"
+  ],
+  "subject": "fix(server): disable claude-acp and copilot providers from registry",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts"
+  ],
+  "source_receipt_digest": "sha256:55342caf009acdcdb7d07de4c1a93c4e7c17bb662a6a986dc07239338411c26e",
+  "diff_tree_digest": "sha256:24486c3962e02383d1ecfd6cfff6d2f3066aca49e22ee0f062379a15c66300e9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-manifest.ts",
+      "old_lines": [
+        140,
+        153
+      ],
+      "new_lines": [
+        140,
+        141
+      ],
+      "diff_block_lines": [
+        8,
+        21
+      ],
+      "hunk_header": "@@ -138,16 +138,4 @@ export const AGENT_PROVIDER_DEFINITIONS: AgentProviderDefinition[] = [",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 20,
+  "receipt_file": "receipts/2051/selected.patch"
+}

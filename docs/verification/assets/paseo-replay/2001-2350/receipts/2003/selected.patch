@@ -1,0 +1,32 @@
+FILE packages/app/src/panels/setup-panel.tsx
+RANGE {"path":"packages/app/src/panels/setup-panel.tsx","old_lines":[0,0],"new_lines":[10,39],"diff_block_lines":[16,45],"hunk_header":"@@ -0,0 +1,309 @@","substantive_changed_lines":22}
++
++function useSetupPanelDescriptor(
++  target: { kind: "setup"; workspaceId: string },
++  context: { serverId: string; workspaceId: string },
++): PanelDescriptor {
++  const key = buildWorkspaceTabPersistenceKey({
++    serverId: context.serverId,
++    workspaceId: target.workspaceId,
++  });
++  const snapshot = useWorkspaceSetupStore((state) => (key ? state.snapshots[key] ?? null : null));
++
++  if (snapshot?.status === "completed") {
++    return {
++      label: "Setup",
++      subtitle: "Setup completed",
++      titleState: "ready",
++      icon: CheckCircle2,
++      statusBucket: null,
++    };
++  }
++
++  if (snapshot?.status === "failed") {
++    return {
++      label: "Setup",
++      subtitle: "Setup failed",
++      titleState: "ready",
++      icon: CircleAlert,
++      statusBucket: null,
++    };
++  }

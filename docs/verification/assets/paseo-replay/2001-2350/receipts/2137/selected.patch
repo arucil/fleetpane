@@ -1,0 +1,8 @@
+FILE packages/server/src/server/workspace-reconciliation-service.ts
+RANGE {"path":"packages/server/src/server/workspace-reconciliation-service.ts","old_lines":[204,208],"new_lines":[204,207],"diff_block_lines":[5,10],"hunk_header":"@@ -204,5 +204,4 @@ export class WorkspaceReconciliationService {","substantive_changed_lines":1}
+@@ -204,5 +204,4 @@ export class WorkspaceReconciliationService {
+       // 4. Reconcile workspace display names (branch name changes)
+       for (const workspace of siblings) {
+-        if (workspace.kind !== "checkout") continue;
+         if (!existsSync(workspace.directory)) continue;
+ 

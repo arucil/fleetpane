@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2170,
+  "revision": "51b83768c78517a2546df1a09e56b472796d7b68",
+  "date": "2026-04-07T09:50:39+07:00",
+  "committer_date": "2026-04-07T09:50:39+07:00",
+  "parents": [
+    "cdbaa8d29c0844c05a4e9eae19cc971793e730e9"
+  ],
+  "subject": "fix(server): push workspace updates instantly, reconcile in background",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:77ce6a150c24ce9e127bc8da7aa47b94ca7c60d5b0abae69c00bca316bdde5e0",
+  "diff_tree_digest": "sha256:cf66e83f8ad132516bc18a4b772a81415228a15fb8e73a56d082d029d7fffab0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5793,
+        5819
+      ],
+      "new_lines": [
+        5792,
+        5796
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -5792,31 +5791,25 @@ export class Session {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 50,
+  "receipt_file": "receipts/2170/selected.patch"
+}

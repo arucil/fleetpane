@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2029,
+  "revision": "ffd07ec17cdd713129050ccf54c06a4d551b1f8e",
+  "date": "2026-04-02T18:02:57+07:00",
+  "committer_date": "2026-04-02T18:02:57+07:00",
+  "parents": [
+    "2d63bc38931153bff0fe3485fab0fc202536cfec"
+  ],
+  "subject": "fix(server): hardcode Claude models with 1M context support",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/claude-models.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/claude-models.ts",
+    "D\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.test.ts",
+    "D\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.ts"
+  ],
+  "source_receipt_digest": "sha256:a8565ed93bc8431fac702ec9f8c81dd6d9518596cf5fb9beccc4da8f96f41672",
+  "diff_tree_digest": "sha256:be243ebea9258abdeadcd0e81755acf5d9feeae58e2147208bc8abb27655b331",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/claude-models.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        39,
+        68
+      ],
+      "diff_block_lines": [
+        45,
+        74
+      ],
+      "hunk_header": "@@ -0,0 +1,74 @@",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 343,
+  "receipt_file": "receipts/2029/selected.patch"
+}

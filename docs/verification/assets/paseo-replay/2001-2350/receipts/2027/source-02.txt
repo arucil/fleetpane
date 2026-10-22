@@ -1,0 +1,81 @@
+
+    const restoreDocumentStyles = this.applyDocumentBoundsStyles({
+      root: input.root,
+    });
+    const restoreViewportStyles = this.applyViewportTouchStyles({
+      host: input.host,
+    });
+
+    this.terminal = terminal;
+    this.fitAddon = fitAddon;
+    window.__paseoTerminal = terminal;
+
+    const fitAndEmitResize = (force: boolean): void => {
+      const currentTerminal = this.terminal;
+      const currentFitAddon = this.fitAddon;
+      if (!currentTerminal || !currentFitAddon) {
+        return;
+      }
+
+      if (input.root.offsetWidth === 0 || input.root.offsetHeight === 0) {
+        return;
+      }
+
+      try {
+        currentFitAddon.fit();
+      } catch {
+        return;
+      }
+
+      const nextRows = currentTerminal.rows;
+      const nextCols = currentTerminal.cols;
+      const previous = this.lastSize;
+      if (!force && previous && previous.rows === nextRows && previous.cols === nextCols) {
+        return;
+      }
+
+      this.lastSize = { rows: nextRows, cols: nextCols };
+      this.callbacks.onResize?.({
+        rows: nextRows,
+        cols: nextCols,
+      });
+    };
+    this.fitAndEmitResize = fitAndEmitResize;
+
+    fitAndEmitResize(true);
+
+    const inputDisposable = terminal.onData((data) => {
+      if (this.suppressInput) {
+        return;
+      }
+      this.callbacks.onInput?.(data);
+    });
+
+    terminal.attachCustomKeyEventHandler((event) => {
+      if (event.type !== "keydown" || event.isComposing) {
+        return true;
+      }
+
+      if (!isMac && event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+        return true;
+      }
+
+      const normalizedKey = normalizeDomTerminalKey(event.key);
+      if (!normalizedKey || isTerminalModifierDomKey(event.key)) {
+        return true;
+      }
+
+      if (
+        !shouldInterceptDomTerminalKey({
+          key: normalizedKey,
+          ctrlKey: event.ctrlKey,
+          altKey: event.altKey,
+          pendingModifiers: this.pendingModifiers,
+        })
+      ) {
+        return true;
+      }
+
+      const modifiers = mergeTerminalModifiers({
+        pendingModifiers: this.pendingModifiers,
+        ctrlKey: event.ctrlKey,

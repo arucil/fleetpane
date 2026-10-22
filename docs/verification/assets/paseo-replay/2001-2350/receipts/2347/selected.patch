@@ -1,0 +1,32 @@
+FILE skills/paseo-orchestrate/SKILL.md
+RANGE {"path":"skills/paseo-orchestrate/SKILL.md","old_lines":[0,0],"new_lines":[198,227],"diff_block_lines":[204,233],"hunk_header":"@@ -0,0 +1,281 @@","substantive_changed_lines":15}
++Execute phases from the plan sequentially. For each phase:
++1. Launch impl agent(s) with `background: true, notifyOnFinish: true`
++2. Wait for notification
++3. Verify (Phase 8)
++4. Fix any issues
++5. Re-verify
++6. Proceed to next phase
++
++UI passes use `providers.ui` from preferences. All other impl work uses `providers.impl`.
++
++### Phase 8: Verify
++
++See [verification.md](references/verification.md).
++
++After each implementation phase, deploy auditors in parallel. Match auditors to the type of work (refactor, feature, UI). Each auditor checks exactly one thing.
++
++If auditors find issues, direct the impl agent to fix or launch a new one. Re-verify after fixes.
++
++Archive all auditors when done.
++
++### Phase 9: Cleanup
++
++See [cleanup.md](references/cleanup.md).
++
++After all phases are implemented and verified, deploy refactorers for a final sweep: DRY, dead code, naming. Run a regression auditor after cleanup to confirm nothing broke.
++
++Archive all refactorers when done.
++
++### Phase 10: Final QA
++

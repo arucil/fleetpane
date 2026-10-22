@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2010,
+  "revision": "9dc3d116b420501bc24fa92121888eb8f82fd6a4",
+  "date": "2026-04-01T23:50:22+07:00",
+  "committer_date": "2026-04-01T23:58:00+07:00",
+  "parents": [
+    "a4326ec5c04ffa1049ff2f1e811dfb33acaa17dd"
+  ],
+  "subject": "fix(windows): quote command paths with spaces when spawning with shell",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:e635bd4de6d7491938e917801cf59a466170b953ffd0dbde4ecc6058d94bcb89",
+  "diff_tree_digest": "sha256:1fcfce2f5f5b625660c29e1dc3dd389f2f5b90befdc50d37d8e3fba401aff1c3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        276,
+        277
+      ],
+      "new_lines": [
+        281,
+        290
+      ],
+      "diff_block_lines": [
+        13,
+        22
+      ],
+      "hunk_header": "@@ -274,4 +274,17 @@ export function findExecutable(",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 37,
+  "receipt_file": "receipts/2010/selected.patch"
+}

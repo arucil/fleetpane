@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2056,
+  "revision": "f924d33076ba926d342ab8a28118caad61d9597f",
+  "date": "2026-04-03T17:55:06+07:00",
+  "committer_date": "2026-04-03T18:49:59+07:00",
+  "parents": [
+    "763cfa933377ccd795059694e7610eb8a633dfa0"
+  ],
+  "subject": "Fix bulk close archiving for stored agents",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:bfc0e580cf5bebc3403d4185c58460bfc919d616a6dd6a3c2eef6ee8522792b0",
+  "diff_tree_digest": "sha256:e3274c53b8e5a2619c56da7c421536c6fca53570a29720b8e2159a4d7fe061e9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        2005,
+        2005
+      ],
+      "new_lines": [
+        2005,
+        2034
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -2004,4 +2004,38 @@ export class Session {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 166,
+  "receipt_file": "receipts/2056/selected.patch"
+}

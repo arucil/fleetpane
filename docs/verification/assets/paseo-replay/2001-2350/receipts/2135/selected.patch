@@ -1,0 +1,32 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[1275,1275],"new_lines":[1308,1337],"diff_block_lines":[71,100],"hunk_header":"@@ -1274,4 +1307,54 @@ export async function getCheckoutShortstat(","substantive_changed_lines":20}
+ 
++function getOrLoadCheckoutShortstat(
++  cwd: string,
++  context?: CheckoutContext,
++): Promise<CheckoutShortstat | null> {
++  const cacheKey = getShortstatCacheKey(cwd);
++  const cached = shortstatCache.get(cacheKey);
++  if (cached !== undefined) {
++    return Promise.resolve(cached);
++  }
++
++  const existing = shortstatInFlight.get(cacheKey);
++  if (existing) {
++    return existing;
++  }
++
++  const load = getCheckoutShortstatUncached(cwd, context)
++    .then((shortstat) => {
++      shortstatCache.set(cacheKey, shortstat);
++      return shortstat;
++    })
++    .finally(() => {
++      shortstatInFlight.delete(cacheKey);
++    });
++
++  shortstatInFlight.set(cacheKey, load);
++  return load;
++}
++
++export async function getCheckoutShortstat(

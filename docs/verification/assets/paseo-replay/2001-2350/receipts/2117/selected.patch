@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[726,726],"new_lines":[749,778],"diff_block_lines":[54,83],"hunk_header":"@@ -724,4 +733,185 @@ function mapCodexPlanToToolCall(params: { callId: string; text: string }): ToolC","substantive_changed_lines":22}
++
++function normalizeCodexQuestionPrompts(raw: unknown): CodexQuestionPrompt[] {
++  if (!Array.isArray(raw)) {
++    return [];
++  }
++  const questions: CodexQuestionPrompt[] = [];
++  for (const item of raw) {
++    if (!item || typeof item !== "object") {
++      continue;
++    }
++    const record = item as Record<string, unknown>;
++    const id = nonEmptyString(record.id);
++    const header = nonEmptyString(record.header);
++    const question = nonEmptyString(record.question);
++    if (!id || !header || !question) {
++      continue;
++    }
++    const options = Array.isArray(record.options)
++      ? record.options.flatMap((option): CodexQuestionOption[] => {
++          if (!option || typeof option !== "object") {
++            return [];
++          }
++          const optionRecord = option as Record<string, unknown>;
++          const label = nonEmptyString(optionRecord.label);
++          if (!label) {
++            return [];
++          }
++          return [
++            {
++              label,

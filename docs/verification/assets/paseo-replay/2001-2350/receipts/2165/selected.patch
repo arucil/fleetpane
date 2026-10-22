@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-preferred-editor.ts
+RANGE {"path":"packages/app/src/hooks/use-preferred-editor.ts","old_lines":[0,0],"new_lines":[8,37],"diff_block_lines":[14,43],"hunk_header":"@@ -0,0 +1,57 @@","substantive_changed_lines":23}
++
++async function loadPreferredEditor(): Promise<EditorTargetId | null> {
++  const stored = await AsyncStorage.getItem(PREFERRED_EDITOR_STORAGE_KEY);
++  if (!stored) {
++    return null;
++  }
++  const parsed = EditorTargetIdSchema.safeParse(stored);
++  return parsed.success ? parsed.data : null;
++}
++
++export function resolvePreferredEditorId(
++  availableEditorIds: readonly EditorTargetId[],
++  storedEditorId: EditorTargetId | null | undefined,
++): EditorTargetId | null {
++  if (
++    storedEditorId &&
++    availableEditorIds.some((availableEditorId) => availableEditorId === storedEditorId)
++  ) {
++    return storedEditorId;
++  }
++  return availableEditorIds[0] ?? null;
++}
++
++export function usePreferredEditor() {
++  const queryClient = useQueryClient();
++  const { data, isPending } = useQuery({
++    queryKey: PREFERRED_EDITOR_QUERY_KEY,
++    queryFn: loadPreferredEditor,
++    staleTime: Infinity,
++    gcTime: Infinity,

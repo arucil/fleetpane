@@ -1,0 +1,15 @@
+FILE packages/server/package.json
+RANGE {"path":"packages/server/package.json","old_lines":[34,43],"new_lines":[34,43],"diff_block_lines":[7,19],"hunk_header":"@@ -33,11 +33,11 @@","substantive_changed_lines":6}
+   "scripts": {
+-    "dev": "NODE_ENV=development tsx scripts/dev-runner.ts",
+-    "dev:tsx": "NODE_ENV=development tsx watch --ignore '**/*.timestamp-*' src/server/index.ts",
++    "dev": "cross-env NODE_ENV=development tsx scripts/dev-runner.ts",
++    "dev:tsx": "cross-env NODE_ENV=development tsx watch --ignore '**/*.timestamp-*' src/server/index.ts",
+     "build": "node -e \"require('node:fs').rmSync('dist',{ recursive: true, force: true })\" && npm run build:lib && npm run build:scripts",
+     "build:lib": "tsc -p tsconfig.server.json --incremental false && node -e \"const fs=require('node:fs'); fs.mkdirSync('dist/server/server/speech/providers/local/sherpa/assets',{recursive:true}); fs.copyFileSync('src/server/speech/providers/local/sherpa/assets/silero_vad.onnx','dist/server/server/speech/providers/local/sherpa/assets/silero_vad.onnx');\"",
+     "build:scripts": "tsc -p tsconfig.scripts.json --incremental false && node -e \"const fs=require('node:fs'); fs.mkdirSync('dist/scripts',{recursive:true}); fs.copyFileSync('scripts/mcp-stdio-socket-bridge-cli.mjs','dist/scripts/mcp-stdio-socket-bridge-cli.mjs');\"",
+     "prepack": "npm run build",
+-    "start": "NODE_ENV=production node dist/server/server/index.js",
++    "start": "cross-env NODE_ENV=production node dist/server/server/index.js",
+     "typecheck": "tsc -p tsconfig.server.typecheck.json --noEmit",
+     "generate:config-schema": "tsx scripts/generate-config-schema.ts",

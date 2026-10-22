@@ -1,0 +1,9 @@
+FILE paseo.json
+RANGE {"path":"paseo.json","old_lines":[3,7],"new_lines":[3,7],"diff_block_lines":[5,11],"hunk_header":"@@ -3,5 +3,5 @@","substantive_changed_lines":2}
+@@ -3,5 +3,5 @@
+     "setup": [
+       "npm ci",
+-      "npm run build --workspace=@getpaseo/relay",
++      "npm run build:daemon",
+       "cp \"$PASEO_SOURCE_CHECKOUT_PATH/packages/server/.env\" \"$PASEO_WORKTREE_PATH/packages/server/.env\""
+     ],

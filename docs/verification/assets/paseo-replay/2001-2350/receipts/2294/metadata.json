@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2294,
+  "revision": "321ffce6a3a240040c2c53f9befe4d9edec4009d",
+  "date": "2026-04-10T19:41:19+07:00",
+  "committer_date": "2026-04-10T19:41:19+07:00",
+  "parents": [
+    "78b7e5139632e12b800b0eab71f28d5e223c6510",
+    "ba1ecedca3732427578eeba1ed332d802574f562"
+  ],
+  "subject": "Merge remote-tracking branch 'origin/main' into dev",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/expo-two-way-audio/package.json",
+    "M\tpackages/highlight/package.json",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/website/package.json"
+  ],
+  "source_receipt_digest": "sha256:292e9708eebcbf9233acc38c39a0b82267ac35ae422603652e78b34068258846",
+  "diff_tree_digest": "sha256:4c165c97603a80a1eb462950b8eebbe6b00eb8f13458ba3893896f2fe9a794a6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+      "old_lines": [
+        99,
+        101
+      ],
+      "new_lines": [
+        107,
+        130
+      ],
+      "diff_block_lines": [
+        20,
+        43
+      ],
+      "hunk_header": "@@ -98,4 +106,25 @@ function getFallbackTabLabel(tab: WorkspaceTabDescriptor): string {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 120,
+  "receipt_file": "receipts/2294/selected.patch"
+}

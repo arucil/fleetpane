@@ -1,0 +1,32 @@
+FILE packages/app/src/components/context-window-meter.tsx
+RANGE {"path":"packages/app/src/components/context-window-meter.tsx","old_lines":[0,0],"new_lines":[16,45],"diff_block_lines":[22,51],"hunk_header":"@@ -0,0 +1,153 @@","substantive_changed_lines":16}
++
++function isValidMaxTokens(value: number): boolean {
++  return Number.isFinite(value) && value > 0;
++}
++
++function isValidUsedTokens(value: number): boolean {
++  return Number.isFinite(value) && value >= 0;
++}
++
++function getUsagePercentage(maxTokens: number, usedTokens: number): number | null {
++  if (!isValidMaxTokens(maxTokens) || !isValidUsedTokens(usedTokens)) {
++    return null;
++  }
++  return (usedTokens / maxTokens) * 100;
++}
++
++function clampPercentage(value: number): number {
++  return Math.max(0, Math.min(100, value));
++}
++
++function formatTokenCount(value: number): string {
++  if (value >= 1_000_000) {
++    return `${Math.round(value / 1_000_000)}m`;
++  }
++  if (value >= 1_000) {
++    return `${Math.round(value / 1_000)}k`;
++  }
++  return Math.round(value).toString();
++}
++

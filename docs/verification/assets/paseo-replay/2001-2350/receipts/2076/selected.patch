@@ -1,0 +1,15 @@
+FILE packages/app/src/screens/open-project-screen.tsx
+RANGE {"path":"packages/app/src/screens/open-project-screen.tsx","old_lines":[61,68],"new_lines":[61,72],"diff_block_lines":[14,26],"hunk_header":"@@ -60,9 +60,13 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":5}
+     position: "relative",
+-    flexGrow: 1,
++    flex: 1,
+     justifyContent: "center",
+     alignItems: "center",
+     gap: 0,
+     padding: theme.spacing[6],
++    paddingBottom: {
++      xs: HEADER_INNER_HEIGHT_MOBILE + HEADER_TOP_PADDING_MOBILE + theme.spacing[6],
++      md: HEADER_INNER_HEIGHT + theme.spacing[6],
++    },
+   },
+   logo: {

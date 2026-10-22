@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/integrations-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/integrations-section.tsx","old_lines":[0,0],"new_lines":[20,49],"diff_block_lines":[26,55],"hunk_header":"@@ -0,0 +1,189 @@","substantive_changed_lines":24}
++
++export function IntegrationsSection() {
++  const { theme } = useUnistyles();
++  const showSection = shouldUseDesktopDaemon();
++
++  const [cliStatus, setCliStatus] = useState<InstallStatus | null>(null);
++  const [skillsStatus, setSkillsStatus] = useState<InstallStatus | null>(null);
++  const [isInstallingCli, setIsInstallingCli] = useState(false);
++  const [isInstallingSkills, setIsInstallingSkills] = useState(false);
++
++  const loadStatus = useCallback(() => {
++    if (!showSection) return;
++    void getCliInstallStatus()
++      .then(setCliStatus)
++      .catch((error) => {
++        console.error("[Integrations] Failed to load CLI status", error);
++      });
++    void getSkillsInstallStatus()
++      .then(setSkillsStatus)
++      .catch((error) => {
++        console.error("[Integrations] Failed to load skills status", error);
++      });
++  }, [showSection]);
++
++  useFocusEffect(
++    useCallback(() => {
++      if (!showSection) return undefined;
++      loadStatus();
++      return undefined;
++    }, [loadStatus, showSection]),

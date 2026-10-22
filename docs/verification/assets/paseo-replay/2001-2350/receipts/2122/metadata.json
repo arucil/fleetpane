@@ -1,0 +1,63 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2122,
+  "revision": "4dca672711aff6175ea0e2a3ca764545459baf3c",
+  "date": "2026-04-05T21:10:16+07:00",
+  "committer_date": "2026-04-05T21:10:16+07:00",
+  "parents": [
+    "8e482b161374be38be660234b347bf95fd3a2c36"
+  ],
+  "subject": "Restore features lost during main merge and fix workspace setup flow",
+  "diff_tree_paths": [
+    "A\tCONTRIBUTING.md",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/composer.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "A\tpackages/app/src/components/provider-diagnostic-sheet.tsx",
+    "M\tpackages/app/src/components/question-form-card.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "A\tpackages/app/src/components/ui/status-badge.tsx",
+    "M\tpackages/app/src/hooks/use-agent-input-draft.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-action-dispatcher.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-config.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "A\tpackages/server/src/server/agent/provider-snapshot-manager.ts",
+    "A\tpackages/server/src/server/agent/providers/diagnostic-utils.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:a308093a53617c2d33181899d829378cb2a3b8f68727d1d2a08c06a8380de3e7",
+  "diff_tree_digest": "sha256:efc207e9cca62e62353cb484a454b6fc6ae8cb22b77c55e7c9b99d18438bfca2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        458,
+        458
+      ],
+      "new_lines": [
+        517,
+        546
+      ],
+      "diff_block_lines": [
+        145,
+        174
+      ],
+      "hunk_header": "@@ -456,4 +515,103 @@ function ControlledStatusBar({",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1538,
+  "receipt_file": "receipts/2122/selected.patch"
+}

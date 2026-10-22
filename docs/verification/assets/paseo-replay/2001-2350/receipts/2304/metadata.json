@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2304,
+  "revision": "70985088f6853aa8c7e492aad2454ac7086a5b71",
+  "date": "2026-04-10T20:29:26+07:00",
+  "committer_date": "2026-04-10T20:29:26+07:00",
+  "parents": [
+    "a525b0e22e9b0744cd9b3a2f180853c5514eeab4"
+  ],
+  "subject": "Make pull abort safely on conflicts",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:a7b79e70d14bce159a26c894263a83e894ff91a1233f57483b02465ab6c85cd3",
+  "diff_tree_digest": "sha256:fbe27fa18b4924c203f63807f11840400539937e8231d58bcc087878c2d34905",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        830,
+        830
+      ],
+      "new_lines": [
+        830,
+        859
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -829,4 +829,44 @@ async function hasOriginRemote(cwd: string): Promise<boolean> {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 75,
+  "receipt_file": "receipts/2304/selected.patch"
+}

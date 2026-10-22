@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-agent-form-state.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-form-state.ts","old_lines":[412,441],"new_lines":[413,413],"diff_block_lines":[20,49],"hunk_header":"@@ -410,73 +411,9 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg","substantive_changed_lines":25}
+-  const [debouncedCwd, setDebouncedCwd] = useState<string | undefined>(undefined);
+-  useEffect(() => {
+-    const trimmed = formState.workingDir.trim();
+-    const next = trimmed.length > 0 ? trimmed : undefined;
+-    const timer = setTimeout(() => setDebouncedCwd(next), 180);
+-    return () => clearTimeout(timer);
+-  }, [formState.workingDir]);
+-
+-  const providerModelsQuery = useQuery({
+-    queryKey: ["providerModels", formState.serverId, formState.provider],
+-    enabled: Boolean(
+-      isVisible &&
+-        isTargetDaemonReady &&
+-        formState.serverId &&
+-        client &&
+-        isConnected &&
+-        providerDefinitionMap.has(formState.provider),
+-    ),
+-    staleTime: 5 * 60 * 1000,
+-    queryFn: async () => {
+-      if (!client) {
+-        throw new Error("Host is not connected");
+-      }
+-      const payload = await client.listProviderModels(formState.provider, {
+-        cwd: debouncedCwd,
+-      });
+-      if (payload.error) {
+-        throw new Error(payload.error);
+-      }
+-      return payload.models ?? [];

@@ -1,0 +1,13 @@
+FILE docs/RELEASE.md
+RANGE {"path":"docs/RELEASE.md","old_lines":[12,15],"new_lines":[12,21],"diff_block_lines":[5,15],"hunk_header":"@@ -12,4 +12,10 @@ There are two supported ways to ship from `main`:","substantive_changed_lines":4}
+@@ -12,4 +12,10 @@ There are two supported ways to ship from `main`:
+ ## Standard release (patch)
+ 
++Before running any stable patch release command:
++
++- Make sure the intended release commit is already committed to `main` and the working tree is clean.
++- Make sure local `npm run typecheck` passes on that commit.
++- Do not use `npm run release:patch` as a substitute for checking whether the current commit is actually ready.
++
+ ```bash
+ npm run release:patch

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2104,
+  "revision": "4e32f9b7bd04ad505a2d6c2186254d8e87209698",
+  "date": "2026-04-04T22:11:54+07:00",
+  "committer_date": "2026-04-04T22:11:54+07:00",
+  "parents": [
+    "744ca7a2bc744308fde3e51dc2ef2fc888b14843"
+  ],
+  "subject": "fix: copy Silero VAD model out of asar so native code can read it",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-provider.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts"
+  ],
+  "source_receipt_digest": "sha256:6b69601a4cb6a7f1bcb5b51829bc6b13f3d53ff3002faab9a30451bda6e4dbe7",
+  "diff_tree_digest": "sha256:181932a4e9b169b7644f6191a066e6cb3da4370db0cfc07972cf20f780ecfc4d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/sherpa/silero-vad-provider.ts",
+      "old_lines": [
+        8,
+        9
+      ],
+      "new_lines": [
+        23,
+        42
+      ],
+      "diff_block_lines": [
+        28,
+        47
+      ],
+      "hunk_header": "@@ -5,5 +8,35 @@ import type {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 25,
+  "receipt_file": "receipts/2104/selected.patch"
+}

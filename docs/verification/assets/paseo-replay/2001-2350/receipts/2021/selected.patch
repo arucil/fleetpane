@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5167,5176],"new_lines":[5167,5187],"diff_block_lines":[7,36],"hunk_header":"@@ -5166,18 +5166,33 @@ export class Session {","substantive_changed_lines":23}
+     const gitMetadata = detectWorkspaceGitMetadata(normalizedCwd, directoryName);
+-    const projectId = await this.projectRegistry.insert({
+-      directory: normalizedCwd,
+-      displayName: gitMetadata.projectDisplayName,
+-      kind: gitMetadata.projectKind,
+-      gitRemote: gitMetadata.gitRemote,
+-      createdAt: timestamp,
+-      updatedAt: timestamp,
+-      archivedAt: null,
+-    });
++
++    let projectId: number | null = null;
++    if (gitMetadata.gitRemote) {
++      const existingProjects = await this.projectRegistry.list();
++      const matchingProject = existingProjects.find(
++        (p) => p.gitRemote === gitMetadata.gitRemote && !p.archivedAt,
++      );
++      if (matchingProject) {
++        projectId = matchingProject.id;
++      }
++    }
++
++    if (projectId === null) {
++      projectId = await this.projectRegistry.insert({
++        directory: normalizedCwd,
++        displayName: gitMetadata.projectDisplayName,
++        kind: gitMetadata.projectKind,
++        gitRemote: gitMetadata.gitRemote,
++        createdAt: timestamp,
++        updatedAt: timestamp,

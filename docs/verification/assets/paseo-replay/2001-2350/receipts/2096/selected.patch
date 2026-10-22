@@ -1,0 +1,32 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,3],"new_lines":[5,34],"diff_block_lines":[10,39],"hunk_header":"@@ -1,4 +1,37 @@","substantive_changed_lines":25}
++### Added
++- Pi (pi.dev) agent provider — connect Pi as a new ACP-based agent type with thinking levels and tool call support.
++- Copilot agent provider re-enabled after ACP compatibility fixes.
++- `paseo .` and `paseo <path>` open the desktop app with the given project, similar to `code .`.
++- Provider-declared features system — providers can expose dynamic toggles and selects that the app renders automatically. First consumer: Codex fast mode.
++- Codex plan mode — start agents in plan-only mode with a dedicated plan card UI for reviewing proposed changes before execution.
++- OpenCode custom agents and slash commands — user-defined agents from opencode.json now appear in the mode picker, and slash commands accept optional arguments.
++- Desktop Integrations settings — install the Paseo CLI and orchestration skills directly from the app without touching the terminal.
++- Daemon status dialog in desktop settings for quick health checks.
++- Auto-restart daemon on version mismatch — the desktop app detects when the running daemon is outdated and restarts it automatically.
++- Setup hint and paseo.sh link on the mobile welcome screen so new App Store users know what to do next.
++
++### Improved
++- Desktop startup is faster — existing daemon connections are raced against bootstrap so the app is usable sooner.
++- Settings sections reordered for better grouping (integrations and daemon together).
++- Sidebar projects and workspaces now persist across sessions, with a context menu to remove projects.
++
++### Fixed
++- Sidebar crash when switching iOS theme (Unistyles/Reanimated interaction).
++- Silero VAD crash caused by external buffer mode in CircularBuffer.
++- Bulk close now correctly archives stored agents instead of leaving orphans.
++- Pinned archived agents are no longer pruned when closing tabs.
++- OpenCode event stream starvation during slash command execution.
++- Duplicate workspaces when multiple git worktrees share the same root.
++- `gh` executable resolution for desktop users whose login shell sets a different PATH.
++- Agent creation timeout increased to 60s to handle slow first-launch scenarios.
++- Forward-compatible provider handling so older app clients don't break on new provider types.
++- Input event listener race condition in the web scrollbar hook.
++- Open-project screen content now vertically centered.
++- Website download page fetches the release version at runtime with asset validation, fixing stale links.

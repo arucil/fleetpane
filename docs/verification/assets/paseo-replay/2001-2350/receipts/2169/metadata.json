@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2169,
+  "revision": "cdbaa8d29c0844c05a4e9eae19cc971793e730e9",
+  "date": "2026-04-06T21:35:07-05:00",
+  "committer_date": "2026-04-07T09:35:07+07:00",
+  "parents": [
+    "b2229a28b9390bc10e60ea01365d198b60df58a7"
+  ],
+  "subject": "fix(server): serve workspace list instantly on fetch, reconcile in background (#204)",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:757e785742827aa0082f933ff98287b62855ddbe5d569090f18821b3eccaea5b",
+  "diff_tree_digest": "sha256:cf66e83f8ad132516bc18a4b772a81415228a15fb8e73a56d082d029d7fffab0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5744,
+        5746
+      ],
+      "new_lines": [
+        5752,
+        5779
+      ],
+      "diff_block_lines": [
+        56,
+        83
+      ],
+      "hunk_header": "@@ -5743,4 +5751,29 @@ export class Session {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 51,
+  "receipt_file": "receipts/2169/selected.patch"
+}

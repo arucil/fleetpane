@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-daemon-config.ts
+RANGE {"path":"packages/app/src/hooks/use-daemon-config.ts","old_lines":[0,0],"new_lines":[8,37],"diff_block_lines":[14,43],"hunk_header":"@@ -0,0 +1,71 @@","substantive_changed_lines":19}
++
++export function daemonConfigQueryKey(serverId: string | null) {
++  return ["daemon-config", serverId] as const;
++}
++
++interface UseDaemonConfigResult {
++  config: MutableDaemonConfig | null;
++  isLoading: boolean;
++  patchConfig: (patch: MutableDaemonConfigPatch) => Promise<MutableDaemonConfig | undefined>;
++}
++
++export function useDaemonConfig(serverId: string | null): UseDaemonConfigResult {
++  const queryClient = useQueryClient();
++  const client = useHostRuntimeClient(serverId ?? "");
++  const isConnected = useHostRuntimeIsConnected(serverId ?? "");
++  const queryKey = useMemo(() => daemonConfigQueryKey(serverId), [serverId]);
++
++  const configQuery = useQuery({
++    queryKey,
++    enabled: Boolean(serverId && client && isConnected),
++    staleTime: Infinity,
++    queryFn: async () => {
++      if (!client) {
++        throw new Error("Host is not connected");
++      }
++      const result = await client.getDaemonConfig();
++      return result.config;
++    },
++  });
++

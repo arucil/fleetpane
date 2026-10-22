@@ -1,0 +1,65 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2152,
+  "revision": "7b19dd736fb73b5b049e428050b3ee7eac1928a1",
+  "date": "2026-04-06T20:16:32+07:00",
+  "committer_date": "2026-04-06T20:16:32+07:00",
+  "parents": [
+    "7173342bcb2cac69401e4c8ab352aae1908f8112"
+  ],
+  "subject": "feat: add service start capability with health monitoring",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/workspace-hover-card.spec.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/components/workspace-setup-dialog.tsx",
+    "M\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/screens/new-workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/service-health-monitor.test.ts",
+    "M\tpackages/server/src/server/service-health-monitor.ts",
+    "M\tpackages/server/src/server/service-proxy.ts",
+    "M\tpackages/server/src/server/service-route-branch-handler.test.ts",
+    "M\tpackages/server/src/server/service-status-projection.test.ts",
+    "M\tpackages/server/src/server/service-status-projection.ts",
+    "M\tpackages/server/src/server/session.provider-history-compatibility-ownership.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:fde1e71cdc3b47086a3f1ac646af728dd06c7ffe3853798691d3e694123b655b",
+  "diff_tree_digest": "sha256:0a7b5e9b150fd558e24c211dcda4277d6e01828d6da5f2a061bf4e1d70c4ef9b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-hover-card.tsx",
+      "old_lines": [
+        465,
+        466
+      ],
+      "new_lines": [
+        540,
+        559
+      ],
+      "diff_block_lines": [
+        177,
+        196
+      ],
+      "hunk_header": "@@ -419,48 +467,93 @@ function WorkspaceHoverCardContent({",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 1007,
+  "receipt_file": "receipts/2152/selected.patch"
+}

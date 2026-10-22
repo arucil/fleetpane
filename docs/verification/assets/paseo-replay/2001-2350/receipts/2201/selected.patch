@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1237,1237],"new_lines":[1240,1269],"diff_block_lines":[22,51],"hunk_header":"@@ -1236,4 +1239,52 @@ function readContextWindowUsedTokensFromTaskProgress(","substantive_changed_lines":23}
+ 
++function readContextWindowUsedTokensFromTaskProgress(
++  message: SDKTaskProgressMessage,
++): number | undefined {
++  return readUsageTotalTokens(message.usage);
++}
++
++function readUsageFromTaskNotification(message: { usage?: unknown }): number | undefined {
++  return readUsageTotalTokens(message.usage);
++}
++
++function readStreamRequestInputTokens(event: Record<string, unknown>): number | undefined {
++  const messageUsage = (event.message as { usage?: unknown } | undefined)?.usage;
++  if (!messageUsage || typeof messageUsage !== "object") {
++    return undefined;
++  }
++  const usage = messageUsage as {
++    input_tokens?: unknown;
++    cache_creation_input_tokens?: unknown;
++    cache_read_input_tokens?: unknown;
++  };
++  const inputTokens =
++    typeof usage.input_tokens === "number" && Number.isFinite(usage.input_tokens)
++      ? usage.input_tokens
++      : undefined;
++  const cacheCreationInputTokens =
++    typeof usage.cache_creation_input_tokens === "number" &&
++    Number.isFinite(usage.cache_creation_input_tokens)
++      ? usage.cache_creation_input_tokens
++      : 0;

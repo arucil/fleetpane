@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2194,
+  "revision": "8088c39fd69243e9ca115018696cdd818b54080f",
+  "date": "2026-04-07T20:02:48+07:00",
+  "committer_date": "2026-04-07T20:02:48+07:00",
+  "parents": [
+    "1279f1d556ff03b9704a6440270f58f54280d9fc"
+  ],
+  "subject": "Fix OpenCode usage regression and update workspace tests",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:1f0100e3a6bd8ae826bb5f9965716dbf1e811af075610e6edbba60efce3f37ad",
+  "diff_tree_digest": "sha256:9f732134499384ad2eed04ed74cf1bdccedde0fbcc73b63a7055e4303698b3d8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        2044,
+        2045
+      ],
+      "new_lines": [
+        2044,
+        2056
+      ],
+      "diff_block_lines": [
+        8,
+        20
+      ],
+      "hunk_header": "@@ -2042,4 +2042,15 @@ class OpenCodeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 24,
+  "receipt_file": "receipts/2194/selected.patch"
+}

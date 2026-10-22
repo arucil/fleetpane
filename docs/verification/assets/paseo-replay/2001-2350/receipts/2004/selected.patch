@@ -1,0 +1,18 @@
+FILE packages/server/src/server/worktree-session.ts
+RANGE {"path":"packages/server/src/server/worktree-session.ts","old_lines":[678,690],"new_lines":[680,686],"diff_block_lines":[68,83],"hunk_header":"@@ -677,14 +679,8 @@ export async function createPaseoWorktreeInBackground(","substantive_changed_lines":11}
+     try {
+-      const createdWorktree = await createAgentWorktree({
+-        cwd: options.repoRoot,
+-        branchName: options.slug,
+-        baseBranch: options.baseBranch,
+-        worktreeSlug: options.slug,
+-        paseoHome: dependencies.paseoHome,
+-      });
+-      worktree = createdWorktree.worktree;
++      emitSetupProgress("running", null);
+ 
+-      if (!createdWorktree.shouldBootstrap) {
++      if (!options.shouldBootstrap) {
++        emitSetupProgress("completed", null);
+         return;
+       }

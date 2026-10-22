@@ -1,0 +1,16 @@
+FILE packages/server/src/server/agent/provider-manifest.ts
+RANGE {"path":"packages/server/src/server/agent/provider-manifest.ts","old_lines":[140,153],"new_lines":[140,141],"diff_block_lines":[8,21],"hunk_header":"@@ -138,16 +138,4 @@ export const AGENT_PROVIDER_DEFINITIONS: AgentProviderDefinition[] = [","substantive_changed_lines":9}
+-  {
+-    id: "claude-acp",
+-    label: "Claude ACP",
+-    description: "Claude Code via Agent Client Protocol with streaming, permissions, and session resume",
+-    defaultModeId: "default",
+-    modes: CLAUDE_MODES,
+-    voice: {
+-      enabled: true,
+-      defaultModeId: "default",
+-      defaultModel: "haiku",
+-    },
+-  },
+   {
+     id: "codex",

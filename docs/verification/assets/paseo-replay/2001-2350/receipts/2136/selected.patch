@@ -1,0 +1,26 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[2176,2198],"new_lines":[2148,2154],"diff_block_lines":[72,95],"hunk_header":"@@ -2175,24 +2147,8 @@ export class AgentManager {","substantive_changed_lines":12}
+           }
+-          this.recordTimeline(agent.id, event.item);
+-          continue;
+-        }
+-
+-        if (event.item.type === "assistant_message") {
+-          bufferedAssistantText += event.item.text;
+-          continue;
+-        }
+-
+-        if (event.item.type === "reasoning") {
+-          continue;
+-        }
+-
+-        if (event.item.type === "tool_call" && event.item.status === "running") {
+-          continue;
+         }
+ 
+-        pendingTurnItems.push(event.item);
++        this.recordTimeline(agent.id, event.item);
+       }
+-      flushPendingTurn();
+     } catch {
+       // ignore history failures

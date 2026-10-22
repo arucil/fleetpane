@@ -1,0 +1,22 @@
+FILE packages/desktop/src/main.ts
+RANGE {"path":"packages/desktop/src/main.ts","old_lines":[149,150],"new_lines":[150,169],"diff_block_lines":[9,28],"hunk_header":"@@ -147,4 +147,23 @@ async function createMainWindow(): Promise<void> {","substantive_changed_lines":11}
++  // Renderer diagnostics — helps debug layout and loading issues
++  mainWindow.webContents.on("console-message", (_event, level, message, line, sourceId) => {
++    const levelNames = ["verbose", "info", "warning", "error"];
++    log.info(`[renderer:console] [${levelNames[level] ?? level}] ${message} (${sourceId}:${line})`);
++  });
++  mainWindow.webContents.on("did-finish-load", () => {
++    log.info("[renderer] did-finish-load");
++  });
++  mainWindow.webContents.on("did-fail-load", (_event, errorCode, errorDescription, validatedURL) => {
++    log.error("[renderer] did-fail-load", { errorCode, errorDescription, validatedURL });
++  });
++  mainWindow.webContents.on("render-process-gone", (_event, details) => {
++    log.error("[renderer] render-process-gone", details);
++  });
++  mainWindow.webContents.on("unresponsive", () => {
++    log.warn("[renderer] unresponsive");
++  });
++
+   mainWindow.once("ready-to-show", () => {
+     mainWindow.show();

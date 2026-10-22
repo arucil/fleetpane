@@ -1,0 +1,10 @@
+FILE packages/app/src/components/question-form-card.tsx
+RANGE {"path":"packages/app/src/components/question-form-card.tsx","old_lines":[229,233],"new_lines":[230,236],"diff_block_lines":[11,18],"hunk_header":"@@ -229,5 +230,7 @@ export function QuestionFormCard({ permission, onRespond, isResponding }: Questi","substantive_changed_lines":2}
+@@ -229,5 +230,7 @@ export function QuestionFormCard({ permission, onRespond, isResponding }: Questi
+               value={otherText}
+               onChangeText={(text) => setOtherText(qIndex, text)}
++              onSubmitEditing={handleSubmit}
+               editable={!isResponding}
++              blurOnSubmit={false}
+             />
+           </View>

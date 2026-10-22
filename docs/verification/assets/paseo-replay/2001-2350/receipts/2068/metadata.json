@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2068,
+  "revision": "60bbfdde25b2578fecef5f1a97018674f65296c7",
+  "date": "2026-04-03T23:47:37+07:00",
+  "committer_date": "2026-04-03T23:47:37+07:00",
+  "parents": [
+    "71ce95de9031402381bbb520a8677be92714ed07"
+  ],
+  "subject": "fix(opencode): prevent event stream starvation for slash commands",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:3e81a73277e4ff0c5be5a68125535fe92a05e77ed2cc34f82222662f4f54ac11",
+  "diff_tree_digest": "sha256:5490b20d7b9149eb445dd27aba44a2403c45df229d96ab40b9a73b11ef208b14",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        1221,
+        1237
+      ],
+      "new_lines": [
+        1233,
+        1246
+      ],
+      "diff_block_lines": [
+        70,
+        95
+      ],
+      "hunk_header": "@@ -1218,20 +1231,16 @@ class OpenCodeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 43,
+  "receipt_file": "receipts/2068/selected.patch"
+}

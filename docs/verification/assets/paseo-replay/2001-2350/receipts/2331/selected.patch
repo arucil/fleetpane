@@ -1,0 +1,28 @@
+FILE packages/app/src/panels/agent-panel.tsx
+RANGE {"path":"packages/app/src/panels/agent-panel.tsx","old_lines":[485,497],"new_lines":[485,500],"diff_block_lines":[7,32],"hunk_header":"@@ -484,14 +484,17 @@ function AgentPanelBody({","substantive_changed_lines":18}
+ 
+-  const agent: AgentScreenAgent | null =
+-    agentState.serverId && agentState.id && agentState.status && agentState.cwd
+-      ? {
+-          serverId: agentState.serverId,
+-          id: agentState.id,
+-          status: agentState.status,
+-          cwd: agentState.cwd,
+-          projectPlacement,
+-        }
+-      : null;
++  const agent = useMemo<AgentScreenAgent | null>(
++    () =>
++      agentState.serverId && agentState.id && agentState.status && agentState.cwd
++        ? {
++            serverId: agentState.serverId,
++            id: agentState.id,
++            status: agentState.status,
++            cwd: agentState.cwd,
++            projectPlacement,
++          }
++        : null,
++    [agentState.serverId, agentState.id, agentState.status, agentState.cwd, projectPlacement],
++  );
+ 
+   const placeholderAgent: AgentScreenAgent | null = useMemo(() => {

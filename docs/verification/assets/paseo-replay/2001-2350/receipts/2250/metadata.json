@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2250,
+  "revision": "d39414064ee136a5ea7940c1fc8e979cfb7f45d4",
+  "date": "2026-04-09T00:25:30+07:00",
+  "committer_date": "2026-04-09T00:25:30+07:00",
+  "parents": [
+    "ffcc35485d1b5e3f5590bda088045b44d3d24427"
+  ],
+  "subject": "Fix opencode terminal states and model refresh",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/agent/providers/opencode-agent.error-handling.real.e2e.test.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode-agent.list-models-timeout.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/opencode-initial-prompt-wait.real.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/opencode-invalid-model.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:786f6f63563f49c14a1702b99af48a656e611007dc3dbc9b3d5b9263778e76cc",
+  "diff_tree_digest": "sha256:ed8d86652ffcbe0bad53a721dbd0617e7fdcf23d1d72287169a5b8c20e1e5cd1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        95,
+        97
+      ],
+      "new_lines": [
+        95,
+        110
+      ],
+      "diff_block_lines": [
+        7,
+        22
+      ],
+      "hunk_header": "@@ -94,4 +94,17 @@ type OpenCodeMcpConfig =",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 309,
+  "receipt_file": "receipts/2250/selected.patch"
+}

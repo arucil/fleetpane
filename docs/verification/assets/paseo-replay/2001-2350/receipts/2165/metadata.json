@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2165,
+  "revision": "5cb424b2e6d525f4d1c4ba3fc35377128ab72584",
+  "date": "2026-04-07T04:25:25+02:00",
+  "committer_date": "2026-04-07T10:25:25+08:00",
+  "parents": [
+    "fd9dfb0cc83eb0d34314cc81475d2ac2d2a757f7"
+  ],
+  "subject": "feat(app): add open in editor toolbar action (#209)",
+  "diff_tree_paths": [
+    "A\tpackages/app/assets/images/editor-apps/cursor.png",
+    "A\tpackages/app/assets/images/editor-apps/file-explorer.png",
+    "A\tpackages/app/assets/images/editor-apps/finder.png",
+    "A\tpackages/app/assets/images/editor-apps/vscode.png",
+    "A\tpackages/app/assets/images/editor-apps/zed.png",
+    "A\tpackages/app/src/components/icons/editor-app-icons.tsx",
+    "A\tpackages/app/src/hooks/use-preferred-editor.test.ts",
+    "A\tpackages/app/src/hooks/use-preferred-editor.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-open-in-editor-button.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "A\tpackages/server/src/server/editor-targets.test.ts",
+    "A\tpackages/server/src/server/editor-targets.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:e72e961d1ac01c05dfa07becbf0dcb3204078f9b1f1e9eebbf3c914878fef9f4",
+  "diff_tree_digest": "sha256:f1dade83104db6d5df53250108c55f6101beba1d55c85e883039fe8a3f7189ef",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-preferred-editor.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        8,
+        37
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,57 @@",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 567,
+  "receipt_file": "receipts/2165/selected.patch"
+}

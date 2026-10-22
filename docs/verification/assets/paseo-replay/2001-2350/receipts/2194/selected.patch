@@ -1,0 +1,15 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[2044,2045],"new_lines":[2044,2056],"diff_block_lines":[8,20],"hunk_header":"@@ -2042,4 +2042,15 @@ class OpenCodeAgentSession implements AgentSession {","substantive_changed_lines":9}
++      if (translatedEvent.type === "turn_completed") {
++        if (hasNormalizedOpenCodeUsage(this.accumulatedUsage)) {
++          translatedEvent.usage = this.accumulatedUsage;
++        }
++        const contextWindowMaxTokens =
++          this.resolveSelectedModelContextWindowMaxTokens();
++        this.accumulatedUsage =
++          contextWindowMaxTokens !== undefined
++            ? { contextWindowMaxTokens }
++            : {};
++      }
+     }
+ 

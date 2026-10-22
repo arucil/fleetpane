@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/diff-layout.ts
+RANGE {"path":"packages/app/src/utils/diff-layout.ts","old_lines":[63,63],"new_lines":[69,98],"diff_block_lines":[18,47],"hunk_header":"@@ -62,4 +68,37 @@ function toDisplayLine(input: {","substantive_changed_lines":19}
+ 
++export function buildUnifiedDiffLines(file: ParsedDiffFile): UnifiedDiffDisplayLine[] {
++  const lines: UnifiedDiffDisplayLine[] = [];
++
++  for (const [hunkIndex, hunk] of file.hunks.entries()) {
++    let oldLineNo = hunk.oldStart;
++    let newLineNo = hunk.newStart;
++
++    for (const [lineIndex, line] of hunk.lines.entries()) {
++      let lineNumber: number | null = null;
++
++      if (line.type === "remove") {
++        lineNumber = oldLineNo;
++        oldLineNo += 1;
++      } else if (line.type === "add") {
++        lineNumber = newLineNo;
++        newLineNo += 1;
++      } else if (line.type === "context") {
++        lineNumber = newLineNo;
++        oldLineNo += 1;
++        newLineNo += 1;
++      }
++
++      lines.push({
++        key: `${hunkIndex}-${lineIndex}`,
++        line,
++        lineNumber,
++      });
++    }
++  }

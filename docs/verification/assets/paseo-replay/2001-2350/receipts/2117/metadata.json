@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2117,
+  "revision": "702e2e7db93517d40e02429211b2de9b2686a195",
+  "date": "2026-04-05T09:18:46+07:00",
+  "committer_date": "2026-04-05T09:21:45+07:00",
+  "parents": [
+    "c32bc847bfcfca1f71f4772ad95bed827d72def9"
+  ],
+  "subject": "Handle Codex request_user_input app-server questions",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:2de8d4951535f7f8562bcb5d3387383dadac2f65cbe1292919df8e4039735e2c",
+  "diff_tree_digest": "sha256:02c45ad8613f4b7f2c0cc10267526db95738944840360a16df745b477b1cab39",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        726,
+        726
+      ],
+      "new_lines": [
+        749,
+        778
+      ],
+      "diff_block_lines": [
+        54,
+        83
+      ],
+      "hunk_header": "@@ -724,4 +733,185 @@ function mapCodexPlanToToolCall(params: { callId: string; text: string }): ToolC",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 600,
+  "receipt_file": "receipts/2117/selected.patch"
+}

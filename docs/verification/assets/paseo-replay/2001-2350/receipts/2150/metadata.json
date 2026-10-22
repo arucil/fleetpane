@@ -1,0 +1,56 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2150,
+  "revision": "6e5cad812ef37cc2515c545bffbd20219bff1db9",
+  "date": "2026-04-06T14:38:29+07:00",
+  "committer_date": "2026-04-06T14:38:29+07:00",
+  "parents": [
+    "5d1b3383d764dbc6b4d588dc8d6b9e769c6228cf"
+  ],
+  "subject": "feat: service route branch handling, workspace hover card redesign, and agent form state improvements",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-agent-input-draft.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-input-draft.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/service-route-branch-handler.test.ts",
+    "A\tpackages/server/src/server/service-route-branch-handler.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "A\tpackages/server/src/utils/service-hostname.test.ts",
+    "A\tpackages/server/src/utils/service-hostname.ts"
+  ],
+  "source_receipt_digest": "sha256:a3bc7bcf37fe9030fd70024e8a97edf54870a0fadb49412203b8052b3e45e182",
+  "diff_tree_digest": "sha256:5c393e74cc769557d8d35c97e7ca71b0b261f85f6376631582fd573c7c18aee4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-hover-card.tsx",
+      "old_lines": [
+        194,
+        204
+      ],
+      "new_lines": [
+        196,
+        218
+      ],
+      "diff_block_lines": [
+        91,
+        120
+      ],
+      "hunk_header": "@@ -193,40 +195,79 @@ const GITHUB_PR_STATE_LABELS: Record<PrHint[\"state\"], string> = {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 705,
+  "receipt_file": "receipts/2150/selected.patch"
+}

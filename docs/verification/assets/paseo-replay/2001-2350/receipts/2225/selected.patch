@@ -1,0 +1,27 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[192,193],"new_lines":[195,219],"diff_block_lines":[21,45],"hunk_header":"@@ -190,4 +192,28 @@ const DEFAULT_AGENT_PROVIDER = AGENT_PROVIDER_IDS[0];","substantive_changed_lines":15}
++
++function isAppVersionAtLeast(appVersion: string | null, minVersion: string): boolean {
++  if (!appVersion) return false;
++  // Strip RC/prerelease suffix: "0.1.45-rc.4" → "0.1.45"
++  const base = appVersion.replace(/-.*$/, "");
++  const parts = base.split(".").map(Number);
++  const minParts = minVersion.split(".").map(Number);
++  for (let i = 0; i < minParts.length; i++) {
++    const a = parts[i] ?? 0;
++    const b = minParts[i] ?? 0;
++    if (a > b) return true;
++    if (a < b) return false;
++  }
++  return true;
++}
++
++function clientSupportsAllProviders(appVersion: string | null): boolean {
++  return isAppVersionAtLeast(appVersion, MIN_VERSION_ALL_PROVIDERS);
++}
++
++function clientSupportsFlexibleEditorIds(appVersion: string | null): boolean {
++  return isAppVersionAtLeast(appVersion, MIN_VERSION_FLEXIBLE_EDITOR_IDS);
++}
+ const WORKSPACE_GIT_WATCH_DEBOUNCE_MS = 500;
+ const WORKSPACE_GIT_WATCH_REMOVED_FINGERPRINT = "__removed__";

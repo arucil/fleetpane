@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2283,
+  "revision": "033c4bcbf21ff6d13ba7f5388d4a45ab1217edf8",
+  "date": "2026-04-10T15:11:14+07:00",
+  "committer_date": "2026-04-10T15:11:14+07:00",
+  "parents": [
+    "0f005172ce9242433e2caba7fe5fe58b6b612566"
+  ],
+  "subject": "fix: let xterm.js handle keyboard input natively for scroll-on-input",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/terminal-keys.test.ts",
+    "M\tpackages/app/src/utils/terminal-keys.ts"
+  ],
+  "source_receipt_digest": "sha256:fa5a75f0f19c637e1a4ac0b678717706c6bac28bf10786176126584b22d49e0f",
+  "diff_tree_digest": "sha256:3cdcbe1fe3833bb5897892aab1efd591ba2f497b9634a4eb2c3239c03b1e21a2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/terminal-keys.ts",
+      "old_lines": [
+        89,
+        98
+      ],
+      "new_lines": [
+        89,
+        93
+      ],
+      "diff_block_lines": [
+        5,
+        16
+      ],
+      "hunk_header": "@@ -89,10 +89,5 @@ export function shouldInterceptDomTerminalKey(args: {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/2283/selected.patch"
+}

@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2331,
+  "revision": "cde10485d4d4c07a2fd21a2deb2a707c36a028c7",
+  "date": "2026-04-12T12:18:51+07:00",
+  "committer_date": "2026-04-12T12:18:51+07:00",
+  "parents": [
+    "0d340959d7b1b939e4bea8fdc436f7ba77846d60"
+  ],
+  "subject": "Memoize agent object in AgentPanelBody to prevent WebStreamViewport re-renders on keystroke",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/panels/agent-panel.tsx"
+  ],
+  "source_receipt_digest": "sha256:7c77b2a55f9ecf87fffaf1718b8a569aa830e26b5538adfa1447d3ad6dec4f66",
+  "diff_tree_digest": "sha256:3ca320281bf41cb360ac661aa675900ea4360dc2a652347436033e8435075c6a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/panels/agent-panel.tsx",
+      "old_lines": [
+        485,
+        497
+      ],
+      "new_lines": [
+        485,
+        500
+      ],
+      "diff_block_lines": [
+        7,
+        32
+      ],
+      "hunk_header": "@@ -484,14 +484,17 @@ function AgentPanelBody({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 18,
+  "receipt_file": "receipts/2331/selected.patch"
+}

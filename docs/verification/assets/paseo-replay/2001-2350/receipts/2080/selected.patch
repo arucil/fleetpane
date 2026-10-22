@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[600,600],"new_lines":[606,635],"diff_block_lines":[29,58],"hunk_header":"@@ -598,4 +601,66 @@ function OfferLinkListener({","substantive_changed_lines":21}
++
++function OpenProjectListener() {
++  const hosts = useHosts();
++  const serverId = hosts[0]?.serverId ?? null;
++  const client = useHostRuntimeClient(serverId ?? "");
++  const openProject = useOpenProject(serverId);
++  const pendingPathRef = useRef<string | null>(null);
++
++  useEffect(() => {
++    let disposed = false;
++    let unlisten: (() => void) | null = null;
++    const maybeOpenProject = (inputPath: string) => {
++      const nextPath = inputPath.trim();
++      if (!nextPath) {
++        return;
++      }
++
++      pendingPathRef.current = nextPath;
++
++      if (!serverId || !client) {
++        return;
++      }
++
++      const pathToOpen = pendingPathRef.current;
++      pendingPathRef.current = null;
++      if (!pathToOpen) {
++        return;
++      }
++
++      void openProject(pathToOpen).catch(() => undefined);

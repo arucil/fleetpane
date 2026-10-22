@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2067,
+  "revision": "71ce95de9031402381bbb520a8677be92714ed07",
+  "date": "2026-04-03T23:20:56+07:00",
+  "committer_date": "2026-04-03T23:20:56+07:00",
+  "parents": [
+    "255c2665ccd88c3437ce1c210f9695050ef482ee"
+  ],
+  "subject": "fix(desktop): race existing connections against bootstrap for faster startup",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts"
+  ],
+  "source_receipt_digest": "sha256:6909f4a23ffa56d2b9835f42f3b9919bda342754ce811a96a4b523b1bd5e4394",
+  "diff_tree_digest": "sha256:55fd3cbc0a79ff5537e695a15c3cc7e72be334274ae1e363e9f52fa56adf8446",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        248,
+        254
+      ],
+      "new_lines": [
+        251,
+        275
+      ],
+      "diff_block_lines": [
+        26,
+        55
+      ],
+      "hunk_header": "@@ -241,26 +242,51 @@ function HostRuntimeBootstrapProvider({ children }: { children: ReactNode }) {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 145,
+  "receipt_file": "receipts/2067/selected.patch"
+}

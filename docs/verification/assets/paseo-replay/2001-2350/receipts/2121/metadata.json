@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2121,
+  "revision": "8e482b161374be38be660234b347bf95fd3a2c36",
+  "date": "2026-04-05T18:16:31+07:00",
+  "committer_date": "2026-04-05T18:16:31+07:00",
+  "parents": [
+    "2dd597f5f51bcfc649b058be1db99f9b110a708f"
+  ],
+  "subject": "fix: use numeric workspace ID for worktree setup tracking and improve service list UI",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts"
+  ],
+  "source_receipt_digest": "sha256:040dd293efc43d993c2411537fc766a16a558d4c8bcde12cf8a8779cada80a6b",
+  "diff_tree_digest": "sha256:24743ee466271c10368d20cd449b684b54b3f92edcd76ed4b812e5cc0c7e8b51",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-hover-card.tsx",
+      "old_lines": [
+        367,
+        378
+      ],
+      "new_lines": [
+        367,
+        389
+      ],
+      "diff_block_lines": [
+        7,
+        32
+      ],
+      "hunk_header": "@@ -366,13 +366,24 @@ function WorkspaceHoverCardContent({",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 74,
+  "receipt_file": "receipts/2121/selected.patch"
+}

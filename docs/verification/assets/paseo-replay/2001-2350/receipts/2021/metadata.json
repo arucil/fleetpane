@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2021,
+  "revision": "b730d8394337d9df08c1f0f2f5c61b5ade3069bc",
+  "date": "2026-04-02T11:31:13+07:00",
+  "committer_date": "2026-04-02T11:31:13+07:00",
+  "parents": [
+    "68c8efc5d3d422a068cabf9b1abd04982af746ff"
+  ],
+  "subject": "fix: deduplicate projects by git remote and detect worktree workspaces",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/workspace-git-metadata.ts"
+  ],
+  "source_receipt_digest": "sha256:7e90ed5c5a9bdebec9e16401cdbe4c0ee4c1cf82c2735b0243bb344893d40c76",
+  "diff_tree_digest": "sha256:85dd5b99a6f5b9c96e43a436c9e0163217b9085a81171d77f68a081ba01d9ece",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5167,
+        5176
+      ],
+      "new_lines": [
+        5167,
+        5187
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -5166,18 +5166,33 @@ export class Session {",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 30,
+  "receipt_file": "receipts/2021/selected.patch"
+}

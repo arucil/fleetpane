@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2158,
+  "revision": "390a3402abdb27f8cf9cf3edd48df376bc713b5c",
+  "date": "2026-04-07T00:11:43+07:00",
+  "committer_date": "2026-04-07T00:11:43+07:00",
+  "parents": [
+    "27ddc95862d01a595cc5e46ca177697ed422d7cf"
+  ],
+  "subject": "Fix provider snapshot session hydration and agent scoping",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-providers-snapshot.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:b1ebd68f2313e47533f77c90ce1507caab67450454b0e3e082bcce785c82efb7",
+  "diff_tree_digest": "sha256:5c2af5e0cf2a2962528deceba821d6c3a729404ee54ba939ac0e6b59e6b8391b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        450,
+        479
+      ],
+      "new_lines": [
+        420,
+        420
+      ],
+      "diff_block_lines": [
+        68,
+        97
+      ],
+      "hunk_header": "@@ -436,155 +418,11 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 196,
+  "receipt_file": "receipts/2158/selected.patch"
+}

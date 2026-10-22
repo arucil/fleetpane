@@ -1,0 +1,32 @@
+FILE packages/server/src/server/background-git-fetch-manager.ts
+RANGE {"path":"packages/server/src/server/background-git-fetch-manager.ts","old_lines":[0,0],"new_lines":[21,50],"diff_block_lines":[27,56],"hunk_header":"@@ -0,0 +1,150 @@","substantive_changed_lines":21}
++
++  constructor(options: { logger: pino.Logger }) {
++    this.logger = options.logger.child({ module: "background-git-fetch-manager" });
++  }
++
++  async subscribe(
++    params: { repoGitRoot: string; cwd: string },
++    listener: () => void,
++  ): Promise<{ unsubscribe: () => void }> {
++    const existingTarget = this.targets.get(params.repoGitRoot);
++    if (existingTarget) {
++      existingTarget.listeners.add(listener);
++      return {
++        unsubscribe: () => {
++          this.removeListener(params.repoGitRoot, listener);
++        },
++      };
++    }
++
++    const hasOrigin = await this.hasOriginRemote(params.cwd);
++    if (!hasOrigin) {
++      return { unsubscribe: () => {} };
++    }
++
++    const targetAfterProbe = this.targets.get(params.repoGitRoot);
++    if (targetAfterProbe) {
++      targetAfterProbe.listeners.add(listener);
++      return {
++        unsubscribe: () => {
++          this.removeListener(params.repoGitRoot, listener);

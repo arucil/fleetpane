@@ -1,0 +1,12 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[131,134],"new_lines":[131,139],"diff_block_lines":[5,14],"hunk_header":"@@ -131,4 +131,9 @@ jobs:","substantive_changed_lines":4}
+@@ -131,4 +131,9 @@ jobs:
+ 
+     steps:
++      - uses: actions/checkout@v4
++        with:
++          sparse-checkout: scripts
++          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref }}
++
+       - name: Resolve release tag
+         shell: bash

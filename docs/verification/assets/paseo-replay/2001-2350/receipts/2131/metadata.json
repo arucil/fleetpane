@@ -1,0 +1,72 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2131,
+  "revision": "76a9c6f9503a14d10c0d9d6d15350ec22d9a02b3",
+  "date": "2026-04-05T21:26:07+07:00",
+  "committer_date": "2026-04-05T21:26:07+07:00",
+  "parents": [
+    "4dca672711aff6175ea0e2a3ca764545459baf3c",
+    "3397e6c5899895937d3fbe14245ebe610f7235c7"
+  ],
+  "subject": "Merge branch 'main' into merge/main-into-dev",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/composer.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/desktop/package.json",
+    "A\tpackages/desktop/src/login-shell-env.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/expo-two-way-audio/package.json",
+    "M\tpackages/highlight/package.json",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "A\tpackages/server/src/server/agent/provider-snapshot-manager.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/copilot-acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/pi-acp-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/executable.test.ts",
+    "M\tpackages/server/src/utils/executable.ts",
+    "M\tpackages/website/package.json"
+  ],
+  "source_receipt_digest": "sha256:962043728d7fd6fe4b5e2c11cde2d3412e1ce313c344b7fa860c1cc7e2653245",
+  "diff_tree_digest": "sha256:c5e0fe812185a7d2eb2b525697fc35064ee396dc30af5ca915957488318c47a0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        375,
+        375
+      ],
+      "new_lines": [
+        387,
+        416
+      ],
+      "diff_block_lines": [
+        51,
+        80
+      ],
+      "hunk_header": "@@ -373,9 +380,136 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 1032,
+  "receipt_file": "receipts/2131/selected.patch"
+}

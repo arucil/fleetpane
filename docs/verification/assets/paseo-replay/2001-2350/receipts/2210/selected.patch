@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/new-workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/new-workspace-screen.tsx","old_lines":[101,101],"new_lines":[125,154],"diff_block_lines":[49,78],"hunk_header":"@@ -99,4 +121,50 @@ export function NewWorkspaceScreen({","substantive_changed_lines":22}
++    queryKey: ["github-search", serverId, sourceDirectory, githubSearchQuery_trimmed],
++    queryFn: async () => {
++      const connectedClient = withConnectedClient();
++      return connectedClient.searchGitHub({
++        cwd: sourceDirectory,
++        query: githubSearchQuery_trimmed,
++        limit: 20,
++      });
++    },
++    enabled: isConnected && !!client && githubSearchQuery_trimmed.length >= 2,
++  });
++
++  const githubSearchOptions: ComboboxOptionType[] = useMemo(() => {
++    const items = githubSearchResultsQuery.data?.items ?? [];
++    const selectedNumbers = new Set(githubContextItems.map((i) => `${i.kind}:${i.number}`));
++    return items
++      .filter((item) => !selectedNumbers.has(`${item.kind}:${item.number}`))
++      .map((item) => ({
++        id: `${item.kind}:${item.number}`,
++        label: `#${item.number} ${item.title}`,
++        // Include search query so the Combobox's client-side filter doesn't
++        // discard server-searched results that match on body but not title.
++        description: githubSearchQuery_trimmed,
++      }));
++  }, [githubSearchResultsQuery.data?.items, githubContextItems, githubSearchQuery_trimmed]);
++
++  const handleSelectGithubItem = useCallback(
++    (id: string) => {
++      const items = githubSearchResultsQuery.data?.items ?? [];
++      const [kind, numberStr] = id.split(":");

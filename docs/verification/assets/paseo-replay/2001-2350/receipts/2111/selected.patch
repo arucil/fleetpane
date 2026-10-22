@@ -1,0 +1,7 @@
+FILE packages/desktop/src/daemon/runtime-paths.ts
+RANGE {"path":"packages/desktop/src/daemon/runtime-paths.ts","old_lines":[307,310],"new_lines":[315,318],"diff_block_lines":[23,27],"hunk_header":"@@ -305,6 +305,14 @@ export async function runCliJsonCommand(args: string[]): Promise<unknown> {","substantive_changed_lines":2}
+   try {
+-    return JSON.parse(stdout) as unknown;
++    return JSON.parse(jsonText) as unknown;
+   } catch (error) {
+     throw new Error(

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2049,
+  "revision": "a2b1498c3f57a25bc3c0c44b4d26cdac96f90787",
+  "date": "2026-04-03T16:46:17+07:00",
+  "committer_date": "2026-04-03T16:53:14+07:00",
+  "parents": [
+    "df617a4c8f27324fe22ce4f33c0234dff38a5047"
+  ],
+  "subject": "fix(app): broaden keyboard focus scope resolution to check multiple candidates",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/keyboard/focus-scope.test.ts",
+    "M\tpackages/app/src/keyboard/focus-scope.ts"
+  ],
+  "source_receipt_digest": "sha256:f428e8b6230ef7d04dd10c8ea1e141e10ba41aee9d6d84724f9ff26ab3756e05",
+  "diff_tree_digest": "sha256:e2669251115701e28e755856de9a68f57209ca1d61e59664574ca32dcbb50d77",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/focus-scope.ts",
+      "old_lines": [
+        17,
+        34
+      ],
+      "new_lines": [
+        50,
+        69
+      ],
+      "diff_block_lines": [
+        57,
+        86
+      ],
+      "hunk_header": "@@ -16,21 +49,28 @@ export function resolveKeyboardFocusScope(input: {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 96,
+  "receipt_file": "receipts/2049/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/provider-registry.ts
+RANGE {"path":"packages/server/src/server/agent/provider-registry.ts","old_lines":[46,63],"new_lines":[74,85],"diff_block_lines":[63,92],"hunk_header":"@@ -36,30 +72,18 @@ export function buildProviderRegistry(","substantive_changed_lines":24}
+-    claude: {
+-      ...AGENT_PROVIDER_DEFINITIONS.find((d) => d.id === "claude")!,
+-      createClient: (logger: Logger) =>
+-        new ClaudeAgentClient({ logger, runtimeSettings: runtimeSettings?.claude }),
+-      fetchModels: (options) => claudeClient.listModels(options),
+-    },
+-    codex: {
+-      ...AGENT_PROVIDER_DEFINITIONS.find((d) => d.id === "codex")!,
+-      createClient: (logger: Logger) =>
+-        new CodexAppServerAgentClient(logger, runtimeSettings?.codex),
+-      fetchModels: (options) => codexClient.listModels(options),
+-    },
+-    opencode: {
+-      ...AGENT_PROVIDER_DEFINITIONS.find((d) => d.id === "opencode")!,
+-      createClient: (logger: Logger) => new OpenCodeAgentClient(logger, runtimeSettings?.opencode),
+-      fetchModels: (options) => opencodeClient.listModels(options),
+-    },
+-  };
++  return Object.fromEntries(
++    AGENT_PROVIDER_DEFINITIONS.map((definition) => {
++      const createClient = getProviderClientFactory(definition.id);
++      const modelClient = createClient(logger, runtimeSettings);
++      return [
++        definition.id,
++        {
++          ...definition,
++          createClient: (providerLogger: Logger) => createClient(providerLogger, runtimeSettings),
++          fetchModels: (listOptions?: ListModelsOptions) => modelClient.listModels(listOptions),
++        } satisfies ProviderDefinition,
++      ];

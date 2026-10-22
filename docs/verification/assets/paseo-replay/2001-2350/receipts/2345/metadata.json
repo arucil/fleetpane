@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2345,
+  "revision": "39b56af47bfe43cb45de592ce2ae89f893519417",
+  "date": "2026-04-12T21:43:28+07:00",
+  "committer_date": "2026-04-12T22:02:13+07:00",
+  "parents": [
+    "64b9b612230bb7fce840aa699ff82078a407c8ef"
+  ],
+  "subject": "Fix Windows MCP config mangling by bypassing cmd.exe shell for Claude spawn",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:f58a7c7599c08ca518b1ca3c067d37826f3759c0a5b8953ed0e02a4cffabbe08",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        225,
+        228
+      ],
+      "new_lines": [
+        225,
+        232
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -225,4 +225,8 @@ function applyRuntimeSettingsToClaudeOptions(",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 1,
+  "receipt_file": "receipts/2345/selected.patch"
+}

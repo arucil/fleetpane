@@ -1,0 +1,16 @@
+FILE packages/app/src/app/pair-scan.tsx
+RANGE {"path":"packages/app/src/app/pair-scan.tsx","old_lines":[161,174],"new_lines":[154,155],"diff_block_lines":[33,46],"hunk_header":"@@ -149,26 +147,9 @@ export default function PairScanScreen() {","substantive_changed_lines":7}
+-    useCallback(
+-      (state) => {
+-        if (!pendingNameHost) return null;
+-        return (
+-          state.sessions[pendingNameHost.serverId]?.serverInfo?.hostname ??
+-          pendingNameHost.hostname ??
+-          null
+-        );
+-      },
+-      [pendingNameHost],
+-    ),
+-  );
+ 
+   const returnToSource = useCallback(

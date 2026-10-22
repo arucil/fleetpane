@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2184,
+  "revision": "ee611d65b693519eb3bd4a90e347292bd19e1d5b",
+  "date": "2026-04-07T16:50:17+07:00",
+  "committer_date": "2026-04-07T16:50:17+07:00",
+  "parents": [
+    "5ce4562eedbef3a68c5f9a644530fe6e6ef531fb"
+  ],
+  "subject": "Surface wait_for_finish agent errors",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/session.wait-for-finish.test.ts"
+  ],
+  "source_receipt_digest": "sha256:c065e3b2601584b412d831263e33550f3581a8414ddd28732f39a6fc390b4ebd",
+  "diff_tree_digest": "sha256:a7acb4680b211a60c6d148d20411d66ab9e556f897fb937c9c307f7602b8848b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        259,
+        261
+      ],
+      "new_lines": [
+        259,
+        272
+      ],
+      "diff_block_lines": [
+        7,
+        20
+      ],
+      "hunk_header": "@@ -258,4 +258,15 @@ export function resolveCreateAgentTitles(options: {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 33,
+  "receipt_file": "receipts/2184/selected.patch"
+}

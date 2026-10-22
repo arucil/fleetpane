@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-actions-policy.ts
+RANGE {"path":"packages/app/src/components/git-actions-policy.ts","old_lines":[194,197],"new_lines":[223,250],"diff_block_lines":[179,208],"hunk_header":"@@ -193,55 +222,92 @@ function buildPrAction(input: BuildGitActionsInput): GitAction {","substantive_changed_lines":20}
+ 
++function canPull(input: BuildGitActionsInput): boolean {
++  return (
++    input.hasRemote &&
++    !input.hasUncommittedChanges &&
++    input.behindOfOrigin > 0
++  );
++}
++
++function canPush(input: BuildGitActionsInput): boolean {
++  return input.hasRemote && input.aheadOfOrigin > 0 && input.behindOfOrigin === 0;
++}
++
++function canMergeBranch(input: BuildGitActionsInput): boolean {
++  return (
++    !input.isOnBaseBranch &&
++    input.baseRefAvailable &&
++    !input.hasUncommittedChanges &&
++    input.aheadCount > 0
++  );
++}
++
+ function canMergeFromBase(input: BuildGitActionsInput): boolean {
+-  if (!input.baseRefAvailable || input.hasUncommittedChanges) {
+-    return false;
++  return (
++    !input.isOnBaseBranch &&
++    input.baseRefAvailable &&
++    !input.hasUncommittedChanges &&
++    input.behindBaseCount > 0

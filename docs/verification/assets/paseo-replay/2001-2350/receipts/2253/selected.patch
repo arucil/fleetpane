@@ -1,0 +1,12 @@
+FILE packages/server/src/shared/messages.ts
+RANGE {"path":"packages/server/src/shared/messages.ts","old_lines":[1107,1108],"new_lines":[1118,1127],"diff_block_lines":[33,42],"hunk_header":"@@ -1104,5 +1106,22 @@ export const EditorTargetIdSchema = z.enum([","substantive_changed_lines":4}
++
++export function isKnownEditorTargetId(value: string): value is KnownEditorTargetId {
++  return KNOWN_EDITOR_TARGET_ID_SET.has(value);
++}
++
++export function isLegacyEditorTargetId(value: string): value is LegacyEditorTargetId {
++  return LEGACY_EDITOR_TARGET_ID_SET.has(value);
++}
+ 
+ export const EditorTargetDescriptorPayloadSchema = z.object({

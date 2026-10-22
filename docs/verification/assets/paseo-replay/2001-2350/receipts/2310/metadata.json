@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2310,
+  "revision": "3b8cfcbec65f892f22c6d3c12f5b67f94ee7c66e",
+  "date": "2026-04-11T10:15:10+07:00",
+  "committer_date": "2026-04-11T10:15:10+07:00",
+  "parents": [
+    "2bbdc7ed86bd8d3dbc611cb01cc7796bb2a46e52"
+  ],
+  "subject": "Support remote workspace service links",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-scripts-button.tsx",
+    "M\tpackages/app/src/stores/session-store.test.ts",
+    "A\tpackages/app/src/utils/workspace-script-links.test.ts",
+    "A\tpackages/app/src/utils/workspace-script-links.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/script-status-projection.test.ts",
+    "M\tpackages/server/src/server/script-status-projection.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:3d37c6e74680cff26538c1f297164b8afb64807742749d7104486e2ced4776bf",
+  "diff_tree_digest": "sha256:0592f19717cdd2c705e83d04c0cdb6a4bff362811d9e35faba750622047cf903",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/worktree-bootstrap.ts",
+      "old_lines": [
+        762,
+        764
+      ],
+      "new_lines": [
+        763,
+        783
+      ],
+      "diff_block_lines": [
+        13,
+        33
+      ],
+      "hunk_header": "@@ -761,4 +762,22 @@ type SpawnWorkspaceScriptOptions = {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 187,
+  "receipt_file": "receipts/2310/selected.patch"
+}

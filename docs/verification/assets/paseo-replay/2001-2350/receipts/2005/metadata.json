@@ -1,0 +1,76 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2005,
+  "revision": "5b3ec572cb0035b6f1f19e1e2c526c07d72c7a9e",
+  "date": "2026-04-01T10:31:15+07:00",
+  "committer_date": "2026-04-01T10:31:15+07:00",
+  "parents": [
+    "806079c7add8a9421574d49e756a667fc80d5521"
+  ],
+  "subject": "feat: service proxy, health monitor, hover card, and homepage section",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/workspace-setup.ts",
+    "A\tpackages/app/e2e/workspace-hover-card.spec.ts",
+    "M\tpackages/app/e2e/workspace-setup-streaming.spec.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "A\tpackages/app/src/components/workspace-hover-card.tsx",
+    "A\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "A\tpackages/app/src/contexts/session-workspace-services.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/panels/setup-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-source-of-truth.test.ts",
+    "A\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/sidebar-project-row-model.test.ts",
+    "M\tpackages/app/src/utils/sidebar-shortcuts.test.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.test.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/service-health-monitor.test.ts",
+    "A\tpackages/server/src/server/service-health-monitor.ts",
+    "M\tpackages/server/src/server/service-proxy.test.ts",
+    "M\tpackages/server/src/server/service-proxy.ts",
+    "A\tpackages/server/src/server/service-status-projection.test.ts",
+    "A\tpackages/server/src/server/service-status-projection.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/components/landing-page.tsx"
+  ],
+  "source_receipt_digest": "sha256:6e20c41292bb3d6867474b77e59cacad52d3ab82bae5ef303a811d66b2588ad3",
+  "diff_tree_digest": "sha256:0e211c1f1d737753ce7266e3e94cd39411f52eb8301ff67c62930ad1d86720f9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        857,
+        878
+      ],
+      "new_lines": [
+        859,
+        869
+      ],
+      "diff_block_lines": [
+        19,
+        48
+      ],
+      "hunk_header": "@@ -856,120 +858,130 @@ function WorkspaceRowInner({",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 3023,
+  "receipt_file": "receipts/2005/selected.patch"
+}

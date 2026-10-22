@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2139,
+  "revision": "d3e5d6929d5a20442c9899bcf60a0cfc937b66e6",
+  "date": "2026-04-06T08:32:10+07:00",
+  "committer_date": "2026-04-06T08:32:10+07:00",
+  "parents": [
+    "6362d429c73f7fe89942ba06af118f4dc50cce81"
+  ],
+  "subject": "fix: optimistic archiving/closing and tab UX improvements",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/hooks/use-archive-agent.test.ts",
+    "M\tpackages/app/src/hooks/use-archive-agent.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.test.ts"
+  ],
+  "source_receipt_digest": "sha256:85692c2467208021bf8139649e3f5389d4d4353e307f413cfd7c6e7aea1ae282",
+  "diff_tree_digest": "sha256:c964528cacadfdc556489fd2fddc5a9426dd754f1f106aadaa11ec6faa0a6859",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-archive-agent.ts",
+      "old_lines": [
+        113,
+        113
+      ],
+      "new_lines": [
+        123,
+        152
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -112,4 +122,68 @@ function removeAgentFromCachedLists(queryClient: QueryClient, input: ArchiveAgen",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 248,
+  "receipt_file": "receipts/2139/selected.patch"
+}

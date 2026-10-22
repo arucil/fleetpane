@@ -1,0 +1,67 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2032,
+  "revision": "a854096c35d71d58a37fcc8943e784ed22d55408",
+  "date": "2026-04-02T22:20:01+07:00",
+  "committer_date": "2026-04-02T23:20:01+08:00",
+  "parents": [
+    "5d89f9444a5a51c9100e5fbe87bf28ff58565dff"
+  ],
+  "subject": "feat: ACP base provider, Copilot integration, eliminate hardcoded provider unions (#170)",
+  "diff_tree_paths": [
+    "A\tdocs/PROVIDERS.md",
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "A\tpackages/app/src/components/icons/copilot-icon.tsx",
+    "A\tpackages/app/src/components/icons/opencode-icon.tsx",
+    "M\tpackages/app/src/components/provider-icons.ts",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/loop/run.ts",
+    "M\tpackages/cli/src/commands/loop/types.ts",
+    "M\tpackages/cli/src/commands/provider/ls.ts",
+    "M\tpackages/cli/src/commands/schedule/types.ts",
+    "M\tpackages/cli/tests/15-provider.test.ts",
+    "M\tpackages/cli/tests/e2e/run-output-schema.test.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/provider-registry.ts",
+    "A\tpackages/server/src/server/agent/providers/acp-agent.test.ts",
+    "A\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-acp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/copilot-acp-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "A\tpackages/server/src/server/daemon-e2e/claude-acp.real.e2e.test.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/server/loop-service.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/voice-roundtrip.e2e.test.ts",
+    "M\tpackages/server/src/tasks/cli.ts",
+    "M\tpackages/server/src/tasks/types.ts",
+    "M\tpackages/website/public/schemas/paseo.config.v1.json"
+  ],
+  "source_receipt_digest": "sha256:8e34a82a5c73ac9d591817b8fe979b6f104b0ad22e4db572a32a2d4b9f23ca7b",
+  "diff_tree_digest": "sha256:02ccdf91dc8a200a1aeb5a580d2023900cd93c51b64d48b2fb0fc201130944cb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-registry.ts",
+      "old_lines": [
+        46,
+        63
+      ],
+      "new_lines": [
+        74,
+        85
+      ],
+      "diff_block_lines": [
+        63,
+        92
+      ],
+      "hunk_header": "@@ -36,30 +72,18 @@ export function buildProviderRegistry(",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 2074,
+  "receipt_file": "receipts/2032/selected.patch"
+}

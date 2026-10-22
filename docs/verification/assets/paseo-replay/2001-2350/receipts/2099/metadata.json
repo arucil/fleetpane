@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2099,
+  "revision": "018ebd5f2984fc6e8bf89b94086db03d03e3f1c8",
+  "date": "2026-04-04T19:50:28+07:00",
+  "committer_date": "2026-04-04T20:29:44+07:00",
+  "parents": [
+    "4706d9e3bdb1bae737a15be43fd2c4fdd26e2169"
+  ],
+  "subject": "Fix punycode deprecation warning in CLI and daemon entrypoints",
+  "diff_tree_paths": [
+    "M\tpackages/cli/bin/paseo",
+    "M\tpackages/desktop/bin/paseo",
+    "M\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/desktop/src/daemon/node-entrypoint-launcher.test.ts",
+    "M\tpackages/desktop/src/daemon/node-entrypoint-launcher.ts"
+  ],
+  "source_receipt_digest": "sha256:6556bf4160b059f377244901179f781e930ca8658350126d3db35b675ee241e5",
+  "diff_tree_digest": "sha256:39c5f43110b5417556fe0a125d98a63809877be7c6def53ef1f049d33befb336",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/node-entrypoint-launcher.ts",
+      "old_lines": [
+        71,
+        75
+      ],
+      "new_lines": [
+        71,
+        75
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -71,5 +71,5 @@ export function createNodeEntrypointInvocation(",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 8,
+  "receipt_file": "receipts/2099/selected.patch"
+}

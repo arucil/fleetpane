@@ -1,0 +1,32 @@
+FILE packages/app/src/components/combined-model-selector.tsx
+RANGE {"path":"packages/app/src/components/combined-model-selector.tsx","old_lines":[337,337],"new_lines":[339,368],"diff_block_lines":[28,57],"hunk_header":"@@ -336,4 +338,45 @@ function GroupedProviderRows({","substantive_changed_lines":24}
+ 
++function ProviderSearchInput({
++  value,
++  onChangeText,
++  autoFocus = false,
++}: {
++  value: string;
++  onChangeText: (text: string) => void;
++  autoFocus?: boolean;
++}) {
++  const { theme } = useUnistyles();
++  const inputRef = useRef<TextInput>(null);
++  const isMobile =
++    UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
++  const InputComponent = isMobile ? BottomSheetTextInput : TextInput;
++
++  useEffect(() => {
++    if (autoFocus && Platform.OS === "web" && inputRef.current) {
++      const timer = setTimeout(() => {
++        inputRef.current?.focus();
++      }, 50);
++      return () => clearTimeout(timer);
++    }
++  }, [autoFocus]);
++
++  return (
++    <View style={styles.providerSearchContainer}>
++      <Search size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
++      <InputComponent
++        ref={inputRef as any}

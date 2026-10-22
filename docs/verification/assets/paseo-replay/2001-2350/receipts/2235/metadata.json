@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2235,
+  "revision": "c7399084a488c4226743dd2f96b8258f6135e465",
+  "date": "2026-04-09T20:39:27+07:00",
+  "committer_date": "2026-04-09T20:39:27+07:00",
+  "parents": [
+    "a236bd45158d29f671cdf24164eb25414f7fa892"
+  ],
+  "subject": "Add hidden agent tab intent for workspace reconcile",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-layout-actions.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.ts",
+    "M\tpackages/app/src/utils/workspace-navigation.test.ts"
+  ],
+  "source_receipt_digest": "sha256:c549f378d881570260216964379c763dbc695c0214f50d76a02791b43bba7243",
+  "diff_tree_digest": "sha256:ba3ccbe85d89c89f318c639f6f34cc811bb80021f99f846b43146db18ec52843",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/workspace-layout-store.ts",
+      "old_lines": [
+        108,
+        108
+      ],
+      "new_lines": [
+        111,
+        140
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -107,4 +110,46 @@ function trimNonEmpty(value: string | null | undefined): string | null {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 131,
+  "receipt_file": "receipts/2235/selected.patch"
+}

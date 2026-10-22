@@ -1,0 +1,32 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[922,951],"new_lines":[937,937],"diff_block_lines":[52,81],"hunk_header":"@@ -914,40 +935,43 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct","substantive_changed_lines":23}
+-          accessibilityLabel="Message agent..."
+-          onFocus={() => {
+-            isInputFocusedRef.current = true;
+-            onFocusChange?.(true);
+-          }}
+-          onBlur={() => {
+-            isInputFocusedRef.current = false;
+-            onFocusChange?.(false);
+-          }}
+-          style={[
+-            styles.textInput,
+-            IS_WEB
+-              ? {
+-                  height: inputHeight,
+-                  minHeight: MIN_INPUT_HEIGHT,
+-                  maxHeight: MAX_INPUT_HEIGHT,
+-                }
+-              : {
+-                  minHeight: MIN_INPUT_HEIGHT,
+-                  maxHeight: MAX_INPUT_HEIGHT,
+-                },
+-          ]}
+-          multiline
+-          scrollEnabled={IS_WEB ? inputHeight >= MAX_INPUT_HEIGHT : true}
+-          onContentSizeChange={handleContentSizeChange}
+-          editable={!isDictating && !isRealtimeVoiceForCurrentAgent && !disabled}
+-          onKeyPress={shouldHandleDesktopSubmit ? handleDesktopKeyPress : undefined}
+-          onSelectionChange={handleSelectionChange}
+-          autoFocus={IS_WEB && autoFocus}
+-        />

@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2078,
+  "revision": "99114ddd1196755d05ade0bc1ac7c9cc6ee3d936",
+  "date": "2026-04-04T14:24:06+07:00",
+  "committer_date": "2026-04-04T14:24:06+07:00",
+  "parents": [
+    "e73c332e4f0828f69026752f9447ce767eed2f6f"
+  ],
+  "subject": "fix(server): resolve gh executable via login shell for desktop users",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/__tests__/claude-agent.event-stream.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.max-effort.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "A\tpackages/server/src/utils/executable.test.ts",
+    "A\tpackages/server/src/utils/executable.ts"
+  ],
+  "source_receipt_digest": "sha256:c194c9e0e2b788f331903fe08e9507c20ce37962c1429d26e98bba26e47f0384",
+  "diff_tree_digest": "sha256:c2300baf7068a881cd0db468b980416da84906d0dc5ba8161ddc1519e9409ab5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/executable.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        14,
+        43
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -0,0 +1,197 @@",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 539,
+  "receipt_file": "receipts/2078/selected.patch"
+}

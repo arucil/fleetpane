@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/tool-name-normalization.ts
+RANGE {"path":"packages/server/src/server/agent/tool-name-normalization.ts","old_lines":[41,41],"new_lines":[41,70],"diff_block_lines":[7,36],"hunk_header":"@@ -40,4 +40,47 @@ export function isLikelyNamespacedToolName(name: string): boolean {","substantive_changed_lines":23}
+ 
++export function isPaseoToolName(name: string): boolean {
++  const normalized = normalizeToolName(name);
++  if (isSpeakToolName(normalized)) {
++    return false;
++  }
++  if (normalized.includes("__")) {
++    const segments = normalized.split("__").filter((s) => s.length > 0);
++    return (
++      segments.length >= 3 &&
++      segments[0] === "mcp" &&
++      (segments[1] === "paseo" || segments[1]!.startsWith("paseo_"))
++    );
++  }
++  if (normalized.includes(".")) {
++    const firstSegment = normalized.split(".")[0]!;
++    return firstSegment === "paseo" || firstSegment.startsWith("paseo_");
++  }
++  return false;
++}
++
++export function getPaseoToolLeafName(name: string): string | null {
++  const normalized = normalizeToolName(name);
++  if (normalized.includes("__")) {
++    const segments = normalized.split("__").filter((s) => s.length > 0);
++    if (
++      segments.length >= 3 &&
++      segments[0] === "mcp" &&
++      (segments[1] === "paseo" || segments[1]!.startsWith("paseo_"))
++    ) {

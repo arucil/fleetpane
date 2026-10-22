@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2100,
+  "revision": "1e9b7f1157a8607257785ed20fb656036d0988ec",
+  "date": "2026-04-04T20:20:33+07:00",
+  "committer_date": "2026-04-04T20:29:44+07:00",
+  "parents": [
+    "018ebd5f2984fc6e8bf89b94086db03d03e3f1c8"
+  ],
+  "subject": "fix: make worktreeRoot backward-compatible for old clients/daemons",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:bdf03fe0206b3f27fd92c0ea823c49adfd7f824a7ad96e4b0da03da157cd8592",
+  "diff_tree_digest": "sha256:16e253d4afa1f83c69745e1c04a28723882a844ca67e141b590043c608b7b9ef",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        1619,
+        1629
+      ],
+      "new_lines": [
+        1619,
+        1639
+      ],
+      "diff_block_lines": [
+        26,
+        55
+      ],
+      "hunk_header": "@@ -1608,33 +1608,48 @@ export const ArtifactMessageSchema = z.object({",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 118,
+  "receipt_file": "receipts/2100/selected.patch"
+}

@@ -1,0 +1,18 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[95,97],"new_lines":[95,110],"diff_block_lines":[7,22],"hunk_header":"@@ -94,4 +94,17 @@ type OpenCodeMcpConfig =","substantive_changed_lines":13}
+ const MCP_ALREADY_PRESENT_ERROR_TOKENS = ["already", "exists", "connected"] as const;
++const OPENCODE_PROVIDER_LIST_TIMEOUT_MS = 30_000;
++const OPENCODE_FATAL_RETRY_MESSAGE_TOKENS = [
++  "insufficient balance",
++  "no resource package",
++  "please recharge",
++  "invalid api key",
++  "unauthorized",
++  "authentication",
++  "model not found",
++  "unknown model",
++  "does not exist",
++  "unsupported model",
++] as const;
+ 
+ const OpencodeToolStateSchema = z

@@ -1,0 +1,11 @@
+FILE packages/desktop/src/daemon/daemon-manager.ts
+RANGE {"path":"packages/desktop/src/daemon/daemon-manager.ts","old_lines":[316,319],"new_lines":[344,351],"diff_block_lines":[109,117],"hunk_header":"@@ -310,10 +326,26 @@ async function startDaemon(): Promise<DesktopDaemonStatus> {","substantive_changed_lines":6}
++    const parts = [`Daemon failed to start: ${reason}`];
++    if (stderr.trim()) parts.push(`stderr:\n${stderr.trim()}`);
++    if (stdout.trim()) parts.push(`stdout:\n${stdout.trim()}`);
+     const logs = tailFile(logFilePath(), 15);
+-    throw new Error(`Daemon failed to start.${logs ? `\n\nRecent logs:\n${logs}` : ""}`);
++    if (logs) parts.push(`Recent logs (${logFilePath()}):\n${logs}`);
++    throw new Error(parts.join("\n\n"));
+   }
+ 

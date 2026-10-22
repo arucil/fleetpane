@@ -1,0 +1,22 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[87,100],"new_lines":[87,103],"diff_block_lines":[7,26],"hunk_header":"@@ -86,15 +86,18 @@ function getSettingsSections(context: { isDesktopApp: boolean }): SettingsSectio","substantive_changed_lines":7}
+     { id: "shortcuts", label: "Shortcuts", icon: Keyboard },
+-    { id: "diagnostics", label: "Diagnostics", icon: Stethoscope },
+-    { id: "about", label: "About", icon: Info },
+   ];
+ 
+   if (context.isDesktopApp) {
+     sections.push(
+-      { id: "permissions", label: "Permissions", icon: Shield },
+       { id: "daemon", label: "Daemon", icon: Settings },
++      { id: "permissions", label: "Permissions", icon: Shield },
+     );
+   }
+ 
++  sections.push(
++    { id: "diagnostics", label: "Diagnostics", icon: Stethoscope },
++    { id: "about", label: "About", icon: Info },
++  );
++
+   return sections;
+ }

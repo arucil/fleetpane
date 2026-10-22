@@ -1,0 +1,65 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2003,
+  "revision": "1f6ffa9e0e056661b9745c6c60a203187e399e5d",
+  "date": "2026-03-31T09:09:38+07:00",
+  "committer_date": "2026-03-31T09:09:38+07:00",
+  "parents": [
+    "266d04252817f3959e0d5eb59a62f04befa205c2"
+  ],
+  "subject": "Add workspace setup streaming and setup tab",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/helpers/workspace-setup.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "A\tpackages/app/e2e/workspace-setup-streaming.spec.ts",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/panels/register-panels.ts",
+    "A\tpackages/app/src/panels/setup-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "A\tpackages/app/src/stores/workspace-setup-store.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/workspace-tab-identity.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "A\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:79f592bc17a72e4d82c816ece6e34e1a5016bd1ab6839f9e89e85eae8b08e52f",
+  "diff_tree_digest": "sha256:da1a9292012aac2272a81ff6b8d10826f94bc58dc26b84aea9753ac59db8a6c4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/panels/setup-panel.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        10,
+        39
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -0,0 +1,309 @@",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 1268,
+  "receipt_file": "receipts/2003/selected.patch"
+}

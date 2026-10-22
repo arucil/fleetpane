@@ -1,0 +1,14 @@
+FILE packages/server/src/server/agent/provider-snapshot-manager.ts
+RANGE {"path":"packages/server/src/server/agent/provider-snapshot-manager.ts","old_lines":[172,174],"new_lines":[175,186],"diff_block_lines":[26,37],"hunk_header":"@@ -171,4 +174,13 @@ export class ProviderSnapshotManager {","substantive_changed_lines":6}
+ 
++  private resetSnapshotToLoading(cwdKey: string): Map<AgentProvider, ProviderSnapshotEntry> {
++    const snapshot = this.getOrCreateSnapshot(cwdKey);
++    snapshot.clear();
++    for (const [provider, entry] of this.createLoadingEntries()) {
++      snapshot.set(provider, entry);
++    }
++    return snapshot;
++  }
++
+   private getProviderIds(): AgentProvider[] {
+     return AGENT_PROVIDER_IDS.filter((provider) => this.providerRegistry[provider]);

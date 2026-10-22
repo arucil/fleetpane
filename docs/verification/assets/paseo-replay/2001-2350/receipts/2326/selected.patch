@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[4183,4211],"new_lines":[4168,4170],"diff_block_lines":[115,144],"hunk_header":"@@ -4182,176 +4167,8 @@ export class Session {","substantive_changed_lines":19}
+ 
+-  private async resolveWorkspaceGitRefsRoot(gitDir: string): Promise<string> {
+-    try {
+-      const commonDir = (await readFile(join(gitDir, "commondir"), "utf8")).trim();
+-      if (commonDir.length > 0) {
+-        return resolve(gitDir, commonDir);
+-      }
+-    } catch {
+-      // Regular repos do not have a commondir file.
+-    }
+-    return gitDir;
+-  }
+-
+-  private closeWorkspaceGitWatchTarget(target: WorkspaceGitWatchTarget): void {
+-    if (target.debounceTimer) {
+-      clearTimeout(target.debounceTimer);
+-      target.debounceTimer = null;
+-    }
+-    for (const watcher of target.watchers) {
+-      watcher.close();
+-    }
+-    target.watchers = [];
+-  }
+-
+-  private removeWorkspaceGitWatchTarget(cwd: string): void {
++  private removeWorkspaceGitSubscription(cwd: string): void {
+     const workspaceId = normalizePersistedWorkspaceId(cwd);
+-    const target = this.workspaceGitWatchTargets.get(workspaceId);
+-    if (!target) {
+-      return;

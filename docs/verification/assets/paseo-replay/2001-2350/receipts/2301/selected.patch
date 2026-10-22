@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[922,928],"new_lines":[923,946],"diff_block_lines":[26,55],"hunk_header":"@@ -920,65 +921,95 @@ export function GitDiffPane({ serverId, workspaceId, cwd, hideHeaderRow }: GitDi","substantive_changed_lines":20}
++  const toastActionError = useCallback(
++    (error: unknown, fallback: string) => {
++      const message = error instanceof Error ? error.message : fallback;
++      toast.error(message);
++    },
++    [toast],
++  );
++
++  const toastActionSuccess = useCallback(
++    (message: string) => {
++      toast.show(message, { variant: "success" });
++    },
++    [toast],
++  );
++
+   const handleCommit = useCallback(() => {
+-    setActionError(null);
+-    void runCommit({ serverId, cwd }).catch((err) => {
+-      const message = err instanceof Error ? err.message : "Failed to commit";
+-      setActionError(message);
+-    });
+-  }, [runCommit, serverId, cwd]);
++    void runCommit({ serverId, cwd })
++      .then(() => {
++        toastActionSuccess("Committed");
++      })
++      .catch((err) => {
++        toastActionError(err, "Failed to commit");
++      });
++  }, [cwd, runCommit, serverId, toastActionError, toastActionSuccess]);

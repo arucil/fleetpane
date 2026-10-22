@@ -1,0 +1,25 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2456,2467],"new_lines":[2458,2471],"diff_block_lines":[14,36],"hunk_header":"@@ -2455,13 +2457,15 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":13}
+           for await (const message of activeQuery) {
+-            this.logger.trace(
+-              {
+-                claudeSessionId: this.claudeSessionId,
+-                messageType: message.type,
+-                messageSubtype: "subtype" in message ? message.subtype : undefined,
+-                messageUuid: "uuid" in message ? message.uuid : undefined,
+-              },
+-              "Claude query pump: raw SDK message",
+-            );
++            if (claudeDebug) {
++              this.logger.trace(
++                {
++                  claudeSessionId: this.claudeSessionId,
++                  messageType: message.type,
++                  messageSubtype: "subtype" in message ? message.subtype : undefined,
++                  messageUuid: "uuid" in message ? message.uuid : undefined,
++                },
++                "Claude query pump: raw SDK message",
++              );
++            }
+             consecutiveInterruptAbortRecoveries = 0;
+             if (await this.handleMissingResumedConversation(message, activeQuery)) {

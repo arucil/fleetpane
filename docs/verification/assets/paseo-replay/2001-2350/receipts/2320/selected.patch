@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/mcp-shared.ts
+RANGE {"path":"packages/server/src/server/agent/mcp-shared.ts","old_lines":[148,148],"new_lines":[154,183],"diff_block_lines":[14,43],"hunk_header":"@@ -146,4 +146,87 @@ export function startAgentRun(","substantive_changed_lines":20}
++
++export function setupFinishNotification(params: SetupFinishNotificationParams): void {
++  const { agentManager, childAgentId, callerAgentId, logger } = params;
++  let hasSeenRunning = false;
++  let fired = false;
++  let unsubscribe: (() => void) | null = null;
++
++  function notify(reason: "finished" | "errored" | "needs permission"): void {
++    if (fired) {
++      return;
++    }
++    fired = true;
++    unsubscribe?.();
++
++    if (!agentManager.getAgent(callerAgentId)) {
++      return;
++    }
++
++    const title = agentManager.getAgent(childAgentId)?.config?.title ?? childAgentId;
++    const prompt = `<paseo-system>\nAgent ${childAgentId} (${title}) ${reason}.\n</paseo-system>`;
++
++    startAgentRun(agentManager, callerAgentId, prompt, logger, {
++      replaceRunning: true,
++    });
++  }
++
++  unsubscribe = agentManager.subscribe(
++    (event) => {
++      if (fired) {
++        return;

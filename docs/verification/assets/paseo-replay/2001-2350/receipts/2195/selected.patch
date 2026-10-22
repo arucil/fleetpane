@@ -1,0 +1,32 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,34],"diff_block_lines":[10,39],"hunk_header":"@@ -1,4 +1,34 @@","substantive_changed_lines":22}
++### Added
++- Context window meter — live token usage indicator for Claude Code, Codex, and OpenCode shows how much of the context window has been consumed, with color thresholds at 70% and 90%.
++- Open in editor — open the current workspace directory in Cursor, VS Code, Zed, or the system file manager directly from the toolbar. Remembers your preferred editor.
++- Side-by-side diff layout — toggle between unified and split-column diff views in the Changes pane, with a whitespace visibility toggle.
++- Spoken messages — voice-mode speak tool calls now render inline in the conversation as labeled spoken messages instead of raw tool call blocks.
++- Plan approval actions — plan permission cards now show provider-defined action buttons (e.g. "Implement", "Deny") instead of hardcoded accept/reject.
++- Background git fetch — the daemon periodically fetches from origin so the Changes pane shows accurate ahead/behind counts without manual refreshes.
++
++### Improved
++- File explorer and diff pane expanded/collapsed state persists across tab switches and rehydration.
++- Workspace list and updates are served instantly on connect; reconciliation happens in the background, eliminating the initial loading delay.
++- Provider list in Settings now includes a Refresh button and shows inline error details.
++- Workspace tabs close optimistically — the tab disappears immediately while the daemon archives the agent in the background.
++- Reload agent action moved away from the close button to prevent accidental taps.
++
++### Fixed
++- WorkingIndicator no longer remounts on every stream update on native.
++- Silero VAD state is now reset between voice turns, preventing LSTM drift that could cause false speech detections in long sessions.
++- OpenCode context window meter updates correctly after the first turn.
++- Garbled overlapping text in plan card markdown.
++- Worktree branch tracking now prefers `origin/{branch}` over the local branch ref, fixing stale diff baselines.
++- Session ID reset on query restart prevents an overwrite crash when restarting an agent quickly.
++- Copilot ACP permission prompts are now bypassed in autopilot mode.
++- Direct connection and pairing modal content now displays correctly on tablets.
++- `wait_for_finish` errors from agents are now surfaced to the caller instead of silently swallowed.
++- Workspace diff stats preserved across rehydration instead of resetting to zero.
++- Diff toolbar toggle buttons polished for consistent sizing and alignment.
++
+ ## 0.1.49 - 2026-04-07
+ 

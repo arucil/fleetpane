@@ -1,0 +1,10 @@
+FILE packages/app/src/components/plan-card.tsx
+RANGE {"path":"packages/app/src/components/plan-card.tsx","old_lines":[84,85],"new_lines":[86,93],"diff_block_lines":[15,22],"hunk_header":"@@ -79,7 +79,15 @@ function createPlanMarkdownRules() {","substantive_changed_lines":5}
++    },
++    paragraph: (node: any, children: ReactNode[], parent: any, styles: any) => {
++      const isLastChild = parent[0]?.children?.at(-1)?.key === node.key;
++      return (
++        <View key={node.key} style={[styles.paragraph, isLastChild && { marginBottom: 0 }]}>
++          {children}
+         </View>
+       );

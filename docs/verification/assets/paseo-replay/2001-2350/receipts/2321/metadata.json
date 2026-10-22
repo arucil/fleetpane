@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2321,
+  "revision": "fa552b0faaa800c76ec1bdd2633f172fa58dd45a",
+  "date": "2026-04-11T16:39:09+07:00",
+  "committer_date": "2026-04-11T16:39:09+07:00",
+  "parents": [
+    "51e96fa303abdb112c98adcc5a8e8c59db23facf"
+  ],
+  "subject": "Add mutable daemon config RPC support",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "A\tpackages/server/src/server/daemon-config-store.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:aaf5d7d11b625dbdc0ada1b751d0b998f5e51e99ead27849c98e2a5c4b276ca6",
+  "diff_tree_digest": "sha256:2801feff94e5b72fc152f3bb85fb442f93e77d0b292fd5e7c5d46ddd9e4a953e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/daemon-config-store.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        16,
+        45
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -0,0 +1,165 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 206,
+  "receipt_file": "receipts/2321/selected.patch"
+}

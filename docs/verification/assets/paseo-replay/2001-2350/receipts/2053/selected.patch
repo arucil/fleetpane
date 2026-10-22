@@ -1,0 +1,11 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,13],"diff_block_lines":[10,18],"hunk_header":"@@ -1,4 +1,13 @@","substantive_changed_lines":5}
++### Fixed
++- Desktop app now stops the daemon cleanly before auto-update restarts.
++- Disabled claude-acp and copilot providers from the agent registry.
++- Keyboard focus scope resolution now checks multiple candidates for broader compatibility.
++- OpenCode interrupt now reaches correct terminal state parity with tool-call flows.
++- Shell injection, symlink escape, and pairing endpoint security hardening.
++
+ ## 0.1.43 - 2026-04-02
+ 

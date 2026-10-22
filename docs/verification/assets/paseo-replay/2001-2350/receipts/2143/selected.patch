@@ -1,0 +1,10 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[59,64],"new_lines":[55,59],"diff_block_lines":[28,35],"hunk_header":"@@ -59,6 +55,5 @@ export default function Index() {","substantive_changed_lines":3}
+@@ -59,6 +55,5 @@ export default function Index() {
+       return;
+     }
+-    const currentPathname = getCurrentPathname(pathname);
+-    if (currentPathname !== "/" && currentPathname !== "") {
++    if (pathname !== "/" && pathname !== "") {
+       return;
+     }

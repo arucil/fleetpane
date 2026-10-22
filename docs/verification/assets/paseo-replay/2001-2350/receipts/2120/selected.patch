@@ -1,0 +1,32 @@
+FILE packages/server/src/server/db/legacy-project-workspace-import.ts
+RANGE {"path":"packages/server/src/server/db/legacy-project-workspace-import.ts","old_lines":[173,173],"new_lines":[223,252],"diff_block_lines":[126,155],"hunk_header":"@@ -171,2 +221,33 @@ async function hasAnyProjectWorkspaceRows(db: PaseoDatabaseHandle[\"db\"]): Promis","substantive_changed_lines":21}
++
++async function backupLegacyProjectWorkspaceJson(options: {
++  projectsPath: string;
++  workspacesPath: string;
++  paseoHome: string;
++  logger: Logger;
++}): Promise<void> {
++  const backupDir = path.join(options.paseoHome, "backup", "pre-migration");
++  await fs.mkdir(backupDir, { recursive: true });
++
++  if (await pathExists(options.projectsPath)) {
++    await fs.copyFile(options.projectsPath, path.join(backupDir, "projects.json"));
++  }
++  if (await pathExists(options.workspacesPath)) {
++    await fs.copyFile(options.workspacesPath, path.join(backupDir, "workspaces.json"));
++  }
++
++  options.logger.info({ backupPath: backupDir }, "Backed up legacy project/workspace JSON before migration");
++}
++
++async function pathExists(targetPath: string): Promise<boolean> {
++  try {
++    await fs.access(targetPath);
++    return true;
++  } catch (error) {
++    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
++      return false;
++    }
++    throw error;
++  }

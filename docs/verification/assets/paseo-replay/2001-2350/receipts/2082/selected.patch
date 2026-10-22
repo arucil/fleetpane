@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/pi-acp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/pi-acp-agent.ts","old_lines":[0,0],"new_lines":[42,71],"diff_block_lines":[48,77],"hunk_header":"@@ -0,0 +1,147 @@","substantive_changed_lines":18}
++
++function normalizePiModelLabel(label: string): string {
++  return label.trim().replace(/[_\s]+/g, " ");
++}
++
++export function transformPiModels(models: AgentModelDefinition[]): AgentModelDefinition[] {
++  return models.map((model) => {
++    if (!model.label.includes("/")) {
++      return model;
++    }
++
++    const segments = model.label.split("/").filter((segment) => segment.length > 0);
++    const rawLabel = segments.at(-1);
++    if (!rawLabel) {
++      return model;
++    }
++
++    return {
++      ...model,
++      label: normalizePiModelLabel(rawLabel),
++      description: model.description ?? model.label,
++    };
++  });
++}
++
++function transformPiToolSnapshot(snapshot: ACPToolSnapshot): ACPToolSnapshot {
++  if (snapshot.kind === "other" && snapshot.title && PI_TOOL_KIND_MAP[snapshot.title]) {
++    return { ...snapshot, kind: PI_TOOL_KIND_MAP[snapshot.title] };
++  }
++  return snapshot;

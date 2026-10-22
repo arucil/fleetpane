@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2149,
+  "revision": "5d1b3383d764dbc6b4d588dc8d6b9e769c6228cf",
+  "date": "2026-04-06T11:04:05+07:00",
+  "committer_date": "2026-04-06T11:04:05+07:00",
+  "parents": [
+    "f75e28a77f4698941bad018ef9a7e67ef790c072"
+  ],
+  "subject": "fix: only confirm archive when agent is running",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:7f77741f3bfbc7831ceba9ef230ae536d6a3907a5d06bb2b9b6c30fec70107d1",
+  "diff_tree_digest": "sha256:6eaf80995dcbff492ec5bb6dd22efbdf8566ae11ad6a7a0f7905b5892574edc2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1296,
+        1297
+      ],
+      "new_lines": [
+        1287,
+        1303
+      ],
+      "diff_block_lines": [
+        17,
+        33
+      ],
+      "hunk_header": "@@ -1285,13 +1285,19 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 38,
+  "receipt_file": "receipts/2149/selected.patch"
+}

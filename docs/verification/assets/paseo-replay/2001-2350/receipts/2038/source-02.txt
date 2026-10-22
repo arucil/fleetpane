@@ -1,0 +1,51 @@
+    path: normalizeRelativePath({ root, targetPath: filePath }),
+    absolutePath: filePath,
+    fileName: path.basename(filePath),
+    mimeType,
+    size: stats.size,
+  };
+}
+
+async function resolveScopedPath({ root, relativePath = "." }: ScopedPathParams): Promise<string> {
+  const normalizedRoot = path.resolve(root);
+  const requestedPath = path.resolve(normalizedRoot, relativePath);
+  const relative = path.relative(normalizedRoot, requestedPath);
+
+  if (relative !== "" && (relative.startsWith("..") || path.isAbsolute(relative))) {
+    throw new Error("Access outside of workspace is not allowed");
+  }
+
+  const realRoot = await fs.realpath(normalizedRoot);
+
+  try {
+    const realPath = await fs.realpath(requestedPath);
+    const realRelative = path.relative(realRoot, realPath);
+    if (realRelative !== "" && (realRelative.startsWith("..") || path.isAbsolute(realRelative))) {
+      throw new Error("Access outside of workspace is not allowed");
+    }
+    return requestedPath;
+  } catch (error) {
+    if (isMissingEntryError(error)) {
+      return requestedPath;
+    }
+    throw error;
+  }
+}
+
+async function buildEntryPayload({
+  root,
+  targetPath,
+  name,
+  kind,
+}: EntryPayloadParams): Promise<FileExplorerEntry> {
+  const stats = await fs.stat(targetPath);
+  return {
+    name,
+    path: normalizeRelativePath({ root, targetPath }),
+    kind,
+    size: stats.size,
+    modifiedAt: stats.mtime.toISOString(),
+  };
+}
+
+function isMissingEntryError(error: unknown): boolean {

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2301,
+  "revision": "e22fb519759b3b84358a1e0b70ac9a5325c75281",
+  "date": "2026-04-10T19:53:45+07:00",
+  "committer_date": "2026-04-10T19:53:45+07:00",
+  "parents": [
+    "a315021c755dc3f6dc13ce8f1b9cd47f69d9526c"
+  ],
+  "subject": "Improve git action toast feedback",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/toast-host.tsx",
+    "M\tpackages/app/src/hooks/use-git-actions.ts"
+  ],
+  "source_receipt_digest": "sha256:365220de2cad0aa1e2d10be3a37036f9649cc82f1cd335cf6178937c088bf429",
+  "diff_tree_digest": "sha256:3bf8247202eb54d080ab16d964708fb05f0d4dca8a3f234ab3a43565a658ba92",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        922,
+        928
+      ],
+      "new_lines": [
+        923,
+        946
+      ],
+      "diff_block_lines": [
+        26,
+        55
+      ],
+      "hunk_header": "@@ -920,65 +921,95 @@ export function GitDiffPane({ serverId, workspaceId, cwd, hideHeaderRow }: GitDi",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 194,
+  "receipt_file": "receipts/2301/selected.patch"
+}

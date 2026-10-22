@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2075,
+  "revision": "4896cfe970770d3136126b273e0ee3497c01ff5a",
+  "date": "2026-04-04T12:43:54+07:00",
+  "committer_date": "2026-04-04T13:21:31+07:00",
+  "parents": [
+    "dcffe46f90be1eab561dce67513075f52604457d"
+  ],
+  "subject": "fix(app): fix sidebar crash when switching iOS theme",
+  "diff_tree_paths": [
+    "A\tdocs/MOBILE_TESTING.md",
+    "A\tpackages/app/maestro/.gitignore",
+    "A\tpackages/app/maestro/sidebar-theme-repro.yaml",
+    "A\tpackages/app/maestro/test-sidebar-theme.sh",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-explorer-open-gesture.ts"
+  ],
+  "source_receipt_digest": "sha256:6d6f26fb150d0072f0a64b10ac8b8b99097fd1fcb08d59a47ad98e0695e1b9b7",
+  "diff_tree_digest": "sha256:297245a477d81e56d1047a5cfe18c7406220c28bdcc691a76888114f8fef1cba",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/explorer-sidebar.tsx",
+      "old_lines": [
+        293,
+        303
+      ],
+      "new_lines": [
+        301,
+        321
+      ],
+      "diff_block_lines": [
+        70,
+        99
+      ],
+      "hunk_header": "@@ -292,23 +300,25 @@ export function ExplorerSidebar({",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 312,
+  "receipt_file": "receipts/2075/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5808,5835],"new_lines":[5832,5834],"diff_block_lines":[111,140],"hunk_header":"@@ -5804,56 +5830,15 @@ export class Session {","substantive_changed_lines":25}
++    const uniqueWorkspaceIds = new Set(
++      Array.from(workspaceIds, (workspaceId) => normalizePersistedWorkspaceId(workspaceId)),
+     );
+-    const workspaceId = this.resolveRegisteredWorkspaceIdForCwd(cwd, activeWorkspaces);
+-    const all = await this.listWorkspaceDescriptorsSnapshot();
+-    const descriptorsByWorkspaceId = new Map(all.map((entry) => [entry.id, entry] as const));
+-
+-    const workspace = descriptorsByWorkspaceId.get(workspaceId);
+-    const nextWorkspace =
+-      workspace && this.matchesWorkspaceFilter({ workspace, filter: subscription.filter })
+-        ? workspace
+-        : null;
+-    if (
+-      options?.dedupeGitState &&
+-      this.shouldSkipWorkspaceGitWatchUpdate(workspaceId, nextWorkspace)
+-    ) {
+-      void this.reconcileAndEmitWorkspaceUpdates();
+-      return;
+-    }
+-    this.rememberWorkspaceGitWatchFingerprint(workspaceId, nextWorkspace);
+-
+-    if (!nextWorkspace) {
+-      this.bufferOrEmitWorkspaceUpdate(subscription, {
+-        kind: "remove",
+-        id: workspaceId,
+-      });
+-    } else {
+-      this.bufferOrEmitWorkspaceUpdate(subscription, {
+-        kind: "upsert",
+-        workspace: nextWorkspace,

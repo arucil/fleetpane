@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2228,
+  "revision": "56fdc47d9c824324ad28fa1dbb357f0c0ad80a04",
+  "date": "2026-04-09T10:23:24+07:00",
+  "committer_date": "2026-04-09T18:56:10+07:00",
+  "parents": [
+    "74f7b9e41647c6775a1f524636a5d8d9bcb3fd85"
+  ],
+  "subject": "feat(server): support image attachments in OpenCode agent prompts",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:27ba7fbeb97fd6a3dec3fef9a0d098a6efca8f8430e5dd4a1cbcc9c096e87230",
+  "diff_tree_digest": "sha256:7fafe9f7332fb9cf560ee16b57e36002aab787b0cbee547f3d1af750a44ace26",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        496,
+        496
+      ],
+      "new_lines": [
+        498,
+        527
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -495,5 +497,64 @@ function hasNormalizedOpenCodeUsage(usage: AgentUsage): boolean {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 64,
+  "receipt_file": "receipts/2228/selected.patch"
+}

@@ -1,0 +1,27 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[404,413],"new_lines":[404,421],"diff_block_lines":[35,59],"hunk_header":"@@ -403,11 +403,19 @@ function WorkspaceHoverCardContent({","substantive_changed_lines":20}
+                         <>
+-                          <View
+-                            testID={`hover-card-script-health-${script.scriptName}`}
+-                            style={[
+-                              styles.statusDot,
+-                              { backgroundColor: dotColor },
+-                            ]}
+-                          />
++                          {isService ? (
++                            <Globe
++                              size={14}
++                              color={dotColor}
++                              testID={`hover-card-script-health-${script.scriptName}`}
++                              style={styles.scriptIcon}
++                            />
++                          ) : (
++                            <SquareTerminal
++                              size={14}
++                              color={dotColor}
++                              testID={`hover-card-script-health-${script.scriptName}`}
++                              style={styles.scriptIcon}
++                            />
++                          )}
+                           <Text
+                             style={[

@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2344,
+  "revision": "64b9b612230bb7fce840aa699ff82078a407c8ef",
+  "date": "2026-04-12T21:37:59+07:00",
+  "committer_date": "2026-04-12T22:37:59+08:00",
+  "parents": [
+    "7c18170d6a638654c45edec35d8797cb04cb07b0"
+  ],
+  "subject": "Align MCP/CLI naming and resolve default model/mode server-side (#291)",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/tests/05-agent-run.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-mcp.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-parity.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:f9944cf4a46aba2876e718bacd4b44fec0e6e12a68d75bdff62e42b683c6b8b2",
+  "diff_tree_digest": "sha256:182e7cfc38fb344b1ef9e89d6811d04425d3891bbb8a1223151bb9698c31bf41",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        2572,
+        2573
+      ],
+      "new_lines": [
+        2578,
+        2597
+      ],
+      "diff_block_lines": [
+        23,
+        42
+      ],
+      "hunk_header": "@@ -2569,5 +2569,29 @@ export class AgentManager {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 132,
+  "receipt_file": "receipts/2344/selected.patch"
+}

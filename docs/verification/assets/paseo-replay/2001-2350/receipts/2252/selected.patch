@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/acp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/acp-agent.ts","old_lines":[878,878],"new_lines":[896,925],"diff_block_lines":[65,94],"hunk_header":"@@ -877,5 +895,57 @@ export class ACPAgentSession implements AgentSession, ACPClient {","substantive_changed_lines":19}
+ 
++  private ensureCommandsReadyDeferred(): void {
++    if (this.commandsReadyDeferred || this.commandsReadySettled || this.cachedCommands.length > 0) {
++      return;
++    }
++
++    let resolve!: () => void;
++    const promise = new Promise<void>((r) => {
++      resolve = r;
++    });
++    this.commandsReadyDeferred = { promise, resolve };
++  }
++
++  private settleCommandsReady(): void {
++    if (this.commandsReadySettled) {
++      return;
++    }
++    this.commandsReadySettled = true;
++    this.commandsReadyDeferred?.resolve();
++    this.commandsReadyDeferred = null;
++  }
++
++  private async waitForCommandsReady(): Promise<void> {
++    const deferred = this.commandsReadyDeferred;
++    if (!deferred) {
++      return;
++    }
++
++    let timer: ReturnType<typeof setTimeout> | null = null;
++    try {

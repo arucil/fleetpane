@@ -1,0 +1,32 @@
+FILE packages/desktop/src/daemon/daemon-manager.ts
+RANGE {"path":"packages/desktop/src/daemon/daemon-manager.ts","old_lines":[235,261],"new_lines":[192,196],"diff_block_lines":[87,116],"hunk_header":"@@ -227,53 +189,62 @@ function resolveDesktopAppVersion(): string {","substantive_changed_lines":22}
+   try {
+-    if (existsSync(pidPath)) {
+-      const parsed = JSON.parse(readFileSync(pidPath, "utf-8")) as Record<string, unknown>;
+-      const pidValue = parsed.pid;
+-      if (typeof pidValue === "number" && Number.isInteger(pidValue) && pidValue > 0) {
+-        pid = pidValue;
+-        hostname = typeof parsed.hostname === "string" ? parsed.hostname : null;
+-        const pidListen =
+-          typeof parsed.listen === "string"
+-            ? parsed.listen
+-            : typeof parsed.sockPath === "string"
+-              ? (parsed.sockPath as string)
+-              : null;
+-        listen = pidListen;
+-      }
+-    }
+-  } catch {
+-    // PID file missing or malformed — treat as stopped.
+-  }
++    const payload = runCliJsonCommand(["daemon", "status", "--json"]) as Record<string, unknown>;
++    const localDaemon = typeof payload.localDaemon === "string" ? payload.localDaemon : "stopped";
++    const running = localDaemon === "running";
+ 
+-  const running = pid !== null && isProcessRunning(pid);
+-
+-  let serverId = "";
+-  try {
+-    serverId = getOrCreateServerId(home);
+-  } catch {
+-    // Ignore — server-id may not exist yet.

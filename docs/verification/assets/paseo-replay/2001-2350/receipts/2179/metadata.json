@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2179,
+  "revision": "022eb33234d7be82a89e81ed364dcdb320416ce7",
+  "date": "2026-04-07T14:53:00+07:00",
+  "committer_date": "2026-04-07T14:53:00+07:00",
+  "parents": [
+    "161b2c237833c2cb3b36718262fbf395ed761a41"
+  ],
+  "subject": "Fix OpenCode context window meter after first turn",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx"
+  ],
+  "source_receipt_digest": "sha256:684089ff9350407020ca8fd4451e3fda63f455cb21c7243136500fcd417686ce",
+  "diff_tree_digest": "sha256:54d94d0b3d0c96689084d6866cfa5485da6e152040bc774525b09941dd5e75cc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        70,
+        72
+      ],
+      "new_lines": [
+        70,
+        88
+      ],
+      "diff_block_lines": [
+        7,
+        25
+      ],
+      "hunk_header": "@@ -69,4 +69,20 @@ const HISTORY_STALE_AFTER_MS = 60_000;",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/2179/selected.patch"
+}

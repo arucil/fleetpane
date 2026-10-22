@@ -1,0 +1,91 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2271,
+  "revision": "4176bd8aa171da495f60475f6011aaf6ade89268",
+  "date": "2026-04-10T10:15:49+07:00",
+  "committer_date": "2026-04-10T10:15:49+07:00",
+  "parents": [
+    "4215120d7cc5393f08de1a9d623cd33bbd6abe88",
+    "201eb6a6719415a18c224a3a8713d76645d50414"
+  ],
+  "subject": "Merge branch 'main' into merge/main-into-dev",
+  "diff_tree_paths": [
+    "A\tdocs/DATA_MODEL.md",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/adaptive-modal-sheet.tsx",
+    "M\tpackages/app/src/components/add-host-modal.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/composer.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/pair-link-modal.tsx",
+    "M\tpackages/app/src/components/question-form-card.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/components/toast-host.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/components/ui/context-menu.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/desktop/updates/desktop-updates.ts",
+    "M\tpackages/app/src/desktop/updates/update-banner.tsx",
+    "M\tpackages/app/src/desktop/updates/use-desktop-app-updater.ts",
+    "A\tpackages/app/src/hooks/feature-preferences.test.ts",
+    "A\tpackages/app/src/hooks/feature-preferences.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/hooks/use-draft-agent-features.ts",
+    "M\tpackages/app/src/hooks/use-form-preferences.test.ts",
+    "M\tpackages/app/src/hooks/use-form-preferences.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/desktop/package.json",
+    "A\tpackages/desktop/scripts/dev.sh",
+    "M\tpackages/desktop/src/features/auto-updater.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/server/.env.example",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/daemon-client.e2e.test.ts",
+    "M\tpackages/server/src/server/logger.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:a76f0d3a5ed5e473060d4325adc1a4b30d489acb839a531e4607ee5844095558",
+  "diff_tree_digest": "sha256:aeadb464c04387cd26a01dcb7acd63dac38581c1ffb98024720ff090f0a0a26f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/feature-preferences.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        2,
+        31
+      ],
+      "diff_block_lines": [
+        8,
+        37
+      ],
+      "hunk_header": "@@ -0,0 +1,60 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 918,
+  "receipt_file": "receipts/2271/selected.patch"
+}

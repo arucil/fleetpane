@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2087,
+  "revision": "d69fcb861da7dbd6e9ede4f518c76e3d7884542e",
+  "date": "2026-04-04T15:37:41+07:00",
+  "committer_date": "2026-04-04T16:35:31+07:00",
+  "parents": [
+    "c3313ff82ae5231e21872da1e9d696e5e1e16d1a"
+  ],
+  "subject": "Fix CLI arg routing and desktop install links",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/open.ts",
+    "M\tpackages/cli/src/index.ts",
+    "M\tpackages/cli/tests/32-open-project.test.ts",
+    "A\tpackages/desktop/src/integrations/cli-install-path.test.ts",
+    "A\tpackages/desktop/src/integrations/cli-install-path.ts",
+    "M\tpackages/desktop/src/integrations/integrations-manager.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "A\tpackages/desktop/src/open-project-routing.test.ts",
+    "A\tpackages/desktop/src/open-project-routing.ts"
+  ],
+  "source_receipt_digest": "sha256:2db404d1d36ca1355c15cff0190aafd5ae33bfa6e3038ee8117f97ed5a23802c",
+  "diff_tree_digest": "sha256:f732ff2bd217942298f8dbd3a7085ff3116e59ae477919c91911e02628d2a94b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/open-project-routing.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        34,
+        63
+      ],
+      "diff_block_lines": [
+        40,
+        69
+      ],
+      "hunk_header": "@@ -0,0 +1,126 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 223,
+  "receipt_file": "receipts/2087/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[841,862],"new_lines":[843,853],"diff_block_lines":[19,48],"hunk_header":"@@ -840,120 +842,130 @@ function WorkspaceRowInner({","substantive_changed_lines":25}
+ 
++  const isDesktop = !isTouchPlatform;
++  const showGlobe = isDesktop && workspace.hasRunningServices;
++
+   return (
+-    <View
+-      style={styles.workspaceRowContainer}
+-      onPointerEnter={() => setIsHovered(true)}
+-      onPointerLeave={() => setIsHovered(false)}
+-    >
+-      <Pressable
+-        disabled={isArchiving}
+-        style={({ pressed }) => [
+-          styles.workspaceRow,
+-          isDragging && styles.workspaceRowDragging,
+-          selected && styles.sidebarRowSelected,
+-          isHovered && styles.workspaceRowHovered,
+-          pressed && styles.workspaceRowPressed,
+-        ]}
+-        onPressIn={interaction.handlePressIn}
+-        onTouchMove={interaction.handleTouchMove}
+-        onPressOut={interaction.handlePressOut}
+-        onPress={handlePress}
+-        testID={`sidebar-workspace-row-${workspace.workspaceKey}`}
++    <WorkspaceHoverCard workspace={workspace} isDragging={isDragging}>
++      <View
++        style={styles.workspaceRowContainer}
++        onPointerEnter={() => setIsHovered(true)}
++        onPointerLeave={() => setIsHovered(false)}
+       >

@@ -1,0 +1,12 @@
+FILE packages/app/src/components/branch-switcher.tsx
+RANGE {"path":"packages/app/src/components/branch-switcher.tsx","old_lines":[9,15],"new_lines":[13,18],"diff_block_lines":[18,27],"hunk_header":"@@ -1,15 +1,18 @@","substantive_changed_lines":7}
+   title: string;
+-  branchOptions: ComboboxOption[];
+-  isOpen: boolean;
+-  onOpenChange: (open: boolean) => void;
+-  onBranchSelect: (branchId: string) => void;
++  serverId: string;
++  workspaceId: string;
++  isGitCheckout: boolean;
+ }
+ 

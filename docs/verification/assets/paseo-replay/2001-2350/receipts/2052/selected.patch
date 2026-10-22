@@ -1,0 +1,11 @@
+FILE packages/desktop/src/daemon/daemon-manager.ts
+RANGE {"path":"packages/desktop/src/daemon/daemon-manager.ts","old_lines":[549,553],"new_lines":[549,555],"diff_block_lines":[5,13],"hunk_header":"@@ -549,5 +549,7 @@ export function createDaemonCommandHandlers(): Record<string, DesktopCommandHand","substantive_changed_lines":3}
+@@ -549,5 +549,7 @@ export function createDaemonCommandHandlers(): Record<string, DesktopCommandHand
+     install_app_update: async () => {
+       const currentVersion = await resolveCurrentUpdateVersion();
+-      return downloadAndInstallUpdate(currentVersion);
++      return downloadAndInstallUpdate(currentVersion, async () => {
++        await stopDaemon();
++      });
+     },
+     get_local_daemon_version: () => getLocalDaemonVersion(),

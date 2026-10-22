@@ -1,0 +1,19 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2691,2698],"new_lines":[2700,2712],"diff_block_lines":[26,42],"hunk_header":"@@ -2690,9 +2699,14 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":10}
+     }
+-    throw new Error(
+-      `CRITICAL: Claude session ID overwrite detected! ` +
+-        `Existing: ${this.claudeSessionId}, New: ${sessionId}. ` +
+-        `This indicates a session identity corruption bug.`,
++    // Session ID changed mid-stream (e.g. a hook caused Claude to restart
++    // with a new session). Accept the new ID and continue — the turn should
++    // not be failed just because the underlying subprocess cycled.
++    this.logger.warn(
++      { existingSessionId: this.claudeSessionId, newSessionId: sessionId },
++      "Claude session ID changed in message; accepting new session",
+     );
++    this.claudeSessionId = sessionId;
++    this.persistence = null;
++    return sessionId;
+   }
+ 

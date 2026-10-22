@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2949,2963],"new_lines":[2936,2951],"diff_block_lines":[59,88],"hunk_header":"@@ -2948,18 +2935,23 @@ export class Session {","substantive_changed_lines":21}
+           outputSchema ? { outputSchema } : undefined,
+-        ).catch((promptError) => {
+-          this.sessionLogger.error(
+-            { err: promptError, agentId: snapshot.id },
+-            `Failed to run initial prompt for agent ${snapshot.id}`,
+-          );
+-          this.emit({
+-            type: "activity_log",
+-            payload: {
+-              id: uuidv4(),
+-              timestamp: new Date(),
+-              type: "error",
+-              content: `Initial prompt failed: ${(promptError as Error)?.message ?? promptError}`,
+-            },
+-          });
++        );
++        if (!started.ok) {
++          throw new Error(started.error);
++        }
++      }
++
++      if (requestId) {
++        const agentPayload = await this.getAgentPayloadById(snapshot.id);
++        if (!agentPayload) {
++          throw new Error(`Agent ${snapshot.id} not found after creation`);
++        }
++        this.emit({
++          type: "status",
++          payload: {
++            status: "agent_created",

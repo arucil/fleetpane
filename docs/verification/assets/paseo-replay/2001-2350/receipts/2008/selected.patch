@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2658,2672],"new_lines":[2608,2622],"diff_block_lines":[95,124],"hunk_header":"@@ -2650,27 +2606,25 @@ export class Session {","substantive_changed_lines":24}
+-            outputSchema ? { outputSchema } : undefined,
+-          ).catch((promptError) => {
+-            this.sessionLogger.error(
+-              { err: promptError, agentId: snapshot.id },
+-              `Failed to run initial prompt for agent ${snapshot.id}`,
+-            );
+-            this.emit({
+-              type: "activity_log",
+-              payload: {
+-                id: uuidv4(),
+-                timestamp: new Date(),
+-                type: "error",
+-                content: `Initial prompt failed: ${(promptError as Error)?.message ?? promptError}`,
+-              },
+-            });
++        void this.handleSendAgentMessage(
++          snapshot.id,
++          trimmedPrompt,
++          resolveClientMessageId(clientMessageId),
++          images,
++          outputSchema ? { outputSchema } : undefined,
++        ).catch((promptError) => {
++          this.sessionLogger.error(
++            { err: promptError, agentId: snapshot.id },
++            `Failed to run initial prompt for agent ${snapshot.id}`,
++          );
++          this.emit({
++            type: "activity_log",
++            payload: {
++              id: uuidv4(),

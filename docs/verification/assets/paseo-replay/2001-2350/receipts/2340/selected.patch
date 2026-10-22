@@ -1,0 +1,9 @@
+FILE nix/package.nix
+RANGE {"path":"nix/package.nix","old_lines":[43,47],"new_lines":[43,47],"diff_block_lines":[5,11],"hunk_header":"@@ -43,5 +43,5 @@ buildNpmPackage rec {","substantive_changed_lines":2}
+@@ -43,5 +43,5 @@ buildNpmPackage rec {
+   # To update: run `nix build` with lib.fakeHash, copy the `got:` hash.
+   # CI auto-updates this when package-lock.json changes (see .github/workflows/).
+-  npmDepsHash = "sha256-0VEwgqUn0j2YWofW8IB5SNpo7Vp3Znfz1TMDAnZFkzs=";
++  npmDepsHash = "sha256-H+hYTcnYBby1aL7kaxA9Y8fX/aW4iAPc5zeMDV8RCGk=";
+ 
+   # Prevent onnxruntime-node's install script from running during automatic

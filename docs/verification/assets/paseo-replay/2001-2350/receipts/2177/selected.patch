@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[470,476],"new_lines":[443,470],"diff_block_lines":[56,85],"hunk_header":"@@ -469,10 +442,31 @@ function ProvidersSection({ routeServerId }: ProvidersSectionProps) {","substantive_changed_lines":22}
+       <View style={settingsStyles.section}>
+-        <Text style={settingsStyles.sectionTitle}>Providers</Text>
++        <View style={settingsStyles.sectionHeader}>
++          <Text style={settingsStyles.sectionHeaderTitle}>Providers</Text>
++          {hasServer && isConnected ? (
++            <Pressable
++              onPress={refresh}
++              disabled={isFetching}
++              style={[
++                settingsStyles.sectionHeaderLink,
++                isFetching ? { opacity: 0.5 } : null,
++              ]}
++            >
++              <Text
++                style={{
++                  color: theme.colors.primary,
++                  fontSize: theme.fontSize.xs,
++                }}
++              >
++                Refresh
++              </Text>
++            </Pressable>
++          ) : null}
++        </View>
+         {!hasServer || !isConnected ? (
+           <View style={[settingsStyles.card, styles.emptyCard]}>
+             <Text style={styles.emptyText}>Connect to a host to see providers</Text>
+           </View>
+-        ) : loading ? (
++        ) : isLoading ? (

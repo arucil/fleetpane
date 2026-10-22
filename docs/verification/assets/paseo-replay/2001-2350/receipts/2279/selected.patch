@@ -1,0 +1,32 @@
+FILE packages/app/src/components/branch-switcher.tsx
+RANGE {"path":"packages/app/src/components/branch-switcher.tsx","old_lines":[0,0],"new_lines":[15,44],"diff_block_lines":[21,50],"hunk_header":"@@ -0,0 +1,125 @@","substantive_changed_lines":19}
++
++export function BranchSwitcher({
++  currentBranchName,
++  title,
++  branchOptions,
++  isOpen,
++  onOpenChange,
++  onBranchSelect,
++}: BranchSwitcherProps) {
++  const { theme } = useUnistyles();
++  const anchorRef = useRef<View>(null);
++
++  if (!currentBranchName) {
++    return (
++      <Text
++        testID="workspace-header-title"
++        style={styles.headerTitle}
++        numberOfLines={1}
++      >
++        {title}
++      </Text>
++    );
++  }
++
++  return (
++    <View ref={anchorRef} collapsable={false}>
++      <Pressable
++        testID="workspace-header-branch-switcher"
++        onPress={() => onOpenChange(true)}
++        style={({ hovered, pressed }) => [

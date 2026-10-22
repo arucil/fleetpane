@@ -1,0 +1,20 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,22],"diff_block_lines":[10,27],"hunk_header":"@@ -1,4 +1,22 @@","substantive_changed_lines":10}
++### Added
++- Provider diagnostics — tap a provider in Settings to see binary path, version, model count, and status at a glance. Helps troubleshoot why an agent type isn't available.
++- Provider snapshot system — daemon now pushes real-time provider availability and model lists to the app, replacing the old poll-based approach. Models and modes update live as providers come online or go offline.
++- Codex question handling — Codex agents can now ask the user questions mid-session (e.g. "which file?") and receive answers inline, matching the Claude Code question flow.
++- Reload tab action — right-click a workspace tab to reload its agent list without restarting the app.
++
++### Improved
++- Model selector redesigned — grouped by provider with status badges, search, and better touch targets on mobile.
++- Enter key now submits question card answers and confirms dictation, matching the expected keyboard flow.
++- Removed noisy agent lifecycle toasts that fired on every state change.
++
++### Fixed
++- Desktop app now resolves the user's full login shell environment at startup, fixing tools like `codex`, `node`, `bun`, and `direnv` not being found when Paseo is launched from Finder or Dock. Terminals spawned by Paseo now inherit the same PATH and environment variables as a normal terminal session. Approach adapted from VS Code's battle-tested shell environment resolution.
++- Input field on running agent screens now correctly receives keyboard focus.
++- Mobile model selector alignment and sizing.
++
+ ## 0.1.47 - 2026-04-05
+ 

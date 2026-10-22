@@ -1,0 +1,32 @@
+FILE packages/desktop/src/open-project-routing.ts
+RANGE {"path":"packages/desktop/src/open-project-routing.ts","old_lines":[0,0],"new_lines":[34,63],"diff_block_lines":[40,69],"hunk_header":"@@ -0,0 +1,126 @@","substantive_changed_lines":19}
++
++function expandUserPath(inputPath: string): string {
++  if (inputPath === "~") {
++    return homedir();
++  }
++
++  if (inputPath.startsWith("~/")) {
++    return path.join(homedir(), inputPath.slice(2));
++  }
++
++  return inputPath;
++}
++
++function isPathLikeArg(arg: string): boolean {
++  return (
++    arg === "." ||
++    arg === ".." ||
++    arg.startsWith("./") ||
++    arg.startsWith("../") ||
++    arg.startsWith("/") ||
++    arg === "~" ||
++    arg.startsWith("~/") ||
++    /^[A-Za-z]:[\\/]/.test(arg)
++  );
++}
++
++function isExistingDirectoryArg(input: { arg: string; cwd: string }): boolean {
++  const absolutePath = path.resolve(input.cwd, expandUserPath(input.arg));
++
++  if (!existsSync(absolutePath)) {

@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2326,
+  "revision": "40e27f5a009759e39ce88b06fb5a32d2037eb7e2",
+  "date": "2026-04-12T10:38:50+07:00",
+  "committer_date": "2026-04-12T10:38:50+07:00",
+  "parents": [
+    "f35b0b8b7d1489487a998fe99a080f8f74e68b59"
+  ],
+  "subject": "Centralize git/GitHub runtime state into WorkspaceGitService",
+  "diff_tree_paths": [
+    "D\tpackages/server/src/server/background-git-fetch-manager.test.ts",
+    "D\tpackages/server/src/server/background-git-fetch-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tpackages/server/src/server/workspace-git-service.test.ts",
+    "A\tpackages/server/src/server/workspace-git-service.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:077148c454a8d543d48db417f9329acb3203cac0266f66bdcfa198e4513fad2f",
+  "diff_tree_digest": "sha256:e31a570396241f496db154b43bd7172b3457f8b9cd2842c479c49ebdf1147ec1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        4183,
+        4211
+      ],
+      "new_lines": [
+        4168,
+        4170
+      ],
+      "diff_block_lines": [
+        115,
+        144
+      ],
+      "hunk_header": "@@ -4182,176 +4167,8 @@ export class Session {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 2032,
+  "receipt_file": "receipts/2326/selected.patch"
+}

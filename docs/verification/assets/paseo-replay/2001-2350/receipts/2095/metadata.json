@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2095,
+  "revision": "43542ac85807589fe179b0715d7912ed24ad5fa1",
+  "date": "2026-04-04T19:16:43+07:00",
+  "committer_date": "2026-04-04T19:21:12+07:00",
+  "parents": [
+    "fefe260f0a026502e195be439f799fd8dbdd8c08"
+  ],
+  "subject": "Fix CLI routing: single classifier, open-project for cold & hot start",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/desktop/host.ts",
+    "A\tpackages/cli/src/classify.test.ts",
+    "A\tpackages/cli/src/classify.ts",
+    "M\tpackages/cli/src/commands/open.ts",
+    "M\tpackages/cli/src/index.ts",
+    "M\tpackages/cli/tests/32-open-project.test.ts",
+    "M\tpackages/desktop/bin/paseo",
+    "M\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/desktop/electron-builder.yml",
+    "M\tpackages/desktop/src/daemon/node-entrypoint-launcher.test.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/open-project-routing.test.ts",
+    "M\tpackages/desktop/src/open-project-routing.ts",
+    "M\tpackages/desktop/src/preload.ts"
+  ],
+  "source_receipt_digest": "sha256:21adc32bd1c3949845e4578ee9654a8f09ab737e353330e3e141f5d0c8e132f5",
+  "diff_tree_digest": "sha256:a44343ea26dc2fb88c67238c6f049bc525e6c3a669c9120de2402adbfd9421a6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/classify.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        8,
+        37
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -0,0 +1,70 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 489,
+  "receipt_file": "receipts/2095/selected.patch"
+}

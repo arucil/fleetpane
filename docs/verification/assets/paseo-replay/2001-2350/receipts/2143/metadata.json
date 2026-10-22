@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2143,
+  "revision": "5d09f7449e89489d1324ef856b33247d55c09f17",
+  "date": "2026-04-06T09:24:54+07:00",
+  "committer_date": "2026-04-06T09:24:54+07:00",
+  "parents": [
+    "dc772021a88ee7600ac493f4b8af48e9f5299c74"
+  ],
+  "subject": "fix: revert getCurrentPathname regression and hide startup splash on web",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:61f38cfb9b1eaafa85bb3c18c620c347223eb90d220f114cd0a4f8334e332716",
+  "diff_tree_digest": "sha256:f5c504f054b230fb4c7e53a456aaa9015db4b56652c5504ff37a05ba9551f82e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index.tsx",
+      "old_lines": [
+        59,
+        64
+      ],
+      "new_lines": [
+        55,
+        59
+      ],
+      "diff_block_lines": [
+        28,
+        35
+      ],
+      "hunk_header": "@@ -59,6 +55,5 @@ export default function Index() {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/2143/selected.patch"
+}

@@ -1,0 +1,50 @@
+{
+  "base": "1a45f02d2a60770751b4515471ef7ace8ae6e595",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "8641e8b0a51fad618ce5844ac8bae1ecc86bd238927c34e48fc59164bdff6d23",
+    "apps/desktop/src/host_view/picker.rs": "688605269b447fa85903a5c31d01cd98469328bf5f627a44b15db102a3a2f2a9"
+  },
+  "binary_sha256": "4be34fd55afd6c62249388094007a60dad8316bd8f92924de3e7f982f69c1294",
+  "checks": [
+    "36 desktop tests",
+    "all-target strict desktop Clippy",
+    "desktop format check",
+    "Linux X11 name/ID/description search, 72 choices includes defaults and excludes hidden",
+    "duplicate labels retain wire-5/wire-6 IDs",
+    "exact single synthetic Codex send model wire-6 and future-effort",
+    "native ACP model-a configuration receipt",
+    "900x560 palette",
+    "lease takeover refuses stale selection",
+    "21-byte ACP and32-byte Codex drafts survive normal close/reopen",
+    "independent pending ACP request/provider PID unchanged"
+  ],
+  "limits": [
+    "fixture providers only; no external model or installed DSH refresh",
+    "choices captured on open and revalidated on selection; no live catalog refresh or favorites",
+    "next-message Codex choice is window-local",
+    "no IME or macOS/Windows/Wayland acceptance"
+  ],
+  "artifacts": {
+    "acp-operation-readback.json": "7fad8ad6572367bf234b3dda48037f070f508ded969c03320e09afee26be2c70",
+    "acp-selection-receipt.json": "278cab5ff13868d90b8680fa3e0c249ec1b2db1465b4077673a3eed397079799",
+    "build.log": "bac011a39630b5cc81a1fd78a1186db6d559b02f0692d66cc2a9cabdfc256c14",
+    "clippy.log": "06d3e519569c4e8dbdfc4df4a1fe521eae300215860e0ca5f2c7d7fcb1e2c830",
+    "desktop-tests.log": "c51eb5d3c61fbceaba2a964295041358d4add2005291028e84ea40737a70397c",
+    "final-duplicates.png": "2c629a6cabab503aeb7261346d88c24fe1535c2db7dc35e9438cc9c07b8c46d3",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "history.json": "7e0d17200cbebde6d2a19b1247b597aca32f0e0eec421739043eba19fc274000",
+    "independent-pending-after.json": "8d03f255878b573341e98690e06178016869acfd1efd1f5320bae7046c5ccf75",
+    "independent-pending-before.json": "8d03f255878b573341e98690e06178016869acfd1efd1f5320bae7046c5ccf75",
+    "models.json": "77c454bed941c7905b4ef4d803aa7d28ac386c811d53e1c048b7da6afee26fd2",
+    "resumed-acp-after-choice.png": "ab4f5a4198bee2256ef2883b3bf2e6e333a8d89f860837c3170dafeba2c7c0e2",
+    "resumed-acp-search.png": "b84289482d10dd7b6b29258b0c57574f296f50a3b4efc3e384aa93ae2651a0de",
+    "resumed-description.png": "21a685af594e2e0024d3a1473c52ed27adad68b67117563bee84e83951dd55ed",
+    "resumed-final-codex-ready.png": "7544fc614c03ef3a8b3000ed2d1d976ec34b752cd4f3daf198301f460e2b837b",
+    "resumed-hidden.png": "cf44b8037684f25a435ae3033de5dfcda333937d67dd9203700cc94eb1de7f27",
+    "resumed-lease-expired.png": "624abeffe6d05fc4c754160c1f34e22bc354ce6ec0d2d2db41da19c0f9251d26",
+    "resumed-reopened-acp.png": "31405250f984c8f640efddfc81519a907a88d09f39136fc38b292c129e885f40",
+    "resumed-small-picker.png": "afc1f4fdeb6c811561bb88903d768ef7c80855523d9394c52b215290682f09be",
+    "send-effects.jsonl": "98f4b3a25413390e4170425d69baf04f17bd750e990bd940861708dc4a2c9f79",
+    "setup.py": "2ce160549a2d9763fddd3144ed1e0e2e843def15a76984e873875c97dbd2c6c8"
+  }
+}

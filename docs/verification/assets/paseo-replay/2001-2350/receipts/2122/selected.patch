@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[458,458],"new_lines":[517,546],"diff_block_lines":[145,174],"hunk_header":"@@ -456,4 +515,103 @@ function ControlledStatusBar({","substantive_changed_lines":27}
++
++          {features?.map((feature) => {
++            if (feature.type === "toggle") {
++              const FeatureIcon = getFeatureIcon(feature.icon);
++              return (
++                <Tooltip
++                  key={`feature-${feature.id}`}
++                  delayDuration={0}
++                  enabledOnDesktop
++                  enabledOnMobile={false}
++                >
++                  <TooltipTrigger asChild triggerRefProp="ref">
++                    <Pressable
++                      disabled={disabled}
++                      onPress={() => onSetFeature?.(feature.id, !feature.value)}
++                      style={({ pressed, hovered }) => [
++                        styles.modeIconBadge,
++                        hovered && styles.modeBadgeHovered,
++                        pressed && styles.modeBadgePressed,
++                        disabled && styles.disabledBadge,
++                      ]}
++                      accessibilityRole="button"
++                      accessibilityLabel={getFeatureTooltip(feature)}
++                      testID={`agent-feature-${feature.id}`}
++                    >
++                      <FeatureIcon
++                        size={theme.iconSize.md}
++                        color={getFeatureIconColor(
++                          feature.id,
++                          feature.value,

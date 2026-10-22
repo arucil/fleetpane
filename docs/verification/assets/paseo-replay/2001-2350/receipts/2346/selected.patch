@@ -1,0 +1,9 @@
+FILE packages/server/src/server/config.ts
+RANGE {"path":"packages/server/src/server/config.ts","old_lines":[88,92],"new_lines":[88,92],"diff_block_lines":[5,11],"hunk_header":"@@ -88,5 +88,5 @@ export function loadConfig(","substantive_changed_lines":2}
+@@ -88,5 +88,5 @@ export function loadConfig(
+   const mcpEnabled = options?.cli?.mcpEnabled ?? persisted.daemon?.mcp?.enabled ?? true;
+   const mcpInjectIntoAgents =
+-    options?.cli?.mcpInjectIntoAgents ?? persisted.daemon?.mcp?.injectIntoAgents ?? true;
++    options?.cli?.mcpInjectIntoAgents ?? persisted.daemon?.mcp?.injectIntoAgents ?? false;
+ 
+   const relayEnabled =

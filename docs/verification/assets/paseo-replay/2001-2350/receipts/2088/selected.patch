@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/pi-acp-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/pi-acp-agent.ts","old_lines":[110,110],"new_lines":[128,157],"diff_block_lines":[32,61],"hunk_header":"@@ -109,4 +127,150 @@ export function transformPiSessionResponse(","substantive_changed_lines":18}
+ 
++function isThoughtLevelFeature(feature: AgentFeature): feature is AgentFeatureSelect {
++  return feature.type === "select" && feature.id === "thought_level";
++}
++
++function normalizePiFeatures(
++  features: AgentFeature[] | undefined,
++  thinkingOptionId: string | null | undefined,
++): AgentFeature[] | undefined {
++  if (!features) {
++    return features;
++  }
++
++  return features.map((feature) => {
++    if (!isThoughtLevelFeature(feature)) {
++      return feature;
++    }
++
++    return {
++      ...feature,
++      value: thinkingOptionId ?? feature.value,
++    };
++  });
++}
++
++class PiACPAgentSession implements AgentSession {
++  readonly provider: AgentSession["provider"];
++  readonly capabilities: AgentSession["capabilities"];
++
++  get id(): string | null {

@@ -1,0 +1,12 @@
+FILE packages/app/src/utils/split-markdown-blocks.ts
+RANGE {"path":"packages/app/src/utils/split-markdown-blocks.ts","old_lines":[44,51],"new_lines":[44,48],"diff_block_lines":[5,14],"hunk_header":"@@ -44,8 +44,5 @@ export function splitMarkdownBlocks(text: string): string[] {","substantive_changed_lines":5}
+@@ -44,8 +44,5 @@ export function splitMarkdownBlocks(text: string): string[] {
+     }
+ 
+-    if (
+-      fenceDelimiter[0] === activeFenceCharacter &&
+-      fenceDelimiter.length >= activeFenceLength
+-    ) {
++    if (fenceDelimiter[0] === activeFenceCharacter && fenceDelimiter.length >= activeFenceLength) {
+       activeFenceCharacter = null;
+       activeFenceLength = 0;

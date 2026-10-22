@@ -1,0 +1,75 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2151,
+  "revision": "7173342bcb2cac69401e4c8ab352aae1908f8112",
+  "date": "2026-04-06T18:15:30+07:00",
+  "committer_date": "2026-04-06T18:15:30+07:00",
+  "parents": [
+    "6e5cad812ef37cc2515c545bffbd20219bff1db9"
+  ],
+  "subject": "feat: replace launcher panel with direct tab creation, use directory-based workspace IDs, and add backward-compatible schema fields",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/app/e2e/helpers/launcher.ts",
+    "M\tpackages/app/e2e/helpers/workspace-lifecycle.ts",
+    "M\tpackages/app/e2e/helpers/workspace-setup.ts",
+    "M\tpackages/app/e2e/helpers/workspace.ts",
+    "M\tpackages/app/e2e/launcher-tab.spec.ts",
+    "M\tpackages/app/e2e/sidebar-workspace.spec.ts",
+    "M\tpackages/app/e2e/workspace-cwd.spec.ts",
+    "M\tpackages/app/e2e/workspace-hover-card.spec.ts",
+    "M\tpackages/app/e2e/workspace-lifecycle.spec.ts",
+    "M\tpackages/app/e2e/workspace-setup-runtime.spec.ts",
+    "M\tpackages/app/e2e/workspace-setup-streaming.spec.ts",
+    "M\tpackages/app/src/components/agent-stream-render-model.ts",
+    "M\tpackages/app/src/components/agent-stream-render-strategy.ts",
+    "M\tpackages/app/src/components/combined-model-selector.test.ts",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.utils.ts",
+    "A\tpackages/app/src/components/stream-strategy-resolver.ts",
+    "M\tpackages/app/src/components/stream-strategy.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.test.ts",
+    "M\tpackages/server/CLAUDE.md",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/persistence.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/timeline-window.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/wait-for-idle.e2e.test.ts",
+    "M\tpackages/server/src/server/db/legacy-project-workspace-import.test.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/provider-history-compatibility-service.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/snapshot-mutation-ownership.test.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:00e3f6f47196b720aacbe5c15202efab1a378bbbceb8e71a2169f3e327208b23",
+  "diff_tree_digest": "sha256:52e8a3a2062fa35f28054134d085f19fe8a47ef1ffb8b0c0bc1d5a7d1bb559bc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        1936,
+        1940
+      ],
+      "new_lines": [
+        1976,
+        1986
+      ],
+      "diff_block_lines": [
+        123,
+        135
+      ],
+      "hunk_header": "@@ -1927,14 +1958,29 @@ export const FetchAgentTimelineResponseMessageSchema = z",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 1063,
+  "receipt_file": "receipts/2151/selected.patch"
+}

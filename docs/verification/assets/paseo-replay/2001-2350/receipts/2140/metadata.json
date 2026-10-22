@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2140,
+  "revision": "8d4d445c857be250dcc23e0eee2f4c428c7ac013",
+  "date": "2026-04-06T08:34:58+07:00",
+  "committer_date": "2026-04-06T08:34:58+07:00",
+  "parents": [
+    "d3e5d6929d5a20442c9899bcf60a0cfc937b66e6"
+  ],
+  "subject": "fix: migrate workspace/project IDs to string and widen schema enums",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/hooks/use-open-project.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:c481c992feb388b1847e3e13f53b750be66ace3e88c15078f78198773b689985",
+  "diff_tree_digest": "sha256:9cb5e8729508c8aef8ddb56cb57524d85a6e638185123f7d4f77f36770225f60",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5184,
+        5196
+      ],
+      "new_lines": [
+        5184,
+        5198
+      ],
+      "diff_block_lines": [
+        37,
+        56
+      ],
+      "hunk_header": "@@ -5182,15 +5182,17 @@ export class Session {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 68,
+  "receipt_file": "receipts/2140/selected.patch"
+}

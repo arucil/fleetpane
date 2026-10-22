@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2205,
+  "revision": "6a4f43954133ce901e63e68c9d9e972b1aaa8140",
+  "date": "2026-04-08T06:52:37+02:00",
+  "committer_date": "2026-04-08T12:52:37+08:00",
+  "parents": [
+    "ac5e6df6c938f1db1bf2be500592491ea147d9fd"
+  ],
+  "subject": "refactor(app): improve route types, reduce amount of `as any` (#217)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/app/pair-scan.tsx",
+    "M\tpackages/app/src/app/settings.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-git-actions.ts",
+    "M\tpackages/app/src/hooks/use-workspace-navigation.ts",
+    "M\tpackages/app/src/screens/sessions-screen.tsx",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/new-agent-routing.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.ts",
+    "M\tpackages/app/src/utils/workspace-navigation.ts"
+  ],
+  "source_receipt_digest": "sha256:9394cf3a8f7895e2a4cab2367f4304dc519b714eaba3937c610da3c993390d21",
+  "diff_tree_digest": "sha256:c60af7c98ac4782da7c0990a62c371a9fb84b19116736a6b4ecc900c8bc92bcf",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/host-routes.ts",
+      "old_lines": [
+        308,
+        329
+      ],
+      "new_lines": [
+        308,
+        329
+      ],
+      "diff_block_lines": [
+        54,
+        83
+      ],
+      "hunk_header": "@@ -286,61 +286,61 @@ export function buildHostAgentDetailRoute(",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 121,
+  "receipt_file": "receipts/2205/selected.patch"
+}

@@ -1,0 +1,10 @@
+FILE packages/app/src/screens/workspace/workspace-tab-menu.ts
+RANGE {"path":"packages/app/src/screens/workspace/workspace-tab-menu.ts","old_lines":[188,189],"new_lines":[185,192],"diff_block_lines":[32,39],"hunk_header":"@@ -186,4 +175,18 @@ export function buildWorkspaceTabMenuEntries(","substantive_changed_lines":3}
++      testID: `${menuTestIDBase}-reload-agent`,
++      onSelect: () => {
++        void onReloadAgent(agentId);
++      },
++    });
++  }
+   entries.push({
+     kind: "item",

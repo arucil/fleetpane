@@ -1,0 +1,8 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[782,785],"new_lines":[781,785],"diff_block_lines":[11,16],"hunk_header":"@@ -782,4 +781,5 @@ export default function RootLayout() {","substantive_changed_lines":1}
+@@ -782,4 +781,5 @@ export default function RootLayout() {
+                       <HorizontalScrollProvider>
+                         <ToastProvider>
++                          <OpenProjectListener />
+                           <AppWithSidebar>
+                             <RootStack />

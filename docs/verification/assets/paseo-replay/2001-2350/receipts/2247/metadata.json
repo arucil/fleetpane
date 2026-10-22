@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2247,
+  "revision": "dace4f862f84d3b2e839ea4096b5d1123a74e49d",
+  "date": "2026-04-08T23:24:43+07:00",
+  "committer_date": "2026-04-08T23:24:43+07:00",
+  "parents": [
+    "fc667d631206a686b0bdb19d020c00f44a191c64"
+  ],
+  "subject": "refactor: make executable resolution async and centralize spawn",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/poc-commands/commands-poc.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/__tests__/claude-agent.event-stream.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.max-effort.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-sdk-behavior.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/copilot-acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/diagnostic-utils.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent-commands.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/pi-acp-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "M\tpackages/server/src/server/editor-targets.test.ts",
+    "M\tpackages/server/src/server/editor-targets.ts",
+    "M\tpackages/server/src/server/exports.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/executable.test.ts",
+    "M\tpackages/server/src/utils/executable.ts",
+    "A\tpackages/server/src/utils/spawn.ts"
+  ],
+  "source_receipt_digest": "sha256:8960a2d3aff9f652470fb0bfee4dfa9dea0411386b6654f7534facaea2d51ac3",
+  "diff_tree_digest": "sha256:5adafc2fb91e04bb74d64737377a239c3da01eb4597bf73dee422eabe9f82a63",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        1040,
+        1050
+      ],
+      "new_lines": [
+        996,
+        1003
+      ],
+      "diff_block_lines": [
+        213,
+        226
+      ],
+      "hunk_header": "@@ -1018,33 +978,26 @@ export function translateOpenCodeEvent(",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 741,
+  "receipt_file": "receipts/2247/selected.patch"
+}

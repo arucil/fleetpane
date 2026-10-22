@@ -1,0 +1,64 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2236,
+  "revision": "b1b85833bb528941f80067df6ed0c4debe76c912",
+  "date": "2026-04-09T23:45:00+07:00",
+  "committer_date": "2026-04-09T23:45:00+07:00",
+  "parents": [
+    "c7399084a488c4226743dd2f96b8258f6135e465"
+  ],
+  "subject": "Distinguish services from scripts with type system and runtime tracking",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-scripts-button.tsx",
+    "M\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/script-health-monitor.test.ts",
+    "M\tpackages/server/src/server/script-health-monitor.ts",
+    "M\tpackages/server/src/server/script-route-branch-handler.test.ts",
+    "M\tpackages/server/src/server/script-route-branch-handler.ts",
+    "M\tpackages/server/src/server/script-status-projection.test.ts",
+    "M\tpackages/server/src/server/script-status-projection.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "A\tpackages/server/src/server/workspace-script-runtime-store.test.ts",
+    "A\tpackages/server/src/server/workspace-script-runtime-store.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpaseo.json"
+  ],
+  "source_receipt_digest": "sha256:d11647ee24512809072c2242d4dc6dabc2aafefcb36fcb0dd30c875ad16c7659",
+  "diff_tree_digest": "sha256:9b62a13a7ada2bffa6836bd63fde8a137c9d93fddc5fb33e571f24e82bfc3f7e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/workspace-hover-card.tsx",
+      "old_lines": [
+        359,
+        365
+      ],
+      "new_lines": [
+        378,
+        396
+      ],
+      "diff_block_lines": [
+        29,
+        48
+      ],
+      "hunk_header": "@@ -356,10 +356,41 @@ function WorkspaceHoverCardContent({",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 1277,
+  "receipt_file": "receipts/2236/selected.patch"
+}

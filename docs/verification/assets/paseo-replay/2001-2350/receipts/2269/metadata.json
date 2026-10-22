@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2269,
+  "revision": "9f09a19a093fc40a1c331ea55219d2196ea07e7e",
+  "date": "2026-04-10T10:05:13+07:00",
+  "committer_date": "2026-04-10T10:05:13+07:00",
+  "parents": [
+    "edfd2564a3f47103f3e56f4e68f17e6bfbd7edf5"
+  ],
+  "subject": "Gate Claude SDK stream trace logs behind PASEO_CLAUDE_DEBUG",
+  "diff_tree_paths": [
+    "M\tpackages/server/.env.example",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:3e72be5a57898a1b228deaedd41ae7976d41f0fe4c1dbb0ae79074e0b31fc175",
+  "diff_tree_digest": "sha256:a1f2e2f4996c2e459cf4dbeb6f84a7208396b61007ee396b293b273ac131fa8e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2456,
+        2467
+      ],
+      "new_lines": [
+        2458,
+        2471
+      ],
+      "diff_block_lines": [
+        14,
+        36
+      ],
+      "hunk_header": "@@ -2455,13 +2457,15 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 24,
+  "receipt_file": "receipts/2269/selected.patch"
+}

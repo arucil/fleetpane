@@ -1,0 +1,25 @@
+FILE scripts/dev.sh
+RANGE {"path":"scripts/dev.sh","old_lines":[10,14],"new_lines":[10,30],"diff_block_lines":[11,33],"hunk_header":"@@ -6,9 +6,25 @@ SCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"","substantive_changed_lines":14}
+   export PASEO_HOME
+-  PASEO_HOME="$(mktemp -d "${TMPDIR:-/tmp}/paseo-dev.XXXXXX")"
+-  trap "rm -rf '$PASEO_HOME'" EXIT
++  GIT_DIR="$(git rev-parse --git-dir 2>/dev/null || true)"
++  GIT_COMMON_DIR="$(git rev-parse --git-common-dir 2>/dev/null || true)"
++  if [ -n "$GIT_DIR" ] && [ -n "$GIT_COMMON_DIR" ] && [ "$GIT_DIR" != "$GIT_COMMON_DIR" ]; then
++    # Inside a worktree — derive a stable home from the worktree name
++    WORKTREE_ROOT="$(git rev-parse --show-toplevel)"
++    WORKTREE_NAME="$(basename "$WORKTREE_ROOT" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g; s/--*/-/g; s/^-//; s/-$//')"
++    PASEO_HOME="$HOME/.paseo-${WORKTREE_NAME}"
++    mkdir -p "$PASEO_HOME"
++  else
++    PASEO_HOME="$(mktemp -d "${TMPDIR:-/tmp}/paseo-dev.XXXXXX")"
++    trap "rm -rf '$PASEO_HOME'" EXIT
++  fi
++fi
++
++# Share speech models with the main install to avoid duplicate downloads
++if [ -z "${PASEO_LOCAL_MODELS_DIR}" ]; then
++  export PASEO_LOCAL_MODELS_DIR="$HOME/.paseo/models/local-speech"
++  mkdir -p "$PASEO_LOCAL_MODELS_DIR"
+ fi
+ 

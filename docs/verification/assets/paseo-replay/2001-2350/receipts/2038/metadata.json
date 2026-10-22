@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2038,
+  "revision": "8a585e60f25f0d313c5bf637bc5f024b6a87462c",
+  "date": "2026-04-02T23:58:21+07:00",
+  "committer_date": "2026-04-02T23:58:38+07:00",
+  "parents": [
+    "1d795f6c32a68f9c92aa3497ee85d125a825d9c6"
+  ],
+  "subject": "fix(security): shell injection, symlink escape, remove /pairing endpoint, harden defaults",
+  "diff_tree_paths": [
+    "M\tSECURITY.md",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpackages/server/src/server/file-explorer/service.test.ts",
+    "M\tpackages/server/src/server/file-explorer/service.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:0c0ee1d1af87d2384e8f0e0eadcc161d0078ededdec15ef8ee8d08cbbab8c64c",
+  "diff_tree_digest": "sha256:0a71af8bdf1b9abb9af54ae5d10ae082ec508cb733725265970e307b3d08c7e2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/runtime-paths.ts",
+      "old_lines": [
+        249,
+        249
+      ],
+      "new_lines": [
+        248,
+        277
+      ],
+      "diff_block_lines": [
+        42,
+        71
+      ],
+      "hunk_header": "@@ -247,2 +246,33 @@ export function runCliPassthroughCommand(args: string[]): number {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 120,
+  "receipt_file": "receipts/2038/selected.patch"
+}

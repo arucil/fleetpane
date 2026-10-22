@@ -1,0 +1,32 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[135,150],"new_lines":[135,149],"diff_block_lines":[7,36],"hunk_header":"@@ -134,19 +134,26 @@ import { resolveVoiceMcpBridgeFromRuntime } from \"./voice-mcp-bridge-command.js\"","substantive_changed_lines":23}
+ 
+-function resolveVoiceMcpBridgeCommand(logger: Logger): { command: string; baseArgs: string[] } {
+-  const decision = resolveVoiceMcpBridgeFromRuntime({
+-    bootstrapModuleUrl: import.meta.url,
+-    execPath: process.execPath,
+-    explicitScriptPath: process.env.PASEO_MCP_STDIO_SOCKET_BRIDGE_SCRIPT,
+-  });
+-  logger.info(
+-    {
+-      source: decision.source,
+-      command: decision.resolved.command,
+-      baseArgs: decision.resolved.baseArgs,
+-    },
+-    "Resolved voice MCP bridge command",
+-  );
+-  return decision.resolved;
++function resolveVoiceMcpBridgeCommand(
++  logger: Logger,
++): { command: string; baseArgs: string[] } | null {
++  try {
++    const decision = resolveVoiceMcpBridgeFromRuntime({
++      bootstrapModuleUrl: import.meta.url,
++      execPath: process.execPath,
++      explicitScriptPath: process.env.PASEO_MCP_STDIO_SOCKET_BRIDGE_SCRIPT,
++    });
++    logger.info(
++      {
++        source: decision.source,
++        command: decision.resolved.command,
++        baseArgs: decision.resolved.baseArgs,

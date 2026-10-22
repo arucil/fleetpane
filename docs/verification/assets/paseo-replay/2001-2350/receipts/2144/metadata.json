@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2144,
+  "revision": "fc55eaf12b0714d35a84e0781b67ae8abca8b513",
+  "date": "2026-04-06T09:28:49+07:00",
+  "committer_date": "2026-04-06T09:28:49+07:00",
+  "parents": [
+    "5d09f7449e89489d1324ef856b33247d55c09f17"
+  ],
+  "subject": "fix: prevent base64 misinterpretation of numeric workspace IDs",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts"
+  ],
+  "source_receipt_digest": "sha256:f6b61516d94df3872f3206057f00a32bf49da84e9e004fa76512bc76fddf571f",
+  "diff_tree_digest": "sha256:1f9d11a9327a1190bf88123bc3e4c30f3897cd6cdab7130ee980b6c9ee04694c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/host-routes.ts",
+      "old_lines": [
+        167,
+        168
+      ],
+      "new_lines": [
+        168,
+        174
+      ],
+      "diff_block_lines": [
+        11,
+        17
+      ],
+      "hunk_header": "@@ -164,5 +164,11 @@ export function encodeWorkspaceIdForPathSegment(workspaceId: string): string {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 38,
+  "receipt_file": "receipts/2144/selected.patch"
+}

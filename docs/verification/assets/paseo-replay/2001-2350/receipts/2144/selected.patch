@@ -1,0 +1,9 @@
+FILE packages/app/src/utils/host-routes.ts
+RANGE {"path":"packages/app/src/utils/host-routes.ts","old_lines":[167,168],"new_lines":[168,174],"diff_block_lines":[11,17],"hunk_header":"@@ -164,5 +164,11 @@ export function encodeWorkspaceIdForPathSegment(workspaceId: string): string {","substantive_changed_lines":4}
++  const id = normalizeWorkspaceId(normalized);
++  if (isPathLikeWorkspaceIdentity(id)) {
++    return toBase64UrlNoPad(id);
++  }
++  return encodeURIComponent(id);
+ }
+ 

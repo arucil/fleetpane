@@ -1,0 +1,67 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2089,
+  "revision": "7e99529bde63c1f610f3b6a6794ba07a498b9431",
+  "date": "2026-04-04T16:31:58+07:00",
+  "committer_date": "2026-04-04T16:35:31+07:00",
+  "parents": [
+    "a6f6c169c8a2d3754bf8b02aa3bee9c9f3fd142a"
+  ],
+  "subject": "Add Codex plan mode draft features",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.utils.ts",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "A\tpackages/app/src/components/plan-card.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-agent-autocomplete.ts",
+    "M\tpackages/app/src/hooks/use-agent-commands-query.ts",
+    "A\tpackages/app/src/hooks/use-draft-agent-features.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/utils/tool-call-detail-state.ts",
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.features.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-feature-definitions.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-plan-mode.real.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/agent-feature-schemas.test.ts",
+    "M\tpackages/server/src/shared/messages.list-commands.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:417b19861ae790d217863a867323f7f12f70a2118d88ba229482e36e3ed6c32e",
+  "diff_tree_digest": "sha256:e7a4c30cb438ddac5b1e1ddf92d1263a0613d450567b9b72396836fe1ed92c1d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        422,
+        422
+      ],
+      "new_lines": [
+        460,
+        489
+      ],
+      "diff_block_lines": [
+        79,
+        108
+      ],
+      "hunk_header": "@@ -421,4 +459,53 @@ function ControlledStatusBar({",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 1175,
+  "receipt_file": "receipts/2089/selected.patch"
+}

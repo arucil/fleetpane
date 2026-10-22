@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2181,
+  "revision": "682fc54778c5a83aadc3f24e02cd7006eb306bd1",
+  "date": "2026-04-07T15:43:14+07:00",
+  "committer_date": "2026-04-07T15:43:14+07:00",
+  "parents": [
+    "e06b691d5d4ea6559769eae1565c1d8a2152c5f8"
+  ],
+  "subject": "feat: normalize plan approval across providers",
+  "diff_tree_paths": [
+    "A\tdocs/plan-approval-normalization.md",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/shared/messages.stream-parsing.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:f77494c7666cdabffe7a3a711f75f7ad32c768f5edf48a329b5dcc89dc2c02a4",
+  "diff_tree_digest": "sha256:0abdaaa771b57f685d05ed6ecaea78107bcc50144678653325d1b88b8a0ea6e2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-view.tsx",
+      "old_lines": [
+        790,
+        819
+      ],
+      "new_lines": [
+        825,
+        825
+      ],
+      "diff_block_lines": [
+        90,
+        119
+      ],
+      "hunk_header": "@@ -779,62 +823,46 @@ function PermissionRequestCard({",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 825,
+  "receipt_file": "receipts/2181/selected.patch"
+}

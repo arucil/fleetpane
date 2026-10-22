@@ -1,0 +1,32 @@
+FILE packages/server/src/server/daemon-config-store.ts
+RANGE {"path":"packages/server/src/server/daemon-config-store.ts","old_lines":[0,0],"new_lines":[16,45],"diff_block_lines":[22,51],"hunk_header":"@@ -0,0 +1,165 @@","substantive_changed_lines":19}
++type LoggerLike = {
++  child(bindings: Record<string, unknown>): LoggerLike;
++  info(...args: any[]): void;
++};
++
++type ConfigListener = (config: MutableDaemonConfig) => void;
++type FieldChangeHandler = (value: unknown) => void;
++
++function getLogger(logger: LoggerLike | undefined): LoggerLike | undefined {
++  return logger?.child({ module: "daemon-config-store" });
++}
++
++function isRecord(value: unknown): value is Record<string, unknown> {
++  return typeof value === "object" && value !== null && !Array.isArray(value);
++}
++
++function deepMerge<T extends Record<string, unknown>>(current: T, patch: Record<string, unknown>): T {
++  const next: Record<string, unknown> = { ...current };
++
++  for (const [key, patchValue] of Object.entries(patch)) {
++    if (patchValue === undefined) {
++      continue;
++    }
++    const currentValue = next[key];
++    if (isRecord(currentValue) && isRecord(patchValue)) {
++      next[key] = deepMerge(currentValue, patchValue);
++      continue;
++    }
++    next[key] = patchValue;
++  }

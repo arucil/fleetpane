@@ -1,0 +1,21 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1266,1270],"new_lines":[1258,1275],"diff_block_lines":[50,68],"hunk_header":"@@ -1255,16 +1256,20 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":12}
++        const agent =
++          useSessionStore.getState().sessions[normalizedServerId]?.agents?.get(agentId) ?? null;
++
++        if (agent?.status !== "idle") {
++          const confirmed = await confirmDialog({
++            title: "Archive agent?",
++            message: "This closes the tab and archives the agent.",
++            confirmLabel: "Archive",
++            cancelLabel: "Cancel",
++            destructive: true,
++          });
++          if (!confirmed) {
++            return;
++          }
+         }
+ 
+-        await archiveAgent({ serverId: normalizedServerId, agentId });
+         setHoveredTabKey((current) => (current === tabId ? null : current));
+         setHoveredCloseTabKey((current) => (current === tabId ? null : current));

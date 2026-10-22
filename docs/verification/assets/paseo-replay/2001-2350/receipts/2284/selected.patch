@@ -1,0 +1,20 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[8469,8486],"new_lines":[8458,8460],"diff_block_lines":[43,60],"hunk_header":"@@ -8468,19 +8457,4 @@ export class Session {","substantive_changed_lines":10}
+ 
+-    if (this.getCurrentBinaryBufferedAmount() > TERMINAL_STREAM_LOW_WATER_BYTES) {
+-      if (!activeStream.snapshotRetryTimer) {
+-        activeStream.snapshotRetryTimer = setTimeout(() => {
+-          activeStream.snapshotRetryTimer = null;
+-          this.trySendTerminalSnapshot(activeStream);
+-        }, 33);
+-      }
+-      return;
+-    }
+-
+-    if (activeStream.snapshotRetryTimer) {
+-      clearTimeout(activeStream.snapshotRetryTimer);
+-      activeStream.snapshotRetryTimer = null;
+-    }
+-
+     const terminal = this.terminalManager?.getTerminal(activeStream.terminalId);
+     if (!terminal) {

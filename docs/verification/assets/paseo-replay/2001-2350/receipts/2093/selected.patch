@@ -1,0 +1,20 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[193,194],"new_lines":[199,216],"diff_block_lines":[14,31],"hunk_header":"@@ -191,4 +191,26 @@ const MAX_INITIAL_AGENT_TITLE_CHARS = Math.min(60, MAX_EXPLICIT_AGENT_TITLE_CHAR","substantive_changed_lines":11}
++
++function clientSupportsAllProviders(appVersion: string | null): boolean {
++  if (!appVersion) return false;
++  // Strip RC/prerelease suffix: "0.1.45-rc.4" → "0.1.45"
++  const base = appVersion.replace(/-.*$/, "");
++  const parts = base.split(".").map(Number);
++  const minParts = MIN_VERSION_ALL_PROVIDERS.split(".").map(Number);
++  for (let i = 0; i < minParts.length; i++) {
++    const a = parts[i] ?? 0;
++    const b = minParts[i] ?? 0;
++    if (a > b) return true;
++    if (a < b) return false;
++  }
++  return true;
++}
++
+ const WORKSPACE_GIT_WATCH_DEBOUNCE_MS = 500;
+ const WORKSPACE_GIT_WATCH_REMOVED_FINGERPRINT = "__removed__";

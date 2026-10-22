@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2088,
+  "revision": "a6f6c169c8a2d3754bf8b02aa3bee9c9f3fd142a",
+  "date": "2026-04-04T16:14:17+07:00",
+  "committer_date": "2026-04-04T16:35:31+07:00",
+  "parents": [
+    "d69fcb861da7dbd6e9ede4f518c76e3d7884542e"
+  ],
+  "subject": "Fix Pi thinking mode state mapping",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/acp-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/pi-acp-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:8a29e12ebe4fcbb45f4010be5079db7854ded14321e2743641776c3c3c6fd1e5",
+  "diff_tree_digest": "sha256:13a40f90cda3df21311c6de3f0ab1cb88c4fb0651255356df469e1dd4e278387",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/pi-acp-agent.ts",
+      "old_lines": [
+        110,
+        110
+      ],
+      "new_lines": [
+        128,
+        157
+      ],
+      "diff_block_lines": [
+        32,
+        61
+      ],
+      "hunk_header": "@@ -109,4 +127,150 @@ export function transformPiSessionResponse(",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 162,
+  "receipt_file": "receipts/2088/selected.patch"
+}

@@ -1,0 +1,28 @@
+FILE packages/app/src/voice/voice-runtime.ts
+RANGE {"path":"packages/app/src/voice/voice-runtime.ts","old_lines":[455,479],"new_lines":[368,378],"diff_block_lines":[159,184],"hunk_header":"@@ -443,37 +360,19 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {","substantive_changed_lines":11}
+-            console.log(
+-              `[VoiceRuntime] played chunk=${group.nextChunkToPlay} id=${nextChunk.id} took=${Date.now() - playStart}ms`,
+-            );
+-          } else {
+-            console.log(
+-              `[VoiceRuntime] SKIPPED chunk=${group.nextChunkToPlay} id=${nextChunk.id} shouldPlay=false`,
+-            );
+           }
+         } catch (error) {
+           if (generation !== playback.generation) {
+-            console.log(`[VoiceRuntime] play error + generation changed, aborting`);
+             return;
+           }
+-          console.error(
+-            `[VoiceRuntime] play error chunk=${group.nextChunkToPlay} took=${Date.now() - playStart}ms:`,
+-            error,
+-          );
++          console.error(`[VoiceRuntime] play error chunk=${group.nextChunkToPlay}:`, error);
+         }
+ 
+         if (generation !== playback.generation) {
+-          console.log(
+-            `[VoiceRuntime] post-play generation changed ${generation} -> ${playback.generation}`,
+-          );
+           return;
+         }

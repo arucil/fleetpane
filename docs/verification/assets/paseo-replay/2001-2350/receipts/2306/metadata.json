@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2306,
+  "revision": "944978ddb65678af78c7691e5970761c3a319b2e",
+  "date": "2026-04-10T20:59:14+07:00",
+  "committer_date": "2026-04-10T20:59:14+07:00",
+  "parents": [
+    "a27858e743e04de81b6d72a450d7e91e719a7bb7",
+    "7a1e12f0c0a550f8662077adf4441dc06a577044"
+  ],
+  "subject": "Merge branch 'main' into dev",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/git-actions-policy.test.ts",
+    "M\tpackages/app/src/components/git-actions-policy.ts",
+    "M\tpackages/app/src/components/git-actions-split-button.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/toast-host.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-git-actions.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-git-actions.tsx",
+    "M\tpackages/app/src/stores/checkout-git-actions-store.ts",
+    "A\tpackages/app/src/utils/desktop-badge-state.test.ts",
+    "A\tpackages/app/src/utils/desktop-badge-state.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:8dc6413d873ee1691cad98553e9701975b0564e1230d6f6066400f3f39a2f1d0",
+  "diff_tree_digest": "sha256:d9d32096e8593e6cf8cc83c31e20b64d7195d3d6cd53504bc117ea83357e7c6f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-actions-policy.ts",
+      "old_lines": [
+        194,
+        197
+      ],
+      "new_lines": [
+        223,
+        250
+      ],
+      "diff_block_lines": [
+        179,
+        208
+      ],
+      "hunk_header": "@@ -193,55 +222,92 @@ function buildPrAction(input: BuildGitActionsInput): GitAction {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 854,
+  "receipt_file": "receipts/2306/selected.patch"
+}

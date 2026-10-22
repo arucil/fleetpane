@@ -1,0 +1,28 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[401,402],"new_lines":[436,461],"diff_block_lines":[114,139],"hunk_header":"@@ -376,27 +421,41 @@ function GeneralSection({","substantive_changed_lines":22}
++            <DropdownMenuContent side="bottom" align="end" width={200}>
++              {(["light", "dark", "auto"] as const).map((t) => (
++                <DropdownMenuItem
++                  key={t}
++                  selected={settings.theme === t}
++                  onSelect={() => handleThemeChange(t)}
++                  leading={<ThemeIcon theme={t} size={iconSize} color={iconColor} />}
++                >
++                  {THEME_LABELS[t]}
++                </DropdownMenuItem>
++              ))}
++              <DropdownMenuSeparator />
++              {(["zinc", "midnight", "claude", "ghostty"] as const).map((t) => (
++                <DropdownMenuItem
++                  key={t}
++                  selected={settings.theme === t}
++                  onSelect={() => handleThemeChange(t)}
++                  leading={<ThemeIcon theme={t} size={iconSize} color={iconColor} />}
++                >
++                  {THEME_LABELS[t]}
++                </DropdownMenuItem>
++              ))}
++            </DropdownMenuContent>
++          </DropdownMenu>
+         </View>
+         <View style={styles.audioRow}>

@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2342,
+  "revision": "ca20945b93daa23c966125091618dbb7ecd93256",
+  "date": "2026-04-12T14:52:41+07:00",
+  "committer_date": "2026-04-12T14:52:41+07:00",
+  "parents": [
+    "cd4db5d81ff2033aa4688a6bc5f5f5f86f87f2c6"
+  ],
+  "subject": "Fix ahead-of-origin count for branches with no remote tracking branch",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:b1222cc0539d2c3e3976155613f919dea294572f1789c513c31c3b6fc8bfbed6",
+  "diff_tree_digest": "sha256:a1fc98c38f6bb2a2855dd9cb918858e5d2fcb78ef9e5e9c49e1fbb3458ca5af3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1009,
+        1010
+      ],
+      "new_lines": [
+        1013,
+        1019
+      ],
+      "diff_block_lines": [
+        14,
+        20
+      ],
+      "hunk_header": "@@ -1006,5 +1006,14 @@ async function getAheadOfOrigin(cwd: string, currentBranch: string): Promise<num",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 9,
+  "receipt_file": "receipts/2342/selected.patch"
+}

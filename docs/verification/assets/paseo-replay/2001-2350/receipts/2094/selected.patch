@@ -1,0 +1,9 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts","old_lines":[108,112],"new_lines":[108,112],"diff_block_lines":[5,11],"hunk_header":"@@ -108,5 +108,5 @@ export class SherpaSileroVadSession extends EventEmitter implements TurnDetectio","substantive_changed_lines":2}
+@@ -108,5 +108,5 @@ export class SherpaSileroVadSession extends EventEmitter implements TurnDetectio
+       this.inputBuffer.push(samples);
+       while (this.inputBuffer.size() > this.windowSize) {
+-        const window = this.inputBuffer.get(this.inputBuffer.head(), this.windowSize);
++        const window = this.inputBuffer.get(this.inputBuffer.head(), this.windowSize, false);
+         this.inputBuffer.pop(this.windowSize);
+         this.vad.acceptWaveform(window);

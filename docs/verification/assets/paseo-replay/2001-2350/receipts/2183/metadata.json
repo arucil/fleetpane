@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2183,
+  "revision": "5ce4562eedbef3a68c5f9a644530fe6e6ef531fb",
+  "date": "2026-04-07T16:48:51+07:00",
+  "committer_date": "2026-04-07T16:48:51+07:00",
+  "parents": [
+    "21c776140388fb8529e0d89b48cb139c4347a68f"
+  ],
+  "subject": "Preserve workspace diff stats across rehydration",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-sidebar-workspaces-list.ts",
+    "A\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/stores/session-store.ts"
+  ],
+  "source_receipt_digest": "sha256:5b0e37a0d220910d05b251ae915fc63b428dcbe48a553d63385921a44376dce3",
+  "diff_tree_digest": "sha256:5b5f03fbfb86afe9fac8a08337bf22dc94266733034c5b47f6969af3c485cd4c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/session-store.ts",
+      "old_lines": [
+        144,
+        146
+      ],
+      "new_lines": [
+        144,
+        161
+      ],
+      "diff_block_lines": [
+        7,
+        24
+      ],
+      "hunk_header": "@@ -143,4 +143,19 @@ export function normalizeWorkspaceDescriptor(",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 59,
+  "receipt_file": "receipts/2183/selected.patch"
+}

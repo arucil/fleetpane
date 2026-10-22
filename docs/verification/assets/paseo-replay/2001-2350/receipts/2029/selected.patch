@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude/claude-models.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/claude-models.ts","old_lines":[0,0],"new_lines":[39,68],"diff_block_lines":[45,74],"hunk_header":"@@ -0,0 +1,74 @@","substantive_changed_lines":14}
++
++export function getClaudeModels(): AgentModelDefinition[] {
++  return CLAUDE_MODELS.map((model) => ({ ...model }));
++}
++
++/**
++ * Normalize a runtime model string (from SDK init message) to a known model ID.
++ * Handles the `[1m]` suffix that the SDK appends for 1M context sessions.
++ */
++export function normalizeClaudeRuntimeModelId(
++  value: string | null | undefined,
++): string | null {
++  const trimmed = typeof value === "string" ? value.trim() : "";
++  if (!trimmed) {
++    return null;
++  }
++
++  // Check for exact match first (handles claude-opus-4-6[1m] directly)
++  if (CLAUDE_MODELS.some((model) => model.id === trimmed)) {
++    return trimmed;
++  }
++
++  // Match: claude-{family}-{major}-{minor}[1m]? possibly followed by a date suffix
++  const runtimeMatch = trimmed.match(
++    /(?:claude-)?(opus|sonnet|haiku)[-_ ]+(\d+)[-.](\d+)(\[1m\])?/i,
++  );
++  if (!runtimeMatch) {
++    return null;
++  }
++

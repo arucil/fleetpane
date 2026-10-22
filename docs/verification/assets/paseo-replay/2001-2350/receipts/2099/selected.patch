@@ -1,0 +1,9 @@
+FILE packages/desktop/src/daemon/node-entrypoint-launcher.ts
+RANGE {"path":"packages/desktop/src/daemon/node-entrypoint-launcher.ts","old_lines":[71,75],"new_lines":[71,75],"diff_block_lines":[5,11],"hunk_header":"@@ -71,5 +71,5 @@ export function createNodeEntrypointInvocation(","substantive_changed_lines":2}
+@@ -71,5 +71,5 @@ export function createNodeEntrypointInvocation(
+     return {
+       command: input.execPath,
+-      args: [input.packagedRunnerPath, input.argvMode, input.entrypoint.entryPath, ...input.args],
++      args: ["--disable-warning=DEP0040", input.packagedRunnerPath, input.argvMode, input.entrypoint.entryPath, ...input.args],
+       env,
+     };

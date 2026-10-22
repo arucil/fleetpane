@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/feature-preferences.ts
+RANGE {"path":"packages/app/src/hooks/feature-preferences.ts","old_lines":[0,0],"new_lines":[2,31],"diff_block_lines":[8,37],"hunk_header":"@@ -0,0 +1,60 @@","substantive_changed_lines":21}
++
++export function pruneFeatureValues(
++  featureValues: Record<string, unknown>,
++  features: AgentFeature[],
++): Record<string, unknown> {
++  const allowedFeatureIds = new Set(features.map((feature) => feature.id));
++  let changed = false;
++  const next: Record<string, unknown> = {};
++
++  for (const [featureId, value] of Object.entries(featureValues)) {
++    if (!allowedFeatureIds.has(featureId)) {
++      changed = true;
++      continue;
++    }
++    next[featureId] = value;
++  }
++
++  return changed ? next : featureValues;
++}
++
++export function applyFeatureValues(
++  features: AgentFeature[],
++  featureValues: Record<string, unknown>,
++): AgentFeature[] {
++  if (Object.keys(featureValues).length === 0) {
++    return features;
++  }
++
++  return features.map((feature) => {
++    if (!Object.prototype.hasOwnProperty.call(featureValues, feature.id)) {

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[721,740],"new_lines":[727,740],"diff_block_lines":[49,78],"hunk_header":"@@ -720,114 +726,119 @@ function DesktopSidebar({","substantive_changed_lines":25}
+   return (
+-    <Animated.View style={[staticStyles.desktopSidebar, resizeAnimatedStyle, { paddingTop: insetsTop }]}>
++    <Animated.View
++      style={[staticStyles.desktopSidebar, resizeAnimatedStyle, { paddingTop: insetsTop }]}
++    >
+       <View style={[styles.desktopSidebarBorder, { flex: 1 }]}>
+-      <View style={styles.sidebarDragArea}>
+-        <TitlebarDragRegion />
+-        {padding.top > 0 ? <View style={{ height: padding.top }} /> : null}
+-        <View style={styles.sidebarHeader}>
+-          <View style={styles.sidebarHeaderRow}>
+-            <SessionsButton onPress={handleViewMore} />
++        <View style={styles.sidebarDragArea}>
++          <TitlebarDragRegion />
++          {padding.top > 0 ? <View style={{ height: padding.top }} /> : null}
++          <View style={styles.sidebarHeader}>
++            <View style={styles.sidebarHeaderRow}>
++              <SessionsButton onPress={handleViewMore} />
++            </View>
+           </View>
+         </View>
+-      </View>
+-
+-      {isInitialLoad ? (
+-        <SidebarAgentListSkeleton />
+-      ) : (
+-        <SidebarWorkspaceList
+-          serverId={activeServerId}
+-          collapsedProjectKeys={collapsedProjectKeys}
+-          onToggleProjectCollapsed={toggleProjectCollapsed}

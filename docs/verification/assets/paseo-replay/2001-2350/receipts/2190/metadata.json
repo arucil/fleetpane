@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2190,
+  "revision": "5ec25687cd4adabb86d2d37e3ed2d8fbf5785b5a",
+  "date": "2026-04-07T18:56:53+07:00",
+  "committer_date": "2026-04-07T18:56:53+07:00",
+  "parents": [
+    "33a1557aede1263127c1559ace29ca03c7b41a9f"
+  ],
+  "subject": "Skip provider refresh when one is already in-flight",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-snapshot-manager.test.ts",
+    "M\tpackages/server/src/server/agent/provider-snapshot-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:db6039a1862c902382824f668e47865bd7b7d75300b36892f906516d6592382d",
+  "diff_tree_digest": "sha256:e978dc4d15c6ac0db40fa1474007599aee77c24d4d5dfe0315e64ab3abf3e79d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-snapshot-manager.ts",
+      "old_lines": [
+        172,
+        174
+      ],
+      "new_lines": [
+        175,
+        186
+      ],
+      "diff_block_lines": [
+        26,
+        37
+      ],
+      "hunk_header": "@@ -171,4 +174,13 @@ export class ProviderSnapshotManager {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/2190/selected.patch"
+}

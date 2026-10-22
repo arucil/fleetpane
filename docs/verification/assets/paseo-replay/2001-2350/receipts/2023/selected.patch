@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[1131,1148],"new_lines":[1139,1151],"diff_block_lines":[49,78],"hunk_header":"@@ -1130,21 +1138,35 @@ class OpenCodeAgentSession implements AgentSession {","substantive_changed_lines":24}
+ 
+-    const promptResponse = await this.client.session.promptAsync({
+-      sessionID: this.sessionId,
+-      directory: this.config.cwd,
+-      parts,
+-      ...(options?.outputSchema
+-        ? {
+-            format: {
+-              type: "json_schema" as const,
+-              schema: options.outputSchema as Record<string, unknown>,
+-            },
+-          }
+-        : {}),
+-      ...(this.config.systemPrompt ? { system: this.config.systemPrompt } : {}),
+-      ...(model ? { model } : {}),
+-      ...(effectiveMode ? { agent: effectiveMode } : {}),
+-      ...(effectiveVariant ? { variant: effectiveVariant } : {}),
+-    });
++    let promptResponse;
++    const slashCommand = await this.resolveSlashCommandInvocation(prompt);
++    if (slashCommand) {
++      promptResponse = await this.client.session.command({
++        sessionID: this.sessionId,
++        directory: this.config.cwd,
++        command: slashCommand.commandName,
++        arguments: slashCommand.args,
++        ...(this.config.model ? { model: this.config.model } : {}),
++        ...(effectiveMode ? { agent: effectiveMode } : {}),
++        ...(effectiveVariant ? { variant: effectiveVariant } : {}),
++      });

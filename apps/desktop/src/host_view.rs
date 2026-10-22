@@ -8,6 +8,7 @@ mod images;
 mod last_session;
 mod mcp;
 mod observe;
+mod picker;
 mod progress;
 mod recent;
 mod recovery;
@@ -79,6 +80,7 @@ pub struct HostView {
     models_requested: bool,
     mcp: mcp::State,
     turn_options: BTreeMap<String, TurnOptions>,
+    picker: Option<picker::State>,
     search: Entity<InputState>,
     filter_workspace: Entity<InputState>,
     rename: Entity<InputState>,
@@ -314,6 +316,7 @@ impl HostView {
             models_requested: false,
             mcp: mcp::State::default(),
             turn_options: BTreeMap::new(),
+            picker: None,
             search,
             filter_workspace,
             rename,
@@ -1598,48 +1601,16 @@ impl HostView {
                 );
             }
             for option in &thread.config_options {
-                let owner = cx.entity().downgrade();
-                let thread_id = thread.id.clone();
                 let config_id = option.id.clone();
-                let choices: Vec<(String, String)> = option
-                    .choices()
-                    .iter()
-                    .map(|(v, n)| (v.to_string(), n.to_string()))
-                    .collect();
-                let selected = option.current_value.clone();
                 row = row.child(
                     Button::new(SharedString::from(format!("acp-option:{}", option.id)))
                         .small()
                         .label(format!("{}: {}", option.name, option.selected_name()))
+                        .tooltip("Search provider-supplied choices by name or ID")
                         .disabled(blocked || option.kind != "select")
-                        .dropdown_menu_with_anchor(Anchor::BottomLeft, move |mut menu, _, _| {
-                            for (value, name) in &choices {
-                                let owner = owner.clone();
-                                let thread_id = thread_id.clone();
-                                let config_id = config_id.clone();
-                                let value = value.clone();
-                                menu = menu.item(
-                                    PopupMenuItem::new(name.clone())
-                                        .checked(selected == value)
-                                        .on_click(move |_, window, cx| {
-                                            if let Some(entity) = owner.upgrade() {
-                                                entity.update(cx, |this, cx| {
-                                                    this.command(
-                                                        Command::Config {
-                                                            thread_id: thread_id.clone(),
-                                                            config_id: config_id.clone(),
-                                                            value: value.clone(),
-                                                        },
-                                                        window,
-                                                        cx,
-                                                    )
-                                                });
-                                            }
-                                        }),
-                                );
-                            }
-                            menu
-                        }),
+                        .on_click(cx.listener(move |this, _, window, cx| {
+                            this.search_models(Some(&config_id), window, cx);
+                        })),
                 );
             }
         }
@@ -1717,8 +1688,6 @@ impl HostView {
             |model| model.display_name.clone(),
         );
         let owner = cx.entity().downgrade();
-        let model_owner = owner.clone();
-        let model_id = id.clone();
         let effort_id = id.clone();
         let effort = if model.is_some_and(|model| model.supported_reasoning_efforts.is_empty()) {
             "No reasoning control".to_owned()
@@ -1731,43 +1700,10 @@ impl HostView {
         div().flex().flex_col().gap_1()
             .child(div().flex().items_center().flex_wrap().gap_2()
                 .child(div().text_xs().text_color(cx.theme().muted_foreground).child("Next message"))
-                .child(Button::new("turn-model").small().label(label).disabled(blocked || id.is_none())
-                    .dropdown_menu_with_anchor(Anchor::BottomLeft, move |menu, _, cx| {
-                        let Some(entity) = model_owner.upgrade() else { return menu; };
-                        let view = entity.read(cx);
-                        let selected = model_id.as_ref().and_then(|id| view.turn_options.get(id));
-                        let reset_owner = model_owner.clone();
-                        let reset_id = model_id.clone();
-                        let mut menu = menu.scrollable(true).max_h(px(320.)).item(
-                            PopupMenuItem::new("Use session settings")
-                                .checked(selected.is_none_or(|options| options.model().is_none()))
-                                .on_click(move |_, _, cx| {
-                                    if let (Some(entity), Some(id)) = (reset_owner.upgrade(), &reset_id) {
-                                        entity.update(cx, |view, cx| view.choose_options(id, TurnOptions::default(), cx));
-                                    }
-                                }),
-                        );
-                        for model in view.models.models.iter().filter(|model| !model.hidden) {
-                            let name = model.model.clone();
-                            let recommended = (!model.supported_reasoning_efforts.is_empty()).then(|| model.default_reasoning_effort.clone());
-                            let target = model_id.clone();
-                            let owner = model_owner.clone();
-                            menu = menu.item(PopupMenuItem::new(model.display_name.clone())
-                                .checked(selected.and_then(TurnOptions::model) == Some(name.as_str()))
-                                .disabled(!view.models.complete)
-                                .on_click(move |_, _, cx| {
-                                    if let (Some(entity), Some(id)) = (owner.upgrade(), &target) {
-                                        entity.update(cx, |view, cx| {
-                                            match TurnOptions::new(&view.models, Some(name.clone()), recommended.clone()) {
-                                                Ok(options) => view.choose_options(id, options, cx),
-                                                Err(error) => { view.error = Some(error.to_string()); cx.notify(); }
-                                            }
-                                        });
-                                    }
-                                }));
-                        }
-                        menu
-                    }))
+                .child(Button::new("turn-model").small().label(label)
+                    .tooltip("Search provider-supplied models by name or ID")
+                    .disabled(blocked || id.is_none())
+                    .on_click(cx.listener(|this, _, window, cx| this.search_models(None, window, cx))))
                 .child(Button::new("turn-effort").small().label(effort)
                     .disabled(blocked || id.is_none() || effort_disabled)
                     .dropdown_menu_with_anchor(Anchor::BottomLeft, move |menu, _, cx| {
@@ -2157,6 +2093,7 @@ impl Render for HostView {
                 }
             }))
             .size_full()
+            .relative()
             .flex()
             .flex_col()
             .bg(cx.theme().background)
@@ -2933,5 +2870,6 @@ impl Render for HostView {
                     )),
                 ),
             )
+            .when(self.picker.is_some(), |view| view.child(self.render_picker(window, cx)))
     }
 }

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[340,340],"new_lines":[341,370],"diff_block_lines":[9,38],"hunk_header":"@@ -338,4 +338,44 @@ function WorkspaceHoverCardContent({","substantive_changed_lines":26}
++            <View style={styles.checksList}>
++              {prHint.checks.map((check) => (
++                <Pressable
++                  key={check.name}
++                  style={({ hovered }) => [
++                    styles.serviceRow,
++                    hovered && check.url && styles.serviceRowHovered,
++                  ]}
++                  onPress={check.url ? () => void openExternalUrl(check.url!) : undefined}
++                  disabled={!check.url}
++                >
++                  <View
++                    style={[
++                      styles.statusDot,
++                      {
++                        backgroundColor:
++                          check.status === "success"
++                            ? theme.colors.palette.green[500]
++                            : check.status === "failure" || check.status === "cancelled"
++                              ? theme.colors.palette.red[500]
++                              : check.status === "pending"
++                                ? theme.colors.palette.amber[500]
++                                : theme.colors.foregroundMuted,
++                      },
++                    ]}
++                  />
++                  <Text
++                    style={styles.checkName}
++                    numberOfLines={1}
++                  >

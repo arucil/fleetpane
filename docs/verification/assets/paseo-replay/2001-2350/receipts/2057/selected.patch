@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/components/desktop-updates-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-updates-section.tsx","old_lines":[317,319],"new_lines":[322,351],"diff_block_lines":[27,56],"hunk_header":"@@ -316,4 +321,31 @@ export function LocalDaemonSection({ appVersion, showLifecycleControls }: LocalD","substantive_changed_lines":21}
+ 
++  const handleOpenCliStatus = useCallback(async () => {
++    setIsLoadingCliStatus(true);
++    try {
++      setCliStatusOutput(await getCliDaemonStatus());
++      setIsCliStatusModalOpen(true);
++    } catch (error) {
++      const message = error instanceof Error ? error.message : String(error);
++      setCliStatusOutput(`Failed to fetch daemon status: ${message}`);
++      setIsCliStatusModalOpen(true);
++    } finally {
++      setIsLoadingCliStatus(false);
++    }
++  }, []);
++
++  const handleCopyCliStatus = useCallback(() => {
++    if (!cliStatusOutput) {
++      return;
++    }
++    void Clipboard.setStringAsync(cliStatusOutput)
++      .then(() => {
++        Alert.alert("Copied", "Status copied to clipboard.");
++      })
++      .catch((error) => {
++        console.error("[Settings] Failed to copy daemon status", error);
++      });
++  }, [cliStatusOutput]);
++
+   if (!showSection) {
+     return null;

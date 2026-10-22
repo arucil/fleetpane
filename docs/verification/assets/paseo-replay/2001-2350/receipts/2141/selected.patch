@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[1346,1350],"new_lines":[1346,1354],"diff_block_lines":[5,15],"hunk_header":"@@ -1346,5 +1346,9 @@ export function getCachedCheckoutShortstat(cwd: string): CheckoutShortstat | nul","substantive_changed_lines":6}
+@@ -1346,5 +1346,9 @@ export function getCachedCheckoutShortstat(cwd: string): CheckoutShortstat | nul
+ }
+ 
+-export function warmCheckoutShortstatInBackground(cwd: string, context?: CheckoutContext): void {
++export function warmCheckoutShortstatInBackground(
++  cwd: string,
++  context?: CheckoutContext,
++  onComplete?: () => void,
++): void {
+   const cacheKey = getShortstatCacheKey(cwd);
+   if (shortstatCache.get(cacheKey) !== undefined || shortstatInFlight.has(cacheKey)) {

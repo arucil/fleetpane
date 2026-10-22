@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2341,
+  "revision": "cd4db5d81ff2033aa4688a6bc5f5f5f86f87f2c6",
+  "date": "2026-04-12T14:01:51+07:00",
+  "committer_date": "2026-04-12T14:01:51+07:00",
+  "parents": [
+    "d1fc271ad4dda28d3ba186b92dd10d9eb170ca06"
+  ],
+  "subject": "Fix release notes sync race when release is recreated by another workflow",
+  "diff_tree_paths": [
+    "M\tscripts/sync-release-notes-from-changelog.mjs"
+  ],
+  "source_receipt_digest": "sha256:dfbbbcd1e4748e6f742769b6092c21ed055503a758037c0dec55233770a4ed13",
+  "diff_tree_digest": "sha256:fb2cffe65ba23b9152168c25b60ced91b06534469e0c7d7356ef8d2e735cf960",
+  "selected_hunk_ranges": [
+    {
+      "path": "scripts/sync-release-notes-from-changelog.mjs",
+      "old_lines": [
+        180,
+        185
+      ],
+      "new_lines": [
+        180,
+        206
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -179,9 +179,30 @@ function main() {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 34,
+  "receipt_file": "receipts/2341/selected.patch"
+}

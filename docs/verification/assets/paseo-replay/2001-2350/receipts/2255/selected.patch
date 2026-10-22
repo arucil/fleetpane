@@ -1,0 +1,22 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[426,428],"new_lines":[430,449],"diff_block_lines":[56,75],"hunk_header":"@@ -425,4 +429,21 @@ function AppearanceSection({ settings, handleThemeChange }: AppearanceSectionPro","substantive_changed_lines":16}
+         </View>
++        <View style={styles.audioRow}>
++          <View style={styles.audioRowContent}>
++            <Text style={styles.audioRowTitle}>Default send</Text>
++            <Text style={styles.audioRowSubtitle}>
++              What happens when you press Enter while the agent is running
++            </Text>
++          </View>
++          <SegmentedControl
++            size="sm"
++            value={settings.sendBehavior}
++            onValueChange={handleSendBehaviorChange}
++            options={[
++              { value: "interrupt", label: "Interrupt" },
++              { value: "queue", label: "Queue" },
++            ]}
++          />
++        </View>
+       </View>
+     </View>

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[233,262],"new_lines":[244,247],"diff_block_lines":[56,85],"hunk_header":"@@ -232,58 +243,10 @@ export function CheckStatusIndicator({","substantive_changed_lines":22}
+   const { theme } = useUnistyles();
+-  const iconSize = Math.round(size * 0.6);
+ 
+   if (!status || status === "none") return null;
+ 
+-  if (status === "pending") {
+-    return (
+-      <View
+-        style={{
+-          width: size,
+-          height: size,
+-          borderRadius: size / 2,
+-          borderWidth: 2,
+-          borderColor: theme.colors.palette.amber[500],
+-          backgroundColor: "transparent",
+-        }}
+-      />
+-    );
+-  }
+-
+-  if (status === "success") {
+-    return (
+-      <View
+-        style={{
+-          width: size,
+-          height: size,
+-          borderRadius: size / 2,
+-          backgroundColor: "rgba(34,197,94,0.15)",
+-          alignItems: "center",
+-          justifyContent: "center",

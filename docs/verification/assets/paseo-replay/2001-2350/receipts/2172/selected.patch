@@ -1,0 +1,32 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[205,219],"new_lines":[230,245],"diff_block_lines":[110,139],"hunk_header":"@@ -194,32 +213,44 @@ export function FileExplorerPane({","substantive_changed_lines":22}
+-      const nextExpanded = !isExpanded;
+-      setExpandedPaths((prev) => {
+-        const next = new Set(prev);
+-        if (isExpanded) {
+-          next.delete(entry.path);
+-        } else {
+-          next.add(entry.path);
++      if (isExpanded) {
++        setExpandedPathsForWorkspace(
++          workspaceStateKey,
++          Array.from(expandedPaths).filter((path) => path !== entry.path),
++        );
++      } else {
++        setExpandedPathsForWorkspace(
++          workspaceStateKey,
++          [...Array.from(expandedPaths), entry.path],
++        );
++        if (!directories.has(entry.path)) {
++          void requestDirectoryListing(entry.path, {
++            recordHistory: false,
++            setCurrentPath: false,
++          });
+         }
+-        return next;
+-      });
+-
+-      if (nextExpanded && !directories.has(entry.path)) {
+-        void requestDirectoryListing(entry.path, {
+-          recordHistory: false,
+-          setCurrentPath: false,

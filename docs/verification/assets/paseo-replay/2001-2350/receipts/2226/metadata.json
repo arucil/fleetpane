@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2226,
+  "revision": "ce779476544facd5e5dfc5d82d79566b888a8dd7",
+  "date": "2026-04-09T09:45:51+07:00",
+  "committer_date": "2026-04-09T18:56:02+07:00",
+  "parents": [
+    "0f0bfb551c009fdde799e8a63eae11b27bbe7edd"
+  ],
+  "subject": "fix(app): wrap daemon settings section in React Query with loading state",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/hooks/use-daemon-status.ts"
+  ],
+  "source_receipt_digest": "sha256:d745a797e424191d056da154dd4b7d316369474a269155aa90d96da9d6455cfc",
+  "diff_tree_digest": "sha256:10abc20ed0c02607f4adffc3980f1702224ee80c6dd3762225bb1d4c644107d6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-updates-section.tsx",
+      "old_lines": [
+        279,
+        292
+      ],
+      "new_lines": [
+        255,
+        272
+      ],
+      "diff_block_lines": [
+        121,
+        150
+      ],
+      "hunk_header": "@@ -278,124 +254,136 @@ export function LocalDaemonSection({ appVersion, showLifecycleControls }: LocalD",
+      "substantive_changed_lines": 28
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 285,
+  "receipt_file": "receipts/2226/selected.patch"
+}

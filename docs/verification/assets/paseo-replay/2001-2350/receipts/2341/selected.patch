@@ -1,0 +1,32 @@
+FILE scripts/sync-release-notes-from-changelog.mjs
+RANGE {"path":"scripts/sync-release-notes-from-changelog.mjs","old_lines":[180,185],"new_lines":[180,206],"diff_block_lines":[7,36],"hunk_header":"@@ -179,9 +179,30 @@ function main() {","substantive_changed_lines":21}
+ 
++  const editArgs = ["release", "edit", targetTag, "--repo", args.repo, "--notes-file", notesPath];
++  const createArgs = [
++    "release",
++    "create",
++    targetTag,
++    "--repo",
++    args.repo,
++    "--title",
++    `Paseo ${targetTag}`,
++    "--notes-file",
++    notesPath,
++    "--verify-tag",
++    ...(parseReleaseVersion(releaseInfo.version).isPrerelease ? ["--prerelease"] : []),
++  ];
++
+   try {
+     if (hasRelease(targetTag, args.repo)) {
+-      runGh(["release", "edit", targetTag, "--repo", args.repo, "--notes-file", notesPath]);
+-      console.log(`Updated release notes for ${targetTag}.`);
+-      return;
++      try {
++        runGh(editArgs);
++        console.log(`Updated release notes for ${targetTag}.`);
++        return;
++      } catch {
++        console.warn(
++          `Edit failed for ${targetTag} (release may have been recreated by another workflow); falling through to create.`,
++        );
++      }

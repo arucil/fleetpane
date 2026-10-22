@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2264,
+  "revision": "2683dae5f96c611a957202a4d7023ff97689ed12",
+  "date": "2026-04-09T19:42:59+07:00",
+  "committer_date": "2026-04-10T09:53:38+07:00",
+  "parents": [
+    "914a5dc6ae6584a0ec7b1833630e00b3c54ca32a"
+  ],
+  "subject": "Auto-download desktop updates before prompting",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/updates/desktop-updates.ts",
+    "M\tpackages/app/src/desktop/updates/update-banner.tsx",
+    "M\tpackages/app/src/desktop/updates/use-desktop-app-updater.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/desktop/src/features/auto-updater.ts"
+  ],
+  "source_receipt_digest": "sha256:46d722d9edf84e7253837e65dcbe5d59e898f7dd3d310f65a7a12e3f399780dc",
+  "diff_tree_digest": "sha256:62798319e6dfd16e7381020871b5c8969e546c1f56ad002ecafe4a84a06dbdc4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/features/auto-updater.ts",
+      "old_lines": [
+        40,
+        40
+      ],
+      "new_lines": [
+        49,
+        78
+      ],
+      "diff_block_lines": [
+        36,
+        65
+      ],
+      "hunk_header": "@@ -32,10 +35,73 @@ let downloading = false;",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 144,
+  "receipt_file": "receipts/2264/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/composer.tsx
+RANGE {"path":"packages/app/src/components/composer.tsx","old_lines":[0,0],"new_lines":[92,121],"diff_block_lines":[98,127],"hunk_header":"@@ -0,0 +1,843 @@","substantive_changed_lines":13}
++
++export function Composer({
++  agentId,
++  serverId,
++  isInputActive,
++  onSubmitMessage,
++  allowEmptySubmit = false,
++  isSubmitLoading = false,
++  blurOnSubmit = false,
++  value,
++  onChangeText,
++  images,
++  onChangeImages,
++  clearDraft,
++  autoFocus = false,
++  onAddImages,
++  commandDraftConfig,
++  onMessageSent,
++  onComposerHeightChange,
++  onAttentionInputFocus,
++  onAttentionPromptSend,
++  statusControls,
++}: ComposerProps) {
++  markScrollInvestigationRender(`Composer:${serverId}:${agentId}`);
++  const { theme } = useUnistyles();
++  const buttonIconSize = Platform.OS === "web" ? theme.iconSize.md : theme.iconSize.lg;
++  const insets = useSafeAreaInsets();
++  const client = useHostRuntimeClient(serverId);
++  const isConnected = useHostRuntimeIsConnected(serverId);
++  const agentDirectoryStatus = useHostRuntimeAgentDirectoryStatus(serverId);

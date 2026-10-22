@@ -1,0 +1,16 @@
+FILE packages/server/src/server/session.workspaces.test.ts
+RANGE {"path":"packages/server/src/server/session.workspaces.test.ts","old_lines":[1243,1254],"new_lines":[1245,1251],"diff_block_lines":[27,40],"hunk_header":"@@ -1241,14 +1243,9 @@ describe(\"workspace aggregation\", () => {","substantive_changed_lines":8}
+-    expect(workspaceUpdates).toHaveLength(3);
+-    expect(workspaceUpdates.map((entry) => entry.payload.kind)).toEqual([
+-      "upsert",
+-      "upsert",
+-      "upsert",
+-    ]);
++    expect(workspaceUpdates).toHaveLength(2);
++    expect(workspaceUpdates.map((entry) => entry.payload.kind)).toEqual(["upsert", "upsert"]);
+     expect(workspaceUpdates.map((entry) => entry.payload.workspace.id).sort()).toEqual([
+       "/tmp/repo",
+       "/tmp/repo/worktree",
+-      "/tmp/repo/worktree",
+     ]);
+   });

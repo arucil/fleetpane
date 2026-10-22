@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2239,
+  "revision": "931d3ba81fa773f01d82cad35b271530a4528914",
+  "date": "2026-04-08T18:55:56+07:00",
+  "committer_date": "2026-04-08T18:55:56+07:00",
+  "parents": [
+    "6a4f43954133ce901e63e68c9d9e972b1aaa8140"
+  ],
+  "subject": "fix: log bootstrap errors to daemon.log and add layout debug logging",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/index.ts"
+  ],
+  "source_receipt_digest": "sha256:66c68582f48ea3cccbbf42b46ee65562712c3ef0376bd2687b2882370c2b96e9",
+  "diff_tree_digest": "sha256:37d5c9d0d1847bf03f9defc10e6669a6b3adee6bcc52e2212e16a0c952932f26",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        122,
+        137
+      ],
+      "new_lines": [
+        122,
+        136
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -121,19 +121,26 @@ import { resolveVoiceMcpBridgeFromRuntime } from \"./voice-mcp-bridge-command.js\"",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 78,
+  "receipt_file": "receipts/2239/selected.patch"
+}

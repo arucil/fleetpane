@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2253,
+  "revision": "602b54874599c918e63af5500cb14e349f55dfa7",
+  "date": "2026-04-09T04:26:53+02:00",
+  "committer_date": "2026-04-09T10:26:53+08:00",
+  "parents": [
+    "d98d5457edc06297559cffe6836233a197c63865"
+  ],
+  "subject": "feat(app): Add WebStorm editor target (#220)",
+  "diff_tree_paths": [
+    "A\tpackages/app/assets/images/editor-apps/webstorm.png",
+    "M\tpackages/app/src/components/icons/editor-app-icons.tsx",
+    "M\tpackages/app/src/hooks/use-preferred-editor.test.ts",
+    "M\tpackages/server/src/server/editor-targets.test.ts",
+    "M\tpackages/server/src/server/editor-targets.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "A\tpackages/server/src/shared/literal-union.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:1f1a66c2f0d1e49413b51302bc9bebfa7b2781f0485a499126ad1137f5ea8ef3",
+  "diff_tree_digest": "sha256:aaee34508dda7422b7998a29123382270ca4419e838610f405571296421b0a84",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        1107,
+        1108
+      ],
+      "new_lines": [
+        1118,
+        1127
+      ],
+      "diff_block_lines": [
+        33,
+        42
+      ],
+      "hunk_header": "@@ -1104,5 +1106,22 @@ export const EditorTargetIdSchema = z.enum([",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 130,
+  "receipt_file": "receipts/2253/selected.patch"
+}

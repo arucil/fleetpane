@@ -1,0 +1,9 @@
+FILE packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/sherpa/sherpa-tts.ts","old_lines":[96,100],"new_lines":[96,100],"diff_block_lines":[5,11],"hunk_header":"@@ -96,5 +96,5 @@ export class SherpaOnnxTTS implements TextToSpeechProvider {","substantive_changed_lines":2}
+@@ -96,5 +96,5 @@ export class SherpaOnnxTTS implements TextToSpeechProvider {
+ 
+     const audio = this.tts.generate({ text: trimmed, sid: this.speakerId, speed: this.speed });
+-    const samples: Float32Array | null =
++    const rawSamples: Float32Array | null =
+       audio && audio.samples instanceof Float32Array
+         ? audio.samples

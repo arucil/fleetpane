@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2134,
+  "revision": "ce821afd27506d682c929424b4591f9f9a670ed8",
+  "date": "2026-04-02T15:28:45+07:00",
+  "committer_date": "2026-04-05T22:26:45+07:00",
+  "parents": [
+    "cc6b0f80be1ff9dd309bfdfb900aebf3a8f4f22a"
+  ],
+  "subject": "fix: harden migration/reconciliation and fix legacy import project grouping",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/db/db-project-registry.ts",
+    "M\tpackages/server/src/server/db/db-workspace-registry.ts",
+    "M\tpackages/server/src/server/db/legacy-agent-snapshot-import.ts",
+    "A\tpackages/server/src/server/db/legacy-import-real-data.adhoc.test.ts",
+    "M\tpackages/server/src/server/db/legacy-project-workspace-import.ts"
+  ],
+  "source_receipt_digest": "sha256:7b4ade631623d748debaa2efa330909d64ca5003409ee742171ab6f1b9efba18",
+  "diff_tree_digest": "sha256:681b8d671766079420916661dfc47704d9753761be2a66c54ca34bd1c8c9a858",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/db/legacy-agent-snapshot-import.ts",
+      "old_lines": [
+        90,
+        100
+      ],
+      "new_lines": [
+        98,
+        120
+      ],
+      "diff_block_lines": [
+        35,
+        64
+      ],
+      "hunk_header": "@@ -88,15 +96,28 @@ export async function importLegacyAgentSnapshots(options: {",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 225,
+  "receipt_file": "receipts/2134/selected.patch"
+}

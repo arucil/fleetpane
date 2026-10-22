@@ -1,0 +1,12 @@
+FILE packages/desktop/package.json
+RANGE {"path":"packages/desktop/package.json","old_lines":[6,12],"new_lines":[6,13],"diff_block_lines":[5,14],"hunk_header":"@@ -6,7 +6,8 @@","substantive_changed_lines":3}
+@@ -6,7 +6,8 @@
+   "main": "dist/main.js",
+   "scripts": {
+-    "build": "npm --prefix ../.. run build:daemon && npm run build:main && electron-builder --config electron-builder.yml",
++    "build": "npm --prefix ../.. run build:daemon && npm run build:main && npm run rebuild-native && electron-builder --config electron-builder.yml",
+     "build:main": "tsc -p tsconfig.json",
+     "dev": "./scripts/dev.sh",
++    "rebuild-native": "electron-rebuild -m ../.. -o better-sqlite3",
+     "test": "vitest run",
+     "typecheck": "tsc --noEmit -p tsconfig.json"

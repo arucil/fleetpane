@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2244,
+  "revision": "5eb8b300a39b5076f6eb532cd54e81ce174ab548",
+  "date": "2026-04-08T19:37:14+07:00",
+  "committer_date": "2026-04-08T19:37:30+07:00",
+  "parents": [
+    "6c9a83290624734c3d3deca4f002c5375c8ee68a"
+  ],
+  "subject": "fix(ci): prevent duplicate GitHub releases in desktop workflow",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:7fb64f4b8d1d9a8ea17e9cef59e371c1aed46425e7987a23dfd380880e1f5bb3",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        38,
+        38
+      ],
+      "new_lines": [
+        38,
+        67
+      ],
+      "diff_block_lines": [
+        8,
+        37
+      ],
+      "hunk_header": "@@ -36,6 +36,41 @@ env:",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 36,
+  "receipt_file": "receipts/2244/selected.patch"
+}

@@ -1,0 +1,27 @@
+FILE packages/server/src/utils/string-command-shell.ts
+RANGE {"path":"packages/server/src/utils/string-command-shell.ts","old_lines":[0,0],"new_lines":[10,34],"diff_block_lines":[16,40],"hunk_header":"@@ -0,0 +1,34 @@","substantive_changed_lines":17}
++
++export function buildStringCommandShellInvocation(
++  options: BuildStringCommandShellInvocationOptions,
++): StringCommandShellInvocation {
++  const platform = options.platform ?? process.platform;
++
++  if (platform === "win32") {
++    return {
++      shell: "powershell",
++      args: [
++        "-NoProfile",
++        "-NonInteractive",
++        "-ExecutionPolicy",
++        "Bypass",
++        "-Command",
++        options.command,
++      ],
++    };
++  }
++
++  return {
++    shell: "/bin/bash",
++    args: ["-lc", options.command],
++  };
++}

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2061,
+  "revision": "29037abd541acf0fca33d3aa306977c89b5d8511",
+  "date": "2026-04-03T19:43:56+07:00",
+  "committer_date": "2026-04-03T19:43:56+07:00",
+  "parents": [
+    "23ffec50723613e64cad8e588302c41018f2d5b7"
+  ],
+  "subject": "feat(desktop): auto-restart desktop-managed daemon on version mismatch",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/desktop/daemon/desktop-daemon.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/src/server/pid-lock.ts"
+  ],
+  "source_receipt_digest": "sha256:989684073ca82ce4abd9054299e53dd6bb7d4e02d91c914d7892329760eab84a",
+  "diff_tree_digest": "sha256:a75c74ef1b3b914eeb55390121cd1219aaa579c32b60b4775665e8ab362cf0b7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/daemon-manager.ts",
+      "old_lines": [
+        235,
+        261
+      ],
+      "new_lines": [
+        192,
+        196
+      ],
+      "diff_block_lines": [
+        87,
+        116
+      ],
+      "hunk_header": "@@ -227,53 +189,62 @@ function resolveDesktopAppVersion(): string {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 152,
+  "receipt_file": "receipts/2061/selected.patch"
+}

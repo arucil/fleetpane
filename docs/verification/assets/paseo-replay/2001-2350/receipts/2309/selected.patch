@@ -1,0 +1,9 @@
+FILE packages/app/src/components/ui/combobox.tsx
+RANGE {"path":"packages/app/src/components/ui/combobox.tsx","old_lines":[323,327],"new_lines":[323,327],"diff_block_lines":[5,11],"hunk_header":"@@ -323,5 +323,5 @@ export function Combobox({","substantive_changed_lines":2}
+@@ -323,5 +323,5 @@ export function Combobox({
+   const middleware = useMemo(
+     () => [
+-      floatingOffset(Platform.OS === "web" ? 0 : 4),
++      floatingOffset(Platform.OS === "web" ? 5 : 4),
+       ...(Platform.OS === "web" ? [] : [flip({ padding: collisionPadding })]),
+       ...(isDesktopAboveSearch ? [] : [shift({ padding: collisionPadding })]),

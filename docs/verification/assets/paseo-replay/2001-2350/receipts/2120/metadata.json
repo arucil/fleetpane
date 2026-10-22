@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2120,
+  "revision": "2dd597f5f51bcfc649b058be1db99f9b110a708f",
+  "date": "2026-04-05T13:05:54+07:00",
+  "committer_date": "2026-04-05T13:05:54+07:00",
+  "parents": [
+    "fcfb9c99da2c6f05432d5f60f75d9076e6284356"
+  ],
+  "subject": "Harden SQLite migration and apply post-merge fixes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/server/db/legacy-agent-snapshot-import.test.ts",
+    "M\tpackages/server/src/server/db/legacy-agent-snapshot-import.ts",
+    "M\tpackages/server/src/server/db/legacy-project-workspace-import.test.ts",
+    "M\tpackages/server/src/server/db/legacy-project-workspace-import.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:dd0c1f5640fa1d9b70b3a0247bb361b4f0206faa5c3e63ed17027fab6c5b4e03",
+  "diff_tree_digest": "sha256:63bc02feccdcd818202cf23a4301257624d5b4279718eabe4732f376e095e10e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/db/legacy-project-workspace-import.ts",
+      "old_lines": [
+        173,
+        173
+      ],
+      "new_lines": [
+        223,
+        252
+      ],
+      "diff_block_lines": [
+        126,
+        155
+      ],
+      "hunk_header": "@@ -171,2 +221,33 @@ async function hasAnyProjectWorkspaceRows(db: PaseoDatabaseHandle[\"db\"]): Promis",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 303,
+  "receipt_file": "receipts/2120/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/db/legacy-agent-snapshot-import.ts
+RANGE {"path":"packages/server/src/server/db/legacy-agent-snapshot-import.ts","old_lines":[90,100],"new_lines":[98,120],"diff_block_lines":[35,64],"hunk_header":"@@ -88,15 +96,28 @@ export async function importLegacyAgentSnapshots(options: {","substantive_changed_lines":24}
+-      const displayName =
+-        normalizedDirectory.split(/[\\/]/).filter(Boolean).at(-1) ?? normalizedDirectory;
+-      let projectId = projectIdsByDirectory.get(normalizedDirectory);
++      const gitInfo = detectGitInfoForCwd(record.cwd);
++      const resolvedDirectory = gitInfo?.toplevel
++        ? normalizeWorkspaceId(gitInfo.toplevel)
++        : normalizedDirectory;
++      const projectDisplayName = gitInfo?.metadata.projectDisplayName
++        ?? resolvedDirectory.split(/[\\/]/).filter(Boolean).at(-1)
++        ?? resolvedDirectory;
++      const projectKind = gitInfo?.metadata.projectKind ?? "directory";
++      const gitRemote = gitInfo?.metadata.gitRemote ?? null;
++      const workspaceKind = gitInfo?.metadata.isWorktree ? "worktree" : "checkout";
++      const workspaceDisplayName = gitInfo?.metadata.workspaceDisplayName
++        ?? normalizedDirectory.split(/[\\/]/).filter(Boolean).at(-1)
++        ?? normalizedDirectory;
++
++      let projectId = projectIdsByDirectory.get(resolvedDirectory)
++        ?? (gitRemote !== null ? projectIdsByRemote.get(gitRemote) : undefined);
+       if (projectId === undefined) {
+         const projectRow = tx
+           .insert(projects)
+           .values({
+-            directory: normalizedDirectory,
+-            displayName,
+-            kind: "directory",
+-            gitRemote: null,
++            directory: resolvedDirectory,
++            displayName: projectDisplayName,
++            kind: projectKind,

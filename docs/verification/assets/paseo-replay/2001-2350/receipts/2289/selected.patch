@@ -1,0 +1,15 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[636,648],"new_lines":[636,638],"diff_block_lines":[7,19],"hunk_header":"@@ -635,14 +635,4 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":7}
+       },
+-      getBinaryBufferedAmount: () => {
+-        if (!connection) {
+-          return 0;
+-        }
+-        let bufferedAmount = 0;
+-        for (const socket of connection.sockets) {
+-          bufferedAmount = Math.max(bufferedAmount, socket.bufferedAmount ?? 0);
+-        }
+-        return bufferedAmount;
+-      },
+       onLifecycleIntent: (intent) => {
+         this.onLifecycleIntent?.(intent);

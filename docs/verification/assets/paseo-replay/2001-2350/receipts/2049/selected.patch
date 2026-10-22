@@ -1,0 +1,32 @@
+FILE packages/app/src/keyboard/focus-scope.ts
+RANGE {"path":"packages/app/src/keyboard/focus-scope.ts","old_lines":[17,34],"new_lines":[50,69],"diff_block_lines":[57,86],"hunk_header":"@@ -16,21 +49,28 @@ export function resolveKeyboardFocusScope(input: {","substantive_changed_lines":18}
+     commandCenterOpen &&
+-    (target.closest("[data-testid='command-center-panel']") ||
+-      target.closest("[data-testid='command-center-input']"))
++    candidates.some((element) =>
++      Boolean(
++        element.closest("[data-testid='command-center-panel']") ||
++          element.closest("[data-testid='command-center-input']"),
++      ),
++    )
+   ) {
+     return "command-center";
+   }
+ 
+-  if (target.closest("[data-testid='message-input-root']")) {
++  if (candidates.some((element) => Boolean(element.closest("[data-testid='message-input-root']")))) {
+     return "message-input";
+   }
+ 
+-  const editable = target as HTMLElement;
+-  if (editable.isContentEditable) {
+-    return commandCenterOpen ? "command-center" : "editable";
+-  }
+-
+-  const tag = target.tagName.toLowerCase();
+-  if (tag === "input" || tag === "textarea" || tag === "select") {
++  if (
++    candidates.some((element) => {
++      const editable = element as HTMLElement;
++      if (editable.isContentEditable) {
++        return true;

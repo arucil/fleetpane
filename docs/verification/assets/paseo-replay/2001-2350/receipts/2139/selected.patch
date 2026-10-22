@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-archive-agent.ts
+RANGE {"path":"packages/app/src/hooks/use-archive-agent.ts","old_lines":[113,113],"new_lines":[123,152],"diff_block_lines":[22,51],"hunk_header":"@@ -112,4 +122,68 @@ function removeAgentFromCachedLists(queryClient: QueryClient, input: ArchiveAgen","substantive_changed_lines":20}
+ 
++function getStoredAgentSnapshot(input: ArchiveAgentInput) {
++  return useSessionStore.getState().sessions[input.serverId]?.agents.get(input.agentId);
++}
++
++function restoreAgentSnapshot(
++  input: ArchiveAgentInput & { agent: ReturnType<typeof getStoredAgentSnapshot> },
++): void {
++  const setAgents = useSessionStore.getState().setAgents;
++  setAgents(input.serverId, (prev) => {
++    const hasAgent = prev.has(input.agentId);
++    if (!input.agent) {
++      if (!hasAgent) {
++        return prev;
++      }
++      const next = new Map(prev);
++      next.delete(input.agentId);
++      return next;
++    }
++
++    const current = prev.get(input.agentId);
++    if (current === input.agent) {
++      return prev;
++    }
++
++    const next = new Map(prev);
++    next.set(input.agentId, input.agent);
++    return next;
++  });
++}

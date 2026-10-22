@@ -1,0 +1,77 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 2204,
+  "revision": "666d3fe807f00de9fbbb24a732ad68c597eab799",
+  "date": "2026-04-08T11:54:46+07:00",
+  "committer_date": "2026-04-08T11:54:46+07:00",
+  "parents": [
+    "65f8823e4e597dedbd36c9b9e72179a832dfe9b9",
+    "ac5e6df6c938f1db1bf2be500592491ea147d9fd"
+  ],
+  "subject": "Merge remote-tracking branch 'origin/main' into merge/main-into-dev",
+  "diff_tree_paths": [
+    "M\tCHANGELOG.md",
+    "M\tdocs/RELEASE.md",
+    "M\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/components/stream-strategy-native.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/cli/package.json",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/expo-two-way-audio/package.json",
+    "M\tpackages/highlight/package.json",
+    "M\tpackages/relay/package.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/provider-snapshot-manager.test.ts",
+    "M\tpackages/server/src/server/agent/provider-snapshot-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/silero-vad-session.ts",
+    "M\tpackages/server/src/server/speech/turn-detection-provider.ts",
+    "M\tpackages/server/src/server/voice-config.ts",
+    "M\tpackages/server/src/server/voice/voice-turn-controller.test.ts",
+    "M\tpackages/server/src/server/voice/voice-turn-controller.ts",
+    "M\tpackages/website/package.json",
+    "M\tpackages/website/src/routes/__root.tsx",
+    "M\tpackages/website/src/routes/index.tsx"
+  ],
+  "source_receipt_digest": "sha256:2de5ecb38d1b52b24fe7acb8ee006df3f553280660e2e0a418e672f10943ca5e",
+  "diff_tree_digest": "sha256:0cef33b6d39b23646f094e249bf4b9fb4f784a07604b95138c284698269bb8b0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/git-diff-pane.tsx",
+      "old_lines": [
+        140,
+        140
+      ],
+      "new_lines": [
+        140,
+        169
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -139,4 +139,94 @@ interface DiffFileSectionProps {",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 1067,
+  "receipt_file": "receipts/2204/selected.patch"
+}

@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2079,
+  "revision": "42cfed514cfc697d1932ca24975badb746469286",
+  "date": "2026-04-04T14:25:20+07:00",
+  "committer_date": "2026-04-04T15:25:20+08:00",
+  "parents": [
+    "99114ddd1196755d05ade0bc1ac7c9cc6ee3d936"
+  ],
+  "subject": "feat: add provider-declared features system with Codex fast mode (#186)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/utils/agent-snapshots.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "A\tpackages/server/src/server/agent/providers/codex-app-server-agent.features.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/persistence-hooks.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/shared/agent-feature-schemas.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:86ce9b1ae08fc29b5696800944adb7ae4a2212d17fbe2c158b651d74c6349496",
+  "diff_tree_digest": "sha256:449ba19ba959dfac23cf935223ba923139df9ab0e15ab5c25eff009b70ee8b7b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        409,
+        409
+      ],
+      "new_lines": [
+        422,
+        451
+      ],
+      "diff_block_lines": [
+        54,
+        83
+      ],
+      "hunk_header": "@@ -408,4 +421,104 @@ function ControlledStatusBar({",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 744,
+  "receipt_file": "receipts/2079/selected.patch"
+}

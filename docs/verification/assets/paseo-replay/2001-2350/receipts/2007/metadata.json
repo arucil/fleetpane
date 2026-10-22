@@ -1,0 +1,66 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2007,
+  "revision": "59cb4d7499515c35cdb3f198059fb302b2fe3ddd",
+  "date": "2026-04-01T22:58:59+07:00",
+  "committer_date": "2026-04-01T22:58:59+07:00",
+  "parents": [
+    "d75dd337737cd070ba0c152cb5d8d262f6f8ae0b"
+  ],
+  "subject": "fix: resolve type errors and test failures from branch integration",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/src/components/workspace-hover-card.tsx",
+    "M\tpackages/app/src/contexts/session-context.service-status.test.ts",
+    "M\tpackages/app/src/desktop/permissions/desktop-permissions.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-input-draft.test.ts",
+    "M\tpackages/app/src/hooks/use-archive-agent.test.ts",
+    "M\tpackages/app/src/hooks/use-open-project.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/stores/provider-recency-store.test.ts",
+    "M\tpackages/app/src/stores/session-store.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "A\tpackages/app/src/types/xterm-addon-ligatures.d.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.test.ts",
+    "M\tpackages/app/src/utils/tool-call-display.test.ts",
+    "M\tpackages/app/src/utils/workspace-execution.test.ts",
+    "M\tpackages/app/src/utils/workspace-navigation.test.ts",
+    "M\tpackages/app/src/voice/voice-runtime.test.ts",
+    "M\tpackages/app/src/voice/voice-runtime.ts",
+    "M\tpackages/server/src/server/dictation/dictation-stream-manager.test.ts",
+    "M\tpackages/server/src/server/service-health-monitor.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/worktree-session.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/shared/messages.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:04d6a151aadd7a29c44336c96bce8f1cc57ad9649254724c142cd505bbb218b6",
+  "diff_tree_digest": "sha256:7e4713d7bbe0f5673c238a3e9dd9ad58d8a1194cd0c17afe0fc04965a6e60893",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/voice/voice-runtime.ts",
+      "old_lines": [
+        1062,
+        1067
+      ],
+      "new_lines": [
+        1065,
+        1076
+      ],
+      "diff_block_lines": [
+        20,
+        33
+      ],
+      "hunk_header": "@@ -1061,7 +1064,13 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 479,
+  "receipt_file": "receipts/2007/selected.patch"
+}

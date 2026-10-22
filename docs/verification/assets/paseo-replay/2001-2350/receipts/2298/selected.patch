@@ -1,0 +1,28 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[181,188],"new_lines":[160,181],"diff_block_lines":[89,114],"hunk_header":"@@ -180,9 +159,23 @@ export const LeftSidebar = memo(function LeftSidebar({","substantive_changed_lines":18}
+         label: daemon.label?.trim() || daemon.serverId,
+-        description: formatConnectionStatus(
+-          runtime.getSnapshot(daemon.serverId)?.connectionStatus ?? "connecting",
+-        ),
+       })),
+-    [daemons, runtime, runtimeConnectionStatusSignature],
++    [daemons],
++  );
++  const renderHostOption = useCallback(
++    ({ option, selected, active, onPress }: {
++      option: ComboboxOption;
++      selected: boolean;
++      active: boolean;
++      onPress: () => void;
++    }) => (
++      <HostSwitchOption
++        serverId={option.id}
++        label={option.label}
++        selected={selected}
++        active={active}
++        onPress={onPress}
++      />
++    ),
++    [],
+   );
+   const hostTriggerRef = useRef<View | null>(null);

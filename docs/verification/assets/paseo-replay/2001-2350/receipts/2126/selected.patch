@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[1129,1141],"new_lines":[1123,1139],"diff_block_lines":[84,113],"hunk_header":"@@ -1116,28 +1121,30 @@ export function DraftAgentStatusBar({","substantive_changed_lines":27}
+-      favoriteKeys={favoriteKeys}
+-      onToggleFavoriteModel={(provider, modelId) => {
+-        void updatePreferences(toggleFavoriteModel({ preferences, provider, modelId })).catch((error) => {
+-          console.warn("[DraftAgentStatusBar] toggle favorite model failed", error);
+-        });
+-      }}
+-      thinkingOptions={mappedThinkingOptions.length > 0 ? mappedThinkingOptions : undefined}
+-      selectedThinkingOptionId={effectiveSelectedThinkingOption}
+-      onSelectThinkingOption={onSelectThinkingOption}
+-      features={features}
+-      onSetFeature={onSetFeature}
+-      disabled={disabled}
+-    />
++    <>
++      <ControlledStatusBar
++        provider={selectedProvider}
++        providerDefinitions={providerDefinitions}
++        allProviderModels={allProviderModels}
++        modeOptions={mappedModeOptions}
++        selectedModeId={effectiveSelectedMode}
++        onSelectMode={onSelectMode}
++        modelOptions={modelOptions}
++        selectedModelId={selectedModel}
++        onSelectModel={(modelId) => onSelectModel(modelId)}
++        isModelLoading={isAllModelsLoading}
++        favoriteKeys={favoriteKeys}
++        onToggleFavoriteModel={(provider, modelId) => {
++          void updatePreferences(toggleFavoriteModel({ preferences, provider, modelId })).catch((error) => {
++            console.warn("[DraftAgentStatusBar] toggle favorite model failed", error);
++          });

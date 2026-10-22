@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2074,
+  "revision": "dcffe46f90be1eab561dce67513075f52604457d",
+  "date": "2026-04-04T12:22:54+07:00",
+  "committer_date": "2026-04-04T13:21:31+07:00",
+  "parents": [
+    "7b4b42068c74fe55ca7fb11d217313e7c1b9b3e0"
+  ],
+  "subject": "fix(server): increase agent creation timeout to 60s",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts"
+  ],
+  "source_receipt_digest": "sha256:dda8ba06a12c1eb5b6dddd5f444262346cbed10391d4bf800abba04800901bbb",
+  "diff_tree_digest": "sha256:4d5ebb51bbce074e620e3a26e404647db069a6fb506a49b19155738f82f4ba2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        1403,
+        1407
+      ],
+      "new_lines": [
+        1403,
+        1407
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -1403,5 +1403,5 @@ export class DaemonClient {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/2074/selected.patch"
+}

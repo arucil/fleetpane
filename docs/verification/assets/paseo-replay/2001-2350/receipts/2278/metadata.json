@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2278,
+  "revision": "8a9d738438077a2f8a5afcbac58931f3d6ce67cc",
+  "date": "2026-04-10T11:13:14+07:00",
+  "committer_date": "2026-04-10T11:13:14+07:00",
+  "parents": [
+    "1d41a50e1ff50b6569785328e9a91c77a3afb1dc"
+  ],
+  "subject": "Fix sync loader spinner showing for initializing (non-running) agents",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/sidebar-agent-state.test.ts",
+    "M\tpackages/app/src/utils/sidebar-agent-state.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:d017029d770bab51e892394a15a61054c0036040664eba1272ac2d8dba5c1134",
+  "diff_tree_digest": "sha256:2d62f59baff45afa63beb20f0136c3a1cc9ae4cf82c9596946c084658971aa3d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/sidebar-agent-state.ts",
+      "old_lines": [
+        22,
+        26
+      ],
+      "new_lines": [
+        22,
+        26
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -22,5 +22,5 @@ export function deriveSidebarStateBucket(input: {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 8,
+  "receipt_file": "receipts/2278/selected.patch"
+}

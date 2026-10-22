@@ -1,0 +1,21 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1416,1427],"new_lines":[1408,1421],"diff_block_lines":[34,52],"hunk_header":"@@ -1415,13 +1407,15 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":11}
+     },
+-    backgroundColor: theme.colors.surface1,
+   },
+   toggleButtonGroupStart: {
+-    borderRightWidth: 1,
+-    borderRightColor: theme.colors.border,
++    borderTopLeftRadius: theme.borderRadius.base,
++    borderBottomLeftRadius: theme.borderRadius.base,
++  },
++  toggleButtonGroupEnd: {
++    borderTopRightRadius: theme.borderRadius.base,
++    borderBottomRightRadius: theme.borderRadius.base,
+   },
+-  toggleButtonGroupEnd: {},
+   toggleButtonSelected: {
+-    backgroundColor: theme.colors.surface3,
++    backgroundColor: theme.colors.surface2,
+   },
+   expandAllButton: {

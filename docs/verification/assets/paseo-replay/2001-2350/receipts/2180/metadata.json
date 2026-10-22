@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2180,
+  "revision": "e06b691d5d4ea6559769eae1565c1d8a2152c5f8",
+  "date": "2026-04-07T15:03:29+07:00",
+  "committer_date": "2026-04-07T15:03:29+07:00",
+  "parents": [
+    "022eb33234d7be82a89e81ed364dcdb320416ce7"
+  ],
+  "subject": "feat: show remaining context window for Claude Code, Codex, and OpenCode",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "A\tpackages/app/src/components/context-window-meter.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/ui/tooltip.tsx",
+    "M\tpackages/server/src/server/agent/agent-projections.test.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:1768d3704a4719409f78c54707d13ec84989adca46ddf70feb5670723f0d6877",
+  "diff_tree_digest": "sha256:441607e6adf6d2fb1e76a2c4f7808072bec0cad79d8825dc7f2921c8fa59224e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/context-window-meter.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        16,
+        45
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -0,0 +1,153 @@",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 1022,
+  "receipt_file": "receipts/2180/selected.patch"
+}

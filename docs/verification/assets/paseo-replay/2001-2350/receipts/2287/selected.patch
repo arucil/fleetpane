@@ -1,0 +1,15 @@
+FILE packages/app/src/styles/theme.ts
+RANGE {"path":"packages/app/src/styles/theme.ts","old_lines":[108,109],"new_lines":[108,120],"diff_block_lines":[8,20],"hunk_header":"@@ -106,4 +106,15 @@ export const baseColors = {","substantive_changed_lines":6}
++// Diff stat colors — light uses muted tones, dark uses the brighter palette values
++const lightDiffColors = {
++  diffAddition: "#15803d", // green-700 — readable on white without screaming
++  diffDeletion: "#b91c1c", // red-700
++};
++
++const darkDiffColors = {
++  diffAddition: "#4ade80", // green-400
++  diffDeletion: "#ef4444", // red-500
++};
++
+ // Semantic color tokens - Layer-based system
+ const lightSemanticColors = {

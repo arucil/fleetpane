@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2103,
+  "revision": "744ca7a2bc744308fde3e51dc2ef2fc888b14843",
+  "date": "2026-04-04T21:12:34+07:00",
+  "committer_date": "2026-04-04T21:12:34+07:00",
+  "parents": [
+    "3110bae209406122e5371567ef66ce598a52bd47"
+  ],
+  "subject": "fix: send appVersion in probe client hello and update it on session resume",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:0785d823f73282f2803479ff2d1dd43b975098291b31977a38d47ad1fe046882",
+  "diff_tree_digest": "sha256:2b6cf7508eb86087a495cf063ed7e29577e76384483afdd8bd32cf3d648f1881",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        746,
+        749
+      ],
+      "new_lines": [
+        746,
+        754
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -746,4 +746,9 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/2103/selected.patch"
+}

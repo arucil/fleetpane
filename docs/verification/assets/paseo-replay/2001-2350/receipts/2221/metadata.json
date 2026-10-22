@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2221,
+  "revision": "9c8bc2e208d13d5c03f3b4e0c7bdddd475a0b0cf",
+  "date": "2026-04-09T00:24:58+07:00",
+  "committer_date": "2026-04-09T18:55:19+07:00",
+  "parents": [
+    "d69d5c92ce200603559b637a33c60a24198c8138"
+  ],
+  "subject": "Fix agent follow-up turns and wait lifecycle",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/providers/acp-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:bc0e0beceb7ee50438958da06ad72ac0918a9f594cb77d753941fa80924f9805",
+  "diff_tree_digest": "sha256:7e2c791ae01f594e32acd458bf793e50be4b846356a915a732c4f2a1116d556e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        2817,
+        2819
+      ],
+      "new_lines": [
+        2820,
+        2845
+      ],
+      "diff_block_lines": [
+        31,
+        56
+      ],
+      "hunk_header": "@@ -2816,4 +2819,27 @@ export class Session {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 123,
+  "receipt_file": "receipts/2221/selected.patch"
+}

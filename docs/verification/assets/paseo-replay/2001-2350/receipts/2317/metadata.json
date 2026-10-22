@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2317,
+  "revision": "6897a400e5fae1c54c70167765a2be28acd99041",
+  "date": "2026-04-11T13:02:22+07:00",
+  "committer_date": "2026-04-11T13:02:22+07:00",
+  "parents": [
+    "cff41d78abd446a33d47a12e4b0d04b6b95ee6b0"
+  ],
+  "subject": "Show Paseo logo and nice names for Paseo MCP tool calls",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/utils/tool-call-icon.ts",
+    "A\tpackages/server/src/server/agent/tool-name-normalization.test.ts",
+    "M\tpackages/server/src/server/agent/tool-name-normalization.ts",
+    "M\tpackages/server/src/shared/tool-call-display.test.ts",
+    "M\tpackages/server/src/shared/tool-call-display.ts"
+  ],
+  "source_receipt_digest": "sha256:4d2fb51794e27f5ca47d8ff23b05e2c8fd75815c887a983e322971f92c0aeef3",
+  "diff_tree_digest": "sha256:8a2d9e34d2d13b5f9f5539dca637c43d117dcd74105575aeffe2968afd2c894b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/tool-name-normalization.ts",
+      "old_lines": [
+        41,
+        41
+      ],
+      "new_lines": [
+        41,
+        70
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -40,4 +40,47 @@ export function isLikelyNamespacedToolName(name: string): boolean {",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 91,
+  "receipt_file": "receipts/2317/selected.patch"
+}

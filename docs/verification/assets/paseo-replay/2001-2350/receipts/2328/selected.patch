@@ -1,0 +1,27 @@
+FILE packages/app/src/stores/keyboard-shortcuts-store.ts
+RANGE {"path":"packages/app/src/stores/keyboard-shortcuts-store.ts","old_lines":[28,29],"new_lines":[31,55],"diff_block_lines":[23,47],"hunk_header":"@@ -25,5 +28,28 @@ interface KeyboardShortcutsState {","substantive_changed_lines":16}
++
++function updateBadgeTimer(
++  set: (partial: Partial<KeyboardShortcutsState>) => void,
++  get: () => KeyboardShortcutsState,
++) {
++  const { altDown, cmdOrCtrlDown } = get();
++  const modifierDown = altDown || cmdOrCtrlDown;
++
++  if (badgeTimer) {
++    clearTimeout(badgeTimer);
++    badgeTimer = null;
++  }
++
++  if (modifierDown) {
++    badgeTimer = setTimeout(() => {
++      set({ showShortcutBadges: true });
++    }, SHORTCUT_BADGE_DELAY_MS);
++  } else {
++    set({ showShortcutBadges: false });
++  }
++}
++
++export const useKeyboardShortcutsStore = create<KeyboardShortcutsState>((set, get) => ({
+   commandCenterOpen: false,
+   projectPickerOpen: false,

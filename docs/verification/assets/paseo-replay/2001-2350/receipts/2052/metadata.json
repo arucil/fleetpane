@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2052,
+  "revision": "a96f2d765230715a7d9e3402c617c144ac01fb0b",
+  "date": "2026-04-03T16:51:33+07:00",
+  "committer_date": "2026-04-03T16:53:14+07:00",
+  "parents": [
+    "44da0c67b2112c99344ed3bbf7e9e4b495b1f937"
+  ],
+  "subject": "fix(desktop): stop daemon before auto-update restart",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/features/auto-updater.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts"
+  ],
+  "source_receipt_digest": "sha256:97e7838f540fe657f806f46d9db2aeff54b0d00c082a498a9ea0472d02fe97cf",
+  "diff_tree_digest": "sha256:4067ad161e72f790faea6d00de6b09be7a7a5b2957a8f015e294d47f560f06de",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/daemon-manager.ts",
+      "old_lines": [
+        549,
+        553
+      ],
+      "new_lines": [
+        549,
+        555
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -549,5 +549,7 @@ export function createDaemonCommandHandlers(): Record<string, DesktopCommandHand",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/2052/selected.patch"
+}

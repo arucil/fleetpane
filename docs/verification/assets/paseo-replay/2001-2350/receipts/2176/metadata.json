@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2176,
+  "revision": "bdaa6b65aac0391d9c03123702c86742b4fc2e6e",
+  "date": "2026-04-07T13:22:58+07:00",
+  "committer_date": "2026-04-07T13:22:58+07:00",
+  "parents": [
+    "1900f4304913485aabab5248f1ac3cc32b823c44"
+  ],
+  "subject": "fix(app): fix garbled overlapping text in plan card markdown",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/plan-card.tsx"
+  ],
+  "source_receipt_digest": "sha256:ca6b96a9de4b1c4bd8f08d6f4839a62a0c1936603fbbb6cb29160d91dce43df6",
+  "diff_tree_digest": "sha256:58f90e2296df4fd6d1b6f393be39bf7ce352f010426680ce537a3ff634a0d1da",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/plan-card.tsx",
+      "old_lines": [
+        84,
+        85
+      ],
+      "new_lines": [
+        86,
+        93
+      ],
+      "diff_block_lines": [
+        15,
+        22
+      ],
+      "hunk_header": "@@ -79,7 +79,15 @@ function createPlanMarkdownRules() {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 10,
+  "receipt_file": "receipts/2176/selected.patch"
+}

@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2327,
+  "revision": "56512d852bac0e1f35470ac9c391bba2039bd135",
+  "date": "2026-04-12T10:40:14+07:00",
+  "committer_date": "2026-04-12T10:40:14+07:00",
+  "parents": [
+    "40e27f5a009759e39ce88b06fb5a32d2037eb7e2"
+  ],
+  "subject": "Run Biome formatter and add formatting guidance to CLAUDE.md",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/app/src/utils/__tests__/split-markdown-blocks.test.ts",
+    "M\tpackages/app/src/utils/split-markdown-blocks.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/workspace-git-service.test.ts",
+    "M\tpackages/server/src/server/workspace-git-service.ts"
+  ],
+  "source_receipt_digest": "sha256:1cc2d585bbbbf6af104ceb9302a76e7c3a6bcf0c36b34c1626753c4dec3ce1f1",
+  "diff_tree_digest": "sha256:4c55a162c03e3a4925d9b34482eb1daf6eac3ef6727ab61cb86ec997367af75c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/split-markdown-blocks.ts",
+      "old_lines": [
+        44,
+        51
+      ],
+      "new_lines": [
+        44,
+        48
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -44,8 +44,5 @@ export function splitMarkdownBlocks(text: string): string[] {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 98,
+  "receipt_file": "receipts/2327/selected.patch"
+}

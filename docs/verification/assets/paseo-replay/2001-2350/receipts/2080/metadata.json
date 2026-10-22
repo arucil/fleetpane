@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2080,
+  "revision": "3d3e327378059cd2e53f5668196dbf140252a2e1",
+  "date": "2026-04-04T14:30:25+07:00",
+  "committer_date": "2026-04-04T15:30:25+08:00",
+  "parents": [
+    "42cfed514cfc697d1932ca24975badb746469286"
+  ],
+  "subject": "feat(cli): support `paseo .` to open desktop app with project (#189)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/cli/src/commands/open.ts",
+    "M\tpackages/cli/src/index.ts",
+    "A\tpackages/cli/tests/32-open-project.test.ts",
+    "M\tpackages/desktop/bin/paseo",
+    "M\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/desktop/src/daemon/node-entrypoint-launcher.test.ts",
+    "M\tpackages/desktop/src/daemon/node-entrypoint-launcher.ts",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:40cd983d93fb806b161a24014ce2be3e01a4b209a7154e915a1b984a66c20b09",
+  "diff_tree_digest": "sha256:1e7d2ddbfaf1d2a8ef66cb10a83f12615a5c8efb34d4c706df68ebee2cdf53e1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        600,
+        600
+      ],
+      "new_lines": [
+        606,
+        635
+      ],
+      "diff_block_lines": [
+        29,
+        58
+      ],
+      "hunk_header": "@@ -598,4 +601,66 @@ function OfferLinkListener({",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 240,
+  "receipt_file": "receipts/2080/selected.patch"
+}

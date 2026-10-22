@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2123,
+  "revision": "809e5fbbdce7c0091ddf999d76be4a6de8ff1de8",
+  "date": "2026-04-05T14:53:10+07:00",
+  "committer_date": "2026-04-05T14:53:10+07:00",
+  "parents": [
+    "a264058a3057185f1a94daf3c72038fc1fce9833"
+  ],
+  "subject": "feat(app): Enter key confirms and sends dictation",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-action-dispatcher.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts"
+  ],
+  "source_receipt_digest": "sha256:76285cf21e833b6cce71bced996cf34cedc1f96d70d62f91a6ddf3f307934ca8",
+  "diff_tree_digest": "sha256:baba40492f50440f1161cb656c4fe704ca44753bc9f37249ce749e3d9578179c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        244,
+        252
+      ],
+      "new_lines": [
+        244,
+        261
+      ],
+      "diff_block_lines": [
+        14,
+        33
+      ],
+      "hunk_header": "@@ -243,10 +243,19 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 50,
+  "receipt_file": "receipts/2123/selected.patch"
+}

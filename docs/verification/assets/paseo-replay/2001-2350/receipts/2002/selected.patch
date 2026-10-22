@@ -1,0 +1,32 @@
+FILE packages/server/src/server/service-proxy.ts
+RANGE {"path":"packages/server/src/server/service-proxy.ts","old_lines":[0,0],"new_lines":[34,63],"diff_block_lines":[40,69],"hunk_header":"@@ -0,0 +1,262 @@","substantive_changed_lines":15}
++
++  addRoute(hostname: string, port: number): void {
++    this.routes.set(hostname, port);
++  }
++
++  removeRoute(hostname: string): void {
++    this.routes.delete(hostname);
++  }
++
++  removeRoutesForPort(port: number): void {
++    for (const [hostname, p] of this.routes) {
++      if (p === port) {
++        this.routes.delete(hostname);
++      }
++    }
++  }
++
++  findRoute(host: string): ServiceRoute | null {
++    // Strip port suffix from the Host header value
++    const hostname = host.replace(/:\d+$/, "");
++
++    // 1. Exact match
++    const exactPort = this.routes.get(hostname);
++    if (exactPort !== undefined) {
++      return { hostname, port: exactPort };
++    }
++
++    // 2. Subdomain match — walk up the labels looking for a registered parent
++    const parts = hostname.split(".");
++    for (let i = 1; i < parts.length; i++) {

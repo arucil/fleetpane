@@ -1,0 +1,16 @@
+FILE packages/app/src/screens/settings-screen.tsx
+RANGE {"path":"packages/app/src/screens/settings-screen.tsx","old_lines":[273,284],"new_lines":[267,274],"diff_block_lines":[32,45],"hunk_header":"@@ -272,13 +266,9 @@ function HostsSection(props: HostsSectionProps) {","substantive_changed_lines":8}
+         onScanQr={() => {
+-          const targetServerId = props.addConnectionTargetServerId;
+-          const source = targetServerId ? "editHost" : "settings";
+-          const sourceServerId = props.routeServerId || targetServerId || undefined;
++          const sourceServerId = props.routeServerId || undefined;
+           props.closeAddConnectionFlow();
+           router.push({
+             pathname: "/pair-scan",
+-            params: targetServerId
+-              ? { source, targetServerId, sourceServerId }
+-              : { source, sourceServerId },
++            params: { source: "settings", sourceServerId },
+           });
+         }}

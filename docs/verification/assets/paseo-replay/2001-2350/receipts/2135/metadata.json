@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2135,
+  "revision": "25213ce83abaa61df84a5c21fb81e1513303ceeb",
+  "date": "2026-04-02T15:43:58+07:00",
+  "committer_date": "2026-04-05T22:28:07+07:00",
+  "parents": [
+    "ce821afd27506d682c929424b4591f9f9a670ed8"
+  ],
+  "subject": "server: cache workspace shortstat and warm in background",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:be74f8dc56bf65da46ae93c7e4f3c13773eb3cd8b823690089e417a181c72f24",
+  "diff_tree_digest": "sha256:00c04e4f8b5630a193dd41268bbe4e1deda8f61d93c24569f94dbf9c9b1bd79c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1275,
+        1275
+      ],
+      "new_lines": [
+        1308,
+        1337
+      ],
+      "diff_block_lines": [
+        71,
+        100
+      ],
+      "hunk_header": "@@ -1274,4 +1307,54 @@ export async function getCheckoutShortstat(",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 77,
+  "receipt_file": "receipts/2135/selected.patch"
+}

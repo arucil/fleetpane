@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2251,
+  "revision": "6bf8da8087cb41c48148909130a7239a7f460ada",
+  "date": "2026-04-09T00:27:20+07:00",
+  "committer_date": "2026-04-09T00:27:20+07:00",
+  "parents": [
+    "d39414064ee136a5ea7940c1fc8e979cfb7f45d4"
+  ],
+  "subject": "Commit current desktop and CLI diff",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "A\tpackages/cli/tests/e2e/opencode-invalid-model.test.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/desktop/src/integrations/integrations-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:b52badb9cabd3233fd8f0bbf1582807945f42169ef0ce968cd2872311c7334e1",
+  "diff_tree_digest": "sha256:5a0dbe04f95214825f04a01176e00dba68e34dea5997026e6ca36f032ada0471",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/integrations/integrations-manager.ts",
+      "old_lines": [
+        202,
+        205
+      ],
+      "new_lines": [
+        202,
+        218
+      ],
+      "diff_block_lines": [
+        7,
+        24
+      ],
+      "hunk_header": "@@ -201,5 +201,18 @@ export async function installCli(): Promise<InstallStatus> {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 265,
+  "receipt_file": "receipts/2251/selected.patch"
+}

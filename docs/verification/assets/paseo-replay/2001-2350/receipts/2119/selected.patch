@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[250,256],"new_lines":[255,279],"diff_block_lines":[38,67],"hunk_header":"@@ -243,26 +246,51 @@ function HostRuntimeBootstrapProvider({ children }: { children: ReactNode }) {","substantive_changed_lines":21}
++          { type: "online" } | { type: "error"; error: string }
++        > => {
++          try {
++            const bootstrapResult = await store.bootstrapDesktop();
++            if (!bootstrapResult.ok) {
++              return { type: "error", error: bootstrapResult.error };
++            }
++            if (!cancelled && !raceSettled) {
++              setPhase("connecting");
++            }
++            await store.addConnectionFromListenAndWaitForOnline({
++              listenAddress: bootstrapResult.listenAddress,
++              serverId: bootstrapResult.serverId,
++              hostname: bootstrapResult.hostname,
++            });
++            return { type: "online" };
++          } catch (err) {
++            return {
++              type: "error",
++              error: err instanceof Error ? err.message : String(err),
++            };
+           }
+-          return;
+-        }
++        })();
+ 
+-        if (cancelled) {
+-          return;
+-        }
++        const result = await Promise.race([

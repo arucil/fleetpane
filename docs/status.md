@@ -1,5 +1,11 @@
 # Behavior status
 
+Provider choices now use native Kit search by name, ID and description. Duplicate
+labels retain separate IDs, stale leases are refused and exact drafts survive
+window replacement. [Linux fixture evidence](verification/2026-10-22-model-search.md)
+covers Codex and ACP, including 900×560. Live catalog refresh, favorites, creation
+defaults and installed-provider acceptance remain open.
+
 Native session sidebar widths now support Kit divider dragging and explicit
 Narrow/Widen/Reset controls, bounded beside the conversation. Per-Host hide/show,
 small windows, appearance switching and exact drafts have [Linux fixture

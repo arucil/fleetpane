@@ -1,0 +1,32 @@
+FILE packages/app/src/components/workspace-setup-dialog.tsx
+RANGE {"path":"packages/app/src/components/workspace-setup-dialog.tsx","old_lines":[276,294],"new_lines":[265,275],"diff_block_lines":[35,64],"hunk_header":"@@ -266,71 +263,44 @@ export function WorkspaceSetupDialog() {","substantive_changed_lines":28}
+-              disabled={pendingAction !== null}
+-              onPress={() => {
+-                setErrorMessage(null);
+-                setStep("chat");
+-              }}
+-            />
+-            <ChoiceCard
+-              title="Terminal"
+-              description="Create the workspace, then open a standalone terminal tab."
+-              Icon={SquareTerminal}
+-              disabled={pendingAction !== null}
+-              pending={pendingAction === "terminal"}
+-              onPress={() => {
+-                void handleCreateTerminal();
+-              }}
+-            />
+-          </View>
+-        </View>
+-      ) : null}
++      <View style={styles.section}>
++        <Composer
++          agentId={`workspace-setup:${serverId}:${sourceDirectory}`}
++          serverId={serverId}
++          isInputActive={true}
++          onSubmitMessage={handleCreateChatAgent}
++          isSubmitLoading={pendingAction === "chat"}
++          blurOnSubmit={true}
++          value={chatDraft.text}
++          onChangeText={chatDraft.setText}
++          images={chatDraft.images}

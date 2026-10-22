@@ -1,0 +1,15 @@
+FILE packages/app/src/utils/desktop-badge-state.ts
+RANGE {"path":"packages/app/src/utils/desktop-badge-state.ts","old_lines":[0,0],"new_lines":[4,16],"diff_block_lines":[10,22],"hunk_header":"@@ -0,0 +1,16 @@","substantive_changed_lines":9}
++
++export function isWorkspaceActionableForDesktopBadge(
++  status: DesktopBadgeWorkspaceStatus,
++): boolean {
++  return status === "attention" || status === "needs_input" || status === "failed";
++}
++
++export function deriveMacDockBadgeCountFromWorkspaceStatuses(
++  statuses: readonly DesktopBadgeWorkspaceStatus[],
++): number | undefined {
++  const actionableCount = statuses.filter(isWorkspaceActionableForDesktopBadge).length;
++  return actionableCount > 0 ? actionableCount : undefined;
++}

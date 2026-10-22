@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2238,
+  "revision": "4215120d7cc5393f08de1a9d623cd33bbd6abe88",
+  "date": "2026-04-10T09:50:46+07:00",
+  "committer_date": "2026-04-10T09:50:46+07:00",
+  "parents": [
+    "e6dec3fc1ada7ae7233edaa4648c521ac9c0f7a5"
+  ],
+  "subject": "Fix agent close persistence, whitespace diff filtering, and diff param cleanup",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-metadata-generator.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:8c78e0c027b82d204cecf4b6aad3e396436fa35e9cd3c7b1a58e4da1941db3be",
+  "diff_tree_digest": "sha256:cf1c50acd08867bfb70f722663826747f47439827a33968d2226af600a429384",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        2228,
+        2239
+      ],
+      "new_lines": [
+        2228,
+        2244
+      ],
+      "diff_block_lines": [
+        7,
+        27
+      ],
+      "hunk_header": "@@ -2227,13 +2227,18 @@ export class DaemonClient {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 33,
+  "receipt_file": "receipts/2238/selected.patch"
+}

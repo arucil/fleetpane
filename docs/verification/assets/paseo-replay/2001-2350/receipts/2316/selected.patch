@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/agent-management-mcp.ts
+RANGE {"path":"packages/server/src/server/agent/agent-management-mcp.ts","old_lines":[60,89],"new_lines":[78,78],"diff_block_lines":[55,84],"hunk_header":"@@ -54,158 +70,14 @@ export interface AgentManagementMcpOptions {","substantive_changed_lines":20}
+-const AgentProviderEnum = z.enum(
+-  AGENT_PROVIDER_DEFINITIONS.map((definition) => definition.id) as [
+-    AgentProvider,
+-    ...AgentProvider[],
+-  ],
+-);
+-
+-const AgentStatusEnum = z.enum(["initializing", "idle", "running", "error", "closed"]);
+-
+-// 50 seconds - surface friendly message before SDK tool timeout (~60s)
+-const AGENT_WAIT_TIMEOUT_MS = 50000;
+-
+-async function waitForAgentWithTimeout(
+-  agentManager: AgentManager,
+-  agentId: string,
+-  options?: {
+-    signal?: AbortSignal;
+-    waitForActive?: boolean;
+-  },
+-): Promise<WaitForAgentResult> {
+-  const timeoutController = new AbortController();
+-  const combinedController = new AbortController();
+-
+-  const timeoutId = setTimeout(() => {
+-    timeoutController.abort(new Error("wait timeout"));
+-  }, AGENT_WAIT_TIMEOUT_MS);
+-
+-  const forwardAbort = (reason: unknown) => {
+-    if (!combinedController.signal.aborted) {
+-      combinedController.abort(reason);

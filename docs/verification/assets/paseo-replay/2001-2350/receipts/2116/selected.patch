@@ -1,0 +1,21 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1369,1370],"new_lines":[1379,1397],"diff_block_lines":[63,81],"hunk_header":"@@ -1367,4 +1377,21 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":11}
++  const handleReloadAgent = useCallback(
++    async (agentId: string) => {
++      if (!client || !isConnected) {
++        toast.error("Host is not connected");
++        return;
++      }
++
++      try {
++        await client.refreshAgent(agentId);
++        toast.show("Reloaded agent", { variant: "success" });
++      } catch (error) {
++        toast.error(error instanceof Error ? error.message : "Failed to reload agent");
++      }
++    },
++    [client, isConnected, toast],
++  );
++
+   const handleCopyWorkspacePath = useCallback(async () => {
+     if (!isAbsolutePath(normalizedWorkspaceId)) {

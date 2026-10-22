@@ -1,0 +1,62 @@
+{
+  "response": "operation",
+  "data": {
+    "id": "7272a953-d807-46df-b41c-621e40dd015e",
+    "method": "acp/config/set",
+    "params": {
+      "configId": "model",
+      "threadId": "4898d229-5353-4a77-8d65-69d6622c0030",
+      "value": "model-a"
+    },
+    "outcome": {
+      "state": "finished",
+      "response": {
+        "id": "7272a953-d807-46df-b41c-621e40dd015e",
+        "result": {
+          "configOptions": [
+            {
+              "category": "model",
+              "currentValue": "model-a",
+              "id": "model",
+              "name": "Model",
+              "options": [
+                {
+                  "group": "synthetic",
+                  "name": "Synthetic",
+                  "options": [
+                    {
+                      "name": "Synthetic A",
+                      "value": "model-a"
+                    },
+                    {
+                      "name": "Synthetic B",
+                      "value": "model-b"
+                    }
+                  ]
+                }
+              ],
+              "type": "select"
+            },
+            {
+              "currentValue": "low",
+              "id": "reasoning_effort",
+              "name": "Reasoning effort",
+              "options": [
+                {
+                  "name": "Low",
+                  "value": "low"
+                },
+                {
+                  "name": "High",
+                  "value": "high"
+                }
+              ],
+              "type": "select"
+            }
+          ]
+        }
+      }
+    },
+    "completed_sequence": 25
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2057,
+  "revision": "4ca04fc6619d058122ee8ba169d42efedbaf40ca",
+  "date": "2026-04-03T18:13:54+07:00",
+  "committer_date": "2026-04-03T18:49:59+07:00",
+  "parents": [
+    "f924d33076ba926d342ab8a28118caad61d9597f"
+  ],
+  "subject": "feat(desktop): add daemon status dialog to built-in daemon settings",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "M\tpackages/app/src/desktop/daemon/desktop-daemon.ts",
+    "M\tpackages/cli/src/index.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts"
+  ],
+  "source_receipt_digest": "sha256:867ef10c59d1b2a497234bfc713443c72048af4d99047ebaacccc03fecfdd06f",
+  "diff_tree_digest": "sha256:0702d4ba00f2cb0ad85f4c5dae5f94f28d63de0e9b35977f9fe6cc93d0164741",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-updates-section.tsx",
+      "old_lines": [
+        317,
+        319
+      ],
+      "new_lines": [
+        322,
+        351
+      ],
+      "diff_block_lines": [
+        27,
+        56
+      ],
+      "hunk_header": "@@ -316,4 +321,31 @@ export function LocalDaemonSection({ appVersion, showLifecycleControls }: LocalD",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 82,
+  "receipt_file": "receipts/2057/selected.patch"
+}

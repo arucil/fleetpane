@@ -1,0 +1,32 @@
+FILE packages/server/src/server/worktree-session.ts
+RANGE {"path":"packages/server/src/server/worktree-session.ts","old_lines":[306,306],"new_lines":[339,368],"diff_block_lines":[75,104],"hunk_header":"@@ -305,4 +338,54 @@ export async function resolveGitCreateBaseBranch(","substantive_changed_lines":22}
+ 
++function resolveGitHubPrBranchName(
++  attachment: Extract<AgentAttachment, { type: "github_pr" }>,
++): string {
++  const trimmed = attachment.headRefName?.trim();
++  return trimmed && trimmed.length > 0 ? trimmed : `pr-${attachment.number}`;
++}
++
++async function fetchGitHubPrBranch(params: {
++  cwd: string;
++  branchName: string;
++  prNumber: number;
++}): Promise<void> {
++  await execFileAsync(
++    "git",
++    [
++      "fetch",
++      "origin",
++      `refs/pull/${params.prNumber}/head:refs/heads/${params.branchName}`,
++      "--force",
++    ],
++    { cwd: params.cwd },
++  );
++}
++
++async function createGitHubPrWorktree(params: {
++  cwd: string;
++  branchName: string;
++  baseBranch: string;
++  prNumber: number;

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2336,
+  "revision": "5aa98f13f2c29a4a47a414cae7a8706f49934f8f",
+  "date": "2026-04-12T12:53:54+07:00",
+  "committer_date": "2026-04-12T12:53:54+07:00",
+  "parents": [
+    "698a18e88f90b8b668e61868444f30a3937ad013"
+  ],
+  "subject": "fix: update workspace test stubs for emission dedup gating",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:2ccae86cc58bac950f4f981abc41aab402105d49478be4a063662214487223fe",
+  "diff_tree_digest": "sha256:d8ebfa14e7823c87b8e60da6b9853fc14e17c87ffe99b850a6508bc6f1fccc28",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.workspaces.test.ts",
+      "old_lines": [
+        1243,
+        1254
+      ],
+      "new_lines": [
+        1245,
+        1251
+      ],
+      "diff_block_lines": [
+        27,
+        40
+      ],
+      "hunk_header": "@@ -1241,14 +1243,9 @@ describe(\"workspace aggregation\", () => {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 15,
+  "receipt_file": "receipts/2336/selected.patch"
+}

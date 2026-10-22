@@ -1,0 +1,14 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[248,251],"new_lines":[261,271],"diff_block_lines":[40,51],"hunk_header":"@@ -248,4 +261,11 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":7}
+@@ -248,4 +261,11 @@ function WorkspaceStatusIndicator({
+ 
+   const dotColor = getStatusDotColor({ theme, bucket, showDoneAsInactive: false });
++  const statusDotSize = isEmphasizedStatusDotBucket(bucket)
++    ? EMPHASIZED_STATUS_DOT_SIZE
++    : DEFAULT_STATUS_DOT_SIZE;
++  const statusDotOffset =
++    statusDotSize === EMPHASIZED_STATUS_DOT_SIZE
++      ? EMPHASIZED_STATUS_DOT_OFFSET
++      : DEFAULT_STATUS_DOT_OFFSET;
+ 
+   return (

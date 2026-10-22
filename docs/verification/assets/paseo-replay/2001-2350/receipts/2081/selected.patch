@@ -1,0 +1,26 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5150,5151],"new_lines":[5180,5203],"diff_block_lines":[104,127],"hunk_header":"@@ -5148,4 +5174,30 @@ export class Session {","substantive_changed_lines":14}
++    const normalizedCwd = normalizePersistedWorkspaceId(cwd);
++    const exact = workspaces.find((workspace) => workspace.workspaceId === normalizedCwd);
++    if (exact) {
++      return exact.workspaceId;
++    }
++
++    let bestMatch: PersistedWorkspaceRecord | null = null;
++    for (const workspace of workspaces) {
++      const prefix = workspace.workspaceId.endsWith(sep)
++        ? workspace.workspaceId
++        : `${workspace.workspaceId}${sep}`;
++      if (!normalizedCwd.startsWith(prefix)) {
++        continue;
++      }
++      if (!bestMatch || workspace.workspaceId.length > bestMatch.workspaceId.length) {
++        bestMatch = workspace;
++      }
++    }
++
++    return bestMatch?.workspaceId ?? normalizedCwd;
++  }
++
+   private async listWorkspaceDescriptors(): Promise<WorkspaceDescriptorPayload[]> {
+     await this.reconcileActiveWorkspaceRecords();

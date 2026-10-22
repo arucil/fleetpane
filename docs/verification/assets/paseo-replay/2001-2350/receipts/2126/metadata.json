@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2126,
+  "revision": "0d88ce22708b67b18bbf5bb40d9996de1af27f3e",
+  "date": "2026-04-05T15:32:13+07:00",
+  "committer_date": "2026-04-05T15:32:13+07:00",
+  "parents": [
+    "6907f6e71d296e604b6c4a3bb1a44ed261008bd7"
+  ],
+  "subject": "feat(app): provider system overhaul with model selector, diagnostics, and UX polish",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "A\tpackages/app/src/components/provider-diagnostic-sheet.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "A\tpackages/app/src/components/ui/status-badge.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "A\tpackages/server/src/server/agent/provider-snapshot-manager.test.ts",
+    "A\tpackages/server/src/server/agent/provider-snapshot-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/copilot-acp-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/diagnostic-utils.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/pi-acp-agent.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:451c485e8104a3eb97922ba0923ef69dcb46e88f482c6ae388d7b663653a39fd",
+  "diff_tree_digest": "sha256:70a55cba693f05ae3fffd1bdf30e6950f3d9cb4336ee07bfab36f122a90d0133",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        1129,
+        1141
+      ],
+      "new_lines": [
+        1123,
+        1139
+      ],
+      "diff_block_lines": [
+        84,
+        113
+      ],
+      "hunk_header": "@@ -1116,28 +1121,30 @@ export function DraftAgentStatusBar({",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 1618,
+  "receipt_file": "receipts/2126/selected.patch"
+}

@@ -1,0 +1,15 @@
+FILE packages/app/src/components/combined-model-selector.tsx
+RANGE {"path":"packages/app/src/components/combined-model-selector.tsx","old_lines":[543,551],"new_lines":[545,555],"diff_block_lines":[19,31],"hunk_header":"@@ -542,10 +544,12 @@ export function CombinedModelSelector({","substantive_changed_lines":6}
+       setView(singleProviderView ?? { kind: "all" });
+-      if (!open) {
++      if (open) {
++        onOpen?.();
++      } else {
+         setSearchQuery("");
+         onClose?.();
+       }
+     },
+-    [onClose, singleProviderView],
++    [onOpen, onClose, singleProviderView],
+   );
+ 

@@ -1,0 +1,61 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2044,
+  "revision": "5e1b24b217e814f8c5cabea90855b222f22285d8",
+  "date": "2026-04-04T15:37:16+07:00",
+  "committer_date": "2026-04-04T15:37:26+07:00",
+  "parents": [
+    "2ca7dd71e217e39c720b413726ad2eb8d0b0d3ce"
+  ],
+  "subject": "refactor(app): remove launcher tabs from workspace flow",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/adaptive-modal-sheet.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/components/composer.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/components/workspace-setup-dialog.tsx",
+    "M\tpackages/app/src/contexts/session-stream-reducers.test.ts",
+    "M\tpackages/app/src/contexts/session-stream-reducers.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-open-project.test.ts",
+    "M\tpackages/app/src/hooks/use-open-project.ts",
+    "A\tpackages/app/src/hooks/use-provider-models.ts",
+    "D\tpackages/app/src/panels/launcher-panel.tsx",
+    "M\tpackages/app/src/panels/register-panels.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "M\tpackages/app/src/stores/workspace-layout-actions.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-tabs-store.ts",
+    "M\tpackages/app/src/utils/workspace-tab-identity.ts",
+    "M\tscripts/dev.sh"
+  ],
+  "source_receipt_digest": "sha256:7dcba53f2016dc1d64546cd5a3e862da216a42824f5505cb9fdf069c6a4590c2",
+  "diff_tree_digest": "sha256:a18f1e99c849723e6403e1244385872bad52bbcf9fa3fbdf307a2c4dc861420e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        412,
+        441
+      ],
+      "new_lines": [
+        413,
+        413
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -410,73 +411,9 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 908,
+  "receipt_file": "receipts/2044/selected.patch"
+}

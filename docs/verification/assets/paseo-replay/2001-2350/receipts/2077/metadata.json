@@ -1,0 +1,50 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2077,
+  "revision": "e73c332e4f0828f69026752f9447ce767eed2f6f",
+  "date": "2026-04-04T13:20:46+07:00",
+  "committer_date": "2026-04-04T13:21:32+07:00",
+  "parents": [
+    "1594e416025c7af158880cc6532fab631549b049"
+  ],
+  "subject": "feat(desktop): add Integrations settings to install CLI and orchestration skills",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/components/integrations-section.tsx",
+    "M\tpackages/app/src/desktop/daemon/desktop-daemon.ts",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/settings/keyboard-shortcuts-section.tsx",
+    "M\tpackages/app/src/styles/settings.ts",
+    "M\tpackages/desktop/electron-builder.yml",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "A\tpackages/desktop/src/integrations/integrations-manager.ts",
+    "M\tpackages/website/src/routeTree.gen.ts",
+    "M\tpackages/website/src/routes/docs.tsx",
+    "A\tpackages/website/src/routes/docs/skills.tsx",
+    "M\tpackages/website/vite.config.ts"
+  ],
+  "source_receipt_digest": "sha256:92df70a851cbad313fb5dcc13e2a86f6ab0793be079ef3119a4f291e05110c39",
+  "diff_tree_digest": "sha256:dbf4bb0e4e85d426c1c1f1a5a0c9e08620d71d1af72f9fd4a32b4eac03424d47",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/integrations-section.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        20,
+        49
+      ],
+      "diff_block_lines": [
+        26,
+        55
+      ],
+      "hunk_header": "@@ -0,0 +1,189 @@",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 799,
+  "receipt_file": "receipts/2077/selected.patch"
+}

@@ -1,0 +1,31 @@
+FILE packages/app/src/components/workspace-hover-card.tsx
+RANGE {"path":"packages/app/src/components/workspace-hover-card.tsx","old_lines":[427,443],"new_lines":[351,371],"diff_block_lines":[199,227],"hunk_header":"@@ -413,31 +338,34 @@ function WorkspaceHoverCardContent({","substantive_changed_lines":20}
+-              <View style={styles.sectionList} testID="hover-card-service-list">
+-                {workspace.services.map((service) => {
+-                  const isRunning = service.lifecycle === "running";
+-                  const isLinkable = isRunning && !!service.url;
++              <View style={styles.sectionLabelRow}>
++                <Terminal size={12} color={theme.colors.foregroundMuted} />
++                <Text style={styles.sectionLabel}>Scripts</Text>
++              </View>
++              <View style={styles.sectionList} testID="hover-card-script-list">
++                {workspace.scripts.map((script) => {
++                  const isRunning = script.lifecycle === "running";
++                  const isLinkable = isRunning && !!script.url;
+                   return (
+                     <Pressable
+-                      key={service.hostname}
++                      key={script.hostname}
+                       accessibilityRole={isLinkable ? "link" : undefined}
+-                      accessibilityLabel={`${service.serviceName} service — ${isRunning ? getServiceHealthLabel(service.health) : "Stopped"}`}
+-                      testID={`hover-card-service-${service.serviceName}`}
++                      accessibilityLabel={`${script.scriptName} script — ${isRunning ? getScriptHealthLabel(script.health) : "Stopped"}`}
++                      testID={`hover-card-script-${script.scriptName}`}
+                       style={({ hovered }) => [
+                         styles.listRow,
+                         hovered && isLinkable && styles.listRowHovered,
+                       ]}
+-                      onPress={isLinkable ? () => void openExternalUrl(service.url!) : undefined}
++                      onPress={isLinkable ? () => void openExternalUrl(script.url!) : undefined}
+                       disabled={!isLinkable}
+                     >

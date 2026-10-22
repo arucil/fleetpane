@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[794,804],"new_lines":[794,813],"diff_block_lines":[43,72],"hunk_header":"@@ -793,14 +793,53 @@ function ProjectHeaderRow({","substantive_changed_lines":29}
+       </View>
+-      {canCreateWorktree ? (
+-        <NewWorktreeButton
+-          displayName={displayName}
+-          onPress={() => createWorktreeMutation.mutate()}
+-          visible={isHovered || isMobileBreakpoint}
+-          loading={createWorktreeMutation.isPending}
+-          showShortcutHint={isProjectActive}
+-          testID={`sidebar-project-new-worktree-${project.projectKey}`}
+-        />
+-      ) : null}
++      <View style={styles.projectTrailingActions}>
++        {canCreateWorktree ? (
++          <NewWorktreeButton
++            displayName={displayName}
++            onPress={() => createWorktreeMutation.mutate()}
++            visible={isHovered || isMobileBreakpoint}
++            loading={createWorktreeMutation.isPending}
++            showShortcutHint={isProjectActive}
++            testID={`sidebar-project-new-worktree-${project.projectKey}`}
++          />
++        ) : null}
++        {onRemoveProject ? (
++          <View
++            style={!(isHovered || isMobileBreakpoint) && styles.projectKebabButtonHidden}
++            pointerEvents={isHovered || isMobileBreakpoint ? "auto" : "none"}
++          >
++            <DropdownMenu>
++              <DropdownMenuTrigger
++                hitSlop={8}
