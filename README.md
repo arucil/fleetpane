@@ -62,6 +62,9 @@ independent details and exact clipboard checks have
 
 **Hide sessions / Show sessions** toggles the current Host’s directory with Ctrl+B (Cmd+B on macOS). The conversation, drafts and pending requests stay open. Visibility is local to the window and Host; [Linux acceptance](docs/verification/2026-10-22-sidebar-toggle.md).
 
+**Ctrl+L** (Cmd+L on macOS) focuses the editable conversation composer. Open
+search palettes and pending questions retain focus. [Linux verification](docs/verification/2026-10-22-composer-focus.md).
+
 **Switch session** opens a bounded cross-Host search palette with Ctrl+K
 (Cmd+K on macOS). Search title, Host, cwd or ID, use arrows and Enter to open
 saved history, and Esc to return to the previous input. Omitted rows and missing

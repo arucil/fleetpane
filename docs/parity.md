@@ -24,6 +24,9 @@ takeover, retained Chinese draft and conflicting write refusal.
 restoration remains open. Chronological scoped review now reaches ordinal 2350;
 this is a source-review cursor, not a parity completion count.
 
+[Composer focus](verification/2026-10-22-composer-focus.md) now uses Ctrl/Cmd+L
+with native fixture evidence for exact drafts and ownership/palette guards.
+
 The bounded cross-Host session switcher now uses Ctrl/Cmd+K and Kit search,
 with exact source identity, explicit omissions and read-only takeover boundaries.
 [Local fixture evidence](verification/2026-10-22-session-switcher.md) covers drafts,

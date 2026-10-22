@@ -242,7 +242,7 @@ impl HostView {
         let composer = cx.new(|cx| {
             TextareaState::new(window, cx)
                 .auto_grow(1, max_rows)
-                .placeholder("Message · Enter adds a line · Ctrl/Cmd+Enter sends")
+                .placeholder("Message · Ctrl/Cmd+L focuses · Ctrl/Cmd+Enter sends")
         });
         let subscription = cx.subscribe_in(&composer, window, |this, input, event, window, cx| {
             if matches!(event, InputEvent::Change) {
@@ -2076,7 +2076,7 @@ impl Render for HostView {
         div()
             .id("host-image-drop")
             .track_focus(&self.focus)
-            .capture_key_down(cx.listener(|this, event: &KeyDownEvent, window, cx| {
+            .capture_key_down(cx.listener(move |this, event: &KeyDownEvent, window, cx| {
                 let modifiers = event.keystroke.modifiers;
                 let primary = if cfg!(target_os = "macos") {
                     modifiers.platform && !modifiers.control
@@ -2089,6 +2089,26 @@ impl Render for HostView {
                     cx.stop_propagation();
                     if !event.is_held {
                         this.toggle_directory(window, cx);
+                    }
+                }
+                if primary && !modifiers.alt && !modifiers.shift
+                    && event.keystroke.key == "l" && !event.prefer_character_input
+                    && this.picker.is_none() && !has_question
+                    && owns && !this.busy && this.pending.is_none()
+                    && this.thread.is_some() && this.draft_editable()
+                {
+                    let composer_composing = this.composer.read(cx).focus_handle(cx).is_focused(window)
+                        && this.composer.update(cx, |input, cx| input.marked_text_range(window, cx).is_some());
+                    let composing = composer_composing || [&this.workspace, &this.search, &this.filter_workspace, &this.rename]
+                        .iter().any(|input| {
+                            input.read(cx).focus_handle(cx).is_focused(window)
+                                && input.update(cx, |input, cx| input.marked_text_range(window, cx).is_some())
+                        });
+                    if !composing {
+                        cx.stop_propagation();
+                        if !event.is_held {
+                            this.composer.update(cx, |input, cx| input.focus(window, cx));
+                        }
                     }
                 }
             }))

@@ -1,0 +1,48 @@
+{
+  "base": "0a934db1af3727a9e0fac75abcd270d7911876c6",
+  "source_sha256": {
+    "apps/desktop/src/host_view.rs": "d7bcdc42ce20bf5282858ce607ead37ce1db10cdace26013badd70ea28d42450"
+  },
+  "binary_sha256": "8be76672efee6b2da8fab57bc4b2eee864be442eb7d4aacf041a10ce0f7c4222",
+  "native_readbacks": {
+    "ACP": "ACP 草稿\n  exact  \n",
+    "Codex": "第二轮草稿 中文\n  exact \n",
+    "read_only_filter": "leasequery"
+  },
+  "checks": [
+    "36 desktop tests",
+    "strict all-target desktop clippy",
+    "Linux native ctrl+l from search restores composer",
+    "open session/model palettes retain search focus",
+    "900x560 DeepSeek composer focus",
+    "normal close/reopen exit0 exact ACP21bytes and Codex32bytes clipboard",
+    "external takeover ctrl+l retains filter focus",
+    "Host/provider PIDs, journal, pending requests and active turns unchanged across native checks"
+  ],
+  "limits": [
+    "synthetic providers; no installed DSH or external model call",
+    "IME guard implemented but no IME acceptance",
+    "macOS/Windows/Wayland not verified",
+    "shortcut bindings not configurable"
+  ],
+  "artifacts": {
+    "acp-after.json": "3acc5d670fc38dab2708ece793ccb0e7703f16992644e9152205893e0527c367",
+    "acp-before.json": "fdaf11fc82046d1f535e4d3e0fdf8b0156aa41f3c5dade7fbaa39d0b0991c519",
+    "acp-open.png": "6553941be88719e88261a6aec9dde8dfa96fb8607b79de253e8318085ae0facb",
+    "acp-small.png": "698b050ee6629bd6d078f0bbb844891223d1345dd19b092b40ba8ab41d97c23e",
+    "after-open.png": "fe0cc5def9721b2663734b0903eee2e9d70961f817b917b04fef65a2a161a697",
+    "build.log": "e7db2afc8e897632ef0fc418b8593aa427e974dd923dcc14c5e1d5d6e9cff786",
+    "clippy.log": "2a7f2bc267ab84a783d3e33a26c82086964c4f5a781be885b3a698fdde636801",
+    "codex-after.json": "3736130fd5dcc6fc42fff00fc51b05ace951d129903005241fa713262a7749ca",
+    "codex-before.json": "604c125b1574e2944e9617d75b0bd49a2f733f7186194bf994a41c8cdb0c121e",
+    "codex-reopen.png": "15cb4b66e3b671c42e87ac64c0c70e6df636597864bdf0c5e3a8f5814ea76047",
+    "external-claim.json": "3d7859a9ca8f4adab66b297a5c6905c4c26491d390f90355530136c01892bde7",
+    "model-control.png": "08a7603187bc440e40b7f768f713d0cb68251647dfd39061022df3a5632deeaa",
+    "model-keeps-focus.png": "2c9fe35c9cb2e893f982185206eff978607091e0d93b36b18daffaef707eb73d",
+    "readonly-keeps-focus.png": "3afe091dcbd7d17cb587c4976773d031bfed6621ad3a813ecf8ab48e9d894193",
+    "reopened.png": "321d4cf789f6189cfa76613576a1e5667b3af0f14b1f539c17e7b9acacf3a299",
+    "search-to-composer.png": "95f8e890d11539a4d8f5116b01a0d4de65786a9384afdd6f31e258220a9bdd91",
+    "switcher-keeps-focus.png": "88e19218cdba8005e71abbe1ab4f549855e3171c107d94d075360a3149224f1a",
+    "tests.log": "ab2f9222d06e01730f6b8f0cca52e62700dc67d52013000dfdc3c09a8f58d26c"
+  }
+}
