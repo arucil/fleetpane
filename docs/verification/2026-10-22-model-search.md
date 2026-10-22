@@ -14,8 +14,11 @@ multiline text. Later search does not send. ACP selection has a durable
 Taking control from a separate CLI while a palette is open makes confirmation
 fail visibly and return to read-only status instead of using the old lease.
 
-Normal window close/reopen keeps the 21-byte ACP and 32-byte Codex drafts;
-clipboard readback matches both strings. An initial copy probe still targeted the
+Window replacement keeps the 21-byte ACP and 32-byte Codex drafts;
+clipboard readback matches both strings. The original automated close destroyed
+the X window and did not prove graceful application exit. Follow-up
+[composer-focus verification](2026-10-22-composer-focus.md) uses normal Alt+F4,
+confirms exit code 0, then reopens and reads the same exact drafts. An initial copy probe still targeted the
 palette's old search field and returned `model-a`; that was not draft evidence.
 After explicitly opening saved history and focusing the composer, exact draft
 Copy succeeds. The independent pending ACP request and provider PID are unchanged.

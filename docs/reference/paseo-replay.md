@@ -1476,9 +1476,9 @@ Kimi/GLM 专属适配继续排除，历史 skills/AGENTS/提示词只作参考�
 保留实际读取区间和完整 SHA。包括 20 个 first-parent merge 与 5 段补充源码；
 没有运行历史版本或审计其余文件。压缩的原始 receipts 随记录保存，可从 Git 重建。
 
-- 第 2492 条的输入框聚焦落实为 [Ctrl/Cmd+L](../verification/2026-10-22-composer-focus.md)，
+- 第 2452 条的输入框聚焦落实为 [Ctrl/Cmd+L](../verification/2026-10-22-composer-focus.md)，
   Codex/ACP 草稿、弹层焦点、只读租约与正常重开已有独立 Linux 验证。
-- 第 2367 条的文件 Markdown 预览是下一项独立功能；完整源码预览和原样 Copy
+- 第 2469 条的文件 Markdown 预览是下一项独立功能；完整源码预览和原样 Copy
   已有证据，不把纯文本语法高亮当作渲染预览。
 - 第 2415/2511 条的上下文用量表仍缺失；计数必须来自 provider，未知不能显示为零。
 - 第 2544/2560 条说明文字、推理和工具高频事件都可能产生压力；现有 sparse
