@@ -124,7 +124,10 @@ mod tests {
         );
         assert_eq!(
             reopened
-                .workspace_at(&original.registration.endpoint.socket, &root)
+                .workspace_at(
+                    &original.registration.endpoint.socket,
+                    &original.registration.directory.path,
+                )
                 .await
                 .unwrap()
                 .unwrap()
