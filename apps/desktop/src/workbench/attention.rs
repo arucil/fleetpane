@@ -80,14 +80,30 @@ impl Workbench {
         let next_token = self.attention.next_pending;
         let configuration = self.configuration.clone();
         let directory = self.creation_directory.clone();
+        let preferences = self.notifications.directory.clone();
         let task = cx.background_executor().spawn(async move {
             background(async move {
-                if let Some(directory) = directory {
+                let report = if let Some(directory) = directory {
                     let store = Store::open(directory).await?;
-                    attention::collect_reviewed(configuration, &store).await
+                    attention::collect_reviewed(configuration, &store).await?
                 } else {
-                    attention::collect(configuration).await
-                }
+                    attention::collect(configuration).await?
+                };
+                let observations =
+                    fleetpane_session::notifications::delivery::Observation::from_report(&report);
+                let batch = match preferences {
+                    Ok(directory) => {
+                        async move {
+                            Store::open(directory)
+                                .await?
+                                .claim_completion_alerts(observations)
+                                .await
+                        }
+                        .await
+                    }
+                    Err(error) => Err(Error::Input(error)),
+                };
+                Ok((report, batch))
             })
         });
         cx.spawn_in(window, async move |this, cx| {
@@ -95,7 +111,8 @@ impl Workbench {
             let _closed = this.update_in(cx, |this, window, cx| {
                 this.attention.busy = false;
                 match result {
-                    Ok(mut report) => {
+                    Ok((mut report, batch)) => {
+                        this.finish_completion_reminders(batch, window, cx);
                         this.attention.items.clear();
                         this.attention.completions.clear();
                         for host in &mut report.hosts {

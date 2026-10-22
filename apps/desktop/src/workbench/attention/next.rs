@@ -32,7 +32,11 @@ impl Workbench {
         }
     }
 
-    pub(super) fn next_request_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
+    pub(in crate::workbench) fn next_request_blocked(
+        &self,
+        window: &mut Window,
+        cx: &mut App,
+    ) -> bool {
         self.switcher.active
             || self.notifications.open
             || self.closing

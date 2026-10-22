@@ -1,5 +1,12 @@
 # Fleetpane
 
+New terminal results now produce one bounded Kit in-app reminder with durable
+claims shared by local windows. First observations baseline silently; reopening
+does not repeat claimed results and unmute does not replay muted ones.
+`fleetpane-host completion-alerts HOSTS_JSON PREFERENCES_STORE [REVIEW_STORE]`
+uses the same engine and **consumes local reminder claims**. It never answers
+requests or reviews a result. [Contract and limits](docs/adr/0114-durable-completion-reminders.md).
+
 **Alerts** now saves device-local global, Host, exact workspace/session and event-type mute.
 Muted items stay in the real pending/results queue and Next request, while the
 alert count excludes them. Normal close waits for saves and displays failures.
@@ -1095,6 +1102,7 @@ python3 scripts/acp-review-smoke.py               # Unix; exact request details,
 python3 scripts/recent-directories-smoke.py       # Unix; device-local exact MRU, Host isolation, corruption/forget
 python3 scripts/appearance-smoke.py              # Unix; device preference persistence, migration, conflicts and failures
 python3 scripts/notification-policy-smoke.py     # Unix; local alert scopes, persistence, conflicts and bounded JSON
+python3 scripts/completion-alert-smoke.py         # Unix; concurrent claims, mute/unmute, failed writes and unchanged Hosts
 python3 scripts/paseo-receipts-smoke.py          # Unix; process death, durable reports and explicit retry
 python3 scripts/paseo-scratch-smoke.py           # Unix; paused/killed copies and explicit scratch collection
 python3 scripts/paseo-signals-smoke.py           # Unix; SIGINT/SIGTERM finish the current copy and save Stop

@@ -61,6 +61,9 @@ jobs:
       - name: Terminal turn results and local reviews
         if: runner.os != 'Windows'
         run: python3 scripts/completion-smoke.py
+      - name: Durable completion reminder claims
+        if: runner.os != 'Windows'
+        run: python3 scripts/completion-alert-smoke.py
       - name: ACP permission review
         if: runner.os != 'Windows'
         run: python3 scripts/acp-review-smoke.py

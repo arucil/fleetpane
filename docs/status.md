@@ -1,5 +1,15 @@
 # Behavior status
 
+**Terminal-result reminders** now use one bounded Kit in-app toast and durable,
+policy-aware claims shared by local windows and the CLI. First Host observations
+baseline silently; reconnect/reopen and unmute do not replay consumed results.
+Failed/interrupted outcomes and the true pending queue remain unchanged.
+[Linux fixture and installed-provider evidence](verification/2026-10-22-completion-reminders.md)
+covers concurrent processes, stored mute scopes, rollback, native click-through,
+49-byte draft/replacement and 900×560. OpenCodex/DeepSeek model results have
+separate cursor/readback evidence. OS delivery, pending-request reminders,
+sound/tray/dock and acknowledged delivery remain open.
+
 **Workspace alert mute** now covers the exact Host endpoint and observed directory,
 including future sessions. Unknown/evicted directories stay included with an
 explicit row notice. Saved scopes can be removed from the bounded Kit Alerts
@@ -30,7 +40,8 @@ saves; schema-15 migration, failed-write close guard, original Host snapshots,
 44-byte draft/replacement and 900×560 have
 [Linux fixture acceptance](verification/2026-10-22-notification-policy.md).
 Workspace rules have separate acceptance above. OS popup/sound/tray/dock and
-delivery deduplication remain open.
+pending-request delivery remain open. Terminal-result claims now have separate
+acceptance above.
 
 Installed OpenCodex/DeepSeek **approvals and Codex structured questions** now have
 [separate Linux native/model acceptance](verification/2026-10-22-real-provider-requests.md).
@@ -107,7 +118,8 @@ performance targets remain proposals pending M0 validation.
 
 | Workflow | Status | Evidence / remaining gap |
 | --- | --- | --- |
-| Local alert policy and attention counts | verified locally for covered shared/CLI/Linux native workflows | Global, Host endpoint, exact workspace/session and six event-type scopes; future sessions inherit workspace rules, unknown directories stay included. Muted requests remain actionable and terminal outcomes remain unreviewed. Strict bounded JSON, schema-15 compatibility, CAS conflicts/failures, background-read ordering, normal close guard/reload, exact drafts/replacement and 900×560 covered. The Kit popover preserves session layout. Real OpenCodex/DeepSeek directory metadata and 2→1→0 native counts have separate build-bound evidence. OS popup/sound/tray/dock, request age and delivery deduplication remain open. [Workspace evidence](verification/2026-10-22-workspace-alert-policy.md), [initial policy evidence](verification/2026-10-22-notification-policy.md), [ADR](adr/0113-workspace-alert-scopes.md). |
+| Durable terminal-result reminders | verified locally for covered shared/CLI/Linux native workflows | Schema-16 endpoint/incarnation cursors, atomic policy/claim transaction, first-observation baseline, concurrent process/window deduplication, out-of-order reads, reviewed/muted consumption, capacity/failure refusal and migration. Native one-toast aggregate, result navigation without review, global mute, failed-write recovery, exact 49-byte draft/replacement and 900×560 covered. Real OpenCodex/DeepSeek model completions consumed through native inventory with matching cursors and unchanged post-model snapshots. At most once claims can be lost after commit; no OS delivery, pending-request reminders, cross-device inbox or durable Host feed claim. [Evidence](verification/2026-10-22-completion-reminders.md), [ADR](adr/0114-durable-completion-reminders.md). |
+| Local alert policy and attention counts | verified locally for covered shared/CLI/Linux native workflows | Global, Host endpoint, exact workspace/session and six event-type scopes; future sessions inherit workspace rules, unknown directories stay included. Muted requests remain actionable and terminal outcomes remain unreviewed. Strict bounded JSON, schema-15 compatibility, CAS conflicts/failures, background-read ordering, normal close guard/reload, exact drafts/replacement and 900×560 covered. The Kit popover preserves session layout. Real OpenCodex/DeepSeek directory metadata and 2→1→0 native counts have separate build-bound evidence. OS popup/sound/tray/dock, request age and pending-request delivery remain open. Durable terminal-result reminders have separate acceptance above. [Workspace evidence](verification/2026-10-22-workspace-alert-policy.md), [initial policy evidence](verification/2026-10-22-notification-policy.md), [ADR](adr/0113-workspace-alert-scopes.md). |
 | Global next pending request | verified locally for covered shared/Linux native fixtures and installed providers | Explicit fresh snapshot, exact-source cycling/wrap, independent filters, cancelled/late reads, startup/question focus and popup/palette/IME guards; native colliding requests, 38-byte draft/replacement, unchanged real PTY input and 900×560 covered. Installed OpenCodex/DeepSeek requests have [separate native/model acceptance](verification/2026-10-22-real-provider-requests.md). Actual IME, other platforms and OS delivery remain open; local mute has separate acceptance above. [Evidence](verification/2026-10-22-next-request.md), [ADR](adr/0109-global-next-pending-request.md). |
 | Workspace tab drag order | verified locally for covered Linux X11 fixtures | Active/inactive same-window UUID moves retain selected session, file and terminal entities; cancellation, exact four 36-byte draft records, beta clipboard, four pending requests, unchanged PTY/input, save-failure close guard/reload, normal replacement and 900×560 covered. No cross-window move, edge autoscroll, installed-model drag or other-platform GUI acceptance. [Evidence](verification/2026-10-22-workspace-tab-drag.md), [ADR](adr/0112-workspace-tab-drag-order.md). |
 | Workspace tab keyboard/menu navigation and order | verified locally for covered Linux X11 fixture and installed OpenCodex/DeepSeek workflows | Ctrl+PageUp/PageDown, positions 1–8/last, Shift movement, guarded close and revisioned saved order; 12-tab scrolling, exact three real drafts/replacement, zero shell input and pending ACP preservation covered. Popup isolation repaired during native QA. Drag has separate fixture acceptance above. IME, other platforms, splits and configurable keys remain open. The observed Codex first-turn wait race now has [separate repair and acceptance](verification/2026-10-22-wait-first-turn.md). [Evidence](verification/2026-10-22-workspace-tab-navigation.md), [ADR](adr/0108-workspace-tab-navigation.md). |

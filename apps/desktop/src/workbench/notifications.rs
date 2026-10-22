@@ -1,16 +1,19 @@
 //! Local alert preferences never acquire a Host lease or filter the true queue.
 use super::*;
 use fleetpane_session::notifications::{Kind, Preferences, Saved, Session, Workspace};
+mod delivery;
 const CLOSE_ERROR: &str = "Alert preferences were not saved. Reload alerts before closing.";
 
 pub(super) struct State {
-    directory: Result<std::path::PathBuf, String>,
+    pub(in crate::workbench) directory: Result<std::path::PathBuf, String>,
     saved: Option<Saved>,
     pub busy: bool,
     refreshing: bool,
     pub(in crate::workbench) open: bool,
     error: Option<String>,
     save_failed: bool,
+    delivery_error: Option<String>,
+    reminder_items: Vec<fleetpane_session::attention::review::Item>,
 }
 
 impl State {
@@ -23,6 +26,8 @@ impl State {
             open: false,
             error: None,
             save_failed: false,
+            delivery_error: None,
+            reminder_items: Vec::new(),
         }
     }
     fn editable(&self) -> bool {
@@ -160,7 +165,7 @@ impl Workbench {
         });
         cx.spawn_in(window, async move |this, cx| {
             let result = task.await;
-            let _closed = this.update_in(cx, |this, _, cx| {
+            let _closed = this.update_in(cx, |this, window, cx| {
                 if explicit
                     && result.is_ok()
                     && this.close_error.as_deref()
@@ -169,6 +174,7 @@ impl Workbench {
                     this.close_error = None;
                 }
                 this.notifications.finish_read(explicit, result);
+                this.reconcile_completion_toast(window, cx);
                 cx.notify();
             });
         })
@@ -207,12 +213,13 @@ impl Workbench {
         });
         cx.spawn_in(window,async move |this,cx| {
             let result=task.await;
-            let _closed=this.update_in(cx,|this,_,cx| {
+            let _closed=this.update_in(cx,|this,window,cx| {
                 this.notifications.busy=false;
                 match result {
                     Ok(saved) => this.notifications.observe(saved),
                     Err(error) => {this.notifications.save_failed=true;this.notifications.error=Some(format!("Notification preferences not saved: {error}. Reload before trying again."));}
                 }
+                this.reconcile_completion_toast(window,cx);
                 cx.notify();
             });
         }).detach();
@@ -394,9 +401,11 @@ impl Workbench {
                     .child(Button::new("notifications-copy").small().ghost().label("Copy policy").disabled(selected.is_none()).on_click(cx.listener(|this,_,_,cx|{
                         if let Some(saved)=&this.notifications.saved {cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(saved).expect("policy serializes")));}
                     }))))
-                .child("Muted items stay in Attention and Next request. System notifications are not available yet.")
+                .child("New turn results show one in-app reminder. Reopening does not replay claimed results. System notifications are not available yet.")
+                .child("Muted items stay in Attention and Next request; unmuting does not replay them.")
                 .child("Workspace mute matches this Host and exact directory, including future sessions. Unknown directories remain included in alerts.")
                 .children(self.notifications.error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
+                .children(self.notifications.delivery_error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
                 .child(div().flex().flex_wrap().gap_2().items_center().child("Mute event types:")
                     .children(Kind::ALL.into_iter().enumerate().map(|(i,kind)| {
                         let muted=selected.as_ref().is_some_and(|p|p.muted_kinds.contains(&kind));

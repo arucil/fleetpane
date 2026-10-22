@@ -1,0 +1,48 @@
+{
+  "base_commit": "859ff20712cfb29371b8156c749746640424ab85",
+  "schema": 16,
+  "fixture_claim_cursors": [
+    [
+      "\"/tmp/fp-completion-alert-native/0/host/control.sock\"",
+      "4ad6ccda-977f-48da-96b8-83a7453c6d5b",
+      121
+    ],
+    [
+      "\"/tmp/fp-completion-alert-native/1/host/control.sock\"",
+      "065cf701-56d0-472c-89ad-3c079ec961da",
+      127
+    ]
+  ],
+  "fixture_pending_count": 2,
+  "fixture_terminal_records": 22,
+  "fixture_reviewed_by_reminders": false,
+  "draft": {
+    "utf8_bytes": 49,
+    "text": "completion reminder 中文\nkeep trailing spaces  ",
+    "revision": 1,
+    "unchanged_after_replacement": true,
+    "native_clipboard_exact": true
+  },
+  "process_probe": {
+    "process_claims": [
+      0,
+      2
+    ],
+    "global_mute_consumes": true,
+    "unmute_replay": false,
+    "failure_rolls_back": true,
+    "full_host_snapshots_unchanged": true,
+    "pending": 2,
+    "schema": 16
+  },
+  "builds": {
+    "host": "d9cae7e3f282d21d161a0296eb8e86df24984e7c1f79f365e727337d411ad95a",
+    "desktop": "07051a443ee3f7b5af8b8e67c92f43f94b0c753b3a24ff20bc35d128c9e81071"
+  },
+  "claim_limits": [
+    "at most once, not delivery acknowledgement",
+    "first observation baselines silently",
+    "256 cursor cap with visible refusal",
+    "no OS popup sound tray dock or pending-request reminders"
+  ]
+}

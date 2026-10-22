@@ -67,7 +67,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "fleetpane-host terminal STORE WORKSPACE_UUID [--take-control] create LABEL | list | output ID AFTER_BYTE | input ID EXPECTED_INPUT TEXT | key ID EXPECTED_INPUT enter|interrupt|eof|tab|escape | resize ID ROWS COLS | rename ID LABEL | close ID. Host-owned POSIX shell; input never appends Enter. Output is raw bytes with explicit loss cursors; native screen and explicit-input panel available from Workspaces."
         );
         println!(
-            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC.\nfleetpane-host notification-policy STORE get | set EXPECTED_REVISION < policy.json: device-local alert preferences; no Host RPC."
+            "fleetpane-host appearance STORE get | set EXPECTED_REVISION system|light|dark: device-local appearance preferences; no Host RPC.\nfleetpane-host notification-policy STORE get | set EXPECTED_REVISION < policy.json: device-local alert preferences; no Host RPC.\nfleetpane-host completion-alerts HOSTS_JSON PREFERENCES_STORE [REVIEW_STORE]: atomically claim new terminal-result reminders; first Host observation baselines silently. Changes local notification cursors, never a Host or review status."
         );
         println!(
             "fleetpane-host recent STORE list SOCKET | remember SOCKET CWD | clear SOCKET: device-local directory suggestions; no Host RPC or session creation."
@@ -900,6 +900,22 @@ async fn run() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 fleetpane_session::attention::collect(configuration).await?
             };
             println!("{}", serde_json::to_string_pretty(&report)?);
+            Ok(())
+        }
+        "completion-alerts" if args.len() == 3 || args.len() == 4 => {
+            let configuration =
+                fleetpane_session::hosts::Configuration::read(std::path::Path::new(&args[1]))?;
+            let report = if let Some(directory) = args.get(3) {
+                let reviews = fleetpane_session::creations::Store::open(directory.into()).await?;
+                fleetpane_session::attention::collect_reviewed(configuration, &reviews).await?
+            } else {
+                fleetpane_session::attention::collect(configuration).await?
+            };
+            let observations =
+                fleetpane_session::notifications::delivery::Observation::from_report(&report);
+            let store = fleetpane_session::creations::Store::open((&args[2]).into()).await?;
+            let batch = store.claim_completion_alerts(observations).await?;
+            println!("{}", serde_json::to_string_pretty(&batch)?);
             Ok(())
         }
         "attention-review" if args.len() == 3 => {

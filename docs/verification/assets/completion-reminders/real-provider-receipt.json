@@ -1,0 +1,54 @@
+{
+  "models": [
+    {
+      "name": "OpenCodex",
+      "socket": "/tmp/fp-completion-alert-real/OpenCodex/host/control.sock",
+      "host_id": "2274a02b-ca33-4c4d-b85c-05a6b80ff5b4",
+      "host_pid": 2243951,
+      "provider_pid": 2243955,
+      "thread_id": "01a1635e-8269-7b90-9073-26bccb621f4e",
+      "turn_id": "01a1635f-fb0a-78e3-9ae7-d8e79fee35cc",
+      "outcome": "finished",
+      "token": "COMPLETION-ALERT-OPENCODEX",
+      "original_result": {
+        "sequence": 27,
+        "observed_unix_ms": 1792668599452,
+        "thread_id": "01a1635e-8269-7b90-9073-26bccb621f4e",
+        "turn_id": "01a1635f-fb0a-78e3-9ae7-d8e79fee35cc",
+        "kind": "completed",
+        "stop_reason": null
+      },
+      "post_model_snapshot_sha256": "b94e402cca9c6483037e3de4c0667096d50e8b5c8e70d9839d73f991b92dc543",
+      "native_claim_cursor_after_first_result": 27
+    },
+    {
+      "name": "DeepSeek",
+      "socket": "/tmp/fp-completion-alert-real/DeepSeek/host/control.sock",
+      "host_id": "2debe0df-ee96-43db-8fa3-4d14fce39d9f",
+      "host_pid": 2244160,
+      "provider_pid": 2244217,
+      "thread_id": "8402f1f3-5761-441d-81b7-464b84ae43d0",
+      "turn_id": "a2bed06f-42be-4d6a-b03f-c08a78efd0c0",
+      "outcome": "finished",
+      "token": "COMPLETION-ALERT-DEEPSEEK",
+      "original_result": {
+        "sequence": 8,
+        "observed_unix_ms": 1792668626609,
+        "thread_id": "8402f1f3-5761-441d-81b7-464b84ae43d0",
+        "turn_id": "a2bed06f-42be-4d6a-b03f-c08a78efd0c0",
+        "kind": "completed",
+        "stop_reason": "end_turn"
+      },
+      "post_model_snapshot_sha256": "9f0f96ecc97294fd0c4f2b17bbf808b394c8c6d8a93710ac7f6597e76c5fbbe2",
+      "native_claim_cursor_after_first_result": 8
+    }
+  ],
+  "native_cursors_match_original_results": true,
+  "post_model_full_snapshots_unchanged_during_native_claims": true,
+  "real_toast_screenshot_acceptance": false,
+  "extra_capture_attempt": {
+    "opencodex": "completed second model turn; transient toast not captured",
+    "deepseek": "failed follow-up after probe had removed copied private credentials; not accepted as successful model evidence"
+  },
+  "private_credentials_in_artifacts": false
+}
