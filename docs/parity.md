@@ -21,7 +21,7 @@ Last inspected session recovery is locally verified for shared/CLI/Linux native
 fixtures: exact Host/session/directory/archive identity, explicit opening after
 takeover, retained Chinese draft and conflicting write refusal.
 [Evidence](verification/2026-10-22-last-session.md). Complete tabs/scroll/layout
-restoration remains open. Chronological scoped review now reaches ordinal 2350;
+restoration remains open. Chronological scoped review now reaches ordinal 2580;
 this is a source-review cursor, not a parity completion count.
 
 [Composer focus](verification/2026-10-22-composer-focus.md) now uses Ctrl/Cmd+L

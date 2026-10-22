@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 2350,
-    "last_revision": "4547d597efbe7f6e6b7369dbcffbb4ff4a455966",
-    "next_revision": "80a7fd4f3e82468a094eec131d1a55c5d016790e",
-    "next_ordinal": 2351
+    "last_ordinal": 2580,
+    "last_revision": "64065061c59f6542d69640fe9ba647ef55175982",
+    "next_revision": "4a5dd986e146d632c17fdc9aac58b91e020033e3",
+    "next_ordinal": 2581
   },
   "entries": [
     {
@@ -30812,6 +30812,2992 @@
       "fleetpane_action": "Native typed images and bounded file navigation exist; markdown inline/full-size media remains partial and needs independent workflow QA.",
       "inspection": "selected-source-or-config-hunk",
       "receipt_ledger": "../verification/assets/paseo-replay/2001-2350/review.json#2350"
+    },
+    {
+      "ordinal": 2351,
+      "revision": "80a7fd4f3e82468a094eec131d1a55c5d016790e",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.54",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App dependency versions bump 0.1.53 to0.1.54.",
+      "fleetpane_action": "Do not recreate historical web release steps in Rust.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2351"
+    },
+    {
+      "ordinal": 2352,
+      "revision": "e6ff15a1e055529ced3c9c10ccb2907de436338e",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes only in selected configuration.",
+      "fleetpane_action": "No user workflow; no dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2352"
+    },
+    {
+      "ordinal": 2353,
+      "revision": "8b1fbb7b8621cd35875bfd953e0aabdbd0ed1d94",
+      "category": "merge-routing",
+      "subject": "Merge branch 'main' into dev",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "First-parent merge moves workspace/agent routes outside protected stack and removes prior route IDs in selected hunk.",
+      "fleetpane_action": "Keep exact native Host/session identity; remaining327 changed paths uninspected.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2353"
+    },
+    {
+      "ordinal": 2354,
+      "revision": "964bf3e13f5d4e5031c816209c5fae9208e9c7bb",
+      "category": "git-admission",
+      "subject": "fix(server): centralize git subprocesses with p-limit throttling (#310)",
+      "paths_inspected": [
+        "packages/server/src/utils/run-git-command.ts"
+      ],
+      "finding": "Shared git wrapper adds process concurrency limiter, timeout and bounded output/exit metadata.",
+      "fleetpane_action": "Existing typed subprocess boundaries remain; whole-host concurrency budgets need measured workload, Git Diff expansion deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2354"
+    },
+    {
+      "ordinal": 2355,
+      "revision": "0f7fa55a0f24bc1dbc7498cebe0475fa090ce0df",
+      "category": "native-platform",
+      "subject": "Centralize platform gating and fix iPad/tablet support",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Workspace row switches View/Pressable and touch/hover event ownership in selected hunk.",
+      "fleetpane_action": "Use GPUI Kit native hit targets; mobile layout not a Rust desktop port requirement.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2355"
+    },
+    {
+      "ordinal": 2356,
+      "revision": "42aaa4e4187667ebe88c0697d9e7fff558e861d8",
+      "category": "formatting",
+      "subject": "fix: format sidebar-workspace-list line wrapping",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Sidebar visibility expression is line wrapped without semantic change.",
+      "fleetpane_action": "No new workflow or implementation claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2356"
+    },
+    {
+      "ordinal": 2357,
+      "revision": "8008ea69dd227f7b98c89d3d4bdef285ccb28244",
+      "category": "hover-boundary",
+      "subject": "fix: restore wrapper View for sidebar hover stability",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Restores outer View pointer hover boundary and moves Pressable responsibilities inward.",
+      "fleetpane_action": "Retain separate identity and pointer semantics; no React-specific wrapper transplant.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2357"
+    },
+    {
+      "ordinal": 2358,
+      "revision": "b3d540129575d275fa99fc7123013499ebaa5baa",
+      "category": "historical-instructions",
+      "subject": "fix(orchestrate): PR delivery requires all CI checks green",
+      "paths_inspected": [
+        "skills/paseo-orchestrate/SKILL.md"
+      ],
+      "finding": "Historical orchestrator skill prescribes CI monitoring, child agents and automatic fixes.",
+      "fleetpane_action": "Reference data only, not authority to delegate/send/modify workflows; remote CI acceptance remains distinct.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2358"
+    },
+    {
+      "ordinal": 2359,
+      "revision": "8aa1833e2b7a33d92da79d022232974b772db29b",
+      "category": "worktree-admission",
+      "subject": "fix(server): await git worktree creation before responding to client",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts",
+        "packages/server/src/server/worktree-session.ts"
+      ],
+      "finding": "Supplemental worktree handler awaits createAgentWorktree before success descriptor; setup terminal starts afterward.",
+      "fleetpane_action": "Existing shared creation is explicit; directory readiness is separate from setup process completion.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2359"
+    },
+    {
+      "ordinal": 2360,
+      "revision": "f0c59ec534d03e58faf956ac629488c81ceb4d2c",
+      "category": "settings-shortcut",
+      "subject": "feat: add Cmd+, keyboard shortcut to toggle settings (#319)",
+      "paths_inspected": [
+        "packages/app/src/keyboard/keyboard-shortcuts.ts"
+      ],
+      "finding": "Adds platform Cmd/Control comma settings actions with nonterminal gates.",
+      "fleetpane_action": "Unified settings surface and shortcut remain a useful native gap; preserve terminal input focus.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2360"
+    },
+    {
+      "ordinal": 2361,
+      "revision": "bf76915884932c36e96487dadc926828da494f6e",
+      "category": "asynchronous-subprocess",
+      "subject": "fix: centralize Windows exec handling and async migrations (#318)",
+      "paths_inspected": [
+        "packages/cli/src/commands/daemon/runtime-toolchain.ts"
+      ],
+      "finding": "Unix PID command lookup moves synchronous spawn to awaited exec with explicit empty/path/error results.",
+      "fleetpane_action": "Keep filesystem/process work off native render thread; Windows support still unaccepted.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2361"
+    },
+    {
+      "ordinal": 2362,
+      "revision": "a2d652d8d82467b71f160394c7567cbfdc368b62",
+      "category": "provider-effort",
+      "subject": "Add `max` reasoning effort option for Opus 4.6 models (#322)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude/claude-models.ts"
+      ],
+      "finding": "Claude declared effort list gains max.",
+      "fleetpane_action": "Current OpenCodex/DSH choices preserve supplied effort strings; no Claude-specific expansion.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2362"
+    },
+    {
+      "ordinal": 2363,
+      "revision": "8023e1f0c37cc730be03b99691352cb6e0a6119f",
+      "category": "ime-submit",
+      "subject": "fix: skip Enter key handling during IME composition (#270)",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Supplemental composer handler returns for nativeEvent.isComposing or Chromium229 before autocomplete/Enter actions.",
+      "fleetpane_action": "Native clipboard/Chinese text tests are not IME acceptance; inspect GPUI marked-text path before claiming coverage.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2363"
+    },
+    {
+      "ordinal": 2364,
+      "revision": "8122d501b09ea4bd12c4a1efbdcc52e04a3ba734",
+      "category": "route-identity",
+      "subject": "fix: add getId to workspace route so navigation updates params (#325)",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "New route parameter helper normalizes string and array values; getId change is outside selected hunk.",
+      "fleetpane_action": "Stable Host/session IDs already native; no mobile route implementation claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2364"
+    },
+    {
+      "ordinal": 2365,
+      "revision": "6f28027687a8ffd71876f16999c879af1e5b047c",
+      "category": "provider-profiles",
+      "subject": "feat: provider profiles — custom provider definitions (#290)",
+      "paths_inspected": [
+        "packages/app/src/components/ui/combobox.tsx",
+        "packages/server/src/server/agent/provider-registry.ts"
+      ],
+      "finding": "Selected dropdown positioning changes plus supplemental registry defines runtime settings, overrides and generic ACP factory boundary.",
+      "fleetpane_action": "DSH custom argv already supported; persistent provider profile editor remains open, excluded providers need no adapters.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2365"
+    },
+    {
+      "ordinal": 2366,
+      "revision": "95e112c1858bf6ba96cf3f07a92b6611cf9398c1",
+      "category": "windows-launch",
+      "subject": "fix: use PATH-aware resolution for provider availability and fix Windows cmd escaping",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "Introduces percent/metacharacter escaping for Windows cmd values.",
+      "fleetpane_action": "Native direct argv avoids shell reconstruction; Windows provider acceptance separate and missing.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2366"
+    },
+    {
+      "ordinal": 2367,
+      "revision": "6dfcb4daa98c2197fb89c66cf3330e59e7ef5d12",
+      "category": "provider-history-path",
+      "subject": "fix: Windows test compatibility for worktree, snapshot, and history paths",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude project path sanitizer now replaces backslash, slash, dot, underscore and colon.",
+      "fleetpane_action": "Do not guess provider history encodings; supported Codex/DSH migrations keep their exact parser.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2367"
+    },
+    {
+      "ordinal": 2368,
+      "revision": "61201d68a61ed5081c2678fccc5fdca277298de6",
+      "category": "test-portability",
+      "subject": "fix: Windows test compat — shell quoting, line endings, binary names",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.test.ts"
+      ],
+      "finding": "Worktree test fixture replaces single shell quotes with double quotes for Windows compatibility.",
+      "fleetpane_action": "No native behavior addition; historical tests not run.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2368"
+    },
+    {
+      "ordinal": 2369,
+      "revision": "4806cd9a51ad320b6b9fc6c8c120a281e08dc2c4",
+      "category": "test-platform",
+      "subject": "fix: skip bash-dependent tests on Windows, fix platform-aware assertions",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.test.ts"
+      ],
+      "finding": "Executable lookup assertion distinguishes where.exe/windowsHide from Unix which.",
+      "fleetpane_action": "Unix provider spawning verified separately; no Windows parity claim from source review.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2369"
+    },
+    {
+      "ordinal": 2370,
+      "revision": "0d0a8a791a7e6366ee0726c5215954b40c9da1e3",
+      "category": "ci-scope",
+      "subject": "fix: scope Windows CI to Windows-critical test files only",
+      "paths_inspected": [
+        ".github/workflows/ci.yml"
+      ],
+      "finding": "Windows workflow narrows to explicit critical server tests.",
+      "fleetpane_action": "Do not edit or execute historical CI; passing subset would not cover excluded workflows.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2370"
+    },
+    {
+      "ordinal": 2371,
+      "revision": "bdb300b919cdbf7d5fbdc30da8ea45d850bc9167",
+      "category": "test-platform",
+      "subject": "fix: skip Unix-specific which path test on Windows",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.test.ts"
+      ],
+      "finding": "Skips Unix which-path assertion on Windows.",
+      "fleetpane_action": "No Rust workflow; non-Linux acceptance remains separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2371"
+    },
+    {
+      "ordinal": 2372,
+      "revision": "7ef47e9193ef8ec67ec83cf45d2d6fa1b983589f",
+      "category": "formatting",
+      "subject": "fix: format executable test",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.test.ts"
+      ],
+      "finding": "Reformats platform-skipped executable test.",
+      "fleetpane_action": "No semantic behavior in selected hunk.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2372"
+    },
+    {
+      "ordinal": 2373,
+      "revision": "7ad448209616133d66c5b914a7073e0f6ee0bfd5",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.55-rc.1",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App package references bump0.1.54 to0.1.55-rc.1.",
+      "fleetpane_action": "No historical release or dependency audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2373"
+    },
+    {
+      "ordinal": 2374,
+      "revision": "8d1def4615f8611c3f8f0b397a0c404fc473b932",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Updates Nix npm dependency hash.",
+      "fleetpane_action": "No new native capability.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2374"
+    },
+    {
+      "ordinal": 2375,
+      "revision": "e3962e1753a5f45b7056153854ed49ee1caf43ce",
+      "category": "merge-positioning",
+      "subject": "Merge origin/main into dev (second round)",
+      "paths_inspected": [
+        "packages/app/src/components/ui/combobox.tsx"
+      ],
+      "finding": "First-parent merge removes stale combo desktop positioning condition in selected hunk.",
+      "fleetpane_action": "Kit handles native geometry; remaining243 paths uninspected.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2375"
+    },
+    {
+      "ordinal": 2376,
+      "revision": "4190a0aa72843c696e81818a5886d61956eda52c",
+      "category": "storage-reversal",
+      "subject": "Remove SQLite/Drizzle infrastructure from dev branch",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Selected session hunk removes remote-based numeric project allocation and workspace insert plumbing.",
+      "fleetpane_action": "Retain Rust private SQLite/CAS and stable IDs; historical backend removal is not a reason to replace verified storage.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2376"
+    },
+    {
+      "ordinal": 2377,
+      "revision": "43a9606c550209af0a7d8fdc896b39caa2c8fb3e",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash updates.",
+      "fleetpane_action": "No native workflow addition or dependency audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2377"
+    },
+    {
+      "ordinal": 2378,
+      "revision": "84600609f0729fba8dabe2848e98afc62c6139f5",
+      "category": "merge-build",
+      "subject": "Merge branch 'dev' of github.com:getpaseo/paseo into dev",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "First-parent merge brings the same Nix hash change.",
+      "fleetpane_action": "No product claim from merge title.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2378"
+    },
+    {
+      "ordinal": 2379,
+      "revision": "c54e2ccabe558d7f3b60b835366199ee96d1d2ee",
+      "category": "setup-shell",
+      "subject": "Fix CI failures: server tests, app tests, CLI typecheck",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "finding": "Setup exec drops explicit /bin/bash override in selected worktree hunk.",
+      "fleetpane_action": "Shell/setup environment is a separate contract; existing direct-argv runtime stays.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2379"
+    },
+    {
+      "ordinal": 2380,
+      "revision": "750d38d3953eccfc31f745cbde8dcae84686b3f9",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash changes again.",
+      "fleetpane_action": "No Rust behavior addition.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2380"
+    },
+    {
+      "ordinal": 2381,
+      "revision": "367d94595432356c38337125483908bcc8ad070f",
+      "category": "merge-build",
+      "subject": "Merge branch 'dev' of github.com:getpaseo/paseo into dev",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "First-parent merge incorporates revised Nix dependency hash.",
+      "fleetpane_action": "No release scripts executed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2381"
+    },
+    {
+      "ordinal": 2382,
+      "revision": "bc53cf0a049b296039d89585811119db80906752",
+      "category": "type-suppression",
+      "subject": "Fix CI failures: server tests, app typecheck, workspace schema alignment",
+      "paths_inspected": [
+        "packages/app/src/components/workspace-hover-card.tsx"
+      ],
+      "finding": "Selected workspace hover gradient adds as any cast.",
+      "fleetpane_action": "Do not reproduce unsafe type suppression in strict Rust boundaries; remaining schema changes not audited.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2382"
+    },
+    {
+      "ordinal": 2383,
+      "revision": "3f0c9f26798e819e13aec2f3f02f083a0bb146ff",
+      "category": "workspace-schema",
+      "subject": "Fix messages.workspaces.test.ts: add missing workspaceDirectory field",
+      "paths_inspected": [
+        "packages/server/src/shared/messages.workspaces.test.ts"
+      ],
+      "finding": "Workspace test descriptor gains explicit workspaceDirectory.",
+      "fleetpane_action": "Keep identity and path distinct and typed; source review is not test execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2383"
+    },
+    {
+      "ordinal": 2384,
+      "revision": "cc6993042f86f790464ad50dff7f622eb8a3e839",
+      "category": "terminal-tests",
+      "subject": "Skip zsh-dependent terminal tests when /bin/zsh is unavailable",
+      "paths_inspected": [
+        "packages/server/src/terminal/terminal.test.ts"
+      ],
+      "finding": "Terminal fixture checks /bin/zsh existence for platform-specific tests.",
+      "fleetpane_action": "Absent shell is an untested scenario, not a passing terminal workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2384"
+    },
+    {
+      "ordinal": 2385,
+      "revision": "1f13eee4a71b3cacdc1fb807ec5f301795f0efe1",
+      "category": "chat-attribution",
+      "subject": "Restore authorAgentId in chat post command",
+      "paths_inspected": [
+        "packages/cli/src/commands/chat/post.ts"
+      ],
+      "finding": "CLI chat post supplies resolved authorAgentId.",
+      "fleetpane_action": "Cross-agent chat and scheduling remain out of this implementation; never infer permission to send.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2385"
+    },
+    {
+      "ordinal": 2386,
+      "revision": "25ab97fe8b338b9feb4987fb7ddc694b1b5f2bd6",
+      "category": "test-transport",
+      "subject": "Fix e2e workspace-setup helper: use Node WebSocket factory",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/workspace-setup.ts"
+      ],
+      "finding": "E2E daemon client type accepts NodeWebSocketFactory.",
+      "fleetpane_action": "Native Unix IPC needs no browser WebSocket compatibility shim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2386"
+    },
+    {
+      "ordinal": 2387,
+      "revision": "369b46ea080038570ddfd032f2778e3a31773b26",
+      "category": "identity-tests",
+      "subject": "Fix e2e helpers: workspace IDs are strings, not numbers",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/workspace-setup.ts"
+      ],
+      "finding": "E2E workspace helper removes numeric parsing and compares string identities.",
+      "fleetpane_action": "Keep opaque stable IDs and exact source binding; no name/path fallback mutation.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2387"
+    },
+    {
+      "ordinal": 2388,
+      "revision": "19585709d5e156a1ad9236192061c4d9bffb5956",
+      "category": "setup-lifecycle",
+      "subject": "Fix 8 failing Playwright e2e tests after SQLite removal",
+      "paths_inspected": [
+        "packages/server/src/server/worktree-session.ts"
+      ],
+      "finding": "Setup launch callback notifies scripts lifecycle changes in selected server hunk.",
+      "fleetpane_action": "Setup scripts and terminal readiness require separate implementation/QA; no acceptance from title.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2388"
+    },
+    {
+      "ordinal": 2389,
+      "revision": "e647c61fb580119f0c071271401e549ca2fe3437",
+      "category": "navigation-test",
+      "subject": "Fix 5 remaining Playwright e2e failures",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/archive-tab.ts"
+      ],
+      "finding": "Archive helper waits until open intent query is consumed before asserting tabs.",
+      "fleetpane_action": "Native routed opening already has explicit source checks; tabs and full layout restore remain gaps.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2389"
+    },
+    {
+      "ordinal": 2390,
+      "revision": "95ea02a87fe9637cdec5bb3233f8248bb846f1d6",
+      "category": "terminal-test",
+      "subject": "fix: resolve 6 remaining Playwright e2e test failures on CI",
+      "paths_inspected": [
+        "packages/app/e2e/workspace-setup-streaming.spec.ts"
+      ],
+      "finding": "Test shifts terminal content inspection from DOM rows to xterm buffer and tolerates missing overlay.",
+      "fleetpane_action": "Use real rendered output plus exact raw evidence; do not copy swallowed overlay errors or claim historical pass.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2390"
+    },
+    {
+      "ordinal": 2391,
+      "revision": "4d5e8d870aa5d6c57fe877d36e23c9d89c965c8c",
+      "category": "navigation-test",
+      "subject": "fix: resolve archive-tab and new-workspace e2e failures (round 4)",
+      "paths_inspected": [
+        "packages/app/e2e/new-workspace.spec.ts"
+      ],
+      "finding": "Workspace test switches via sidebar helper instead of direct URL fallback.",
+      "fleetpane_action": "Verify actual visible entry point; native fixture checks remain separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2391"
+    },
+    {
+      "ordinal": 2392,
+      "revision": "74a65bd851e0950f793f3ce21132feb8d3b55833",
+      "category": "creation-test",
+      "subject": "fix(e2e): derive new workspace ID from URL instead of sidebar rows",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/new-workspace.ts"
+      ],
+      "finding": "Creation helper reads opaque workspace ID from URL with extended deadline.",
+      "fleetpane_action": "Avoid deriving identity from row order; no timeout increase used as native bug fix.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2392"
+    },
+    {
+      "ordinal": 2393,
+      "revision": "d888da8591b3a7f5646ed07b0548ad0184052b68",
+      "category": "creation-test",
+      "subject": "fix(e2e): submit creation form in new-workspace test",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/new-workspace.ts"
+      ],
+      "finding": "Creation helper now explicitly clicks Create after checking route.",
+      "fleetpane_action": "A visible form is not completed creation; shared receipts/native readback already distinct.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2393"
+    },
+    {
+      "ordinal": 2394,
+      "revision": "4d6774f0c2f3176fad6a35efc6c494b52bdc9596",
+      "category": "creation-test",
+      "subject": "fix(e2e): scope Create button locator to message-input-root",
+      "paths_inspected": [
+        "packages/app/e2e/helpers/new-workspace.ts"
+      ],
+      "finding": "Create locator is scoped to composer root.",
+      "fleetpane_action": "Retain exact native control/source targeting in isolated workspace QA.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2394"
+    },
+    {
+      "ordinal": 2395,
+      "revision": "795c3cac977ce4cc4dd5b19643fe782c10259ee7",
+      "category": "provider-guide",
+      "subject": "docs: add custom provider configuration guide",
+      "paths_inspected": [
+        "docs/CUSTOM-PROVIDERS.md"
+      ],
+      "finding": "Guide documents agents.providers profiles, ACP options and custom binaries.",
+      "fleetpane_action": "Useful configuration contract; no ZAI/GLM-specific adapter under current scope.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2395"
+    },
+    {
+      "ordinal": 2396,
+      "revision": "d480101115b6d04b521d59d926c98a2a63c70fd5",
+      "category": "empty-create",
+      "subject": "fix: thread allowEmptySubmit through submit pipeline",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-submit.ts"
+      ],
+      "finding": "Submit helper allows explicitly requested empty submission past text/image noop gate.",
+      "fleetpane_action": "Session creation is already separate from Send; preserve nonempty prompt contract for ordinary conversation input.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2396"
+    },
+    {
+      "ordinal": 2397,
+      "revision": "612979f95f7ba1cd70d703e5be4bbb2d5f59f776",
+      "category": "creation-test",
+      "subject": "fix(e2e): check for agent tab instead of draft \"New Agent\" tab",
+      "paths_inspected": [
+        "packages/app/e2e/new-workspace.spec.ts"
+      ],
+      "finding": "E2E expects real agent tab instead of obsolete New Agent draft.",
+      "fleetpane_action": "Draft and actual provider context remain distinct; native receipt acceptance separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2397"
+    },
+    {
+      "ordinal": 2398,
+      "revision": "7652ee10cada86d992fd423db66da248222ec740",
+      "category": "focus-test",
+      "subject": "fix(e2e): click agent tab before asserting composer visibility",
+      "paths_inspected": [
+        "packages/app/e2e/new-workspace.spec.ts"
+      ],
+      "finding": "E2E explicitly opens agent tab after setup auto-focuses another tab.",
+      "fleetpane_action": "Native focus and pending actions should be preserved; workspace tabs still unimplemented.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2398"
+    },
+    {
+      "ordinal": 2399,
+      "revision": "be3d5ed78dbb8f0a0ee2be47ef8cf816ada1c9e4",
+      "category": "git-cache",
+      "subject": "fix: use cached git service snapshots for fetchWorkspaces instead of shelling out",
+      "paths_inspected": [
+        "packages/server/src/server/workspace-registry-model.ts"
+      ],
+      "finding": "New projection maps cached Git snapshot fields into checkout metadata.",
+      "fleetpane_action": "No synchronous git from render; complete workspace Git watchers remain open and Git Diff deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2399"
+    },
+    {
+      "ordinal": 2400,
+      "revision": "6ed166641f1c86b092e0d1c06f50dbbdaa2efc9e",
+      "category": "selector-overflow",
+      "subject": "Fix mobile model selector overflow",
+      "paths_inspected": [
+        "packages/app/src/components/combined-model-selector.tsx"
+      ],
+      "finding": "Model trigger limits title to one ellipsized line.",
+      "fleetpane_action": "Native search already shows stable ID separately; long trigger geometry still requires dedicated limits.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2400"
+    },
+    {
+      "ordinal": 2401,
+      "revision": "c59a9794461f84e0b09db57736e540ae7d6dd4e2",
+      "category": "merge-build",
+      "subject": "Merge branch 'main' of github.com:getpaseo/paseo",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "First-parent merge changes Nix npm hash only.",
+      "fleetpane_action": "No native behavior change or dependency audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2401"
+    },
+    {
+      "ordinal": 2402,
+      "revision": "9c0b5616fecec64f4bb5db8038e8ac6a254c1f1e",
+      "category": "compact-header",
+      "subject": "Refine compact workspace header layout",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Groups compact workspace title/subtitle and uses derived header title.",
+      "fleetpane_action": "Native compact conversation already allocates bounded details; workspace header/tabs still separate gaps.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2402"
+    },
+    {
+      "ordinal": 2403,
+      "revision": "5329a12222e72c5da103c69c095dfda4d0f766aa",
+      "category": "compact-controls",
+      "subject": "Fix compact status bar model overflow",
+      "paths_inspected": [
+        "packages/app/src/components/agent-status-bar.tsx"
+      ],
+      "finding": "Model preference trigger gets minWidth0 and flexShrink1.",
+      "fleetpane_action": "Native palette now searchable with explicit ID; arbitrary long trigger labels not yet accepted.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2403"
+    },
+    {
+      "ordinal": 2404,
+      "revision": "8d854a634240af62ef425bddcc6786c48744c60b",
+      "category": "header-geometry",
+      "subject": "Fix desktop workspace header alignment",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Workspace header flexGrow differs between xs and md breakpoints.",
+      "fleetpane_action": "Use native layout constraints instead of copying web breakpoints.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2404"
+    },
+    {
+      "ordinal": 2405,
+      "revision": "202fa3e8f32b2488fff88986cfdff454357d6fa5",
+      "category": "light-contrast",
+      "subject": "Improve synced loader visibility in light mode",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Workspace syncing loader uses darker amber in light theme.",
+      "fleetpane_action": "Keep light/dark native theme acceptance separate; all indicator contrast is not established.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2405"
+    },
+    {
+      "ordinal": 2406,
+      "revision": "5241727b29c0be9d0c15c0d8f2af5d2fac52a099",
+      "category": "merge-git-cache",
+      "subject": "Merge branch 'main' into dev",
+      "paths_inspected": [
+        "packages/server/src/server/workspace-registry-model.ts"
+      ],
+      "finding": "First-parent merge adds cached Git snapshot projection.",
+      "fleetpane_action": "Retain read projection independent of Git shell work; watcher/freshness coverage open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2406"
+    },
+    {
+      "ordinal": 2407,
+      "revision": "1e0f62976dfaa2e72f6524f48ec7a1e2d571cabf",
+      "category": "provider-scope",
+      "subject": "fix: checkpoint CI and provider snapshot changes",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-providers-snapshot.ts"
+      ],
+      "finding": "Provider snapshot subscription filters payload cwd against current normalized cwd.",
+      "fleetpane_action": "Keep Host/provider/session exact scope; future per-workspace catalog cache must include cwd.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2407"
+    },
+    {
+      "ordinal": 2408,
+      "revision": "d0be7c3ee7072f1f8e9c3235dc57eaf5b491c51f",
+      "category": "tab-sync",
+      "subject": "fix: lock workspace navigation tab sync",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Selected hunk removes agent/terminal tab ensure and prune loop from workspace effect.",
+      "fleetpane_action": "Full workspace tabs and restoration remain gaps; avoid extra reads in render.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2408"
+    },
+    {
+      "ordinal": 2409,
+      "revision": "9c90657d601faca46c04dc0b1573715058b8f059",
+      "category": "route-identity",
+      "subject": "fix: simplify workspace route navigation",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "Route identity stops including transient open intent and uses stable server/workspace only.",
+      "fleetpane_action": "Native exact Host/session binding already separate from presentation intent.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2409"
+    },
+    {
+      "ordinal": 2410,
+      "revision": "dd6a396dbf2d5590f3e0c82bc01c8528dddc999d",
+      "category": "debug-projection",
+      "subject": "Add provider/model selection for schedules and workspace fetch debug logging",
+      "paths_inspected": [
+        "packages/app/src/utils/workspace-fetch-debug.ts"
+      ],
+      "finding": "Adds workspace diagnostic summarizer enumerating names/project IDs/status.",
+      "fleetpane_action": "Keep diagnostics explicit and bounded; do not log private full workspace catalog by default. Schedule changes outside inspected hunk.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2410"
+    },
+    {
+      "ordinal": 2411,
+      "revision": "dd9914458772cf677b23324d560678b579f29727",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.55-rc.2",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App package refs bump rc1 to rc2.",
+      "fleetpane_action": "No release steps executed or Rust feature addition.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2411"
+    },
+    {
+      "ordinal": 2412,
+      "revision": "dbd1645dc9e289ce569d3ad65cb461c3ca2af10e",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix npm hash changes.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2412"
+    },
+    {
+      "ordinal": 2413,
+      "revision": "16386ba6d7729c5bab916afadeb53100ee64966b",
+      "category": "merge-debug",
+      "subject": "Merge branch 'main' into dev",
+      "paths_inspected": [
+        "packages/app/src/utils/workspace-fetch-debug.ts"
+      ],
+      "finding": "First-parent merge adds workspace diagnostic summarizer.",
+      "fleetpane_action": "Same bounded/privacy caution; remaining paths uninspected.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2413"
+    },
+    {
+      "ordinal": 2414,
+      "revision": "7cba6cf4147dc385fd7f826fe98c762cc2ae11ca",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No native workflow change.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2414"
+    },
+    {
+      "ordinal": 2415,
+      "revision": "fb24029c69dee9534f63598394e33f1800eec4dc",
+      "category": "empty-commit",
+      "subject": "chore: retrigger PR workflows on latest head",
+      "paths_inspected": [],
+      "finding": "Commit tree has no diff paths.",
+      "fleetpane_action": "Metadata-only review; no source or runtime claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2415"
+    },
+    {
+      "ordinal": 2416,
+      "revision": "0f0efa1707dc43b5afa921b8c99c0199e34109d0",
+      "category": "formatting",
+      "subject": "fix: format providers snapshot hook",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-providers-snapshot.ts"
+      ],
+      "finding": "Reindents existing cwd-filtered provider snapshot subscription.",
+      "fleetpane_action": "No new semantic workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2416"
+    },
+    {
+      "ordinal": 2417,
+      "revision": "d55209b81eb490c876fbd3c17877c8d2636d298e",
+      "category": "cli-export",
+      "subject": "fix: stabilize workspace e2e routing and cli helper export",
+      "paths_inspected": [
+        "packages/cli/src/commands/agent/run.ts"
+      ],
+      "finding": "Run module reexports provider/model resolver.",
+      "fleetpane_action": "Rust typed provider boundary already independent; no TS module transplant.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2417"
+    },
+    {
+      "ordinal": 2418,
+      "revision": "89db6d31872b41757a81eb6e1098304687e87229",
+      "category": "popup-position",
+      "subject": "fix(app): restore combobox flash prevention condition",
+      "paths_inspected": [
+        "packages/app/src/components/ui/combobox.tsx"
+      ],
+      "finding": "Reverses referenceAtOrigin condition in resolved popup position.",
+      "fleetpane_action": "Native geometry verified independently; no guessed timer workaround.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2418"
+    },
+    {
+      "ordinal": 2419,
+      "revision": "c80d7a8165e0202cd192119fb1120ce2838268ff",
+      "category": "submit-reversal",
+      "subject": "fix: require content to create workspace — no more empty submissions",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Selected tooltip hunk removes empty-create labeling; other submit paths changed but uninspected.",
+      "fleetpane_action": "Keep explicit empty-session creation separate from Send rather than copying transient web policy.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2419"
+    },
+    {
+      "ordinal": 2420,
+      "revision": "326dad93e42bbb321497a6f426c6ed01eb6ccc11",
+      "category": "file-shortcut",
+      "subject": "fix: remove hasSelectedAgent gate from Cmd+E and focus mode shortcuts",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-keyboard-shortcuts.ts"
+      ],
+      "finding": "File explorer toggle drops selected-agent gate and invokes available callback.",
+      "fleetpane_action": "Workspace file view should not require agent runtime; global explorer shortcut still separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2420"
+    },
+    {
+      "ordinal": 2421,
+      "revision": "9d30b7e85ac9918aa1326207a4daed612702de12",
+      "category": "timeline-epoch",
+      "subject": "fix: sync dev branch with main timeline/schema changes and remove stale providers",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-stream-reducers.ts"
+      ],
+      "finding": "Incremental timeline append adds epoch to cursor/gap classification.",
+      "fleetpane_action": "Current Host identity/cursor replay remains explicit; no cross-epoch merging or silent restart replay.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2421"
+    },
+    {
+      "ordinal": 2422,
+      "revision": "79ddf6980a3e742f1ec2b4071fb016e66e848b75",
+      "category": "formatting",
+      "subject": "fix: format message-input.tsx",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Simplifies send-button style array layout.",
+      "fleetpane_action": "No behavior addition.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2422"
+    },
+    {
+      "ordinal": 2423,
+      "revision": "751a1df6828c85a20abbee4050cab8ac97b41b0a",
+      "category": "diagnostics-removal",
+      "subject": "chore: clean up debug logging, temp files, and restore changelog",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-context.tsx"
+      ],
+      "finding": "Deletes noisy workspace hydration response logs.",
+      "fleetpane_action": "Do not publish private runtime workspace inventories; retain task-owned synthetic evidence.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2423"
+    },
+    {
+      "ordinal": 2424,
+      "revision": "43bec954eab01a4f059745be60173326f217ec4d",
+      "category": "terminal-admission",
+      "subject": "fix: resolve e2e test failures for terminal creation and new workspace",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Queues terminal create intent until workspace authority is ready, errors after missing hydration.",
+      "fleetpane_action": "Current Host-owned typed PTY authority stays; do not silently retarget stale intent.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2424"
+    },
+    {
+      "ordinal": 2425,
+      "revision": "60cc73f87ef04f9445f5733ec4aea57db32c4bb3",
+      "category": "empty-create",
+      "subject": "fix: thread allowEmptySubmit through composer submit path",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-submit.ts"
+      ],
+      "finding": "Shared submit no-op gate adds explicit allowEmptySubmit alongside external content.",
+      "fleetpane_action": "Ordinary Send still requires content; creation and submission remain separate native actions.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2425"
+    },
+    {
+      "ordinal": 2426,
+      "revision": "f21f86165358bbae5545abf7621fe9dd2e33b982",
+      "category": "test-import",
+      "subject": "Fix CLI test import for resolveProviderAndModel",
+      "paths_inspected": [
+        "packages/cli/tests/21-run-output-schema-helper.test.ts"
+      ],
+      "finding": "CLI helper test imports resolver from dedicated utility module.",
+      "fleetpane_action": "No Rust behavior; historical tests not run.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2426"
+    },
+    {
+      "ordinal": 2427,
+      "revision": "df0ce60a350cd0e88ffceacc79fb00bfb785b9f2",
+      "category": "formatting",
+      "subject": "Fix formatting in synced loader components",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Light-theme loader color expression reformatted.",
+      "fleetpane_action": "No new semantic behavior.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2427"
+    },
+    {
+      "ordinal": 2428,
+      "revision": "61c36b4e2299c5c713a1074c59da4ff19c350687",
+      "category": "git-cache",
+      "subject": "fix: use cached snapshot for checkout_pr_status_request",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "PR status handler reads cached Git snapshot without forced refresh.",
+      "fleetpane_action": "Explicit freshness matters; Git/PR integration remains deferred rather than claiming updated remote status.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2428"
+    },
+    {
+      "ordinal": 2429,
+      "revision": "5a836eb170657ec690ef65edf75dc604fd8f5185",
+      "category": "windows-dev",
+      "subject": "Allow dev on windows machine (#357)",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "finding": "Root package gains PowerShell development entry point.",
+      "fleetpane_action": "Native Windows packaging/runtime acceptance still open; no historical script execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2429"
+    },
+    {
+      "ordinal": 2430,
+      "revision": "3cdadd362ceb11c1a82ed4c9b65554856079ed22",
+      "category": "diagnostics-removal",
+      "subject": "chore: remove noisy WorkspaceFetch debug logs",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-sidebar-workspaces-list.ts"
+      ],
+      "finding": "Sidebar paging removes verbose request/response logs while retaining bounded fetch loop.",
+      "fleetpane_action": "Keep native explicit page scope and omissions; no full-index search claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2430"
+    },
+    {
+      "ordinal": 2431,
+      "revision": "345729c5881b1956404c6d1a1ab54ce3aa0a3450",
+      "category": "git-watch-owner",
+      "subject": "refactor: eliminate getCheckoutStatusLite, use WorkspaceGitService",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Checkout diff manager delegates watches to shared WorkspaceGitService instead of independent timed fallback.",
+      "fleetpane_action": "Retain a single resource owner and explicit unsubscribe; Git Diff expansion remains deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2431"
+    },
+    {
+      "ordinal": 2432,
+      "revision": "380c9927d704d00df9bae714f52cf74af5e37d78",
+      "category": "startup-logging",
+      "subject": "fix: stop logging pairing offer during daemon startup",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Removes logging of pairing offer URL while still constructing it.",
+      "fleetpane_action": "Do not log credentials/pairing secrets; native remote auth remains unimplemented.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2432"
+    },
+    {
+      "ordinal": 2433,
+      "revision": "80eb5dbe83947b28cb7784769fc22de497c58e66",
+      "category": "watch-tests",
+      "subject": "fix: make workspace-git-service tests platform-aware for Linux CI",
+      "paths_inspected": [
+        "packages/server/src/server/workspace-git-service.test.ts"
+      ],
+      "finding": "Git watch assertion treats Linux as nonrecursive and expects fallback state.",
+      "fleetpane_action": "Native watcher semantics need real platform tests; source review does not verify historical fallback.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2433"
+    },
+    {
+      "ordinal": 2434,
+      "revision": "d1702e8a40210f452ef41fb64f470b00eacf4fa6",
+      "category": "worktree-watch",
+      "subject": "fix: defer worktree git watch subscription until after worktree exists",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session injects explicit syncWorkspaceGitWatchTarget dependency into worktree creation.",
+      "fleetpane_action": "Watch only after directory exists; setup completion is independent of workspace identity.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2434"
+    },
+    {
+      "ordinal": 2435,
+      "revision": "8651c334c747c5c31f86c5d18f55820d50dafb72",
+      "category": "creation-progress",
+      "subject": "fix: keep worktree creation spinner visible while loading",
+      "paths_inspected": [
+        "packages/app/src/components/sidebar-workspace-list.tsx"
+      ],
+      "finding": "Worktree creation control remains visible while mutation pending even after hover exit.",
+      "fleetpane_action": "Native durable creation progress already separate; no invisible in-flight actions.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2435"
+    },
+    {
+      "ordinal": 2436,
+      "revision": "30c7729a7a7caa4f03cc1054d022261f218f86d8",
+      "category": "provider-guide",
+      "subject": "docs: add custom provider configuration guide",
+      "paths_inspected": [
+        "docs/CUSTOM-PROVIDERS.md"
+      ],
+      "finding": "Provider configuration guide describes profiles and ACP with agents.providers.",
+      "fleetpane_action": "Custom provider UI is a gap; no excluded ZAI/GLM adapter planned.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2436"
+    },
+    {
+      "ordinal": 2437,
+      "revision": "649eddeea8f3c810c7b91e1b4e0701daff801c86",
+      "category": "release-docs",
+      "subject": "docs: add 0.1.55 changelog",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog claims profiles, faster20+workspaces, Windows/tablet/IME fixes and settings shortcut.",
+      "fleetpane_action": "Claims are not measured Fleetpane performance or acceptance; retain separate scenario evidence.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2437"
+    },
+    {
+      "ordinal": 2438,
+      "revision": "c70277f445bc742a22b4266abe13591c9731fafd",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.55",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App dependencies bump rc2 to0.1.55.",
+      "fleetpane_action": "No historical release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2438"
+    },
+    {
+      "ordinal": 2439,
+      "revision": "2090d685ed60315c421e3ccfc39aa34128bb3f6a",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash update.",
+      "fleetpane_action": "No native behavior or dependency audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2439"
+    },
+    {
+      "ordinal": 2440,
+      "revision": "25fd93d7e2f1443c1c0f918204cdd343e1804d63",
+      "category": "git-empty",
+      "subject": "fix: handle repos with no commits in getCurrentBranch",
+      "paths_inspected": [
+        "packages/server/src/utils/checkout-git.ts"
+      ],
+      "finding": "getCurrentBranch catches every git error as null for empty repo handling.",
+      "fleetpane_action": "Do not copy swallowed errors; distinguish unborn HEAD from invalid repo/permissions in typed boundary.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2440"
+    },
+    {
+      "ordinal": 2441,
+      "revision": "f0ac6327329015127820426b129dabda4dc1bc6d",
+      "category": "workspace-fault-domain",
+      "subject": "fix: isolate git snapshot errors per workspace in fetch_workspaces",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Workspace descriptor catches Git snapshot failure and returns base descriptor with warning.",
+      "fleetpane_action": "Keep per-workspace faults visible without preventing independent rows; stale/error metadata must remain explicit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2441"
+    },
+    {
+      "ordinal": 2442,
+      "revision": "c8cafbabff62cda82083418fb2ab4b72c002f8b3",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.56-rc.1",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App dependencies bump0.1.55 to0.1.56-rc.1.",
+      "fleetpane_action": "No new native workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2442"
+    },
+    {
+      "ordinal": 2443,
+      "revision": "32b68cbcf4ed05aecddf46ff17f90465148e7305",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash update.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2443"
+    },
+    {
+      "ordinal": 2444,
+      "revision": "d4a40158049ad6eeed641ddfaa44c2defe621ccf",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.56",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App package refs bump rc1 to0.1.56.",
+      "fleetpane_action": "No historical release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2444"
+    },
+    {
+      "ordinal": 2445,
+      "revision": "200453f032f30f42b80542efaacc9095c8d70b22",
+      "category": "release-docs",
+      "subject": "docs: add 0.1.56 changelog",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog describes empty repositories and single-project load isolation.",
+      "fleetpane_action": "Useful future acceptance scenarios; not runtime proof.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2445"
+    },
+    {
+      "ordinal": 2446,
+      "revision": "7f92f7f51d915b8e13eb2becfbcaafb955909c10",
+      "category": "header-layout",
+      "subject": "fix: stabilize branch switcher layout on mobile",
+      "paths_inspected": [
+        "packages/app/src/components/branch-switcher.tsx"
+      ],
+      "finding": "Branch trigger preserves icon/title wrapper for absent current branch.",
+      "fleetpane_action": "Keep absent metadata explicit and consistent geometry; Git branch switching not implemented here.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2446"
+    },
+    {
+      "ordinal": 2447,
+      "revision": "312a6e22fe3cd2e31e7118a5712d058f8646ccc9",
+      "category": "stream-order",
+      "subject": "fix: flush head before applying canonical catch-up entries on mobile",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-stream-reducers.ts"
+      ],
+      "finding": "Canonical catch-up flushes current head before reducing accepted tail units.",
+      "fleetpane_action": "Preserve event order, epoch/cursor and item identity; existing sparse native projection remains tested separately.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2447"
+    },
+    {
+      "ordinal": 2448,
+      "revision": "e012c8f52e7173a1fe6bfaa96ac74832a291c6d1",
+      "category": "attention-rpc",
+      "subject": "feat: return agent snapshots from cancel and clear-attention RPCs",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client.ts"
+      ],
+      "finding": "clear attention becomes awaited correlated RPC with15-second response timeout.",
+      "fleetpane_action": "Acknowledge observation separately from turn completion; existing exact local review remains distinct from provider mutation.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2448"
+    },
+    {
+      "ordinal": 2449,
+      "revision": "f59af4c810d8f24863ce329d7d14464f72a6a2dc",
+      "category": "swallowed-errors",
+      "subject": "fix: catch unhandled timeout rejection in attention clear",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-attention-clear.ts"
+      ],
+      "finding": "Attention clear caller suppresses new async rejection with empty catch.",
+      "fleetpane_action": "Do not copy silent failure; keep explicit operation outcomes.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2449"
+    },
+    {
+      "ordinal": 2450,
+      "revision": "c5295a4ab35b6c3b77efee489234f684b1b67792",
+      "category": "opencode-close",
+      "subject": "fix(server): archive OpenCode sessions on close (#408)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "OpenCode close reconciliation classifies NotFound and attempts abort with warning.",
+      "fleetpane_action": "OpenCode is not OpenCodex; no new provider adapter under current scope. Closing/cancel/archive remain separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2450"
+    },
+    {
+      "ordinal": 2451,
+      "revision": "8f04e65cf12f1f7caad293f5b54d69b1be355118",
+      "category": "opencode-timeout",
+      "subject": "fix(opencode): Wait for SSE after slash command timeouts (#407)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "OpenCode helper traverses error causes/diagnostics to classify headers timeout.",
+      "fleetpane_action": "No adapter added; timeout is not completion or permission to replay input.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2451"
+    },
+    {
+      "ordinal": 2452,
+      "revision": "d40e4b6f0d0a577ff3087a45f2095bd51dd99d84",
+      "category": "composer-focus",
+      "subject": "feat: add ⌘L shortcut to focus message input with hint",
+      "paths_inspected": [
+        "packages/app/src/keyboard/keyboard-shortcuts.ts"
+      ],
+      "finding": "Platform Cmd/Control L focuses message input, excluding terminal on nonmacOS.",
+      "fleetpane_action": "Useful native keyboard gap; implement scoped focus without stealing PTY control-L.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2452"
+    },
+    {
+      "ordinal": 2453,
+      "revision": "3fe79535cc2d37c89709a875e19752701c75f435",
+      "category": "focus-hint",
+      "subject": "fix: only show ⌘L focus hint when agent panel is active",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Focus hint is gated by active agent input pane.",
+      "fleetpane_action": "Only advertise shortcut when it can target current native conversation.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2453"
+    },
+    {
+      "ordinal": 2454,
+      "revision": "fc96b260d10dd002824f8f08af1f4823d1c9bfb4",
+      "category": "pane-focus",
+      "subject": "refactor: rename isInputActive to isPaneFocused for clarity",
+      "paths_inspected": [
+        "packages/app/src/components/agent-input-area.tsx"
+      ],
+      "finding": "Renames pane-active flag used in keyboard priority/gating.",
+      "fleetpane_action": "Native focus ownership must be exact; no global key capture through overlays.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2454"
+    },
+    {
+      "ordinal": 2455,
+      "revision": "89b87c0235c20b44edf33d288529b18a61203b44",
+      "category": "historical-instructions",
+      "subject": "docs: add local test suite execution rules",
+      "paths_inspected": [
+        "CLAUDE.md"
+      ],
+      "finding": "Historical CLAUDE adds local test and delegation policies.",
+      "fleetpane_action": "Reference data only; does not replace current instructions or authorize agents/CI writes.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2455"
+    },
+    {
+      "ordinal": 2456,
+      "revision": "7a8f65805d62e7bd2e3c3db1299fb0d8bcdef01c",
+      "category": "http-hostnames",
+      "subject": "refactor: rename allowedHosts to hostnames (#413)",
+      "paths_inspected": [
+        "packages/server/src/server/hostnames.ts"
+      ],
+      "finding": "Hostname helper normalizes case/space and handles bracketed IPv6 and domain patterns.",
+      "fleetpane_action": "No HTTP service added; future remote auth/host validation requires independent design.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2456"
+    },
+    {
+      "ordinal": 2457,
+      "revision": "c1df523a77f2384043ca9a8c21817a60e2edb1e2",
+      "category": "empty-commit",
+      "subject": "fix: update lockfile signatures and Nix hash (#412)",
+      "paths_inspected": [],
+      "finding": "No changed paths in indexed commit.",
+      "fleetpane_action": "Metadata-only inspection; no source diff or behavior.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2457"
+    },
+    {
+      "ordinal": 2458,
+      "revision": "918949c7fa421d1a7b764c1f153d0b299b597b59",
+      "category": "fresh-files",
+      "subject": "fix: file preview shows stale content when re-opening a file (#411)",
+      "paths_inspected": [
+        "packages/app/src/components/file-pane.tsx"
+      ],
+      "finding": "File preview query refetches on mount despite five-second stale cache.",
+      "fleetpane_action": "Native explicit reopen already performs fresh read with separate fixture evidence.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2458"
+    },
+    {
+      "ordinal": 2459,
+      "revision": "e635c6beca507d668c8b781dd0922b6260be0976",
+      "category": "merge-provider-close",
+      "subject": "merge: integrate main into dev",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "First-parent merge adds OpenCode abort/close reconciliation classifier.",
+      "fleetpane_action": "No OpenCode adapter; remaining68 paths uninspected.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2459"
+    },
+    {
+      "ordinal": 2460,
+      "revision": "beeb315c8d9e7ed27d4374090beb914a77f63641",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix npm hash update.",
+      "fleetpane_action": "No native capability or dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2460"
+    },
+    {
+      "ordinal": 2461,
+      "revision": "e6044264e2971c972d9d24749b53257995eb60cc",
+      "category": "opaque-identity",
+      "subject": "refactor: transition to opaque workspace identifiers",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Selected watcher bookkeeping renames path-derived workspaceId to normalizedCwd.",
+      "fleetpane_action": "Keep stable workspace UUID and filesystem path distinct; Rust already uses typed IDs.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2461"
+    },
+    {
+      "ordinal": 2462,
+      "revision": "5a20e78dffc11e3b11602dcd9fcfb985ab6a0c95",
+      "category": "lazy-load",
+      "subject": "fix: restore timeline hydration after daemon restart and clean up defensive code",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session delegates initialization to shared agent loading service instead of its own in-flight map.",
+      "fleetpane_action": "One lifecycle owner; native archive reads never imply context resume.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2462"
+    },
+    {
+      "ordinal": 2463,
+      "revision": "4e9d80d118c0305814e4bc29a161f22bc10b7abf",
+      "category": "model-layout",
+      "subject": "fix: prevent model name truncation in combobox item rows",
+      "paths_inspected": [
+        "packages/app/src/components/ui/combobox.tsx"
+      ],
+      "finding": "Picker model label disables flex shrink.",
+      "fleetpane_action": "Native search shows stable IDs; long-label layout remains separate acceptance.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2463"
+    },
+    {
+      "ordinal": 2464,
+      "revision": "deca82653e013a22b5fd5a62b3f218594c2cfc82",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.57-rc.1",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App package refs bump0.1.56 to0.1.57-rc.1.",
+      "fleetpane_action": "No release execution or native workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2464"
+    },
+    {
+      "ordinal": 2465,
+      "revision": "b8ade39f73c89554aee1560ba5df2718295b19a1",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2465"
+    },
+    {
+      "ordinal": 2466,
+      "revision": "45a5ba8637a60fc1bc6abe7372997d4e32a13871",
+      "category": "ime-gate",
+      "subject": "Fix duplicate command args for generic ACP providers (#444)",
+      "paths_inspected": [
+        "packages/app/src/utils/keyboard-ime.ts"
+      ],
+      "finding": "New shared keyboard helper checks isComposing or keyCode229.",
+      "fleetpane_action": "Current native composer checks marked text; actual IME still unaccepted. Generic ACP argv changes outside inspected path.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2466"
+    },
+    {
+      "ordinal": 2467,
+      "revision": "ffbb2ffd06262b059b8d1976057d6337ef75c640",
+      "category": "file-init",
+      "subject": "fix: retry file explorer init when client reconnects after page refresh (#442)",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "finding": "Explorer initialization clears initialized flag on failed listing and restores expanded directories only after success.",
+      "fleetpane_action": "Native fresh reads retain explicit failure; tree expansion persistence not yet implemented.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2467"
+    },
+    {
+      "ordinal": 2468,
+      "revision": "57312d4f75e7b51b22838404ff3d13ede1201341",
+      "category": "opencode-events",
+      "subject": "fix(server): Map OpenCode todo and compaction events (#429)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "OpenCode translator emits ordered todo and compaction timeline objects.",
+      "fleetpane_action": "No OpenCode adapter; tasks and compaction parity for supported providers still separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2468"
+    },
+    {
+      "ordinal": 2469,
+      "revision": "1885d8602f6b3b13ed54abf25146a141dd6ecafa",
+      "category": "markdown-preview",
+      "subject": "feat(app): Render markdown files in file pane (#427)",
+      "paths_inspected": [
+        "packages/app/src/components/file-pane.tsx"
+      ],
+      "finding": "Text file preview conditionally renders Markdown in independent scroll container.",
+      "fleetpane_action": "Native text/source preview exists; formatted Markdown file mode is useful missing workflow, distinct from message Markdown.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2469"
+    },
+    {
+      "ordinal": 2470,
+      "revision": "0b3c29b2ec5b13b1d3d80f2734ed0d36518e037a",
+      "category": "dev-cors",
+      "subject": "fix(desktop): allow localhost origins in dev (#419)",
+      "paths_inspected": [
+        "packages/desktop/scripts/dev.sh"
+      ],
+      "finding": "Desktop dev shell exports wildcard CORS origins.",
+      "fleetpane_action": "Native Unix IPC needs no wildcard web CORS; no exposure introduced.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2470"
+    },
+    {
+      "ordinal": 2471,
+      "revision": "483312e1dcee6029e5922351be49a74c16dcd51d",
+      "category": "provider-tools",
+      "subject": "feat: add disallowedTools to provider config",
+      "paths_inspected": [
+        "packages/server/src/server/agent/provider-registry.ts"
+      ],
+      "finding": "Runtime setting merge appends base and override disallowedTools.",
+      "fleetpane_action": "Current provider scope does not add Claude config; future restrictions need explicit contract, not guessed enforcement.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2471"
+    },
+    {
+      "ordinal": 2472,
+      "revision": "86bb5cc82701f3f668389e31360bde98912250cc",
+      "category": "archived-loading",
+      "subject": "fix: make MCP tools work for archived agents, matching CLI code paths (#423)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-loading.ts"
+      ],
+      "finding": "Shared loader deduplicates pending init, loads persisted handle and resumes provider when needed.",
+      "fleetpane_action": "Keep Fleetpane archive observation read-only and explicit Resume; shared automation not added.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2472"
+    },
+    {
+      "ordinal": 2473,
+      "revision": "a1f32569230495a632adc7bb7482a1c614222619",
+      "category": "scrollbar-theme",
+      "subject": "style(app): theme native scrollbars across all web views (#399)",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-web-scrollbar-style.web.ts"
+      ],
+      "finding": "Web scrollbar style derives color/width from theme.",
+      "fleetpane_action": "Native Kit scrollbars already theme-owned; no web CSS transplant.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2473"
+    },
+    {
+      "ordinal": 2474,
+      "revision": "165ae58f75602dc3448656ffa09f7037250588b4",
+      "category": "opencode-permission",
+      "subject": "fix(server): Improve OpenCode permission prompt context (#398)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "Permission utility maps names and extracts first string metadata field.",
+      "fleetpane_action": "No OpenCode adapter; preserve exact pending request and tool context rather than inferred permissions.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2474"
+    },
+    {
+      "ordinal": 2475,
+      "revision": "278acf5fe1b6fb223b09b850f30f8e1d8522538a",
+      "category": "release-guidance",
+      "subject": "docs: credit external contributors with PR/GitHub links in changelog",
+      "paths_inspected": [
+        "docs/RELEASE.md"
+      ],
+      "finding": "Release doc adds linked contributor credit and impact ordering.",
+      "fleetpane_action": "Provenance remains required; historical instructions not current execution authority.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2475"
+    },
+    {
+      "ordinal": 2476,
+      "revision": "5c6f175db5b54573b42b73ed2cdce878f94d0bbd",
+      "category": "ios-selection",
+      "subject": "fix: make code file preview text selectable on iOS (#447)",
+      "paths_inspected": [
+        "packages/app/src/components/file-pane.tsx"
+      ],
+      "finding": "Code line text gains selectable flag.",
+      "fleetpane_action": "Native exact Copy already verified; arbitrary source selection and iOS remain separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2476"
+    },
+    {
+      "ordinal": 2477,
+      "revision": "814098852cbead843e000cd89fb11f5faa256302",
+      "category": "provider-freshness",
+      "subject": "feat: provider model freshness TTL and diagnostic UI (#426)",
+      "paths_inspected": [
+        "packages/app/src/components/provider-diagnostic-sheet.tsx"
+      ],
+      "finding": "Diagnostic UI shows loading/error/fetchedAt and filters model labels/IDs.",
+      "fleetpane_action": "New native search is bounded/explicit; freshness TTL and provider settings diagnostics remain open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2477"
+    },
+    {
+      "ordinal": 2478,
+      "revision": "11b407c804a462f840a6902c971ba7c20b3c453e",
+      "category": "non-git-header",
+      "subject": "fix(app): hide branch icon on non-git workspace headers",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Extracts checkout query gate requiring connection and absolute workspace path.",
+      "fleetpane_action": "Opaque IDs must not be treated as directories; non-Git folder workflow already supported.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2478"
+    },
+    {
+      "ordinal": 2479,
+      "revision": "21742bbeb45d5d49cc0eac3a83bf7f794150d162",
+      "category": "merge-diagnostics",
+      "subject": "Merge remote-tracking branch 'origin/main' into dev",
+      "paths_inspected": [
+        "packages/app/src/components/provider-diagnostic-sheet.tsx"
+      ],
+      "finding": "First-parent merge adds provider status/fetchedAt and search projection.",
+      "fleetpane_action": "No automatic freshness or full67-path audit claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2479"
+    },
+    {
+      "ordinal": 2480,
+      "revision": "7c50b7a08092b52a5ef579edcd1d5146a4813f4f",
+      "category": "provider-launch",
+      "subject": "fix(server): harden Codex/Windows startup and provider resolution (#454)",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "Executable resolution enumerates PATH candidates via which and distinguishes ENOENT.",
+      "fleetpane_action": "Keep direct argv and visible launch errors; Windows startup remains unaccepted.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2480"
+    },
+    {
+      "ordinal": 2481,
+      "revision": "cbb690efd09d4f92e74a87d5eb761bbda2d7bfbb",
+      "category": "merge-launch",
+      "subject": "Merge remote-tracking branch 'origin/main' into dev",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "First-parent merge repeats PATH candidate enumeration change.",
+      "fleetpane_action": "No native Windows acceptance from source merge.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2481"
+    },
+    {
+      "ordinal": 2482,
+      "revision": "54b8126debc0fefe4f3f02e7dd17036cb819485f",
+      "category": "release-docs",
+      "subject": "docs: add 0.1.57 changelog",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog enumerates Markdown mode, focus shortcut, freshness and Windows fixes.",
+      "fleetpane_action": "Useful acceptance inventory only, not tested Fleetpane behavior.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2482"
+    },
+    {
+      "ordinal": 2483,
+      "revision": "41fd45588f348974b2b2174e77ab45e3232496af",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.57",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App refs bump0.1.57-rc.1 to0.1.57.",
+      "fleetpane_action": "No historical release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2483"
+    },
+    {
+      "ordinal": 2484,
+      "revision": "a3822ca2993624d95ad9fa78004559150efa5888",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash update.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2484"
+    },
+    {
+      "ordinal": 2485,
+      "revision": "917c2f56f40e1320daa1fb67348989397e8766a8",
+      "category": "argv-regression",
+      "subject": "test(server): reproduce Windows spawn EINVAL with cmd shim + spaces + JSON args",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/provider-windows-launch.test.ts"
+      ],
+      "finding": "Windows fake provider test compares exact argv with paths containing spaces and JSON.",
+      "fleetpane_action": "Retain exact argv tests for supported runtime; Windows fixtures not executed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2485"
+    },
+    {
+      "ordinal": 2486,
+      "revision": "de33dfd0340e7133fc0edc0d2f39cc8aa55c03e7",
+      "category": "windows-quoting",
+      "subject": "fix(server): share Windows launch handling across providers",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "Cmd quoting doubles slash runs before quotes and trailing slashes.",
+      "fleetpane_action": "Do not transpose cmd escaping to Unix direct argv; Windows support separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2486"
+    },
+    {
+      "ordinal": 2487,
+      "revision": "c2a8e56d33b25cab6c4b7e26bad38722091bb015",
+      "category": "launch-reversal",
+      "subject": "test(server): reproduce Windows EINVAL for .cmd shim with shell:false",
+      "paths_inspected": [
+        "packages/server/src/utils/spawn.ts"
+      ],
+      "finding": "Selected spawn hunk removes automatic cmd-script shell route.",
+      "fleetpane_action": "Historical regression sequence, not a preferred final implementation.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2487"
+    },
+    {
+      "ordinal": 2488,
+      "revision": "9cee1d81960dc7937791589b54c8c463f0fd7859",
+      "category": "launch-reversal",
+      "subject": "fix(server): restore .cmd shell routing for Windows EINVAL",
+      "paths_inspected": [
+        "packages/server/src/utils/spawn.ts"
+      ],
+      "finding": "Restores explicit cmd-script shell route after EINVAL regression.",
+      "fleetpane_action": "Preserve documented platform boundary; no Windows claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2488"
+    },
+    {
+      "ordinal": 2489,
+      "revision": "e0f82e7ad0575cd879ec538d8e8fe61b6fcf640f",
+      "category": "powershell-test",
+      "subject": "test(server): reproduce Windows ps1 shim launch gap",
+      "paths_inspected": [
+        "packages/server/src/utils/spawn.launch-regression.test.ts"
+      ],
+      "finding": "Fixture adds temporary PATH/PATHEXT handling with restoration.",
+      "fleetpane_action": "No global environment changes or historical tests executed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2489"
+    },
+    {
+      "ordinal": 2490,
+      "revision": "086b3098b1075b9149771b00822db0f0cba31b5b",
+      "category": "powershell-launch",
+      "subject": "fix(server): support Windows PowerShell shims in shared launcher",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "Version probe invokes PowerShell for ps1 shims and explicit argument conversion.",
+      "fleetpane_action": "Current Unix native runtime does not require this shim path.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2490"
+    },
+    {
+      "ordinal": 2491,
+      "revision": "7442323ca2f0d0af756fa3e7a0385ed01d3e9c00",
+      "category": "powershell-argv",
+      "subject": "fix(server): preserve JSON args for Windows PowerShell shims",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "PowerShell shim serializes exact argv through UTF16/Base64 encoded command.",
+      "fleetpane_action": "No shell reconstruction on Unix; later reversal must remain in sequence.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2491"
+    },
+    {
+      "ordinal": 2492,
+      "revision": "a2b743a6d3f23ad6b9bccb6c0161fe163a1b8bf2",
+      "category": "optional-fields",
+      "subject": "fix(server): emit valid MCP list_agents payloads",
+      "paths_inspected": [
+        "packages/server/src/server/persistence-hooks.ts"
+      ],
+      "finding": "Persistence handles omit undefined nativeHandle and metadata fields.",
+      "fleetpane_action": "Typed Rust serialization must distinguish absent/unknown; raw provider metadata retained.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2492"
+    },
+    {
+      "ordinal": 2493,
+      "revision": "b6147e39abaa3a419c387e170fe705a9beda2af0",
+      "category": "claude-diagnostic",
+      "subject": "feat(server): show Claude auth status in provider diagnostic",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Claude diagnostic invokes auth status then parses login metadata.",
+      "fleetpane_action": "No Claude-specific adapter and no credential file reads; future diagnostics should avoid raw secrets.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2493"
+    },
+    {
+      "ordinal": 2494,
+      "revision": "14ac6984f3fbf65c7aa04ead817e183492c09786",
+      "category": "provider-timeout",
+      "subject": "fix(server): extend refresh_providers_snapshot timeout to 60s",
+      "paths_inspected": [
+        "packages/server/src/client/daemon-client.ts"
+      ],
+      "finding": "Refresh provider snapshot timeout increases5s to60s.",
+      "fleetpane_action": "Not a root-cause performance fix; native catalog uses explicit existing operation boundaries.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2494"
+    },
+    {
+      "ordinal": 2495,
+      "revision": "84db0cecd7328e90d38a8577c8d47ac3d83b4d3a",
+      "category": "release-docs",
+      "subject": "docs: expand Windows entry and rename header to 0.1.58",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Windows release bullet expands paths/shim/JSON startup claims.",
+      "fleetpane_action": "No runtime acceptance from prose.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2495"
+    },
+    {
+      "ordinal": 2496,
+      "revision": "4d0fe57a7ac86576d79c43e0cea0a11800cdc8a8",
+      "category": "powershell-reversal",
+      "subject": "fix(server): stop detecting Windows PowerShell shims",
+      "paths_inspected": [
+        "packages/server/src/utils/executable.ts"
+      ],
+      "finding": "Version probe drops PowerShell shim detection and goes back to direct spawn/cmd route.",
+      "fleetpane_action": "Retain reversal rather than implementing an abandoned historical path.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2496"
+    },
+    {
+      "ordinal": 2497,
+      "revision": "1b4483615a14f4e204e3fca8ed27cbb5bc30208f",
+      "category": "claude-diagnostic",
+      "subject": "fix(server): surface raw claude auth status in diagnostic",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Auth status diagnostic returns raw trimmed stdout instead of parsed metadata.",
+      "fleetpane_action": "No raw auth output logging added; provider privacy boundary remains.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2497"
+    },
+    {
+      "ordinal": 2498,
+      "revision": "2e9500315485604b83990fd555fb889c0de7e88a",
+      "category": "claude-diagnostic",
+      "subject": "fix(server): include stderr in claude auth status diagnostic",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude-agent.ts"
+      ],
+      "finding": "Auth helper returns stderr/message on command error.",
+      "fleetpane_action": "Keep command failure explicit; no Claude adapter or secret publication.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2498"
+    },
+    {
+      "ordinal": 2499,
+      "revision": "a11c246bdceca3dff819959161a0d004a515fd25",
+      "category": "shared-send",
+      "subject": "fix(server): share send-prompt path between MCP and Session",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-shared.ts"
+      ],
+      "finding": "Adds shared unarchive helper and typed send-prompt params to common module.",
+      "fleetpane_action": "Native GUI/CLI already share typed commands; archive reading never silently unarchives/sends.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2499"
+    },
+    {
+      "ordinal": 2500,
+      "revision": "a387eaf26a197135ec79741ad424baa57ba87df1",
+      "category": "release-docs",
+      "subject": "docs: trim 0.1.58 changelog and add scannable-bullets guidance",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog splits reliability improvements into shorter user-visible bullets.",
+      "fleetpane_action": "No new source behavior or acceptance claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2500"
+    },
+    {
+      "ordinal": 2501,
+      "revision": "727aa0cdac42fb669f36e6cc685e0101aaa843b6",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.58",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App refs bump0.1.57 to0.1.58.",
+      "fleetpane_action": "No native feature or release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2501"
+    },
+    {
+      "ordinal": 2502,
+      "revision": "754f1facb66d35e679a4ebf6a4eaddb85f946173",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2502"
+    },
+    {
+      "ordinal": 2503,
+      "revision": "a5582e0ee032738ec6715e4b1bc6189681907d57",
+      "category": "merge-shared-send",
+      "subject": "Merge remote-tracking branch 'origin/main' into dev",
+      "paths_inspected": [
+        "packages/server/src/server/agent/mcp-shared.ts"
+      ],
+      "finding": "First-parent merge adds common unarchive state and send-prompt parameter definitions.",
+      "fleetpane_action": "Native typed GUI/CLI command path retained; no automatic unarchive on reads.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2503"
+    },
+    {
+      "ordinal": 2504,
+      "revision": "e6bf64aed8956cfadbd50274628b38db2c7a14db",
+      "category": "ownership-test",
+      "subject": "fix(server): drop stale snapshot mutation ownership assertions",
+      "paths_inspected": [
+        "packages/server/src/server/snapshot-mutation-ownership.test.ts"
+      ],
+      "finding": "Drops obsolete snapshot ownership assertions for removed session methods.",
+      "fleetpane_action": "No historical test run; independent runtime/storage proof still required.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2504"
+    },
+    {
+      "ordinal": 2505,
+      "revision": "e70fa2dc849f523488ea39c4a8132bcd658a6f8a",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No native workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2505"
+    },
+    {
+      "ordinal": 2506,
+      "revision": "53ed34bacfa85b2ea77866e1bef564608cf3c053",
+      "category": "empty-merge",
+      "subject": "Merge remote-tracking branch 'origin/dev' into dev",
+      "paths_inspected": [],
+      "finding": "Merge tree has no changed paths against first parent.",
+      "fleetpane_action": "Metadata-only review; no source audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2506"
+    },
+    {
+      "ordinal": 2507,
+      "revision": "6ffffc38a0f178ec1837d1428cf262aeb468c18b",
+      "category": "route-tests",
+      "subject": "fix(app): update route test expectations for b64_ workspace ID prefix",
+      "paths_inspected": [
+        "packages/app/src/utils/new-agent-routing.test.ts"
+      ],
+      "finding": "Routing tests add b64_ prefix to path-encoded workspace segments.",
+      "fleetpane_action": "Native UUIDs remain distinct from path; no URL encoding transplant.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2507"
+    },
+    {
+      "ordinal": 2508,
+      "revision": "270c12d524f42e31a510f175739309ba3bcaa8ba",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No native workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2508"
+    },
+    {
+      "ordinal": 2509,
+      "revision": "213767e3d5a95e6a9d8963ddfd936550ce3ad31f",
+      "category": "merge-build",
+      "subject": "Merge remote-tracking branch 'origin/dev' into dev",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "First-parent merge incorporates Nix hash.",
+      "fleetpane_action": "No product behavior claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2509"
+    },
+    {
+      "ordinal": 2510,
+      "revision": "827092a246645e9f85b0b2970e0abb884c7a4aed",
+      "category": "render-identity",
+      "subject": "fix(app): avoid infinite render loop in FilePanel zustand selector",
+      "paths_inspected": [
+        "packages/app/src/panels/file-panel.tsx"
+      ],
+      "finding": "FilePanel selects stable workspace object and memoizes authority instead of allocating inside external-store selector.",
+      "fleetpane_action": "Native sparse projection avoids rebuilding unrelated rows; no measured performance gain claimed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2510"
+    },
+    {
+      "ordinal": 2511,
+      "revision": "981b94fa56372f7d7415a3deca4552f84142c1b0",
+      "category": "compact-meter",
+      "subject": "fix(app): balance composer right-side button spacing",
+      "paths_inspected": [
+        "packages/app/src/components/context-window-meter.tsx"
+      ],
+      "finding": "Context meter SVG size shrinks20 to16.",
+      "fleetpane_action": "Context usage meter remains a functional gap; cosmetic dimensions do not implement it.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2511"
+    },
+    {
+      "ordinal": 2512,
+      "revision": "daefa8fb7fe27d2d30de0816c475ed1e829fff68",
+      "category": "claude-models",
+      "subject": "feat(server): add Opus 4.7 to claude provider with xhigh effort",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude/claude-models.ts"
+      ],
+      "finding": "Adds Opus4.7 variants and xhigh effort catalog.",
+      "fleetpane_action": "No Claude adapter under current provider scope; preserve advertised Codex/DSH values.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2512"
+    },
+    {
+      "ordinal": 2513,
+      "revision": "6390f8d995644af83e1ad711bbea5fbbdce41fc5",
+      "category": "merge-claude-models",
+      "subject": "Merge branch 'main' of github.com:getpaseo/paseo into dev",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/claude/claude-models.ts"
+      ],
+      "finding": "First-parent merge incorporates same catalog additions.",
+      "fleetpane_action": "No additional provider coverage.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2513"
+    },
+    {
+      "ordinal": 2514,
+      "revision": "a001c72726c7b8fbb0faf5dc9dc2e7258afa9952",
+      "category": "path-resolution",
+      "subject": "fix(server): expand ~ in file-explorer scoped paths",
+      "paths_inspected": [
+        "packages/server/src/server/file-explorer/service.ts"
+      ],
+      "finding": "File explorer scoped resolver delegates tilde-aware path utility before root confinement.",
+      "fleetpane_action": "Native literal paths preserve exact names; optional tilde UX must not escape workspace boundary.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2514"
+    },
+    {
+      "ordinal": 2515,
+      "revision": "11524dc3492f06835c56be8ea3a1cc5ebc54fca8",
+      "category": "worktree-retirement",
+      "subject": "fix(server): make paseo worktree archive idempotent after partial teardown",
+      "paths_inspected": [
+        "packages/server/src/utils/worktree.ts"
+      ],
+      "finding": "Archive ownership fallback accepts private worktree path shape after git metadata is gone.",
+      "fleetpane_action": "Do not assume path prefix proves safe deletion; Rust durable identity/receipts remain required for future retirement.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2515"
+    },
+    {
+      "ordinal": 2516,
+      "revision": "3838a8b969d87fae95e3461bab62c482704b4daf",
+      "category": "attachment-viewer",
+      "subject": "feat(app): unify composer attachments with pill + lightbox redesign",
+      "paths_inspected": [
+        "packages/app/src/components/attachment-lightbox.tsx"
+      ],
+      "finding": "New lightbox tracks exact attachment metadata, errors and Escape cleanup.",
+      "fleetpane_action": "Current original image drafts verified; full-size viewer remains useful missing workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2516"
+    },
+    {
+      "ordinal": 2517,
+      "revision": "adf2f5921f406d75468bb74da43ff8f802d26cfa",
+      "category": "native-routing",
+      "subject": "fix(app): unblock host index redirect on native by dropping window.location read",
+      "paths_inspected": [
+        "packages/app/src/app/h/[serverId]/index.tsx"
+      ],
+      "finding": "Host index redirect removes window.location reads and uses route pathname.",
+      "fleetpane_action": "Native routing already toolkit-independent; no browser global/timer port.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2517"
+    },
+    {
+      "ordinal": 2518,
+      "revision": "9a8b01a738e2cb495e67ffa6132f8ddf2865b6e3",
+      "category": "ios-presenter",
+      "subject": "fix(app): unstick iOS image picker and land reusable Maestro primitives",
+      "paths_inspected": [
+        "packages/app/src/components/ui/dropdown-menu.tsx"
+      ],
+      "finding": "Dropdown delays pending native image-picker action until modal dismissal with250ms iOS timer.",
+      "fleetpane_action": "Linux file picker evidence separate; do not copy timing workaround into native lifecycle.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2518"
+    },
+    {
+      "ordinal": 2519,
+      "revision": "13bfdd8cc18411bee4c2b51a406d6c7474343de5",
+      "category": "creation-focus",
+      "subject": "fix(app): land on agent tab after creating a workspace",
+      "paths_inspected": [
+        "packages/app/src/stores/workspace-layout-store.ts"
+      ],
+      "finding": "Workspace store distinguishes opening foreground tab from background tab while unhiding exact agent.",
+      "fleetpane_action": "Native creation source identity explicit; workspace tab system remains open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2519"
+    },
+    {
+      "ordinal": 2520,
+      "revision": "07d10f55f9eb6ecc8c8db1cdf7233904a4ff11d6",
+      "category": "provider-probe-owner",
+      "subject": "fix(app): stop spawning providers per client by warming the snapshot store",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Workspace screen warms shared provider snapshot instead of per-client model hook.",
+      "fleetpane_action": "Native search reads existing Host catalog, never starts probe processes on render; freshness remains open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2520"
+    },
+    {
+      "ordinal": 2521,
+      "revision": "4b82ca77c8ad33f82ca4828b0f6ed7af701e72b4",
+      "category": "provider-cache",
+      "subject": "fix(server): route list_provider_models through the snapshot manager",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Model-list handler routes through snapshot manager with explicit cwd and fallback registry path.",
+      "fleetpane_action": "Single catalog owner useful; no global prefetch or silent process spawning added.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2521"
+    },
+    {
+      "ordinal": 2522,
+      "revision": "ed2dc084438429b7d391f83ca27305c07b8c7cd9",
+      "category": "attachment-controls",
+      "subject": "fix(app): hide attachment remove X until hover on desktop",
+      "paths_inspected": [
+        "packages/app/src/components/attachment-pill.tsx"
+      ],
+      "finding": "Attachment remove visibility depends on compact/native/hover state.",
+      "fleetpane_action": "Native removal already explicit; hover redesign not copied without accessibility QA.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2522"
+    },
+    {
+      "ordinal": 2523,
+      "revision": "d6585f7c3a99c60937c9406a323c7900b431884f",
+      "category": "worktree-teardown",
+      "subject": "fix(server): harden worktree archive with parallel teardown",
+      "paths_inspected": [
+        "packages/server/src/server/worktree-session.ts"
+      ],
+      "finding": "Archive collects exact live agents under target path before parallel resource teardown.",
+      "fleetpane_action": "Retirement must remain complete/fenced; no implicit shutdown of imported original sessions.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2523"
+    },
+    {
+      "ordinal": 2524,
+      "revision": "49d542605944b9b2ac8311ad85f8fc2b4daaf52a",
+      "category": "external-link-affordance",
+      "subject": "fix(app): swap github icon for external link on hover in checks row",
+      "paths_inspected": [
+        "packages/app/src/components/workspace-hover-card.tsx"
+      ],
+      "finding": "Checks row switches GitHub glyph to external-link icon while hovered.",
+      "fleetpane_action": "GitHub integration remains future scope; no network action or message sent.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2524"
+    },
+    {
+      "ordinal": 2525,
+      "revision": "9386901896861b1a4d00843b03195ffbf0f0826a",
+      "category": "release-docs",
+      "subject": "docs: add 0.1.59 changelog entry for Opus 4.7",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog lists Opus4.7 and extra-high effort.",
+      "fleetpane_action": "No new provider adapter.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2525"
+    },
+    {
+      "ordinal": 2526,
+      "revision": "40f8a8414af30ef4e979d489542c02ae77998e46",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.59",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Package refs bump0.1.58 to0.1.59.",
+      "fleetpane_action": "No release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2526"
+    },
+    {
+      "ordinal": 2527,
+      "revision": "83442967890949dcde6ca94c78ff8a7e246a5cff",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No dependency audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2527"
+    },
+    {
+      "ordinal": 2528,
+      "revision": "aac780ddf7c65851647effec59879953c476bb84",
+      "category": "merge-release",
+      "subject": "Merge remote-tracking branch 'origin/main' into dev",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "First-parent merge brings0.1.59 package refs.",
+      "fleetpane_action": "No native feature claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2528"
+    },
+    {
+      "ordinal": 2529,
+      "revision": "63a46acaf1a466989eee9a7af160535c6cda6115",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash update.",
+      "fleetpane_action": "No native workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2529"
+    },
+    {
+      "ordinal": 2530,
+      "revision": "f08bff1b2de4455170174504874bd0ea347a3a5b",
+      "category": "diff-presentation",
+      "subject": "fix(app): centralize workspace diff stat rendering",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-screen.tsx"
+      ],
+      "finding": "Workspace header delegates additions/deletions to shared DiffStat.",
+      "fleetpane_action": "Git Diff expansion remains user-deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2530"
+    },
+    {
+      "ordinal": 2531,
+      "revision": "d8ff049affe112585625c7ff01731dbf7361152b",
+      "category": "tooltip-modality",
+      "subject": "fix(app): only open tooltip on keyboard focus",
+      "paths_inspected": [
+        "packages/app/src/components/ui/tooltip.tsx"
+      ],
+      "finding": "Tooltip helper distinguishes last keyboard input from pointer/touch for focus opening.",
+      "fleetpane_action": "Kit focus/tooltips should remain platform-native; accessibility verification separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2531"
+    },
+    {
+      "ordinal": 2532,
+      "revision": "59d9b2ebdd39c7af82f96f2f9482c0ccec2ee10b",
+      "category": "hover-geometry",
+      "subject": "fix(app): bridge trigger and content in workspace hover card",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-hover-safe-zone.ts"
+      ],
+      "finding": "Hover hook tests pointer position against trigger/content safe zone and unregisters listener.",
+      "fleetpane_action": "Native overlay geometry uses Kit; no web event-loop shim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2532"
+    },
+    {
+      "ordinal": 2533,
+      "revision": "82f97e942dd2b7dac58bb9960aaa05c56cfa98a7",
+      "category": "probe-side-effects",
+      "subject": "fix(server): suppress browser popups from ACP probes",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/acp-agent.ts"
+      ],
+      "finding": "ACP listModels probe receives dedicated environment to suppress browser popups.",
+      "fleetpane_action": "Native choice search does not create ACP probe sessions; any future refresh must expose its side effects.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2533"
+    },
+    {
+      "ordinal": 2534,
+      "revision": "14cc1cc83c14aa4a03208a0840edfd41065b972b",
+      "category": "pr-worktree",
+      "subject": "feat: support creating worktrees from GitHub pull requests",
+      "paths_inspected": [
+        "packages/app/src/screens/new-workspace-screen.tsx"
+      ],
+      "finding": "New-workspace picker distinguishes branch and GitHub PR IDs and labels.",
+      "fleetpane_action": "Existing local pinned worktree creation remains; remote PR fetch/checkout absent and not implied by label.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2534"
+    },
+    {
+      "ordinal": 2535,
+      "revision": "b0e078641907e4d8b7442ca8488f3df544de8048",
+      "category": "global-create",
+      "subject": "fix(app): make cmd+o work regardless of sidebar visibility",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-active-worktree-new-action.ts"
+      ],
+      "finding": "Worktree-new action resolves active Git workspace independent of sidebar mount.",
+      "fleetpane_action": "Native commands should not depend on hidden presentation controls; unified create shortcut separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2535"
+    },
+    {
+      "ordinal": 2536,
+      "revision": "5d76cc8840124b3e774db9ee9cd5fbcb5e0d410c",
+      "category": "send-affordance",
+      "subject": "feat(app): gate return-key submit icon to new workspace composer",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Message submit icon chooses return only for configured creation flow.",
+      "fleetpane_action": "Native explicit New session and Send remain distinct controls.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2536"
+    },
+    {
+      "ordinal": 2537,
+      "revision": "72e4476accc0f5bc93f39508818e81d25f168238",
+      "category": "provider-freshness",
+      "subject": "refactor(app): replace providers-snapshot invalidate with refetchIfStale",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "finding": "Provider model invalidation changes to refetch-if-stale.",
+      "fleetpane_action": "Freshness ownership remains Host-side candidate; no timer-based workaround added.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2537"
+    },
+    {
+      "ordinal": 2538,
+      "revision": "6b5282ad43a864284caedec5e6f77e50fcadc8bc",
+      "category": "service-environment",
+      "subject": "refactor(server): extract workspace service env and port registry",
+      "paths_inspected": [
+        "packages/server/src/server/workspace-service-env.ts"
+      ],
+      "finding": "Service env builder validates normalized script name collisions and self-peer before generating host/port URLs.",
+      "fleetpane_action": "Workspace script/service lifecycle and port registry remain missing and require typed explicit actions.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2538"
+    },
+    {
+      "ordinal": 2539,
+      "revision": "c0bb34c514ba6024bb6eb0e33693976aa4807676",
+      "category": "service-config",
+      "subject": "docs: document service-script env vars and split dev into daemon+app",
+      "paths_inspected": [
+        "paseo.json"
+      ],
+      "finding": "Reference config splits dev service into daemon and app with generated service env.",
+      "fleetpane_action": "No service command executed or local binding changed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2539"
+    },
+    {
+      "ordinal": 2540,
+      "revision": "5c3cc99d8cb112677486b9805bb8785014932fc1",
+      "category": "settings-routing",
+      "subject": "refactor(app): restructure settings with modular section navigation",
+      "paths_inspected": [
+        "packages/app/src/app/h/[serverId]/index.tsx"
+      ],
+      "finding": "Selected host index hunk removes preference-loaded last-workspace redirect path.",
+      "fleetpane_action": "Unified native settings is still open; explicit remembered Host/session remains intentional.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2540"
+    },
+    {
+      "ordinal": 2541,
+      "revision": "4d6a154f6e5e6830c8ecd5c94ba36d90bbd97901",
+      "category": "theme-presentation",
+      "subject": "Fix Unistyles theme splits",
+      "paths_inspected": [
+        "packages/app/src/components/welcome-screen.tsx"
+      ],
+      "finding": "Welcome screen replaces hardcoded cyan/magenta wrappers with themed scroll view.",
+      "fleetpane_action": "Use Kit theme rather than copying historical web debug colors.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2541"
+    },
+    {
+      "ordinal": 2542,
+      "revision": "f483e62231afe527c20c7b9f0149c0927063cfa8",
+      "category": "shortcut-ownership",
+      "subject": "wip(app): keep keyboard shortcuts alive on /settings",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "Settings route enables shortcuts via pathname exception with explicit TODO to split global scope from workspace chrome.",
+      "fleetpane_action": "Native shortcut owner should be independent of hidden sidebar and not steal terminal input; unified settings open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2542"
+    },
+    {
+      "ordinal": 2543,
+      "revision": "9f6570ca3e092e90e4cad221348b5bc6aae4d75b",
+      "category": "merge-settings",
+      "subject": "Merge branch 'config-work' into dev",
+      "paths_inspected": [
+        "packages/app/src/app/h/[serverId]/index.tsx"
+      ],
+      "finding": "First-parent merge removes host-index effect redirect based on preference hydration and timeout.",
+      "fleetpane_action": "Preserve explicit native last-session action; no timer-based startup routing.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2543"
+    },
+    {
+      "ordinal": 2544,
+      "revision": "ccb956f98f825a159a8f72b041eb6bacb2d52c16",
+      "category": "stream-coalescing",
+      "subject": "wip(server): coalesce agent stream events and add runtime metrics",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Agent manager changes history echo handling to flags controlling dispatch and waiter notification.",
+      "fleetpane_action": "Native sparse UI projection retained; provider event ordering and complete retained state cannot be dropped for speed.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2544"
+    },
+    {
+      "ordinal": 2545,
+      "revision": "fa41ba76cdcde2638b32440d9fd393be059c758f",
+      "category": "merge-coalescing",
+      "subject": "Merge branch 'orchestrate/agent-stream-coalescing' into dev",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "First-parent merge brings same canonical-history echo suppression flags.",
+      "fleetpane_action": "No full performance or provider parity claim from selected hunk.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2545"
+    },
+    {
+      "ordinal": 2546,
+      "revision": "4de4e90325395dcba3c9825e177ced1528b82c1b",
+      "category": "theme-boundary",
+      "subject": "fix(app): close theme split escape hatches",
+      "paths_inspected": [
+        "packages/app/src/components/agent-form/agent-form-dropdowns.tsx"
+      ],
+      "finding": "Dropdown backdrop derives colors and corner radii from current theme inside rendering component.",
+      "fleetpane_action": "Keep native Kit theme owner; no React wrapper transplant.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2546"
+    },
+    {
+      "ordinal": 2547,
+      "revision": "e5b0ea6d1b6ab2dd5aaaa8ca80855c92040accd1",
+      "category": "service-port",
+      "subject": "fix(paseo): pin app service to PASEO_PORT",
+      "paths_inspected": [
+        "paseo.json"
+      ],
+      "finding": "Reference app service explicitly passes allocated PASEO_PORT to Expo.",
+      "fleetpane_action": "Workspace script/service lifecycle and port registry remain native gaps.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2547"
+    },
+    {
+      "ordinal": 2548,
+      "revision": "23b20169efefd4953bb2b781386f886a3f3ee4ef",
+      "category": "invariant-test",
+      "subject": "test(app,server): align e2e specs with settings redesign, drop rg dep",
+      "paths_inspected": [
+        "packages/server/src/server/worktree-core.test.ts"
+      ],
+      "finding": "Worktree call-site test walks files directly rather than requiring rg, excludes test/helper paths.",
+      "fleetpane_action": "Useful dependency boundary invariant; historical tests not run and no new runtime behavior inferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2548"
+    },
+    {
+      "ordinal": 2549,
+      "revision": "7819019ceac48fd20f493da21c0fc35aba9dff94",
+      "category": "remote-identity",
+      "subject": "feat(server,app,website): prefix service URLs with project slug",
+      "paths_inspected": [
+        "packages/server/src/server/workspace-git-metadata.ts"
+      ],
+      "finding": "GitHub remote parser uses URL hostname equality and decoded pathname rather than substring matching.",
+      "fleetpane_action": "Preserve exact remote identity before future GitHub actions; no remote mutation added.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2549"
+    },
+    {
+      "ordinal": 2550,
+      "revision": "83bbc8f659236ce852e2163255b3dc161f46951f",
+      "category": "merge-settings",
+      "subject": "Merge branch 'dev' into main",
+      "paths_inspected": [
+        "packages/app/src/app/h/[serverId]/index.tsx"
+      ],
+      "finding": "First-parent merge removes host-index delayed preference redirect.",
+      "fleetpane_action": "Explicit remembered native Host/session workflow remains; full settings open.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2550"
+    },
+    {
+      "ordinal": 2551,
+      "revision": "9fb0ab9b2d22e51ed9d7f349a3bf454256fb3b88",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.2.0-rc.1",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Package refs move to0.2.0-rc.1.",
+      "fleetpane_action": "No native product behavior or release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2551"
+    },
+    {
+      "ordinal": 2552,
+      "revision": "ada623c1c61bfd8a2259c0a8316aa66a3c622abc",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2552"
+    },
+    {
+      "ordinal": 2553,
+      "revision": "07714773cc95b58053e188ede3fe88d883221648",
+      "category": "release-revert",
+      "subject": "Revert \"chore(release): cut 0.2.0-rc.1\"",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Package refs revert0.2.0-rc.1 to0.1.59.",
+      "fleetpane_action": "Do not mistake release reversal for user feature regression.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2553"
+    },
+    {
+      "ordinal": 2554,
+      "revision": "2a519d96e5c0b388541d6f54f855c5c3e04ec2cc",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash returns to earlier value.",
+      "fleetpane_action": "No native workflow change.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2554"
+    },
+    {
+      "ordinal": 2555,
+      "revision": "c53d42acf85ea64c57e7b6b0da7026b48ecc2508",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.60-rc.1",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Package refs move0.1.59 to0.1.60-rc.1.",
+      "fleetpane_action": "No native release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2555"
+    },
+    {
+      "ordinal": 2556,
+      "revision": "93cda8e60f029bc198027d877786514970981306",
+      "category": "build-metadata",
+      "subject": "fix: update lockfile signatures and Nix hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes again.",
+      "fleetpane_action": "No dependency payload audit.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2556"
+    },
+    {
+      "ordinal": 2557,
+      "revision": "f8815bf1c2d6a4fa86678b5f1be090797c9dd0c9",
+      "category": "worktree-docs",
+      "subject": "docs(website): rewrite worktrees page around scripts, services, and proxy",
+      "paths_inspected": [
+        "packages/website/src/routes/docs/worktrees.tsx"
+      ],
+      "finding": "Worktree docs explain separate branch/directory and paseo.json setup, scripts and long-running services.",
+      "fleetpane_action": "Local worktrees exist; managed scripts/services/setup remain separate missing workflow.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2557"
+    },
+    {
+      "ordinal": 2558,
+      "revision": "fbc2371b95f9333e59ee3a46b8b62725ded962a9",
+      "category": "pi-provider",
+      "subject": "feat(server): replace Pi ACP with direct SDK provider (#202)",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/pi-direct-agent.ts"
+      ],
+      "finding": "Direct provider selected helper normalizes model display labels while preserving full label as description.",
+      "fleetpane_action": "Pi SDK adapter outside preferred providers; native choice keeps supplied stable IDs.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2558"
+    },
+    {
+      "ordinal": 2559,
+      "revision": "22381719558c975abfe80f06150c480d9bfce9fd",
+      "category": "composer-measurement",
+      "subject": "fix(app): composer textarea shrinks back down on web",
+      "paths_inspected": [
+        "packages/app/src/components/composer-height-mirror.web.ts"
+      ],
+      "finding": "Web height mirror creates hidden textarea with current value and dimensions.",
+      "fleetpane_action": "Kit Textarea auto-grow used; no DOM mirror transplanted.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2559"
+    },
+    {
+      "ordinal": 2560,
+      "revision": "5a232d8cf1fa8d2b49447afd3c68ee5224b686e9",
+      "category": "tool-coalescing",
+      "subject": "fix(server,app): coalesce tool call stream events to prevent JS thread freeze",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-stream-coalescer.ts"
+      ],
+      "finding": "Coalescer extends text/reasoning predicate to tool calls and detects terminal statuses.",
+      "fleetpane_action": "Retain ordered terminal tool state; native projection tests do not establish full-host throughput gains.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2560"
+    },
+    {
+      "ordinal": 2561,
+      "revision": "73b0b60bdd046a4cff8662b5f9217270641dfc49",
+      "category": "shutdown-lifecycle",
+      "subject": "fix(server): block dev-runner on Ctrl-C until supervisor finishes shutting down",
+      "paths_inspected": [
+        "packages/server/scripts/dev-runner.ts"
+      ],
+      "finding": "Dev runner installs signal handlers before blocking supervisor spawn.",
+      "fleetpane_action": "Native close and provider lifetime have separate evidence; no historical dev runner invoked.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2561"
+    },
+    {
+      "ordinal": 2562,
+      "revision": "c4d84ff2a3c3c05132e65e0d657a8b5ea86f90da",
+      "category": "test-resolution",
+      "subject": "chore: add workspace aliases to vitest config for app tests",
+      "paths_inspected": [
+        "vitest.config.ts"
+      ],
+      "finding": "Vitest aliases shared packages and chooses local or root React resolution.",
+      "fleetpane_action": "Rust workspace boundaries retained; historical tests not run.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2562"
+    },
+    {
+      "ordinal": 2563,
+      "revision": "f411a2a38342d219dbd88a84a06f7c9744e581a8",
+      "category": "search-ranking",
+      "subject": "feat(app): rank combobox options by word-boundary match quality",
+      "paths_inspected": [
+        "packages/app/src/utils/score-match.ts"
+      ],
+      "finding": "Matcher ranks exact, whole word, prefix and boundary matches before substring matches.",
+      "fleetpane_action": "Native picker search currently filters advertised label/ID/description; quality ranking remains candidate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2563"
+    },
+    {
+      "ordinal": 2564,
+      "revision": "cfa3b009e3d0a6b606fcf418cfcff85690a50d02",
+      "category": "compact-layout",
+      "subject": "fix(app): prevent branch switcher title from overflowing its row",
+      "paths_inspected": [
+        "packages/app/src/components/branch-switcher.tsx"
+      ],
+      "finding": "Branch-switcher title gets row wrapper for layout.",
+      "fleetpane_action": "Kit compact windows need own screenshots; branch-switcher work deferred with Git expansion.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2564"
+    },
+    {
+      "ordinal": 2565,
+      "revision": "43bbf8cb122a0c2c25ab1278c421c6a75b195923",
+      "category": "responsive-controls",
+      "subject": "feat(app): collapse workspace header button labels on narrow rows",
+      "paths_inspected": [
+        "packages/app/src/components/git-actions-split-button.tsx"
+      ],
+      "finding": "Git action split button receives hideLabels and keeps pending/success text mapping.",
+      "fleetpane_action": "Native compact controls preserve actionable labels and accessibility; Git expansion deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2565"
+    },
+    {
+      "ordinal": 2566,
+      "revision": "d3393b434a20187a049b0ba99b57e9d475bdb131",
+      "category": "creation-search",
+      "subject": "feat(app,server): rank new-workspace picker by recency with debounced search",
+      "paths_inspected": [
+        "packages/app/src/screens/new-workspace-screen.tsx"
+      ],
+      "finding": "Workspace picker removes per-item header wrapper while simplifying render dependencies.",
+      "fleetpane_action": "Recency and paged search remain explicit native creation concerns, not proven by this layout hunk.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2566"
+    },
+    {
+      "ordinal": 2567,
+      "revision": "6a36db99248c7ab750c637531035154932a863b7",
+      "category": "git-cache-identity",
+      "subject": "feat(server): invalidate GitHub cache after local git mutations",
+      "paths_inspected": [
+        "packages/server/src/utils/checkout-git.ts"
+      ],
+      "finding": "Merge-to-base returns actual worktree directory even when branch already equals target.",
+      "fleetpane_action": "Future Git mutations must invalidate correct workspace identity; Git Diff expansion deferred.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2567"
+    },
+    {
+      "ordinal": 2568,
+      "revision": "e373c33108390e3ae1373587c8b80eff0b9f57cf",
+      "category": "pr-pane",
+      "subject": "feat(app,server): add pull request pane to the workspace sidebar",
+      "paths_inspected": [
+        "packages/app/src/components/pr-pane.tsx"
+      ],
+      "finding": "PR pane counts passed/failed/pending checks and review/comment types before rendering external link header.",
+      "fleetpane_action": "GitHub integration useful missing workflow; counts and readiness remain distinct.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2568"
+    },
+    {
+      "ordinal": 2569,
+      "revision": "2d9cbb04530750de69955ee845a6b6a2f53bcc9e",
+      "category": "branch-resolution",
+      "subject": "fix(server): resolve remote-only branches in switcher checkout",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session handler removes nested local/origin ref checks and catch-based branch probing.",
+      "fleetpane_action": "Native branch mutation not implemented by this change; don't suppress arbitrary Git errors as missing refs.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2569"
+    },
+    {
+      "ordinal": 2570,
+      "revision": "d9d6509880de76ad777c5b2b873ef0b3fcc3f20a",
+      "category": "test-resolution",
+      "subject": "fix(test): resolve Metro .web.ts variants in vitest",
+      "paths_inspected": [
+        "packages/app/vitest.config.ts"
+      ],
+      "finding": "Vitest resolution prioritizes web variants before common JS/TS extensions.",
+      "fleetpane_action": "No native workflow; historical tests not run.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2570"
+    },
+    {
+      "ordinal": 2571,
+      "revision": "128d6668ae495dd04ee21a31e02e3e7ae224d427",
+      "category": "test-shape",
+      "subject": "fix(server): update PR status test for new normalized fields",
+      "paths_inspected": [
+        "packages/server/src/server/session.workspace-git-watch.test.ts"
+      ],
+      "finding": "PR status fixture adds normalized fields for number, repo, draft, checks and review decision.",
+      "fleetpane_action": "No executed test or GitHub parity claim.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2571"
+    },
+    {
+      "ordinal": 2572,
+      "revision": "5a2708653c0f0365f0524295b125ec475c6f154e",
+      "category": "server-authority",
+      "subject": "feat(server,app): redesign git/GitHub refresh architecture with server authority",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session checkout-status handler removes direct local status assembly.",
+      "fleetpane_action": "Future Git refresh should have one owner; native live directory and Host state remain separate.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2572"
+    },
+    {
+      "ordinal": 2573,
+      "revision": "06b3fc2ec6a04dd89f45b10242e1787dee57170b",
+      "category": "notification-routing",
+      "subject": "fix(server,app,desktop): route in-app notifications by presence cascade",
+      "paths_inspected": [
+        "packages/server/src/server/agent-attention-policy.ts"
+      ],
+      "finding": "Attention policy introduces last-activity/focused-agent presence and recipient/push plan.",
+      "fleetpane_action": "OS notifications, mute/tray and multi-client routing remain native gaps; not replaced by Attention queue.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2573"
+    },
+    {
+      "ordinal": 2574,
+      "revision": "badec6f587c0455748b7ec0157240125d29a8150",
+      "category": "merge-notifications",
+      "subject": "Merge orchestrate/notif-routing-presence into main",
+      "paths_inspected": [
+        "packages/server/src/server/agent-attention-policy.ts"
+      ],
+      "finding": "First-parent merge incorporates same presence-plan types and removes old device-class policy helpers.",
+      "fleetpane_action": "No notification delivery acceptance; dedup and mute semantics need own implementation.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2574"
+    },
+    {
+      "ordinal": 2575,
+      "revision": "8991d34f78fa0c12d59d91c5e7506d36c741710b",
+      "category": "file-tree-collapse",
+      "subject": "fix(app): allow collapsing the parent folder of a selected file (#500)",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "finding": "File explorer removes local dirname/ancestor helper functions in selected hunk.",
+      "fleetpane_action": "Native directory listing separate from selection; no claim to have audited full collapse effect.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2575"
+    },
+    {
+      "ordinal": 2576,
+      "revision": "bd1fb311ea52243b8192d8a84230349de0753db8",
+      "category": "store-projection",
+      "subject": "refactor(app): reshape session store reads around narrow hook surface",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-sidebar-workspaces-list.ts"
+      ],
+      "finding": "Sidebar hook replaces aggregated bucket/baseline comparison helpers with structural workspace entry construction.",
+      "fleetpane_action": "Native stable Host/workspace identity and sparse rows retained; complete workspace tabs still absent.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2576"
+    },
+    {
+      "ordinal": 2577,
+      "revision": "75f83b0b9b20ec9cd851ecd5c65c0d7694029109",
+      "category": "merge-store-identity",
+      "subject": "Merge refactor/session-store-identity into main",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-sidebar-workspaces-list.ts"
+      ],
+      "finding": "First-parent merge incorporates same structural sidebar entry refactor.",
+      "fleetpane_action": "No extra runtime acceptance from merge duplication.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2577"
+    },
+    {
+      "ordinal": 2578,
+      "revision": "8165de7b06691a4c9e404a311d08a903da0b23e8",
+      "category": "pi-history",
+      "subject": "feat(server): replay pi tool calls in streamHistory for resume",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/pi-direct-agent.ts"
+      ],
+      "finding": "Pi history emits exact tool-call IDs/status/details and errors from tracked tool results.",
+      "fleetpane_action": "Codex/DeepSeek histories already structured; no Pi adapter scope expansion.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2578"
+    },
+    {
+      "ordinal": 2579,
+      "revision": "7b9636a22dc3c6705adab03f57a7dbf3ed4bbf82",
+      "category": "diff-invalidation",
+      "subject": "fix(server): bypass diff cache on working-tree watch refresh",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Working-tree diff refresh adds force/reason options to bypass shared cache.",
+      "fleetpane_action": "Git Diff expansion stays user-deferred; don't invalidate unrelated workspace identities.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2579"
+    },
+    {
+      "ordinal": 2580,
+      "revision": "64065061c59f6542d69640fe9ba647ef55175982",
+      "category": "release-metadata",
+      "subject": "chore(release): cut 0.1.60-rc.2",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Package refs bump0.1.60-rc.1 to0.1.60-rc.2.",
+      "fleetpane_action": "No native feature or release execution.",
+      "scope": "Selected source/config hunks only; remaining changed paths not audited; no tests executed.",
+      "source_receipts": "docs/verification/assets/paseo-replay/2351-2580/review.json#2580"
     }
   ],
   "workflow_status": {
@@ -30857,7 +33843,8 @@
     "loaded-answer-copy": "Covered shared/Linux native exact loaded assistant-only text, pagination scope, no-text clipboard refusal, retained draft and normal replacement verified. No complete transcript/media export or automatic history reads.",
     "acp-commands": "Covered shared/Host/Linux native fixtures verified: exact live advertisements, safe draft preparation, clear/isolation/archive expiry and window replacement. Installed provider/Codex discovery/IME acceptance open.",
     "complete-text-preview": "Covered Linux native fixture: complete bounded source, line gutter, highlighted Rust, wrap/horizontal scrolling, source anchors, exact Copy and retained draft verified. Editing/search/other platforms remain open.",
-    "modified-terminal-enter": "Shared encoder and Linux native raw PTY verifies all control/alt/shift combinations, exact 51 bytes, focus separation and independent pending ACP preservation. Installed terminal programs/negotiation unaccepted."
+    "modified-terminal-enter": "Shared encoder and Linux native raw PTY verifies all control/alt/shift combinations, exact 51 bytes, focus separation and independent pending ACP preservation. Installed terminal programs/negotiation unaccepted.",
+    "composer-focus": "Covered Linux native fixtures: Ctrl/Cmd+L, palette/ownership guards, exact Chinese drafts and normal close/reopen. IME/other platforms unaccepted."
   },
   "limits": [
     "Index is complete for captured tips; semantic inspection is limited to this explicit batch",
