@@ -761,6 +761,14 @@ is Cmd+W; native acceptance currently covers Linux X11. The fixed **Tabs** menu
 shows these actions. Selection scrolls an overflowing strip into view; order
 survives normal close/reopen. [Navigation evidence](docs/verification/2026-10-22-workspace-tab-navigation.md).
 
+Ctrl+Shift+P (Cmd+Shift+P on macOS), or **Tabs → Toggle workspace pin**, toggles
+the current saved workspace even with the catalog closed. Each press changes
+the stored state once; holding the key does not repeat. A failed save shows its
+reason and blocks normal close until a successful next action or **Keep saved
+pins**. The latter retains the previous pins without writing. This local action
+requires no Host control, including for an offline Host.
+[Linux acceptance](docs/verification/2026-10-22-workspace-pin-shortcut.md).
+
 Drag a tab's label onto another tab to move it to that position. The selected
 workspace and its conversation, file and terminal views stay attached to their
 original identities; moving an inactive tab keeps the current view selected.
@@ -994,10 +1002,13 @@ control. Use **Newest** to reload preference changes from another window.
 fleetpane-host workspace /absolute/hosts.creations pins
 fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID on
 fleetpane-host workspace /absolute/hosts.creations pin WORKSPACE_UUID off
+fleetpane-host workspace /absolute/hosts.creations toggle-pin WORKSPACE_UUID
 ```
 
 This adds local quick access; workspace tabs now have separate saved-layout,
-navigation and drag ordering support. Pin ordering and keyboard pin shortcuts remain open. See [the decision](docs/adr/0025-local-workspace-pins.md)
+navigation, drag ordering and pin shortcuts. Each `toggle-pin` invocation is one
+transition; use `pin ... on|off` for idempotent assignment. Pin ordering remains
+open. See [the decision](docs/adr/0025-local-workspace-pins.md)
 and [verification](docs/verification/2026-10-20-workspace-pins.md).
 
 Choose **Rename** on a saved or pinned row to save a local display name. Names

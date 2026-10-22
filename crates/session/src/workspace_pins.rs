@@ -36,44 +36,67 @@ impl Store {
         id: Uuid,
         pinned: bool,
     ) -> Result<Vec<Workspace>, Error> {
-        self.job(move |database| {
-            let transaction = database.transaction_with_behavior(TransactionBehavior::Immediate)?;
-            let id = id.to_string();
-            let exists: bool = transaction.query_row(
-                "SELECT EXISTS(SELECT 1 FROM workspaces WHERE id=?1)",
-                [&id],
-                |row| row.get(0),
-            )?;
-            if !exists {
-                return Err("workspace not found".into());
-            }
-            if pinned {
-                let present: bool = transaction.query_row(
-                    "SELECT EXISTS(SELECT 1 FROM workspace_pins WHERE workspace=?1)",
-                    [&id],
-                    |row| row.get(0),
-                )?;
-                if !present {
-                    let count: i64 = transaction.query_row(
-                        "SELECT count(*) FROM workspace_pins",
-                        [],
-                        |row| row.get(0),
-                    )?;
-                    if count >= i64::try_from(MAX_PINNED_WORKSPACES)? {
-                        return Err("32 workspaces are already pinned; unpin one first".into());
-                    }
-                    transaction
-                        .execute("INSERT INTO workspace_pins(workspace) VALUES(?1)", [&id])?;
-                }
-            } else {
-                transaction.execute("DELETE FROM workspace_pins WHERE workspace=?1", [&id])?;
-            }
-            let pins = read(&transaction)?;
-            transaction.commit()?;
-            Ok(pins)
-        })
-        .await
+        self.job(move |database| update(database, id, Change::Assign(pinned)))
+            .await
     }
+
+    /// One atomic user action. Concurrent windows cannot read the same old pin
+    /// and accidentally collapse two requested transitions into one assignment.
+    pub async fn toggle_workspace_pinned(&self, id: Uuid) -> Result<Vec<Workspace>, Error> {
+        self.job(move |database| update(database, id, Change::Toggle))
+            .await
+    }
+}
+
+enum Change {
+    Assign(bool),
+    Toggle,
+}
+
+fn update(
+    database: &mut Connection,
+    id: Uuid,
+    change: Change,
+) -> Result<Vec<Workspace>, StorageError> {
+    let transaction = database.transaction_with_behavior(TransactionBehavior::Immediate)?;
+    let id = id.to_string();
+    let exists: bool = transaction.query_row(
+        "SELECT EXISTS(SELECT 1 FROM workspaces WHERE id=?1)",
+        [&id],
+        |row| row.get(0),
+    )?;
+    if !exists {
+        return Err("workspace not found".into());
+    }
+    let pinned = match change {
+        Change::Assign(pinned) => pinned,
+        Change::Toggle => !transaction.query_row(
+            "SELECT EXISTS(SELECT 1 FROM workspace_pins WHERE workspace=?1)",
+            [&id],
+            |row| row.get::<_, bool>(0),
+        )?,
+    };
+    if pinned {
+        let present: bool = transaction.query_row(
+            "SELECT EXISTS(SELECT 1 FROM workspace_pins WHERE workspace=?1)",
+            [&id],
+            |row| row.get(0),
+        )?;
+        if !present {
+            let count: i64 =
+                transaction
+                    .query_row("SELECT count(*) FROM workspace_pins", [], |row| row.get(0))?;
+            if count >= i64::try_from(MAX_PINNED_WORKSPACES)? {
+                return Err("32 workspaces are already pinned; unpin one first".into());
+            }
+            transaction.execute("INSERT INTO workspace_pins(workspace) VALUES(?1)", [&id])?;
+        }
+    } else {
+        transaction.execute("DELETE FROM workspace_pins WHERE workspace=?1", [&id])?;
+    }
+    let pins = read(&transaction)?;
+    transaction.commit()?;
+    Ok(pins)
 }
 
 #[cfg(test)]
@@ -81,6 +104,64 @@ mod tests {
     use super::*;
     use crate::{hosts::Endpoint, workspaces::Kind};
     use std::path::PathBuf;
+
+    #[tokio::test]
+    async fn toggles_are_atomic_across_stores_and_failed_transitions_preserve_pins() {
+        let (root, store) = fixture().await;
+        let a = register(&store, root.clone(), "A").await;
+        let b = register(&store, root.clone(), "B").await;
+        store.set_workspace_pinned(b.id, true).await.unwrap();
+        let other = Store::open(root.join("state")).await.unwrap();
+        let (first, second) = tokio::join!(
+            store.toggle_workspace_pinned(a.id),
+            other.toggle_workspace_pinned(a.id)
+        );
+        let replies = [first.unwrap(), second.unwrap()];
+        assert_eq!(
+            replies
+                .iter()
+                .filter(|pins| pins.iter().any(|w| w.id == a.id))
+                .count(),
+            1
+        );
+        assert_eq!(
+            store
+                .pinned_workspaces()
+                .await
+                .unwrap()
+                .iter()
+                .map(|w| w.id)
+                .collect::<Vec<_>>(),
+            [b.id]
+        );
+        store.job(|db| { db.execute_batch("CREATE TRIGGER reject_pin BEFORE INSERT ON workspace_pins BEGIN SELECT RAISE(ABORT,'owned pin refusal'); END")?; Ok(()) }).await.unwrap();
+        assert!(
+            store
+                .toggle_workspace_pinned(a.id)
+                .await
+                .unwrap_err()
+                .to_string()
+                .contains("owned pin refusal")
+        );
+        assert_eq!(store.pinned_workspaces().await.unwrap()[0].id, b.id);
+        store
+            .job(|db| {
+                db.execute_batch("DROP TRIGGER reject_pin")?;
+                Ok(())
+            })
+            .await
+            .unwrap();
+        assert_eq!(
+            store.toggle_workspace_pinned(a.id).await.unwrap()[0].id,
+            a.id
+        );
+        assert!(store.toggle_workspace_pinned(Uuid::new_v4()).await.is_err());
+        assert_eq!(
+            store.toggle_workspace_pinned(a.id).await.unwrap()[0].id,
+            b.id
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     async fn fixture() -> (PathBuf, Store) {
         let root = std::env::temp_dir().join(format!("fp-pins-{}", Uuid::new_v4()));
@@ -216,6 +297,27 @@ mod tests {
             .find(|id| !pins.iter().any(|p| p.id == **id))
             .unwrap();
         assert!(store.set_workspace_pinned(missing, true).await.is_err());
+        assert!(store.toggle_workspace_pinned(missing).await.is_err());
+        assert_eq!(
+            serde_json::to_value(store.pinned_workspaces().await.unwrap()).unwrap(),
+            serde_json::to_value(&pins).unwrap()
+        );
+        assert_eq!(
+            store
+                .toggle_workspace_pinned(pins[0].id)
+                .await
+                .unwrap()
+                .len(),
+            MAX_PINNED_WORKSPACES - 1
+        );
+        assert_eq!(
+            store
+                .toggle_workspace_pinned(pins[0].id)
+                .await
+                .unwrap()
+                .len(),
+            MAX_PINNED_WORKSPACES
+        );
         store.set_workspace_pinned(pins[0].id, false).await.unwrap();
         assert_eq!(
             store

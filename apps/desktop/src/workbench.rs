@@ -68,6 +68,7 @@ pub struct Workbench {
     records_busy: bool,
     resolution: Option<(uuid::Uuid, String)>,
     _input_subscription: Subscription,
+    _activation_subscription: Subscription,
 }
 
 impl Workbench {
@@ -117,6 +118,9 @@ impl Workbench {
                 cx.notify();
             }
         });
+        let activation_subscription = cx.observe_window_activation(window, |this, _, _| {
+            this.reset_tab_keys();
+        });
         let mut value = Self {
             focus: cx.focus_handle(),
             slots: configuration
@@ -160,6 +164,7 @@ impl Workbench {
             records_busy: false,
             resolution: None,
             _input_subscription: subscription,
+            _activation_subscription: activation_subscription,
         };
         value.load_host_choice(true, window, cx);
         value.load_tabs(true, window, cx);
@@ -789,6 +794,9 @@ impl Render for Workbench {
             .capture_key_down(cx.listener(|this, event, window, cx| {
                 this.next_request_key(event, window, cx);
                 this.tab_key(event, window, cx);
+            }))
+            .capture_key_up(cx.listener(|this, event, _, _| {
+                this.tab_key_up(event);
             }))
             .capture_action(cx.listener(|this, _: &switcher::Toggle, window, cx| {
                 cx.stop_propagation();

@@ -1,0 +1,11 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 11.38s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 4 tests
+test workspace_names::tests::validation_and_corrupt_persisted_names_are_explicit ... ok
+test workspace_names::tests::names_preserve_exact_catalog_identity_pins_and_registration_refresh ... ok
+test workspace_names::tests::concurrent_compare_and_set_and_failed_write_never_overwrite_a_name ... ok
+test workspace_names::tests::v17_upgrade_keeps_all_existing_state_and_missing_table_is_an_error ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 254 filtered out; finished in 0.41s

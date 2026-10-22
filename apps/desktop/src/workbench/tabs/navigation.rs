@@ -9,6 +9,7 @@ enum Command {
     Position(usize),
     Last,
     Close,
+    TogglePin,
 }
 
 fn command(key: &Keystroke) -> Option<Command> {
@@ -33,6 +34,7 @@ fn command(key: &Keystroke) -> Option<Command> {
             Command::Step(true)
         }),
         "w" if mods.shift == !cfg!(target_os = "macos") => Some(Command::Close),
+        "p" if mods.shift => Some(Command::TogglePin),
         "9" if !mods.shift => Some(Command::Last),
         digit if !mods.shift && matches!(digit, "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8") => {
             Some(Command::Position(usize::from(digit.as_bytes()[0] - b'1')))
@@ -59,12 +61,21 @@ fn step(index: usize, count: usize, forward: bool, wrap: bool) -> Option<usize> 
 }
 
 impl Workbench {
+    pub(in crate::workbench) fn reset_tab_keys(&mut self) {
+        self.tabs.pins.reset_key();
+    }
+
+    pub(in crate::workbench) fn tab_key_up(&mut self, event: &KeyUpEvent) {
+        self.tabs.pins.key_up(&event.keystroke.key);
+    }
+
     pub(in crate::workbench) fn tab_key(
         &mut self,
         event: &KeyDownEvent,
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        let pin_held = self.tabs.pins.key_down(&event.keystroke.key);
         let Some(command) = command(&event.keystroke) else {
             return;
         };
@@ -87,7 +98,7 @@ impl Workbench {
         }
         // Consume even a refused close: the same chord must never enter a shell.
         cx.stop_propagation();
-        if !event.is_held {
+        if !event.is_held && !(command == Command::TogglePin && pin_held) {
             self.tab_command(command, window, cx);
         }
     }
@@ -138,6 +149,7 @@ impl Workbench {
         };
         let count = self.tabs.entries.len();
         match command {
+            Command::TogglePin => self.toggle_workspace_pin(window, cx),
             Command::Close => {
                 self.close_workspace_tab(self.tabs.entries[index].saved.workspace, window, cx)
             }
@@ -203,6 +215,10 @@ impl Workbench {
                         format!("Move tab right · {primary}+Shift+PageDown"),
                     ),
                     (Command::Close, format!("Close tab · {close}")),
+                    (
+                        Command::TogglePin,
+                        format!("Toggle workspace pin · {primary}+Shift+P"),
+                    ),
                 ] {
                     let owner = owner.clone();
                     menu = menu.item(PopupMenuItem::new(label).on_click(move |_, window, cx| {
@@ -250,6 +266,7 @@ mod tests {
             (format!("{primary}-1"), Some(Command::Position(0))),
             (format!("{primary}-8"), Some(Command::Position(7))),
             (format!("{primary}-9"), Some(Command::Last)),
+            (format!("{primary}-shift-p"), Some(Command::TogglePin)),
             (
                 if cfg!(target_os = "macos") {
                     "cmd-w".into()
@@ -264,6 +281,8 @@ mod tests {
             (format!("{primary}-shift-1"), None),
             (format!("{primary}-0"), None),
             ("ctrl-alt-w".into(), None),
+            (format!("{primary}-p"), None),
+            (format!("{primary}-shift-alt-p"), None),
         ] {
             assert_eq!(
                 command(&Keystroke::parse(&chord).unwrap()),

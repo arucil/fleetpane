@@ -1,6 +1,7 @@
 //! Bounded workspace views and revisioned device-local layout persistence.
 mod drag;
 mod navigation;
+mod pins;
 use super::*;
 use crate::{file_locations::Location, files_view::FilesView, terminal_view::TerminalView};
 use fleetpane_session::{
@@ -44,6 +45,7 @@ impl WorkspaceTab {
 
 #[derive(Default)]
 pub(super) struct State {
+    pins: pins::State,
     entries: Vec<WorkspaceTab>,
     selected: Option<Uuid>,
     pub visible: bool,
@@ -94,6 +96,7 @@ impl Workbench {
         }
     }
     pub(super) fn tabs_close_status(&self, cx: &App) -> Result<(), String> {
+        self.tabs.pins.close_status()?;
         if let Some(error) = &self.tabs.error {
             return Err(error.clone());
         }
@@ -105,7 +108,7 @@ impl Workbench {
         Ok(())
     }
     pub(super) fn tabs_ready(&self, cx: &App) -> Result<bool, String> {
-        let mut ready = !self.tabs.busy;
+        let mut ready = !self.tabs.busy && !self.tabs.pins.busy;
         for entry in &self.tabs.entries {
             if let Some(host) = &entry.host {
                 ready &= host.read(cx).draft_close_status()?;
@@ -601,6 +604,7 @@ impl Workbench {
             .flex_col()
             .border_b_1()
             .border_color(cx.theme().border)
+            .child(self.pin_status(cx))
             .when_some(self.tabs.error.clone(), |bar, error| {
                 bar.child(
                     div()

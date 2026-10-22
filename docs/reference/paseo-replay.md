@@ -1637,3 +1637,16 @@ covers concurrent processes, offline edits, unchanged Host snapshots, failed-sav
 close/reload, exact draft replacement and small windows. This closes the local
 workspace-label portion; project names and automatic cross-window refresh remain
 open. No history checkpoint or upstream freshness claim changes.
+
+## Active workspace pin shortcuts: continued implementation
+
+Follow through on the reviewed workspace navigation gap using
+`e2e/browser/sidebar-workspace-pin-shortcut.spec.ts` at
+`a486b0558168c08890890e787d55cfb88c0d7256`. The reference tests distinguish one
+dispatch from two cancelling toggles and require the shortcut to work without
+a mounted sidebar row. Fleetpane now uses the selected saved UUID, an atomic
+local Store toggle shared by GUI/CLI, explicit failed-write recovery and physical
+key-edge tracking for Kit's X11 repeat behavior. [Linux fixture acceptance](../verification/2026-10-22-workspace-pin-shortcut.md)
+covers popup isolation, same-path/offline Hosts, real PTY input, cached pin lists,
+exact drafts and replacement. No history cursor or upstream freshness claim
+changes; pin ordering and other-platform native acceptance remain open.

@@ -1,0 +1,30 @@
+All commands from /home/amlo/Projects/Rust/fleetpane.
+
+cargo test --workspace --locked                          workspace-tests.log (367 pass)
+cargo test -p fleetpane-session workspace_pins --locked core-final.log (4 pass; capacity assertions added after native QA)
+cargo test --manifest-path apps/desktop/Cargo.toml --locked desktop-tests.log (50 pass)
+cargo clippy --workspace --all-targets --locked -- -D warnings workspace-clippy.log
+cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -- -D warnings desktop-clippy.log
+cargo fmt --all --check                                 pass
+cargo fmt --manifest-path apps/desktop/Cargo.toml --check pass
+git diff --check                                       pass
+cargo build -p fleetpane-host --locked                   host-build.log
+cargo build --manifest-path apps/desktop/Cargo.toml --locked desktop-build.log
+cargo check --workspace --locked --target x86_64-pc-windows-gnu windows-check.log
+python3 -m unittest discover -s scripts/tests -p '*_test.py' python-tests.log (22 pass)
+python3 scripts/workspace-names-smoke.py                  names-smoke.log
+python3 scripts/workspace-pins-smoke.py                   pins-smoke.log
+
+Portability reproduction:
+/tmp/fp-names-ci-fix/alias -> /tmp/fp-names-ci-fix/canonical
+Before: TMPDIR=/tmp/fp-names-ci-fix/alias cargo test -p fleetpane-session --locked workspace_names::tests::names_preserve_exact_catalog_identity_pins_and_registration_refresh -- --exact
+After: TMPDIR=/tmp/fp-names-ci-fix/alias cargo test -p fleetpane-session --locked workspace_names
+
+Native: agent-workspace-linux, workspace fp-pin-shortcut, X11 :92, no host desktop input.
+Launch argv: apps/desktop/target/debug/fleetpane-desktop --hosts /tmp/fp-pin-shortcut-native/hosts.json --preferences-dir /tmp/fp-pin-shortcut-native/preferences
+Environment override LIBGL_ALWAYS_SOFTWARE=1.
+Physical hold scoped to DISPLAY=:92 and this workspace's XAUTHORITY:
+xdotool keydown ctrl keydown shift keydown p
+hold 1.4 seconds
+xdotool keyup p keyup shift keyup ctrl
+Actual keypresses, menus and screenshots documented in ../2026-10-22-workspace-pin-shortcut.md.

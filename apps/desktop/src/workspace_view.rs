@@ -91,6 +91,9 @@ impl EventEmitter<NamesUpdated> for WorkspaceView {}
 impl EventEmitter<crate::paseo_import_view::Continuation> for WorkspaceView {}
 
 impl WorkspaceView {
+    pub(crate) fn update_pins(&mut self, pins: Vec<Workspace>) {
+        self.pins = pins;
+    }
     pub(crate) fn name_save_failed(&self) -> bool {
         self.name_error.is_some()
     }

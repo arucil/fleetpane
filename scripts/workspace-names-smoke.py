@@ -19,7 +19,7 @@ def main():
     parser.add_argument("--fixture", type=Path)
     args = parser.parse_args()
     temporary = None if args.fixture else tempfile.TemporaryDirectory(prefix="fp-names-", dir="/tmp")
-    root = args.fixture.resolve() if args.fixture else Path(temporary.name)
+    root = args.fixture.resolve() if args.fixture else Path(temporary.name).resolve()
     root.mkdir(parents=True, exist_ok=True)
     processes, hosts = [], []
     keep = False
@@ -62,6 +62,8 @@ def main():
 
         before = [snapshot(i) for i in range(2)]
         a, b = records[:2]
+        assert not any(w["id"] == a["id"] for w in workspace("toggle-pin", a["id"]))
+        assert next(w for w in workspace("toggle-pin", a["id"]) if w["id"] == a["id"])["name"] == a["name"]
         renamed = workspace("rename", a["id"], 0, "研究 / release 🚀")
         assert renamed["name"] == {"revision": 1, "value": "研究 / release 🚀"}
         assert {k: v for k, v in renamed.items() if k != "name"} == {k: v for k, v in a.items() if k != "name"}
