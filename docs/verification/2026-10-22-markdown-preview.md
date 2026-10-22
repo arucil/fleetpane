@@ -16,7 +16,7 @@ The exact same owned Rust file is included in the combined build/test receipt.
 | Refused scheme | [Visible error](assets/markdown-preview/small-scheme-error.png), no fallback navigation |
 | Reload | [Changed source](assets/markdown-preview/reloaded-source.png), then [fresh preview](assets/markdown-preview/reloaded-preview.png) |
 | Larger document | [Rendered and scrollable](assets/markdown-preview/large-preview.png); 94 KiB Copy not separately accepted |
-| Original Copy | [Exact original content](assets/markdown-preview/clipboard-main.json), including syntax and line endings, matches captured README.MD bytes |
+| Original Copy | [Exact original content](assets/markdown-preview/clipboard-main.json), including syntax and line endings, matches captured README.MD bytes (retained as README.MD.base64) |
 | No automatic images | Local loopback probe recorded zero requests while remote/HTML image fixtures rendered placeholders; this is focused probe evidence, not all-network instrumentation |
 | Session isolation | [Before/after comparison](assets/markdown-preview/verification.json) preserves Codex/ACP Host/provider identities, pending requests, active turns, journal and operation identities |
 
