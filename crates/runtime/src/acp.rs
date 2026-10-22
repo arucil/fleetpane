@@ -57,6 +57,8 @@ struct Session {
     config: Vec<Value>,
     #[serde(default)]
     modes: Option<modes::State>,
+    #[serde(default)]
+    context_usage: Option<crate::usage::Observation>,
     /// Advertised availability is ephemeral and must be refreshed after resume.
     #[serde(skip)]
     commands: Option<Vec<commands::Command>>,
@@ -545,7 +547,7 @@ impl Adapter {
             let method = method.as_str().ok_or("ACP method must be a string")?;
             let params = message.get("params").ok_or("ACP method lacks params")?;
             match method {
-                "session/update" => self.update(params, &mut batch)?,
+                "session/update" => self.update(params, &message, &mut batch)?,
                 "session/request_permission" => {
                     let id = string(params, "sessionId")?;
                     let session = self
@@ -696,6 +698,7 @@ impl Adapter {
                     summary: summary.clone(),
                     config: config(result)?,
                     modes: modes::parse(result)?,
+                    context_usage: None,
                     commands: None,
                     mode_update_version: 0,
                     turns: vec![],
@@ -731,6 +734,7 @@ impl Adapter {
                     summary,
                     config: config(result)?,
                     modes: modes::parse(result)?,
+                    context_usage: self.sessions.get(&id).and_then(|s| s.context_usage.clone()),
                     commands: None,
                     mode_update_version: 0,
                     turns,
@@ -875,7 +879,7 @@ impl Adapter {
         Ok(())
     }
 
-    fn update(&mut self, params: &Value, batch: &mut Batch) -> Result<(), String> {
+    fn update(&mut self, params: &Value, raw: &Value, batch: &mut Batch) -> Result<(), String> {
         let id = string(params, "sessionId")?;
         let session = self
             .sessions
@@ -938,8 +942,13 @@ impl Adapter {
             return Ok(());
         }
         if kind == "usage_update" {
+            let observation = crate::usage::Observation::from_acp(raw, session.active.clone())?;
+            batch.events.push(observation.notification());
+            session.context_usage = Some(observation);
+            #[cfg(unix)]
+            self.dirty.insert(id.into());
             return Ok(());
-        } // Not displayed by the current common projection.
+        }
         let turn=session.active.as_ref().ok_or("ACP emitted conversation activity without a Host prompt; autonomous turns need a separate boundary contract")?.clone();
         if !matches!(kind, "agent_message_chunk" | "agent_thought_chunk") {
             session.anonymous_stream = None;
@@ -1080,6 +1089,13 @@ impl Adapter {
         self.permissions.remove(&id.to_string());
     }
 
+    #[cfg(unix)]
+    pub(crate) fn context_observations(&self) -> impl Iterator<Item = &crate::usage::Observation> {
+        self.sessions
+            .values()
+            .filter_map(|s| s.context_usage.as_ref())
+    }
+
     fn validate(&self) -> Result<(), String> {
         self.validate_with_commands(None)
     }
@@ -1098,6 +1114,12 @@ impl Adapter {
         }
         let mut bytes = 0;
         for (id, session) in &self.sessions {
+            if let Some(observation) = &session.context_usage {
+                observation.validate()?;
+                if observation.thread_id != *id {
+                    return Err("ACP usage belongs to another archived session".into());
+                }
+            }
             if let Some(modes) = &session.modes {
                 modes.validate()?;
             }

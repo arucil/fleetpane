@@ -11,14 +11,14 @@ use gpui_kit::component::{
 };
 use gpui_kit::{
     AnyElement, ClipboardItem, Context, Entity, Image, ImageFormat, ImageSource, ObjectFit, Render,
-    ScrollHandle, SharedString, SharedUri, StyledImage, Subscription, Window, div, img, prelude::*,
-    rems,
+    ScrollHandle, SharedString, StyledImage, Subscription, Window, div, img, prelude::*, rems,
 };
 use serde_json::Value;
 use std::{path::Path, sync::Arc};
 
 const PREVIEW_BYTES: usize = 16 * 1024;
 
+mod image_viewer;
 mod resources;
 
 #[derive(Clone, PartialEq)]
@@ -198,6 +198,7 @@ enum Block {
     Image {
         source: Result<ImageSource, String>,
         label: SharedString,
+        identity: SharedString,
     },
     Patch {
         state: Entity<DiffState>,
@@ -723,7 +724,11 @@ fn render_block(block: &Block, index: usize, cx: &mut Context<ItemView>) -> AnyE
             .occlude()
             .child(Diff::new(state).w_full().h(rems(18.)).soft_wrap(true))
             .into_any_element(),
-        Block::Image { source, label } => {
+        Block::Image {
+            source,
+            label,
+            identity,
+        } => {
             let image = match source {
                 Ok(source) => img(source.clone())
                     .w_full()
@@ -752,6 +757,26 @@ fn render_block(block: &Block, index: usize, cx: &mut Context<ItemView>) -> AnyE
                         .text_color(cx.theme().muted_foreground)
                         .child(label.clone()),
                 )
+                .when_some(source.as_ref().ok(), |view, source| {
+                    let source = source.clone();
+                    let label = label.clone();
+                    let identity = identity.clone();
+                    view.child(
+                        Button::new(("view-image", index))
+                            .small()
+                            .label("View image")
+                            .on_click(move |_, window, cx| {
+                                cx.stop_propagation();
+                                image_viewer::open(
+                                    source.clone(),
+                                    label.clone(),
+                                    identity.clone(),
+                                    window,
+                                    cx,
+                                );
+                            }),
+                    )
+                })
                 .into_any_element()
         }
     }
@@ -788,21 +813,35 @@ fn part_block(part: &Part, cwd: &str, cx: &mut Context<ItemView>) -> Block {
 }
 
 fn image_block(image: &Attachment, cwd: &str) -> Block {
-    let (source, label) = match image {
+    let (source, label, identity) = match image {
         Attachment::Local(path) => {
             let path = Path::new(cwd).join(path);
+            let identity: SharedString = path.to_string_lossy().into_owned().into();
             (
                 Ok(ImageSource::from(Arc::<Path>::from(path))),
                 "Local image".into(),
+                identity,
             )
         }
-        Attachment::Url(url) => (image_url(url), "Image attachment".into()),
-        Attachment::Encoded { mime_type, data } => (
-            image_url(&format!("data:{mime_type};base64,{data}")),
-            "Tool image".into(),
+        Attachment::Url(url) => (
+            image_url(url),
+            "Image attachment".into(),
+            url.clone().into(),
         ),
+        Attachment::Encoded { mime_type, data } => {
+            let identity = format!("data:{mime_type};base64,{data}");
+            (
+                image_url(&identity),
+                format!("Tool image · {mime_type}").into(),
+                identity.into(),
+            )
+        }
     };
-    Block::Image { source, label }
+    Block::Image {
+        source,
+        label,
+        identity,
+    }
 }
 
 fn image_url(url: &str) -> Result<ImageSource, String> {
@@ -819,7 +858,7 @@ fn image_url(url: &str) -> Result<ImageSource, String> {
             format, bytes,
         ))))
     } else {
-        Ok(ImageSource::from(SharedUri::from(url.to_owned())))
+        Err("Only supplied data URLs and local image paths can be displayed; other URLs are not fetched".into())
     }
 }
 
@@ -990,6 +1029,13 @@ mod tests {
         assert!(image_url("data:image/png;base64,invalid*").is_err());
         assert!(image_url("data:text/plain;base64,aGk=").is_err());
         assert!(image_url("data:image/png;base64,iVBORw0KGgo=").is_ok());
+        for url in [
+            "https://example.com/image.png",
+            "file:///example/image.png",
+            "",
+        ] {
+            assert!(matches!(image_url(url), Err(error) if error.contains("not fetched")));
+        }
     }
 
     #[test]

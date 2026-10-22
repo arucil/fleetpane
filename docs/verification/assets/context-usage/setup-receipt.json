@@ -1,0 +1,102 @@
+{
+  "synthetic_only": true,
+  "root": "/tmp/fp-context-native2",
+  "host_sha256": "fce87f388f2fd60a2c6f638942d1be5ebfe8cc7ab67f8fea5439862932dafe20",
+  "desktop_sha256": "817928f85ad07e805f83a1bf4d375ade336a28fa021a0031078d78188cdeeede",
+  "hosts": [
+    {
+      "provider": "codex",
+      "name": "Context Codex",
+      "host_pid": 322712,
+      "provider_pid": 322717,
+      "host_id": "c768d311-e39a-4135-81b0-e168a9150218",
+      "socket": "/tmp/fp-context-native2/codex/host/control.sock",
+      "inbox": "/tmp/fp-context-native2/codex/inbox.jsonl",
+      "observed_thread_id": "usage-1",
+      "unavailable_thread_id": "usage-2",
+      "pending_choices": 1,
+      "observation": {
+        "capacityTokens": 100,
+        "observedAtUnixMs": 1792633150053,
+        "raw": {
+          "method": "thread/tokenUsage/updated",
+          "params": {
+            "threadId": "usage-1",
+            "tokenUsage": {
+              "future": {
+                "opaque": [
+                  false,
+                  null,
+                  "中文\n"
+                ]
+              },
+              "last": {
+                "cachedInputTokens": 0,
+                "inputTokens": 1,
+                "outputTokens": 0,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 125
+              },
+              "modelContextWindow": 100,
+              "total": {
+                "cachedInputTokens": 0,
+                "inputTokens": 1,
+                "outputTokens": 0,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 999999
+              }
+            },
+            "turnId": "observed-turn"
+          }
+        },
+        "source": "codex_last",
+        "threadId": "usage-1",
+        "turnId": "observed-turn",
+        "usedTokens": 125
+      }
+    },
+    {
+      "provider": "acp",
+      "name": "Context Acp",
+      "host_pid": 322749,
+      "provider_pid": 322756,
+      "host_id": "c555d41b-d7ab-4c8f-bb26-21cdf4a7c919",
+      "socket": "/tmp/fp-context-native2/acp/host/control.sock",
+      "inbox": "/tmp/fp-context-native2/acp/inbox.jsonl",
+      "observed_thread_id": "usage-1",
+      "unavailable_thread_id": "usage-2",
+      "pending_choices": 1,
+      "observation": {
+        "capacityTokens": 100,
+        "observedAtUnixMs": 1792633150355,
+        "raw": {
+          "jsonrpc": "2.0",
+          "method": "session/update",
+          "params": {
+            "sessionId": "usage-1",
+            "update": {
+              "_meta": {
+                "opaque": [
+                  false,
+                  null,
+                  "中文\n"
+                ]
+              },
+              "cost": {
+                "amount": 0.125,
+                "currency": "USD"
+              },
+              "sessionUpdate": "usage_update",
+              "size": 100,
+              "used": 42
+            }
+          }
+        },
+        "source": "acp_usage_update",
+        "threadId": "usage-1",
+        "turnId": "e6916890-33ed-4c0f-a997-3a792c1383f0",
+        "usedTokens": 42
+      }
+    }
+  ]
+}

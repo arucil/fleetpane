@@ -1,0 +1,31 @@
+{
+  "capacityTokens": 100,
+  "observedAtUnixMs": 1792633150355,
+  "raw": {
+    "jsonrpc": "2.0",
+    "method": "session/update",
+    "params": {
+      "sessionId": "usage-1",
+      "update": {
+        "_meta": {
+          "opaque": [
+            false,
+            null,
+            "中文\n"
+          ]
+        },
+        "cost": {
+          "amount": 0.125,
+          "currency": "USD"
+        },
+        "sessionUpdate": "usage_update",
+        "size": 100,
+        "used": 42
+      }
+    }
+  },
+  "source": "acp_usage_update",
+  "threadId": "usage-1",
+  "turnId": "e6916890-33ed-4c0f-a997-3a792c1383f0",
+  "usedTokens": 42
+}

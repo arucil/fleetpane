@@ -1,0 +1,82 @@
+{
+  "protocol": 3,
+  "host_id": "c555d41b-d7ab-4c8f-bb26-21cdf4a7c919",
+  "host_pid": 322749,
+  "provider_pid": 322756,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "context-fixture",
+      "version": "1"
+    },
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "deepseek-acp",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "c555d41b-d7ab-4c8f-bb26-21cdf4a7c919",
+    "controller_id": "40d04ccf-44c6-40ec-8b02-992c4e2b70fb",
+    "generation": 4
+  },
+  "sequence": 13,
+  "operation_ids": [
+    "8c71d08c-ac17-473b-b1e3-eb3f119b953e",
+    "37662723-c416-4350-88b7-e20a52603eea",
+    "ca79fcef-3812-45a8-a6eb-ae6dff01abae"
+  ],
+  "journal_total": 3,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "usage-1",
+        "turn_id": "e6916890-33ed-4c0f-a997-3a792c1383f0"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": 71,
+      "method": "session/request_permission",
+      "params": {
+        "options": [
+          {
+            "kind": "allow_once",
+            "name": "Allow once",
+            "optionId": "allow"
+          },
+          {
+            "kind": "reject_once",
+            "name": "Reject once",
+            "optionId": "reject"
+          }
+        ],
+        "sessionId": "usage-1",
+        "threadId": "usage-1",
+        "toolCall": {
+          "title": "Synthetic context QA choice",
+          "toolCallId": "usage-qa"
+        }
+      }
+    }
+  ],
+  "attention": {
+    "records": [],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}

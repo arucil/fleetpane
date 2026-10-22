@@ -44,6 +44,7 @@ mod session_settings;
 #[cfg(unix)]
 pub mod session_tree;
 pub mod turn_output;
+pub mod usage;
 #[cfg(unix)]
 pub mod wait;
 #[cfg(unix)]
@@ -85,6 +86,8 @@ pub struct Thread {
     pub turns: Vec<Turn>,
     #[serde(default)]
     pub task_plan: Option<fleetpane_runtime::tasks::View>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub context_usage: Option<fleetpane_runtime::usage::View>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -173,6 +176,10 @@ impl Thread {
 
     pub fn validate(&self) -> Result<(), Error> {
         self.validate_session_settings()?;
+        if let Some(view) = &self.context_usage {
+            view.validate(&self.id, view.sequence)
+                .map_err(Error::Projection)?;
+        }
         if let Some(modes) = &self.acp_modes {
             modes.validate().map_err(Error::Projection)?;
         }
@@ -206,7 +213,9 @@ impl Thread {
         };
         if !matches!(
             method,
-            "turn/plan/updated"
+            "thread/contextUsage/updated"
+                | "thread/tokenUsage/updated"
+                | "turn/plan/updated"
                 | "thread/status/changed"
                 | "thread/name/updated"
                 | "thread/acpSessionInfo/updated"
@@ -235,6 +244,22 @@ impl Thread {
             return Ok(false);
         }
         match envelope.method.as_str() {
+            "thread/contextUsage/updated" | "thread/tokenUsage/updated" => {
+                if self
+                    .context_usage
+                    .as_ref()
+                    .is_none_or(|v| event.sequence > v.sequence)
+                {
+                    let observation =
+                        fleetpane_runtime::usage::Observation::from_event(&event.message)
+                            .map_err(Error::Projection)?;
+                    self.context_usage = Some(fleetpane_runtime::usage::View {
+                        sequence: event.sequence,
+                        observation,
+                    });
+                }
+                return Ok(true);
+            }
             "thread/acpCommands/updated" => {
                 self.apply_acp_commands(&params)?;
                 return Ok(true);

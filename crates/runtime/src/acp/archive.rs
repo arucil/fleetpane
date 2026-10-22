@@ -22,7 +22,7 @@ impl Adapter {
                 .ok_or("archive session disappeared")?;
             batch.archive.push(Row {
                 kind: "session".into(), session: id.clone(), parent: String::new(), id,
-                data: json!({"summary":session.summary,"config":session.config,"modes":session.modes,"turns":[],"active":null}),
+                data: json!({"summary":session.summary,"config":session.config,"modes":session.modes,"context_usage":session.context_usage,"turns":[],"active":null}),
             });
         }
         for event in &batch.events {
@@ -408,5 +408,79 @@ mod tests {
         });
         damaged[0].data["summary"]["sessionId"] = json!("other");
         assert!(Adapter::restore(damaged).is_err());
+    }
+}
+
+#[cfg(test)]
+mod usage_tests {
+    use super::*;
+    #[test]
+    fn idle_usage_is_archived_restored_and_not_replaced_by_prompt_totals_or_resume() {
+        let mut adapter = Adapter::default();
+        let request = adapter
+            .dispatch("create".into(), "thread/start", json!({"cwd":"/synthetic"}))
+            .unwrap();
+        adapter.receive(json!({"jsonrpc":"2.0","id":request.wire[0]["id"],"result":{"sessionId":"s","configOptions":[]}})).unwrap();
+        let raw = json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"usage_update","used":0,"size":0,"_meta":{"exact":false}}}});
+        let batch = adapter.receive(raw.clone()).unwrap();
+        assert_eq!(batch.events.len(), 1);
+        let observation = adapter.sessions["s"].context_usage.clone().unwrap();
+        assert_eq!(observation.raw, raw);
+        assert!(observation.turn_id.is_none());
+        let mut restored = Adapter::restore(batch.archive.clone()).unwrap();
+        assert_eq!(
+            restored.sessions["s"].context_usage,
+            Some(observation.clone())
+        );
+        assert!(!restored.sessions["s"].resident);
+        assert!(restored.receive(raw.clone()).is_err());
+        let pending = restored
+            .dispatch(
+                "resume".into(),
+                "thread/resume",
+                json!({"threadId":"s","includeTurns":true}),
+            )
+            .unwrap();
+        restored
+            .receive(
+                json!({"jsonrpc":"2.0","id":pending.wire[0]["id"],"result":{"configOptions":[]}}),
+            )
+            .unwrap();
+        assert_eq!(
+            restored.sessions["s"].context_usage,
+            Some(observation.clone())
+        );
+        let pending = restored
+            .dispatch(
+                "prompt".into(),
+                "turn/start",
+                json!({"threadId":"s","input":[{"type":"text","text":"synthetic"}]}),
+            )
+            .unwrap();
+        restored.receive(json!({"jsonrpc":"2.0","id":pending.wire[0]["id"],"result":{"stopReason":"end_turn","usage":{"totalTokens":99999,"inputTokens":99998,"outputTokens":1}}})).unwrap();
+        assert_eq!(restored.sessions["s"].context_usage, Some(observation));
+        assert!(restored.sessions["s"].active.is_none());
+        let mut corrupt = batch.archive;
+        corrupt[0].data["context_usage"]["usedTokens"] = json!(1);
+        assert!(Adapter::restore(corrupt).is_err());
+    }
+    #[test]
+    fn invalid_known_idle_update_keeps_prior_snapshot_and_other_sessions_are_refused() {
+        let mut adapter = Adapter::default();
+        let request = adapter
+            .dispatch("create".into(), "thread/start", json!({"cwd":"/synthetic"}))
+            .unwrap();
+        adapter.receive(json!({"jsonrpc":"2.0","id":request.wire[0]["id"],"result":{"sessionId":"s","configOptions":[]}})).unwrap();
+        let raw = json!({"jsonrpc":"2.0","method":"session/update","params":{"sessionId":"s","update":{"sessionUpdate":"usage_update","used":42,"size":100}}});
+        adapter.receive(raw.clone()).unwrap();
+        let before = adapter.sessions["s"].context_usage.clone();
+        let mut bad = raw.clone();
+        bad["params"]["update"]["used"] = Value::Null;
+        assert!(adapter.receive(bad).is_err());
+        assert_eq!(adapter.sessions["s"].context_usage, before);
+        let mut other = raw;
+        other["params"]["sessionId"] = json!("other");
+        assert!(adapter.receive(other).is_err());
+        assert_eq!(adapter.sessions["s"].context_usage, before);
     }
 }

@@ -650,6 +650,11 @@ pub async fn run(config: Config) -> Result<(), Error> {
         info["fleetpaneProvider"] = json!("codex");
         None
     };
+    if let Some(adapter) = &adapter {
+        for observation in adapter.context_observations() {
+            state.usage.record(observation.clone());
+        }
+    }
     state.snapshot.provider_pid = pid;
     state.snapshot.provider_info = info;
     state.snapshot.provider_info["fleetpaneTerminalVersion"] = json!(1);
@@ -711,6 +716,20 @@ pub async fn run(config: Config) -> Result<(), Error> {
                                     .map_err(|e|e.to_string()).and_then(|read|terminals.read(read)) {
                                     Ok(result) => Response::Query { message:json!({"result":result}), sequence:state.snapshot.sequence },
                                     Err(error) => Response::error("terminal_read",error),
+                                }
+                            };
+                            let _disconnected = call.reply.send(response);
+                            continue;
+                        }
+                        if method == crate::usage::READ_METHOD {
+                            let response = match state.authorize_controller(&lease) {
+                                Err(error) => error.into(),
+                                Ok(()) => match serde_json::from_value::<crate::usage::Read>(params) {
+                                    Ok(read) if !read.thread_id.is_empty() && read.thread_id.len() <= 4096 => Response::Query {
+                                        message: json!({"result":state.usage.read(&read.thread_id,state.snapshot.sequence)}),
+                                        sequence: state.snapshot.sequence,
+                                    },
+                                    _ => Response::error("invalid_context_usage_read", "expected a nonempty threadId up to 4 KiB"),
                                 }
                             };
                             let _disconnected = call.reply.send(response);

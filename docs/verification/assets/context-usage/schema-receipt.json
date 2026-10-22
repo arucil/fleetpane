@@ -1,0 +1,29 @@
+{
+  "codex_version": "codex-cli 0.163.0",
+  "generated_schema": "/tmp/fp-context-usage/installed-codex-schema/v2/ThreadTokenUsageUpdatedNotification.json",
+  "sha256": "aba4f6c7e4a19b2b842c08ee793b57000c07dafd57b922ad0d8e7c76609108c2",
+  "matches_supplied_schema": true,
+  "notification_required": [
+    "threadId",
+    "tokenUsage",
+    "turnId"
+  ],
+  "token_usage_required": [
+    "last",
+    "total"
+  ],
+  "breakdown_required": [
+    "cachedInputTokens",
+    "inputTokens",
+    "outputTokens",
+    "reasoningOutputTokens",
+    "totalTokens"
+  ],
+  "capacity_schema": {
+    "format": "int64",
+    "type": [
+      "integer",
+      "null"
+    ]
+  }
+}

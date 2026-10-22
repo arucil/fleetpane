@@ -1,0 +1,68 @@
+{
+  "protocol": 3,
+  "host_id": "c768d311-e39a-4135-81b0-e168a9150218",
+  "host_pid": 322712,
+  "provider_pid": 322717,
+  "provider_info": {
+    "agentCapabilities": {
+      "sessionCapabilities": {
+        "list": {},
+        "resume": {}
+      }
+    },
+    "agentInfo": {
+      "name": "context-fixture",
+      "version": "1"
+    },
+    "fleetpaneAttachmentVersion": 1,
+    "fleetpaneProvider": "codex",
+    "fleetpaneTerminalVersion": 1,
+    "protocolVersion": 1
+  },
+  "owner": {
+    "host_id": "c768d311-e39a-4135-81b0-e168a9150218",
+    "controller_id": "f7215498-a2ff-4464-a535-231f0a6ac211",
+    "generation": 4
+  },
+  "sequence": 8,
+  "operation_ids": [
+    "15b76cd0-2c3c-4fca-818a-9c8f17a4867f",
+    "30603774-5437-4a60-a18b-0a4da8b210c8",
+    "0e0c3384-0dbf-47b9-abe9-a1ce400be697"
+  ],
+  "journal_total": 3,
+  "admission": {
+    "generation": 0,
+    "mode": "ready"
+  },
+  "activity": {
+    "stopping": [],
+    "terminal_ids": [],
+    "turns": [
+      {
+        "thread_id": "usage-1",
+        "turn_id": "turn-usage-1-1"
+      }
+    ],
+    "in_flight_operations": 0,
+    "unknown_operations": 0
+  },
+  "pending_requests": [
+    {
+      "id": "usage-qa-choice",
+      "method": "item/commandExecution/requestApproval",
+      "params": {
+        "command": "Synthetic context QA; nothing executes",
+        "itemId": "usage-qa",
+        "threadId": "usage-1",
+        "turnId": "turn-usage-1-1"
+      }
+    }
+  ],
+  "attention": {
+    "records": [],
+    "evicted": 0
+  },
+  "fault": null,
+  "fault_scope": null
+}

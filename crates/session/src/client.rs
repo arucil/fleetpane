@@ -38,6 +38,9 @@ pub struct Connection {
 
 #[derive(Clone, Debug)]
 pub enum Command {
+    ContextUsage {
+        thread_id: String,
+    },
     Tasks {
         thread_id: String,
     },
@@ -144,6 +147,17 @@ impl Command {
                     return Err(Error::Input("Invalid session identity for restore".into()));
                 }
                 ("thread/unarchive", json!({"threadId":thread_id}))
+            }
+            Self::ContextUsage { thread_id } => {
+                if thread_id.is_empty() || thread_id.len() > 4096 {
+                    return Err(Error::Input(
+                        "Invalid context usage session identity".into(),
+                    ));
+                }
+                (
+                    fleetpane_runtime::usage::READ_METHOD,
+                    json!({"threadId":thread_id}),
+                )
             }
             Self::Tasks { thread_id } => {
                 if thread_id.is_empty() || thread_id.len() > 4096 {

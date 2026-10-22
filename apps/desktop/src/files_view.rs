@@ -6,7 +6,7 @@ use crate::{
 };
 use base64::{Engine, engine::general_purpose::STANDARD};
 use fleetpane_session::{
-    files::{Content, Kind, Listing, Opened, Readback, Target},
+    files::{Content, Kind, Link, Listing, Opened, Readback, Target},
     workspaces::Workspace,
 };
 use gpui_kit::component::{
@@ -14,8 +14,23 @@ use gpui_kit::component::{
     button::{Button, ButtonVariants},
     input::{Editor, EditorState, Input, InputEvent, InputState, Position},
 };
+// The component facade does not expose Base's authoritative image-source override.
+use gpui_kit::base::text::{TextView, TextViewState};
 use gpui_kit::{prelude::*, *};
-use std::{num::NonZeroUsize, sync::Arc};
+use std::{num::NonZeroUsize, path::Path, sync::Arc};
+
+#[derive(Clone, Copy, Default, PartialEq, Eq)]
+enum TextMode {
+    #[default]
+    Source,
+    Preview,
+}
+
+struct MarkdownPreview {
+    state: Entity<TextViewState>,
+    _observer: Subscription,
+    image_placeholder: Arc<Image>,
+}
 
 enum Action {
     List(String),
@@ -54,6 +69,8 @@ pub struct FilesView {
     listing: Option<Listing>,
     file: Option<Readback>,
     preview: Option<Entity<EditorState>>,
+    text_mode: TextMode,
+    markdown: Option<MarkdownPreview>,
     wrap: bool,
     image: Option<Arc<Image>>,
     busy: bool,
@@ -81,6 +98,9 @@ fn source_position(text: &str, line: Option<NonZeroUsize>) -> Result<Position, S
 }
 
 fn language(path: &str) -> &'static str {
+    if markdown_file(path) {
+        return "markdown";
+    }
     match std::path::Path::new(path)
         .extension()
         .and_then(|s| s.to_str())
@@ -95,12 +115,44 @@ fn language(path: &str) -> &'static str {
         Some("toml") => "toml",
         Some("yaml" | "yml") => "yaml",
         Some("sh" | "bash" | "zsh") => "bash",
-        Some("md" | "markdown") => "markdown",
         Some("html" | "htm") => "html",
         Some("css") => "css",
         Some("c" | "h") => "c",
         Some("cpp" | "cc" | "cxx" | "hpp") => "cpp",
         _ => "text",
+    }
+}
+
+fn markdown_file(path: &str) -> bool {
+    Path::new(path)
+        .extension()
+        .and_then(|extension| extension.to_str())
+        .is_some_and(|extension| {
+            extension.eq_ignore_ascii_case("md") || extension.eq_ignore_ascii_case("markdown")
+        })
+}
+
+// Link decoding stays shared with conversations. The displayed file, rather
+// than the directory listing or editable path input, supplies the relative base.
+// open_path remains responsible for traversal, symlink and saved-root checks.
+fn markdown_link(
+    root: &Path,
+    displayed_file: &str,
+    href: &str,
+) -> Result<Link, fleetpane_session::client::Error> {
+    match Link::parse(href)? {
+        Link::Web(url) => Ok(Link::Web(url)),
+        Link::Local(target) => {
+            let file = root.join(displayed_file);
+            let directory = file.parent().and_then(Path::to_str).ok_or_else(|| {
+                fleetpane_session::client::Error::Input(
+                    "Markdown file directory is not a local UTF-8 path".into(),
+                )
+            })?;
+            let mut resolved = Target::in_directory(directory, &target.path)?;
+            resolved.line = target.line;
+            Ok(Link::Local(resolved))
+        }
     }
 }
 
@@ -189,7 +241,11 @@ impl FilesView {
                 _ => {}
             },
         );
-        cx.on_release(|this, cx| this.clear_image(cx)).detach();
+        cx.on_release(|this, cx| {
+            this.clear_image(cx);
+            this.clear_markdown(cx);
+        })
+        .detach();
         let mut value = Self {
             workspace,
             location: location.clone(),
@@ -201,6 +257,8 @@ impl FilesView {
             listing: None,
             file: None,
             preview: None,
+            text_mode: TextMode::Source,
+            markdown: None,
             wrap: true,
             image: None,
             busy: false,
@@ -284,6 +342,123 @@ impl FilesView {
     fn clear_image(&mut self, cx: &mut App) {
         if let Some(image) = self.image.take() {
             ImageSource::from(image).remove_asset(cx);
+        }
+    }
+
+    fn clear_markdown(&mut self, cx: &mut App) {
+        if let Some(markdown) = self.markdown.take() {
+            ImageSource::from(markdown.image_placeholder).remove_asset(cx);
+        }
+        self.text_mode = TextMode::Source;
+    }
+
+    fn set_text_mode(&mut self, mode: TextMode, cx: &mut Context<Self>) {
+        if self.busy {
+            return;
+        }
+        let Some(file) = &self.file else {
+            return;
+        };
+        let Content::Text { text } = &file.content else {
+            return;
+        };
+        if !markdown_file(&file.path) {
+            return;
+        }
+        if mode == TextMode::Preview && self.markdown.is_none() {
+            let state = cx.new(|cx| TextViewState::markdown(text, cx));
+            // Larger documents parse asynchronously. Observe completion even
+            // when the parent has no other reason to repaint.
+            let observer = cx.observe(&state, |_, _, cx| cx.notify());
+            self.markdown = Some(MarkdownPreview {
+                state,
+                _observer: observer,
+                image_placeholder: Arc::new(Image::from_bytes(
+                    ImageFormat::Svg,
+                    br##"<svg xmlns="http://www.w3.org/2000/svg" width="64" height="48" viewBox="0 0 64 48"><rect x="1" y="1" width="62" height="46" rx="4" fill="#dddddd" stroke="#666666"/><path d="M12 36 26 20 36 30 44 22 54 36M10 8 54 40" fill="none" stroke="#666666" stroke-width="3"/></svg>"##.to_vec(),
+                )),
+            });
+        }
+        self.text_mode = mode;
+        cx.notify();
+    }
+
+    fn render_text(&self, cx: &mut Context<Self>) -> AnyElement {
+        match self.text_mode {
+            TextMode::Source => {
+                let Some(state) = &self.preview else {
+                    return div().into_any_element();
+                };
+                div()
+                    .flex_1()
+                    .min_h_0()
+                    .overflow_hidden()
+                    .child(
+                        Editor::new(state)
+                            .readonly(true)
+                            .aria_label("Read-only workspace source")
+                            .h_full(),
+                    )
+                    .into_any_element()
+            }
+            TextMode::Preview => {
+                let markdown = self
+                    .markdown
+                    .as_ref()
+                    .expect("Preview mode retains its Markdown state");
+                let file = self.file.as_ref().expect("Preview mode has a loaded file");
+                let displayed_file = file.path.clone();
+                let image_placeholder = markdown.image_placeholder.clone();
+                let owner = cx.entity().downgrade();
+                div()
+                    .flex_1()
+                    .min_h_0()
+                    .overflow_hidden()
+                    .child(
+                        TextView::new(&markdown.state)
+                            .w_full()
+                            .h_full()
+                            .selectable(true)
+                            .scrollable(true)
+                            // Covers intrinsic measurement as well as rendering,
+                            // including HTML and data images. Never return a URI.
+                            .image_source(move |_| ImageSource::from(image_placeholder.clone()))
+                            .on_link_click(move |href, _, window, cx| {
+                                if let Some(view) = owner.upgrade() {
+                                    view.update(cx, |this, cx| {
+                                        if this.busy
+                                            || this.text_mode != TextMode::Preview
+                                            || !this
+                                                .file
+                                                .as_ref()
+                                                .is_some_and(|file| file.path == displayed_file)
+                                        {
+                                            return;
+                                        }
+                                        match markdown_link(
+                                            &this.workspace.registration.directory.path,
+                                            &displayed_file,
+                                            href,
+                                        ) {
+                                            Ok(Link::Web(url)) => {
+                                                this.error = None;
+                                                cx.open_url(&url);
+                                                cx.notify();
+                                            }
+                                            Ok(Link::Local(target)) => {
+                                                this.run(Action::Open(target), window, cx);
+                                            }
+                                            Err(error) => {
+                                                this.error = Some(error.to_string());
+                                                cx.notify();
+                                            }
+                                        }
+                                    });
+                                }
+                            }),
+                    )
+                    .into_any_element()
+            }
         }
     }
 
@@ -381,6 +556,7 @@ impl FilesView {
         }
         self.busy = true;
         self.error = None;
+        self.clear_markdown(cx);
         let workspace = self.workspace.clone();
         let task = cx.background_executor().spawn(async move {
             background(async move {
@@ -703,8 +879,14 @@ impl Render for FilesView {
                             Content::Text {text}=> {
                                 let full=text.clone();
                                 view.child(div().flex().flex_wrap().items_center().gap_2()
+                                    .when(markdown_file(&file.path),|view|view.children([TextMode::Source,TextMode::Preview].map(|mode| {
+                                        Button::new(if mode == TextMode::Source {"workspace-file-source"} else {"workspace-file-preview"})
+                                            .small().label(if mode == TextMode::Source {"Source"} else {"Preview"})
+                                            .selected(self.text_mode == mode).disabled(self.busy)
+                                            .on_click(cx.listener(move|this,_,_,cx|this.set_text_mode(mode,cx)))
+                                    })))
                                     .child(Button::new("copy-workspace-file").small().label("Copy full text").on_click(move|_,_,cx|cx.write_to_clipboard(ClipboardItem::new_string(full.clone()))))
-                                    .child(Button::new("wrap-workspace-file").small().label(if self.wrap {"Wrap: on"} else {"Wrap: off"}).selected(self.wrap).disabled(self.preview.is_none()).on_click(cx.listener(|this,_,window,cx| {
+                                    .child(Button::new("wrap-workspace-file").small().label(if self.wrap {"Wrap: on"} else {"Wrap: off"}).selected(self.wrap).disabled(self.busy || self.preview.is_none() || self.text_mode != TextMode::Source).on_click(cx.listener(|this,_,window,cx| {
                                         this.wrap = !this.wrap;
                                         if let Some(preview) = &this.preview {
                                             preview.update(cx,|state,cx|state.set_soft_wrap(this.wrap,window,cx));
@@ -724,16 +906,119 @@ impl Render for FilesView {
                         div().relative().flex_1().min_h_0().overflow_hidden().child(img(ImageSource::from(source.clone())).absolute().top_0().left_0().size_full().object_fit(ObjectFit::Contain)
                             .with_loading(||div().child("Loading image…").into_any_element())
                             .with_fallback(||div().child("Image renderer could not display the validated file.").into_any_element()))))
-                    .when_some(self.line.filter(|_|self.preview.is_some()),|view,line|view.child(div().text_sm().child(format!("Requested source line {line} · complete loaded file"))))
-                    .when_some(self.preview.as_ref(),|view,state|view.child(div().flex_1().min_h_0().overflow_hidden().child(Editor::new(state).readonly(true).aria_label("Read-only workspace source").h_full())))))
+                    .when(self.text_mode == TextMode::Preview,|view|view.child(div().text_sm().child("Markdown preview · images disabled (placeholders) · source line anchors require Source. Heading anchors are unsupported.")))
+                    .when_some(self.line.filter(|_|self.preview.is_some() && self.text_mode == TextMode::Source),|view,line|view.child(div().text_sm().child(format!("Requested source line {line} · complete loaded file"))))
+                    .child(self.render_text(cx))))
     }
 }
 
 #[cfg(test)]
 mod tests {
+    use super::{Link, Target, markdown_file, markdown_link};
+    use std::{num::NonZeroUsize, path::Path};
+
+    #[test]
+    fn markdown_extension_is_explicit_and_case_insensitive() {
+        for path in [
+            "README.md",
+            "doc.MD",
+            "nested/中文.MarkDown",
+            "empty.markdown",
+        ] {
+            assert!(markdown_file(path), "{path}");
+            assert_eq!(super::language(path), "markdown");
+        }
+        for path in ["README", ".md", "doc.mdx", "doc.md.rs", "md/doc.txt"] {
+            assert!(!markdown_file(path), "{path}");
+        }
+    }
+
+    #[test]
+    fn markdown_links_use_displayed_file_directory_and_shared_decoding() {
+        let root = Path::new("/workspace 中文");
+        assert_eq!(
+            markdown_link(root, "docs/README.MD", "sibling%20中文.rs#L2").unwrap(),
+            Link::Local(Target {
+                path: "/workspace 中文/docs/sibling 中文.rs".into(),
+                line: NonZeroUsize::new(2),
+            })
+        );
+        assert_eq!(
+            markdown_link(root, "docs/guide.MD", "子目录/file%20name.rs#L2-L4").unwrap(),
+            Link::Local(Target {
+                path: "/workspace 中文/docs/子目录/file name.rs".into(),
+                line: NonZeroUsize::new(2),
+            })
+        );
+        assert_eq!(
+            markdown_link(root, "README.md", "exact%25%23%3A2.txt").unwrap(),
+            Link::Local(Target {
+                path: "/workspace 中文/exact%#:2.txt".into(),
+                line: None,
+            })
+        );
+        assert_eq!(
+            markdown_link(
+                root,
+                "docs/guide.md",
+                "file:///workspace%20中文/src/main.rs:7"
+            )
+            .unwrap(),
+            Link::Local(Target {
+                path: "/workspace 中文/src/main.rs".into(),
+                line: NonZeroUsize::new(7),
+            })
+        );
+        assert_eq!(
+            markdown_link(root, "docs/guide.md", "https://example.test/path#section").unwrap(),
+            Link::Web("https://example.test/path#section".into())
+        );
+    }
+
+    #[test]
+    fn markdown_links_reject_bad_schemes_and_anchors_and_keep_engine_confinement() {
+        let root = Path::new("/workspace");
+        for href in [
+            "javascript:alert(1)",
+            "data:text/html,bad",
+            "mailto:user@example.test",
+            "file://remote/path.md",
+            "//remote/path.md",
+            "file.md#heading",
+            "file.md#L0",
+            "file.md#L4-L2",
+            "#heading",
+            "#L2",
+            "bad%00.md",
+            "bad%FF.md",
+        ] {
+            assert!(
+                markdown_link(root, "docs/guide.md", href).is_err(),
+                "{href}"
+            );
+        }
+        // Never erase parent components or rebase absolute escapes: the shared
+        // open_path engine must receive these unmodified and refuse them.
+        for href in ["../outside.md", "%2e%2e/outside.md"] {
+            assert_eq!(
+                markdown_link(root, "docs/guide.md", href).unwrap(),
+                Link::Local(Target {
+                    path: "/workspace/docs/../outside.md".into(),
+                    line: None,
+                })
+            );
+        }
+        assert_eq!(
+            markdown_link(root, "docs/guide.md", "/outside.md").unwrap(),
+            Link::Local(Target {
+                path: "/outside.md".into(),
+                line: None,
+            })
+        );
+    }
+
     #[test]
     fn source_position_keeps_original_lines_and_rejects_absent_targets() {
-        use std::num::NonZeroUsize;
         assert_eq!(
             super::source_position("first\r\n中文  \n", NonZeroUsize::new(2)).unwrap(),
             super::Position::new(1, 0)

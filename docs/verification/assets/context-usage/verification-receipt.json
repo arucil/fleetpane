@@ -1,0 +1,116 @@
+{
+  "owned_files": {
+    "crates/runtime/src/usage.rs": "4ce4dbbc8dcf28e56b2baf15fcaf8fade6529dcae715ff707204bcbb215a2208",
+    "crates/runtime/src/usage/tests.rs": "1f53c40556d1d5bbf91906993445763af03bbabbb0200f96661697f2056b91f6",
+    "crates/runtime/src/lib.rs": "7f6a721bb82c9a57f9e78c61da89d353cbf983ba2425af62f1c17c25798aca82",
+    "crates/runtime/src/unix.rs": "c4956faadd5407ea7d61461746b5866287d4d327c631d75dc6a761b016770210",
+    "crates/runtime/src/acp.rs": "98b74b1fbefad0c451fafed3230d94ffa797ab8bb679ddbaaee4d2bc6ecd4b9d",
+    "crates/runtime/src/acp/archive.rs": "365d37ff428c732a4edba4489ef23409d3da3f73be2ee054a8d90d39c41c27ae",
+    "crates/runtime/src/acp/history.rs": "f73f40589bb1118fa689ab0c3d717e1d28440c7075f98ece0dfb210ae5251d11",
+    "crates/session/src/usage.rs": "ba10627c11fd4b3415ea68ca3e9b17b81f68d69194ce65e5f2ff6a58d2b66f93",
+    "crates/session/src/usage/tests.rs": "993677b73a1b30ae6b4117e2faa7eb281e86e93f2419ba1b184dc6160f13ea14",
+    "crates/session/src/lib.rs": "2a9c573cadc334df6eba79a9570438882baa7eadbf5181abe6d638e0b8f1a9df",
+    "crates/session/src/client.rs": "83f5b808e4edc1c68d6db96fc9f755d006ca80622f2d6da46b9acc5344c01134",
+    "apps/desktop/src/host_view.rs": "45f40145b1ede3fe77489ea73b6fcf2c2ccdb85e18179a0db440327195e07223",
+    "apps/desktop/src/host_view/usage.rs": "248a35938008693fb0f6a715a6dcb11501e9b83df97c94123ac63bf30ede97fc",
+    "apps/desktop/src/host_view/row_changes.rs": "75467198402034a2cf473d98fccc6bb92862a09b560933b86fe21d6f057740f3",
+    "scripts/context-usage-fixture.py": "5709024c858e1b3e66886252a151d3efac37b729bacb469ea9eb206a04d70656",
+    "scripts/context-usage-smoke.py": "061964aa4d6f615f4e85091a524da5263c741f379dda3b9f4726c5c6f28c7437",
+    "docs/adr/0103-provider-context-observations.md": "31b6823e5b6e73791b1687ee93ab13110d2f8f78c030b04ea641aec41d0c2553"
+  },
+  "checks": [
+    {
+      "command": "cargo fmt --all --check",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/workspace-fmt.log",
+      "test_results": []
+    },
+    {
+      "command": "cargo test --workspace --locked -j2",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/workspace-test.log",
+      "test_results": [
+        "0",
+        "4",
+        "2",
+        "4",
+        "87",
+        "214",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --locked -j2 -- -D warnings",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/workspace-clippy.log",
+      "test_results": []
+    },
+    {
+      "command": "cargo build -p fleetpane-host --locked -j2",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/host-build.log",
+      "test_results": []
+    },
+    {
+      "command": "cargo fmt --manifest-path apps/desktop/Cargo.toml --check",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/native-fmt.log",
+      "test_results": []
+    },
+    {
+      "command": "cargo test --manifest-path apps/desktop/Cargo.toml --locked -j2",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/native-test.log",
+      "test_results": [
+        "39"
+      ]
+    },
+    {
+      "command": "cargo build --manifest-path apps/desktop/Cargo.toml --locked -j2",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/native-build.log",
+      "test_results": []
+    },
+    {
+      "command": "cargo clippy --manifest-path apps/desktop/Cargo.toml --all-targets --locked -j2 -- -D warnings",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/native-clippy.log",
+      "test_results": []
+    },
+    {
+      "command": "python3 scripts/context-usage-smoke.py --evidence-dir /tmp/fp-context-usage/process-final",
+      "result": "PASS",
+      "log": "/tmp/fp-context-usage/process-smoke.log",
+      "test_results": []
+    }
+  ],
+  "schema_receipt": "/tmp/fp-context-usage/schema-receipt.json",
+  "process_receipt": "/tmp/fp-context-usage/process-final/process-receipt.json",
+  "native_fixture_setup": "/tmp/fp-context-native/setup-receipt.json",
+  "remaining": [
+    "Installed-provider context runtime acceptance",
+    "IME and other platforms",
+    "Codex context cache not retained across Host restart"
+  ],
+  "no_model_calls": true,
+  "no_live_sessions": true,
+  "no_commits_or_push": true,
+  "initial_head": "59431f9504f0064d5194310a62084ad20f0c7826",
+  "head_at_receipt": "06bf074d331c206fafcbcdac069c95484e524086",
+  "initial_findings": [
+    "ACP usage_update returned Ok without publication at old acp.rs:940",
+    "Thread projection ignored thread/tokenUsage/updated",
+    "No context UI; these were supported by inspected source, not model calls"
+  ],
+  "limits": [
+    "Exact raw means parsed JSON values, not original whitespace or key order",
+    "Percent uses floating point, counts retain exact integers",
+    "Dedicated native fixture holds synthetic prompts and supports explicit inbox settle; Stop provider cancellation behavior is not implemented by that fixture",
+    "Retained native fixture Hosts are intentionally alive for parent QA; process-smoke Hosts are cleaned"
+  ],
+  "native_acceptance": "../../2026-10-22-context-usage.md",
+  "fixture_correction": "thread/list now returns metadata with empty turns; fixed process smoke accepted"
+}

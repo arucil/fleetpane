@@ -17,6 +17,7 @@ mod session_settings;
 mod stopping;
 mod tasks;
 mod tree_navigation;
+mod usage;
 use crate::conversation_item::{CopyAnswer, ItemView, OpenFile, Row};
 use crate::question_view::{AnswerEvent, QuestionView};
 use fleetpane_runtime::Snapshot;
@@ -115,6 +116,7 @@ pub struct HostView {
     draft: draft::State,
     recent: recent::State,
     tasks: tasks::State,
+    usage: usage::State,
     busy: bool,
     poll_paused: bool,
     polling: bool,
@@ -329,6 +331,7 @@ impl HostView {
             tree_opening: None,
             tree_return: None,
             tasks: tasks::State::default(),
+            usage: usage::State::default(),
             history: None,
             rows: Vec::new(),
             row_index: BTreeMap::new(),
@@ -1046,6 +1049,10 @@ impl HostView {
                 self.rebuild_rows(cx);
                 self.load_draft(false, window, cx);
                 self.load_tasks(window, cx);
+                self.load_context_usage(window, cx);
+            }
+            Command::ContextUsage { thread_id } => {
+                self.apply_context_usage(thread_id, completed)?
             }
             Command::Tasks { thread_id } => self.apply_tasks(thread_id, completed)?,
             Command::Send { thread_id, .. } => {
@@ -2594,6 +2601,7 @@ impl Render for HostView {
                             ))
                             .when(compact && self.compact_details, |pane| pane.child(self.render_session_details(blocked,cx)))
                             .children(self.session_tree.clone())
+                            .when(self.thread.is_some(), |view| view.child(self.render_context_usage(cx)))
                             .when(self.thread.is_some() && (!compact || self.compact_details), |view| view.child(self.render_tasks(cx)))
                             .when(!self.is_acp() && (!compact || self.compact_details), |view| view.child(self.render_mcp(cx)))
                             .children(self.thread.as_ref().filter(|thread| {

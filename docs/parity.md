@@ -1,5 +1,17 @@
 # Functional parity with donut-paseo
 
+Conversation image dialogs now provide Fit/100%, two-axis scrolling, original
+source Copy and Kit modal close/focus restoration, with
+[Linux fixture evidence](verification/2026-10-22-image-viewer.md).
+
+Native Markdown file Source/Preview, confined explicit links and no automatic
+image fetching now have [Linux fixture evidence](verification/2026-10-22-markdown-preview.md).
+Provider context observations show exact Codex/ACP counts, capacity/unavailable
+states and original parsed telemetry Copy, with independent pending choices and
+900×560 controls [verified locally](verification/2026-10-22-context-usage.md).
+Installed-provider telemetry, large-document Copy and other platforms remain open.
+
+
 Provider choices now use native Kit search by name, ID and description. Duplicate
 labels retain separate IDs, stale leases are refused and exact drafts survive
 window replacement. [Linux fixture evidence](verification/2026-10-22-model-search.md)
@@ -21,7 +33,8 @@ Last inspected session recovery is locally verified for shared/CLI/Linux native
 fixtures: exact Host/session/directory/archive identity, explicit opening after
 takeover, retained Chinese draft and conflicting write refusal.
 [Evidence](verification/2026-10-22-last-session.md). Complete tabs/scroll/layout
-restoration remains open. Chronological scoped review now reaches ordinal 2580;
+restoration remains open. Chronological scoped review now reaches the pinned ordinal 6215 plus upstream
+documentation delta `1198cddf` (remote tips checked 2026-10-22);
 this is a source-review cursor, not a parity completion count.
 
 [Composer focus](verification/2026-10-22-composer-focus.md) now uses Ctrl/Cmd+L

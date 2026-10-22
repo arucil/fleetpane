@@ -18,6 +18,7 @@ pub mod tasks;
 pub mod terminal;
 #[cfg(unix)]
 pub mod unix;
+pub mod usage;
 
 pub const PROTOCOL_VERSION: u32 = 3;
 pub const MAX_FRAME: usize = 1024 * 1024;
@@ -229,6 +230,7 @@ pub struct State {
     activity: lifecycle::Tracker,
     stopping: stopping::Tracker,
     tasks: tasks::Cache,
+    usage: usage::Cache,
 }
 
 /// Only these Codex RPCs are observational. Resume and unknown methods are writes.
@@ -242,6 +244,7 @@ pub fn is_query_method(method: &str) -> bool {
             | "thread/turns/list"
             | "thread/items/list"
             | tasks::READ_METHOD
+            | usage::READ_METHOD
             | terminal::READ_METHOD
     )
 }
@@ -287,6 +290,7 @@ impl State {
             activity: lifecycle::Tracker::default(),
             stopping: stopping::Tracker::default(),
             tasks: tasks::Cache::default(),
+            usage: usage::Cache::default(),
         }
     }
 
@@ -535,6 +539,10 @@ impl State {
     ) -> Result<Option<QueryReply>, String> {
         self.check_response_target(&message, target)?;
         let plan = tasks::Plan::from_event(&message)?;
+        let observation = usage::Observation::from_event(&message)?;
+        let message = observation
+            .as_ref()
+            .map_or(message, usage::Observation::notification);
         let bytes = serde_json::to_vec(&message)
             .map_err(|error| error.to_string())?
             .len();
@@ -646,6 +654,9 @@ impl State {
         }
         if let Some(plan) = plan {
             self.tasks.record(plan);
+        }
+        if let Some(observation) = observation {
+            self.usage.record(observation);
         }
         if let Some(record) = attention {
             self.snapshot

@@ -1,0 +1,44 @@
+{
+  "synthetic_only": true,
+  "host_sha256": "fce87f388f2fd60a2c6f638942d1be5ebfe8cc7ab67f8fea5439862932dafe20",
+  "providers": [
+    {
+      "provider": "codex",
+      "unknown_zero_null_overcapacity_exact_raw": true,
+      "other_thread_and_atomic_replacement": true,
+      "read_no_provider_or_owner_mutation": true,
+      "takeover_stale_fencing_reload_event_expiry": true,
+      "interturn_no_inferred_completion": true,
+      "restart_retention": "unavailable",
+      "invalid_known_payload_visible_fault": "invalid context usage totalTokens: expected nonnegative int64"
+    },
+    {
+      "provider": "acp",
+      "unknown_zero_null_overcapacity_exact_raw": true,
+      "other_thread_and_atomic_replacement": true,
+      "read_no_provider_or_owner_mutation": true,
+      "takeover_stale_fencing_reload_event_expiry": true,
+      "interturn_no_inferred_completion": true,
+      "restart_retention": "archive",
+      "invalid_known_payload_visible_fault": "invalid ACP context usage: invalid type: null, expected u64"
+    }
+  ],
+  "cleanup": [
+    {
+      "pid": 332578,
+      "exit_code": 0
+    },
+    {
+      "pid": 332640,
+      "exit_code": 0
+    },
+    {
+      "pid": 332661,
+      "exit_code": 0
+    },
+    {
+      "pid": 332916,
+      "exit_code": 0
+    }
+  ]
+}

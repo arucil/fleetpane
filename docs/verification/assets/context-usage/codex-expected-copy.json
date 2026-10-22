@@ -1,0 +1,39 @@
+{
+  "capacityTokens": 100,
+  "observedAtUnixMs": 1792633150053,
+  "raw": {
+    "method": "thread/tokenUsage/updated",
+    "params": {
+      "threadId": "usage-1",
+      "tokenUsage": {
+        "future": {
+          "opaque": [
+            false,
+            null,
+            "中文\n"
+          ]
+        },
+        "last": {
+          "cachedInputTokens": 0,
+          "inputTokens": 1,
+          "outputTokens": 0,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 125
+        },
+        "modelContextWindow": 100,
+        "total": {
+          "cachedInputTokens": 0,
+          "inputTokens": 1,
+          "outputTokens": 0,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 999999
+        }
+      },
+      "turnId": "observed-turn"
+    }
+  },
+  "source": "codex_last",
+  "threadId": "usage-1",
+  "turnId": "observed-turn",
+  "usedTokens": 125
+}
