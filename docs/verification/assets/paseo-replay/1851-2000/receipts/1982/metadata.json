@@ -1,0 +1,57 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1982,
+  "revision": "58d72bea8715b8acf735703ab0d1c90172a84c58",
+  "date": "2026-04-01T16:00:33+07:00",
+  "committer_date": "2026-04-01T16:00:33+07:00",
+  "parents": [
+    "953f7898e7d3ccb2093e23de458f3d7983383045"
+  ],
+  "subject": "refactor: migrate to VS Code titlebar drag region pattern",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "A\tpackages/app/src/components/desktop/titlebar-drag-region.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/desktop/electron/window.ts",
+    "M\tpackages/app/src/desktop/host.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/startup-splash-screen.tsx",
+    "D\tpackages/app/src/utils/desktop-window-drag-coordinates.test.ts",
+    "D\tpackages/app/src/utils/desktop-window-drag-coordinates.ts",
+    "D\tpackages/app/src/utils/desktop-window.test.ts",
+    "M\tpackages/app/src/utils/desktop-window.ts",
+    "M\tpackages/desktop/scripts/verify-electron-cdp.mjs",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/preload.ts",
+    "D\tpackages/desktop/src/window/window-drag-coordinates.test.ts",
+    "D\tpackages/desktop/src/window/window-drag-coordinates.ts",
+    "M\tpackages/desktop/src/window/window-manager.test.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:c6fee9352a545cd16a69be616e65130b606dc778de6d1050409b94b258fce4c0",
+  "diff_tree_digest": "sha256:9f6e90eeb15d529e7cba7bd8660db0d3770176fa25cb5b5ab8ef4af7a82193cc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/desktop/titlebar-drag-region.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        27,
+        56
+      ],
+      "diff_block_lines": [
+        33,
+        62
+      ],
+      "hunk_header": "@@ -0,0 +1,228 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1073,
+  "receipt_file": "receipts/1982/selected.patch"
+}

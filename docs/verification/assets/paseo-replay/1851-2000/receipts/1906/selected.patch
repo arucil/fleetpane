@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/updates/update-banner.tsx
+RANGE {"path":"packages/app/src/desktop/updates/update-banner.tsx","old_lines":[39,50],"new_lines":[48,70],"diff_block_lines":[30,59],"hunk_header":"@@ -34,22 +41,34 @@ export function UpdateBanner() {","substantive_changed_lines":21}
++
++  function getTitle(): string {
++    if (isInstalled) return "Update installed";
++    if (isInstalling) return "Installing update";
++    if (isError) return "Update failed";
++    return "Update available";
++  }
++
++  function getSubtitle(): string {
++    if (isInstalled) return "Restart to use the new version.";
++    if (isInstalling) return "Downloading and installing...";
++    if (isError) return errorMessage ?? "Something went wrong.";
++    return `${availableUpdate?.latestVersion ? `v${availableUpdate.latestVersion.replace(/^v/i, "")} is ready` : "A new version is ready"} to install.`;
++  }
+ 
+   return (
+     <View style={styles.container} pointerEvents="box-none">
+-      <View style={styles.banner}>
+-        <Pressable onPress={() => setDismissed(true)} hitSlop={8} style={styles.closeButton}>
+-          <X size={14} color={theme.colors.foregroundMuted} />
+-        </Pressable>
++      <Pressable onPress={() => setDismissed(true)} hitSlop={8} style={styles.closeButton}>
++        <X size={12} color={theme.colors.foregroundMuted} />
++      </Pressable>
+ 
++      <View style={styles.banner}>
+         <View style={styles.textSection}>
+-          <Text style={styles.title}>{isInstalled ? "Update installed" : "Update available"}</Text>
+-          <Text style={styles.subtitle}>
+-            {isInstalled

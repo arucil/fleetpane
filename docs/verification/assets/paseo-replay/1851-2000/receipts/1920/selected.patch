@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/chat/schema.ts
+RANGE {"path":"packages/cli/src/commands/chat/schema.ts","old_lines":[38,42],"new_lines":[42,70],"diff_block_lines":[27,56],"hunk_header":"@@ -34,11 +37,57 @@ export const chatMessageSchema: OutputSchema<ChatMessageRow> = {","substantive_changed_lines":20}
+-    { header: "MENTIONS", field: "mentions", width: 24 },
++    { header: "MENTIONS", field: (row) => row.mentionLabels.join(", ") || "-", width: 24 },
+     { header: "MESSAGE", field: "body", width: 60 },
+   ],
++  renderHuman: renderChatTranscript,
+ };
+ 
++function renderChatTranscript(
++  result: AnyCommandResult<ChatMessageRow>,
++  _options: OutputOptions,
++): string {
++  const data = result.type === "list" ? result.data : [result.data];
++  if (data.length === 0) {
++    return "";
++  }
++  return data.map(renderChatMessageBlock).join("\n\n");
++}
++
++function renderChatMessageBlock(message: ChatMessageRow): string {
++  const authorLabel = message.authorName
++    ? `${message.authorName} (${message.author})`
++    : message.author;
++  const lines = [`┌─ ${authorLabel} ── ${formatTimestamp(message.createdAt)} ── [msg ${message.id}]`];
++
++  if (message.replyTo !== "-") {
++    lines.push(`│  reply-to: msg ${message.replyTo}`);
++  }
++  if (message.mentionLabels.length > 0) {
++    lines.push(`│  mentions: ${message.mentionLabels.join(", ")}`);
++  }

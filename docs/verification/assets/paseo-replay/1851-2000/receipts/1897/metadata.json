@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1897,
+  "revision": "394b9cac13ca13645e3e756bdb8e57510b58afcb",
+  "date": "2026-03-27T21:40:02+07:00",
+  "committer_date": "2026-03-28T00:25:23+07:00",
+  "parents": [
+    "be419110836078dcf5980602e58eb4f054b6afbe"
+  ],
+  "subject": "fix: hardcode paseo://app as allowed CORS origin in daemon bootstrap",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:0f7dddeb4f120d9203acd51ee6ce85a8cfbaed53127d2dc3966f4257ace8ce4a",
+  "diff_tree_digest": "sha256:a1d9280f4c6bc0dd789bd273cd2e75ded0201b80067166c96c040bbc077a24bd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        250,
+        256
+      ],
+      "new_lines": [
+        250,
+        255
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -250,7 +250,6 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1897/selected.patch"
+}

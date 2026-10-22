@@ -1,0 +1,10 @@
+FILE scripts/sync-release-notes-from-changelog.mjs
+RANGE {"path":"scripts/sync-release-notes-from-changelog.mjs","old_lines":[151,155],"new_lines":[151,156],"diff_block_lines":[5,12],"hunk_header":"@@ -151,5 +151,6 @@ function main() {","substantive_changed_lines":3}
+@@ -151,5 +151,6 @@ function main() {
+ 
+   if (!targetEntry) {
+-    throw new Error(`No matching changelog section found for ${targetTag}.`);
++    console.log(`No matching changelog section found for ${targetTag}. Skipping.`);
++    return;
+   }
+ 

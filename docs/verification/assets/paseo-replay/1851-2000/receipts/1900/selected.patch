@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/daemon/status.ts
+RANGE {"path":"packages/cli/src/commands/daemon/status.ts","old_lines":[229,241],"new_lines":[233,250],"diff_block_lines":[64,93],"hunk_header":"@@ -218,30 +227,51 @@ export async function runStatusCommand(","substantive_changed_lines":27}
+-          const agentsPayload = await client.fetchAgents({ filter: { includeArchived: true } });
+-          const agents = agentsPayload.entries.map((entry) => entry.agent);
+-          runningAgents = agents.filter((a) => a.status === "running").length;
+-          idleAgents = agents.filter((a) => a.status === "idle").length;
+-        } catch {
+-          status = "unresponsive";
+-          note = appendNote(note, `Daemon PID is running but API requests to ${host} failed`);
+-        } finally {
+-          await client.close().catch(() => {});
++  if (host) {
++    const client = await tryConnectToDaemon({ host, timeout: 1500 });
++    if (client) {
++      connectedDaemon = "reachable";
++      try {
++        const agentsPayload = await client.fetchAgents({ filter: { includeArchived: true } });
++        const agents = agentsPayload.entries.map((entry) => entry.agent);
++        runningAgents = agents.filter((a) => a.status === "running").length;
++        idleAgents = agents.filter((a) => a.status === "idle").length;
++        if (!state.running) {
++          daemonNode = "unknown (API reachable, PID unresolved)";
++          note = appendNote(
++            note,
++            state.pidInfo
++              ? `Connected daemon is reachable at ${host} even though local daemon PID ${state.pidInfo.pid} is stale`
++              : `Connected daemon is reachable at ${host} but no local daemon PID file was found`,
++          );
+         }
+-      } else {
+-        status = "unresponsive";
+-        note = appendNote(note, `Daemon PID is running but websocket at ${host} is not reachable`);

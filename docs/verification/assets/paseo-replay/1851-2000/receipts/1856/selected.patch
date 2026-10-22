@@ -1,0 +1,32 @@
+FILE scripts/update-nix.sh
+RANGE {"path":"scripts/update-nix.sh","old_lines":[0,0],"new_lines":[7,36],"diff_block_lines":[13,42],"hunk_header":"@@ -0,0 +1,63 @@","substantive_changed_lines":18}
++#   ./scripts/update-nix.sh --check  # verify everything is up to date (CI mode)
++set -euo pipefail
++
++SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
++ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
++LOCK_FILE="$ROOT_DIR/package-lock.json"
++PACKAGE_NIX="$ROOT_DIR/nix/package.nix"
++
++CHECK_MODE=false
++if [[ "${1:-}" == "--check" ]]; then
++  CHECK_MODE=true
++fi
++
++# 1. Fix lockfile (add resolved/integrity for workspace-local entries)
++#    Workaround for https://github.com/npm/cli/issues/4460
++echo "Fixing lockfile..."
++node "$SCRIPT_DIR/fix-lockfile.mjs" "$LOCK_FILE"
++
++# 2. Prefetch deps and compute hash
++echo "Prefetching npm dependencies..."
++
++# Resolve prefetch-npm-deps from the same nixpkgs pinned in flake.lock
++NIXPKGS_URL="$(node -p "
++  const l = JSON.parse(require('fs').readFileSync('$ROOT_DIR/flake.lock', 'utf8'));
++  const n = l.nodes.nixpkgs.locked;
++  'github:' + n.owner + '/' + n.repo + '/' + n.rev;
++")"
++
++STDERR_LOG="$(mktemp)"
++trap "rm -f '$STDERR_LOG'" EXIT

@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1933,
+  "revision": "04b21f089c652ccb9049bbe3104e7a63a90fe155",
+  "date": "2026-03-29T21:17:31+07:00",
+  "committer_date": "2026-03-29T21:17:31+07:00",
+  "parents": [
+    "fb42c8eea22b435985c04f22769b64afe3037c73"
+  ],
+  "subject": "Fix mobile dropdown close and draft thinking persistence",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/ui/dropdown-menu.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "A\tpackages/app/src/hooks/use-form-preferences.test.ts",
+    "M\tpackages/app/src/hooks/use-form-preferences.ts"
+  ],
+  "source_receipt_digest": "sha256:91c2f9d6467347bd803a5bc62f60a233b0904961cabc1ba2577fcb7736bca505",
+  "diff_tree_digest": "sha256:771f8ccce6407ea52f2ea1148e38d936c5ff80e67f2524cda0180b856d22bb85",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-agent-form-state.ts",
+      "old_lines": [
+        695,
+        713
+      ],
+      "new_lines": [
+        696,
+        709
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -694,24 +695,21 @@ export function useAgentFormState(options: UseAgentFormStateOptions = {}): UseAg",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 101,
+  "receipt_file": "receipts/1933/selected.patch"
+}

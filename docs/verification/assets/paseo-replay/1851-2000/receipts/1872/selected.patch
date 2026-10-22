@@ -1,0 +1,12 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[496,500],"new_lines":[496,503],"diff_block_lines":[5,14],"hunk_header":"@@ -496,5 +496,8 @@ case \"$command_name\" in","substantive_changed_lines":5}
+@@ -496,5 +496,8 @@ case "$command_name" in
+     require_room "$room"
+ 
+-    mapfile -t all_files < <(message_files_sorted "$room")
++    all_files=()
++    while IFS= read -r _f; do
++      all_files+=("$_f")
++    done < <(message_files_sorted "$room")
+ 
+     since_file=""

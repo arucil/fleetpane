@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1923,
+  "revision": "b1d663557b6c4f0eba95ae4e4443fbdb5a245651",
+  "date": "2026-03-29T16:42:31+07:00",
+  "committer_date": "2026-03-29T16:42:31+07:00",
+  "parents": [
+    "a460c5e9b9532bda1853ed18fc1b2821320ebff0"
+  ],
+  "subject": "refactor(daemon): replace daemon-launch.log with electron-log in desktop, remove from CLI/server",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/scripts/daemon-runner.ts",
+    "M\tpackages/server/scripts/supervisor.ts"
+  ],
+  "source_receipt_digest": "sha256:7c40eeb1074fa2c35fb16c6bf44cff62619a6a5b3fc73d9ba17d9c62256713bb",
+  "diff_tree_digest": "sha256:fa2358e468c8464dc74e08d0b22213c23c780da728fe844aec885394e3dde092",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/daemon-manager.ts",
+      "old_lines": [
+        147,
+        165
+      ],
+      "new_lines": [
+        143,
+        150
+      ],
+      "diff_block_lines": [
+        31,
+        54
+      ],
+      "hunk_header": "@@ -146,20 +142,9 @@ function tailFile(filePath: string, lines = 50): string {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 139,
+  "receipt_file": "receipts/1923/selected.patch"
+}

@@ -1,0 +1,19 @@
+FILE packages/website/src/routes/download.tsx
+RANGE {"path":"packages/website/src/routes/download.tsx","old_lines":[136,149],"new_lines":[139,146],"diff_block_lines":[15,31],"hunk_header":"@@ -135,15 +138,9 @@ function Download() {","substantive_changed_lines":12}
+                 <DownloadPill
+-                  href={`${releaseBase}/Paseo-${desktopVersion}.AppImage`}
++                  href={linuxAppImageDownloadUrl}
+                   label="AppImage"
+                 />
+-                <DownloadPill
+-                  href={`${releaseBase}/paseo_${desktopVersion}_amd64.deb`}
+-                  label="DEB"
+-                />
+-                <DownloadPill
+-                  href={`${releaseBase}/paseo-${desktopVersion}-1.x86_64.rpm`}
+-                  label="RPM"
+-                />
++                <DownloadPill href={linuxDebDownloadUrl} label="DEB" />
++                <DownloadPill href={linuxRpmDownloadUrl} label="RPM" />
+               </div>
+             </div>

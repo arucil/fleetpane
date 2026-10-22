@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1963,
+  "revision": "4b12ebd5c00e2e6d20fe062d57d5ea4234626d4f",
+  "date": "2026-04-01T04:46:07Z",
+  "committer_date": "2026-04-01T04:46:07Z",
+  "parents": [
+    "27c8cfbd4b86dd67f4475345406490edd47ee9f1"
+  ],
+  "subject": "fix: Linux checkout diff watchers using non-recursive directory watching",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/checkout-diff-manager.test.ts",
+    "M\tpackages/server/src/server/checkout-diff-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:ee53a1abd365e9070f703d847ce5c656c0539322426ff0a89cb0cd5fbada2cee",
+  "diff_tree_digest": "sha256:dcfab4b6ea497969c7684fe5c7e900408799448d12043f512fc022c1610f7ac5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/checkout-diff-manager.ts",
+      "old_lines": [
+        292,
+        321
+      ],
+      "new_lines": [
+        306,
+        306
+      ],
+      "diff_block_lines": [
+        47,
+        76
+      ],
+      "hunk_header": "@@ -288,50 +300,13 @@ export class CheckoutDiffManager {",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 291,
+  "receipt_file": "receipts/1963/selected.patch"
+}

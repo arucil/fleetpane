@@ -1,0 +1,32 @@
+FILE packages/website/src/components/landing-page.tsx
+RANGE {"path":"packages/website/src/components/landing-page.tsx","old_lines":[534,563],"new_lines":[546,549],"diff_block_lines":[36,65],"hunk_header":"@@ -530,70 +544,17 @@ function GetStarted() {","substantive_changed_lines":22}
+-
+-  React.useEffect(() => {
+-    function handleClickOutside(e: MouseEvent) {
+-      if (ref.current && !ref.current.contains(e.target as Node)) {
+-        setOpen(false);
+-      }
+-    }
+-    document.addEventListener("mousedown", handleClickOutside);
+-    return () => document.removeEventListener("mousedown", handleClickOutside);
+-  }, []);
+-
+   const primary = downloadOptions.find((o) => o.platform === detectedPlatform)!;
+-  const secondaryOptions = downloadOptions.filter((o) => o.platform !== detectedPlatform);
+   const PrimaryIcon = primary.icon;
+ 
+   return (
+-    <div className="relative" ref={ref}>
+-      <div className="flex items-stretch">
+-        <a
+-          href={primary.href}
+-          target="_blank"
+-          rel="noopener noreferrer"
+-          className="inline-flex items-center gap-2 rounded-l-lg bg-foreground px-4 py-2 text-sm font-medium text-background hover:bg-foreground/90 transition-colors"
+-        >
+-          <PrimaryIcon className="h-4 w-4" />
+-          Download for {primary.label}
+-        </a>
+-        <button
+-          onClick={() => setOpen(!open)}
+-          className="inline-flex items-center justify-center rounded-r-lg border-l border-background/20 bg-foreground px-2 py-2 text-background hover:bg-foreground/90 transition-colors"

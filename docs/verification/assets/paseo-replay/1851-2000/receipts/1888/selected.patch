@@ -1,0 +1,15 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[348,353],"new_lines":[348,357],"diff_block_lines":[7,19],"hunk_header":"@@ -347,7 +347,11 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct","substantive_changed_lines":8}
+ 
+-  const handleDictationError = useCallback((error: Error) => {
+-    console.error("[MessageInput] Dictation error:", error);
+-  }, []);
++  const handleDictationError = useCallback(
++    (error: Error) => {
++      console.error("[MessageInput] Dictation error:", error);
++      toast.error(error.message);
++    },
++    [toast],
++  );
+ 
+   const dictationUnavailableMessage = resolveVoiceUnavailableMessage({

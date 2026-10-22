@@ -1,0 +1,32 @@
+FILE packages/server/src/server/checkout-diff-manager.ts
+RANGE {"path":"packages/server/src/server/checkout-diff-manager.ts","old_lines":[292,321],"new_lines":[306,306],"diff_block_lines":[47,76],"hunk_header":"@@ -288,50 +300,13 @@ export class CheckoutDiffManager {","substantive_changed_lines":24}
+-      const createWatcher = (recursive: boolean): FSWatcher =>
+-        watch(watchPath, { recursive }, () => {
+-          this.scheduleTargetRefresh(target);
+-        });
+-
+-      let watcher: FSWatcher | null = null;
+-      let watcherIsRecursive = false;
+-      try {
+-        if (shouldTryRecursive) {
+-          watcher = createWatcher(true);
+-          watcherIsRecursive = true;
+-        } else {
+-          watcher = createWatcher(false);
+-        }
+-      } catch (error) {
+-        if (shouldTryRecursive) {
+-          try {
+-            watcher = createWatcher(false);
+-            this.logger.warn(
+-              { err: error, watchPath, cwd, compare },
+-              "Checkout diff recursive watch unavailable; using non-recursive fallback",
+-            );
+-          } catch (fallbackError) {
+-            this.logger.warn(
+-              { err: fallbackError, watchPath, cwd, compare },
+-              "Failed to start checkout diff watcher",
+-            );
+-          }
+-        } else {
+-          this.logger.warn(

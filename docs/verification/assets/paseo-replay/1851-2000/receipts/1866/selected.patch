@@ -1,0 +1,30 @@
+FILE packages/website/src/components/landing-page.tsx
+RANGE {"path":"packages/website/src/components/landing-page.tsx","old_lines":[1177,1186],"new_lines":[1177,1199],"diff_block_lines":[49,76],"hunk_header":"@@ -1176,11 +1176,24 @@ function SponsorCTA() {","substantive_changed_lines":23}
+       transition={{ duration: 0.5, ease: "easeOut" }}
+-      className="rounded-xl bg-white/5 border border-white/10 p-8 md:p-10 text-center space-y-4"
++      className="rounded-xl bg-white/5 border border-white/10 p-8 md:p-10 text-left space-y-4 max-w-xl mx-auto"
+     >
+       <p className="text-lg font-medium">Paseo is an independent project</p>
+-      <p className="text-sm text-white/50 max-w-md mx-auto leading-relaxed">
+-        I built Paseo because the existing tools weren't good enough for me. There's no VC or big
+-        team behind this. If it saves you time, sponsoring keeps development going.
+-      </p>
++      <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
++        <p>
++          I believe that open source and freedom of choice always win for developer tools.
++        </p>
++        <p>
++          Paseo has no VC funding and no big team behind it. I built it because the existing tools
++          weren't good enough for me. No tracking, no telemetry, no forced accounts, no vendor lock-in.
++        </p>
++        <p>
++          The monetization story is still taking shape. The obvious path is optional hosted
++          infrastructure like cloud sandboxes for teams. But Paseo itself will always be FOSS.
++        </p>
++        <p>
++          If you like Paseo, sponsoring keeps development going.
++        </p>
++        <p>- Mo</p>
++      </div>
+       <div className="pt-2">
+         <a

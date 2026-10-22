@@ -1,0 +1,27 @@
+FILE packages/app/src/utils/sidebar-animation-state.ts
+RANGE {"path":"packages/app/src/utils/sidebar-animation-state.ts","old_lines":[0,0],"new_lines":[17,41],"diff_block_lines":[23,47],"hunk_header":"@@ -0,0 +1,41 @@","substantive_changed_lines":16}
++
++export function shouldSyncSidebarAnimation(input: SidebarAnimationSyncInput): boolean {
++  return (
++    input.previousIsOpen !== input.nextIsOpen ||
++    input.previousWindowWidth !== input.nextWindowWidth
++  );
++}
++
++export function getLeftSidebarAnimationTargets(
++  input: SidebarAnimationTargetInput,
++): SidebarAnimationTargets {
++  return {
++    translateX: input.isOpen ? 0 : -input.windowWidth,
++    backdropOpacity: input.isOpen ? 1 : 0,
++  };
++}
++
++export function getRightSidebarAnimationTargets(
++  input: SidebarAnimationTargetInput,
++): SidebarAnimationTargets {
++  return {
++    translateX: input.isOpen ? 0 : input.windowWidth,
++    backdropOpacity: input.isOpen ? 1 : 0,
++  };
++}

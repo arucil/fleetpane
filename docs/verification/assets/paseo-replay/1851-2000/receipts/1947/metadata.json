@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1947,
+  "revision": "e0e4f228eb2a3192e20b1846c1a8c82fd56b3b1f",
+  "date": "2026-03-30T12:43:45+07:00",
+  "committer_date": "2026-03-30T12:44:05+07:00",
+  "parents": [
+    "f6630e16ff222f1324d0027937545cbcd9514fb3"
+  ],
+  "subject": "fix(server): guard paseo:ready IPC behind PASEO_SUPERVISED env var",
+  "diff_tree_paths": [
+    "M\tpackages/server/scripts/supervisor-entrypoint.ts",
+    "M\tpackages/server/src/server/bootstrap.ts"
+  ],
+  "source_receipt_digest": "sha256:3815ae45ae83642bf1dda306274ba1a49a82a34d755f25ad925b6e48ad292479",
+  "diff_tree_digest": "sha256:f673c32a61b0227bdda15d5e7eda6067851dc2cd0a512a8e6be3efbd26239cb6",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        692,
+        696
+      ],
+      "new_lines": [
+        692,
+        696
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -692,5 +692,5 @@ export async function createPaseoDaemon(",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1947/selected.patch"
+}

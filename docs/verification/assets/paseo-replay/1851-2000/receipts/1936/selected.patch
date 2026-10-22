@@ -1,0 +1,13 @@
+FILE packages/server/src/utils/directory-suggestions.ts
+RANGE {"path":"packages/server/src/utils/directory-suggestions.ts","old_lines":[636,643],"new_lines":[654,661],"diff_block_lines":[44,54],"hunk_header":"@@ -633,11 +643,19 @@ function normalizeQueryParts(query: string, homeRoot: string): QueryParts | null","substantive_changed_lines":5}
+   const slashIndex = normalized.lastIndexOf("/");
+-  const parentPart = slashIndex >= 0 ? normalized.slice(0, slashIndex) : "";
+-  const searchTerm = slashIndex >= 0 ? normalized.slice(slashIndex + 1) : normalized;
++  const parentPart = normalized.slice(0, slashIndex);
++  const searchTerm = normalized.slice(slashIndex + 1);
+ 
+   return {
+-    isPathQuery,
++    isPathQuery: true,
+     parentPart,
+     searchTerm,

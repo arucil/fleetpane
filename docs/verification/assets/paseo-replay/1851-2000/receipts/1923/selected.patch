@@ -1,0 +1,26 @@
+FILE packages/desktop/src/daemon/daemon-manager.ts
+RANGE {"path":"packages/desktop/src/daemon/daemon-manager.ts","old_lines":[147,165],"new_lines":[143,150],"diff_block_lines":[31,54],"hunk_header":"@@ -146,20 +142,9 @@ function tailFile(filePath: string, lines = 50): string {","substantive_changed_lines":15}
+ 
+-function appendLaunchLog(message: string, details?: Record<string, unknown>): void {
+-  const line = [
+-    new Date().toISOString(),
+-    "[desktop daemon]",
+-    `pid=${process.pid}`,
+-    message,
+-    details ? JSON.stringify(details) : "",
+-  ]
+-    .filter((part) => part.length > 0)
+-    .join(" ");
+-
+-  try {
+-    appendFileSync(launchLogFilePath(), `${line}\n`, "utf-8");
+-  } catch {
+-    // Keep launch debugging best-effort so desktop startup behavior is unchanged.
+-  }
++function logDesktopDaemonLifecycle(message: string, details?: Record<string, unknown>): void {
++  log.info("[desktop daemon]", message, {
++    pid: process.pid,
++    ...(details ?? {}),
++  });
+ }
+ 

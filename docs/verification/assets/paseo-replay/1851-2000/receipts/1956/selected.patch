@@ -1,0 +1,12 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,14],"diff_block_lines":[10,19],"hunk_header":"@@ -1,4 +1,14 @@","substantive_changed_lines":4}
++### Added
++- **Terminal management from the CLI** — new `paseo terminal` command group lets you list, create, and interact with workspace terminals without leaving your terminal.
++- **Material file icons in the explorer** — the file explorer tree now shows language-specific icons (TypeScript, JSON, Markdown, etc.) so you can spot files at a glance.
++
++### Fixed
++- Fixed iOS sidebar scroll flicker caused by redundant overflow clipping.
++- Centralized window controls padding into a shared hook, eliminating layout inconsistencies across platforms.
++
+ ## 0.1.38 - 2026-03-30
+ 

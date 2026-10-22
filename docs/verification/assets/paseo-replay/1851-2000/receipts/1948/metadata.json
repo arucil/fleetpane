@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1948,
+  "revision": "db39417be9d43f2c11a89bb1a767c6cbb7a649af",
+  "date": "2026-03-30T13:45:26+07:00",
+  "committer_date": "2026-03-30T13:45:26+07:00",
+  "parents": [
+    "e0e4f228eb2a3192e20b1846c1a8c82fd56b3b1f"
+  ],
+  "subject": "fix(app): remove redundant overflow hidden causing iOS sidebar scroll flicker",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/left-sidebar.tsx"
+  ],
+  "source_receipt_digest": "sha256:4f43e5594f36f629af9ce8db5edc4c3704c7985f7197037b26f433f6a3cbb712",
+  "diff_tree_digest": "sha256:cc2e26f888ba483043419228da2062f5ec2f755421e4b77d68baad6629c516c1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/left-sidebar.tsx",
+      "old_lines": [
+        812,
+        816
+      ],
+      "new_lines": [
+        812,
+        815
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -812,5 +812,4 @@ const styles = StyleSheet.create((theme) => ({",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 1,
+  "receipt_file": "receipts/1948/selected.patch"
+}

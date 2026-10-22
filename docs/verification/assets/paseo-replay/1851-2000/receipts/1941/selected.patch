@@ -1,0 +1,9 @@
+FILE .github/workflows/deploy-website.yml
+RANGE {"path":".github/workflows/deploy-website.yml","old_lines":[10,13],"new_lines":[10,15],"diff_block_lines":[5,11],"hunk_header":"@@ -10,4 +10,6 @@ on:","substantive_changed_lines":2}
+@@ -10,4 +10,6 @@ on:
+       - 'patches/**'
+       - '.github/workflows/deploy-website.yml'
++  release:
++    types: [published, edited]
+   workflow_dispatch:
+ 

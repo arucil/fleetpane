@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[788,788],"new_lines":[830,859],"diff_block_lines":[55,84],"hunk_header":"@@ -786,4 +822,58 @@ export function translateOpenCodeEvent(","substantive_changed_lines":16}
++      const requestId = props.id as string | undefined;
++      const rawQuestions = Array.isArray(props.questions) ? props.questions : [];
++      if (!requestId || rawQuestions.length === 0) {
++        break;
++      }
++
++      const questions = rawQuestions.flatMap((item) => {
++        const questionRecord = readOpenCodeRecord(item);
++        const question = readNonEmptyString(questionRecord?.question);
++        const header = readNonEmptyString(questionRecord?.header);
++        if (!question || !header) {
++          return [];
++        }
++
++        const options = normalizeQuestionOptions(questionRecord?.options) ?? [];
++        return [
++          {
++            question,
++            header,
++            options,
++            ...(questionRecord?.multiple === true ? { multiSelect: true } : {}),
++          },
++        ];
++      });
++
++      if (questions.length === 0) {
++        break;
++      }
++
++      events.push({

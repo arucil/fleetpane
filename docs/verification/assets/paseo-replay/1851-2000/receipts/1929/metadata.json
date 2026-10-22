@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1929,
+  "revision": "a1761363fa1b1517f1ad34f3b1fa9e42d00a3d83",
+  "date": "2026-03-29T19:15:23+07:00",
+  "committer_date": "2026-03-29T20:39:03+07:00",
+  "parents": [
+    "096417d5ac1586f8706dd9a73e37cdebd710f169"
+  ],
+  "subject": "fix(website): respect draft frontmatter field when filtering posts",
+  "diff_tree_paths": [
+    "M\tpackages/website/src/posts.ts"
+  ],
+  "source_receipt_digest": "sha256:d2f4565138ae19ea3511e2271694edfb5140bc6cf2bff4cbeaa03614d2e7150a",
+  "diff_tree_digest": "sha256:39cfb23783fb9c21b9a214053ef00cc01e041184612c041350b29aa951dd3e06",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/src/posts.ts",
+      "old_lines": [
+        41,
+        48
+      ],
+      "new_lines": [
+        41,
+        48
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -41,8 +41,8 @@ function loadPosts(includeDrafts: boolean): Post[] {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1929/selected.patch"
+}

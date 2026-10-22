@@ -1,0 +1,12 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[250,256],"new_lines":[250,255],"diff_block_lines":[5,14],"hunk_header":"@@ -250,7 +250,6 @@ export async function createPaseoDaemon(","substantive_changed_lines":3}
+@@ -250,7 +250,6 @@ export async function createPaseoDaemon(
+     const allowedOrigins = new Set([
+       ...config.corsAllowedOrigins,
+-      // Packaged desktop renderers may send `file://` or `null` as the origin.
+-      "file://",
+-      "null",
++      // Packaged desktop renderers use the custom paseo:// protocol scheme.
++      "paseo://app",
+       // For TCP, add localhost variants
+       ...(listenTarget.type === "tcp"

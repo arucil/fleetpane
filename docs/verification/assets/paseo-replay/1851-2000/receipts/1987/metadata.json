@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1987,
+  "revision": "c13972c83554cee8a693dd1fae19d7398f30ea18",
+  "date": "2026-04-01T18:20:02+07:00",
+  "committer_date": "2026-04-01T18:20:02+07:00",
+  "parents": [
+    "d8d04c545ea651c187538e114fbc890230afd94b"
+  ],
+  "subject": "fix: replace Unix path assumptions with cross-platform isAbsolutePath",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/attachments/native/native-file-attachment-store.ts",
+    "A\tpackages/app/src/attachments/utils.test.ts",
+    "M\tpackages/app/src/attachments/utils.ts",
+    "M\tpackages/app/src/hooks/image-attachment-picker.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/explorer-paths.ts",
+    "M\tpackages/app/src/utils/inline-path.ts",
+    "A\tpackages/app/src/utils/path.test.ts",
+    "A\tpackages/app/src/utils/path.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts"
+  ],
+  "source_receipt_digest": "sha256:6b90443f333c0bc265f1db33349beca87efede67818f6ba94cb4b8a9fb5229f7",
+  "diff_tree_digest": "sha256:ee115a23d4f86c5771a005158ae3731f6f024d4f3b35fd198ec9344cf7c49ffe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/attachments/native/native-file-attachment-store.ts",
+      "old_lines": [
+        10,
+        14
+      ],
+      "new_lines": [
+        11,
+        24
+      ],
+      "diff_block_lines": [
+        12,
+        27
+      ],
+      "hunk_header": "@@ -9,6 +10,15 @@ export function createNativeFileAttachmentStore() {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 81,
+  "receipt_file": "receipts/1987/selected.patch"
+}

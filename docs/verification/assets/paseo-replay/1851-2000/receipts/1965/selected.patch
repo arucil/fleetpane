@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-bulk-close.ts
+RANGE {"path":"packages/app/src/screens/workspace/workspace-bulk-close.ts","old_lines":[53,53],"new_lines":[70,99],"diff_block_lines":[33,62],"hunk_header":"@@ -51,2 +68,71 @@ export function buildBulkCloseConfirmationMessage(input: BulkClosableTabGroups):","substantive_changed_lines":20}
++
++function toSuccessfulAgentIds(payload: CloseItemsPayload | null): Set<string> {
++  return new Set(payload?.agents.map((agent) => agent.agentId) ?? []);
++}
++
++function toSuccessfulTerminalIds(payload: CloseItemsPayload | null): Set<string> {
++  return new Set(
++    payload?.terminals.filter((terminal) => terminal.success).map((terminal) => terminal.terminalId) ??
++      [],
++  );
++}
++
++export async function closeBulkWorkspaceTabs(
++  input: CloseBulkWorkspaceTabsInput,
++): Promise<CloseItemsPayload | null> {
++  const { client, groups, closeTab, closeWorkspaceTabWithCleanup, logLabel, warn } = input;
++  const hasDestructiveTabs = groups.agentTabs.length > 0 || groups.terminalTabs.length > 0;
++  let payload: CloseItemsPayload | null = null;
++
++  if (hasDestructiveTabs && client) {
++    try {
++      payload = await client.closeItems({
++        agentIds: groups.agentTabs.map((tab) => tab.agentId),
++        terminalIds: groups.terminalTabs.map((tab) => tab.terminalId),
++      });
++    } catch (error) {
++      warn?.(`[WorkspaceScreen] Failed to bulk close tabs ${logLabel}`, { error });
++    }
++  } else if (hasDestructiveTabs) {
++    warn?.(`[WorkspaceScreen] Failed to bulk close tabs ${logLabel}`, {

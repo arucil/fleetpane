@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2906,2935],"new_lines":[2896,2896],"diff_block_lines":[69,98],"hunk_header":"@@ -2905,68 +2895,16 @@ export class Session {","substantive_changed_lines":17}
+   ): Promise<{ sessionConfig: AgentSessionConfig; worktreeConfig?: WorktreeConfig }> {
+-    let cwd = expandTilde(config.cwd);
+-    const normalized = this.normalizeGitOptions(gitOptions, legacyWorktreeName);
+-    let worktreeConfig: WorktreeConfig | undefined;
+-
+-    if (!normalized) {
+-      return {
+-        sessionConfig: {
+-          ...config,
+-          cwd,
+-        },
+-      };
+-    }
+-
+-    if (normalized.createWorktree) {
+-      let targetBranch: string;
+-
+-      if (normalized.createNewBranch) {
+-        targetBranch = normalized.newBranchName!;
+-      } else {
+-        // Resolve current branch name from HEAD
+-        const { stdout } = await execAsync("git rev-parse --abbrev-ref HEAD", {
+-          cwd,
+-          env: READ_ONLY_GIT_ENV,
+-        });
+-        targetBranch = stdout.trim();
+-      }
+-
+-      if (!targetBranch) {
+-        throw new Error("A branch name is required when creating a worktree.");

@@ -1,0 +1,25 @@
+FILE packages/desktop/src/window/window-manager.ts
+RANGE {"path":"packages/desktop/src/window/window-manager.ts","old_lines":[17,18],"new_lines":[18,40],"diff_block_lines":[14,36],"hunk_header":"@@ -15,4 +15,26 @@ export function readBadgeCount(input: unknown): number {","substantive_changed_lines":10}
++
++export function readWindowTheme(input: unknown): WindowTheme | null {
++  if (input === "light" || input === "dark") {
++    return input;
++  }
++
++  return null;
++}
++
++export function resolveSystemWindowTheme(): WindowTheme {
++  return nativeTheme.shouldUseDarkColors ? "dark" : "light";
++}
++
++export function getTitleBarOverlayOptions(theme: WindowTheme): Electron.TitleBarOverlayOptions {
++  if (theme === "dark") {
++    return { color: "#18181c", symbolColor: "#e4e4e7", height: 48 };
++  }
++
++  return { color: "#ffffff", symbolColor: "#09090b", height: 48 };
++}
++
+ export function registerWindowManager(): void {
+   // ---------------------------------------------------------------------------

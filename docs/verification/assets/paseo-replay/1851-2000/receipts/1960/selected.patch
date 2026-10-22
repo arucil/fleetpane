@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[2020,2027],"new_lines":[2002,2024],"diff_block_lines":[111,140],"hunk_header":"@@ -1983,49 +1994,42 @@ export class Session {","substantive_changed_lines":19}
+-    // freeing memory. ensureAgentLoaded will re-initialize if needed later.
+-    if (this.agentManager.getAgent(agentId)) {
+-      try {
+-        await this.agentManager.closeAgent(agentId);
+-      } catch (error) {
+-        this.sessionLogger.warn({ err: error, agentId }, "Failed to close agent during archive");
+-      }
++    if (this.agentUpdatesSubscription) {
++      const payload = this.buildStoredAgentPayload(archivedRecord);
++      const project = await this.buildProjectPlacement(payload.cwd);
++      const matches = this.matchesAgentFilter({
++        agent: payload,
++        project,
++        filter: this.agentUpdatesSubscription.filter,
++      });
++      this.bufferOrEmitAgentUpdate(
++        this.agentUpdatesSubscription,
++        matches
++          ? {
++              kind: "upsert",
++              agent: payload,
++              project,
++            }
++          : {
++              kind: "remove",
++              agentId,
++            },
++      );
++      await this.emitWorkspaceUpdateForCwd(payload.cwd);
+     }

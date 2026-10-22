@@ -1,0 +1,9 @@
+FILE packages/app/src/hooks/use-settings.ts
+RANGE {"path":"packages/app/src/hooks/use-settings.ts","old_lines":[13,17],"new_lines":[13,17],"diff_block_lines":[5,11],"hunk_header":"@@ -13,5 +13,5 @@ export interface AppSettings {","substantive_changed_lines":2}
+@@ -13,5 +13,5 @@ export interface AppSettings {
+ 
+ export const DEFAULT_APP_SETTINGS: AppSettings = {
+-  theme: "dark",
++  theme: "auto",
+   manageBuiltInDaemon: true,
+ };

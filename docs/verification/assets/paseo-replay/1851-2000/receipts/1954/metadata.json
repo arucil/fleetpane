@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1954,
+  "revision": "0ba2f6b194d70cc146c190b52f8ff58bd878dc80",
+  "date": "2026-03-30T17:02:46+07:00",
+  "committer_date": "2026-03-30T17:05:14+07:00",
+  "parents": [
+    "5b22aedaff61ffcf8be52256a4c8142eff287f21"
+  ],
+  "subject": "feat(cli): add `paseo terminal` command group for managing workspace terminals",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/terminal/capture.ts",
+    "A\tpackages/cli/src/commands/terminal/create.ts",
+    "A\tpackages/cli/src/commands/terminal/index.ts",
+    "A\tpackages/cli/src/commands/terminal/kill.ts",
+    "A\tpackages/cli/src/commands/terminal/ls.ts",
+    "A\tpackages/cli/src/commands/terminal/schema.ts",
+    "A\tpackages/cli/src/commands/terminal/send-keys.ts",
+    "A\tpackages/cli/src/commands/terminal/shared.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/terminal/terminal.ts",
+    "M\tskills/paseo/SKILL.md"
+  ],
+  "source_receipt_digest": "sha256:31948d0bcf28e72ee77116c97b992720d98d7719fe2c35da60161e986e41e92b",
+  "diff_tree_digest": "sha256:8d64496af58992e4d0ab735e3e00c95bb0ff6702d6915c8198fd36a77804782b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/terminal/capture.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        16,
+        45
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -0,0 +1,99 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 626,
+  "receipt_file": "receipts/1954/selected.patch"
+}

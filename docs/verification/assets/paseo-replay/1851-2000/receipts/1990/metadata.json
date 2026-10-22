@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1990,
+  "revision": "b91884bc54f9f9d22e5d7156af22cc76dc47253e",
+  "date": "2026-04-01T19:19:40+07:00",
+  "committer_date": "2026-04-01T19:19:40+07:00",
+  "parents": [
+    "963c79265aaf7f4774aafe6aa66a1232bebebbcb"
+  ],
+  "subject": "fix(desktop): enable default context menu for copy/paste across the app",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:a32a5904906edd510051d4cdff1ec81bcfd793f0a4887cf855e75f11498c4be3",
+  "diff_tree_digest": "sha256:8136da99dc802b2115b666701ad8fa899810ef784a62f8446d4b986d4cd9903a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/window/window-manager.ts",
+      "old_lines": [
+        219,
+        221
+      ],
+      "new_lines": [
+        219,
+        233
+      ],
+      "diff_block_lines": [
+        12,
+        26
+      ],
+      "hunk_header": "@@ -218,4 +218,16 @@ export function setupWindowResizeEvents(win: BrowserWindow): void {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 9,
+  "receipt_file": "receipts/1990/selected.patch"
+}

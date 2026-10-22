@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1973,
+  "revision": "cce8dee21c9e7abe7b31931d6ea4fe7cf73aa4e4",
+  "date": "2026-04-01T15:19:28+07:00",
+  "committer_date": "2026-04-01T15:19:28+07:00",
+  "parents": [
+    "2d02db6ae0bd3337d76498cbdecbfda1d3bc372a"
+  ],
+  "subject": "fix(server): use shell on Windows for all provider spawns",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:ac34e7aa19dd2b4b388cc26e58a10ad2ed1c56977d6db6c64141a08610e36658",
+  "diff_tree_digest": "sha256:a75f8e10e16b9049057f69acb10a9f793bd602185955d848dd07959f267fc945",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        233,
+        234
+      ],
+      "new_lines": [
+        236,
+        241
+      ],
+      "diff_block_lines": [
+        22,
+        27
+      ],
+      "hunk_header": "@@ -229,6 +232,10 @@ export function findExecutable(",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 22,
+  "receipt_file": "receipts/1973/selected.patch"
+}

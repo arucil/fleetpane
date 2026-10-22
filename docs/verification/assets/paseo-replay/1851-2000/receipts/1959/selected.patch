@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[152,152],"new_lines":[172,201],"diff_block_lines":[28,57],"hunk_header":"@@ -150,4 +150,117 @@ jobs:","substantive_changed_lines":20}
++          source_tag="${SOURCE_TAG}"
++          if [[ "$source_tag" =~ ^(desktop-(windows|linux|macos)-|desktop-)?v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
++            release_tag="v${BASH_REMATCH[3]}"
++          else
++            release_tag="$source_tag"
++          fi
++          echo "RELEASE_TAG=$release_tag" >> "$GITHUB_ENV"
++
++          if [[ "$source_tag" == *gha-smoke* ]]; then
++            echo "IS_SMOKE_TAG=true" >> "$GITHUB_ENV"
++          else
++            echo "IS_SMOKE_TAG=false" >> "$GITHUB_ENV"
++          fi
++
++      - name: Download manifest artifacts
++        if: env.IS_SMOKE_TAG != 'true'
++        uses: actions/download-artifact@v4
++        with:
++          pattern: mac-manifest-*
++
++      - name: Merge manifests
++        if: env.IS_SMOKE_TAG != 'true'
++        shell: bash
++        run: |
++          set -euo pipefail
++
++          node <<'NODE'
++          const fs = require('node:fs');
++
++          // Simple YAML parser for electron-builder's latest-mac.yml format

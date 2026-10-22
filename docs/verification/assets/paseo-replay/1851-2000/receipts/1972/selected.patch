@@ -1,0 +1,32 @@
+FILE packages/app/src/styles/theme.ts
+RANGE {"path":"packages/app/src/styles/theme.ts","old_lines":[312,320],"new_lines":[320,349],"diff_block_lines":[35,64],"hunk_header":"@@ -311,16 +319,58 @@ const commonTheme = {","substantive_changed_lines":17}
+ export const darkTheme = {
++  colorScheme: "dark" as const,
+   colors: {
+     ...darkSemanticColors,
+     palette: baseColors,
+   },
++  shadow: {
++    sm: {
++      shadowColor: "rgba(0, 0, 0, 0.25)",
++      shadowOffset: { width: 0, height: 2 },
++      shadowRadius: 4,
++      elevation: 2,
++    },
++    md: {
++      shadowColor: "rgba(0, 0, 0, 0.20)",
++      shadowOffset: { width: 0, height: 4 },
++      shadowRadius: 8,
++      elevation: 8,
++    },
++    lg: {
++      shadowColor: "rgba(0, 0, 0, 0.40)",
++      shadowOffset: { width: 0, height: 12 },
++      shadowRadius: 24,
++      elevation: 8,
++    },
++  },
+   ...commonTheme,
+ } as const;
+ 
+ export const lightTheme = {

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1950,
+  "revision": "a94bc0720cc3c9a2a1da6acb24c9ec11531c65eb",
+  "date": "2026-03-30T14:53:27+07:00",
+  "committer_date": "2026-03-30T14:53:27+07:00",
+  "parents": [
+    "7504d20b67431dfc772698525ce05f779b7c64a6"
+  ],
+  "subject": "refactor(server): rename worktree destroy → teardown, add port to env, extract session code",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/git-operations.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/server/src/server/worktree-session.ts",
+    "M\tpackages/server/src/utils/worktree.test.ts",
+    "M\tpackages/server/src/utils/worktree.ts",
+    "M\tpackages/website/src/routes/docs/worktrees.tsx"
+  ],
+  "source_receipt_digest": "sha256:db26b1123d378ee2e9a4eb15ad2a0ec5c9c61af3380f8ea3d748cd871f81188f",
+  "diff_tree_digest": "sha256:33a5d1ce9e861a4ec075467f16b7aac11c30c903b6fca31b239bdb0e46fef774",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        2906,
+        2935
+      ],
+      "new_lines": [
+        2896,
+        2896
+      ],
+      "diff_block_lines": [
+        69,
+        98
+      ],
+      "hunk_header": "@@ -2905,68 +2895,16 @@ export class Session {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 1020,
+  "receipt_file": "receipts/1950/selected.patch"
+}

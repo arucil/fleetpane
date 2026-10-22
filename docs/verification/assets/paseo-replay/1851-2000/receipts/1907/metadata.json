@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1907,
+  "revision": "93845db70a3e7d2c73e99519ce8474dd9eb66803",
+  "date": "2026-03-28T21:38:53+07:00",
+  "committer_date": "2026-03-28T21:38:53+07:00",
+  "parents": [
+    "d5085294df19819e580d32f1e0fcde1e49b2b1c4"
+  ],
+  "subject": "Extract chat mention handling from session",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/chat/chat-mentions.test.ts",
+    "A\tpackages/server/src/server/chat/chat-mentions.ts",
+    "M\tpackages/server/src/server/chat/chat-service.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tskills/paseo-chat/SKILL.md",
+    "M\tskills/paseo-orchestrator/SKILL.md",
+    "M\tskills/paseo/SKILL.md"
+  ],
+  "source_receipt_digest": "sha256:42bc27dcb5f9bddf4bc59adfd5f96c6d38df031069230c4007841bde72b892c1",
+  "diff_tree_digest": "sha256:c2c6dd44005c8692a7d9451548fe3f3adf0ed31053cd2bc77128ef20590f3bcd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/chat/chat-mentions.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        21,
+        50
+      ],
+      "diff_block_lines": [
+        27,
+        56
+      ],
+      "hunk_header": "@@ -0,0 +1,114 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 193,
+  "receipt_file": "receipts/1907/selected.patch"
+}

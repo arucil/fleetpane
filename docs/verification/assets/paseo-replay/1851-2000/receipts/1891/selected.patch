@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[125,129],"new_lines":[125,129],"diff_block_lines":[5,11],"hunk_header":"@@ -125,5 +125,5 @@ jobs:","substantive_changed_lines":2}
+@@ -125,5 +125,5 @@ jobs:
+             fi
+           else
+-            release_type="release"
++            release_type="draft"
+           fi
+           echo "RELEASE_TYPE=$release_type" >> "$GITHUB_ENV"

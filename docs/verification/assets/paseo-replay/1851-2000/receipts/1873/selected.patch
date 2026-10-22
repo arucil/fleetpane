@@ -1,0 +1,25 @@
+FILE packages/server/src/server/agent/providers/codex/tool-call-mapper.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex/tool-call-mapper.ts","old_lines":[718,720],"new_lines":[735,757],"diff_block_lines":[66,88],"hunk_header":"@@ -717,4 +734,24 @@ function parseFileChangeEntries(","substantive_changed_lines":14}
+ 
++function resolveFileChangeTextFields(
++  file: CodexFileChangeEntry | undefined,
++): { unifiedDiff?: string; newString?: string } {
++  if (!file) {
++    return {};
++  }
++  const isDelete = file.kind === "delete";
++  if (isDelete && file.diff) {
++    const classified = classifyDiffLikeText(file.diff);
++    if (classified.isDiff) {
++      return { unifiedDiff: truncateDiffText(classified.text) };
++    }
++    return { unifiedDiff: truncateDiffText(contentToDeletionDiff(file.path, file.diff)) };
++  }
++  if (isDelete && !file.diff) {
++    return { unifiedDiff: contentToDeletionDiff(file.path, "") };
++  }
++  return asEditTextFields(file.diff);
++}
++
+ function mapFileChangeItem(
+   item: z.infer<typeof CodexFileChangeItemSchema>,

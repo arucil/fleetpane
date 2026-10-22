@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1921,
+  "revision": "831e3289e71b392bdce6a8d89b927827a53453bf",
+  "date": "2026-03-29T14:38:18+07:00",
+  "committer_date": "2026-03-29T14:38:18+07:00",
+  "parents": [
+    "094864d779e1b8d18e0c2fd8adad67c498e51d99"
+  ],
+  "subject": "chore(windows): instrument detached daemon launch",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/scripts/daemon-runner.ts",
+    "M\tpackages/server/scripts/supervisor.ts"
+  ],
+  "source_receipt_digest": "sha256:6a00116c33583cfa69a518deb7b11d0a84813e80124af31e85b87a123d88324b",
+  "diff_tree_digest": "sha256:fa2358e468c8464dc74e08d0b22213c23c780da728fe844aec885394e3dde092",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/local-daemon.ts",
+      "old_lines": [
+        116,
+        118
+      ],
+      "new_lines": [
+        117,
+        137
+      ],
+      "diff_block_lines": [
+        19,
+        39
+      ],
+      "hunk_header": "@@ -115,4 +116,22 @@ function buildChildEnv(options: DaemonStartOptions): NodeJS.ProcessEnv {",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 148,
+  "receipt_file": "receipts/1921/selected.patch"
+}

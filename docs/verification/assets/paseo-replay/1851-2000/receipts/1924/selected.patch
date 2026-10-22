@@ -1,0 +1,32 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[19,20],"new_lines":[26,55],"diff_block_lines":[20,49],"hunk_header":"@@ -17,4 +18,38 @@ const READ_ONLY_GIT_ENV: NodeJS.ProcessEnv = {","substantive_changed_lines":19}
++
++function createPullRequestStatusCache(ttlMs: number) {
++  return new TTLCache<string, PullRequestStatusResult>({
++    ttl: ttlMs,
++    max: PULL_REQUEST_STATUS_CACHE_MAX,
++    checkAgeOnGet: true,
++  });
++}
++
++function getPullRequestStatusCacheKey(cwd: string): string {
++  return resolve(cwd);
++}
++
++export function __resetPullRequestStatusCacheForTests(): void {
++  pullRequestStatusCache.clear();
++  pullRequestStatusCache.cancelTimer();
++  pullRequestStatusCacheTtlMs = DEFAULT_PULL_REQUEST_STATUS_CACHE_TTL_MS;
++  pullRequestStatusCache = createPullRequestStatusCache(pullRequestStatusCacheTtlMs);
++  pullRequestStatusInFlight.clear();
++}
++
++export function __setPullRequestStatusCacheTtlForTests(ttlMs: number): void {
++  pullRequestStatusCache.clear();
++  pullRequestStatusCache.cancelTimer();
++  pullRequestStatusCacheTtlMs = ttlMs;
++  pullRequestStatusCache = createPullRequestStatusCache(ttlMs);
++  pullRequestStatusInFlight.clear();
++}
+ 
+ async function execGit(

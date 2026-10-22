@@ -1,0 +1,8 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[426,429],"new_lines":[426,430],"diff_block_lines":[5,10],"hunk_header":"@@ -426,4 +426,5 @@ export async function createPaseoDaemon(","substantive_changed_lines":1}
+@@ -426,4 +426,5 @@ export async function createPaseoDaemon(
+     await scheduleService.start();
+     logger.info({ elapsed: elapsed() }, "Schedule service initialized");
++    logger.info({ elapsed: elapsed() }, "Loading persisted agent registry");
+     const persistedRecords = await agentStorage.list();
+     logger.info(

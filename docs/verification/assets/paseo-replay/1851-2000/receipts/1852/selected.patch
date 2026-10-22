@@ -1,0 +1,29 @@
+FILE packages/website/src/components/landing-page.tsx
+RANGE {"path":"packages/website/src/components/landing-page.tsx","old_lines":[46,72],"new_lines":[17,18],"diff_block_lines":[61,87],"hunk_header":"@@ -2,71 +2,17 @@ import * as React from \"react\";","substantive_changed_lines":16}
+-
+-function useDetectedPlatform(): Platform {
+-  const [platform, setPlatform] = React.useState<Platform>("mac-silicon");
+-
+-  React.useEffect(() => {
+-    const ua = navigator.userAgent.toLowerCase();
+-    if (ua.includes("win")) {
+-      setPlatform("windows");
+-    } else if (ua.includes("linux")) {
+-      setPlatform("linux");
+-    } else if (ua.includes("mac")) {
+-      // Check for Apple Silicon vs Intel
+-      // navigator.platform is deprecated but still the most reliable check
+-      const isARM =
+-        /arm|aarch64/i.test(navigator.platform) ||
+-        // Chrome/Edge on Apple Silicon report x86 platform but have ARM in userAgentData
+-        (navigator as unknown as { userAgentData?: { architecture?: string } }).userAgentData
+-          ?.architecture === "arm";
+-      setPlatform(isARM ? "mac-silicon" : "mac-silicon"); // Default to Silicon for modern Macs
+-    }
+-  }, []);
+-
+-  return platform;
+-}
+-
+ interface LandingPageProps {
+   title: React.ReactNode;

@@ -1,0 +1,17 @@
+FILE docs/RELEASE.md
+RANGE {"path":"docs/RELEASE.md","old_lines":[38,40],"new_lines":[47,61],"diff_block_lines":[26,40],"hunk_header":"@@ -37,4 +46,16 @@ npm run release:promote        # Promote X.Y.Z-rc.N to stable X.Y.Z","substantive_changed_lines":7}
+ 
++Use the RC path when you need to:
++
++- test a build manually in a Linux or Windows VM
++- send a build to a user who is hitting a specific problem
++- iterate on `rc.1`, `rc.2`, `rc.3`, and so on before deciding to ship broadly
++
++## Website behavior
++
++- The website download page points to GitHub's latest published **stable** release.
++- Published RC prereleases are public on GitHub Releases, but they do **not** become the website download target.
++- The website only moves when you publish the final stable release tag like `v0.1.41`.
++
+ ## Fixing a failed release build
+ 

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1877,
+  "revision": "7892b3cbe17ceb3a2b63d6a50eeae550ed95d59b",
+  "date": "2026-03-26T20:19:12+07:00",
+  "committer_date": "2026-03-26T20:19:12+07:00",
+  "parents": [
+    "f2000ff789a22bdf05fe745c71202e4a92b1d7d5"
+  ],
+  "subject": "fix(nix): update stale npmDepsHash and auto-fix on all lockfile changes",
+  "diff_tree_paths": [
+    "M\t.github/workflows/fix-nix-hash.yml",
+    "M\t.github/workflows/nix-build.yml",
+    "M\tnix/package.nix"
+  ],
+  "source_receipt_digest": "sha256:b52171c696b841df09758ba05ec0b2371675a999f3ad86b80d5c8d11c758053c",
+  "diff_tree_digest": "sha256:e110c4c2c877b657ebef585f696c6921f33f1570e2ecd5dfd986a5ee384f9c2f",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/fix-nix-hash.yml",
+      "old_lines": [
+        2,
+        5
+      ],
+      "new_lines": [
+        2,
+        10
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -2,4 +2,9 @@ name: Fix Nix hash",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 12,
+  "receipt_file": "receipts/1877/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/workspace-execution.ts
+RANGE {"path":"packages/app/src/utils/workspace-execution.ts","old_lines":[0,0],"new_lines":[22,51],"diff_block_lines":[28,57],"hunk_header":"@@ -0,0 +1,177 @@","substantive_changed_lines":19}
++
++export function resolveWorkspaceRouteId(input: {
++  routeWorkspaceId: string | null | undefined;
++}): string | null {
++  return normalizeWorkspaceIdentity(input.routeWorkspaceId);
++}
++
++export function resolveWorkspaceIdByExecutionDirectory(input: {
++  workspaces: Iterable<WorkspaceDescriptor> | null | undefined;
++  workspaceDirectory: string | null | undefined;
++}): string | null {
++  const normalizedWorkspaceDirectory = normalizeWorkspaceIdentity(input.workspaceDirectory);
++  if (!normalizedWorkspaceDirectory) {
++    return null;
++  }
++
++  for (const workspace of input.workspaces ?? []) {
++    if (normalizeWorkspaceIdentity(workspace.workspaceDirectory) === normalizedWorkspaceDirectory) {
++      return workspace.id;
++    }
++  }
++
++  return null;
++}
++
++export function getWorkspaceExecutionAuthority(
++  input:
++    | {
++        workspace: WorkspaceDescriptor | null | undefined;
++      }

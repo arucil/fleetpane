@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1926,
+  "revision": "6c3559e90fd117d85f0951e3ef5e683b7fa06cb1",
+  "date": "2026-03-29T17:39:47+07:00",
+  "committer_date": "2026-03-29T17:39:47+07:00",
+  "parents": [
+    "409ab466cacdcb2ed73d1bdecfb1931c2d9f2a94"
+  ],
+  "subject": "refactor(server): extract CheckoutDiffManager from Session into daemon-global service",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/checkout-diff-manager.ts",
+    "A\tpackages/server/src/server/checkout-git-utils.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspace-git-watch.test.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:d3cf1d4a4b770b95e7a01b23fa90ea6e2b31e9f3dc871765cf3eb581bb7604c8",
+  "diff_tree_digest": "sha256:322fbe9fa2c16ff32c75bdbf5db7ba9da5243a23ae6d6ecaf07b5e1c34b6d5a4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/checkout-diff-manager.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        74,
+        103
+      ],
+      "diff_block_lines": [
+        80,
+        109
+      ],
+      "hunk_header": "@@ -0,0 +1,361 @@",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 655,
+  "receipt_file": "receipts/1926/selected.patch"
+}

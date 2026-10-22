@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1924,
+  "revision": "efb8c8f229b00fd4eb7f118a50b97cedbd2e8413",
+  "date": "2026-03-29T16:42:39+07:00",
+  "committer_date": "2026-03-29T16:42:39+07:00",
+  "parents": [
+    "b1d663557b6c4f0eba95ae4e4443fbdb5a245651"
+  ],
+  "subject": "feat(server): cache getPullRequestStatus with TTL and in-flight dedup",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:cddc1aadb1ddaf4577d8e51875b6b20aadbc527ff59aa1ec4bacae23a9b984fa",
+  "diff_tree_digest": "sha256:016bb25719a83e1f1ce2a1625b411165cb8aca20e3c3fb640301e95d8db91878",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        19,
+        20
+      ],
+      "new_lines": [
+        26,
+        55
+      ],
+      "diff_block_lines": [
+        20,
+        49
+      ],
+      "hunk_header": "@@ -17,4 +18,38 @@ const READ_ONLY_GIT_ENV: NodeJS.ProcessEnv = {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 190,
+  "receipt_file": "receipts/1924/selected.patch"
+}

@@ -1,0 +1,29 @@
+FILE packages/app/src/contexts/session-status-tracking.ts
+RANGE {"path":"packages/app/src/contexts/session-status-tracking.ts","old_lines":[0,0],"new_lines":[3,29],"diff_block_lines":[9,35],"hunk_header":"@@ -0,0 +1,29 @@","substantive_changed_lines":16}
++
++export function reconcilePreviousAgentStatuses(
++  previousStatuses: Map<string, AgentLifecycleStatus>,
++  sessionAgents: Map<string, Agent> | undefined,
++): Map<string, AgentLifecycleStatus> {
++  if (!sessionAgents) {
++    return new Map();
++  }
++
++  const nextStatuses = new Map(previousStatuses);
++  const seenAgentIds = new Set<string>();
++
++  for (const agent of sessionAgents.values()) {
++    seenAgentIds.add(agent.id);
++    if (!nextStatuses.has(agent.id)) {
++      nextStatuses.set(agent.id, agent.status);
++    }
++  }
++
++  for (const agentId of nextStatuses.keys()) {
++    if (!seenAgentIds.has(agentId)) {
++      nextStatuses.delete(agentId);
++    }
++  }
++
++  return nextStatuses;
++}

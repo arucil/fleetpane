@@ -1,0 +1,18 @@
+FILE package.json
+RANGE {"path":"package.json","old_lines":[51,60],"new_lines":[51,60],"diff_block_lines":[7,22],"hunk_header":"@@ -50,11 +50,11 @@","substantive_changed_lines":12}
+     "draft-release:push": "node scripts/push-current-release-tag.mjs --draft-release",
+-    "draft-release:patch": "npm run version:all:patch && npm run release:check && npm run draft-release:push",
+-    "draft-release:minor": "npm run version:all:minor && npm run release:check && npm run draft-release:push",
+-    "draft-release:major": "npm run version:all:major && npm run release:check && npm run draft-release:push",
++    "draft-release:patch": "npm run release:check && npm run version:all:patch && npm run draft-release:push",
++    "draft-release:minor": "npm run release:check && npm run version:all:minor && npm run draft-release:push",
++    "draft-release:major": "npm run release:check && npm run version:all:major && npm run draft-release:push",
+     "release:finalize": "node scripts/finalize-current-release.mjs",
+-    "release:patch": "npm run version:all:patch && npm run release:check && npm run release:publish && npm run release:push",
+-    "release:minor": "npm run version:all:minor && npm run release:check && npm run release:publish && npm run release:push",
+-    "release:major": "npm run version:all:major && npm run release:check && npm run release:publish && npm run release:push"
++    "release:patch": "npm run release:check && npm run version:all:patch && npm run release:publish && npm run release:push",
++    "release:minor": "npm run release:check && npm run version:all:minor && npm run release:publish && npm run release:push",
++    "release:major": "npm run release:check && npm run version:all:major && npm run release:publish && npm run release:push"
+   },
+   "devDependencies": {

@@ -1,0 +1,66 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 2000,
+  "revision": "a7d5ab24977e7b64e7f4f24b4f691544f0256976",
+  "date": "2026-04-01T21:28:07+07:00",
+  "committer_date": "2026-04-01T21:28:07+07:00",
+  "parents": [
+    "d8243bfb7261ef9c69e727dbf3acafb2e12913df"
+  ],
+  "subject": "WIP: workspace execution refactor + notification routing + setup store updates",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/workspace-setup.ts",
+    "M\tpackages/app/e2e/sidebar-workspace.spec.ts",
+    "A\tpackages/app/e2e/workspace-setup-runtime.spec.ts",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/workspace-setup-dialog.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/panels/file-panel.tsx",
+    "M\tpackages/app/src/panels/launcher-panel.tsx",
+    "M\tpackages/app/src/panels/terminal-panel.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-setup-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-setup-store.ts",
+    "M\tpackages/app/src/utils/notification-routing.test.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts",
+    "D\tpackages/app/src/utils/resolve-hydrated-workspace-id.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.test.ts",
+    "M\tpackages/app/src/utils/workspace-archive-navigation.ts",
+    "A\tpackages/app/src/utils/workspace-execution.test.ts",
+    "A\tpackages/app/src/utils/workspace-execution.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/server/worktree-session.ts"
+  ],
+  "source_receipt_digest": "sha256:6296e3308315ab88b35d0e68723f86d24fa9be53356525a1d68098457374a33c",
+  "diff_tree_digest": "sha256:47e0065e0a09f68d49101660cdf1460be085046dcd11b890dbc9d8da98007902",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/workspace-execution.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        22,
+        51
+      ],
+      "diff_block_lines": [
+        28,
+        57
+      ],
+      "hunk_header": "@@ -0,0 +1,177 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 898,
+  "receipt_file": "receipts/2000/selected.patch"
+}

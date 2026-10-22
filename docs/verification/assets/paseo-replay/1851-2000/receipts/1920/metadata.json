@@ -1,0 +1,63 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1920,
+  "revision": "094864d779e1b8d18e0c2fd8adad67c498e51d99",
+  "date": "2026-03-29T12:49:05+07:00",
+  "committer_date": "2026-03-29T12:49:05+07:00",
+  "parents": [
+    "147482d6eda04c56e1d5c6bfbad7c58c33fffa4b"
+  ],
+  "subject": "feat: add chat and website updates",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/chat/post.ts",
+    "M\tpackages/cli/src/commands/chat/read.ts",
+    "M\tpackages/cli/src/commands/chat/schema.ts",
+    "M\tpackages/cli/src/commands/chat/shared.ts",
+    "M\tpackages/cli/src/commands/chat/wait.ts",
+    "M\tpackages/cli/src/output/render.ts",
+    "M\tpackages/cli/src/output/types.ts",
+    "M\tpackages/cli/tests/02-output.test.ts",
+    "M\tpackages/cli/tests/30-chat.test.ts",
+    "M\tpackages/cli/tests/helpers/test-daemon.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/chat/chat-rpc-schemas.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "A\tpackages/website/posts/drafts/draft-example.md",
+    "A\tpackages/website/posts/hello-world.md",
+    "M\tpackages/website/src/components/landing-page.tsx",
+    "A\tpackages/website/src/components/site-header.tsx",
+    "A\tpackages/website/src/posts.ts",
+    "M\tpackages/website/src/routeTree.gen.ts",
+    "A\tpackages/website/src/routes/blog.tsx",
+    "A\tpackages/website/src/routes/blog/$.tsx",
+    "A\tpackages/website/src/routes/blog/index.tsx",
+    "M\tpackages/website/src/routes/changelog.tsx",
+    "M\tpackages/website/src/styles.css",
+    "A\tpackages/website/src/types/vite-env.d.ts",
+    "M\tpackages/website/vite.config.ts"
+  ],
+  "source_receipt_digest": "sha256:c6d09c278e27c5fcdb7f8f3810a60a4d69633bd9a72184a96fcdaadb4abdba11",
+  "diff_tree_digest": "sha256:3faaa5753fa8e8c3df44689f7e6f6555ec86899f7ef266ee1cc86423ec94d96f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/chat/schema.ts",
+      "old_lines": [
+        38,
+        42
+      ],
+      "new_lines": [
+        42,
+        70
+      ],
+      "diff_block_lines": [
+        27,
+        56
+      ],
+      "hunk_header": "@@ -34,11 +37,57 @@ export const chatMessageSchema: OutputSchema<ChatMessageRow> = {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 611,
+  "receipt_file": "receipts/1920/selected.patch"
+}

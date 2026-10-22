@@ -1,0 +1,32 @@
+FILE packages/website/src/components/command-dialog.tsx
+RANGE {"path":"packages/website/src/components/command-dialog.tsx","old_lines":[0,0],"new_lines":[11,40],"diff_block_lines":[17,46],"hunk_header":"@@ -0,0 +1,122 @@","substantive_changed_lines":18}
++
++export function CommandDialog({
++  trigger,
++  title,
++  description,
++  command,
++  footnote,
++}: CommandDialogProps) {
++  const [open, setOpen] = React.useState(false);
++  const ref = React.useRef<HTMLDivElement>(null);
++
++  React.useEffect(() => {
++    function handleClickOutside(e: MouseEvent) {
++      if (ref.current && !ref.current.contains(e.target as Node)) {
++        setOpen(false);
++      }
++    }
++    function handleKeyDown(e: KeyboardEvent) {
++      if (e.key === "Escape") setOpen(false);
++    }
++    document.addEventListener("mousedown", handleClickOutside);
++    document.addEventListener("keydown", handleKeyDown);
++    return () => {
++      document.removeEventListener("mousedown", handleClickOutside);
++      document.removeEventListener("keydown", handleKeyDown);
++    };
++  }, []);
++
++  return (
++    <div className="relative" ref={ref}>

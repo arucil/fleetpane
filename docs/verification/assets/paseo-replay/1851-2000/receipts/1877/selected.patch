@@ -1,0 +1,12 @@
+FILE .github/workflows/fix-nix-hash.yml
+RANGE {"path":".github/workflows/fix-nix-hash.yml","old_lines":[2,5],"new_lines":[2,10],"diff_block_lines":[5,14],"hunk_header":"@@ -2,4 +2,9 @@ name: Fix Nix hash","substantive_changed_lines":5}
+@@ -2,4 +2,9 @@ name: Fix Nix hash
+ 
+ on:
++  push:
++    branches: [main]
++    paths:
++      - 'package.json'
++      - 'package-lock.json'
+   pull_request:
+     paths:

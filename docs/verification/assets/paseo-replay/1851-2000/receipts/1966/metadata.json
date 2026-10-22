@@ -1,0 +1,73 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1966,
+  "revision": "51411182fe44343f0844944c8151fb7674e560eb",
+  "date": "2026-04-01T10:55:01+07:00",
+  "committer_date": "2026-04-01T13:37:51+07:00",
+  "parents": [
+    "f53c770a71651b46f5df54aaa718d53c13e8b589"
+  ],
+  "subject": "fix(app): support ipad desktop layout safely",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/attachments/store.ts",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/headers/menu-header.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/keyboard-shortcuts-dialog.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/contexts/explorer-sidebar-animation-context.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-permissions-section.tsx",
+    "M\tpackages/app/src/desktop/daemon/desktop-daemon.ts",
+    "M\tpackages/app/src/desktop/host.ts",
+    "M\tpackages/app/src/desktop/permissions/use-desktop-permissions.ts",
+    "M\tpackages/app/src/desktop/updates/desktop-updates.ts",
+    "M\tpackages/app/src/desktop/updates/update-banner.tsx",
+    "M\tpackages/app/src/desktop/updates/use-desktop-app-updater.ts",
+    "M\tpackages/app/src/hooks/use-audio-recorder.web.ts",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-dictation-audio-source.web.ts",
+    "M\tpackages/app/src/hooks/use-favicon-status.ts",
+    "M\tpackages/app/src/hooks/use-image-attachment-picker.ts",
+    "M\tpackages/app/src/hooks/use-is-local-daemon.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/hooks/use-shortcut-keys.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/settings/keyboard-shortcuts-section.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/desktop-window.ts",
+    "M\tpackages/app/src/utils/shortcut-platform.ts",
+    "M\tpackages/app/src/voice/audio-engine.web.ts"
+  ],
+  "source_receipt_digest": "sha256:6f405ff0eec95dad49e8ccba4d9e2df14d76f04e74a9e90962931e04391c8cbc",
+  "diff_tree_digest": "sha256:6c84ef1bc58cb9184137d8a31e77947c04a2cedab2b5c79fbe7db20c09f0b026",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/constants/layout.ts",
+      "old_lines": [
+        26,
+        45
+      ],
+      "new_lines": [
+        27,
+        46
+      ],
+      "diff_block_lines": [
+        15,
+        44
+      ],
+      "hunk_header": "@@ -24,39 +25,58 @@ export const DESKTOP_WINDOW_CONTROLS_WIDTH = 140;",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 363,
+  "receipt_file": "receipts/1966/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/daemon/runtime-toolchain.ts
+RANGE {"path":"packages/cli/src/commands/daemon/runtime-toolchain.ts","old_lines":[38,44],"new_lines":[37,64],"diff_block_lines":[33,62],"hunk_header":"@@ -35,11 +33,35 @@ export function resolveNodePathFromPid(pid: number): NodePathFromPidResult {","substantive_changed_lines":17}
++
++function resolveNodePathFromPidWindows(pid: number): NodePathFromPidResult {
++  const result = spawnSync(
++    "wmic",
++    ["process", "where", `ProcessId=${pid}`, "get", "ExecutablePath", "/VALUE"],
++    { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
++  );
++
++  if (result.error) {
++    return { nodePath: null, error: `wmic failed: ${normalizeError(result.error)}` };
++  }
++
++  if ((result.status ?? 1) !== 0) {
++    const details = result.stderr?.trim();
+     return {
+       nodePath: null,
+-      error: "ps returned an empty command path",
++      error: details ? `wmic failed: ${details}` : `wmic exited with code ${result.status ?? 1}`,
+     };
+   }
+ 
+-  return { nodePath: resolved };
++  // wmic output format: "ExecutablePath=C:\path\to\node.exe\r\n"
++  const match = result.stdout.match(/ExecutablePath=(.+)/);
++  const resolved = match?.[1]?.trim();
++  return resolved ? { nodePath: resolved } : { nodePath: null, error: "wmic returned no executable path" };
++}
++
++export function resolveNodePathFromPid(pid: number): NodePathFromPidResult {
++  return platform() === "win32"

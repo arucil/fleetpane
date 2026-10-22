@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[213,227],"new_lines":[225,248],"diff_block_lines":[48,77],"hunk_header":"@@ -210,41 +221,87 @@ function HostSessionManager() {","substantive_changed_lines":19}
++  const [retryToken, setRetryToken] = useState(0);
++  const retry = useCallback(() => {
++    setPhase("starting-daemon");
++    setError(null);
++    setRetryToken((current) => current + 1);
++  }, []);
+ 
+   useEffect(() => {
+     let cancelled = false;
++    const shouldManageDesktop = shouldUseDesktopDaemon();
+     const store = getHostRuntimeStore();
+ 
+     const init = async () => {
+       const settings = await loadSettingsFromStorage();
+-      const isDesktopManaged = shouldUseDesktopDaemon() && settings.manageBuiltInDaemon;
++      const isDesktopManaged = shouldManageDesktop && settings.manageBuiltInDaemon;
+       await store.loadFromStorage();
+       if (isDesktopManaged) {
+-        await store.bootstrap({ manageBuiltInDaemon: true });
+-      } else {
+-        void store.bootstrap({ manageBuiltInDaemon: settings.manageBuiltInDaemon });
+-      }
+-    };
++        setPhase("starting-daemon");
++        setError(null);
++        const bootstrapResult = await store.bootstrapDesktop();
++        if (!bootstrapResult.ok) {
++          if (!cancelled) {
++            setPhase("error");
++            setError(bootstrapResult.error);

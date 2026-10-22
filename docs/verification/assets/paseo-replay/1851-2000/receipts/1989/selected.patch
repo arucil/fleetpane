@@ -1,0 +1,13 @@
+FILE packages/desktop/src/window/window-manager.ts
+RANGE {"path":"packages/desktop/src/window/window-manager.ts","old_lines":[182,184],"new_lines":[186,196],"diff_block_lines":[30,40],"hunk_header":"@@ -181,4 +185,12 @@ export function registerWindowManager(): void {","substantive_changed_lines":4}
+ 
++    if (nextUpdate.backgroundColor) {
++      win.setBackgroundColor(nextUpdate.backgroundColor);
++    }
++
++    if (process.platform === "darwin") {
++      return;
++    }
++
+     const current =
+       overlayStateByWindow.get(win) ?? createWindowControlsOverlayState(resolveSystemWindowTheme());

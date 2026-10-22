@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[7748,7748],"new_lines":[7771,7800],"diff_block_lines":[43,72],"hunk_header":"@@ -7746,4 +7751,66 @@ export class Session {","substantive_changed_lines":21}
++    await Promise.all(
++      mentionAgentIds.map(async (mentionedAgentId) => {
++        const resolved = await this.resolveAgentIdentifier(mentionedAgentId);
++        if (!resolved.ok) {
++          this.sessionLogger.warn(
++            { mentionedAgentId, room: input.room, error: resolved.error },
++            "Failed to resolve chat mention target",
++          );
++          return;
++        }
++
++        try {
++          await this.handleSendAgentMessage(resolved.agentId, notification);
++        } catch (error) {
++          this.sessionLogger.warn(
++            { err: error, mentionedAgentId: resolved.agentId, room: input.room },
++            "Failed to notify mentioned agent about chat message",
++          );
++        }
++      }),
++    );
++  }
++
++  private buildChatMentionNotification(input: {
++    room: string;
++    authorAgentId: string;
++    body: string;
++    mentionAgentIds: string[];
++  }): string {
++    const mentioned = input.mentionAgentIds.map((agentId) => `@${agentId}`).join(", ");

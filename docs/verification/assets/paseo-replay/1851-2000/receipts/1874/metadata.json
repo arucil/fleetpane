@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1874,
+  "revision": "68df3048677065c3ba283fb2d284e6b252558f62",
+  "date": "2026-03-26T18:10:21+07:00",
+  "committer_date": "2026-03-26T18:10:21+07:00",
+  "parents": [
+    "a2aac3797f4a231881a9cfbce28731f97f83fd2e"
+  ],
+  "subject": "refactor(app): move startup routing logic into welcome screen and simplify index route",
+  "diff_tree_paths": [
+    "D\tpackages/app/src/app-support/index-startup.ts",
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/index.tsx",
+    "M\tpackages/app/src/components/welcome-screen.tsx",
+    "M\tpackages/app/src/runtime/host-runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:4040ddc8eca1e2d43898110193260bb1aa96c0384b3c7c2c53dc99e82d52d278",
+  "diff_tree_digest": "sha256:94ac6e7a9467746ec7e264d23ecc210ce464d00426c250e88f9e1311bd69681c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/index.tsx",
+      "old_lines": [
+        15,
+        44
+      ],
+      "new_lines": [
+        4,
+        4
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -1,112 +1,17 @@",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 236,
+  "receipt_file": "receipts/1874/selected.patch"
+}

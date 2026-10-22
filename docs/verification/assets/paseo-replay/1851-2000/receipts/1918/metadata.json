@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1918,
+  "revision": "921ddf47a8d85542b36513e8a7aa1c63e68afaba",
+  "date": "2026-03-29T09:26:18+07:00",
+  "committer_date": "2026-03-29T09:26:18+07:00",
+  "parents": [
+    "f287c7f9727a990789548506f248292148054137"
+  ],
+  "subject": "refactor(desktop): move title bar overlay logic to window-manager and add setTitleBarTheme IPC",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/preload.ts",
+    "M\tpackages/desktop/src/window/window-manager.test.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:27374ad551e5dcdb8e3dd33fab654cf32de63c63c649d970333de2c06fab1c41",
+  "diff_tree_digest": "sha256:68937cfa995ec69b3197b63de545ddbb1e500787d1135fbe7222d4f162d8795d",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/window/window-manager.ts",
+      "old_lines": [
+        17,
+        18
+      ],
+      "new_lines": [
+        18,
+        40
+      ],
+      "diff_block_lines": [
+        14,
+        36
+      ],
+      "hunk_header": "@@ -15,4 +15,26 @@ export function readBadgeCount(input: unknown): number {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 49,
+  "receipt_file": "receipts/1918/selected.patch"
+}

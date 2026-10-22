@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1989,
+  "revision": "963c79265aaf7f4774aafe6aa66a1232bebebbcb",
+  "date": "2026-04-01T18:33:17+07:00",
+  "committer_date": "2026-04-01T18:33:17+07:00",
+  "parents": [
+    "ade1e338eafe49aeb8f2b1fb3d919b39376e25c4"
+  ],
+  "subject": "fix(desktop): eliminate white flash on window resize in dark mode",
+  "diff_tree_paths": [
+    "M\tpackages/app/public/index.html",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:ebfb52c1aa3b4269bffafb3f5fed50c4ebce5111717929f1bbc0a949dcb92b45",
+  "diff_tree_digest": "sha256:00a9d282a763b3ca0ea1c4573ef9ea946bc4bce83b604442dd8613208c432db2",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/window/window-manager.ts",
+      "old_lines": [
+        182,
+        184
+      ],
+      "new_lines": [
+        186,
+        196
+      ],
+      "diff_block_lines": [
+        30,
+        40
+      ],
+      "hunk_header": "@@ -181,4 +185,12 @@ export function registerWindowManager(): void {",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 14,
+  "receipt_file": "receipts/1989/selected.patch"
+}

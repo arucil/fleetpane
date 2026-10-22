@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1968,
+  "revision": "9c4dee536442001a8bb063a496b32d9590ac80b1",
+  "date": "2026-04-01T12:56:27+07:00",
+  "committer_date": "2026-04-01T13:37:51+07:00",
+  "parents": [
+    "c635eabff321bdac23aeab314085e46e7bdcb275"
+  ],
+  "subject": "fix(server): handle codex spawn errors to prevent daemon crash",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/agent/providers/codex-app-server-agent.spawn-error.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/index.ts"
+  ],
+  "source_receipt_digest": "sha256:ca42f7640c9fd677109fc36fe933b70455077ae5c436884e3049cc864773478c",
+  "diff_tree_digest": "sha256:6f36872b4faa9e1d707ddcd718a58303dfbe96f4d98a9887753553177eb53dfc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex-app-server-agent.ts",
+      "old_lines": [
+        513,
+        515
+      ],
+      "new_lines": [
+        513,
+        527
+      ],
+      "diff_block_lines": [
+        7,
+        21
+      ],
+      "hunk_header": "@@ -512,4 +512,16 @@ class CodexAppServerClient {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/1968/selected.patch"
+}

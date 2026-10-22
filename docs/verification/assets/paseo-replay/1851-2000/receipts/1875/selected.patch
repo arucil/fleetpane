@@ -1,0 +1,16 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,18],"diff_block_lines":[10,23],"hunk_header":"@@ -1,4 +1,18 @@","substantive_changed_lines":6}
++### Improved
++- Faster app startup by redirecting to the welcome screen immediately and showing host connection status inline.
++- Codex file deletions now display correctly as removed lines in diffs.
++- OpenCode questions are now surfaced in the permission UI.
++
++### Fixed
++- Fixed queued prompt dispatch after idle transition.
++- Replaced bash-only `mapfile` with a portable `while-read` loop in the chat script.
++
++### Added
++- Added support for Nix and NixOS installation.
++
+ ## 0.1.34 - 2026-03-25
+ 

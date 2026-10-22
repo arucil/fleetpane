@@ -1,0 +1,81 @@
+          }
+          const next = new Map(prev);
+          next.set(agentId, false);
+          return next;
+        });
+      }
+
+      if (shouldMarkAuthoritativeHistoryApplied) {
+        setAgentAuthoritativeHistoryApplied(serverId, agentId, true);
+      }
+      if (result.initResolution === "resolve") {
+        resolveInitDeferred(initKey);
+      }
+      if (result.clearInitializing) {
+        markAgentHistorySynchronized(serverId, agentId);
+      }
+    },
+    [
+      applyAuthoritativeAgentSnapshot,
+      applyAgentUpdatePayload,
+      clearAgentStreamHead,
+      markAgentHistorySynchronized,
+      requestCanonicalCatchUp,
+      serverId,
+      setAgentAuthoritativeHistoryApplied,
+      setAgentStreamTail,
+      setAgentTimelineCursor,
+      setInitializingAgents,
+    ],
+  );
+
+  useEffect(() => {
+    if (isConnected) {
+      return;
+    }
+    clearPendingAgentUpdates(serverId);
+  }, [isConnected, serverId]);
+
+  useEffect(() => {
+    const wasConnected = wasConnectedRef.current;
+    wasConnectedRef.current = isConnected;
+    if (!wasConnected && isConnected) {
+      scheduleAuthoritativeRevalidation();
+    }
+  }, [isConnected, scheduleAuthoritativeRevalidation]);
+
+  useEffect(() => {
+    return () => {
+      if (revalidationTimerRef.current) {
+        clearTimeout(revalidationTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Daemon message handlers - directly update Zustand store
+  useEffect(() => {
+    const unsubAgentUpdate = client.on("agent_update", (message) => {
+      if (message.type !== "agent_update") return;
+      const update = message.payload;
+      const agentId = getAgentIdFromUpdate(update);
+      const initKey = getInitKey(serverId, agentId);
+      const session = useSessionStore.getState().sessions[serverId];
+      const isSyncingHistory =
+        session?.initializingAgents.get(agentId) === true && Boolean(getInitDeferred(initKey));
+
+      if (isSyncingHistory) {
+        bufferPendingAgentUpdate(serverId, agentId, update);
+        return;
+      }
+
+      deletePendingAgentUpdate(serverId, agentId);
+      applyAgentUpdatePayload(update);
+    });
+
+    const unsubAgentStream = client.on("agent_stream", (message) => {
+      if (message.type !== "agent_stream") return;
+      const { agentId, event, timestamp, seq, epoch } = message.payload;
+      const parsedTimestamp = new Date(timestamp);
+      const streamEvent = event as AgentStreamEventPayload;
+      if (
+        event.type === "turn_started" ||

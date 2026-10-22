@@ -1,0 +1,18 @@
+FILE packages/app/src/attachments/native/native-file-attachment-store.ts
+RANGE {"path":"packages/app/src/attachments/native/native-file-attachment-store.ts","old_lines":[10,14],"new_lines":[11,24],"diff_block_lines":[12,27],"hunk_header":"@@ -9,6 +10,15 @@ export function createNativeFileAttachmentStore() {","substantive_changed_lines":8}
+       }
+-      if (attachment.storageKey.startsWith("/")) {
+-        return `file://${attachment.storageKey}`;
++      if (isAbsolutePath(attachment.storageKey)) {
++        if (attachment.storageKey.startsWith("/")) {
++          return `file://${attachment.storageKey}`;
++        }
++
++        // UNC paths: \\server\share -> file://server/share
++        if (attachment.storageKey.startsWith("\\\\")) {
++          return `file:${attachment.storageKey.replace(/\\/g, "/")}`;
++        }
++
++        return `file:///${attachment.storageKey.replace(/\\/g, "/")}`;
+       }
+       return attachment.storageKey;

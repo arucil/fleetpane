@@ -1,0 +1,10 @@
+FILE packages/server/src/server/agent/providers/opencode-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/opencode-agent.ts","old_lines":[818,819],"new_lines":[819,826],"diff_block_lines":[36,43],"hunk_header":"@@ -810,10 +817,10 @@ export function translateOpenCodeEvent(","substantive_changed_lines":5}
++      const partId = props.partID as string | undefined;
++      const knownPartType = partId ? state.partTypes.get(partId) : undefined;
++      const isReasoning = knownPartType === "reasoning" || deltaField === "reasoning";
++
++      if (isReasoning) {
++        const partKey = partId ? `reasoning:${partId}` : null;
+         if (partKey) {
+           state.streamedPartKeys.add(partKey);

@@ -1,0 +1,27 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[631,632],"new_lines":[619,643],"diff_block_lines":[38,62],"hunk_header":"@@ -615,18 +614,30 @@ function RootStack() {","substantive_changed_lines":22}
++        name="h/[serverId]/workspace/[workspaceId]"
++        getId={({ params }) => {
++          const serverValue = Array.isArray(params?.serverId) ? params.serverId[0] : params?.serverId;
++          const workspaceValue = Array.isArray(params?.workspaceId)
++            ? params.workspaceId[0]
++            : params?.workspaceId;
++          const serverId = typeof serverValue === "string" ? serverValue.trim() : "";
++          const workspaceId =
++            typeof workspaceValue === "string"
++              ? (decodeWorkspaceIdFromPathSegment(workspaceValue) ?? workspaceValue.trim())
++              : "";
++          return `${serverId}:${workspaceId}`;
++        }}
++      />
++      <Stack.Screen
++        name="h/[serverId]/agent/[agentId]"
++        options={{ gestureEnabled: false }}
++      />
++      <Stack.Screen name="h/[serverId]/index" />
++      <Stack.Screen name="h/[serverId]/sessions" />
++      <Stack.Screen name="h/[serverId]/open-project" />
++      <Stack.Screen name="h/[serverId]/settings" />
++      <Stack.Screen name="pair-scan" />
+       <Stack.Screen name="index" />
+     </Stack>

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1932,
+  "revision": "fb42c8eea22b435985c04f22769b64afe3037c73",
+  "date": "2026-03-29T21:12:17+07:00",
+  "committer_date": "2026-03-29T21:12:30+07:00",
+  "parents": [
+    "971f74e2abf85daf06b13754bfc8b8cc2d557268"
+  ],
+  "subject": "fix(website): fetch desktop version from latest GitHub release",
+  "diff_tree_paths": [
+    "M\tpackages/website/src/downloads.tsx",
+    "M\tpackages/website/vite.config.ts"
+  ],
+  "source_receipt_digest": "sha256:b0c34ce4e24449127dae1e78d2fbaacf9cb19552075b49b853a6ba376707b112",
+  "diff_tree_digest": "sha256:44ac70aee66d657d8705158d286dfe16b9b0d2b46babc4aebb78cbb8f73c7add",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/website/vite.config.ts",
+      "old_lines": [
+        35,
+        44
+      ],
+      "new_lines": [
+        31,
+        51
+      ],
+      "diff_block_lines": [
+        18,
+        47
+      ],
+      "hunk_header": "@@ -29,22 +29,43 @@ const sitemapPages = [",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 46,
+  "receipt_file": "receipts/1932/selected.patch"
+}

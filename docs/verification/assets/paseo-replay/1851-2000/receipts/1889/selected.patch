@@ -1,0 +1,27 @@
+FILE packages/app/src/utils/desktop-window.ts
+RANGE {"path":"packages/app/src/utils/desktop-window.ts","old_lines":[177,186],"new_lines":[180,200],"diff_block_lines":[29,53],"hunk_header":"@@ -176,11 +179,22 @@ export function useTrafficLightPadding(): { left: number; top: number } {","substantive_changed_lines":16}
+ 
+-  if (!getIsDesktopMac() || isFullscreen) {
+-    return { left: 0, top: 0 };
++  if (!getIsDesktop() || isFullscreen) {
++    return { left: 0, right: 0, top: 0, side: null };
++  }
++
++  if (getIsDesktopMac()) {
++    return {
++      left: DESKTOP_TRAFFIC_LIGHT_WIDTH,
++      right: 0,
++      top: DESKTOP_TRAFFIC_LIGHT_HEIGHT,
++      side: 'left',
++    };
+   }
+ 
+   return {
+-    left: DESKTOP_TRAFFIC_LIGHT_WIDTH,
+-    top: DESKTOP_TRAFFIC_LIGHT_HEIGHT,
++    left: 0,
++    right: DESKTOP_WINDOW_CONTROLS_WIDTH,
++    top: DESKTOP_WINDOW_CONTROLS_HEIGHT,
++    side: 'right',
+   };
+ }

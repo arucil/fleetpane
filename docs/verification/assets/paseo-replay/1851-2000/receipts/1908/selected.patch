@@ -1,0 +1,32 @@
+FILE packages/desktop/src/features/menu.ts
+RANGE {"path":"packages/desktop/src/features/menu.ts","old_lines":[92,92],"new_lines":[97,126],"diff_block_lines":[18,47],"hunk_header":"@@ -90,3 +95,35 @@ export function setupApplicationMenu(): void {","substantive_changed_lines":15}
++
++  ipcMain.handle("paseo:menu:showContextMenu", (event, input?: ShowContextMenuInput) => {
++    const win = BrowserWindow.fromWebContents(event.sender);
++    if (!win) {
++      return;
++    }
++
++    if (input?.kind !== "terminal") {
++      return;
++    }
++
++    const menu = Menu.buildFromTemplate([
++      {
++        label: "Copy",
++        role: "copy",
++        enabled: input.hasSelection === true,
++      },
++      {
++        label: "Paste",
++        role: "paste",
++      },
++      {
++        type: "separator",
++      },
++      {
++        label: "Select All",
++        role: "selectAll",
++      },
++    ]);
++

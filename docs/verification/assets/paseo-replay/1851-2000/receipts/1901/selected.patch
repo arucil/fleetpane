@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[862,862],"new_lines":[862,891],"diff_block_lines":[7,36],"hunk_header":"@@ -861,4 +861,37 @@ export class AgentManager {","substantive_changed_lines":21}
+ 
++  async archiveAgent(agentId: string): Promise<{ archivedAt: string }> {
++    const agent = this.requireAgent(agentId);
++    if (!this.registry) {
++      throw new Error("Agent storage is not configured");
++    }
++
++    await this.registry.applySnapshot(agent, {
++      internal: agent.internal,
++    });
++    const stored = await this.registry.get(agentId);
++    if (!stored) {
++      throw new Error(`Agent ${agentId} not found in storage after snapshot`);
++    }
++
++    const archivedAt = new Date().toISOString();
++    const normalizedStatus =
++      stored.lastStatus === "running" || stored.lastStatus === "initializing"
++        ? "idle"
++        : stored.lastStatus;
++
++    await this.registry.upsert({
++      ...stored,
++      archivedAt,
++      lastStatus: normalizedStatus,
++      requiresAttention: false,
++      attentionReason: null,
++      attentionTimestamp: null,
++    });
++    await this.closeAgent(agentId);

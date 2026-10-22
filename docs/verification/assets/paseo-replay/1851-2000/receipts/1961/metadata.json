@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1961,
+  "revision": "07b077f1a28e7126f9d2b48be03bca8486173aac",
+  "date": "2026-04-01T04:38:45Z",
+  "committer_date": "2026-04-01T04:38:50Z",
+  "parents": [
+    "ee50d3b8d0c14c88aa0181957581d6a51a63075f"
+  ],
+  "subject": "fix: Linux checkout diff watchers and rewind command ordering",
+  "diff_tree_paths": [
+    "M\t.gitignore",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "A\tpackages/server/src/server/checkout-diff-manager.test.ts",
+    "M\tpackages/server/src/server/checkout-diff-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:ee53a1abd365e9070f703d847ce5c656c0539322426ff0a89cb0cd5fbada2cee",
+  "diff_tree_digest": "sha256:1edd850dcf2f0e61c566a53ffb9ef5afa50cd9d94131c37ab8df66773794d81a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/checkout-diff-manager.ts",
+      "old_lines": [
+        292,
+        321
+      ],
+      "new_lines": [
+        306,
+        306
+      ],
+      "diff_block_lines": [
+        47,
+        76
+      ],
+      "hunk_header": "@@ -288,50 +300,13 @@ export class CheckoutDiffManager {",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 236,
+  "receipt_file": "receipts/1961/selected.patch"
+}

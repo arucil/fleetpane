@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1904,
+  "revision": "05a4e8f5a325a9c3954d6afb8a9d269fe319c788",
+  "date": "2026-03-28T10:47:53+07:00",
+  "committer_date": "2026-03-28T10:47:53+07:00",
+  "parents": [
+    "1b0fe4aa4732c2df824eea329f1488cf001f3103"
+  ],
+  "subject": "fix(cli): resolve daemon executable path without wmic",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/runtime-toolchain.ts"
+  ],
+  "source_receipt_digest": "sha256:fc16c65f0abf7370490f6f4e3bbfa21db8441dc2cf211a188ace16dcb0be2595",
+  "diff_tree_digest": "sha256:91a980e3f62bb12da49f6da1fc51e59ae9e49d7d3bc9f5b8515b9719ddb2745c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/runtime-toolchain.ts",
+      "old_lines": [
+        61,
+        61
+      ],
+      "new_lines": [
+        62,
+        91
+      ],
+      "diff_block_lines": [
+        45,
+        74
+      ],
+      "hunk_header": "@@ -50,13 +52,57 @@ function resolveNodePathFromPidWindows(pid: number): NodePathFromPidResult {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 52,
+  "receipt_file": "receipts/1904/selected.patch"
+}

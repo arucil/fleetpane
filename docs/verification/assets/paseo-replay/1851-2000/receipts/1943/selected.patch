@@ -1,0 +1,32 @@
+FILE packages/server/src/server/pid-lock.ts
+RANGE {"path":"packages/server/src/server/pid-lock.ts","old_lines":[116,116],"new_lines":[116,145],"diff_block_lines":[21,50],"hunk_header":"@@ -115,4 +115,35 @@ export async function acquirePidLock(","substantive_changed_lines":21}
+ 
++export async function updatePidLock(
++  paseoHome: string,
++  patch: { listen: string },
++  options?: { ownerPid?: number },
++): Promise<void> {
++  const pidPath = getPidFilePath(paseoHome);
++  const lockOwnerPid = resolveOwnerPid(options?.ownerPid);
++  const content = await readFile(pidPath, "utf-8");
++  const existingLock = JSON.parse(content) as PidLockInfo;
++
++  if (existingLock.pid !== lockOwnerPid) {
++    throw new PidLockError(
++      `Cannot update PID lock owned by PID ${existingLock.pid}`,
++      existingLock,
++    );
++  }
++
++  const updatedLock: PidLockInfo = {
++    ...existingLock,
++    ...patch,
++  };
++
++  const fd = await open(pidPath, "r+");
++  try {
++    await fd.truncate(0);
++    await fd.writeFile(JSON.stringify(updatedLock));
++  } finally {
++    await fd.close();
++  }

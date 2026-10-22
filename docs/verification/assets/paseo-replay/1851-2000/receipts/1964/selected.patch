@@ -1,0 +1,32 @@
+FILE packages/server/src/server/checkout-diff-manager.test.ts
+RANGE {"path":"packages/server/src/server/checkout-diff-manager.test.ts","old_lines":[13,13],"new_lines":[4,33],"diff_block_lines":[20,49],"hunk_header":"@@ -1,153 +1,134 @@","substantive_changed_lines":23}
++const { execMock, getCheckoutDiffMock, resolveCheckoutGitDirMock, readdirMock, watchCalls } =
++  vi.hoisted(() => {
++    const hoistedWatchCalls: Array<{ path: string; close: ReturnType<typeof vi.fn> }> = [];
++    return {
++      execMock: vi.fn((_command: string, _options: unknown, callback: (error: null, result: { stdout: string; stderr: string }) => void) => {
++        callback(null, { stdout: "/tmp/repo\n", stderr: "" });
++      }),
++      getCheckoutDiffMock: vi.fn(async () => ({ diff: "", structured: [] })),
++      resolveCheckoutGitDirMock: vi.fn(async () => "/tmp/repo/.git"),
++      readdirMock: vi.fn(async (directory: string) => {
++        if (directory === "/tmp/repo") {
++          return [
++            { name: "packages", isDirectory: () => true },
++            { name: ".git", isDirectory: () => true },
++            { name: "README.md", isDirectory: () => false },
++          ];
++        }
++        if (directory === path.join("/tmp/repo", "packages")) {
++          return [
++            { name: "server", isDirectory: () => true },
++            { name: "app", isDirectory: () => true },
++          ];
++        }
++        if (directory === path.join("/tmp/repo", "packages", "server")) {
++          return [{ name: "src", isDirectory: () => true }];
++        }
++        if (directory === path.join("/tmp/repo", "packages", "server", "src")) {
++          return [{ name: "server", isDirectory: () => true }];
++        }
++        return [];

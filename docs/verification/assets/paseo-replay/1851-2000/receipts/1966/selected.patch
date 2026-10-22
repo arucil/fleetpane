@@ -1,0 +1,32 @@
+FILE packages/app/src/constants/layout.ts
+RANGE {"path":"packages/app/src/constants/layout.ts","old_lines":[26,45],"new_lines":[27,46],"diff_block_lines":[15,44],"hunk_header":"@@ -24,39 +25,58 @@ export const DESKTOP_WINDOW_CONTROLS_WIDTH = 140;","substantive_changed_lines":16}
+-// Check if running in desktop app (any OS)
+-function isDesktopEnvironment(): boolean {
++// Check if running in the Electron desktop runtime (any OS)
++function isElectronDesktopRuntime(): boolean {
+   if (Platform.OS !== "web") return false;
+-  return isDesktop();
++  return isElectronRuntime();
+ }
+ 
+-// Check if running in desktop host on macOS
+-function isDesktopEnvironmentMac(): boolean {
++// Check if running in the Electron desktop runtime on macOS
++function isElectronDesktopRuntimeMac(): boolean {
+   if (Platform.OS !== "web") return false;
+-  return isDesktopMac();
++  return isElectronRuntimeMac();
+ }
+ 
+ // Cached result - only cache true, keep checking if false (in case desktop globals load later)
+-let _isDesktopMacCached: boolean | null = null;
+-let _isDesktopCached: boolean | null = null;
++let _isElectronRuntimeMacCached: boolean | null = null;
++let _isElectronRuntimeCached: boolean | null = null;
+ 
+-export function getIsDesktopMac(): boolean {
+-  if (_isDesktopMacCached === true) {
++export function getIsElectronRuntimeMac(): boolean {
++  if (_isElectronRuntimeMacCached === true) {
+     return true;
+   }

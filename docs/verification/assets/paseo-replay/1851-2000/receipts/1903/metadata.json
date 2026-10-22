@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1903,
+  "revision": "1b0fe4aa4732c2df824eea329f1488cf001f3103",
+  "date": "2026-03-28T09:26:32+07:00",
+  "committer_date": "2026-03-28T09:26:32+07:00",
+  "parents": [
+    "29876acae5af67670a1396e8d131a2847973087e"
+  ],
+  "subject": "fix(server): preserve packaged node runtime for supervised daemon worker",
+  "diff_tree_paths": [
+    "M\tpackages/server/scripts/daemon-runner.ts",
+    "M\tpackages/server/scripts/supervisor.ts"
+  ],
+  "source_receipt_digest": "sha256:4ceee2783d2e62defa14b59e3d3976a45264b7e0bfe319c389d6c261c20e9dd6",
+  "diff_tree_digest": "sha256:5ad0c6e1e6e08b8e33351ebc2e803f6cf21708f331d1a77c1d1108c9ef13f6af",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/scripts/supervisor.ts",
+      "old_lines": [
+        86,
+        93
+      ],
+      "new_lines": [
+        92,
+        107
+      ],
+      "diff_block_lines": [
+        28,
+        48
+      ],
+      "hunk_header": "@@ -85,9 +91,17 @@ export function runSupervisor(options: SupervisorOptions): void {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/1903/selected.patch"
+}

@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1960,
+  "revision": "ee50d3b8d0c14c88aa0181957581d6a51a63075f",
+  "date": "2026-03-31T16:03:36+07:00",
+  "committer_date": "2026-03-31T16:03:36+07:00",
+  "parents": [
+    "4b93f990d21af24b0c63c53120651fdd8ba1a54f"
+  ],
+  "subject": "WIP: fix archive tab reconciliation (#158)",
+  "diff_tree_paths": [
+    "A\tpackages/app/e2e/archive-tab.spec.ts",
+    "A\tpackages/app/e2e/helpers/archive-tab.ts",
+    "M\tpackages/app/src/runtime/host-runtime.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts"
+  ],
+  "source_receipt_digest": "sha256:52968081e8080e2074f65e3b1839cacddfab3cea631aa6507a623280719b4649",
+  "diff_tree_digest": "sha256:7a2a80bb7cd63dfa64a900342d42b4226f15f9ed156dc50055f84348da392f64",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        2020,
+        2027
+      ],
+      "new_lines": [
+        2002,
+        2024
+      ],
+      "diff_block_lines": [
+        111,
+        140
+      ],
+      "hunk_header": "@@ -1983,49 +1994,42 @@ export class Session {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 547,
+  "receipt_file": "receipts/1960/selected.patch"
+}

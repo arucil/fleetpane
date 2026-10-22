@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1908,
+  "revision": "a3aed9b8b680f4125d5324cfc166599912bd1f3a",
+  "date": "2026-03-28T11:14:43+07:00",
+  "committer_date": "2026-03-28T11:14:43+07:00",
+  "parents": [
+    "7ca428677cd5bcc297199d044479aada8084727f"
+  ],
+  "subject": "Fix desktop terminal link and context menu behavior",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/desktop/host.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/desktop/src/features/menu.ts",
+    "M\tpackages/desktop/src/preload.ts"
+  ],
+  "source_receipt_digest": "sha256:a4bbfe1543a7ac6507ca753fc4979332be14f170cdc8b8a2f82974c78e647ffb",
+  "diff_tree_digest": "sha256:5f98df44e889ce3a7ecdca7a74009b8d6f9957a1f535705abd2b35de4e98d254",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/features/menu.ts",
+      "old_lines": [
+        92,
+        92
+      ],
+      "new_lines": [
+        97,
+        126
+      ],
+      "diff_block_lines": [
+        18,
+        47
+      ],
+      "hunk_header": "@@ -90,3 +95,35 @@ export function setupApplicationMenu(): void {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 43,
+  "receipt_file": "receipts/1908/selected.patch"
+}

@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1890,
+  "revision": "54b5a22688bc0ab96db0b0f58fe167828e742b17",
+  "date": "2026-03-27T20:50:18+07:00",
+  "committer_date": "2026-03-27T20:50:18+07:00",
+  "parents": [
+    "ab3443fd5265c91826277d4bce684cb462da0b35"
+  ],
+  "subject": "fix(windows): broken PATH propagation, ps usage, and claude binary resolution",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/runtime-toolchain.ts",
+    "M\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/speech/providers/local/sherpa/sherpa-runtime-env.ts"
+  ],
+  "source_receipt_digest": "sha256:ce87f15b0a1d1e190d6f5669c4cf21a69ddce92f9edd767f8f21175d07281521",
+  "diff_tree_digest": "sha256:f156d75ed4b4c0e3edbfab6a7c8d098ec68bdf633614dcb87da01c9f879c5566",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/runtime-toolchain.ts",
+      "old_lines": [
+        38,
+        44
+      ],
+      "new_lines": [
+        37,
+        64
+      ],
+      "diff_block_lines": [
+        33,
+        62
+      ],
+      "hunk_header": "@@ -35,11 +33,35 @@ export function resolveNodePathFromPid(pid: number): NodePathFromPidResult {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 52,
+  "receipt_file": "receipts/1890/selected.patch"
+}

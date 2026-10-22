@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[66,68],"new_lines":[66,95],"diff_block_lines":[7,36],"hunk_header":"@@ -65,4 +65,31 @@ interface FindExecutableDependencies {","substantive_changed_lines":20}
+ 
++function resolveWindowsPathEntries(deps: FindExecutableDependencies): string[] {
++  try {
++    const output = deps.execFileSync(
++      "powershell",
++      [
++        "-NoProfile",
++        "-NonInteractive",
++        "-Command",
++        [
++          '$machine = [Environment]::GetEnvironmentVariable("Path", "Machine")',
++          '$user = [Environment]::GetEnvironmentVariable("Path", "User")',
++          "if ($machine) { Write-Output $machine }",
++          "if ($user) { Write-Output $user }",
++        ].join("; "),
++      ],
++      { encoding: "utf8" },
++    );
++    return output
++      .split(/\r?\n/)
++      .flatMap((line) => line.split(";"))
++      .map((entry) => entry.trim())
++      .filter((entry) => entry.length > 0);
++  } catch {
++    return [];
++  }
++}
++
+ function resolveExecutableFromWhichOutput(
+   name: string,

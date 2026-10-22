@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/desktop-window.ts
+RANGE {"path":"packages/app/src/utils/desktop-window.ts","old_lines":[180,191],"new_lines":[189,210],"diff_block_lines":[28,57],"hunk_header":"@@ -179,22 +188,51 @@ export function useTrafficLightPadding(): { left: number; right: number; top: nu","substantive_changed_lines":19}
+ 
+-  if (!getIsDesktop() || isFullscreen) {
+-    return { left: 0, right: 0, top: 0, side: null };
+-  }
++  return useMemo((): RawWindowControlsPadding => {
++    if (!getIsDesktop() || isFullscreen) {
++      return { left: 0, right: 0, top: 0 };
++    }
++
++    if (getIsDesktopMac()) {
++      return {
++        left: DESKTOP_TRAFFIC_LIGHT_WIDTH,
++        right: 0,
++        top: DESKTOP_TRAFFIC_LIGHT_HEIGHT,
++      };
++    }
+ 
+-  if (getIsDesktopMac()) {
+     return {
+-      left: DESKTOP_TRAFFIC_LIGHT_WIDTH,
+-      right: 0,
+-      top: DESKTOP_TRAFFIC_LIGHT_HEIGHT,
+-      side: 'left',
++      left: 0,
++      right: DESKTOP_WINDOW_CONTROLS_WIDTH,
++      top: DESKTOP_WINDOW_CONTROLS_HEIGHT,
+     };
++  }, [isFullscreen]);
++}
++

@@ -1,0 +1,92 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1896,
+  "revision": "be419110836078dcf5980602e58eb4f054b6afbe",
+  "date": "2026-03-28T00:25:04+07:00",
+  "committer_date": "2026-03-28T00:25:04+07:00",
+  "parents": [
+    "8f11902cb7d0547d7051f783bdbb35023a9ef185"
+  ],
+  "subject": "feat: add loop, schedule, and chat CLI commands (#149)",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "A\tpackages/cli/src/commands/chat/create.ts",
+    "A\tpackages/cli/src/commands/chat/delete.ts",
+    "A\tpackages/cli/src/commands/chat/index.ts",
+    "A\tpackages/cli/src/commands/chat/inspect.ts",
+    "A\tpackages/cli/src/commands/chat/ls.ts",
+    "A\tpackages/cli/src/commands/chat/post.ts",
+    "A\tpackages/cli/src/commands/chat/read.ts",
+    "A\tpackages/cli/src/commands/chat/schema.ts",
+    "A\tpackages/cli/src/commands/chat/shared.ts",
+    "A\tpackages/cli/src/commands/chat/wait.ts",
+    "A\tpackages/cli/src/commands/loop/index.ts",
+    "A\tpackages/cli/src/commands/loop/inspect.ts",
+    "A\tpackages/cli/src/commands/loop/logs.ts",
+    "A\tpackages/cli/src/commands/loop/ls.ts",
+    "A\tpackages/cli/src/commands/loop/run.ts",
+    "A\tpackages/cli/src/commands/loop/stop.ts",
+    "A\tpackages/cli/src/commands/loop/types.ts",
+    "A\tpackages/cli/src/commands/schedule/create.ts",
+    "A\tpackages/cli/src/commands/schedule/delete.ts",
+    "A\tpackages/cli/src/commands/schedule/index.ts",
+    "A\tpackages/cli/src/commands/schedule/inspect.ts",
+    "A\tpackages/cli/src/commands/schedule/logs.ts",
+    "A\tpackages/cli/src/commands/schedule/ls.ts",
+    "A\tpackages/cli/src/commands/schedule/pause.ts",
+    "A\tpackages/cli/src/commands/schedule/resume.ts",
+    "A\tpackages/cli/src/commands/schedule/schema.ts",
+    "A\tpackages/cli/src/commands/schedule/shared.ts",
+    "A\tpackages/cli/src/commands/schedule/types.ts",
+    "M\tpackages/cli/tests/15-provider.test.ts",
+    "A\tpackages/cli/tests/30-chat.test.ts",
+    "A\tpackages/cli/tests/31-loop-schedule.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent-attention-policy.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "A\tpackages/server/src/server/chat/chat-rpc-schemas.ts",
+    "A\tpackages/server/src/server/chat/chat-service.test.ts",
+    "A\tpackages/server/src/server/chat/chat-service.ts",
+    "A\tpackages/server/src/server/chat/chat-types.ts",
+    "A\tpackages/server/src/server/loop-service.test.ts",
+    "A\tpackages/server/src/server/loop-service.ts",
+    "A\tpackages/server/src/server/loop/rpc-schemas.ts",
+    "A\tpackages/server/src/server/schedule/cron.test.ts",
+    "A\tpackages/server/src/server/schedule/cron.ts",
+    "A\tpackages/server/src/server/schedule/rpc-schemas.ts",
+    "A\tpackages/server/src/server/schedule/service.test.ts",
+    "A\tpackages/server/src/server/schedule/service.ts",
+    "A\tpackages/server/src/server/schedule/store.test.ts",
+    "A\tpackages/server/src/server/schedule/store.ts",
+    "A\tpackages/server/src/server/schedule/types.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.notifications.test.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:fef42b7954419e1eeec675dc7d7e2adad532b56233673a7915557e817ab261ac",
+  "diff_tree_digest": "sha256:ef4909c8fab52c083118fcb59d4342e88364e47785765487034b8849042db3c7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/chat/index.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        11,
+        40
+      ],
+      "diff_block_lines": [
+        17,
+        46
+      ],
+      "hunk_header": "@@ -0,0 +1,75 @@",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 4511,
+  "receipt_file": "receipts/1896/selected.patch"
+}

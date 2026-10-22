@@ -1,0 +1,15 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[427,429],"new_lines":[431,443],"diff_block_lines":[27,39],"hunk_header":"@@ -426,4 +430,14 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {","substantive_changed_lines":6}
+ 
++  useEffect(() => {
++    if (isLoading || Platform.OS !== "web") {
++      return;
++    }
++
++    void setDesktopTitleBarTheme(resolvedTheme).catch((error) => {
++      console.warn("[DesktopWindow] Failed to update title bar theme", error);
++    });
++  }, [isLoading, resolvedTheme]);
++
+   if (isLoading) {
+     const isDesktopManaged =

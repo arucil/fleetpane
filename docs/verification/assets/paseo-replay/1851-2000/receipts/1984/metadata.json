@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1984,
+  "revision": "cafff08a30bb258fd46f0d05d284f7a27eee4669",
+  "date": "2026-04-01T17:36:26+07:00",
+  "committer_date": "2026-04-01T17:36:26+07:00",
+  "parents": [
+    "cb60f2a59677c6248717ecb234e9ca4f5943668e"
+  ],
+  "subject": "fix: rewrite titlebar drag to match VS Code's static pattern",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/desktop/titlebar-drag-region.tsx",
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/startup-splash-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:7ae23c11f1791dd99cbb5ae8a26923e4f2d81d648dae5ee8354ad6b8c125f7e6",
+  "diff_tree_digest": "sha256:99bc0cb0bf50c67c3ee190d46a8ab94e895b2126f886b9ba4664d479f3288eef",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/desktop/titlebar-drag-region.tsx",
+      "old_lines": [
+        100,
+        129
+      ],
+      "new_lines": [
+        29,
+        29
+      ],
+      "diff_block_lines": [
+        116,
+        145
+      ],
+      "hunk_header": "@@ -80,148 +27,30 @@ export function TitlebarDragRegion() {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 221,
+  "receipt_file": "receipts/1984/selected.patch"
+}

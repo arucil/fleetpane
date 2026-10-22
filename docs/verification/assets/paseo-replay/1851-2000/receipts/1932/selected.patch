@@ -1,0 +1,32 @@
+FILE packages/website/vite.config.ts
+RANGE {"path":"packages/website/vite.config.ts","old_lines":[35,44],"new_lines":[31,51],"diff_block_lines":[18,47],"hunk_header":"@@ -29,22 +29,43 @@ const sitemapPages = [","substantive_changed_lines":23}
+-      allow: [repoRoot],
++async function fetchLatestReleaseVersion(): Promise<string | undefined> {
++  try {
++    const res = await fetch(
++      "https://api.github.com/repos/getpaseo/paseo/releases/latest",
++      { headers: { Accept: "application/vnd.github+json" }, signal: AbortSignal.timeout(5000) },
++    );
++    if (!res.ok) return undefined;
++    const data = (await res.json()) as { tag_name: string };
++    return data.tag_name.replace(/^v/, "");
++  } catch {
++    return undefined;
++  }
++}
++
++export default defineConfig(async (): Promise<UserConfig> => {
++  const latestVersion = await fetchLatestReleaseVersion();
++
++  return {
++    define: {
++      ...(latestVersion && { __DESKTOP_VERSION__: JSON.stringify(latestVersion) }),
+     },
+-  },
+-  plugins: [
+-    cloudflare({ viteEnvironment: { name: "ssr" } }),
+-    tsConfigPaths(),
+-    tanstackStart({
+-      pages: sitemapPages,
+-      sitemap: {
+-        host: siteHost,

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/checkout-diff-manager.ts
+RANGE {"path":"packages/server/src/server/checkout-diff-manager.ts","old_lines":[0,0],"new_lines":[74,103],"diff_block_lines":[80,109],"hunk_header":"@@ -0,0 +1,361 @@","substantive_changed_lines":17}
++      initial,
++      unsubscribe: () => {
++        this.removeListener(target.key, listener);
++      },
++    };
++  }
++
++  scheduleRefreshForCwd(cwd: string): void {
++    const resolvedCwd = expandTilde(cwd);
++    for (const target of this.targets.values()) {
++      if (target.cwd !== resolvedCwd && target.diffCwd !== resolvedCwd) {
++        continue;
++      }
++      this.scheduleTargetRefresh(target);
++    }
++  }
++
++  getMetrics(): CheckoutDiffMetrics {
++    let checkoutDiffSubscriptionCount = 0;
++    let checkoutDiffWatcherCount = 0;
++    let checkoutDiffFallbackRefreshTargetCount = 0;
++
++    for (const target of this.targets.values()) {
++      checkoutDiffSubscriptionCount += target.listeners.size;
++      checkoutDiffWatcherCount += target.watchers.length;
++      if (target.fallbackRefreshInterval) {
++        checkoutDiffFallbackRefreshTargetCount += 1;
++      }
++    }
++

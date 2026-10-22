@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1997,
+  "revision": "2190910e6f3a88d2c73de2e89de73a39c7639264",
+  "date": "2026-03-30T17:30:31+07:00",
+  "committer_date": "2026-03-30T17:30:31+07:00",
+  "parents": [
+    "0d3f59feed7ecd54bf3ddc8f6aa5098b14a2677f"
+  ],
+  "subject": "fix: resolve type errors from main merge",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/worktree-session.ts"
+  ],
+  "source_receipt_digest": "sha256:7df2163a9af514b6429420d22d97a7ac9663f25f14c37a80325d9a65f5963d76",
+  "diff_tree_digest": "sha256:0e0fdecf4b34f057fa2dd2dbf8ec9f4433b60498b4abda8250590b68ae899957",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        5135,
+        5135
+      ],
+      "new_lines": [
+        5131,
+        5160
+      ],
+      "diff_block_lines": [
+        66,
+        95
+      ],
+      "hunk_header": "@@ -5114,23 +5117,66 @@ export class Session {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 146,
+  "receipt_file": "receipts/1997/selected.patch"
+}

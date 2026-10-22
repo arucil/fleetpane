@@ -1,0 +1,24 @@
+FILE docs/RELEASE.md
+RANGE {"path":"docs/RELEASE.md","old_lines":[64,72],"new_lines":[66,85],"diff_block_lines":[19,40],"hunk_header":"@@ -63,10 +65,21 @@ This ensures the checkout ref matches the actual code on `main` with the fix inc","substantive_changed_lines":9}
+ - If `release:publish` partially fails, re-run it — npm skips already-published versions
+-- Website Mac download CTA URL derives from `packages/website/package.json` version at build time
++- The website parses the first `## X.Y.Z` heading in `CHANGELOG.md` to determine the download version. This is why changelog entries must only be added at finalization, not during drafts.
++
++## Changelog format
++
++The website depends on the changelog to determine the latest download version. The heading format **must** be strictly followed:
++
++```
++## X.Y.Z - YYYY-MM-DD
++```
++
++No prefix (`v`), no extra text. The parser matches the first `## X.Y.Z` line to extract the version. A malformed heading will break download links on the homepage.
+ 
+ ## Completion checklist
+ 
+ - [ ] Update `CHANGELOG.md` with user-facing release notes (features, fixes — not refactors)
+-- [ ] `npm run release:patch` completes successfully
++- [ ] Verify the changelog heading follows strict `## X.Y.Z - YYYY-MM-DD` format
++- [ ] `npm run release:patch` (or `release:finalize` for drafts) completes successfully
+ - [ ] GitHub `Desktop Release` workflow for the `v*` tag is green
+ - [ ] GitHub `Android APK Release` workflow for the same tag is green

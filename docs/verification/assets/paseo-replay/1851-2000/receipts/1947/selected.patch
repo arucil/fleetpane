@@ -1,0 +1,9 @@
+FILE packages/server/src/server/bootstrap.ts
+RANGE {"path":"packages/server/src/server/bootstrap.ts","old_lines":[692,696],"new_lines":[692,696],"diff_block_lines":[5,11],"hunk_header":"@@ -692,5 +692,5 @@ export async function createPaseoDaemon(","substantive_changed_lines":2}
+@@ -692,5 +692,5 @@ export async function createPaseoDaemon(
+             }
+ 
+-            if (typeof process.send === "function") {
++            if (typeof process.send === "function" && process.env.PASEO_SUPERVISED === "1") {
+               process.send({
+                 type: "paseo:ready",

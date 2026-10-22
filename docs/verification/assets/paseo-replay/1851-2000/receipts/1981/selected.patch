@@ -1,0 +1,13 @@
+FILE docs/RELEASE.md
+RANGE {"path":"docs/RELEASE.md","old_lines":null,"new_lines":null,"diff_block_lines":[1,11],"hunk_header":null,"substantive_changed_lines":0}
+diff --git a/docs/RELEASE.md b/docs/RELEASE.md
+index 2ff67a19d..d9ab42cae 100644
+--- a/docs/RELEASE.md
++++ b/docs/RELEASE.md
+@@ -62,5 +62,5 @@ Use the RC path when you need to:
+ **NEVER bump the version to fix a build problem.** New versions are reserved for meaningful product changes (features, fixes, improvements). Build/CI failures are fixed on the current version.
+ 
+-**NEVER use `workflow_dispatch` to retry release builds.** The `workflow_dispatch` trigger runs the workflow file from the default branch but checks out the code at the tag ref (`ref: ${{ inputs.tag }}`). This means build fixes committed to `main` won't be picked up — the old broken code at the tag gets built again.
++**Do not rely on `workflow_dispatch` for tagged code fixes.** The `workflow_dispatch` trigger runs the workflow file from the default branch but checks out the code at the tag ref (`ref: ${{ inputs.tag }}`). That means fixes committed to `main` won't change the tagged source tree being built. `workflow_dispatch` only helps when the fix lives in the workflow file itself.
+ 
+ To retry a failed workflow, **always push a retry tag** on the commit you want to build:

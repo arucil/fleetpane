@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1868,
+  "revision": "5b3aea8bfe890fd54adfdd1412837f023e60f8a1",
+  "date": "2026-03-26T14:49:52+07:00",
+  "committer_date": "2026-03-26T14:49:52+07:00",
+  "parents": [
+    "e47eb64de09e526fa256f5730d5316512bf9909a"
+  ],
+  "subject": "fix(server): surface opencode questions in permission UI",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/daemon-e2e/opencode-plan-and-questions.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:7d6d2369cc8e028b868fa2e9c828c45a99b62712295af5e28e4ed5240a7f6b12",
+  "diff_tree_digest": "sha256:b72fcb1e07aaadb2f0ba717d1fbc098bc6eddd338819ba1bb99effb02f46135f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        788,
+        788
+      ],
+      "new_lines": [
+        830,
+        859
+      ],
+      "diff_block_lines": [
+        55,
+        84
+      ],
+      "hunk_header": "@@ -786,4 +822,58 @@ export function translateOpenCodeEvent(",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 167,
+  "receipt_file": "receipts/1868/selected.patch"
+}

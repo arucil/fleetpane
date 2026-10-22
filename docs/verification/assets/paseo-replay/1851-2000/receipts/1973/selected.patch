@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/provider-launch-config.ts
+RANGE {"path":"packages/server/src/server/agent/provider-launch-config.ts","old_lines":[233,234],"new_lines":[236,241],"diff_block_lines":[22,27],"hunk_header":"@@ -229,6 +232,10 @@ export function findExecutable(","substantive_changed_lines":3}
++          .split(/\r?\n/)
++          .map((line) => line.trim())
++          .find((line) => line.length > 0) ?? null
++      );
+     } catch {
+       return null;

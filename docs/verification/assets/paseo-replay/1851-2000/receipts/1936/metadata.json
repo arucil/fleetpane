@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1936,
+  "revision": "930660074d557301fcd6239597785ad2e9f0bd77",
+  "date": "2026-03-29T23:10:15+07:00",
+  "committer_date": "2026-03-29T23:10:15+07:00",
+  "parents": [
+    "fd030e8673ebb42afb87945df6ecb12ba8fab888"
+  ],
+  "subject": "fix(server): treat bare slash queries as search terms in project picker",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/utils/directory-suggestions.ts"
+  ],
+  "source_receipt_digest": "sha256:8818953418d1b24c18e19e24bef89fb4b07a1b95525e0cab303b98c7029c57aa",
+  "diff_tree_digest": "sha256:2649511f67021122f35191dfc14e71ca1bdf1148bc778bf06f23a448450da217",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/directory-suggestions.ts",
+      "old_lines": [
+        636,
+        643
+      ],
+      "new_lines": [
+        654,
+        661
+      ],
+      "diff_block_lines": [
+        44,
+        54
+      ],
+      "hunk_header": "@@ -633,11 +643,19 @@ function normalizeQueryParts(query: string, homeRoot: string): QueryParts | null",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 17,
+  "receipt_file": "receipts/1936/selected.patch"
+}

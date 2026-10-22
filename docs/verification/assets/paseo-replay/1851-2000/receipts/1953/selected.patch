@@ -1,0 +1,32 @@
+FILE packages/app/src/components/file-explorer-pane.tsx
+RANGE {"path":"packages/app/src/components/file-explorer-pane.tsx","old_lines":[554,575],"new_lines":[566,574],"diff_block_lines":[77,106],"hunk_header":"@@ -553,25 +565,29 @@ export function FileExplorerPane({","substantive_changed_lines":27}
+           <View style={styles.paneHeader} testID="files-pane-header">
+-            <View style={styles.paneHeaderLeft} />
+-            <View style={styles.paneHeaderRight}>
+-              <Pressable
+-                onPress={handleRefresh}
+-                disabled={isRefreshFetching}
+-                hitSlop={8}
+-                style={({ hovered, pressed }) => [
+-                  styles.iconButton,
+-                  (hovered || pressed) && styles.iconButtonHovered,
+-                ]}
+-                accessibilityRole="button"
+-                accessibilityLabel="Refresh files"
+-              >
+-                <Animated.View style={[styles.refreshIcon, refreshIconAnimatedStyle]}>
+-                  <RotateCw size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
+-                </Animated.View>
+-              </Pressable>
+-              <Pressable style={styles.sortButton} onPress={handleSortCycle}>
+-                <Text style={styles.sortButtonText}>{currentSortLabel}</Text>
+-              </Pressable>
+-            </View>
++            <Pressable
++              onPress={handleSortCycle}
++              style={({ hovered, pressed }) => [
++                styles.sortTrigger,
++                (hovered || pressed) && styles.sortTriggerHovered,
++              ]}
++            >
++              <Text style={styles.sortTriggerText}>{currentSortLabel}</Text>

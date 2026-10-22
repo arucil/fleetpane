@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1856,
+  "revision": "bb560809c700d47821006bb73e4479683f13821a",
+  "date": "2026-03-25T12:42:44-04:00",
+  "committer_date": "2026-03-25T23:42:44+07:00",
+  "parents": [
+    "765a11c7ab82ee4c6a47bc888091a7de8fd8e767"
+  ],
+  "subject": "Add support for Nix and NixOS (#130)",
+  "diff_tree_paths": [
+    "A\t.github/workflows/fix-nix-hash.yml",
+    "A\t.github/workflows/nix-build.yml",
+    "A\tflake.lock",
+    "A\tflake.nix",
+    "A\tnix/module.nix",
+    "A\tnix/package.nix",
+    "M\tpackage-lock.json",
+    "A\tscripts/fix-lockfile.mjs",
+    "A\tscripts/update-nix.sh"
+  ],
+  "source_receipt_digest": "sha256:bf2767da3c59aab27c4b60d8e58decd7b92ef0833fc89b0481fda8244f6e967d",
+  "diff_tree_digest": "sha256:13180ea6775d2aa8be53a6da8d10a5c76113ae8a9e440ca4a78c12170447e339",
+  "selected_hunk_ranges": [
+    {
+      "path": "scripts/update-nix.sh",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        7,
+        36
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -0,0 +1,63 @@",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 438,
+  "receipt_file": "receipts/1856/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[5135,5135],"new_lines":[5131,5160],"diff_block_lines":[66,95],"hunk_header":"@@ -5114,23 +5117,66 @@ export class Session {","substantive_changed_lines":22}
++    const projectId = Number(basePlacement.projectKey);
++    if (!Number.isInteger(projectId)) {
++      throw new Error(`Invalid project id for repo root ${options.repoRoot}`);
++    }
++
++    const now = new Date().toISOString();
++    const existingWorkspace = await this.findWorkspaceByDirectory(workspaceDirectory);
++    if (!existingWorkspace) {
++      const workspaceId = await this.workspaceRegistry.insert({
++        projectId,
++        directory: workspaceDirectory,
++        displayName: options.branchName,
++        kind: "worktree",
++        createdAt: now,
++        updatedAt: now,
++        archivedAt: null,
++      });
++      const workspace = await this.workspaceRegistry.get(workspaceId);
++      if (!workspace) {
++        throw new Error(`Workspace not found after insert: ${workspaceId}`);
++      }
++      await this.syncWorkspaceGitWatchTarget(workspace.directory, { isGit: true });
++      return workspace;
++    }
++
++    await this.workspaceRegistry.upsert({
++      id: existingWorkspace.id,
++      projectId,
++      directory: workspaceDirectory,
++      displayName: options.branchName,

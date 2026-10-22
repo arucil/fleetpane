@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/chat/index.ts
+RANGE {"path":"packages/cli/src/commands/chat/index.ts","old_lines":[0,0],"new_lines":[11,40],"diff_block_lines":[17,46],"hunk_header":"@@ -0,0 +1,75 @@","substantive_changed_lines":21}
++
++export function createChatCommand(): Command {
++  const chat = new Command("chat").description("Manage chat rooms for agent coordination");
++
++  addJsonAndDaemonHostOptions(
++    chat
++      .command("create")
++      .description("Create a chat room")
++      .argument("<name>", "Room name (must be unique)")
++      .option("--purpose <text>", "Room purpose/description"),
++  ).action(withOutput(runCreateCommand));
++
++  addJsonAndDaemonHostOptions(
++    chat.command("ls").description("List chat rooms"),
++  ).action(withOutput(runLsCommand));
++
++  addJsonAndDaemonHostOptions(
++    chat
++      .command("inspect")
++      .description("Inspect a chat room")
++      .argument("<name-or-id>", "Room name or ID"),
++  ).action(withOutput(runInspectCommand));
++
++  addJsonAndDaemonHostOptions(
++    chat
++      .command("delete")
++      .description("Delete a chat room")
++      .argument("<name-or-id>", "Room name or ID"),
++  ).action(withOutput(runDeleteCommand));
++

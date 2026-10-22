@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1900,
+  "revision": "a2ab0af3f142e1fdb3105eb7681c7d7dde811cab",
+  "date": "2026-03-28T00:31:18+07:00",
+  "committer_date": "2026-03-28T00:31:18+07:00",
+  "parents": [
+    "bb9e181c205e001e1be209f4c8891b43b3ae75f3"
+  ],
+  "subject": "feat(cli): distinguish local and connected daemon status",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/status.ts"
+  ],
+  "source_receipt_digest": "sha256:24d568c13780374623e4fa74eaa22110b0097143d55a71db689e2cdccc694b15",
+  "diff_tree_digest": "sha256:c35afac6585d14b89d7650c921dec242219166bfdcd2012945866922cf41fb38",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/status.ts",
+      "old_lines": [
+        229,
+        241
+      ],
+      "new_lines": [
+        233,
+        250
+      ],
+      "diff_block_lines": [
+        64,
+        93
+      ],
+      "hunk_header": "@@ -218,30 +227,51 @@ export async function runStatusCommand(",
+      "substantive_changed_lines": 27
+    }
+  ],
+  "selected_substantive_changed_lines": 27,
+  "available_substantive_changed_lines": 68,
+  "receipt_file": "receipts/1900/selected.patch"
+}

@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1949,
+  "revision": "7504d20b67431dfc772698525ce05f779b7c64a6",
+  "date": "2026-03-30T14:07:55+07:00",
+  "committer_date": "2026-03-30T14:07:55+07:00",
+  "parents": [
+    "db39417be9d43f2c11a89bb1a767c6cbb7a649af"
+  ],
+  "subject": "refactor(server): extract SpeechService and defer init until after listen",
+  "diff_tree_paths": [
+    "D\tpackages/cli/src/commands/speech/download.ts",
+    "M\tpackages/cli/src/commands/speech/index.ts",
+    "D\tpackages/cli/src/commands/speech/models.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.test.ts",
+    "M\tpackages/server/src/server/speech/speech-runtime.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/shared/messages.ts"
+  ],
+  "source_receipt_digest": "sha256:704e4e30dee17e5a12d09a69441c08132a5dda9f3e8c4a4bf15b6c1e1f1f67c6",
+  "diff_tree_digest": "sha256:2058463cab777163aa2c8a6762c0e539980df08beb3a846176f9bb7e263a52f7",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/speech-runtime.ts",
+      "old_lines": [
+        665,
+        668
+      ],
+      "new_lines": [
+        667,
+        693
+      ],
+      "diff_block_lines": [
+        60,
+        89
+      ],
+      "hunk_header": "@@ -659,14 +665,34 @@ export async function initializeSpeechRuntime(params: {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 380,
+  "receipt_file": "receipts/1949/selected.patch"
+}

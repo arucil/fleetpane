@@ -1,0 +1,32 @@
+FILE packages/app/src/app/index.tsx
+RANGE {"path":"packages/app/src/app/index.tsx","old_lines":[15,44],"new_lines":[4,4],"diff_block_lines":[21,50],"hunk_header":"@@ -1,112 +1,17 @@","substantive_changed_lines":25}
+-const STARTUP_TIMEOUT_MS = 30_000;
+-function useAnyHostOnline(serverIds: string[]): string | null {
+-  const runtime = getHostRuntimeStore();
+-  return useSyncExternalStore(
+-    (onStoreChange) => runtime.subscribeAll(onStoreChange),
+-    () => {
+-      let firstOnlineServerId: string | null = null;
+-      let firstOnlineAt: string | null = null;
+-      for (const serverId of serverIds) {
+-        const snapshot = runtime.getSnapshot(serverId);
+-        const lastOnlineAt = snapshot?.lastOnlineAt ?? null;
+-        if (!isHostRuntimeConnected(snapshot) || !lastOnlineAt) {
+-          continue;
+-        }
+-        if (!firstOnlineAt || lastOnlineAt < firstOnlineAt) {
+-          firstOnlineAt = lastOnlineAt;
+-          firstOnlineServerId = serverId;
+-        }
+-      }
+-      return firstOnlineServerId;
+-    },
+-    () => {
+-      let firstOnlineServerId: string | null = null;
+-      let firstOnlineAt: string | null = null;
+-      for (const serverId of serverIds) {
+-        const snapshot = runtime.getSnapshot(serverId);
+-        const lastOnlineAt = snapshot?.lastOnlineAt ?? null;
+-        if (!isHostRuntimeConnected(snapshot) || !lastOnlineAt) {
+-          continue;
+-        }

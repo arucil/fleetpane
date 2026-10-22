@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1943,
+  "revision": "8d0a9f922455fba4044fe51fb1317020183800f5",
+  "date": "2026-03-30T12:37:07+07:00",
+  "committer_date": "2026-03-30T12:37:07+07:00",
+  "parents": [
+    "e75873480796517b6bf2c7592cc2fa6bde2f31a2"
+  ],
+  "subject": "fix(server): fix daemon startup race and reduce log bloat",
+  "diff_tree_paths": [
+    "M\tnix/package.nix",
+    "M\tpackages/app/src/desktop/daemon/desktop-daemon.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/tests/22-daemon-stop-supervisor.test.ts",
+    "M\tpackages/cli/tests/23-daemon-sigint-supervisor.test.ts",
+    "M\tpackages/cli/tests/24-daemon-stop-ownership.test.ts",
+    "M\tpackages/cli/tests/25-daemon-restart-supervisor.test.ts",
+    "M\tpackages/cli/tests/26-daemon-restart-unsupervised.test.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "D\tpackages/server/scripts/daemon-runner.ts",
+    "M\tpackages/server/scripts/dev-runner.ts",
+    "M\tpackages/server/scripts/supervision-parity.test.ts",
+    "A\tpackages/server/scripts/supervisor-entrypoint.ts",
+    "M\tpackages/server/scripts/supervisor.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/index.ts",
+    "M\tpackages/server/src/server/pid-lock.test.ts",
+    "M\tpackages/server/src/server/pid-lock.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/tsconfig.scripts.json"
+  ],
+  "source_receipt_digest": "sha256:6ce2634837fd60d88825441be62fd35910f957af1c23b1f7b21320e18270b432",
+  "diff_tree_digest": "sha256:864cff0c28b267972d157f9bf116b677675294eee02be07fee700fd24a3a104c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/pid-lock.ts",
+      "old_lines": [
+        116,
+        116
+      ],
+      "new_lines": [
+        116,
+        145
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -115,4 +115,35 @@ export async function acquirePidLock(",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 428,
+  "receipt_file": "receipts/1943/selected.patch"
+}

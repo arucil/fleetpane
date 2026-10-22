@@ -1,0 +1,17 @@
+FILE packages/server/src/server/agent/providers/codex-app-server-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/codex-app-server-agent.ts","old_lines":[513,515],"new_lines":[513,527],"diff_block_lines":[7,21],"hunk_header":"@@ -512,4 +512,16 @@ class CodexAppServerClient {","substantive_changed_lines":9}
+ 
++    child.on("error", (err) => {
++      this.logger.error({ err }, "Codex app-server child process error");
++      for (const pending of this.pending.values()) {
++        clearTimeout(pending.timer);
++        pending.reject(err);
++      }
++      this.pending.clear();
++      this.disposed = true;
++      this.resolveExitPromise?.();
++      this.resolveExitPromise = null;
++    });
++
+     child.on("exit", (code, signal) => {
+       const message =

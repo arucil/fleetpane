@@ -19,10 +19,10 @@
   "indexed_unique_commits": 6215,
   "review_batch": {
     "first_ordinal": 1,
-    "last_ordinal": 1850,
-    "last_revision": "9ce6b45cf9f6643cdeec39b6bd677c3b8594de06",
-    "next_revision": "701480c11c147e06e5e7b14a02a4b3f89b2d7882",
-    "next_ordinal": 1851
+    "last_ordinal": 2000,
+    "last_revision": "a7d5ab24977e7b64e7f4f24b4f691544f0256976",
+    "next_revision": "f1ffecfcd4a2bbe67e2e2eac341c314f5e643dff",
+    "next_ordinal": 2001
   },
   "entries": [
     {
@@ -24807,6 +24807,1807 @@
       "fleetpane_action": "Native packaging remains a separate artifact workflow; no build/sign/install acceptance.",
       "inspection": "selected-source-or-config-hunk",
       "receipt_ledger": "../verification/assets/paseo-replay/1651-1850/review.json#1850"
+    },
+    {
+      "ordinal": 1851,
+      "revision": "701480c11c147e06e5e7b14a02a4b3f89b2d7882",
+      "category": "website-download",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Landing page removes dropdown handling for platform download links.",
+      "fleetpane_action": "Keep native artifact work separate; no website route needed for session behavior.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1851"
+    },
+    {
+      "ordinal": 1852,
+      "revision": "6d467d465954f481d88c9715b40b6596a6b3e550",
+      "category": "website-refactor",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Platform detection hook moves out of landing page.",
+      "fleetpane_action": "Do not copy UA detection into native Rust platform selection.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1852"
+    },
+    {
+      "ordinal": 1853,
+      "revision": "1768e2787ff857b0a1c95224c69c3a548543d2b9",
+      "category": "download-links",
+      "paths_inspected": [
+        "packages/website/src/routes/download.tsx"
+      ],
+      "finding": "Download page consumes shared Apple Silicon and Intel URLs.",
+      "fleetpane_action": "Future native release links must bind actual artifacts; no packaging acceptance here.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1853"
+    },
+    {
+      "ordinal": 1854,
+      "revision": "08e37540ebe2df03c46ecef38ac58cb42e5631b6",
+      "category": "package-metadata",
+      "paths_inspected": [
+        "packages/desktop/package.json"
+      ],
+      "finding": "Desktop manifest receives homepage, repository, author and license metadata.",
+      "fleetpane_action": "Keep Fleetpane independent identity and existing license provenance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1854"
+    },
+    {
+      "ordinal": 1855,
+      "revision": "765a11c7ab82ee4c6a47bc888091a7de8fd8e767",
+      "category": "package-metadata",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "finding": "Root author contact email changes.",
+      "fleetpane_action": "No runtime behavior to adopt.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1855"
+    },
+    {
+      "ordinal": 1856,
+      "revision": "bb560809c700d47821006bb73e4479683f13821a",
+      "category": "nix-packaging",
+      "paths_inspected": [
+        "scripts/update-nix.sh"
+      ],
+      "finding": "Update script fixes npm lock metadata then prefetches pinned nixpkgs dependencies.",
+      "fleetpane_action": "Rust Nix packaging remains a candidate; do not execute historical install/release scripts.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1856"
+    },
+    {
+      "ordinal": 1857,
+      "revision": "00e172798b862195ad7dcd8be7a10d830315c0f3",
+      "category": "download-docs",
+      "paths_inspected": [
+        "packages/website/src/routes/download.tsx"
+      ],
+      "finding": "Website CLI install command changes to global npm package install.",
+      "fleetpane_action": "Fleetpane uses native binaries; Node install path does not apply.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1857"
+    },
+    {
+      "ordinal": 1858,
+      "revision": "46d7512cc4bd72f764ba5fac0cbb5cea17cbaee4",
+      "category": "download-links",
+      "paths_inspected": [
+        "packages/website/src/routes/download.tsx"
+      ],
+      "finding": "Linux downloads use shared AppImage, DEB and RPM URLs.",
+      "fleetpane_action": "Native artifacts need their own build/install verification.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1858"
+    },
+    {
+      "ordinal": 1859,
+      "revision": "3fcc1ecedb2c8024070935c8610d72f425a01e94",
+      "category": "getting-started",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "README separates bundled desktop from headless daemon setup.",
+      "fleetpane_action": "Retain explicit Host versus controller launch in Fleetpane docs.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1859"
+    },
+    {
+      "ordinal": 1860,
+      "revision": "bf8ba4da8fc73da65300ba0dc357962f0eb99f69",
+      "category": "website-marketing",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Landing page adds mobile section and parity claim.",
+      "fleetpane_action": "Marketing is not behavior proof; mobile transport remains separate scope.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1860"
+    },
+    {
+      "ordinal": 1861,
+      "revision": "caab3f96862129734e265efa6c24186ec54dca82",
+      "category": "provider-marketing",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "README names Claude Code, Codex and OpenCode.",
+      "fleetpane_action": "Current priorities remain OpenCodex and DeepSeek Harness.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1861"
+    },
+    {
+      "ordinal": 1862,
+      "revision": "3cd1552ddc897467388d2580f21c92f9ccce334c",
+      "category": "orchestration-docs",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "README documents CLI run/list/attach/send and orchestration skill examples.",
+      "fleetpane_action": "Existing shared commands remain canonical; no automatic skill execution or agent creation.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1862"
+    },
+    {
+      "ordinal": 1863,
+      "revision": "f50252c3b186e75f5b3c4713e00024a707f77cb3",
+      "category": "orchestration-docs",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "README explains handoff, loops and chat orchestration examples.",
+      "fleetpane_action": "Treat examples as source material; shared scheduling remains missing.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1863"
+    },
+    {
+      "ordinal": 1864,
+      "revision": "612731a5b580838f613e0003504ee0295f5e83f6",
+      "category": "documentation-format",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "Skill examples receive Bash syntax highlighting.",
+      "fleetpane_action": "No runtime behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1864"
+    },
+    {
+      "ordinal": 1865,
+      "revision": "1ee7cace3642a1dc1c9d3b13a09e19fe73f6c37e",
+      "category": "orchestration-docs",
+      "paths_inspected": [
+        "README.md"
+      ],
+      "finding": "README explicitly labels orchestration skills experimental and setup dependent.",
+      "fleetpane_action": "Do not import private assumptions or run historical instructions.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1865"
+    },
+    {
+      "ordinal": 1866,
+      "revision": "eada5eec53ad2febdc15d1ae1e84cac1efa433be",
+      "category": "website-marketing",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Landing page changes sponsor presentation and local-first privacy copy.",
+      "fleetpane_action": "No native capability is established by this copy.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1866"
+    },
+    {
+      "ordinal": 1867,
+      "revision": "e47eb64de09e526fa256f5730d5316512bf9909a",
+      "category": "website-marketing",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Sponsor CTA wording changes.",
+      "fleetpane_action": "No implementation required.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1867"
+    },
+    {
+      "ordinal": 1868,
+      "revision": "5b3aea8bfe890fd54adfdd1412837f023e60f8a1",
+      "category": "provider-questions",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "OpenCode parser validates question ID/header/text and normalizes options/multiple selection.",
+      "fleetpane_action": "Current Codex/ACP request paths already preserve typed pending questions; OpenCode SDK adapter not required.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1868"
+    },
+    {
+      "ordinal": 1869,
+      "revision": "55dd3a9b1a9ffa7f64151a715f973889bac25ff3",
+      "category": "download-dialog",
+      "paths_inspected": [
+        "packages/website/src/components/command-dialog.tsx"
+      ],
+      "finding": "Command dialog installs and cleans up outside-click and Escape listeners.",
+      "fleetpane_action": "Native Kit controls own focus/lifecycle; no web listener port.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1869"
+    },
+    {
+      "ordinal": 1870,
+      "revision": "2e7bc49c4c619be04ee43e65ce9f5b91f8c0d813",
+      "category": "website-layout",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Mobile mockup receives horizontal overflow and minimum width.",
+      "fleetpane_action": "No native workflow change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1870"
+    },
+    {
+      "ordinal": 1871,
+      "revision": "c1d71dfedc5ef3ed7ddb6085ca463656cffbbf5b",
+      "category": "queued-prompts",
+      "paths_inspected": [
+        "packages/app/src/contexts/session-status-tracking.ts"
+      ],
+      "finding": "Status reconciliation retains previous lifecycle entries while adding/removing sessions.",
+      "fleetpane_action": "Inspect idle-dispatch boundary before introducing queued prompts; existing explicit follow-ups must not auto-send twice.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1871"
+    },
+    {
+      "ordinal": 1872,
+      "revision": "f13178a9adf7a3f108bcaea99abec0de1e5ffdda",
+      "category": "chat-portability",
+      "paths_inspected": [
+        "skills/paseo-chat/bin/chat.sh"
+      ],
+      "finding": "Chat script replaces mapfile with while-read array accumulation.",
+      "fleetpane_action": "Historical chat script is data, not authorization to send; Rust orchestration remains separate.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1872"
+    },
+    {
+      "ordinal": 1873,
+      "revision": "a2aac3797f4a231881a9cfbce28731f97f83fd2e",
+      "category": "file-change-rendering",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex/tool-call-mapper.ts"
+      ],
+      "finding": "Codex deletion mapping distinguishes existing unified patches from raw removed content.",
+      "fleetpane_action": "Git diff expansion deferred by user; preserve existing structured tool cards.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1873"
+    },
+    {
+      "ordinal": 1874,
+      "revision": "68df3048677065c3ba283fb2d284e6b252558f62",
+      "category": "startup-routing",
+      "paths_inspected": [
+        "packages/app/src/app/index.tsx"
+      ],
+      "finding": "Index route removes host startup polling as routing moves to welcome screen.",
+      "fleetpane_action": "Keep explicit Host choice/recovery; no automatic cross-Host fallback.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1874"
+    },
+    {
+      "ordinal": 1875,
+      "revision": "759815cfac5eda8d24716ff4ce29422a9a5f1cdc",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog lists queued prompts, questions, deletion rendering and Nix support.",
+      "fleetpane_action": "Release notes are metadata; no runtime tests claimed.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1875"
+    },
+    {
+      "ordinal": 1876,
+      "revision": "f2000ff789a22bdf05fe745c71202e4a92b1d7d5",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "App manifests bump internal package versions to 0.1.35.",
+      "fleetpane_action": "No native behavior change; dependency contents not audited.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1876"
+    },
+    {
+      "ordinal": 1877,
+      "revision": "7892b3cbe17ceb3a2b63d6a50eeae550ed95d59b",
+      "category": "nix-ci",
+      "paths_inspected": [
+        ".github/workflows/fix-nix-hash.yml"
+      ],
+      "finding": "Nix hash workflow adds main pushes on package/lock changes.",
+      "fleetpane_action": "Do not add npm hash CI to native Rust project.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1877"
+    },
+    {
+      "ordinal": 1878,
+      "revision": "c667aca3e0147bbf48e6ec3e685775f0f98325ed",
+      "category": "stale-design-doc",
+      "paths_inspected": [
+        "docs/design/agent-event-stream-redesign.md"
+      ],
+      "finding": "Deleted design text describes identity-owned provider turns replacing timing-based routing.",
+      "fleetpane_action": "Retain single provider event path and turn IDs; deleted proposals are not running behavior proof.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1878"
+    },
+    {
+      "ordinal": 1879,
+      "revision": "d8e9298222f74f70133d1c8395f5a993fb3f30f5",
+      "category": "performance-metrics",
+      "paths_inspected": [
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "finding": "Server records per-request latency samples and computes summary statistics.",
+      "fleetpane_action": "Need bounded measurements and equivalent release workloads; no speedup from language choice alone.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1879"
+    },
+    {
+      "ordinal": 1880,
+      "revision": "ca443b3ecf0ff6c7f5b2603de1049585394e64ed",
+      "category": "windows-and-metrics",
+      "paths_inspected": [
+        "packages/server/src/server/websocket-server.ts"
+      ],
+      "finding": "Selected websocket hunk also adds request latency collection in Windows-path commit.",
+      "fleetpane_action": "Title is broader than inspected source; Windows paths not audited in this entry; follow up separately.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1880"
+    },
+    {
+      "ordinal": 1881,
+      "revision": "e6c06e22639f780a269773269b9d0a5704265b0d",
+      "category": "windows-listen",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "First-parent merge rejects Windows drive paths as Unix listeners and parses numeric/host TCP separately.",
+      "fleetpane_action": "Local Unix Host transport remains explicit; Windows runtime acceptance separate.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1881"
+    },
+    {
+      "ordinal": 1882,
+      "revision": "89f285ffd0b03af8e111cd361769c50811134964",
+      "category": "release-docs",
+      "paths_inspected": [
+        "docs/RELEASE.md"
+      ],
+      "finding": "Release guide ties download version extraction to changelog heading format.",
+      "fleetpane_action": "Keep artifact identities independent of prose parsing when native packaging is added.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1882"
+    },
+    {
+      "ordinal": 1883,
+      "revision": "57291b1fd9d299446e13643b97e5d9fd72adf21f",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal package dependencies bump to 0.1.36.",
+      "fleetpane_action": "No runtime change to adopt.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1883"
+    },
+    {
+      "ordinal": 1884,
+      "revision": "5adde123e320f846dd23cbcce1c8abecd6db2f40",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "Metadata only; dependency contents/build not audited.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1884"
+    },
+    {
+      "ordinal": 1885,
+      "revision": "76c357c88ce0ffd8124bd7bc884db4920dac98a1",
+      "category": "release-order",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "finding": "Release checks move before version mutation in package scripts.",
+      "fleetpane_action": "Validate before publication; do not execute release scripts.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1885"
+    },
+    {
+      "ordinal": 1886,
+      "revision": "dfa376f5ca42c5a964dc899468a7caac16e1e0a1",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog records Windows paths, Nix hash and metrics.",
+      "fleetpane_action": "Metadata only, not native Windows or performance evidence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1886"
+    },
+    {
+      "ordinal": 1887,
+      "revision": "80e153f861783bba7c25ee0c934e4362b9a7c2d2",
+      "category": "desktop-logging",
+      "paths_inspected": [
+        "packages/desktop/src/main.ts"
+      ],
+      "finding": "Electron main imports and initializes file logging.",
+      "fleetpane_action": "Native bounded diagnostic logs remain candidate; no Electron dependency.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1887"
+    },
+    {
+      "ordinal": 1888,
+      "revision": "95ad879f82928e6aa64a5d8a9b2d5cc3644cb09d",
+      "category": "voice-errors",
+      "paths_inspected": [
+        "packages/app/src/components/message-input.tsx"
+      ],
+      "finding": "Dictation error path now raises a toast instead of console-only logging.",
+      "fleetpane_action": "Voice remains P2; boundary failures must be user-visible.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1888"
+    },
+    {
+      "ordinal": 1889,
+      "revision": "ab3443fd5265c91826277d4bce684cb462da0b35",
+      "category": "window-chrome",
+      "paths_inspected": [
+        "packages/app/src/utils/desktop-window.ts"
+      ],
+      "finding": "Desktop inset helper distinguishes macOS left traffic lights from other desktop right controls.",
+      "fleetpane_action": "Retain native window lifecycle; custom cross-platform chrome needs own acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1889"
+    },
+    {
+      "ordinal": 1890,
+      "revision": "54b5a22688bc0ab96db0b0f58fe167828e742b17",
+      "category": "windows-process",
+      "paths_inspected": [
+        "packages/cli/src/commands/daemon/runtime-toolchain.ts"
+      ],
+      "finding": "Windows runtime toolchain resolves executable path via wmic and reports exit/parse errors.",
+      "fleetpane_action": "No ps/wmic emulation in Unix Host; Windows process support remains explicit gap.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1890"
+    },
+    {
+      "ordinal": 1891,
+      "revision": "89923b5f76bf7abd3d4d0cd89eb3b7321de3532e",
+      "category": "release-drafts",
+      "paths_inspected": [
+        ".github/workflows/desktop-release.yml"
+      ],
+      "finding": "Release workflow defaults absent GitHub release to draft.",
+      "fleetpane_action": "No automatic release publication.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1891"
+    },
+    {
+      "ordinal": 1892,
+      "revision": "6342057a6ff633aefcd697c4b2425a57209ebf68",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No Rust implementation required.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1892"
+    },
+    {
+      "ordinal": 1893,
+      "revision": "af35cccb5fb13bd3f99937e893d7ed00e8bbfeac",
+      "category": "release-notes",
+      "paths_inspected": [
+        "scripts/sync-release-notes-from-changelog.mjs"
+      ],
+      "finding": "Release-note sync returns explicitly when matching changelog entry is absent.",
+      "fleetpane_action": "Do not infer publication success from skipped sync.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1893"
+    },
+    {
+      "ordinal": 1894,
+      "revision": "e2b2b7c701956668602cee53bd5436b00d460900",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal package versions bump to 0.1.37.",
+      "fleetpane_action": "No native behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1894"
+    },
+    {
+      "ordinal": 1895,
+      "revision": "8f11902cb7d0547d7051f783bdbb35023a9ef185",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes again.",
+      "fleetpane_action": "No dependency or build acceptance claimed.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1895"
+    },
+    {
+      "ordinal": 1896,
+      "revision": "be419110836078dcf5980602e58eb4f054b6afbe",
+      "category": "orchestration-cli",
+      "paths_inspected": [
+        "packages/cli/src/commands/chat/index.ts"
+      ],
+      "finding": "Chat CLI exposes create/list/inspect/delete through shared command handlers.",
+      "fleetpane_action": "Scheduling/loops/chat remain missing; inspect service lifecycle before implementing native equivalents.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1896"
+    },
+    {
+      "ordinal": 1897,
+      "revision": "394b9cac13ca13645e3e756bdb8e57510b58afcb",
+      "category": "desktop-origin",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Allowed web origins replace file/null with paseo scheme.",
+      "fleetpane_action": "Native Unix IPC has distinct trust boundary; no blanket CORS copying.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1897"
+    },
+    {
+      "ordinal": 1898,
+      "revision": "7bc1f04e27ad7d09fa186ba4cb2a780ce241093d",
+      "category": "bootstrap-retries",
+      "paths_inspected": [
+        "packages/app/src/runtime/host-runtime.ts"
+      ],
+      "finding": "Host bootstrap adds delay between attempts and final visible failure logging.",
+      "fleetpane_action": "Do not mask causal startup errors with blanket retries; existing observed recovery remains explicit.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1898"
+    },
+    {
+      "ordinal": 1899,
+      "revision": "bb9e181c205e001e1be209f4c8891b43b3ae75f3",
+      "category": "preload-logging",
+      "paths_inspected": [
+        "packages/desktop/src/preload.ts"
+      ],
+      "finding": "Packaged preload removes logging bridge import.",
+      "fleetpane_action": "Electron-specific packaging change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1899"
+    },
+    {
+      "ordinal": 1900,
+      "revision": "a2ab0af3f142e1fdb3105eb7681c7d7dde811cab",
+      "category": "daemon-status",
+      "paths_inspected": [
+        "packages/cli/src/commands/daemon/status.ts"
+      ],
+      "finding": "CLI distinguishes connected API reachability from local PID status.",
+      "fleetpane_action": "Fleetpane diagnostics must retain exact endpoint/Host/provider identity; PID presence alone is not readiness.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1900"
+    },
+    {
+      "ordinal": 1901,
+      "revision": "657b3e1ccdcebff0bd2a8abcad3e98b8be114b33",
+      "category": "loop-archive",
+      "paths_inspected": [
+        "packages/server/src/server/agent/agent-manager.ts"
+      ],
+      "finding": "Archive persists an agent snapshot before marking archive and closing live context.",
+      "fleetpane_action": "Do not equate archive flag with resource completion; native mutation remains gated on full lifecycle support.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1901"
+    },
+    {
+      "ordinal": 1902,
+      "revision": "29876acae5af67670a1396e8d131a2847973087e",
+      "category": "orchestration-skills",
+      "paths_inspected": [
+        "skills/paseo-chat/bin/chat.sh"
+      ],
+      "finding": "Deleted shell chat usage implements rooms, posts and waits.",
+      "fleetpane_action": "Historical skill contents remain data; no automatic chat or other-agent messages.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1902"
+    },
+    {
+      "ordinal": 1903,
+      "revision": "1b0fe4aa4732c2df824eea329f1488cf001f3103",
+      "category": "supervised-runtime",
+      "paths_inspected": [
+        "packages/server/scripts/supervisor.ts"
+      ],
+      "finding": "Supervisor can use explicit worker spawn spec with packaged executable/environment.",
+      "fleetpane_action": "Native Host update must preserve precise process identity; Node spawning not applicable.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1903"
+    },
+    {
+      "ordinal": 1904,
+      "revision": "05a4e8f5a325a9c3954d6afb8a9d269fe319c788",
+      "category": "windows-runtime",
+      "paths_inspected": [
+        "packages/cli/src/commands/daemon/runtime-toolchain.ts"
+      ],
+      "finding": "Executable probes prefer PowerShell CIM/process and retain wmic fallback.",
+      "fleetpane_action": "Windows native support remains separate; no adding this on Linux.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1904"
+    },
+    {
+      "ordinal": 1905,
+      "revision": "7ca428677cd5bcc297199d044479aada8084727f",
+      "category": "chat-mentions",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Chat mentions resolve targets then send notifications concurrently with logged failures.",
+      "fleetpane_action": "Future chat delivery requires durable identity/dedup; no chat send authorized by reading source.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1905"
+    },
+    {
+      "ordinal": 1906,
+      "revision": "d5085294df19819e580d32f1e0fcde1e49b2b1c4",
+      "category": "updater-feedback",
+      "paths_inspected": [
+        "packages/app/src/desktop/updates/update-banner.tsx"
+      ],
+      "finding": "Update banner distinguishes available/installing/error/installed states.",
+      "fleetpane_action": "Native updater remains missing and must keep session lifetime independent.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1906"
+    },
+    {
+      "ordinal": 1907,
+      "revision": "93845db70a3e7d2c73e99519ce8474dd9eb66803",
+      "category": "chat-mentions",
+      "paths_inspected": [
+        "packages/server/src/server/chat/chat-mentions.ts"
+      ],
+      "finding": "Mention fanout moves to dedicated service and resolves stored plus live targets.",
+      "fleetpane_action": "Retain explicit ownership and bounded fanout when orchestration is added.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1907"
+    },
+    {
+      "ordinal": 1908,
+      "revision": "a3aed9b8b680f4125d5324cfc166599912bd1f3a",
+      "category": "terminal-context-menu",
+      "paths_inspected": [
+        "packages/desktop/src/features/menu.ts"
+      ],
+      "finding": "Desktop IPC creates terminal-specific Copy/Paste/Select All menu using selection state.",
+      "fleetpane_action": "Native terminal selection/context-menu remains a useful gap; explicit full copy already exists.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1908"
+    },
+    {
+      "ordinal": 1909,
+      "revision": "2e9f935dbc84cf88fc9e52dad9ee48a9dda516f7",
+      "category": "website-mockups",
+      "paths_inspected": [
+        "packages/website/src/components/hero-mockup.tsx"
+      ],
+      "finding": "Animated mockup declares sample user/text/tool chat union and canned agent activity.",
+      "fleetpane_action": "Mockups do not prove implementation, speed or parity.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1909"
+    },
+    {
+      "ordinal": 1910,
+      "revision": "03a5323755f17c087221ac94ee248ac48cb0fa20",
+      "category": "merge-mockups",
+      "paths_inspected": [
+        "packages/website/src/components/hero-mockup.tsx"
+      ],
+      "finding": "First-parent merge includes animated website chat mockup.",
+      "fleetpane_action": "Selected source only; terminal path changes in merge not audited in this entry.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1910"
+    },
+    {
+      "ordinal": 1911,
+      "revision": "9ad3e7661ba7103265e3272f5b22a26d38ae04f6",
+      "category": "sidebar-state",
+      "paths_inspected": [
+        "packages/app/src/utils/sidebar-animation-state.ts"
+      ],
+      "finding": "Animation synchronization depends on open state/window width rather than theme object.",
+      "fleetpane_action": "Native sidebar layout must survive theme rerenders; included in resize acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1911"
+    },
+    {
+      "ordinal": 1912,
+      "revision": "dae677edeb5f8ca1d425cb1465502db8cd1c119c",
+      "category": "merge-sidebar",
+      "paths_inspected": [
+        "packages/app/src/utils/sidebar-animation-state.ts"
+      ],
+      "finding": "First-parent merge preserves same open/width animation predicate.",
+      "fleetpane_action": "Retain per-Host state rather than recreate view on theme change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1912"
+    },
+    {
+      "ordinal": 1913,
+      "revision": "01bab92fed40519cb2fe1cdb4360893e3c421362",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash updated.",
+      "fleetpane_action": "Metadata only; no native behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1913"
+    },
+    {
+      "ordinal": 1914,
+      "revision": "62b1e94257005a4a54d375c9b81f9851ea76b879",
+      "category": "startup-metrics",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Bootstrap logs elapsed time before loading persisted registry.",
+      "fleetpane_action": "Log actual phases without treating elapsed time as successful recovery.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1914"
+    },
+    {
+      "ordinal": 1915,
+      "revision": "95d56ddf15a2ac49d4b3699b870d6976ef820ca4",
+      "category": "windows-path",
+      "paths_inspected": [
+        "packages/server/src/server/agent/provider-launch-config.ts"
+      ],
+      "finding": "Provider resolution fetches machine/user PATH through PowerShell and returns empty list on probe failure.",
+      "fleetpane_action": "Linux provider config stays explicit; do not swallow resolver errors in native implementation.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1915"
+    },
+    {
+      "ordinal": 1916,
+      "revision": "9eb1f93296b5d365e0a53fe83cc83fe9224a1111",
+      "category": "sidebar-style",
+      "paths_inspected": [
+        "packages/app/src/components/left-sidebar.tsx"
+      ],
+      "finding": "Mobile sidebar footer icon changes size.",
+      "fleetpane_action": "Native Kit sizing chosen independently.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1916"
+    },
+    {
+      "ordinal": 1917,
+      "revision": "f287c7f9727a990789548506f248292148054137",
+      "category": "theme-default",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-settings.ts"
+      ],
+      "finding": "Default theme changes from dark to auto.",
+      "fleetpane_action": "Fleetpane already uses device System appearance with local evidence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1917"
+    },
+    {
+      "ordinal": 1918,
+      "revision": "921ddf47a8d85542b36513e8a7aa1c63e68afaba",
+      "category": "window-theme",
+      "paths_inspected": [
+        "packages/desktop/src/window/window-manager.ts"
+      ],
+      "finding": "Window theme parser accepts light/dark and computes overlay colors from OS appearance.",
+      "fleetpane_action": "Native appearance exists; other platforms still need acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1918"
+    },
+    {
+      "ordinal": 1919,
+      "revision": "147482d6eda04c56e1d5c6bfbad7c58c33fffa4b",
+      "category": "window-theme-sync",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "Resolved app theme is forwarded to desktop window chrome after settings load.",
+      "fleetpane_action": "Native theme changes must not reset session/sidebar/drafts.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1919"
+    },
+    {
+      "ordinal": 1920,
+      "revision": "094864d779e1b8d18e0c2fd8adad67c498e51d99",
+      "category": "chat-transcript",
+      "paths_inspected": [
+        "packages/cli/src/commands/chat/schema.ts"
+      ],
+      "finding": "Human chat renderer includes author, timestamps, message ID, reply target and mentions.",
+      "fleetpane_action": "Future orchestration needs stable message IDs; no chat capability claimed.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1920"
+    },
+    {
+      "ordinal": 1921,
+      "revision": "831e3289e71b392bdce6a8d89b927827a53453bf",
+      "category": "launch-diagnostics",
+      "paths_inspected": [
+        "packages/cli/src/commands/daemon/local-daemon.ts"
+      ],
+      "finding": "Windows launch helper appends timestamp/PID and ignores logging failures.",
+      "fleetpane_action": "Keep startup failure visible; no unbounded best-effort log port.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1921"
+    },
+    {
+      "ordinal": 1922,
+      "revision": "a460c5e9b9532bda1853ed18fc1b2821320ebff0",
+      "category": "blog-drafts",
+      "paths_inspected": [
+        "packages/website/src/routes/blog/index.tsx"
+      ],
+      "finding": "Draft blog search parameter only accepts explicit true/empty/true-string.",
+      "fleetpane_action": "Website-only behavior.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1922"
+    },
+    {
+      "ordinal": 1923,
+      "revision": "b1d663557b6c4f0eba95ae4e4443fbdb5a245651",
+      "category": "launch-logging",
+      "paths_inspected": [
+        "packages/desktop/src/daemon/daemon-manager.ts"
+      ],
+      "finding": "Desktop launch logging switches from custom append file to electron-log.",
+      "fleetpane_action": "No Electron dependency in native rewrite.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1923"
+    },
+    {
+      "ordinal": 1924,
+      "revision": "efb8c8f229b00fd4eb7f118a50b97cedbd2e8413",
+      "category": "pr-status-cache",
+      "paths_inspected": [
+        "packages/server/src/utils/checkout-git.ts"
+      ],
+      "finding": "PR status adds bounded TTL cache and in-flight map reset hooks.",
+      "fleetpane_action": "Git/PR extension remains deferred; native caches need exact target identity.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1924"
+    },
+    {
+      "ordinal": 1925,
+      "revision": "409ab466cacdcb2ed73d1bdecfb1931c2d9f2a94",
+      "category": "architecture-blog",
+      "paths_inspected": [
+        "packages/website/posts/why-i-migrated-from-tauri-to-electron.md"
+      ],
+      "finding": "Draft blog reports Tauri rendering, bundling and Linux WebKitGTK concerns.",
+      "fleetpane_action": "Experience is qualitative source material; retain GPUI Kit and real render acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1925"
+    },
+    {
+      "ordinal": 1926,
+      "revision": "6c3559e90fd117d85f0951e3ef5e683b7fa06cb1",
+      "category": "diff-watchers",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Daemon-global diff manager schedules matching targets and exposes watcher/subscription counts.",
+      "fleetpane_action": "Diff/watch extension deferred; no poll scans in render path.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1926"
+    },
+    {
+      "ordinal": 1927,
+      "revision": "35446e01a23d8f515c285c04eb2e95c8555802fc",
+      "category": "archive-docs",
+      "paths_inspected": [
+        "skills/paseo/SKILL.md"
+      ],
+      "finding": "CLI skill documents archive and forced interrupt-before-archive.",
+      "fleetpane_action": "Documentation is not permission to stop sessions; preserve lifecycle gap explicitly.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1927"
+    },
+    {
+      "ordinal": 1928,
+      "revision": "096417d5ac1586f8706dd9a73e37cdebd710f169",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No native behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1928"
+    },
+    {
+      "ordinal": 1929,
+      "revision": "a1761363fa1b1517f1ad34f3b1fa9e42d00a3d83",
+      "category": "blog-drafts",
+      "paths_inspected": [
+        "packages/website/src/posts.ts"
+      ],
+      "finding": "Post loader also checks draft frontmatter when deciding visibility.",
+      "fleetpane_action": "Website-only behavior.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1929"
+    },
+    {
+      "ordinal": 1930,
+      "revision": "4318aa2bb1cd9c79720e5cb8ca9cb80002eb688e",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash and package lock update.",
+      "fleetpane_action": "Dependency package contents not audited.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1930"
+    },
+    {
+      "ordinal": 1931,
+      "revision": "971f74e2abf85daf06b13754bfc8b8cc2d557268",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash/lock change reverses prior hash.",
+      "fleetpane_action": "No native behavior or dependency acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1931"
+    },
+    {
+      "ordinal": 1932,
+      "revision": "fb42c8eea22b435985c04f22769b64afe3037c73",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/website/vite.config.ts"
+      ],
+      "finding": "Website build fetches latest release with timeout and optional override.",
+      "fleetpane_action": "Native updater needs artifact identity and explicit errors; no silent fallback design copied.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1932"
+    },
+    {
+      "ordinal": 1933,
+      "revision": "04b21f089c652ccb9049bbe3104e7a63a90fe155",
+      "category": "provider-preferences",
+      "paths_inspected": [
+        "packages/app/src/hooks/use-agent-form-state.ts"
+      ],
+      "finding": "Draft model/mode/thinking preferences merge into existing per-provider values.",
+      "fleetpane_action": "Profiles/defaults remain missing; preserve model-specific effort rather than overwrite another model.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1933"
+    },
+    {
+      "ordinal": 1934,
+      "revision": "bb73147efd69b6d0d691541728fa6ee423009ea6",
+      "category": "startup-recovery",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "Desktop startup exposes phase/error and explicit retry token.",
+      "fleetpane_action": "Existing Host recovery is explicit; integrated supervisor/launcher remains open.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1934"
+    },
+    {
+      "ordinal": 1935,
+      "revision": "fd030e8673ebb42afb87945df6ecb12ba8fab888",
+      "category": "installation-docs",
+      "paths_inspected": [
+        "packages/website/src/routes/docs/index.tsx"
+      ],
+      "finding": "Docs distinguish bundled desktop-managed daemon from optional CLI.",
+      "fleetpane_action": "Native packaging and session Host should be documented independently.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1935"
+    },
+    {
+      "ordinal": 1936,
+      "revision": "930660074d557301fcd6239597785ad2e9f0bd77",
+      "category": "directory-search",
+      "paths_inspected": [
+        "packages/server/src/utils/directory-suggestions.ts"
+      ],
+      "finding": "Path query parsing derives parent/search term after normalized last slash.",
+      "fleetpane_action": "Fleetpane loaded/MRU exact directory selectors exist; arbitrary filesystem search remains open.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1936"
+    },
+    {
+      "ordinal": 1937,
+      "revision": "a7439c8e56cbf01925c4c2c60e34924651883adb",
+      "category": "button-style",
+      "paths_inspected": [
+        "packages/app/src/components/ui/button.tsx"
+      ],
+      "finding": "Ghost button supports element/render-function/component icons with hover colors.",
+      "fleetpane_action": "Use native Kit button semantics; no React type assertions.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1937"
+    },
+    {
+      "ordinal": 1938,
+      "revision": "487af3c82201bebeadca5f8ffc4170fe729177f7",
+      "category": "header-style",
+      "paths_inspected": [
+        "packages/app/src/components/headers/menu-header.tsx"
+      ],
+      "finding": "Menu header passes optional borderless state.",
+      "fleetpane_action": "No new native workflow.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1938"
+    },
+    {
+      "ordinal": 1939,
+      "revision": "e5fd61f1313eea8819429efc8edf6237971aeefa",
+      "category": "empty-states",
+      "paths_inspected": [
+        "packages/app/src/screens/open-project-screen.tsx"
+      ],
+      "finding": "Open-project view provides explicit Add project action for empty hydrated catalog.",
+      "fleetpane_action": "Keep native empty state actionable without hiding errors or starting provider automatically.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1939"
+    },
+    {
+      "ordinal": 1940,
+      "revision": "8047394154eb78974184053a420b219222d9cbbf",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog describes native chrome/logging and Windows/dictation fixes.",
+      "fleetpane_action": "Release prose does not establish Fleetpane cross-platform acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1940"
+    },
+    {
+      "ordinal": 1941,
+      "revision": "352a4e793ae3c797b5afa9d8d34b268af3922cb8",
+      "category": "website-release",
+      "paths_inspected": [
+        ".github/workflows/deploy-website.yml"
+      ],
+      "finding": "Website deploy workflow triggers on published/edited releases.",
+      "fleetpane_action": "No website deployment required for Rust session workflows.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1941"
+    },
+    {
+      "ordinal": 1942,
+      "revision": "e75873480796517b6bf2c7592cc2fa6bde2f31a2",
+      "category": "website-style",
+      "paths_inspected": [
+        "packages/website/src/components/landing-page.tsx"
+      ],
+      "finding": "Landing page client icons change size/style.",
+      "fleetpane_action": "No new native feature.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1942"
+    },
+    {
+      "ordinal": 1943,
+      "revision": "8d0a9f922455fba4044fe51fb1317020183800f5",
+      "category": "startup-readiness",
+      "paths_inspected": [
+        "packages/server/src/server/pid-lock.ts"
+      ],
+      "finding": "PID lock update verifies owner then rewrites listen metadata.",
+      "fleetpane_action": "Host readiness must follow actual socket/provider handshake; preserve OS-owned lock rather than PID-only fence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1943"
+    },
+    {
+      "ordinal": 1944,
+      "revision": "3784357b7e53547033200ac3c466ea58e79eaef7",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog describes readiness race and trace payload bloat.",
+      "fleetpane_action": "Keep log metadata bounded and source identity exact; notes are not runtime evidence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1944"
+    },
+    {
+      "ordinal": 1945,
+      "revision": "82a235dada11988364b4053b55d7724949e1fa6b",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal packages bump to 0.1.38.",
+      "fleetpane_action": "No native behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1945"
+    },
+    {
+      "ordinal": 1946,
+      "revision": "f6630e16ff222f1324d0027937545cbcd9514fb3",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "Metadata only.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1946"
+    },
+    {
+      "ordinal": 1947,
+      "revision": "e0e4f228eb2a3192e20b1846c1a8c82fd56b3b1f",
+      "category": "supervisor-ready",
+      "paths_inspected": [
+        "packages/server/src/server/bootstrap.ts"
+      ],
+      "finding": "Ready IPC sends only when explicit supervised environment is enabled.",
+      "fleetpane_action": "Native supervisor should use authenticated process/socket identity; no env-only ownership claim.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1947"
+    },
+    {
+      "ordinal": 1948,
+      "revision": "db39417be9d43f2c11a89bb1a767c6cbb7a649af",
+      "category": "sidebar-scroll",
+      "paths_inspected": [
+        "packages/app/src/components/left-sidebar.tsx"
+      ],
+      "finding": "Mobile sidebar removes redundant overflow clipping.",
+      "fleetpane_action": "Native scroll/resize acceptance must catch clipping; no CSS workaround port.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1948"
+    },
+    {
+      "ordinal": 1949,
+      "revision": "7504d20b67431dfc772698525ce05f779b7c64a6",
+      "category": "speech-lifecycle",
+      "paths_inspected": [
+        "packages/server/src/server/speech/speech-runtime.ts"
+      ],
+      "finding": "Speech runtime defers first reconcile to explicit idempotent start and settles readiness errors.",
+      "fleetpane_action": "Voice stays P2 and must not block base Host readiness.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1949"
+    },
+    {
+      "ordinal": 1950,
+      "revision": "a94bc0720cc3c9a2a1da6acb24c9ec11531c65eb",
+      "category": "worktree-refactor",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Session removes inline Git/worktree preparation as it is extracted.",
+      "fleetpane_action": "Existing native worktree commands retain typed boundaries; teardown scripts still missing.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1950"
+    },
+    {
+      "ordinal": 1951,
+      "revision": "0d9bda12e620883efa12578b947e5f1539184c71",
+      "category": "window-insets",
+      "paths_inspected": [
+        "packages/app/src/utils/desktop-window.ts"
+      ],
+      "finding": "Desktop controls padding moves into memoized platform/fullscreen helper.",
+      "fleetpane_action": "Use native window bounds; custom chrome is separate acceptance.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1951"
+    },
+    {
+      "ordinal": 1952,
+      "revision": "e3b6e2dcfa2e4e84346c4d34cda895113a38e66f",
+      "category": "sponsorship",
+      "paths_inspected": [
+        ".github/FUNDING.yml"
+      ],
+      "finding": "Funding metadata specifies sponsor account and template providers.",
+      "fleetpane_action": "No product behavior; no account changes.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1952"
+    },
+    {
+      "ordinal": 1953,
+      "revision": "5b22aedaff61ffcf8be52256a4c8142eff287f21",
+      "category": "file-explorer-style",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "finding": "Explorer header replaces separate controls with sort trigger and label.",
+      "fleetpane_action": "Native file sort/tree remains candidate; source icons not copied.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1953"
+    },
+    {
+      "ordinal": 1954,
+      "revision": "0ba2f6b194d70cc146c190b52f8ff58bd878dc80",
+      "category": "terminal-cli",
+      "paths_inspected": [
+        "packages/cli/src/commands/terminal/capture.ts"
+      ],
+      "finding": "CLI capture renders terminal ID, lines and totalLines as JSON or joined text.",
+      "fleetpane_action": "Host CLI already exposes bounded raw cursor output; preserve bytes/omission semantics.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1954"
+    },
+    {
+      "ordinal": 1955,
+      "revision": "8eddb2ee1852881fb561d6ba1590eb1cf30b55dd",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash changes.",
+      "fleetpane_action": "No native behavior.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1955"
+    },
+    {
+      "ordinal": 1956,
+      "revision": "4e8e2589bfcbfcb04bc9fd2dd970d21d45b3094e",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Notes list terminal CLI, explorer icons and sidebar/inset fixes.",
+      "fleetpane_action": "No execution or acceptance inferred from notes.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1956"
+    },
+    {
+      "ordinal": 1957,
+      "revision": "b50b065bccc40f648f2478aa81b91000c78e81ab",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal dependencies bump to 0.1.39.",
+      "fleetpane_action": "No runtime change to port.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1957"
+    },
+    {
+      "ordinal": 1958,
+      "revision": "87f297e75540af1af5daf36d17447c25da52c63a",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix hash changes.",
+      "fleetpane_action": "Dependency contents not audited.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1958"
+    },
+    {
+      "ordinal": 1959,
+      "revision": "4b93f990d21af24b0c63c53120651fdd8ba1a54f",
+      "category": "updater-artifacts",
+      "paths_inspected": [
+        ".github/workflows/desktop-release.yml"
+      ],
+      "finding": "Release workflow downloads architecture manifests then merges update metadata.",
+      "fleetpane_action": "Native updater must bind architecture/digest; signing/install verification remains open.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1959"
+    },
+    {
+      "ordinal": 1960,
+      "revision": "ee50d3b8d0c14c88aa0181957581d6a51a63075f",
+      "category": "archive-visibility",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Archive emits stored-agent upsert/remove according to active filter and updates workspace.",
+      "fleetpane_action": "Native archive restoration stays separate from session close; refresh must retain draft identity.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1960"
+    },
+    {
+      "ordinal": 1961,
+      "revision": "07b077f1a28e7126f9d2b48be03bca8486173aac",
+      "category": "watcher-removal",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Selected diff removes recursive/nonrecursive watcher setup logic.",
+      "fleetpane_action": "Git watcher extension deferred; deletion alone does not prove replacement correctness.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1961"
+    },
+    {
+      "ordinal": 1962,
+      "revision": "27c8cfbd4b86dd67f4475345406490edd47ee9f1",
+      "category": "watcher-revert",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Revert reinstates recursive watcher fallback and explicit warnings.",
+      "fleetpane_action": "Track actual resulting implementation; do not treat every intermediate fix as final design.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1962"
+    },
+    {
+      "ordinal": 1963,
+      "revision": "4b12ebd5c00e2e6d20fe062d57d5ea4234626d4f",
+      "category": "watcher-replacement",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.ts"
+      ],
+      "finding": "Selected source again removes old watcher setup after focused Linux change.",
+      "fleetpane_action": "Deferred Git workflow; follow-up replacement needs bounded directory watcher lifecycle.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1963"
+    },
+    {
+      "ordinal": 1964,
+      "revision": "8d55764313c69b9a12f14214c06cc0495b379a9d",
+      "category": "watcher-test",
+      "paths_inspected": [
+        "packages/server/src/server/checkout-diff-manager.test.ts"
+      ],
+      "finding": "Watcher test uses hoisted mocked directory tree and captures watch calls.",
+      "fleetpane_action": "Tests are source evidence only; not executed against historical app.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1964"
+    },
+    {
+      "ordinal": 1965,
+      "revision": "f53c770a71651b46f5df54aaa718d53c13e8b589",
+      "category": "bulk-close",
+      "paths_inspected": [
+        "packages/app/src/screens/workspace/workspace-bulk-close.ts"
+      ],
+      "finding": "Bulk-close helper removes only successful terminal results and uses batch RPC for destructive tabs.",
+      "fleetpane_action": "Native tabs remain missing; close-view and stop-resource must stay distinct and failures visible.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1965"
+    },
+    {
+      "ordinal": 1966,
+      "revision": "51411182fe44343f0844944c8151fb7674e560eb",
+      "category": "runtime-detection",
+      "paths_inspected": [
+        "packages/app/src/constants/layout.ts"
+      ],
+      "finding": "Desktop detection is renamed to explicit Electron runtime check.",
+      "fleetpane_action": "Window width must not imply runtime capabilities; native platform boundary remains explicit.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1966"
+    },
+    {
+      "ordinal": 1967,
+      "revision": "c635eabff321bdac23aeab314085e46e7bdcb275",
+      "category": "model-loading",
+      "paths_inspected": [
+        "packages/app/src/components/agent-status-bar.model-loading.ts"
+      ],
+      "finding": "Loading helper includes isFetching as well as initial isLoading.",
+      "fleetpane_action": "Native model catalog already endpoint/view scoped; cache defaults/profiles remain open.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1967"
+    },
+    {
+      "ordinal": 1968,
+      "revision": "9c4dee536442001a8bb063a496b32d9590ac80b1",
+      "category": "provider-spawn",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/codex-app-server-agent.ts"
+      ],
+      "finding": "Codex child error rejects pending work, clears timers and settles exit promise.",
+      "fleetpane_action": "Rust spawn errors return from I/O boundary; provider loss must not kill independent PTY/Host state.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1968"
+    },
+    {
+      "ordinal": 1969,
+      "revision": "5cf8b7549d70db289c2daa02e00daefeb74d6d1c",
+      "category": "reasoning-identity",
+      "paths_inspected": [
+        "packages/server/src/server/agent/providers/opencode-agent.ts"
+      ],
+      "finding": "OpenCode translator uses known part type or delta field to separate reasoning.",
+      "fleetpane_action": "Current Codex/ACP item identities already separate text/reasoning; no new provider adapter.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1969"
+    },
+    {
+      "ordinal": 1970,
+      "revision": "e95554d7828e5e8583dd5ee962563877adb03542",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Notes summarize batch close, models, archive and Linux fixes.",
+      "fleetpane_action": "No acceptance claim from changelog.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1970"
+    },
+    {
+      "ordinal": 1971,
+      "revision": "30ebd4b7779e25edfd71b314a047ede560dee386",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal dependencies bump to 0.1.40.",
+      "fleetpane_action": "No native behavior change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1971"
+    },
+    {
+      "ordinal": 1972,
+      "revision": "2d02db6ae0bd3337d76498cbdecbfda1d3bc372a",
+      "category": "theme-semantics",
+      "paths_inspected": [
+        "packages/app/src/styles/theme.ts"
+      ],
+      "finding": "Theme gains explicit color scheme and structured shadow tokens.",
+      "fleetpane_action": "Use Kit semantic theme; native theme switch must preserve view state.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1972"
+    },
+    {
+      "ordinal": 1973,
+      "revision": "cce8dee21c9e7abe7b31931d6ea4fe7cf73aa4e4",
+      "category": "windows-resolution",
+      "paths_inspected": [
+        "packages/server/src/server/agent/provider-launch-config.ts"
+      ],
+      "finding": "Executable resolver trims first nonempty which output and handles failure.",
+      "fleetpane_action": "Selected hunk does not inspect all Windows shell spawn changes; Unix config remains explicit.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1973"
+    },
+    {
+      "ordinal": 1974,
+      "revision": "66732a2f48bb1e1875fe76339ac95e1b08cc31cd",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No native workflow.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1974"
+    },
+    {
+      "ordinal": 1975,
+      "revision": "3af5b0f0317bc456f81960533332a011d8728d35",
+      "category": "merge-nix",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "First-parent merge changes Nix hash only.",
+      "fleetpane_action": "Metadata-only merge inspection.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1975"
+    },
+    {
+      "ordinal": 1976,
+      "revision": "f7fd41a5f811e38c3bd911e4c75d5a2081f6d6d6",
+      "category": "release-flow",
+      "paths_inspected": [
+        "package.json"
+      ],
+      "finding": "Package scripts add RC version/promote commands with checks before mutation.",
+      "fleetpane_action": "No release execution; native artifact publication remains explicit.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1976"
+    },
+    {
+      "ordinal": 1977,
+      "revision": "1930a8a2f2135e7102653dfd5d4a0740e164f403",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal dependencies bump to 0.1.41-rc.1.",
+      "fleetpane_action": "No native workflow change.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1977"
+    },
+    {
+      "ordinal": 1978,
+      "revision": "3ee11efcd038be0e2aeb9007a3002b437bd643a3",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "Metadata only.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1978"
+    },
+    {
+      "ordinal": 1979,
+      "revision": "ba1bb1646e70b7f009b9711b28f4bb794bf0f32d",
+      "category": "release-docs",
+      "paths_inspected": [
+        "docs/RELEASE.md"
+      ],
+      "finding": "Docs distinguish public RC artifacts from latest stable website target.",
+      "fleetpane_action": "Future native updater needs explicit stable/prerelease channel.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1979"
+    },
+    {
+      "ordinal": 1980,
+      "revision": "fd06e109be6d6282d0aa427f5bb82c017dc4edfc",
+      "category": "release-shell",
+      "paths_inspected": [
+        ".github/workflows/android-apk-release.yml"
+      ],
+      "finding": "Android workflow explicitly selects Bash for environment emission.",
+      "fleetpane_action": "Not applicable to native session implementation.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1980"
+    },
+    {
+      "ordinal": 1981,
+      "revision": "953f7898e7d3ccb2093e23de458f3d7983383045",
+      "category": "release-identity",
+      "paths_inspected": [
+        "docs/RELEASE.md"
+      ],
+      "finding": "Docs distinguish workflow-file changes from tagged source fixes during dispatch.",
+      "fleetpane_action": "Keep source SHA/artifact/runtime verification separate.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1981"
+    },
+    {
+      "ordinal": 1982,
+      "revision": "58d72bea8715b8acf735703ab0d1c90172a84c58",
+      "category": "titlebar-lifecycle",
+      "paths_inspected": [
+        "packages/app/src/components/desktop/titlebar-drag-region.tsx"
+      ],
+      "finding": "Titlebar helper installs fullscreen resize subscription with disposed cleanup.",
+      "fleetpane_action": "Native view listeners must survive replacement without leaked subscription.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1982"
+    },
+    {
+      "ordinal": 1983,
+      "revision": "cb60f2a59677c6248717ecb234e9ca4f5943668e",
+      "category": "terminal-shell",
+      "paths_inspected": [
+        "packages/server/src/terminal/terminal.ts"
+      ],
+      "finding": "Windows shell uses ComSpec/COMSPEC, Unix uses SHELL or sh.",
+      "fleetpane_action": "Existing Unix Host owns PTY; Windows remains unimplemented rather than guessing shell.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1983"
+    },
+    {
+      "ordinal": 1984,
+      "revision": "cafff08a30bb258fd46f0d05d284f7a27eee4669",
+      "category": "titlebar-refactor",
+      "paths_inspected": [
+        "packages/app/src/components/desktop/titlebar-drag-region.tsx"
+      ],
+      "finding": "Static drag-region rewrite removes dynamic no-drag wrapper.",
+      "fleetpane_action": "No Electron CSS port; native drag/chrome requires independent interaction evidence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1984"
+    },
+    {
+      "ordinal": 1985,
+      "revision": "613450bac8f4c6924df2e62fc5e313053292e670",
+      "category": "timeline-limits",
+      "paths_inspected": [
+        "packages/server/src/server/agent/activity-curator.ts"
+      ],
+      "finding": "Activity curator default cap changes from 40 to unlimited.",
+      "fleetpane_action": "Native bounded paging must make omissions explicit; do not remove all bounds.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1985"
+    },
+    {
+      "ordinal": 1986,
+      "revision": "d8d04c545ea651c187538e114fbc890230afd94b",
+      "category": "release-docs",
+      "paths_inspected": [
+        "docs/RELEASE.md"
+      ],
+      "finding": "Retry-tag documentation describes moving tags to rebuild a different source commit.",
+      "fleetpane_action": "Do not execute force tags; preserve immutable source/artifact reporting.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1986"
+    },
+    {
+      "ordinal": 1987,
+      "revision": "c13972c83554cee8a693dd1fae19d7398f30ea18",
+      "category": "attachment-paths",
+      "paths_inspected": [
+        "packages/app/src/attachments/native/native-file-attachment-store.ts"
+      ],
+      "finding": "Native attachment URL conversion distinguishes POSIX, UNC and Windows drive paths.",
+      "fleetpane_action": "Current local Unix path confinement remains explicit; remote authority/Windows acceptance separate.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1987"
+    },
+    {
+      "ordinal": 1988,
+      "revision": "ade1e338eafe49aeb8f2b1fb3d919b39376e25c4",
+      "category": "shortcut-capture",
+      "paths_inspected": [
+        "packages/app/src/screens/settings/keyboard-shortcuts-section.tsx"
+      ],
+      "finding": "Rebinding UI combines captured combos with held modifier feedback.",
+      "fleetpane_action": "Configurable shortcuts remain missing; terminal modifier encoding has separate evidence.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1988"
+    },
+    {
+      "ordinal": 1989,
+      "revision": "963c79265aaf7f4774aafe6aa66a1232bebebbcb",
+      "category": "window-background",
+      "paths_inspected": [
+        "packages/desktop/src/window/window-manager.ts"
+      ],
+      "finding": "Theme update applies native window background before overlay handling.",
+      "fleetpane_action": "Native resize/light-dark QA must inspect actual frames; no Electron APIs.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1989"
+    },
+    {
+      "ordinal": 1990,
+      "revision": "b91884bc54f9f9d22e5d7156af22cc76dc47253e",
+      "category": "context-menu",
+      "paths_inspected": [
+        "packages/desktop/src/window/window-manager.ts"
+      ],
+      "finding": "Default desktop menu enables Copy only with selection plus Paste/Select All.",
+      "fleetpane_action": "Kit input controls provide native semantics; terminal selection remains gap.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1990"
+    },
+    {
+      "ordinal": 1991,
+      "revision": "4b7c62359240252928407a1bec476feb25017486",
+      "category": "release-notes",
+      "paths_inspected": [
+        "CHANGELOG.md"
+      ],
+      "finding": "Changelog records Windows, titlebar, context menu and history-cap fixes.",
+      "fleetpane_action": "No implementation proof from release notes.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1991"
+    },
+    {
+      "ordinal": 1992,
+      "revision": "26d69e2006911afc5d63ad43425be8e66da4af18",
+      "category": "release-version",
+      "paths_inspected": [
+        "packages/app/package.json"
+      ],
+      "finding": "Internal dependencies promote RC to 0.1.41.",
+      "fleetpane_action": "No native workflow.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1992"
+    },
+    {
+      "ordinal": 1993,
+      "revision": "cc09b61b190ea50891064ed5c8249f849c3cb1a9",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "Metadata only.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1993"
+    },
+    {
+      "ordinal": 1994,
+      "revision": "7d02e24d849542147f6712d8a7bc6414ebcf07c6",
+      "category": "storage-composer",
+      "paths_inspected": [
+        "packages/app/src/components/composer.tsx",
+        "packages/server/src/server/db/sqlite-database.ts"
+      ],
+      "finding": "Composer declares status/attention/draft/image hooks; supplemental SQLite opener enables FK/WAL then migrations.",
+      "fleetpane_action": "Fleetpane already stores revisioned private controller/journal SQLite; migration source/import compatibility remains separate.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1994"
+    },
+    {
+      "ordinal": 1995,
+      "revision": "edcd2fe5d533bfae359c4c9c468c2104ac2f42dd",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Branch package lock and Nix hash change.",
+      "fleetpane_action": "No dependency content audit.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1995"
+    },
+    {
+      "ordinal": 1996,
+      "revision": "0d3f59feed7ecd54bf3ddc8f6aa5098b14a2677f",
+      "category": "merge-explorer",
+      "paths_inspected": [
+        "packages/app/src/components/file-explorer-pane.tsx"
+      ],
+      "finding": "First-parent merge replaces explorer header controls with sort trigger.",
+      "fleetpane_action": "Native sort is useful candidate; other merged paths not fully audited.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1996"
+    },
+    {
+      "ordinal": 1997,
+      "revision": "2190910e6f3a88d2c73de2e89de73a39c7639264",
+      "category": "workspace-identity",
+      "paths_inspected": [
+        "packages/server/src/server/session.ts"
+      ],
+      "finding": "Workspace creation validates numeric project ID, inserts registry row then verifies readback.",
+      "fleetpane_action": "Native UUID/device/inode identity already explicit; never infer execution directory from display name.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1997"
+    },
+    {
+      "ordinal": 1998,
+      "revision": "e026223c80914dcd3948a57152510ce4d86836ab",
+      "category": "nix-hash",
+      "paths_inspected": [
+        "nix/package.nix"
+      ],
+      "finding": "Nix dependency hash changes.",
+      "fleetpane_action": "No native feature.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1998"
+    },
+    {
+      "ordinal": 1999,
+      "revision": "d8243bfb7261ef9c69e727dbf3acafb2e12913df",
+      "category": "workspace-routes",
+      "paths_inspected": [
+        "packages/app/src/app/_layout.tsx"
+      ],
+      "finding": "Route key combines server/workspace IDs and decodes workspace segment.",
+      "fleetpane_action": "Keep Host/workspace/session identities distinct; tabs/routes remain partial.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#1999"
+    },
+    {
+      "ordinal": 2000,
+      "revision": "a7d5ab24977e7b64e7f4f24b4f691544f0256976",
+      "category": "workspace-authority",
+      "paths_inspected": [
+        "packages/app/src/utils/workspace-execution.ts"
+      ],
+      "finding": "Execution authority rejects missing workspace/id/directory and returns stable workspace ID plus directory.",
+      "fleetpane_action": "Native catalog already binds precise endpoint and directory identity; no cwd/name fallback for mutation.",
+      "inspection": "selected-source-or-config-hunk",
+      "receipt_ledger": "../verification/assets/paseo-replay/1851-2000/review.json#2000"
     }
   ],
   "workflow_status": {

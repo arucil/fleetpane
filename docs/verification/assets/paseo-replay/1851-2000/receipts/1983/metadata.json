@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1983,
+  "revision": "cb60f2a59677c6248717ecb234e9ca4f5943668e",
+  "date": "2026-04-01T17:25:41+07:00",
+  "committer_date": "2026-04-01T17:25:41+07:00",
+  "parents": [
+    "58d72bea8715b8acf735703ab0d1c90172a84c58"
+  ],
+  "subject": "Fix Windows default shell for terminal creation",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:57ccac7bf44de1657179750b47e51bac785e2bb3b1732d944ee6c37fe33d5191",
+  "diff_tree_digest": "sha256:6876da7b715017ab35de12468889031c98fcf738669a2b70188e60d509b59a63",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/terminal/terminal.ts",
+      "old_lines": [
+        121,
+        123
+      ],
+      "new_lines": [
+        121,
+        139
+      ],
+      "diff_block_lines": [
+        7,
+        25
+      ],
+      "hunk_header": "@@ -120,4 +120,20 @@ export function ensureNodePtySpawnHelperExecutableForCurrentPlatform(",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/1983/selected.patch"
+}

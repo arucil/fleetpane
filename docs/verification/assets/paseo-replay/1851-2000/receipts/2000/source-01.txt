@@ -1,0 +1,71 @@
+}
+
+export function getWorkspaceExecutionAuthority(
+  input:
+    | {
+        workspace: WorkspaceDescriptor | null | undefined;
+      }
+    | {
+        workspaces: Map<string, WorkspaceDescriptor> | undefined;
+        workspaceId: string | null | undefined;
+      },
+): WorkspaceExecutionAuthorityResult {
+  const workspace =
+    "workspace" in input
+      ? input.workspace
+      : (() => {
+          const normalizedWorkspaceId = normalizeWorkspaceIdentity(input.workspaceId);
+          if (!normalizedWorkspaceId) {
+            return null;
+          }
+          return input.workspaces?.get(normalizedWorkspaceId) ?? null;
+        })();
+
+  if ("workspaces" in input) {
+    const normalizedWorkspaceId = normalizeWorkspaceIdentity(input.workspaceId);
+    if (!normalizedWorkspaceId) {
+      return {
+        ok: false,
+        reason: "workspace_id_missing",
+        message: "Workspace id is required.",
+      };
+    }
+  }
+
+  if (!workspace) {
+    return {
+      ok: false,
+      reason: "workspace_missing",
+      message:
+        "workspaces" in input
+          ? `Workspace not found: ${String(input.workspaceId ?? "")}`
+          : "Workspace not found.",
+    };
+  }
+
+  const workspaceDirectory = normalizeWorkspaceIdentity(workspace.workspaceDirectory);
+  if (!workspaceDirectory) {
+    return {
+      ok: false,
+      reason: "workspace_directory_missing",
+      message: `Workspace directory is missing for workspace ${workspace.id}`,
+    };
+  }
+
+  return {
+    ok: true,
+    authority: {
+      workspaceId: workspace.id,
+      workspaceDirectory,
+      workspace,
+    },
+  };
+}
+
+export function requireWorkspaceExecutionAuthority(
+  input:
+    | {
+        workspace: WorkspaceDescriptor | null | undefined;
+      }
+    | {
+        workspaces: Map<string, WorkspaceDescriptor> | undefined;

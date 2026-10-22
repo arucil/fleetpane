@@ -1,0 +1,32 @@
+FILE packages/server/src/server/chat/chat-mentions.ts
+RANGE {"path":"packages/server/src/server/chat/chat-mentions.ts","old_lines":[0,0],"new_lines":[21,50],"diff_block_lines":[27,56],"hunk_header":"@@ -0,0 +1,114 @@","substantive_changed_lines":20}
++
++export async function notifyChatMentions(input: NotifyChatMentionsInput): Promise<void> {
++  const mentionAgentIds = await resolveChatMentionTargetAgentIds({
++    authorAgentId: input.authorAgentId,
++    mentionAgentIds: input.mentionAgentIds,
++    storedAgents: await input.listStoredAgents(),
++    liveAgents: input.listLiveAgents(),
++  });
++  if (mentionAgentIds.length === 0) {
++    return;
++  }
++
++  const notification = buildChatMentionNotification({
++    room: input.room,
++    authorAgentId: input.authorAgentId,
++    body: input.body,
++    mentionAgentIds,
++  });
++
++  await Promise.all(
++    mentionAgentIds.map(async (mentionedAgentId) => {
++      const resolved = await input.resolveAgentIdentifier(mentionedAgentId);
++      if (!resolved.ok) {
++        input.logger.warn(
++          { mentionedAgentId, room: input.room, error: resolved.error },
++          "Failed to resolve chat mention target",
++        );
++        return;
++      }
++

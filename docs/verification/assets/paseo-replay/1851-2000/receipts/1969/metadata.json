@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1969,
+  "revision": "5cf8b7549d70db289c2daa02e00daefeb74d6d1c",
+  "date": "2026-04-01T13:35:42+07:00",
+  "committer_date": "2026-04-01T13:37:51+07:00",
+  "parents": [
+    "9c4dee536442001a8bb063a496b32d9590ac80b1"
+  ],
+  "subject": "fix(opencode): prevent reasoning content from duplicating as assistant text",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode-reasoning-dedup.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts",
+    "M\tpackages/server/src/test-utils/vitest-setup.ts"
+  ],
+  "source_receipt_digest": "sha256:041f004b4007c4af4ed49ae4b12f2cb2c99fa8d7990fa5a31a79106dde9e79c9",
+  "diff_tree_digest": "sha256:f049079043b52f85aeb67086b1e5df1e8e5bf59f2cd5b814763dd0ed2b2ee132",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/opencode-agent.ts",
+      "old_lines": [
+        818,
+        819
+      ],
+      "new_lines": [
+        819,
+        826
+      ],
+      "diff_block_lines": [
+        36,
+        43
+      ],
+      "hunk_header": "@@ -810,10 +817,10 @@ export function translateOpenCodeEvent(",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 100,
+  "receipt_file": "receipts/1969/selected.patch"
+}

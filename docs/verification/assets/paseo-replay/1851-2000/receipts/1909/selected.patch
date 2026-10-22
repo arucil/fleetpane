@@ -1,0 +1,32 @@
+FILE packages/website/src/components/hero-mockup.tsx
+RANGE {"path":"packages/website/src/components/hero-mockup.tsx","old_lines":[0,0],"new_lines":[40,69],"diff_block_lines":[46,75],"hunk_header":"@@ -0,0 +1,737 @@","substantive_changed_lines":20}
++
++function fade(delay: number) {
++  return {
++    initial: { opacity: 0, y: 8 } as const,
++    animate: { opacity: 1, y: 0 } as const,
++    transition: { duration: 0.5, delay, ease: "easeOut" as const },
++  };
++}
++
++// ── Data ────────────────────────────────────────────────
++
++type ChatItem =
++  | { type: "user"; text: string }
++  | { type: "text"; text: string; bold?: boolean }
++  | { type: "tool"; label: string; summary?: string; status: "running" | "done" };
++
++const CHAT: ChatItem[] = [
++  { type: "user", text: "Build me an internal dashboard for tracking customer returns" },
++  { type: "text", text: "I'll break this down into planning and implementation.", bold: true },
++  { type: "tool", label: "Run plan-technical", summary: "codex · plan-technical", status: "done" },
++  { type: "tool", label: "Run plan-design", summary: "claude · plan-design", status: "done" },
++  { type: "tool", label: "Wait for agents", summary: "plan-technical  plan-design", status: "done" },
++  { type: "text", text: "Got the plans. Spinning up Codex for implementation.", bold: true },
++  { type: "tool", label: "Run implement", summary: "codex · 12 files changed", status: "done" },
++  { type: "text", text: "Implementation done. Requesting review from Claude." },
++  { type: "tool", label: "Run review", summary: "claude · no issues found", status: "running" },
++  { type: "text", text: "All tasks complete. Dashboard is ready.", bold: true },
++];
++
++// ── Sidebar data ────────────────────────────────────────

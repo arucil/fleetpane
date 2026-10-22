@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1976,
+  "revision": "f7fd41a5f811e38c3bd911e4c75d5a2081f6d6d6",
+  "date": "2026-04-01T15:33:27+07:00",
+  "committer_date": "2026-04-01T15:33:27+07:00",
+  "parents": [
+    "3af5b0f0317bc456f81960533332a011d8728d35"
+  ],
+  "subject": "chore(release): add rc prerelease flow",
+  "diff_tree_paths": [
+    "M\t.github/workflows/android-apk-release.yml",
+    "M\t.github/workflows/deploy-app.yml",
+    "M\t.github/workflows/deploy-website.yml",
+    "M\t.github/workflows/desktop-release.yml",
+    "M\t.github/workflows/release-notes-sync.yml",
+    "M\tdocs/ANDROID.md",
+    "M\tdocs/RELEASE.md",
+    "M\tpackage.json",
+    "M\tpackages/app/.eas/workflows/release-mobile.yml",
+    "A\tscripts/emit-release-env.mjs",
+    "D\tscripts/finalize-current-release.mjs",
+    "M\tscripts/push-current-release-tag.mjs",
+    "A\tscripts/release-version-utils.mjs",
+    "A\tscripts/set-release-version.mjs",
+    "M\tscripts/sync-release-notes-from-changelog.mjs"
+  ],
+  "source_receipt_digest": "sha256:c036e80b9983db07424dfa8fae702ed0ccda8a4e0e8cb968f00a557c0c4bf88a",
+  "diff_tree_digest": "sha256:a49beaa7cd949a0d23e43ba732fa83a780a6b813ff610e9ac013596ef5b38bf6",
+  "selected_hunk_ranges": [
+    {
+      "path": "package.json",
+      "old_lines": [
+        43,
+        57
+      ],
+      "new_lines": [
+        43,
+        62
+      ],
+      "diff_block_lines": [
+        7,
+        35
+      ],
+      "hunk_header": "@@ -42,16 +42,21 @@",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 504,
+  "receipt_file": "receipts/1976/selected.patch"
+}

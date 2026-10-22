@@ -1,0 +1,28 @@
+FILE packages/app/src/components/ui/button.tsx
+RANGE {"path":"packages/app/src/components/ui/button.tsx","old_lines":[110,112],"new_lines":[130,155],"diff_block_lines":[64,89],"hunk_header":"@@ -106,7 +124,32 @@ export function Button({","substantive_changed_lines":12}
+ 
++  function renderIcon() {
++    if (!leftIcon) return null;
++
++    // Pre-rendered element — pass through
++    if (typeof leftIcon === "object" && "type" in leftIcon) {
++      return <View>{leftIcon}</View>;
++    }
++
++    const color = variant === "ghost"
++      ? (isGhostHovered ? theme.colors.foreground : theme.colors.foregroundMuted)
++      : theme.colors.foreground;
++    const iconSize = ICON_SIZE[size];
++
++    // Render function
++    if (typeof leftIcon === "function" && !leftIcon.prototype?.isReactComponent && leftIcon.length > 0) {
++      return <View>{(leftIcon as (color: string) => ReactElement)(color)}</View>;
++    }
++
++    // Component type
++    const Icon = leftIcon as ComponentType<{ color: string; size: number }>;
++    return <View><Icon color={color} size={iconSize} /></View>;
++  }
++
+   return (
+     <Pressable

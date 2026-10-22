@@ -1,0 +1,57 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1881,
+  "revision": "e6c06e22639f780a269773269b9d0a5704265b0d",
+  "date": "2026-03-27T18:18:56+07:00",
+  "committer_date": "2026-03-27T18:18:56+07:00",
+  "parents": [
+    "d8e9298222f74f70133d1c8395f5a993fb3f30f5",
+    "ca443b3ecf0ff6c7f5b2603de1049585394e64ed"
+  ],
+  "subject": "Merge branch 'main' of github.com:getpaseo/paseo",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/delete.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/worktree/archive.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "A\tpackages/cli/src/utils/paths.ts",
+    "M\tpackages/cli/tests/18-local-daemon-utils.test.ts",
+    "M\tpackages/cli/tests/28-client-ipc-targets.test.ts",
+    "A\tpackages/cli/tests/30-cwd-filter-paths.test.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:b929018f6d0dbf5b1843eeb36a37829dd510bd4dd9c079e6f99047db3518da45",
+  "diff_tree_digest": "sha256:a2165dad75e25556882edc914ef43eef99cdb51acc9b3b6e4dd1988ec0b2f798",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/bootstrap.ts",
+      "old_lines": [
+        45,
+        57
+      ],
+      "new_lines": [
+        49,
+        70
+      ],
+      "diff_block_lines": [
+        18,
+        47
+      ],
+      "hunk_header": "@@ -43,25 +47,30 @@ export function parseListenString(listen: string): ListenTarget {",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 260,
+  "receipt_file": "receipts/1881/selected.patch"
+}

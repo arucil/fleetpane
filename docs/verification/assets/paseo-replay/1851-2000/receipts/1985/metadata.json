@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1985,
+  "revision": "613450bac8f4c6924df2e62fc5e313053292e670",
+  "date": "2026-04-01T17:38:32+07:00",
+  "committer_date": "2026-04-01T17:38:32+07:00",
+  "parents": [
+    "cafff08a30bb258fd46f0d05d284f7a27eee4669"
+  ],
+  "subject": "fix: remove 40-item cap on activity curator timeline output",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/activity-curator.ts"
+  ],
+  "source_receipt_digest": "sha256:a17fdb7886c9740847d6947bd5b331ea5025269a9e20aaa70183ad7d09f656fd",
+  "diff_tree_digest": "sha256:9311c39dba8e5dddd0dca8d07bc90c3808cf6c979af9c2e242b033b576a57328",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/activity-curator.ts",
+      "old_lines": [
+        3,
+        7
+      ],
+      "new_lines": [
+        3,
+        7
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -3,5 +3,5 @@ import { isLikelyExternalToolName } from \"./tool-name-normalization.js\";",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/1985/selected.patch"
+}

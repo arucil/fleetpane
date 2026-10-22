@@ -1,0 +1,11 @@
+FILE skills/paseo/SKILL.md
+RANGE {"path":"skills/paseo/SKILL.md","old_lines":[54,57],"new_lines":[54,61],"diff_block_lines":[5,13],"hunk_header":"@@ -54,4 +54,8 @@ paseo inspect <agent-id>","substantive_changed_lines":2}
+@@ -54,4 +54,8 @@ paseo inspect <agent-id>
+ paseo stop <agent-id>
+ 
++# Archive an agent (soft-delete, removes from UI)
++paseo archive <agent-id>
++paseo archive <agent-id> --force  # Force archive running agent (interrupts first)
++
+ # Hard-delete an agent (interrupts first if needed)
+ paseo delete <agent-id>

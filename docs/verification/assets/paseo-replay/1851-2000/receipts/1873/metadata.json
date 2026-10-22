@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1873,
+  "revision": "a2aac3797f4a231881a9cfbce28731f97f83fd2e",
+  "date": "2026-03-26T17:53:57+07:00",
+  "committer_date": "2026-03-26T17:53:57+07:00",
+  "parents": [
+    "f13178a9adf7a3f108bcaea99abec0de1e5ffdda"
+  ],
+  "subject": "fix(server): translate Codex file deletions as removed lines instead of added lines",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex/tool-call-mapper.ts"
+  ],
+  "source_receipt_digest": "sha256:aafee9e121d3127c032c3c8da2dfb3305f4e79cdb38f24949d41f181dae10e20",
+  "diff_tree_digest": "sha256:97855926e75698b81386496f245ae641d65f3219d269416b13cdc4b04b07d7e4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/codex/tool-call-mapper.ts",
+      "old_lines": [
+        718,
+        720
+      ],
+      "new_lines": [
+        735,
+        757
+      ],
+      "diff_block_lines": [
+        66,
+        88
+      ],
+      "hunk_header": "@@ -717,4 +734,24 @@ function parseFileChangeEntries(",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 124,
+  "receipt_file": "receipts/1873/selected.patch"
+}

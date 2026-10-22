@@ -1,0 +1,32 @@
+FILE packages/website/posts/why-i-migrated-from-tauri-to-electron.md
+RANGE {"path":"packages/website/posts/why-i-migrated-from-tauri-to-electron.md","old_lines":[0,0],"new_lines":[1,30],"diff_block_lines":[7,36],"hunk_header":"@@ -0,0 +1,68 @@","substantive_changed_lines":18}
++---
++title: "Why I migrated from Tauri to Electron"
++description: "Why I migrated from Tauri to Electron after rendering, WebKitGTK, notifications, and bundling a Node daemon made the pragmatic choice obvious."
++date: "2026-03-29"
++draft: "true"
++---
++
++I picked Tauri because it felt like the smarter choice.
++
++Smaller runtime, lighter footprint, better story on paper. Electron felt brute-force by comparison. I remember having that feeling of "yeah, I'm not going to ship a whole browser just to build a desktop app."
++
++Then I had to ship a real app.
++
++Not a toy wrapper. A real cross-platform app with stable rendering requirements, a bundled Node daemon, and Linux support.
++
++That's when my opinion started changing.
++
++The first big crack was rendering stability. When you're building something you actually want people to use daily, that matters a lot more than the abstract elegance of the stack. I started caring less about theoretical efficiency and more about whether the UI behaved consistently across machines.
++
++Then came the daemon side.
++
++My app bundles a Node daemon. I spent a long time making that work inside Tauri. And to be fair, I did get it working. But at some point I had this pretty uncomfortable realization:
++
++I was basically reinventing Electron.
++
++I had picked Tauri partly to avoid bundling that whole world, and then product reality pushed me into rebuilding pieces of it anyway. What had started as architectural elegance was turning into self-inflicted complexity.
++
++Then WebKitGTK really pushed it over the edge.
++
++If you care about Linux, WebKitGTK is not some small implementation detail you can ignore. It becomes part of your product. Its bugs become your bugs. Its rendering behavior becomes your rendering behavior.

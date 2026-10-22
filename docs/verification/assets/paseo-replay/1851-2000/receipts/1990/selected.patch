@@ -1,0 +1,17 @@
+FILE packages/desktop/src/window/window-manager.ts
+RANGE {"path":"packages/desktop/src/window/window-manager.ts","old_lines":[219,221],"new_lines":[219,233],"diff_block_lines":[12,26],"hunk_header":"@@ -218,4 +218,16 @@ export function setupWindowResizeEvents(win: BrowserWindow): void {","substantive_changed_lines":8}
+ 
++export function setupDefaultContextMenu(win: BrowserWindow): void {
++  win.webContents.on("context-menu", (_event, params) => {
++    const menu = Menu.buildFromTemplate([
++      { role: "copy", enabled: params.selectionText.length > 0 },
++      { role: "paste" },
++      { type: "separator" },
++      { role: "selectAll" },
++    ]);
++    menu.popup({ window: win });
++  });
++}
++
+ /**
+  * Prevent Electron from navigating to files dragged onto the window.

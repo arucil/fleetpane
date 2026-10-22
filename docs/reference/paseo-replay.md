@@ -29,8 +29,8 @@
 不能先读完最新上游再把 fork 的所有变更追加到末尾，也不能仅按日期排序：
 提交时间可能倒退。序号只对本次固定的 tip 有效；更新 tip 后用完整 SHA 校验位置。
 
-**当前连续的限定路径审查到第 1850 个提交 `9ce6b45cf`（本地审查 2026-10-22）。**
-下一条是第 1851 个 `701480c11`。逐条记录明确列出实际读过的路径，
+**当前连续的限定路径审查到第 2000 个提交 `a7d5ab249`（本地审查 2026-10-22）。**
+下一条是第 2001 个 `f1ffecfcd`。逐条记录明确列出实际读过的路径，
 不把选定路径审查称为每个文件的完整审计。
 6215 是索引覆盖数，不是源码审查完成数，也不是待实现功能数。
 记录区分源码/配置 diff 检查与仅依赖元数据检查，不声称审计过依赖包内容、
@@ -1414,3 +1414,27 @@ Git Diff 扩展继续暂缓，Kimi/GLM 不适配；下一条第 1401 条
 
 本次重新 fetch 两个远端，tips 仍为上表固定 SHA。Git Diff 继续暂缓，Kimi/GLM 不适配。
 下一条第 1851 条 `701480c11c147e06e5e7b14a02a4b3f89b2d7882`。
+
+
+## 第 1851–2000 条：桌面可靠性、布局和执行身份
+
+[150 条来源记录](../verification/assets/paseo-replay/1851-2000/review.json)
+与[Git 对象完整性校验](../verification/assets/paseo-replay/1851-2000/validation.json)
+覆盖选定片段、4 段补充源码和 5 个 first-parent merge；未运行历史版本。
+
+- 原生侧栏的可调整宽度已有[Kit/Linux 验证](../verification/2026-10-22-sidebar-resize.md)，
+  包括真实拖动、上下限、隐藏恢复、主题变化和独立 Host 草稿保留。持久 tabs/layout 仍缺失。
+- 1871 的 idle-transition 提醒队列应保存前一状态，不能把目录刷新覆盖成当前状态后
+  再判断迁移。Fleetpane 仍显式发送/steer；自动排队调度未实现。
+- 1880/1881/1987 分开 Windows 路径、named pipe 与本地 Unix socket。
+  本批不把解析源码等同于 Windows 原生验收。
+- 1896–1920 的 loop/schedule/chat 是独立服务候选，仍缺失；历史 skill 不成为
+  自动发消息、安装或运行模型的授权。
+- 1943/1947 的启动 ready、1968 的 provider spawn error 和 1994 的 SQLite 边界
+  延续真实进程/存储身份。Fleetpane 的 journal、控制端 SQLite 和 provider 故障域已有
+  独立证据；不照搬 Node/Electron 的进程和发布实现。
+- 1997–2000 以稳定 workspace ID 和 execution directory 代替标签推断。
+  原生 catalog 已绑定 endpoint、UUID 和目录身份；setup/teardown、服务代理仍待实现。
+
+重新 fetch 上游/fork，固定 tips 未变化。Git Diff 暂缓，Kimi/GLM 不适配。
+下一条第 2001 条 `f1ffecfcd4a2bbe67e2e2eac341c314f5e643dff`。

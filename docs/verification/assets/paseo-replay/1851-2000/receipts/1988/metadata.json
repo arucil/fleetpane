@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1988,
+  "revision": "ade1e338eafe49aeb8f2b1fb3d919b39376e25c4",
+  "date": "2026-04-01T18:32:31+07:00",
+  "committer_date": "2026-04-01T18:32:31+07:00",
+  "parents": [
+    "c13972c83554cee8a693dd1fae19d7398f30ea18"
+  ],
+  "subject": "fix: show modifier keys and missing keys during shortcut rebinding",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/keyboard/shortcut-string.ts",
+    "M\tpackages/app/src/screens/settings/keyboard-shortcuts-section.tsx"
+  ],
+  "source_receipt_digest": "sha256:c9430b176359358534ed478baae6d97a2656210ee4df0d15d27b510a38ef0ad7",
+  "diff_tree_digest": "sha256:d612fb9031b6ef050429f688922319831e033e82760c6d2429e1ef46af51b974",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/settings/keyboard-shortcuts-section.tsx",
+      "old_lines": [
+        21,
+        29
+      ],
+      "new_lines": [
+        23,
+        42
+      ],
+      "diff_block_lines": [
+        19,
+        41
+      ],
+      "hunk_header": "@@ -20,10 +22,21 @@ import { getShortcutOs } from \"@/utils/shortcut-platform\";",
+      "substantive_changed_lines": 13
+    }
+  ],
+  "selected_substantive_changed_lines": 13,
+  "available_substantive_changed_lines": 43,
+  "receipt_file": "receipts/1988/selected.patch"
+}

@@ -1,0 +1,25 @@
+FILE packages/app/src/screens/settings/keyboard-shortcuts-section.tsx
+RANGE {"path":"packages/app/src/screens/settings/keyboard-shortcuts-section.tsx","old_lines":[21,29],"new_lines":[23,42],"diff_block_lines":[19,41],"hunk_header":"@@ -20,10 +22,21 @@ import { getShortcutOs } from \"@/utils/shortcut-platform\";","substantive_changed_lines":13}
+ 
+-function ShortcutSequence({ chord }: { chord: string[] | null }) {
+-  if (!chord || chord.length === 0) {
++function ShortcutSequence({
++  chord,
++  heldModifiers,
++}: {
++  chord: string[] | null;
++  heldModifiers: string | null;
++}) {
++  if ((!chord || chord.length === 0) && !heldModifiers) {
+     return <Text style={styles.capturingText}>Press shortcut...</Text>;
+   }
+ 
+-  return <Shortcut chord={chord.map(comboStringToShortcutKeys)} />;
++  const displayCombos = [...(chord ?? [])];
++  if (heldModifiers) {
++    displayCombos.push(heldModifiers);
++  }
++
++  return <Shortcut chord={displayCombos.map(comboStringToShortcutKeys)} />;
+ }
+ 

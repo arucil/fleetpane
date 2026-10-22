@@ -1,0 +1,9 @@
+FILE packages/website/src/routes/blog/index.tsx
+RANGE {"path":"packages/website/src/routes/blog/index.tsx","old_lines":[5,9],"new_lines":[5,9],"diff_block_lines":[5,11],"hunk_header":"@@ -5,5 +5,5 @@ import { pageMeta } from \"~/meta\";","substantive_changed_lines":2}
+@@ -5,5 +5,5 @@ import { pageMeta } from "~/meta";
+ export const Route = createFileRoute("/blog/")({
+   validateSearch: (search: Record<string, unknown>) => ({
+-    drafts: search.drafts !== undefined,
++    drafts: search.drafts === true || search.drafts === "" || search.drafts === "true",
+   }),
+   head: () => ({

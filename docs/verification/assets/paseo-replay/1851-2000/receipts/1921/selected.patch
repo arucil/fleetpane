@@ -1,0 +1,23 @@
+FILE packages/cli/src/commands/daemon/local-daemon.ts
+RANGE {"path":"packages/cli/src/commands/daemon/local-daemon.ts","old_lines":[116,118],"new_lines":[117,137],"diff_block_lines":[19,39],"hunk_header":"@@ -115,4 +116,22 @@ function buildChildEnv(options: DaemonStartOptions): NodeJS.ProcessEnv {","substantive_changed_lines":11}
+ 
++function appendLaunchLog(home: string, message: string, details?: Record<string, unknown>): void {
++  const line = [
++    new Date().toISOString(),
++    "[CLI daemon]",
++    `pid=${process.pid}`,
++    message,
++    details ? JSON.stringify(details) : "",
++  ]
++    .filter((part) => part.length > 0)
++    .join(" ");
++
++  try {
++    appendFileSync(path.join(home, DAEMON_LAUNCH_LOG_FILENAME), `${line}\n`, "utf-8");
++  } catch {
++    // Keep launch debugging best-effort so daemon startup behavior is unchanged.
++  }
++}
++
+ function resolveDaemonRunnerEntry(): string {
+   const serverExportPath = require.resolve("@getpaseo/server");

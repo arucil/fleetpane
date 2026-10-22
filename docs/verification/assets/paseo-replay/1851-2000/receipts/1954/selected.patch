@@ -1,0 +1,32 @@
+FILE packages/cli/src/commands/terminal/capture.ts
+RANGE {"path":"packages/cli/src/commands/terminal/capture.ts","old_lines":[0,0],"new_lines":[16,45],"diff_block_lines":[22,51],"hunk_header":"@@ -0,0 +1,99 @@","substantive_changed_lines":21}
++
++export async function runCaptureCommand(
++  terminalId: string,
++  _options: TerminalCaptureOptions,
++  command: Command,
++): Promise<void> {
++  const options = command.optsWithGlobals() as TerminalCaptureOptions;
++
++  try {
++    const payload = await executeCaptureCommand(terminalId, options);
++    if (options.json) {
++      process.stdout.write(
++        JSON.stringify(
++          {
++            terminalId: payload.terminalId,
++            lines: payload.lines,
++            totalLines: payload.totalLines,
++          },
++          null,
++          2,
++        ) + "\n",
++      );
++      return;
++    }
++
++    if (payload.lines.length > 0) {
++      process.stdout.write(payload.lines.join("\n") + "\n");
++    }
++  } catch (err) {
++    const output = renderError(toCommandError(err), {

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1915,
+  "revision": "95d56ddf15a2ac49d4b3699b870d6976ef820ca4",
+  "date": "2026-03-28T23:54:50+07:00",
+  "committer_date": "2026-03-28T23:54:50+07:00",
+  "parents": [
+    "62b1e94257005a4a54d375c9b81f9851ea76b879"
+  ],
+  "subject": "fix(server): resolve claude from current windows path",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:63e638a30d8f5964edde2cf8445a45948acff7fa33f63795274f8f4dc9371840",
+  "diff_tree_digest": "sha256:9240e3ed53d9577bbc174855d27c49d19be922339fa1b1ce229881bacf7ebc77",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/provider-launch-config.ts",
+      "old_lines": [
+        66,
+        68
+      ],
+      "new_lines": [
+        66,
+        95
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -65,4 +65,31 @@ interface FindExecutableDependencies {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 77,
+  "receipt_file": "receipts/1915/selected.patch"
+}

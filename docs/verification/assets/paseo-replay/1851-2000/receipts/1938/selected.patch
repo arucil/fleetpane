@@ -1,0 +1,9 @@
+FILE packages/app/src/components/headers/menu-header.tsx
+RANGE {"path":"packages/app/src/components/headers/menu-header.tsx","old_lines":[76,80],"new_lines":[77,81],"diff_block_lines":[11,17],"hunk_header":"@@ -76,5 +77,5 @@ export function SidebarMenuToggle({","substantive_changed_lines":2}
+@@ -76,5 +77,5 @@ export function SidebarMenuToggle({
+ }
+ 
+-export function MenuHeader({ title, rightContent }: MenuHeaderProps) {
++export function MenuHeader({ title, rightContent, borderless }: MenuHeaderProps) {
+   return (
+     <ScreenHeader

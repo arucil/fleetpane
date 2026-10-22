@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1905,
+  "revision": "7ca428677cd5bcc297199d044479aada8084727f",
+  "date": "2026-03-28T10:51:22+07:00",
+  "committer_date": "2026-03-28T10:51:22+07:00",
+  "parents": [
+    "05a4e8f5a325a9c3954d6afb8a9d269fe319c788"
+  ],
+  "subject": "Make chat mentions inline",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/chat/index.ts",
+    "M\tpackages/cli/src/commands/chat/post.ts",
+    "M\tpackages/cli/tests/30-chat.test.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/chat/chat-rpc-schemas.ts",
+    "M\tpackages/server/src/server/chat/chat-service.test.ts",
+    "M\tpackages/server/src/server/chat/chat-service.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tskills/paseo-chat/SKILL.md",
+    "M\tskills/paseo-orchestrator/SKILL.md",
+    "M\tskills/paseo/SKILL.md"
+  ],
+  "source_receipt_digest": "sha256:650674b70dda556b4901c4c546633c742bb972bf1b5fb6786963eb9f5362099f",
+  "diff_tree_digest": "sha256:37ba32631026577572a26b4a4caf4000e66b5c6e63335cea94f3e34e77390291",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7748,
+        7748
+      ],
+      "new_lines": [
+        7771,
+        7800
+      ],
+      "diff_block_lines": [
+        43,
+        72
+      ],
+      "hunk_header": "@@ -7746,4 +7751,66 @@ export class Session {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 121,
+  "receipt_file": "receipts/1905/selected.patch"
+}

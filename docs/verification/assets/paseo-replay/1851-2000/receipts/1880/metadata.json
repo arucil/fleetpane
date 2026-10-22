@@ -1,0 +1,62 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1880,
+  "revision": "ca443b3ecf0ff6c7f5b2603de1049585394e64ed",
+  "date": "2026-03-27T18:17:48+07:00",
+  "committer_date": "2026-03-27T18:17:48+07:00",
+  "parents": [
+    "c667aca3e0147bbf48e6ec3e685775f0f98325ed"
+  ],
+  "subject": "fix: handle Windows drive-letter paths across the codebase (#148)",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/global-setup.ts",
+    "A\tpackages/app/e2e/helpers/terminal-perf.ts",
+    "A\tpackages/app/e2e/terminal-performance.spec.ts",
+    "M\tpackages/cli/src/commands/agent/delete.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "M\tpackages/cli/src/commands/daemon/local-daemon.ts",
+    "M\tpackages/cli/src/commands/worktree/archive.ts",
+    "M\tpackages/cli/src/utils/client.ts",
+    "A\tpackages/cli/src/utils/paths.ts",
+    "M\tpackages/cli/tests/18-local-daemon-utils.test.ts",
+    "M\tpackages/cli/tests/28-client-ipc-targets.test.ts",
+    "A\tpackages/cli/tests/30-cwd-filter-paths.test.ts",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.ts",
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/bootstrap.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.test.ts",
+    "M\tpackages/server/src/terminal/terminal-manager.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:e53921e539e6cc500064622c40e78d235fc7481c72f6d28a9259d1dd1d8384cd",
+  "diff_tree_digest": "sha256:7bd3c4f8b4ed62cb28123223a6599be5ec2c9bedac908afaf303b6bcffed7c86",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        1149,
+        1153
+      ],
+      "new_lines": [
+        1165,
+        1194
+      ],
+      "diff_block_lines": [
+        39,
+        68
+      ],
+      "hunk_header": "@@ -1148,8 +1164,47 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 600,
+  "receipt_file": "receipts/1880/selected.patch"
+}

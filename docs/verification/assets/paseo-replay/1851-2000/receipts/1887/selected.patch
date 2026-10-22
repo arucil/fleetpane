@@ -1,0 +1,8 @@
+FILE packages/desktop/src/main.ts
+RANGE {"path":"packages/desktop/src/main.ts","old_lines":[1,2],"new_lines":[1,5],"diff_block_lines":[5,10],"hunk_header":"@@ -1,2 +1,5 @@","substantive_changed_lines":1}
+@@ -1,2 +1,5 @@
++import log from "electron-log/main";
++log.initialize();
++
+ import path from "node:path";
+ import { pathToFileURL } from "node:url";

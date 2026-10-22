@@ -1,0 +1,32 @@
+FILE packages/server/src/server/websocket-server.ts
+RANGE {"path":"packages/server/src/server/websocket-server.ts","old_lines":[1149,1153],"new_lines":[1165,1194],"diff_block_lines":[39,68],"hunk_header":"@@ -1148,8 +1164,47 @@ export class VoiceAssistantWebSocketServer {","substantive_changed_lines":22}
+ 
++  private recordRequestLatency(type: string, durationMs: number): void {
++    let latencies = this.requestLatencies.get(type);
++    if (!latencies) {
++      latencies = [];
++      this.requestLatencies.set(type, latencies);
++    }
++    latencies.push(durationMs);
++  }
++
+   private getTopCounts(map: Map<string, number>, limit: number): Array<[string, number]> {
+     return [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit);
+   }
+ 
++  private computeLatencyStats(): Array<{
++    type: string;
++    count: number;
++    minMs: number;
++    maxMs: number;
++    p50Ms: number;
++    totalMs: number;
++  }> {
++    const stats: Array<{
++      type: string;
++      count: number;
++      minMs: number;
++      maxMs: number;
++      p50Ms: number;
++      totalMs: number;
++    }> = [];

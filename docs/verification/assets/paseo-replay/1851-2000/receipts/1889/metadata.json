@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1889,
+  "revision": "ab3443fd5265c91826277d4bce684cb462da0b35",
+  "date": "2026-03-27T19:59:17+07:00",
+  "committer_date": "2026-03-27T19:59:17+07:00",
+  "parents": [
+    "95ad879f82928e6aa64a5d8a9b2d5cc3644cb09d"
+  ],
+  "subject": "feat(desktop): hide native titlebar on Windows/Linux with overlay window controls",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/utils/desktop-window.ts",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:91db78e29dd3f3c18f7d3cfa31dcd48d8914da182d538b54625863c9f3e70806",
+  "diff_tree_digest": "sha256:28c261d02cbf4e5a274283a2bd4b21ea77cffe53b79b270f9f73484afdf68f23",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/desktop-window.ts",
+      "old_lines": [
+        177,
+        186
+      ],
+      "new_lines": [
+        180,
+        200
+      ],
+      "diff_block_lines": [
+        29,
+        53
+      ],
+      "hunk_header": "@@ -176,11 +179,22 @@ export function useTrafficLightPadding(): { left: number; top: number } {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 56,
+  "receipt_file": "receipts/1889/selected.patch"
+}

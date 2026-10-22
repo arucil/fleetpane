@@ -1,0 +1,59 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1965,
+  "revision": "f53c770a71651b46f5df54aaa718d53c13e8b589",
+  "date": "2026-04-01T13:31:38+07:00",
+  "committer_date": "2026-04-01T14:31:38+08:00",
+  "parents": [
+    "8d55764313c69b9a12f14214c06cc0495b379a9d"
+  ],
+  "subject": "[codex] add batch close rpc for workspace tabs (#165)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/web-desktop-scrollbar.tsx",
+    "M\tpackages/app/src/hooks/use-archive-agent.test.ts",
+    "M\tpackages/app/src/hooks/use-archive-agent.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "M\tpackages/app/src/styles/theme.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/opencode-assistant-message.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode/event-translator.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/website/src/components/landing-page.tsx",
+    "M\tpackages/website/src/routes/__root.tsx",
+    "M\tpackages/website/src/styles.css"
+  ],
+  "source_receipt_digest": "sha256:55f686388fd029c3c4fbdaaf7962cf3f5cdfb61d3665d665199a72199ce7f45d",
+  "diff_tree_digest": "sha256:3d36645aceb743881f029bcde986598d1fb2fcb96ebb5a5b74662861415bb1a9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-bulk-close.ts",
+      "old_lines": [
+        53,
+        53
+      ],
+      "new_lines": [
+        70,
+        99
+      ],
+      "diff_block_lines": [
+        33,
+        62
+      ],
+      "hunk_header": "@@ -51,2 +68,71 @@ export function buildBulkCloseConfirmationMessage(input: BulkClosableTabGroups):",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 944,
+  "receipt_file": "receipts/1965/selected.patch"
+}

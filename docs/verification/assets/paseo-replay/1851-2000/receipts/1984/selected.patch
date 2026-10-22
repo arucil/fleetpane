@@ -1,0 +1,32 @@
+FILE packages/app/src/components/desktop/titlebar-drag-region.tsx
+RANGE {"path":"packages/app/src/components/desktop/titlebar-drag-region.tsx","old_lines":[100,129],"new_lines":[29,29],"diff_block_lines":[116,145],"hunk_header":"@@ -80,148 +27,30 @@ export function TitlebarDragRegion() {","substantive_changed_lines":22}
+-
+-export function TitlebarNoDragContent({ children, direction = "row" }: TitlebarNoDragContentProps) {
+-  if (Platform.OS !== "web" || !getIsElectronRuntime()) {
+-    return <>{children}</>;
+-  }
+-
+-  return (
+-    <div
+-      style={{
+-        position: "relative",
+-        zIndex: 2500,
+-        // @ts-expect-error — WebkitAppRegion is not in CSSProperties
+-        WebkitAppRegion: "no-drag",
+-        display: "flex",
+-        flexDirection: direction,
+-        alignItems: "center",
+-        justifyContent: direction === "column" ? "center" : undefined,
+-        flex: 1,
+-        height: "100%",
+-        minWidth: 0,
+-      }}
+-    >
+-      {children}
+-    </div>
+-  );
+-}
+-
+-function TitlebarDragRegionInner() {
+-  const isFullscreen = useIsFullscreen();
+-  const dragRegionRef = useRef<HTMLDivElement | null>(null);

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/desktop/titlebar-drag-region.tsx
+RANGE {"path":"packages/app/src/components/desktop/titlebar-drag-region.tsx","old_lines":[0,0],"new_lines":[27,56],"diff_block_lines":[33,62],"hunk_header":"@@ -0,0 +1,228 @@","substantive_changed_lines":20}
++
++function useIsFullscreen(): boolean {
++  const [isFullscreen, setIsFullscreen] = useState(false);
++
++  useEffect(() => {
++    if (Platform.OS !== "web" || !getIsElectronRuntime()) return;
++
++    let disposed = false;
++    let cleanup: (() => void) | undefined;
++
++    async function setup() {
++      const win = getDesktopWindow();
++      if (!win) return;
++
++      const fs = typeof win.isFullscreen === "function" ? await win.isFullscreen() : false;
++      if (disposed) return;
++      setIsFullscreen(fs);
++
++      if (typeof win.onResized !== "function") return;
++
++      const unlisten = await win.onResized(async () => {
++        if (disposed) return;
++        const fullscreen = typeof win.isFullscreen === "function" ? await win.isFullscreen() : false;
++        if (disposed) return;
++        setIsFullscreen(fullscreen);
++      });
++
++      cleanup = unlisten;
++      if (disposed) cleanup?.();
++    }

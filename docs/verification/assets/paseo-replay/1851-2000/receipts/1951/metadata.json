@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1951,
+  "revision": "0d9bda12e620883efa12578b947e5f1539184c71",
+  "date": "2026-03-30T15:17:27+07:00",
+  "committer_date": "2026-03-30T15:17:27+07:00",
+  "parents": [
+    "a94bc0720cc3c9a2a1da6acb24c9ec11531c65eb"
+  ],
+  "subject": "fix(app): centralize window controls padding into useWindowControlsPadding hook",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/explorer-sidebar.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/constants/layout.ts",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/utils/desktop-window.ts"
+  ],
+  "source_receipt_digest": "sha256:5ab29bf6dae715b9e4075f8347221e73cdf5b7f9635a3f0b00145a0ffc86463a",
+  "diff_tree_digest": "sha256:25af4426fc18a27d1a3ed970bbbb1cc9b523188a47330ba5da333fdc4013ef2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/desktop-window.ts",
+      "old_lines": [
+        180,
+        191
+      ],
+      "new_lines": [
+        189,
+        210
+      ],
+      "diff_block_lines": [
+        28,
+        57
+      ],
+      "hunk_header": "@@ -179,22 +188,51 @@ export function useTrafficLightPadding(): { left: number; right: number; top: nu",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 94,
+  "receipt_file": "receipts/1951/selected.patch"
+}

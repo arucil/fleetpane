@@ -1,0 +1,13 @@
+FILE packages/website/src/posts.ts
+RANGE {"path":"packages/website/src/posts.ts","old_lines":[41,48],"new_lines":[41,48],"diff_block_lines":[5,15],"hunk_header":"@@ -41,8 +41,8 @@ function loadPosts(includeDrafts: boolean): Post[] {","substantive_changed_lines":4}
+@@ -41,8 +41,8 @@ function loadPosts(includeDrafts: boolean): Post[] {
+ 
+   for (const [path, raw] of Object.entries(postModules)) {
+-    const isDraft = path.includes("/drafts/");
++    const { data, content } = parseFrontmatter(raw);
++    const isDraft = path.includes("/drafts/") || data.draft === "true";
+     if (isDraft && !includeDrafts) continue;
+ 
+-    const { data, content } = parseFrontmatter(raw);
+     const fileName = path.split("/").pop()!.replace(".md", "");
+     const slug = isDraft ? `drafts/${fileName}` : fileName;

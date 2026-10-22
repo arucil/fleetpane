@@ -1,0 +1,32 @@
+FILE docs/design/agent-event-stream-redesign.md
+RANGE {"path":"docs/design/agent-event-stream-redesign.md","old_lines":[9,38],"new_lines":[0,0],"diff_block_lines":[15,44],"hunk_header":"@@ -1,170 +0,0 @@","substantive_changed_lines":16}
+-1. **Foreground stream** (`stream()` → `activeForegroundTurn.queue`)
+-2. **Live event pump** (`streamLiveEvents()` → `liveEventQueue`) fed by the query pump
+-3. **JSONL history poller** (`startLiveHistoryPolling()` → `routeSdkMessageFromPump()`)
+-
+-Routing between paths was timing-based (`Boolean(activeForegroundTurn)`, `pendingRun`). This caused:
+-
+-- **Duplicate user messages**: trailing SDK events routed to the live queue after `activeForegroundTurn` cleared
+-- **Stuck running state**: stale `turn_started` from the live path flipped lifecycle back to `running` after finalize set it to terminal
+-- **Fragile dedup**: `shouldSuppressLiveUserMessageEcho` checked `pendingRun` (already null) and `messageId` (Claude assigns its own UUID)
+-
+-Codex and OpenCode were stable because they had ONE event path with no routing decision.
+-
+-## Design
+-
+-### Core principle
+-
+-One event source per provider session. Identity-based turn ownership, not timing-based routing.
+-
+-### Provider contract (`AgentSession`)
+-
+-```typescript
+-interface AgentSession {
+-  readonly provider: AgentProvider;
+-  readonly id: string | null;
+-  readonly capabilities: AgentCapabilityFlags;
+-
+-  // Turn lifecycle
+-  startTurn(prompt: AgentPromptInput, options?: AgentRunOptions): Promise<{ turnId: string }>;
+-  interrupt(): Promise<void>;
+-

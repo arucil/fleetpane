@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1879,
+  "revision": "d8e9298222f74f70133d1c8395f5a993fb3f30f5",
+  "date": "2026-03-26T23:38:32+07:00",
+  "committer_date": "2026-03-26T23:38:32+07:00",
+  "parents": [
+    "c667aca3e0147bbf48e6ec3e685775f0f98325ed"
+  ],
+  "subject": "Add metrics collection and terminal performance tests",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/global-setup.ts",
+    "A\tpackages/app/e2e/helpers/terminal-perf.ts",
+    "A\tpackages/app/e2e/terminal-performance.spec.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:e53921e539e6cc500064622c40e78d235fc7481c72f6d28a9259d1dd1d8384cd",
+  "diff_tree_digest": "sha256:2816dde64d22f9036beee525a447c29f99dc96ab25d0c101ebfaab74f0dc751f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/websocket-server.ts",
+      "old_lines": [
+        1149,
+        1153
+      ],
+      "new_lines": [
+        1165,
+        1194
+      ],
+      "diff_block_lines": [
+        39,
+        68
+      ],
+      "hunk_header": "@@ -1148,8 +1164,47 @@ export class VoiceAssistantWebSocketServer {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 340,
+  "receipt_file": "receipts/1879/selected.patch"
+}

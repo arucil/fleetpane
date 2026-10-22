@@ -1,0 +1,32 @@
+FILE packages/server/src/server/speech/speech-runtime.ts
+RANGE {"path":"packages/server/src/server/speech/speech-runtime.ts","old_lines":[665,668],"new_lines":[667,693],"diff_block_lines":[60,89],"hunk_header":"@@ -659,14 +665,34 @@ export async function initializeSpeechRuntime(params: {","substantive_changed_lines":22}
+-      startBackgroundDownload();
++  const start = (): void => {
++    if (started || stopped) {
++      return;
+     }
+-    scheduleMonitor();
+-  }
++    started = true;
++    void (async () => {
++      try {
++        await runReconcile();
++        const snapshot = computeReadinessSnapshot();
++        if (snapshot.voiceFeature.enabled && !snapshot.voiceFeature.available) {
++          if (missingLocalModelIds.length > 0) {
++            startBackgroundDownload();
++          }
++          scheduleMonitor();
++        }
++        if (!readySettled) {
++          readySettled = true;
++          resolveReady();
++        }
++      } catch (error) {
++        if (!readySettled) {
++          readySettled = true;
++          rejectReady(error);
++        }
++        logger.error({ err: error }, "Speech runtime failed during initial reconcile");
++      }
++    })();

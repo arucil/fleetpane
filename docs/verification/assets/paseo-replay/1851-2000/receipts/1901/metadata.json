@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1901,
+  "revision": "657b3e1ccdcebff0bd2a8abcad3e98b8be114b33",
+  "date": "2026-03-28T01:10:05+07:00",
+  "committer_date": "2026-03-28T01:10:05+07:00",
+  "parents": [
+    "a2ab0af3f142e1fdb3105eb7681c7d7dde811cab"
+  ],
+  "subject": "feat(loop): add worker/verifier model selection and archive support",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/loop/inspect.ts",
+    "M\tpackages/cli/src/commands/loop/run.ts",
+    "M\tpackages/cli/src/commands/loop/types.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/loop-service.test.ts",
+    "M\tpackages/server/src/server/loop-service.ts",
+    "M\tpackages/server/src/server/loop/rpc-schemas.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:e70e538e0c2f421981bad61ee3f95f10fc47598bef34120c90154afe501cbfee",
+  "diff_tree_digest": "sha256:96291e5c728caa6f5c49271ebb53355a40815d70d62365e7c404ebd48d55a473",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        862,
+        862
+      ],
+      "new_lines": [
+        862,
+        891
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -861,4 +861,37 @@ export class AgentManager {",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 227,
+  "receipt_file": "receipts/1901/selected.patch"
+}

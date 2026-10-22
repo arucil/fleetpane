@@ -1,0 +1,23 @@
+FILE packages/server/scripts/supervisor.ts
+RANGE {"path":"packages/server/scripts/supervisor.ts","old_lines":[86,93],"new_lines":[92,107],"diff_block_lines":[28,48],"hunk_header":"@@ -85,9 +91,17 @@ export function runSupervisor(options: SupervisorOptions): void {","substantive_changed_lines":14}
+ 
+-    child = fork(workerEntry, workerArgs, {
+-      stdio: "inherit",
+-      env: workerEnv,
+-      execArgv: workerExecArgv,
+-    });
++    const spawnSpec = resolveWorkerSpawnSpec?.(workerEntry) ?? null;
++    if (spawnSpec) {
++      child = spawn(spawnSpec.command, spawnSpec.args, {
++        stdio: ["inherit", "inherit", "inherit", "ipc"],
++        env: spawnSpec.env ?? workerEnv,
++      });
++    } else {
++      child = fork(workerEntry, workerArgs, {
++        stdio: "inherit",
++        env: workerEnv,
++        execArgv: workerExecArgv,
++      });
++    }
+ 
+     child.on("message", (msg: unknown) => {

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1898,
+  "revision": "7bc1f04e27ad7d09fa186ba4cb2a780ce241093d",
+  "date": "2026-03-27T22:48:27+07:00",
+  "committer_date": "2026-03-28T00:25:23+07:00",
+  "parents": [
+    "394b9cac13ca13645e3e756bdb8e57510b58afcb"
+  ],
+  "subject": "fix(desktop): restore windows daemon bootstrap logging",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:ec46426da777b23915585ff3bb0b7a78481c4479ced842f03cf3f908cba639ef",
+  "diff_tree_digest": "sha256:30f34ad3012efc46a2935055e12508970263669f8d56e2fe5d501f4cae0156a8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/runtime/host-runtime.ts",
+      "old_lines": [
+        1170,
+        1179
+      ],
+      "new_lines": [
+        1183,
+        1194
+      ],
+      "diff_block_lines": [
+        30,
+        48
+      ],
+      "hunk_header": "@@ -1163,17 +1163,32 @@ export class HostRuntimeStore {",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 29,
+  "receipt_file": "receipts/1898/selected.patch"
+}
