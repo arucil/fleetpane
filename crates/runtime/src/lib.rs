@@ -14,6 +14,7 @@ mod creation_directory;
 #[cfg(unix)]
 pub mod journal;
 pub mod lifecycle;
+pub mod session_directories;
 pub mod stopping;
 pub mod tasks;
 pub mod terminal;
@@ -111,6 +112,9 @@ pub struct Snapshot {
     /// None means an older Host cannot provide completion review records.
     #[serde(default)]
     pub attention: Option<Box<attention::Feed>>,
+    /// None means an older Host has no workspace association observations.
+    #[serde(default)]
+    pub session_directories: Option<Box<session_directories::Feed>>,
     pub fault: Option<String>,
     #[serde(default)]
     pub fault_scope: Option<FaultScope>,
@@ -281,6 +285,7 @@ impl State {
                 },
                 pending_requests: Vec::new(),
                 attention: Some(Box::default()),
+                session_directories: Some(Box::default()),
                 fault: None,
                 fault_scope: None,
             },
@@ -558,6 +563,7 @@ impl State {
             .checked_add(1)
             .ok_or("event sequence exhausted")?;
         let attention = attention::Record::from_event(&message, sequence)?;
+        let directory = session_directories::Record::from_message(&message)?;
         if let Some(record) = &attention {
             self.snapshot
                 .attention
@@ -667,6 +673,13 @@ impl State {
                 .attention
                 .as_mut()
                 .expect("new Host has attention feed")
+                .record(record);
+        }
+        if let Some(record) = directory {
+            self.snapshot
+                .session_directories
+                .as_mut()
+                .expect("new Host observes directories")
                 .record(record);
         }
         self.snapshot.sequence = sequence;

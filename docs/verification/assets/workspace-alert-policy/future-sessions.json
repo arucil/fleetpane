@@ -1,0 +1,323 @@
+{
+  "created_after_mute": [
+    "fixture-thread-4",
+    "fixture-thread-5"
+  ],
+  "initial": {
+    "protocol": 3,
+    "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+    "host_pid": 949502,
+    "provider_pid": 949557,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+      "controller_id": "6dacafe5-ccca-4c35-b8e4-745671013dcd",
+      "generation": 7
+    },
+    "sequence": 41,
+    "operation_ids": [
+      "5138284c-7f78-4f3d-9af2-82414171c66a",
+      "ab9f343a-8fd2-4704-b2e8-6bd487037d7a",
+      "4935ea7e-4995-4853-a708-791ec3ef8974",
+      "ff196ede-f822-4589-b3d8-248347d7aa98",
+      "e5510e28-583a-409e-880e-dd99d9e9bad7",
+      "6c897fbf-95b3-4e92-a81e-3d2d6145394f",
+      "88c2ea7e-74bf-4f91-b077-f2be755173dd"
+    ],
+    "journal_total": 7,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-1-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-1-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "选择实现语言？"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "补充要求（支持中文和换行）"
+            }
+          ],
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      },
+      {
+        "id": "approval-fixture-thread-2-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-2-turn-1",
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [
+        {
+          "sequence": 23,
+          "observed_unix_ms": 1792664822859,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 34,
+          "observed_unix_ms": 1792664823543,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-2",
+          "kind": "failed",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "session_directories": {
+      "records": [
+        {
+          "thread_id": "fixture-thread-2",
+          "cwd": "/tmp/fp-workspace-alert/beta"
+        },
+        {
+          "thread_id": "fixture-thread-3",
+          "cwd": "/tmp/fp-workspace-alert/results"
+        },
+        {
+          "thread_id": "fixture-thread-1",
+          "cwd": "/tmp/fp-workspace-alert/alpha 中文"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "after": {
+    "protocol": 3,
+    "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+    "host_pid": 949502,
+    "provider_pid": 949557,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+      "controller_id": "5f99a259-5606-4a65-8f92-0138487b605a",
+      "generation": 12
+    },
+    "sequence": 70,
+    "operation_ids": [
+      "5138284c-7f78-4f3d-9af2-82414171c66a",
+      "ab9f343a-8fd2-4704-b2e8-6bd487037d7a",
+      "4935ea7e-4995-4853-a708-791ec3ef8974",
+      "ff196ede-f822-4589-b3d8-248347d7aa98",
+      "e5510e28-583a-409e-880e-dd99d9e9bad7",
+      "6c897fbf-95b3-4e92-a81e-3d2d6145394f",
+      "88c2ea7e-74bf-4f91-b077-f2be755173dd",
+      "dd7930d9-adb1-422b-85e9-690066e0f2ec",
+      "3f391f77-8b54-4bfa-8851-f047cc811072",
+      "af8a3ea4-1a7f-4ce8-a43e-83d004f90b31",
+      "d40cf733-14b8-4cf8-835d-8c0922a34cd1",
+      "4f69e35f-fef3-4bcd-96b0-b0300efdfa82"
+    ],
+    "journal_total": 12,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-4",
+          "turn_id": "fixture-thread-4-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-1-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-1-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "选择实现语言？"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "补充要求（支持中文和换行）"
+            }
+          ],
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      },
+      {
+        "id": "approval-fixture-thread-2-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-2-turn-1",
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      },
+      {
+        "id": "approval-fixture-thread-4-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-4-turn-1",
+          "threadId": "fixture-thread-4",
+          "turnId": "fixture-thread-4-turn-1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [
+        {
+          "sequence": 23,
+          "observed_unix_ms": 1792664822859,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 34,
+          "observed_unix_ms": 1792664823543,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-2",
+          "kind": "failed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 58,
+          "observed_unix_ms": 1792665021154,
+          "thread_id": "fixture-thread-5",
+          "turn_id": "fixture-thread-5-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 69,
+          "observed_unix_ms": 1792665021838,
+          "thread_id": "fixture-thread-5",
+          "turn_id": "fixture-thread-5-turn-2",
+          "kind": "failed",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "session_directories": {
+      "records": [
+        {
+          "thread_id": "fixture-thread-2",
+          "cwd": "/tmp/fp-workspace-alert/beta"
+        },
+        {
+          "thread_id": "fixture-thread-3",
+          "cwd": "/tmp/fp-workspace-alert/results"
+        },
+        {
+          "thread_id": "fixture-thread-1",
+          "cwd": "/tmp/fp-workspace-alert/alpha 中文"
+        },
+        {
+          "thread_id": "fixture-thread-4",
+          "cwd": "/tmp/fp-workspace-alert/alpha 中文"
+        },
+        {
+          "thread_id": "fixture-thread-5",
+          "cwd": "/tmp/fp-workspace-alert/alpha 中文"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

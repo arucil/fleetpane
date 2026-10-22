@@ -34,6 +34,7 @@ impl Workbench {
 
     pub(super) fn next_request_blocked(&self, window: &mut Window, cx: &mut App) -> bool {
         self.switcher.active
+            || self.notifications.open
             || self.closing
             || window.has_active_dialog(cx)
             || window.has_active_sheet(cx)

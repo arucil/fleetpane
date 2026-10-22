@@ -1,0 +1,515 @@
+{
+  "host_binary_sha256": "620c426ef2b1e3fcd1fe3611d4988e03a81a4a40cd8da5ada8ef44a28e89f36d",
+  "hold_seconds": 1.0001504980027676,
+  "snapshots_unchanged_while_waiting": true,
+  "read_only_collection": true,
+  "same_request_ids_isolated": true,
+  "original_provider_answer": {
+    "outcome": {
+      "outcome": "selected",
+      "optionId": "allow-one"
+    }
+  },
+  "stale_controller_rejected": true,
+  "duplicate_rejected": true,
+  "initial_report": {
+    "observed_unix_ms": 1792666218680,
+    "hosts": [
+      {
+        "endpoint": {
+          "name": "Questions",
+          "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+        },
+        "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Questions",
+              "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+            },
+            "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+            "id": "questions-fixture-thread-1-turn-1",
+            "method": "item/tool/requestUserInput",
+            "kind": "question",
+            "thread_id": "fixture-thread-1",
+            "cwd": "/tmp/fp-attention-3w96tg77/0",
+            "turn_id": "fixture-thread-1-turn-1",
+            "title": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f",
+            "request": {
+              "id": "questions-fixture-thread-1-turn-1",
+              "method": "item/tool/requestUserInput",
+              "params": {
+                "isBlocking": true,
+                "itemId": "input-fixture-thread-1-turn-1",
+                "questions": [
+                  {
+                    "header": "Language",
+                    "id": "language",
+                    "isOther": true,
+                    "isSecret": false,
+                    "options": [
+                      {
+                        "description": "Native performance and explicit ownership.",
+                        "label": "Rust (Recommended)"
+                      },
+                      {
+                        "description": "Simple concurrency and quick builds.",
+                        "label": "Go"
+                      }
+                    ],
+                    "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+                  },
+                  {
+                    "header": "Details",
+                    "id": "notes",
+                    "isOther": false,
+                    "isSecret": false,
+                    "options": null,
+                    "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+                  }
+                ],
+                "threadId": "fixture-thread-1",
+                "turnId": "fixture-thread-1-turn-1"
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval A",
+          "socket": "/tmp/fp-attention-3w96tg77/1/host/control.sock"
+        },
+        "host_id": "8c0b071c-8aef-463a-b4e9-988e429ba760",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Approval A",
+              "socket": "/tmp/fp-attention-3w96tg77/1/host/control.sock"
+            },
+            "host_id": "8c0b071c-8aef-463a-b4e9-988e429ba760",
+            "id": 10,
+            "method": "session/request_permission",
+            "kind": "approval",
+            "thread_id": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+            "cwd": "/tmp/fp-attention-3w96tg77/1",
+            "turn_id": null,
+            "title": "Synthetic tool",
+            "request": {
+              "id": 10,
+              "method": "session/request_permission",
+              "params": {
+                "options": [
+                  {
+                    "kind": "allow_once",
+                    "name": "Run this tool",
+                    "optionId": "allow-one"
+                  },
+                  {
+                    "kind": "reject_once",
+                    "name": "Skip this tool",
+                    "optionId": "reject-one"
+                  }
+                ],
+                "sessionId": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+                "threadId": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+                "toolCall": {
+                  "title": "Synthetic tool",
+                  "toolCallId": "call-951da7e1-03fd-434c-8f5b-228efa5a59e0"
+                }
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval B",
+          "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+        },
+        "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Approval B",
+              "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+            },
+            "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+            "id": 10,
+            "method": "session/request_permission",
+            "kind": "approval",
+            "thread_id": "37290190-8226-48f2-b3e6-d04199f6af8e",
+            "cwd": "/tmp/fp-attention-3w96tg77/2",
+            "turn_id": null,
+            "title": "Synthetic tool",
+            "request": {
+              "id": 10,
+              "method": "session/request_permission",
+              "params": {
+                "options": [
+                  {
+                    "kind": "allow_once",
+                    "name": "Run this tool",
+                    "optionId": "allow-one"
+                  },
+                  {
+                    "kind": "reject_once",
+                    "name": "Skip this tool",
+                    "optionId": "reject-one"
+                  }
+                ],
+                "sessionId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "threadId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "toolCall": {
+                  "title": "Synthetic tool",
+                  "toolCallId": "call-558da5e4-e3d6-4aa0-b21b-d93997ec4a79"
+                }
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Offline",
+          "socket": "/tmp/fp-attention-3w96tg77/offline/control.sock"
+        },
+        "host_id": null,
+        "items": [],
+        "error": "host transport: No such file or directory (os error 2)",
+        "completions": [],
+        "completion_evicted": null
+      }
+    ]
+  },
+  "held_report": {
+    "observed_unix_ms": 1792666219675,
+    "hosts": [
+      {
+        "endpoint": {
+          "name": "Questions",
+          "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+        },
+        "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Questions",
+              "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+            },
+            "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+            "id": "questions-fixture-thread-1-turn-1",
+            "method": "item/tool/requestUserInput",
+            "kind": "question",
+            "thread_id": "fixture-thread-1",
+            "cwd": "/tmp/fp-attention-3w96tg77/0",
+            "turn_id": "fixture-thread-1-turn-1",
+            "title": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f",
+            "request": {
+              "id": "questions-fixture-thread-1-turn-1",
+              "method": "item/tool/requestUserInput",
+              "params": {
+                "isBlocking": true,
+                "itemId": "input-fixture-thread-1-turn-1",
+                "questions": [
+                  {
+                    "header": "Language",
+                    "id": "language",
+                    "isOther": true,
+                    "isSecret": false,
+                    "options": [
+                      {
+                        "description": "Native performance and explicit ownership.",
+                        "label": "Rust (Recommended)"
+                      },
+                      {
+                        "description": "Simple concurrency and quick builds.",
+                        "label": "Go"
+                      }
+                    ],
+                    "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+                  },
+                  {
+                    "header": "Details",
+                    "id": "notes",
+                    "isOther": false,
+                    "isSecret": false,
+                    "options": null,
+                    "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+                  }
+                ],
+                "threadId": "fixture-thread-1",
+                "turnId": "fixture-thread-1-turn-1"
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval A",
+          "socket": "/tmp/fp-attention-3w96tg77/1/host/control.sock"
+        },
+        "host_id": "8c0b071c-8aef-463a-b4e9-988e429ba760",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Approval A",
+              "socket": "/tmp/fp-attention-3w96tg77/1/host/control.sock"
+            },
+            "host_id": "8c0b071c-8aef-463a-b4e9-988e429ba760",
+            "id": 10,
+            "method": "session/request_permission",
+            "kind": "approval",
+            "thread_id": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+            "cwd": "/tmp/fp-attention-3w96tg77/1",
+            "turn_id": null,
+            "title": "Synthetic tool",
+            "request": {
+              "id": 10,
+              "method": "session/request_permission",
+              "params": {
+                "options": [
+                  {
+                    "kind": "allow_once",
+                    "name": "Run this tool",
+                    "optionId": "allow-one"
+                  },
+                  {
+                    "kind": "reject_once",
+                    "name": "Skip this tool",
+                    "optionId": "reject-one"
+                  }
+                ],
+                "sessionId": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+                "threadId": "0aa1a1b9-6992-483d-a4e5-1ba528992777",
+                "toolCall": {
+                  "title": "Synthetic tool",
+                  "toolCallId": "call-951da7e1-03fd-434c-8f5b-228efa5a59e0"
+                }
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval B",
+          "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+        },
+        "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Approval B",
+              "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+            },
+            "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+            "id": 10,
+            "method": "session/request_permission",
+            "kind": "approval",
+            "thread_id": "37290190-8226-48f2-b3e6-d04199f6af8e",
+            "cwd": "/tmp/fp-attention-3w96tg77/2",
+            "turn_id": null,
+            "title": "Synthetic tool",
+            "request": {
+              "id": 10,
+              "method": "session/request_permission",
+              "params": {
+                "options": [
+                  {
+                    "kind": "allow_once",
+                    "name": "Run this tool",
+                    "optionId": "allow-one"
+                  },
+                  {
+                    "kind": "reject_once",
+                    "name": "Skip this tool",
+                    "optionId": "reject-one"
+                  }
+                ],
+                "sessionId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "threadId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "toolCall": {
+                  "title": "Synthetic tool",
+                  "toolCallId": "call-558da5e4-e3d6-4aa0-b21b-d93997ec4a79"
+                }
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Offline",
+          "socket": "/tmp/fp-attention-3w96tg77/offline/control.sock"
+        },
+        "host_id": null,
+        "items": [],
+        "error": "host transport: No such file or directory (os error 2)",
+        "completions": [],
+        "completion_evicted": null
+      }
+    ]
+  },
+  "remaining_report": {
+    "observed_unix_ms": 1792666219749,
+    "hosts": [
+      {
+        "endpoint": {
+          "name": "Questions",
+          "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+        },
+        "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Questions",
+              "socket": "/tmp/fp-attention-3w96tg77/0/host/control.sock"
+            },
+            "host_id": "e6e27562-8d5c-4eb8-93cc-35a44d8d565a",
+            "id": "questions-fixture-thread-1-turn-1",
+            "method": "item/tool/requestUserInput",
+            "kind": "question",
+            "thread_id": "fixture-thread-1",
+            "cwd": "/tmp/fp-attention-3w96tg77/0",
+            "turn_id": "fixture-thread-1-turn-1",
+            "title": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f",
+            "request": {
+              "id": "questions-fixture-thread-1-turn-1",
+              "method": "item/tool/requestUserInput",
+              "params": {
+                "isBlocking": true,
+                "itemId": "input-fixture-thread-1-turn-1",
+                "questions": [
+                  {
+                    "header": "Language",
+                    "id": "language",
+                    "isOther": true,
+                    "isSecret": false,
+                    "options": [
+                      {
+                        "description": "Native performance and explicit ownership.",
+                        "label": "Rust (Recommended)"
+                      },
+                      {
+                        "description": "Simple concurrency and quick builds.",
+                        "label": "Go"
+                      }
+                    ],
+                    "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+                  },
+                  {
+                    "header": "Details",
+                    "id": "notes",
+                    "isOther": false,
+                    "isSecret": false,
+                    "options": null,
+                    "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+                  }
+                ],
+                "threadId": "fixture-thread-1",
+                "turnId": "fixture-thread-1-turn-1"
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval A",
+          "socket": "/tmp/fp-attention-3w96tg77/1/host/control.sock"
+        },
+        "host_id": "8c0b071c-8aef-463a-b4e9-988e429ba760",
+        "items": [],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Approval B",
+          "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+        },
+        "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+        "items": [
+          {
+            "endpoint": {
+              "name": "Approval B",
+              "socket": "/tmp/fp-attention-3w96tg77/2/host/control.sock"
+            },
+            "host_id": "8ca803fd-6317-4d26-830a-181c73021f9e",
+            "id": 10,
+            "method": "session/request_permission",
+            "kind": "approval",
+            "thread_id": "37290190-8226-48f2-b3e6-d04199f6af8e",
+            "cwd": "/tmp/fp-attention-3w96tg77/2",
+            "turn_id": null,
+            "title": "Synthetic tool",
+            "request": {
+              "id": 10,
+              "method": "session/request_permission",
+              "params": {
+                "options": [
+                  {
+                    "kind": "allow_once",
+                    "name": "Run this tool",
+                    "optionId": "allow-one"
+                  },
+                  {
+                    "kind": "reject_once",
+                    "name": "Skip this tool",
+                    "optionId": "reject-one"
+                  }
+                ],
+                "sessionId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "threadId": "37290190-8226-48f2-b3e6-d04199f6af8e",
+                "toolCall": {
+                  "title": "Synthetic tool",
+                  "toolCallId": "call-558da5e4-e3d6-4aa0-b21b-d93997ec4a79"
+                }
+              }
+            }
+          }
+        ],
+        "error": null,
+        "completions": [],
+        "completion_evicted": 0
+      },
+      {
+        "endpoint": {
+          "name": "Offline",
+          "socket": "/tmp/fp-attention-3w96tg77/offline/control.sock"
+        },
+        "host_id": null,
+        "items": [],
+        "error": "host transport: No such file or directory (os error 2)",
+        "completions": [],
+        "completion_evicted": null
+      }
+    ]
+  },
+  "owned_processes_stopped": true,
+  "owned_sockets_removed": true
+}

@@ -1,6 +1,6 @@
 //! Local alert preferences never acquire a Host lease or filter the true queue.
 use super::*;
-use fleetpane_session::notifications::{Kind, Preferences, Saved, Session};
+use fleetpane_session::notifications::{Kind, Preferences, Saved, Session, Workspace};
 const CLOSE_ERROR: &str = "Alert preferences were not saved. Reload alerts before closing.";
 
 pub(super) struct State {
@@ -8,7 +8,7 @@ pub(super) struct State {
     saved: Option<Saved>,
     pub busy: bool,
     refreshing: bool,
-    open: bool,
+    pub(in crate::workbench) open: bool,
     error: Option<String>,
     save_failed: bool,
 }
@@ -75,7 +75,16 @@ impl Workbench {
             .filter(|_| self.notifications.error.is_none())
         {
             None => "Alert policy unavailable",
-            Some(saved) if saved.value.pending_allowed(item) => "Included in alert count",
+            Some(saved) if saved.value.pending_allowed(item) => {
+                if saved
+                    .value
+                    .workspace_unknown(&item.endpoint.socket, item.cwd.as_deref())
+                {
+                    "Workspace unknown · included in alert count"
+                } else {
+                    "Included in alert count"
+                }
+            }
             Some(_) => "Muted · retained in queue",
         }
     }
@@ -92,7 +101,16 @@ impl Workbench {
         {
             None => "Alert policy unavailable",
             Some(_) if item.reviewed => "Reviewed",
-            Some(saved) if saved.value.result_allowed(item) => "Included in alert count",
+            Some(saved) if saved.value.result_allowed(item) => {
+                if saved
+                    .value
+                    .workspace_unknown(&item.endpoint.socket, item.cwd.as_deref())
+                {
+                    "Workspace unknown · included in alert count"
+                } else {
+                    "Included in alert count"
+                }
+            }
             Some(_) => "Muted · unreviewed",
         }
     }
@@ -275,7 +293,11 @@ impl Workbench {
             }))
     }
 
-    pub(super) fn notifications_button(&self, cx: &mut Context<Self>) -> Button {
+    pub(super) fn notifications_button(
+        &self,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement {
         let label = if self.notifications.busy {
             "Alerts · saving / loading"
         } else if self.notifications.error.is_some() {
@@ -290,23 +312,80 @@ impl Workbench {
         } else {
             "Alerts"
         };
-        Button::new("notifications-open")
+        let owner = cx.entity().downgrade();
+        gpui_kit::component::popover::Popover::new("notifications-popover")
+            .open(self.notifications.open)
+            .on_open_change(move |open, _, cx| {
+                if let Some(owner) = owner.upgrade() {
+                    owner.update(cx, |this, cx| {
+                        this.notifications.open = *open;
+                        cx.notify();
+                    });
+                }
+            })
+            .trigger(
+                Button::new("notifications-open")
+                    .small()
+                    .ghost()
+                    .label(label)
+                    .selected(self.notifications.open),
+            )
+            .when(self.notifications.open, |popover| {
+                popover.child(self.notification_controls(window, cx))
+            })
+    }
+
+    pub(super) fn workspace_mute_button(
+        &self,
+        id: SharedString,
+        workspace: Workspace,
+        cx: &mut Context<Self>,
+    ) -> Button {
+        let muted = self
+            .notifications
+            .saved
+            .as_ref()
+            .is_some_and(|s| s.value.muted_workspaces.contains(&workspace));
+        Button::new(id)
             .small()
             .ghost()
-            .label(label)
-            .selected(self.notifications.open)
-            .on_click(cx.listener(|this, _, _, cx| {
-                this.notifications.open = !this.notifications.open;
-                cx.notify();
+            .label(if muted {
+                "Unmute workspace"
+            } else {
+                "Mute workspace"
+            })
+            .tooltip(format!(
+                "{} · {}",
+                workspace.directory.display(),
+                workspace.socket.display()
+            ))
+            .disabled(!self.notifications.editable() || self.closing)
+            .on_click(cx.listener(move |this, _, window, cx| {
+                let Some(saved) = &this.notifications.saved else {
+                    return;
+                };
+                let mut value = saved.value.clone();
+                if value.muted_workspaces.contains(&workspace) {
+                    value.muted_workspaces.retain(|w| w != &workspace);
+                } else {
+                    value.muted_workspaces.push(workspace.clone());
+                }
+                this.save_notifications(value, window, cx);
             }))
     }
 
-    pub(super) fn notification_controls(&self, cx: &mut Context<Self>) -> impl IntoElement {
+    fn notification_controls(
+        &self,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement {
         let selected = self.notifications.saved.as_ref().map(|s| s.value.clone());
         let editable = self.notifications.editable() && !self.closing;
         let muted = selected.as_ref().is_some_and(|p| p.muted);
-        div()
-            .when(self.notifications.open,|view|view.child(div().id("notification-settings").max_h_48().overflow_y_scroll().px_4().pb_2().text_sm()
+        div().id("notification-settings")
+            .w((window.viewport_size().width - px(64.)).min(px(760.)))
+            .max_h((window.viewport_size().height - px(144.)).min(px(320.)))
+            .overflow_y_scroll().text_sm()
                 .child(div().flex().flex_wrap().gap_2().items_center()
                     .child(Button::new("notifications-global").small().label(if muted {"Unmute globally"} else {"Mute globally"}).disabled(!editable).on_click(cx.listener(|this,_,window,cx|{
                         let Some(saved)=&this.notifications.saved else{return;};let mut value=saved.value.clone();value.muted = !value.muted;this.save_notifications(value,window,cx);
@@ -316,6 +395,7 @@ impl Workbench {
                         if let Some(saved)=&this.notifications.saved {cx.write_to_clipboard(ClipboardItem::new_string(serde_json::to_string_pretty(saved).expect("policy serializes")));}
                     }))))
                 .child("Muted items stay in Attention and Next request. System notifications are not available yet.")
+                .child("Workspace mute matches this Host and exact directory, including future sessions. Unknown directories remain included in alerts.")
                 .children(self.notifications.error.iter().map(|error|div().text_color(cx.theme().danger).child(error.clone())))
                 .child(div().flex().flex_wrap().gap_2().items_center().child("Mute event types:")
                     .children(Kind::ALL.into_iter().enumerate().map(|(i,kind)| {
@@ -335,9 +415,12 @@ impl Workbench {
                             this.save_notifications(value,window,cx);
                         }))
                     })))
+                .children(selected.iter().flat_map(|p|p.muted_workspaces.iter()).enumerate().map(|(i,w)|div().flex().gap_2().items_center()
+                    .child(self.workspace_mute_button(format!("notifications-workspace-{i}").into(),w.clone(),cx))
+                    .child(div().truncate().child(format!("{} · {}",w.directory.display(),w.socket.display())))))
                 .children(selected.iter().flat_map(|p|p.muted_sessions.iter()).enumerate().map(|(i,s)|div().flex().gap_2().items_center()
                     .child(self.session_mute_button(format!("notifications-saved-{i}").into(),Some(s.clone()),cx))
-                    .child(div().truncate().child(format!("{} · {} · {}",s.socket.display(),s.host_id,s.thread_id)))))))
+                    .child(div().truncate().child(format!("{} · {} · {}",s.socket.display(),s.host_id,s.thread_id)))))
     }
 }
 

@@ -33,8 +33,10 @@ remain unavailable rather than a zero. Muted rows remain selectable, copyable,
 answerable through their original controls and available to Next request. Muting
 does not mark results reviewed or change failed/interrupted outcomes.
 
+Workspace rules and the bounded Kit settings popover are subsequently defined
+in [ADR 0113](0113-workspace-alert-scopes.md), with separate runtime evidence.
 This slice implements local policy and counts only. OS notification delivery,
-sound, tray/dock integration, workspace-specific rules, delivery deduplication,
+sound, tray/dock integration, delivery deduplication,
 request age and persistent delivery inbox remain open. Do not advertise complete
 ATT-04/05 acceptance until those outputs share this policy and have independent
 runtime evidence. CLI policy edits alone do not deliver notifications.

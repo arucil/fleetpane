@@ -1,0 +1,60 @@
+{
+  "providers": [
+    {
+      "name": "OpenCodex",
+      "socket": "/tmp/fp-workspace-alert-real-final/OpenCodex/host/control.sock",
+      "host_pid": 1686595,
+      "thread_id": "01a16340-34d2-75e1-9e83-4b36a52af0fd",
+      "directory": "/tmp/fp-workspace-alert-real-final/workspace 中文",
+      "wait": {
+        "host_id": "9d00b321-8fe5-4444-a616-2a3482f2a087",
+        "thread_id": "01a16340-34d2-75e1-9e83-4b36a52af0fd",
+        "turn_id": "01a16340-35d9-76a3-b291-ddb69760178e",
+        "sequence": 25,
+        "outcome": "finished",
+        "turn": {
+          "id": "01a16340-35d9-76a3-b291-ddb69760178e",
+          "status": "completed",
+          "items": [],
+          "error": null
+        }
+      },
+      "model_reply_token": "WORKSPACE-MUTE-OPENCODEX"
+    },
+    {
+      "name": "DeepSeek",
+      "socket": "/tmp/fp-workspace-alert-real-final/DeepSeek/host/control.sock",
+      "host_pid": 1687619,
+      "thread_id": "ea41f093-7c47-4502-81e7-ec9cb9ac141a",
+      "directory": "/tmp/fp-workspace-alert-real-final/workspace 中文",
+      "wait": {
+        "host_id": "48614c06-720a-4895-8a27-1e017939979a",
+        "thread_id": "ea41f093-7c47-4502-81e7-ec9cb9ac141a",
+        "turn_id": "58871515-7111-4261-bc0e-8f0752df3c37",
+        "sequence": 8,
+        "outcome": "finished",
+        "turn": {
+          "id": "58871515-7111-4261-bc0e-8f0752df3c37",
+          "status": "completed",
+          "items": [],
+          "error": null,
+          "stopReason": "end_turn"
+        }
+      },
+      "model_reply_token": "WORKSPACE-MUTE-DEEPSEEK"
+    }
+  ],
+  "native_alert_counts": [
+    1,
+    0,
+    2
+  ],
+  "full_snapshots_unchanged": true,
+  "unreviewed_results": 2,
+  "native_read_only": true,
+  "binary_sha256": {
+    "host": "620c426ef2b1e3fcd1fe3611d4988e03a81a4a40cd8da5ada8ef44a28e89f36d",
+    "desktop": "581b101b597ba60e7c627f17ca5fb177e7d94c0ade8f15e45650b54609513a98"
+  },
+  "normal_close": true
+}

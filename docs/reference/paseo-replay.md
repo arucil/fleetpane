@@ -1596,3 +1596,11 @@ The already inspected tab workflow has [Linux fixture acceptance](../verificatio
 for active/inactive moves, cancellation, save failure/reload, exact drafts,
 pending requests, real PTY isolation, replacement and 900×560. Cross-window moves,
 edge autoscroll and splits remain open. No source-review cursor or tip claim changes.
+
+Workspace alert follow-up (2026-10-22): PRD ATT-04 now has exact endpoint/directory
+scopes covering future sessions, bounded provider-observed metadata and explicit
+unknown-directory alert inclusion. [Separate evidence](../verification/2026-10-22-workspace-alert-policy.md)
+covers fixture pending requests/results, native policy failure/reload, Kit popup
+layout, exact drafts and real OpenCodex/DeepSeek completed-result counts. OS
+delivery/sound/tray/dock and durable deduplication remain open. No new history
+cursor coverage or upstream-tip claim is implied.

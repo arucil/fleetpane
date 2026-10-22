@@ -118,14 +118,18 @@ impl Workbench {
         }).detach();
     }
 
-    pub(super) fn host_choice_bar(&self, cx: &mut Context<Self>) -> impl IntoElement {
+    pub(super) fn host_choice_bar(
+        &self,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) -> impl IntoElement {
         div()
             .px_4()
             .py_1()
             .flex()
             .items_center()
             .gap_2()
-            .child(self.notifications_button(cx))
+            .child(self.notifications_button(window, cx))
             .child(
                 div()
                     .flex_1()

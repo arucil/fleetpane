@@ -11,6 +11,8 @@ pub struct Item {
     pub host_id: Uuid,
     pub record: Record,
     pub reviewed: bool,
+    #[serde(default)]
+    pub cwd: Option<String>,
 }
 
 impl Item {
@@ -139,6 +141,7 @@ mod tests {
             },
             host_id: Uuid::new_v4(),
             reviewed: false,
+            cwd: None,
             record: Record {
                 sequence: 1,
                 observed_unix_ms: 42,

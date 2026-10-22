@@ -27,6 +27,7 @@ pub struct Item {
     pub method: String,
     pub kind: Kind,
     pub thread_id: Option<String>,
+    pub cwd: Option<String>,
     pub turn_id: Option<String>,
     pub title: String,
     pub request: Value,
@@ -77,6 +78,7 @@ impl Item {
             method,
             kind,
             thread_id,
+            cwd: None,
             turn_id,
             title,
             request,
@@ -159,6 +161,11 @@ fn project(probe: Probe) -> Host {
                             host_id: snapshot.host_id,
                             record: record.clone(),
                             reviewed: false,
+                            cwd: snapshot
+                                .session_directories
+                                .as_ref()
+                                .and_then(|feed| feed.directory(&record.thread_id))
+                                .map(str::to_owned),
                         })
                         .collect()
                 })
@@ -168,7 +175,20 @@ fn project(probe: Probe) -> Host {
                 .pending_requests
                 .iter()
                 .cloned()
-                .map(|request| Item::from_request(endpoint.clone(), snapshot.host_id, request))
+                .map(|request| {
+                    let mut item = Item::from_request(endpoint.clone(), snapshot.host_id, request)?;
+                    item.cwd = item
+                        .thread_id
+                        .as_ref()
+                        .and_then(|id| {
+                            snapshot
+                                .session_directories
+                                .as_ref()
+                                .and_then(|feed| feed.directory(id))
+                        })
+                        .map(str::to_owned);
+                    Ok::<_, Error>(item)
+                })
                 .collect::<Result<Vec<_>, _>>();
             match items {
                 Ok(items) => Host {
@@ -319,5 +339,51 @@ mod tests {
         });
         assert!(host.error.is_some());
         assert!(host.host_id.is_some());
+    }
+
+    #[test]
+    fn workspace_is_joined_by_original_session_metadata_without_trusting_request_cwd() {
+        let mut state = snapshot();
+        state.session_directories.as_mut().unwrap().record(
+            fleetpane_runtime::session_directories::Record {
+                thread_id: "s".into(),
+                cwd: "/observed".into(),
+            },
+        );
+        state.pending_requests.push(json!({"id":1,"method":"session/request_permission","params":{"threadId":"s","cwd":"/wrong","toolCall":{"title":"Synthetic"}}}));
+        state.pending_requests.push(
+            json!({"id":2,"method":"unknown","params":{"threadId":"missing","cwd":"/guess"}}),
+        );
+        state
+            .attention
+            .as_mut()
+            .unwrap()
+            .record(fleetpane_runtime::attention::Record {
+                sequence: 1,
+                observed_unix_ms: 42,
+                thread_id: "s".into(),
+                turn_id: "t".into(),
+                kind: fleetpane_runtime::attention::Kind::Failed,
+                stop_reason: None,
+            });
+        let host = project(Probe {
+            endpoint: endpoint("same"),
+            result: ProbeResult::Available {
+                snapshot: Box::new(state.clone()),
+            },
+        });
+        assert_eq!(host.items[0].cwd.as_deref(), Some("/observed"));
+        assert_eq!(host.items[1].cwd, None);
+        assert_eq!(host.completions[0].cwd.as_deref(), Some("/observed"));
+        assert_eq!(host.items[0].request, state.pending_requests[0]);
+        state.session_directories = None;
+        let old = project(Probe {
+            endpoint: endpoint("old"),
+            result: ProbeResult::Available {
+                snapshot: Box::new(state),
+            },
+        });
+        assert!(old.items.iter().all(|i| i.cwd.is_none()));
+        assert!(old.completions.iter().all(|i| i.cwd.is_none()));
     }
 }

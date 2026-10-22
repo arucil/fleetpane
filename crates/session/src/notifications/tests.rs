@@ -53,6 +53,141 @@ fn session_mute_uses_endpoint_incarnation_and_thread_not_labels_or_request_ids()
 }
 
 #[test]
+fn workspace_policy_covers_new_sessions_but_never_guesses_unknown_or_neighbor_paths() {
+    let s = session();
+    let workspace = Workspace {
+        socket: s.socket.clone(),
+        directory: "/workspace 中文".into(),
+    };
+    let p = Preferences {
+        muted_workspaces: vec![workspace.clone()],
+        ..Default::default()
+    };
+    p.validate().unwrap();
+    let mut item = attention::Item {
+        endpoint: crate::hosts::Endpoint {
+            name: "Display name".into(),
+            socket: s.socket.clone(),
+        },
+        host_id: s.host_id,
+        id: json!(1),
+        method: "future".into(),
+        kind: attention::Kind::Approval,
+        thread_id: Some(s.thread_id.clone()),
+        cwd: Some("/workspace 中文".into()),
+        turn_id: None,
+        title: "Title".into(),
+        request: json!({"opaque":true}),
+    };
+    let before = serde_json::to_value(&item).unwrap();
+    for kind in [
+        attention::Kind::Approval,
+        attention::Kind::Question,
+        attention::Kind::Other,
+    ] {
+        item.kind = kind;
+        assert!(!p.pending_allowed(&item));
+    }
+    item.kind = attention::Kind::Approval;
+    assert_eq!(serde_json::to_value(&item).unwrap(), before);
+    item.thread_id = Some("new session".into());
+    item.host_id = Uuid::new_v4();
+    item.endpoint.name = "Renamed".into();
+    assert!(!p.pending_allowed(&item));
+    item.cwd = Some("/workspace 中文/child".into());
+    assert!(p.pending_allowed(&item));
+    item.cwd = Some("/workspace 中文-suffix".into());
+    assert!(p.pending_allowed(&item));
+    item.cwd = None;
+    assert!(p.pending_allowed(&item));
+    item.cwd = Some("/workspace 中文".into());
+    item.endpoint.socket = "/tmp/other.sock".into();
+    assert!(p.pending_allowed(&item));
+    let mut result = attention::review::Item {
+        endpoint: crate::hosts::Endpoint {
+            name: "Same".into(),
+            socket: s.socket,
+        },
+        host_id: s.host_id,
+        cwd: Some("/workspace 中文".into()),
+        reviewed: false,
+        record: fleetpane_runtime::attention::Record {
+            sequence: 1,
+            observed_unix_ms: 42,
+            thread_id: "new session".into(),
+            turn_id: "turn".into(),
+            kind: fleetpane_runtime::attention::Kind::Completed,
+            stop_reason: None,
+        },
+    };
+    for kind in [
+        fleetpane_runtime::attention::Kind::Completed,
+        fleetpane_runtime::attention::Kind::Failed,
+        fleetpane_runtime::attention::Kind::Interrupted,
+    ] {
+        result.record.kind = kind;
+        assert!(!p.result_allowed(&result));
+        assert!(!result.reviewed);
+    }
+    result.cwd = None;
+    assert!(p.result_allowed(&result));
+    let mut invalid = p.clone();
+    invalid.muted_workspaces.push(workspace);
+    assert!(invalid.validate().is_err());
+    invalid.muted_workspaces.pop();
+    invalid.muted_workspaces[0].directory = "relative".into();
+    assert!(invalid.validate().is_err());
+    invalid.muted_workspaces[0].directory = "/exact/../neighbor".into();
+    assert!(invalid.validate().is_err());
+    invalid.muted_workspaces[0].directory = "/a\0b".into();
+    assert!(invalid.validate().is_err());
+}
+
+#[tokio::test]
+async fn old_policy_is_compatible_and_workspace_rules_share_cas_without_schema_change() {
+    let root = std::env::temp_dir().join(format!("fp-workspace-alert-{}", Uuid::new_v4()));
+    let store = Store::open(root.clone()).await.unwrap();
+    store
+        .job(|db| {
+            db.execute(
+                "INSERT INTO notification_preferences VALUES(1,7,?1)",
+                [r#"{"muted":false,"muted_kinds":[],"muted_hosts":[],"muted_sessions":[]}"#],
+            )?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+    let old = store.notifications().await.unwrap();
+    assert!(old.value.muted_workspaces.is_empty());
+    let mut value = old.value;
+    value.muted_workspaces.push(Workspace {
+        socket: "/tmp/missing.sock".into(),
+        directory: "/missing 中文".into(),
+    });
+    let saved = store.save_notifications(7, value.clone()).await.unwrap();
+    assert_eq!(saved.revision, 8);
+    assert_eq!(
+        Store::open(root.clone())
+            .await
+            .unwrap()
+            .notifications()
+            .await
+            .unwrap(),
+        saved
+    );
+    assert!(
+        store
+            .save_notifications(7, Preferences::default())
+            .await
+            .is_err()
+    );
+    value.muted_workspaces = vec![value.muted_workspaces[0].clone(); 65];
+    assert!(store.save_notifications(8, value).await.is_err());
+    assert_eq!(store.notifications().await.unwrap(), saved);
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
 fn muting_does_not_review_results_or_rewrite_failure() {
     let s = session();
     let item = attention::review::Item {
@@ -62,6 +197,7 @@ fn muting_does_not_review_results_or_rewrite_failure() {
         },
         host_id: s.host_id,
         reviewed: false,
+        cwd: None,
         record: fleetpane_runtime::attention::Record {
             sequence: 1,
             observed_unix_ms: 42,
@@ -116,6 +252,7 @@ fn pending_policy_preserves_opaque_payloads_and_accepts_only_string_event_types(
         method: "future/method".into(),
         kind: attention::Kind::Other,
         thread_id: Some(s.thread_id.clone()),
+        cwd: None,
         turn_id: None,
         title: "Future request".into(),
         request: json!({"opaque":{"future":true}}),

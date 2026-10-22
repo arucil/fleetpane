@@ -81,6 +81,7 @@ def main():
             report = observe()
             assert [len(host["items"]) for host in report["hosts"]] == [1, 1, 1, 0]
             assert [host["items"][0]["kind"] for host in report["hosts"][:3]] == ["question", "approval", "approval"]
+            assert [host["items"][0]["cwd"] for host in report["hosts"][:3]] == [str(root / str(index)) for index in range(3)]
             assert report["hosts"][3]["error"] is not None
             assert [snapshot(index) for index in range(3)] == before, "attention collection claimed or mutated a Host"
             while True:

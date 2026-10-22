@@ -93,6 +93,8 @@ def main():
 
         report = observe()
         assert [len(host["completions"]) for host in report["hosts"]] == [2, 4, 0]
+        for index, host in enumerate(report["hosts"][:2]):
+            assert all(item["cwd"] == str(root / str(index)) for item in host["completions"])
         assert [host["completions"][0]["record"]["kind"] for host in report["hosts"][:2]] == ["failed", "interrupted"]
         assert report["hosts"][1]["completions"][1]["record"]["stop_reason"] == "refusal"
         assert all(not item["reviewed"] for host in report["hosts"] for item in host["completions"])

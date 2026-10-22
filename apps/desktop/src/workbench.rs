@@ -786,8 +786,7 @@ impl Render for Workbench {
             .flex()
             .flex_col()
             .bg(cx.theme().background)
-            .child(self.host_choice_bar(cx))
-            .child(self.notification_controls(cx))
+            .child(self.host_choice_bar(window, cx))
             .child(self.tabs_bar(cx))
             .when_some(self.close_error.as_ref(), |view, error| {
                 view.child(

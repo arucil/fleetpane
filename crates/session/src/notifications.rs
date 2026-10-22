@@ -64,6 +64,36 @@ pub struct Session {
     pub thread_id: String,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Workspace {
+    pub socket: PathBuf,
+    pub directory: PathBuf,
+}
+
+impl Workspace {
+    fn validate(&self) -> Result<(), Error> {
+        crate::hosts::Configuration::single(self.socket.clone())
+            .map_err(|e| Error::Input(e.to_string()))?;
+        if !self.directory.is_absolute()
+            || self.directory.to_str().is_none()
+            || self.directory.as_os_str().len() > 4096
+            || self.directory.as_os_str().as_encoded_bytes().contains(&0)
+            || !self.directory.components().all(|c| {
+                matches!(
+                    c,
+                    std::path::Component::RootDir | std::path::Component::Normal(_)
+                )
+            })
+        {
+            return Err(Error::Input(
+                "Notification workspace requires an exact absolute directory within 4 KiB".into(),
+            ));
+        }
+        Ok(())
+    }
+}
+
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Preferences {
@@ -71,6 +101,8 @@ pub struct Preferences {
     pub muted_kinds: Vec<Kind>,
     pub muted_hosts: Vec<PathBuf>,
     pub muted_sessions: Vec<Session>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub muted_workspaces: Vec<Workspace>,
 }
 
 impl Preferences {
@@ -81,10 +113,14 @@ impl Preferences {
         if !unique(&self.muted_kinds, 6)
             || !unique(&self.muted_hosts, 64)
             || !unique(&self.muted_sessions, 512)
+            || !unique(&self.muted_workspaces, 64)
         {
             return Err(Error::Input(
                 "Notification policy has duplicate or excessive scopes".into(),
             ));
+        }
+        for workspace in &self.muted_workspaces {
+            workspace.validate()?;
         }
         for socket in self
             .muted_hosts
@@ -129,12 +165,13 @@ impl Preferences {
             attention::Kind::Question => Kind::Question,
             attention::Kind::Other => Kind::Other,
         };
-        self.allows(
-            kind,
-            &item.endpoint.socket,
-            item.host_id,
-            item.thread_id.as_deref(),
-        )
+        self.workspace_allowed(&item.endpoint.socket, item.cwd.as_deref())
+            && self.allows(
+                kind,
+                &item.endpoint.socket,
+                item.host_id,
+                item.thread_id.as_deref(),
+            )
     }
 
     pub fn result_allowed(&self, item: &attention::review::Item) -> bool {
@@ -144,12 +181,23 @@ impl Preferences {
             fleetpane_runtime::attention::Kind::Interrupted => Kind::Interrupted,
         };
         !item.reviewed
+            && self.workspace_allowed(&item.endpoint.socket, item.cwd.as_deref())
             && self.allows(
                 kind,
                 &item.endpoint.socket,
                 item.host_id,
                 Some(&item.record.thread_id),
             )
+    }
+
+    fn workspace_allowed(&self, socket: &std::path::Path, cwd: Option<&str>) -> bool {
+        !self.muted_workspaces.iter().any(|w| {
+            w.socket == socket && cwd.is_some_and(|cwd| w.directory == std::path::Path::new(cwd))
+        })
+    }
+
+    pub fn workspace_unknown(&self, socket: &std::path::Path, cwd: Option<&str>) -> bool {
+        cwd.is_none() && self.muted_workspaces.iter().any(|w| w.socket == socket)
     }
 }
 

@@ -747,6 +747,14 @@ impl Workbench {
                                 .truncate()
                                 .child(entry.saved.directory.to_string_lossy().into_owned()),
                         )
+                        .child(self.workspace_mute_button(
+                            "workspace-alert-mute".into(),
+                            fleetpane_session::notifications::Workspace {
+                                socket: entry.saved.socket.clone(),
+                                directory: entry.saved.directory.clone(),
+                            },
+                            cx,
+                        ))
                         .children(
                             [
                                 (Panel::Conversation, "Conversation"),

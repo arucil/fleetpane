@@ -185,6 +185,7 @@ mod tests {
 
     fn snapshot(mode: Mode) -> Snapshot {
         Snapshot {
+            session_directories: None,
             protocol: PROTOCOL_VERSION,
             host_id: Uuid::new_v4(),
             host_pid: 10,

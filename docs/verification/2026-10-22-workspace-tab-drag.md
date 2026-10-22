@@ -71,7 +71,9 @@ cargo build --manifest-path apps/desktop/Cargo.toml --locked
 
 The previous exact-head [CI run](https://github.com/arucil/fleetpane/actions/runs/39758600958)
 passes all four jobs; it covers the CI repairs, not this subsequent desktop change.
-The new head needs its own CI result. This is not other-platform GUI, real model,
+The subsequent exact `df39a36b7c3acc03f228d40c2333be03604eb702`
+[CI run](https://github.com/arucil/fleetpane/actions/runs/39761641148) passes all
+four jobs, including this tab-drag change. This is not other-platform GUI, real model,
 IME, scale or release-performance acceptance. Foreign Workbench rejection and
 stale payload handling are implemented; only identity boundaries have unit proof.
 Drag-edge autoscroll, cross-window moves/detach, splits and conversation scroll

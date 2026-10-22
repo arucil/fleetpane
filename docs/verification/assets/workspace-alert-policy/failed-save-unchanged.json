@@ -1,0 +1,366 @@
+{
+  "Codex": {
+    "protocol": 3,
+    "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+    "host_pid": 949502,
+    "provider_pid": 949557,
+    "provider_info": {
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "codex",
+      "fleetpaneTerminalVersion": 1,
+      "userAgent": "synthetic-provider/1"
+    },
+    "owner": {
+      "host_id": "fced092d-d608-4c1b-ade7-c95eccfe08ce",
+      "controller_id": "1c888f3b-ceef-4b37-b4e5-ef1eae2cb590",
+      "generation": 15
+    },
+    "sequence": 110,
+    "operation_ids": [
+      "5138284c-7f78-4f3d-9af2-82414171c66a",
+      "ab9f343a-8fd2-4704-b2e8-6bd487037d7a",
+      "4935ea7e-4995-4853-a708-791ec3ef8974",
+      "ff196ede-f822-4589-b3d8-248347d7aa98",
+      "e5510e28-583a-409e-880e-dd99d9e9bad7",
+      "6c897fbf-95b3-4e92-a81e-3d2d6145394f",
+      "88c2ea7e-74bf-4f91-b077-f2be755173dd",
+      "dd7930d9-adb1-422b-85e9-690066e0f2ec",
+      "3f391f77-8b54-4bfa-8851-f047cc811072",
+      "af8a3ea4-1a7f-4ce8-a43e-83d004f90b31",
+      "d40cf733-14b8-4cf8-835d-8c0922a34cd1",
+      "4f69e35f-fef3-4bcd-96b0-b0300efdfa82"
+    ],
+    "journal_total": 12,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fixture-thread-1",
+          "turn_id": "fixture-thread-1-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-2",
+          "turn_id": "fixture-thread-2-turn-1"
+        },
+        {
+          "thread_id": "fixture-thread-4",
+          "turn_id": "fixture-thread-4-turn-1"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": "questions-fixture-thread-1-turn-1",
+        "method": "item/tool/requestUserInput",
+        "params": {
+          "isBlocking": true,
+          "itemId": "input-fixture-thread-1-turn-1",
+          "questions": [
+            {
+              "header": "Language",
+              "id": "language",
+              "isOther": true,
+              "isSecret": false,
+              "options": [
+                {
+                  "description": "Native performance and explicit ownership.",
+                  "label": "Rust (Recommended)"
+                },
+                {
+                  "description": "Simple concurrency and quick builds.",
+                  "label": "Go"
+                }
+              ],
+              "question": "\u9009\u62e9\u5b9e\u73b0\u8bed\u8a00\uff1f"
+            },
+            {
+              "header": "Details",
+              "id": "notes",
+              "isOther": false,
+              "isSecret": false,
+              "options": null,
+              "question": "\u8865\u5145\u8981\u6c42\uff08\u652f\u6301\u4e2d\u6587\u548c\u6362\u884c\uff09"
+            }
+          ],
+          "threadId": "fixture-thread-1",
+          "turnId": "fixture-thread-1-turn-1"
+        }
+      },
+      {
+        "id": "approval-fixture-thread-2-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-2-turn-1",
+          "threadId": "fixture-thread-2",
+          "turnId": "fixture-thread-2-turn-1"
+        }
+      },
+      {
+        "id": "approval-fixture-thread-4-turn-1",
+        "method": "item/commandExecution/requestApproval",
+        "params": {
+          "command": "synthetic approval; no command runs",
+          "itemId": "command-fixture-thread-4-turn-1",
+          "threadId": "fixture-thread-4",
+          "turnId": "fixture-thread-4-turn-1"
+        }
+      }
+    ],
+    "attention": {
+      "records": [
+        {
+          "sequence": 23,
+          "observed_unix_ms": 1792664822859,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 34,
+          "observed_unix_ms": 1792664823543,
+          "thread_id": "fixture-thread-3",
+          "turn_id": "fixture-thread-3-turn-2",
+          "kind": "failed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 58,
+          "observed_unix_ms": 1792665021154,
+          "thread_id": "fixture-thread-5",
+          "turn_id": "fixture-thread-5-turn-1",
+          "kind": "completed",
+          "stop_reason": null
+        },
+        {
+          "sequence": 69,
+          "observed_unix_ms": 1792665021838,
+          "thread_id": "fixture-thread-5",
+          "turn_id": "fixture-thread-5-turn-2",
+          "kind": "failed",
+          "stop_reason": null
+        }
+      ],
+      "evicted": 0
+    },
+    "session_directories": {
+      "records": [
+        {
+          "thread_id": "fixture-thread-3",
+          "cwd": "/tmp/fp-workspace-alert/results"
+        },
+        {
+          "thread_id": "fixture-thread-4",
+          "cwd": "/tmp/fp-workspace-alert/alpha \u4e2d\u6587"
+        },
+        {
+          "thread_id": "fixture-thread-5",
+          "cwd": "/tmp/fp-workspace-alert/alpha \u4e2d\u6587"
+        },
+        {
+          "thread_id": "fixture-thread-1",
+          "cwd": "/tmp/fp-workspace-alert/alpha \u4e2d\u6587"
+        },
+        {
+          "thread_id": "fixture-thread-2",
+          "cwd": "/tmp/fp-workspace-alert/beta"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "DeepSeek-A": {
+    "protocol": 3,
+    "host_id": "93fbcff2-011b-4a8f-8f2f-9899e2c1c94c",
+    "host_pid": 949574,
+    "provider_pid": 949631,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "93fbcff2-011b-4a8f-8f2f-9899e2c1c94c",
+      "controller_id": "a346a820-3a5a-4d9b-8fc5-0bfa10c67c2a",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "a14dd511-ca94-4fb7-8141-49eb2b4b3662",
+      "bc54592b-26eb-438f-a413-ed9bd3b42185"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "6a0f174c-fc79-4b2c-8233-99c138f178eb",
+          "turn_id": "6776f62a-b616-4aeb-9885-810c00046f72"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "6a0f174c-fc79-4b2c-8233-99c138f178eb",
+          "threadId": "6a0f174c-fc79-4b2c-8233-99c138f178eb",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-e4ff8085-9ee2-45b8-9a3d-91bdaeae5132"
+          }
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "session_directories": {
+      "records": [
+        {
+          "thread_id": "6a0f174c-fc79-4b2c-8233-99c138f178eb",
+          "cwd": "/tmp/fp-workspace-alert/alpha \u4e2d\u6587"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  },
+  "DeepSeek-B": {
+    "protocol": 3,
+    "host_id": "f1d9f1f9-05a9-4de6-b3b1-9f581ca27e21",
+    "host_pid": 949658,
+    "provider_pid": 949712,
+    "provider_info": {
+      "agentCapabilities": {
+        "sessionCapabilities": {
+          "close": {},
+          "list": {},
+          "resume": {}
+        }
+      },
+      "agentInfo": {
+        "name": "synthetic-acp",
+        "version": "1"
+      },
+      "authMethods": [],
+      "fleetpaneAttachmentVersion": 1,
+      "fleetpaneProvider": "deepseek-acp",
+      "fleetpaneTerminalVersion": 1,
+      "protocolVersion": 1
+    },
+    "owner": {
+      "host_id": "f1d9f1f9-05a9-4de6-b3b1-9f581ca27e21",
+      "controller_id": "8b5c7f6b-d0f6-495f-92fb-76ab41d834a8",
+      "generation": 2
+    },
+    "sequence": 8,
+    "operation_ids": [
+      "b8115e50-0aef-4e3a-aae0-62950f2245cc",
+      "416664d0-77b8-4a98-bdae-14d2c32c2ce3"
+    ],
+    "journal_total": 2,
+    "admission": {
+      "generation": 0,
+      "mode": "ready"
+    },
+    "activity": {
+      "stopping": [],
+      "terminal_ids": [],
+      "turns": [
+        {
+          "thread_id": "fd071b5a-1218-4b19-909d-74fed65b0ac4",
+          "turn_id": "fb057624-87bd-421c-810a-963cf735fd23"
+        }
+      ],
+      "in_flight_operations": 0,
+      "unknown_operations": 0
+    },
+    "pending_requests": [
+      {
+        "id": 10,
+        "method": "session/request_permission",
+        "params": {
+          "options": [
+            {
+              "kind": "allow_once",
+              "name": "Run this tool",
+              "optionId": "allow-one"
+            },
+            {
+              "kind": "reject_once",
+              "name": "Skip this tool",
+              "optionId": "reject-one"
+            }
+          ],
+          "sessionId": "fd071b5a-1218-4b19-909d-74fed65b0ac4",
+          "threadId": "fd071b5a-1218-4b19-909d-74fed65b0ac4",
+          "toolCall": {
+            "title": "Synthetic tool",
+            "toolCallId": "call-9cdeca08-d291-4e53-b9a3-e12831336d8f"
+          }
+        }
+      }
+    ],
+    "attention": {
+      "records": [],
+      "evicted": 0
+    },
+    "session_directories": {
+      "records": [
+        {
+          "thread_id": "fd071b5a-1218-4b19-909d-74fed65b0ac4",
+          "cwd": "/tmp/fp-workspace-alert/alpha \u4e2d\u6587"
+        }
+      ],
+      "evicted": 0
+    },
+    "fault": null,
+    "fault_scope": null
+  }
+}

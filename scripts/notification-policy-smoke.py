@@ -48,6 +48,18 @@ with tempfile.TemporaryDirectory(prefix="fp-policy-smoke-") as temporary:
     assert unmuted["revision"] == 2
     assert not unmuted["value"]["muted"]
     assert unmuted["value"]["muted_kinds"] == ["failed"], "global unmute preserves scoped rules"
+    workspace = {"socket": str(root / "missing-host.sock"), "directory": str(root / "workspace 中文")}
+    policy["muted_workspaces"] = [workspace]
+    workspace_saved = cli(store, "set", 2, payload=json.dumps(policy).encode())
+    assert workspace_saved == {"revision": 3, "value": policy}
+    assert cli(store, "get") == workspace_saved
+    for scopes in [[workspace, workspace], [workspace] * 65, [{**workspace, "directory": "relative"}], [{**workspace, "directory": str(root / "a/../b")}], [{**workspace, "socket": "relative"}]]:
+        bad = {**policy, "muted_workspaces": scopes}
+        absent = root / str(uuid.uuid4())
+        cli(absent, "set", 0, payload=json.dumps(bad).encode(), ok=False)
+        assert not absent.exists(), "invalid workspace scope opened storage"
+    assert cli(store, "get") == workspace_saved
+    assert not Path(workspace["directory"]).exists(), "policy must not inspect or create directories"
     assert not (root / "missing-host.sock").exists()
     assert not (root / "other.sock").exists()
     print("notification policy smoke: persistence, CAS, exact scopes, invalid-input bounds and no Host dependency passed")

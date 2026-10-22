@@ -1,10 +1,13 @@
 # Fleetpane
 
-**Alerts** now saves device-local global, Host, exact session and event-type mute.
+**Alerts** now saves device-local global, Host, exact workspace/session and event-type mute.
 Muted items stay in the real pending/results queue and Next request, while the
 alert count excludes them. Normal close waits for saves and displays failures.
-OS popup, sound, tray/dock and workspace rules remain open.
+Workspace scopes cover future sessions on that Host and exact directory; unknown
+directories remain included. The bounded Kit popover keeps the conversation layout.
+OS popup, sound and tray/dock remain open.
 [Linux fixture acceptance](docs/verification/2026-10-22-notification-policy.md).
+[Workspace scope and real-provider evidence](docs/verification/2026-10-22-workspace-alert-policy.md).
 
 CLI uses the same private preference directory as desktop `--preferences-dir`:
 `fleetpane-host notification-policy STORE get` or

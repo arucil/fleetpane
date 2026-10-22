@@ -71,6 +71,7 @@ impl Workbench {
         if event.prefer_character_input
             || !self.tabs_active()
             || self.switcher.active
+            || self.notifications.open
             || self.closing
             || window.has_active_dialog(cx)
             || window.has_active_sheet(cx)

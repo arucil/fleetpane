@@ -53,7 +53,7 @@ impl Workbench {
             self.close_switcher(window, cx);
             return;
         }
-        if self.export_pending(cx) || self.closing {
+        if self.export_pending(cx) || self.closing || self.notifications.open {
             return;
         }
         self.attention.next_pending = None;
