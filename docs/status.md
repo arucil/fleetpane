@@ -1,5 +1,11 @@
 # Behavior status
 
+Native session sidebar widths now support Kit divider dragging and explicit
+Narrow/Widen/Reset controls, bounded beside the conversation. Per-Host hide/show,
+small windows, appearance switching and exact drafts have [Linux fixture
+acceptance](verification/2026-10-22-sidebar-resize.md). Width is window-local;
+persisted layout and workspace tabs remain open.
+
 Updated 2026-10-22. This is an initial foundation, not a replacement release.
 
 The user-confirmed target is donut-paseo's useful workflow completeness, with

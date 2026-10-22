@@ -1,5 +1,11 @@
 # Functional parity with donut-paseo
 
+Native session sidebar widths now support Kit divider dragging and explicit
+Narrow/Widen/Reset controls, bounded beside the conversation. Per-Host hide/show,
+small windows, appearance switching and exact drafts have [Linux fixture
+acceptance](verification/2026-10-22-sidebar-resize.md). Width is window-local;
+persisted layout and workspace tabs remain open.
+
 CLI Send and Codex live follow-up now accept prompt files or stdin with exact
 UTF-8 preservation and validation before Host control. [Local CLI evidence](verification/2026-10-22-prompt-input.md)
 covers the 64 KiB boundary, FIFO refusal and unchanged Host on input errors;

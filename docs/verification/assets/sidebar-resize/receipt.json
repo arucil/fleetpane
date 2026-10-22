@@ -1,0 +1,50 @@
+{
+  "base": "5a2756a8236ab03d6ce593fb3fc082b058231284",
+  "source_sha256": "9d7a2b029045c7e92c5d6276a113e7ac3e59773c19388449720080e18b8cce79",
+  "binary_sha256": "660511846b08a99433f9f34dcafcb6ba40462b22ccf9b9a7ac6b0a467ff96e3f",
+  "checks": [
+    "36 desktop tests",
+    "strict desktop all-target Clippy",
+    "desktop fmt and build",
+    "Linux X11 incremental divider drag",
+    "Narrow/Widen/Reset buttons",
+    "240 minimum / 420 maximum at 900px; 520 maximum at wider windows",
+    "hide/show retains width and draft",
+    "independent Host layout",
+    "normal reopen resets width to 320 and restores selected-session draft explicitly",
+    "theme switch keeps 360px width",
+    "35-byte Chinese multiline clipboard matches",
+    "independent pending ACP full snapshot identical after normal close"
+  ],
+  "limits": [
+    "window-local width only",
+    "no persisted layout or tabs",
+    "no macOS/Windows/Wayland or IME acceptance"
+  ],
+  "fixture_correction": "Synthetic beta session lacked required preview; corrected fixture and relaunched original exact journal binding. Failed probe used different Python path and was correctly refused; no journal edited.",
+  "artifacts": {
+    "acp-after-close.json": "a6814a6fc24cab7280c0b7b1ed696f045e62d1c6a9d50c45509f0b031477df9f",
+    "build.log": "c6b0d6bad6e67ab3b152f16166d871f17071af2d26c18800a4250eb7fbffbafb",
+    "button.png": "74f99cea8f5e423a2885d32f207c321b3b08e58a527a89e5d07e5b3abef549ca",
+    "button2.png": "1cf49ea40e893bdc49adf84e24a9052eea101f3b4b035d93c2cd42a0ed04517a",
+    "clipboard.json": "150b8976273270963f025fccc5645681b68dc8f1b370544ab33cd8d258bc7145",
+    "clippy.log": "604a375925a552acfefdd6955307948bb6581ec5b52fe02b8424cc3dfc8bf7a1",
+    "codex-after-close.json": "3d17215b6cfc65177b2836bc00d3c10650e61f6892b000e226b98e0a5b42c873",
+    "controlled.png": "34c3250444db872999142fcfd8e4260b669a2e026fe88f94afb71fcae1ae6984",
+    "fixed-wide.png": "4bd522d5ebb54c0ca17a34148ce8a49160b776516c707c30554936f8cc0d8e20",
+    "hidden.png": "e1002bf3bb65bf936a70a55bc939623f6fcbedc1bd6778852a9299bb5686926a",
+    "host-return.png": "fc8bb0f824ef0dbfa8f95bcafcc628884d9c2c260972d74076d16b557b3ad342",
+    "incremental-drag.png": "713a16954c3cd816844f14a6c0389c4c8fb2eae03ba06cbfa909166a3e56db12",
+    "independent-before.json": "a6814a6fc24cab7280c0b7b1ed696f045e62d1c6a9d50c45509f0b031477df9f",
+    "initial.png": "75abf66f41909892f5b27e8599e3a563da68f2e3510b10867e7519d67b93e4a3",
+    "light.png": "e283c9a5acde50a10b6ae79035ff9429fb8a207892ed80b1e0a7d5e004f39c61",
+    "reopen.png": "4ec89e6f044af0781118ae2de02d15a035ac7e7917ad4b8b9e380430b8761534",
+    "restored-width.png": "7045bb9b08106bfb648afcf7bcd753be1a4569a68731a487f031ec462d1498d6",
+    "setup.py": "b37d76484a0f2e222a72bfdf722be2ac93e504a6bc4fce2a9e60401871fea9f4",
+    "small-max.png": "43fa4e147cd12feeec55045487bd1681bc247ebf30f3662a02a69eea367eb9fa",
+    "small-min.png": "52c852e0a0fa6c410841baf595c33c952089f71fce5fe1c7d45c281591765bd4",
+    "small.png": "2e2252f43f0839040685bc4b8ae2a1be59b2279d5fc328972eb1c69ca399d3b3",
+    "tests.log": "f2de3c157b4d2bdfdae462869b2d25c0c0c38034e3631dc20c3b207b7d267936",
+    "wide-max.png": "66de91f83855c4fe3d04f87da93dd6d8e0d815cf83f4e14c4f83151cf42fd3d3"
+  }
+}

@@ -32,6 +32,7 @@ use gpui_kit::component::{
     button::{Button, ButtonVariants},
     input::{Enter, Input, InputEvent, InputState, Textarea, TextareaState},
     menu::{DropdownMenu, PopupMenuItem},
+    resizable::{ResizableState, h_resizable, resizable_panel},
 };
 use gpui_kit::{prelude::*, *};
 use serde::Deserialize;
@@ -105,6 +106,7 @@ pub struct HostView {
     compact_details: bool,
     directory_scroll: UniformListScrollHandle,
     directory_visible: bool,
+    directory_layout: Entity<ResizableState>,
     focus: FocusHandle,
     workspace: Entity<InputState>,
     composer: Entity<TextareaState>,
@@ -251,7 +253,11 @@ impl HostView {
         let filter_workspace =
             cx.new(|cx| InputState::new(window, cx).placeholder("Exact workspace directory"));
         let rename = cx.new(|cx| InputState::new(window, cx).placeholder("Session name"));
-        let mut subscriptions = vec![subscription];
+        let directory_layout = cx.new(|_| ResizableState::default());
+        let mut subscriptions = vec![
+            subscription,
+            cx.observe(&directory_layout, |_, _, cx| cx.notify()),
+        ];
         subscriptions.push(cx.observe_window_bounds(window, move |this, window, cx| {
             let rows = composer_max_rows(window);
             if rows != max_rows {
@@ -336,6 +342,7 @@ impl HostView {
             timeline,
             directory_scroll: UniformListScrollHandle::new(),
             directory_visible: true,
+            directory_layout,
             focus: cx.focus_handle(),
             interactions_scroll: ScrollHandle::new(),
             compact_details: false,
@@ -1938,6 +1945,20 @@ impl HostView {
 }
 
 impl HostView {
+    fn resize_directory(
+        &mut self,
+        delta: Option<f32>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
+        let current = self.directory_layout.read(cx).sizes().first().copied();
+        if let Some(current) = current {
+            let size = delta.map_or(px(320.), |delta| current + px(delta));
+            self.directory_layout
+                .update(cx, |state, cx| state.resize_panel(0, size, window, cx));
+        }
+    }
+
     fn toggle_directory(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         self.directory_visible = !self.directory_visible;
         if !self.directory_visible {
@@ -2263,21 +2284,25 @@ impl Render for HostView {
                 })
             })
             .child(
-                div()
-                    .flex()
-                    .items_stretch()
-                    .flex_1()
-                    .min_h_0()
-                    .when(self.directory_visible, |body| body.child(
-                        div()
-                            .w_80()
-                            .flex_shrink_0()
+                div().flex_1().min_h_0().child(
+                    h_resizable("host-session-layout").with_state(&self.directory_layout)
+                    .child(resizable_panel().visible(self.directory_visible).size(px(320.)).flex_none()
+                        .size_range(px(240.)..(window.viewport_size().width-px(480.)).min(px(520.)).max(px(240.)))
+                        .child(div()
+                            .size_full()
                             .flex()
                             .flex_col()
                             .bg(cx.theme().sidebar)
                             .border_r_1()
                             .border_color(cx.theme().border)
                             .child(div().id("host-session-controls").max_h((window.viewport_size().height-px(340.)).max(px(180.))).overflow_y_scroll().flex_shrink_0()
+                            .child(div().flex().flex_wrap().items_center().gap_1().px_4().py_1()
+                                .child(Button::new("narrow-session-directory").small().ghost().label("Narrow").tooltip("Reduce session sidebar width")
+                                    .on_click(cx.listener(|this,_,window,cx| this.resize_directory(Some(-40.),window,cx))))
+                                .child(Button::new("widen-session-directory").small().ghost().label("Widen").tooltip("Increase session sidebar width")
+                                    .on_click(cx.listener(|this,_,window,cx| this.resize_directory(Some(40.),window,cx))))
+                                .child(Button::new("reset-session-directory").small().ghost().label("Reset width").tooltip("Restore 320-pixel session sidebar")
+                                    .on_click(cx.listener(|this,_,window,cx| this.resize_directory(None,window,cx)))))
                             .child(
                                 div()
                                     .p_4()
@@ -2527,9 +2552,9 @@ impl Render for HostView {
                                 )
                             }),
                     ))
-                    .child(
+                    .child(resizable_panel().size_range(px(480.)..Pixels::MAX).child(
                         div()
-                            .flex_1()
+                            .size_full()
                             .min_w_0()
                             .min_h_0()
                             .flex()
@@ -2905,7 +2930,8 @@ impl Render for HostView {
                                             ),
                                     ),
                             ),
-                    ),
+                    )),
+                ),
             )
     }
 }
