@@ -1,0 +1,13 @@
+FILE packages/desktop/src/daemon/runtime-paths.ts
+RANGE {"path":"packages/desktop/src/daemon/runtime-paths.ts","old_lines":[86,90],"new_lines":[86,94],"diff_block_lines":[5,15],"hunk_header":"@@ -86,5 +86,9 @@ export function parseCliPassthroughArgsFromArgv(argv: string[]): string[] | null","substantive_changed_lines":5}
+@@ -86,5 +86,9 @@ export function parseCliPassthroughArgsFromArgv(argv: string[]): string[] | null
+   const effective = argv
+     .slice(startIndex)
+-    .filter((arg) => !arg.startsWith(IGNORED_GUI_LAUNCH_ARG_PREFIX));
++    .filter(
++      (arg) =>
++        !arg.startsWith(IGNORED_GUI_LAUNCH_ARG_PREFIX) &&
++        !arg.startsWith("--"),
++    );
+ 
+   return effective.length > 0 ? effective : null;

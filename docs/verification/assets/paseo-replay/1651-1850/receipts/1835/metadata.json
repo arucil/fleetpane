@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1835,
+  "revision": "6b67e6569be27bf84a8ec9fea1ad3149fc1a0eaf",
+  "date": "2026-03-25T17:18:53+07:00",
+  "committer_date": "2026-03-25T17:18:53+07:00",
+  "parents": [
+    "f5a28a434d11cf7ec21ce15146893840fbe47511"
+  ],
+  "subject": "Fix chat read --since to accept message IDs",
+  "diff_tree_paths": [
+    "M\tskills/paseo-chat/bin/chat.sh"
+  ],
+  "source_receipt_digest": "sha256:8ac7bbffe14afcdda353a29aa21cda06be3eaf931bf7bde43a8ea25de330094b",
+  "diff_tree_digest": "sha256:1e1685256c665a740b58296afdf88d64dd7ec160200e608faea01249660084ed",
+  "selected_hunk_ranges": [
+    {
+      "path": "skills/paseo-chat/bin/chat.sh",
+      "old_lines": [
+        499,
+        506
+      ],
+      "new_lines": [
+        499,
+        523
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -498,12 +498,35 @@ case \"$command_name\" in",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 23,
+  "receipt_file": "receipts/1835/selected.patch"
+}

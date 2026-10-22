@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1788,
+  "revision": "d562fd40c0e684aa1ecdb1c7d34f0fc1ba5454d9",
+  "date": "2026-03-23T13:05:20+07:00",
+  "committer_date": "2026-03-23T13:05:20+07:00",
+  "parents": [
+    "cded2c52ab046163deceb42c80bca1fe4f2ac60f",
+    "df99442123e1cfe37f12eb9f569a5f6e859f6c28"
+  ],
+  "subject": "Merge branch 'terminal-multiplexing-slot'",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.test.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.ts"
+  ],
+  "source_receipt_digest": "sha256:1de243e6bf4c755f4300ed59a5e63cf545b062582b430517f4481e0cfa5f7990",
+  "diff_tree_digest": "sha256:a16e1b3dca2a47334d3cf6b67cf86cc66fccf93539305d1c884db162b774b389",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7854,
+        7856
+      ],
+      "new_lines": [
+        7857,
+        7884
+      ],
+      "diff_block_lines": [
+        229,
+        258
+      ],
+      "hunk_header": "@@ -7841,22 +7845,85 @@ export class Session {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 469,
+  "receipt_file": "receipts/1788/selected.patch"
+}

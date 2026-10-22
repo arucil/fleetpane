@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1698,
+  "revision": "48924626df9b8831eaf409b32418834a21e6c973",
+  "date": "2026-03-20T21:07:51+07:00",
+  "committer_date": "2026-03-20T21:07:51+07:00",
+  "parents": [
+    "72ea9b7a72abfdcd8091862653947858e1db6e68"
+  ],
+  "subject": "fix(app): reduce workspace screen re-renders and fix archived agent handling",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:48b40efb1d2fa34d261fa4314ec1949bf9d20c5a3f544addbf1c78b967a7bee7",
+  "diff_tree_digest": "sha256:984546938e892dc6588186f889e146b711fa77ce288abe9cc19a4b98ae8647df",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-agent-visibility.ts",
+      "old_lines": [
+        3,
+        27
+      ],
+      "new_lines": [
+        3,
+        12
+      ],
+      "diff_block_lines": [
+        7,
+        36
+      ],
+      "hunk_header": "@@ -2,60 +2,58 @@ import type { Agent } from \"@/stores/session-store\";",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 173,
+  "receipt_file": "receipts/1698/selected.patch"
+}

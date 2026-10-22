@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1849,
+  "revision": "7eebee2de0659e1655ff5efa1ad78316f5ac0575",
+  "date": "2026-03-25T22:49:14+07:00",
+  "committer_date": "2026-03-25T22:49:14+07:00",
+  "parents": [
+    "ff2fc72581cf612a10aa6293f5eb50bbc750fb45"
+  ],
+  "subject": "Fix Claude model catalog CI assertion",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/model-catalog.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:e2d4be9ae571e44797076bd39e29cf1c499867ef242cbc1194f1aee997cd6063",
+  "diff_tree_digest": "sha256:f6a55fc16e014fb0d094c631118364e4d3af8ab4d160690d6e598ca7afc9c0cc",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/model-catalog.e2e.test.ts",
+      "old_lines": [
+        17,
+        19
+      ],
+      "new_lines": [
+        18,
+        30
+      ],
+      "diff_block_lines": [
+        13,
+        25
+      ],
+      "hunk_header": "@@ -16,4 +17,14 @@ const hasCodex = isBinaryInstalled(\"codex\");",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 13,
+  "receipt_file": "receipts/1849/selected.patch"
+}

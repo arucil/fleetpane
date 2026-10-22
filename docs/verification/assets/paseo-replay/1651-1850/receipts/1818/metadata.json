@@ -1,0 +1,64 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1818,
+  "revision": "6cc81e3ab4908688d9c04538e3c8d918e48b1d48",
+  "date": "2026-03-24T14:08:57+07:00",
+  "committer_date": "2026-03-24T14:08:57+07:00",
+  "parents": [
+    "cbab9332a9c7c6d724cd8fe702e1516cfc096d4b",
+    "7699d2fcbdf7167f31055c80139f3815d8ee8351"
+  ],
+  "subject": "Merge branch 'main' of github.com:getpaseo/paseo",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/panels/draft-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-draft-pane-focus.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-draft-pane-focus.ts",
+    "M\tpackages/app/src/styles/markdown-styles.test.ts",
+    "M\tpackages/app/src/styles/markdown-styles.ts",
+    "A\tpackages/app/src/utils/web-focus.test.ts",
+    "M\tpackages/app/src/utils/web-focus.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent.env.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.sub-agent-sidechain.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/task-notification-tool-call.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\ttsconfig.json"
+  ],
+  "source_receipt_digest": "sha256:2c374536fe4ecc7d2163e2975002c892a2f21b4fa67b8db4d9724bb98fa52754",
+  "diff_tree_digest": "sha256:8deeca803836802942884fb3b87f8eb31396912ec55188656a80a923af616f4f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2885,
+        2887
+      ],
+      "new_lines": [
+        2913,
+        2936
+      ],
+      "diff_block_lines": [
+        151,
+        174
+      ],
+      "hunk_header": "@@ -2884,4 +2912,25 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 14
+    }
+  ],
+  "selected_substantive_changed_lines": 14,
+  "available_substantive_changed_lines": 726,
+  "receipt_file": "receipts/1818/selected.patch"
+}

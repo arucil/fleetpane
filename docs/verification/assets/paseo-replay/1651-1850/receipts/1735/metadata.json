@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1735,
+  "revision": "7b8a2fbcef97b446447c02e98ac1580a72b0c154",
+  "date": "2026-03-21T22:25:53+07:00",
+  "committer_date": "2026-03-21T22:25:53+07:00",
+  "parents": [
+    "928169a4f266f23ecc87e0b322e02f4c668c80f3"
+  ],
+  "subject": "Fix deleted diff syntax highlighting",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/utils/diff-highlighter.test.ts",
+    "M\tpackages/server/src/server/utils/diff-highlighter.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:36ba49298bd385fe0a6917e17831d899f2a3336ec6afa15f586210fbbd55f052",
+  "diff_tree_digest": "sha256:f3ec89acdd41455a429920ea67b025ae61a5a67d7ed06a33b8ff721e8385be34",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/utils/diff-highlighter.ts",
+      "old_lines": [
+        238,
+        258
+      ],
+      "new_lines": [
+        266,
+        277
+      ],
+      "diff_block_lines": [
+        89,
+        118
+      ],
+      "hunk_header": "@@ -237,30 +265,26 @@ export async function highlightDiffWithFileContent(",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 171,
+  "receipt_file": "receipts/1735/selected.patch"
+}

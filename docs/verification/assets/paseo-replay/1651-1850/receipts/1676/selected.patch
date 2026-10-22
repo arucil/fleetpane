@@ -1,0 +1,32 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[375,392],"new_lines":[378,390],"diff_block_lines":[48,77],"hunk_header":"@@ -374,21 +377,31 @@ export function LeftSidebar({ selectedAgentId: _selectedAgentId }: LeftSidebarPr","substantive_changed_lines":26}
+                 <View style={styles.footerIconRow}>
+-                  <Pressable
+-                    style={styles.footerIconButton}
+-                    testID="sidebar-all-agents"
+-                    nativeID="sidebar-all-agents"
+-                    collapsable={false}
+-                    accessible
+-                    accessibilityLabel="Sessions"
+-                    accessibilityRole="button"
+-                    onPress={handleViewMore}
+-                  >
+-                    {({ hovered }) => (
+-                      <MessagesSquare
+-                        size={theme.iconSize.lg}
+-                        color={hovered ? theme.colors.foreground : theme.colors.foregroundMuted}
+-                      />
+-                    )}
+-                  </Pressable>
++                  <Tooltip delayDuration={300}>
++                    <TooltipTrigger asChild>
++                      <Pressable
++                        style={styles.footerIconButton}
++                        testID="sidebar-add-project"
++                        nativeID="sidebar-add-project"
++                        collapsable={false}
++                        accessible
++                        accessibilityLabel="Add project"
++                        accessibilityRole="button"
++                        onPress={handleOpenProjectMobile}
++                      >

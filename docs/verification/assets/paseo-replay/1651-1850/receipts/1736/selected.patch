@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[1611,1640],"new_lines":[1667,1667],"diff_block_lines":[236,265],"hunk_header":"@@ -1609,66 +1665,31 @@ export function SidebarWorkspaceList({","substantive_changed_lines":24}
+-  const handleCreateWorktree = useCallback(
+-    async (project: SidebarProjectEntry) => {
+-      if (!serverId || project.projectKind !== "git") {
+-        return;
+-      }
+-      if (creatingProjectKey) {
+-        return;
+-      }
+-      onSetProjectCollapsed(project.projectKey, false);
+-      setCreatingProjectKey(project.projectKey);
+-      try {
+-        const client = getHostRuntimeStore().getClient(serverId);
+-        if (!client || !isHostRuntimeConnected(getHostRuntimeStore().getSnapshot(serverId))) {
+-          throw new Error("Host is not connected");
+-        }
+-        const payload = await client.createPaseoWorktree({
+-          cwd: project.iconWorkingDir,
+-          worktreeSlug: createNameId(),
+-        });
+-        if (payload.error || !payload.workspace) {
+-          throw new Error(payload.error ?? "Failed to create worktree");
+-        }
+-        const workspace = payload.workspace;
+-        mergeWorkspaces(serverId, [normalizeWorkspaceDescriptor(workspace)]);
+-        setCreatingWorkspaceIds((current) => {
+-          const next = new Set(current);
+-          next.add(workspace.id);
+-          return next;
+-        });
+-        const existingTimeout = creatingWorkspaceTimeoutsRef.current.get(workspace.id);

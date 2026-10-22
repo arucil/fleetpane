@@ -1,0 +1,32 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[359,367],"new_lines":[348,368],"diff_block_lines":[76,105],"hunk_header":"@@ -333,37 +346,84 @@ function DiffFileBody({","substantive_changed_lines":23}
+-          <View style={[styles.linesContainer, scrollViewWidth > 0 && { minWidth: scrollViewWidth }]}>
+-            {file.hunks.map((hunk, hunkIndex) =>
+-              hunk.lines.map((line, lineIndex) => (
+-                <DiffLineView key={`${hunkIndex}-${lineIndex}`} line={line} />
+-              ))
+-            )}
+-          </View>
+-        </ScrollView>
+-      )}
++      {(() => {
++        if (file.status === "too_large" || file.status === "binary") {
++          return (
++            <View style={styles.statusMessageContainer}>
++              <Text style={styles.statusMessageText}>
++                {file.status === "binary" ? "Binary file" : "Diff too large to display"}
++              </Text>
++            </View>
++          );
++        }
++
++        const linesContent = (() => {
++          let maxLineNo = 0;
++          for (const hunk of file.hunks) {
++            maxLineNo = Math.max(maxLineNo, hunk.oldStart + hunk.oldCount, hunk.newStart + hunk.newCount);
++          }
++          const digitCount = Math.max(1, String(maxLineNo).length);
++          const gutterWidth = digitCount * 8 + 12;
++          return file.hunks.map((hunk, hunkIndex) => {
++            let oldLineNo = hunk.oldStart;
++            let newLineNo = hunk.newStart;

@@ -1,0 +1,32 @@
+FILE packages/desktop/src/daemon/node-entrypoint-launcher.ts
+RANGE {"path":"packages/desktop/src/daemon/node-entrypoint-launcher.ts","old_lines":[0,0],"new_lines":[33,62],"diff_block_lines":[39,68],"hunk_header":"@@ -0,0 +1,78 @@","substantive_changed_lines":20}
++
++export function createElectronNodeEnv(baseEnv: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
++  return {
++    ...baseEnv,
++    ELECTRON_RUN_AS_NODE: "1",
++  };
++}
++
++export function parseCliPassthroughArgsFromArgv(
++  input: ParseCliPassthroughArgsFromArgvInput,
++): string[] | null {
++  const startIndex = input.isDefaultApp ? 2 : 1;
++  const effective = input.argv
++    .slice(startIndex)
++    .filter((arg) => !arg.startsWith(IGNORED_GUI_LAUNCH_ARG_PREFIX));
++
++  if (input.forceCli) {
++    return effective;
++  }
++
++  return effective.length > 0 ? effective : null;
++}
++
++export function createNodeEntrypointInvocation(
++  input: CreateNodeEntrypointInvocationInput,
++): NodeEntrypointInvocation {
++  const env = createElectronNodeEnv(input.baseEnv);
++
++  if (input.isPackaged) {
++    if (!input.packagedRunnerPath) {

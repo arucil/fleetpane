@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1842,
+  "revision": "08f25f065a1a4724f4f8f15cd90f78587d676cb2",
+  "date": "2026-03-25T20:12:18+07:00",
+  "committer_date": "2026-03-25T20:12:18+07:00",
+  "parents": [
+    "36327cad008b9cadda1a25657fc4680fe4e31b3c"
+  ],
+  "subject": "Fix stale abort result contaminating replacement turns after interrupt",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-during-tool-call-claude.real.e2e.test.ts",
+    "M\tpackages/server/src/test-utils/vitest-setup.ts"
+  ],
+  "source_receipt_digest": "sha256:ffa3a6b3fe1570a4a6a32e68b69155132b324f2e3d3e70fab0371d9e60df082a",
+  "diff_tree_digest": "sha256:b5aab37cd8393139290a9f6d9cd28d19392ca3c3ce92c0a8af8617427603aa46",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2250,
+        2251
+      ],
+      "new_lines": [
+        2258,
+        2276
+      ],
+      "diff_block_lines": [
+        21,
+        39
+      ],
+      "hunk_header": "@@ -2248,4 +2254,23 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 291,
+  "receipt_file": "receipts/1842/selected.patch"
+}

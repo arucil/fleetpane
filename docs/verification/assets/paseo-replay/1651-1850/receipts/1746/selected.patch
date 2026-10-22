@@ -1,0 +1,11 @@
+FILE packages/desktop/src/main.ts
+RANGE {"path":"packages/desktop/src/main.ts","old_lines":[22,25],"new_lines":[22,29],"diff_block_lines":[5,13],"hunk_header":"@@ -22,4 +22,8 @@ import { registerOpenerHandlers } from \"./features/opener.js\";","substantive_changed_lines":2}
+@@ -22,4 +22,8 @@ import { registerOpenerHandlers } from "./features/opener.js";
+ import { setupApplicationMenu } from "./features/menu.js";
+ 
++if (process.platform === "linux") {
++  app.commandLine.appendSwitch("no-sandbox");
++}
++
+ const DEV_SERVER_URL = process.env.EXPO_DEV_URL ?? "http://localhost:8081";
+ const APP_SCHEME = "paseo";

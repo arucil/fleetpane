@@ -1,0 +1,32 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[127,140],"new_lines":[135,158],"diff_block_lines":[20,49],"hunk_header":"@@ -126,17 +134,27 @@ print_message() {","substantive_changed_lines":18}
+ 
++  local display_time
++  display_time="$(format_timestamp "$created_at")"
++
++  local author
+   if [[ -n "$agent_name" ]]; then
+-    printf '### %s · %s (%s)\n' "$created_at" "$agent_name" "$agent_id"
++    author="$agent_name ($agent_id)"
+   else
+-    printf '### %s · %s\n' "$created_at" "$agent_id"
++    author="$agent_id"
+   fi
+-  printf 'message_id: %s\n' "$message_id"
++
++  printf '┌─ %s ── %s ── [%s]' "$author" "$display_time" "$message_id"
+   if [[ -n "$reply_to" ]]; then
+-    printf 'reply_to: %s\n' "$reply_to"
++    printf ' ↩ %s' "$reply_to"
+   fi
+   printf '\n'
++  printf '│\n'
+ 
+-  message_body "$file"
+-  printf '\n'
++  message_body "$file" | sed '/./,$!d' | while IFS= read -r line; do
++    printf '│  %s\n' "$line"
++  done
++
++  printf '│\n'
++  printf '└─\n'

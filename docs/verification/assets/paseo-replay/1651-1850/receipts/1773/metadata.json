@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1773,
+  "revision": "93f4b84b8b13d09ebde873e1e988f6195085abc3",
+  "date": "2026-03-22T23:17:26+07:00",
+  "committer_date": "2026-03-22T23:17:26+07:00",
+  "parents": [
+    "804d5d2487ed93e00a8f369417e952a61a535f4e"
+  ],
+  "subject": "Add terminal prod-ready e2e coverage",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts"
+  ],
+  "source_receipt_digest": "sha256:3103d322c2311aa82e45b1e2d1b93c4da65bc433639018fe2037d1985dae274c",
+  "diff_tree_digest": "sha256:d32657a664582d83a6bd9b000ced1a7fe440dcad1c2566d1bbdd9711d5912bcd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        2706,
+        2721
+      ],
+      "new_lines": [
+        2705,
+        2707
+      ],
+      "diff_block_lines": [
+        13,
+        28
+      ],
+      "hunk_header": "@@ -2705,17 +2704,4 @@ export class DaemonClient {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 267,
+  "receipt_file": "receipts/1773/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,3],"new_lines":[5,34],"diff_block_lines":[10,39],"hunk_header":"@@ -1,4 +1,35 @@","substantive_changed_lines":23}
++### Added
++- Fully rebindable keyboard shortcuts with chord support — all shortcuts are now declarative with proper Cmd (Mac) vs Ctrl (Windows/Linux) separation.
++- Migrated the desktop app from Tauri to Electron, with macOS notarization, code signing, and Linux Wayland support.
++- Added line numbers and word-wrap toggle to file previews.
++- Added an archived agent callout with an unarchive button so you can restore agents directly from the chat view.
++- Added workspace kind indicators in the sidebar (e.g. worktree vs standalone).
++- Expanded diff syntax highlighting to cover more languages.
++- Added status bar tooltips for project and agent status.
++
++### Improved
++- Redesigned the mobile tab switcher as a compact header row with quick access to new agents and terminals.
++- Streamlined workspace creation — worktrees are now created inline with a single action instead of a multi-step flow.
++- Agent history now streams from disk on reconnect, so you see past messages immediately instead of a blank screen.
++- Automatic cleanup of stale workspaces: deleted worktree directories and fully-archived workspaces are pruned automatically.
++- After archiving a workspace, the app now redirects to the next available workspace instead of leaving you on a dead screen.
++- Reopening an archived agent tab now keeps it open instead of collapsing back to archived state.
++- Reduced unnecessary re-renders across the workspace screen, sidebar, and agent list for smoother scrolling and interaction.
++- Agent list no longer refreshes in the background when the screen is unfocused, saving resources.
++- Desktop key repeat now works correctly on macOS.
++- Desktop notifications on macOS are more reliable.
++- Daemon startup no longer blocks on model downloads.
++- Better error messages from the daemon — RPC errors now include the actual underlying details.
++
++### Fixed
++- Fixed user messages appearing as assistant output in the timeline when messages contained structured content blocks.
++- Fixed archived workspace routing so navigating to an archived session no longer breaks the app.
++- Fixed Linux AppImage failing to launch on Wayland-only desktops.
++- Fixed desktop window drag coordinates being applied when they shouldn't be.
++
+ ## 0.1.30 - 2026-03-19

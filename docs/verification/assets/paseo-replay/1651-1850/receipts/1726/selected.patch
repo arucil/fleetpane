@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-agent-input-draft.ts
+RANGE {"path":"packages/app/src/hooks/use-agent-input-draft.ts","old_lines":[0,0],"new_lines":[17,46],"diff_block_lines":[23,52],"hunk_header":"@@ -0,0 +1,161 @@","substantive_changed_lines":21}
++
++function hasDraftContent(input: { text: string; images: AttachmentMetadata[] }): boolean {
++  return input.text.trim().length > 0 || input.images.length > 0
++}
++
++function areImagesEqual(input: {
++  left: AttachmentMetadata[]
++  right: AttachmentMetadata[]
++}): boolean {
++  if (input.left.length !== input.right.length) {
++    return false
++  }
++
++  return input.left.every((image, index) => {
++    const other = input.right[index]
++    return (
++      image.id === other?.id &&
++      image.mimeType === other?.mimeType &&
++      image.storageType === other?.storageType &&
++      image.storageKey === other?.storageKey
++    )
++  })
++}
++
++export function useAgentInputDraft(draftKey: string): AgentInputDraft {
++  const [text, setText] = useState('')
++  const [images, setImagesState] = useState<AttachmentMetadata[]>([])
++  const [isHydrated, setIsHydrated] = useState(false)
++  const draftGenerationRef = useRef(0)
++  const hydratedGenerationRef = useRef(0)

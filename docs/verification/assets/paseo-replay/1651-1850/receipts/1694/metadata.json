@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1694,
+  "revision": "584f5ce05e348f1fde8104ef5d0944cebc975869",
+  "date": "2026-03-20T18:34:52+07:00",
+  "committer_date": "2026-03-20T18:34:52+07:00",
+  "parents": [
+    "614c085310b75a829c4eeb33769cc138a5c4ff2e"
+  ],
+  "subject": "refactor(app): extract agent panel content",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "D\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:e49f1c36d34e895e1a08cf57d93153118f950f4e8cb90b00bd866a2b7377ef50",
+  "diff_tree_digest": "sha256:cea74f4eba2471a38047eb40c0d24ab4287864f4a1171e7fea4cfd2527e18375",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/panels/agent-panel.tsx",
+      "old_lines": [
+        86,
+        86
+      ],
+      "new_lines": [
+        125,
+        154
+      ],
+      "diff_block_lines": [
+        74,
+        103
+      ],
+      "hunk_header": "@@ -84,2 +121,890 @@ export const agentPanelRegistration: PanelRegistration<\"agent\"> = {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 1450,
+  "receipt_file": "receipts/1694/selected.patch"
+}

@@ -1,0 +1,23 @@
+FILE packages/server/src/server/agent/provider-manifest.ts
+RANGE {"path":"packages/server/src/server/agent/provider-manifest.ts","old_lines":[29,44],"new_lines":[29,44],"diff_block_lines":[14,34],"hunk_header":"@@ -28,17 +28,17 @@ const CLAUDE_MODES: AgentProviderModeDefinition[] = [","substantive_changed_lines":10}
+   { id: "acceptEdits", label: "Accept File Edits", description: "Automatically approves edit-focused tools without prompting", icon: "ShieldAlert", colorTier: "moderate" },
+-  { id: "plan", label: "Plan Mode", description: "Analyze the codebase without executing tools or edits", icon: "ShieldCheck", colorTier: "safe" },
+-  { id: "bypassPermissions", label: "Bypass", description: "Skip all permission prompts (use with caution)", icon: "ShieldOff", colorTier: "dangerous" },
++  { id: "plan", label: "Plan Mode", description: "Analyze the codebase without executing tools or edits", icon: "ShieldCheck", colorTier: "readonly" },
++  { id: "bypassPermissions", label: "Bypass", description: "Skip all permission prompts (use with caution)", icon: "ShieldAlert", colorTier: "dangerous" },
+ ];
+ 
+ const CODEX_MODES: AgentProviderModeDefinition[] = [
+-  { id: "read-only", label: "Read Only", description: "Read files and answer questions. Manual approval required for edits, commands, or network ops.", icon: "ShieldCheck", colorTier: "safe" },
++  { id: "read-only", label: "Read Only", description: "Read files and answer questions. Manual approval required for edits, commands, or network ops.", icon: "ShieldCheck", colorTier: "readonly" },
+   { id: "auto", label: "Auto", description: "Edit files and run commands but still request approval before escalating scope.", icon: "ShieldAlert", colorTier: "moderate" },
+-  { id: "full-access", label: "Full Access", description: "Edit files, run commands, and access the network without additional prompts.", icon: "ShieldOff", colorTier: "dangerous" },
++  { id: "full-access", label: "Full Access", description: "Edit files, run commands, and access the network without additional prompts.", icon: "ShieldAlert", colorTier: "dangerous" },
+ ];
+ 
+ const OPENCODE_MODES: AgentProviderModeDefinition[] = [
+   { id: "build", label: "Build", description: "Allows edits and tool execution for implementation work", icon: "ShieldAlert", colorTier: "moderate" },
+-  { id: "plan", label: "Plan", description: "Read-only planning mode that avoids file edits", icon: "ShieldCheck", colorTier: "safe" },
++  { id: "plan", label: "Plan", description: "Read-only planning mode that avoids file edits", icon: "ShieldCheck", colorTier: "readonly" },
+ ];
+ 

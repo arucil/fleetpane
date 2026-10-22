@@ -1,0 +1,9 @@
+FILE packages/cli/src/commands/agent/send.ts
+RANGE {"path":"packages/cli/src/commands/agent/send.ts","old_lines":[29,33],"new_lines":[29,33],"diff_block_lines":[5,11],"hunk_header":"@@ -29,5 +29,5 @@ export const agentSendSchema: OutputSchema<AgentSendResult> = {","substantive_changed_lines":2}
+@@ -29,5 +29,5 @@ export const agentSendSchema: OutputSchema<AgentSendResult> = {
+ 
+ export interface AgentSendOptions extends CommandOptions {
+-  noWait?: boolean;
++  wait?: boolean;
+   image?: string[];
+   prompt?: string;

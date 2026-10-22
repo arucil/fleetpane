@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1846,
+  "revision": "30cba9550eea9101c972e1fc2e1d77edbbcebee0",
+  "date": "2026-03-25T22:31:24+07:00",
+  "committer_date": "2026-03-25T22:31:24+07:00",
+  "parents": [
+    "1318372e81d528dc3f0834fdfd2444e0550146a7"
+  ],
+  "subject": "Fix attach button trigger and Claude interrupt test race",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/server/src/server/agent/providers/__tests__/claude-agent.event-stream.integration.test.ts"
+  ],
+  "source_receipt_digest": "sha256:aa755372acf9e90839cc9d42191bf47eebf05d3ca87633b60b7d4fb457de2e37",
+  "diff_tree_digest": "sha256:c5005e9fd885eab3a133927639bae3635d4590b4ec6c2c0ea74f4a240911187f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/message-input.tsx",
+      "old_lines": [
+        952,
+        966
+      ],
+      "new_lines": [
+        952,
+        968
+      ],
+      "diff_block_lines": [
+        7,
+        35
+      ],
+      "hunk_header": "@@ -951,16 +951,18 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 50,
+  "receipt_file": "receipts/1846/selected.patch"
+}

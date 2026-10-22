@@ -1,0 +1,31 @@
+FILE packages/cli/src/commands/daemon/status.ts
+RANGE {"path":"packages/cli/src/commands/daemon/status.ts","old_lines":[132,133],"new_lines":[158,186],"diff_block_lines":[76,104],"hunk_header":"@@ -127,7 +136,51 @@ function toStatusRows(status: DaemonStatus): StatusRow[] {","substantive_changed_lines":18}
++
++function checkProviderBinary(binary: string): { path: string | null; version: string | null } {
++  const binaryPath = findExecutable(binary)
++  if (!binaryPath) {
++    return { path: null, version: null }
++  }
++  const env = applyProviderEnv(process.env)
++  try {
++    const output = execFileSync(binaryPath, ['--version'], {
++      encoding: 'utf8',
++      timeout: 5000,
++      stdio: ['ignore', 'pipe', 'pipe'],
++      env,
++    }).trim()
++    return { path: binaryPath, version: output || null }
++  } catch {
++    return { path: binaryPath, version: null }
++  }
++}
++
++function checkProviderBinaries(): ProviderBinaryStatus[] {
++  return PROVIDER_BINARIES.map(({ label, binary }) => {
++    const result = checkProviderBinary(binary)
++    return { label, ...result }
++  })
++}
++
+ function resolveOwnerLabel(uid: number | undefined, hostname: string | undefined): string | null {
+   if (uid === undefined && !hostname) {

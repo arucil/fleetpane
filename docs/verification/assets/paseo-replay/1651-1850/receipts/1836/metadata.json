@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1836,
+  "revision": "4c1b11f73352eba38aec7b5102db3c6a2bf5c1b5",
+  "date": "2026-03-25T17:22:46+07:00",
+  "committer_date": "2026-03-25T17:22:46+07:00",
+  "parents": [
+    "6b67e6569be27bf84a8ec9fea1ad3149fc1a0eaf"
+  ],
+  "subject": "Revert incorrect Claude interrupt flags that broke autonomous wake",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:26c30ec73ef56ab26db001b6011bc6aa3e94d968c082c883f3a9dc8d2032dfc8",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1326,
+        1330
+      ],
+      "new_lines": [
+        1326,
+        1329
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -1326,5 +1326,4 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/1836/selected.patch"
+}

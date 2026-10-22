@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1808,
+  "revision": "8ba5df358a6e658662583a686f30939b2e503998",
+  "date": "2026-03-23T23:06:55+07:00",
+  "committer_date": "2026-03-23T23:06:55+07:00",
+  "parents": [
+    "771acd11a1da160e793466bdb1ae0fb5b63cbb52"
+  ],
+  "subject": "Revert \"debug(app): add dictation pipeline logging\"",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/hooks/use-dictation.ts"
+  ],
+  "source_receipt_digest": "sha256:41f98fb9157e7d2e240b3753ff0ec2ed855451d4af6d8d92a0ab8448e34a0ed4",
+  "diff_tree_digest": "sha256:269f8f5988558789de6ca961da9e68559ca5c0ad819361a1dd283c6073a6a310",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/hooks/use-dictation.ts",
+      "old_lines": [
+        333,
+        348
+      ],
+      "new_lines": [
+        330,
+        339
+      ],
+      "diff_block_lines": [
+        20,
+        35
+      ],
+      "hunk_header": "@@ -332,17 +329,11 @@ export function useDictation(options: UseDictationOptions): UseDictationResult {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 18,
+  "receipt_file": "receipts/1808/selected.patch"
+}

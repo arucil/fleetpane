@@ -1,0 +1,32 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[88,99],"new_lines":[86,107],"diff_block_lines":[38,67],"hunk_header":"@@ -87,31 +85,35 @@ function PushNotificationRouter() {","substantive_changed_lines":22}
+     if (Platform.OS === "web") {
+-      if (getTauri()) {
++      let removeDesktopNotificationListener: (() => void) | null = null;
++      let cancelled = false;
++
++      if (getIsDesktop()) {
+         void ensureOsNotificationPermission();
+ 
+-        let disposed = false;
+-        let unlisten: (() => void) | null = null;
++        const unlistenResult = getDesktopHost()?.events?.on?.(
++          "notification-click",
++          (payload: unknown) => {
++            const data =
++              typeof payload === "object" &&
++              payload !== null &&
++              "data" in payload &&
++              typeof (payload as { data?: unknown }).data === "object" &&
++              (payload as { data?: unknown }).data !== null
++                ? ((payload as { data: Record<string, unknown> }).data)
++                : undefined;
++            router.push(buildNotificationRoute(data) as any);
++          }
++        );
+ 
+-        void listenToDesktopNotificationClicks((payload) => {
+-          router.push(buildNotificationRoute(payload.data) as any);
+-        })
+-          .then((cleanup) => {
+-            if (disposed) {

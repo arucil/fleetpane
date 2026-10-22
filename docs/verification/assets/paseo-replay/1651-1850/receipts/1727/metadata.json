@@ -1,0 +1,57 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1727,
+  "revision": "5f065c2685cc111536e007a5a395c2b3a1d5010a",
+  "date": "2026-03-21T19:56:49+07:00",
+  "committer_date": "2026-03-21T19:56:49+07:00",
+  "parents": [
+    "6b50ace2bd517e6f511fdccc6df3d33da72c406a"
+  ],
+  "subject": "Extract isomorphic @getpaseo/highlight package with syntax-highlighted file preview",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/components/file-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/utils/diff-highlighter.ts",
+    "D\tpackages/app/src/utils/syntax-highlighter.ts",
+    "A\tpackages/highlight/package.json",
+    "A\tpackages/highlight/src/__tests__/colors.test.ts",
+    "A\tpackages/highlight/src/__tests__/highlighter.test.ts",
+    "A\tpackages/highlight/src/__tests__/parsers.test.ts",
+    "A\tpackages/highlight/src/colors.ts",
+    "A\tpackages/highlight/src/highlighter.ts",
+    "A\tpackages/highlight/src/index.ts",
+    "A\tpackages/highlight/src/parsers.ts",
+    "A\tpackages/highlight/src/types.ts",
+    "A\tpackages/highlight/tsconfig.json",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/utils/diff-highlighter.ts",
+    "D\tpackages/server/src/server/utils/syntax-highlighter.ts"
+  ],
+  "source_receipt_digest": "sha256:ed2ea4f1e7f2d5a8b3e1e0154296e4edd8238c60f064759f9f9c28b6fa5af41c",
+  "diff_tree_digest": "sha256:cfc6123ae423bf8f11f4a2b761b7aeef91287a69304486730ca6b1573e32d57f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/file-pane.tsx",
+      "old_lines": [
+        39,
+        39
+      ],
+      "new_lines": [
+        62,
+        91
+      ],
+      "diff_block_lines": [
+        76,
+        105
+      ],
+      "hunk_header": "@@ -11,31 +11,103 @@ import {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 2610,
+  "receipt_file": "receipts/1727/selected.patch"
+}

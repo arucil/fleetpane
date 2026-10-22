@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1774,
+  "revision": "c0e63f76da7b5b3a117f9d1ee30a1371bd306dc4",
+  "date": "2026-03-23T00:03:09+07:00",
+  "committer_date": "2026-03-23T00:03:09+07:00",
+  "parents": [
+    "93f4b84b8b13d09ebde873e1e988f6195085abc3"
+  ],
+  "subject": "feat(terminal): add shift+enter support and force resize on focus",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/server/src/shared/terminal-key-input.test.ts",
+    "M\tpackages/server/src/shared/terminal-key-input.ts"
+  ],
+  "source_receipt_digest": "sha256:7daf3c11b389a4cd942c7a756bf82e14d1b6a771cb3d873668bf50ea2ac9f435",
+  "diff_tree_digest": "sha256:ac924c72d2572e3b42f69191d0922d5290c58fc0087b6137c8786995c72cf03a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/terminal-key-input.ts",
+      "old_lines": [
+        87,
+        90
+      ],
+      "new_lines": [
+        87,
+        93
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -87,4 +87,7 @@ export function encodeTerminalKeyInput(input: TerminalKeyInput): string {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 9,
+  "receipt_file": "receipts/1774/selected.patch"
+}

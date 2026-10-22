@@ -1,0 +1,32 @@
+FILE packages/desktop/scripts/after-pack.js
+RANGE {"path":"packages/desktop/scripts/after-pack.js","old_lines":[10,10],"new_lines":[18,47],"diff_block_lines":[16,45],"hunk_header":"@@ -8,6 +8,123 @@ exec \"$(dirname \"$(readlink -f \"$0\")\")/${EXECUTABLE_NAME}.bin\" --no-sandbox \"$@\"","substantive_changed_lines":19}
++
++function rmSafe(target) {
++  fs.rmSync(target, { recursive: true, force: true });
++}
++
++function pruneChildrenExcept(parent, keep) {
++  if (!fs.existsSync(parent)) return;
++  for (const entry of fs.readdirSync(parent)) {
++    if (!keep.has(entry)) {
++      rmSafe(path.join(parent, entry));
++    }
++  }
++}
++
++function pruneOnnxRuntime(nodeModules, platform, arch) {
++  const onnxBin = path.join(nodeModules, "onnxruntime-node", "bin", "napi-v6");
++  if (!fs.existsSync(onnxBin)) return;
++
++  const otherPlatforms = ["darwin", "linux", "win32"].filter((p) => p !== platform);
++  for (const p of otherPlatforms) {
++    rmSafe(path.join(onnxBin, p));
++  }
++
++  pruneChildrenExcept(path.join(onnxBin, platform), new Set([arch]));
++
++  if (platform === "linux") {
++    const archDir = path.join(onnxBin, "linux", arch);
++    if (fs.existsSync(archDir)) {
++      for (const name of fs.readdirSync(archDir)) {
++        if (name.includes("cuda") || name.includes("tensorrt")) {

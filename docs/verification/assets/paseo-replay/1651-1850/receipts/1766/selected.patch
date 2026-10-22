@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[791,794],"new_lines":[791,795],"diff_block_lines":[5,10],"hunk_header":"@@ -791,4 +791,5 @@ export class AgentManager {","substantive_changed_lines":1}
+@@ -791,4 +791,5 @@ export class AgentManager {
+       agent.runtimeInfo = { ...agent.runtimeInfo, modeId };
+     }
++    this.touchUpdatedAt(agent);
+     this.emitState(agent);
+   }

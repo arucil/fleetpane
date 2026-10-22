@@ -1,0 +1,18 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[99,110],"new_lines":[100,106],"diff_block_lines":[13,28],"hunk_header":"@@ -98,13 +99,8 @@ const projectKeyExtractor = (project: SidebarProjectEntry) => project.projectKey","substantive_changed_lines":12}
+ const WORKSPACE_STATUS_DOT_WIDTH = 14;
+-const GITHUB_PR_STATE_COLORS: Record<PrHint["state"], string> = {
+-  open: "#3fb950",
+-  merged: "#a371f7",
+-  closed: "#f85149",
+-};
+-const GITHUB_PR_STATE_COLORS_HOVER: Record<PrHint["state"], string> = {
+-  open: "#56d364",
+-  merged: "#bc8cff",
+-  closed: "#ff7b72",
++const GITHUB_PR_STATE_LABELS: Record<PrHint["state"], string> = {
++  open: "Open",
++  merged: "Merged",
++  closed: "Closed",
+ };
+ 

@@ -1,0 +1,15 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[4183,4190],"new_lines":[4185,4196],"diff_block_lines":[16,28],"hunk_header":"@@ -4182,9 +4184,13 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":6}
+     options?: {
++      textMessageType?: "assistant_message" | "user_message";
+       suppressAssistantText?: boolean;
+       suppressReasoning?: boolean;
+     }
+   ): AgentTimelineItem[] {
+-    const suppressAssistant = options?.suppressAssistantText ?? false;
++    const textMessageType = options?.textMessageType ?? "assistant_message";
++    const suppressText =
++      textMessageType === "assistant_message" &&
++      (options?.suppressAssistantText ?? false);
+     const suppressReasoning = options?.suppressReasoning ?? false;
+ 

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-list.tsx
+RANGE {"path":"packages/app/src/components/agent-list.tsx","old_lines":[333,341],"new_lines":[289,316],"diff_block_lines":[156,185],"hunk_header":"@@ -315,33 +279,45 @@ export function AgentList({","substantive_changed_lines":19}
++  const renderItem: ListRenderItem<FlatListItem> = useCallback(
++    ({ item }) => {
++      if (item.type === 'header') {
++        return (
++          <View style={styles.sectionHeading}>
++            <Text style={styles.sectionTitle}>{item.title}</Text>
++          </View>
++        )
++      }
++      return (
++        <SessionRow
++          agent={item.agent}
++          isMobile={isMobile}
++          selectedAgentId={selectedAgentId}
++          showAttentionIndicator={showAttentionIndicator}
++          onPress={handleAgentPress}
++          onLongPress={handleAgentLongPress}
++        />
++      )
++    },
+     [handleAgentLongPress, handleAgentPress, isMobile, selectedAgentId, showAttentionIndicator]
+   )
+ 
+-  const keyExtractor = useCallback((section: AgentListSection) => section.key, [])
++  const keyExtractor = useCallback((item: FlatListItem) => item.key, [])
+ 
+   return (
+     <>
+       <FlatList
+-        data={sections}

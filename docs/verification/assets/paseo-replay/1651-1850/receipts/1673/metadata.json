@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1673,
+  "revision": "f0ba64f23b87a55a87eca42eaa0b28c592c98275",
+  "date": "2026-03-19T08:55:40+07:00",
+  "committer_date": "2026-03-19T08:55:40+07:00",
+  "parents": [
+    "22c27dd58344ecb60d375b31819e607b36ace7fc"
+  ],
+  "subject": "Add combined model selector and refactor working indicator",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.status-controls.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/components/combined-model-selector.tsx",
+    "A\tpackages/app/src/components/provider-icons.ts",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/combobox.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "A\tpackages/app/src/utils/working-indicator.test.ts",
+    "A\tpackages/app/src/utils/working-indicator.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts"
+  ],
+  "source_receipt_digest": "sha256:0a3ce116345c83a412ea406b2b72906b85497f36f9f57d5582959a5fa3188d78",
+  "diff_tree_digest": "sha256:ba3191308bd886966c148079eea82d1bc03f430e66042898199eff5a6d5e2345",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        300,
+        329
+      ],
+      "new_lines": [
+        297,
+        297
+      ],
+      "diff_block_lines": [
+        53,
+        82
+      ],
+      "hunk_header": "@@ -299,33 +296,37 @@ function ControlledStatusBar({",
+      "substantive_changed_lines": 28
+    }
+  ],
+  "selected_substantive_changed_lines": 28,
+  "available_substantive_changed_lines": 607,
+  "receipt_file": "receipts/1673/selected.patch"
+}

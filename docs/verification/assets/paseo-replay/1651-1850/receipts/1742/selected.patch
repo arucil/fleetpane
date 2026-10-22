@@ -1,0 +1,32 @@
+FILE packages/app/src/components/diff-scroll.tsx
+RANGE {"path":"packages/app/src/components/diff-scroll.tsx","old_lines":[0,0],"new_lines":[20,49],"diff_block_lines":[26,55],"hunk_header":"@@ -0,0 +1,85 @@","substantive_changed_lines":16}
++
++export function DiffScroll({
++  children,
++  scrollViewWidth,
++  onScrollViewWidthChange,
++  style,
++  contentContainerStyle,
++}: DiffScrollProps) {
++  const [isAtLeftEdge, setIsAtLeftEdge] = useState(true);
++  const horizontalScroll = useHorizontalScrollOptional();
++  const scrollId = useId();
++  const scrollViewRef = useRef<ScrollViewType>(null);
++
++  // Get the close gesture ref from animation context (may not be available outside sidebar)
++  let closeGestureRef: React.MutableRefObject<any> | undefined;
++  try {
++    const animation = useExplorerSidebarAnimation();
++    closeGestureRef = animation.closeGestureRef;
++  } catch {
++    // Not inside ExplorerSidebarAnimationProvider, which is fine
++  }
++
++  // Register/unregister scroll offset tracking
++  useEffect(() => {
++    if (!horizontalScroll) return;
++    // Start at 0 (not scrolled)
++    horizontalScroll.registerScrollOffset(scrollId, 0);
++    return () => {
++      horizontalScroll.unregisterScrollOffset(scrollId);
++    };

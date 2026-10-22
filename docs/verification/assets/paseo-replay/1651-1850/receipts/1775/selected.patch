@@ -1,0 +1,29 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[701,702],"new_lines":[696,722],"diff_block_lines":[32,58],"hunk_header":"@@ -699,4 +693,30 @@ const SHORTCUT_BINDINGS: readonly ShortcutBinding[] = [","substantive_changed_lines":18}
++  {
++    id: "sidebar-toggle-both-cmd-period-mac",
++    action: "sidebar.toggle.both",
++    combo: "Cmd+.",
++    when: { mac: true, commandCenter: false },
++    help: {
++      id: "toggle-both-sidebars",
++      section: "panels",
++      label: "Toggle both sidebars",
++      keys: ["mod", "."],
++    },
++  },
++  {
++    id: "sidebar-toggle-both-ctrl-period-non-mac",
++    action: "sidebar.toggle.both",
++    combo: "Ctrl+.",
++    when: { mac: false, commandCenter: false, terminal: false },
++    help: {
++      id: "toggle-both-sidebars",
++      section: "panels",
++      label: "Toggle both sidebars",
++      keys: ["mod", "."],
++    },
++  },
++
+   // --- Message input ---
+   {

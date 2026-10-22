@@ -1,0 +1,16 @@
+FILE packages/app/src/styles/markdown-styles.ts
+RANGE {"path":"packages/app/src/styles/markdown-styles.ts","old_lines":[115,125],"new_lines":[126,139],"diff_block_lines":[64,77],"hunk_header":"@@ -114,12 +125,15 @@ export function createMarkdownStyles(theme: Theme) {","substantive_changed_lines":3}
+     strong: {
++      ...webSelectableTextStyle,
+       fontWeight: theme.fontWeight.medium,
+     },
+ 
+     em: {
++      ...webSelectableTextStyle,
+       fontStyle: "italic" as const,
+     },
+ 
+     s: {
++      ...webSelectableTextStyle,
+       textDecorationLine: "line-through" as const,
+       color: theme.colors.foregroundMuted,

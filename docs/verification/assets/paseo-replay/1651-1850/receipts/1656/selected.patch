@@ -1,0 +1,32 @@
+FILE packages/app/src/components/split-container.tsx
+RANGE {"path":"packages/app/src/components/split-container.tsx","old_lines":[477,487],"new_lines":[466,486],"diff_block_lines":[184,213],"hunk_header":"@@ -476,20 +465,62 @@ function SplitPaneView({","substantive_changed_lines":23}
+   const { theme } = useUnistyles();
+-  const paneTabs = useMemo(() => getPaneTabDescriptors(pane, tabsById), [pane, tabsById]);
+-  const paneModel = useMemo(
++  const paneState = useMemo(
++    () =>
++      deriveWorkspacePaneState({
++        pane,
++        tabs: uiTabs,
++      }),
++    [pane, uiTabs]
++  );
++  const paneTabs = useMemo(
++    () => paneState.tabs.map((tab) => tab.descriptor),
++    [paneState.tabs]
++  );
++  const activeTabDescriptor = paneState.activeTab?.descriptor ?? null;
++  const desktopTabRowItems = useMemo<WorkspaceDesktopTabRowItem[]>(
+     () =>
+-      deriveWorkspaceTabModel({
+-        tabs: paneTabs.map((tab) => ({
+-          tabId: tab.tabId,
+-          target: tab.target,
+-          createdAt: 0,
+-        })),
+-        focusedTabId: pane.focusedTabId,
++      paneTabs.map((tab) => {
++        const isClosingAgent =
++          tab.target.kind === "agent" &&
++          isArchivingAgent({
++            serverId: normalizedServerId,

@@ -1,0 +1,30 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[47,74],"new_lines":[38,40],"diff_block_lines":[17,44],"hunk_header":"@@ -36,39 +36,5 @@ env:","substantive_changed_lines":19}
+-          source_tag="${SOURCE_TAG}"
+-          if [[ "$source_tag" =~ ^(desktop-(windows|linux|macos)-|desktop-)?v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+-            release_tag="v${BASH_REMATCH[3]}"
+-          else
+-            release_tag="$source_tag"
+-          fi
+-          echo "RELEASE_TAG=$release_tag" >> "$GITHUB_ENV"
+-
+-      - name: Delete all existing release assets
+-        env:
+-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-        shell: bash
+-        run: |
+-          set -euo pipefail
+-          assets=$(gh release view "$RELEASE_TAG" --repo "${{ github.repository }}" --json assets --jq '.assets[].name' 2>/dev/null || true)
+-          if [[ -z "$assets" ]]; then
+-            echo "No existing assets to clean up"
+-            exit 0
+-          fi
+-          for asset in $assets; do
+-            echo "Deleting $asset"
+-            gh release delete-asset "$RELEASE_TAG" "$asset" --repo "${{ github.repository }}" --yes || true
+-          done
+-
+   publish-macos:
+-    needs: cleanup-assets
+     if: ${{ (github.event_name == 'workflow_dispatch' && (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'macos')) || (github.event_name == 'push' && (startsWith(github.ref_name, 'v') || startsWith(github.ref_name, 'desktop-v') || startsWith(github.ref_name, 'desktop-macos-v'))) }}
+     strategy:

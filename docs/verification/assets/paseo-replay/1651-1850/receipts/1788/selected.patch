@@ -1,0 +1,32 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[7854,7856],"new_lines":[7857,7884],"diff_block_lines":[229,258],"hunk_header":"@@ -7841,22 +7845,85 @@ export class Session {","substantive_changed_lines":22}
+ 
+-  private detachActiveTerminalStream(options?: { emitExit: boolean }): boolean {
+-    const activeStream = this.activeTerminalStream;
++  private trySendTerminalSnapshot(activeStream: ActiveTerminalStream): void {
++    if (
++      this.activeTerminalStreams.get(activeStream.slot) !== activeStream ||
++      !activeStream.needsSnapshot
++    ) {
++      return;
++    }
++
++    if (this.getCurrentBinaryBufferedAmount() > TERMINAL_STREAM_LOW_WATER_BYTES) {
++      if (!activeStream.snapshotRetryTimer) {
++        activeStream.snapshotRetryTimer = setTimeout(() => {
++          activeStream.snapshotRetryTimer = null;
++          this.trySendTerminalSnapshot(activeStream);
++        }, 33);
++      }
++      return;
++    }
++
++    if (activeStream.snapshotRetryTimer) {
++      clearTimeout(activeStream.snapshotRetryTimer);
++      activeStream.snapshotRetryTimer = null;
++    }
++
++    const terminal = this.terminalManager?.getTerminal(activeStream.terminalId);
++    if (!terminal) {
++      this.detachTerminalStream(activeStream.terminalId, { emitExit: true });
++      return;

@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1785,
+  "revision": "cded2c52ab046163deceb42c80bca1fe4f2ac60f",
+  "date": "2026-03-23T13:05:07+07:00",
+  "committer_date": "2026-03-23T13:05:07+07:00",
+  "parents": [
+    "b9b1601bb872df0873ae33a38fe3ddfec1c049a9"
+  ],
+  "subject": "feat(app): add focus mode (Cmd+Shift+F) to show only the active pane",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/panel-store.ts",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:fd1c37aa5ffcd1723348c753c9eedfe3f6b66f7463f8ba1d54af0b48576dfb1d",
+  "diff_tree_digest": "sha256:7183c9f3664b8c153e10aa4020050a9c15fdcd353735de4e53c2cc745ae9701f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        721,
+        722
+      ],
+      "new_lines": [
+        722,
+        748
+      ],
+      "diff_block_lines": [
+        9,
+        35
+      ],
+      "hunk_header": "@@ -719,4 +719,30 @@ const SHORTCUT_BINDINGS: readonly ShortcutBinding[] = [",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 92,
+  "receipt_file": "receipts/1785/selected.patch"
+}

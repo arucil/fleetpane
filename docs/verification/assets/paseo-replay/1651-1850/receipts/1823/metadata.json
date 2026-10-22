@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1823,
+  "revision": "140e0ef9655d5aded70f2fb40b95443faf286287",
+  "date": "2026-03-24T22:48:40+07:00",
+  "committer_date": "2026-03-24T22:48:40+07:00",
+  "parents": [
+    "8c49f74fd9aebcdeef0483aa79aaf40be7974a23"
+  ],
+  "subject": "fix(chat): skip archived agent notifications",
+  "diff_tree_paths": [
+    "M\tskills/paseo-chat/bin/chat.sh"
+  ],
+  "source_receipt_digest": "sha256:09ada073d45d6a35e8702371a4fbbdbe20925aa68843dff858f579d3ef590bec",
+  "diff_tree_digest": "sha256:1e1685256c665a740b58296afdf88d64dd7ec160200e608faea01249660084ed",
+  "selected_hunk_ranges": [
+    {
+      "path": "skills/paseo-chat/bin/chat.sh",
+      "old_lines": [
+        213,
+        215
+      ],
+      "new_lines": [
+        213,
+        223
+      ],
+      "diff_block_lines": [
+        7,
+        17
+      ],
+      "hunk_header": "@@ -212,4 +212,12 @@ room_participant_ids() {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1823/selected.patch"
+}

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1795,
+  "revision": "956828fa55d6c5f1cacf88a6cb4f2734b8106f9c",
+  "date": "2026-03-23T15:34:07+07:00",
+  "committer_date": "2026-03-23T15:34:07+07:00",
+  "parents": [
+    "b873523eab7000d9da4aa594b0985c39c34d868d"
+  ],
+  "subject": "Fix terminal stream stalls after resize",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:e19b450b930798f7491ffa5d7bd6a5c483be90a781d35ad522b864ebfd7ae7db",
+  "diff_tree_digest": "sha256:b3c4c8fc50385535f769080c995b9f658bf55d64231f267418428f9fc92726bd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7860,
+        7863
+      ],
+      "new_lines": [
+        7859,
+        7863
+      ],
+      "diff_block_lines": [
+        11,
+        16
+      ],
+      "hunk_header": "@@ -7860,4 +7859,5 @@ export class Session {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/1795/selected.patch"
+}

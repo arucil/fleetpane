@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1713,
+  "revision": "84d3aa19628f321166f0bd8056646444b35b32e8",
+  "date": "2026-03-21T14:46:26+07:00",
+  "committer_date": "2026-03-21T14:46:26+07:00",
+  "parents": [
+    "0bc693f1571cf1ad8763bf48ea316550352ed922"
+  ],
+  "subject": "fix(desktop): update release workflow for Electron migration and add notarization",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml",
+    "A\tpackages/desktop/build/entitlements.mac.inherit.plist",
+    "A\tpackages/desktop/build/entitlements.mac.plist",
+    "M\tpackages/desktop/electron-builder.yml"
+  ],
+  "source_receipt_digest": "sha256:179e42431b8ace719d59c7b79da942b26318bd2f9882786d45db70835b2ef0ba",
+  "diff_tree_digest": "sha256:ee8f609a006152f22b3c19a10745422d77570c695f211ade42cc61f019e81d93",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        32,
+        37
+      ],
+      "new_lines": [
+        32,
+        37
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -32,6 +32,6 @@ concurrency:",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 28,
+  "receipt_file": "receipts/1713/selected.patch"
+}

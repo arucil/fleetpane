@@ -1,0 +1,74 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1700,
+  "revision": "17b81fb13265c2fbdab0d91983efe05159fef8f7",
+  "date": "2026-03-21T01:52:25+07:00",
+  "committer_date": "2026-03-21T01:52:25+07:00",
+  "parents": [
+    "111576e2ca7440f942f7e33e6a0f386202bd2fa6",
+    "862cc43db7a745c1d39125e641b7f6e28933a737"
+  ],
+  "subject": "Merge branch 'main' into read-electron-migration-skills",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/project-picker-modal.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/hooks/use-agent-autocomplete.ts",
+    "M\tpackages/app/src/hooks/use-agent-commands-query.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "M\tpackages/app/src/hooks/use-checkout-diff-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "M\tpackages/app/src/hooks/use-checkout-status-query.ts",
+    "M\tpackages/app/src/hooks/use-open-project.ts",
+    "M\tpackages/app/src/hooks/use-project-icon-query.ts",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/panels/pane-context.tsx",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "D\tpackages/app/src/screens/agent/agent-ready-screen.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-pane-content.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/task-notification-tool-call.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:6d7bb2b0f78069badcc76fef6ddaecf19ef590169b4a715fe46092f54d9abd9b",
+  "diff_tree_digest": "sha256:a327b768255f52d56dbac6eb745c47fcadea24161352535d7b08f2152a3ca0e5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/_layout.tsx",
+      "old_lines": [
+        298,
+        299
+      ],
+      "new_lines": [
+        323,
+        335
+      ],
+      "diff_block_lines": [
+        85,
+        97
+      ],
+      "hunk_header": "@@ -296,4 +288,48 @@ function AppContainer({",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 2693,
+  "receipt_file": "receipts/1700/selected.patch"
+}

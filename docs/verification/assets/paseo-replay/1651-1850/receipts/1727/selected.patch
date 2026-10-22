@@ -1,0 +1,32 @@
+FILE packages/app/src/components/file-pane.tsx
+RANGE {"path":"packages/app/src/components/file-pane.tsx","old_lines":[39,39],"new_lines":[62,91],"diff_block_lines":[76,105],"hunk_header":"@@ -11,31 +11,103 @@ import {","substantive_changed_lines":20}
+ 
++const CodeLine = React.memo(function CodeLine({
++  tokens,
++  lineNumber,
++  gutterWidth,
++  colorMap,
++  baseColor,
++}: CodeLineProps) {
++  return (
++    <View style={codeLineStyles.line}>
++      <View style={[codeLineStyles.gutter, { width: gutterWidth }]}>
++        <Text style={[codeLineStyles.gutterText, { color: baseColor }]}>{String(lineNumber)}</Text>
++      </View>
++      <Text style={codeLineStyles.lineText}>
++        {tokens.map((token, index) => (
++          <Text
++            key={index}
++            style={{ color: token.style ? colorMap[token.style] ?? baseColor : baseColor }}
++          >
++            {token.text}
++          </Text>
++        ))}
++      </Text>
++    </View>
++  )
++})
++
++const codeLineStyles = StyleSheet.create((theme) => ({
++  line: {
++    flexDirection: 'row',

@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1612,1615],"new_lines":[1612,1616],"diff_block_lines":[5,10],"hunk_header":"@@ -1612,4 +1612,5 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":1}
+@@ -1612,4 +1612,5 @@ class ClaudeAgentSession implements AgentSession {
+     this.sidechainTracker.clear();
+     this.input?.end();
++    this.query?.close();
+     await this.awaitWithTimeout(this.query?.interrupt?.(), "close query interrupt");
+     await this.awaitWithTimeout(this.query?.return?.(), "close query return");

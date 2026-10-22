@@ -1,0 +1,21 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2250,2251],"new_lines":[2258,2276],"diff_block_lines":[21,39],"hunk_header":"@@ -2248,4 +2254,23 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":12}
++    // request. Consume the flag on ANY result so it doesn't linger.
++    if (message.type === "result" && this.pendingInterruptAbort) {
++      this.pendingInterruptAbort = false;
++      if (message.subtype !== "success") {
++        this.logger.debug("Suppressing stale non-success result from interrupted request");
++        return;
++      }
++    }
++    if (
++      message.type === "result" &&
++      message.subtype !== "success" &&
++      this.isAbortError(message)
++    ) {
++      this.logger.debug("Suppressing abort result by content");
++      return;
++    }
++
+     const isForeground = Boolean(this.activeForegroundTurnId);
+     const assistantishMessage =

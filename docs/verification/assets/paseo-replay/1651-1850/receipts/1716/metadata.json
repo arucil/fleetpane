@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1716,
+  "revision": "67318799311a0f6c2c561b4381069af7f91beafb",
+  "date": "2026-03-21T14:58:57+07:00",
+  "committer_date": "2026-03-21T14:58:57+07:00",
+  "parents": [
+    "b15159caeba560ddc7dec6d2db2b10104f9e7650"
+  ],
+  "subject": "fix(desktop): guard manual window drag coordinates",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/utils/desktop-window-drag-coordinates.test.ts",
+    "A\tpackages/app/src/utils/desktop-window-drag-coordinates.ts",
+    "M\tpackages/app/src/utils/desktop-window.ts",
+    "A\tpackages/desktop/src/window/window-drag-coordinates.test.ts",
+    "A\tpackages/desktop/src/window/window-drag-coordinates.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:31034188adfaab6d4cecb5f74bfbb170db95f26699042f919a0aefb771a3fa57",
+  "diff_tree_digest": "sha256:5254cbb83ef7a4dc4c56bb47a244880481f45caf4ffe3fa812c3195d108ca7dd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/desktop-window.ts",
+      "old_lines": [
+        111,
+        131
+      ],
+      "new_lines": [
+        119,
+        138
+      ],
+      "diff_block_lines": [
+        168,
+        197
+      ],
+      "hunk_header": "@@ -28,141 +29,146 @@ export async function toggleMaximize() {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 364,
+  "receipt_file": "receipts/1716/selected.patch"
+}

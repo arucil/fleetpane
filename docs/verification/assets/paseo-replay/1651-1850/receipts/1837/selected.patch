@@ -1,0 +1,10 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1382,1386],"new_lines":[1382,1387],"diff_block_lines":[5,12],"hunk_header":"@@ -1382,5 +1382,6 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":3}
+@@ -1382,5 +1382,6 @@ class ClaudeAgentSession implements AgentSession {
+ 
+     if (this.autonomousTurn) {
+-      this.cancelAutonomousTurn("Interrupted");
++      this.flushPendingToolCalls();
++      this.completeAutonomousTurn();
+     }
+ 

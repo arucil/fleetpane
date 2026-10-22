@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1776,
+  "revision": "7f9dafab6841a115ff9dd5eceb00514ddf12b00a",
+  "date": "2026-03-23T10:33:06+07:00",
+  "committer_date": "2026-03-23T10:33:06+07:00",
+  "parents": [
+    "07720f1d9985993f64d42dec0d71e4a650a3be27"
+  ],
+  "subject": "refactor(cli): deduplicate command options between top-level and agent subcommands",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/attach.ts",
+    "M\tpackages/cli/src/commands/agent/delete.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts",
+    "M\tpackages/cli/src/commands/agent/inspect.ts",
+    "M\tpackages/cli/src/commands/agent/logs.ts",
+    "M\tpackages/cli/src/commands/agent/ls.ts",
+    "M\tpackages/cli/src/commands/agent/run.ts",
+    "M\tpackages/cli/src/commands/agent/send.ts",
+    "M\tpackages/cli/src/commands/agent/stop.ts",
+    "M\tpackages/cli/src/commands/agent/wait.ts"
+  ],
+  "source_receipt_digest": "sha256:c6bf1411bc70b9cb93b8f64ed6b6c28eefba35a66de6a2141783ec96ab03f2de",
+  "diff_tree_digest": "sha256:c220d4c7b9562a3094f231c73946e88573db5b36c5fae8dd27018d6036de1858",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/cli.ts",
+      "old_lines": [
+        97,
+        124
+      ],
+      "new_lines": [
+        65,
+        72
+      ],
+      "diff_block_lines": [
+        73,
+        102
+      ],
+      "hunk_header": "@@ -60,118 +59,37 @@ export function createCli(): Command {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 233,
+  "receipt_file": "receipts/1776/selected.patch"
+}

@@ -1,0 +1,26 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2885,2887],"new_lines":[2913,2936],"diff_block_lines":[151,174],"hunk_header":"@@ -2884,4 +2912,25 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":14}
+ 
++  private startLiveHistoryPolling(): void {
++    if (this.liveHistoryPollTimer || !this.claudeSessionId) {
++      return;
++    }
++    this.liveHistoryPollTimer = setInterval(() => {
++      if (!this.claudeSessionId || this.closed) {
++        this.stopLiveHistoryPolling();
++        return;
++      }
++      this.loadPersistedHistory(this.claudeSessionId, { dispatchLive: true });
++    }, 200);
++  }
++
++  private stopLiveHistoryPolling(): void {
++    if (!this.liveHistoryPollTimer) {
++      return;
++    }
++    clearInterval(this.liveHistoryPollTimer);
++    this.liveHistoryPollTimer = null;
++  }
++
+   private ingestPersistedHistoryChunk(chunk: string, options: { dispatchLive: boolean }): void {
+     if (!chunk) {

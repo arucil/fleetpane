@@ -1,0 +1,32 @@
+FILE packages/app/src/runtime/host-runtime.ts
+RANGE {"path":"packages/app/src/runtime/host-runtime.ts","old_lines":[1779,1779],"new_lines":[1775,1804],"diff_block_lines":[30,59],"hunk_header":"@@ -1778,4 +1774,44 @@ export function useHostRuntimeIsConnected(serverId: string): boolean {","substantive_changed_lines":22}
+ 
++export function useHostRuntimeConnectionStatus(
++  serverId: string
++): HostRuntimeConnectionStatus {
++  const store = getHostRuntimeStore();
++  return useSyncExternalStore(
++    (onStoreChange) => store.subscribe(serverId, onStoreChange),
++    () => store.getSnapshot(serverId)?.connectionStatus ?? "connecting",
++    () => store.getSnapshot(serverId)?.connectionStatus ?? "connecting"
++  );
++}
++
++export function useHostRuntimeLastError(serverId: string): string | null {
++  const store = getHostRuntimeStore();
++  return useSyncExternalStore(
++    (onStoreChange) => store.subscribe(serverId, onStoreChange),
++    () => store.getSnapshot(serverId)?.lastError ?? null,
++    () => store.getSnapshot(serverId)?.lastError ?? null
++  );
++}
++
++export function useHostRuntimeAgentDirectoryStatus(
++  serverId: string
++): HostRuntimeAgentDirectoryStatus {
++  const store = getHostRuntimeStore();
++  return useSyncExternalStore(
++    (onStoreChange) => store.subscribe(serverId, onStoreChange),
++    () => store.getSnapshot(serverId)?.agentDirectoryStatus ?? "idle",
++    () => store.getSnapshot(serverId)?.agentDirectoryStatus ?? "idle"
++  );

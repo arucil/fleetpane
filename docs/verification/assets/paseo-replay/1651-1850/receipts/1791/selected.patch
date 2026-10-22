@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-app-visible.ts
+RANGE {"path":"packages/app/src/hooks/use-app-visible.ts","old_lines":[0,0],"new_lines":[7,36],"diff_block_lines":[13,42],"hunk_header":"@@ -0,0 +1,49 @@","substantive_changed_lines":19}
++
++function notify(): void {
++  const next = getIsAppActivelyVisible();
++  if (next === current) {
++    return;
++  }
++  current = next;
++  for (const listener of listeners) {
++    listener();
++  }
++}
++
++function subscribe(listener: () => void): () => void {
++  listeners.add(listener);
++  return () => listeners.delete(listener);
++}
++
++function getSnapshot(): boolean {
++  return current;
++}
++
++export function useAppVisible(): boolean {
++  useEffect(() => {
++    const appStateSubscription = AppState.addEventListener("change", notify);
++
++    if (Platform.OS === "web" && typeof document !== "undefined") {
++      document.addEventListener("visibilitychange", notify);
++      window.addEventListener("focus", notify);
++      window.addEventListener("blur", notify);
++    }

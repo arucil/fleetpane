@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[1439,1451],"new_lines":[1513,1534],"diff_block_lines":[178,207],"hunk_header":"@@ -1438,18 +1512,66 @@ export function SidebarWorkspaceList({","substantive_changed_lines":19}
+   const handleCreateWorktree = useCallback(
+-    (project: SidebarProjectEntry) => {
++    async (project: SidebarProjectEntry) => {
+       if (!serverId || project.projectKind !== 'git') {
+         return
+       }
++      if (creatingProjectKey) {
++        return
++      }
+       onSetProjectCollapsed(project.projectKey, false)
+-      onWorkspacePress?.()
+-      router.push(
+-        buildHostNewAgentRoute(serverId, {
+-          workingDir: project.iconWorkingDir,
+-          worktreeMode: 'create',
+-        }) as any
+-      )
++      setCreatingProjectKey(project.projectKey)
++      try {
++        const client = getHostRuntimeStore().getClient(serverId)
++        if (!client || !isHostRuntimeConnected(getHostRuntimeStore().getSnapshot(serverId))) {
++          throw new Error('Host is not connected')
++        }
++        const payload = await client.createPaseoWorktree({
++          cwd: project.iconWorkingDir,
++          worktreeSlug: createNameId(),
++        })
++        if (payload.error || !payload.workspace) {
++          throw new Error(payload.error ?? 'Failed to create worktree')
++        }

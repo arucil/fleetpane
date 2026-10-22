@@ -1,0 +1,32 @@
+FILE packages/app/src/app/settings.tsx
+RANGE {"path":"packages/app/src/app/settings.tsx","old_lines":[20,48],"new_lines":[12,19],"diff_block_lines":[25,54],"hunk_header":"@@ -1,54 +1,22 @@","substantive_changed_lines":18}
+-    if (preferences.serverId) {
+-      const match = daemons.find((daemon) => daemon.serverId === preferences.serverId);
+-      if (match) {
+-        return match.serverId;
+-      }
+-    }
+     return daemons[0]?.serverId ?? null;
+-  }, [daemons, preferences.serverId]);
++  }, [daemons]);
+ 
+   useEffect(() => {
+-    if (preferencesLoading) {
+-      return;
+-    }
+     if (!targetServerId) {
+       return;
+     }
+     router.replace(buildHostSettingsRoute(targetServerId) as any);
+-  }, [preferencesLoading, router, targetServerId]);
+-
+-  if (preferencesLoading) {
+-    return (
+-      <View
+-        style={{
+-          flex: 1,
+-          justifyContent: "center",
+-          alignItems: "center",
+-          backgroundColor: theme.colors.surface0,
+-        }}
+-      >

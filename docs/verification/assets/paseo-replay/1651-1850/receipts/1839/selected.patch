@@ -1,0 +1,14 @@
+FILE packages/cli/src/commands/agent/archive.ts
+RANGE {"path":"packages/cli/src/commands/agent/archive.ts","old_lines":[25,28],"new_lines":[25,35],"diff_block_lines":[10,21],"hunk_header":"@@ -25,4 +25,11 @@ export const archiveSchema: OutputSchema<AgentArchiveResult> = {","substantive_changed_lines":5}
+@@ -25,4 +25,11 @@ export const archiveSchema: OutputSchema<AgentArchiveResult> = {
+ };
+ 
++export function addArchiveOptions(cmd: Command): Command {
++  return cmd
++    .description('Archive an agent (soft-delete)')
++    .argument("<id>", "Agent ID, prefix, or name")
++    .option("--force", "Force archive running agent (interrupts active run first)");
++}
++
+ export interface AgentArchiveOptions extends CommandOptions {
+   force?: boolean;

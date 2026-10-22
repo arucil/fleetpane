@@ -1,0 +1,60 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1819,
+  "revision": "a54687d3ef7d9b1f20b9271e4bf45c75f7e37281",
+  "date": "2026-03-24T21:22:00+07:00",
+  "committer_date": "2026-03-24T21:22:00+07:00",
+  "parents": [
+    "6cc81e3ab4908688d9c04538e3c8d918e48b1d48"
+  ],
+  "subject": "refactor(server): replace stream() with subscribe() + startTurn() across all providers",
+  "diff_tree_paths": [
+    "A\tdocs/design/agent-event-stream-redesign.md",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/server/src/server/agent/agent-management-mcp.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/agent-projections.test.ts",
+    "M\tpackages/server/src/server/agent/agent-sdk-types.ts",
+    "M\tpackages/server/src/server/agent/agent-storage.test.ts",
+    "M\tpackages/server/src/server/agent/mcp-server.ts",
+    "A\tpackages/server/src/server/agent/providers/__tests__/claude-agent.event-stream.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.sub-agent-sidechain.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/codex-app-server-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/opencode-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/test-utils/session-stream-adapter.ts",
+    "M\tpackages/server/src/server/persistence-hooks.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/test-utils/fake-agent-client.ts"
+  ],
+  "source_receipt_digest": "sha256:1e415041f81d0e7cdba041fe62457ef1b315ce5fc236223d6047ee0d97070468",
+  "diff_tree_digest": "sha256:448fbc8ebe168566e7e735f54904d66987fd8902205df19cafa11decf2b12c2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        1000,
+        1028
+      ],
+      "new_lines": [
+        1037,
+        1038
+      ],
+      "diff_block_lines": [
+        214,
+        243
+      ],
+      "hunk_header": "@@ -994,133 +1032,132 @@ export class AgentManager {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 3029,
+  "receipt_file": "receipts/1819/selected.patch"
+}

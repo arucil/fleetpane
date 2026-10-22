@@ -1,0 +1,19 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1793,1803],"new_lines":[1799,1806],"diff_block_lines":[30,46],"hunk_header":"@@ -1791,13 +1797,10 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":10}
+-  const handleFocusPane = useCallback(
+-    function handleFocusPane(paneId: string) {
+-      if (!persistenceKey) {
+-        return;
+-      }
+-      focusWorkspacePane(persistenceKey, paneId);
+-    },
+-    [focusWorkspacePane, persistenceKey],
+-  );
++  const handleFocusPane = useStableEvent(function handleFocusPane(paneId: string) {
++    if (!persistenceKey || paneFocusSuppressedRef.current) {
++      return;
++    }
++    focusWorkspacePane(persistenceKey, paneId);
++  });
+ 
+   const handleSplitPane = useCallback(

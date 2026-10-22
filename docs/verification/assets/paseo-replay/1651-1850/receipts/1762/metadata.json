@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1762,
+  "revision": "d79ea8b15c7f1f58e242454db3a3e8f13ca942f7",
+  "date": "2026-03-22T19:07:01+07:00",
+  "committer_date": "2026-03-22T19:07:01+07:00",
+  "parents": [
+    "c60ea67a9b9a06af3761916787d2f67f49057c1c"
+  ],
+  "subject": "fix(sidebar): fix PR hint for fork PRs, remove badge styling, add hover effect",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-checkout-pr-status-query.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:7396bf96755538927278764d9cc00b761be3cb1164e2c34083d1059e582660bf",
+  "diff_tree_digest": "sha256:f31203b5786d8fef436298390eac24eb4ea9d4b901d85e2c854eb64a3923d850",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/utils/checkout-git.ts",
+      "old_lines": [
+        1873,
+        1884
+      ],
+      "new_lines": [
+        1808,
+        1826
+      ],
+      "diff_block_lines": [
+        87,
+        116
+      ],
+      "hunk_header": "@@ -1861,68 +1805,50 @@ export async function getPullRequestStatus(cwd: string): Promise<PullRequestStat",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 142,
+  "receipt_file": "receipts/1762/selected.patch"
+}

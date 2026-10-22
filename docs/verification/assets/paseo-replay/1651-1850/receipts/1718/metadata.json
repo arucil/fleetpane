@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1718,
+  "revision": "48c3308c318adeff0ba348dcf5b22c8d7f019bef",
+  "date": "2026-03-21T15:21:02+07:00",
+  "committer_date": "2026-03-21T15:21:02+07:00",
+  "parents": [
+    "78fc1fe8620dd19ac2dd786776f2d56009f3ab00"
+  ],
+  "subject": "refactor: move workspace tab navigation logic to prepareWorkspaceTab",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/agent-bottom-anchor.ts",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-open-project.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts",
+    "A\tpackages/app/src/utils/workspace-navigation.ts"
+  ],
+  "source_receipt_digest": "sha256:976b2426696c6cde44b6beed9e015f6887101de778632f2ab3caecf3f3672850",
+  "diff_tree_digest": "sha256:749374040d432da830229a9964d40776a536405b3c1c5d66405159a75c485803",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+      "old_lines": [
+        15,
+        23
+      ],
+      "new_lines": [
+        46,
+        68
+      ],
+      "diff_block_lines": [
+        50,
+        79
+      ],
+      "hunk_header": "@@ -14,12 +45,36 @@ export default function HostWorkspaceLayout() {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 370,
+  "receipt_file": "receipts/1718/selected.patch"
+}

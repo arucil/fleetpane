@@ -1,0 +1,14 @@
+FILE packages/app/src/components/ui/shortcut.tsx
+RANGE {"path":"packages/app/src/components/ui/shortcut.tsx","old_lines":[36,44],"new_lines":[36,41],"diff_block_lines":[5,16],"hunk_header":"@@ -36,9 +36,6 @@ export function Shortcut({","substantive_changed_lines":7}
+@@ -36,9 +36,6 @@ export function Shortcut({
+       {displayChord.map(function (combo, index) {
+         return (
+-          <View key={`${combo.join("+")}-${index}`} style={styles.sequenceItem}>
+-            <View style={styles.badge}>
+-              <Text style={[styles.text, textStyle]}>{formatShortcut(combo, shortcutOs)}</Text>
+-            </View>
+-            {index < displayChord.length - 1 ? <Text style={styles.separator}>→</Text> : null}
++          <View key={`${combo.join("+")}-${index}`} style={styles.badge}>
++            <Text style={[styles.text, textStyle]}>{formatShortcut(combo, shortcutOs)}</Text>
+           </View>
+         );

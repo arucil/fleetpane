@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1711,
+  "revision": "5ae7a0c9c22d3579106eaa8230036989043ed1de",
+  "date": "2026-03-21T14:29:55+07:00",
+  "committer_date": "2026-03-21T14:29:55+07:00",
+  "parents": [
+    "e6bc752b68fe3aacd87ddb53d3e09e6573f34dbd"
+  ],
+  "subject": "fix(app): reduce unnecessary workspace screen re-renders from unstable callback deps",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/hooks/use-archive-agent.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-layout-actions.ts"
+  ],
+  "source_receipt_digest": "sha256:e2e24ad53b576acc782d55a633e0ff0ae5533c4a8a9a23bc5a7d0b71ef418b1a",
+  "diff_tree_digest": "sha256:8435b93ad487ee0be1fc26d41949a8659327db0de7a1cb3eff63419aeac5d08c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1305,
+        1333
+      ],
+      "new_lines": [
+        1343,
+        1347
+      ],
+      "diff_block_lines": [
+        121,
+        150
+      ],
+      "hunk_header": "@@ -1303,79 +1341,54 @@ function WorkspaceScreenContent({",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 265,
+  "receipt_file": "receipts/1711/selected.patch"
+}

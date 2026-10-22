@@ -1,0 +1,32 @@
+FILE packages/app/src/components/ui/autocomplete.tsx
+RANGE {"path":"packages/app/src/components/ui/autocomplete.tsx","old_lines":[158,187],"new_lines":[156,156],"diff_block_lines":[15,44],"hunk_header":"@@ -151,57 +151,87 @@ export function Autocomplete({","substantive_changed_lines":28}
+-        onContentSizeChange={pinToBottom}
+-        onScroll={(event) => {
+-          scrollOffsetRef.current = event.nativeEvent.contentOffset.y;
+-        }}
+-        scrollEventThrottle={16}
+-        style={styles.scrollView}
+-        contentContainerStyle={styles.scrollContent}
+-        keyboardShouldPersistTaps="always"
+-      >
+-        {options.map((option, index) => {
+-          const isSelected = index === selectedIndex;
+-          const optionLabel = removeBoltGlyphs(option.label) ?? option.label;
+-          const optionDetail = removeBoltGlyphs(option.detail);
+-          const optionDescription = removeBoltGlyphs(option.description);
+-          return (
+-            <Pressable
+-              key={option.id}
+-              onLayout={(event) => handleRowLayout(index, event)}
+-              onPress={() => onSelect(option)}
+-              style={({ hovered = false, pressed }) => [
+-                styles.item,
+-                (hovered || pressed || isSelected) && styles.itemActive,
+-              ]}
+-            >
+-              {option.kind === "directory" || option.kind === "file" ? (
+-                <View style={styles.itemLeading}>
+-                  {option.kind === "directory" ? (
+-                    <Folder size={14} color={theme.colors.foregroundMuted} />
+-                  ) : (
+-                    <File size={14} color={theme.colors.foregroundMuted} />

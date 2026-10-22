@@ -1,0 +1,32 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[941,942],"new_lines":[970,997],"diff_block_lines":[95,124],"hunk_header":"@@ -936,9 +965,86 @@ export function resolveKeyboardShortcut(input: {","substantive_changed_lines":26}
+-  for (const binding of bindings) {
+-    if (!matchesCombo(binding.parsedCombo, event, context.isMac)) {
++}): {
++  match: KeyboardShortcutMatch | null;
++  nextChordState: ChordState;
++  preventDefault: boolean;
++};
++export function resolveKeyboardShortcut(input: {
++  event: KeyboardEvent;
++  context: KeyboardShortcutContext;
++  chordState: ChordState;
++  onChordReset: () => void;
++  bindings?: readonly ParsedShortcutBinding[];
++}): {
++  match: KeyboardShortcutMatch | null;
++  nextChordState: ChordState;
++  preventDefault: boolean;
++} {
++  const { event, context, chordState, onChordReset, bindings = DEFAULT_BINDINGS } = input;
++
++  if (chordState.step === 0) {
++    const advancingCandidateIndices: number[] = [];
++    let singleComboMatch: KeyboardShortcutMatch | null = null;
++
++    for (const [index, binding] of bindings.entries()) {
++      const firstCombo = binding.parsedChord[0];
++      if (!firstCombo) {
++        continue;
++      }
++      if (!matchesCombo(firstCombo, event, context.isMac)) {

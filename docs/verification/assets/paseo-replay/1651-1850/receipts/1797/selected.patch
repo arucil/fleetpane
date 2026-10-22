@@ -1,0 +1,8 @@
+FILE packages/desktop/electron-builder.yml
+RANGE {"path":"packages/desktop/electron-builder.yml","old_lines":[30,33],"new_lines":[30,34],"diff_block_lines":[5,10],"hunk_header":"@@ -30,4 +30,5 @@ linux:","substantive_changed_lines":1}
+@@ -30,4 +30,5 @@ linux:
+   category: Development
+   icon: assets
++  artifactName: "Paseo-${version}-${arch}.${ext}"
+   extraResources:
+     - from: bin/paseo

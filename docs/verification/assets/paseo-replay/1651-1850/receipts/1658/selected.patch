@@ -1,0 +1,32 @@
+FILE packages/app/src/components/resize-handle.tsx
+RANGE {"path":"packages/app/src/components/resize-handle.tsx","old_lines":[105,118],"new_lines":[104,123],"diff_block_lines":[51,80],"hunk_header":"@@ -91,32 +97,45 @@ export function ResizeHandle({","substantive_changed_lines":22}
+-      onPointerDown={handlePointerDown}
+-      onPointerEnter={() => {
+-        setHovered(true);
+-      }}
+-      onPointerLeave={() => {
+-        setHovered(false);
+-      }}
+     >
++      {highlighted && (
++        <View
++          pointerEvents="none"
++          style={[
++            styles.highlight,
++            direction === "horizontal"
++              ? styles.highlightHorizontal
++              : styles.highlightVertical,
++            { backgroundColor: theme.colors.accent },
++          ]}
++        />
++      )}
+       <View
++        role="separator"
++        aria-orientation={direction === "horizontal" ? "vertical" : "horizontal"}
+         style={[
+-          styles.handleGrip,
+-          direction === "horizontal" ? styles.handleGripHorizontal : styles.handleGripVertical,
++          styles.hitArea,
++          direction === "horizontal" ? styles.hitAreaHorizontal : styles.hitAreaVertical,
+           {
+-            backgroundColor: hovered ? theme.colors.accent : theme.colors.border,

@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1833,
+  "revision": "638c633a21f6fed3190565ea6a6cb12ded8113dc",
+  "date": "2026-03-25T16:46:23+07:00",
+  "committer_date": "2026-03-25T16:46:23+07:00",
+  "parents": [
+    "935e55eb27dc33879a40ccd4d143630875f072d0"
+  ],
+  "subject": "Fix Claude agent interrupt race and refactor mode color tiers",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/active-processes.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/provider-manifest.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-during-tool-call-claude.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:d3eb5d56394cac816de93b66d30816170ce81ca76de80529ca5639337ae7d5e1",
+  "diff_tree_digest": "sha256:6e4387b0d906b64cc2f0a6d402e0b9fc35487c67a90e3b07be90b719d3f0a4c1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1782,
+        1794
+      ],
+      "new_lines": [
+        1784,
+        1801
+      ],
+      "diff_block_lines": [
+        19,
+        42
+      ],
+      "hunk_header": "@@ -1781,14 +1783,19 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 48,
+  "receipt_file": "receipts/1833/selected.patch"
+}

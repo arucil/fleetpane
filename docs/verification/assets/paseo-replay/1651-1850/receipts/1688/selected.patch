@@ -1,0 +1,8 @@
+FILE packages/app/src/utils/working-indicator.ts
+RANGE {"path":"packages/app/src/utils/working-indicator.ts","old_lines":[7,10],"new_lines":[7,11],"diff_block_lines":[5,10],"hunk_header":"@@ -7,4 +7,5 @@ export const WORKING_INDICATOR_OFFSETS = [","substantive_changed_lines":1}
+@@ -7,4 +7,5 @@ export const WORKING_INDICATOR_OFFSETS = [
+ 
+ function normalizePhase(value: number): number {
++  "worklet";
+   const wrapped = value % 1;
+   return wrapped < 0 ? wrapped + 1 : wrapped;

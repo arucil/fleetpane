@@ -1,0 +1,96 @@
+      input: {
+        key: string;
+        ctrl: boolean;
+        shift: boolean;
+        alt: boolean;
+        meta?: boolean;
+      };
+    };
+
+const EMPTY_MODIFIERS: ModifierState = {
+  ctrl: false,
+  shift: false,
+  alt: false,
+};
+
+function terminalScopeKey(input: { serverId: string; cwd: string }): string {
+  return `${input.serverId}:${input.cwd}`;
+}
+
+export function TerminalPane({
+  serverId,
+  cwd,
+  terminalId,
+  isPaneFocused,
+}: TerminalPaneProps) {
+  const isScreenFocused = useIsFocused();
+  const isAppVisible = useAppVisible();
+  const { theme } = useUnistyles();
+  const xtermTheme = useMemo(() => toXtermTheme(theme.colors.terminal), [theme.colors.terminal]);
+  const isMobile = UnistylesRuntime.breakpoint === "xs" || UnistylesRuntime.breakpoint === "sm";
+  const mobileView = usePanelStore((state) => state.mobileView);
+  const openAgentList = usePanelStore((state) => state.openAgentList);
+  const openFileExplorer = usePanelStore((state) => state.openFileExplorer);
+  const swipeGesturesEnabled = isMobile && mobileView === "agent";
+  const { shift: keyboardShift, style: keyboardPaddingStyle } = useKeyboardShiftStyle({
+    mode: "padding",
+    enabled: isMobile,
+  });
+
+  const client = useHostRuntimeClient(serverId);
+  const isConnected = useHostRuntimeIsConnected(serverId);
+
+  const scopeKey = useMemo(() => terminalScopeKey({ serverId, cwd }), [serverId, cwd]);
+  const lastReportedSizeRef = useRef<{ rows: number; cols: number } | null>(null);
+  const streamControllerRef = useRef<TerminalStreamController | null>(null);
+  const emulatorRef = useRef<TerminalEmulatorHandle | null>(null);
+  const workspaceTerminalSession = useMemo(() => getWorkspaceTerminalSession({ scopeKey }), [scopeKey]);
+  const [isAttaching, setIsAttaching] = useState(false);
+  const [streamError, setStreamError] = useState<string | null>(null);
+  const [modifiers, setModifiers] = useState<ModifierState>(EMPTY_MODIFIERS);
+  const [focusRequestToken, setFocusRequestToken] = useState(0);
+  const [resizeRequestToken, setResizeRequestToken] = useState(0);
+  const terminalIdRef = useRef<string>(terminalId);
+  const pendingTerminalInputRef = useRef<PendingTerminalInput[]>([]);
+  const keyboardRefitTimeoutsRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
+  const lastAutoFocusKeyRef = useRef<string | null>(null);
+  const initialSnapshot = workspaceTerminalSession.snapshots.get({ terminalId });
+
+  useEffect(() => {
+    terminalIdRef.current = terminalId;
+  }, [terminalId]);
+
+  const requestTerminalFocus = useCallback(() => {
+    setFocusRequestToken((current) => current + 1);
+  }, []);
+  const requestTerminalReflow = useCallback(() => {
+    setResizeRequestToken((current) => current + 1);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || !isScreenFocused || !isPaneFocused || !terminalId) {
+      lastAutoFocusKeyRef.current = null;
+      return;
+    }
+
+    const nextFocusKey = `${scopeKey}:${terminalId}`;
+    if (lastAutoFocusKeyRef.current === nextFocusKey) {
+      return;
+    }
+
+    lastAutoFocusKeyRef.current = nextFocusKey;
+    requestTerminalFocus();
+  }, [isMobile, isPaneFocused, isScreenFocused, requestTerminalFocus, scopeKey, terminalId]);
+
+  useEffect(() => {
+    if (isPaneFocused && isScreenFocused && isAppVisible && terminalId) {
+      lastReportedSizeRef.current = null;
+      requestTerminalReflow();
+    }
+  }, [isAppVisible, isPaneFocused, isScreenFocused, requestTerminalReflow, terminalId]);
+
+  const clearKeyboardRefitTimeouts = useCallback(() => {
+    if (keyboardRefitTimeoutsRef.current.length === 0) {
+      return;
+    }
+    for (const handle of keyboardRefitTimeoutsRef.current) {

@@ -1,0 +1,66 @@
+   */
+  systemPrompt?: string;
+  modeId?: string;
+  model?: string;
+  thinkingOptionId?: string;
+  title?: string | null;
+  approvalPolicy?: string;
+  sandboxMode?: string;
+  networkAccess?: boolean;
+  webSearch?: boolean;
+  extra?: {
+    codex?: AgentMetadata;
+    claude?: Partial<ClaudeAgentOptions>;
+  };
+  mcpServers?: Record<string, McpServerConfig>;
+  /**
+   * Internal agents are hidden from listings and don't trigger notifications.
+   * They are used for ephemeral system tasks like commit/PR generation.
+   */
+  internal?: boolean;
+};
+
+export interface AgentLaunchContext {
+  env?: Record<string, string>;
+}
+
+export interface AgentSession {
+  readonly provider: AgentProvider;
+  readonly id: string | null;
+  readonly capabilities: AgentCapabilityFlags;
+  run(prompt: AgentPromptInput, options?: AgentRunOptions): Promise<AgentRunResult>;
+  startTurn(prompt: AgentPromptInput, options?: AgentRunOptions): Promise<{ turnId: string }>;
+  subscribe(callback: (event: AgentStreamEvent) => void): () => void;
+  streamHistory(): AsyncGenerator<AgentStreamEvent>;
+  getRuntimeInfo(): Promise<AgentRuntimeInfo>;
+  getAvailableModes(): Promise<AgentMode[]>;
+  getCurrentMode(): Promise<string | null>;
+  setMode(modeId: string): Promise<void>;
+  getPendingPermissions(): AgentPermissionRequest[];
+  respondToPermission(requestId: string, response: AgentPermissionResponse): Promise<void>;
+  describePersistence(): AgentPersistenceHandle | null;
+  interrupt(): Promise<void>;
+  close(): Promise<void>;
+  listCommands?(): Promise<AgentSlashCommand[]>;
+  setModel?(modelId: string | null): Promise<void>;
+  setThinkingOption?(thinkingOptionId: string | null): Promise<void>;
+}
+
+export interface ListModelsOptions {
+  cwd?: string;
+}
+
+export interface AgentClient {
+  readonly provider: AgentProvider;
+  readonly capabilities: AgentCapabilityFlags;
+  createSession(
+    config: AgentSessionConfig,
+    launchContext?: AgentLaunchContext,
+  ): Promise<AgentSession>;
+  resumeSession(
+    handle: AgentPersistenceHandle,
+    overrides?: Partial<AgentSessionConfig>,
+    launchContext?: AgentLaunchContext,
+  ): Promise<AgentSession>;
+  listModels(options?: ListModelsOptions): Promise<AgentModelDefinition[]>;
+  listPersistedAgents?(options?: ListPersistedAgentsOptions): Promise<PersistedAgentDescriptor[]>;

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[215,229],"new_lines":[210,224],"diff_block_lines":[25,54],"hunk_header":"@@ -208,74 +208,101 @@ export function LeftSidebar({ selectedAgentId: _selectedAgentId }: LeftSidebarPr","substantive_changed_lines":21}
+-    .manualActivation(true)
+-    .onTouchesDown((event) => {
+-      const touch = event.changedTouches[0]
+-      if (!touch) {
+-        return
+-      }
+-      closeTouchStartX.value = touch.absoluteX
+-      closeTouchStartY.value = touch.absoluteY
+-    })
+-    .onTouchesMove((event, stateManager) => {
+-      const touch = event.changedTouches[0]
+-      if (!touch || event.numberOfTouches !== 1) {
+-        stateManager.fail()
+-        return
+-      }
++  const closeGesture = useMemo(
++    () =>
++      Gesture.Pan()
++        .withRef(closeGestureRef)
++        .enabled(isOpen)
++        // Use manual activation so child views keep touch streams unless we detect
++        // an intentional left-swipe close (mirrors explorer-sidebar pattern).
++        .manualActivation(true)
++        .onTouchesDown((event) => {
++          const touch = event.changedTouches[0]
++          if (!touch) {
++            return
++          }
++          closeTouchStartX.value = touch.absoluteX
++          closeTouchStartY.value = touch.absoluteY

@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/terminal-output-buffer.ts
+RANGE {"path":"packages/app/src/utils/terminal-output-buffer.ts","old_lines":[8,37],"new_lines":[0,0],"diff_block_lines":[14,43],"hunk_header":"@@ -1,93 +0,0 @@","substantive_changed_lines":19}
+-
+-export function createTerminalOutputBuffer(): TerminalOutputBuffer {
+-  return {
+-    segments: [],
+-    startIndex: 0,
+-    totalChars: 0,
+-  };
+-}
+-
+-function normalizeMaxChars(input: { maxChars: number }): number {
+-  if (!Number.isFinite(input.maxChars)) {
+-    return 0;
+-  }
+-  return Math.max(0, Math.floor(input.maxChars));
+-}
+-
+-function compactTerminalOutputBuffer(input: { buffer: TerminalOutputBuffer }): void {
+-  const { buffer } = input;
+-  if (buffer.startIndex <= COMPACT_SEGMENT_THRESHOLD) {
+-    return;
+-  }
+-
+-  buffer.segments = buffer.segments.slice(buffer.startIndex);
+-  buffer.startIndex = 0;
+-}
+-
+-function trimTerminalOutputBufferToMax(input: {
+-  buffer: TerminalOutputBuffer;
+-  maxChars: number;
+-}): void {

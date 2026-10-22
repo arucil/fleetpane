@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1793,
+  "revision": "b862f7b72db3bdc24fab71c861084682d3574e6f",
+  "date": "2026-03-23T14:42:17+07:00",
+  "committer_date": "2026-03-23T14:42:17+07:00",
+  "parents": [
+    "af0f62907319eab37ba83d4353345709ac467028"
+  ],
+  "subject": "fix(desktop): guard invalid badge count payloads",
+  "diff_tree_paths": [
+    "A\tpackages/desktop/src/window/window-manager.test.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:74bf5f8d7c820c965180c48cae3be4a73078c5ebd00a4b72b43491db1e406f98",
+  "diff_tree_digest": "sha256:bc922721083c6b6431a8ad02850a64cbdd3f3ab222814c6897bbe7169ba1ccf9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/window/window-manager.ts",
+      "old_lines": [
+        81,
+        86
+      ],
+      "new_lines": [
+        89,
+        103
+      ],
+      "diff_block_lines": [
+        20,
+        36
+      ],
+      "hunk_header": "@@ -80,7 +88,16 @@ export function registerWindowManager(): void {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 26,
+  "receipt_file": "receipts/1793/selected.patch"
+}

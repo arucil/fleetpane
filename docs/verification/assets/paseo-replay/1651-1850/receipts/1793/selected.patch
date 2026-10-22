@@ -1,0 +1,19 @@
+FILE packages/desktop/src/window/window-manager.ts
+RANGE {"path":"packages/desktop/src/window/window-manager.ts","old_lines":[81,86],"new_lines":[89,103],"diff_block_lines":[20,36],"hunk_header":"@@ -80,7 +88,16 @@ export function registerWindowManager(): void {","substantive_changed_lines":8}
+ 
+-  ipcMain.handle("paseo:window:setBadgeCount", (_event, count?: number) => {
++  ipcMain.handle("paseo:window:setBadgeCount", (_event, count?: unknown) => {
+     if (process.platform === "darwin" || process.platform === "linux") {
+-      app.setBadgeCount(count ?? 0);
++      const badgeCount = readBadgeCount(count);
++      try {
++        app.setBadgeCount(badgeCount);
++      } catch (error) {
++        console.warn("[window-manager] Failed to update badge count", {
++          count,
++          badgeCount,
++          error,
++        });
++      }
+     }
+   });

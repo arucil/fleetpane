@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1705,
+  "revision": "a042fbbe435d336b0480fcc92c5a838dbbe15435",
+  "date": "2026-03-21T13:01:23+07:00",
+  "committer_date": "2026-03-21T13:01:23+07:00",
+  "parents": [
+    "ee5577c2dae4e6564de6254fec936dff0c70deb2"
+  ],
+  "subject": "Keep explicitly reopened archived agent tabs open",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/workspace-layout-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.ts"
+  ],
+  "source_receipt_digest": "sha256:132971e3a1790891dd7b71a20b6e559ecfeefa62ffd6a69d7e001575b57d2ff3",
+  "diff_tree_digest": "sha256:82515bdc1816869f26cd4e8ff4301467536deb4bfa32d2210d763a8ae623e890",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/stores/workspace-layout-store.ts",
+      "old_lines": [
+        387,
+        387
+      ],
+      "new_lines": [
+        391,
+        420
+      ],
+      "diff_block_lines": [
+        26,
+        55
+      ],
+      "hunk_header": "@@ -386,4 +390,64 @@ export const useWorkspaceLayoutStore = create<WorkspaceLayoutStore>()(",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 129,
+  "receipt_file": "receipts/1705/selected.patch"
+}

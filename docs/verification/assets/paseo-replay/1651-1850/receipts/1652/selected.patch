@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1038,1057],"new_lines":[1039,1052],"diff_block_lines":[14,43],"hunk_header":"@@ -1036,27 +1037,46 @@ function WorkspaceScreenContent({","substantive_changed_lines":24}
+-  const handleCloseTerminalTab = useCallback(
+-    async (input: { tabId: string; terminalId: string }) => {
+-      const { tabId, terminalId } = input;
+-      if (
+-        killTerminalMutation.isPending &&
+-        killTerminalMutation.variables === terminalId
+-      ) {
++  const runCloseFlowForTab = useCallback(
++    async (input: { tabId: string; action: () => Promise<void> }): Promise<void> => {
++      const normalizedTabId = input.tabId.trim();
++      if (!normalizedTabId || pendingCloseTabIdsRef.current.has(normalizedTabId)) {
+         return;
+       }
+ 
+-      const confirmed = await confirmDialog({
+-        title: "Close terminal?",
+-        message: "Any running process in this terminal will be stopped immediately.",
+-        confirmLabel: "Close",
+-        cancelLabel: "Cancel",
+-        destructive: true,
+-      });
+-      if (!confirmed) {
+-        return;
++      pendingCloseTabIdsRef.current.add(normalizedTabId);
++      try {
++        await input.action();
++      } finally {
++        pendingCloseTabIdsRef.current.delete(normalizedTabId);
+       }
++    },

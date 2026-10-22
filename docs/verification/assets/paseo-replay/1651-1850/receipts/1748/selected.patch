@@ -1,0 +1,32 @@
+FILE packages/app/src/components/terminal-pane.tsx
+RANGE {"path":"packages/app/src/components/terminal-pane.tsx","old_lines":[191,220],"new_lines":[154,154],"diff_block_lines":[121,150],"hunk_header":"@@ -181,66 +147,12 @@ export function TerminalPane({","substantive_changed_lines":20}
+-  const updateSelectedTerminalId = useCallback(
+-    (next: string | null) => {
+-      onSelectedTerminalIdChange?.(next);
+-    },
+-    [onSelectedTerminalIdChange],
+-  );
+-
+   useEffect(() => {
+-    selectedTerminalIdRef.current = selectedTerminalId;
+-  }, [selectedTerminalId]);
+-
+-  const clearHoverOutTimeout = useCallback(() => {
+-    if (!hoverOutTimeoutRef.current) {
+-      return;
+-    }
+-    clearTimeout(hoverOutTimeoutRef.current);
+-    hoverOutTimeoutRef.current = null;
+-  }, []);
+-
+-  const handleTerminalTabHoverIn = useCallback(
+-    (terminalId: string) => {
+-      clearHoverOutTimeout();
+-      setHoveredTerminalId(terminalId);
+-    },
+-    [clearHoverOutTimeout],
+-  );
+-
+-  const handleTerminalTabHoverOut = useCallback(
+-    (terminalId: string) => {
+-      clearHoverOutTimeout();

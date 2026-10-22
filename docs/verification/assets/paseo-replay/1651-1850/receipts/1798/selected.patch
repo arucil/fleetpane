@@ -1,0 +1,8 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[133,136],"new_lines":[133,137],"diff_block_lines":[5,10],"hunk_header":"@@ -133,4 +133,5 @@ jobs:","substantive_changed_lines":1}
+@@ -133,4 +133,5 @@ jobs:
+         env:
+           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
++          EP_GH_IGNORE_TIME: true
+           CSC_LINK: ${{ secrets.APPLE_CERTIFICATE }}
+           CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}

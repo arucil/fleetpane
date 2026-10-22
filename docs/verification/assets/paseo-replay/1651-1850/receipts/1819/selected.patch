@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[1000,1028],"new_lines":[1037,1038],"diff_block_lines":[214,243],"hunk_header":"@@ -994,133 +1032,132 @@ export class AgentManager {","substantive_changed_lines":18}
+-    let finalized = false;
+-    const finalize = (error?: string) => {
+-      this.logger.trace(
+-        {
+-          agentId,
+-          error,
+-          alreadyFinalized: finalized,
+-          lifecycle: agent.lifecycle,
+-          hasPendingRun: Boolean(agent.pendingRun),
+-        },
+-        "streamAgent.finalize: invoked",
+-      );
+-      if (finalized) {
+-        return;
+-      }
+-      finalized = true;
++    const self = this;
+ 
+-      if (agent.pendingRun !== streamForwarder) {
+-        this.logger.trace(
+-          {
+-            agentId,
+-            error,
+-            lifecycle: agent.lifecycle,
+-            hasPendingRun: Boolean(agent.pendingRun),
+-          },
+-          "streamAgent.finalize: skipped because pendingRun no longer points to streamForwarder",
+-        );
+-        if (error) {
+-          agent.lastError = error;

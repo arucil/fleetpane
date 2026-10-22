@@ -1,0 +1,32 @@
+FILE packages/app/src/components/split-container.tsx
+RANGE {"path":"packages/app/src/components/split-container.tsx","old_lines":[520,521],"new_lines":[499,527],"diff_block_lines":[47,76],"hunk_header":"@@ -490,33 +490,39 @@ function DragOverlayTabChipInner({","substantive_changed_lines":22}
+-    </View>
++      {(presentation) => {
++        const label =
++          presentation.titleState === "loading" ? "Loading..." : presentation.label;
++
++        return (
++          <View
++            style={[
++              styles.dragOverlayChip,
++              {
++                backgroundColor: theme.colors.surface1,
++                borderColor: theme.colors.borderAccent,
++              },
++            ]}
++          >
++            <WorkspaceTabIcon presentation={presentation} active size={14} />
++            <Text
++              numberOfLines={1}
++              style={[
++                styles.dragOverlayLabel,
++                { color: theme.colors.foreground },
++              ]}
++            >
++              {label}
++            </Text>
++          </View>
++        );
++      }}
++    </WorkspaceTabPresentationResolver>
+   );

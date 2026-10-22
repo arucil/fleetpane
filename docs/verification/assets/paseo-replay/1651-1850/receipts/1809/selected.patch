@@ -1,0 +1,10 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,12],"diff_block_lines":[10,17],"hunk_header":"@@ -1,4 +1,12 @@","substantive_changed_lines":4}
++### Fixed
++- Fixed the desktop app failing to reopen after closing on macOS — the daemon and agent processes were registering with Launch Services as instances of the main app, blocking subsequent launches.
++- Fixed dictation not working in the packaged desktop app — the microphone entitlement was missing from the hardened runtime configuration.
++- Fixed leaked Claude Code child processes when agents were closed — the SDK query stream was not being properly shut down.
++- The notification test button now surfaces errors instead of failing silently.
++
+ ## 0.1.32 - 2026-03-23
+ 

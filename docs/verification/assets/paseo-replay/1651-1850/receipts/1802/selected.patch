@@ -1,0 +1,16 @@
+FILE packages/highlight/package.json
+RANGE {"path":"packages/highlight/package.json","old_lines":[3,9],"new_lines":[3,14],"diff_block_lines":[7,20],"hunk_header":"@@ -2,8 +2,13 @@","substantive_changed_lines":7}
+   "version": "0.1.32",
+-  "private": true,
+   "type": "module",
++  "publishConfig": {
++    "access": "public"
++  },
+   "main": "./dist/index.js",
+-  "types": "./src/index.ts",
++  "types": "./dist/index.d.ts",
++  "files": [
++    "dist"
++  ],
+   "scripts": {
+     "build": "node -e \"require('node:fs').rmSync('dist',{ recursive: true, force: true })\" && tsc -p tsconfig.json --incremental false",

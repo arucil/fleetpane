@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1829,
+  "revision": "c2c5bc815e533b98611dbe4d9bcc30f39b1fa314",
+  "date": "2026-03-25T11:46:35+07:00",
+  "committer_date": "2026-03-25T11:46:35+07:00",
+  "parents": [
+    "bd635cf07eccd998a07bc56288af3acb5e2a6808"
+  ],
+  "subject": "Fix Claude stderr diagnostics and hide max effort",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "A\tpackages/server/src/server/agent/providers/claude-agent.max-effort.real.e2e.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.ts"
+  ],
+  "source_receipt_digest": "sha256:3ba289bbc260343e3837e377a6b6c55b930b922c6d3f67e86ece42b5f10dd73c",
+  "diff_tree_digest": "sha256:f38279b6a8011ed6ed85521a41b45a52346b7372b33b33c1ee31d8901581d8ee",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1998,
+        2000
+      ],
+      "new_lines": [
+        2006,
+        2027
+      ],
+      "diff_block_lines": [
+        32,
+        53
+      ],
+      "hunk_header": "@@ -1997,4 +2005,23 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 120,
+  "receipt_file": "receipts/1829/selected.patch"
+}

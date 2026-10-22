@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1724,
+  "revision": "7395fc6fd1089b91a95a406adfef8a4944968f82",
+  "date": "2026-03-21T18:37:51+07:00",
+  "committer_date": "2026-03-21T18:37:51+07:00",
+  "parents": [
+    "c35d649f6d9a64230bedc14bde4703d2d6f57c29"
+  ],
+  "subject": "fix: interrupt scaffold drain and desktop CLI bin layout",
+  "diff_tree_paths": [
+    "A\tpackages/desktop/bin/paseo",
+    "A\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/desktop/electron-builder.yml",
+    "D\tpackages/desktop/scripts/paseo",
+    "D\tpackages/desktop/scripts/paseo.cmd",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:3cc0aac369c6a65efd8f8431a750f6332ad11de092c6df892eff792949bc80ee",
+  "diff_tree_digest": "sha256:618e88bcc21c1417b16648e4d6946d9476d49c2647dd315719220fafa322f675",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        586,
+        586
+      ],
+      "new_lines": [
+        589,
+        618
+      ],
+      "diff_block_lines": [
+        15,
+        44
+      ],
+      "hunk_header": "@@ -585,9 +588,86 @@ function coerceToolResultContentToString(content: unknown): string {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 430,
+  "receipt_file": "receipts/1724/selected.patch"
+}

@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1725,
+  "revision": "c46c03158e90967e058aa27418a76d6b58374701",
+  "date": "2026-03-21T19:47:56+07:00",
+  "committer_date": "2026-03-21T19:47:56+07:00",
+  "parents": [
+    "7395fc6fd1089b91a95a406adfef8a4944968f82"
+  ],
+  "subject": "Simplify Claude agent session flow",
+  "diff_tree_paths": [
+    "A\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.interrupt-restart-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/sidechain-tracker.ts"
+  ],
+  "source_receipt_digest": "sha256:0bc65bb38a4f8c602721eca1fbeac1a4386a32aa8d9fc33542f7282284c37d69",
+  "diff_tree_digest": "sha256:98fdc9ef01edefb5b6e4035e2fa0913cf18474619568b9c2bb39f982a3bab832",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        2581,
+        2605
+      ],
+      "new_lines": [
+        2215,
+        2226
+      ],
+      "diff_block_lines": [
+        579,
+        608
+      ],
+      "hunk_header": "@@ -2578,364 +2213,131 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 3498,
+  "receipt_file": "receipts/1725/selected.patch"
+}

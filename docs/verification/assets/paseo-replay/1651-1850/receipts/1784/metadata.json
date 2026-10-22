@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1784,
+  "revision": "b9b1601bb872df0873ae33a38fe3ddfec1c049a9",
+  "date": "2026-03-23T12:43:21+07:00",
+  "committer_date": "2026-03-23T12:43:21+07:00",
+  "parents": [
+    "5efac0dfaf8c9f9cc2a6d10b138a70d8c60c4f22"
+  ],
+  "subject": "fix(terminal): suppress DA response feedback loop after closing vim",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:95a079ef1538cc0219f984fb3f065581a944111f4a73f47fdd599a79d2ca8dfd",
+  "diff_tree_digest": "sha256:216e2d497d04f79750be5cdae687557dc481810e2264333a057f55cdea330842",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/terminal/terminal.ts",
+      "old_lines": [
+        275,
+        276
+      ],
+      "new_lines": [
+        275,
+        285
+      ],
+      "diff_block_lines": [
+        8,
+        18
+      ],
+      "hunk_header": "@@ -273,4 +273,13 @@ export async function createTerminal(options: CreateTerminalOptions): Promise<Te",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/1784/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1305,1333],"new_lines":[1343,1347],"diff_block_lines":[121,150],"hunk_header":"@@ -1303,79 +1341,54 @@ function WorkspaceScreenContent({","substantive_changed_lines":18}
+-  const runCloseFlowForTab = useCallback(
+-    async (input: { tabId: string; action: () => Promise<void> }): Promise<void> => {
+-      const normalizedTabId = input.tabId.trim();
+-      if (!normalizedTabId || pendingCloseTabIdsRef.current.has(normalizedTabId)) {
+-        return;
+-      }
+-
+-      pendingCloseTabIdsRef.current.add(normalizedTabId);
+-      try {
+-        await input.action();
+-      } finally {
+-        pendingCloseTabIdsRef.current.delete(normalizedTabId);
+-      }
+-    },
+-    []
+-  );
++  const killTerminalAsync = killTerminalMutation.mutateAsync;
+ 
+   const handleCloseTerminalTab = useCallback(
+     async (input: { tabId: string; terminalId: string }) => {
+       const { tabId, terminalId } = input;
+-      await runCloseFlowForTab({
+-        tabId,
+-        action: async () => {
+-          if (
+-            killTerminalMutation.isPending &&
+-            killTerminalMutation.variables === terminalId
+-          ) {
+-            return;
+-          }

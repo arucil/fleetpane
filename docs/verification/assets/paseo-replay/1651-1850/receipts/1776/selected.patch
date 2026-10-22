@@ -1,0 +1,32 @@
+FILE packages/cli/src/cli.ts
+RANGE {"path":"packages/cli/src/cli.ts","old_lines":[97,124],"new_lines":[65,72],"diff_block_lines":[73,102],"hunk_header":"@@ -60,118 +59,37 @@ export function createCli(): Command {","substantive_changed_lines":15}
+-        "--image <path>",
+-        "Attach image(s) to the initial prompt (can be used multiple times)",
+-        collectMultiple,
+-        [],
+-      )
+-      .option("--cwd <path>", "Working directory (default: current)")
+-      .option(
+-        "--label <key=value>",
+-        "Add label(s) to the agent (can be used multiple times)",
+-        collectMultiple,
+-        [],
+-      )
+-      .option(
+-        "--output-schema <schema>",
+-        "Output JSON matching the provided schema file path or inline JSON schema",
+-      ),
++    addRunOptions(program.command("run")),
+   ).action(withOutput(runRunCommand));
+ 
+   addDaemonHostOption(
+-    program
+-      .command("attach")
+-      .description("Attach to a running agent's output stream")
+-      .argument("<id>", "Agent ID (or prefix)"),
++    addAttachOptions(program.command("attach")),
+   ).action(runAttachCommand);
+ 
+   addDaemonHostOption(
+-    program
+-      .command("logs")

@@ -1,0 +1,27 @@
+FILE packages/server/src/terminal/terminal.ts
+RANGE {"path":"packages/server/src/terminal/terminal.ts","old_lines":[227,229],"new_lines":[210,234],"diff_block_lines":[95,119],"hunk_header":"@@ -226,4 +209,26 @@ function extractScrollback(terminal: TerminalType): Cell[][] {","substantive_changed_lines":18}
+ 
++function extractCursorState(terminal: TerminalType): TerminalState["cursor"] {
++  const coreService = (terminal as any)._core?.coreService;
++  const cursorStyle = coreService?.decPrivateModes?.cursorStyle;
++  const normalizedCursorStyle =
++    cursorStyle === "block" || cursorStyle === "underline" || cursorStyle === "bar"
++      ? cursorStyle
++      : undefined;
++  const cursorBlink =
++    typeof coreService?.decPrivateModes?.cursorBlink === "boolean"
++      ? coreService.decPrivateModes.cursorBlink
++      : undefined;
++  const hidden = Boolean(coreService?.isCursorHidden);
++
++  return {
++    row: terminal.buffer.active.cursorY,
++    col: terminal.buffer.active.cursorX,
++    ...(hidden ? { hidden: true } : {}),
++    ...(normalizedCursorStyle ? { style: normalizedCursorStyle } : {}),
++    ...(typeof cursorBlink === "boolean" ? { blink: cursorBlink } : {}),
++  };
++}
++
+ export async function createTerminal(options: CreateTerminalOptions): Promise<TerminalSession> {
+   const {

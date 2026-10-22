@@ -1,0 +1,32 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[0,0],"new_lines":[3,32],"diff_block_lines":[9,38],"hunk_header":"@@ -0,0 +1,415 @@","substantive_changed_lines":20}
++
++usage() {
++  cat <<'EOF'
++Usage:
++  chat.sh room create --room ROOM [--title TITLE] [--purpose PURPOSE]
++  chat.sh room list
++  chat.sh room show --room ROOM
++  chat.sh post --room ROOM (--body TEXT | --body-file PATH) [--agent-id ID] [--agent-name NAME] [--reply-to MESSAGE_ID]
++  chat.sh read --room ROOM [--limit N] [--since ISO_TIMESTAMP] [--agent-id ID]
++
++Options:
++  --root PATH   Override chat root (default: ~/.paseo/chat)
++EOF
++  exit 1
++}
++
++yaml_quote() {
++  local value="${1//\'/\'\'}"
++  printf "'%s'" "$value"
++}
++
++require_command() {
++  local name="$1"
++  command -v "$name" >/dev/null 2>&1 || {
++    echo "Error: required command not found: $name" >&2
++    exit 1
++  }
++}
++
++sanitize_room_path() {

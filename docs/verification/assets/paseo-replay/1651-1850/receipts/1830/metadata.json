@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1830,
+  "revision": "81ee887d030f611b2b0d0464b777033e189a5410",
+  "date": "2026-03-25T13:09:17+07:00",
+  "committer_date": "2026-03-25T13:09:17+07:00",
+  "parents": [
+    "c2c5bc815e533b98611dbe4d9bcc30f39b1fa314"
+  ],
+  "subject": "Reduce unnecessary re-renders in agent panel and input components",
+  "diff_tree_paths": [
+    "M\tCLAUDE.md",
+    "M\tpackages/app/src/components/agent-form/agent-form-dropdowns.tsx",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/agent-input-submit.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-agent-screen-state-machine.ts",
+    "M\tpackages/app/src/panels/agent-panel.tsx"
+  ],
+  "source_receipt_digest": "sha256:ddbf1311d7ad226116f1856c211f8176c0072d43606c5f77b0480369c5e1de12",
+  "diff_tree_digest": "sha256:0a36cb08e47f165f5db68e0649d51905ef62b42a8ca79050654f887223ef1c9e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/panels/agent-panel.tsx",
+      "old_lines": [
+        497,
+        514
+      ],
+      "new_lines": [
+        489,
+        508
+      ],
+      "diff_block_lines": [
+        145,
+        174
+      ],
+      "hunk_header": "@@ -496,40 +488,25 @@ function AgentPanelBody({",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 257,
+  "receipt_file": "receipts/1830/selected.patch"
+}

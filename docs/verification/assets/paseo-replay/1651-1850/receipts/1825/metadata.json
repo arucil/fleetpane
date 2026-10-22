@@ -1,0 +1,57 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1825,
+  "revision": "fadeca82eb61cec0961f96cd2d0a5cec810aadef",
+  "date": "2026-03-24T23:32:23+07:00",
+  "committer_date": "2026-03-24T23:32:23+07:00",
+  "parents": [
+    "891dbb0f6ee451844e263bb457ead9cdc7c2b5a3"
+  ],
+  "subject": "Use parsed Claude models and remove auto defaults",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.utils.ts",
+    "M\tpackages/app/src/components/combined-model-selector.tsx",
+    "M\tpackages/app/src/hooks/use-agent-form-state.test.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts",
+    "M\tpackages/app/src/hooks/use-form-preferences.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx",
+    "M\tpackages/app/src/utils/extract-agent-model.test.ts",
+    "M\tpackages/app/src/utils/extract-agent-model.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.integration.test.ts",
+    "D\tpackages/server/src/server/agent/providers/claude-agent.model-normalization.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "D\tpackages/server/src/server/agent/providers/claude/model-catalog.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.test.ts",
+    "A\tpackages/server/src/server/agent/providers/claude/sdk-model-resolver.ts",
+    "M\tpackages/server/src/server/client-activity.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:cfec1734c45502781ff842ad24ea05a4eb265798abe6f73e90167bb009a8dc6c",
+  "diff_tree_digest": "sha256:6862e6b930d44a8ddcbba158c738f201dfb91f85417cc2d22e7c0be9d0b1b17e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/sdk-model-resolver.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        9,
+        38
+      ],
+      "diff_block_lines": [
+        15,
+        44
+      ],
+      "hunk_header": "@@ -0,0 +1,140 @@",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 900,
+  "receipt_file": "receipts/1825/selected.patch"
+}

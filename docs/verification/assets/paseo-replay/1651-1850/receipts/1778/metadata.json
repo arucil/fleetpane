@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1778,
+  "revision": "d6977352aaa8bbc1f0dc078b939fb3d9e327d80d",
+  "date": "2026-03-23T10:58:39+07:00",
+  "committer_date": "2026-03-23T10:58:39+07:00",
+  "parents": [
+    "87145f1e6a23f09c9c9a05a62e184ef6ee04539d"
+  ],
+  "subject": "feat(terminal): capture cursor presentation modes (style, blink, hidden)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/terminal/runtime/terminal-snapshot.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-snapshot.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:cf6495b623d045f76c33459f04aee23749e876a73602f9eda0ab1fafdaa38893",
+  "diff_tree_digest": "sha256:96822b1b7d661b9cd5f2da8bc0139cb28300a53f3c1f62fc25d17da660778ea0",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/terminal/terminal.ts",
+      "old_lines": [
+        227,
+        229
+      ],
+      "new_lines": [
+        210,
+        234
+      ],
+      "diff_block_lines": [
+        95,
+        119
+      ],
+      "hunk_header": "@@ -226,4 +209,26 @@ function extractScrollback(terminal: TerminalType): Cell[][] {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 181,
+  "receipt_file": "receipts/1778/selected.patch"
+}

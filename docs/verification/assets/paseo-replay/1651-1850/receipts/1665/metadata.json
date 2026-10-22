@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1665,
+  "revision": "82ab5984262f413823889a295eeea666da0a3f3c",
+  "date": "2026-03-18T21:11:00+07:00",
+  "committer_date": "2026-03-18T21:11:00+07:00",
+  "parents": [
+    "09fae62888c7e3e5f29fffe15664872ccde492a0"
+  ],
+  "subject": "Fix workspace route state syncing",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/file-explorer-pane.tsx",
+    "M\tpackages/app/src/components/git-diff-pane.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/constants/layout.ts"
+  ],
+  "source_receipt_digest": "sha256:fb725c2c41ee1541d0ce721cac2f3631230059b787f19735244926bee196dd17",
+  "diff_tree_digest": "sha256:a5b1c4767d96a695f9e95d7c4068c80e65845dbe5c747f4a5db76b5970e3b385",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        1228,
+        1233
+      ],
+      "new_lines": [
+        1233,
+        1259
+      ],
+      "diff_block_lines": [
+        34,
+        63
+      ],
+      "hunk_header": "@@ -1225,13 +1231,34 @@ export function SidebarWorkspaceList({",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 61,
+  "receipt_file": "receipts/1665/selected.patch"
+}

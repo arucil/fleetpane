@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[242,261],"new_lines":[224,241],"diff_block_lines":[49,78],"hunk_header":"@@ -241,36 +223,46 @@ function WorkspaceStatusIndicator({","substantive_changed_lines":18}
+   const { theme } = useUnistyles();
+-  const color = resolveStatusDotColor({ theme, bucket });
+   const shouldShowSyncedLoader = shouldRenderSyncedStatusLoader({ bucket });
+-  const isIdle = !loading && !shouldShowSyncedLoader && bucket === "done";
+-
+-  if (isIdle) {
+-    const KindIcon =
+-      workspaceKind === "local_checkout"
+-        ? Monitor
+-        : workspaceKind === "worktree"
+-          ? FolderGit2
+-          : null;
+-    if (!KindIcon) return null;
++
++  if (loading) {
+     return (
+       <View style={styles.workspaceStatusDot}>
+-        <KindIcon size={14} color={theme.colors.foregroundMuted} />
++        <ActivityIndicator size={8} color={theme.colors.foregroundMuted} />
+       </View>
+     );
+   }
+ 
++  if (shouldShowSyncedLoader) {
++    return (
++      <View style={styles.workspaceStatusDot}>
++        <SyncedLoader size={11} color={theme.colors.palette.amber[500]} />
++      </View>
++    );
++  }

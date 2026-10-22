@@ -1,0 +1,32 @@
+FILE packages/app/src/desktop/updates/update-banner.tsx
+RANGE {"path":"packages/app/src/desktop/updates/update-banner.tsx","old_lines":[0,0],"new_lines":[10,39],"diff_block_lines":[16,45],"hunk_header":"@@ -0,0 +1,180 @@","substantive_changed_lines":16}
++
++export function UpdateBanner() {
++  const { theme } = useUnistyles();
++  const {
++    isDesktop,
++    status,
++    availableUpdate,
++    checkForUpdates,
++    installUpdate,
++    isInstalling,
++  } = useDesktopAppUpdater();
++  const [dismissed, setDismissed] = useState(false);
++  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
++
++  useEffect(() => {
++    if (!isDesktop) return;
++
++    void checkForUpdates({ silent: true });
++
++    intervalRef.current = setInterval(() => {
++      void checkForUpdates({ silent: true });
++    }, CHECK_INTERVAL_MS);
++
++    return () => {
++      if (intervalRef.current) {
++        clearInterval(intervalRef.current);
++      }
++    };
++  }, [isDesktop, checkForUpdates]);
++

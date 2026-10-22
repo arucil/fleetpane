@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1653,
+  "revision": "abc8ad3fd4ca3b88221e9460be2b8aed67745808",
+  "date": "2026-03-17T20:19:41+07:00",
+  "committer_date": "2026-03-17T20:19:41+07:00",
+  "parents": [
+    "4897627943d01fa165b6601b36c0a8643244f400"
+  ],
+  "subject": "refactor: migrate workspace tab actions to keyboard action dispatcher",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "A\tpackages/app/src/desktop/updates/update-banner.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "A\tpackages/app/src/hooks/use-workspace-navigation.ts",
+    "M\tpackages/app/src/keyboard/keyboard-action-dispatcher.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.test.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-debug.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-pump.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-output-session.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock"
+  ],
+  "source_receipt_digest": "sha256:13e34aa12621feff16e085b1b5f97b8168b834fccbde272346ffb1c5160c68f2",
+  "diff_tree_digest": "sha256:c514a63cc0589766ddd90a008911ed1ee6ec9c97478032f7bc95a01db537941a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/updates/update-banner.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        10,
+        39
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -0,0 +1,180 @@",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 710,
+  "receipt_file": "receipts/1653/selected.patch"
+}

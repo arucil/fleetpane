@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1656,
+  "revision": "e2f20f0e244764bfbb9ec5643558ec91761a8251",
+  "date": "2026-03-18T09:39:12+07:00",
+  "committer_date": "2026-03-18T09:39:12+07:00",
+  "parents": [
+    "30a225ce9f8514bbf57e304d5637a7a5b26f40b6"
+  ],
+  "subject": "refactor: extract workspace layout actions and pane state logic",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-pane-content.tsx",
+    "A\tpackages/app/src/screens/workspace/workspace-pane-state.test.ts",
+    "A\tpackages/app/src/screens/workspace/workspace-pane-state.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "A\tpackages/app/src/stores/workspace-layout-actions.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.test.ts",
+    "M\tpackages/app/src/stores/workspace-layout-store.ts",
+    "A\tpackages/app/src/utils/workspace-tab-identity.ts",
+    "M\tpackages/app/vitest.config.ts"
+  ],
+  "source_receipt_digest": "sha256:7401ba88e7307a7eca8aa970d5c4969e27c2eb025df3cdc81021076420accbc2",
+  "diff_tree_digest": "sha256:c8ad293bc66fd597040e76b6de2140356d3570ca165a165966e7f03c44f1e511",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/split-container.tsx",
+      "old_lines": [
+        477,
+        487
+      ],
+      "new_lines": [
+        466,
+        486
+      ],
+      "diff_block_lines": [
+        184,
+        213
+      ],
+      "hunk_header": "@@ -476,20 +465,62 @@ function SplitPaneView({",
+      "substantive_changed_lines": 23
+    }
+  ],
+  "selected_substantive_changed_lines": 23,
+  "available_substantive_changed_lines": 2413,
+  "receipt_file": "receipts/1656/selected.patch"
+}

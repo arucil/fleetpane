@@ -1,0 +1,9 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[438,442],"new_lines":[438,442],"diff_block_lines":[5,11],"hunk_header":"@@ -438,5 +438,5 @@ jobs:","substantive_changed_lines":2}
+@@ -438,5 +438,5 @@ jobs:
+         run: |
+           set -euo pipefail
+-          appimage_dir="packages/desktop/src-tauri/target/release/bundle/appimage"
++          appimage_dir="$GITHUB_WORKSPACE/packages/desktop/src-tauri/target/release/bundle/appimage"
+           appimage="$(find "$appimage_dir" -maxdepth 1 -type f -name '*.AppImage' | head -n 1)"
+           if [ -z "$appimage" ]; then

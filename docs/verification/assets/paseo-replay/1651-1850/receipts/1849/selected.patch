@@ -1,0 +1,15 @@
+FILE packages/server/src/server/agent/model-catalog.e2e.test.ts
+RANGE {"path":"packages/server/src/server/agent/model-catalog.e2e.test.ts","old_lines":[17,19],"new_lines":[18,30],"diff_block_lines":[13,25],"hunk_header":"@@ -16,4 +17,14 @@ const hasCodex = isBinaryInstalled(\"codex\");","substantive_changed_lines":7}
+ 
++function modelMatchesFamily(
++  model: AgentModelDefinition,
++  family: "sonnet" | "haiku",
++): boolean {
++  const haystacks = [model.id, model.label, model.description ?? ""].map((value) =>
++    value.toLowerCase(),
++  );
++  return haystacks.some((text) => text.includes(family));
++}
++
+ describe("provider model catalogs (e2e)", () => {
+   let ctx: DaemonTestContext;

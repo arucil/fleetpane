@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1659,
+  "revision": "3bdc90a6614e989674b6f316906ddbcc7d165a6e",
+  "date": "2026-03-18T16:59:03+07:00",
+  "committer_date": "2026-03-18T16:59:03+07:00",
+  "parents": [
+    "b5212a69c9387a453c0293a17a6c8072ed003ea6"
+  ],
+  "subject": "refactor: simplify tab layout to use equal widths with ideal clamping",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-layout.ts"
+  ],
+  "source_receipt_digest": "sha256:3062fc2d246dec78a07633a74a51fe940adcefc28299ca1f36be1fc6ac8f27ad",
+  "diff_tree_digest": "sha256:b0603c449312ed82cb26dae905279bcd9926e679e0f154ae0b952432d21ee41c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-tab-layout.ts",
+      "old_lines": [
+        71,
+        96
+      ],
+      "new_lines": [
+        62,
+        67
+      ],
+      "diff_block_lines": [
+        22,
+        51
+      ],
+      "hunk_header": "@@ -68,31 +60,11 @@ export function computeWorkspaceTabLayout(",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 93,
+  "receipt_file": "receipts/1659/selected.patch"
+}

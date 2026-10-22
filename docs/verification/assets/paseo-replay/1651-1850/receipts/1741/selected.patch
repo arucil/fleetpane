@@ -1,0 +1,14 @@
+FILE packages/app/src/components/code-insets.ts
+RANGE {"path":"packages/app/src/components/code-insets.ts","old_lines":[1,2],"new_lines":[1,11],"diff_block_lines":[5,16],"hunk_header":"@@ -1,2 +1,11 @@","substantive_changed_lines":3}
+@@ -1,2 +1,11 @@
++/**
++ * Compute the pixel width for a line-number gutter based on the highest
++ * line number that will be displayed. Minimum width accommodates 2 digits.
++ */
++export function lineNumberGutterWidth(maxLineNumber: number): number {
++  const digits = Math.max(2, String(maxLineNumber).length);
++  return digits * 8 + 12;
++}
++
+ export function getCodeInsets(theme: any) {
+   const padding =

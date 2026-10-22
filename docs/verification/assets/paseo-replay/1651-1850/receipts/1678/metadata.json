@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1678,
+  "revision": "7609ccee4c34868a1c1ec541d0b0f486f6a6e89e",
+  "date": "2026-03-19T15:44:04+07:00",
+  "committer_date": "2026-03-19T15:44:04+07:00",
+  "parents": [
+    "9065dcef54dda7257f5e6e111bdb465d19fe0b0a"
+  ],
+  "subject": "feat: expand diff syntax highlighting languages",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/utils/diff-highlighter.test.ts",
+    "M\tpackages/app/src/utils/syntax-highlighter.ts",
+    "M\tpackages/server/package.json",
+    "M\tpackages/server/src/server/utils/diff-highlighter.test.ts",
+    "M\tpackages/server/src/server/utils/syntax-highlighter.ts"
+  ],
+  "source_receipt_digest": "sha256:e2d2c73e2631f86f4a0bf08cf34b54615c182af1751805614773ad5f8c34a2f3",
+  "diff_tree_digest": "sha256:5c8136d0ad521c1f228799a11bf3dcaaa172d24390ca271c49be8e93c97798b4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/syntax-highlighter.ts",
+      "old_lines": [
+        20,
+        21
+      ],
+      "new_lines": [
+        27,
+        38
+      ],
+      "diff_block_lines": [
+        23,
+        34
+      ],
+      "hunk_header": "@@ -18,4 +25,14 @@ const parsersByExtension: Record<string, Parser> = {",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 437,
+  "receipt_file": "receipts/1678/selected.patch"
+}

@@ -1,0 +1,12 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[635,639],"new_lines":[635,642],"diff_block_lines":[5,14],"hunk_header":"@@ -635,5 +635,8 @@ export default function TerminalEmulator({","substantive_changed_lines":5}
+@@ -635,5 +635,8 @@ export default function TerminalEmulator({
+           overflow: "hidden",
+           overscrollBehavior: "none",
+-          padding: 8,
++          paddingTop: 8,
++          paddingBottom: 8,
++          paddingLeft: 8,
++          paddingRight: 0,
+         }}
+       />

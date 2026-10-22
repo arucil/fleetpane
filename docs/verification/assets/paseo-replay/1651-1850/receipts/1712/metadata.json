@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1712,
+  "revision": "0bc693f1571cf1ad8763bf48ea316550352ed922",
+  "date": "2026-03-21T14:40:30+07:00",
+  "committer_date": "2026-03-21T14:40:30+07:00",
+  "parents": [
+    "5ae7a0c9c22d3579106eaa8230036989043ed1de"
+  ],
+  "subject": "feat(desktop): manual window dragging and agent tab pruning",
+  "diff_tree_paths": [
+    "M\tpackages/app/package.json",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/headers/screen-header.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/desktop/electron/window.ts",
+    "M\tpackages/app/src/desktop/host.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/startup-splash-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/utils/desktop-window.ts",
+    "M\tpackages/desktop/src/main.ts",
+    "M\tpackages/desktop/src/preload.ts",
+    "M\tpackages/desktop/src/window/window-manager.ts",
+    "A\tpackages/server/src/server/session.workspace-git-watch.test.ts"
+  ],
+  "source_receipt_digest": "sha256:21a2a8b43d9a169b2727e3c791737a6f952d0a4e4793e9626199a7dc236b845c",
+  "diff_tree_digest": "sha256:51bb53fb2f5dc2649e4306e44ec55146e9854acc8710eb4201029e6642763135",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/utils/desktop-window.ts",
+      "old_lines": [
+        41,
+        49
+      ],
+      "new_lines": [
+        21,
+        43
+      ],
+      "diff_block_lines": [
+        39,
+        68
+      ],
+      "hunk_header": "@@ -40,12 +20,88 @@ export async function toggleMaximize() {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 360,
+  "receipt_file": "receipts/1712/selected.patch"
+}

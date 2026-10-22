@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1721,
+  "revision": "f424503234fb44036886bc56666aa89da3527da9",
+  "date": "2026-03-21T15:47:43+07:00",
+  "committer_date": "2026-03-21T15:47:43+07:00",
+  "parents": [
+    "1d42542514098135427911a6e63bfce99d502a4a"
+  ],
+  "subject": "fix(app): skip agent list refresh when screen is unfocused",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/agents-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:78b33f4ad4cdd6fbea72860b75ec753dd1e43418defa5ab603115a9dc816f929",
+  "diff_tree_digest": "sha256:ce442c670e93ae5d50fb76ef34292bfc5a323b409e85d1d464b2688f233381d5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/agents-screen.tsx",
+      "old_lines": [
+        11,
+        12
+      ],
+      "new_lines": [
+        20,
+        23
+      ],
+      "diff_block_lines": [
+        22,
+        25
+      ],
+      "hunk_header": "@@ -9,4 +10,14 @@ import { buildHostRootRoute } from \"@/utils/host-routes\";",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 5,
+  "receipt_file": "receipts/1721/selected.patch"
+}

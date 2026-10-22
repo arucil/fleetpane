@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1777,
+  "revision": "87145f1e6a23f09c9c9a05a62e184ef6ee04539d",
+  "date": "2026-03-23T10:45:48+07:00",
+  "committer_date": "2026-03-23T10:45:48+07:00",
+  "parents": [
+    "7f9dafab6841a115ff9dd5eceb00514ddf12b00a"
+  ],
+  "subject": "Stabilize workspace stream render boundaries",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "A\tpackages/app/src/hooks/use-stable-event.ts",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:2e9f1337711714993519905d0ded3833e1124be22dbc999cf8de3e87922aed09",
+  "diff_tree_digest": "sha256:bfca32d6da9b035a814b42536ee49bcc7af43cfea75576a8fcba79dd239ce9ec",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1777,
+        1777
+      ],
+      "new_lines": [
+        1777,
+        1806
+      ],
+      "diff_block_lines": [
+        8,
+        37
+      ],
+      "hunk_header": "@@ -1775,4 +1775,82 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 102,
+  "receipt_file": "receipts/1777/selected.patch"
+}

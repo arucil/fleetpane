@@ -1,0 +1,9 @@
+FILE packages/desktop/electron-builder.yml
+RANGE {"path":"packages/desktop/electron-builder.yml","old_lines":[36,39],"new_lines":[37,42],"diff_block_lines":[11,17],"hunk_header":"@@ -36,4 +37,6 @@ linux:","substantive_changed_lines":2}
+@@ -36,4 +37,6 @@ linux:
+   target:
+     - AppImage
++    - deb
++    - rpm
+     - tar.gz
+ win:

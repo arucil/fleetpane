@@ -1,0 +1,10 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[800,803],"new_lines":[801,807],"diff_block_lines":[11,18],"hunk_header":"@@ -800,4 +801,7 @@ class TimelineAssembler {","substantive_changed_lines":2}
+@@ -800,4 +801,7 @@ class TimelineAssembler {
+       return [];
+     }
++    if (this.finalizedMessageIds.has(messageId)) {
++      return [];
++    }
+     const state = this.ensureMessageState(messageId, runId);
+     const fragments = this.extractFragments(message.message?.content);

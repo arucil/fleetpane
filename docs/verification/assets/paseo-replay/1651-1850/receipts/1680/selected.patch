@@ -1,0 +1,32 @@
+FILE packages/app/src/components/toast-host.tsx
+RANGE {"path":"packages/app/src/components/toast-host.tsx","old_lines":[0,0],"new_lines":[57,86],"diff_block_lines":[63,92],"hunk_header":"@@ -0,0 +1,328 @@","substantive_changed_lines":24}
++
++export function useToastHost(): {
++  api: ToastApi;
++  toast: ToastState | null;
++  dismiss: () => void;
++} {
++  const [toast, setToast] = useState<ToastState | null>(null);
++  const idRef = useRef(0);
++
++  const show = useCallback(
++    (content: ReactNode, options?: ToastShowOptions) => {
++      const nativeMessage =
++        typeof content === "string"
++          ? content.trim()
++          : null;
++      if (!content || nativeMessage === "") {
++        return;
++      }
++
++      const variant = options?.variant ?? "default";
++      const durationMs = options?.durationMs ?? DEFAULT_DURATION_MS;
++      const nativeAndroid = options?.nativeAndroid ?? false;
++
++      if (Platform.OS === "android" && nativeAndroid && nativeMessage) {
++        const duration =
++          durationMs <= 2500
++            ? ToastAndroid.SHORT
++            : ToastAndroid.LONG;
++        ToastAndroid.showWithGravity(
++          nativeMessage,

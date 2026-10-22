@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1839,
+  "revision": "5567652c6c67c4fb9dad8774437348e2fe81e4d7",
+  "date": "2026-03-25T17:46:32+07:00",
+  "committer_date": "2026-03-25T17:46:32+07:00",
+  "parents": [
+    "a65f4c1465397706e4ede59d731416dc145a49b3"
+  ],
+  "subject": "Add top-level `paseo archive` as alias for `paseo agent archive`",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/cli.ts",
+    "M\tpackages/cli/src/commands/agent/archive.ts",
+    "M\tpackages/cli/src/commands/agent/index.ts"
+  ],
+  "source_receipt_digest": "sha256:a35762d12efc7b0730d2f58141bec32d5af684c55b7e050ccc6af049c1a28d3e",
+  "diff_tree_digest": "sha256:077b7049f9f1a2130cf07a511a0cfc79b3c4416e0694a324b1668c5c2e031d2b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/archive.ts",
+      "old_lines": [
+        25,
+        28
+      ],
+      "new_lines": [
+        25,
+        35
+      ],
+      "diff_block_lines": [
+        10,
+        21
+      ],
+      "hunk_header": "@@ -25,4 +25,11 @@ export const archiveSchema: OutputSchema<AgentArchiveResult> = {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 13,
+  "receipt_file": "receipts/1839/selected.patch"
+}

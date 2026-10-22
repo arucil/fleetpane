@@ -1,0 +1,32 @@
+FILE skills/paseo-loop/bin/loop.sh
+RANGE {"path":"skills/paseo-loop/bin/loop.sh","old_lines":[5,23],"new_lines":[5,19],"diff_block_lines":[7,36],"hunk_header":"@@ -4,27 +4,32 @@ set -euo pipefail","substantive_changed_lines":23}
+   cat <<'EOF'
+-Usage: loop.sh --worker-prompt TEXT --name NAME [options]
++Usage: loop.sh --name NAME --target-prompt TEXT [options]
+ 
+-Worker (required):
+-  --worker-prompt TEXT          Prompt given to the worker agent each iteration
+-  --worker-prompt-file PATH     Read the worker prompt from a file
+-  --worker PROVIDER/MODEL       Worker agent (e.g. codex, codex/gpt-5.4, claude/sonnet). Default: codex
++Target (required):
++  --target self|new-agent        Who acts each iteration. Default: new-agent
++  --target-prompt TEXT           Prompt given to the target each iteration
++  --target-prompt-file PATH      Read the target prompt from a file
++
++Target options:
++  --agent-id ID                  Existing agent id for --target self
++                                 Default: $PASEO_AGENT_ID
++  --worker PROVIDER/MODEL        Worker agent for --target new-agent
++                                 Default: codex
+ 
+ Verifier (optional):
+-  --verifier-prompt TEXT        Verification prompt evaluated by a separate agent after each iteration
+-  --verifier-prompt-file PATH   Read the verification prompt from a file
+-  --verifier PROVIDER/MODEL     Verifier agent (e.g. claude/sonnet, codex/gpt-5.4). Default: claude/sonnet
+-
+-  When a verifier prompt is provided, a separate verifier agent evaluates the
+-  condition after each worker iteration. When omitted, the worker itself returns
+-  { done: boolean, reason: string } and decides when the loop is done.
+-
+-Options:
+-  --name NAME             Name prefix for agents (required)

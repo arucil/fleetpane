@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude/sdk-model-resolver.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/sdk-model-resolver.ts","old_lines":[0,0],"new_lines":[9,38],"diff_block_lines":[15,44],"hunk_header":"@@ -0,0 +1,140 @@","substantive_changed_lines":17}
++
++function normalizeWhitespace(value: string): string {
++  return value.replace(/\s+/g, " ").trim();
++}
++
++function titleCase(value: string): string {
++  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
++}
++
++function normalizeClaudeVersionId(version: string): string {
++  return version.replace(/\./g, "-");
++}
++
++function buildClaudeModelId(parsed: ParsedClaudeSdkModelDescriptor): string {
++  return `claude-${parsed.family}-${normalizeClaudeVersionId(parsed.version)}`;
++}
++
++function parseClaudeSdkDescriptor(model: ModelInfo): ParsedClaudeSdkModelDescriptor | null {
++  const description = normalizeWhitespace(model.description ?? "");
++  if (!description) {
++    return null;
++  }
++
++  const match = description.match(/\b(opus|sonnet|haiku)\s+(\d+(?:\.\d+)*)\b/i);
++  if (!match) {
++    return null;
++  }
++
++  const family = match[1].toLowerCase() as ParsedClaudeSdkModelDescriptor["family"];
++  const version = match[2]!;

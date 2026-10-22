@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1831,
+  "revision": "c4782ec71ccb51b3b4b4a8b06cf08c1f98e2a4a7",
+  "date": "2026-03-25T16:00:24+07:00",
+  "committer_date": "2026-03-25T16:00:24+07:00",
+  "parents": [
+    "81ee887d030f611b2b0d0464b777033e189a5410"
+  ],
+  "subject": "Fix nested Claude Code session detection and centralize provider availability checks",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.test.ts",
+    "M\tpackages/server/src/server/agent/agent-manager.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/daemon-e2e/agent-configs.ts",
+    "M\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake-simple.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/model-resolution-on-init.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/model-runtime-reconcile-claude.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/rewind-user-message-dedupe-claude.real.e2e.test.ts",
+    "A\tpackages/server/src/server/daemon-e2e/send-during-tool-call-claude.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-while-running-stuck-claude.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/send-while-running-stuck.real.e2e.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/ui-action-stress.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:469e7c63cc85236962ae14551e8336ff1b04fd620097cbf6e9069603261f35de",
+  "diff_tree_digest": "sha256:0d28c32abca9bccff1b1254c9400223a7d1bc77f718cb74d1050c99c714add21",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        1391,
+        1392
+      ],
+      "new_lines": [
+        1393,
+        1414
+      ],
+      "diff_block_lines": [
+        10,
+        31
+      ],
+      "hunk_header": "@@ -1389,4 +1389,26 @@ export class AgentManager {",
+      "substantive_changed_lines": 12
+    }
+  ],
+  "selected_substantive_changed_lines": 12,
+  "available_substantive_changed_lines": 213,
+  "receipt_file": "receipts/1831/selected.patch"
+}

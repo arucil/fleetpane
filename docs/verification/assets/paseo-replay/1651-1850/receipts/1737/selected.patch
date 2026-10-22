@@ -1,0 +1,15 @@
+FILE packages/server/src/server/agent/providers/claude/model-catalog.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/model-catalog.ts","old_lines":[28,35],"new_lines":[28,35],"diff_block_lines":[7,19],"hunk_header":"@@ -27,9 +27,9 @@ export type ClaudeCatalogModel = {","substantive_changed_lines":10}
+   {
+-    family: "sonnet",
+-    modelId: "claude-sonnet-4-5-20250929",
+-    name: "Sonnet 4.5",
+-    description: "Sonnet 4.5 · Best for everyday tasks",
+-    isDefault: true,
++    family: "opus",
++    modelId: "claude-opus-4-6",
++    name: "Opus 4.6",
++    description: "Opus 4.6 · Most capable for complex work",
++    isLatestInFamily: true,
+   },
+   {

@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[150,151],"new_lines":[154,183],"diff_block_lines":[19,48],"hunk_header":"@@ -149,4 +153,32 @@ function buildOpenIntentKey(input: {","substantive_changed_lines":19}
+ 
++function openIntentMatchesActiveTab(input: {
++  openIntent?: WorkspaceOpenIntent | null;
++  activeTab: WorkspaceDerivedTab | null;
++}): boolean {
++  const { openIntent, activeTab } = input;
++  if (!openIntent || !activeTab) {
++    return false;
++  }
++
++  const target = activeTab.descriptor.target;
++  if (openIntent.kind !== target.kind) {
++    return false;
++  }
++  if (openIntent.kind === "agent" && target.kind === "agent") {
++    return target.agentId === openIntent.agentId;
++  }
++  if (openIntent.kind === "terminal" && target.kind === "terminal") {
++    return target.terminalId === openIntent.terminalId;
++  }
++  if (openIntent.kind === "file" && target.kind === "file") {
++    return target.path === openIntent.path;
++  }
++  if (openIntent.kind === "draft" && target.kind === "draft") {
++    return openIntent.draftId === "new" || target.draftId === openIntent.draftId;
++  }
++  return false;
++}
++
+ function getFallbackTabOptionLabel(tab: WorkspaceTabDescriptor): string {

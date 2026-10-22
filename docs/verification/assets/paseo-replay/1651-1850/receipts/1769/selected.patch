@@ -1,0 +1,32 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[346,375],"new_lines":[340,340],"diff_block_lines":[91,120],"hunk_header":"@@ -345,38 +339,19 @@ export default function TerminalEmulator({","substantive_changed_lines":19}
+ 
+-  useEffect(() => {
+-    const runtime = runtimeRef.current;
+-    if (outputChunkSequence <= 0) {
+-      return;
+-    }
+-
+-    if (outputChunkSequence <= appliedChunkSequenceRef.current) {
+-      onOutputChunkConsumed?.(outputChunkSequence);
+-      return;
+-    }
+-
+-    if (!runtime) {
+-      onOutputChunkConsumed?.(outputChunkSequence);
+-      return;
+-    }
+-
+-    appliedChunkSequenceRef.current = outputChunkSequence;
+-
+-    if (outputChunkText.length === 0) {
+-      runtime.clear({
+-        onCommitted: () => {
+-          onOutputChunkConsumed?.(outputChunkSequence);
+-        },
+-      });
+-      return;
+-    }
+-    runtime.write({
+-      text: outputChunkText,
+-      suppressInput: outputChunkReplay,

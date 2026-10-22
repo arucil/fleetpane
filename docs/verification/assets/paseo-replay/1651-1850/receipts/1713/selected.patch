@@ -1,0 +1,11 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[32,37],"new_lines":[32,37],"diff_block_lines":[5,13],"hunk_header":"@@ -32,6 +32,6 @@ concurrency:","substantive_changed_lines":4}
+@@ -32,6 +32,6 @@ concurrency:
+ env:
+   SOURCE_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+-  DESKTOP_WORKSPACE: '@getpaseo/desktop-electron'
+-  DESKTOP_PACKAGE_PATH: 'packages/desktop-electron'
++  DESKTOP_WORKSPACE: '@getpaseo/desktop'
++  DESKTOP_PACKAGE_PATH: 'packages/desktop'
+ 
+ jobs:

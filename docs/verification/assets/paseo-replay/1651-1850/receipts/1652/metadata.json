@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1652,
+  "revision": "4897627943d01fa165b6601b36c0a8643244f400",
+  "date": "2026-03-17T16:14:18+07:00",
+  "committer_date": "2026-03-17T16:14:18+07:00",
+  "parents": [
+    "18533ef52b7c4bf426ae40c817de3aa29b83a8ba"
+  ],
+  "subject": "Fix Tauri tab close confirm reentry",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/confirm-dialog.test.ts",
+    "M\tpackages/app/src/utils/confirm-dialog.ts"
+  ],
+  "source_receipt_digest": "sha256:8f71c11e03c61d3ad69d3b7e556c217d02186d08a2bb6f0461d4bd05c58dced2",
+  "diff_tree_digest": "sha256:d058afe7b92ec214a0f459143bffb1f07fc54015b52ded8e45d0a617342ae762",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1038,
+        1057
+      ],
+      "new_lines": [
+        1039,
+        1052
+      ],
+      "diff_block_lines": [
+        14,
+        43
+      ],
+      "hunk_header": "@@ -1036,27 +1037,46 @@ function WorkspaceScreenContent({",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 104,
+  "receipt_file": "receipts/1652/selected.patch"
+}

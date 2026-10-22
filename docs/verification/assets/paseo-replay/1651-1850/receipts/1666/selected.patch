@@ -1,0 +1,13 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[120,121],"new_lines":[125,135],"diff_block_lines":[34,44],"hunk_header":"@@ -118,4 +121,15 @@ function TabChip({","substantive_changed_lines":7}
++      ? ({
++          onPointerDown: (event: { stopPropagation?: () => void }) => {
++            event.stopPropagation?.();
++          },
++          onMouseDown: (event: { stopPropagation?: () => void }) => {
++            event.stopPropagation?.();
++          },
++        } as const)
++      : undefined;
+ 
+   return (

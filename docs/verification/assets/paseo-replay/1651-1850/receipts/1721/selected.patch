@@ -1,0 +1,6 @@
+FILE packages/app/src/screens/agents-screen.tsx
+RANGE {"path":"packages/app/src/screens/agents-screen.tsx","old_lines":[11,12],"new_lines":[20,23],"diff_block_lines":[22,25],"hunk_header":"@@ -9,4 +10,14 @@ import { buildHostRootRoute } from \"@/utils/host-routes\";","substantive_changed_lines":1}
++
++function AgentsScreenContent({ serverId }: { serverId: string }) {
+   const { agents, isRevalidating, refreshAll } = useAllAgentsList({
+     serverId,

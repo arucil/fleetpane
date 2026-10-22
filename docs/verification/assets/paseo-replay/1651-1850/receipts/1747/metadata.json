@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1747,
+  "revision": "00a2eec5f6a51f23aaad7e2a58b54075bd1bb957",
+  "date": "2026-03-22T01:16:38+07:00",
+  "committer_date": "2026-03-22T01:16:38+07:00",
+  "parents": [
+    "859d23454315554682a07cd76a28fe56834889d4"
+  ],
+  "subject": "Fix Linux AppImage sandbox startup",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/scripts/after-pack.js",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:bfd9c6e969dec61b699e74fb149e137505c10fe82d1edbbef73ad371f46b007f",
+  "diff_tree_digest": "sha256:c72dc880e0c944a91d583b66dcee5f6e26d9ed77c91261025440ea38f545cefe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/main.ts",
+      "old_lines": [
+        22,
+        29
+      ],
+      "new_lines": [
+        22,
+        25
+      ],
+      "diff_block_lines": [
+        5,
+        13
+      ],
+      "hunk_header": "@@ -22,8 +22,4 @@ import { registerOpenerHandlers } from \"./features/opener.js\";",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 17,
+  "receipt_file": "receipts/1747/selected.patch"
+}

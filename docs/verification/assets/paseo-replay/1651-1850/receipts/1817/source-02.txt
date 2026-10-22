@@ -1,0 +1,51 @@
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          "code" in error &&
+          (error as NodeJS.ErrnoException).code === "ENOENT"
+        ) {
+          throw new Error(`Working directory does not exist: ${normalized.cwd}`);
+        }
+        if (error instanceof Error) {
+          throw error;
+        }
+        throw new Error(`Failed to access working directory: ${normalized.cwd}`);
+      }
+    }
+
+    if (typeof normalized.model === "string") {
+      const trimmed = normalized.model.trim();
+      const normalizedId = trimmed.toLowerCase();
+      normalized.model = trimmed.length > 0 && normalizedId !== "default" ? trimmed : undefined;
+    }
+
+    return normalized;
+  }
+
+  private buildLaunchContext(agentId: string): AgentLaunchContext {
+    return {
+      env: {
+        PASEO_AGENT_ID: agentId,
+      },
+    };
+  }
+
+  private requireClient(provider: AgentProvider): AgentClient {
+    const client = this.clients.get(provider);
+    if (!client) {
+      throw new Error(`No client registered for provider '${provider}'`);
+    }
+    return client;
+  }
+
+  private requireAgent(id: string): ActiveManagedAgent {
+    const normalizedId = validateAgentId(id, "requireAgent");
+    const agent = this.agents.get(normalizedId);
+    if (!agent) {
+      throw new Error(`Unknown agent '${normalizedId}'`);
+    }
+    return agent;
+  }
+
+  private startLiveEventPump(agent: ActiveManagedAgent): void {
+    if (!supportsLiveEventStream(agent.session)) {

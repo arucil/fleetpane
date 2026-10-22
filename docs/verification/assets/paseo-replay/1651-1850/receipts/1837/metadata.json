@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1837,
+  "revision": "253319ee50c100644589aac430baeb7d1d3dd20d",
+  "date": "2026-03-25T17:37:00+07:00",
+  "committer_date": "2026-03-25T17:37:00+07:00",
+  "parents": [
+    "4c1b11f73352eba38aec7b5102db3c6a2bf5c1b5"
+  ],
+  "subject": "Complete (not cancel) autonomous turns on interrupt",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/daemon-e2e/claude-autonomous-wake.real.e2e.test.ts"
+  ],
+  "source_receipt_digest": "sha256:e9527c090910189756325092d9e3fb862dc5b953e4eee37fc194bda2ba3baf7c",
+  "diff_tree_digest": "sha256:65503c43453530994c7a864e8103e38fbe68d51dabc7f33c979479f818b46f65",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1382,
+        1386
+      ],
+      "new_lines": [
+        1382,
+        1387
+      ],
+      "diff_block_lines": [
+        5,
+        12
+      ],
+      "hunk_header": "@@ -1382,5 +1382,6 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 53,
+  "receipt_file": "receipts/1837/selected.patch"
+}

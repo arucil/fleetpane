@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1775,
+  "revision": "07720f1d9985993f64d42dec0d71e4a650a3be27",
+  "date": "2026-03-23T10:06:38+07:00",
+  "committer_date": "2026-03-23T10:06:38+07:00",
+  "parents": [
+    "c0e63f76da7b5b3a117f9d1ee30a1371bd306dc4"
+  ],
+  "subject": "feat(keyboard): add Cmd+./Ctrl+. shortcut to toggle both sidebars",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/actions.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/stores/panel-store.ts"
+  ],
+  "source_receipt_digest": "sha256:0919c4616d01ad58e3729f41fae405d91d63d8edcbcb88e86d44e52a004e28fa",
+  "diff_tree_digest": "sha256:df19268d5bab1ab5c5911cb86c7f8f0bcf7688c19ad8e1994911a078df3d599c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        701,
+        702
+      ],
+      "new_lines": [
+        696,
+        722
+      ],
+      "diff_block_lines": [
+        32,
+        58
+      ],
+      "hunk_header": "@@ -699,4 +693,30 @@ const SHORTCUT_BINDINGS: readonly ShortcutBinding[] = [",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 46,
+  "receipt_file": "receipts/1775/selected.patch"
+}

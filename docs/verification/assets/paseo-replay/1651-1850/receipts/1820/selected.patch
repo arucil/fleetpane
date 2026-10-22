@@ -1,0 +1,32 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[403,407],"new_lines":[491,516],"diff_block_lines":[227,256],"hunk_header":"@@ -402,9 +490,77 @@ case \"$command_name\" in","substantive_changed_lines":21}
+ 
+-    for ((index = start_index; index < ${#filtered_files[@]}; index += 1)); do
+-      print_message "${filtered_files[$index]}"
+-      if [[ $index -lt $((${#filtered_files[@]} - 1)) ]]; then
+-        printf -- '---\n\n'
++    print_message_files "${filtered_files[@]:$start_index}"
++    ;;
++
++  wait)
++    room=""
++    since_message_id=""
++    timeout_seconds=""
++    poll_interval_seconds="1"
++
++    while [[ $# -gt 0 ]]; do
++      case "$1" in
++        --room) room="$2"; shift 2 ;;
++        --since) since_message_id="$2"; shift 2 ;;
++        --timeout) timeout_seconds="$2"; shift 2 ;;
++        *) echo "Unknown option: $1" >&2; usage ;;
++      esac
++    done
++
++    [[ -n "$room" ]] || { echo "Error: --room is required" >&2; exit 1; }
++    sanitize_room_path "$room"
++    require_room "$room"
++
++    if [[ -n "$timeout_seconds" ]] && ! [[ "$timeout_seconds" =~ ^[0-9]+$ ]]; then
++      echo "Error: --timeout must be a number" >&2
++      exit 1

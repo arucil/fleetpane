@@ -1,0 +1,13 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[213,215],"new_lines":[213,223],"diff_block_lines":[7,17],"hunk_header":"@@ -212,4 +212,12 @@ room_participant_ids() {","substantive_changed_lines":5}
+ 
++agent_is_archived() {
++  local target_agent_id="$1"
++  local archived_at
++
++  archived_at="$("$paseo_bin" inspect "$target_agent_id" --json 2>/dev/null | jq -r '.ArchivedAt // empty' 2>/dev/null)" || archived_at=""
++  [[ -n "$archived_at" ]]
++}
++
+ notify_agent() {
+   local target_agent_id="$1"

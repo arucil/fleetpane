@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1708,
+  "revision": "84500cdcae68e79589e6e0413db487cd4eda7cc0",
+  "date": "2026-03-21T13:31:11+07:00",
+  "committer_date": "2026-03-21T13:31:11+07:00",
+  "parents": [
+    "480af26b57b259968d7c86b8f2b3183b63430826"
+  ],
+  "subject": "fix(server): make mapBlocksToTimeline role-aware to prevent user text emitting as assistant_message",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d7fdee99ad10c72170861c374d4f546fe9650dd8fff1576c3973f501001af5cc",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        4183,
+        4190
+      ],
+      "new_lines": [
+        4185,
+        4196
+      ],
+      "diff_block_lines": [
+        16,
+        28
+      ],
+      "hunk_header": "@@ -4182,9 +4184,13 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 24,
+  "receipt_file": "receipts/1708/selected.patch"
+}

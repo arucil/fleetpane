@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1681,
+  "revision": "efb3df82336edd24a1a20c265ebedebf4c8442d3",
+  "date": "2026-03-19T16:43:34+07:00",
+  "committer_date": "2026-03-19T16:43:34+07:00",
+  "parents": [
+    "a95211291018263a5411a97c20c629c68b4a23eb"
+  ],
+  "subject": "fix desktop notification handling on macos",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/desktop/components/desktop-permission-row.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-permissions-section.tsx",
+    "M\tpackages/app/src/desktop/permissions/use-desktop-permissions.ts",
+    "M\tpackages/desktop/src-tauri/Cargo.lock",
+    "M\tpackages/desktop/src-tauri/Cargo.toml",
+    "M\tpackages/desktop/src-tauri/build.rs",
+    "A\tpackages/desktop/src-tauri/macos/paseo_notifications.h",
+    "A\tpackages/desktop/src-tauri/macos/paseo_notifications.m",
+    "M\tpackages/desktop/src-tauri/src/desktop_notifications.rs"
+  ],
+  "source_receipt_digest": "sha256:453d37e226b86e77d82fa1c1ecbb07c7d29d7c1708a1d3869175a4b428a23ef8",
+  "diff_tree_digest": "sha256:6c17a47ecfd5ef748ad8a2f4d7265cc30f2c838acea65e249472655717645407",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src-tauri/src/desktop_notifications.rs",
+      "old_lines": [
+        32,
+        34
+      ],
+      "new_lines": [
+        49,
+        76
+      ],
+      "diff_block_lines": [
+        44,
+        73
+      ],
+      "hunk_header": "@@ -23,57 +23,228 @@ mod platform {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 363,
+  "receipt_file": "receipts/1681/selected.patch"
+}

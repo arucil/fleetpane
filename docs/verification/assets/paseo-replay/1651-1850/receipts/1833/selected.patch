@@ -1,0 +1,26 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1782,1794],"new_lines":[1784,1801],"diff_block_lines":[19,42],"hunk_header":"@@ -1781,14 +1783,19 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":15}
+     if (this.queryRestartNeeded && this.query) {
+-      this.input?.end();
+-      this.query.close?.();
++      const oldQuery = this.query;
++      const oldInput = this.input;
++      // Null out query/input BEFORE awaiting the old iterator's return so the
++      // old pump sees this.query !== activeQuery and skips failActiveTurns.
++      this.query = null;
++      this.input = null;
++      this.queryPumpPromise = null;
++      this.queryRestartNeeded = false;
++      oldInput?.end();
++      oldQuery.close?.();
+       try {
+-        await this.query.return?.();
++        await oldQuery.return?.();
+       } catch {
+         /* ignore */
+       }
+-      this.query = null;
+-      this.input = null;
+-      this.queryRestartNeeded = false;
+     }
+ 

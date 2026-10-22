@@ -1,0 +1,32 @@
+FILE packages/app/src/components/split-container.tsx
+RANGE {"path":"packages/app/src/components/split-container.tsx","old_lines":[153,153],"new_lines":[167,196],"diff_block_lines":[37,66],"hunk_header":"@@ -151,4 +154,66 @@ interface SplitPaneViewProps","substantive_changed_lines":16}
++
++const MountedTabSlot = memo(function MountedTabSlot({
++  tabDescriptor,
++  isVisible,
++  isPaneFocused,
++  paneId,
++  buildPaneContentModel,
++}: MountedTabSlotProps) {
++  const content = useMemo(
++    () =>
++      buildPaneContentModel({
++        paneId,
++        isPaneFocused,
++        tab: tabDescriptor,
++      }),
++    [buildPaneContentModel, isPaneFocused, paneId, tabDescriptor],
++  );
++
++  return (
++    <View style={{ display: isVisible ? "flex" : "none", flex: 1 }}>
++      <WorkspacePaneContent content={content} />
++    </View>
++  );
++});
++
++function useStableTabDescriptorMap(tabDescriptors: WorkspaceTabDescriptor[]) {
++  const cacheRef = useRef(new Map<string, WorkspaceTabDescriptor>());
++  const tabDescriptorMap = useMemo(() => {
++    const next = new Map<string, WorkspaceTabDescriptor>();
++    for (const tabDescriptor of tabDescriptors) {

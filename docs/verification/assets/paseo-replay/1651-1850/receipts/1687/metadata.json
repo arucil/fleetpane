@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1687,
+  "revision": "26c07b671fb3ca464dacbab435e7f0681f4516e1",
+  "date": "2026-03-20T12:17:50+07:00",
+  "committer_date": "2026-03-20T12:17:50+07:00",
+  "parents": [
+    "c9f2e01131fb9917679b120676160cd35a000e34"
+  ],
+  "subject": "Fix archived workspace session routing\\n\\nCloses #128",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:da16ed99aea62dc63e85931356086c55e6c3db9dd064ddf9e41d9e56ae6e3555",
+  "diff_tree_digest": "sha256:3525f2fed7d1c0e868f5434afa292d1d6b77a707c1d4430cfb79ed1a963770bd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        150,
+        151
+      ],
+      "new_lines": [
+        154,
+        183
+      ],
+      "diff_block_lines": [
+        19,
+        48
+      ],
+      "hunk_header": "@@ -149,4 +153,32 @@ function buildOpenIntentKey(input: {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 116,
+  "receipt_file": "receipts/1687/selected.patch"
+}

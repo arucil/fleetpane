@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1693,
+  "revision": "614c085310b75a829c4eeb33769cc138a5c4ff2e",
+  "date": "2026-03-20T18:26:36+07:00",
+  "committer_date": "2026-03-20T18:26:36+07:00",
+  "parents": [
+    "866aeb8ad9cc74e8cf2b8082f284f3ab7c96475c"
+  ],
+  "subject": "fix(app): reduce unnecessary re-renders in sidebar and workspace screens",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/contexts/sidebar-animation-context.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:886c7d0bec435326811cdf9f9cd1b434541fc24edd3c76c29a0b714d1954e167",
+  "diff_tree_digest": "sha256:ee20f59838d9792e0c4240d8e7a54e65ae76011386827de8628a842b38e9fbb8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/left-sidebar.tsx",
+      "old_lines": [
+        215,
+        229
+      ],
+      "new_lines": [
+        210,
+        224
+      ],
+      "diff_block_lines": [
+        25,
+        54
+      ],
+      "hunk_header": "@@ -208,74 +208,101 @@ export function LeftSidebar({ selectedAgentId: _selectedAgentId }: LeftSidebarPr",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 133,
+  "receipt_file": "receipts/1693/selected.patch"
+}

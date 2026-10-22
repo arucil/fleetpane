@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx","old_lines":[412,412],"new_lines":[418,447],"diff_block_lines":[30,59],"hunk_header":"@@ -411,4 +417,52 @@ export function WorkspaceDesktopTabsRow({","substantive_changed_lines":27}
+         </Tooltip>
++        <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
++          <TooltipTrigger
++            onPress={onNewTerminalTab}
++            accessibilityRole="button"
++            accessibilityLabel="New terminal tab"
++            style={({ hovered, pressed }) => [
++              styles.newTabActionButton,
++              (hovered || pressed) && styles.newTabActionButtonHovered,
++            ]}
++          >
++            <SquareTerminal size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
++          </TooltipTrigger>
++          <TooltipContent side="bottom" align="end" offset={8}>
++            <Text style={styles.newTabTooltipText}>New terminal tab</Text>
++          </TooltipContent>
++        </Tooltip>
++        <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
++          <TooltipTrigger
++            onPress={onSplitRight}
++            accessibilityRole="button"
++            accessibilityLabel="Split pane right"
++            style={({ hovered, pressed }) => [
++              styles.newTabActionButton,
++              (hovered || pressed) && styles.newTabActionButtonHovered,
++            ]}
++          >
++            <Columns2 size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
++          </TooltipTrigger>
++          <TooltipContent side="bottom" align="end" offset={8}>

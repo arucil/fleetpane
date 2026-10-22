@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1824,
+  "revision": "891dbb0f6ee451844e263bb457ead9cdc7c2b5a3",
+  "date": "2026-03-24T23:06:17+07:00",
+  "committer_date": "2026-03-24T23:06:17+07:00",
+  "parents": [
+    "140e0ef9655d5aded70f2fb40b95443faf286287"
+  ],
+  "subject": "Fix terminal snapshot ordering on subscribe",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:880c0c6b81e8073418a30d72967067b2df58dab280147cc6300ce0273fbabeff",
+  "diff_tree_digest": "sha256:0ea246bd68947d1cdae3f0a2b0e1759d9ae9d0c041e08733af6d3919a18164e4",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7713,
+        7716
+      ],
+      "new_lines": [
+        7713,
+        7721
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -7713,4 +7713,9 @@ export class Session {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 72,
+  "receipt_file": "receipts/1824/selected.patch"
+}

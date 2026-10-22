@@ -1,0 +1,10 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[354,358],"new_lines":[357,362],"diff_block_lines":[13,20],"hunk_header":"@@ -354,5 +357,6 @@ jobs:","substantive_changed_lines":3}
+@@ -354,5 +357,6 @@ jobs:
+           $patchPath = (Get-Item "$env:GITHUB_WORKSPACE/scripts/metro-config-windows-loader-patch.cjs").FullName
+           $env:NODE_OPTIONS = "--require=$patchPath"
+-          npm run build:web --workspace=@getpaseo/app
++          npx expo export --platform web
++        working-directory: packages/app
+ 
+       - name: Detect existing GitHub release state

@@ -1,0 +1,14 @@
+FILE packages/app/src/utils/syntax-highlighter.ts
+RANGE {"path":"packages/app/src/utils/syntax-highlighter.ts","old_lines":[20,21],"new_lines":[27,38],"diff_block_lines":[23,34],"hunk_header":"@@ -18,4 +25,14 @@ const parsersByExtension: Record<string, Parser> = {","substantive_changed_lines":9}
++  // C / C++ / Objective-C
++  c: cppParser,
++  h: cppParser,
++  cc: cppParser,
++  cpp: cppParser,
++  cxx: cppParser,
++  hpp: cppParser,
++  hxx: cppParser,
++  m: cppParser,
++  mm: cppParser,
+   // JSON
+   json: jsonParser,

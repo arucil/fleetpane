@@ -1,0 +1,32 @@
+FILE packages/app/src/components/ui/dropdown-menu.tsx
+RANGE {"path":"packages/app/src/components/ui/dropdown-menu.tsx","old_lines":[374,377],"new_lines":[386,412],"diff_block_lines":[99,128],"hunk_header":"@@ -352,28 +382,36 @@ export function DropdownMenuContent({","substantive_changed_lines":22}
++            entering={contentEntering}
++            exiting={contentExiting.withCallback((finished) => {
++              "worklet";
++              if (finished) {
++                runOnJS(setModalVisible)(false);
++              }
++            })}
++            collapsable={false}
++            testID={testID}
++            onLayout={handleContentLayout}
++            style={[
++              styles.content,
++              resolvedWidthStyle,
++              {
++                position: "absolute",
++                top: position?.y ?? -9999,
++                left: position?.x ?? -9999,
++                transformOrigin: getTransformOrigin(actualPlacement, align),
++              },
++            ]}
+           >
+-            {children}
+-          </ScrollView>
+-        </Animated.View>
++            <ScrollView
++              bounces={false}
++              showsVerticalScrollIndicator
++              contentContainerStyle={{ flexGrow: 1 }}
++            >
++              {children}

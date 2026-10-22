@@ -1,0 +1,32 @@
+FILE packages/server/src/server/daemon-e2e/mode-switch-propagation.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/mode-switch-propagation.e2e.test.ts","old_lines":[0,0],"new_lines":[9,38],"diff_block_lines":[15,44],"hunk_header":"@@ -0,0 +1,174 @@","substantive_changed_lines":20}
++
++function sleep(ms: number): Promise<void> {
++  return new Promise((r) => setTimeout(r, ms));
++}
++
++function collectAgentUpdates(client: DaemonClient): {
++  updates: AgentUpdatePayload[];
++  unsub: () => void;
++} {
++  const updates: AgentUpdatePayload[] = [];
++  const unsub = client.on("agent_update", (message) => {
++    if (message.type === "agent_update") {
++      updates.push(message.payload);
++    }
++  });
++  return { updates, unsub };
++}
++
++function lastUpsertFor(updates: AgentUpdatePayload[], agentId: string): AgentUpsertPayload | undefined {
++  return updates
++    .filter((u): u is AgentUpsertPayload => u.kind === "upsert" && u.agent.id === agentId)
++    .at(-1);
++}
++
++describe("mode-switch update propagation", () => {
++  let ctx: DaemonTestContext;
++
++  beforeAll(async () => {
++    ctx = await createDaemonTestContext();
++  }, 30000);

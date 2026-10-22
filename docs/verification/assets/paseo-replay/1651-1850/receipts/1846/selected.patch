@@ -1,0 +1,31 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[952,966],"new_lines":[952,968],"diff_block_lines":[7,35],"hunk_header":"@@ -951,16 +951,18 @@ export const MessageInput = forwardRef<MessageInputRef, MessageInputProps>(funct","substantive_changed_lines":24}
+               <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
+-                <TooltipTrigger
+-                  onPress={onPickImages}
+-                  disabled={!isConnected || disabled}
+-                  accessibilityLabel="Attach images"
+-                  accessibilityRole="button"
+-                  style={({ hovered }) => [
+-                    styles.attachButton,
+-                    hovered && styles.iconButtonHovered,
+-                    (!isConnected || disabled) && styles.buttonDisabled,
+-                  ]}
+-                >
+-                  <Paperclip size={buttonIconSize} color={theme.colors.foreground} />
++                <TooltipTrigger asChild>
++                  <Pressable
++                    onPress={onPickImages}
++                    disabled={!isConnected || disabled}
++                    accessibilityLabel="Attach images"
++                    accessibilityRole="button"
++                    style={({ hovered }) => [
++                      styles.attachButton,
++                      hovered && styles.iconButtonHovered,
++                      (!isConnected || disabled) && styles.buttonDisabled,
++                    ]}
++                  >
++                    <Paperclip size={buttonIconSize} color={theme.colors.foreground} />
++                  </Pressable>
+                 </TooltipTrigger>
+                 <TooltipContent side="top" align="center" offset={8}>

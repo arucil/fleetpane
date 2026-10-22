@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1744,
+  "revision": "d102a8fd64e14e8de37155f938ca7e3d33570439",
+  "date": "2026-03-22T00:47:40+07:00",
+  "committer_date": "2026-03-22T00:47:40+07:00",
+  "parents": [
+    "fcbdb0979688fe99c6b3f8e44560d4c993eb3bb9"
+  ],
+  "subject": "fix Linux AppImage sandbox",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/desktop/src/main.ts"
+  ],
+  "source_receipt_digest": "sha256:b693c1218ec0bcbde79c05c3b08f6492a372d2a795ae1bf9677e1f907f49762c",
+  "diff_tree_digest": "sha256:2c2802491d87dfb3b70124d74800d7af1cfdc8d8e095087b6e9413367ba78c22",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/runtime-paths.ts",
+      "old_lines": [
+        86,
+        90
+      ],
+      "new_lines": [
+        86,
+        94
+      ],
+      "diff_block_lines": [
+        5,
+        15
+      ],
+      "hunk_header": "@@ -86,5 +86,9 @@ export function parseCliPassthroughArgsFromArgv(argv: string[]): string[] | null",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/1744/selected.patch"
+}

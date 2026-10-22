@@ -1,0 +1,12 @@
+FILE .github/workflows/android-apk-release.yml
+RANGE {"path":".github/workflows/android-apk-release.yml","old_lines":[35,36],"new_lines":[39,48],"diff_block_lines":[19,28],"hunk_header":"@@ -33,4 +33,16 @@ jobs:","substantive_changed_lines":5}
++          source_tag="${SOURCE_TAG}"
++          if [[ "$source_tag" =~ ^(android-)?v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
++            release_tag="v${BASH_REMATCH[2]}"
++          else
++            release_tag="$source_tag"
++          fi
++          echo "RELEASE_TAG=$release_tag" >> "$GITHUB_ENV"
++
+       - name: Setup Node
+         uses: actions/setup-node@v4

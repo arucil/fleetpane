@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-stream-view.tsx
+RANGE {"path":"packages/app/src/components/agent-stream-view.tsx","old_lines":[264,264],"new_lines":[267,296],"diff_block_lines":[11,40],"hunk_header":"@@ -262,4 +262,42 @@ export const AgentStreamView = forwardRef<AgentStreamViewHandle, AgentStreamView","substantive_changed_lines":19}
++  const debugStreamPrevRef = useRef<Record<string, unknown>>({});
++  useEffect(() => {
++    const prev = debugStreamPrevRef.current;
++    const curr: Record<string, unknown> = {
++      // handleInlinePathPress deps (line 196-205)
++      "hip.agent.cwd": agent.cwd,
++      "hip.openFileExplorer": openFileExplorer,
++      "hip.requestDirectoryListing": requestDirectoryListing,
++      "hip.resolvedServerId": resolvedServerId,
++      "hip.router": router,
++      "hip.setExplorerTabForCheckout": setExplorerTabForCheckout,
++      "hip.onOpenWorkspaceFile": onOpenWorkspaceFile,
++      "hip.workspaceId": workspaceId,
++      // top-level deps
++      handleInlinePathPress,
++      "agent.status": agent.status,
++      streamRenderStrategy,
++      getGapBetween,
++      streamItems,
++      "streamItems.length": streamItems.length,
++      streamHead,
++      baseRenderModel,
++    };
++    const changed: string[] = [];
++    for (const key of Object.keys(curr)) {
++      if (!Object.is(prev[key], curr[key])) {
++        changed.push(key);
++      }
++    }
++    if (changed.length > 0 && Object.keys(prev).length > 0) {

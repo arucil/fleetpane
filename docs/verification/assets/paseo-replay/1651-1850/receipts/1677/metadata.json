@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1677,
+  "revision": "9065dcef54dda7257f5e6e111bdb465d19fe0b0a",
+  "date": "2026-03-19T14:01:09+07:00",
+  "committer_date": "2026-03-19T14:03:49+07:00",
+  "parents": [
+    "4ab307b10f0db75d4327ff12da6e7cb7ccf6c3a4"
+  ],
+  "subject": "Fix daemon startup blocking on model downloads",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/bootstrap.smoke.test.ts",
+    "M\tpackages/server/src/server/speech/providers/local/runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:075298b6986c27b3bcca077ba12f0ff00cda4d438dbb4c15ec643a51f4b57f04",
+  "diff_tree_digest": "sha256:a4bbd96c400a318c58f5f104e26e1be595bda26acbfef3e6e547b2689e8d37f5",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/speech/providers/local/runtime.ts",
+      "old_lines": [
+        205,
+        234
+      ],
+      "new_lines": [
+        204,
+        204
+      ],
+      "diff_block_lines": [
+        13,
+        42
+      ],
+      "hunk_header": "@@ -204,33 +203,4 @@ export async function initializeLocalSpeechServices(params: {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/1677/selected.patch"
+}

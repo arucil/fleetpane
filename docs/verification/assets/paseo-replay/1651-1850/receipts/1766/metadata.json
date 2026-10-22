@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1766,
+  "revision": "907074a45403b6fc4cd4287745b39e4f9e10430b",
+  "date": "2026-03-22T21:08:36+07:00",
+  "committer_date": "2026-03-22T21:08:36+07:00",
+  "parents": [
+    "1f764d418c1b33456325d63f9dd1ded2b66fe4af"
+  ],
+  "subject": "fix(agent-manager): add missing touchUpdatedAt before emitState calls",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/agent-manager.ts"
+  ],
+  "source_receipt_digest": "sha256:8965666283d251478d9ebb75f53caf16f596f4d72ec5def9435fc42bb36c0f01",
+  "diff_tree_digest": "sha256:cb72717b67324c624376e99d70544b478c3d50c522fa1d046a67fbada5efeedd",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/agent-manager.ts",
+      "old_lines": [
+        791,
+        794
+      ],
+      "new_lines": [
+        791,
+        795
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -791,4 +791,5 @@ export class AgentManager {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/1766/selected.patch"
+}

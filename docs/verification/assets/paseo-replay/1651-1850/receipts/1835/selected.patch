@@ -1,0 +1,32 @@
+FILE skills/paseo-chat/bin/chat.sh
+RANGE {"path":"skills/paseo-chat/bin/chat.sh","old_lines":[499,506],"new_lines":[499,523],"diff_block_lines":[14,43],"hunk_header":"@@ -498,12 +498,35 @@ case \"$command_name\" in","substantive_changed_lines":18}
+ 
++    since_file=""
++    if [[ -n "$since" ]]; then
++      if [[ "$since" == msg-* ]]; then
++        since_file="$(find_message_file_by_id "$room" "$since" || true)"
++        [[ -n "$since_file" ]] || { echo "Error: message not found: $since" >&2; exit 1; }
++      fi
++    fi
++
+     filtered_files=()
+-    for file in "${all_files[@]}"; do
+-      created_at="$(frontmatter_value "created_at" "$file")"
+-      file_agent_id="$(frontmatter_value "agent_id" "$file")"
++    past_since=false
++    if [[ -z "$since" ]]; then
++      past_since=true
++    fi
+ 
+-      if [[ -n "$since" && "$created_at" < "$since" ]]; then
+-        continue
++    for file in "${all_files[@]}"; do
++      if [[ -n "$since_file" ]]; then
++        if [[ "$file" == "$since_file" ]]; then
++          past_since=true
++          continue
++        fi
++        if [[ "$past_since" != true ]]; then
++          continue
++        fi
++      elif [[ -n "$since" ]]; then

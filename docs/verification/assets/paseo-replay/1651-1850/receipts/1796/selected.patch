@@ -1,0 +1,8 @@
+FILE .github/workflows/android-apk-release.yml
+RANGE {"path":".github/workflows/android-apk-release.yml","old_lines":[5,8],"new_lines":[5,9],"diff_block_lines":[5,10],"hunk_header":"@@ -5,4 +5,5 @@ on:","substantive_changed_lines":1}
+@@ -5,4 +5,5 @@ on:
+     tags:
+       - "v*"
++      - "android-v*"
+   workflow_dispatch:
+     inputs:

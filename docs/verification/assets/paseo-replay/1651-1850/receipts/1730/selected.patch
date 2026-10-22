@@ -1,0 +1,12 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[428,432],"new_lines":[428,435],"diff_block_lines":[11,20],"hunk_header":"@@ -428,5 +428,8 @@ function ControlledStatusBar({","substantive_changed_lines":4}
+@@ -428,5 +428,8 @@ function ControlledStatusBar({
+         <>
+           <Pressable
+-            onPress={() => setPrefsOpen(true)}
++            onPress={() => {
++              Keyboard.dismiss();
++              setPrefsOpen(true);
++            }}
+             style={({ pressed }) => [styles.prefsButton, pressed && styles.prefsButtonPressed]}
+             accessibilityRole="button"

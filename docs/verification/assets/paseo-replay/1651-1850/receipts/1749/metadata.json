@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1749,
+  "revision": "051868c74cf45d2ba322d9991acc75fbf6c903fb",
+  "date": "2026-03-22T15:45:47+07:00",
+  "committer_date": "2026-03-22T15:45:47+07:00",
+  "parents": [
+    "ffee4a472a546e61e55bb2555c867ea27fbbd8c1"
+  ],
+  "subject": "fix(app): remove terminal padding and fetch catch-up timeline on mobile resume",
+  "diff_tree_paths": [
+    "A\tdocs/PRODUCT.md",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/contexts/session-context.tsx"
+  ],
+  "source_receipt_digest": "sha256:aa3278d524f624688550231bb3e3777c4597648dbeca698d308828e4a532dbff",
+  "diff_tree_digest": "sha256:f2458304233c5f99a5395bc846acc122724eddaac553b8d03f6a4ca3f3c64289",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/contexts/session-context.tsx",
+      "old_lines": [
+        519,
+        520
+      ],
+      "new_lines": [
+        522,
+        539
+      ],
+      "diff_block_lines": [
+        11,
+        28
+      ],
+      "hunk_header": "@@ -517,4 +517,23 @@ function SessionProviderInternal({ children, serverId, client }: SessionProvider",
+      "substantive_changed_lines": 11
+    }
+  ],
+  "selected_substantive_changed_lines": 11,
+  "available_substantive_changed_lines": 59,
+  "receipt_file": "receipts/1749/selected.patch"
+}

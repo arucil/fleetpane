@@ -1,0 +1,54 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1654,
+  "revision": "30dd54a3187d0315e77bb337272d3202cbaabf75",
+  "date": "2026-03-17T21:58:11+07:00",
+  "committer_date": "2026-03-17T21:58:11+07:00",
+  "parents": [
+    "abc8ad3fd4ca3b88221e9460be2b8aed67745808"
+  ],
+  "subject": "refactor: extract panel registry and pane context from workspace screen",
+  "diff_tree_paths": [
+    "A\tpackages/app/src/panels/agent-panel.tsx",
+    "A\tpackages/app/src/panels/draft-panel.tsx",
+    "A\tpackages/app/src/panels/file-panel.tsx",
+    "A\tpackages/app/src/panels/pane-context.tsx",
+    "A\tpackages/app/src/panels/panel-registry.ts",
+    "A\tpackages/app/src/panels/register-panels.ts",
+    "A\tpackages/app/src/panels/terminal-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-bulk-close.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-menu.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-model.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-presentation.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tabs-types.ts"
+  ],
+  "source_receipt_digest": "sha256:53ab432422196acaee1799f475bbfd539fe4c42a5161c39d62fdc68d300c1f84",
+  "diff_tree_digest": "sha256:996f6eaab8fc1546673a82a5f02a3148012ae41b9a2bf40470af90724f05446a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/panels/agent-panel.tsx",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        10,
+        39
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -0,0 +1,85 @@",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 1382,
+  "receipt_file": "receipts/1654/selected.patch"
+}

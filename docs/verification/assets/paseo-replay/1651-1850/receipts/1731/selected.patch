@@ -1,0 +1,9 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[1053,1057],"new_lines":[1053,1057],"diff_block_lines":[5,11],"hunk_header":"@@ -1053,5 +1053,5 @@ export function GitDiffPane({ serverId, workspaceId, cwd, hideHeaderRow }: GitDi","substantive_changed_lines":2}
+@@ -1053,5 +1053,5 @@ export function GitDiffPane({ serverId, workspaceId, cwd, hideHeaderRow }: GitDi
+                 accessibilityLabel="Diff mode"
+               >
+-                <Text style={styles.diffStatusText}>
++                <Text style={styles.diffStatusText} numberOfLines={1}>
+                   {diffMode === "uncommitted" ? "Uncommitted" : "Committed"}
+                 </Text>

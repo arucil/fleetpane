@@ -1,0 +1,32 @@
+FILE packages/app/src/terminal/runtime/terminal-stream-controller.ts
+RANGE {"path":"packages/app/src/terminal/runtime/terminal-stream-controller.ts","old_lines":[134,162],"new_lines":[78,80],"diff_block_lines":[122,151],"hunk_header":"@@ -44,180 +37,65 @@ export type TerminalStreamControllerOptions = {","substantive_changed_lines":20}
+-
+-  handleStreamExit(input: { terminalId: string }): void {
+-    if (this.isDisposed || this.selectedTerminalId !== input.terminalId) {
++      this.options.onStatusChange?.({ terminalId: null, isAttaching: false, error: null });
+       return;
+     }
+-
+-    this.attachGeneration += 1;
+-    const generation = this.attachGeneration;
+-    this.decoder.decode();
+-    this.updateStatus({
+-      terminalId: input.terminalId,
+-      isAttaching: true,
+-      error: this.options.reconnectErrorMessage ?? DEFAULT_RECONNECT_ERROR_MESSAGE,
+-    });
+-    void this.attachTerminal({
+-      terminalId: input.terminalId,
+-      generation,
+-    });
+-  }
+-
+-  dispose(): void {
+-    if (this.isDisposed) {
+-      return;
+-    }
+-    this.isDisposed = true;
+-    this.attachGeneration += 1;
+-    this.decoder.decode();
+-    const selectedTerminalId = this.selectedTerminalId;
+-    this.selectedTerminalId = null;

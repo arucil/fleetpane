@@ -1,0 +1,72 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1769,
+  "revision": "50ea5a76fb0d2dfb22c2b69ab01512992c31ae85",
+  "date": "2026-03-22T22:31:23+07:00",
+  "committer_date": "2026-03-22T22:31:23+07:00",
+  "parents": [
+    "54282409bbb5396b4ade6dc6842218e9eae214d6"
+  ],
+  "subject": "Simplify terminal streaming protocol",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.test.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-delivery-queue.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-pump.test.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-pump.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-session.test.ts",
+    "D\tpackages/app/src/terminal/runtime/terminal-output-session.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-snapshot.test.ts",
+    "A\tpackages/app/src/terminal/runtime/terminal-snapshot.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/app/src/terminal/runtime/workspace-terminal-session.test.ts",
+    "M\tpackages/app/src/terminal/runtime/workspace-terminal-session.ts",
+    "M\tpackages/app/src/utils/terminal-attach.test.ts",
+    "M\tpackages/app/src/utils/terminal-attach.ts",
+    "D\tpackages/server/src/client/daemon-client-terminal-stream-manager.test.ts",
+    "D\tpackages/server/src/client/daemon-client-terminal-stream-manager.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/server/websocket-server.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.test.ts",
+    "M\tpackages/server/src/server/worktree-bootstrap.ts",
+    "D\tpackages/server/src/shared/binary-mux.test.ts",
+    "D\tpackages/server/src/shared/binary-mux.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "A\tpackages/server/src/shared/terminal-stream-protocol.test.ts",
+    "A\tpackages/server/src/shared/terminal-stream-protocol.ts",
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:795e284361eb01465c5c1ba853873330c83b586539ad7870fe149310c73c614b",
+  "diff_tree_digest": "sha256:e4f63514b82fa71a8d174ff00f80346b7349538f8b69818e50ffc2e44644cb55",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-emulator.tsx",
+      "old_lines": [
+        346,
+        375
+      ],
+      "new_lines": [
+        340,
+        340
+      ],
+      "diff_block_lines": [
+        91,
+        120
+      ],
+      "hunk_header": "@@ -345,38 +339,19 @@ export default function TerminalEmulator({",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 4164,
+  "receipt_file": "receipts/1769/selected.patch"
+}

@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1732,
+  "revision": "d41808efe1b0a605151db7ba73b20c927dfaffe6",
+  "date": "2026-03-21T20:47:33+07:00",
+  "committer_date": "2026-03-21T20:47:33+07:00",
+  "parents": [
+    "aec28c8b67f2dd5cb9af7a8c39c60fe661beb665"
+  ],
+  "subject": "fix(app): clear composer immediately on submit",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "A\tpackages/app/src/components/agent-input-submit.test.ts",
+    "A\tpackages/app/src/components/agent-input-submit.ts"
+  ],
+  "source_receipt_digest": "sha256:cdc80e1e8e69960118dda1b6c888971938e664cb48b9aeedaa45c92fde9e2778",
+  "diff_tree_digest": "sha256:38f80dfcd5bd28a37301a5d0edb9aa9f9bc22e8fe20fc6424ab7d6bf8ef011a3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        382,
+        383
+      ],
+      "new_lines": [
+        353,
+        372
+      ],
+      "diff_block_lines": [
+        58,
+        77
+      ],
+      "hunk_header": "@@ -343,41 +344,29 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 164,
+  "receipt_file": "receipts/1732/selected.patch"
+}

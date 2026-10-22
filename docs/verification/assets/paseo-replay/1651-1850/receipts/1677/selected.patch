@@ -1,0 +1,32 @@
+FILE packages/server/src/server/speech/providers/local/runtime.ts
+RANGE {"path":"packages/server/src/server/speech/providers/local/runtime.ts","old_lines":[205,234],"new_lines":[204,204],"diff_block_lines":[13,42],"hunk_header":"@@ -204,33 +203,4 @@ export async function initializeLocalSpeechServices(params: {","substantive_changed_lines":17}
+ 
+-  if (requiredLocalModelIds.length > 0 && localConfig) {
+-    try {
+-      logger.info(
+-        {
+-          modelsDir: localConfig.modelsDir,
+-          modelIds: requiredLocalModelIds,
+-        },
+-        "Ensuring local speech models"
+-      );
+-      await ensureLocalSpeechModels({
+-        modelsDir: localConfig.modelsDir,
+-        modelIds: requiredLocalModelIds,
+-        logger,
+-      });
+-    } catch (err) {
+-      logger.warn(
+-        {
+-          err,
+-          modelsDir: localConfig.modelsDir,
+-          modelIds: requiredLocalModelIds,
+-          hint:
+-            "Use `paseo speech models` to inspect status and " +
+-            "`paseo speech download --model <MODEL_ID>` to fetch missing models.",
+-        },
+-        "Local speech model bootstrap failed"
+-      );
+-    }
+-  }
+-

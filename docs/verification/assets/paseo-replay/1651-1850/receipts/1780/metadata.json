@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1780,
+  "revision": "37aaa7b155a05b58267a22fa027ba025bc4c2ecb",
+  "date": "2026-03-23T12:03:02+07:00",
+  "committer_date": "2026-03-23T12:03:02+07:00",
+  "parents": [
+    "4b4e55a246b3a9979c6151c29774f101fb362fac"
+  ],
+  "subject": "feat(app): keep workspace tabs alive in panes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "A\tpackages/app/src/screens/workspace/use-mounted-tab-set.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-emulator-runtime.ts"
+  ],
+  "source_receipt_digest": "sha256:c59246703f00805e4706e8886e373fc5c43897b1ed4ce05488f476f443156793",
+  "diff_tree_digest": "sha256:0355c3ab14f97c1a07433ae01594fb5254c95121fdb622129cfc86bc3b19a812",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/split-container.tsx",
+      "old_lines": [
+        153,
+        153
+      ],
+      "new_lines": [
+        167,
+        196
+      ],
+      "diff_block_lines": [
+        37,
+        66
+      ],
+      "hunk_header": "@@ -151,4 +154,66 @@ interface SplitPaneViewProps",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 233,
+  "receipt_file": "receipts/1780/selected.patch"
+}

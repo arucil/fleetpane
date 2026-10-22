@@ -1,0 +1,32 @@
+FILE packages/server/src/utils/checkout-git.ts
+RANGE {"path":"packages/server/src/utils/checkout-git.ts","old_lines":[1873,1884],"new_lines":[1808,1826],"diff_block_lines":[87,116],"hunk_header":"@@ -1861,68 +1805,50 @@ export async function getPullRequestStatus(cwd: string): Promise<PullRequestStat","substantive_changed_lines":24}
+-  } catch (error) {
+-    if (isGhAuthError(error)) {
+-      return {
+-        status: null,
+-        githubFeaturesEnabled: false,
+-      };
++    const { stdout } = await execFileAsync(
++      "gh",
++      [
++        "pr",
++        "view",
++        "--json",
++        "url,title,state,baseRefName,headRefName,mergedAt",
++      ],
++      { cwd },
++    );
++    const pr = JSON.parse(stdout.trim());
++    if (!pr || typeof pr !== "object" || !pr.url || !pr.title) {
++      return { status: null, githubFeaturesEnabled: true };
+     }
+-    throw error;
+-  }
+-  const openPull = openPulls[0] ?? null;
+-  const openStatus = buildPullRequestStatus(openPull, head);
+-  if (openStatus) {
++    const mergedAt =
++      typeof pr.mergedAt === "string" && pr.mergedAt.trim().length > 0
++        ? pr.mergedAt
++        : null;
++    const state =

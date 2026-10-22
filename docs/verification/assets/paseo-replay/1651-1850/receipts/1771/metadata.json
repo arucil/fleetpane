@@ -1,0 +1,51 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1771,
+  "revision": "babc7242207c3557c619a541a677f6f9198b1a6d",
+  "date": "2026-03-22T22:49:05+07:00",
+  "committer_date": "2026-03-22T22:49:05+07:00",
+  "parents": [
+    "138c774297e5167164593ff547864cf5d6b0b18a"
+  ],
+  "subject": "Align terminal stream with snapshot-only attach",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.test.ts",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "D\tpackages/app/src/utils/terminal-attach.test.ts",
+    "D\tpackages/app/src/utils/terminal-attach.ts",
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.test.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.ts",
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:d64e6e39552d71e9f056e848f7c808c17a3044639f7a7fd272cb88fc3cf4675c",
+  "diff_tree_digest": "sha256:13c401118e975c0efde9ed028b62457396301ddcd67a43c254fefe2ad097761e",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/terminal/runtime/terminal-stream-controller.ts",
+      "old_lines": [
+        134,
+        162
+      ],
+      "new_lines": [
+        78,
+        80
+      ],
+      "diff_block_lines": [
+        122,
+        151
+      ],
+      "hunk_header": "@@ -44,180 +37,65 @@ export type TerminalStreamControllerOptions = {",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 614,
+  "receipt_file": "receipts/1771/selected.patch"
+}

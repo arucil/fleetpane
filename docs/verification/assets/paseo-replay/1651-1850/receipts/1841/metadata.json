@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1841,
+  "revision": "36327cad008b9cadda1a25657fc4680fe4e31b3c",
+  "date": "2026-03-25T19:04:01+07:00",
+  "committer_date": "2026-03-25T19:04:01+07:00",
+  "parents": [
+    "939b5c22db2732b13577c8513dc069368cf3d56a"
+  ],
+  "subject": "Eliminate \"Default\" from thinking selector, always resolve to a real option",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.utils.ts",
+    "M\tpackages/app/src/hooks/use-agent-form-state.ts"
+  ],
+  "source_receipt_digest": "sha256:b433e3bce34eef1e443f7a0d3917e3428266228a4b87d89f1a39f670c7b5b1b8",
+  "diff_tree_digest": "sha256:ab5b121997ace5a25a92ef19693af98fbdcfc620a29a2ff7dc6cdee855721cd8",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.utils.ts",
+      "old_lines": [
+        55,
+        61
+      ],
+      "new_lines": [
+        55,
+        61
+      ],
+      "diff_block_lines": [
+        13,
+        23
+      ],
+      "hunk_header": "@@ -49,13 +49,13 @@ export function resolveAgentModelSelection(input: {",
+      "substantive_changed_lines": 8
+    }
+  ],
+  "selected_substantive_changed_lines": 8,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/1841/selected.patch"
+}

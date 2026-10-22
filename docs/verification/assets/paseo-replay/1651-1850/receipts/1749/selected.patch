@@ -1,0 +1,20 @@
+FILE packages/app/src/contexts/session-context.tsx
+RANGE {"path":"packages/app/src/contexts/session-context.tsx","old_lines":[519,520],"new_lines":[522,539],"diff_block_lines":[11,28],"hunk_header":"@@ -517,4 +517,23 @@ function SessionProviderInternal({ children, serverId, client }: SessionProvider","substantive_changed_lines":11}
++        const agentId = session?.focusedAgentId;
++        const cursor = agentId ? session?.agentTimelineCursor.get(agentId) : undefined;
++        if (agentId && cursor) {
++          void client
++            .fetchAgentTimeline(agentId, {
++              direction: "after",
++              cursor: { epoch: cursor.epoch, seq: cursor.endSeq },
++              limit: 0,
++              projection: "canonical",
++            })
++            .catch((error) => {
++              console.warn("[Session] failed to fetch catch-up timeline on resume", agentId, error);
++            });
++        }
++      }
++
+       if (awayMs < HISTORY_STALE_AFTER_MS) {
+         return;

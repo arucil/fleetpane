@@ -1,0 +1,12 @@
+FILE packages/app/src/components/message-input.tsx
+RANGE {"path":"packages/app/src/components/message-input.tsx","old_lines":[1166,1172],"new_lines":[1166,1172],"diff_block_lines":[5,14],"hunk_header":"@@ -1166,7 +1166,7 @@ const styles = StyleSheet.create(((theme: any) => ({","substantive_changed_lines":4}
+@@ -1166,7 +1166,7 @@ const styles = StyleSheet.create(((theme: any) => ({
+     width: '100%',
+     color: theme.colors.foreground,
+-    fontSize: theme.fontSize.lg,
++    fontSize: theme.fontSize.base,
+     fontWeight: theme.fontWeight.normal,
+-    lineHeight: theme.fontSize.lg * 1.4,
++    lineHeight: theme.fontSize.base * 1.4,
+     ...(IS_WEB
+       ? {

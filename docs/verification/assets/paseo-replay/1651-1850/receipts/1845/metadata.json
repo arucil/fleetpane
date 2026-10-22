@@ -1,0 +1,46 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1845,
+  "revision": "1318372e81d528dc3f0834fdfd2444e0550146a7",
+  "date": "2026-03-25T21:54:34+07:00",
+  "committer_date": "2026-03-25T21:54:34+07:00",
+  "parents": [
+    "185990f46bcf26c5d17d2888ed9ead5e642848e7"
+  ],
+  "subject": "Remove dead agent-prompt and terminal-mcp code",
+  "diff_tree_paths": [
+    "D\tpackages/server/agent-prompt.md",
+    "M\tpackages/server/package.json",
+    "D\tpackages/server/src/server/agent/system-prompt.ts",
+    "D\tpackages/server/src/server/terminal-mcp/REFERENCES.md",
+    "D\tpackages/server/src/server/terminal-mcp/index.ts",
+    "D\tpackages/server/src/server/terminal-mcp/server.ts",
+    "D\tpackages/server/src/server/terminal-mcp/terminal-manager.test.ts",
+    "D\tpackages/server/src/server/terminal-mcp/terminal-manager.ts",
+    "D\tpackages/server/src/server/terminal-mcp/tmux.ts"
+  ],
+  "source_receipt_digest": "sha256:df95e09cc9c65f52b9b25cff82ebc73bc52e6fd8fa4b467229760dae2afe2457",
+  "diff_tree_digest": "sha256:445326f4a661daccf31a6ef7f6a6e87c68711ed2676d0650891fcda210c9654b",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/terminal-mcp/server.ts",
+      "old_lines": [
+        13,
+        42
+      ],
+      "new_lines": [
+        0,
+        0
+      ],
+      "diff_block_lines": [
+        19,
+        48
+      ],
+      "hunk_header": "@@ -1,266 +0,0 @@",
+      "substantive_changed_lines": 9
+    }
+  ],
+  "selected_substantive_changed_lines": 9,
+  "available_substantive_changed_lines": 1528,
+  "receipt_file": "receipts/1845/selected.patch"
+}

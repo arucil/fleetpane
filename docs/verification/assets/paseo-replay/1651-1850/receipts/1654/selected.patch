@@ -1,0 +1,32 @@
+FILE packages/app/src/panels/agent-panel.tsx
+RANGE {"path":"packages/app/src/panels/agent-panel.tsx","old_lines":[0,0],"new_lines":[10,39],"diff_block_lines":[16,45],"hunk_header":"@@ -0,0 +1,85 @@","substantive_changed_lines":19}
++
++function formatProviderLabel(provider: Agent["provider"]): string {
++  if (provider === "claude") {
++    return "Claude";
++  }
++  if (provider === "codex") {
++    return "Codex";
++  }
++  if (!provider) {
++    return "Agent";
++  }
++  return provider.charAt(0).toUpperCase() + provider.slice(1);
++}
++
++function resolveWorkspaceAgentTabLabel(title: string | null | undefined): string | null {
++  if (typeof title !== "string") {
++    return null;
++  }
++  const normalized = title.trim();
++  if (!normalized) {
++    return null;
++  }
++  if (normalized.toLowerCase() === "new agent") {
++    return null;
++  }
++  return normalized;
++}
++
++function useAgentPanelDescriptor(
++  target: { kind: "agent"; agentId: string },

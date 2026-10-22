@@ -1,0 +1,32 @@
+FILE packages/server/src/server/daemon-e2e/model-resolution-on-init.real.e2e.test.ts
+RANGE {"path":"packages/server/src/server/daemon-e2e/model-resolution-on-init.real.e2e.test.ts","old_lines":[0,0],"new_lines":[11,40],"diff_block_lines":[17,46],"hunk_header":"@@ -0,0 +1,65 @@","substantive_changed_lines":20}
++
++function tmpCwd(): string {
++  return mkdtempSync(path.join(tmpdir(), "daemon-claude-model-init-"));
++}
++
++describe("daemon E2E (real claude) - model resolution on init", () => {
++  test.runIf(isCommandAvailable("claude"))(
++    "runtimeInfo.model is set as soon as the agent starts running, not after turn completes",
++    async () => {
++      const logger = pino({ level: "silent" });
++      const cwd = tmpCwd();
++      const daemon = await createTestPaseoDaemon({
++        agentClients: { claude: new ClaudeAgentClient({ logger }) },
++        logger,
++      });
++      const client = new DaemonClient({ url: `ws://127.0.0.1:${daemon.port}/ws` });
++
++      try {
++        await client.connect();
++        await client.fetchAgents({
++          subscribe: { subscriptionId: "model-init-test" },
++        });
++
++        const modelsResult = await client.listProviderModels("claude", { cwd });
++        const catalogModelIds = new Set(modelsResult.models.map((m) => m.id));
++
++        const agent = await client.createAgent({
++          provider: "claude",
++          cwd,
++          model: "haiku",

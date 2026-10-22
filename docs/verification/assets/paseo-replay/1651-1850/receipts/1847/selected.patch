@@ -1,0 +1,32 @@
+FILE CHANGELOG.md
+RANGE {"path":"CHANGELOG.md","old_lines":[3,4],"new_lines":[5,34],"diff_block_lines":[10,39],"hunk_header":"@@ -1,4 +1,34 @@","substantive_changed_lines":22}
++### Added
++- Added `paseo archive` as a top-level alias for `paseo agent archive`.
++- Added the `PASEO_AGENT_ID` environment variable for Claude and Codex agents.
++- Added a redesigned command autocomplete with a detail card and dropdown styling.
++- Linked Android download surfaces to the Google Play Store.
++
++### Improved
++- Autonomous turns now complete gracefully on interrupt instead of being canceled.
++- Thinking/model selection now always resolves to a real option instead of showing a generic Default choice.
++- Restored per-provider form preferences and removed the Auto model fallback.
++- Improved Codex activity logs with clearer tool-call summaries.
++- Reduced unnecessary re-renders in the agent panel and input area for smoother interaction.
++- Improved chat transcript readability.
++
++### Fixed
++- Fixed `paseo send --no-wait` not taking effect.
++- Fixed stale abort results contaminating replacement turns after an interrupt.
++- Fixed Claude interrupt handling and autonomous wake reliability.
++- Fixed nested Claude Code session detection and provider availability checks.
++- Fixed agent input focus scoping across panels.
++- Fixed terminal snapshot ordering when subscribing.
++- Fixed `chat read --since` to accept message IDs.
++- Fixed keyboard pane focus syncing with the active panel.
++- Fixed assistant text selection on web.
++- Fixed archived-agent notifications still appearing in chat rooms.
++- Fixed the attach-images button interaction in the message composer.
++- Pruned wrong-platform native binaries from Electron desktop builds.
++
+ ## 0.1.33 - 2026-03-23
+ 

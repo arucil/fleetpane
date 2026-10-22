@@ -1,0 +1,32 @@
+FILE packages/app/src/components/archived-agent-callout.tsx
+RANGE {"path":"packages/app/src/components/archived-agent-callout.tsx","old_lines":[0,0],"new_lines":[16,45],"diff_block_lines":[22,51],"hunk_header":"@@ -0,0 +1,99 @@","substantive_changed_lines":24}
++
++export function ArchivedAgentCallout({ serverId, agentId }: ArchivedAgentCalloutProps) {
++  const insets = useSafeAreaInsets()
++  const client = useHostRuntimeClient(serverId)
++  const isConnected = useHostRuntimeIsConnected(serverId)
++  const [isUnarchiving, setIsUnarchiving] = useState(false)
++
++  const { style: keyboardAnimatedStyle } = useKeyboardShiftStyle({ mode: 'translate' })
++
++  async function handleUnarchive() {
++    if (!client || !isConnected || isUnarchiving) return
++    setIsUnarchiving(true)
++    try {
++      await client.refreshAgent(agentId)
++    } catch (error) {
++      console.error('[ArchivedAgentCallout] Failed to unarchive agent:', error)
++      setIsUnarchiving(false)
++    }
++  }
++
++  return (
++    <Animated.View
++      style={[styles.container, { paddingBottom: insets.bottom }, keyboardAnimatedStyle]}
++    >
++      <View style={styles.inputAreaContainer}>
++        <View style={styles.inputAreaContent}>
++          <View style={styles.callout}>
++            <Text style={styles.calloutText}>This agent is archived</Text>
++            <Button
++              size="sm"

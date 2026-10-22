@@ -1,0 +1,29 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[721,722],"new_lines":[722,748],"diff_block_lines":[9,35],"hunk_header":"@@ -719,4 +719,30 @@ const SHORTCUT_BINDINGS: readonly ShortcutBinding[] = [","substantive_changed_lines":18}
++  {
++    id: "view-toggle-focus-cmd-shift-f-mac",
++    action: "view.toggle.focus",
++    combo: "Cmd+Shift+F",
++    when: { mac: true, hasSelectedAgent: true, commandCenter: false },
++    help: {
++      id: "toggle-focus",
++      section: "panels",
++      label: "Toggle focus mode",
++      keys: ["mod", "shift", "F"],
++    },
++  },
++  {
++    id: "view-toggle-focus-ctrl-shift-f-non-mac",
++    action: "view.toggle.focus",
++    combo: "Ctrl+Shift+F",
++    when: { mac: false, hasSelectedAgent: true, commandCenter: false, terminal: false },
++    help: {
++      id: "toggle-focus",
++      section: "panels",
++      label: "Toggle focus mode",
++      keys: ["mod", "shift", "F"],
++    },
++  },
++
+   // --- Message input ---
+   {

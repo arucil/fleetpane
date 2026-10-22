@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[262,283],"new_lines":[275,284],"diff_block_lines":[63,92],"hunk_header":"@@ -261,25 +274,37 @@ function ControlledStatusBar({","substantive_changed_lines":25}
+             <>
+-              <Pressable
+-                ref={modeAnchorRef}
+-                collapsable={false}
+-                disabled={disabled || !canSelectMode}
+-                onPress={() => setOpenSelector(openSelector === 'mode' ? null : 'mode')}
+-                style={({ pressed, hovered }) => [
+-                  styles.modeIconBadge,
+-                  hovered && styles.modeBadgeHovered,
+-                  (pressed || openSelector === 'mode') && styles.modeBadgePressed,
+-                  (disabled || !canSelectMode) && styles.disabledBadge,
+-                ]}
+-                accessibilityRole="button"
+-                accessibilityLabel={`Select agent mode (${displayMode})`}
+-                testID="agent-mode-selector"
++              <Tooltip
++                key={`mode-${openSelector === 'mode' ? 'open' : 'closed'}`}
++                delayDuration={0}
++                enabledOnDesktop
++                enabledOnMobile={false}
+               >
+-                {ModeIconComponent ? (
+-                  <ModeIconComponent size={theme.iconSize.md} color={modeIconColor} />
+-                ) : (
+-                  <ShieldCheck size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
+-                )}
+-              </Pressable>
++                <TooltipTrigger asChild triggerRefProp="ref">
++                  <Pressable
++                    ref={modeAnchorRef}

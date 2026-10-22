@@ -1,0 +1,9 @@
+FILE packages/app/src/desktop/components/desktop-permissions-section.tsx
+RANGE {"path":"packages/app/src/desktop/components/desktop-permissions-section.tsx","old_lines":[61,65],"new_lines":[61,65],"diff_block_lines":[5,11],"hunk_header":"@@ -61,5 +61,5 @@ export function DesktopPermissionsSection() {","substantive_changed_lines":2}
+@@ -61,5 +61,5 @@ export function DesktopPermissionsSection() {
+         />
+         {testNotificationError ? (
+-          <Text style={[styles.errorText, { color: theme.colors.danger }]}>
++          <Text style={[styles.errorText, { color: theme.colors.destructive }]}>
+             {testNotificationError}
+           </Text>

@@ -1,0 +1,32 @@
+FILE packages/app/src/hooks/use-keyboard-shortcut-overrides.ts
+RANGE {"path":"packages/app/src/hooks/use-keyboard-shortcut-overrides.ts","old_lines":[0,0],"new_lines":[18,47],"diff_block_lines":[24,53],"hunk_header":"@@ -0,0 +1,77 @@","substantive_changed_lines":23}
++
++export function useKeyboardShortcutOverrides(): UseKeyboardShortcutOverridesReturn {
++  const queryClient = useQueryClient();
++  const { data, isPending } = useQuery({
++    queryKey: QUERY_KEY,
++    queryFn: loadOverridesFromStorage,
++    staleTime: Infinity,
++    gcTime: Infinity,
++  });
++
++  const setOverride = useCallback(
++    async (bindingId: string, comboString: string) => {
++      const prev =
++        queryClient.getQueryData<Record<string, string>>(QUERY_KEY) ?? EMPTY_OVERRIDES;
++      const next = { ...prev, [bindingId]: comboString };
++      queryClient.setQueryData<Record<string, string>>(QUERY_KEY, next);
++      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
++    },
++    [queryClient],
++  );
++
++  const removeOverride = useCallback(
++    async (bindingId: string) => {
++      const prev =
++        queryClient.getQueryData<Record<string, string>>(QUERY_KEY) ?? EMPTY_OVERRIDES;
++      const { [bindingId]: _, ...next } = prev;
++      queryClient.setQueryData<Record<string, string>>(QUERY_KEY, next);
++      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
++    },
++    [queryClient],

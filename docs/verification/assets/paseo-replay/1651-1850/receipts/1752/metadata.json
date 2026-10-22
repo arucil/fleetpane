@@ -1,0 +1,53 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1752,
+  "revision": "57f8c7615c0fb59b990516a9d69823c6bb3348c4",
+  "date": "2026-03-22T16:28:09+07:00",
+  "committer_date": "2026-03-22T16:28:09+07:00",
+  "parents": [
+    "d9bcf2a4390b7f4b99e750daeb0bd0be5d9dd703"
+  ],
+  "subject": "Add chord keyboard shortcuts and staged capture UI",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/shortcut.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/hooks/use-shortcut-keys.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/shortcut-string.ts",
+    "M\tpackages/app/src/screens/settings/keyboard-shortcuts-section.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.test.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts"
+  ],
+  "source_receipt_digest": "sha256:be58c53089652cedb6f90757c9322b82b3f19939119addc201d26809b5c152a0",
+  "diff_tree_digest": "sha256:f2ad9768e665870ace3dc1b36ec9e1e3c74e1e008024eff985d1bf2b706f1423",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        941,
+        942
+      ],
+      "new_lines": [
+        970,
+        997
+      ],
+      "diff_block_lines": [
+        95,
+        124
+      ],
+      "hunk_header": "@@ -936,9 +965,86 @@ export function resolveKeyboardShortcut(input: {",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 449,
+  "receipt_file": "receipts/1752/selected.patch"
+}

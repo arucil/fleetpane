@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1843,
+  "revision": "508cd524a82f2c03e15f00caa74860557eb83194",
+  "date": "2026-03-25T20:38:43+07:00",
+  "committer_date": "2026-03-25T20:38:43+07:00",
+  "parents": [
+    "08f25f065a1a4724f4f8f15cd90f78587d676cb2"
+  ],
+  "subject": "Tighten Claude partial tool input parsing",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.redesign.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/partial-json.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/partial-json.ts"
+  ],
+  "source_receipt_digest": "sha256:ce5d17c1a7f63f2cff06d5356b5b10bd22352ac4f88f70c3b9a470d7f7f5192c",
+  "diff_tree_digest": "sha256:55dcccd8ed6662491bae2c418c785a693ecd74da5ea0a366a6ae4755388e6804",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude/partial-json.ts",
+      "old_lines": [
+        273,
+        286
+      ],
+      "new_lines": [
+        273,
+        286
+      ],
+      "diff_block_lines": [
+        7,
+        24
+      ],
+      "hunk_header": "@@ -272,15 +272,15 @@ function parsePartialObject(",
+      "substantive_changed_lines": 6
+    }
+  ],
+  "selected_substantive_changed_lines": 6,
+  "available_substantive_changed_lines": 28,
+  "receipt_file": "receipts/1843/selected.patch"
+}

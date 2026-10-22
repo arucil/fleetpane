@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[2060,2082],"new_lines":[2049,2055],"diff_block_lines":[19,48],"hunk_header":"@@ -2047,38 +2047,59 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":28}
+-                    >
+-                      {({ hovered, pressed }) => {
+-                        const active = isExplorerOpen || hovered || pressed;
+-                        const iconColor = active
+-                          ? theme.colors.foreground
+-                          : theme.colors.foregroundMuted;
+-                        return (
+-                          <>
+-                            <SourceControlPanelIcon size={theme.iconSize.md} color={iconColor} />
+-                            {workspaceDescriptor?.diffStat ? (
+-                              <View style={styles.diffStatRow}>
+-                                <Text style={styles.diffStatAdditions}>
+-                                  +{workspaceDescriptor.diffStat.additions}
+-                                </Text>
+-                                <Text style={styles.diffStatDeletions}>
+-                                  -{workspaceDescriptor.diffStat.deletions}
+-                                </Text>
+-                              </View>
+-                            ) : null}
+-                          </>
+-                        );
+-                      }}
+-                    </Pressable>
++                    <Tooltip delayDuration={0} enabledOnDesktop enabledOnMobile={false}>
++                      <TooltipTrigger asChild>
++                        <Pressable
++                          testID="workspace-explorer-toggle"
++                          onPress={handleToggleExplorer}
++                          accessibilityRole="button"
++                          accessibilityLabel={

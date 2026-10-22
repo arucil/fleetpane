@@ -1,0 +1,18 @@
+FILE packages/app/src/components/terminal-emulator.tsx
+RANGE {"path":"packages/app/src/components/terminal-emulator.tsx","old_lines":[168,169],"new_lines":[174,189],"diff_block_lines":[79,94],"hunk_header":"@@ -166,4 +169,21 @@ const TerminalEmulator = forwardRef<TerminalEmulatorHandle, TerminalEmulatorProp","substantive_changed_lines":7}
++      ({
++        writeOutput: (text: string) => {
++          runtimeRef.current?.write({ text });
++        },
++        renderSnapshot: (state: TerminalState | null) => {
++          runtimeRef.current?.renderSnapshot({ state });
++        },
++        clear: () => {
++          runtimeRef.current?.clear();
++        },
++      }) as unknown as DOMImperativeFactory,
++    [],
++  );
++
+   useEffect(() => {
+     mountedThemeRef.current = xtermTheme;

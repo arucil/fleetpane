@@ -1,0 +1,24 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1998,2000],"new_lines":[2006,2027],"diff_block_lines":[32,53],"hunk_header":"@@ -1997,4 +2005,23 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":12}
+ 
++  private async awaitRecentStderrAfterProcessExit(error: unknown): Promise<void> {
++    if (this.getRecentStderrDiagnostic()) {
++      return;
++    }
++    const message =
++      typeof error === "string" ? error : error instanceof Error ? error.message : "";
++    if (!/\bprocess exited with code\b/i.test(message) && !/\bterminated by signal\b/i.test(message)) {
++      return;
++    }
++
++    const startedAt = Date.now();
++    while (!this.closed && !this.getRecentStderrDiagnostic()) {
++      if (Date.now() - startedAt >= STDERR_FLUSH_WAIT_MS) {
++        return;
++      }
++      await new Promise((resolve) => setTimeout(resolve, STDERR_FLUSH_POLL_INTERVAL_MS));
++    }
++  }
++
+   private createTurnId(owner: "foreground" | "autonomous"): string {
+     return `${owner}-turn-${this.nextTurnOrdinal++}`;

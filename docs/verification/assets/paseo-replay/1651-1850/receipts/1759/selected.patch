@@ -1,0 +1,12 @@
+FILE packages/app/src/components/git-actions-split-button.tsx
+RANGE {"path":"packages/app/src/components/git-actions-split-button.tsx","old_lines":[78,81],"new_lines":[81,89],"diff_block_lines":[18,27],"hunk_header":"@@ -78,4 +81,9 @@ export function GitActionsSplitButton({ gitActions }: GitActionsSplitButtonProps","substantive_changed_lines":4}
+@@ -78,4 +81,9 @@ export function GitActionsSplitButton({ gitActions }: GitActionsSplitButtonProps
+                         testID={`changes-menu-${action.id}`}
+                         leading={action.icon}
++                        trailing={
++                          action.id === "archive-worktree" && archiveShortcutKeys
++                            ? <Shortcut chord={archiveShortcutKeys} />
++                            : undefined
++                        }
+                         disabled={action.disabled}
+                         status={action.status}

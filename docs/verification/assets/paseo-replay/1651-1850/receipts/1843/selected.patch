@@ -1,0 +1,20 @@
+FILE packages/server/src/server/agent/providers/claude/partial-json.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude/partial-json.ts","old_lines":[273,286],"new_lines":[273,286],"diff_block_lines":[7,24],"hunk_header":"@@ -272,15 +272,15 @@ function parsePartialObject(","substantive_changed_lines":6}
+ 
+-    value[parsedKey.value] = parsedMemberValue.value;
+-    currentIndex = skipWhitespace(input, parsedMemberValue.nextIndex);
+-
+     if (!parsedMemberValue.complete) {
+       return {
+         value,
+-        nextIndex: currentIndex,
++        nextIndex: skipWhitespace(input, parsedMemberValue.nextIndex),
+         complete: false,
+       };
+     }
+ 
++    value[parsedKey.value] = parsedMemberValue.value;
++    currentIndex = skipWhitespace(input, parsedMemberValue.nextIndex);
++
+     const delimiter = input[currentIndex];
+     if (delimiter === ",") {

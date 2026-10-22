@@ -1,0 +1,15 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[296,297],"new_lines":[318,330],"diff_block_lines":[63,75],"hunk_header":"@@ -294,4 +283,48 @@ function AppContainer({","substantive_changed_lines":8}
++
++function MobileGestureWrapper({
++  children,
++  chromeEnabled,
++}: {
++  children: ReactNode;
++  chromeEnabled: boolean;
++}) {
++  const mobileView = usePanelStore((state) => state.mobileView);
++  const openAgentList = usePanelStore((state) => state.openAgentList);
++  const horizontalScroll = useHorizontalScrollOptional();
+   const {
+     translateX,

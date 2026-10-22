@@ -1,0 +1,32 @@
+FILE packages/server/src/server/utils/diff-highlighter.ts
+RANGE {"path":"packages/server/src/server/utils/diff-highlighter.ts","old_lines":[238,258],"new_lines":[266,277],"diff_block_lines":[89,118],"hunk_header":"@@ -237,30 +265,26 @@ export async function highlightDiffWithFileContent(","substantive_changed_lines":19}
+ 
+-  const filePath = resolve(cwd, file.path);
+-
+-  try {
+-    // Read the current file content (the "new" version)
+-    const fileContent = await readFile(filePath, "utf-8");
+-
+-    // Highlight the entire file
+-    const highlighted = highlightCode(fileContent, file.path);
++  const reconstructedTokens = buildReconstructedTokenLookups(file);
++  let newTokensByLine = reconstructedTokens.newTokensByLine;
++  let oldTokensByLine = reconstructedTokens.oldTokensByLine;
+ 
+-    // Build lookup: line number (1-indexed) -> tokens
+-    const tokensByLine = new Map<number, HighlightToken[]>();
+-    for (let i = 0; i < highlighted.length; i++) {
+-      tokensByLine.set(i + 1, highlighted[i]);
+-    }
++  if (typeof options.oldFileContent === "string") {
++    oldTokensByLine = buildFullFileTokenLookup(options.oldFileContent, file.path);
++  }
+ 
+-    // For removed lines, we need to reconstruct from hunks since they're not in the file
+-    const oldFileLines = reconstructOldFile(file.hunks);
+-    const oldFileContent = buildFileContent(oldFileLines);
+-    const oldHighlighted = highlightCode(oldFileContent, file.path);
+-    const oldTokensByLine = buildTokenLookup(oldFileLines, oldHighlighted);
++  if (typeof options.newFileContent === "string") {
++    newTokensByLine = buildFullFileTokenLookup(options.newFileContent, file.path);
++    return applyTokensToHunks(file, newTokensByLine, oldTokensByLine);

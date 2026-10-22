@@ -1,0 +1,150 @@
+import type { Options as ClaudeAgentOptions } from "@anthropic-ai/claude-agent-sdk";
+
+export type AgentProvider = string;
+
+export type AgentMetadata = { [key: string]: unknown };
+
+/**
+ * Stdio-based MCP server (spawns a subprocess).
+ */
+export interface McpStdioServerConfig {
+  type: "stdio";
+  command: string;
+  args?: string[];
+  env?: Record<string, string>;
+}
+
+/**
+ * HTTP-based MCP server.
+ */
+export interface McpHttpServerConfig {
+  type: "http";
+  url: string;
+  headers?: Record<string, string>;
+}
+
+/**
+ * SSE-based MCP server (Server-Sent Events over HTTP).
+ */
+export interface McpSseServerConfig {
+  type: "sse";
+  url: string;
+  headers?: Record<string, string>;
+}
+
+/**
+ * Canonical MCP server configuration.
+ * Discriminated union by `type` field.
+ * Each provider normalizes this to their expected format.
+ */
+export type McpServerConfig = McpStdioServerConfig | McpHttpServerConfig | McpSseServerConfig;
+
+export type AgentMode = {
+  id: string;
+  label: string;
+  description?: string;
+};
+
+export type AgentModelDefinition = {
+  provider: AgentProvider;
+  id: string;
+  label: string;
+  description?: string;
+  isDefault?: boolean;
+  metadata?: AgentMetadata;
+  thinkingOptions?: AgentSelectOption[];
+  defaultThinkingOptionId?: string;
+};
+
+export type AgentSelectOption = {
+  id: string;
+  label: string;
+  description?: string;
+  isDefault?: boolean;
+  metadata?: AgentMetadata;
+};
+
+export type AgentCapabilityFlags = {
+  supportsStreaming: boolean;
+  supportsSessionPersistence: boolean;
+  supportsDynamicModes: boolean;
+  supportsMcpServers: boolean;
+  supportsReasoningStream: boolean;
+  supportsToolInvocations: boolean;
+};
+
+export type AgentPersistenceHandle = {
+  provider: AgentProvider;
+  sessionId: string;
+  /** Provider specific handle (Codex thread id, Claude resume token, etc). */
+  nativeHandle?: string;
+  metadata?: AgentMetadata;
+};
+
+export type AgentPromptContentBlock =
+  | { type: "text"; text: string }
+  | { type: "image"; data: string; mimeType: string };
+
+export type AgentPromptInput = string | AgentPromptContentBlock[];
+
+export type AgentRunOptions = {
+  outputSchema?: unknown;
+  resumeFrom?: AgentPersistenceHandle;
+  maxThinkingTokens?: number;
+};
+
+export type AgentUsage = {
+  inputTokens?: number;
+  cachedInputTokens?: number;
+  outputTokens?: number;
+  totalCostUsd?: number;
+};
+
+export const TOOL_CALL_ICON_NAMES = [
+  "wrench",
+  "square_terminal",
+  "eye",
+  "pencil",
+  "search",
+  "bot",
+  "sparkles",
+  "brain",
+  "mic_vocal",
+] as const;
+
+export type ToolCallIconName = (typeof TOOL_CALL_ICON_NAMES)[number];
+
+export type ToolCallDetail =
+  | {
+      type: "shell";
+      command: string;
+      cwd?: string;
+      output?: string;
+      exitCode?: number | null;
+    }
+  | {
+      type: "read";
+      filePath: string;
+      content?: string;
+      offset?: number;
+      limit?: number;
+    }
+  | {
+      type: "edit";
+      filePath: string;
+      oldString?: string;
+      newString?: string;
+      unifiedDiff?: string;
+    }
+  | {
+      type: "write";
+      filePath: string;
+      content?: string;
+    }
+  | {
+      type: "search";
+      query: string;
+      toolName?: "search" | "grep" | "glob" | "web_search";
+      content?: string;
+      filePaths?: string[];
+      webResults?: Array<{

@@ -1,0 +1,31 @@
+FILE packages/app/src/panels/agent-panel.tsx
+RANGE {"path":"packages/app/src/panels/agent-panel.tsx","old_lines":[400,415],"new_lines":[406,421],"diff_block_lines":[111,139],"hunk_header":"@@ -398,18 +404,18 @@ function AgentPanelBody({","substantive_changed_lines":20}
+-  useFocusEffect(
+-    useCallback(() => {
+-      if (!agentId) {
+-        setFocusedAgentId(null);
+-        return;
+-      }
++  useEffect(() => {
++    if (wasPaneFocusedRef.current && !isPaneFocused) {
++      clearOnAgentBlurRef.current();
++    }
++    wasPaneFocusedRef.current = isPaneFocused;
++  }, [isPaneFocused]);
+ 
+-      setFocusedAgentId(agentId);
+-      return () => {
+-        attentionController.clearOnAgentBlur();
+-        setFocusedAgentId(null);
+-      };
+-    }, [agentId, attentionController, setFocusedAgentId])
+-  );
++  useEffect(() => {
++    return () => {
++      if (wasPaneFocusedRef.current) {
++        clearOnAgentBlurRef.current();
++      }
++    };
++  }, []);
+ 
+   const isInitializing = agentId ? isInitializingFromMap !== false : false;

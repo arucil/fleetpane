@@ -1,0 +1,7 @@
+FILE packages/desktop/src/daemon/node-entrypoint-launcher.ts
+RANGE {"path":"packages/desktop/src/daemon/node-entrypoint-launcher.ts","old_lines":[1,3],"new_lines":[1,3],"diff_block_lines":[5,9],"hunk_header":"@@ -1,3 +1,3 @@","substantive_changed_lines":2}
+@@ -1,3 +1,3 @@
+-const IGNORED_GUI_LAUNCH_ARG_PREFIX = "-psn_";
++const IGNORED_ARG_PREFIXES = ["-psn_", "--no-sandbox"];
+ 
+ export const DESKTOP_CLI_ENV = "PASEO_DESKTOP_CLI";

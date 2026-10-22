@@ -1,0 +1,32 @@
+FILE packages/desktop/src-tauri/src/desktop_notifications.rs
+RANGE {"path":"packages/desktop/src-tauri/src/desktop_notifications.rs","old_lines":[32,34],"new_lines":[49,76],"diff_block_lines":[44,73],"hunk_header":"@@ -23,57 +23,228 @@ mod platform {","substantive_changed_lines":17}
++
++    fn app_slot() -> &'static Mutex<Option<AppHandle<Wry>>> {
++        MACOS_NOTIFICATION_APP.get_or_init(|| Mutex::new(None))
++    }
++
++    fn read_owned_error_message(error_ptr: *mut c_char) -> String {
++        if error_ptr.is_null() {
++            return "Unknown macOS notification error".to_string();
++        }
++
++        let message = unsafe { CStr::from_ptr(error_ptr) }
++            .to_string_lossy()
++            .into_owned();
++        unsafe {
++            paseo_notifications_free_string(error_ptr);
++        }
++        message
++    }
++
++    extern "C" fn handle_notification_click(payload_json: *const c_char) {
++        let data = if payload_json.is_null() {
++            None
++        } else {
++            let raw = unsafe { CStr::from_ptr(payload_json) }.to_string_lossy();
++            serde_json::from_str::<Value>(&raw).ok()
++        };
+ 
+-    fn ensure_notification_sender() -> Result<(), String> {
+-        MACOS_NOTIFICATION_SENDER_INIT
++        let payload = DesktopNotificationClickPayload { data };

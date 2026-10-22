@@ -1,0 +1,13 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[2232,2240],"new_lines":[2232,2240],"diff_block_lines":[7,17],"hunk_header":"@@ -2231,10 +2231,10 @@ const styles = StyleSheet.create((theme) => ({","substantive_changed_lines":4}
+     fontWeight: theme.fontWeight.normal,
+-    color: "#2d8a4e",
++    color: theme.colors.palette.green[400],
+   },
+   diffStatDeletions: {
+     fontSize: theme.fontSize.xs,
+     fontWeight: theme.fontWeight.normal,
+-    color: "#c43a31",
++    color: theme.colors.palette.red[500],
+   },
+   kebabButton: {

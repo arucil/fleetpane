@@ -1,0 +1,32 @@
+FILE packages/app/src/panels/agent-panel.tsx
+RANGE {"path":"packages/app/src/panels/agent-panel.tsx","old_lines":[86,86],"new_lines":[125,154],"diff_block_lines":[74,103],"hunk_header":"@@ -84,2 +121,890 @@ export const agentPanelRegistration: PanelRegistration<\"agent\"> = {","substantive_changed_lines":20}
++
++function logWebStickyBottom(
++  _event: string,
++  _details: Record<string, unknown>
++): void {}
++
++function toErrorMessage(error: unknown): string {
++  if (error instanceof Error) {
++    return error.message;
++  }
++  return String(error);
++}
++
++function isNotFoundErrorMessage(message: string): boolean {
++  return /agent not found|not found/i.test(message);
++}
++
++function AgentPanelContent({
++  serverId,
++  agentId,
++  onOpenWorkspaceFile,
++}: {
++  serverId: string;
++  agentId: string;
++  onOpenWorkspaceFile?: (input: { filePath: string }) => void;
++}) {
++  const resolvedAgentId = agentId.trim() || undefined;
++  const resolvedServerId = serverId.trim() || undefined;
++  const daemons = useHosts();
++  const runtimeServerId = resolvedServerId ?? "";

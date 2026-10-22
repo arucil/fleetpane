@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/desktop-window.ts
+RANGE {"path":"packages/app/src/utils/desktop-window.ts","old_lines":[111,131],"new_lines":[119,138],"diff_block_lines":[168,197],"hunk_header":"@@ -28,141 +29,146 @@ export async function toggleMaximize() {","substantive_changed_lines":17}
+   useEffect(() => {
+-    if (Platform.OS !== "web" || !getIsDesktopMac()) return;
++    if (Platform.OS !== 'web' || !getIsDesktopMac()) return
+ 
+-    let disposed = false;
+-    let cleanup: (() => void) | undefined;
+-    let didCleanup = false;
++    let disposed = false
++    let cleanup: (() => void) | undefined
++    let didCleanup = false
+ 
+     function runCleanup() {
+-      if (!cleanup || didCleanup) return;
+-      didCleanup = true;
++      if (!cleanup || didCleanup) return
++      didCleanup = true
+       try {
+         void Promise.resolve(cleanup()).catch((error) => {
+-          console.warn("[DesktopWindow] Failed to remove resize listener", error);
+-        });
++          console.warn('[DesktopWindow] Failed to remove resize listener', error)
++        })
+       } catch (error) {
+-        console.warn("[DesktopWindow] Failed to remove resize listener", error);
++        console.warn('[DesktopWindow] Failed to remove resize listener', error)
+       }
+     }
+ 
+     async function setup() {
+-      const win = getDesktopWindow();

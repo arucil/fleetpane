@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1840,
+  "revision": "939b5c22db2732b13577c8513dc069368cf3d56a",
+  "date": "2026-03-25T18:13:27+07:00",
+  "committer_date": "2026-03-25T18:13:27+07:00",
+  "parents": [
+    "5567652c6c67c4fb9dad8774437348e2fe81e4d7"
+  ],
+  "subject": "Fix --no-wait flag never working on paseo send",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/agent/send.ts"
+  ],
+  "source_receipt_digest": "sha256:8eab28c02b44d5998a6db89fb79ca5d9d7572e96800c7c58c0ba54638c445bfb",
+  "diff_tree_digest": "sha256:7ecda3ec67901f6d8e64ab79e224c87a5375b6cef36d11f72f944900139b6b62",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/agent/send.ts",
+      "old_lines": [
+        29,
+        33
+      ],
+      "new_lines": [
+        29,
+        33
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -29,5 +29,5 @@ export const agentSendSchema: OutputSchema<AgentSendResult> = {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 4,
+  "receipt_file": "receipts/1840/selected.patch"
+}

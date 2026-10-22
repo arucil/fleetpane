@@ -1,0 +1,32 @@
+FILE packages/app/src/components/resize-handle.tsx
+RANGE {"path":"packages/app/src/components/resize-handle.tsx","old_lines":[0,0],"new_lines":[19,48],"diff_block_lines":[25,54],"hunk_header":"@@ -0,0 +1,154 @@","substantive_changed_lines":18}
++
++export function ResizeHandle({
++  direction,
++  groupId,
++  index,
++  sizes,
++  onResizeSplit,
++}: ResizeHandleProps) {
++  const { theme } = useUnistyles();
++  const pointerStateRef = useRef<PointerState | null>(null);
++  const [hovered, setHovered] = useState(false);
++
++  const handlePointerDown = useCallback(
++    (event: any) => {
++      const handleElement = event.currentTarget as HTMLElement | null;
++      const containerElement = handleElement?.parentElement ?? null;
++      if (!containerElement) {
++        return;
++      }
++
++      const rect = containerElement.getBoundingClientRect();
++      const containerSize = direction === "horizontal" ? rect.width : rect.height;
++      if (containerSize <= 0) {
++        return;
++      }
++
++      pointerStateRef.current = {
++        containerSize,
++        pointerStart: direction === "horizontal" ? event.clientX : event.clientY,
++        leftSize: sizes[index] ?? 0,

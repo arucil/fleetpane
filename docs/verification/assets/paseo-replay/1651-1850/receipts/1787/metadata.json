@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1787,
+  "revision": "df99442123e1cfe37f12eb9f569a5f6e859f6c28",
+  "date": "2026-03-23T12:44:18+07:00",
+  "committer_date": "2026-03-23T12:44:18+07:00",
+  "parents": [
+    "ea41dbc8e78ceba3a03907f5b83077f4112f1050"
+  ],
+  "subject": "Fix terminal slot review issues",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.ts"
+  ],
+  "source_receipt_digest": "sha256:3b5fcc486ff570ae59a765a55e91af64eb69b4ef2b038e3aaf934b92d462f25c",
+  "diff_tree_digest": "sha256:7e8e27fdde0cf3d2e3ea251745ec87df1e6d4351d8b359d72c789cdd1f196cc9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/shared/messages.ts",
+      "old_lines": [
+        2163,
+        2171
+      ],
+      "new_lines": [
+        2163,
+        2178
+      ],
+      "diff_block_lines": [
+        7,
+        28
+      ],
+      "hunk_header": "@@ -2162,10 +2162,17 @@ export const CreateTerminalResponseSchema = z.object({",
+      "substantive_changed_lines": 15
+    }
+  ],
+  "selected_substantive_changed_lines": 15,
+  "available_substantive_changed_lines": 29,
+  "receipt_file": "receipts/1787/selected.patch"
+}

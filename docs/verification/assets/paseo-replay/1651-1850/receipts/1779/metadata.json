@@ -1,0 +1,42 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1779,
+  "revision": "4b4e55a246b3a9979c6151c29774f101fb362fac",
+  "date": "2026-03-23T11:30:35+07:00",
+  "committer_date": "2026-03-23T11:30:35+07:00",
+  "parents": [
+    "d6977352aaa8bbc1f0dc078b939fb3d9e327d80d"
+  ],
+  "subject": "fix(workspace): suppress pane focus when moving tabs between panes",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/panels/terminal-panel.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:64d50a1613a95860717202dc0810f721cf1a42c2f4aef44586c4fc0b2581e858",
+  "diff_tree_digest": "sha256:ae7ec7e4220330c39be78223a50c0fa4eb23d9b63f1dce4cd02f654267d62d1a",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/screens/workspace/workspace-screen.tsx",
+      "old_lines": [
+        1793,
+        1803
+      ],
+      "new_lines": [
+        1799,
+        1806
+      ],
+      "diff_block_lines": [
+        30,
+        46
+      ],
+      "hunk_header": "@@ -1791,13 +1797,10 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)",
+      "substantive_changed_lines": 10
+    }
+  ],
+  "selected_substantive_changed_lines": 10,
+  "available_substantive_changed_lines": 53,
+  "receipt_file": "receipts/1779/selected.patch"
+}

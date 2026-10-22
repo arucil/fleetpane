@@ -1,0 +1,55 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1719,
+  "revision": "d1314a4d5dfb598e04fc37f082c93a633bf613c8",
+  "date": "2026-03-21T15:27:35+07:00",
+  "committer_date": "2026-03-21T15:27:35+07:00",
+  "parents": [
+    "ba149330b1a200799e7cd9df579a74546af69b65",
+    "48c3308c318adeff0ba348dcf5b22c8d7f019bef"
+  ],
+  "subject": "Merge branch 'feat/unit-1-workspace-tab-store-navigation'",
+  "diff_tree_paths": [
+    "M\tpackages/app/e2e/helpers/agent-bottom-anchor.ts",
+    "M\tpackages/app/src/app/h/[serverId]/agent/[agentId].tsx",
+    "M\tpackages/app/src/app/h/[serverId]/index.tsx",
+    "M\tpackages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-open-project.ts",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.test.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-agent-visibility.ts",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "M\tpackages/app/src/utils/notification-routing.ts",
+    "A\tpackages/app/src/utils/workspace-navigation.ts"
+  ],
+  "source_receipt_digest": "sha256:bb532d6aacaede863c0421eddd1ba6424071fa0ce448eda4bdbf670353fadb06",
+  "diff_tree_digest": "sha256:749374040d432da830229a9964d40776a536405b3c1c5d66405159a75c485803",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx",
+      "old_lines": [
+        18,
+        33
+      ],
+      "new_lines": [
+        46,
+        61
+      ],
+      "diff_block_lines": [
+        50,
+        79
+      ],
+      "hunk_header": "@@ -17,19 +45,36 @@ export default function HostWorkspaceLayout() {",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 377,
+  "receipt_file": "receipts/1719/selected.patch"
+}

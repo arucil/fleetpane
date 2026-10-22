@@ -1,0 +1,52 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1682,
+  "revision": "3d4ac57bd0a51361ba0278b00edacf609f1c7075",
+  "date": "2026-03-19T19:04:01+07:00",
+  "committer_date": "2026-03-19T19:04:01+07:00",
+  "parents": [
+    "efb3df82336edd24a1a20c265ebedebf4c8442d3"
+  ],
+  "subject": "Refactor project opening and add status bar tooltips",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-status-bar.test.ts",
+    "M\tpackages/app/src/components/agent-status-bar.tsx",
+    "M\tpackages/app/src/components/agent-status-bar.utils.ts",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/project-picker-modal.tsx",
+    "M\tpackages/app/src/components/toast-host.tsx",
+    "M\tpackages/app/src/desktop/components/desktop-updates-section.tsx",
+    "A\tpackages/app/src/desktop/pick-directory.ts",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "A\tpackages/app/src/hooks/use-is-local-daemon.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "A\tpackages/app/src/hooks/use-open-project-picker.ts",
+    "A\tpackages/app/src/hooks/use-open-project.ts",
+    "M\tpackages/app/src/screens/open-project-screen.tsx",
+    "M\tpackages/app/src/screens/settings-screen.tsx"
+  ],
+  "source_receipt_digest": "sha256:8d5a70f3847858a3ca9abf8fe185364aecec4d9a553b7de415d241c339586932",
+  "diff_tree_digest": "sha256:e5088d3426b8fcfc1db4c3e5d0cb5537626d08b6bf06c6c8b89abffebd19fe60",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-status-bar.tsx",
+      "old_lines": [
+        262,
+        283
+      ],
+      "new_lines": [
+        275,
+        284
+      ],
+      "diff_block_lines": [
+        63,
+        92
+      ],
+      "hunk_header": "@@ -261,25 +274,37 @@ function ControlledStatusBar({",
+      "substantive_changed_lines": 25
+    }
+  ],
+  "selected_substantive_changed_lines": 25,
+  "available_substantive_changed_lines": 451,
+  "receipt_file": "receipts/1682/selected.patch"
+}

@@ -1,0 +1,76 @@
+    for (const handle of keyboardRefitTimeoutsRef.current) {
+      clearTimeout(handle);
+    }
+    keyboardRefitTimeoutsRef.current = [];
+  }, []);
+
+  const pulseKeyboardRefits = useCallback(() => {
+    clearKeyboardRefitTimeouts();
+    requestTerminalReflow();
+    keyboardRefitTimeoutsRef.current = TERMINAL_REFIT_DELAYS_MS.map((delayMs) =>
+      setTimeout(() => {
+        requestTerminalReflow();
+      }, delayMs),
+    );
+  }, [clearKeyboardRefitTimeouts, requestTerminalReflow]);
+
+  useEffect(() => {
+    return () => clearKeyboardRefitTimeouts();
+  }, [clearKeyboardRefitTimeouts]);
+
+  useAnimatedReaction(
+    () => keyboardShift.value > 0,
+    (next, prev) => {
+      if (next === prev) {
+        return;
+      }
+      runOnJS(pulseKeyboardRefits)();
+    },
+    [pulseKeyboardRefits],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!terminalId) {
+        return;
+      }
+      // Navigation transitions can temporarily report stale dimensions.
+      // Pulse forced refits so xterm fills the pane when returning to an agent.
+      const timeoutHandles = TERMINAL_REFIT_DELAYS_MS.map((delayMs) =>
+        setTimeout(() => {
+          requestTerminalReflow();
+        }, delayMs),
+      );
+
+      return () => {
+        for (const handle of timeoutHandles) {
+          clearTimeout(handle);
+        }
+      };
+    }, [requestTerminalReflow, terminalId]),
+  );
+
+  useEffect(() => {
+    if (!client || !isConnected || !isScreenFocused) {
+      return;
+    }
+
+    return client.on("terminal_stream_exit", (message) => {
+      if (message.type !== "terminal_stream_exit") {
+        return;
+      }
+
+      const exitedTerminalId = message.payload.terminalId;
+      if (!exitedTerminalId) {
+        return;
+      }
+
+      workspaceTerminalSession.snapshots.clear({ terminalId: exitedTerminalId });
+      if (terminalIdRef.current === exitedTerminalId) {
+        emulatorRef.current?.clear();
+      }
+      streamControllerRef.current?.handleTerminalExit({
+        terminalId: exitedTerminalId,
+      });
+      setModifiers({ ...EMPTY_MODIFIERS });
+    });

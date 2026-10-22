@@ -1,0 +1,14 @@
+FILE packages/app/src/app/_layout.tsx
+RANGE {"path":"packages/app/src/app/_layout.tsx","old_lines":[638,647],"new_lines":[614,620],"diff_block_lines":[138,149],"hunk_header":"@@ -637,11 +613,8 @@ export default function RootLayout() {","substantive_changed_lines":7}
+                               <Stack.Screen name="settings" />
+-                              <Stack.Screen
+-                                name="h/[serverId]/workspace/[workspaceId]"
+-                                options={{ freezeOnBlur: true }}
+-                              />
++                              <Stack.Screen name="h/[serverId]/workspace/[workspaceId]" />
+                               <Stack.Screen
+                                 name="h/[serverId]/agent/[agentId]"
+-                                options={{ gestureEnabled: false, freezeOnBlur: true }}
++                                options={{ gestureEnabled: false }}
+                               />
+                               <Stack.Screen name="h/[serverId]/index" />

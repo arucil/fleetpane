@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[1228,1233],"new_lines":[1233,1259],"diff_block_lines":[34,63],"hunk_header":"@@ -1225,13 +1231,34 @@ export function SidebarWorkspaceList({","substantive_changed_lines":20}
+-    if (!parsed) {
++    if (!parseHostWorkspaceRouteFromPathname(pathname)) {
+       return null
+     }
++
++    const serverValue = Array.isArray(routeParams.serverId)
++      ? routeParams.serverId[0]
++      : routeParams.serverId
++    const workspaceValue = Array.isArray(routeParams.workspaceId)
++      ? routeParams.workspaceId[0]
++      : routeParams.workspaceId
++    const serverId = serverValue?.trim() ?? ''
++    const workspaceId = normalizeWorkspaceIdentity(
++      workspaceValue ? decodeWorkspaceIdFromPathSegment(workspaceValue) : null
++    )
++    if (!serverId || !workspaceId) {
++      const parsed = parseHostWorkspaceRouteFromPathname(pathname)
++      if (!parsed) {
++        return null
++      }
++      return {
++        serverId: parsed.serverId,
++        workspaceId: parsed.workspaceId,
++      }
++    }
++
+     return {
+-      serverId: parsed.serverId,
+-      workspaceId: parsed.workspaceId,
++      serverId,

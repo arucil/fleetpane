@@ -1,0 +1,58 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1683,
+  "revision": "6ab97c579ee63225e111984945e9d790e3cf2c93",
+  "date": "2026-03-19T23:33:35+07:00",
+  "committer_date": "2026-03-19T23:33:35+07:00",
+  "parents": [
+    "3d4ac57bd0a51361ba0278b00edacf609f1c7075"
+  ],
+  "subject": "Simplify workspace creation with inline worktree API",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/h/[serverId]/new-agent.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/runtime/host-runtime.ts",
+    "M\tpackages/app/src/types/host-connection.ts",
+    "M\tpackages/app/src/utils/host-routes.test.ts",
+    "M\tpackages/app/src/utils/host-routes.ts",
+    "D\tpackages/app/src/utils/tauri-daemon-transport.test.ts",
+    "D\tpackages/app/src/utils/tauri-daemon-transport.ts",
+    "M\tpackages/app/src/utils/test-daemon-connection.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/connection-offer.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "M\tpackages/server/src/shared/daemon-endpoints.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/utils/checkout-git.test.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts",
+    "M\tpackages/server/src/utils/worktree.ts"
+  ],
+  "source_receipt_digest": "sha256:a4d51a14798e1caf787d7b515551c2bbc64701dd583262dc37b2e1db30441d8e",
+  "diff_tree_digest": "sha256:fae543b352ce3a030acf40131f7f1256d725a1277dbceb9e671f523ba0be3bcb",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/sidebar-workspace-list.tsx",
+      "old_lines": [
+        1439,
+        1451
+      ],
+      "new_lines": [
+        1513,
+        1534
+      ],
+      "diff_block_lines": [
+        178,
+        207
+      ],
+      "hunk_header": "@@ -1438,18 +1512,66 @@ export function SidebarWorkspaceList({",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 721,
+  "receipt_file": "receipts/1683/selected.patch"
+}

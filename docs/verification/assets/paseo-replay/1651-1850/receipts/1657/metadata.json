@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1657,
+  "revision": "0bc903fa21005308cb830116bdf95522b9a05d42",
+  "date": "2026-03-18T10:08:48+07:00",
+  "committer_date": "2026-03-18T10:08:48+07:00",
+  "parents": [
+    "e2f20f0e244764bfbb9ec5643558ec91761a8251"
+  ],
+  "subject": "Fix agent spawn PATH resolution and add provider binary checks to status",
+  "diff_tree_paths": [
+    "M\tpackages/cli/src/commands/daemon/status.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.test.ts",
+    "M\tpackages/server/src/server/agent/provider-launch-config.ts",
+    "M\tpackages/server/src/server/exports.ts"
+  ],
+  "source_receipt_digest": "sha256:8b89f83c1fbf99d86b4d578d1d27f828f27974b94d4eb0e7ae4bd77e2b7f1355",
+  "diff_tree_digest": "sha256:661f840519dca6fb702d8cbeb23f9e2deeb013ded796afa7f2962420ab5457db",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/cli/src/commands/daemon/status.ts",
+      "old_lines": [
+        132,
+        133
+      ],
+      "new_lines": [
+        158,
+        186
+      ],
+      "diff_block_lines": [
+        76,
+        104
+      ],
+      "hunk_header": "@@ -127,7 +136,51 @@ function toStatusRows(status: DaemonStatus): StatusRow[] {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 65,
+  "receipt_file": "receipts/1657/selected.patch"
+}

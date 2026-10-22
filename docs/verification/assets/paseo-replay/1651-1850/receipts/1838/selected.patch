@@ -1,0 +1,18 @@
+FILE packages/website/src/components/landing-page.tsx
+RANGE {"path":"packages/website/src/components/landing-page.tsx","old_lines":[499,511],"new_lines":[507,516],"diff_block_lines":[27,42],"hunk_header":"@@ -498,14 +506,11 @@ function GetStarted() {","substantive_changed_lines":9}
+         <a
+-          href={androidApkHref}
++          href="https://play.google.com/store/apps/details?id=sh.paseo"
+           target="_blank"
+           rel="noopener noreferrer"
+-          className="relative group inline-flex items-center justify-center rounded-lg border border-white/20 px-3 py-2 text-white hover:bg-white/10 transition-colors"
+-          aria-label="Download APK"
++          className="inline-flex items-center justify-center rounded-lg border border-white/20 px-3 py-2 text-white hover:bg-white/10 transition-colors"
++          aria-label="Google Play"
+         >
+           <AndroidIcon className="h-5 w-5" />
+-          <span className="absolute -top-8 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 px-2 py-1 rounded bg-white text-black text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+-            Download APK (Play Store coming soon)
+-          </span>
+         </a>
+         <ServerInstallButton />

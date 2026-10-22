@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1720,
+  "revision": "1d42542514098135427911a6e63bfce99d502a4a",
+  "date": "2026-03-21T15:44:49+07:00",
+  "committer_date": "2026-03-21T15:44:49+07:00",
+  "parents": [
+    "d1314a4d5dfb598e04fc37f082c93a633bf613c8"
+  ],
+  "subject": "refactor: extract isInteractiveDesktopDragTarget and add debug logging",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-stream-view.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "A\tpackages/app/src/utils/desktop-window.test.ts",
+    "M\tpackages/app/src/utils/desktop-window.ts"
+  ],
+  "source_receipt_digest": "sha256:b418606747b6535cade83d7678eae34ada8cbabe378f9cc709bcfdc05796fc29",
+  "diff_tree_digest": "sha256:24c58f5e644d135131a76770b598624e3ae99227a074be1954fe8931e30f40fe",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-stream-view.tsx",
+      "old_lines": [
+        264,
+        264
+      ],
+      "new_lines": [
+        267,
+        296
+      ],
+      "diff_block_lines": [
+        11,
+        40
+      ],
+      "hunk_header": "@@ -262,4 +262,42 @@ export const AgentStreamView = forwardRef<AgentStreamViewHandle, AgentStreamView",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 84,
+  "receipt_file": "receipts/1720/selected.patch"
+}

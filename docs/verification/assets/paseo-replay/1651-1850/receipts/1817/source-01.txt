@@ -1,0 +1,145 @@
+import { execFileSync, execSync } from "node:child_process";
+import { existsSync } from "node:fs";
+import { platform } from "node:os";
+import { shellEnvSync } from "shell-env";
+import { z } from "zod";
+
+import type { AgentProvider } from "./agent-sdk-types.js";
+import { AgentProviderSchema } from "./provider-manifest.js";
+
+const ProviderCommandDefaultSchema = z
+  .object({
+    mode: z.literal("default"),
+  })
+  .strict();
+
+const ProviderCommandAppendSchema = z
+  .object({
+    mode: z.literal("append"),
+    args: z.array(z.string()).optional(),
+  })
+  .strict();
+
+const ProviderCommandReplaceSchema = z
+  .object({
+    mode: z.literal("replace"),
+    argv: z.array(z.string().min(1)).min(1),
+  })
+  .strict();
+
+export const ProviderCommandSchema = z.discriminatedUnion("mode", [
+  ProviderCommandDefaultSchema,
+  ProviderCommandAppendSchema,
+  ProviderCommandReplaceSchema,
+]);
+
+export const ProviderRuntimeSettingsSchema = z
+  .object({
+    command: ProviderCommandSchema.optional(),
+    env: z.record(z.string()).optional(),
+  })
+  .strict();
+
+export const AgentProviderRuntimeSettingsMapSchema = z.record(
+  AgentProviderSchema,
+  ProviderRuntimeSettingsSchema,
+);
+
+export type ProviderCommand = z.infer<typeof ProviderCommandSchema>;
+export type ProviderRuntimeSettings = z.infer<typeof ProviderRuntimeSettingsSchema>;
+export type AgentProviderRuntimeSettingsMap = Partial<
+  Record<AgentProvider, ProviderRuntimeSettings>
+>;
+
+export type ProviderCommandPrefix = {
+  command: string;
+  args: string[];
+};
+
+interface FindExecutableDependencies {
+  execSync: typeof execSync;
+  execFileSync: typeof execFileSync;
+  existsSync: typeof existsSync;
+  platform: typeof platform;
+  shell: string | undefined;
+}
+
+function resolveExecutableFromWhichOutput(
+  name: string,
+  output: string,
+  source: "login-shell" | "which",
+): string | null {
+  const lines = output
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+  const candidate = lines.at(-1);
+
+  if (!candidate) {
+    return null;
+  }
+
+  if (!candidate.startsWith("/")) {
+    console.warn(
+      `[findExecutable] Ignoring non-absolute ${source} output for '${name}': ${JSON.stringify(candidate)}`,
+    );
+    return null;
+  }
+
+  return candidate;
+}
+
+export function resolveProviderCommandPrefix(
+  commandConfig: ProviderCommand | undefined,
+  resolveDefaultCommand: () => string,
+): ProviderCommandPrefix {
+  if (!commandConfig || commandConfig.mode === "default") {
+    return {
+      command: resolveDefaultCommand(),
+      args: [],
+    };
+  }
+
+  if (commandConfig.mode === "append") {
+    return {
+      command: resolveDefaultCommand(),
+      args: [...(commandConfig.args ?? [])],
+    };
+  }
+
+  return {
+    command: commandConfig.argv[0]!,
+    args: commandConfig.argv.slice(1),
+  };
+}
+
+let cachedShellEnv: Record<string, string> | null = null;
+
+export function resolveShellEnv(): Record<string, string> {
+  if (cachedShellEnv) return cachedShellEnv;
+  try {
+    cachedShellEnv = shellEnvSync();
+  } catch {
+    cachedShellEnv = { ...process.env } as Record<string, string>;
+  }
+  return cachedShellEnv;
+}
+
+export function applyProviderEnv(
+  baseEnv: Record<string, string | undefined>,
+  runtimeSettings?: ProviderRuntimeSettings,
+  shellEnv?: Record<string, string>,
+): Record<string, string | undefined> {
+  return {
+    ...baseEnv,
+    ...(shellEnv ?? resolveShellEnv()),
+    ...(runtimeSettings?.env ?? {}),
+  };
+}
+
+/**
+ * Resolve an executable name to its absolute path the way the user's shell would.
+ *
+ * On Unix we first try `$SHELL -lic "which <name>"` so that rc-file PATH
+ * additions (asdf, nvm, homebrew, nix, etc.) are visible — exactly as if the
+ * user opened a terminal and typed the command.  If that fails (e.g. the login

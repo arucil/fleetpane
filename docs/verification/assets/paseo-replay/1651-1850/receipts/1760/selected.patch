@@ -1,0 +1,32 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[779,802],"new_lines":[832,839],"diff_block_lines":[90,119],"hunk_header":"@@ -778,90 +831,97 @@ function WorkspaceRowInner({","substantive_changed_lines":27}
+       >
+-        <View
+-          {...(dragHandleProps?.attributes as any)}
+-          {...(dragHandleProps?.listeners as any)}
+-          ref={dragHandleProps?.setActivatorNodeRef as any}
+-          style={styles.workspaceRowLeft}
+-        >
+-          <WorkspaceStatusIndicator
+-            bucket={workspace.statusBucket}
+-            workspaceKind={workspace.workspaceKind}
+-            loading={isArchiving || isCreating}
+-          />
+-          <Text
+-            style={[
+-              styles.workspaceBranchText,
+-              isHovered && styles.workspaceBranchTextHovered,
+-              isCreating && styles.workspaceBranchTextCreating,
+-            ]}
+-            numberOfLines={1}
++        <View style={styles.workspaceRowMain}>
++          <View
++            {...(dragHandleProps?.attributes as any)}
++            {...(dragHandleProps?.listeners as any)}
++            ref={dragHandleProps?.setActivatorNodeRef as any}
++            style={styles.workspaceRowLeft}
+           >
+-            {workspace.name}
+-          </Text>
+-        </View>
+-        <View style={styles.workspaceRowRight}>

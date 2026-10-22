@@ -1,0 +1,24 @@
+FILE packages/server/src/server/agent/agent-manager.ts
+RANGE {"path":"packages/server/src/server/agent/agent-manager.ts","old_lines":[1391,1392],"new_lines":[1393,1414],"diff_block_lines":[10,31],"hunk_header":"@@ -1389,4 +1389,26 @@ export class AgentManager {","substantive_changed_lines":12}
++    // activeForegroundTurnId, settles waiters, and unblocks the streamForwarder.
++    if (foregroundTurnId && agent.activeForegroundTurnId === foregroundTurnId) {
++      this.logger.warn(
++        { agentId, foregroundTurnId },
++        "cancelAgentRun: foreground turn still active after timeout, force-canceling",
++      );
++      this.dispatchSessionEvent(agent, {
++        type: "turn_canceled",
++        provider: agent.provider,
++        reason: "interrupted",
++        turnId: foregroundTurnId,
++      });
++      // The synthetic event unblocks the streamForwarder generator, whose finally
++      // block settles the pending foreground run asynchronously. Wait for it.
++      const staleRun = this.getPendingForegroundRun(agentId);
++      if (staleRun && !staleRun.settled) {
++        await staleRun.settledPromise;
++      }
++    }
++
+     // Clear any pending permissions that weren't cleaned up by handleStreamEvent.
+     if (agent.pendingPermissions.size > 0) {

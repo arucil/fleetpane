@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[2581,2605],"new_lines":[2215,2226],"diff_block_lines":[579,608],"hunk_header":"@@ -2578,364 +2213,131 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":22}
+-    return text.length > 0 ? text : undefined;
++    return this.recentStderr.trim() || undefined;
+   }
+ 
+-  private cancelRun(
+-    run: RunRecord,
+-    event: Extract<AgentStreamEvent, { type: "turn_canceled" }>
+-  ): void {
+-    this.flushPendingToolCalls();
+-    this.emitRunEvent(run, event);
++  private createTurnId(owner: "foreground" | "autonomous"): string {
++    return `${owner}-turn-${this.nextTurnOrdinal++}`;
+   }
+ 
+-  private emitRunEvent(run: RunRecord, event: AgentStreamEvent): void {
+-    if (
+-      event.type === "turn_started" ||
++  private isTerminalTurnEvent(event: AgentStreamEvent): boolean {
++    return (
+       event.type === "turn_completed" ||
+       event.type === "turn_failed" ||
+       event.type === "turn_canceled"
+-    ) {
+-      this.logger.trace(
+-        {
+-          runId: run.id,
+-          owner: run.owner,
+-          runState: run.state,
+-          eventType: event.type,
+-          routedTo: run.owner === "foreground" && run.queue ? "foreground_queue" : "live_queue",

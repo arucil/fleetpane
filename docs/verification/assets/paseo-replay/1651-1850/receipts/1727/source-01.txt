@@ -1,0 +1,106 @@
+  }, [highlightedLines])
+
+  const handlePreviewScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      if (enablePreviewDesktopScrollbar) {
+        previewScrollbarMetrics.onScroll(event)
+      }
+    },
+    [enablePreviewDesktopScrollbar, previewScrollbarMetrics]
+  )
+
+  const handlePreviewLayout = useCallback(
+    (event: LayoutChangeEvent) => {
+      if (enablePreviewDesktopScrollbar) {
+        previewScrollbarMetrics.onLayout(event)
+      }
+    },
+    [enablePreviewDesktopScrollbar, previewScrollbarMetrics]
+  )
+
+  if (isLoading && !preview) {
+    return (
+      <View style={styles.centerState}>
+        <ActivityIndicator size="small" />
+        <Text style={styles.loadingText}>Loading file…</Text>
+      </View>
+    )
+  }
+
+  if (!preview) {
+    return (
+      <View style={styles.centerState}>
+        <Text style={styles.emptyText}>No preview available</Text>
+      </View>
+    )
+  }
+
+  if (preview.kind === 'text') {
+    const lines = highlightedLines ?? [[{ text: preview.content ?? '', style: null }]]
+    const codeLines = (
+      <View>
+        {lines.map((tokens, index) => (
+          <CodeLine
+            key={index}
+            tokens={tokens}
+            lineNumber={index + 1}
+            gutterWidth={gutterWidth}
+            colorMap={colorMap}
+            baseColor={baseColor}
+          />
+        ))}
+      </View>
+    )
+
+    return (
+      <View style={styles.previewScrollContainer}>
+        <RNScrollView
+          ref={previewScrollRef}
+          style={styles.previewContent}
+          onLayout={enablePreviewDesktopScrollbar ? handlePreviewLayout : undefined}
+          onScroll={enablePreviewDesktopScrollbar ? handlePreviewScroll : undefined}
+          onContentSizeChange={
+            enablePreviewDesktopScrollbar ? previewScrollbarMetrics.onContentSizeChange : undefined
+          }
+          scrollEventThrottle={enablePreviewDesktopScrollbar ? 16 : undefined}
+          showsVerticalScrollIndicator={!enablePreviewDesktopScrollbar}
+        >
+          {isMobile ? (
+            <View style={styles.previewCodeScrollContent}>{codeLines}</View>
+          ) : (
+            <RNScrollView
+              horizontal
+              nestedScrollEnabled
+              showsHorizontalScrollIndicator
+              contentContainerStyle={styles.previewCodeScrollContent}
+            >
+              {codeLines}
+            </RNScrollView>
+          )}
+        </RNScrollView>
+        <WebDesktopScrollbarOverlay
+          enabled={enablePreviewDesktopScrollbar}
+          metrics={previewScrollbarMetrics}
+          onScrollToOffset={(nextOffset) => {
+            previewScrollRef.current?.scrollTo({ y: nextOffset, animated: false })
+          }}
+        />
+      </View>
+    )
+  }
+
+  if (preview.kind === 'image' && preview.content) {
+    return (
+      <View style={styles.previewScrollContainer}>
+        <RNScrollView
+          ref={previewScrollRef}
+          style={styles.previewContent}
+          contentContainerStyle={styles.previewImageScrollContent}
+          onLayout={enablePreviewDesktopScrollbar ? handlePreviewLayout : undefined}
+          onScroll={enablePreviewDesktopScrollbar ? handlePreviewScroll : undefined}
+          onContentSizeChange={
+            enablePreviewDesktopScrollbar ? previewScrollbarMetrics.onContentSizeChange : undefined
+          }
+          scrollEventThrottle={enablePreviewDesktopScrollbar ? 16 : undefined}
+          showsVerticalScrollIndicator={!enablePreviewDesktopScrollbar}
+        >

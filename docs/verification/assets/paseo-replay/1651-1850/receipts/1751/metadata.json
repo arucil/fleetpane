@@ -1,0 +1,48 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1751,
+  "revision": "83b681cebbc9e1d6c900ea0b363dba446ab3949c",
+  "date": "2026-03-22T17:38:10+07:00",
+  "committer_date": "2026-03-22T17:38:10+07:00",
+  "parents": [
+    "d9bcf2a4390b7f4b99e750daeb0bd0be5d9dd703"
+  ],
+  "subject": "fix(desktop): harden packaged launcher and desktop build",
+  "diff_tree_paths": [
+    "M\tpackage.json",
+    "M\tpackages/app/package.json",
+    "M\tpackages/desktop/bin/paseo",
+    "M\tpackages/desktop/bin/paseo.cmd",
+    "M\tpackages/desktop/package.json",
+    "M\tpackages/desktop/src/daemon/daemon-manager.ts",
+    "A\tpackages/desktop/src/daemon/node-entrypoint-launcher.test.ts",
+    "A\tpackages/desktop/src/daemon/node-entrypoint-launcher.ts",
+    "A\tpackages/desktop/src/daemon/node-entrypoint-runner.ts",
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts",
+    "M\tpackages/expo-two-way-audio/package.json"
+  ],
+  "source_receipt_digest": "sha256:610b40cd8e7fdb52550e63b8e3300f093adee65b0afa29e553fff839ed287672",
+  "diff_tree_digest": "sha256:a1be22e3f444de00a158e58ee4ec906187da5b3db730fa933f65dc146d26c660",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/node-entrypoint-launcher.ts",
+      "old_lines": [
+        0,
+        0
+      ],
+      "new_lines": [
+        33,
+        62
+      ],
+      "diff_block_lines": [
+        39,
+        68
+      ],
+      "hunk_header": "@@ -0,0 +1,78 @@",
+      "substantive_changed_lines": 20
+    }
+  ],
+  "selected_substantive_changed_lines": 20,
+  "available_substantive_changed_lines": 245,
+  "receipt_file": "receipts/1751/selected.patch"
+}

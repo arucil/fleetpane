@@ -1,0 +1,32 @@
+FILE packages/app/src/stores/workspace-layout-store.ts
+RANGE {"path":"packages/app/src/stores/workspace-layout-store.ts","old_lines":[387,387],"new_lines":[391,420],"diff_block_lines":[26,55],"hunk_header":"@@ -386,4 +390,64 @@ export const useWorkspaceLayoutStore = create<WorkspaceLayoutStore>()(","substantive_changed_lines":20}
+       },
++      pinAgent: (workspaceKey, agentId) => {
++        const normalizedWorkspaceKey = trimNonEmpty(workspaceKey);
++        const normalizedAgentId = trimNonEmpty(agentId);
++        if (!normalizedWorkspaceKey || !normalizedAgentId) {
++          return;
++        }
++
++        set((state) => {
++          const currentPinnedAgentIds =
++            state.pinnedAgentIdsByWorkspace[normalizedWorkspaceKey] ?? null;
++          if (currentPinnedAgentIds?.has(normalizedAgentId)) {
++            return state;
++          }
++
++          const nextPinnedAgentIds = new Set(currentPinnedAgentIds ?? []);
++          nextPinnedAgentIds.add(normalizedAgentId);
++
++          return {
++            pinnedAgentIdsByWorkspace: {
++              ...state.pinnedAgentIdsByWorkspace,
++              [normalizedWorkspaceKey]: nextPinnedAgentIds,
++            },
++          };
++        });
++      },
++      unpinAgent: (workspaceKey, agentId) => {
++        const normalizedWorkspaceKey = trimNonEmpty(workspaceKey);
++        const normalizedAgentId = trimNonEmpty(agentId);
++        if (!normalizedWorkspaceKey || !normalizedAgentId) {

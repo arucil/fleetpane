@@ -1,0 +1,8 @@
+FILE packages/app/src/components/git-diff-pane.tsx
+RANGE {"path":"packages/app/src/components/git-diff-pane.tsx","old_lines":[208,211],"new_lines":[208,212],"diff_block_lines":[5,10],"hunk_header":"@@ -208,4 +208,5 @@ const DiffFileHeader = memo(function DiffFileHeader({","substantive_changed_lines":1}
+@@ -208,4 +208,5 @@ const DiffFileHeader = memo(function DiffFileHeader({
+       style={[
+         styles.fileSectionHeaderContainer,
++        isExpanded && styles.fileSectionHeaderExpanded,
+       ]}
+       onLayout={(event) => {

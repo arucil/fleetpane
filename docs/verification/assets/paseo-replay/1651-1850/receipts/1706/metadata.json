@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1706,
+  "revision": "2003f308f3b6e8db03f446d440d90a3eb24fb9aa",
+  "date": "2026-03-21T13:04:57+07:00",
+  "committer_date": "2026-03-21T13:04:57+07:00",
+  "parents": [
+    "a042fbbe435d336b0480fcc92c5a838dbbe15435"
+  ],
+  "subject": "fix(server): reconcile stale workspaces by pruning missing directories and fully-archived agents",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/session.workspaces.test.ts",
+    "A\tpackages/server/src/server/workspace-registry-model.test.ts",
+    "M\tpackages/server/src/server/workspace-registry-model.ts"
+  ],
+  "source_receipt_digest": "sha256:25b277747536b8ee7ec8b453e322f46b4f45699634f4c5e25ed7332bc08056e6",
+  "diff_tree_digest": "sha256:323da1eae223bab11aea1b3cff99522b327d0308992193627ce2c69ac52498a1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        3989,
+        3989
+      ],
+      "new_lines": [
+        4029,
+        4058
+      ],
+      "diff_block_lines": [
+        86,
+        115
+      ],
+      "hunk_header": "@@ -3988,4 +4028,172 @@ export class Session {",
+      "substantive_changed_lines": 18
+    }
+  ],
+  "selected_substantive_changed_lines": 18,
+  "available_substantive_changed_lines": 291,
+  "receipt_file": "receipts/1706/selected.patch"
+}

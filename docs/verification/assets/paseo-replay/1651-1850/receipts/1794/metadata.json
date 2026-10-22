@@ -1,0 +1,47 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1794,
+  "revision": "b873523eab7000d9da4aa594b0985c39c34d868d",
+  "date": "2026-03-23T14:47:27+07:00",
+  "committer_date": "2026-03-23T14:47:27+07:00",
+  "parents": [
+    "b862f7b72db3bdc24fab71c861084682d3574e6f"
+  ],
+  "subject": "fix(terminal): skip resize snapshots and standardize key encoding",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/components/terminal-emulator.tsx",
+    "M\tpackages/app/src/components/terminal-pane.tsx",
+    "M\tpackages/app/src/terminal/runtime/terminal-stream-controller.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/shared/terminal-key-input.test.ts",
+    "M\tpackages/server/src/shared/terminal-key-input.ts",
+    "M\tpackages/server/src/terminal/terminal.test.ts",
+    "M\tpackages/server/src/terminal/terminal.ts"
+  ],
+  "source_receipt_digest": "sha256:87e063222453a0caef9a0a9189e07300c064a831c5bb68614713ac6e4999c8c1",
+  "diff_tree_digest": "sha256:1d15184b353f2a7f14960d693d5f4be4a0f97f1819b222036e00cdcaa2c20554",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/terminal-emulator.tsx",
+      "old_lines": [
+        168,
+        169
+      ],
+      "new_lines": [
+        174,
+        189
+      ],
+      "diff_block_lines": [
+        79,
+        94
+      ],
+      "hunk_header": "@@ -166,4 +169,21 @@ const TerminalEmulator = forwardRef<TerminalEmulatorHandle, TerminalEmulatorProp",
+      "substantive_changed_lines": 7
+    }
+  ],
+  "selected_substantive_changed_lines": 7,
+  "available_substantive_changed_lines": 167,
+  "receipt_file": "receipts/1794/selected.patch"
+}

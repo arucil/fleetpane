@@ -1,0 +1,32 @@
+FILE packages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx
+RANGE {"path":"packages/app/src/app/h/[serverId]/workspace/[workspaceId]/_layout.tsx","old_lines":[18,33],"new_lines":[46,61],"diff_block_lines":[50,79],"hunk_header":"@@ -17,19 +45,36 @@ export default function HostWorkspaceLayout() {","substantive_changed_lines":19}
+   }>()
+-  const serverValue = Array.isArray(params.serverId) ? params.serverId[0] : params.serverId
+-  const workspaceValue = Array.isArray(params.workspaceId)
+-    ? params.workspaceId[0]
+-    : params.workspaceId
+-  const serverId = serverValue?.trim() ?? ''
++  const serverId = getParamValue(params.serverId)
++  const workspaceValue = getParamValue(params.workspaceId)
+   const workspaceId = workspaceValue ? (decodeWorkspaceIdFromPathSegment(workspaceValue) ?? '') : ''
+-  const openValue = Array.isArray(globalParams.open) ? globalParams.open[0] : globalParams.open
+-  const openIntent = parseWorkspaceOpenIntent(openValue)
+-
+-  const handleOpenIntentConsumed = useCallback(
+-    function handleOpenIntentConsumed() {
+-      router.replace(buildHostWorkspaceRoute(serverId, workspaceId) as any)
+-    },
+-    [router, serverId, workspaceId]
+-  )
++  const openValue = getParamValue(globalParams.open)
++
++  useEffect(() => {
++    if (!openValue) {
++      return
++    }
++
++    const consumptionKey = `${serverId}:${workspaceId}:${openValue}`
++    if (consumedIntentRef.current === consumptionKey) {
++      return
++    }
++    consumedIntentRef.current = consumptionKey

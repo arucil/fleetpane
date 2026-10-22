@@ -1,0 +1,32 @@
+FILE .github/workflows/desktop-release.yml
+RANGE {"path":".github/workflows/desktop-release.yml","old_lines":[430,430],"new_lines":[430,459],"diff_block_lines":[7,36],"hunk_header":"@@ -429,4 +429,48 @@ jobs:","substantive_changed_lines":22}
+ 
++      - name: Patch AppImage for Wayland compatibility
++        if: env.IS_SMOKE_TAG != 'true'
++        env:
++          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
++          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
++          APPIMAGE_EXTRACT_AND_RUN: "1"
++        shell: bash
++        run: |
++          set -euo pipefail
++          appimage_dir="packages/desktop/src-tauri/target/release/bundle/appimage"
++          appimage="$(find "$appimage_dir" -maxdepth 1 -type f -name '*.AppImage' | head -n 1)"
++          if [ -z "$appimage" ]; then
++            echo "::error::No AppImage found to patch"
++            exit 1
++          fi
++          echo "Patching $appimage for Wayland compatibility..."
++
++          # Extract the AppImage
++          workdir="$(mktemp -d)"
++          cd "$workdir"
++          "$appimage" --appimage-extract
++
++          # Remove GDK_BACKEND=x11 from the GTK plugin hook.
++          # The bundled libgdk-3.so has Wayland support built in; forcing x11
++          # prevents the app from starting on Wayland-only systems.
++          gtk_hook="squashfs-root/apprun-hooks/linuxdeploy-plugin-gtk.sh"
++          if [ -f "$gtk_hook" ]; then
++            sed -i 's/^export GDK_BACKEND=x11/#export GDK_BACKEND=x11/' "$gtk_hook"
++            echo "Patched $gtk_hook — removed GDK_BACKEND=x11"

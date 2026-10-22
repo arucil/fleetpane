@@ -1,0 +1,41 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1679,
+  "revision": "20fa1a3a3bbb378a706cef925d510184de7b124d",
+  "date": "2026-03-19T15:45:29+07:00",
+  "committer_date": "2026-03-19T15:45:29+07:00",
+  "parents": [
+    "7609ccee4c34868a1c1ec541d0b0f486f6a6e89e"
+  ],
+  "subject": "Fix workspace tab presentation hook ordering",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/split-container.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-tab-presentation.tsx"
+  ],
+  "source_receipt_digest": "sha256:93eaefb4466c6f9246c1b47cc8daccc49dd6342bf328b16f0db12be69e4a855e",
+  "diff_tree_digest": "sha256:03ee96134dc992ccf7a13ac403e9e62b85e70844cd866f662e44b2ffbabf192c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/split-container.tsx",
+      "old_lines": [
+        520,
+        521
+      ],
+      "new_lines": [
+        499,
+        527
+      ],
+      "diff_block_lines": [
+        47,
+        76
+      ],
+      "hunk_header": "@@ -490,33 +490,39 @@ function DragOverlayTabChipInner({",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 277,
+  "receipt_file": "receipts/1679/selected.patch"
+}

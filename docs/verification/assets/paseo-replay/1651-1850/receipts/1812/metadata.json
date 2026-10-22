@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1812,
+  "revision": "af8509d012bac5c7448587ba8eba3af95f20d591",
+  "date": "2026-03-24T00:09:05+07:00",
+  "committer_date": "2026-03-24T00:09:05+07:00",
+  "parents": [
+    "0e6aba28865c1ddf527bbd413915c12892ab15e5"
+  ],
+  "subject": "fix(release): unblock 0.1.33 app and server checks",
+  "diff_tree_paths": [
+    "M\t.github/workflows/deploy-app.yml",
+    "M\t.github/workflows/server-ci.yml",
+    "M\tpackages/app/src/desktop/components/desktop-permissions-section.tsx"
+  ],
+  "source_receipt_digest": "sha256:0e20512af3d89faf3f8ccc9b749d88854428f2f1a39828d7740eb4e98a733dd2",
+  "diff_tree_digest": "sha256:24b8fa96169fe2c85de0f801717833e60861c1456036debc7eef8e2d0f845a54",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/desktop/components/desktop-permissions-section.tsx",
+      "old_lines": [
+        61,
+        65
+      ],
+      "new_lines": [
+        61,
+        65
+      ],
+      "diff_block_lines": [
+        5,
+        11
+      ],
+      "hunk_header": "@@ -61,5 +61,5 @@ export function DesktopPermissionsSection() {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 6,
+  "receipt_file": "receipts/1812/selected.patch"
+}

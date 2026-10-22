@@ -1,0 +1,44 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1820,
+  "revision": "fa45ab593b59da1879b95f883f3e7fa584301a85",
+  "date": "2026-03-24T21:22:14+07:00",
+  "committer_date": "2026-03-24T21:22:14+07:00",
+  "parents": [
+    "a54687d3ef7d9b1f20b9271e4bf45c75f7e37281"
+  ],
+  "subject": "chore: update orchestrator/chat skills and dev tooling",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/server/src/server/config.ts",
+    "M\tpaseo.json",
+    "M\tscripts/dev.sh",
+    "M\tskills/paseo-chat/SKILL.md",
+    "M\tskills/paseo-chat/bin/chat.sh",
+    "M\tskills/paseo-orchestrator/SKILL.md"
+  ],
+  "source_receipt_digest": "sha256:406c76a77ec03436211d6f294ebace963aafdd016c10bc538e902a23b1a0a086",
+  "diff_tree_digest": "sha256:14aaf4e77ea39e685d75a2b6b6c839a58b5f4c19ff9671b0276c5694993d3c6a",
+  "selected_hunk_ranges": [
+    {
+      "path": "skills/paseo-chat/bin/chat.sh",
+      "old_lines": [
+        403,
+        407
+      ],
+      "new_lines": [
+        491,
+        516
+      ],
+      "diff_block_lines": [
+        227,
+        256
+      ],
+      "hunk_header": "@@ -402,9 +490,77 @@ case \"$command_name\" in",
+      "substantive_changed_lines": 21
+    }
+  ],
+  "selected_substantive_changed_lines": 21,
+  "available_substantive_changed_lines": 302,
+  "receipt_file": "receipts/1820/selected.patch"
+}

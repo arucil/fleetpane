@@ -1,0 +1,110 @@
+import type { ShortcutKey } from "@/utils/format-shortcut";
+import type {
+  KeyboardActionId,
+  KeyboardFocusScope,
+  KeyboardShortcutPayload,
+  MessageInputKeyboardActionKind,
+} from "@/keyboard/actions";
+import { type KeyCombo, parseShortcutString } from "@/keyboard/shortcut-string";
+
+export type { KeyCombo } from "@/keyboard/shortcut-string";
+
+// --- Public types ---
+
+export type KeyboardShortcutContext = {
+  isMac: boolean;
+  isDesktop: boolean;
+  focusScope: KeyboardFocusScope;
+  commandCenterOpen: boolean;
+  hasSelectedAgent: boolean;
+};
+
+export type KeyboardShortcutMatch = {
+  action: KeyboardActionId;
+  payload: KeyboardShortcutPayload;
+  preventDefault: boolean;
+  stopPropagation: boolean;
+};
+
+export type KeyboardShortcutHelpRow = {
+  id: string;
+  label: string;
+  keys: ShortcutKey[];
+  note?: string;
+};
+
+export type KeyboardShortcutHelpSection = {
+  id: "global" | "agent-input";
+  title: string;
+  rows: KeyboardShortcutHelpRow[];
+};
+
+// --- Binding definition types ---
+
+type KeyboardShortcutPlatformContext = {
+  isMac: boolean;
+  isDesktop: boolean;
+};
+
+
+interface ShortcutWhen {
+  /** true = mac only, false = non-mac only */
+  mac?: boolean;
+  /** true = desktop only, false = web only */
+  desktop?: boolean;
+  /** false = disabled when terminal is focused */
+  terminal?: false;
+  /** false = disabled when command center is open */
+  commandCenter?: false;
+  /** true = requires a selected agent */
+  hasSelectedAgent?: true;
+  /** Exact focus scope match */
+  focusScope?: KeyboardFocusScope;
+}
+
+type ShortcutPayloadDef =
+  | { type: "index" }
+  | { type: "delta"; delta: 1 | -1 }
+  | { type: "message-input"; kind: MessageInputKeyboardActionKind };
+
+interface ShortcutHelp {
+  id: string;
+  section: "global" | "agent-input";
+  label: string;
+  keys: ShortcutKey[];
+  note?: string;
+}
+
+interface ShortcutBinding {
+  id: string;
+  action: KeyboardActionId;
+  combo: string;
+  repeat?: false;
+  when?: ShortcutWhen;
+  payload?: ShortcutPayloadDef;
+  preventDefault?: boolean;
+  stopPropagation?: boolean;
+  help?: ShortcutHelp;
+}
+
+export interface ParsedShortcutBinding extends ShortcutBinding {
+  parsedCombo: KeyCombo;
+}
+
+// --- Constants ---
+
+const SHORTCUT_HELP_SECTION_TITLES: Record<KeyboardShortcutHelpSection["id"], string> = {
+  global: "Global",
+  "agent-input": "Agent Input",
+};
+
+// --- Binding definitions ---
+
+const SHORTCUT_BINDINGS: readonly ShortcutBinding[] = [
+  // --- New agent ---
+  {
+    id: "agent-new-cmd-shift-o-mac",
+    action: "agent.new",
+    combo: "Cmd+Shift+O",
+    when: { mac: true },
+    help: {

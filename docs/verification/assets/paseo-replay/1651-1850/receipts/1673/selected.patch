@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[300,329],"new_lines":[297,297],"diff_block_lines":[53,82],"hunk_header":"@@ -299,33 +296,37 @@ function ControlledStatusBar({","substantive_changed_lines":28}
+ 
+-          <Pressable
+-            ref={modelAnchorRef}
+-            collapsable={false}
+-            disabled={modelDisabled}
+-            onPress={() => setOpenSelector(openSelector === 'model' ? null : 'model')}
+-            style={({ pressed, hovered }) => [
+-              styles.modeBadge,
+-              hovered && styles.modeBadgeHovered,
+-              (pressed || openSelector === 'model') && styles.modeBadgePressed,
+-              modelDisabled && styles.disabledBadge,
+-            ]}
+-            accessibilityRole="button"
+-            accessibilityLabel="Select agent model"
+-            testID="agent-model-selector"
+-          >
+-            <ProviderIcon size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
+-            <Text style={styles.modeBadgeText}>{displayModel}</Text>
+-            <ChevronDown size={theme.iconSize.sm} color={theme.colors.foregroundMuted} />
+-          </Pressable>
+-          <Combobox
+-            options={comboboxModelOptions}
+-            value={selectedModelId ?? ''}
+-            onSelect={(id) => onSelectModel?.(id)}
+-            searchable={comboboxModelOptions.length > SEARCH_THRESHOLD}
+-            open={openSelector === 'model'}
+-            onOpenChange={handleOpenChange('model')}
+-            anchorRef={modelAnchorRef}
+-            desktopPlacement="top-start"
+-          />

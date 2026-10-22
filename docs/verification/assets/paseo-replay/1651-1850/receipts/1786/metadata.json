@@ -1,0 +1,45 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1786,
+  "revision": "ea41dbc8e78ceba3a03907f5b83077f4112f1050",
+  "date": "2026-03-23T12:36:35+07:00",
+  "committer_date": "2026-03-23T12:36:35+07:00",
+  "parents": [
+    "ed3ed78ec3a4b6ca4d97df65adc4e5699e222fe9"
+  ],
+  "subject": "Add multiplexed terminal stream slots",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.test.ts",
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/daemon-e2e/terminal.e2e.test.ts",
+    "M\tpackages/server/src/server/session.ts",
+    "M\tpackages/server/src/server/websocket-server.relay-reconnect.test.ts",
+    "M\tpackages/server/src/shared/messages.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.test.ts",
+    "M\tpackages/server/src/shared/terminal-stream-protocol.ts"
+  ],
+  "source_receipt_digest": "sha256:b259a42a271f1c92650e027ff5d7e7ef6d64154ba66f30a1d7231e4c4a5a417e",
+  "diff_tree_digest": "sha256:a16e1b3dca2a47334d3cf6b67cf86cc66fccf93539305d1c884db162b774b389",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/session.ts",
+      "old_lines": [
+        7854,
+        7856
+      ],
+      "new_lines": [
+        7853,
+        7880
+      ],
+      "diff_block_lines": [
+        235,
+        264
+      ],
+      "hunk_header": "@@ -7841,22 +7841,85 @@ export class Session {",
+      "substantive_changed_lines": 22
+    }
+  ],
+  "selected_substantive_changed_lines": 22,
+  "available_substantive_changed_lines": 450,
+  "receipt_file": "receipts/1786/selected.patch"
+}

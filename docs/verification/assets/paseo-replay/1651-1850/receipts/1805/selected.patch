@@ -1,0 +1,18 @@
+FILE packages/app/src/hooks/use-dictation.ts
+RANGE {"path":"packages/app/src/hooks/use-dictation.ts","old_lines":[330,339],"new_lines":[333,348],"diff_block_lines":[20,35],"hunk_header":"@@ -329,11 +332,17 @@ export function useDictation(options: UseDictationOptions): UseDictationResult {","substantive_changed_lines":5}
+     if (actionGateRef.current.confirming) {
++      console.warn("[useDictation] confirmDictation: already confirming, skipping");
+       return;
+     }
+     if (!isRecordingRef.current || isProcessingRef.current) {
++      console.warn("[useDictation] confirmDictation: guard failed", {
++        isRecording: isRecordingRef.current,
++        isProcessing: isProcessingRef.current,
++      });
+       return;
+     }
+     const confirmAllowed = canConfirm ? canConfirm() : true;
+     if (!confirmAllowed) {
++      console.warn("[useDictation] confirmDictation: canConfirm returned false");
+       return;
+     }

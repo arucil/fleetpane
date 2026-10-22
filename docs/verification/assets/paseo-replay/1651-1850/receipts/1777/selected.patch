@@ -1,0 +1,32 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[1777,1777],"new_lines":[1777,1806],"diff_block_lines":[8,37],"hunk_header":"@@ -1775,4 +1775,82 @@ function WorkspaceScreenContent({ serverId, workspaceId }: WorkspaceScreenProps)","substantive_changed_lines":22}
++  const buildDesktopPaneContentModel = useCallback(
++    function buildDesktopPaneContentModel(input: {
++      paneId: string;
++      tab: WorkspaceTabDescriptor;
++      isPaneFocused: boolean;
++    }) {
++      return buildPaneContentModel({
++        tab: input.tab,
++        paneId: input.paneId,
++        isPaneFocused: input.isPaneFocused,
++        focusPaneBeforeOpen: true,
++      });
++    },
++    [buildPaneContentModel],
++  );
++
++  const handleFocusPane = useCallback(
++    function handleFocusPane(paneId: string) {
++      if (!persistenceKey) {
++        return;
++      }
++      focusWorkspacePane(persistenceKey, paneId);
++    },
++    [focusWorkspacePane, persistenceKey],
++  );
++
++  const handleSplitPane = useCallback(
++    function handleSplitPane(input: {
++      tabId: string;
++      targetPaneId: string;

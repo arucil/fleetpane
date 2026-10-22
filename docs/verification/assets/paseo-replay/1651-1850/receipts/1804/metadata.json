@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1804,
+  "revision": "a2372858084ee8d3ac624305809ca5b5c1ba5cf4",
+  "date": "2026-03-23T22:04:19+07:00",
+  "committer_date": "2026-03-23T22:04:19+07:00",
+  "parents": [
+    "ee6d8072ed07c24257f6f4c057dd72d41c108af4"
+  ],
+  "subject": "fix(desktop): resolve to Helper app for daemon child processes on macOS",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/src/daemon/runtime-paths.ts"
+  ],
+  "source_receipt_digest": "sha256:737abc6f3e37f1e6bc754b780605a121d40db8828a4dc1ad140c33a28dd165bf",
+  "diff_tree_digest": "sha256:a9de4235f5e724f99d9e53e15ed28cfdb29ec4f405f4403591699b81bd1f47c1",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/src/daemon/runtime-paths.ts",
+      "old_lines": [
+        170,
+        172
+      ],
+      "new_lines": [
+        170,
+        196
+      ],
+      "diff_block_lines": [
+        7,
+        33
+      ],
+      "hunk_header": "@@ -169,4 +169,28 @@ export function resolveCliEntrypoint(): NodeEntrypointSpec {",
+      "substantive_changed_lines": 17
+    }
+  ],
+  "selected_substantive_changed_lines": 17,
+  "available_substantive_changed_lines": 19,
+  "receipt_file": "receipts/1804/selected.patch"
+}

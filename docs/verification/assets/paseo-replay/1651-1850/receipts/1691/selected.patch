@@ -1,0 +1,12 @@
+FILE packages/server/src/client/daemon-client.ts
+RANGE {"path":"packages/server/src/client/daemon-client.ts","old_lines":[329,333],"new_lines":[329,336],"diff_block_lines":[5,14],"hunk_header":"@@ -329,5 +329,8 @@ class DaemonRpcError extends Error {","substantive_changed_lines":5}
+@@ -329,5 +329,8 @@ class DaemonRpcError extends Error {
+ 
+   constructor(params: { requestId: string; error: string; requestType?: string; code?: string }) {
+-    super(params.error)
++    const parts = [params.error]
++    if (params.requestType) parts.push(`requestType=${params.requestType}`)
++    if (params.code) parts.push(`code=${params.code}`)
++    super(parts.join(' '))
+     this.name = 'DaemonRpcError'
+     this.requestId = params.requestId

@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1782,
+  "revision": "c9ca1697e55e4daeb82ce0bb0d2b66991e376344",
+  "date": "2026-03-23T12:29:23+07:00",
+  "committer_date": "2026-03-23T12:29:23+07:00",
+  "parents": [
+    "ed3ed78ec3a4b6ca4d97df65adc4e5699e222fe9"
+  ],
+  "subject": "fix(server): free finalized message text in TimelineAssembler",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:556fc7e78793fdeab5ae9ad68af2c942ec00a3af51c8d8a0b0c56dd02772ba15",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        800,
+        803
+      ],
+      "new_lines": [
+        801,
+        807
+      ],
+      "diff_block_lines": [
+        11,
+        18
+      ],
+      "hunk_header": "@@ -800,4 +801,7 @@ class TimelineAssembler {",
+      "substantive_changed_lines": 2
+    }
+  ],
+  "selected_substantive_changed_lines": 2,
+  "available_substantive_changed_lines": 5,
+  "receipt_file": "receipts/1782/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/components/agent-status-bar.tsx
+RANGE {"path":"packages/app/src/components/agent-status-bar.tsx","old_lines":[426,426],"new_lines":[377,406],"diff_block_lines":[62,91],"hunk_header":"@@ -424,4 +375,53 @@ function ControlledStatusBar({","substantive_changed_lines":26}
++
++          {modeOptions && modeOptions.length > 0 ? (
++            <>
++              <Tooltip
++                key={`mode-${openSelector === "mode" ? "open" : "closed"}`}
++                delayDuration={0}
++                enabledOnDesktop
++                enabledOnMobile={false}
++              >
++                <TooltipTrigger asChild triggerRefProp="ref">
++                  <Pressable
++                    ref={modeAnchorRef}
++                    collapsable={false}
++                    disabled={disabled || !canSelectMode}
++                    onPress={() => handleSelectorPress("mode")}
++                    style={({ pressed, hovered }) => [
++                      styles.modeIconBadge,
++                      hovered && styles.modeBadgeHovered,
++                      (pressed || openSelector === "mode") && styles.modeBadgePressed,
++                      (disabled || !canSelectMode) && styles.disabledBadge,
++                    ]}
++                    accessibilityRole="button"
++                    accessibilityLabel={`Select agent mode (${displayMode})`}
++                    testID="agent-mode-selector"
++                  >
++                    {ModeIconComponent ? (
++                      <ModeIconComponent size={theme.iconSize.md} color={modeIconColor} />
++                    ) : (
++                      <ShieldCheck size={theme.iconSize.md} color={theme.colors.foregroundMuted} />
++                    )}

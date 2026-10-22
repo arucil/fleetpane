@@ -1,0 +1,32 @@
+FILE packages/app/src/panels/agent-panel.tsx
+RANGE {"path":"packages/app/src/panels/agent-panel.tsx","old_lines":[497,514],"new_lines":[489,508],"diff_block_lines":[145,174],"hunk_header":"@@ -496,40 +488,25 @@ function AgentPanelBody({","substantive_changed_lines":19}
+ 
+-  const placeholderAgent: Agent | null = useMemo(() => {
++  const agent: AgentScreenAgent | null =
++    agentState.serverId && agentState.id && agentState.status && agentState.cwd
++      ? {
++          serverId: agentState.serverId,
++          id: agentState.id,
++          status: agentState.status,
++          cwd: agentState.cwd,
++          projectPlacement,
++        }
++      : null;
++
++  const placeholderAgent: AgentScreenAgent | null = useMemo(() => {
+     if (!shouldUseOptimisticStream || !agentId) {
+       return null;
+     }
+-    const now = new Date();
+     return {
+       serverId,
+       id: agentId,
+-      provider: "claude",
+       status: "running",
+-      createdAt: now,
+-      updatedAt: now,
+-      lastUserMessageAt: now,
+-      lastActivityAt: now,
+-      capabilities: {
+-        supportsStreaming: true,
+-        supportsSessionPersistence: false,

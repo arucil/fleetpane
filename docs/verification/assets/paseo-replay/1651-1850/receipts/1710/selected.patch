@@ -1,0 +1,32 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[41,42],"new_lines":[45,73],"diff_block_lines":[21,50],"hunk_header":"@@ -40,23 +44,57 @@ type KeyboardShortcutPlatformContext = {","substantive_changed_lines":16}
+ 
+-type KeyboardShortcutHelpEntry = {
++interface KeyCombo {
++  /** Event.code to match. Use "Digit" for any digit 1-9. */
++  code: string;
++  /** Optional event.key fallback (case-insensitive). */
++  key?: string;
++  meta?: true;
++  ctrl?: true;
++  alt?: true;
++  shift?: true;
++  /** Set to false to block key repeat events. */
++  repeat?: false;
++}
++
++interface ShortcutWhen {
++  /** true = mac only, false = non-mac only */
++  mac?: boolean;
++  /** true = desktop only, false = web only */
++  desktop?: boolean;
++  /** false = disabled when terminal is focused */
++  terminal?: false;
++  /** false = disabled when command center is open */
++  commandCenter?: false;
++  /** true = requires a selected agent */
++  hasSelectedAgent?: true;
++  /** Exact focus scope match */
++  focusScope?: KeyboardFocusScope;
++}
++

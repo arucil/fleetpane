@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1710,
+  "revision": "e6bc752b68fe3aacd87ddb53d3e09e6573f34dbd",
+  "date": "2026-03-21T14:29:37+07:00",
+  "committer_date": "2026-03-21T14:29:37+07:00",
+  "parents": [
+    "78fc1fe8620dd19ac2dd786776f2d56009f3ab00"
+  ],
+  "subject": "refactor(app): make keyboard shortcuts declarative and separate Cmd/Ctrl per platform",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts"
+  ],
+  "source_receipt_digest": "sha256:88e99e3e5988820ba4b9aed66a3a1abd0684ae7ad3d19348390c006629c91532",
+  "diff_tree_digest": "sha256:a1c0e153fa5f3e4acb918e947de19c053098bde8d6bd32d879bdc6c839a736c9",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        41,
+        42
+      ],
+      "new_lines": [
+        45,
+        73
+      ],
+      "diff_block_lines": [
+        21,
+        50
+      ],
+      "hunk_header": "@@ -40,23 +44,57 @@ type KeyboardShortcutPlatformContext = {",
+      "substantive_changed_lines": 16
+    }
+  ],
+  "selected_substantive_changed_lines": 16,
+  "available_substantive_changed_lines": 657,
+  "receipt_file": "receipts/1710/selected.patch"
+}

@@ -1,0 +1,32 @@
+FILE packages/app/src/utils/desktop-window.ts
+RANGE {"path":"packages/app/src/utils/desktop-window.ts","old_lines":[41,49],"new_lines":[21,43],"diff_block_lines":[39,68],"hunk_header":"@@ -40,12 +20,88 @@ export async function toggleMaximize() {","substantive_changed_lines":16}
+ 
+-export function useDesktopDragHandlers(): DesktopDragHandlers {
+-  if (Platform.OS !== "web" || !isDesktop()) {
+-    return {};
+-  }
++// ---------------------------------------------------------------------------
++// Manual window dragging via pointer events.
++// Mirrors the Tauri implementation: single pointerdown handler with
++// double-click-to-maximize via timing, closest() for interactive check,
++// and pointer capture for move tracking.
++// ---------------------------------------------------------------------------
+ 
+-  return {
+-    style: DESKTOP_DRAG_REGION_STYLE,
+-  };
++const INTERACTIVE_SELECTOR =
++  "button, a, input, textarea, select, " +
++  "[role='button'], [role='link'], [role='textbox'], [role='combobox'], " +
++  "[role='tab'], [role='switch'], [role='checkbox'], [role='slider'], " +
++  "[role='menuitem'], [contenteditable='true']";
++
++const DOUBLE_CLICK_MS = 300;
++
++type DesktopDragViewProps = Pick<
++  ViewProps,
++  "onPointerDown" | "onPointerMove" | "onPointerUp" | "onPointerCancel"
++>;
++
++export function useDesktopDragHandlers(): DesktopDragViewProps {
++  const isDragging = useRef(false);

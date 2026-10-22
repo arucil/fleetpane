@@ -1,0 +1,49 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1723,
+  "revision": "c35d649f6d9a64230bedc14bde4703d2d6f57c29",
+  "date": "2026-03-21T16:20:17+07:00",
+  "committer_date": "2026-03-21T16:20:17+07:00",
+  "parents": [
+    "60e833245d31819da0c35d76e2f67a9c785d8552"
+  ],
+  "subject": "refactor(app): rename agents route to sessions with improved list layout",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/app/_layout.tsx",
+    "D\tpackages/app/src/app/h/[serverId]/agents.tsx",
+    "A\tpackages/app/src/app/h/[serverId]/sessions.tsx",
+    "M\tpackages/app/src/components/agent-list.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/hooks/use-aggregated-agents.ts",
+    "M\tpackages/app/src/hooks/use-all-agents-list.ts",
+    "D\tpackages/app/src/screens/agents-screen.tsx",
+    "A\tpackages/app/src/screens/sessions-screen.tsx",
+    "M\tpackages/app/src/stores/session-store.ts",
+    "M\tpackages/app/src/types/agent-directory.ts",
+    "M\tpackages/app/src/utils/host-routes.ts"
+  ],
+  "source_receipt_digest": "sha256:7fef51a93be01ccecd92cf30b9016c3c785a1b28e3fe899bc06e9fc4f149bbbd",
+  "diff_tree_digest": "sha256:90a04d750ef54c47216e04c7625b12d4252b772175e314896d87d09ab1166221",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-list.tsx",
+      "old_lines": [
+        333,
+        341
+      ],
+      "new_lines": [
+        289,
+        316
+      ],
+      "diff_block_lines": [
+        156,
+        185
+      ],
+      "hunk_header": "@@ -315,33 +279,45 @@ export function AgentList({",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 303,
+  "receipt_file": "receipts/1723/selected.patch"
+}

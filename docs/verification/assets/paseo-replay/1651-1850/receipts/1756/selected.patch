@@ -1,0 +1,15 @@
+FILE packages/app/src/keyboard/keyboard-shortcuts.ts
+RANGE {"path":"packages/app/src/keyboard/keyboard-shortcuts.ts","old_lines":[35,39],"new_lines":[35,46],"diff_block_lines":[7,19],"hunk_header":"@@ -34,6 +34,13 @@ export type KeyboardShortcutHelpRow = {","substantive_changed_lines":8}
+ 
++export type ShortcutSectionId =
++  | "navigation"
++  | "tabs-panes"
++  | "projects"
++  | "panels"
++  | "agent-input";
++
+ export type KeyboardShortcutHelpSection = {
+-  id: "global" | "agent-input";
++  id: ShortcutSectionId;
+   title: string;
+   rows: KeyboardShortcutHelpRow[];

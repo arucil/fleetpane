@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1699,
+  "revision": "862cc43db7a745c1d39125e641b7f6e28933a737",
+  "date": "2026-03-21T00:12:44+07:00",
+  "committer_date": "2026-03-21T00:12:44+07:00",
+  "parents": [
+    "48924626df9b8831eaf409b32418834a21e6c973"
+  ],
+  "subject": "feat: stream persisted history and show workspace kind indicators",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts",
+    "M\tpackages/server/src/server/agent/providers/claude-agent.voice-history-regression.test.ts",
+    "M\tpackages/server/src/server/agent/providers/claude/task-notification-tool-call.ts",
+    "M\tpackages/server/src/utils/checkout-git.ts"
+  ],
+  "source_receipt_digest": "sha256:4099a1e384f5c232f94d982df469908b903959bdedb844bb948c4da0798bd74b",
+  "diff_tree_digest": "sha256:b90aa6207dc857f30dc4078f0da182c4296f9d93eb18a079c03d33aa88042690",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        4012,
+        4034
+      ],
+      "new_lines": [
+        4024,
+        4031
+      ],
+      "diff_block_lines": [
+        50,
+        79
+      ],
+      "hunk_header": "@@ -4009,29 +4022,25 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 24
+    }
+  ],
+  "selected_substantive_changed_lines": 24,
+  "available_substantive_changed_lines": 369,
+  "receipt_file": "receipts/1699/selected.patch"
+}

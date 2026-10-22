@@ -1,0 +1,57 @@
+{
+  "comparison_basis": "first-parent",
+  "ordinal": 1754,
+  "revision": "1572c95b4d99f34a6253c7481698fcc2dcb4fc56",
+  "date": "2026-03-22T17:44:51+07:00",
+  "committer_date": "2026-03-22T17:44:51+07:00",
+  "parents": [
+    "83b681cebbc9e1d6c900ea0b363dba446ab3949c",
+    "cc80d05e495e319c4e06c1ab9159019518ce34c4"
+  ],
+  "subject": "Merge branch 'feat/chord-keyboard-shortcuts'",
+  "diff_tree_paths": [
+    "M\tpackage-lock.json",
+    "M\tpackage.json",
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/command-center.tsx",
+    "M\tpackages/app/src/components/left-sidebar.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/components/sidebar-workspace-list.tsx",
+    "M\tpackages/app/src/components/ui/shortcut.tsx",
+    "M\tpackages/app/src/hooks/use-command-center.ts",
+    "M\tpackages/app/src/hooks/use-keyboard-shortcuts.ts",
+    "M\tpackages/app/src/hooks/use-shortcut-keys.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.test.ts",
+    "M\tpackages/app/src/keyboard/keyboard-shortcuts.ts",
+    "M\tpackages/app/src/keyboard/shortcut-string.ts",
+    "M\tpackages/app/src/screens/settings/keyboard-shortcuts-section.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-desktop-tabs-row.tsx",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.test.ts",
+    "M\tpackages/app/src/stores/keyboard-shortcuts-store.ts",
+    "M\tpackages/app/src/utils/format-shortcut.ts"
+  ],
+  "source_receipt_digest": "sha256:be58c53089652cedb6f90757c9322b82b3f19939119addc201d26809b5c152a0",
+  "diff_tree_digest": "sha256:9d3085895d2ccb335cc034860688666e932ffb51d191eefd1ea924e46b204c19",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/keyboard/keyboard-shortcuts.ts",
+      "old_lines": [
+        941,
+        942
+      ],
+      "new_lines": [
+        970,
+        997
+      ],
+      "diff_block_lines": [
+        95,
+        124
+      ],
+      "hunk_header": "@@ -936,9 +965,86 @@ export function resolveKeyboardShortcut(input: {",
+      "substantive_changed_lines": 26
+    }
+  ],
+  "selected_substantive_changed_lines": 26,
+  "available_substantive_changed_lines": 472,
+  "receipt_file": "receipts/1754/selected.patch"
+}

@@ -1,0 +1,11 @@
+FILE packages/app/src/components/sidebar-workspace-list.tsx
+RANGE {"path":"packages/app/src/components/sidebar-workspace-list.tsx","old_lines":[400,405],"new_lines":[400,405],"diff_block_lines":[23,31],"hunk_header":"@@ -400,6 +400,6 @@ function NewWorktreeButton({","substantive_changed_lines":4}
+@@ -400,6 +400,6 @@ function NewWorktreeButton({
+                 <ActivityIndicator size={14} color={theme.colors.foregroundMuted} />
+               ) : (
+-                <Plus
+-                  size={14}
++                <FolderPlus
++                  size={15}
+                   color={
+                     hovered || pressed ? theme.colors.foreground : theme.colors.foregroundMuted

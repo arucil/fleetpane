@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1807,
+  "revision": "771acd11a1da160e793466bdb1ae0fb5b63cbb52",
+  "date": "2026-03-23T22:04:37+07:00",
+  "committer_date": "2026-03-23T22:04:37+07:00",
+  "parents": [
+    "d4735edd456d24f316442d7ad29a4fb9152492b9"
+  ],
+  "subject": "fix(server): close query stream before interrupt/return in claude agent",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/server/agent/providers/claude-agent.ts"
+  ],
+  "source_receipt_digest": "sha256:d4ab9a3b46166a4a12df7cc9c83193f6f07f91822e9d0be7aa203584ddc75223",
+  "diff_tree_digest": "sha256:0617a1892455c217ff607802885e624e3123952d6649dffb65027352d157ef7c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/server/agent/providers/claude-agent.ts",
+      "old_lines": [
+        1612,
+        1615
+      ],
+      "new_lines": [
+        1612,
+        1616
+      ],
+      "diff_block_lines": [
+        5,
+        10
+      ],
+      "hunk_header": "@@ -1612,4 +1612,5 @@ class ClaudeAgentSession implements AgentSession {",
+      "substantive_changed_lines": 1
+    }
+  ],
+  "selected_substantive_changed_lines": 1,
+  "available_substantive_changed_lines": 2,
+  "receipt_file": "receipts/1807/selected.patch"
+}

@@ -1,0 +1,39 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1691,
+  "revision": "23aaecd99a6bdf5e0702470b2ccb5592df00eda8",
+  "date": "2026-03-20T17:22:17+07:00",
+  "committer_date": "2026-03-20T17:22:17+07:00",
+  "parents": [
+    "77fb74c188809dca3d8bec979709d457739a412a"
+  ],
+  "subject": "fix(server): include actual error details in DaemonRpcError messages",
+  "diff_tree_paths": [
+    "M\tpackages/server/src/client/daemon-client.ts",
+    "M\tpackages/server/src/server/session.ts"
+  ],
+  "source_receipt_digest": "sha256:0511861da2a6fd4e24dcfb69c71fb68df585ddcc41b965359bc21c025738eca4",
+  "diff_tree_digest": "sha256:0f6c773860f7c867bb2bceda22ac73a26454708cd4778a2b1a6f8d518abc164c",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/server/src/client/daemon-client.ts",
+      "old_lines": [
+        329,
+        333
+      ],
+      "new_lines": [
+        329,
+        336
+      ],
+      "diff_block_lines": [
+        5,
+        14
+      ],
+      "hunk_header": "@@ -329,5 +329,8 @@ class DaemonRpcError extends Error {",
+      "substantive_changed_lines": 5
+    }
+  ],
+  "selected_substantive_changed_lines": 5,
+  "available_substantive_changed_lines": 7,
+  "receipt_file": "receipts/1691/selected.patch"
+}

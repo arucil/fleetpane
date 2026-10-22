@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[4012,4034],"new_lines":[4024,4031],"diff_block_lines":[50,79],"hunk_header":"@@ -4009,29 +4022,25 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":24}
+-      const timeline: AgentTimelineItem[] = [];
+-      for (const line of content.split(/\n+/)) {
+-        const trimmed = line.trim();
+-        if (!trimmed) continue;
+-        try {
+-          const entry = JSON.parse(trimmed);
+-          if (entry.isSidechain) {
+-            continue;
+-          }
+-          if (entry.type === "user" && typeof entry.uuid === "string") {
+-            this.rememberUserMessageId(entry.uuid);
+-          }
+-          const items = this.convertHistoryEntry(entry);
+-          if (items.length > 0) {
+-            timeline.push(...items);
+-          }
+-        } catch (error) {
+-          // ignore malformed history line
+-        }
++      if (this.historyOffsetSessionId !== sessionId) {
++        this.historyOffsetSessionId = sessionId;
++        this.historyReadOffsetBytes = 0;
++        this.historyLineFragment = "";
+       }
+-      if (timeline.length > 0) {
+-        this.persistedHistory = timeline;
+-        this.historyPending = true;
++      const content = fs.readFileSync(historyPath);
++      if (content.byteLength < this.historyReadOffsetBytes) {
++        this.historyReadOffsetBytes = 0;

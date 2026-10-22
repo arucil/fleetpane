@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1722,
+  "revision": "60e833245d31819da0c35d76e2f67a9c785d8552",
+  "date": "2026-03-21T15:56:01+07:00",
+  "committer_date": "2026-03-21T15:56:01+07:00",
+  "parents": [
+    "f424503234fb44036886bc56666aa89da3527da9"
+  ],
+  "subject": "fix(desktop): add cleanup-assets job to delete stale release assets before rebuild",
+  "diff_tree_paths": [
+    "M\t.github/workflows/desktop-release.yml"
+  ],
+  "source_receipt_digest": "sha256:dd7ff9bdcfa8dac532327b4c9af75c7ff6390599665d1814324f957ef1bca311",
+  "diff_tree_digest": "sha256:a21786ed6268aa676578214e3713cb5dd28fa46e838ca9be8721c3c3428140f4",
+  "selected_hunk_ranges": [
+    {
+      "path": ".github/workflows/desktop-release.yml",
+      "old_lines": [
+        38,
+        40
+      ],
+      "new_lines": [
+        47,
+        74
+      ],
+      "diff_block_lines": [
+        17,
+        44
+      ],
+      "hunk_header": "@@ -36,5 +36,39 @@ env:",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 30,
+  "receipt_file": "receipts/1722/selected.patch"
+}

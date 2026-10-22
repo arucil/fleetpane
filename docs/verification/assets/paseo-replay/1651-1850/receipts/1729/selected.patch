@@ -1,0 +1,32 @@
+FILE packages/app/src/app-support/index-startup.ts
+RANGE {"path":"packages/app/src/app-support/index-startup.ts","old_lines":[1,20],"new_lines":[1,20],"diff_block_lines":[6,35],"hunk_header":"@@ -1,36 +1,36 @@","substantive_changed_lines":20}
+-export const WELCOME_ROUTE = '/welcome'
++export const WELCOME_ROUTE = "/welcome";
+ 
+ export function shouldWaitOnStartupRace(input: {
+-  onlineServerId: string | null
+-  hasTimedOut: boolean
+-  isDesktopStartupRace: boolean
+-  daemonCount: number
+-  pathname: string
++  onlineServerId: string | null;
++  hasTimedOut: boolean;
++  isDesktopStartupRace: boolean;
++  daemonCount: number;
++  pathname: string;
+ }): boolean {
+   if (input.onlineServerId) {
+-    return false
++    return false;
+   }
+   if (input.pathname === WELCOME_ROUTE) {
+-    return false
++    return false;
+   }
+   if (input.hasTimedOut) {
+-    return false
++    return false;
+   }
+-  return input.isDesktopStartupRace || input.daemonCount > 0
++  return input.isDesktopStartupRace || input.daemonCount > 0;
+ }

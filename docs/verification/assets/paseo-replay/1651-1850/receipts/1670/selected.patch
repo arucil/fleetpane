@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/provider-manifest.ts
+RANGE {"path":"packages/server/src/server/agent/provider-manifest.ts","old_lines":[16,40],"new_lines":[26,33],"diff_block_lines":[29,58],"hunk_header":"@@ -15,58 +25,20 @@ export interface AgentProviderDefinition {","substantive_changed_lines":19}
+ 
+-const CLAUDE_MODES: AgentMode[] = [
+-  {
+-    id: "default",
+-    label: "Always Ask",
+-    description: "Prompts for permission the first time a tool is used",
+-  },
+-  {
+-    id: "acceptEdits",
+-    label: "Accept File Edits",
+-    description: "Automatically approves edit-focused tools without prompting",
+-  },
+-  {
+-    id: "plan",
+-    label: "Plan Mode",
+-    description: "Analyze the codebase without executing tools or edits",
+-  },
+-  {
+-    id: "bypassPermissions",
+-    label: "Bypass",
+-    description: "Skip all permission prompts (use with caution)",
+-  },
++const CLAUDE_MODES: AgentProviderModeDefinition[] = [
++  { id: "default", label: "Always Ask", description: "Prompts for permission the first time a tool is used", icon: "ShieldCheck", colorTier: "safe" },
++  { id: "acceptEdits", label: "Accept File Edits", description: "Automatically approves edit-focused tools without prompting", icon: "ShieldAlert", colorTier: "moderate" },
++  { id: "plan", label: "Plan Mode", description: "Analyze the codebase without executing tools or edits", icon: "ShieldCheck", colorTier: "safe" },
++  { id: "bypassPermissions", label: "Bypass", description: "Skip all permission prompts (use with caution)", icon: "ShieldOff", colorTier: "dangerous" },
+ ];
+ 
+-const CODEX_MODES: AgentMode[] = [

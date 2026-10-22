@@ -1,0 +1,43 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1827,
+  "revision": "ad565c2555d6d1a1bb8bb63ad181cf66b22c6d62",
+  "date": "2026-03-24T23:41:41+07:00",
+  "committer_date": "2026-03-24T23:41:41+07:00",
+  "parents": [
+    "ac991e064cb43e01766e4a1ef0970ad34bfde2e7"
+  ],
+  "subject": "Fix agent input focus scoping",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/agent-input-area.tsx",
+    "M\tpackages/app/src/components/message-input.tsx",
+    "M\tpackages/app/src/keyboard/keyboard-action-dispatcher.test.ts",
+    "M\tpackages/app/src/panels/agent-panel.tsx",
+    "M\tpackages/app/src/screens/agent/draft-agent-screen.tsx",
+    "M\tpackages/app/src/screens/workspace/workspace-draft-agent-tab.tsx"
+  ],
+  "source_receipt_digest": "sha256:140c1dd93344d1a3a8f6decc3101a6ddf62eb8df5215745e163d0e6bdadcbf99",
+  "diff_tree_digest": "sha256:3737b873bd64cb3f7f0d739411b5214afce9c1975879c07f43b981d5f2f62ca3",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/components/agent-input-area.tsx",
+      "old_lines": [
+        472,
+        478
+      ],
+      "new_lines": [
+        471,
+        477
+      ],
+      "diff_block_lines": [
+        44,
+        53
+      ],
+      "hunk_header": "@@ -472,7 +471,7 @@ export function AgentInputArea({",
+      "substantive_changed_lines": 4
+    }
+  ],
+  "selected_substantive_changed_lines": 4,
+  "available_substantive_changed_lines": 47,
+  "receipt_file": "receipts/1827/selected.patch"
+}

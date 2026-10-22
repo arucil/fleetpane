@@ -1,0 +1,19 @@
+FILE packages/server/src/server/agent/activity-curator.ts
+RANGE {"path":"packages/server/src/server/agent/activity-curator.ts","old_lines":[47,49],"new_lines":[48,64],"diff_block_lines":[13,29],"hunk_header":"@@ -46,4 +47,18 @@ function formatToolInputJson(input: unknown): string | null {","substantive_changed_lines":9}
+ 
++function formatToolSummary(summary: string | undefined): string | null {
++  if (typeof summary !== "string") {
++    return null;
++  }
++  const normalized = summary.replace(/\s+/g, " ").trim();
++  if (!normalized) {
++    return null;
++  }
++  if (normalized.length <= MAX_TOOL_SUMMARY_CHARS) {
++    return normalized;
++  }
++  return `${normalized.slice(0, MAX_TOOL_SUMMARY_CHARS - 3)}...`;
++}
++
+ function hasNonEmptyObject(value: unknown): boolean {
+   return (

@@ -1,0 +1,12 @@
+FILE packages/app/src/screens/workspace/workspace-screen.tsx
+RANGE {"path":"packages/app/src/screens/workspace/workspace-screen.tsx","old_lines":[378,382],"new_lines":[379,386],"diff_block_lines":[11,20],"hunk_header":"@@ -378,5 +379,8 @@ const MobileWorkspaceTabSwitcher = memo(function MobileWorkspaceTabSwitcher({","substantive_changed_lines":4}
+@@ -378,5 +379,8 @@ const MobileWorkspaceTabSwitcher = memo(function MobileWorkspaceTabSwitcher({
+         accessibilityLabel={`Switch tabs (${tabs.length} open)`}
+         style={({ pressed }) => [styles.switcherTrigger, pressed && styles.switcherTriggerPressed]}
+-        onPress={() => setIsOpen(true)}
++        onPress={() => {
++          Keyboard.dismiss();
++          setIsOpen(true);
++        }}
+       >
+         <View style={styles.switcherTriggerLeft}>

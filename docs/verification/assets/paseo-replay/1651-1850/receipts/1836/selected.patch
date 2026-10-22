@@ -1,0 +1,8 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[1326,1330],"new_lines":[1326,1329],"diff_block_lines":[5,10],"hunk_header":"@@ -1326,5 +1326,4 @@ class ClaudeAgentSession implements AgentSession {","substantive_changed_lines":1}
+@@ -1326,5 +1326,4 @@ class ClaudeAgentSession implements AgentSession {
+     this.activeForegroundTurnId = turnId;
+     this.foregroundHasVisibleActivity = false;
+-    this.pendingInterruptAbort = false;
+     this.transitionTurnState("foreground", "foreground turn started");
+     this.clearRecentStderr();

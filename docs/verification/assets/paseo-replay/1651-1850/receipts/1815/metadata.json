@@ -1,0 +1,40 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1815,
+  "revision": "c6aff35db22f22809b145e14e57c26feecd70e9f",
+  "date": "2026-03-24T11:01:08+07:00",
+  "committer_date": "2026-03-24T12:01:08+08:00",
+  "parents": [
+    "af8509d012bac5c7448587ba8eba3af95f20d591"
+  ],
+  "subject": "fix(app): restore assistant text selection on web (#140)",
+  "diff_tree_paths": [
+    "M\tpackages/app/src/components/message.tsx",
+    "M\tpackages/app/src/styles/markdown-styles.test.ts",
+    "M\tpackages/app/src/styles/markdown-styles.ts"
+  ],
+  "source_receipt_digest": "sha256:29fdc66500f34e08de6b3cde6bed72332978c7c98cc597532397594d4370e1e2",
+  "diff_tree_digest": "sha256:335459e218ab7783ddad2d555c5e800fa25e03c85f510ced655812e231025270",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/app/src/styles/markdown-styles.ts",
+      "old_lines": [
+        115,
+        125
+      ],
+      "new_lines": [
+        126,
+        139
+      ],
+      "diff_block_lines": [
+        64,
+        77
+      ],
+      "hunk_header": "@@ -114,12 +125,15 @@ export function createMarkdownStyles(theme: Theme) {",
+      "substantive_changed_lines": 3
+    }
+  ],
+  "selected_substantive_changed_lines": 3,
+  "available_substantive_changed_lines": 44,
+  "receipt_file": "receipts/1815/selected.patch"
+}

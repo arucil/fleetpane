@@ -1,0 +1,13 @@
+FILE packages/app/src/components/agent-status-bar.utils.ts
+RANGE {"path":"packages/app/src/components/agent-status-bar.utils.ts","old_lines":[55,61],"new_lines":[55,61],"diff_block_lines":[13,23],"hunk_header":"@@ -49,13 +49,13 @@ export function resolveAgentModelSelection(input: {","substantive_changed_lines":8}
+   const selectedThinking =
+-    thinkingOptions?.find((option) => option.id === selectedThinkingId) ?? null;
+-  const displayThinking =
+-    selectedThinking?.label ??
+-    (selectedThinkingId === "default" ? "Model default" : (selectedThinkingId ?? "Default"));
++    thinkingOptions?.find((option) => option.id === resolvedThinkingId) ?? null;
++  const effectiveThinking = selectedThinking ?? thinkingOptions?.[0] ?? null;
++  const selectedThinkingId = effectiveThinking?.id ?? null;
++  const displayThinking = effectiveThinking?.label ?? selectedThinkingId ?? "Unknown";
+ 
+   return {

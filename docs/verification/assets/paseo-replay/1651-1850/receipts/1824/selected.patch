@@ -1,0 +1,12 @@
+FILE packages/server/src/server/session.ts
+RANGE {"path":"packages/server/src/server/session.ts","old_lines":[7713,7716],"new_lines":[7713,7721],"diff_block_lines":[5,14],"hunk_header":"@@ -7713,4 +7713,9 @@ export class Session {","substantive_changed_lines":3}
+@@ -7713,4 +7713,9 @@ export class Session {
+       },
+     });
++
++    const activeStream = this.activeTerminalStreams.get(slot);
++    if (activeStream) {
++      this.trySendTerminalSnapshot(activeStream);
++    }
+   }
+ 

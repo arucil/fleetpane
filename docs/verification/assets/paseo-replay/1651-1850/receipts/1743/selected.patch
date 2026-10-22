@@ -1,0 +1,32 @@
+FILE packages/app/src/components/left-sidebar.tsx
+RANGE {"path":"packages/app/src/components/left-sidebar.tsx","old_lines":[639,639],"new_lines":[645,674],"diff_block_lines":[40,69],"hunk_header":"@@ -637,4 +641,39 @@ function DesktopSidebar({","substantive_changed_lines":20}
++
++  useEffect(() => {
++    resizeWidth.value = sidebarWidth;
++  }, [sidebarWidth, resizeWidth]);
++
++  const resizeGesture = useMemo(
++    () =>
++      Gesture.Pan()
++        .hitSlop({ left: 8, right: 8, top: 0, bottom: 0 })
++        .onStart(() => {
++          startWidthRef.current = sidebarWidth;
++          resizeWidth.value = sidebarWidth;
++        })
++        .onUpdate((event) => {
++          // Dragging right (positive translationX) increases width
++          const newWidth = startWidthRef.current + event.translationX;
++          const maxWidth = Math.max(
++            MIN_SIDEBAR_WIDTH,
++            Math.min(MAX_SIDEBAR_WIDTH, viewportWidth - MIN_CHAT_WIDTH),
++          );
++          const clampedWidth = Math.max(MIN_SIDEBAR_WIDTH, Math.min(maxWidth, newWidth));
++          resizeWidth.value = clampedWidth;
++        })
++        .onEnd(() => {
++          runOnJS(setSidebarWidth)(resizeWidth.value);
++        }),
++    [sidebarWidth, resizeWidth, setSidebarWidth, viewportWidth],
++  );
++
++  const resizeAnimatedStyle = useAnimatedStyle(() => ({

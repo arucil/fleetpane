@@ -1,0 +1,38 @@
+{
+  "comparison_basis": "parent",
+  "ordinal": 1832,
+  "revision": "935e55eb27dc33879a40ccd4d143630875f072d0",
+  "date": "2026-03-25T16:43:19+07:00",
+  "committer_date": "2026-03-25T16:43:19+07:00",
+  "parents": [
+    "c4782ec71ccb51b3b4b4a8b06cf08c1f98e2a4a7"
+  ],
+  "subject": "Prune wrong-platform native binaries from Electron builds",
+  "diff_tree_paths": [
+    "M\tpackages/desktop/scripts/after-pack.js"
+  ],
+  "source_receipt_digest": "sha256:4420294919f2d2b8299851a25d0f2bf5307f8f9b5ad5664efe9a6435566cdb5c",
+  "diff_tree_digest": "sha256:bbb4b3da5a5b9892b9b530cb303c6e1f35cbdd01081e6e3cd76a5e1648c6867f",
+  "selected_hunk_ranges": [
+    {
+      "path": "packages/desktop/scripts/after-pack.js",
+      "old_lines": [
+        10,
+        10
+      ],
+      "new_lines": [
+        18,
+        47
+      ],
+      "diff_block_lines": [
+        16,
+        45
+      ],
+      "hunk_header": "@@ -8,6 +8,123 @@ exec \"$(dirname \"$(readlink -f \"$0\")\")/${EXECUTABLE_NAME}.bin\" --no-sandbox \"$@\"",
+      "substantive_changed_lines": 19
+    }
+  ],
+  "selected_substantive_changed_lines": 19,
+  "available_substantive_changed_lines": 73,
+  "receipt_file": "receipts/1832/selected.patch"
+}

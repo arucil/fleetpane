@@ -1,0 +1,32 @@
+FILE packages/server/src/server/terminal-mcp/server.ts
+RANGE {"path":"packages/server/src/server/terminal-mcp/server.ts","old_lines":[13,42],"new_lines":[0,0],"diff_block_lines":[19,48],"hunk_header":"@@ -1,266 +0,0 @@","substantive_changed_lines":9}
+- */
+-export async function createTerminalMcpServer(
+-  options: TerminalMcpServerOptions,
+-): Promise<McpServer> {
+-  const { sessionName } = options;
+-  const terminalManager = new TerminalManager(sessionName);
+-
+-  // Initialize the session
+-  await terminalManager.initialize();
+-
+-  const server = new McpServer({
+-    name: "terminal-mcp",
+-    version: "1.0.0",
+-  });
+-
+-  // COMMAND-BASED TOOLS
+-
+-  // Tool: execute_command (disabled – commands must be run through coding agents)
+-  // server.registerTool(
+-  //   "execute_command",
+-  //   {
+-  //     title: "Execute Command",
+-  //     description:
+-  //       "Execute a shell command in a specified directory. Commands are wrapped in bash -c, so you can use pipes, operators, redirects, and all bash features. The command runs until completion or until output stabilizes (for interactive processes). Returns command ID for follow-up interactions, output, exit code (if finished), and whether the process is still running. Windows remain after command exits for inspection.",
+-  //     inputSchema: {
+-  //       command: z
+-  //         .string()
+-  //         .describe(
+-  //           "The command to execute. Can include pipes (|), operators (&&, ||, ;), redirects (>, >>), and any bash syntax. Examples: 'npm test', 'ls | grep foo', 'cd src && npm run build'"
+-  //         ),

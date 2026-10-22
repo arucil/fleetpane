@@ -1,0 +1,32 @@
+FILE packages/server/src/server/agent/providers/claude-agent.ts
+RANGE {"path":"packages/server/src/server/agent/providers/claude-agent.ts","old_lines":[586,586],"new_lines":[589,618],"diff_block_lines":[15,44],"hunk_header":"@@ -585,9 +588,86 @@ function coerceToolResultContentToString(content: unknown): string {","substantive_changed_lines":18}
+ 
++function normalizeClaudeTranscriptText(value: unknown): string | null {
++  if (typeof value !== "string") {
++    return null;
++  }
++  const normalized = value.trim();
++  return normalized.length > 0 ? normalized : null;
++}
++
++function isClaudeInterruptPlaceholderText(value: unknown): boolean {
++  const normalized = normalizeClaudeTranscriptText(value);
++  return normalized !== null && INTERRUPT_PLACEHOLDER_PATTERN.test(normalized);
++}
++
++function isClaudeNoResponsePlaceholderText(value: unknown): boolean {
++  return (
++    normalizeClaudeTranscriptText(value) === NO_RESPONSE_REQUESTED_PLACEHOLDER
++  );
++}
++
++function isClaudeTranscriptNoiseText(value: unknown): boolean {
++  return (
++    isClaudeInterruptPlaceholderText(value) ||
++    isClaudeNoResponsePlaceholderText(value)
++  );
++}
++
++function collectClaudeTextContentParts(content: unknown): string[] {
++  if (typeof content === "string") {
++    const normalized = normalizeClaudeTranscriptText(content);

@@ -1,0 +1,32 @@
+FILE packages/app/src/stores/navigation-active-workspace-store.ts
+RANGE {"path":"packages/app/src/stores/navigation-active-workspace-store.ts","old_lines":[0,0],"new_lines":[19,48],"diff_block_lines":[25,54],"hunk_header":"@@ -0,0 +1,97 @@","substantive_changed_lines":20}
++  current: {
++    getCurrentRoute(): unknown;
++  } | null;
++}
++
++let snapshot: ActiveWorkspaceSelection | null = null;
++const listeners = new Set<() => void>();
++
++function subscribe(listener: () => void): () => void {
++  listeners.add(listener);
++  return () => {
++    listeners.delete(listener);
++  };
++}
++
++function getSnapshot(): ActiveWorkspaceSelection | null {
++  return snapshot;
++}
++
++function emitIfChanged(next: ActiveWorkspaceSelection | null) {
++  if (
++    snapshot?.serverId === next?.serverId &&
++    snapshot?.workspaceId === next?.workspaceId
++  ) {
++    return;
++  }
++  snapshot = next;
++  for (const listener of listeners) {
++    listener();
++  }
