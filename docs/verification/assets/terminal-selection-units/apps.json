@@ -1,0 +1,167 @@
+{
+  "workspace_stopped": true,
+  "apps": [
+    {
+      "id": "app-1509490",
+      "name": "terminal-selection-units",
+      "pid": 1509490,
+      "process_group_id": 1509490,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-terminal-units-20261023/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-terminal-units-20261023/preferences"
+      ],
+      "env": [
+        {
+          "name": "LIBGL_ALWAYS_SOFTWARE",
+          "value": "1"
+        },
+        {
+          "name": "WGPU_BACKEND",
+          "value": "vulkan"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1509490.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1509490.stderr.log",
+      "started_at_unix": 1792721006,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721374,
+      "runtime_seconds": 368
+    },
+    {
+      "id": "app-1548000",
+      "name": "terminal-selection-units-final",
+      "pid": 1548000,
+      "process_group_id": 1548000,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-terminal-units-20261023/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-terminal-units-20261023/preferences"
+      ],
+      "env": [
+        {
+          "name": "LIBGL_ALWAYS_SOFTWARE",
+          "value": "1"
+        },
+        {
+          "name": "WGPU_BACKEND",
+          "value": "vulkan"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1548000.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1548000.stderr.log",
+      "started_at_unix": 1792721374,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721668,
+      "runtime_seconds": 294
+    },
+    {
+      "id": "app-1560034",
+      "name": "shift-click-gesture",
+      "pid": 1560034,
+      "process_group_id": 1560034,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "-c",
+        "import subprocess\ndef x(*args):subprocess.run([\"xdotool\",*args],check=True)\nx(\"keydown\",\"Shift_L\")\ntry:\n x(\"mousemove\",\"--window\",\"4194305\",\"418\",\"303\",\"click\",\"1\")\nfinally:x(\"keyup\",\"Shift_L\")\n"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1560034.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1560034.stderr.log",
+      "started_at_unix": 1792721484,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721484,
+      "runtime_seconds": 0
+    },
+    {
+      "id": "app-1563622",
+      "name": "word-drag-gesture",
+      "pid": 1563622,
+      "process_group_id": 1563622,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "-c",
+        "import subprocess,time\ndef x(*args):subprocess.run([\"xdotool\",*args],check=True)\nx(\"mousemove\",\"--window\",\"4194305\",\"271\",\"303\",\"click\",\"1\")\ntime.sleep(.1)\nx(\"mousedown\",\"1\")\ntime.sleep(.1)\nx(\"mousemove\",\"--sync\",\"--window\",\"4194305\",\"380\",\"321\",\"mouseup\",\"1\")\n"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1563622.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1563622.stderr.log",
+      "started_at_unix": 1792721521,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721522,
+      "runtime_seconds": 1
+    },
+    {
+      "id": "app-1566727",
+      "name": "reverse-word-drag",
+      "pid": 1566727,
+      "process_group_id": 1566727,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "python3",
+        "-c",
+        "import subprocess,time\ndef x(*args):subprocess.run([\"xdotool\",*args],check=True)\nx(\"mousemove\",\"--window\",\"4194305\",\"380\",\"321\",\"click\",\"1\")\ntime.sleep(.1)\nx(\"mousedown\",\"1\")\ntime.sleep(.1)\nx(\"mousemove\",\"--sync\",\"--window\",\"4194305\",\"271\",\"303\",\"mouseup\",\"1\")\n"
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1566727.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1566727.stderr.log",
+      "started_at_unix": 1792721544,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721544,
+      "runtime_seconds": 0
+    },
+    {
+      "id": "app-1581263",
+      "name": "terminal-selection-units-replacement",
+      "pid": 1581263,
+      "process_group_id": 1581263,
+      "mount_isolation": "host",
+      "network_isolation": "host",
+      "command": [
+        "/home/amlo/Projects/Rust/fleetpane/apps/desktop/target/debug/fleetpane-desktop",
+        "--hosts",
+        "/tmp/fleetpane-terminal-units-20261023/hosts.json",
+        "--preferences-dir",
+        "/tmp/fleetpane-terminal-units-20261023/preferences"
+      ],
+      "env": [
+        {
+          "name": "LIBGL_ALWAYS_SOFTWARE",
+          "value": "1"
+        },
+        {
+          "name": "WGPU_BACKEND",
+          "value": "vulkan"
+        }
+      ],
+      "stdout_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1581263.stdout.log",
+      "stderr_path": "/run/user/1000/agent-workspace-linux/fleetpane-terminal-units-20261023/apps/app-1581263.stderr.log",
+      "started_at_unix": 1792721668,
+      "running": false,
+      "exit_status": "exit status: 0",
+      "exit_code": 0,
+      "stopped_at_unix": 1792721772,
+      "runtime_seconds": 104
+    }
+  ]
+}

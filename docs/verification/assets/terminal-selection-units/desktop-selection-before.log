@@ -1,0 +1,22 @@
+   Compiling fleetpane-desktop v0.1.0 (/home/amlo/Projects/Rust/fleetpane/apps/desktop)
+    Finished `test` profile [unoptimized] target(s) in 5.35s
+     Running unittests src/main.rs (apps/desktop/target/debug/deps/fleetpane_desktop-cd9b6372c396ffa1)
+
+running 1 test
+test terminal_view::selection::tests::multiple_clicks_use_the_displayed_picture_without_an_intervening_frame ... FAILED
+
+failures:
+
+---- terminal_view::selection::tests::multiple_clicks_use_the_displayed_picture_without_an_intervening_frame stdout ----
+
+thread 'terminal_view::selection::tests::multiple_clicks_use_the_displayed_picture_without_an_intervening_frame' (1539383) panicked at src/terminal_view/selection.rs:236:44:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    terminal_view::selection::tests::multiple_clicks_use_the_displayed_picture_without_an_intervening_frame
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 51 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin fleetpane-desktop`

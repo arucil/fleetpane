@@ -1708,7 +1708,22 @@ preserves printed spaces and whole wide/combining characters; native hit testing
 uses shaped row bounds. No source/assets were copied.
 [Linux real-shell fixture acceptance](../verification/2026-10-23-terminal-selection.md)
 covers clipboard, scrollback, background output, input isolation, outside release,
-900×560 and window replacement. IME, word/keyboard selection, drag-edge autoscroll,
+900×560 and window replacement. Word/line selection and keyboard extension have
+separate acceptance below. IME, drag-edge autoscroll,
 conversation attachment and Host update recovery remain open. This is an
 implementation follow-through, not a history cursor advance or a new upstream
 freshness claim.
+
+## Terminal words and lines: continued implementation
+
+Revisited the same pinned `terminal-selection.ts` word resolver. Fleetpane now
+supports whole-word and logical-line gestures, reverse unit drags and explicit
+Shift extensions through its own bounded snapshot engine. Paths/flags remain
+whole; wide and combining cells never split. A rapid-click repaint dependency
+discovered during Linux QA is fixed with a state-transition regression.
+[Real-shell acceptance](../verification/2026-10-23-terminal-selection-units.md)
+covers exact Copy, read-only gestures, background output, keyboard input gating,
+900×560 and retained shells after window replacement. Keyboard-only initiation,
+drag-edge autoscroll, IME, other-platform GUI and active Host update transfer
+remain open. No source/assets copied, history cursor advanced or new upstream
+freshness claimed.

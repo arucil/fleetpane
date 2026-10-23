@@ -777,7 +777,7 @@ impl Render for TerminalView {
                                 .on_mouse_up(MouseButton::Left,cx.listener(Self::selection_end))
                                 .on_mouse_up_out(MouseButton::Left,cx.listener(Self::selection_end)).on_click(cx.listener(|this,_,window,cx|{if this.keyboard.enabled {window.focus(&this.keyboard.focus,cx);}})).flex_1().min_h_0().overflow_scroll().p_2().bg(rgb(0x171a20)).text_size(px(14.)).line_height(px(18.)).font_family(cx.theme().mono_font_family.clone())
                                 .child(rows(self.selection.selected.as_ref().map(|selection| &selection.viewport).or(self.selection.displayed.as_ref()).expect("displayed terminal viewport"),self.selection.selected.as_ref(),cx.theme().mono_font_family.clone(),&self.selection.geometry,window)))
-                            .when(self.selection.selected.is_some(),|view|view.child(div().text_sm().child("Selection snapshot · output continues in background · Esc or Live output to return")))
+                            .when(self.selection.selected.is_some(),|view|view.child(div().text_sm().child("Selection snapshot · Shift+click/arrows extend · Ctrl+Shift+C copy · Esc to return")))
                             .child(div().flex().gap_2()
                                 .child(Button::new("terminal-scroll-up").small().label("Page up").on_click(cx.listener(|this,_,_,cx|{this.selection.clear();if let Some(s)=&mut this.screen{s.scroll(20);}cx.notify();})))
                                 .child(Button::new("terminal-scroll-down").small().label("Page down").on_click(cx.listener(|this,_,_,cx|{this.selection.clear();if let Some(s)=&mut this.screen{s.scroll(-20);}cx.notify();})))

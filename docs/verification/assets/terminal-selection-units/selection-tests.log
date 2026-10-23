@@ -1,0 +1,15 @@
+   Compiling fleetpane-session v0.1.0 (/home/amlo/Projects/Rust/fleetpane/crates/session)
+    Finished `test` profile [unoptimized] target(s) in 2.60s
+     Running unittests src/lib.rs (target/debug/deps/fleetpane_session-b80b6052c933fec1)
+
+running 8 tests
+test terminals::selection::tests::blank_cells_and_explicit_spaces_remain_distinct ... ok
+test terminals::selection::tests::reverse_unicode_selection_preserves_cells_spaces_and_hard_lines ... ok
+test terminals::selection::tests::line_selection_joins_only_visible_soft_wraps_and_preserves_printed_spaces ... ok
+test terminals::selection::tests::scrollback_capture_and_outside_drag_are_bounded_to_visible_cells ... ok
+test terminals::selection::tests::word_drags_expand_whole_words_in_both_directions_and_shift_changes_to_cells ... ok
+test terminals::selection::tests::soft_wraps_join_and_frozen_cells_survive_output_resize_and_alternate_screen ... ok
+test terminals::selection::tests::keyboard_extensions_keep_unicode_whole_and_clamp_to_the_fixed_viewport ... ok
+test terminals::selection::tests::word_boundaries_preserve_shell_paths_wide_cells_combining_marks_and_separators ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 271 filtered out; finished in 0.00s

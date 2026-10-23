@@ -31,8 +31,9 @@ Terminal or Host replacement clears the old selection. Window replacement keeps
 the existing Host and shells; selection is transient and is not restored.
 
 This is desktop mouse selection within a bounded snapshot, including a selected
-scrollback viewport. Double-click word selection, keyboard range extension,
-drag-edge autoscroll, IME, terminal mouse/query replies, automatic PTY geometry,
+scrollback viewport. Double-click word selection, triple-click logical lines and
+keyboard range extension now have a separate [contract](0123-terminal-selection-units.md)
+and acceptance. Drag-edge autoscroll, IME, terminal mouse/query replies, automatic PTY geometry,
 other-platform GUI acceptance and active PTY transfer during Host updates remain
 separate work. This does not establish terminal compatibility or performance.
 

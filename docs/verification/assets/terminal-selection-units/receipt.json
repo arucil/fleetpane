@@ -1,0 +1,103 @@
+{
+  "base_head": "37bc2bf139d392bcfe4b41320963eb7fa13f3f1d",
+  "profile": "development",
+  "platform": "isolated Linux X11; software Vulkan rendering",
+  "reference": {
+    "repo": "https://github.com/getpaseo/paseo",
+    "sha": "a486b0558168c08890890e787d55cfb88c0d7256",
+    "path": "packages/app/src/terminal/native-renderer/terminal-selection.ts",
+    "reuse": "behavioral reference only; no source/assets copied"
+  },
+  "build": "build.json",
+  "checks": {
+    "selection-tests.log": {
+      "passed": 8
+    },
+    "engine-clippy.log": "passed",
+    "engine-fmt.log": "passed",
+    "desktop-build.log": "passed",
+    "terminal-smoke.log": "passed: real PTYs with Codex and ACP fixtures",
+    "desktop-clippy.log": "passed",
+    "windows-check.log": "passed",
+    "desktop-selection-before.log": "expected regression failure with previous clear transition",
+    "desktop-tests.log": {
+      "passed": 52
+    },
+    "engine-tests.log": {
+      "passed": 387
+    },
+    "desktop-fmt.log": "passed"
+  },
+  "native": {
+    "workspace": "fleetpane-terminal-units-20261023",
+    "workspace_stopped": true,
+    "final_apps": [
+      "app-1548000",
+      "app-1581263"
+    ],
+    "initial_candidate_app": "app-1509490",
+    "initial_candidate": "exposed rapid-click race before fixed final build",
+    "final_app_exit_codes": [
+      0,
+      0
+    ],
+    "clipboard": "clipboard.json",
+    "host_and_terminal_snapshots_unchanged_across_readonly_gestures_and_output": true,
+    "keyboard_sequences": {
+      "before_selection": 1,
+      "after_shift_text_tab_paste": 1,
+      "after_escape_and_explicit_ctrl_c": 2,
+      "other_shell": 0
+    },
+    "replacement_retained_pids": [
+      1506266,
+      1506283,
+      1506288
+    ],
+    "cleanup": "cleanup.json"
+  },
+  "limits": [
+    "Local prototype; no new remote CI or provider model turn",
+    "Keyboard extension requires an existing selection; no drag-edge autoscroll or unseen-scrollback selection",
+    "No IME, accessibility, other-platform GUI, automatic geometry, terminal mouse/query replies, or active Host transfer acceptance",
+    "No performance acceptance"
+  ],
+  "log_normalization": "Only final blank lines stripped; no output lines removed",
+  "evidence_sha256": {
+    "apps.json": "68f04af42c8d1936eed5189bc3a868850912f9af612e16b0e96dade95c6cde3c",
+    "before.json": "00e20cd02b294555b4f2e76cf3b022b96bf2053330d8f658903e33faedf2e3be",
+    "build.json": "9929bf7c17d1258391916716d047a7fe3108c68d936410400cd3f1912f74370f",
+    "cleanup.json": "d7c6735a3d9f4b0f010a4f2947c5e8a71cabc208275885fdedf1a92308a528cf",
+    "clipboard.json": "d029491b181eecaafd622e2c43d6782ccb3ebf435cf5cfbe0b16e8600c9f09b0",
+    "desktop-build.log": "c635b98dc261cf54bd72aa6ebaa251ec1d81ab05e4a2ac5a1d02e444d1e4a1b9",
+    "desktop-clippy.log": "8992b7e8cd4d60a371898d81d6d2074a11e813bd6f3ffebcd97edeae0ac36147",
+    "desktop-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "desktop-selection-before.log": "eef899a3b48643b15737590b6f8b863fa75dae011fa3061485e5b9ef5d90e890",
+    "desktop-tests.log": "3b84b62da579a82c83f6b5acdd16084bef68e877cccd8010854a7ec95eaec975",
+    "engine-clippy.log": "b70824db4239cdeaab0234feacac5e742eb884077eb97569e5f1c6277e45663a",
+    "engine-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "engine-tests.log": "4d73f3315636919a7ec464e8b1b2a9f8a90169741f673cde4390768215962388",
+    "final-blocked-small.png": "3dbde7adedf56bac8c8c66c0a997f9a74695560c51e754e7c9fabcbcce75405d",
+    "final-keyboard.png": "b66aa2f4e88c7687401a6b6535f244161a034ad2175d18fac7dab6c1ae151a52",
+    "final-line.png": "dad1a50229565752682ceb0f823d51fb8263f4fd5f4f585ccab3b14c422a6e70",
+    "final-other.png": "162d2a1d3b0023d134c94cbd7cc8de3fa97309fece7724d8c95eed765ac3f533",
+    "final-replacement.png": "69958311cd6167b2e75273d2c2ebdb8a602a4d0d326e421e9a48892cf25e0103",
+    "final-shift-click.png": "dd64387a171d869775fc098c1f5c2169a28d2e3daaba1f98880de0fd17ac3921",
+    "final-small.png": "a851063381ae8d77aa13fa3ea449c1ecbf141b124fde87dab8869c81f3df9097",
+    "final-word-drag.png": "c0235cef539528b8c895aa7751fa17b2916592a9cbe586763b056e0b66dbe36e",
+    "final-word.png": "e2315b4030c757fb0b6f0fd2a7f8bc1c832b6b445e9ddf317370ba9495e900aa",
+    "output-after.json": "00e20cd02b294555b4f2e76cf3b022b96bf2053330d8f658903e33faedf2e3be",
+    "readonly-after.json": "00e20cd02b294555b4f2e76cf3b022b96bf2053330d8f658903e33faedf2e3be",
+    "render.py": "ea4884b209129e522d6ebabb0c4646486249bc91e9ade64c884e056dfae2947b",
+    "selection-tests.log": "8617e7ad2155ec832002f20f42523c0f58daac943eec15fd5003ac7803a64d6a",
+    "setup.json": "0b2a1c89fcbac58971e999e64724a7d0215e1e08139f0a50236a5a10fa8d8f8c",
+    "terminal-smoke.log": "f11011c536d7002a2ef6c9409d1a2cbcd8fb558560b4eded49dd26be5cbd7103",
+    "terminals-before.json": "5a3c79b2679857c0332b67a703fd058c675e975cfd27024a2e0ca2c38ba499f3",
+    "terminals-blocked.json": "5a3c79b2679857c0332b67a703fd058c675e975cfd27024a2e0ca2c38ba499f3",
+    "terminals-escaped.json": "74d4487738989a2d225d4b9ac95c1cd9fe503eb20b60d635c483562d941c4f56",
+    "terminals-output-after.json": "5a3c79b2679857c0332b67a703fd058c675e975cfd27024a2e0ca2c38ba499f3",
+    "terminals-readonly-after.json": "5a3c79b2679857c0332b67a703fd058c675e975cfd27024a2e0ca2c38ba499f3",
+    "terminals-reopened.json": "74d4487738989a2d225d4b9ac95c1cd9fe503eb20b60d635c483562d941c4f56",
+    "windows-check.log": "430c91fad887ceb46122b8a32d14aa6434aded15f10d96919765c56705e73001"
+  }
+}

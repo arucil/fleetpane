@@ -1298,7 +1298,15 @@ displayed viewport. Selection clears when changing shells or replacing the windo
 [Contract](docs/adr/0122-bounded-terminal-selection.md) and
 [Linux fixture acceptance](docs/verification/2026-10-23-terminal-selection.md).
 
-IME acceptance, word/keyboard selection, drag-edge autoscroll, terminal replies/mouse
+Double-click selects a word (including paths and flags); triple-click selects a
+logical line across visible soft wraps. Drag to expand by words/lines, or use
+**Shift+click**, **Shift+arrows**, **Shift+Home** and **Shift+End** to extend an
+existing selection by cells. Chinese and combining characters stay whole. These
+gestures also work without Host control; terminal input remains blocked until
+the selection clears. [Contract and limits](docs/adr/0123-terminal-selection-units.md),
+[Linux real-shell acceptance](docs/verification/2026-10-23-terminal-selection-units.md).
+
+IME acceptance, keyboard-only selection initiation, drag-edge autoscroll, terminal replies/mouse
 reporting, automatic geometry, other-platform GUI and Host update recovery remain open. One selected screen is retained (up to 60×200 cells
 and 1,000 scrollback lines); dropped Host output clears incomplete parser state
 and remains visibly flagged. Resize does not reflow prior lines. Terminal drafts

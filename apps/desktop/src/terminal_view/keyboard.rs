@@ -199,7 +199,7 @@ impl TerminalView {
         div().flex().flex_col().gap_1().text_sm()
             .child(div().flex().gap_2().items_center()
                 .child(Button::new("terminal-keyboard").small().label(if enabled{"Stop keyboard input"}else{"Type in terminal"}).disabled(!enabled && (!self.can_write() || !self.keyboard.queue.empty() || self.screen.is_none())).on_click(cx.listener(|this,_,window,cx|this.keyboard_toggle(window,cx))))
-                .child(if enabled {"Click screen to focus · Drag to select · Ctrl+Shift+V paste · Ctrl+Shift+C copy"}else{"Drag to select · Ctrl+Shift+C copy · Keyboard input is off"}))
+                .child(if enabled {"Drag to select · Double-click word · Triple-click line · Ctrl+Shift+V paste"}else{"Drag to select · Double-click word · Triple-click line · Keyboard input is off"}))
             .when(!self.keyboard.queue.empty() || paused,|view|view.child(div().flex().gap_2().items_center()
                 .child(format!("{} queued bytes{}{}",self.keyboard.queue.waiting(),if self.keyboard.queue.in_flight(){" · packet awaiting result"}else{""},if paused{" · paused"}else{""}))
                 .child(Button::new("terminal-copy-keys").small().label("Copy queued keys").on_click(cx.listener(|this,_,_,cx|{
